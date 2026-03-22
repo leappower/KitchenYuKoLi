@@ -117,3 +117,79 @@ app.*.symbols
 !**/ios/**/default.perspectivev3
 !/packages/flutter_tools/test/data/dart_dependencies_test/**/.packages
 !/dev/ci/**/Gemfile.lock
+node_modules/
+
+# Node / JavaScript
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+.pnp/
+.pnp.js
+.pnp.cjs
+
+# Dependency directories
+/.pnp.cjs
+
+# Build outputs
+dist/
+build/
+out/
+public/build/
+public/assets/
+.parcel-cache/
+.next/
+.nuxt/
+.vite/
+.cache/
+.tmp/
+
+# Coverage
+coverage/
+.nyc_output/
+
+# Environment
+.env
+.env.local
+.env.*.local
+.env.*
+
+# Logs, pids, temp files
+logs/
+*.log
+pids/
+*.pid
+*.seed
+tmp/
+temp/
+
+# OS files
+.DS_Store
+Thumbs.db
+Icon?
+
+# IDEs and editors
+.vscode/
+.idea/
+*.sublime-workspace
+*.sublime-project
+
+# Docker
+docker-compose.override.yml
+.docker/
+
+# Secrets / certs
+*.pem
+*.key
+*.crt
+
+# Misc
+ehthumbs.db
+
+scripts/ci/
+scripts/.archive/
+
+dist/
+build/
+coverage/
+skill/
