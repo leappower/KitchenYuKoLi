@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Yukoli 2026 | Technical Design Documentation</title>
+<link href="/assets/fonts/local-fonts.css" rel="stylesheet"/>
+<link rel="stylesheet" href="/assets/css/tailwind.css">
+<!-- BEGIN: External Scripts -->
+<script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            vitalityOrange: '#F26522',
+            techSilver: '#E2E8F0',
+            obsidian: '#1A1A1A',
+            deepSlate: '#0F172A',
+          },
+          fontFamily: {
+            sans: ['Inter', 'Roboto', 'sans-serif'],
+          },
+        }
+      }
+    }
+  </script>
+<!-- END: External Scripts -->
+<!-- BEGIN: Custom Typography Styles -->
+<style data-purpose="typography">
+    body {
+      font-family: 'Inter', 'Roboto', sans-serif;
+      scroll-behavior: smooth;
+    }
+    .technical-label {
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      font-size: 0.75rem;
+      font-weight: 700;
+    }
+    .mono-code {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    }
+  </style>
+<!-- END: Custom Typography Styles -->
+<!-- BEGIN: Layout Utilities -->
+<style data-purpose="layout-grid">
+    .grid-paper {
+      background-size: 40px 40px;
+      background-image: 
+        linear-gradient(to right, rgba(226, 232, 240, 0.1) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(226, 232, 240, 0.1) 1px, transparent 1px);
+    }
+    .section-border {
+      border-left: 4px solid #F26522;
+    }
+  </style>
+<!-- END: Layout Utilities -->
+</head>
+<body class="bg-obsidian text-techSilver min-h-screen">
+<!-- BEGIN: Sidebar Navigation -->
+<nav class="fixed left-0 top-0 h-full w-16 md:w-20 bg-deepSlate border-r border-white/10 flex flex-col items-center py-8 z-50">
+<div class="mb-12">
+<!-- Minimalist Logo -->
+<div class="w-10 h-10 border-2 border-vitalityOrange flex items-center justify-center font-bold text-vitalityOrange">Y.</div>
+</div>
+<div class="flex-1 flex flex-col gap-8">
+<a class="rotate-[-90deg] whitespace-nowrap technical-label hover:text-vitalityOrange transition-colors" href="#schema">SEO Schema</a>
+<a class="rotate-[-90deg] whitespace-nowrap technical-label hover:text-vitalityOrange transition-colors" href="#logic">GEO Logic</a>
+<a class="rotate-[-90deg] whitespace-nowrap technical-label hover:text-vitalityOrange transition-colors" href="#tokens">Tokens</a>
+<a class="rotate-[-90deg] whitespace-nowrap technical-label hover:text-vitalityOrange transition-colors" href="#sitemap">Sitemap</a>
+</div>
+</nav>
+<!-- END: Sidebar Navigation -->
+<!-- BEGIN: Main Content Container -->
+<main class="ml-16 md:ml-20 p-6 md:p-12 max-w-7xl mx-auto grid-paper">
+<!-- BEGIN: Header Section -->
+<header class="mb-20">
+<p class="technical-label text-vitalityOrange mb-2">Technical Specification v1.0.4</p>
+<h1 class="text-5xl md:text-7xl font-black tracking-tighter text-white mb-4">YUKOLI 2026</h1>
+<div class="h-1 w-32 bg-vitalityOrange"></div>
+<p class="mt-6 text-xl text-slate-400 max-w-2xl">A framework for Minimalist Industrialism in digital architecture, focusing on performance, entity-based search, and regional intelligence.</p>
+</header>
+<!-- END: Header Section -->
+<!-- BEGIN: SEO Schema Mapping Section -->
+<section class="mb-32 section-border pl-8" data-purpose="seo-schema-mapping" id="schema">
+<div class="flex items-center gap-4 mb-8">
+<h2 class="text-3xl font-bold text-white">01. Entity-Based SEO Mapping</h2>
+</div>
+<div class="grid md:grid-cols-2 gap-8">
+<div class="bg-deepSlate p-6 border border-white/5 rounded-sm">
+<p class="technical-label text-vitalityOrange mb-4">Core Entities</p>
+<ul class="space-y-4">
+<li class="flex justify-between border-b border-white/10 pb-2">
+<span>Organization</span>
+<span class="mono-code text-xs text-slate-400">@id: /#corp</span>
+</li>
+<li class="flex justify-between border-b border-white/10 pb-2">
+<span>Product/Software</span>
+<span class="mono-code text-xs text-slate-400">@id: /#suite</span>
+</li>
+<li class="flex justify-between border-b border-white/10 pb-2">
+<span>TechnicalArticle</span>
+<span class="mono-code text-xs text-slate-400">@id: /#docs</span>
+</li>
+</ul>
+</div>
+<div class="bg-obsidian border border-vitalityOrange/30 p-4 mono-code text-xs overflow-x-auto">
+<pre class="text-green-400">{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Yukoli OS",
+  "operatingSystem": "Universal",
+  "applicationCategory": "BusinessApplication",
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "4.9",
+    "reviewCount": "1024"
+  }
+}
+          </pre>
+</div>
+</div>
+</section>
+<!-- END: SEO Schema Mapping Section -->
+<!-- BEGIN: GEO Logic Section -->
+<section class="mb-32 section-border pl-8" data-purpose="multi-language-logic" id="logic">
+<h2 class="text-3xl font-bold text-white mb-8">02. Multi-Language / GEO Switching</h2>
+<div class="grid lg:grid-cols-3 gap-6">
+<!-- Western Market Strategy -->
+<div class="p-6 bg-deepSlate border border-white/10">
+<h3 class="technical-label text-vitalityOrange mb-4">Western Market (EU/NA)</h3>
+<p class="text-sm text-slate-400 mb-4">Priority: Data Privacy (GDPR/CCPA), Performance Metrics, Compliance.</p>
+<div class="text-xs p-3 bg-obsidian rounded border border-white/5">
+            Default: EN-US / EN-GB<br/>
+            CDN Node: AWS us-east-1 / eu-central-1
+          </div>
+</div>
+<!-- Logic Controller -->
+<div class="p-6 bg-vitalityOrange text-white flex flex-col justify-center items-center text-center">
+<span class="font-bold text-lg mb-2">GEOLocation Middleware</span>
+<div class="w-full h-[1px] bg-white/30 my-4"></div>
+<p class="text-xs font-mono uppercase">Request Header Detection &gt; Redirect Rule Map</p>
+</div>
+<!-- SE Asia Market Strategy -->
+<div class="p-6 bg-deepSlate border border-white/10">
+<h3 class="technical-label text-vitalityOrange mb-4">SE Asia Market</h3>
+<p class="text-sm text-slate-400 mb-4">Priority: Mobile-First, Local Payment Gateways, Low-Bandwidth Optimization.</p>
+<div class="text-xs p-3 bg-obsidian rounded border border-white/5">
+            Default: ZH / VI / TH<br/>
+            CDN Node: Alibaba Cloud ap-southeast-1
+          </div>
+</div>
+</div>
+</section>
+<!-- END: GEO Logic Section -->
+<!-- BEGIN: Design Tokens Section -->
+<section class="mb-32 section-border pl-8" data-purpose="design-tokens" id="tokens">
+<h2 class="text-3xl font-bold text-white mb-8">03. Design Tokens</h2>
+<div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12">
+<div class="space-y-2">
+<div class="h-24 bg-vitalityOrange rounded-sm"></div>
+<p class="technical-label">Vitality Orange</p>
+<p class="mono-code text-xs">#F26522</p>
+</div>
+<div class="space-y-2">
+<div class="h-24 bg-techSilver rounded-sm"></div>
+<p class="technical-label">Tech Silver</p>
+<p class="mono-code text-xs">#E2E8F0</p>
+</div>
+<div class="space-y-2">
+<div class="h-24 bg-obsidian rounded-sm border border-white/10"></div>
+<p class="technical-label">Obsidian</p>
+<p class="mono-code text-xs">#1A1A1A</p>
+</div>
+<div class="space-y-2">
+<div class="h-24 bg-deepSlate rounded-sm"></div>
+<p class="technical-label">Deep Slate</p>
+<p class="mono-code text-xs">#0F172A</p>
+</div>
+</div>
+<div class="grid md:grid-cols-2 gap-8 bg-deepSlate p-8 border border-white/10">
+<div>
+<p class="technical-label text-vitalityOrange mb-2">Typography: Heading</p>
+<p class="text-4xl font-bold text-white font-sans">Inter Bold</p>
+<p class="mt-4 text-sm text-slate-400">Used for primary headlines and data highlights. Optimized for readability in dark mode environments.</p>
+</div>
+<div>
+<p class="technical-label text-vitalityOrange mb-2">Typography: Body</p>
+<p class="text-4xl font-normal text-white font-sans">Roboto Regular</p>
+<p class="mt-4 text-sm text-slate-400">Used for technical documentation, lists, and general interface text.</p>
+</div>
+</div>
+</section>
+<!-- END: Design Tokens Section -->
+<!-- BEGIN: Interactive Sitemap Section -->
+<section class="mb-32 section-border pl-8" data-purpose="interactive-sitemap" id="sitemap">
+<h2 class="text-3xl font-bold text-white mb-8">04. Interactive Site Map</h2>
+<div class="relative overflow-hidden bg-deepSlate p-4 md:p-8 border border-white/10 min-h-[400px]">
+<!-- Canvas for Site Map Connections -->
+<canvas class="absolute inset-0 pointer-events-none" id="sitemapCanvas"></canvas>
+<!-- Sitemap Nodes -->
+<div class="relative z-10 grid grid-cols-1 md:grid-cols-3 gap-y-12 gap-x-8 text-center">
+<!-- Root -->
+<div class="md:col-span-3 flex justify-center mb-12">
+<div class="p-4 border-2 border-vitalityOrange bg-obsidian w-48 transition-transform hover:scale-105 cursor-default" data-purpose="sitemap-node" id="node-root">
+<span class="technical-label font-black">Home [Index]</span>
+</div>
+</div>
+<!-- Secondary Nodes -->
+<div class="flex flex-col items-center gap-8">
+<div class="p-4 border border-white/30 bg-obsidian w-48 transition-transform hover:scale-105 cursor-default" data-purpose="sitemap-node" id="node-solutions">
+<span class="technical-label">Solutions</span>
+</div>
+<div class="pl-4 border-l border-white/10 space-y-4">
+<div class="text-xs text-slate-500 hover:text-vitalityOrange cursor-pointer">Enterprise API</div>
+<div class="text-xs text-slate-500 hover:text-vitalityOrange cursor-pointer">Security Suite</div>
+</div>
+</div>
+<div class="flex flex-col items-center gap-8">
+<div class="p-4 border border-white/30 bg-obsidian w-48 transition-transform hover:scale-105 cursor-default" data-purpose="sitemap-node" id="node-resources">
+<span class="technical-label">Resources</span>
+</div>
+<div class="pl-4 border-l border-white/10 space-y-4">
+<div class="text-xs text-slate-500 hover:text-vitalityOrange cursor-pointer">Tech Specs</div>
+<div class="text-xs text-slate-500 hover:text-vitalityOrange cursor-pointer">Dev Console</div>
+</div>
+</div>
+<div class="flex flex-col items-center gap-8">
+<div class="p-4 border border-white/30 bg-obsidian w-48 transition-transform hover:scale-105 cursor-default" data-purpose="sitemap-node" id="node-company">
+<span class="technical-label">Company</span>
+</div>
+<div class="pl-4 border-l border-white/10 space-y-4">
+<div class="text-xs text-slate-500 hover:text-vitalityOrange cursor-pointer">Global Map</div>
+<div class="text-xs text-slate-500 hover:text-vitalityOrange cursor-pointer">Careers</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- END: Interactive Sitemap Section -->
+<!-- BEGIN: Footer -->
+<footer class="mt-20 py-12 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-6">
+<div class="flex items-center gap-4">
+<div class="w-8 h-8 bg-vitalityOrange"></div>
+<p class="technical-label text-slate-500">© 2026 Yukoli Technologies. Internal Only.</p>
+</div>
+<div class="flex gap-8">
+<span class="text-xs text-slate-500 mono-code">LAT: 35.6895° N</span>
+<span class="text-xs text-slate-500 mono-code">LONG: 139.6917° E</span>
+</div>
+</footer>
+<!-- END: Footer -->
+</main>
+<!-- END: Main Content Container -->
+<!-- BEGIN: JavaScript Logic -->
+<script data-purpose="sitemap-visualizer">
+    /**
+     * Handles the drawing of lines between sitemap nodes to create a technical diagram look
+     */
+    function drawSitemapConnections() {
+      const canvas = document.getElementById('sitemapCanvas');
+      if (!canvas) return;
+      
+      const ctx = canvas.getContext('2d');
+      const rootNode = document.getElementById('node-root');
+      const targets = ['node-solutions', 'node-resources', 'node-company'];
+      
+      // Set canvas size
+      canvas.width = canvas.parentElement.offsetWidth;
+      canvas.height = canvas.parentElement.offsetHeight;
+      
+      const parentRect = canvas.parentElement.getBoundingClientRect();
+      const rootRect = rootNode.getBoundingClientRect();
+      
+      const startX = (rootRect.left + rootRect.width / 2) - parentRect.left;
+      const startY = rootRect.bottom - parentRect.top;
+
+      ctx.strokeStyle = 'rgba(242, 101, 34, 0.4)';
+      ctx.lineWidth = 1;
+      ctx.setLineDash([5, 5]);
+
+      targets.forEach(id => {
+        const targetNode = document.getElementById(id);
+        const targetRect = targetNode.getBoundingClientRect();
+        const endX = (targetRect.left + targetRect.width / 2) - parentRect.left;
+        const endY = targetRect.top - parentRect.top;
+
+        ctx.beginPath();
+        ctx.moveTo(startX, startY);
+        // Draw L-shaped connector
+        ctx.lineTo(startX, startY + 20);
+        ctx.lineTo(endX, startY + 20);
+        ctx.lineTo(endX, endY);
+        ctx.stroke();
+      });
+    }
+
+    // Initial draw and resize listener
+    window.addEventListener('load', drawSitemapConnections);
+    window.addEventListener('resize', drawSitemapConnections);
+  </script>
+<!-- END: JavaScript Logic -->
+
+<style>
+#smart-popup-overlay{display:none}
+#smart-popup-overlay.show{display:flex!important}
+#smart-popup-overlay.closing{opacity:0;transition:opacity .2s}
+</style>
+<!-- ═══ Smart Popup Overlay (required by smart-popup.js) ═══ -->
+<div id="smart-popup-overlay" style="display:none;position:fixed;inset:0;z-[var(--z-modal)];align-items:center;justify-content:center;background:rgba(0,0,0,.5);backdrop-filter:blur(4px);">
+  <div style="background:#fff;border-radius:1rem;padding:2rem;max-width:480px;width:90%;position:relative;box-shadow:0 20px 60px rgba(0,0,0,.3);">
+    <!-- Close button -->
+    <button id="smart-popup-close" style="position:absolute;top:1rem;right:1rem;background:none;border:none;cursor:pointer;font-size:1.25rem;color:#64748b;" aria-label="Close">&#x2715;</button>
+    <div id="trigger-reason" style="display:none;font-size:.75rem;color:#94a3b8;margin-bottom:.5rem;align-items:center;gap:.25rem;"></div>
+    <div id="popup-today-count" style="display:none;font-size:.75rem;color:#94a3b8;margin-bottom:.5rem;"></div>
+    <!-- Header -->
+    <div style="margin-bottom:1.25rem;">
+      <h3 style="font-size:1.25rem;font-weight:700;color:#0f172a;margin:0 0 .25rem;">Get a Custom Quote</h3>
+      <p style="font-size:.875rem;color:#64748b;margin:0;">Tell us about your kitchen needs — our team will respond within 24 hours.</p>
+    </div>
+    <!-- Form -->
+    <form id="smart-popup-form" style="display:flex;flex-direction:column;gap:.75rem;">
+      <input name="name"    type="text"  placeholder="Full Name *"       required style="border:1px solid #e2e8f0;border-radius:.5rem;padding:.625rem .75rem;font-size:.875rem;outline:none;"/>
+      <input name="email"   type="email" placeholder="Business Email *"  required style="border:1px solid #e2e8f0;border-radius:.5rem;padding:.625rem .75rem;font-size:.875rem;outline:none;"/>
+      <input name="phone"   type="tel"   placeholder="Phone / WhatsApp"           style="border:1px solid #e2e8f0;border-radius:.5rem;padding:.625rem .75rem;font-size:.875rem;outline:none;"/>
+      <input name="country" type="text"  placeholder="Country / Region"           style="border:1px solid #e2e8f0;border-radius:.5rem;padding:.625rem .75rem;font-size:.875rem;outline:none;"/>
+      <textarea name="message" placeholder="Describe your requirements…" rows="3" style="border:1px solid #e2e8f0;border-radius:.5rem;padding:.625rem .75rem;font-size:.875rem;outline:none;resize:vertical;"></textarea>
+      <button type="submit" style="background:#2563eb;color:#fff;border:none;border-radius:.5rem;padding:.75rem;font-size:.875rem;font-weight:600;cursor:pointer;">Send Inquiry</button>
+    </form>
+  </div>
+</div>
+<script src="/assets/js/contacts.js"></script>
+<script src="/assets/js/ui/smart-popup.js""></script>
+<script src="/assets/js/router.js"></script>
+
+<script src="/assets/js/page-interactions.js"></script>
+</body></html>

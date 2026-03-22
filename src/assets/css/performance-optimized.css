@@ -1,0 +1,148 @@
+/**
+ * 优化的性能 CSS
+ * 
+ * ✅ 只在必要时使用 will-change
+ * ✅ 优先使用 GPU 加速的属性 (transform, opacity)
+ * ✅ 避免触发重排的属性
+ */
+
+/* ═════════════════════════════════════════════════════════
+   GPU 加速优化
+   ═════════════════════════════════════════════════════════ */
+
+/* 强制 GPU 加速 (仅用于关键动画) */
+.gpu-accelerated {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+
+/* 3D 变换优化 */
+.perspective-1000 {
+  perspective: 1000px;
+}
+
+.backface-hidden {
+  backface-visibility: hidden;
+}
+
+/* ═════════════════════════════════════════════════════════
+   平滑滚动优化
+   ═════════════════════════════════════════════════════════ */
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* 改善滚动性能 */
+body {
+  -webkit-overflow-scrolling: touch;
+}
+
+/* 减少重绘 */
+.reduce-repaint {
+  will-change: transform;
+}
+
+/* ═════════════════════════════════════════════════════════
+   优化的过渡效果
+   ═════════════════════════════════════════════════════════ */
+
+/* 使用 transform 而非 top/left */
+.transform-optimized {
+  transition: transform 0.15s ease-out;
+  will-change: transform;
+}
+
+/* 使用 opacity 而非 visibility/display */
+.opacity-optimized {
+  transition: opacity 0.15s ease-out;
+  will-change: opacity;
+}
+
+/* 组合优化 (transform + opacity) */
+.combo-optimized {
+  transition: transform 0.15s ease-out, opacity 0.15s ease-out;
+  will-change: transform, opacity;
+}
+
+/* ═════════════════════════════════════════════════════════
+   避免重排的动画
+   ═════════════════════════════════════════════════════════ */
+
+/* ❌ 避免: 使用 top/left 进行动画 */
+.layout-animation-bad {
+  transition: top 0.3s ease, left 0.3s ease;
+}
+
+/* ✅ 推荐: 使用 transform 进行动画 */
+.layout-animation-good {
+  transition: transform 0.3s ease;
+}
+
+/* ═════════════════════════════════════════════════════════
+   Z-Index 标准化
+   ═════════════════════════════════════════════════════════ */
+
+/* 语言选择器容器 */
+.language-selector {
+  position: relative;
+  z-index: var(--z-language-dropdown);
+}
+
+/* ═════════════════════════════════════════════════════════
+   防止 Header/Footer 动态挂载导致的 Layout Shift（抖动）
+   原理：组件通过 JS 动态替换占位 <div>，若占位符无高度，
+   内容区会在挂载瞬间发生垂直偏移（CLS）。
+   预设最小高度与实际组件等高，确保空间已保留。
+   ═════════════════════════════════════════════════════════ */
+
+/* PC Header 占位符 (py-4 + logo h-9 ≈ 70px) */
+[data-component="navigator"],
+[data-component="pc-header"] {
+  min-height: 70px;
+  display: block;
+}
+
+/* ═════════════════════════════════════════════════════════
+   移除不必要的 will-change
+   ═════════════════════════════════════════════════════════ */
+
+/* 只在 hover 时添加 will-change */
+.hover-optimized:hover {
+  will-change: transform, opacity;
+}
+
+.hover-optimized {
+  transition: transform 0.15s ease-out, opacity 0.15s ease-out;
+}
+
+/* ═════════════════════════════════════════════════════════
+   图片优化
+   ═════════════════════════════════════════════════════════ */
+
+/* 防止图片布局偏移 */
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+/* 图片加载优化 */
+img[loading="lazy"] {
+  content-visibility: auto;
+}
+
+/* ═════════════════════════════════════════════════════════
+   性能提示
+   ═════════════════════════════════════════════════════════ */
+
+/*
+性能检查清单:
+✅ 避免过度使用 will-change
+✅ 优先使用 transform 和 opacity
+✅ 使用 content-visibility 优化长列表
+✅ 使用 contain 属性隔离渲染
+✅ 避免同步布局读取
+✅ 使用 requestAnimationFrame 进行动画
+✅ 使用 debounce/throttle 优化事件处理
+*/

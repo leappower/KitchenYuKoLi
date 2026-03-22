@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SPA Router 修复测试</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 20px; }
+    .test-case { margin: 15px 0; padding: 10px; border: 1px solid #ccc; }
+    .pass { color: green; font-weight: bold; }
+    .fail { color: red; font-weight: bold; }
+    .log { background: #f5f5f5; padding: 10px; margin: 10px 0; font-family: monospace; }
+  </style>
+</head>
+<body>
+  <h1>SPA Router SecurityError 修复测试</h1>
+  
+  <div id="results"></div>
+  
+  <div class="test-case">
+    <h3>测试链接（点击测试）</h3>
+    <p>以下链接应该都能正常工作，不会抛出 SecurityError:</p>
+    <ul>
+      <li><a href="/home">/home (带斜杠)</a></li>
+      <li><a href="/catalog">/catalog (带斜杠)</a></li>
+      <li><a href="/pages/roi/index.html">/pages/roi/index.html (完整路径)</a></li>
+    </ul>
+  </div>
+
+  <div class="log" id="log"></div>
+
+  <script src="/assets/js/spa-router.js"></script>
+  <script>
+    // 捕获控制台日志
+    var logDiv = document.getElementById('log');
+    var originalLog = console.log;
+    console.log = function() {
+      var msg = Array.prototype.slice.call(arguments).join(' ');
+      originalLog.apply(console, arguments);
+      logDiv.innerHTML += msg + '\n';
+    };
+    
+    // 捕获错误
+    window.addEventListener('error', function(e) {
+      console.log('ERROR: ' + e.message);
+      console.log('Stack: ' + e.error.stack);
+    });
+    
+    // 初始化路由
+    try {
+      console.log('初始化 SPA Router...');
+      window.SpaRouter.init();
+      console.log('初始化完成！');
+      
+      // 测试 navigate 方法
+      console.log('测试 navigate 方法...');
+      // 注意：不要在这里实际调用 navigate，会导致页面跳转
+      // 我们只是验证方法存在且可调用
+      console.log('navigate 方法存在:', typeof window.SpaRouter.navigate === 'function');
+      
+    } catch (e) {
+      console.log('初始化失败: ' + e.message);
+    }
+  </script>
+</body>
+</html>

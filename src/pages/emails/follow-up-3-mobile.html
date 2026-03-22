@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<!-- ═══ Responsive Redirect (injected by patch-responsive-redirect.py) ═══ -->
+<link rel="canonical" href="pages/emails/follow-up-3-mobile.html"/>
+<link rel="alternate" media="only screen and (max-width: 767px)"
+      href="pages/emails/follow-up-3-mobile.html"/>
+<link rel="alternate" media="only screen and (min-width: 768px)"
+      href="pages/emails/follow-up-3-pc.html"/>
+<script>
+/* Responsive redirect — runs before render, no flash */
+(function(){
+  // 防止 bfcache 恢复时重复 redirect
+  if (window.__redirectChecked) return;
+  window.__redirectChecked = true;
+
+  // 处理 clean-url 参数:重定向后清理 URL 为干净的目录 URL
+  var urlParams = new URLSearchParams(location.search);
+  var cleanUrl = urlParams.get('clean-url');
+  if (cleanUrl) {
+    console.log('[Responsive Redirect] Cleaning URL to:', cleanUrl);
+    history.replaceState({}, '', cleanUrl);
+    return;
+  }
+
+  // SPA 导航时跳过响应式重定向
+  console.log('[Responsive Redirect] Checking SPA flag: window.__spaNavigating =', window.__spaNavigating);
+  if (window.__spaNavigating) {
+    console.log('[Responsive Redirect] SPA navigation detected, skipping redirect');
+    return;
+  }
+
+  // 使用 DeviceUtils 统一管理设备判断
+  var currentFile = location.pathname.split('/').pop();
+  console.log('[Responsive Redirect] Current file:', currentFile, 'Pathname:', location.pathname);
+
+  // 当访问目录 URL(以 / 结尾)时,不要重定向(SPA 导航使用干净的目录 URL)
+  if (window.DeviceUtils && window.DeviceUtils.isDirectoryURL()) {
+    console.log('[Responsive Redirect] Directory URL detected, skipping redirect');
+    return;
+  }
+
+  // 使用 DeviceUtils 判断是否需要重定向
+  if (window.DeviceUtils && window.DeviceUtils.shouldRedirect(currentFile)) {
+    var deviceType = window.DeviceUtils.getDeviceType();
+    var targetFile;
+
+    if (deviceType === window.DeviceUtils.DeviceType.MOBILE) {
+      targetFile = 'index-mobile.html';
+    } else if (deviceType === window.DeviceUtils.DeviceType.TABLET) {
+      targetFile = 'index-tablet.html';
+    } else {
+      targetFile = 'index-pc.html';
+    }
+
+    console.log('[Responsive Redirect] Redirecting to:', targetFile);
+    location.href = targetFile;
+    return;
+  }
+
+  console.log('[Responsive Redirect] No redirect needed');
+})();
+</script>
+<!-- ═══ End Responsive Redirect ═══ -->
+
+
+<meta charset="utf-8"/>
+<meta name="description" content="Yukoli 2026 Technical Roadmap invitation — the future of commercial kitchen automation.">
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<title>Final Invitation | 2026 Technical Roadmap</title>
+<style>
+    body {
+      min-height: 100dvh;
+    }
+  </style>
+  <link rel="stylesheet" href="../../assets/css/styles.css"/>
+<link rel="preload" href="/assets/fonts/local-fonts.css" as="style">
+<link rel="preload" href="/assets/css/tailwind.css" as="style">
+<link rel="preload" href="/assets/fonts/public-sans-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/fonts/public-sans-latin-700-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/assets/css/tailwind.css">
+<link rel="stylesheet" href="/assets/css/z-index-system.css">
+<link rel="stylesheet" href="/assets/css/performance-optimized.css"/>
+<!-- Dark mode: apply saved preference before first paint (prevents flash) -->
+  <script>(function(){
+if(localStorage.getItem('darkMode')==='true')document.documentElement.classList.add('dark')})()</script>
+<link rel="stylesheet" href="/assets/css/skeleton.css"/>
+<link rel="icon" href="/assets/images/logo_header.webp" type="image/webp">
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100">
+<div class="relative flex h-auto min-h-screen w-full flex-col bg-background-light dark:bg-background-dark overflow-x-hidden max-w-md mx-auto">
+<!-- Top Navigation -->
+<div class="flex items-center bg-background-light dark:bg-background-dark p-4 pb-2 justify-between">
+<div class="text-primary flex size-12 shrink-0 items-center justify-start cursor-pointer">
+<span class="material-symbols-outlined">arrow_back</span>
+</div>
+<h2 class="text-slate-900 dark:text-slate-100 text-lg font-bold leading-tight tracking-[-0.015em] flex-1 text-center pr-12">Final Invitation</h2>
+</div>
+<!-- Hero Section -->
+<div class="@container">
+<div class="@[480px]:px-4 @[480px]:py-3 px-0 py-0">
+<div class="bg-cover bg-center flex flex-col justify-end overflow-hidden bg-slate-800 @[480px]:rounded-xl min-h-[260px] relative" data-alt="Digital blue network visualization background" style='background-image: linear-gradient(0deg, rgba(34, 22, 16, 0.9) 0%, rgba(34, 22, 16, 0.2) 60%), url("https://lh3.googleusercontent.com/aida-public/AB6AXuAAXyJNTFUkRewCF_Tta0-RWIVPK_dPHTk5E8xDLNdSjR4Io83xl59KKjDK-iKfxF2dsC54P1z-Ki9nGZLhyN5EW5CMbOOeDuhKRqcgu5TpFgg1mlUiUi7LQx2x7mCUlXf8ddM8Djif7hpUO3yj298EZbPrpcUOP2k9gOtLKcw5SnTZi94Y5Z5hEB9HpB8_9kBuocj0Hal0wAHVF-E59rFjmQsUSGySjJTVxC4u1nlWv2ecOQb4cOgSkptzic8_fcH3iZnZl63OqqzQ");'>
+<div class="flex p-6">
+<p class="text-white tracking-tight text-[28px] font-bold leading-tight">Secure Your 2026 Technical Roadmap</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Scarcity Indicator -->
+<div class="bg-primary/5 dark:bg-primary/10 mt-4 mx-4 rounded-xl p-5 border border-primary/20">
+<h3 class="text-primary tracking-light text-2xl font-bold leading-tight text-center pb-2">Only 04 Slots Left</h3>
+<div class="flex flex-col gap-3 py-2">
+<div class="flex gap-6 justify-between items-center">
+<p class="text-slate-700 dark:text-slate-300 text-sm font-medium leading-normal uppercase tracking-wider">Limited Availability</p>
+<p class="text-primary text-sm font-bold leading-normal">4 / 20 Remaining</p>
+</div>
+<div class="rounded-full bg-primary/20 h-3 w-full overflow-hidden">
+<div class="h-full rounded-full bg-primary" style="width: 20%;"></div>
+</div>
+</div>
+</div>
+<!-- Body Content -->
+<div class="px-6 py-6 space-y-4">
+<p class="text-slate-800 dark:text-slate-200 text-lg font-medium leading-snug">
+                This is your final opportunity to lock in your technical strategy for 2026. 
+            </p>
+<p class="text-slate-600 dark:text-slate-400 text-base font-normal leading-relaxed">
+                As industry landscapes shift, our specialists are ready to help you navigate upcoming transitions with a tailored roadmap. We've reserved these final slots for high-impact teams.
+            </p>
+</div>
+<!-- Main Action CTA -->
+<div class="px-6 pb-8">
+<button class="w-full bg-primary hover:bg-primary/90 text-white font-bold py-4 px-6 rounded-xl flex items-center justify-center gap-3 shadow-lg shadow-primary/20 transition-all active:scale-[0.98]">
+<span class="material-symbols-outlined">calendar_today</span>
+                Access Direct Scheduler
+            </button>
+<p class="text-center text-slate-400 dark:text-slate-500 text-xs mt-4 italic">
+                No-obligation consultation. 15-minute quick sync.
+            </p>
+</div>
+<!-- Features/Quick Scan Points -->
+<div class="px-6 py-4 bg-slate-100 dark:bg-slate-800/50">
+<div class="space-y-4">
+<div class="flex items-start gap-4">
+<div class="bg-primary/10 p-2 rounded-lg text-primary">
+<span class="material-symbols-outlined text-lg">insights</span>
+</div>
+<div>
+<h4 class="font-bold text-slate-800 dark:text-slate-200">Customized Strategy</h4>
+<p class="text-sm text-slate-600 dark:text-slate-400">Tailored specifically to your architecture and goals.</p>
+</div>
+</div>
+<div class="flex items-start gap-4">
+<div class="bg-primary/10 p-2 rounded-lg text-primary">
+<span class="material-symbols-outlined text-lg">verified_user</span>
+</div>
+<div>
+<h4 class="font-bold text-slate-800 dark:text-slate-200">Priority Implementation</h4>
+<p class="text-sm text-slate-600 dark:text-slate-400">Bypass the standard 2026 onboarding queue.</p>
+</div>
+</div>
+</div>
+</div>
+
+<div class="h-5 bg-background-light dark:bg-background-dark"></div>
+</div>
+<script defer src="/assets/js/lang-registry.js"></script>
+<script defer src="/assets/js/translations.js"></script><script defer src="/assets/js/translations-dropdown-template.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    if (window.translationManager) window.translationManager.initialize();
+  });
+</script>
+<script src="/assets/js/spa-router.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    if (window.SpaRouter && typeof window.SpaRouter.init === 'function') {
+      window.SpaRouter.init();
+    }
+  });
+</script>
+</body></html>

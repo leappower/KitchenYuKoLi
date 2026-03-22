@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<!-- ═══ Responsive Redirect (injected by patch-responsive-redirect.py) ═══ -->
+<link rel="canonical" href="pages/emails/follow-up-3-pc.html"/>
+<link rel="alternate" media="only screen and (max-width: 767px)"
+      href="pages/emails/follow-up-3-mobile.html"/>
+<link rel="alternate" media="only screen and (min-width: 768px)"
+      href="pages/emails/follow-up-3-pc.html"/>
+<script>
+/* Responsive redirect — runs before render, no flash */
+(function(){
+  // 防止 bfcache 恢复时重复 redirect
+  if (window.__redirectChecked) return;
+  window.__redirectChecked = true;
+
+  // 处理 clean-url 参数:重定向后清理 URL 为干净的目录 URL
+  var urlParams = new URLSearchParams(location.search);
+  var cleanUrl = urlParams.get('clean-url');
+  if (cleanUrl) {
+    console.log('[Responsive Redirect] Cleaning URL to:', cleanUrl);
+    history.replaceState({}, '', cleanUrl);
+    return;
+  }
+
+  // SPA 导航时跳过响应式重定向
+  console.log('[Responsive Redirect] Checking SPA flag: window.__spaNavigating =', window.__spaNavigating);
+  if (window.__spaNavigating) {
+    console.log('[Responsive Redirect] SPA navigation detected, skipping redirect');
+    return;
+  }
+
+  // 使用 DeviceUtils 统一管理设备判断
+  var currentFile = location.pathname.split('/').pop();
+  console.log('[Responsive Redirect] Current file:', currentFile, 'Pathname:', location.pathname);
+
+  // 当访问目录 URL(以 / 结尾)时,不要重定向(SPA 导航使用干净的目录 URL)
+  if (window.DeviceUtils && window.DeviceUtils.isDirectoryURL()) {
+    console.log('[Responsive Redirect] Directory URL detected, skipping redirect');
+    return;
+  }
+
+  // 使用 DeviceUtils 判断是否需要重定向
+  if (window.DeviceUtils && window.DeviceUtils.shouldRedirect(currentFile)) {
+    var deviceType = window.DeviceUtils.getDeviceType();
+    var targetFile;
+
+    if (deviceType === window.DeviceUtils.DeviceType.MOBILE) {
+      targetFile = 'index-mobile.html';
+    } else if (deviceType === window.DeviceUtils.DeviceType.TABLET) {
+      targetFile = 'index-tablet.html';
+    } else {
+      targetFile = 'index-pc.html';
+    }
+
+    console.log('[Responsive Redirect] Redirecting to:', targetFile);
+    location.href = targetFile;
+    return;
+  }
+
+  console.log('[Responsive Redirect] No redirect needed');
+})();
+</script>
+<!-- ═══ End Responsive Redirect ═══ -->
+
+
+
+
+<meta charset="utf-8"/>
+<meta name="description" content="Final invitation to Yukoli's 2026 Technical Roadmap — next-generation kitchen automation innovations.">
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        body { font-family: 'Public Sans', sans-serif; }
+    </style>
+<link rel="stylesheet" href="../../assets/css/styles.css"/>
+<link rel="preload" href="/assets/fonts/local-fonts.css" as="style">
+<link rel="preload" href="/assets/css/tailwind.css" as="style">
+<link rel="preload" href="/assets/fonts/public-sans-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/fonts/public-sans-latin-700-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/assets/css/tailwind.css">
+<link rel="stylesheet" href="/assets/css/z-index-system.css">
+<link rel="stylesheet" href="/assets/css/performance-optimized.css"/>
+<!-- Dark mode: apply saved preference before first paint (prevents flash) -->
+  <script>(function(){
+if(localStorage.getItem('darkMode')==='true')document.documentElement.classList.add('dark')})()</script>
+<link rel="stylesheet" href="/assets/css/skeleton.css"/>
+<link rel="icon" href="/assets/images/logo_header.webp" type="image/webp">
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 antialiased">
+<div class="relative flex min-h-screen flex-col items-center py-8 px-4 sm:px-6 lg:px-8">
+<div class="w-full max-w-[640px] bg-white dark:bg-slate-900 shadow-xl rounded-xl overflow-hidden border border-slate-200 dark:border-slate-800">
+<header class="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 px-8 py-6">
+<div class="flex items-center gap-3">
+<div class="text-primary">
+<span class="material-symbols-outlined text-3xl">architecture</span>
+</div>
+<h2 class="text-slate-900 dark:text-white text-xl font-extrabold tracking-tight">2026 STRATEGY</h2>
+</div>
+<div class="text-slate-400 dark:text-slate-500 text-xs font-mono uppercase tracking-widest">
+                    Invitation Ref: BP-2026
+                </div>
+</header>
+<div class="relative w-full aspect-[21/9] bg-slate-100 dark:bg-slate-800 overflow-hidden">
+<div class="absolute inset-0 bg-gradient-to-t from-slate-900/80 to-transparent z-0"></div>
+<div class="absolute inset-0 bg-cover bg-center" data-alt="Modern minimalist industrial architecture facade detail" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuB3ac8yrmeBkT3keAGeqwPUqS0mcMuCTRtydMlbcnmpTDV2dXm-N8HkRAdcFA0cciNv0-Ms4jQgtDmOG1WoL9-fAK-hErxrgzVsBABKyInHON5_RTz239BzXbmfu9iZSzdFlS5CQwTlxSdn0AjjmcgH5oXxb_THzcI0ZD4c2m7RKqarCmWZVQe-zIEIa9AGtxmEF-c64WcK7Gc-GoL2HEupjutZ7LxsDA5XlxJb6jPLCpyEbmtvLTmQ54B8x4Unlb0fmKx5MWxuBCZX');"></div>
+<div class="absolute bottom-0 left-0 p-8 z-20">
+<h1 class="text-white text-3xl font-black leading-tight tracking-tight uppercase">System Blueprint Session</h1>
+</div>
+</div>
+<main id="spa-content" class="p-8 space-y-6">
+<div class="space-y-4">
+<h2 class="text-slate-900 dark:text-white text-4xl font-black leading-tight tracking-tighter">
+                        Secure Your 2026 <br/><span class="text-primary">Technical Roadmap</span>
+</h2>
+<p class="text-slate-600 dark:text-slate-400 text-lg font-medium leading-relaxed">
+                        This is our final invitation for a direct consultation on your infrastructure planning. These sessions are the cornerstone of 2026 resource allocation.
+                    </p>
+</div>
+<div class="grid grid-cols-2 gap-4">
+<div class="rounded-xl p-5 bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-800 flex flex-col gap-1">
+<span class="text-slate-500 dark:text-slate-500 text-xs font-bold uppercase tracking-wider">Remaining Capacity</span>
+<div class="flex items-center gap-2">
+<span class="text-primary text-3xl font-black italic">04</span>
+<span class="text-slate-400 text-sm">SLOTS LEFT</span>
+</div>
+</div>
+<div class="rounded-xl p-5 bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-800 flex flex-col gap-1">
+<span class="text-slate-500 dark:text-slate-500 text-xs font-bold uppercase tracking-wider">Planning Horizon</span>
+<div class="flex items-center gap-2">
+<span class="text-slate-900 dark:text-white text-3xl font-black italic">Q1-Q4</span>
+<span class="text-slate-400 text-sm">2026</span>
+</div>
+</div>
+</div>
+<div class="py-4 border-l-4 border-primary pl-6 bg-primary/5">
+<p class="text-slate-700 dark:text-slate-300 text-base leading-relaxed">
+                        Our technical consultations for the next fiscal cycle are nearly at capacity. This session is designed to architect your high-level system blueprint, ensuring zero friction during implementation.
+                    </p>
+</div>
+<div class="pt-4">
+<a class="group flex items-center justify-center w-full bg-primary hover:bg-primary/90 text-white py-5 px-8 rounded-xl transition-all duration-200 shadow-lg shadow-primary/20" href="#">
+<span class="text-lg font-black uppercase tracking-widest mr-2">Access Direct Scheduler</span>
+<span class="material-symbols-outlined transition-transform group-hover:translate-x-1">calendar_today</span>
+</a>
+<p class="text-center text-slate-400 text-xs mt-4 font-medium uppercase tracking-tighter">
+                        Booking closes in 48 hours or when final slots are filled.
+                    </p>
+</div>
+</main>
+
+</div>
+</div>
+<script defer src="/assets/js/lang-registry.js"></script>
+<script defer src="/assets/js/translations.js"></script><script defer src="/assets/js/translations-dropdown-template.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    if (window.translationManager) window.translationManager.initialize();
+  });
+</script>
+<script src="/assets/js/spa-router.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    if (window.SpaRouter && typeof window.SpaRouter.init === 'function') {
+      window.SpaRouter.init();
+    }
+  });
+</script>
+</body></html>

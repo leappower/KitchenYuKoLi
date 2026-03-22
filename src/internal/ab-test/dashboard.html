@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Yukoli A/B Testing Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;500;600;700;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#ec5b13",
+                        "background-light": "#f8f6f6",
+                        "background-dark": "#221610",
+                    },
+                    fontFamily: {
+                        "display": ["Public Sans"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Public Sans', sans-serif;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+<link rel="stylesheet" href="../../assets/css/styles.css"/>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 font-display">
+<div class="relative flex h-auto min-h-screen w-full flex-col overflow-x-hidden">
+<!-- Navigation -->
+<header class="flex items-center justify-between whitespace-nowrap border-b border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 px-10 py-3 sticky top-0 z-50">
+<div class="flex items-center gap-8">
+<div class="flex items-center gap-4 text-primary">
+<div class="size-6 flex items-center justify-center">
+<span class="material-symbols-outlined text-3xl font-bold">query_stats</span>
+</div>
+<h2 class="text-slate-900 dark:text-slate-100 text-lg font-black leading-tight tracking-tight">YUKOLI</h2>
+</div>
+<label class="flex flex-col min-w-40 h-10 max-w-64">
+<div class="flex w-full flex-1 items-stretch rounded-lg h-full border border-slate-200 dark:border-slate-700">
+<div class="text-slate-400 flex items-center justify-center pl-4">
+<span class="material-symbols-outlined text-xl">search</span>
+</div>
+<input class="form-input flex w-full min-w-0 flex-1 border-none bg-transparent focus:ring-0 text-sm font-normal placeholder:text-slate-400" placeholder="Search tests..."/>
+</div>
+</label>
+</div>
+<div class="flex flex-1 justify-end gap-8 items-center">
+<nav class="hidden md:flex items-center gap-9">
+<a class="text-primary text-sm font-bold border-b-2 border-primary pb-1" href="#">Dashboard</a>
+<a class="text-slate-600 dark:text-slate-400 text-sm font-medium hover:text-primary" href="#">Sequences</a>
+<a class="text-slate-600 dark:text-slate-400 text-sm font-medium hover:text-primary" href="#">Analytics</a>
+<a class="text-slate-600 dark:text-slate-400 text-sm font-medium hover:text-primary" href="#">Segments</a>
+</nav>
+<div class="flex gap-2">
+<button class="flex items-center justify-center rounded-lg h-10 w-10 bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-primary/10 transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="flex items-center justify-center rounded-lg h-10 w-10 bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-primary/10 transition-colors">
+<span class="material-symbols-outlined">settings</span>
+</button>
+</div>
+<div class="size-10 rounded-full border-2 border-primary/20 p-0.5">
+<img class="rounded-full object-cover w-full h-full" data-alt="User profile avatar placeholder" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAqCAU4yZi8trRKafG0U7JfRAFkzX3ubiFJQcsDzXtDYzVhd4YkN25TPjI1vxgxKX3sbJUd7fzxt22KpwS55GfYyqaam_PB0pbpwSLb_mADyykK5b6WmAdaG-SKEbWkyAIr2_RUlrq26BLY8olSylk842-VR2zbc6G_peclSDkkgJAJ5zz5_fGqVk3ggNbrm-2liANID54jFiBpqAvIoYkLP_97WgVu0DCsqDeorSCyMZ_vecAy6stHbeTYilIWJeu1glZnDtNg1zf7"/>
+</div>
+</div>
+</header>
+<main class="max-w-[1440px] mx-auto w-full px-4 md:px-10 py-8">
+<!-- Header Section -->
+<div class="flex flex-wrap justify-between items-end gap-6 mb-8">
+<div class="flex flex-col gap-2">
+<div class="flex items-center gap-2 text-primary font-bold text-xs uppercase tracking-widest">
+<span class="material-symbols-outlined text-sm">science</span>
+                    Active A/B Experiment
+                </div>
+<h1 class="text-slate-900 dark:text-slate-100 text-4xl font-black leading-tight tracking-tighter">Follow-up Sequence: Q4 Enterprise</h1>
+<p class="text-slate-500 dark:text-slate-400 text-lg">Comparing <span class="font-semibold text-slate-700 dark:text-slate-200 underline decoration-slate-300">Analytical Precision</span> vs. <span class="font-semibold text-primary underline decoration-primary/30">Provocative Disruption</span></p>
+</div>
+<div class="flex gap-3">
+<button class="flex items-center justify-center rounded-xl h-12 px-6 bg-slate-900 dark:bg-white text-white dark:text-slate-900 font-bold text-sm tracking-wide gap-2">
+<span class="material-symbols-outlined text-xl">play_arrow</span>
+                    Live Preview
+                </button>
+<button class="flex items-center justify-center rounded-xl h-12 px-6 bg-primary text-white font-bold text-sm tracking-wide gap-2">
+<span class="material-symbols-outlined text-xl">download</span>
+                    Export PDF
+                </button>
+</div>
+</div>
+<!-- Metric Prediction Cards -->
+<div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-10">
+<div class="flex flex-col gap-1 rounded-xl p-6 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm">
+<p class="text-slate-500 dark:text-slate-400 text-xs font-bold uppercase tracking-wider">Avg. Open Rate A</p>
+<div class="flex items-baseline gap-2">
+<p class="text-slate-900 dark:text-slate-100 text-3xl font-black">22.4%</p>
+<span class="text-slate-400 text-sm font-medium italic">Predicted</span>
+</div>
+<div class="flex items-center gap-1 text-slate-500 text-xs mt-2">
+<span class="material-symbols-outlined text-sm">trending_flat</span>
+                    Stable performance
+                </div>
+</div>
+<div class="flex flex-col gap-1 rounded-xl p-6 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm">
+<p class="text-slate-500 dark:text-slate-400 text-xs font-bold uppercase tracking-wider">Avg. CTR A</p>
+<div class="flex items-baseline gap-2">
+<p class="text-slate-900 dark:text-slate-100 text-3xl font-black">3.1%</p>
+<span class="text-slate-400 text-sm font-medium italic">Predicted</span>
+</div>
+<div class="flex items-center gap-1 text-red-500 text-xs mt-2">
+<span class="material-symbols-outlined text-sm">trending_down</span>
+                    -0.2% drop risk
+                </div>
+</div>
+<div class="flex flex-col gap-1 rounded-xl p-6 bg-primary/5 border border-primary/20 shadow-sm">
+<p class="text-primary text-xs font-bold uppercase tracking-wider">Avg. Open Rate B</p>
+<div class="flex items-baseline gap-2">
+<p class="text-primary text-3xl font-black">29.8%</p>
+<span class="text-primary/60 text-sm font-medium italic">Predicted</span>
+</div>
+<div class="flex items-center gap-1 text-emerald-600 text-xs mt-2">
+<span class="material-symbols-outlined text-sm">trending_up</span>
+                    +7.4% lift expected
+                </div>
+</div>
+<div class="flex flex-col gap-1 rounded-xl p-6 bg-primary/5 border border-primary/20 shadow-sm">
+<p class="text-primary text-xs font-bold uppercase tracking-wider">Avg. CTR B</p>
+<div class="flex items-baseline gap-2">
+<p class="text-primary text-3xl font-black">5.4%</p>
+<span class="text-primary/60 text-sm font-medium italic">Predicted</span>
+</div>
+<div class="flex items-center gap-1 text-emerald-600 text-xs mt-2">
+<span class="material-symbols-outlined text-sm">trending_up</span>
+                    High engagement
+                </div>
+</div>
+</div>
+<!-- Side by Side Comparison -->
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+<!-- Segment A: Analytical -->
+<div class="flex flex-col gap-6">
+<div class="flex items-center justify-between border-b-2 border-slate-200 dark:border-slate-800 pb-4">
+<div class="flex items-center gap-3">
+<div class="bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-200 font-black text-xl px-3 py-1 rounded-lg">A</div>
+<h3 class="text-xl font-bold">The Analytical Lead</h3>
+</div>
+<span class="text-xs font-bold text-slate-400 uppercase tracking-widest">Clean • Neutral • Data-Driven</span>
+</div>
+<!-- Email 1: A -->
+<div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl overflow-hidden shadow-sm">
+<div class="bg-slate-50 dark:bg-slate-800/50 px-6 py-3 border-b border-slate-100 dark:border-slate-800 flex justify-between items-center">
+<span class="text-xs font-bold text-slate-500 uppercase">Day 1: Initial Pulse</span>
+<div class="flex gap-2">
+<div class="w-2 h-2 rounded-full bg-slate-300"></div>
+<div class="w-2 h-2 rounded-full bg-slate-300"></div>
+</div>
+</div>
+<div class="p-6">
+<p class="text-sm font-bold text-slate-400 mb-1 italic">Subject: Efficiency analysis of your current stack</p>
+<div class="space-y-3 text-slate-600 dark:text-slate-400 text-sm leading-relaxed">
+<p>Hello {First_Name},</p>
+<p>Based on recent industry benchmarks, mid-market SaaS companies are seeing a 14% drift in operational overhead. I’ve compiled a breakdown of how Yukoli aligns with these specific KPIs.</p>
+<p>Would a 10-minute review of this data be useful for your team?</p>
+<p class="font-medium">Best regards,<br/>The Yukoli Team</p>
+</div>
+</div>
+</div>
+<!-- Email 2: A -->
+<div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl overflow-hidden shadow-sm">
+<div class="bg-slate-50 dark:bg-slate-800/50 px-6 py-3 border-b border-slate-100 dark:border-slate-800 flex justify-between items-center">
+<span class="text-xs font-bold text-slate-500 uppercase">Day 3: Case Study</span>
+<div class="flex gap-2">
+<div class="w-2 h-2 rounded-full bg-slate-300"></div>
+<div class="w-2 h-2 rounded-full bg-slate-300"></div>
+</div>
+</div>
+<div class="p-6">
+<p class="text-sm font-bold text-slate-400 mb-1 italic">Subject: Case Study: 22% Reduction in churn</p>
+<div class="space-y-3 text-slate-600 dark:text-slate-400 text-sm leading-relaxed">
+<p>Hi {First_Name},</p>
+<p>Attached is a whitepaper detailing our implementation with GlobalTech. We focused on three key variables: latency, integration depth, and user adoption rates. The results were statistically significant.</p>
+<p>Review the full report here [Link].</p>
+</div>
+</div>
+</div>
+<!-- Email 3: A -->
+<div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl overflow-hidden shadow-sm">
+<div class="bg-slate-50 dark:bg-slate-800/50 px-6 py-3 border-b border-slate-100 dark:border-slate-800 flex justify-between items-center">
+<span class="text-xs font-bold text-slate-500 uppercase">Day 7: Final Logic</span>
+<div class="flex gap-2">
+<div class="w-2 h-2 rounded-full bg-slate-300"></div>
+<div class="w-2 h-2 rounded-full bg-slate-300"></div>
+</div>
+</div>
+<div class="p-6">
+<p class="text-sm font-bold text-slate-400 mb-1 italic">Subject: Finalizing our Q4 audit resources</p>
+<div class="space-y-3 text-slate-600 dark:text-slate-400 text-sm leading-relaxed">
+<p>Dear {First_Name},</p>
+<p>We are concluding our outreach for this quarter's audit cycle. If the data provided previously didn't meet your requirements, I'd appreciate knowing which metrics you prioritize.</p>
+<p>Thank you for your time.</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Segment B: Provocative -->
+<div class="flex flex-col gap-6">
+<div class="flex items-center justify-between border-b-2 border-primary/40 pb-4">
+<div class="flex items-center gap-3">
+<div class="bg-primary text-white font-black text-xl px-3 py-1 rounded-lg">B</div>
+<h3 class="text-xl font-bold text-primary">The Provocateur</h3>
+</div>
+<span class="text-xs font-bold text-primary uppercase tracking-widest">Bold • Direct • Orange Accents</span>
+</div>
+<!-- Email 1: B -->
+<div class="bg-white dark:bg-slate-900 border-2 border-primary/20 rounded-xl overflow-hidden shadow-lg relative">
+<div class="absolute top-0 right-0 p-2">
+<span class="bg-primary text-white text-[10px] font-black px-2 py-0.5 rounded-full uppercase">Top Performer</span>
+</div>
+<div class="bg-primary/5 px-6 py-3 border-b border-primary/10 flex justify-between items-center">
+<span class="text-xs font-bold text-primary uppercase">Day 1: The Disruption</span>
+<div class="flex gap-2">
+<div class="w-2 h-2 rounded-full bg-primary"></div>
+<div class="w-2 h-2 rounded-full bg-primary/30"></div>
+</div>
+</div>
+<div class="p-6">
+<p class="text-sm font-bold text-primary mb-1 italic">Subject: Your current stack is leaking revenue</p>
+<div class="space-y-3 text-slate-900 dark:text-slate-100 text-sm font-medium leading-relaxed">
+<p>Hey {First_Name},</p>
+<p>Every day you wait is a day your competitors gain ground. We've identified exactly where your process is failing—and it's costing you more than you think.</p>
+<p>Ready to stop the bleed? Let's talk tomorrow at 10 AM.</p>
+<p class="text-primary font-black uppercase tracking-tighter">— TEAM YUKOLI</p>
+</div>
+</div>
+</div>
+<!-- Email 2: B -->
+<div class="bg-white dark:bg-slate-900 border border-primary/10 rounded-xl overflow-hidden shadow-sm">
+<div class="bg-primary/5 px-6 py-3 border-b border-primary/10 flex justify-between items-center">
+<span class="text-xs font-bold text-primary uppercase">Day 3: The Challenge</span>
+<div class="flex gap-2">
+<div class="w-2 h-2 rounded-full bg-primary"></div>
+<div class="w-2 h-2 rounded-full bg-primary/30"></div>
+</div>
+</div>
+<div class="p-6">
+<p class="text-sm font-bold text-primary mb-1 italic">Subject: Why your team hates your CRM</p>
+<div class="space-y-3 text-slate-900 dark:text-slate-100 text-sm font-medium leading-relaxed">
+<p>Hi {First_Name},</p>
+<p>Standard tools are designed for standard companies. You aren't one of them. We built Yukoli for the 1% who actually want to scale, not just manage. </p>
+<p class="p-3 bg-primary/10 rounded-lg border-l-4 border-primary italic">"Yukoli didn't just help us; it made our old process look like a joke." — CEO, Apex Corp</p>
+<p>Check the proof [Link].</p>
+</div>
+</div>
+</div>
+<!-- Email 3: B -->
+<div class="bg-white dark:bg-slate-900 border border-primary/10 rounded-xl overflow-hidden shadow-sm">
+<div class="bg-primary/5 px-6 py-3 border-b border-primary/10 flex justify-between items-center">
+<span class="text-xs font-bold text-primary uppercase">Day 7: The Ultimatum</span>
+<div class="flex gap-2">
+<div class="w-2 h-2 rounded-full bg-primary"></div>
+<div class="w-2 h-2 rounded-full bg-primary/30"></div>
+</div>
+</div>
+<div class="p-6">
+<p class="text-sm font-bold text-primary mb-1 italic">Subject: Goodbye for now (or until you're ready)</p>
+<div class="space-y-3 text-slate-900 dark:text-slate-100 text-sm font-medium leading-relaxed">
+<p>{First_Name},</p>
+<p>I'm pulling your file from our priority list. We only partner with firms ready for aggressive growth. If that changes, you know where to find us.</p>
+<p>One last chance to secure your pilot pricing [Claim Link].</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Footer Stats / Meta -->
+<div class="mt-12 p-8 rounded-2xl bg-slate-900 text-white flex flex-wrap items-center justify-between gap-8">
+<div class="flex flex-col gap-1">
+<h4 class="text-lg font-bold">Experiment Metadata</h4>
+<p class="text-slate-400 text-sm">Started: Oct 12, 2023 • Sample Size: 12,400 per segment</p>
+</div>
+<div class="flex gap-8">
+<div class="flex flex-col">
+<span class="text-primary text-xs font-bold uppercase">Confidence Score</span>
+<span class="text-2xl font-black">98.2%</span>
+</div>
+<div class="flex flex-col">
+<span class="text-primary text-xs font-bold uppercase">Winning Variant</span>
+<span class="text-2xl font-black">SEGMENT B</span>
+</div>
+<div class="flex flex-col">
+<span class="text-primary text-xs font-bold uppercase">Time Remaining</span>
+<span class="text-2xl font-black">4d 12h</span>
+</div>
+</div>
+<button class="bg-white text-slate-900 px-8 py-3 rounded-xl font-bold hover:bg-primary hover:text-white transition-all">
+                Terminate &amp; Deploy Winner
+            </button>
+</div>
+</main>
+</div>
+</body></html>

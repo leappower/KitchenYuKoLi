@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+
+<html class="light" lang="zh-CN"><head>
+<!-- ═══ Responsive Redirect (injected by patch-responsive-redirect.py) ═══ -->
+<link rel="canonical" href="/case-download/"/>
+<link rel="alternate" media="only screen and (max-width: 767px)"
+      href="/case-download/index-mobile.html"/>
+<link rel="alternate" media="only screen and (min-width: 768px) and (max-width: 1279px)"
+      href="/case-download/index-tablet.html"/>
+<link rel="alternate" media="only screen and (min-width: 1280px)"
+      href="/case-download/index-pc.html"/>
+<script>
+/* Responsive redirect — runs before render, no flash */
+(function(){
+  // 防止 bfcache 恢复时重复 redirect
+  if (window.__redirectChecked) return;
+  window.__redirectChecked = true;
+
+  // 处理 clean-url 参数:重定向后清理 URL 为干净的目录 URL
+  var urlParams = new URLSearchParams(location.search);
+  var cleanUrl = urlParams.get('clean-url');
+  if (cleanUrl) {
+    console.log('[Responsive Redirect] Cleaning URL to:', cleanUrl);
+    history.replaceState({}, '', cleanUrl);
+    return;
+  }
+
+  // SPA 导航时跳过响应式重定向
+  console.log('[Responsive Redirect] Checking SPA flag: window.__spaNavigating =', window.__spaNavigating);
+  if (window.__spaNavigating) {
+    console.log('[Responsive Redirect] SPA navigation detected, skipping redirect');
+    return;
+  }
+
+  // 使用 DeviceUtils 统一管理设备判断
+  var currentFile = location.pathname.split('/').pop();
+  console.log('[Responsive Redirect] Current file:', currentFile, 'Pathname:', location.pathname);
+
+  // 当访问目录 URL(以 / 结尾)时,不要重定向(SPA 导航使用干净的目录 URL)
+  if (window.DeviceUtils && window.DeviceUtils.isDirectoryURL()) {
+    console.log('[Responsive Redirect] Directory URL detected, skipping redirect');
+    return;
+  }
+
+  // 使用 DeviceUtils 判断是否需要重定向
+  if (window.DeviceUtils && window.DeviceUtils.shouldRedirect(currentFile)) {
+    var deviceType = window.DeviceUtils.getDeviceType();
+    var targetFile;
+
+    if (deviceType === window.DeviceUtils.DeviceType.MOBILE) {
+      targetFile = 'index-mobile.html';
+    } else if (deviceType === window.DeviceUtils.DeviceType.TABLET) {
+      targetFile = 'index-tablet.html';
+    } else {
+      targetFile = 'index-pc.html';
+    }
+
+    console.log('[Responsive Redirect] Redirecting to:', targetFile);
+    location.href = targetFile;
+    return;
+  }
+
+  console.log('[Responsive Redirect] No redirect needed');
+})();
+</script>
+<!-- ═══ End Responsive Redirect ═══ -->
+
+
+<meta charset="utf-8"/>
+<meta name="description" content="Yukoli case study download — supply chain efficiency and smart kitchen automation ROI data.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Yukoli Smart Kitchen">
+<meta property="og:description" content="Yukoli case study download — supply chain efficiency and smart kitchen automation ROI data.">
+<meta property="og:url" content="https://www.yukoli.com/case-download/index-tablet.html">
+<meta property="og:image" content="https://www.yukoli.com/assets/images/og-case-studies.webp">
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="/assets/fonts/local-fonts.css" rel="stylesheet"/>
+<link rel="stylesheet" href="/assets/css/styles.css">
+  <link rel="stylesheet" href="/assets/css/tailwind.css">
+<!-- Dark mode: apply saved preference before first paint (prevents flash) -->
+  <script>(function(){
+if(localStorage.getItem('darkMode')==='true')document.documentElement.classList.add('dark')})()</script>
+<link rel="stylesheet" href="/assets/css/skeleton.css"/>
+<link rel="icon" href="/assets/images/logo_header.webp" type="image/webp">
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 min-h-screen overflow-x-hidden">
+<div class="max-w-[1024px] mx-auto px-6 md:px-10">
+<!-- Top Navigation -->
+<!-- ═══ Navigator Component ═══ -->
+<navigator data-component="navigator"
+  data-variant="tablet"
+  data-search="true"
+  data-active="cases"
+  data-cta-text-key="nav_get_quote"
+  data-cta-href="/quote"></navigator>
+<main id="spa-content" class="py-8 pb-24 space-y-12">
+<!-- Hero Section & Featured Metric -->
+<section class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+<div class="space-y-6">
+<span class="inline-block px-3 py-1 bg-primary/10 text-primary text-xs font-bold uppercase tracking-widest rounded">Case Study: Industrial Series</span>
+<h2 class="text-4xl md:text-5xl font-black leading-tight text-slate-900 dark:text-white">
+                        Maximizing <span class="text-primary">Operational Efficiency</span> in Tier 1 Manufacturing
+                    </h2>
+<p class="text-lg text-slate-600 dark:text-slate-400 leading-relaxed max-w-xl">
+                        Discover how Yukoli's automated orchestration helped top manufacturers achieve a 150% increase in throughput within 6 months.
+                    </p>
+<div class="flex items-center gap-4 py-2">
+<div class="flex -space-x-3">
+<div class="size-10 rounded-full border-2 border-background-light bg-slate-200" data-alt="Professional avatar headshot of a manufacturing executive"></div>
+<div class="size-10 rounded-full border-2 border-background-light bg-slate-300" data-alt="Professional avatar headshot of an operations manager"></div>
+<div class="size-10 rounded-full border-2 border-background-light bg-slate-400" data-alt="Professional avatar headshot of a lead engineer"></div>
+</div>
+<p class="text-sm font-medium text-slate-500 italic">Downloaded by 1,200+ industry leaders</p>
+</div>
+</div>
+<!-- Featured Image Card -->
+<div class="relative group">
+<div class="absolute -inset-1 bg-gradient-to-r from-primary to-orange-600 rounded-2xl blur opacity-25 group-hover:opacity-40 transition duration-1000"></div>
+<div class="relative bg-white dark:bg-slate-900 rounded-2xl overflow-hidden shadow-2xl border border-slate-200 dark:border-slate-800">
+<div class="aspect-video bg-cover bg-center" data-alt="High-tech automated manufacturing facility with robotic arms and orange accents" style="background-image: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.6)), url('https://lh3.googleusercontent.com/aida-public/AB6AXuDWvF8m3gt5tvGEQRSMpjO-rlor3KbcqcxG3YFlDoZGoaB3tDtljEX3odzoRE1PSWwdrzV3MzzI-M4I6AhEMYXA6bIbunGsCgqInoKO9JWp5MIPomnru0tJwxvgw1CmA1Zp7fucPVY5NFmripD0YrfozTTgOcuqLKLstaLl1TWziJOQ_pcb3t0xkptfPeBHWlGAvYAv51XnKdK0ExPgeuE8XsA2B3JpCiR4GyOW28m8EfC6Ptz_iVIbH1oXAIplSKQkzTuqXzRCcWsv');">
+<div class="absolute bottom-6 left-6 right-6 flex justify-between items-end">
+<div>
+<p class="text-white/80 text-sm font-medium">Download Report</p>
+<p class="text-white text-xl font-bold italic">2024 Efficiency Index</p>
+</div>
+<span class="material-symbols-outlined text-white text-4xl">download_for_offline</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Key Metrics Grid -->
+<section class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="flex flex-col gap-3 rounded-2xl p-6 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm">
+<div class="flex justify-between items-start">
+<p class="text-slate-500 dark:text-slate-400 text-sm font-semibold uppercase tracking-wider" data-i18n="case_throughput">Throughput</p>
+<span class="material-symbols-outlined text-primary">trending_up</span>
+</div>
+<p class="text-slate-900 dark:text-white text-4xl font-black">+150%</p>
+<div class="flex items-center gap-2 text-green-500 font-bold text-sm">
+<span class="material-symbols-outlined text-sm">arrow_upward</span>
+<span>12% YoY</span>
+</div>
+</div>
+<div class="flex flex-col gap-3 rounded-2xl p-6 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm">
+<div class="flex justify-between items-start">
+<p class="text-slate-500 dark:text-slate-400 text-sm font-semibold uppercase tracking-wider">ROI Realized</p>
+<span class="material-symbols-outlined text-primary">timer</span>
+</div>
+<p class="text-slate-900 dark:text-white text-4xl font-black">14 Mo.</p>
+<div class="flex items-center gap-2 text-green-500 font-bold text-sm">
+<span class="material-symbols-outlined text-sm">bolt</span>
+<span>Accelerated</span>
+</div>
+</div>
+<div class="flex flex-col gap-3 rounded-2xl p-6 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm">
+<div class="flex justify-between items-start">
+<p class="text-slate-500 dark:text-slate-400 text-sm font-semibold uppercase tracking-wider">Compliance</p>
+<span class="material-symbols-outlined text-primary">verified</span>
+</div>
+<p class="text-slate-900 dark:text-white text-4xl font-black">99.9%</p>
+<div class="flex items-center gap-2 text-primary font-bold text-sm">
+<span class="material-symbols-outlined text-sm">verified_user</span>
+<span>Certified</span>
+</div>
+</div>
+</section>
+<!-- Main Content Area: Two Columns (Form & Preview) -->
+<section class="grid grid-cols-1 md:grid-cols-12 gap-10">
+<!-- Form Column -->
+<div class="md:col-span-7 bg-white dark:bg-slate-900 p-8 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-xl">
+<h3 class="text-2xl font-bold mb-6">Download the Full Case Study</h3>
+<form class="space-y-5">
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+<div class="space-y-1.5">
+<label class="text-xs font-bold uppercase text-slate-500 px-1" data-i18n="quote_first_name">First Name</label>
+<input class="w-full bg-slate-50 dark:bg-slate-800 border-slate-200 dark:border-slate-700 rounded-xl h-12 px-4 focus:ring-primary focus:border-primary transition-all" placeholder="John" type="text"/>
+</div>
+<div class="space-y-1.5">
+<label class="text-xs font-bold uppercase text-slate-500 px-1" data-i18n="quote_last_name">Last Name</label>
+<input class="w-full bg-slate-50 dark:bg-slate-800 border-slate-200 dark:border-slate-700 rounded-xl h-12 px-4 focus:ring-primary focus:border-primary transition-all" placeholder="Doe" type="text"/>
+</div>
+</div>
+<div class="space-y-1.5">
+<label class="text-xs font-bold uppercase text-slate-500 px-1" data-i18n="landing_work_email">Work Email</label>
+<input class="w-full bg-slate-50 dark:bg-slate-800 border-slate-200 dark:border-slate-700 rounded-xl h-12 px-4 focus:ring-primary focus:border-primary transition-all" placeholder="john@company.com" type="email"/>
+</div>
+<div class="space-y-1.5">
+<label class="text-xs font-bold uppercase text-slate-500 px-1">Company Industry</label>
+<select class="w-full bg-slate-50 dark:bg-slate-800 border-slate-200 dark:border-slate-700 rounded-xl h-12 px-4 focus:ring-primary focus:border-primary transition-all">
+<option>Automotive Manufacturing</option>
+<option>Aerospace &amp; Defense</option>
+<option>Heavy Equipment</option>
+<option>Electronics</option>
+</select>
+</div>
+<button class="w-full bg-primary hover:bg-orange-600 text-white h-14 rounded-xl font-bold text-lg shadow-lg shadow-primary/30 transition-all flex items-center justify-center gap-3">
+<span class="material-symbols-outlined">description</span>
+                            Get PDF Report
+                        </button>
+<p class="text-[10px] text-slate-400 text-center uppercase tracking-widest font-bold">Encrypted &amp; Secure. We value your privacy.</p>
+</form>
+</div>
+<!-- "What's Inside" Column -->
+<div class="md:col-span-5 space-y-8">
+<div>
+<h4 class="text-xl font-bold mb-4 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">auto_stories</span>
+                            What's Inside
+                        </h4>
+<ul class="space-y-4">
+<li class="flex gap-3">
+<div class="shrink-0 size-6 bg-primary/20 text-primary flex items-center justify-center rounded-full">
+<span class="material-symbols-outlined text-sm font-bold">check</span>
+</div>
+<div>
+<p class="font-bold text-sm">Operational Roadmaps</p>
+<p class="text-xs text-slate-500">Step-by-step framework for automation scaling.</p>
+</div>
+</li>
+<li class="flex gap-3">
+<div class="shrink-0 size-6 bg-primary/20 text-primary flex items-center justify-center rounded-full">
+<span class="material-symbols-outlined text-sm font-bold">check</span>
+</div>
+<div>
+<p class="font-bold text-sm">Vendor Comparison Tables</p>
+<p class="text-xs text-slate-500">How Yukoli stacks up against legacy ERP systems.</p>
+</div>
+</li>
+<li class="flex gap-3">
+<div class="shrink-0 size-6 bg-primary/20 text-primary flex items-center justify-center rounded-full">
+<span class="material-symbols-outlined text-sm font-bold">check</span>
+</div>
+<div>
+<p class="font-bold text-sm">ROI Calculator Template</p>
+<p class="text-xs text-slate-500">Interactive sheets to calculate your potential savings.</p>
+</div>
+</li>
+</ul>
+</div>
+<div class="p-6 bg-slate-100 dark:bg-slate-800/50 rounded-2xl space-y-4">
+<p class="text-xs font-bold uppercase text-slate-400 tracking-tighter">Certified Compliance</p>
+<div class="flex flex-wrap gap-4 grayscale opacity-60">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-xl">security</span>
+<span class="text-xs font-bold">ISO 27001</span>
+</div>
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-xl">inventory_2</span>
+<span class="text-xs font-bold">SOC2 TYPE II</span>
+</div>
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-xl">precision_manufacturing</span>
+<span class="text-xs font-bold">NIST 800-171</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+
+</div>
+
+
+
+<script defer src="/assets/js/ui/products-dropdown.js?v=20260322-v3"></script>
+<script defer src="/assets/js/ui/navigator.js?v=20260322-v3"></script>
+<script defer src="/assets/js/ui/search-engine.js"></script>
+<script defer src="/assets/js/ui/footer.js?v=20260322-v3"></script>
+<script defer src="/assets/js/lang-registry.js"></script>
+<script defer src="/assets/js/translations.js"></script><script defer src="/assets/js/translations-dropdown-template.js"></script>
+<script defer src="/assets/js/contacts.js"></script>
+<script defer src="/assets/js/ui/smart-popup.js"></script>
+<script defer src="/assets/js/router.js"></script>
+
+<script defer src="/assets/js/page-interactions.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    if (window.translationManager) window.translationManager.initialize();
+  });
+</script>
+
+
+    
+    
+    
+
+<footer data-component="footer"
+  data-variant="tablet"
+  data-search="true"
+  data-active="">
+</footer>
+
+
+
+<script src="/assets/js/utils/device-utils.js"></script>
+<script src="/assets/js/spa-router.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    if (window.SpaRouter && typeof window.SpaRouter.init === 'function') {
+      window.SpaRouter.init();
+    }
+  });
+</script>
+</body></html>

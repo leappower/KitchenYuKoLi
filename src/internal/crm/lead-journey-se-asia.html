@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+
+<html class="light" lang="zh-CN"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Yukoli Lead Journey - Seng_Kitchen_Group</title>
+<link href="/assets/fonts/local-fonts.css" rel="stylesheet"/>
+<link rel="stylesheet" href="/assets/css/tailwind.css">
+
+
+
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#ec5b13",
+                        "background-light": "#f8f6f6",
+                        "background-dark": "#221610",
+                    },
+                    fontFamily: {
+                        "display": ["Public Sans"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'Public Sans', sans-serif; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 min-h-screen">
+<div class="relative flex h-auto min-h-screen w-full flex-col overflow-x-hidden">
+<div class="layout-container flex h-full grow flex-col">
+<!-- Top Navigation -->
+<header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-primary/20 px-4 md:px-10 py-3 bg-white dark:bg-background-dark/50 backdrop-blur-md sticky top-0 z-50">
+<div class="flex items-center gap-4">
+<div class="size-8 bg-primary rounded-lg flex items-center justify-center text-white">
+<span class="material-symbols-outlined">rocket_launch</span>
+</div>
+<h2 class="text-slate-900 dark:text-white text-lg font-bold leading-tight tracking-[-0.015em]">Yukoli Lead Journey</h2>
+</div>
+<div class="flex flex-1 justify-end gap-4 md:gap-8 items-center">
+<div class="flex gap-2">
+<button class="flex size-10 cursor-pointer items-center justify-center rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-primary/10 transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="flex size-10 cursor-pointer items-center justify-center rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-primary/10 transition-colors">
+<span class="material-symbols-outlined">account_circle</span>
+</button>
+</div>
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10 border-2 border-primary" data-alt="User profile avatar of admin" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAYCsP-EeKzLWREHmTFxgsDZP9Eoo_DY440XvhJCLAOydXlzgOm8L3F1ly3xuvxJN_MV6KASH71Gcb1qzopblLnMXvHai_25sC9bFj4NtZLJbSbl8pqFmcIwNtHTg2LEq43eslmERJgcxYF3_mK2eCVaK5anU3n8UbSzEGR97_MbyI1FNtyPrTFhMHdqgsGv2w38k7bDNgKxkGfB1XRyIICwJPSm2nGmLwFTt_1anpuKJU3BJYYgq9w3F3xcSAEtc8auqFGq9k9jfcT");'></div>
+</div>
+</header>
+<main class="flex-1 max-w-[1200px] mx-auto w-full p-4 md:p-8">
+<!-- Breadcrumb / Sidebar Mockup Nav -->
+<div class="flex items-center gap-2 text-sm text-slate-500 dark:text-slate-400 mb-6">
+<span class="material-symbols-outlined text-sm">home</span>
+<span>Dashboard</span>
+<span class="material-symbols-outlined text-sm">chevron_right</span>
+<span class="text-primary font-medium">Lead Journey</span>
+</div>
+<!-- Lead Header Section -->
+<div class="flex flex-col @container mb-8">
+<div class="flex w-full flex-col gap-6 @[520px]:flex-row @[520px]:justify-between items-start">
+<div class="flex gap-6">
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-2xl min-h-32 w-32 shadow-xl border-4 border-white dark:border-slate-800" data-alt="Commercial kitchen interior with stainless steel equipment" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBX5BPco6gsOQNbU3-Lk1FbvzoI1qg0d2MtRJNzmW8v-IZxgBvBo6ktCgnLIv-bVb9IGW4ihdAU8vaKOl4HZ3vo4r3WnFWgN-1H31D8HBXQPn3D5aVNMnggoCxdASo1sYjRxJsffTmOvpBBSF1Dw73bR3bqYZlCYwkkpdvJd_asOImupgghsVnGkRWnqrZKifsPZ1-N0qWv_xo0r6UvKT6BqQ2G6GcgIxtD2xyDWirXXka0qYerN-e_Rr0yz8056BSQsbkBAPxzQ5hj");'></div>
+<div class="flex flex-col justify-center">
+<div class="flex items-center gap-2 mb-1">
+<h1 class="text-slate-900 dark:text-white text-3xl font-extrabold leading-tight tracking-tight">Seng_Kitchen_Group</h1>
+<span class="px-2 py-0.5 bg-primary/10 text-primary text-[10px] font-bold rounded uppercase tracking-wider">High Velocity</span>
+</div>
+<p class="text-slate-500 dark:text-slate-400 text-base font-normal flex items-center gap-1">
+<span class="material-symbols-outlined text-sm">location_on</span> Singapore/Malaysia • SE Asia
+                                </p>
+<div class="mt-3 flex gap-2">
+<span class="inline-flex items-center rounded-full bg-green-100 dark:bg-green-900/30 px-2.5 py-0.5 text-xs font-medium text-green-800 dark:text-green-400">
+<span class="mr-1 h-1.5 w-1.5 rounded-full bg-green-500"></span>
+                                        Active Now
+                                    </span>
+</div>
+</div>
+</div>
+<div class="flex w-full max-w-[480px] gap-3 @[480px]:w-auto pt-2">
+<button class="flex min-w-[120px] cursor-pointer items-center justify-center rounded-xl h-12 px-6 bg-slate-200 dark:bg-slate-800 text-slate-900 dark:text-white text-sm font-bold transition-all hover:bg-slate-300 dark:hover:bg-slate-700">
+<span class="material-symbols-outlined mr-2">chat</span> Contact Now
+                            </button>
+<button class="flex min-w-[120px] cursor-pointer items-center justify-center rounded-xl h-12 px-6 bg-primary text-white text-sm font-bold transition-all hover:opacity-90 shadow-lg shadow-primary/20">
+<span class="material-symbols-outlined mr-2">database</span> View CRM
+                            </button>
+</div>
+</div>
+</div>
+<!-- KPI Cards -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+<div class="flex flex-col gap-2 rounded-2xl p-6 bg-white dark:bg-slate-800/50 border border-slate-100 dark:border-slate-700 shadow-sm">
+<div class="flex items-center justify-between">
+<p class="text-slate-500 dark:text-slate-400 text-sm font-medium uppercase tracking-wider">Current Score</p>
+<span class="material-symbols-outlined text-primary">analytics</span>
+</div>
+<p class="text-slate-900 dark:text-white text-4xl font-bold leading-tight">80</p>
+<p class="text-green-500 text-sm font-bold flex items-center gap-1">
+<span class="material-symbols-outlined text-sm font-bold">trending_up</span> +15% from last week
+                        </p>
+</div>
+<div class="flex flex-col gap-2 rounded-2xl p-6 bg-white dark:bg-slate-800/50 border border-slate-100 dark:border-slate-700 shadow-sm">
+<div class="flex items-center justify-between">
+<p class="text-slate-500 dark:text-slate-400 text-sm font-medium uppercase tracking-wider">Vitality</p>
+<span class="material-symbols-outlined text-primary">electric_bolt</span>
+</div>
+<p class="text-slate-900 dark:text-white text-4xl font-bold leading-tight">92%</p>
+<p class="text-green-500 text-sm font-bold flex items-center gap-1">
+<span class="material-symbols-outlined text-sm font-bold">speed</span> Peak Response Rate
+                        </p>
+</div>
+<div class="flex flex-col gap-2 rounded-2xl p-6 bg-white dark:bg-slate-800/50 border border-slate-100 dark:border-slate-700 shadow-sm">
+<div class="flex items-center justify-between">
+<p class="text-slate-500 dark:text-slate-400 text-sm font-medium uppercase tracking-wider">Tier</p>
+<span class="material-symbols-outlined text-primary">verified</span>
+</div>
+<p class="text-slate-900 dark:text-white text-2xl font-bold leading-tight uppercase">Emerging Owner</p>
+<p class="text-slate-400 dark:text-slate-500 text-sm font-medium">Status: Stable Growth</p>
+</div>
+</div>
+<!-- Timeline Section -->
+<div class="bg-white dark:bg-slate-800/50 rounded-3xl p-6 border border-slate-100 dark:border-slate-700 shadow-sm">
+<div class="flex items-center justify-between mb-8">
+<h2 class="text-slate-900 dark:text-white text-xl font-bold">Lead Velocity Timeline</h2>
+<button class="text-primary text-sm font-bold hover:underline">Download Report</button>
+</div>
+<div class="space-y-8 relative before:absolute before:inset-0 before:ml-5 before:-translate-x-px md:before:mx-auto md:before:translate-x-0 before:h-full before:w-0.5 before:bg-gradient-to-b before:from-primary before:via-primary/50 before:to-transparent">
+<!-- Timeline Item 1 -->
+<div class="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group">
+<div class="flex items-center justify-center w-10 h-10 rounded-full border border-white dark:border-slate-700 bg-primary text-white shadow shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 z-10">
+<span class="material-symbols-outlined text-lg">chat</span>
+</div>
+<div class="w-[calc(100%-4rem)] md:w-[45%] p-4 rounded-2xl border border-slate-100 dark:border-slate-700 bg-white dark:bg-slate-900 shadow-sm">
+<div class="flex items-center justify-between mb-1">
+<time class="font-display font-bold text-slate-900 dark:text-white">Just Now</time>
+<span class="text-green-500 font-bold text-xs bg-green-50 dark:bg-green-900/20 px-2 py-1 rounded">+25 PTS</span>
+</div>
+<div class="text-slate-600 dark:text-slate-300 font-medium">WhatsApp Inquiry Sent</div>
+<div class="mt-2 text-sm text-slate-500 dark:text-slate-400 p-2 bg-slate-50 dark:bg-slate-800 rounded-lg italic">
+                                    "Instant response via automated bot."
+                                </div>
+</div>
+</div>
+<!-- Timeline Item 2 -->
+<div class="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group">
+<div class="flex items-center justify-center w-10 h-10 rounded-full border border-white dark:border-slate-700 bg-primary text-white shadow shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 z-10">
+<span class="material-symbols-outlined text-lg">calculate</span>
+</div>
+<div class="w-[calc(100%-4rem)] md:w-[45%] p-4 rounded-2xl border border-slate-100 dark:border-slate-700 bg-white dark:bg-slate-900 shadow-sm">
+<div class="flex items-center justify-between mb-1">
+<time class="font-display font-bold text-slate-900 dark:text-white">4 Hours Ago</time>
+<span class="text-green-500 font-bold text-xs bg-green-50 dark:bg-green-900/20 px-2 py-1 rounded">+40 PTS</span>
+</div>
+<div class="text-slate-600 dark:text-slate-300 font-medium">ROI Calculator Completion</div>
+<div class="mt-3 flex items-center gap-4">
+<div class="flex-1 text-center p-2 rounded-lg bg-primary/5 border border-primary/10">
+<p class="text-[10px] uppercase text-slate-500 font-bold tracking-tighter">Savings</p>
+<p class="text-primary font-bold text-lg">$185k</p>
+</div>
+<div class="flex-1 text-center p-2 rounded-lg bg-primary/5 border border-primary/10">
+<p class="text-[10px] uppercase text-slate-500 font-bold tracking-tighter">Payback</p>
+<p class="text-primary font-bold text-lg">8-mo</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Timeline Item 3 -->
+<div class="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group">
+<div class="flex items-center justify-center w-10 h-10 rounded-full border border-white dark:border-slate-700 bg-primary text-white shadow shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 z-10">
+<span class="material-symbols-outlined text-lg">ads_click</span>
+</div>
+<div class="w-[calc(100%-4rem)] md:w-[45%] p-4 rounded-2xl border border-slate-100 dark:border-slate-700 bg-white dark:bg-slate-900 shadow-sm">
+<div class="flex items-center justify-between mb-1">
+<time class="font-display font-bold text-slate-900 dark:text-white">1 Day Ago</time>
+<span class="text-green-500 font-bold text-xs bg-green-50 dark:bg-green-900/20 px-2 py-1 rounded">+15 PTS</span>
+</div>
+<div class="text-slate-600 dark:text-slate-300 font-medium">TikTok Video Ad Click</div>
+<div class="mt-2 flex items-center gap-3">
+<div class="size-12 rounded-lg bg-slate-200 bg-cover bg-center" data-alt="Screenshot from Smart Stir-fry video demo" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCo1nDjqthc__DpKTfn9t8YS2x_VsjV8VGhyRdX7uRTAeefEuNI-fznHJbhN_Tj35jNz_XJZpaqB4cYmYZkykDtSXeQ-QeWnhOEYvp3g20uREEJ0vAvav30Ry83bgG3UeY7AJ6lexM-9JyUezPTRaTFChJcIEdKgXBgow0DUoBTfYNzKj0UrfNcjM_Qy0N9DA9AHYzpWVYJarnN78gN-DATv01l7a-9djzR8YWGAf_KQpKPleUNknDnvZ0U2Z7oF8k1yYbcsUaet4-v');"></div>
+<div class="text-sm text-slate-500 dark:text-slate-400">
+                                        Viewed 'Smart Stir-fry' demo
+                                    </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Footer Summary -->
+<div class="mt-12 text-center text-slate-400 text-xs font-medium tracking-widest uppercase pb-8">
+                    Yukoli Intelligence Engine • Real-time Journey Tracking
+                </div>
+</main>
+</div>
+</div>
+</body></html>

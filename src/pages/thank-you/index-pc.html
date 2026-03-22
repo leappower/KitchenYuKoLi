@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+
+<html class="light" lang="zh-CN"><head>
+<!-- ═══ Responsive Redirect (injected by patch-responsive-redirect.py) ═══ -->
+<link rel="canonical" href="/thank-you/"/>
+<link rel="alternate" media="only screen and (max-width: 767px)"
+      href="/thank-you/index-mobile.html"/>
+<link rel="alternate" media="only screen and (min-width: 768px)"
+      href="/thank-you/index-pc.html"/>
+<script>
+/* Responsive redirect — runs before render, no flash */
+(function(){
+  // 防止 bfcache 恢复时重复 redirect
+  if (window.__redirectChecked) return;
+  window.__redirectChecked = true;
+
+  // 处理 clean-url 参数:重定向后清理 URL 为干净的目录 URL
+  var urlParams = new URLSearchParams(location.search);
+  var cleanUrl = urlParams.get('clean-url');
+  if (cleanUrl) {
+    console.log('[Responsive Redirect] Cleaning URL to:', cleanUrl);
+    history.replaceState({}, '', cleanUrl);
+    return;
+  }
+
+  // SPA 导航时跳过响应式重定向
+  console.log('[Responsive Redirect] Checking SPA flag: window.__spaNavigating =', window.__spaNavigating);
+  if (window.__spaNavigating) {
+    console.log('[Responsive Redirect] SPA navigation detected, skipping redirect');
+    return;
+  }
+
+  // 使用 DeviceUtils 统一管理设备判断
+  var currentFile = location.pathname.split('/').pop();
+  console.log('[Responsive Redirect] Current file:', currentFile, 'Pathname:', location.pathname);
+
+  // 当访问目录 URL(以 / 结尾)时,不要重定向(SPA 导航使用干净的目录 URL)
+  if (window.DeviceUtils && window.DeviceUtils.isDirectoryURL()) {
+    console.log('[Responsive Redirect] Directory URL detected, skipping redirect');
+    return;
+  }
+
+  // 使用 DeviceUtils 判断是否需要重定向
+  if (window.DeviceUtils && window.DeviceUtils.shouldRedirect(currentFile)) {
+    var deviceType = window.DeviceUtils.getDeviceType();
+    var targetFile;
+
+    if (deviceType === window.DeviceUtils.DeviceType.MOBILE) {
+      targetFile = 'index-mobile.html';
+    } else if (deviceType === window.DeviceUtils.DeviceType.TABLET) {
+      targetFile = 'index-tablet.html';
+    } else {
+      targetFile = 'index-pc.html';
+    }
+
+    console.log('[Responsive Redirect] Redirecting to:', targetFile);
+    location.href = targetFile;
+    return;
+  }
+
+  console.log('[Responsive Redirect] No redirect needed');
+})();
+</script>
+<!-- ═══ End Responsive Redirect ═══ -->
+
+
+
+
+<meta charset="utf-8"/>
+<meta name="description" content="Thank you for downloading the Yukoli 2026 catalog. Your smart kitchen automation guide is on its way.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Yukoli | Catalog Download Confirmed">
+<meta property="og:description" content="Thank you for downloading the Yukoli 2026 catalog. Your smart kitchen automation guide is on its way.">
+<meta property="og:url" content="https://www.yukoli.com/thank-you/index-pc.html">
+<meta property="og:image" content="https://www.yukoli.com/assets/images/og-home.webp">
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Yukoli | Catalog Download Confirmed</title>
+<link rel="preload" href="/assets/fonts/local-fonts.css" as="style">
+<link rel="preload" href="/assets/css/styles.css" as="style">
+  <link rel="preload" href="/assets/css/tailwind.css" as="style">
+<link rel="preload" href="/assets/fonts/public-sans-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/fonts/public-sans-latin-700-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link href="/assets/fonts/local-fonts.css" rel="stylesheet"/>
+<link rel="stylesheet" href="/assets/css/styles.css">
+  <link rel="stylesheet" href="/assets/css/tailwind.css">
+<link rel="stylesheet" href="/assets/css/z-index-system.css">
+<link rel="stylesheet" href="/assets/css/performance-optimized.css"/>
+<style>
+        body { font-family: 'Public Sans', sans-serif; }
+        .industrial-grid {
+            background-image: radial-gradient(circle, #ec5b1310 1px, transparent 1px);
+            background-size: 30px 30px;
+        }
+    </style>
+<!-- Dark mode: apply saved preference before first paint (prevents flash) -->
+  <script>(function(){
+if(localStorage.getItem('darkMode')==='true')document.documentElement.classList.add('dark')})()</script>
+<link rel="stylesheet" href="/assets/css/skeleton.css"/>
+<link rel="icon" href="/assets/images/logo_header.webp" type="image/webp">
+
+<script>
+window.addEventListener('DOMContentLoaded',function(){
+  setTimeout(function(){
+    var m=document.getElementById('spa-content');
+    if(!m)return;
+    var s=getComputedStyle(m);
+    var ok=s.maxWidth==='none'||parseInt(s.maxWidth)>=1920;
+    console.log('%c['+location.pathname.replace(//$/,'')+'] main: max-w='+s.maxWidth+' px='+s.paddingLeft+'/'+s.paddingRight+' w='+m.offsetWidth,ok?'color:green':'color:orange;font-weight:bold');
+    if(!ok)console.warn('Expected max-width: 1920px, got:',s.maxWidth);
+  },200);
+});
+</script>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 font-display overflow-x-hidden">
+<navigator data-component="navigator"
+  data-variant="pc"
+  data-active="thank-you"
+  data-search="true"
+  data-cta-href="/quote">
+</navigator>
+
+
+<div class="relative flex min-h-screen w-full flex-col industrial-grid">
+<div class="layout-container flex h-full grow flex-col">
+<!-- TopNavBar -->
+<main id="spa-content" class="flex-1 flex flex-col items-center">
+<div class="layout-content-container flex flex-col w-full py-10 gap-12">
+<!-- Confirmation Hero -->
+<section class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center bg-white dark:bg-slate-900 rounded-xl overflow-hidden shadow-sm border border-slate-200 dark:border-slate-800">
+<div class="p-8 md:p-12 space-y-6">
+<div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-sm font-bold uppercase tracking-wider">
+<span class="material-symbols-outlined text-sm">check_circle</span>
+                                Download Initiated
+                            </div>
+<h1 class="text-4xl md:text-5xl font-black text-slate-900 dark:text-white leading-[1.1] tracking-tight" data-i18n="thank_you_your_digital_copy_is_on_its_way">Your Digital Copy is on its Way</h1>
+<p class="text-lg text-slate-600 dark:text-slate-400 max-w-md">
+                                The <span class="text-slate-900 dark:text-white font-bold">2026 Global Product Catalog</span> has been dispatched to your registered email. Check your inbox for technical schematics and procurement pricing.
+                            </p>
+<div class="flex flex-wrap gap-4 pt-4">
+<button class="bg-primary hover:bg-primary/90 text-white px-8 py-4 rounded-lg font-bold flex items-center gap-2 transition-all">
+<span class="material-symbols-outlined">download</span>
+                                    Manual Download
+                                </button>
+<button class="bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 px-8 py-4 rounded-lg font-bold border border-slate-200 dark:border-slate-700 hover:bg-slate-200 transition-all" data-i18n="thank_you_share_with_team">
+                                    Share with Team
+                                </button>
+</div>
+</div>
+<div class="h-full min-h-[400px] bg-cover bg-center" data-alt="Professional industrial machinery and digital catalog interface" style='background-image: linear-gradient(to right, rgba(255,255,255,1) 0%, rgba(255,255,255,0) 20%), url("https://lh3.googleusercontent.com/aida-public/AB6AXuCYndj30pV2Y9UF3twHWPXITlHyHTzfg7hlP7eYGpL3Marur6GkOk-wcsKJtxbKhqdT6So_suIfTWyzW7E9ZDglKzR3PZ0lMrgWO_LyGLgqztzcSUBdYz2PwyYxhfA-ZkJ3aN5J2xj1GeqVywgN3BMeDT73rj-j4J4DZLXHErzR35gAVaRAcSQoQtQWQZUDH51wLs5asyEtLBDX6qU3vdFIEPQx_fFJox6ngXj7OXIslpGj8hzQkinzHSFBVeXczHb2RYGxPqDms5yj");'></div>
+</section>
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+<!-- Meeting Scheduler Widget -->
+<div class="lg:col-span-2 space-y-6">
+<div class="flex flex-col gap-2">
+<h2 class="text-2xl font-black text-slate-900 dark:text-white uppercase tracking-tight" data-i18n="thank_you_system_blueprint_session">System Blueprint Session</h2>
+<p class="text-slate-600 dark:text-slate-400" data-i18n="thank_you_schedule_a_15_minute_technical_review_wi">Schedule a 15-minute technical review with our engineering lead to map your smart kitchen integration.</p>
+</div>
+<div class="bg-white dark:bg-slate-900 rounded-xl p-6 border border-slate-200 dark:border-slate-800 shadow-sm">
+<div class="flex flex-wrap items-start justify-between gap-6">
+<div class="flex-1 min-w-[300px]">
+<div class="flex items-center justify-between mb-4">
+<button class="p-2 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-full transition-colors">
+<span class="material-symbols-outlined">chevron_left</span>
+</button>
+<p class="text-slate-900 dark:text-white font-bold">October 2025</p>
+<button class="p-2 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-full transition-colors">
+<span class="material-symbols-outlined">chevron_right</span>
+</button>
+</div>
+<div class="grid grid-cols-7 gap-1 text-center text-xs font-bold text-slate-400 mb-2">
+<div>S</div><div>M</div><div>T</div><div>W</div><div>T</div><div>F</div><div>S</div>
+</div>
+<div class="grid grid-cols-7 gap-1">
+<div class="h-10 flex items-center justify-center text-slate-300">28</div>
+<div class="h-10 flex items-center justify-center text-slate-300">29</div>
+<div class="h-10 flex items-center justify-center text-slate-300">30</div>
+<button class="h-10 rounded-lg hover:bg-primary/10 hover:text-primary transition-colors font-medium">1</button>
+<button class="h-10 rounded-lg hover:bg-primary/10 hover:text-primary transition-colors font-medium">2</button>
+<button class="h-10 rounded-lg bg-primary text-white font-bold">3</button>
+<button class="h-10 rounded-lg hover:bg-primary/10 hover:text-primary transition-colors font-medium">4</button>
+<button class="h-10 rounded-lg hover:bg-primary/10 hover:text-primary transition-colors font-medium">5</button>
+<button class="h-10 rounded-lg hover:bg-primary/10 hover:text-primary transition-colors font-medium">6</button>
+<button class="h-10 rounded-lg hover:bg-primary/10 hover:text-primary transition-colors font-medium">7</button>
+<button class="h-10 rounded-lg hover:bg-primary/10 hover:text-primary transition-colors font-medium">8</button>
+<button class="h-10 rounded-lg hover:bg-primary/10 hover:text-primary transition-colors font-medium">9</button>
+<button class="h-10 rounded-lg hover:bg-primary/10 hover:text-primary transition-colors font-medium">10</button>
+<button class="h-10 rounded-lg hover:bg-primary/10 hover:text-primary transition-colors font-medium">11</button>
+</div>
+</div>
+<div class="w-full md:w-48 space-y-3">
+<p class="text-xs font-bold text-slate-500 uppercase tracking-widest" data-i18n="thank_you_available_times">Available Times</p>
+<button class="w-full py-2 px-4 rounded border border-slate-200 dark:border-slate-700 text-sm font-medium hover:border-primary hover:text-primary transition-all">09:00 AM</button>
+<button class="w-full py-2 px-4 rounded border border-primary bg-primary/5 text-primary text-sm font-bold">10:30 AM</button>
+<button class="w-full py-2 px-4 rounded border border-slate-200 dark:border-slate-700 text-sm font-medium hover:border-primary hover:text-primary transition-all">01:00 PM</button>
+<button class="w-full py-2 px-4 rounded border border-slate-200 dark:border-slate-700 text-sm font-medium hover:border-primary hover:text-primary transition-all">03:30 PM</button>
+<button class="w-full py-3 bg-slate-900 dark:bg-white dark:text-slate-900 text-white rounded-lg text-sm font-black uppercase mt-4" data-i18n="thank_you_confirm_slot">Confirm Slot</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Secondary Action: Smart Stir-fry Robot Pro -->
+<div class="space-y-6">
+<h2 class="text-2xl font-black text-slate-900 dark:text-white uppercase tracking-tight">Spotlight</h2>
+<div class="group relative rounded-xl overflow-hidden bg-slate-900 aspect-[4/5] shadow-lg border border-slate-800">
+<div class="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110 opacity-70" data-alt="Smart Stir-fry Robot Pro in a high-tech kitchen environment" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuA-4rQilRnEqNRI6fBp2rklhyI2fZYWrd1YyIEBGbtKmM99s2cLZDH8tSuSrTszwztHKoLJx3v2oeYwxByhf9UfPdDYQ_F--jzuZM_nglXb38R3boEpxyCYtsfnFJhbXyxJXWw3kwm35rsr6jCuPHd62zpFAsp2vJpv3kMNq8Plpy7U5-s5Ua4sXOwJX545bOKXUfw87m_UNeWU6iU8JiQcE34eBvUoej1ExsehBAagYarM4xLHOizrpbLAMFpd5vyh68jUq-vMv4G9");'></div>
+<div class="absolute inset-0 bg-gradient-to-t from-slate-900 via-transparent to-transparent"></div>
+<div class="absolute bottom-0 left-0 p-6 space-y-3">
+<h3 class="text-xl font-bold text-white" data-i18n="pdp_hero_product_name">Smart Stir-fry Robot Pro</h3>
+<p class="text-slate-300 text-sm leading-relaxed" data-i18n="thank_you_experience_2026_industrial_automation_wa">Experience 2026 industrial automation. Watch the full Smart Kitchen video tour.</p>
+<a class="inline-flex items-center gap-2 text-primary font-bold group-hover:gap-3 transition-all" href="#">
+                                        Watch Video Tour <span class="material-symbols-outlined">play_circle</span>
+</a>
+</div>
+</div>
+</div>
+</div>
+<!-- Trust Reinforcement: Roadmap -->
+<section class="bg-slate-100 dark:bg-slate-900/50 rounded-2xl p-8 md:p-12 border border-slate-200 dark:border-slate-800">
+<div class="text-center mb-12">
+<h2 class="text-3xl font-black text-slate-900 dark:text-white uppercase tracking-tighter" data-i18n="thank_you_what_happens_next">What Happens Next</h2>
+<p class="text-slate-500 mt-2" data-i18n="thank_you_your_journey_to_industrial_grade_kitchen">Your journey to industrial-grade kitchen automation</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8 relative">
+<!-- Roadmap Line -->
+<div class="hidden md:block absolute top-12 left-0 w-full h-0.5 bg-slate-200 dark:bg-slate-800 -z-10"></div>
+<div class="flex flex-col items-center text-center gap-4">
+<div class="size-16 rounded-full bg-white dark:bg-slate-800 border-4 border-primary flex items-center justify-center text-primary shadow-xl">
+<span class="material-symbols-outlined text-3xl">mail</span>
+</div>
+<div class="space-y-2">
+<h4 class="font-black text-slate-900 dark:text-white uppercase text-sm" data-i18n="thank_you_email_confirmation">Email Confirmation</h4>
+<p class="text-sm text-slate-600 dark:text-slate-400" data-i18n="thank_you_receive_your_48_page_technical_catalog_a">Receive your 48-page technical catalog and pricing matrix instantly.</p>
+</div>
+</div>
+<div class="flex flex-col items-center text-center gap-4">
+<div class="size-16 rounded-full bg-white dark:bg-slate-800 border-4 border-slate-200 dark:border-slate-700 flex items-center justify-center text-slate-400 shadow-lg">
+<span class="material-symbols-outlined text-3xl">person_pin</span>
+</div>
+<div class="space-y-2">
+<h4 class="font-black text-slate-900 dark:text-white uppercase text-sm" data-i18n="thank_you_account_manager">Account Manager</h4>
+<p class="text-sm text-slate-600 dark:text-slate-400" data-i18n="thank_you_within_24_hours_a_regional_specialist_wi">Within 24 hours, a regional specialist will contact you for a brief intro.</p>
+</div>
+</div>
+<div class="flex flex-col items-center text-center gap-4">
+<div class="size-16 rounded-full bg-white dark:bg-slate-800 border-4 border-slate-200 dark:border-slate-700 flex items-center justify-center text-slate-400 shadow-lg">
+<span class="material-symbols-outlined text-3xl">analytics</span>
+</div>
+<div class="space-y-2">
+<h4 class="font-black text-slate-900 dark:text-white uppercase text-sm" data-i18n="thank_you_technical_review">Technical Review</h4>
+<p class="text-sm text-slate-600 dark:text-slate-400" data-i18n="thank_you_draft_your_custom_blueprint_based_on_you">Draft your custom blueprint based on your specific kitchen footprint.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Contact Info Section -->
+<section class="flex flex-col md:flex-row items-center justify-between gap-8 py-8 border-t border-slate-200 dark:border-slate-800 fullwidth-bg">
+<div class="space-y-2 text-center md:text-left">
+<h3 class="text-xl font-black text-slate-900 dark:text-white uppercase" data-i18n="thank_you_need_immediate_support">Need Immediate Support?</h3>
+<p class="text-slate-500" data-i18n="thank_you_our_engineering_support_line_is_open_24">Our engineering support line is open 24/7 for industrial partners.</p>
+</div>
+<div class="flex flex-wrap justify-center gap-4">
+<a class="flex items-center gap-3 px-6 py-3 rounded-lg bg-[#25D366]/10 text-[#25D366] font-bold border border-[#25D366]/20 hover:bg-[#25D366] hover:text-white transition-all" href="https://wa.me/8613163756465" target="_blank" rel="noopener noreferrer">
+<svg class="w-6 h-6" fill="currentColor" viewbox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L0 24l6.335-1.662c1.72.937 3.659 1.432 5.628 1.433h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"></path></svg>
+                                WhatsApp Support
+                            </a>
+<a class="flex items-center gap-3 px-6 py-3 rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-900 dark:text-white font-bold border border-slate-200 dark:border-slate-700 hover:border-primary transition-all" href="mailto:solutions@yukoli.com">
+<span class="material-symbols-outlined">alternate_email</span>
+                                solutions@yukoli.com
+                            </a>
+</div>
+</section>
+</div>
+</main>
+
+</div>
+</div>
+
+
+
+<script defer src="/assets/js/ui/products-dropdown.js?v=20260322-v3"></script>
+<script defer src="/assets/js/ui/navigator.js?v=20260322-v3"></script>
+<script defer src="/assets/js/ui/search-engine.js"></script>
+<script defer src="/assets/js/ui/footer.js?v=20260322-v3"></script>
+<script defer src="/assets/js/lang-registry.js"></script>
+<script defer src="/assets/js/translations.js"></script><script defer src="/assets/js/translations-dropdown-template.js"></script>
+<script defer src="/assets/js/contacts.js"></script>
+<script defer src="/assets/js/ui/smart-popup.js"></script>
+<script defer src="/assets/js/router.js"></script>
+
+<script defer src="/assets/js/page-interactions.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    if (window.translationManager) window.translationManager.initialize();
+  });
+</script>
+
+
+<script src="/assets/js/utils/device-utils.js"></script>
+<script src="/assets/js/spa-router.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    if (window.SpaRouter && typeof window.SpaRouter.init === 'function') {
+      window.SpaRouter.init();
+    }
+  });
+</script>
+</body></html>

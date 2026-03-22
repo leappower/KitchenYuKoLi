@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Yukoli 2026 | CRM Automation Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#ec5b13",
+                        "background-light": "#f8f6f6",
+                        "background-dark": "#221610",
+                    },
+                    fontFamily: {
+                        "display": ["Public Sans"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'Public Sans', sans-serif; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        .custom-scrollbar::-webkit-scrollbar { width: 4px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #ec5b1333; border-radius: 10px; }
+    </style>
+<link rel="stylesheet" href="../../assets/css/styles.css"/>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 antialiased font-display">
+<div class="relative flex min-h-screen w-full flex-col overflow-x-hidden">
+<!-- Top Navigation -->
+<header class="sticky top-0 z-50 w-full border-b border-slate-200 dark:border-slate-800 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md px-6 md:px-10 py-3">
+<div class="max-w-[1440px] mx-auto flex items-center justify-between gap-8">
+<div class="flex items-center gap-8">
+<div class="flex items-center gap-3">
+<div class="size-8 bg-primary rounded-lg flex items-center justify-center text-white">
+<span class="material-symbols-outlined text-xl">token</span>
+</div>
+<div class="flex flex-col">
+<h2 class="text-slate-900 dark:text-white text-lg font-bold leading-tight tracking-tight">Yukoli 2026</h2>
+<span class="text-[10px] font-bold uppercase tracking-widest text-primary">Automation Core</span>
+</div>
+</div>
+<nav class="hidden lg:flex items-center gap-6">
+<a class="text-primary text-sm font-semibold border-b-2 border-primary pb-1" href="#">Dashboard</a>
+<a class="text-slate-500 dark:text-slate-400 hover:text-primary text-sm font-medium transition-colors" href="#">Synchronization</a>
+<a class="text-slate-500 dark:text-slate-400 hover:text-primary text-sm font-medium transition-colors" href="#">Lead Scoring</a>
+<a class="text-slate-500 dark:text-slate-400 hover:text-primary text-sm font-medium transition-colors" href="#">API Logs</a>
+</nav>
+</div>
+<div class="flex flex-1 justify-end items-center gap-4">
+<div class="hidden md:flex relative max-w-xs w-full">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-sm">search</span>
+<input class="w-full bg-slate-100 dark:bg-slate-800/50 border-none rounded-xl pl-10 pr-4 py-2 text-sm focus:ring-2 focus:ring-primary/50 outline-none" placeholder="Search leads or logs..." type="text"/>
+</div>
+<button class="p-2 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-primary/10 hover:text-primary transition-all">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<div class="h-8 w-[1px] bg-slate-200 dark:bg-slate-800 mx-2"></div>
+<div class="flex items-center gap-3">
+<div class="bg-primary/10 p-1 rounded-full border border-primary/20">
+<img class="size-8 rounded-full" data-alt="User profile avatar icon" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCb-J_ImBSznN8EZ6qfBXqt6ieIDN8n9Bl3exs14HTAbHwo3uDLaDV5DkG8d0VQrS73jjbsQBcKBL-dcYI8RRPlIx9STXnCxo_HwNtaivputv8YJkeLaXliRon8DK8ZjoK_YNP9CcCYNTe2ep1tyjsXMs7Hs5cMj5w813es8MlQhs1-1qZI8em5epBUfcUwMhVpFZyTeWsce_gJMdZX50pzrUhNY70PIHzeWdMTlF7x54Uo06E6mDZWXBogRPkJbdUHMN415VKJzSSq"/>
+</div>
+</div>
+</div>
+</div>
+</header>
+<main class="max-w-[1440px] mx-auto w-full p-6 md:p-10 space-y-8">
+<!-- Hero Header Section -->
+<div class="flex flex-col lg:flex-row lg:items-end justify-between gap-6 pb-6 border-b border-slate-200 dark:border-slate-800">
+<div class="space-y-2">
+<div class="flex items-center gap-2 text-primary font-bold text-xs uppercase tracking-[0.2em]">
+<span class="material-symbols-outlined text-xs">bolt</span>
+                        System Operational: V4.2.1 Stable
+                    </div>
+<h1 class="text-4xl md:text-5xl font-black text-slate-900 dark:text-white tracking-tight">CRM Integration <span class="text-primary">&amp;</span> Automation</h1>
+<p class="text-slate-500 dark:text-slate-400 max-w-2xl text-lg">Industrial-grade lead orchestration for Yukoli 2026. Managing winner variants and automated sales blueprints across HubSpot and Salesforce.</p>
+</div>
+<div class="flex gap-3">
+<button class="flex items-center gap-2 px-6 py-3 bg-primary text-white font-bold rounded-xl hover:bg-primary/90 shadow-lg shadow-primary/20 transition-all active:scale-95">
+<span class="material-symbols-outlined">cloud_upload</span>
+                        Deploy to CRM
+                    </button>
+</div>
+</div>
+<!-- Stats Grid -->
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+<div class="p-6 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900/50">
+<div class="flex items-center justify-between mb-4">
+<span class="text-slate-500 dark:text-slate-400 text-sm font-medium">Total Syncs</span>
+<span class="material-symbols-outlined text-primary">sync</span>
+</div>
+<div class="text-3xl font-bold dark:text-white">12,842</div>
+<div class="mt-2 flex items-center gap-1 text-emerald-500 text-sm font-bold">
+<span class="material-symbols-outlined text-sm">trending_up</span> +12.4%
+                    </div>
+</div>
+<div class="p-6 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900/50">
+<div class="flex items-center justify-between mb-4">
+<span class="text-slate-500 dark:text-slate-400 text-sm font-medium">Winner Rate</span>
+<span class="material-symbols-outlined text-primary">trophy</span>
+</div>
+<div class="text-3xl font-bold dark:text-white">64.2%</div>
+<div class="mt-2 flex items-center gap-1 text-emerald-500 text-sm font-bold">
+<span class="material-symbols-outlined text-sm">trending_up</span> +5.1%
+                    </div>
+</div>
+<div class="p-6 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900/50">
+<div class="flex items-center justify-between mb-4">
+<span class="text-slate-500 dark:text-slate-400 text-sm font-medium">API Health</span>
+<span class="material-symbols-outlined text-emerald-500">check_circle</span>
+</div>
+<div class="text-3xl font-bold dark:text-white">99.9%</div>
+<div class="mt-2 text-slate-400 text-xs font-medium uppercase tracking-tighter">Latency: 42ms</div>
+</div>
+<div class="p-6 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900/50">
+<div class="flex items-center justify-between mb-4">
+<span class="text-slate-500 dark:text-slate-400 text-sm font-medium">Pending Tasks</span>
+<span class="material-symbols-outlined text-primary">pending_actions</span>
+</div>
+<div class="text-3xl font-bold dark:text-white">12</div>
+<div class="mt-2 text-slate-400 text-xs font-medium">Queue cleared 4m ago</div>
+</div>
+</div>
+<div class="grid grid-cols-1 xl:grid-cols-3 gap-8">
+<!-- Main Content Area -->
+<div class="xl:col-span-2 space-y-8">
+<!-- Automated Sales Pipeline -->
+<div class="space-y-4">
+<div class="flex items-center justify-between">
+<h2 class="text-xl font-bold flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">view_kanban</span>
+                                Automated Sales Pipeline
+                            </h2>
+<button class="text-primary text-sm font-bold hover:underline">View All Leads</button>
+</div>
+<div class="flex gap-4 overflow-x-auto pb-4 custom-scrollbar">
+<!-- Stage 1 -->
+<div class="min-w-[300px] flex-1 space-y-3">
+<div class="flex items-center justify-between px-2">
+<span class="text-xs font-bold uppercase text-slate-400 tracking-widest">Email Winner (142)</span>
+<span class="material-symbols-outlined text-slate-400 text-sm">more_horiz</span>
+</div>
+<div class="bg-slate-100 dark:bg-slate-800/50 p-3 rounded-xl border-l-4 border-primary shadow-sm space-y-2">
+<div class="flex justify-between items-start">
+<span class="font-bold text-sm">Alex Chen</span>
+<span class="bg-primary/10 text-primary text-[10px] px-2 py-0.5 rounded font-black">WINNER: PROVOCATIVE</span>
+</div>
+<div class="text-xs text-slate-500">Syncing to Salesforce...</div>
+<div class="w-full bg-slate-200 dark:bg-slate-700 h-1 rounded-full overflow-hidden">
+<div class="bg-primary h-full w-[85%]"></div>
+</div>
+</div>
+<div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-3 rounded-xl shadow-sm space-y-2 opacity-80">
+<div class="flex justify-between items-start">
+<span class="font-bold text-sm">Sarah Miller</span>
+<span class="bg-slate-100 dark:bg-slate-800 text-slate-500 text-[10px] px-2 py-0.5 rounded font-bold uppercase">WINNER: ANALYTICAL</span>
+</div>
+<div class="text-xs text-slate-400 italic">Score: 88/100</div>
+</div>
+</div>
+<!-- Stage 2 -->
+<div class="min-w-[300px] flex-1 space-y-3">
+<div class="flex items-center justify-between px-2">
+<span class="text-xs font-bold uppercase text-slate-400 tracking-widest">Blueprint Booked (28)</span>
+</div>
+<div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-3 rounded-xl shadow-sm border-t-2 border-emerald-500">
+<div class="flex justify-between items-start mb-1">
+<span class="font-bold text-sm">David Vane</span>
+<span class="material-symbols-outlined text-emerald-500 text-sm">calendar_today</span>
+</div>
+<div class="text-xs text-slate-500 mb-2">Session scheduled for Oct 24</div>
+<div class="flex -space-x-2">
+<img class="size-6 rounded-full border-2 border-white dark:border-slate-900" data-alt="Team member avatar small" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBF7xHRy2OmqzyHxJ7F8hly28OVqfCpZXNCPoT4zv-Qdxq9qSVexWCZMv1U0PFu038zrvzafRWOj1KgqoHZxVp9WPQ95BnJ9ZEJYnke12YbGkOmfpHds78yftUK6CV9eSqj5R9xfRxMEDdRDDRWxuPQsZ6oOkCdJqgV2Mv95nXr4aE7FM3dxpRUbn3yaxtKToDviKA4c3Ww3OrtF1MIWengDLoBKujd3ych8nhyxAa2fUg6pHhQoY2d_o2aJWVEaemcwqr9RtepT5wc"/>
+<img class="size-6 rounded-full border-2 border-white dark:border-slate-900" data-alt="Team member avatar small" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC2gKGuDq_dbuRDFg3CGHMH8OE9zjaci0OI3OQNI7A4GaQsNO3AhrbklOWykf9ayfO71-eYZ4evBEdJvMfsVkeLpy4UGu91LBwhdsCAvas8jsrdbN22zADUG6NqWMAljLdoNBSIThYnSps_08vPvmRllkoeloaco15AcRGpNVFdpmtsDCy95HGiFW7nCf9-SZxSdAHmikwg75mNy3mn4Gqi16eVSWUuWid31gthN3yijQ_I700QBzBoLnLZ1mvqD5vRKdWFsWIDOzRE"/>
+</div>
+</div>
+</div>
+<!-- Stage 3 -->
+<div class="min-w-[300px] flex-1 space-y-3">
+<div class="flex items-center justify-between px-2">
+<span class="text-xs font-bold uppercase text-slate-400 tracking-widest">Blueprint Delivered (12)</span>
+</div>
+<div class="h-24 rounded-xl border-2 border-dashed border-slate-200 dark:border-slate-800 flex items-center justify-center text-slate-400">
+<span class="material-symbols-outlined">add_circle</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Dynamic Lead Scoring Visualization -->
+<div class="p-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800">
+<div class="flex items-center justify-between mb-6">
+<h2 class="text-xl font-bold flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">analytics</span>
+                                Dynamic Lead Scoring
+                            </h2>
+<div class="flex gap-2">
+<span class="flex items-center gap-1 text-xs text-slate-400"><div class="size-2 rounded-full bg-primary"></div> Provocative Path</span>
+<span class="flex items-center gap-1 text-xs text-slate-400"><div class="size-2 rounded-full bg-slate-300"></div> Analytical Path</span>
+</div>
+</div>
+<div class="h-64 w-full relative flex items-end justify-around gap-4 px-4 border-b border-l border-slate-200 dark:border-slate-800">
+<!-- Chart Placeholder -->
+<div class="w-12 bg-primary rounded-t-lg relative group transition-all hover:scale-105" style="height: 80%">
+<div class="absolute -top-8 left-1/2 -translate-x-1/2 text-xs font-bold">94</div>
+</div>
+<div class="w-12 bg-slate-200 dark:bg-slate-800 rounded-t-lg relative group transition-all hover:scale-105" style="height: 45%">
+<div class="absolute -top-8 left-1/2 -translate-x-1/2 text-xs font-bold text-slate-400">62</div>
+</div>
+<div class="w-12 bg-primary rounded-t-lg relative group transition-all hover:scale-105" style="height: 90%">
+<div class="absolute -top-8 left-1/2 -translate-x-1/2 text-xs font-bold">98</div>
+</div>
+<div class="w-12 bg-slate-200 dark:bg-slate-800 rounded-t-lg relative group transition-all hover:scale-105" style="height: 30%">
+<div class="absolute -top-8 left-1/2 -translate-x-1/2 text-xs font-bold text-slate-400">42</div>
+</div>
+<div class="w-12 bg-primary rounded-t-lg relative group transition-all hover:scale-105" style="height: 65%">
+<div class="absolute -top-8 left-1/2 -translate-x-1/2 text-xs font-bold">81</div>
+</div>
+<div class="w-12 bg-slate-200 dark:bg-slate-800 rounded-t-lg relative group transition-all hover:scale-105" style="height: 55%">
+<div class="absolute -top-8 left-1/2 -translate-x-1/2 text-xs font-bold text-slate-400">74</div>
+</div>
+</div>
+<div class="flex justify-around mt-4 text-[10px] font-bold text-slate-400 uppercase tracking-widest">
+<span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span>
+</div>
+</div>
+</div>
+<!-- Side Panel -->
+<div class="space-y-6">
+<!-- Integration Settings -->
+<div class="p-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 space-y-4">
+<h3 class="text-sm font-black uppercase tracking-widest text-slate-500 border-b border-slate-100 dark:border-slate-800 pb-2">API Connectivity</h3>
+<div class="space-y-4">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="size-8 rounded-lg bg-slate-100 dark:bg-slate-800 flex items-center justify-center">
+<img class="size-5" data-alt="Salesforce brand logo" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDoXc2uxoP7YpV7QcM4Pubglamp9VmmPxn2g6z3M8BG5TOwtrriD19JGDAyadwtZKlHhKiLYfj7cyG628hCavh6qt2Ab_TpD-RUaFcKdU2GRw5Yv8z6K5Aap-84dy8rUl7tHQLqODoOXStpVk5h_BQqJXgivJYG9pN42DShBZaEIBqDPNMRvH-1nn2OOEQDhj7IBFRmD46pzTeAK-1qvCSPRX3Qp8KwVDzRsLZfz3BG0UdDQD4_6vqXRiOHcMYdcCiuzwn4EReIbhra"/>
+</div>
+<div>
+<div class="text-xs font-bold">Salesforce CRM</div>
+<div class="text-[10px] text-emerald-500 font-bold uppercase">Connected</div>
+</div>
+</div>
+<span class="material-symbols-outlined text-slate-300">settings</span>
+</div>
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="size-8 rounded-lg bg-slate-100 dark:bg-slate-800 flex items-center justify-center">
+<img class="size-5" data-alt="Hubspot brand logo" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA2AhvInHq-uGCEcgqYgKYT_ICs5Dso63MPZHxLzIN1DGgp_pJREKkf3ZVypLEp6QdeqDLOEwmZuqxr06oCgxanEbhij4LhUFsHs5phgOia5kOYi-bvaJ2NpEdD97elgp1IeUAvutkaoROd6hqHfmRhuOeJidoiLPyKKyik4yk_NCN287nEB8peftOlNRSV2k_OnnhgrKTCbLRFjDSuCHZRiaacft3TITiuns4lTnR_ihA-5FKTigkKmjyVWMUQkJfyCFj5CzZEae7J"/>
+</div>
+<div>
+<div class="text-xs font-bold">HubSpot Sync</div>
+<div class="text-[10px] text-emerald-500 font-bold uppercase">Connected</div>
+</div>
+</div>
+<span class="material-symbols-outlined text-slate-300">settings</span>
+</div>
+</div>
+<div class="mt-6 pt-4 border-t border-slate-100 dark:border-slate-800 space-y-3">
+<h4 class="text-[10px] font-black uppercase text-slate-400">Data Mapping Fields</h4>
+<div class="space-y-2">
+<div class="flex items-center justify-between text-xs p-2 bg-slate-50 dark:bg-slate-800/30 rounded border border-slate-100 dark:border-slate-800">
+<span class="font-mono text-primary">email_field</span>
+<span class="material-symbols-outlined text-slate-300 text-sm">trending_flat</span>
+<span class="font-mono">crm_primary_email</span>
+</div>
+<div class="flex items-center justify-between text-xs p-2 bg-slate-50 dark:bg-slate-800/30 rounded border border-slate-100 dark:border-slate-800">
+<span class="font-mono text-primary">winner_tag</span>
+<span class="material-symbols-outlined text-slate-300 text-sm">trending_flat</span>
+<span class="font-mono">lead_source_detail</span>
+</div>
+<div class="flex items-center justify-between text-xs p-2 bg-slate-50 dark:bg-slate-800/30 rounded border border-slate-100 dark:border-slate-800">
+<span class="font-mono text-primary">score_result</span>
+<span class="material-symbols-outlined text-slate-300 text-sm">trending_flat</span>
+<span class="font-mono">priority_rating</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Sync Status Logs -->
+<div class="p-6 rounded-2xl bg-slate-900 text-slate-100 space-y-4">
+<div class="flex items-center justify-between">
+<h3 class="text-xs font-black uppercase tracking-widest text-primary">Live Sync Logs</h3>
+<span class="flex size-2 rounded-full bg-emerald-500 animate-pulse"></span>
+</div>
+<div class="font-mono text-[10px] space-y-2 max-h-[200px] overflow-y-auto custom-scrollbar">
+<div class="flex gap-2 text-slate-500">
+<span>[14:22:10]</span>
+<span class="text-emerald-400">SUCCESS</span>
+<span>Lead #8421 pushed to SFDC</span>
+</div>
+<div class="flex gap-2 text-slate-500">
+<span>[14:21:45]</span>
+<span class="text-emerald-400">SUCCESS</span>
+<span>Winner Variant 'Provocative' Applied</span>
+</div>
+<div class="flex gap-2 text-slate-500">
+<span>[14:20:01]</span>
+<span class="text-primary">INFO</span>
+<span>Polling Email Sequence 2026_WIN...</span>
+</div>
+<div class="flex gap-2 text-slate-500">
+<span>[14:18:30]</span>
+<span class="text-emerald-400">SUCCESS</span>
+<span>Mapping validation complete</span>
+</div>
+<div class="flex gap-2 text-slate-400 italic">
+<span>[14:15:00]</span>
+<span>System Heartbeat: Nominal</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Lead Synchronization Table (Summary) -->
+<div class="p-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800">
+<div class="flex items-center justify-between mb-6">
+<h2 class="text-xl font-bold flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">sync_alt</span>
+                        Recent Lead Synchronizations
+                    </h2>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left">
+<thead>
+<tr class="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 border-b border-slate-100 dark:border-slate-800">
+<th class="pb-3 pl-2">Sync ID</th>
+<th class="pb-3">Lead Email</th>
+<th class="pb-3">Winning Variant</th>
+<th class="pb-3 text-center">Score</th>
+<th class="pb-3">CRM Status</th>
+<th class="pb-3 text-right pr-2">Actions</th>
+</tr>
+</thead>
+<tbody class="text-sm font-medium">
+<tr class="border-b border-slate-50 dark:border-slate-800 hover:bg-slate-50 dark:hover:bg-slate-800/30 transition-colors">
+<td class="py-4 pl-2 font-mono text-xs text-slate-400">#SY-9012</td>
+<td class="py-4">m.thompson@enterprise.com</td>
+<td class="py-4">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-primary/10 text-primary">
+                                        Provocative Path
+                                    </span>
+</td>
+<td class="py-4 text-center font-bold">92</td>
+<td class="py-4">
+<div class="flex items-center gap-1.5 text-emerald-500 text-xs font-bold uppercase">
+<span class="material-symbols-outlined text-sm">cloud_done</span> Synced
+                                    </div>
+</td>
+<td class="py-4 text-right pr-2">
+<button class="p-1 rounded hover:bg-slate-100 dark:hover:bg-slate-700"><span class="material-symbols-outlined text-slate-400">open_in_new</span></button>
+</td>
+</tr>
+<tr class="border-b border-slate-50 dark:border-slate-800 hover:bg-slate-50 dark:hover:bg-slate-800/30 transition-colors">
+<td class="py-4 pl-2 font-mono text-xs text-slate-400">#SY-9011</td>
+<td class="py-4">j.doe@tech-solutions.io</td>
+<td class="py-4">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400">
+                                        Analytical Path
+                                    </span>
+</td>
+<td class="py-4 text-center font-bold">78</td>
+<td class="py-4">
+<div class="flex items-center gap-1.5 text-emerald-500 text-xs font-bold uppercase">
+<span class="material-symbols-outlined text-sm">cloud_done</span> Synced
+                                    </div>
+</td>
+<td class="py-4 text-right pr-2">
+<button class="p-1 rounded hover:bg-slate-100 dark:hover:bg-slate-700"><span class="material-symbols-outlined text-slate-400">open_in_new</span></button>
+</td>
+</tr>
+<tr class="hover:bg-slate-50 dark:hover:bg-slate-800/30 transition-colors">
+<td class="py-4 pl-2 font-mono text-xs text-slate-400">#SY-9010</td>
+<td class="py-4">clara.w@growth-ag.com</td>
+<td class="py-4">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-primary/10 text-primary">
+                                        Provocative Path
+                                    </span>
+</td>
+<td class="py-4 text-center font-bold">88</td>
+<td class="py-4">
+<div class="flex items-center gap-1.5 text-primary text-xs font-bold uppercase">
+<span class="material-symbols-outlined text-sm">pending</span> Queueing
+                                    </div>
+</td>
+<td class="py-4 text-right pr-2">
+<button class="p-1 rounded hover:bg-slate-100 dark:hover:bg-slate-700"><span class="material-symbols-outlined text-slate-400">open_in_new</span></button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</main>
+<!-- Footer Info -->
+<footer class="mt-auto border-t border-slate-200 dark:border-slate-800 px-10 py-6 bg-white dark:bg-slate-900/50">
+<div class="max-w-[1440px] mx-auto flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-slate-400 font-medium">
+<div class="flex items-center gap-4">
+<span>Yukoli 2026 Engine v4.2.1</span>
+<span class="h-1 w-1 bg-slate-300 rounded-full"></span>
+<span>Industrial Automation Cluster Alpha</span>
+</div>
+<div class="flex gap-6 uppercase tracking-widest text-[10px] font-bold">
+<a class="hover:text-primary" href="#">System Health</a>
+<a class="hover:text-primary" href="#">Documentation</a>
+<a class="hover:text-primary" href="#">Support</a>
+</div>
+</div>
+</footer>
+</div>
+</body></html>

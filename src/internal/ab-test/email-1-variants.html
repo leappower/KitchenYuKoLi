@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Yukoli 2026 - A/B Test Details</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#ec5b13",
+                        "background-light": "#f8f6f6",
+                        "background-dark": "#221610",
+                    },
+                    fontFamily: {
+                        "display": ["Public Sans"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'Public Sans', sans-serif; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+    </style>
+<link rel="stylesheet" href="../../assets/css/styles.css"/>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 font-display">
+<div class="relative flex min-h-screen w-full flex-col overflow-x-hidden">
+<!-- Top Navigation Bar -->
+<header class="flex items-center justify-between whitespace-nowrap border-b border-slate-200 dark:border-slate-800 px-6 py-3 bg-background-light dark:bg-background-dark sticky top-0 z-50">
+<div class="flex items-center gap-4">
+<div class="size-8 bg-primary rounded-lg flex items-center justify-center text-white">
+<span class="material-symbols-outlined">rocket_launch</span>
+</div>
+<h2 class="text-slate-900 dark:text-white text-lg font-bold leading-tight tracking-tight">Yukoli 2026</h2>
+</div>
+<div class="flex flex-1 justify-end gap-6 items-center">
+<nav class="hidden md:flex items-center gap-6">
+<a class="text-slate-600 dark:text-slate-300 text-sm font-medium hover:text-primary transition-colors" href="#">Campaigns</a>
+<a class="text-slate-600 dark:text-slate-300 text-sm font-medium hover:text-primary transition-colors" href="#">Reports</a>
+<a class="text-slate-600 dark:text-slate-300 text-sm font-medium hover:text-primary transition-colors" href="#">Automations</a>
+</nav>
+<div class="flex gap-2">
+<button class="flex size-10 items-center justify-center rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-primary/10 hover:text-primary transition-all">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="flex size-10 items-center justify-center rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-primary/10 hover:text-primary transition-all">
+<span class="material-symbols-outlined">account_circle</span>
+</button>
+</div>
+<div class="bg-slate-200 dark:bg-slate-700 rounded-full size-10 overflow-hidden border border-slate-300 dark:border-slate-600">
+<img alt="User Profile" data-alt="Headshot of a professional marketing manager" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCTJHYANP9PblauynTQnBMtU4IjMEAcT8ThC1zOJDeYnTjDEaIY_PhqPgPH9NWMJNNGN19BGFaylfR0SSvYJQxNoZ2oJMWvwPs8jLC2BS_rhE-LBZGQM9lCaRN3eAphR__wMmtjSDk-8yUkfoOfRyNCIdWwefwNMNUkj02K6Zu5dQi7N7E8ARzrAF21bkMLzJZntq7JaNpyuU63zdFiXdiTt6YZf8sTutxHyPJJIoduJaQTiKcmFezjK92ugSUCHT52DhQ3ZeVWKw3k"/>
+</div>
+</div>
+</header>
+<main class="flex-1 flex flex-col md:flex-row max-w-[1440px] mx-auto w-full">
+<!-- Sidebar -->
+<aside class="w-full md:w-64 border-r border-slate-200 dark:border-slate-800 p-4 space-y-2 flex-shrink-0">
+<div class="flex items-center gap-3 px-3 py-2 rounded-xl text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 cursor-pointer">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="text-sm font-medium leading-normal">Dashboard</span>
+</div>
+<div class="flex items-center gap-3 px-3 py-2 rounded-xl text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 cursor-pointer">
+<span class="material-symbols-outlined">bar_chart</span>
+<span class="text-sm font-medium leading-normal">Analytics</span>
+</div>
+<div class="flex items-center gap-3 px-3 py-2 rounded-xl bg-primary text-white shadow-lg shadow-primary/20">
+<span class="material-symbols-outlined">campaign</span>
+<span class="text-sm font-medium leading-normal">Campaigns</span>
+</div>
+<div class="flex items-center gap-3 px-3 py-2 rounded-xl text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 cursor-pointer">
+<span class="material-symbols-outlined">description</span>
+<span class="text-sm font-medium leading-normal">Templates</span>
+</div>
+<div class="flex items-center gap-3 px-3 py-2 rounded-xl text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 cursor-pointer">
+<span class="material-symbols-outlined">settings</span>
+<span class="text-sm font-medium leading-normal">Settings</span>
+</div>
+</aside>
+<!-- Content Area -->
+<div class="flex-1 min-w-0">
+<!-- Breadcrumbs -->
+<div class="flex flex-wrap items-center gap-2 p-6 text-sm">
+<a class="text-slate-500 dark:text-slate-400 hover:text-primary" href="#">Campaigns</a>
+<span class="text-slate-400">/</span>
+<a class="text-slate-500 dark:text-slate-400 hover:text-primary" href="#">Email 1</a>
+<span class="text-slate-400">/</span>
+<span class="text-primary font-semibold">A/B Test Details</span>
+</div>
+<!-- Page Header -->
+<div class="flex flex-wrap justify-between items-end gap-6 px-6 pb-6">
+<div class="flex flex-col gap-2">
+<h1 class="text-slate-900 dark:text-white text-4xl font-black leading-tight tracking-tight">Email 1 A/B Test</h1>
+<p class="text-slate-500 dark:text-slate-400 text-lg">Performance breakdown and variant comparison for hospitality sector outreach.</p>
+</div>
+<div class="flex gap-3">
+<button class="flex items-center gap-2 rounded-xl h-12 px-6 bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-slate-200 text-sm font-bold hover:bg-slate-300 dark:hover:bg-slate-700 transition-all">
+<span class="material-symbols-outlined text-lg">file_download</span>
+                        Export Report
+                    </button>
+<button class="flex items-center gap-2 rounded-xl h-12 px-6 bg-primary text-white text-sm font-bold hover:opacity-90 transition-all shadow-lg shadow-primary/30">
+<span class="material-symbols-outlined text-lg">edit</span>
+                        Edit Campaign
+                    </button>
+</div>
+</div>
+<!-- Tabs -->
+<div class="px-6 border-b border-slate-200 dark:border-slate-800 mb-8">
+<div class="flex gap-8">
+<a class="flex flex-col items-center justify-center border-b-2 border-transparent text-slate-500 dark:text-slate-400 pb-4 text-sm font-bold hover:text-primary transition-all" href="#">
+                        Overview
+                    </a>
+<a class="flex flex-col items-center justify-center border-b-2 border-primary text-primary pb-4 text-sm font-bold" href="#">
+                        Variant Analysis
+                    </a>
+</div>
+</div>
+<!-- A/B Test Content -->
+<div class="px-6 pb-12">
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+<!-- Variant A -->
+<div class="flex flex-col gap-4 border border-slate-200 dark:border-slate-800 rounded-2xl overflow-hidden bg-white dark:bg-slate-900/50">
+<div class="bg-slate-100 dark:bg-slate-800/50 p-4 border-b border-slate-200 dark:border-slate-800 flex justify-between items-center">
+<div>
+<span class="bg-blue-100 text-blue-600 dark:bg-blue-900/40 dark:text-blue-400 text-[10px] font-bold uppercase tracking-widest px-2 py-1 rounded">Variant A</span>
+<h3 class="text-slate-900 dark:text-white font-bold mt-1">Data-Focused Professional</h3>
+</div>
+<div class="text-right">
+<p class="text-xs text-slate-500">Subject Line</p>
+<p class="text-sm font-medium italic">"The Three Highs, One Low Reality"</p>
+</div>
+</div>
+<div class="p-6">
+<div class="aspect-[4/3] bg-slate-50 dark:bg-slate-800 rounded-xl overflow-hidden border border-slate-200 dark:border-slate-700 p-8 flex flex-col gap-4">
+<!-- Data Heavy Mockup -->
+<div class="h-4 w-24 bg-primary/20 rounded"></div>
+<div class="space-y-2">
+<div class="h-2 w-full bg-slate-200 dark:bg-slate-700 rounded"></div>
+<div class="h-2 w-full bg-slate-200 dark:bg-slate-700 rounded"></div>
+<div class="h-2 w-3/4 bg-slate-200 dark:bg-slate-700 rounded"></div>
+</div>
+<div class="grid grid-cols-3 gap-2 mt-4">
+<div class="h-20 bg-slate-100 dark:bg-slate-700/50 rounded flex items-center justify-center">
+<span class="material-symbols-outlined text-slate-400">equalizer</span>
+</div>
+<div class="h-20 bg-slate-100 dark:bg-slate-700/50 rounded flex items-center justify-center">
+<span class="material-symbols-outlined text-slate-400">pie_chart</span>
+</div>
+<div class="h-20 bg-slate-100 dark:bg-slate-700/50 rounded flex items-center justify-center">
+<span class="material-symbols-outlined text-slate-400">data_exploration</span>
+</div>
+</div>
+<div class="h-10 w-32 bg-primary rounded-lg self-center mt-4"></div>
+</div>
+<div class="grid grid-cols-3 gap-4 mt-8">
+<div class="text-center">
+<p class="text-slate-500 text-xs uppercase font-bold tracking-tighter">Open Rate</p>
+<p class="text-2xl font-black text-slate-900 dark:text-white">24.2%</p>
+</div>
+<div class="text-center">
+<p class="text-slate-500 text-xs uppercase font-bold tracking-tighter">CTR</p>
+<p class="text-2xl font-black text-slate-900 dark:text-white">3.1%</p>
+</div>
+<div class="text-center">
+<p class="text-slate-500 text-xs uppercase font-bold tracking-tighter">Bounce</p>
+<p class="text-2xl font-black text-slate-900 dark:text-white">0.4%</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Variant B -->
+<div class="flex flex-col gap-4 border-2 border-primary rounded-2xl overflow-hidden bg-white dark:bg-slate-900/50 relative">
+<div class="absolute top-4 right-4 z-10">
+<span class="bg-primary text-white text-[10px] font-bold uppercase tracking-widest px-3 py-1 rounded-full flex items-center gap-1 shadow-lg">
+<span class="material-symbols-outlined text-[14px]">stars</span> Leading
+                            </span>
+</div>
+<div class="bg-primary/5 p-4 border-b border-primary/20 flex justify-between items-center">
+<div>
+<span class="bg-primary/20 text-primary text-[10px] font-bold uppercase tracking-widest px-2 py-1 rounded">Variant B</span>
+<h3 class="text-slate-900 dark:text-white font-bold mt-1">High-Impact Visual</h3>
+</div>
+<div class="text-right">
+<p class="text-xs text-slate-500">Subject Line</p>
+<p class="text-sm font-medium text-primary italic">"Are rising labor costs squeezing margins?"</p>
+</div>
+</div>
+<div class="p-6">
+<div class="aspect-[4/3] bg-slate-50 dark:bg-slate-800 rounded-xl overflow-hidden border border-slate-200 dark:border-slate-700 flex flex-col relative group">
+<div class="flex h-full">
+<div class="w-1/2 h-full relative overflow-hidden">
+<img alt="Busy Kitchen" class="w-full h-full object-cover grayscale opacity-60" data-alt="Black and white photo of a chaotic busy commercial kitchen" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBvZ075t2hgNQjXley4SukyeWxUcm7OBk9lcUF5VvfXEnCYqgJg3ExXQgIxeyae0pV6gW1uMnHCg6Y-r3eUtH0YpCjzxEvhqOj6AmTvioIyVWVJnjZpmQfWK1ixmy2v4exoFOv_hkRbLddtt781pYmsN7pGyAbj_uX53CRyFHvFrhXwR3-mPEFBBkoWu6YT5ciqJO8hTryYE4PrRf76aKkFkL4rwsa3fqAIm5NXhZrvZ8YytKiPh96Xm3Mky4vhYkSPQbpG59zUxKBZ"/>
+<div class="absolute inset-0 bg-red-900/20 flex items-center justify-center">
+<span class="text-white text-xs font-black uppercase tracking-widest bg-black/50 px-2 py-1 rounded">Manual</span>
+</div>
+</div>
+<div class="w-1/2 h-full relative overflow-hidden">
+<img alt="Robotic Kitchen" class="w-full h-full object-cover" data-alt="High-tech sleek automated kitchen with robotic arms" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAMkmjRAUUUmFuMe1KBSFt7P3PxsSz7mlCC7qc_gGRjG5gD0FJpYY6NCJWSORrCo8UoQYedG2jKitDbw6pUuKFJopC_ZkOPdewIbEHuusSUMWVJ0opcR4Hbjl9vVI_9NBuZijoeDjoWAh2KLu247fP9Omy0h1-hozAd4JrlMh9Q6P_1HGP6-lqTXsiXZeTWm2-mO-X_gObcDXGc6fvCjzcXbArgYNxaXVFAyCyGhzDbOJWhMZXV7ubWRZuauqTJ8zCDn7x0L4Srv9l7"/>
+<div class="absolute inset-0 bg-primary/20 flex items-center justify-center">
+<span class="text-white text-xs font-black uppercase tracking-widest bg-primary px-2 py-1 rounded">Robotic</span>
+</div>
+</div>
+</div>
+<div class="absolute bottom-0 inset-x-0 p-4 bg-gradient-to-t from-black/80 to-transparent">
+<div class="h-2 w-full bg-white/20 rounded-full overflow-hidden">
+<div class="h-full bg-primary w-2/3"></div>
+</div>
+<p class="text-white text-[10px] mt-2 font-medium">Efficiency Index: +42% with Yukoli</p>
+</div>
+</div>
+<div class="grid grid-cols-3 gap-4 mt-8">
+<div class="text-center">
+<p class="text-primary text-xs uppercase font-bold tracking-tighter">Open Rate</p>
+<p class="text-2xl font-black text-slate-900 dark:text-white">36.8% <span class="text-xs text-green-500 font-normal">↑</span></p>
+</div>
+<div class="text-center">
+<p class="text-primary text-xs uppercase font-bold tracking-tighter">CTR</p>
+<p class="text-2xl font-black text-slate-900 dark:text-white">5.4% <span class="text-xs text-green-500 font-normal">↑</span></p>
+</div>
+<div class="text-center">
+<p class="text-slate-500 text-xs uppercase font-bold tracking-tighter">Bounce</p>
+<p class="text-2xl font-black text-slate-900 dark:text-white">0.3%</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Insights Section -->
+<div class="mt-12 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-8">
+<div class="flex items-center gap-3 mb-6">
+<div class="size-10 rounded-full bg-primary/10 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">lightbulb</span>
+</div>
+<h2 class="text-xl font-bold text-slate-900 dark:text-white">Test Insights</h2>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+<div class="space-y-3">
+<h4 class="font-bold text-slate-800 dark:text-slate-200">Emotional Connection</h4>
+<p class="text-sm text-slate-500 leading-relaxed">Variant B's question-based subject line generated 52% higher engagement by addressing a direct pain point of hospitality managers: labor costs.</p>
+</div>
+<div class="space-y-3">
+<h4 class="font-bold text-slate-800 dark:text-slate-200">Visual Impact</h4>
+<p class="text-sm text-slate-500 leading-relaxed">The split-screen comparison imagery in Variant B led to a 74% higher click-through rate on the primary Call to Action button compared to Variant A's data charts.</p>
+</div>
+<div class="space-y-3">
+<h4 class="font-bold text-slate-800 dark:text-slate-200">Next Steps</h4>
+<p class="text-sm text-slate-500 leading-relaxed">Recommend rolling out Variant B as the primary template for the remaining 80,000 leads in the hospitality segment to maximize conversion.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+</body></html>

@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<!-- ═══ Responsive Redirect (injected by patch-responsive-redirect.py) ═══ -->
+<link rel="canonical" href="pages/emails/follow-up-1-mobile.html"/>
+<link rel="alternate" media="only screen and (max-width: 767px)"
+      href="pages/emails/follow-up-1-mobile.html"/>
+<link rel="alternate" media="only screen and (min-width: 768px)"
+      href="pages/emails/follow-up-1-pc.html"/>
+<script>
+/* Responsive redirect — runs before render, no flash */
+(function(){
+  // 防止 bfcache 恢复时重复 redirect
+  if (window.__redirectChecked) return;
+  window.__redirectChecked = true;
+
+  // 处理 clean-url 参数:重定向后清理 URL 为干净的目录 URL
+  var urlParams = new URLSearchParams(location.search);
+  var cleanUrl = urlParams.get('clean-url');
+  if (cleanUrl) {
+    console.log('[Responsive Redirect] Cleaning URL to:', cleanUrl);
+    history.replaceState({}, '', cleanUrl);
+    return;
+  }
+
+  // SPA 导航时跳过响应式重定向
+  console.log('[Responsive Redirect] Checking SPA flag: window.__spaNavigating =', window.__spaNavigating);
+  if (window.__spaNavigating) {
+    console.log('[Responsive Redirect] SPA navigation detected, skipping redirect');
+    return;
+  }
+
+  // 使用 DeviceUtils 统一管理设备判断
+  var currentFile = location.pathname.split('/').pop();
+  console.log('[Responsive Redirect] Current file:', currentFile, 'Pathname:', location.pathname);
+
+  // 当访问目录 URL(以 / 结尾)时,不要重定向(SPA 导航使用干净的目录 URL)
+  if (window.DeviceUtils && window.DeviceUtils.isDirectoryURL()) {
+    console.log('[Responsive Redirect] Directory URL detected, skipping redirect');
+    return;
+  }
+
+  // 使用 DeviceUtils 判断是否需要重定向
+  if (window.DeviceUtils && window.DeviceUtils.shouldRedirect(currentFile)) {
+    var deviceType = window.DeviceUtils.getDeviceType();
+    var targetFile;
+
+    if (deviceType === window.DeviceUtils.DeviceType.MOBILE) {
+      targetFile = 'index-mobile.html';
+    } else if (deviceType === window.DeviceUtils.DeviceType.TABLET) {
+      targetFile = 'index-tablet.html';
+    } else {
+      targetFile = 'index-pc.html';
+    }
+
+    console.log('[Responsive Redirect] Redirecting to:', targetFile);
+    location.href = targetFile;
+    return;
+  }
+
+  console.log('[Responsive Redirect] No redirect needed');
+})();
+</script>
+<!-- ═══ End Responsive Redirect ═══ -->
+
+
+
+
+<meta charset="utf-8"/>
+<meta name="description" content="Yukoli: solving the 3H1L challenge in commercial kitchens with AI cooking automation.">
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<title>The 3H1L Challenge - Industry Follow-up</title>
+<style>
+    body {
+      min-height: 100dvh;
+    }
+  </style>
+  <link rel="stylesheet" href="../../assets/css/styles.css"/>
+<link rel="preload" href="/assets/fonts/local-fonts.css" as="style">
+<link rel="preload" href="/assets/css/tailwind.css" as="style">
+<link rel="preload" href="/assets/fonts/public-sans-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/fonts/public-sans-latin-700-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/assets/css/tailwind.css">
+<link rel="stylesheet" href="/assets/css/z-index-system.css">
+<link rel="stylesheet" href="/assets/css/performance-optimized.css"/>
+<!-- Dark mode: apply saved preference before first paint (prevents flash) -->
+  <script>(function(){
+if(localStorage.getItem('darkMode')==='true')document.documentElement.classList.add('dark')})()</script>
+<link rel="stylesheet" href="/assets/css/skeleton.css"/>
+<link rel="icon" href="/assets/images/logo_header.webp" type="image/webp">
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 antialiased">
+<!-- Main Container for Mobile View -->
+<div class="relative flex min-h-screen w-full flex-col overflow-x-hidden max-w-[480px] mx-auto shadow-2xl border-x border-slate-200 dark:border-slate-800">
+<!-- Top Navigation / Header -->
+<div class="flex items-center bg-background-light dark:bg-background-dark p-4 pb-2 justify-between sticky top-0 z-50 border-b border-slate-200 dark:border-slate-800">
+<div class="text-slate-900 dark:text-slate-100 flex size-10 shrink-0 items-center justify-center rounded-lg hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors">
+<span class="material-symbols-outlined">arrow_back</span>
+</div>
+<h2 class="text-slate-900 dark:text-white text-base font-bold leading-tight tracking-tight flex-1 text-center">Industry Update</h2>
+<div class="flex w-10 items-center justify-end">
+<button class="flex cursor-pointer items-center justify-center rounded-lg h-10 w-10 bg-transparent text-slate-900 dark:text-white hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</div>
+</div>
+<!-- Hero Section -->
+<div class="@container">
+<div class="@[480px]:px-4 @[480px]:py-3">
+<div class="relative bg-cover bg-center flex flex-col justify-end overflow-hidden bg-slate-800 min-h-[240px] @[480px]:rounded-xl" data-alt="Industrial factory floor with dramatic orange lighting" style='background-image: linear-gradient(0deg, rgba(34, 22, 16, 0.9) 0%, rgba(34, 22, 16, 0.2) 60%), url("https://lh3.googleusercontent.com/aida-public/AB6AXuB0kwqmdxjlm93aoh03wQp_Qd7oGUsjsxiHmwk_PslLVPyLqlkmh8wuRpw5qXP_cU8MQakwqaXEQvkYTd0Op2tMdnGRmo2f0HZxXoR48lkz-87EYs7t-ApFRiJ9D2sKhv2M6DkyG9_ii4mqi51UqrsQxq1sAXTlp6eMPy0_vBQLgXJPicozxeoVlQH4UKgsr8gikPVpsY2LO-7u8hPDNjJzL0USluv1tgh45s5SQW0XdgzXjsfkCIgjda85jHZHyzNexwYFsLNzDc96");'>
+<div class="flex flex-col p-6 gap-2">
+<span class="bg-primary text-white text-[10px] font-extrabold uppercase tracking-widest px-2 py-1 rounded w-fit">Urgent Insight</span>
+<p class="text-white text-3xl font-extrabold leading-tight tracking-tight">The 'Three Highs, One Low' Reality</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Content Area -->
+<div class="px-6 pt-8 pb-4">
+<h1 class="text-slate-900 dark:text-white text-2xl font-bold leading-tight tracking-tight mb-4">Are rising costs squeezing your operations?</h1>
+<p class="text-slate-600 dark:text-slate-400 text-base font-normal leading-relaxed">
+                The industry is facing a critical bottleneck. We've identified four key pain points that are eroding your bottom line today.
+            </p>
+</div>
+<!-- Pain Point Grid (Minimalist Industrialism) -->
+<div class="grid grid-cols-2 gap-3 px-6 py-4">
+<!-- Labor (High) -->
+<div class="bg-slate-100 dark:bg-slate-800/50 p-4 rounded-xl border-l-4 border-primary">
+<div class="flex flex-col gap-3">
+<span class="material-symbols-outlined text-primary text-3xl">groups</span>
+<div>
+<p class="text-[10px] font-bold text-primary uppercase tracking-tighter">High</p>
+<p class="text-slate-900 dark:text-white font-bold text-lg">Labor</p>
+</div>
+</div>
+</div>
+<!-- Energy (High) -->
+<div class="bg-slate-100 dark:bg-slate-800/50 p-4 rounded-xl border-l-4 border-primary">
+<div class="flex flex-col gap-3">
+<span class="material-symbols-outlined text-primary text-3xl">bolt</span>
+<div>
+<p class="text-[10px] font-bold text-primary uppercase tracking-tighter">High</p>
+<p class="text-slate-900 dark:text-white font-bold text-lg">Energy</p>
+</div>
+</div>
+</div>
+<!-- Rent (High) -->
+<div class="bg-slate-100 dark:bg-slate-800/50 p-4 rounded-xl border-l-4 border-primary">
+<div class="flex flex-col gap-3">
+<span class="material-symbols-outlined text-primary text-3xl">factory</span>
+<div>
+<p class="text-[10px] font-bold text-primary uppercase tracking-tighter">High</p>
+<p class="text-slate-900 dark:text-white font-bold text-lg">Rent</p>
+</div>
+</div>
+</div>
+<!-- Margin (Low) -->
+<div class="bg-slate-200/50 dark:bg-slate-700/30 p-4 rounded-xl border-l-4 border-slate-400">
+<div class="flex flex-col gap-3">
+<span class="material-symbols-outlined text-slate-500 dark:text-slate-400 text-3xl">trending_down</span>
+<div>
+<p class="text-[10px] font-bold text-slate-500 uppercase tracking-tighter">Low</p>
+<p class="text-slate-900 dark:text-white font-bold text-lg">Margin</p>
+</div>
+</div>
+</div>
+</div>
+<!-- CTA Section -->
+<div class="px-6 py-8">
+<a class="flex items-center justify-center gap-3 w-full bg-primary hover:bg-primary/90 text-white font-bold py-4 rounded-xl transition-all shadow-lg shadow-primary/20 group" href="#">
+<span>READ THE BLUEPRINT</span>
+<span class="material-symbols-outlined group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</a>
+<p class="text-center text-slate-500 dark:text-slate-500 text-xs mt-6 font-medium">
+                *Based on the 2024 Industrial Efficiency Report
+            </p>
+</div>
+<!-- Spacer for content -->
+<div class="flex-grow"></div>
+<!-- Bottom Navigation Bar -->
+<div class="mt-auto border-t border-slate-200 dark:border-slate-800 bg-background-light dark:bg-background-dark px-4 pb-6 pt-3 flex gap-2">
+<a class="flex flex-1 flex-col items-center justify-center gap-1 text-slate-400 dark:text-slate-600" href="#">
+<span class="material-symbols-outlined">home</span>
+</a>
+<a class="flex flex-1 flex-col items-center justify-center gap-1 text-primary" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1">description</span>
+</a>
+<a class="flex flex-1 flex-col items-center justify-center gap-1 text-slate-400 dark:text-slate-600" href="#">
+<span class="material-symbols-outlined">analytics</span>
+</a>
+<a class="flex flex-1 flex-col items-center justify-center gap-1 text-slate-400 dark:text-slate-600" href="#">
+<span class="material-symbols-outlined">person</span>
+</a>
+</div>
+</div>
+<script defer src="/assets/js/lang-registry.js"></script>
+<script defer src="/assets/js/translations.js"></script><script defer src="/assets/js/translations-dropdown-template.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    if (window.translationManager) window.translationManager.initialize();
+  });
+</script>
+<script src="/assets/js/spa-router.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    if (window.SpaRouter && typeof window.SpaRouter.init === 'function') {
+      window.SpaRouter.init();
+    }
+  });
+</script>
+</body></html>

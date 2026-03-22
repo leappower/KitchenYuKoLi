@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Yukoli Technology - Professional Kitchen Equipment</title>
+  <link rel="canonical" href="https://www.yukoli.com/"/>
+  <meta name="description" content="Yukoli Smart Kitchen — industrial cooking automation and IoT solutions for commercial kitchens worldwide.">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Yukoli Technology - Professional Kitchen Equipment">
+  <meta property="og:description" content="Yukoli Smart Kitchen — industrial cooking automation and IoT solutions for commercial kitchens worldwide.">
+  <meta property="og:url" content="https://www.yukoli.com/">
+  <meta property="og:image" content="https://www.yukoli.com/assets/images/og-home.webp">
+
+  <!-- Fonts -->
+  <link rel="preload" href="/assets/fonts/local-fonts.css" as="style">
+  <link rel="preload" href="/assets/css/tailwind.css" as="style">
+  <link href="/assets/fonts/local-fonts.css" rel="stylesheet"/>
+
+  <!-- Core Styles (loaded in SPA shell) -->
+  <link rel="stylesheet" href="/assets/css/styles.css">
+  <link rel="stylesheet" href="/assets/css/tailwind.css">
+  <link rel="stylesheet" href="/assets/css/z-index-system.css">
+  <link rel="stylesheet" href="/assets/css/performance-optimized.css">
+  <link rel="stylesheet" href="/assets/css/skeleton.css">
+
+  <!-- Dark mode -->
+  <script>(function(){if(localStorage.getItem('darkMode')==='true')document.documentElement.classList.add('dark')})()</script>
+
+  <!-- Favicon -->
+  <link rel="icon" href="/assets/images/logo_header.webp" type="image/webp">
+</head>
+<body>
+<noscript>
+  <p>Please enable JavaScript or <a href="/home/">click here</a> to visit our site.</p>
+</noscript>
+
+<!-- SPA Shell Structure -->
+<!-- Navigator placeholder - will be replaced by Navigator component -->
+<navigator data-component="navigator"
+  data-variant="pc"
+  data-active="home"
+  data-search="true"
+  data-cta-text-key="nav_get_quote"
+  data-cta-href="/quote"></navigator>
+
+<!-- Main content area - content will be dynamically loaded by SPA router -->
+<main id="spa-content">
+  <!-- Initial skeleton screen -->
+  <div class="skeleton-container">
+    <div class="skeleton-header">
+      <div class="skeleton-logo"></div>
+      <div class="skeleton-nav">
+        <div class="skeleton-nav-item"></div>
+        <div class="skeleton-nav-item"></div>
+        <div class="skeleton-nav-item"></div>
+        <div class="skeleton-nav-item"></div>
+        <div class="skeleton-nav-item"></div>
+      </div>
+    </div>
+    <div class="skeleton-hero">
+      <div class="skeleton-title"></div>
+      <div class="skeleton-subtitle"></div>
+      <div class="skeleton-cta"></div>
+    </div>
+    <div class="skeleton-content">
+      <div class="skeleton-card"></div>
+      <div class="skeleton-card"></div>
+      <div class="skeleton-card"></div>
+    </div>
+  </div>
+</main>
+
+<!-- Footer placeholder - will be replaced by Footer component -->
+<footer data-component="footer" data-active="home"></footer>
+
+<!-- All scripts deferred: browser parses HTML + renders skeleton immediately,
+     scripts download in parallel and execute in order after DOM is ready -->
+<script defer src="/assets/js/utils/device-utils.js"></script>
+<script defer src="/assets/js/lang-registry.js"></script>
+<script defer src="/assets/js/translations.js"></script>
+<script defer src="/assets/js/translations-dropdown-template.js"></script>
+<script defer src="/assets/js/ui/products-dropdown.js"></script>
+<script defer src="/assets/js/ui/solutions-dropdown.js"></script>
+<script defer src="/assets/js/ui/applications-dropdown.js"></script>
+<script defer src="/assets/js/ui/support-dropdown.js"></script>
+<script defer src="/assets/js/ui/about-dropdown.js"></script>
+<script defer src="/assets/js/ui/contact-dropdown.js"></script>
+<script defer src="/assets/js/ui/mobile-menu.js"></script>
+<script defer src="/assets/js/ui/navigator.js"></script>
+<script defer src="/assets/js/ui/search-engine.js"></script>
+<script defer src="/assets/js/ui/footer.js"></script>
+<script defer src="/assets/js/ui/floating-actions.js"></script>
+<script defer src="/assets/js/ui/whatsapp-fab.js"></script>
+<script defer src="/assets/js/contacts.js"></script>
+<script defer src="/assets/js/ui/smart-popup.js"></script>
+<script defer src="/assets/js/spa-router.js"></script>
+
+<!-- Suppress DOM errors from injected third-party scripts (e.g. frame_start.js)
+     that try to removeChild a node already removed by SPA navigation or
+     component re-mounting. These errors are harmless but noisy in console. -->
+<script>
+  // Use window.onerror (direct assignment) for maximum priority —
+  // it catches errors BEFORE any other handler, including third-party scripts.
+  var _origOnerror = window.onerror;
+  window.onerror = function(msg, url, line, col, error) {
+    if (msg && /removeChild.*not a child of/i.test(msg)) {
+      console.debug('[DOM] Suppressed removeChild error from third-party script:', url);
+      return true; // prevent default console.error
+    }
+    if (typeof _origOnerror === 'function') {
+      return _origOnerror(msg, url, line, col, error);
+    }
+  };
+</script>
+
+<!-- Initialize SPA -->
+<script>
+  (function() {
+    // Wait for DOM to be ready
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initSPA);
+    } else {
+      initSPA();
+    }
+
+    function initSPA() {
+      // Navigator and Footer are auto-mounted by their own boot() code.
+      // Do NOT call mount() again — the placeholder has already been replaced
+      // and a second mount would find no placeholder to render.
+
+      // Root path redirect: / → /home/
+      var path = window.location.pathname;
+      if (path === '/' || path === '/index.html') {
+        history.replaceState(null, '', '/home/');
+      }
+
+      // GitHub Pages 404 SPA redirect:
+      // 404.html redirects unknown paths to /?redirect=/original/path/
+      // We restore the path before the SPA router initializes so it
+      // navigates to the correct route instead of home.
+      var redirectParam = new URLSearchParams(window.location.search).get('redirect');
+      if (redirectParam) {
+        // Clean the URL back to the original path before router init
+        history.replaceState(null, '', redirectParam);
+      }
+
+      // Initialize SPA router
+      if (window.SpaRouter && window.SpaRouter.init) {
+        window.SpaRouter.init();
+      }
+    }
+  })();
+</script>
+</body>
+</html>

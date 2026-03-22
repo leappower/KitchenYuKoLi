@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>404 — Page Not Found | Yukoli</title>
+  <link rel="canonical" href="https://www.yukoli.com/"/>
+  <meta name="robots" content="noindex">
+
+  <!-- Fonts -->
+  <link rel="preload" href="/assets/fonts/local-fonts.css" as="style">
+  <link rel="preload" href="/assets/css/tailwind.css" as="style">
+  <link rel="preload" href="/assets/fonts/public-sans-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/assets/fonts/public-sans-latin-700-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link href="/assets/fonts/local-fonts.css" rel="stylesheet"/>
+  <link rel="stylesheet" href="/assets/css/tailwind.css">
+  <link rel="stylesheet" href="/assets/css/z-index-system.css">
+  <link rel="stylesheet" href="/assets/css/performance-optimized.css">
+
+  <!-- Dark mode: apply saved preference before first paint -->
+  <script>(function(){if(localStorage.getItem('darkMode')==='true')document.documentElement.classList.add('dark')})()</script>
+
+  <link rel="icon" href="/assets/images/logo_header.webp" type="image/webp">
+
+  <style>
+    body { font-family: 'Public Sans', sans-serif; }
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-12px); }
+    }
+    .float-anim { animation: float 3s ease-in-out infinite; }
+    @keyframes pulse-ring {
+      0% { transform: scale(0.8); opacity: 0.8; }
+      100% { transform: scale(1.6); opacity: 0; }
+    }
+    .pulse-ring {
+      animation: pulse-ring 2s ease-out infinite;
+    }
+  </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 min-h-screen flex flex-col overflow-x-hidden">
+
+  <!-- GitHub Pages SPA redirect script -->
+  <!-- Redirects /some/path/ back to /#/some/path/ so the SPA can handle it -->
+  <script>
+    (function() {
+      var path = window.location.pathname;
+      // Don't redirect the root or already-handled paths
+      if (path === '/' || path === '/404.html') return;
+      // Store the path and redirect to root with a query param
+      // The SPA shell (index.html) will pick this up and navigate correctly
+      var redirectUrl = '/?redirect=' + encodeURIComponent(path + window.location.search) + window.location.hash;
+      window.location.replace(redirectUrl);
+    })();
+  </script>
+
+  <!-- Minimal header -->
+  <header class="sticky top-0 z-[var(--z-header)] w-full border-b border-slate-200 dark:border-slate-800 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md">
+    <div class="max-w-[1920px] mx-auto px-6 md:px-10 lg:px-20 py-4 flex items-center justify-between">
+      <a class="flex items-center gap-2 text-primary" href="/home/">
+        <img loading="eager" src="/assets/images/logo_header.webp" alt="Yukoli Logo" width="36" height="36" style="width:36px;height:36px;object-fit:contain"/>
+        <span class="text-xl font-black tracking-tighter uppercase dark:text-slate-100">Yukoli</span>
+      </a>
+      <a href="/home/" class="bg-primary text-white px-5 py-2 rounded-xl font-bold text-sm hover:opacity-90 transition-opacity">
+        Back to Home
+      </a>
+    </div>
+  </header>
+
+  <!-- 404 content -->
+  <main class="flex-1 flex items-center justify-center px-6 py-24">
+    <div class="max-w-2xl mx-auto text-center space-y-10">
+
+      <!-- Animated 404 graphic -->
+      <div class="relative flex items-center justify-center h-48">
+        <!-- Pulse rings -->
+        <div class="absolute w-40 h-40 rounded-full border-2 border-primary/20 pulse-ring"></div>
+        <div class="absolute w-40 h-40 rounded-full border-2 border-primary/10 pulse-ring" style="animation-delay: 0.6s;"></div>
+        <!-- Icon -->
+        <div class="float-anim relative z-10 w-28 h-28 rounded-full bg-primary/10 border border-primary/20 flex items-center justify-center">
+          <span class="material-symbols-outlined text-primary" style="font-size: 3rem;">search_off</span>
+        </div>
+      </div>
+
+      <!-- Text -->
+      <div class="space-y-4">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-bold uppercase tracking-widest">
+          <span>Error 404</span>
+        </div>
+        <h1 class="text-5xl md:text-7xl font-black tracking-tight text-slate-900 dark:text-white">
+          Page Not <span class="text-primary">Found</span>
+        </h1>
+        <p class="text-lg text-slate-500 dark:text-slate-400 max-w-md mx-auto leading-relaxed">
+          The page you're looking for doesn't exist or has been moved. Let's get you back on track.
+        </p>
+      </div>
+
+      <!-- Navigation options -->
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a href="/home/"
+           class="bg-primary text-white px-8 py-4 rounded-xl font-bold text-base flex items-center justify-center gap-2 hover:shadow-lg hover:shadow-primary/20 transition-all">
+          <span class="material-symbols-outlined text-lg">home</span>
+          Go to Homepage
+        </a>
+        <a href="/solution/"
+           class="border-2 border-slate-200 dark:border-slate-700 px-8 py-4 rounded-xl font-bold text-base flex items-center justify-center gap-2 hover:bg-slate-50 dark:hover:bg-slate-800 transition-all">
+          <span class="material-symbols-outlined text-lg">inventory_2</span>
+          Browse Solutions
+        </a>
+      </div>
+
+      <!-- Quick links -->
+      <div class="pt-4 border-t border-slate-200 dark:border-slate-800">
+        <p class="text-sm text-slate-400 mb-4 font-semibold uppercase tracking-widest">Quick Links</p>
+        <div class="flex flex-wrap gap-3 justify-center">
+          <a href="/cases/" class="text-sm text-slate-600 dark:text-slate-400 hover:text-primary transition-colors font-medium">Case Studies</a>
+          <span class="text-slate-300 dark:text-slate-700">·</span>
+          <a href="/support/" class="text-sm text-slate-600 dark:text-slate-400 hover:text-primary transition-colors font-medium">Support</a>
+          <span class="text-slate-300 dark:text-slate-700">·</span>
+          <a href="/roi/" class="text-sm text-slate-600 dark:text-slate-400 hover:text-primary transition-colors font-medium">ROI Calculator</a>
+          <span class="text-slate-300 dark:text-slate-700">·</span>
+          <a href="/quote/" class="text-sm text-slate-600 dark:text-slate-400 hover:text-primary transition-colors font-medium">Get a Quote</a>
+          <span class="text-slate-300 dark:text-slate-700">·</span>
+          <a href="/esg/" class="text-sm text-slate-600 dark:text-slate-400 hover:text-primary transition-colors font-medium">ESG</a>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Minimal footer -->
+  <footer class="border-t border-slate-200 dark:border-slate-800 py-6">
+    <div class="max-w-[1920px] mx-auto px-6 md:px-10 lg:px-20 flex flex-col sm:flex-row items-center justify-between gap-4">
+      <p class="text-sm text-slate-400">© 2026 Yukoli Technology. All rights reserved.</p>
+      <div class="flex items-center gap-4 text-sm text-slate-400">
+        <a href="/home/" class="hover:text-primary transition-colors">Home</a>
+        <a href="/support/" class="hover:text-primary transition-colors">Support</a>
+        <a href="/quote/" class="hover:text-primary transition-colors">Contact</a>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>

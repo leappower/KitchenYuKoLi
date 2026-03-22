@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>A/B Testing Logic & Performance Analysis | Yukoli 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;500;600;700;900&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        colors: {
+          "primary":          "#ec5b13",
+          "background-light": "#f8f6f6",
+          "background-dark":  "#221610",
+        },
+        fontFamily: { "display": ["Public Sans", "sans-serif"] },
+        borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" },
+      },
+    },
+  }
+</script>
+<link rel="stylesheet" href="../../assets/css/styles.css"/>
+<style>
+  body { font-family: 'Public Sans', sans-serif; }
+</style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 transition-colors duration-300">
+
+<!-- Header -->
+<header class="sticky top-0 z-50 w-full border-b border-slate-200 dark:border-slate-800 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md">
+  <div class="max-w-5xl mx-auto px-6 py-4 flex items-center justify-between">
+    <a class="flex items-center gap-3 text-primary" href="../../router-test.html">
+      <span class="material-symbols-outlined text-3xl">restaurant</span>
+      <span class="text-xl font-black tracking-tighter uppercase dark:text-slate-100">Yukoli</span>
+    </a>
+    <nav class="flex items-center gap-4 text-sm font-semibold text-slate-500">
+      <a href="dashboard.html" class="hover:text-primary transition-colors">Dashboard</a>
+      <a href="strategy.html" class="hover:text-primary transition-colors">Strategy</a>
+      <span class="text-primary">Logic Analysis</span>
+    </nav>
+  </div>
+</header>
+
+<!-- Main Content -->
+<main class="max-w-5xl mx-auto px-6 py-16">
+
+  <!-- Page Title -->
+  <div class="mb-12">
+    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-bold uppercase tracking-widest mb-6">
+      <span class="material-symbols-outlined text-sm">science</span>
+      A/B Testing Framework
+    </div>
+    <h1 class="text-5xl font-black tracking-tight mb-4">A/B Testing Logic &amp;<br/><span class="text-primary">Performance Analysis</span></h1>
+    <p class="text-slate-500 dark:text-slate-400 text-lg">Yukoli 2026 — B2B Smart Commercial Kitchen Campaign</p>
+  </div>
+
+  <!-- Document Body (md-content) -->
+  <div class="md-content bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 p-10 shadow-sm space-y-2">
+
+    <h2>1. Testing Framework: Psychological Triggers</h2>
+    <p>The core of this experiment is to identify which messaging architecture resonates best with the 2026 B2B decision-maker in the smart commercial kitchen sector.</p>
+
+    <h3>Segment A: The Analytical ROI Lead (Control)</h3>
+    <ul>
+      <li><strong>Core Principle:</strong> "Trust through Data."</li>
+      <li><strong>Psychological Hook:</strong> Loss Aversion &amp; Logical Validation.</li>
+      <li><strong>Visual Language:</strong> Clean, metric-heavy, authoritative.</li>
+      <li><strong>ICP Fit:</strong> Procurement Directors, CFOs, Operational Engineers (Western Market focus).</li>
+    </ul>
+
+    <h3>Segment B: The Provocative Disruptor (Variant)</h3>
+    <ul>
+      <li><strong>Core Principle:</strong> "FOMO &amp; Direct Pain Addressing."</li>
+      <li><strong>Psychological Hook:</strong> Curiosity &amp; Urgent Problem Solving.</li>
+      <li><strong>Visual Language:</strong> Bold, high-contrast, emotive.</li>
+      <li><strong>ICP Fit:</strong> Business Owners, Executive Chefs, Emerging Market Entrepreneurs (SE Asia focus).</li>
+    </ul>
+
+    <hr class="border-slate-200 dark:border-slate-700 my-6"/>
+
+    <h2>2. Sequence Logic &amp; KPI Breakdown</h2>
+
+    <h3>Phase 1: The Hook (Email 1)</h3>
+    <ul>
+      <li><strong>Logic:</strong> Establish relevance.</li>
+      <li><strong>Winning Metric:</strong> Open Rate (OR).</li>
+      <li><strong>Insight:</strong> If Variant B (Provocative) wins OR by &gt;15%, it suggests the market is currently experiencing acute pain and is looking for immediate relief rather than long-term reports.</li>
+    </ul>
+
+    <h3>Phase 2: The Proof (Email 2)</h3>
+    <ul>
+      <li><strong>Logic:</strong> Build technical trust.</li>
+      <li><strong>Winning Metric:</strong> Click-Through Rate (CTR).</li>
+      <li><strong>Insight:</strong> If Segment A (Case Study) wins CTR, the leads require deep validation before committing. If Segment B (The 'Secret' Math) wins, the leads are driven by competitive advantage and efficiency 'hacks'.</li>
+    </ul>
+
+    <h3>Phase 3: The Close (Email 3)</h3>
+    <ul>
+      <li><strong>Logic:</strong> Drive final conversion.</li>
+      <li><strong>Winning Metric:</strong> Conversion Rate (CVR) — Meetings Booked.</li>
+      <li><strong>Insight:</strong> This is the ultimate test of "Scarcity" vs. "Strategy." A win for Scarcity (Variant B) suggests a high-velocity, high-volume sales cycle is needed.</li>
+    </ul>
+
+    <hr class="border-slate-200 dark:border-slate-700 my-6"/>
+
+    <h2>3. Predicted Winning Path (2026 Forecast)</h2>
+    <p>Based on current industry trends toward <strong>Automation &amp; ROI</strong>, we anticipate:</p>
+    <ul>
+      <li><strong>Western Market:</strong> Segment A will likely have a lower OR but a <strong>higher quality Lead-to-Meeting conversion</strong>, as C-levels prefer the "Technical Roadmap" framing.</li>
+      <li><strong>SE Asia Market:</strong> Segment B will likely dominate in <strong>total volume and speed of response</strong>, driven by the high-urgency "04 slots left" scarcity hook.</li>
+    </ul>
+
+    <hr class="border-slate-200 dark:border-slate-700 my-6"/>
+
+    <h2>4. Next Steps &amp; Scaling</h2>
+    <ol>
+      <li><strong>Winner Deployment:</strong> Automatically roll out the winning subject line logic to the remainder of the 80,000 lead database.</li>
+      <li><strong>Dynamic Content:</strong> Implement AI-driven dynamic content blocks that adjust the hardware/software ratio based on the lead's initial click behavior.</li>
+      <li><strong>Cross-Channel Sync:</strong> Feed the winning "Provocative" or "Analytical" hooks back into LinkedIn Ad copy for unified campaign performance.</li>
+    </ol>
+
+  </div><!-- /md-content -->
+
+  <!-- Back link -->
+  <div class="mt-10">
+    <a href="../../router-test.html" class="inline-flex items-center gap-2 text-slate-500 hover:text-primary transition-colors text-sm font-semibold">
+      <span class="material-symbols-outlined text-base">arrow_back</span>
+      Back to Overview
+    </a>
+  </div>
+
+</main>
+
+</body>
+</html>

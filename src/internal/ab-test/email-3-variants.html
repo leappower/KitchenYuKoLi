@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#ec5b13",
+                        "background-light": "#f8f6f6",
+                        "background-dark": "#221610",
+                        "neutral-light": "#e5e1df",
+                        "neutral-dark": "#3d2e26",
+                    },
+                    fontFamily: {
+                        "display": ["Public Sans", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<link rel="stylesheet" href="../../assets/css/styles.css"/>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 min-h-screen">
+<div class="relative flex h-auto min-h-screen w-full flex-col overflow-x-hidden">
+<div class="layout-container flex h-full grow flex-col">
+<!-- Top Navigation Bar -->
+<header class="flex items-center justify-between whitespace-nowrap border-b border-neutral-light dark:border-neutral-dark px-6 md:px-10 py-3 bg-background-light dark:bg-background-dark sticky top-0 z-50">
+<div class="flex items-center gap-4">
+<div class="size-8 flex items-center justify-center bg-primary rounded-lg text-white">
+<span class="material-symbols-outlined text-2xl">campaign</span>
+</div>
+<h2 class="text-slate-900 dark:text-slate-100 text-lg font-bold leading-tight tracking-[-0.015em]">Yukoli 2026</h2>
+</div>
+<div class="flex flex-1 justify-end gap-8">
+<div class="hidden md:flex items-center gap-9">
+<a class="text-slate-600 dark:text-slate-400 hover:text-primary dark:hover:text-primary text-sm font-medium transition-colors" href="#">Dashboard</a>
+<a class="text-primary text-sm font-bold border-b-2 border-primary pb-1" href="#">Campaigns</a>
+<a class="text-slate-600 dark:text-slate-400 hover:text-primary dark:hover:text-primary text-sm font-medium transition-colors" href="#">Analytics</a>
+</div>
+<div class="flex gap-2">
+<button class="flex items-center justify-center rounded-xl h-10 w-10 bg-neutral-light dark:bg-neutral-dark text-slate-700 dark:text-slate-200 hover:bg-primary/20 transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="flex items-center justify-center rounded-xl h-10 w-10 bg-neutral-light dark:bg-neutral-dark text-slate-700 dark:text-slate-200 hover:bg-primary/20 transition-colors">
+<span class="material-symbols-outlined">account_circle</span>
+</button>
+</div>
+</div>
+</header>
+<main class="flex-1 flex flex-col md:flex-row">
+<!-- Sidebar Nav -->
+<aside class="w-full md:w-64 border-r border-neutral-light dark:border-neutral-dark p-4 flex flex-col gap-6 bg-background-light dark:bg-background-dark">
+<div class="flex flex-col gap-1">
+<h1 class="text-slate-900 dark:text-slate-100 text-sm font-bold uppercase tracking-wider">Campaign Manager</h1>
+<p class="text-slate-500 dark:text-slate-400 text-xs font-normal">Yukoli Engine v2.4</p>
+</div>
+<nav class="flex flex-col gap-2">
+<a class="flex items-center gap-3 px-3 py-2 text-slate-600 dark:text-slate-400 hover:bg-primary/10 rounded-xl transition-all" href="#">
+<span class="material-symbols-outlined">grid_view</span>
+<p class="text-sm font-medium">Overview</p>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 bg-primary text-white rounded-xl shadow-lg shadow-primary/20" href="#">
+<span class="material-symbols-outlined">compare_arrows</span>
+<p class="text-sm font-medium">A/B Testing</p>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-slate-600 dark:text-slate-400 hover:bg-primary/10 rounded-xl transition-all" href="#">
+<span class="material-symbols-outlined">group</span>
+<p class="text-sm font-medium">Audience</p>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-slate-600 dark:text-slate-400 hover:bg-primary/10 rounded-xl transition-all" href="#">
+<span class="material-symbols-outlined">settings</span>
+<p class="text-sm font-medium">Settings</p>
+</a>
+</nav>
+</aside>
+<!-- Dashboard Content -->
+<section class="flex-1 overflow-y-auto bg-background-light dark:bg-background-dark">
+<!-- Page Header -->
+<div class="flex flex-wrap justify-between items-end gap-4 p-6 md:p-8 border-b border-neutral-light dark:border-neutral-dark">
+<div class="flex flex-col gap-2">
+<span class="px-3 py-1 bg-primary/10 text-primary text-xs font-bold rounded-full w-fit uppercase tracking-widest">Active Test</span>
+<h2 class="text-slate-900 dark:text-slate-100 text-3xl md:text-4xl font-black leading-tight tracking-tight">Email 3: Final Follow-up</h2>
+<p class="text-slate-500 dark:text-slate-400 text-base font-normal">Comparing Professional Invitation vs. Scarcity Tactic for Q1 conversion.</p>
+</div>
+<div class="flex gap-3">
+<button class="flex items-center justify-center rounded-xl h-11 px-6 border-2 border-primary text-primary text-sm font-bold hover:bg-primary/5 transition-all">
+                                Save Draft
+                            </button>
+<button class="flex items-center justify-center rounded-xl h-11 px-8 bg-primary text-white text-sm font-bold shadow-lg shadow-primary/30 hover:brightness-110 transition-all">
+                                Launch Campaign
+                            </button>
+</div>
+</div>
+<!-- Aggregate Metrics -->
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 p-6 md:p-8">
+<div class="flex flex-col gap-2 rounded-xl p-6 bg-white dark:bg-neutral-dark border border-neutral-light dark:border-neutral-dark shadow-sm">
+<div class="flex justify-between items-center text-slate-500 dark:text-slate-400">
+<p class="text-sm font-medium uppercase tracking-wider">Total Audience</p>
+<span class="material-symbols-outlined text-primary">groups</span>
+</div>
+<p class="text-slate-900 dark:text-slate-100 text-3xl font-bold leading-tight">12,400</p>
+<p class="text-xs text-slate-400">Segments: Enterprise, Mid-Market</p>
+</div>
+<div class="flex flex-col gap-2 rounded-xl p-6 bg-white dark:bg-neutral-dark border border-neutral-light dark:border-neutral-dark shadow-sm">
+<div class="flex justify-between items-center text-slate-500 dark:text-slate-400">
+<p class="text-sm font-medium uppercase tracking-wider">Avg Open Rate</p>
+<span class="material-symbols-outlined text-primary">mail</span>
+</div>
+<p class="text-slate-900 dark:text-slate-100 text-3xl font-bold leading-tight">28.4%</p>
+<div class="w-full bg-neutral-light dark:bg-slate-700 h-1.5 rounded-full overflow-hidden">
+<div class="bg-primary h-full" style="width: 28%"></div>
+</div>
+</div>
+<div class="flex flex-col gap-2 rounded-xl p-6 bg-white dark:bg-neutral-dark border border-neutral-light dark:border-neutral-dark shadow-sm">
+<div class="flex justify-between items-center text-slate-500 dark:text-slate-400">
+<p class="text-sm font-medium uppercase tracking-wider">Avg CTR</p>
+<span class="material-symbols-outlined text-primary">ads_click</span>
+</div>
+<p class="text-slate-900 dark:text-slate-100 text-3xl font-bold leading-tight">4.2%</p>
+<div class="w-full bg-neutral-light dark:bg-slate-700 h-1.5 rounded-full overflow-hidden">
+<div class="bg-primary h-full" style="width: 42%"></div>
+</div>
+</div>
+<div class="flex flex-col gap-2 rounded-xl p-6 bg-white dark:bg-neutral-dark border border-neutral-light dark:border-neutral-dark shadow-sm">
+<div class="flex justify-between items-center text-slate-500 dark:text-slate-400">
+<p class="text-sm font-medium uppercase tracking-wider">Conv. Lift</p>
+<span class="material-symbols-outlined text-green-500">trending_up</span>
+</div>
+<p class="text-green-500 text-3xl font-bold leading-tight">+12.5%</p>
+<p class="text-xs text-slate-400">vs. Baseline Campaign</p>
+</div>
+</div>
+<!-- Comparison Grid -->
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-8 p-6 md:p-8 pt-0">
+<!-- Variant A -->
+<div class="flex flex-col gap-6 rounded-2xl bg-white dark:bg-neutral-dark border border-neutral-light dark:border-neutral-dark overflow-hidden shadow-sm hover:border-primary/50 transition-colors">
+<div class="bg-neutral-light/50 dark:bg-neutral-dark/50 px-6 py-4 border-b border-neutral-light dark:border-neutral-dark flex justify-between items-center">
+<h3 class="text-lg font-bold">Variant A: The Professional Invitation</h3>
+<span class="bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300 px-3 py-1 rounded text-xs font-bold uppercase tracking-widest">Control</span>
+</div>
+<div class="px-6 space-y-4">
+<div class="p-4 bg-background-light dark:bg-background-dark rounded-xl border border-neutral-light dark:border-neutral-dark">
+<p class="text-xs text-slate-400 font-bold uppercase mb-1">Subject Line</p>
+<p class="text-slate-900 dark:text-slate-100 font-medium">"Invitation: Secure Your 2026 Technical Roadmap Session"</p>
+</div>
+<div class="relative h-48 rounded-xl overflow-hidden bg-slate-200">
+<img alt="Modern tech consultation" class="w-full h-full object-cover" data-alt="Professional meeting in a modern minimal boardroom" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB7AjvFLun7m4riS43hj-PV_3CuSoRvjJJoOm0XH_WFTCug-NB-yA1xf8JS6rEqN8W2ZIo6bUb_l48EFbLY4-y9V9hjq9gUxb8S1rLLilXUVHMQq_fZIGzbvWd3Tvu3mG2xAyy_OFNLuFJt3oz2qkhQRg5cavWbAaH73t00d-kkDwwQaebBuPXZjKrzk1FM1zYC96W-dWqJPjESBeDQwvX1CN0YXPS8OLGAcpNWn47MgBCdY9-2hTXFeFbj4n2St84SWmNuPCtb2mh0"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end p-4">
+<span class="text-white text-xs font-medium">Hero Image: Corporate Minimalism</span>
+</div>
+</div>
+<div class="space-y-2">
+<p class="text-xs text-slate-400 font-bold uppercase">Strategy</p>
+<p class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
+                                        Focuses on long-term value, infrastructure planning, and expert guidance. This variant appeals to senior stakeholders prioritizing stability and strategic depth.
+                                    </p>
+</div>
+<div class="py-4 flex justify-center">
+<button class="w-full max-w-xs h-11 bg-primary/20 text-primary border border-primary/30 rounded-lg font-bold text-sm">
+                                        Access Direct Scheduler
+                                    </button>
+</div>
+</div>
+<div class="mt-auto grid grid-cols-2 divide-x divide-neutral-light dark:divide-neutral-dark border-t border-neutral-light dark:border-neutral-dark">
+<div class="p-6 text-center">
+<p class="text-xs text-slate-400 uppercase tracking-widest mb-1">Predicted Open Rate</p>
+<p class="text-2xl font-black text-slate-900 dark:text-slate-100">24.2%</p>
+</div>
+<div class="p-6 text-center">
+<p class="text-xs text-slate-400 uppercase tracking-widest mb-1">Predicted CTR</p>
+<p class="text-2xl font-black text-slate-900 dark:text-slate-100">3.8%</p>
+</div>
+</div>
+</div>
+<!-- Variant B -->
+<div class="flex flex-col gap-6 rounded-2xl bg-white dark:bg-neutral-dark border-2 border-primary/40 overflow-hidden shadow-xl shadow-primary/5 transition-colors">
+<div class="bg-primary/5 px-6 py-4 border-b border-primary/20 flex justify-between items-center">
+<h3 class="text-lg font-bold text-primary">Variant B: The Scarcity Tactic</h3>
+<span class="bg-primary text-white px-3 py-1 rounded text-xs font-bold uppercase tracking-widest">Challenger</span>
+</div>
+<div class="px-6 space-y-4">
+<div class="p-4 bg-primary/5 rounded-xl border border-primary/20">
+<p class="text-xs text-primary font-bold uppercase mb-1">Subject Line</p>
+<p class="text-slate-900 dark:text-slate-100 font-medium">"Final Call: 04 slots left for Q1 blueprint sessions"</p>
+</div>
+<div class="relative h-48 rounded-xl overflow-hidden bg-slate-900 flex flex-col items-center justify-center gap-4 text-white">
+<div class="w-2/3 space-y-2">
+<div class="flex justify-between text-[10px] font-bold uppercase tracking-tighter">
+<span>Current Capacity</span>
+<span class="text-primary">84% Full</span>
+</div>
+<div class="w-full h-4 bg-slate-700 rounded-full overflow-hidden p-0.5">
+<div class="bg-primary h-full rounded-full" style="width: 84%"></div>
+</div>
+</div>
+<div class="flex gap-4">
+<div class="flex flex-col items-center">
+<span class="text-2xl font-black tabular-nums">08</span>
+<span class="text-[8px] uppercase tracking-widest opacity-60">Hours</span>
+</div>
+<div class="text-2xl font-black text-primary">:</div>
+<div class="flex flex-col items-center">
+<span class="text-2xl font-black tabular-nums">42</span>
+<span class="text-[8px] uppercase tracking-widest opacity-60">Mins</span>
+</div>
+</div>
+<div class="absolute inset-0 bg-primary/5 mix-blend-overlay"></div>
+</div>
+<div class="space-y-2">
+<p class="text-xs text-slate-400 font-bold uppercase">Strategy</p>
+<p class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
+                                        Emphasizes that these are the last few openings for the quarter, driving immediate FOMO. Designed for quick decision-makers and tactical responders.
+                                    </p>
+</div>
+<div class="py-4 flex justify-center">
+<button class="w-full max-w-xs h-11 bg-primary text-white shadow-lg shadow-primary/20 rounded-lg font-bold text-sm">
+                                        Claim Your Slot
+                                    </button>
+</div>
+</div>
+<div class="mt-auto grid grid-cols-2 divide-x divide-neutral-light dark:divide-neutral-dark border-t border-neutral-light dark:border-neutral-dark">
+<div class="p-6 text-center">
+<p class="text-xs text-slate-400 uppercase tracking-widest mb-1">Predicted Open Rate</p>
+<p class="text-2xl font-black text-primary">32.6%</p>
+</div>
+<div class="p-6 text-center">
+<p class="text-xs text-slate-400 uppercase tracking-widest mb-1">Predicted CTR</p>
+<p class="text-2xl font-black text-primary">4.6%</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Comparison Table -->
+<div class="p-6 md:p-8 pt-0">
+<div class="bg-white dark:bg-neutral-dark rounded-2xl border border-neutral-light dark:border-neutral-dark overflow-hidden">
+<table class="w-full text-left">
+<thead class="bg-neutral-light/30 dark:bg-neutral-dark/50">
+<tr>
+<th class="px-6 py-4 text-xs font-bold uppercase tracking-widest text-slate-500">Metric</th>
+<th class="px-6 py-4 text-xs font-bold uppercase tracking-widest text-slate-500">Professional (A)</th>
+<th class="px-6 py-4 text-xs font-bold uppercase tracking-widest text-slate-500">Scarcity (B)</th>
+<th class="px-6 py-4 text-xs font-bold uppercase tracking-widest text-slate-500">Delta</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-neutral-light dark:divide-neutral-dark">
+<tr>
+<td class="px-6 py-4 text-sm font-semibold">Subject Sentiment</td>
+<td class="px-6 py-4 text-sm">Authoritative</td>
+<td class="px-6 py-4 text-sm">Urgent</td>
+<td class="px-6 py-4 text-sm text-slate-400">-</td>
+</tr>
+<tr>
+<td class="px-6 py-4 text-sm font-semibold">Mobile Optimization</td>
+<td class="px-6 py-4 text-sm">98%</td>
+<td class="px-6 py-4 text-sm">94%</td>
+<td class="px-6 py-4 text-sm text-red-500">-4%</td>
+</tr>
+<tr>
+<td class="px-6 py-4 text-sm font-semibold">Estimated Reach</td>
+<td class="px-6 py-4 text-sm">6,200</td>
+<td class="px-6 py-4 text-sm">6,200</td>
+<td class="px-6 py-4 text-sm text-slate-400">0</td>
+</tr>
+<tr>
+<td class="px-6 py-4 text-sm font-semibold">Projected Conv. Rate</td>
+<td class="px-6 py-4 text-sm">1.8%</td>
+<td class="px-6 py-4 text-sm font-bold text-primary">2.4%</td>
+<td class="px-6 py-4 text-sm font-bold text-green-500">+33%</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+</main>
+</div>
+</div>
+</body></html>

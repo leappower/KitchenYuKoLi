@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+
+<html class="light" lang="zh-CN"><head>
+<!-- ═══ Responsive Redirect (injected by patch-responsive-redirect.py) ═══ -->
+<link rel="canonical" href="/products/"/>
+<link rel="alternate" media="only screen and (max-width: 767px)"
+      href="/products/index-mobile.html"/>
+<link rel="alternate" media="only screen and (min-width: 768px) and (max-width: 1279px)"
+      href="/products/index-tablet.html"/>
+<link rel="alternate" media="only screen and (min-width: 1280px)"
+      href="/products/index-pc.html"/>
+<script>
+/* Responsive redirect — runs before render, no flash */
+(function(){
+  // 防止 bfcache 恢复时重复 redirect
+  if (window.__redirectChecked) return;
+  window.__redirectChecked = true;
+
+  // 处理 clean-url 参数:重定向后清理 URL 为干净的目录 URL
+  var urlParams = new URLSearchParams(location.search);
+  var cleanUrl = urlParams.get('clean-url');
+  if (cleanUrl) {
+    console.log('[Responsive Redirect] Cleaning URL to:', cleanUrl);
+    history.replaceState({}, '', cleanUrl);
+    return;
+  }
+
+  // SPA 导航时跳过响应式重定向
+  console.log('[Responsive Redirect] Checking SPA flag: window.__spaNavigating =', window.__spaNavigating);
+  if (window.__spaNavigating) {
+    console.log('[Responsive Redirect] SPA navigation detected, skipping redirect');
+    return;
+  }
+
+  // 使用 DeviceUtils 统一管理设备判断
+  var currentFile = location.pathname.split('/').pop();
+  console.log('[Responsive Redirect] Current file:', currentFile, 'Pathname:', location.pathname);
+
+  // 当访问目录 URL(以 / 结尾)时,不要重定向(SPA 导航使用干净的目录 URL)
+  if (window.DeviceUtils && window.DeviceUtils.isDirectoryURL()) {
+    console.log('[Responsive Redirect] Directory URL detected, skipping redirect');
+    return;
+  }
+
+  // 使用 DeviceUtils 判断是否需要重定向
+  if (window.DeviceUtils && window.DeviceUtils.shouldRedirect(currentFile)) {
+    var deviceType = window.DeviceUtils.getDeviceType();
+    var targetFile;
+
+    if (deviceType === window.DeviceUtils.DeviceType.MOBILE) {
+      targetFile = 'index-mobile.html';
+    } else if (deviceType === window.DeviceUtils.DeviceType.TABLET) {
+      targetFile = 'index-tablet.html';
+    } else {
+      targetFile = 'index-pc.html';
+    }
+
+    console.log('[Responsive Redirect] Redirecting to:', targetFile);
+    location.href = targetFile;
+    return;
+  }
+
+  console.log('[Responsive Redirect] No redirect needed');
+})();
+</script>
+<!-- ═══ End Responsive Redirect ═══ -->
+
+<meta charset="utf-8"/>
+<meta name="description" content="Yukoli global product catalog: advanced commercial kitchen automation hardware for restaurants, cloud kitchens, and food service chains.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Yukoli | Global Product Catalog">
+<meta property="og:description" content="Yukoli global product catalog: advanced commercial kitchen automation hardware for restaurants, cloud kitchens, and food service chains.">
+<meta property="og:url" content="https://www.yukoli.com/products/index-tablet.html">
+<meta property="og:image" content="https://www.yukoli.com/assets/images/og-catalog.webp">
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Yukoli | Global Product Catalog</title>
+<link rel="preload" href="/assets/fonts/local-fonts.css" as="style">
+<link rel="preload" href="/assets/css/styles.css" as="style">
+  <link rel="preload" href="/assets/css/tailwind.css" as="style">
+<link rel="preload" href="/assets/fonts/public-sans-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/fonts/public-sans-latin-700-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link href="/assets/fonts/local-fonts.css" rel="stylesheet"/>
+<link rel="stylesheet" href="/assets/css/styles.css">
+  <link rel="stylesheet" href="/assets/css/tailwind.css">
+<link rel="stylesheet" href="/assets/css/z-index-system.css">
+<link rel="stylesheet" href="/assets/css/performance-optimized.css"/>
+<style>
+    body {
+      min-height: 100dvh;
+    }
+  </style>
+  <!-- Dark mode: apply saved preference before first paint (prevents flash) -->
+  <script>(function(){
+if(localStorage.getItem('darkMode')==='true')document.documentElement.classList.add('dark')})()</script>
+<link rel="stylesheet" href="/assets/css/skeleton.css"/>
+<link rel="icon" href="/assets/images/logo_header.webp" type="image/webp">
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 antialiased overflow-x-hidden">
+<!-- ═══ Navigator Component ═══ -->
+<navigator data-component="navigator"
+  data-variant="tablet"
+  data-search="true"
+  data-active="solutions"
+  data-cta-text-key="catalog_access_portal"
+  data-cta-href="#"></navigator>
+<main id="spa-content" class="max-w-[1024px] mx-auto px-6 py-12 pb-24">
+<!-- Hero Section -->
+<section class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-24">
+<div class="flex flex-col gap-6 order-2 lg:order-1">
+<div class="inline-flex items-center gap-2 bg-primary/10 text-primary px-3 py-1 rounded-full text-xs font-bold uppercase tracking-widest w-fit">
+                    <span data-i18n="catalog_hero_badge">Industrial Excellence</span>
+                </div>
+<h1 class="text-5xl md:text-6xl font-black leading-[1.1] tracking-tight text-slate-900 dark:text-white">
+                    <span data-i18n="catalog_tablet_hero_prefix">2026 Smart Kitchen</span> <span class="text-primary" data-i18n="nav_solutions">Solutions</span> <span data-i18n="catalog_word_catalog">Catalog</span>
+                </h1>
+<p class="text-lg md:text-xl text-slate-600 dark:text-slate-400 leading-relaxed max-w-xl">
+                    <span data-i18n="catalog_tablet_hero_desc">Revolutionizing industrial kitchen efficiency with next-generation smart hardware and real-time IoT intelligence.</span>
+                </p>
+<div class="flex flex-wrap gap-4 pt-4">
+<a class="bg-primary text-white px-8 py-4 rounded-xl text-lg font-bold shadow-lg shadow-primary/20 hover:shadow-primary/40 transition-all flex items-center gap-2" href="#download-form">
+                        <span data-i18n="catalog_btn_get_access">Get Full Access</span> <span class="material-symbols-outlined">download</span>
+</a>
+<button class="border border-slate-200 dark:border-slate-700 px-8 py-4 rounded-xl text-lg font-bold hover:bg-slate-50 dark:hover:bg-slate-800 transition-all">
+                        <span data-i18n="catalog_btn_preview">Preview Sample</span>
+                    </button>
+</div>
+</div>
+<div class="relative order-1 lg:order-2">
+<div class="aspect-[4/3] rounded-3xl overflow-hidden shadow-2xl">
+<img loading="lazy" class="w-full h-full object-cover" data-alt="Modern high-tech industrial kitchen with stainless steel equipment and smart displays" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCEtHhnDQAqfUrCAtHVANMOBGZc43bpcyhG710jeA5qhluqEMLlvpqOuPPy8g33wJXUi5BPCMm_52XLdWkA-3A6CnkEubR76Fdvwz_TBix_MPLyoq6PXbvd6KA8F6GxWMhinTw98Ko_AyYqEq6xwcP3EuK1TiVeUC4FsfmzELv5QtYi1nBIc2-bKaiz8sBojch8JLMIabaw2mEzQRQgBQikbDMnTFp9hOKJZD-N1R827O4cHOYDoCQWllVe7i4oG9MsebyAOMLt32LB" width="800" height="600">
+</div>
+<!-- Floating Badge -->
+<div class="absolute -bottom-6 -left-6 bg-white dark:bg-slate-800 p-6 rounded-2xl shadow-xl border border-primary/10 flex items-center gap-4">
+<div class="size-12 rounded-full bg-primary/20 flex items-center justify-center">
+<span class="material-symbols-outlined text-primary">verified</span>
+</div>
+<div>
+<p class="text-xs font-bold text-slate-500 uppercase" data-i18n="catalog_version_label">Version</p>
+<p class="text-lg font-black" data-i18n="catalog_version_value">v4.2.0 Stable</p>
+</div>
+</div>
+</div>
+</section>
+<!-- 5:3:2 Strategy Preview -->
+<section class="mb-24">
+<div class="text-center mb-12">
+<h2 class="text-3xl font-bold mb-4" data-i18n="catalog_framework_title">5:3:2 Strategic Framework</h2>
+<p class="text-slate-600 dark:text-slate-400" data-i18n="catalog_framework_desc">Integrated excellence across three core industrial pillars.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+<!-- Smart Hardware -->
+<div class="flex flex-col bg-white dark:bg-slate-800/50 rounded-2xl overflow-hidden border border-slate-100 dark:border-slate-700/50 shadow-sm hover:shadow-md transition-shadow">
+<div class="aspect-video">
+<img loading="lazy" class="w-full h-full object-cover" data-alt="Close up of high precision stainless steel cooking equipment" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDH2nn3LlJ_XRnOPZ7vC6gYwswa9j6IM7HfUj2ojFEYsotYPIRnYtnzIZYd9NdTI3PXC8umaRDPMVHlv1z9_63gUKP4NWmRGxM-QjqHmiV_FnhmsMtx8-S222HDgmc5A_vd6sExdaJNjqE_J8JEwEeLeOzxqZf59edKawPSR6yV7N_GyfOswQ797mTaenf_Smk7vI6WnPZI8TJLpYdG8qOGAERRQ1YmLiiR10kvcsSX_kqhQ-RU1NNCvN4ci1ldXhzFe0yhZgy7i606" width="800" height="600">
+</div>
+<div class="p-6">
+<div class="text-3xl font-black text-primary mb-2">50%</div>
+<h3 class="text-xl font-bold mb-2 text-slate-900 dark:text-white" data-i18n="catalog_smart_hardware">Smart Hardware</h3>
+<p class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
+                            <span data-i18n="catalog_hw_card_desc">High-performance industrial grade kitchen equipment engineered for durability and precision.</span>
+                        </p>
+</div>
+</div>
+<!-- System Solutions -->
+<div class="flex flex-col bg-white dark:bg-slate-800/50 rounded-2xl overflow-hidden border border-slate-100 dark:border-slate-700/50 shadow-sm hover:shadow-md transition-shadow">
+<div class="aspect-video">
+<img loading="lazy" class="w-full h-full object-cover" data-alt="Industrial kitchen workflow visualization and planning" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBtQn97mit6notYeo1PWrXLP81F5pP2LrDjVhqTop6TsMMEh7S5UDjpYeYDG0b8rw5_-mtxVaKhy4qc6gZK5tis3bZ9hhFD6KZzxHdPYiVne7Pw0B7UxbWf-e0R9_hLnH2dMg99yQlJqdg6dj6dHW2YAtOKT7hZapTHBEMqcDX0_tbeJ6VygLK-UMH029XXdqhAlWemc9cEwpdLOd6E-8PQanveeZAOduTyTrEu6-rUkGNqDPLjMadR6XRRb0fAI-L2damAzMWzBnaE" width="800" height="600">
+</div>
+<div class="p-6">
+<div class="text-3xl font-black text-primary mb-2">30%</div>
+<h3 class="text-xl font-bold mb-2 text-slate-900 dark:text-white" data-i18n="catalog_system_solutions">System Solutions</h3>
+<p class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
+                            <span data-i18n="catalog_sys_card_desc">Integrated workflows and architectural layouts optimized for commercial food service scaling.</span>
+                        </p>
+</div>
+</div>
+<!-- IoT Intelligence -->
+<div class="flex flex-col bg-white dark:bg-slate-800/50 rounded-2xl overflow-hidden border border-slate-100 dark:border-slate-700/50 shadow-sm hover:shadow-md transition-shadow">
+<div class="aspect-video">
+<img loading="lazy" class="w-full h-full object-cover" data-alt="Digital tablet showing real time kitchen monitoring analytics" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBP41f1chcUdFvJjJyJdnOQP0PUt-qW40y66Ok4Q6MBhiqFqt0vAmUpWOTQFNWUxnFWWdIJV7QkKFOa1pyVRa1Cv2XyCf5XOuNjRjxO6iqWXSVaYwrSVncIm0cxwn8sOJ8Zb15ub6cU9b1GH4lzlMxaHta4_Sp9tKGhrpLnpfwYyu087JMJELUAezqpsJlBFocbciwVoWzvclULtyKDsYJShXPZMPjxrfcv_0oZHZFg0-WsvhBunD6w7X8m-w-Wr0BPvyr7ZwxD3pNR" width="800" height="600">
+</div>
+<div class="p-6">
+<div class="text-3xl font-black text-primary mb-2">20%</div>
+<h3 class="text-xl font-bold mb-2 text-slate-900 dark:text-white" data-i18n="catalog_iot_intelligence">IoT Intelligence</h3>
+<p class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
+                            <span data-i18n="catalog_iot_card_desc">Edge-to-cloud connectivity providing real-time monitoring and predictive maintenance alerts.</span>
+                        </p>
+</div>
+</div>
+</div>
+</section>
+<!-- Lead Capture Form -->
+<section class="bg-slate-900 text-white rounded-[2rem] p-8 md:p-12 mb-24 overflow-hidden relative" id="download-form">
+<div class="absolute top-0 right-0 w-1/3 h-full bg-primary/5 -skew-x-12 translate-x-1/2"></div>
+<div class="relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+<div>
+<h2 class="text-4xl font-bold mb-6" data-i18n="catalog_form_title">Secure Your Digital Copy</h2>
+<p class="text-slate-400 text-lg mb-8 leading-relaxed">
+                        <span data-i18n="catalog_form_desc">Complete the professional profile to receive a personalized, secure download link for the 2026 Yukoli Global Product Catalog.</span>
+                    </p>
+<div class="flex flex-col gap-4">
+<div class="flex items-center gap-4 text-slate-300">
+<span class="material-symbols-outlined text-primary">description</span>
+<span data-i18n="catalog_benefit_1">Full technical specifications and CAD drawings</span>
+</div>
+<div class="flex items-center gap-4 text-slate-300">
+<span class="material-symbols-outlined text-primary">analytics</span>
+<span data-i18n="catalog_benefit_2">ROI analysis and energy efficiency data</span>
+</div>
+<div class="flex items-center gap-4 text-slate-300">
+<span class="material-symbols-outlined text-primary">location_on</span>
+<span data-i18n="catalog_benefit_3">Global distribution and support network contacts</span>
+</div>
+</div>
+</div>
+<form class="bg-white dark:bg-slate-800 p-8 rounded-2xl text-slate-900 dark:text-white shadow-2xl grid grid-cols-1 md:grid-cols-2 gap-6">
+<div class="flex flex-col gap-2">
+<label class="text-xs font-bold uppercase tracking-wider text-slate-500" data-i18n="landing_full_name">Full Name</label>
+<input class="bg-slate-50 dark:bg-slate-900 border-slate-200 dark:border-slate-700 rounded-lg p-3 focus:ring-primary focus:border-primary" placeholder="John Doe" type="text"/>
+</div>
+<div class="flex flex-col gap-2">
+<label class="text-xs font-bold uppercase tracking-wider text-slate-500" data-i18n="landing_professional_email">Professional Email</label>
+<input class="bg-slate-50 dark:bg-slate-900 border-slate-200 dark:border-slate-700 rounded-lg p-3 focus:ring-primary focus:border-primary" placeholder="john@company.com" type="email"/>
+</div>
+<div class="flex flex-col gap-2">
+<label class="text-xs font-bold uppercase tracking-wider text-slate-500" data-i18n="form_company">Company Name</label>
+<input class="bg-slate-50 dark:bg-slate-900 border-slate-200 dark:border-slate-700 rounded-lg p-3 focus:ring-primary focus:border-primary" placeholder="Global Systems Inc." type="text"/>
+</div>
+<div class="flex flex-col gap-2">
+<label class="text-xs font-bold uppercase tracking-wider text-slate-500" data-i18n="catalog_role_label">Professional Role</label>
+<select class="bg-slate-50 dark:bg-slate-900 border-slate-200 dark:border-slate-700 rounded-lg p-3 focus:ring-primary focus:border-primary">
+<option>Facility Manager</option>
+<option>Executive Chef</option>
+<option>Procurement Director</option>
+<option>Kitchen Designer</option>
+</select>
+</div>
+<div class="flex flex-col gap-2 md:col-span-2">
+<label class="text-xs font-bold uppercase tracking-wider text-slate-500" data-i18n="quote_annual_volume">Annual Project Volume</label>
+<select class="bg-slate-50 dark:bg-slate-900 border-slate-200 dark:border-slate-700 rounded-lg p-3 focus:ring-primary focus:border-primary">
+<option>&lt; $500k</option>
+<option>$500k - $2M</option>
+<option>$2M - $10M</option>
+<option>$10M+</option>
+</select>
+</div>
+<button class="md:col-span-2 bg-primary text-white py-4 rounded-xl font-bold text-lg hover:brightness-110 transition-all flex items-center justify-center gap-3 mt-4">
+                        <span data-i18n="catalog_btn_generate">Generate Secure Download Link</span>
+                        <span class="material-symbols-outlined">arrow_forward</span>
+</button>
+</form>
+</div>
+</section>
+<!-- Trust Signals -->
+<section class="mb-24">
+<div class="flex flex-col md:flex-row items-center justify-between gap-12 p-8 border-y border-slate-200 dark:border-slate-800">
+<div class="text-center md:text-left">
+<p class="text-xs font-black uppercase tracking-widest text-slate-400 mb-4" data-i18n="catalog_compliance_certified">Compliance Certified</p>
+<div class="flex items-center gap-8 opacity-60">
+<div class="flex flex-col items-center gap-1">
+<span class="material-symbols-outlined text-4xl">verified_user</span>
+<span class="text-[10px] font-bold">CE MARK</span>
+</div>
+<div class="flex flex-col items-center gap-1">
+<span class="material-symbols-outlined text-4xl">security</span>
+<span class="text-[10px] font-bold" data-i18n="trust_ul_listed">UL LISTED</span>
+</div>
+<div class="flex flex-col items-center gap-1">
+<span class="material-symbols-outlined text-4xl">health_and_safety</span>
+<span class="text-[10px] font-bold">NSF INTL</span>
+</div>
+</div>
+</div>
+<div class="w-full md:w-px h-px md:h-20 bg-slate-200 dark:bg-slate-800"></div>
+<div class="text-center md:text-right flex-1">
+<p class="text-xs font-black uppercase tracking-widest text-slate-400 mb-6" data-i18n="quote_trusted_chains">Trusted by Global Chains</p>
+<div class="flex flex-wrap justify-center md:justify-end gap-10 opacity-30 grayscale items-center">
+<span class="text-xl font-bold italic">RESTAURANT_CORP</span>
+<span class="text-xl font-bold italic">HOTEL_GROUP</span>
+<span class="text-xl font-bold italic">FOOD_LOGISTICS</span>
+<span class="text-xl font-bold italic">KITCHEN_MASTER</span>
+</div>
+</div>
+</div>
+</section>
+</main>
+
+
+
+<script defer src="/assets/js/ui/products-dropdown.js?v=20260322-v3"></script>
+<script defer src="/assets/js/ui/navigator.js?v=20260322-v3"></script>
+<script defer src="/assets/js/ui/search-engine.js"></script>
+<script defer src="/assets/js/ui/footer.js?v=20260322-v3"></script>
+<script defer src="/assets/js/lang-registry.js"></script>
+<script defer src="/assets/js/translations.js"></script><script defer src="/assets/js/translations-dropdown-template.js"></script>
+<script defer src="/assets/js/contacts.js"></script>
+<script defer src="/assets/js/ui/smart-popup.js"></script>
+<script defer src="/assets/js/router.js"></script>
+
+<script defer src="/assets/js/page-interactions.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    if (window.translationManager) window.translationManager.initialize();
+  });
+</script>
+
+
+    
+    
+    
+
+<footer data-component="footer"
+  data-variant="tablet"
+  data-search="true"
+  data-active="solutions">
+</footer>
+
+
+
+<script src="/assets/js/utils/device-utils.js"></script>
+<script src="/assets/js/spa-router.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    if (window.SpaRouter && typeof window.SpaRouter.init === 'function') {
+      window.SpaRouter.init();
+    }
+  });
+</script>
+</body></html>
