@@ -1,0 +1,15 @@
+/* tailwind-entry.css — Build entry for Tailwind CSS generation
+ * This file is used ONLY as input to `tailwindcss` CLI.
+ * Output → src/assets/css/tailwind.css (shipped to pages via <link>)
+ *
+ * IMPORTANT: This replaces the 432 KB CDN (tailwind.cdn.js) loaded by every page.
+ *            Pages should reference /assets/css/tailwind.css instead.
+ */
+
+/* Tailwind layers — generates base reset + utilities scanned from content[] */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Design system custom properties and component overrides */
+@import './styles.css';
