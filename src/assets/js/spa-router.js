@@ -378,7 +378,7 @@
     loadRoute: function(routePath) {
       var _self = this;
       var pagePath = this.routes[routePath];
-      
+
       if (!pagePath) {
         this.log('Unknown route:', routePath, '- redirecting to home');
         this.navigate('/home/');
@@ -388,6 +388,12 @@
       // 获取设备特定页面
       pagePath = this.getDevicePage(pagePath);
       this.log('Loading:', pagePath);
+
+      // 添加 BASE_PATH 前缀（如果存在）
+      var basePath = (typeof window !== 'undefined' && window.BASE_PATH) || '';
+      if (basePath && pagePath.startsWith('/')) {
+        pagePath = basePath + pagePath;
+      }
 
       // 显示骨架屏
       this.showSkeleton();

@@ -145,27 +145,28 @@ function patchHtmlPaths(html) {
 
   // Ensure BASE_PATH doesn't have trailing slash for consistent replacement
   var bp = BASE_PATH.replace(/\/$/, '');
+  // Extract the path part for negative lookahead (e.g., 'KitchenYuKoLi' from '/KitchenYuKoLi')
+  var bpName = bp.replace(/^\//, '');
+
+  // 0. Inject window.BASE_PATH for JS files to use
+  // Insert after <head> tag
+  var basePathScript = '<script>window.BASE_PATH="' + bp + '";</script>';
+  html = html.replace(/<head>/i, '<head>\n' + basePathScript);
 
   // 1. Patch src= and href= attributes in HTML tags
-  //    Match: src="/path" or href="/path" (not //, not /#, not already /KitchenYuKoLi/)
+  //    Match: src="/path" or href="/path" (not //, not /#, not already prefixed)
   //    $2 captures the leading "/", so we prepend bp (without extra slash)
-  html = html.replace(
-    /((?:src|href)\s*=\s*")(\/(?!\/|#))(?!KitchenYuKoLi\/)/g,
-    '$1' + bp + '$2'
-  );
+  var attrRegex = new RegExp('((?:src|href)\\s*=\\s*")(\\/(?!\\/|#))(?!' + bpName + '\\/)', 'g');
+  html = html.replace(attrRegex, '$1' + bp + '$2');
 
   // 2. Patch inline JS: location.href = '/home/' and similar redirects
   //    Matches: location.href = '/path', window.location.replace('/path')
-  html = html.replace(
-    /(location\.href\s*=\s*'|window\.location\.replace\(['"])(\/(?!\/|#))(?!KitchenYuKoLi)/g,
-    '$1' + bp + '$2'
-  );
+  var jsRegex1 = new RegExp("(location\\.href\\s*=\\s*'|window\\.location\\.replace\\(['\"])(\\/(?!\\/|#))(?!" + bpName + ")", 'g');
+  html = html.replace(jsRegex1, '$1' + bp + '$2');
 
   // 3. Patch inline JS: history.replaceState(null, '', '/path')
-  html = html.replace(
-    /(history\.(?:push|replace)State\([^,]*,\s*[^,]*,\s*')(\/(?!\/|#))(?!KitchenYuKoLi)/g,
-    '$1' + bp + '$2'
-  );
+  var jsRegex2 = new RegExp("(history\\.(?:push|replace)State\\([^,]*,\\s*[^,]*,\\s*')(" + bpName + ")", 'g');
+  html = html.replace(jsRegex2, '$1' + bp + '$2');
 
   return html;
 }
@@ -307,6 +308,9 @@ function generateRootIndex() {
     /<script>\s*\/\*\s*Responsive entry[\s\S]*?<\/script>/i,
     '<script>location.href = \'' + homePath + '\';</script>'
   );
+
+  // Patch all root-absolute paths with BASE_PATH prefix
+  html = patchHtmlPaths(html);
 
   // Write to dist/index.html
   fs.writeFileSync(path.join(DIST_DIR, 'index.html'), html, 'utf-8');

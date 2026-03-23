@@ -17,6 +17,7 @@
  *   node scripts/release.js --no-translate         # 同 --skip-translate（别名）
  *   node scripts/release.js --full-translate       # 全量翻译（默认为增量翻译）
  *   node scripts/release.js --gh-pages             # 同时部署到 gh-pages 分支（GitHub Pages）
+ *   node scripts/release.js --gh-pages --custom-domain  # 使用自定义域名部署（不使用 base path）
  *
  * 构建模式（由各 --skip-* 开关组合决定）：
  *   完整模式（默认）：飞书拉取 → i18n提取 → 增量翻译 → 图片下载(增量) → 图片压缩(增量) → webpack → 验证
@@ -81,6 +82,8 @@ const opts = {
   fullTranslate: args.includes('--full-translate'),
   // GitHub Pages 部署：--gh-pages（同时部署到 gh-pages 分支）
   ghPages:       args.includes('--gh-pages'),
+  // 自定义域名部署：--custom-domain（不使用 base path 前缀）
+  customDomain:  args.includes('--custom-domain'),
   version:       (args.find(a => a.startsWith('--version=')) || '').replace('--version=', ''),
 };
 
@@ -521,7 +524,9 @@ try {
 // ─── Step 8: 部署到 GitHub Pages（可选）─────────────────────────────────────
 
 // gh-pages 配置和辅助函数（提升到块作用域外，满足 no-inner-declarations）
-const GH_PAGES_BASE   = '/KitchenYuKoLi';
+// 自定义域名配置
+const CUSTOM_DOMAIN   = 'kitchen.yukoli.com';
+const GH_PAGES_BASE   = opts.customDomain ? '/' : '/KitchenYuKoLi';
 const GH_PAGES_BRANCH = 'gh-pages';
 const ghTmpDir        = path.join(ROOT, '.ghpages-tmp');
 
@@ -584,12 +589,20 @@ if (opts.ghPages) {
       run(`cp -r "${src}" "${dst}"`, { silent: true });
     }
 
-    // 复制 CNAME 文件（如有）
-    for (const cf of ['CNAME', 'www.CNAME']) {
-      const src = path.join(ROOT, cf);
-      if (fs.existsSync(src)) {
-        fs.copyFileSync(src, path.join(ghTmpDir, cf));
-        log(`已复制 ${cf}`);
+    // 复制或创建 CNAME 文件
+    if (opts.customDomain) {
+      // 使用自定义域名，自动创建 CNAME 文件
+      const cnamePath = path.join(ghTmpDir, 'CNAME');
+      fs.writeFileSync(cnamePath, CUSTOM_DOMAIN, 'utf8');
+      log(`已创建 CNAME 文件: ${CUSTOM_DOMAIN}`);
+    } else {
+      // 子目录部署，复制已有的 CNAME 文件（如有）
+      for (const cf of ['CNAME', 'www.CNAME']) {
+        const src = path.join(ROOT, cf);
+        if (fs.existsSync(src)) {
+          fs.copyFileSync(src, path.join(ghTmpDir, cf));
+          log(`已复制 ${cf}`);
+        }
       }
     }
 
@@ -604,8 +617,11 @@ if (opts.ghPages) {
     ok(`已推送到 origin/${GH_PAGES_BRANCH}`);
 
     console.log(`\n  ${c.gray}GitHub Pages 访问:${c.reset}`);
-    console.log(`    https://leappower.github.io/KitchenYuKoLi/\n`);
-
+    if (opts.customDomain) {
+      console.log(`    https://${CUSTOM_DOMAIN}/\n`);
+    } else {
+      console.log(`    https://leappower.github.io/KitchenYuKoLi/\n`);
+    }
   } catch (e) {
     fail('GitHub Pages 部署失败', e);
   } finally {

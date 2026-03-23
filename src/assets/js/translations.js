@@ -147,7 +147,8 @@
     var self = this;
     if (typeof fetch !== 'function') return lang !== 'zh-CN' ? self.loadUITranslations('zh-CN') : Promise.reject(new Error('fetch not available'));
 
-    var fetchPromise = fetch('/assets/lang/' + lang + '-ui.json', { cache: _isDevOrTest ? 'no-store' : 'default' }).then(function (response) {
+    var basePath = (typeof window !== 'undefined' && window.BASE_PATH) || '';
+    var fetchPromise = fetch(basePath + '/assets/lang/' + lang + '-ui.json', { cache: _isDevOrTest ? 'no-store' : 'default' }).then(function (response) {
       if (!response.ok) throw new Error('HTTP ' + response.status + ': ' + response.statusText);
       return response.json();
     }).then(function (data) {
@@ -184,7 +185,8 @@
     }
     var self = this;
     
-    var fetchPromise = fetch('/assets/lang/' + lang + '-product.json', { cache: _isDevOrTest ? 'no-store' : 'default' }).then(function (response) {
+    var basePath = (typeof window !== 'undefined' && window.BASE_PATH) || '';
+    var fetchPromise = fetch(basePath + '/assets/lang/' + lang + '-product.json', { cache: _isDevOrTest ? 'no-store' : 'default' }).then(function (response) {
       if (!response.ok) throw new Error('HTTP ' + response.status);
       return response.json();
     }).then(function (data) {
