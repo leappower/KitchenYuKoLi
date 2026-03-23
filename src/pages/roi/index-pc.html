@@ -66,14 +66,14 @@
 <!-- ═══ End Responsive Redirect ═══ -->
 
 <meta charset="utf-8"/>
-<meta name="description" content="Yukoli 2026 ROI Calculator — calculate return on investment for kitchen automation and IoT deployments.">
+<meta name="description" content="YuKoLi 智能厨具投资回报分析工具 — 计算商用厨房自动化设备的节省人工、节能降耗与投资回收周期，助力餐饮企业科学决策。">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Yukoli ROI Calculator">
-<meta property="og:description" content="Yukoli 2026 ROI Calculator — calculate return on investment for kitchen automation and IoT deployments.">
+<meta property="og:title" content="YuKoLi 智能厨具 | 投资回报分析">
+<meta property="og:description" content="YuKoLi 智能厨具投资回报分析工具 — 计算商用厨房自动化设备的节省人工、节能降耗与投资回收周期，助力餐饮企业科学决策。">
 <meta property="og:url" content="https://www.kitchen.yukoli.com/roi/">
 <meta property="og:image" content="https://www.kitchen.yukoli.com/assets/images/og-home.webp">
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Yukoli 2026 ROI Calculator</title>
+<title>YuKoLi 智能厨具 | 投资回报分析</title>
 <link href="/assets/fonts/local-fonts.css" rel="stylesheet"/>
 <link rel="stylesheet" href="/assets/css/styles.css">
   <link rel="stylesheet" href="/assets/css/tailwind.css">
@@ -119,56 +119,63 @@ window.addEventListener('DOMContentLoaded',function(){
 <div class="bg-white dark:bg-slate-900/50 p-6 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm">
 <div class="flex items-center gap-2 mb-6">
 <span class="material-symbols-outlined text-primary">tune</span>
-<h3 class="text-lg font-bold" data-i18n="roi_input_parameters">Input Parameters</h3>
+<h3 class="text-lg font-bold" data-i18n="roi_input_parameters">参数设置</h3>
 </div>
 <div class="space-y-6">
 <!-- Number of Outlets -->
 <div class="flex flex-col gap-2">
 <label class="text-sm font-semibold text-slate-600 dark:text-slate-400 flex justify-between">
-                                    Number of Outlets
-                                    <span class="text-primary">124</span>
+                                    <span data-i18n="roi_num_outlets">门店数量</span>
+                                    <span class="text-primary">3</span>
 </label>
 <div class="relative flex items-center">
 <span class="material-symbols-outlined absolute left-3 text-slate-400 text-sm">storefront</span>
-<input class="w-full h-2 bg-slate-200 dark:bg-slate-800 rounded-lg appearance-none cursor-pointer accent-primary" max="500" min="1" type="range" value="124"/>
+<input class="w-full h-2 bg-slate-200 dark:bg-slate-800 rounded-lg appearance-none cursor-pointer accent-primary" max="50" min="1" type="range" value="3"/>
 </div>
 <div class="flex justify-between text-[10px] text-slate-400 font-bold uppercase tracking-tighter">
-<span data-i18n="roi_1_outlet">1 Outlet</span>
-<span data-i18n="roi_500_outlets">500 Outlets</span>
+<span data-i18n="roi_1_outlet">1 家</span>
+<span data-i18n="roi_50_outlets">50 家</span>
 </div>
 </div>
-<!-- Labor Costs -->
+<!-- Monthly Chef Count -->
 <div class="flex flex-col gap-2">
-<label class="text-sm font-semibold text-slate-600 dark:text-slate-400" data-i18n="roi_current_monthly_labor_cost">Current Monthly Labor Cost ($)</label>
+<label class="text-sm font-semibold text-slate-600 dark:text-slate-400" data-i18n="roi_chefs_per_outlet">每店厨师人数</label>
+<div class="flex rounded-lg overflow-hidden border border-slate-200 dark:border-slate-800">
+<span class="flex items-center justify-center bg-slate-50 dark:bg-slate-800 px-3 text-slate-500 border-r border-slate-200 dark:border-slate-800">
+<span class="material-symbols-outlined text-sm">people</span>
+</span>
+<input class="w-full bg-white dark:bg-slate-900 border-0 focus:ring-1 focus:ring-primary text-sm p-3" placeholder="0" type="number" value="5"/>
+</div>
+</div>
+<!-- Average Chef Salary -->
+<div class="flex flex-col gap-2">
+<label class="text-sm font-semibold text-slate-600 dark:text-slate-400" data-i18n="roi_avg_chef_salary">厨师平均月薪（人民币）</label>
 <div class="flex rounded-lg overflow-hidden border border-slate-200 dark:border-slate-800">
 <span class="flex items-center justify-center bg-slate-50 dark:bg-slate-800 px-3 text-slate-500 border-r border-slate-200 dark:border-slate-800">
 <span class="material-symbols-outlined text-sm">payments</span>
 </span>
-<input class="w-full bg-white dark:bg-slate-900 border-0 focus:ring-1 focus:ring-primary text-sm p-3" placeholder="0.00" type="number" value="450000"/>
+<input class="w-full bg-white dark:bg-slate-900 border-0 focus:ring-1 focus:ring-primary text-sm p-3" placeholder="5000" type="number" value="5000"/>
 </div>
-</div>
-<!-- Energy Usage -->
-<div class="flex flex-col gap-2">
-<label class="text-sm font-semibold text-slate-600 dark:text-slate-400" data-i18n="roi_average_energy_usage_kwh_mo">Average Energy Usage (kWh/mo)</label>
-<div class="flex rounded-lg overflow-hidden border border-slate-200 dark:border-slate-800">
-<span class="flex items-center justify-center bg-slate-50 dark:bg-slate-800 px-3 text-slate-500 border-r border-slate-200 dark:border-slate-800">
-<span class="material-symbols-outlined text-sm">bolt</span>
-</span>
-<input class="w-full bg-white dark:bg-slate-900 border-0 focus:ring-1 focus:ring-primary text-sm p-3" placeholder="0.00" type="number" value="18500"/>
-</div>
+<p class="text-[11px] text-slate-400" data-i18n="roi_salary_hint">东南亚参考范围：3000-8000 元/月</p>
 </div>
 <div class="h-px bg-slate-200 dark:bg-slate-800 my-2"></div>
-<!-- Deployment Scale -->
+<!-- Expected Savings -->
 <div class="flex flex-col gap-3">
-<p class="text-sm font-semibold text-slate-600 dark:text-slate-400" data-i18n="roi_deployment_strategy">Deployment Strategy</p>
-<div class="grid grid-cols-2 gap-2">
-<button class="px-4 py-2 text-xs font-bold rounded-lg border border-primary bg-primary/10 text-primary" data-i18n="roi_phased_rollout">Phased Rollout</button>
-<button class="px-4 py-2 text-xs font-bold rounded-lg border border-slate-200 dark:border-slate-800 text-slate-500" data-i18n="roi_instant_deploy">Instant Deploy</button>
+<p class="text-sm font-semibold text-slate-600 dark:text-slate-400" data-i18n="roi_expected_savings">预期节省</p>
+<div class="space-y-3">
+<div class="flex items-center justify-between">
+<span class="text-xs text-slate-500" data-i18n="roi_labor_savings">人工节省</span>
+<span class="text-sm font-bold text-primary" data-i18n="roi_70_percent">约 70%</span>
+</div>
+<div class="flex items-center justify-between">
+<span class="text-xs text-slate-500" data-i18n="roi_energy_savings">能耗节省</span>
+<span class="text-sm font-bold text-primary" data-i18n="roi_30_percent_plus">30% 以上</span>
+</div>
 </div>
 </div>
 <button class="w-full py-4 mt-4 bg-slate-900 dark:bg-white text-white dark:text-slate-900 rounded-lg text-sm font-bold flex items-center justify-center gap-2 hover:opacity-90 transition-opacity">
 <span class="material-symbols-outlined text-sm">refresh</span>
-                                Recalculate Simulation
+                                <span data-i18n="roi_recalculate">重新计算</span>
                             </button>
 </div>
 </div>
@@ -178,8 +185,8 @@ window.addEventListener('DOMContentLoaded',function(){
 <span class="material-symbols-outlined">verified</span>
 </div>
 <div>
-<p class="text-xs font-bold uppercase opacity-80" data-i18n="roi_system_confidence">System Confidence</p>
-<h4 class="text-xl font-black" data-i18n="roi_98_4_accuracy">98.4% Accuracy</h4>
+<p class="text-xs font-bold uppercase opacity-80" data-i18n="roi_data_note">数据说明</p>
+<h4 class="text-xl font-black" data-i18n="roi_consult_for_detail">具体价格请询价</h4>
 </div>
 </div>
 </aside>
@@ -188,42 +195,42 @@ window.addEventListener('DOMContentLoaded',function(){
 <!-- KPI Cards -->
 <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
 <div class="bg-white dark:bg-slate-900/50 p-5 rounded-xl border border-slate-200 dark:border-slate-800">
-<p class="text-slate-500 text-xs font-bold uppercase tracking-wider mb-1" data-i18n="roi_projected_5y_roi">Projected 5Y ROI</p>
+<p class="text-slate-500 text-xs font-bold uppercase tracking-wider mb-1" data-i18n="roi_monthly_labor_saved">月节省人工成本</p>
 <div class="flex items-end gap-2">
-<h3 class="text-3xl font-black text-slate-900 dark:text-slate-100">342%</h3>
-<span class="text-emerald-500 text-sm font-bold flex items-center mb-1">
-<span class="material-symbols-outlined text-sm">trending_up</span> +12%
-                                </span>
+<h3 class="text-3xl font-black text-slate-900 dark:text-slate-100">¥52,500</h3>
+<span class="text-slate-500 text-sm font-bold mb-1" data-i18n="roi_per_month">/月</span>
 </div>
+<p class="text-[11px] text-slate-400 mt-1" data-i18n="roi_labor_saved_note">* 基于假设：3店 × 5人 × ¥5000 × 70%节省</p>
 </div>
 <div class="bg-white dark:bg-slate-900/50 p-5 rounded-xl border border-slate-200 dark:border-slate-800">
-<p class="text-slate-500 text-xs font-bold uppercase tracking-wider mb-1" data-i18n="roi_payback_period">Payback Period</p>
+<p class="text-slate-500 text-xs font-bold uppercase tracking-wider mb-1" data-i18n="roi_annual_savings">年度节省估算</p>
 <div class="flex items-end gap-2">
-<h3 class="text-3xl font-black text-primary">14.2</h3>
-<span class="text-slate-500 text-sm font-bold mb-1">Months</span>
+<h3 class="text-3xl font-black text-primary">¥63万+</h3>
+<span class="text-slate-500 text-sm font-bold mb-1" data-i18n="roi_per_year">/年</span>
 </div>
+<p class="text-[11px] text-slate-400 mt-1" data-i18n="roi_annual_note">* 含人工+能耗节省，不含设备投入</p>
 </div>
 <div class="bg-white dark:bg-slate-900/50 p-5 rounded-xl border border-slate-200 dark:border-slate-800">
-<p class="text-slate-500 text-xs font-bold uppercase tracking-wider mb-1" data-i18n="roi_carbon_reduction">Carbon Reduction</p>
+<p class="text-slate-500 text-xs font-bold uppercase tracking-wider mb-1" data-i18n="roi_one_pot_capacity">单锅产出</p>
 <div class="flex items-end gap-2">
-<h3 class="text-3xl font-black text-slate-900 dark:text-slate-100" data-i18n="roi_2_4k">2.4k</h3>
-<span class="text-slate-500 text-sm font-bold mb-1" data-i18n="roi_tons_co2e">Tons CO2e</span>
+<h3 class="text-3xl font-black text-slate-900 dark:text-slate-100" data-i18n="roi_500_servings">500 份</h3>
 </div>
+<p class="text-[11px] text-slate-400 mt-1" data-i18n="roi_capacity_note">* 智能炒菜机单次出品量</p>
 </div>
 </div>
 <!-- Main Chart Area -->
 <div class="bg-white dark:bg-slate-900/50 p-8 rounded-xl border border-slate-200 dark:border-slate-800 flex-1 flex flex-col min-h-[400px]">
 <div class="flex justify-between items-center mb-6">
 <div>
-<h3 class="text-xl font-bold" data-i18n="roi_5_year_cumulative_impact">5-Year Cumulative Impact</h3>
-<p class="text-sm text-slate-500" data-i18n="roi_financial_savings_vs_carbon_offset_miles">Financial savings vs. Carbon offset milestones</p>
+<h3 class="text-xl font-bold" data-i18n="roi_5_year_cumulative_impact">5年累计节省趋势</h3>
+<p class="text-sm text-slate-500" data-i18n="roi_savings_trend_note">基于当前参数假设的年度节省估算（不含设备投入）</p>
 </div>
 <div class="flex gap-2">
 <span class="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-slate-100 dark:bg-slate-800 text-[10px] font-bold uppercase">
-<span class="size-2 rounded-full bg-primary inline-block"></span> Net Profit
+<span class="size-2 rounded-full bg-primary inline-block"></span> <span data-i18n="roi_chart_labor_saved">人工节省</span>
 </span>
 <span class="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-slate-100 dark:bg-slate-800 text-[10px] font-bold uppercase">
-<span class="size-2 rounded-full bg-slate-400 inline-block"></span> Baseline
+<span class="size-2 rounded-full bg-slate-400 inline-block"></span> <span data-i18n="roi_chart_energy_saved">能耗节省</span>
 </span>
 </div>
 </div>
@@ -236,25 +243,25 @@ window.addEventListener('DOMContentLoaded',function(){
 <div class="bg-white dark:bg-slate-900/50 p-6 rounded-xl border border-slate-200 dark:border-slate-800">
 <h4 class="text-sm font-bold mb-4 flex items-center gap-2">
 <span class="material-symbols-outlined text-primary text-lg">eco</span>
-                                ESG Contribution Profile
+                                <span data-i18n="roi_green_benefits">绿色环保收益</span>
                             </h4>
 <div class="space-y-4">
 <div>
 <div class="flex justify-between text-xs mb-1">
-<span class="text-slate-500" data-i18n="roi_waste_reduction">Waste Reduction</span>
-<span class="font-bold text-primary">68%</span>
+<span class="text-slate-500" data-i18n="roi_waste_reduction">食材浪费减少</span>
+<span class="font-bold text-primary" data-i18n="roi_waste_reduction_pct">显著降低</span>
 </div>
 <div class="w-full h-1.5 bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden">
-<div class="h-full bg-primary rounded-full" style="width: 68%"></div>
+<div class="h-full bg-primary rounded-full" style="width: 60%"></div>
 </div>
 </div>
 <div>
 <div class="flex justify-between text-xs mb-1">
-<span class="text-slate-500" data-i18n="roi_green_energy_transition">Green Energy Transition</span>
-<span class="font-bold text-primary">42%</span>
+<span class="text-slate-500" data-i18n="roi_energy_savings_detail">能耗降低</span>
+<span class="font-bold text-primary" data-i18n="roi_energy_savings_pct">30%+</span>
 </div>
 <div class="w-full h-1.5 bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden">
-<div class="h-full bg-primary rounded-full" style="width: 42%"></div>
+<div class="h-full bg-primary rounded-full" style="width: 30%"></div>
 </div>
 </div>
 </div>
@@ -262,20 +269,31 @@ window.addEventListener('DOMContentLoaded',function(){
 <div class="bg-white dark:bg-slate-900/50 p-6 rounded-xl border border-slate-200 dark:border-slate-800">
 <h4 class="text-sm font-bold mb-4 flex items-center gap-2">
 <span class="material-symbols-outlined text-primary text-lg">compare_arrows</span>
-                                Manual vs. Automated Labor Cost
+                                <span data-i18n="roi_manual_vs_auto">人工 vs 自动化成本对比</span>
                             </h4>
 <div class="relative" style="height:160px;">
 <canvas id="roi-labor-compare-chart"></canvas>
 </div>
 <div class="flex gap-4 mt-3">
 <span class="flex items-center gap-1.5 text-[10px] font-bold text-slate-400 uppercase">
-<span class="inline-block size-2 rounded-full bg-slate-400"></span> Manual
+<span class="inline-block size-2 rounded-full bg-slate-400"></span> <span data-i18n="roi_manual">传统人工</span>
 </span>
 <span class="flex items-center gap-1.5 text-[10px] font-bold text-primary uppercase">
-<span class="inline-block size-2 rounded-full bg-primary"></span> Automated
+<span class="inline-block size-2 rounded-full bg-primary"></span> <span data-i18n="roi_automated">智能自动化</span>
 </span>
 </div>
 </div>
+</div>
+<!-- CTA -->
+<div class="bg-primary/5 border border-primary/20 rounded-xl p-6 flex items-center justify-between">
+<div>
+<h4 class="font-bold mb-1" data-i18n="roi_cta_title">需要精确的 ROI 分析？</h4>
+<p class="text-sm text-slate-500" data-i18n="roi_cta_desc">联系我们的团队，获取基于您实际场景的定制化投资回报报告</p>
+</div>
+<a href="/quote" class="bg-primary text-white px-6 py-3 rounded-lg font-bold text-sm hover:bg-primary/90 transition-all flex items-center gap-2">
+<span data-i18n="roi_cta_btn">获取报价</span>
+<span class="material-symbols-outlined text-sm">arrow_forward</span>
+</a>
 </div>
 </div>
 </div>
