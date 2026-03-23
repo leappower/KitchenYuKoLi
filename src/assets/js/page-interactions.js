@@ -526,19 +526,28 @@
 
   // ─── 7. ROI Calculator logic ──────────────────────────────────────────────────
   function initROICalculator() {
-    var recalcBtn = findByText('button', 'recalculate simulation')[0];
+    var recalcBtn = document.getElementById('roi-recalc-btn');
     if (!recalcBtn) return;
 
     // Input references
-    var outletsInput = document.querySelector('input[type="range"]');
-    var laborInput   = document.querySelectorAll('input[type="number"]')[0];
-    var energyInput  = document.querySelectorAll('input[type="number"]')[1];
+    var outletsInput = document.getElementById('roi-outlets');
+    var chefsInput   = document.getElementById('roi-chefs');
+    var salaryInput  = document.getElementById('roi-salary');
+    var energyInput  = document.getElementById('roi-energy');
 
-    // KPI card text targets (3 cards: ROI, Payback, Carbon)
-    var kpiValues = document.querySelectorAll('.text-3xl.font-black');
+    // KPI card text targets
+    var kpiROI      = document.getElementById('roi-kpi-roi');
+    var kpiPayback  = document.getElementById('roi-kpi-payback');
+    var kpiSavings  = document.getElementById('roi-kpi-savings');
+
+    // Benefit bars
+    var laborPct  = document.getElementById('roi-labor-pct');
+    var laborBar  = document.getElementById('roi-labor-bar');
+    var energyPct = document.getElementById('roi-energy-pct');
+    var energyBar = document.getElementById('roi-energy-bar');
 
     // Strategy toggle buttons
-    var strategyBtns = document.querySelectorAll('.grid.grid-cols-2.gap-2 button');
+    var strategyBtns = document.querySelectorAll('.roi-strategy-btn');
     var deployStrategy = 'phased'; // default
 
     // ─── §2.3 Chart.js — 5-Year Cumulative Impact 柱状图 ─────────────────────
@@ -736,67 +745,77 @@
         });
         btn.classList.add('border-primary', 'bg-primary/10', 'text-primary');
         btn.classList.remove('border-slate-200', 'text-slate-500');
-        deployStrategy = btn.textContent.trim().toLowerCase().indexOf('phased') !== -1 ? 'phased' : 'instant';
+        deployStrategy = btn.dataset.strategy || 'phased';
         runCalculation();
       });
     });
 
     // Live slider label update
     if (outletsInput) {
-      var outletsLabel = outletsInput.closest('.flex.flex-col.gap-2');
-      var outletCountSpan = outletsLabel ? outletsLabel.querySelector('.text-primary') : null;
+      var outletCountSpan = document.getElementById('roi-outlet-label');
       outletsInput.addEventListener('input', function () {
         if (outletCountSpan) outletCountSpan.textContent = outletsInput.value;
         runCalculation();
       });
     }
-    if (laborInput)  laborInput.addEventListener('input', runCalculation);
+    if (chefsInput) {
+      var chefCountSpan = document.getElementById('roi-chef-label');
+      chefsInput.addEventListener('input', function () {
+        if (chefCountSpan) chefCountSpan.textContent = chefsInput.value;
+        runCalculation();
+      });
+    }
+    if (salaryInput) salaryInput.addEventListener('input', runCalculation);
     if (energyInput) energyInput.addEventListener('input', runCalculation);
 
     recalcBtn.addEventListener('click', function () {
-      // §3.2 Skeleton screen — show 0.8 s loading state on KPI cards
-      kpiValues.forEach(function (kv) {
-        kv.dataset.realContent = kv.textContent;
-        kv.innerHTML = '<span class="skeleton" style="display:inline-block;width:4rem;height:1.5rem;border-radius:0.25rem;"></span>';
-      });
-      setTimeout(function () {
-        kpiValues.forEach(function (kv) {
-          kv.innerHTML = kv.dataset.realContent || kv.innerHTML;
-        });
-        runCalculation();
-        safeCall('showNotification', ['ROI recalculated!', 'success']);
-      }, 800);
+      runCalculation();
+      safeCall('showNotification', ['已重新计算', 'success']);
     });
 
     function runCalculation() {
-      var outlets = parseInt((outletsInput && outletsInput.value) || 124, 10);
-      var labor   = parseFloat((laborInput && laborInput.value) || 450000);
-      var energy  = parseFloat((energyInput && energyInput.value) || 18500);
+      var outlets = parseInt((outletsInput && outletsInput.value) || 5, 10);
+      var chefs   = parseInt((chefsInput && chefsInput.value) || 3, 10);
+      var salary  = parseFloat((salaryInput && salaryInput.value) || 5000);
+      var energy  = parseFloat((energyInput && energyInput.value) || 8000);
 
-      // Simplified Yukoli ROI model
-      var laborSavingRate  = deployStrategy === 'phased' ? 0.35 : 0.40;
-      var energySavingRate = 0.22;
-      var energyRate       = 0.12; // $0.12 per kWh
+      // YuKoLi ROI model (RMB-based)
+      var laborSavingRate  = deployStrategy === 'phased' ? 0.70 : 0.70; // 节省人工70%
+      var energySavingRate = 0.30; // 节能30%+
+      var machinesPerOutlet = Math.ceil(chefs * laborSavingRate); // 需要的机器数
+      var machineCost = 30000; // 单台智能炒菜机均价估算(人民币)
+      var totalMachineCost = outlets * machinesPerOutlet * machineCost;
 
-      var monthlyLaborSave  = labor * laborSavingRate;
-      var monthlyEnergySave = energy * energySavingRate * energyRate;
+      var monthlyLaborSave  = chefs * salary * laborSavingRate; // 每店每月节省人工
+      var monthlyEnergySave = energy * energySavingRate; // 每店每月节省能源
       var monthlySavings    = (monthlyLaborSave + monthlyEnergySave) * outlets;
       var annualSavings     = monthlySavings * 12;
-      var hardwareCost      = outlets * 18000;
-      var paybackMonths     = hardwareCost / monthlySavings;
-      var fiveYearROI       = Math.round((annualSavings * 5 / hardwareCost) * 100);
-      var carbonTons        = Math.round(energy * energySavingRate * outlets * 12 * 0.0005);
+      var paybackMonths     = totalMachineCost / monthlySavings;
+      var fiveYearROI       = Math.round((annualSavings * 5 / totalMachineCost) * 100);
 
-      // Update KPI cards with number counter animation (§3.2)
-      if (kpiValues[0]) animateNumber(kpiValues[0], Math.max(0, fiveYearROI), 500, '%');
-      if (kpiValues[1]) animateNumber(kpiValues[1], Math.min(99, Math.round(paybackMonths * 10) / 10), 500, '');
-      if (kpiValues[2]) {
-        var carbonK = carbonTons / 1000;
-        animateNumber(kpiValues[2], carbonK, 500, 'k');
+      // Update KPI cards
+      if (kpiROI) animateNumber(kpiROI, Math.max(0, fiveYearROI), 500, '%');
+      if (kpiPayback) animateNumber(kpiPayback, Math.min(99, Math.round(paybackMonths * 10) / 10), 500, '');
+      if (kpiSavings) {
+        var savingsWan = annualSavings / 10000;
+        animateNumber(kpiSavings, Math.round(savingsWan), 500, '');
+      }
+
+      // Update benefit bars
+      var totalMonthly = monthlyLaborSave + monthlyEnergySave;
+      if (laborPct && laborBar) {
+        var lp = Math.round((monthlyLaborSave / totalMonthly) * 100);
+        laborPct.textContent = lp + '%';
+        laborBar.style.width = lp + '%';
+      }
+      if (energyPct && energyBar) {
+        var ep = Math.round((monthlyEnergySave / totalMonthly) * 100);
+        energyPct.textContent = ep + '%';
+        energyBar.style.width = ep + '%';
       }
 
       // §2.3 Update Chart.js dynamic charts
-      updateCharts(annualSavings, labor, laborSavingRate);
+      updateCharts(annualSavings, chefs * salary, laborSavingRate);
 
     }
 

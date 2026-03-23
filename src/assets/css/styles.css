@@ -331,17 +331,18 @@ html.dark .md-content code {
 
 /* ─── §3.2 Button Hover — CTA lift & deepen ─────────────────────────────── */
 
-/* Applied via JS to .btn-cta / .btn-primary classes */
+/* ─── §3.4 Primary Button Hover ───────────────────────────────────────── */
+/* 所有 bg-primary 按钮的 hover 效果：加深背景色 + 微上浮 + 阴影
+   通过 Tailwind 的 group/peer 机制或直接 class 触发 */
 .btn-cta,
-.btn-primary {
-  transition: background-color 200ms ease, transform 200ms ease, box-shadow 200ms ease;
-}
-
-.btn-cta:hover,
-.btn-primary:hover {
+.btn-primary,
+a.bg-primary:hover,
+button.bg-primary:hover,
+a.bg-primary[class*="hover:"]:hover,
+button.bg-primary[class*="hover:"]:hover {
   background-color: #d4521a !important;
-  transform: translateY(-4px) !important;
-  box-shadow: 0 6px 16px rgb(242 101 34 / 0.4) !important;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgb(242 101 34 / 0.35);
 }
 
 /* ─── §4 Form Inline Validation ──────────────────────────────────────────── */
