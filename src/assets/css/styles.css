@@ -114,11 +114,34 @@ html.dark body {
 .border-primary   { border-color: var(--color-primary); }
 
 /* ─── Typography Scale ───────────────────────────────────────────── */
+/* 统一排版规范 - 三端(PC/Tablet/Mobile)遵循此体系
+   字体: Public Sans (全局), font-weight: 400/600/700/900
+   标题层级:
+     h1 (Hero): PC 6xl→5xl→4xl | Tablet 4xl→3xl | Mobile 3xl→2xl
+     h2 (Section): PC 4xl | Tablet 3xl | Mobile 2xl
+     h3 (Card): PC 2xl | Tablet xl | Mobile lg
+     h4 (Sub): PC xl | Mobile lg
+   正文: text-base (PC) | text-sm (Mobile)
+   辅助: text-sm (PC) | text-xs (Mobile)
+   强调色: text-primary (#ec5b13)
+   正文色: text-slate-900 dark:text-white
+   辅助色: text-slate-500 dark:text-slate-400
+*/
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-display);
   font-weight: 900;
   line-height: 1.1;
   letter-spacing: -0.02em;
+}
+
+/* Section 标题统一: PC 4xl / Tablet 3xl / Mobile 2xl */
+h2.section-title {
+  font-size: clamp(1.5rem, 3vw, 2.25rem); /* 2xl → 4xl */
+}
+
+/* 卡片标题统一: PC 2xl / Mobile xl */
+h3.card-title {
+  font-size: clamp(1.125rem, 2vw, 1.5rem); /* xl → 2xl */
 }
 
 /* ─── Links ──────────────────────────────────────────────────────── */
