@@ -8,7 +8,7 @@
  * Usage in HTML (PC variant):
  *   <navigator data-component="navigator"
  *        data-variant="pc"
- *        data-active="catalog"
+ *        data-active="products"
  *        data-search="true"
  *        data-search-i18n="search_placeholder"
  *        data-cta-text-key="nav_get_quote"
@@ -25,9 +25,10 @@
  *
  * Configuration attributes:
  *   data-variant       {string}  Layout variant: "pc" | "tablet" (default: "pc")
- *   data-active        {string}  Nav item to highlight: "home" | "catalog" |
- *                                "case-studies" | "pdp" | "support" | "esg" |
- *                                "thank-you" | "landing" | "quote" | "roi" |
+ *   data-active        {string}  Nav item to highlight: "home" | "products" |
+ *                                "applications" | "solutions" | "support" |
+ *                                "case-studies" | "roi" | "pdp" | "esg" |
+ *                                "thank-you" | "landing" | "quote" |
  *                                "" (none — page not in main nav)
  *   data-search        {string}  Show search box: "true" | "false" (default: "false")
  *   data-search-i18n   {string}  i18n key for search placeholder
@@ -49,14 +50,15 @@
 
   // Base nav item definitions — use directory URLs for SSG (/home/, /products/, etc.)
   // GitHub Pages serves each route as a directory with index.html
-  // L1 菜单 — 5 项新架构
-  // Products / Solutions / Service&Support / About / Contact
+  // L1 菜单 — 6 项架构
+  // Products / Applications / Solutions / Service / About / Contact
   var NAV_ITEMS = [
-    { key: 'nav_products',  path: '/products/',  id: 'products',  hasDropdown: true },
-    { key: 'nav_solutions', path: '/solutions/', id: 'solutions', hasDropdown: true },
-    { key: 'nav_support',   path: '/support/',   id: 'support',   hasDropdown: true },
-    { key: 'nav_about',     path: '/about/',     id: 'about',     hasDropdown: true },
-    { key: 'nav_contact',   path: '/contact/',   id: 'contact',   hasDropdown: true },
+    { key: 'nav_products',     path: '/products/',     id: 'products',     hasDropdown: true },
+    { key: 'nav_applications', path: '/applications/', id: 'applications', hasDropdown: true },
+    { key: 'nav_solutions',    path: '/solutions/',    id: 'solutions',    hasDropdown: true },
+    { key: 'nav_service',      path: '/support/',      id: 'support',      hasDropdown: true },
+    { key: 'nav_about',        path: '/about/',        id: 'about',        hasDropdown: true },
+    { key: 'nav_contact',      path: '/contact/',      id: 'contact',      hasDropdown: true },
   ];
 
   
@@ -736,7 +738,7 @@
   /**
    * Update the active navigation item without full re-render.
    * Used by SPA shell after page navigation to highlight the correct nav item.
-   * @param {string} activeId - The active nav item id (e.g. "home", "catalog", "case-studies", "support")
+   * @param {string} activeId - The active nav item id (e.g. "home", "products", "case-studies", "support")
    */
   function updateActive(activeId) {
     activeId = activeId || '';

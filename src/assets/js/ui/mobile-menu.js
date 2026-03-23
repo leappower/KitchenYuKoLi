@@ -32,20 +32,25 @@
       ],
     },
     {
-      key: 'nav_solutions', href: '/solutions/', id: 'solutions',
-      icon: 'build',
+      key: 'nav_applications', href: '/applications/', id: 'applications',
+      icon: 'apps',
       children: [
-        { key: 'nav_applications_fastfood',      icon: 'ramen_dining',          href: '/applications/' },
-        { key: 'nav_applications_hotpot',        icon: 'local_fire_department', href: '/applications/' },
-        { key: 'nav_applications_cloud_kitchen', icon: 'delivery_dining',       href: '/applications/' },
-        { key: 'nav_applications_canteen',       icon: 'restaurant',            href: '/applications/' },
-        { key: 'nav_applications_thai',          icon: 'public',                href: '/applications/' },
-        { key: 'nav_cases', icon: 'monitoring', href: '/cases/' },
-        { key: 'nav_roi',   icon: 'calculate',  href: '/roi/', badge: true },
+        { key: 'nav_applications_fastfood',      icon: 'ramen_dining',          href: '/applications/fast-food/' },
+        { key: 'nav_applications_hotpot',        icon: 'local_fire_department', href: '/applications/hotpot/' },
+        { key: 'nav_applications_cloud_kitchen', icon: 'delivery_dining',       href: '/applications/cloud-kitchen/' },
+        { key: 'nav_applications_canteen',       icon: 'restaurant',            href: '/applications/canteen/' },
+        { key: 'nav_applications_thai',          icon: 'public',                href: '/applications/southeast-asian/' },
       ],
     },
     {
-      key: 'nav_support', href: '/support/', id: 'support',
+      key: 'nav_solutions', href: '/solutions/', id: 'solutions',
+      icon: 'build',
+      children: [
+        { key: 'nav_automation', icon: 'trending_up', href: '/solutions/automation/' },
+      ],
+    },
+    {
+      key: 'nav_service', href: '/support/', id: 'support',
       icon: 'support_agent',
       children: [
         { key: 'nav_support_installation',  icon: 'construction',    href: '/support/' },
@@ -215,23 +220,51 @@
       'html.dark .mobile-menu-l2-item.is-whatsapp .mobile-menu-l2-icon { background: rgba(37,211,102,.20); }',
       '.mobile-menu-l2-item.is-whatsapp .mobile-menu-l2-icon .material-symbols-outlined { color: #25d366; }',
 
-      /* ── Bottom WhatsApp Bar ── */
-      '.mobile-menu-wa-bar {',
-      '  padding: 16px 20px; border-top: .5px solid rgba(60,60,67,.12);',
-      '  margin-top: 8px;',
+      /* ── Bottom CTA Bar (Contact + ROI) ── */
+      '.mobile-menu-cta-bar {',
+      '  position: fixed; bottom: 0; left: 0; right: 0;',
+      '  padding: 12px 16px calc(12px + env(safe-area-inset-bottom)) 16px;',
+      '  background: rgba(246,246,248,.98);',
+      '  backdrop-filter: blur(40px) saturate(200%);',
+      '  -webkit-backdrop-filter: blur(40px) saturate(200%);',
+      '  border-top: .5px solid rgba(60,60,67,.12);',
+      '  display: flex; gap: 12px;',
+      '  z-index: 920;',
       '}',
-      'html.dark .mobile-menu-wa-bar { border-color: rgba(235,235,245,.15); }',
-      '.mobile-menu-wa-btn {',
-      '  display: flex; align-items: center; justify-content: center; gap: 10px;',
+      'html.dark .mobile-menu-cta-bar {',
+      '  background: rgba(44,44,46,.98);',
+      '  border-color: rgba(235,235,245,.15);',
+      '}',
+      '.mobile-menu-cta-btn {',
+      '  flex: 1;',
+      '  display: flex; align-items: center; justify-content: center; gap: 8px;',
       '  padding: 14px; border-radius: 12px; border: none;',
-      '  background: #25d366; color: #fff;',
       '  font-size: 15px; font-weight: 600; cursor: pointer;',
       '  -webkit-tap-highlight-color: transparent;',
       '  text-decoration: none;',
-      '  transition: background .15s ease;',
+      '  transition: all .15s ease;',
       '}',
-      '.mobile-menu-wa-btn:active { background: #1da851; }',
-      '.mobile-menu-wa-btn .material-symbols-outlined { font-size: 20px; }',
+      '.mobile-menu-cta-btn.primary {',
+      '  background: #ec5b13; color: #fff;',
+      '}',
+      '.mobile-menu-cta-btn.primary:hover, .mobile-menu-cta-btn.primary:active {',
+      '  background: #d54f0f;',
+      '}',
+      '.mobile-menu-cta-btn.secondary {',
+      '  background: rgba(236,91,19,.10); color: #ec5b13;',
+      '}',
+      'html.dark .mobile-menu-cta-btn.secondary {',
+      '  background: rgba(236,91,19,.18); color: #ff8c5a;',
+      '}',
+      '.mobile-menu-cta-btn.secondary:hover, .mobile-menu-cta-btn.secondary:active {',
+      '  background: rgba(236,91,19,.20); color: #d54f0f;',
+      '}',
+      'html.dark .mobile-menu-cta-btn.secondary:hover, html.dark .mobile-menu-cta-btn.secondary:active {',
+      '  background: rgba(236,91,19,.25); color: #ff9f70;',
+      '}',
+      '.mobile-menu-cta-btn .material-symbols-outlined { font-size: 20px; }',
+      '/* Add padding to panel content to account for fixed CTA bar */',
+      '.mobile-menu-panel { padding-bottom: 100px !important; }',
 
       /* ── Smart Header ── */
       '#mobile-header.header-hidden { transform: translateY(-100%); }',
@@ -394,16 +427,20 @@
       '</div>';
     }).join('\n');
 
-    // Bottom WhatsApp bar
-    var waBarHtml =
-      '<div class="mobile-menu-wa-bar">' +
-        '<a class="mobile-menu-wa-btn" href="https://wa.me/XXXXXXXXXXX" target="_blank" rel="noopener noreferrer">' +
-          '<span class="material-symbols-outlined">chat</span>' +
-          '<span data-i18n="nav_contact_whatsapp_chat">Chat on WhatsApp</span>' +
+    // Bottom CTA bar (Contact + ROI) - Fixed at bottom for conversion
+    var ctaBarHtml =
+      '<div class="mobile-menu-cta-bar">' +
+        '<a class="mobile-menu-cta-btn secondary" href="/contact/" data-nav="/contact/">' +
+          '<span class="material-symbols-outlined">mail</span>' +
+          '<span data-i18n="btn_contact_us">Contact Us</span>' +
+        '</a>' +
+        '<a class="mobile-menu-cta-btn primary" href="/roi/" data-nav="/roi/">' +
+          '<span class="material-symbols-outlined">calculate</span>' +
+          '<span data-i18n="btn_roi_calc">ROI Calculator</span>' +
         '</a>' +
       '</div>';
 
-    return headerHtml + menuHtml + waBarHtml;
+    return headerHtml + menuHtml + ctaBarHtml;
   }
 
   /* ───────────────────────── OPEN / CLOSE ───────────────────────── */
@@ -550,6 +587,19 @@
         // If has L2, accordion handles it; otherwise navigate
         if (!l2 || l2.children.length === 0) {
           closeMenu();
+        }
+      });
+    }
+
+    // CTA bar buttons click handling
+    var ctaBtns = panel.querySelectorAll('.mobile-menu-cta-btn[data-nav]');
+    for (var n = 0; n < ctaBtns.length; n++) {
+      ctaBtns[n].addEventListener('click', function (e) {
+        var href = this.getAttribute('href') || this.getAttribute('data-nav');
+        closeMenu();
+        if (href && global.SpaRouter) {
+          e.preventDefault();
+          global.SpaRouter.navigate(href);
         }
       });
     }

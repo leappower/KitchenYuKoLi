@@ -9,32 +9,35 @@ const webpack = require('webpack');
  * Scan src/pages/ and return HtmlWebpackPlugin instances for every .html file.
  * Files at src/pages/<section>/index.html → output filename: <section>/index.html
  * Files at src/pages/home/index.html → output filename: index.html  (root entry)
+ * Supports nested directories (e.g., src/pages/solutions/fast-food/)
  */
 function buildHtmlPlugins() {
   const pagesDir = path.join(__dirname, 'src/pages');
   const plugins = [];
 
   // Directories excluded from production build (internal/marketing assets)
-  const EXCLUDED_SECTIONS = new Set(['emails', 'linkedin']);
+  const EXCLUDED_SECTIONS = new Set(['emails', 'linkedin', 'applications']);
 
-  for (const section of fs.readdirSync(pagesDir)) {
-    const sectionPath = path.join(pagesDir, section);
-    if (!fs.statSync(sectionPath).isDirectory()) continue;
-    if (EXCLUDED_SECTIONS.has(section)) continue;
+  function scanDir(dir, relativePath) {
+    for (const entry of fs.readdirSync(dir)) {
+      const entryPath = path.join(dir, entry);
+      const entryRelativePath = relativePath ? `${relativePath}/${entry}` : entry;
+      const stat = fs.statSync(entryPath);
 
-    for (const file of fs.readdirSync(sectionPath)) {
-      if (!file.endsWith('.html')) continue;
-
-      const template = `./src/pages/${section}/${file}`;
-      // Output pages under /pages/<section>/<file> so runtime links like
-      // /pages/catalog/index.html resolve consistently in production.
-      // SPA shell remains at root `index.html` (handled separately).
-      const filename = `pages/${section}/${file}`;
-
-      plugins.push(new HtmlWebpackPlugin({ template, filename, inject: false }));
+      if (stat.isDirectory()) {
+        // Skip excluded directories
+        if (EXCLUDED_SECTIONS.has(entry)) continue;
+        // Recursively scan subdirectories
+        scanDir(entryPath, entryRelativePath);
+      } else if (entry.endsWith('.html')) {
+        const template = `./src/pages/${entryRelativePath}`;
+        const filename = `pages/${entryRelativePath}`;
+        plugins.push(new HtmlWebpackPlugin({ template, filename, inject: false }));
+      }
     }
   }
 
+  scanDir(pagesDir, '');
   return plugins;
 }
 

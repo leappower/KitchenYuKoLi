@@ -19,13 +19,12 @@
   var WHATSAPP_NUMBER = (global.Contacts && global.Contacts.whatsapp) || '16478158194';
   var PAGES = Object.freeze({
     home:           '/home/',
-    catalog:        '/products/',
+    products:       '/products/',
     caseStudies:    '/cases/',
     caseDownload:   '/cases/download/',
     quote:          '/quote/',
     thankYou:       '/thank-you/',
     landing:        '/landing/',
-    products:       '/products/',
     support:        '/support/',
     esg:            '/esg/',
     roiCalculator:  '/roi/',
@@ -106,20 +105,20 @@
   function wireNavLinks() {
     // Priority 1: i18n key to page mapping (language-agnostic)
     var i18nLinkMap = {
-      footer_hardware_title: PAGES.catalog,
-      nav_hardware: PAGES.catalog,
+      footer_hardware_title: PAGES.products,
+      nav_hardware: PAGES.products,
       nav_solutions: PAGES.home,
       nav_case_studies: PAGES.caseStudies,
       footer_support_title: PAGES.support,
       nav_support: PAGES.support,
       nav_contact: PAGES.quote,
       footer_case_studies: PAGES.caseStudies,
-      quote_equipment: PAGES.catalog,
+      quote_equipment: PAGES.products,
     };
 
     // Priority 2: Text-based mapping (fallback, language-dependent)
     var textLinkMap = {
-      'Hardware': PAGES.catalog,
+      'Hardware': PAGES.products,
       'Solutions': PAGES.products,
       'IoT OS': PAGES.support,
       'IoT': PAGES.support,
@@ -128,11 +127,11 @@
       'About': PAGES.home,
       'Support': PAGES.support,
       'Dashboard': PAGES.home,
-      'Inventory': PAGES.catalog,
-      'Analytics': PAGES.catalog,
-      'Products': PAGES.catalog,
+      'Inventory': PAGES.products,
+      'Analytics': PAGES.products,
+      'Products': PAGES.products,
       'Home': PAGES.home,
-      'Equipment': PAGES.catalog,
+      'Equipment': PAGES.products,
       'Insights': PAGES.caseStudies,
       'Config': PAGES.quote,
       'ESG Report': PAGES.esg,
@@ -260,7 +259,7 @@
       var isActive = false;
       if (label === 'home' && (path === '/' || path.indexOf('home') !== -1 || path.indexOf('index') !== -1)) {
         isActive = true;
-      } else if ((label === 'hardware' || label === 'equipment' || label === 'inventory') && path.indexOf('catalog') !== -1) {
+      } else if ((label === 'hardware' || label === 'equipment' || label === 'inventory') && path.indexOf('products') !== -1) {
         isActive = true;
       } else if (label === 'quotes' && path.indexOf('quote') !== -1) {
         isActive = true;
@@ -303,14 +302,14 @@
       });
     }
 
-    // Catalog page: View Summary button
-    if (path.indexOf('/products/') !== -1 || path.indexOf('/catalog') !== -1) {
+    // Products page: View Summary button
+    if (path.indexOf('/products/') !== -1) {
       on('button', function (e) {
         var key = e.currentTarget.getAttribute('data-i18n') || '';
         var text = e.currentTarget.textContent.trim();
 
         // Scroll to download form on View Summary button
-        if (key === 'catalog_view_summary' || text === 'View Summary') {
+        if (key === 'products_view_summary' || text === 'View Summary') {
           scrollTo('download-form');
         }
       });
@@ -323,7 +322,7 @@
     wireBottomNav();
   }
 
-  function initCatalog() {
+  function initProducts() {
     setupPageSpecificActions();
   }
   /* ═══════════════════════════════════════════════════════════════════
@@ -365,8 +364,8 @@
     if (path === '/' || path.indexOf('/home/') !== -1 || path.indexOf('/index') !== -1) {
       initHome();
     }
-    if (path.indexOf('/products/') !== -1 || path.indexOf('/catalog') !== -1) {
-      initCatalog();
+    if (path.indexOf('/products/') !== -1) {
+      initProducts();
     }
     // Other pages can be extended as needed
   }

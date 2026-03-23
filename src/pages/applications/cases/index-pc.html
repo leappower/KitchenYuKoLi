@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+
+<html class="light" lang="zh-CN"><head>
+<!-- ═══ Responsive Redirect (injected by patch-responsive-redirect.py) ═══ -->
+<link rel="canonical" href="/cases/"/>
+<link rel="alternate" media="only screen and (max-width: 767px)"
+      href="/cases/index-mobile.html"/>
+<link rel="alternate" media="only screen and (min-width: 768px) and (max-width: 1279px)"
+      href="/cases/index-tablet.html"/>
+<link rel="alternate" media="only screen and (min-width: 1280px)"
+      href="/cases/index-pc.html"/>
+<script>
+/* Responsive redirect — runs before render, no flash */
+(function(){
+  // 防止 bfcache 恢复时重复 redirect
+  if (window.__redirectChecked) return;
+  window.__redirectChecked = true;
+
+  // 处理 clean-url 参数:重定向后清理 URL 为干净的目录 URL
+  var urlParams = new URLSearchParams(location.search);
+  var cleanUrl = urlParams.get('clean-url');
+  if (cleanUrl) {
+    console.log('[Responsive Redirect] Cleaning URL to:', cleanUrl);
+    history.replaceState({}, '', cleanUrl);
+    return;
+  }
+
+  // SPA 导航时跳过响应式重定向
+  console.log('[Responsive Redirect] Checking SPA flag: window.__spaNavigating =', window.__spaNavigating);
+  if (window.__spaNavigating) {
+    console.log('[Responsive Redirect] SPA navigation detected, skipping redirect');
+    return;
+  }
+
+  // 使用 DeviceUtils 统一管理设备判断
+  var currentFile = location.pathname.split('/').pop();
+  console.log('[Responsive Redirect] Current file:', currentFile, 'Pathname:', location.pathname);
+
+  // 当访问目录 URL(以 / 结尾)时,不要重定向(SPA 导航使用干净的目录 URL)
+  if (window.DeviceUtils && window.DeviceUtils.isDirectoryURL()) {
+    console.log('[Responsive Redirect] Directory URL detected, skipping redirect');
+    return;
+  }
+
+  // 使用 DeviceUtils 判断是否需要重定向
+  if (window.DeviceUtils && window.DeviceUtils.shouldRedirect(currentFile)) {
+    var deviceType = window.DeviceUtils.getDeviceType();
+    var targetFile;
+
+    if (deviceType === window.DeviceUtils.DeviceType.MOBILE) {
+      targetFile = 'index-mobile.html';
+    } else if (deviceType === window.DeviceUtils.DeviceType.TABLET) {
+      targetFile = 'index-tablet.html';
+    } else {
+      targetFile = 'index-pc.html';
+    }
+
+    console.log('[Responsive Redirect] Redirecting to:', targetFile);
+    location.href = targetFile;
+    return;
+  }
+
+  console.log('[Responsive Redirect] No redirect needed');
+})();
+</script>
+<!-- ═══ End Responsive Redirect ═══ -->
+
+
+<meta charset="utf-8"/>
+<meta name="description" content="Yukoli case studies: real-world results from industrial smart kitchen deployments. See how leading restaurant chains reduced labor costs and improved food consistency.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Yukoli | Case Studies - Industrial Smart Kitchen Solutions">
+<meta property="og:description" content="Yukoli case studies: real-world results from industrial smart kitchen deployments. See how leading restaurant chains reduced labor costs and improved food consistency.">
+<meta property="og:url" content="https://www.kitchen.yukoli.com/cases/index-pc.html">
+<meta property="og:image" content="https://www.kitchen.yukoli.com/assets/images/og-case-studies.webp">
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Yukoli | Case Studies - Industrial Smart Kitchen Solutions</title>
+<link rel="preload" href="/assets/fonts/local-fonts.css" as="style">
+<link rel="preload" href="/assets/css/styles.css" as="style">
+  <link rel="preload" href="/assets/css/tailwind.css" as="style">
+<link rel="preload" href="/assets/fonts/public-sans-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/fonts/public-sans-latin-700-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link href="/assets/fonts/local-fonts.css" rel="stylesheet"/>
+<link rel="stylesheet" href="/assets/css/styles.css">
+  <link rel="stylesheet" href="/assets/css/tailwind.css">
+<link rel="stylesheet" href="/assets/css/z-index-system.css">
+<link rel="stylesheet" href="/assets/css/performance-optimized.css"/>
+<!-- Dark mode: apply saved preference before first paint (prevents flash) -->
+  <script>(function(){
+if(localStorage.getItem('darkMode')==='true')document.documentElement.classList.add('dark')})()</script>
+<link rel="stylesheet" href="/assets/css/skeleton.css"/>
+<link rel="icon" href="/assets/images/logo_header.webp" type="image/webp">
+
+<script>
+window.addEventListener('DOMContentLoaded',function(){
+  setTimeout(function(){
+    var m=document.getElementById('spa-content');
+    if(!m)return;
+    var s=getComputedStyle(m);
+    var ok=s.maxWidth==='none'||parseInt(s.maxWidth)>=1920;
+    console.log('%c['+location.pathname.replace(//$/,'')+'] main: max-w='+s.maxWidth+' px='+s.paddingLeft+'/'+s.paddingRight+' w='+m.offsetWidth,ok?'color:green':'color:orange;font-weight:bold');
+    if(!ok)console.warn('Expected max-width: 1920px, got:',s.maxWidth);
+  },200);
+});
+</script>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 antialiased transition-colors duration-300 overflow-x-hidden">
+<!-- Top Navigation Bar -->
+<!-- ═══ Navigator Component ═══ -->
+<navigator data-component="navigator"
+  data-variant="pc"
+  data-active="case-studies"
+  data-cta-text-key="nav_get_quote"
+  data-cta-href="/quote"></navigator>
+<main id="spa-content">
+<!-- Hero Section -->
+<section class="flex flex-col lg:flex-row items-center py-12 gap-12 mb-24">
+<div class="w-full lg:w-1/2 flex flex-col gap-6">
+<div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-bold uppercase tracking-wider w-fit">
+<span class="material-symbols-outlined text-sm">public</span>
+                    Global Impact
+                </div>
+<h1 class="text-5xl lg:text-7xl font-black leading-tight tracking-tighter">
+                    Global Success <br/><span class="text-primary">Stories</span>
+</h1>
+<p class="text-lg text-slate-600 dark:text-slate-400 max-w-xl">
+                    Empowering the world's leading culinary chains through industrial-grade automation and IoT intelligence. See how we transform kitchen efficiency.
+                </p>
+<div class="flex items-center gap-4">
+<button class="bg-primary text-white px-8 py-4 rounded-xl font-bold flex items-center gap-2 hover:shadow-lg hover:shadow-primary/20 transition-all">
+                        Explore All Stories <span class="material-symbols-outlined">arrow_downward</span>
+</button>
+</div>
+</div>
+<div class="w-full lg:w-1/2 relative">
+<div class="absolute -inset-4 bg-primary/20 rounded-2xl blur-2xl group-hover:bg-primary/30 transition-all"></div>
+<div class="relative w-full h-[400px] bg-slate-200 dark:bg-slate-800 rounded-2xl overflow-hidden border border-slate-300 dark:border-slate-700">
+<img loading="lazy" alt="Modern Industrial Smart Kitchen" class="w-full h-full object-cover" data-alt="High-tech stainless steel industrial kitchen with robots" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCLuBoqVuQKFqRZ5Vat73BTpJyGYz_fz5nvYZ-53DRmRbIhb3eHeax1VUoPitic9JIR_nK_Hq1b4X9nyGv70OhOu3DQGMrmOUpcDxM6A5vo-pGNmg5c-fNVUUVWDAh3AYmCmG79EqJvZ1nHfeqV8Ma0T-bUvJ0LT54xeLIDd_URlDZ6f0hRf-IhZZcleIr9jiG2SAcpIABB37AleKiYMkFOYxArczs_y-0AK1jt5yRKuRTgmiWuV6SToR1YWP9lW2i310MWumHSiFYq" width="800" height="600">
+<div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end p-8">
+<div class="flex items-center gap-4 text-white">
+<div class="size-12 rounded-full border-2 border-white/50 bg-white/20 backdrop-blur flex items-center justify-center">
+<span class="material-symbols-outlined">play_circle</span>
+</div>
+<div>
+<p class="text-sm font-bold" data-i18n="case_studies_watch_video_case_study">Watch Video Case Study</p>
+<p class="text-xs opacity-80" data-i18n="case_studies_the_future_of_automated_stir_frying">The Future of Automated Stir-frying</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Strategy Filter & Ratio Distribution -->
+<section class="mb-16">
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-8">
+<div>
+<h2 class="text-2xl font-bold mb-2" data-i18n="case_studies_portfolio_strategy">Portfolio Strategy</h2>
+<p class="text-slate-500" data-i18n="case_studies_filter_deployments_by_core_technology_ap">Filter deployments by core technology application</p>
+</div>
+<div class="flex flex-wrap gap-3">
+<button class="px-6 py-2.5 rounded-xl bg-primary text-white font-bold text-sm" data-i18n="case_studies_all_cases">All Cases</button>
+<button class="px-6 py-2.5 rounded-xl bg-slate-200 dark:bg-slate-800 hover:bg-primary/10 transition-colors font-bold text-sm" data-i18n="products_smart_hardware">Smart Hardware</button>
+<button class="px-6 py-2.5 rounded-xl bg-slate-200 dark:bg-slate-800 hover:bg-primary/10 transition-colors font-bold text-sm" data-i18n="case_studies_integrated_solutions">Integrated Solutions</button>
+<button class="px-6 py-2.5 rounded-xl bg-slate-200 dark:bg-slate-800 hover:bg-primary/10 transition-colors font-bold text-sm" data-i18n="products_iot_intelligence">IoT Intelligence</button>
+</div>
+</div>
+<!-- Ratio Visualization -->
+<div class="w-full h-3 rounded-full overflow-hidden flex mb-4">
+<div class="h-full bg-primary w-1/2" title="Smart Hardware (50%)"></div>
+<div class="h-full bg-slate-400 dark:bg-slate-600 w-3/10" style="width: 30%" title="Integrated Solutions (30%)"></div>
+<div class="h-full bg-slate-900 dark:bg-slate-100 w-1/5" style="width: 20%" title="IoT Intelligence (20%)"></div>
+</div>
+<div class="flex justify-between text-[10px] font-bold uppercase tracking-widest text-slate-400">
+<span data-i18n="case_studies_50_smart_hardware">50% Smart Hardware</span>
+<span data-i18n="case_studies_30_integrated_solutions">30% Integrated Solutions</span>
+<span data-i18n="case_studies_20_iot_intelligence">20% IoT Intelligence</span>
+</div>
+</section>
+<!-- Case Study Grid -->
+<section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-24">
+<!-- Card 1 -->
+<div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl overflow-hidden group hover:border-primary/50 transition-all">
+<div class="h-48 relative">
+<img loading="lazy" alt="Stir Fry Automation" class="w-full h-full object-cover" data-alt="Automated robotic arm cooking in a wok" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAFsg3P7imWwAI5fWRLRIfdNokiRvFXrLbnJFQtF7Q2JRv7XsiVcohM3jovW-5p4r_xEeVxmbf87Vfy-USzwXr7bYfBe2whEbw8lZDpU9EWiEFpDkSbPBJINpF3EFevjGi5X75h-pDVjB-GQSuP3v8XtOi6yhqEuvBKokoskkxB1ogXzDVm5zAXZpX3byCB3NT7VqwBje9uFpgRxv-1rLbx944xSSN52d6TkYD-CGQ4cx0MCbeyz5ev2vQY9VSD2uf5kt2hc6qYngGc" width="800" height="600">
+<div class="absolute top-4 left-4 bg-white/90 dark:bg-slate-900/90 p-2 rounded-lg backdrop-blur">
+<span class="material-symbols-outlined text-primary">restaurant</span>
+</div>
+</div>
+<div class="p-6">
+<h3 class="text-xl font-bold mb-2" data-i18n="case_studies_global_stir_fry_network">Global Stir-Fry Network</h3>
+<p class="text-sm text-slate-500 mb-6" data-i18n="case_studies_implementing_automated_wok_tech_across_2">Implementing automated wok-tech across 200+ fast-casual locations in SE Asia.</p>
+<div class="grid grid-cols-3 gap-2 py-4 border-y border-slate-100 dark:border-slate-800 mb-6">
+<div class="text-center">
+<p class="text-lg font-black text-primary">35%</p>
+<p class="text-[10px] font-bold text-slate-400 uppercase" data-i18n="case_studies_labor">Labor ↓</p>
+</div>
+<div class="text-center border-x border-slate-100 dark:border-slate-800 px-2">
+<p class="text-lg font-black text-primary">22%</p>
+<p class="text-[10px] font-bold text-slate-400 uppercase" data-i18n="case_studies_energy">Energy ↓</p>
+</div>
+<div class="text-center">
+<p class="text-lg font-black text-primary">99.9%</p>
+<p class="text-[10px] font-bold text-slate-400 uppercase" data-i18n="pdp_consistency">Consistency</p>
+</div>
+</div>
+<button class="w-full py-3 rounded-xl border-2 border-primary text-primary font-bold text-sm hover:bg-primary hover:text-white transition-all" data-i18n="case_read_more">Read Case Study</button>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl overflow-hidden group hover:border-primary/50 transition-all">
+<div class="h-48 relative">
+<img loading="lazy" alt="Smart Fridge Integration" class="w-full h-full object-cover" data-alt="Industrial walk-in cooler with digital control panel" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDzlLTC5peoURvKyniQhXcDewyvp37bkrpA7ZLmFWbZVvTMIMBCGevibZK1onmlR7nyaOAUZGWANG9QGtWzgiOTS_Aw3YxIeapDnBT8KAlWVsZFUxBh3lEOwUHZkcPoT4ZDXdJRJ1Cuhw62a5KmkI2e_AHFko1yiTmKmZ4cx1b9F-vuB1y4AS_FvQjAOkisPR_kNzM_l2IyvwjUUDC84JVgUK3Oktjz55d50XzsPhta-S6Es7a8ltfY2kW94Hmp6Xz6CIkkvN1kkxSI" width="800" height="600">
+<div class="absolute top-4 left-4 bg-white/90 dark:bg-slate-900/90 p-2 rounded-lg backdrop-blur">
+<span class="material-symbols-outlined text-primary">ac_unit</span>
+</div>
+</div>
+<div class="p-6">
+<h3 class="text-xl font-bold mb-2" data-i18n="case_studies_cold_chain_iot_synergy">Cold-Chain IoT Synergy</h3>
+<p class="text-sm text-slate-500 mb-6" data-i18n="case_studies_real_time_temperature_and_inventory_moni">Real-time temperature and inventory monitoring for a national catering giant.</p>
+<div class="grid grid-cols-3 gap-2 py-4 border-y border-slate-100 dark:border-slate-800 mb-6">
+<div class="text-center">
+<p class="text-lg font-black text-primary">15%</p>
+<p class="text-[10px] font-bold text-slate-400 uppercase" data-i18n="case_studies_waste">Waste ↓</p>
+</div>
+<div class="text-center border-x border-slate-100 dark:border-slate-800 px-2">
+<p class="text-lg font-black text-primary">100%</p>
+<p class="text-[10px] font-bold text-slate-400 uppercase">HACCP OK</p>
+</div>
+<div class="text-center">
+<p class="text-lg font-black text-primary">40%</p>
+<p class="text-[10px] font-bold text-slate-400 uppercase" data-i18n="case_studies_opex">OpEx ↓</p>
+</div>
+</div>
+<button class="w-full py-3 rounded-xl border-2 border-primary text-primary font-bold text-sm hover:bg-primary hover:text-white transition-all" data-i18n="case_read_more">Read Case Study</button>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl overflow-hidden group hover:border-primary/50 transition-all">
+<div class="h-48 relative">
+<img loading="lazy" alt="Ghost Kitchen Management" class="w-full h-full object-cover" data-alt="Multiple tablets and screens in a delivery kitchen hub" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCMRIPRbPjZjIBocS_bU0T7R4WJrjcavutn004927AG4-MiIVaCoFpKxe6a8rymq_t0VgL7PMYpy-eUZWRS7zAV7QWCFSXtK7qNBLXL3N_CpwUEijoEoil8TV8-PgxdoskgsA5g_88N5b1OuIWX7_Tm5PDNKBQqsT2xyU4eSRPsfu78Ld9vm-QDnShGIBYb0W6og_f0T7pNjDlMYuuYCcIC3NXdRnvItZu2KCWVsHsjPEvQKHykVkF_s2-CL_sEk-6otpUaGXbXpkCD" width="800" height="600">
+<div class="absolute top-4 left-4 bg-white/90 dark:bg-slate-900/90 p-2 rounded-lg backdrop-blur">
+<span class="material-symbols-outlined text-primary">cloud</span>
+</div>
+</div>
+<div class="p-6">
+<h3 class="text-xl font-bold mb-2" data-i18n="case_studies_cloud_kitchen_nexus">Cloud-Kitchen Nexus</h3>
+<p class="text-sm text-slate-500 mb-6">Centralized management system for 50+ ghost kitchens in metropolitan hubs.</p>
+<div class="grid grid-cols-3 gap-2 py-4 border-y border-slate-100 dark:border-slate-800 mb-6">
+<div class="text-center">
+<p class="text-lg font-black text-primary">28%</p>
+<p class="text-[10px] font-bold text-slate-400 uppercase" data-i18n="case_studies_speed">Speed ↑</p>
+</div>
+<div class="text-center border-x border-slate-100 dark:border-slate-800 px-2">
+<p class="text-lg font-black text-primary">12%</p>
+<p class="text-[10px] font-bold text-slate-400 uppercase">Margin ↑</p>
+</div>
+<div class="text-center">
+<p class="text-lg font-black text-primary" data-i18n="case_studies_50k">50k+</p>
+<p class="text-[10px] font-bold text-slate-400 uppercase" data-i18n="case_studies_orders_mo">Orders/Mo</p>
+</div>
+</div>
+<button class="w-full py-3 rounded-xl border-2 border-primary text-primary font-bold text-sm hover:bg-primary hover:text-white transition-all" data-i18n="case_read_more">Read Case Study</button>
+</div>
+</div>
+</section>
+<!-- Featured Client Section -->
+<div class="mb-24">
+<section class="bg-slate-900 text-white rounded-3xl overflow-hidden relative">
+<div class="absolute inset-0 opacity-20 pointer-events-none">
+<img loading="lazy" alt="Restaurant Interior" class="w-full h-full object-cover" data-alt="Wide shot of a luxury modern restaurant dining area" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAdHHYJClaXapTu-4BK8ffG2TChpXiZIjaMXk0KZSlW1sHEeUTSLYKdNfYz49ZX7ZsltlDEUht2_3if8Y4derzJYjWnqmBu502upOsJ3cQiWdoKEa7HjM3bYapSs_OU1aqOkpBf1GEg6w9QssLcHpVfdzUvfjmuw8j7JUZyjOtvu0Srd4b23YTZmhgdJSHkvClyOa7ZK5YIGdyS49RFy4bXiQQhtbHZoumiJwPmDepTXKEkzPpP2T712oLNCz8FGQiy0SLBd_SsuFEO" width="800" height="600">
+</div>
+<div class="relative grid grid-cols-1 lg:grid-cols-2">
+<div class="p-12 lg:p-20 flex flex-col gap-8">
+<div class="flex items-center gap-4">
+<div class="size-16 bg-white rounded-xl flex items-center justify-center p-2">
+<span class="material-symbols-outlined text-slate-900 text-4xl">corporate_fare</span>
+</div>
+<div>
+<h4 class="text-2xl font-bold">Restaurant_Corp</h4>
+<p class="text-slate-400" data-i18n="case_studies_global_expansion_partner">Global Expansion Partner</p>
+</div>
+</div>
+<h3 class="text-4xl font-black" data-i18n="case_studies_scaling_to_500_outlets_with_automated_pr">Scaling to 500+ Outlets with Automated Precision.</h3>
+<p class="text-slate-300 leading-relaxed">
+                        Discover how Restaurant_Corp utilized Yukoli's automated stir-fryers to maintain recipe integrity across continents while reducing training time by 80%.
+                    </p>
+<div class="flex gap-10">
+<div>
+<p class="text-primary text-3xl font-black">500+</p>
+<p class="text-xs uppercase font-bold text-slate-400 tracking-tighter" data-i18n="case_studies_smart_units">Smart Units</p>
+</div>
+<div class="border-l border-slate-700 pl-10">
+<p class="text-primary text-3xl font-black">12</p>
+<p class="text-xs uppercase font-bold text-slate-400 tracking-tighter">Countries</p>
+</div>
+<div class="border-l border-slate-700 pl-10">
+<p class="text-primary text-3xl font-black" data-i18n="case_studies_14m">14M+</p>
+<p class="text-xs uppercase font-bold text-slate-400 tracking-tighter" data-i18n="case_studies_dishes_served">Dishes Served</p>
+</div>
+</div>
+<button class="bg-primary text-white w-fit px-8 py-4 rounded-xl font-bold mt-4 hover:scale-105 transition-transform" data-i18n="case_studies_view_full_blueprint">View Full Blueprint</button>
+</div>
+<div class="hidden lg:block relative h-full min-h-[500px]">
+<img loading="lazy" alt="Stir Fry Automation Closeup" class="w-full h-full object-cover" data-alt="Close up of mechanical arm operating a frying machine" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDkRotQOGg-LtH01SGHflIH0x9EnfYaQeSmbfuDZSohXOvJtiBEFCu1dyj1tKfKsCwjpCozEObbSDR4b7n6cZ_KeIq6FQVTuGRohYvFYnKbaCUBrL3RckvOHhhxbqqQ7-FcjALJ8O9BifEkaBa2aS1XDJ2bb9-Kc56aSZwkivuWr4cHYT8gfmX1Ptjuj7dbJVE8-V2bdLptSkbe1uCmJJQAAwxNCRkw3o05xxFhT3dWxNUAQgM_e_hQknbQL_ECYbvqLp5JfVglmQsu" width="800" height="600">
+</div>
+</div>
+</section>
+</div>
+<!-- Global Deployment Map -->
+<!-- Global Deployment Map -->
+<section class="mb-24 text-center">
+<h2 class="text-3xl font-bold mb-4" data-i18n="case_studies_global_deployment">Global Deployment</h2>
+<p class="text-slate-500 mb-12" data-i18n="case_studies_our_smart_systems_are_powering_kitchens">Our smart systems are powering kitchens in 45+ countries.</p>
+<div class="relative w-full aspect-[21/9] bg-slate-100 dark:bg-slate-800/50 rounded-3xl overflow-hidden border border-slate-200 dark:border-slate-800">
+<div class="absolute inset-0 opacity-40">
+<img loading="lazy" alt="World Map Texture" class="w-full h-full object-cover grayscale invert dark:invert-0" data-alt="Stylized world map with dots representing cities" data-location="Global" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBHIAVIJhRXrA7TcHNY9uIqfEew9whK0IQo0MHylrqFgLhq02jj3axhJitkBabnVWhAnCxwmZg-3MZmasfqJfmnD87VwJ-gKhXVYvM1fPJppOzQMZEmLjFHJ1C1SPo8U1EnJwlINBfm_9buaIVri7kh-kYXoggiJGh-sj5Ag1w_syRJ-W8nV379SD-pgDj0lL68flP1FpcAM_iV6f2s3DrGkPDW0XZE-JiYd5cwF1IB0O583crXManYrNkns0k8BFiCfQFAqDdn5UsX" width="800" height="600">
+</div>
+<!-- Pulsing Markers -->
+<div class="absolute top-1/4 left-1/4 size-4 bg-primary rounded-full animate-ping"></div>
+<div class="absolute top-1/4 left-1/4 size-3 bg-primary rounded-full"></div>
+<div class="absolute top-1/2 right-1/4 size-4 bg-primary rounded-full animate-ping"></div>
+<div class="absolute top-1/2 right-1/4 size-3 bg-primary rounded-full"></div>
+<div class="absolute bottom-1/3 left-1/3 size-4 bg-primary rounded-full animate-ping"></div>
+<div class="absolute bottom-1/3 left-1/3 size-3 bg-primary rounded-full"></div>
+<!-- Info Overlay -->
+<div class="absolute bottom-8 right-8 bg-white/90 dark:bg-slate-900/90 p-6 rounded-2xl backdrop-blur-md shadow-xl text-left border border-slate-200 dark:border-slate-800">
+<div class="flex items-center gap-2 text-primary font-bold text-sm mb-1">
+<span class="material-symbols-outlined text-sm">hub</span> Active Nodes
+                    </div>
+<p class="text-2xl font-black" data-i18n="case_studies_2_481_units">2,481 Units</p>
+<p class="text-xs text-slate-500 mt-1" data-i18n="case_studies_real_time_synchronized_data_points">Real-time synchronized data points.</p>
+</div>
+</div>
+</section>
+<!-- CTA Section -->
+<div class="mb-24">
+<section class="bg-primary rounded-3xl p-12 lg:p-20 text-center text-white relative overflow-hidden">
+<div class="absolute top-0 right-0 size-64 bg-white/10 rounded-full -mr-32 -mt-32"></div>
+<div class="relative z-10">
+<h2 class="text-4xl lg:text-5xl font-black mb-6" data-i18n="case_studies_ready_for_your_roi_blueprint">Ready for your ROI Blueprint?</h2>
+<p class="text-white/80 text-lg mb-10 max-w-2xl mx-auto">
+                    Let our industrial engineers analyze your operations and provide a customized projection of savings and efficiency gains.
+                </p>
+<div class="flex flex-wrap justify-center gap-4">
+<button class="bg-white text-primary px-10 py-5 rounded-xl font-black hover:bg-slate-100 transition-colors shadow-xl" data-i18n="case_studies_launch_roi_calculator">
+                        Launch ROI Calculator
+                    </button>
+<button class="bg-slate-900 text-white px-10 py-5 rounded-xl font-black hover:bg-slate-800 transition-colors shadow-xl" data-i18n="case_studies_speak_with_an_expert">
+                        Speak with an Expert
+                    </button>
+</div>
+</div>
+</section>
+</div>
+<!-- Compliance & Trust Bar -->
+<!-- Compliance & Trust Bar -->
+<section class="border-t border-slate-200 dark:border-slate-800 pt-12 pb-24 fullwidth-bg">
+<p class="text-center text-xs font-bold uppercase tracking-widest text-slate-400 mb-8" data-i18n="case_studies_industrial_certifications_compliance">Industrial Certifications &amp; Compliance</p>
+<div class="flex flex-wrap justify-center items-center gap-8 lg:gap-16 opacity-50 dark:opacity-40 grayscale contrast-125">
+<div class="flex flex-col items-center">
+<div class="text-2xl font-black">ISO 9001</div>
+<span class="text-[10px] font-bold" data-i18n="case_studies_quality_mgmt">QUALITY MGMT</span>
+</div>
+<div class="flex flex-col items-center">
+<div class="text-2xl font-black">CE</div>
+<span class="text-[10px] font-bold" data-i18n="case_studies_eu_conformity">EU CONFORMITY</span>
+</div>
+<div class="flex flex-col items-center">
+<div class="text-2xl font-black">UL</div>
+<span class="text-[10px] font-bold" data-i18n="case_studies_safety_listed">SAFETY LISTED</span>
+</div>
+<div class="flex flex-col items-center border-2 border-slate-900 dark:border-white px-3 py-1">
+<div class="text-2xl font-black">NSF</div>
+<span class="text-[10px] font-bold tracking-tighter" data-i18n="case_studies_san_compliant">SAN-COMPLIANT</span>
+</div>
+<div class="flex flex-col items-center">
+<div class="text-2xl font-black">RoHS</div>
+<span class="text-[10px] font-bold" data-i18n="case_studies_eco_compliant">ECO-COMPLIANT</span>
+</div>
+</div>
+</section>
+</main>
+
+
+
+
+<script defer src="/assets/js/ui/products-dropdown.js?v=20260322-v3"></script>
+<script defer src="/assets/js/ui/navigator.js?v=20260322-v3"></script>
+<script defer src="/assets/js/ui/search-engine.js"></script>
+<script defer src="/assets/js/ui/footer.js?v=20260322-v3"></script>
+<script defer src="/assets/js/lang-registry.js"></script>
+<script defer src="/assets/js/translations.js"></script><script defer src="/assets/js/translations-dropdown-template.js"></script>
+<script defer src="/assets/js/contacts.js"></script>
+<script defer src="/assets/js/ui/smart-popup.js"></script>
+<script defer src="/assets/js/router.js"></script>
+
+<script defer src="/assets/js/page-interactions.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    if (window.translationManager) window.translationManager.initialize();
+  });
+</script>
+
+
+
+<script src="/assets/js/utils/device-utils.js"></script>
+<script src="/assets/js/spa-router.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    if (window.SpaRouter && typeof window.SpaRouter.init === 'function') {
+      window.SpaRouter.init();
+    }
+  });
+</script>
+</body></html>

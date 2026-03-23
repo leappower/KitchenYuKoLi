@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+
+<html class="light" lang="zh-CN"><head>
+<link rel="canonical" href="/about/"/>
+<link rel="alternate" media="only screen and (max-width: 767px)"
+      href="/about/index-mobile.html"/>
+<link rel="alternate" media="only screen and (min-width: 768px) and (max-width: 1279px)"
+      href="/about/index-tablet.html"/>
+<link rel="alternate" media="only screen and (min-width: 1280px)"
+      href="/about/index-pc.html"/>
+<script>
+(function(){
+  if (window.__redirectChecked) return;
+  window.__redirectChecked = true;
+  var urlParams = new URLSearchParams(location.search);
+  var cleanUrl = urlParams.get('clean-url');
+  if (cleanUrl) {
+    history.replaceState({}, '', cleanUrl);
+    return;
+  }
+  if (window.__spaNavigating) return;
+  var currentFile = location.pathname.split('/').pop();
+  if (window.DeviceUtils && window.DeviceUtils.isDirectoryURL()) return;
+  if (window.DeviceUtils && window.DeviceUtils.shouldRedirect(currentFile)) {
+    var deviceType = window.DeviceUtils.getDeviceType();
+    var targetFile = deviceType === window.DeviceUtils.DeviceType.MOBILE ? 'index-mobile.html' :
+                     deviceType === window.DeviceUtils.DeviceType.TABLET ? 'index-tablet.html' : 'index-pc.html';
+    location.href = targetFile;
+  }
+})();
+</script>
+
+<meta charset="utf-8"/>
+<meta name="description" content="Learn about Yukoli - a leading industrial smart kitchen solutions provider.">
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Yukoli | About Us</title>
+<link rel="preload" href="/assets/fonts/local-fonts.css" as="style">
+<link rel="preload" href="/assets/css/styles.css" as="style">
+<link rel="preload" href="/assets/css/tailwind.css" as="style">
+<link href="/assets/fonts/local-fonts.css" rel="stylesheet"/>
+<link rel="stylesheet" href="/assets/css/styles.css">
+<link rel="stylesheet" href="/assets/css/tailwind.css">
+<link rel="stylesheet" href="/assets/css/z-index-system.css">
+<link rel="stylesheet" href="/assets/css/performance-optimized.css"/>
+<script>(function(){if(localStorage.getItem('darkMode')==='true')document.documentElement.classList.add('dark')})()</script>
+<link rel="stylesheet" href="/assets/css/skeleton.css"/>
+<link rel="icon" href="/assets/images/logo_header.webp" type="image/webp">
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 antialiased transition-colors duration-300 overflow-x-hidden">
+
+<navigator data-component="navigator"
+  data-variant="tablet"
+  data-active="about"
+  data-cta-text-key="nav_get_quote"
+  data-cta-href="/quote"></navigator>
+
+<main id="spa-content" class="px-6 py-8">
+<!-- Hero -->
+<section class="mb-12">
+<div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-bold uppercase tracking-wider mb-4">
+<span class="material-symbols-outlined text-sm">apartment</span>
+                About Yukoli
+            </div>
+<h1 class="text-4xl font-black leading-tight tracking-tighter mb-4">
+                Pioneering <span class="text-primary">Kitchen Intelligence</span>
+</h1>
+<p class="text-slate-600 dark:text-slate-400 mb-6">
+                Since 2010, Yukoli has been at the forefront of industrial kitchen automation, transforming how restaurants work worldwide.
+            </p>
+<div class="relative h-[300px] rounded-2xl overflow-hidden">
+<img loading="lazy" alt="Yukoli Factory" class="w-full h-full object-cover" src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=800&h=600&fit=crop">
+</div>
+</section>
+
+<!-- Stats -->
+<section class="mb-12">
+<div class="grid grid-cols-2 gap-4">
+<div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-6 text-center">
+<p class="text-3xl font-black text-primary mb-1">15+</p>
+<p class="text-xs font-bold text-slate-500 uppercase">Years</p>
+</div>
+<div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-6 text-center">
+<p class="text-3xl font-black text-primary mb-1">45+</p>
+<p class="text-xs font-bold text-slate-500 uppercase">Countries</p>
+</div>
+<div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-6 text-center">
+<p class="text-3xl font-black text-primary mb-1">10K+</p>
+<p class="text-xs font-bold text-slate-500 uppercase">Installations</p>
+</div>
+<div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-6 text-center">
+<p class="text-3xl font-black text-primary mb-1">500+</p>
+<p class="text-xs font-bold text-slate-500 uppercase">Team</p>
+</div>
+</div>
+</section>
+
+<!-- Story -->
+<section class="mb-12">
+<h2 class="text-2xl font-black tracking-tighter mb-4">Our Story</h2>
+<div class="relative h-[250px] rounded-2xl overflow-hidden mb-4">
+<img loading="lazy" alt="Our History" class="w-full h-full object-cover" src="https://images.unsplash.com/photo-1565514020176-db8e3c3d6338?w=800&h=600&fit=crop">
+</div>
+<p class="text-slate-600 dark:text-slate-400 mb-4">
+                Founded in 2010 in Shenzhen, China, Yukoli began with a simple mission: to revolutionize commercial kitchens through intelligent automation.
+            </p>
+<p class="text-slate-600 dark:text-slate-400">
+                Today, our equipment powers kitchens across 45+ countries, helping thousands of businesses reduce costs and scale efficiently.
+            </p>
+</section>
+
+<!-- Manufacturing -->
+<section class="mb-12">
+<div class="bg-slate-900 text-white rounded-2xl overflow-hidden relative">
+<div class="p-8">
+<h2 class="text-2xl font-black mb-4">Manufacturing Excellence</h2>
+<p class="text-slate-300 text-sm mb-6">
+                    Our 50,000 sqm facility features CNC machinery, robotic welding, and quality control labs.
+                </p>
+<div class="grid grid-cols-2 gap-4">
+<div class="flex items-start gap-2">
+<span class="material-symbols-outlined text-primary text-sm">precision_manufacturing</span>
+<div>
+<h4 class="font-bold text-sm mb-1">Advanced</h4>
+<p class="text-xs text-slate-400">CNC & robotics</p>
+</div>
+</div>
+<div class="flex items-start gap-2">
+<span class="material-symbols-outlined text-primary text-sm">verified</span>
+<div>
+<h4 class="font-bold text-sm mb-1">Quality</h4>
+<p class="text-xs text-slate-400">Multi-stage testing</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- Certifications -->
+<section class="mb-12">
+<h2 class="text-2xl font-bold text-center mb-6">Certifications</h2>
+<div class="grid grid-cols-4 gap-3">
+<div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-4 text-center">
+<div class="text-lg font-black text-slate-400">ISO</div>
+</div>
+<div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-4 text-center">
+<div class="text-lg font-black text-slate-400">CE</div>
+</div>
+<div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-4 text-center">
+<div class="text-lg font-black text-slate-400">UL</div>
+</div>
+<div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-4 text-center">
+<div class="text-lg font-black text-slate-400">NSF</div>
+</div>
+</div>
+</section>
+
+<!-- CTA -->
+<section class="bg-primary rounded-2xl p-8 text-center text-white">
+<h2 class="text-2xl font-black mb-4">Transform Your Kitchen?</h2>
+<p class="text-white/80 text-sm mb-6">Partner with Yukoli and join thousands of businesses worldwide.</p>
+<button class="bg-white text-primary px-6 py-3 rounded-xl font-bold text-sm">Contact Us</button>
+</section>
+</main>
+
+<script defer src="/assets/js/ui/products-dropdown.js"></script>
+<script defer src="/assets/js/ui/navigator.js"></script>
+<script defer src="/assets/js/ui/footer.js"></script>
+<script defer src="/assets/js/lang-registry.js"></script>
+<script defer src="/assets/js/translations.js"></script>
+<script defer src="/assets/js/page-interactions.js"></script>
+<script src="/assets/js/utils/device-utils.js"></script>
+<script src="/assets/js/spa-router.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    if (window.SpaRouter && typeof window.SpaRouter.init === 'function') {
+      window.SpaRouter.init();
+    }
+  });
+</script>
+</body></html>

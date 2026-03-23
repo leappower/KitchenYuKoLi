@@ -146,7 +146,7 @@
   /**
    * Update the active navigation item without full re-render.
    * Used by SPA shell after page navigation to highlight the correct nav item.
-   * @param {string} activeId - The active nav item id (e.g. "home", "catalog", "case-studies", "support")
+   * @param {string} activeId - The active nav item id (e.g. "home", "products", "case-studies", "support")
    */
   function updateActive(activeId) {
     activeId = activeId || '';

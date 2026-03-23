@@ -18,20 +18,26 @@
   var SpaRouter = {
     // 路由定义（SEO 友好目录 URL）
     routes: {
-      '/':               '/home/index.html',
-      '/home/':          '/home/index.html',
-      '/products/':       '/products/index.html',
-      '/applications/':   '/applications/index.html',
-      '/solutions/':      '/solutions/index.html',
-      '/cases/':         '/cases/index.html',
-      '/case-download/': '/case-download/index.html',
-      '/esg/':          '/esg/index.html',
-      '/roi/':          '/roi/index.html',
-      '/quote/':        '/quote/index.html',
-      '/contact/':      '/quote/index.html',
-      '/support/':      '/support/index.html',
-      '/thank-you/':    '/thank-you/index.html',
-      '/landing/':      '/landing/index.html'
+      '/':                       '/home/index.html',
+      '/home/':                  '/home/index.html',
+      '/products/':              '/products/index.html',
+      '/applications/':          '/applications/index.html',
+      '/applications/fast-food/':       '/applications/fast-food/index.html',
+      '/applications/hotpot/':          '/applications/hotpot/index.html',
+      '/applications/cloud-kitchen/':   '/applications/cloud-kitchen/index.html',
+      '/applications/canteen/':         '/applications/canteen/index.html',
+      '/applications/southeast-asian/': '/applications/southeast-asian/index.html',
+      '/solutions/':             '/solutions/index.html',
+      '/solutions/automation/':  '/solutions/automation/index.html',
+      '/cases/':                 '/cases/index.html',
+      '/case-download/':         '/case-download/index.html',
+      '/esg/':                   '/esg/index.html',
+      '/roi/':                   '/roi/index.html',
+      '/quote/':                 '/quote/index.html',
+      '/contact/':               '/quote/index.html',
+      '/support/':               '/support/index.html',
+      '/thank-you/':             '/thank-you/index.html',
+      '/landing/':               '/landing/index.html'
     },
 
     // 设备特定页面映射

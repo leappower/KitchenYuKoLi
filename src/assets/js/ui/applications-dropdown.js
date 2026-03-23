@@ -8,12 +8,19 @@
 
   /* ───────────────────────── DATA ───────────────────────── */
 
+  /** Application scenarios (5 items) */
   var SUBSERIES = [
     { key: 'nav_applications_fastfood',     icon: 'ramen_dining',          emoji: '' },
     { key: 'nav_applications_hotpot',       icon: 'local_fire_department', emoji: '' },
     { key: 'nav_applications_cloud_kitchen', icon: 'delivery_dining',       emoji: '' },
     { key: 'nav_applications_canteen',      icon: 'restaurant',            emoji: '' },
     { key: 'nav_applications_thai',         icon: 'public',                emoji: '' }
+  ];
+
+  /** Bottom links (Case Studies + ROI) */
+  var EXTRAS = [
+    { key: 'nav_cases', icon: 'monitoring',    href: '/cases/',  badge: false },
+    { key: 'nav_roi',   icon: 'calculate',     href: '/roi/',    badge: true  },
   ];
 
   /* ───────────────────────── HELPERS ───────────────────────── */
@@ -198,6 +205,14 @@
       '  color: rgba(235,235,245,.25);',
       '}',
 
+      /* ===== ROI Badge ===== */
+      '.app-roi-badge {',
+      '  display: inline-flex; align-items: center; padding: 2px 7px;',
+      '  font-size: 10px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase;',
+      '  background: #ec5b13; color: #fff; border-radius: 20px;',
+      '  flex-shrink: 0; line-height: 1.4;',
+      '}',
+
       /* ===== Separator ===== */
       '.app-dropdown-item + .app-dropdown-item {',
       '  margin-top: 0;',
@@ -351,6 +366,19 @@
     return '<div class="app-dropdown-separator"></div>';
   }
 
+  function buildDropdownItem(item) {
+    var badgeHtml = item.badge
+      ? '<span class="app-roi-badge" data-i18n="nav_roi_badge">HOT</span>'
+      : '<span class="material-symbols-outlined app-dropdown-chevron">chevron_right</span>';
+    return '<a href="' + esc(item.href) + '" class="app-dropdown-item">' +
+      '<span class="app-dropdown-icon">' +
+        '<span class="material-symbols-outlined">' + esc(item.icon) + '</span>' +
+      '</span>' +
+      '<span class="app-dropdown-label" data-i18n="' + esc(item.key) + '">' + esc(item.key) + '</span>' +
+      badgeHtml +
+    '</a>';
+  }
+
   function renderDropdown(cfg) {
     var items = SUBSERIES.map(function (s, idx) {
       var html = buildItem(s, cfg.href);
@@ -358,6 +386,12 @@
         html += buildSeparator();
       }
       return html;
+    }).join('\n');
+
+    var extrasHtml = EXTRAS.map(function (s, idx) {
+      var row = buildDropdownItem(s);
+      if (idx < EXTRAS.length - 1) row += '<div class="app-dropdown-separator"></div>';
+      return row;
     }).join('\n');
 
     var html = '<div class="app-dropdown-wrap' + (isTouch() ? ' touch-device' : '') + '">' +
@@ -370,6 +404,8 @@
       '<div class="app-dropdown-panel">' +
         '<div class="app-dropdown-card">' +
           items +
+          '<div class="app-dropdown-separator" style="margin: 4px 0;"></div>' +
+          extrasHtml +
         '</div>' +
       '</div>' +
     '</div>';
@@ -423,7 +459,20 @@
       '</a>';
     }).join('\n');
 
-    panel.innerHTML = handle + items;
+    var extrasItems = EXTRAS.map(function (s) {
+      var badgeHtml = s.badge
+        ? '<span class="app-roi-badge" data-i18n="nav_roi_badge">HOT</span>'
+        : '<span class="material-symbols-outlined app-popup-chevron">chevron_right</span>';
+      return '<a href="' + esc(s.href) + '" class="app-popup-item">' +
+        '<span class="app-dropdown-icon">' +
+          '<span class="material-symbols-outlined">' + esc(s.icon) + '</span>' +
+        '</span>' +
+        '<span class="app-popup-label" data-i18n="' + esc(s.key) + '">' + esc(s.key) + '</span>' +
+        badgeHtml +
+      '</a>';
+    }).join('\n');
+
+    panel.innerHTML = handle + items + extrasItems;
 
     overlay.onclick = closePopup;
     document.body.appendChild(overlay);
@@ -496,6 +545,7 @@
 
   global.ApplicationsDropdown = {
     SUBSERIES: SUBSERIES,
+    EXTRAS: EXTRAS,
     renderPC: renderDropdown,
     renderTablet: renderDropdown,
     initDropdownClick: initDropdownClick,

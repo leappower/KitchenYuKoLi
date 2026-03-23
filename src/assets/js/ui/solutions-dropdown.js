@@ -1,11 +1,10 @@
 /**
  * solutions-dropdown.js — Solutions Dropdown
  *
- * Content:
- *   场景应用 × 5 items
- *   ─── separator ───
- *   成功案例
- *   ROI 计算器  ← Badge highlight
+ * Structure:
+ *   ── Solutions (解决方案) ──
+ *   │  Automation Solutions (6 items)
+ *   │  Case Studies · ROI Calculator
  */
 
 (function (global) {
@@ -13,17 +12,20 @@
 
   /* ───────────────────────── DATA ───────────────────────── */
 
-  var SCENES = [
-    { key: 'nav_applications_fastfood',      icon: 'ramen_dining',          href: '/applications/' },
-    { key: 'nav_applications_hotpot',        icon: 'local_fire_department', href: '/applications/' },
-    { key: 'nav_applications_cloud_kitchen', icon: 'delivery_dining',       href: '/applications/' },
-    { key: 'nav_applications_canteen',       icon: 'restaurant',            href: '/applications/' },
-    { key: 'nav_applications_thai',          icon: 'public',                href: '/applications/' },
+  /** Automation Solutions (自动化方案) */
+  var AUTOMATION = [
+    { key: 'nav_auto_kitchen',      icon: 'restaurant',     href: '/solutions/kitchen/' },
+    { key: 'nav_auto_cooking_line', icon: 'soup_kitchen',   href: '/solutions/cooking-line/' },
+    { key: 'nav_auto_prep',         icon: 'blender',        href: '/solutions/prep/' },
+    { key: 'nav_auto_beverage',     icon: 'local_cafe',     href: '/solutions/beverage/' },
+    { key: 'nav_auto_cooling',      icon: 'ac_unit',        href: '/solutions/cooling/' },
+    { key: 'nav_auto_cabinet',      icon: 'kitchen',        href: '/solutions/cabinet/' },
   ];
 
-  var EXTRAS = [
-    { key: 'nav_cases', icon: 'monitoring',    href: '/cases/',  badge: false },
-    { key: 'nav_roi',   icon: 'calculate',     href: '/roi/',    badge: true  },
+  /** Solutions items (Case Studies + ROI) */
+  var SOLUTIONS = [
+    { key: 'nav_cases_sol', icon: 'monitoring', href: '/solutions/case/', badge: false },
+    { key: 'nav_roi',       icon: 'calculate',  href: '/roi/',            badge: true  },
   ];
 
   /* ───────────────────────── HELPERS ───────────────────────── */
@@ -43,9 +45,9 @@
   /* ───────────────────────── CSS ───────────────────────── */
 
   function injectStyles() {
-    if (document.getElementById('sol-dropdown-styles-v3')) return;
+    if (document.getElementById('sol-dropdown-styles-v7')) return;
     var style = document.createElement('style');
-    style.id = 'sol-dropdown-styles-v3';
+    style.id = 'sol-dropdown-styles-v7';
     style.textContent = [
       /* ===== Trigger ===== */
       '.sol-dropdown-trigger {',
@@ -86,7 +88,7 @@
       /* ===== Card ===== */
       '.sol-dropdown-card {',
       '  background: rgba(246,246,248,1);',
-      '  border-radius: 13px; padding: 4px; min-width: 300px; max-width: 400px;',
+      '  border-radius: 13px; padding: 4px; min-width: 220px; max-width: 320px;',
       '  border: .5px solid rgba(0,0,0,.08);',
       '  box-shadow: 0 0 0 .5px rgba(0,0,0,.04), 0 8px 40px rgba(0,0,0,.12), 0 2px 12px rgba(0,0,0,.08);',
       '}',
@@ -98,7 +100,7 @@
 
       /* ===== Item ===== */
       '.sol-dropdown-item {',
-      '  display: flex; align-items: center; gap: 10px; padding: 9px 12px;',
+      '  display: flex; align-items: center; gap: 10px; padding: 10px 12px;',
       '  font-size: 13px; font-weight: 500; letter-spacing: -.01em; line-height: 1.38;',
       '  color: #1d1d1f; text-decoration: none; border-radius: 10px; position: relative;',
       '  transition: background .1s ease;',
@@ -195,6 +197,7 @@
       '  height: .5px; background: rgba(60,60,67,.12); margin: 4px 16px 4px 60px;',
       '}',
       'html.dark .sol-popup-separator { background: rgba(235,235,245,.15); }',
+
     ].join('\n');
     document.head.appendChild(style);
   }
@@ -214,6 +217,36 @@
     '</a>';
   }
 
+  function buildDropdownList(items) {
+    return items.map(function (item, idx) {
+      var row = buildDropdownItem(item);
+      if (idx < items.length - 1) {
+        row += '<div class="sol-dropdown-separator"></div>';
+      }
+      return row;
+    }).join('\n');
+  }
+
+  function buildAutomationItem(item) {
+    return '<a href="' + esc(item.href) + '" class="sol-dropdown-item">' +
+      '<span class="sol-dropdown-icon">' +
+        '<span class="material-symbols-outlined">' + esc(item.icon) + '</span>' +
+      '</span>' +
+      '<span class="sol-dropdown-label" data-i18n="' + esc(item.key) + '">' + esc(item.key) + '</span>' +
+      '<span class="material-symbols-outlined sol-dropdown-chevron">chevron_right</span>' +
+    '</a>';
+  }
+
+  function buildAutomationList(items) {
+    return items.map(function (item, idx) {
+      var row = buildAutomationItem(item);
+      if (idx < items.length - 1) {
+        row += '<div class="sol-dropdown-separator"></div>';
+      }
+      return row;
+    }).join('\n');
+  }
+
   function buildPopupItem(item) {
     var badgeHtml = item.badge
       ? '<span class="sol-roi-badge" data-i18n="nav_roi_badge">HOT</span>'
@@ -227,26 +260,34 @@
     '</a>';
   }
 
+  function buildPopupList(items) {
+    return items.map(function (item, idx) {
+      var row = buildPopupItem(item);
+      if (idx < items.length - 1) row += '<div class="sol-popup-separator"></div>';
+      return row;
+    }).join('\n');
+  }
+
+  function buildPopupAutomationItem(item) {
+    return '<a href="' + esc(item.href) + '" class="sol-popup-item">' +
+      '<span class="sol-dropdown-icon">' +
+        '<span class="material-symbols-outlined">' + esc(item.icon) + '</span>' +
+      '</span>' +
+      '<span class="sol-popup-label" data-i18n="' + esc(item.key) + '">' + esc(item.key) + '</span>' +
+      '<span class="material-symbols-outlined sol-popup-chevron">chevron_right</span>' +
+    '</a>';
+  }
+
+  function buildPopupAutomationList(items) {
+    return items.map(function (item, idx) {
+      var row = buildPopupAutomationItem(item);
+      if (idx < items.length - 1) row += '<div class="sol-popup-separator"></div>';
+      return row;
+    }).join('\n');
+  }
+
   /* ── Unified dropdown: floating card for both PC and Tablet ── */
   function renderDropdown(cfg) {
-    // Scenes section
-    var sceneItems = SCENES.map(function (s, idx) {
-      var row = buildDropdownItem(s);
-      if (idx < SCENES.length - 1) {
-        row += '<div class="sol-dropdown-separator"></div>';
-      }
-      return row;
-    }).join('\n');
-
-    // Extras (Cases + ROI) with section divider
-    var extraItems = EXTRAS.map(function (s, idx) {
-      var row = buildDropdownItem(s);
-      if (idx < EXTRAS.length - 1) {
-        row += '<div class="sol-dropdown-separator"></div>';
-      }
-      return row;
-    }).join('\n');
-
     var html =
       '<div class="sol-dropdown-wrap' + (isTouch() ? ' touch-device' : '') + '">' +
         '<a href="' + esc(cfg.href) + '"' +
@@ -257,9 +298,9 @@
         '</a>' +
         '<div class="sol-dropdown-panel">' +
           '<div class="sol-dropdown-card">' +
-            sceneItems +
-            '<div class="sol-dropdown-separator" style="margin: 4px 0;"></div>' +
-            extraItems +
+            buildAutomationList(AUTOMATION) +
+            '<div class="sol-dropdown-separator" style="margin: 8px 12px;"></div>' +
+            buildDropdownList(SOLUTIONS) +
           '</div>' +
         '</div>' +
       '</div>';
@@ -298,21 +339,13 @@
 
     var handle = '<div class="sol-popup-handle"></div>';
 
-    var sceneItems = SCENES.map(function (s, idx) {
-      var row = buildPopupItem(s);
-      if (idx < SCENES.length - 1) row += '<div class="sol-popup-separator"></div>';
-      return row;
-    }).join('\n');
+    var content =
+      handle +
+      buildPopupAutomationList(AUTOMATION) +
+      '<div class="sol-popup-separator" style="margin: 8px 16px;"></div>' +
+      buildPopupList(SOLUTIONS);
 
-    var extraItems = EXTRAS.map(function (s, idx) {
-      var row = buildPopupItem(s);
-      if (idx < EXTRAS.length - 1) row += '<div class="sol-popup-separator"></div>';
-      return row;
-    }).join('\n');
-
-    var divider = '<div class="sol-popup-separator" style="margin: 4px 0;"></div>';
-
-    panel.innerHTML = handle + sceneItems + divider + extraItems;
+    panel.innerHTML = content;
 
     // translate immediately
     if (global.translationManager) {
@@ -366,8 +399,8 @@
   /* ───────────────────────── PUBLIC API ───────────────────────── */
 
   global.SolutionsDropdown = {
-    SCENES: SCENES,
-    EXTRAS: EXTRAS,
+    AUTOMATION: AUTOMATION,
+    SOLUTIONS: SOLUTIONS,
     renderPC: renderDropdown,
     renderTablet: renderDropdown,
     initDropdownClick: initDropdownClick,

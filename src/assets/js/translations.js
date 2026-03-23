@@ -233,7 +233,7 @@
     for (var i = 0; i < keys.length; i++) {
       value = value ? value[keys[i]] : undefined;
     }
-    if (key.indexOf('home_tablet') === 0 || key.indexOf('nav_') === 0 || key.indexOf('catalog_') === 0) {
+    if (key.indexOf('home_tablet') === 0 || key.indexOf('nav_') === 0 || key.indexOf('products_') === 0) {
       // intentionally no-op for these key prefixes
     }
     return value || key;
