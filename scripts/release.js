@@ -378,8 +378,10 @@ if (!opts.skipBuild && fs.existsSync(swSrcPath)) {
     let swContent = fs.readFileSync(swSrcPath, 'utf8');
 
     // 匹配并替换三个缓存名常量（只替换引号内的版本后缀，不改变常量名本身）
+    // 同时更新 CACHE_VERSION 变量，确保 Service Worker 检测到变化并触发缓存更新
     const before = swContent;
     swContent = swContent
+      .replace(/CACHE_VERSION\s*=\s*['"`]v[\d.-]+['"`]/, `CACHE_VERSION = 'v${versionSlug}'`)
       .replace(/(['"`])language-files-v[\d.-]+\1/g, `'language-files-v${versionSlug}'`)
       .replace(/(['"`])language-cache-v[\d.-]+\1/g,  `'language-cache-v${versionSlug}'`)
       .replace(/(['"`])image-cache-v[\d.-]+\1/g,     `'image-cache-v${versionSlug}'`);
