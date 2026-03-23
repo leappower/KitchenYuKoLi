@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 500" fill="none">
+  <rect width="1000" height="500" fill="#94a3b8"/>
+  <!-- North America -->
+  <path d="M120,80 L180,70 L220,90 L240,130 L260,160 L250,200 L230,230 L200,260 L180,240 L160,210 L140,180 L110,150 L100,120 Z" fill="#475569"/>
+  <!-- South America -->
+  <path d="M220,270 L270,260 L300,280 L310,320 L300,370 L280,410 L250,430 L220,420 L200,390 L195,350 L200,310 Z" fill="#475569"/>
+  <!-- Europe -->
+  <path d="M430,60 L480,55 L510,70 L520,100 L500,120 L470,130 L440,120 L420,100 L415,80 Z" fill="#475569"/>
+  <!-- Africa -->
+  <path d="M420,140 L480,130 L510,150 L520,200 L510,260 L490,310 L460,340 L430,330 L410,290 L400,240 L405,190 L410,160 Z" fill="#475569"/>
+  <!-- Asia -->
+  <path d="M530,50 L650,45 L750,60 L800,90 L820,130 L800,170 L760,190 L700,200 L640,190 L580,180 L540,160 L520,130 L525,90 Z" fill="#475569"/>
+  <!-- Southeast Asia -->
+  <path d="M680,200 L730,195 L760,210 L770,240 L750,260 L710,265 L680,250 L665,225 Z" fill="#475569"/>
+  <!-- Australia -->
+  <path d="M700,300 L780,290 L830,310 L840,360 L820,400 L770,420 L720,410 L690,380 L680,340 L685,310 Z" fill="#475569"/>
+  <!-- Grid lines (latitude/longitude) -->
+  <line x1="0" y1="250" x2="1000" y2="250" stroke="#64748b" stroke-width="0.5" stroke-dasharray="4,4"/>
+  <line x1="500" y1="0" x2="500" y2="500" stroke="#64748b" stroke-width="0.5" stroke-dasharray="4,4"/>
+  <line x1="0" y1="125" x2="1000" y2="125" stroke="#64748b" stroke-width="0.3" stroke-dasharray="2,6"/>
+  <line x1="0" y1="375" x2="1000" y2="375" stroke="#64748b" stroke-width="0.3" stroke-dasharray="2,6"/>
+  <line x1="250" y1="0" x2="250" y2="500" stroke="#64748b" stroke-width="0.3" stroke-dasharray="2,6"/>
+  <line x1="750" y1="0" x2="750" y2="500" stroke="#64748b" stroke-width="0.3" stroke-dasharray="2,6"/>
+  <!-- Network dots -->
+  <circle cx="160" cy="160" r="4" fill="#f97316" opacity="0.8"/>
+  <circle cx="460" cy="95" r="4" fill="#f97316" opacity="0.8"/>
+  <circle cx="540" cy="120" r="4" fill="#f97316" opacity="0.8"/>
+  <circle cx="700" cy="150" r="4" fill="#f97316" opacity="0.8"/>
+  <circle cx="750" cy="340" r="4" fill="#f97316" opacity="0.8"/>
+  <circle cx="260" cy="310" r="3" fill="#f97316" opacity="0.6"/>
+  <circle cx="480" cy="220" r="3" fill="#f97316" opacity="0.6"/>
+  <!-- Network lines -->
+  <line x1="160" y1="160" x2="460" y2="95" stroke="#f97316" stroke-width="0.8" opacity="0.4"/>
+  <line x1="460" y1="95" x2="540" y2="120" stroke="#f97316" stroke-width="0.8" opacity="0.4"/>
+  <line x1="540" y1="120" x2="700" y2="150" stroke="#f97316" stroke-width="0.8" opacity="0.4"/>
+  <line x1="700" y1="150" x2="750" y2="340" stroke="#f97316" stroke-width="0.8" opacity="0.4"/>
+  <line x1="160" y1="160" x2="260" y2="310" stroke="#f97316" stroke-width="0.8" opacity="0.3"/>
+  <line x1="460" y1="95" x2="480" y2="220" stroke="#f97316" stroke-width="0.8" opacity="0.3"/>
+</svg>

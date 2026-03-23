@@ -1,0 +1,185 @@
+<!doctype html><html class="light" lang="zh-CN"><head>
+<script>window.BASE_PATH="/KitchenYuKoLi";</script><link rel="canonical" href="/KitchenYuKoLi/thank-you/"/><link rel="alternate" media="only screen and (max-width: 767px)" href="/KitchenYuKoLi/thank-you/index-mobile.html"/><link rel="alternate" media="only screen and (min-width: 768px)" href="/KitchenYuKoLi/thank-you/index-pc.html"/><script>/* Responsive redirect — runs before render, no flash */
+(function(){
+  // 防止 bfcache 恢复时重复 redirect
+  if (window.__redirectChecked) return;
+  window.__redirectChecked = true;
+
+  // 处理 clean-url 参数:重定向后清理 URL 为干净的目录 URL
+  var urlParams = new URLSearchParams(location.search);
+  var cleanUrl = urlParams.get('clean-url');
+  if (cleanUrl) {
+    console.log('[Responsive Redirect] Cleaning URL to:', cleanUrl);
+    history.replaceState({}, '', cleanUrl);
+    return;
+  }
+
+  // SPA 导航时跳过响应式重定向
+  console.log('[Responsive Redirect] Checking SPA flag: window.__spaNavigating =', window.__spaNavigating);
+  if (window.__spaNavigating) {
+    console.log('[Responsive Redirect] SPA navigation detected, skipping redirect');
+    return;
+  }
+
+  // 使用 DeviceUtils 统一管理设备判断
+  var currentFile = location.pathname.split('/').pop();
+  console.log('[Responsive Redirect] Current file:', currentFile, 'Pathname:', location.pathname);
+
+  // 当访问目录 URL(以 / 结尾)时,不要重定向(SPA 导航使用干净的目录 URL)
+  if (window.DeviceUtils && window.DeviceUtils.isDirectoryURL()) {
+    console.log('[Responsive Redirect] Directory URL detected, skipping redirect');
+    return;
+  }
+
+  // 使用 DeviceUtils 判断是否需要重定向
+  if (window.DeviceUtils && window.DeviceUtils.shouldRedirect(currentFile)) {
+    var deviceType = window.DeviceUtils.getDeviceType();
+    var targetFile;
+
+    if (deviceType === window.DeviceUtils.DeviceType.MOBILE) {
+      targetFile = 'index-mobile.html';
+    } else if (deviceType === window.DeviceUtils.DeviceType.TABLET) {
+      targetFile = 'index-tablet.html';
+    } else {
+      targetFile = 'index-pc.html';
+    }
+
+    console.log('[Responsive Redirect] Redirecting to:', targetFile);
+    location.href = targetFile;
+    return;
+  }
+
+  console.log('[Responsive Redirect] No redirect needed');
+})();</script><meta charset="utf-8"/><meta name="description" content="Thanks for your interest in Yukoli Smart Kitchen. Your 2026 catalog download has been confirmed."><meta property="og:type" content="website"><meta property="og:title" content="Yukoli 2026 Catalog Thank You - Mobile"><meta property="og:description" content="Thanks for your interest in Yukoli Smart Kitchen. Your 2026 catalog download has been confirmed."><meta property="og:url" content="https://www.kitchen.yukoli.com/thank-you/index-mobile.html"><meta property="og:image" content="https://www.kitchen.yukoli.com/assets/images/og-home.webp"><meta content="width=device-width,initial-scale=1" name="viewport"/><title>Yukoli 2026 Catalog Thank You - Mobile</title><link rel="preload" href="/KitchenYuKoLi/assets/fonts/local-fonts.css" as="style"><link rel="preload" href="/KitchenYuKoLi/assets/css/styles.css" as="style"><link rel="preload" href="/KitchenYuKoLi/assets/css/tailwind.css" as="style"><link rel="preload" href="/KitchenYuKoLi/assets/fonts/public-sans-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin><link rel="preload" href="/KitchenYuKoLi/assets/fonts/public-sans-latin-700-normal.woff2" as="font" type="font/woff2" crossorigin><link href="/KitchenYuKoLi/assets/fonts/local-fonts.css" rel="stylesheet"/><link rel="stylesheet" href="/KitchenYuKoLi/assets/css/styles.css"><link rel="stylesheet" href="/KitchenYuKoLi/assets/css/tailwind.css"><link rel="stylesheet" href="/KitchenYuKoLi/assets/css/z-index-system.css"><link rel="stylesheet" href="/KitchenYuKoLi/assets/css/performance-optimized.css"/><style data-purpose="custom-utilities">/* Subtle background pattern for industrial feel */
+    .bg-grid-pattern {
+      background-image: radial-gradient(#e5e7eb 1px, transparent 1px);
+      background-size: 20px 20px;
+    }
+    .hide-scrollbar::-webkit-scrollbar {
+      display: none;
+    }</style><script>(function(){
+if(localStorage.getItem('darkMode')==='true')document.documentElement.classList.add('dark')})()</script><link rel="stylesheet" href="/KitchenYuKoLi/assets/css/skeleton.css"/><link rel="icon" href="/KitchenYuKoLi/assets/images/logo_header.webp" type="image/webp"></head><body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 bg-grid-pattern overflow-x-hidden"><navigator data-component="navigator" data-variant="mobile" data-active="thank-you"></navigator><style>/* Header按钮悬停效果 */
+header button:hover {
+  transform: scale(1.05);
+}
+
+header button:active {
+  transform: scale(0.95);
+}</style><script>(function() {
+  // 语言切换器功能
+  const langToggleBtn = document.getElementById('lang-toggle-btn');
+  const langDropdown = document.getElementById('language-dropdown');
+  const langSearchInput = document.getElementById('lang-search-input');
+  const langOptions = document.querySelectorAll('.lang-option');
+  const currentLangLabel = document.getElementById('current-lang-label');
+  
+  let isDropdownOpen = false;
+  
+  // 切换下拉菜单
+  if (langToggleBtn && langDropdown) {
+    langToggleBtn.addEventListener('click', function(e) {
+      e.stopPropagation();
+      isDropdownOpen = !isDropdownOpen;
+      langDropdown.style.display = isDropdownOpen ? 'block' : 'none';
+    });
+    
+    // 点击外部关闭
+    document.addEventListener('click', function() {
+      if (isDropdownOpen) {
+        isDropdownOpen = false;
+        langDropdown.style.display = 'none';
+      }
+    });
+    
+    // 搜索功能
+    if (langSearchInput) {
+      langSearchInput.addEventListener('input', function(e) {
+        const search = e.target.value.toLowerCase();
+        langOptions.forEach(option => {
+          const text = option.textContent.toLowerCase();
+          option.style.display = text.includes(search) ? 'block' : 'none';
+        });
+      });
+    }
+    
+    // 选择语言
+    langOptions.forEach(option => {
+      option.addEventListener('click', function() {
+        const langCode = this.getAttribute('data-code');
+        const langName = this.textContent;
+        
+        // 更新显示
+        if (currentLangLabel) {
+          currentLangLabel.textContent = langName;
+        }
+        
+        // 调用语言切换逻辑
+        if (window.translationManager) {
+          window.translationManager.setLanguage(langCode);
+        }
+        
+        // 关闭下拉菜单
+        isDropdownOpen = false;
+        langDropdown.style.display = 'none';
+      });
+    });
+  }
+  
+  // 通知按钮点击效果
+  const notifyBtn = document.querySelector('header button[aria-label*="Notification"]');
+  if (notifyBtn) {
+    notifyBtn.addEventListener('click', function() {
+      console.log('Notifications clicked');
+      // TODO: 实现通知功能
+    });
+  }
+})();</script><main id="spa-content" class="max-w-md mx-auto px-4 py-6 pb-24 space-y-8 overflow-x-hidden"><section class="bg-white rounded-3xl shadow-sm border border-gray-100 overflow-hidden" data-purpose="status-hero"><div class="p-6"><div class="inline-flex items-center gap-2 bg-orange-50 text-primary px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider mb-4 border border-orange-100"><svg class="h-4 w-4" fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path clip-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" fill-rule="evenodd"></path></svg> Download Initiated</div><h1 class="text-3xl font-extrabold text-slate-900 leading-tight mb-4" data-i18n="thank_you_your_digital_copy_is_on_its_way">Your Digital Copy is on its Way</h1><p class="text-slate-500 text-sm leading-relaxed mb-6">The <span class="font-bold text-slate-900">2026 Global Product Catalog</span> has been dispatched. Check your inbox for technical schematics and procurement pricing.</p><div class="flex flex-col gap-3"><button class="w-full bg-primary text-white font-bold py-4 rounded-xl flex items-center justify-center gap-2 shadow-lg shadow-primary/20 active:scale-[0.98] transition-transform"><svg class="h-5 w-5" fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg> Manual Download</button> <button class="w-full bg-gray-100 text-slate-900 font-bold py-4 rounded-xl flex items-center justify-center gap-2 active:scale-[0.98] transition-transform" data-i18n="thank_you_share_with_team">Share with Team</button></div></div><div class="relative h-48 bg-gray-900"><img loading="lazy" alt="Digital Catalog Preview" class="w-full h-full object-cover opacity-80" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB7OLka3U8jGcj4DBCP_WDvRBfJ9Lk1kdh95QWCNaLNpVKlTYO7xi75VfUfXSDZDvKEAUhTP8x0_HFXSd3CtlEIM6_IqZfWAXDaDOeNGLDHYrs7Etq5Xdwl4JQw2OIy7f_nyQiDM6JQ8IfTFO0IBDMwR6DR4XCOIbD1Tx9qGZ0OLcJNkuBKBAflOsH4P0y24AKp9BzPMRIDgp5qi-V5it6r1G6Z4C1Xj55-l3bu2toSDxV90yVp2OsuO_fkBIoJ74i7Q1TSEFCW8O1j" width="400" height="300"><div class="absolute inset-0 bg-gradient-to-t from-slate-900/60 to-transparent"></div></div></section><section class="space-y-4" data-purpose="booking-calendar"><div class="space-y-2"><h2 class="text-xl font-extrabold uppercase tracking-tight" data-i18n="thank_you_system_blueprint_session">System Blueprint Session</h2><p class="text-sm text-slate-500" data-i18n="thank_you_schedule_a_15_minute_technical_review_wi">Schedule a 15-minute technical review with our engineering lead to map your smart kitchen integration.</p></div><div class="bg-white rounded-2xl border border-gray-200 p-4 shadow-sm"><div class="flex justify-between items-center mb-6 px-2"><button aria-label="Previous month" class="p-2 text-gray-400"><svg class="h-5 w-5" fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path clip-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" fill-rule="evenodd"></path></svg></button> <span class="font-bold text-gray-800">October 2025</span> <button aria-label="Next month" class="p-2 text-gray-400"><svg class="h-5 w-5" fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path clip-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" fill-rule="evenodd"></path></svg></button></div><div class="grid grid-cols-7 gap-1 text-center mb-6"><div class="text-[10px] font-bold text-gray-400 uppercase">S</div><div class="text-[10px] font-bold text-gray-400 uppercase">M</div><div class="text-[10px] font-bold text-gray-400 uppercase">T</div><div class="text-[10px] font-bold text-gray-400 uppercase">W</div><div class="text-[10px] font-bold text-gray-400 uppercase">T</div><div class="text-[10px] font-bold text-gray-400 uppercase">F</div><div class="text-[10px] font-bold text-gray-400 uppercase">S</div><div class="py-2 text-gray-300 text-sm">28</div><div class="py-2 text-gray-300 text-sm">29</div><div class="py-2 text-gray-300 text-sm">30</div><div class="py-2 text-slate-900 text-sm font-medium">1</div><div class="py-2 text-slate-900 text-sm font-medium">2</div><div class="py-2 bg-primary text-white rounded-lg text-sm font-bold shadow-md shadow-orange-100">3</div><div class="py-2 text-slate-900 text-sm font-medium">4</div><div class="py-2 text-slate-900 text-sm font-medium">5</div><div class="py-2 text-slate-900 text-sm font-medium">6</div><div class="py-2 text-slate-900 text-sm font-medium">7</div><div class="py-2 text-slate-900 text-sm font-medium">8</div><div class="py-2 text-slate-900 text-sm font-medium">9</div><div class="py-2 text-slate-900 text-sm font-medium">10</div><div class="py-2 text-slate-900 text-sm font-medium">11</div></div><div class="space-y-2 mb-4"><p class="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-2" data-i18n="thank_you_available_times">Available Times</p><div class="grid grid-cols-2 gap-2"><button class="py-3 border border-gray-200 rounded-lg text-sm font-medium hover:bg-gray-50">09:00 AM</button> <button class="py-3 border-2 border-primary text-primary rounded-lg text-sm font-bold bg-primary/10">10:30 AM</button> <button class="py-3 border border-gray-200 rounded-lg text-sm font-medium hover:bg-gray-50">01:00 PM</button> <button class="py-3 border border-gray-200 rounded-lg text-sm font-medium hover:bg-gray-50">03:30 PM</button></div></div><button class="w-full bg-slate-900 text-white py-4 rounded-xl font-bold uppercase tracking-wider text-sm active:bg-black" data-i18n="thank_you_confirm_slot">Confirm Slot</button></div></section><section class="space-y-4" data-purpose="featured-product"><h2 class="text-xl font-extrabold uppercase tracking-tight">Spotlight</h2><div class="relative rounded-3xl overflow-hidden aspect-[4/5] shadow-xl group"><img loading="lazy" alt="Smart Stir-fry Robot Pro" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD2ZghbEdnl_7EZMKC4DcEw18ciYZ1EN5Xsce1-uVIjpfp8KAjQegPaWfr4cv2UGkT8DF-ALmnCeJGiwRUIxanHVNCbibVOjH9iXxB8rjf8pGgsTPhstPLo3qzUOH3k9GR3FZWYFEBGB9pKJe1ptj9hI4RvFkaYQICCFqgv8PPg4_7rD367UrEL-KEre_oWdPBYRK0lXhdl3ORDwVMO0sBi-QQ9lq3Y736XW_tJZj0HTs9eWKjmrjIOGSMPRB9bJYLG3sk33jQvQZ5M" width="400" height="300"><div class="absolute inset-0 bg-gradient-to-t from-slate-900 via-yukoli-dark/40 to-transparent p-6 flex flex-col justify-end"><h3 class="text-2xl font-bold text-white mb-2" data-i18n="pdp_hero_product_name">Smart Stir-fry Robot Pro</h3><p class="text-gray-300 text-sm mb-4 leading-relaxed" data-i18n="thank_you_experience_2026_industrial_automation_wa">Experience 2026 industrial automation. Watch the full Smart Kitchen video tour.</p><button class="flex items-center gap-2 text-primary font-bold text-sm group-hover:underline">Watch Video Tour <svg class="h-6 w-6" fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path clip-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" fill-rule="evenodd"></path></svg></button></div></div></section><section class="bg-white rounded-3xl border border-gray-200 p-8 text-center" data-purpose="vertical-timeline"><h2 class="text-xl font-extrabold uppercase tracking-tight mb-2" data-i18n="thank_you_what_happens_next">What Happens Next</h2><p class="text-sm text-slate-500 mb-8" data-i18n="thank_you_your_journey_to_industrial_grade_kitchen">Your journey to industrial-grade kitchen automation</p><div class="space-y-10 relative"><div class="absolute left-1/2 top-4 bottom-4 w-px bg-gray-100 -translate-x-1/2"></div><div class="relative z-10 space-y-3"><div class="w-12 h-12 bg-orange-50 text-primary rounded-full flex items-center justify-center mx-auto border-4 border-white shadow-sm"><svg class="h-6 w-6" fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg></div><div><h4 class="font-bold text-sm uppercase tracking-wide" data-i18n="thank_you_email_confirmation">Email Confirmation</h4><p class="text-xs text-slate-500 px-6" data-i18n="thank_you_receive_your_48_page_technical_catalog_a">Receive your 48-page technical catalog and pricing matrix instantly.</p></div></div><div class="relative z-10 space-y-3"><div class="w-12 h-12 bg-blue-50 text-blue-600 rounded-full flex items-center justify-center mx-auto border-4 border-white shadow-sm"><svg class="h-6 w-6" fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg></div><div><h4 class="font-bold text-sm uppercase tracking-wide" data-i18n="thank_you_account_manager">Account Manager</h4><p class="text-xs text-slate-500 px-6" data-i18n="thank_you_within_24_hours_a_regional_specialist_wi">Within 24 hours, a regional specialist will contact you for a brief intro.</p></div></div><div class="relative z-10 space-y-3"><div class="w-12 h-12 bg-gray-50 text-gray-600 rounded-full flex items-center justify-center mx-auto border-4 border-white shadow-sm"><svg class="h-6 w-6" fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg></div><div><h4 class="font-bold text-sm uppercase tracking-wide" data-i18n="thank_you_technical_review">Technical Review</h4><p class="text-xs text-slate-500 px-6" data-i18n="thank_you_draft_your_custom_blueprint_based_on_you">Draft your custom blueprint based on your specific kitchen footprint.</p></div></div></div></section><section class="space-y-4 pb-8" data-purpose="quick-support"><div class="text-center"><h3 class="font-extrabold uppercase tracking-tight text-lg" data-i18n="thank_you_need_immediate_support">Need Immediate Support?</h3><p class="text-sm text-slate-500" data-i18n="thank_you_our_engineering_support_line_is_open_24">Our engineering support line is open 24/7 for industrial partners.</p></div><div class="grid grid-cols-1 gap-3"><a class="bg-[#25D366] text-white py-4 rounded-xl flex items-center justify-center gap-3 font-bold shadow-lg shadow-green-100 active:scale-[0.98] transition-transform" href="https://wa.me/yourlink"><svg fill="currentColor" height="24" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"></path></svg> WhatsApp Support </a><a class="bg-white border border-gray-200 text-slate-900 py-4 rounded-xl flex items-center justify-center gap-3 font-bold active:bg-gray-50 transition-colors" href="mailto:solutions@yukoli.com"><svg class="h-6 w-6" fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg> solutions@yukoli.com</a></div></section></main><script defer="defer" src="/KitchenYuKoLi/assets/js/ui/products-dropdown.js?v=20260322-v3"></script><script defer="defer" src="/KitchenYuKoLi/assets/js/ui/navigator.js?v=20260322-v3"></script><script defer="defer" src="/KitchenYuKoLi/assets/js/ui/search-engine.js"></script><script defer="defer" src="/KitchenYuKoLi/assets/js/ui/footer.js?v=20260322-v3"></script><script defer="defer" src="/KitchenYuKoLi/assets/js/lang-registry.js"></script><script defer="defer" src="/KitchenYuKoLi/assets/js/translations.js"></script><script defer="defer" src="/KitchenYuKoLi/assets/js/translations-dropdown-template.js"></script><script defer="defer" src="/KitchenYuKoLi/assets/js/contacts.js"></script><script defer="defer" src="/KitchenYuKoLi/assets/js/ui/smart-popup.js"></script><script defer="defer" src="/KitchenYuKoLi/assets/js/router.js"></script><script defer="defer" src="/KitchenYuKoLi/assets/js/page-interactions.js"></script><script>document.addEventListener('DOMContentLoaded', function () {
+    if (window.translationManager) window.translationManager.initialize();
+  });</script><style>/* 底部导航项悬停效果 */
+.nav-item:hover {
+  color: #ec5b13;
+}
+
+.nav-item:hover p {
+  color: #ec5b13;
+}
+
+/* 激活状态 */
+.nav-item.active {
+  color: #ec5b13;
+}
+
+.nav-item.active p {
+  color: #ec5b13;
+}
+
+.nav-item.active span {
+  font-variation-settings: 'FILL' 1;
+}</style><script>(function() {
+  // 设置当前页面的激活状态
+  const currentPath = window.location.pathname;
+  const navItems = document.querySelectorAll('.nav-item');
+  
+  navItems.forEach(item => {
+    const href = item.getAttribute('href');
+    if (href && currentPath.includes(href)) {
+      item.classList.add('active');
+      item.classList.remove('text-slate-400', 'dark:text-slate-500');
+      item.classList.add('text-primary');
+    }
+  });
+  
+  // 触摸反馈
+  navItems.forEach(item => {
+    item.addEventListener('touchstart', function() {
+      this.style.transform = 'scale(0.95)';
+    });
+    item.addEventListener('touchend', function() {
+      this.style.transform = '';
+    });
+  });
+})();</script><footer data-component="footer" data-variant="mobile" data-active=""></footer><script src="/KitchenYuKoLi/assets/js/utils/device-utils.js"></script><script src="/KitchenYuKoLi/assets/js/spa-router.js"></script><script>document.addEventListener('DOMContentLoaded', function() {
+    if (window.SpaRouter && typeof window.SpaRouter.init === 'function') {
+      window.SpaRouter.init();
+    }
+  });</script></body></html>

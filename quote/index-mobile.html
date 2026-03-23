@@ -1,0 +1,186 @@
+<!doctype html><html class="light" lang="zh-CN"><head>
+<script>window.BASE_PATH="/KitchenYuKoLi";</script><link rel="canonical" href="/KitchenYuKoLi/quote/"/><link rel="alternate" media="only screen and (max-width: 767px)" href="/KitchenYuKoLi/quote/index-mobile.html"/><link rel="alternate" media="only screen and (min-width: 768px) and (max-width: 1279px)" href="/KitchenYuKoLi/quote/index-tablet.html"/><link rel="alternate" media="only screen and (min-width: 1280px)" href="/KitchenYuKoLi/quote/index-pc.html"/><script>/* Responsive redirect — runs before render, no flash */
+(function(){
+  // 防止 bfcache 恢复时重复 redirect
+  if (window.__redirectChecked) return;
+  window.__redirectChecked = true;
+
+  // 处理 clean-url 参数:重定向后清理 URL 为干净的目录 URL
+  var urlParams = new URLSearchParams(location.search);
+  var cleanUrl = urlParams.get('clean-url');
+  if (cleanUrl) {
+    console.log('[Responsive Redirect] Cleaning URL to:', cleanUrl);
+    history.replaceState({}, '', cleanUrl);
+    return;
+  }
+
+  // SPA 导航时跳过响应式重定向
+  console.log('[Responsive Redirect] Checking SPA flag: window.__spaNavigating =', window.__spaNavigating);
+  if (window.__spaNavigating) {
+    console.log('[Responsive Redirect] SPA navigation detected, skipping redirect');
+    return;
+  }
+
+  // 使用 DeviceUtils 统一管理设备判断
+  var currentFile = location.pathname.split('/').pop();
+  console.log('[Responsive Redirect] Current file:', currentFile, 'Pathname:', location.pathname);
+
+  // 当访问目录 URL(以 / 结尾)时,不要重定向(SPA 导航使用干净的目录 URL)
+  if (window.DeviceUtils && window.DeviceUtils.isDirectoryURL()) {
+    console.log('[Responsive Redirect] Directory URL detected, skipping redirect');
+    return;
+  }
+
+  // 使用 DeviceUtils 判断是否需要重定向
+  if (window.DeviceUtils && window.DeviceUtils.shouldRedirect(currentFile)) {
+    var deviceType = window.DeviceUtils.getDeviceType();
+    var targetFile;
+
+    if (deviceType === window.DeviceUtils.DeviceType.MOBILE) {
+      targetFile = 'index-mobile.html';
+    } else if (deviceType === window.DeviceUtils.DeviceType.TABLET) {
+      targetFile = 'index-tablet.html';
+    } else {
+      targetFile = 'index-pc.html';
+    }
+
+    console.log('[Responsive Redirect] Redirecting to:', targetFile);
+    location.href = targetFile;
+    return;
+  }
+
+  console.log('[Responsive Redirect] No redirect needed');
+})();</script><meta charset="utf-8"/><meta name="description" content="Request a Yukoli kitchen automation quote — fast, custom proposals for commercial food service operations."><meta property="og:type" content="website"><meta property="og:title" content="Yukoli Request a Quote (Mobile) - Final"><meta property="og:description" content="Request a Yukoli kitchen automation quote — fast, custom proposals for commercial food service operations."><meta property="og:url" content="https://www.kitchen.yukoli.com/quote/index-mobile.html"><meta property="og:image" content="https://www.kitchen.yukoli.com/assets/images/og-home.webp"><meta content="width=device-width,initial-scale=1" name="viewport"/><title>Yukoli Request a Quote (Mobile) - Final</title><link rel="preload" href="/KitchenYuKoLi/assets/fonts/local-fonts.css" as="style"><link rel="preload" href="/KitchenYuKoLi/assets/css/styles.css" as="style"><link rel="preload" href="/KitchenYuKoLi/assets/css/tailwind.css" as="style"><link rel="preload" href="/KitchenYuKoLi/assets/fonts/public-sans-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin><link rel="preload" href="/KitchenYuKoLi/assets/fonts/public-sans-latin-700-normal.woff2" as="font" type="font/woff2" crossorigin><link href="/KitchenYuKoLi/assets/fonts/local-fonts.css" rel="stylesheet"/><link rel="stylesheet" href="/KitchenYuKoLi/assets/css/styles.css"><link rel="stylesheet" href="/KitchenYuKoLi/assets/css/tailwind.css"><link rel="stylesheet" href="/KitchenYuKoLi/assets/css/z-index-system.css"><link rel="stylesheet" href="/KitchenYuKoLi/assets/css/performance-optimized.css"/><style>body {
+            font-family: 'Public Sans', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .thumb-zone-bottom {
+            padding-bottom: env(safe-area-inset-bottom);
+        }</style><style>body {
+      min-height: 100dvh;
+    }</style><script>(function(){
+if(localStorage.getItem('darkMode')==='true')document.documentElement.classList.add('dark')})()</script><link rel="stylesheet" href="/KitchenYuKoLi/assets/css/skeleton.css"/><link rel="icon" href="/KitchenYuKoLi/assets/images/logo_header.webp" type="image/webp"></head><body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 min-h-screen flex flex-col overflow-x-hidden"><navigator data-component="navigator" data-variant="mobile" data-active="quote"></navigator><style>/* Header按钮悬停效果 */
+header button:hover {
+  transform: scale(1.05);
+}
+
+header button:active {
+  transform: scale(0.95);
+}</style><script>(function() {
+  // 语言切换器功能
+  const langToggleBtn = document.getElementById('lang-toggle-btn');
+  const langDropdown = document.getElementById('language-dropdown');
+  const langSearchInput = document.getElementById('lang-search-input');
+  const langOptions = document.querySelectorAll('.lang-option');
+  const currentLangLabel = document.getElementById('current-lang-label');
+  
+  let isDropdownOpen = false;
+  
+  // 切换下拉菜单
+  if (langToggleBtn && langDropdown) {
+    langToggleBtn.addEventListener('click', function(e) {
+      e.stopPropagation();
+      isDropdownOpen = !isDropdownOpen;
+      langDropdown.style.display = isDropdownOpen ? 'block' : 'none';
+    });
+    
+    // 点击外部关闭
+    document.addEventListener('click', function() {
+      if (isDropdownOpen) {
+        isDropdownOpen = false;
+        langDropdown.style.display = 'none';
+      }
+    });
+    
+    // 搜索功能
+    if (langSearchInput) {
+      langSearchInput.addEventListener('input', function(e) {
+        const search = e.target.value.toLowerCase();
+        langOptions.forEach(option => {
+          const text = option.textContent.toLowerCase();
+          option.style.display = text.includes(search) ? 'block' : 'none';
+        });
+      });
+    }
+    
+    // 选择语言
+    langOptions.forEach(option => {
+      option.addEventListener('click', function() {
+        const langCode = this.getAttribute('data-code');
+        const langName = this.textContent;
+        
+        // 更新显示
+        if (currentLangLabel) {
+          currentLangLabel.textContent = langName;
+        }
+        
+        // 调用语言切换逻辑
+        if (window.translationManager) {
+          window.translationManager.setLanguage(langCode);
+        }
+        
+        // 关闭下拉菜单
+        isDropdownOpen = false;
+        langDropdown.style.display = 'none';
+      });
+    });
+  }
+  
+  // 通知按钮点击效果
+  const notifyBtn = document.querySelector('header button[aria-label*="Notification"]');
+  if (notifyBtn) {
+    notifyBtn.addEventListener('click', function() {
+      console.log('Notifications clicked');
+      // TODO: 实现通知功能
+    });
+  }
+})();</script><main id="spa-content" class="flex-1 p-4 pb-28 max-w-md mx-auto w-full overflow-x-hidden"><section class="mb-8"><h2 class="text-2xl font-extrabold mb-2 text-slate-900 dark:text-slate-50" data-i18n="quote_mobile_form_title">Tell us about your project</h2><p class="text-slate-600 dark:text-slate-400 text-sm mb-6" data-i18n="quote_mobile_form_desc">Complete the details below to get a fast, accurate estimate from our team.</p><form class="space-y-5"><div class="space-y-1.5"><label class="block text-sm font-bold text-slate-700 dark:text-slate-300 ml-1" data-i18n="landing_full_name">Full Name</label> <input class="w-full h-14 px-4 rounded-xl border-primary/20 bg-white dark:bg-slate-800 focus:ring-2 focus:ring-primary focus:border-primary transition-all text-base" placeholder="e.g. Alex Johnson"/></div><div class="space-y-1.5"><label class="block text-sm font-bold text-slate-700 dark:text-slate-300 ml-1" data-i18n="quote_email_address">Email Address</label> <input class="w-full h-14 px-4 rounded-xl border-primary/20 bg-white dark:bg-slate-800 focus:ring-2 focus:ring-primary focus:border-primary transition-all text-base" placeholder="alex@example.com" type="email"/></div><div class="space-y-1.5"><label class="block text-sm font-bold text-slate-700 dark:text-slate-300 ml-1" data-i18n="quote_service_type">Service Type</label> <select class="w-full h-14 px-4 rounded-xl border-primary/20 bg-white dark:bg-slate-800 focus:ring-2 focus:ring-primary focus:border-primary transition-all text-base appearance-none"><option data-i18n="footer_hardware_title">Hardware</option><option data-i18n="nav_solutions">Solutions</option><option data-i18n="quote_service_iot">IoT Systems</option></select></div><div class="space-y-1.5"><label class="block text-sm font-bold text-slate-700 dark:text-slate-300 ml-1" data-i18n="quote_project_budget">Project Budget</label><div class="grid grid-cols-2 gap-3"><button class="h-12 border-2 border-primary bg-primary/5 text-primary font-bold rounded-xl transition-all" type="button" data-i18n="quote_budget_under_5k">Under $5k</button> <button class="h-12 border-2 border-primary/10 bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-400 font-bold rounded-xl hover:border-primary/40 transition-all" type="button" data-i18n="quote_budget_5k_15k">$5k - $15k</button></div></div><div class="space-y-1.5 pt-2"><label class="block text-sm font-bold text-slate-700 dark:text-slate-300 ml-1" data-i18n="quote_project_brief">Project Brief (Optional)</label> <textarea class="w-full p-4 rounded-xl border-primary/20 bg-white dark:bg-slate-800 focus:ring-2 focus:ring-primary focus:border-primary transition-all text-base min-h-[120px]" placeholder="Tell us a little more about what you're looking for..."></textarea></div></form></section><section class="mt-8 border-t border-primary/10 pt-6"><details class="group"><summary class="flex items-center justify-between cursor-pointer list-none"><h3 class="text-sm font-bold uppercase tracking-widest text-slate-500 dark:text-slate-400" data-i18n="quote_why_yukoli">Why choose Yukoli?</h3><span class="material-symbols-outlined transition-transform group-open:rotate-180 text-slate-400">expand_more</span></summary><div class="mt-4 grid grid-cols-1 gap-4"><div class="flex items-center gap-4 p-3 rounded-lg bg-primary/5"><span class="material-symbols-outlined text-primary">verified</span><div><p class="font-bold text-sm" data-i18n="quote_trust_experts_title">Certified Experts</p><p class="text-xs text-slate-500" data-i18n="quote_trust_experts_desc">Over 10+ years of industry experience</p></div></div><div class="flex items-center gap-4 p-3 rounded-lg bg-primary/5"><span class="material-symbols-outlined text-primary">speed</span><div><p class="font-bold text-sm" data-i18n="quote_trust_speed_title">Fast Turnaround</p><p class="text-xs text-slate-500" data-i18n="quote_trust_speed_desc">Quotes delivered within 24 hours</p></div></div></div></details></section></main><div class="sticky bottom-0 bg-white dark:bg-slate-900 border-t border-primary/10 thumb-zone-bottom shadow-[0_-10px_30px_rgba(0,0,0,0.05)]"><div class="px-4 pt-4 pb-2"><button class="w-full h-14 bg-primary text-white font-bold text-lg rounded-xl shadow-lg shadow-primary/30 flex items-center justify-center gap-2 active:scale-[0.98] transition-all"><span data-i18n="quote_btn_submit_inquiry">Submit Inquiry</span> <span class="material-symbols-outlined">send</span></button></div></div><script defer="defer" src="/KitchenYuKoLi/assets/js/ui/products-dropdown.js?v=20260322-v3"></script><script defer="defer" src="/KitchenYuKoLi/assets/js/ui/navigator.js?v=20260322-v3"></script><script defer="defer" src="/KitchenYuKoLi/assets/js/ui/search-engine.js"></script><script defer="defer" src="/KitchenYuKoLi/assets/js/ui/footer.js?v=20260322-v3"></script><script defer="defer" src="/KitchenYuKoLi/assets/js/lang-registry.js"></script><script defer="defer" src="/KitchenYuKoLi/assets/js/translations.js"></script><script defer="defer" src="/KitchenYuKoLi/assets/js/translations-dropdown-template.js"></script><script defer="defer" src="/KitchenYuKoLi/assets/js/contacts.js"></script><script defer="defer" src="/KitchenYuKoLi/assets/js/ui/smart-popup.js"></script><script defer="defer" src="/KitchenYuKoLi/assets/js/router.js"></script><script defer="defer" src="/KitchenYuKoLi/assets/js/page-interactions.js"></script><script>document.addEventListener('DOMContentLoaded', function () {
+    if (window.translationManager) window.translationManager.initialize();
+  });</script><style>/* 底部导航项悬停效果 */
+.nav-item:hover {
+  color: #ec5b13;
+}
+
+.nav-item:hover p {
+  color: #ec5b13;
+}
+
+/* 激活状态 */
+.nav-item.active {
+  color: #ec5b13;
+}
+
+.nav-item.active p {
+  color: #ec5b13;
+}
+
+.nav-item.active span {
+  font-variation-settings: 'FILL' 1;
+}</style><script>(function() {
+  // 设置当前页面的激活状态
+  const currentPath = window.location.pathname;
+  const navItems = document.querySelectorAll('.nav-item');
+  
+  navItems.forEach(item => {
+    const href = item.getAttribute('href');
+    if (href && currentPath.includes(href)) {
+      item.classList.add('active');
+      item.classList.remove('text-slate-400', 'dark:text-slate-500');
+      item.classList.add('text-primary');
+    }
+  });
+  
+  // 触摸反馈
+  navItems.forEach(item => {
+    item.addEventListener('touchstart', function() {
+      this.style.transform = 'scale(0.95)';
+    });
+    item.addEventListener('touchend', function() {
+      this.style.transform = '';
+    });
+  });
+})();</script><footer data-component="footer" data-variant="mobile" data-active=""></footer><script src="/KitchenYuKoLi/assets/js/utils/device-utils.js"></script><script src="/KitchenYuKoLi/assets/js/spa-router.js"></script><script>document.addEventListener('DOMContentLoaded', function() {
+    if (window.SpaRouter && typeof window.SpaRouter.init === 'function') {
+      window.SpaRouter.init();
+    }
+  });</script></body></html>

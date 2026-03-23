@@ -1,0 +1,136 @@
+<!doctype html><html class="light" lang="zh-CN"><head><meta charset="utf-8"/><meta name="description" content="Yukoli IoT support and after-sales service — remote diagnostics and maintenance for commercial kitchen automation."><meta property="og:type" content="website"><meta property="og:title" content="Yukoli - IoT & Support"><meta property="og:description" content="Yukoli IoT support and after-sales service — remote diagnostics and maintenance for commercial kitchen automation."><meta property="og:url" content="https://www.kitchen.yukoli.com/support/index-mobile.html"><meta property="og:image" content="https://www.kitchen.yukoli.com/assets/images/og-home.webp"><meta content="width=device-width,initial-scale=1" name="viewport"/><title>Yukoli - IoT &amp; Support</title><link rel="preload" href="/assets/fonts/local-fonts.css" as="style"><link rel="preload" href="/assets/css/styles.css" as="style"><link rel="preload" href="/assets/css/tailwind.css" as="style"><link rel="preload" href="/assets/fonts/public-sans-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin><link rel="preload" href="/assets/fonts/public-sans-latin-700-normal.woff2" as="font" type="font/woff2" crossorigin><link href="/assets/fonts/local-fonts.css" rel="stylesheet"/><link rel="stylesheet" href="/assets/css/styles.css"><link rel="stylesheet" href="/assets/css/tailwind.css"><link rel="stylesheet" href="/assets/css/z-index-system.css"><link rel="stylesheet" href="/assets/css/performance-optimized.css"/><style>body {
+      min-height: 100dvh;
+    }</style><script>(function(){if(localStorage.getItem('darkMode')==='true')document.documentElement.classList.add('dark')})()</script><link rel="stylesheet" href="/assets/css/skeleton.css"/><link rel="icon" href="/assets/images/logo_header.webp" type="image/webp"></head><body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 antialiased overflow-x-hidden"><navigator data-component="navigator" data-variant="mobile" data-active="support"></navigator><div class="relative flex min-h-screen flex-col overflow-x-hidden max-w-md mx-auto shadow-2xl bg-background-light dark:bg-background-dark pb-24"><style>/* Header按钮悬停效果 */
+header button:hover {
+  transform: scale(1.05);
+}
+
+header button:active {
+  transform: scale(0.95);
+}</style><script>(function() {
+  // 语言切换器功能
+  const langToggleBtn = document.getElementById('lang-toggle-btn');
+  const langDropdown = document.getElementById('language-dropdown');
+  const langSearchInput = document.getElementById('lang-search-input');
+  const langOptions = document.querySelectorAll('.lang-option');
+  const currentLangLabel = document.getElementById('current-lang-label');
+  
+  let isDropdownOpen = false;
+  
+  // 切换下拉菜单
+  if (langToggleBtn && langDropdown) {
+    langToggleBtn.addEventListener('click', function(e) {
+      e.stopPropagation();
+      isDropdownOpen = !isDropdownOpen;
+      langDropdown.style.display = isDropdownOpen ? 'block' : 'none';
+    });
+    
+    // 点击外部关闭
+    document.addEventListener('click', function() {
+      if (isDropdownOpen) {
+        isDropdownOpen = false;
+        langDropdown.style.display = 'none';
+      }
+    });
+    
+    // 搜索功能
+    if (langSearchInput) {
+      langSearchInput.addEventListener('input', function(e) {
+        const search = e.target.value.toLowerCase();
+        langOptions.forEach(option => {
+          const text = option.textContent.toLowerCase();
+          option.style.display = text.includes(search) ? 'block' : 'none';
+        });
+      });
+    }
+    
+    // 选择语言
+    langOptions.forEach(option => {
+      option.addEventListener('click', function() {
+        const langCode = this.getAttribute('data-code');
+        const langName = this.textContent;
+        
+        // 更新显示
+        if (currentLangLabel) {
+          currentLangLabel.textContent = langName;
+        }
+        
+        // 调用语言切换逻辑
+        if (window.translationManager) {
+          window.translationManager.setLanguage(langCode);
+        }
+        
+        // 关闭下拉菜单
+        isDropdownOpen = false;
+        langDropdown.style.display = 'none';
+      });
+    });
+  }
+  
+  // 通知按钮点击效果
+  const notifyBtn = document.querySelector('header button[aria-label*="Notification"]');
+  if (notifyBtn) {
+    notifyBtn.addEventListener('click', function() {
+      console.log('Notifications clicked');
+      // TODO: 实现通知功能
+    });
+  }
+})();</script><div class="p-4"><div class="relative overflow-hidden rounded-xl bg-slate-900 aspect-[16/9] flex items-end group" data-alt="Modern high-tech industrial facility in Southeast Asia" style='background-image: linear-gradient(to top, rgba(34, 22, 16, 0.9), rgba(34, 22, 16, 0)), url("https://lh3.googleusercontent.com/aida-public/AB6AXuDanfZX_RdPLuMMRkwPpLdOu9eogiTO8n1NsRLweU6mBzXTBJ59R9i9YhVtjuztmYh5AwR371xQucQKa-zDGHwdiXuI4NWDar7xLIQxdXsI6jdWZJUp_9-iRnnjZgwvl9l9pLzz8fQEXf7AGITEFWO14N9Yjcca2_uiQJXtMdSY20fk4JZZnS2FiQs9em2EPmH2liN40Q86aXQmsBU1KktP5UFvbEZvVLKOd1xeS_3d8YhgiL7J5hsc8mayVOGJzFCyk9rGKjytTA9g"); background-size: cover; background-position: center;'><div class="p-5 w-full"><span class="inline-block px-2 py-1 mb-2 rounded bg-primary text-white text-[10px] font-bold uppercase tracking-wider" data-i18n="support_reliability_first">Reliability First</span><h2 class="text-white text-2xl font-bold leading-tight" data-i18n="support_peace_of_mind_for_se_asia">Peace of Mind for SE Asia</h2><p class="text-slate-300 text-sm mt-1" data-i18n="support_global_service_local_expertise">Global service, local expertise.</p></div></div></div><div class="px-4 py-2"><a class="flex items-center justify-between bg-[#06C755] hover:bg-green-700 text-white p-4 rounded-xl shadow-lg transition-all active:scale-95" href="https://wa.me/8613163756465" target="_blank" rel="noopener noreferrer"><div class="flex items-center gap-3"><div class="bg-white/20 p-2 rounded-full flex items-center justify-center"><span class="material-symbols-outlined">chat</span></div><div><p class="font-bold text-base" data-i18n="support_one_tap_whatsapp_support">One-Tap WhatsApp Support</p><p class="text-xs text-green-100" data-i18n="support_direct_line_to_regional_engineers">Direct line to regional engineers</p></div></div><span class="material-symbols-outlined">arrow_forward_ios</span></a></div><div class="px-4 pt-6 pb-2 flex justify-between items-end"><h3 class="text-slate-900 dark:text-slate-100 text-xl font-bold leading-tight" data-i18n="support_machine_health">Machine Health</h3><a class="text-primary text-sm font-semibold" href="/catalog" data-i18n="quote_view_all">View All</a></div><div class="flex gap-4 p-4 overflow-x-auto no-scrollbar"><div class="flex min-w-[160px] flex-col gap-3 rounded-xl p-5 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 shadow-sm"><div class="flex justify-between items-start"><div class="p-2 rounded-lg bg-primary/10 text-primary"><span class="material-symbols-outlined">settings_input_component</span></div><span class="text-[10px] font-bold text-green-500 uppercase">Live</span></div><div><p class="text-slate-500 dark:text-slate-400 text-xs font-medium" data-i18n="support_active_units">Active Units</p><p class="text-slate-900 dark:text-slate-100 text-2xl font-bold">128</p></div><div class="flex items-center gap-1 text-green-500 text-xs font-bold"><span class="material-symbols-outlined text-sm">trending_up</span> <span>+5.2%</span></div></div><div class="flex min-w-[160px] flex-col gap-3 rounded-xl p-5 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 shadow-sm"><div class="flex justify-between items-start"><div class="p-2 rounded-lg bg-primary/10 text-primary"><span class="material-symbols-outlined">monitor_heart</span></div><span class="text-[10px] font-bold text-primary uppercase">Optimal</span></div><div><p class="text-slate-500 dark:text-slate-400 text-xs font-medium" data-i18n="support_health_score">Health Score</p><p class="text-slate-900 dark:text-slate-100 text-2xl font-bold">98%</p></div><div class="flex items-center gap-1 text-slate-400 text-xs font-bold"><span class="material-symbols-outlined text-sm">horizontal_rule</span> <span>Stable</span></div></div><div class="flex min-w-[160px] flex-col gap-3 rounded-xl p-5 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 shadow-sm"><div class="flex justify-between items-start"><div class="p-2 rounded-lg bg-primary/10 text-primary"><span class="material-symbols-outlined">timer</span></div><span class="text-[10px] font-bold text-green-500 uppercase">24/7</span></div><div><p class="text-slate-500 dark:text-slate-400 text-xs font-medium" data-i18n="case_uptime">Uptime</p><p class="text-slate-900 dark:text-slate-100 text-2xl font-bold">99.9%</p></div><div class="flex items-center gap-1 text-green-500 text-xs font-bold"><span class="material-symbols-outlined text-sm">trending_up</span> <span>+0.1%</span></div></div></div><div class="px-4 py-6"><h3 class="text-slate-900 dark:text-slate-100 text-xl font-bold leading-tight mb-4" data-i18n="support_service_network">Service Network</h3><div class="relative rounded-xl overflow-hidden bg-slate-200 dark:bg-slate-800 aspect-square" data-location="Southeast Asia" style=""><div class="absolute inset-0 bg-cover bg-center opacity-80" data-alt="Abstract map of Southeast Asia with glowing node points" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuC61597Vf9vxPOOUww9O4Ezf3MGLG1PwP_SelSJfzM098h-iA72uNXqCd61U17mEsxfx_DAHEnjoPh2iov3Qj4l2DkqA5orMMF40NtEBRvSF-Hi85oM_ptofhCbaMhbeo39RwJwKPpl8g63lJCZwkFWDFXAqmo71CSkcV9omQVr901s2EsGF4sretUZJ_4k90TF6hEcKBM4P_pbqQvnqmn5VZMiKRF9RZ2j47w68qEsRF44s7MAubRly6dxwdmLIRat0BdzY5jDFXc9");'></div><div class="absolute inset-0 bg-gradient-to-t from-slate-900/60 to-transparent"></div><div class="absolute top-1/3 left-1/4 animate-pulse"><div class="bg-primary text-white p-1 rounded-full border-2 border-white shadow-lg"><span class="material-symbols-outlined text-sm block">location_on</span></div></div><div class="absolute top-1/2 right-1/3"><div class="bg-primary text-white p-1 rounded-full border-2 border-white shadow-lg"><span class="material-symbols-outlined text-sm block">location_on</span></div></div><div class="absolute bottom-4 left-4 right-4 bg-white/10 backdrop-blur-md rounded-lg p-3 border border-white/20"><p class="text-white text-xs font-bold" data-i18n="support_currently_active">Currently Active:</p><p class="text-white text-lg font-bold" data-i18n="support_14_service_hubs_in_se_asia">14 Service Hubs in SE Asia</p></div></div></div><div class="px-4 pb-8"><button class="w-full bg-primary hover:bg-primary/90 text-white font-bold py-4 rounded-xl shadow-lg shadow-primary/30 transition-all active:scale-95 flex items-center justify-center gap-2"><span class="material-symbols-outlined">add_circle</span> Register New Equipment</button></div><style>.no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        .fill-1 {
+            font-variation-settings: 'FILL' 1;
+        }</style><script defer="defer" src="/assets/js/ui/products-dropdown.js?v=20260322-v3"></script><script defer="defer" src="/assets/js/ui/navigator.js?v=20260322-v3"></script><script defer="defer" src="/assets/js/ui/search-engine.js"></script><script defer="defer" src="/assets/js/ui/footer.js?v=20260322-v3"></script><script defer="defer" src="/assets/js/lang-registry.js"></script><script defer="defer" src="/assets/js/translations.js"></script><script defer="defer" src="/assets/js/translations-dropdown-template.js"></script><script defer="defer" src="/assets/js/contacts.js"></script><script defer="defer" src="/assets/js/ui/smart-popup.js"></script><script defer="defer" src="/assets/js/router.js"></script><script defer="defer" src="/assets/js/page-interactions.js"></script><script>document.addEventListener('DOMContentLoaded', function () {
+    if (window.translationManager) window.translationManager.initialize();
+  });</script></div><style>/* 底部导航项悬停效果 */
+.nav-item:hover {
+  color: #ec5b13;
+}
+
+.nav-item:hover p {
+  color: #ec5b13;
+}
+
+/* 激活状态 */
+.nav-item.active {
+  color: #ec5b13;
+}
+
+.nav-item.active p {
+  color: #ec5b13;
+}
+
+.nav-item.active span {
+  font-variation-settings: 'FILL' 1;
+}</style><script>(function() {
+  // 设置当前页面的激活状态
+  const currentPath = window.location.pathname;
+  const navItems = document.querySelectorAll('.nav-item');
+  
+  navItems.forEach(item => {
+    const href = item.getAttribute('href');
+    if (href && currentPath.includes(href)) {
+      item.classList.add('active');
+      item.classList.remove('text-slate-400', 'dark:text-slate-500');
+      item.classList.add('text-primary');
+    }
+  });
+  
+  // 触摸反馈
+  navItems.forEach(item => {
+    item.addEventListener('touchstart', function() {
+      this.style.transform = 'scale(0.95)';
+    });
+    item.addEventListener('touchend', function() {
+      this.style.transform = '';
+    });
+  });
+})();</script><footer data-component="footer" data-variant="mobile" data-active="support"></footer><script src="/assets/js/utils/device-utils.js"></script><script src="/assets/js/spa-router.js"></script><script>document.addEventListener('DOMContentLoaded', function() {
+    if (window.SpaRouter && typeof window.SpaRouter.init === 'function') {
+      window.SpaRouter.init();
+    }
+  });</script></body></html>

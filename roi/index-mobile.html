@@ -1,0 +1,111 @@
+<!doctype html><html class="light" lang="zh-CN"><head>
+<script>window.BASE_PATH="/KitchenYuKoLi";</script><link rel="canonical" href="/KitchenYuKoLi/roi/"/><link rel="alternate" media="only screen and (max-width: 767px)" href="/KitchenYuKoLi/roi/index-mobile.html"/><link rel="alternate" media="only screen and (min-width: 768px) and (max-width: 1279px)" href="/KitchenYuKoLi/roi/index-tablet.html"/><link rel="alternate" media="only screen and (min-width: 1280px)" href="/KitchenYuKoLi/roi/index-pc.html"/><script>/* Responsive redirect — runs before render, no flash */
+(function(){
+  // 防止 bfcache 恢复时重复 redirect
+  if (window.__redirectChecked) return;
+  window.__redirectChecked = true;
+
+  // 处理 clean-url 参数:重定向后清理 URL 为干净的目录 URL
+  var urlParams = new URLSearchParams(location.search);
+  var cleanUrl = urlParams.get('clean-url');
+  if (cleanUrl) {
+    console.log('[Responsive Redirect] Cleaning URL to:', cleanUrl);
+    history.replaceState({}, '', cleanUrl);
+    return;
+  }
+
+  // SPA 导航时跳过响应式重定向
+  console.log('[Responsive Redirect] Checking SPA flag: window.__spaNavigating =', window.__spaNavigating);
+  if (window.__spaNavigating) {
+    console.log('[Responsive Redirect] SPA navigation detected, skipping redirect');
+    return;
+  }
+
+  // 使用 DeviceUtils 统一管理设备判断
+  var currentFile = location.pathname.split('/').pop();
+  console.log('[Responsive Redirect] Current file:', currentFile, 'Pathname:', location.pathname);
+
+  // 当访问目录 URL(以 / 结尾)时,不要重定向(SPA 导航使用干净的目录 URL)
+  if (window.DeviceUtils && window.DeviceUtils.isDirectoryURL()) {
+    console.log('[Responsive Redirect] Directory URL detected, skipping redirect');
+    return;
+  }
+
+  // 使用 DeviceUtils 判断是否需要重定向
+  if (window.DeviceUtils && window.DeviceUtils.shouldRedirect(currentFile)) {
+    var deviceType = window.DeviceUtils.getDeviceType();
+    var targetFile;
+
+    if (deviceType === window.DeviceUtils.DeviceType.MOBILE) {
+      targetFile = 'index-mobile.html';
+    } else if (deviceType === window.DeviceUtils.DeviceType.TABLET) {
+      targetFile = 'index-tablet.html';
+    } else {
+      targetFile = 'index-pc.html';
+    }
+
+    console.log('[Responsive Redirect] Redirecting to:', targetFile);
+    location.href = targetFile;
+    return;
+  }
+
+  console.log('[Responsive Redirect] No redirect needed');
+})();</script><meta charset="utf-8"/><meta name="description" content="Yukoli 2026 ROI Calculator — calculate return on investment for kitchen automation and IoT deployments."><meta property="og:type" content="website"><meta property="og:title" content="Yukoli ROI Calculator"><meta property="og:description" content="Yukoli 2026 ROI Calculator — calculate return on investment for kitchen automation and IoT deployments."><meta property="og:url" content="https://www.kitchen.yukoli.com/roi/index-mobile.html"><meta property="og:image" content="https://www.kitchen.yukoli.com/assets/images/og-home.webp"><meta content="width=device-width,initial-scale=1" name="viewport"/><title>Yukoli 2026 ROI Calculator</title><link href="/KitchenYuKoLi/assets/fonts/local-fonts.css" rel="stylesheet"/><link rel="stylesheet" href="/KitchenYuKoLi/assets/css/styles.css"><link rel="stylesheet" href="/KitchenYuKoLi/assets/css/tailwind.css"><style>body { font-family: 'Public Sans', sans-serif; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        /* Collapsible results section */
+        #results-body { transition: max-height 0.3s ease, opacity 0.3s ease; overflow: hidden; }
+        #results-body.collapsed { max-height: 0 !important; opacity: 0; }</style><script>(function(){
+if(localStorage.getItem('darkMode')==='true')document.documentElement.classList.add('dark')})()</script><link rel="stylesheet" href="/KitchenYuKoLi/assets/css/skeleton.css"/><link rel="icon" href="/KitchenYuKoLi/assets/images/logo_header.webp" type="image/webp"></head><body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 min-h-screen overflow-x-hidden"><navigator data-component="navigator" data-variant="mobile" data-active="roi"></navigator><div class="layout-container flex h-full grow flex-col"><main id="spa-content" class="flex-1 px-4 py-5 pb-24 flex flex-col gap-4 overflow-x-hidden"><div class="grid grid-cols-2 gap-3"><div class="bg-white dark:bg-slate-900/50 p-4 rounded-xl border border-slate-200 dark:border-slate-800"><p class="text-slate-500 text-[10px] font-bold uppercase tracking-wider mb-1" data-i18n="roi_5y_roi">5Y ROI</p><div class="flex items-end gap-1"><h3 class="text-2xl font-black text-slate-900 dark:text-slate-100">342%</h3><span class="text-emerald-500 text-[10px] font-bold mb-0.5">+12%</span></div></div><div class="bg-white dark:bg-slate-900/50 p-4 rounded-xl border border-slate-200 dark:border-slate-800"><p class="text-slate-500 text-[10px] font-bold uppercase tracking-wider mb-1">Payback</p><div class="flex items-end gap-1"><h3 class="text-2xl font-black text-primary">14.2</h3><span class="text-slate-500 text-[10px] font-bold mb-0.5">mo</span></div></div><div class="col-span-2 bg-white dark:bg-slate-900/50 p-4 rounded-xl border border-slate-200 dark:border-slate-800 flex items-center justify-between"><div><p class="text-slate-500 text-[10px] font-bold uppercase tracking-wider mb-1" data-i18n="roi_carbon_reduction">Carbon Reduction</p><div class="flex items-end gap-1"><h3 class="text-2xl font-black text-slate-900 dark:text-slate-100" data-i18n="roi_2_4k">2.4k</h3><span class="text-slate-500 text-[10px] font-bold mb-0.5" data-i18n="roi_tons_co2e">Tons CO2e</span></div></div><div class="size-2 rounded-full bg-emerald-500 animate-pulse"></div></div></div><div class="bg-white dark:bg-slate-900/50 p-4 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm"><div class="flex items-center gap-2 mb-4"><span class="material-symbols-outlined text-primary text-base">tune</span><h3 class="text-sm font-bold" data-i18n="roi_input_parameters">Input Parameters</h3></div><div class="space-y-4"><div class="flex flex-col gap-1.5"><label class="text-xs font-semibold text-slate-600 dark:text-slate-400 flex justify-between">Number of Outlets <span class="text-primary">124</span></label> <input class="w-full h-3 bg-slate-200 dark:bg-slate-800 rounded-lg appearance-none cursor-pointer accent-primary" max="500" min="1" type="range" value="124"/><div class="flex justify-between text-[9px] text-slate-400 font-bold uppercase tracking-tighter"><span data-i18n="roi_1_outlet">1 Outlet</span><span data-i18n="roi_500_outlets">500 Outlets</span></div></div><div class="flex flex-col gap-1.5"><label class="text-xs font-semibold text-slate-600 dark:text-slate-400" data-i18n="roi_monthly_labor_cost">Monthly Labor Cost ($)</label><div class="flex rounded-lg overflow-hidden border border-slate-200 dark:border-slate-800"><span class="flex items-center justify-center bg-slate-50 dark:bg-slate-800 px-2.5 text-slate-500 border-r border-slate-200 dark:border-slate-800"><span class="material-symbols-outlined text-sm">payments</span> </span><input class="w-full bg-white dark:bg-slate-900 border-0 focus:ring-1 focus:ring-primary text-sm p-2.5" placeholder="0.00" type="number" value="450000"/></div></div><div class="flex flex-col gap-1.5"><label class="text-xs font-semibold text-slate-600 dark:text-slate-400" data-i18n="roi_energy_usage_kwh_mo">Energy Usage (kWh/mo)</label><div class="flex rounded-lg overflow-hidden border border-slate-200 dark:border-slate-800"><span class="flex items-center justify-center bg-slate-50 dark:bg-slate-800 px-2.5 text-slate-500 border-r border-slate-200 dark:border-slate-800"><span class="material-symbols-outlined text-sm">bolt</span> </span><input class="w-full bg-white dark:bg-slate-900 border-0 focus:ring-1 focus:ring-primary text-sm p-2.5" placeholder="0.00" type="number" value="18500"/></div></div><div class="h-px bg-slate-200 dark:bg-slate-800"></div><div class="flex flex-col gap-2"><p class="text-xs font-semibold text-slate-600 dark:text-slate-400" data-i18n="roi_deployment_strategy">Deployment Strategy</p><div class="grid grid-cols-2 gap-2"><button class="px-3 py-2 text-xs font-bold rounded-lg border border-primary bg-primary/10 text-primary" data-i18n="roi_phased_rollout">Phased Rollout</button> <button class="px-3 py-2 text-xs font-bold rounded-lg border border-slate-200 dark:border-slate-800 text-slate-500" data-i18n="roi_instant_deploy">Instant Deploy</button></div></div><button class="w-full py-3 bg-slate-900 dark:bg-white text-white dark:text-slate-900 rounded-lg text-sm font-bold flex items-center justify-center gap-2 hover:opacity-90 transition-opacity"><span class="material-symbols-outlined text-sm">refresh</span> Recalculate</button></div></div><div class="bg-primary p-4 rounded-xl text-white flex items-center gap-3"><div class="size-9 rounded-full bg-white/20 flex items-center justify-center flex-shrink-0"><span class="material-symbols-outlined text-sm">verified</span></div><div><p class="text-[10px] font-bold uppercase opacity-80" data-i18n="roi_system_confidence">System Confidence</p><h4 class="text-base font-black" data-i18n="roi_98_4_accuracy">98.4% Accuracy</h4></div></div><div class="bg-white dark:bg-slate-900/50 rounded-xl border border-slate-200 dark:border-slate-800 overflow-hidden"><button class="w-full flex items-center justify-between px-4 py-3 hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors" onclick="toggleResults()"><div class="flex items-center gap-2"><span class="material-symbols-outlined text-primary text-base">bar_chart</span><h3 class="text-sm font-bold" data-i18n="roi_5_year_impact_chart">5-Year Impact Chart</h3></div><span id="results-chevron" class="material-symbols-outlined text-slate-400 transition-transform duration-300">expand_more</span></button><div id="results-body" style="max-height: 500px;"><div class="px-4 pb-4"><div class="flex gap-2 mb-3"><span class="flex items-center gap-1 px-2 py-1 rounded-full bg-slate-100 dark:bg-slate-800 text-[9px] font-bold uppercase"><span class="size-1.5 rounded-full bg-primary inline-block"></span>Net Profit </span><span class="flex items-center gap-1 px-2 py-1 rounded-full bg-slate-100 dark:bg-slate-800 text-[9px] font-bold uppercase"><span class="size-1.5 rounded-full bg-slate-400 inline-block"></span>Baseline</span></div><div class="relative" style="height:200px;"><canvas id="roi-cumulative-chart"></canvas></div></div></div></div><div class="bg-white dark:bg-slate-900/50 p-4 rounded-xl border border-slate-200 dark:border-slate-800"><h4 class="text-sm font-bold mb-3 flex items-center gap-2"><span class="material-symbols-outlined text-primary text-base">eco</span>ESG Profile</h4><div class="space-y-3"><div><div class="flex justify-between text-xs mb-1"><span class="text-slate-500" data-i18n="roi_waste_reduction">Waste Reduction</span><span class="font-bold text-primary">68%</span></div><div class="w-full h-2 bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden"><div class="h-full bg-primary rounded-full" style="width: 68%"></div></div></div><div><div class="flex justify-between text-xs mb-1"><span class="text-slate-500" data-i18n="roi_green_energy">Green Energy</span><span class="font-bold text-primary">42%</span></div><div class="w-full h-2 bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden"><div class="h-full bg-primary rounded-full" style="width: 42%"></div></div></div></div></div><div class="bg-white dark:bg-slate-900/50 p-4 rounded-xl border border-slate-200 dark:border-slate-800"><h4 class="text-sm font-bold mb-3 flex items-center gap-2"><span class="material-symbols-outlined text-primary text-base">compare_arrows</span>Labor Cost</h4><div class="relative" style="height:140px;"><canvas id="roi-labor-compare-chart"></canvas></div><div class="flex gap-3 mt-2"><span class="flex items-center gap-1 text-[10px] font-bold text-slate-400 uppercase"><span class="inline-block size-1.5 rounded-full bg-slate-400"></span>Manual </span><span class="flex items-center gap-1 text-[10px] font-bold text-primary uppercase"><span class="inline-block size-1.5 rounded-full bg-primary"></span>Automated</span></div></div></main></div><script>function toggleResults() {
+  var body = document.getElementById('results-body');
+  var chevron = document.getElementById('results-chevron');
+  body.classList.toggle('collapsed');
+  chevron.style.transform = body.classList.contains('collapsed') ? 'rotate(-90deg)' : '';
+}</script><script defer="defer" src="/KitchenYuKoLi/assets/js/ui/products-dropdown.js?v=20260322-v3"></script><script defer="defer" src="/KitchenYuKoLi/assets/js/ui/navigator.js?v=20260322-v3"></script><script defer="defer" src="/KitchenYuKoLi/assets/js/ui/search-engine.js"></script><script defer="defer" src="/KitchenYuKoLi/assets/js/ui/footer.js?v=20260322-v3"></script><script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script><script defer="defer" src="/KitchenYuKoLi/assets/js/lang-registry.js"></script><script defer="defer" src="/KitchenYuKoLi/assets/js/translations.js"></script><script defer="defer" src="/KitchenYuKoLi/assets/js/translations-dropdown-template.js"></script><script src="/KitchenYuKoLi/assets/js/contacts.js"></script><script src="/KitchenYuKoLi/assets/js/ui/smart-popup.js"></script><script src="/KitchenYuKoLi/assets/js/router.js"></script><script src="/KitchenYuKoLi/assets/js/page-interactions.js"></script><style>/* 底部导航项悬停效果 */
+.nav-item:hover {
+  color: #ec5b13;
+}
+
+.nav-item:hover p {
+  color: #ec5b13;
+}
+
+/* 激活状态 */
+.nav-item.active {
+  color: #ec5b13;
+}
+
+.nav-item.active p {
+  color: #ec5b13;
+}
+
+.nav-item.active span {
+  font-variation-settings: 'FILL' 1;
+}</style><script>(function() {
+  // 设置当前页面的激活状态
+  const currentPath = window.location.pathname;
+  const navItems = document.querySelectorAll('.nav-item');
+  
+  navItems.forEach(item => {
+    const href = item.getAttribute('href');
+    if (href && currentPath.includes(href)) {
+      item.classList.add('active');
+      item.classList.remove('text-slate-400', 'dark:text-slate-500');
+      item.classList.add('text-primary');
+    }
+  });
+  
+  // 触摸反馈
+  navItems.forEach(item => {
+    item.addEventListener('touchstart', function() {
+      this.style.transform = 'scale(0.95)';
+    });
+    item.addEventListener('touchend', function() {
+      this.style.transform = '';
+    });
+  });
+})();</script><footer data-component="footer" data-variant="mobile" data-active="roi"></footer><script src="/KitchenYuKoLi/assets/js/utils/device-utils.js"></script><script src="/KitchenYuKoLi/assets/js/spa-router.js"></script><script>document.addEventListener('DOMContentLoaded', function() {
+    if (window.translationManager) window.translationManager.initialize();
+    if (window.SpaRouter && typeof window.SpaRouter.init === 'function') {
+      window.SpaRouter.init();
+    }
+  });</script></body></html>

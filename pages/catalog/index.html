@@ -1,0 +1,21 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>产品中心 | Yukoli 智能商厨设备</title><meta name="description" content="探索 Yukoli 智能商厨设备全系列产品，为商业厨房提供一站式自动化解决方案。"><link rel="canonical" href="/catalog/"><script>// Responsive redirect - runs before render
+        (function(){
+            if (window.__redirectChecked) return;
+            window.__redirectChecked = true;
+            
+            var width = window.innerWidth || document.documentElement.clientWidth;
+            var targetFile;
+            
+            if (width < 768) {
+                targetFile = 'index-mobile.html';
+            } else if (width < 1280) {
+                targetFile = 'index-tablet.html';
+            } else {
+                targetFile = 'index-pc.html';
+            }
+            
+            // Only redirect if we're on the base index.html
+            if (!location.pathname.includes('index-')) {
+                location.replace(targetFile);
+            }
+        })();</script></head><body><p>正在跳转到适合您设备的页面...</p></body></html>
