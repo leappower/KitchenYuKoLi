@@ -277,8 +277,8 @@
               '<span class="material-symbols-outlined text-2xl">menu</span>' +
             '</button>' +
             /* Center: Logo */
-            '<a class="nav-logo-link" href="/home/">' +
-              '<img loading="eager" src="/assets/images/logo_footer.webp" alt="Yukoli" width="36" height="36" style="width:36px;height:36px;object-fit:contain" />' +
+            '<a class="nav-logo-link" href="' + (window.BASE_PATH || '') + '/home/">' +
+              '<img loading="eager" src="' + (window.BASE_PATH || '') + '/assets/images/logo_footer.webp" alt="Yukoli" width="36" height="36" style="width:36px;height:36px;object-fit:contain" />' +
             '</a>' +
             /* Right: Search */
             '<button id="mobile-search-toggle" type="button" class="flex items-center justify-center w-10 h-10 -mr-2 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors" aria-label="Search">' +
@@ -312,8 +312,8 @@
           '<div class="max-w-[1024px] mx-auto px-4 py-3 flex items-center justify-between">' +
             /* Left: Logo + Nav */
             '<div class="flex items-center gap-4">' +
-              '<a class="nav-logo-link" href="/home/">' +
-                '<img loading="eager" src="/assets/images/logo_footer.webp" alt="Yukoli" width="36" height="36" style="width:36px;height:36px;object-fit:contain" />' +
+              '<a class="nav-logo-link" href="' + (window.BASE_PATH || '') + '/home/">' +
+                '<img loading="eager" src="' + (window.BASE_PATH || '') + '/assets/images/logo_footer.webp" alt="Yukoli" width="36" height="36" style="width:36px;height:36px;object-fit:contain" />' +
               '</a>' +
               '<nav class="hidden md:flex items-center gap-3">' +
                 buildNavLinks(cfg.active, cfg.variant) +
@@ -345,8 +345,8 @@
         '<div class="max-w-[1920px] mx-auto px-6 md:px-10 lg:px-16 xl:px-20 py-4 flex items-center justify-between">' +
           /* Left: Logo + Nav */
           '<div class="flex items-center gap-6 lg:gap-12">' +
-            '<a class="nav-logo-link" href="/home/">' +
-              '<img loading="eager" src="/assets/images/logo_footer.webp" alt="Yukoli" width="44" height="44" style="width:44px;height:44px;object-fit:contain" />' +
+            '<a class="nav-logo-link" href="' + (window.BASE_PATH || '') + '/home/">' +
+              '<img loading="eager" src="' + (window.BASE_PATH || '') + '/assets/images/logo_footer.webp" alt="Yukoli" width="44" height="44" style="width:44px;height:44px;object-fit:contain" />' +
             '</a>' +
             '<nav class="hidden md:flex items-center gap-4 lg:gap-8">' +
               buildNavLinks(cfg.active, cfg.variant) +
