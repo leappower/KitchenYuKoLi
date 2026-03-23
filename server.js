@@ -229,7 +229,7 @@ app.get('*', (req, res) => {
 });
 
 // Global error handling middleware
-app.use((err, req, res, next) => {
+app.use((err, req, res, _next) => {
   console.error('Server error:', err);
 
   // Don't leak error details in production

@@ -30,7 +30,7 @@
   }
 
   /** Attach click listener to all elements matching selector, only if found */
-  function bindClick(selector, handler) {
+  function _bindClick(selector, handler) {
     var els = document.querySelectorAll(selector);
     els.forEach(function (el) {
       el.addEventListener('click', handler);
@@ -79,20 +79,20 @@
 
   // ─── 1. Get a Quote / Request a Quote CTA ────────────────────────────────────
   function bindQuoteButtons() {
-    var count = 0;
-    count += bindByText('button', 'get a quote', function (e) {
+    var _count = 0;
+    _count += bindByText('button', 'get a quote', function (e) {
       e.preventDefault();
       safeCall('showSmartPopupManual');
     });
-    count += bindByText('button', 'request a quote', function (e) {
+    _count += bindByText('button', 'request a quote', function (e) {
       e.preventDefault();
       safeCall('showSmartPopupManual');
     });
-    count += bindByText('button', 'get quote', function (e) {
+    _count += bindByText('button', 'get quote', function (e) {
       e.preventDefault();
       safeCall('showSmartPopupManual');
     });
-    count += bindByText('button', 'speak with an expert', function (e) {
+    _count += bindByText('button', 'speak with an expert', function (e) {
       e.preventDefault();
       safeCall('showSmartPopupManual');
     });

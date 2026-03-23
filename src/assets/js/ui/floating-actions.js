@@ -256,7 +256,7 @@
   };
 
   FloatingActionsController.prototype._bindButtons = function () {
-    var self = this;
+    var _self = this;
 
     // Back to top click
     if (this._btnBtt) {
@@ -267,7 +267,7 @@
   };
 
   FloatingActionsController.prototype._bindScroll = function () {
-    var self = this;
+    var _self = this;
 
     var onScroll = debounce(function () {
       self._isScrolling = true;
@@ -306,7 +306,7 @@
   };
 
   FloatingActionsController.prototype._triggerPulse = function () {
-    var self = this;
+    var _self = this;
     if (!this._btnWa && !this._btnLine) return;
 
     function pulse(el) {

@@ -99,6 +99,7 @@ function processHtmlFile(filePath) {
   } else {
     console.log('  → No changes needed\n');
   }
+  return modified;
 }
 
 // 主函数
@@ -122,13 +123,15 @@ function main() {
   
   let modifiedCount = 0;
   for (const filePath of htmlFiles) {
-    processHtmlFile(filePath);
+    if (processHtmlFile(filePath)) modifiedCount++;
   }
   
   console.log('');
   console.log('='.repeat(60));
   console.log('Processing complete!');
   console.log('='.repeat(60));
+
+  console.log(`Total modified files: ${modifiedCount}`);
 }
 
 // 执行主函数

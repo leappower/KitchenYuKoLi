@@ -173,15 +173,14 @@
       if (!matchedItem) continue;
 
       var isActive = matchedItem.id === activeId;
+      var iconSpan = link.querySelector('.material-symbols-outlined');
       if (isActive) {
         link.className = 'flex flex-1 flex-col items-center justify-center gap-1 text-primary';
-        var iconSpan = link.querySelector('.material-symbols-outlined');
         if (iconSpan && matchedItem.fill) {
           iconSpan.setAttribute('style', 'font-variation-settings: \'FILL\' 1;');
         }
       } else if (!matchedItem.isWhatsApp) {
         link.className = 'flex flex-1 flex-col items-center justify-center gap-1 text-slate-400 dark:text-slate-500';
-        var iconSpan = link.querySelector('.material-symbols-outlined');
         if (iconSpan) {
           iconSpan.removeAttribute('style');
         }

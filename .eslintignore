@@ -1,0 +1,6 @@
+node_modules/
+dist/
+public/
+coverage/
+src/assets/js/tailwind.cdn.js
+*.min.js

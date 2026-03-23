@@ -1,0 +1,35 @@
+{
+  "root": true,
+  "env": {
+    "browser": true,
+    "node": true,
+    "es2021": true
+  },
+  "parserOptions": {
+    "ecmaVersion": 2021,
+    "sourceType": "module"
+  },
+  "extends": [
+    "eslint:recommended"
+  ],
+  "rules": {
+    "no-console": 0,
+    "no-unused-vars": ["warn", {"vars": "all", "args": "after-used", "varsIgnorePattern": "^_", "argsIgnorePattern": "^_"}],
+    "no-undef": "error",
+    "no-empty": ["error", { "allowEmptyCatch": true }]
+  },
+  "globals": {
+    "__SW_ENV__": "readonly",
+    "__DEVELOPMENT__": "readonly",
+    "__TEST__": "readonly",
+    "DeviceUtils": "readonly",
+    "LanguageDropdownTemplate": "readonly"
+  },
+  "overrides": [
+    {
+      "files": ["**/tests/**", "**/*.test.js", "jest.setup.js"],
+      "env": { "jest": true }
+    }
+  ],
+  "ignorePatterns": ["node_modules/", "dist/", "public/", "coverage/", "src/assets/js/tailwind.cdn.js"]
+}

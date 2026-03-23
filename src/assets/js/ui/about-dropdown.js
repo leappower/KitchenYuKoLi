@@ -158,7 +158,7 @@
 
   /* ───────────────────────── MOBILE POPUP ───────────────────────── */
 
-  function openPopup(href) {
+  function openPopup(_href) {
     closePopup();
     var overlay = document.createElement('div');
     overlay.className = 'abt-popup-overlay';

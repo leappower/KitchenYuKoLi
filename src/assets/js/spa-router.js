@@ -30,19 +30,17 @@
       '/quote/':        '/quote/index.html',
       '/contact/':      '/quote/index.html',
       '/support/':      '/support/index.html',
-      '/products/':     '/products/index.html',
-      '/solutions/':    '/solutions/index.html',
       '/thank-you/':    '/thank-you/index.html',
       '/landing/':      '/landing/index.html'
     },
 
     // 设备特定页面映射
     getDevicePage: function(basePath) {
-      // 使用 DeviceUtils 统一管理设备判断
-      if (DeviceUtils && DeviceUtils.getDevicePagePath) {
+      // 使用 DeviceUtils 统一管理设备判断（安全检测）
+      if (typeof DeviceUtils !== 'undefined' && DeviceUtils && DeviceUtils.getDevicePagePath) {
         return DeviceUtils.getDevicePagePath(basePath);
       }
-      // 降级处理已移除 - DeviceUtils 应该总是可用
+      // 降级处理
       return basePath;
     },
 
@@ -96,7 +94,7 @@
       this.loadRoute(normalizedPath);
 
       // 清除标志(延迟以确保导航完成)
-      var self = this;
+      var _self = this;
       setTimeout(function() {
         window.__spaNavigating = false;
         console.log('[SpaRouter] SPA flag cleared: window.__spaNavigating =', window.__spaNavigating);
@@ -120,7 +118,7 @@
       this.loadRoute(normalizedPath);
 
       // 清除标志(延迟以确保导航完成)
-      var self = this;
+      var _self = this;
       setTimeout(function() {
         window.__spaNavigating = false;
         console.log('[SpaRouter] SPA flag cleared (replace): window.__spaNavigating =', window.__spaNavigating);
@@ -378,7 +376,7 @@
 
     // 加载路由
     loadRoute: function(routePath) {
-      var self = this;
+      var _self = this;
       var pagePath = this.routes[routePath];
       
       if (!pagePath) {
@@ -415,7 +413,7 @@
       var title = this.extractTitle(html);
       var metaTags = this.extractMetaTags(html);
       var container = document.getElementById('spa-content');
-      var self = this;
+      var _self = this;
 
       if (!container) {
         this.log('Content container not found');
@@ -489,7 +487,7 @@
       this.loadRoute(path);
 
       // 清除标志(延迟以确保导航完成)
-      var self = this;
+      var _self = this;
       setTimeout(function() {
         window.__spaNavigating = false;
         console.log('[SpaRouter] SPA flag cleared (popstate): window.__spaNavigating =', window.__spaNavigating);
@@ -514,7 +512,7 @@
 
     // 初始化路由器
     init: function() {
-      var self = this;
+      var _self = this;
 
       this.log('Initializing...');
 
@@ -564,7 +562,7 @@
         }
 
         // 处理 /pages/.../index*.html -> /<basename>
-        var pagesMatch = targetPath.match(/^\/pages\/([^\/]+)\/index(?:-[a-z0-9-]+)?\.html$/i);
+        var pagesMatch = targetPath.match(/^\/pages\/([^/]+)\/index(?:-[a-z0-9-]+)?\.html$/i);
         if (pagesMatch && pagesMatch[1]) {
           targetPath = '/' + pagesMatch[1] + '/';
         }

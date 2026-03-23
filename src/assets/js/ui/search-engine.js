@@ -115,8 +115,8 @@
     if (!query || query.length < 1) return [];
 
     var q = query.toLowerCase().trim();
-    // Split query into tokens for multi-term search
-    var tokens = q.split(/[\s,，、\-\/]+/).filter(Boolean);
+    // Split query into tokens for multi-term search; normalize slashes first
+    var tokens = q.replace(/\//g, ' ').split(/[\s,，、-]+/).filter(Boolean);
 
     var allProducts = buildSearchableProducts();
     var results = [];

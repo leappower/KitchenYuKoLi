@@ -117,7 +117,7 @@
                   try { window.indexedDB.deleteDatabase(db.name); } catch(e){}
                 });
                 console.log('[SW] Dev mode: attempted to delete indexedDB databases');
-              }).catch(function(){ /* ignore */ });
+              }).catch(function(){ /* ignore */ return; });
             }
           } catch (e) { /* ignore */ }
         }).catch(function() {/*ignore*/});
@@ -212,13 +212,13 @@
       '[aria-label*="sensor"]',
       '[aria-label*="node"]'
     ];
-    var count = 0;
+    var _count = 0;
     selectors.forEach(function (sel) {
       try {
         document.querySelectorAll(sel).forEach(function (el) {
           if (!el.classList.contains('iot-pulse')) {
             el.classList.add('iot-pulse');
-            count++;
+            _count++;
           }
         });
       } catch (e) { /* ignore */ }

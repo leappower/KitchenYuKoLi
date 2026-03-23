@@ -35,7 +35,7 @@ function analyzeAnimations() {
 
   htmlFiles.forEach(file => {
     const content = fs.readFileSync(file, 'utf8');
-    const relativePath = file.replace('src/pages/', '');
+    const _relativePath = file.replace('src/pages/', '');
 
     // 统计不同的动画类型
     const transitionAll = (content.match(/transition-all/gi) || []).length;

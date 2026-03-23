@@ -307,6 +307,7 @@
       if (translated && translated !== key) return translated;
       // Log miss only for 'name' field to avoid noise
       if (field === 'name') {
+        // intentionally left blank — no-op for missing translations
       }
     }
     return fallback;
@@ -362,8 +363,8 @@
     var orderedProducts = filtered;
     // Diagnostic: check how many products get a translated name on this render pass
     if (orderedProducts.length > 0) {
-      var lang = window.translationManager ? window.translationManager.currentLanguage : 'unknown';
-      var sampleName = getProductI18nField(orderedProducts[0], 'name', null);
+      var _lang = window.translationManager ? window.translationManager.currentLanguage : 'unknown';
+      var _sampleName = getProductI18nField(orderedProducts[0], 'name', null);
     }
     var mobileCarousel = isMobileProductCarousel();
     var itemsPerPage = mobileCarousel ? Math.max(1, orderedProducts.length) : getItemsPerPage();

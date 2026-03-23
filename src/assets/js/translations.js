@@ -152,9 +152,9 @@
       return response.json();
     }).then(function (data) {
       var normalized = self.normalizeTranslationKeys(data);
-      var keyCount = Object.keys(normalized).length;
+      var _keyCount = Object.keys(normalized).length;
       var sampleKeys = ['home_tablet_hero_title', 'nav_home', 'catalog_mobile_title', 'all'];
-      var foundSamples = sampleKeys.filter(function(k) { return normalized[k] !== undefined; });
+      var _foundSamples = sampleKeys.filter(function(k) { return normalized[k] !== undefined; });
       self.translationsCache.set(cacheKey, normalized);
 
       // 保存到 localStorage（测试/开发环境下跳过）
@@ -196,7 +196,7 @@
         return self.loadProductTranslations('zh-CN');
       }
       var normalized = self.normalizeTranslationKeys(data);
-      var keyCount = Object.keys(normalized).length;
+      var _keyCount = Object.keys(normalized).length;
       self.translationsCache.set(cacheKey, normalized);
       return normalized;
     }).catch(function (error) {
@@ -235,6 +235,7 @@
       value = value ? value[keys[i]] : undefined;
     }
     if (key.indexOf('home_tablet') === 0 || key.indexOf('nav_') === 0 || key.indexOf('catalog_') === 0) {
+      // intentionally no-op for these key prefixes
     }
     return value || key;
   };

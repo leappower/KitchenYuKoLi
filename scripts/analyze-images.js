@@ -41,7 +41,6 @@ function analyzeImages() {
     const images = [];
 
     while ((match = imgRegex.exec(content)) !== null) {
-      const imgTag = match[0];
       const attrs = match[1];
 
       // 提取关键属性
