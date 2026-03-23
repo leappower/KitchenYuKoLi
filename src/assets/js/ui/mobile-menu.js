@@ -492,7 +492,7 @@
     // L1 accordion toggle
     var toggles = panel.querySelectorAll('[data-menu-toggle]');
     for (var i = 0; i < toggles.length; i++) {
-      toggles[i].addEventListener('click', function (e) {
+      toggles[i].addEventListener('click', function (_e) {
         var id = this.getAttribute('data-menu-toggle');
         var l2 = panel.querySelector('[data-menu-l2="' + id + '"]');
         if (!l2) return;
@@ -544,7 +544,7 @@
     // L1 click without children (shouldn't happen with current data, but just in case)
     var l1Items = panel.querySelectorAll('.mobile-menu-l1');
     for (var m = 0; m < l1Items.length; m++) {
-      l1Items[m].addEventListener('click', function (e) {
+      l1Items[m].addEventListener('click', function (_e) {
         var id = this.getAttribute('data-menu-toggle');
         var l2 = panel.querySelector('[data-menu-l2="' + id + '"]');
         // If has L2, accordion handles it; otherwise navigate
@@ -734,7 +734,7 @@
     }, 200);
   }
 
-  function renderMobileSearchResults(results, query) {
+  function renderMobileSearchResults(results) {
     var resultsEl = document.getElementById('mobile-search-results');
     if (!resultsEl) return;
 
@@ -776,7 +776,7 @@
     // Bind click to navigate
     var items = resultsEl.querySelectorAll('.mobile-search-result-item');
     for (var j = 0; j < items.length; j++) {
-      items[j].addEventListener('click', function (e) {
+      items[j].addEventListener('click', function () {
         closeMobileSearch();
       });
     }

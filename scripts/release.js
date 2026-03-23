@@ -16,6 +16,7 @@
  *   node scripts/release.js --no-feishu            # 同 --skip-feishu（别名）
  *   node scripts/release.js --no-translate         # 同 --skip-translate（别名）
  *   node scripts/release.js --full-translate       # 全量翻译（默认为增量翻译）
+ *   node scripts/release.js --gh-pages             # 同时部署到 gh-pages 分支（GitHub Pages）
  *
  * 构建模式（由各 --skip-* 开关组合决定）：
  *   完整模式（默认）：飞书拉取 → i18n提取 → 增量翻译 → 图片下载(增量) → 图片压缩(增量) → webpack → 验证
@@ -34,7 +35,8 @@
  *   7. webpack 打包 + 验证（--skip-build 可跳过，含图片增量压缩）
  *   8. 创建新的 release/vX.Y.Z 分支（孤立分支，仅含产物）
  *   9. 提交产物并推送到远端
- *  10. 打印发布摘要
+ *  10. [可选] 部署到 gh-pages 分支（--gh-pages）
+ *  11. 打印发布摘要
  */
 
 'use strict';
@@ -77,6 +79,8 @@ const opts = {
   skipDownload:  args.includes('--skip-download'),
   // 全量翻译（默认增量）：--full-translate
   fullTranslate: args.includes('--full-translate'),
+  // GitHub Pages 部署：--gh-pages（同时部署到 gh-pages 分支）
+  ghPages:       args.includes('--gh-pages'),
   version:       (args.find(a => a.startsWith('--version=')) || '').replace('--version=', ''),
 };
 
@@ -234,6 +238,7 @@ if (opts.dryRun) {
   drylog(`  多语言翻译:   ${opts.skipTranslate ? '跳过 (--skip-translate)' : opts.fullTranslate ? '全量翻译 (--full-translate)' : '增量翻译（默认）'}`);
   drylog(`  图片下载:     ${opts.skipDownload  ? '跳过 (--skip-download)'  : '增量下载（已有文件自动跳过）'}`);
   drylog(`  webpack 打包: ${opts.skipBuild     ? '跳过 (--skip-build)'     : '执行（含图片增量压缩）'}`);
+  drylog(`  GitHub Pages:  ${opts.ghPages       ? '部署 (--gh-pages)'      : '不部署'}`);
   drylog('');
   drylog('后续步骤: lint → feishu → translate → build → 推送产物');
   drylog('dry-run 模式，不执行任何实际操作');
@@ -513,16 +518,116 @@ try {
   ok('临时 worktree 已清理');
 }
 
+// ─── Step 8: 部署到 GitHub Pages（可选）─────────────────────────────────────
+
+// gh-pages 配置和辅助函数（提升到块作用域外，满足 no-inner-declarations）
+const GH_PAGES_BASE   = '/KitchenYuKoLi';
+const GH_PAGES_BRANCH = 'gh-pages';
+const ghTmpDir        = path.join(ROOT, '.ghpages-tmp');
+
+function cleanupGhPages() {
+  try { run(`git worktree remove --force "${ghTmpDir}"`, { silent: true }); } catch (_) { /* ignore */ }
+  try { if (fs.existsSync(ghTmpDir)) run(`rm -rf "${ghTmpDir}"`, { silent: true }); } catch (_) { /* ignore */ }
+}
+
+if (opts.ghPages) {
+  title('Step 8  部署到 GitHub Pages (gh-pages)');
+
+  try {
+    // 清理旧的 dist，重新构建（build-ssg 会使用 --base-path 处理所有 HTML 路径）
+    log('清理旧 dist 并重新构建...');
+    run('rm -rf dist', { silent: true });
+
+    // Step 6a: build:css + webpack（标准构建，publicPath='/'）
+    log('标准构建（CSS + webpack + SSG）...');
+    runLive('npm run build:pack');
+
+    // Step 6b: 用 --base-path 重新运行 build-ssg，覆盖 index.html 和 404.html
+    // 以及各路由目录下的 HTML 文件，添加 /KitchenYuKoLi 前缀
+    log('SSG 重新生成（base-path=' + GH_PAGES_BASE + '）...');
+    runLive('node scripts/build-ssg.js --clean --base-path=' + GH_PAGES_BASE);
+
+    ok('构建完成（base-path=' + GH_PAGES_BASE + '）');
+
+    // 验证 dist 产物
+    if (!fs.existsSync(distDir)) {
+      fail('dist/ 目录不存在，构建可能未输出到正确位置');
+      process.exit(1);
+    }
+    const rebuiltFiles = fs.readdirSync(distDir);
+    ok(`dist/ 产物: ${rebuiltFiles.join(', ')}`);
+
+    // 部署到 gh-pages 分支
+    cleanupGhPages();
+
+    // 删除本地 gh-pages 分支（如有）
+    try { run(`git branch -D ${GH_PAGES_BRANCH}`, { silent: true }); } catch (_) { /* ignore */ }
+
+    // 创建孤立 worktree
+    log(`创建孤立分支 ${GH_PAGES_BRANCH}...`);
+    const gitVersion = run('git --version', { silent: true }).match(/(\d+)\.(\d+)/);
+    const gitMajor = gitVersion ? parseInt(gitVersion[1], 10) : 0;
+    const gitMinor = gitVersion ? parseInt(gitVersion[2], 10) : 0;
+    if (gitMajor > 2 || (gitMajor === 2 && gitMinor >= 40)) {
+      run(`git worktree add --orphan -b ${GH_PAGES_BRANCH} "${ghTmpDir}"`, { silent: false });
+    } else {
+      run(`git worktree add --detach "${ghTmpDir}" HEAD`, { silent: false });
+      run(`git -C "${ghTmpDir}" checkout --orphan ${GH_PAGES_BRANCH}`, { silent: false });
+      run(`git -C "${ghTmpDir}" rm -rf . --quiet`, { silent: true });
+    }
+
+    // 复制 dist 内容
+    log('复制产物到 gh-pages worktree...');
+    for (const file of fs.readdirSync(distDir)) {
+      const src = path.join(distDir, file);
+      const dst = path.join(ghTmpDir, file);
+      run(`cp -r "${src}" "${dst}"`, { silent: true });
+    }
+
+    // 复制 CNAME 文件（如有）
+    for (const cf of ['CNAME', 'www.CNAME']) {
+      const src = path.join(ROOT, cf);
+      if (fs.existsSync(src)) {
+        fs.copyFileSync(src, path.join(ghTmpDir, cf));
+        log(`已复制 ${cf}`);
+      }
+    }
+
+    // 提交并推送
+    run('git add -A', { cwd: ghTmpDir, silent: false });
+    run(`git commit -m "deploy: v${newVersion} to GitHub Pages"`, { cwd: ghTmpDir, silent: false });
+
+    log(`推送 ${GH_PAGES_BRANCH} 到远端...`);
+    execSync(`git -C "${ghTmpDir}" -c http.postBuffer=524288000 push origin ${GH_PAGES_BRANCH}`, {
+      cwd: ROOT, encoding: 'utf8', stdio: 'inherit',
+    });
+    ok(`已推送到 origin/${GH_PAGES_BRANCH}`);
+
+    console.log(`\n  ${c.gray}GitHub Pages 访问:${c.reset}`);
+    console.log(`    https://leappower.github.io/KitchenYuKoLi/\n`);
+
+  } catch (e) {
+    fail('GitHub Pages 部署失败', e);
+  } finally {
+    cleanupGhPages();
+    ok('gh-pages 临时目录已清理');
+  }
+}
+
 // ─── 完成摘要 ─────────────────────────────────────────────────────────────────
 title('发布完成');
+
+const ghPagesLine = opts.ghPages ? '\n  Pages:   ' + c.cyan + 'origin/gh-pages' + c.reset : '';
+const ghPagesLog  = opts.ghPages ? '\n    git log origin/gh-pages --oneline' : '';
+
 console.log(`
   ${c.bold}${c.green}🎉 发布成功！${c.reset}
 
   版本:    ${c.bold}v${currentVersion}  →  v${newVersion}${c.reset}
   分支:    ${c.cyan}${releaseBranch}${c.reset}
-  远端:    origin/${releaseBranch}
+  远端:    origin/${releaseBranch}${ghPagesLine}
 
   ${c.gray}查看发布分支:${c.reset}
     git fetch origin
-    git log origin/${releaseBranch} --oneline
-`);
+    git log origin/${releaseBranch} --oneline${ghPagesLog}
+:`);

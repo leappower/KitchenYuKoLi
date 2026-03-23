@@ -76,7 +76,7 @@ var SmartPopupComponent = {
   loadTemplate: function() {
     var self = this;
     
-    return new Promise(function(resolve, reject) {
+    return new Promise(function(resolve, _reject) {
       fetch(self.config.templatePath)
         .then(function(response) {
           if (!response.ok) {

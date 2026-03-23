@@ -109,6 +109,10 @@ const ROUTES = [
 // Parse CLI args
 const args = process.argv.slice(2);
 const shouldClean = args.includes('--clean');
+// basePath: prefix for sub-directory deployments (e.g. /KitchenYuKoLi)
+// Affects all asset href/src paths and URL redirects in generated HTML.
+const basePathArg = args.find(function (a) { return a.startsWith('--base-path='); });
+const BASE_PATH = basePathArg ? basePathArg.replace('--base-path=', '').replace(/\/$/, '') : '';
 
 function log(msg) {
   console.log('[build-ssg] ' + msg);
@@ -118,6 +122,52 @@ function ensureDir(dirPath) {
   if (!fs.existsSync(dirPath)) {
     fs.mkdirSync(dirPath, { recursive: true });
   }
+}
+
+/**
+ * Patch HTML content to replace root-absolute asset paths with basePath-prefixed paths.
+ *
+ * When BASE_PATH is '/KitchenYuKoLi':
+ *   src="/assets/js/foo.js" → src="/KitchenYuKoLi/assets/js/foo.js"
+ *   href="/assets/css/bar.css" → href="/KitchenYuKoLi/assets/css/bar.css"
+ *   href="/home/" → href="/KitchenYuKoLi/home/"
+ *
+ * Only modifies paths starting with "/" that are NOT:
+ *   - protocol-relative (//...)
+ *   - hash-only (/#...)
+ *   - already prefixed with BASE_PATH
+ *   - HTML anchor-only references (e.g. href="#section")
+ *
+ * Also handles inline script content like location.href = '/home/';
+ */
+function patchHtmlPaths(html) {
+  if (!BASE_PATH) return html;
+
+  // Ensure BASE_PATH doesn't have trailing slash for consistent replacement
+  var bp = BASE_PATH.replace(/\/$/, '');
+
+  // 1. Patch src= and href= attributes in HTML tags
+  //    Match: src="/path" or href="/path" (not //, not /#, not already /KitchenYuKoLi/)
+  //    $2 captures the leading "/", so we prepend bp (without extra slash)
+  html = html.replace(
+    /((?:src|href)\s*=\s*")(\/(?!\/|#))(?!KitchenYuKoLi\/)/g,
+    '$1' + bp + '$2'
+  );
+
+  // 2. Patch inline JS: location.href = '/home/' and similar redirects
+  //    Matches: location.href = '/path', window.location.replace('/path')
+  html = html.replace(
+    /(location\.href\s*=\s*'|window\.location\.replace\(['"])(\/(?!\/|#))(?!KitchenYuKoLi)/g,
+    '$1' + bp + '$2'
+  );
+
+  // 3. Patch inline JS: history.replaceState(null, '', '/path')
+  html = html.replace(
+    /(history\.(?:push|replace)State\([^,]*,\s*[^,]*,\s*')(\/(?!\/|#))(?!KitchenYuKoLi)/g,
+    '$1' + bp + '$2'
+  );
+
+  return html;
 }
 
 /**
@@ -142,7 +192,8 @@ function generateRouteIndex(route) {
   let html = fs.readFileSync(srcEntryFile, 'utf-8');
 
   // Update canonical URL to clean directory path
-  const canonicalUrl = 'https://www.yukoli.com/' + route.slug + '/';
+  const basePathPart = BASE_PATH ? BASE_PATH.replace(/^\//, '') + '/' : '';
+  const canonicalUrl = 'https://www.kitchen.yukoli.com/' + basePathPart + route.slug + '/';
   html = html.replace(
     /<link\s+rel="canonical"\s+href="[^"]*"\s*\/?>/i,
     '<link rel="canonical" href="' + canonicalUrl + '"/>'
@@ -153,6 +204,9 @@ function generateRouteIndex(route) {
     /<meta\s+property="og:url"\s+content="[^"]*"\s*>/gi,
     '<meta property="og:url" content="' + canonicalUrl + '">'
   );
+
+  // Patch all root-absolute paths with BASE_PATH prefix
+  html = patchHtmlPaths(html);
 
   // Ensure the responsive redirect uses relative paths (it already does in source)
   // No change needed — 'index-mobile.html' etc. are relative
@@ -194,7 +248,13 @@ function copyDeviceFiles(route) {
     const srcFile = path.join(srcPagesDir, file);
     const destFile = path.join(destRouteDir, file);
 
-    fs.copyFileSync(srcFile, destFile);
+    if (BASE_PATH) {
+      let content = fs.readFileSync(srcFile, 'utf-8');
+      content = patchHtmlPaths(content);
+      fs.writeFileSync(destFile, content, 'utf-8');
+    } else {
+      fs.copyFileSync(srcFile, destFile);
+    }
     copied++;
   }
 
@@ -216,15 +276,16 @@ function generateRootIndex() {
   let html = fs.readFileSync(homeEntry, 'utf-8');
 
   // Update canonical URL to root
+  var rootCanonical = 'https://www.kitchen.yukoli.com/' + (BASE_PATH ? BASE_PATH.replace(/^\//, '') + '/' : '');
   html = html.replace(
     /<link\s+rel="canonical"\s+href="[^"]*"\s*\/?>/i,
-    '<link rel="canonical" href="https://www.yukoli.com/"/>'
+    '<link rel="canonical" href="' + rootCanonical + '"/>'
   );
 
   // Update OG URLs
   html = html.replace(
     /<meta\s+property="og:url"\s+content="[^"]*"\s*>/gi,
-    '<meta property="og:url" content="https://www.yukoli.com/">'
+    '<meta property="og:url" content="' + rootCanonical + '">'
   );
 
   // Update title
@@ -240,10 +301,11 @@ function generateRootIndex() {
   );
 
   // Replace responsive redirect with a single redirect to /home/
-  // The /home/index.html will handle device-specific redirect from there
+  // When BASE_PATH is set (e.g. /KitchenYuKoLi), redirect includes the prefix.
+  var homePath = (BASE_PATH ? BASE_PATH + '/' : '') + 'home/';
   html = html.replace(
     /<script>\s*\/\*\s*Responsive entry[\s\S]*?<\/script>/i,
-    '<script>location.href = \'/home/\';</script>'
+    '<script>location.href = \'' + homePath + '\';</script>'
   );
 
   // Write to dist/index.html
@@ -253,14 +315,15 @@ function generateRootIndex() {
 
 /**
  * Generate a 404.html that:
- * 1. Shows a full page with navigator, footer, and floating actions
- *    (consistent with other pages)
+ * 1. Adds BASE_PATH prefix to all asset references
  * 2. Handles URL without trailing slash (/home → /home/)
- * 3. Redirects unknown routes to home page
+ * 3. For known routes without trailing slash, redirects to the correct path
+ * 4. For truly unknown routes, does NOT redirect (shows 404 page)
  *
  * GitHub Pages uses 404.html for any unmatched URL.
  */
 function generate404() {
+  var bp = BASE_PATH; // alias for shorter references
   var routesJson = JSON.stringify(ROUTES.map(function (r) { return r.slug; }));
   var html = [
     '<!DOCTYPE html>',
@@ -273,16 +336,16 @@ function generate404() {
     '  <meta property="og:type" content="website">',
     '  <meta property="og:title" content="Page Not Found - Yukoli Technology">',
     '  <meta property="og:description" content="The page you are looking for does not exist or has been moved.">',
-    '  <meta property="og:url" content="https://www.yukoli.com/404.html">',
+    '  <meta property="og:url" content="https://www.kitchen.yukoli.com/' + (bp ? bp.replace(/^\//, '') + '/' : '') + '404.html">',
     '  <meta name="robots" content="noindex, follow">',
     '',
     '  <!-- Fonts & Styles (same as other pages) -->',
-    '  <link rel="preload" href="/assets/fonts/local-fonts.css" as="style">',
-    '  <link rel="preload" href="/assets/css/tailwind.css" as="style">',
-    '  <link href="/assets/fonts/local-fonts.css" rel="stylesheet"/>',
-    '  <link rel="stylesheet" href="/assets/css/tailwind.css">',
-    '  <link rel="stylesheet" href="/assets/css/z-index-system.css">',
-    '  <link rel="stylesheet" href="/assets/css/performance-optimized.css"/>',
+    '  <link rel="preload" href="' + bp + '/assets/fonts/local-fonts.css" as="style">',
+    '  <link rel="preload" href="' + bp + '/assets/css/tailwind.css" as="style">',
+    '  <link href="' + bp + '/assets/fonts/local-fonts.css" rel="stylesheet"/>',
+    '  <link rel="stylesheet" href="' + bp + '/assets/css/tailwind.css">',
+    '  <link rel="stylesheet" href="' + bp + '/assets/css/z-index-system.css">',
+    '  <link rel="stylesheet" href="' + bp + '/assets/css/performance-optimized.css"/>',
     '',
     '  <style>',
     '    body { font-family: "Public Sans", sans-serif; min-height: 100dvh; }',
@@ -291,22 +354,23 @@ function generate404() {
     '  <!-- Dark mode -->',
     '  <script>(function(){if(localStorage.getItem("darkMode")==="true")document.documentElement.classList.add("dark")})()</script>',
     '',
-    '  <!-- Redirect script: /home → /home/, unknown → /home/ -->',
+    '  <!-- Redirect script: /home → /home/, unknown → show 404 -->',
     '  <script>',
     '  (function () {',
+    '    var base = "' + (bp || '') + '";',
     '    var path = window.location.pathname;',
     '    var normalized = path.replace(/\\/$/, "");',
     '    var routes = ' + routesJson + ';',
     '    var segment = normalized.split("/").pop();',
     '    if (routes.indexOf(segment) !== -1) {',
-    '      window.location.replace(normalized + "/");',
+    '      window.location.replace(base + "/" + segment + "/");',
     '    }',
     '    // Unknown routes stay on this 404 page (no redirect)',
     '  }());',
     '  </script>',
     '',
     '  <!-- Favicon -->',
-    '  <link rel="icon" href="/assets/images/logo_header.webp" type="image/webp">',
+    '  <link rel="icon" href="' + bp + '/assets/images/logo_header.webp" type="image/webp">',
     '</head>',
     '<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 min-h-screen flex flex-col overflow-x-hidden">',
     '',
@@ -324,11 +388,11 @@ function generate404() {
     '        The page you are looking for does not exist or has been moved.',
     '      </p>',
     '      <div class="flex flex-col sm:flex-row gap-4 justify-center">',
-    '        <a href="/home/" class="inline-flex items-center justify-center px-8 py-3 bg-primary text-white font-bold rounded-lg hover:bg-primary/90 transition-colors shadow-lg hover:shadow-xl">',
+    '        <a href="' + bp + '/home/" class="inline-flex items-center justify-center px-8 py-3 bg-primary text-white font-bold rounded-lg hover:bg-primary/90 transition-colors shadow-lg hover:shadow-xl">',
     '          <span class="material-symbols-outlined mr-2" style="font-size:20px">home</span>',
     '          <span data-i18n="nav_home">Go Home</span>',
     '        </a>',
-    '        <a href="/catalog/" class="inline-flex items-center justify-center px-8 py-3 border-2 border-slate-200 dark:border-slate-700 font-bold rounded-lg hover:border-primary hover:text-primary transition-colors">',
+    '        <a href="' + bp + '/catalog/" class="inline-flex items-center justify-center px-8 py-3 border-2 border-slate-200 dark:border-slate-700 font-bold rounded-lg hover:border-primary hover:text-primary transition-colors">',
     '          <span class="material-symbols-outlined mr-2" style="font-size:20px">kitchen</span>',
     '          <span data-i18n="quote_equipment">Browse Equipment</span>',
     '        </a>',
@@ -340,13 +404,13 @@ function generate404() {
     '  <div id="footer" data-variant="auto"></div>',
     '',
     '  <!-- Shared scripts (same as other pages) -->',
-    '  <script defer src="/assets/js/router.js"></script>',
-    '  <script defer src="/assets/js/lang-registry.js"></script>',
-    '  <script defer src="/assets/js/translations.js"></script>',
-    '  <script src="/assets/js/translations-dropdown-template.js"></script>',
-    '  <script defer src="/assets/js/ui/navigator.js"></script>',
-    '  <script defer src="/assets/js/ui/footer.js"></script>',
-    '  <script defer src="/assets/js/ui/floating-actions.js"></script>',
+    '  <script defer src="' + bp + '/assets/js/router.js"></script>',
+    '  <script defer src="' + bp + '/assets/js/lang-registry.js"></script>',
+    '  <script defer src="' + bp + '/assets/js/translations.js"></script>',
+    '  <script src="' + bp + '/assets/js/translations-dropdown-template.js"></script>',
+    '  <script defer src="' + bp + '/assets/js/ui/navigator.js"></script>',
+    '  <script defer src="' + bp + '/assets/js/ui/footer.js"></script>',
+    '  <script defer src="' + bp + '/assets/js/ui/floating-actions.js"></script>',
     '  <script>',
     '  document.addEventListener("DOMContentLoaded", function () {',
     '    if (window.translationManager) window.translationManager.initialize();',

@@ -191,12 +191,11 @@
 
     // Close on click outside
     document.addEventListener('mousedown', function (e) {
-      if (panel && !panel.contains(e.target)) {
+        if (panel && !panel.contains(e.target)) {
         var bar = document.getElementById('ios-search-bar');
-        var input = document.getElementById('ios-search-input');
         if (!bar || !bar.contains(e.target)) {
-          hidePanel();
-        }
+              hidePanel();
+            }
       }
     });
 

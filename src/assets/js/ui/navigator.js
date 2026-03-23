@@ -59,38 +59,7 @@
     { key: 'nav_contact',   path: '/contact/',   id: 'contact',   hasDropdown: true },
   ];
 
-  var LANG_OPTIONS = [
-    { group: 'lang_group_common', langs: [
-      { code: 'zh-CN', label: '\u4e2d\u6587\uff08\u7b80\u4f53\uff09' },
-      { code: 'zh-TW', label: '\u4e2d\u6587\uff08\u7e41\u9ad4\uff09' },
-      { code: 'en',    label: 'English' },
-    ]},
-    { group: 'lang_group_europe', langs: [
-      { code: 'de',  label: 'Deutsch' },
-      { code: 'es',  label: 'Espa\u00f1ol' },
-      { code: 'fr',  label: 'Fran\u00e7ais' },
-      { code: 'it',  label: 'Italiano' },
-      { code: 'nl',  label: 'Nederlands' },
-      { code: 'pl',  label: 'Polski' },
-      { code: 'pt',  label: 'Portugu\u00eas' },
-      { code: 'ru',  label: '\u0420\u0443\u0441\u0441\u043a\u0438\u0439' },
-      { code: 'tr',  label: 'T\u00fcrk\u00e7e' },
-    ]},
-    { group: 'lang_group_asian', langs: [
-      { code: 'ja',  label: '\u65e5\u672c\u8a9e' },
-      { code: 'ko',  label: '\ud55c\uad6d\uc5b4' },
-      { code: 'id',  label: 'Bahasa Indonesia' },
-      { code: 'ms',  label: 'Bahasa Melayu' },
-      { code: 'fil', label: 'Filipino' },
-      { code: 'th',  label: '\u0e20\u0e32\u0e29\u0e32\u0e44\u0e17\u0e22' },
-      { code: 'vi',  label: 'Ti\u1ebfng Vi\u1ec7t' },
-      { code: 'hi',  label: '\u0939\u093f\u0928\u094d\u0926\u0940' },
-    ]},
-    { group: 'lang_group_middle_east', langs: [
-      { code: 'ar',  label: '\u0627\u0644\u0639\u0631\u0628\u064a\u0629' },
-      { code: 'he',  label: '\u05e2\u05d1\u05e8\u05d9\u05ea' },
-    ]},
-  ];
+  
 
   /* ─────────────────────────────────────────────
    * 1. HELPERS
@@ -110,7 +79,7 @@
   }
 
   // Resolve nav href — directory URLs for SSG deployment (/home/, /products/)
-  function navHref(item, variant) {
+  function navHref(item, _variant) {
     return item.path; // Direct return, directory URL
   }
 
@@ -269,22 +238,9 @@
     );
   }
 
-  function buildLangDropdown(variant) {
-    var optionRows = LANG_OPTIONS.map(function (group) {
-      var groupRow = '<p class="text-[10px] font-bold uppercase tracking-widest text-slate-400 px-2 py-1 mt-2" data-i18n="' + esc(group.group) + '">' + esc(group.group) + '</p>';
-      var langRows = group.langs.map(function (l) {
-        return (
-          '<button class="lang-option w-full text-left px-3 py-2 rounded-lg text-sm hover:bg-primary/10 hover:text-primary transition-colors"' +
-          ' data-code="' + esc(l.code) + '" type="button">' + esc(l.label) + '</button>'
-        );
-      }).join('\n');
-      return groupRow + '\n' + langRows;
-    }).join('\n');
+  function buildLangDropdown() {
+    // Lang dropdown: static placeholder (dynamically generated options removed)
 
-    // Tablet uses fixed centered dropdown; PC uses absolute right-aligned
-    var dropdownClass = variant === 'tablet'
-      ? 'fixed left-1/2 -translate-x-1/2 top-20 w-72 max-w-[calc(100vw-2rem)] bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-2xl shadow-2xl z-[var(--z-dropdown)] overflow-hidden'
-      : 'absolute right-0 top-full mt-2 w-64 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-2xl shadow-xl z-[var(--z-dropdown)] overflow-hidden';
 
     return (
       '<div class="lang-dropdown-container relative">' +

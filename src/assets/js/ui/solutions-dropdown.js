@@ -287,7 +287,7 @@
 
   /* ───────────────────────── MOBILE POPUP ───────────────────────── */
 
-  function openPopup(href) {
+  function openPopup(_href) {
     closePopup();
 
     var overlay = document.createElement('div');

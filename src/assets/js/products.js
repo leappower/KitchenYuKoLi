@@ -364,7 +364,6 @@
     // Diagnostic: check how many products get a translated name on this render pass
     if (orderedProducts.length > 0) {
       var _lang = window.translationManager ? window.translationManager.currentLanguage : 'unknown';
-      var _sampleName = getProductI18nField(orderedProducts[0], 'name', null);
     }
     var mobileCarousel = isMobileProductCarousel();
     var itemsPerPage = mobileCarousel ? Math.max(1, orderedProducts.length) : getItemsPerPage();
@@ -598,8 +597,7 @@
     }
   });
 
-  global.addEventListener('languageChanged', function (e) {
-    var newLang = e.detail && e.detail.language ? e.detail.language : 'unknown';
+  global.addEventListener('languageChanged', function () {
     filterBarRendered = false;
     var defaultFilter = renderProductFilters();
     filterBarRendered = true;
@@ -608,8 +606,7 @@
     scheduleRenderProducts();
   });
 
-  global.addEventListener('productTranslationsLoaded', function (e) {
-    var lang = e.detail && e.detail.language ? e.detail.language : 'unknown';
+  global.addEventListener('productTranslationsLoaded', function () {
     scheduleRenderProducts();
   });
 

@@ -152,9 +152,6 @@
       return response.json();
     }).then(function (data) {
       var normalized = self.normalizeTranslationKeys(data);
-      var _keyCount = Object.keys(normalized).length;
-      var sampleKeys = ['home_tablet_hero_title', 'nav_home', 'catalog_mobile_title', 'all'];
-      var _foundSamples = sampleKeys.filter(function(k) { return normalized[k] !== undefined; });
       self.translationsCache.set(cacheKey, normalized);
 
       // 保存到 localStorage（测试/开发环境下跳过）
@@ -582,7 +579,6 @@
   };
 
 TranslationManager.prototype.openLanguageDropdown = function () {
-    var self = this;
     var dropdown = this.getDropdown();
     var anchor = document.getElementById('language-dropdown-anchor');
     

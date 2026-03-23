@@ -477,7 +477,7 @@
     },
 
     // 处理 popstate（浏览器返回）
-    onPopState: function(event) {
+    onPopState: function(_event) {
       // 设置 SPA 导航标志,禁用响应式重定向
       window.__spaNavigating = true;
       console.log('[SpaRouter] SPA flag set (popstate): window.__spaNavigating =', window.__spaNavigating);

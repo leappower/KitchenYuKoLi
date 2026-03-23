@@ -1,6 +1,6 @@
 {
   "name": "yukoli-tech",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "YuKoLi Tech - 智能商厨专家 - 专业商业厨房设备网站，多语言支持与模块化架构",
   "main": "server.js",
   "scripts": {
@@ -18,6 +18,7 @@
     "build:dev": "rm -rf dist && npm run build:css && webpack --env devBuild && node scripts/build-ssg.js",
     "build:production": "node scripts/ensure-product-data-table.js && npm run i18n:extract && npm run product:sync:source && npm run translate:products:incremental && npm run product:sync && npm run build:css && npm run download:images && npm run optimize:images && webpack --mode=production && node scripts/verify-static-build.js && node scripts/build-ssg.js",
     "build:production:full": "node scripts/ensure-product-data-table.js && npm run i18n:extract && npm run product:sync:source && npm run translate:products && npm run product:sync && npm run build:css && npm run download:images && npm run optimize:images && webpack --mode=production && node scripts/verify-static-build.js && node scripts/build-ssg.js",
+    "build:pack": "npm run build:css && webpack --mode=production && node scripts/build-ssg.js",
     "test": "jest",
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage",
@@ -45,6 +46,7 @@
     "release:no-translate": "node scripts/release.js --skip-translate",
     "release:no-feishu": "node scripts/release.js --skip-feishu",
     "release:pack-only": "node scripts/release.js --skip-feishu --skip-translate",
+    "release:gh-pages": "node scripts/release.js --skip-feishu --skip-translate --skip-download --gh-pages",
     "release:full-translate": "node scripts/release.js --full-translate",
     "release:skip-download": "node scripts/release.js --skip-download",
     "prepare": "git config core.hooksPath .githooks"

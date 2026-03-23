@@ -30,13 +30,7 @@
   }
 
   /** Attach click listener to all elements matching selector, only if found */
-  function _bindClick(selector, handler) {
-    var els = document.querySelectorAll(selector);
-    els.forEach(function (el) {
-      el.addEventListener('click', handler);
-    });
-    return els.length;
-  }
+  // helper removed: was previously unused
 
   /**
    * Collect only the direct Text-node content of an element, ignoring child
@@ -96,11 +90,11 @@
       e.preventDefault();
       safeCall('showSmartPopupManual');
     });
-    count += bindByText('button', 'request full audit data', function (e) {
+    _count += bindByText('button', 'request full audit data', function (e) {
       e.preventDefault();
       safeCall('showSmartPopupManual');
     });
-    count += bindByText('button', 'request a physical copy', function (e) {
+    _count += bindByText('button', 'request a physical copy', function (e) {
       e.preventDefault();
       safeCall('showSmartPopupManual');
     });
@@ -119,14 +113,14 @@
 
   // ─── 2. WhatsApp / Contact channel buttons ────────────────────────────────────
   function bindContactButtons() {
-    var count = 0;
+    var _count = 0;
 
     // WhatsApp buttons / links — with preset message
-    count += bindByText('button', 'whatsapp', function (e) {
+    _count += bindByText('button', 'whatsapp', function (e) {
       e.preventDefault();
       openWhatsAppWithPreset('Hello Yukoli, I\'d like to get a quote for your smart kitchen solutions.');
     });
-    count += bindByText('a', 'whatsapp support', function (e) {
+    _count += bindByText('a', 'whatsapp support', function (e) {
       e.preventDefault();
       openWhatsAppWithPreset('Hello Yukoli Support, I need assistance with my smart kitchen device.');
     });
@@ -134,26 +128,26 @@
     var waLinks = document.querySelectorAll('a[href="#"]');
     waLinks.forEach(function (link) {
       var svg = link.querySelector('svg');
-      if (svg) {
+        if (svg) {
         var pathD = svg.innerHTML;
         // WhatsApp SVG path is recognisable by "17.472 14.382" from its brand path
         if (pathD && pathD.indexOf('17.472') !== -1) {
-          link.addEventListener('click', function (e) {
-            e.preventDefault();
-            openWhatsAppWithPreset('Hello Yukoli, I found your website and would like to connect.');
-          });
-          count++;
+              link.addEventListener('click', function (e) {
+                e.preventDefault();
+                openWhatsAppWithPreset('Hello Yukoli, I found your website and would like to connect.');
+              });
+              _count++;
         }
       }
     });
 
     // Consult an Engineer → WhatsApp
-    count += bindByText('button', 'consult an engineer', function (e) {
+      _count += bindByText('button', 'consult an engineer', function (e) {
       e.preventDefault();
       safeCall('startWhatsApp');
     });
     // Contact Sales → WhatsApp
-    count += bindByText('button', 'contact sales', function (e) {
+      _count += bindByText('button', 'contact sales', function (e) {
       e.preventDefault();
       safeCall('startWhatsApp');
     });
@@ -169,30 +163,30 @@
           e.preventDefault();
           safeCall('startEmail');
         });
-        count++;
+        _count++;
       } else if (iconName === 'contact_support' || iconName === 'share') {
         link.addEventListener('click', function (e) {
           e.preventDefault();
           openWhatsAppWithPreset('Hello Yukoli Support, I need help. Please contact me.');
         });
-        count++;
+        _count++;
       } else if (iconName === 'public') {
         link.addEventListener('click', function (e) {
           e.preventDefault();
           global.location.href = '/';
         });
-        count++;
+        _count++;
       }
     });
-
+    
   }
 
   // ─── 3. Navigation CTA buttons ────────────────────────────────────────────────
   function bindNavCTAs() {
-    var count = 0;
+    var _count = 0;
 
     // "Get Blueprint" on landing pages → scroll to form section
-    count += bindByText('button', 'get blueprint', function (e) {
+    _count += bindByText('button', 'get blueprint', function (e) {
       e.preventDefault();
       var formSection = document.getElementById('download-form') ||
                         document.querySelector('form');
@@ -204,7 +198,7 @@
     });
 
     // "Get the Free Blueprint" hero CTA → scroll to form
-    count += bindByText('button', 'get the free blueprint', function (e) {
+    _count += bindByText('button', 'get the free blueprint', function (e) {
       e.preventDefault();
       var formSection = document.querySelector('form');
       if (formSection) {
@@ -214,14 +208,14 @@
 
     // "Download Now" anchor link already has href="#download-form" — no JS needed for PC
     // "View Summary" → page-internal scroll to strategy preview section
-    count += bindByText('button', 'view summary', function () {
+    _count += bindByText('button', 'view summary', function () {
       var section = document.querySelector('section:nth-of-type(2)') ||
                     document.querySelector('.bg-slate-100');
       if (section) section.scrollIntoView({ behavior: 'smooth' });
     });
 
     // "Explore All Stories" → scroll down to case study grid
-    count += bindByText('button', 'explore all stories', function (e) {
+    _count += bindByText('button', 'explore all stories', function (e) {
       e.preventDefault();
       var grid = document.querySelector('#case-grid') ||
                  document.querySelector('.grid.grid-cols-1.md\\:grid-cols-2.lg\\:grid-cols-3');
@@ -232,45 +226,45 @@
 
   // ─── 4. Page-jump buttons ─────────────────────────────────────────────────────
   function bindPageJumps() {
-    var count = 0;
+    var _count = 0;
 
-    count += bindByText('button', 'start roi calculator', function (e) {
+    _count += bindByText('button', 'start roi calculator', function (e) {
       e.preventDefault();
       global.location.href = '/internal/strategy/roi-calculator-pc.html';
     });
-    count += bindByText('button', 'launch roi calculator', function (e) {
+    _count += bindByText('button', 'launch roi calculator', function (e) {
       e.preventDefault();
       global.location.href = '/internal/strategy/roi-calculator-pc.html';
     });
-    count += bindByText('button', 'custom roi analysis', function (e) {
+    _count += bindByText('button', 'custom roi analysis', function (e) {
       e.preventDefault();
       global.location.href = '/internal/strategy/roi-calculator-pc.html';
     });
 
-    count += bindByText('button', 'view hardware stack', function (e) {
+    _count += bindByText('button', 'view hardware stack', function (e) {
       e.preventDefault();
       global.location.href = '/products/';
     });
-    count += bindByText('a', 'view full inventory', function (e) {
+    _count += bindByText('a', 'view full inventory', function (e) {
       e.preventDefault();
       global.location.href = '/products/';
     });
 
-    count += bindByText('button', 'view full blueprint', function (e) {
+    _count += bindByText('button', 'view full blueprint', function (e) {
       e.preventDefault();
       global.location.href = '/landing/';
     });
-    count += bindByText('button', 'read case study', function (e) {
+    _count += bindByText('button', 'read case study', function (e) {
       e.preventDefault();
       global.location.href = '/landing/';
     });
 
-    count += bindByText('button', 'schedule live demo', function (e) {
+    _count += bindByText('button', 'schedule live demo', function (e) {
       e.preventDefault();
       global.location.href = '/thank-you/';
     });
 
-    count += bindByText('button', 'technical specs', function (e) {
+    _count += bindByText('button', 'technical specs', function (e) {
       e.preventDefault();
       global.location.href = '/products/';
     });
@@ -294,13 +288,11 @@
       'button[class*="bg-\\[#f26522\\]"]',
       'button[class*="bg-orange"]'
     ];
-    var count = 0;
     selectors.forEach(function (sel) {
       try {
         document.querySelectorAll(sel).forEach(function (el) {
           if (!el.classList.contains('btn-cta')) {
             el.classList.add('btn-cta');
-            count++;
           }
         });
       } catch (e) { /* ignore invalid selector on older engines */ }
@@ -443,7 +435,6 @@
 
   // ─── 5. Form submission wiring ────────────────────────────────────────────────
   function bindForms() {
-    var count = 0;
     var forms = document.querySelectorAll('form');
     forms.forEach(function (form) {
       // Assign id="contact-form" if form has no id (so submitContactForm can find it)
@@ -483,30 +474,28 @@
             });
           }
         });
-        count++;
       }
     });
   }
 
   // ─── 6. Download / Export buttons ─────────────────────────────────────────────
   function bindDownloadButtons() {
-    var count = 0;
 
     // "Manual Download" on thank-you page
-    count += bindByText('button', 'manual download', function () {
+    bindByText('button', 'manual download', function () {
       safeCall('showNotification', ['Preparing your download…', 'success']);
       // Uncomment when PDF is ready:
       // window.open('/assets/pdf/catalog-2026.pdf', '_blank');
     });
 
     // "Share with Team"
-    count += bindByText('button', 'share with team', function () {
+    bindByText('button', 'share with team', function () {
       if (navigator.share) {
         navigator.share({
           title: 'Yukoli 2026 Smart Kitchen Solutions',
           text: 'Check out the Yukoli 2026 Catalog — commercial kitchen automation.',
           url: global.location.href
-        }).catch(function (err) {
+        }).catch(function () {
         });
       } else {
         // Fallback: copy URL to clipboard
@@ -519,17 +508,17 @@
     });
 
     // "Download PDF" (ESG page)
-    count += bindByText('button', 'download pdf', function () {
+    bindByText('button', 'download pdf', function () {
       safeCall('showNotification', ['ESG Report download coming soon.', 'success']);
     });
 
     // "Export PDF Report" (ROI Calculator)
-    count += bindByText('button', 'export pdf report', function () {
+    bindByText('button', 'export pdf report', function () {
       global.print();
     });
 
     // "Read the OS Whitepaper"
-    count += bindByText('button', 'read the os whitepaper', function () {
+    bindByText('button', 'read the os whitepaper', function () {
       global.location.href = '/support/';
     });
 
@@ -828,7 +817,7 @@
     var cards = document.querySelectorAll('.grid.grid-cols-1.md\\:grid-cols-2.lg\\:grid-cols-3 > div');
     if (cards.length === 0) return;
 
-    filterBtns.forEach(function (btn, i) {
+    filterBtns.forEach(function (btn) {
       btn.addEventListener('click', function () {
         // Visual active state
         filterBtns.forEach(function (b) {
@@ -862,9 +851,7 @@
     var confirmBtn = findByText('button', 'confirm slot')[0];
 
     if (calendarBtns.length === 0 && !confirmBtn) return;
-
-    var selectedDate = '3'; // default pre-selected
-    var selectedTime = '10:30 AM'; // default pre-selected
+    // calendar selection values removed (were unused)
 
     calendarBtns.forEach(function (btn) {
       btn.addEventListener('click', function () {
@@ -872,7 +859,8 @@
           b.classList.remove('bg-primary', 'text-white', 'font-bold');
         });
         btn.classList.add('bg-primary', 'text-white', 'font-bold');
-        selectedDate = btn.textContent.trim();
+        // date selected — value not used elsewhere currently
+        // selectedDate intentionally not stored to avoid unused globals
       });
     });
 
@@ -886,7 +874,8 @@
         });
         btn.classList.add('border-primary', 'bg-primary/5', 'text-primary', 'font-bold');
         btn.classList.remove('border-slate-200', 'font-medium');
-        selectedTime = btn.textContent.trim();
+        // time selected — value not used elsewhere currently
+        // selectedTime intentionally not stored to avoid unused globals
       });
     });
 
@@ -1290,12 +1279,9 @@
       document.head.appendChild(s);
     }
 
-    var count = 0;
-
     // 1. Buttons with data-expand attribute
     document.querySelectorAll('[data-expand]').forEach(function (btn) {
       wireExpandBtn(btn);
-      count++;
     });
 
     // 2. Buttons whose text contains "show more" / "read more" / "view more"
@@ -1305,7 +1291,6 @@
       for (var i = 0; i < textMatches.length; i++) {
         if (txt.indexOf(textMatches[i]) !== -1 && !el.dataset.expandBound) {
           wireExpandBtn(el);
-          count++;
           break;
         }
       }
