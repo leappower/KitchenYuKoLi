@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"/>
+<link rel="canonical" href="https://www.kitchen.yukoli.com/landing/"/>
+<meta name="description" content="Yukoli Restaurant_Corp case study landing page — smart kitchen automation ROI for restaurant chains.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Restaurant Corp — Responsive Entry">
+<meta property="og:description" content="Yukoli Restaurant_Corp case study landing page — smart kitchen automation ROI for restaurant chains.">
+<meta property="og:url" content="https://www.kitchen.yukoli.com/landing/">
+<meta property="og:image" content="https://www.kitchen.yukoli.com/assets/images/og-landing.webp">
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Restaurant Corp — Responsive Entry</title>
+<script src="/assets/js/utils/device-utils.js"></script>
+<script>
+/* Responsive entry — redirect to device file with clean-url parameter */
+(function () {
+  // SPA 导航时跳过响应式重定向
+  if (window.__spaNavigating) return;
+
+  // 使用 DeviceUtils 统一管理设备判断
+  var deviceType = window.DeviceUtils ? window.DeviceUtils.getDeviceType() : 'pc';
+  var targetFile;
+
+  if (deviceType === window.DeviceUtils.DeviceType.MOBILE) {
+    targetFile = 'index-mobile.html';
+  } else if (deviceType === window.DeviceUtils.DeviceType.TABLET) {
+    targetFile = 'index-tablet.html';
+  } else {
+    targetFile = 'index-pc.html';
+  }
+
+  console.log('[Responsive Entry] Device type:', deviceType, 'Target file:', targetFile);
+
+  // 重定向到设备特定文件,带 clean-url 参数,让它在加载后清理 URL
+  location.href = targetFile + '?clean-url=/landing/';
+}());
+</script>
+<link rel="preload" href="/assets/fonts/local-fonts.css" as="style">
+<link rel="preload" href="/assets/css/tailwind.css" as="style">
+<link rel="preload" href="/assets/fonts/public-sans-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/fonts/public-sans-latin-700-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/assets/css/tailwind.css">
+<link rel="stylesheet" href="/assets/css/z-index-system.css">
+<link rel="stylesheet" href="/assets/css/performance-optimized.css"/>
+<!-- Dark mode: apply saved preference before first paint (prevents flash) -->
+  <script>(function(){if(localStorage.getItem('darkMode')==='true')document.documentElement.classList.add('dark')})()</script>
+<link rel="icon" href="/assets/images/logo_header.webp" type="image/webp">
+</head>
+<body><script defer src="/assets/js/lang-registry.js"></script>
+<script defer src="/assets/js/translations.js"></script><script defer src="/assets/js/translations-dropdown-template.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    if (window.translationManager) window.translationManager.initialize();
+  });
+</script>
+</body>
+</html>

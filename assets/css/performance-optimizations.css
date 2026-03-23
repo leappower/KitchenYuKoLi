@@ -1,0 +1,165 @@
+/**
+ * CSS动画性能优化
+ * 
+ * ⚠️  已优化: 移除全局 will-change,改为按需使用
+ * 
+ * 注意事项:
+ * 1. will-change 只在动画执行期间添加
+ * 2. 动画结束后必须移除,释放内存
+ * 3. 优先使用 transform 和 opacity (GPU 加速)
+ * 4. 避免对大量元素使用 will-change
+ */
+
+/* ═══════════════════════════════════════════════════════════
+   Hover Effects - 高频交互动画
+   ═══════════════════════════════════════════════════════════ */
+
+/* 颜色变化 (hover:bg, hover:text) */
+.hover-bg-color-transition {
+  will-change: background-color;
+}
+
+.hover-text-color-transition {
+  will-change: color;
+}
+
+/* 尺寸变化 (hover:scale) */
+.hover-scale-transition {
+  will-change: transform;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   Transition Animations - 页面元素过渡动画
+   ═══════════════════════════════════════════════════════════ */
+
+/* 颜色过渡 */
+.transition-colors {
+  will-change: background-color, border-color, color;
+}
+
+/* 变换过渡 */
+.transition-transform {
+  will-change: transform;
+}
+
+/* 透明度过渡 */
+.transition-opacity {
+  will-change: opacity;
+}
+
+/* 多属性过渡 (谨慎使用) */
+.transition-all {
+  will-change: transform, opacity;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   Keyframe Animations - 持续动画
+   ═══════════════════════════════════════════════════════════ */
+
+/* 脉冲动画 */
+.animate-pulse {
+  will-change: opacity;
+}
+
+/* 旋转动画 */
+.animate-spin {
+  will-change: transform;
+}
+
+/* 弹跳动画 */
+.animate-bounce {
+  will-change: transform;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   Component-Specific Optimizations
+   ═══════════════════════════════════════════════════════════ */
+
+/* 按钮 - 点击反馈 */
+button {
+  will-change: transform, background-color;
+}
+
+button:active {
+  will-change: transform;
+}
+
+/* 链接 - 悬停效果 */
+a {
+  will-change: color;
+}
+
+/* 输入框 - 聚焦状态 */
+input:focus,
+textarea:focus,
+select:focus {
+  will-change: border-color, box-shadow;
+}
+
+/* 下拉菜单 - 打开/关闭动画 */
+.dropdown-menu {
+  will-change: opacity, transform;
+}
+
+/* 模态框 - 显示/隐藏动画 */
+.modal-overlay {
+  will-change: opacity;
+}
+
+.modal-content {
+  will-change: transform, opacity;
+}
+
+/* Toast 通知 - 进出动画 */
+.toast-notification {
+  will-change: transform, opacity;
+}
+
+/* FAB 按钮 - 悬停和点击 */
+.fab-button {
+  will-change: transform;
+}
+
+.fab-button:active {
+  will-change: transform;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   Performance Tips (作为注释保留,供开发者参考)
+   ═══════════════════════════════════════════════════════════ */
+
+/*
+优化建议:
+1. 优先使用 transform 和 opacity 进行动画 (GPU加速)
+2. 避免对 width, height, top, left 进行动画 (触发重排)
+3. 对于大量动画,考虑使用 CSS transform: translateZ(0) 强制GPU加速
+4. 使用 requestAnimationFrame 进行动画而非 setInterval
+5. 在动画结束后移除 will-change 属性以释放内存
+*/
+
+/* ═════════════════════════════════════════════════════════
+   💡 GPU 加速优化
+   ═════════════════════════════════════════════════════════
+
+强制 GPU 加速 (慎用,仅用于关键动画):
+.gpu-accelerated {
+  transform: translateZ(0);
+  will-change: transform;
+}
+
+.backface-hidden {
+  backface-visibility: hidden;
+  perspective: 1000px;
+}
+
+/* ═════════════════════════════════════════════════════════
+   📝 示例: 动态添加 will-change 的 JavaScript 函数
+/*
+function startAnimation(element) {
+  element.style.willChange = 'transform, opacity';
+}
+
+function endAnimation(element) {
+  element.style.willChange = 'auto';
+}
+*/

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Page Not Found - Yukoli Technology</title>
+  <meta name="description" content="The page you are looking for does not exist or has been moved.">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Page Not Found - Yukoli Technology">
+  <meta property="og:description" content="The page you are looking for does not exist or has been moved.">
+  <meta property="og:url" content="https://www.kitchen.yukoli.com/404.html">
+  <meta name="robots" content="noindex, follow">
+
+  <!-- Fonts & Styles (same as other pages) -->
+  <link rel="preload" href="/assets/fonts/local-fonts.css" as="style">
+  <link rel="preload" href="/assets/css/tailwind.css" as="style">
+  <link href="/assets/fonts/local-fonts.css" rel="stylesheet"/>
+  <link rel="stylesheet" href="/assets/css/tailwind.css">
+  <link rel="stylesheet" href="/assets/css/z-index-system.css">
+  <link rel="stylesheet" href="/assets/css/performance-optimized.css"/>
+
+  <style>
+    body { font-family: "Public Sans", sans-serif; min-height: 100dvh; }
+  </style>
+
+  <!-- Dark mode -->
+  <script>(function(){if(localStorage.getItem("darkMode")==="true")document.documentElement.classList.add("dark")})()</script>
+
+  <!-- Redirect script: /home → /home/, unknown → show 404 -->
+  <script>
+  (function () {
+    var base = "";
+    var path = window.location.pathname;
+    var normalized = path.replace(/\/$/, "");
+    var routes = ["home","catalog","case-studies","case-download","esg","roi","quote","support","pdp","thank-you","landing"];
+    var segment = normalized.split("/").pop();
+    if (routes.indexOf(segment) !== -1) {
+      window.location.replace(base + "/" + segment + "/");
+    }
+    // Unknown routes stay on this 404 page (no redirect)
+  }());
+  </script>
+
+  <!-- Favicon -->
+  <link rel="icon" href="/assets/images/logo_header.webp" type="image/webp">
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 min-h-screen flex flex-col overflow-x-hidden">
+
+  <!-- Navigator placeholder (rendered by navigator.js) -->
+  <div id="navigator" data-variant="auto"></div>
+
+  <!-- 404 Content -->
+  <main class="flex-1 flex items-center justify-center px-6 py-20">
+    <div class="text-center max-w-lg">
+      <div class="mb-6">
+        <span class="text-8xl font-black tracking-tighter text-primary/20">404</span>
+      </div>
+      <h1 class="text-3xl md:text-4xl font-black tracking-tight mb-4" data-i18n="error_404_title">Page Not Found</h1>
+      <p class="text-slate-500 dark:text-slate-400 text-lg mb-8" data-i18n="error_404_message">
+        The page you are looking for does not exist or has been moved.
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a href="/home/" class="inline-flex items-center justify-center px-8 py-3 bg-primary text-white font-bold rounded-lg hover:bg-primary/90 transition-colors shadow-lg hover:shadow-xl">
+          <span class="material-symbols-outlined mr-2" style="font-size:20px">home</span>
+          <span data-i18n="nav_home">Go Home</span>
+        </a>
+        <a href="/catalog/" class="inline-flex items-center justify-center px-8 py-3 border-2 border-slate-200 dark:border-slate-700 font-bold rounded-lg hover:border-primary hover:text-primary transition-colors">
+          <span class="material-symbols-outlined mr-2" style="font-size:20px">kitchen</span>
+          <span data-i18n="quote_equipment">Browse Equipment</span>
+        </a>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer placeholder (rendered by footer.js) -->
+  <div id="footer" data-variant="auto"></div>
+
+  <!-- Shared scripts (same as other pages) -->
+  <script defer src="/assets/js/router.js"></script>
+  <script defer src="/assets/js/lang-registry.js"></script>
+  <script defer src="/assets/js/translations.js"></script>
+  <script src="/assets/js/translations-dropdown-template.js"></script>
+  <script defer src="/assets/js/ui/navigator.js"></script>
+  <script defer src="/assets/js/ui/footer.js"></script>
+  <script defer src="/assets/js/ui/floating-actions.js"></script>
+  <script>
+  document.addEventListener("DOMContentLoaded", function () {
+    if (window.translationManager) window.translationManager.initialize();
+  });
+  </script>
+</body>
+</html>
