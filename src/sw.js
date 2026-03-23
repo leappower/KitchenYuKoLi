@@ -5,7 +5,7 @@
 // - Development: Cache disabled for live reload
 // - Production: Cache enabled for offline support and performance
 
-const CACHE_VERSION = 'v0-0-0';
+const CACHE_VERSION = 'v0-0-5';
 
 // Cache names (will be skipped in development)
 const CACHE_NAME = `language-cache-${CACHE_VERSION}`;

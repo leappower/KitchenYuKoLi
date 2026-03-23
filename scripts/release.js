@@ -517,7 +517,7 @@ if (opts.ghPages) {
     run(`git commit -m "deploy: v${newVersion} to GitHub Pages"`, { cwd: ghTmpDir, silent: false });
 
     log(`推送 ${GH_PAGES_BRANCH} 到远端...`);
-    execSync(`git -C "${ghTmpDir}" -c http.postBuffer=524288000 push origin ${GH_PAGES_BRANCH}`, {
+    execSync(`git -C "${ghTmpDir}" -c http.postBuffer=524288000 push origin ${GH_PAGES_BRANCH} --force`, {
       cwd: ROOT, encoding: 'utf8', stdio: 'inherit',
     });
     ok(`已推送到 origin/${GH_PAGES_BRANCH}`);
