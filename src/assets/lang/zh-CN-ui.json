@@ -224,10 +224,10 @@
   "home_hw_subtitle": "114款智能商厨设备，覆盖烹饪全流程",
   "home_hw_title": "核心产品 Core Products",
   "home_hw_view_inventory": "查看全部产品",
-  "home_int_cloud_desc": "通过高效机器人备料站优化出餐周转时间。",
-  "home_int_enterprise_desc": "实时同步 500+ 门店的菜谱下发与库存追踪。",
-  "home_int_health_desc": "以营养锁定精准烹饪确保 100% 合规。",
-  "home_int_title": "规模化集成解决方案",
+  "home_int_cloud_desc": "从前处理到烹饪全流程自动化，统一口味、统一标准、统一配送。",
+  "home_int_enterprise_desc": "大批量标准化出餐，智能炒菜机一人操作即可满足千人食堂需求。",
+  "home_int_health_desc": "菜谱云端下发，所有门店同步出品，保证品牌口味一致性。",
+  "home_int_title": "覆盖全行业的智慧厨房方案",
   "home_mobile_btn_calculator": "计算器",
   "home_mobile_cta_desc": "准备改变您的业务?今天就联系我们。",
   "home_mobile_cta_title": "开启您的旅程",
@@ -531,5 +531,10 @@
   "home_stat_countries": "50+",
   "home_stat_countries_label": "出口国家",
   "home_stat_years": "20+",
-  "home_stat_certified": "资质认证"
+  "home_stat_certified": "资质认证",
+  "home_solution_canteen": "学校/企业食堂",
+  "home_solution_central": "中央厨房",
+  "home_solution_chain": "餐饮连锁",
+  "home_trust_title": "品质保障，全球信赖",
+  "home_trust_subtitle": "通过国际权威认证，产品远销全球50+国家和地区"
 }

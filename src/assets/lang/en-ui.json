@@ -224,10 +224,10 @@
   "home_hw_subtitle": "114 smart kitchen equipment models covering the entire cooking process",
   "home_hw_title": "Core Products",
   "home_hw_view_inventory": "View All Products",
-  "home_int_cloud_desc": "Optimize turnaround times with hyper-efficient robotic prep stations.",
-  "home_int_enterprise_desc": "Sync 500+ locations with real-time recipe deployment and inventory tracking.",
-  "home_int_health_desc": "Ensure 100% compliance with nutrient-locked precision cooking.",
-  "home_int_title": "Integrated Solutions for Scale",
+  "home_int_cloud_desc": "Full automation from prep to cooking — consistent taste, standards, and delivery.",
+  "home_int_enterprise_desc": "High-volume standardized cooking — one operator with a smart wok machine can serve thousands.",
+  "home_int_health_desc": "Cloud-based recipe deployment ensures consistent quality across all locations.",
+  "home_int_title": "Smart Kitchen Solutions for Every Industry",
   "home_mobile_btn_calculator": "Calculator",
   "home_mobile_cta_desc": "Ready to transform your business? Contact us today.",
   "home_mobile_cta_title": "Start Your Journey",
@@ -531,5 +531,10 @@
   "home_stat_countries": "50+",
   "home_stat_countries_label": "Export Countries",
   "home_stat_years": "20+",
-  "home_stat_certified": "Certified"
+  "home_stat_certified": "Certified",
+  "home_solution_canteen": "School & Corporate Canteens",
+  "home_solution_central": "Central Kitchens",
+  "home_solution_chain": "Restaurant Chains",
+  "home_trust_title": "Quality Guaranteed, Trusted Globally",
+  "home_trust_subtitle": "Internationally certified, exporting to 50+ countries worldwide"
 }
