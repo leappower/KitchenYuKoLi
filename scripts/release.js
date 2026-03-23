@@ -406,119 +406,18 @@ if (!opts.skipBuild && fs.existsSync(swSrcPath)) {
   warn('src/sw.js 不存在，跳过缓存版本更新');
 }
 
-// ─── Step 7: 推送到 release 分支 ──────────────────────────────────────────────
-title('Step 7  创建并推送 release 分支');
+// ─── Step 7: 推送到 release 分支（临时禁用）───────────────────────────────────
+// TODO: 测试验证完成后恢复此步骤
+title('Step 7  创建并推送 release 分支 [已禁用]');
+warn('release 分支操作已临时禁用，仅执行 gh-pages 部署');
+ok('跳过 release 分支创建（测试阶段）');
 
-// 记录当前所在分支，操作结束后回来
-let originalBranch;
+// 记录当前所在分支（临时禁用 release 分支操作，保留变量供后续恢复使用）
+let _originalBranch;
 try {
-  originalBranch = run('git rev-parse --abbrev-ref HEAD', { silent: true });
+  _originalBranch = run('git rev-parse --abbrev-ref HEAD', { silent: true });
 } catch (_) {
-  originalBranch = 'main';
-}
-
-// 检查工作区是否干净（只检查 non-dist 改动）
-try {
-  const status = run('git status --porcelain', { silent: true });
-  if (status) {
-    warn('工作区有未提交改动，发布产物时将不影响 main 分支');
-  }
-} catch (_) { /* 无法读取工作区状态，忽略 */ }
-
-// 使用临时目录来存放产物并创建孤立分支（tmpDir 已在顶部声明）
-try {
-  // 清理旧的临时目录和遗留 worktree 记录
-  log('初始化临时发布工作区...');
-  try {
-    run(`git worktree remove --force "${tmpDir}"`, { silent: true });
-  } catch (_) { /* ignore if no existing worktree */ }
-  if (fs.existsSync(tmpDir)) {
-    run(`rm -rf "${tmpDir}"`, { silent: true });
-  }
-
-  // 创建孤立分支并 checkout 到 worktree
-  log(`创建孤立分支 ${releaseBranch}...`);
-
-  // 检查本地是否有同名分支（遗留）
-  try {
-    const localBranches = run('git branch', { silent: true });
-    if (localBranches.split('\n').some(b => b.trim() === releaseBranch || b.trim() === `* ${releaseBranch}`)) {
-      run(`git branch -D "${releaseBranch}"`, { silent: true });
-      log(`已删除旧的本地分支 ${releaseBranch}`);
-    }
-  } catch (_) { /* ignore if branch listing fails */ }
-
-  // 添加 worktree（孤立分支）
-  // git 2.40+ 支持 --orphan，旧版本用兼容方案：先建普通 worktree，再在其中执行 checkout --orphan
-  const gitVersion = run('git --version', { silent: true }).match(/(\d+)\.(\d+)/);
-  const gitMajor = gitVersion ? parseInt(gitVersion[1], 10) : 0;
-  const gitMinor = gitVersion ? parseInt(gitVersion[2], 10) : 0;
-  if (gitMajor > 2 || (gitMajor === 2 && gitMinor >= 40)) {
-    // git 2.40+：原生支持 --orphan
-    run(`git worktree add --orphan -b "${releaseBranch}" "${tmpDir}"`, { silent: false });
-  } else {
-    // git < 2.40：先创建 detach 状态的 worktree，再在其中 checkout --orphan 新分支，最后清空继承文件
-    run(`git worktree add --detach "${tmpDir}" HEAD`, { silent: false });
-    run(`git -C "${tmpDir}" checkout --orphan "${releaseBranch}"`, { silent: false });
-    // 清空 worktree 中从 HEAD 带过来的文件（orphan 分支不应继承任何历史文件）
-    run(`git -C "${tmpDir}" rm -rf . --quiet`, { silent: true });
-  }
-
-  // 复制 dist 内容到 worktree
-  log('复制产物到发布分支...');
-  const files = fs.readdirSync(distDir);
-  for (const file of files) {
-    const src = path.join(distDir, file);
-    const dst = path.join(tmpDir, file);
-    run(`cp -r "${src}" "${dst}"`, { silent: true });
-  }
-
-  // 复制 CNAME 文件（如有）
-  const cnameFiles = ['CNAME', 'www.CNAME'];
-  for (const cf of cnameFiles) {
-    const src = path.join(ROOT, cf);
-    if (fs.existsSync(src)) {
-      fs.copyFileSync(src, path.join(tmpDir, cf));
-      log(`已复制 ${cf}`);
-    }
-  }
-
-  // 写入版本信息文件
-  const releaseInfo = {
-    version: newVersion,
-    branch: releaseBranch,
-    builtAt: new Date().toISOString(),
-    builtFrom: originalBranch,
-    commit: (() => { try { return run('git rev-parse --short HEAD', { silent: true }); } catch (_) { return 'unknown'; } })(),
-  };
-  fs.writeFileSync(
-    path.join(tmpDir, 'release.json'),
-    JSON.stringify(releaseInfo, null, 2) + '\n',
-    'utf8'
-  );
-  ok('写入 release.json');
-
-  // 在 worktree 中提交
-  log('提交发布产物...');
-  run('git add -A', { cwd: tmpDir, silent: false });
-
-  const commitMsg = `release: v${newVersion}\n\n- 构建时间: ${releaseInfo.builtAt}\n- 来源分支: ${originalBranch}\n- 来源 commit: ${releaseInfo.commit}`;
-  run(`git commit -m "${commitMsg.replace(/\n/g, '\\n').replace(/"/g, '\\"')}"`, { cwd: tmpDir, silent: false });
-  ok('产物提交完成');
-
-  // 推送到远端
-  log(`推送 ${releaseBranch} 到远端...`);
-  run(`git push origin "${releaseBranch}"`, { cwd: tmpDir, silent: false });
-  ok(`已推送到 origin/${releaseBranch}`);
-
-} catch (e) {
-  fail('发布过程出错', e);
-  cleanupWorktree();
-  process.exit(1);
-} finally {
-  // 清理 worktree（无论成败均执行）
-  cleanupWorktree();
-  ok('临时 worktree 已清理');
+  _originalBranch = 'main';
 }
 
 // ─── Step 8: 部署到 GitHub Pages（可选）─────────────────────────────────────
@@ -549,8 +448,13 @@ if (opts.ghPages) {
 
     // Step 6b: 用 --base-path 重新运行 build-ssg，覆盖 index.html 和 404.html
     // 以及各路由目录下的 HTML 文件，添加 /KitchenYuKoLi 前缀
-    log('SSG 重新生成（base-path=' + GH_PAGES_BASE + '）...');
-    runLive('node scripts/build-ssg.js --clean --base-path=' + GH_PAGES_BASE);
+    // 自定义域名模式下 GH_PAGES_BASE='/'，此时不添加 base-path 参数（或传空值）
+    var ssgCmd = 'node scripts/build-ssg.js --clean';
+    if (GH_PAGES_BASE && GH_PAGES_BASE !== '/') {
+      ssgCmd += ' --base-path=' + GH_PAGES_BASE;
+    }
+    log('SSG 重新生成' + (GH_PAGES_BASE && GH_PAGES_BASE !== '/' ? '（base-path=' + GH_PAGES_BASE + '）' : '（无 base-path，自定义域名模式）') + '...');
+    runLive(ssgCmd);
 
     ok('构建完成（base-path=' + GH_PAGES_BASE + '）');
 

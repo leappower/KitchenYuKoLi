@@ -156,16 +156,26 @@ function patchHtmlPaths(html) {
   // 1. Patch src= and href= attributes in HTML tags
   //    Match: src="/path" or href="/path" (not //, not /#, not already prefixed)
   //    $2 captures the leading "/", so we prepend bp (without extra slash)
-  var attrRegex = new RegExp('((?:src|href)\\s*=\\s*")(\\/(?!\\/|#))(?!' + bpName + '\\/)', 'g');
+  //    Only apply negative lookahead if bpName is not empty
+  var attrPattern = bpName
+    ? '((?:src|href)\\s*=\\s*")(\\/(?!\\/|#))(?!' + bpName + '\\/)'
+    : '((?:src|href)\\s*=\\s*")(\\/(?!\\/|#))';
+  var attrRegex = new RegExp(attrPattern, 'g');
   html = html.replace(attrRegex, '$1' + bp + '$2');
 
   // 2. Patch inline JS: location.href = '/home/' and similar redirects
   //    Matches: location.href = '/path', window.location.replace('/path')
-  var jsRegex1 = new RegExp("(location\\.href\\s*=\\s*'|window\\.location\\.replace\\(['\"])(\\/(?!\\/|#))(?!" + bpName + ")", 'g');
+  var jsPattern1 = bpName
+    ? "(location\\.href\\s*=\\s*'|window\\.location\\.replace\\(['\"])(\\/(?!\\/|#))(?!" + bpName + ")"
+    : "(location\\.href\\s*=\\s*'|window\\.location\\.replace\\(['\"])(\\/(?!\\/|#))";
+  var jsRegex1 = new RegExp(jsPattern1, 'g');
   html = html.replace(jsRegex1, '$1' + bp + '$2');
 
   // 3. Patch inline JS: history.replaceState(null, '', '/path')
-  var jsRegex2 = new RegExp("(history\\.(?:push|replace)State\\([^,]*,\\s*[^,]*,\\s*')(" + bpName + ")", 'g');
+  var jsPattern2 = bpName
+    ? "(history\\.(?:push|replace)State\\([^,]*,\\s*[^,]*,\\s*')(" + bpName + ")"
+    : "(history\\.(?:push|replace)State\\([^,]*,\\s*[^,]*,\\s*')";
+  var jsRegex2 = new RegExp(jsPattern2, 'g');
   html = html.replace(jsRegex2, '$1' + bp + '$2');
 
   return html;
