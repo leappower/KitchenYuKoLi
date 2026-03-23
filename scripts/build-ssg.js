@@ -507,6 +507,45 @@ function main() {
     log('  ✓ 404.html → redirects /home → /home/ and unknown → /home/');
   }
 
+  // Step 5: Copy language files to dist/assets/lang/
+  log('\nStep 5: Copying language files...');
+  const srcLangDir = path.resolve(__dirname, '..', 'src', 'assets', 'lang');
+  const distLangDir = path.join(DIST_DIR, 'assets', 'lang');
+  if (fs.existsSync(srcLangDir)) {
+    if (!fs.existsSync(distLangDir)) {
+      fs.mkdirSync(distLangDir, { recursive: true });
+    }
+    const langFiles = fs.readdirSync(srcLangDir);
+    let copiedLangFiles = 0;
+    for (const file of langFiles) {
+      const srcFile = path.join(srcLangDir, file);
+      const destFile = path.join(distLangDir, file);
+      fs.copyFileSync(srcFile, destFile);
+      copiedLangFiles++;
+    }
+    log('  ✓ Copied ' + copiedLangFiles + ' language files to assets/lang/');
+  } else {
+    log('  ⚠ Language directory not found: ' + srcLangDir);
+  }
+
+  // Step 6: Patch CSS files for basePath (font URLs in local-fonts.css)
+  if (BASE_PATH) {
+    log('\nStep 6: Patching CSS files for basePath...');
+    const cssDir = path.join(DIST_DIR, 'assets', 'css');
+    const fontsCssPath = path.join(DIST_DIR, 'assets', 'fonts', 'local-fonts.css');
+    
+    // Patch local-fonts.css font URLs
+    if (fs.existsSync(fontsCssPath)) {
+      let cssContent = fs.readFileSync(fontsCssPath, 'utf-8');
+      const bp = BASE_PATH.replace(/\/$/, '');
+      // Replace url('/assets/fonts/...') with url('/KitchenYuKoLi/assets/fonts/...')
+      // Match url('...') or url("...") or url(...)
+      cssContent = cssContent.replace(/url\((['"])\/assets\/fonts\//g, 'url($1' + bp + '/assets/fonts/');
+      fs.writeFileSync(fontsCssPath, cssContent, 'utf-8');
+      log('  ✓ Patched local-fonts.css font URLs');
+    }
+  }
+
   // Summary
   log('\n────────────────────────────────────────');
   log('SSG build complete!');
