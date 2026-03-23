@@ -405,11 +405,11 @@
           return response.text();
         })
         .then(function(html) {
-          self.renderContent(pagePath, html);
+          _self.renderContent(pagePath, html);
         })
         .catch(function(error) {
-          self.log('Failed to load:', error);
-          self.hideSkeleton();
+          _self.log('Failed to load:', error);
+          _self.hideSkeleton();
         });
     },
 
@@ -524,14 +524,14 @@
 
       // 监听 popstate
       window.addEventListener('popstate', function(event) {
-        self.onPopState(event);
+        _self.onPopState(event);
       });
 
       // 监听设备类型变化
       if (window.DeviceUtils && typeof window.DeviceUtils.onDeviceChange === 'function') {
         window.DeviceUtils.onDeviceChange(function(newDeviceType, oldDeviceType) {
-          self.log('Device type changed detected:', oldDeviceType, '->', newDeviceType);
-          self.reloadCurrentRoute();
+          _self.log('Device type changed detected:', oldDeviceType, '->', newDeviceType);
+          _self.reloadCurrentRoute();
         });
       }
 
@@ -574,16 +574,16 @@
         }
 
         // 只拦截已知路由的链接,其他链接让浏览器默认处理
-        if (!self.routes[targetPath]) {
-          self.log('Skipping SPA for unknown route:', targetPath);
+        if (!_self.routes[targetPath]) {
+          _self.log('Skipping SPA for unknown route:', targetPath);
           return;
         }
 
         // 阻止默认行为，使用 SPA 导航
         event.preventDefault();
 
-        self.log('SPA navigation to:', targetPath);
-        self.navigate(targetPath);
+        _self.log('SPA navigation to:', targetPath);
+        _self.navigate(targetPath);
       });
 
       this.log('Initialized successfully');
