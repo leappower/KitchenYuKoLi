@@ -17,20 +17,14 @@
  *   englishName    翻译 Prompt 中使用的英文名称
  *   hasTranslation true  = 已有翻译文件，参与翻译引擎处理
  *                  false = 仅前端展示，暂无翻译文件
- *                  → 将 hasTranslation 改为 true 并提供翻译文件即可纳入翻译体系
- *
- * 说明 hi / km / my / lo 四种语言（hasTranslation: true）：
- *   - {lang}-ui.json      ✅ 已有完整 UI 翻译（约 15 KB）
- *   - {lang}-product.json ⚠️  当前为空 {}，产品页自动 fallback 到 zh-CN
- *   → 运行 product:sync 可生成占位翻译，后续逐步补全产品字段
- *   uiGroup        弹窗分组：'common' | 'european' | 'asian' | 'rtl'
+ *   uiGroup        弹窗分组：'common'
  *   sortOrder      合并/排序时的顺序（数字越小越靠前）
  */
 
 'use strict';
 
 // ─────────────────────────────────────────────────────────────────────────────
-// 主注册表（25 种语言）
+// 主注册表（2 种语言：zh-CN + en）
 // ─────────────────────────────────────────────────────────────────────────────
 // 使用 var 防止重复加载时报错，并用 window 检查避免重复定义
 if (typeof window !== 'undefined' && window.LANG_REGISTRY && window.LANG_REGISTRY.LANGUAGES) {
@@ -38,7 +32,6 @@ if (typeof window !== 'undefined' && window.LANG_REGISTRY && window.LANG_REGISTR
 } else {
 // 语言注册表定义
 var LANGUAGES = [
-  // ── 常用语言 (Common) ──────────────────────────────────────────────────────
   {
     code: 'zh-CN',
     nativeName: '中文（简体）',
@@ -48,198 +41,12 @@ var LANGUAGES = [
     sortOrder: 1,
   },
   {
-    code: 'zh-TW',
-    nativeName: '中文（繁體）',
-    englishName: 'Chinese (Traditional)',
-    hasTranslation: true,
-    uiGroup: 'common',
-    sortOrder: 2,
-  },
-  {
     code: 'en',
     nativeName: 'English',
     englishName: 'English',
     hasTranslation: true,
     uiGroup: 'common',
-    sortOrder: 3,
-  },
-  {
-    code: 'ar',
-    nativeName: 'العربية',
-    englishName: 'Arabic',
-    hasTranslation: true,
-    uiGroup: 'rtl',
-    sortOrder: 4,
-  },
-  {
-    code: 'he',
-    nativeName: 'עברית',
-    englishName: 'Hebrew',
-    hasTranslation: true,
-    uiGroup: 'rtl',
-    sortOrder: 5,
-  },
-  // ── 欧洲语言 (European) ────────────────────────────────────────────────────
-  {
-    code: 'de',
-    nativeName: 'Deutsch',
-    englishName: 'German',
-    hasTranslation: true,
-    uiGroup: 'european',
-    sortOrder: 6,
-  },
-  {
-    code: 'es',
-    nativeName: 'Español',
-    englishName: 'Spanish',
-    hasTranslation: true,
-    uiGroup: 'european',
-    sortOrder: 7,
-  },
-  {
-    code: 'fr',
-    nativeName: 'Français',
-    englishName: 'French',
-    hasTranslation: true,
-    uiGroup: 'european',
-    sortOrder: 8,
-  },
-  {
-    code: 'it',
-    nativeName: 'Italiano',
-    englishName: 'Italian',
-    hasTranslation: true,
-    uiGroup: 'european',
-    sortOrder: 9,
-  },
-  {
-    code: 'nl',
-    nativeName: 'Nederlands',
-    englishName: 'Dutch',
-    hasTranslation: true,
-    uiGroup: 'european',
-    sortOrder: 10,
-  },
-  {
-    code: 'pl',
-    nativeName: 'Polski',
-    englishName: 'Polish',
-    hasTranslation: true,
-    uiGroup: 'european',
-    sortOrder: 11,
-  },
-  {
-    code: 'pt',
-    nativeName: 'Português',
-    englishName: 'Portuguese',
-    hasTranslation: true,
-    uiGroup: 'european',
-    sortOrder: 12,
-  },
-  {
-    code: 'ru',
-    nativeName: 'Русский',
-    englishName: 'Russian',
-    hasTranslation: true,
-    uiGroup: 'european',
-    sortOrder: 13,
-  },
-  {
-    code: 'tr',
-    nativeName: 'Türkçe',
-    englishName: 'Turkish',
-    hasTranslation: true,
-    uiGroup: 'european',
-    sortOrder: 14,
-  },
-  // ── 亚洲语言 (Asian) ───────────────────────────────────────────────────────
-  {
-    code: 'ja',
-    nativeName: '日本語',
-    englishName: 'Japanese',
-    hasTranslation: true,
-    uiGroup: 'asian',
-    sortOrder: 15,
-  },
-  {
-    code: 'ko',
-    nativeName: '한국어',
-    englishName: 'Korean',
-    hasTranslation: true,
-    uiGroup: 'asian',
-    sortOrder: 16,
-  },
-  {
-    code: 'id',
-    nativeName: 'Bahasa Indonesia',
-    englishName: 'Indonesian',
-    hasTranslation: true,
-    uiGroup: 'asian',
-    sortOrder: 17,
-  },
-  {
-    code: 'ms',
-    nativeName: 'Bahasa Melayu',
-    englishName: 'Malay',
-    hasTranslation: true,
-    uiGroup: 'asian',
-    sortOrder: 18,
-  },
-  {
-    code: 'fil',
-    nativeName: 'Filipino',
-    englishName: 'Filipino',
-    hasTranslation: true,
-    uiGroup: 'asian',
-    sortOrder: 19,
-  },
-  {
-    code: 'th',
-    nativeName: 'ภาษาไทย',
-    englishName: 'Thai',
-    hasTranslation: true,
-    uiGroup: 'asian',
-    sortOrder: 20,
-  },
-  {
-    code: 'vi',
-    nativeName: 'Tiếng Việt',
-    englishName: 'Vietnamese',
-    hasTranslation: true,
-    uiGroup: 'asian',
-    sortOrder: 21,
-  },
-  {
-    code: 'hi',
-    nativeName: 'हिन्दी',
-    englishName: 'Hindi',
-    hasTranslation: true,
-    uiGroup: 'asian',
-    sortOrder: 22,
-  },
-  {
-    code: 'my',
-    nativeName: 'မြန်မာဘာသာ',
-    englishName: 'Burmese',
-    hasTranslation: true,
-    uiGroup: 'asian',
-    sortOrder: 23,
-  },
-  {
-    code: 'km',
-    nativeName: 'ភាសាខ្មែរ',
-    englishName: 'Khmer',
-    hasTranslation: true,
-    uiGroup: 'asian',
-    sortOrder: 24,
-  },
-  {
-    code: 'lo',
-    nativeName: 'ພາສາລາວ',
-    englishName: 'Lao',
-    hasTranslation: true,
-    uiGroup: 'asian',
-    sortOrder: 25,
+    sortOrder: 2,
   },
 ];
 } // 结束重复加载保护

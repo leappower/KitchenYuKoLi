@@ -693,17 +693,10 @@ TranslationManager.prototype.openLanguageDropdown = function () {
   TranslationManager.prototype.detectBrowserLanguage = function () {
     var browserLang = navigator.language || navigator.userLanguage || 'en';
     var langMap = {
-      'zh': 'zh-CN', 'zh-CN': 'zh-CN', 'zh-TW': 'zh-TW', 'zh-HK': 'zh-TW',
+      'zh': 'zh-CN', 'zh-CN': 'zh-CN', 'zh-TW': 'zh-CN', 'zh-HK': 'zh-CN',
       'en': 'en', 'en-US': 'en', 'en-GB': 'en',
-      'de': 'de', 'de-DE': 'de', 'fr': 'fr', 'fr-FR': 'fr',
-      'it': 'it', 'it-IT': 'it', 'pt': 'pt', 'pt-BR': 'pt',
-      'ja': 'ja', 'ja-JP': 'ja', 'ko': 'ko', 'ko-KR': 'ko',
-      'nl': 'nl', 'nl-NL': 'nl', 'pl': 'pl', 'pl-PL': 'pl',
-      'ru': 'ru', 'ru-RU': 'ru', 'tr': 'tr', 'tr-TR': 'tr',
-      'th': 'th', 'th-TH': 'th', 'vi': 'vi', 'vi-VN': 'vi',
-      'ar': 'ar', 'he': 'he', 'id': 'id', 'ms': 'ms', 'fil': 'fil'
     };
-    return langMap[browserLang] || langMap[browserLang.split('-')[0]] || 'zh-CN';
+    return langMap[browserLang] || langMap[browserLang.split('-')[0]] || 'en';
   };
 
   TranslationManager.prototype.debug = function () {
