@@ -237,14 +237,106 @@
       <!-- Explore Products -->
       <section class="mb-24">
         <div class="text-center mb-12">
-          <h2 class="text-3xl font-bold mb-4" data-i18n="sol_explore_title">探索相关产品</h2>
-          <p class="text-slate-500 dark:text-slate-400 max-w-2xl mx-auto" data-i18n="sol_explore_desc">浏览我们的全系列智能商厨设备，找到最适合您需求的解决方案。</p>
+          <h2 class="text-2xl font-bold mb-4" data-i18n="sol_explore_title">探索相关产品</h2>
+          <p class="text-slate-500 dark:text-slate-400 max-w-2xl mx-auto text-sm" data-i18n="sol_explore_desc">浏览我们的全系列智能商厨设备，找到最适合您需求的解决方案。</p>
         </div>
         <div class="text-center">
-          <a href="/products/" class="inline-flex items-center gap-2 bg-primary text-white px-8 py-4 rounded-xl font-bold hover:shadow-lg hover:shadow-primary/20 transition-all">
-            <span class="material-symbols-outlined">grid_view</span>
+          <a href="/products/" class="inline-flex items-center gap-2 bg-primary text-white px-6 py-3 rounded-xl font-bold hover:shadow-lg hover:shadow-primary/20 transition-all text-sm">
+            <span class="material-symbols-outlined text-lg">grid_view</span>
             <span data-i18n="sol_explore_btn">查看全部产品</span>
           </a>
+        </div>
+      </section>
+
+      <!-- Customer Cases (Mobile: 2-col, 3rd card span-2) -->
+      <section class="mb-16 py-10 bg-white dark:bg-slate-900 rounded-2xl">
+        <div class="px-4">
+          <div class="text-center mb-8">
+            <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-bold uppercase tracking-widest mb-4">
+              <span class="material-symbols-outlined text-sm">workspace_premium</span>
+              <span data-i18n="sol_bev_cases_badge">客户案例</span>
+            </span>
+            <h2 class="text-2xl font-black tracking-tight mb-3" data-i18n="sol_bev_cases_title">他们的饮品，正在智能进化</h2>
+            <p class="text-sm text-slate-500 dark:text-slate-400 max-w-xl mx-auto" data-i18n="sol_bev_cases_desc">来自全球 50+ 国家的饮品品牌选择了 YuKoLi 智能饮品解决方案。</p>
+          </div>
+          <div class="grid grid-cols-2 gap-4">
+            <div class="bg-gradient-to-br from-slate-50 to-white dark:from-slate-800 dark:to-slate-900 rounded-xl p-5 border border-slate-200 dark:border-slate-700">
+              <div class="flex items-center gap-2 mb-3">
+                <div class="w-9 h-9 rounded-lg bg-primary/10 flex items-center justify-center"><span class="material-symbols-outlined text-primary text-base">emoji_food_beverage</span></div>
+                <div>
+                  <h3 class="font-bold text-sm leading-tight" data-i18n="sol_bev_case_1_name">连锁奶茶品牌</h3>
+                  <p class="text-[10px] text-slate-500" data-i18n="sol_bev_case_1_loc">菲律宾 · 500+ 门店</p>
+                </div>
+              </div>
+              <p class="text-xs text-slate-600 dark:text-slate-400 mb-3" data-i18n="sol_bev_case_1_desc">部署 YuKoLi 全自动奶茶机，出杯速度 15 秒/杯，口味一致性 99.8%。</p>
+              <div class="flex items-center gap-2 text-[10px] font-bold">
+                <span class="text-green-600 bg-green-50 dark:bg-green-900/20 px-1.5 py-0.5 rounded" data-i18n="sol_bev_case_1_m1">15 秒/杯</span>
+                <span class="text-primary bg-primary/10 px-1.5 py-0.5 rounded" data-i18n="sol_bev_case_1_m2">一致性 99.8%</span>
+              </div>
+            </div>
+            <div class="bg-gradient-to-br from-slate-50 to-white dark:from-slate-800 dark:to-slate-900 rounded-xl p-5 border border-slate-200 dark:border-slate-700">
+              <div class="flex items-center gap-2 mb-3">
+                <div class="w-9 h-9 rounded-lg bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center"><span class="material-symbols-outlined text-blue-600 text-base">hotel</span></div>
+                <div>
+                  <h3 class="font-bold text-sm leading-tight" data-i18n="sol_bev_case_2_name">五星级酒店集团</h3>
+                  <p class="text-[10px] text-slate-500" data-i18n="sol_bev_case_2_loc">阿联酋 · 12 家酒店</p>
+                </div>
+              </div>
+              <p class="text-xs text-slate-600 dark:text-slate-400 mb-3" data-i18n="sol_bev_case_2_desc">YuKoLi 商用咖啡机和饮品系统，日均出杯 8,000+。</p>
+              <div class="flex items-center gap-2 text-[10px] font-bold">
+                <span class="text-blue-600 bg-blue-50 dark:bg-blue-900/20 px-1.5 py-0.5 rounded" data-i18n="sol_bev_case_2_m1">8,000+ 杯/日</span>
+                <span class="text-green-600 bg-green-50 dark:bg-green-900/20 px-1.5 py-0.5 rounded" data-i18n="sol_bev_case_2_m2">五星品质</span>
+              </div>
+            </div>
+            <div class="col-span-2 bg-gradient-to-br from-slate-50 to-white dark:from-slate-800 dark:to-slate-900 rounded-xl p-5 border border-slate-200 dark:border-slate-700">
+              <div class="flex items-center gap-2 mb-3">
+                <div class="w-9 h-9 rounded-lg bg-orange-100 dark:bg-orange-900/30 flex items-center justify-center"><span class="material-symbols-outlined text-orange-600 text-base">set_meal</span></div>
+                <div>
+                  <h3 class="font-bold text-sm leading-tight" data-i18n="sol_bev_case_3_name">鲜榨果汁连锁</h3>
+                  <p class="text-[10px] text-slate-500" data-i18n="sol_bev_case_3_loc">越南 · 80 家门店</p>
+                </div>
+              </div>
+              <p class="text-xs text-slate-600 dark:text-slate-400 mb-3" data-i18n="sol_bev_case_3_desc">YuKoLi 智能榨汁系统，出汁率提升 35%，运营成本降低 50%。</p>
+              <div class="flex items-center gap-2 text-[10px] font-bold">
+                <span class="text-orange-600 bg-orange-50 dark:bg-orange-900/20 px-1.5 py-0.5 rounded" data-i18n="sol_bev_case_3_m1">出汁率 +35%</span>
+                <span class="text-primary bg-primary/10 px-1.5 py-0.5 rounded" data-i18n="sol_bev_case_3_m2">成本 -50%</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Beverage Core Tech (Mobile: 2-col) -->
+      <section class="mb-16">
+        <div class="text-center mb-8">
+          <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-100 dark:bg-cyan-900/20 text-cyan-600 text-xs font-bold uppercase tracking-widest mb-4">
+            <span class="material-symbols-outlined text-sm">science</span>
+            <span data-i18n="sol_bev_tech_badge">核心技术</span>
+          </span>
+          <h2 class="text-2xl font-bold mb-3" data-i18n="sol_bev_tech_title">饮品解决方案核心技术</h2>
+          <p class="text-sm text-slate-500 dark:text-slate-400 max-w-xl mx-auto" data-i18n="sol_bev_tech_desc">四大核心技术，为每一杯饮品的品质保驾护航。</p>
+        </div>
+        <div class="grid grid-cols-2 gap-4 px-4">
+          <div class="text-center p-4">
+            <div class="size-12 rounded-xl bg-primary/10 flex items-center justify-center mx-auto mb-3"><span class="material-symbols-outlined text-primary text-2xl">thermostat</span></div>
+            <h3 class="font-bold text-sm mb-1" data-i18n="sol_bev_tech_1_title">精准温控萃取</h3>
+            <p class="text-xs text-slate-500 dark:text-slate-400" data-i18n="sol_bev_tech_1_desc">智能温控系统精确到 ±0.1°C。</p>
+          </div>
+          <div class="text-center p-4">
+            <div class="size-12 rounded-xl bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center mx-auto mb-3"><span class="material-symbols-outlined text-blue-600 text-2xl">cleaning_services</span></div>
+            <h3 class="font-bold text-sm mb-1" data-i18n="sol_bev_tech_2_title">自动清洗消毒</h3>
+            <p class="text-xs text-slate-500 dark:text-slate-400" data-i18n="sol_bev_tech_2_desc">一键自动清洗，换品仅需 30 秒。</p>
+          </div>
+          <div class="text-center p-4">
+            <div class="size-12 rounded-xl bg-green-100 dark:bg-green-900/30 flex items-center justify-center mx-auto mb-3"><span class="material-symbols-outlined text-green-600 text-2xl">cloud_sync</span></div>
+            <h3 class="font-bold text-sm mb-1" data-i18n="sol_bev_tech_3_title">智能配方管理</h3>
+            <p class="text-xs text-slate-500 dark:text-slate-400" data-i18n="sol_bev_tech_3_desc">云端 500+ 配方，远程更新无需到店。</p>
+          </div>
+          <div class="text-center p-4">
+            <div class="size-12 rounded-xl bg-purple-100 dark:bg-purple-900/30 flex items-center justify-center mx-auto mb-3"><span class="material-symbols-outlined text-purple-600 text-2xl">sensors</span></div>
+            <h3 class="font-bold text-sm mb-1" data-i18n="sol_bev_tech_4_title">物联网远程监控</h3>
+            <p class="text-xs text-slate-500 dark:text-slate-400" data-i18n="sol_bev_tech_4_desc">实时监控设备，预测性维护减少 90% 故障。</p>
+          </div>
         </div>
       </section>
 <!-- CTA Section -->
