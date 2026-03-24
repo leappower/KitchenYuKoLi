@@ -715,5 +715,11 @@
   "about_cta_title": "Ready to Upgrade Your Kitchen?",
   "about_cta_desc": "Join 3,000+ F&B businesses worldwide that have upgraded with YuKoLi. Get a free customized proposal — our engineers respond within 24 hours.",
   "about_cta_btn_quote": "Get a Quote",
-  "about_cta_btn_products": "Browse Products"
+  "about_cta_btn_products": "Browse Products",
+  "nav_auto_kitchen": "Smart Kitchen",
+  "nav_auto_cooking_line": "Cooking Line",
+  "nav_auto_prep": "Prep Station",
+  "nav_auto_beverage": "Beverage",
+  "nav_auto_cooling": "Cooling",
+  "nav_auto_cabinet": "Storage Cabinet"
 }

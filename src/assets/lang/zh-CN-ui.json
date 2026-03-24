@@ -715,5 +715,11 @@
   "about_cta_title": "准备好升级您的厨房了吗？",
   "about_cta_desc": "与 YuKoLi 合作，加入全球3000+餐饮企业的智能化升级行列。免费获取定制方案，24小时内专业工程师回复。",
   "about_cta_btn_quote": "获取报价",
-  "about_cta_btn_products": "浏览产品"
+  "about_cta_btn_products": "浏览产品",
+  "nav_auto_kitchen": "智能厨房",
+  "nav_auto_cooking_line": "烹饪产线",
+  "nav_auto_prep": "切配中心",
+  "nav_auto_beverage": "智能饮品",
+  "nav_auto_cooling": "冷链保鲜",
+  "nav_auto_cabinet": "储存柜"
 }
