@@ -323,11 +323,11 @@
 
     pulse(this._btnWa);
     // LINE 稍微错开 1s
-    setTimeout(function () { pulse(self._btnLine); }, 1000);
+    setTimeout(function () { pulse(_self._btnLine); }, 1000);
 
     // 之后每 30s 重复一次（如果不在滚动中）
-    self._pulseTimer = setTimeout(function () {
-      if (!self._isScrolling) self._triggerPulse();
+    _self._pulseTimer = setTimeout(function () {
+      if (!_self._isScrolling) _self._triggerPulse();
     }, 30000);
   };
 

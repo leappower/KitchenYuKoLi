@@ -46,7 +46,14 @@
       key: 'nav_solutions', href: '/solutions/', id: 'solutions',
       icon: 'build',
       children: [
-        { key: 'nav_automation', icon: 'trending_up', href: '/solutions/automation/' },
+        { key: 'nav_auto_kitchen',      icon: 'restaurant',    href: '/solutions/kitchen/' },
+        { key: 'nav_auto_cooking_line', icon: 'soup_kitchen',  href: '/solutions/cooking-line/' },
+        { key: 'nav_auto_prep',         icon: 'blender',       href: '/solutions/prep/' },
+        { key: 'nav_auto_beverage',     icon: 'local_cafe',    href: '/solutions/beverage/' },
+        { key: 'nav_auto_cooling',      icon: 'ac_unit',       href: '/solutions/cooling/' },
+        { key: 'nav_auto_cabinet',      icon: 'kitchen',       href: '/solutions/cabinet/' },
+        { key: 'nav_cases_sol',         icon: 'monitoring',    href: '/solutions/case/' },
+        { key: 'nav_roi',               icon: 'calculate',     href: '/roi/' },
       ],
     },
     {
