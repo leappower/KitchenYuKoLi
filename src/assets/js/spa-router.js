@@ -31,6 +31,7 @@
       "/roi/": "/roi/index.html",
       "/quote/": "/quote/index.html",
       "/contact/": "/quote/index.html",
+      "/news/": "/news/index.html",
       "/support/": "/support/index.html",
       "/thank-you/": "/thank-you/index.html",
       "/landing/": "/landing/index.html",

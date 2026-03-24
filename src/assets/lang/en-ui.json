@@ -1138,5 +1138,10 @@
   "thank_you_subtitle": "We will get back to you within 24 hours",
   "thank_you_desc": "Our team will contact you shortly to provide the best commercial kitchen automation solution.",
   "thank_you_back_home": "Back to Home",
-  "thank_you_browse": "Browse Products"
+  "thank_you_browse": "Browse Products",
+  "news_title": "News & Updates",
+  "news_subtitle": "Stay updated on commercial kitchen automation",
+  "news_empty_hint": "No news yet. Stay tuned!",
+  "news_read_more": "Read More",
+  "news_date": "Published"
 }

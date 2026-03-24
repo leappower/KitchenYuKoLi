@@ -1138,5 +1138,10 @@
   "thank_you_subtitle": "我们会在 24 小时内回复您",
   "thank_you_desc": "我们的团队会尽快与您联系，为您提供最合适的商用厨房自动化解决方案。",
   "thank_you_back_home": "返回首页",
-  "thank_you_browse": "浏览产品"
+  "thank_you_browse": "浏览产品",
+  "news_title": "新闻资讯",
+  "news_subtitle": "了解商用厨房自动化最新动态",
+  "news_empty_hint": "暂无新闻，敬请期待",
+  "news_read_more": "阅读更多",
+  "news_date": "发布日期"
 }
