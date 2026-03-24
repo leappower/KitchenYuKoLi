@@ -1,0 +1,6 @@
+node_modules/
+dist/
+.git/
+*.min.js
+*.min.css
+src/assets/js/tailwind.cdn.js

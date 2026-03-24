@@ -1,82 +1,176 @@
-<!DOCTYPE html>
-<html class="light" lang="zh-CN"><head>
-<link rel="canonical" href="/thank-you/"/>
-<link rel="alternate" media="only screen and (max-width: 767px)" href="/thank-you/index-mobile.html"/>
-<link rel="alternate" media="only screen and (min-width: 768px) and (max-width: 1279px)" href="/thank-you/index-tablet.html"/>
-<link rel="alternate" media="only screen and (min-width: 1280px)" href="/thank-you/index-pc.html"/>
-<script>
-(function(){ if (window.__redirectChecked) return; window.__redirectChecked = true; var urlParams = new URLSearchParams(location.search); var cleanUrl = urlParams.get('clean-url'); if (cleanUrl) { history.replaceState({}, '', cleanUrl); return; } if (window.__spaNavigating) return; var currentFile = location.pathname.split('/').pop(); if (window.DeviceUtils && window.DeviceUtils.isDirectoryURL()) return; if (window.DeviceUtils && window.DeviceUtils.shouldRedirect(currentFile)) { var deviceType = window.DeviceUtils.getDeviceType(); var targetFile = deviceType === window.DeviceUtils.DeviceType.MOBILE ? 'index-mobile.html' : deviceType === window.DeviceUtils.DeviceType.TABLET ? 'index-tablet.html' : 'index-pc.html'; location.href = targetFile; } })();
-</script>
-<meta charset="utf-8"/>
-<meta name="description" content="感谢您的询价 — Yukoli 智能商厨设备">
-<meta name="robots" content="noindex,nofollow">
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title data-i18n="thankyou_page_title">感谢您的询价 | Yukoli 智能商厨设备</title>
-<link rel="preload" href="/assets/fonts/local-fonts.css" as="style">
-<link rel="preload" href="/assets/css/styles.css" as="style">
-<link rel="preload" href="/assets/css/tailwind.css" as="style">
-<link href="/assets/fonts/local-fonts.css" rel="stylesheet"/>
-<link rel="stylesheet" href="/assets/css/styles.css">
-<link rel="stylesheet" href="/assets/css/tailwind.css">
-<link rel="stylesheet" href="/assets/css/z-index-system.css">
-<link rel="stylesheet" href="/assets/css/performance-optimizations.css"/>
-<script>(function(){if(localStorage.getItem('darkMode')==='true')document.documentElement.classList.add('dark')})()</script>
-<link rel="stylesheet" href="/assets/css/skeleton.css"/>
-<link rel="icon" href="/assets/images/logo_header.webp" type="image/webp">
-<style>
-  @keyframes checkmark { 0% { transform: scale(0); opacity: 0; } 50% { transform: scale(1.2); } 100% { transform: scale(1); opacity: 1; } }
-  @keyframes circle-draw { 0% { stroke-dashoffset: 166; } 100% { stroke-dashoffset: 0; } }
-  .check-circle { animation: circle-draw 0.6s ease-out forwards; stroke-dasharray: 166; stroke-dashoffset: 166; }
-  .check-mark { animation: checkmark 0.3s 0.5s ease-out both; }
-</style>
-</head>
-<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 antialiased overflow-x-hidden">
-<div class="relative flex min-h-screen flex-col">
-<navigator data-component="navigator" data-variant="tablet" data-active="" data-cta-text-key="nav_get_quote" data-cta-href="/quote"></navigator>
-<main id="spa-content" class="flex-1 flex items-center justify-center py-16">
-  <div class="max-w-xl mx-auto px-6 text-center">
-    <div class="mb-6"><svg class="w-20 h-20 mx-auto" viewBox="0 0 52 52"><circle class="check-circle" cx="26" cy="26" r="25" fill="none" stroke="#10b981" stroke-width="2"/><path class="check-mark" fill="none" stroke="#10b981" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" d="M14.1 27.2l7.1 7.2 16.7-16.8"/></svg></div>
-    <h1 class="text-3xl font-black tracking-tight mb-3" data-i18n="thankyou_title">感谢您的询价！</h1>
-    <p class="text-lg text-slate-600 dark:text-slate-400 mb-10" data-i18n="thankyou_desc">我们的销售团队将在 24 小时内与您联系。</p>
-    <div class="flex items-center justify-center gap-3 mb-12">
-      <a href="/" class="bg-primary text-white px-6 py-3 rounded-xl font-bold flex items-center gap-2 hover:shadow-lg transition-all text-sm">
-        <span class="material-symbols-outlined text-base">home</span> <span data-i18n="thankyou_btn_home">返回首页</span>
-      </a>
-      <a href="/products/" class="px-6 py-3 rounded-xl font-bold flex items-center gap-2 border-2 border-slate-300 dark:border-slate-600 hover:border-primary hover:text-primary transition-all text-sm">
-        <span class="material-symbols-outlined text-base">grid_view</span> <span data-i18n="thankyou_btn_products">浏览更多产品</span>
-      </a>
+<!doctype html>
+<html class="light" lang="zh-CN">
+  <head>
+    <link rel="canonical" href="/thank-you/" />
+    <link rel="alternate" media="only screen and (max-width: 767px)" href="/thank-you/index-mobile.html" />
+    <link
+      rel="alternate"
+      media="only screen and (min-width: 768px) and (max-width: 1279px)"
+      href="/thank-you/index-tablet.html"
+    />
+    <link rel="alternate" media="only screen and (min-width: 1280px)" href="/thank-you/index-pc.html" />
+    <script>
+      (function () {
+        if (window.__redirectChecked) return;
+        window.__redirectChecked = true;
+        var urlParams = new URLSearchParams(location.search);
+        var cleanUrl = urlParams.get("clean-url");
+        if (cleanUrl) {
+          history.replaceState({}, "", cleanUrl);
+          return;
+        }
+        if (window.__spaNavigating) return;
+        var currentFile = location.pathname.split("/").pop();
+        if (window.DeviceUtils && window.DeviceUtils.isDirectoryURL()) return;
+        if (window.DeviceUtils && window.DeviceUtils.shouldRedirect(currentFile)) {
+          var deviceType = window.DeviceUtils.getDeviceType();
+          var targetFile =
+            deviceType === window.DeviceUtils.DeviceType.MOBILE
+              ? "index-mobile.html"
+              : deviceType === window.DeviceUtils.DeviceType.TABLET
+                ? "index-tablet.html"
+                : "index-pc.html";
+          location.href = targetFile;
+        }
+      })();
+    </script>
+    <meta charset="utf-8" />
+    <meta name="description" content="感谢您的询价 — Yukoli 智能商厨设备" />
+    <meta name="robots" content="noindex,nofollow" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title data-i18n="thankyou_page_title">感谢您的询价 | Yukoli 智能商厨设备</title>
+    <link rel="preload" href="/assets/fonts/local-fonts.css" as="style" />
+    <link rel="preload" href="/assets/css/styles.css" as="style" />
+    <link rel="preload" href="/assets/css/tailwind.css" as="style" />
+    <link href="/assets/fonts/local-fonts.css" rel="stylesheet" />
+    <link rel="stylesheet" href="/assets/css/styles.css" />
+    <link rel="stylesheet" href="/assets/css/tailwind.css" />
+    <link rel="stylesheet" href="/assets/css/z-index-system.css" />
+    <link rel="stylesheet" href="/assets/css/performance-optimizations.css" />
+    <script>
+      (function () {
+        if (localStorage.getItem("darkMode") === "true") document.documentElement.classList.add("dark");
+      })();
+    </script>
+    <link rel="stylesheet" href="/assets/css/skeleton.css" />
+    <link rel="icon" href="/assets/images/logo_header.webp" type="image/webp" />
+    <style>
+      @keyframes checkmark {
+        0% {
+          transform: scale(0);
+          opacity: 0;
+        }
+        50% {
+          transform: scale(1.2);
+        }
+        100% {
+          transform: scale(1);
+          opacity: 1;
+        }
+      }
+      @keyframes circle-draw {
+        0% {
+          stroke-dashoffset: 166;
+        }
+        100% {
+          stroke-dashoffset: 0;
+        }
+      }
+      .check-circle {
+        animation: circle-draw 0.6s ease-out forwards;
+        stroke-dasharray: 166;
+        stroke-dashoffset: 166;
+      }
+      .check-mark {
+        animation: checkmark 0.3s 0.5s ease-out both;
+      }
+    </style>
+  </head>
+  <body
+    class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 antialiased overflow-x-hidden"
+  >
+    <div class="relative flex min-h-screen flex-col">
+      <navigator
+        data-component="navigator"
+        data-variant="tablet"
+        data-active=""
+        data-cta-text-key="nav_get_quote"
+        data-cta-href="/quote"
+      ></navigator>
+      <main id="spa-content" class="flex-1 flex items-center justify-center py-16">
+        <div class="max-w-xl mx-auto px-6 text-center">
+          <div class="mb-6">
+            <svg class="w-20 h-20 mx-auto" viewBox="0 0 52 52">
+              <circle class="check-circle" cx="26" cy="26" r="25" fill="none" stroke="#10b981" stroke-width="2" />
+              <path
+                class="check-mark"
+                fill="none"
+                stroke="#10b981"
+                stroke-width="3"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M14.1 27.2l7.1 7.2 16.7-16.8"
+              />
+            </svg>
+          </div>
+          <h1 class="text-3xl font-black tracking-tight mb-3" data-i18n="thankyou_title">感谢您的询价！</h1>
+          <p class="text-lg text-slate-600 dark:text-slate-400 mb-10" data-i18n="thankyou_desc">
+            我们的销售团队将在 24 小时内与您联系。
+          </p>
+          <div class="flex items-center justify-center gap-3 mb-12">
+            <a
+              href="/"
+              class="bg-primary text-white px-6 py-3 rounded-xl font-bold flex items-center gap-2 hover:shadow-lg transition-all text-sm"
+            >
+              <span class="material-symbols-outlined text-base">home</span>
+              <span data-i18n="thankyou_btn_home">返回首页</span>
+            </a>
+            <a
+              href="/products/"
+              class="px-6 py-3 rounded-xl font-bold flex items-center gap-2 border-2 border-slate-300 dark:border-slate-600 hover:border-primary hover:text-primary transition-all text-sm"
+            >
+              <span class="material-symbols-outlined text-base">grid_view</span>
+              <span data-i18n="thankyou_btn_products">浏览更多产品</span>
+            </a>
+          </div>
+          <div class="grid grid-cols-3 gap-3">
+            <div
+              class="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg p-4 text-center"
+            >
+              <span class="material-symbols-outlined text-primary text-2xl mb-2 block">email</span>
+              <p class="text-xs font-bold mb-0.5" data-i18n="thankyou_contact_email">邮件联系</p>
+              <a href="mailto:info@yukoli.com" class="text-xs text-primary font-bold">info@yukoli.com</a>
+            </div>
+            <div
+              class="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg p-4 text-center"
+            >
+              <span class="material-symbols-outlined text-primary text-2xl mb-2 block">phone</span>
+              <p class="text-xs font-bold mb-0.5" data-i18n="thankyou_contact_phone">电话联系</p>
+              <a href="tel:+8675588888888" class="text-xs text-primary font-bold">+86 755 8888 8888</a>
+            </div>
+            <div
+              class="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg p-4 text-center"
+            >
+              <span class="material-symbols-outlined text-primary text-2xl mb-2 block">chat</span>
+              <p class="text-xs font-bold mb-0.5" data-i18n="thankyou_contact_whatsapp">WhatsApp</p>
+              <a href="https://wa.me/8613800138000" class="text-xs text-primary font-bold">+86 138 0013 8000</a>
+            </div>
+          </div>
+        </div>
+      </main>
+      <footer data-component="footer" data-variant="tablet" data-cta="true"></footer>
     </div>
-    <div class="grid grid-cols-3 gap-3">
-      <div class="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg p-4 text-center">
-        <span class="material-symbols-outlined text-primary text-2xl mb-2 block">email</span>
-        <p class="text-xs font-bold mb-0.5" data-i18n="thankyou_contact_email">邮件联系</p>
-        <a href="mailto:info@yukoli.com" class="text-xs text-primary font-bold">info@yukoli.com</a>
-      </div>
-      <div class="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg p-4 text-center">
-        <span class="material-symbols-outlined text-primary text-2xl mb-2 block">phone</span>
-        <p class="text-xs font-bold mb-0.5" data-i18n="thankyou_contact_phone">电话联系</p>
-        <a href="tel:+8675588888888" class="text-xs text-primary font-bold">+86 755 8888 8888</a>
-      </div>
-      <div class="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg p-4 text-center">
-        <span class="material-symbols-outlined text-primary text-2xl mb-2 block">chat</span>
-        <p class="text-xs font-bold mb-0.5" data-i18n="thankyou_contact_whatsapp">WhatsApp</p>
-        <a href="https://wa.me/8613800138000" class="text-xs text-primary font-bold">+86 138 0013 8000</a>
-      </div>
-    </div>
-  </div>
-</main>
-<footer data-component="footer" data-variant="tablet" data-cta="true"></footer>
-</div>
-<script defer src="/assets/js/router.js"></script>
-<script src="/assets/js/translations.js"></script>
-<script src="/assets/js/ui/language-dropdown.js"></script>
-<script src="/assets/js/ui/mobile-menu.js"></script>
-<script src="/assets/js/ui/products-dropdown.js"></script>
-<script src="/assets/js/ui/solutions-dropdown.js"></script>
-<script src="/assets/js/ui/support-dropdown.js"></script>
-<script src="/assets/js/ui/about-dropdown.js"></script>
-<script src="/assets/js/ui/contact-dropdown.js"></script>
-<script src="/assets/js/ui/navigator.js"></script>
-<script src="/assets/js/ui/footer.js"></script>
-<script defer src="/assets/js/ui/floating-actions.js"></script>
-</body></html>
+    <script defer src="/assets/js/router.js"></script>
+    <script src="/assets/js/translations.js"></script>
+    <script src="/assets/js/ui/language-dropdown.js"></script>
+    <script src="/assets/js/ui/mobile-menu.js"></script>
+    <script src="/assets/js/ui/products-dropdown.js"></script>
+    <script src="/assets/js/ui/solutions-dropdown.js"></script>
+    <script src="/assets/js/ui/support-dropdown.js"></script>
+    <script src="/assets/js/ui/about-dropdown.js"></script>
+    <script src="/assets/js/ui/contact-dropdown.js"></script>
+    <script src="/assets/js/ui/navigator.js"></script>
+    <script src="/assets/js/ui/footer.js"></script>
+    <script defer src="/assets/js/ui/floating-actions.js"></script>
+  </body>
+</html>

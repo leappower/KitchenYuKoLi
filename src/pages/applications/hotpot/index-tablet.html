@@ -1,324 +1,437 @@
-<!DOCTYPE html>
-<html class="light" lang="zh-CN"><head>
-<link rel="canonical" href="/applications/hotpot/"/>
-<link rel="alternate" media="only screen and (max-width: 767px)" href="/applications/hotpot/index-mobile.html"/>
-<link rel="alternate" media="only screen and (min-width: 768px) and (max-width: 1279px)" href="/applications/hotpot/index-tablet.html"/>
-<link rel="alternate" media="only screen and (min-width: 1280px)" href="/applications/hotpot/index-pc.html"/>
-<script>
-(function(){
-  if (window.__redirectChecked) return;
-  window.__redirectChecked = true;
-  var urlParams = new URLSearchParams(location.search);
-  var cleanUrl = urlParams.get('clean-url');
-  if (cleanUrl) { history.replaceState({}, '', cleanUrl); return; }
-  if (window.__spaNavigating) return;
-  var currentFile = location.pathname.split('/').pop();
-  if (window.DeviceUtils && window.DeviceUtils.isDirectoryURL()) return;
-  if (window.DeviceUtils && window.DeviceUtils.shouldRedirect(currentFile)) {
-    var deviceType = window.DeviceUtils.getDeviceType();
-    var targetFile = deviceType === window.DeviceUtils.DeviceType.MOBILE ? 'index-mobile.html' :
-                     deviceType === window.DeviceUtils.DeviceType.TABLET ? 'index-tablet.html' : 'index-pc.html';
-    location.href = targetFile;
-  }
-})();
-</script>
-<meta charset="utf-8"/>
-<meta name="description" content="火锅麻辣烫智能厨房解决方案 - 智能涮煮设备、自动出菜系统，实现快速出餐、降低人工成本、提升顾客体验。">
-<meta name="keywords" content="火锅,麻辣烫,智能涮煮,自动出菜,商用厨房设备">
-<meta property="og:type" content="website">
-<meta property="og:url" content="https://www.kitchen.yukoli.com/applications/hotpot/">
-<meta property="og:image" content="https://www.kitchen.yukoli.com/assets/images/logo_header.webp">
-<meta property="og:title" content="Yukoli | 火锅/麻辣烫智能厨房解决方案">
-<meta property="og:description" content="为火锅和麻辣烫连锁提供自动化底料调配、智能控温、标准化出品解决方案，降低人工依赖。">
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title data-i18n="hotpot_page_title">Yukoli | 火锅/麻辣烫智能厨房解决方案</title>
-<link rel="preload" href="/assets/fonts/local-fonts.css" as="style">
-<link rel="preload" href="/assets/css/styles.css" as="style">
-<link rel="preload" href="/assets/css/tailwind.css" as="style">
-<link href="/assets/fonts/local-fonts.css" rel="stylesheet"/>
-<link rel="stylesheet" href="/assets/css/styles.css">
-<link rel="stylesheet" href="/assets/css/tailwind.css">
-<link rel="stylesheet" href="/assets/css/z-index-system.css">
-<link rel="stylesheet" href="/assets/css/performance-optimizations.css"/>
-<script>(function(){if(localStorage.getItem('darkMode')==='true')document.documentElement.classList.add('dark')})()</script>
-<link rel="stylesheet" href="/assets/css/skeleton.css"/>
-<link rel="icon" href="/assets/images/logo_header.webp" type="image/webp">
-</head>
-<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 antialiased transition-colors duration-300 overflow-x-hidden">
-<navigator data-component="navigator" data-variant="tablet" data-active="solutions" data-cta-text-key="nav_get_quote" data-cta-href="/quote"></navigator>
-<main id="spa-content">
-<section class="relative py-12 overflow-hidden">
-  <div class="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-orange-100/30 dark:from-primary/10 dark:to-orange-900/20"></div>
-  <div class="relative max-w-4xl mx-auto px-6">
-    <div class="flex flex-col lg:flex-row items-center gap-12">
-      <div class="w-full lg:w-1/2 flex flex-col gap-6">
-        <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 text-primary text-sm font-bold uppercase tracking-wider w-fit">
-          <span class="material-symbols-outlined">local_fire_department</span>
-          火锅/麻辣烫解决方案
-        </div>
-        <h1 class="text-4xl font-black leading-tight tracking-tighter">
-          智能厨房<br/><span class="text-primary">赋能火锅/麻辣烫</span>
-        </h1>
-        <p class="text-xl text-slate-600 dark:text-slate-400 max-w-xl leading-relaxed">
-          智能涮煮设备、自动出菜系统，实现快速出餐、降低人工成本、提升顾客体验。
-        </p>
-        <div class="flex items-center gap-4 pt-4">
-          <a href="/quote/" class="bg-primary text-white px-8 py-4 rounded-xl font-bold flex items-center gap-2 hover:shadow-lg hover:shadow-primary/20 transition-all">
-            获取专属方案 <span class="material-symbols-outlined">arrow_forward</span>
-          </a>
-          <a href="/roi/" class="px-8 py-4 rounded-xl font-bold flex items-center gap-2 border-2 border-slate-300 dark:border-slate-600 hover:border-primary hover:text-primary transition-all">
-            <span class="material-symbols-outlined">calculate</span> ROI计算
-          </a>
-        </div>
-      </div>
-      <div class="w-full lg:w-1/2 relative">
-        <div class="absolute -inset-4 bg-primary/20 rounded-3xl blur-3xl"></div>
-        <div class="relative rounded-2xl overflow-hidden shadow-2xl">
-          <img loading="eager" alt="火锅/麻辣烫智能厨房" class="w-full h-[500px] object-cover" src="/assets/images/applications/hotpot-hero.webp" onerror="this.src='https://images.unsplash.com/photo-1556910103-1c02745aae4d?w=1200&h=800&fit=crop'">
-          <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
-          <div class="absolute bottom-0 left-0 right-0 p-8">
-            <div class="flex items-center gap-4 text-white">
-              <div class="flex -space-x-3">
-                <div class="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-xs font-bold">Y</div>
+<!doctype html>
+<html class="light" lang="zh-CN">
+  <head>
+    <link rel="canonical" href="/applications/hotpot/" />
+    <link rel="alternate" media="only screen and (max-width: 767px)" href="/applications/hotpot/index-mobile.html" />
+    <link
+      rel="alternate"
+      media="only screen and (min-width: 768px) and (max-width: 1279px)"
+      href="/applications/hotpot/index-tablet.html"
+    />
+    <link rel="alternate" media="only screen and (min-width: 1280px)" href="/applications/hotpot/index-pc.html" />
+    <script>
+      (function () {
+        if (window.__redirectChecked) return;
+        window.__redirectChecked = true;
+        var urlParams = new URLSearchParams(location.search);
+        var cleanUrl = urlParams.get("clean-url");
+        if (cleanUrl) {
+          history.replaceState({}, "", cleanUrl);
+          return;
+        }
+        if (window.__spaNavigating) return;
+        var currentFile = location.pathname.split("/").pop();
+        if (window.DeviceUtils && window.DeviceUtils.isDirectoryURL()) return;
+        if (window.DeviceUtils && window.DeviceUtils.shouldRedirect(currentFile)) {
+          var deviceType = window.DeviceUtils.getDeviceType();
+          var targetFile =
+            deviceType === window.DeviceUtils.DeviceType.MOBILE
+              ? "index-mobile.html"
+              : deviceType === window.DeviceUtils.DeviceType.TABLET
+                ? "index-tablet.html"
+                : "index-pc.html";
+          location.href = targetFile;
+        }
+      })();
+    </script>
+    <meta charset="utf-8" />
+    <meta
+      name="description"
+      content="火锅麻辣烫智能厨房解决方案 - 智能涮煮设备、自动出菜系统，实现快速出餐、降低人工成本、提升顾客体验。"
+    />
+    <meta name="keywords" content="火锅,麻辣烫,智能涮煮,自动出菜,商用厨房设备" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://www.kitchen.yukoli.com/applications/hotpot/" />
+    <meta property="og:image" content="https://www.kitchen.yukoli.com/assets/images/logo_header.webp" />
+    <meta property="og:title" content="Yukoli | 火锅/麻辣烫智能厨房解决方案" />
+    <meta
+      property="og:description"
+      content="为火锅和麻辣烫连锁提供自动化底料调配、智能控温、标准化出品解决方案，降低人工依赖。"
+    />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title data-i18n="hotpot_page_title">Yukoli | 火锅/麻辣烫智能厨房解决方案</title>
+    <link rel="preload" href="/assets/fonts/local-fonts.css" as="style" />
+    <link rel="preload" href="/assets/css/styles.css" as="style" />
+    <link rel="preload" href="/assets/css/tailwind.css" as="style" />
+    <link href="/assets/fonts/local-fonts.css" rel="stylesheet" />
+    <link rel="stylesheet" href="/assets/css/styles.css" />
+    <link rel="stylesheet" href="/assets/css/tailwind.css" />
+    <link rel="stylesheet" href="/assets/css/z-index-system.css" />
+    <link rel="stylesheet" href="/assets/css/performance-optimizations.css" />
+    <script>
+      (function () {
+        if (localStorage.getItem("darkMode") === "true") document.documentElement.classList.add("dark");
+      })();
+    </script>
+    <link rel="stylesheet" href="/assets/css/skeleton.css" />
+    <link rel="icon" href="/assets/images/logo_header.webp" type="image/webp" />
+  </head>
+  <body
+    class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 antialiased transition-colors duration-300 overflow-x-hidden"
+  >
+    <navigator
+      data-component="navigator"
+      data-variant="tablet"
+      data-active="solutions"
+      data-cta-text-key="nav_get_quote"
+      data-cta-href="/quote"
+    ></navigator>
+    <main id="spa-content">
+      <section class="relative py-12 overflow-hidden">
+        <div
+          class="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-orange-100/30 dark:from-primary/10 dark:to-orange-900/20"
+        ></div>
+        <div class="relative max-w-4xl mx-auto px-6">
+          <div class="flex flex-col lg:flex-row items-center gap-12">
+            <div class="w-full lg:w-1/2 flex flex-col gap-6">
+              <div
+                class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 text-primary text-sm font-bold uppercase tracking-wider w-fit"
+              >
+                <span class="material-symbols-outlined">local_fire_department</span>
+                火锅/麻辣烫解决方案
               </div>
-              <div>
-                <p class="text-sm font-semibold">Yukoli智能厨房</p>
-                <p class="text-xs opacity-80">专业火锅/麻辣烫解决方案</p>
+              <h1 class="text-4xl font-black leading-tight tracking-tighter">
+                智能厨房
+                <br />
+                <span class="text-primary">赋能火锅/麻辣烫</span>
+              </h1>
+              <p class="text-xl text-slate-600 dark:text-slate-400 max-w-xl leading-relaxed">
+                智能涮煮设备、自动出菜系统，实现快速出餐、降低人工成本、提升顾客体验。
+              </p>
+              <div class="flex items-center gap-4 pt-4">
+                <a
+                  href="/quote/"
+                  class="bg-primary text-white px-8 py-4 rounded-xl font-bold flex items-center gap-2 hover:shadow-lg hover:shadow-primary/20 transition-all"
+                >
+                  获取专属方案
+                  <span class="material-symbols-outlined">arrow_forward</span>
+                </a>
+                <a
+                  href="/roi/"
+                  class="px-8 py-4 rounded-xl font-bold flex items-center gap-2 border-2 border-slate-300 dark:border-slate-600 hover:border-primary hover:text-primary transition-all"
+                >
+                  <span class="material-symbols-outlined">calculate</span>
+                  ROI计算
+                </a>
+              </div>
+            </div>
+            <div class="w-full lg:w-1/2 relative">
+              <div class="absolute -inset-4 bg-primary/20 rounded-3xl blur-3xl"></div>
+              <div class="relative rounded-2xl overflow-hidden shadow-2xl">
+                <img
+                  loading="eager"
+                  alt="火锅/麻辣烫智能厨房"
+                  class="w-full h-[500px] object-cover"
+                  src="/assets/images/applications/hotpot-hero.webp"
+                  onerror="this.src = 'https://images.unsplash.com/photo-1556910103-1c02745aae4d?w=1200&h=800&fit=crop'"
+                />
+                <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+                <div class="absolute bottom-0 left-0 right-0 p-8">
+                  <div class="flex items-center gap-4 text-white">
+                    <div class="flex -space-x-3">
+                      <div class="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-xs font-bold">
+                        Y
+                      </div>
+                    </div>
+                    <div>
+                      <p class="text-sm font-semibold">Yukoli智能厨房</p>
+                      <p class="text-xs opacity-80">专业火锅/麻辣烫解决方案</p>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
-    </div>
-  </div>
-</section>
-<section class="py-12 bg-slate-50 dark:bg-slate-900/50">
-  <div class="max-w-7xl mx-auto px-6">
-    <div class="text-center mb-16">
-      <h2 class="text-2xl font-black tracking-tight mb-4" data-i18n="hotpot_pain_title">行业痛点，我们深知</h2>
-      <p class="text-lg text-slate-600 dark:text-slate-400">火锅/麻辣烫面临的核心挑战</p>
-    </div>
-    <div class="grid md:grid-cols-3 gap-8">
-      <div class="bg-white dark:bg-slate-800 rounded-2xl p-8 shadow-lg hover:shadow-xl transition-shadow">
-        <div class="w-14 h-14 rounded-xl bg-red-100 dark:bg-red-900/30 flex items-center justify-center mb-6">
-          <span class="material-symbols-outlined text-3xl text-red-600">timer</span>
-        </div>
-        <h3 class="text-xl font-bold mb-3">出菜速度慢</h3>
-        <p class="text-slate-600 dark:text-slate-400">高峰期出菜慢，顾客等待时间长，影响翻台率</p>
-      </div>
-      <div class="bg-white dark:bg-slate-800 rounded-2xl p-8 shadow-lg hover:shadow-xl transition-shadow">
-        <div class="w-14 h-14 rounded-xl bg-orange-100 dark:bg-orange-900/30 flex items-center justify-center mb-6">
-          <span class="material-symbols-outlined text-3xl text-orange-600">group</span>
-        </div>
-        <h3 class="text-xl font-bold mb-3">人工成本高</h3>
-        <p class="text-slate-600 dark:text-slate-400">后厨人员配置多，人工成本高企</p>
-      </div>
-      <div class="bg-white dark:bg-slate-800 rounded-2xl p-8 shadow-lg hover:shadow-xl transition-shadow">
-        <div class="w-14 h-14 rounded-xl bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center mb-6">
-          <span class="material-symbols-outlined text-3xl text-blue-600">thermostat</span>
-        </div>
-        <h3 class="text-xl font-bold mb-3">火候难控制</h3>
-        <p class="text-slate-600 dark:text-slate-400">不同食材涮煮时间不同，火候难以精准控制</p>
-      </div></div>
-  </div>
-</section>
-<section class="py-12">
-  <div class="max-w-7xl mx-auto px-6">
-    <div class="flex flex-col lg:flex-row gap-16 items-center">
-      <div class="w-full lg:w-1/2">
-        <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 text-primary text-sm font-bold uppercase tracking-wider mb-6">
-          <span class="material-symbols-outlined">lightbulb</span> 解决方案
-        </div>
-        <h2 class="text-2xl font-black tracking-tight mb-6" data-i18n="hotpot_solution_title">智能厨房全流程自动化</h2>
-        <p class="text-lg text-slate-600 dark:text-slate-400 mb-8">专为火锅/麻辣烫场景优化的智能厨房解决方案。</p>
-        <div class="space-y-6">
-          <div class="flex gap-4">
-            <div class="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0">
-              <span class="material-symbols-outlined text-primary">soup_kitchen</span>
+      </section>
+      <section class="py-12 bg-slate-50 dark:bg-slate-900/50">
+        <div class="max-w-7xl mx-auto px-6">
+          <div class="text-center mb-16">
+            <h2 class="text-2xl font-black tracking-tight mb-4" data-i18n="hotpot_pain_title">行业痛点，我们深知</h2>
+            <p class="text-lg text-slate-600 dark:text-slate-400">火锅/麻辣烫面临的核心挑战</p>
+          </div>
+          <div class="grid md:grid-cols-3 gap-8">
+            <div class="bg-white dark:bg-slate-800 rounded-2xl p-8 shadow-lg hover:shadow-xl transition-shadow">
+              <div class="w-14 h-14 rounded-xl bg-red-100 dark:bg-red-900/30 flex items-center justify-center mb-6">
+                <span class="material-symbols-outlined text-3xl text-red-600">timer</span>
+              </div>
+              <h3 class="text-xl font-bold mb-3">出菜速度慢</h3>
+              <p class="text-slate-600 dark:text-slate-400">高峰期出菜慢，顾客等待时间长，影响翻台率</p>
             </div>
-            <div>
-              <h4 class="font-bold text-lg">智能涮煮</h4>
-              <p class="text-slate-600 dark:text-slate-400">自动升降涮煮设备，精准控制时间和温度</p>
+            <div class="bg-white dark:bg-slate-800 rounded-2xl p-8 shadow-lg hover:shadow-xl transition-shadow">
+              <div
+                class="w-14 h-14 rounded-xl bg-orange-100 dark:bg-orange-900/30 flex items-center justify-center mb-6"
+              >
+                <span class="material-symbols-outlined text-3xl text-orange-600">group</span>
+              </div>
+              <h3 class="text-xl font-bold mb-3">人工成本高</h3>
+              <p class="text-slate-600 dark:text-slate-400">后厨人员配置多，人工成本高企</p>
+            </div>
+            <div class="bg-white dark:bg-slate-800 rounded-2xl p-8 shadow-lg hover:shadow-xl transition-shadow">
+              <div class="w-14 h-14 rounded-xl bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center mb-6">
+                <span class="material-symbols-outlined text-3xl text-blue-600">thermostat</span>
+              </div>
+              <h3 class="text-xl font-bold mb-3">火候难控制</h3>
+              <p class="text-slate-600 dark:text-slate-400">不同食材涮煮时间不同，火候难以精准控制</p>
             </div>
           </div>
-          <div class="flex gap-4">
-            <div class="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0">
-              <span class="material-symbols-outlined text-primary">automation</span>
+        </div>
+      </section>
+      <section class="py-12">
+        <div class="max-w-7xl mx-auto px-6">
+          <div class="flex flex-col lg:flex-row gap-16 items-center">
+            <div class="w-full lg:w-1/2">
+              <div
+                class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 text-primary text-sm font-bold uppercase tracking-wider mb-6"
+              >
+                <span class="material-symbols-outlined">lightbulb</span>
+                解决方案
+              </div>
+              <h2 class="text-2xl font-black tracking-tight mb-6" data-i18n="hotpot_solution_title">
+                智能厨房全流程自动化
+              </h2>
+              <p class="text-lg text-slate-600 dark:text-slate-400 mb-8">专为火锅/麻辣烫场景优化的智能厨房解决方案。</p>
+              <div class="space-y-6">
+                <div class="flex gap-4">
+                  <div class="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0">
+                    <span class="material-symbols-outlined text-primary">soup_kitchen</span>
+                  </div>
+                  <div>
+                    <h4 class="font-bold text-lg">智能涮煮</h4>
+                    <p class="text-slate-600 dark:text-slate-400">自动升降涮煮设备，精准控制时间和温度</p>
+                  </div>
+                </div>
+                <div class="flex gap-4">
+                  <div class="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0">
+                    <span class="material-symbols-outlined text-primary">automation</span>
+                  </div>
+                  <div>
+                    <h4 class="font-bold text-lg">自动出菜</h4>
+                    <p class="text-slate-600 dark:text-slate-400">智能传送系统，自动将菜品送至取餐区</p>
+                  </div>
+                </div>
+                <div class="flex gap-4">
+                  <div class="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0">
+                    <span class="material-symbols-outlined text-primary">inventory</span>
+                  </div>
+                  <div>
+                    <h4 class="font-bold text-lg">库存管理</h4>
+                    <p class="text-slate-600 dark:text-slate-400">智能库存监控，自动预警补货</p>
+                  </div>
+                </div>
+              </div>
             </div>
-            <div>
-              <h4 class="font-bold text-lg">自动出菜</h4>
-              <p class="text-slate-600 dark:text-slate-400">智能传送系统，自动将菜品送至取餐区</p>
+            <div class="w-full lg:w-1/2">
+              <div class="grid grid-cols-2 gap-4">
+                <div class="bg-white dark:bg-slate-800 rounded-2xl p-6 shadow-lg">
+                  <div class="text-4xl font-black text-primary mb-2">50%</div>
+                  <p class="text-slate-600 dark:text-slate-400">人工成本降低</p>
+                </div>
+                <div class="bg-white dark:bg-slate-800 rounded-2xl p-6 shadow-lg">
+                  <div class="text-4xl font-black text-primary mb-2">3x</div>
+                  <p class="text-slate-600 dark:text-slate-400">出菜速度提升</p>
+                </div>
+                <div class="bg-white dark:bg-slate-800 rounded-2xl p-6 shadow-lg">
+                  <div class="text-4xl font-black text-primary mb-2">30%</div>
+                  <p class="text-slate-600 dark:text-slate-400">翻台率提升</p>
+                </div>
+                <div class="bg-white dark:bg-slate-800 rounded-2xl p-6 shadow-lg">
+                  <div class="text-4xl font-black text-primary mb-2">0</div>
+                  <p class="text-slate-600 dark:text-slate-400">火候失误</p>
+                </div>
+              </div>
             </div>
           </div>
-          <div class="flex gap-4">
-            <div class="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0">
-              <span class="material-symbols-outlined text-primary">inventory</span>
-            </div>
-            <div>
-              <h4 class="font-bold text-lg">库存管理</h4>
-              <p class="text-slate-600 dark:text-slate-400">智能库存监控，自动预警补货</p>
-            </div>
-          </div></div>
-      </div>
-      <div class="w-full lg:w-1/2">
-        <div class="grid grid-cols-2 gap-4">
-            <div class="bg-white dark:bg-slate-800 rounded-2xl p-6 shadow-lg">
-              <div class="text-4xl font-black text-primary mb-2">50%</div>
-              <p class="text-slate-600 dark:text-slate-400">人工成本降低</p>
-            </div>
-            <div class="bg-white dark:bg-slate-800 rounded-2xl p-6 shadow-lg">
-              <div class="text-4xl font-black text-primary mb-2">3x</div>
-              <p class="text-slate-600 dark:text-slate-400">出菜速度提升</p>
-            </div>
-            <div class="bg-white dark:bg-slate-800 rounded-2xl p-6 shadow-lg">
-              <div class="text-4xl font-black text-primary mb-2">30%</div>
-              <p class="text-slate-600 dark:text-slate-400">翻台率提升</p>
-            </div>
-            <div class="bg-white dark:bg-slate-800 rounded-2xl p-6 shadow-lg">
-              <div class="text-4xl font-black text-primary mb-2">0</div>
-              <p class="text-slate-600 dark:text-slate-400">火候失误</p>
-            </div></div>
-      </div>
-    </div>
-  </div>
-</section>
-<section class="py-12 bg-slate-50 dark:bg-slate-900/50">
-  <div class="max-w-7xl mx-auto px-6">
-    <div class="text-center mb-16">
-      <h2 class="text-2xl font-black tracking-tight mb-4" data-i18n="hotpot_equipment_title">推荐设备组合</h2>
-      <p class="text-lg text-slate-600 dark:text-slate-400">为火锅/麻辣烫量身定制的智能设备方案</p>
-    </div>
-    <div class="grid md:grid-cols-3 gap-8">
-      <div class="bg-white dark:bg-slate-800 rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all group">
-        <div class="h-48 bg-slate-200 dark:bg-slate-700 overflow-hidden">
-          <img loading="lazy" alt="智能涮煮机 YK-SZ600" class="w-full h-full object-cover group-hover:scale-105 transition-transform" src="/assets/images/products/hotpot-热销.webp" onerror="this.style.display='none'">
         </div>
-        <div class="p-6">
-          <h3 class="text-xl font-bold mb-2">智能涮煮机 YK-SZ600</h3>
-          <p class="text-slate-600 dark:text-slate-400 text-sm mb-4">6工位自动升降，精准控温控时</p>
-          <div class="flex items-center justify-between">
-            <span class="text-primary font-bold" data-i18n="hotpot_equipment_badge_hot">热销</span>
-            <a href="/products/" class="text-sm font-semibold flex items-center gap-1 hover:text-primary transition-colors">
-              了解详情 <span class="material-symbols-outlined text-sm">arrow_forward</span>
+      </section>
+      <section class="py-12 bg-slate-50 dark:bg-slate-900/50">
+        <div class="max-w-7xl mx-auto px-6">
+          <div class="text-center mb-16">
+            <h2 class="text-2xl font-black tracking-tight mb-4" data-i18n="hotpot_equipment_title">推荐设备组合</h2>
+            <p class="text-lg text-slate-600 dark:text-slate-400">为火锅/麻辣烫量身定制的智能设备方案</p>
+          </div>
+          <div class="grid md:grid-cols-3 gap-8">
+            <div
+              class="bg-white dark:bg-slate-800 rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all group"
+            >
+              <div class="h-48 bg-slate-200 dark:bg-slate-700 overflow-hidden">
+                <img
+                  loading="lazy"
+                  alt="智能涮煮机 YK-SZ600"
+                  class="w-full h-full object-cover group-hover:scale-105 transition-transform"
+                  src="/assets/images/products/hotpot-热销.webp"
+                  onerror="this.style.display = 'none'"
+                />
+              </div>
+              <div class="p-6">
+                <h3 class="text-xl font-bold mb-2">智能涮煮机 YK-SZ600</h3>
+                <p class="text-slate-600 dark:text-slate-400 text-sm mb-4">6工位自动升降，精准控温控时</p>
+                <div class="flex items-center justify-between">
+                  <span class="text-primary font-bold" data-i18n="hotpot_equipment_badge_hot">热销</span>
+                  <a
+                    href="/products/"
+                    class="text-sm font-semibold flex items-center gap-1 hover:text-primary transition-colors"
+                  >
+                    了解详情
+                    <span class="material-symbols-outlined text-sm">arrow_forward</span>
+                  </a>
+                </div>
+              </div>
+            </div>
+            <div
+              class="bg-white dark:bg-slate-800 rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all group"
+            >
+              <div class="h-48 bg-slate-200 dark:bg-slate-700 overflow-hidden">
+                <img
+                  loading="lazy"
+                  alt="自动出菜系统 YK-AC200"
+                  class="w-full h-full object-cover group-hover:scale-105 transition-transform"
+                  src="/assets/images/products/hotpot-标配.webp"
+                  onerror="this.style.display = 'none'"
+                />
+              </div>
+              <div class="p-6">
+                <h3 class="text-xl font-bold mb-2">自动出菜系统 YK-AC200</h3>
+                <p class="text-slate-600 dark:text-slate-400 text-sm mb-4">智能传送，自动分拣</p>
+                <div class="flex items-center justify-between">
+                  <span class="text-primary font-bold" data-i18n="hotpot_equipment_badge_standard">标配</span>
+                  <a
+                    href="/products/"
+                    class="text-sm font-semibold flex items-center gap-1 hover:text-primary transition-colors"
+                  >
+                    了解详情
+                    <span class="material-symbols-outlined text-sm">arrow_forward</span>
+                  </a>
+                </div>
+              </div>
+            </div>
+            <div
+              class="bg-white dark:bg-slate-800 rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all group"
+            >
+              <div class="h-48 bg-slate-200 dark:bg-slate-700 overflow-hidden">
+                <img
+                  loading="lazy"
+                  alt="智能汤锅 YK-TK400"
+                  class="w-full h-full object-cover group-hover:scale-105 transition-transform"
+                  src="/assets/images/products/hotpot-推荐.webp"
+                  onerror="this.style.display = 'none'"
+                />
+              </div>
+              <div class="p-6">
+                <h3 class="text-xl font-bold mb-2">智能汤锅 YK-TK400</h3>
+                <p class="text-slate-600 dark:text-slate-400 text-sm mb-4">4口味同时出餐，自动补汤</p>
+                <div class="flex items-center justify-between">
+                  <span class="text-primary font-bold" data-i18n="hotpot_equipment_badge_recommended">推荐</span>
+                  <a
+                    href="/products/"
+                    class="text-sm font-semibold flex items-center gap-1 hover:text-primary transition-colors"
+                  >
+                    了解详情
+                    <span class="material-symbols-outlined text-sm">arrow_forward</span>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="py-12">
+        <div class="max-w-7xl mx-auto px-6">
+          <div class="flex flex-col lg:flex-row gap-12 items-center">
+            <div class="w-full lg:w-1/2">
+              <div
+                class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400 text-sm font-bold uppercase tracking-wider mb-6"
+              >
+                <span class="material-symbols-outlined">check_circle</span>
+                成功案例
+              </div>
+              <h2 class="text-2xl font-black tracking-tight mb-6">某知名火锅连锁品牌</h2>
+              <div class="space-y-4 mb-8">
+                <div class="flex items-center gap-3">
+                  <span class="material-symbols-outlined text-primary">location_on</span>
+                  <span>全国300+门店</span>
+                </div>
+              </div>
+              <blockquote class="text-lg italic text-slate-600 dark:text-slate-400 border-l-4 border-primary pl-6 mb-8">
+                "引入智能涮煮系统后，单店后厨人员从8人减少到4人，出菜速度提升3倍，顾客满意度大幅提升。"
+              </blockquote>
+              <a href="/cases/" class="inline-flex items-center gap-2 text-primary font-bold hover:underline">
+                查看更多案例
+                <span class="material-symbols-outlined">arrow_forward</span>
+              </a>
+            </div>
+            <div class="w-full lg:w-1/2">
+              <div class="bg-white dark:bg-slate-800 rounded-2xl p-8 shadow-xl">
+                <h3 class="text-xl font-bold mb-6" data-i18n="hotpot_compare_title">实施效果对比</h3>
+                <div class="space-y-6">
+                  <div>
+                    <div class="flex justify-between mb-2">
+                      <span class="text-sm font-medium">人工成本</span>
+                      <span class="text-sm text-green-600 font-bold">↓ 50%</span>
+                    </div>
+                    <div class="h-2 bg-slate-200 dark:bg-slate-700 rounded-full overflow-hidden">
+                      <div class="h-full bg-green-500 rounded-full" style="width: 76.98019315162146%"></div>
+                    </div>
+                  </div>
+                  <div>
+                    <div class="flex justify-between mb-2">
+                      <span class="text-sm font-medium">出菜速度</span>
+                      <span class="text-sm text-green-600 font-bold">↑ 3x</span>
+                    </div>
+                    <div class="h-2 bg-slate-200 dark:bg-slate-700 rounded-full overflow-hidden">
+                      <div class="h-full bg-green-500 rounded-full" style="width: 95.17176960258445%"></div>
+                    </div>
+                  </div>
+                  <div>
+                    <div class="flex justify-between mb-2">
+                      <span class="text-sm font-medium">顾客满意度</span>
+                      <span class="text-sm text-green-600 font-bold">↑ 35%</span>
+                    </div>
+                    <div class="h-2 bg-slate-200 dark:bg-slate-700 rounded-full overflow-hidden">
+                      <div class="h-full bg-green-500 rounded-full" style="width: 97.67200710479251%"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="py-12 bg-primary">
+        <div class="max-w-4xl mx-auto px-6 text-center">
+          <h2 class="text-2xl font-black text-white mb-6" data-i18n="hotpot_cta_title">开启您的智能厨房之旅</h2>
+          <p class="text-xl text-white/80 mb-8" data-i18n="hotpot_cta_desc">获取专属解决方案，让科技赋能您的餐饮事业</p>
+          <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+            <a
+              href="/quote/"
+              class="bg-white text-primary px-8 py-4 rounded-xl font-bold flex items-center gap-2 hover:shadow-lg transition-all"
+            >
+              免费咨询
+              <span class="material-symbols-outlined">arrow_forward</span>
+            </a>
+            <a
+              href="/contact/"
+              class="px-8 py-4 rounded-xl font-bold flex items-center gap-2 border-2 border-white text-white hover:bg-white/10 transition-all"
+            >
+              <span class="material-symbols-outlined">phone</span>
+              联系销售
             </a>
           </div>
         </div>
-      </div>
-      <div class="bg-white dark:bg-slate-800 rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all group">
-        <div class="h-48 bg-slate-200 dark:bg-slate-700 overflow-hidden">
-          <img loading="lazy" alt="自动出菜系统 YK-AC200" class="w-full h-full object-cover group-hover:scale-105 transition-transform" src="/assets/images/products/hotpot-标配.webp" onerror="this.style.display='none'">
-        </div>
-        <div class="p-6">
-          <h3 class="text-xl font-bold mb-2">自动出菜系统 YK-AC200</h3>
-          <p class="text-slate-600 dark:text-slate-400 text-sm mb-4">智能传送，自动分拣</p>
-          <div class="flex items-center justify-between">
-            <span class="text-primary font-bold" data-i18n="hotpot_equipment_badge_standard">标配</span>
-            <a href="/products/" class="text-sm font-semibold flex items-center gap-1 hover:text-primary transition-colors">
-              了解详情 <span class="material-symbols-outlined text-sm">arrow_forward</span>
-            </a>
-          </div>
-        </div>
-      </div>
-      <div class="bg-white dark:bg-slate-800 rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all group">
-        <div class="h-48 bg-slate-200 dark:bg-slate-700 overflow-hidden">
-          <img loading="lazy" alt="智能汤锅 YK-TK400" class="w-full h-full object-cover group-hover:scale-105 transition-transform" src="/assets/images/products/hotpot-推荐.webp" onerror="this.style.display='none'">
-        </div>
-        <div class="p-6">
-          <h3 class="text-xl font-bold mb-2">智能汤锅 YK-TK400</h3>
-          <p class="text-slate-600 dark:text-slate-400 text-sm mb-4">4口味同时出餐，自动补汤</p>
-          <div class="flex items-center justify-between">
-            <span class="text-primary font-bold" data-i18n="hotpot_equipment_badge_recommended">推荐</span>
-            <a href="/products/" class="text-sm font-semibold flex items-center gap-1 hover:text-primary transition-colors">
-              了解详情 <span class="material-symbols-outlined text-sm">arrow_forward</span>
-            </a>
-          </div>
-        </div>
-      </div></div>
-  </div>
-</section>
-<section class="py-12">
-  <div class="max-w-7xl mx-auto px-6">
-    <div class="flex flex-col lg:flex-row gap-12 items-center">
-      <div class="w-full lg:w-1/2">
-        <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400 text-sm font-bold uppercase tracking-wider mb-6">
-          <span class="material-symbols-outlined">check_circle</span> 成功案例
-        </div>
-        <h2 class="text-2xl font-black tracking-tight mb-6">某知名火锅连锁品牌</h2>
-        <div class="space-y-4 mb-8">
-          <div class="flex items-center gap-3">
-            <span class="material-symbols-outlined text-primary">location_on</span>
-            <span>全国300+门店</span>
-          </div>
-        </div>
-        <blockquote class="text-lg italic text-slate-600 dark:text-slate-400 border-l-4 border-primary pl-6 mb-8">
-          "引入智能涮煮系统后，单店后厨人员从8人减少到4人，出菜速度提升3倍，顾客满意度大幅提升。"
-        </blockquote>
-        <a href="/cases/" class="inline-flex items-center gap-2 text-primary font-bold hover:underline">
-          查看更多案例 <span class="material-symbols-outlined">arrow_forward</span>
-        </a>
-      </div>
-      <div class="w-full lg:w-1/2">
-        <div class="bg-white dark:bg-slate-800 rounded-2xl p-8 shadow-xl">
-          <h3 class="text-xl font-bold mb-6" data-i18n="hotpot_compare_title">实施效果对比</h3>
-          <div class="space-y-6">
-            <div>
-              <div class="flex justify-between mb-2">
-                <span class="text-sm font-medium">人工成本</span>
-                <span class="text-sm text-green-600 font-bold">↓ 50%</span>
-              </div>
-              <div class="h-2 bg-slate-200 dark:bg-slate-700 rounded-full overflow-hidden">
-                <div class="h-full bg-green-500 rounded-full" style="width: 76.98019315162146%" ></div>
-              </div>
-            </div>
-            <div>
-              <div class="flex justify-between mb-2">
-                <span class="text-sm font-medium">出菜速度</span>
-                <span class="text-sm text-green-600 font-bold">↑ 3x</span>
-              </div>
-              <div class="h-2 bg-slate-200 dark:bg-slate-700 rounded-full overflow-hidden">
-                <div class="h-full bg-green-500 rounded-full" style="width: 95.17176960258445%" ></div>
-              </div>
-            </div>
-            <div>
-              <div class="flex justify-between mb-2">
-                <span class="text-sm font-medium">顾客满意度</span>
-                <span class="text-sm text-green-600 font-bold">↑ 35%</span>
-              </div>
-              <div class="h-2 bg-slate-200 dark:bg-slate-700 rounded-full overflow-hidden">
-                <div class="h-full bg-green-500 rounded-full" style="width: 97.67200710479251%" ></div>
-              </div>
-            </div></div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-<section class="py-12 bg-primary">
-  <div class="max-w-4xl mx-auto px-6 text-center">
-    <h2 class="text-2xl font-black text-white mb-6" data-i18n="hotpot_cta_title">开启您的智能厨房之旅</h2>
-    <p class="text-xl text-white/80 mb-8" data-i18n="hotpot_cta_desc">获取专属解决方案，让科技赋能您的餐饮事业</p>
-    <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
-      <a href="/quote/" class="bg-white text-primary px-8 py-4 rounded-xl font-bold flex items-center gap-2 hover:shadow-lg transition-all">
-        免费咨询 <span class="material-symbols-outlined">arrow_forward</span>
-      </a>
-      <a href="/contact/" class="px-8 py-4 rounded-xl font-bold flex items-center gap-2 border-2 border-white text-white hover:bg-white/10 transition-all">
-        <span class="material-symbols-outlined">phone</span> 联系销售
-      </a>
-    </div>
-  </div>
-</section>
-</main>
-<footer data-component="footer" data-variant="pc" data-cta="true"></footer>
-<script defer src="/assets/js/router.js"></script>
-<script src="/assets/js/translations.js"></script>
-<script src="/assets/js/ui/language-dropdown.js"></script>
-<script src="/assets/js/ui/mobile-menu.js"></script>
-<script src="/assets/js/ui/products-dropdown.js"></script>
-<script src="/assets/js/ui/solutions-dropdown.js"></script>
-<script src="/assets/js/ui/support-dropdown.js"></script>
-<script src="/assets/js/ui/about-dropdown.js"></script>
-<script src="/assets/js/ui/contact-dropdown.js"></script>
-<script src="/assets/js/ui/navigator.js"></script>
-<script src="/assets/js/ui/footer.js"></script>
-<script defer src="/assets/js/ui/floating-actions.js"></script>
-</body></html>
+      </section>
+    </main>
+    <footer data-component="footer" data-variant="pc" data-cta="true"></footer>
+    <script defer src="/assets/js/router.js"></script>
+    <script src="/assets/js/translations.js"></script>
+    <script src="/assets/js/ui/language-dropdown.js"></script>
+    <script src="/assets/js/ui/mobile-menu.js"></script>
+    <script src="/assets/js/ui/products-dropdown.js"></script>
+    <script src="/assets/js/ui/solutions-dropdown.js"></script>
+    <script src="/assets/js/ui/support-dropdown.js"></script>
+    <script src="/assets/js/ui/about-dropdown.js"></script>
+    <script src="/assets/js/ui/contact-dropdown.js"></script>
+    <script src="/assets/js/ui/navigator.js"></script>
+    <script src="/assets/js/ui/footer.js"></script>
+    <script defer src="/assets/js/ui/floating-actions.js"></script>
+  </body>
+</html>

@@ -21,34 +21,34 @@
  *   sortOrder      合并/排序时的顺序（数字越小越靠前）
  */
 
-'use strict';
+"use strict";
 
 // ─────────────────────────────────────────────────────────────────────────────
 // 主注册表（2 种语言：zh-CN + en）
 // ─────────────────────────────────────────────────────────────────────────────
 // 使用 var 防止重复加载时报错，并用 window 检查避免重复定义
-if (typeof window !== 'undefined' && window.LANG_REGISTRY && window.LANG_REGISTRY.LANGUAGES) {
+if (typeof window !== "undefined" && window.LANG_REGISTRY && window.LANG_REGISTRY.LANGUAGES) {
   // 已存在，直接复用
 } else {
-// 语言注册表定义
-var LANGUAGES = [
-  {
-    code: 'zh-CN',
-    nativeName: '中文（简体）',
-    englishName: 'Chinese (Simplified)',
-    hasTranslation: true,
-    uiGroup: 'common',
-    sortOrder: 1,
-  },
-  {
-    code: 'en',
-    nativeName: 'English',
-    englishName: 'English',
-    hasTranslation: true,
-    uiGroup: 'common',
-    sortOrder: 2,
-  },
-];
+  // 语言注册表定义
+  var LANGUAGES = [
+    {
+      code: "zh-CN",
+      nativeName: "中文（简体）",
+      englishName: "Chinese (Simplified)",
+      hasTranslation: true,
+      uiGroup: "common",
+      sortOrder: 1,
+    },
+    {
+      code: "en",
+      nativeName: "English",
+      englishName: "English",
+      hasTranslation: true,
+      uiGroup: "common",
+      sortOrder: 2,
+    },
+  ];
 } // 结束重复加载保护
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -61,13 +61,19 @@ var LANGUAGES = [
  * @returns {Array} 符合条件的语言记录，按 sortOrder 升序
  */
 function getLangs(filter) {
-  var result = LANGUAGES.slice().sort(function(a, b) { return a.sortOrder - b.sortOrder; });
+  var result = LANGUAGES.slice().sort(function (a, b) {
+    return a.sortOrder - b.sortOrder;
+  });
   if (!filter) return result;
   if (filter.group !== undefined) {
-    result = result.filter(function(l) { return l.uiGroup === filter.group; });
+    result = result.filter(function (l) {
+      return l.uiGroup === filter.group;
+    });
   }
   if (filter.hasTranslation !== undefined) {
-    result = result.filter(function(l) { return l.hasTranslation === filter.hasTranslation; });
+    result = result.filter(function (l) {
+      return l.hasTranslation === filter.hasTranslation;
+    });
   }
   return result;
 }
@@ -77,7 +83,9 @@ function getLangs(filter) {
  * @returns {string[]}
  */
 function getSupportedCodes() {
-  return getLangs({ hasTranslation: true }).map(function(l) { return l.code; });
+  return getLangs({ hasTranslation: true }).map(function (l) {
+    return l.code;
+  });
 }
 
 /**
@@ -85,7 +93,9 @@ function getSupportedCodes() {
  * @returns {string[]}
  */
 function getAllCodes() {
-  return getLangs().map(function(l) { return l.code; });
+  return getLangs().map(function (l) {
+    return l.code;
+  });
 }
 
 /**
@@ -94,7 +104,7 @@ function getAllCodes() {
  * @returns {Object}
  */
 function getNativeNames(filter) {
-  return getLangs(filter).reduce(function(acc, l) {
+  return getLangs(filter).reduce(function (acc, l) {
     acc[l.code] = l.nativeName;
     return acc;
   }, {});
@@ -106,7 +116,7 @@ function getNativeNames(filter) {
  * @returns {Object}
  */
 function getEnglishNames() {
-  return getLangs({ hasTranslation: true }).reduce(function(acc, l) {
+  return getLangs({ hasTranslation: true }).reduce(function (acc, l) {
     acc[l.code] = l.englishName;
     return acc;
   }, {});
@@ -118,7 +128,7 @@ function getEnglishNames() {
  */
 function getLangsByGroup() {
   var result = { common: [], rtl: [], european: [], asian: [] };
-  getLangs().forEach(function(l) {
+  getLangs().forEach(function (l) {
     if (result[l.uiGroup]) result[l.uiGroup].push(l);
   });
   return result;
@@ -129,7 +139,9 @@ function getLangsByGroup() {
  * @returns {string[]}
  */
 function getSortedCodes() {
-  return getLangs().map(function(l) { return l.code; });
+  return getLangs().map(function (l) {
+    return l.code;
+  });
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -137,7 +149,7 @@ function getSortedCodes() {
 // ─────────────────────────────────────────────────────────────────────────────
 
 // Node.js 环境
-if (typeof module !== 'undefined' && module.exports) {
+if (typeof module !== "undefined" && module.exports) {
   module.exports = {
     LANGUAGES,
     getLangs,
@@ -151,7 +163,7 @@ if (typeof module !== 'undefined' && module.exports) {
 }
 
 // 浏览器环境（通过 <script> 直接引入时）
-if (typeof window !== 'undefined') {
+if (typeof window !== "undefined") {
   window.LANG_REGISTRY = {
     LANGUAGES: LANGUAGES,
     getLangs: getLangs,

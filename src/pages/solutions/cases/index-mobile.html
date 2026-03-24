@@ -1,459 +1,710 @@
-<!DOCTYPE html>
+<!doctype html>
 
-<html class="light" lang="zh-CN"><head>
-<!-- ═══ Responsive Redirect (injected by patch-responsive-redirect.py) ═══ -->
-<link rel="canonical" href="/solutions/cases/"/>
-<link rel="alternate" media="only screen and (max-width: 767px)"
-      href="/solutions/cases/index-mobile.html"/>
-<link rel="alternate" media="only screen and (min-width: 768px) and (max-width: 1279px)"
-      href="/solutions/cases/index-tablet.html"/>
-<link rel="alternate" media="only screen and (min-width: 1280px)"
-      href="/solutions/cases/index-mobile.html"/>
-<script>
-/* Responsive redirect — runs before render, no flash */
-(function(){
-  if (window.__redirectChecked) return;
-  window.__redirectChecked = true;
-  var urlParams = new URLSearchParams(location.search);
-  var cleanUrl = urlParams.get('clean-url');
-  if (cleanUrl) {
-    console.log('[Responsive Redirect] Cleaning URL to:', cleanUrl);
-    history.replaceState({}, '', cleanUrl);
-    return;
-  }
-  console.log('[Responsive Redirect] Checking SPA flag: window.__spaNavigating =', window.__spaNavigating);
-  if (window.__spaNavigating) {
-    console.log('[Responsive Redirect] SPA navigation detected, skipping redirect');
-    return;
-  }
-  var currentFile = location.pathname.split('/').pop();
-  console.log('[Responsive Redirect] Current file:', currentFile, 'Pathname:', location.pathname);
-  if (window.DeviceUtils && window.DeviceUtils.isDirectoryURL()) {
-    console.log('[Responsive Redirect] Directory URL detected, skipping redirect');
-    return;
-  }
-  if (window.DeviceUtils && window.DeviceUtils.shouldRedirect(currentFile)) {
-    var deviceType = window.DeviceUtils.getDeviceType();
-    var targetFile;
-    if (deviceType === window.DeviceUtils.DeviceType.MOBILE) {
-      targetFile = 'index-mobile.html';
-    } else if (deviceType === window.DeviceUtils.DeviceType.TABLET) {
-      targetFile = 'index-tablet.html';
-    } else {
-      targetFile = 'index-mobile.html';
-    }
-    console.log('[Responsive Redirect] Redirecting to:', targetFile);
-    location.href = targetFile;
-    return;
-  }
-  console.log('[Responsive Redirect] No redirect needed');
-})();
-</script>
-<!-- ═══ End Responsive Redirect ═══ -->
+<html class="light" lang="zh-CN">
+  <head>
+    <!-- ═══ Responsive Redirect (injected by patch-responsive-redirect.py) ═══ -->
+    <link rel="canonical" href="/solutions/cases/" />
+    <link rel="alternate" media="only screen and (max-width: 767px)" href="/solutions/cases/index-mobile.html" />
+    <link
+      rel="alternate"
+      media="only screen and (min-width: 768px) and (max-width: 1279px)"
+      href="/solutions/cases/index-tablet.html"
+    />
+    <link rel="alternate" media="only screen and (min-width: 1280px)" href="/solutions/cases/index-mobile.html" />
+    <script>
+      /* Responsive redirect — runs before render, no flash */
+      (function () {
+        if (window.__redirectChecked) return;
+        window.__redirectChecked = true;
+        var urlParams = new URLSearchParams(location.search);
+        var cleanUrl = urlParams.get("clean-url");
+        if (cleanUrl) {
+          console.log("[Responsive Redirect] Cleaning URL to:", cleanUrl);
+          history.replaceState({}, "", cleanUrl);
+          return;
+        }
+        console.log("[Responsive Redirect] Checking SPA flag: window.__spaNavigating =", window.__spaNavigating);
+        if (window.__spaNavigating) {
+          console.log("[Responsive Redirect] SPA navigation detected, skipping redirect");
+          return;
+        }
+        var currentFile = location.pathname.split("/").pop();
+        console.log("[Responsive Redirect] Current file:", currentFile, "Pathname:", location.pathname);
+        if (window.DeviceUtils && window.DeviceUtils.isDirectoryURL()) {
+          console.log("[Responsive Redirect] Directory URL detected, skipping redirect");
+          return;
+        }
+        if (window.DeviceUtils && window.DeviceUtils.shouldRedirect(currentFile)) {
+          var deviceType = window.DeviceUtils.getDeviceType();
+          var targetFile;
+          if (deviceType === window.DeviceUtils.DeviceType.MOBILE) {
+            targetFile = "index-mobile.html";
+          } else if (deviceType === window.DeviceUtils.DeviceType.TABLET) {
+            targetFile = "index-tablet.html";
+          } else {
+            targetFile = "index-mobile.html";
+          }
+          console.log("[Responsive Redirect] Redirecting to:", targetFile);
+          location.href = targetFile;
+          return;
+        }
+        console.log("[Responsive Redirect] No redirect needed");
+      })();
+    </script>
+    <!-- ═══ End Responsive Redirect ═══ -->
 
-
-<meta charset="utf-8"/>
-<meta name="description" content="YuKoLi case studies: real-world smart kitchen deployments across Southeast Asia. See how restaurants reduced labor costs by 70% with automated commercial kitchen equipment.">
-<meta property="og:type" content="website">
-<meta property="og:title" content="YuKoLi | Case Studies - Smart Commercial Kitchen Equipment">
-<meta property="og:description" content="YuKoLi case studies: real-world smart kitchen deployments across Southeast Asia. See how restaurants reduced labor costs by 70% with automated commercial kitchen equipment.">
-<meta property="og:url" content="https://www.kitchen.yukoli.com/cases/index-mobile.html">
-<meta property="og:image" content="https://www.kitchen.yukoli.com/assets/images/logo_header.webp">
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>YuKoLi | Case Studies - Smart Commercial Kitchen Equipment</title>
-<link rel="preload" href="/assets/fonts/local-fonts.css" as="style">
-<link rel="preload" href="/assets/css/styles.css" as="style">
-  <link rel="preload" href="/assets/css/tailwind.css" as="style">
-<link rel="preload" href="/assets/fonts/public-sans-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" href="/assets/fonts/public-sans-latin-700-normal.woff2" as="font" type="font/woff2" crossorigin>
-<link href="/assets/fonts/local-fonts.css" rel="stylesheet"/>
-<link rel="stylesheet" href="/assets/css/styles.css">
-  <link rel="stylesheet" href="/assets/css/tailwind.css">
-<link rel="stylesheet" href="/assets/css/z-index-system.css">
-<link rel="stylesheet" href="/assets/css/performance-optimizations.css"/>
-  <script>(function(){
-if(localStorage.getItem('darkMode')==='true')document.documentElement.classList.add('dark')})()</script>
-<link rel="stylesheet" href="/assets/css/skeleton.css"/>
-<link rel="icon" href="/assets/images/logo_header.webp" type="image/webp">
-
-</head>
-<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 antialiased transition-colors duration-300 overflow-x-hidden">
-<!-- Top Navigation Bar -->
-<!-- ═══ Navigator Component ═══ -->
-<navigator data-component="navigator"
-  data-variant="pc"
-  data-active="case-studies"
-  data-cta-text-key="nav_get_quote"
-  data-cta-href="/quote"></navigator>
-<main id="spa-content">
-<!-- Hero Section -->
-<section class="flex flex-col lg:flex-row items-center py-12 gap-12 mb-24">
-<div class="w-full lg:w-1/2 flex flex-col gap-6">
-<div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-bold uppercase tracking-wider w-fit">
-<span class="material-symbols-outlined text-sm">restaurant</span>
-                    <span data-i18n="case_studies_se_asia_kitchen">Southeast Asia Kitchen Automation</span>
+    <meta charset="utf-8" />
+    <meta
+      name="description"
+      content="YuKoLi case studies: real-world smart kitchen deployments across Southeast Asia. See how restaurants reduced labor costs by 70% with automated commercial kitchen equipment."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="YuKoLi | Case Studies - Smart Commercial Kitchen Equipment" />
+    <meta
+      property="og:description"
+      content="YuKoLi case studies: real-world smart kitchen deployments across Southeast Asia. See how restaurants reduced labor costs by 70% with automated commercial kitchen equipment."
+    />
+    <meta property="og:url" content="https://www.kitchen.yukoli.com/cases/index-mobile.html" />
+    <meta property="og:image" content="https://www.kitchen.yukoli.com/assets/images/logo_header.webp" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>YuKoLi | Case Studies - Smart Commercial Kitchen Equipment</title>
+    <link rel="preload" href="/assets/fonts/local-fonts.css" as="style" />
+    <link rel="preload" href="/assets/css/styles.css" as="style" />
+    <link rel="preload" href="/assets/css/tailwind.css" as="style" />
+    <link
+      rel="preload"
+      href="/assets/fonts/public-sans-latin-400-normal.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href="/assets/fonts/public-sans-latin-700-normal.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link href="/assets/fonts/local-fonts.css" rel="stylesheet" />
+    <link rel="stylesheet" href="/assets/css/styles.css" />
+    <link rel="stylesheet" href="/assets/css/tailwind.css" />
+    <link rel="stylesheet" href="/assets/css/z-index-system.css" />
+    <link rel="stylesheet" href="/assets/css/performance-optimizations.css" />
+    <script>
+      (function () {
+        if (localStorage.getItem("darkMode") === "true") document.documentElement.classList.add("dark");
+      })();
+    </script>
+    <link rel="stylesheet" href="/assets/css/skeleton.css" />
+    <link rel="icon" href="/assets/images/logo_header.webp" type="image/webp" />
+  </head>
+  <body
+    class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 antialiased transition-colors duration-300 overflow-x-hidden"
+  >
+    <!-- Top Navigation Bar -->
+    <!-- ═══ Navigator Component ═══ -->
+    <navigator
+      data-component="navigator"
+      data-variant="pc"
+      data-active="case-studies"
+      data-cta-text-key="nav_get_quote"
+      data-cta-href="/quote"
+    ></navigator>
+    <main id="spa-content">
+      <!-- Hero Section -->
+      <section class="flex flex-col lg:flex-row items-center py-12 gap-12 mb-24">
+        <div class="w-full lg:w-1/2 flex flex-col gap-6">
+          <div
+            class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-bold uppercase tracking-wider w-fit"
+          >
+            <span class="material-symbols-outlined text-sm">restaurant</span>
+            <span data-i18n="case_studies_se_asia_kitchen">Southeast Asia Kitchen Automation</span>
+          </div>
+          <h1 class="text-5xl lg:text-7xl font-black leading-tight tracking-tighter">
+            <span data-i18n="case_studies_hero_title_1">Real Kitchens.</span>
+            <br />
+            <span class="text-primary" data-i18n="case_studies_hero_title_2">Real Results.</span>
+          </h1>
+          <p class="text-lg text-slate-600 dark:text-slate-400 max-w-xl" data-i18n="case_studies_hero_desc">
+            From Bangkok street-food chains to Jakarta catering halls — see how YuKoLi smart kitchen equipment cuts
+            labor costs by 70%, saves 30%+ energy, and delivers consistent quality across every outlet.
+          </p>
+          <div class="flex items-center gap-4">
+            <button
+              class="bg-primary text-white px-8 py-4 rounded-xl font-bold flex items-center gap-2 hover:shadow-lg hover:shadow-primary/20 transition-all"
+            >
+              <span data-i18n="case_studies_explore_cases">Explore Cases</span>
+              <span class="material-symbols-outlined">arrow_downward</span>
+            </button>
+          </div>
+        </div>
+        <div class="w-full lg:w-1/2 relative">
+          <div
+            class="absolute -inset-4 bg-primary/20 rounded-2xl blur-2xl group-hover:bg-primary/30 transition-all"
+          ></div>
+          <div
+            class="relative w-full h-[400px] bg-slate-200 dark:bg-slate-800 rounded-2xl overflow-hidden border border-slate-300 dark:border-slate-700"
+          >
+            <img
+              loading="lazy"
+              alt="YuKoLi Smart Kitchen Equipment in Action"
+              class="w-full h-full object-cover"
+              data-alt="YuKoLi smart cooking machines in a commercial kitchen"
+              width="800"
+              height="600"
+            />
+            <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end p-8">
+              <div class="flex items-center gap-4 text-white">
+                <div
+                  class="size-12 rounded-full border-2 border-white/50 bg-white/20 backdrop-blur flex items-center justify-center"
+                >
+                  <span class="material-symbols-outlined">play_circle</span>
                 </div>
-<h1 class="text-5xl lg:text-7xl font-black leading-tight tracking-tighter">
-                    <span data-i18n="case_studies_hero_title_1">Real Kitchens.</span> <br/><span class="text-primary" data-i18n="case_studies_hero_title_2">Real Results.</span>
-</h1>
-<p class="text-lg text-slate-600 dark:text-slate-400 max-w-xl" data-i18n="case_studies_hero_desc">
-                    From Bangkok street-food chains to Jakarta catering halls — see how YuKoLi smart kitchen equipment cuts labor costs by 70%, saves 30%+ energy, and delivers consistent quality across every outlet.
+                <div>
+                  <p class="text-sm font-bold" data-i18n="case_studies_watch_video">Watch Video</p>
+                  <p class="text-xs opacity-80" data-i18n="case_studies_auto_stir_fry_demo">Automated Stir-Fry Demo</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Industry Filter -->
+      <section class="mb-16">
+        <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-8">
+          <div>
+            <h2 class="text-2xl font-bold mb-2" data-i18n="case_studies_industry_filter_title">By Industry</h2>
+            <p class="text-slate-500" data-i18n="case_studies_industry_filter_desc">
+              Filter by business type to find the case most relevant to you
+            </p>
+          </div>
+          <div class="flex flex-wrap gap-3">
+            <button
+              class="px-6 py-2.5 rounded-xl bg-primary text-white font-bold text-sm"
+              data-i18n="case_studies_all_cases"
+            >
+              All Cases
+            </button>
+            <button
+              class="px-6 py-2.5 rounded-xl bg-slate-200 dark:bg-slate-800 hover:bg-primary/10 transition-colors font-bold text-sm"
+              data-i18n="case_studies_chain_restaurants"
+            >
+              Chain Restaurants
+            </button>
+            <button
+              class="px-6 py-2.5 rounded-xl bg-slate-200 dark:bg-slate-800 hover:bg-primary/10 transition-colors font-bold text-sm"
+              data-i18n="case_studies_catering"
+            >
+              Catering &amp; Canteens
+            </button>
+            <button
+              class="px-6 py-2.5 rounded-xl bg-slate-200 dark:bg-slate-800 hover:bg-primary/10 transition-colors font-bold text-sm"
+              data-i18n="case_studies_ghost_kitchens"
+            >
+              Ghost Kitchens
+            </button>
+          </div>
+        </div>
+        <!-- Ratio Visualization -->
+        <div class="w-full h-3 rounded-full overflow-hidden flex mb-4">
+          <div class="h-full bg-primary w-1/2" title="Chain Restaurants (50%)"></div>
+          <div class="h-full bg-slate-400 dark:bg-slate-600 w-3/10" style="width: 30%" title="Catering (30%)"></div>
+          <div
+            class="h-full bg-slate-900 dark:bg-slate-100 w-1/5"
+            style="width: 20%"
+            title="Ghost Kitchens (20%)"
+          ></div>
+        </div>
+        <div class="flex justify-between text-[10px] font-bold uppercase tracking-widest text-slate-400">
+          <span data-i18n="case_studies_50_chain">50% Chain Restaurants</span>
+          <span data-i18n="case_studies_30_catering">30% Catering &amp; Canteens</span>
+          <span data-i18n="case_studies_20_ghost">20% Ghost Kitchens</span>
+        </div>
+      </section>
+
+      <!-- Case Study Grid -->
+      <section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-24">
+        <!-- Case 1: Thailand Chain Restaurant -->
+        <div
+          class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl overflow-hidden group hover:border-primary/50 transition-all"
+        >
+          <div class="h-48 relative">
+            <img
+              loading="lazy"
+              alt="Thai Restaurant Kitchen"
+              class="w-full h-full object-cover"
+              data-alt="YuKoLi smart wok in a Thai restaurant kitchen"
+              width="800"
+              height="600"
+            />
+            <div class="absolute top-4 left-4 bg-white/90 dark:bg-slate-900/90 p-2 rounded-lg backdrop-blur">
+              <span class="material-symbols-outlined text-primary">restaurant</span>
+            </div>
+            <div class="absolute top-4 right-4 bg-primary text-white px-2 py-1 rounded-lg text-xs font-bold">
+              🇹🇭 Thailand
+            </div>
+          </div>
+          <div class="p-6">
+            <h3 class="text-xl font-bold mb-2" data-i18n="case1_title">Siam Wok Express — 86 Outlets</h3>
+            <p class="text-sm text-slate-500 mb-6" data-i18n="case1_desc">
+              Bangkok-based Thai stir-fry chain deployed YuKoLi auto-woks across all outlets, standardizing pad thai and
+              basil chicken recipes nationwide.
+            </p>
+            <div class="grid grid-cols-3 gap-2 py-4 border-y border-slate-100 dark:border-slate-800 mb-6">
+              <div class="text-center">
+                <p class="text-lg font-black text-primary">70%</p>
+                <p class="text-[10px] font-bold text-slate-400 uppercase" data-i18n="case_studies_labor">Labor ↓</p>
+              </div>
+              <div class="text-center border-x border-slate-100 dark:border-slate-800 px-2">
+                <p class="text-lg font-black text-primary">32%</p>
+                <p class="text-[10px] font-bold text-slate-400 uppercase" data-i18n="case_studies_energy">Energy ↓</p>
+              </div>
+              <div class="text-center">
+                <p class="text-lg font-black text-primary">¥18万</p>
+                <p class="text-[10px] font-bold text-slate-400 uppercase" data-i18n="case_studies_annual_saving">
+                  Annual Saving
                 </p>
-<div class="flex items-center gap-4">
-<button class="bg-primary text-white px-8 py-4 rounded-xl font-bold flex items-center gap-2 hover:shadow-lg hover:shadow-primary/20 transition-all">
-                        <span data-i18n="case_studies_explore_cases">Explore Cases</span> <span class="material-symbols-outlined">arrow_downward</span>
-</button>
-</div>
-</div>
-<div class="w-full lg:w-1/2 relative">
-<div class="absolute -inset-4 bg-primary/20 rounded-2xl blur-2xl group-hover:bg-primary/30 transition-all"></div>
-<div class="relative w-full h-[400px] bg-slate-200 dark:bg-slate-800 rounded-2xl overflow-hidden border border-slate-300 dark:border-slate-700">
-<img loading="lazy" alt="YuKoLi Smart Kitchen Equipment in Action" class="w-full h-full object-cover" data-alt="YuKoLi smart cooking machines in a commercial kitchen" width="800" height="600">
-<div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end p-8">
-<div class="flex items-center gap-4 text-white">
-<div class="size-12 rounded-full border-2 border-white/50 bg-white/20 backdrop-blur flex items-center justify-center">
-<span class="material-symbols-outlined">play_circle</span>
-</div>
-<div>
-<p class="text-sm font-bold" data-i18n="case_studies_watch_video">Watch Video</p>
-<p class="text-xs opacity-80" data-i18n="case_studies_auto_stir_fry_demo">Automated Stir-Fry Demo</p>
-</div>
-</div>
-</div>
-</div>
-</div>
-</section>
+              </div>
+            </div>
+            <button
+              class="w-full py-3 rounded-xl border-2 border-primary text-primary font-bold text-sm hover:bg-primary hover:text-white transition-all"
+              data-i18n="case_read_more"
+            >
+              Read Case Study
+            </button>
+          </div>
+        </div>
 
-<!-- Industry Filter -->
-<section class="mb-16">
-<div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-8">
-<div>
-<h2 class="text-2xl font-bold mb-2" data-i18n="case_studies_industry_filter_title">By Industry</h2>
-<p class="text-slate-500" data-i18n="case_studies_industry_filter_desc">Filter by business type to find the case most relevant to you</p>
-</div>
-<div class="flex flex-wrap gap-3">
-<button class="px-6 py-2.5 rounded-xl bg-primary text-white font-bold text-sm" data-i18n="case_studies_all_cases">All Cases</button>
-<button class="px-6 py-2.5 rounded-xl bg-slate-200 dark:bg-slate-800 hover:bg-primary/10 transition-colors font-bold text-sm" data-i18n="case_studies_chain_restaurants">Chain Restaurants</button>
-<button class="px-6 py-2.5 rounded-xl bg-slate-200 dark:bg-slate-800 hover:bg-primary/10 transition-colors font-bold text-sm" data-i18n="case_studies_catering">Catering &amp; Canteens</button>
-<button class="px-6 py-2.5 rounded-xl bg-slate-200 dark:bg-slate-800 hover:bg-primary/10 transition-colors font-bold text-sm" data-i18n="case_studies_ghost_kitchens">Ghost Kitchens</button>
-</div>
-</div>
-<!-- Ratio Visualization -->
-<div class="w-full h-3 rounded-full overflow-hidden flex mb-4">
-<div class="h-full bg-primary w-1/2" title="Chain Restaurants (50%)"></div>
-<div class="h-full bg-slate-400 dark:bg-slate-600 w-3/10" style="width: 30%" title="Catering (30%)"></div>
-<div class="h-full bg-slate-900 dark:bg-slate-100 w-1/5" style="width: 20%" title="Ghost Kitchens (20%)"></div>
-</div>
-<div class="flex justify-between text-[10px] font-bold uppercase tracking-widest text-slate-400">
-<span data-i18n="case_studies_50_chain">50% Chain Restaurants</span>
-<span data-i18n="case_studies_30_catering">30% Catering &amp; Canteens</span>
-<span data-i18n="case_studies_20_ghost">20% Ghost Kitchens</span>
-</div>
-</section>
-
-<!-- Case Study Grid -->
-<section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-24">
-
-<!-- Case 1: Thailand Chain Restaurant -->
-<div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl overflow-hidden group hover:border-primary/50 transition-all">
-<div class="h-48 relative">
-<img loading="lazy" alt="Thai Restaurant Kitchen" class="w-full h-full object-cover" data-alt="YuKoLi smart wok in a Thai restaurant kitchen" width="800" height="600">
-<div class="absolute top-4 left-4 bg-white/90 dark:bg-slate-900/90 p-2 rounded-lg backdrop-blur">
-<span class="material-symbols-outlined text-primary">restaurant</span>
-</div>
-<div class="absolute top-4 right-4 bg-primary text-white px-2 py-1 rounded-lg text-xs font-bold">🇹🇭 Thailand</div>
-</div>
-<div class="p-6">
-<h3 class="text-xl font-bold mb-2" data-i18n="case1_title">Siam Wok Express — 86 Outlets</h3>
-<p class="text-sm text-slate-500 mb-6" data-i18n="case1_desc">Bangkok-based Thai stir-fry chain deployed YuKoLi auto-woks across all outlets, standardizing pad thai and basil chicken recipes nationwide.</p>
-<div class="grid grid-cols-3 gap-2 py-4 border-y border-slate-100 dark:border-slate-800 mb-6">
-<div class="text-center">
-<p class="text-lg font-black text-primary">70%</p>
-<p class="text-[10px] font-bold text-slate-400 uppercase" data-i18n="case_studies_labor">Labor ↓</p>
-</div>
-<div class="text-center border-x border-slate-100 dark:border-slate-800 px-2">
-<p class="text-lg font-black text-primary">32%</p>
-<p class="text-[10px] font-bold text-slate-400 uppercase" data-i18n="case_studies_energy">Energy ↓</p>
-</div>
-<div class="text-center">
-<p class="text-lg font-black text-primary">¥18万</p>
-<p class="text-[10px] font-bold text-slate-400 uppercase" data-i18n="case_studies_annual_saving">Annual Saving</p>
-</div>
-</div>
-<button class="w-full py-3 rounded-xl border-2 border-primary text-primary font-bold text-sm hover:bg-primary hover:text-white transition-all" data-i18n="case_read_more">Read Case Study</button>
-</div>
-</div>
-
-<!-- Case 2: Vietnam Fast Food -->
-<div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl overflow-hidden group hover:border-primary/50 transition-all">
-<div class="h-48 relative">
-<img loading="lazy" alt="Vietnamese Fast Food Kitchen" class="w-full h-full object-cover" data-alt="YuKoLi steamer and fryer in a Vietnamese kitchen" width="800" height="600">
-<div class="absolute top-4 left-4 bg-white/90 dark:bg-slate-900/90 p-2 rounded-lg backdrop-blur">
-<span class="material-symbols-outlined text-primary">lunch_dining</span>
-</div>
-<div class="absolute top-4 right-4 bg-primary text-white px-2 py-1 rounded-lg text-xs font-bold">🇻🇳 Vietnam</div>
-</div>
-<div class="p-6">
-<h3 class="text-xl font-bold mb-2" data-i18n="case2_title">Phở Việt Quick — 45 Stores</h3>
-<p class="text-sm text-slate-500 mb-6" data-i18n="case2_desc">Ho Chi Minh City phở chain replaced 3-5 cooks per store with YuKoLi smart stockpot boilers and auto-stir-fry machines, serving 500+ bowls daily.</p>
-<div class="grid grid-cols-3 gap-2 py-4 border-y border-slate-100 dark:border-slate-800 mb-6">
-<div class="text-center">
-<p class="text-lg font-black text-primary">3→1</p>
-<p class="text-[10px] font-bold text-slate-400 uppercase" data-i18n="case_studies_cooks_reduced">Cooks</p>
-</div>
-<div class="text-center border-x border-slate-100 dark:border-slate-800 px-2">
-<p class="text-lg font-black text-primary">500+</p>
-<p class="text-[10px] font-bold text-slate-400 uppercase" data-i18n="case_studies_bowls_day">Bowls/Day</p>
-</div>
-<div class="text-center">
-<p class="text-lg font-black text-primary">¥12万</p>
-<p class="text-[10px] font-bold text-slate-400 uppercase" data-i18n="case_studies_annual_saving">Annual Saving</p>
-</div>
-</div>
-<button class="w-full py-3 rounded-xl border-2 border-primary text-primary font-bold text-sm hover:bg-primary hover:text-white transition-all" data-i18n="case_read_more">Read Case Study</button>
-</div>
-</div>
-
-<!-- Case 3: Malaysia Factory Canteen -->
-<div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl overflow-hidden group hover:border-primary/50 transition-all">
-<div class="h-48 relative">
-<img loading="lazy" alt="Malaysia Factory Canteen" class="w-full h-full object-cover" data-alt="YuKoLi steamers and rice cookers in a Malaysian canteen" width="800" height="600">
-<div class="absolute top-4 left-4 bg-white/90 dark:bg-slate-900/90 p-2 rounded-lg backdrop-blur">
-<span class="material-symbols-outlined text-primary">factory</span>
-</div>
-<div class="absolute top-4 right-4 bg-primary text-white px-2 py-1 rounded-lg text-xs font-bold">🇲🇾 Malaysia</div>
-</div>
-<div class="p-6">
-<h3 class="text-xl font-bold mb-2" data-i18n="case3_title">KL Industrial Canteen — 3,000 Meals/Day</h3>
-<p class="text-sm text-slate-500 mb-6" data-i18n="case3_desc">Kuala Lumpur electronics factory canteen installed YuKoLi steamers and rice cookers, feeding 3,000 workers daily with only 4 staff.</p>
-<div class="grid grid-cols-3 gap-2 py-4 border-y border-slate-100 dark:border-slate-800 mb-6">
-<div class="text-center">
-<p class="text-lg font-black text-primary">75%</p>
-<p class="text-[10px] font-bold text-slate-400 uppercase" data-i18n="case_studies_labor">Labor ↓</p>
-</div>
-<div class="text-center border-x border-slate-100 dark:border-slate-800 px-2">
-<p class="text-lg font-black text-primary">3,000</p>
-<p class="text-[10px] font-bold text-slate-400 uppercase" data-i18n="case_studies_meals_day">Meals/Day</p>
-</div>
-<div class="text-center">
-<p class="text-lg font-black text-primary">¥25万</p>
-<p class="text-[10px] font-bold text-slate-400 uppercase" data-i18n="case_studies_annual_saving">Annual Saving</p>
-</div>
-</div>
-<button class="w-full py-3 rounded-xl border-2 border-primary text-primary font-bold text-sm hover:bg-primary hover:text-white transition-all" data-i18n="case_read_more">Read Case Study</button>
-</div>
-</div>
-
-<!-- Case 4: Indonesia Ghost Kitchen -->
-<div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl overflow-hidden group hover:border-primary/50 transition-all">
-<div class="h-48 relative">
-<img loading="lazy" alt="Indonesia Ghost Kitchen" class="w-full h-full object-cover" data-alt="YuKoLi multi-station cooking line in Jakarta ghost kitchen" width="800" height="600">
-<div class="absolute top-4 left-4 bg-white/90 dark:bg-slate-900/90 p-2 rounded-lg backdrop-blur">
-<span class="material-symbols-outlined text-primary">delivery_dining</span>
-</div>
-<div class="absolute top-4 right-4 bg-primary text-white px-2 py-1 rounded-lg text-xs font-bold">🇮🇩 Indonesia</div>
-</div>
-<div class="p-6">
-<h3 class="text-xl font-bold mb-2" data-i18n="case4_title">Jakarta Cloud Kitchen Hub</h3>
-<p class="text-sm text-slate-500 mb-6" data-i18n="case4_desc">GoFood partner in Jakarta runs 8 delivery-only stations with YuKoLi auto-fryers and steamers, handling 800+ orders per day with minimal staff.</p>
-<div class="grid grid-cols-3 gap-2 py-4 border-y border-slate-100 dark:border-slate-800 mb-6">
-<div class="text-center">
-<p class="text-lg font-black text-primary">800+</p>
-<p class="text-[10px] font-bold text-slate-400 uppercase" data-i18n="case_studies_orders_day">Orders/Day</p>
-</div>
-<div class="text-center border-x border-slate-100 dark:border-slate-800 px-2">
-<p class="text-lg font-black text-primary">28%</p>
-<p class="text-[10px] font-bold text-slate-400 uppercase" data-i18n="case_studies_speed">Speed ↑</p>
-</div>
-<div class="text-center">
-<p class="text-lg font-black text-primary">¥15万</p>
-<p class="text-[10px] font-bold text-slate-400 uppercase" data-i18n="case_studies_annual_saving">Annual Saving</p>
-</div>
-</div>
-<button class="w-full py-3 rounded-xl border-2 border-primary text-primary font-bold text-sm hover:bg-primary hover:text-white transition-all" data-i18n="case_read_more">Read Case Study</button>
-</div>
-</div>
-
-<!-- Case 5: Philippines School Cafeteria -->
-<div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl overflow-hidden group hover:border-primary/50 transition-all">
-<div class="h-48 relative">
-<img loading="lazy" alt="Philippines School Cafeteria" class="w-full h-full object-cover" data-alt="YuKoLi equipment in a Philippine school kitchen" width="800" height="600">
-<div class="absolute top-4 left-4 bg-white/90 dark:bg-slate-900/90 p-2 rounded-lg backdrop-blur">
-<span class="material-symbols-outlined text-primary">school</span>
-</div>
-<div class="absolute top-4 right-4 bg-primary text-white px-2 py-1 rounded-lg text-xs font-bold">🇵🇭 Philippines</div>
-</div>
-<div class="p-6">
-<h3 class="text-xl font-bold mb-2" data-i18n="case5_title">Manila University Cafeteria</h3>
-<p class="text-sm text-slate-500 mb-6" data-i18n="case5_desc">Metro Manila university deployed YuKoLi steamers and auto-stir-fry machines to serve 2,000+ students daily while cutting kitchen staff from 12 to 4.</p>
-<div class="grid grid-cols-3 gap-2 py-4 border-y border-slate-100 dark:border-slate-800 mb-6">
-<div class="text-center">
-<p class="text-lg font-black text-primary">67%</p>
-<p class="text-[10px] font-bold text-slate-400 uppercase" data-i18n="case_studies_labor">Labor ↓</p>
-</div>
-<div class="text-center border-x border-slate-100 dark:border-slate-800 px-2">
-<p class="text-lg font-black text-primary">99.5%</p>
-<p class="text-[10px] font-bold text-slate-400 uppercase" data-i18n="pdp_consistency">Consistency</p>
-</div>
-<div class="text-center">
-<p class="text-lg font-black text-primary">¥20万</p>
-<p class="text-[10px] font-bold text-slate-400 uppercase" data-i18n="case_studies_annual_saving">Annual Saving</p>
-</div>
-</div>
-<button class="w-full py-3 rounded-xl border-2 border-primary text-primary font-bold text-sm hover:bg-primary hover:text-white transition-all" data-i18n="case_read_more">Read Case Study</button>
-</div>
-</div>
-
-</section>
-
-<!-- Featured Client Section -->
-<div class="mb-24">
-<section class="bg-slate-900 text-white rounded-3xl overflow-hidden relative">
-<div class="absolute inset-0 opacity-20 pointer-events-none">
-<img loading="lazy" alt="Restaurant Interior" class="w-full h-full object-cover" data-alt="Modern commercial kitchen with YuKoLi equipment" width="800" height="600">
-</div>
-<div class="relative grid grid-cols-1 lg:grid-cols-2">
-<div class="p-12 lg:p-20 flex flex-col gap-8">
-<div class="flex items-center gap-4">
-<div class="size-16 bg-white rounded-xl flex items-center justify-center p-2">
-<span class="material-symbols-outlined text-slate-900 text-4xl">restaurant</span>
-</div>
-<div>
-<h4 class="text-2xl font-bold" data-i18n="featured_client_name">Siam Wok Express</h4>
-<p class="text-slate-400" data-i18n="featured_client_tagline">Thailand's Fastest-Growing Stir-Fry Chain</p>
-</div>
-</div>
-<h3 class="text-4xl font-black" data-i18n="featured_client_heading">From 12 Stores to 86 Outlets in 18 Months — Zero Recipe Drift.</h3>
-<p class="text-slate-300 leading-relaxed" data-i18n="featured_client_desc">
-                        Siam Wok Express chose YuKoLi smart woks to solve their biggest expansion bottleneck: training cooks. Each auto-wok stores 200+ recipes and reproduces them identically at every outlet, cutting new-store launch time from 6 weeks to 10 days.
-                    </p>
-<div class="flex gap-10">
-<div>
-<p class="text-primary text-3xl font-black">86</p>
-<p class="text-xs uppercase font-bold text-slate-400 tracking-tighter" data-i18n="featured_stat_outlets">Outlets</p>
-</div>
-<div class="border-l border-slate-700 pl-10">
-<p class="text-primary text-3xl font-black">70%</p>
-<p class="text-xs uppercase font-bold text-slate-400 tracking-tighter" data-i18n="featured_stat_labor_cut">Labor Cost Cut</p>
-</div>
-<div class="border-l border-slate-700 pl-10">
-<p class="text-primary text-3xl font-black">10天</p>
-<p class="text-xs uppercase font-bold text-slate-400 tracking-tighter" data-i18n="featured_stat_launch_time">New Store Launch</p>
-</div>
-</div>
-<button class="bg-primary text-white w-fit px-8 py-4 rounded-xl font-bold mt-4 hover:scale-105 transition-transform" data-i18n="featured_cta">Read Full Story</button>
-</div>
-<div class="hidden lg:block relative h-full min-h-[500px]">
-<img loading="lazy" alt="YuKoLi Smart Wok Closeup" class="w-full h-full object-cover" data-alt="Close up of YuKoLi smart wok cooking stir-fry" width="800" height="600">
-</div>
-</div>
-</section>
-</div>
-
-<!-- Southeast Asia Deployment Map -->
-<section class="mb-24 text-center">
-<h2 class="text-3xl font-bold mb-4" data-i18n="map_title">Southeast Asia Deployment</h2>
-<p class="text-slate-500 mb-12" data-i18n="map_desc">YuKoLi smart kitchen equipment is serving restaurants across 5 Southeast Asian countries.</p>
-<div class="relative w-full aspect-[21/9] bg-slate-100 dark:bg-slate-800/50 rounded-3xl overflow-hidden border border-slate-200 dark:border-slate-800">
-<div class="absolute inset-0 opacity-40">
-<img loading="lazy" alt="Southeast Asia Map" class="w-full h-full object-cover grayscale invert dark:invert-0" data-alt="Map of Southeast Asia" data-location="Southeast Asia" width="800" height="600">
-</div>
-<!-- Pulsing Markers -->
-<div class="absolute top-[30%] left-[38%] size-4 bg-primary rounded-full animate-ping"></div>
-<div class="absolute top-[30%] left-[38%] size-3 bg-primary rounded-full"></div>
-<div class="absolute top-[45%] left-[32%] size-4 bg-primary rounded-full animate-ping"></div>
-<div class="absolute top-[45%] left-[32%] size-3 bg-primary rounded-full"></div>
-<div class="absolute top-[55%] left-[42%] size-4 bg-primary rounded-full animate-ping"></div>
-<div class="absolute top-[55%] left-[42%] size-3 bg-primary rounded-full"></div>
-<div class="absolute top-[40%] left-[55%] size-4 bg-primary rounded-full animate-ping"></div>
-<div class="absolute top-[40%] left-[55%] size-3 bg-primary rounded-full"></div>
-<div class="absolute top-[35%] left-[48%] size-4 bg-primary rounded-full animate-ping"></div>
-<div class="absolute top-[35%] left-[48%] size-3 bg-primary rounded-full"></div>
-<!-- Info Overlay -->
-<div class="absolute bottom-8 right-8 bg-white/90 dark:bg-slate-900/90 p-6 rounded-2xl backdrop-blur-md shadow-xl text-left border border-slate-200 dark:border-slate-800">
-<div class="flex items-center gap-2 text-primary font-bold text-sm mb-1">
-<span class="material-symbols-outlined text-sm">hub</span> <span data-i18n="map_active_nodes">Active Deployments</span>
-                    </div>
-<p class="text-2xl font-black" data-i18n="map_units">500+ Units</p>
-<p class="text-xs text-slate-500 mt-1" data-i18n="map_units_desc">Across Thailand, Vietnam, Malaysia, Indonesia &amp; Philippines.</p>
-</div>
-</div>
-</section>
-
-<!-- CTA Section -->
-<div class="mb-24">
-<section class="bg-primary rounded-3xl p-12 lg:p-20 text-center text-white relative overflow-hidden">
-<div class="absolute top-0 right-0 size-64 bg-white/10 rounded-full -mr-32 -mt-32"></div>
-<div class="relative z-10">
-<h2 class="text-4xl lg:text-5xl font-black mb-6" data-i18n="cta_title">Ready to Transform Your Kitchen?</h2>
-<p class="text-white/80 text-lg mb-10 max-w-2xl mx-auto" data-i18n="cta_desc">
-                    Tell us about your kitchen and menu. Our engineers will create a free ROI proposal showing exactly how much you can save with YuKoLi smart equipment.
+        <!-- Case 2: Vietnam Fast Food -->
+        <div
+          class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl overflow-hidden group hover:border-primary/50 transition-all"
+        >
+          <div class="h-48 relative">
+            <img
+              loading="lazy"
+              alt="Vietnamese Fast Food Kitchen"
+              class="w-full h-full object-cover"
+              data-alt="YuKoLi steamer and fryer in a Vietnamese kitchen"
+              width="800"
+              height="600"
+            />
+            <div class="absolute top-4 left-4 bg-white/90 dark:bg-slate-900/90 p-2 rounded-lg backdrop-blur">
+              <span class="material-symbols-outlined text-primary">lunch_dining</span>
+            </div>
+            <div class="absolute top-4 right-4 bg-primary text-white px-2 py-1 rounded-lg text-xs font-bold">
+              🇻🇳 Vietnam
+            </div>
+          </div>
+          <div class="p-6">
+            <h3 class="text-xl font-bold mb-2" data-i18n="case2_title">Phở Việt Quick — 45 Stores</h3>
+            <p class="text-sm text-slate-500 mb-6" data-i18n="case2_desc">
+              Ho Chi Minh City phở chain replaced 3-5 cooks per store with YuKoLi smart stockpot boilers and
+              auto-stir-fry machines, serving 500+ bowls daily.
+            </p>
+            <div class="grid grid-cols-3 gap-2 py-4 border-y border-slate-100 dark:border-slate-800 mb-6">
+              <div class="text-center">
+                <p class="text-lg font-black text-primary">3→1</p>
+                <p class="text-[10px] font-bold text-slate-400 uppercase" data-i18n="case_studies_cooks_reduced">
+                  Cooks
                 </p>
-<div class="flex flex-wrap justify-center gap-4">
-<button class="bg-white text-primary px-10 py-5 rounded-xl font-black hover:bg-slate-100 transition-colors shadow-xl" data-i18n="cta_get_proposal">
-                        Get Free ROI Proposal
-                    </button>
-<button class="bg-slate-900 text-white px-10 py-5 rounded-xl font-black hover:bg-slate-800 transition-colors shadow-xl" data-i18n="cta_contact_sales">
-                        Contact Sales
-                    </button>
-</div>
-</div>
-</section>
-</div>
+              </div>
+              <div class="text-center border-x border-slate-100 dark:border-slate-800 px-2">
+                <p class="text-lg font-black text-primary">500+</p>
+                <p class="text-[10px] font-bold text-slate-400 uppercase" data-i18n="case_studies_bowls_day">
+                  Bowls/Day
+                </p>
+              </div>
+              <div class="text-center">
+                <p class="text-lg font-black text-primary">¥12万</p>
+                <p class="text-[10px] font-bold text-slate-400 uppercase" data-i18n="case_studies_annual_saving">
+                  Annual Saving
+                </p>
+              </div>
+            </div>
+            <button
+              class="w-full py-3 rounded-xl border-2 border-primary text-primary font-bold text-sm hover:bg-primary hover:text-white transition-all"
+              data-i18n="case_read_more"
+            >
+              Read Case Study
+            </button>
+          </div>
+        </div>
 
-<!-- Compliance & Trust Bar -->
-<section class="border-t border-slate-200 dark:border-slate-800 pt-12 pb-24 fullwidth-bg">
-<p class="text-center text-xs font-bold uppercase tracking-widest text-slate-400 mb-8" data-i18n="certifications_title">Certifications &amp; Compliance</p>
-<div class="flex flex-wrap justify-center items-center gap-8 lg:gap-16 opacity-50 dark:opacity-40 grayscale contrast-125">
-<div class="flex flex-col items-center">
-<div class="text-2xl font-black">ISO 9001</div>
-<span class="text-[10px] font-bold" data-i18n="cert_quality_mgmt">QUALITY MGMT</span>
-</div>
-<div class="flex flex-col items-center">
-<div class="text-2xl font-black">CE</div>
-<span class="text-[10px] font-bold" data-i18n="cert_eu_conformity">EU CONFORMITY</span>
-</div>
-<div class="flex flex-col items-center">
-<div class="text-2xl font-black">UL</div>
-<span class="text-[10px] font-bold" data-i18n="cert_safety_listed">SAFETY LISTED</span>
-</div>
-<div class="flex flex-col items-center">
-<div class="text-2xl font-black">RoHS</div>
-<span class="text-[10px] font-bold" data-i18n="cert_eco_compliant">ECO-COMPLIANT</span>
-</div>
-</div>
-</section>
-</main>
+        <!-- Case 3: Malaysia Factory Canteen -->
+        <div
+          class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl overflow-hidden group hover:border-primary/50 transition-all"
+        >
+          <div class="h-48 relative">
+            <img
+              loading="lazy"
+              alt="Malaysia Factory Canteen"
+              class="w-full h-full object-cover"
+              data-alt="YuKoLi steamers and rice cookers in a Malaysian canteen"
+              width="800"
+              height="600"
+            />
+            <div class="absolute top-4 left-4 bg-white/90 dark:bg-slate-900/90 p-2 rounded-lg backdrop-blur">
+              <span class="material-symbols-outlined text-primary">factory</span>
+            </div>
+            <div class="absolute top-4 right-4 bg-primary text-white px-2 py-1 rounded-lg text-xs font-bold">
+              🇲🇾 Malaysia
+            </div>
+          </div>
+          <div class="p-6">
+            <h3 class="text-xl font-bold mb-2" data-i18n="case3_title">KL Industrial Canteen — 3,000 Meals/Day</h3>
+            <p class="text-sm text-slate-500 mb-6" data-i18n="case3_desc">
+              Kuala Lumpur electronics factory canteen installed YuKoLi steamers and rice cookers, feeding 3,000 workers
+              daily with only 4 staff.
+            </p>
+            <div class="grid grid-cols-3 gap-2 py-4 border-y border-slate-100 dark:border-slate-800 mb-6">
+              <div class="text-center">
+                <p class="text-lg font-black text-primary">75%</p>
+                <p class="text-[10px] font-bold text-slate-400 uppercase" data-i18n="case_studies_labor">Labor ↓</p>
+              </div>
+              <div class="text-center border-x border-slate-100 dark:border-slate-800 px-2">
+                <p class="text-lg font-black text-primary">3,000</p>
+                <p class="text-[10px] font-bold text-slate-400 uppercase" data-i18n="case_studies_meals_day">
+                  Meals/Day
+                </p>
+              </div>
+              <div class="text-center">
+                <p class="text-lg font-black text-primary">¥25万</p>
+                <p class="text-[10px] font-bold text-slate-400 uppercase" data-i18n="case_studies_annual_saving">
+                  Annual Saving
+                </p>
+              </div>
+            </div>
+            <button
+              class="w-full py-3 rounded-xl border-2 border-primary text-primary font-bold text-sm hover:bg-primary hover:text-white transition-all"
+              data-i18n="case_read_more"
+            >
+              Read Case Study
+            </button>
+          </div>
+        </div>
 
+        <!-- Case 4: Indonesia Ghost Kitchen -->
+        <div
+          class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl overflow-hidden group hover:border-primary/50 transition-all"
+        >
+          <div class="h-48 relative">
+            <img
+              loading="lazy"
+              alt="Indonesia Ghost Kitchen"
+              class="w-full h-full object-cover"
+              data-alt="YuKoLi multi-station cooking line in Jakarta ghost kitchen"
+              width="800"
+              height="600"
+            />
+            <div class="absolute top-4 left-4 bg-white/90 dark:bg-slate-900/90 p-2 rounded-lg backdrop-blur">
+              <span class="material-symbols-outlined text-primary">delivery_dining</span>
+            </div>
+            <div class="absolute top-4 right-4 bg-primary text-white px-2 py-1 rounded-lg text-xs font-bold">
+              🇮🇩 Indonesia
+            </div>
+          </div>
+          <div class="p-6">
+            <h3 class="text-xl font-bold mb-2" data-i18n="case4_title">Jakarta Cloud Kitchen Hub</h3>
+            <p class="text-sm text-slate-500 mb-6" data-i18n="case4_desc">
+              GoFood partner in Jakarta runs 8 delivery-only stations with YuKoLi auto-fryers and steamers, handling
+              800+ orders per day with minimal staff.
+            </p>
+            <div class="grid grid-cols-3 gap-2 py-4 border-y border-slate-100 dark:border-slate-800 mb-6">
+              <div class="text-center">
+                <p class="text-lg font-black text-primary">800+</p>
+                <p class="text-[10px] font-bold text-slate-400 uppercase" data-i18n="case_studies_orders_day">
+                  Orders/Day
+                </p>
+              </div>
+              <div class="text-center border-x border-slate-100 dark:border-slate-800 px-2">
+                <p class="text-lg font-black text-primary">28%</p>
+                <p class="text-[10px] font-bold text-slate-400 uppercase" data-i18n="case_studies_speed">Speed ↑</p>
+              </div>
+              <div class="text-center">
+                <p class="text-lg font-black text-primary">¥15万</p>
+                <p class="text-[10px] font-bold text-slate-400 uppercase" data-i18n="case_studies_annual_saving">
+                  Annual Saving
+                </p>
+              </div>
+            </div>
+            <button
+              class="w-full py-3 rounded-xl border-2 border-primary text-primary font-bold text-sm hover:bg-primary hover:text-white transition-all"
+              data-i18n="case_read_more"
+            >
+              Read Case Study
+            </button>
+          </div>
+        </div>
 
+        <!-- Case 5: Philippines School Cafeteria -->
+        <div
+          class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl overflow-hidden group hover:border-primary/50 transition-all"
+        >
+          <div class="h-48 relative">
+            <img
+              loading="lazy"
+              alt="Philippines School Cafeteria"
+              class="w-full h-full object-cover"
+              data-alt="YuKoLi equipment in a Philippine school kitchen"
+              width="800"
+              height="600"
+            />
+            <div class="absolute top-4 left-4 bg-white/90 dark:bg-slate-900/90 p-2 rounded-lg backdrop-blur">
+              <span class="material-symbols-outlined text-primary">school</span>
+            </div>
+            <div class="absolute top-4 right-4 bg-primary text-white px-2 py-1 rounded-lg text-xs font-bold">
+              🇵🇭 Philippines
+            </div>
+          </div>
+          <div class="p-6">
+            <h3 class="text-xl font-bold mb-2" data-i18n="case5_title">Manila University Cafeteria</h3>
+            <p class="text-sm text-slate-500 mb-6" data-i18n="case5_desc">
+              Metro Manila university deployed YuKoLi steamers and auto-stir-fry machines to serve 2,000+ students daily
+              while cutting kitchen staff from 12 to 4.
+            </p>
+            <div class="grid grid-cols-3 gap-2 py-4 border-y border-slate-100 dark:border-slate-800 mb-6">
+              <div class="text-center">
+                <p class="text-lg font-black text-primary">67%</p>
+                <p class="text-[10px] font-bold text-slate-400 uppercase" data-i18n="case_studies_labor">Labor ↓</p>
+              </div>
+              <div class="text-center border-x border-slate-100 dark:border-slate-800 px-2">
+                <p class="text-lg font-black text-primary">99.5%</p>
+                <p class="text-[10px] font-bold text-slate-400 uppercase" data-i18n="pdp_consistency">Consistency</p>
+              </div>
+              <div class="text-center">
+                <p class="text-lg font-black text-primary">¥20万</p>
+                <p class="text-[10px] font-bold text-slate-400 uppercase" data-i18n="case_studies_annual_saving">
+                  Annual Saving
+                </p>
+              </div>
+            </div>
+            <button
+              class="w-full py-3 rounded-xl border-2 border-primary text-primary font-bold text-sm hover:bg-primary hover:text-white transition-all"
+              data-i18n="case_read_more"
+            >
+              Read Case Study
+            </button>
+          </div>
+        </div>
+      </section>
 
+      <!-- Featured Client Section -->
+      <div class="mb-24">
+        <section class="bg-slate-900 text-white rounded-3xl overflow-hidden relative">
+          <div class="absolute inset-0 opacity-20 pointer-events-none">
+            <img
+              loading="lazy"
+              alt="Restaurant Interior"
+              class="w-full h-full object-cover"
+              data-alt="Modern commercial kitchen with YuKoLi equipment"
+              width="800"
+              height="600"
+            />
+          </div>
+          <div class="relative grid grid-cols-1 lg:grid-cols-2">
+            <div class="p-12 lg:p-20 flex flex-col gap-8">
+              <div class="flex items-center gap-4">
+                <div class="size-16 bg-white rounded-xl flex items-center justify-center p-2">
+                  <span class="material-symbols-outlined text-slate-900 text-4xl">restaurant</span>
+                </div>
+                <div>
+                  <h4 class="text-2xl font-bold" data-i18n="featured_client_name">Siam Wok Express</h4>
+                  <p class="text-slate-400" data-i18n="featured_client_tagline">
+                    Thailand's Fastest-Growing Stir-Fry Chain
+                  </p>
+                </div>
+              </div>
+              <h3 class="text-4xl font-black" data-i18n="featured_client_heading">
+                From 12 Stores to 86 Outlets in 18 Months — Zero Recipe Drift.
+              </h3>
+              <p class="text-slate-300 leading-relaxed" data-i18n="featured_client_desc">
+                Siam Wok Express chose YuKoLi smart woks to solve their biggest expansion bottleneck: training cooks.
+                Each auto-wok stores 200+ recipes and reproduces them identically at every outlet, cutting new-store
+                launch time from 6 weeks to 10 days.
+              </p>
+              <div class="flex gap-10">
+                <div>
+                  <p class="text-primary text-3xl font-black">86</p>
+                  <p
+                    class="text-xs uppercase font-bold text-slate-400 tracking-tighter"
+                    data-i18n="featured_stat_outlets"
+                  >
+                    Outlets
+                  </p>
+                </div>
+                <div class="border-l border-slate-700 pl-10">
+                  <p class="text-primary text-3xl font-black">70%</p>
+                  <p
+                    class="text-xs uppercase font-bold text-slate-400 tracking-tighter"
+                    data-i18n="featured_stat_labor_cut"
+                  >
+                    Labor Cost Cut
+                  </p>
+                </div>
+                <div class="border-l border-slate-700 pl-10">
+                  <p class="text-primary text-3xl font-black">10天</p>
+                  <p
+                    class="text-xs uppercase font-bold text-slate-400 tracking-tighter"
+                    data-i18n="featured_stat_launch_time"
+                  >
+                    New Store Launch
+                  </p>
+                </div>
+              </div>
+              <button
+                class="bg-primary text-white w-fit px-8 py-4 rounded-xl font-bold mt-4 hover:scale-105 transition-transform"
+                data-i18n="featured_cta"
+              >
+                Read Full Story
+              </button>
+            </div>
+            <div class="hidden lg:block relative h-full min-h-[500px]">
+              <img
+                loading="lazy"
+                alt="YuKoLi Smart Wok Closeup"
+                class="w-full h-full object-cover"
+                data-alt="Close up of YuKoLi smart wok cooking stir-fry"
+                width="800"
+                height="600"
+              />
+            </div>
+          </div>
+        </section>
+      </div>
 
-<script defer src="/assets/js/ui/products-dropdown.js?v=20260322-v3"></script>
-<script defer src="/assets/js/ui/navigator.js?v=20260322-v3"></script>
-<script defer src="/assets/js/ui/search-engine.js"></script>
-<script defer src="/assets/js/ui/footer.js?v=20260322-v3"></script>
-<script defer src="/assets/js/lang-registry.js"></script>
-<script defer src="/assets/js/translations.js"></script><script defer src="/assets/js/translations-dropdown-template.js"></script>
-<script defer src="/assets/js/contacts.js"></script>
-<script defer src="/assets/js/ui/smart-popup.js"></script>
-<script defer src="/assets/js/router.js"></script>
+      <!-- Southeast Asia Deployment Map -->
+      <section class="mb-24 text-center">
+        <h2 class="text-3xl font-bold mb-4" data-i18n="map_title">Southeast Asia Deployment</h2>
+        <p class="text-slate-500 mb-12" data-i18n="map_desc">
+          YuKoLi smart kitchen equipment is serving restaurants across 5 Southeast Asian countries.
+        </p>
+        <div
+          class="relative w-full aspect-[21/9] bg-slate-100 dark:bg-slate-800/50 rounded-3xl overflow-hidden border border-slate-200 dark:border-slate-800"
+        >
+          <div class="absolute inset-0 opacity-40">
+            <img
+              loading="lazy"
+              alt="Southeast Asia Map"
+              class="w-full h-full object-cover grayscale invert dark:invert-0"
+              data-alt="Map of Southeast Asia"
+              data-location="Southeast Asia"
+              width="800"
+              height="600"
+            />
+          </div>
+          <!-- Pulsing Markers -->
+          <div class="absolute top-[30%] left-[38%] size-4 bg-primary rounded-full animate-ping"></div>
+          <div class="absolute top-[30%] left-[38%] size-3 bg-primary rounded-full"></div>
+          <div class="absolute top-[45%] left-[32%] size-4 bg-primary rounded-full animate-ping"></div>
+          <div class="absolute top-[45%] left-[32%] size-3 bg-primary rounded-full"></div>
+          <div class="absolute top-[55%] left-[42%] size-4 bg-primary rounded-full animate-ping"></div>
+          <div class="absolute top-[55%] left-[42%] size-3 bg-primary rounded-full"></div>
+          <div class="absolute top-[40%] left-[55%] size-4 bg-primary rounded-full animate-ping"></div>
+          <div class="absolute top-[40%] left-[55%] size-3 bg-primary rounded-full"></div>
+          <div class="absolute top-[35%] left-[48%] size-4 bg-primary rounded-full animate-ping"></div>
+          <div class="absolute top-[35%] left-[48%] size-3 bg-primary rounded-full"></div>
+          <!-- Info Overlay -->
+          <div
+            class="absolute bottom-8 right-8 bg-white/90 dark:bg-slate-900/90 p-6 rounded-2xl backdrop-blur-md shadow-xl text-left border border-slate-200 dark:border-slate-800"
+          >
+            <div class="flex items-center gap-2 text-primary font-bold text-sm mb-1">
+              <span class="material-symbols-outlined text-sm">hub</span>
+              <span data-i18n="map_active_nodes">Active Deployments</span>
+            </div>
+            <p class="text-2xl font-black" data-i18n="map_units">500+ Units</p>
+            <p class="text-xs text-slate-500 mt-1" data-i18n="map_units_desc">
+              Across Thailand, Vietnam, Malaysia, Indonesia &amp; Philippines.
+            </p>
+          </div>
+        </div>
+      </section>
 
-<script defer src="/assets/js/page-interactions.js"></script>
-<script>
-  document.addEventListener('DOMContentLoaded', function () {
-    if (window.translationManager) window.translationManager.initialize();
-  });
-</script>
+      <!-- CTA Section -->
+      <div class="mb-24">
+        <section class="bg-primary rounded-3xl p-12 lg:p-20 text-center text-white relative overflow-hidden">
+          <div class="absolute top-0 right-0 size-64 bg-white/10 rounded-full -mr-32 -mt-32"></div>
+          <div class="relative z-10">
+            <h2 class="text-4xl lg:text-5xl font-black mb-6" data-i18n="cta_title">Ready to Transform Your Kitchen?</h2>
+            <p class="text-white/80 text-lg mb-10 max-w-2xl mx-auto" data-i18n="cta_desc">
+              Tell us about your kitchen and menu. Our engineers will create a free ROI proposal showing exactly how
+              much you can save with YuKoLi smart equipment.
+            </p>
+            <div class="flex flex-wrap justify-center gap-4">
+              <button
+                class="bg-white text-primary px-10 py-5 rounded-xl font-black hover:bg-slate-100 transition-colors shadow-xl"
+                data-i18n="cta_get_proposal"
+              >
+                Get Free ROI Proposal
+              </button>
+              <button
+                class="bg-slate-900 text-white px-10 py-5 rounded-xl font-black hover:bg-slate-800 transition-colors shadow-xl"
+                data-i18n="cta_contact_sales"
+              >
+                Contact Sales
+              </button>
+            </div>
+          </div>
+        </section>
+      </div>
 
+      <!-- Compliance & Trust Bar -->
+      <section class="border-t border-slate-200 dark:border-slate-800 pt-12 pb-24 fullwidth-bg">
+        <p
+          class="text-center text-xs font-bold uppercase tracking-widest text-slate-400 mb-8"
+          data-i18n="certifications_title"
+        >
+          Certifications &amp; Compliance
+        </p>
+        <div
+          class="flex flex-wrap justify-center items-center gap-8 lg:gap-16 opacity-50 dark:opacity-40 grayscale contrast-125"
+        >
+          <div class="flex flex-col items-center">
+            <div class="text-2xl font-black">ISO 9001</div>
+            <span class="text-[10px] font-bold" data-i18n="cert_quality_mgmt">QUALITY MGMT</span>
+          </div>
+          <div class="flex flex-col items-center">
+            <div class="text-2xl font-black">CE</div>
+            <span class="text-[10px] font-bold" data-i18n="cert_eu_conformity">EU CONFORMITY</span>
+          </div>
+          <div class="flex flex-col items-center">
+            <div class="text-2xl font-black">UL</div>
+            <span class="text-[10px] font-bold" data-i18n="cert_safety_listed">SAFETY LISTED</span>
+          </div>
+          <div class="flex flex-col items-center">
+            <div class="text-2xl font-black">RoHS</div>
+            <span class="text-[10px] font-bold" data-i18n="cert_eco_compliant">ECO-COMPLIANT</span>
+          </div>
+        </div>
+      </section>
+    </main>
 
+    <script defer src="/assets/js/ui/products-dropdown.js?v=20260322-v3"></script>
+    <script defer src="/assets/js/ui/navigator.js?v=20260322-v3"></script>
+    <script defer src="/assets/js/ui/search-engine.js"></script>
+    <script defer src="/assets/js/ui/footer.js?v=20260322-v3"></script>
+    <script defer src="/assets/js/lang-registry.js"></script>
+    <script defer src="/assets/js/translations.js"></script>
+    <script defer src="/assets/js/translations-dropdown-template.js"></script>
+    <script defer src="/assets/js/contacts.js"></script>
+    <script defer src="/assets/js/ui/smart-popup.js"></script>
+    <script defer src="/assets/js/router.js"></script>
 
-<script src="/assets/js/utils/device-utils.js"></script>
-<script src="/assets/js/spa-router.js"></script>
-<script>
-  document.addEventListener('DOMContentLoaded', function() {
-    if (window.SpaRouter && typeof window.SpaRouter.init === 'function') {
-      window.SpaRouter.init();
-    }
-  });
-</script>
-</body></html>
+    <script defer src="/assets/js/page-interactions.js"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        if (window.translationManager) window.translationManager.initialize();
+      });
+    </script>
+
+    <script src="/assets/js/utils/device-utils.js"></script>
+    <script src="/assets/js/spa-router.js"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        if (window.SpaRouter && typeof window.SpaRouter.init === "function") {
+          window.SpaRouter.init();
+        }
+      });
+    </script>
+  </body>
+</html>

@@ -11,35 +11,35 @@
   --z-content: 1;
 
   /* 固定元素层级 */
-  --z-header: 10;           /* 页面顶部导航 */
-  --z-footer: 10;           /* 页面底部导航 */
-  --z-back-to-top: 20;      /* 返回顶部按钮 */
+  --z-header: 10; /* 页面顶部导航 */
+  --z-footer: 10; /* 页面底部导航 */
+  --z-back-to-top: 20; /* 返回顶部按钮 */
 
   /* 浮动元素层级 */
-  --z-fab: 50;              /* 浮动操作按钮 (WhatsApp, LINE等) */
-  --z-bottom-nav: 50;       /* 移动端底部导航栏 */
+  --z-fab: 50; /* 浮动操作按钮 (WhatsApp, LINE等) */
+  --z-bottom-nav: 50; /* 移动端底部导航栏 */
 
   /* 交互元素层级 */
-  --z-dropdown: 200;        /* 下拉菜单 */
+  --z-dropdown: 200; /* 下拉菜单 */
   --z-language-dropdown: 250; /* 语言选择下拉框 (高于普通下拉菜单) */
-  --z-popover: 210;         /* 气泡提示 */
-  --z-sticky: 100;          /* 粘性元素 */
+  --z-popover: 210; /* 气泡提示 */
+  --z-sticky: 100; /* 粘性元素 */
 
   /* 覆盖层层级 */
-  --z-modal-backdrop: 300;  /* 模态框背景 */
-  --z-modal: 310;           /* 模态框内容 */
-  --z-drawer: 320;          /* 抽屉式菜单 */
-  --z-dialog: 330;          /* 对话框 */
+  --z-modal-backdrop: 300; /* 模态框背景 */
+  --z-modal: 310; /* 模态框内容 */
+  --z-drawer: 320; /* 抽屉式菜单 */
+  --z-dialog: 330; /* 对话框 */
 
   /* 通知层级 */
-  --z-toast: 400;           /* 消息提示 */
-  --z-notification: 410;    /* 通知提醒 */
-  --z-alert: 420;           /* 警告提示 */
+  --z-toast: 400; /* 消息提示 */
+  --z-notification: 410; /* 通知提醒 */
+  --z-alert: 420; /* 警告提示 */
 
   /* 最高层级 */
-  --z-tooltip: 500;         /* 工具提示 */
-  --z-loading: 600;         /* 加载遮罩 */
-  --z-overlay: 700;         /* 遮罩层 (最高) */
+  --z-tooltip: 500; /* 工具提示 */
+  --z-loading: 600; /* 加载遮罩 */
+  --z-overlay: 700; /* 遮罩层 (最高) */
 }
 
 /* Tailwind CSS 映射类
@@ -50,10 +50,24 @@
  */
 
 /* 兼容旧代码的过渡类 */
-.z-header { z-index: var(--z-header); }
-.z-fab { z-index: var(--z-fab); }
-.z-dropdown { z-index: var(--z-dropdown); }
-.z-language-dropdown { z-index: var(--z-language-dropdown); }
-.z-modal { z-index: var(--z-modal); }
-.z-toast { z-index: var(--z-toast); }
-.z-tooltip { z-index: var(--z-tooltip); }
+.z-header {
+  z-index: var(--z-header);
+}
+.z-fab {
+  z-index: var(--z-fab);
+}
+.z-dropdown {
+  z-index: var(--z-dropdown);
+}
+.z-language-dropdown {
+  z-index: var(--z-language-dropdown);
+}
+.z-modal {
+  z-index: var(--z-modal);
+}
+.z-toast {
+  z-index: var(--z-toast);
+}
+.z-tooltip {
+  z-index: var(--z-tooltip);
+}

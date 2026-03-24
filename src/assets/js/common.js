@@ -7,7 +7,7 @@
  * Then: window.CommonUtils.debounce(fn, 300)
  */
 (function (global) {
-  'use strict';
+  "use strict";
 
   /** Debounce function execution */
   function debounce(func, wait) {
@@ -35,20 +35,22 @@
       if (!inThrottle) {
         func.apply(ctx, args);
         inThrottle = true;
-        setTimeout(function () { inThrottle = false; }, limit);
+        setTimeout(function () {
+          inThrottle = false;
+        }, limit);
       }
     };
   }
 
   /** Escape HTML special characters */
   function escapeHtml(unsafe) {
-    if (typeof unsafe !== 'string') return unsafe;
+    if (typeof unsafe !== "string") return unsafe;
     return unsafe
-      .replace(/&/g, '&amp;')
-      .replace(/</g, '&lt;')
-      .replace(/>/g, '&gt;')
-      .replace(/"/g, '&quot;')
-      .replace(/'/g, '&#039;');
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&#039;");
   }
 
   /** Validate email address */
@@ -65,33 +67,38 @@
 
   /** Format currency */
   function formatCurrency(amount, currency) {
-    if (currency === undefined) currency = 'CNY';
-    var localeMap = { 'USD': 'en-US', 'CNY': 'zh-CN', 'EUR': 'en-US', 'GBP': 'en-GB', 'JPY': 'ja-JP' };
-    var locale = localeMap[currency] || 'en-US';
-    return new Intl.NumberFormat(locale, { style: 'currency', currency: currency }).format(amount);
+    if (currency === undefined) currency = "CNY";
+    var localeMap = { USD: "en-US", CNY: "zh-CN", EUR: "en-US", GBP: "en-GB", JPY: "ja-JP" };
+    var locale = localeMap[currency] || "en-US";
+    return new Intl.NumberFormat(locale, { style: "currency", currency: currency }).format(amount);
   }
 
   /** Format date */
   function formatDate(date, locale) {
-    if (locale === undefined) locale = 'zh-CN';
-    var options = { year: 'numeric', month: 'long', day: 'numeric' };
-    if (locale === 'en-US') {
-      return new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'numeric', day: 'numeric' }).format(new Date(date));
+    if (locale === undefined) locale = "zh-CN";
+    var options = { year: "numeric", month: "long", day: "numeric" };
+    if (locale === "en-US") {
+      return new Intl.DateTimeFormat("en-US", { year: "numeric", month: "numeric", day: "numeric" }).format(
+        new Date(date)
+      );
     }
     return new Intl.DateTimeFormat(locale, options).format(new Date(date));
   }
 
   /** Format number with thousand separator */
   function formatNumber(num, locale) {
-    if (locale === undefined) locale = 'zh-CN';
+    if (locale === undefined) locale = "zh-CN";
     return new Intl.NumberFormat(locale).format(num);
   }
 
   /** Deep clone object */
   function deepClone(obj) {
-    if (obj === null || typeof obj !== 'object') return obj;
+    if (obj === null || typeof obj !== "object") return obj;
     if (obj instanceof Date) return new Date(obj.getTime());
-    if (obj instanceof Array) return obj.map(function (item) { return deepClone(item); });
+    if (obj instanceof Array)
+      return obj.map(function (item) {
+        return deepClone(item);
+      });
     if (obj instanceof Object) {
       var clonedObj = {};
       for (var key in obj) {
@@ -106,14 +113,14 @@
   /** Check if object is empty */
   function isEmpty(obj) {
     if (obj === null || obj === undefined) return true;
-    if (Array.isArray(obj) || typeof obj === 'string') return obj.length === 0;
-    if (typeof obj === 'object') return Object.keys(obj).length === 0;
+    if (Array.isArray(obj) || typeof obj === "string") return obj.length === 0;
+    if (typeof obj === "object") return Object.keys(obj).length === 0;
     return false;
   }
 
   /** Get value from object by path */
   function get(obj, path, defaultValue) {
-    var keys = path.split('.');
+    var keys = path.split(".");
     var result = obj;
     for (var i = 0; i < keys.length; i++) {
       if (result === null || result === undefined) return defaultValue;
@@ -124,7 +131,7 @@
 
   /** Set value in object by path */
   function set(obj, path, value) {
-    var keys = path.split('.');
+    var keys = path.split(".");
     var current = obj;
     for (var i = 0; i < keys.length - 1; i++) {
       var key = keys[i];
@@ -137,7 +144,9 @@
 
   /** Sleep function */
   function sleep(ms) {
-    return new Promise(function (resolve) { return setTimeout(resolve, ms); });
+    return new Promise(function (resolve) {
+      return setTimeout(resolve, ms);
+    });
   }
 
   /**
@@ -151,14 +160,22 @@
    */
   function withTimeout(promise, ms, message) {
     ms = ms !== undefined ? ms : 10000;
-    message = message || ('Operation timed out after ' + ms + 'ms');
+    message = message || "Operation timed out after " + ms + "ms";
     var timer;
     var timeoutPromise = new Promise(function (_, reject) {
-      timer = setTimeout(function () { reject(new Error(message)); }, ms);
+      timer = setTimeout(function () {
+        reject(new Error(message));
+      }, ms);
     });
     return Promise.race([promise, timeoutPromise]).then(
-      function (value) { clearTimeout(timer); return value; },
-      function (error) { clearTimeout(timer); throw error; }
+      function (value) {
+        clearTimeout(timer);
+        return value;
+      },
+      function (error) {
+        clearTimeout(timer);
+        throw error;
+      }
     );
   }
 
@@ -173,8 +190,12 @@
    */
   function fetchWithTimeout(url, options, timeoutMs) {
     timeoutMs = timeoutMs !== undefined ? timeoutMs : 10000;
-    var controller = typeof AbortController !== 'undefined' ? new AbortController() : null;
-    var timer = controller ? setTimeout(function () { controller.abort(); }, timeoutMs) : null;
+    var controller = typeof AbortController !== "undefined" ? new AbortController() : null;
+    var timer = controller
+      ? setTimeout(function () {
+          controller.abort();
+        }, timeoutMs)
+      : null;
     var fetchOptions = Object.assign({}, options || {});
     if (controller) fetchOptions.signal = controller.signal;
 
@@ -185,8 +206,8 @@
       })
       .catch(function (error) {
         if (timer) clearTimeout(timer);
-        if (error.name === 'AbortError') {
-          throw new Error('Request timed out after ' + timeoutMs + 'ms: ' + url);
+        if (error.name === "AbortError") {
+          throw new Error("Request timed out after " + timeoutMs + "ms: " + url);
         }
         throw error;
       });
@@ -205,7 +226,9 @@
         lastError = error;
         onRetry(i + 1, error);
         if (i < maxRetries - 1) {
-          return sleep(delay * Math.pow(backoff, i)).then(function () { return attempt(i + 1); });
+          return sleep(delay * Math.pow(backoff, i)).then(function () {
+            return attempt(i + 1);
+          });
         }
         throw lastError;
       });
@@ -216,14 +239,14 @@
   /** Parse query string */
   function parseQueryString(url) {
     if (url === undefined) url = global.location.href;
-    var queryString = url.split('?')[1];
+    var queryString = url.split("?")[1];
     if (!queryString) return {};
     var params = {};
-    var pairs = queryString.split('&');
+    var pairs = queryString.split("&");
     for (var i = 0; i < pairs.length; i++) {
-      var parts = pairs[i].split('=');
+      var parts = pairs[i].split("=");
       var decodedKey = decodeURIComponent(parts[0]);
-      var decodedValue = parts[1] ? decodeURIComponent(parts[1]) : '';
+      var decodedValue = parts[1] ? decodeURIComponent(parts[1]) : "";
       params[decodedKey] = decodedValue;
     }
     return params;
@@ -236,16 +259,17 @@
     for (var i = 0; i < entries.length; i++) {
       var key = entries[i][0];
       var value = entries[i][1];
-      pairs.push(encodeURIComponent(key) + '=' + (value ? encodeURIComponent(value) : ''));
+      pairs.push(encodeURIComponent(key) + "=" + (value ? encodeURIComponent(value) : ""));
     }
-    return pairs.length > 0 ? '?' + pairs.join('&') : '';
+    return pairs.length > 0 ? "?" + pairs.join("&") : "";
   }
 
   /** Check if element is in viewport */
   function isInViewport(element) {
     var rect = element.getBoundingClientRect();
     return (
-      rect.top >= 0 && rect.left >= 0 &&
+      rect.top >= 0 &&
+      rect.left >= 0 &&
       rect.bottom <= (global.innerHeight || document.documentElement.clientHeight) &&
       rect.right <= (global.innerWidth || document.documentElement.clientWidth)
     );
@@ -255,7 +279,8 @@
   function isPartiallyInViewport(element) {
     var rect = element.getBoundingClientRect();
     return (
-      rect.bottom > 0 && rect.right > 0 &&
+      rect.bottom > 0 &&
+      rect.right > 0 &&
       rect.top < (global.innerHeight || document.documentElement.clientHeight) &&
       rect.left < (global.innerWidth || document.documentElement.clientWidth)
     );
@@ -272,27 +297,34 @@
   function scrollToElement(element, offset) {
     if (offset === undefined) offset = 0;
     var top = element.getBoundingClientRect().top + global.pageYOffset - offset;
-    global.scrollTo({ top: top, behavior: 'smooth' });
+    global.scrollTo({ top: top, behavior: "smooth" });
   }
 
   /** Copy text to clipboard */
   function copyToClipboard(text) {
     if (navigator.clipboard && navigator.clipboard.writeText) {
-      return navigator.clipboard.writeText(text).then(function () { return true; }).catch(function () { return _fallbackCopy(text); });
+      return navigator.clipboard
+        .writeText(text)
+        .then(function () {
+          return true;
+        })
+        .catch(function () {
+          return _fallbackCopy(text);
+        });
     }
     return Promise.resolve(_fallbackCopy(text));
   }
   function _fallbackCopy(text) {
-    var textArea = document.createElement('textarea');
+    var textArea = document.createElement("textarea");
     textArea.value = text;
-    textArea.style.position = 'fixed';
-    textArea.style.left = '-999999px';
-    textArea.style.top = '-999999px';
+    textArea.style.position = "fixed";
+    textArea.style.left = "-999999px";
+    textArea.style.top = "-999999px";
     document.body.appendChild(textArea);
     textArea.focus();
     textArea.select();
     try {
-      document.execCommand('copy');
+      document.execCommand("copy");
       if (textArea.parentNode) document.body.removeChild(textArea);
       return true;
     } catch (e) {
@@ -303,10 +335,10 @@
 
   /** Download file */
   function downloadFile(content, filename, type) {
-    if (type === undefined) type = 'text/plain';
+    if (type === undefined) type = "text/plain";
     var blob = new Blob([content], { type: type });
     var url = URL.createObjectURL(blob);
-    var link = document.createElement('a');
+    var link = document.createElement("a");
     link.href = url;
     link.download = filename;
     document.body.appendChild(link);
@@ -317,8 +349,8 @@
 
   /** Generate unique ID */
   function generateId(prefix) {
-    if (prefix === undefined) prefix = '';
-    return '' + prefix + Date.now() + '-' + Math.random().toString(36).substr(2, 9);
+    if (prefix === undefined) prefix = "";
+    return "" + prefix + Date.now() + "-" + Math.random().toString(36).substr(2, 9);
   }
 
   /** LocalStorage helpers */
@@ -327,18 +359,26 @@
       var item = localStorage.getItem(key);
       if (item === null) return null;
       if (parseJson) {
-        try { return JSON.parse(item); } catch (e) { return item; }
+        try {
+          return JSON.parse(item);
+        } catch (e) {
+          return item;
+        }
       }
       return item;
-    } catch (e) { return null; }
+    } catch (e) {
+      return null;
+    }
   }
 
   function setLocalStorageItem(key, value, stringify) {
     try {
-      var item = (stringify || typeof value === 'object') ? JSON.stringify(value) : value;
+      var item = stringify || typeof value === "object" ? JSON.stringify(value) : value;
       localStorage.setItem(key, item);
       return true;
-    } catch (e) { return false; }
+    } catch (e) {
+      return false;
+    }
   }
 
   var storage = {
@@ -347,79 +387,111 @@
       try {
         var item = localStorage.getItem(key);
         if (item === null) return defaultValue;
-        try { return JSON.parse(item); } catch (e) { return item; }
-      } catch (e) { return defaultValue; }
+        try {
+          return JSON.parse(item);
+        } catch (e) {
+          return item;
+        }
+      } catch (e) {
+        return defaultValue;
+      }
     },
     set: function (key, value) {
       try {
-        localStorage.setItem(key, typeof value === 'object' ? JSON.stringify(value) : value);
+        localStorage.setItem(key, typeof value === "object" ? JSON.stringify(value) : value);
         return true;
-      } catch (e) { return false; }
+      } catch (e) {
+        return false;
+      }
     },
     remove: function (key) {
-      try { localStorage.removeItem(key); return true; } catch (e) { return false; }
+      try {
+        localStorage.removeItem(key);
+        return true;
+      } catch (e) {
+        return false;
+      }
     },
     clear: function () {
-      try { localStorage.clear(); return true; } catch (e) { return false; }
-    }
+      try {
+        localStorage.clear();
+        return true;
+      } catch (e) {
+        return false;
+      }
+    },
   };
 
   /** Device helpers */
-  function isMobile() { return global.innerWidth < 768; }
-  function isTablet() { return global.innerWidth >= 768 && global.innerWidth < 1024; }
-  function isDesktop() { return global.innerWidth >= 1024; }
+  function isMobile() {
+    return global.innerWidth < 768;
+  }
+  function isTablet() {
+    return global.innerWidth >= 768 && global.innerWidth < 1024;
+  }
+  function isDesktop() {
+    return global.innerWidth >= 1024;
+  }
   function getDeviceType() {
-    if (isMobile()) return 'mobile';
-    if (isTablet()) return 'tablet';
-    return 'desktop';
+    if (isMobile()) return "mobile";
+    if (isTablet()) return "tablet";
+    return "desktop";
   }
 
   /** Detect browser */
   function detectBrowser() {
     var ua = navigator.userAgent;
-    if (ua.includes('Chrome') && !ua.includes('Edg')) return 'Chrome';
-    if (ua.includes('Safari') && !ua.includes('Chrome')) return 'Safari';
-    if (ua.includes('Firefox')) return 'Firefox';
-    if (ua.includes('Edg')) return 'Edge';
-    if (ua.includes('Opera') || ua.includes('OPR')) return 'Opera';
-    return 'Unknown';
+    if (ua.includes("Chrome") && !ua.includes("Edg")) return "Chrome";
+    if (ua.includes("Safari") && !ua.includes("Chrome")) return "Safari";
+    if (ua.includes("Firefox")) return "Firefox";
+    if (ua.includes("Edg")) return "Edge";
+    if (ua.includes("Opera") || ua.includes("OPR")) return "Opera";
+    return "Unknown";
   }
 
   /** Detect OS */
   function detectOS() {
     var ua = navigator.userAgent;
-    if (ua.includes('Windows')) return 'Windows';
-    if (ua.includes('Mac OS')) return 'macOS';
-    if (ua.includes('Linux')) return 'Linux';
-    if (ua.includes('Android')) return 'Android';
-    if (ua.includes('iOS')) return 'iOS';
-    return 'Unknown';
+    if (ua.includes("Windows")) return "Windows";
+    if (ua.includes("Mac OS")) return "macOS";
+    if (ua.includes("Linux")) return "Linux";
+    if (ua.includes("Android")) return "Android";
+    if (ua.includes("iOS")) return "iOS";
+    return "Unknown";
   }
 
   /** Get browser language */
   function getBrowserLanguage() {
-    return navigator.language || navigator.userLanguage || 'zh-CN';
+    return navigator.language || navigator.userLanguage || "zh-CN";
   }
 
   /** Array utilities */
   function arraysEqual(a, b) {
     if (a.length !== b.length) return false;
-    for (var i = 0; i < a.length; i++) { if (a[i] !== b[i]) return false; }
+    for (var i = 0; i < a.length; i++) {
+      if (a[i] !== b[i]) return false;
+    }
     return true;
   }
 
   function mergeUniqueArrays() {
-    var merged = [], seen = new Set();
+    var merged = [],
+      seen = new Set();
     for (var i = 0; i < arguments.length; i++) {
       var arr = arguments[i];
       for (var j = 0; j < arr.length; j++) {
-        if (!seen.has(arr[j])) { seen.add(arr[j]); merged.push(arr[j]); }
+        if (!seen.has(arr[j])) {
+          seen.add(arr[j]);
+          merged.push(arr[j]);
+        }
       }
     }
     return merged;
   }
 
-  function removeDuplicates(array) { return Array.from(new Set(array)); }
+  function removeDuplicates(array) {
+    return Array.from(new Set(array));
+  }
 
   function groupBy(array, key) {
     return array.reduce(function (result, item) {
@@ -429,9 +501,9 @@
   }
 
   function sortBy(array, key, order) {
-    if (order === undefined) order = 'asc';
+    if (order === undefined) order = "asc";
     return array.slice().sort(function (a, b) {
-      return order === 'asc' ? (a[key] > b[key] ? 1 : -1) : (a[key] < b[key] ? 1 : -1);
+      return order === "asc" ? (a[key] > b[key] ? 1 : -1) : a[key] < b[key] ? 1 : -1;
     });
   }
 
@@ -441,7 +513,7 @@
    * products.js 和 smart-popup.js 的同名函数可删除，改调 CommonUtils.tr。
    */
   function tr(key, fallback) {
-    var value = typeof global.t === 'function' ? global.t(key) : key;
+    var value = typeof global.t === "function" ? global.t(key) : key;
     return value && value !== key ? value : fallback;
   }
 
@@ -451,8 +523,8 @@
    * 统一替代项目中 6 处重复的 DOMContentLoaded 启动模板。
    */
   function ready(fn) {
-    if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', fn);
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", fn);
     } else {
       fn();
     }
@@ -501,10 +573,9 @@
     withTimeout: withTimeout,
     fetchWithTimeout: fetchWithTimeout,
     tr: tr,
-    ready: ready
+    ready: ready,
   };
 
   // Also keep legacy window.common alias for compatibility
   global.common = global.CommonUtils;
-
-}(window));
+})(window);
