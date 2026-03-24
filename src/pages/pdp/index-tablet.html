@@ -85,6 +85,38 @@
             <div class="h-72 bg-slate-200 dark:bg-slate-700 rounded-2xl"></div>
           </div>
         </div>
+
+        <!-- Product Specifications -->
+        <section class="mb-10 max-w-5xl mx-auto px-6" id="specs-section">
+          <div class="bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 p-6">
+            <h2 class="text-xl font-bold mb-5 flex items-center gap-2">
+              <span class="material-symbols-outlined text-primary">fact_check</span>
+              <span data-i18n="pdp_specs_title">产品规格</span>
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-3" id="specs-grid">
+              <div class="pdp-spec-placeholder text-center py-10 text-slate-400">
+                <span class="material-symbols-outlined text-4xl mb-2 block">inventory_2</span>
+                <p data-i18n="pdp_specs_placeholder">选择产品后显示详细规格</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Related Products -->
+        <section class="mb-10 max-w-5xl mx-auto px-6">
+          <div class="bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 p-6">
+            <h2 class="text-xl font-bold mb-5 flex items-center gap-2">
+              <span class="material-symbols-outlined text-primary">recommend</span>
+              <span data-i18n="pdp_related_title">推荐产品</span>
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-5" id="related-products">
+              <div class="pdp-related-placeholder text-center py-10 text-slate-400 md:col-span-2">
+                <span class="material-symbols-outlined text-4xl mb-2 block">category</span>
+                <p data-i18n="pdp_related_placeholder">浏览更多同类产品</p>
+              </div>
+            </div>
+          </div>
+        </section>
       </main>
       <footer data-component="footer" data-variant="tablet" data-cta="true"></footer>
     </div>

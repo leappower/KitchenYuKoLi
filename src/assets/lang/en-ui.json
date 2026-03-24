@@ -1179,5 +1179,17 @@
   "sol_why_3_title": "Full Lifecycle Service",
   "sol_why_3_desc": "One-stop service from solution design and installation to after-sales maintenance.",
   "sol_why_4_title": "International Certifications",
-  "sol_why_4_desc": "Certified by CE, UL, ISO 9001, RoHS and other international safety and quality standards."
+  "sol_why_4_desc": "Certified by CE, UL, ISO 9001, RoHS and other international safety and quality standards.",
+  "pdp_specs_placeholder": "Select a product to view detailed specifications",
+  "pdp_related_title": "Recommended Products",
+  "pdp_related_placeholder": "Browse more similar products",
+  "pdp_related_view": "View Details",
+  "pdp_spec_label_model": "Model",
+  "pdp_spec_label_category": "Category",
+  "pdp_spec_label_power": "Power",
+  "pdp_spec_label_dimensions": "Dimensions",
+  "pdp_spec_label_weight": "Net Weight",
+  "pdp_spec_label_voltage": "Voltage",
+  "pdp_spec_label_material": "Material",
+  "pdp_spec_label_certification": "Certification"
 }

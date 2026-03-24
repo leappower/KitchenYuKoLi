@@ -1179,5 +1179,17 @@
   "sol_why_3_title": "全生命周期服务",
   "sol_why_3_desc": "从方案设计、安装调试到售后维护，提供一站式服务。",
   "sol_why_4_title": "国际认证保障",
-  "sol_why_4_desc": "通过 CE、UL、ISO 9001、RoHS 等国际安全与质量认证。"
+  "sol_why_4_desc": "通过 CE、UL、ISO 9001、RoHS 等国际安全与质量认证。",
+  "pdp_specs_placeholder": "选择产品后显示详细规格",
+  "pdp_related_title": "推荐产品",
+  "pdp_related_placeholder": "浏览更多同类产品",
+  "pdp_related_view": "查看详情",
+  "pdp_spec_label_model": "型号",
+  "pdp_spec_label_category": "分类",
+  "pdp_spec_label_power": "功率",
+  "pdp_spec_label_dimensions": "产品尺寸",
+  "pdp_spec_label_weight": "净重",
+  "pdp_spec_label_voltage": "电压",
+  "pdp_spec_label_material": "材质",
+  "pdp_spec_label_certification": "认证"
 }
