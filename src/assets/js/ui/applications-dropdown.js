@@ -19,7 +19,7 @@
 
   /** Bottom links (Case Studies + ROI) */
   var EXTRAS = [
-    { key: "nav_cases", icon: "monitoring", href: "/cases/", badge: false },
+    { key: "nav_cases", icon: "monitoring", href: "/applications/cases/", badge: false },
     { key: "nav_roi", icon: "calculate", href: "/roi/", badge: true },
   ];
 

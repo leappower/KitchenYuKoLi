@@ -24,7 +24,6 @@
 
   /** Solutions items (Case Studies + ROI) */
   var SOLUTIONS = [
-    { key: "nav_cases_sol", icon: "monitoring", href: "/solutions/cases/", badge: false },
     { key: "nav_roi", icon: "calculate", href: "/roi/", badge: true },
   ];
 
