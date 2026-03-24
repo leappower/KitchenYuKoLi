@@ -98,15 +98,12 @@
       if ('serviceWorker' in navigator) {
         navigator.serviceWorker.getRegistrations().then(function (regs) {
           regs.forEach(function (r) { r.unregister().catch(function(){/*ignore*/}); });
-          console.log('[SW] Dev mode: unregistered existing service workers');
           // Also attempt to clear Cache Storage to avoid serving stale assets
           if ('caches' in window) {
             caches.keys().then(function (keys) {
               return Promise.all(keys.map(function (k) { return caches.delete(k); }));
-            }).then(function (results) {
-              console.log('[SW] Dev mode: cleared caches:', results);
+            }).then(function (_results) {
             }).catch(function () {
-              console.log('[SW] Dev mode: failed to clear caches');
             });
           }
           // Try to delete common IndexedDB databases used by the app (best-effort)
@@ -116,14 +113,12 @@
                 dbs.forEach(function(db){
                   try { window.indexedDB.deleteDatabase(db.name); } catch(e){}
                 });
-                console.log('[SW] Dev mode: attempted to delete indexedDB databases');
               }).catch(function(){ /* ignore */ return; });
             }
           } catch (e) { /* ignore */ }
         }).catch(function() {/*ignore*/});
       }
       // Skip registering in development
-      console.log('[SW] Dev mode detected — skipping SW registration');
       return;
     }
 

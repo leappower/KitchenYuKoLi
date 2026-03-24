@@ -59,7 +59,6 @@
     
     // 日志函数
     log: function() {
-      console.log('[SpaRouter]', Array.prototype.slice.call(arguments).join(' '));
     },
 
     // 获取当前路径（规范化）
@@ -91,11 +90,8 @@
 
       // 设置 SPA 导航标志,禁用响应式重定向
       window.__spaNavigating = true;
-      console.log('[SpaRouter] SPA flag set: window.__spaNavigating =', window.__spaNavigating);
 
       history.pushState({ path: normalizedPath }, '', normalizedPath);
-      console.log('[SpaRouter] PushState called with:', normalizedPath);
-      console.log('[SpaRouter] Current URL after pushState:', window.location.href);
 
       this.loadRoute(normalizedPath);
 
@@ -103,7 +99,6 @@
       var _self = this;
       setTimeout(function() {
         window.__spaNavigating = false;
-        console.log('[SpaRouter] SPA flag cleared: window.__spaNavigating =', window.__spaNavigating);
       }, 500);
     },
 
@@ -116,10 +111,8 @@
 
       // 设置 SPA 导航标志,禁用响应式重定向
       window.__spaNavigating = true;
-      console.log('[SpaRouter] SPA flag set (replace): window.__spaNavigating =', window.__spaNavigating);
 
       history.replaceState({ path: normalizedPath }, '', normalizedPath);
-      console.log('[SpaRouter] ReplaceState called with:', normalizedPath);
 
       this.loadRoute(normalizedPath);
 
@@ -127,7 +120,6 @@
       var _self = this;
       setTimeout(function() {
         window.__spaNavigating = false;
-        console.log('[SpaRouter] SPA flag cleared (replace): window.__spaNavigating =', window.__spaNavigating);
       }, 500);
     },
 
@@ -492,7 +484,6 @@
     onPopState: function(_event) {
       // 设置 SPA 导航标志,禁用响应式重定向
       window.__spaNavigating = true;
-      console.log('[SpaRouter] SPA flag set (popstate): window.__spaNavigating =', window.__spaNavigating);
 
       var path = this.getCurrentPath();
       this.log('Popstate to:', path);
@@ -502,7 +493,6 @@
       var _self = this;
       setTimeout(function() {
         window.__spaNavigating = false;
-        console.log('[SpaRouter] SPA flag cleared (popstate): window.__spaNavigating =', window.__spaNavigating);
       }, 500);
     },
 

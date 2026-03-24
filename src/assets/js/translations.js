@@ -446,15 +446,11 @@
   };
 
   TranslationManager.prototype.toggleLanguageDropdown = function (event) {
-    console.log('[i18n] toggleLanguageDropdown called!');
     if (event) event.stopPropagation();
     var dropdown = this.getDropdown();
-    console.log('[i18n] toggleLanguageDropdown: dropdown =', dropdown ? 'found' : 'null');
     if (!dropdown) {
-      console.log('[i18n] toggleLanguageDropdown: calling initDropdownContainer()');
       this.initDropdownContainer();
       dropdown = this.getDropdown();
-      console.log('[i18n] toggleLanguageDropdown: dropdown after init =', dropdown ? 'found' : 'null');
     }
     if (!dropdown) return;
 
@@ -462,13 +458,10 @@
     var styleDisplay = dropdown.style.display;
     var hasShowClass = dropdown.classList.contains('show');
     var isVisible = (styleDisplay === 'block') || hasShowClass;
-    console.log('[i18n] toggleLanguageDropdown: styleDisplay=', styleDisplay, 'hasShowClass=', hasShowClass, 'isVisible=', isVisible);
 
     if (isVisible) {
-      console.log('[i18n] toggleLanguageDropdown: closing dropdown');
       this.closeLanguageDropdown();
     } else {
-      console.log('[i18n] toggleLanguageDropdown: opening dropdown');
       this.openLanguageDropdown();
     }
   };
@@ -584,13 +577,10 @@ TranslationManager.prototype.openLanguageDropdown = function () {
     var dropdown = this.getDropdown();
     var anchor = document.getElementById('language-dropdown-anchor');
     
-    console.log('[i18n] openLanguageDropdown: dropdown from query =', dropdown ? 'found' : 'null');
     
     if (!dropdown) {
-      console.log('[i18n] openLanguageDropdown: calling initDropdownContainer()');
       this.initDropdownContainer();
       dropdown = this.getDropdown();
-      console.log('[i18n] openLanguageDropdown: dropdown after init =', dropdown ? 'found' : 'null');
     }
     
     if (!dropdown) {
@@ -641,11 +631,9 @@ TranslationManager.prototype.openLanguageDropdown = function () {
   TranslationManager.prototype.setupEventListeners = function () {
     // 防止重复设置事件监听器
     if (this._eventListenersSetup) {
-      console.log('[i18n] setupEventListeners: already setup, skipping');
       return;
     }
     this._eventListenersSetup = true;
-    console.log('[i18n] setupEventListeners: setting up event listeners');
     var self = this;
     var container = document.querySelector('.lang-dropdown-container');
     var dropdown = this.getDropdown();
@@ -677,7 +665,6 @@ TranslationManager.prototype.openLanguageDropdown = function () {
     // Bind toggle button (#lang-toggle-btn)
     // Defensive check: warn if multiple lang-toggle-btn elements exist (only first will be bound)
     var allToggleBtns = document.querySelectorAll('#lang-toggle-btn');
-    console.log('[i18n] setupEventListeners: found', allToggleBtns.length, 'lang-toggle-btn elements');
     if (allToggleBtns.length > 1) {
       console.warn(
         '[i18n] setupEventListeners: found ' + allToggleBtns.length + ' elements with id="lang-toggle-btn".' +
@@ -686,9 +673,7 @@ TranslationManager.prototype.openLanguageDropdown = function () {
     }
     var toggleBtn = document.getElementById('lang-toggle-btn');
     if (toggleBtn) {
-      console.log('[i18n] Binding click event to lang-toggle-btn');
       toggleBtn.addEventListener('click', function (event) {
-        console.log('[i18n] lang-toggle-btn clicked!');
         self.toggleLanguageDropdown(event);
       });
     } else {
@@ -703,7 +688,6 @@ TranslationManager.prototype.openLanguageDropdown = function () {
   TranslationManager.prototype.resetEventListeners = function () {
     this._eventListenersSetup = false;
     this.dropdownEl = null;
-    console.log('[i18n] resetEventListeners: flag reset, next setupEventListeners() will rebind');
   };
 
   TranslationManager.prototype.detectBrowserLanguage = function () {
@@ -792,12 +776,10 @@ TranslationManager.prototype.openLanguageDropdown = function () {
    */
   TranslationManager.prototype.recoverFromBfcache = function () {
     var self = this;
-    console.log('[i18n] Recovering from bfcache with language:', this.currentLanguage);
 
     // Check if dropdown exists in restored DOM, if not clear the cached reference
     var dropdown = document.getElementById('language-dropdown');
     if (!dropdown) {
-      console.log('[i18n] Dropdown not found in restored DOM, clearing cached reference');
       this.dropdownEl = null;
     }
 
@@ -838,7 +820,6 @@ TranslationManager.prototype.openLanguageDropdown = function () {
   // ─── SPA Navigation Support ──────────────────────────────────────────────────
   // Re-apply translations and re-bind events when SPA navigates to a new page
   document.addEventListener('spa:load', function () {
-    console.log('[i18n] SPA navigation detected, re-applying translations');
     translationManager.resetEventListeners();
     translationManager.applyTranslations().catch(function (err) {
       console.warn('[i18n] spa:load translation apply failed:', err);

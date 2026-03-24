@@ -24,25 +24,21 @@ var SmartPopupComponent = {
   init: function() {
     // Check if already loaded or loading
     if (this.state.loaded) {
-      console.log('[SmartPopupComponent] Already loaded');
       return Promise.resolve(true);
     }
     
     if (this.state.loading) {
-      console.log('[SmartPopupComponent] Currently loading...');
       return this.waitForLoad();
     }
 
     // Check if overlay already exists in DOM
     if (document.getElementById(this.config.overlayId)) {
-      console.log('[SmartPopupComponent] Overlay already exists in DOM');
       this.state.loaded = true;
       return Promise.resolve(true);
     }
 
     // Start loading
     this.state.loading = true;
-    console.log('[SmartPopupComponent] Loading template from:', this.config.templatePath);
     
     return this.loadTemplate()
       .then(function(success) {
@@ -50,10 +46,8 @@ var SmartPopupComponent = {
         SmartPopupComponent.state.loading = false;
         
         if (success) {
-          console.log('[SmartPopupComponent] Template loaded successfully');
           // Initialize smart popup if available
           if (window.smartPopup && typeof window.smartPopup.init === 'function') {
-            console.log('[SmartPopupComponent] Initializing smartPopup');
             window.smartPopup.init();
           }
         } else {
@@ -113,7 +107,6 @@ var SmartPopupComponent = {
       container.id = this.config.containerId;
       // Insert at the end of body
       document.body.appendChild(container);
-      console.log('[SmartPopupComponent] Created container:', this.config.containerId);
     }
     
     return container;
@@ -208,10 +201,7 @@ var SmartPopupComponent = {
 if (document.readyState === 'loading') {
   document.addEventListener('DOMContentLoaded', function() {
     // Don't auto-initialize, let the page decide when to load
-    console.log('[SmartPopupComponent] DOM loaded, ready for initialization');
   });
-} else {
-  console.log('[SmartPopupComponent] DOM already loaded, ready for initialization');
 }
 
 // Export for use in other scripts

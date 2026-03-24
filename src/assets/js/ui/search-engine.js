@@ -364,7 +364,6 @@
   function init() {
     var input = document.getElementById('ios-search-input');
     if (!input) {
-      console.log('[SearchEngine] ios-search-input not found, skipping init');
       return;
     }
 
@@ -423,7 +422,6 @@
       }
     });
 
-    console.log('[SearchEngine] Initialized');
   }
 
   /**
