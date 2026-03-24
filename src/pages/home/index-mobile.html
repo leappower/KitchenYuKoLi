@@ -66,14 +66,14 @@
 <!-- ═══ End Responsive Redirect ═══ -->
 
 <meta charset="utf-8"/>
-<meta name="description" content="Yukoli Smart Kitchen — AI cooking automation for the future of high-volume commercial food production.">
+<meta name="description" content="YuKoLi 智能厨具 - 专业商用厨房设备制造商，提供智能炒菜机、炖煮机、油炸炉、蒸煮设备等114款产品，覆盖食堂、中央厨房、餐饮连锁全场景，产品远销全球50+国家。">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Yukoli | Future of High-Volume Cooking">
-<meta property="og:description" content="Yukoli Smart Kitchen — AI cooking automation for the future of high-volume commercial food production.">
+<meta property="og:title" content="YuKoLi 智能厨具 | 专业商用厨房设备制造商">
+<meta property="og:description" content="YuKoLi 智能厨具 - 专业商用厨房设备制造商，提供智能炒菜机、炖煮机、油炸炉、蒸煮设备等114款产品。">
 <meta property="og:url" content="https://www.kitchen.yukoli.com/home/index-mobile.html">
 <meta property="og:image" content="https://www.kitchen.yukoli.com/assets/images/logo_header.webp">
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Yukoli | Future of High-Volume Cooking</title>
+<title>YuKoLi 智能厨具 | 专业商用厨房设备制造商</title>
 <link rel="preload" href="/assets/fonts/local-fonts.css" as="style">
 <link rel="preload" href="/assets/css/styles.css" as="style">
   <link rel="preload" href="/assets/css/tailwind.css" as="style">
@@ -85,18 +85,10 @@
 <link rel="stylesheet" href="/assets/css/z-index-system.css">
 <link rel="stylesheet" href="/assets/css/performance-optimizations.css"/>
 <style>
-        body { font-family: 'Public Sans', sans-serif; }
-        .thumb-optimized { padding-bottom: 100px; }
-        .glass-effect { backdrop-filter: blur(8px); background-color: rgba(255, 255, 255, 0.8); }
-        .dark .glass-effect { background-color: rgba(34, 22, 16, 0.8); }
-    </style>
-<style>
-    body {
-      min-height: 100dvh;
-    }
-  </style>
-  <!-- Dark mode: apply saved preference before first paint (prevents flash) -->
-  <script>(function(){
+  body { font-family: 'Public Sans', sans-serif; min-height: 100dvh; }
+</style>
+<!-- Dark mode: apply saved preference before first paint (prevents flash) -->
+<script>(function(){
 if(localStorage.getItem('darkMode')==='true')document.documentElement.classList.add('dark')})()</script>
 <link rel="stylesheet" href="/assets/css/skeleton.css"/>
 <link rel="icon" href="/assets/images/logo_header.webp" type="image/webp">
@@ -107,131 +99,252 @@ if(localStorage.getItem('darkMode')==='true')document.documentElement.classList.
   data-active="home">
 </navigator>
 
+<main id="spa-content" class="flex-1 overflow-x-hidden">
+  <!-- Hero Section -->
+  <section class="px-4 py-6">
+    <div
+      class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-bold uppercase tracking-widest mb-4"
+    >
+      <span class="relative flex h-2 w-2">
+        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
+        <span class="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
+      </span>
+      <span data-i18n="home_hero_badge">智能商厨设备领导品牌</span>
+    </div>
+    <h1 class="text-3xl font-black leading-tight tracking-tight text-slate-900 dark:text-white mb-3">
+      智能<span class="text-primary" data-i18n="home_hero_title_2">烹饪</span>，标准化出品。
+    </h1>
+    <p class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed mb-4" data-i18n="home_hero_desc">
+      YuKoLi 全系列智能商厨设备，涵盖爆炒、炖煮、蒸煮、煎炸、切配，为食堂、中央厨房、餐饮连锁提供一站式自动化解决方案。产品远销全球50+国家。
+    </p>
+    <div
+      class="relative w-full h-[220px] bg-slate-200 dark:bg-slate-800 rounded-2xl overflow-hidden shadow-xl border border-white/10 mb-5"
+      style="background-image: url(&quot;/assets/images/products/esl-bxc800.webp&quot;); background-size: cover; background-position: center;"
+    >
+      <div class="absolute bottom-3 left-3 right-3 p-3 bg-white/10 backdrop-blur-xl border border-white/20 rounded-xl">
+        <div class="flex justify-between items-center text-white">
+          <div>
+            <p class="text-[10px] font-bold uppercase opacity-70" data-i18n="home_hero_flagship_label">旗舰型号</p>
+            <p class="text-sm font-black">ESL-GQ90 全自动语音炒菜机</p>
+          </div>
+          <div class="text-right">
+            <p class="text-[10px] font-bold uppercase opacity-70" data-i18n="home_hero_efficiency_label">效率提升</p>
+            <p class="text-sm font-black text-primary">+340%</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="flex gap-3">
+      <a href="/products" class="flex-1 bg-primary text-white px-5 py-3 rounded-xl font-bold text-sm flex items-center justify-center gap-2 shadow-lg shadow-primary/25">
+        <span data-i18n="home_hero_btn_products">浏览全系列产品</span>
+        <span class="material-symbols-outlined text-lg">inventory_2</span>
+      </a>
+      <a href="/quote" class="flex-1 border-2 border-slate-200 dark:border-slate-800 px-5 py-3 rounded-xl font-bold text-sm flex items-center justify-center gap-2" data-i18n="home_hero_btn_hardware">
+        获取报价
+      </a>
+    </div>
+  </section>
 
+  <!-- Product Matrix -->
+  <section class="py-6 bg-slate-100 dark:bg-slate-900/50">
+    <div class="px-4">
+      <div class="flex justify-between items-end mb-4">
+        <div>
+          <h2 class="text-xl font-black tracking-tight mb-1" data-i18n="home_hw_title">核心产品</h2>
+          <p class="text-slate-500 text-xs" data-i18n="home_hw_subtitle">114款智能商厨设备，覆盖烹饪全流程</p>
+        </div>
+        <a class="text-primary font-bold text-sm flex items-center gap-1" href="/catalog/">
+          <span data-i18n="home_hw_view_inventory">查看全部</span>
+          <span class="material-symbols-outlined text-sm">arrow_forward</span>
+        </a>
+      </div>
+      <div class="flex overflow-x-auto gap-3 no-scrollbar pb-2">
+        <!-- ESL-GQ90 -->
+        <div class="min-w-[260px] bg-white dark:bg-slate-900 rounded-xl overflow-hidden shadow-sm border border-slate-200 dark:border-slate-800">
+          <div class="h-36 bg-cover bg-center bg-slate-200 dark:bg-slate-800" style="background-image: url(&quot;/assets/images/products/esl-gq90.webp&quot;)"></div>
+          <div class="p-3">
+            <h3 class="font-bold text-sm mb-1" data-i18n="product_esl_gq90_name">ESL-GQ90 全自动语音炒菜机</h3>
+            <p class="text-xs text-slate-500 mb-2" data-i18n="product_esl_gq90_desc">900mm大容量全自动语音智能炒菜机，单锅日产500+份。</p>
+            <span class="text-xs font-bold text-primary" data-i18n="home_hw_learn_more">了解更多</span>
+          </div>
+        </div>
+        <!-- ESL-XC120 -->
+        <div class="min-w-[260px] bg-white dark:bg-slate-900 rounded-xl overflow-hidden shadow-sm border border-slate-200 dark:border-slate-800">
+          <div class="h-36 bg-cover bg-center bg-slate-200 dark:bg-slate-800" style="background-image: url(&quot;/assets/images/products/esl-xc120.webp&quot;)"></div>
+          <div class="p-3">
+            <h3 class="font-bold text-sm mb-1" data-i18n="product_esl_xc120_name">ESL-XC120 搅拌炒锅炖烩机</h3>
+            <p class="text-xs text-slate-500 mb-2" data-i18n="product_esl_xc120_desc">120L大容量搅拌炒锅，集翻炒、炖煮、烩制于一体。</p>
+            <span class="text-xs font-bold text-primary" data-i18n="home_hw_learn_more">了解更多</span>
+          </div>
+        </div>
+        <!-- ESL-GB80 -->
+        <div class="min-w-[260px] bg-white dark:bg-slate-900 rounded-xl overflow-hidden shadow-sm border border-slate-200 dark:border-slate-800">
+          <div class="h-36 bg-cover bg-center bg-slate-200 dark:bg-slate-800" style="background-image: url(&quot;/assets/images/products/esl-gb80.webp&quot;)"></div>
+          <div class="p-3">
+            <h3 class="font-bold text-sm mb-1" data-i18n="product_esl_gb80_name">ESL-GB80 座地式电磁爆炒机</h3>
+            <p class="text-xs text-slate-500 mb-2" data-i18n="product_esl_gb80_desc">座地式电磁加热爆炒机，还原铁锅爆炒口感。</p>
+            <span class="text-xs font-bold text-primary" data-i18n="home_hw_learn_more">了解更多</span>
+          </div>
+        </div>
+        <!-- Y50 -->
+        <div class="min-w-[260px] bg-white dark:bg-slate-900 rounded-xl overflow-hidden shadow-sm border border-slate-200 dark:border-slate-800">
+          <div class="h-36 bg-cover bg-center bg-slate-200 dark:bg-slate-800" style="background-image: url(&quot;/assets/images/products/y50-fryer.webp&quot;)"></div>
+          <div class="p-3">
+            <h3 class="font-bold text-sm mb-1" data-i18n="product_y50_name">Y50 升降油炸炉</h3>
+            <p class="text-xs text-slate-500 mb-2" data-i18n="product_y50_desc">50L大容量电加热升降油炸炉，精准控温。</p>
+            <span class="text-xs font-bold text-primary" data-i18n="home_hw_learn_more">了解更多</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-<main id="spa-content" class="flex-1 thumb-optimized overflow-x-hidden">
-<!-- Hero Section: Product Art -->
-<div class="@container">
-<div class="px-4 py-3">
-<div class="bg-cover bg-center flex flex-col justify-end overflow-hidden rounded-xl min-h-[340px] relative shadow-xl" data-alt="Professional high-end commercial kitchen range with stainless steel finishes" style="background-image: linear-gradient(to top, rgba(34, 22, 16, 0.9) 0%, rgba(34, 22, 16, 0) 60%)">
-<div class="flex flex-col p-5 gap-2">
-<span class="bg-primary text-white text-[10px] font-bold px-2 py-0.5 rounded-full w-fit uppercase" data-i18n="home_mobile_hero_badge">New Release</span>
-<h1 class="text-white text-3xl font-bold leading-tight font-display" data-i18n="home_mobile_hero_title">The Future of High-Volume Cooking</h1>
-<p class="text-slate-200 text-sm" data-i18n="home_mobile_hero_desc">Next-gen IoT integration for the modern workspace.</p>
-</div>
-</div>
-</div>
-</div>
-<!-- ROI Calculator CTA (Immediate) -->
-<div class="px-4 py-2 @container">
-<div class="flex flex-col gap-4 rounded-xl border border-primary/20 bg-white dark:bg-slate-900 p-5 shadow-sm">
-<div class="flex items-start gap-4">
-<div class="bg-primary/10 p-3 rounded-lg text-primary">
-<span class="material-symbols-outlined text-3xl">calculate</span>
-</div>
-<div class="flex flex-col gap-1">
-<p class="text-slate-900 dark:text-slate-100 text-lg font-bold leading-tight" data-i18n="home_mobile_roi_title">Calculate Your ROI</p>
-<p class="text-slate-500 dark:text-slate-400 text-sm leading-normal" data-i18n="home_mobile_roi_desc">Save up to 30% on labor and energy costs within 12 months.</p>
-</div>
-</div>
-<a href="/roi" class="w-full flex cursor-pointer items-center justify-center overflow-hidden rounded-xl h-12 bg-primary text-white text-base font-bold transition-transform active:scale-95 shadow-lg shadow-primary/25">
-<span class="truncate" data-i18n="home_mobile_btn_calculator">Launch Profit Calculator</span>
-<span class="material-symbols-outlined ml-2">arrow_forward</span>
-</a>
-</div>
-</div>
-<!-- Smart Product Lineup (50%) -->
-<section class="py-6">
-<div class="flex items-center justify-between px-4 mb-4">
-<h2 class="text-slate-900 dark:text-slate-100 text-xl font-bold tracking-tight" data-i18n="home_mobile_lineup_title">Smart Lineup</h2>
-<a class="text-primary text-sm font-semibold" href="/catalog/" data-i18n="quote_view_all">View All</a>
-</div>
-<div class="flex overflow-x-auto gap-4 px-4 no-scrollbar">
-<!-- Card 1 -->
-<div class="min-w-[280px] bg-white dark:bg-slate-900 rounded-xl overflow-hidden shadow-sm border border-slate-200 dark:border-slate-800">
-<div class="h-40 bg-cover bg-center" data-alt="Modern smart industrial oven with digital display" style="background-image: none">
-<div class="p-4">
-<h3 class="font-bold text-lg mb-1" data-i18n="product_robo_chef_s2">Robo-Chef S2</h3>
-<p class="text-slate-500 dark:text-slate-400 text-xs mb-3" data-i18n="product_robo_chef_s2_desc">High-precision automated cooking with haptic feedback sensors.</p>
-<div class="flex items-center justify-between">
-<span class="text-primary font-bold">$12,499</span>
-<button class="bg-primary/10 text-primary p-2 rounded-lg">
-<span class="material-symbols-outlined">add_shopping_cart</span>
-</button>
-</div>
-</div>
-</div>
-<!-- Card 2 -->
-<div class="min-w-[280px] bg-white dark:bg-slate-900 rounded-xl overflow-hidden shadow-sm border border-slate-200 dark:border-slate-800">
-<div class="h-40 bg-cover bg-center" data-alt="Industrial smart dishwasher with clean interface" style="background-image: none">
-<div class="p-4">
-<h3 class="font-bold text-lg mb-1" data-i18n="product_omni_oven_x1">Omni-Oven X1</h3>
-<p class="text-slate-500 dark:text-slate-400 text-xs mb-3" data-i18n="product_omni_oven_x1_desc">Multi-zone intelligent convection with 0.1°C precision controls.</p>
-<div class="flex items-center justify-between">
-<span class="text-primary font-bold">$8,250</span>
-<button class="bg-primary/10 text-primary p-2 rounded-lg">
-<span class="material-symbols-outlined">add_shopping_cart</span>
-</button>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</section>
-<!-- Solution Highlights (30%) -->
-<section class="bg-primary/5 py-8">
-<div class="px-4 mb-6">
-<h2 class="text-slate-900 dark:text-slate-100 text-xl font-bold tracking-tight" data-i18n="home_mobile_ecosystem_title">The 2026 Ecosystem</h2>
-</div>
-<div class="grid grid-cols-1 gap-4 px-4">
-<div class="flex items-center gap-4 bg-white dark:bg-slate-900 p-4 rounded-xl shadow-sm">
-<div class="bg-orange-100 dark:bg-orange-900/30 p-3 rounded-full text-primary">
-<span class="material-symbols-outlined">bolt</span>
-</div>
-<div>
-<h4 class="font-bold" data-i18n="home_mobile_feature1_title">Energy Harvest</h4>
-<p class="text-xs text-slate-500" data-i18n="home_mobile_feature1_desc">Self-optimizing power consumption.</p>
-</div>
-</div>
-<div class="flex items-center gap-4 bg-white dark:bg-slate-900 p-4 rounded-xl shadow-sm">
-<div class="bg-blue-100 dark:bg-blue-900/30 p-3 rounded-full text-blue-600">
-<span class="material-symbols-outlined">hub</span>
-</div>
-<div>
-<h4 class="font-bold" data-i18n="home_mobile_feature2_title">Central Hub</h4>
-<p class="text-xs text-slate-500" data-i18n="home_mobile_feature2_desc">One dashboard for all kitchen nodes.</p>
-</div>
-</div>
-<div class="flex items-center gap-4 bg-white dark:bg-slate-900 p-4 rounded-xl shadow-sm">
-<div class="bg-green-100 dark:bg-green-900/30 p-3 rounded-full text-green-600">
-<span class="material-symbols-outlined">sanitizer</span>
-</div>
-<div>
-<h4 class="font-bold" data-i18n="home_mobile_feature3_title">Auto-Sanitize</h4>
-<p class="text-xs text-slate-500" data-i18n="home_mobile_feature3_desc">UV-C integration for 24/7 safety.</p>
-</div>
-</div>
-</div>
-</section>
-<!-- Newsletter / Lead Magnet -->
-<section class="p-4 py-8 mb-16">
-<div class="bg-background-dark text-white p-6 rounded-2xl relative overflow-hidden">
-<div class="relative z-10">
-<h3 class="text-2xl font-bold mb-2" data-i18n="home_mobile_cta_title">Join the Future</h3>
-<p class="text-slate-400 text-sm mb-4" data-i18n="home_mobile_cta_desc">Get the 2026 Kitchen Automation Guide (PDF).</p>
-<div class="flex gap-2">
-<input class="flex-1 rounded-lg bg-white/10 border-white/20 text-white placeholder:text-slate-500 text-sm" placeholder="Email" type="email"/>
-<button class="bg-primary px-4 py-2 rounded-lg font-bold" data-i18n="form_btn_send">Send</button>
-</div>
-</div>
-<div class="absolute -right-10 -bottom-10 opacity-10">
-<span class="material-symbols-outlined text-[160px]" data-i18n="home_robot_2">robot_2</span>
-</div>
-</div>
-</section>
+  <!-- 行业解决方案 -->
+  <section class="py-6 px-4">
+    <h2 class="text-xl font-black tracking-tight mb-4" data-i18n="home_int_title">覆盖全行业的智慧厨房方案</h2>
+    <div class="space-y-3">
+      <div class="flex items-center gap-3 bg-white dark:bg-slate-900 p-4 rounded-xl shadow-sm border border-slate-200 dark:border-slate-800">
+        <span class="material-symbols-outlined text-primary text-2xl flex-shrink-0">apartment</span>
+        <div>
+          <h4 class="font-bold text-sm mb-0.5" data-i18n="home_solution_canteen">学校/企业食堂</h4>
+          <p class="text-xs text-slate-500" data-i18n="home_int_enterprise_desc">大批量标准化出餐，智能炒菜机一人操作即可满足千人食堂需求。</p>
+        </div>
+      </div>
+      <div class="flex items-center gap-3 bg-white dark:bg-slate-900 p-4 rounded-xl shadow-sm border border-slate-200 dark:border-slate-800">
+        <span class="material-symbols-outlined text-primary text-2xl flex-shrink-0">factory</span>
+        <div>
+          <h4 class="font-bold text-sm mb-0.5" data-i18n="home_solution_central">中央厨房</h4>
+          <p class="text-xs text-slate-500" data-i18n="home_int_cloud_desc">从前处理到烹饪全流程自动化，统一口味、统一标准、统一配送。</p>
+        </div>
+      </div>
+      <div class="flex items-center gap-3 bg-white dark:bg-slate-900 p-4 rounded-xl shadow-sm border border-slate-200 dark:border-slate-800">
+        <span class="material-symbols-outlined text-primary text-2xl flex-shrink-0">storefront</span>
+        <div>
+          <h4 class="font-bold text-sm mb-0.5" data-i18n="home_solution_chain">餐饮连锁</h4>
+          <p class="text-xs text-slate-500" data-i18n="home_int_health_desc">菜谱云端下发，所有门店同步出品，保证品牌口味一致性。</p>
+        </div>
+      </div>
+    </div>
+  </section>
 
+  <!-- Stats -->
+  <section class="py-6 bg-slate-100 dark:bg-slate-900/50">
+    <div class="px-4">
+      <div class="grid grid-cols-2 gap-3">
+        <div class="bg-white dark:bg-slate-800 rounded-xl p-4 text-center border border-slate-200 dark:border-slate-700">
+          <p class="text-2xl font-black text-primary">114</p>
+          <p class="text-xs font-bold text-slate-500 uppercase" data-i18n="home_stat_products">产品型号</p>
+        </div>
+        <div class="bg-white dark:bg-slate-800 rounded-xl p-4 text-center border border-slate-200 dark:border-slate-700">
+          <p class="text-2xl font-black text-primary" data-i18n="home_stat_countries">50+</p>
+          <p class="text-xs font-bold text-slate-500 uppercase" data-i18n="home_stat_countries_label">出口国家</p>
+        </div>
+        <div class="bg-white dark:bg-slate-800 rounded-xl p-4 text-center border border-slate-200 dark:border-slate-700">
+          <p class="text-2xl font-black text-primary">20+</p>
+          <p class="text-xs font-bold text-slate-500 uppercase" data-i18n="home_stat_years">年制造经验</p>
+        </div>
+        <div class="bg-white dark:bg-slate-800 rounded-xl p-4 text-center border border-slate-200 dark:border-slate-700">
+          <p class="text-2xl font-black text-primary">CE/UL</p>
+          <p class="text-xs font-bold text-slate-500 uppercase" data-i18n="home_stat_certified">国际认证</p>
+        </div>
+      </div>
+    </div>
+  </section>
 
+  <!-- 核心优势 -->
+  <section class="py-6 px-4">
+    <div class="text-center mb-4">
+      <h2 class="text-xl font-black tracking-tight mb-1" data-i18n="home_advantage_title">为什么选择 YuKoLi</h2>
+      <p class="text-slate-500 text-xs" data-i18n="home_advantage_subtitle">20年商用厨具制造经验，产品远销全球50+国家</p>
+    </div>
+    <div class="grid grid-cols-1 gap-3">
+      <div class="bg-white dark:bg-slate-900 rounded-xl p-4 flex items-center gap-3 border border-slate-200 dark:border-slate-800">
+        <div class="size-10 bg-primary/10 rounded-xl flex items-center justify-center flex-shrink-0">
+          <span class="material-symbols-outlined text-primary text-xl">groups</span>
+        </div>
+        <div>
+          <h4 class="font-bold text-sm" data-i18n="home_advantage_labor_title">节省人工 70%</h4>
+          <p class="text-xs text-slate-500" data-i18n="home_advantage_labor_desc">1台智能炒菜机可替代3-5名厨师，降低人力成本</p>
+        </div>
+      </div>
+      <div class="bg-white dark:bg-slate-900 rounded-xl p-4 flex items-center gap-3 border border-slate-200 dark:border-slate-800">
+        <div class="size-10 bg-primary/10 rounded-xl flex items-center justify-center flex-shrink-0">
+          <span class="material-symbols-outlined text-primary text-xl">verified</span>
+        </div>
+        <div>
+          <h4 class="font-bold text-sm" data-i18n="home_advantage_quality_title">标准化出品</h4>
+          <p class="text-xs text-slate-500" data-i18n="home_advantage_quality_desc">智能控温控时，800+菜谱程序，每份菜品品质一致</p>
+        </div>
+      </div>
+      <div class="bg-white dark:bg-slate-900 rounded-xl p-4 flex items-center gap-3 border border-slate-200 dark:border-slate-800">
+        <div class="size-10 bg-primary/10 rounded-xl flex items-center justify-center flex-shrink-0">
+          <span class="material-symbols-outlined text-primary text-xl">bolt</span>
+        </div>
+        <div>
+          <h4 class="font-bold text-sm" data-i18n="home_advantage_energy_title">节能30%+</h4>
+          <p class="text-xs text-slate-500" data-i18n="home_advantage_energy_desc">电磁加热技术，比传统燃气灶节能30%以上</p>
+        </div>
+      </div>
+      <div class="bg-white dark:bg-slate-900 rounded-xl p-4 flex items-center gap-3 border border-slate-200 dark:border-slate-800">
+        <div class="size-10 bg-primary/10 rounded-xl flex items-center justify-center flex-shrink-0">
+          <span class="material-symbols-outlined text-primary text-xl">public</span>
+        </div>
+        <div>
+          <h4 class="font-bold text-sm" data-i18n="home_advantage_service_title">全球服务</h4>
+          <p class="text-xs text-slate-500" data-i18n="home_advantage_service_desc">CE/UL认证，全球物流，本地化技术支持与培训服务</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 资质认证 -->
+  <section class="py-6 border-t border-slate-200 dark:border-slate-800">
+    <div class="px-4">
+      <div class="text-center mb-4">
+        <h3 class="text-lg font-black mb-1" data-i18n="home_trust_title">品质保障，全球信赖</h3>
+        <p class="text-slate-500 text-xs" data-i18n="home_trust_subtitle">通过国际权威认证，产品远销全球50+国家</p>
+      </div>
+      <div class="flex flex-wrap justify-center gap-3">
+        <div class="flex items-center gap-1.5 border border-slate-300 dark:border-slate-700 px-3 py-2 rounded-lg font-bold text-sm">
+          <span class="material-symbols-outlined text-base">verified</span>
+          CE 认证
+        </div>
+        <div class="flex items-center gap-1.5 border border-slate-300 dark:border-slate-700 px-3 py-2 rounded-lg font-bold text-sm">
+          <span class="material-symbols-outlined text-base">electric_bolt</span>
+          UL 认证
+        </div>
+        <div class="flex items-center gap-1.5 border border-slate-300 dark:border-slate-700 px-3 py-2 rounded-lg font-bold text-sm">
+          <span class="material-symbols-outlined text-base">health_and_safety</span>
+          ISO 9001
+        </div>
+        <div class="flex items-center gap-1.5 border border-slate-300 dark:border-slate-700 px-3 py-2 rounded-lg font-bold text-sm">
+          <span class="material-symbols-outlined text-base">workspace_premium</span>
+          20年品牌
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Bottom -->
+  <section class="px-4 py-6 mb-8">
+    <div class="bg-primary rounded-2xl p-6 text-center text-white relative overflow-hidden">
+      <div class="absolute top-0 right-0 size-32 bg-white/10 rounded-full -mr-16 -mt-16"></div>
+      <div class="relative z-10">
+        <h2 class="text-2xl font-black mb-3" data-i18n="home_cta_title">准备好升级您的厨房了吗？</h2>
+        <p class="text-white/80 text-sm mb-5" data-i18n="home_cta_desc">
+          与 YuKoLi 合作，加入全球3000+餐饮企业的智能化升级行列。免费获取定制方案。
+        </p>
+        <div class="flex flex-col gap-2">
+          <a href="/quote" class="bg-white text-primary px-5 py-3 rounded-xl font-bold text-sm text-center" data-i18n="home_cta_btn_quote">
+            免费获取报价
+          </a>
+          <a href="/products" class="bg-slate-900 text-white px-5 py-3 rounded-xl font-bold text-sm text-center" data-i18n="home_cta_btn_products">
+            浏览全系列产品
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
 </main>
 
 <script defer src="/assets/js/ui/products-dropdown.js?v=20260322-v3"></script>
@@ -250,15 +363,11 @@ if(localStorage.getItem('darkMode')==='true')document.documentElement.classList.
   });
 </script>
 
-
-
 <!-- ═══ Footer Component ═══ -->
 <footer data-component="footer"
   data-variant="mobile"
   data-active="home">
 </footer>
-
-
 
 <script src="/assets/js/utils/device-utils.js"></script>
 <script src="/assets/js/spa-router.js"></script>

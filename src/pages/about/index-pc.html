@@ -203,12 +203,13 @@
             </span>
           </p>
           <div class="flex items-center gap-4">
-            <button
+            <a
+              href="#story"
               class="bg-primary text-white px-8 py-4 rounded-xl font-bold flex items-center gap-2 hover:shadow-lg hover:shadow-primary/20 transition-all"
             >
               <span data-i18n="about_hero_btn">了解我们的故事</span>
               <span class="material-symbols-outlined">arrow_downward</span>
-            </button>
+            </a>
           </div>
         </div>
         <div class="w-full lg:w-1/2 relative">
@@ -429,7 +430,7 @@
       <!-- Certifications -->
       <section class="mb-24">
         <h2 class="text-3xl font-bold text-center mb-12" data-i18n="about_cert_title" id="cert">全球权威认证</h2>
-        <div class="grid grid-cols-3 gap-6">
+        <div class="grid grid-cols-2 lg:grid-cols-4 gap-6">
           <div
             class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-8 text-center hover:border-primary/50 transition-all"
           >
@@ -447,6 +448,12 @@
           >
             <div class="text-4xl font-black text-slate-400 mb-4">ISO 9001</div>
             <p class="text-sm font-bold text-slate-600 dark:text-slate-400" data-i18n="about_cert_iso">质量管理体系</p>
+          </div>
+          <div
+            class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-8 text-center hover:border-primary/50 transition-all"
+          >
+            <div class="text-4xl font-black text-slate-400 mb-4">RoHS</div>
+            <p class="text-sm font-bold text-slate-600 dark:text-slate-400" data-i18n="about_cert_rohs">环保有害物质限制</p>
           </div>
         </div>
       </section>
