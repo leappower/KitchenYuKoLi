@@ -584,9 +584,9 @@
             "</p></div>",
           "</div>",
           '<div class="mt-auto grid grid-cols-2 gap-1 shrink-0">',
-          '<button data-action="show-popup" class="inline-flex h-[36px] items-center justify-center gap-1 rounded-lg border border-primary/20 bg-primary/5 px-2 py-1.5 text-xs font-bold text-primary hover:bg-primary/10 transition-colors"><span class="material-symbols-outlined text-[10px]">tune</span><span class="truncate">' +
+          '<a href="/pdp/?model=' + encodeURIComponent(p.model || p.name || '') + '" class="inline-flex h-[36px] items-center justify-center gap-1 rounded-lg border border-primary/20 bg-primary/5 px-2 py-1.5 text-xs font-bold text-primary hover:bg-primary/10 transition-colors"><span class="material-symbols-outlined text-[10px]">tune</span><span class="truncate">' +
             tr("product_optional_specs", "Optional") +
-            "</span></button>",
+            "</span></a>",
           '<button data-action="show-popup" class="inline-flex h-[36px] items-center justify-center gap-1 rounded-lg bg-primary px-2 py-1.5 text-xs font-bold text-white hover:bg-primary/90 transition-colors"><span class="material-symbols-outlined text-[10px]">request_page</span><span class="truncate">' +
             tr("product_request", "Request") +
             "</span></button>",

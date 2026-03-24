@@ -35,6 +35,9 @@
       "/support/": "/support/index.html",
       "/thank-you/": "/thank-you/index.html",
       "/landing/": "/landing/index.html",
+      "/catalog/": "/catalog/index.html",
+      "/applications/cases/": "/applications/cases/index.html",
+      "/pdp/": "/pdp/index.html",
     },
 
     // 设备特定页面映射
