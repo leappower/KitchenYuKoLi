@@ -12,22 +12,45 @@
 
 /* ─── CSS Custom Properties ─────────────────────────────────────── */
 :root {
-  --color-primary:          #ec5b13;
-  --color-primary-10:       rgb(236, 91, 19, 0.1);
-  --color-primary-20:       rgb(236, 91, 19, 0.2);
-  --color-bg-light:         #f8f6f6;
-  --color-bg-dark:          #221610;
-  --font-display:           'Public Sans', sans-serif;
-  --radius-sm:              0.25rem;
-  --radius-md:              0.5rem;
-  --radius-lg:              0.75rem;
-  --radius-full:            9999px;
-  --transition-base:        150ms ease;
-  --transition-colors:      colors 300ms ease;
+  --color-primary: #ec5b13;
+  --color-primary-10: rgb(236, 91, 19, 0.1);
+  --color-primary-20: rgb(236, 91, 19, 0.2);
+  --color-bg-light: #f8f6f6;
+  --color-bg-dark: #221610;
+  --font-display: "Public Sans", sans-serif;
+  --radius-sm: 0.25rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 0.75rem;
+  --radius-full: 9999px;
+  --transition-base: 150ms ease;
+  --transition-colors: colors 300ms ease;
+  /* ── Design Tokens: 统一间距 ── */
+  --section-py: 5rem; /* py-20 */
+  --section-py-lg: 6rem; /* py-24 */
+  --container-px: 1.5rem; /* px-6 */
+  --container-gap: 2rem; /* gap-8 */
+}
+
+@media (width >= 768px) {
+  :root {
+    --container-px: 2.5rem;
+  }
+}
+@media (width >= 1024px) {
+  :root {
+    --container-px: 4rem;
+  }
+}
+@media (width >= 1280px) {
+  :root {
+    --container-px: 5rem;
+  }
 }
 
 /* ─── Base Reset ─────────────────────────────────────────────────── */
-*, *::before, *::after {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
@@ -83,17 +106,67 @@ html.dark body {
  * </script>
  */
 
+/* ─── Design Tokens ──────────────────────────────────────────────── */
+/* 统一间距系统 - 所有页面遵循此规范
+   Container 左右边距: px-6 md:px-10 lg:px-16 xl:px-20
+   Section 上下间距:   py-20 (标准) / py-24 (大区块)
+   元素内部间距:       gap-8 (标准) / gap-12 (宽松)
+   卡片圆角:           rounded-xl (12px) / rounded-2xl (16px)
+   区块圆角:           rounded-3xl (24px)
+*/
+
+/* 统一容器 - 替代各页面不一致的 px-6/px-8/px-10/px-16/px-20 */
+.section-container {
+  width: 100%;
+  padding-left: var(--container-px);
+  padding-right: var(--container-px);
+}
+
 /* ─── Brand Utility Classes ──────────────────────────────────────── */
-.text-primary     { color: var(--color-primary); }
-.bg-primary       { background-color: var(--color-primary); }
-.border-primary   { border-color: var(--color-primary); }
+.text-primary {
+  color: var(--color-primary);
+}
+.bg-primary {
+  background-color: var(--color-primary);
+}
+.border-primary {
+  border-color: var(--color-primary);
+}
 
 /* ─── Typography Scale ───────────────────────────────────────────── */
-h1, h2, h3, h4, h5, h6 {
+/* 统一排版规范 - 三端(PC/Tablet/Mobile)遵循此体系
+   字体: Public Sans (全局), font-weight: 400/600/700/900
+   标题层级:
+     h1 (Hero): PC 6xl→5xl→4xl | Tablet 4xl→3xl | Mobile 3xl→2xl
+     h2 (Section): PC 4xl | Tablet 3xl | Mobile 2xl
+     h3 (Card): PC 2xl | Tablet xl | Mobile lg
+     h4 (Sub): PC xl | Mobile lg
+   正文: text-base (PC) | text-sm (Mobile)
+   辅助: text-sm (PC) | text-xs (Mobile)
+   强调色: text-primary (#ec5b13)
+   正文色: text-slate-900 dark:text-white
+   辅助色: text-slate-500 dark:text-slate-400
+*/
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-family: var(--font-display);
   font-weight: 900;
   line-height: 1.1;
   letter-spacing: -0.02em;
+}
+
+/* Section 标题统一: PC 4xl / Tablet 3xl / Mobile 2xl */
+h2.section-title {
+  font-size: clamp(1.5rem, 3vw, 2.25rem); /* 2xl → 4xl */
+}
+
+/* 卡片标题统一: PC 2xl / Mobile xl */
+h3.card-title {
+  font-size: clamp(1.125rem, 2vw, 1.5rem); /* xl → 2xl */
 }
 
 /* ─── Links ──────────────────────────────────────────────────────── */
@@ -115,7 +188,8 @@ img {
 }
 
 /* ─── Buttons ────────────────────────────────────────────────────── */
-button, [role="button"] {
+button,
+[role="button"] {
   cursor: pointer;
   font-family: var(--font-display);
 }
@@ -211,7 +285,11 @@ main#spa-content {
 
 /* ─── Material Symbols helper ────────────────────────────────────── */
 .material-symbols-outlined {
-  font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+  font-variation-settings:
+    "FILL" 0,
+    "wght" 400,
+    "GRAD" 0,
+    "opsz" 24;
   vertical-align: middle;
   line-height: 1;
 }
@@ -238,7 +316,10 @@ main#spa-content {
   margin-bottom: 1rem;
   color: #475569;
 }
-.md-content ul, .md-content ol { margin: 0.75rem 0 1rem 1.5rem; }
+.md-content ul,
+.md-content ol {
+  margin: 0.75rem 0 1rem 1.5rem;
+}
 
 .md-content li {
   margin-bottom: 0.375rem;
@@ -250,7 +331,7 @@ main#spa-content {
   padding: 0.15em 0.4em;
   border-radius: 0.25rem;
   font-size: 0.875em;
-  font-family: 'Fira Code', 'Courier New', monospace;
+  font-family: "Fira Code", "Courier New", monospace;
 }
 
 .md-content pre {
@@ -331,17 +412,18 @@ html.dark .md-content code {
 
 /* ─── §3.2 Button Hover — CTA lift & deepen ─────────────────────────────── */
 
-/* Applied via JS to .btn-cta / .btn-primary classes */
+/* ─── §3.4 Primary Button Hover ───────────────────────────────────────── */
+/* 所有 bg-primary 按钮的 hover 效果：加深背景色 + 微上浮 + 阴影
+   通过 Tailwind 的 group/peer 机制或直接 class 触发 */
 .btn-cta,
-.btn-primary {
-  transition: background-color 200ms ease, transform 200ms ease, box-shadow 200ms ease;
-}
-
-.btn-cta:hover,
-.btn-primary:hover {
+.btn-primary,
+a.bg-primary:hover,
+button.bg-primary:hover,
+a.bg-primary[class*="hover:"]:hover,
+button.bg-primary[class*="hover:"]:hover {
   background-color: #d4521a !important;
-  transform: translateY(-4px) !important;
-  box-shadow: 0 6px 16px rgb(242 101 34 / 0.4) !important;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgb(242 101 34 / 0.35);
 }
 
 /* ─── §4 Form Inline Validation ──────────────────────────────────────────── */

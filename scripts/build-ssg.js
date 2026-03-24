@@ -101,6 +101,7 @@ const ROUTES = [
   { slug: 'roi',          navId: 'roi' },
   { slug: 'quote',        navId: 'quote' },
   { slug: 'support',      navId: 'support' },
+  { slug: 'news',         navId: 'news' },
   { slug: 'about',        navId: 'about' },
   { slug: 'contact',      navId: 'contact' },
   { slug: 'solutions/fast-food',       navId: 'solutions' },
@@ -546,7 +547,7 @@ function main() {
   // Step 6: Patch CSS files for basePath (font URLs in local-fonts.css)
   if (BASE_PATH) {
     log('\nStep 6: Patching CSS files for basePath...');
-    const cssDir = path.join(DIST_DIR, 'assets', 'css');
+    const _cssDir = path.join(DIST_DIR, 'assets', 'css');
     const fontsCssPath = path.join(DIST_DIR, 'assets', 'fonts', 'local-fonts.css');
     
     // Patch local-fonts.css font URLs

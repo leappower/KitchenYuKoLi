@@ -1,324 +1,444 @@
-<!DOCTYPE html>
-<html class="light" lang="zh-CN"><head>
-<link rel="canonical" href="/applications/canteen/"/>
-<link rel="alternate" media="only screen and (max-width: 767px)" href="/applications/canteen/index-mobile.html"/>
-<link rel="alternate" media="only screen and (min-width: 768px) and (max-width: 1279px)" href="/applications/canteen/index-tablet.html"/>
-<link rel="alternate" media="only screen and (min-width: 1280px)" href="/applications/canteen/index-pc.html"/>
-<script>
-(function(){
-  if (window.__redirectChecked) return;
-  window.__redirectChecked = true;
-  var urlParams = new URLSearchParams(location.search);
-  var cleanUrl = urlParams.get('clean-url');
-  if (cleanUrl) { history.replaceState({}, '', cleanUrl); return; }
-  if (window.__spaNavigating) return;
-  var currentFile = location.pathname.split('/').pop();
-  if (window.DeviceUtils && window.DeviceUtils.isDirectoryURL()) return;
-  if (window.DeviceUtils && window.DeviceUtils.shouldRedirect(currentFile)) {
-    var deviceType = window.DeviceUtils.getDeviceType();
-    var targetFile = deviceType === window.DeviceUtils.DeviceType.MOBILE ? 'index-mobile.html' :
-                     deviceType === window.DeviceUtils.DeviceType.TABLET ? 'index-tablet.html' : 'index-pc.html';
-    location.href = targetFile;
-  }
-})();
-</script>
-<meta charset="utf-8"/>
-<meta name="description" content="食堂中央厨房智能解决方案 - 大容量自动化设备，满足千人级供餐需求，食品安全可追溯。">
-<meta name="keywords" content="食堂,中央厨房,团餐,大型厨房,食品安全">
-<meta property="og:type" content="website">
-<meta property="og:url" content="https://www.kitchen.yukoli.com/applications/canteen/">
-<meta property="og:image" content="https://www.kitchen.yukoli.com/assets/images/og-canteen-solution.webp">
-<meta property="og:title" content="Yukoli | 食堂/中央厨房智能厨房解决方案">
-<meta property="og:description" content="为大型食堂和中央厨房提供标准化、规模化智能烹饪解决方案，日产万份以上。">
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Yukoli | 食堂/中央厨房智能厨房解决方案</title>
-<link rel="preload" href="/assets/fonts/local-fonts.css" as="style">
-<link rel="preload" href="/assets/css/styles.css" as="style">
-<link rel="preload" href="/assets/css/tailwind.css" as="style">
-<link href="/assets/fonts/local-fonts.css" rel="stylesheet"/>
-<link rel="stylesheet" href="/assets/css/styles.css">
-<link rel="stylesheet" href="/assets/css/tailwind.css">
-<link rel="stylesheet" href="/assets/css/z-index-system.css">
-<link rel="stylesheet" href="/assets/css/performance-optimized.css"/>
-<script>(function(){if(localStorage.getItem('darkMode')==='true')document.documentElement.classList.add('dark')})()</script>
-<link rel="stylesheet" href="/assets/css/skeleton.css"/>
-<link rel="icon" href="/assets/images/logo_header.webp" type="image/webp">
-</head>
-<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 antialiased transition-colors duration-300 overflow-x-hidden">
-<navigator data-component="navigator" data-variant="pc" data-active="solutions" data-cta-text-key="nav_get_quote" data-cta-href="/quote"></navigator>
-<main id="spa-content">
-<section class="relative py-20 overflow-hidden">
-  <div class="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-orange-100/30 dark:from-primary/10 dark:to-orange-900/20"></div>
-  <div class="relative max-w-7xl mx-auto px-6 lg:px-8">
-    <div class="flex flex-col lg:flex-row items-center gap-12">
-      <div class="w-full lg:w-1/2 flex flex-col gap-6">
-        <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 text-primary text-sm font-bold uppercase tracking-wider w-fit">
-          <span class="material-symbols-outlined">restaurant</span>
-          食堂/中央厨房解决方案
-        </div>
-        <h1 class="text-5xl lg:text-6xl font-black leading-tight tracking-tighter">
-          智能厨房<br/><span class="text-primary">赋能食堂/中央厨房</span>
-        </h1>
-        <p class="text-xl text-slate-600 dark:text-slate-400 max-w-xl leading-relaxed">
-          大容量自动化设备，满足千人级供餐需求，食品安全可追溯。
-        </p>
-        <div class="flex items-center gap-4 pt-4">
-          <a href="/quote/" class="bg-primary text-white px-8 py-4 rounded-xl font-bold flex items-center gap-2 hover:shadow-lg hover:shadow-primary/20 transition-all">
-            获取专属方案 <span class="material-symbols-outlined">arrow_forward</span>
-          </a>
-          <a href="/roi/" class="px-8 py-4 rounded-xl font-bold flex items-center gap-2 border-2 border-slate-300 dark:border-slate-600 hover:border-primary hover:text-primary transition-all">
-            <span class="material-symbols-outlined">calculate</span> ROI计算
-          </a>
-        </div>
-      </div>
-      <div class="w-full lg:w-1/2 relative">
-        <div class="absolute -inset-4 bg-primary/20 rounded-3xl blur-3xl"></div>
-        <div class="relative rounded-2xl overflow-hidden shadow-2xl">
-          <img loading="eager" alt="食堂/中央厨房智能厨房" class="w-full h-[500px] object-cover" src="/assets/images/applications/canteen-hero.webp" onerror="this.src='https://images.unsplash.com/photo-1556910103-1c02745aae4d?w=1200&h=800&fit=crop'">
-          <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
-          <div class="absolute bottom-0 left-0 right-0 p-8">
-            <div class="flex items-center gap-4 text-white">
-              <div class="flex -space-x-3">
-                <div class="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-xs font-bold">Y</div>
+<!doctype html>
+<html class="light" lang="zh-CN">
+  <head>
+    <link rel="canonical" href="/applications/canteen/" />
+    <link rel="alternate" media="only screen and (max-width: 767px)" href="/applications/canteen/index-mobile.html" />
+    <link
+      rel="alternate"
+      media="only screen and (min-width: 768px) and (max-width: 1279px)"
+      href="/applications/canteen/index-tablet.html"
+    />
+    <link rel="alternate" media="only screen and (min-width: 1280px)" href="/applications/canteen/index-pc.html" />
+    <script>
+      (function () {
+        if (window.__redirectChecked) return;
+        window.__redirectChecked = true;
+        var urlParams = new URLSearchParams(location.search);
+        var cleanUrl = urlParams.get("clean-url");
+        if (cleanUrl) {
+          history.replaceState({}, "", cleanUrl);
+          return;
+        }
+        if (window.__spaNavigating) return;
+        var currentFile = location.pathname.split("/").pop();
+        if (window.DeviceUtils && window.DeviceUtils.isDirectoryURL()) return;
+        if (window.DeviceUtils && window.DeviceUtils.shouldRedirect(currentFile)) {
+          var deviceType = window.DeviceUtils.getDeviceType();
+          var targetFile =
+            deviceType === window.DeviceUtils.DeviceType.MOBILE
+              ? "index-mobile.html"
+              : deviceType === window.DeviceUtils.DeviceType.TABLET
+                ? "index-tablet.html"
+                : "index-pc.html";
+          location.href = targetFile;
+        }
+      })();
+    </script>
+    <meta charset="utf-8" />
+    <meta
+      name="description"
+      content="食堂中央厨房智能解决方案 - 大容量自动化设备，满足千人级供餐需求，食品安全可追溯。"
+    />
+    <meta name="keywords" content="食堂,中央厨房,团餐,大型厨房,食品安全" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://www.kitchen.yukoli.com/applications/canteen/" />
+    <meta property="og:image" content="https://www.kitchen.yukoli.com/assets/images/logo_header.webp" />
+    <meta property="og:title" content="Yukoli | 食堂/中央厨房智能厨房解决方案" />
+    <meta property="og:description" content="为大型食堂和中央厨房提供标准化、规模化智能烹饪解决方案，日产万份以上。" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title data-i18n="canteen_page_title">Yukoli | 食堂/中央厨房智能厨房解决方案</title>
+    <link rel="preload" href="/assets/fonts/local-fonts.css" as="style" />
+    <link rel="preload" href="/assets/css/styles.css" as="style" />
+    <link rel="preload" href="/assets/css/tailwind.css" as="style" />
+    <link href="/assets/fonts/local-fonts.css" rel="stylesheet" />
+    <link rel="stylesheet" href="/assets/css/styles.css" />
+    <link rel="stylesheet" href="/assets/css/tailwind.css" />
+    <link rel="stylesheet" href="/assets/css/z-index-system.css" />
+    <link rel="stylesheet" href="/assets/css/performance-optimizations.css" />
+    <script>
+      (function () {
+        if (localStorage.getItem("darkMode") === "true") document.documentElement.classList.add("dark");
+      })();
+    </script>
+    <link rel="stylesheet" href="/assets/css/skeleton.css" />
+    <link rel="icon" href="/assets/images/logo_header.webp" type="image/webp" />
+  </head>
+  <body
+    class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 antialiased transition-colors duration-300 overflow-x-hidden"
+  >
+    <navigator
+      data-component="navigator"
+      data-variant="pc"
+      data-active="solutions"
+      data-cta-text-key="nav_get_quote"
+      data-cta-href="/quote"
+    ></navigator>
+    <main id="spa-content">
+      <section class="relative py-20 overflow-hidden">
+        <div
+          class="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-orange-100/30 dark:from-primary/10 dark:to-orange-900/20"
+        ></div>
+        <div class="relative max-w-7xl mx-auto px-6 lg:px-8">
+          <div class="flex flex-col lg:flex-row items-center gap-12">
+            <div class="w-full lg:w-1/2 flex flex-col gap-6">
+              <div
+                class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 text-primary text-sm font-bold uppercase tracking-wider w-fit"
+              >
+                <span class="material-symbols-outlined">restaurant</span>
+                食堂/中央厨房解决方案
               </div>
-              <div>
-                <p class="text-sm font-semibold">Yukoli智能厨房</p>
-                <p class="text-xs opacity-80">专业食堂/中央厨房解决方案</p>
+              <h1 class="text-5xl lg:text-6xl font-black leading-tight tracking-tighter">
+                智能厨房
+                <br />
+                <span class="text-primary">赋能食堂/中央厨房</span>
+              </h1>
+              <p class="text-xl text-slate-600 dark:text-slate-400 max-w-xl leading-relaxed">
+                大容量自动化设备，满足千人级供餐需求，食品安全可追溯。
+              </p>
+              <div class="flex items-center gap-4 pt-4">
+                <a
+                  href="/quote/"
+                  class="bg-primary text-white px-8 py-4 rounded-xl font-bold flex items-center gap-2 hover:shadow-lg hover:shadow-primary/20 transition-all"
+                >
+                  获取专属方案
+                  <span class="material-symbols-outlined">arrow_forward</span>
+                </a>
+                <a
+                  href="/roi/"
+                  class="px-8 py-4 rounded-xl font-bold flex items-center gap-2 border-2 border-slate-300 dark:border-slate-600 hover:border-primary hover:text-primary transition-all"
+                >
+                  <span class="material-symbols-outlined">calculate</span>
+                  ROI计算
+                </a>
+              </div>
+            </div>
+            <div class="w-full lg:w-1/2 relative">
+              <div class="absolute -inset-4 bg-primary/20 rounded-3xl blur-3xl"></div>
+              <div class="relative rounded-2xl overflow-hidden shadow-2xl">
+                <img
+                  loading="eager"
+                  alt="食堂/中央厨房智能厨房"
+                  class="w-full h-[500px] object-cover"
+                  src="/assets/images/applications/canteen-hero.webp"
+                  onerror="this.src = 'https://images.unsplash.com/photo-1556910103-1c02745aae4d?w=1200&h=800&fit=crop'"
+                />
+                <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+                <div class="absolute bottom-0 left-0 right-0 p-8">
+                  <div class="flex items-center gap-4 text-white">
+                    <div class="flex -space-x-3">
+                      <div class="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-xs font-bold">
+                        Y
+                      </div>
+                    </div>
+                    <div>
+                      <p class="text-sm font-semibold">Yukoli智能厨房</p>
+                      <p class="text-xs opacity-80">专业食堂/中央厨房解决方案</p>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
-    </div>
-  </div>
-</section>
-<section class="py-20 bg-slate-50 dark:bg-slate-900/50">
-  <div class="max-w-7xl mx-auto px-6 lg:px-8">
-    <div class="text-center mb-16">
-      <h2 class="text-3xl lg:text-4xl font-black tracking-tight mb-4">行业痛点，我们深知</h2>
-      <p class="text-lg text-slate-600 dark:text-slate-400">食堂/中央厨房面临的核心挑战</p>
-    </div>
-    <div class="grid md:grid-cols-3 gap-8">
-      <div class="bg-white dark:bg-slate-800 rounded-2xl p-8 shadow-lg hover:shadow-xl transition-shadow">
-        <div class="w-14 h-14 rounded-xl bg-red-100 dark:bg-red-900/30 flex items-center justify-center mb-6">
-          <span class="material-symbols-outlined text-3xl text-red-600">groups</span>
-        </div>
-        <h3 class="text-xl font-bold mb-3">供餐压力大</h3>
-        <p class="text-slate-600 dark:text-slate-400">用餐时间集中，短时间内需要完成大量出餐</p>
-      </div>
-      <div class="bg-white dark:bg-slate-800 rounded-2xl p-8 shadow-lg hover:shadow-xl transition-shadow">
-        <div class="w-14 h-14 rounded-xl bg-orange-100 dark:bg-orange-900/30 flex items-center justify-center mb-6">
-          <span class="material-symbols-outlined text-3xl text-orange-600">security</span>
-        </div>
-        <h3 class="text-xl font-bold mb-3">食品安全风险</h3>
-        <p class="text-slate-600 dark:text-slate-400">人工操作环节多，食品安全难以保障</p>
-      </div>
-      <div class="bg-white dark:bg-slate-800 rounded-2xl p-8 shadow-lg hover:shadow-xl transition-shadow">
-        <div class="w-14 h-14 rounded-xl bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center mb-6">
-          <span class="material-symbols-outlined text-3xl text-blue-600">account_balance_wallet</span>
-        </div>
-        <h3 class="text-xl font-bold mb-3">成本控制难</h3>
-        <p class="text-slate-600 dark:text-slate-400">食材浪费严重，成本控制困难</p>
-      </div></div>
-  </div>
-</section>
-<section class="py-20">
-  <div class="max-w-7xl mx-auto px-6 lg:px-8">
-    <div class="flex flex-col lg:flex-row gap-16 items-center">
-      <div class="w-full lg:w-1/2">
-        <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 text-primary text-sm font-bold uppercase tracking-wider mb-6">
-          <span class="material-symbols-outlined">lightbulb</span> 解决方案
-        </div>
-        <h2 class="text-3xl lg:text-4xl font-black tracking-tight mb-6">智能厨房全流程自动化</h2>
-        <p class="text-lg text-slate-600 dark:text-slate-400 mb-8">专为食堂/中央厨房场景优化的智能厨房解决方案。</p>
-        <div class="space-y-6">
-          <div class="flex gap-4">
-            <div class="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0">
-              <span class="material-symbols-outlined text-primary">batch_prediction</span>
+      </section>
+      <section class="py-20 bg-slate-50 dark:bg-slate-900/50">
+        <div class="max-w-7xl mx-auto px-6 lg:px-8">
+          <div class="text-center mb-16">
+            <h2 class="text-3xl lg:text-4xl font-black tracking-tight mb-4" data-i18n="canteen_pain_title">
+              行业痛点，我们深知
+            </h2>
+            <p class="text-lg text-slate-600 dark:text-slate-400">食堂/中央厨房面临的核心挑战</p>
+          </div>
+          <div class="grid md:grid-cols-3 gap-8">
+            <div class="bg-white dark:bg-slate-800 rounded-2xl p-8 shadow-lg hover:shadow-xl transition-shadow">
+              <div class="w-14 h-14 rounded-xl bg-red-100 dark:bg-red-900/30 flex items-center justify-center mb-6">
+                <span class="material-symbols-outlined text-3xl text-red-600">groups</span>
+              </div>
+              <h3 class="text-xl font-bold mb-3">供餐压力大</h3>
+              <p class="text-slate-600 dark:text-slate-400">用餐时间集中，短时间内需要完成大量出餐</p>
             </div>
-            <div>
-              <h4 class="font-bold text-lg">大容量生产</h4>
-              <p class="text-slate-600 dark:text-slate-400">工业级设备，单次出餐百人份</p>
+            <div class="bg-white dark:bg-slate-800 rounded-2xl p-8 shadow-lg hover:shadow-xl transition-shadow">
+              <div
+                class="w-14 h-14 rounded-xl bg-orange-100 dark:bg-orange-900/30 flex items-center justify-center mb-6"
+              >
+                <span class="material-symbols-outlined text-3xl text-orange-600">security</span>
+              </div>
+              <h3 class="text-xl font-bold mb-3">食品安全风险</h3>
+              <p class="text-slate-600 dark:text-slate-400">人工操作环节多，食品安全难以保障</p>
+            </div>
+            <div class="bg-white dark:bg-slate-800 rounded-2xl p-8 shadow-lg hover:shadow-xl transition-shadow">
+              <div class="w-14 h-14 rounded-xl bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center mb-6">
+                <span class="material-symbols-outlined text-3xl text-blue-600">account_balance_wallet</span>
+              </div>
+              <h3 class="text-xl font-bold mb-3">成本控制难</h3>
+              <p class="text-slate-600 dark:text-slate-400">食材浪费严重，成本控制困难</p>
             </div>
           </div>
-          <div class="flex gap-4">
-            <div class="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0">
-              <span class="material-symbols-outlined text-primary">verified_user</span>
+        </div>
+      </section>
+      <section class="py-20">
+        <div class="max-w-7xl mx-auto px-6 lg:px-8">
+          <div class="flex flex-col lg:flex-row gap-16 items-center">
+            <div class="w-full lg:w-1/2">
+              <div
+                class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 text-primary text-sm font-bold uppercase tracking-wider mb-6"
+              >
+                <span class="material-symbols-outlined">lightbulb</span>
+                解决方案
+              </div>
+              <h2 class="text-3xl lg:text-4xl font-black tracking-tight mb-6" data-i18n="canteen_solution_title">
+                智能厨房全流程自动化
+              </h2>
+              <p class="text-lg text-slate-600 dark:text-slate-400 mb-8">
+                专为食堂/中央厨房场景优化的智能厨房解决方案。
+              </p>
+              <div class="space-y-6">
+                <div class="flex gap-4">
+                  <div class="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0">
+                    <span class="material-symbols-outlined text-primary">batch_prediction</span>
+                  </div>
+                  <div>
+                    <h4 class="font-bold text-lg">大容量生产</h4>
+                    <p class="text-slate-600 dark:text-slate-400">工业级设备，单次出餐百人份</p>
+                  </div>
+                </div>
+                <div class="flex gap-4">
+                  <div class="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0">
+                    <span class="material-symbols-outlined text-primary">verified_user</span>
+                  </div>
+                  <div>
+                    <h4 class="font-bold text-lg">食品安全</h4>
+                    <p class="text-slate-600 dark:text-slate-400">全程可追溯，减少人工接触</p>
+                  </div>
+                </div>
+                <div class="flex gap-4">
+                  <div class="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0">
+                    <span class="material-symbols-outlined text-primary">savings</span>
+                  </div>
+                  <div>
+                    <h4 class="font-bold text-lg">精准配餐</h4>
+                    <p class="text-slate-600 dark:text-slate-400">智能称重配餐，减少食材浪费</p>
+                  </div>
+                </div>
+              </div>
             </div>
-            <div>
-              <h4 class="font-bold text-lg">食品安全</h4>
-              <p class="text-slate-600 dark:text-slate-400">全程可追溯，减少人工接触</p>
+            <div class="w-full lg:w-1/2">
+              <div class="grid grid-cols-2 gap-4">
+                <div class="bg-white dark:bg-slate-800 rounded-2xl p-6 shadow-lg">
+                  <div class="text-4xl font-black text-primary mb-2">1000+</div>
+                  <p class="text-slate-600 dark:text-slate-400">人/小时产能</p>
+                </div>
+                <div class="bg-white dark:bg-slate-800 rounded-2xl p-6 shadow-lg">
+                  <div class="text-4xl font-black text-primary mb-2">40%</div>
+                  <p class="text-slate-600 dark:text-slate-400">食材浪费降</p>
+                </div>
+                <div class="bg-white dark:bg-slate-800 rounded-2xl p-6 shadow-lg">
+                  <div class="text-4xl font-black text-primary mb-2">50%</div>
+                  <p class="text-slate-600 dark:text-slate-400">人工成本降</p>
+                </div>
+                <div class="bg-white dark:bg-slate-800 rounded-2xl p-6 shadow-lg">
+                  <div class="text-4xl font-black text-primary mb-2">100%</div>
+                  <p class="text-slate-600 dark:text-slate-400">食品安全追溯</p>
+                </div>
+              </div>
             </div>
           </div>
-          <div class="flex gap-4">
-            <div class="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0">
-              <span class="material-symbols-outlined text-primary">savings</span>
-            </div>
-            <div>
-              <h4 class="font-bold text-lg">精准配餐</h4>
-              <p class="text-slate-600 dark:text-slate-400">智能称重配餐，减少食材浪费</p>
-            </div>
-          </div></div>
-      </div>
-      <div class="w-full lg:w-1/2">
-        <div class="grid grid-cols-2 gap-4">
-            <div class="bg-white dark:bg-slate-800 rounded-2xl p-6 shadow-lg">
-              <div class="text-4xl font-black text-primary mb-2">1000+</div>
-              <p class="text-slate-600 dark:text-slate-400">人/小时产能</p>
-            </div>
-            <div class="bg-white dark:bg-slate-800 rounded-2xl p-6 shadow-lg">
-              <div class="text-4xl font-black text-primary mb-2">40%</div>
-              <p class="text-slate-600 dark:text-slate-400">食材浪费降</p>
-            </div>
-            <div class="bg-white dark:bg-slate-800 rounded-2xl p-6 shadow-lg">
-              <div class="text-4xl font-black text-primary mb-2">50%</div>
-              <p class="text-slate-600 dark:text-slate-400">人工成本降</p>
-            </div>
-            <div class="bg-white dark:bg-slate-800 rounded-2xl p-6 shadow-lg">
-              <div class="text-4xl font-black text-primary mb-2">100%</div>
-              <p class="text-slate-600 dark:text-slate-400">食品安全追溯</p>
-            </div></div>
-      </div>
-    </div>
-  </div>
-</section>
-<section class="py-20 bg-slate-50 dark:bg-slate-900/50">
-  <div class="max-w-7xl mx-auto px-6 lg:px-8">
-    <div class="text-center mb-16">
-      <h2 class="text-3xl lg:text-4xl font-black tracking-tight mb-4">推荐设备组合</h2>
-      <p class="text-lg text-slate-600 dark:text-slate-400">为食堂/中央厨房量身定制的智能设备方案</p>
-    </div>
-    <div class="grid md:grid-cols-3 gap-8">
-      <div class="bg-white dark:bg-slate-800 rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all group">
-        <div class="h-48 bg-slate-200 dark:bg-slate-700 overflow-hidden">
-          <img loading="lazy" alt="大型炒菜机 YK-SF1200" class="w-full h-full object-cover group-hover:scale-105 transition-transform" src="/assets/images/products/canteen-热销.webp" onerror="this.style.display='none'">
         </div>
-        <div class="p-6">
-          <h3 class="text-xl font-bold mb-2">大型炒菜机 YK-SF1200</h3>
-          <p class="text-slate-600 dark:text-slate-400 text-sm mb-4">1200mm锅径，单次出餐20份</p>
-          <div class="flex items-center justify-between">
-            <span class="text-primary font-bold">热销</span>
-            <a href="/products/" class="text-sm font-semibold flex items-center gap-1 hover:text-primary transition-colors">
-              了解详情 <span class="material-symbols-outlined text-sm">arrow_forward</span>
+      </section>
+      <section class="py-20 bg-slate-50 dark:bg-slate-900/50">
+        <div class="max-w-7xl mx-auto px-6 lg:px-8">
+          <div class="text-center mb-16">
+            <h2 class="text-3xl lg:text-4xl font-black tracking-tight mb-4" data-i18n="canteen_equipment_title">
+              推荐设备组合
+            </h2>
+            <p class="text-lg text-slate-600 dark:text-slate-400">为食堂/中央厨房量身定制的智能设备方案</p>
+          </div>
+          <div class="grid md:grid-cols-3 gap-8">
+            <div
+              class="bg-white dark:bg-slate-800 rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all group"
+            >
+              <div class="h-48 bg-slate-200 dark:bg-slate-700 overflow-hidden">
+                <img
+                  loading="lazy"
+                  alt="大型炒菜机 YK-SF1200"
+                  class="w-full h-full object-cover group-hover:scale-105 transition-transform"
+                  src="/assets/images/products/canteen-热销.webp"
+                  onerror="this.style.display = 'none'"
+                />
+              </div>
+              <div class="p-6">
+                <h3 class="text-xl font-bold mb-2">大型炒菜机 YK-SF1200</h3>
+                <p class="text-slate-600 dark:text-slate-400 text-sm mb-4">1200mm锅径，单次出餐20份</p>
+                <div class="flex items-center justify-between">
+                  <span class="text-primary font-bold" data-i18n="canteen_equipment_badge_hot">热销</span>
+                  <a
+                    href="/products/"
+                    class="text-sm font-semibold flex items-center gap-1 hover:text-primary transition-colors"
+                  >
+                    了解详情
+                    <span class="material-symbols-outlined text-sm">arrow_forward</span>
+                  </a>
+                </div>
+              </div>
+            </div>
+            <div
+              class="bg-white dark:bg-slate-800 rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all group"
+            >
+              <div class="h-48 bg-slate-200 dark:bg-slate-700 overflow-hidden">
+                <img
+                  loading="lazy"
+                  alt="自动分餐线 YK-AL500"
+                  class="w-full h-full object-cover group-hover:scale-105 transition-transform"
+                  src="/assets/images/products/canteen-标配.webp"
+                  onerror="this.style.display = 'none'"
+                />
+              </div>
+              <div class="p-6">
+                <h3 class="text-xl font-bold mb-2">自动分餐线 YK-AL500</h3>
+                <p class="text-slate-600 dark:text-slate-400 text-sm mb-4">智能分餐，精准称重</p>
+                <div class="flex items-center justify-between">
+                  <span class="text-primary font-bold" data-i18n="canteen_equipment_badge_standard">标配</span>
+                  <a
+                    href="/products/"
+                    class="text-sm font-semibold flex items-center gap-1 hover:text-primary transition-colors"
+                  >
+                    了解详情
+                    <span class="material-symbols-outlined text-sm">arrow_forward</span>
+                  </a>
+                </div>
+              </div>
+            </div>
+            <div
+              class="bg-white dark:bg-slate-800 rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all group"
+            >
+              <div class="h-48 bg-slate-200 dark:bg-slate-700 overflow-hidden">
+                <img
+                  loading="lazy"
+                  alt="中央厨房系统 YK-CK1000"
+                  class="w-full h-full object-cover group-hover:scale-105 transition-transform"
+                  src="/assets/images/products/canteen-推荐.webp"
+                  onerror="this.style.display = 'none'"
+                />
+              </div>
+              <div class="p-6">
+                <h3 class="text-xl font-bold mb-2">中央厨房系统 YK-CK1000</h3>
+                <p class="text-slate-600 dark:text-slate-400 text-sm mb-4">全流程自动化管理</p>
+                <div class="flex items-center justify-between">
+                  <span class="text-primary font-bold" data-i18n="canteen_equipment_badge_recommended">推荐</span>
+                  <a
+                    href="/products/"
+                    class="text-sm font-semibold flex items-center gap-1 hover:text-primary transition-colors"
+                  >
+                    了解详情
+                    <span class="material-symbols-outlined text-sm">arrow_forward</span>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="py-20">
+        <div class="max-w-7xl mx-auto px-6 lg:px-8">
+          <div class="flex flex-col lg:flex-row gap-12 items-center">
+            <div class="w-full lg:w-1/2">
+              <div
+                class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400 text-sm font-bold uppercase tracking-wider mb-6"
+              >
+                <span class="material-symbols-outlined">check_circle</span>
+                成功案例
+              </div>
+              <h2 class="text-3xl lg:text-4xl font-black tracking-tight mb-6">某大型企业食堂</h2>
+              <div class="space-y-4 mb-8">
+                <div class="flex items-center gap-3">
+                  <span class="material-symbols-outlined text-primary">location_on</span>
+                  <span>员工5000+人</span>
+                </div>
+              </div>
+              <blockquote class="text-lg italic text-slate-600 dark:text-slate-400 border-l-4 border-primary pl-6 mb-8">
+                "中央厨房改造后，供餐能力从3000人提升到8000人，食材浪费减少40%，员工满意度显著提升。"
+              </blockquote>
+              <a href="/cases/" class="inline-flex items-center gap-2 text-primary font-bold hover:underline">
+                查看更多案例
+                <span class="material-symbols-outlined">arrow_forward</span>
+              </a>
+            </div>
+            <div class="w-full lg:w-1/2">
+              <div class="bg-white dark:bg-slate-800 rounded-2xl p-8 shadow-xl">
+                <h3 class="text-xl font-bold mb-6" data-i18n="canteen_compare_title">实施效果对比</h3>
+                <div class="space-y-6">
+                  <div>
+                    <div class="flex justify-between mb-2">
+                      <span class="text-sm font-medium">供餐能力</span>
+                      <span class="text-sm text-green-600 font-bold">8000人</span>
+                    </div>
+                    <div class="h-2 bg-slate-200 dark:bg-slate-700 rounded-full overflow-hidden">
+                      <div class="h-full bg-green-500 rounded-full" style="width: 75.91429056681562%"></div>
+                    </div>
+                  </div>
+                  <div>
+                    <div class="flex justify-between mb-2">
+                      <span class="text-sm font-medium">食材浪费</span>
+                      <span class="text-sm text-green-600 font-bold">↓ 40%</span>
+                    </div>
+                    <div class="h-2 bg-slate-200 dark:bg-slate-700 rounded-full overflow-hidden">
+                      <div class="h-full bg-green-500 rounded-full" style="width: 91.7950576361302%"></div>
+                    </div>
+                  </div>
+                  <div>
+                    <div class="flex justify-between mb-2">
+                      <span class="text-sm font-medium">满意度</span>
+                      <span class="text-sm text-green-600 font-bold">↑ 45%</span>
+                    </div>
+                    <div class="h-2 bg-slate-200 dark:bg-slate-700 rounded-full overflow-hidden">
+                      <div class="h-full bg-green-500 rounded-full" style="width: 72.85682646445147%"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="py-20 bg-primary">
+        <div class="max-w-4xl mx-auto px-6 lg:px-8 text-center">
+          <h2 class="text-3xl lg:text-4xl font-black text-white mb-6" data-i18n="canteen_cta_title">
+            开启您的智能厨房之旅
+          </h2>
+          <p class="text-xl text-white/80 mb-8" data-i18n="canteen_cta_desc">
+            获取专属解决方案，让科技赋能您的餐饮事业
+          </p>
+          <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+            <a
+              href="/quote/"
+              class="bg-white text-primary px-8 py-4 rounded-xl font-bold flex items-center gap-2 hover:shadow-lg transition-all"
+            >
+              免费咨询
+              <span class="material-symbols-outlined">arrow_forward</span>
+            </a>
+            <a
+              href="/contact/"
+              class="px-8 py-4 rounded-xl font-bold flex items-center gap-2 border-2 border-white text-white hover:bg-white/10 transition-all"
+            >
+              <span class="material-symbols-outlined">phone</span>
+              联系销售
             </a>
           </div>
         </div>
-      </div>
-      <div class="bg-white dark:bg-slate-800 rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all group">
-        <div class="h-48 bg-slate-200 dark:bg-slate-700 overflow-hidden">
-          <img loading="lazy" alt="自动分餐线 YK-AL500" class="w-full h-full object-cover group-hover:scale-105 transition-transform" src="/assets/images/products/canteen-标配.webp" onerror="this.style.display='none'">
-        </div>
-        <div class="p-6">
-          <h3 class="text-xl font-bold mb-2">自动分餐线 YK-AL500</h3>
-          <p class="text-slate-600 dark:text-slate-400 text-sm mb-4">智能分餐，精准称重</p>
-          <div class="flex items-center justify-between">
-            <span class="text-primary font-bold">标配</span>
-            <a href="/products/" class="text-sm font-semibold flex items-center gap-1 hover:text-primary transition-colors">
-              了解详情 <span class="material-symbols-outlined text-sm">arrow_forward</span>
-            </a>
-          </div>
-        </div>
-      </div>
-      <div class="bg-white dark:bg-slate-800 rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all group">
-        <div class="h-48 bg-slate-200 dark:bg-slate-700 overflow-hidden">
-          <img loading="lazy" alt="中央厨房系统 YK-CK1000" class="w-full h-full object-cover group-hover:scale-105 transition-transform" src="/assets/images/products/canteen-推荐.webp" onerror="this.style.display='none'">
-        </div>
-        <div class="p-6">
-          <h3 class="text-xl font-bold mb-2">中央厨房系统 YK-CK1000</h3>
-          <p class="text-slate-600 dark:text-slate-400 text-sm mb-4">全流程自动化管理</p>
-          <div class="flex items-center justify-between">
-            <span class="text-primary font-bold">推荐</span>
-            <a href="/products/" class="text-sm font-semibold flex items-center gap-1 hover:text-primary transition-colors">
-              了解详情 <span class="material-symbols-outlined text-sm">arrow_forward</span>
-            </a>
-          </div>
-        </div>
-      </div></div>
-  </div>
-</section>
-<section class="py-20">
-  <div class="max-w-7xl mx-auto px-6 lg:px-8">
-    <div class="flex flex-col lg:flex-row gap-12 items-center">
-      <div class="w-full lg:w-1/2">
-        <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400 text-sm font-bold uppercase tracking-wider mb-6">
-          <span class="material-symbols-outlined">check_circle</span> 成功案例
-        </div>
-        <h2 class="text-3xl lg:text-4xl font-black tracking-tight mb-6">某大型企业食堂</h2>
-        <div class="space-y-4 mb-8">
-          <div class="flex items-center gap-3">
-            <span class="material-symbols-outlined text-primary">location_on</span>
-            <span>员工5000+人</span>
-          </div>
-        </div>
-        <blockquote class="text-lg italic text-slate-600 dark:text-slate-400 border-l-4 border-primary pl-6 mb-8">
-          "中央厨房改造后，供餐能力从3000人提升到8000人，食材浪费减少40%，员工满意度显著提升。"
-        </blockquote>
-        <a href="/cases/" class="inline-flex items-center gap-2 text-primary font-bold hover:underline">
-          查看更多案例 <span class="material-symbols-outlined">arrow_forward</span>
-        </a>
-      </div>
-      <div class="w-full lg:w-1/2">
-        <div class="bg-white dark:bg-slate-800 rounded-2xl p-8 shadow-xl">
-          <h3 class="text-xl font-bold mb-6">实施效果对比</h3>
-          <div class="space-y-6">
-            <div>
-              <div class="flex justify-between mb-2">
-                <span class="text-sm font-medium">供餐能力</span>
-                <span class="text-sm text-green-600 font-bold">8000人</span>
-              </div>
-              <div class="h-2 bg-slate-200 dark:bg-slate-700 rounded-full overflow-hidden">
-                <div class="h-full bg-green-500 rounded-full" style="width: 75.91429056681562%"></div>
-              </div>
-            </div>
-            <div>
-              <div class="flex justify-between mb-2">
-                <span class="text-sm font-medium">食材浪费</span>
-                <span class="text-sm text-green-600 font-bold">↓ 40%</span>
-              </div>
-              <div class="h-2 bg-slate-200 dark:bg-slate-700 rounded-full overflow-hidden">
-                <div class="h-full bg-green-500 rounded-full" style="width: 91.7950576361302%"></div>
-              </div>
-            </div>
-            <div>
-              <div class="flex justify-between mb-2">
-                <span class="text-sm font-medium">满意度</span>
-                <span class="text-sm text-green-600 font-bold">↑ 45%</span>
-              </div>
-              <div class="h-2 bg-slate-200 dark:bg-slate-700 rounded-full overflow-hidden">
-                <div class="h-full bg-green-500 rounded-full" style="width: 72.85682646445147%"></div>
-              </div>
-            </div></div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-<section class="py-20 bg-primary">
-  <div class="max-w-4xl mx-auto px-6 lg:px-8 text-center">
-    <h2 class="text-3xl lg:text-4xl font-black text-white mb-6">开启您的智能厨房之旅</h2>
-    <p class="text-xl text-white/80 mb-8">获取专属解决方案，让科技赋能您的餐饮事业</p>
-    <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
-      <a href="/quote/" class="bg-white text-primary px-8 py-4 rounded-xl font-bold flex items-center gap-2 hover:shadow-lg transition-all">
-        免费咨询 <span class="material-symbols-outlined">arrow_forward</span>
-      </a>
-      <a href="/contact/" class="px-8 py-4 rounded-xl font-bold flex items-center gap-2 border-2 border-white text-white hover:bg-white/10 transition-all">
-        <span class="material-symbols-outlined">phone</span> 联系销售
-      </a>
-    </div>
-  </div>
-</section>
-</main>
-<footer data-component="footer" data-variant="pc" data-cta="true"></footer>
-<script defer src="/assets/js/router.js"></script>
-<script src="/assets/js/translations.js"></script>
-<script src="/assets/js/ui/language-dropdown.js"></script>
-<script src="/assets/js/ui/mobile-menu.js"></script>
-<script src="/assets/js/ui/products-dropdown.js"></script>
-<script src="/assets/js/ui/solutions-dropdown.js"></script>
-<script src="/assets/js/ui/support-dropdown.js"></script>
-<script src="/assets/js/ui/about-dropdown.js"></script>
-<script src="/assets/js/ui/contact-dropdown.js"></script>
-<script src="/assets/js/ui/navigator.js"></script>
-<script src="/assets/js/ui/footer.js"></script>
-<script defer src="/assets/js/ui/floating-actions.js"></script>
-</body></html>
+      </section>
+    </main>
+    <footer data-component="footer" data-variant="pc" data-cta="true"></footer>
+    <script defer src="/assets/js/router.js"></script>
+    <script src="/assets/js/translations.js"></script>
+    <script src="/assets/js/ui/language-dropdown.js"></script>
+    <script src="/assets/js/ui/mobile-menu.js"></script>
+    <script src="/assets/js/ui/products-dropdown.js"></script>
+    <script src="/assets/js/ui/solutions-dropdown.js"></script>
+    <script src="/assets/js/ui/support-dropdown.js"></script>
+    <script src="/assets/js/ui/about-dropdown.js"></script>
+    <script src="/assets/js/ui/contact-dropdown.js"></script>
+    <script src="/assets/js/ui/navigator.js"></script>
+    <script src="/assets/js/ui/footer.js"></script>
+    <script defer src="/assets/js/ui/floating-actions.js"></script>
+  </body>
+</html>

@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html class="light" lang="zh-CN">
+<head>
+<meta charset="utf-8"/>
+<meta name="description" content="YuKoLi — Thank you for your inquiry. Our team will contact you within 24 hours with the best commercial kitchen automation solution.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="YuKoLi | Thank You for Your Inquiry">
+<meta property="og:description" content="YuKoLi — Thank you for your inquiry. Our team will contact you within 24 hours.">
+<meta property="og:url" content="https://www.kitchen.yukoli.com/thank-you/">
+<meta property="og:image" content="https://www.kitchen.yukoli.com/assets/images/og-home.webp">
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>YuKoLi | Thank You</title>
+<link rel="canonical" href="/thank-you/"/>
+<link rel="preload" href="/assets/fonts/local-fonts.css" as="style">
+<link rel="preload" href="/assets/css/tailwind.css" as="style">
+<link rel="preload" href="/assets/fonts/public-sans-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/fonts/public-sans-latin-700-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link href="/assets/fonts/local-fonts.css" rel="stylesheet"/>
+<link rel="stylesheet" href="/assets/css/tailwind.css">
+<link rel="stylesheet" href="/assets/css/z-index-system.css">
+<link rel="stylesheet" href="/assets/css/performance-optimizations.css"/>
+<style>
+  body { font-family: 'Public Sans', sans-serif; }
+  @keyframes check-bounce {
+    0% { transform: scale(0); }
+    50% { transform: scale(1.2); }
+    100% { transform: scale(1); }
+  }
+  @keyframes checkmark-draw {
+    0% { stroke-dashoffset: 48; }
+    100% { stroke-dashoffset: 0; }
+  }
+  .check-icon-animate {
+    animation: check-bounce 0.5s cubic-bezier(0.36, 0.07, 0.19, 0.97) forwards;
+  }
+  .checkmark-path {
+    stroke-dasharray: 48;
+    stroke-dashoffset: 48;
+    animation: checkmark-draw 0.4s ease-out 0.4s forwards;
+  }
+  .circle-path {
+    stroke-dasharray: 166;
+    stroke-dashoffset: 166;
+    animation: checkmark-draw 0.6s ease-out 0.2s forwards;
+  }
+</style>
+<script>(function(){if(localStorage.getItem('darkMode')==='true')document.documentElement.classList.add('dark')})()</script>
+<link rel="icon" href="/assets/images/logo_header.webp" type="image/webp">
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 antialiased overflow-x-hidden">
+<div class="relative flex h-auto min-h-screen w-full flex-col">
+
+<!-- Top Navigation Bar -->
+<navigator data-component="navigator"
+  data-variant="tablet"
+  data-active="thank-you"
+  data-cta-text-key="nav_get_quote"
+  data-cta-href="/quote"></navigator>
+
+<main id="spa-content">
+
+  <!-- Thank You Section -->
+  <section class="py-20 md:py-28 flex items-center justify-center">
+    <div class="max-w-xl mx-auto text-center flex flex-col items-center gap-6 px-6">
+      <!-- Animated Check Icon -->
+      <div class="check-icon-animate">
+        <svg class="w-20 h-20 md:w-28 md:h-28" viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle class="circle-path" cx="26" cy="26" r="25" stroke="#22c55e" stroke-width="2" fill="none"/>
+          <path class="checkmark-path" d="M14 27l8 8 16-16" stroke="#22c55e" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+        </svg>
+      </div>
+
+      <h1 class="text-3xl md:text-5xl font-black leading-[1.1] tracking-tight text-slate-900 dark:text-slate-100" data-i18n="thank_you_title">
+        感谢您的询价！
+      </h1>
+
+      <p class="text-lg md:text-xl font-semibold text-primary" data-i18n="thank_you_subtitle">
+        我们会在 24 小时内回复您
+      </p>
+
+      <p class="text-base text-slate-600 dark:text-slate-400 max-w-md leading-relaxed" data-i18n="thank_you_desc">
+        我们的团队会尽快与您联系，为您提供最合适的商用厨房自动化解决方案。
+      </p>
+
+      <div class="flex flex-wrap gap-4 mt-2">
+        <a href="/home/" class="bg-primary text-white px-7 py-3 rounded-xl font-bold flex items-center gap-2 shadow-lg shadow-primary/20 hover:translate-y-[-2px] transition-transform">
+          <span class="material-symbols-outlined">home</span>
+          <span data-i18n="thank_you_back_home">返回首页</span>
+        </a>
+        <a href="/products/" class="border-2 border-slate-200 dark:border-slate-700 px-7 py-3 rounded-xl font-bold hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors flex items-center gap-2">
+          <span class="material-symbols-outlined">inventory_2</span>
+          <span data-i18n="thank_you_browse">浏览产品</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+</div>
+
+<script defer src="/assets/js/ui/products-dropdown.js?v=20260322-v3"></script>
+<script defer src="/assets/js/ui/navigator.js?v=20260322-v3"></script>
+<script defer src="/assets/js/ui/footer.js?v=20260322-v3"></script>
+<script defer src="/assets/js/lang-registry.js"></script>
+<script defer src="/assets/js/translations.js"></script>
+<script defer src="/assets/js/translations-dropdown-template.js"></script>
+<script defer src="/assets/js/contacts.js"></script>
+<script defer src="/assets/js/ui/smart-popup.js"></script>
+<script defer src="/assets/js/router.js"></script>
+<script defer src="/assets/js/page-interactions.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    if (window.translationManager) window.translationManager.initialize();
+  });
+</script>
+<script src="/assets/js/utils/device-utils.js"></script>
+<script src="/assets/js/spa-router.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    if (window.SpaRouter && typeof window.SpaRouter.init === 'function') {
+      window.SpaRouter.init();
+    }
+  });
+</script>
+</body>
+</html>

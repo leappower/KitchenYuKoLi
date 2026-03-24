@@ -1,0 +1,379 @@
+<!doctype html>
+
+<html class="light" lang="zh-CN">
+  <head>
+    <link rel="canonical" href="/pdp/" />
+    <link rel="alternate" media="only screen and (max-width: 767px)" href="/pdp/index-mobile.html" />
+    <link
+      rel="alternate"
+      media="only screen and (min-width: 768px) and (max-width: 1279px)"
+      href="/pdp/index-tablet.html"
+    />
+    <link rel="alternate" media="only screen and (min-width: 1280px)" href="/pdp/index-pc.html" />
+    <script>
+      (function () {
+        if (window.__redirectChecked) return;
+        window.__redirectChecked = true;
+        var urlParams = new URLSearchParams(location.search);
+        var cleanUrl = urlParams.get("clean-url");
+        if (cleanUrl) {
+          history.replaceState({}, "", cleanUrl);
+          return;
+        }
+        if (window.__spaNavigating) return;
+        var currentFile = location.pathname.split("/").pop();
+        if (window.DeviceUtils && window.DeviceUtils.isDirectoryURL()) return;
+        if (window.DeviceUtils && window.DeviceUtils.shouldRedirect(currentFile)) {
+          var deviceType = window.DeviceUtils.getDeviceType();
+          var targetFile =
+            deviceType === window.DeviceUtils.DeviceType.MOBILE
+              ? "index-mobile.html"
+              : deviceType === window.DeviceUtils.DeviceType.TABLET
+                ? "index-tablet.html"
+                : "index-pc.html";
+          location.href = targetFile;
+        }
+      })();
+    </script>
+
+    <meta charset="utf-8" />
+    <meta name="description" content="Yukoli 智能商厨设备产品详情 — 查看产品规格、亮点和方案。" />
+    <meta name="robots" content="noindex,follow" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="产品详情 | Yukoli 智能商厨设备" />
+    <meta property="og:description" content="Yukoli 智能商厨设备产品详情。" />
+    <meta property="og:url" content="https://www.kitchen.yukoli.com/pdp/" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title data-i18n="pdp_page_title">产品详情 | Yukoli 智能商厨设备</title>
+    <link rel="preload" href="/assets/fonts/local-fonts.css" as="style" />
+    <link rel="preload" href="/assets/css/styles.css" as="style" />
+    <link rel="preload" href="/assets/css/tailwind.css" as="style" />
+    <link
+      rel="preload"
+      href="/assets/fonts/public-sans-latin-400-normal.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href="/assets/fonts/public-sans-latin-700-normal.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link href="/assets/fonts/local-fonts.css" rel="stylesheet" />
+    <link rel="stylesheet" href="/assets/css/styles.css" />
+    <link rel="stylesheet" href="/assets/css/tailwind.css" />
+    <link rel="stylesheet" href="/assets/css/z-index-system.css" />
+    <link rel="stylesheet" href="/assets/css/performance-optimizations.css" />
+    <script>
+      (function () {
+        if (localStorage.getItem("darkMode") === "true") document.documentElement.classList.add("dark");
+      })();
+    </script>
+    <link rel="stylesheet" href="/assets/css/skeleton.css" />
+    <link rel="icon" href="/assets/images/logo_header.webp" type="image/webp" />
+
+    <script type="application/ld+json" id="product-jsonld">
+      {
+        "@context": "https://schema.org",
+        "@type": "Product",
+        "name": "",
+        "description": "",
+        "image": "",
+        "brand": { "@type": "Brand", "name": "YuKoLi" },
+        "manufacturer": { "@type": "Organization", "name": "YuKoLi 跃迁力科技" },
+        "offers": { "@type": "Offer", "availability": "https://schema.org/InStock" }
+      }
+    </script>
+  </head>
+  <body
+    class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 antialiased overflow-x-hidden"
+  >
+    <div class="relative flex min-h-screen flex-col">
+      <navigator
+        data-component="navigator"
+        data-variant="pc"
+        data-active="products"
+        data-cta-text-key="nav_get_quote"
+        data-cta-href="/quote"
+      ></navigator>
+
+      <main id="spa-content">
+        <!-- Breadcrumb -->
+        <nav class="max-w-7xl mx-auto px-6 lg:px-8 pt-6">
+          <ol class="flex items-center gap-2 text-sm text-slate-500 dark:text-slate-400">
+            <li><a href="/" data-i18n="nav_home" class="hover:text-primary transition-colors">首页</a></li>
+            <li><span class="material-symbols-outlined text-xs">chevron_right</span></li>
+            <li>
+              <a href="/products/" data-i18n="nav_products" class="hover:text-primary transition-colors">产品中心</a>
+            </li>
+            <li><span class="material-symbols-outlined text-xs">chevron_right</span></li>
+            <li id="breadcrumb-product" class="text-slate-900 dark:text-slate-100 font-medium"></li>
+          </ol>
+        </nav>
+
+        <div id="product-content">
+          <!-- Loading skeleton -->
+          <div class="max-w-7xl mx-auto px-6 lg:px-8 py-12 animate-pulse">
+            <div class="h-96 bg-slate-200 dark:bg-slate-700 rounded-2xl"></div>
+          </div>
+        </div>
+      </main>
+
+      <footer data-component="footer" data-variant="pc" data-cta="true"></footer>
+    </div>
+
+    <script defer src="/assets/js/router.js"></script>
+    <script src="/assets/js/translations.js"></script>
+    <script src="/assets/js/ui/language-dropdown.js"></script>
+    <script src="/assets/js/ui/mobile-menu.js"></script>
+    <script src="/assets/js/ui/products-dropdown.js"></script>
+    <script src="/assets/js/ui/solutions-dropdown.js"></script>
+    <script src="/assets/js/ui/support-dropdown.js"></script>
+    <script src="/assets/js/ui/about-dropdown.js"></script>
+    <script src="/assets/js/ui/contact-dropdown.js"></script>
+    <script src="/assets/js/ui/navigator.js"></script>
+    <script src="/assets/js/ui/footer.js"></script>
+    <script defer src="/assets/js/ui/floating-actions.js"></script>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        var params = new URLSearchParams(window.location.search);
+        var model = params.get("model");
+        if (!model) {
+          window.location.href = "/products/";
+          return;
+        }
+        var products = window.PRODUCT_DATA_TABLE || [];
+        var product = null;
+        for (var i = 0; i < products.length; i++) {
+          if (products[i].model === model) {
+            product = products[i];
+            break;
+          }
+        }
+        if (!product) {
+          document.getElementById("product-content").innerHTML =
+            '<div class="max-w-7xl mx-auto px-6 lg:px-8 py-20 text-center">' +
+            '<div class="w-24 h-24 bg-slate-100 dark:bg-slate-800 rounded-full flex items-center justify-center mx-auto mb-6">' +
+            '<span class="material-symbols-outlined text-4xl text-slate-400">search_off</span></div>' +
+            '<h2 class="text-2xl font-bold mb-4" data-i18n="pdp_not_found_title">产品未找到</h2>' +
+            '<p class="text-slate-500 mb-8" data-i18n="pdp_not_found_desc">抱歉，未找到该产品。请浏览我们的产品目录。</p>' +
+            '<a href="/products/" class="inline-flex items-center gap-2 bg-primary text-white px-6 py-3 rounded-xl font-bold hover:shadow-lg transition-all">' +
+            '<span class="material-symbols-outlined">arrow_back</span> <span data-i18n="pdp_back_to_products">返回产品中心</span></a></div>';
+          return;
+        }
+
+        function tr(key, fallback) {
+          if (window.CommonUtils && typeof window.CommonUtils.tr === "function")
+            return window.CommonUtils.tr(key, fallback);
+          return fallback || key;
+        }
+
+        function esc(str) {
+          var d = document.createElement("div");
+          d.textContent = str || "";
+          return d.innerHTML;
+        }
+
+        function modelToSnake(m) {
+          return (m || "")
+            .toLowerCase()
+            .replace(/\//g, "")
+            .replace(/\+/g, "_p")
+            .replace(/-/g, "_")
+            .replace(/[^a-z0-9_]/g, "_")
+            .replace(/__+/g, "_")
+            .replace(/^_|_$/g, "");
+        }
+
+        var imgKey = modelToSnake(product.model) + "_1";
+        var imgSrc = "/assets/images/products/" + imgKey + ".webp";
+
+        document.getElementById("breadcrumb-product").textContent = product.name || product.model;
+        document.title = (product.name || product.model) + " | Yukoli 智能商厨设备";
+
+        // Update JSON-LD with product data for SEO
+        (function () {
+          var el = document.getElementById("product-jsonld");
+          if (!el) return;
+          var schema = {
+            "@context": "https://schema.org",
+            "@type": "Product",
+            name: product.name || product.model,
+            description: (product.description || product.model).substring(0, 200),
+            image: "https://www.kitchen.yukoli.com/assets/images/products/" + imgKey + ".webp",
+            brand: { "@type": "Brand", name: "YuKoLi" },
+            manufacturer: { "@type": "Organization", name: "YuKoLi 跃迁力科技" },
+            offers: {
+              "@type": "Offer",
+              availability: "https://schema.org/InStock",
+              priceCurrency: "USD",
+              price: product.referencePrice || "",
+            },
+          };
+          el.textContent = JSON.stringify(schema, null, 2);
+        })();
+
+        var highlights = Array.isArray(product.highlights) ? product.highlights : [];
+        var scenarios = Array.isArray(product.scenarios) ? product.scenarios : [];
+        var category = product.category || "";
+        var subCategory = product.subCategory || "";
+
+        var specFields = [
+          { label: "型号", value: product.model, key: "model" },
+          { label: "分类", value: category, key: "category" },
+          { label: "子分类", value: subCategory, key: "subCategory" },
+          { label: "功率", value: product.power, key: "power" },
+          { label: "产能", value: product.throughput, key: "throughput" },
+          { label: "平均用时", value: product.averageTime, key: "averageTime" },
+          { label: "电压", value: product.voltage, key: "voltage" },
+          { label: "频率", value: product.frequency, key: "frequency" },
+          { label: "材质", value: product.material, key: "material" },
+          { label: "产品尺寸", value: product.productDimensions, key: "productDimensions" },
+          { label: "净重", value: product.netWeight, key: "netWeight" },
+          { label: "毛重", value: product.grossWeight, key: "grossWeight" },
+          { label: "包装尺寸", value: product.packageDimensions, key: "packageDimensions" },
+          { label: "颜色", value: product.color, key: "color" },
+          { label: "认证", value: product.certification, key: "certification" },
+          { label: "质保", value: product.warrantyPeriod, key: "warrantyPeriod" },
+          { label: "产地", value: product.origin, key: "origin" },
+          { label: "装箱数", value: product.packingQuantity, key: "packingQuantity" },
+          { label: "起订量", value: product.minimumOrderQuantity, key: "minimumOrderQuantity" },
+          { label: "参考价格", value: product.referencePrice, key: "referencePrice" },
+        ];
+
+        var specRows = "";
+        for (var s = 0; s < specFields.length; s++) {
+          if (specFields[s].value) {
+            specRows +=
+              '<tr class="border-b border-slate-100 dark:border-slate-700/50">' +
+              '<td class="py-3 px-4 text-slate-500 dark:text-slate-400 text-sm font-medium w-1/3">' +
+              esc(specFields[s].label) +
+              "</td>" +
+              '<td class="py-3 px-4 text-sm">' +
+              esc(specFields[s].value) +
+              "</td></tr>";
+          }
+        }
+
+        var highlightItems = "";
+        for (var h = 0; h < highlights.length; h++) {
+          highlightItems +=
+            '<li class="flex items-start gap-3"><span class="material-symbols-outlined text-primary mt-0.5 flex-shrink-0">check_circle</span><span>' +
+            esc(highlights[h]) +
+            "</span></li>";
+        }
+
+        var scenarioItems = "";
+        for (var sc = 0; sc < scenarios.length; sc++) {
+          scenarioItems +=
+            '<span class="inline-flex items-center gap-1 px-3 py-1.5 rounded-full bg-slate-100 dark:bg-slate-700 text-sm">' +
+            '<span class="material-symbols-outlined text-primary text-sm">store</span>' +
+            esc(scenarios[sc]) +
+            "</span>";
+        }
+
+        var relatedHtml = "";
+        var relatedCount = 0;
+        for (var r = 0; r < products.length && relatedCount < 4; r++) {
+          var rp = products[r];
+          if (rp.model === product.model) continue;
+          if (rp.category === product.category || rp.subCategory === product.subCategory) {
+            var rImgKey = modelToSnake(rp.model) + "_1";
+            relatedHtml +=
+              '<a href="/pdp/?model=' +
+              encodeURIComponent(rp.model) +
+              '" class="bg-white dark:bg-slate-800 rounded-xl overflow-hidden shadow-md hover:shadow-lg transition-all group block">' +
+              '<div class="h-40 bg-slate-100 dark:bg-slate-700 overflow-hidden">' +
+              '<img loading="lazy" alt="' +
+              esc(rp.name || rp.model) +
+              '" class="w-full h-full object-cover group-hover:scale-105 transition-transform" src="/assets/images/products/' +
+              rImgKey +
+              '.webp" onerror="this.style.display=\'none\'">' +
+              '</div><div class="p-4"><h4 class="font-bold text-sm mb-1">' +
+              esc(rp.name || rp.model) +
+              "</h4>" +
+              '<p class="text-xs text-slate-500 dark:text-slate-400">' +
+              esc(rp.model) +
+              "</p></div></a>";
+            relatedCount++;
+          }
+        }
+
+        var badgeHtml = "";
+        if (product.badge) {
+          var badgeColor = product.badgeColor || "bg-primary";
+          badgeHtml =
+            '<span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-bold ' +
+            badgeColor +
+            ' text-white">' +
+            esc(product.badge) +
+            "</span>";
+        }
+
+        var html =
+          "" +
+          '<div class="max-w-7xl mx-auto px-6 lg:px-8 py-12">' +
+          '<div class="flex flex-col lg:flex-row gap-12">' +
+          '<div class="lg:w-1/2">' +
+          '<div class="rounded-2xl overflow-hidden bg-white dark:bg-slate-800 shadow-lg">' +
+          '<div class="relative">' +
+          '<img id="main-product-img" loading="eager" alt="' +
+          esc(product.name || product.model) +
+          '" class="w-full h-[480px] object-cover" src="' +
+          imgSrc +
+          '" onerror="this.src=\'https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=800&h=600&fit=crop\'">' +
+          "</div></div></div>" +
+          '<div class="lg:w-1/2 flex flex-col gap-6">' +
+          "<div>" +
+          '<div class="flex items-center gap-3 mb-2">' +
+          '<span class="text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">' +
+          esc(subCategory || category) +
+          "</span>" +
+          badgeHtml +
+          "</div>" +
+          '<h1 class="text-3xl lg:text-4xl font-black tracking-tight mb-2" id="pdp-name">' +
+          esc(product.name || product.model) +
+          "</h1>" +
+          '<p class="text-lg text-slate-500 dark:text-slate-400" id="pdp-model">' +
+          esc(product.model) +
+          "</p>" +
+          "</div>" +
+          '<div class="flex items-center gap-4">' +
+          '<a href="/quote/?model=' +
+          encodeURIComponent(product.model) +
+          '" class="bg-primary text-white px-8 py-4 rounded-xl font-bold flex items-center gap-2 hover:shadow-lg hover:shadow-primary/20 transition-all">' +
+          '<span class="material-symbols-outlined">request_quote</span> <span data-i18n="pdp_cta_quote">获取报价</span></a>' +
+          '<a href="https://wa.me/8613800138000?text=' +
+          encodeURIComponent("Hi, I am interested in " + (product.name || product.model)) +
+          '" target="_blank" class="px-8 py-4 rounded-xl font-bold flex items-center gap-2 border-2 border-slate-300 dark:border-slate-600 hover:border-primary hover:text-primary transition-all">' +
+          '<span class="material-symbols-outlined">chat</span> <span data-i18n="pdp_cta_contact">联系销售</span></a>' +
+          "</div>" +
+          (scenarios.length > 0 ? '<div class="flex flex-wrap gap-2">' + scenarioItems + "</div>" : "") +
+          "</div></div>" +
+          (highlights.length > 0
+            ? '<section class="mt-12"><h2 class="text-2xl font-bold mb-6 flex items-center gap-2"><span class="material-symbols-outlined text-primary">star</span> <span data-i18n="pdp_highlights">产品亮点</span></h2><ul class="space-y-3 max-w-3xl">' +
+              highlightItems +
+              "</ul></section>"
+            : "") +
+          (specRows
+            ? '<section class="mt-12"><h2 class="text-2xl font-bold mb-6 flex items-center gap-2"><span class="material-symbols-outlined text-primary">specifications</span> <span data-i18n="pdp_specs">产品规格</span></h2><div class="bg-white dark:bg-slate-800 rounded-xl overflow-hidden shadow-md max-w-3xl"><table class="w-full">' +
+              specRows +
+              "</table></div></section>"
+            : "") +
+          (relatedHtml
+            ? '<section class="mt-16"><h2 class="text-2xl font-bold mb-6 flex items-center gap-2"><span class="material-symbols-outlined text-primary">grid_view</span> <span data-i18n="pdp_related">相关产品</span></h2><div class="grid grid-cols-2 lg:grid-cols-4 gap-6">' +
+              relatedHtml +
+              "</div></section>"
+            : "") +
+          '<section class="mt-16 bg-primary rounded-2xl p-12 text-center"><h2 class="text-2xl font-black text-white mb-4" data-i18n="pdp_bottom_title">需要定制方案？</h2><p class="text-white/80 mb-8" data-i18n="pdp_bottom_desc">告诉我们您的需求，我们为您提供专属解决方案。</p><a href="/quote/" class="inline-flex items-center gap-2 bg-white text-primary px-8 py-4 rounded-xl font-bold hover:shadow-lg transition-all"><span class="material-symbols-outlined">arrow_forward</span> <span data-i18n="pdp_cta_quote">获取报价</span></a></section>' +
+          "</div>";
+
+        document.getElementById("product-content").innerHTML = html;
+      });
+    </script>
+  </body>
+</html>

@@ -1,315 +1,425 @@
-<!DOCTYPE html>
+<!doctype html>
 
-<html class="light" lang="zh-CN"><head>
-<!-- ═══ Responsive Redirect (injected by patch-responsive-redirect.py) ═══ -->
-<link rel="canonical" href="/roi/"/>
-<link rel="alternate" media="only screen and (max-width: 767px)"
-      href="/roi/index-mobile.html"/>
-<link rel="alternate" media="only screen and (min-width: 768px) and (max-width: 1279px)"
-      href="/roi/index-tablet.html"/>
-<link rel="alternate" media="only screen and (min-width: 1280px)"
-      href="/roi/index-pc.html"/>
-<script>
-/* Responsive redirect — runs before render, no flash */
-(function(){
-  // 防止 bfcache 恢复时重复 redirect
-  if (window.__redirectChecked) return;
-  window.__redirectChecked = true;
+<html class="light" lang="zh-CN">
+  <head>
+    <!-- ═══ Responsive Redirect (injected by patch-responsive-redirect.py) ═══ -->
+    <link rel="canonical" href="/roi/" />
+    <link rel="alternate" media="only screen and (max-width: 767px)" href="/roi/index-mobile.html" />
+    <link
+      rel="alternate"
+      media="only screen and (min-width: 768px) and (max-width: 1279px)"
+      href="/roi/index-tablet.html"
+    />
+    <link rel="alternate" media="only screen and (min-width: 1280px)" href="/roi/index-pc.html" />
+    <script>
+      /* Responsive redirect — runs before render, no flash */
+      (function () {
+        if (window.__redirectChecked) return;
+        window.__redirectChecked = true;
+        var urlParams = new URLSearchParams(location.search);
+        var cleanUrl = urlParams.get("clean-url");
+        if (cleanUrl) {
+          history.replaceState({}, "", cleanUrl);
+          return;
+        }
+        if (window.__spaNavigating) return;
+        var currentFile = location.pathname.split("/").pop();
+        if (window.DeviceUtils && window.DeviceUtils.isDirectoryURL()) return;
+        if (window.DeviceUtils && window.DeviceUtils.shouldRedirect(currentFile)) {
+          var deviceType = window.DeviceUtils.getDeviceType();
+          var targetFile =
+            deviceType === window.DeviceUtils.DeviceType.MOBILE
+              ? "index-mobile.html"
+              : deviceType === window.DeviceUtils.DeviceType.TABLET
+                ? "index-tablet.html"
+                : "index-pc.html";
+          location.href = targetFile;
+          return;
+        }
+      })();
+    </script>
+    <!-- ═══ End Responsive Redirect ═══ -->
 
-  // 处理 clean-url 参数:重定向后清理 URL 为干净的目录 URL
-  var urlParams = new URLSearchParams(location.search);
-  var cleanUrl = urlParams.get('clean-url');
-  if (cleanUrl) {
-    console.log('[Responsive Redirect] Cleaning URL to:', cleanUrl);
-    history.replaceState({}, '', cleanUrl);
-    return;
-  }
-
-  // SPA 导航时跳过响应式重定向
-  console.log('[Responsive Redirect] Checking SPA flag: window.__spaNavigating =', window.__spaNavigating);
-  if (window.__spaNavigating) {
-    console.log('[Responsive Redirect] SPA navigation detected, skipping redirect');
-    return;
-  }
-
-  // 使用 DeviceUtils 统一管理设备判断
-  var currentFile = location.pathname.split('/').pop();
-  console.log('[Responsive Redirect] Current file:', currentFile, 'Pathname:', location.pathname);
-
-  // 当访问目录 URL(以 / 结尾)时,不要重定向(SPA 导航使用干净的目录 URL)
-  if (window.DeviceUtils && window.DeviceUtils.isDirectoryURL()) {
-    console.log('[Responsive Redirect] Directory URL detected, skipping redirect');
-    return;
-  }
-
-  // 使用 DeviceUtils 判断是否需要重定向
-  if (window.DeviceUtils && window.DeviceUtils.shouldRedirect(currentFile)) {
-    var deviceType = window.DeviceUtils.getDeviceType();
-    var targetFile;
-
-    if (deviceType === window.DeviceUtils.DeviceType.MOBILE) {
-      targetFile = 'index-mobile.html';
-    } else if (deviceType === window.DeviceUtils.DeviceType.TABLET) {
-      targetFile = 'index-tablet.html';
-    } else {
-      targetFile = 'index-pc.html';
-    }
-
-    console.log('[Responsive Redirect] Redirecting to:', targetFile);
-    location.href = targetFile;
-    return;
-  }
-
-  console.log('[Responsive Redirect] No redirect needed');
-})();
-</script>
-<!-- ═══ End Responsive Redirect ═══ -->
-
-<meta charset="utf-8"/>
-<meta name="description" content="Yukoli 2026 ROI Calculator — calculate return on investment for kitchen automation and IoT deployments.">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Yukoli ROI Calculator">
-<meta property="og:description" content="Yukoli 2026 ROI Calculator — calculate return on investment for kitchen automation and IoT deployments.">
-<meta property="og:url" content="https://www.kitchen.yukoli.com/roi/">
-<meta property="og:image" content="https://www.kitchen.yukoli.com/assets/images/og-home.webp">
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Yukoli 2026 ROI Calculator</title>
-<link href="/assets/fonts/local-fonts.css" rel="stylesheet"/>
-<link rel="stylesheet" href="/assets/css/styles.css">
-  <link rel="stylesheet" href="/assets/css/tailwind.css">
-<style>
-        body { font-family: 'Public Sans', sans-serif; }
-        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
-        .chart-gradient { background: linear-gradient(180deg, rgba(236, 91, 19, 0.2) 0%, rgba(236, 91, 19, 0) 100%); }
+    <meta charset="utf-8" />
+    <meta
+      name="description"
+      content="YuKoLi 智能厨具投资回报分析 — 计算智能炒菜机、商用厨房设备为您节省的人工成本和能源费用，预估回本周期。"
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="YuKoLi 智能厨具 | 投资回报分析" />
+    <meta
+      property="og:description"
+      content="YuKoLi 智能厨具投资回报分析 — 计算智能炒菜机、商用厨房设备为您节省的人工成本和能源费用，预估回本周期。"
+    />
+    <meta property="og:url" content="https://www.kitchen.yukoli.com/roi/" />
+    <meta property="og:image" content="https://www.kitchen.yukoli.com/assets/images/logo_header.webp" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>YuKoLi 智能厨具 | 投资回报分析</title>
+    <link href="/assets/fonts/local-fonts.css" rel="stylesheet" />
+    <link rel="stylesheet" href="/assets/css/styles.css" />
+    <link rel="stylesheet" href="/assets/css/tailwind.css" />
+    <style>
+      body {
+        font-family: "Public Sans", sans-serif;
+      }
+      .material-symbols-outlined {
+        font-variation-settings:
+          "FILL" 0,
+          "wght" 400,
+          "GRAD" 0,
+          "opsz" 24;
+      }
+      .chart-gradient {
+        background: linear-gradient(180deg, rgba(236, 91, 19, 0.2) 0%, rgba(236, 91, 19, 0) 100%);
+      }
     </style>
-<!-- Dark mode: apply saved preference before first paint (prevents flash) -->
-<script>(function(){
-if(localStorage.getItem('darkMode')==='true')document.documentElement.classList.add('dark')})()</script>
-<link rel="stylesheet" href="/assets/css/skeleton.css"/>
-<link rel="icon" href="/assets/images/logo_header.webp" type="image/webp">
+    <script>
+      (function () {
+        if (localStorage.getItem("darkMode") === "true") document.documentElement.classList.add("dark");
+      })();
+    </script>
+    <link rel="stylesheet" href="/assets/css/skeleton.css" />
+    <link rel="icon" href="/assets/images/logo_header.webp" type="image/webp" />
 
-<script>
-window.addEventListener('DOMContentLoaded',function(){
-  setTimeout(function(){
-    var m=document.getElementById('spa-content');
-    if(!m)return;
-    var s=getComputedStyle(m);
-    var ok=s.maxWidth==='none'||parseInt(s.maxWidth)>=1920;
-    console.log('%c['+location.pathname.replace(//$/,'')+'] main: max-w='+s.maxWidth+' px='+s.paddingLeft+'/'+s.paddingRight+' w='+m.offsetWidth,ok?'color:green':'color:orange;font-weight:bold');
-    if(!ok)console.warn('Expected max-width: 1920px, got:',s.maxWidth);
-  },200);
-});
-</script>
-</head>
-<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 min-h-screen overflow-x-hidden">
-<navigator data-component="navigator"
-  data-variant="pc"
-  data-active="roi"
-  data-search="true"
-  data-cta-href="/quote">
-</navigator>
+    <script>
+      window.addEventListener("DOMContentLoaded", function () {
+        setTimeout(function () {
+          var m = document.getElementById("spa-content");
+          if (!m) return;
+          var s = getComputedStyle(m);
+          var ok = s.maxWidth === "none" || parseInt(s.maxWidth) >= 1920;
+          if (!ok) console.warn("Expected max-width: 1920px, got:", s.maxWidth);
+        }, 200);
+      });
+    </script>
 
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebPage",
+        "name": "YuKoLi 智能厨具投资回报分析",
+        "description": "计算智能炒菜机、商用厨房设备为您节省的人工成本和能源费用，预估回本周期",
+        "url": "https://www.kitchen.yukoli.com/roi/",
+        "isPartOf": {
+          "@type": "WebSite",
+          "name": "YuKoLi 智能厨具",
+          "url": "https://www.kitchen.yukoli.com"
+        }
+      }
+    </script>
+  </head>
+  <body
+    class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 min-h-screen overflow-x-hidden"
+  >
+    <navigator
+      data-component="navigator"
+      data-variant="pc"
+      data-active="roi"
+      data-search="true"
+      data-cta-href="/quote"
+    ></navigator>
 
-<div class="layout-container flex h-full grow flex-col">
-<!-- Header -->
-<main id="spa-content">
-<div class="py-8 grid grid-cols-12 gap-8">
-<!-- Left Column: Input Parameters -->
-<aside class="col-span-12 lg:col-span-4 flex flex-col gap-6">
-<div class="bg-white dark:bg-slate-900/50 p-6 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm">
-<div class="flex items-center gap-2 mb-6">
-<span class="material-symbols-outlined text-primary">tune</span>
-<h3 class="text-lg font-bold" data-i18n="roi_input_parameters">Input Parameters</h3>
-</div>
-<div class="space-y-6">
-<!-- Number of Outlets -->
-<div class="flex flex-col gap-2">
-<label class="text-sm font-semibold text-slate-600 dark:text-slate-400 flex justify-between">
-                                    Number of Outlets
-                                    <span class="text-primary">124</span>
-</label>
-<div class="relative flex items-center">
-<span class="material-symbols-outlined absolute left-3 text-slate-400 text-sm">storefront</span>
-<input class="w-full h-2 bg-slate-200 dark:bg-slate-800 rounded-lg appearance-none cursor-pointer accent-primary" max="500" min="1" type="range" value="124"/>
-</div>
-<div class="flex justify-between text-[10px] text-slate-400 font-bold uppercase tracking-tighter">
-<span data-i18n="roi_1_outlet">1 Outlet</span>
-<span data-i18n="roi_500_outlets">500 Outlets</span>
-</div>
-</div>
-<!-- Labor Costs -->
-<div class="flex flex-col gap-2">
-<label class="text-sm font-semibold text-slate-600 dark:text-slate-400" data-i18n="roi_current_monthly_labor_cost">Current Monthly Labor Cost ($)</label>
-<div class="flex rounded-lg overflow-hidden border border-slate-200 dark:border-slate-800">
-<span class="flex items-center justify-center bg-slate-50 dark:bg-slate-800 px-3 text-slate-500 border-r border-slate-200 dark:border-slate-800">
-<span class="material-symbols-outlined text-sm">payments</span>
-</span>
-<input class="w-full bg-white dark:bg-slate-900 border-0 focus:ring-1 focus:ring-primary text-sm p-3" placeholder="0.00" type="number" value="450000"/>
-</div>
-</div>
-<!-- Energy Usage -->
-<div class="flex flex-col gap-2">
-<label class="text-sm font-semibold text-slate-600 dark:text-slate-400" data-i18n="roi_average_energy_usage_kwh_mo">Average Energy Usage (kWh/mo)</label>
-<div class="flex rounded-lg overflow-hidden border border-slate-200 dark:border-slate-800">
-<span class="flex items-center justify-center bg-slate-50 dark:bg-slate-800 px-3 text-slate-500 border-r border-slate-200 dark:border-slate-800">
-<span class="material-symbols-outlined text-sm">bolt</span>
-</span>
-<input class="w-full bg-white dark:bg-slate-900 border-0 focus:ring-1 focus:ring-primary text-sm p-3" placeholder="0.00" type="number" value="18500"/>
-</div>
-</div>
-<div class="h-px bg-slate-200 dark:bg-slate-800 my-2"></div>
-<!-- Deployment Scale -->
-<div class="flex flex-col gap-3">
-<p class="text-sm font-semibold text-slate-600 dark:text-slate-400" data-i18n="roi_deployment_strategy">Deployment Strategy</p>
-<div class="grid grid-cols-2 gap-2">
-<button class="px-4 py-2 text-xs font-bold rounded-lg border border-primary bg-primary/10 text-primary" data-i18n="roi_phased_rollout">Phased Rollout</button>
-<button class="px-4 py-2 text-xs font-bold rounded-lg border border-slate-200 dark:border-slate-800 text-slate-500" data-i18n="roi_instant_deploy">Instant Deploy</button>
-</div>
-</div>
-<button class="w-full py-4 mt-4 bg-slate-900 dark:bg-white text-white dark:text-slate-900 rounded-lg text-sm font-bold flex items-center justify-center gap-2 hover:opacity-90 transition-opacity">
-<span class="material-symbols-outlined text-sm">refresh</span>
-                                Recalculate Simulation
-                            </button>
-</div>
-</div>
-<!-- Small Info Card -->
-<div class="bg-primary p-6 rounded-xl text-white flex items-center gap-4">
-<div class="size-12 rounded-full bg-white/20 flex items-center justify-center">
-<span class="material-symbols-outlined">verified</span>
-</div>
-<div>
-<p class="text-xs font-bold uppercase opacity-80" data-i18n="roi_system_confidence">System Confidence</p>
-<h4 class="text-xl font-black" data-i18n="roi_98_4_accuracy">98.4% Accuracy</h4>
-</div>
-</div>
-</aside>
-<!-- Right Column: Results & Visuals -->
-<div class="col-span-12 lg:col-span-8 flex flex-col gap-6">
-<!-- KPI Cards -->
-<div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-<div class="bg-white dark:bg-slate-900/50 p-5 rounded-xl border border-slate-200 dark:border-slate-800">
-<p class="text-slate-500 text-xs font-bold uppercase tracking-wider mb-1" data-i18n="roi_projected_5y_roi">Projected 5Y ROI</p>
-<div class="flex items-end gap-2">
-<h3 class="text-3xl font-black text-slate-900 dark:text-slate-100">342%</h3>
-<span class="text-emerald-500 text-sm font-bold flex items-center mb-1">
-<span class="material-symbols-outlined text-sm">trending_up</span> +12%
-                                </span>
-</div>
-</div>
-<div class="bg-white dark:bg-slate-900/50 p-5 rounded-xl border border-slate-200 dark:border-slate-800">
-<p class="text-slate-500 text-xs font-bold uppercase tracking-wider mb-1" data-i18n="roi_payback_period">Payback Period</p>
-<div class="flex items-end gap-2">
-<h3 class="text-3xl font-black text-primary">14.2</h3>
-<span class="text-slate-500 text-sm font-bold mb-1">Months</span>
-</div>
-</div>
-<div class="bg-white dark:bg-slate-900/50 p-5 rounded-xl border border-slate-200 dark:border-slate-800">
-<p class="text-slate-500 text-xs font-bold uppercase tracking-wider mb-1" data-i18n="roi_carbon_reduction">Carbon Reduction</p>
-<div class="flex items-end gap-2">
-<h3 class="text-3xl font-black text-slate-900 dark:text-slate-100" data-i18n="roi_2_4k">2.4k</h3>
-<span class="text-slate-500 text-sm font-bold mb-1" data-i18n="roi_tons_co2e">Tons CO2e</span>
-</div>
-</div>
-</div>
-<!-- Main Chart Area -->
-<div class="bg-white dark:bg-slate-900/50 p-8 rounded-xl border border-slate-200 dark:border-slate-800 flex-1 flex flex-col min-h-[400px]">
-<div class="flex justify-between items-center mb-6">
-<div>
-<h3 class="text-xl font-bold" data-i18n="roi_5_year_cumulative_impact">5-Year Cumulative Impact</h3>
-<p class="text-sm text-slate-500" data-i18n="roi_financial_savings_vs_carbon_offset_miles">Financial savings vs. Carbon offset milestones</p>
-</div>
-<div class="flex gap-2">
-<span class="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-slate-100 dark:bg-slate-800 text-[10px] font-bold uppercase">
-<span class="size-2 rounded-full bg-primary inline-block"></span> Net Profit
-</span>
-<span class="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-slate-100 dark:bg-slate-800 text-[10px] font-bold uppercase">
-<span class="size-2 rounded-full bg-slate-400 inline-block"></span> Baseline
-</span>
-</div>
-</div>
-<div class="flex-1 relative" style="min-height:280px;">
-<canvas id="roi-cumulative-chart"></canvas>
-</div>
-</div>
-<!-- Secondary Charts -->
-<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-<div class="bg-white dark:bg-slate-900/50 p-6 rounded-xl border border-slate-200 dark:border-slate-800">
-<h4 class="text-sm font-bold mb-4 flex items-center gap-2">
-<span class="material-symbols-outlined text-primary text-lg">eco</span>
-                                ESG Contribution Profile
-                            </h4>
-<div class="space-y-4">
-<div>
-<div class="flex justify-between text-xs mb-1">
-<span class="text-slate-500" data-i18n="roi_waste_reduction">Waste Reduction</span>
-<span class="font-bold text-primary">68%</span>
-</div>
-<div class="w-full h-1.5 bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden">
-<div class="h-full bg-primary rounded-full" style="width: 68%"></div>
-</div>
-</div>
-<div>
-<div class="flex justify-between text-xs mb-1">
-<span class="text-slate-500" data-i18n="roi_green_energy_transition">Green Energy Transition</span>
-<span class="font-bold text-primary">42%</span>
-</div>
-<div class="w-full h-1.5 bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden">
-<div class="h-full bg-primary rounded-full" style="width: 42%"></div>
-</div>
-</div>
-</div>
-</div>
-<div class="bg-white dark:bg-slate-900/50 p-6 rounded-xl border border-slate-200 dark:border-slate-800">
-<h4 class="text-sm font-bold mb-4 flex items-center gap-2">
-<span class="material-symbols-outlined text-primary text-lg">compare_arrows</span>
-                                Manual vs. Automated Labor Cost
-                            </h4>
-<div class="relative" style="height:160px;">
-<canvas id="roi-labor-compare-chart"></canvas>
-</div>
-<div class="flex gap-4 mt-3">
-<span class="flex items-center gap-1.5 text-[10px] font-bold text-slate-400 uppercase">
-<span class="inline-block size-2 rounded-full bg-slate-400"></span> Manual
-</span>
-<span class="flex items-center gap-1.5 text-[10px] font-bold text-primary uppercase">
-<span class="inline-block size-2 rounded-full bg-primary"></span> Automated
-</span>
-</div>
-</div>
-</div>
-</div>
-</div>
-</main>
+    <div class="layout-container flex h-full grow flex-col">
+      <main id="spa-content">
+        <div class="py-8 grid grid-cols-12 gap-8">
+          <!-- Left Column: Input Parameters -->
+          <aside class="col-span-12 lg:col-span-4 flex flex-col gap-6">
+            <div
+              class="bg-white dark:bg-slate-900/50 p-6 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm"
+            >
+              <div class="flex items-center gap-2 mb-6">
+                <span class="material-symbols-outlined text-primary">tune</span>
+                <h3 class="text-lg font-bold" data-i18n="roi_input_parameters">输入参数</h3>
+              </div>
+              <div class="space-y-6">
+                <!-- Number of Outlets -->
+                <div class="flex flex-col gap-2">
+                  <label class="text-sm font-semibold text-slate-600 dark:text-slate-400 flex justify-between">
+                    <span data-i18n="roi_outlet_count">门店数量</span>
+                    <span class="text-primary" id="roi-outlet-label">5</span>
+                  </label>
+                  <div class="relative flex items-center">
+                    <span class="material-symbols-outlined absolute left-3 text-slate-400 text-sm">storefront</span>
+                    <input
+                      id="roi-outlets"
+                      class="w-full h-2 bg-slate-200 dark:bg-slate-800 rounded-lg appearance-none cursor-pointer accent-primary"
+                      max="200"
+                      min="1"
+                      type="range"
+                      value="5"
+                    />
+                  </div>
+                  <div class="flex justify-between text-[10px] text-slate-400 font-bold uppercase tracking-tighter">
+                    <span data-i18n="roi_1_outlet">1 家</span>
+                    <span data-i18n="roi_200_outlets">200 家</span>
+                  </div>
+                </div>
+                <!-- Number of Chefs per Outlet -->
+                <div class="flex flex-col gap-2">
+                  <label class="text-sm font-semibold text-slate-600 dark:text-slate-400 flex justify-between">
+                    <span data-i18n="roi_chefs_per_outlet">每店厨师人数</span>
+                    <span class="text-primary" id="roi-chef-label">3</span>
+                  </label>
+                  <div class="relative flex items-center">
+                    <span class="material-symbols-outlined absolute left-3 text-slate-400 text-sm">restaurant</span>
+                    <input
+                      id="roi-chefs"
+                      class="w-full h-2 bg-slate-200 dark:bg-slate-800 rounded-lg appearance-none cursor-pointer accent-primary"
+                      max="20"
+                      min="1"
+                      type="range"
+                      value="3"
+                    />
+                  </div>
+                  <div class="flex justify-between text-[10px] text-slate-400 font-bold uppercase tracking-tighter">
+                    <span data-i18n="roi_1_chef">1 人</span>
+                    <span data-i18n="roi_20_chefs">20 人</span>
+                  </div>
+                </div>
+                <!-- Monthly Chef Salary -->
+                <div class="flex flex-col gap-2">
+                  <label
+                    class="text-sm font-semibold text-slate-600 dark:text-slate-400"
+                    data-i18n="roi_monthly_chef_salary"
+                  >
+                    厨师月薪（人民币）
+                  </label>
+                  <div class="flex rounded-lg overflow-hidden border border-slate-200 dark:border-slate-800">
+                    <span
+                      class="flex items-center justify-center bg-slate-50 dark:bg-slate-800 px-3 text-slate-500 border-r border-slate-200 dark:border-slate-800"
+                    >
+                      <span class="material-symbols-outlined text-sm">payments</span>
+                    </span>
+                    <input
+                      id="roi-salary"
+                      class="w-full bg-white dark:bg-slate-900 border-0 focus:ring-1 focus:ring-primary text-sm p-3"
+                      placeholder="5000"
+                      type="number"
+                      value="5000"
+                    />
+                  </div>
+                </div>
+                <!-- Monthly Energy Cost -->
+                <div class="flex flex-col gap-2">
+                  <label
+                    class="text-sm font-semibold text-slate-600 dark:text-slate-400"
+                    data-i18n="roi_monthly_energy_cost"
+                  >
+                    每店月度能源费用（人民币）
+                  </label>
+                  <div class="flex rounded-lg overflow-hidden border border-slate-200 dark:border-slate-800">
+                    <span
+                      class="flex items-center justify-center bg-slate-50 dark:bg-slate-800 px-3 text-slate-500 border-r border-slate-200 dark:border-slate-800"
+                    >
+                      <span class="material-symbols-outlined text-sm">bolt</span>
+                    </span>
+                    <input
+                      id="roi-energy"
+                      class="w-full bg-white dark:bg-slate-900 border-0 focus:ring-1 focus:ring-primary text-sm p-3"
+                      placeholder="8000"
+                      type="number"
+                      value="8000"
+                    />
+                  </div>
+                </div>
+                <div class="h-px bg-slate-200 dark:bg-slate-800 my-2"></div>
+                <!-- Deployment Strategy -->
+                <div class="flex flex-col gap-3">
+                  <p
+                    class="text-sm font-semibold text-slate-600 dark:text-slate-400"
+                    data-i18n="roi_deployment_strategy"
+                  >
+                    部署方式
+                  </p>
+                  <div class="grid grid-cols-2 gap-2">
+                    <button
+                      class="roi-strategy-btn px-4 py-2 text-xs font-bold rounded-lg border border-primary bg-primary/10 text-primary"
+                      data-strategy="phased"
+                      data-i18n="roi_phased_rollout"
+                    >
+                      分批部署
+                    </button>
+                    <button
+                      class="roi-strategy-btn px-4 py-2 text-xs font-bold rounded-lg border border-slate-200 dark:border-slate-800 text-slate-500"
+                      data-strategy="instant"
+                      data-i18n="roi_instant_deploy"
+                    >
+                      一次性部署
+                    </button>
+                  </div>
+                </div>
+                <button
+                  id="roi-recalc-btn"
+                  class="w-full py-4 mt-4 bg-primary text-white rounded-lg text-sm font-bold flex items-center justify-center gap-2 hover:opacity-90 transition-opacity"
+                >
+                  <span class="material-symbols-outlined text-sm">refresh</span>
+                  <span data-i18n="roi_recalculate">重新计算</span>
+                </button>
+              </div>
+            </div>
+            <!-- Info Card -->
+            <div class="bg-primary p-6 rounded-xl text-white flex items-center gap-4">
+              <div class="size-12 rounded-full bg-white/20 flex items-center justify-center">
+                <span class="material-symbols-outlined">verified</span>
+              </div>
+              <div>
+                <p class="text-xs font-bold uppercase opacity-80" data-i18n="roi_data_reference">数据参考</p>
+                <h4 class="text-base font-bold" data-i18n="roi_based_on_real_cases">基于实际案例</h4>
+              </div>
+            </div>
+          </aside>
 
-</div>
+          <!-- Right Column: Results & Visuals -->
+          <div class="col-span-12 lg:col-span-8 flex flex-col gap-6">
+            <!-- KPI Cards -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <div class="bg-white dark:bg-slate-900/50 p-5 rounded-xl border border-slate-200 dark:border-slate-800">
+                <p
+                  class="text-slate-500 text-xs font-bold uppercase tracking-wider mb-1"
+                  data-i18n="roi_projected_5y_roi"
+                >
+                  预计5年投资回报
+                </p>
+                <div class="flex items-end gap-2">
+                  <h3 class="text-3xl font-black text-slate-900 dark:text-slate-100" id="roi-kpi-roi">—</h3>
+                </div>
+              </div>
+              <div class="bg-white dark:bg-slate-900/50 p-5 rounded-xl border border-slate-200 dark:border-slate-800">
+                <p
+                  class="text-slate-500 text-xs font-bold uppercase tracking-wider mb-1"
+                  data-i18n="roi_payback_period"
+                >
+                  预计回本周期
+                </p>
+                <div class="flex items-end gap-2">
+                  <h3 class="text-3xl font-black text-primary" id="roi-kpi-payback">—</h3>
+                  <span class="text-slate-500 text-sm font-bold mb-1" data-i18n="roi_months">个月</span>
+                </div>
+              </div>
+              <div class="bg-white dark:bg-slate-900/50 p-5 rounded-xl border border-slate-200 dark:border-slate-800">
+                <p
+                  class="text-slate-500 text-xs font-bold uppercase tracking-wider mb-1"
+                  data-i18n="roi_annual_savings"
+                >
+                  年节省总额
+                </p>
+                <div class="flex items-end gap-2">
+                  <h3 class="text-3xl font-black text-slate-900 dark:text-slate-100" id="roi-kpi-savings">—</h3>
+                  <span class="text-slate-500 text-sm font-bold mb-1" data-i18n="roi_rmb_per_year">万元/年</span>
+                </div>
+              </div>
+            </div>
+            <!-- Main Chart Area -->
+            <div
+              class="bg-white dark:bg-slate-900/50 p-8 rounded-xl border border-slate-200 dark:border-slate-800 flex-1 flex flex-col min-h-[400px]"
+            >
+              <div class="flex justify-between items-center mb-6">
+                <div>
+                  <h3 class="text-xl font-bold" data-i18n="roi_5_year_cumulative_impact">5年累计节省趋势</h3>
+                  <p class="text-sm text-slate-500" data-i18n="roi_savings_vs_equipment_cost">设备投入 vs 累计节省</p>
+                </div>
+                <div class="flex gap-2">
+                  <span
+                    class="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-slate-100 dark:bg-slate-800 text-[10px] font-bold uppercase"
+                  >
+                    <span class="size-2 rounded-full bg-primary inline-block"></span>
+                    <span data-i18n="roi_net_savings">净节省</span>
+                  </span>
+                  <span
+                    class="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-slate-100 dark:bg-slate-800 text-[10px] font-bold uppercase"
+                  >
+                    <span class="size-2 rounded-full bg-slate-400 inline-block"></span>
+                    <span data-i18n="roi_equipment_cost">设备投入</span>
+                  </span>
+                </div>
+              </div>
+              <div class="flex-1 relative" style="min-height: 280px">
+                <canvas id="roi-cumulative-chart"></canvas>
+              </div>
+            </div>
+            <!-- Secondary Charts -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div class="bg-white dark:bg-slate-900/50 p-6 rounded-xl border border-slate-200 dark:border-slate-800">
+                <h4 class="text-sm font-bold mb-4 flex items-center gap-2">
+                  <span class="material-symbols-outlined text-primary text-lg">eco</span>
+                  <span data-i18n="roi_benefit_breakdown">效益构成</span>
+                </h4>
+                <div class="space-y-4">
+                  <div>
+                    <div class="flex justify-between text-xs mb-1">
+                      <span class="text-slate-500" data-i18n="roi_labor_saving">人工节省</span>
+                      <span class="font-bold text-primary" id="roi-labor-pct">—</span>
+                    </div>
+                    <div class="w-full h-1.5 bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden">
+                      <div class="h-full bg-primary rounded-full" id="roi-labor-bar" style="width: 70%"></div>
+                    </div>
+                  </div>
+                  <div>
+                    <div class="flex justify-between text-xs mb-1">
+                      <span class="text-slate-500" data-i18n="roi_energy_saving">能源节省</span>
+                      <span class="font-bold text-primary" id="roi-energy-pct">—</span>
+                    </div>
+                    <div class="w-full h-1.5 bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden">
+                      <div class="h-full bg-primary rounded-full" id="roi-energy-bar" style="width: 30%"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="bg-white dark:bg-slate-900/50 p-6 rounded-xl border border-slate-200 dark:border-slate-800">
+                <h4 class="text-sm font-bold mb-4 flex items-center gap-2">
+                  <span class="material-symbols-outlined text-primary text-lg">compare_arrows</span>
+                  <span data-i18n="roi_manual_vs_automated">传统 vs 智能月度成本</span>
+                </h4>
+                <div class="relative" style="height: 160px">
+                  <canvas id="roi-labor-compare-chart"></canvas>
+                </div>
+                <div class="flex gap-4 mt-3">
+                  <span class="flex items-center gap-1.5 text-[10px] font-bold text-slate-400 uppercase">
+                    <span class="inline-block size-2 rounded-full bg-slate-400"></span>
+                    <span data-i18n="roi_traditional">传统方式</span>
+                  </span>
+                  <span class="flex items-center gap-1.5 text-[10px] font-bold text-primary uppercase">
+                    <span class="inline-block size-2 rounded-full bg-primary"></span>
+                    <span data-i18n="roi_intelligent">智能方案</span>
+                  </span>
+                </div>
+              </div>
+            </div>
+            <!-- Disclaimer -->
+            <p class="text-xs text-slate-400 text-center mt-4" data-i18n="roi_disclaimer">
+              *
+              以上数据为基于典型使用场景的估算，实际效果因具体配置和使用环境而异。如需精准方案，请联系我们获取定制报价。
+            </p>
+          </div>
+        </div>
+      </main>
+    </div>
 
-
-
-<script defer src="/assets/js/ui/products-dropdown.js?v=20260322-v3"></script>
-<script defer src="/assets/js/ui/navigator.js?v=20260322-v3"></script>
-<script defer src="/assets/js/ui/search-engine.js"></script>
-<script defer src="/assets/js/ui/footer.js?v=20260322-v3"></script>
-<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
-<script defer src="/assets/js/lang-registry.js"></script>
-<script defer src="/assets/js/translations.js"></script><script defer src="/assets/js/translations-dropdown-template.js"></script>
-<script src="/assets/js/contacts.js"></script>
-<script src="/assets/js/ui/smart-popup.js"></script>
-<script src="/assets/js/router.js"></script>
-<script src="/assets/js/page-interactions.js"></script>
-<script>
-  document.addEventListener('DOMContentLoaded', function () {
-    if (window.translationManager) window.translationManager.initialize();
-  });
-</script>
-
-
-<script src="/assets/js/utils/device-utils.js"></script>
-<script src="/assets/js/spa-router.js"></script>
-<script>
-  document.addEventListener('DOMContentLoaded', function() {
-    if (window.SpaRouter && typeof window.SpaRouter.init === 'function') {
-      window.SpaRouter.init();
-    }
-  });
-</script>
-</body></html>
+    <script defer src="/assets/js/ui/products-dropdown.js?v=20260322-v3"></script>
+    <script defer src="/assets/js/ui/navigator.js?v=20260322-v3"></script>
+    <script defer src="/assets/js/ui/search-engine.js"></script>
+    <script defer src="/assets/js/ui/footer.js?v=20260322-v3"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
+    <script defer src="/assets/js/lang-registry.js"></script>
+    <script defer src="/assets/js/translations.js"></script>
+    <script defer src="/assets/js/translations-dropdown-template.js"></script>
+    <script src="/assets/js/contacts.js"></script>
+    <script src="/assets/js/ui/smart-popup.js"></script>
+    <script src="/assets/js/router.js"></script>
+    <script src="/assets/js/page-interactions.js"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        if (window.translationManager) window.translationManager.initialize();
+      });
+    </script>
+    <script src="/assets/js/utils/device-utils.js"></script>
+    <script src="/assets/js/spa-router.js"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        if (window.SpaRouter && typeof window.SpaRouter.init === "function") {
+          window.SpaRouter.init();
+        }
+      });
+    </script>
+  </body>
+</html>

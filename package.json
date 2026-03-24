@@ -27,8 +27,10 @@
     "lint:fix": "eslint . --ext .js --fix",
     "lint:css": "stylelint 'src/**/*.css' --ignore-pattern 'src/assets/css/tailwind.css' --ignore-pattern 'src/assets/css/tailwind-entry.css'",
     "lint:css:fix": "stylelint 'src/**/*.css' --ignore-pattern 'src/assets/css/tailwind.css' --ignore-pattern 'src/assets/css/tailwind-entry.css' --fix",
-    "lint:all": "npm run lint && npm run lint:css",
-    "lint:all:fix": "npm run lint:fix && npm run lint:css:fix",
+    "lint:html": "htmlhint \"src/**/*.html\"",
+    "lint:html:fix": "htmlhint \"src/**/*.html\"",
+    "lint:all": "npm run lint && npm run lint:css && npm run lint:html",
+    "lint:all:fix": "npm run lint:fix && npm run lint:css:fix && npm run lint:html:fix",
     "docker:build": "docker build -t html-yuql .",
     "docker:run": "docker run -p 3000:3000 html-yuql",
     "prestart": "node scripts/init-dev.js",
@@ -56,8 +58,7 @@
     "express": "^4.18.2",
     "express-rate-limit": "^7.1.5",
     "helmet": "^7.1.0",
-    "puppeteer-core": "24.39.1",
-    "xlsx": "0.18.5"
+    "puppeteer-core": "24.39.1"
   },
   "devDependencies": {
     "@babel/preset-env": "7.29.0",
@@ -69,6 +70,7 @@
     "css-loader": "7.1.4",
     "eslint": "^8.53.0",
     "html-webpack-plugin": "^5.6.6",
+    "htmlhint": "^1.9.2",
     "jest": "30.3.0",
     "jest-environment-jsdom": "30.3.0",
     "mini-css-extract-plugin": "2.10.0",

@@ -35,16 +35,16 @@
  * 依赖：无（纯工具类）
  */
 
-(function(global) {
-  'use strict';
+(function (global) {
+  "use strict";
 
   /**
    * 设备类型枚举
    */
   var DeviceType = {
-    MOBILE: 'mobile',
-    TABLET: 'tablet',
-    PC: 'pc'
+    MOBILE: "mobile",
+    TABLET: "tablet",
+    PC: "pc",
   };
 
   /**
@@ -52,10 +52,10 @@
    * 与 Tailwind 默认断点保持一致
    */
   var Breakpoints = {
-    MOBILE_MAX: 767,      // < 768px
-    TABLET_MIN: 768,      // >= 768px
-    TABLET_MAX: 1279,     // < 1280px
-    PC_MIN: 1280          // >= 1280px
+    MOBILE_MAX: 767, // < 768px
+    TABLET_MIN: 768, // >= 768px
+    TABLET_MAX: 1279, // < 1280px
+    PC_MIN: 1280, // >= 1280px
   };
 
   /**
@@ -123,7 +123,7 @@
    */
   function getDevicePagePath(basePath) {
     // 如果不是标准的 index.html 路径，返回原值
-    if (!basePath || !basePath.endsWith('/index.html')) {
+    if (!basePath || !basePath.endsWith("/index.html")) {
       return basePath;
     }
 
@@ -132,19 +132,19 @@
 
     switch (deviceType) {
       case DeviceType.MOBILE:
-        suffix = 'index-mobile.html';
+        suffix = "index-mobile.html";
         break;
       case DeviceType.TABLET:
-        suffix = 'index-tablet.html';
+        suffix = "index-tablet.html";
         break;
       case DeviceType.PC:
-        suffix = 'index-pc.html';
+        suffix = "index-pc.html";
         break;
       default:
-        suffix = 'index.html';
+        suffix = "index.html";
     }
 
-    return basePath.replace('index.html', suffix);
+    return basePath.replace("index.html", suffix);
   }
 
   /**
@@ -155,7 +155,7 @@
    */
   function shouldRedirect(currentFile) {
     // 如果当前文件名为空（目录 URL），不需要重定向
-    if (!currentFile || currentFile === '') {
+    if (!currentFile || currentFile === "") {
       return false;
     }
 
@@ -164,20 +164,20 @@
 
     switch (deviceType) {
       case DeviceType.MOBILE:
-        targetFile = 'index-mobile.html';
+        targetFile = "index-mobile.html";
         break;
       case DeviceType.TABLET:
-        targetFile = 'index-tablet.html';
+        targetFile = "index-tablet.html";
         break;
       case DeviceType.PC:
-        targetFile = 'index-pc.html';
+        targetFile = "index-pc.html";
         break;
       default:
-        targetFile = 'index.html';
+        targetFile = "index.html";
     }
 
     // 特殊情况：PC 访问 index.html 不需要重定向（保持干净 URL）
-    if (deviceType === DeviceType.PC && currentFile === 'index.html') {
+    if (deviceType === DeviceType.PC && currentFile === "index.html") {
       return false;
     }
 
@@ -193,7 +193,7 @@
    */
   function isDirectoryURL() {
     var pathname = window.location.pathname;
-    return pathname.endsWith('/') || pathname === '' || pathname === window.location.pathname;
+    return pathname.endsWith("/") || pathname === "" || pathname === window.location.pathname;
   }
 
   // 设备类型变化检测
@@ -205,7 +205,7 @@
    * @param {Function} callback - 设备类型变化时的回调函数
    */
   function onDeviceChange(callback) {
-    if (typeof callback === 'function') {
+    if (typeof callback === "function") {
       deviceChangeCallbacks.push(callback);
     }
   }
@@ -216,15 +216,14 @@
   function checkDeviceChange() {
     var currentDeviceType = getDeviceType();
     if (currentDeviceType !== lastDeviceType) {
-      console.log('[DeviceUtils] Device type changed:', lastDeviceType, '->', currentDeviceType);
       lastDeviceType = currentDeviceType;
-      
+
       // 触发所有回调
-      deviceChangeCallbacks.forEach(function(callback) {
+      deviceChangeCallbacks.forEach(function (callback) {
         try {
           callback(currentDeviceType, lastDeviceType);
         } catch (e) {
-          console.error('[DeviceUtils] Error in device change callback:', e);
+          console.error("[DeviceUtils] Error in device change callback:", e);
         }
       });
     }
@@ -235,11 +234,11 @@
    */
   function initResizeListener() {
     var resizeTimer;
-    window.addEventListener('resize', function() {
+    window.addEventListener("resize", function () {
       clearTimeout(resizeTimer);
       resizeTimer = setTimeout(checkDeviceChange, 250); // 防抖250ms
     });
-    
+
     // 初始检查
     setTimeout(checkDeviceChange, 100);
   }
@@ -258,14 +257,13 @@
     isDirectoryURL: isDirectoryURL,
     onDeviceChange: onDeviceChange,
     initResizeListener: initResizeListener,
-    getLastDeviceType: function() { return lastDeviceType; }
+    getLastDeviceType: function () {
+      return lastDeviceType;
+    },
   };
 
-  console.log('[DeviceUtils] Loaded successfully');
-
   // 初始化窗口大小变化监听
-  if (typeof window !== 'undefined') {
+  if (typeof window !== "undefined") {
     setTimeout(initResizeListener, 0);
   }
-
-})(typeof window !== 'undefined' ? window : global);
+})(typeof window !== "undefined" ? window : global);

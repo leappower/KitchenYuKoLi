@@ -1,318 +1,533 @@
-<!DOCTYPE html>
+<!doctype html>
 
-<html class="light" lang="zh-CN"><head>
-<!-- ═══ Responsive Redirect (injected by patch-responsive-redirect.py) ═══ -->
-<link rel="canonical" href="/about/"/>
-<link rel="alternate" media="only screen and (max-width: 767px)"
-      href="/about/index-mobile.html"/>
-<link rel="alternate" media="only screen and (min-width: 768px) and (max-width: 1279px)"
-      href="/about/index-tablet.html"/>
-<link rel="alternate" media="only screen and (min-width: 1280px)"
-      href="/about/index-pc.html"/>
-<script>
-/* Responsive redirect — runs before render, no flash */
-(function(){
-  if (window.__redirectChecked) return;
-  window.__redirectChecked = true;
+<html class="light" lang="zh-CN">
+  <head>
+    <!-- ═══ Responsive Redirect (injected by patch-responsive-redirect.py) ═══ -->
+    <link rel="canonical" href="/about/" />
+    <link rel="alternate" media="only screen and (max-width: 767px)" href="/about/index-mobile.html" />
+    <link
+      rel="alternate"
+      media="only screen and (min-width: 768px) and (max-width: 1279px)"
+      href="/about/index-tablet.html"
+    />
+    <link rel="alternate" media="only screen and (min-width: 1280px)" href="/about/index-pc.html" />
+    <script>
+      /* Responsive redirect — runs before render, no flash */
+      (function () {
+        if (window.__redirectChecked) return;
+        window.__redirectChecked = true;
 
-  var urlParams = new URLSearchParams(location.search);
-  var cleanUrl = urlParams.get('clean-url');
-  if (cleanUrl) {
-    console.log('[Responsive Redirect] Cleaning URL to:', cleanUrl);
-    history.replaceState({}, '', cleanUrl);
-    return;
-  }
+        var urlParams = new URLSearchParams(location.search);
+        var cleanUrl = urlParams.get("clean-url");
+        if (cleanUrl) {
+          console.log("[Responsive Redirect] Cleaning URL to:", cleanUrl);
+          history.replaceState({}, "", cleanUrl);
+          return;
+        }
 
-  console.log('[Responsive Redirect] Checking SPA flag: window.__spaNavigating =', window.__spaNavigating);
-  if (window.__spaNavigating) {
-    console.log('[Responsive Redirect] SPA navigation detected, skipping redirect');
-    return;
-  }
+        console.log("[Responsive Redirect] Checking SPA flag: window.__spaNavigating =", window.__spaNavigating);
+        if (window.__spaNavigating) {
+          console.log("[Responsive Redirect] SPA navigation detected, skipping redirect");
+          return;
+        }
 
-  var currentFile = location.pathname.split('/').pop();
-  console.log('[Responsive Redirect] Current file:', currentFile, 'Pathname:', location.pathname);
+        var currentFile = location.pathname.split("/").pop();
+        console.log("[Responsive Redirect] Current file:", currentFile, "Pathname:", location.pathname);
 
-  if (window.DeviceUtils && window.DeviceUtils.isDirectoryURL()) {
-    console.log('[Responsive Redirect] Directory URL detected, skipping redirect');
-    return;
-  }
+        if (window.DeviceUtils && window.DeviceUtils.isDirectoryURL()) {
+          console.log("[Responsive Redirect] Directory URL detected, skipping redirect");
+          return;
+        }
 
-  if (window.DeviceUtils && window.DeviceUtils.shouldRedirect(currentFile)) {
-    var deviceType = window.DeviceUtils.getDeviceType();
-    var targetFile;
+        if (window.DeviceUtils && window.DeviceUtils.shouldRedirect(currentFile)) {
+          var deviceType = window.DeviceUtils.getDeviceType();
+          var targetFile;
 
-    if (deviceType === window.DeviceUtils.DeviceType.MOBILE) {
-      targetFile = 'index-mobile.html';
-    } else if (deviceType === window.DeviceUtils.DeviceType.TABLET) {
-      targetFile = 'index-tablet.html';
-    } else {
-      targetFile = 'index-pc.html';
-    }
+          if (deviceType === window.DeviceUtils.DeviceType.MOBILE) {
+            targetFile = "index-mobile.html";
+          } else if (deviceType === window.DeviceUtils.DeviceType.TABLET) {
+            targetFile = "index-tablet.html";
+          } else {
+            targetFile = "index-pc.html";
+          }
 
-    console.log('[Responsive Redirect] Redirecting to:', targetFile);
-    location.href = targetFile;
-    return;
-  }
+          console.log("[Responsive Redirect] Redirecting to:", targetFile);
+          location.href = targetFile;
+          return;
+        }
 
-  console.log('[Responsive Redirect] No redirect needed');
-})();
-</script>
-<!-- ═══ End Responsive Redirect ═══ -->
+        console.log("[Responsive Redirect] No redirect needed");
+      })();
+    </script>
+    <!-- ═══ End Responsive Redirect ═══ -->
 
+    <meta charset="utf-8" />
+    <meta
+      name="description"
+      content="YuKoLi（跃迁力科技）— 20年商用厨房设备制造商，总部位于广东佛山。114款智能商厨设备，覆盖全球50+国家，通过CE、UL、ISO 9001认证。核心产品：智能炒菜机、万能蒸烤箱等。"
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="YuKoLi 智能厨具 | 关于我们 - 20年商用厨房设备制造商" />
+    <meta
+      property="og:description"
+      content="YuKoLi（跃迁力科技）— 20年商用厨房设备制造商，总部位于广东佛山。114款智能商厨设备，覆盖全球50+国家，通过CE、UL、ISO 9001认证。"
+    />
+    <meta property="og:url" content="https://www.kitchen.yukoli.com/about/" />
+    <meta property="og:image" content="https://www.kitchen.yukoli.com/assets/images/logo_header.webp" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>YuKoLi 智能厨具 | 关于我们 - 20年商用厨房设备制造商</title>
 
-<meta charset="utf-8"/>
-<meta name="description" content="Learn about Yukoli - a leading industrial smart kitchen solutions provider. Discover our story, manufacturing capabilities, and global certifications.">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Yukoli | About Us - Industrial Smart Kitchen Solutions">
-<meta property="og:description" content="Learn about Yukoli - a leading industrial smart kitchen solutions provider. Discover our story, manufacturing capabilities, and global certifications.">
-<meta property="og:url" content="https://www.kitchen.yukoli.com/about/index-pc.html">
-<meta property="og:image" content="https://www.kitchen.yukoli.com/assets/images/og-about.webp">
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Yukoli | About Us - Industrial Smart Kitchen Solutions</title>
-<link rel="preload" href="/assets/fonts/local-fonts.css" as="style">
-<link rel="preload" href="/assets/css/styles.css" as="style">
-  <link rel="preload" href="/assets/css/tailwind.css" as="style">
-<link rel="preload" href="/assets/fonts/public-sans-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" href="/assets/fonts/public-sans-latin-700-normal.woff2" as="font" type="font/woff2" crossorigin>
-<link href="/assets/fonts/local-fonts.css" rel="stylesheet"/>
-<link rel="stylesheet" href="/assets/css/styles.css">
-  <link rel="stylesheet" href="/assets/css/tailwind.css">
-<link rel="stylesheet" href="/assets/css/z-index-system.css">
-<link rel="stylesheet" href="/assets/css/performance-optimized.css"/>
-<!-- Dark mode: apply saved preference before first paint (prevents flash) -->
-  <script>(function(){
-if(localStorage.getItem('darkMode')==='true')document.documentElement.classList.add('dark')})()</script>
-<link rel="stylesheet" href="/assets/css/skeleton.css"/>
-<link rel="icon" href="/assets/images/logo_header.webp" type="image/webp">
+    <!-- Organization JSON-LD -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "佛山市跃迁力科技有限公司",
+        "alternateName": ["Foshan YuKoLi Technology Co., Ltd.", "YuKoLi", "跃迁力科技"],
+        "url": "https://www.kitchen.yukoli.com",
+        "logo": "https://www.kitchen.yukoli.com/assets/images/logo_header.webp",
+        "description": "YuKoLi 是一家位于广东佛山的商用厨房设备制造商，拥有20年行业经验，114款智能商厨设备，产品出口全球50+国家。",
+        "foundingDate": "2006",
+        "foundingLocation": {
+          "@type": "Place",
+          "name": "Foshan, Guangdong, China"
+        },
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Foshan",
+          "addressRegion": "Guangdong",
+          "addressCountry": "CN"
+        },
+        "areaServed": [
+          { "@type": "Country", "name": "Thailand" },
+          { "@type": "Country", "name": "Vietnam" },
+          { "@type": "Country", "name": "Malaysia" },
+          { "@type": "Country", "name": "Indonesia" },
+          { "@type": "Country", "name": "Philippines" }
+        ],
+        "numberOfEmployees": { "@type": "QuantitativeValue", "minValue": 200, "maxValue": 499 },
+        "sameAs": []
+      }
+    </script>
 
-<script>
-window.addEventListener('DOMContentLoaded',function(){
-  setTimeout(function(){
-    var m=document.getElementById('spa-content');
-    if(!m)return;
-    var s=getComputedStyle(m);
-    var ok=s.maxWidth==='none'||parseInt(s.maxWidth)>=1920;
-    console.log('%c['+location.pathname.replace(//$/,'')+'] main: max-w='+s.maxWidth+' px='+s.paddingLeft+'/'+s.paddingRight+' w='+m.offsetWidth,ok?'color:green':'color:orange;font-weight:bold');
-    if(!ok)console.warn('Expected max-width: 1920px, got:',s.maxWidth);
-  },200);
-});
-</script>
-</head>
-<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 antialiased transition-colors duration-300 overflow-x-hidden">
-<!-- Top Navigation Bar -->
-<!-- ═══ Navigator Component ═══ -->
-<navigator data-component="navigator"
-  data-variant="pc"
-  data-active="about"
-  data-cta-text-key="nav_get_quote"
-  data-cta-href="/quote"></navigator>
-<main id="spa-content">
-<!-- Hero Section -->
-<section class="flex flex-col lg:flex-row items-center py-12 gap-12 mb-24">
-<div class="w-full lg:w-1/2 flex flex-col gap-6">
-<div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-bold uppercase tracking-wider w-fit">
-<span class="material-symbols-outlined text-sm">apartment</span>
-                    About Yukoli
-                </div>
-<h1 class="text-5xl lg:text-7xl font-black leading-tight tracking-tighter">
-                    Pioneering <br/><span class="text-primary">Kitchen Intelligence</span>
-</h1>
-<p class="text-lg text-slate-600 dark:text-slate-400 max-w-xl">
-                    Since 2010, Yukoli has been at the forefront of industrial kitchen automation, transforming how restaurants and food service operations work worldwide.
-                </p>
-<div class="flex items-center gap-4">
-<button class="bg-primary text-white px-8 py-4 rounded-xl font-bold flex items-center gap-2 hover:shadow-lg hover:shadow-primary/20 transition-all">
-                        Our Story <span class="material-symbols-outlined">arrow_downward</span>
-</button>
-</div>
-</div>
-<div class="w-full lg:w-1/2 relative">
-<div class="absolute -inset-4 bg-primary/20 rounded-2xl blur-2xl group-hover:bg-primary/30 transition-all"></div>
-<div class="relative w-full h-[400px] bg-slate-200 dark:bg-slate-800 rounded-2xl overflow-hidden border border-slate-300 dark:border-slate-700">
-<img loading="lazy" alt="Yukoli Factory" class="w-full h-full object-cover" src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=800&h=600&fit=crop" width="800" height="600">
-</div>
-</div>
-</section>
+    <link rel="preload" href="/assets/fonts/local-fonts.css" as="style" />
+    <link rel="preload" href="/assets/css/styles.css" as="style" />
+    <link rel="preload" href="/assets/css/tailwind.css" as="style" />
+    <link
+      rel="preload"
+      href="/assets/fonts/public-sans-latin-400-normal.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href="/assets/fonts/public-sans-latin-700-normal.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link href="/assets/fonts/local-fonts.css" rel="stylesheet" />
+    <link rel="stylesheet" href="/assets/css/styles.css" />
+    <link rel="stylesheet" href="/assets/css/tailwind.css" />
+    <link rel="stylesheet" href="/assets/css/z-index-system.css" />
+    <link rel="stylesheet" href="/assets/css/performance-optimizations.css" />
+    <!-- Dark mode: apply saved preference before first paint (prevents flash) -->
+    <script>
+      (function () {
+        if (localStorage.getItem("darkMode") === "true") document.documentElement.classList.add("dark");
+      })();
+    </script>
+    <link rel="stylesheet" href="/assets/css/skeleton.css" />
+    <link rel="icon" href="/assets/images/logo_header.webp" type="image/webp" />
 
-<!-- Company Stats -->
-<section class="mb-24">
-<div class="grid grid-cols-2 lg:grid-cols-4 gap-6">
-<div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-8 text-center">
-<p class="text-4xl lg:text-5xl font-black text-primary mb-2">15+</p>
-<p class="text-sm font-bold text-slate-500 uppercase tracking-wider">Years Experience</p>
-</div>
-<div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-8 text-center">
-<p class="text-4xl lg:text-5xl font-black text-primary mb-2">45+</p>
-<p class="text-sm font-bold text-slate-500 uppercase tracking-wider">Countries</p>
-</div>
-<div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-8 text-center">
-<p class="text-4xl lg:text-5xl font-black text-primary mb-2">10K+</p>
-<p class="text-sm font-bold text-slate-500 uppercase tracking-wider">Installations</p>
-</div>
-<div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-8 text-center">
-<p class="text-4xl lg:text-5xl font-black text-primary mb-2">500+</p>
-<p class="text-sm font-bold text-slate-500 uppercase tracking-wider">Team Members</p>
-</div>
-</div>
-</section>
+    <!-- SEO JSON-LD: AboutPage -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "AboutPage",
+        "name": "关于 YuKoLi - 20年商用厨房设备制造商",
+        "url": "https://www.kitchen.yukoli.com/about/",
+        "description": "YuKoLi（跃迁力科技）— 20年专注智能商用厨房设备的研发与制造，114款智能设备服务全球50+国家。",
+        "mainEntity": {
+          "@type": "Organization",
+          "name": "佛山市跃迁力科技有限公司",
+          "url": "https://www.kitchen.yukoli.com"
+        }
+      }
+    </script>
 
-<!-- Our Story Section -->
-<section class="mb-24">
-<div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-<div class="relative h-[400px] rounded-2xl overflow-hidden">
-<img loading="lazy" alt="Our History" class="w-full h-full object-cover" src="https://images.unsplash.com/photo-1565514020176-db8e3c3d6338?w=800&h=600&fit=crop" width="800" height="600">
-</div>
-<div class="flex flex-col gap-6">
-<h2 class="text-3xl lg:text-4xl font-black tracking-tighter">Our Story</h2>
-<p class="text-slate-600 dark:text-slate-400">
-                    Founded in 2010 in Shenzhen, China, Yukoli began with a simple mission: to revolutionize commercial kitchens through intelligent automation. What started as a small team of engineers has grown into a global leader in smart kitchen solutions.
-                </p>
-<p class="text-slate-600 dark:text-slate-400">
-                    Today, our equipment powers kitchens across 45+ countries, from bustling fast-food chains in Southeast Asia to high-end restaurants in Europe. We've helped thousands of businesses reduce labor costs, improve consistency, and scale their operations efficiently.
-                </p>
-<div class="flex gap-4">
-<div class="flex items-center gap-2">
-<span class="material-symbols-outlined text-primary">check_circle</span>
-<span class="text-sm font-bold">Innovation First</span>
-</div>
-<div class="flex items-center gap-2">
-<span class="material-symbols-outlined text-primary">check_circle</span>
-<span class="text-sm font-bold">Quality Assured</span>
-</div>
-</div>
-</div>
-</div>
-</section>
+    <script>
+      window.addEventListener('DOMContentLoaded',function(){
+        setTimeout(function(){
+          var m=document.getElementById('spa-content');
+          if(!m)return;
+          var s=getComputedStyle(m);
+          var ok=s.maxWidth==='none'||parseInt(s.maxWidth)>=1920;
+          console.log('%c['+location.pathname.replace(//$/,'')+'] main: max-w='+s.maxWidth+' px='+s.paddingLeft+'/'+s.paddingRight+' w='+m.offsetWidth,ok?'color:green':'color:orange;font-weight:bold');
+          if(!ok)console.warn('Expected max-width: 1920px, got:',s.maxWidth);
+        },200);
+      });
+    </script>
+  </head>
+  <body
+    class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 antialiased transition-colors duration-300 overflow-x-hidden"
+  >
+    <!-- Top Navigation Bar -->
+    <!-- ═══ Navigator Component ═══ -->
+    <navigator
+      data-component="navigator"
+      data-variant="pc"
+      data-active="about"
+      data-cta-text-key="nav_get_quote"
+      data-cta-href="/quote"
+    ></navigator>
+    <main id="spa-content">
+      <!-- Hero Section -->
+      <section id="profile" class="flex flex-col lg:flex-row items-center py-12 gap-12 mb-24">
+        <div class="w-full lg:w-1/2 flex flex-col gap-6">
+          <div
+            class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-bold uppercase tracking-wider w-fit"
+          >
+            <span class="material-symbols-outlined text-sm">apartment</span>
+            <span data-i18n="about_badge">关于跃迁力</span>
+          </div>
+          <h1 class="text-5xl lg:text-7xl font-black leading-tight tracking-tighter">
+            <span data-i18n="about_hero_title_1">20年深耕</span>
+            <br />
+            <span class="text-primary" data-i18n="about_hero_title_2">智能商用厨具</span>
+          </h1>
+          <p class="text-lg text-slate-600 dark:text-slate-400 max-w-xl">
+            <span data-i18n="about_hero_desc">
+              YuKoLi（跃迁力科技）扎根中国厨具之都广东佛山，20年专注智能商用厨房设备的研发与制造。从一台炒菜机到114款全品类智能设备，我们帮助全球50+国家的餐饮企业实现降本增效、标准化出品。
+            </span>
+          </p>
+          <div class="flex items-center gap-4">
+            <button
+              class="bg-primary text-white px-8 py-4 rounded-xl font-bold flex items-center gap-2 hover:shadow-lg hover:shadow-primary/20 transition-all"
+            >
+              <span data-i18n="about_hero_btn">了解我们的故事</span>
+              <span class="material-symbols-outlined">arrow_downward</span>
+            </button>
+          </div>
+        </div>
+        <div class="w-full lg:w-1/2 relative">
+          <div
+            class="absolute -inset-4 bg-primary/20 rounded-2xl blur-2xl group-hover:bg-primary/30 transition-all"
+          ></div>
+          <div
+            class="relative w-full h-[400px] bg-slate-200 dark:bg-slate-800 rounded-2xl overflow-hidden border border-slate-300 dark:border-slate-700"
+          >
+            <img
+              loading="lazy"
+              alt="YuKoLi 工厂"
+              class="w-full h-full object-cover"
+              src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=800&h=600&fit=crop"
+              width="800"
+              height="600"
+            />
+          </div>
+        </div>
+      </section>
 
-<!-- Manufacturing Excellence -->
-<section class="mb-24">
-<div class="bg-slate-900 text-white rounded-3xl overflow-hidden relative">
-<div class="absolute inset-0 opacity-20 pointer-events-none">
-<img loading="lazy" alt="Factory" class="w-full h-full object-cover" src="https://images.unsplash.com/photo-1565043666747-69f6646db940?w=800&h=600&fit=crop" width="800" height="600">
-</div>
-<div class="relative p-12 lg:p-20">
-<div class="max-w-3xl">
-<h2 class="text-3xl lg:text-4xl font-black mb-6">Manufacturing Excellence</h2>
-<p class="text-slate-300 text-lg mb-8">
-                        Our state-of-the-art manufacturing facility spans 50,000 square meters, equipped with the latest CNC machinery, robotic welding systems, and quality control laboratories. Every unit undergoes rigorous testing before leaving our factory.
+      <!-- Company Stats -->
+      <section class="mb-24">
+        <div class="grid grid-cols-2 lg:grid-cols-4 gap-6">
+          <div
+            class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-8 text-center"
+          >
+            <p class="text-4xl lg:text-5xl font-black text-primary mb-2" data-i18n="about_stat_1_num">20+</p>
+            <p class="text-sm font-bold text-slate-500 uppercase tracking-wider" data-i18n="about_stat_1_label">
+              年制造经验
+            </p>
+          </div>
+          <div
+            class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-8 text-center"
+          >
+            <p class="text-4xl lg:text-5xl font-black text-primary mb-2" data-i18n="about_stat_2_num">50+</p>
+            <p class="text-sm font-bold text-slate-500 uppercase tracking-wider" data-i18n="about_stat_2_label">
+              出口国家
+            </p>
+          </div>
+          <div
+            class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-8 text-center"
+          >
+            <p class="text-4xl lg:text-5xl font-black text-primary mb-2" data-i18n="about_stat_3_num">114款</p>
+            <p class="text-sm font-bold text-slate-500 uppercase tracking-wider" data-i18n="about_stat_3_label">
+              智能设备
+            </p>
+          </div>
+          <div
+            class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-8 text-center"
+          >
+            <p class="text-4xl lg:text-5xl font-black text-primary mb-2" data-i18n="about_stat_4_num">3,000+</p>
+            <p class="text-sm font-bold text-slate-500 uppercase tracking-wider" data-i18n="about_stat_4_label">
+              服务客户
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Core Advantages -->
+      <section class="mb-24">
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          <div
+            class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-8 text-center hover:border-primary/50 transition-all"
+          >
+            <div class="inline-flex items-center justify-center size-14 bg-primary/10 rounded-xl mb-4">
+              <span class="material-symbols-outlined text-primary text-2xl">groups</span>
+            </div>
+            <p class="text-3xl font-black text-primary mb-2">70%</p>
+            <p class="font-bold mb-2" data-i18n="about_advantage_labor">节省人工</p>
+            <p class="text-sm text-slate-500" data-i18n="about_advantage_labor_desc">
+              1台智能炒菜机可替代3-5名厨师，解决招工难、留人难问题
+            </p>
+          </div>
+          <div
+            class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-8 text-center hover:border-primary/50 transition-all"
+          >
+            <div class="inline-flex items-center justify-center size-14 bg-primary/10 rounded-xl mb-4">
+              <span class="material-symbols-outlined text-primary text-2xl">bolt</span>
+            </div>
+            <p class="text-3xl font-black text-primary mb-2">30%+</p>
+            <p class="font-bold mb-2" data-i18n="about_advantage_energy">节能降耗</p>
+            <p class="text-sm text-slate-500" data-i18n="about_advantage_energy_desc">
+              电磁加热技术，比传统燃气灶节能30%以上
+            </p>
+          </div>
+          <div
+            class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-8 text-center hover:border-primary/50 transition-all"
+          >
+            <div class="inline-flex items-center justify-center size-14 bg-primary/10 rounded-xl mb-4">
+              <span class="material-symbols-outlined text-primary text-2xl">restaurant</span>
+            </div>
+            <p class="text-3xl font-black text-primary mb-2">500份</p>
+            <p class="font-bold mb-2" data-i18n="about_advantage_capacity">单锅产能</p>
+            <p class="text-sm text-slate-500" data-i18n="about_advantage_capacity_desc">
+              全自动炒菜机一锅出500份标准出品，大幅提升出餐效率
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Our Story Section -->
+      <section class="mb-24">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+          <div class="relative h-[400px] rounded-2xl overflow-hidden">
+            <img
+              loading="lazy"
+              alt="我们的历史"
+              class="w-full h-full object-cover"
+              src="https://images.unsplash.com/photo-1565514020176-db8e3c3d6338?w=800&h=600&fit=crop"
+              width="800"
+              height="600"
+            />
+          </div>
+          <div class="flex flex-col gap-6">
+            <h2 class="text-3xl lg:text-4xl font-black tracking-tighter" data-i18n="about_story_title" id="story">
+              我们的故事
+            </h2>
+            <p class="text-slate-600 dark:text-slate-400">
+              <span data-i18n="about_story_p1">
+                佛山市跃迁力科技有限公司成立于2006年，坐落于中国厨具制造重镇——广东佛山。从一间小型工程车间起步，我们始终聚焦一个目标：用智能自动化改变商用厨房的工作方式。经过20年的技术积累和市场验证，YuKoLi
+                已发展成为集研发、制造、销售于一体的专业智能厨具制造商。
+              </span>
+            </p>
+            <p class="text-slate-600 dark:text-slate-400">
+              <span data-i18n="about_story_p2">
+                今天，我们的114款智能设备服务于全球50多个国家——从泰国曼谷的连锁餐厅，到越南胡志明市的中央厨房，从马来西亚吉隆坡的食堂，到印度尼西亚雅加达的快餐品牌。无论是街头小吃摊还是千店连锁，YuKoLi
+                都能帮助您节省人工、统一出品、高效扩张。
+              </span>
+            </p>
+            <div class="flex gap-4">
+              <div class="flex items-center gap-2">
+                <span class="material-symbols-outlined text-primary">check_circle</span>
+                <span class="text-sm font-bold"><span data-i18n="about_check_1">自主研发</span></span>
+              </div>
+              <div class="flex items-center gap-2">
+                <span class="material-symbols-outlined text-primary">check_circle</span>
+                <span class="text-sm font-bold"><span data-i18n="about_check_2">品质保障</span></span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Manufacturing Excellence -->
+      <section class="mb-24">
+        <div class="bg-slate-900 text-white rounded-3xl overflow-hidden relative">
+          <div class="absolute inset-0 opacity-20 pointer-events-none">
+            <img
+              loading="lazy"
+              alt="工厂"
+              class="w-full h-full object-cover"
+              src="https://images.unsplash.com/photo-1565043666747-69f6646db940?w=800&h=600&fit=crop"
+              width="800"
+              height="600"
+            />
+          </div>
+          <div class="relative p-12 lg:p-20">
+            <div class="max-w-3xl">
+              <h2 class="text-3xl lg:text-4xl font-black mb-6" data-i18n="about_mfg_title" id="factory">制造实力</h2>
+              <p class="text-slate-300 text-lg mb-8">
+                <span data-i18n="about_mfg_desc">
+                  YuKoLi
+                  佛山制造基地配备先进的数控加工中心、自动化焊接系统和全流程质量检测线。每台设备出厂前经过严格的性能测试和安全检验，确保在高强度的商用厨房环境中稳定可靠运行。
+                </span>
+              </p>
+              <div class="grid grid-cols-2 gap-6">
+                <div class="flex items-start gap-3">
+                  <div class="size-10 bg-primary/20 rounded-lg flex items-center justify-center flex-shrink-0">
+                    <span class="material-symbols-outlined text-primary">precision_manufacturing</span>
+                  </div>
+                  <div>
+                    <h4 class="font-bold mb-1" data-i18n="about_mfg_adv1_title">精密制造</h4>
+                    <p class="text-sm text-slate-400" data-i18n="about_mfg_adv1_desc">
+                      数控加工中心与自动化产线，确保每个零部件精度一致
                     </p>
-<div class="grid grid-cols-2 gap-6">
-<div class="flex items-start gap-3">
-<div class="size-10 bg-primary/20 rounded-lg flex items-center justify-center flex-shrink-0">
-<span class="material-symbols-outlined text-primary">precision_manufacturing</span>
-</div>
-<div>
-<h4 class="font-bold mb-1">Advanced Machinery</h4>
-<p class="text-sm text-slate-400">CNC machining centers and robotic assembly lines</p>
-</div>
-</div>
-<div class="flex items-start gap-3">
-<div class="size-10 bg-primary/20 rounded-lg flex items-center justify-center flex-shrink-0">
-<span class="material-symbols-outlined text-primary">verified</span>
-</div>
-<div>
-<h4 class="font-bold mb-1">Quality Control</h4>
-<p class="text-sm text-slate-400">Multi-stage inspection and testing protocols</p>
-</div>
-</div>
-<div class="flex items-start gap-3">
-<div class="size-10 bg-primary/20 rounded-lg flex items-center justify-center flex-shrink-0">
-<span class="material-symbols-outlined text-primary">inventory</span>
-</div>
-<div>
-<h4 class="font-bold mb-1">Supply Chain</h4>
-<p class="text-sm text-slate-400">Strategic partnerships with global component suppliers</p>
-</div>
-</div>
-<div class="flex items-start gap-3">
-<div class="size-10 bg-primary/20 rounded-lg flex items-center justify-center flex-shrink-0">
-<span class="material-symbols-outlined text-primary">local_shipping</span>
-</div>
-<div>
-<h4 class="font-bold mb-1">Global Logistics</h4>
-<p class="text-sm text-slate-400">Efficient shipping to 45+ countries worldwide</p>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</section>
+                  </div>
+                </div>
+                <div class="flex items-start gap-3">
+                  <div class="size-10 bg-primary/20 rounded-lg flex items-center justify-center flex-shrink-0">
+                    <span class="material-symbols-outlined text-primary">verified</span>
+                  </div>
+                  <div>
+                    <h4 class="font-bold mb-1" data-i18n="about_mfg_adv2_title">全检出厂</h4>
+                    <p class="text-sm text-slate-400" data-i18n="about_mfg_adv2_desc">
+                      多阶段质检流程，每台设备出厂前通过严格性能与安全测试
+                    </p>
+                  </div>
+                </div>
+                <div class="flex items-start gap-3">
+                  <div class="size-10 bg-primary/20 rounded-lg flex items-center justify-center flex-shrink-0">
+                    <span class="material-symbols-outlined text-primary">inventory</span>
+                  </div>
+                  <div>
+                    <h4 class="font-bold mb-1" data-i18n="about_mfg_adv3_title">供应链管理</h4>
+                    <p class="text-sm text-slate-400" data-i18n="about_mfg_adv3_desc">
+                      与全球优质零部件供应商建立战略合作，确保供应链稳定
+                    </p>
+                  </div>
+                </div>
+                <div class="flex items-start gap-3">
+                  <div class="size-10 bg-primary/20 rounded-lg flex items-center justify-center flex-shrink-0">
+                    <span class="material-symbols-outlined text-primary">local_shipping</span>
+                  </div>
+                  <div>
+                    <h4 class="font-bold mb-1" data-i18n="about_mfg_adv4_title">全球物流</h4>
+                    <p class="text-sm text-slate-400" data-i18n="about_mfg_adv4_desc">
+                      高效的国际物流体系，设备安全送达全球50+国家
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
 
-<!-- Certifications -->
-<section class="mb-24">
-<h2 class="text-3xl font-bold text-center mb-12">Global Certifications</h2>
-<div class="grid grid-cols-2 md:grid-cols-4 gap-6">
-<div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-8 text-center hover:border-primary/50 transition-all">
-<div class="text-4xl font-black text-slate-400 mb-4">ISO 9001</div>
-<p class="text-sm font-bold text-slate-600 dark:text-slate-400">Quality Management</p>
-</div>
-<div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-8 text-center hover:border-primary/50 transition-all">
-<div class="text-4xl font-black text-slate-400 mb-4">CE</div>
-<p class="text-sm font-bold text-slate-600 dark:text-slate-400">EU Conformity</p>
-</div>
-<div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-8 text-center hover:border-primary/50 transition-all">
-<div class="text-4xl font-black text-slate-400 mb-4">UL</div>
-<p class="text-sm font-bold text-slate-600 dark:text-slate-400">Safety Listed</p>
-</div>
-<div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-8 text-center hover:border-primary/50 transition-all">
-<div class="text-4xl font-black text-slate-400 mb-4">NSF</div>
-<p class="text-sm font-bold text-slate-600 dark:text-slate-400">Sanitation Compliant</p>
-</div>
-</div>
-</section>
+      <!-- Certifications -->
+      <section class="mb-24">
+        <h2 class="text-3xl font-bold text-center mb-12" data-i18n="about_cert_title" id="cert">全球权威认证</h2>
+        <div class="grid grid-cols-3 gap-6">
+          <div
+            class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-8 text-center hover:border-primary/50 transition-all"
+          >
+            <div class="text-4xl font-black text-slate-400 mb-4">CE</div>
+            <p class="text-sm font-bold text-slate-600 dark:text-slate-400" data-i18n="about_cert_ce">欧盟合格认证</p>
+          </div>
+          <div
+            class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-8 text-center hover:border-primary/50 transition-all"
+          >
+            <div class="text-4xl font-black text-slate-400 mb-4">UL</div>
+            <p class="text-sm font-bold text-slate-600 dark:text-slate-400" data-i18n="about_cert_ul">美国安全认证</p>
+          </div>
+          <div
+            class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-8 text-center hover:border-primary/50 transition-all"
+          >
+            <div class="text-4xl font-black text-slate-400 mb-4">ISO 9001</div>
+            <p class="text-sm font-bold text-slate-600 dark:text-slate-400" data-i18n="about_cert_iso">质量管理体系</p>
+          </div>
+        </div>
+      </section>
 
-<!-- CTA Section -->
-<div class="mb-24">
-<section class="bg-primary rounded-3xl p-12 lg:p-20 text-center text-white relative overflow-hidden">
-<div class="absolute top-0 right-0 size-64 bg-white/10 rounded-full -mr-32 -mt-32"></div>
-<div class="relative z-10">
-<h2 class="text-4xl lg:text-5xl font-black mb-6">Ready to Transform Your Kitchen?</h2>
-<p class="text-white/80 text-lg mb-10 max-w-2xl mx-auto">
-                    Partner with Yukoli and join thousands of businesses worldwide that have revolutionized their operations with our smart kitchen solutions.
-                </p>
-<div class="flex flex-wrap justify-center gap-4">
-<button class="bg-white text-primary px-10 py-5 rounded-xl font-black hover:bg-slate-100 transition-colors shadow-xl">
-                        Contact Us
-                    </button>
-<button class="bg-slate-900 text-white px-10 py-5 rounded-xl font-black hover:bg-slate-800 transition-colors shadow-xl">
-                        View Products
-                    </button>
-</div>
-</div>
-</section>
-</div>
-</main>
+      <!-- CTA Section -->
+      <div class="mb-24">
+        <section class="bg-primary rounded-3xl p-12 lg:p-20 text-center text-white relative overflow-hidden">
+          <div class="absolute top-0 right-0 size-64 bg-white/10 rounded-full -mr-32 -mt-32"></div>
+          <div class="relative z-10">
+            <h2 class="text-4xl lg:text-5xl font-black mb-6" data-i18n="about_cta_title">准备好升级您的厨房了吗？</h2>
+            <p class="text-white/80 text-lg mb-10 max-w-2xl mx-auto">
+              <span data-i18n="about_cta_desc">
+                与 YuKoLi 合作，加入全球3000+餐饮企业的智能化升级行列。免费获取定制方案，24小时内专业工程师回复。
+              </span>
+            </p>
+            <div class="flex flex-wrap justify-center gap-4">
+              <a
+                href="/quote"
+                class="bg-white text-primary px-10 py-5 rounded-xl font-black hover:bg-slate-100 transition-colors shadow-xl"
+                data-i18n="about_cta_btn_quote"
+              >
+                获取报价
+              </a>
+              <a
+                href="/products"
+                class="bg-slate-900 text-white px-10 py-5 rounded-xl font-black hover:bg-slate-800 transition-colors shadow-xl"
+                data-i18n="about_cta_btn_products"
+              >
+                浏览产品
+              </a>
+            </div>
+          </div>
+        </section>
+      </div>
 
+      <!-- 公司地址 -->
+      <section class="w-full py-16">
+        <div class="section-container">
+          <div class="text-center mb-8">
+            <div class="inline-flex items-center justify-center size-12 bg-primary/10 rounded-xl mb-3">
+              <span class="material-symbols-outlined text-primary text-xl">location_on</span>
+            </div>
+            <h3 class="text-xl font-bold mb-1" data-i18n="about_address_label">公司地址</h3>
+          </div>
+          <p class="text-center text-slate-600 dark:text-slate-400 max-w-2xl mx-auto" data-i18n="about_address">
+            广东省佛山市顺德区大良街道红岗社区展伦路83号方创园12栋502室之六
+          </p>
+          <p class="text-center text-sm text-slate-400 mt-2">
+            邮编：
+            <span data-i18n="about_postcode">528300</span>
+          </p>
+        </div>
+      </section>
+    </main>
 
+    <script defer src="/assets/js/ui/products-dropdown.js?v=20260322-v3"></script>
+    <script defer src="/assets/js/ui/navigator.js?v=20260322-v3"></script>
+    <script defer src="/assets/js/ui/search-engine.js"></script>
+    <script defer src="/assets/js/ui/footer.js?v=20260322-v3"></script>
+    <script defer src="/assets/js/lang-registry.js"></script>
+    <script defer src="/assets/js/translations.js"></script>
+    <script defer src="/assets/js/translations-dropdown-template.js"></script>
+    <script defer src="/assets/js/contacts.js"></script>
+    <script defer src="/assets/js/ui/smart-popup.js"></script>
+    <script defer src="/assets/js/router.js"></script>
 
+    <script defer src="/assets/js/page-interactions.js"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        if (window.translationManager) window.translationManager.initialize();
+      });
+    </script>
 
-<script defer src="/assets/js/ui/products-dropdown.js?v=20260322-v3"></script>
-<script defer src="/assets/js/ui/navigator.js?v=20260322-v3"></script>
-<script defer src="/assets/js/ui/search-engine.js"></script>
-<script defer src="/assets/js/ui/footer.js?v=20260322-v3"></script>
-<script defer src="/assets/js/lang-registry.js"></script>
-<script defer src="/assets/js/translations.js"></script><script defer src="/assets/js/translations-dropdown-template.js"></script>
-<script defer src="/assets/js/contacts.js"></script>
-<script defer src="/assets/js/ui/smart-popup.js"></script>
-<script defer src="/assets/js/router.js"></script>
-
-<script defer src="/assets/js/page-interactions.js"></script>
-<script>
-  document.addEventListener('DOMContentLoaded', function () {
-    if (window.translationManager) window.translationManager.initialize();
-  });
-</script>
-
-
-
-<script src="/assets/js/utils/device-utils.js"></script>
-<script src="/assets/js/spa-router.js"></script>
-<script>
-  document.addEventListener('DOMContentLoaded', function() {
-    if (window.SpaRouter && typeof window.SpaRouter.init === 'function') {
-      window.SpaRouter.init();
-    }
-  });
-</script>
-</body></html>
+    <script src="/assets/js/utils/device-utils.js"></script>
+    <script src="/assets/js/spa-router.js"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        if (window.SpaRouter && typeof window.SpaRouter.init === "function") {
+          window.SpaRouter.init();
+        }
+      });
+    </script>
+  </body>
+</html>

@@ -228,7 +228,7 @@ function generatePCPage(solution) {
             </div>
           </div>`).join('');
 
-  const statsHtml = solution.stats.map((s, i) => `
+  const statsHtml = solution.stats.map((s) => `
             <div class="bg-white dark:bg-slate-800 rounded-2xl p-6 shadow-lg">
               <div class="text-4xl font-black text-primary mb-2">${s.value}</div>
               <p class="text-slate-600 dark:text-slate-400">${s.label}</p>

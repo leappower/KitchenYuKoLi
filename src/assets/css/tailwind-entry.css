@@ -12,4 +12,4 @@
 @tailwind utilities;
 
 /* Design system custom properties and component overrides */
-@import './styles.css';
+@import "./styles.css";

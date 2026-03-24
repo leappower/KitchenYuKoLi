@@ -1,446 +1,730 @@
-<!DOCTYPE html>
+<!doctype html>
 
-<html class="light" lang="zh-CN"><head>
-<!-- ═══ Responsive Redirect (injected by patch-responsive-redirect.py) ═══ -->
-<link rel="canonical" href="/products/"/>
-<link rel="alternate" media="only screen and (max-width: 767px)"
-      href="/products/index-mobile.html"/>
-<link rel="alternate" media="only screen and (min-width: 768px) and (max-width: 1279px)"
-      href="/products/index-tablet.html"/>
-<link rel="alternate" media="only screen and (min-width: 1280px)"
-      href="/products/index-pc.html"/>
-<script>
-/* Responsive redirect — runs before render, no flash */
-(function(){
-  if (window.__redirectChecked) return;
-  window.__redirectChecked = true;
+<html class="light" lang="zh-CN">
+  <head>
+    <!-- ═══ Responsive Redirect (injected by patch-responsive-redirect.py) ═══ -->
+    <link rel="canonical" href="/products/" />
+    <link rel="alternate" media="only screen and (max-width: 767px)" href="/products/index-mobile.html" />
+    <link
+      rel="alternate"
+      media="only screen and (min-width: 768px) and (max-width: 1279px)"
+      href="/products/index-tablet.html"
+    />
+    <link rel="alternate" media="only screen and (min-width: 1280px)" href="/products/index-pc.html" />
+    <script>
+      /* Responsive redirect — runs before render, no flash */
+      (function () {
+        if (window.__redirectChecked) return;
+        window.__redirectChecked = true;
 
-  var urlParams = new URLSearchParams(location.search);
-  var cleanUrl = urlParams.get('clean-url');
-  if (cleanUrl) {
-    history.replaceState({}, '', cleanUrl);
-    return;
-  }
+        var urlParams = new URLSearchParams(location.search);
+        var cleanUrl = urlParams.get("clean-url");
+        if (cleanUrl) {
+          history.replaceState({}, "", cleanUrl);
+          return;
+        }
 
-  if (window.__spaNavigating) return;
+        if (window.__spaNavigating) return;
 
-  var currentFile = location.pathname.split('/').pop();
-  if (window.DeviceUtils && window.DeviceUtils.isDirectoryURL()) return;
+        var currentFile = location.pathname.split("/").pop();
+        if (window.DeviceUtils && window.DeviceUtils.isDirectoryURL()) return;
 
-  if (window.DeviceUtils && window.DeviceUtils.shouldRedirect(currentFile)) {
-    var deviceType = window.DeviceUtils.getDeviceType();
-    var targetFile = deviceType === window.DeviceUtils.DeviceType.MOBILE ? 'index-mobile.html' :
-                     deviceType === window.DeviceUtils.DeviceType.TABLET ? 'index-tablet.html' : 'index-pc.html';
-    location.href = targetFile;
-  }
-})();
-</script>
-<!-- ═══ End Responsive Redirect ═══ -->
+        if (window.DeviceUtils && window.DeviceUtils.shouldRedirect(currentFile)) {
+          var deviceType = window.DeviceUtils.getDeviceType();
+          var targetFile =
+            deviceType === window.DeviceUtils.DeviceType.MOBILE
+              ? "index-mobile.html"
+              : deviceType === window.DeviceUtils.DeviceType.TABLET
+                ? "index-tablet.html"
+                : "index-pc.html";
+          location.href = targetFile;
+        }
+      })();
+    </script>
+    <!-- ═══ End Responsive Redirect ═══ -->
 
-<meta charset="utf-8"/>
-<meta name="description" content="探索 Yukoli 智能商厨设备全系列产品，为商业厨房提供一站式自动化解决方案。">
-<meta property="og:type" content="website">
-<meta property="og:title" content="产品中心 | Yukoli 智能商厨设备">
-<meta property="og:description" content="探索 Yukoli 智能商厨设备全系列产品，为商业厨房提供一站式自动化解决方案。">
-<meta property="og:url" content="https://www.kitchen.yukoli.com/products/index-tablet.html">
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title data-i18n="products_page_title">产品中心 | Yukoli 智能商厨设备</title>
-<link rel="preload" href="/assets/fonts/local-fonts.css" as="style">
-<link rel="preload" href="/assets/css/styles.css" as="style">
-<link rel="preload" href="/assets/css/tailwind.css" as="style">
-<link href="/assets/fonts/local-fonts.css" rel="stylesheet"/>
-<link rel="stylesheet" href="/assets/css/styles.css">
-<link rel="stylesheet" href="/assets/css/tailwind.css">
-<link rel="stylesheet" href="/assets/css/z-index-system.css">
-<link rel="stylesheet" href="/assets/css/performance-optimized.css"/>
-<style>
-  body { font-family: 'Public Sans', sans-serif; }
-  .product-card-tablet { transition: all 0.3s ease; }
-  .product-card-tablet:hover { transform: translateY(-4px); box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.12); }
-  .category-tab-tablet { position: relative; transition: all 0.2s ease; }
-  .category-tab-tablet.active::after {
-    content: '';
-    position: absolute;
-    bottom: -2px;
-    left: 0;
-    right: 0;
-    height: 2px;
-    background: #ec5b13;
-    border-radius: 1px;
-  }
-</style>
-<script>(function(){
-if(localStorage.getItem('darkMode')==='true')document.documentElement.classList.add('dark')
-})()</script>
-<link rel="stylesheet" href="/assets/css/skeleton.css"/>
-<link rel="icon" href="/assets/images/logo_header.webp" type="image/webp">
-</head>
-<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 transition-colors duration-300 overflow-x-hidden">
-
-<!-- Tablet Header -->
-<header class="sticky top-0 z-50 bg-white/95 dark:bg-slate-900/95 backdrop-blur-xl border-b border-slate-200 dark:border-slate-800">
-  <div class="flex items-center justify-between px-6 h-16">
-    <a href="/home" class="flex items-center gap-2">
-      <img src="/assets/images/logo_header.webp" alt="Yukoli" class="h-9 w-auto">
-      <span class="text-xl font-black tracking-tighter uppercase dark:text-slate-100">Yukoli</span>
-    </a>
-    <nav class="hidden md:flex items-center gap-6">
-      <a href="/home" class="text-sm font-medium text-slate-600 dark:text-slate-400 hover:text-primary uppercase tracking-wider" data-i18n="nav_home">首页</a>
-      <a href="/catalog" class="text-sm font-bold text-primary uppercase tracking-wider" data-i18n="nav_equipment">设备</a>
-      <a href="/solutions" class="text-sm font-medium text-slate-600 dark:text-slate-400 hover:text-primary uppercase tracking-wider" data-i18n="nav_solutions">解决方案</a>
-      <a href="/support" class="text-sm font-medium text-slate-600 dark:text-slate-400 hover:text-primary uppercase tracking-wider" data-i18n="nav_iot">IoT</a>
-      <a href="/quote" class="text-sm font-medium text-slate-600 dark:text-slate-400 hover:text-primary uppercase tracking-wider" data-i18n="nav_config">配置</a>
-    </nav>
-    <div class="flex items-center gap-3">
-      <button class="p-2 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800">
-        <span class="material-symbols-outlined">search</span>
-      </button>
-      <button id="menu-btn" class="p-2 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 md:hidden">
-        <span class="material-symbols-outlined">menu</span>
-      </button>
-    </div>
-  </div>
-</header>
-
-<main id="spa-content">
-<div class="w-full">
-  <!-- Hero Section -->
-  <section class="relative w-full py-14 px-6 bg-gradient-to-br from-slate-50 dark:from-slate-900 to-white dark:to-black overflow-hidden">
-    <div class="absolute inset-0 opacity-25">
-      <div class="absolute top-16 right-16 w-72 h-72 bg-primary/10 rounded-full blur-3xl"></div>
-      <div class="absolute bottom-16 left-16 w-56 h-56 bg-primary/5 rounded-full blur-2xl"></div>
-    </div>
-    <div class="relative max-w-4xl mx-auto text-center">
-      <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-primary/10 text-primary text-xs font-bold uppercase tracking-wider mb-4">
-        <span class="material-symbols-outlined text-sm">inventory_2</span>
-        <span data-i18n="products_hero_badge">Industrial Excellence</span>
+    <meta charset="utf-8" />
+    <meta name="description" content="探索 Yukoli 智能商厨设备全系列产品，为商业厨房提供一站式自动化解决方案。" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="产品中心 | Yukoli 智能商厨设备" />
+    <meta
+      property="og:description"
+      content="探索 Yukoli 智能商厨设备全系列产品，为商业厨房提供一站式自动化解决方案。"
+    />
+    <meta property="og:url" content="https://www.kitchen.yukoli.com/products/index-tablet.html" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title data-i18n="products_page_title">产品中心 | Yukoli 智能商厨设备</title>
+    <link rel="preload" href="/assets/fonts/local-fonts.css" as="style" />
+    <link rel="preload" href="/assets/css/styles.css" as="style" />
+    <link rel="preload" href="/assets/css/tailwind.css" as="style" />
+    <link href="/assets/fonts/local-fonts.css" rel="stylesheet" />
+    <link rel="stylesheet" href="/assets/css/styles.css" />
+    <link rel="stylesheet" href="/assets/css/tailwind.css" />
+    <link rel="stylesheet" href="/assets/css/z-index-system.css" />
+    <link rel="stylesheet" href="/assets/css/performance-optimizations.css" />
+    <style>
+      body {
+        font-family: "Public Sans", sans-serif;
+      }
+      .product-card-tablet {
+        transition: all 0.3s ease;
+      }
+      .product-card-tablet:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.12);
+      }
+      .category-tab-tablet {
+        position: relative;
+        transition: all 0.2s ease;
+      }
+      .category-tab-tablet.active::after {
+        content: "";
+        position: absolute;
+        bottom: -2px;
+        left: 0;
+        right: 0;
+        height: 2px;
+        background: #ec5b13;
+        border-radius: 1px;
+      }
+    </style>
+    <script>
+      (function () {
+        if (localStorage.getItem("darkMode") === "true") document.documentElement.classList.add("dark");
+      })();
+    </script>
+    <link rel="stylesheet" href="/assets/css/skeleton.css" />
+    <link rel="icon" href="/assets/images/logo_header.webp" type="image/webp" />
+  </head>
+  <body
+    class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 transition-colors duration-300 overflow-x-hidden"
+  >
+    <!-- Tablet Header -->
+    <header
+      class="sticky top-0 z-50 bg-white/95 dark:bg-slate-900/95 backdrop-blur-xl border-b border-slate-200 dark:border-slate-800"
+    >
+      <div class="flex items-center justify-between px-6 h-16">
+        <a href="/home" class="flex items-center gap-2">
+          <img src="/assets/images/logo_header.webp" alt="Yukoli" class="h-9 w-auto" />
+          <span class="text-xl font-black tracking-tighter uppercase dark:text-slate-100">Yukoli</span>
+        </a>
+        <nav class="hidden md:flex items-center gap-6">
+          <a
+            href="/home"
+            class="text-sm font-medium text-slate-600 dark:text-slate-400 hover:text-primary uppercase tracking-wider"
+            data-i18n="nav_home"
+          >
+            首页
+          </a>
+          <a href="/catalog/" class="text-sm font-bold text-primary uppercase tracking-wider" data-i18n="nav_equipment">
+            设备
+          </a>
+          <a
+            href="/solutions"
+            class="text-sm font-medium text-slate-600 dark:text-slate-400 hover:text-primary uppercase tracking-wider"
+            data-i18n="nav_solutions"
+          >
+            解决方案
+          </a>
+          <a
+            href="/support"
+            class="text-sm font-medium text-slate-600 dark:text-slate-400 hover:text-primary uppercase tracking-wider"
+            data-i18n="nav_iot"
+          >
+            IoT
+          </a>
+          <a
+            href="/quote"
+            class="text-sm font-medium text-slate-600 dark:text-slate-400 hover:text-primary uppercase tracking-wider"
+            data-i18n="nav_config"
+          >
+            配置
+          </a>
+        </nav>
+        <div class="flex items-center gap-3">
+          <button class="p-2 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800">
+            <span class="material-symbols-outlined">search</span>
+          </button>
+          <button id="menu-btn" class="p-2 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 md:hidden">
+            <span class="material-symbols-outlined">menu</span>
+          </button>
+        </div>
       </div>
-      <h1 class="text-4xl font-black leading-tight tracking-tight text-slate-900 dark:text-white mb-4" data-i18n="products_hero_title">
-        产品中心
-      </h1>
-      <p class="text-base text-slate-600 dark:text-slate-400 max-w-xl mx-auto leading-relaxed mb-6" data-i18n="products_hero_desc_tablet">
-        探索 Yukoli 全系列智能商厨设备，从爆炒到蒸煮，为您的商业厨房提供完整的自动化解决方案。
-      </p>
-      <div class="flex flex-wrap justify-center gap-3">
-        <a href="#products" class="bg-primary text-white px-6 py-3 rounded-xl font-bold text-sm flex items-center gap-2">
-          <span data-i18n="products_browse_products">浏览产品</span>
-          <span class="material-symbols-outlined text-sm">arrow_downward</span>
-        </a>
-        <a href="/quote" class="border-2 border-slate-200 dark:border-slate-800 px-6 py-3 rounded-xl font-bold text-sm hover:bg-slate-100 dark:hover:bg-slate-800 transition-all" data-i18n="products_request_quote">
-          获取报价
-        </a>
+    </header>
+
+    <main id="spa-content">
+      <div class="w-full">
+        <!-- Hero Section -->
+        <section
+          class="relative w-full py-14 px-6 bg-gradient-to-br from-slate-50 dark:from-slate-900 to-white dark:to-black overflow-hidden"
+        >
+          <div class="absolute inset-0 opacity-25">
+            <div class="absolute top-16 right-16 w-72 h-72 bg-primary/10 rounded-full blur-3xl"></div>
+            <div class="absolute bottom-16 left-16 w-56 h-56 bg-primary/5 rounded-full blur-2xl"></div>
+          </div>
+          <div class="relative max-w-4xl mx-auto text-center">
+            <div
+              class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-primary/10 text-primary text-xs font-bold uppercase tracking-wider mb-4"
+            >
+              <span class="material-symbols-outlined text-sm">inventory_2</span>
+              <span data-i18n="products_hero_badge">Industrial Excellence</span>
+            </div>
+            <h1
+              class="text-4xl font-black leading-tight tracking-tight text-slate-900 dark:text-white mb-4"
+              data-i18n="products_hero_title"
+            >
+              产品中心
+            </h1>
+            <p
+              class="text-base text-slate-600 dark:text-slate-400 max-w-xl mx-auto leading-relaxed mb-6"
+              data-i18n="products_hero_desc_tablet"
+            >
+              探索 Yukoli 全系列智能商厨设备，从爆炒到蒸煮，为您的商业厨房提供完整的自动化解决方案。
+            </p>
+            <div class="flex flex-wrap justify-center gap-3">
+              <a
+                href="#products"
+                class="bg-primary text-white px-6 py-3 rounded-xl font-bold text-sm flex items-center gap-2"
+              >
+                <span data-i18n="products_browse_products">浏览产品</span>
+                <span class="material-symbols-outlined text-sm">arrow_downward</span>
+              </a>
+              <a
+                href="/quote"
+                class="border-2 border-slate-200 dark:border-slate-800 px-6 py-3 rounded-xl font-bold text-sm hover:bg-slate-100 dark:hover:bg-slate-800 transition-all"
+                data-i18n="products_request_quote"
+              >
+                获取报价
+              </a>
+            </div>
+          </div>
+        </section>
+
+        <!-- Category Tabs -->
+        <section
+          class="sticky top-16 z-40 bg-white/90 dark:bg-slate-900/90 backdrop-blur-xl border-b border-slate-200 dark:border-slate-800"
+        >
+          <div class="flex items-center justify-center gap-1 px-6 py-3 overflow-x-auto scrollbar-hide">
+            <button
+              class="category-tab-tablet active px-4 py-2 text-sm font-bold"
+              data-category="all"
+              data-i18n="products_filter_all"
+            >
+              全部
+            </button>
+            <button
+              class="category-tab-tablet px-4 py-2 text-sm font-medium text-slate-500 hover:text-slate-900 dark:hover:text-white"
+              data-category="stirfry"
+              data-i18n="nav_products_stirfry"
+            >
+              智能爆炒
+            </button>
+            <button
+              class="category-tab-tablet px-4 py-2 text-sm font-medium text-slate-500 hover:text-slate-900 dark:hover:text-white"
+              data-category="cutting"
+              data-i18n="nav_products_cutting"
+            >
+              智能切配
+            </button>
+            <button
+              class="category-tab-tablet px-4 py-2 text-sm font-medium text-slate-500 hover:text-slate-900 dark:hover:text-white"
+              data-category="frying"
+              data-i18n="nav_products_frying"
+            >
+              智能煎炸
+            </button>
+            <button
+              class="category-tab-tablet px-4 py-2 text-sm font-medium text-slate-500 hover:text-slate-900 dark:hover:text-white"
+              data-category="stewing"
+              data-i18n="nav_products_stewing"
+            >
+              智能炖煮
+            </button>
+            <button
+              class="category-tab-tablet px-4 py-2 text-sm font-medium text-slate-500 hover:text-slate-900 dark:hover:text-white"
+              data-category="steaming"
+              data-i18n="nav_products_steaming"
+            >
+              智能蒸煮
+            </button>
+          </div>
+        </section>
+
+        <!-- Filter & Sort Bar -->
+        <section class="px-6 py-4 flex items-center justify-between border-b border-slate-100 dark:border-slate-800">
+          <div class="flex items-center gap-2">
+            <span class="text-sm text-slate-500" data-i18n="products_filter_by">筛选:</span>
+            <select
+              class="bg-transparent border border-slate-200 dark:border-slate-700 rounded-lg px-3 py-1.5 text-sm focus:outline-none focus:border-primary"
+            >
+              <option value="all" data-i18n="all">全部</option>
+              <option value="industrial" data-i18n="products_filter_industrial">工业级</option>
+              <option value="commercial" data-i18n="products_filter_commercial">商用级</option>
+              <option value="compact" data-i18n="products_filter_compact">紧凑型</option>
+            </select>
+          </div>
+          <div class="flex items-center gap-2 text-sm text-slate-500">
+            <span data-i18n="products_sort_by">排序:</span>
+            <select
+              class="bg-transparent border-none font-medium text-slate-900 dark:text-white focus:outline-none cursor-pointer"
+            >
+              <option value="featured" data-i18n="products_sort_featured">推荐</option>
+              <option value="newest" data-i18n="products_sort_newest">最新</option>
+              <option value="price_asc" data-i18n="products_sort_price_asc">价格: 低到高</option>
+              <option value="price_desc" data-i18n="products_sort_price_desc">价格: 高到低</option>
+            </select>
+          </div>
+        </section>
+
+        <!-- Product Grid -->
+        <section id="products" class="px-6 py-8">
+          <div class="grid grid-cols-2 lg:grid-cols-3 gap-6" id="product-grid">
+            <!-- Product 1 -->
+            <article
+              class="product-card-tablet bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 overflow-hidden"
+              data-category="stirfry"
+            >
+              <div class="relative aspect-[4/3] overflow-hidden bg-slate-100 dark:bg-slate-700">
+                <img loading="lazy" alt="Smart Stir-fry Robot Pro" class="w-full h-full object-cover" />
+                <div class="absolute top-3 left-3 flex gap-1.5">
+                  <span
+                    class="px-2 py-0.5 bg-primary text-white text-[10px] font-bold rounded"
+                    data-i18n="product_badge_industrial"
+                  >
+                    工业级
+                  </span>
+                </div>
+              </div>
+              <div class="p-4">
+                <div class="flex items-center gap-1.5 mb-2">
+                  <span class="material-symbols-outlined text-primary text-xs">local_fire_department</span>
+                  <span
+                    class="text-[10px] font-bold text-primary uppercase tracking-wider"
+                    data-i18n="category_stirfry"
+                  >
+                    智能爆炒
+                  </span>
+                </div>
+                <h3
+                  class="text-base font-bold mb-1 text-slate-900 dark:text-white"
+                  data-i18n="product_stirfry_pro_name"
+                >
+                  智能爆炒机器人 Pro
+                </h3>
+                <p
+                  class="text-xs text-slate-500 dark:text-slate-400 mb-3 line-clamp-2"
+                  data-i18n="product_stirfry_pro_desc_tablet"
+                >
+                  工业级自动爆炒设备，配备AI精准控温系统
+                </p>
+                <div class="flex flex-wrap gap-1.5 mb-3">
+                  <span class="px-1.5 py-0.5 bg-primary/10 rounded text-[10px] font-medium text-primary">
+                    450+
+                    <span data-i18n="unit_dishes_day">份/天</span>
+                  </span>
+                  <span class="px-1.5 py-0.5 bg-primary/10 rounded text-[10px] font-medium text-primary">12kg</span>
+                </div>
+                <div class="flex items-center justify-between pt-3 border-t border-slate-100 dark:border-slate-700">
+                  <span class="text-base font-black text-primary">$28,500</span>
+                  <a href="/products/" class="flex items-center gap-1 text-xs font-bold hover:text-primary">
+                    <span data-i18n="btn_view_details">查看详情</span>
+                    <span class="material-symbols-outlined text-xs">arrow_forward</span>
+                  </a>
+                </div>
+              </div>
+            </article>
+
+            <!-- Product 2 -->
+            <article
+              class="product-card-tablet bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 overflow-hidden"
+              data-category="cutting"
+            >
+              <div class="relative aspect-[4/3] overflow-hidden bg-slate-100 dark:bg-slate-700">
+                <img loading="lazy" alt="Smart Cutting Station" class="w-full h-full object-cover" />
+                <div class="absolute top-3 left-3 flex gap-1.5">
+                  <span
+                    class="px-2 py-0.5 bg-primary text-white text-[10px] font-bold rounded"
+                    data-i18n="product_badge_industrial"
+                  >
+                    工业级
+                  </span>
+                </div>
+              </div>
+              <div class="p-4">
+                <div class="flex items-center gap-1.5 mb-2">
+                  <span class="material-symbols-outlined text-primary text-xs">content_cut</span>
+                  <span
+                    class="text-[10px] font-bold text-primary uppercase tracking-wider"
+                    data-i18n="category_cutting"
+                  >
+                    智能切配
+                  </span>
+                </div>
+                <h3
+                  class="text-base font-bold mb-1 text-slate-900 dark:text-white"
+                  data-i18n="product_cutting_station_name"
+                >
+                  智能切配工作站
+                </h3>
+                <p
+                  class="text-xs text-slate-500 dark:text-slate-400 mb-3 line-clamp-2"
+                  data-i18n="product_cutting_station_desc_tablet"
+                >
+                  多功能食材预处理中心
+                </p>
+                <div class="flex flex-wrap gap-1.5 mb-3">
+                  <span class="px-1.5 py-0.5 bg-primary/10 rounded text-[10px] font-medium text-primary">500kg/h</span>
+                  <span class="px-1.5 py-0.5 bg-primary/10 rounded text-[10px] font-medium text-primary">
+                    8
+                    <span data-i18n="unit_blades">刀头</span>
+                  </span>
+                </div>
+                <div class="flex items-center justify-between pt-3 border-t border-slate-100 dark:border-slate-700">
+                  <span class="text-base font-black text-primary">$18,900</span>
+                  <a href="/products/" class="flex items-center gap-1 text-xs font-bold hover:text-primary">
+                    <span data-i18n="btn_view_details">查看详情</span>
+                    <span class="material-symbols-outlined text-xs">arrow_forward</span>
+                  </a>
+                </div>
+              </div>
+            </article>
+
+            <!-- Product 3 -->
+            <article
+              class="product-card-tablet bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 overflow-hidden"
+              data-category="frying"
+            >
+              <div class="relative aspect-[4/3] overflow-hidden bg-slate-100 dark:bg-slate-700">
+                <img loading="lazy" alt="Smart Fryer Elite" class="w-full h-full object-cover" />
+                <div class="absolute top-3 left-3 flex gap-1.5">
+                  <span
+                    class="px-2 py-0.5 bg-blue-500 text-white text-[10px] font-bold rounded"
+                    data-i18n="product_badge_commercial"
+                  >
+                    商用级
+                  </span>
+                </div>
+              </div>
+              <div class="p-4">
+                <div class="flex items-center gap-1.5 mb-2">
+                  <span class="material-symbols-outlined text-primary text-xs">oil_barrel</span>
+                  <span class="text-[10px] font-bold text-primary uppercase tracking-wider" data-i18n="category_frying">
+                    智能煎炸
+                  </span>
+                </div>
+                <h3
+                  class="text-base font-bold mb-1 text-slate-900 dark:text-white"
+                  data-i18n="product_fryer_elite_name"
+                >
+                  智能煎炸精英版
+                </h3>
+                <p
+                  class="text-xs text-slate-500 dark:text-slate-400 mb-3 line-clamp-2"
+                  data-i18n="product_fryer_elite_desc_tablet"
+                >
+                  精准温控油炸系统
+                </p>
+                <div class="flex flex-wrap gap-1.5 mb-3">
+                  <span class="px-1.5 py-0.5 bg-primary/10 rounded text-[10px] font-medium text-primary">±1°C</span>
+                  <span class="px-1.5 py-0.5 bg-primary/10 rounded text-[10px] font-medium text-primary">30L</span>
+                </div>
+                <div class="flex items-center justify-between pt-3 border-t border-slate-100 dark:border-slate-700">
+                  <span class="text-base font-black text-primary">$12,800</span>
+                  <a href="/products/" class="flex items-center gap-1 text-xs font-bold hover:text-primary">
+                    <span data-i18n="btn_view_details">查看详情</span>
+                    <span class="material-symbols-outlined text-xs">arrow_forward</span>
+                  </a>
+                </div>
+              </div>
+            </article>
+
+            <!-- Product 4 -->
+            <article
+              class="product-card-tablet bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 overflow-hidden"
+              data-category="stewing"
+            >
+              <div class="relative aspect-[4/3] overflow-hidden bg-slate-100 dark:bg-slate-700">
+                <img loading="lazy" alt="Smart Stewing Pot" class="w-full h-full object-cover" />
+                <div class="absolute top-3 left-3 flex gap-1.5">
+                  <span
+                    class="px-2 py-0.5 bg-blue-500 text-white text-[10px] font-bold rounded"
+                    data-i18n="product_badge_commercial"
+                  >
+                    商用级
+                  </span>
+                </div>
+              </div>
+              <div class="p-4">
+                <div class="flex items-center gap-1.5 mb-2">
+                  <span class="material-symbols-outlined text-primary text-xs">soup_kitchen</span>
+                  <span
+                    class="text-[10px] font-bold text-primary uppercase tracking-wider"
+                    data-i18n="category_stewing"
+                  >
+                    智能炖煮
+                  </span>
+                </div>
+                <h3
+                  class="text-base font-bold mb-1 text-slate-900 dark:text-white"
+                  data-i18n="product_stewing_pot_name"
+                >
+                  智能炖煮锅
+                </h3>
+                <p
+                  class="text-xs text-slate-500 dark:text-slate-400 mb-3 line-clamp-2"
+                  data-i18n="product_stewing_pot_desc_tablet"
+                >
+                  大容量慢炖系统
+                </p>
+                <div class="flex flex-wrap gap-1.5 mb-3">
+                  <span class="px-1.5 py-0.5 bg-primary/10 rounded text-[10px] font-medium text-primary">100L</span>
+                  <span class="px-1.5 py-0.5 bg-primary/10 rounded text-[10px] font-medium text-primary">
+                    6
+                    <span data-i18n="unit_modes">模式</span>
+                  </span>
+                </div>
+                <div class="flex items-center justify-between pt-3 border-t border-slate-100 dark:border-slate-700">
+                  <span class="text-base font-black text-primary">$9,600</span>
+                  <a href="/products/" class="flex items-center gap-1 text-xs font-bold hover:text-primary">
+                    <span data-i18n="btn_view_details">查看详情</span>
+                    <span class="material-symbols-outlined text-xs">arrow_forward</span>
+                  </a>
+                </div>
+              </div>
+            </article>
+
+            <!-- Product 5 -->
+            <article
+              class="product-card-tablet bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 overflow-hidden"
+              data-category="steaming"
+            >
+              <div class="relative aspect-[4/3] overflow-hidden bg-slate-100 dark:bg-slate-700">
+                <img loading="lazy" alt="Smart Steamer Pro" class="w-full h-full object-cover" />
+                <div class="absolute top-3 left-3 flex gap-1.5">
+                  <span
+                    class="px-2 py-0.5 bg-primary text-white text-[10px] font-bold rounded"
+                    data-i18n="product_badge_industrial"
+                  >
+                    工业级
+                  </span>
+                  <span
+                    class="px-2 py-0.5 bg-amber-500 text-white text-[10px] font-bold rounded"
+                    data-i18n="product_badge_new"
+                  >
+                    新品
+                  </span>
+                </div>
+              </div>
+              <div class="p-4">
+                <div class="flex items-center gap-1.5 mb-2">
+                  <span class="material-symbols-outlined text-primary text-xs">water_drop</span>
+                  <span
+                    class="text-[10px] font-bold text-primary uppercase tracking-wider"
+                    data-i18n="category_steaming"
+                  >
+                    智能蒸煮
+                  </span>
+                </div>
+                <h3
+                  class="text-base font-bold mb-1 text-slate-900 dark:text-white"
+                  data-i18n="product_steamer_pro_name"
+                >
+                  智能蒸箱 Pro
+                </h3>
+                <p
+                  class="text-xs text-slate-500 dark:text-slate-400 mb-3 line-clamp-2"
+                  data-i18n="product_steamer_pro_desc_tablet"
+                >
+                  多层蒸汽循环系统
+                </p>
+                <div class="flex flex-wrap gap-1.5 mb-3">
+                  <span class="px-1.5 py-0.5 bg-primary/10 rounded text-[10px] font-medium text-primary">
+                    12
+                    <span data-i18n="unit_trays">层架</span>
+                  </span>
+                  <span class="px-1.5 py-0.5 bg-primary/10 rounded text-[10px] font-medium text-primary">3min</span>
+                </div>
+                <div class="flex items-center justify-between pt-3 border-t border-slate-100 dark:border-slate-700">
+                  <span class="text-base font-black text-primary">$22,400</span>
+                  <a href="/products/" class="flex items-center gap-1 text-xs font-bold hover:text-primary">
+                    <span data-i18n="btn_view_details">查看详情</span>
+                    <span class="material-symbols-outlined text-xs">arrow_forward</span>
+                  </a>
+                </div>
+              </div>
+            </article>
+
+            <!-- Product 6 -->
+            <article
+              class="product-card-tablet bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 overflow-hidden"
+              data-category="stirfry"
+            >
+              <div class="relative aspect-[4/3] overflow-hidden bg-slate-100 dark:bg-slate-700">
+                <img loading="lazy" alt="Compact Stir-fry" class="w-full h-full object-cover" />
+                <div class="absolute top-3 left-3 flex gap-1.5">
+                  <span
+                    class="px-2 py-0.5 bg-purple-500 text-white text-[10px] font-bold rounded"
+                    data-i18n="product_badge_compact"
+                  >
+                    紧凑型
+                  </span>
+                </div>
+              </div>
+              <div class="p-4">
+                <div class="flex items-center gap-1.5 mb-2">
+                  <span class="material-symbols-outlined text-primary text-xs">local_fire_department</span>
+                  <span
+                    class="text-[10px] font-bold text-primary uppercase tracking-wider"
+                    data-i18n="category_stirfry"
+                  >
+                    智能爆炒
+                  </span>
+                </div>
+                <h3
+                  class="text-base font-bold mb-1 text-slate-900 dark:text-white"
+                  data-i18n="product_stirfry_compact_name"
+                >
+                  智能爆炒紧凑型
+                </h3>
+                <p
+                  class="text-xs text-slate-500 dark:text-slate-400 mb-3 line-clamp-2"
+                  data-i18n="product_stirfry_compact_desc_tablet"
+                >
+                  专为小型餐厅设计
+                </p>
+                <div class="flex flex-wrap gap-1.5 mb-3">
+                  <span class="px-1.5 py-0.5 bg-primary/10 rounded text-[10px] font-medium text-primary">
+                    150+
+                    <span data-i18n="unit_dishes_day">份/天</span>
+                  </span>
+                  <span class="px-1.5 py-0.5 bg-primary/10 rounded text-[10px] font-medium text-primary">5kg</span>
+                </div>
+                <div class="flex items-center justify-between pt-3 border-t border-slate-100 dark:border-slate-700">
+                  <span class="text-base font-black text-primary">$14,900</span>
+                  <a href="/products/" class="flex items-center gap-1 text-xs font-bold hover:text-primary">
+                    <span data-i18n="btn_view_details">查看详情</span>
+                    <span class="material-symbols-outlined text-xs">arrow_forward</span>
+                  </a>
+                </div>
+              </div>
+            </article>
+          </div>
+
+          <!-- Load More -->
+          <div class="flex justify-center mt-8">
+            <button
+              class="flex items-center gap-2 px-8 py-3 border-2 border-slate-200 dark:border-slate-700 rounded-xl font-bold text-sm text-slate-600 dark:text-slate-400 hover:border-primary hover:text-primary transition-all"
+              data-i18n="products_load_more"
+            >
+              加载更多产品
+              <span class="material-symbols-outlined">expand_more</span>
+            </button>
+          </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="px-6 py-12">
+          <div class="bg-gradient-to-br from-primary/10 to-primary/5 rounded-2xl p-8 text-center">
+            <h2 class="text-2xl font-bold mb-3 text-slate-900 dark:text-white" data-i18n="products_cta_title">
+              需要定制化解决方案？
+            </h2>
+            <p class="text-sm text-slate-600 dark:text-slate-400 mb-6" data-i18n="products_cta_desc_tablet">
+              我们的工程师团队可以根据您的需求，为您量身定制最优的设备配置方案。
+            </p>
+            <div class="flex flex-wrap justify-center gap-3">
+              <a
+                href="/quote"
+                class="bg-primary text-white px-6 py-3 rounded-xl font-bold text-sm hover:shadow-lg hover:shadow-primary/20 transition-all"
+              >
+                <span data-i18n="products_cta_btn_quote">获取定制报价</span>
+              </a>
+              <a
+                href="/support"
+                class="border-2 border-slate-300 dark:border-slate-600 px-6 py-3 rounded-xl font-bold text-sm hover:bg-slate-100 dark:hover:bg-slate-800 transition-all"
+                data-i18n="products_cta_btn_contact"
+              >
+                联系销售团队
+              </a>
+            </div>
+          </div>
+        </section>
       </div>
-    </div>
-  </section>
+    </main>
 
-  <!-- Category Tabs -->
-  <section class="sticky top-16 z-40 bg-white/90 dark:bg-slate-900/90 backdrop-blur-xl border-b border-slate-200 dark:border-slate-800">
-    <div class="flex items-center justify-center gap-1 px-6 py-3 overflow-x-auto scrollbar-hide">
-      <button class="category-tab-tablet active px-4 py-2 text-sm font-bold" data-category="all" data-i18n="products_filter_all">全部</button>
-      <button class="category-tab-tablet px-4 py-2 text-sm font-medium text-slate-500 hover:text-slate-900 dark:hover:text-white" data-category="stirfry" data-i18n="nav_products_stirfry">智能爆炒</button>
-      <button class="category-tab-tablet px-4 py-2 text-sm font-medium text-slate-500 hover:text-slate-900 dark:hover:text-white" data-category="cutting" data-i18n="nav_products_cutting">智能切配</button>
-      <button class="category-tab-tablet px-4 py-2 text-sm font-medium text-slate-500 hover:text-slate-900 dark:hover:text-white" data-category="frying" data-i18n="nav_products_frying">智能煎炸</button>
-      <button class="category-tab-tablet px-4 py-2 text-sm font-medium text-slate-500 hover:text-slate-900 dark:hover:text-white" data-category="stewing" data-i18n="nav_products_stewing">智能炖煮</button>
-      <button class="category-tab-tablet px-4 py-2 text-sm font-medium text-slate-500 hover:text-slate-900 dark:hover:text-white" data-category="steaming" data-i18n="nav_products_steaming">智能蒸煮</button>
-    </div>
-  </section>
+    <script defer src="/assets/js/ui/products-dropdown.js?v=20260322-v3"></script>
+    <script defer src="/assets/js/ui/navigator.js?v=20260322-v3"></script>
+    <script defer src="/assets/js/ui/search-engine.js"></script>
+    <script defer src="/assets/js/ui/footer.js?v=20260322-v3"></script>
+    <script defer src="/assets/js/lang-registry.js"></script>
+    <script defer src="/assets/js/translations.js"></script>
+    <script defer src="/assets/js/translations-dropdown-template.js"></script>
+    <script defer src="/assets/js/contacts.js"></script>
+    <script defer src="/assets/js/ui/smart-popup.js"></script>
+    <script defer src="/assets/js/router.js"></script>
+    <script defer src="/assets/js/page-interactions.js"></script>
 
-  <!-- Filter & Sort Bar -->
-  <section class="px-6 py-4 flex items-center justify-between border-b border-slate-100 dark:border-slate-800">
-    <div class="flex items-center gap-2">
-      <span class="text-sm text-slate-500" data-i18n="products_filter_by">筛选:</span>
-      <select class="bg-transparent border border-slate-200 dark:border-slate-700 rounded-lg px-3 py-1.5 text-sm focus:outline-none focus:border-primary">
-        <option value="all" data-i18n="all">全部</option>
-        <option value="industrial" data-i18n="products_filter_industrial">工业级</option>
-        <option value="commercial" data-i18n="products_filter_commercial">商用级</option>
-        <option value="compact" data-i18n="products_filter_compact">紧凑型</option>
-      </select>
-    </div>
-    <div class="flex items-center gap-2 text-sm text-slate-500">
-      <span data-i18n="products_sort_by">排序:</span>
-      <select class="bg-transparent border-none font-medium text-slate-900 dark:text-white focus:outline-none cursor-pointer">
-        <option value="featured" data-i18n="products_sort_featured">推荐</option>
-        <option value="newest" data-i18n="products_sort_newest">最新</option>
-        <option value="price_asc" data-i18n="products_sort_price_asc">价格: 低到高</option>
-        <option value="price_desc" data-i18n="products_sort_price_desc">价格: 高到低</option>
-      </select>
-    </div>
-  </section>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        if (window.translationManager) window.translationManager.initialize();
 
-  <!-- Product Grid -->
-  <section id="products" class="px-6 py-8">
-    <div class="grid grid-cols-2 lg:grid-cols-3 gap-6" id="product-grid">
-      
-      <!-- Product 1 -->
-      <article class="product-card-tablet bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 overflow-hidden" data-category="stirfry">
-        <div class="relative aspect-[4/3] overflow-hidden bg-slate-100 dark:bg-slate-700">
-          <img loading="lazy" alt="Smart Stir-fry Robot Pro" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAhhbVuMdRRIOCpYVbmXAkpotdRqxlv2LqUHqTFwg-af__tt0tOMFzYg5MQ761mNvotMamhHAiQm0exS09kAL4_C1ZeXQNOD7fRhn2SewNr3wTWxVuXn8COvDie0pCHMhWjL3QAZX3rWQ6pW013yURNuMgWq1drnr9uzRz0yq1Gdp5OcxkRQiGA6HrjyjbJV-tB2DaAQ6AVxib_uPQqDIeiLN1FQdCODXKQqGnuEHfMwkvig2nMCmcZjTGQMzIbrL70IrPM9rM-i2Ai">
-          <div class="absolute top-3 left-3 flex gap-1.5">
-            <span class="px-2 py-0.5 bg-primary text-white text-[10px] font-bold rounded" data-i18n="product_badge_industrial">工业级</span>
-          </div>
-        </div>
-        <div class="p-4">
-          <div class="flex items-center gap-1.5 mb-2">
-            <span class="material-symbols-outlined text-primary text-xs">local_fire_department</span>
-            <span class="text-[10px] font-bold text-primary uppercase tracking-wider" data-i18n="category_stirfry">智能爆炒</span>
-          </div>
-          <h3 class="text-base font-bold mb-1 text-slate-900 dark:text-white" data-i18n="product_stirfry_pro_name">智能爆炒机器人 Pro</h3>
-          <p class="text-xs text-slate-500 dark:text-slate-400 mb-3 line-clamp-2" data-i18n="product_stirfry_pro_desc_tablet">工业级自动爆炒设备，配备AI精准控温系统</p>
-          <div class="flex flex-wrap gap-1.5 mb-3">
-            <span class="px-1.5 py-0.5 bg-primary/10 rounded text-[10px] font-medium text-primary">450+ <span data-i18n="unit_dishes_day">份/天</span></span>
-            <span class="px-1.5 py-0.5 bg-primary/10 rounded text-[10px] font-medium text-primary">12kg</span>
-          </div>
-          <div class="flex items-center justify-between pt-3 border-t border-slate-100 dark:border-slate-700">
-            <span class="text-base font-black text-primary">$28,500</span>
-            <a href="/products/" class="flex items-center gap-1 text-xs font-bold hover:text-primary">
-              <span data-i18n="btn_view_details">查看详情</span>
-              <span class="material-symbols-outlined text-xs">arrow_forward</span>
-            </a>
-          </div>
-        </div>
-      </article>
+        // Category filter
+        const categoryTabs = document.querySelectorAll(".category-tab-tablet");
+        const productCards = document.querySelectorAll(".product-card-tablet");
 
-      <!-- Product 2 -->
-      <article class="product-card-tablet bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 overflow-hidden" data-category="cutting">
-        <div class="relative aspect-[4/3] overflow-hidden bg-slate-100 dark:bg-slate-700">
-          <img loading="lazy" alt="Smart Cutting Station" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBVnf2ozwqL0wDlQbFDBIx9au72GOHq_OGJX31h7t5785gGwxv3Hl4Bt5H_7chG6LCT_F2OL9OVkzbPrxqc1467aPyux8uzJsswsfYpKr8oYffpDx10oK9E2eA3nJP8R7lG8R1VVMha5CsX1jY493nWPdpBfX_A5S4qXjsGPtE7UZyHoyi_0tX5EB4I_EfzciojYSHr2no1ADgJ9EW0xT0VhcalRJTArzUAp-13UbTQVwG5pGPSVklnMoymC8chmDpsesWNcn6aBHCP">
-          <div class="absolute top-3 left-3 flex gap-1.5">
-            <span class="px-2 py-0.5 bg-primary text-white text-[10px] font-bold rounded" data-i18n="product_badge_industrial">工业级</span>
-          </div>
-        </div>
-        <div class="p-4">
-          <div class="flex items-center gap-1.5 mb-2">
-            <span class="material-symbols-outlined text-primary text-xs">content_cut</span>
-            <span class="text-[10px] font-bold text-primary uppercase tracking-wider" data-i18n="category_cutting">智能切配</span>
-          </div>
-          <h3 class="text-base font-bold mb-1 text-slate-900 dark:text-white" data-i18n="product_cutting_station_name">智能切配工作站</h3>
-          <p class="text-xs text-slate-500 dark:text-slate-400 mb-3 line-clamp-2" data-i18n="product_cutting_station_desc_tablet">多功能食材预处理中心</p>
-          <div class="flex flex-wrap gap-1.5 mb-3">
-            <span class="px-1.5 py-0.5 bg-primary/10 rounded text-[10px] font-medium text-primary">500kg/h</span>
-            <span class="px-1.5 py-0.5 bg-primary/10 rounded text-[10px] font-medium text-primary">8 <span data-i18n="unit_blades">刀头</span></span>
-          </div>
-          <div class="flex items-center justify-between pt-3 border-t border-slate-100 dark:border-slate-700">
-            <span class="text-base font-black text-primary">$18,900</span>
-            <a href="/products/" class="flex items-center gap-1 text-xs font-bold hover:text-primary">
-              <span data-i18n="btn_view_details">查看详情</span>
-              <span class="material-symbols-outlined text-xs">arrow_forward</span>
-            </a>
-          </div>
-        </div>
-      </article>
+        categoryTabs.forEach((tab) => {
+          tab.addEventListener("click", function () {
+            const category = this.dataset.category;
 
-      <!-- Product 3 -->
-      <article class="product-card-tablet bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 overflow-hidden" data-category="frying">
-        <div class="relative aspect-[4/3] overflow-hidden bg-slate-100 dark:bg-slate-700">
-          <img loading="lazy" alt="Smart Fryer Elite" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDR9KFSd89E429_5PctsP1KGI6Ns-HJi8huk9fvLCNkulehmZv7y5xjnpQMztw2UoJljrOS9_u-CX8kVG91UB1GkfUHs07P6vmeR8PMp88Bvn5zQTfgKX2LCXf5qYnKT29vsR_P5FFXMeWDPtMHk4dv3y4ex1TujXRXQtWN0HfoCRj_WLBsdPluhO4w4PuMRcAzGhl_Mx0-YZygp3_ZOxT79YEoUz4l6-kJIN8u3os63p7OZQ5JlzSHiMmM395UghsUWGqP3BcHLD6T">
-          <div class="absolute top-3 left-3 flex gap-1.5">
-            <span class="px-2 py-0.5 bg-blue-500 text-white text-[10px] font-bold rounded" data-i18n="product_badge_commercial">商用级</span>
-          </div>
-        </div>
-        <div class="p-4">
-          <div class="flex items-center gap-1.5 mb-2">
-            <span class="material-symbols-outlined text-primary text-xs">oil_barrel</span>
-            <span class="text-[10px] font-bold text-primary uppercase tracking-wider" data-i18n="category_frying">智能煎炸</span>
-          </div>
-          <h3 class="text-base font-bold mb-1 text-slate-900 dark:text-white" data-i18n="product_fryer_elite_name">智能煎炸精英版</h3>
-          <p class="text-xs text-slate-500 dark:text-slate-400 mb-3 line-clamp-2" data-i18n="product_fryer_elite_desc_tablet">精准温控油炸系统</p>
-          <div class="flex flex-wrap gap-1.5 mb-3">
-            <span class="px-1.5 py-0.5 bg-primary/10 rounded text-[10px] font-medium text-primary">±1°C</span>
-            <span class="px-1.5 py-0.5 bg-primary/10 rounded text-[10px] font-medium text-primary">30L</span>
-          </div>
-          <div class="flex items-center justify-between pt-3 border-t border-slate-100 dark:border-slate-700">
-            <span class="text-base font-black text-primary">$12,800</span>
-            <a href="/products/" class="flex items-center gap-1 text-xs font-bold hover:text-primary">
-              <span data-i18n="btn_view_details">查看详情</span>
-              <span class="material-symbols-outlined text-xs">arrow_forward</span>
-            </a>
-          </div>
-        </div>
-      </article>
+            categoryTabs.forEach((t) => t.classList.remove("active"));
+            this.classList.add("active");
 
-      <!-- Product 4 -->
-      <article class="product-card-tablet bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 overflow-hidden" data-category="stewing">
-        <div class="relative aspect-[4/3] overflow-hidden bg-slate-100 dark:bg-slate-700">
-          <img loading="lazy" alt="Smart Stewing Pot" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAsIYWPeCLf0ojsDsBZgkG6uqaeGR-R49fjs4hWOwsNTJYe4ESxm-P9FFnEGfqaRBOddF89wStuv3iyo_Eu7aTbqNoTj15h2iYIHhPuwNPID_Pi3MzmDRtYqvOuSr2c4NUWhiSWYwMwY2vvk0OOLQcjc2cZQ_nde-L7IJzqyX1q7dOEHyX0xfuiVDc2V1nAhoktSKfDWnYG6Vda2Xkzam6aIcuuUxIXj8RK8caPJBbaOvlNM62uPkFMVVdVfpbA4s1aVpBIs1fG8_um">
-          <div class="absolute top-3 left-3 flex gap-1.5">
-            <span class="px-2 py-0.5 bg-blue-500 text-white text-[10px] font-bold rounded" data-i18n="product_badge_commercial">商用级</span>
-          </div>
-        </div>
-        <div class="p-4">
-          <div class="flex items-center gap-1.5 mb-2">
-            <span class="material-symbols-outlined text-primary text-xs">soup_kitchen</span>
-            <span class="text-[10px] font-bold text-primary uppercase tracking-wider" data-i18n="category_stewing">智能炖煮</span>
-          </div>
-          <h3 class="text-base font-bold mb-1 text-slate-900 dark:text-white" data-i18n="product_stewing_pot_name">智能炖煮锅</h3>
-          <p class="text-xs text-slate-500 dark:text-slate-400 mb-3 line-clamp-2" data-i18n="product_stewing_pot_desc_tablet">大容量慢炖系统</p>
-          <div class="flex flex-wrap gap-1.5 mb-3">
-            <span class="px-1.5 py-0.5 bg-primary/10 rounded text-[10px] font-medium text-primary">100L</span>
-            <span class="px-1.5 py-0.5 bg-primary/10 rounded text-[10px] font-medium text-primary">6 <span data-i18n="unit_modes">模式</span></span>
-          </div>
-          <div class="flex items-center justify-between pt-3 border-t border-slate-100 dark:border-slate-700">
-            <span class="text-base font-black text-primary">$9,600</span>
-            <a href="/products/" class="flex items-center gap-1 text-xs font-bold hover:text-primary">
-              <span data-i18n="btn_view_details">查看详情</span>
-              <span class="material-symbols-outlined text-xs">arrow_forward</span>
-            </a>
-          </div>
-        </div>
-      </article>
-
-      <!-- Product 5 -->
-      <article class="product-card-tablet bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 overflow-hidden" data-category="steaming">
-        <div class="relative aspect-[4/3] overflow-hidden bg-slate-100 dark:bg-slate-700">
-          <img loading="lazy" alt="Smart Steamer Pro" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAxzvXyPHegGJoZFiJdTKkoLIpzXYNKBXI7PcqdX-1xeSU_8JORuM9PXPiB1s2k8yocB8NnO9xfsOhit29KGl3bAF3NkwEh1M3XJ2M_0FArEB6qvIoqS-W-iL9d9ElXW9qmIkeM6xWOVqgN78-EDtdo5xcuXJOoD1Ak2KhmcZarcVWFkt6JoCgKnnmpH4KTgCshq0VN2FtE1CeUMeAEZgC6q-sKP-e65BoG0UcdV7bHU02tlAB1J5b1EXcbhN5bozVb0kFCIagv8-ck">
-          <div class="absolute top-3 left-3 flex gap-1.5">
-            <span class="px-2 py-0.5 bg-primary text-white text-[10px] font-bold rounded" data-i18n="product_badge_industrial">工业级</span>
-            <span class="px-2 py-0.5 bg-amber-500 text-white text-[10px] font-bold rounded" data-i18n="product_badge_new">新品</span>
-          </div>
-        </div>
-        <div class="p-4">
-          <div class="flex items-center gap-1.5 mb-2">
-            <span class="material-symbols-outlined text-primary text-xs">water_drop</span>
-            <span class="text-[10px] font-bold text-primary uppercase tracking-wider" data-i18n="category_steaming">智能蒸煮</span>
-          </div>
-          <h3 class="text-base font-bold mb-1 text-slate-900 dark:text-white" data-i18n="product_steamer_pro_name">智能蒸箱 Pro</h3>
-          <p class="text-xs text-slate-500 dark:text-slate-400 mb-3 line-clamp-2" data-i18n="product_steamer_pro_desc_tablet">多层蒸汽循环系统</p>
-          <div class="flex flex-wrap gap-1.5 mb-3">
-            <span class="px-1.5 py-0.5 bg-primary/10 rounded text-[10px] font-medium text-primary">12 <span data-i18n="unit_trays">层架</span></span>
-            <span class="px-1.5 py-0.5 bg-primary/10 rounded text-[10px] font-medium text-primary">3min</span>
-          </div>
-          <div class="flex items-center justify-between pt-3 border-t border-slate-100 dark:border-slate-700">
-            <span class="text-base font-black text-primary">$22,400</span>
-            <a href="/products/" class="flex items-center gap-1 text-xs font-bold hover:text-primary">
-              <span data-i18n="btn_view_details">查看详情</span>
-              <span class="material-symbols-outlined text-xs">arrow_forward</span>
-            </a>
-          </div>
-        </div>
-      </article>
-
-      <!-- Product 6 -->
-      <article class="product-card-tablet bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 overflow-hidden" data-category="stirfry">
-        <div class="relative aspect-[4/3] overflow-hidden bg-slate-100 dark:bg-slate-700">
-          <img loading="lazy" alt="Compact Stir-fry" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC1MW_mHuRalISgbjv1juF4qaQy4x8vV08AXyzij7Ge0hG1_2bwbPCie1-j-ibR9adXbVxoEIvp7JC41Xc-8JzO05fvbViUsuMYt5LUWbgAIPgVK72hIh-JXAbslfZ8X_GyDbOIfpsfmc0FaqmtCprXh8lyx6JOaz2MvyeMR6hqeF_kj74mPhsVkt1wbCYibf9TSCj7mxhKPMLXvLpR2o6cVMEMGrhk6U05EbmaIT-WoPdEHnJ6ZaBDqPvZGBGNaueWsKkORihyJ8hg">
-          <div class="absolute top-3 left-3 flex gap-1.5">
-            <span class="px-2 py-0.5 bg-purple-500 text-white text-[10px] font-bold rounded" data-i18n="product_badge_compact">紧凑型</span>
-          </div>
-        </div>
-        <div class="p-4">
-          <div class="flex items-center gap-1.5 mb-2">
-            <span class="material-symbols-outlined text-primary text-xs">local_fire_department</span>
-            <span class="text-[10px] font-bold text-primary uppercase tracking-wider" data-i18n="category_stirfry">智能爆炒</span>
-          </div>
-          <h3 class="text-base font-bold mb-1 text-slate-900 dark:text-white" data-i18n="product_stirfry_compact_name">智能爆炒紧凑型</h3>
-          <p class="text-xs text-slate-500 dark:text-slate-400 mb-3 line-clamp-2" data-i18n="product_stirfry_compact_desc_tablet">专为小型餐厅设计</p>
-          <div class="flex flex-wrap gap-1.5 mb-3">
-            <span class="px-1.5 py-0.5 bg-primary/10 rounded text-[10px] font-medium text-primary">150+ <span data-i18n="unit_dishes_day">份/天</span></span>
-            <span class="px-1.5 py-0.5 bg-primary/10 rounded text-[10px] font-medium text-primary">5kg</span>
-          </div>
-          <div class="flex items-center justify-between pt-3 border-t border-slate-100 dark:border-slate-700">
-            <span class="text-base font-black text-primary">$14,900</span>
-            <a href="/products/" class="flex items-center gap-1 text-xs font-bold hover:text-primary">
-              <span data-i18n="btn_view_details">查看详情</span>
-              <span class="material-symbols-outlined text-xs">arrow_forward</span>
-            </a>
-          </div>
-        </div>
-      </article>
-
-    </div>
-
-    <!-- Load More -->
-    <div class="flex justify-center mt-8">
-      <button class="flex items-center gap-2 px-8 py-3 border-2 border-slate-200 dark:border-slate-700 rounded-xl font-bold text-sm text-slate-600 dark:text-slate-400 hover:border-primary hover:text-primary transition-all" data-i18n="products_load_more">
-        加载更多产品
-        <span class="material-symbols-outlined">expand_more</span>
-      </button>
-    </div>
-  </section>
-
-  <!-- CTA Section -->
-  <section class="px-6 py-12">
-    <div class="bg-gradient-to-br from-primary/10 to-primary/5 rounded-2xl p-8 text-center">
-      <h2 class="text-2xl font-bold mb-3 text-slate-900 dark:text-white" data-i18n="products_cta_title">
-        需要定制化解决方案？
-      </h2>
-      <p class="text-sm text-slate-600 dark:text-slate-400 mb-6" data-i18n="products_cta_desc_tablet">
-        我们的工程师团队可以根据您的需求，为您量身定制最优的设备配置方案。
-      </p>
-      <div class="flex flex-wrap justify-center gap-3">
-        <a href="/quote" class="bg-primary text-white px-6 py-3 rounded-xl font-bold text-sm hover:shadow-lg hover:shadow-primary/20 transition-all">
-          <span data-i18n="products_cta_btn_quote">获取定制报价</span>
-        </a>
-        <a href="/support" class="border-2 border-slate-300 dark:border-slate-600 px-6 py-3 rounded-xl font-bold text-sm hover:bg-slate-100 dark:hover:bg-slate-800 transition-all" data-i18n="products_cta_btn_contact">
-          联系销售团队
-        </a>
-      </div>
-    </div>
-  </section>
-</div>
-</main>
-
-<script defer src="/assets/js/ui/products-dropdown.js?v=20260322-v3"></script>
-<script defer src="/assets/js/ui/navigator.js?v=20260322-v3"></script>
-<script defer src="/assets/js/ui/search-engine.js"></script>
-<script defer src="/assets/js/ui/footer.js?v=20260322-v3"></script>
-<script defer src="/assets/js/lang-registry.js"></script>
-<script defer src="/assets/js/translations.js"></script>
-<script defer src="/assets/js/translations-dropdown-template.js"></script>
-<script defer src="/assets/js/contacts.js"></script>
-<script defer src="/assets/js/ui/smart-popup.js"></script>
-<script defer src="/assets/js/router.js"></script>
-<script defer src="/assets/js/page-interactions.js"></script>
-
-<script>
-  document.addEventListener('DOMContentLoaded', function () {
-    if (window.translationManager) window.translationManager.initialize();
-    
-    // Category filter
-    const categoryTabs = document.querySelectorAll('.category-tab-tablet');
-    const productCards = document.querySelectorAll('.product-card-tablet');
-    
-    categoryTabs.forEach(tab => {
-      tab.addEventListener('click', function() {
-        const category = this.dataset.category;
-        
-        categoryTabs.forEach(t => t.classList.remove('active'));
-        this.classList.add('active');
-        
-        productCards.forEach(card => {
-          if (category === 'all' || card.dataset.category === category) {
-            card.style.display = 'block';
-            card.style.animation = 'fadeIn 0.3s ease-out';
-          } else {
-            card.style.display = 'none';
-          }
+            productCards.forEach((card) => {
+              if (category === "all" || card.dataset.category === category) {
+                card.style.display = "block";
+                card.style.animation = "fadeIn 0.3s ease-out";
+              } else {
+                card.style.display = "none";
+              }
+            });
+          });
         });
       });
-    });
-  });
-</script>
+    </script>
 
-<style>
-  @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-  .scrollbar-hide::-webkit-scrollbar { display: none; }
-  .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
-  .line-clamp-2 {
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-  }
-</style>
+    <style>
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(10px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      .scrollbar-hide::-webkit-scrollbar {
+        display: none;
+      }
+      .scrollbar-hide {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+      }
+      .line-clamp-2 {
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+      }
+    </style>
 
-<script src="/assets/js/utils/device-utils.js"></script>
-<script src="/assets/js/spa-router.js"></script>
-<script>
-  document.addEventListener('DOMContentLoaded', function() {
-    if (window.SpaRouter && typeof window.SpaRouter.init === 'function') {
-      window.SpaRouter.init();
-    }
-  });
-</script>
-</body></html>
+    <script src="/assets/js/utils/device-utils.js"></script>
+    <script src="/assets/js/spa-router.js"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        if (window.SpaRouter && typeof window.SpaRouter.init === "function") {
+          window.SpaRouter.init();
+        }
+      });
+    </script>
+  </body>
+</html>

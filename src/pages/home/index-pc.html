@@ -1,456 +1,635 @@
-<!DOCTYPE html>
+<!doctype html>
 
-<html class="light" lang="zh-CN"><head>
-<!-- ═══ Responsive Redirect (injected by patch-responsive-redirect.py) ═══ -->
-<link rel="canonical" href="/home/"/>
-<link rel="alternate" media="only screen and (max-width: 767px)"
-      href="/home/index-mobile.html"/>
-<link rel="alternate" media="only screen and (min-width: 768px) and (max-width: 1279px)"
-      href="/home/index-tablet.html"/>
-<link rel="alternate" media="only screen and (min-width: 1280px)"
-      href="/home/index-pc.html"/>
-<script>
-/* Responsive redirect — runs before render, no flash */
-(function(){
-  // 防止 bfcache 恢复时重复 redirect
-  if (window.__redirectChecked) return;
-  window.__redirectChecked = true;
+<html class="light" lang="zh-CN">
+  <head>
+    <!-- ═══ Responsive Redirect (injected by patch-responsive-redirect.py) ═══ -->
+    <link rel="canonical" href="/home/" />
+    <link rel="alternate" media="only screen and (max-width: 767px)" href="/home/index-mobile.html" />
+    <link
+      rel="alternate"
+      media="only screen and (min-width: 768px) and (max-width: 1279px)"
+      href="/home/index-tablet.html"
+    />
+    <link rel="alternate" media="only screen and (min-width: 1280px)" href="/home/index-pc.html" />
+    <script>
+      /* Responsive redirect — runs before render, no flash */
+      (function () {
+        // 防止 bfcache 恢复时重复 redirect
+        if (window.__redirectChecked) return;
+        window.__redirectChecked = true;
 
-  // 处理 clean-url 参数:重定向后清理 URL 为干净的目录 URL
-  var urlParams = new URLSearchParams(location.search);
-  var cleanUrl = urlParams.get('clean-url');
-  if (cleanUrl) {
-    console.log('[Responsive Redirect] Cleaning URL to:', cleanUrl);
-    history.replaceState({}, '', cleanUrl);
-    return;
-  }
+        // 处理 clean-url 参数:重定向后清理 URL 为干净的目录 URL
+        var urlParams = new URLSearchParams(location.search);
+        var cleanUrl = urlParams.get("clean-url");
+        if (cleanUrl) {
+          console.log("[Responsive Redirect] Cleaning URL to:", cleanUrl);
+          history.replaceState({}, "", cleanUrl);
+          return;
+        }
 
-  // SPA 导航时跳过响应式重定向
-  console.log('[Responsive Redirect] Checking SPA flag: window.__spaNavigating =', window.__spaNavigating);
-  if (window.__spaNavigating) {
-    console.log('[Responsive Redirect] SPA navigation detected, skipping redirect');
-    return;
-  }
+        // SPA 导航时跳过响应式重定向
+        console.log("[Responsive Redirect] Checking SPA flag: window.__spaNavigating =", window.__spaNavigating);
+        if (window.__spaNavigating) {
+          console.log("[Responsive Redirect] SPA navigation detected, skipping redirect");
+          return;
+        }
 
-  // 使用 DeviceUtils 统一管理设备判断
-  var currentFile = location.pathname.split('/').pop();
-  console.log('[Responsive Redirect] Current file:', currentFile, 'Pathname:', location.pathname);
+        // 使用 DeviceUtils 统一管理设备判断
+        var currentFile = location.pathname.split("/").pop();
+        console.log("[Responsive Redirect] Current file:", currentFile, "Pathname:", location.pathname);
 
-  // 当访问目录 URL(以 / 结尾)时,不要重定向(SPA 导航使用干净的目录 URL)
-  if (window.DeviceUtils && window.DeviceUtils.isDirectoryURL()) {
-    console.log('[Responsive Redirect] Directory URL detected, skipping redirect');
-    return;
-  }
+        // 当访问目录 URL(以 / 结尾)时,不要重定向(SPA 导航使用干净的目录 URL)
+        if (window.DeviceUtils && window.DeviceUtils.isDirectoryURL()) {
+          console.log("[Responsive Redirect] Directory URL detected, skipping redirect");
+          return;
+        }
 
-  // 使用 DeviceUtils 判断是否需要重定向
-  if (window.DeviceUtils && window.DeviceUtils.shouldRedirect(currentFile)) {
-    var deviceType = window.DeviceUtils.getDeviceType();
-    var targetFile;
+        // 使用 DeviceUtils 判断是否需要重定向
+        if (window.DeviceUtils && window.DeviceUtils.shouldRedirect(currentFile)) {
+          var deviceType = window.DeviceUtils.getDeviceType();
+          var targetFile;
 
-    if (deviceType === window.DeviceUtils.DeviceType.MOBILE) {
-      targetFile = 'index-mobile.html';
-    } else if (deviceType === window.DeviceUtils.DeviceType.TABLET) {
-      targetFile = 'index-tablet.html';
-    } else {
-      targetFile = 'index-pc.html';
-    }
+          if (deviceType === window.DeviceUtils.DeviceType.MOBILE) {
+            targetFile = "index-mobile.html";
+          } else if (deviceType === window.DeviceUtils.DeviceType.TABLET) {
+            targetFile = "index-tablet.html";
+          } else {
+            targetFile = "index-pc.html";
+          }
 
-    console.log('[Responsive Redirect] Redirecting to:', targetFile);
-    location.href = targetFile;
-    return;
-  }
+          console.log("[Responsive Redirect] Redirecting to:", targetFile);
+          location.href = targetFile;
+          return;
+        }
 
-  console.log('[Responsive Redirect] No redirect needed');
-})();
-</script>
-<script>
-/* Pre-apply cached translations to prevent flash */
-(function(){
-  try {
-    var lang = localStorage.getItem('userLanguage') || 'zh-CN';
-    if (lang === 'zh-CN') return; // 默认中文，无需处理
-    var cacheKey = 'yukoli-translations-ui-' + lang;
-    var cached = localStorage.getItem(cacheKey);
-    if (!cached) return;
-    var data = JSON.parse(cached);
-    if (!data.data) return;
-    var translations = data.data;
-    document.documentElement.lang = lang;
-    // 预应用关键翻译（仅处理无子元素的叶子节点）
-    var elements = document.querySelectorAll('[data-i18n]');
-    for (var i = 0; i < elements.length; i++) {
-      var el = elements[i];
-      var key = el.getAttribute('data-i18n');
-      if (translations[key] && el.children.length === 0) {
-        el.textContent = translations[key];
+        console.log("[Responsive Redirect] No redirect needed");
+      })();
+    </script>
+    <script>
+      /* Pre-apply cached translations to prevent flash */
+      (function () {
+        try {
+          var lang = localStorage.getItem("userLanguage") || "zh-CN";
+          if (lang === "zh-CN") return; // 默认中文，无需处理
+          var cacheKey = "yukoli-translations-ui-" + lang;
+          var cached = localStorage.getItem(cacheKey);
+          if (!cached) return;
+          var data = JSON.parse(cached);
+          if (!data.data) return;
+          var translations = data.data;
+          document.documentElement.lang = lang;
+          // 预应用关键翻译（仅处理无子元素的叶子节点）
+          var elements = document.querySelectorAll("[data-i18n]");
+          for (var i = 0; i < elements.length; i++) {
+            var el = elements[i];
+            var key = el.getAttribute("data-i18n");
+            if (translations[key] && el.children.length === 0) {
+              el.textContent = translations[key];
+            }
+          }
+        } catch (e) {
+          // 忽略错误，让主翻译系统处理
+        }
+      })();
+    </script>
+    <!-- ═══ End Responsive Redirect ═══ -->
+
+    <meta charset="utf-8" />
+    <meta
+      name="description"
+      content="YuKoLi 智能厨具 - 专业商用厨房设备制造商，提供智能炒菜机、炖煮机、油炸炉、蒸煮设备等114款产品，覆盖食堂、中央厨房、餐饮连锁全场景，产品远销全球50+国家。"
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="YuKoLi 智能厨具 | 专业商用厨房设备制造商" />
+    <meta
+      property="og:description"
+      content="YuKoLi 智能厨具 - 专业商用厨房设备制造商，提供智能炒菜机、炖煮机、油炸炉、蒸煮设备等114款产品，覆盖食堂、中央厨房、餐饮连锁全场景。"
+    />
+    <meta property="og:url" content="https://www.kitchen.yukoli.com/home/index-pc.html" />
+    <meta property="og:image" content="https://www.kitchen.yukoli.com/assets/images/logo_header.webp" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>YuKoLi 智能厨具 | 专业商用厨房设备制造商 - 114款智能商厨设备</title>
+    <link rel="preload" href="/assets/fonts/local-fonts.css" as="style" />
+    <link rel="preload" href="/assets/css/styles.css" as="style" />
+    <link rel="preload" href="/assets/css/tailwind.css" as="style" />
+    <link
+      rel="preload"
+      href="/assets/fonts/public-sans-latin-400-normal.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href="/assets/fonts/public-sans-latin-700-normal.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link href="/assets/fonts/local-fonts.css" rel="stylesheet" />
+    <link rel="stylesheet" href="/assets/css/styles.css" />
+    <link rel="stylesheet" href="/assets/css/tailwind.css" />
+    <link rel="stylesheet" href="/assets/css/z-index-system.css" />
+    <link rel="stylesheet" href="/assets/css/performance-optimizations.css" />
+    <style>
+      body {
+        font-family: "Public Sans", sans-serif;
       }
-    }
-  } catch (e) {
-    // 忽略错误，让主翻译系统处理
-  }
-})();
-</script>
-<!-- ═══ End Responsive Redirect ═══ -->
-
-
-<meta charset="utf-8"/>
-<meta name="description" content="Yukoli Smart Kitchen delivers industrial-grade cooking automation for high-volume commercial kitchens. Explore AI-driven solutions, IoT integration, and 2026 innovations.">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Yukoli Smart Kitchen | Commercial Kitchen 2026">
-<meta property="og:description" content="Yukoli Smart Kitchen delivers industrial-grade cooking automation for high-volume commercial kitchens. Explore AI-driven solutions, IoT integration, and 2026 innovations.">
-<meta property="og:url" content="https://www.kitchen.yukoli.com/home/index-pc.html">
-<meta property="og:image" content="https://www.kitchen.yukoli.com/assets/images/og-home.webp">
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Yukoli Smart Kitchen | Commercial Kitchen 2026</title>
-<link rel="preload" href="/assets/fonts/local-fonts.css" as="style">
-<link rel="preload" href="/assets/css/styles.css" as="style">
-  <link rel="preload" href="/assets/css/tailwind.css" as="style">
-<link rel="preload" href="/assets/fonts/public-sans-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" href="/assets/fonts/public-sans-latin-700-normal.woff2" as="font" type="font/woff2" crossorigin>
-<link href="/assets/fonts/local-fonts.css" rel="stylesheet"/>
-<link rel="stylesheet" href="/assets/css/styles.css">
-  <link rel="stylesheet" href="/assets/css/tailwind.css">
-<link rel="stylesheet" href="/assets/css/z-index-system.css">
-<link rel="stylesheet" href="/assets/css/performance-optimized.css"/>
-<style>
-        body { font-family: 'Public Sans', sans-serif; }
     </style>
-<!-- Dark mode: apply saved preference before first paint (prevents flash) -->
-  <script>(function(){
-if(localStorage.getItem('darkMode')==='true')document.documentElement.classList.add('dark')})()</script>
-<link rel="stylesheet" href="/assets/css/skeleton.css"/>
-<link rel="icon" href="/assets/images/logo_header.webp" type="image/webp">
+    <!-- Dark mode: apply saved preference before first paint (prevents flash) -->
+    <script>
+      (function () {
+        if (localStorage.getItem("darkMode") === "true") document.documentElement.classList.add("dark");
+      })();
+    </script>
+    <link rel="stylesheet" href="/assets/css/skeleton.css" />
+    <link rel="icon" href="/assets/images/logo_header.webp" type="image/webp" />
 
-<script>
-window.addEventListener('DOMContentLoaded',function(){
-  setTimeout(function(){
-    var m=document.getElementById('spa-content');
-    if(!m)return;
-    var s=getComputedStyle(m);
-    var ok=s.maxWidth==='none'||parseInt(s.maxWidth)>=1920;
-    console.log('%c['+location.pathname.replace(//$/,'')+'] main: max-w='+s.maxWidth+' px='+s.paddingLeft+'/'+s.paddingRight+' w='+m.offsetWidth,ok?'color:green':'color:orange;font-weight:bold');
-    if(!ok)console.warn('Expected max-width: 1920px, got:',s.maxWidth);
-  },200);
-});
-</script>
-</head>
-<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 transition-colors duration-300 overflow-x-hidden">
-<!-- Top Navigation Bar -->
-<!-- ═══ Navigator Component ═══ -->
-<navigator data-component="navigator"
-  data-variant="pc"
-  data-active="home"
-  data-search="true"
-  data-cta-text-key="nav_get_quote"
-  data-cta-href="/quote"></navigator>
-<main id="spa-content">
-<!-- Hero Section: 50% Focus on Hardware -->
-<section class="w-full flex flex-col lg:flex-row items-center min-h-[85vh] py-12 gap-12">
-<div class="w-full lg:w-1/2 space-y-8">
-<div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-bold uppercase tracking-widest">
-<span class="relative flex h-2 w-2">
-<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
-<span class="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
-</span>
-<span data-i18n="home_hero_badge">Smart Commercial Kitchen 2026</span>
-                </div>
-<h1 class="text-6xl xl:text-8xl font-black leading-[1.1] tracking-tight text-slate-900 dark:text-white">
-                    Precision <span class="text-primary" data-i18n="home_hero_title_2">Robotics</span> for Scale.
-                </h1>
-<p class="text-lg xl:text-xl text-slate-600 dark:text-slate-400 max-w-2xl leading-relaxed" data-i18n="home_hero_desc">
-                    Revolutionize your culinary operations with AI-driven robotics and the Yukoli IoT Backbone. Achieve 3x ROI in the first year with our hardware-first ecosystem.
-                </p>
-<div class="flex flex-wrap gap-4 pt-4">
-<a href="/roi" class="bg-primary text-white px-8 py-4 rounded-xl font-bold text-lg flex items-center gap-2 hover:shadow-lg hover:shadow-primary/20 transition-all">
-<span data-i18n="home_hero_btn_roi">Start ROI Calculator</span>
-<span class="material-symbols-outlined">calculate</span>
-</a>
-<button class="border-2 border-slate-200 dark:border-slate-800 px-8 py-4 rounded-xl font-bold text-lg hover:bg-slate-100 dark:hover:bg-slate-800 transition-all" data-i18n="home_hero_btn_hardware">
-                        View Hardware Stack
-                    </button>
-</div>
-</div>
-<div class="w-full lg:w-1/2 relative">
-<div class="aspect-square bg-gradient-to-br from-primary/20 to-transparent rounded-full absolute -top-10 -right-10 blur-3xl opacity-50 -z-10"></div>
-<div class="relative w-full h-[600px] bg-slate-200 dark:bg-slate-800 rounded-3xl overflow-hidden shadow-2xl border border-white/10" data-alt="3D render of a futuristic flagship kitchen robot arm" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuC1MW_mHuRalISgbjv1juF4qaQy4x8vV08AXyzij7Ge0hG1_2bwbPCie1-j-ibR9adXbVxoEIvp7JC41Xc-8JzO05fvbViUsuMYt5LUWbgAIPgVK72hIh-JXAbslfZ8X_GyDbOIfpsfmc0FaqmtCprXh8lyx6JOaz2MvyeMR6hqeF_kj74mPhsVkt1wbCYibf9TSCj7mxhKPMLXvLpR2o6cVMEMGrhk6U05EbmaIT-WoPdEHnJ6ZaBDqPvZGBGNaueWsKkORihyJ8hg'); background-size: cover; background-position: center;">
-<div class="absolute bottom-6 left-6 right-6 p-6 bg-white/10 backdrop-blur-xl border border-white/20 rounded-2xl">
-<div class="flex justify-between items-center text-white">
-<div>
-<p class="text-xs font-bold uppercase opacity-70" data-i18n="home_hero_flagship_label">Flagship Model</p>
-<p class="text-xl font-black">Yukoli Robo-Chef S2</p>
-</div>
-<div class="text-right">
-<p class="text-xs font-bold uppercase opacity-70" data-i18n="home_hero_efficiency_label">Efficiency</p>
-<p class="text-xl font-black text-primary">+340%</p>
-</div>
-</div>
-</div>
-</div>
-</div>
-</section>
-<!-- Product Matrix -->
-<section class="py-24 bg-slate-100 dark:bg-slate-900/50 fullwidth-bg">
-<div class="w-full px-6 md:px-10 lg:px-16 xl:px-20">
-<div class="flex flex-col md:flex-row justify-between items-end mb-12 gap-6">
-<div>
-<h2 class="text-4xl font-black tracking-tight mb-4" data-i18n="home_hw_title">Hardware Matrix</h2>
-<p class="text-slate-600 dark:text-slate-400 text-lg" data-i18n="home_hw_subtitle">Individually Powerful. Together, Unstoppable.</p>
-</div>
-<a class="text-primary font-bold flex items-center gap-2 group" href="/catalog">
-<span data-i18n="home_hw_view_inventory">View Full Inventory</span>
-                    <span class="material-symbols-outlined group-hover:translate-x-1 transition-transform">arrow_forward</span>
-</a>
-</div>
-<div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-8">
-<!-- Robo-Chef S2 -->
-<div class="group bg-background-light dark:bg-background-dark p-4 rounded-2xl border border-slate-200 dark:border-slate-800 hover:border-primary transition-all shadow-sm">
-<div class="aspect-square rounded-xl bg-slate-200 dark:bg-slate-800 overflow-hidden mb-6" data-alt="Modern stainless steel robotic cooking station" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAxzvXyPHegGJoZFiJdTKkoLIpzXYNKBXI7PcqdX-1xeSU_8JORuM9PXPiB1s2k8yocB8NnO9xfsOhit29KGl3bAF3NkwEh1M3XJ2M_0FArEB6qvIoqS-W-iL9d9ElXW9qmIkeM6xWOVqgN78-EDtdo5xcuXJOoD1Ak2KhmcZarcVWFkt6JoCgKnnmpH4KTgCshq0VN2FtE1CeUMeAEZgC6q-sKP-e65BoG0UcdV7bHU02tlAB1J5b1EXcbhN5bozVb0kFCIagv8-ck'); background-size: cover; background-position: center;">
-</div>
-<h3 class="text-xl font-bold mb-2" data-i18n="product_robo_chef_s2">Robo-Chef S2</h3>
-<p class="text-sm text-slate-500 mb-6" data-i18n="product_robo_chef_s2_desc">High-precision automated cooking with haptic feedback sensors.</p>
-<div class="flex justify-between items-center border-t border-slate-100 dark:border-slate-800 pt-4">
-<span class="text-xs font-bold uppercase text-slate-400" data-i18n="product_badge_gen4ai">Gen 4 AI</span>
-<span class="text-primary font-black" data-i18n="home_hw_learn_more">Learn More</span>
-</div>
-</div>
-<!-- Omni-Oven X1 -->
-<div class="group bg-background-light dark:bg-background-dark p-4 rounded-2xl border border-slate-200 dark:border-slate-800 hover:border-primary transition-all shadow-sm">
-<div class="aspect-square rounded-xl bg-slate-200 dark:bg-slate-800 overflow-hidden mb-6" data-alt="High tech commercial convection oven with digital display" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAsIYWPeCLf0ojsDsBZgkG6uqaeGR-R49fjs4hWOwsNTJYe4ESxm-P9FFnEGfqaRBOddF89wStuv3iyo_Eu7aTbqNoTj15h2iYIHhPuwNPID_Pi3MzmDRtYqvOuSr2c4NUWhiSWYwMwY2vvk0OOLQcjc2cZQ_nde-L7IJzqyX1q7dOEHyX0xfuiVDc2V1nAhoktSKfDWnYG6Vda2Xkzam6aIcuuUxIXj8RK8caPJBbaOvlNM62uPkFMVVdVfpbA4s1aVpBIs1fG8_um'); background-size: cover; background-position: center;">
-</div>
-<h3 class="text-xl font-bold mb-2" data-i18n="product_omni_oven_x1">Omni-Oven X1</h3>
-<p class="text-sm text-slate-500 mb-6" data-i18n="product_omni_oven_x1_desc">Multi-zone intelligent convection with 0.1°C precision controls.</p>
-<div class="flex justify-between items-center border-t border-slate-100 dark:border-slate-800 pt-4">
-<span class="text-xs font-bold uppercase text-slate-400" data-i18n="product_badge_energystar">Energy-Star 2.0</span>
-<span class="text-primary font-black" data-i18n="home_hw_learn_more">Learn More</span>
-</div>
-</div>
-<!-- Sous-Chef Lite -->
-<div class="group bg-background-light dark:bg-background-dark p-4 rounded-2xl border border-slate-200 dark:border-slate-800 hover:border-primary transition-all shadow-sm opacity-60">
-<div class="aspect-square rounded-xl bg-slate-200 dark:bg-slate-800 overflow-hidden mb-6" data-alt="Industrial food preparation robot arm" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBVnf2ozwqL0wDlQbFDBIx9au72GOHq_OGJX31h7t5785gGwxv3Hl4Bt5H_7chG6LCT_F2OL9OVkzbPrxqc1467aPyux8uzJsswsfYpKr8oYffpDx10oK9E2eA3nJP8R7lG8R1VVMha5CsX1jY493nWPdpBfX_A5S4qXjsGPtE7UZyHoyi_0tX5EB4I_EfzciojYSHr2no1ADgJ9EW0xT0VhcalRJTArzUAp-13UbTQVwG5pGPSVklnMoymC8chmDpsesWNcn6aBHCP'); background-size: cover; background-position: center;">
-</div>
-<h3 class="text-xl font-bold mb-2" data-i18n="product_sous_chef_lite">Sous-Chef Lite</h3>
-<p class="text-sm text-slate-500 mb-6" data-i18n="product_sous_chef_lite_desc">Automated prep and ingredient sorting for high-volume units.</p>
-<div class="flex justify-between items-center border-t border-slate-100 dark:border-slate-800 pt-4">
-<span class="text-xs font-bold uppercase text-slate-400" data-i18n="product_badge_q3launch">Q3 2024 Launch</span>
-<span class="text-slate-400 font-bold italic" data-i18n="home_hw_coming_soon">Coming Soon</span>
-</div>
-</div>
-<!-- Hydro-Wash Pro -->
-<div class="group bg-background-light dark:bg-background-dark p-4 rounded-2xl border border-slate-200 dark:border-slate-800 hover:border-primary transition-all shadow-sm">
-<div class="aspect-square rounded-xl bg-slate-200 dark:bg-slate-800 overflow-hidden mb-6" data-alt="Large commercial dishwasher with futuristic controls" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDR9KFSd89E429_5PctsP1KGI6Ns-HJi8huk9fvLCNkulehmZv7y5xjnpQMztw2UoJljrOS9_u-CX8kVG91UB1GkfUHs07P6vmeR8PMp88Bvn5zQTfgKX2LCXf5qYnKT29vsR_P5FFXMeWDPtMHk4dv3y4ex1TujXRXQtWN0HfoCRj_WLBsdPluhO4w4PuMRcAzGhl_Mx0-YZygp3_ZOxT79YEoUz4l6-kJIN8u3os63p7OZQ5JlzSHiMmM395UghsUWGqP3BcHLD6T'); background-size: cover; background-position: center;">
-</div>
-<h3 class="text-xl font-bold mb-2" data-i18n="product_hydro_wash_pro">Hydro-Wash Pro</h3>
-<p class="text-sm text-slate-500 mb-6" data-i18n="product_hydro_wash_pro_desc">Zero-waste water filtration with automated sanitization logic.</p>
-<div class="flex justify-between items-center border-t border-slate-100 dark:border-slate-800 pt-4">
-<span class="text-xs font-bold uppercase text-slate-400" data-i18n="product_badge_nsf">NSF Certified</span>
-<span class="text-primary font-black" data-i18n="home_hw_learn_more">Learn More</span>
-</div>
-</div>
-</div>
-</div>
-</section>
-<!-- Integrated Solutions & Map -->
-<section class="flex flex-col xl:flex-row min-h-[700px] w-full overflow-hidden">
-<div class="w-full xl:w-[30%] bg-primary text-white flex flex-col justify-center">
-<div class="py-12 xl:py-20">
-<h2 class="text-4xl xl:text-5xl font-black mb-8 leading-tight" data-i18n="home_int_title">Integrated Solutions for Scale</h2>
-<div class="space-y-10">
-<div class="flex gap-6">
-<span class="material-symbols-outlined text-4xl opacity-50">corporate_fare</span>
-<div>
-<h4 class="text-xl font-bold mb-2" data-i18n="case_filter_chains">Enterprise Chains</h4>
-<p class="text-white/70" data-i18n="home_int_enterprise_desc">Sync 500+ locations with real-time recipe deployment and inventory tracking.</p>
-</div>
-</div>
-<div class="flex gap-6">
-<span class="material-symbols-outlined text-4xl opacity-50">cloud_done</span>
-<div>
-<h4 class="text-xl font-bold mb-2" data-i18n="case_filter_cloud">Cloud Kitchens</h4>
-<p class="text-white/70" data-i18n="home_int_cloud_desc">Optimize turnaround times with hyper-efficient robotic prep stations.</p>
-</div>
-</div>
-<div class="flex gap-6">
-<span class="material-symbols-outlined text-4xl opacity-50">local_hospital</span>
-<div>
-<h4 class="text-xl font-bold mb-2" data-i18n="home_institution_health">Institution &amp; Health</h4>
-<p class="text-white/70" data-i18n="home_int_health_desc">Ensure 100% compliance with nutrient-locked precision cooking.</p>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="w-full xl:w-[70%] relative bg-slate-300 dark:bg-slate-800 overflow-hidden min-h-[700px]">
-<!-- Interactive Map Visualization -->
-<div class="absolute inset-0 opacity-40 mix-blend-multiply grayscale" data-alt="World map with glowing network connections" data-location="Global" style="background-image: url('/assets/images/world-map.svg'); background-size: cover; background-position: center;">
-</div>
-<div class="relative z-10 h-full w-full flex items-center justify-center p-12">
-<div class="grid grid-cols-2 md:grid-cols-4 gap-4 w-full max-w-4xl">
-<!-- Location Stats -->
-<div class="relative z-[var(--z-content)] bg-white/80 dark:bg-background-dark/80 backdrop-blur p-6 rounded-2xl border border-white/20 shadow-xl text-center">
-<p class="text-3xl font-black text-primary">124</p>
-<p class="text-xs font-bold uppercase text-slate-500" data-i18n="home_stat_global_hubs">Global Hubs</p>
-</div>
-<div class="relative z-[var(--z-content)] bg-white/80 dark:bg-background-dark/80 backdrop-blur p-6 rounded-2xl border border-white/20 shadow-xl text-center">
-<p class="text-3xl font-black text-primary" data-i18n="home_8_4k">8.4k</p>
-<p class="text-xs font-bold uppercase text-slate-500" data-i18n="home_stat_live_kitchens">Live Kitchens</p>
-</div>
-<div class="relative z-[var(--z-content)] bg-white/80 dark:bg-background-dark/80 backdrop-blur p-6 rounded-2xl border border-white/20 shadow-xl text-center">
-<p class="text-3xl font-black text-primary">0.03%</p>
-<p class="text-xs font-bold uppercase text-slate-500" data-i18n="home_stat_failure_rate">Failure Rate</p>
-</div>
-<div class="relative z-[var(--z-content)] bg-white/80 dark:bg-background-dark/80 backdrop-blur p-6 rounded-2xl border border-white/20 shadow-xl text-center">
-<p class="text-3xl font-black text-primary">24/7</p>
-<p class="text-xs font-bold uppercase text-slate-500" data-i18n="home_stat_expert_support">Expert Support</p>
-</div>
-</div>
-</div>
-</div>
-</section>
-<!-- IoT Backbone: 20% Section -->
-<section class="w-full py-24 flex flex-col xl:flex-row gap-16 items-center">
-<div class="w-full xl:w-2/3">
-<div class="bg-slate-900 rounded-3xl p-8 border border-primary/20 shadow-2xl overflow-hidden relative">
-<div class="flex items-center justify-between mb-8 border-b border-slate-800 pb-6">
-<div class="flex items-center gap-4">
-<div class="size-10 rounded-lg bg-primary flex items-center justify-center">
-<span class="material-symbols-outlined text-white">monitoring</span>
-</div>
-<div>
-<h3 class="text-white font-bold" data-i18n="iot_dashboard_title">Yukoli IoT Backbone</h3>
-<p class="text-xs text-slate-400 uppercase tracking-widest font-bold" data-i18n="iot_dashboard_subtitle">Live Predictive Maintenance Dashboard</p>
-</div>
-</div>
-<div class="flex gap-2">
-<div class="h-2 w-8 rounded-full bg-primary"></div>
-<div class="h-2 w-2 rounded-full bg-slate-700"></div>
-<div class="h-2 w-2 rounded-full bg-slate-700"></div>
-</div>
-</div>
-<div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-<div class="bg-slate-800/50 p-6 rounded-2xl border border-slate-700">
-<p class="text-xs text-slate-400 font-bold mb-1" data-i18n="iot_metric_efficiency">UNIT EFFICIENCY</p>
-<p class="text-2xl font-black text-white">98.2%</p>
-<div class="w-full h-1 bg-slate-700 mt-4 rounded-full">
-<div class="w-[98%] h-full bg-green-500 rounded-full"></div>
-</div>
-</div>
-<div class="bg-slate-800/50 p-6 rounded-2xl border border-slate-700">
-<p class="text-xs text-slate-400 font-bold mb-1" data-i18n="iot_metric_alerts">PREDICTIVE ALERTS</p>
-<p class="text-2xl font-black text-white">02 <span class="text-sm font-normal text-slate-500" data-i18n="iot_metric_active">Active</span></p>
-<div class="flex gap-2 mt-4">
-<span class="size-2 rounded-full bg-orange-500 animate-pulse"></span>
-<span class="size-2 rounded-full bg-orange-500 animate-pulse"></span>
-</div>
-</div>
-<div class="bg-slate-800/50 p-6 rounded-2xl border border-slate-700">
-<p class="text-xs text-slate-400 font-bold mb-1" data-i18n="iot_metric_savings">ENERGY SAVINGS</p>
-<p class="text-2xl font-black text-primary">-$1,420 <span class="text-sm font-normal text-slate-500">M/M</span></p>
-<p class="text-[10px] text-green-500 mt-2 font-bold">+12% vs Industry Standard</p>
-</div>
-</div>
-<div class="h-48 bg-slate-800/30 rounded-2xl border border-slate-700 flex items-center justify-center">
-<span class="text-slate-600 font-mono text-xs italic" data-i18n="home_real_time_system_schematic_data_feed">[REAL-TIME SYSTEM SCHEMATIC DATA FEED]</span>
-</div>
-</div>
-</div>
-<div class="w-full xl:w-1/3 space-y-6">
-<h2 class="text-4xl font-black tracking-tight leading-tight" data-i18n="iot_section_title">Predictive. Cloud-Native. Secure.</h2>
-<p class="text-slate-600 dark:text-slate-400 leading-relaxed" data-i18n="iot_section_desc">
-                    Yukoli OS is the nervous system of the modern kitchen. Our proprietary IoT backbone predicts hardware failures before they occur, reducing downtime by 94%.
-                </p>
-<ul class="space-y-4">
-<li class="flex items-center gap-3">
-<span class="material-symbols-outlined text-primary text-xl">verified</span>
-<span class="font-bold" data-i18n="iot_feature_telemetry">Real-time telemetry</span>
-</li>
-<li class="flex items-center gap-3">
-<span class="material-symbols-outlined text-primary text-xl">verified</span>
-<span class="font-bold" data-i18n="iot_feature_ota">Over-the-air recipe updates</span>
-</li>
-<li class="flex items-center gap-3">
-<span class="material-symbols-outlined text-primary text-xl">verified</span>
-<span class="font-bold" data-i18n="iot_feature_encryption">End-to-end 256-bit encryption</span>
-</li>
-</ul>
-<button class="text-primary font-bold border-b-2 border-primary pb-1" data-i18n="iot_whitepaper_btn">Read the OS Whitepaper</button>
-</div>
-</section>
-<!-- Trust Section: Certifications & Logos -->
-<section class="border-t border-slate-200 dark:border-slate-800 py-16 fullwidth-bg">
-<div class="w-full px-6 md:px-10 lg:px-16 xl:px-20">
-<div class="flex flex-col md:flex-row items-center gap-12 justify-between opacity-60 grayscale hover:grayscale-0 transition-all duration-700">
-<div class="flex flex-wrap justify-center gap-12">
-<!-- Placeholder Logos -->
-<div class="flex items-center gap-2 border border-slate-300 dark:border-slate-700 px-4 py-2 rounded-lg font-bold text-lg">
-<span class="material-symbols-outlined">security</span> CE CERTIFIED
-                    </div>
-<div class="flex items-center gap-2 border border-slate-300 dark:border-slate-700 px-4 py-2 rounded-lg font-bold text-lg">
-<span class="material-symbols-outlined">electric_bolt</span> UL LISTED
-                    </div>
-<div class="flex items-center gap-2 border border-slate-300 dark:border-slate-700 px-4 py-2 rounded-lg font-bold text-lg">
-<span class="material-symbols-outlined">health_and_safety</span> NSF INTERNATIONAL
-                    </div>
-</div>
-<div class="h-12 w-px bg-slate-300 hidden md:block"></div>
-<div class="flex flex-wrap justify-center gap-12 text-2xl font-black tracking-widest uppercase text-slate-400">
-<span>GlobalFoods</span>
-<span>DineCorp</span>
-<span>QuickBite</span>
-<span>CityCloud</span>
-</div>
-</div>
-</div>
-</section>
-</main>
-
-<!-- Schema Markup for SEO -->
-<script type="application/ld+json">
-    {
-      "@context": "https://schema.org/",
-      "@type": "Product",
-      "name": "Smart Commercial Kitchen Equipment 2026",
-      "brand": {
-        "@type": "Brand",
-        "name": "Yukoli"
-      },
-      "description": "Next-generation smart commercial kitchen hardware featuring AI robotics and predictive maintenance IoT backbone.",
-      "category": "Commercial Kitchen Equipment",
-      "offers": {
-        "@type": "AggregateOffer",
-        "priceCurrency": "USD",
-        "availability": "https://schema.org/InStock"
-      }
-    }
+    <script>
+      window.addEventListener('DOMContentLoaded',function(){
+        setTimeout(function(){
+          var m=document.getElementById('spa-content');
+          if(!m)return;
+          var s=getComputedStyle(m);
+          var ok=s.maxWidth==='none'||parseInt(s.maxWidth)>=1920;
+          console.log('%c['+location.pathname.replace(//$/,'')+'] main: max-w='+s.maxWidth+' px='+s.paddingLeft+'/'+s.paddingRight+' w='+m.offsetWidth,ok?'color:green':'color:orange;font-weight:bold');
+          if(!ok)console.warn('Expected max-width: 1920px, got:',s.maxWidth);
+        },200);
+      });
     </script>
 
+    <!-- SEO JSON-LD: Organization + WebSite -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "YuKoLi 跃迁力科技",
+        "url": "https://www.kitchen.yukoli.com",
+        "logo": "https://www.kitchen.yukoli.com/assets/images/logo_header.webp",
+        "description": "YuKoLi（跃迁力科技）— 20年专注智能商用厨房设备的研发与制造，114款智能设备服务全球50+国家。",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "方创园12栋502室之六",
+          "addressLocality": "佛山市顺德区",
+          "addressRegion": "广东",
+          "postalCode": "528300",
+          "addressCountry": "CN"
+        },
+        "contactPoint": {
+          "@type": "ContactPoint",
+          "telephone": "+86-755-8888-8888",
+          "contactType": "sales",
+          "availableLanguage": ["zh-CN", "en"]
+        },
+        "sameAs": []
+      }
+    </script>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "YuKoLi 智能商厨设备",
+        "url": "https://www.kitchen.yukoli.com",
+        "description": "YuKoLi 专业商用厨房设备制造商，提供智能炒菜机、油炸炉、蒸煮设备等114款智能商厨产品。",
+        "inLanguage": ["zh-CN", "en"]
+      }
+    </script>
+  </head>
+  <body
+    class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 transition-colors duration-300 overflow-x-hidden"
+  >
+    <!-- Top Navigation Bar -->
+    <!-- ═══ Navigator Component ═══ -->
+    <navigator
+      data-component="navigator"
+      data-variant="pc"
+      data-active="home"
+      data-search="true"
+      data-cta-text-key="nav_get_quote"
+      data-cta-href="/quote"
+    ></navigator>
+    <main id="spa-content">
+      <!-- Hero Section: 50% Focus on Hardware -->
+      <section class="w-full flex flex-col lg:flex-row items-center min-h-[85vh] py-12 gap-12">
+        <div class="w-full lg:w-1/2 space-y-8">
+          <div
+            class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-bold uppercase tracking-widest"
+          >
+            <span class="relative flex h-2 w-2">
+              <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
+              <span class="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
+            </span>
+            <span data-i18n="home_hero_badge">智能商厨设备领导品牌 / Smart Commercial Kitchen Leader</span>
+          </div>
+          <h1 class="text-6xl xl:text-8xl font-black leading-[1.1] tracking-tight text-slate-900 dark:text-white">
+            智能
+            <span class="text-primary" data-i18n="home_hero_title_2">烹饪</span>
+            ，标准化出品。
+          </h1>
+          <p
+            class="text-lg xl:text-xl text-slate-600 dark:text-slate-400 max-w-2xl leading-relaxed"
+            data-i18n="home_hero_desc"
+          >
+            YuKoLi
+            全系列智能商厨设备，涵盖爆炒、炖煮、蒸煮、煎炸、切配，为食堂、中央厨房、餐饮连锁提供一站式自动化解决方案。产品远销全球50+国家。
+          </p>
+          <div class="flex flex-wrap gap-4 pt-4">
+            <a
+              href="/products"
+              class="bg-primary text-white px-8 py-4 rounded-xl font-bold text-lg flex items-center gap-2 hover:shadow-lg hover:shadow-primary/20 transition-all"
+            >
+              <span data-i18n="home_hero_btn_products">浏览全系列产品</span>
+              <span class="material-symbols-outlined">inventory_2</span>
+            </a>
+            <a
+              href="/quote"
+              class="border-2 border-slate-200 dark:border-slate-800 px-8 py-4 rounded-xl font-bold text-lg hover:bg-slate-100 dark:hover:bg-slate-800 transition-all"
+              data-i18n="home_hero_btn_hardware"
+            >
+              获取报价
+            </a>
+          </div>
+        </div>
+        <div class="w-full lg:w-1/2 relative">
+          <div
+            class="aspect-square bg-gradient-to-br from-primary/20 to-transparent rounded-full absolute -top-10 -right-10 blur-3xl opacity-50 -z-10"
+          ></div>
+          <div
+            class="relative w-full h-[600px] bg-slate-200 dark:bg-slate-800 rounded-3xl overflow-hidden shadow-2xl border border-white/10"
+            data-alt="3D render of a futuristic flagship kitchen robot arm"
+            style="
+              background-image: url(&quot;/assets/images/products/esl-bxc800.webp&quot;);
+              background-size: cover;
+              background-position: center;
+            "
+          >
+            <div
+              class="absolute bottom-6 left-6 right-6 p-6 bg-white/10 backdrop-blur-xl border border-white/20 rounded-2xl"
+            >
+              <div class="flex justify-between items-center text-white">
+                <div>
+                  <p class="text-xs font-bold uppercase opacity-70" data-i18n="home_hero_flagship_label">
+                    旗舰型号 Flagship
+                  </p>
+                  <p class="text-xl font-black">ESL-GQ90 全自动语音炒菜机</p>
+                </div>
+                <div class="text-right">
+                  <p class="text-xs font-bold uppercase opacity-70" data-i18n="home_hero_efficiency_label">
+                    Efficiency
+                  </p>
+                  <p class="text-xl font-black text-primary">+340%</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- Product Matrix -->
+      <section class="py-24 bg-slate-100 dark:bg-slate-900/50 fullwidth-bg">
+        <div class="w-full px-6 md:px-10 lg:px-16 xl:px-20">
+          <div class="flex flex-col md:flex-row justify-between items-end mb-12 gap-6">
+            <div>
+              <h2 class="text-4xl font-black tracking-tight mb-4" data-i18n="home_hw_title">核心产品 Core Products</h2>
+              <p class="text-slate-600 dark:text-slate-400 text-lg" data-i18n="home_hw_subtitle">
+                114款智能商厨设备，覆盖烹饪全流程
+              </p>
+            </div>
+            <a class="text-primary font-bold flex items-center gap-2 group" href="/catalog/">
+              <span data-i18n="home_hw_view_inventory">View Full Inventory</span>
+              <span class="material-symbols-outlined group-hover:translate-x-1 transition-transform">
+                arrow_forward
+              </span>
+            </a>
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-8">
+            <!-- ESL-GQ90 全自动语音炒菜机 -->
+            <div
+              class="group bg-background-light dark:bg-background-dark p-4 rounded-2xl border border-slate-200 dark:border-slate-800 hover:border-primary transition-all shadow-sm"
+            >
+              <div
+                class="aspect-square rounded-xl bg-slate-200 dark:bg-slate-800 overflow-hidden mb-6"
+                data-alt="ESL-GQ90 全自动语音炒菜机"
+                style="
+                  background-image: url(&quot;/assets/images/products/esl-gq90.webp&quot;);
+                  background-size: cover;
+                  background-position: center;
+                "
+              ></div>
+              <h3 class="text-xl font-bold mb-2" data-i18n="product_esl_gq90_name">ESL-GQ90 全自动语音炒菜机</h3>
+              <p class="text-sm text-slate-500 mb-6" data-i18n="product_esl_gq90_desc">
+                900mm大容量全自动语音智能炒菜机，支持语音控制菜谱，单锅日产500+份。
+              </p>
+              <div class="flex justify-between items-center border-t border-slate-100 dark:border-slate-800 pt-4">
+                <span class="text-xs font-bold uppercase text-slate-400" data-i18n="product_badge_flagship">
+                  旗舰热销
+                </span>
+                <span class="text-primary font-black" data-i18n="home_hw_learn_more">了解更多</span>
+              </div>
+            </div>
+            <!-- ESL-XC120 搅拌炒锅炖烩机 -->
+            <div
+              class="group bg-background-light dark:bg-background-dark p-4 rounded-2xl border border-slate-200 dark:border-slate-800 hover:border-primary transition-all shadow-sm"
+            >
+              <div
+                class="aspect-square rounded-xl bg-slate-200 dark:bg-slate-800 overflow-hidden mb-6"
+                data-alt="ESL-XC120 搅拌炒锅炖烩机"
+                style="
+                  background-image: url(&quot;/assets/images/products/esl-xc120.webp&quot;);
+                  background-size: cover;
+                  background-position: center;
+                "
+              ></div>
+              <h3 class="text-xl font-bold mb-2" data-i18n="product_esl_xc120_name">ESL-XC120 搅拌炒锅炖烩机</h3>
+              <p class="text-sm text-slate-500 mb-6" data-i18n="product_esl_xc120_desc">
+                120L大容量搅拌炒锅，集翻炒、炖煮、烩制于一体，适合食堂和中央厨房。
+              </p>
+              <div class="flex justify-between items-center border-t border-slate-100 dark:border-slate-800 pt-4">
+                <span class="text-xs font-bold uppercase text-slate-400" data-i18n="product_badge_multifunction">
+                  多功能
+                </span>
+                <span class="text-primary font-black" data-i18n="home_hw_learn_more">了解更多</span>
+              </div>
+            </div>
+            <!-- ESL-GB80 座地式爆炒机 -->
+            <div
+              class="group bg-background-light dark:bg-background-dark p-4 rounded-2xl border border-slate-200 dark:border-slate-800 hover:border-primary transition-all shadow-sm"
+            >
+              <div
+                class="aspect-square rounded-xl bg-slate-200 dark:bg-slate-800 overflow-hidden mb-6"
+                data-alt="ESL-GB80 座地式电磁爆炒机"
+                style="
+                  background-image: url(&quot;/assets/images/products/esl-gb80.webp&quot;);
+                  background-size: cover;
+                  background-position: center;
+                "
+              ></div>
+              <h3 class="text-xl font-bold mb-2" data-i18n="product_esl_gb80_name">ESL-GB80 座地式电磁爆炒机</h3>
+              <p class="text-sm text-slate-500 mb-6" data-i18n="product_esl_gb80_desc">
+                座地式电磁加热爆炒机，800mm口径猛火翻炒，还原铁锅爆炒口感。
+              </p>
+              <div class="flex justify-between items-center border-t border-slate-100 dark:border-slate-800 pt-4">
+                <span class="text-xs font-bold uppercase text-slate-400" data-i18n="product_badge_bestseller">
+                  热销款
+                </span>
+                <span class="text-primary font-black" data-i18n="home_hw_learn_more">了解更多</span>
+              </div>
+            </div>
+            <!-- Y50 升降油炸炉 -->
+            <div
+              class="group bg-background-light dark:bg-background-dark p-4 rounded-2xl border border-slate-200 dark:border-slate-800 hover:border-primary transition-all shadow-sm"
+            >
+              <div
+                class="aspect-square rounded-xl bg-slate-200 dark:bg-slate-800 overflow-hidden mb-6"
+                data-alt="Y50 升降油炸炉"
+                style="
+                  background-image: url(&quot;/assets/images/products/y50-fryer.webp&quot;);
+                  background-size: cover;
+                  background-position: center;
+                "
+              ></div>
+              <h3 class="text-xl font-bold mb-2" data-i18n="product_y50_name">Y50 升降油炸炉</h3>
+              <p class="text-sm text-slate-500 mb-6" data-i18n="product_y50_desc">
+                50L大容量电加热升降油炸炉，自动升降篮，精准控温，适合连锁快餐。
+              </p>
+              <div class="flex justify-between items-center border-t border-slate-100 dark:border-slate-800 pt-4">
+                <span class="text-xs font-bold uppercase text-slate-400" data-i18n="product_badge_ce_cert">
+                  CE 认证
+                </span>
+                <span class="text-primary font-black" data-i18n="home_hw_learn_more">了解更多</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- 行业解决方案 Section -->
+      <section class="flex flex-col xl:flex-row min-h-[700px] w-full overflow-hidden">
+        <div class="w-full xl:w-[30%] bg-primary text-white flex flex-col justify-center">
+          <div class="py-12 xl:py-20 px-6 md:px-10 lg:px-16 xl:px-20">
+            <h2 class="text-4xl xl:text-5xl font-black mb-8 leading-tight" data-i18n="home_int_title">
+              覆盖全行业的智慧厨房方案
+            </h2>
+            <div class="space-y-10">
+              <div class="flex gap-6">
+                <span class="material-symbols-outlined text-4xl opacity-50">apartment</span>
+                <div>
+                  <h4 class="text-xl font-bold mb-2" data-i18n="home_solution_canteen">学校/企业食堂</h4>
+                  <p class="text-white/70" data-i18n="home_int_enterprise_desc">
+                    大批量标准化出餐，智能炒菜机一人操作即可满足千人食堂需求。
+                  </p>
+                </div>
+              </div>
+              <div class="flex gap-6">
+                <span class="material-symbols-outlined text-4xl opacity-50">factory</span>
+                <div>
+                  <h4 class="text-xl font-bold mb-2" data-i18n="home_solution_central">中央厨房</h4>
+                  <p class="text-white/70" data-i18n="home_int_cloud_desc">
+                    从前处理到烹饪全流程自动化，统一口味、统一标准、统一配送。
+                  </p>
+                </div>
+              </div>
+              <div class="flex gap-6">
+                <span class="material-symbols-outlined text-4xl opacity-50">storefront</span>
+                <div>
+                  <h4 class="text-xl font-bold mb-2" data-i18n="home_solution_chain">餐饮连锁</h4>
+                  <p class="text-white/70" data-i18n="home_int_health_desc">
+                    菜谱云端下发，所有门店同步出品，保证品牌口味一致性。
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="w-full xl:w-[70%] relative bg-slate-300 dark:bg-slate-800 overflow-hidden min-h-[700px]">
+          <!-- Interactive Map Visualization -->
+          <div
+            class="absolute inset-0 opacity-40 mix-blend-multiply grayscale"
+            data-alt="World map with glowing network connections"
+            data-location="Global"
+            style="
+              background-image: url(&quot;/assets/images/world-map.svg&quot;);
+              background-size: cover;
+              background-position: center;
+            "
+          ></div>
+          <div class="relative z-10 h-full w-full flex items-center justify-center p-12">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 w-full max-w-4xl">
+              <!-- Location Stats - 品牌数据（待确认后更新具体数字） -->
+              <div
+                class="relative z-[var(--z-content)] bg-white/80 dark:bg-background-dark/80 backdrop-blur p-6 rounded-2xl border border-white/20 shadow-xl text-center"
+              >
+                <p class="text-3xl font-black text-primary">114</p>
+                <p class="text-xs font-bold uppercase text-slate-500" data-i18n="home_stat_products">Product Models</p>
+              </div>
+              <div
+                class="relative z-[var(--z-content)] bg-white/80 dark:bg-background-dark/80 backdrop-blur p-6 rounded-2xl border border-white/20 shadow-xl text-center"
+              >
+                <p class="text-3xl font-black text-primary" data-i18n="home_stat_countries">50+</p>
+                <p class="text-xs font-bold uppercase text-slate-500" data-i18n="home_stat_countries_label">
+                  Export Countries
+                </p>
+              </div>
+              <div
+                class="relative z-[var(--z-content)] bg-white/80 dark:bg-background-dark/80 backdrop-blur p-6 rounded-2xl border border-white/20 shadow-xl text-center"
+              >
+                <p class="text-3xl font-black text-primary">20+</p>
+                <p class="text-xs font-bold uppercase text-slate-500" data-i18n="home_stat_years">Years Experience</p>
+              </div>
+              <div
+                class="relative z-[var(--z-content)] bg-white/80 dark:bg-background-dark/80 backdrop-blur p-6 rounded-2xl border border-white/20 shadow-xl text-center"
+              >
+                <p class="text-3xl font-black text-primary">CE/UL</p>
+                <p class="text-xs font-bold uppercase text-slate-500" data-i18n="home_stat_certified">Certified</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- 核心优势 Section -->
+      <section class="w-full py-24 bg-slate-100 dark:bg-slate-900/50 fullwidth-bg">
+        <div class="w-full px-6 md:px-10 lg:px-16 xl:px-20">
+          <div class="text-center mb-16">
+            <h2 class="text-4xl font-black tracking-tight mb-4" data-i18n="home_advantage_title">为什么选择 YuKoLi</h2>
+            <p class="text-slate-600 dark:text-slate-400 text-lg max-w-2xl mx-auto" data-i18n="home_advantage_subtitle">
+              20年商用厨具制造经验，产品远销全球50+国家和地区
+            </p>
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            <div
+              class="bg-white dark:bg-slate-800 rounded-2xl p-8 text-center border border-slate-200 dark:border-slate-700"
+            >
+              <div class="size-14 rounded-2xl bg-primary/10 flex items-center justify-center mx-auto mb-6">
+                <span class="material-symbols-outlined text-primary text-3xl">groups</span>
+              </div>
+              <h3 class="text-xl font-bold mb-2" data-i18n="home_advantage_labor_title">节省人工 70%</h3>
+              <p class="text-sm text-slate-500 dark:text-slate-400" data-i18n="home_advantage_labor_desc">
+                1台智能炒菜机可替代3-5名厨师，降低人力成本，解决招工难问题
+              </p>
+            </div>
+            <div
+              class="bg-white dark:bg-slate-800 rounded-2xl p-8 text-center border border-slate-200 dark:border-slate-700"
+            >
+              <div class="size-14 rounded-2xl bg-primary/10 flex items-center justify-center mx-auto mb-6">
+                <span class="material-symbols-outlined text-primary text-3xl">verified</span>
+              </div>
+              <h3 class="text-xl font-bold mb-2" data-i18n="home_advantage_quality_title">标准化出品</h3>
+              <p class="text-sm text-slate-500 dark:text-slate-400" data-i18n="home_advantage_quality_desc">
+                智能控温控时，800+菜谱程序，每份菜品品质一致
+              </p>
+            </div>
+            <div
+              class="bg-white dark:bg-slate-800 rounded-2xl p-8 text-center border border-slate-200 dark:border-slate-700"
+            >
+              <div class="size-14 rounded-2xl bg-primary/10 flex items-center justify-center mx-auto mb-6">
+                <span class="material-symbols-outlined text-primary text-3xl">bolt</span>
+              </div>
+              <h3 class="text-xl font-bold mb-2" data-i18n="home_advantage_energy_title">节能30%+</h3>
+              <p class="text-sm text-slate-500 dark:text-slate-400" data-i18n="home_advantage_energy_desc">
+                电磁加热技术，比传统燃气灶节能30%以上，降低运营成本
+              </p>
+            </div>
+            <div
+              class="bg-white dark:bg-slate-800 rounded-2xl p-8 text-center border border-slate-200 dark:border-slate-700"
+            >
+              <div class="size-14 rounded-2xl bg-primary/10 flex items-center justify-center mx-auto mb-6">
+                <span class="material-symbols-outlined text-primary text-3xl">public</span>
+              </div>
+              <h3 class="text-xl font-bold mb-2" data-i18n="home_advantage_service_title">全球服务</h3>
+              <p class="text-sm text-slate-500 dark:text-slate-400" data-i18n="home_advantage_service_desc">
+                CE/UL认证，全球物流，本地化技术支持与培训服务
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- 资质认证 Section -->
+      <section class="border-t border-slate-200 dark:border-slate-800 py-16 fullwidth-bg">
+        <div class="w-full px-6 md:px-10 lg:px-16 xl:px-20">
+          <div class="text-center mb-10">
+            <h3 class="text-2xl font-black mb-2" data-i18n="home_trust_title">品质保障，全球信赖</h3>
+            <p class="text-slate-500 text-sm" data-i18n="home_trust_subtitle">
+              通过国际权威认证，产品远销全球50+国家和地区
+            </p>
+          </div>
+          <div
+            class="flex flex-wrap justify-center gap-12 opacity-70 grayscale hover:grayscale-0 transition-all duration-700"
+          >
+            <!-- 认证标识 -->
+            <div
+              class="flex items-center gap-2 border border-slate-300 dark:border-slate-700 px-5 py-3 rounded-lg font-bold text-lg"
+            >
+              <span class="material-symbols-outlined">verified</span>
+              CE 认证
+            </div>
+            <div
+              class="flex items-center gap-2 border border-slate-300 dark:border-slate-700 px-5 py-3 rounded-lg font-bold text-lg"
+            >
+              <span class="material-symbols-outlined">electric_bolt</span>
+              UL 认证
+            </div>
+            <div
+              class="flex items-center gap-2 border border-slate-300 dark:border-slate-700 px-5 py-3 rounded-lg font-bold text-lg"
+            >
+              <span class="material-symbols-outlined">health_and_safety</span>
+              ISO 9001
+            </div>
+            <div
+              class="flex items-center gap-2 border border-slate-300 dark:border-slate-700 px-5 py-3 rounded-lg font-bold text-lg"
+            >
+              <span class="material-symbols-outlined">workspace_premium</span>
+              20年品牌
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
 
+    <!-- Schema Markup for SEO -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org/",
+        "@type": "Organization",
+        "name": "佛山市跃迁力科技有限公司",
+        "alternateName": "YuKoLi",
+        "url": "https://www.kitchen.yukoli.com",
+        "logo": "https://www.kitchen.yukoli.com/assets/images/logo_header.webp",
+        "description": "专业商用厨房设备制造商，提供智能炒菜机、炖煮机、油炸炉、蒸煮设备等114款产品",
+        "areaServed": ["东南亚", "欧洲", "美国", "中东"],
+        "product": {
+          "@type": "Product",
+          "name": "智能商用厨房设备",
+          "brand": { "@type": "Brand", "name": "YuKoLi" },
+          "category": "Commercial Kitchen Equipment",
+          "manufacturer": { "@type": "Organization", "name": "佛山市跃迁力科技有限公司" }
+        }
+      }
+    </script>
 
-<script defer src="/assets/js/ui/products-dropdown.js?v=20260322-v3"></script>
-<script defer src="/assets/js/ui/navigator.js?v=20260322-v3"></script>
-<script defer src="/assets/js/ui/search-engine.js"></script>
-<script defer src="/assets/js/ui/footer.js?v=20260322-v3"></script>
-<script defer src="/assets/js/lang-registry.js"></script>
-<script defer src="/assets/js/translations.js"></script><script defer src="/assets/js/translations-dropdown-template.js"></script>
-<script defer src="/assets/js/contacts.js"></script>
-<script defer src="/assets/js/ui/smart-popup.js"></script>
-<script defer src="/assets/js/router.js"></script>
+    <script defer src="/assets/js/ui/products-dropdown.js?v=20260322-v3"></script>
+    <script defer src="/assets/js/ui/navigator.js?v=20260322-v3"></script>
+    <script defer src="/assets/js/ui/search-engine.js"></script>
+    <script defer src="/assets/js/ui/footer.js?v=20260322-v3"></script>
+    <script defer src="/assets/js/lang-registry.js"></script>
+    <script defer src="/assets/js/translations.js"></script>
+    <script defer src="/assets/js/translations-dropdown-template.js"></script>
+    <script defer src="/assets/js/contacts.js"></script>
+    <script defer src="/assets/js/ui/smart-popup.js"></script>
+    <script defer src="/assets/js/router.js"></script>
 
-<script defer src="/assets/js/page-interactions.js"></script>
-<script>
-  document.addEventListener('DOMContentLoaded', function () {
-    if (window.translationManager) window.translationManager.initialize();
-  });
-</script>
+    <script defer src="/assets/js/page-interactions.js"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        if (window.translationManager) window.translationManager.initialize();
+      });
+    </script>
 
-
-
-<script src="/assets/js/utils/device-utils.js"></script>
-<script src="/assets/js/spa-router.js"></script>
-<script>
-  document.addEventListener('DOMContentLoaded', function() {
-    if (window.SpaRouter && typeof window.SpaRouter.init === 'function') {
-      window.SpaRouter.init();
-    }
-  });
-</script>
-</body></html>
+    <script src="/assets/js/utils/device-utils.js"></script>
+    <script src="/assets/js/spa-router.js"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        if (window.SpaRouter && typeof window.SpaRouter.init === "function") {
+          window.SpaRouter.init();
+        }
+      });
+    </script>
+  </body>
+</html>

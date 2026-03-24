@@ -3,4 +3,5 @@ dist/
 public/
 coverage/
 src/assets/js/tailwind.cdn.js
+scripts/archive/
 *.min.js
