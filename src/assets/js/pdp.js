@@ -144,14 +144,14 @@
         "</span>";
     }
 
-    var relatedHtml = "";
     var relatedCount = 0;
+    var _relatedHtml = "";
     for (var r = 0; r < products.length && relatedCount < 4; r++) {
       var rp = products[r];
       if (rp.model === product.model) continue;
       if (rp.category === product.category || rp.subCategory === product.subCategory) {
         var rImgKey = modelToSnake(rp.model) + "_1";
-        relatedHtml +=
+        _relatedHtml +=
           '<a href="/pdp/?model=' +
           encodeURIComponent(rp.model) +
           '" class="bg-white dark:bg-slate-800 rounded-xl overflow-hidden shadow-md hover:shadow-lg transition-all group block">' +
@@ -220,20 +220,86 @@
           highlightItems +
           "</ul></section>"
         : "") +
-      (specRows
-        ? '<section class="mt-8"><h2 class="text-xl font-bold mb-4 flex items-center gap-2"><span class="material-symbols-outlined text-primary">specifications</span> <span data-i18n="pdp_specs">产品规格</span></h2><div class="bg-white dark:bg-slate-800 rounded-xl overflow-hidden shadow-md max-w-3xl"><table class="w-full">' +
-          specRows +
-          "</table></div></section>"
-        : "") +
-      (relatedHtml
-        ? '<section class="mt-12"><h2 class="text-xl font-bold mb-4 flex items-center gap-2"><span class="material-symbols-outlined text-primary">grid_view</span> <span data-i18n="pdp_related">相关产品</span></h2><div class="grid grid-cols-2 lg:grid-cols-4 gap-4">' +
-          relatedHtml +
-          "</div></section>"
-        : "") +
       '<section class="mt-12 bg-primary rounded-xl p-8 text-center"><h2 class="text-xl font-black text-white mb-3" data-i18n="pdp_bottom_title">需要定制方案？</h2><p class="text-white/80 mb-6 text-sm" data-i18n="pdp_bottom_desc">告诉我们您的需求，我们为您提供专属解决方案。</p><a href="/quote/" class="inline-flex items-center gap-2 bg-white text-primary px-6 py-3 rounded-xl font-bold hover:shadow-lg transition-all"><span class="material-symbols-outlined">arrow_forward</span> <span data-i18n="pdp_cta_quote">获取报价</span></a></section>' +
       "</div>";
 
     var contentEl = document.getElementById("product-content");
     if (contentEl) contentEl.innerHTML = html;
+
+    // --- Populate static specs section ---
+    var specsGrid = document.getElementById("specs-grid");
+    if (specsGrid && specRows) {
+      // Build spec cards instead of table rows for the grid layout
+      var specCards = "";
+      for (var s2 = 0; s < specFields.length; s++) {
+        if (specFields[s].value) {
+          specCards +=
+            '<div class="flex justify-between items-start py-3 px-4 rounded-lg bg-slate-50 dark:bg-slate-700/50">' +
+            '<span class="text-sm text-slate-500 dark:text-slate-400 font-medium">' +
+            esc(specFields[s].label) +
+            "</span>" +
+            '<span class="text-sm font-semibold text-right">' +
+            esc(specFields[s].value) +
+            "</span></div>";
+        }
+      }
+      if (specCards) {
+        specsGrid.innerHTML = specCards;
+      }
+    }
+
+    // --- Populate static related products section ---
+    var relatedEl = document.getElementById("related-products");
+    if (relatedEl && relatedCount > 0) {
+      // Rebuild related as enhanced cards with gradient placeholder, name, model, description, link
+      var relatedCards = "";
+      var cardCount = 0;
+      var gradients = [
+        "from-primary/10 to-blue-100 dark:from-primary/20 dark:to-blue-900/30",
+        "from-emerald-100 to-teal-50 dark:from-emerald-900/30 dark:to-teal-900/20",
+        "from-amber-100 to-orange-50 dark:from-amber-900/30 dark:to-orange-900/20",
+      ];
+      for (var r2 = 0; r2 < products.length && cardCount < 3; r2++) {
+        var rp2 = products[r2];
+        if (rp2.model === product.model) continue;
+        if (rp2.category === product.category || rp2.subCategory === product.subCategory) {
+          var rImgKey2 = modelToSnake(rp2.model) + "_1";
+          var grad = gradients[cardCount % gradients.length];
+          var desc2 = rp2.description
+            ? (rp2.description.length > 60 ? rp2.description.substring(0, 60) + "…" : rp2.description)
+            : "";
+          relatedCards +=
+            '<a href="/pdp/?model=' +
+            encodeURIComponent(rp2.model) +
+            '" class="group block bg-white dark:bg-slate-800 rounded-xl overflow-hidden shadow-md hover:shadow-lg transition-all border border-slate-100 dark:border-slate-700">' +
+            '<div class="h-36 bg-gradient-to-br ' +
+            grad +
+            ' relative overflow-hidden">' +
+            '<img loading="lazy" alt="' +
+            esc(rp2.name || rp2.model) +
+            '" class="w-full h-full object-cover group-hover:scale-105 transition-transform" src="/assets/images/products/' +
+            rImgKey2 +
+            '.webp" onerror="this.style.display=\'none\'">' +
+            '</div><div class="p-4">' +
+            '<h4 class="font-bold text-sm mb-1">' +
+            esc(rp2.name || rp2.model) +
+            "</h4>" +
+            '<p class="text-xs text-slate-500 dark:text-slate-400 mb-2">' +
+            esc(rp2.model) +
+            "</p>" +
+            (desc2
+              ? '<p class="text-xs text-slate-400 dark:text-slate-500 mb-3">' + esc(desc2) + "</p>"
+              : "") +
+            '<span class="inline-flex items-center gap-1 text-xs font-semibold text-primary group-hover:gap-2 transition-all">' +
+            '<span data-i18n="pdp_related_view">查看详情</span>' +
+            '<span class="material-symbols-outlined text-sm">arrow_forward</span>' +
+            "</span></div></a>";
+          cardCount++;
+        }
+      }
+      if (relatedCards) {
+        relatedEl.innerHTML = relatedCards;
+      }
+    }
   });
 })();

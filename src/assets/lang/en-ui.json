@@ -1235,5 +1235,17 @@
   "app_fastfood_compare_menu_old": "Requires retraining staff",
   "app_fastfood_compare_menu_new": "One-tap recipe switching",
   "app_fastfood_compare_roa": "ROI Period",
-  "app_fastfood_compare_roa_new": "8-12 months"
+  "app_fastfood_compare_roa_new": "8-12 months",
+  "pdp_specs_placeholder": "Select a product to view detailed specifications",
+  "pdp_related_title": "Recommended Products",
+  "pdp_related_placeholder": "Browse more similar products",
+  "pdp_related_view": "View Details",
+  "pdp_spec_label_model": "Model",
+  "pdp_spec_label_category": "Category",
+  "pdp_spec_label_power": "Power",
+  "pdp_spec_label_dimensions": "Dimensions",
+  "pdp_spec_label_weight": "Net Weight",
+  "pdp_spec_label_voltage": "Voltage",
+  "pdp_spec_label_material": "Material",
+  "pdp_spec_label_certification": "Certification"
 }

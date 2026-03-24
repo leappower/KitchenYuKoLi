@@ -1235,5 +1235,16 @@
   "app_fastfood_compare_menu_old": "需重新培训员工",
   "app_fastfood_compare_menu_new": "一键切换程序配方",
   "app_fastfood_compare_roa": "投资回报周期",
-  "app_fastfood_compare_roa_new": "8-12 个月"
-}
+  "app_fastfood_compare_roa_new": "8-12 个月",
+  "pdp_specs_placeholder": "选择产品后显示详细规格",
+  "pdp_related_title": "推荐产品",
+  "pdp_related_placeholder": "浏览更多同类产品",
+  "pdp_related_view": "查看详情",
+  "pdp_spec_label_model": "型号",
+  "pdp_spec_label_category": "分类",
+  "pdp_spec_label_power": "功率",
+  "pdp_spec_label_dimensions": "产品尺寸",
+  "pdp_spec_label_weight": "净重",
+  "pdp_spec_label_voltage": "电压",
+  "pdp_spec_label_material": "材质",
+  "pdp_spec_label_certification": "认证"

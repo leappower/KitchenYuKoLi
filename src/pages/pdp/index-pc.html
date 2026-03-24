@@ -120,6 +120,95 @@
             <div class="h-96 bg-slate-200 dark:bg-slate-700 rounded-2xl"></div>
           </div>
         </div>
+
+        <!-- Product Specifications -->
+        <section class="mb-12 max-w-7xl mx-auto px-6 lg:px-8">
+          <h2 class="text-2xl font-bold mb-6 flex items-center gap-2">
+            <span class="material-symbols-outlined text-primary">description</span>
+            <span data-i18n="pdp_spec_title">产品规格</span>
+          </h2>
+          <div class="bg-slate-50 dark:bg-slate-800/50 rounded-2xl overflow-hidden">
+            <div class="divide-y divide-slate-200 dark:divide-slate-700" id="spec-table">
+              <div class="flex items-center p-4 hover:bg-slate-100 dark:hover:bg-slate-700/50 transition-colors">
+                <div class="w-40 shrink-0 text-sm font-medium text-slate-500 dark:text-slate-400" data-i18n="pdp_spec_model">产品型号</div>
+                <div class="text-sm font-medium" id="spec-model">—</div>
+              </div>
+              <div class="flex items-center p-4 hover:bg-slate-100 dark:hover:bg-slate-700/50 transition-colors">
+                <div class="w-40 shrink-0 text-sm font-medium text-slate-500 dark:text-slate-400" data-i18n="pdp_spec_power">额定功率</div>
+                <div class="text-sm font-medium" id="spec-power">—</div>
+              </div>
+              <div class="flex items-center p-4 hover:bg-slate-100 dark:hover:bg-slate-700/50 transition-colors">
+                <div class="w-40 shrink-0 text-sm font-medium text-slate-500 dark:text-slate-400" data-i18n="pdp_spec_voltage">电压</div>
+                <div class="text-sm font-medium" id="spec-voltage">—</div>
+              </div>
+              <div class="flex items-center p-4 hover:bg-slate-100 dark:hover:bg-slate-700/50 transition-colors">
+                <div class="w-40 shrink-0 text-sm font-medium text-slate-500 dark:text-slate-400" data-i18n="pdp_spec_dimension">外形尺寸</div>
+                <div class="text-sm font-medium" id="spec-dimension">—</div>
+              </div>
+              <div class="flex items-center p-4 hover:bg-slate-100 dark:hover:bg-slate-700/50 transition-colors">
+                <div class="w-40 shrink-0 text-sm font-medium text-slate-500 dark:text-slate-400" data-i18n="pdp_spec_capacity">容量/产量</div>
+                <div class="text-sm font-medium" id="spec-capacity">—</div>
+              </div>
+              <div class="flex items-center p-4 hover:bg-slate-100 dark:hover:bg-slate-700/50 transition-colors">
+                <div class="w-40 shrink-0 text-sm font-medium text-slate-500 dark:text-slate-400" data-i18n="pdp_spec_material">材质</div>
+                <div class="text-sm font-medium" id="spec-material">—</div>
+              </div>
+              <div class="flex items-center p-4 hover:bg-slate-100 dark:hover:bg-slate-700/50 transition-colors">
+                <div class="w-40 shrink-0 text-sm font-medium text-slate-500 dark:text-slate-400" data-i18n="pdp_spec_cert">认证标准</div>
+                <div class="text-sm font-medium" id="spec-cert">CE, UL, ISO 9001</div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Related Products -->
+        <section class="mb-24 max-w-7xl mx-auto px-6 lg:px-8">
+          <div class="flex items-center justify-between mb-8">
+            <h2 class="text-2xl font-bold flex items-center gap-2">
+              <span class="material-symbols-outlined text-primary">grid_view</span>
+              <span data-i18n="pdp_related_title">相关推荐</span>
+            </h2>
+            <a href="/products/" class="text-sm text-primary font-semibold hover:underline flex items-center gap-1" data-i18n="pdp_related_viewall">查看全部 →</a>
+          </div>
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6" id="related-products">
+            <div class="group rounded-2xl border border-slate-200 dark:border-slate-700 overflow-hidden hover:border-primary/50 hover:shadow-lg transition-all">
+              <div class="aspect-square bg-gradient-to-br from-slate-100 to-slate-200 dark:from-slate-800 dark:to-slate-700 flex items-center justify-center">
+                <span class="material-symbols-outlined text-4xl text-slate-300 dark:text-slate-600">kitchen</span>
+              </div>
+              <div class="p-4">
+                <h3 class="font-bold text-sm mb-1" data-i18n="pdp_related_placeholder_1_name">智能炒菜机器人</h3>
+                <p class="text-xs text-slate-500" data-i18n="pdp_related_placeholder_1_cat">烹饪设备</p>
+              </div>
+            </div>
+            <div class="group rounded-2xl border border-slate-200 dark:border-slate-700 overflow-hidden hover:border-primary/50 hover:shadow-lg transition-all">
+              <div class="aspect-square bg-gradient-to-br from-slate-100 to-slate-200 dark:from-slate-800 dark:to-slate-700 flex items-center justify-center">
+                <span class="material-symbols-outlined text-4xl text-slate-300 dark:text-slate-600">kitchen</span>
+              </div>
+              <div class="p-4">
+                <h3 class="font-bold text-sm mb-1" data-i18n="pdp_related_placeholder_2_name">商用万能蒸烤箱</h3>
+                <p class="text-xs text-slate-500" data-i18n="pdp_related_placeholder_2_cat">烘焙设备</p>
+              </div>
+            </div>
+            <div class="group rounded-2xl border border-slate-200 dark:border-slate-700 overflow-hidden hover:border-primary/50 hover:shadow-lg transition-all">
+              <div class="aspect-square bg-gradient-to-br from-slate-100 to-slate-200 dark:from-slate-800 dark:to-slate-700 flex items-center justify-center">
+                <span class="material-symbols-outlined text-4xl text-slate-300 dark:text-slate-600">kitchen</span>
+              </div>
+              <div class="p-4">
+                <h3 class="font-bold text-sm mb-1" data-i18n="pdp_related_placeholder_3_name">不锈钢工作台</h3>
+                <p class="text-xs text-slate-500" data-i18n="pdp_related_placeholder_3_cat">备餐设备</p>
+              </div>
+            </div>
+            <div class="group rounded-2xl border border-slate-200 dark:border-slate-700 overflow-hidden hover:border-primary/50 hover:shadow-lg transition-all">
+              <div class="aspect-square bg-gradient-to-br from-slate-100 to-slate-200 dark:from-slate-800 dark:to-slate-700 flex items-center justify-center">
+                <span class="material-symbols-outlined text-4xl text-slate-300 dark:text-slate-600">kitchen</span>
+              </div>
+              <div class="p-4">
+                <h3 class="font-bold text-sm mb-1" data-i18n="pdp_related_placeholder_4_name">四门冷藏柜</h3>
+                <p class="text-xs text-slate-500" data-i18n="pdp_related_placeholder_4_cat">冷藏设备</p>
+              </div>
+            </div>
+          </div>
+        </section>
       </main>
 
       <footer data-component="footer" data-variant="pc" data-cta="true"></footer>
@@ -359,20 +448,80 @@
               highlightItems +
               "</ul></section>"
             : "") +
-          (specRows
-            ? '<section class="mt-12"><h2 class="text-2xl font-bold mb-6 flex items-center gap-2"><span class="material-symbols-outlined text-primary">specifications</span> <span data-i18n="pdp_specs">产品规格</span></h2><div class="bg-white dark:bg-slate-800 rounded-xl overflow-hidden shadow-md max-w-3xl"><table class="w-full">' +
-              specRows +
-              "</table></div></section>"
-            : "") +
-          (relatedHtml
-            ? '<section class="mt-16"><h2 class="text-2xl font-bold mb-6 flex items-center gap-2"><span class="material-symbols-outlined text-primary">grid_view</span> <span data-i18n="pdp_related">相关产品</span></h2><div class="grid grid-cols-2 lg:grid-cols-4 gap-6">' +
-              relatedHtml +
-              "</div></section>"
-            : "") +
           '<section class="mt-16 bg-primary rounded-2xl p-12 text-center"><h2 class="text-2xl font-black text-white mb-4" data-i18n="pdp_bottom_title">需要定制方案？</h2><p class="text-white/80 mb-8" data-i18n="pdp_bottom_desc">告诉我们您的需求，我们为您提供专属解决方案。</p><a href="/quote/" class="inline-flex items-center gap-2 bg-white text-primary px-8 py-4 rounded-xl font-bold hover:shadow-lg transition-all"><span class="material-symbols-outlined">arrow_forward</span> <span data-i18n="pdp_cta_quote">获取报价</span></a></section>' +
           "</div>";
 
         document.getElementById("product-content").innerHTML = html;
+
+        // --- Populate static specs section ---
+        var pcSpecsGrid = document.getElementById("specs-grid");
+        if (pcSpecsGrid && specRows) {
+          var pcSpecCards = "";
+          for (var ps = 0; ps < specFields.length; ps++) {
+            if (specFields[ps].value) {
+              pcSpecCards +=
+                '<div class="flex justify-between items-start py-3 px-4 rounded-lg bg-slate-50 dark:bg-slate-700/50">' +
+                '<span class="text-sm text-slate-500 dark:text-slate-400 font-medium">' +
+                esc(specFields[ps].label) +
+                "</span>" +
+                '<span class="text-sm font-semibold text-right">' +
+                esc(specFields[ps].value) +
+                "</span></div>";
+            }
+          }
+          if (pcSpecCards) pcSpecsGrid.innerHTML = pcSpecCards;
+        }
+
+        // --- Populate static related products section ---
+        var pcRelatedEl = document.getElementById("related-products");
+        if (pcRelatedEl && relatedCount > 0) {
+          var pcGradients = [
+            "from-primary/10 to-blue-100 dark:from-primary/20 dark:to-blue-900/30",
+            "from-emerald-100 to-teal-50 dark:from-emerald-900/30 dark:to-teal-900/20",
+            "from-amber-100 to-orange-50 dark:from-amber-900/30 dark:to-orange-900/20",
+          ];
+          var pcCards = "";
+          var pcCardCount = 0;
+          for (var pr = 0; pr < products.length && pcCardCount < 3; pr++) {
+            var prp = products[pr];
+            if (prp.model === product.model) continue;
+            if (prp.category === product.category || prp.subCategory === product.subCategory) {
+              var prImgKey = modelToSnake(prp.model) + "_1";
+              var prGrad = pcGradients[pcCardCount % pcGradients.length];
+              var prDesc = prp.description
+                ? (prp.description.length > 80 ? prp.description.substring(0, 80) + "…" : prp.description)
+                : "";
+              pcCards +=
+                '<a href="/pdp/?model=' +
+                encodeURIComponent(prp.model) +
+                '" class="group block bg-white dark:bg-slate-800 rounded-xl overflow-hidden shadow-md hover:shadow-lg transition-all border border-slate-100 dark:border-slate-700">' +
+                '<div class="h-44 bg-gradient-to-br ' +
+                prGrad +
+                ' relative overflow-hidden">' +
+                '<img loading="lazy" alt="' +
+                esc(prp.name || prp.model) +
+                '" class="w-full h-full object-cover group-hover:scale-105 transition-transform" src="/assets/images/products/' +
+                prImgKey +
+                '.webp" onerror="this.style.display=\'none\'">' +
+                '</div><div class="p-5">' +
+                '<h4 class="font-bold mb-1">' +
+                esc(prp.name || prp.model) +
+                "</h4>" +
+                '<p class="text-sm text-slate-500 dark:text-slate-400 mb-2">' +
+                esc(prp.model) +
+                "</p>" +
+                (prDesc
+                  ? '<p class="text-sm text-slate-400 dark:text-slate-500 mb-3">' + esc(prDesc) + "</p>"
+                  : "") +
+                '<span class="inline-flex items-center gap-1 text-sm font-semibold text-primary group-hover:gap-2 transition-all">' +
+                '<span data-i18n="pdp_related_view">查看详情</span>' +
+                '<span class="material-symbols-outlined">arrow_forward</span>' +
+                "</span></div></a>";
+              pcCardCount++;
+            }
+          }
+          if (pcCards) pcRelatedEl.innerHTML = pcCards;
+        }
       });
     </script>
   </body>
