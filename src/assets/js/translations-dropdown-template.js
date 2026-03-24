@@ -4,57 +4,18 @@
  */
 
 window.LanguageDropdownTemplate = {
-  // 按地区分组的语言配置
+  // 按地区分组的语言配置（仅 zh-CN + en）
   LANG_GROUPS: {
     common: {
       titleKey: 'lang_group_common',
-      langs: ['en', 'zh-CN', 'hi', 'es', 'fr']
-    },
-    asian: {
-      titleKey: 'lang_group_asian',
-      langs: ['zh-CN', 'zh-TW', 'ja', 'ko', 'id', 'vi', 'th', 'ms', 'fil', 'my', 'km', 'lo']
-    },
-    middle_east: {
-      titleKey: 'lang_group_middle_east',
-      langs: ['ar', 'he']
-    },
-    europe: {
-      titleKey: 'lang_group_europe',
-      langs: ['de', 'fr', 'it', 'es', 'pt', 'nl', 'pl']
-    },
-    global: {
-      titleKey: 'lang_group_global',
-      langs: ['en', 'ru', 'tr']
+      langs: ['zh-CN', 'en']
     }
   },
 
   // 语言代码到显示名称的映射
   LANGUAGE_NAMES: {
     'zh-CN': '中文（简体）',
-    'zh-TW': '中文（繁體）',
-    'en': 'English',
-    'hi': 'हिन्दी',
-    'es': 'Español',
-    'fr': 'Français',
-    'ja': '日本語',
-    'ko': '한국어',
-    'id': 'Bahasa Indonesia',
-    'vi': 'Tiếng Việt',
-    'th': 'ภาษาไทย',
-    'ms': 'Bahasa Melayu',
-    'fil': 'Filipino',
-    'my': 'မြန်မာဘာသာ',
-    'km': 'ភាសាខ្មែរ',
-    'lo': 'ພາສາລາວ',
-    'ar': 'العربية',
-    'he': 'עברית',
-    'de': 'Deutsch',
-    'it': 'Italiano',
-    'pt': 'Português',
-    'nl': 'Nederlands',
-    'pl': 'Polski',
-    'ru': 'Русский',
-    'tr': 'Türkçe'
+    'en': 'English'
   },
 
   // 创建单个语言选项按钮
@@ -98,38 +59,6 @@ window.LanguageDropdownTemplate = {
     groupHtml += '<div class="lang-group mt-1 border-t border-slate-100 dark:border-slate-800 pt-1">';
     groupHtml += this.createGroupTitle(this.LANG_GROUPS.common.titleKey);
     this.LANG_GROUPS.common.langs.forEach(function(code) {
-      groupHtml += self.createLangOption(code, currentLang, getLangName(code));
-    });
-    groupHtml += '</div>';
-
-    // Asian 组
-    groupHtml += '<div class="lang-group mt-1 border-t border-slate-100 dark:border-slate-800 pt-1">';
-    groupHtml += this.createGroupTitle(this.LANG_GROUPS.asian.titleKey);
-    this.LANG_GROUPS.asian.langs.forEach(function(code) {
-      groupHtml += self.createLangOption(code, currentLang, getLangName(code));
-    });
-    groupHtml += '</div>';
-
-    // Middle East 组
-    groupHtml += '<div class="lang-group mt-1 border-t border-slate-100 dark:border-slate-800 pt-1">';
-    groupHtml += this.createGroupTitle(this.LANG_GROUPS.middle_east.titleKey);
-    this.LANG_GROUPS.middle_east.langs.forEach(function(code) {
-      groupHtml += self.createLangOption(code, currentLang, getLangName(code));
-    });
-    groupHtml += '</div>';
-
-    // Europe 组
-    groupHtml += '<div class="lang-group mt-1 border-t border-slate-100 dark:border-slate-800 pt-1">';
-    groupHtml += this.createGroupTitle(this.LANG_GROUPS.europe.titleKey);
-    this.LANG_GROUPS.europe.langs.forEach(function(code) {
-      groupHtml += self.createLangOption(code, currentLang, getLangName(code));
-    });
-    groupHtml += '</div>';
-
-    // Global 组
-    groupHtml += '<div class="lang-group mt-1 border-t border-slate-100 dark:border-slate-800 pt-1">';
-    groupHtml += this.createGroupTitle(this.LANG_GROUPS.global.titleKey);
-    this.LANG_GROUPS.global.langs.forEach(function(code) {
       groupHtml += self.createLangOption(code, currentLang, getLangName(code));
     });
     groupHtml += '</div>';

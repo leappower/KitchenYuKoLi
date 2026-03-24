@@ -226,7 +226,7 @@
     if (!bar || !panel) return;
 
     var rect = bar.getBoundingClientRect();
-    var isRTL = document.documentElement.dir === 'rtl' || document.documentElement.lang === 'ar' || document.documentElement.lang === 'he';
+    var isRTL = document.documentElement.dir === 'rtl';
 
     panel.style.position = 'fixed';
     panel.style.top = (rect.bottom + 6) + 'px';
