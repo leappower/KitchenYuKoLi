@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html class="light" lang="zh-CN"><head>
+<link rel="canonical" href="/catalog/"/>
+<link rel="alternate" media="only screen and (max-width: 767px)" href="/catalog/index-mobile.html"/>
+<link rel="alternate" media="only screen and (min-width: 768px) and (max-width: 1279px)" href="/catalog/index-tablet.html"/>
+<link rel="alternate" media="only screen and (min-width: 1280px)" href="/catalog/index-pc.html"/>
+<script>
+(function(){
+  if (window.__redirectChecked) return; window.__redirectChecked = true;
+  var urlParams = new URLSearchParams(location.search); var cleanUrl = urlParams.get('clean-url');
+  if (cleanUrl) { history.replaceState({}, '', cleanUrl); return; }
+  if (window.__spaNavigating) return;
+  var currentFile = location.pathname.split('/').pop();
+  if (window.DeviceUtils && window.DeviceUtils.isDirectoryURL()) return;
+  if (window.DeviceUtils && window.DeviceUtils.shouldRedirect(currentFile)) {
+    var deviceType = window.DeviceUtils.getDeviceType();
+    var targetFile = deviceType === window.DeviceUtils.DeviceType.MOBILE ? 'index-mobile.html' :
+                     deviceType === window.DeviceUtils.DeviceType.TABLET ? 'index-tablet.html' : 'index-pc.html';
+    location.href = targetFile;
+  }
+})();
+</script>
+<meta charset="utf-8"/>
+<meta name="description" content="浏览 Yukoli 智能商厨设备全系列目录。">
+<meta property="og:type" content="website">
+<meta property="og:title" content="产品目录 | Yukoli 智能商厨设备">
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<title data-i18n="catalog_page_title">产品目录 | Yukoli 智能商厨设备</title>
+<link rel="preload" href="/assets/fonts/local-fonts.css" as="style">
+<link rel="preload" href="/assets/css/styles.css" as="style">
+<link rel="preload" href="/assets/css/tailwind.css" as="style">
+<link href="/assets/fonts/local-fonts.css" rel="stylesheet"/>
+<link rel="stylesheet" href="/assets/css/styles.css">
+<link rel="stylesheet" href="/assets/css/tailwind.css">
+<link rel="stylesheet" href="/assets/css/z-index-system.css">
+<link rel="stylesheet" href="/assets/css/performance-optimized.css"/>
+<script>(function(){if(localStorage.getItem('darkMode')==='true')document.documentElement.classList.add('dark')})()</script>
+<link rel="stylesheet" href="/assets/css/skeleton.css"/>
+<link rel="icon" href="/assets/images/logo_header.webp" type="image/webp">
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 antialiased overflow-x-hidden">
+<div class="relative flex min-h-screen flex-col">
+<navigator data-component="navigator" data-variant="mobile" data-active="products" data-cta-text-key="nav_get_quote" data-cta-href="/quote"></navigator>
+<main id="spa-content" class="flex-1">
+<section class="px-4 py-6">
+  <h1 class="text-2xl font-black tracking-tight mb-2" data-i18n="catalog_hero_title">产品目录</h1>
+  <p class="text-sm text-slate-600 dark:text-slate-400" data-i18n="catalog_hero_desc">浏览全系列产品</p>
+</section>
+<section class="sticky top-0 z-30 bg-white/90 dark:bg-slate-900/90 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 px-4 py-2">
+  <div class="relative">
+    <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-sm">search</span>
+    <input id="catalog-search" type="text" placeholder="搜索产品..." class="w-full pl-9 pr-4 py-2.5 rounded-lg border border-slate-200 dark:border-slate-700 bg-transparent focus:border-primary focus:outline-none text-sm">
+  </div>
+  <div id="catalog-filters" class="flex items-center gap-2 mt-2 overflow-x-auto pb-1 -mx-4 px-4"></div>
+</section>
+<section class="px-4 py-6">
+  <div id="catalog-results-count" class="text-xs text-slate-500 dark:text-slate-400 mb-3"></div>
+  <div id="catalog-grid" class="grid grid-cols-2 gap-3"></div>
+  <div id="catalog-empty" class="hidden text-center py-16">
+    <span class="material-symbols-outlined text-5xl text-slate-300 dark:text-slate-600 mb-3 block">search_off</span>
+    <h3 class="text-base font-bold mb-1" data-i18n="catalog_empty_title">未找到匹配的产品</h3>
+  </div>
+</section>
+<section class="p-4">
+  <div class="bg-primary rounded-xl p-6 text-center">
+    <h2 class="text-lg font-black text-white mb-2" data-i18n="catalog_cta_title">找不到合适的产品？</h2>
+    <a href="/quote/" class="inline-flex items-center gap-2 bg-white text-primary px-5 py-2.5 rounded-lg font-bold text-sm">
+      <span class="material-symbols-outlined text-sm">arrow_forward</span>
+      <span data-i18n="catalog_cta_btn">获取定制方案</span>
+    </a>
+  </div>
+</section>
+</main>
+<footer data-component="footer" data-variant="mobile" data-cta="true"></footer>
+</div>
+<script defer src="/assets/js/router.js"></script>
+<script src="/assets/js/translations.js"></script>
+<script src="/assets/js/ui/language-dropdown.js"></script>
+<script src="/assets/js/ui/mobile-menu.js"></script>
+<script src="/assets/js/ui/products-dropdown.js"></script>
+<script src="/assets/js/ui/solutions-dropdown.js"></script>
+<script src="/assets/js/ui/support-dropdown.js"></script>
+<script src="/assets/js/ui/about-dropdown.js"></script>
+<script src="/assets/js/ui/contact-dropdown.js"></script>
+<script src="/assets/js/ui/navigator.js"></script>
+<script src="/assets/js/ui/footer.js"></script>
+<script defer src="/assets/js/ui/floating-actions.js"></script>
+<script src="/assets/js/catalog.js"></script>
+</body></html>
