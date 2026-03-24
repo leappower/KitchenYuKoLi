@@ -552,6 +552,11 @@
             if (typeof window.showNotification === "function") {
               window.showNotification("正在跳转到 WhatsApp，请发送询价信息", "success");
             }
+
+            // Redirect to thank-you page after short delay
+            setTimeout(function () {
+              window.location.href = "/thank-you/";
+            }, 1500);
           });
         });
       })();

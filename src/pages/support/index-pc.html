@@ -71,12 +71,12 @@ window.addEventListener('DOMContentLoaded',function(){
                         </p>
 </div>
 <div class="flex flex-wrap gap-4">
-<button class="bg-primary text-white px-8 py-4 rounded-xl font-bold flex items-center gap-2 shadow-lg shadow-primary/20 hover:translate-y-[-2px] transition-transform">
+<a href="/quote/" class="bg-primary text-white px-8 py-4 rounded-xl font-bold flex items-center gap-2 shadow-lg shadow-primary/20 hover:translate-y-[-2px] transition-transform">
                             预约服务 <span class="material-symbols-outlined">bolt</span>
-</button>
-<button class="border-2 border-slate-200 dark:border-slate-800 px-8 py-4 rounded-xl font-bold hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors" data-i18n="support_technical_specs">
+</a>
+<a href="/products/" class="border-2 border-slate-200 dark:border-slate-800 px-8 py-4 rounded-xl font-bold hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors" data-i18n="support_technical_specs">
                             技术资料
-                        </button>
+                        </a>
 </div>
 </div>
 <div class="relative">
@@ -155,6 +155,35 @@ window.addEventListener('DOMContentLoaded',function(){
 </div>
 </div>
 </section>
+<!-- Contact Channels -->
+<section class="py-16 bg-white dark:bg-slate-900/50 fullwidth-bg">
+<div class="px-6 md:px-10 lg:px-16 xl:px-20">
+<h2 class="text-3xl font-black tracking-tight mb-10 text-center" data-i18n="support_contact_channels_title">联系我们</h2>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
+<a href="https://wa.me/16478158194" target="_blank" class="flex flex-col items-center gap-3 p-8 rounded-2xl bg-[#06C755]/5 border border-[#06C755]/20 hover:bg-[#06C755]/10 hover:shadow-lg transition-all group">
+<div class="w-14 h-14 rounded-full bg-[#06C755] flex items-center justify-center group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-white text-2xl">chat</span>
+</div>
+<h3 class="font-bold text-lg">WhatsApp</h3>
+<p class="text-sm text-slate-500 dark:text-slate-400 text-center" data-i18n="support_contact_whatsapp_desc">在线咨询，快速响应</p>
+</a>
+<a href="mailto:sales@yukoli.com" class="flex flex-col items-center gap-3 p-8 rounded-2xl bg-primary/5 border border-primary/20 hover:bg-primary/10 hover:shadow-lg transition-all group">
+<div class="w-14 h-14 rounded-full bg-primary flex items-center justify-center group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-white text-2xl">email</span>
+</div>
+<h3 class="font-bold text-lg">Email</h3>
+<p class="text-sm text-slate-500 dark:text-slate-400 text-center">sales@yukoli.com</p>
+</a>
+<a href="tel:+16478158194" class="flex flex-col items-center gap-3 p-8 rounded-2xl bg-blue-500/5 border border-blue-500/20 hover:bg-blue-500/10 hover:shadow-lg transition-all group">
+<div class="w-14 h-14 rounded-full bg-blue-500 flex items-center justify-center group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-white text-2xl">call</span>
+</div>
+<h3 class="font-bold text-lg">电话</h3>
+<p class="text-sm text-slate-500 dark:text-slate-400 text-center" data-i18n="support_contact_phone_desc">工作日 9:00-18:00</p>
+</a>
+</div>
+</div>
+</section>
 <!-- Yukoli OS Section -->
 <section class="py-24">
 <div class="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
@@ -208,6 +237,54 @@ window.addEventListener('DOMContentLoaded',function(){
 </div>
 </div>
 </section>
+
+<!-- FAQ Section -->
+<section class="py-16 bg-slate-50 dark:bg-slate-900/30 fullwidth-bg">
+<div class="px-6 md:px-10 lg:px-16 xl:px-20">
+<div class="max-w-3xl mx-auto">
+<h2 class="text-3xl font-black tracking-tight mb-8 text-center" data-i18n="support_faq_title">常见问题</h2>
+<div class="space-y-4">
+<details class="bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 overflow-hidden">
+<summary class="flex items-center justify-between p-5 cursor-pointer font-bold text-slate-900 dark:text-slate-100 hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-colors">
+<span data-i18n="support_faq_q1">设备出现故障如何报修？</span>
+<span class="material-symbols-outlined text-slate-400 transition-transform group-open:rotate-180">expand_more</span>
+</summary>
+<div class="px-5 pb-5 text-slate-600 dark:text-slate-400 leading-relaxed" data-i18n="support_faq_a1">
+您可以通过 WhatsApp 一键联系我们的区域工程师，或拨打服务热线。我们支持远程视频诊断，大多数问题可在 2 小时内远程解决。如需上门，48 小时内到达。
+</div>
+</details>
+<details class="bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 overflow-hidden">
+<summary class="flex items-center justify-between p-5 cursor-pointer font-bold text-slate-900 dark:text-slate-100 hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-colors">
+<span data-i18n="support_faq_q2">保修期是多长时间？</span>
+<span class="material-symbols-outlined text-slate-400 transition-transform group-open:rotate-180">expand_more</span>
+</summary>
+<div class="px-5 pb-5 text-slate-600 dark:text-slate-400 leading-relaxed" data-i18n="support_faq_a2">
+所有设备自发货之日起提供 1 年免费保修，核心部件保修 2 年。保修期内因质量问题产生的维修费用由我方承担。
+</div>
+</details>
+<details class="bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 overflow-hidden">
+<summary class="flex items-center justify-between p-5 cursor-pointer font-bold text-slate-900 dark:text-slate-100 hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-colors">
+<span data-i18n="support_faq_q3">是否支持海外服务？</span>
+<span class="material-symbols-outlined text-slate-400 transition-transform group-open:rotate-180">expand_more</span>
+</summary>
+<div class="px-5 pb-5 text-slate-600 dark:text-slate-400 leading-relaxed" data-i18n="support_faq_a3">
+我们在泰国、越南、马来西亚、印度尼西亚、菲律宾等东南亚 10 国设有服务站点，提供本地化售后支持。其他地区可通过远程服务覆盖。
+</div>
+</details>
+<details class="bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 overflow-hidden">
+<summary class="flex items-center justify-between p-5 cursor-pointer font-bold text-slate-900 dark:text-slate-100 hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-colors">
+<span data-i18n="support_faq_q4">备件供应需要多久？</span>
+<span class="material-symbols-outlined text-slate-400 transition-transform group-open:rotate-180">expand_more</span>
+</summary>
+<div class="px-5 pb-5 text-slate-600 dark:text-slate-400 leading-relaxed" data-i18n="support_faq_a4">
+常规备件东南亚区域仓库 48 小时内发货，非常规备件 7 个工作日内交付。我们建议客户储备常用易损件以减少停机时间。
+</div>
+</details>
+</div>
+</div>
+</div>
+</section>
+
 <!-- CTA Section -->
 <section class="pb-24">
 <div>
@@ -217,12 +294,12 @@ window.addEventListener('DOMContentLoaded',function(){
 <h2 class="text-4xl md:text-5xl font-black text-white leading-tight">需要专业的厨具售后服务？</h2>
 <p class="text-slate-400 max-w-xl text-lg" data-i18n="support_join_2_500_enterprises_leveraging_yukoli">已有 3000+ 餐饮企业选择 YuKoLi 售后服务，覆盖东南亚主要市场。</p>
 <div class="flex flex-wrap justify-center gap-4">
-<button class="bg-primary text-white px-10 py-5 rounded-2xl font-black text-lg shadow-2xl shadow-primary/40 hover:scale-105 transition-transform" data-i18n="quote_schedule_demo">
+<a href="/quote/" class="bg-primary text-white px-10 py-5 rounded-2xl font-black text-lg shadow-2xl shadow-primary/40 hover:scale-105 transition-transform" data-i18n="quote_schedule_demo">
                         预约服务
-                    </button>
-<button class="bg-white/10 text-white border border-white/20 backdrop-blur-sm px-10 py-5 rounded-2xl font-black text-lg hover:bg-white/20 transition-colors" data-i18n="support_contact_sales">
+                    </a>
+<a href="https://wa.me/16478158194" target="_blank" class="bg-white/10 text-white border border-white/20 backdrop-blur-sm px-10 py-5 rounded-2xl font-black text-lg hover:bg-white/20 transition-colors" data-i18n="support_contact_sales">
                         联系我们
-                    </button>
+                    </a>
 </div>
 </div>
 </div>
