@@ -1133,5 +1133,10 @@
   "sol_cabinet_feat3_title": "Auto FIFO Rotation",
   "sol_cabinet_feat3_desc": "Automatic first-in-first-out rotation reduces food waste and ensures freshness.",
   "sol_cabinet_feat4_title": "Access Control",
-  "sol_cabinet_feat4_desc": "Role-based access with audit trails for ingredient usage and staff activity."
+  "sol_cabinet_feat4_desc": "Role-based access with audit trails for ingredient usage and staff activity.",
+  "news_title": "News & Updates",
+  "news_subtitle": "Stay updated on commercial kitchen automation",
+  "news_empty_hint": "No news yet. Stay tuned!",
+  "news_read_more": "Read More",
+  "news_date": "Published"
 }

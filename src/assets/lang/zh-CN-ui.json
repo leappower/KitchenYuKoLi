@@ -1133,5 +1133,10 @@
   "sol_cabinet_feat3_title": "先进先出轮转",
   "sol_cabinet_feat3_desc": "自动先进先出轮转，减少浪费、保证新鲜。",
   "sol_cabinet_feat4_title": "权限管理",
-  "sol_cabinet_feat4_desc": "基于角色的权限控制，记录食材使用和人员操作审计日志。"
+  "sol_cabinet_feat4_desc": "基于角色的权限控制，记录食材使用和人员操作审计日志。",
+  "news_title": "新闻资讯",
+  "news_subtitle": "了解商用厨房自动化最新动态",
+  "news_empty_hint": "暂无新闻，敬请期待",
+  "news_read_more": "阅读更多",
+  "news_date": "发布日期"
 }

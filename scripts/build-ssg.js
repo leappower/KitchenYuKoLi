@@ -101,6 +101,7 @@ const ROUTES = [
   { slug: 'roi',          navId: 'roi' },
   { slug: 'quote',        navId: 'quote' },
   { slug: 'support',      navId: 'support' },
+  { slug: 'news',         navId: 'news' },
   { slug: 'about',        navId: 'about' },
   { slug: 'contact',      navId: 'contact' },
   { slug: 'solutions/fast-food',       navId: 'solutions' },
