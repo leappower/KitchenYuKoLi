@@ -20,8 +20,6 @@
   var PAGES = Object.freeze({
     home: "/home/",
     products: "/products/",
-    caseStudies: "/cases/",
-    caseDownload: "/cases/download/",
     quote: "/quote/",
     thankYou: "/thank-you/",
     landing: "/landing/",
@@ -136,8 +134,8 @@
       Equipment: PAGES.products,
       Insights: PAGES.caseStudies,
       Config: PAGES.quote,
-      "ESG Report": PAGES.esg,
-      "Global Benchmarks": PAGES.esg,
+      "ESG Report": "/home/",
+      "Global Benchmarks": "/home/",
     };
 
     var allLinks = document.querySelectorAll('a[href="#"], nav a');
