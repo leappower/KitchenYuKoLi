@@ -1498,5 +1498,15 @@
   "app_sea_compare_6_yukoli": "10-14 个月回本",
   "app_hotpot_pain_desc": "出餐瓶颈、人力密集、口味一致性差——这些痛点正在侵蚀火锅店的利润空间。",
   "app_hotpot_compare_traditional": "传统方案",
-  "app_hotpot_compare_yukoli": "YuKoLi 方案"
+  "app_hotpot_compare_yukoli": "YuKoLi 方案",
+  "catalog_view_detail": "查看详情",
+  "catalog_get_quote": "获取报价",
+  "catalog_spec_power": "功率",
+  "catalog_spec_voltage": "电压",
+  "catalog_spec_capacity": "容量",
+  "catalog_spec_dimension": "尺寸",
+  "catalog_empty_category_title": "该分类暂无产品",
+  "catalog_empty_category_desc": "该分类下暂无产品，请查看其他分类或联系销售获取推荐。",
+  "catalog_empty_search_title": "未找到匹配的产品",
+  "catalog_empty_search_desc": "请尝试其他关键词或清除搜索条件。"
 }

@@ -1498,5 +1498,15 @@
   "app_sea_compare_6_yukoli": "10-14 months payback",
   "app_hotpot_pain_desc": "Slow service, labor-intensive operations, inconsistent taste — these pain points are eroding your hotpot business profits.",
   "app_hotpot_compare_traditional": "Traditional",
-  "app_hotpot_compare_yukoli": "YuKoLi Solution"
+  "app_hotpot_compare_yukoli": "YuKoLi Solution",
+  "catalog_view_detail": "View Details",
+  "catalog_get_quote": "Get Quote",
+  "catalog_spec_power": "Power",
+  "catalog_spec_voltage": "Voltage",
+  "catalog_spec_capacity": "Capacity",
+  "catalog_spec_dimension": "Dimensions",
+  "catalog_empty_category_title": "No Products in This Category",
+  "catalog_empty_category_desc": "No products found in this category. Try other categories or contact sales for recommendations.",
+  "catalog_empty_search_title": "No Matching Products Found",
+  "catalog_empty_search_desc": "Try different keywords or clear the search filter."
 }

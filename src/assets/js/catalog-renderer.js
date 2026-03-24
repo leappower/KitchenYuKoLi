@@ -24,6 +24,14 @@
       nav_products_other: [],
     };
 
+    // Key spec fields to display as badges, in priority order
+    var KEY_SPEC_FIELDS = [
+      { field: "power", i18nKey: "catalog_spec_power" },
+      { field: "voltage", i18nKey: "catalog_spec_voltage" },
+      { field: "throughput", i18nKey: "catalog_spec_capacity" },
+      { field: "productDimensions", i18nKey: "catalog_spec_dimension" },
+    ];
+
     function tr(key, fallback) {
       if (window.CommonUtils && typeof window.CommonUtils.tr === "function")
         return window.CommonUtils.tr(key, fallback);
@@ -45,6 +53,33 @@
         .replace(/[^a-z0-9_]/g, "_")
         .replace(/__+/g, "_")
         .replace(/^_|_$/g, "");
+    }
+
+    /**
+     * Build spec badge HTML for a product.
+     * Reads from p[spec.field] or p.i18n[spec.field]["zh-CN"] and returns
+     * up to maxCount badges.
+     */
+    function buildSpecBadges(p, maxCount) {
+      var badges = [];
+      for (var i = 0; i < KEY_SPEC_FIELDS.length && badges.length < maxCount; i++) {
+        var spec = KEY_SPEC_FIELDS[i];
+        var value = p[spec.field];
+        // Fallback to i18n zh-CN value if top-level is missing
+        if (!value && p.i18n && p.i18n[spec.field] && p.i18n[spec.field]["zh-CN"]) {
+          value = p.i18n[spec.field]["zh-CN"];
+        }
+        if (value) {
+          var label = tr(spec.i18nKey, spec.field);
+          badges.push(
+            '<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-md text-xs bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-300">' +
+            '<span class="font-medium">' + esc(label) + '</span>' +
+            '<span>' + esc(value) + '</span>' +
+            '</span>'
+          );
+        }
+      }
+      return badges.join("");
     }
 
     var activeCategory = "all";
@@ -134,6 +169,8 @@
       var filtered = filterProducts();
       var grid = document.getElementById("catalog-grid");
       var empty = document.getElementById("catalog-empty");
+      var emptyTitle = document.getElementById("catalog-empty-title");
+      var emptyDesc = document.getElementById("catalog-empty-desc");
       var countEl = document.getElementById("catalog-results-count");
 
       if (!grid) return;
@@ -141,6 +178,45 @@
       if (filtered.length === 0) {
         grid.innerHTML = "";
         if (empty) empty.classList.remove("hidden");
+
+        // Context-aware empty messaging
+        if (emptyTitle) {
+          if (activeCategory !== "all") {
+            emptyTitle.textContent = tr(
+              "catalog_empty_category_title",
+              "该分类暂无产品"
+            );
+          } else if (searchTerm) {
+            emptyTitle.textContent = tr(
+              "catalog_empty_search_title",
+              "未找到匹配的产品"
+            );
+          } else {
+            emptyTitle.textContent = tr(
+              "catalog_empty_title",
+              "未找到匹配的产品"
+            );
+          }
+        }
+        if (emptyDesc) {
+          if (activeCategory !== "all" && !searchTerm) {
+            emptyDesc.textContent = tr(
+              "catalog_empty_category_desc",
+              "该分类下暂无产品，请查看其他分类或联系销售获取推荐。"
+            );
+          } else if (searchTerm) {
+            emptyDesc.textContent = tr(
+              "catalog_empty_search_desc",
+              "请尝试其他关键词或清除搜索条件。"
+            );
+          } else {
+            emptyDesc.textContent = tr(
+              "catalog_empty_desc",
+              "请尝试其他关键词或筛选条件"
+            );
+          }
+        }
+
         if (countEl) countEl.textContent = "";
         return;
       }
@@ -163,10 +239,26 @@
             esc(p.badge) +
             "</span>";
         }
+
+        // Build spec badges (up to 3)
+        var specBadgesHtml = buildSpecBadges(p, 3);
+
+        // Build action buttons
+        var viewDetailUrl = "/pdp/?model=" + encodeURIComponent(p.model);
+        var quoteUrl = "/quote/";
+        var actionHtml =
+          '<div class="flex items-center gap-2 mt-4">' +
+          '<a href="' + viewDetailUrl + '" class="flex-1 text-center px-3 py-2 rounded-lg text-sm font-bold bg-primary text-white hover:bg-primary/90 transition-colors">' +
+          '<span data-i18n="catalog_view_detail">' + tr("catalog_view_detail", "查看详情") + '</span>' +
+          '</a>' +
+          '<a href="' + quoteUrl + '" class="flex-1 text-center px-3 py-2 rounded-lg text-sm font-bold border border-primary text-primary hover:bg-primary/10 transition-colors">' +
+          '<span data-i18n="catalog_get_quote">' + tr("catalog_get_quote", "获取报价") + '</span>' +
+          '</a>' +
+          '</div>';
+
         html +=
-          '<a href="/pdp/?model=' +
-          encodeURIComponent(p.model) +
-          '" class="bg-white dark:bg-slate-800 rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all group block">' +
+          '<div class="bg-white dark:bg-slate-800 rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all group">' +
+          '<a href="' + viewDetailUrl + '" class="block">' +
           '<div class="relative h-48 bg-slate-100 dark:bg-slate-700 overflow-hidden">' +
           badgeHtml +
           '<img loading="lazy" alt="' +
@@ -174,18 +266,25 @@
           '" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" src="/assets/images/products/' +
           imgKey +
           '.webp" onerror="this.style.display=\'none\'">' +
-          '</div><div class="p-5">' +
+          '</div></a>' +
+          '<div class="p-5">' +
           '<div class="flex items-center gap-2 mb-1">' +
           '<span class="text-xs text-slate-500 dark:text-slate-400 uppercase tracking-wider">' +
           esc(p.subCategory || p.category || "") +
           "</span></div>" +
+          '<a href="' + viewDetailUrl + '" class="block">' +
           '<h3 class="font-bold text-lg mb-1 group-hover:text-primary transition-colors">' +
           esc(p.name || p.model) +
           "</h3>" +
           '<p class="text-sm text-slate-500 dark:text-slate-400">' +
           esc(p.model) +
           "</p>" +
-          "</div></a>";
+          '</a>' +
+          (specBadgesHtml
+            ? '<div class="flex flex-wrap gap-1.5 mt-3">' + specBadgesHtml + '</div>'
+            : '') +
+          actionHtml +
+          "</div></div>";
       });
       grid.innerHTML = html;
     }
