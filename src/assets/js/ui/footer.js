@@ -155,7 +155,6 @@
 
     // 容错处理:如果没有导航链接,直接返回(PC 端没有底部导航)
     if (navLinks.length === 0) {
-      console.log('[footer] No bottom nav links found, skipping active state update');
       return;
     }
 
@@ -218,7 +217,6 @@
         needsRemount = true;
       }
       if (needsRemount) {
-        console.log('[footer] Re-mounting after bfcache restoration');
         mount();
       }
     }

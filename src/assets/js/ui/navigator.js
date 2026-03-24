@@ -560,7 +560,6 @@
    * ───────────────────────────────────────────── */
 
   function mount() {
-    console.log('[Navigator] ProductsDropdown exists:', !!global.ProductsDropdown);
     if (global.ProductsDropdown) global.ProductsDropdown.injectAllStyles();
     if (global.SolutionsDropdown) global.SolutionsDropdown.injectAllStyles();
     if (global.ApplicationsDropdown) global.ApplicationsDropdown.injectAllStyles();
@@ -770,7 +769,6 @@
 
     // 容错处理:如果没有导航链接,直接返回(Mobile/Tablet 端可能没有 nav)
     if (navLinks.length === 0) {
-      console.log('[navigator] No nav links found, skipping active state update');
       return;
     }
 
@@ -818,7 +816,6 @@
         }
       }
       if (needsRemount) {
-        console.log('[navigator] Re-mounting after bfcache restoration');
         mount();
       }
     }
@@ -838,7 +835,6 @@
 
       if (newVariant !== lastVariant) {
         lastVariant = newVariant;
-        console.log('[navigator] Viewport crossed breakpoint, re-mounting as', newVariant);
         mount();
         // Re-init mobile menu toggle if switching to mobile
         if (newVariant === 'mobile' && global.MobileMenu && typeof global.MobileMenu.initToggle === 'function') {
@@ -855,11 +851,9 @@
   // Do NOT call updateActive() here without an argument — it would clear the active state
   // that was just set by renderContent → updateHeaderActiveNav.
   document.addEventListener('spa:load', function () {
-    console.log('[navigator] SPA navigation detected');
     // Only re-mount if there is NO header in the document at all.
     // If header exists, active state is managed by SpaRouter.updateHeaderActiveNav().
     if (!document.querySelector('header')) {
-      console.log('[navigator] No header found, re-mounting navigator');
       mount();
     }
   });

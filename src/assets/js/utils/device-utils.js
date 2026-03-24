@@ -216,7 +216,6 @@
   function checkDeviceChange() {
     var currentDeviceType = getDeviceType();
     if (currentDeviceType !== lastDeviceType) {
-      console.log('[DeviceUtils] Device type changed:', lastDeviceType, '->', currentDeviceType);
       lastDeviceType = currentDeviceType;
       
       // 触发所有回调
@@ -261,7 +260,6 @@
     getLastDeviceType: function() { return lastDeviceType; }
   };
 
-  console.log('[DeviceUtils] Loaded successfully');
 
   // 初始化窗口大小变化监听
   if (typeof window !== 'undefined') {
