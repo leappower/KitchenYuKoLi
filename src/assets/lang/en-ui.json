@@ -910,5 +910,16 @@
   "unit_precision": "Precision",
   "unit_temp_control": "Control",
   "unit_timer": "Timer",
-  "unit_trays": "Trays"
+  "unit_trays": "Trays",
+  "pdp_page_title": "Product Details | Yukoli Smart Kitchen Equipment",
+  "pdp_not_found_title": "Product Not Found",
+  "pdp_not_found_desc": "Sorry, we couldn't find this product. Please browse our product catalog.",
+  "pdp_back_to_products": "Back to Products",
+  "pdp_cta_quote": "Get a Quote",
+  "pdp_cta_contact": "Contact Sales",
+  "pdp_highlights": "Product Highlights",
+  "pdp_specs": "Specifications",
+  "pdp_related": "Related Products",
+  "pdp_bottom_title": "Need a Custom Solution?",
+  "pdp_bottom_desc": "Tell us your needs and we'll provide a tailored solution."
 }

@@ -910,5 +910,16 @@
   "unit_precision": "精度",
   "unit_temp_control": "控温",
   "unit_timer": "定时",
-  "unit_trays": "层架"
+  "unit_trays": "层架",
+  "pdp_page_title": "产品详情 | Yukoli 智能商厨设备",
+  "pdp_not_found_title": "产品未找到",
+  "pdp_not_found_desc": "抱歉，未找到该产品。请浏览我们的产品目录。",
+  "pdp_back_to_products": "返回产品中心",
+  "pdp_cta_quote": "获取报价",
+  "pdp_cta_contact": "联系销售",
+  "pdp_highlights": "产品亮点",
+  "pdp_specs": "产品规格",
+  "pdp_related": "相关产品",
+  "pdp_bottom_title": "需要定制方案？",
+  "pdp_bottom_desc": "告诉我们您的需求，我们为您提供专属解决方案。"
 }
