@@ -47,14 +47,15 @@
 <link rel="stylesheet" href="/assets/css/skeleton.css"/>
 <link rel="icon" href="/assets/images/logo_header.webp" type="image/webp">
 
-<script type="application/ld+json">
+<script type="application/ld+json" id="product-jsonld">
 {
   "@context": "https://schema.org",
   "@type": "Product",
   "name": "",
   "description": "",
   "image": "",
-  "brand": { "@type": "Brand", "name": "Yukoli" },
+  "brand": { "@type": "Brand", "name": "YuKoLi" },
+  "manufacturer": { "@type": "Organization", "name": "YuKoLi 跃迁力科技" },
   "offers": { "@type": "Offer", "availability": "https://schema.org/InStock" }
 }
 </script>
@@ -144,6 +145,23 @@ document.addEventListener('DOMContentLoaded', function() {
 
   document.getElementById('breadcrumb-product').textContent = product.name || product.model;
   document.title = (product.name || product.model) + ' | Yukoli 智能商厨设备';
+
+  // Update JSON-LD with product data for SEO
+  (function() {
+    var el = document.getElementById('product-jsonld');
+    if (!el) return;
+    var schema = {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      "name": product.name || product.model,
+      "description": (product.description || product.model).substring(0, 200),
+      "image": "https://www.kitchen.yukoli.com/assets/images/products/" + imgKey + ".webp",
+      "brand": { "@type": "Brand", "name": "YuKoLi" },
+      "manufacturer": { "@type": "Organization", "name": "YuKoLi 跃迁力科技" },
+      "offers": { "@type": "Offer", "availability": "https://schema.org/InStock", "priceCurrency": "USD", "price": product.referencePrice || "" }
+    };
+    el.textContent = JSON.stringify(schema, null, 2);
+  })();
 
   var highlights = Array.isArray(product.highlights) ? product.highlights : [];
   var scenarios = Array.isArray(product.scenarios) ? product.scenarios : [];
