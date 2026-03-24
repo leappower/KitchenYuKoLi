@@ -270,15 +270,15 @@
     var _self = this;
 
     var onScroll = debounce(function () {
-      self._isScrolling = true;
-      self._cancelPulse();
-      self._clearScrollIdleTimer();
-      self._updateBackToTop();
+      _self._isScrolling = true;
+      _self._cancelPulse();
+      _self._clearScrollIdleTimer();
+      _self._updateBackToTop();
 
       // 停止滚动后 10s 触发闪烁
-      self._scrollIdleTimer = setTimeout(function () {
-        self._isScrolling = false;
-        self._triggerPulse();
+      _self._scrollIdleTimer = setTimeout(function () {
+        _self._isScrolling = false;
+        _self._triggerPulse();
       }, 10000);
     }, 50);
 
