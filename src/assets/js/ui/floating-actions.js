@@ -18,7 +18,7 @@
    * 0. CONFIG
    * ───────────────────────────────────────────── */
 
-  var WHATSAPP_HREF = "https://wa.me/8613163756465";
+  var WHATSAPP_HREF = "https://wa.me/947644875109261";
   var LINE_HREF = "https://line.me/R/ti/p/@yourlineid";
   var SCROLL_THRESHOLD = 300;
 

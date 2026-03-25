@@ -15,7 +15,7 @@
   // CONTACT CHANNEL CONFIG
   // ============================================
   /** 规范 WhatsApp 号码（不含 +），其他模块可通过 window.Contacts.whatsapp 读取，避免多处硬编码 */
-  var WHATSAPP_NUMBER = "8613163756465";
+  var WHATSAPP_NUMBER = "947644875109261";
 
   // ============================================
   // CONTACT CHANNEL LAUNCHERS
