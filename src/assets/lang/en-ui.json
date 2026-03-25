@@ -972,7 +972,7 @@
   "support_cta_btn_contact": "Contact Support",
   "support_cta_btn_quote": "Get Quote",
   "support_cta_desc": "YuKoLi service team is ready. Fill out the form or call our service hotline directly.",
-  "support_cta_title": "Need After-Sales Service or Technical Support?",
+  "support_cta_title": "Need Professional Kitchen After-Sales Service?",
   "support_currently_active": "Currently Active:",
   "support_dashboard": "Dashboard",
   "support_direct_line_to_regional_engineers": "Direct line to regional engineers",
@@ -1540,5 +1540,18 @@
   "landing_sp_m3_num": "12",
   "landing_sp_m3_label": "Countries Covered",
   "landing_sp_m4_num": "98%",
-  "landing_sp_m4_label": "Client Satisfaction"
+  "landing_sp_m4_label": "Client Satisfaction",
+  "support_hero_badge_text": "Professional After-Sales Guarantee",
+  "support_hero_title_prefix": "Professional After-Sales",
+  "support_hero_desc": "YuKoLi provides full-lifecycle service from installation to daily operations. Professional engineers cover 10 Southeast Asian countries, ensuring your kitchen equipment runs efficiently at all times.",
+  "support_book_service": "Book Service",
+  "support_map_desc": "Covering major cities across 10 Southeast Asian countries including Thailand, Vietnam, Malaysia, Indonesia, and the Philippines. On-site response within 48 hours. Remote video guidance available for quick issue resolution.",
+  "support_map_search_placeholder2": "Find nearest service center...",
+  "support_map_search_btn": "Search",
+  "support_contact_phone_label": "Phone",
+  "support_service_system_title": "Professional After-Sales Service System",
+  "support_service_system_desc": "From installation to long-term operation, YuKoLi provides complete after-sales coverage. Including free installation guidance, on-site operation training, regular inspection and maintenance, and fast original parts supply.",
+  "support_original_parts": "Original Parts",
+  "support_100_original": "100% Original",
+  "support_sla_guarantee": "SLA Guaranteed"
 }
