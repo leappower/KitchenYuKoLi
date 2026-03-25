@@ -1103,7 +1103,7 @@
       <div class="flex items-center justify-between mb-6">
         <h2 class="text-xl font-bold">🤖 AI模型</h2>
         <div class="flex items-center gap-3">
-          <select id="aiModelsProjectSelect" onchange="onAiModelsProjectChange()" class="px-3 py-1.5 bg-gray-700 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"></select>
+          <span id="aiModelsProjectSelect" class="text-xs px-2.5 py-1.5 bg-indigo-900/40 text-indigo-300 rounded-lg cursor-default">📂 当前项目</span>
         </div>
       </div>
 
@@ -4269,26 +4269,18 @@ function showAiModelsTab(tab) {
 let aiModelsPageLoaded = false;
 
 async function loadAiModelsPage() {
-  // Init project selector once
+  // Show current project as read-only badge
   if (!aiModelsPageLoaded) {
     try {
       const projects = await api('/api/projects');
-      const sel = document.getElementById('aiModelsProjectSelect');
-      sel.innerHTML = projects.map(p => '<option value="' + p.id + '">' + esc(p.name) + '</option>').join('');
+      const badge = document.getElementById('aiModelsProjectSelect');
+      const cur = projects.find(p => p.id === window.currentProject);
+      badge.textContent = '📂 ' + (cur ? cur.name : window.currentProject || '全部');
     } catch(e) {}
     aiModelsPageLoaded = true;
   }
   // Show settings tab by default
   showAiModelsTab('settings');
-}
-
-function onAiModelsProjectChange() {
-  const sel = document.getElementById('aiModelsProjectSelect');
-  currentRoutingProject = sel.value || 'default';
-  // Reload current tab
-  const activeTab = document.querySelector('.ai-tab.bg-indigo-600')?.id?.replace('aitab-', '');
-  if (activeTab === 'routing') loadModelRoutingPage();
-  else if (activeTab === 'analytics') loadModelAnalyticsPage();
 }
 
 async function loadAiModelsSettings() {
@@ -4360,15 +4352,13 @@ const STAGE_LABELS = {
 };
 
 async function loadModelRoutingPage() {
-  // 加载项目列表到选择器
+  // Update project badge (read-only display)
   try {
     const projects = await api('/api/projects');
-    const sel = document.getElementById('aiModelsProjectSelect');
-    const prev = currentRoutingProject;
-    sel.innerHTML = projects.map(p =>
-      '<option value="' + p.id + '"' + (p.id === prev ? ' selected' : '') + '>' + esc(p.name) + '</option>'
-    ).join('');
-    currentRoutingProject = sel.value || 'default';
+    const badge = document.getElementById('aiModelsProjectSelect');
+    const cur = projects.find(p => p.id === window.currentProject);
+    badge.textContent = '📂 ' + (cur ? cur.name : window.currentProject || '全部');
+    currentRoutingProject = window.currentProject || 'default';
   } catch(e) {}
 
   // 加载可用模型
