@@ -577,6 +577,8 @@
    * ───────────────────────────────────────────── */
 
   function mount() {
+    // Inject shared dropdown base styles before any dropdown-specific styles
+    if (global.DropdownBaseStyles) global.DropdownBaseStyles.inject();
     if (global.ProductsDropdown) global.ProductsDropdown.injectAllStyles();
     if (global.SolutionsDropdown) global.SolutionsDropdown.injectAllStyles();
     if (global.ApplicationsDropdown) global.ApplicationsDropdown.injectAllStyles();
@@ -764,6 +766,7 @@
     activeId = activeId || "";
 
     // 确保最新样式已注入（SPA 导航时不会重新 mount）
+    if (global.DropdownBaseStyles) global.DropdownBaseStyles.inject();
     if (global.ProductsDropdown && global.ProductsDropdown.injectAllStyles) {
       global.ProductsDropdown.injectAllStyles();
     }

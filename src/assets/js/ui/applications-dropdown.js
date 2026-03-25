@@ -36,169 +36,23 @@
   /* ───────────────────────── CSS ───────────────────────── */
 
   function injectStyles() {
+    // Shared base styles
+    if (window.DropdownBaseStyles) window.DropdownBaseStyles.inject();
+    // Unique overrides: card size, ROI badge, emoji
     if (document.getElementById("app-dropdown-styles-v1")) return;
-
     var style = document.createElement("style");
     style.id = "app-dropdown-styles-v1";
     style.setAttribute("data-ver", "2026-03-22-v1");
     style.textContent = [
-      /* ===== Trigger ===== */
-      ".app-dropdown-trigger {",
-      "  display: inline-flex;",
-      "  align-items: center;",
-      "  gap: 4px;",
-      "  cursor: pointer;",
-      "  user-select: none;",
-      "  -webkit-tap-highlight-color: transparent;",
-      "}",
+      /* Card size override */
+      ".app-dropdown-card { min-width: 320px; max-width: 420px; }",
 
-      ".app-dropdown-arrow {",
-      "  font-size: 16px;",
-      "  opacity: .5;",
-      "  transition: transform .28s cubic-bezier(.4,0,.2,1);",
-      "}",
-
-      ".app-dropdown-wrap.is-open .app-dropdown-arrow,",
-      ".app-dropdown-wrap:not(.touch-device):hover .app-dropdown-arrow {",
-      "  transform: rotate(180deg);",
-      "}",
-
-      /* ===== Wrap ===== */
-      ".app-dropdown-wrap {",
-      "  position: relative;",
-      "  display: inline-block;",
-      "}",
-
-      /* ===== Panel — iOS spring animation ===== */
-      ".app-dropdown-panel {",
-      "  position: absolute;",
-      "  left: 50%;",
-      "  top: calc(100% + 6px);",
-      "  transform: translateX(-50%) scale(.96);",
-      "  transform-origin: top center;",
-      "  opacity: 0;",
-      "  visibility: hidden;",
-      "  pointer-events: none;",
-      "  transition: opacity .2s ease, transform .25s cubic-bezier(.32,.72,0,1), visibility 0s .2s;",
-      "  z-index: 1200;",
-      "}",
-
-      ".app-dropdown-wrap.is-open .app-dropdown-panel,",
-      ".app-dropdown-wrap:not(.touch-device):hover .app-dropdown-panel {",
-      "  opacity: 1;",
-      "  visibility: visible;",
-      "  pointer-events: auto;",
-      "  transform: translateX(-50%) scale(1);",
-      "  transition: opacity .2s ease, transform .35s cubic-bezier(.32,.72,0,1), visibility 0s 0s;",
-      "}",
-
-      /* ===== Card — iOS system menu (SF-style) ===== */
-      ".app-dropdown-card {",
-      "  background: rgba(246,246,248,1);",
-      "  border-radius: 13px;",
-      "  padding: 4px;",
-      "  min-width: 320px;",
-      "  max-width: 420px;",
-      "  border: .5px solid rgba(0,0,0,.08);",
-      "  box-shadow: 0 0 0 .5px rgba(0,0,0,.04), 0 8px 40px rgba(0,0,0,.12), 0 2px 12px rgba(0,0,0,.08);",
-      "}",
-
-      "html.dark .app-dropdown-card {",
-      "  background: rgba(44,44,46,1);",
-      "  border-color: rgba(255,255,255,.12);",
-      "  box-shadow: 0 0 0 .5px rgba(255,255,255,.06), 0 8px 40px rgba(0,0,0,.4), 0 2px 12px rgba(0,0,0,.3);",
-      "}",
-
-      /* ===== Item — iOS list row ===== */
-      ".app-dropdown-item {",
-      "  display: flex;",
-      "  align-items: center;",
-      "  gap: 10px;",
-      "  padding: 9px 12px;",
-      "  font-size: 13px;",
-      "  font-weight: 500;",
-      "  letter-spacing: -.01em;",
-      "  line-height: 1.38;",
-      "  color: #1d1d1f;",
-      "  text-decoration: none;",
-      "  border-radius: 10px;",
-      "  position: relative;",
-      "  transition: background .1s ease, transform .15s cubic-bezier(.32,.72,0,1);",
-      "}",
-
-      "html.dark .app-dropdown-item {",
-      "  color: #f5f5f7;",
-      "}",
-
-      ".app-dropdown-item:hover {",
-      "  background: rgba(236,91,19,.06);",
-      "}",
-
-      ".app-dropdown-item:active {",
-      "  background: rgba(236,91,19,.12);",
-      "  transform: scale(.98);",
-      "}",
-
-      "html.dark .app-dropdown-item:hover {",
-      "  background: rgba(236,91,19,.10);",
-      "}",
-
-      "html.dark .app-dropdown-item:active {",
-      "  background: rgba(236,91,19,.18);",
-      "}",
-
-      /* ===== Icon — tinted rounded square ===== */
-      ".app-dropdown-icon {",
-      "  width: 28px;",
-      "  height: 28px;",
-      "  border-radius: 7px;",
-      "  background: rgba(236,91,19,.10);",
-      "  display: flex;",
-      "  align-items: center;",
-      "  justify-content: center;",
-      "  flex-shrink: 0;",
-      "}",
-
-      "html.dark .app-dropdown-icon {",
-      "  background: rgba(236,91,19,.18);",
-      "}",
-
-      ".app-dropdown-icon .material-symbols-outlined {",
-      "  font-size: 16px;",
-      "  color: #ec5b13;",
-      "}",
-
-      /* ===== Label ===== */
-      ".app-dropdown-label {",
-      "  flex: 1;",
-      "  min-width: 0;",
-      "  white-space: nowrap;",
-      "  overflow: hidden;",
-      "  text-overflow: ellipsis;",
-      "}",
-
-      /* ===== Emoji Badge ===== */
+      /* Emoji Badge */
       ".app-dropdown-emoji {",
-      "  margin-left: auto;",
-      "  font-size: 13px;",
-      "  line-height: 1;",
-      "  opacity: .85;",
-      "  flex-shrink: 0;",
+      "  margin-left: auto; font-size: 13px; line-height: 1; opacity: .85; flex-shrink: 0;",
       "}",
 
-      /* ===== Chevron ===== */
-      ".app-dropdown-chevron {",
-      "  margin-left: auto;",
-      "  font-size: 14px;",
-      "  color: rgba(60,60,67,.3);",
-      "  flex-shrink: 0;",
-      "}",
-
-      "html.dark .app-dropdown-chevron {",
-      "  color: rgba(235,235,245,.25);",
-      "}",
-
-      /* ===== ROI Badge ===== */
+      /* ROI Badge */
       ".app-roi-badge {",
       "  display: inline-flex; align-items: center; padding: 2px 7px;",
       "  font-size: 10px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase;",
@@ -206,133 +60,9 @@
       "  flex-shrink: 0; line-height: 1.4;",
       "}",
 
-      /* ===== Separator ===== */
-      ".app-dropdown-item + .app-dropdown-item {",
-      "  margin-top: 0;",
-      "}",
-
-      ".app-dropdown-separator {",
-      "  height: .5px;",
-      "  background: rgba(60,60,67,.12);",
-      "  margin: 0 12px 0 50px;",
-      "}",
-
-      "html.dark .app-dropdown-separator {",
-      "  background: rgba(235,235,245,.15);",
-      "}",
-
-      /* ===== Mobile — hide panel, use popup instead ===== */
-      "@media (max-width: 720px) {",
-      "  .app-dropdown-panel { display: none !important; }",
-      "}",
-
-      /* ===== Popup — iOS bottom sheet ===== */
-      ".app-popup-overlay {",
-      "  position: fixed;",
-      "  inset: 0;",
-      "  background: rgba(0,0,0,.35);",
-      "  z-index: 998;",
-      "  animation: adp-fade-in .2s ease;",
-      "}",
-
-      "@keyframes adp-fade-in { from { opacity: 0; } to { opacity: 1; } }",
-
-      ".app-popup-panel {",
-      "  position: fixed;",
-      "  left: 8px;",
-      "  right: 8px;",
-      "  bottom: 0;",
-      "  background: rgba(246,246,248,.97);",
-      "  border-radius: 14px 14px 0 0;",
-      "  transform: translateY(100%);",
-      "  transition: transform .35s cubic-bezier(.32,.72,0,1);",
-      "  z-index: 999;",
-      "  padding: 8px 4px calc(16px + env(safe-area-inset-bottom)) 4px;",
-      "  box-shadow: 0 -2px 20px rgba(0,0,0,.1);",
-      "}",
-
-      ".app-popup-panel.is-open {",
-      "  transform: translateY(0);",
-      "}",
-
-      "html.dark .app-popup-panel {",
-      "  background: rgba(44,44,46,.97);",
-      "  box-shadow: 0 -2px 20px rgba(0,0,0,.4);",
-      "}",
-
-      /* iOS drag indicator */
-      ".app-popup-handle {",
-      "  width: 36px;",
-      "  height: 5px;",
-      "  border-radius: 3px;",
-      "  background: rgba(60,60,67,.25);",
-      "  margin: 0 auto 8px;",
-      "}",
-
-      "html.dark .app-popup-handle {",
-      "  background: rgba(235,235,245,.2);",
-      "}",
-
-      /* Popup items */
-      ".app-popup-item {",
-      "  display: flex;",
-      "  align-items: center;",
-      "  gap: 12px;",
-      "  padding: 12px 16px;",
-      "  font-size: 17px;",
-      "  font-weight: 400;",
-      "  color: #1d1d1f;",
-      "  text-decoration: none;",
-      "  border-radius: 10px;",
-      "  margin: 0 4px;",
-      "  transition: background .1s ease, transform .15s cubic-bezier(.32,.72,0,1);",
-      "}",
-
-      "html.dark .app-popup-item {",
-      "  color: #f5f5f7;",
-      "}",
-
-      ".app-popup-item:hover {",
-      "  background: rgba(236,91,19,.06);",
-      "}",
-
-      "html.dark .app-popup-item:hover {",
-      "  background: rgba(236,91,19,.10);",
-      "}",
-
-      ".app-popup-item:active {",
-      "  background: rgba(236,91,19,.12);",
-      "  transform: scale(.98);",
-      "}",
-
-      "html.dark .app-popup-item:active {",
-      "  background: rgba(236,91,19,.18);",
-      "}",
-
-      ".app-popup-label {",
-      "  flex: 1;",
-      "  min-width: 0;",
-      "}",
-
-      ".app-popup-chevron {",
-      "  font-size: 16px;",
-      "  color: rgba(60,60,67,.3);",
-      "  flex-shrink: 0;",
-      "}",
-
-      "html.dark .app-popup-chevron {",
-      "  color: rgba(235,235,245,.25);",
-      "}",
-
+      /* Popup emoji */
       ".app-popup-emoji {",
-      "  margin-left: auto;",
-      "  font-size: 15px;",
-      "  opacity: .85;",
-      "  flex-shrink: 0;",
-      "}",
-
-      ".app-popup-item + .app-popup-item {",
-      "  border-top: none;",
+      "  margin-left: auto; font-size: 15px; opacity: .85; flex-shrink: 0;",
       "}",
     ].join("\n");
     document.head.appendChild(style);
