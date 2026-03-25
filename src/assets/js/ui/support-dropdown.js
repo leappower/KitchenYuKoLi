@@ -9,11 +9,11 @@
   /* ───────────────────────── DATA ───────────────────────── */
 
   var SUBSERIES = [
-    { key: "nav_support_installation", icon: "construction", emoji: "" },
-    { key: "nav_support_warranty", icon: "verified", emoji: "" },
-    { key: "nav_support_spare_parts", icon: "build_circle", emoji: "" },
-    { key: "nav_support_training", icon: "school", emoji: "" },
-    { key: "nav_support_faq", icon: "contact_support", emoji: "" },
+    { key: "nav_support_installation", icon: "construction", href: "/support/#installation", emoji: "" },
+    { key: "nav_support_warranty", icon: "verified", href: "/support/#warranty", emoji: "" },
+    { key: "nav_support_spare_parts", icon: "build_circle", href: "/support/#spare-parts", emoji: "" },
+    { key: "nav_support_training", icon: "school", href: "/support/#training", emoji: "" },
+    { key: "nav_support_faq", icon: "contact_support", href: "/support/#faq", emoji: "" },
   ];
 
   /* ───────────────────────── HELPERS ───────────────────────── */
@@ -326,11 +326,12 @@
   /* ───────────────────────── BUILDERS ───────────────────────── */
 
   function buildItem(sub, href) {
+    var itemHref = sub.href || href;
     var chevron = '<span class="material-symbols-outlined sup-dropdown-chevron">chevron_right</span>';
     var emojiHtml = sub.emoji ? '<span class="sup-dropdown-emoji">' + sub.emoji + "</span>" : "";
     return (
       '<a href="' +
-      esc(href) +
+      esc(itemHref) +
       '" class="sup-dropdown-item">' +
       '<span class="sup-dropdown-icon">' +
       '<span class="material-symbols-outlined">' +
@@ -424,11 +425,12 @@
     var handle = '<div class="sup-popup-handle"></div>';
 
     var items = SUBSERIES.map(function (s) {
+      var itemHref = s.href || href;
       var chevron = '<span class="material-symbols-outlined sup-popup-chevron">chevron_right</span>';
       var emojiHtml = s.emoji ? '<span class="sup-popup-emoji">' + s.emoji + "</span>" : "";
       return (
         '<a href="' +
-        esc(href) +
+        esc(itemHref) +
         '" class="sup-popup-item">' +
         '<span class="sup-dropdown-icon">' +
         '<span class="material-symbols-outlined">' +
