@@ -38,7 +38,7 @@ import './assets/js/init.js';            // Initialization
 import './assets/js/utils.js';           // window.AppUtils
 import './assets/js/main.js';            // Lazy loading, error handling, app modules
 import './assets/js/contacts.js';        // window contact helpers
-import './assets/js/navigation.js';      // window navigation helpers
+// navigation.js REMOVED: functions duplicated in floating-actions.js, mobile-menu.js, page-interactions.js
 import './assets/js/sidebar.js';         // window sidebar helpers
 // import './assets/js/smart-popup.js';     // REMOVED: now in assets/js/ui/smart-popup.js, loaded directly by pages
 import './assets/js/product-list.js';    // window.ProductList
