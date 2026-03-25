@@ -365,8 +365,7 @@
     safeBack: safeBack,
     PAGES: PAGES,
   };
-})(window);
-═════════════════════ */
+
   // Auto-initialize when DOM is ready
   if (global.CommonUtils && typeof global.CommonUtils.ready === "function") {
     global.CommonUtils.ready(init);
