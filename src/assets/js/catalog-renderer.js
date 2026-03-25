@@ -83,6 +83,23 @@
     }
 
     var activeCategory = "all";
+
+    // 支持 URL 参数预选分类：/catalog/?cat=cutting
+    var catParam = new URLSearchParams(window.location.search).get("cat");
+    if (catParam) {
+      var catKeyMap = {
+        cutting: "nav_products_cutting",
+        stirfry: "nav_products_stirfry",
+        frying: "nav_products_frying",
+        stewing: "nav_products_stewing",
+        steaming: "nav_products_steaming",
+        other: "nav_products_other",
+      };
+      if (catKeyMap[catParam]) {
+        activeCategory = catKeyMap[catParam];
+      }
+    }
+
     var searchTerm = "";
 
     // Render filters

@@ -10,12 +10,12 @@
   /* ───────────────────────── DATA ───────────────────────── */
 
   var SUBSERIES = [
-    { key: "nav_products_cutting", icon: "content_cut", emoji: "" },
-    { key: "nav_products_stirfry", icon: "local_fire_department", emoji: "🔥" },
-    { key: "nav_products_frying", icon: "outdoor_grill", emoji: "" },
-    { key: "nav_products_stewing", icon: "soup_kitchen", emoji: "" },
-    { key: "nav_products_steaming", icon: "cloud", emoji: "" },
-    { key: "nav_products_other", icon: "more_horiz", emoji: "" },
+    { key: "nav_products_cutting", icon: "content_cut", emoji: "", href: "/catalog/?cat=cutting" },
+    { key: "nav_products_stirfry", icon: "local_fire_department", emoji: "🔥", href: "/catalog/?cat=stirfry" },
+    { key: "nav_products_frying", icon: "outdoor_grill", emoji: "", href: "/catalog/?cat=frying" },
+    { key: "nav_products_stewing", icon: "soup_kitchen", emoji: "", href: "/catalog/?cat=stewing" },
+    { key: "nav_products_steaming", icon: "cloud", emoji: "", href: "/catalog/?cat=steaming" },
+    { key: "nav_products_other", icon: "more_horiz", emoji: "", href: "/catalog/?cat=other" },
   ];
 
   /* ───────────────────────── HELPERS ───────────────────────── */
@@ -364,11 +364,12 @@
   /* ───────────────────────── BUILDERS ───────────────────────── */
 
   function buildItem(sub, href) {
+    var itemHref = sub.href || href;
     var chevron = '<span class="material-symbols-outlined prod-dropdown-chevron">chevron_right</span>';
     var emojiHtml = sub.emoji ? '<span class="prod-dropdown-emoji">' + sub.emoji + "</span>" : "";
     return (
       '<a href="' +
-      esc(href) +
+      esc(itemHref) +
       '" class="prod-dropdown-item">' +
       '<span class="prod-dropdown-icon">' +
       '<span class="material-symbols-outlined">' +
@@ -477,11 +478,12 @@
     var handle = '<div class="prod-popup-handle"></div>';
 
     var items = SUBSERIES.map(function (s) {
+      var itemHref = s.href || href;
       var chevron = '<span class="material-symbols-outlined prod-popup-chevron">chevron_right</span>';
       var emojiHtml = s.emoji ? '<span class="prod-popup-emoji">' + s.emoji + "</span>" : "";
       return (
         '<a href="' +
-        esc(href) +
+        esc(itemHref) +
         '" class="prod-popup-item">' +
         '<span class="prod-dropdown-icon">' +
         '<span class="material-symbols-outlined">' +
