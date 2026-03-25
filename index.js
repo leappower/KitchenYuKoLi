@@ -1076,6 +1076,21 @@ function initDB() {
     );
   `);
 
+  // ── 系统日志表（持久化，带项目维度） ──
+  db.exec(`
+    CREATE TABLE IF NOT EXISTS system_logs (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      project_id TEXT,
+      level TEXT DEFAULT 'info',
+      action TEXT DEFAULT '',
+      message TEXT DEFAULT '',
+      detail TEXT DEFAULT '',
+      created_at TEXT
+    )
+  `);
+  db.exec('CREATE INDEX IF NOT EXISTS idx_syslog_project ON system_logs(project_id)');
+  db.exec('CREATE INDEX IF NOT EXISTS idx_syslog_time ON system_logs(created_at DESC)');
+
   // 为现有业务表加 project_id（默认 'default'）
   for (const table of ['customers', 'customers_v2', 'messages', 'messages_v2', 'deals',
     'customer_timeline', 'customer_channels', 'message_queue', 'knowledge_docs',
@@ -2409,6 +2424,7 @@ function checkEscalation(customerId, customerData, projectId = '') {
           'INSERT INTO escalation_events (customer_id, event_type, reason, severity, status, project_id) VALUES (?, ?, ?, ?, ?, ?)'
         ).run(customerId, rule.type, rule.reason, rule.severity, 'open', projectId || '');
         console.log(`🚨 Escalation: ${rule.type} for ${customerId} (${rule.severity}) - ${rule.reason}`);
+        projectLog(projectId || '', 'warn', 'escalation', `触发升级: ${rule.type}`, `客户${customerId} - ${rule.reason}`);
         return { escalated: true, type: rule.type, severity: rule.severity, reason: rule.reason };
       }
     }
@@ -2739,6 +2755,7 @@ async function generateSalesReply(phone, userMessage, accountId = 'default', cha
 
     console.log(`📤 Final reply: ${finalReply.slice(0, 100)}`);
     console.log(`⏱️ Total time: ${Date.now() - startTime}ms`);
+    projectLog(projectId || '', 'info', 'ai_reply', `AI回复已发送`, `${phone} - 耗时${Date.now() - startTime}ms`);
     console.log(`${'='.repeat(50)}\n`);
 
     // 更新最近一条 AI 调用日志的汇总字段
@@ -3103,6 +3120,7 @@ async function processReplyWithIntervene(phone, content, accountId, channel, ada
       updateMessageStatus(inboundMsgs[0].id, 'replied');
     }
     console.log(`🖐️ Intervene mode: reply saved as pending for ${phone}`);
+    projectLog(projectId || '', 'info', 'intervene', `回复待审核`, `${phone}`);
   } else {
     // CRM: 更新统计 + 时间线
     try {
@@ -3573,6 +3591,7 @@ const RETRY_DELAYS = [5000, 30000, 180000]; // 5s, 30s, 180s
 async function throttledAIProcess(phone, content, accountId, channel, adapter) {
   const projectId = getAccountProject(accountId);
   console.log(`🧠 AI process [${projectId}] from ${phone}`);
+  projectLog(projectId, 'info', 'ai_process', `收到消息并处理`, `${phone}`);
 
   await acquireAI(projectId);
   try {
@@ -3910,6 +3929,7 @@ async function processFollowUps() {
 
         sent++;
         console.log(`✅ [FollowUp] Sent to ${customer.display_name || customer.phone} (attempt ${totalAttempts + 1})`);
+        projectLog(project.id, 'info', 'follow_up', `跟进消息已发送`, `${customer.display_name || customer.phone} 第${totalAttempts + 1}次`);
       } catch (err) {
         console.error(`❌ [FollowUp] Error for ${customer.display_name || customer.phone}:`, err.message);
         // 记录失败
@@ -4226,6 +4246,7 @@ app.post('/api/projects', (req, res) => {
       JSON.stringify(ai_persona || {}), JSON.stringify(sales_strategy || {}), JSON.stringify(follow_up_config || {})
     );
     res.json({ id, name: name.trim(), message: 'Project created' });
+    projectLog(id, 'info', 'project_create', `项目创建`, name.trim());
   } catch (e) { console.error('[Projects] create error:', e); res.status(500).json({ error: e.message }); }
 });
 
@@ -4246,6 +4267,7 @@ app.put('/api/projects/:id', (req, res) => {
       req.params.id
     );
     res.json({ message: 'Project updated' });
+    projectLog(req.params.id, 'info', 'project_update', `项目配置更新`, name || req.params.id);
   } catch (e) { console.error('[Projects] update error:', e); res.status(500).json({ error: e.message }); }
 });
 
@@ -4257,6 +4279,7 @@ app.delete('/api/projects/:id', (req, res) => {
     if (p.status === 'active') return res.status(400).json({ error: 'Deactivate project before deleting' });
     // 直接删除（不再迁移数据到 default）
     db.prepare('DELETE FROM projects WHERE id = ?').run(req.params.id);
+    projectLog(req.params.id, 'warn', 'project_delete', `项目已删除`, req.params.id);
     res.json({ message: 'Project deleted' });
   } catch (e) { console.error('[Projects] delete error:', e); res.status(500).json({ error: e.message }); }
 });
@@ -4449,6 +4472,7 @@ async function rebuildProjectEmbeddings(projectId) {
     if (i + 20 < chunks.length) await new Promise(r => setTimeout(r, 200));
   }
   console.log(`✅ Embeddings rebuilt for project ${projectId}`);
+  projectLog(projectId, 'info', 'knowledge', 'Embeddings重建完成', `${chunks.length} chunks`);
 }
 
 // ============================================================
@@ -5288,12 +5312,24 @@ const adminLogs = [];
 const origConsole = { log: console.log, error: console.error, warn: console.warn };
 function captureLog(level, args) {
   const msg = args.map(a => typeof a === 'object' ? JSON.stringify(a) : String(a)).join(' ');
-  adminLogs.unshift({ time: new Date().toISOString(), level, msg });
+  adminLogs.unshift({ time: new Date().toISOString(), level, msg, type: 'system' });
   if (adminLogs.length > 500) adminLogs.length = 500;
 }
 console.log = (...args) => { captureLog('info', args); origConsole.log(...args); };
 console.error = (...args) => { captureLog('error', args); origConsole.error(...args); };
 console.warn = (...args) => { captureLog('warn', args); origConsole.warn(...args); };
+
+// 项目级持久化日志（写入 DB + 缓存到内存）
+function projectLog(projectId, level, action, msg, detail = '') {
+  const time = new Date().toISOString();
+  try {
+    db.prepare('INSERT INTO system_logs (project_id, level, action, message, detail, created_at) VALUES (?, ?, ?, ?, ?, ?)')
+      .run(projectId || null, level, action, msg, detail);
+  } catch(e) {}
+  // 同步到内存缓存
+  adminLogs.unshift({ time, level, msg: `[${action}] ${msg}${detail ? ' — ' + detail : ''}`, type: 'project', project_id: projectId, action });
+  if (adminLogs.length > 500) adminLogs.length = 500;
+}
 
 // Auth middleware (dynamic token)
 function adminAuth(req, res, next) {
@@ -5501,8 +5537,44 @@ adminApp.post('/admin/api/customers/:phone/notes', (req, res) => {
 
 // Logs
 adminApp.get('/admin/api/logs', (req, res) => {
-  const limit = Math.min(parseInt(req.query.limit) || 100, 500);
-  res.json(adminLogs.slice(0, limit));
+  try {
+    const limit = Math.min(parseInt(req.query.limit) || 200, 500);
+    const { projectId, level, type } = req.query;
+
+    // 1. 从 DB 读取项目日志（持久化）
+    let dbLogs = [];
+    const conds = [];
+    const params = [];
+    if (projectId && projectId !== 'default' && projectId !== 'all') {
+      conds.push('(project_id = ? OR project_id IS NULL)');
+      params.push(projectId);
+    }
+    if (level && level !== 'all') {
+      conds.push('level = ?');
+      params.push(level);
+    }
+    const where = conds.length ? 'WHERE ' + conds.join(' AND ') : '';
+    dbLogs = db.prepare(`SELECT time, level, message as msg, project_id, action, 'project' as type FROM (SELECT created_at as time, level, message, project_id, action FROM system_logs ${where} ORDER BY created_at DESC LIMIT ?)`)
+      .all(...params, limit).map(r => ({ ...r, type: 'project' }));
+
+    // 2. 合并内存系统日志
+    let memLogs = adminLogs;
+    if (type === 'project') memLogs = [];
+    else if (type === 'system') dbLogs = [];
+    if (level && level !== 'all') memLogs = memLogs.filter(l => l.level === level);
+
+    // 3. 合并去重（按 time+msg），排序
+    const seen = new Set();
+    const merged = [];
+    for (const l of [...dbLogs, ...memLogs]) {
+      const key = l.time + '|' + (l.msg || '').slice(0, 80);
+      if (!seen.has(key)) { seen.add(key); merged.push(l); }
+    }
+    merged.sort((a, b) => b.time.localeCompare(a.time));
+    res.json(merged.slice(0, limit));
+  } catch(e) {
+    res.status(500).json({ error: e.message });
+  }
 });
 
 // Chat test

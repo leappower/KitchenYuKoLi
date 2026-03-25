@@ -476,7 +476,7 @@
     <!-- Logs -->
     <div id="page-logs" class="page hidden fade-in h-full overflow-hidden flex flex-col"><div class="p-6 overflow-y-auto flex-1 min-h-0">
       <h2 class="text-xl font-bold mb-6">📋 系统日志</h2>
-      <div class="flex gap-3 mb-4">
+      <div class="flex gap-3 mb-4 flex-wrap items-center">
         <button onclick="loadLogs()" class="px-4 py-2 bg-gray-700 hover:bg-gray-600 rounded-lg transition">刷新</button>
         <select id="logFilter" onchange="filterLogs()" class="px-3 py-2 bg-gray-700 rounded-lg text-sm">
           <option value="all">全部</option>
@@ -484,6 +484,12 @@
           <option value="warn">Warn</option>
           <option value="error">Error</option>
         </select>
+        <select id="logTypeFilter" onchange="filterLogs()" class="px-3 py-2 bg-gray-700 rounded-lg text-sm">
+          <option value="all">全部类型</option>
+          <option value="project">项目日志</option>
+          <option value="system">系统日志</option>
+        </select>
+        <span id="logsProjectBadge" class="text-xs px-2.5 py-1.5 bg-indigo-900/40 text-indigo-300 rounded-lg ml-auto cursor-default">📂 当前项目</span>
       </div>
       <div id="logContainer" class="bg-gray-800 rounded-xl p-4 h-[60vh] overflow-y-auto font-mono text-sm space-y-0.5"></div>
     </div>
@@ -1553,8 +1559,10 @@ function updateProjectBadges() {
   const badge = '📂 ' + label;
   const kb = document.getElementById('knowledgeProjectBadge');
   const ab = document.getElementById('analyticsProjectBadge');
+  const lb = document.getElementById('logsProjectBadge');
   if (kb) kb.textContent = badge;
   if (ab) ab.textContent = badge;
+  if (lb) lb.textContent = badge;
 }
 
 async function refreshCurrentPageData() {
@@ -2948,16 +2956,34 @@ async function deleteProject(id, name) {
 }
 
 async function loadLogs() {
-  allLogs = await api('/admin/api/logs?limit=300');
+  const pid = getPid();
+  const typeFilter = document.getElementById('logTypeFilter').value;
+  const params = new URLSearchParams({ limit: 300 });
+  if (pid && pid !== 'default' && pid !== 'all') params.set('projectId', pid);
+  if (typeFilter !== 'all') params.set('type', typeFilter);
+  allLogs = await api('/admin/api/logs?' + params.toString());
   filterLogs();
+  // Update badge
+  const badge = document.getElementById('logsProjectBadge');
+  const sel = document.getElementById('globalProject');
+  const label = sel?.selectedOptions?.[0]?.textContent || '';
+  if (badge && label) badge.textContent = '📂 ' + label;
 }
 
 function filterLogs() {
   const filter = document.getElementById('logFilter').value;
-  const filtered = filter === 'all' ? allLogs : allLogs.filter(l => l.level === filter);
-  document.getElementById('logContainer').innerHTML = filtered.map(l =>
-    `<div class="log-${l.level}"><span class="text-gray-500">[${l.time}]</span> <span class="text-gray-600">[${l.level}]</span> ${esc(l.msg)}</div>`
-  ).join('');
+  const typeFilter = document.getElementById('logTypeFilter').value;
+  const filtered = allLogs.filter(l => {
+    if (filter !== 'all' && l.level !== filter) return false;
+    if (typeFilter !== 'all' && l.type !== typeFilter) return false;
+    return true;
+  });
+  document.getElementById('logContainer').innerHTML = filtered.map(l => {
+    const tag = l.type === 'project'
+      ? '<span class="text-indigo-400 text-xs px-1.5 py-0.5 bg-indigo-900/30 rounded">项目</span>'
+      : '<span class="text-gray-500 text-xs px-1.5 py-0.5 bg-gray-700/50 rounded">系统</span>';
+    return `<div class="log-${l.level}"><span class="text-gray-500">[${l.time}]</span> ${tag} <span class="text-gray-600">[${l.level}]</span> ${esc(l.msg)}</div>`;
+  }).join('');
 }
 
 // Settings
