@@ -94,7 +94,7 @@
       children: [
         { key: "nav_contact_form", icon: "mail", href: "/contact/" },
         { key: "nav_contact_locations", icon: "location_on", href: "/contact/" },
-        { key: "nav_contact_whatsapp", icon: "chat", href: "https://wa.me/16478158194", isWhatsApp: true },
+        { key: "nav_contact_whatsapp", icon: "chat", href: "https://wa.me/8613163756465", isWhatsApp: true },
       ],
     },
   ];
