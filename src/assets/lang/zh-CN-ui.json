@@ -972,7 +972,7 @@
   "support_cta_btn_contact": "联系客服",
   "support_cta_btn_quote": "获取报价",
   "support_cta_desc": "YuKoLi 服务团队随时为您服务。填写表单或直接拨打服务热线。",
-  "support_cta_title": "需要售后服务或技术支持？",
+  "support_cta_title": "需要专业的厨具售后服务？",
   "support_currently_active": "当前活跃：",
   "support_dashboard": "仪表盘",
   "support_direct_line_to_regional_engineers": "直通区域工程师",
@@ -1540,5 +1540,18 @@
   "landing_sp_m3_num": "12",
   "landing_sp_m3_label": "覆盖国家",
   "landing_sp_m4_num": "98%",
-  "landing_sp_m4_label": "客户满意度"
+  "landing_sp_m4_label": "客户满意度",
+  "support_hero_badge_text": "专业售后保障",
+  "support_hero_title_prefix": "专业售后保障",
+  "support_hero_desc": "YuKoLi 提供从设备安装到日常运维的全生命周期服务。专业工程师团队覆盖东南亚 10 国，确保您的厨具设备始终高效运转。",
+  "support_book_service": "预约服务",
+  "support_map_desc": "覆盖泰国、越南、马来西亚、印度尼西亚、菲律宾等东南亚 10 国主要城市，48 小时内上门响应。支持远程视频指导，快速解决常见问题。",
+  "support_map_search_placeholder2": "查找最近的服务中心...",
+  "support_map_search_btn": "搜索",
+  "support_contact_phone_label": "电话",
+  "support_service_system_title": "专业售后服务体系",
+  "support_service_system_desc": "从设备安装到长期运维，YuKoLi 提供完整的售后保障。包含免费安装指导、现场操作培训、定期巡检保养，以及原厂配件快速供应。",
+  "support_original_parts": "原厂配件",
+  "support_100_original": "100% 原厂",
+  "support_sla_guarantee": "SLA 保障"
 }
