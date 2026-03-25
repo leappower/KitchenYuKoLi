@@ -90,12 +90,36 @@
           <div class="bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 p-5">
             <h2 class="text-xl font-bold mb-4 flex items-center gap-2">
               <span class="material-symbols-outlined text-primary">fact_check</span>
-              <span data-i18n="pdp_specs_title">产品规格</span>
+              <span data-i18n="pdp_spec_title">产品规格</span>
             </h2>
             <div class="grid grid-cols-1 gap-3" id="specs-grid">
-              <div class="pdp-spec-placeholder text-center py-8 text-slate-400">
-                <span class="material-symbols-outlined text-3xl mb-2 block">inventory_2</span>
-                <p data-i18n="pdp_specs_placeholder" class="text-sm">选择产品后显示详细规格</p>
+              <div class="flex items-center p-3 rounded-lg bg-slate-50 dark:bg-slate-700/50">
+                <span class="text-sm text-slate-500 dark:text-slate-400 font-medium" data-i18n="pdp_spec_model">产品型号</span>
+                <span class="text-sm font-medium ml-auto">—</span>
+              </div>
+              <div class="flex items-center p-3 rounded-lg bg-slate-50 dark:bg-slate-700/50">
+                <span class="text-sm text-slate-500 dark:text-slate-400 font-medium" data-i18n="pdp_spec_power">额定功率</span>
+                <span class="text-sm font-medium ml-auto">—</span>
+              </div>
+              <div class="flex items-center p-3 rounded-lg bg-slate-50 dark:bg-slate-700/50">
+                <span class="text-sm text-slate-500 dark:text-slate-400 font-medium" data-i18n="pdp_spec_voltage">电压</span>
+                <span class="text-sm font-medium ml-auto">—</span>
+              </div>
+              <div class="flex items-center p-3 rounded-lg bg-slate-50 dark:bg-slate-700/50">
+                <span class="text-sm text-slate-500 dark:text-slate-400 font-medium" data-i18n="pdp_spec_dimension">外形尺寸</span>
+                <span class="text-sm font-medium ml-auto">—</span>
+              </div>
+              <div class="flex items-center p-3 rounded-lg bg-slate-50 dark:bg-slate-700/50">
+                <span class="text-sm text-slate-500 dark:text-slate-400 font-medium" data-i18n="pdp_spec_capacity">容量/产量</span>
+                <span class="text-sm font-medium ml-auto">—</span>
+              </div>
+              <div class="flex items-center p-3 rounded-lg bg-slate-50 dark:bg-slate-700/50">
+                <span class="text-sm text-slate-500 dark:text-slate-400 font-medium" data-i18n="pdp_spec_material">材质</span>
+                <span class="text-sm font-medium ml-auto">—</span>
+              </div>
+              <div class="flex items-center p-3 rounded-lg bg-slate-50 dark:bg-slate-700/50">
+                <span class="text-sm text-slate-500 dark:text-slate-400 font-medium" data-i18n="pdp_spec_cert">认证标准</span>
+                <span class="text-sm font-medium ml-auto">—</span>
               </div>
             </div>
           </div>
@@ -104,14 +128,49 @@
         <!-- Related Products -->
         <section class="mb-8 px-4">
           <div class="bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 p-5">
-            <h2 class="text-xl font-bold mb-4 flex items-center gap-2">
-              <span class="material-symbols-outlined text-primary">recommend</span>
-              <span data-i18n="pdp_related_title">推荐产品</span>
-            </h2>
+            <div class="flex items-center justify-between mb-4">
+              <h2 class="text-xl font-bold flex items-center gap-2">
+                <span class="material-symbols-outlined text-primary">recommend</span>
+                <span data-i18n="pdp_related_title">相关推荐</span>
+              </h2>
+              <a href="/products/" class="text-sm text-primary font-semibold hover:underline" data-i18n="pdp_related_viewall">查看全部 →</a>
+            </div>
             <div class="grid grid-cols-1 gap-4" id="related-products">
-              <div class="pdp-related-placeholder text-center py-8 text-slate-400">
-                <span class="material-symbols-outlined text-3xl mb-2 block">category</span>
-                <p data-i18n="pdp_related_placeholder" class="text-sm">浏览更多同类产品</p>
+              <div class="group rounded-xl border border-slate-200 dark:border-slate-700 overflow-hidden">
+                <div class="aspect-square bg-gradient-to-br from-slate-100 to-slate-200 dark:from-slate-800 dark:to-slate-700 flex items-center justify-center">
+                  <span class="material-symbols-outlined text-4xl text-slate-300 dark:text-slate-600">kitchen</span>
+                </div>
+                <div class="p-4">
+                  <h3 class="font-bold text-sm mb-1" data-i18n="pdp_related_placeholder_1_name">智能炒菜机器人</h3>
+                  <p class="text-xs text-slate-500" data-i18n="pdp_related_placeholder_1_cat">烹饪设备</p>
+                </div>
+              </div>
+              <div class="group rounded-xl border border-slate-200 dark:border-slate-700 overflow-hidden">
+                <div class="aspect-square bg-gradient-to-br from-slate-100 to-slate-200 dark:from-slate-800 dark:to-slate-700 flex items-center justify-center">
+                  <span class="material-symbols-outlined text-4xl text-slate-300 dark:text-slate-600">kitchen</span>
+                </div>
+                <div class="p-4">
+                  <h3 class="font-bold text-sm mb-1" data-i18n="pdp_related_placeholder_2_name">商用万能蒸烤箱</h3>
+                  <p class="text-xs text-slate-500" data-i18n="pdp_related_placeholder_2_cat">烘焙设备</p>
+                </div>
+              </div>
+              <div class="group rounded-xl border border-slate-200 dark:border-slate-700 overflow-hidden">
+                <div class="aspect-square bg-gradient-to-br from-slate-100 to-slate-200 dark:from-slate-800 dark:to-slate-700 flex items-center justify-center">
+                  <span class="material-symbols-outlined text-4xl text-slate-300 dark:text-slate-600">kitchen</span>
+                </div>
+                <div class="p-4">
+                  <h3 class="font-bold text-sm mb-1" data-i18n="pdp_related_placeholder_3_name">不锈钢工作台</h3>
+                  <p class="text-xs text-slate-500" data-i18n="pdp_related_placeholder_3_cat">备餐设备</p>
+                </div>
+              </div>
+              <div class="group rounded-xl border border-slate-200 dark:border-slate-700 overflow-hidden">
+                <div class="aspect-square bg-gradient-to-br from-slate-100 to-slate-200 dark:from-slate-800 dark:to-slate-700 flex items-center justify-center">
+                  <span class="material-symbols-outlined text-4xl text-slate-300 dark:text-slate-600">kitchen</span>
+                </div>
+                <div class="p-4">
+                  <h3 class="font-bold text-sm mb-1" data-i18n="pdp_related_placeholder_4_name">四门冷藏柜</h3>
+                  <p class="text-xs text-slate-500" data-i18n="pdp_related_placeholder_4_cat">冷藏设备</p>
+                </div>
               </div>
             </div>
           </div>
