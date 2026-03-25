@@ -116,28 +116,6 @@
       quote_equipment: PAGES.products,
     };
 
-    // Priority 2: Text-based mapping (fallback, language-dependent)
-    var textLinkMap = {
-      Hardware: PAGES.products,
-      Solutions: PAGES.products,
-      "IoT OS": PAGES.support,
-      IoT: PAGES.support,
-      "ROI Calculator": PAGES.roiCalculator,
-      "Case Studies": PAGES.caseStudies,
-      About: PAGES.home,
-      Support: PAGES.support,
-      Dashboard: PAGES.home,
-      Inventory: PAGES.products,
-      Analytics: PAGES.products,
-      Products: PAGES.products,
-      Home: PAGES.home,
-      Equipment: PAGES.products,
-      Insights: PAGES.caseStudies,
-      Config: PAGES.quote,
-      "ESG Report": "/home/",
-      "Global Benchmarks": "/home/",
-    };
-
     var allLinks = document.querySelectorAll('a[href="#"], nav a');
 
     for (var i = 0; i < allLinks.length; i++) {
@@ -148,14 +126,6 @@
       var key = el.getAttribute("data-i18n");
       if (key && i18nLinkMap[key]) {
         href = i18nLinkMap[key];
-      }
-
-      // Priority 2: Match by text content (fallback)
-      if (!href) {
-        var text = el.textContent.trim();
-        if (textLinkMap[text]) {
-          href = textLinkMap[text];
-        }
       }
 
       // Apply resolved href
@@ -186,13 +156,11 @@
   function wireQuoteButtons() {
     if (typeof global.showSmartPopupManual === "function") return;
     var quoteI18nKeys = ["nav_get_quote", "landing_request_quote", "quote_get_a_quote"];
-    var quoteFallbackTexts = ["Get a Quote", "Request a Quote"];
     var btns = document.querySelectorAll("button");
     for (var i = 0; i < btns.length; i++) {
       (function (btn) {
         var key = btn.getAttribute("data-i18n");
-        var text = btn.textContent.trim();
-        if (quoteI18nKeys.indexOf(key) !== -1 || quoteFallbackTexts.indexOf(text) !== -1) {
+        if (quoteI18nKeys.indexOf(key) !== -1) {
           btn.addEventListener("click", function () {
             navigate(PAGES.quote);
           });
@@ -380,6 +348,25 @@
   /* ═══════════════════════════════════════════════════════════════════
      SECTION 15: AUTO-START & EXPORTS
      ═══════════════════════════════════════════════════════════════════ */
+  // Auto-initialize when DOM is ready
+  if (global.CommonUtils && typeof global.CommonUtils.ready === "function") {
+    global.CommonUtils.ready(init);
+  } else if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", init);
+  } else {
+    init();
+  }
+  // Setup bfcache recovery handlers
+  setupBfcacheRecovery();
+  // Export public API for debugging and external use
+  global.YukoliRouter = {
+    navigate: navigate,
+    whatsappHref: whatsappHref,
+    safeBack: safeBack,
+    PAGES: PAGES,
+  };
+})(window);
+═════════════════════ */
   // Auto-initialize when DOM is ready
   if (global.CommonUtils && typeof global.CommonUtils.ready === "function") {
     global.CommonUtils.ready(init);
