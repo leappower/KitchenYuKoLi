@@ -10,11 +10,11 @@
 
   /** Application scenarios (5 items) */
   var SUBSERIES = [
-    { key: "nav_applications_fastfood", icon: "ramen_dining", emoji: "" },
-    { key: "nav_applications_hotpot", icon: "local_fire_department", emoji: "" },
-    { key: "nav_applications_cloud_kitchen", icon: "delivery_dining", emoji: "" },
-    { key: "nav_applications_canteen", icon: "restaurant", emoji: "" },
-    { key: "nav_applications_thai", icon: "public", emoji: "" },
+    { key: "nav_applications_fastfood", icon: "ramen_dining", href: "/applications/fast-food/", emoji: "" },
+    { key: "nav_applications_hotpot", icon: "local_fire_department", href: "/applications/hotpot/", emoji: "" },
+    { key: "nav_applications_cloud_kitchen", icon: "delivery_dining", href: "/applications/cloud-kitchen/", emoji: "" },
+    { key: "nav_applications_canteen", icon: "restaurant", href: "/applications/canteen/", emoji: "" },
+    { key: "nav_applications_thai", icon: "public", href: "/applications/southeast-asian/", emoji: "" },
   ];
 
   /** Bottom links (Case Studies + ROI) */
@@ -341,11 +341,12 @@
   /* ───────────────────────── BUILDERS ───────────────────────── */
 
   function buildItem(sub, href) {
+    var itemHref = sub.href || href;
     var chevron = '<span class="material-symbols-outlined app-dropdown-chevron">chevron_right</span>';
     var emojiHtml = sub.emoji ? '<span class="app-dropdown-emoji">' + sub.emoji + "</span>" : "";
     return (
       '<a href="' +
-      esc(href) +
+      esc(itemHref) +
       '" class="app-dropdown-item">' +
       '<span class="app-dropdown-icon">' +
       '<span class="material-symbols-outlined">' +
@@ -470,11 +471,12 @@
     var handle = '<div class="app-popup-handle"></div>';
 
     var items = SUBSERIES.map(function (s) {
+      var itemHref = s.href || href;
       var chevron = '<span class="material-symbols-outlined app-popup-chevron">chevron_right</span>';
       var emojiHtml = s.emoji ? '<span class="app-popup-emoji">' + s.emoji + "</span>" : "";
       return (
         '<a href="' +
-        esc(href) +
+        esc(itemHref) +
         '" class="app-popup-item">' +
         '<span class="app-dropdown-icon">' +
         '<span class="material-symbols-outlined">' +
