@@ -596,6 +596,14 @@
         continue;
       }
 
+      // If <navigator> already contains a <header> (pre-rendered in HTML),
+      // unwrap it: replace <navigator> with its child <header>. No rebuild needed.
+      var existingHeader = el.querySelector("header");
+      if (existingHeader) {
+        el.parentNode.replaceChild(existingHeader, el);
+        continue;
+      }
+
       var variant = el.getAttribute("data-variant") || "pc";
 
       // Auto-detect mobile/tablet based on viewport width when variant is "pc"
