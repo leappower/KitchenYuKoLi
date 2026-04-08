@@ -180,7 +180,6 @@
     document.querySelectorAll(".app-dropdown-trigger").forEach(function (t) {
       t.addEventListener("click", function (e) {
         if (window.innerWidth <= 720) return;
-        e.preventDefault();
         e.stopPropagation();
         t.closest(".app-dropdown-wrap").classList.toggle("is-open");
       });
@@ -301,7 +300,6 @@
       el._appPopupBound = true;
 
       el.addEventListener("click", function (e) {
-        e.preventDefault();
         e.stopPropagation();
         var href = el.getAttribute("data-app-popup-href") || el.getAttribute("href") || "/applications/";
         openPopup(href);

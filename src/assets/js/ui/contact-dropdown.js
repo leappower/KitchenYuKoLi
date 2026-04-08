@@ -113,7 +113,6 @@
     document.querySelectorAll(".cnt-dropdown-trigger").forEach(function (t) {
       t.addEventListener("click", function (e) {
         if (window.innerWidth <= 720) return;
-        e.preventDefault();
         e.stopPropagation();
         t.closest(".cnt-dropdown-wrap").classList.toggle("is-open");
       });
@@ -191,7 +190,6 @@
       if (el._cntPopupBound) return;
       el._cntPopupBound = true;
       el.addEventListener("click", function (e) {
-        e.preventDefault();
         e.stopPropagation();
         openPopup(el.getAttribute("data-cnt-popup-href") || el.getAttribute("href") || "/contact/");
       });

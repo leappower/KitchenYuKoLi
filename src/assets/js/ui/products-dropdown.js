@@ -176,7 +176,6 @@
     document.querySelectorAll(".prod-dropdown-trigger").forEach(function (t) {
       t.addEventListener("click", function (e) {
         if (window.innerWidth <= 720) return;
-        e.preventDefault();
         e.stopPropagation();
         t.closest(".prod-dropdown-wrap").classList.toggle("is-open");
       });
@@ -274,7 +273,6 @@
       el._prodPopupBound = true;
 
       el.addEventListener("click", function (e) {
-        e.preventDefault();
         e.stopPropagation();
         var href = el.getAttribute("data-prod-popup-href") || el.getAttribute("href") || "/products/";
         openPopup(href);
