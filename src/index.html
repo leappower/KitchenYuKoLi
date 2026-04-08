@@ -5,11 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
     /* Navigator placeholder: matches real header styling for seamless JS mount.
-       Height matches: mobile 61px (py-3+36px logo), PC 77px (py-4+44px logo).
+       Height matches: PC header actual height 109px (py-4=32 + content=76 + border=1), mobile 61px.
        JS mount replaces <navigator> with the actual <header> element. */
     navigator[data-component="navigator"] {
       display: block;
-      height: 77px; /* PC default */
+      height: 109px;
       background: rgba(248,246,246,.8);
       border-bottom: 1px solid rgba(226,232,240,1);
       position: sticky;

@@ -265,9 +265,7 @@
       ' class="bg-primary text-white px-6 py-2.5 rounded-xl font-bold text-sm hover:opacity-90 transition-opacity"' +
       ' data-i18n="' +
       esc(textKey) +
-      '">' +
-      esc(textKey) +
-      "</a>"
+      '">获取报价</a>'
     );
   }
 
@@ -357,7 +355,7 @@
 
     return (
       '<header class="sticky top-0 z-[var(--z-header)] w-full border-b border-slate-200 dark:border-slate-800 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md">' +
-      '<div class="max-w-[1920px] mx-auto px-6 md:px-10 lg:px-16 xl:px-20 py-4 flex items-center justify-between">' +
+      '<div class="max-w-[1920px] mx-auto px-6 md:px-10 lg:px-16 xl:px-20 py-4 flex items-center justify-between" style="min-height:108px">' +
       /* Left: Logo + Nav */
       '<div class="flex items-center gap-6 lg:gap-12">' +
       '<a class="nav-logo-link" href="' +
