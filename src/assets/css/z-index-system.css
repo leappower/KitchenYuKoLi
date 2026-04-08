@@ -11,7 +11,7 @@
   --z-content: 1;
 
   /* 固定元素层级 */
-  --z-header: 10; /* 页面顶部导航 */
+  --z-header: 2000; /* 页面顶部导航 (must be above all page content including dropdown panels at 1200) */
   --z-footer: 10; /* 页面底部导航 */
   --z-back-to-top: 20; /* 返回顶部按钮 */
 
