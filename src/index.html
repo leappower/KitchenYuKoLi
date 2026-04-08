@@ -4,23 +4,18 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
-    /* Navigator placeholder: matches real header styling for seamless JS mount.
-       Height matches: PC header actual height 109px (py-4=32 + content=76 + border=1), mobile 61px.
-       JS mount replaces <navigator> with the actual <header> element. */
-    navigator[data-component="navigator"] {
-      display: block;
-      height: 109px;
-      background: rgba(248,246,246,.8);
-      border-bottom: 1px solid rgba(226,232,240,1);
-      position: sticky;
-      top: 0;
-    }
-    @media (max-width: 767px) {
-      navigator[data-component="navigator"] { height: 61px; }
-    }
-    html.dark navigator[data-component="navigator"] {
-      background: rgba(34,22,16,.8);
-      border-bottom-color: rgba(30,41,59,1);
+    /* Navigator: pre-rendered header in HTML.
+       Hide dropdown panels until dropdown-styles.js injects hover/open rules.
+       Using same specificity as dropdown-styles so it can override on hover. */
+    .prod-dropdown-panel,
+    .app-dropdown-panel,
+    .sol-dropdown-panel,
+    .sup-dropdown-panel,
+    .abt-dropdown-panel,
+    .cnt-dropdown-panel {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
     }
   </style>
   <title>Yukoli Technology - Professional Kitchen Equipment</title>
