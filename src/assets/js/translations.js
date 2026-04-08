@@ -630,7 +630,7 @@
 
     // 使用 fixed 定位，确保在最上层
     dropdown.style.position = "fixed";
-    dropdown.style.zIndex = "9999";
+    dropdown.style.zIndex = "1200";
     dropdown.style.display = "block";
     dropdown.classList.add("show");
 

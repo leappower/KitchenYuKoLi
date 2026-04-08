@@ -277,7 +277,7 @@
     // ── Mobile: hamburger + logo + search ──
     if (variant === "mobile") {
       return (
-        '<header id="mobile-header" class="sticky top-0 z-[var(--z-header)] w-full border-b border-slate-200 dark:border-slate-800 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md transition-transform duration-300">' +
+        '<header id="mobile-header" class="sticky top-0 w-full border-b border-slate-200 dark:border-slate-800 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md transition-transform duration-300">' +
         '<div class="px-4 py-3 flex items-center justify-between">' +
         /* Left: Hamburger */
         '<button id="mobile-menu-toggle" type="button" class="flex items-center justify-center w-10 h-10 -ml-2 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors" aria-label="Menu">' +
@@ -319,7 +319,7 @@
         tabletRight.push(buildCtaButton(cfg.ctaTextKey, cfg.ctaHref));
       }
       return (
-        '<header class="sticky top-0 z-[var(--z-header)] w-full border-b border-slate-200 dark:border-slate-800 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md">' +
+        '<header class="sticky top-0 w-full border-b border-slate-200 dark:border-slate-800 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md">' +
         '<div class="max-w-[1024px] mx-auto px-4 py-3 flex items-center justify-between">' +
         /* Left: Logo + Nav */
         '<div class="flex items-center gap-4">' +
@@ -356,7 +356,7 @@
     }
 
     return (
-      '<header class="sticky top-0 z-[var(--z-header)] w-full border-b border-slate-200 dark:border-slate-800 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md">' +
+      '<header class="sticky top-0 w-full border-b border-slate-200 dark:border-slate-800 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md">' +
       '<div class="max-w-[1920px] mx-auto px-6 md:px-10 lg:px-16 xl:px-20 py-4 flex items-center justify-between">' +
       /* Left: Logo + Nav */
       '<div class="flex items-center gap-6 lg:gap-12">' +

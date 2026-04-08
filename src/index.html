@@ -3,6 +3,19 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    /* Navigator skeleton: prevent layout shift before JS mounts */
+    navigator[data-component="navigator"] {
+      display: block;
+      min-height: 80px;
+      background: rgba(246,246,248,1);
+      border-bottom: 1px solid rgba(0,0,0,.08);
+    }
+    html.dark navigator[data-component="navigator"] {
+      background: rgba(44,44,46,1);
+      border-bottom-color: rgba(255,255,255,.12);
+    }
+  </style>
   <title>Yukoli Technology - Professional Kitchen Equipment</title>
   <link rel="canonical" href="https://www.kitchen.yukoli.com/"/>
   <meta name="description" content="Yukoli Smart Kitchen — industrial cooking automation and IoT solutions for commercial kitchens worldwide.">

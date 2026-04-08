@@ -92,7 +92,7 @@
   function _createNotificationContainer() {
     var container = document.createElement("div");
     container.id = "notification-container";
-    container.className = "fixed top-20 right-4 z-[9999] max-w-sm";
+    container.className = "fixed top-20 right-4 z-[200] max-w-sm";
     document.body.appendChild(container);
     return container;
   }

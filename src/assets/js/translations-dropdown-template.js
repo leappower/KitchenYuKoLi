@@ -76,7 +76,7 @@ window.LanguageDropdownTemplate = {
     groupHtml += "</div>";
 
     return (
-      '<div id="language-dropdown" class="fixed bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-2xl shadow-2xl z-[9999] overflow-hidden" style="display:none;width:280px;">' +
+      '<div id="language-dropdown" class="fixed bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-2xl shadow-2xl z-[1200] overflow-hidden" style="display:none;width:280px;">' +
       '<div class="p-2 bg-slate-50 dark:bg-slate-900/50 border-b border-primary/5">' +
       '<div class="relative">' +
       '<span class="material-symbols-outlined absolute left-2 top-1/2 -translate-y-1/2 text-slate-400 text-xs">search</span>' +

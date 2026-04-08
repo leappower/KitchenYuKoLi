@@ -51,31 +51,6 @@
     'a11.821 11.821 0 00-3.48-8.413Z"></path>' +
     "</svg>";
 
-  var SVG_LINE =
-    '<svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">' +
-    '<path d="M19.365 9.863c.349 0 .63.285.63.631' +
-    " 0 .345-.281.63-.63.63H17.61v1.125h1.755c.349 0 .63.283.63.63" +
-    " 0 .344-.281.629-.63.629h-2.386c-.345 0-.627-.285-.627-.629V8.108" +
-    "c0-.345.282-.63.63-.63h2.386c.346 0 .627.285.627.63" +
-    " 0 .349-.281.63-.63.63H17.61v1.125h1.755zm-3.855 3.016" +
-    "c0 .27-.174.51-.432.596-.064.021-.133.031-.199.031" +
-    "-.211 0-.391-.09-.51-.25l-2.443-3.317v2.94" +
-    "c0 .344-.279.629-.631.629-.346 0-.626-.285-.626-.629V8.108" +
-    "c0-.27.173-.51.43-.595.06-.023.136-.033.194-.033" +
-    ".195 0 .375.104.495.254l2.462 3.33V8.108" +
-    "c0-.345.282-.63.63-.63.345 0 .63.285.63.63v4.771zm-5.741 0" +
-    "c0 .344-.282.629-.631.629-.345 0-.627-.285-.627-.629V8.108" +
-    "c0-.345.282-.63.63-.63.346 0 .628.285.628.63v4.771zm-2.466.629H4.917" +
-    "c-.345 0-.63-.285-.63-.629V8.108c0-.345.285-.63.63-.63" +
-    ".348 0 .63.285.63.63v4.141h1.756c.348 0 .629.283.629.63" +
-    " 0 .344-.281.629-.629.629M24 10.314" +
-    "C24 4.943 18.615.572 12 .572S0 4.943 0 10.314" +
-    "c0 4.811 4.27 8.842 10.035 9.608.391.082.923.258 1.058.59" +
-    ".12.301.079.766.038 1.08l-.164 1.02" +
-    "c-.045.301-.24 1.186 1.049.645 1.291-.539 6.916-4.078 9.436-6.975" +
-    'C23.176 14.393 24 12.458 24 10.314"></path>' +
-    "</svg>";
-
   var SVG_BACKTOTOP =
     '<svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">' +
     '<path d="M5 15l7-7 7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"></path>' +
@@ -130,6 +105,8 @@
       "#fab-line {",
       "  background: #06C755;",
       "  color: #fff;",
+      "  width: 3.5rem;",
+      "  height: 3.5rem;",
       "}",
 
       "#fab-backtotop {",
@@ -154,18 +131,17 @@
       "  box-shadow: 0 6px 24px rgba(0,0,0,.22);",
       "}",
 
-      /* Pulse animation */
+      /* Pulse animation — gentle, single pulse */
       "@keyframes fab-pulse {",
-      "  0%   { transform: scale(1);    box-shadow: 0 4px 20px rgba(0,0,0,.25), 0 0 0 0 rgba(37,211,102,.7); }",
-      "  25%  { transform: scale(1.28); box-shadow: 0 8px 32px rgba(0,0,0,.3),  0 0 0 10px rgba(37,211,102,.3); }",
-      "  50%  { transform: scale(1.05); box-shadow: 0 4px 20px rgba(0,0,0,.25), 0 0 0 18px rgba(37,211,102,.1); }",
-      "  75%  { transform: scale(1.22); box-shadow: 0 8px 28px rgba(0,0,0,.28), 0 0 0 8px rgba(37,211,102,.25); }",
-      "  100% { transform: scale(1);    box-shadow: 0 4px 20px rgba(0,0,0,.25), 0 0 0 0 rgba(37,211,102,0); }",
+      "  0%   { transform: scale(1);    box-shadow: 0 4px 20px rgba(0,0,0,.25), 0 0 0 0 rgba(37,211,102,.6); }",
+      "  40%  { transform: scale(1.12); box-shadow: 0 6px 24px rgba(0,0,0,.28), 0 0 0 10px rgba(37,211,102,.2); }",
+      "  100% { transform: scale(1);    box-shadow: 0 4px 20px rgba(0,0,0,.25), 0 0 0 16px rgba(37,211,102,0); }",
       "}",
 
       ".fab-pulsing {",
-      "  animation: fab-pulse 1s cubic-bezier(.36,.07,.19,.97) 3 !important;",
+      "  animation: fab-pulse 1.2s cubic-bezier(.36,.07,.19,.97) 1 !important;",
       "}",
+
     ].join("\n");
     document.head.appendChild(style);
   }
@@ -234,7 +210,29 @@
     line.setAttribute("aria-label", "LINE");
     line.target = "_blank";
     line.rel = "noopener noreferrer";
-    line.innerHTML = SVG_LINE;
+    line.innerHTML = '<svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">' +
+      '<path d="M19.365 9.863c.349 0 .63.285.63.631' +
+      " 0 .345-.281.63-.63.63H17.61v1.125h1.755c.349 0 .63.283.63.63" +
+      " 0 .344-.281.629-.63.629h-2.386c-.345 0-.627-.285-.627-.629V8.108" +
+      "c0-.345.282-.63.63-.63h2.386c.346 0 .627.285.627.63" +
+      " 0 .349-.281.63-.63.63H17.61v1.125h1.755zm-3.855 3.016" +
+      "c0 .27-.174.51-.432.596-.064.021-.133.031-.199.031" +
+      "-.211 0-.391-.09-.51-.25l-2.443-3.317v2.94" +
+      "c0 .344-.279.629-.631.629-.346 0-.626-.285-.626-.629V8.108" +
+      "c0-.27.173-.51.43-.595.06-.023.136-.033.194-.033" +
+      ".195 0 .375.104.495.254l2.462 3.33V8.108" +
+      "c0-.345.282-.63.63-.63.345 0 .63.285.63.63v4.771zm-5.741 0" +
+      "c0 .344-.282.629-.631.629-.345 0-.627-.285-.627-.629V8.108" +
+      "c0-.345.282-.63.63-.63.346 0 .628.285.628.63v4.771zm-2.466.629H4.917" +
+      "c-.345 0-.63-.285-.63-.629V8.108c0-.345.285-.63.63-.63" +
+      ".348 0 .63.285.63.63v4.141h1.756c.348 0 .629.283.629.63" +
+      " 0 .344-.281.629-.629.629M24 10.314" +
+      "C24 4.943 18.615.572 12 .572S0 4.943 0 10.314" +
+      "c0 4.811 4.27 8.842 10.035 9.608.391.082.923.258 1.058.59" +
+      ".12.301.079.766.038 1.08l-.164 1.02" +
+      "c-.045.301-.24 1.186 1.049.645 1.291-.539 6.916-4.078 9.436-6.975" +
+      'C23.176 14.393 24 12.458 24 10.314"></path>' +
+      "</svg>";
 
     // Back to top
     var btt = document.createElement("button");
@@ -307,7 +305,7 @@
 
   FloatingActionsController.prototype._triggerPulse = function () {
     var _self = this;
-    if (!this._btnWa && !this._btnLine) return;
+    if (!this._btnWa) return;
 
     function pulse(el) {
       if (!el) return;
@@ -321,13 +319,10 @@
       });
     }
 
+    // Only pulse WhatsApp (primary conversion entry)
     pulse(this._btnWa);
-    // LINE 稍微错开 1s
-    setTimeout(function () {
-      pulse(_self._btnLine);
-    }, 1000);
 
-    // 之后每 30s 重复一次（如果不在滚动中）
+    // Repeat after 30s if not scrolling
     _self._pulseTimer = setTimeout(function () {
       if (!_self._isScrolling) _self._triggerPulse();
     }, 30000);
