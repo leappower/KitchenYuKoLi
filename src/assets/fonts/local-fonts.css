@@ -112,10 +112,8 @@
   font-feature-settings: 'liga';
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizelegibility;
-  /* Hide fallback text (e.g. "expand_more") before font loads.
-     Fixed size prevents layout shift when Material Symbols replaces fallback. */
+  /* Prevent layout shift from fallback text (e.g. "expand_more") before font loads */
   width: 1em;
   height: 1em;
-  overflow: hidden;
   vertical-align: middle;
 }
