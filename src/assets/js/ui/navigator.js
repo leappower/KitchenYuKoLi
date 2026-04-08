@@ -625,12 +625,7 @@
       wrapper.innerHTML = buildHeader(cfg);
       var header = wrapper.firstChild;
 
-      // Insert invisible so i18n key→text swap is hidden from user.
-      // Placeholder reserves height via CSS, so no layout shift occurs.
-      header.style.opacity = "0";
-      header.style.transition = "opacity 0.12s ease-out";
-
-      // Replace the placeholder with the rendered header
+      // Replace the placeholder with the rendered header (immediate, no fade)
       el.parentNode.replaceChild(header, el);
     }
 
@@ -720,12 +715,6 @@
         global.translationManager.setupEventListeners();
       }
     }
-    var headers = document.querySelectorAll('header[style*="opacity: 0"], header[style*="opacity:0"]');
-    global.requestAnimationFrame(function () {
-      for (var k = 0; k < headers.length; k++) {
-        headers[k].style.opacity = "1";
-      }
-    });
 
     // Re-init mobile menu toggle and smart header after mount (timing fix).
     // mobile-menu.js boot() runs BEFORE this mount, so initToggle() ran

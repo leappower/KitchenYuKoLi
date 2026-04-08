@@ -4,16 +4,23 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
-    /* Navigator skeleton: prevent layout shift before JS mounts */
+    /* Navigator placeholder: matches real header styling for seamless JS mount.
+       Height matches: mobile 61px (py-3+36px logo), PC 77px (py-4+44px logo).
+       JS mount replaces <navigator> with the actual <header> element. */
     navigator[data-component="navigator"] {
       display: block;
-      min-height: 80px;
-      background: rgba(246,246,248,1);
-      border-bottom: 1px solid rgba(0,0,0,.08);
+      height: 77px; /* PC default */
+      background: rgba(248,246,246,.8);
+      border-bottom: 1px solid rgba(226,232,240,1);
+      position: sticky;
+      top: 0;
+    }
+    @media (max-width: 767px) {
+      navigator[data-component="navigator"] { height: 61px; }
     }
     html.dark navigator[data-component="navigator"] {
-      background: rgba(44,44,46,1);
-      border-bottom-color: rgba(255,255,255,.12);
+      background: rgba(34,22,16,.8);
+      border-bottom-color: rgba(30,41,59,1);
     }
   </style>
   <title>Yukoli Technology - Professional Kitchen Equipment</title>
