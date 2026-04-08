@@ -86,12 +86,12 @@
       esc(cfg.activeClass || "") +
       ' cnt-dropdown-trigger"' +
       ' data-cnt-trigger-label="' +
-      esc(cfg.labelKey) +
+      esc(cfg.label || cfg.labelKey) +
       '">' +
       '<span data-i18n="' +
-      esc(cfg.labelKey) +
+      esc(cfg.label || cfg.labelKey) +
       '">' +
-      esc(cfg.labelKey) +
+      esc(cfg.label || cfg.labelKey) +
       "</span>" +
       '<span class="material-symbols-outlined cnt-dropdown-arrow">expand_more</span>' +
       "</a>" +

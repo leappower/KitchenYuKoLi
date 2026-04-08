@@ -53,12 +53,12 @@
   // L1 菜单 — 6 项架构
   // Products / Applications / Solutions / Service / About / Contact
   var NAV_ITEMS = [
-    { key: "nav_products", path: "/products/", id: "products", hasDropdown: true },
-    { key: "nav_applications", path: "/applications/", id: "applications", hasDropdown: true },
-    { key: "nav_solutions", path: "/solutions/", id: "solutions", hasDropdown: true },
-    { key: "nav_service", path: "/support/", id: "support", hasDropdown: true },
-    { key: "nav_about", path: "/about/", id: "about", hasDropdown: true },
-    { key: "nav_contact", path: "/contact/", id: "contact", hasDropdown: true },
+    { key: "nav_products", label: "产品中心", path: "/products/", id: "products", hasDropdown: true },
+    { key: "nav_applications", label: "场景应用", path: "/applications/", id: "applications", hasDropdown: true },
+    { key: "nav_solutions", label: "解决方案", path: "/solutions/", id: "solutions", hasDropdown: true },
+    { key: "nav_service", label: "服务支持", path: "/support/", id: "support", hasDropdown: true },
+    { key: "nav_about", label: "关于我们", path: "/about/", id: "about", hasDropdown: true },
+    { key: "nav_contact", label: "联系", path: "/contact/", id: "contact", hasDropdown: true },
   ];
 
   /* ─────────────────────────────────────────────
@@ -96,14 +96,14 @@
         if (variant === "pc") {
           return global.ProductsDropdown.renderPC({
             href: href,
-            labelKey: item.key,
+            labelKey: item.key, label: item.label,
             activeClass: cls,
           });
         }
         if (variant === "tablet") {
           return global.ProductsDropdown.renderTablet({
             href: href,
-            labelKey: item.key,
+            labelKey: item.key, label: item.label,
             activeClass: cls,
           });
         }
@@ -114,14 +114,14 @@
         if (variant === "pc") {
           return global.SolutionsDropdown.renderPC({
             href: href,
-            labelKey: item.key,
+            labelKey: item.key, label: item.label,
             activeClass: cls,
           });
         }
         if (variant === "tablet") {
           return global.SolutionsDropdown.renderTablet({
             href: href,
-            labelKey: item.key,
+            labelKey: item.key, label: item.label,
             activeClass: cls,
           });
         }
@@ -132,14 +132,14 @@
         if (variant === "pc") {
           return global.ApplicationsDropdown.renderPC({
             href: href,
-            labelKey: item.key,
+            labelKey: item.key, label: item.label,
             activeClass: cls,
           });
         }
         if (variant === "tablet") {
           return global.ApplicationsDropdown.renderTablet({
             href: href,
-            labelKey: item.key,
+            labelKey: item.key, label: item.label,
             activeClass: cls,
           });
         }
@@ -150,14 +150,14 @@
         if (variant === "pc") {
           return global.SupportDropdown.renderPC({
             href: href,
-            labelKey: item.key,
+            labelKey: item.key, label: item.label,
             activeClass: cls,
           });
         }
         if (variant === "tablet") {
           return global.SupportDropdown.renderTablet({
             href: href,
-            labelKey: item.key,
+            labelKey: item.key, label: item.label,
             activeClass: cls,
           });
         }
@@ -168,14 +168,14 @@
         if (variant === "pc") {
           return global.AboutDropdown.renderPC({
             href: href,
-            labelKey: item.key,
+            labelKey: item.key, label: item.label,
             activeClass: cls,
           });
         }
         if (variant === "tablet") {
           return global.AboutDropdown.renderTablet({
             href: href,
-            labelKey: item.key,
+            labelKey: item.key, label: item.label,
             activeClass: cls,
           });
         }
@@ -186,14 +186,14 @@
         if (variant === "pc") {
           return global.ContactDropdown.renderPC({
             href: href,
-            labelKey: item.key,
+            labelKey: item.key, label: item.label,
             activeClass: cls,
           });
         }
         if (variant === "tablet") {
           return global.ContactDropdown.renderTablet({
             href: href,
-            labelKey: item.key,
+            labelKey: item.key, label: item.label,
             activeClass: cls,
           });
         }
@@ -203,7 +203,7 @@
         // Dropdown component not loaded yet — fallback to simple link
       }
       return (
-        '<a class="' + cls + '" href="' + esc(href) + '" data-i18n="' + esc(item.key) + '">' + esc(item.key) + "</a>"
+        '<a class="' + cls + '" href="' + esc(href) + '" data-i18n="' + esc(item.key) + '">' + esc(item.label) + "</a>"
       );
     }).join("\n");
   }

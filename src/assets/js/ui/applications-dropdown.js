@@ -147,12 +147,12 @@
       esc(cfg.activeClass || "") +
       ' app-dropdown-trigger"' +
       ' data-app-trigger-label="' +
-      esc(cfg.labelKey) +
+      esc(cfg.label || cfg.labelKey) +
       '">' +
       '<span data-i18n="' +
-      esc(cfg.labelKey) +
+      esc(cfg.label || cfg.labelKey) +
       '">' +
-      esc(cfg.labelKey) +
+      esc(cfg.label || cfg.labelKey) +
       "</span>" +
       '<span class="material-symbols-outlined app-dropdown-arrow">expand_more</span>' +
       "</a>" +

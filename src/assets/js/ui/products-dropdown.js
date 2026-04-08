@@ -143,12 +143,12 @@
       esc(cfg.activeClass || "") +
       ' prod-dropdown-trigger"' +
       ' data-prod-trigger-label="' +
-      esc(cfg.labelKey) +
+      esc(cfg.label || cfg.labelKey) +
       '">' +
       '<span data-i18n="' +
-      esc(cfg.labelKey) +
+      esc(cfg.label || cfg.labelKey) +
       '">' +
-      esc(cfg.labelKey) +
+      esc(cfg.label || cfg.labelKey) +
       "</span>" +
       '<span class="material-symbols-outlined prod-dropdown-arrow">expand_more</span>' +
       "</a>" +
