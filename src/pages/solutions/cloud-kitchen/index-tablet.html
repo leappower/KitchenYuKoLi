@@ -1,0 +1,586 @@
+<!doctype html>
+<html class="light" lang="zh-CN">
+  <head>
+    <link rel="canonical" href="/solutions/cloud-kitchen/" />
+    <link
+      rel="alternate"
+      media="only screen and (max-width: 767px)"
+      href="/solutions/cloud-kitchen/index-mobile.html"
+    />
+    <link
+      rel="alternate"
+      media="only screen and (min-width: 768px) and (max-width: 1279px)"
+      href="/solutions/cloud-kitchen/index-tablet.html"
+    />
+    <link
+      rel="alternate"
+      media="only screen and (min-width: 1280px)"
+      href="/solutions/cloud-kitchen/index-pc.html"
+    />
+    <script>
+      (function () {
+        if (window.__redirectChecked) return;
+        window.__redirectChecked = true;
+        var urlParams = new URLSearchParams(location.search);
+        var cleanUrl = urlParams.get("clean-url");
+        if (cleanUrl) {
+          history.replaceState({}, "", cleanUrl);
+          return;
+        }
+        if (window.__spaNavigating) return;
+        var currentFile = location.pathname.split("/").pop();
+        if (window.DeviceUtils && window.DeviceUtils.isDirectoryURL()) return;
+        if (window.DeviceUtils && window.DeviceUtils.shouldRedirect(currentFile)) {
+          var deviceType = window.DeviceUtils.getDeviceType();
+          var targetFile =
+            deviceType === window.DeviceUtils.DeviceType.MOBILE
+              ? "index-mobile.html"
+              : deviceType === window.DeviceUtils.DeviceType.TABLET
+                ? "index-tablet.html"
+                : "index-pc.html";
+          location.href = targetFile;
+        }
+      })();
+    </script>
+    <meta charset="utf-8" />
+    <meta name="description" content="YuKoLi 云厨房外卖解决方案 — 专为外卖场景设计的高效率出餐系统，小空间大产能，支持多品牌共享厨房。" />
+    <meta name="keywords" content="云厨房,外卖,共享厨房,幽灵厨房,智能出餐" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://www.kitchen.yukoli.com/solutions/cloud-kitchen/" />
+    <meta property="og:image" content="https://www.kitchen.yukoli.com/assets/images/logo_header.webp" />
+    <meta property="og:title" content="Yukoli | 云厨房/外卖智能厨房解决方案" />
+    <meta property="og:description" content="YuKoLi 云厨房外卖解决方案 — 专为外卖场景设计的高效率出餐系统，小空间大产能，支持多品牌共享厨房。" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title data-i18n="cloud-kitchen_page_title">Yukoli | 云厨房/外卖智能厨房解决方案</title>
+    <link rel="preload" href="/assets/fonts/local-fonts.css" as="style" />
+    <link rel="preload" href="/assets/css/styles.css" as="style" />
+    <link rel="preload" href="/assets/css/tailwind.css" as="style" />
+    <link href="/assets/fonts/local-fonts.css" rel="stylesheet" />
+    <link rel="stylesheet" href="/assets/css/styles.css" />
+    <link rel="stylesheet" href="/assets/css/tailwind.css" />
+    <link rel="stylesheet" href="/assets/css/z-index-system.css" />
+    <link rel="stylesheet" href="/assets/css/performance-optimizations.css" />
+    <script>
+      (function () {
+        if (localStorage.getItem("darkMode") === "true") document.documentElement.classList.add("dark");
+      })();
+    </script>
+    <link rel="stylesheet" href="/assets/css/skeleton.css" />
+    <link rel="icon" href="/assets/images/logo_header.webp" type="image/webp" />
+  </head>
+  <body
+    class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 antialiased transition-colors duration-300 overflow-x-hidden"
+  >
+    <navigator
+      data-component="navigator"
+      data-variant="tablet"
+      data-active="solutions"
+      data-cta-text-key="nav_get_quote"
+      data-cta-href="/quote"
+    ></navigator>
+    <main id="spa-content">
+      <section class="relative py-12 overflow-hidden">
+        <div
+          class="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-orange-100/30 dark:from-primary/10 dark:to-orange-900/20"
+        ></div>
+        <div class="relative max-w-4xl mx-auto px-6">
+          <div class="flex flex-col lg:flex-row items-center gap-12">
+            <div class="w-full lg:w-1/2 flex flex-col gap-6">
+              <div
+                class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 text-primary text-sm font-bold uppercase tracking-wider w-fit"
+              >
+                <span class="material-symbols-outlined">delivery_dining</span>
+                云厨房/外卖解决方案
+              </div>
+              <h1 class="text-4xl font-black leading-tight tracking-tighter">
+                智能厨房
+                <br />
+                <span class="text-primary">赋能云厨房/外卖</span>
+              </h1>
+              <p class="text-xl text-slate-600 dark:text-slate-400 max-w-xl leading-relaxed">
+                专为外卖场景设计的高效率出餐系统，小空间大产能，支持多品牌共享厨房。
+              </p>
+              <div class="flex items-center gap-4 pt-4">
+                <a
+                  href="/quote/"
+                  class="bg-primary text-white px-8 py-4 rounded-xl font-bold flex items-center gap-2 hover:shadow-lg hover:shadow-primary/20 transition-all"
+                >
+                  获取专属方案
+                  <span class="material-symbols-outlined">arrow_forward</span>
+                </a>
+                <a
+                  href="/roi/"
+                  class="px-8 py-4 rounded-xl font-bold flex items-center gap-2 border-2 border-slate-300 dark:border-slate-600 hover:border-primary hover:text-primary transition-all"
+                >
+                  <span class="material-symbols-outlined">calculate</span>
+                  ROI计算
+                </a>
+              </div>
+            </div>
+            <div class="w-full lg:w-1/2 relative">
+              <div class="absolute -inset-4 bg-primary/20 rounded-3xl blur-3xl"></div>
+              <div class="relative rounded-2xl overflow-hidden shadow-2xl">
+                <img
+                  loading="eager"
+                  alt="云厨房/外卖智能厨房"
+                  class="w-full h-[500px] object-cover"
+                  src="/assets/images/applications/cloud-kitchen-hero.webp"
+                  onerror="this.src = 'https://images.unsplash.com/photo-1556910103-1c02745aae4d?w=1200&h=800&fit=crop'"
+                />
+                <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+                <div class="absolute bottom-0 left-0 right-0 p-8">
+                  <div class="flex items-center gap-4 text-white">
+                    <div class="flex -space-x-3">
+                      <div class="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-xs font-bold">
+                        Y
+                      </div>
+                    </div>
+                    <div>
+                      <p class="text-sm font-semibold">Yukoli智能厨房</p>
+                      <p class="text-xs opacity-80">专业云厨房/外卖解决方案</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="py-12 bg-slate-50 dark:bg-slate-900/50">
+        <div class="max-w-7xl mx-auto px-6">
+          <div class="text-center mb-16">
+            <h2 class="text-2xl font-black tracking-tight mb-4" data-i18n="cloud-kitchen_pain_title">
+              行业痛点，我们深知
+            </h2>
+            <p class="text-lg text-slate-600 dark:text-slate-400">云厨房/外卖面临的核心挑战</p>
+          </div>
+          <div class="grid md:grid-cols-3 gap-8">
+            <div class="bg-white dark:bg-slate-800 rounded-2xl p-8 shadow-lg hover:shadow-xl transition-shadow">
+              <div class="w-14 h-14 rounded-xl bg-red-100 dark:bg-red-900/30 flex items-center justify-center mb-6">
+                <span class="material-symbols-outlined text-3xl text-red-600">restaurant</span>
+              </div>
+              <h3 class="text-xl font-bold mb-3">空间利用率低</h3>
+              <p class="text-slate-600 dark:text-slate-400">传统厨房布局不合理，空间浪费严重</p>
+            </div>
+            <div class="bg-white dark:bg-slate-800 rounded-2xl p-8 shadow-lg hover:shadow-xl transition-shadow">
+              <div
+                class="w-14 h-14 rounded-xl bg-orange-100 dark:bg-orange-900/30 flex items-center justify-center mb-6"
+              >
+                <span class="material-symbols-outlined text-3xl text-orange-600">speed</span>
+              </div>
+              <h3 class="text-xl font-bold mb-3">出餐压力大</h3>
+              <p class="text-slate-600 dark:text-slate-400">外卖高峰期订单集中，出餐压力大</p>
+            </div>
+            <div class="bg-white dark:bg-slate-800 rounded-2xl p-8 shadow-lg hover:shadow-xl transition-shadow">
+              <div class="w-14 h-14 rounded-xl bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center mb-6">
+                <span class="material-symbols-outlined text-3xl text-blue-600">sync_alt</span>
+              </div>
+              <h3 class="text-xl font-bold mb-3">多平台管理难</h3>
+              <p class="text-slate-600 dark:text-slate-400">多个外卖平台订单难以统一管理</p>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="py-12">
+        <div class="max-w-7xl mx-auto px-6">
+          <div class="flex flex-col lg:flex-row gap-16 items-center">
+            <div class="w-full lg:w-1/2">
+              <div
+                class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 text-primary text-sm font-bold uppercase tracking-wider mb-6"
+              >
+                <span class="material-symbols-outlined">lightbulb</span>
+                解决方案
+              </div>
+              <h2 class="text-2xl font-black tracking-tight mb-6" data-i18n="cloud-kitchen_solution_title">
+                智能厨房全流程自动化
+              </h2>
+              <p class="text-lg text-slate-600 dark:text-slate-400 mb-8">专为云厨房/外卖场景优化的智能厨房解决方案。</p>
+              <div class="space-y-6">
+                <div class="flex gap-4">
+                  <div class="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0">
+                    <span class="material-symbols-outlined text-primary">view_compact</span>
+                  </div>
+                  <div>
+                    <h4 class="font-bold text-lg">紧凑型设计</h4>
+                    <p class="text-slate-600 dark:text-slate-400">模块化设备，小空间大产能</p>
+                  </div>
+                </div>
+                <div class="flex gap-4">
+                  <div class="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0">
+                    <span class="material-symbols-outlined text-primary">bolt</span>
+                  </div>
+                  <div>
+                    <h4 class="font-bold text-lg">极速出餐</h4>
+                    <p class="text-slate-600 dark:text-slate-400">自动化设备，2分钟快速出餐</p>
+                  </div>
+                </div>
+                <div class="flex gap-4">
+                  <div class="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0">
+                    <span class="material-symbols-outlined text-primary">hub</span>
+                  </div>
+                  <div>
+                    <h4 class="font-bold text-lg">订单聚合</h4>
+                    <p class="text-slate-600 dark:text-slate-400">多平台订单统一管理，智能调度</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="w-full lg:w-1/2">
+              <div class="grid grid-cols-2 gap-4">
+                <div class="bg-white dark:bg-slate-800 rounded-2xl p-6 shadow-lg">
+                  <div class="text-4xl font-black text-primary mb-2">3x</div>
+                  <p class="text-slate-600 dark:text-slate-400">空间利用率</p>
+                </div>
+                <div class="bg-white dark:bg-slate-800 rounded-2xl p-6 shadow-lg">
+                  <div class="text-4xl font-black text-primary mb-2">2min</div>
+                  <p class="text-slate-600 dark:text-slate-400">平均出餐</p>
+                </div>
+                <div class="bg-white dark:bg-slate-800 rounded-2xl p-6 shadow-lg">
+                  <div class="text-4xl font-black text-primary mb-2">60%</div>
+                  <p class="text-slate-600 dark:text-slate-400">人工成本降</p>
+                </div>
+                <div class="bg-white dark:bg-slate-800 rounded-2xl p-6 shadow-lg">
+                  <div class="text-4xl font-black text-primary mb-2">24h</div>
+                  <p class="text-slate-600 dark:text-slate-400">全天候运营</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="py-12 bg-slate-50 dark:bg-slate-900/50">
+        <div class="max-w-7xl mx-auto px-6">
+          <div class="text-center mb-16">
+            <h2 class="text-2xl font-black tracking-tight mb-4" data-i18n="cloud-kitchen_equipment_title">
+              推荐设备组合
+            </h2>
+            <p class="text-lg text-slate-600 dark:text-slate-400">为云厨房/外卖量身定制的智能设备方案</p>
+          </div>
+          <div class="grid md:grid-cols-3 gap-8">
+            <div
+              class="bg-white dark:bg-slate-800 rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all group"
+            >
+              <div class="h-48 bg-slate-200 dark:bg-slate-700 overflow-hidden">
+                <img
+                  loading="lazy"
+                  alt="紧凑型炒菜机 YK-SF400"
+                  class="w-full h-full object-cover group-hover:scale-105 transition-transform"
+                  src="/assets/images/products/cloud-kitchen-热销.webp"
+                  onerror="this.style.display = 'none'"
+                />
+              </div>
+              <div class="p-6">
+                <h3 class="text-xl font-bold mb-2">紧凑型炒菜机 YK-SF400</h3>
+                <p class="text-slate-600 dark:text-slate-400 text-sm mb-4">占地仅0.5㎡，单次出餐4份</p>
+                <div class="flex items-center justify-between">
+                  <span class="text-primary font-bold" data-i18n="cloud-kitchen_equipment_badge_hot">热销</span>
+                  <a
+                    href="/products/"
+                    class="text-sm font-semibold flex items-center gap-1 hover:text-primary transition-colors"
+                  >
+                    了解详情
+                    <span class="material-symbols-outlined text-sm">arrow_forward</span>
+                  </a>
+                </div>
+              </div>
+            </div>
+            <div
+              class="bg-white dark:bg-slate-800 rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all group"
+            >
+              <div class="h-48 bg-slate-200 dark:bg-slate-700 overflow-hidden">
+                <img
+                  loading="lazy"
+                  alt="智能订单系统 YK-OS100"
+                  class="w-full h-full object-cover group-hover:scale-105 transition-transform"
+                  src="/assets/images/products/cloud-kitchen-标配.webp"
+                  onerror="this.style.display = 'none'"
+                />
+              </div>
+              <div class="p-6">
+                <h3 class="text-xl font-bold mb-2">智能订单系统 YK-OS100</h3>
+                <p class="text-slate-600 dark:text-slate-400 text-sm mb-4">多平台聚合，智能分单</p>
+                <div class="flex items-center justify-between">
+                  <span class="text-primary font-bold" data-i18n="cloud-kitchen_equipment_badge_standard">标配</span>
+                  <a
+                    href="/products/"
+                    class="text-sm font-semibold flex items-center gap-1 hover:text-primary transition-colors"
+                  >
+                    了解详情
+                    <span class="material-symbols-outlined text-sm">arrow_forward</span>
+                  </a>
+                </div>
+              </div>
+            </div>
+            <div
+              class="bg-white dark:bg-slate-800 rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all group"
+            >
+              <div class="h-48 bg-slate-200 dark:bg-slate-700 overflow-hidden">
+                <img
+                  loading="lazy"
+                  alt="自动打包机 YK-AP50"
+                  class="w-full h-full object-cover group-hover:scale-105 transition-transform"
+                  src="/assets/images/products/cloud-kitchen-推荐.webp"
+                  onerror="this.style.display = 'none'"
+                />
+              </div>
+              <div class="p-6">
+                <h3 class="text-xl font-bold mb-2">自动打包机 YK-AP50</h3>
+                <p class="text-slate-600 dark:text-slate-400 text-sm mb-4">自动分装打包，提升效率</p>
+                <div class="flex items-center justify-between">
+                  <span class="text-primary font-bold" data-i18n="cloud-kitchen_equipment_badge_recommended">推荐</span>
+                  <a
+                    href="/products/"
+                    class="text-sm font-semibold flex items-center gap-1 hover:text-primary transition-colors"
+                  >
+                    了解详情
+                    <span class="material-symbols-outlined text-sm">arrow_forward</span>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="py-12">
+        <div class="max-w-7xl mx-auto px-6">
+          <div class="flex flex-col lg:flex-row gap-12 items-center">
+            <div class="w-full lg:w-1/2">
+              <div
+                class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400 text-sm font-bold uppercase tracking-wider mb-6"
+              >
+                <span class="material-symbols-outlined">check_circle</span>
+                成功案例
+              </div>
+              <h2 class="text-2xl font-black tracking-tight mb-6">某云厨房运营商</h2>
+              <div class="space-y-4 mb-8">
+                <div class="flex items-center gap-3">
+                  <span class="material-symbols-outlined text-primary">location_on</span>
+                  <span>北京/上海/深圳 50+站点</span>
+                </div>
+              </div>
+              <blockquote class="text-lg italic text-slate-600 dark:text-slate-400 border-l-4 border-primary pl-6 mb-8">
+                "使用Yukoli紧凑型设备后，单个云厨房站点可同时运营5个品牌，日订单量突破2000单。"
+              </blockquote>
+              <a href="/cases/" class="inline-flex items-center gap-2 text-primary font-bold hover:underline">
+                查看更多案例
+                <span class="material-symbols-outlined">arrow_forward</span>
+              </a>
+            </div>
+            <div class="w-full lg:w-1/2">
+              <div class="bg-white dark:bg-slate-800 rounded-2xl p-8 shadow-xl">
+                <h3 class="text-xl font-bold mb-6" data-i18n="cloud-kitchen_compare_title">实施效果对比</h3>
+                <div class="space-y-6">
+                  <div>
+                    <div class="flex justify-between mb-2">
+                      <span class="text-sm font-medium">品牌数量</span>
+                      <span class="text-sm text-green-600 font-bold">5个/站点</span>
+                    </div>
+                    <div class="h-2 bg-slate-200 dark:bg-slate-700 rounded-full overflow-hidden">
+                      <div class="h-full bg-green-500 rounded-full" style="width: 70.77207649782869%"></div>
+                    </div>
+                  </div>
+                  <div>
+                    <div class="flex justify-between mb-2">
+                      <span class="text-sm font-medium">日订单量</span>
+                      <span class="text-sm text-green-600 font-bold">2000+</span>
+                    </div>
+                    <div class="h-2 bg-slate-200 dark:bg-slate-700 rounded-full overflow-hidden">
+                      <div class="h-full bg-green-500 rounded-full" style="width: 97.72896298438606%"></div>
+                    </div>
+                  </div>
+                  <div>
+                    <div class="flex justify-between mb-2">
+                      <span class="text-sm font-medium">坪效提升</span>
+                      <span class="text-sm text-green-600 font-bold">↑ 300%</span>
+                    </div>
+                    <div class="h-2 bg-slate-200 dark:bg-slate-700 rounded-full overflow-hidden">
+                      <div class="h-full bg-green-500 rounded-full" style="width: 81.19742408655785%"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- Enhanced Industry Pain Points -->
+      <section class="py-12">
+        <div class="max-w-7xl mx-auto px-6">
+          <div class="text-center mb-12">
+            <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-red-100 dark:bg-red-900/20 text-red-600 text-xs font-bold uppercase tracking-widest mb-4">
+              <span class="material-symbols-outlined text-sm">warning</span>
+              <span data-i18n="app_pain_badge">行业痛点</span>
+            </span>
+            <h2 class="text-2xl font-bold mb-4" data-i18n="app_cloud_pain_title">云厨房行业面临的深度挑战</h2>
+            <p class="text-slate-500 dark:text-slate-400 max-w-2xl mx-auto" data-i18n="app_cloud_pain_desc">空间受限、出餐瓶颈、多品牌共享冲突、合规压力——这些痛点正在拖慢你的云厨房盈利速度。</p>
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="flex gap-4 p-6 rounded-2xl bg-red-50/50 dark:bg-red-900/10 border border-red-100 dark:border-red-900/30">
+              <div class="w-10 h-10 rounded-xl bg-red-100 dark:bg-red-900/30 flex items-center justify-center shrink-0"><span class="material-symbols-outlined text-red-600">view_compact</span></div>
+              <div>
+                <h3 class="font-bold mb-1" data-i18n="app_cloud_pain_1_title">空间利用率极低</h3>
+                <p class="text-sm text-slate-600 dark:text-slate-400" data-i18n="app_cloud_pain_1_desc">云厨房租金按面积计费，传统商用厨具占地大、布局刚性，实际烹饪区仅占总面积的 30%-40%，坪效远低于预期。</p>
+              </div>
+            </div>
+            <div class="flex gap-4 p-6 rounded-2xl bg-red-50/50 dark:bg-red-900/10 border border-red-100 dark:border-red-900/30">
+              <div class="w-10 h-10 rounded-xl bg-red-100 dark:bg-red-900/30 flex items-center justify-center shrink-0"><span class="material-symbols-outlined text-red-600">speed</span></div>
+              <div>
+                <h3 class="font-bold mb-1" data-i18n="app_cloud_pain_2_title">出餐速度遇瓶颈</h3>
+                <p class="text-sm text-slate-600 dark:text-slate-400" data-i18n="app_cloud_pain_2_desc">午晚餐高峰订单量可达平峰 5-8 倍，人工出餐速度跟不上，超时率攀升，差评率和退单率直接影响平台排名。</p>
+              </div>
+            </div>
+            <div class="flex gap-4 p-6 rounded-2xl bg-red-50/50 dark:bg-red-900/10 border border-red-100 dark:border-red-900/30">
+              <div class="w-10 h-10 rounded-xl bg-red-100 dark:bg-red-900/30 flex items-center justify-center shrink-0"><span class="material-symbols-outlined text-red-600">device_hub</span></div>
+              <div>
+                <h3 class="font-bold mb-1" data-i18n="app_cloud_pain_3_title">多品牌设备共享冲突</h3>
+                <p class="text-sm text-slate-600 dark:text-slate-400" data-i18n="app_cloud_pain_3_desc">一个站点同时运营 3-5 个品牌时，烹饪设备排产冲突频繁，设备切换清洗耗时，不同菜系风味串味风险高。</p>
+              </div>
+            </div>
+            <div class="flex gap-4 p-6 rounded-2xl bg-red-50/50 dark:bg-red-900/10 border border-red-100 dark:border-red-900/30">
+              <div class="w-10 h-10 rounded-xl bg-red-100 dark:bg-red-900/30 flex items-center justify-center shrink-0"><span class="material-symbols-outlined text-red-600">local_fire_department</span></div>
+              <div>
+                <h3 class="font-bold mb-1" data-i18n="app_cloud_pain_4_title">油烟排放与消防合规难</h3>
+                <p class="text-sm text-slate-600 dark:text-slate-400" data-i18n="app_cloud_pain_4_desc">商业综合体和居民楼内的云厨房面临严格的油烟排放标准和消防安全要求，传统明火设备改造合规成本高昂。</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Solution Comparison -->
+      <section class="py-12">
+        <div class="max-w-5xl mx-auto px-6">
+          <div class="text-center mb-12">
+            <h2 class="text-2xl font-bold mb-4" data-i18n="app_cloud_compare_title">YuKoLi vs 传统方案</h2>
+          </div>
+          <div class="overflow-x-auto">
+            <table class="w-full text-sm border-collapse">
+              <thead>
+                <tr class="border-b-2 border-primary">
+                  <th class="text-left p-4 font-bold" data-i18n="app_cloud_compare_dim">对比维度</th>
+                  <th class="text-left p-4 font-bold text-red-600" data-i18n="app_cloud_compare_traditional">传统方案</th>
+                  <th class="text-left p-4 font-bold text-green-600" data-i18n="app_cloud_compare_yukoli">YuKoLi 方案</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="border-b border-slate-200 dark:border-slate-700">
+                  <td class="p-4 font-medium" data-i18n="app_cloud_compare_1_dim">空间利用率</td>
+                  <td class="p-4 text-slate-500" data-i18n="app_cloud_compare_1_trad">30%-40%（大量空间浪费）</td>
+                  <td class="p-4 text-green-600 font-bold" data-i18n="app_cloud_compare_1_yukoli">70%-85%（紧凑模块化布局）</td>
+                </tr>
+                <tr class="border-b border-slate-200 dark:border-slate-700">
+                  <td class="p-4 font-medium" data-i18n="app_cloud_compare_2_dim">出餐效率</td>
+                  <td class="p-4 text-slate-500" data-i18n="app_cloud_compare_2_trad">5-10 分钟/份（人工操作）</td>
+                  <td class="p-4 text-green-600 font-bold" data-i18n="app_cloud_compare_2_yukoli">1-3 分钟/份（智能自动化）</td>
+                </tr>
+                <tr class="border-b border-slate-200 dark:border-slate-700">
+                  <td class="p-4 font-medium" data-i18n="app_cloud_compare_3_dim">设备投资</td>
+                  <td class="p-4 text-slate-500" data-i18n="app_cloud_compare_3_trad">每品牌独立采购，重复投入</td>
+                  <td class="p-4 text-green-600 font-bold" data-i18n="app_cloud_compare_3_yukoli">多品牌共享设备，投资减少 50%</td>
+                </tr>
+                <tr class="border-b border-slate-200 dark:border-slate-700">
+                  <td class="p-4 font-medium" data-i18n="app_cloud_compare_4_dim">油烟处理</td>
+                  <td class="p-4 text-slate-500" data-i18n="app_cloud_compare_4_trad">明火+传统烟罩，改造成本高</td>
+                  <td class="p-4 text-green-600 font-bold" data-i18n="app_cloud_compare_4_yukoli">无明火/少油烟设计，天然合规</td>
+                </tr>
+                <tr class="border-b border-slate-200 dark:border-slate-700">
+                  <td class="p-4 font-medium" data-i18n="app_cloud_compare_5_dim">多品牌兼容</td>
+                  <td class="p-4 text-slate-500" data-i18n="app_cloud_compare_5_trad">菜系串味，频繁清洗切换</td>
+                  <td class="p-4 text-green-600 font-bold" data-i18n="app_cloud_compare_5_yukoli">独立烹饪舱+一键配方切换</td>
+                </tr>
+                <tr>
+                  <td class="p-4 font-medium" data-i18n="app_cloud_compare_6_dim">运营成本</td>
+                  <td class="p-4 text-slate-500" data-i18n="app_cloud_compare_6_trad">高人工+高能耗+高维护</td>
+                  <td class="p-4 text-green-600 font-bold" data-i18n="app_cloud_compare_6_yukoli">人效提升 60%，能耗降低 35%</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- Recommended Equipment -->
+      <section class="py-20">
+        <div class="max-w-7xl mx-auto px-6 lg:px-8">
+          <div class="text-center mb-12">
+            <h2 class="text-3xl lg:text-4xl font-black tracking-tight mb-4" data-i18n="app_recommended_title">推荐设备方案</h2>
+            <p class="text-lg text-slate-600 dark:text-slate-400 max-w-2xl mx-auto" data-i18n="app_recommended_desc">
+              根据您的行业场景，我们推荐以下智能厨房设备组合。
+            </p>
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <a href="/solutions/kitchen/" class="group bg-white dark:bg-slate-800 rounded-2xl p-8 border border-slate-200 dark:border-slate-700 hover:border-primary/50 hover:shadow-lg transition-all">
+              <div class="size-14 rounded-xl bg-primary/10 flex items-center justify-center mb-6">
+                <span class="material-symbols-outlined text-primary text-2xl">restaurant</span>
+              </div>
+              <h3 class="text-xl font-bold mb-3" data-i18n="app_rec_smart_kitchen">智能炒菜设备</h3>
+              <p class="text-slate-600 dark:text-slate-400 mb-4" data-i18n="app_rec_smart_kitchen_desc">大/中/小型炒菜机器人，满足不同规模的烹饪需求。</p>
+              <span class="inline-flex items-center gap-1 text-primary font-bold text-sm group-hover:gap-2 transition-all">
+                了解更多 <span class="material-symbols-outlined text-base">arrow_forward</span>
+              </span>
+            </a>
+            <a href="/solutions/cooking-line/" class="group bg-white dark:bg-slate-800 rounded-2xl p-8 border border-slate-200 dark:border-slate-700 hover:border-primary/50 hover:shadow-lg transition-all">
+              <div class="size-14 rounded-xl bg-orange-100 dark:bg-orange-900/30 flex items-center justify-center mb-6">
+                <span class="material-symbols-outlined text-orange-600 text-2xl">soup_kitchen</span>
+              </div>
+              <h3 class="text-xl font-bold mb-3" data-i18n="app_rec_cooking_line">烹饪流水线</h3>
+              <p class="text-slate-600 dark:text-slate-400 mb-4" data-i18n="app_rec_cooking_line_desc">全自动烹饪流水线，实现标准化大批量生产。</p>
+              <span class="inline-flex items-center gap-1 text-orange-600 font-bold text-sm group-hover:gap-2 transition-all">
+                了解更多 <span class="material-symbols-outlined text-base">arrow_forward</span>
+              </span>
+            </a>
+            <a href="/products/" class="group bg-white dark:bg-slate-800 rounded-2xl p-8 border border-slate-200 dark:border-slate-700 hover:border-primary/50 hover:shadow-lg transition-all">
+              <div class="size-14 rounded-xl bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center mb-6">
+                <span class="material-symbols-outlined text-blue-600 text-2xl">grid_view</span>
+              </div>
+              <h3 class="text-xl font-bold mb-3" data-i18n="app_rec_all_products">全系列产品</h3>
+              <p class="text-slate-600 dark:text-slate-400 mb-4" data-i18n="app_rec_all_products_desc">浏览 114 款智能商厨设备，涵盖炒菜、炸、蒸、煮、切配等。</p>
+              <span class="inline-flex items-center gap-1 text-blue-600 font-bold text-sm group-hover:gap-2 transition-all">
+                了解更多 <span class="material-symbols-outlined text-base">arrow_forward</span>
+              </span>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <section class="py-12 bg-primary">
+        <div class="max-w-4xl mx-auto px-6 text-center">
+          <h2 class="text-2xl font-black text-white mb-6" data-i18n="cloud-kitchen_cta_title">开启您的智能厨房之旅</h2>
+          <p class="text-xl text-white/80 mb-8" data-i18n="cloud-kitchen_cta_desc">
+            获取专属解决方案，让科技赋能您的餐饮事业
+          </p>
+          <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+            <a
+              href="/quote/"
+              class="bg-white text-primary px-8 py-4 rounded-xl font-bold flex items-center gap-2 hover:shadow-lg transition-all"
+            >
+              免费咨询
+              <span class="material-symbols-outlined">arrow_forward</span>
+            </a>
+            <a
+              href="/contact/"
+              class="px-8 py-4 rounded-xl font-bold flex items-center gap-2 border-2 border-white text-white hover:bg-white/10 transition-all"
+            >
+              <span class="material-symbols-outlined">phone</span>
+              联系销售
+            </a>
+          </div>
+        </div>
+      </section>
+    </main>
+    <footer data-component="footer" data-variant="pc" data-cta="true"></footer>
+    <script defer src="/assets/js/router.js"></script>
+    <script src="/assets/js/translations.js"></script>
+    <script src="/assets/js/ui/language-dropdown.js"></script>
+    <script src="/assets/js/ui/mobile-menu.js"></script>
+    <script src="/assets/js/ui/dropdown-styles.js"></script>
+    <script src="/assets/js/ui/products-dropdown.js"></script>
+    <script src="/assets/js/ui/solutions-dropdown.js"></script>
+    <script src="/assets/js/ui/support-dropdown.js"></script>
+    <script src="/assets/js/ui/about-dropdown.js"></script>
+    <script src="/assets/js/ui/contact-dropdown.js"></script>
+    <script src="/assets/js/ui/navigator.js"></script>
+    <script src="/assets/js/ui/footer.js"></script>
+    <script defer src="/assets/js/ui/floating-actions.js"></script>
+  </body>
+</html>

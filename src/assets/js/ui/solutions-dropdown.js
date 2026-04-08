@@ -14,12 +14,11 @@
 
   /** Automation Solutions (自动化方案) */
   var AUTOMATION = [
-    { key: "nav_auto_kitchen", icon: "restaurant", href: "/solutions/kitchen/" },
-    { key: "nav_auto_cooking_line", icon: "soup_kitchen", href: "/solutions/cooking-line/" },
-    { key: "nav_auto_prep", icon: "blender", href: "/solutions/prep/" },
-    { key: "nav_auto_beverage", icon: "local_cafe", href: "/solutions/beverage/" },
-    { key: "nav_auto_cooling", icon: "ac_unit", href: "/solutions/cooling/" },
-    { key: "nav_auto_cabinet", icon: "kitchen", href: "/solutions/cabinet/" },
+    { key: "nav_solutions_fastfood", icon: "ramen_dining", href: "/solutions/fast-food/" },
+    { key: "nav_solutions_hotpot", icon: "local_fire_department", href: "/solutions/hotpot/" },
+    { key: "nav_solutions_cloud_kitchen", icon: "delivery_dining", href: "/solutions/cloud-kitchen/" },
+    { key: "nav_solutions_canteen", icon: "restaurant", href: "/solutions/canteen/" },
+    { key: "nav_solutions_thai", icon: "public", href: "/solutions/southeast-asian/" },
   ];
 
   /** Solutions items (Case Studies + ROI) */

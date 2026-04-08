@@ -1,0 +1,529 @@
+<!doctype html>
+
+<html class="light" lang="zh-CN">
+  <head>
+    <link rel="canonical" href="/solutions/fast-food/" />
+    <link rel="alternate" media="only screen and (max-width: 767px)" href="/solutions/fast-food/index-mobile.html" />
+    <link
+      rel="alternate"
+      media="only screen and (min-width: 768px) and (max-width: 1279px)"
+      href="/solutions/fast-food/index-tablet.html"
+    />
+    <link rel="alternate" media="only screen and (min-width: 1280px)" href="/solutions/fast-food/index-pc.html" />
+    <script>
+      (function () {
+        if (window.__redirectChecked) return;
+        window.__redirectChecked = true;
+        var urlParams = new URLSearchParams(location.search);
+        var cleanUrl = urlParams.get("clean-url");
+        if (cleanUrl) {
+          history.replaceState({}, "", cleanUrl);
+          return;
+        }
+        if (window.__spaNavigating) return;
+        var currentFile = location.pathname.split("/").pop();
+        if (window.DeviceUtils && window.DeviceUtils.isDirectoryURL()) return;
+        if (window.DeviceUtils && window.DeviceUtils.shouldRedirect(currentFile)) {
+          var deviceType = window.DeviceUtils.getDeviceType();
+          var targetFile =
+            deviceType === window.DeviceUtils.DeviceType.MOBILE
+              ? "index-mobile.html"
+              : deviceType === window.DeviceUtils.DeviceType.TABLET
+                ? "index-tablet.html"
+                : "index-pc.html";
+          location.href = targetFile;
+        }
+      })();
+    </script>
+    <meta charset="utf-8" />
+    <meta name="description" content="YuKoLi 快餐自动化解决方案 — 智能炒菜机、万能蒸烤箱，帮助快餐连锁实现标准化生产，日均出餐量提升 3 倍。" />
+    <meta name="keywords" content="中式快餐,连锁餐饮,智能厨房,自动化炒菜机,商用厨房设备" />
+    <meta property="og:title" content="Yukoli | 中式快餐连锁智能厨房解决方案" />
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport" />
+    <title data-i18n="fast-food_page_title">Yukoli | 中式快餐连锁智能厨房解决方案</title>
+    <link rel="preload" href="/assets/fonts/local-fonts.css" as="style" />
+    <link rel="preload" href="/assets/css/styles.css" as="style" />
+    <link rel="preload" href="/assets/css/tailwind.css" as="style" />
+    <link href="/assets/fonts/local-fonts.css" rel="stylesheet" />
+    <link rel="stylesheet" href="/assets/css/styles.css" />
+    <link rel="stylesheet" href="/assets/css/tailwind.css" />
+    <link rel="stylesheet" href="/assets/css/z-index-system.css" />
+    <link rel="stylesheet" href="/assets/css/performance-optimizations.css" />
+    <script>
+      (function () {
+        if (localStorage.getItem("darkMode") === "true") document.documentElement.classList.add("dark");
+      })();
+    </script>
+    <link rel="stylesheet" href="/assets/css/skeleton.css" />
+    <link rel="icon" href="/assets/images/logo_header.webp" type="image/webp" />
+  </head>
+  <body
+    class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 antialiased transition-colors duration-300 overflow-x-hidden"
+  >
+    <navigator data-component="navigator" data-variant="mobile" data-active="solutions"></navigator>
+
+    <main id="spa-content">
+      <!-- Hero -->
+      <section class="relative py-8 px-4">
+        <div
+          class="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-orange-100/30 dark:from-primary/10 dark:to-orange-900/20"
+        ></div>
+        <div class="relative">
+          <div
+            class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-primary/10 text-primary text-xs font-bold uppercase tracking-wider mb-4"
+          >
+            <span class="material-symbols-outlined text-sm">restaurant</span>
+            中式快餐连锁
+          </div>
+          <h1 class="text-3xl font-black leading-tight tracking-tighter mb-4">
+            标准化出餐
+            <br />
+            <span class="text-primary">智能化运营</span>
+          </h1>
+          <p class="text-base text-slate-600 dark:text-slate-400 mb-6">
+            专为中式快餐连锁打造的智能厨房解决方案，降低人工成本
+            <span class="text-primary font-bold">30%</span>
+            ，提升翻台率
+            <span class="text-primary font-bold">40%</span>
+            。
+          </p>
+          <div class="flex flex-col gap-3 mb-6">
+            <a
+              href="/quote/"
+              class="bg-primary text-white px-6 py-3.5 rounded-xl font-bold flex items-center justify-center gap-2 hover:shadow-lg transition-all"
+            >
+              获取专属方案
+              <span class="material-symbols-outlined">arrow_forward</span>
+            </a>
+            <a
+              href="/roi/"
+              class="px-6 py-3.5 rounded-xl font-bold flex items-center justify-center gap-2 border-2 border-slate-300 dark:border-slate-600 hover:border-primary hover:text-primary transition-all"
+            >
+              <span class="material-symbols-outlined">calculate</span>
+              ROI计算
+            </a>
+          </div>
+          <div class="relative rounded-xl overflow-hidden shadow-lg">
+            <img
+              loading="eager"
+              alt="中式快餐智能厨房"
+              class="w-full h-[220px] object-cover"
+              src="/assets/images/applications/fast-food-hero.webp"
+              onerror="this.src = 'https://images.unsplash.com/photo-1556910103-1c02745aae4d?w=600&h=400&fit=crop'"
+            />
+            <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+            <div class="absolute bottom-0 left-0 right-0 p-4">
+              <div class="flex items-center gap-3 text-white">
+                <div class="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-xs font-bold">
+                  500+
+                </div>
+                <div>
+                  <p class="text-sm font-semibold">连锁品牌信赖</p>
+                  <p class="text-xs opacity-80">覆盖全球30+国家</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Pain Points -->
+      <section class="py-8 px-4 bg-slate-50 dark:bg-slate-900/50">
+        <h2 class="text-xl font-black tracking-tight mb-6 text-center" data-i18n="fast-food_pain_title">行业痛点</h2>
+        <div class="space-y-4">
+          <div class="bg-white dark:bg-slate-800 rounded-xl p-5 shadow-md flex gap-4">
+            <div
+              class="w-12 h-12 rounded-lg bg-red-100 dark:bg-red-900/30 flex items-center justify-center flex-shrink-0"
+            >
+              <span class="material-symbols-outlined text-2xl text-red-600">person_off</span>
+            </div>
+            <div>
+              <h3 class="font-bold mb-1">用工成本高</h3>
+              <p class="text-sm text-slate-600 dark:text-slate-400">厨师招聘难、培训周期长、人员流动性大</p>
+            </div>
+          </div>
+          <div class="bg-white dark:bg-slate-800 rounded-xl p-5 shadow-md flex gap-4">
+            <div
+              class="w-12 h-12 rounded-lg bg-orange-100 dark:bg-orange-900/30 flex items-center justify-center flex-shrink-0"
+            >
+              <span class="material-symbols-outlined text-2xl text-orange-600">sync_problem</span>
+            </div>
+            <div>
+              <h3 class="font-bold mb-1">出品不稳定</h3>
+              <p class="text-sm text-slate-600 dark:text-slate-400">不同厨师手艺差异大，口味难以统一</p>
+            </div>
+          </div>
+          <div class="bg-white dark:bg-slate-800 rounded-xl p-5 shadow-md flex gap-4">
+            <div
+              class="w-12 h-12 rounded-lg bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center flex-shrink-0"
+            >
+              <span class="material-symbols-outlined text-2xl text-blue-600">timer_off</span>
+            </div>
+            <div>
+              <h3 class="font-bold mb-1">出餐效率低</h3>
+              <p class="text-sm text-slate-600 dark:text-slate-400">高峰期订单积压，顾客等待时间长</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Solution -->
+      <section class="py-8 px-4">
+        <div class="text-center mb-6">
+          <div
+            class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-primary/10 text-primary text-xs font-bold uppercase tracking-wider mb-3"
+          >
+            <span class="material-symbols-outlined text-sm">lightbulb</span>
+            解决方案
+          </div>
+          <h2 class="text-xl font-black tracking-tight" data-i18n="fast-food_solution_title">智能厨房全流程自动化</h2>
+        </div>
+        <div class="space-y-3 mb-6">
+          <div class="bg-white dark:bg-slate-800 rounded-xl p-4 shadow-md flex gap-3">
+            <div class="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
+              <span class="material-symbols-outlined text-primary">content_cut</span>
+            </div>
+            <div>
+              <h4 class="font-bold text-sm">智能切配</h4>
+              <p class="text-xs text-slate-600 dark:text-slate-400">自动切菜机精准切割，节省80%时间</p>
+            </div>
+          </div>
+          <div class="bg-white dark:bg-slate-800 rounded-xl p-4 shadow-md flex gap-3">
+            <div class="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
+              <span class="material-symbols-outlined text-primary">local_fire_department</span>
+            </div>
+            <div>
+              <h4 class="font-bold text-sm">自动烹饪</h4>
+              <p class="text-xs text-slate-600 dark:text-slate-400">1000+菜谱一键出餐，口味标准化</p>
+            </div>
+          </div>
+          <div class="bg-white dark:bg-slate-800 rounded-xl p-4 shadow-md flex gap-3">
+            <div class="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
+              <span class="material-symbols-outlined text-primary">trending_up</span>
+            </div>
+            <div>
+              <h4 class="font-bold text-sm">数据管理</h4>
+              <p class="text-xs text-slate-600 dark:text-slate-400">IoT实时监控，智能分析运营数据</p>
+            </div>
+          </div>
+        </div>
+        <div class="grid grid-cols-2 gap-3">
+          <div class="bg-white dark:bg-slate-800 rounded-xl p-4 shadow-md text-center">
+            <div class="text-2xl font-black text-primary mb-1">30%</div>
+            <p class="text-xs text-slate-600 dark:text-slate-400">人工成本降低</p>
+          </div>
+          <div class="bg-white dark:bg-slate-800 rounded-xl p-4 shadow-md text-center">
+            <div class="text-2xl font-black text-primary mb-1">40%</div>
+            <p class="text-xs text-slate-600 dark:text-slate-400">翻台率提升</p>
+          </div>
+          <div class="bg-white dark:bg-slate-800 rounded-xl p-4 shadow-md text-center">
+            <div class="text-2xl font-black text-primary mb-1">2min</div>
+            <p class="text-xs text-slate-600 dark:text-slate-400">平均出餐时间</p>
+          </div>
+          <div class="bg-white dark:bg-slate-800 rounded-xl p-4 shadow-md text-center">
+            <div class="text-2xl font-black text-primary mb-1">99%</div>
+            <p class="text-xs text-slate-600 dark:text-slate-400">出品一致性</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Products -->
+      <section class="py-8 px-4 bg-slate-50 dark:bg-slate-900/50">
+        <h2 class="text-xl font-black tracking-tight mb-4 text-center" data-i18n="fast-food_equipment_title">
+          推荐设备组合
+        </h2>
+        <div class="space-y-4">
+          <div class="bg-white dark:bg-slate-800 rounded-xl overflow-hidden shadow-md">
+            <div class="h-40 bg-slate-200 dark:bg-slate-700">
+              <img
+                loading="lazy"
+                alt="智能炒菜机"
+                class="w-full h-full object-cover"
+                src="/assets/images/products/stir-fry-1.webp"
+                onerror="this.style.display = 'none'"
+              />
+            </div>
+            <div class="p-4">
+              <div class="flex items-center justify-between mb-2">
+                <h3 class="font-bold">智能炒菜机 YK-SF800</h3>
+                <span
+                  class="text-xs bg-primary/10 text-primary px-2 py-1 rounded-full"
+                  data-i18n="fast-food_equipment_badge_hot"
+                >
+                  热销
+                </span>
+              </div>
+              <p class="text-sm text-slate-600 dark:text-slate-400">800mm锅径，单次出餐6-8份，支持1000+菜谱</p>
+            </div>
+          </div>
+          <div class="bg-white dark:bg-slate-800 rounded-xl overflow-hidden shadow-md">
+            <div class="h-40 bg-slate-200 dark:bg-slate-700">
+              <img
+                loading="lazy"
+                alt="自动切菜机"
+                class="w-full h-full object-cover"
+                src="/assets/images/products/cutter-1.webp"
+                onerror="this.style.display = 'none'"
+              />
+            </div>
+            <div class="p-4">
+              <div class="flex items-center justify-between mb-2">
+                <h3 class="font-bold">自动切菜机 YK-CT300</h3>
+                <span
+                  class="text-xs bg-primary/10 text-primary px-2 py-1 rounded-full"
+                  data-i18n="fast-food_equipment_badge_standard"
+                >
+                  标配
+                </span>
+              </div>
+              <p class="text-sm text-slate-600 dark:text-slate-400">多功能切割，丝片丁条一键切换</p>
+            </div>
+          </div>
+          <div class="bg-white dark:bg-slate-800 rounded-xl overflow-hidden shadow-md">
+            <div class="h-40 bg-slate-200 dark:bg-slate-700">
+              <img
+                loading="lazy"
+                alt="智能蒸箱"
+                class="w-full h-full object-cover"
+                src="/assets/images/products/steamer-1.webp"
+                onerror="this.style.display = 'none'"
+              />
+            </div>
+            <div class="p-4">
+              <div class="flex items-center justify-between mb-2">
+                <h3 class="font-bold">智能蒸箱 YK-ST600</h3>
+                <span
+                  class="text-xs bg-primary/10 text-primary px-2 py-1 rounded-full"
+                  data-i18n="fast-food_equipment_badge_recommended"
+                >
+                  推荐
+                </span>
+              </div>
+              <p class="text-sm text-slate-600 dark:text-slate-400">6层大容量，精准温控</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Case Study -->
+      <section class="py-8 px-4">
+        <div class="bg-white dark:bg-slate-800 rounded-2xl p-5 shadow-lg">
+          <div
+            class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400 text-xs font-bold uppercase tracking-wider mb-3"
+          >
+            <span class="material-symbols-outlined text-sm">check_circle</span>
+            成功案例
+          </div>
+          <h2 class="text-lg font-black mb-3">某知名连锁快餐品牌</h2>
+          <div class="flex gap-4 mb-4 text-sm">
+            <div class="flex items-center gap-1.5">
+              <span class="material-symbols-outlined text-primary text-sm">location_on</span>
+              <span>500+门店</span>
+            </div>
+            <div class="flex items-center gap-1.5">
+              <span class="material-symbols-outlined text-primary text-sm">category</span>
+              <span>中式快餐</span>
+            </div>
+          </div>
+          <blockquote class="text-sm italic text-slate-600 dark:text-slate-400 border-l-4 border-primary pl-4 mb-5">
+            "引入Yukoli智能厨房后，单店人工成本从每月8万降至5.5万，出餐速度提升50%。"
+          </blockquote>
+          <h3 class="font-bold mb-3 text-sm">实施效果</h3>
+          <div class="space-y-3">
+            <div>
+              <div class="flex justify-between mb-1 text-xs">
+                <span>人工成本</span>
+                <span class="text-green-600 font-bold">↓ 31%</span>
+              </div>
+              <div class="h-2 bg-slate-200 dark:bg-slate-700 rounded-full overflow-hidden">
+                <div class="h-full bg-green-500 rounded-full" style="width: 69%"></div>
+              </div>
+            </div>
+            <div>
+              <div class="flex justify-between mb-1 text-xs">
+                <span>出餐效率</span>
+                <span class="text-green-600 font-bold">↑ 50%</span>
+              </div>
+              <div class="h-2 bg-slate-200 dark:bg-slate-700 rounded-full overflow-hidden">
+                <div class="h-full bg-green-500 rounded-full" style="width: 100%"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Recommended Equipment -->
+      <section class="py-20">
+        <div class="max-w-7xl mx-auto px-6 lg:px-8">
+          <div class="text-center mb-12">
+            <h2 class="text-3xl lg:text-4xl font-black tracking-tight mb-4" data-i18n="app_recommended_title">推荐设备方案</h2>
+            <p class="text-lg text-slate-600 dark:text-slate-400 max-w-2xl mx-auto" data-i18n="app_recommended_desc">
+              根据您的行业场景，我们推荐以下智能厨房设备组合。
+            </p>
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <a href="/solutions/kitchen/" class="group bg-white dark:bg-slate-800 rounded-2xl p-8 border border-slate-200 dark:border-slate-700 hover:border-primary/50 hover:shadow-lg transition-all">
+              <div class="size-14 rounded-xl bg-primary/10 flex items-center justify-center mb-6">
+                <span class="material-symbols-outlined text-primary text-2xl">restaurant</span>
+              </div>
+              <h3 class="text-xl font-bold mb-3" data-i18n="app_rec_smart_kitchen">智能炒菜设备</h3>
+              <p class="text-slate-600 dark:text-slate-400 mb-4" data-i18n="app_rec_smart_kitchen_desc">大/中/小型炒菜机器人，满足不同规模的烹饪需求。</p>
+              <span class="inline-flex items-center gap-1 text-primary font-bold text-sm group-hover:gap-2 transition-all">
+                了解更多 <span class="material-symbols-outlined text-base">arrow_forward</span>
+              </span>
+            </a>
+            <a href="/solutions/cooking-line/" class="group bg-white dark:bg-slate-800 rounded-2xl p-8 border border-slate-200 dark:border-slate-700 hover:border-primary/50 hover:shadow-lg transition-all">
+              <div class="size-14 rounded-xl bg-orange-100 dark:bg-orange-900/30 flex items-center justify-center mb-6">
+                <span class="material-symbols-outlined text-orange-600 text-2xl">soup_kitchen</span>
+              </div>
+              <h3 class="text-xl font-bold mb-3" data-i18n="app_rec_cooking_line">烹饪流水线</h3>
+              <p class="text-slate-600 dark:text-slate-400 mb-4" data-i18n="app_rec_cooking_line_desc">全自动烹饪流水线，实现标准化大批量生产。</p>
+              <span class="inline-flex items-center gap-1 text-orange-600 font-bold text-sm group-hover:gap-2 transition-all">
+                了解更多 <span class="material-symbols-outlined text-base">arrow_forward</span>
+              </span>
+            </a>
+            <a href="/products/" class="group bg-white dark:bg-slate-800 rounded-2xl p-8 border border-slate-200 dark:border-slate-700 hover:border-primary/50 hover:shadow-lg transition-all">
+              <div class="size-14 rounded-xl bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center mb-6">
+                <span class="material-symbols-outlined text-blue-600 text-2xl">grid_view</span>
+              </div>
+              <h3 class="text-xl font-bold mb-3" data-i18n="app_rec_all_products">全系列产品</h3>
+              <p class="text-slate-600 dark:text-slate-400 mb-4" data-i18n="app_rec_all_products_desc">浏览 114 款智能商厨设备，涵盖炒菜、炸、蒸、煮、切配等。</p>
+              <span class="inline-flex items-center gap-1 text-blue-600 font-bold text-sm group-hover:gap-2 transition-all">
+                了解更多 <span class="material-symbols-outlined text-base">arrow_forward</span>
+              </span>
+            </a>
+          </div>
+        </div>
+      </section>
+
+
+
+      <!-- Industry Pain Points -->
+      <section class="py-10 px-4">
+        <div class="text-center mb-8">
+          <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-red-100 dark:bg-red-900/20 text-red-600 text-xs font-bold uppercase tracking-widest mb-3">
+            <span class="material-symbols-outlined text-sm">warning</span>
+            <span data-i18n="app_pain_badge">行业痛点</span>
+          </span>
+          <h2 class="text-xl font-bold mb-3" data-i18n="app_fastfood_pain_title">快餐行业面临的挑战</h2>
+          <p class="text-slate-500 dark:text-slate-400 text-sm" data-i18n="app_fastfood_pain_desc">高峰时段出餐压力、人力成本攀升、食品安全风险——这些问题，YuKoLi 帮你解决。</p>
+        </div>
+        <div class="grid grid-cols-1 gap-4">
+          <div class="flex gap-3 p-4 rounded-xl bg-red-50/50 dark:bg-red-900/10 border border-red-100 dark:border-red-900/30">
+            <div class="w-9 h-9 rounded-lg bg-red-100 dark:bg-red-900/30 flex items-center justify-center shrink-0"><span class="material-symbols-outlined text-red-600 text-lg">speed</span></div>
+            <div>
+              <h3 class="font-bold text-sm mb-1" data-i18n="app_fastfood_pain_1_title">高峰出餐慢</h3>
+              <p class="text-xs text-slate-600 dark:text-slate-400" data-i18n="app_fastfood_pain_1_desc">午餐高峰期出餐速度跟不上订单量，客户流失率高达 25%。传统手工烹饪无法标准化、规模化。</p>
+            </div>
+          </div>
+          <div class="flex gap-3 p-4 rounded-xl bg-red-50/50 dark:bg-red-900/10 border border-red-100 dark:border-red-900/30">
+            <div class="w-9 h-9 rounded-lg bg-red-100 dark:bg-red-900/30 flex items-center justify-center shrink-0"><span class="material-symbols-outlined text-red-600 text-lg">trending_up</span></div>
+            <div>
+              <h3 class="font-bold text-sm mb-1" data-i18n="app_fastfood_pain_2_title">人力成本高</h3>
+              <p class="text-xs text-slate-600 dark:text-slate-400" data-i18n="app_fastfood_pain_2_desc">厨师薪资持续上涨，人员流动率超过 40%，培训新厨师至少需要 3 个月。</p>
+            </div>
+          </div>
+          <div class="flex gap-3 p-4 rounded-xl bg-red-50/50 dark:bg-red-900/10 border border-red-100 dark:border-red-900/30">
+            <div class="w-9 h-9 rounded-lg bg-red-100 dark:bg-red-900/30 flex items-center justify-center shrink-0"><span class="material-symbols-outlined text-red-600 text-lg">health_and_safety</span></div>
+            <div>
+              <h3 class="font-bold text-sm mb-1" data-i18n="app_fastfood_pain_3_title">食品安全风险</h3>
+              <p class="text-xs text-slate-600 dark:text-slate-400" data-i18n="app_fastfood_pain_3_desc">人工操作难以保证每份餐品的温度、卫生标准一致性，食品安全隐患大。</p>
+            </div>
+          </div>
+          <div class="flex gap-3 p-4 rounded-xl bg-red-50/50 dark:bg-red-900/10 border border-red-100 dark:border-red-900/30">
+            <div class="w-9 h-9 rounded-lg bg-red-100 dark:bg-red-900/30 flex items-center justify-center shrink-0"><span class="material-symbols-outlined text-red-600 text-lg">menu_book</span></div>
+            <div>
+              <h3 class="font-bold text-sm mb-1" data-i18n="app_fastfood_pain_4_title">菜单一致性差</h3>
+              <p class="text-xs text-slate-600 dark:text-slate-400" data-i18n="app_fastfood_pain_4_desc">不同门店、不同厨师的菜品口味差异大，品牌标准化执行困难。</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Solution Comparison -->
+      <section class="py-10 px-4">
+        <div class="text-center mb-6">
+          <h2 class="text-xl font-bold mb-3" data-i18n="app_fastfood_compare_title">YuKoLi vs 传统方案</h2>
+        </div>
+        <div class="overflow-x-auto -mx-4 px-4">
+          <table class="w-full text-xs border-collapse">
+            <thead>
+              <tr class="border-b-2 border-primary">
+                <th class="text-left p-3 font-bold" data-i18n="app_fastfood_compare_dim">对比维度</th>
+                <th class="text-left p-3 font-bold text-red-600" data-i18n="app_fastfood_compare_traditional">传统方案</th>
+                <th class="text-left p-3 font-bold text-green-600" data-i18n="app_fastfood_compare_yukoli">YuKoLi 方案</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="border-b border-slate-200 dark:border-slate-700">
+                <td class="p-3 font-medium" data-i18n="app_fastfood_compare_speed">出餐速度</td>
+                <td class="p-3 text-slate-500" data-i18n="app_fastfood_compare_speed_old">5-8 分钟/份</td>
+                <td class="p-3 text-green-600 font-bold" data-i18n="app_fastfood_compare_speed_new">30-90 秒/份</td>
+              </tr>
+              <tr class="border-b border-slate-200 dark:border-slate-700">
+                <td class="p-3 font-medium" data-i18n="app_fastfood_compare_labor">人力需求</td>
+                <td class="p-3 text-slate-500" data-i18n="app_fastfood_compare_labor_old">6-8 人/班次</td>
+                <td class="p-3 text-green-600 font-bold" data-i18n="app_fastfood_compare_labor_new">2-3 人/班次</td>
+              </tr>
+              <tr class="border-b border-slate-200 dark:border-slate-700">
+                <td class="p-3 font-medium" data-i18n="app_fastfood_compare_consistency">口味一致性</td>
+                <td class="p-3 text-slate-500" data-i18n="app_fastfood_compare_consistency_old">依赖厨师经验</td>
+                <td class="p-3 text-green-600 font-bold" data-i18n="app_fastfood_compare_consistency_new">99.5% 标准化</td>
+              </tr>
+              <tr class="border-b border-slate-200 dark:border-slate-700">
+                <td class="p-3 font-medium" data-i18n="app_fastfood_compare_menu">菜单切换</td>
+                <td class="p-3 text-slate-500" data-i18n="app_fastfood_compare_menu_old">需重新培训员工</td>
+                <td class="p-3 text-green-600 font-bold" data-i18n="app_fastfood_compare_menu_new">一键切换程序配方</td>
+              </tr>
+              <tr>
+                <td class="p-3 font-medium" data-i18n="app_fastfood_compare_roa">投资回报周期</td>
+                <td class="p-3 text-slate-500">—</td>
+                <td class="p-3 text-green-600 font-bold" data-i18n="app_fastfood_compare_roa_new">8-12 个月</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- CTA -->
+      <section class="py-10 px-4 bg-primary">
+        <div class="text-center">
+          <h2 class="text-xl font-black text-white mb-2" data-i18n="fast-food_cta_title">开启智能厨房之旅</h2>
+          <p class="text-white/80 text-sm mb-5">获取专属解决方案</p>
+          <div class="flex flex-col gap-3">
+            <a
+              href="/quote/"
+              class="bg-white text-primary px-6 py-3.5 rounded-xl font-bold flex items-center justify-center gap-2 hover:shadow-lg transition-all"
+            >
+              免费咨询
+              <span class="material-symbols-outlined">arrow_forward</span>
+            </a>
+            <a
+              href="/contact/"
+              class="px-6 py-3.5 rounded-xl font-bold flex items-center justify-center gap-2 border-2 border-white text-white hover:bg-white/10 transition-all"
+            >
+              <span class="material-symbols-outlined">phone</span>
+              联系销售
+            </a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer data-component="footer" data-variant="mobile" data-cta="true"></footer>
+
+    <script defer src="/assets/js/router.js"></script>
+    <script src="/assets/js/translations.js"></script>
+    <script src="/assets/js/ui/language-dropdown.js"></script>
+    <script src="/assets/js/ui/mobile-menu.js"></script>
+    <script src="/assets/js/ui/dropdown-styles.js"></script>
+    <script src="/assets/js/ui/products-dropdown.js"></script>
+    <script src="/assets/js/ui/solutions-dropdown.js"></script>
+    <script src="/assets/js/ui/support-dropdown.js"></script>
+    <script src="/assets/js/ui/about-dropdown.js"></script>
+    <script src="/assets/js/ui/contact-dropdown.js"></script>
+    <script src="/assets/js/ui/navigator.js"></script>
+    <script src="/assets/js/ui/footer.js"></script>
+    <script defer src="/assets/js/ui/floating-actions.js"></script>
+  </body>
+</html>
