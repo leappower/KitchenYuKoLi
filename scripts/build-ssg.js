@@ -94,6 +94,9 @@ const SRC_PAGES_DIR = path.resolve(__dirname, '..', 'src', 'pages');
 // Each entry has a source page directory under src/pages/
 const ROUTES = [
   { slug: 'home',         navId: 'home' },
+  { slug: 'products',     navId: 'products' },
+  { slug: 'applications', navId: 'applications' },
+  { slug: 'solutions',    navId: 'solutions' },
   { slug: 'catalog',      navId: 'catalog' },
   { slug: 'case-studies', navId: 'case-studies' },
   { slug: 'case-download', navId: 'case-studies' },

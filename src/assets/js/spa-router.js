@@ -391,30 +391,31 @@
         return;
       }
 
-      // 获取设备特定页面
-      pagePath = this.getDevicePage(pagePath);
-      this.log("Loading:", pagePath);
+      // Use the device-specific HTML directly (index-pc/tablet/mobile.html)
+      // instead of index.html (which is a redirect bounce)
+      var devicePath = this.getDevicePage(pagePath);
+      this.log("Loading:", devicePath);
 
       // 添加 BASE_PATH 前缀（如果存在）
       var basePath = (typeof window !== "undefined" && window.BASE_PATH) || "";
-      if (basePath && pagePath.startsWith("/")) {
-        pagePath = basePath + pagePath;
+      if (basePath && devicePath.startsWith("/")) {
+        devicePath = basePath + devicePath;
       }
 
       // 显示骨架屏
       this.showSkeleton();
 
       // 加载页面（不使用内存缓存，始终获取最新内容）
-      fetch(pagePath)
+      fetch(devicePath)
         .then(function (response) {
           if (!response.ok) throw new Error("HTTP " + response.status);
           return response.text();
         })
         .then(function (html) {
-          _self.renderContent(pagePath, html);
+          _self.renderContent(devicePath, html);
         })
         .catch(function (error) {
-          _self.log("Failed to load:", error);
+          _self.log("Failed to load:", devicePath, error);
           _self.hideSkeleton();
         });
     },

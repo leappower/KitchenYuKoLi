@@ -221,7 +221,11 @@ app.get('/', (req, res) => {
 // SPA fallback with proper 404 handling
 // Known SPA routes — always serve the root SPA shell, let the frontend router handle them
 const SPA_ROUTES = ['/home', '/catalog', '/solutions', '/about', '/contact', '/quote',
-  '/applications', '/thank-you', '/landing', '/pdp', '/roi-calculator'];
+  '/applications', '/products', '/support', '/news', '/thank-you', '/landing',
+  '/pdp', '/roi', '/applications/fast-food', '/applications/hotpot',
+  '/applications/cloud-kitchen', '/applications/canteen', '/applications/southeast-asian',
+  '/applications/cases', '/solutions/fast-food', '/solutions/hotpot',
+  '/solutions/cloud-kitchen', '/solutions/canteen', '/solutions/southeast-asian'];
 
 app.get('*', (req, res) => {
   // Only look inside dist/ — never expose project root files (scripts/, .env, etc.)

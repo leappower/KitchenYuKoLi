@@ -16,7 +16,7 @@ function buildHtmlPlugins() {
   const plugins = [];
 
   // Directories excluded from production build (internal/marketing assets)
-  const EXCLUDED_SECTIONS = new Set(['emails', 'linkedin', 'applications']);
+  const EXCLUDED_SECTIONS = new Set(['emails', 'linkedin']);
 
   function scanDir(dir, relativePath) {
     for (const entry of fs.readdirSync(dir)) {
