@@ -1,5 +1,6 @@
 const express = require('express');
 const compression = require('compression');
+const fs = require('fs');
 const path = require('path');
 const helmet = require('helmet');
 const rateLimit = require('express-rate-limit');
@@ -35,7 +36,7 @@ app.use(helmet({
 // Rate limiting to prevent abuse
 const limiter = rateLimit({
   windowMs: 15 * 60 * 1000, // 15 minutes
-  max: 100, // limit each IP to 100 requests per windowMs
+  max: 2000, // limit each IP to 2000 requests per windowMs
   message: 'Too many requests from this IP, please try again later.',
   standardHeaders: true,
   legacyHeaders: false,
@@ -153,6 +154,9 @@ app.get('/health', (req, res) => {
 // Trailing slash redirect for known route directories
 // Handles /home → /home/, /catalog → /catalog/, etc.
 app.use((req, res, next) => {
+  // Skip if path already ends with /
+  if (req.path.endsWith('/')) return next();
+
   var cleanPath = req.path.replace(/\/+$/, '');
   if (cleanPath && cleanPath !== '/') {
     var dirPath = path.join(__dirname, 'dist', cleanPath);
@@ -253,6 +257,12 @@ app.use((req, res) => {
 });
 
 const PORT = process.env.PORT || 3000;
+const SSL_PORT = parseInt(process.env.SSL_PORT) || 5443;
+const https = require('https');
+const sslOptions = {
+  key: fs.readFileSync('/Users/chee/certs/192.168.3.181-key.pem'),
+  cert: fs.readFileSync('/Users/chee/certs/192.168.3.181-new.pem'),
+};
 
 // Start server with error handling
 const server = app.listen(PORT, (err) => {
@@ -287,6 +297,13 @@ const server = app.listen(PORT, (err) => {
 
   startDailyFeishuSyncScheduler();
   console.log('[feishu-sync] daily scheduler enabled (04:00)');
+
+  // Start HTTPS server
+  const httpsServer = https.createServer(sslOptions, app);
+  httpsServer.listen(SSL_PORT, (err) => {
+    if (err) { console.error('Failed to start HTTPS server:', err); return; }
+    console.log(`🔒 HTTPS running on https://192.168.3.181:${SSL_PORT}`);
+  });
 });
 
 // Graceful shutdown with connection draining
