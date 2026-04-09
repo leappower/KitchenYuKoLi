@@ -103,10 +103,10 @@
       esc(cfg.activeClass || "") +
       ' sup-dropdown-trigger"' +
       ' data-sup-trigger-label="' +
-      esc(cfg.label || cfg.labelKey) +
+      esc(cfg.labelKey || cfg.label) +
       '">' +
       '<span data-i18n="' +
-      esc(cfg.label || cfg.labelKey) +
+      esc(cfg.labelKey || cfg.label) +
       '">' +
       esc(cfg.label || cfg.labelKey) +
       "</span>" +
