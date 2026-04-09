@@ -24,6 +24,7 @@
     "  display: inline-flex; align-items: center; gap: 4px;",
     "  cursor: pointer; user-select: none;",
     "  -webkit-tap-highlight-color: transparent;",
+    "  padding-bottom: 8px; margin-bottom: -8px;",
     "}",
 
     ".{{PREFIX}}-dropdown-arrow {",
@@ -41,11 +42,11 @@
 
     /* ===== Panel — floating card animation ===== */
     ".{{PREFIX}}-dropdown-panel {",
-    "  position: absolute; left: 50%; top: calc(100% + 6px);",
+    "  position: absolute; left: 50%; top: 100%;",
     "  transform: translateX(-50%) scale(.97); transform-origin: top center;",
     "  opacity: 0; visibility: hidden; pointer-events: none;",
     "  transition: opacity .2s ease, transform .25s cubic-bezier(.32,.72,0,1), visibility 0s .2s;",
-    "  z-index: 1200;",
+    "  z-index: 2500; padding-top: 8px;",
     "}",
 
     ".{{PREFIX}}-dropdown-wrap.is-open .{{PREFIX}}-dropdown-panel,",

@@ -21,7 +21,7 @@
 
   /* 交互元素层级 */
   --z-dropdown: 200; /* 下拉菜单 */
-  --z-language-dropdown: 250; /* 语言选择下拉框 (高于普通下拉菜单) */
+  --z-language-dropdown: 2500; /* 语言选择下拉框 (must be above header at 2000) */
   --z-popover: 210; /* 气泡提示 */
   --z-sticky: 100; /* 粘性元素 */
 
