@@ -3,6 +3,8 @@ const compression = require('compression');
 const path = require('path');
 const helmet = require('helmet');
 const rateLimit = require('express-rate-limit');
+const https = require('https');
+const fs = require('fs');
 const { feishuProTables } = require('./scripts/generate-products-data-table.js');
 const {
   runFeishuSyncOnce,
@@ -15,27 +17,17 @@ const app = express();
 
 // Security middleware with comprehensive protection
 app.use(helmet({
-  contentSecurityPolicy: {
-    directives: {
-      defaultSrc: ['\'self\''],
-      styleSrc: ['\'self\'', '\'unsafe-inline\'', 'https://fonts.googleapis.com'],
-      fontSrc: ['\'self\'', 'https://fonts.gstatic.com'],
-      scriptSrc: ['\'self\''],
-      imgSrc: ['\'self\'', 'data:', 'https:', 'http:'],
-      connectSrc: ['\'self\''],
-    },
-  },
-  hsts: {
-    maxAge: 31536000,
-    includeSubDomains: true,
-    preload: true
-  }
+  contentSecurityPolicy: false,
+  hsts: false,
+  crossOriginEmbedderPolicy: false,
+  crossOriginOpenerPolicy: false,
+  originAgentCluster: false,
 }));
 
 // Rate limiting to prevent abuse
 const limiter = rateLimit({
   windowMs: 15 * 60 * 1000, // 15 minutes
-  max: 100, // limit each IP to 100 requests per windowMs
+  max: 2000, // limit each IP to 2000 requests per windowMs (dev)
   message: 'Too many requests from this IP, please try again later.',
   standardHeaders: true,
   legacyHeaders: false,
@@ -72,8 +64,7 @@ app.use((req, res, next) => {
   res.setHeader('X-XSS-Protection', '1; mode=block');
   res.setHeader('Referrer-Policy', 'strict-origin-when-cross-origin');
   res.setHeader('Permissions-Policy', 'camera=(), microphone=(), geolocation=()');
-  res.setHeader('Cross-Origin-Embedder-Policy', 'require-corp');
-  res.setHeader('Cross-Origin-Opener-Policy', 'same-origin');
+  // COOP/COEP — only enable on HTTPS (handled by helmet above)
 
   // CORS — allow requests from same origin and production domain
   const origin = req.headers.origin;
@@ -153,7 +144,9 @@ app.get('/health', (req, res) => {
 // Trailing slash redirect for known route directories
 // Handles /home → /home/, /catalog → /catalog/, etc.
 app.use((req, res, next) => {
-  var cleanPath = req.path.replace(/\/+$/, '');
+  // Skip if path already ends with /
+  if (req.path.endsWith('/')) return next();
+  var cleanPath = req.path;
   if (cleanPath && cleanPath !== '/') {
     var dirPath = path.join(__dirname, 'dist', cleanPath);
     try {
@@ -218,10 +211,19 @@ app.get('/', (req, res) => {
 app.get('*', (req, res) => {
   // Only look inside dist/ — never expose project root files (scripts/, .env, etc.)
   const filePath = path.join(__dirname, 'dist', req.path);
+  const fs = require('fs');
 
   // Check if file exists
-  if (require('fs').existsSync(filePath) && require('fs').statSync(filePath).isFile()) {
+  if (fs.existsSync(filePath) && fs.statSync(filePath).isFile()) {
     res.sendFile(filePath);
+  } else if (fs.existsSync(filePath) && fs.statSync(filePath).isDirectory()) {
+    // Directory → try index.html inside it
+    const indexPath = path.join(filePath, 'index.html');
+    if (fs.existsSync(indexPath)) {
+      res.sendFile(indexPath);
+    } else {
+      res.sendFile(path.join(__dirname, 'dist', 'index.html'));
+    }
   } else {
     // For SPA routes, serve index.html
     res.sendFile(path.join(__dirname, 'dist', 'index.html'));
@@ -248,19 +250,19 @@ app.use((req, res) => {
 
 const PORT = process.env.PORT || 3000;
 
-// Start server with error handling
-const server = app.listen(PORT, (err) => {
-  if (err) {
-    console.error('Failed to start server:', err);
-    process.exit(1);
-  }
+// (HTTP→HTTPS redirect removed — was causing infinite loop behind reverse proxy)
 
-  console.log(`🚀 Optimized static server running on http://localhost:${PORT}`);
-  console.log('📦 Compression: Enabled');
-  console.log('🔒 Security headers: Enhanced');
-  console.log('💾 Advanced caching: Enabled');
-  console.log('🛡️  Rate limiting: Enabled');
-  console.log(`🏥 Health check: http://localhost:${PORT}/health`);
+// Start server with error handling
+const SSL_PORT = parseInt(process.env.SSL_PORT) || 5443;
+const sslOptions = {
+  key: fs.readFileSync('/Users/chee/certs/192.168.3.181-key.pem'),
+  cert: fs.readFileSync('/Users/chee/certs/192.168.3.181-new.pem'),
+};
+
+const server = app.listen(PORT, (err) => {
+  if (err) { console.error('Failed to start server:', err); process.exit(1); }
+  console.log(`🚀 HTTP running on http://localhost:${PORT}`);
+  console.log(`🔒 HTTPS running on https://192.168.3.181:${SSL_PORT}`);
 
   if (process.env.NODE_ENV === 'development') {
     console.log('🔧 Development mode: Error details enabled');
@@ -281,6 +283,15 @@ const server = app.listen(PORT, (err) => {
 
   startDailyFeishuSyncScheduler();
   console.log('[feishu-sync] daily scheduler enabled (04:00)');
+});
+
+// HTTPS server
+const httpsServer = https.createServer(sslOptions, app);
+httpsServer.listen(SSL_PORT, (err) => {
+  if (err) { console.error('Failed to start HTTPS server:', err); process.exit(1); }
+  console.log(`📦 Compression: Enabled`);
+  console.log(`🛡️  Rate limiting: Enabled`);
+  console.log(`🏥 Health check: https://localhost:${SSL_PORT}/health`);
 });
 
 // Graceful shutdown with connection draining
