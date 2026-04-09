@@ -322,7 +322,7 @@ function generateRootIndex() {
 
   // Replace responsive redirect with a single redirect to /home/
   // When BASE_PATH is set (e.g. /KitchenYuKoLi), redirect includes the prefix.
-  var homePath = (BASE_PATH ? BASE_PATH + '/' : '') + 'home/';
+  var homePath = '/' + (BASE_PATH ? BASE_PATH + '/' : '') + 'home/';
   html = html.replace(
     /<script>\s*\/\*\s*Responsive entry[\s\S]*?<\/script>/i,
     '<script>location.href = \'' + homePath + '\';</script>'

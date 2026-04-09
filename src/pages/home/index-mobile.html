@@ -99,7 +99,7 @@ if(localStorage.getItem('darkMode')==='true')document.documentElement.classList.
   data-active="home">
 </navigator>
 
-<div id="skeleton-loader" class="skeleton-container"><div class="skeleton-hero"><div class="skeleton-title"></div><div class="skeleton-subtitle"></div><div class="skeleton-cta"></div></div><div class="skeleton-content"><div class="skeleton-card"></div><div class="skeleton-card"></div><div class="skeleton-card"></div></div></div><main id="spa-content" class="flex-1 overflow-x-hidden">
+<main id="spa-content" class="flex-1 overflow-x-hidden">
   <!-- Hero Section -->
   <section class="px-4 py-6">
     <div
@@ -359,7 +359,7 @@ if(localStorage.getItem('darkMode')==='true')document.documentElement.classList.
 
 <script defer src="/assets/js/page-interactions.js"></script>
 <script>
-  document.addEventListener('DOMContentLoaded', function () { var s=document.getElementById('skeleton-loader'); if(s) s.remove();
+  document.addEventListener('DOMContentLoaded', function () {
     if (window.translationManager) window.translationManager.initialize();
   });
 </script>
