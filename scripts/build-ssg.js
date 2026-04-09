@@ -282,18 +282,19 @@ function copyDeviceFiles(route) {
 }
 
 /**
- * Generate the root index.html that redirects to /home/
- * This is needed because GitHub Pages serves / as the entry point
+ * Generate the root index.html (SPA Shell)
+ * Uses src/index.html as the base — the SPA shell with navigator, spa-content, footer.
+ * SSG script only patches canonical/OG URLs; the SPA router handles navigation.
  */
 function generateRootIndex() {
-  // Read the home entry file as a base
-  const homeEntry = path.join(SRC_PAGES_DIR, 'home', 'index.html');
-  if (!fs.existsSync(homeEntry)) {
-    log('ERROR: src/pages/home/index.html not found');
+  // Use the SPA shell as base (not the MPA home entry)
+  const spaShell = path.join(__dirname, '..', 'src', 'index.html');
+  if (!fs.existsSync(spaShell)) {
+    log('ERROR: src/index.html (SPA shell) not found');
     return false;
   }
 
-  let html = fs.readFileSync(homeEntry, 'utf-8');
+  let html = fs.readFileSync(spaShell, 'utf-8');
 
   // Update canonical URL to root
   var rootCanonical = 'https://www.kitchen.yukoli.com/' + (BASE_PATH ? BASE_PATH.replace(/^\//, '') + '/' : '');
@@ -304,28 +305,8 @@ function generateRootIndex() {
 
   // Update OG URLs
   html = html.replace(
-    /<meta\s+property="og:url"\s+content="[^"]*"\s*>/gi,
+    /<meta\s+property="og:url"\s*content="[^"]*"\s*>/gi,
     '<meta property="og:url" content="' + rootCanonical + '">'
-  );
-
-  // Update title
-  html = html.replace(
-    /<title>[^<]*<\/title>/i,
-    '<title>Yukoli Technology - Professional Kitchen Equipment</title>'
-  );
-
-  // Update og:title
-  html = html.replace(
-    /<meta\s+property="og:title"\s+content="[^"]*"\s*>/gi,
-    '<meta property="og:title" content="Yukoli Technology - Professional Kitchen Equipment">'
-  );
-
-  // Replace responsive redirect with a single redirect to /home/
-  // When BASE_PATH is set (e.g. /KitchenYuKoLi), redirect includes the prefix.
-  var homePath = '/' + (BASE_PATH ? BASE_PATH + '/' : '') + 'home/';
-  html = html.replace(
-    /<script>\s*\/\*\s*Responsive entry[\s\S]*?<\/script>/i,
-    '<script>location.href = \'' + homePath + '\';</script>'
   );
 
   // Patch all root-absolute paths with BASE_PATH prefix

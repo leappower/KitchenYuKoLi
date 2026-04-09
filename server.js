@@ -219,22 +219,32 @@ app.get('/', (req, res) => {
 });
 
 // SPA fallback with proper 404 handling
+// Known SPA routes — always serve the root SPA shell, let the frontend router handle them
+const SPA_ROUTES = ['/home', '/catalog', '/solutions', '/about', '/contact', '/quote',
+  '/applications', '/thank-you', '/landing', '/pdp', '/roi-calculator'];
+
 app.get('*', (req, res) => {
   // Only look inside dist/ — never expose project root files (scripts/, .env, etc.)
   const filePath = path.join(__dirname, 'dist', req.path);
 
-  // Check if file exists
+  // Check if it's an exact file match (CSS, JS, images, etc.)
   if (require('fs').existsSync(filePath) && require('fs').statSync(filePath).isFile()) {
-    res.sendFile(filePath);
+    return res.sendFile(filePath);
+  }
+
+  // Check if the path matches a known SPA route (with or without trailing slash)
+  const cleanPath = req.path.replace(/\/+$/, '') || '/';
+  if (SPA_ROUTES.includes(cleanPath)) {
+    return res.sendFile(path.join(__dirname, 'dist', 'index.html'));
+  }
+
+  // Check if path is a directory with index.html (e.g. /some/route/)
+  const indexPath = path.join(__dirname, 'dist', req.path, 'index.html');
+  if (require('fs').existsSync(indexPath) && require('fs').statSync(indexPath).isFile()) {
+    res.sendFile(indexPath);
   } else {
-    // Check if path is a directory with index.html (e.g. /home/ → dist/home/index.html)
-    const indexPath = path.join(__dirname, 'dist', req.path, 'index.html');
-    if (require('fs').existsSync(indexPath) && require('fs').statSync(indexPath).isFile()) {
-      res.sendFile(indexPath);
-    } else {
-      // For SPA routes, serve root index.html
-      res.sendFile(path.join(__dirname, 'dist', 'index.html'));
-    }
+    // For unknown routes, serve root SPA shell (SPA router will show 404 if needed)
+    res.sendFile(path.join(__dirname, 'dist', 'index.html'));
   }
 });
 
