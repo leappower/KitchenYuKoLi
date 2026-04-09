@@ -185,28 +185,28 @@
     ></navigator>
     <main id="spa-content">
       <!-- Hero Section -->
-      <section id="profile" class="flex flex-col lg:flex-row items-center py-12 gap-12 mb-24">
-        <div class="w-full lg:w-1/2 flex flex-col gap-6">
+      <section id="profile" class="w-full flex flex-col lg:flex-row items-center min-h-[85vh] py-12 gap-12">
+        <div class="w-full lg:w-1/2 space-y-8">
           <div
-            class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-bold uppercase tracking-wider w-fit"
+            class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-bold uppercase tracking-widest"
           >
             <span class="material-symbols-outlined text-sm">apartment</span>
             <span data-i18n="about_badge">关于跃迁力</span>
           </div>
-          <h1 class="text-5xl lg:text-7xl font-black leading-tight tracking-tighter">
+          <h1 class="text-6xl xl:text-8xl font-black leading-[1.1] tracking-tight text-slate-900 dark:text-white">
             <span data-i18n="about_hero_title_1">20年深耕</span>
             <br />
             <span class="text-primary" data-i18n="about_hero_title_2">智能商用厨具</span>
           </h1>
-          <p class="text-lg text-slate-600 dark:text-slate-400 max-w-xl">
+          <p class="text-lg xl:text-xl text-slate-600 dark:text-slate-400 max-w-2xl leading-relaxed">
             <span data-i18n="about_hero_desc">
               YuKoLi（跃迁力科技）扎根中国厨具之都广东佛山，20年专注智能商用厨房设备的研发与制造。从一台炒菜机到114款全品类智能设备，我们帮助全球50+国家的餐饮企业实现降本增效、标准化出品。
             </span>
           </p>
-          <div class="flex items-center gap-4">
+          <div class="flex items-center gap-4 pt-4">
             <a
               href="#story"
-              class="bg-primary text-white px-8 py-4 rounded-xl font-bold flex items-center gap-2 hover:shadow-lg hover:shadow-primary/20 transition-all"
+              class="bg-primary text-white px-8 py-4 rounded-xl font-bold text-lg flex items-center gap-2 hover:shadow-lg hover:shadow-primary/20 transition-all"
             >
               <span data-i18n="about_hero_btn">了解我们的故事</span>
               <span class="material-symbols-outlined">arrow_downward</span>
@@ -215,10 +215,10 @@
         </div>
         <div class="w-full lg:w-1/2 relative">
           <div
-            class="absolute -inset-4 bg-primary/20 rounded-2xl blur-2xl group-hover:bg-primary/30 transition-all"
+            class="aspect-square bg-gradient-to-br from-primary/20 to-transparent rounded-full absolute -top-10 -right-10 blur-3xl opacity-50 -z-10"
           ></div>
           <div
-            class="relative w-full h-[400px] bg-slate-200 dark:bg-slate-800 rounded-2xl overflow-hidden border border-slate-300 dark:border-slate-700"
+            class="relative w-full h-[600px] bg-slate-200 dark:bg-slate-800 rounded-3xl overflow-hidden shadow-2xl border border-white/10"
           >
             <img
               loading="lazy"
