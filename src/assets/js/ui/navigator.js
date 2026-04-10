@@ -759,6 +759,7 @@
    */
   function updateActive(activeId) {
     activeId = activeId || "";
+    var currentPath = window.location.pathname.replace(/\/$/, "") || "/";
 
     // 确保最新样式已注入（SPA 导航时不会重新 mount）
     if (global.DropdownBaseStyles) global.DropdownBaseStyles.inject();
@@ -781,19 +782,13 @@
       global.ContactDropdown.injectAllStyles();
     }
 
-    // 匹配所有 nav 链接：
-    // - 普通链接: a[data-i18n]
-    // - dropdown trigger: prod / sol / app / sup / abt / cnt
+    // ── 1. Update trigger active class ──
     var navLinks = document.querySelectorAll(
       "header nav a[data-i18n], header nav a.prod-dropdown-trigger, header nav a.sol-dropdown-trigger, header nav a.app-dropdown-trigger, header nav a.sup-dropdown-trigger, header nav a.abt-dropdown-trigger, header nav a.cnt-dropdown-trigger"
     );
 
-    // 容错处理:如果没有导航链接,直接返回(Mobile/Tablet 端可能没有 nav)
-    if (navLinks.length === 0) {
-      return;
-    }
-
-    for (var i = 0; i < navLinks.length; i++) {
+    if (navLinks.length > 0) {
+      for (var i = 0; i < navLinks.length; i++) {
       var link = navLinks[i];
       var isActive = false;
       var linkKey =
@@ -818,12 +813,58 @@
         link.classList.contains("sup-dropdown-trigger") ||
         link.classList.contains("abt-dropdown-trigger") ||
         link.classList.contains("cnt-dropdown-trigger");
+      // Collect dropdown-specific trigger classes BEFORE overwriting className
+      var triggerClasses = [];
+      if (isDropdownTrigger) {
+        if (link.classList.contains("prod-dropdown-trigger")) triggerClasses.push("prod-dropdown-trigger");
+        if (link.classList.contains("sol-dropdown-trigger")) triggerClasses.push("sol-dropdown-trigger");
+        if (link.classList.contains("app-dropdown-trigger")) triggerClasses.push("app-dropdown-trigger");
+        if (link.classList.contains("sup-dropdown-trigger")) triggerClasses.push("sup-dropdown-trigger");
+        if (link.classList.contains("abt-dropdown-trigger")) triggerClasses.push("abt-dropdown-trigger");
+        if (link.classList.contains("cnt-dropdown-trigger")) triggerClasses.push("cnt-dropdown-trigger");
+      }
       if (isActive) {
-        link.className = "text-sm font-semibold text-primary" + (isDropdownTrigger ? " prod-dropdown-trigger" : "");
+        link.className = "text-sm font-semibold text-primary" + (triggerClasses.length ? " " + triggerClasses.join(" ") : "");
       } else {
-        link.className =
-          "text-sm font-semibold hover:text-primary transition-colors" +
-          (isDropdownTrigger ? " prod-dropdown-trigger" : "");
+        link.className = "text-sm font-semibold hover:text-primary transition-colors" + (triggerClasses.length ? " " + triggerClasses.join(" ") : "");
+      }
+    }
+    } // end if (navLinks.length > 0)
+
+    // ── 2. Update dropdown sub-item active state ──
+    // Remove all existing is-active from dropdown items
+    var allDropdownItems = document.querySelectorAll(
+      ".prod-dropdown-item.is-active, .sol-dropdown-item.is-active, .app-dropdown-item.is-active, " +
+      ".sup-dropdown-item.is-active, .abt-dropdown-item.is-active, .cnt-dropdown-item.is-active"
+    );
+    for (var k = 0; k < allDropdownItems.length; k++) {
+      allDropdownItems[k].classList.remove("is-active");
+    }
+
+    // Match current path against dropdown item hrefs
+    if (activeId) {
+      // Find the correct prefix for the active dropdown
+      var prefixMap = {
+        products: "prod",
+        applications: "app",
+        solutions: "sol",
+        support: "sup",
+        about: "abt",
+        contact: "cnt",
+      };
+      var prefix = prefixMap[activeId];
+      if (prefix) {
+        var items = document.querySelectorAll("." + prefix + "-dropdown-item");
+        for (var m = 0; m < items.length; m++) {
+          var itemHref = items[m].getAttribute("href");
+          if (itemHref) {
+            // Normalize: strip trailing slash for comparison
+            var normalizedHref = itemHref.replace(/\/$/, "");
+            if (normalizedHref && currentPath.indexOf(normalizedHref) === 0) {
+              items[m].classList.add("is-active");
+            }
+          }
+        }
       }
     }
   }
