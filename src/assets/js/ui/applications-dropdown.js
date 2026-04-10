@@ -122,8 +122,10 @@
   }
 
   function renderDropdown(cfg) {
+    var parentHref = "/applications/";
+
     var items = SUBSERIES.map(function (s, idx) {
-      var html = buildItem(s, cfg.href);
+      var html = buildItem(s, parentHref);
       if (idx < SUBSERIES.length - 1) {
         html += buildSeparator();
       }
@@ -140,9 +142,7 @@
       '<div class="app-dropdown-wrap' +
       (isTouch() ? " touch-device" : "") +
       '">' +
-      '<a href="' +
-      esc(cfg.href) +
-      '"' +
+      '<a href="#"' +
       ' class="' +
       esc(cfg.activeClass || "") +
       ' app-dropdown-trigger"' +
@@ -200,7 +200,7 @@
     var handle = '<div class="app-popup-handle"></div>';
 
     var items = SUBSERIES.map(function (s) {
-      var itemHref = s.href || href;
+      var itemHref = s.href || "/applications/";
       var chevron = '<span class="material-symbols-outlined app-popup-chevron">chevron_right</span>';
       var emojiHtml = s.emoji ? '<span class="app-popup-emoji">' + s.emoji + "</span>" : "";
       return (

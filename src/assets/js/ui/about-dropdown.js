@@ -11,6 +11,7 @@
   /* ───────────────────────── DATA ───────────────────────── */
 
   var ITEMS = [
+    { key: "nav_about_us", icon: "grid_view", href: "/about/" },
     { key: "nav_about_profile", icon: "apartment", href: "/about/#profile" },
     { key: "nav_about_factory", icon: "factory", href: "/about/#factory" },
     { key: "nav_about_cert", icon: "verified", href: "/about/#cert" },
@@ -64,9 +65,7 @@
       '<div class="abt-dropdown-wrap' +
       (isTouch() ? " touch-device" : "") +
       '">' +
-      '<a href="' +
-      esc(cfg.href) +
-      '"' +
+      '<a href="#"' +
       ' class="' +
       esc(cfg.activeClass || "") +
       ' abt-dropdown-trigger"' +

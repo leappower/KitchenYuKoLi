@@ -112,19 +112,13 @@
 
   /* ── Unified dropdown: floating card for both PC and Tablet ── */
   function renderDropdown(cfg) {
-    var items = SUBSERIES.map(function (s, idx) {
-      var html = buildItem(s, cfg.href);
-      if (idx < SUBSERIES.length - 1) {
-        html += buildSeparator();
-      }
-      return html;
-    }).join("\n");
+    var parentHref = "/products/"; // default landing for this dropdown group
 
-    // "View All Products" link at bottom
+    // "View All Products" link at TOP (first sub-item)
     var viewAll =
       '<a href="' +
-      esc(cfg.href) +
-      '" class="prod-viewall-item">' +
+      esc(parentHref) +
+      '" class="prod-dropdown-item prod-viewall-item">' +
       '<span class="prod-dropdown-icon">' +
       '<span class="material-symbols-outlined">grid_view</span>' +
       "</span>" +
@@ -132,13 +126,19 @@
       '<span class="material-symbols-outlined prod-dropdown-chevron">chevron_right</span>' +
       "</a>";
 
+    var items = SUBSERIES.map(function (s, idx) {
+      var html = buildItem(s, parentHref);
+      if (idx < SUBSERIES.length - 1) {
+        html += buildSeparator();
+      }
+      return html;
+    }).join("\n");
+
     var html =
       '<div class="prod-dropdown-wrap' +
       (isTouch() ? " touch-device" : "") +
       '">' +
-      '<a href="' +
-      esc(cfg.href) +
-      '"' +
+      '<a href="#"' +
       ' class="' +
       esc(cfg.activeClass || "") +
       ' prod-dropdown-trigger"' +
@@ -154,9 +154,9 @@
       "</a>" +
       '<div class="prod-dropdown-panel">' +
       '<div class="prod-dropdown-card">' +
-      items +
-      '<div class="prod-dropdown-separator" style="margin: 4px 0;"></div>' +
       viewAll +
+      '<div class="prod-dropdown-separator" style="margin: 4px 0;"></div>' +
+      items +
       "</div>" +
       "</div>" +
       "</div>";
@@ -187,6 +187,8 @@
   function openPopup(href) {
     closePopup();
 
+    var parentHref = "/products/"; // default landing page
+
     var overlay = document.createElement("div");
     overlay.className = "prod-popup-overlay";
 
@@ -195,8 +197,20 @@
 
     var handle = '<div class="prod-popup-handle"></div>';
 
+    // "View All Products" as first item in popup
+    var viewAllHtml =
+      '<a href="' +
+      esc(parentHref) +
+      '" class="prod-popup-item prod-viewall-item">' +
+      '<span class="prod-dropdown-icon">' +
+      '<span class="material-symbols-outlined">grid_view</span>' +
+      "</span>" +
+      '<span class="prod-popup-label" data-i18n="nav_mega_view_all">View All Products</span>' +
+      '<span class="material-symbols-outlined prod-popup-chevron">chevron_right</span>' +
+      "</a>";
+
     var items = SUBSERIES.map(function (s) {
-      var itemHref = s.href || href;
+      var itemHref = s.href || parentHref;
       var chevron = '<span class="material-symbols-outlined prod-popup-chevron">chevron_right</span>';
       var emojiHtml = s.emoji ? '<span class="prod-popup-emoji">' + s.emoji + "</span>" : "";
       return (
@@ -219,7 +233,7 @@
       );
     }).join("\n");
 
-    panel.innerHTML = handle + items;
+    panel.innerHTML = handle + viewAllHtml + items;
 
     overlay.onclick = closePopup;
     document.body.appendChild(overlay);

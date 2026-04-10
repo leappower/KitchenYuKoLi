@@ -11,6 +11,7 @@
   /* ───────────────────────── DATA ───────────────────────── */
 
   var ITEMS = [
+    { key: "nav_contact_us", icon: "grid_view", href: "/contact/" },
     { key: "nav_contact_form", icon: "mail", href: "/contact/" },
     { key: "nav_contact_locations", icon: "location_on", href: "/contact/" },
     { key: "nav_contact_whatsapp", icon: "chat", href: "/contact/", isWhatsApp: true },
@@ -79,9 +80,7 @@
       '<div class="cnt-dropdown-wrap' +
       (isTouch() ? " touch-device" : "") +
       '">' +
-      '<a href="' +
-      esc(cfg.href) +
-      '"' +
+      '<a href="#"' +
       ' class="' +
       esc(cfg.activeClass || "") +
       ' cnt-dropdown-trigger"' +

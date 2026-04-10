@@ -23,6 +23,7 @@
 
   /** Solutions items (Case Studies + ROI) */
   var SOLUTIONS = [
+    { key: "nav_solutions_automation", icon: "grid_view", href: "/solutions/" },
     { key: "nav_roi", icon: "calculate", href: "/roi/", badge: true },
   ];
 
@@ -210,9 +211,7 @@
       '<div class="sol-dropdown-wrap' +
       (isTouch() ? " touch-device" : "") +
       '">' +
-      '<a href="' +
-      esc(cfg.href) +
-      '"' +
+      '<a href="#"' +
       ' class="' +
       esc(cfg.activeClass || "") +
       ' sol-dropdown-trigger"' +
@@ -228,9 +227,9 @@
       "</a>" +
       '<div class="sol-dropdown-panel">' +
       '<div class="sol-dropdown-card">' +
-      buildAutomationList(AUTOMATION) +
-      '<div class="sol-dropdown-separator" style="margin: 8px 12px;"></div>' +
       buildDropdownList(SOLUTIONS) +
+      '<div class="sol-dropdown-separator" style="margin: 8px 12px;"></div>' +
+      buildAutomationList(AUTOMATION) +
       "</div>" +
       "</div>" +
       "</div>";
@@ -271,9 +270,9 @@
 
     var content =
       handle +
-      buildPopupAutomationList(AUTOMATION) +
+      buildPopupList(SOLUTIONS) +
       '<div class="sol-popup-separator" style="margin: 8px 16px;"></div>' +
-      buildPopupList(SOLUTIONS);
+      buildPopupAutomationList(AUTOMATION);
 
     panel.innerHTML = content;
 

@@ -234,7 +234,10 @@
     "nav_mega_solutions_title": "Solutions",
     "nav_mega_scenes": "Application Scenarios",
     "nav_mega_resources": "Resources",
-    "nav_mega_view_all": "View All Products"
+    "nav_mega_view_all": "View All Products",
+    "nav_support_services": "الدعم والخدمات",
+    "nav_about_us": "من نحن",
+    "nav_contact_us": "اتصل بنا"
   },
   "de": {
     "all": "Alle",
@@ -471,7 +474,10 @@
     "nav_mega_solutions_title": "Solutions",
     "nav_mega_scenes": "Application Scenarios",
     "nav_mega_resources": "Resources",
-    "nav_mega_view_all": "View All Products"
+    "nav_mega_view_all": "View All Products",
+    "nav_support_services": "Support & Service",
+    "nav_about_us": "Über Uns",
+    "nav_contact_us": "Kontakt"
   },
   "en": {
     "all": "All",
@@ -861,7 +867,10 @@
     "nav_mega_solutions_title": "Solutions",
     "nav_mega_scenes": "Application Scenarios",
     "nav_mega_resources": "Resources",
-    "nav_mega_view_all": "View All Products"
+    "nav_mega_view_all": "View All Products",
+    "nav_support_services": "Support & Services",
+    "nav_about_us": "About Us",
+    "nav_contact_us": "Contact Us"
   },
   "es": {
     "all": "Todo",
@@ -1098,7 +1107,10 @@
     "nav_mega_solutions_title": "Solutions",
     "nav_mega_scenes": "Application Scenarios",
     "nav_mega_resources": "Resources",
-    "nav_mega_view_all": "View All Products"
+    "nav_mega_view_all": "View All Products",
+    "nav_support_services": "Soporte y Servicios",
+    "nav_about_us": "Sobre Nosotros",
+    "nav_contact_us": "Contáctenos"
   },
   "fil": {
     "all": "Lahat",
@@ -1335,7 +1347,10 @@
     "nav_mega_solutions_title": "Solutions",
     "nav_mega_scenes": "Application Scenarios",
     "nav_mega_resources": "Resources",
-    "nav_mega_view_all": "View All Products"
+    "nav_mega_view_all": "View All Products",
+    "nav_support_services": "Suporta at Serbisyo",
+    "nav_about_us": "Tungkol sa Amin",
+    "nav_contact_us": "Makipag-ugnayan"
   },
   "fr": {
     "all": "Tout",
@@ -1572,7 +1587,10 @@
     "nav_mega_solutions_title": "Solutions",
     "nav_mega_scenes": "Application Scenarios",
     "nav_mega_resources": "Resources",
-    "nav_mega_view_all": "View All Products"
+    "nav_mega_view_all": "View All Products",
+    "nav_support_services": "Support & Services",
+    "nav_about_us": "À Propos",
+    "nav_contact_us": "Contactez-nous"
   },
   "he": {
     "all": "הכל",
@@ -1809,7 +1827,10 @@
     "nav_mega_solutions_title": "Solutions",
     "nav_mega_scenes": "Application Scenarios",
     "nav_mega_resources": "Resources",
-    "nav_mega_view_all": "View All Products"
+    "nav_mega_view_all": "View All Products",
+    "nav_support_services": "תמיכה ושירותים",
+    "nav_about_us": "עלינו",
+    "nav_contact_us": "צור קשר"
   },
   "hi": {
     "all": "सभी",
@@ -2046,7 +2067,10 @@
     "nav_mega_solutions_title": "Solutions",
     "nav_mega_scenes": "Application Scenarios",
     "nav_mega_resources": "Resources",
-    "nav_mega_view_all": "View All Products"
+    "nav_mega_view_all": "View All Products",
+    "nav_support_services": "सहायता और सेवाएं",
+    "nav_about_us": "हमारे बारे में",
+    "nav_contact_us": "संपर्क करें"
   },
   "id": {
     "all": "Semua",
@@ -2283,7 +2307,10 @@
     "nav_mega_solutions_title": "Solutions",
     "nav_mega_scenes": "Application Scenarios",
     "nav_mega_resources": "Resources",
-    "nav_mega_view_all": "View All Products"
+    "nav_mega_view_all": "View All Products",
+    "nav_support_services": "Dukungan & Layanan",
+    "nav_about_us": "Tentang Kami",
+    "nav_contact_us": "Hubungi Kami"
   },
   "it": {
     "all": "Tutti",
@@ -2520,7 +2547,10 @@
     "nav_mega_solutions_title": "Solutions",
     "nav_mega_scenes": "Application Scenarios",
     "nav_mega_resources": "Resources",
-    "nav_mega_view_all": "View All Products"
+    "nav_mega_view_all": "View All Products",
+    "nav_support_services": "Supporto & Servizi",
+    "nav_about_us": "Chi Siamo",
+    "nav_contact_us": "Contattaci"
   },
   "ja": {
     "all": "すべて",
@@ -2757,7 +2787,10 @@
     "nav_mega_solutions_title": "Solutions",
     "nav_mega_scenes": "Application Scenarios",
     "nav_mega_resources": "Resources",
-    "nav_mega_view_all": "View All Products"
+    "nav_mega_view_all": "View All Products",
+    "nav_support_services": "サポート・サービス",
+    "nav_about_us": "会社概要",
+    "nav_contact_us": "お問い合わせ"
   },
   "km": {
     "all": "ទាំងអស់",
@@ -2993,7 +3026,10 @@
     "nav_mega_solutions_title": "Solutions",
     "nav_mega_scenes": "Application Scenarios",
     "nav_mega_resources": "Resources",
-    "nav_mega_view_all": "View All Products"
+    "nav_mega_view_all": "View All Products",
+    "nav_support_services": "ការគាំទ្រនិងសេវាកម្ម",
+    "nav_about_us": "អំពីយើង",
+    "nav_contact_us": "ទាក់ទងមកពួកយើង"
   },
   "ko": {
     "all": "전체",
@@ -3230,7 +3266,10 @@
     "nav_mega_solutions_title": "Solutions",
     "nav_mega_scenes": "Application Scenarios",
     "nav_mega_resources": "Resources",
-    "nav_mega_view_all": "View All Products"
+    "nav_mega_view_all": "View All Products",
+    "nav_support_services": "지원 및 서비스",
+    "nav_about_us": "회사 소개",
+    "nav_contact_us": "문의하기"
   },
   "lo": {
     "all": "ທັງໝົດ",
@@ -3466,7 +3505,10 @@
     "nav_mega_solutions_title": "Solutions",
     "nav_mega_scenes": "Application Scenarios",
     "nav_mega_resources": "Resources",
-    "nav_mega_view_all": "View All Products"
+    "nav_mega_view_all": "View All Products",
+    "nav_support_services": "ການສະໜັບສະໜູນແລະບໍລິການ",
+    "nav_about_us": "ກ່ຽວກັບພວກເຮົາ",
+    "nav_contact_us": "ຕິດຕໍ່ພວກເຮົາ"
   },
   "ms": {
     "all": "Semua",
@@ -3703,7 +3745,10 @@
     "nav_mega_solutions_title": "Solutions",
     "nav_mega_scenes": "Application Scenarios",
     "nav_mega_resources": "Resources",
-    "nav_mega_view_all": "View All Products"
+    "nav_mega_view_all": "View All Products",
+    "nav_support_services": "Sokongan & Perkhidmatan",
+    "nav_about_us": "Tentang Kami",
+    "nav_contact_us": "Hubungi Kami"
   },
   "my": {
     "all": "အားလုံး",
@@ -3939,7 +3984,10 @@
     "nav_mega_solutions_title": "Solutions",
     "nav_mega_scenes": "Application Scenarios",
     "nav_mega_resources": "Resources",
-    "nav_mega_view_all": "View All Products"
+    "nav_mega_view_all": "View All Products",
+    "nav_support_services": "အားနည်းကြီးနှုပ်မှုနှင့် ဝန်ဆောင်မှု",
+    "nav_about_us": "အကျုံးဝင်ရေးအကြောင်း",
+    "nav_contact_us": "ဆက်သွယ်ရန်"
   },
   "nl": {
     "all": "Alles",
@@ -4176,7 +4224,10 @@
     "nav_mega_solutions_title": "Solutions",
     "nav_mega_scenes": "Application Scenarios",
     "nav_mega_resources": "Resources",
-    "nav_mega_view_all": "View All Products"
+    "nav_mega_view_all": "View All Products",
+    "nav_support_services": "Ondersteuning & Service",
+    "nav_about_us": "Over Ons",
+    "nav_contact_us": "Neem Contact Op"
   },
   "pl": {
     "all": "Wszystko",
@@ -4413,7 +4464,10 @@
     "nav_mega_solutions_title": "Solutions",
     "nav_mega_scenes": "Application Scenarios",
     "nav_mega_resources": "Resources",
-    "nav_mega_view_all": "View All Products"
+    "nav_mega_view_all": "View All Products",
+    "nav_support_services": "Wsparcie & Usługi",
+    "nav_about_us": "O Nas",
+    "nav_contact_us": "Skontaktuj się"
   },
   "pt": {
     "all": "Tudo",
@@ -4650,7 +4704,10 @@
     "nav_mega_solutions_title": "Solutions",
     "nav_mega_scenes": "Application Scenarios",
     "nav_mega_resources": "Resources",
-    "nav_mega_view_all": "View All Products"
+    "nav_mega_view_all": "View All Products",
+    "nav_support_services": "Suporte & Serviços",
+    "nav_about_us": "Sobre Nós",
+    "nav_contact_us": "Entre em Contato"
   },
   "ru": {
     "all": "Все",
@@ -4887,7 +4944,10 @@
     "nav_mega_solutions_title": "Solutions",
     "nav_mega_scenes": "Application Scenarios",
     "nav_mega_resources": "Resources",
-    "nav_mega_view_all": "View All Products"
+    "nav_mega_view_all": "View All Products",
+    "nav_support_services": "Поддержка и сервис",
+    "nav_about_us": "О нас",
+    "nav_contact_us": "Связаться с нами"
   },
   "th": {
     "all": "ทั้งหมด",
@@ -5124,7 +5184,10 @@
     "nav_mega_solutions_title": "Solutions",
     "nav_mega_scenes": "Application Scenarios",
     "nav_mega_resources": "Resources",
-    "nav_mega_view_all": "View All Products"
+    "nav_mega_view_all": "View All Products",
+    "nav_support_services": "การสนับสนุนและบริการ",
+    "nav_about_us": "เกี่ยวกับเรา",
+    "nav_contact_us": "ติดต่อเรา"
   },
   "tr": {
     "all": "Hepsi",
@@ -5361,7 +5424,10 @@
     "nav_mega_solutions_title": "Solutions",
     "nav_mega_scenes": "Application Scenarios",
     "nav_mega_resources": "Resources",
-    "nav_mega_view_all": "View All Products"
+    "nav_mega_view_all": "View All Products",
+    "nav_support_services": "Destek & Hizmetler",
+    "nav_about_us": "Hakkımızda",
+    "nav_contact_us": "İletişim"
   },
   "vi": {
     "all": "Tất cả",
@@ -5598,7 +5664,10 @@
     "nav_mega_solutions_title": "Solutions",
     "nav_mega_scenes": "Application Scenarios",
     "nav_mega_resources": "Resources",
-    "nav_mega_view_all": "View All Products"
+    "nav_mega_view_all": "View All Products",
+    "nav_support_services": "Hỗ trợ & Dịch vụ",
+    "nav_about_us": "Về Chúng Tôi",
+    "nav_contact_us": "Liên hệ"
   },
   "zh-CN": {
     "all": "全部",
@@ -5988,7 +6057,10 @@
     "nav_mega_solutions_title": "Solutions",
     "nav_mega_scenes": "Application Scenarios",
     "nav_mega_resources": "Resources",
-    "nav_mega_view_all": "View All Products"
+    "nav_mega_view_all": "View All Products",
+    "nav_support_services": "服务支持",
+    "nav_about_us": "关于我们",
+    "nav_contact_us": "联系我们"
   },
   "zh-TW": {
     "all": "全部",
@@ -6225,7 +6297,10 @@
     "nav_mega_solutions_title": "Solutions",
     "nav_mega_scenes": "Application Scenarios",
     "nav_mega_resources": "Resources",
-    "nav_mega_view_all": "View All Products"
+    "nav_mega_view_all": "View All Products",
+    "nav_support_services": "服務支持",
+    "nav_about_us": "關於我們",
+    "nav_contact_us": "聯繫我們"
   },
   "nav_applications": {
     "zh-CN": "场景应用",
@@ -6285,6 +6360,9 @@
     "nav_mega_solutions_title": "Solutions",
     "nav_mega_scenes": "Application Scenarios",
     "nav_mega_resources": "Resources",
-    "nav_mega_view_all": "View All Products"
+    "nav_mega_view_all": "View All Products",
+    "nav_support_services": "Support & Services",
+    "nav_about_us": "About Us",
+    "nav_contact_us": "Contact Us"
   }
 }

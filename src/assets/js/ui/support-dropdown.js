@@ -9,6 +9,7 @@
   /* ───────────────────────── DATA ───────────────────────── */
 
   var SUBSERIES = [
+    { key: "nav_support_services", icon: "grid_view", href: "/support/", emoji: "" },
     { key: "nav_support_installation", icon: "construction", href: "/support/#installation", emoji: "" },
     { key: "nav_support_warranty", icon: "verified", href: "/support/#warranty", emoji: "" },
     { key: "nav_support_spare_parts", icon: "build_circle", href: "/support/#spare-parts", emoji: "" },
@@ -84,8 +85,10 @@
   }
 
   function renderDropdown(cfg) {
+    var parentHref = "/support/";
+
     var items = SUBSERIES.map(function (s, idx) {
-      var html = buildItem(s, cfg.href);
+      var html = buildItem(s, parentHref);
       if (idx < SUBSERIES.length - 1) {
         html += buildSeparator();
       }
@@ -96,9 +99,7 @@
       '<div class="sup-dropdown-wrap' +
       (isTouch() ? " touch-device" : "") +
       '">' +
-      '<a href="' +
-      esc(cfg.href) +
-      '"' +
+      '<a href="#"' +
       ' class="' +
       esc(cfg.activeClass || "") +
       ' sup-dropdown-trigger"' +
@@ -154,7 +155,7 @@
     var handle = '<div class="sup-popup-handle"></div>';
 
     var items = SUBSERIES.map(function (s) {
-      var itemHref = s.href || href;
+      var itemHref = s.href || "/support/";
       var chevron = '<span class="material-symbols-outlined sup-popup-chevron">chevron_right</span>';
       var emojiHtml = s.emoji ? '<span class="sup-popup-emoji">' + s.emoji + "</span>" : "";
       return (
