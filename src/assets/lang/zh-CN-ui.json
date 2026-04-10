@@ -1553,5 +1553,8 @@
   "support_service_system_desc": "从设备安装到长期运维，YuKoLi 提供完整的售后保障。包含免费安装指导、现场操作培训、定期巡检保养，以及原厂配件快速供应。",
   "support_original_parts": "原厂配件",
   "support_100_original": "100% 原厂",
-  "support_sla_guarantee": "SLA 保障"
+  "support_sla_guarantee": "SLA 保障",
+  "nav_support_services": "服务支持",
+  "nav_about_us": "关于我们",
+  "nav_contact_us": "联系我们"
 }
