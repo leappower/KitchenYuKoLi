@@ -54,10 +54,14 @@
     "prepare": "git config core.hooksPath .githooks"
   },
   "dependencies": {
+    "bcryptjs": "^3.0.3",
+    "better-sqlite3": "^12.9.0",
     "compression": "^1.7.4",
     "express": "^4.18.2",
     "express-rate-limit": "^7.1.5",
     "helmet": "^7.1.0",
+    "jsonwebtoken": "^9.0.3",
+    "multer": "^2.1.1",
     "puppeteer-core": "24.39.1"
   },
   "devDependencies": {

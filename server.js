@@ -142,6 +142,14 @@ app.use((req, res, next) => {
   next();
 });
 
+// CMS admin panel
+try {
+  const { initCMS } = require('./src/admin');
+  initCMS(app);
+} catch (e) {
+  console.warn('[CMS] Failed to initialize:', e.message);
+}
+
 // Health check endpoint
 app.get('/health', (req, res) => {
   res.status(200).json({
