@@ -19,12 +19,12 @@
     { key: "nav_solutions_cloud_kitchen", icon: "delivery_dining", href: "/solutions/cloud-kitchen/" },
     { key: "nav_solutions_canteen", icon: "restaurant", href: "/solutions/canteen/" },
     { key: "nav_solutions_thai", icon: "public", href: "/solutions/southeast-asian/" },
+    { key: "nav_roi", icon: "calculate", href: "/roi/", badge: true },
   ];
 
-  /** Solutions items (Case Studies + ROI) */
+  /** Solutions items (Case Studies) */
   var SOLUTIONS = [
     { key: "nav_solutions_automation", icon: "grid_view", href: "/solutions/" },
-    { key: "nav_roi", icon: "calculate", href: "/roi/", badge: true },
   ];
 
   /* ───────────────────────── HELPERS ───────────────────────── */
@@ -111,6 +111,9 @@
   }
 
   function buildAutomationItem(item) {
+    var suffix = item.badge
+      ? '<span class="sol-roi-badge" data-i18n="nav_roi_badge">HOT</span>'
+      : '<span class="material-symbols-outlined sol-dropdown-chevron">chevron_right</span>';
     return (
       '<a href="' +
       esc(item.href) +
@@ -125,7 +128,7 @@
       '">' +
       esc(item.key) +
       "</span>" +
-      '<span class="material-symbols-outlined sol-dropdown-chevron">chevron_right</span>' +
+      suffix +
       "</a>"
     );
   }
@@ -176,6 +179,9 @@
   }
 
   function buildPopupAutomationItem(item) {
+    var suffix = item.badge
+      ? '<span class="sol-roi-badge" data-i18n="nav_roi_badge">HOT</span>'
+      : '<span class="material-symbols-outlined sol-popup-chevron">chevron_right</span>';
     return (
       '<a href="' +
       esc(item.href) +
@@ -190,7 +196,7 @@
       '">' +
       esc(item.key) +
       "</span>" +
-      '<span class="material-symbols-outlined sol-popup-chevron">chevron_right</span>' +
+      suffix +
       "</a>"
     );
   }
