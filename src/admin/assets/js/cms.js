@@ -832,6 +832,7 @@
   }
 
   function togglePostPublish(id, active) {
+    if (!confirm(active ? '确认发布这篇文章？' : '确认取消发布？取消后文章将变为草稿。')) return;
     api('/posts/' + id + '/publish', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ is_active: active }) })
       .then(function() { toast(active ? '已发布' : '已取消发布'); loadPosts(); });
   }
@@ -1455,6 +1456,7 @@
 
   // Publish
   window.publishProducts = function() {
+    if (!confirm('确认发布？这将更新产品数据并推送到网站仓库。')) return;
     var btn = document.getElementById('btn-publish');
     btn.disabled = true; btn.textContent = '发布中...';
     api('/publish/products', { method: 'POST' }).then(function(d) {
