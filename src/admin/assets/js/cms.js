@@ -54,6 +54,8 @@
       case 'categories': renderCategories(area); break;
       case 'products': renderProducts(area); break;
       case 'media': renderMedia(area); break;
+      case 'nav': renderNavPage(area); break;
+      case 'i18n': renderI18nPage(area); break;
       default: area.innerHTML = '<div class="text-center text-gray-400 py-16">功能开发中</div>';
     }
   }
@@ -517,7 +519,15 @@
   CMS.loadProducts = loadProducts;
 
   // ─── NAV MANAGEMENT ───────────────────────────────────────────────
-  CMS.loadNav = function() {
+  function renderNavPage(area) {
+    area.innerHTML = '<div class="fade-in"><div class="flex items-center justify-between mb-4">' +
+      '<h2 class="text-lg font-semibold">导航管理</h2>' +
+      '<button class="btn-primary" onclick="openNavEditor()">+ 新增导航项</button></div>' +
+      '<div id="nav-container"><div class="text-center py-8 text-gray-400">加载中...</div></div></div>';
+    loadNavData();
+  }
+
+  function loadNavData() {
     var container = document.getElementById('nav-container');
     if (!container) return;
     container.innerHTML = '<div class="text-center py-8 text-gray-400">加载中...</div>';
@@ -525,7 +535,7 @@
       if (!data) return;
       renderNavTree(data.tree, container);
     });
-  };
+  }
 
   function renderNavTree(tree, container) {
     container.innerHTML = '';
@@ -586,7 +596,7 @@
         if (action === 'edit') openNavEditor(id);
         else if (action === 'delete') {
           if (!confirm('确定删除？子项也会被删除。')) return;
-          api('/nav/' + id, { method: 'DELETE' }).then(function() { toast('已删除'); CMS.loadNav(); });
+          api('/nav/' + id, { method: 'DELETE' }).then(function() { toast('已删除'); loadNavData(); });
         }
       });
     });
@@ -632,7 +642,7 @@
         var promise;
         if (isEdit) promise = api('/nav/' + id, { method: 'PUT', body: body });
         else promise = api('/nav', { method: 'POST', body: body });
-        promise.then(function() { toast(isEdit ? '已更新' : '已创建'); CMS.loadNav(); });
+        promise.then(function() { toast(isEdit ? '已更新' : '已创建'); loadNavData(); });
       });
     });
   }
@@ -640,17 +650,33 @@
   window.openNavEditor = openNavEditor;
 
   // ─── I18N MANAGEMENT ──────────────────────────────────────────────
-  CMS.loadI18n = function(lang, type) {
-    lang = lang || 'zh-CN';
-    type = type || 'ui';
+  function renderI18nPage(area) {
+    area.innerHTML = '<div class="fade-in"><div class="flex items-center justify-between mb-4">' +
+      '<h2 class="text-lg font-semibold">多语言管理</h2>' +
+      '<div class="flex gap-2">' +
+      '<select id="i18n-lang" onchange="loadI18nUI(this.value)" style="border:1px solid #374151;background:#1e293b;color:#e2e8f0;padding:0.375rem 0.5rem;border-radius:0.375rem;font-size:0.8rem">' +
+      '<option value="zh-CN">中文</option><option value="en">English</option></select>' +
+      '<select id="i18n-type" onchange="loadI18nUI(document.getElementById(\'i18n-lang\').value, this.value)" style="border:1px solid #374151;background:#1e293b;color:#e2e8f0;padding:0.375rem 0.5rem;border-radius:0.375rem;font-size:0.8rem">' +
+      '<option value="ui">UI 文案</option><option value="product">产品翻译</option></select></div></div>' +
+      '<div class="flex gap-2 mb-4">' +
+      '<input id="i18n-search" placeholder="搜索翻译键..." style="flex:1;border:1px solid #374151;background:#1e293b;color:#e2e8f0;padding:0.5rem;border-radius:0.375rem;font-size:0.8rem">' +
+      '<button onclick="var s=document.getElementById(\'i18n-search\').value;loadI18nUI(document.getElementById(\'i18n-lang\').value,undefined,s)" style="padding:0.5rem 1rem;background:#4f46e5;color:#fff;border:none;border-radius:0.375rem;cursor:pointer;font-size:0.8rem">搜索</button></div>' +
+      '<div id="i18n-container"><div class="text-center py-8 text-gray-400">加载中...</div></div></div>';
+    loadI18nUI('zh-CN', 'ui');
+  }
+
+  function loadI18nUI(lang, type, search) {
+    lang = lang || document.getElementById('i18n-lang').value || 'zh-CN';
+    type = type || document.getElementById('i18n-type').value || 'ui';
     var container = document.getElementById('i18n-container');
     if (!container) return;
     container.innerHTML = '<div class="text-center py-8 text-gray-400">加载中...</div>';
 
+    var searchParam = search ? '&search=' + encodeURIComponent(search) : '';
     // Fetch both languages for comparison
-    var p1 = fetch('/api/cms/i18n/keys?lang=' + lang + '&type=' + type + '&limit=100', { headers: { 'Authorization': 'Bearer ' + token } }).then(function(r) { return r.json(); });
+    var p1 = fetch('/api/cms/i18n/keys?lang=' + lang + '&type=' + type + '&limit=100' + searchParam, { headers: { 'Authorization': 'Bearer ' + token } }).then(function(r) { return r.json(); });
     var lang2 = lang === 'zh-CN' ? 'en' : 'zh-CN';
-    var p2 = fetch('/api/cms/i18n/keys?lang=' + lang2 + '&type=' + type + '&limit=100', { headers: { 'Authorization': 'Bearer ' + token } }).then(function(r) { return r.json(); });
+    var p2 = fetch('/api/cms/i18n/keys?lang=' + lang2 + '&type=' + type + '&limit=100' + searchParam, { headers: { 'Authorization': 'Bearer ' + token } }).then(function(r) { return r.json(); });
 
     Promise.all([p1, p2]).then(function(results) {
       var data1 = results[0] || { keys: [] };
@@ -716,14 +742,14 @@
             method: 'PUT',
             body: { lang: lang, type: type, updates: updates }
           }).then(function(d) {
-            if (d) { toast(d.message || '已保存'); CMS.loadI18n(lang, type); }
+            if (d) { toast(d.message || '已保存'); loadI18nUI(lang, type); }
           });
         });
       }
     });
   };
 
-  window.loadI18n = function(lang, type) { CMS.loadI18n(lang, type); };
+  window.loadI18nUI = function(lang, type, search) { loadI18nUI(lang, type, search); };
 
   // Publish
   window.publishProducts = function() {
