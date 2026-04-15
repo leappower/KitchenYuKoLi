@@ -1,6 +1,7 @@
 'use strict';
 
 const { getDb, logAudit } = require('../db/init');
+const { upload } = require('./media');
 
 function productsRoutes(db) {
   const express = require('express');
@@ -139,26 +140,30 @@ function productsRoutes(db) {
     res.json({ message: 'Product deleted' });
   });
 
-  // POST /products/:id/images — upload image
-  router.post('/products/:id/images', requireAuth, (req, res) => {
+  // POST /products/:id/images — upload image(s) via multipart
+  router.post('/products/:id/images', requireAuth, upload.array('files', 20), (req, res) => {
     const productId = parseInt(req.params.id);
     const product = db.prepare('SELECT id FROM products WHERE id = ?').get(productId);
     if (!product) return res.status(404).json({ error: 'Product not found' });
 
-    const { file_path, is_primary, sort_order, alt_text } = req.body;
-    if (!file_path) return res.status(400).json({ error: 'file_path is required' });
+    // Check existing images to decide if first one should be primary
+    const existingCount = db.prepare('SELECT COUNT(*) as cnt FROM product_images WHERE product_id = ?').get(productId).cnt;
+    const isAutoPrimary = existingCount === 0;
 
-    // If setting as primary, unset others
-    if (is_primary) {
-      db.prepare('UPDATE product_images SET is_primary = 0 WHERE product_id = ?').run(productId);
+    const uploaded = [];
+    for (const file of req.files) {
+      const result = db.prepare(
+        'INSERT INTO product_images (product_id, file_path, is_primary, sort_order) VALUES (?, ?, ?, ?)'
+      ).run(productId, `/admin/uploads/${file.filename}`, isAutoPrimary && uploaded.length === 0 ? 1 : 0, existingCount + uploaded.length);
+
+      uploaded.push({
+        id: result.lastInsertRowid,
+        file_path: `/admin/uploads/${file.filename}`,
+        is_primary: isAutoPrimary && uploaded.length === 0 ? 1 : 0,
+        sort_order: existingCount + uploaded.length
+      });
     }
-
-    const result = db.prepare(
-      'INSERT INTO product_images (product_id, file_path, is_primary, sort_order, alt_text) VALUES (?, ?, ?, ?, ?)'
-    ).run(productId, file_path, is_primary ? 1 : 0, sort_order || 0, alt_text || '');
-
-    const img = db.prepare('SELECT * FROM product_images WHERE id = ?').get(result.lastInsertRowid);
-    res.json({ image: img });
+    res.json({ images: uploaded });
   });
 
   // DELETE /products/:id/images/:imgId

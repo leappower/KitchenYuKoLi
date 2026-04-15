@@ -174,6 +174,12 @@ module.exports = (env = {}, argv = {}) => {
                 to: 'assets/fonts',
                 noErrorOnMissing: true,
               },
+              // Copy i18n language files
+              {
+                from: 'src/assets/lang',
+                to: 'assets/lang',
+                noErrorOnMissing: true,
+              },
               // Copy images — optimize-images.js 直接输出到 src/assets/images（含 WebP + 压缩 PNG）
               {
                 from: 'src/assets/images',

@@ -15,23 +15,52 @@ const {
 const app = express();
 
 // Security middleware with comprehensive protection
-app.use(helmet({
-  contentSecurityPolicy: {
-    directives: {
-      defaultSrc: ['\'self\''],
-      styleSrc: ['\'self\'', '\'unsafe-inline\'', 'https://fonts.googleapis.com'],
-      fontSrc: ['\'self\'', 'https://fonts.gstatic.com'],
-      scriptSrc: ['\'self\'', '\'unsafe-inline\''],
-      imgSrc: ['\'self\'', 'data:', 'https:', 'http:'],
-      connectSrc: ['\'self\''],
+// Admin panel needs relaxed security for CDN scripts (Tailwind, Alpine.js)
+app.use('/admin', (req, res, next) => {
+  // Remove restrictive headers that helmet may add elsewhere
+  const removeHeaders = [
+    'Cross-Origin-Embedder-Policy',
+    'Cross-Origin-Opener-Policy',
+    'Origin-Agent-Cluster',
+    'Strict-Transport-Security',
+  ];
+  const origSetHeader = res.setHeader.bind(res);
+  res.setHeader = function(name, value) {
+    if (removeHeaders.includes(name)) return this;
+    return origSetHeader(name, value);
+  };
+
+  helmet({
+    contentSecurityPolicy: {
+      directives: {
+        defaultSrc: ['\'self\''],
+        styleSrc: ['\'self\'', '\'unsafe-inline\''],
+        fontSrc: ['\'self\''],
+        scriptSrc: ['\'self\'', '\'unsafe-inline\'', '\'unsafe-eval\''],
+        scriptSrcAttr: ['\'unsafe-inline\''],
+        imgSrc: ['\'self\'', 'data:', 'https:', 'http:'],
+        connectSrc: ['\'self\''],
+        upgradeInsecureRequests: null,
+      },
     },
-  },
-  hsts: {
-    maxAge: 31536000,
-    includeSubDomains: true,
-    preload: true
-  }
-}));
+    crossOriginEmbedderPolicy: false,
+    crossOriginOpenerPolicy: false,
+    originAgentCluster: false,
+    hsts: false,
+  })(req, res, next);
+});
+
+// Strict CSP for main site — skip /admin (handled above)
+// Remove problematic CORS headers after helmet (for non-HTTPS LAN origins)
+const REMOVE_COEP = ['Cross-Origin-Embedder-Policy', 'Cross-Origin-Opener-Policy', 'Origin-Agent-Cluster'];
+app.use((req, res, next) => {
+  const origWriteHead = res.writeHead;
+  res.writeHead = function(...args) {
+    REMOVE_COEP.forEach(h => this.removeHeader(h));
+    return origWriteHead.apply(this, args);
+  };
+  next();
+});
 
 // Rate limiting to prevent abuse
 const limiter = rateLimit({
@@ -73,8 +102,6 @@ app.use((req, res, next) => {
   res.setHeader('X-XSS-Protection', '1; mode=block');
   res.setHeader('Referrer-Policy', 'strict-origin-when-cross-origin');
   res.setHeader('Permissions-Policy', 'camera=(), microphone=(), geolocation=()');
-  res.setHeader('Cross-Origin-Embedder-Policy', 'require-corp');
-  res.setHeader('Cross-Origin-Opener-Policy', 'same-origin');
 
   // CORS — allow requests from same origin and production domain
   const origin = req.headers.origin;
@@ -236,27 +263,53 @@ const SPA_ROUTES = ['/home', '/catalog', '/solutions', '/about', '/contact', '/q
   '/solutions/cloud-kitchen', '/solutions/canteen', '/solutions/southeast-asian'];
 
 app.get('*', (req, res) => {
+  // Never intercept API routes
+  if (req.path.startsWith('/api/')) return res.status(404).json({ error: 'Not found' });
+
+  var fs = require('fs');
+
   // Only look inside dist/ — never expose project root files (scripts/, .env, etc.)
-  const filePath = path.join(__dirname, 'dist', req.path);
+  var filePath = path.join(__dirname, 'dist', req.path);
 
   // Check if it's an exact file match (CSS, JS, images, etc.)
-  if (require('fs').existsSync(filePath) && require('fs').statSync(filePath).isFile()) {
+  if (fs.existsSync(filePath) && fs.statSync(filePath).isFile()) {
     return res.sendFile(filePath);
   }
 
+  // Webpack outputs pages under dist/pages/ — SPA router fetches /products/index-pc.html
+  // but the file lives at dist/pages/products/index-pc.html
+  var pagesFilePath = path.join(__dirname, 'dist', 'pages', req.path);
+  if (fs.existsSync(pagesFilePath) && fs.statSync(pagesFilePath).isFile()) {
+    return res.sendFile(pagesFilePath);
+  }
+
   // Check if the path matches a known SPA route (with or without trailing slash)
-  const cleanPath = req.path.replace(/\/+$/, '') || '/';
+  var cleanPath = req.path.replace(/\/+$/, '') || '/';
   if (SPA_ROUTES.includes(cleanPath)) {
     return res.sendFile(path.join(__dirname, 'dist', 'index.html'));
   }
 
   // Check if path is a directory with index.html (e.g. /some/route/)
-  const indexPath = path.join(__dirname, 'dist', req.path, 'index.html');
-  if (require('fs').existsSync(indexPath) && require('fs').statSync(indexPath).isFile()) {
+  var indexPath = path.join(__dirname, 'dist', req.path, 'index.html');
+  if (fs.existsSync(indexPath) && fs.statSync(indexPath).isFile()) {
     res.sendFile(indexPath);
   } else {
-    // For unknown routes, serve root SPA shell (SPA router will show 404 if needed)
-    res.sendFile(path.join(__dirname, 'dist', 'index.html'));
+    // Also try dist/pages/ for directory index.html
+    var pagesIndexPath = path.join(__dirname, 'dist', 'pages', req.path, 'index.html');
+    if (fs.existsSync(pagesIndexPath) && fs.statSync(pagesIndexPath).isFile()) {
+      res.sendFile(pagesIndexPath);
+    } else if (process.env.NODE_ENV !== 'production') {
+      // Dev fallback: serve from src/ for files not yet built (e.g. lang JSON, images)
+      var srcPath = path.join(__dirname, 'src', req.path);
+      if (fs.existsSync(srcPath) && fs.statSync(srcPath).isFile()) {
+        res.sendFile(srcPath);
+      } else {
+        res.sendFile(path.join(__dirname, 'dist', 'index.html'));
+      }
+    } else {
+      // For unknown routes, serve root SPA shell (SPA router will show 404 if needed)
+      res.sendFile(path.join(__dirname, 'dist', 'index.html'));
+    }
   }
 });
 
@@ -278,7 +331,7 @@ app.use((req, res) => {
   res.status(404).json({ error: 'Not Found' });
 });
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3099;
 const SSL_PORT = parseInt(process.env.SSL_PORT) || 5443;
 const https = require('https');
 const sslOptions = {

@@ -32,8 +32,10 @@ function initCMS(app) {
     res.status(404).json({ error: 'Not found' });
   });
 
-  // Create uploads directory
-  fs.mkdirSync(path.join(__dirname, 'uploads'), { recursive: true });
+  // Serve uploaded files
+  const uploadsDir = path.join(__dirname, 'uploads');
+  fs.mkdirSync(uploadsDir, { recursive: true });
+  app.use('/admin/uploads', require('express').static(uploadsDir));
   console.log('[CMS] Admin panel available at /admin');
 }
 

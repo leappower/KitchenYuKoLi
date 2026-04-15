@@ -29,6 +29,7 @@ const storage = multer.diskStorage({
 const upload = multer({
   storage,
   limits: { fileSize: 50 * 1024 * 1024 },
+  defParamCharset: 'utf8',
   fileFilter: (req, file, cb) => {
     const ext = path.extname(file.originalname).toLowerCase().slice(1);
     if (!ALLOWED_EXT.has(ext)) {
@@ -58,6 +59,7 @@ function mediaRoutes(db) {
 
     const countRow = db.prepare(`SELECT COUNT(*) as total FROM media_library ${where}`).get(...params);
     const rows = db.prepare(`SELECT * FROM media_library ${where} ORDER BY created_at DESC LIMIT ? OFFSET ?`).all(...params, limitNum, offset);
+    res.setHeader('Content-Type', 'application/json; charset=utf-8');
     res.json({ media: rows, total: countRow.total, page: pageNum, limit: limitNum });
   });
 
