@@ -115,6 +115,22 @@ function initDatabase() {
       group_key TEXT NOT NULL DEFAULT '',
       FOREIGN KEY (parent_id) REFERENCES nav_items(id) ON DELETE CASCADE
     );
+
+    CREATE TABLE IF NOT EXISTS posts (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      title TEXT NOT NULL DEFAULT '',
+      slug TEXT NOT NULL DEFAULT '',
+      excerpt TEXT DEFAULT '',
+      content_markdown TEXT DEFAULT '',
+      cover_image TEXT DEFAULT '',
+      category TEXT DEFAULT 'news',
+      sort_order INTEGER DEFAULT 0,
+      is_active INTEGER DEFAULT 1,
+      published_at TEXT,
+      created_at TEXT DEFAULT (datetime('now')),
+      updated_at TEXT DEFAULT (datetime('now'))
+    );
+    CREATE UNIQUE INDEX IF NOT EXISTS idx_posts_slug ON posts(slug);
   `);
 
   // Ensure default admin user
