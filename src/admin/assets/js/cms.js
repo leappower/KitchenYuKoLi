@@ -650,106 +650,363 @@
   window.openNavEditor = openNavEditor;
 
   // ─── I18N MANAGEMENT ──────────────────────────────────────────────
+  var i18nState = {
+    lang: 'zh-CN',
+    type: 'ui',
+    search: '',
+    page: 1,
+    pageSize: 50,
+    total: 0,
+    edits: {},      // key -> new value (unsaved changes)
+    editCount: 0
+  };
+
   function renderI18nPage(area) {
-    area.innerHTML = '<div class="fade-in"><div class="flex items-center justify-between mb-4">' +
-      '<h2 class="text-lg font-semibold">多语言管理</h2>' +
-      '<div class="flex gap-2">' +
-      '<select id="i18n-lang" onchange="loadI18nUI(this.value)" style="border:1px solid #374151;background:#1e293b;color:#e2e8f0;padding:0.375rem 0.5rem;border-radius:0.375rem;font-size:0.8rem">' +
-      '<option value="zh-CN">中文</option><option value="en">English</option></select>' +
-      '<select id="i18n-type" onchange="loadI18nUI(document.getElementById(\'i18n-lang\').value, this.value)" style="border:1px solid #374151;background:#1e293b;color:#e2e8f0;padding:0.375rem 0.5rem;border-radius:0.375rem;font-size:0.8rem">' +
-      '<option value="ui">UI 文案</option><option value="product">产品翻译</option></select></div></div>' +
+    area.innerHTML = '<div class="fade-in">' +
+      // Header
+      '<div class="flex items-center justify-between mb-4 flex-wrap gap-3">' +
+        '<h2 class="text-lg font-semibold">多语言管理</h2>' +
+        '<div class="flex gap-2 flex-wrap">' +
+          '<select id="i18n-lang" style="border:1px solid #374151;background:#1e293b;color:#e2e8f0;padding:0.375rem 0.5rem;border-radius:0.375rem;font-size:0.8rem">' +
+            '<option value="zh-CN"' + (i18nState.lang === 'zh-CN' ? ' selected' : '') + '>中文</option>' +
+            '<option value="en"' + (i18nState.lang === 'en' ? ' selected' : '') + '>English</option>' +
+          '</select>' +
+          '<select id="i18n-type" style="border:1px solid #374151;background:#1e293b;color:#e2e8f0;padding:0.375rem 0.5rem;border-radius:0.375rem;font-size:0.8rem">' +
+            '<option value="ui"' + (i18nState.type === 'ui' ? ' selected' : '') + '>UI 文案 (' + (i18nState.lang === 'zh-CN' ? '1558' : '1558') + ')</option>' +
+            '<option value="product"' + (i18nState.type === 'product' ? ' selected' : '') + '>产品翻译 (' + (i18nState.lang === 'zh-CN' ? '2217' : '2217') + ')</option>' +
+          '</select>' +
+        '</div>' +
+      '</div>' +
+      // Stats bar
+      '<div id="i18n-stats" class="flex items-center gap-4 mb-4 text-sm text-slate-400"></div>' +
+      // Search
       '<div class="flex gap-2 mb-4">' +
-      '<input id="i18n-search" placeholder="搜索翻译键..." style="flex:1;border:1px solid #374151;background:#1e293b;color:#e2e8f0;padding:0.5rem;border-radius:0.375rem;font-size:0.8rem">' +
-      '<button onclick="var s=document.getElementById(\'i18n-search\').value;loadI18nUI(document.getElementById(\'i18n-lang\').value,undefined,s)" style="padding:0.5rem 1rem;background:#4f46e5;color:#fff;border:none;border-radius:0.375rem;cursor:pointer;font-size:0.8rem">搜索</button></div>' +
-      '<div id="i18n-container"><div class="text-center py-8 text-gray-400">加载中...</div></div></div>';
-    loadI18nUI('zh-CN', 'ui');
+        '<input id="i18n-search" placeholder="搜索翻译键或值..." value="' + esc(i18nState.search) + '" style="flex:1;border:1px solid #374151;background:#1e293b;color:#e2e8f0;padding:0.5rem;border-radius:0.375rem;font-size:0.8rem">' +
+        '<button id="i18n-search-btn" style="padding:0.5rem 1rem;background:#4f46e5;color:#fff;border:none;border-radius:0.375rem;cursor:pointer;font-size:0.8rem">搜索</button>' +
+      '</div>' +
+      // Unsaved changes bar
+      '<div id="i18n-unsaved-bar" class="hidden mb-4 flex items-center justify-between px-4 py-2 bg-amber-500/10 border border-amber-500/30 rounded-lg">' +
+        '<span class="text-sm text-amber-400" id="i18n-unsaved-text">0 条未保存修改</span>' +
+        '<div class="flex gap-2">' +
+          '<button id="i18n-discard-btn" style="font-size:0.8rem;padding:0.25rem 0.75rem;background:#374151;color:#e2e8f0;border:none;border-radius:0.25rem;cursor:pointer">放弃</button>' +
+          '<button id="i18n-unsaved-save-btn" style="font-size:0.8rem;padding:0.25rem 0.75rem;background:#f59e0b;color:#000;border:none;border-radius:0.25rem;cursor:pointer;font-weight:600">保存修改</button>' +
+        '</div>' +
+      '</div>' +
+      // Table container
+      '<div id="i18n-container" style="overflow-x:auto"><div class="text-center py-8 text-gray-400">加载中...</div></div>' +
+      // Pagination
+      '<div id="i18n-pagination" class="flex items-center justify-between mt-4 text-sm text-slate-400"></div>' +
+      // Import/Export bar
+      '<div class="flex items-center justify-end gap-2 mt-4">' +
+        '<button id="i18n-export-btn" style="font-size:0.8rem;padding:0.375rem 0.75rem;background:#374151;color:#e2e8f0;border:none;border-radius:0.375rem;cursor:pointer">📥 导出 JSON</button>' +
+        '<button id="i18n-import-btn" style="font-size:0.8rem;padding:0.375rem 0.75rem;background:#374151;color:#e2e8f0;border:none;border-radius:0.375rem;cursor:pointer">📤 导入 JSON</button>' +
+        '<input type="file" id="i18n-import-file" accept=".json" style="display:none">' +
+      '</div>' +
+      '</div>';
+
+    // Bind events
+    document.getElementById('i18n-lang').addEventListener('change', function() {
+      i18nState.lang = this.value;
+      i18nState.page = 1;
+      i18nState.search = '';
+      document.getElementById('i18n-search').value = '';
+      loadI18nKeys();
+    });
+    document.getElementById('i18n-type').addEventListener('change', function() {
+      i18nState.type = this.value;
+      i18nState.page = 1;
+      loadI18nKeys();
+    });
+    document.getElementById('i18n-search-btn').addEventListener('click', function() {
+      i18nState.search = document.getElementById('i18n-search').value.trim();
+      i18nState.page = 1;
+      loadI18nKeys();
+    });
+    document.getElementById('i18n-search').addEventListener('keydown', function(e) {
+      if (e.key === 'Enter') {
+        i18nState.search = this.value.trim();
+        i18nState.page = 1;
+        loadI18nKeys();
+      }
+    });
+    document.getElementById('i18n-discard-btn').addEventListener('click', function() {
+      i18nState.edits = {};
+      i18nState.editCount = 0;
+      updateUnsavedBar();
+      loadI18nKeys();
+    });
+    document.getElementById('i18n-unsaved-save-btn').addEventListener('click', saveI18nEdits);
+    document.getElementById('i18n-export-btn').addEventListener('click', exportI18n);
+    document.getElementById('i18n-import-btn').addEventListener('click', function() {
+      document.getElementById('i18n-import-file').click();
+    });
+    document.getElementById('i18n-import-file').addEventListener('change', importI18nFile);
+
+    loadI18nKeys();
   }
 
-  function loadI18nUI(lang, type, search) {
-    lang = lang || document.getElementById('i18n-lang').value || 'zh-CN';
-    type = type || document.getElementById('i18n-type').value || 'ui';
+  function loadI18nKeys() {
     var container = document.getElementById('i18n-container');
     if (!container) return;
     container.innerHTML = '<div class="text-center py-8 text-gray-400">加载中...</div>';
 
-    var searchParam = search ? '&search=' + encodeURIComponent(search) : '';
-    // Fetch both languages for comparison
-    var p1 = fetch('/api/cms/i18n/keys?lang=' + lang + '&type=' + type + '&limit=100' + searchParam, { headers: { 'Authorization': 'Bearer ' + token } }).then(function(r) { return r.json(); });
-    var lang2 = lang === 'zh-CN' ? 'en' : 'zh-CN';
-    var p2 = fetch('/api/cms/i18n/keys?lang=' + lang2 + '&type=' + type + '&limit=100' + searchParam, { headers: { 'Authorization': 'Bearer ' + token } }).then(function(r) { return r.json(); });
+    var params = '?lang=' + i18nState.lang + '&type=' + i18nState.type +
+      '&page=' + i18nState.page + '&limit=' + i18nState.pageSize +
+      (i18nState.search ? '&search=' + encodeURIComponent(i18nState.search) : '');
 
-    Promise.all([p1, p2]).then(function(results) {
-      var data1 = results[0] || { keys: [] };
-      var data2 = results[1] || { keys: [] };
-      var map2 = {};
-      data2.keys.forEach(function(k) { map2[k.key] = k.value; });
+    // Fetch primary + comparison language
+    var lang2 = i18nState.lang === 'zh-CN' ? 'en' : 'zh-CN';
+    api('/i18n/keys' + params).then(function(data1) {
+      if (!data1) { container.innerHTML = '<div class="text-center py-8 text-red-400">加载失败</div>'; return; }
+      i18nState.total = data1.total || 0;
 
-      // Build comparison table
-      var html = '<table style="width:100%;border-collapse:collapse;font-size:0.875rem">' +
-        '<thead><tr style="border-bottom:2px solid #e5e7eb;text-align:left">' +
-        '<th style="padding:0.5rem">Key</th>' +
-        '<th style="padding:0.5rem">' + lang + '</th>' +
-        '<th style="padding:0.5rem">' + lang2 + '</th>' +
-        '<th style="padding:0.5rem;width:4rem">操作</th>' +
-        '</tr></thead><tbody>';
+      // Fetch comparison
+      var compParams = '?lang=' + lang2 + '&type=' + i18nState.type + '&limit=' + i18nState.pageSize +
+        '&page=' + i18nState.page +
+        (i18nState.search ? '&search=' + encodeURIComponent(i18nState.search) : '');
+      api('/i18n/keys' + compParams).then(function(data2) {
+        var map2 = {};
+        if (data2 && data2.keys) data2.keys.forEach(function(k) { map2[k.key] = k.value; });
 
-      data1.keys.forEach(function(entry, idx) {
-        var v2 = map2[entry.key] || '';
-        var missing = !v2;
-        html += '<tr style="border-bottom:1px solid #f3f4f6;' + (missing ? 'background:#fef2f2' : '') + '">' +
-          '<td style="padding:0.5rem;font-family:monospace;font-size:0.75rem;color:#6b7280" title="' + esc(entry.key) + '">' + esc(entry.key.length > 40 ? entry.key.slice(0, 40) + '...' : entry.key) + '</td>' +
-          '<td style="padding:0.5rem"><input class="i18n-edit" data-lang="' + lang + '" data-key="' + esc(entry.key) + '" value="' + esc(entry.value) + '" style="width:100%;border:1px solid #e5e7eb;padding:0.25rem 0.5rem;border-radius:0.25rem;font-size:0.8rem"></td>' +
-          '<td style="padding:0.5rem;color:' + (missing ? '#ef4444' : '#374151') + '">' + esc(v2 || '(缺失)') + '</td>' +
-          '<td style="padding:0.5rem"><button class="i18n-save-btn" data-lang="' + lang + '" data-key="' + esc(entry.key) + '" style="font-size:0.7rem;padding:0.125rem 0.375rem;background:#4f46e5;color:#fff;border:none;border-radius:0.25rem;cursor:pointer">保存</button></td>' +
-          '</tr>';
-      });
+        // Also fetch total for comparison for stats
+        api('/i18n/keys?lang=' + lang2 + '&type=' + i18nState.type + '&limit=1').then(function(compInfo) {
+          var compTotal = (compInfo && compInfo.total) || 0;
+          var missingCount = data1.keys.filter(function(e) { return !map2[e.key]; }).length;
 
-      html += '</tbody></table>';
-      html += '<div class="flex items-center justify-between mt-4">' +
-        '<span class="text-sm text-gray-500">共 ' + data1.total + ' 条</span>' +
-        '<button id="i18n-batch-save" style="font-size:0.875rem;padding:0.5rem 1rem;background:#4f46e5;color:#fff;border:none;border-radius:0.375rem;cursor:pointer">批量保存所有修改</button>' +
-        '</div>';
+          // Update stats
+          var statsEl = document.getElementById('i18n-stats');
+          if (statsEl) {
+            statsEl.innerHTML =
+              '<span>当前语言: <strong class="text-slate-200">' + i18nState.lang + '</strong></span>' +
+              '<span>对照: <strong class="text-slate-200">' + lang2 + '</strong></span>' +
+              '<span>总条目: <strong class="text-slate-200">' + i18nState.total + '</strong></span>' +
+              '<span class="text-red-400">缺失翻译: <strong>' + missingCount + '</strong></span>' +
+              '<span>覆盖率: <strong class="' + (missingCount === 0 ? 'text-green-400' : 'text-amber-400') + '">' +
+                (data1.keys.length ? Math.round((1 - missingCount / data1.keys.length) * 100) : 0) + '%</strong></span>';
+          }
 
-      container.innerHTML = html;
-
-      // Bind save buttons
-      container.querySelectorAll('.i18n-save-btn').forEach(function(btn) {
-        btn.addEventListener('click', function() {
-          var key = btn.getAttribute('data-key');
-          var input = container.querySelector('.i18n-edit[data-key="' + key + '"]');
-          if (!input) return;
-          api('/i18n/batch', {
-            method: 'PUT',
-            body: { lang: lang, type: type, updates: [{ key: key, value: input.value }] }
-          }).then(function(d) {
-            if (d) toast('已保存');
-          });
+          renderI18nTable(data1.keys, map2, lang2);
+          renderI18nPagination();
+          updateUnsavedBar();
         });
       });
+    });
+  }
 
-      // Batch save
-      var batchBtn = document.getElementById('i18n-batch-save');
-      if (batchBtn) {
-        batchBtn.addEventListener('click', function() {
-          var updates = [];
-          container.querySelectorAll('.i18n-edit').forEach(function(input) {
-            if (input._originalValue !== input.value) {
-              updates.push({ key: input.getAttribute('data-key'), value: input.value });
-            }
-          });
-          if (!updates.length) { toast('没有修改', true); return; }
-          api('/i18n/batch', {
-            method: 'PUT',
-            body: { lang: lang, type: type, updates: updates }
-          }).then(function(d) {
-            if (d) { toast(d.message || '已保存'); loadI18nUI(lang, type); }
-          });
-        });
+  function renderI18nTable(entries, map2, lang2) {
+    var container = document.getElementById('i18n-container');
+    if (!container) return;
+
+    if (!entries.length) {
+      container.innerHTML = '<div class="text-center py-12 text-slate-400"><div class="text-4xl mb-3">📭</div><div>没有找到匹配的翻译条目</div></div>';
+      return;
+    }
+
+    // Group by prefix (e.g. "nav_" or "products_")
+    var groups = {};
+    entries.forEach(function(e) {
+      var prefix = e.key.split('_')[0];
+      if (!groups[prefix]) groups[prefix] = [];
+      groups[prefix].push(e);
+    });
+
+    var html = '<table style="width:100%;border-collapse:collapse;font-size:0.875rem">' +
+      '<thead style="position:sticky;top:0;z-index:1;background:#0f172a"><tr style="border-bottom:2px solid #334155">' +
+      '<th style="padding:0.625rem 0.5rem;text-align:left;width:25%">Key</th>' +
+      '<th style="padding:0.625rem 0.5rem;text-align:left;width:35%">' + i18nState.lang + ' <span class="text-xs text-slate-500">(可编辑)</span></th>' +
+      '<th style="padding:0.625rem 0.5rem;text-align:left;width:35%">' + lang2 + ' <span class="text-xs text-slate-500">(可编辑)</span></th>' +
+      '<th style="padding:0.625rem 0.5rem;text-align:center;width:5%">状态</th>' +
+      '</tr></thead><tbody>';
+
+    var lastPrefix = '';
+    entries.forEach(function(entry) {
+      var prefix = entry.key.split('_')[0];
+      // Group separator row
+      if (prefix !== lastPrefix && Object.keys(groups).length > 1) {
+        if (lastPrefix) html += '<tr><td colspan="4" style="padding:0;height:0.5rem"></td></tr>';
+        html += '<tr style="border-bottom:1px solid #1e293b"><td colspan="4" style="padding:0.375rem 0.5rem">' +
+          '<span style="font-size:0.7rem;font-weight:700;color:#64748b;text-transform:uppercase;letter-spacing:0.05em">' +
+          esc(prefix) + ' <span style="color:#475569">(' + groups[prefix].length + ')</span></span></td></tr>';
+        lastPrefix = prefix;
+      }
+
+      var v2 = map2[entry.key] || '';
+      var missing = !v2;
+      var editedKey = entry.key;
+      var currentVal = i18nState.edits.hasOwnProperty(entry.key) ? i18nState.edits[entry.key] : entry.value;
+      var currentV2 = i18nState.edits.hasOwnProperty(entry.key + ':' + lang2) ? i18nState.edits[entry.key + ':' + lang2] : v2;
+
+      html += '<tr style="border-bottom:1px solid #1e293b;' +
+        (missing && !i18nState.edits.hasOwnProperty(entry.key + ':' + lang2) ? 'background:#1a0a0a' : '') +
+        (i18nState.edits.hasOwnProperty(entry.key) ? 'background:#1a1a0a' : '') +
+        '" data-key="' + esc(entry.key) + '">' +
+        '<td style="padding:0.5rem;font-family:monospace;font-size:0.7rem;color:#94a3b8;word-break:break-all;line-height:1.4" title="' + esc(entry.key) + '">' + esc(entry.key) + '</td>' +
+        '<td style="padding:0.25rem 0.5rem"><input class="i18n-edit" data-lang="' + i18nState.lang + '" data-key="' + esc(entry.key) + '" value="' + esc(currentVal) + '" ' +
+        'style="width:100%;border:1px solid #334155;background:#1e293b;color:#e2e8f0;padding:0.375rem 0.5rem;border-radius:0.25rem;font-size:0.8rem;line-height:1.4"></td>' +
+        '<td style="padding:0.25rem 0.5rem"><input class="i18n-edit" data-lang="' + lang2 + '" data-key="' + esc(entry.key) + '" value="' + esc(currentV2) + '" ' +
+        'style="width:100%;border:1px solid #334155;background:#1e293b;color:' + (missing ? '#fca5a5' : '#e2e8f0') + ';padding:0.375rem 0.5rem;border-radius:0.25rem;font-size:0.8rem;line-height:1.4" ' +
+        'placeholder="' + esc(v2 || '(点击输入翻译)') + '"></td>' +
+        '<td style="padding:0.5rem;text-align:center">' +
+        (i18nState.edits.hasOwnProperty(entry.key) || i18nState.edits.hasOwnProperty(entry.key + ':' + lang2)
+          ? '<span style="color:#f59e0b;font-size:0.75rem" title="已修改未保存">✏️</span>'
+          : (missing ? '<span style="color:#ef4444;font-size:0.75rem" title="缺失翻译">⚠️</span>' : '<span style="color:#22c55e;font-size:0.75rem">✅</span>')) +
+        '</td></tr>';
+    });
+
+    html += '</tbody></table>';
+    container.innerHTML = html;
+
+    // Track edits
+    container.querySelectorAll('.i18n-edit').forEach(function(input) {
+      input.addEventListener('input', function() {
+        var lang = input.getAttribute('data-lang');
+        var key = input.getAttribute('data-key');
+        var editKey = lang === i18nState.lang ? key : key + ':' + lang;
+        if (input.value === '') delete i18nState.edits[editKey];
+        else i18nState.edits[editKey] = input.value;
+        i18nState.editCount = Object.keys(i18nState.edits).length;
+        updateUnsavedBar();
+        // Update row highlight
+        var row = input.closest('tr');
+        if (row) row.style.background = input.value ? '#1a1a0a' : '';
+      });
+    });
+  }
+
+  function renderI18nPagination() {
+    var el = document.getElementById('i18n-pagination');
+    if (!el) return;
+    var totalPages = Math.ceil(i18nState.total / i18nState.pageSize);
+    var page = i18nState.page;
+    if (totalPages <= 1) { el.innerHTML = '<span>共 ' + i18nState.total + ' 条</span><span></span>'; return; }
+
+    var start = (page - 1) * i18nState.pageSize + 1;
+    var end = Math.min(page * i18nState.pageSize, i18nState.total);
+
+    var pages = [];
+    if (page > 1) pages.push({ n: page - 1, t: '‹' });
+    for (var i = Math.max(1, page - 2); i <= Math.min(totalPages, page + 2); i++) {
+      pages.push({ n: i, t: String(i) });
+    }
+    if (page < totalPages) pages.push({ n: page + 1, t: '›' });
+
+    var btns = pages.map(function(p) {
+      var active = p.n === page;
+      return '<button data-page="' + p.n + '" style="padding:0.25rem 0.5rem;border:1px solid ' +
+        (active ? '#4f46e5' : '#334155') + ';background:' + (active ? '#4f46e5' : 'transparent') +
+        ';color:' + (active ? '#fff' : '#94a3b8') + ';border-radius:0.25rem;cursor:pointer;font-size:0.8rem;min-width:2rem">' + p.t + '</button>';
+    }).join('');
+
+    el.innerHTML = '<span>显示 ' + start + '-' + end + ' / 共 ' + i18nState.total + ' 条</span>' +
+      '<div class="flex gap-1">' + btns + '</div>';
+
+    el.querySelectorAll('[data-page]').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        i18nState.page = parseInt(this.getAttribute('data-page'));
+        loadI18nKeys();
+        document.getElementById('i18n-container').scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+    });
+  }
+
+  function updateUnsavedBar() {
+    var bar = document.getElementById('i18n-unsaved-bar');
+    var text = document.getElementById('i18n-unsaved-text');
+    if (!bar) return;
+    if (i18nState.editCount > 0) {
+      bar.classList.remove('hidden');
+      if (text) text.textContent = i18nState.editCount + ' 条未保存修改';
+    } else {
+      bar.classList.add('hidden');
+    }
+  }
+
+  function saveI18nEdits() {
+    if (!i18nState.editCount) return;
+    var updates = [];
+    Object.keys(i18nState.edits).forEach(function(editKey) {
+      var isComp = editKey.indexOf(':') > -1;
+      var key = isComp ? editKey.split(':')[0] : editKey;
+      var lang = isComp ? editKey.split(':')[1] : i18nState.lang;
+      var type = isComp ? i18nState.type : i18nState.type;
+      updates.push({ key: key, value: i18nState.edits[editKey], lang: lang, type: type });
+    });
+
+    // Group by lang+type to minimize API calls
+    var groups = {};
+    updates.forEach(function(u) {
+      var gk = u.lang + '|' + u.type;
+      if (!groups[gk]) groups[gk] = { lang: u.lang, type: u.type, updates: [] };
+      groups[gk].updates.push({ key: u.key, value: u.value });
+    });
+
+    var promises = Object.values(groups).map(function(g) {
+      return api('/i18n/batch', { method: 'PUT', body: g });
+    });
+
+    Promise.all(promises).then(function(results) {
+      var totalSaved = 0;
+      results.forEach(function(r) { if (r && r.count) totalSaved += r.count; });
+      if (totalSaved > 0) {
+        i18nState.edits = {};
+        i18nState.editCount = 0;
+        updateUnsavedBar();
+        toast('已保存 ' + totalSaved + ' 条翻译');
+        loadI18nKeys(); // Refresh
       }
     });
-  };
+  }
 
-  window.loadI18nUI = function(lang, type, search) { loadI18nUI(lang, type, search); };
+  function exportI18n() {
+    var url = '/api/cms/i18n/export?lang=' + i18nState.lang + '&type=' + i18nState.type;
+    fetch(url, { headers: { 'Authorization': 'Bearer ' + token } })
+      .then(function(r) { return r.text(); })
+      .then(function(text) {
+        var blob = new Blob([text], { type: 'application/json' });
+        var a = document.createElement('a');
+        a.href = URL.createObjectURL(blob);
+        a.download = i18nState.lang + '-' + i18nState.type + '.json';
+        a.click();
+        URL.revokeObjectURL(a.href);
+        toast('导出成功');
+      })
+      .catch(function(e) { toast('导出失败: ' + e.message, true); });
+  }
+
+  function importI18nFile(e) {
+    var file = e.target.files[0];
+    if (!file) return;
+    var reader = new FileReader();
+    reader.onload = function(ev) {
+      try {
+        var data = JSON.parse(ev.target.result);
+        if (typeof data !== 'object' || Array.isArray(data)) {
+          toast('无效的 JSON 格式', true); return;
+        }
+        api('/i18n/import', {
+          method: 'POST',
+          body: { lang: i18nState.lang, type: i18nState.type, data: data, mode: 'merge' }
+        }).then(function(result) {
+          if (result) {
+            toast(result.message || '导入成功');
+            loadI18nKeys();
+          }
+        });
+      } catch (err) {
+        toast('JSON 解析失败: ' + err.message, true);
+      }
+    };
+    reader.readAsText(file);
+    e.target.value = ''; // Reset file input
+  }
+
+  window.loadI18nUI = function(lang, type, search) {
+    i18nState.lang = lang || i18nState.lang;
+    i18nState.type = type || i18nState.type;
+    if (search !== undefined) i18nState.search = search;
+    i18nState.page = 1;
+    loadI18nKeys();
+  };
 
   // Publish
   window.publishProducts = function() {
