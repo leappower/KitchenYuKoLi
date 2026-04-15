@@ -52,7 +52,7 @@
   // Products / Applications / Solutions / Service / About / Contact
   // Parent items with dropdown do NOT navigate — only sub-items do.
   // The href here is a no-op; actual navigation is handled by dropdown sub-items.
-  var NAV_ITEMS = [
+  var NAV_ITEMS = (typeof NAV_CONFIG !== 'undefined' && NAV_CONFIG.mainNav) || [
     { key: "nav_products", label: "产品中心", path: "#", id: "products", hasDropdown: true },
     { key: "nav_applications", label: "场景应用", path: "#", id: "applications", hasDropdown: true },
     { key: "nav_solutions", label: "解决方案", path: "#", id: "solutions", hasDropdown: true },

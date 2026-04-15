@@ -9,7 +9,7 @@
 
   /* ───────────────────────── DATA ───────────────────────── */
 
-  var SUBSERIES = [
+  var SUBSERIES = (typeof NAV_CONFIG !== 'undefined' && NAV_CONFIG.dropdowns && NAV_CONFIG.dropdowns.products) || [
     { key: "nav_products_cutting", icon: "content_cut", emoji: "", href: "/catalog/?cat=cutting" },
     { key: "nav_products_stirfry", icon: "local_fire_department", emoji: "🔥", href: "/catalog/?cat=stirfry" },
     { key: "nav_products_frying", icon: "outdoor_grill", emoji: "", href: "/catalog/?cat=frying" },
