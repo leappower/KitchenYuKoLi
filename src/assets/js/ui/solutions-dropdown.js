@@ -13,7 +13,7 @@
   /* ───────────────────────── DATA ───────────────────────── */
 
   /** Automation Solutions (自动化方案) */
-  var AUTOMATION = [
+  var AUTOMATION = (typeof NAV_CONFIG !== 'undefined' && NAV_CONFIG.dropdowns && NAV_CONFIG.dropdowns.solutions) || [
     { key: "nav_solutions_fastfood", icon: "ramen_dining", href: "/solutions/fast-food/" },
     { key: "nav_solutions_hotpot", icon: "local_fire_department", href: "/solutions/hotpot/" },
     { key: "nav_solutions_cloud_kitchen", icon: "delivery_dining", href: "/solutions/cloud-kitchen/" },

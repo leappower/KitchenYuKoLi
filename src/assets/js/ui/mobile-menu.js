@@ -18,85 +18,34 @@
 
   /* ───────────────────────── L1 MENU DATA ───────────────────────── */
 
-  var MENU_ITEMS = [
-    {
-      key: "nav_products",
-      href: "/products/",
-      id: "products",
-      icon: "kitchen",
-      children: [
-        { key: "nav_products_cutting", icon: "content_cut", href: "/products/" },
-        { key: "nav_products_stirfry", icon: "local_fire_department", href: "/products/" },
-        { key: "nav_products_frying", icon: "outdoor_grill", href: "/products/" },
-        { key: "nav_products_stewing", icon: "soup_kitchen", href: "/products/" },
-        { key: "nav_products_steaming", icon: "cloud", href: "/products/" },
-        { key: "nav_products_other", icon: "more_horiz", href: "/products/" },
-      ],
-    },
-    {
-      key: "nav_applications",
-      href: "/applications/",
-      id: "applications",
-      icon: "apps",
-      children: [
-        { key: "nav_applications_fastfood", icon: "ramen_dining", href: "/applications/fast-food/" },
-        { key: "nav_applications_hotpot", icon: "local_fire_department", href: "/applications/hotpot/" },
-        { key: "nav_applications_cloud_kitchen", icon: "delivery_dining", href: "/applications/cloud-kitchen/" },
-        { key: "nav_applications_canteen", icon: "restaurant", href: "/applications/canteen/" },
-        { key: "nav_applications_thai", icon: "public", href: "/applications/southeast-asian/" },
-      ],
-    },
-    {
-      key: "nav_solutions",
-      href: "/solutions/",
-      id: "solutions",
-      icon: "build",
-      children: [
-        { key: "nav_auto_kitchen", icon: "restaurant", href: "/solutions/kitchen/" },
-        { key: "nav_auto_cooking_line", icon: "soup_kitchen", href: "/solutions/cooking-line/" },
-        { key: "nav_auto_prep", icon: "blender", href: "/solutions/prep/" },
-        { key: "nav_auto_beverage", icon: "local_cafe", href: "/solutions/beverage/" },
-        { key: "nav_auto_cooling", icon: "ac_unit", href: "/solutions/cooling/" },
-        { key: "nav_auto_cabinet", icon: "kitchen", href: "/solutions/cabinet/" },
-        { key: "nav_cases_sol", icon: "monitoring", href: "/solutions/case/" },
-        { key: "nav_roi", icon: "calculate", href: "/roi/" },
-      ],
-    },
-    {
-      key: "nav_service",
-      href: "/support/",
-      id: "support",
-      icon: "support_agent",
-      children: [
-        { key: "nav_support_installation", icon: "construction", href: "/support/" },
-        { key: "nav_support_warranty", icon: "verified", href: "/support/" },
-        { key: "nav_support_spare_parts", icon: "build_circle", href: "/support/" },
-        { key: "nav_support_training", icon: "school", href: "/support/" },
-        { key: "nav_support_faq", icon: "contact_support", href: "/support/" },
-      ],
-    },
-    {
-      key: "nav_about",
-      href: "/about/",
-      id: "about",
-      icon: "apartment",
-      children: [
-        { key: "nav_about_profile", icon: "apartment", href: "/about/" },
-        { key: "nav_about_factory", icon: "factory", href: "/about/" },
-        { key: "nav_about_cert", icon: "verified", href: "/about/" },
-      ],
-    },
-    {
-      key: "nav_contact",
-      href: "/contact/",
-      id: "contact",
-      icon: "mail",
-      children: [
-        { key: "nav_contact_form", icon: "mail", href: "/contact/" },
-        { key: "nav_contact_locations", icon: "location_on", href: "/contact/" },
-        { key: "nav_contact_whatsapp", icon: "chat", href: "https://wa.me/947644875109261", isWhatsApp: true },
-      ],
-    },
+  var MENU_ITEMS = (typeof NAV_CONFIG !== 'undefined' && NAV_CONFIG.mainNav) ? NAV_CONFIG.mainNav.map(function(item) {
+    var children = [];
+    var dropdownMap = {
+      products: 'products',
+      applications: 'applications',
+      solutions: 'solutions',
+      support: 'support',
+      about: 'about',
+      contact: 'contact'
+    };
+    var dropdownKey = dropdownMap[item.id];
+    if (dropdownKey && NAV_CONFIG.dropdowns && NAV_CONFIG.dropdowns[dropdownKey]) {
+      children = NAV_CONFIG.dropdowns[dropdownKey];
+    }
+    return {
+      key: item.key,
+      href: item.path,
+      id: item.id,
+      icon: item.id === 'products' ? 'kitchen' : item.id === 'applications' ? 'apps' : item.id === 'solutions' ? 'build' : item.id === 'support' ? 'support_agent' : item.id === 'about' ? 'info' : 'mail',
+      children: children.map(function(c) { return { key: c.key, icon: c.icon, href: c.href || c.path || '/', badge: c.badge }; })
+    };
+  }) : [
+    { key: "nav_products", href: "/products/", id: "products", icon: "kitchen", children: [] },
+    { key: "nav_applications", href: "/applications/", id: "applications", icon: "apps", children: [] },
+    { key: "nav_solutions", href: "/solutions/", id: "solutions", icon: "build", children: [] },
+    { key: "nav_service", href: "/support/", id: "support", icon: "support_agent", children: [] },
+    { key: "nav_about", href: "/about/", id: "about", icon: "info", children: [] },
+    { key: "nav_contact", href: "/contact/", id: "contact", icon: "mail", children: [] }
   ];
 
   /* ───────────────────────── HELPERS ───────────────────────── */

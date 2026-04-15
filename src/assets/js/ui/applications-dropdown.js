@@ -9,7 +9,7 @@
   /* ───────────────────────── DATA ───────────────────────── */
 
   /** Application scenarios (5 items) */
-  var SUBSERIES = [
+  var SUBSERIES = (typeof NAV_CONFIG !== 'undefined' && NAV_CONFIG.dropdowns && NAV_CONFIG.dropdowns.applications) || [
     { key: "nav_applications_fastfood", icon: "ramen_dining", href: "/applications/fast-food/", emoji: "" },
     { key: "nav_applications_hotpot", icon: "local_fire_department", href: "/applications/hotpot/", emoji: "" },
     { key: "nav_applications_cloud_kitchen", icon: "delivery_dining", href: "/applications/cloud-kitchen/", emoji: "" },

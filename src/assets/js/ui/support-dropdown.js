@@ -8,7 +8,7 @@
 
   /* ───────────────────────── DATA ───────────────────────── */
 
-  var SUBSERIES = [
+  var SUBSERIES = (typeof NAV_CONFIG !== 'undefined' && NAV_CONFIG.dropdowns && NAV_CONFIG.dropdowns.support) || [
     { key: "nav_support_services", icon: "grid_view", href: "/support/", emoji: "" },
     { key: "nav_support_installation", icon: "construction", href: "/support/#installation", emoji: "" },
     { key: "nav_support_warranty", icon: "verified", href: "/support/#warranty", emoji: "" },

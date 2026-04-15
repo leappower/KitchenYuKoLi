@@ -10,7 +10,7 @@
 
   /* ───────────────────────── DATA ───────────────────────── */
 
-  var ITEMS = [
+  var ITEMS = (typeof NAV_CONFIG !== 'undefined' && NAV_CONFIG.dropdowns && NAV_CONFIG.dropdowns.contact) || [
     { key: "nav_contact_us", icon: "grid_view", href: "/contact/" },
     { key: "nav_contact_form", icon: "mail", href: "/contact/" },
     { key: "nav_contact_locations", icon: "location_on", href: "/contact/" },
