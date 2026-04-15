@@ -516,6 +516,215 @@
 
   CMS.loadProducts = loadProducts;
 
+  // ─── NAV MANAGEMENT ───────────────────────────────────────────────
+  CMS.loadNav = function() {
+    var container = document.getElementById('nav-container');
+    if (!container) return;
+    container.innerHTML = '<div class="text-center py-8 text-gray-400">加载中...</div>';
+    api('/nav').then(function(data) {
+      if (!data) return;
+      renderNavTree(data.tree, container);
+    });
+  };
+
+  function renderNavTree(tree, container) {
+    container.innerHTML = '';
+    if (!tree || !tree.length) {
+      container.innerHTML = '<div class="text-center py-8 text-gray-400">暂无导航项，点击"新增"添加</div>';
+      return;
+    }
+    tree.forEach(function(item) {
+      var div = document.createElement('div');
+      div.style.cssText = 'border:1px solid #e5e7eb;border-radius:0.5rem;padding:0.75rem;margin-bottom:0.5rem';
+      div.className = item.is_active ? '' : 'opacity-50';
+
+      var header = document.createElement('div');
+      header.className = 'flex items-center justify-between';
+      header.innerHTML = '<div class="flex items-center gap-2">' +
+        '<span class="text-lg">' + (item.icon || '📄') + '</span>' +
+        '<span class="font-medium">' + esc(item.default_label || item.i18n_key) + '</span>' +
+        '<span class="text-xs text-gray-400">' + esc(item.path || '') + '</span>' +
+        (item.is_active ? '<span class="text-xs bg-green-100 text-green-700 px-1.5 py-0.5 rounded">启用</span>' : '<span class="text-xs bg-red-100 text-red-700 px-1.5 py-0.5 rounded">禁用</span>') +
+        '</div>' +
+        '<div class="flex gap-1">' +
+        '<button class="nav-action" data-id="' + item.id + '" data-action="edit" style="font-size:0.75rem;padding:0.25rem 0.5rem;background:#4f46e5;color:#fff;border:none;border-radius:0.25rem;cursor:pointer">编辑</button>' +
+        '<button class="nav-action" data-id="' + item.id + '" data-action="delete" style="font-size:0.75rem;padding:0.25rem 0.5rem;background:#ef4444;color:#fff;border:none;border-radius:0.25rem;cursor:pointer">删除</button>' +
+        '</div>';
+      div.appendChild(header);
+
+      // Children
+      if (item.children && item.children.length) {
+        var childContainer = document.createElement('div');
+        childContainer.style.cssText = 'margin-top:0.5rem;padding-left:1.5rem;border-left:2px solid #e5e7eb';
+        item.children.forEach(function(child) {
+          var childDiv = document.createElement('div');
+          childDiv.className = child.is_active ? '' : 'opacity-50';
+          childDiv.style.cssText = 'padding:0.375rem 0.5rem;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #f3f4f6';
+          childDiv.innerHTML = '<div class="flex items-center gap-2">' +
+            '<span>' + esc(child.icon || '') + '</span>' +
+            '<span class="text-sm">' + esc(child.default_label || child.i18n_key) + '</span>' +
+            '<span class="text-xs text-gray-400">' + esc(child.path || child.href || '') + '</span>' +
+            (child.badge ? '<span class="text-xs bg-amber-100 text-amber-700 px-1 rounded">HOT</span>' : '') +
+            '</div>' +
+            '<div class="flex gap-1">' +
+            '<button class="nav-action" data-id="' + child.id + '" data-action="edit" style="font-size:0.7rem;padding:0.125rem 0.375rem;background:#4f46e5;color:#fff;border:none;border-radius:0.25rem;cursor:pointer">编辑</button>' +
+            '<button class="nav-action" data-id="' + child.id + '" data-action="delete" style="font-size:0.7rem;padding:0.125rem 0.375rem;background:#ef4444;color:#fff;border:none;border-radius:0.25rem;cursor:pointer">删除</button>' +
+            '</div>';
+          childContainer.appendChild(childDiv);
+        });
+        div.appendChild(childContainer);
+      }
+      container.appendChild(div);
+    });
+
+    // Bind events
+    container.querySelectorAll('.nav-action').forEach(function(btn) {
+      btn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        var id = parseInt(btn.getAttribute('data-id'));
+        var action = btn.getAttribute('data-action');
+        if (action === 'edit') openNavEditor(id);
+        else if (action === 'delete') {
+          if (!confirm('确定删除？子项也会被删除。')) return;
+          api('/nav/' + id, { method: 'DELETE' }).then(function() { toast('已删除'); CMS.loadNav(); });
+        }
+      });
+    });
+  }
+
+  function openNavEditor(id) {
+    var isEdit = !!id;
+    var done = function(cb) {
+      if (isEdit) {
+        api('/nav').then(function(data) {
+          if (!data) return;
+          var item = data.items.find(function(i) { return i.id === id; });
+          if (item) cb(item);
+        });
+      } else {
+        cb({ parent_id: null, sort_order: 0, is_active: 1, i18n_key: '', default_label: '', path: '', icon: '', badge: 0, target: '', group_key: '' });
+      }
+    };
+    done(function(item) {
+      var html = '<div class="form-grid">' +
+        '<div><label class="text-sm font-medium">i18n Key</label><input id="ne-key" value="' + esc(item.i18n_key) + '" placeholder="nav_xxx"></div>' +
+        '<div><label class="text-sm font-medium">默认标签</label><input id="ne-label" value="' + esc(item.default_label) + '" placeholder="产品中心"></div>' +
+        '<div><label class="text-sm font-medium">路径</label><input id="ne-path" value="' + esc(item.path) + '" placeholder="/products/"></div>' +
+        '<div><label class="text-sm font-medium">图标</label><input id="ne-icon" value="' + esc(item.icon) + '" placeholder="kitchen"></div>' +
+        '<div><label class="text-sm font-medium">分组</label><input id="ne-group" value="' + esc(item.group_key) + '" placeholder="products/solutions/..."></div>' +
+        '<div><label class="text-sm font-medium">排序</label><input id="ne-sort" type="number" value="' + item.sort_order + '"></div>' +
+        '<div><label class="text-sm font-medium">父级 ID</label><input id="ne-parent" type="number" value="' + (item.parent_id || '') + '" placeholder="留空=主菜单"></div>' +
+        '<div class="flex items-end gap-2"><label class="text-sm font-medium flex items-center gap-2"><input id="ne-active" type="checkbox" ' + (item.is_active ? 'checked' : '') + '> 启用</label>' +
+        '<label class="text-sm font-medium flex items-center gap-2"><input id="ne-badge" type="checkbox" ' + (item.badge ? 'checked' : '') + '> HOT 标签</label></div></div>';
+      showModal('nav-modal', (isEdit ? '编辑导航项' : '新增导航项'), html, function() {
+        var body = {
+          i18n_key: document.getElementById('ne-key').value.trim(),
+          default_label: document.getElementById('ne-label').value.trim(),
+          path: document.getElementById('ne-path').value.trim(),
+          icon: document.getElementById('ne-icon').value.trim(),
+          group_key: document.getElementById('ne-group').value.trim(),
+          sort_order: parseInt(document.getElementById('ne-sort').value) || 0,
+          parent_id: document.getElementById('ne-parent').value ? parseInt(document.getElementById('ne-parent').value) : null,
+          is_active: document.getElementById('ne-active').checked ? 1 : 0,
+          badge: document.getElementById('ne-badge').checked ? 1 : 0
+        };
+        if (!body.i18n_key) { toast('请输入 i18n Key', true); return; }
+        var promise;
+        if (isEdit) promise = api('/nav/' + id, { method: 'PUT', body: body });
+        else promise = api('/nav', { method: 'POST', body: body });
+        promise.then(function() { toast(isEdit ? '已更新' : '已创建'); CMS.loadNav(); });
+      });
+    });
+  }
+
+  window.openNavEditor = openNavEditor;
+
+  // ─── I18N MANAGEMENT ──────────────────────────────────────────────
+  CMS.loadI18n = function(lang, type) {
+    lang = lang || 'zh-CN';
+    type = type || 'ui';
+    var container = document.getElementById('i18n-container');
+    if (!container) return;
+    container.innerHTML = '<div class="text-center py-8 text-gray-400">加载中...</div>';
+
+    // Fetch both languages for comparison
+    var p1 = fetch('/api/cms/i18n/keys?lang=' + lang + '&type=' + type + '&limit=100', { headers: { 'Authorization': 'Bearer ' + token } }).then(function(r) { return r.json(); });
+    var lang2 = lang === 'zh-CN' ? 'en' : 'zh-CN';
+    var p2 = fetch('/api/cms/i18n/keys?lang=' + lang2 + '&type=' + type + '&limit=100', { headers: { 'Authorization': 'Bearer ' + token } }).then(function(r) { return r.json(); });
+
+    Promise.all([p1, p2]).then(function(results) {
+      var data1 = results[0] || { keys: [] };
+      var data2 = results[1] || { keys: [] };
+      var map2 = {};
+      data2.keys.forEach(function(k) { map2[k.key] = k.value; });
+
+      // Build comparison table
+      var html = '<table style="width:100%;border-collapse:collapse;font-size:0.875rem">' +
+        '<thead><tr style="border-bottom:2px solid #e5e7eb;text-align:left">' +
+        '<th style="padding:0.5rem">Key</th>' +
+        '<th style="padding:0.5rem">' + lang + '</th>' +
+        '<th style="padding:0.5rem">' + lang2 + '</th>' +
+        '<th style="padding:0.5rem;width:4rem">操作</th>' +
+        '</tr></thead><tbody>';
+
+      data1.keys.forEach(function(entry, idx) {
+        var v2 = map2[entry.key] || '';
+        var missing = !v2;
+        html += '<tr style="border-bottom:1px solid #f3f4f6;' + (missing ? 'background:#fef2f2' : '') + '">' +
+          '<td style="padding:0.5rem;font-family:monospace;font-size:0.75rem;color:#6b7280" title="' + esc(entry.key) + '">' + esc(entry.key.length > 40 ? entry.key.slice(0, 40) + '...' : entry.key) + '</td>' +
+          '<td style="padding:0.5rem"><input class="i18n-edit" data-lang="' + lang + '" data-key="' + esc(entry.key) + '" value="' + esc(entry.value) + '" style="width:100%;border:1px solid #e5e7eb;padding:0.25rem 0.5rem;border-radius:0.25rem;font-size:0.8rem"></td>' +
+          '<td style="padding:0.5rem;color:' + (missing ? '#ef4444' : '#374151') + '">' + esc(v2 || '(缺失)') + '</td>' +
+          '<td style="padding:0.5rem"><button class="i18n-save-btn" data-lang="' + lang + '" data-key="' + esc(entry.key) + '" style="font-size:0.7rem;padding:0.125rem 0.375rem;background:#4f46e5;color:#fff;border:none;border-radius:0.25rem;cursor:pointer">保存</button></td>' +
+          '</tr>';
+      });
+
+      html += '</tbody></table>';
+      html += '<div class="flex items-center justify-between mt-4">' +
+        '<span class="text-sm text-gray-500">共 ' + data1.total + ' 条</span>' +
+        '<button id="i18n-batch-save" style="font-size:0.875rem;padding:0.5rem 1rem;background:#4f46e5;color:#fff;border:none;border-radius:0.375rem;cursor:pointer">批量保存所有修改</button>' +
+        '</div>';
+
+      container.innerHTML = html;
+
+      // Bind save buttons
+      container.querySelectorAll('.i18n-save-btn').forEach(function(btn) {
+        btn.addEventListener('click', function() {
+          var key = btn.getAttribute('data-key');
+          var input = container.querySelector('.i18n-edit[data-key="' + key + '"]');
+          if (!input) return;
+          api('/i18n/batch', {
+            method: 'PUT',
+            body: { lang: lang, type: type, updates: [{ key: key, value: input.value }] }
+          }).then(function(d) {
+            if (d) toast('已保存');
+          });
+        });
+      });
+
+      // Batch save
+      var batchBtn = document.getElementById('i18n-batch-save');
+      if (batchBtn) {
+        batchBtn.addEventListener('click', function() {
+          var updates = [];
+          container.querySelectorAll('.i18n-edit').forEach(function(input) {
+            if (input._originalValue !== input.value) {
+              updates.push({ key: input.getAttribute('data-key'), value: input.value });
+            }
+          });
+          if (!updates.length) { toast('没有修改', true); return; }
+          api('/i18n/batch', {
+            method: 'PUT',
+            body: { lang: lang, type: type, updates: updates }
+          }).then(function(d) {
+            if (d) { toast(d.message || '已保存'); CMS.loadI18n(lang, type); }
+          });
+        });
+      }
+    });
+  };
+
+  window.loadI18n = function(lang, type) { CMS.loadI18n(lang, type); };
+
   // Publish
   window.publishProducts = function() {
     var btn = document.getElementById('btn-publish');
