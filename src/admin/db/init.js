@@ -101,6 +101,28 @@ function initDatabase() {
     CREATE INDEX IF NOT EXISTS idx_media_created ON media_library(created_at);
     CREATE INDEX IF NOT EXISTS idx_audit_created ON audit_log(created_at);
 
+    CREATE TABLE IF NOT EXISTS page_sections (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      page_id TEXT NOT NULL,
+      section_key TEXT NOT NULL,
+      section_type TEXT NOT NULL DEFAULT 'text',
+      content_json TEXT DEFAULT '{}',
+      sort_order INTEGER DEFAULT 0,
+      is_active INTEGER DEFAULT 1,
+      updated_at TEXT DEFAULT (datetime('now')),
+      UNIQUE(page_id, section_key)
+    );
+
+    CREATE TABLE IF NOT EXISTS page_images (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      page_id TEXT NOT NULL,
+      section_key TEXT NOT NULL,
+      image_url TEXT NOT NULL DEFAULT '',
+      alt_text TEXT DEFAULT '',
+      sort_order INTEGER DEFAULT 0,
+      updated_at TEXT DEFAULT (datetime('now'))
+    );
+
     CREATE TABLE IF NOT EXISTS nav_items (
       id INTEGER PRIMARY KEY AUTOINCREMENT,
       parent_id INTEGER,
