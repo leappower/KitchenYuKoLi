@@ -7,6 +7,7 @@ const { mediaRoutes } = require('./media');
 const { publishRoutes } = require('./publish');
 const { navRoutes } = require('./nav');
 const { i18nRoutes } = require('./i18n');
+const { pagesRoutes } = require('./pages');
 
 function createApiRouter(db) {
   const express = require('express');
@@ -21,6 +22,7 @@ function createApiRouter(db) {
   router.use(publishRoutes(db));
   router.use(navRoutes(db));
   router.use(i18nRoutes(db));
+  router.use(pagesRoutes(db));
 
   return router;
 }
