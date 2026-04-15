@@ -100,6 +100,21 @@ function initDatabase() {
     CREATE INDEX IF NOT EXISTS idx_images_product ON product_images(product_id);
     CREATE INDEX IF NOT EXISTS idx_media_created ON media_library(created_at);
     CREATE INDEX IF NOT EXISTS idx_audit_created ON audit_log(created_at);
+
+    CREATE TABLE IF NOT EXISTS nav_items (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      parent_id INTEGER,
+      sort_order INTEGER DEFAULT 0,
+      is_active INTEGER DEFAULT 1,
+      i18n_key TEXT NOT NULL DEFAULT '',
+      default_label TEXT NOT NULL DEFAULT '',
+      path TEXT NOT NULL DEFAULT '',
+      icon TEXT NOT NULL DEFAULT '',
+      badge INTEGER DEFAULT 0,
+      target TEXT NOT NULL DEFAULT '',
+      group_key TEXT NOT NULL DEFAULT '',
+      FOREIGN KEY (parent_id) REFERENCES nav_items(id) ON DELETE CASCADE
+    );
   `);
 
   // Ensure default admin user
