@@ -20,7 +20,7 @@ function pagesRoutes(db) {
       ];
       // Add section count for each
       pages = pages.map(function(p) {
-        var count = db.prepare('SELECT COUNT(*) as c FROM page_sections WHERE page_id = ?').params(p.page_id).get();
+        var count = db.prepare('SELECT COUNT(*) as c FROM page_sections WHERE page_id = ?').get(p.page_id);
         p.section_count = count.c;
         return p;
       });
@@ -32,12 +32,12 @@ function pagesRoutes(db) {
   router.get('/pages/:pageId', (req, res) => {
     try {
       var pageId = decodeURIComponent(req.params.pageId);
-      var sections = db.prepare('SELECT * FROM page_sections WHERE page_id = ? ORDER BY sort_order ASC').params(pageId).all();
+      var sections = db.prepare('SELECT * FROM page_sections WHERE page_id = ? ORDER BY sort_order ASC').all(pageId);
       // Parse content_json
       sections = sections.map(function(s) {
         try { s.content = JSON.parse(s.content_json); } catch(e) { s.content = {}; }
         // Also get images for this section
-        var imgs = db.prepare('SELECT * FROM page_images WHERE page_id = ? AND section_key = ? ORDER BY sort_order ASC').params(pageId, s.section_key).all();
+        var imgs = db.prepare('SELECT * FROM page_images WHERE page_id = ? AND section_key = ? ORDER BY sort_order ASC').all(pageId, s.section_key);
         s.images = imgs;
         return s;
       });
@@ -52,13 +52,13 @@ function pagesRoutes(db) {
       var sectionKey = req.params.sectionKey;
       var { section_type, content, sort_order, is_active } = req.body;
       var contentJson = JSON.stringify(content || {});
-      var existing = db.prepare('SELECT id FROM page_sections WHERE page_id = ? AND section_key = ?').params(pageId, sectionKey).get();
+      var existing = db.prepare('SELECT id FROM page_sections WHERE page_id = ? AND section_key = ?').get(pageId, sectionKey);
       if (existing) {
         db.prepare('UPDATE page_sections SET section_type = ?, content_json = ?, sort_order = ?, is_active = ?, updated_at = datetime("now") WHERE id = ?')
-          .params(section_type || 'text', contentJson, parseInt(sort_order) || 0, is_active !== undefined ? parseInt(is_active) : 1, existing.id).run();
+          .run(section_type || 'text', contentJson, parseInt(sort_order) || 0, is_active !== undefined ? parseInt(is_active) : 1, existing.id);
       } else {
         db.prepare('INSERT INTO page_sections (page_id, section_key, section_type, content_json, sort_order, is_active) VALUES (?, ?, ?, ?, ?, 1)')
-          .params(pageId, sectionKey, section_type || 'text', contentJson, parseInt(sort_order) || 0).run();
+          .run(pageId, sectionKey, section_type || 'text', contentJson, parseInt(sort_order) || 0);
       }
       logAudit(db, req.user.userId, req.user.username, 'update', 'page_section', null, null, { page_id: pageId, section_key: sectionKey });
       res.json({ message: '已保存' });
@@ -73,11 +73,11 @@ function pagesRoutes(db) {
       var images = req.body.images; // [{ image_url, alt_text, sort_order }, ...]
       if (!Array.isArray(images)) return res.status(400).json({ error: 'images array required' });
       // Delete existing images for this section
-      db.prepare('DELETE FROM page_images WHERE page_id = ? AND section_key = ?').params(pageId, sectionKey).run();
+      db.prepare('DELETE FROM page_images WHERE page_id = ? AND section_key = ?').run(pageId, sectionKey);
       // Insert new images
       images.forEach(function(img) {
         db.prepare('INSERT INTO page_images (page_id, section_key, image_url, alt_text, sort_order) VALUES (?, ?, ?, ?, ?)')
-          .params(pageId, sectionKey, img.image_url || '', img.alt_text || '', parseInt(img.sort_order) || 0).run();
+          .run(pageId, sectionKey, img.image_url || '', img.alt_text || '', parseInt(img.sort_order) || 0);
       });
       logAudit(db, req.user.userId, req.user.username, 'update', 'page_images', null, null, { page_id: pageId, section_key: sectionKey, count: images.length });
       res.json({ message: '已保存 ' + images.length + ' 张图片' });
