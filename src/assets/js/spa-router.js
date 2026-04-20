@@ -466,7 +466,19 @@
       this.hideSkeleton();
 
       // 滚动到页面顶部
-      window.scrollTo({ top: 0, left: 0, behavior: "instant" });
+      if (this._pendingScroll) {
+        // 有待滚动锚点，延迟等 DOM 渲染完成
+        var anchorId = this._pendingScroll;
+        this._pendingScroll = null;
+        setTimeout(function () {
+          var el = document.getElementById(anchorId);
+          if (el) {
+            el.scrollIntoView({ behavior: "smooth", block: "start" });
+          }
+        }, 300);
+      } else {
+        window.scrollTo({ top: 0, left: 0, behavior: "instant" });
+      }
 
       // Fade in 新内容
       requestAnimationFrame(function () {
@@ -541,9 +553,13 @@
 
       // 处理初始加载
       var currentPath = this.getCurrentPath();
+      var initialHash = window.location.hash.replace("#", "");
       if (this.routes[currentPath]) {
         // 已在正确的路由上，不需要导航
         this.log("Already on route:", currentPath);
+        if (initialHash) {
+          this._pendingScroll = initialHash;
+        }
         // 但需要初始化组件
         this.loadRoute(currentPath);
       } else if (currentPath === "/" || currentPath === "//") {
@@ -553,7 +569,13 @@
         this.navigate("/home/");
       }
 
-      // 拦截链接点击 - 只拦截已知路由的链接
+      // 解析路径中的 hash 锚点（如 /support/#faq → path=/support/ hash=faq）
+    function parseHashHref(href) {
+      var match = href.match(/^(\/[^#]*?)#([^#]*)$/);
+      return match ? { path: match[1], hash: match[2] } : null;
+    }
+
+    // 拦截链接点击 - 只拦截已知路由的链接
       document.addEventListener("click", function (event) {
         var link = event.target.closest("a");
         if (!link) return;
@@ -561,14 +583,21 @@
         var href = link.getAttribute("href");
         if (!href) return;
         if (href.startsWith("http")) return; // 外部链接
-        if (href.startsWith("#")) return; // Hash 链接
+        if (href.startsWith("#")) return; // 纯 Hash 链接（当前页面滚动）
         if (href.startsWith("mailto:")) return;
         if (href.startsWith("tel:")) return;
 
-        // 规范化路径
-        var targetPath = href.startsWith("/") ? href : "/" + href;
-        if (!targetPath.endsWith("/")) {
-          targetPath = targetPath + "/";
+        // 检查是否含 hash 锚点（/support/#faq）
+        var hashInfo = parseHashHref(href);
+        var targetPath, scrollAnchor = null;
+
+        if (hashInfo) {
+          targetPath = hashInfo.path;
+          scrollAnchor = hashInfo.hash;
+          if (!targetPath.endsWith("/")) targetPath += "/";
+        } else {
+          targetPath = href.startsWith("/") ? href : "/" + href;
+          if (!targetPath.endsWith("/")) targetPath += "/";
         }
 
         // 处理 /pages/.../index*.html -> /<basename>
@@ -586,8 +615,15 @@
         // 阻止默认行为，使用 SPA 导航
         event.preventDefault();
 
-        _self.log("SPA navigation to:", targetPath);
-        _self.navigate(targetPath);
+        if (scrollAnchor) {
+          // 含锚点：导航到父页面后滚动到锚点
+          _self.log("SPA navigation to:", targetPath, "scroll to #", scrollAnchor);
+          _self._pendingScroll = scrollAnchor;
+          _self.navigate(targetPath);
+        } else {
+          _self.log("SPA navigation to:", targetPath);
+          _self.navigate(targetPath);
+        }
       });
 
       this.log("Initialized successfully");

@@ -70,7 +70,7 @@
             '<a class="whatsapp-tab-item relative flex flex-1 flex-col items-center justify-center gap-1 ' +
             colorCls +
             '"' +
-            ' href="https://wa.me/XXXXXXXXXXX" target="_blank" rel="noopener noreferrer"' +
+            ' href="https://wa.me/8613163756465" target="_blank" rel="noopener noreferrer"' +
             ' aria-label="WhatsApp">' +
             '<span class="material-symbols-outlined relative" style="font-size:26px">' +
             esc(item.icon) +
