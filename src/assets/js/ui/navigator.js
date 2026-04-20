@@ -53,12 +53,12 @@
   // Parent items with dropdown do NOT navigate — only sub-items do.
   // The href here is a no-op; actual navigation is handled by dropdown sub-items.
   var NAV_ITEMS = (typeof NAV_CONFIG !== 'undefined' && NAV_CONFIG.mainNav) || [
-    { key: "nav_products", label: "产品中心", path: "#", id: "products", hasDropdown: true },
-    { key: "nav_applications", label: "场景应用", path: "#", id: "applications", hasDropdown: true },
-    { key: "nav_solutions", label: "解决方案", path: "#", id: "solutions", hasDropdown: true },
-    { key: "nav_service", label: "服务支持", path: "#", id: "support", hasDropdown: true },
-    { key: "nav_about", label: "关于我们", path: "#", id: "about", hasDropdown: true },
-    { key: "nav_contact", label: "联系", path: "#", id: "contact", hasDropdown: true },
+    { key: "nav_products", label: "产品中心", path: "/products/", id: "products", hasDropdown: true },
+    { key: "nav_applications", label: "场景应用", path: "/applications/", id: "applications", hasDropdown: true },
+    { key: "nav_solutions", label: "解决方案", path: "/solutions/", id: "solutions", hasDropdown: true },
+    { key: "nav_service", label: "服务支持", path: "/support/", id: "support", hasDropdown: true },
+    { key: "nav_about", label: "关于我们", path: "/about/", id: "about", hasDropdown: true },
+    { key: "nav_contact", label: "联系", path: "/contact/", id: "contact", hasDropdown: true },
   ];
 
   /* ─────────────────────────────────────────────
@@ -200,7 +200,8 @@
       }
 
       if (item.hasDropdown) {
-        // Dropdown component not loaded yet — fallback to simple link
+        // Dropdown component not loaded yet — render non-clickable label
+        return '<span class="' + cls + ' pointer-events-none">' + item.label + '</span>';
       }
       return (
         '<a class="' + cls + '" href="' + esc(href) + '" data-i18n="' + esc(item.key) + '">' + esc(item.label) + "</a>"
