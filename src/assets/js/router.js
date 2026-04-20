@@ -16,7 +16,7 @@
   /* ═══════════════════════════════════════════════════════════════════
      SECTION 1: CONSTANTS & CONFIGURATION
      ═══════════════════════════════════════════════════════════════════ */
-  var WHATSAPP_NUMBER = (global.Contacts && global.Contacts.whatsapp) || "16478158194";
+  var WHATSAPP_NUMBER = (global.Contacts && global.Contacts.whatsapp) || "8613163756465";
   var PAGES = Object.freeze({
     home: "/home/",
     products: "/products/",
