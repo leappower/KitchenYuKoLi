@@ -1,5 +1,8 @@
-# Use Node.js 18 Alpine for smaller image size
-FROM node:18-alpine
+# Use Node.js 20 Alpine for better-sqlite3 compatibility
+FROM node:20-alpine
+
+# Install build dependencies for native modules (better-sqlite3)
+RUN apk add --no-cache python3 make g++ git
 
 # Set working directory
 WORKDIR /app
@@ -7,8 +10,8 @@ WORKDIR /app
 # Copy package files
 COPY package*.json ./
 
-# Install dependencies
-RUN npm ci --only=production && npm cache clean --force
+# Install dependencies (init fake git for prepare script)
+RUN git init && git config core.hooksPath .githooks && npm ci --omit=dev && npm cache clean --force
 
 # Copy application code
 COPY . .

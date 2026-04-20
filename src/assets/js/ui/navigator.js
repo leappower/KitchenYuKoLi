@@ -862,6 +862,7 @@
             var normalizedHref = itemHref.replace(/\/$/, "");
             if (normalizedHref && currentPath.indexOf(normalizedHref) === 0) {
               items[m].classList.add("is-active");
+              break; // Only highlight first matching sub-item
             }
           }
         }

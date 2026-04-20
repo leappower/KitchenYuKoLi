@@ -12,9 +12,7 @@
 
   var ITEMS = (typeof NAV_CONFIG !== 'undefined' && NAV_CONFIG.dropdowns && NAV_CONFIG.dropdowns.contact) || [
     { key: "nav_contact_us", icon: "grid_view", href: "/contact/" },
-    { key: "nav_contact_form", icon: "mail", href: "/contact/" },
-    { key: "nav_contact_locations", icon: "location_on", href: "/contact/" },
-    { key: "nav_contact_whatsapp", icon: "chat", href: "/contact/", isWhatsApp: true },
+    { key: "nav_contact_whatsapp", icon: "chat", href: "https://api.whatsapp.com/send/?phone=8613163756465", isWhatsApp: true },
   ];
 
   /* ───────────────────────── HELPERS ───────────────────────── */
@@ -165,6 +163,12 @@
       item.addEventListener("click", function (e) {
         var itemHref = item.getAttribute("href");
         closePopup();
+        // External links (WhatsApp etc.) open directly, don't SPA-route
+        if (itemHref && itemHref.startsWith("http")) {
+          e.preventDefault();
+          window.open(itemHref, "_blank");
+          return;
+        }
         if (itemHref && global.SpaRouter) {
           e.preventDefault();
           global.SpaRouter.navigate(itemHref);

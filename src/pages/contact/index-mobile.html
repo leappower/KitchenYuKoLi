@@ -89,21 +89,21 @@
       <section class="mb-6">
         <div class="grid grid-cols-3 gap-2">
           <a
-            href="mailto:info@yukoli.com"
+            href="mailto:support.kitchen@yukoli.com"
             class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-3 text-center"
           >
             <span class="material-symbols-outlined text-primary text-lg">email</span>
             <p class="text-xs font-bold mt-1" data-i18n="contact_mobile_quick_email">邮件</p>
           </a>
           <a
-            href="tel:+8675588888888"
+            href="tel:+8613163764654"
             class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-3 text-center"
           >
             <span class="material-symbols-outlined text-primary text-lg">phone</span>
             <p class="text-xs font-bold mt-1" data-i18n="contact_mobile_quick_call">电话</p>
           </a>
           <a
-            href="https://wa.me/8613800138000"
+            href="https://wa.me/8613163764654"
             class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-3 text-center"
           >
             <span class="material-symbols-outlined text-primary text-lg">chat</span>
@@ -115,7 +115,7 @@
       <!-- Contact Form -->
       <section class="mb-8">
         <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-4">
-          <h3 class="font-bold mb-3" data-i18n="contact_mobile_form_title">发送留言</h3>
+          <h3 id="contact-form" class="font-bold mb-3" data-i18n="contact_mobile_form_title">发送留言</h3>
           <form class="space-y-2">
             <input
               type="text"
@@ -152,35 +152,31 @@
         </div>
       </section>
 
-      <!-- Offices -->
+      <!-- Office Address -->
       <section class="mb-8">
-        <h2 class="text-lg font-bold mb-3" data-i18n="contact_mobile_offices_title">我们的办公室</h2>
-        <div class="space-y-2">
-          <div
-            class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-lg p-3 flex items-center gap-3"
-          >
+        <h2 class="text-lg font-bold mb-3" data-i18n="contact_mobile_offices_title">公司地址</h2>
+        <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-4">
+          <div class="flex items-start gap-3 mb-3">
             <span class="text-xl">🇨🇳</span>
             <div>
-              <p class="font-bold text-sm" data-i18n="contact_office_hq_city">中国深圳（总部）</p>
-              <p class="text-xs text-slate-500">Hi-Tech Park, Nanshan</p>
+              <p class="font-bold text-sm" data-i18n="contact_office_hq">中国总部</p>
+              <p class="text-xs text-slate-500">YuKoLi 跃迁力科技</p>
             </div>
           </div>
-          <div
-            class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-lg p-3 flex items-center gap-3"
-          >
-            <span class="text-xl">🇸🇬</span>
-            <div>
-              <p class="font-bold text-sm" data-i18n="contact_mobile_office_singapore">新加坡</p>
-              <p class="text-xs text-slate-500">Marina Bay Financial Centre</p>
+          <div class="space-y-2 ml-8">
+            <div class="flex items-start gap-2">
+              <span class="material-symbols-outlined text-primary text-sm mt-0.5">apartment</span>
+              <div>
+                <p class="text-xs font-bold">中文地址</p>
+                <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">广东省佛山市顺德区大良街道红岗社区展伦路83号万创园12栋502室之六</p>
+              </div>
             </div>
-          </div>
-          <div
-            class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-lg p-3 flex items-center gap-3"
-          >
-            <span class="text-xl">🇩🇪</span>
-            <div>
-              <p class="font-bold text-sm" data-i18n="contact_mobile_office_frankfurt">德国法兰克福</p>
-              <p class="text-xs text-slate-500">Mainzer Landstraße 41</p>
+            <div class="flex items-start gap-2">
+              <span class="material-symbols-outlined text-primary text-sm mt-0.5">language</span>
+              <div>
+                <p class="text-xs font-bold">English Address</p>
+                <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">Room 6, 502, Building 12, Wanchuangyuan, No. 83, Zhanlun Road, Honggang Community, Daliang Subdistrict, Shunde District, Foshan City, Guangdong Province, China</p>
+              </div>
             </div>
           </div>
         </div>
@@ -190,12 +186,12 @@
       <section class="bg-slate-900 text-white rounded-xl p-5 text-center">
         <h2 class="text-lg font-black mb-2" data-i18n="contact_partner_title">成为合作伙伴</h2>
         <p class="text-slate-300 text-xs mb-3" data-i18n="contact_mobile_partner_desc">加入我们的全球分销商网络。</p>
-        <button
-          class="bg-primary text-white px-5 py-2 rounded-lg font-bold text-sm"
+        <a href="#contact-form"
+          class="inline-block bg-primary text-white px-5 py-2 rounded-lg font-bold text-sm"
           data-i18n="contact_mobile_partner_btn"
         >
           申请
-        </button>
+        </a>
       </section>
     </main>
 
