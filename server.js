@@ -146,16 +146,16 @@ app.use((req, res, next) => {
   const isHtmlPage = req.path.match(/\.html$/i) || req.path === '/' || req.path === '/index.html';
 
   if (req.path === '/' || req.path === '/index.html') {
-    // Main HTML entry - short cache to allow updates
-    res.setHeader('Cache-Control', 'public, max-age=300, must-revalidate'); // 5 minutes
+    // Main HTML entry - no cache for dev
+    res.setHeader('Cache-Control', 'no-cache');
     res.setHeader('Vary', 'Accept-Encoding');
   } else if (isHtmlPage) {
-    // All HTML pages - short cache to prevent stale content issues during back navigation
-    res.setHeader('Cache-Control', 'public, max-age=300, must-revalidate'); // 5 minutes
+    // All HTML pages - no cache for dev
+    res.setHeader('Cache-Control', 'no-cache');
     res.setHeader('Vary', 'Accept-Encoding');
   } else if (isTranslation) {
-    // Translation files - keep short to avoid serving stale language files during updates
-    res.setHeader('Cache-Control', 'public, max-age=300, must-revalidate'); // 5 minutes
+    // Translation files - no cache for dev
+    res.setHeader('Cache-Control', 'no-cache');
   } else if (isAsset) {
     // Static assets - long-term cache with immutable
     const maxAge = 60 * 60 * 24 * 30; // 30 days
