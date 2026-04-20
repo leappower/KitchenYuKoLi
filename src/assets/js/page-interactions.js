@@ -485,7 +485,6 @@
     bindByText("button", "manual download", function () {
       safeCall("showNotification", ["Preparing your download…", "success"]);
       // Uncomment when PDF is ready:
-      // window.open('/assets/pdf/catalog-2026.pdf', '_blank');
     });
 
     // "Share with Team"
