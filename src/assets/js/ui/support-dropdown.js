@@ -135,6 +135,7 @@
     document.querySelectorAll(".sup-dropdown-trigger").forEach(function (t) {
       t.addEventListener("click", function (e) {
         if (window.innerWidth <= 720) return;
+        e.preventDefault();
         e.stopPropagation();
         t.closest(".sup-dropdown-wrap").classList.toggle("is-open");
       });
@@ -232,6 +233,7 @@
       el._supPopupBound = true;
 
       el.addEventListener("click", function (e) {
+        e.preventDefault();
         e.stopPropagation();
         var href = el.getAttribute("data-sup-popup-href") || el.getAttribute("href") || "/support/";
         openPopup(href);
