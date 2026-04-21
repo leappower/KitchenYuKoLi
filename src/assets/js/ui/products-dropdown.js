@@ -64,12 +64,12 @@
       /* View All link */
       ".prod-viewall-item {",
       "  display: flex; align-items: center; gap: 8px;",
-      "  padding: 9px 12px; font-size: 13px; font-weight: 600; color: #475569;",
+      "  padding: 9px 12px; font-size: 13px; font-weight: 600; color: #1d1d1f;",
       "  text-decoration: none; border-radius: 10px; transition: background .1s ease;",
       "}",
       ".prod-viewall-item:hover { background: rgba(236,91,19,.06); color: #ec5b13; }",
       ".prod-viewall-item .material-symbols-outlined { font-size: 16px; }",
-      "html.dark .prod-viewall-item { color: #94a3b8; }",
+      "html.dark .prod-viewall-item { color: #f5f5f7; }",
       "html.dark .prod-viewall-item:hover { background: rgba(236,91,19,.10); color: #f97316; }",
 
       /* Popup emoji */
