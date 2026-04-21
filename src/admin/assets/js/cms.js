@@ -248,7 +248,20 @@
         card.querySelector('.media-copy-btn').addEventListener('click', function(e) {
           e.stopPropagation();
           var url = card.querySelector('.media-copy-btn').getAttribute('data-url');
-          navigator.clipboard.writeText(url).then(function() { toast('链接已复制'); });
+          // Build full URL for clipboard
+          var fullUrl = url.startsWith('http') ? url : window.location.origin + url;
+          if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(fullUrl).then(function() { toast('链接已复制'); });
+          } else {
+            // Fallback for non-HTTPS
+            var ta = document.createElement('textarea');
+            ta.value = fullUrl;
+            ta.style.cssText = 'position:fixed;opacity:0';
+            document.body.appendChild(ta);
+            ta.select();
+            try { document.execCommand('copy'); toast('链接已复制'); } catch(e) { toast('复制失败，请手动复制: ' + fullUrl); }
+            document.body.removeChild(ta);
+          }
         });
         card.querySelector('[data-preview]').addEventListener('click', function(e) {
           e.stopPropagation();
@@ -400,14 +413,14 @@
         var productId = p ? p.id : (d.product ? d.product.id : null);
         // Close modal first
         document.getElementById('product-modal').remove();
-        toast(productId ? '保存成功' : '保存成功（未获取产品ID）');
+        var hasMedia = pendingImages.length || pendingVideos.length || pendingUrls.length;
+        toast(hasMedia ? '保存成功，正在处理媒体...' : '保存成功');
         renderPage();
         // Upload media after modal closed
         if (productId) {
           var hasUploads = pendingImages.length || pendingVideos.length;
           var hasUrls = pendingUrls.length;
           if (hasUploads) {
-            toast('正在上传媒体...');
             var pendingFiles = [];
             if (pendingImages.length) pendingFiles.push({ files: pendingImages, type: 'image' });
             if (pendingVideos.length) pendingFiles.push({ files: pendingVideos, type: 'video' });
@@ -415,7 +428,6 @@
           }
           // Add URLs as product images
           if (hasUrls) {
-            if (!hasUploads) toast('正在添加链接...');
             addProductMediaUrls(productId, pendingUrls);
           }
         }
@@ -501,6 +513,13 @@
       wrap.innerHTML = '<img src="' + esc(url) + '" style="width:100%;height:100%;object-fit:cover" onerror="this.outerHTML=\'<div style=\"width:100%;height:100%;background:#1e293b;display:flex;align-items:center;justify-content:center;color:#94a3b8;font-size:0.6rem\">加载失败</div>\'">';
     }
     wrap.innerHTML += '<div style="position:absolute;top:0.25rem;left:0.25rem;background:#8b5cf6;color:#fff;font-size:0.5rem;padding:1px 4px;border-radius:0.25rem">链接</div>';
+    wrap.innerHTML += '<button title="移除" style="position:absolute;top:0.25rem;right:0.25rem;background:rgba(239,68,68,0.85);color:#fff;border:none;width:1rem;height:1rem;border-radius:9999px;font-size:0.55rem;cursor:pointer">✕</button>';
+    wrap.querySelector('button').addEventListener('click', function() {
+      var idx = window._pmPendingUrls.indexOf(url);
+      if (idx > -1) window._pmPendingUrls.splice(idx, 1);
+      wrap.remove();
+      if (!container.children.length && emptyMsg) emptyMsg.style.display = '';
+    });
     container.appendChild(wrap);
     toast('已添加链接，保存后生效');
   }
@@ -540,6 +559,14 @@
       wrap.innerHTML = '<div style="width:100%;height:100%;background:#0f172a;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:0.25rem"><span style="font-size:1.25rem">🎬</span><span style="color:#fff;font-size:0.5rem">' + esc(file.name) + '</span></div>';
     }
     wrap.innerHTML += '<div style="position:absolute;top:0.25rem;left:0.25rem;background:#6366f1;color:#fff;font-size:0.5rem;padding:1px 4px;border-radius:0.25rem">待上传</div>';
+    wrap.innerHTML += '<button title="移除" style="position:absolute;top:0.25rem;right:0.25rem;background:rgba(239,68,68,0.85);color:#fff;border:none;width:1rem;height:1rem;border-radius:9999px;font-size:0.55rem;cursor:pointer">✕</button>';
+    wrap.querySelector('button').addEventListener('click', function() {
+      var arr = type === 'image' ? window._pmPendingImages : window._pmPendingVideos;
+      var idx = arr ? arr.indexOf(file) : -1;
+      if (idx > -1) arr.splice(idx, 1);
+      wrap.remove();
+      if (!container.children.length && emptyMsg) emptyMsg.style.display = '';
+    });
     container.appendChild(wrap);
   }
 
