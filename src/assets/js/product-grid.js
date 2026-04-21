@@ -129,6 +129,32 @@
     grid.innerHTML = html;
   }
 
+  // ─── Auto-render on SPA navigation ──────────────────────
+  function autoRender() {
+    // Ensure data is available
+    if (!getProducts().length) return;
+    // Detect device and render
+    if (document.getElementById('product-grid')) {
+      if (document.getElementById('product-list')) {
+        renderGrid('product-list', renderMobileCard, 100);
+      } else {
+        // PC or Tablet — detect by grid cols
+        var grid = document.getElementById('product-grid');
+        if (grid && grid.classList.contains('md:grid-cols-2')) {
+          renderGrid('product-grid', renderPCCard, 100);
+        } else {
+          renderGrid('product-grid', renderTabletCard, 100);
+        }
+      }
+    }
+  }
+
+  // Try immediately + listen for events
+  if (document.readyState !== 'loading') autoRender();
+  else document.addEventListener('DOMContentLoaded', autoRender);
+  window.addEventListener('product-data-ready', autoRender);
+  document.addEventListener('spa:load', autoRender);
+
   // ─── Public API ─────────────────────────────────────────────
   window.ProductGrid = {
     renderPC: function (limit) { renderGrid('product-grid', renderPCCard, limit); },
