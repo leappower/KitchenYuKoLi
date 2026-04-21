@@ -299,33 +299,41 @@ window.addEventListener('DOMContentLoaded',function(){
     <script defer src="/assets/js/product-grid.js?v=20260415"></script>
 
 <script>
-  document.addEventListener('DOMContentLoaded', function () {
-    if (window.translationManager) window.translationManager.initialize();
+  function renderProductPage() {
+    if (!window.ProductGrid) return;
+    if (!window.PRODUCT_DATA_TABLE || !window.PRODUCT_DATA_TABLE.length) return;
+    window.ProductGrid.renderPC(18);
+    document.querySelectorAll('.category-tab').forEach(function(tab) {
+      tab.addEventListener('click', function() {
+        var category = this.dataset.category;
+        document.querySelectorAll('.category-tab').forEach(function(t) { t.classList.remove('active'); });
+        this.classList.add('active');
+        document.querySelectorAll('#product-grid .product-card').forEach(function(card) {
+          card.style.display = (category === 'all' || card.dataset.category === category) ? '' : 'none';
+        });
+      });
+    });
+    document.querySelectorAll('.filter-chip').forEach(function(chip) {
+      chip.addEventListener('click', function() {
+        var filter = this.dataset.filter;
+        document.querySelectorAll('.filter-chip').forEach(function(c) { c.classList.remove('active'); });
+        this.classList.add('active');
+        document.querySelectorAll('#product-grid .product-card').forEach(function(card) {
+          card.style.display = (filter === 'all') ? '' : 'none';
+        });
+      });
+    });
+  }
 
-    if (window.ProductGrid) {
-      window.ProductGrid.renderPC(18);
-      document.querySelectorAll('.category-tab').forEach(function(tab) {
-        tab.addEventListener('click', function() {
-          var category = this.dataset.category;
-          document.querySelectorAll('.category-tab').forEach(function(t) { t.classList.remove('active'); });
-          this.classList.add('active');
-          document.querySelectorAll('#product-grid .product-card').forEach(function(card) {
-            card.style.display = (category === 'all' || card.dataset.category === category) ? '' : 'none';
-          });
-        });
-      });
-      document.querySelectorAll('.filter-chip').forEach(function(chip) {
-        chip.addEventListener('click', function() {
-          var filter = this.dataset.filter;
-          document.querySelectorAll('.filter-chip').forEach(function(c) { c.classList.remove('active'); });
-          this.classList.add('active');
-          document.querySelectorAll('#product-grid .product-card').forEach(function(card) {
-            card.style.display = (filter === 'all') ? '' : 'none';
-          });
-        });
-      });
-    }
-  });
+  // Try immediately if data already loaded
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', function() { renderProductPage(); });
+  } else {
+    renderProductPage();
+  }
+
+  // Also listen for async data ready event
+  window.addEventListener('product-data-ready', renderProductPage);
 </script>
 
 <style>

@@ -335,68 +335,17 @@
     <script defer src="/assets/js/product-grid.js?v=20260415"></script>
 
     <script>
-      document.addEventListener("DOMContentLoaded", function () {
-        if (window.translationManager) window.translationManager.initialize();
-
-        if (window.ProductGrid) {
-          window.ProductGrid.renderMobile(18);
-          document.querySelectorAll(".category-pill").forEach(function(pill) {
-            pill.addEventListener("click", function() {
-              var cat = this.dataset.category;
-              document.querySelectorAll(".category-pill").forEach(function(p) { p.classList.remove("active"); });
-              this.classList.add("active");
-              document.querySelectorAll("#product-list .product-card-mobile").forEach(function(card) {
-                card.style.display = (cat === "all" || card.dataset.category === cat) ? "" : "none";
-              });
-            });
-          });
-        }
-
-          filterSheet.classList.add("open");
-          filterOverlay.classList.remove("hidden");
-          document.body.style.overflow = "hidden";
-        }
-
-        function closeFilterSheet() {
-          filterSheet.classList.remove("open");
-          filterOverlay.classList.add("hidden");
-          document.body.style.overflow = "";
-        }
-
-        filterBtn.addEventListener("click", openFilter);
-        closeFilter.addEventListener("click", closeFilterSheet);
-        filterOverlay.addEventListener("click", closeFilterSheet);
-        applyFilter.addEventListener("click", closeFilterSheet);
-      });
-    </script>
-
-    <style>
-      .scrollbar-hide::-webkit-scrollbar {
-        display: none;
+      function renderProductPage_renderMobile() {
+        if (!window.ProductGrid) return;
+        if (!window.PRODUCT_DATA_TABLE || !window.PRODUCT_DATA_TABLE.length) return;
+        window.ProductGrid.renderMobile(18);
       }
-      .scrollbar-hide {
-        -ms-overflow-style: none;
-        scrollbar-width: none;
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', function() { renderProductPage_renderMobile(); });
+      } else {
+        renderProductPage_renderMobile();
       }
-      .safe-area-bottom {
-        padding-bottom: env(safe-area-inset-bottom);
-      }
-      .line-clamp-2 {
-        display: -webkit-box;
-        -webkit-line-clamp: 2;
-        -webkit-box-orient: vertical;
-        overflow: hidden;
-      }
-    </style>
-
-    <script src="/assets/js/utils/device-utils.js"></script>
-    <script src="/assets/js/spa-router.js"></script>
-    <script>
-      document.addEventListener("DOMContentLoaded", function () {
-        if (window.SpaRouter && typeof window.SpaRouter.init === "function") {
-          window.SpaRouter.init();
-        }
-      });
+      window.addEventListener('product-data-ready', renderProductPage_renderMobile);
     </script>
   </body>
 </html>

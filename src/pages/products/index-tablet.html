@@ -343,23 +343,27 @@
     <script defer src="/assets/js/product-grid.js?v=20260415"></script>
 
     <script>
-      document.addEventListener("DOMContentLoaded", function () {
-        if (window.translationManager) window.translationManager.initialize();
-
-        if (window.ProductGrid) {
-          window.ProductGrid.renderTablet(18);
-          document.querySelectorAll(".category-tab-tablet").forEach(function(tab) {
-            tab.addEventListener("click", function() {
-              var cat = this.dataset.category;
-              document.querySelectorAll(".category-tab-tablet").forEach(function(t) { t.classList.remove("active"); });
-              this.classList.add("active");
-              document.querySelectorAll("#product-grid .product-card-tablet").forEach(function(card) {
-                card.style.display = (cat === "all" || card.dataset.category === cat) ? "" : "none";
-              });
+      function renderProductPage_renderTablet() {
+        if (!window.ProductGrid) return;
+        if (!window.PRODUCT_DATA_TABLE || !window.PRODUCT_DATA_TABLE.length) return;
+        window.ProductGrid.renderTablet(18);
+        document.querySelectorAll(".category-tab-tablet").forEach(function(tab) {
+          tab.addEventListener("click", function() {
+            var cat = this.dataset.category;
+            document.querySelectorAll(".category-tab-tablet").forEach(function(t) { t.classList.remove("active"); });
+            this.classList.add("active");
+            document.querySelectorAll("#product-grid .product-card-tablet").forEach(function(card) {
+              card.style.display = (cat === "all" || card.dataset.category === cat) ? "" : "none";
             });
           });
-        }
-      });
+        });
+      }
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', function() { renderProductPage_renderTablet(); });
+      } else {
+        renderProductPage_renderTablet();
+      }
+      window.addEventListener('product-data-ready', renderProductPage_renderTablet);
     </script>
 
     <style>
