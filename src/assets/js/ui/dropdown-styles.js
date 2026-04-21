@@ -83,6 +83,10 @@
 
     ".{{PREFIX}}-dropdown-item:active { background: rgba(236,91,19,.12); transform: scale(.98); }",
 
+    ".{{PREFIX}}-dropdown-item.is-active { background: rgba(236,91,19,.08); color: #ec5b13; }",
+
+    "html.dark .{{PREFIX}}-dropdown-item.is-active { background: rgba(236,91,19,.14); color: #f97316; }",
+
     "html.dark .{{PREFIX}}-dropdown-item:hover { background: rgba(236,91,19,.10); }",
 
     "html.dark .{{PREFIX}}-dropdown-item:active { background: rgba(236,91,19,.18); }",

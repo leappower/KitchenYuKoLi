@@ -866,8 +866,10 @@
               var hrefBase = itemHref.split('?')[0].replace(/\/$/, "");
               var isExact = hrefBase === currentNorm;
               // Sub-path: /products/cutting/ should match when current is /products/cutting/
-              // View All: /products/ should only match exactly /products (not sub-paths)
-              var isSubPath = currentNorm.indexOf(hrefBase + '/') === 0;
+              // View All (/products/): only exact match, never sub-path
+              // Sub-items (/products/cutting/): allow sub-path match
+              var isViewAll = items[m].classList.contains('prod-viewall-item');
+              var isSubPath = !isViewAll && currentNorm.indexOf(hrefBase + '/') === 0;
               if (isExact || isSubPath) {
                 items[m].classList.add('is-active');
                 break;
