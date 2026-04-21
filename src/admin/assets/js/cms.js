@@ -287,7 +287,7 @@
         var promise;
         if (cat) promise = api('/categories/' + cat.id, { method: 'PUT', body: body });
         else promise = api('/categories', { method: 'POST', body: body });
-        promise.then(function(d) { if (d) { toast('保存成功'); renderPage(); } });
+        promise.then(function(d) { if (d) { document.getElementById('category-modal').remove(); toast('保存成功'); renderPage(); } });
       });
   };
 
