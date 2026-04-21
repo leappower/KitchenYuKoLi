@@ -236,6 +236,9 @@
           var path = e.currentTarget.getAttribute('data-preview');
           showPreview(path, m.original_name, isImg, isVid);
         });
+        // Handle broken images
+        var img = card.querySelector('img');
+        if (img) img.onerror = function() { this.outerHTML = '<div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:#1e293b;font-size:0.7rem;color:#94a3b8">缺失</div>'; };
         grid.appendChild(card);
       });
     });
@@ -295,6 +298,7 @@
 
   // Product modal
   CMS.openProductForm = function(p) {
+    var renderForm = function(p) {
     var html = '<div class="form-grid">' +
       '<div class="full"><label class="text-sm font-medium text-gray-700" style="display:block;margin-bottom:0.25rem">型号 *</label>' +
       '<input id="pm-model" required value="' + esc(p ? p.model : '') + '"></div>' +
@@ -404,6 +408,15 @@
         });
       }
     });
+    }; // end of renderForm
+    if (p && !p.images) {
+      api('/products/' + p.id).then(function(d) {
+        if (d && d.product) renderForm(d.product);
+        else renderForm(p);
+      });
+    } else {
+      renderForm(p || null);
+    }
   };
 
   // Show instant preview for files selected in new product form
