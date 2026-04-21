@@ -94,7 +94,7 @@ function productsRoutes(db) {
   });
 
   // PUT /products/:id — update
-  router.put('/products/:id', (req, res) => {
+  router.put('/products/:id', requireAuth, (req, res) => {
     const id = parseInt(req.params.id);
     const existing = db.prepare('SELECT * FROM products WHERE id = ?').get(id);
     if (!existing) return res.status(404).json({ error: 'Product not found' });
