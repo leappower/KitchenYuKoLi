@@ -153,12 +153,31 @@
       products.forEach(function(p) {
         var card = document.createElement('div');
         card.className = 'card product-card';
-        card.innerHTML = '<div class="img-area">' +
+        card.style.cssText = 'position:relative';
+        card.innerHTML = '<button class="product-del-btn" data-pid="' + p.id + '" title="删除产品" style="position:absolute;top:0.25rem;right:0.25rem;background:rgba(239,68,68,0.85);color:#fff;border:none;width:1.25rem;height:1.25rem;border-radius:9999px;font-size:0.65rem;cursor:pointer;z-index:2;opacity:0;transition:opacity 0.15s">✕</button>' +
+          '<div class="img-area">' +
           (p.primary_image ? '<img src="' + esc(p.primary_image) + '">' : '<div style="font-size:2.5rem;color:#d1d5db">📦</div>') +
           '</div><div class="p-3"><div class="font-medium text-sm">' + esc(p.model) + '</div>' +
           '<div class="text-xs text-gray-500 mt-1">' + esc(p.category_slug || '未分类') + '</div></div>';
-        card.addEventListener('click', function() { CMS.openProductForm(p); });
+        card.addEventListener('click', function(e) {
+          if (e.target.closest('.product-del-btn')) return;
+          CMS.openProductForm(p);
+        });
+        // Hover show delete
+        card.addEventListener('mouseenter', function() { var b = card.querySelector('.product-del-btn'); if (b) b.style.opacity = '1'; });
+        card.addEventListener('mouseleave', function() { var b = card.querySelector('.product-del-btn'); if (b) b.style.opacity = '0'; });
         grid.appendChild(card);
+      });
+      // Bind product delete buttons
+      grid.querySelectorAll('.product-del-btn').forEach(function(btn) {
+        btn.addEventListener('click', function(e) {
+          e.stopPropagation();
+          var pid = parseInt(btn.getAttribute('data-pid'));
+          if (!confirm('确定删除该产品？')) return;
+          api('/products/' + pid, { method: 'DELETE' }).then(function(d) {
+            if (d) { toast('产品已删除'); renderPage(); }
+          });
+        });
       });
     });
   }
@@ -548,7 +567,7 @@
         wrap.innerHTML += '<div style="position:absolute;top:0;left:0;background:#4f46e5;color:#fff;font-size:0.6rem;padding:1px 6px;border-radius:0 0 0.375rem 0">主图</div>';
       }
       // Action buttons (bottom-right)
-      wrap.innerHTML += '<div style="position:absolute;bottom:0;right:0;display:flex;gap:0;opacity:0;transition:opacity 0.15s" class="media-actions">';
+      wrap.innerHTML += '<div style="position:absolute;bottom:0;right:0;display:flex;gap:0" class="media-actions">';
       if (!img.is_primary) {
         wrap.innerHTML += '<button class="pm-img-action" data-action="setPrimary" data-imgid="' + img.id + '" title="设为主图" style="background:#4f46e5;color:#fff;border:none;width:1.25rem;height:1.25rem;font-size:0.625rem;cursor:pointer">★</button>';
       }
