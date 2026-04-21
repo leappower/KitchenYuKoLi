@@ -248,12 +248,6 @@ const scriptsMetadata = {
     reason: '发布脚本，核心功能',
     date: '2025-03-17' 
   },
-  'serve-static.js': { 
-    category: 'core',
-    reason: '静态服务器，核心功能',
-    date: '2025-03-17' 
-  },
-
   // 产品相关脚本（需要评估）
   'generate-products-data-table.js': { 
     category: 'product',
