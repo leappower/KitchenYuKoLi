@@ -6,7 +6,6 @@
   "scripts": {
     "start": "webpack serve --mode development",
     "dev": "NODE_ENV=development nodemon server.js",
-    "dev:static": "node scripts/serve-static.js",
     "optimize:images": "node scripts/optimize-images.js",
     "optimize:images:force": "node scripts/optimize-images.js --force",
     "download:images": "node scripts/optimize-images.js --download-remote",

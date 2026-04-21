@@ -39,7 +39,8 @@ window.addEventListener('DOMContentLoaded',function(){
     if(!m)return;
     var s=getComputedStyle(m);
     var ok=s.maxWidth==='none'||parseInt(s.maxWidth)>=1920;
-    console.log('%c['+location.pathname.replace(//$/,'')+'] main: max-w='+s.maxWidth+' px='+s.paddingLeft+'/'+s.paddingRight+' w='+m.offsetWidth,ok?'color:green':'color:orange;font-weight:bold');
+    console.log('%c['+location.pathname.replace(/\/
+,'')+'] main: max-w='+s.maxWidth+' px='+s.paddingLeft+'/'+s.paddingRight+' w='+m.offsetWidth,ok?'color:green':'color:orange;font-weight:bold');
     if(!ok)console.warn('Expected max-width: 1920px, got:',s.maxWidth);
   },200);
 });
@@ -323,6 +324,11 @@ YuKoLi 提供从设备安装到日常运维的全生命周期服务。专业工�
 
     <script src="/assets/js/ui/dropdown-styles.js"></script>
 <script defer src="/assets/js/ui/products-dropdown.js?v=20260322-v3"></script>
+    <script defer src="/assets/js/ui/solutions-dropdown.js?v=20260322-v3"></script>
+    <script defer src="/assets/js/ui/applications-dropdown.js?v=20260322-v3"></script>
+    <script defer src="/assets/js/ui/support-dropdown.js?v=20260322-v3"></script>
+    <script defer src="/assets/js/ui/about-dropdown.js?v=20260322-v3"></script>
+    <script defer src="/assets/js/ui/contact-dropdown.js?v=20260322-v3"></script>
 <script defer src="/assets/js/nav-config.js?v=20260415"></script>
     <script defer src="/assets/js/ui/navigator.js?v=20260322-v3"></script>
 <script defer src="/assets/js/ui/search-engine.js"></script>
