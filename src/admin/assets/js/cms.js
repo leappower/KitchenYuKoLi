@@ -120,7 +120,7 @@
       '<select id="prod-cat-filter" onchange="CMS.loadProducts()" style="width:auto"><option value="">全部系列</option></select>' +
       '<input id="prod-search" type="text" placeholder="搜索型号..." style="flex:1;min-width:150px">' +
       '<button class="btn-primary ml-auto" onclick="CMS.openProductForm()">+ 新增产品</button></div>' +
-      '<div class="grid grid-cols-3" id="prod-grid" style="gap:0.75rem"></div>' +
+      '<div class="grid grid-cols-6" id="prod-grid" style="gap:0.75rem"></div>' +
       '<div id="prod-empty" class="py-16 text-center text-gray-400" style="display:none">暂无产品</div></div>';
     api('/categories').then(function(d) {
       if (!d || !d.categories) return;
