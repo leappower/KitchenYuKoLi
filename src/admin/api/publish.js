@@ -79,6 +79,11 @@ function publishRoutes(db) {
       const targetPath = path.join(__dirname, '..', '..', '..', 'src', 'assets', 'js', 'product-data-table.js');
       fs.writeFileSync(targetPath, output, 'utf-8');
 
+      // Also write to dist/ so the SPA loads the latest data immediately (no rebuild needed)
+      const distPath = path.join(__dirname, '..', '..', '..', 'dist', 'assets', 'js', 'product-data-table.js');
+      fs.mkdirSync(path.dirname(distPath), { recursive: true });
+      fs.writeFileSync(distPath, output, 'utf-8');
+
       logAudit(db, req.user.userId, req.user.username, 'publish', 'products', null, null, {
         categories: categories.length,
         products: allProducts.length,

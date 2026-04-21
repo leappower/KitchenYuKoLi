@@ -42,5 +42,6 @@ import './assets/js/contacts.js';        // window contact helpers
 import './assets/js/sidebar.js';         // window sidebar helpers
 // import './assets/js/smart-popup.js';     // REMOVED: now in assets/js/ui/smart-popup.js, loaded directly by pages
 import './assets/js/product-list.js';    // window.ProductList
-import './assets/js/product-data-table.js'; // window product data
+// product-data-table.js is now loaded as an external script (not bundled)
+// so CMS publish can update it without rebuilding. See src/index.html.
 import './assets/js/products.js';        // window product rendering helpers

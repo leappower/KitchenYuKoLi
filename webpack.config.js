@@ -61,17 +61,10 @@ module.exports = (env = {}, argv = {}) => {
       ...(isProduction ? {
         splitChunks: {
           chunks: 'all',
-          // Only split modules larger than 40 KB (e.g. product-data-table.js ~332 KB)
+          // Split large modules into separate chunks
           minSize: 40_000,
           cacheGroups: {
-            // product-data-table goes into its own named chunk so the main
-            // bundle is not blocked by parsing 332 KB of static product data.
-            productData: {
-              test: /[\\/]product-data-table\.js$/,
-              name: 'product-data',
-              chunks: 'all',
-              enforce: true,
-            },
+            // product-data-table.js is excluded from webpack (loaded as external script)
           },
         },
       } : {}),
@@ -137,7 +130,7 @@ module.exports = (env = {}, argv = {}) => {
                   const skip = [
                     'common.js', 'image-assets.js', 'init.js', 'main.js',
                     'navigation.js', 'sidebar.js', 'utils.js', 'media-queries.js',
-                    'product-list.js', 'product-data-table.js', 'products.js',
+                    'product-list.js', 'products.js',
                     'smart-popup.js', // Moved to assets/js/ui/smart-popup.js
                     'max-display-header.js', // Moved to assets/js/ui/max-display-header.js
                     'min-display-footer.js', // Moved to assets/js/ui/min-display-footer.js
