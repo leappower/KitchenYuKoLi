@@ -192,6 +192,15 @@ function productsRoutes(db) {
     if (!img) return res.status(404).json({ error: 'Image not found' });
 
     db.prepare('DELETE FROM product_images WHERE id = ?').run(imgId);
+
+    // Auto-promote next image as primary if deleted was primary
+    if (img.is_primary) {
+      const next = db.prepare('SELECT id FROM product_images WHERE product_id = ? ORDER BY sort_order ASC LIMIT 1').get(img.product_id);
+      if (next) {
+        db.prepare('UPDATE product_images SET is_primary = 1 WHERE id = ?').run(next.id);
+      }
+    }
+
     res.json({ message: 'Image deleted' });
   });
 

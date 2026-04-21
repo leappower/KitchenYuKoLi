@@ -584,25 +584,19 @@
       var isVid = img.file_path && img.file_path.match(/\.mp4/i);
       var wrap = document.createElement('div');
       wrap.style.cssText = 'position:relative;width:5.5rem;height:5.5rem;border-radius:0.5rem;border:1px solid ' + (img.is_primary ? '#4f46e5' : '#e5e7eb') + ';overflow:hidden;flex-shrink:0';
-      if (isVid) {
-        wrap.innerHTML = '<div style="width:100%;height:100%;background:#0f172a;display:flex;align-items:center;justify-content:center;font-size:1.5rem">🎬</div>';
-      } else {
-        wrap.innerHTML = '<img src="' + esc(img.file_path) + '" style="width:100%;height:100%;object-fit:cover">';
-      }
-      // Primary badge
+      var html = isVid
+        ? '<div style="width:100%;height:100%;background:#0f172a;display:flex;align-items:center;justify-content:center;font-size:1.5rem">🎬</div>'
+        : '<img src="' + esc(img.file_path) + '" style="width:100%;height:100%;object-fit:cover">';
       if (img.is_primary) {
-        wrap.innerHTML += '<div style="position:absolute;top:0;left:0;background:#4f46e5;color:#fff;font-size:0.6rem;padding:1px 6px;border-radius:0 0 0.375rem 0">主图</div>';
+        html += '<div style="position:absolute;top:0;left:0;background:#4f46e5;color:#fff;font-size:0.6rem;padding:1px 6px;border-radius:0 0 0.375rem 0">主图</div>';
       }
-      // Action buttons (bottom-right)
-      wrap.innerHTML += '<div style="position:absolute;bottom:0;right:0;display:flex;gap:0" class="media-actions">';
+      html += '<div style="position:absolute;bottom:0;right:0;display:flex;gap:0">';
       if (!img.is_primary) {
-        wrap.innerHTML += '<button class="pm-img-action" data-action="setPrimary" data-imgid="' + img.id + '" title="设为主图" style="background:#4f46e5;color:#fff;border:none;width:1.25rem;height:1.25rem;font-size:0.625rem;cursor:pointer">★</button>';
+        html += '<button class="pm-img-action" data-action="setPrimary" data-imgid="' + img.id + '" title="设为主图" style="background:#4f46e5;color:#fff;border:none;width:1.25rem;height:1.25rem;font-size:0.625rem;cursor:pointer">★</button>';
       }
-      wrap.innerHTML += '<button class="pm-img-action" data-action="delete" data-imgid="' + img.id + '" data-pid="' + p.id + '" title="删除" style="background:#ef4444;color:#fff;border:none;width:1.25rem;height:1.25rem;font-size:0.625rem;cursor:pointer">✕</button>';
-      wrap.innerHTML += '</div>';
-      // Hover show actions
-      wrap.addEventListener('mouseenter', function() { var a = wrap.querySelector('.media-actions'); if (a) a.style.opacity = '1'; });
-      wrap.addEventListener('mouseleave', function() { var a = wrap.querySelector('.media-actions'); if (a) a.style.opacity = '0'; });
+      html += '<button class="pm-img-action" data-action="delete" data-imgid="' + img.id + '" data-pid="' + p.id + '" title="删除" style="background:#ef4444;color:#fff;border:none;width:1.25rem;height:1.25rem;font-size:0.625rem;cursor:pointer">✕</button>';
+      html += '</div>';
+      wrap.innerHTML = html;
       container.appendChild(wrap);
     });
 
