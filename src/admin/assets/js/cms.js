@@ -83,7 +83,7 @@
       '<h2 class="text-lg font-semibold">产品系列</h2>' +
       '<button class="btn-primary" onclick="CMS.openCategoryForm()">+ 新增系列</button></div>' +
       '<div class="card" style="overflow:hidden"><table><thead style="background:#f9fafb"><tr>' +
-      '<th>URL 别名</th><th>翻译键</th><th>排序</th><th>状态</th><th style="text-align:right">操作</th>' +
+      '<th>名称</th><th>URL 别名</th><th>排序</th><th>状态</th><th style="text-align:right">操作</th>' +
       '</tr></thead><tbody id="cat-tbody"></tbody></table>' +
       '<div id="cat-empty" class="py-12 text-center text-gray-400" style="display:none">暂无产品系列</div></div></div>';
     api('/categories').then(function(d) {
@@ -94,8 +94,8 @@
       if (categories.length === 0) { empty.style.display = ''; return; }
       categories.forEach(function(cat) {
         var tr = document.createElement('tr');
-        tr.innerHTML = '<td class="text-sm" style="font-family:monospace">' + esc(cat.slug) + '</td>' +
-          '<td class="text-gray-600">' + esc(cat.i18n_key || '—') + '</td>' +
+        tr.innerHTML = '<td class="text-sm font-medium">' + esc(cat.name || cat.slug) + '</td>' +
+          '<td class="text-sm text-gray-500" style="font-family:monospace">' + esc(cat.slug) + '</td>' +
           '<td>' + (cat.sort_order || 0) + '</td>' +
           '<td><span class="badge ' + (cat.is_active ? 'badge-green' : 'badge-gray') + '">' + (cat.is_active ? '启用' : '禁用') + '</span></td>' +
           '<td style="text-align:right"></td>';
@@ -262,10 +262,12 @@
   CMS.openCategoryForm = function(cat) {
     showModal('category-modal', cat ? '编辑系列' : '新增系列',
       '<div class="flex flex-col gap-3">' +
+      '<div><label class="text-sm font-medium text-gray-700" style="display:block;margin-bottom:0.25rem">系列名称 *</label>' +
+      '<input id="cm-name" required placeholder="如：切配系列" value="' + esc(cat ? (cat.name || '') : '') + '"></div>' +
       '<div><label class="text-sm font-medium text-gray-700" style="display:block;margin-bottom:0.25rem">URL 别名 *</label>' +
-      '<input id="cm-slug" required placeholder="如：large-wok" value="' + esc(cat ? cat.slug : '') + '"></div>' +
+      '<input id="cm-slug" required placeholder="如：cutting" value="' + esc(cat ? cat.slug : '') + '"></div>' +
       '<div><label class="text-sm font-medium text-gray-700" style="display:block;margin-bottom:0.25rem">翻译键</label>' +
-      '<input id="cm-i18n" placeholder="如：nav_large_wok" value="' + esc(cat ? (cat.i18n_key || '') : '') + '"></div>' +
+      '<input id="cm-i18n" placeholder="如：nav_products_cutting" value="' + esc(cat ? (cat.i18n_key || '') : '') + '"></div>' +
       '<div class="flex gap-3"><div class="flex-1"><label class="text-sm font-medium text-gray-700" style="display:block;margin-bottom:0.25rem">排序</label>' +
       '<input id="cm-sort" type="number" value="' + (cat ? cat.sort_order : 0) + '"></div>' +
       '<div class="flex-1"><label class="text-sm font-medium text-gray-700" style="display:block;margin-bottom:0.25rem">状态</label>' +
@@ -273,6 +275,7 @@
       '<option value="false"' + (cat && !cat.is_active ? ' selected' : '') + '>禁用</option></select></div></div></div>',
       function() {
         var body = {
+          name: document.getElementById('cm-name').value,
           slug: document.getElementById('cm-slug').value,
           i18n_key: document.getElementById('cm-i18n').value,
           sort_order: parseInt(document.getElementById('cm-sort').value) || 0,
@@ -286,7 +289,7 @@
   };
 
   CMS.deleteCategory = function(cat) {
-    if (!confirm('确定删除系列 ' + cat.slug + '？')) return;
+    if (!confirm('确定删除系列 ' + (cat.name || cat.slug) + '？')) return;
     api('/categories/' + cat.id, { method: 'DELETE' }).then(function() { toast('已删除'); renderPage(); });
   };
 

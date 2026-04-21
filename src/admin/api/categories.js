@@ -26,13 +26,13 @@ function categoriesRoutes(db) {
   });
 
   router.post('/categories', requireAuth, (req, res) => {
-    const { slug, i18n_key, sort_order, is_active } = req.body;
+    const { name, slug, i18n_key, sort_order, is_active } = req.body;
     if (!slug) return res.status(400).json({ error: 'slug is required' });
 
     try {
       const result = db.prepare(
-        'INSERT INTO product_categories (slug, i18n_key, sort_order, is_active) VALUES (?, ?, ?, ?)'
-      ).run(slug, i18n_key || '', sort_order || 0, is_active !== undefined ? (is_active ? 1 : 0) : 1);
+        'INSERT INTO product_categories (name, slug, i18n_key, sort_order, is_active) VALUES (?, ?, ?, ?, ?)'
+      ).run(name || '', slug, i18n_key || '', sort_order || 0, is_active !== undefined ? (is_active ? 1 : 0) : 1);
 
       logAudit(db, req.user.userId, req.user.username, 'create', 'product_categories', result.lastInsertRowid, null, req.body);
       const row = db.prepare('SELECT * FROM product_categories WHERE id = ?').get(result.lastInsertRowid);
@@ -44,15 +44,15 @@ function categoriesRoutes(db) {
   });
 
   router.put('/categories/:id', requireAuth, (req, res) => {
-    const { slug, i18n_key, sort_order, is_active } = req.body;
+    const { name, slug, i18n_key, sort_order, is_active } = req.body;
     const id = parseInt(req.params.id);
     const existing = db.prepare('SELECT * FROM product_categories WHERE id = ?').get(id);
     if (!existing) return res.status(404).json({ error: 'Category not found' });
 
     try {
       db.prepare(
-        'UPDATE product_categories SET slug = COALESCE(?, slug), i18n_key = COALESCE(?, i18n_key), sort_order = COALESCE(?, sort_order), is_active = COALESCE(?, is_active), updated_at = datetime(\'now\') WHERE id = ?'
-      ).run(slug, i18n_key, sort_order, is_active !== undefined ? (is_active ? 1 : 0) : null, id);
+        'UPDATE product_categories SET name = COALESCE(?, name), slug = COALESCE(?, slug), i18n_key = COALESCE(?, i18n_key), sort_order = COALESCE(?, sort_order), is_active = COALESCE(?, is_active), updated_at = datetime(\'now\') WHERE id = ?'
+      ).run(name, slug, i18n_key, sort_order, is_active !== undefined ? (is_active ? 1 : 0) : null, id);
 
       logAudit(db, req.user.userId, req.user.username, 'update', 'product_categories', id, existing, req.body);
       const row = db.prepare('SELECT * FROM product_categories WHERE id = ?').get(id);

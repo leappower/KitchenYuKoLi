@@ -29,6 +29,7 @@ function initDatabase() {
     CREATE TABLE IF NOT EXISTS product_categories (
       id INTEGER PRIMARY KEY AUTOINCREMENT,
       slug TEXT UNIQUE NOT NULL,
+      name TEXT DEFAULT '',
       i18n_key TEXT DEFAULT '',
       sort_order INTEGER DEFAULT 0,
       is_active INTEGER DEFAULT 1,
