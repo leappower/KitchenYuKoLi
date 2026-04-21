@@ -114,37 +114,43 @@
 <script defer src="/assets/js/ui/smart-popup.js"></script>
 <script defer src="/assets/js/spa-router.js"></script>
 
-<!-- Product data: loaded from API with ETag cache, fallback to static file -->
+<!-- Product data: static initial data → API refresh with ETag → localStorage cache -->
+<script src="/assets/js/product-data-table.js"></script>
 <script>
 (function() {
-  var STORAGE_KEY = 'pdt_data';
-  var ETAG_KEY = 'pdt_etag';
-  var stored = sessionStorage.getItem(STORAGE_KEY);
-  var etag = sessionStorage.getItem(ETAG_KEY);
+  var KEY = 'pdt_v1';
+  // Step 1: initial data from static file (baked into build, always available)
+  var initial = window.PRODUCT_DATA_TABLE || [];
+  // Step 2: try localStorage cache (survives across sessions)
+  var cached = null;
+  try { cached = JSON.parse(localStorage.getItem(KEY)); } catch(e) {}
+  // Use cached > initial
+  window.PRODUCT_DATA_TABLE = cached || initial;
+  // Step 3: fetch latest from API (ETag version check)
+  var etag = localStorage.getItem(KEY + '_etag') || '';
   var headers = {};
   if (etag) headers['If-None-Match'] = etag;
   fetch('/api/cms/products-data', { headers: headers })
     .then(function(r) {
-      if (r.status === 304) return JSON.parse(stored); // not modified
+      if (r.status === 304) return cached || initial; // not modified
       if (!r.ok) throw new Error('API ' + r.status);
       var newEtag = r.headers.get('ETag');
       return r.json().then(function(data) {
-        sessionStorage.setItem(STORAGE_KEY, JSON.stringify(data));
-        if (newEtag) sessionStorage.setItem(ETAG_KEY, newEtag);
+        // Cache to localStorage
+        try {
+          localStorage.setItem(KEY, JSON.stringify(data));
+          if (newEtag) localStorage.setItem(KEY + '_etag', newEtag);
+        } catch(e) {}
         return data;
       });
     })
     .then(function(data) {
-      window.PRODUCT_DATA_TABLE = data || [];
-      // Dispatch event so SPA router knows data is ready
+      if (data) window.PRODUCT_DATA_TABLE = data;
       window.dispatchEvent(new Event('product-data-ready'));
     })
     .catch(function() {
-      // Fallback: use static file or cached data
-      if (stored) { window.PRODUCT_DATA_TABLE = JSON.parse(stored); return; }
-      var s = document.createElement('script');
-      s.src = '/assets/js/product-data-table.js';
-      document.head.appendChild(s);
+      // API failed — already have initial or cached data, just fire ready event
+      window.dispatchEvent(new Event('product-data-ready'));
     });
 })();
 </script>
