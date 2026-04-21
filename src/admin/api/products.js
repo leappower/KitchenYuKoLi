@@ -166,6 +166,25 @@ function productsRoutes(db) {
     res.json({ images: uploaded });
   });
 
+  // POST /products/:id/images/url — add image by URL (from media library)
+  router.post('/products/:id/images/url', requireAuth, (req, res) => {
+    const productId = parseInt(req.params.id);
+    const product = db.prepare('SELECT id FROM products WHERE id = ?').get(productId);
+    if (!product) return res.status(404).json({ error: 'Product not found' });
+
+    const { url } = req.body;
+    if (!url || typeof url !== 'string') return res.status(400).json({ error: 'URL is required' });
+
+    const existingCount = db.prepare('SELECT COUNT(*) as cnt FROM product_images WHERE product_id = ?').get(productId).cnt;
+    const isPrimary = existingCount === 0 ? 1 : 0;
+
+    const result = db.prepare(
+      'INSERT INTO product_images (product_id, file_path, is_primary, sort_order) VALUES (?, ?, ?, ?)'
+    ).run(productId, url, isPrimary, existingCount);
+
+    res.json({ id: result.lastInsertRowid, file_path: url, is_primary: isPrimary, sort_order: existingCount });
+  });
+
   // DELETE /products/:id/images/:imgId
   router.delete('/products/:id/images/:imgId', requireAuth, (req, res) => {
     const imgId = parseInt(req.params.imgId);

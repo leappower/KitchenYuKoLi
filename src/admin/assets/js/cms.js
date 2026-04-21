@@ -336,11 +336,15 @@
     html += '<div style="margin-top:1rem;padding-top:1rem;border-top:1px solid #e5e7eb">' +
       '<div class="flex items-center justify-between mb-2"><label class="text-sm font-medium text-gray-700">产品图片与视频</label>' +
       '<div class="flex gap-2">' +
-      '<label style="font-size:0.75rem;color:#4f46e5;cursor:pointer">+ 图片 <input type="file" accept="image/*" multiple style="display:none" id="pm-img-upload"></label>' +
-      '<label style="font-size:0.75rem;color:#4f46e5;cursor:pointer">+ 视频 <input type="file" accept="video/mp4" style="display:none" id="pm-vid-upload"></label>' +
+      '<label style="font-size:0.75rem;color:#4f46e5;cursor:pointer">+ 上传图片 <input type="file" accept="image/*" multiple style="display:none" id="pm-img-upload"></label>' +
+      '<label style="font-size:0.75rem;color:#4f46e5;cursor:pointer">+ 上传视频 <input type="file" accept="video/mp4" style="display:none" id="pm-vid-upload"></label>' +
       '</div></div>' +
+      '<div style="display:flex;gap:0.25rem;margin-bottom:0.5rem">' +
+      '<input id="pm-url-input" placeholder="粘贴媒体库链接（如 /admin/uploads/xxx.jpg）" style="flex:1;font-size:0.75rem;padding:0.25rem 0.5rem;border:1px solid #d1d5db;border-radius:0.375rem">' +
+      '<button id="pm-url-add" class="btn-primary" style="font-size:0.7rem;padding:0.25rem 0.75rem">添加链接</button>' +
+      '</div>' +
       '<div class="flex" style="flex-wrap:wrap;gap:0.5rem" id="pm-images"></div>' +
-      '<div id="pm-no-media" class="text-sm text-gray-400" style="padding:1rem' + (hasMedia ? ';display:none' : '') + '">暂无图片或视频，点击上方按钮上传</div></div>';
+      '<div id="pm-no-media" class="text-sm text-gray-400" style="padding:1rem' + (hasMedia ? ';display:none' : '') + '">暂无图片或视频</div></div>';
 
     showModal('product-modal', p ? '编辑产品' : '新增产品', html, function() {
       // Validate model name
@@ -361,11 +365,10 @@
         color: document.getElementById('pm-color').value,
         sort_order: parseInt(document.getElementById('pm-sort').value) || 0
       };
-      // Capture pending files BEFORE saving (modal still exists)
-      var imgInput = document.getElementById('pm-img-upload');
-      var vidInput = document.getElementById('pm-vid-upload');
-      var pendingImages = imgInput ? Array.from(imgInput.files) : [];
-      var pendingVideos = vidInput ? Array.from(vidInput.files) : [];
+      // Use global pending arrays (populated by file input change handlers)
+      var pendingImages = window._pmPendingImages || [];
+      var pendingVideos = window._pmPendingVideos || [];
+      var pendingUrls = window._pmPendingUrls || [];
 
       var saveBtn = document.getElementById('product-modal-save');
       if (saveBtn) { saveBtn.disabled = true; saveBtn.textContent = '保存中...'; }
@@ -381,30 +384,63 @@
         toast(productId ? '保存成功' : '保存成功（未获取产品ID）');
         renderPage();
         // Upload media after modal closed
-        if (productId && (pendingImages.length || pendingVideos.length)) {
-          toast('正在上传媒体...');
-          var pendingFiles = [];
-          if (pendingImages.length) pendingFiles.push({ files: pendingImages, type: 'image' });
-          if (pendingVideos.length) pendingFiles.push({ files: pendingVideos, type: 'video' });
-          uploadProductMediaFiles(productId, pendingFiles);
+        if (productId) {
+          var hasUploads = pendingImages.length || pendingVideos.length;
+          var hasUrls = pendingUrls.length;
+          if (hasUploads) {
+            toast('正在上传媒体...');
+            var pendingFiles = [];
+            if (pendingImages.length) pendingFiles.push({ files: pendingImages, type: 'image' });
+            if (pendingVideos.length) pendingFiles.push({ files: pendingVideos, type: 'video' });
+            uploadProductMediaFiles(productId, pendingFiles);
+          }
+          // Add URLs as product images
+          if (hasUrls) {
+            if (!hasUploads) toast('正在添加链接...');
+            addProductMediaUrls(productId, pendingUrls);
+          }
         }
+        // Clear pending
+        window._pmPendingImages = [];
+        window._pmPendingVideos = [];
+        window._pmPendingUrls = [];
       });
     }, function() {
-      // onReady: render existing media + bind upload handlers for ALL products (new & existing)
+      // onReady: init pending arrays, render existing media, bind handlers
+      window._pmPendingImages = [];
+      window._pmPendingVideos = [];
+      window._pmPendingUrls = [];
       renderProductMedia(p);
-      // Bind change handlers to show instant preview
+      // File upload handlers
       var imgInput = document.getElementById('pm-img-upload');
       var vidInput = document.getElementById('pm-vid-upload');
       if (imgInput) {
         imgInput.addEventListener('change', function(e) {
-          Array.from(e.target.files).forEach(function(file) { addPendingPreview(file, 'image'); });
+          Array.from(e.target.files).forEach(function(file) {
+            window._pmPendingImages.push(file);
+            addPendingPreview(file, 'image');
+          });
           e.target.value = '';
         });
       }
       if (vidInput) {
         vidInput.addEventListener('change', function(e) {
-          Array.from(e.target.files).forEach(function(file) { addPendingPreview(file, 'video'); });
+          Array.from(e.target.files).forEach(function(file) {
+            window._pmPendingVideos.push(file);
+            addPendingPreview(file, 'video');
+          });
           e.target.value = '';
+        });
+      }
+      // URL input handler
+      var urlInput = document.getElementById('pm-url-input');
+      var urlBtn = document.getElementById('pm-url-add');
+      if (urlBtn) {
+        urlBtn.addEventListener('click', function() { addMediaUrl(urlInput); });
+      }
+      if (urlInput) {
+        urlInput.addEventListener('keydown', function(e) {
+          if (e.key === 'Enter') { e.preventDefault(); addMediaUrl(urlInput); }
         });
       }
     });
@@ -420,6 +456,54 @@
   };
 
   // Show instant preview for files selected in new product form
+  // Add media URL from input (for linking media library files)
+  function addMediaUrl(urlInput) {
+    var url = urlInput.value.trim();
+    if (!url) return;
+    // Normalize: accept full URL or relative path
+    if (url.startsWith('http')) {
+      try { url = new URL(url).pathname; } catch(e) {}
+    }
+    if (!url.startsWith('/')) url = '/' + url;
+    window._pmPendingUrls = window._pmPendingUrls || [];
+    window._pmPendingUrls.push(url);
+    urlInput.value = '';
+    // Show preview
+    var container = document.getElementById('pm-images');
+    var emptyMsg = document.getElementById('pm-no-media');
+    if (!container) return;
+    if (emptyMsg) emptyMsg.style.display = 'none';
+    var isVid = /\.mp4/i.test(url);
+    var wrap = document.createElement('div');
+    wrap.style.cssText = 'position:relative;width:5.5rem;height:5.5rem;border-radius:0.5rem;border:1px dashed #a5b4fc;overflow:hidden;flex-shrink:0';
+    if (isVid) {
+      wrap.innerHTML = '<div style="width:100%;height:100%;background:#0f172a;display:flex;align-items:center;justify-content:center;font-size:1.5rem">🎬</div>';
+    } else {
+      wrap.innerHTML = '<img src="' + esc(url) + '" style="width:100%;height:100%;object-fit:cover" onerror="this.outerHTML=\'<div style=\"width:100%;height:100%;background:#1e293b;display:flex;align-items:center;justify-content:center;color:#94a3b8;font-size:0.6rem\">加载失败</div>\'">';
+    }
+    wrap.innerHTML += '<div style="position:absolute;top:0.25rem;left:0.25rem;background:#8b5cf6;color:#fff;font-size:0.5rem;padding:1px 4px;border-radius:0.25rem">链接</div>';
+    container.appendChild(wrap);
+    toast('已添加链接，保存后生效');
+  }
+
+  // Add URLs as product images via API (after product is saved)
+  function addProductMediaUrls(productId, urls) {
+    var count = 0;
+    urls.forEach(function(url) {
+      fetch('/api/cms/products/' + productId + '/images/url', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + token },
+        body: JSON.stringify({ url: url })
+      }).then(function(r) { return r.json(); }).then(function(d) {
+        count++;
+        if (count === urls.length) {
+          toast(urls.length + ' 个链接已添加');
+          renderPage();
+        }
+      });
+    });
+  }
+
   function addPendingPreview(file, type) {
     var container = document.getElementById('pm-images');
     var emptyMsg = document.getElementById('pm-no-media');
