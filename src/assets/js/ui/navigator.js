@@ -861,9 +861,17 @@
           if (itemHref) {
             // Normalize: strip trailing slash for comparison
             var normalizedHref = itemHref.replace(/\/$/, "");
-            if (normalizedHref && currentPath.indexOf(normalizedHref) === 0) {
-              items[m].classList.add("is-active");
-              break; // Only highlight first matching sub-item
+            if (itemHref) {
+              var currentNorm = currentPath.replace(/\/$/, "");
+              var hrefBase = itemHref.split('?')[0].replace(/\/$/, "");
+              var isExact = hrefBase === currentNorm;
+              // Sub-path: /products/cutting/ should match when current is /products/cutting/
+              // View All: /products/ should only match exactly /products (not sub-paths)
+              var isSubPath = currentNorm.indexOf(hrefBase + '/') === 0;
+              if (isExact || isSubPath) {
+                items[m].classList.add('is-active');
+                break;
+              }
             }
           }
         }

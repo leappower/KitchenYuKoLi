@@ -17,12 +17,12 @@
     ],
     dropdowns: {
       products: [
-        { key: 'nav_products_cutting', icon: 'content_cut', emoji: '', href: '/products/?cat=cutting' },
-        { key: 'nav_products_stirfry', icon: 'local_fire_department', emoji: '🔥', href: '/products/?cat=stirfry' },
-        { key: 'nav_products_frying', icon: 'outdoor_grill', emoji: '', href: '/products/?cat=frying' },
-        { key: 'nav_products_stewing', icon: 'soup_kitchen', emoji: '', href: '/products/?cat=stewing' },
-        { key: 'nav_products_steaming', icon: 'cloud', emoji: '', href: '/products/?cat=steaming' },
-        { key: 'nav_products_other', icon: 'more_horiz', emoji: '', href: '/products/?cat=other' }
+        { key: 'nav_products_cutting', icon: 'content_cut', emoji: '', href: '/products/cutting/' },
+        { key: 'nav_products_stirfry', icon: 'local_fire_department', emoji: '🔥', href: '/products/stirfry/' },
+        { key: 'nav_products_frying', icon: 'outdoor_grill', emoji: '', href: '/products/frying/' },
+        { key: 'nav_products_stewing', icon: 'soup_kitchen', emoji: '', href: '/products/stewing/' },
+        { key: 'nav_products_steaming', icon: 'cloud', emoji: '', href: '/products/steaming/' },
+        { key: 'nav_products_other', icon: 'more_horiz', emoji: '', href: '/products/other/' }
       ],
       applications: [
         { key: 'nav_applications_fastfood', icon: 'ramen_dining', href: '/applications/fast-food/' },
