@@ -183,7 +183,7 @@
   // Replaces hardcoded category tabs in products page HTML.
   // Called after render so the DOM has product cards with data-category.
   function setupCategoryTabs() {
-    var tabContainer = document.querySelector('.category-tab') && document.querySelector('.category-tab').parentElement;
+    var tabContainer = document.querySelector('.category-tab-container');
     if (!tabContainer) return;
     // Get unique categories from PRODUCT_DATA_TABLE (including empty ones)
     var categories = [];
@@ -195,13 +195,13 @@
     if (!categories.length) return;
     // Build tabs: All + each category
     var allTab = document.createElement('button');
-    allTab.className = 'category-tab active px-4 py-2 text-sm font-bold whitespace-nowrap';
+    allTab.className = 'category-tab active px-4 py-2 text-sm font-bold whitespace-nowrap rounded-full border border-slate-200 dark:border-slate-700';
     allTab.dataset.category = 'all';
     allTab.textContent = '全部产品';
     var html = allTab.outerHTML + ' ';
     categories.forEach(function(cat) {
       var label = esc(cat.name) + (cat.count > 0 ? '' : '');
-      html += '<button class="category-tab px-4 py-2 text-sm font-medium text-slate-500 hover:text-slate-900 dark:hover:text-white whitespace-nowrap transition-colors" data-category="' + esc(cat.key) + '">' + label + '</button> ';
+      html += '<button class="category-tab px-4 py-2 text-sm font-medium whitespace-nowrap rounded-full border border-slate-200 dark:border-slate-700" data-category="' + esc(cat.key) + '">' + label + '</button> ';
     });
     tabContainer.innerHTML = html;
     // Bind click events with delegation on parent
@@ -209,9 +209,8 @@
       var tab = e.target.closest('.category-tab');
       if (!tab) return;
       var category = tab.dataset.category;
-      tabContainer.querySelectorAll('.category-tab').forEach(function(t) { t.classList.remove('active'); t.classList.add('text-slate-500'); });
+      tabContainer.querySelectorAll('.category-tab').forEach(function(t) { t.classList.remove('active'); });
       tab.classList.add('active');
-      tab.classList.remove('text-slate-500');
       document.querySelectorAll('#product-grid .product-card, #product-list .product-card-mobile').forEach(function(card) {
         card.style.display = (category === 'all' || card.dataset.category === category) ? '' : 'none';
       });

@@ -602,8 +602,15 @@ html.dark .skeleton {
 }
 
 /* Category tabs active state */
-.category-tab.active {
+.category-tab {
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.category-tab:hover {
   color: #ec5b13;
-  border-bottom: 2px solid #ec5b13;
-  font-weight: 700;
+}
+.category-tab.active {
+  background: #ec5b13;
+  color: white;
+  border-radius: 9999px;
 }
