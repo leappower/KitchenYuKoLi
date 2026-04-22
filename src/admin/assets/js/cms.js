@@ -427,7 +427,10 @@
       promise.then(function(d) {
         if (!d) { if (saveBtn) { saveBtn.disabled = false; saveBtn.textContent = '保存'; } return; }
         var productId = p ? p.id : (d.product ? d.product.id : null);
-        // Close modal first
+        // Close modal first — but collect related tags BEFORE removing
+        var relatedTags = document.querySelectorAll('.pm-related-tag');
+        var relatedItems = [];
+        relatedTags.forEach(function(t) { relatedItems.push({ id: t.dataset.rid }); });
         document.getElementById('product-modal').remove();
         var hasMedia = pendingImages.length || pendingVideos.length || pendingUrls.length;
         renderPage();
@@ -463,7 +466,7 @@
             addProductMediaUrls(productId, pendingUrls, onTaskDone);
           }
           // Save related products
-          saveRelatedProducts(productId);
+          saveRelatedProducts(productId, relatedItems);
           // No media at all: show simple toast now
           if (pendingTasks === 0) {
             toast(p ? '产品已更新' : '产品已创建');
@@ -1822,12 +1825,9 @@
     });
   }
 
-  function saveRelatedProducts(productId) {
-    var tags = document.querySelectorAll('.pm-related-tag');
+  function saveRelatedProducts(productId, items) {
     if (!productId) return;
-    var items = [];
-    tags.forEach(function(t) { items.push({ id: t.dataset.rid }); });
-    api('/products/' + productId + '/related', { method: 'PUT', body: items }).catch(function() {});
+    api('/products/' + productId + '/related', { method: 'PUT', body: items || [] }).catch(function() {});
   }
 
   // Initial render
