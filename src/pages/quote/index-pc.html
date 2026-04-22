@@ -556,6 +556,29 @@
               "📝 详细需求: " +
               message;
 
+            // Submit to Google Sheets
+            var formData = {
+              formType: "quote_form",
+              company: company,
+              contact: contact,
+              phone: phone,
+              email: email,
+              country: countryText,
+              equipmentType: equipText,
+              quantity: quantity,
+              kitchenCapacity: capacityText,
+              budget: budgetText,
+              message: message,
+              language: (window.translationManager && window.translationManager.currentLang) || navigator.language,
+              pageUrl: location.href
+            };
+            fetch("https://script.google.com/macros/s/AKfycbyikM1ArEFhJhQUSAp6l4DHJcGzDDK1cckL-KOrVbjipoMGSKsOOlhFWJGTPB6qOys/exec", {
+              method: "POST",
+              mode: "no-cors",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify(formData)
+            }).catch(function() {});
+
             var encoded = encodeURIComponent(msg);
             window.open(
               "https://wa.me/" + (window.Contacts ? window.Contacts.whatsapp : "8613163756465") + "?text=" + encoded,
