@@ -117,36 +117,40 @@
 
 <!-- Product data: static initial data → API refresh with ETag → localStorage cache -->
 <script src="/assets/js/product-data-table.js?v=20260422114327"></script>
+<script src="/assets/js/product-data-table.js"></script>
 <script>
 (function() {
-  var KEY = 'pdt_v1';
-  // Step 1: initial data from static file (baked into build, always available)
+  var KEY = 'pdt_v2';
+  var VERSION_KEY = 'pdt_version';
+  // Step 1: initial data from static file (always fresh after publish)
   var initial = window.PRODUCT_DATA_TABLE || [];
-  // Step 2: try localStorage cache (survives across sessions)
+  var version = window.PRODUCT_DATA_VERSION || '0';
+  // Step 2: check localStorage cache — invalidate if version changed
   var cached = null;
-  try { cached = JSON.parse(localStorage.getItem(KEY)); } catch(e) {}
-  // Use cached > initial
+  var storedVersion = localStorage.getItem(VERSION_KEY) || '';
+  if (storedVersion === version) {
+    try { cached = JSON.parse(localStorage.getItem(KEY)); } catch(e) {}
+  } else {
+    // Version mismatch — clear stale cache
+    try { localStorage.removeItem(KEY); localStorage.removeItem(KEY + '_etag'); } catch(e) {}
+  }
+  // Use cached > initial (only if version matches)
   window.PRODUCT_DATA_TABLE = cached || initial;
-  // Step 3: fetch latest from API (ETag version check)
-  var etag = localStorage.getItem(KEY + '_etag') || '';
-  var headers = {};
-  if (etag) headers['If-None-Match'] = etag;
-  fetch('/api/cms/products-data', { headers: headers })
+  // Step 3: fetch latest from API (skip cache to always get fresh data after publish)
+  fetch('/api/cms/products-data?_t=' + Date.now())
     .then(function(r) {
-      if (r.status === 304) return cached || initial; // not modified
       if (!r.ok) throw new Error('API ' + r.status);
-      var newEtag = r.headers.get('ETag');
       return r.json().then(function(data) {
-        // Cache to localStorage
+        // Cache to localStorage with version
         try {
           localStorage.setItem(KEY, JSON.stringify(data));
-          if (newEtag) localStorage.setItem(KEY + '_etag', newEtag);
+          localStorage.setItem(VERSION_KEY, version);
         } catch(e) {}
         return data;
       });
     })
     .then(function(data) {
-      if (data) window.PRODUCT_DATA_TABLE = data;
+      if (data && data.length) window.PRODUCT_DATA_TABLE = data;
       window.dispatchEvent(new Event('product-data-ready'));
     })
     .catch(function() {

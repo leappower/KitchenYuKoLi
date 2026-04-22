@@ -306,7 +306,9 @@
   // When CMS publish updates PRODUCT_DATA_TABLE via API, rebuild PRODUCT_SERIES
   // so the Products module (bundle.js) picks up new categories/products.
   function rebuildProductSeries() {
-    var rebuilt = SAFE_PRODUCT_DATA_TABLE.map(function (series) {
+    // Read from RUNTIME global, not closure snapshot
+    var liveData = Array.isArray(global.PRODUCT_DATA_TABLE) ? global.PRODUCT_DATA_TABLE : [];
+    var rebuilt = liveData.map(function (series) {
       return Object.assign({}, series, {
         products: filterValidProducts(series.products).map(function (product) {
           return normalizeProduct(product, series.category);

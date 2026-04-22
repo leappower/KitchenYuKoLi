@@ -172,6 +172,55 @@
     }
   }
 
+  // ─── Dynamic category tabs ───────────────────────────────────
+  // Replaces hardcoded category tabs in products page HTML.
+  // Called after render so the DOM has product cards with data-category.
+  function setupCategoryTabs() {
+    var tabContainer = document.querySelector('.category-tab') && document.querySelector('.category-tab').parentElement;
+    if (!tabContainer) return;
+    // Get unique categories from current products in the grid
+    var categories = [];
+    getProducts().forEach(function(series) {
+      if (series.products && series.products.length > 0) {
+        categories.push({ key: series.category, count: series.products.length });
+      }
+    });
+    if (!categories.length) return;
+    // Build tabs: All + each category
+    var allTab = document.createElement('button');
+    allTab.className = 'category-tab active px-4 py-2 text-sm font-bold whitespace-nowrap';
+    allTab.dataset.category = 'all';
+    allTab.textContent = '全部产品';
+    var html = allTab.outerHTML + ' ';
+    categories.forEach(function(cat) {
+      html += '<button class="category-tab px-4 py-2 text-sm font-medium text-slate-500 hover:text-slate-900 dark:hover:text-white whitespace-nowrap transition-colors" data-category="' + esc(cat.key) + '">' + esc(cat.key) + '</button> ';
+    });
+    tabContainer.innerHTML = html;
+    // Bind click events with delegation on parent
+    tabContainer.addEventListener('click', function(e) {
+      var tab = e.target.closest('.category-tab');
+      if (!tab) return;
+      var category = tab.dataset.category;
+      tabContainer.querySelectorAll('.category-tab').forEach(function(t) { t.classList.remove('active'); t.classList.add('text-slate-500'); });
+      tab.classList.add('active');
+      tab.classList.remove('text-slate-500');
+      document.querySelectorAll('#product-grid .product-card, #product-list .product-card-mobile').forEach(function(card) {
+        card.style.display = (category === 'all' || card.dataset.category === category) ? '' : 'none';
+      });
+    });
+    // Also bind filter-chips (industrial/commercial/compact) — simple all/none for now
+    document.querySelectorAll('.filter-chip').forEach(function(chip) {
+      chip.addEventListener('click', function() {
+        var filter = this.dataset.filter;
+        document.querySelectorAll('.filter-chip').forEach(function(c) { c.classList.remove('active'); });
+        this.classList.add('active');
+        document.querySelectorAll('#product-grid .product-card, #product-list .product-card-mobile').forEach(function(card) {
+          card.style.display = (filter === 'all') ? '' : 'none';
+        });
+      });
+    });
+  }
+
   console.log('[ProductGrid] Script loaded, registering events');
   // Try immediately + listen for events
   if (document.readyState !== 'loading') autoRender();
@@ -179,10 +228,12 @@
   window.addEventListener('product-data-ready', function() {
     console.log('[ProductGrid] product-data-ready event fired');
     autoRender();
+    setTimeout(setupCategoryTabs, 50);
   });
   document.addEventListener('spa:load', function() {
     console.log('[ProductGrid] spa:load event fired');
     autoRender();
+    setTimeout(setupCategoryTabs, 50);
   });
 
   // ─── Public API ─────────────────────────────────────────────
