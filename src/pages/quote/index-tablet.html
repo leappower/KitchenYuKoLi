@@ -14,11 +14,8 @@
     <script>
       /* Responsive redirect — runs before render, no flash */
       (function () {
-        // 防止 bfcache 恢复时重复 redirect
         if (window.__redirectChecked) return;
         window.__redirectChecked = true;
-
-        // 处理 clean-url 参数:重定向后清理 URL 为干净的目录 URL
         var urlParams = new URLSearchParams(location.search);
         var cleanUrl = urlParams.get("clean-url");
         if (cleanUrl) {
@@ -26,29 +23,20 @@
           history.replaceState({}, "", cleanUrl);
           return;
         }
-
-        // SPA 导航时跳过响应式重定向
         console.log("[Responsive Redirect] Checking SPA flag: window.__spaNavigating =", window.__spaNavigating);
         if (window.__spaNavigating) {
           console.log("[Responsive Redirect] SPA navigation detected, skipping redirect");
           return;
         }
-
-        // 使用 DeviceUtils 统一管理设备判断
         var currentFile = location.pathname.split("/").pop();
         console.log("[Responsive Redirect] Current file:", currentFile, "Pathname:", location.pathname);
-
-        // 当访问目录 URL(以 / 结尾)时,不要重定向(SPA 导航使用干净的目录 URL)
         if (window.DeviceUtils && window.DeviceUtils.isDirectoryURL()) {
           console.log("[Responsive Redirect] Directory URL detected, skipping redirect");
           return;
         }
-
-        // 使用 DeviceUtils 判断是否需要重定向
         if (window.DeviceUtils && window.DeviceUtils.shouldRedirect(currentFile)) {
           var deviceType = window.DeviceUtils.getDeviceType();
           var targetFile;
-
           if (deviceType === window.DeviceUtils.DeviceType.MOBILE) {
             targetFile = "index-mobile.html";
           } else if (deviceType === window.DeviceUtils.DeviceType.TABLET) {
@@ -56,33 +44,30 @@
           } else {
             targetFile = "index-pc.html";
           }
-
           console.log("[Responsive Redirect] Redirecting to:", targetFile);
           location.href = targetFile;
           return;
         }
-
         console.log("[Responsive Redirect] No redirect needed");
       })();
     </script>
     <!-- ═══ End Responsive Redirect ═══ -->
 
     <meta charset="utf-8" />
-<meta name="description" content="获取 YuKoLi 智能商用厨房设备免费报价 — 填写需求表单，24小时内获得专业设备选型建议和定制方案。">
     <meta
       name="description"
-      content="Get a Yukoli smart kitchen automation quote — tailored for your restaurant, cloud kitchen, or food production facility."
+      content="获取 YuKoLi 智能商用厨房设备免费报价 — 填写需求表单，24小时内获得专业设备选型建议和定制方案。"
     />
     <meta property="og:type" content="website" />
-    <meta property="og:title" content="Yukoli Request a Quote (Tablet) - Final" />
+    <meta property="og:title" content="YuKoLi 智能厨具 | 获取报价" />
     <meta
       property="og:description"
-      content="Get a Yukoli smart kitchen automation quote — tailored for your restaurant, cloud kitchen, or food production facility."
+      content="获取 YuKoLi 智能厨具定制报价 — 告诉我们您的商用厨房需求，我们将为您提供专属的智能设备解决方案。"
     />
-    <meta property="og:url" content="https://www.kitchen.yukoli.com/quote/index-tablet.html" />
+    <meta property="og:url" content="https://www.kitchen.yukoli.com/quote/" />
     <meta property="og:image" content="https://www.kitchen.yukoli.com/assets/images/logo_header.webp" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-    <title>Yukoli Request a Quote (Tablet) - Final</title>
+    <title>YuKoLi 智能厨具 | 获取报价</title>
     <link rel="preload" href="/assets/fonts/local-fonts.css" as="style" />
     <link rel="preload" href="/assets/css/styles.css" as="style" />
     <link rel="preload" href="/assets/css/tailwind.css" as="style" />
@@ -105,7 +90,6 @@
     <link rel="stylesheet" href="/assets/css/tailwind.css" />
     <link rel="stylesheet" href="/assets/css/z-index-system.css" />
     <link rel="stylesheet" href="/assets/css/performance-optimizations.css" />
-    <!-- Dark mode: apply saved preference before first paint (prevents flash) -->
     <script>
       (function () {
         if (localStorage.getItem("darkMode") === "true") document.documentElement.classList.add("dark");
@@ -118,14 +102,12 @@
     class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 min-h-screen overflow-x-hidden"
   >
     <div class="layout-container flex h-full grow flex-col">
-      <!-- Header -->
-      <!-- ═══ Navigator Header Component ═══ -->
       <navigator
         data-component="navigator"
         data-variant="tablet"
         data-search="true"
-        data-active=""
-        data-cta-text-key="nav_get_started"
+        data-active="quote"
+        data-cta-text-key="nav_get_quote"
         data-cta-href="/quote"
       ></navigator>
       <main id="spa-content" class="flex-1 max-w-[1024px] mx-auto w-full py-8 pb-24 md:py-12">
@@ -133,13 +115,12 @@
         <div class="mb-10 text-center md:text-left">
           <h1
             class="text-slate-900 dark:text-slate-50 text-4xl md:text-5xl font-black leading-tight tracking-[-0.033em] mb-4"
-            data-i18n="landing_request_quote"
+            data-i18n="quote_get_quote"
           >
-            Request a Quote
+            获取报价
           </h1>
-          <p class="text-slate-600 dark:text-slate-400 text-lg max-w-2xl" data-i18n="quote_hero_desc_532">
-            Experience the 5:3:2 strategy in action. Get a customized growth solution for your business needs in
-            minutes.
+          <p class="text-slate-600 dark:text-slate-400 text-lg max-w-2xl" data-i18n="quote_hero_desc">
+            告诉我们您的商用厨房需求，我们将在24小时内为您提供定制化的智能设备方案和报价。
           </p>
         </div>
         <div class="grid grid-cols-1 gap-8">
@@ -147,147 +128,200 @@
           <div
             class="bg-white dark:bg-slate-900/50 border border-slate-200 dark:border-slate-800 rounded-xl p-6 md:p-10 shadow-sm"
           >
-            <form class="space-y-6">
+            <form id="quote-form" class="space-y-6" novalidate>
+              <!-- 企业信息 -->
               <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <label class="flex flex-col gap-2">
-                  <span class="text-slate-700 dark:text-slate-200 text-sm font-semibold" data-i18n="quote_first_name">
-                    First Name
+                  <span class="text-slate-700 dark:text-slate-200 text-sm font-semibold">
+                    公司名称 <span class="text-red-500">*</span>
                   </span>
                   <input
+                    id="q-company"
                     class="h-14 rounded-xl border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white focus:border-primary focus:ring-primary text-base px-4"
-                    placeholder="e.g. Alex"
+                    placeholder="请输入公司全称"
                     type="text"
+                    required
                   />
                 </label>
                 <label class="flex flex-col gap-2">
-                  <span class="text-slate-700 dark:text-slate-200 text-sm font-semibold" data-i18n="quote_last_name">
-                    Last Name
+                  <span class="text-slate-700 dark:text-slate-200 text-sm font-semibold">
+                    联系人 <span class="text-red-500">*</span>
                   </span>
                   <input
+                    id="q-contact"
                     class="h-14 rounded-xl border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white focus:border-primary focus:ring-primary text-base px-4"
-                    placeholder="e.g. Morgan"
+                    placeholder="请输入联系人姓名"
                     type="text"
+                    required
                   />
                 </label>
               </div>
               <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <label class="flex flex-col gap-2">
-                  <span class="text-slate-700 dark:text-slate-200 text-sm font-semibold" data-i18n="landing_work_email">
-                    Work Email
+                  <span class="text-slate-700 dark:text-slate-200 text-sm font-semibold">
+                    联系电话 <span class="text-red-500">*</span>
                   </span>
                   <input
+                    id="q-phone"
                     class="h-14 rounded-xl border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white focus:border-primary focus:ring-primary text-base px-4"
-                    placeholder="alex@company.com"
-                    type="email"
-                  />
-                </label>
-                <label class="flex flex-col gap-2">
-                  <span class="text-slate-700 dark:text-slate-200 text-sm font-semibold" data-i18n="quote_phone_number">
-                    Phone Number
-                  </span>
-                  <input
-                    class="h-14 rounded-xl border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white focus:border-primary focus:ring-primary text-base px-4"
-                    placeholder="+1 (555) 000-0000"
+                    placeholder="请输入联系电话（含国际区号）"
                     type="tel"
+                    required
+                  />
+                </label>
+                <label class="flex flex-col gap-2">
+                  <span class="text-slate-700 dark:text-slate-200 text-sm font-semibold">
+                    邮箱地址 <span class="text-red-500">*</span>
+                  </span>
+                  <input
+                    id="q-email"
+                    class="h-14 rounded-xl border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white focus:border-primary focus:ring-primary text-base px-4"
+                    placeholder="请输入工作邮箱"
+                    type="email"
+                    required
                   />
                 </label>
               </div>
-              <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div>
                 <label class="flex flex-col gap-2">
-                  <span class="text-slate-700 dark:text-slate-200 text-sm font-semibold" data-i18n="quote_company_size">
-                    Company Size
+                  <span class="text-slate-700 dark:text-slate-200 text-sm font-semibold">
+                    国家/地区 <span class="text-red-500">*</span>
                   </span>
                   <select
+                    id="q-country"
                     class="h-14 rounded-xl border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white focus:border-primary focus:ring-primary text-base px-4 appearance-none"
+                    required
                   >
-                    <option value="" data-i18n="quote_select_company_size">Select company size</option>
-                    <option value="1-10">1-10 employees</option>
-                    <option value="11-50">11-50 employees</option>
-                    <option value="51-200">51-200 employees</option>
-                    <option value="201+">201+ employees</option>
+                    <option value="">请选择国家/地区</option>
+                    <option value="TH">🇹🇭 泰国</option>
+                    <option value="VN">🇻🇳 越南</option>
+                    <option value="MY">🇲🇾 马来西亚</option>
+                    <option value="ID">🇮🇩 印度尼西亚</option>
+                    <option value="PH">🇵🇭 菲律宾</option>
+                    <option value="SG">🇸🇬 新加坡</option>
+                    <option value="MM">🇲🇲 缅甸</option>
+                    <option value="KH">🇰🇭 柬埔寨</option>
+                    <option value="LA">🇱🇦 老挝</option>
+                    <option value="CN">🇨🇳 中国</option>
+                    <option value="other">其他国家/地区</option>
+                  </select>
+                </label>
+              </div>
+              <!-- 设备需求 -->
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <label class="flex flex-col gap-2">
+                  <span class="text-slate-700 dark:text-slate-200 text-sm font-semibold">
+                    设备类型 <span class="text-red-500">*</span>
+                  </span>
+                  <select
+                    id="q-equipment-type"
+                    class="h-14 rounded-xl border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white focus:border-primary focus:ring-primary text-base px-4 appearance-none"
+                    required
+                  >
+                    <option value="">请选择设备类型</option>
+                    <option value="auto-wok">智能炒菜机</option>
+                    <option value="semi-auto-wok">半自动炒菜机</option>
+                    <option value="combi-oven">万能蒸烤箱</option>
+                    <option value="soup-machine">智能熬汤机</option>
+                    <option value="rice-machine">智能煮饭机</option>
+                    <option value="full-set">整套厨房设备方案</option>
+                    <option value="other">其他</option>
                   </select>
                 </label>
                 <label class="flex flex-col gap-2">
-                  <span
-                    class="text-slate-700 dark:text-slate-200 text-sm font-semibold"
-                    data-i18n="quote_service_interest"
-                  >
-                    Service Interest
-                  </span>
+                  <span class="text-slate-700 dark:text-slate-200 text-sm font-semibold">设备数量</span>
+                  <input
+                    id="q-quantity"
+                    class="h-14 rounded-xl border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white focus:border-primary focus:ring-primary text-base px-4"
+                    placeholder="请输入所需数量"
+                    type="number"
+                    min="1"
+                  />
+                </label>
+              </div>
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <label class="flex flex-col gap-2">
+                  <span class="text-slate-700 dark:text-slate-200 text-sm font-semibold">厨房规模</span>
                   <select
+                    id="q-capacity"
                     class="h-14 rounded-xl border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white focus:border-primary focus:ring-primary text-base px-4 appearance-none"
                   >
-                    <option value="" data-i18n="quote_choose_solution">Choose a solution</option>
-                    <option value="full-stack" data-i18n="quote_service_full_stack">Full-Stack Digital</option>
-                    <option value="branding" data-i18n="quote_service_brand">Brand Identity</option>
-                    <option value="strategy" data-i18n="quote_service_strategy">5:3:2 Strategic Consulting</option>
+                    <option value="">请选择厨房规模</option>
+                    <option value="small">小型餐厅（50份以内/餐）</option>
+                    <option value="medium">中型餐厅（50-200份/餐）</option>
+                    <option value="large">大型餐厅/食堂（200-500份/餐）</option>
+                    <option value="enterprise">连锁/中央厨房（500份以上/餐）</option>
+                  </select>
+                </label>
+                <label class="flex flex-col gap-2">
+                  <span class="text-slate-700 dark:text-slate-200 text-sm font-semibold">预算范围</span>
+                  <select
+                    id="q-budget"
+                    class="h-14 rounded-xl border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white focus:border-primary focus:ring-primary text-base px-4 appearance-none"
+                  >
+                    <option value="">请选择预算范围</option>
+                    <option value="consult">需咨询（暂无明确预算）</option>
+                    <option value="5w-10w">5万 - 10万 人民币</option>
+                    <option value="10w-30w">10万 - 30万 人民币</option>
+                    <option value="30w-50w">30万 - 50万 人民币</option>
+                    <option value="50w+">50万以上 人民币</option>
                   </select>
                 </label>
               </div>
               <label class="flex flex-col gap-2">
-                <span
-                  class="text-slate-700 dark:text-slate-200 text-sm font-semibold"
-                  data-i18n="quote_project_details"
-                >
-                  Project Details
-                </span>
+                <span class="text-slate-700 dark:text-slate-200 text-sm font-semibold">详细需求描述</span>
                 <textarea
+                  id="q-message"
                   class="min-h-[120px] rounded-xl border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white focus:border-primary focus:ring-primary text-base p-4"
-                  placeholder="Tell us about your goals..."
+                  placeholder="请描述您的具体需求，如菜系类型、出餐量、特殊要求等"
                 ></textarea>
               </label>
               <div class="flex items-center gap-3 pt-2">
                 <input
+                  id="q-consent"
                   class="size-5 rounded border-slate-300 dark:border-slate-700 text-primary focus:ring-primary bg-white dark:bg-slate-800"
-                  id="consent"
                   type="checkbox"
                   checked
                 />
-                <label class="text-sm text-slate-600 dark:text-slate-400" for="consent" data-i18n="quote_consent_text">
-                  I agree to the privacy policy and terms of service.
+                <label class="text-sm text-slate-600 dark:text-slate-400" for="q-consent" data-i18n="quote_consent_text">
+                  我同意 YuKoLi 的隐私政策，并允许通过以上联系方式接收报价方案。
                 </label>
               </div>
-              <a
+              <button
+                type="submit"
                 class="w-full md:w-auto min-w-[200px] h-14 bg-primary text-white font-bold text-lg rounded-xl shadow-lg hover:shadow-primary/20 transition-all inline-flex items-center justify-center"
-                href="/thank-you/"
-                data-i18n="quote_btn_submit"
+                data-i18n="quote_btn_submit_inquiry"
               >
-                提交报价请求
-              </a>
+                提交咨询
+              </button>
             </form>
           </div>
           <!-- Trust and Strategy Row (Tablet Optimized) -->
           <div class="grid grid-cols-1 md:grid-cols-3 gap-6 py-8">
             <div class="flex flex-col gap-4 p-6 bg-primary/5 dark:bg-primary/10 rounded-xl border border-primary/20">
-              <span class="material-symbols-outlined text-primary text-3xl">pie_chart</span>
+              <span class="material-symbols-outlined text-primary text-3xl">inventory_2</span>
               <div>
-                <h3 class="font-bold text-slate-900 dark:text-slate-50" data-i18n="quote_strategy_5_title">
-                  5: Content Value
-                </h3>
-                <p class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed" data-i18n="quote_strategy_5_desc">
-                  We focus 50% on educational value that builds authority in your niche.
+                <h3 class="font-bold text-slate-900 dark:text-slate-50" data-i18n="quote_114_products">114款智能设备</h3>
+                <p class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed" data-i18n="quote_114_products_desc">
+                  覆盖炒菜、蒸烤、熬汤、煮饭等全套商用厨房场景。
                 </p>
               </div>
             </div>
             <div class="flex flex-col gap-4 p-6 bg-primary/5 dark:bg-primary/10 rounded-xl border border-primary/20">
-              <span class="material-symbols-outlined text-primary text-3xl">share</span>
+              <span class="material-symbols-outlined text-primary text-3xl">public</span>
               <div>
-                <h3 class="font-bold text-slate-900 dark:text-slate-50" data-i18n="quote_strategy_3_title">
-                  3: Curated Trust
-                </h3>
-                <p class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed" data-i18n="quote_strategy_3_desc">
-                  30% strategy on curation and community building with relevant industry news.
+                <h3 class="font-bold text-slate-900 dark:text-slate-50" data-i18n="quote_50_countries">覆盖50+国家</h3>
+                <p class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed" data-i18n="quote_50_countries_desc">
+                  深耕东南亚市场，产品远销全球50多个国家和地区。
                 </p>
               </div>
             </div>
             <div class="flex flex-col gap-4 p-6 bg-primary/5 dark:bg-primary/10 rounded-xl border border-primary/20">
-              <span class="material-symbols-outlined text-primary text-3xl">campaign</span>
+              <span class="material-symbols-outlined text-primary text-3xl">verified_user</span>
               <div>
-                <h3 class="font-bold text-slate-900 dark:text-slate-50" data-i18n="quote_strategy_2_title">
-                  2: Direct Growth
-                </h3>
-                <p class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed" data-i18n="quote_strategy_2_desc">
-                  20% direct promotion that converts high-intent prospects into loyal clients.
+                <h3 class="font-bold text-slate-900 dark:text-slate-50" data-i18n="quote_certified">国际认证品质</h3>
+                <p class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed" data-i18n="quote_certified_desc">
+                  通过 CE、UL、ISO 9001 认证，品质有保障。
                 </p>
               </div>
             </div>
@@ -296,43 +330,35 @@
           <div class="border-t border-slate-200 dark:border-slate-800 pt-10 pb-16">
             <p
               class="text-center text-slate-500 text-xs font-bold uppercase tracking-widest mb-8"
-              data-i18n="quote_trusted_by"
+              data-i18n="quote_certifications"
             >
-              Trusted by industry leaders
+              权威认证
             </p>
-            <div class="flex flex-wrap justify-center items-center gap-8 opacity-60 grayscale">
-              <img
-                loading="lazy"
-                alt="Partner Logo 1"
-                class="h-8"
-                data-alt="Corporate partner logo simple flat style"
-                width="800"
-                height="600"
-              />
-              <img
-                loading="lazy"
-                alt="Partner Logo 2"
-                class="h-8"
-                data-alt="Tech company logo minimalist design"
-                width="800"
-                height="600"
-              />
-              <img
-                loading="lazy"
-                alt="Partner Logo 3"
-                class="h-8"
-                data-alt="Venture capital firm logo geometric"
-                width="800"
-                height="600"
-              />
-              <img
-                loading="lazy"
-                alt="Partner Logo 4"
-                class="h-8"
-                data-alt="Enterprise software logo clean typography"
-                width="800"
-                height="600"
-              />
+            <div class="flex flex-wrap justify-center items-center gap-8 opacity-60 grayscale hover:grayscale-0 transition-all duration-500">
+              <div class="flex flex-col items-center">
+                <div
+                  class="size-12 rounded border border-slate-300 dark:border-slate-700 flex items-center justify-center font-black text-xl mb-1"
+                >
+                  CE
+                </div>
+                <span class="text-[10px] font-bold" data-i18n="quote_ce_standard">欧洲标准</span>
+              </div>
+              <div class="flex flex-col items-center">
+                <div
+                  class="size-12 rounded border border-slate-300 dark:border-slate-700 flex items-center justify-center font-black text-xl mb-1"
+                >
+                  UL
+                </div>
+                <span class="text-[10px] font-bold" data-i18n="quote_ul_safety">安全认证</span>
+              </div>
+              <div class="flex flex-col items-center">
+                <div
+                  class="size-12 rounded border border-slate-300 dark:border-slate-700 flex items-center justify-center font-black text-xl mb-1"
+                >
+                  ISO
+                </div>
+                <span class="text-[10px] font-bold" data-i18n="quote_iso_quality">质量体系</span>
+              </div>
             </div>
           </div>
         </div>
@@ -356,7 +382,6 @@
     <script defer src="/assets/js/contacts.js"></script>
     <script defer src="/assets/js/ui/smart-popup.js"></script>
     <script defer src="/assets/js/router.js"></script>
-
     <script defer src="/assets/js/page-interactions.js"></script>
     <script>
       document.addEventListener("DOMContentLoaded", function () {
@@ -364,7 +389,122 @@
       });
     </script>
 
-    <footer data-component="footer" data-variant="tablet" data-search="true" data-active=""></footer>
+    <footer data-component="footer" data-variant="tablet" data-search="true" data-active="quote"></footer>
+
+    <!-- Quote form handler -->
+    <script>
+      (function () {
+        document.addEventListener("DOMContentLoaded", function () {
+          var form = document.getElementById("quote-form");
+          if (!form) return;
+
+          form.addEventListener("submit", function (e) {
+            e.preventDefault();
+
+            var required = ["q-company", "q-contact", "q-phone", "q-email", "q-country", "q-equipment-type"];
+            var valid = true;
+            required.forEach(function (id) {
+              var el = document.getElementById(id);
+              if (!el) return;
+              if (!el.value.trim()) {
+                el.classList.add("border-red-500");
+                valid = false;
+              } else {
+                el.classList.remove("border-red-500");
+              }
+            });
+
+            var emailEl = document.getElementById("q-email");
+            if (emailEl && emailEl.value && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailEl.value)) {
+              emailEl.classList.add("border-red-500");
+              valid = false;
+            }
+
+            var consentEl = document.getElementById("q-consent");
+            if (consentEl && !consentEl.checked) {
+              valid = false;
+              if (typeof window.showNotification === "function") {
+                window.showNotification("请先同意隐私政策", "error");
+              }
+              return;
+            }
+
+            if (!valid) {
+              if (typeof window.showNotification === "function") {
+                window.showNotification("请填写所有必填项", "error");
+              }
+              return;
+            }
+
+            var company = document.getElementById("q-company").value;
+            var contact = document.getElementById("q-contact").value;
+            var phone = document.getElementById("q-phone").value;
+            var email = document.getElementById("q-email").value;
+            var country = document.getElementById("q-country");
+            var countryText = country.options[country.selectedIndex].text;
+            var equipType = document.getElementById("q-equipment-type");
+            var equipText = equipType.options[equipType.selectedIndex].text;
+            var quantity = document.getElementById("q-quantity").value || "未指定";
+            var capacity = document.getElementById("q-capacity");
+            var capacityText = capacity.value ? capacity.options[capacity.selectedIndex].text : "未指定";
+            var budget = document.getElementById("q-budget");
+            var budgetText = budget.value ? budget.options[budget.selectedIndex].text : "未指定";
+            var message = document.getElementById("q-message").value || "无";
+
+            var msg =
+              "🔧 YuKoLi 智能厨具询价\n" +
+              "━━━━━━━━━━━━━━\n" +
+              "🏢 公司: " + company + "\n" +
+              "👤 联系人: " + contact + "\n" +
+              "📞 电话: " + phone + "\n" +
+              "📧 邮箱: " + email + "\n" +
+              "🌍 国家: " + countryText + "\n" +
+              "━━━━━━━━━━━━━━\n" +
+              "🍽️ 设备类型: " + equipText + "\n" +
+              "📦 数量: " + quantity + "\n" +
+              "🏭 厨房规模: " + capacityText + "\n" +
+              "💰 预算: " + budgetText + "\n" +
+              "📝 详细需求: " + message;
+
+            var formData = {
+              formType: "quote_form",
+              company: company,
+              contact: contact,
+              phone: phone,
+              email: email,
+              country: countryText,
+              equipmentType: equipText,
+              quantity: quantity,
+              kitchenCapacity: capacityText,
+              budget: budgetText,
+              message: message,
+              language: (window.translationManager && window.translationManager.currentLang) || navigator.language,
+              pageUrl: location.href
+            };
+            fetch("https://script.google.com/macros/s/AKfycbyikM1ArEFhJhQUSAp6l4DHJcGzDDK1cckL-KOrVbjipoMGSKsOOlhFWJGTPB6qOys/exec", {
+              method: "POST",
+              mode: "no-cors",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify(formData)
+            }).catch(function () {});
+
+            var encoded = encodeURIComponent(msg);
+            window.open(
+              "https://wa.me/" + (window.Contacts ? window.Contacts.whatsapp : "8613163756465") + "?text=" + encoded,
+              "_blank"
+            );
+
+            if (typeof window.showNotification === "function") {
+              window.showNotification("正在跳转到 WhatsApp，请发送询价信息", "success");
+            }
+
+            setTimeout(function () {
+              window.location.href = "/thank-you/";
+            }, 1500);
+          });
+        });
+      })();
+    </script>
 
     <script src="/assets/js/utils/device-utils.js"></script>
     <script src="/assets/js/spa-router.js"></script>
