@@ -547,9 +547,9 @@
   function addMediaUrl(urlInput) {
     var url = urlInput.value.trim();
     if (!url) return;
-    if (url.startsWith('http')) {
-      try { url = new URL(url).pathname; } catch(e) {}
-    }
+    // For external URLs, keep as-is (hotlink preview)
+    // pathname conversion removed: external URLs like baidu images
+    // cannot be loaded as /it/u=xxx on our server
     if (!url.startsWith('/')) url = '/' + url;
     window._pmPendingUrls = window._pmPendingUrls || [];
     window._pmPendingUrls.push(url);
