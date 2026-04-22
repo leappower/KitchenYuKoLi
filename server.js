@@ -291,8 +291,11 @@ app.get('*', (req, res) => {
   }
 
   // Check if the path matches a known SPA route (with or without trailing slash)
+  // Also match sub-paths like /products/炒菜机/ → matches /products
   var cleanPath = req.path.replace(/\/+$/, '') || '/';
-  if (SPA_ROUTES.includes(cleanPath)) {
+  var isSpaRoute = SPA_ROUTES.includes(cleanPath) ||
+    SPA_ROUTES.some(function(route) { return cleanPath.startsWith(route + '/'); });
+  if (isSpaRoute) {
     return res.sendFile(path.join(__dirname, 'dist', 'index.html'));
   }
 
