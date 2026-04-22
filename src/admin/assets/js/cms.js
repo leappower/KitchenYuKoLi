@@ -1780,7 +1780,7 @@
       document.getElementById('rp-search').oninput = function() {
         var q = this.value.toLowerCase();
         document.querySelectorAll('#rp-list label').forEach(function(l) {
-          l.style.display = (l.dataset.model || '').indexOf(q) >= 0 ? '' : 'none';
+          l.style.display = (l.dataset.model || '').indexOf(q) >= 0 ? 'flex' : 'none';
         });
       };
       document.getElementById('rp-confirm').onclick = function() {
