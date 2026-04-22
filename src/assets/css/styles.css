@@ -278,6 +278,17 @@ main#spa-content:not([class*="p-"], [class*="px-"], [class*="py-"]) .fullwidth-b
   }
 }
 
+/* ─── Navigator placeholder: prevent layout shift ─────────────── */
+navigator[data-component="navigator"] {
+  display: block;
+  min-height: 108px;
+}
+
+/* ─── Scroll margin for sections (prevent navigator overlap) ───── */
+main#spa-content > section {
+  scroll-margin-top: 108px;
+}
+
 /* ─── Material Symbols helper ────────────────────────────────────── */
 .material-symbols-outlined {
   font-variation-settings:
