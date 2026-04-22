@@ -332,8 +332,11 @@
   CMS.openProductForm = function(p) {
     // Load related products for this product
     if (p && p.id) {
+      console.log('[CMS] openProductForm loading related for id=' + p.id);
       api('/products/' + p.id + '/related').then(function(d) {
+        console.log('[CMS] related response id=' + p.id + ' data=' + JSON.stringify(d));
         if (d && d.manual) p.related = d.manual;
+        else p.related = null;
         _renderProductForm(p);
       });
     } else {
@@ -546,7 +549,6 @@
   function addMediaUrl(urlInput) {
     var url = urlInput.value.trim();
     if (!url) return;
-    // Normalize: accept full URL or relative path
     if (url.startsWith('http')) {
       try { url = new URL(url).pathname; } catch(e) {}
     }
@@ -554,7 +556,6 @@
     window._pmPendingUrls = window._pmPendingUrls || [];
     window._pmPendingUrls.push(url);
     urlInput.value = '';
-    // Show preview
     var container = document.getElementById('pm-images');
     var emptyMsg = document.getElementById('pm-no-media');
     if (!container) return;
@@ -563,22 +564,37 @@
     var wrap = document.createElement('div');
     wrap.style.cssText = 'position:relative;width:5.5rem;height:5.5rem;border-radius:0.5rem;border:1px dashed #a5b4fc;overflow:hidden;flex-shrink:0';
     if (isVid) {
-      wrap.innerHTML = '<div style="width:100%;height:100%;background:#0f172a;display:flex;align-items:center;justify-content:center;font-size:1.5rem">🎬</div>';
+      wrap.appendChild(Object.assign(document.createElement('div'), { style: 'width:100%;height:100%;background:#0f172a;display:flex;align-items:center;justify-content:center;font-size:1.5rem', textContent: '\u{1F3AC}' }));
     } else {
-      wrap.innerHTML = '<img src="' + esc(url) + '" style="width:100%;height:100%;object-fit:cover" onerror="this.outerHTML=\'<div style=\"width:100%;height:100%;background:#1e293b;display:flex;align-items:center;justify-content:center;color:#94a3b8;font-size:0.6rem\">加载失败</div>\'">';
+      var img = document.createElement('img');
+      img.style.cssText = 'width:100%;height:100%;object-fit:cover';
+      img.src = url;
+      img.onerror = function() {
+        var errDiv = document.createElement('div');
+        errDiv.style.cssText = 'width:100%;height:100%;background:#1e293b;display:flex;align-items:center;justify-content:center;color:#94a3b8;font-size:0.6rem';
+        errDiv.textContent = '\u52a0\u8f7d\u5931\u8d25';
+        this.replaceWith(errDiv);
+      };
+      wrap.appendChild(img);
     }
-    wrap.innerHTML += '<div style="position:absolute;top:0.25rem;left:0.25rem;background:#8b5cf6;color:#fff;font-size:0.5rem;padding:1px 4px;border-radius:0.25rem">链接</div>';
-    wrap.innerHTML += '<button title="移除" style="position:absolute;top:0.25rem;right:0.25rem;background:rgba(239,68,68,0.85);color:#fff;border:none;width:1rem;height:1rem;border-radius:9999px;font-size:0.55rem;cursor:pointer">✕</button>';
-    wrap.querySelector('button').addEventListener('click', function() {
+    var linkBadge = document.createElement('div');
+    linkBadge.style.cssText = 'position:absolute;top:0.25rem;left:0.25rem;background:#8b5cf6;color:#fff;font-size:0.5rem;padding:1px 4px;border-radius:0.25rem';
+    linkBadge.textContent = '\u94fe\u63a5';
+    wrap.appendChild(linkBadge);
+    var delBtn = document.createElement('button');
+    delBtn.title = '\u79fb\u9664';
+    delBtn.style.cssText = 'position:absolute;top:0.25rem;right:0.25rem;background:rgba(239,68,68,0.85);color:#fff;border:none;width:1rem;height:1rem;border-radius:9999px;font-size:0.55rem;cursor:pointer';
+    delBtn.textContent = '\u2715';
+    delBtn.addEventListener('click', function() {
       var idx = window._pmPendingUrls.indexOf(url);
       if (idx > -1) window._pmPendingUrls.splice(idx, 1);
       wrap.remove();
       if (!container.children.length && emptyMsg) emptyMsg.style.display = '';
     });
+    wrap.appendChild(delBtn);
     container.appendChild(wrap);
-    toast('已添加链接，保存后生效');
+    toast('\u5df2\u6dfb\u52a0\u94fe\u63a5\uff0c\u4fdd\u5b58\u540e\u751f\u6548');
   }
-
   // Add URLs as product images via API (after product is saved)
   function addProductMediaUrls(productId, urls, callback) {
     var count = 0;
@@ -1827,7 +1843,12 @@
 
   function saveRelatedProducts(productId, items) {
     if (!productId) return;
-    api('/products/' + productId + '/related', { method: 'PUT', body: items || [] }).catch(function() {});
+    console.log('[CMS] saveRelatedProducts productId=' + productId + ' items=' + JSON.stringify(items));
+    api('/products/' + productId + '/related', { method: 'PUT', body: items || [] }).then(function(d) {
+      console.log('[CMS] saveRelatedProducts response=' + JSON.stringify(d));
+    }).catch(function(e) {
+      console.error('[CMS] saveRelatedProducts error=' + e.message);
+    });
   }
 
   // Initial render
