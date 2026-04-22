@@ -129,9 +129,11 @@
     var model = null;
     var m = path.match(/^\/products\/([^/]+)$/);
     if (m) model = decodeURIComponent(m[1]);
+    console.log('[ProductDetail] renderPDP called, pathname:', window.location.pathname, 'cleanPath:', path, 'model:', model);
     if (!model) return; // Not a PDP URL, skip silently
 
     var product = findProduct(model);
+    console.log('[ProductDetail] findProduct result:', product ? product.model + ' (category: ' + (product.category || product.categoryName) + ')' : 'NOT FOUND');
     if (!product) {
       ensureContainers();
       var ce = document.getElementById("product-content");
@@ -192,11 +194,27 @@
   }
 
   document.addEventListener("DOMContentLoaded", renderPDP);
-  window.addEventListener("product-data-ready", renderPDP);
-  window.addEventListener("spa:load", function() {
+  document.addEventListener("product-data-ready", renderPDP);
+  document.addEventListener("spa:load", function() {
     var segs = location.pathname.split("/").filter(Boolean);
+    console.log('[ProductDetail] spa:load fired, pathname:', location.pathname, 'segs:', segs);
+    console.log('[ProductDetail] PRODUCT_DATA_TABLE:', window.PRODUCT_DATA_TABLE ? window.PRODUCT_DATA_TABLE.length + ' categories' : 'MISSING');
+    console.log('[ProductDetail] #product-content:', !!document.getElementById('product-content'), '#related-products:', !!document.getElementById('related-products'));
     if (segs.length === 2 && segs[0] === "products") {
+      console.log('[ProductDetail] Will render PDP in 100ms');
       setTimeout(renderPDP, 100);
+    } else {
+      console.log('[ProductDetail] Skipping PDP render (not a product detail route)');
+    }
+    var segs = location.pathname.split("/").filter(Boolean);
+    console.log('[ProductDetail] spa:load fired, pathname:', location.pathname, 'segs:', segs);
+    console.log('[ProductDetail] PRODUCT_DATA_TABLE:', window.PRODUCT_DATA_TABLE ? window.PRODUCT_DATA_TABLE.length + ' categories' : 'MISSING');
+    console.log('[ProductDetail] #product-content:', !!document.getElementById('product-content'), '#related-products:', !!document.getElementById('related-products'));
+    if (segs.length === 2 && segs[0] === "products") {
+      console.log('[ProductDetail] Will render PDP in 100ms');
+      setTimeout(renderPDP, 100);
+    } else {
+      console.log('[ProductDetail] Skipping PDP render (not a product detail route)');
     }
   });
 })();

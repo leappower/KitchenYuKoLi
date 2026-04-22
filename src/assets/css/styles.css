@@ -310,6 +310,13 @@ details[open] > summary {
     "opsz" 24;
   vertical-align: middle;
   line-height: 1;
+  /* Fix icon-text vertical alignment in flex containers */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1em;
+  height: 1em;
+  flex-shrink: 0;
 }
 
 /* ─── Markdown Content (used in logic-analysis.html) ────────────── */
