@@ -289,30 +289,9 @@ window.addEventListener('DOMContentLoaded',function(){
     <script defer src="/assets/js/product-detail.js?v=20260422"></script>
 
 <script>
-  function renderProductPage() {
-    if (!window.ProductGrid) return;
-    if (!window.PRODUCT_DATA_TABLE || !window.PRODUCT_DATA_TABLE.length) return;
-    window.ProductGrid.renderPC(18);
-    document.querySelectorAll('.category-tab').forEach(function(tab) {
-      tab.addEventListener('click', function() {
-        var category = this.dataset.category;
-        document.querySelectorAll('.category-tab').forEach(function(t) { t.classList.remove('active'); });
-        this.classList.add('active');
-        document.querySelectorAll('#product-grid .product-card').forEach(function(card) {
-          card.style.display = (category === 'all' || card.dataset.category === category) ? '' : 'none';
-        });
-      });
-    });
-    document.querySelectorAll('.filter-chip').forEach(function(chip) {
-      chip.addEventListener('click', function() {
-        var filter = this.dataset.filter;
-        document.querySelectorAll('.filter-chip').forEach(function(c) { c.classList.remove('active'); });
-        this.classList.add('active');
-        document.querySelectorAll('#product-grid .product-card').forEach(function(card) {
-          card.style.display = (filter === 'all') ? '' : 'none';
-        });
-      });
-    });
+    function renderProductPage() {
+    // ProductGrid.autoRender() handles rendering + setupCategoryTabs()
+    // Just ensure data is ready and trigger auto render
   }
 
   // Try immediately if data already loaded

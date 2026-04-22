@@ -177,13 +177,16 @@
     } else {
       console.log('[ProductGrid] No #product-grid or #product-list element found');
     }
+    setupCategoryTabs();
   }
 
   // ─── Dynamic category tabs ───────────────────────────────────
   // Replaces hardcoded category tabs in products page HTML.
   // Called after render so the DOM has product cards with data-category.
   function setupCategoryTabs() {
-    var tabContainer = document.querySelector('.category-tab-container');
+    var tabContainer = document.querySelector('.category-tab-container')
+      || document.querySelector('.category-tab-tablet-container')
+      || document.querySelector('.category-pill-container');
     if (!tabContainer) return;
     // Get unique categories from PRODUCT_DATA_TABLE (including empty ones)
     var categories = [];
