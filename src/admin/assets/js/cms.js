@@ -329,7 +329,7 @@
   };
 
   // Product modal
-  CMS.openProductForm = function(p) { console.log("[DIAG] openProductForm p.id=" + (p && p.id) + " p.related=" + JSON.stringify(p && p.related));
+  CMS.openProductForm = function(p) { 
     // Load related products for this product
     if (p && p.id) {
       api('/products/' + p.id + '/related').then(function(d) {
@@ -342,7 +342,7 @@
     }
   };
 
-  var _renderProductForm = function(p) { console.log("[DIAG] _renderProductForm p.id=" + (p && p.id) + " p.related=" + JSON.stringify(p && p.related));
+  var _renderProductForm = function(p) { 
     var renderForm = function(p) {
     var html = '<div class="form-grid">' +
       '<div class="full"><label class="text-sm font-medium text-gray-700" style="display:block;margin-bottom:0.25rem">型号 *</label>' +
@@ -534,7 +534,7 @@
     }; // end of renderForm
     if (p && !p.images) {
       api('/products/' + p.id).then(function(d) {
-        if (d && d.product) renderForm(d.product);
+        if (d && d.product) { d.product.related = p.related; renderForm(d.product); }
         else renderForm(p);
       });
     } else {
