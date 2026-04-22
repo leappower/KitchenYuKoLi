@@ -332,10 +332,8 @@
   CMS.openProductForm = function(p) {
     // Load related products for this product
     if (p && p.id) {
-      console.log('[CMS] openProductForm loading related for id=' + p.id);
       api('/products/' + p.id + '/related').then(function(d) {
-        console.log('[CMS] related response id=' + p.id + ' data=' + JSON.stringify(d));
-        if (d && d.manual) p.related = d.manual;
+          if (d && d.manual) p.related = d.manual;
         else p.related = null;
         _renderProductForm(p);
       });
@@ -1843,12 +1841,7 @@
 
   function saveRelatedProducts(productId, items) {
     if (!productId) return;
-    console.log('[CMS] saveRelatedProducts productId=' + productId + ' items=' + JSON.stringify(items));
-    api('/products/' + productId + '/related', { method: 'PUT', body: items || [] }).then(function(d) {
-      console.log('[CMS] saveRelatedProducts response=' + JSON.stringify(d));
-    }).catch(function(e) {
-      console.error('[CMS] saveRelatedProducts error=' + e.message);
-    });
+    api('/products/' + productId + '/related', { method: 'PUT', body: items || [] }).catch(function() {});
   }
 
   // Initial render
