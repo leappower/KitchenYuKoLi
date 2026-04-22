@@ -625,8 +625,14 @@
           targetPath = "/" + pagesMatch[1] + "/";
         }
 
-        // 只拦截已知路由的链接,其他链接让浏览器默认处理
-        if (!_self.routes[targetPath]) {
+        // 只拦截已知路由的链接（含动态 /products/<slug>/ 路由），其他让浏览器默认处理
+        var isKnown = !!_self.routes[targetPath];
+        // Dynamic: /products/<slug>/ — category slug or PDP model
+        if (!isKnown) {
+          var dynMatch = targetPath.match(/^\/products\/([^/]+)\/$/);
+          if (dynMatch) isKnown = true;
+        }
+        if (!isKnown) {
           _self.log("Skipping SPA for unknown route:", targetPath);
           return;
         }
