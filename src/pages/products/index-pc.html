@@ -173,7 +173,7 @@ window.addEventListener('DOMContentLoaded',function(){
         探索 Yukoli 全系列智能商厨设备，从爆炒到蒸煮，为您的商业厨房提供完整的自动化解决方案。
       </p>
       <div class="flex flex-wrap gap-4 pt-4">
-        <a href="#products" class="bg-primary text-white px-8 py-4 rounded-xl font-bold text-lg flex items-center gap-2 hover:shadow-lg hover:shadow-primary/20 transition-all">
+        <a href="#products" onclick="event.preventDefault();document.getElementById('products').scrollIntoView({behavior:'smooth',block:'start'})" class="bg-primary text-white px-8 py-4 rounded-xl font-bold text-lg flex items-center gap-2 hover:shadow-lg hover:shadow-primary/20 transition-all">
           <span data-i18n="products_browse_products">浏览产品</span>
           <span class="material-symbols-outlined">arrow_downward</span>
         </a>

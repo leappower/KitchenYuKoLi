@@ -104,7 +104,7 @@
                   <span data-i18n="sol_canteen_hero_cta_1">获取专属方案</span>
                   <span class="material-symbols-outlined">arrow_forward</span>
                 </a>
-                <a href="#roi-section" class="px-8 py-4 rounded-xl font-bold flex items-center gap-2 border-2 border-slate-300 dark:border-slate-600 hover:border-primary hover:text-primary transition-all">
+                <a href="#roi-section" onclick="event.preventDefault();document.getElementById('roi-section').scrollIntoView({behavior:'smooth',block:'start'})" class="px-8 py-4 rounded-xl font-bold flex items-center gap-2 border-2 border-slate-300 dark:border-slate-600 hover:border-primary hover:text-primary transition-all">
                   <span class="material-symbols-outlined">calculate</span>
                   <span data-i18n="sol_canteen_hero_cta_2">ROI计算</span>
                 </a>
