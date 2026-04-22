@@ -585,3 +585,25 @@ html.dark .skeleton {
   stroke-dashoffset: 48;
   animation: checkmark-draw 0.5s ease 0.5s forwards;
 }
+
+/* ─── Product page filter chips ────────────────────────── */
+.filter-chip {
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.filter-chip:hover {
+  border-color: #ec5b13;
+  color: #ec5b13;
+}
+.filter-chip.active {
+  background: #ec5b13;
+  color: white;
+  border-color: #ec5b13;
+}
+
+/* Category tabs active state */
+.category-tab.active {
+  color: #ec5b13;
+  border-bottom: 2px solid #ec5b13;
+  font-weight: 700;
+}
