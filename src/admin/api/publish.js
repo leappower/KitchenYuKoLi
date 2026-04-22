@@ -12,6 +12,9 @@ function publishRoutes(db) {
   // Shared: build product data table from DB
   function buildProductTable() {
     const categories = db.prepare('SELECT * FROM product_categories WHERE is_active = 1 ORDER BY sort_order ASC, id ASC').all();
+    // Build slug → display name map
+    const catNameMap = {};
+    categories.forEach(cat => { catNameMap[cat.slug] = cat.name || cat.slug; });
     const allProducts = db.prepare(
         'SELECT p.*, c.slug as category_slug, c.i18n_key as category_i18n_key FROM products p LEFT JOIN product_categories c ON p.category_id = c.id WHERE p.is_active = 1 ORDER BY p.sort_order ASC, p.id ASC'
       ).all();
@@ -30,7 +33,7 @@ function publishRoutes(db) {
         const catId = p.category_id || 0;
         const catSlug = p.category_slug || 'Uncategorized';
         if (!catMap[catSlug]) {
-          catMap[catSlug] = { category: p.category_i18n_key || p.category_slug, products: [] };
+          catMap[catSlug] = { category: p.category_i18n_key || p.category_slug, categoryName: catNameMap[catSlug] || p.category_slug, products: [] };
         }
         catMap[catSlug].products.push({
           category: p.category_i18n_key || p.category_slug,
@@ -68,6 +71,7 @@ function publishRoutes(db) {
           // Empty category — still include it so the frontend can show it
           table.push({
             category: cat.i18n_key || cat.slug,
+            categoryName: catNameMap[cat.slug] || cat.slug,
             products: []
           });
         }

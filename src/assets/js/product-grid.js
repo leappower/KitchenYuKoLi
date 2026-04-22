@@ -178,12 +178,12 @@
   function setupCategoryTabs() {
     var tabContainer = document.querySelector('.category-tab') && document.querySelector('.category-tab').parentElement;
     if (!tabContainer) return;
-    // Get unique categories from current products in the grid
+    // Get unique categories from PRODUCT_DATA_TABLE (including empty ones)
     var categories = [];
     getProducts().forEach(function(series) {
-      if (series.products && series.products.length > 0) {
-        categories.push({ key: series.category, count: series.products.length });
-      }
+      // Use categoryName for display, fallback to i18n translation, then raw key
+      var displayName = series.categoryName || (typeof t === 'function' ? t(series.category) : null) || series.category;
+      categories.push({ key: series.category, name: displayName, count: (series.products || []).length });
     });
     if (!categories.length) return;
     // Build tabs: All + each category
@@ -193,7 +193,8 @@
     allTab.textContent = '全部产品';
     var html = allTab.outerHTML + ' ';
     categories.forEach(function(cat) {
-      html += '<button class="category-tab px-4 py-2 text-sm font-medium text-slate-500 hover:text-slate-900 dark:hover:text-white whitespace-nowrap transition-colors" data-category="' + esc(cat.key) + '">' + esc(cat.key) + '</button> ';
+      var label = esc(cat.name) + (cat.count > 0 ? '' : '');
+      html += '<button class="category-tab px-4 py-2 text-sm font-medium text-slate-500 hover:text-slate-900 dark:hover:text-white whitespace-nowrap transition-colors" data-category="' + esc(cat.key) + '">' + label + '</button> ';
     });
     tabContainer.innerHTML = html;
     // Bind click events with delegation on parent
