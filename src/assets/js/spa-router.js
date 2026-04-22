@@ -49,7 +49,6 @@
       "/thank-you/": "/thank-you/index.html",
       "/landing/": "/landing/index.html",
       "/applications/cases/": "/applications/cases/index.html",
-      "/pdp/": "/pdp/index.html",
     },
 
     // Category slugs used for /products/<slug>/ routing
@@ -400,17 +399,7 @@
         if (this.CATEGORY_SLUGS.indexOf(segment) >= 0) {
           pagePath = '/products/index.html';
         } else {
-          pagePath = '/pdp/index.html';
-        }
-      }
-
-      // Backward compat: /pdp/?model=xxx → redirect to /products/xxx/
-      if (routePath === '/pdp/' || routePath === '/pdp') {
-        var params = new URLSearchParams(window.location.search);
-        var model = params.get('model');
-        if (model) {
-          this.replace('/products/' + encodeURIComponent(model) + '/');
-          return;
+          pagePath = '/product-detail/index.html';
         }
       }
 

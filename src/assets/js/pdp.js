@@ -88,7 +88,6 @@
     var model = null;
     var m = path.match(/^\/products\/([^/]+)$/);
     if (m) model = decodeURIComponent(m[1]);
-    if (!model) { var params = new URLSearchParams(window.location.search); model = params.get("model"); }
     if (!model) { window.location.href = "/products/"; return; }
 
     var product = findProduct(model);

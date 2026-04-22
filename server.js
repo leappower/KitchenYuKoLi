@@ -264,7 +264,7 @@ app.get('/', (req, res) => {
 // Known SPA routes — always serve the root SPA shell, let the frontend router handle them
 const SPA_ROUTES = ['/home', '/catalog', '/solutions', '/about', '/contact', '/quote',
   '/applications', '/products', '/support', '/news', '/thank-you', '/landing',
-  '/pdp', '/roi', '/applications/fast-food', '/applications/hotpot',
+  '/product-detail', '/roi', '/applications/fast-food', '/applications/hotpot',
   '/applications/cloud-kitchen', '/applications/canteen', '/applications/southeast-asian',
   '/applications/cases', '/solutions/fast-food', '/solutions/hotpot',
   '/solutions/cloud-kitchen', '/solutions/canteen', '/solutions/southeast-asian'];

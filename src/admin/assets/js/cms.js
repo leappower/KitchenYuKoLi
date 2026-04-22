@@ -1747,8 +1747,9 @@
 
   // ─── Related Products ──────────────────────────────
   function showRelatedPicker(currentProduct) {
-    api('/products').then(function(products) {
-      if (!products) return;
+    api('/products').then(function(d) {
+      var products = (d && d.products) ? d.products : (Array.isArray(d) ? d : []);
+      if (!products.length) return;
       var items = products.filter(function(p) { return p.is_active && (!currentProduct || p.id !== currentProduct.id); });
       var overlay = document.createElement('div');
       overlay.id = 'related-picker-overlay';
