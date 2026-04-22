@@ -65,10 +65,17 @@ app.use((req, res, next) => {
 // Rate limiting to prevent abuse
 const limiter = rateLimit({
   windowMs: 15 * 60 * 1000, // 15 minutes
-  max: 2000, // limit each IP to 2000 requests per windowMs
+  max: 5000, // limit each IP to 5000 requests per windowMs
   message: 'Too many requests from this IP, please try again later.',
   standardHeaders: true,
   legacyHeaders: false,
+  skip: (req) => {
+    // Skip rate limiting for admin, API, and static assets (all have their own protections)
+    return req.path.startsWith('/admin') ||
+           req.path.startsWith('/api/') ||
+           req.path.startsWith('/assets/') ||
+           req.path.match(/\.(js|css|png|jpg|jpeg|gif|svg|webp|ico|woff2?|ttf|eot|mp4|webm)$/);
+  }
 });
 
 app.use(limiter);

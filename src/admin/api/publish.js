@@ -59,16 +59,22 @@ function publishRoutes(db) {
       });
 
       const table = [];
-      // First add categories that have products
-      const usedCats = new Set(Object.keys(catMap));
+      // Add ALL active categories (including empty ones)
+      const usedCatSlugs = new Set(Object.keys(catMap));
       categories.forEach(cat => {
         if (catMap[cat.slug]) {
           table.push(catMap[cat.slug]);
+        } else {
+          // Empty category — still include it so the frontend can show it
+          table.push({
+            category: cat.i18n_key || cat.slug,
+            products: []
+          });
         }
       });
-      // Then add any remaining
+      // Add any categories that exist in products but not in categories table
       Object.keys(catMap).forEach(slug => {
-        if (!usedCats.has(slug) || !categories.find(c => c.slug === slug)) {
+        if (!categories.find(c => c.slug === slug)) {
           table.push(catMap[slug]);
         }
       });

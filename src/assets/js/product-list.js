@@ -302,9 +302,36 @@
 
   var PRODUCT_SERIES = assembleProductSeries();
 
+  // ─── Rebuild on data update ───────────────────────────────────────────
+  // When CMS publish updates PRODUCT_DATA_TABLE via API, rebuild PRODUCT_SERIES
+  // so the Products module (bundle.js) picks up new categories/products.
+  function rebuildProductSeries() {
+    var rebuilt = SAFE_PRODUCT_DATA_TABLE.map(function (series) {
+      return Object.assign({}, series, {
+        products: filterValidProducts(series.products).map(function (product) {
+          return normalizeProduct(product, series.category);
+        }),
+      });
+    });
+    // Merge with any appended series
+    var combined = rebuilt.concat(APPENDED_PRODUCT_SERIES_NORMALIZED);
+    PRODUCT_SERIES = withImageUrl(mergeSeriesByIdentity(combined));
+    global.PRODUCT_SERIES = PRODUCT_SERIES;
+    // Re-render products if the module is available
+    if (global.Products && typeof global.Products.renderProducts === 'function') {
+      global.Products.initFilterBarAndProducts();
+    }
+    if (global.ProductGrid && typeof global.ProductGrid.renderPC === 'function') {
+      global.ProductGrid.renderPC();
+    }
+  }
+
+  window.addEventListener('product-data-ready', rebuildProductSeries);
+
   // ─── Exports ───────────────────────────────────────────────────────────────
   global.PRODUCT_DEFAULTS = PRODUCT_DEFAULTS;
   global.ProductEntity = ProductEntity;
   global.assembleProductSeries = assembleProductSeries;
   global.PRODUCT_SERIES = PRODUCT_SERIES;
+  global.rebuildProductSeries = rebuildProductSeries;
 })(window);

@@ -17,9 +17,19 @@
     getProducts().forEach(function (series) {
       if (series.products && Array.isArray(series.products)) {
         series.products.forEach(function (p) {
+          // Resolve primary image from images array (CMS publish format)
+          var primaryImg = '/assets/images/products/' + (p.model || 'default') + '.webp';
+          if (p.images && Array.isArray(p.images) && p.images.length > 0) {
+            var pri = p.images.find(function(img) { return img.isPrimary; }) || p.images[0];
+            if (pri && pri.filePath) primaryImg = pri.filePath;
+          } else if (p.image) {
+            primaryImg = p.image;
+          } else if (p.imageUrl) {
+            primaryImg = p.imageUrl;
+          }
           products.push(Object.assign({}, p, {
             _category: series.category || series.slug || '',
-            _imageUrl: p.image || p.imageUrl || '/assets/images/products/' + (p.model || 'default') + '.webp'
+            _imageUrl: primaryImg
           }));
         });
       }
@@ -55,7 +65,7 @@
 
     return '<article class="product-card group bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 overflow-hidden" data-category="' + category + '" data-model="' + model + '">' +
       '<div class="relative aspect-[4/3] overflow-hidden bg-slate-100 dark:bg-slate-700">' +
-      '<img loading="lazy" alt="' + name + '" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" src="' + img + '" onerror="this.src=\'/assets/images/products/default.webp\'">' +
+      '<img loading="lazy" alt="' + name + '" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" src="' + img + '" onerror="if(!this.dataset.errored){this.dataset.errored=\'1\';this.src=\'/assets/images/products/default.webp\' }">' +
       (badge ? '<div class="absolute top-4 left-4 flex gap-2">' + badge + '</div>' : '') +
       '</div>' +
       '<div class="p-6">' +
@@ -84,7 +94,7 @@
 
     return '<article class="product-card-tablet bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 overflow-hidden" data-model="' + model + '">' +
       '<div class="relative aspect-[4/3] overflow-hidden bg-slate-100 dark:bg-slate-700">' +
-      '<img loading="lazy" alt="' + name + '" class="w-full h-full object-cover" src="' + img + '" onerror="this.src=\'/assets/images/products/default.webp\'">' +
+      '<img loading="lazy" alt="' + name + '" class="w-full h-full object-cover" src="' + img + '" onerror="if(!this.dataset.errored){this.dataset.errored=\'1\';this.src=\'/assets/images/products/default.webp\' }">' +
       (badge ? '<div class="absolute top-3 left-3 flex gap-1.5">' + badge + '</div>' : '') +
       '</div>' +
       '<div class="p-4">' +
@@ -109,7 +119,7 @@
     return '<article class="product-card-mobile bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 overflow-hidden" data-model="' + model + '">' +
       '<a href="' + pdpLink + '" class="flex gap-4 p-3">' +
       '<div class="w-24 h-24 rounded-lg bg-slate-100 dark:bg-slate-700 flex-shrink-0 overflow-hidden">' +
-      '<img loading="lazy" alt="' + name + '" class="w-full h-full object-cover" src="' + img + '" onerror="this.src=\'/assets/images/products/default.webp\'">' +
+      '<img loading="lazy" alt="' + name + '" class="w-full h-full object-cover" src="' + img + '" onerror="if(!this.dataset.errored){this.dataset.errored=\'1\';this.src=\'/assets/images/products/default.webp\' }">' +
       '</div>' +
       '<div class="flex-1 min-w-0">' +
       '<h3 class="text-sm font-bold text-slate-900 dark:text-white mb-1 truncate">' + name + '</h3>' +
@@ -131,29 +141,49 @@
 
   // ─── Auto-render on SPA navigation ──────────────────────
   function autoRender() {
+    console.log('[ProductGrid] autoRender called, readyState:', document.readyState,
+      'PRODUCT_DATA_TABLE:', window.PRODUCT_DATA_TABLE ? window.PRODUCT_DATA_TABLE.length + ' items' : 'MISSING',
+      'grid:', !!document.getElementById('product-grid'),
+      'list:', !!document.getElementById('product-list'),
+      'url:', location.pathname);
     // Ensure data is available
-    if (!getProducts().length) return;
+    if (!getProducts().length) {
+      console.log('[ProductGrid] No products data, skipping render');
+      return;
+    }
     // Detect device and render
     if (document.getElementById('product-grid')) {
       if (document.getElementById('product-list')) {
+        console.log('[ProductGrid] Rendering mobile:', getProducts().length, 'products');
         renderGrid('product-list', renderMobileCard, 100);
       } else {
         // PC or Tablet — detect by grid cols
         var grid = document.getElementById('product-grid');
         if (grid && grid.classList.contains('md:grid-cols-2')) {
+          console.log('[ProductGrid] Rendering PC:', getProducts().length, 'products');
           renderGrid('product-grid', renderPCCard, 100);
         } else {
+          console.log('[ProductGrid] Rendering Tablet:', getProducts().length, 'products');
           renderGrid('product-grid', renderTabletCard, 100);
         }
       }
+    } else {
+      console.log('[ProductGrid] No #product-grid or #product-list element found');
     }
   }
 
+  console.log('[ProductGrid] Script loaded, registering events');
   // Try immediately + listen for events
   if (document.readyState !== 'loading') autoRender();
   else document.addEventListener('DOMContentLoaded', autoRender);
-  window.addEventListener('product-data-ready', autoRender);
-  document.addEventListener('spa:load', autoRender);
+  window.addEventListener('product-data-ready', function() {
+    console.log('[ProductGrid] product-data-ready event fired');
+    autoRender();
+  });
+  document.addEventListener('spa:load', function() {
+    console.log('[ProductGrid] spa:load event fired');
+    autoRender();
+  });
 
   // ─── Public API ─────────────────────────────────────────────
   window.ProductGrid = {
