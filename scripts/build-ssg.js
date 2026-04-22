@@ -528,6 +528,26 @@ function main() {
     log('  ⚠ Language directory not found: ' + srcLangDir);
   }
 
+  // Step 5.5: Overwrite JS files that webpack may have minified from stale cache.
+  // CopyWebpackPlugin copies src/assets/js/* but webpack production mode can
+  // re-minify them from a stale compilation, losing recent edits.
+  log('\nStep 5.5: Copying fresh JS files from src...');
+  var _srcJsDir = path.resolve(__dirname, '..', 'src', 'assets', 'js');
+  var _distJsDir = path.join(DIST_DIR, 'assets', 'js');
+  var _jsCopied = 0;
+  if (fs.existsSync(_srcJsDir) && fs.existsSync(_distJsDir)) {
+    var _jsFiles = fs.readdirSync(_srcJsDir).filter(function(f) { return f.endsWith('.js'); });
+    for (var _jf = 0; _jf < _jsFiles.length; _jf++) {
+      var _srcFile = path.join(_srcJsDir, _jsFiles[_jf]);
+      var _dstFile = path.join(_distJsDir, _jsFiles[_jf]);
+      if (fs.statSync(_srcFile).isFile()) {
+        fs.copyFileSync(_srcFile, _dstFile);
+        _jsCopied++;
+      }
+    }
+    log('  ✓ Copied ' + _jsCopied + ' JS files to assets/js/');
+  }
+
   // Step 6: Patch CSS files for basePath (font URLs in local-fonts.css)
   if (BASE_PATH) {
     log('\nStep 6: Patching CSS files for basePath...');
