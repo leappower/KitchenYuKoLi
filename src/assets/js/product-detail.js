@@ -1,6 +1,7 @@
 /**
  * PDP Renderer - product detail page (SPA-safe)
  * URL: /products/<model>/ or /pdp/?model=<model> (backward compat)
+ * Self-contained: creates #product-content and #related-products if missing
  */
 (function () {
 
@@ -82,7 +83,6 @@
     // Plan C: last resort — fill with any remaining products
     if (count < max) {
       var shown2 = new Set(product.relatedProducts || []); shown2.add(product.model);
-      // Add already-shown same-category products
       for (var i = 0; i < allProducts.length; i++) {
         var rp = allProducts[i];
         if (rp.category === product.category) shown2.add(rp.model);
@@ -97,20 +97,50 @@
     else el.parentElement.style.display = 'none';
   }
 
+  function ensureContainers() {
+    var ce = document.getElementById("product-content");
+    var re = document.getElementById("related-products");
+    if (!ce || !re) {
+      // Products listing page has #products-section; hide it and create PDP containers
+      var listing = document.getElementById("products-section") || document.getElementById("product-grid");
+      var container = listing ? listing.parentElement : document.getElementById("app") || document.querySelector("main") || document.body;
+      if (listing) listing.style.display = "none";
+
+      if (!ce) {
+        ce = document.createElement("div");
+        ce.id = "product-content";
+        ce.className = "max-w-5xl mx-auto";
+        container.insertBefore(ce, container.firstChild);
+      }
+      if (!re) {
+        var section = document.createElement("section");
+        section.className = "max-w-5xl mx-auto px-4 py-12";
+        section.innerHTML = '<h2 class="text-xl font-bold mb-4 flex items-center gap-2"><span class="material-symbols-outlined text-primary">recommend</span> 推荐产品</h2><div class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-4" id="related-products"></div>';
+        // Find the container's parent to append
+        var target = ce.parentElement || container;
+        target.appendChild(section);
+      }
+    }
+  }
+
   function renderPDP() {
     // Read model from path: /products/<model>/
     var path = window.location.pathname.replace(/\/$/, '');
     var model = null;
     var m = path.match(/^\/products\/([^/]+)$/);
     if (m) model = decodeURIComponent(m[1]);
-    if (!model) { window.location.href = "/products/"; return; }
+    if (!model) return; // Not a PDP URL, skip silently
 
     var product = findProduct(model);
     if (!product) {
+      ensureContainers();
       var ce = document.getElementById("product-content");
       if (ce) ce.innerHTML = '<div class="max-w-3xl mx-auto px-4 py-16 text-center"><div class="w-20 h-20 bg-slate-100 dark:bg-slate-800 rounded-full flex items-center justify-center mx-auto mb-6"><span class="material-symbols-outlined text-3xl text-slate-400">search_off</span></div><h2 class="text-xl font-bold mb-3">产品未找到</h2><p class="text-slate-500 mb-6">抱歉，未找到该产品。</p><a href="/products/" class="inline-flex items-center gap-2 bg-primary text-white px-5 py-3 rounded-xl font-bold hover:shadow-lg transition-all"><span class="material-symbols-outlined">arrow_back</span> 返回产品中心</a></div>';
       return;
     }
+
+    // Ensure containers exist (for products listing page)
+    ensureContainers();
 
     // Image: CMS upload > static
     var imgSrc = "/assets/images/products/" + modelToSnake(product.model) + "_1.webp";
@@ -164,7 +194,6 @@
   document.addEventListener("DOMContentLoaded", renderPDP);
   window.addEventListener("product-data-ready", renderPDP);
   window.addEventListener("spa:load", function() {
-    // /products/<model>/ (2 segments) → PDP
     var segs = location.pathname.split("/").filter(Boolean);
     if (segs.length === 2 && segs[0] === "products") {
       setTimeout(renderPDP, 100);
