@@ -52,6 +52,10 @@
       "/pdp/": "/pdp/index.html",
     },
 
+    // Category slugs used for /products/<slug>/ routing
+    // Known categories map to products list; everything else → PDP
+    CATEGORY_SLUGS: ['cutting', 'stirfry', 'frying', 'stewing', 'steaming', 'other'],
+
     // 设备特定页面映射
     getDevicePage: function (basePath) {
       // 使用 DeviceUtils 统一管理设备判断（安全检测）
@@ -389,6 +393,26 @@
     loadRoute: function (routePath) {
       var _self = this;
       var pagePath = this.routes[routePath];
+
+      // Dynamic route: /products/<segment>/ — category or PDP
+      if (!pagePath && routePath.match(/^\/products\/[^/]+\/$/)) {
+        var segment = routePath.replace(/^\/products\/|\/$/g, '');
+        if (this.CATEGORY_SLUGS.indexOf(segment) >= 0) {
+          pagePath = '/products/index.html';
+        } else {
+          pagePath = '/pdp/index.html';
+        }
+      }
+
+      // Backward compat: /pdp/?model=xxx → redirect to /products/xxx/
+      if (routePath === '/pdp/' || routePath === '/pdp') {
+        var params = new URLSearchParams(window.location.search);
+        var model = params.get('model');
+        if (model) {
+          this.replace('/products/' + encodeURIComponent(model) + '/');
+          return;
+        }
+      }
 
       if (!pagePath) {
         this.log("Unknown route:", routePath, "- redirecting to home");

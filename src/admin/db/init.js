@@ -155,6 +155,14 @@ function initDatabase() {
       updated_at TEXT DEFAULT (datetime('now'))
     );
     CREATE UNIQUE INDEX IF NOT EXISTS idx_posts_slug ON posts(slug);
+
+    CREATE TABLE IF NOT EXISTS related_products (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      product_id INTEGER NOT NULL REFERENCES products(id) ON DELETE CASCADE,
+      related_id INTEGER NOT NULL REFERENCES products(id) ON DELETE CASCADE,
+      sort_order INTEGER DEFAULT 0,
+      UNIQUE(product_id, related_id)
+    );
   `);
 
   // Auto-migration: add tier column if missing

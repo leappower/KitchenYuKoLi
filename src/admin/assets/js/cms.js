@@ -330,6 +330,18 @@
 
   // Product modal
   CMS.openProductForm = function(p) {
+    // Load related products for this product
+    if (p && p.id) {
+      api('/products/' + p.id + '/related').then(function(d) {
+        if (d && d.manual) p.related = d.manual;
+        _renderProductForm(p);
+      });
+    } else {
+      _renderProductForm(p);
+    }
+  };
+
+  var _renderProductForm = function(p) {
     var renderForm = function(p) {
     var html = '<div class="form-grid">' +
       '<div class="full"><label class="text-sm font-medium text-gray-700" style="display:block;margin-bottom:0.25rem">型号 *</label>' +
@@ -367,8 +379,9 @@
 
     // Media section (images + videos)
     var hasMedia = p && p.images && p.images.length > 0;
-    html += '<div style="margin-top:1rem;padding-top:1rem;border-top:1px solid #e5e7eb">' +
-      '<div class="flex items-center justify-between mb-2"><label class="text-sm font-medium text-gray-700">产品图片与视频</label>' +
+    // Related products selector
+    html += '<div style="margin-top:1rem;padding-top:1rem;border-top:1px solid #e5e7eb"><label class="text-sm font-medium text-gray-700" style="display:block;margin-bottom:0.5rem">推荐产品</label><div class="text-xs text-gray-400" style="margin-bottom:0.5rem">不选则自动推荐同分类产品</div><div id="pm-related" style="display:flex;flex-wrap:wrap;gap:0.5rem;min-height:36px;padding:0.5rem;border:1px dashed #d1d5db;border-radius:8px">' + (p && p.related ? p.related.map(function(r) { return '<span class="pm-related-tag" data-rid="' + r.id + '" style="display:inline-flex;align-items:center;gap:4px;padding:4px 10px;background:#f0f9ff;border:1px solid #bae6fd;border-radius:9999px;font-size:0.75rem;cursor:pointer">' + esc(r.model) + ' <span style="color:#ef4444;font-weight:bold">×</span></span>'; }).join('') : '') + '</div><button type="button" id="pm-add-related" style="margin-top:0.5rem;font-size:0.75rem;color:#4f46e5;cursor:pointer;background:none;border:none;padding:0">+ 添加推荐产品</button></div>';
+    html += '<div style="margin-top:1rem;padding-top:1rem;border-top:1px solid #e5e7eb"><div class="flex items-center justify-between mb-2"><label class="text-sm font-medium text-gray-700">产品图片与视频</label>' +
       '<div class="flex gap-2">' +
       '<label style="font-size:0.75rem;color:#4f46e5;cursor:pointer">+ 上传图片 <input type="file" accept="image/*" multiple style="display:none" id="pm-img-upload"></label>' +
       '<label style="font-size:0.75rem;color:#4f46e5;cursor:pointer">+ 上传视频 <input type="file" accept="video/mp4" style="display:none" id="pm-vid-upload"></label>' +
@@ -433,6 +446,8 @@
           if (hasUrls) {
             addProductMediaUrls(productId, pendingUrls);
           }
+          // Save related products
+          saveRelatedProducts(productId);
         }
         // Clear pending
         window._pmPendingImages = [];
@@ -445,6 +460,18 @@
       window._pmPendingVideos = [];
       window._pmPendingUrls = [];
       renderProductMedia(p);
+      // Related products handlers
+      var addRelBtn = document.getElementById('pm-add-related');
+      if (addRelBtn) {
+        addRelBtn.addEventListener('click', function() {
+          showRelatedPicker(p);
+        });
+      }
+      // Remove tag on click
+      document.getElementById('pm-related').addEventListener('click', function(e) {
+        var tag = e.target.closest('.pm-related-tag');
+        if (tag) tag.remove();
+      });
       // File upload handlers
       var imgInput = document.getElementById('pm-img-upload');
       var vidInput = document.getElementById('pm-vid-upload');
@@ -1716,6 +1743,63 @@
     if (bytes < 1024) return bytes + ' B';
     if (bytes < 1048576) return (bytes / 1024).toFixed(1) + ' KB';
     return (bytes / 1048576).toFixed(1) + ' MB';
+  }
+
+  // ─── Related Products ──────────────────────────────
+  function showRelatedPicker(currentProduct) {
+    api('/products').then(function(products) {
+      if (!products) return;
+      var items = products.filter(function(p) { return p.is_active && (!currentProduct || p.id !== currentProduct.id); });
+      var overlay = document.createElement('div');
+      overlay.id = 'related-picker-overlay';
+      overlay.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:9999;display:flex;align-items:center;justify-content:center';
+      // Get already selected IDs
+      var selected = {};
+      document.querySelectorAll('.pm-related-tag').forEach(function(t) { selected[t.dataset.rid] = true; });
+      var inner = '<div style="background:white;border-radius:12px;padding:1.5rem;max-width:480px;width:90%;max-height:70vh;overflow:auto">';
+      inner += '<div style="font-weight:bold;margin-bottom:1rem">选择推荐产品</div>';
+      inner += '<div style="margin-bottom:1rem"><input type="text" id="rp-search" placeholder="搜索型号..." style="width:100%;padding:0.5rem;border:1px solid #d1d5db;border-radius:8px"></div>';
+      inner += '<div id="rp-list">';
+      items.forEach(function(p) {
+        var checked = selected[p.id] ? 'checked' : '';
+        inner += '<label style="display:flex;align-items:center;gap:0.5rem;padding:0.5rem;cursor:pointer;border-bottom:1px solid #f3f4f6"><input type="checkbox" class="rp-cb" value="' + p.id + '" ' + checked + '><span style="font-weight:500">' + esc(p.model) + '</span><span style="color:#9ca3af;font-size:0.75rem">' + esc(p.sub_category || '') + '</span></label>';
+      });
+      inner += '</div>';
+      inner += '<div style="display:flex;gap:0.5rem;justify-content:flex-end;margin-top:1rem"><button id="rp-cancel" style="padding:0.5rem 1rem;border:1px solid #d1d5db;border-radius:8px;cursor:pointer">取消</button><button id="rp-confirm" style="padding:0.5rem 1rem;background:#4f46e5;color:white;border:none;border-radius:8px;cursor:pointer">确定</button></div>';
+      inner += '</div>';
+      overlay.innerHTML = inner;
+      document.body.appendChild(overlay);
+      overlay.addEventListener('click', function(e) { if (e.target === overlay) overlay.remove(); });
+      document.getElementById('rp-cancel').onclick = function() { overlay.remove(); };
+      document.getElementById('rp-search').oninput = function() {
+        var q = this.value.toLowerCase();
+        document.querySelectorAll('#rp-list label').forEach(function(l) { l.style.display = l.textContent.toLowerCase().indexOf(q) >= 0 ? '' : 'none'; });
+      };
+      document.getElementById('rp-confirm').onclick = function() {
+        var chosen = [];
+        document.querySelectorAll('.rp-cb:checked').forEach(function(cb) {
+          var id = cb.value, label = cb.closest('label').querySelector('span').textContent;
+          chosen.push({ id: id, model: label });
+        });
+        // Update tags in form
+        var container = document.getElementById('pm-related');
+        container.innerHTML = chosen.map(function(c) {
+          return '<span class="pm-related-tag" data-rid="' + c.id + '" style="display:inline-flex;align-items:center;gap:4px;padding:4px 10px;background:#f0f9ff;border:1px solid #bae6fd;border-radius:9999px;font-size:0.75rem;cursor:pointer">' + esc(c.model) + ' <span style="color:#ef4444;font-weight:bold">×</span></span>';
+        }).join('');
+        container.querySelectorAll('.pm-related-tag').forEach(function(tag) {
+          tag.addEventListener('click', function() { this.remove(); });
+        });
+        overlay.remove();
+      };
+    });
+  }
+
+  function saveRelatedProducts(productId) {
+    var tags = document.querySelectorAll('.pm-related-tag');
+    if (!productId || !tags.length) return;
+    var items = [];
+    tags.forEach(function(t) { items.push({ id: t.dataset.rid }); });
+    api('/products/' + productId + '/related', { method: 'PUT', body: items }).catch(function() {});
   }
 
   // Initial render

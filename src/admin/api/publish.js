@@ -27,6 +27,16 @@ function publishRoutes(db) {
         imgMap[img.product_id].push(img);
       });
 
+      // Load manual related products (product_id → [related_model, ...])
+      const relatedMap = {};
+      const relatedRows = db.prepare(
+        'SELECT rp.product_id, p.model FROM related_products rp JOIN products p ON p.id = rp.related_id ORDER BY rp.sort_order'
+      ).all();
+      relatedRows.forEach(r => {
+        if (!relatedMap[r.product_id]) relatedMap[r.product_id] = [];
+        relatedMap[r.product_id].push(r.model);
+      });
+
       // Group products by category
       const catMap = {};
       allProducts.forEach(p => {
@@ -57,6 +67,7 @@ function publishRoutes(db) {
           sort_order: p.sort_order || 0,
           created_at: p.created_at || null,
           updated_at: p.updated_at || null,
+          relatedProducts: relatedMap[p.id] || null,
           images: (imgMap[p.id] || []).map(i => ({
             filePath: i.file_path,
             isPrimary: !!i.is_primary,

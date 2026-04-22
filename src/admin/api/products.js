@@ -222,6 +222,42 @@ function productsRoutes(db) {
     res.json({ images });
   });
 
+  // ─── Related Products (manual + auto fallback) ───────────
+
+  // GET /products/:id/related — get manual relations + auto fallback
+  router.get('/products/:id/related', requireAuth, (req, res) => {
+    try {
+      const productId = parseInt(req.params.id);
+      // Manual relations
+      const manual = db.prepare(
+        'SELECT p.id, p.model, rp.sort_order FROM related_products rp ' +
+        'JOIN products p ON p.id = rp.related_id WHERE rp.product_id = ? AND p.is_active = 1 ' +
+        'ORDER BY rp.sort_order ASC'
+      ).all(productId);
+      res.json({ manual });
+    } catch (e) { res.status(500).json({ error: e.message }); }
+  });
+
+  // PUT /products/:id/related — set manual related products (replaces all)
+  router.put('/products/:id/related', requireAuth, (req, res) => {
+    try {
+      const productId = parseInt(req.params.id);
+      const items = req.body; // [{id: number, sort_order: number}]
+      if (!Array.isArray(items)) return res.status(400).json({ error: 'Expected array' });
+      const del = db.prepare('DELETE FROM related_products WHERE product_id = ?');
+      const ins = db.prepare('INSERT OR REPLACE INTO related_products (product_id, related_id, sort_order) VALUES (?, ?, ?)');
+      const batch = db.transaction(() => {
+        del.run(productId);
+        items.forEach((item, i) => {
+          ins.run(productId, parseInt(item.id), item.sort_order || i);
+        });
+      });
+      batch();
+      logAudit('update', 'related_products', productId, null, { related: items });
+      res.json({ message: 'Related products updated' });
+    } catch (e) { res.status(500).json({ error: e.message }); }
+  });
+
   return router;
 }
 

@@ -61,7 +61,7 @@
     var specBadges = specs.map(function (s) { return '<span class="spec-badge px-2 py-1 rounded text-xs font-medium text-primary">' + s + '</span>'; }).join('');
     var badge = '';
     if (p.badge) badge = '<span class="px-3 py-1 bg-primary text-white text-xs font-bold rounded-full">' + esc(p.badge) + '</span>';
-    var pdpLink = '/pdp/?model=' + encodeURIComponent(model);
+    var pdpLink = '/products/' + encodeURIComponent(model) + '/';
 
     return '<article class="product-card group bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 overflow-hidden" data-category="' + category + '" data-tier="' + esc(p.tier || '') + '" data-model="' + model + '" data-sort-order="' + (p.sort_order || 0) + '" data-created="' + (p.created_at || '') + '">' +
       '<div class="relative aspect-[4/3] overflow-hidden bg-slate-100 dark:bg-slate-700">' +
@@ -89,7 +89,7 @@
     var name = esc(p.name || model);
     var desc = esc(p.description || p.card_desc || '');
     var img = esc(p._imageUrl);
-    var pdpLink = '/pdp/?model=' + encodeURIComponent(model);
+    var pdpLink = '/products/' + encodeURIComponent(model) + '/';
     var badge = p.badge ? '<span class="px-2 py-0.5 bg-primary text-white text-[10px] font-bold rounded">' + esc(p.badge) + '</span>' : '';
 
     return '<article class="product-card-tablet bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 overflow-hidden" data-model="' + model + ' data-tier="' + esc(p.tier || '') + ' data-sort-order="' + (p.sort_order || 0) + ' data-created="' + (p.created_at || '') + '">' +
@@ -114,7 +114,7 @@
     var name = esc(p.name || model);
     var desc = esc(p.description || p.card_desc || '');
     var img = esc(p._imageUrl);
-    var pdpLink = '/pdp/?model=' + encodeURIComponent(model);
+    var pdpLink = '/products/' + encodeURIComponent(model) + '/';
 
     return '<article class="product-card-mobile bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 overflow-hidden" data-model="' + model + ' data-tier="' + esc(p.tier || '') + ' data-sort-order="' + (p.sort_order || 0) + ' data-created="' + (p.created_at || '') + '">' +
       '<a href="' + pdpLink + '" class="flex gap-4 p-3">' +
