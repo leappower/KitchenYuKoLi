@@ -253,7 +253,7 @@ function productsRoutes(db) {
         });
       });
       batch();
-      logAudit('update', 'related_products', productId, null, { related: items });
+      logAudit(db, req.user.userId, req.user.username, 'update', 'related_products', productId, null, { related: items });
       res.json({ message: 'Related products updated' });
     } catch (e) { res.status(500).json({ error: e.message }); }
   });
