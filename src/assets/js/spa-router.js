@@ -583,6 +583,10 @@
         this.loadRoute(currentPath);
       } else if (currentPath === "/" || currentPath === "//") {
         this.replace("/home/");
+      } else if (currentPath.match(/^\/products\/[^/]+\/$/)) {
+        // Dynamic PDP/category route — load it directly
+        this.log("Dynamic route on init:", currentPath);
+        this.loadRoute(currentPath);
       } else {
         this.log("Unknown initial route:", currentPath, "- redirecting to home");
         this.navigate("/home/");
