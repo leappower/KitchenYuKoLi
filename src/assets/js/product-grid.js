@@ -78,7 +78,7 @@
       (specBadges ? '<div class="flex flex-wrap gap-2 mb-4">' + specBadges + '</div>' : '') +
       '<div class="flex items-center justify-between pt-4 border-t border-slate-100 dark:border-slate-700">' +
       '<div><span class="text-xs text-slate-400">起售价</span><p class="text-xl font-black text-primary">询价</p></div>' +
-      '<a href="' + pdpLink + '" class="flex items-center gap-2 bg-slate-900 dark:bg-white text-white dark:text-slate-900 px-4 py-2 rounded-lg font-bold text-sm hover:opacity-90 transition-opacity">' +
+      '<a href="' + pdpLink + '" class="flex items-center gap-2 bg-primary text-white px-5 py-2.5 rounded-lg font-bold text-sm hover:opacity-90 transition-opacity">' +
       '<span>查看详情</span><span class="material-symbols-outlined text-sm">arrow_forward</span></a>' +
       '</div></div></article>';
   }
@@ -104,7 +104,7 @@
       '<p class="text-xs text-slate-500 dark:text-slate-400 mb-3 line-clamp-2">' + desc + '</p>' +
       '<div class="flex items-center justify-between pt-3 border-t border-slate-100 dark:border-slate-700">' +
       '<span class="text-base font-black text-primary">询价</span>' +
-      '<a href="' + pdpLink + '" class="flex items-center gap-1 text-xs font-bold hover:text-primary"><span>查看详情</span><span class="material-symbols-outlined text-xs">arrow_forward</span></a>' +
+      '<a href="' + pdpLink + '" class="flex items-center gap-1 text-primary text-sm font-bold hover:underline"><span>查看详情</span><span class="material-symbols-outlined text-xs">arrow_forward</span></a>' +
       '</div></div></article>';
   }
 

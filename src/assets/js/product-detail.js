@@ -51,7 +51,7 @@
       '<img loading="lazy" alt="' + esc(rp.model) + '" class="w-full h-full object-cover group-hover:scale-105 transition-transform" src="' + rImg + '" onerror="this.style.display=\'none\'">' +
       '</div><div class="p-4"><h4 class="font-bold text-sm mb-1">' + esc(rp.model) +
       '</h4><p class="text-xs text-slate-500 dark:text-slate-400 mb-2">' + esc(rp.categoryName || rp.category) +
-      '</p><span class="inline-flex items-center gap-1 text-xs font-semibold text-primary group-hover:gap-2 transition-all">' +
+      '</p><span class="inline-flex items-center gap-1 text-sm font-bold text-primary group-hover:gap-2 transition-all">' +
       '查看详情<span class="material-symbols-outlined text-sm">arrow_forward</span></span></div></a>';
   }
 
@@ -70,7 +70,7 @@
         if (rp && rp.model !== product.model) { cards += buildRelatedCard(rp, count++); }
       });
     }
-    // Plan C: auto fallback — same category
+    // Plan B: auto fallback — same category
     if (count < max) {
       var shown = new Set(product.relatedProducts || []); shown.add(product.model);
       for (var i = 0; i < allProducts.length && count < max; i++) {
@@ -79,7 +79,22 @@
         if (rp.category === product.category) { cards += buildRelatedCard(rp, count++); shown.add(rp.model); }
       }
     }
+    // Plan C: last resort — fill with any remaining products
+    if (count < max) {
+      var shown2 = new Set(product.relatedProducts || []); shown2.add(product.model);
+      // Add already-shown same-category products
+      for (var i = 0; i < allProducts.length; i++) {
+        var rp = allProducts[i];
+        if (rp.category === product.category) shown2.add(rp.model);
+      }
+      for (var i = 0; i < allProducts.length && count < max; i++) {
+        var rp = allProducts[i];
+        if (shown2.has(rp.model)) continue;
+        cards += buildRelatedCard(rp, count++); shown2.add(rp.model);
+      }
+    }
     if (cards) el.innerHTML = cards;
+    else el.parentElement.style.display = 'none';
   }
 
   function renderPDP() {

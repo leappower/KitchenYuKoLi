@@ -463,9 +463,7 @@
             addProductMediaUrls(productId, pendingUrls, onTaskDone);
           }
           // Save related products
-          if (saveRelatedProducts && typeof saveRelatedProducts === 'function') {
-            // Related products saves silently (already handled by its own toast removal)
-          }
+          saveRelatedProducts(productId);
           // No media at all: show simple toast now
           if (pendingTasks === 0) {
             toast(p ? '产品已更新' : '产品已创建');
@@ -1826,7 +1824,7 @@
 
   function saveRelatedProducts(productId) {
     var tags = document.querySelectorAll('.pm-related-tag');
-    if (!productId || !tags.length) return;
+    if (!productId) return;
     var items = [];
     tags.forEach(function(t) { items.push({ id: t.dataset.rid }); });
     api('/products/' + productId + '/related', { method: 'PUT', body: items }).catch(function() {});
