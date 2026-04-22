@@ -285,7 +285,8 @@ navigator[data-component="navigator"] {
 }
 
 /* ─── Scroll margin for sections (prevent navigator overlap) ───── */
-main#spa-content > section {
+main#spa-content > section,
+main#spa-content [id] {
   scroll-margin-top: 108px;
 }
 

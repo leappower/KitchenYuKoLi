@@ -208,6 +208,7 @@
             <a
               href="#story"
               class="bg-primary text-white px-8 py-4 rounded-xl font-bold text-lg flex items-center gap-2 hover:shadow-lg hover:shadow-primary/20 transition-all"
+              onclick="event.preventDefault(); document.getElementById('story').scrollIntoView({behavior:'smooth',block:'start'})"
             >
               <span data-i18n="about_hero_btn">了解我们的故事</span>
               <span class="material-symbols-outlined">arrow_downward</span>
