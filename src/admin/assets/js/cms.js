@@ -1754,35 +1754,42 @@
       var overlay = document.createElement('div');
       overlay.id = 'related-picker-overlay';
       overlay.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:9999;display:flex;align-items:center;justify-content:center';
-      // Get already selected IDs
       var selected = {};
       document.querySelectorAll('.pm-related-tag').forEach(function(t) { selected[t.dataset.rid] = true; });
-      var inner = '<div style="background:white;border-radius:12px;padding:1.5rem;max-width:480px;width:90%;max-height:70vh;overflow:auto">';
-      inner += '<div style="font-weight:bold;margin-bottom:1rem">选择推荐产品</div>';
-      inner += '<div style="margin-bottom:1rem"><input type="text" id="rp-search" placeholder="搜索型号..." style="width:100%;padding:0.5rem;border:1px solid #d1d5db;border-radius:8px"></div>';
-      inner += '<div id="rp-list">';
+      var h = '<div style="background:#fff;border-radius:16px;padding:1.5rem;max-width:520px;width:92%;max-height:75vh;display:flex;flex-direction:column">';
+      h += '<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem"><span style="font-weight:700;font-size:1.1rem">选择推荐产品</span><span style="color:#9ca3af;font-size:0.8rem">不选则自动推荐同分类产品</span></div>';
+      h += '<input type="text" id="rp-search" placeholder="搜索型号..." style="width:100%;padding:8px 12px;border:1px solid #e5e7eb;border-radius:10px;margin-bottom:0.75rem;outline:none;font-size:0.875rem">';
+      h += '<div id="rp-list" style="flex:1;overflow-y:auto">';
       items.forEach(function(p) {
         var checked = selected[p.id] ? 'checked' : '';
-        inner += '<label style="display:flex;align-items:center;gap:0.5rem;padding:0.5rem;cursor:pointer;border-bottom:1px solid #f3f4f6"><input type="checkbox" class="rp-cb" value="' + p.id + '" ' + checked + '><span style="font-weight:500">' + esc(p.model) + '</span><span style="color:#9ca3af;font-size:0.75rem">' + esc(p.sub_category || '') + '</span></label>';
+        var img = p.primary_image ? '<img src="' + esc(p.primary_image) + '" style="width:40px;height:40px;object-fit:cover;border-radius:8px;background:#f3f4f6" onerror="this.style.display=\'none\'">' : '<div style="width:40px;height:40px;border-radius:8px;background:#f1f5f9;display:flex;align-items:center;justify-content:center;font-size:1.2rem">📦</div>';
+        h += '<label data-model="' + esc(p.model.toLowerCase()) + '" style="display:flex;align-items:center;gap:10px;padding:8px;cursor:pointer;border-bottom:1px solid #f3f4f6;transition:background 0.1s" onmouseover="this.style.background=\'#f8fafc\'" onmouseout="this.style.background=\'transparent\'">';
+        h += '<input type="checkbox" class="rp-cb" value="' + p.id + '" ' + checked + ' style="width:16px;height:16px;flex-shrink:0;accent-color:#4f46e5">';
+        h += img;
+        h += '<div style="flex:1;min-width:0"><div style="font-weight:600;font-size:0.875rem;color:#1e293b;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">' + esc(p.model) + '</div>';
+        h += '<div style="font-size:0.75rem;color:#94a3b8">' + esc(p.sub_category || '') + '</div></div>';
+        h += '</label>';
       });
-      inner += '</div>';
-      inner += '<div style="display:flex;gap:0.5rem;justify-content:flex-end;margin-top:1rem"><button id="rp-cancel" style="padding:0.5rem 1rem;border:1px solid #d1d5db;border-radius:8px;cursor:pointer">取消</button><button id="rp-confirm" style="padding:0.5rem 1rem;background:#4f46e5;color:white;border:none;border-radius:8px;cursor:pointer">确定</button></div>';
-      inner += '</div>';
-      overlay.innerHTML = inner;
+      h += '</div>';
+      h += '<div style="display:flex;gap:0.5rem;justify-content:flex-end;margin-top:1rem;padding-top:0.75rem;border-top:1px solid #f3f4f6"><button id="rp-cancel" style="padding:8px 16px;border:1px solid #d1d5db;border-radius:10px;cursor:pointer;font-size:0.875rem;background:#fff">取消</button><button id="rp-confirm" style="padding:8px 16px;background:#4f46e5;color:white;border:none;border-radius:10px;cursor:pointer;font-size:0.875rem;font-weight:600">确定</button></div>';
+      h += '</div>';
+      overlay.innerHTML = h;
       document.body.appendChild(overlay);
       overlay.addEventListener('click', function(e) { if (e.target === overlay) overlay.remove(); });
       document.getElementById('rp-cancel').onclick = function() { overlay.remove(); };
       document.getElementById('rp-search').oninput = function() {
         var q = this.value.toLowerCase();
-        document.querySelectorAll('#rp-list label').forEach(function(l) { l.style.display = l.textContent.toLowerCase().indexOf(q) >= 0 ? '' : 'none'; });
+        document.querySelectorAll('#rp-list label').forEach(function(l) {
+          l.style.display = (l.dataset.model || '').indexOf(q) >= 0 ? '' : 'none';
+        });
       };
       document.getElementById('rp-confirm').onclick = function() {
         var chosen = [];
         document.querySelectorAll('.rp-cb:checked').forEach(function(cb) {
-          var id = cb.value, label = cb.closest('label').querySelector('span').textContent;
-          chosen.push({ id: id, model: label });
+          var id = cb.value;
+          var info = cb.closest('label').querySelector('div > div');
+          chosen.push({ id: id, model: info ? info.textContent : cb.value });
         });
-        // Update tags in form
         var container = document.getElementById('pm-related');
         container.innerHTML = chosen.map(function(c) {
           return '<span class="pm-related-tag" data-rid="' + c.id + '" style="display:inline-flex;align-items:center;gap:4px;padding:4px 10px;background:#f0f9ff;border:1px solid #bae6fd;border-radius:9999px;font-size:0.75rem;cursor:pointer">' + esc(c.model) + ' <span style="color:#ef4444;font-weight:bold">×</span></span>';
