@@ -116,7 +116,8 @@
     ];
     var specCards = "";
     for (var s = 0; s < specs.length; s++) {
-      if (specs[s].v) specCards += '<div class="flex justify-between items-start py-3 px-4 rounded-lg bg-slate-50 dark:bg-slate-700/50"><span class="text-sm text-slate-500 dark:text-slate-400 font-medium">' + esc(specs[s].l) + '</span><span class="text-sm font-semibold text-right">' + esc(specs[s].v) + '</span></div>';
+      var val = specs[s].v || '—';
+      specCards += '<div class="flex justify-between items-start py-3 px-4 rounded-lg bg-slate-50 dark:bg-slate-700/50"><span class="text-sm text-slate-500 dark:text-slate-400 font-medium">' + esc(specs[s].l) + '</span><span class="text-sm font-semibold text-right">' + esc(val) + '</span></div>';
     }
 
     var tier = product.tier ? '<span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-bold bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-300">' + esc(product.tier) + '</span>' : '';
@@ -131,7 +132,7 @@
       '<div class="flex items-center gap-3">' +
       '<a href="/quote/?model=' + encodeURIComponent(product.model) + '" class="flex-1 bg-primary text-white px-6 py-3 rounded-xl font-bold flex items-center justify-center gap-2 hover:shadow-lg hover:shadow-primary/20 transition-all text-sm"><span class="material-symbols-outlined text-lg">request_quote</span> 获取报价</a>' +
       '<a href="https://wa.me/' + wa + '?text=' + encodeURIComponent("Hi, I am interested in " + product.model) + '" target="_blank" class="px-6 py-3 rounded-xl font-bold flex items-center gap-2 border-2 border-slate-300 dark:border-slate-600 hover:border-primary hover:text-primary transition-all text-sm"><span class="material-symbols-outlined text-lg">chat</span> 联系销售</a></div></div></div>' +
-      (specCards ? '<section class="mt-8"><h2 class="text-xl font-bold mb-4 flex items-center gap-2"><span class="material-symbols-outlined text-primary">specifications</span> 产品规格</h2><div class="grid grid-cols-1 md:grid-cols-2 gap-3">' + specCards + '</div></section>' : '') +
+      '<section class="mt-8"><h2 class="text-xl font-bold mb-4 flex items-center gap-2"><span class="material-symbols-outlined text-primary">specifications</span> 产品规格</h2><div class="grid grid-cols-1 md:grid-cols-2 gap-3">' + specCards + '</div></section>' +
       '<section class="mt-12 bg-primary rounded-xl p-8 text-center"><h2 class="text-xl font-black text-white mb-3">需要定制方案？</h2><p class="text-white/80 mb-6 text-sm">告诉我们您的需求，我们为您提供专属解决方案。</p><a href="/quote/" class="inline-flex items-center gap-2 bg-white text-primary px-6 py-3 rounded-xl font-bold hover:shadow-lg transition-all"><span class="material-symbols-outlined">arrow_forward</span> 获取报价</a></section></div>';
 
     var ce = document.getElementById("product-content");
@@ -139,7 +140,7 @@
 
     // Static specs grid
     var sg = document.getElementById("specs-grid");
-    if (sg && specCards) sg.innerHTML = specCards;
+    if (sg) sg.innerHTML = specCards;
 
     // Related products
     renderRelated(product);
