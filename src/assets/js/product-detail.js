@@ -109,12 +109,12 @@
       if (!ce) {
         ce = document.createElement("div");
         ce.id = "product-content";
-        ce.className = "max-w-5xl mx-auto";
+        ce.className = "max-w-5xl mx-auto py-6";
         container.insertBefore(ce, container.firstChild);
       }
       if (!re) {
         var section = document.createElement("section");
-        section.className = "max-w-5xl mx-auto px-4 py-12";
+        section.className = "max-w-5xl mx-auto py-12";
         section.innerHTML = '<h2 class="text-xl font-bold mb-4 flex items-center gap-2"><span class="material-symbols-outlined text-primary">recommend</span> 推荐产品</h2><div class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-4" id="related-products"></div>';
         // Find the container's parent to append
         var target = ce.parentElement || container;
@@ -171,7 +171,7 @@
     var badge = product.badge ? '<span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-bold bg-primary text-white">' + esc(product.badge) + '</span>' : '';
     var wa = window.Contacts ? window.Contacts.whatsapp : "8613163756465";
 
-    var html = '<div class="max-w-5xl mx-auto px-4 py-6"><div class="flex flex-col lg:flex-row gap-8">' +
+    var html = '<div class="flex flex-col lg:flex-row gap-8">' +
       '<div class="lg:w-1/2"><div class="rounded-xl overflow-hidden bg-white dark:bg-slate-800 shadow-lg"><div class="relative"><img loading="eager" alt="' + esc(product.model) + '" class="w-full h-[360px] object-cover" src="' + imgSrc + '" onerror="this.src=\'https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=800&h=600&fit=crop\'"></div></div></div>' +
       '<div class="lg:w-1/2 flex flex-col gap-5"><div><div class="flex items-center gap-3 mb-2"><span class="text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">' + esc(product.subCategory || product.categoryName) + '</span>' + badge + tier + '</div>' +
       '<h1 class="text-2xl lg:text-3xl font-black tracking-tight mb-2">' + esc(product.model) + '</h1>' +
@@ -180,7 +180,7 @@
       '<a href="/quote/?model=' + encodeURIComponent(product.model) + '" class="flex-1 bg-primary text-white px-6 py-3 rounded-xl font-bold flex items-center justify-center gap-2 hover:shadow-lg hover:shadow-primary/20 transition-all text-sm"><span class="material-symbols-outlined text-lg">request_quote</span> 获取报价</a>' +
       '<a href="https://wa.me/' + wa + '?text=' + encodeURIComponent("Hi, I am interested in " + product.model) + '" target="_blank" class="px-6 py-3 rounded-xl font-bold flex items-center gap-2 border-2 border-slate-300 dark:border-slate-600 hover:border-primary hover:text-primary transition-all text-sm"><span class="material-symbols-outlined text-lg">chat</span> 联系销售</a></div></div></div>' +
       '<section class="mt-8"><h2 class="text-xl font-bold mb-4 flex items-center gap-2"><span class="material-symbols-outlined text-primary">specifications</span> 产品规格</h2><div class="grid grid-cols-1 md:grid-cols-2 gap-3">' + specCards + '</div></section>' +
-      '<section class="mt-12 bg-primary rounded-xl p-8 text-center"><h2 class="text-xl font-black text-white mb-3">需要定制方案？</h2><p class="text-white/80 mb-6 text-sm">告诉我们您的需求，我们为您提供专属解决方案。</p><a href="/quote/" class="inline-flex items-center gap-2 bg-white text-primary px-6 py-3 rounded-xl font-bold hover:shadow-lg transition-all"><span class="material-symbols-outlined">arrow_forward</span> 获取报价</a></section></div>';
+      '<section class="mt-12 bg-primary rounded-xl p-8 text-center"><h2 class="text-xl font-black text-white mb-3">需要定制方案？</h2><p class="text-white/80 mb-6 text-sm">告诉我们您的需求，我们为您提供专属解决方案。</p><a href="/quote/" class="inline-flex items-center gap-2 bg-white text-primary px-6 py-3 rounded-xl font-bold hover:shadow-lg transition-all"><span class="material-symbols-outlined">arrow_forward</span> 获取报价</a></section>';
 
     var ce = document.getElementById("product-content");
     if (ce) ce.innerHTML = html;
