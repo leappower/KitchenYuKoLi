@@ -290,6 +290,17 @@ main#spa-content [id] {
   scroll-margin-top: 144px;
 }
 
+/* ─── Details/FAQ accordion ────────────────────────────────────── */
+details summary::-webkit-details-marker {
+  display: none;
+}
+details[open] > summary .material-symbols-outlined {
+  transform: rotate(180deg);
+}
+details[open] > summary {
+  border-bottom: 1px solid var(--color-primary);
+}
+
 /* ─── Material Symbols helper ────────────────────────────────────── */
 .material-symbols-outlined {
   font-variation-settings:
