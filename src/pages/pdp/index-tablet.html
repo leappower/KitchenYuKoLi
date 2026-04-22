@@ -61,26 +61,7 @@
     class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 antialiased overflow-x-hidden"
   >
     <div class="relative flex min-h-screen flex-col">
-      <navigator
-        data-component="navigator"
-        data-variant="tablet"
-        data-active="products"
-        data-cta-text-key="nav_get_quote"
-        data-cta-href="/quote"
-      ></navigator>
-      <main id="spa-content">
-        <nav class="max-w-5xl mx-auto px-6 pt-4">
-          <ol class="flex items-center gap-2 text-sm text-slate-500 dark:text-slate-400">
-            <li><a href="/" data-i18n="nav_home" class="hover:text-primary transition-colors">首页</a></li>
-            <li><span class="material-symbols-outlined text-xs">chevron_right</span></li>
-            <li>
-              <a href="/products/" data-i18n="nav_products" class="hover:text-primary transition-colors">产品中心</a>
-            </li>
-            <li><span class="material-symbols-outlined text-xs">chevron_right</span></li>
-            <li id="breadcrumb-product" class="text-slate-900 dark:text-slate-100 font-medium"></li>
-          </ol>
-        </nav>
-        <div id="product-content">
+      <div id="product-content">
           <div class="max-w-5xl mx-auto px-6 py-8 animate-pulse">
             <div class="h-72 bg-slate-200 dark:bg-slate-700 rounded-2xl"></div>
           </div>
