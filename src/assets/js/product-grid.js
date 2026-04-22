@@ -135,8 +135,15 @@
     var grid = document.getElementById(containerId);
     if (!grid) return;
     var products = getAllProducts();
+    var count = products.length;
+    var showing = Math.min(count, limit || 100);
     var html = products.slice(0, limit || 100).map(renderer).join('');
     grid.innerHTML = html;
+    // Hide 'load more' button if all products are shown
+    var loadMoreBtn = grid.parentElement && grid.parentElement.querySelector('[data-i18n="products_load_more"]') || document.querySelector('[data-i18n="products_load_more"]');
+    if (loadMoreBtn) {
+      loadMoreBtn.style.display = (count <= showing) ? 'none' : '';
+    }
   }
 
   // ─── Auto-render on SPA navigation ──────────────────────
