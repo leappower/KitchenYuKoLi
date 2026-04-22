@@ -430,24 +430,48 @@
         // Close modal first
         document.getElementById('product-modal').remove();
         var hasMedia = pendingImages.length || pendingVideos.length || pendingUrls.length;
-        toast(hasMedia ? '保存成功，正在处理媒体...' : '保存成功');
         renderPage();
         // Upload media after modal closed
         if (productId) {
+          var pendingTasks = 0;
+          var pendingDone = 0;
+          function onTaskDone() {
+            pendingDone++;
+            if (pendingDone === pendingTasks) {
+              var msg = p ? '产品已更新' : '产品已创建';
+              var parts = [];
+              if (pendingImages.length) parts.push(pendingImages.length + ' 张图片');
+              if (pendingVideos.length) parts.push(pendingVideos.length + ' 个视频');
+              if (pendingUrls.length) parts.push(pendingUrls.length + ' 个链接');
+              if (parts.length) msg += '，已添加' + parts.join('、');
+              toast(msg);
+              renderPage();
+            }
+          }
           var hasUploads = pendingImages.length || pendingVideos.length;
           var hasUrls = pendingUrls.length;
           if (hasUploads) {
+            pendingTasks++;
             var pendingFiles = [];
             if (pendingImages.length) pendingFiles.push({ files: pendingImages, type: 'image' });
             if (pendingVideos.length) pendingFiles.push({ files: pendingVideos, type: 'video' });
-            uploadProductMediaFiles(productId, pendingFiles);
+            uploadProductMediaFiles(productId, pendingFiles, onTaskDone);
           }
           // Add URLs as product images
           if (hasUrls) {
-            addProductMediaUrls(productId, pendingUrls);
+            pendingTasks++;
+            addProductMediaUrls(productId, pendingUrls, onTaskDone);
           }
           // Save related products
-          saveRelatedProducts(productId);
+          if (saveRelatedProducts && typeof saveRelatedProducts === 'function') {
+            // Related products saves silently (already handled by its own toast removal)
+          }
+          // No media at all: show simple toast now
+          if (pendingTasks === 0) {
+            toast(p ? '产品已更新' : '产品已创建');
+          }
+        } else {
+          toast(p ? '产品已更新' : '产品已创建');
         }
         // Clear pending
         window._pmPendingImages = [];
@@ -555,7 +579,7 @@
   }
 
   // Add URLs as product images via API (after product is saved)
-  function addProductMediaUrls(productId, urls) {
+  function addProductMediaUrls(productId, urls, callback) {
     var count = 0;
     urls.forEach(function(url) {
       fetch('/api/cms/products/' + productId + '/images/url', {
@@ -564,10 +588,7 @@
         body: JSON.stringify({ url: url })
       }).then(function(r) { return r.json(); }).then(function(d) {
         count++;
-        if (count === urls.length) {
-          toast(urls.length + ' 个链接已添加');
-          renderPage();
-        }
+        if (count === urls.length) { renderPage(); if (callback) callback(); }
       });
     });
   }
@@ -673,7 +694,8 @@
     }
   }
 
-  function uploadProductMediaFiles(productId, pendingFiles) {
+  function uploadProductMediaFiles(productId, pendingFiles, callback) {
+    var done = 0, total = pendingFiles.length;
     pendingFiles.forEach(function(pf) {
       var fd = new FormData();
       pf.files.forEach(function(f) { fd.append('files', f); });
@@ -682,11 +704,11 @@
       })
         .then(function(r) { return r.json(); })
         .then(function(d) {
-          if (d && d.images) toast((pf.type === 'video' ? '视频' : '图片') + '已上传');
-          else toast('上传失败', true);
-          renderPage();
+          if (!d || !d.images) toast('上传失败', true);
+          done++;
+          if (done === total) { renderPage(); if (callback) callback(); }
         })
-        .catch(function() { toast('上传失败', true); });
+        .catch(function() { toast('上传失败', true); done++; if (done === total && callback) callback(); });
     });
   }
 
