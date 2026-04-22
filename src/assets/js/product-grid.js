@@ -63,7 +63,7 @@
     if (p.badge) badge = '<span class="px-3 py-1 bg-primary text-white text-xs font-bold rounded-full">' + esc(p.badge) + '</span>';
     var pdpLink = '/pdp/?model=' + encodeURIComponent(model);
 
-    return '<article class="product-card group bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 overflow-hidden" data-category="' + category + '" data-model="' + model + '">' +
+    return '<article class="product-card group bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 overflow-hidden" data-category="' + category + '" data-tier="' + esc(p.tier || '') + '" data-model="' + model + '" data-sort-order="' + (p.sort_order || 0) + '" data-created="' + (p.created_at || '') + '">' +
       '<div class="relative aspect-[4/3] overflow-hidden bg-slate-100 dark:bg-slate-700">' +
       '<img loading="lazy" alt="' + name + '" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" src="' + img + '" onerror="if(!this.dataset.errored){this.dataset.errored=\'1\';this.src=\'/assets/images/products/default.webp\' }">' +
       (badge ? '<div class="absolute top-4 left-4 flex gap-2">' + badge + '</div>' : '') +
@@ -92,7 +92,7 @@
     var pdpLink = '/pdp/?model=' + encodeURIComponent(model);
     var badge = p.badge ? '<span class="px-2 py-0.5 bg-primary text-white text-[10px] font-bold rounded">' + esc(p.badge) + '</span>' : '';
 
-    return '<article class="product-card-tablet bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 overflow-hidden" data-model="' + model + '">' +
+    return '<article class="product-card-tablet bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 overflow-hidden" data-model="' + model + ' data-tier="' + esc(p.tier || '') + ' data-sort-order="' + (p.sort_order || 0) + ' data-created="' + (p.created_at || '') + '">' +
       '<div class="relative aspect-[4/3] overflow-hidden bg-slate-100 dark:bg-slate-700">' +
       '<img loading="lazy" alt="' + name + '" class="w-full h-full object-cover" src="' + img + '" onerror="if(!this.dataset.errored){this.dataset.errored=\'1\';this.src=\'/assets/images/products/default.webp\' }">' +
       (badge ? '<div class="absolute top-3 left-3 flex gap-1.5">' + badge + '</div>' : '') +
@@ -116,7 +116,7 @@
     var img = esc(p._imageUrl);
     var pdpLink = '/pdp/?model=' + encodeURIComponent(model);
 
-    return '<article class="product-card-mobile bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 overflow-hidden" data-model="' + model + '">' +
+    return '<article class="product-card-mobile bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 overflow-hidden" data-model="' + model + ' data-tier="' + esc(p.tier || '') + ' data-sort-order="' + (p.sort_order || 0) + ' data-created="' + (p.created_at || '') + '">' +
       '<a href="' + pdpLink + '" class="flex gap-4 p-3">' +
       '<div class="w-24 h-24 rounded-lg bg-slate-100 dark:bg-slate-700 flex-shrink-0 overflow-hidden">' +
       '<img loading="lazy" alt="' + name + '" class="w-full h-full object-cover" src="' + img + '" onerror="if(!this.dataset.errored){this.dataset.errored=\'1\';this.src=\'/assets/images/products/default.webp\' }">' +
@@ -209,17 +209,43 @@
         card.style.display = (category === 'all' || card.dataset.category === category) ? '' : 'none';
       });
     });
-    // Also bind filter-chips (industrial/commercial/compact) — simple all/none for now
+    // Bind filter-chips (industrial/commercial/compact) + sort select
     document.querySelectorAll('.filter-chip').forEach(function(chip) {
       chip.addEventListener('click', function() {
-        var filter = this.dataset.filter;
+        var tier = this.dataset.filter;
         document.querySelectorAll('.filter-chip').forEach(function(c) { c.classList.remove('active'); });
         this.classList.add('active');
-        document.querySelectorAll('#product-grid .product-card, #product-list .product-card-mobile').forEach(function(card) {
-          card.style.display = (filter === 'all') ? '' : 'none';
-        });
+        applyFilters();
       });
     });
+    var sortSelect = document.querySelector('#products .flex select');
+    if (sortSelect) {
+      sortSelect.addEventListener('change', function() { applyFilters(); });
+    }
+    function applyFilters() {
+      var activeTier = (document.querySelector('.filter-chip.active') || {}).dataset || { filter: 'all' };
+      var tierFilter = activeTier.filter || 'all';
+      var sortBy = sortSelect ? sortSelect.value : 'featured';
+      var grid = document.getElementById('product-grid') || document.getElementById('product-list');
+      if (!grid) return;
+      var cards = Array.from(grid.children);
+      // Filter by tier
+      cards.forEach(function(card) {
+        var cardTier = card.dataset.tier || '';
+        card.style.display = (tierFilter === 'all' || cardTier === tierFilter) ? '' : 'none';
+      });
+      // Sort visible cards
+      var visible = cards.filter(function(c) { return c.style.display !== 'none'; });
+      visible.sort(function(a, b) {
+        if (sortBy === 'newest') {
+          return (b.dataset.created || '').localeCompare(a.dataset.created || '');
+        } else if (sortBy === 'capacity') {
+          return (b.dataset.sortOrder || 0) - (a.dataset.sortOrder || 0);
+        }
+        return 0; // featured = default order
+      });
+      visible.forEach(function(card) { grid.appendChild(card); });
+    }
   }
 
   console.log('[ProductGrid] Script loaded, registering events');

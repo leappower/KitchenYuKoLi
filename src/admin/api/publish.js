@@ -53,6 +53,10 @@ function publishRoutes(db) {
           color: p.color || null,
           controlMethod: p.control_method || null,
           launchTime: p.launch_time || null,
+          tier: p.tier || '',
+          sort_order: p.sort_order || 0,
+          created_at: p.created_at || null,
+          updated_at: p.updated_at || null,
           images: (imgMap[p.id] || []).map(i => ({
             filePath: i.file_path,
             isPrimary: !!i.is_primary,

@@ -346,6 +346,8 @@
       '<select id="pm-status"><option' + (p && p.status !== '在售' ? '' : ' selected') + '>在售</option><option' + (p && p.status === '停产' ? ' selected' : '') + '>停产</option><option' + (p && p.status === '预售' ? ' selected' : '') + '>预售</option></select></div>' +
       '<div><label class="text-sm font-medium text-gray-700" style="display:block;margin-bottom:0.25rem">Badge</label>' +
       '<input id="pm-badge" placeholder="如：热销" value="' + esc(p ? (p.badge || '') : '') + '"></div>' +
+      '<div><label class="text-sm font-medium text-gray-700" style="display:block;margin-bottom:0.25rem">等级</label>' +
+      '<select id="pm-tier"><option value="">全部</option><option value="工业级"' + (p && p.tier === '工业级' ? ' selected' : '') + '>工业级</option><option value="商用级"' + (p && p.tier === '商用级' ? ' selected' : '') + '>商用级</option><option value="紧凑型"' + (p && p.tier === '紧凑型' ? ' selected' : '') + '>紧凑型</option></select></div>' +
       '<div><label class="text-sm font-medium text-gray-700" style="display:block;margin-bottom:0.25rem">功率</label>' +
       '<input id="pm-power" value="' + esc(p ? (p.power || '') : '') + '"></div>' +
       '<div><label class="text-sm font-medium text-gray-700" style="display:block;margin-bottom:0.25rem">产能</label>' +
@@ -388,6 +390,7 @@
         category_id: document.getElementById('pm-cat').value || null,
         status: document.getElementById('pm-status').value,
         badge: document.getElementById('pm-badge').value,
+        tier: document.getElementById('pm-tier').value,
         power: document.getElementById('pm-power').value,
         throughput: document.getElementById('pm-throughput').value,
         voltage: document.getElementById('pm-voltage').value,

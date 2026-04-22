@@ -56,6 +56,7 @@ function initDatabase() {
       color TEXT DEFAULT '',
       control_method TEXT DEFAULT '',
       launch_time TEXT DEFAULT '',
+      tier TEXT DEFAULT '',
       sort_order INTEGER DEFAULT 0,
       created_at TEXT DEFAULT (datetime('now')),
       updated_at TEXT DEFAULT (datetime('now'))
@@ -155,6 +156,11 @@ function initDatabase() {
     );
     CREATE UNIQUE INDEX IF NOT EXISTS idx_posts_slug ON posts(slug);
   `);
+
+  // Auto-migration: add tier column if missing
+  try {
+    db.exec(`ALTER TABLE products ADD COLUMN tier TEXT DEFAULT ''`);
+  } catch(e) { /* column already exists */ }
 
   // Ensure default admin user
   const adminExists = db.prepare('SELECT id FROM cms_users WHERE username = ?').get('admin');

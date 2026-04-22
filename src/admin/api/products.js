@@ -64,7 +64,7 @@ function productsRoutes(db) {
   router.post('/products', requireAuth, (req, res) => {
     const fields = ['category_id', 'sub_category', 'model', 'status', 'is_active', 'badge', 'badge_color',
       'power', 'throughput', 'average_time', 'voltage', 'frequency', 'material',
-      'product_dimensions', 'color', 'control_method', 'launch_time', 'sort_order'];
+      'product_dimensions', 'color', 'control_method', 'launch_time', 'tier', 'sort_order'];
     const { model } = req.body;
     if (!model) return res.status(400).json({ error: 'model is required' });
 
@@ -104,7 +104,7 @@ function productsRoutes(db) {
       const vals = [];
       const fields = ['category_id', 'sub_category', 'model', 'status', 'is_active', 'badge', 'badge_color',
         'power', 'throughput', 'average_time', 'voltage', 'frequency', 'material',
-        'product_dimensions', 'color', 'control_method', 'launch_time', 'sort_order'];
+        'product_dimensions', 'color', 'control_method', 'launch_time', 'tier', 'sort_order'];
 
       fields.forEach(f => {
         if (req.body[f] !== undefined) {
