@@ -228,6 +228,10 @@ header button:active {
 <label class="block text-sm font-bold text-slate-700 dark:text-slate-300 ml-1" data-i18n="quote_project_brief">Project Brief (Optional)</label>
 <textarea class="w-full p-4 rounded-xl border-primary/20 bg-white dark:bg-slate-800 focus:ring-2 focus:ring-primary focus:border-primary transition-all text-base min-h-[120px]" placeholder="Tell us a little more about what you're looking for..."></textarea>
 </div>
+<div class="flex items-start gap-2 pt-4">
+  <input id="q-consent-m" type="checkbox" class="mt-1 accent-primary size-5" checked />
+  <label for="q-consent-m" class="text-xs text-slate-500" data-i18n="quote_consent_text">我同意 YuKoLi 的隐私政策，并允许通过以上联系方式接收报价方案。</label>
+</div>
 </form>
 </section>
 <!-- Collapsible Trust Signals -->
@@ -261,7 +265,7 @@ header button:active {
 <!-- Bottom Navigation & CTA Zone -->
 <div class="sticky bottom-0 bg-white dark:bg-slate-900 border-t border-primary/10 thumb-zone-bottom shadow-[0_-10px_30px_rgba(0,0,0,0.05)]">
 <div class="px-4 pt-4 pb-2">
-<a class="flex items-center justify-center w-full h-14 bg-primary text-white font-bold text-lg rounded-xl shadow-lg shadow-primary/30 active:scale-[0.98] transition-all gap-2" href="/thank-you/">
+<a id="quote-submit-mobile" class="flex items-center justify-center w-full h-14 bg-primary text-white font-bold text-lg rounded-xl shadow-lg shadow-primary/30 active:scale-[0.98] transition-all gap-2" href="#">
                 <span data-i18n="quote_btn_submit_inquiry">提交询价</span>
                 <span class="material-symbols-outlined">send</span>
 </a>
@@ -366,5 +370,20 @@ header button:active {
       window.SpaRouter.init();
     }
   });
+</script>
+<script>
+(function(){
+  var btn = document.getElementById('quote-submit-mobile');
+  if(!btn) return;
+  btn.addEventListener('click', function(e){
+    e.preventDefault();
+    var consent = document.getElementById('q-consent-m');
+    if(consent && !consent.checked){
+      if(window.showNotification) window.showNotification('请先同意隐私政策','error');
+      return;
+    }
+    location.href = '/thank-you/';
+  });
+})();
 </script>
 </body></html>

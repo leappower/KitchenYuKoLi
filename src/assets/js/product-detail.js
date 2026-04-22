@@ -109,7 +109,7 @@
       if (!ce) {
         ce = document.createElement("div");
         ce.id = "product-content";
-        ce.className = "w-full py-6";
+        ce.className = "w-full py-10";
         container.insertBefore(ce, container.firstChild);
       }
       if (!re) {

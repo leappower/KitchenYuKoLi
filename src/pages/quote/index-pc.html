@@ -122,9 +122,9 @@
           <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
             <!-- Form Section -->
             <div class="lg:col-span-8">
-              <form id="quote-form" class="space-y-10" novalidate>
+              <form id="quote-form" class="space-y-6" novalidate>
                 <!-- Basic Info Section -->
-                <section class="py-12">
+                <section>
                   <h2 class="text-xl font-bold mb-6 flex items-center gap-2">
                     <span class="material-symbols-outlined text-primary">business</span>
                     <span data-i18n="quote_company_info">企业信息</span>
@@ -210,7 +210,7 @@
                 </section>
 
                 <!-- Equipment Needs Section -->
-                <section class="py-12">
+                <section>
                   <h2 class="text-xl font-bold mb-6 flex items-center gap-2">
                     <span class="material-symbols-outlined text-primary">precision_manufacturing</span>
                     <span data-i18n="quote_equipment_needs">设备需求</span>
@@ -290,9 +290,9 @@
                 </section>
 
                 <!-- Submit -->
-                <div class="pt-6">
+                <div class="pt-2">
                   <label class="flex items-start gap-3 mb-6 cursor-pointer">
-                    <input id="q-consent" type="checkbox" class="mt-1 accent-primary" />
+                    <input id="q-consent" type="checkbox" class="mt-1 accent-primary" checked />
                     <span class="text-sm text-slate-500" data-i18n="quote_consent_text">
                       我同意 YuKoLi 的隐私政策，并允许通过以上联系方式接收报价方案。
                     </span>
@@ -487,6 +487,16 @@
             if (emailEl && emailEl.value && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailEl.value)) {
               emailEl.classList.add("border-red-500");
               valid = false;
+            }
+
+            // Consent validation
+            var consentEl = document.getElementById('q-consent');
+            if (consentEl && !consentEl.checked) {
+              valid = false;
+              if (typeof window.showNotification === 'function') {
+                window.showNotification('请先同意隐私政策', 'error');
+              }
+              return;
             }
 
             if (!valid) {
