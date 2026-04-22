@@ -547,10 +547,16 @@
   function addMediaUrl(urlInput) {
     var url = urlInput.value.trim();
     if (!url) return;
-    // For external URLs, keep as-is (hotlink preview)
-    // pathname conversion removed: external URLs like baidu images
-    // cannot be loaded as /it/u=xxx on our server
+    // Support: relative path (/admin/uploads/xxx) or full URL (https://xxx)
+    var previewUrl = url;
+    var isExternal = false;
+    if (url.startsWith('http://') || url.startsWith('https://')) {
+      isExternal = true;
+      try { url = new URL(url).pathname; } catch(e) {}
+      previewUrl = url;
+    }
     if (!url.startsWith('/')) url = '/' + url;
+    if (!isExternal) previewUrl = url;
     window._pmPendingUrls = window._pmPendingUrls || [];
     window._pmPendingUrls.push(url);
     urlInput.value = '';
@@ -562,27 +568,27 @@
     var wrap = document.createElement('div');
     wrap.style.cssText = 'position:relative;width:5.5rem;height:5.5rem;border-radius:0.5rem;border:1px dashed #a5b4fc;overflow:hidden;flex-shrink:0';
     if (isVid) {
-      wrap.appendChild(Object.assign(document.createElement('div'), { style: 'width:100%;height:100%;background:#0f172a;display:flex;align-items:center;justify-content:center;font-size:1.5rem', textContent: '\u{1F3AC}' }));
+      wrap.appendChild(Object.assign(document.createElement('div'), { style: 'width:100%;height:100%;background:#0f172a;display:flex;align-items:center;justify-content:center;font-size:1.5rem', textContent: '🎬' }));
     } else {
       var img = document.createElement('img');
       img.style.cssText = 'width:100%;height:100%;object-fit:cover';
-      img.src = url;
+      img.src = previewUrl;
       img.onerror = function() {
         var errDiv = document.createElement('div');
         errDiv.style.cssText = 'width:100%;height:100%;background:#1e293b;display:flex;align-items:center;justify-content:center;color:#94a3b8;font-size:0.6rem';
-        errDiv.textContent = '\u52a0\u8f7d\u5931\u8d25';
+        errDiv.textContent = '加载失败';
         this.replaceWith(errDiv);
       };
       wrap.appendChild(img);
     }
     var linkBadge = document.createElement('div');
     linkBadge.style.cssText = 'position:absolute;top:0.25rem;left:0.25rem;background:#8b5cf6;color:#fff;font-size:0.5rem;padding:1px 4px;border-radius:0.25rem';
-    linkBadge.textContent = '\u94fe\u63a5';
+    linkBadge.textContent = '链接';
     wrap.appendChild(linkBadge);
     var delBtn = document.createElement('button');
-    delBtn.title = '\u79fb\u9664';
+    delBtn.title = '移除';
     delBtn.style.cssText = 'position:absolute;top:0.25rem;right:0.25rem;background:rgba(239,68,68,0.85);color:#fff;border:none;width:1rem;height:1rem;border-radius:9999px;font-size:0.55rem;cursor:pointer';
-    delBtn.textContent = '\u2715';
+    delBtn.textContent = '✕';
     delBtn.addEventListener('click', function() {
       var idx = window._pmPendingUrls.indexOf(url);
       if (idx > -1) window._pmPendingUrls.splice(idx, 1);
@@ -591,7 +597,7 @@
     });
     wrap.appendChild(delBtn);
     container.appendChild(wrap);
-    toast('\u5df2\u6dfb\u52a0\u94fe\u63a5\uff0c\u4fdd\u5b58\u540e\u751f\u6548');
+    toast('已添加链接，保存后生效');
   }
   // Add URLs as product images via API (after product is saved)
   function addProductMediaUrls(productId, urls, callback) {
