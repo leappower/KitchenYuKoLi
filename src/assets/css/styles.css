@@ -287,7 +287,21 @@ navigator[data-component="navigator"] {
 /* ─── Scroll margin for sections (prevent navigator overlap) ───── */
 main#spa-content > section,
 main#spa-content [id] {
-  scroll-margin-top: 144px;
+  scroll-margin-top: 72px; /* mobile: 61px nav + 11px buffer */
+}
+
+@media (min-width: 768px) {
+  main#spa-content > section,
+  main#spa-content [id] {
+    scroll-margin-top: 80px; /* tablet: ~70px nav + 10px buffer */
+  }
+}
+
+@media (min-width: 1280px) {
+  main#spa-content > section,
+  main#spa-content [id] {
+    scroll-margin-top: 144px; /* PC: 109px nav + 35px buffer */
+  }
 }
 
 /* ─── Details/FAQ accordion ────────────────────────────────────── */

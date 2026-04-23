@@ -101,6 +101,21 @@
         t.closest(".abt-dropdown-wrap").classList.toggle("is-open");
       });
     });
+    // SPA navigation for dropdown sub-items (prevent full page refresh)
+    document.querySelectorAll(".abt-dropdown-item").forEach(function (item) {
+      if (item._abtNavBound) return;
+      item._abtNavBound = true;
+      item.addEventListener("click", function (e) {
+        var href = item.getAttribute("href");
+        if (href && global.SpaRouter) {
+          e.preventDefault();
+          // Close dropdown first
+          var wrap = item.closest(".abt-dropdown-wrap");
+          if (wrap) wrap.classList.remove("is-open");
+          global.SpaRouter.navigate(href);
+        }
+      });
+    });
   }
 
   /* ───────────────────────── MOBILE POPUP ───────────────────────── */
