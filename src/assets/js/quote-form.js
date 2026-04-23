@@ -3,50 +3,94 @@
  * Works with both direct page load and SPA navigation.
  */
 (function () {
+  var VERSION = "20260423";
+
+  function ensureErrorBanner() {
+    if (document.getElementById("quote-form-error")) return;
+    var banner = document.createElement("div");
+    banner.id = "quote-form-error";
+    banner.style.cssText = "display:none;background:#fef2f2;border:1px solid #fca5a5;color:#dc2626;padding:12px 16px;border-radius:8px;margin-bottom:16px;font-size:14px;font-weight:600;text-align:center;";
+    banner.textContent = "";
+    var form = document.getElementById("quote-form");
+    if (form) form.insertBefore(banner, form.firstChild);
+    return banner;
+  }
+
+  function showError(msg) {
+    // Try toast notification first
+    if (typeof window.showNotification === "function") {
+      window.showNotification(msg, "error");
+    }
+    // Always show inline banner as fallback
+    var banner = ensureErrorBanner();
+    if (banner) {
+      banner.textContent = "⚠ " + msg;
+      banner.style.display = "block";
+      banner.scrollIntoView({ behavior: "smooth", block: "center" });
+    }
+    // Also try alert as last resort
+    setTimeout(function () {
+      if (banner && banner.style.display !== "none") return;
+      alert(msg);
+    }, 300);
+  }
+
+  function clearError() {
+    var banner = document.getElementById("quote-form-error");
+    if (banner) banner.style.display = "none";
+  }
+
   function initQuoteForm() {
     var form = document.getElementById("quote-form");
     if (!form || form.dataset.quoteFormBound) return;
     form.dataset.quoteFormBound = "1";
-    form.dataset.interactionBound = "1";
+
+    console.log("[QuoteForm] Initialized (v" + VERSION + ")");
+
+    // Clear errors on input
+    form.addEventListener("input", clearError);
+    form.addEventListener("change", clearError);
 
     form.addEventListener("submit", function (e) {
       e.preventDefault();
+      clearError();
 
       // Required fields
       var required = ["q-company", "q-contact", "q-phone", "q-email", "q-country", "q-equipment-type"];
       var valid = true;
+      var firstInvalid = null;
       required.forEach(function (id) {
         var el = document.getElementById(id);
         if (!el) return;
         if (!el.value.trim()) {
           el.classList.add("border-red-500");
+          el.classList.add("ring-2", "ring-red-300");
           valid = false;
+          if (!firstInvalid) firstInvalid = el;
         } else {
           el.classList.remove("border-red-500");
+          el.classList.remove("ring-2", "ring-red-300");
         }
       });
 
       // Email validation
       var emailEl = document.getElementById("q-email");
       if (emailEl && emailEl.value && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailEl.value)) {
-        emailEl.classList.add("border-red-500");
+        emailEl.classList.add("border-red-500", "ring-2", "ring-red-300");
         valid = false;
+        if (!firstInvalid) firstInvalid = emailEl;
       }
 
       // Consent validation
       var consentEl = document.getElementById("q-consent");
       if (consentEl && !consentEl.checked) {
-        valid = false;
-        if (typeof window.showNotification === "function") {
-          window.showNotification("请先同意隐私政策", "error");
-        }
+        showError("请先同意隐私政策");
         return;
       }
 
       if (!valid) {
-        if (typeof window.showNotification === "function") {
-          window.showNotification("请填写所有必填项", "error");
-        }
+        showError("请填写所有必填项（红色边框的字段为必填）");
+        if (firstInvalid) firstInvalid.focus();
         return;
       }
 
