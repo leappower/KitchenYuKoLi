@@ -426,6 +426,8 @@
           </div>
         </div>
         <div class="w-full xl:w-[70%] relative bg-slate-300 dark:bg-slate-800 overflow-hidden min-h-[500px]">
+          <!-- px wrapper to match main padding for consistent content margins -->
+          <div class="px-6 md:px-10 lg:px-10 xl:px-20 py-10 xl:py-12 h-full w-full flex items-center justify-center">
           <!-- Interactive Map Visualization -->
           <div
             class="absolute inset-0 opacity-40 mix-blend-multiply grayscale"
@@ -437,7 +439,7 @@
               background-position: center;
             "
           ></div>
-          <div class="relative z-10 h-full w-full flex items-center justify-center p-8 xl:p-12">
+            <div class="relative z-10 h-full w-full flex items-center justify-center">
             <div class="grid grid-cols-2 md:grid-cols-4 gap-4 w-full max-w-4xl">
               <!-- Location Stats - 品牌数据（待确认后更新具体数字） -->
               <div
@@ -467,6 +469,7 @@
                 <p class="text-xs font-bold uppercase text-slate-500" data-i18n="home_stat_certified">Certified</p>
               </div>
             </div>
+          </div>
           </div>
         </div>
       </section>
