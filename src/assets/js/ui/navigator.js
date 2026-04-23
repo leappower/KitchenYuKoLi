@@ -276,7 +276,7 @@
     // ── Mobile: hamburger + logo + search ──
     if (variant === "mobile") {
       return (
-        '<div id="mobile-header-placeholder" style="height:56px;flex-shrink:0"></div>' +
+        '<div id="mobile-header-placeholder" style="height:65px;flex-shrink:0"></div>' +
         '<header id="mobile-header" class="fixed top-0 left-0 right-0 z-[var(--z-header)] border-b border-slate-200 dark:border-slate-800 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md transition-transform duration-300">' +
         '<div class="px-4 py-3 flex items-center justify-between">' +
         /* Left: Hamburger */
@@ -303,7 +303,7 @@
     // ── Tablet: hamburger menu (same as mobile — compact screens can't fit 6 nav links) ──
     if (variant === "tablet") {
       return (
-        '<div id="mobile-header-placeholder" style="height:56px;flex-shrink:0"></div>' +
+        '<div id="mobile-header-placeholder" style="height:65px;flex-shrink:0"></div>' +
         '<header id="mobile-header" class="fixed top-0 left-0 right-0 z-[var(--z-header)] border-b border-slate-200 dark:border-slate-800 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md transition-transform duration-300">' +
         '<div class="px-4 py-3 flex items-center justify-between">' +
         /* Left: Hamburger */
