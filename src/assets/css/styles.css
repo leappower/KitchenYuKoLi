@@ -310,16 +310,21 @@ details[open] > summary {
     "opsz" 24;
   vertical-align: middle;
   line-height: 1;
-  /* Fix icon-text vertical alignment in flex containers */
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
+  /* Ensure consistent sizing in all contexts */
+  display: inline-block;
   width: 1em;
   height: 1em;
+  vertical-align: -0.15em;
   flex-shrink: 0;
-  overflow: hidden;
   /* Fallback: hide text content if font fails to load */
   font-family: 'Material Symbols Outlined', sans-serif;
+}
+
+/* In flex containers, let align-items handle centering */
+.flex .material-symbols-outlined,
+[class*="items-"] .material-symbols-outlined {
+  vertical-align: initial;
+  display: inline-block;
 }
 
 /* ─── Select dropdown arrow ────────────────────────────────────── */
