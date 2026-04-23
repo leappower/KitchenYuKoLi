@@ -668,12 +668,27 @@
   var _searchToggleBound = false;
   var onMenuClick = null;
   var onSearchClick = null;
+  var _lastToggleBtn = null; // track which DOM element we bound to
 
   function initToggle() {
     var toggleBtn = document.getElementById("mobile-menu-toggle");
-    console.log('[mobile-menu] initToggle: toggleBtn=', !!toggleBtn, '| _toggleBound=', _toggleBound);
-    if (toggleBtn && !_toggleBound) {
+    console.log('[mobile-menu] initToggle: toggleBtn=', !!toggleBtn, '| _toggleBound=', _toggleBound, '| _lastToggleBtn=', _lastToggleBtn === toggleBtn);
+
+    // If we already bound to THIS specific button, skip
+    if (_toggleBound && toggleBtn === _lastToggleBtn) {
+      console.log('[mobile-menu] initToggle: already bound to this button, skipping');
+      return;
+    }
+
+    // If we bound to a DIFFERENT (old) button, remove old handler first
+    if (_toggleBound && onMenuClick && _lastToggleBtn && _lastToggleBtn !== toggleBtn) {
+      try { _lastToggleBtn.removeEventListener("click", onMenuClick); } catch(e) {}
+      console.log('[mobile-menu] initToggle: removed old handler from previous button');
+    }
+
+    if (toggleBtn) {
       _toggleBound = true;
+      _lastToggleBtn = toggleBtn;
       onMenuClick = function (e) {
         e.preventDefault();
         e.stopPropagation();
@@ -681,10 +696,8 @@
       };
       toggleBtn.addEventListener("click", onMenuClick);
       console.log('[mobile-menu] initToggle: bound click to toggleBtn');
-    } else if (!toggleBtn) {
+    } else {
       console.log('[mobile-menu] initToggle: #mobile-menu-toggle NOT FOUND in DOM');
-      // Button not in DOM yet — allow future retry
-      _toggleBound = false;
     }
 
     // Mobile search toggle — open inline search overlay
@@ -880,6 +893,9 @@
 
   document.addEventListener("spa:load", function () {
     closeMenu();
+    // Reset binding flags so initToggle can bind to the new button.
+    // Also clear _lastToggleBtn so the old DOM element ref is released.
+    _lastToggleBtn = null;
     _toggleBound = false;
     _searchToggleBound = false;
     initToggle();
