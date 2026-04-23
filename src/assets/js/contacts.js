@@ -29,6 +29,16 @@
     return el.value.trim();
   }
   function buildQuoteMessage() {
+    // Use i18n for labels if available, otherwise raw key (English fallback)
+    var t = function(key) {
+      if (global.translationManager && typeof global.translationManager.translate === 'function') {
+        var v = global.translationManager.translate(key);
+        if (v && v !== key) return v;
+      }
+      // Fallback: strip quote_ prefix, replace _ with space
+      return key.replace('quote_', '').replace(/_/g, ' ');
+    };
+
     var company = getVal("q-company");
     var contact = getVal("q-contact");
     var phone = getVal("q-phone");
@@ -40,23 +50,23 @@
     var budget = getVal("q-budget") || "";
     var message = getVal("q-message") || "";
 
-    // Only include filled fields
+    // Only include filled fields, labels in current UI language
     var lines = [];
-    if (company) lines.push("🏢 公司: " + company);
-    if (contact) lines.push("👤 联系人: " + contact);
-    if (phone) lines.push("📞 电话: " + phone);
-    if (email) lines.push("📧 邮箱: " + email);
-    if (country) lines.push("🌍 国家: " + country);
-    if (equipType) lines.push("🍽️ 设备类型: " + equipType);
-    if (quantity) lines.push("📦 数量: " + quantity);
-    if (capacity) lines.push("🏭 厨房规模: " + capacity);
-    if (budget) lines.push("💰 预算: " + budget);
-    if (message) lines.push("📝 需求: " + message);
-    lines.push("🔗 页面: " + global.location.href);
+    if (company) lines.push("🏢 " + t("quote_company_name") + ": " + company);
+    if (contact) lines.push("👤 " + t("quote_contact_person") + ": " + contact);
+    if (phone) lines.push("📞 " + t("quote_phone") + ": " + phone);
+    if (email) lines.push("📧 " + t("quote_email_address") + ": " + email);
+    if (country) lines.push("🌍 " + t("quote_country_region") + ": " + country);
+    if (equipType) lines.push("🍽️ " + t("quote_equipment_type") + ": " + equipType);
+    if (quantity) lines.push("📦 " + t("quote_quantity") + ": " + quantity);
+    if (capacity) lines.push("🏭 " + t("quote_kitchen_capacity") + ": " + capacity);
+    if (budget) lines.push("💰 " + t("quote_budget_range") + ": " + budget);
+    if (message) lines.push("📝 " + t("quote_detailed_requirements") + ": " + message);
+    lines.push("🔗 " + global.location.href);
 
     return lines.length > 1
-      ? "🔧 YuKoLi 智能厨具询价\n━━━━━━━━━━━━━━\n" + lines.join("\n")
-      : "🔧 YuKoLi 智能厨具询价 — 来自 " + global.location.href;
+      ? "🔧 " + t("quote_get_quote") + "\n" + lines.join("\n")
+      : "🔧 " + t("quote_get_quote") + " — " + global.location.href;
   }
 
   // ============================================
