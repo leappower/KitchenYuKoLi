@@ -209,10 +209,10 @@
     tabContainer.innerHTML = html;
     // Bind click events with delegation on parent
     tabContainer.addEventListener('click', function(e) {
-      var tab = e.target.closest('.category-tab');
+      var tab = e.target.closest('.category-tab, .category-tab-tablet');
       if (!tab) return;
       var category = tab.dataset.category;
-      tabContainer.querySelectorAll('.category-tab').forEach(function(t) { t.classList.remove('active'); });
+      tabContainer.querySelectorAll('.category-tab, .category-tab-tablet').forEach(function(t) { t.classList.remove('active'); });
       tab.classList.add('active');
       document.querySelectorAll('#product-grid .product-card, #product-list .product-card-mobile').forEach(function(card) {
         card.style.display = (category === 'all' || card.dataset.category === category) ? '' : 'none';
