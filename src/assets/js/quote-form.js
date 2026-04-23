@@ -6,7 +6,7 @@
   var VERSION = "20260423b";
 
   // Required field IDs whose labels need * markers
-  var REQUIRED_IDS = ["q-company", "q-contact", "q-phone", "q-email", "q-country", "q-equipment-type"];
+  var REQUIRED_IDS = ["q-company", "q-contact", "q-phone", "q-email", "q-country", "q-equipment-type", "q-capacity"];
   var ASTERISK_HTML = ' <span class="text-red-500 font-bold text-base align-middle">*</span>';
 
   /**
@@ -86,7 +86,7 @@
       clearError();
 
       // Required fields
-      var required = ["q-company", "q-contact", "q-phone", "q-email", "q-country", "q-equipment-type"];
+      var required = ["q-company", "q-contact", "q-phone", "q-email", "q-country", "q-equipment-type", "q-capacity"];
       var valid = true;
       var firstInvalid = null;
       required.forEach(function (id) {
