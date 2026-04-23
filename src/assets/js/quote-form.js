@@ -168,7 +168,6 @@
         Timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
         PageUrl: location.href,
         TimeOnPage: Math.round((Date.now() - (window._quotePageLoadTime || Date.now())) / 1000) + "s",
-        ScrollDepth: Math.round((document.documentElement.scrollTop || document.body.scrollTop) / (document.documentElement.scrollHeight - document.documentElement.clientHeight) * 100) + "%",
         UserAgent: navigator.userAgent
       };
 
