@@ -299,29 +299,16 @@
       );
     }
 
-    // ── Tablet: logo + nav links + search icon + language switcher + CTA ──
+    // ── Tablet: hamburger menu (same as mobile — compact screens can't fit 6 nav links) ──
     if (variant === "tablet") {
-      var tabletRight = [];
-      // Tablet uses a compact search icon instead of the full iOS search bar
-      // (screen space is limited with nav links + lang + CTA)
-      if (cfg.showSearch) {
-        tabletRight.push(
-          '<button id="tablet-search-toggle" type="button" class="flex items-center justify-center w-9 h-9 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors" aria-label="Search">' +
-            '<span class="material-symbols-outlined text-xl">search</span>' +
-            "</button>"
-        );
-      }
-      if (cfg.showLang) {
-        tabletRight.push(buildLangDropdown(variant));
-      }
-      if (cfg.showCta) {
-        tabletRight.push(buildCtaButton(cfg.ctaTextKey, cfg.ctaHref));
-      }
       return (
-        '<header class="sticky top-0 z-[var(--z-header)] w-full border-b border-slate-200 dark:border-slate-800 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md">' +
-        '<div class="max-w-[1024px] mx-auto px-4 py-3 flex items-center justify-between">' +
-        /* Left: Logo + Nav */
-        '<div class="flex items-center gap-4">' +
+        '<header id="mobile-header" class="sticky top-0 z-[var(--z-header)] w-full border-b border-slate-200 dark:border-slate-800 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md transition-transform duration-300">' +
+        '<div class="px-4 py-3 flex items-center justify-between">' +
+        /* Left: Hamburger */
+        '<button id="mobile-menu-toggle" type="button" class="flex items-center justify-center w-10 h-10 -ml-2 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors" aria-label="Menu">' +
+        '<span class="material-symbols-outlined text-2xl">menu</span>' +
+        "</button>" +
+        /* Center: Logo */
         '<a class="nav-logo-link" href="' +
         (window.BASE_PATH || "") +
         '/home/">' +
@@ -329,14 +316,10 @@
         (window.BASE_PATH || "") +
         '/assets/images/logo_footer.webp" alt="Yukoli" width="36" height="36" style="width:36px;height:36px;object-fit:contain" />' +
         "</a>" +
-        '<nav class="hidden md:flex items-center gap-3">' +
-        buildNavLinks(cfg.active, cfg.variant) +
-        "</nav>" +
-        "</div>" +
-        /* Right: Search icon + Lang + CTA */
-        '<div class="flex items-center gap-2">' +
-        tabletRight.join("\n") +
-        "</div>" +
+        /* Right: Search + Lang */
+        '<button id="mobile-search-toggle" type="button" class="flex items-center justify-center w-10 h-10 -mr-2 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors" aria-label="Search">' +
+        '<span class="material-symbols-outlined text-2xl">search</span>' +
+        "</button>" +
         "</div>" +
         "</header>"
       );
