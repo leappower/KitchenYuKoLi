@@ -31,7 +31,7 @@ window.PRODUCT_DATA_TABLE = [
         "relatedProducts": null,
         "images": [
           {
-            "filePath": "/admin/uploads/1776771332325-5qok3c.png",
+            "filePath": "/admin/uploads/1776771332325-5qok3c.webp",
             "isPrimary": true,
             "sortOrder": 0
           }
@@ -68,7 +68,7 @@ window.PRODUCT_DATA_TABLE = [
         "relatedProducts": null,
         "images": [
           {
-            "filePath": "/admin/uploads/1776829094775-fr0z7s.png",
+            "filePath": "/admin/uploads/1776829094775-fr0z7s.webp",
             "isPrimary": true,
             "sortOrder": 0
           }
@@ -145,7 +145,7 @@ window.PRODUCT_DATA_TABLE = [
         ],
         "images": [
           {
-            "filePath": "/admin/uploads/1776837263148-oit2a1.png",
+            "filePath": "/admin/uploads/1776837263148-oit2a1.webp",
             "isPrimary": true,
             "sortOrder": 0
           }
