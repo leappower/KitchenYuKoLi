@@ -324,7 +324,9 @@ details[open] > summary {
 .flex .material-symbols-outlined,
 [class*="items-"] .material-symbols-outlined {
   vertical-align: initial;
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 
 /* ─── Select dropdown arrow ────────────────────────────────────── */
