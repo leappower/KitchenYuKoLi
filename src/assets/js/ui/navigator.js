@@ -616,7 +616,14 @@
 
       var wrapper = document.createElement("div");
       wrapper.innerHTML = buildHeader(cfg);
-      var header = wrapper.firstChild;
+      // buildHeader returns [placeholder div, header] for mobile/tablet/PC.
+      // We need the header (2nd child), and insert placeholder before it.
+      var placeholder = wrapper.firstElementChild;
+      var header = placeholder ? placeholder.nextElementSibling : wrapper.firstChild;
+      // Insert placeholder into DOM before navigator, then replace navigator with header
+      if (placeholder && placeholder.id) {
+        el.parentNode.insertBefore(placeholder, el);
+      }
 
       // Replace the placeholder with the rendered header (immediate, no fade)
       el.parentNode.replaceChild(header, el);
