@@ -406,7 +406,13 @@
           })
           .join("\n");
 
-        childrenHtml = '<div class="mobile-menu-l2" data-menu-l2="' + esc(item.id) + '">' + itemsHtml + "</div>";
+        childrenHtml = '<div class="mobile-menu-l2" data-menu-l2="' + esc(item.id) + '">' + itemsHtml;
+        if (item.id === 'products') {
+          childrenHtml += '<a class="mobile-menu-l2-item" href="/products/" style="color:var(--color-primary);font-weight:600">' +
+            '<span class="mobile-menu-l2-icon"><span class="material-symbols-outlined">arrow_forward</span></span>' +
+            '<span class="mobile-menu-l2-label" data-i18n="nav_mega_view_all">查看全部产品</span></a>';
+        }
+        childrenHtml += '</div>';
       }
 
       return (
