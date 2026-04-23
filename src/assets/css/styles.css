@@ -31,17 +31,17 @@
   --container-gap: 2rem; /* gap-8 */
 }
 
-@media (width >= 768px) {
+@media (min-width: 768px) {
   :root {
     --container-px: 2.5rem;
   }
 }
-@media (width >= 1024px) {
+@media (min-width: 1024px) {
   :root {
     --container-px: 4rem;
   }
 }
-@media (width >= 1280px) {
+@media (min-width: 1280px) {
   :root {
     --container-px: 5rem;
   }
@@ -239,14 +239,14 @@ main#spa-content:not([class*="p-"], [class*="px-"], [class*="py-"]) {
   padding-right: 1.5rem;
 }
 
-@media (width >= 768px) {
+@media (min-width: 768px) {
   main#spa-content:not([class*="p-"], [class*="px-"], [class*="py-"]) {
     padding-left: 2.5rem; /* 40px */
     padding-right: 2.5rem;
   }
 }
 
-@media (width >= 1280px) {
+@media (min-width: 1280px) {
   main#spa-content:not([class*="p-"], [class*="px-"], [class*="py-"]) {
     padding-left: 5rem; /* 80px */
     padding-right: 5rem;
@@ -264,14 +264,14 @@ main#spa-content:not([class*="p-"], [class*="px-"], [class*="py-"]) .fullwidth-b
   margin-right: -1.5rem;
 }
 
-@media (width >= 768px) {
+@media (min-width: 768px) {
   main#spa-content:not([class*="p-"], [class*="px-"], [class*="py-"]) .fullwidth-bg {
     margin-left: -2.5rem;
     margin-right: -2.5rem;
   }
 }
 
-@media (width >= 1280px) {
+@media (min-width: 1280px) {
   main#spa-content:not([class*="p-"], [class*="px-"], [class*="py-"]) .fullwidth-bg {
     margin-left: -5rem;
     margin-right: -5rem;
