@@ -839,7 +839,13 @@
 
   /* ───────────────────────── SPA CLEANUP ───────────────────────── */
 
-  document.addEventListener("spa:load", closeMenu);
+  document.addEventListener("spa:load", function () {
+    closeMenu();
+    _toggleBound = false;
+    _searchToggleBound = false;
+    initToggle();
+    initSmartHeader();
+  });
 
   /* ───────────────────────── BOOT ───────────────────────── */
 
