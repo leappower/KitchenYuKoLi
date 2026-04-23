@@ -102,20 +102,49 @@
       });
     });
     // SPA navigation for dropdown sub-items (prevent full page refresh)
-    // Note: The global click interceptor in spa-router.js handles /about/#hash links.
-    // We just need to prevent the default <a> behavior here so the browser doesn't
-    // do a full page load. The global handler will pick it up via event delegation.
     document.querySelectorAll(".abt-dropdown-item").forEach(function (item) {
       if (item._abtNavBound) return;
       item._abtNavBound = true;
       item.addEventListener("click", function (e) {
+        e.preventDefault();
+        e.stopPropagation();
         // Close dropdown
         var wrap = item.closest(".abt-dropdown-wrap");
         if (wrap) wrap.classList.remove("is-open");
-        // Let the global spa-router click interceptor handle navigation.
-        // Don't call e.preventDefault() here — the global handler will do it.
-        // If the global handler doesn't fire (e.g. not on an about page),
-        // the native <a> click provides a working fallback.
+
+        var href = item.getAttribute("href");
+        if (!href) return;
+
+        // Parse /about/#factory → path=/about/ hash=factory
+        var hashMatch = href.match(/^(\/[^#]*?)#([^#]*)$/);
+        if (hashMatch) {
+          var targetPath = hashMatch[1];
+          var anchorId = hashMatch[2];
+          if (!targetPath.endsWith("/")) targetPath += "/";
+
+          var currentPath = global.SpaRouter ? global.SpaRouter.getCurrentPath() : window.location.pathname;
+          if (!currentPath.endsWith("/")) currentPath += "/";
+
+          if (targetPath === currentPath) {
+            // Same page — just scroll to anchor
+            window.setTimeout(function () {
+              var el = document.getElementById(anchorId);
+              if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+            }, 100);
+          } else if (global.SpaRouter) {
+            global.SpaRouter._pendingScroll = anchorId;
+            global.SpaRouter.navigate(targetPath);
+          } else {
+            window.location.href = href;
+          }
+        } else {
+          // No hash — regular SPA navigation
+          if (global.SpaRouter) {
+            global.SpaRouter.navigate(href);
+          } else {
+            window.location.href = href;
+          }
+        }
       });
     });
   }
