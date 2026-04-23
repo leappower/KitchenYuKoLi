@@ -5,6 +5,9 @@
 (function () {
   var VERSION = "20260423b";
 
+  // Record page load time for TimeOnPage calculation
+  window._quotePageLoadTime = window._quotePageLoadTime || Date.now();
+
   // Required field IDs whose labels need * markers
   var REQUIRED_IDS = ["q-company", "q-contact", "q-phone", "q-email", "q-country", "q-equipment-type", "q-capacity"];
   var ASTERISK_HTML = ' <span class="text-red-500 font-bold text-base align-middle">*</span>';
@@ -140,20 +143,33 @@
       var budgetText = budget.value ? budget.options[budget.selectedIndex].text : "未指定";
       var message = document.getElementById("q-message").value || "无";
 
+      // Build rich message from all fields
+      var richMsg = [
+        "设备类型: " + equipText,
+        "数量: " + quantity,
+        "厨房规模: " + capacityText,
+        "预算: " + budgetText,
+        "需求: " + message
+      ].join(" | ");
+
       var formData = {
-        formType: "quote_form",
-        company: company,
-        contact: contact,
-        phone: phone,
-        email: email,
-        country: countryText,
-        equipmentType: equipText,
-        quantity: quantity,
-        kitchenCapacity: capacityText,
-        budget: budgetText,
-        message: message,
-        language: (window.translationManager && window.translationManager.currentLang) || navigator.language,
-        pageUrl: location.href
+        Timestamp: new Date().toISOString(),
+        FormType: "quote_form",
+        Name: contact,
+        Email: email,
+        Phone: phone,
+        Country: countryText,
+        Company: company,
+        Message: richMsg,
+        Language: (window.translationManager && window.translationManager.currentLang) || navigator.language,
+        BrowserLanguage: navigator.language,
+        ScreenWidth: window.screen.width,
+        ScreenHeight: window.screen.height,
+        Timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+        PageUrl: location.href,
+        TimeOnPage: Math.round((Date.now() - (window._quotePageLoadTime || Date.now())) / 1000) + "s",
+        ScrollDepth: Math.round((document.documentElement.scrollTop || document.body.scrollTop) / (document.documentElement.scrollHeight - document.documentElement.clientHeight) * 100) + "%",
+        UserAgent: navigator.userAgent
       };
 
       // Disable button + show loading
