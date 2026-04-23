@@ -13,6 +13,7 @@ const {
 } = feishuProTables;
 
 const app = express();
+app.set('trust proxy', 1);
 
 // Security middleware with comprehensive protection
 // Admin panel needs relaxed security for CDN scripts (Tailwind, Alpine.js)
@@ -342,7 +343,8 @@ app.use((req, res) => {
 });
 
 const PORT = process.env.PORT || 3099;
-const SSL_PORT = parseInt(process.env.SSL_PORT) || 5443;
+const SSL_PORT = process.env.SSL_PORT ? parseInt(process.env.SSL_PORT) : 5443;
+const ENABLE_SSL = SSL_PORT > 0;
 const https = require('https');
 const sslOptions = {
   key: fs.readFileSync('/Users/chee/certs/192.168.3.181-key.pem'),
@@ -383,12 +385,14 @@ const server = app.listen(PORT, (err) => {
   startDailyFeishuSyncScheduler();
   console.log('[feishu-sync] daily scheduler enabled (04:00)');
 
-  // Start HTTPS server
-  const httpsServer = https.createServer(sslOptions, app);
-  httpsServer.listen(SSL_PORT, (err) => {
-    if (err) { console.error('Failed to start HTTPS server:', err); return; }
-    console.log(`🔒 HTTPS running on https://192.168.3.181:${SSL_PORT}`);
-  });
+  // Start HTTPS server (only if SSL_PORT > 0 — skip when behind reverse proxy)
+  if (ENABLE_SSL) {
+    const httpsServer = https.createServer(sslOptions, app);
+    httpsServer.listen(SSL_PORT, (err) => {
+      if (err) { console.error('Failed to start HTTPS server:', err); return; }
+      console.log(`🔒 HTTPS running on https://192.168.3.181:${SSL_PORT}`);
+    });
+  }
 });
 
 // Graceful shutdown with connection draining
