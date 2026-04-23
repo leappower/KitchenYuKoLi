@@ -153,22 +153,21 @@
       ].join(" | ");
 
       var formData = {
-        Timestamp: new Date().toISOString(),
-        FormType: "quote_form",
-        Name: contact,
-        Email: email,
-        Phone: phone,
-        Country: countryText,
-        Company: company,
-        Message: richMsg,
-        Language: (window.translationManager && window.translationManager.currentLang) || navigator.language,
-        BrowserLanguage: navigator.language,
-        ScreenWidth: window.screen.width,
-        ScreenHeight: window.screen.height,
-        Timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
-        PageUrl: location.href,
-        TimeOnPage: Math.round((Date.now() - (window._quotePageLoadTime || Date.now())) / 1000) + "s",
-        UserAgent: navigator.userAgent
+        formType: "quote_form",
+        name: contact,
+        email: email,
+        phone: phone,
+        country: countryText,
+        company: company,
+        message: richMsg,
+        language: (window.translationManager && window.translationManager.currentLang) || navigator.language,
+        browserLanguage: navigator.language,
+        screenWidth: window.screen.width,
+        screenHeight: window.screen.height,
+        timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+        pageUrl: location.href,
+        timeOnPage: Math.round((Date.now() - (window._quotePageLoadTime || Date.now())) / 1000) + "s",
+        userAgent: navigator.userAgent
       };
 
       // Disable button + show loading
