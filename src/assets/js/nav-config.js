@@ -30,7 +30,8 @@
         { key: 'nav_applications_cloud_kitchen', icon: 'delivery_dining', href: '/applications/cloud-kitchen/' },
         { key: 'nav_applications_canteen', icon: 'restaurant', href: '/applications/canteen/' },
         { key: 'nav_applications_thai', icon: 'public', href: '/applications/southeast-asian/' },
-        { key: 'nav_applications_cases', icon: 'monitoring', href: '/applications/cases/' }
+        { key: 'nav_applications_cases', icon: 'monitoring', href: '/applications/cases/' },
+        { key: 'nav_roi', icon: 'calculate', href: '/roi/', badge: true }
       ],
       solutions: [
         { key: 'nav_solutions_fastfood', icon: 'ramen_dining', href: '/solutions/fast-food/' },
@@ -42,17 +43,21 @@
         { key: 'nav_roi', icon: 'calculate', href: '/roi/', badge: true }
       ],
       about: [
-        { key: 'nav_about_company', icon: 'business', href: '/about/' },
-        { key: 'nav_about_news', icon: 'newspaper', href: '/news/' }
+        { key: 'nav_about_profile', icon: 'apartment', href: '/about/#profile' },
+        { key: 'nav_about_factory', icon: 'factory', href: '/about/#factory' },
+        { key: 'nav_about_cert', icon: 'verified', href: '/about/#cert' }
       ],
       support: [
-        { key: 'nav_support_center', icon: 'support_agent', href: '/support/' },
-        { key: 'nav_support_contact', icon: 'contact_page', href: '/contact/' },
-        { key: 'nav_support_faq', icon: 'help', href: '/support/#faq' }
+        { key: 'nav_support_services', icon: 'grid_view', href: '/support/' },
+        { key: 'nav_support_installation', icon: 'construction', href: '/support/#installation' },
+        { key: 'nav_support_warranty', icon: 'verified', href: '/support/#warranty' },
+        { key: 'nav_support_spare_parts', icon: 'build_circle', href: '/support/#spare-parts' },
+        { key: 'nav_support_training', icon: 'school', href: '/support/#training' },
+        { key: 'nav_support_faq', icon: 'contact_support', href: '/support/#faq' }
       ],
       contact: [
-        { key: 'nav_contact_form', icon: 'mail', href: '/contact/' },
-        { key: 'nav_contact_quote', icon: 'request_quote', href: '/quote/' }
+        { key: 'nav_contact_us', icon: 'grid_view', href: '/contact/' },
+        { key: 'nav_contact_whatsapp', icon: 'chat', href: 'https://api.whatsapp.com/send/?phone=8613163756465', isWhatsApp: true }
       ]
     }
   };
