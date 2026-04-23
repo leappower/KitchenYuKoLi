@@ -114,6 +114,24 @@
       // 设置 SPA 导航标志,禁用响应式重定向
       window.__spaNavigating = true;
 
+      // Same-page navigation (hash anchor on current page): just scroll, don't reload
+      var currentPath = this.getCurrentPath();
+      if (normalizedPath === currentPath || normalizedPath.replace(/\/$/, "") === currentPath.replace(/\/$/, "")) {
+        // Same page — just scroll to anchor if pending
+        if (this._pendingScroll) {
+          var anchorId = this._pendingScroll;
+          this._pendingScroll = null;
+          var el = document.getElementById(anchorId);
+          if (el) {
+            el.scrollIntoView({ behavior: "smooth", block: "start" });
+          }
+        } else {
+          window.scrollTo({ top: 0, left: 0, behavior: "instant" });
+        }
+        window.__spaNavigating = false;
+        return;
+      }
+
       history.pushState({ path: normalizedPath }, "", normalizedPath);
 
       this.loadRoute(normalizedPath);

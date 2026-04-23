@@ -102,18 +102,20 @@
       });
     });
     // SPA navigation for dropdown sub-items (prevent full page refresh)
+    // Note: The global click interceptor in spa-router.js handles /about/#hash links.
+    // We just need to prevent the default <a> behavior here so the browser doesn't
+    // do a full page load. The global handler will pick it up via event delegation.
     document.querySelectorAll(".abt-dropdown-item").forEach(function (item) {
       if (item._abtNavBound) return;
       item._abtNavBound = true;
       item.addEventListener("click", function (e) {
-        var href = item.getAttribute("href");
-        if (href && global.SpaRouter) {
-          e.preventDefault();
-          // Close dropdown first
-          var wrap = item.closest(".abt-dropdown-wrap");
-          if (wrap) wrap.classList.remove("is-open");
-          global.SpaRouter.navigate(href);
-        }
+        // Close dropdown
+        var wrap = item.closest(".abt-dropdown-wrap");
+        if (wrap) wrap.classList.remove("is-open");
+        // Let the global spa-router click interceptor handle navigation.
+        // Don't call e.preventDefault() here — the global handler will do it.
+        // If the global handler doesn't fire (e.g. not on an about page),
+        // the native <a> click provides a working fallback.
       });
     });
   }

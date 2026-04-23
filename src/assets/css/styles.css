@@ -287,13 +287,13 @@ navigator[data-component="navigator"] {
 /* ─── Scroll margin for sections (prevent navigator overlap) ───── */
 main#spa-content > section,
 main#spa-content [id] {
-  scroll-margin-top: 72px; /* mobile: 61px nav + 11px buffer */
+  scroll-margin-top: 80px; /* mobile: 62px nav + 18px buffer */
 }
 
 @media (min-width: 768px) {
   main#spa-content > section,
   main#spa-content [id] {
-    scroll-margin-top: 80px; /* tablet: ~70px nav + 10px buffer */
+    scroll-margin-top: 88px; /* tablet: ~72px nav + 16px buffer */
   }
 }
 
