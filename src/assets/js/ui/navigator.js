@@ -352,14 +352,14 @@
       rightParts.push(buildLangDropdown(cfg.variant));
     }
     if (cfg.showCta) {
-      rightParts.push(buildCtaButton(cfg.ctaTextKey, cfg.ctaHref));
+      rightParts.push('<div class="hidden xl:block">' + buildCtaButton(cfg.ctaTextKey, cfg.ctaHref) + '</div>');
     }
 
     return (
       '<header class="sticky top-0 z-[var(--z-header)] w-full border-b border-slate-200 dark:border-slate-800 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md">' +
       '<div class="max-w-[1920px] mx-auto px-6 md:px-10 lg:px-16 xl:px-20 py-4 flex items-center justify-between" style="min-height:108px">' +
       /* Left: Logo + Nav */
-      '<div class="flex items-center gap-6 lg:gap-12">' +
+      '<div class="flex items-center gap-3 lg:gap-6">' +
       '<a class="nav-logo-link" href="' +
       (window.BASE_PATH || "") +
       '/home/">' +
