@@ -99,58 +99,14 @@
   <body
     class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 transition-colors duration-300 overflow-x-hidden"
   >
-    <!-- Tablet Header -->
-    <header
-      class="sticky top-0 z-50 bg-white/95 dark:bg-slate-900/95 backdrop-blur-xl border-b border-slate-200 dark:border-slate-800"
-    >
-      <div class="flex items-center justify-between px-6 h-16">
-        <a href="/home" class="flex items-center gap-2">
-          <img src="/assets/images/logo_header.webp" alt="Yukoli" class="h-9 w-auto" />
-          <span class="text-xl font-black tracking-tighter uppercase dark:text-slate-100">Yukoli</span>
-        </a>
-        <nav class="hidden md:flex items-center gap-6">
-          <a
-            href="/home"
-            class="text-sm font-medium text-slate-600 dark:text-slate-400 hover:text-primary uppercase tracking-wider"
-            data-i18n="nav_home"
-          >
-            首页
-          </a>
-          <a href="/products/" class="text-sm font-bold text-primary uppercase tracking-wider" data-i18n="nav_equipment">
-            设备
-          </a>
-          <a
-            href="/solutions"
-            class="text-sm font-medium text-slate-600 dark:text-slate-400 hover:text-primary uppercase tracking-wider"
-            data-i18n="nav_solutions"
-          >
-            解决方案
-          </a>
-          <a
-            href="/support"
-            class="text-sm font-medium text-slate-600 dark:text-slate-400 hover:text-primary uppercase tracking-wider"
-            data-i18n="nav_iot"
-          >
-            IoT
-          </a>
-          <a
-            href="/quote"
-            class="text-sm font-medium text-slate-600 dark:text-slate-400 hover:text-primary uppercase tracking-wider"
-            data-i18n="nav_config"
-          >
-            配置
-          </a>
-        </nav>
-        <div class="flex items-center gap-3">
-          <button class="p-2 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800">
-            <span class="material-symbols-outlined">search</span>
-          </button>
-          <button id="menu-btn" class="p-2 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 md:hidden">
-            <span class="material-symbols-outlined">menu</span>
-          </button>
-        </div>
-      </div>
-    </header>
+    <navigator
+      data-component="navigator"
+      data-variant="tablet"
+      data-active="products"
+      data-search="true"
+      data-cta-text-key="nav_get_quote"
+      data-cta-href="/quote"
+    ></navigator>
 
     <main id="spa-content">
       <div class="w-full">
@@ -188,13 +144,6 @@
               >
                 <span data-i18n="products_browse_products">浏览产品</span>
                 <span class="material-symbols-outlined text-sm">arrow_downward</span>
-              </a>
-              <a
-                href="/quote"
-                class="border-2 border-slate-200 dark:border-slate-800 px-6 py-3 rounded-xl font-bold text-sm hover:bg-slate-100 dark:hover:bg-slate-800 transition-all"
-                data-i18n="products_request_quote"
-              >
-                获取报价
               </a>
             </div>
           </div>

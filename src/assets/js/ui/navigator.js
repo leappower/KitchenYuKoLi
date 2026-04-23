@@ -276,7 +276,8 @@
     // ── Mobile: hamburger + logo + search ──
     if (variant === "mobile") {
       return (
-        '<header id="mobile-header" class="sticky top-0 z-[var(--z-header)] w-full border-b border-slate-200 dark:border-slate-800 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md transition-transform duration-300">' +
+        '<div id="mobile-header-placeholder" style="height:56px;flex-shrink:0"></div>' +
+        '<header id="mobile-header" class="fixed top-0 left-0 right-0 z-[var(--z-header)] w-full border-b border-slate-200 dark:border-slate-800 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md transition-transform duration-300">' +
         '<div class="px-4 py-3 flex items-center justify-between">' +
         /* Left: Hamburger */
         '<button id="mobile-menu-toggle" type="button" class="flex items-center justify-center w-10 h-10 -ml-2 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors" aria-label="Menu">' +
@@ -302,7 +303,8 @@
     // ── Tablet: hamburger menu (same as mobile — compact screens can't fit 6 nav links) ──
     if (variant === "tablet") {
       return (
-        '<header id="mobile-header" class="sticky top-0 z-[var(--z-header)] w-full border-b border-slate-200 dark:border-slate-800 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md transition-transform duration-300">' +
+        '<div id="mobile-header-placeholder" style="height:56px;flex-shrink:0"></div>' +
+        '<header id="mobile-header" class="fixed top-0 left-0 right-0 z-[var(--z-header)] w-full border-b border-slate-200 dark:border-slate-800 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md transition-transform duration-300">' +
         '<div class="px-4 py-3 flex items-center justify-between">' +
         /* Left: Hamburger */
         '<button id="mobile-menu-toggle" type="button" class="flex items-center justify-center w-10 h-10 -ml-2 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors" aria-label="Menu">' +
@@ -338,7 +340,8 @@
     }
 
     return (
-      '<header class="sticky top-0 z-[var(--z-header)] w-full border-b border-slate-200 dark:border-slate-800 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md">' +
+        '<div id="pc-header-placeholder" style="height:109px;flex-shrink:0"></div>' +
+        '<header class="fixed top-0 left-0 right-0 z-[var(--z-header)] w-full border-b border-slate-200 dark:border-slate-800 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md">' +
       '<div class="max-w-[1920px] mx-auto px-6 md:px-10 lg:px-16 xl:px-20 py-4 flex items-center justify-between" style="min-height:108px">' +
       /* Left: Logo + Nav */
       '<div class="flex items-center gap-4 lg:gap-8">' +
