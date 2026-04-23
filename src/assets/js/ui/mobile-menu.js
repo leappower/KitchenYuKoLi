@@ -16,41 +16,53 @@
 (function (global) {
   "use strict";
 
-  /* ───────────────────────── L1 MENU DATA ───────────────────────── */
+  /* ───────────────────────── L1 MENU DATA (lazy) ───────────────────────── */
+  /* MENU_ITEMS must be computed lazily because NAV_CONFIG (from nav-config.js)
+     may not be available at module init time — SPA dynamic script loading
+     does not guarantee execution order. We read NAV_CONFIG when openMenu()
+     is called (user clicks hamburger), by which time all scripts are loaded. */
 
-  console.log('[mobile-menu] NAV_CONFIG exists:', typeof NAV_CONFIG !== 'undefined');
-  var MENU_ITEMS = (typeof NAV_CONFIG !== 'undefined' && NAV_CONFIG.mainNav) ? NAV_CONFIG.mainNav.map(function(item) {
-    var children = [];
-    var dropdownMap = {
-      products: 'products',
-      applications: 'applications',
-      solutions: 'solutions',
-      support: 'support',
-      about: 'about',
-      contact: 'contact'
-    };
-    var dropdownKey = dropdownMap[item.id];
-    if (dropdownKey && NAV_CONFIG.dropdowns && NAV_CONFIG.dropdowns[dropdownKey]) {
-      children = NAV_CONFIG.dropdowns[dropdownKey];
+  var _cachedMenuItems = null;
+
+  function getMenuItems() {
+    if (_cachedMenuItems) return _cachedMenuItems;
+
+    var items;
+    if (typeof NAV_CONFIG !== 'undefined' && NAV_CONFIG.mainNav) {
+      var dropdownMap = {
+        products: 'products', applications: 'applications',
+        solutions: 'solutions', support: 'support',
+        about: 'about', contact: 'contact'
+      };
+      items = NAV_CONFIG.mainNav.map(function(item) {
+        var children = [];
+        var dk = dropdownMap[item.id];
+        if (dk && NAV_CONFIG.dropdowns && NAV_CONFIG.dropdowns[dk]) {
+          children = NAV_CONFIG.dropdowns[dk];
+        }
+        return {
+          key: item.key, href: item.path, id: item.id,
+          icon: item.id === 'products' ? 'kitchen' : item.id === 'applications' ? 'apps' : item.id === 'solutions' ? 'build' : item.id === 'support' ? 'support_agent' : item.id === 'about' ? 'info' : 'mail',
+          children: children.map(function(c) { return { key: c.key, icon: c.icon, href: c.href || c.path || '/', badge: c.badge }; })
+        };
+      });
+    } else {
+      items = [
+        { key: "nav_products", href: "/products/", id: "products", icon: "kitchen", children: [] },
+        { key: "nav_applications", href: "/applications/", id: "applications", icon: "apps", children: [] },
+        { key: "nav_solutions", href: "/solutions/", id: "solutions", icon: "build", children: [] },
+        { key: "nav_service", href: "/support/", id: "support", icon: "support_agent", children: [] },
+        { key: "nav_about", href: "/about/", id: "about", icon: "info", children: [] },
+        { key: "nav_contact", href: "/contact/", id: "contact", icon: "mail", children: [] }
+      ];
     }
-    return {
-      key: item.key,
-      href: item.path,
-      id: item.id,
-      icon: item.id === 'products' ? 'kitchen' : item.id === 'applications' ? 'apps' : item.id === 'solutions' ? 'build' : item.id === 'support' ? 'support_agent' : item.id === 'about' ? 'info' : 'mail',
-      children: children.map(function(c) { return { key: c.key, icon: c.icon, href: c.href || c.path || '/', badge: c.badge }; })
-    };
-  }) : [
-    { key: "nav_products", href: "/products/", id: "products", icon: "kitchen", children: [] },
-    { key: "nav_applications", href: "/applications/", id: "applications", icon: "apps", children: [] },
-    { key: "nav_solutions", href: "/solutions/", id: "solutions", icon: "build", children: [] },
-    { key: "nav_service", href: "/support/", id: "support", icon: "support_agent", children: [] },
-    { key: "nav_about", href: "/about/", id: "about", icon: "info", children: [] },
-    { key: "nav_contact", href: "/contact/", id: "contact", icon: "mail", children: [] }
-  ];
 
-  console.log('[mobile-menu] MENU_ITEMS:', MENU_ITEMS.length, 'items');
-  MENU_ITEMS.forEach(function(item) { console.log('  ', item.id, ':', item.children.length, 'children'); });
+    console.log('[mobile-menu] getMenuItems(): NAV_CONFIG=' + (typeof NAV_CONFIG !== 'undefined') +
+      ' items=' + items.length + ' children=[' + items.map(function(i){return i.id+':'+i.children.length}).join(',') + ']');
+
+    _cachedMenuItems = items;
+    return items;
+  }
 
   /* ───────────────────────── HELPERS ───────────────────────── */
 
@@ -362,7 +374,7 @@
       "</div>";
 
     // L1 + L2 accordion
-    var menuHtml = MENU_ITEMS.map(function (item) {
+    var menuHtml = getMenuItems().map(function (item) {
       var childrenHtml = "";
       if (item.children && item.children.length > 0) {
         var itemsHtml = item.children
@@ -606,9 +618,25 @@
 
   function initSmartHeader() {
     headerEl = document.getElementById("mobile-header");
-    if (!headerEl) return;
+    if (!headerEl) {
+      console.log('[mobile-menu] initSmartHeader: no #mobile-header found');
+      return;
+    }
 
-    window.addEventListener("scroll", onScroll, { passive: true });
+    // Check if tablet variant via navigator data-attribute or screen width
+    var navEl = document.querySelector('navigator[data-variant="tablet"]');
+    var isTablet = !!(navEl && navEl.parentNode) || (window.innerWidth >= 768 && window.innerWidth < 1280);
+    console.log('[mobile-menu] initSmartHeader: isTablet=', isTablet, 'innerWidth=', window.innerWidth);
+
+    if (isTablet) {
+      console.log('[mobile-menu] Tablet mode — smart header hide disabled, header stays visible');
+      // Ensure header is visible
+      headerEl.classList.remove('header-hidden');
+      return; // Don't enable scroll hide for tablet
+    }
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    console.log('[mobile-menu] Smart header scroll listener attached (mobile mode)');
   }
 
   function onScroll() {
@@ -619,9 +647,13 @@
 
       if (currentY > scrollThreshold && currentY > lastScrollY) {
         // Scrolling down & past threshold → hide
+        console.log('[mobile-menu] onScroll: hiding header, currentY=', currentY, 'lastScrollY=', lastScrollY);
         headerEl.classList.add("header-hidden");
       } else {
         // Scrolling up → show
+        if (headerEl.classList.contains('header-hidden')) {
+          console.log('[mobile-menu] onScroll: showing header, currentY=', currentY, 'lastScrollY=', lastScrollY);
+        }
         headerEl.classList.remove("header-hidden");
       }
 
