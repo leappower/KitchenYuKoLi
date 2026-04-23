@@ -18,10 +18,54 @@
   var WHATSAPP_NUMBER = "8613163756465";
 
   // ============================================
+  // QUOTE FORM MESSAGE BUILDER
+  // ============================================
+  function getVal(id) {
+    var el = document.getElementById(id);
+    if (!el) return "";
+    if (el.tagName === "SELECT") {
+      return el.value ? el.options[el.selectedIndex].text : "";
+    }
+    return el.value.trim();
+  }
+  function buildQuoteMessage() {
+    var company = getVal("q-company");
+    var contact = getVal("q-contact");
+    var phone = getVal("q-phone");
+    var email = getVal("q-email");
+    var country = getVal("q-country");
+    var equipType = getVal("q-equipment-type");
+    var quantity = getVal("q-quantity") || "";
+    var capacity = getVal("q-capacity") || "";
+    var budget = getVal("q-budget") || "";
+    var message = getVal("q-message") || "";
+
+    // Only include filled fields
+    var lines = [];
+    if (company) lines.push("🏢 公司: " + company);
+    if (contact) lines.push("👤 联系人: " + contact);
+    if (phone) lines.push("📞 电话: " + phone);
+    if (email) lines.push("📧 邮箱: " + email);
+    if (country) lines.push("🌍 国家: " + country);
+    if (equipType) lines.push("🍽️ 设备类型: " + equipType);
+    if (quantity) lines.push("📦 数量: " + quantity);
+    if (capacity) lines.push("🏭 厨房规模: " + capacity);
+    if (budget) lines.push("💰 预算: " + budget);
+    if (message) lines.push("📝 需求: " + message);
+    lines.push("🔗 页面: " + global.location.href);
+
+    return lines.length > 1
+      ? "🔧 YuKoLi 智能厨具询价\n━━━━━━━━━━━━━━\n" + lines.join("\n")
+      : "🔧 YuKoLi 智能厨具询价 — 来自 " + global.location.href;
+  }
+
+  // ============================================
   // CONTACT CHANNEL LAUNCHERS
   // ============================================
   function startWhatsApp() {
-    global.open("https://wa.me/" + WHATSAPP_NUMBER, "_blank");
+    var text = buildQuoteMessage();
+    var url = "https://wa.me/" + WHATSAPP_NUMBER + "?text=" + encodeURIComponent(text);
+    global.open(url, "_blank");
   }
   function startLine() {
     global.open("https://line.me/ti/p/+66840273150", "_blank");
@@ -33,7 +77,9 @@
     global.open("https://t.me/baeckerei-profi", "_blank");
   }
   function startEmail() {
-    global.location.href = "mailto:support@yukoli.com";
+    var subject = "YuKoLi 智能厨具询价";
+    var body = buildQuoteMessage();
+    global.location.href = "mailto:support@yukoli.com?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(body);
   }
   function startFacebook() {
     global.open("https://www.facebook.com/people/Yukoli-Technology-Co-Ltd/61579549730250/", "_blank");
