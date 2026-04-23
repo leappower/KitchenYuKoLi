@@ -3,7 +3,32 @@
  * Works with both direct page load and SPA navigation.
  */
 (function () {
-  var VERSION = "20260423";
+  var VERSION = "20260423b";
+
+  // Required field IDs whose labels need * markers
+  var REQUIRED_IDS = ["q-company", "q-contact", "q-phone", "q-email", "q-country", "q-equipment-type"];
+  var ASTERISK_HTML = ' <span class="text-red-500 font-bold text-base align-middle">*</span>';
+
+  /**
+   * Re-inject * markers into labels after i18n overwrites textContent.
+   * The translation system uses textContent which destroys child <span> elements.
+   */
+  function restoreAsterisks() {
+    REQUIRED_IDS.forEach(function (id) {
+      var input = document.getElementById(id);
+      if (!input) return;
+      var label = input.closest('div') ? input.closest('div').querySelector('label') : null;
+      if (!label) {
+        // Fallback: find label by for attribute or sibling relationship
+        label = document.querySelector('label[for="' + id + '"]');
+        if (!label) return;
+      }
+      // Only restore if * is missing
+      if (!label.querySelector('.text-red-500')) {
+        label.insertAdjacentHTML('beforeend', ASTERISK_HTML);
+      }
+    });
+  }
 
   function ensureErrorBanner() {
     if (document.getElementById("quote-form-error")) return;
@@ -46,6 +71,11 @@
     form.dataset.quoteFormBound = "1";
 
     console.log("[QuoteForm] Initialized (v" + VERSION + ")");
+
+    // Restore * markers after i18n (which uses textContent, destroying <span> children)
+    restoreAsterisks();
+    document.addEventListener("translationsApplied", restoreAsterisks);
+    document.addEventListener("languageChanged", restoreAsterisks);
 
     // Clear errors on input
     form.addEventListener("input", clearError);
