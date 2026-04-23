@@ -14,53 +14,22 @@
 
   /**
    * Re-inject * markers into labels after i18n overwrites textContent.
-   * The translation system uses textContent which destroys child <span> elements.
-   * We register on the TranslationManager's internal EventEmitter (not DOM events)
-   * plus a MutationObserver as ultimate safety net.
+   * Since translations.js now preserves non-data-i18n child elements,
+   * this is only a safety net for edge cases.
    */
   function restoreAsterisks() {
     REQUIRED_IDS.forEach(function (id) {
       var input = document.getElementById(id);
       if (!input) return;
-      // Walk up to find the containing div, then find label sibling
       var container = input.parentElement;
       while (container && container.tagName !== 'DIV') container = container.parentElement;
       if (!container) return;
       var label = container.querySelector('label');
       if (!label) return;
-      // Only restore if * is missing
       if (!label.querySelector('.text-red-500')) {
         label.insertAdjacentHTML('beforeend', ASTERISK_HTML);
       }
     });
-  }
-
-  function setupAsteriskProtection() {
-    // 1. Register on TranslationManager EventEmitter (covers translationsApplied + languageChanged)
-    if (global.translationManager && typeof global.translationManager.on === 'function') {
-      global.translationManager.on('translationsApplied', restoreAsterisks);
-      global.translationManager.on('languageChanged', restoreAsterisks);
-    }
-    // 2. DOM languageChanged CustomEvent (backup)
-    document.addEventListener('languageChanged', restoreAsterisks);
-    // 3. MutationObserver as ultimate safety net — watch all quote labels
-    var form = document.getElementById('quote-form');
-    if (form && typeof MutationObserver !== 'undefined') {
-      var observer = new MutationObserver(function (mutations) {
-        var needRestore = false;
-        for (var i = 0; i < mutations.length; i++) {
-          if (mutations[i].type === 'childList' || mutations[i].type === 'characterData') {
-            needRestore = true;
-            break;
-          }
-        }
-        if (needRestore) restoreAsterisks();
-      });
-      var labels = form.querySelectorAll('label[data-i18n]');
-      labels.forEach(function (label) {
-        observer.observe(label, { childList: true, characterData: true, subtree: true });
-      });
-    }
   }
 
   function ensureErrorBanner() {
@@ -105,9 +74,8 @@
 
     console.log("[QuoteForm] Initialized (v" + VERSION + ")");
 
-    // Protect * markers from being stripped by i18n textContent
+    // Restore * markers if needed (translations.js now preserves child spans, but safety net)
     restoreAsterisks();
-    setupAsteriskProtection();
 
     // Clear errors on input
     form.addEventListener("input", clearError);

@@ -283,7 +283,21 @@
       if (el.placeholder !== translation) el.placeholder = translation;
       return;
     }
-    if (el.textContent !== translation) el.textContent = translation;
+    if (el.textContent !== translation) {
+      // Preserve child elements that are NOT data-i18n targets
+      // (e.g. <span class="text-red-500">*</span> in labels)
+      var preservedChildren = [];
+      for (var i = el.childNodes.length - 1; i >= 0; i--) {
+        var child = el.childNodes[i];
+        if (child.nodeType === 1 && !child.getAttribute("data-i18n")) {
+          preservedChildren.unshift(child);
+        }
+      }
+      el.textContent = translation;
+      for (var j = 0; j < preservedChildren.length; j++) {
+        el.appendChild(preservedChildren[j]);
+      }
+    }
   };
 
   TranslationManager.prototype.translate = function (key) {
