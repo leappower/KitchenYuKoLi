@@ -140,22 +140,6 @@
       var budgetText = budget.value ? budget.options[budget.selectedIndex].text : "未指定";
       var message = document.getElementById("q-message").value || "无";
 
-      var msg =
-        "🔧 YuKoLi 智能厨具询价\n" +
-        "━━━━━━━━━━━━━━\n" +
-        "🏢 公司: " + company + "\n" +
-        "👤 联系人: " + contact + "\n" +
-        "📞 电话: " + phone + "\n" +
-        "📧 邮箱: " + email + "\n" +
-        "🌍 国家: " + countryText + "\n" +
-        "━━━━━━━━━━━━━━\n" +
-        "🍽️ 设备类型: " + equipText + "\n" +
-        "📦 数量: " + quantity + "\n" +
-        "🏭 厨房规模: " + capacityText + "\n" +
-        "💰 预算: " + budgetText + "\n" +
-        "📝 详细需求: " + message;
-
-      // Submit to Google Sheets (fire-and-forget)
       var formData = {
         formType: "quote_form",
         company: company,
@@ -171,23 +155,33 @@
         language: (window.translationManager && window.translationManager.currentLang) || navigator.language,
         pageUrl: location.href
       };
+
+      // Disable button + show loading
+      var btn = document.getElementById("quote-submit-btn");
+      var btnOrig = btn ? btn.innerHTML : "";
+      if (btn) {
+        btn.disabled = true;
+        btn.innerHTML = '<span class="material-symbols-outlined animate-spin">progress_activity</span> 提交中...';
+      }
+
+      // Submit to Google Sheets
       fetch("https://script.google.com/macros/s/AKfycbyikM1ArEFhJhQUSAp6l4DHJcGzDDK1cckL-KOrVbjipoMGSKsOOlhFWJGTPB6qOys/exec", {
         method: "POST",
         mode: "no-cors",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData)
-      }).catch(function () {});
-
-      // Open WhatsApp
-      var wa = (window.Contacts && window.Contacts.whatsapp) || "8613163756465";
-      window.open("https://wa.me/" + wa + "?text=" + encodeURIComponent(msg), "_blank");
-
-      if (typeof window.showNotification === "function") {
-        window.showNotification("正在跳转到 WhatsApp，请发送询价信息", "success");
-      }
-
-      // Redirect to thank-you
-      setTimeout(function () { location.href = "/thank-you/"; }, 1500);
+      }).then(function () {
+        if (typeof window.showNotification === "function") {
+          window.showNotification("提交成功！我们将尽快与您联系", "success");
+        }
+        setTimeout(function () { location.href = "/thank-you/"; }, 1000);
+      }).catch(function () {
+        // no-cors returns opaque response, treat as success
+        if (typeof window.showNotification === "function") {
+          window.showNotification("提交成功！我们将尽快与您联系", "success");
+        }
+        setTimeout(function () { location.href = "/thank-you/"; }, 1000);
+      });
     });
   }
 
