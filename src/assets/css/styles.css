@@ -10,6 +10,19 @@
  *   Icons:            Material Symbols Outlined
  */
 
+/* ─── Fixed Navigator Compensation ─────────────────────────────── */
+/*
+ * When navigator.js renders as position:fixed, it inserts placeholder divs.
+ * But for extra safety, ensure main content has enough top margin.
+ * Mobile/tablet header: 56px | PC header: 109px
+ */
+#mobile-header-placeholder {
+  flex-shrink: 0;
+}
+#pc-header-placeholder {
+  flex-shrink: 0;
+}
+
 /* ─── CSS Custom Properties ─────────────────────────────────────── */
 :root {
   --color-primary: #ec5b13;

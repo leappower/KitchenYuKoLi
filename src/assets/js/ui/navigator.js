@@ -277,7 +277,7 @@
     if (variant === "mobile") {
       return (
         '<div id="mobile-header-placeholder" style="height:56px;flex-shrink:0"></div>' +
-        '<header id="mobile-header" class="fixed top-0 left-0 right-0 z-[var(--z-header)] w-full border-b border-slate-200 dark:border-slate-800 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md transition-transform duration-300">' +
+        '<header id="mobile-header" class="fixed top-0 left-0 right-0 z-[var(--z-header)] border-b border-slate-200 dark:border-slate-800 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md transition-transform duration-300">' +
         '<div class="px-4 py-3 flex items-center justify-between">' +
         /* Left: Hamburger */
         '<button id="mobile-menu-toggle" type="button" class="flex items-center justify-center w-10 h-10 -ml-2 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors" aria-label="Menu">' +
@@ -304,7 +304,7 @@
     if (variant === "tablet") {
       return (
         '<div id="mobile-header-placeholder" style="height:56px;flex-shrink:0"></div>' +
-        '<header id="mobile-header" class="fixed top-0 left-0 right-0 z-[var(--z-header)] w-full border-b border-slate-200 dark:border-slate-800 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md transition-transform duration-300">' +
+        '<header id="mobile-header" class="fixed top-0 left-0 right-0 z-[var(--z-header)] border-b border-slate-200 dark:border-slate-800 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md transition-transform duration-300">' +
         '<div class="px-4 py-3 flex items-center justify-between">' +
         /* Left: Hamburger */
         '<button id="mobile-menu-toggle" type="button" class="flex items-center justify-center w-10 h-10 -ml-2 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors" aria-label="Menu">' +
@@ -341,7 +341,7 @@
 
     return (
         '<div id="pc-header-placeholder" style="height:109px;flex-shrink:0"></div>' +
-        '<header class="fixed top-0 left-0 right-0 z-[var(--z-header)] w-full border-b border-slate-200 dark:border-slate-800 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md">' +
+        '<header class="fixed top-0 left-0 right-0 z-[var(--z-header)] border-b border-slate-200 dark:border-slate-800 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md">' +
       '<div class="max-w-[1920px] mx-auto px-6 md:px-10 lg:px-16 xl:px-20 py-4 flex items-center justify-between" style="min-height:108px">' +
       /* Left: Logo + Nav */
       '<div class="flex items-center gap-4 lg:gap-8">' +
@@ -573,6 +573,7 @@
     injectLogoStyles();
     injectSearchStyles();
 
+    console.log('[navigator] mount() called, found', document.querySelectorAll('[data-component="navigator"]').length, 'placeholder(s)');
     var placeholders = document.querySelectorAll('[data-component="navigator"]');
     for (var i = 0; i < placeholders.length; i++) {
       var el = placeholders[i];
@@ -616,15 +617,15 @@
 
       var wrapper = document.createElement("div");
       wrapper.innerHTML = buildHeader(cfg);
-      // buildHeader returns [placeholder div, header] for mobile/tablet/PC.
-      // We need the header (2nd child), and insert placeholder before it.
+      var childCount = wrapper.children.length;
       var placeholder = wrapper.firstElementChild;
       var header = placeholder ? placeholder.nextElementSibling : wrapper.firstChild;
+      console.log('[navigator] buildHeader children:', childCount, '| placeholder:', placeholder ? placeholder.tagName + '#' + placeholder.id : 'NULL', '| header:', header ? header.tagName + '#' + (header.id || '') : 'NULL');
       // Insert placeholder into DOM before navigator, then replace navigator with header
       if (placeholder && placeholder.id) {
         el.parentNode.insertBefore(placeholder, el);
       }
-
+      console.log('[navigator] variant=' + variant + ' | header inserted, tag=' + (header ? header.tagName : 'NULL'));
       // Replace the placeholder with the rendered header (immediate, no fade)
       el.parentNode.replaceChild(header, el);
     }
@@ -720,9 +721,11 @@
     // mobile-menu.js boot() runs BEFORE this mount, so initToggle() ran
     // when #mobile-menu-toggle didn't exist yet.  Now the button is in the
     // DOM, so we must bind events here.
+    console.log('[navigator] MobileMenu exists:', !!global.MobileMenu, '| initToggle:', typeof (global.MobileMenu && global.MobileMenu.initToggle));
     if (global.MobileMenu) {
       if (typeof global.MobileMenu.initToggle === "function") {
         global.MobileMenu.initToggle();
+        console.log('[navigator] MobileMenu.initToggle() called');
       }
       if (typeof global.MobileMenu.initSmartHeader === "function") {
         global.MobileMenu.initSmartHeader();

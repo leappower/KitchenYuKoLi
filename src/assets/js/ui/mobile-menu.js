@@ -18,6 +18,7 @@
 
   /* ───────────────────────── L1 MENU DATA ───────────────────────── */
 
+  console.log('[mobile-menu] NAV_CONFIG exists:', typeof NAV_CONFIG !== 'undefined');
   var MENU_ITEMS = (typeof NAV_CONFIG !== 'undefined' && NAV_CONFIG.mainNav) ? NAV_CONFIG.mainNav.map(function(item) {
     var children = [];
     var dropdownMap = {
@@ -47,6 +48,9 @@
     { key: "nav_about", href: "/about/", id: "about", icon: "info", children: [] },
     { key: "nav_contact", href: "/contact/", id: "contact", icon: "mail", children: [] }
   ];
+
+  console.log('[mobile-menu] MENU_ITEMS:', MENU_ITEMS.length, 'items');
+  MENU_ITEMS.forEach(function(item) { console.log('  ', item.id, ':', item.children.length, 'children'); });
 
   /* ───────────────────────── HELPERS ───────────────────────── */
 
@@ -635,6 +639,7 @@
 
   function initToggle() {
     var toggleBtn = document.getElementById("mobile-menu-toggle");
+    console.log('[mobile-menu] initToggle: toggleBtn=', !!toggleBtn, '| _toggleBound=', _toggleBound);
     if (toggleBtn && !_toggleBound) {
       _toggleBound = true;
       onMenuClick = function (e) {
@@ -643,7 +648,9 @@
         openMenu();
       };
       toggleBtn.addEventListener("click", onMenuClick);
+      console.log('[mobile-menu] initToggle: bound click to toggleBtn');
     } else if (!toggleBtn) {
+      console.log('[mobile-menu] initToggle: #mobile-menu-toggle NOT FOUND in DOM');
       // Button not in DOM yet — allow future retry
       _toggleBound = false;
     }
