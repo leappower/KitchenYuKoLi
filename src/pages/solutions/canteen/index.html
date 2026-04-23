@@ -24,11 +24,11 @@
         var currentFile = location.pathname.split("/").pop();
         if (window.DeviceUtils && window.DeviceUtils.isDirectoryURL()) return;
         if (window.DeviceUtils && window.DeviceUtils.shouldRedirect(currentFile)) {
-          var deviceType = window.DeviceUtils.getDeviceType();
+          var w = window.innerWidth;
           var targetFile =
-            deviceType === window.DeviceUtils.DeviceType.MOBILE
+            w < 768
               ? "index-mobile.html"
-              : deviceType === window.DeviceUtils.DeviceType.TABLET
+              : w < 1280
                 ? "index-tablet.html"
                 : "index-pc.html";
           location.href = targetFile;

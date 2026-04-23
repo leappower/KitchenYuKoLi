@@ -25,12 +25,11 @@
         if (window.__spaNavigating) return;
 
         // 使用 DeviceUtils 统一管理设备判断
-        var deviceType = window.DeviceUtils ? window.DeviceUtils.getDeviceType() : "pc";
+        var w = window.innerWidth;
         var targetFile;
-
-        if (deviceType === window.DeviceUtils.DeviceType.MOBILE) {
+        if (w < 768) {
           targetFile = "index-mobile.html";
-        } else if (deviceType === window.DeviceUtils.DeviceType.TABLET) {
+        } else if (w < 1280) {
           targetFile = "index-tablet.html";
         } else {
           targetFile = "index-pc.html";

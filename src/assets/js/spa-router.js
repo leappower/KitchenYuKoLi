@@ -57,12 +57,21 @@
 
     // 设备特定页面映射
     getDevicePage: function (basePath) {
-      // 使用 DeviceUtils 统一管理设备判断（安全检测）
+      // Use DeviceUtils if available
       if (typeof DeviceUtils !== "undefined" && DeviceUtils && DeviceUtils.getDevicePagePath) {
         return DeviceUtils.getDevicePagePath(basePath);
       }
-      // 降级处理
-      return basePath;
+      // Fallback: inline device detection via viewport width
+      var w = window.innerWidth;
+      var suffix;
+      if (w < 768) {
+        suffix = "index-mobile.html";
+      } else if (w < 1280) {
+        suffix = "index-tablet.html";
+      } else {
+        suffix = "index-pc.html";
+      }
+      return basePath.replace("index.html", suffix);
     },
 
     // 当前路由
