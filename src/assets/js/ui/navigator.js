@@ -314,10 +314,9 @@
       if (cfg.showLang) {
         tabletRight.push(buildLangDropdown(variant));
       }
-      // Tablet: hide CTA to avoid overflow — nav links + lang + search already fill the bar
-      // if (cfg.showCta) {
-      //   tabletRight.push(buildCtaButton(cfg.ctaTextKey, cfg.ctaHref));
-      // }
+      if (cfg.showCta) {
+        tabletRight.push(buildCtaButton(cfg.ctaTextKey, cfg.ctaHref));
+      }
       return (
         '<header class="sticky top-0 z-[var(--z-header)] w-full border-b border-slate-200 dark:border-slate-800 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md">' +
         '<div class="max-w-[1024px] mx-auto px-4 py-3 flex items-center justify-between">' +
@@ -352,7 +351,7 @@
       rightParts.push(buildLangDropdown(cfg.variant));
     }
     if (cfg.showCta) {
-      rightParts.push('<div class="hidden xl:block">' + buildCtaButton(cfg.ctaTextKey, cfg.ctaHref) + '</div>');
+      rightParts.push('<div class="hidden lg:block">' + buildCtaButton(cfg.ctaTextKey, cfg.ctaHref) + '</div>');
     }
 
     return (
