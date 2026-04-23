@@ -155,8 +155,8 @@
       '<div class="prod-dropdown-panel">' +
       '<div class="prod-dropdown-card">' +
       viewAll +
-      '<div class="prod-dropdown-separator" style="margin: 4px 0;"></div>' +
       items +
+      '<div class="prod-dropdown-separator" style="margin: 4px 0;"></div>' +
       "</div>" +
       "</div>" +
       "</div>";
@@ -234,7 +234,7 @@
       );
     }).join("\n");
 
-    panel.innerHTML = handle + viewAllHtml + items;
+    panel.innerHTML = handle + items + viewAllHtml;
 
     overlay.onclick = closePopup;
     document.body.appendChild(overlay);

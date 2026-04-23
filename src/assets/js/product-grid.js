@@ -214,7 +214,8 @@
       var category = tab.dataset.category;
       tabContainer.querySelectorAll('.category-tab, .category-tab-tablet').forEach(function(t) { t.classList.remove('active'); });
       tab.classList.add('active');
-      document.querySelectorAll('#product-grid .product-card, #product-list .product-card-mobile').forEach(function(card) {
+      // Include all card variants
+      document.querySelectorAll('#product-grid .product-card, #product-grid .product-card-tablet, #product-list .product-card-mobile').forEach(function(card) {
         card.style.display = (category === 'all' || card.dataset.category === category) ? '' : 'none';
       });
     });
