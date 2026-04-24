@@ -10,11 +10,11 @@
 
   var SUBSERIES = (typeof NAV_CONFIG !== 'undefined' && NAV_CONFIG.dropdowns && NAV_CONFIG.dropdowns.support) || [
     { key: "nav_support_services", icon: "grid_view", href: "/support/", emoji: "" },
-    { key: "nav_support_installation", icon: "construction", href: "/support/#installation", emoji: "" },
-    { key: "nav_support_warranty", icon: "verified", href: "/support/#warranty", emoji: "" },
-    { key: "nav_support_spare_parts", icon: "build_circle", href: "/support/#spare-parts", emoji: "" },
-    { key: "nav_support_training", icon: "school", href: "/support/#training", emoji: "" },
-    { key: "nav_support_faq", icon: "contact_support", href: "/support/#faq", emoji: "" },
+    { key: "nav_support_installation", icon: "construction", href: "/support/installation/", emoji: "" },
+    { key: "nav_support_warranty", icon: "verified", href: "/support/warranty/", emoji: "" },
+    { key: "nav_support_spare_parts", icon: "build_circle", href: "/support/spare-parts/", emoji: "" },
+    { key: "nav_support_training", icon: "school", href: "/support/training/", emoji: "" },
+    { key: "nav_support_faq", icon: "contact_support", href: "/support/faq/", emoji: "" },
   ];
 
   /* ───────────────────────── HELPERS ───────────────────────── */

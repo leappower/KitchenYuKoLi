@@ -198,7 +198,7 @@
     // Close on click outside
     document.addEventListener("mousedown", function (e) {
       if (panel && !panel.contains(e.target)) {
-        var bar = document.getElementById("ios-search-bar");
+        var bar = document.getElementById("ios-search-bar") || document.getElementById("mobile-ios-search-bar");
         if (!bar || !bar.contains(e.target)) {
           hidePanel();
         }
@@ -228,7 +228,7 @@
   }
 
   function positionPanel() {
-    var bar = document.getElementById("ios-search-bar");
+    var bar = document.getElementById("ios-search-bar") || document.getElementById("mobile-ios-search-bar");
     if (!bar || !panel) return;
 
     var rect = bar.getBoundingClientRect();
@@ -399,11 +399,19 @@
       debouncedSearch(input.value.trim());
     });
 
-    // Focus — show results if there's a query
+    // Focus — show results panel + is-focused style
     input.addEventListener("focus", function () {
+      var bar = input.closest && input.closest('.ios-search-bar');
+      if (bar) bar.classList.add('is-focused');
       if (currentQuery && currentQuery.length >= 1) {
         showPanel();
       }
+    });
+
+    // Blur — remove is-focused
+    input.addEventListener("blur", function () {
+      var bar = input.closest && input.closest('.ios-search-bar');
+      if (bar) bar.classList.remove('is-focused');
     });
 
     // Keyboard navigation
