@@ -1,81 +1,35 @@
 <!doctype html>
-<html lang="zh-CN">
+<html class="light" lang="zh-CN">
   <head>
     <meta charset="utf-8" />
     <link rel="canonical" href="/applications/cases/" />
+    <link rel="alternate" media="only screen and (max-width: 767px)" href="/applications/cases/index-mobile.html" />
+    <link
+      rel="alternate"
+      media="only screen and (min-width: 768px) and (max-width: 1279px)"
+      href="/applications/cases/index-tablet.html"
+    />
+    <link rel="alternate" media="only screen and (min-width: 1280px)" href="/applications/cases/index-pc.html" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>YuKoLi | 客户案例 - 智能厨房解决方案成功案例</title>
     <meta
       name="description"
       content="YuKoLi smart kitchen case studies — industrial automation results and customer success stories."
     />
-    <meta property="og:type" content="website" />
-    <meta property="og:title" content="Case Studies — Responsive Entry" />
-    <meta
-      property="og:description"
-      content="YuKoLi smart kitchen case studies — industrial automation results and customer success stories."
-    />
-    <meta property="og:url" content="https://www.kitchen.yukoli.com/applications/cases/" />
-    <meta property="og:image" content="https://www.kitchen.yukoli.com/assets/images/logo_header.webp" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Case Studies — Responsive Entry</title>
-    <script src="/assets/js/utils/device-utils.js"></script>
-    <script>
-      /* Responsive entry — redirect to device file with clean-url parameter */
-      (function () {
-        // SPA 导航时跳过响应式重定向
-        if (window.__spaNavigating) return;
-
-        // 使用 DeviceUtils 统一管理设备判断
-        var w = window.innerWidth;
-        var targetFile;
-        if (w < 768) {
-          targetFile = "index-mobile.html";
-        } else if (w < 1280) {
-          targetFile = "index-tablet.html";
-        } else {
-          targetFile = "index-pc.html";
-        }
-
-        console.log("[Responsive Entry] Device type:", deviceType, "Target file:", targetFile);
-
-        // 重定向到设备特定文件,带 clean-url 参数,让它在加载后清理 URL
-        location.href = targetFile + "?clean-url=/applications/cases/";
-      })();
-    </script>
-    <link rel="preload" href="/assets/fonts/local-fonts.css" as="style" />
-    <link rel="preload" href="/assets/css/tailwind.css" as="style" />
-    <link
-      rel="preload"
-      href="/assets/fonts/public-sans-latin-400-normal.woff2"
-      as="font"
-      type="font/woff2"
-      crossorigin
-    />
-    <link
-      rel="preload"
-      href="/assets/fonts/public-sans-latin-700-normal.woff2"
-      as="font"
-      type="font/woff2"
-      crossorigin
-    />
-    <link rel="stylesheet" href="/assets/css/tailwind.css" />
-    <link rel="stylesheet" href="/assets/css/z-index-system.css" />
-    <link rel="stylesheet" href="/assets/css/performance-optimizations.css" />
-    <!-- Dark mode: apply saved preference before first paint (prevents flash) -->
-    <script>
-      (function () {
-        if (localStorage.getItem("darkMode") === "true") document.documentElement.classList.add("dark");
-      })();
-    </script>
     <link rel="icon" href="/assets/images/logo_header.webp" type="image/webp" />
-  </head>
-  <body>
-    <script defer src="/assets/js/lang-registry.js"></script>
-    <script defer src="/assets/js/translations.js"></script>
-    <script defer src="/assets/js/translations-dropdown-template.js"></script>
     <script>
-      document.addEventListener("DOMContentLoaded", function () {
-        if (window.translationManager) window.translationManager.initialize();
-      });
+      /* Responsive Entry — redirect to device-specific page */
+      (function () {
+        if (window.__redirectChecked) return;
+        window.__redirectChecked = true;
+        var w = window.innerWidth;
+        var target = w < 768 ? "index-mobile.html" : w < 1280 ? "index-tablet.html" : "index-pc.html";
+        location.replace(target);
+      })();
     </script>
+  </head>
+  <body class="bg-background-light dark:bg-background-dark">
+    <noscript><meta http-equiv="refresh" content="0;url=index-pc.html" /></noscript>
+    <p>Loading...</p>
   </body>
 </html>
