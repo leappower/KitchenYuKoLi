@@ -108,7 +108,7 @@
                   <span data-i18n="sol_southeastasian_hero_cta1">获取专属方案</span>
                   <span class="material-symbols-outlined">arrow_forward</span>
                 </a>
-                <a href="#roi-section" class="px-8 py-4 rounded-xl font-bold flex items-center gap-2 border-2 border-slate-300 dark:border-slate-600 hover:border-primary hover:text-primary transition-all">
+                <a href="#sol-sea-roi-section" class="px-8 py-4 rounded-xl font-bold flex items-center gap-2 border-2 border-slate-300 dark:border-slate-600 hover:border-primary hover:text-primary transition-all">
                   <span class="material-symbols-outlined">calculate</span>
                   <span data-i18n="sol_southeastasian_hero_cta2">ROI计算</span>
                 </a>
@@ -436,7 +436,7 @@
 
       <!-- ═══ Section 5: ROI 计算器 (Inline Component) ═══ -->
       <!-- ROI Calculator Component (Inline) -->
-      <section id="roi-section" class="py-20 bg-gradient-to-b from-slate-50 to-white dark:from-slate-900/50 dark:to-transparent">
+      <section id="sol-sea-roi-section" class="py-20 bg-gradient-to-b from-slate-50 to-white dark:from-slate-900/50 dark:to-transparent">
         <div class="max-w-5xl mx-auto px-6 lg:px-8">
           <div class="text-center mb-12">
             <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-bold uppercase tracking-widest mb-4">
@@ -459,7 +459,7 @@
                 <div>
                   <label class="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-2" data-i18n="sol_roi_orders_label">日均订单量</label>
                   <div class="relative">
-                    <input id="roi-orders" type="number" value="200" min="50" max="5000" step="10"
+                    <input id="sol-sea-roi-orders" type="number" value="200" min="50" max="5000" step="10"
                       class="w-full px-4 py-3 rounded-xl border border-slate-200 dark:border-slate-600 bg-slate-50 dark:bg-slate-700 text-lg font-bold focus:ring-2 focus:ring-primary/50 focus:border-primary outline-none transition-all" />
                     <span class="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 text-sm" data-i18n="sol_roi_orders_unit">单/天</span>
                   </div>
@@ -469,7 +469,7 @@
                   <label class="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-2" data-i18n="sol_roi_price_label">平均客单价 (¥)</label>
                   <div class="relative">
                     <span class="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 font-bold">¥</span>
-                    <input id="roi-price" type="number" value="25" min="5" max="500" step="1"
+                    <input id="sol-sea-roi-price" type="number" value="25" min="5" max="500" step="1"
                       class="w-full pl-10 pr-4 py-3 rounded-xl border border-slate-200 dark:border-slate-600 bg-slate-50 dark:bg-slate-700 text-lg font-bold focus:ring-2 focus:ring-primary/50 focus:border-primary outline-none transition-all" />
                   </div>
                 </div>
@@ -478,14 +478,14 @@
                   <label class="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-2" data-i18n="sol_roi_labor_label">当前月人工成本 (¥)</label>
                   <div class="relative">
                     <span class="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 font-bold">¥</span>
-                    <input id="roi-labor" type="number" value="60000" min="5000" max="500000" step="1000"
+                    <input id="sol-sea-roi-labor" type="number" value="60000" min="5000" max="500000" step="1000"
                       class="w-full pl-10 pr-4 py-3 rounded-xl border border-slate-200 dark:border-slate-600 bg-slate-50 dark:bg-slate-700 text-lg font-bold focus:ring-2 focus:ring-primary/50 focus:border-primary outline-none transition-all" />
                   </div>
                 </div>
 
                 <div>
                   <label class="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-2" data-i18n="sol_roi_scale_label">门店规模</label>
-                  <select id="roi-scale"
+                  <select id="sol-sea-roi-scale"
                     class="w-full px-4 py-3 rounded-xl border border-slate-200 dark:border-slate-600 bg-slate-50 dark:bg-slate-700 text-lg font-bold focus:ring-2 focus:ring-primary/50 focus:border-primary outline-none transition-all appearance-none">
                     <option value="small" data-i18n="sol_roi_scale_small">小型 (50-100㎡)</option>
                     <option value="medium" selected data-i18n="sol_roi_scale_medium">中型 (100-300㎡)</option>
@@ -501,7 +501,7 @@
 
               <!-- Results Panel -->
               <div class="bg-gradient-to-br from-primary/5 to-orange-50 dark:from-primary/10 dark:to-slate-800 p-8 lg:p-10 flex flex-col justify-center">
-                <div id="roi-results">
+                <div id="sol-sea-roi-results">
                   <!-- Default state (before calculation) -->
                   <div class="text-center py-8">
                     <span class="material-symbols-outlined text-6xl text-primary/20 mb-4 block">insert_chart</span>
@@ -798,6 +798,93 @@
             <div class="flex items-center gap-2">
               <span class="material-symbols-outlined text-primary">check_circle</span>
               <span class="text-sm" data-i18n="sol_support_badge_4">终身技术支持</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ═══ Customer Case Study ═══ -->
+      <section class="py-12 bg-slate-50 dark:bg-slate-900/50">
+        <div class="max-w-6xl mx-auto px-4">
+          <div class="flex items-center gap-3 mb-8">
+            <div class="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center">
+              <span class="material-symbols-outlined text-primary">verified</span>
+            </div>
+            <h2 class="text-2xl font-black mb-3" data-i18n="sol_southeastasian_case_1_section_title">客户案例</h2>
+          </div>
+          <div class="grid grid-cols-1 gap-6">
+            <!-- Left: Case Info -->
+            <div>
+              <div class="bg-white dark:bg-slate-800 rounded-2xl p-8 p-5 shadow-lg border border-slate-100 dark:border-slate-700 mb-6">
+                <div class="flex items-center gap-3 mb-4">
+                  <div class="w-12 h-12 rounded-xl bg-primary flex items-center justify-center">
+                    <span class="material-symbols-outlined text-white text-2xl">store</span>
+                  </div>
+                  <div>
+                    <h3 class="text-xl font-bold" data-i18n="sol_southeastasian_case_1_name">暹罗美食集团</h3>
+                    <p class="text-sm text-slate-500" data-i18n="sol_southeastasian_case_1_scale">覆盖泰国、越南、马来西亚</p>
+                  </div>
+                </div>
+
+                <div class="mb-6">
+                  <h4 class="text-lg font-bold mb-2 text-red-500" data-i18n="sol_southeastasian_case_1_pain_title">实施前痛点</h4>
+                  <ul class="space-y-2">
+            <li class="flex items-start gap-2">
+              <span class="material-symbols-outlined text-red-400 text-lg mt-0.5">close</span>
+              <span data-i18n="sol_southeastasian_case_1_pain_1">三国口味差异大，菜谱本地化管理困难</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="material-symbols-outlined text-red-400 text-lg mt-0.5">close</span>
+              <span data-i18n="sol_southeastasian_case_1_pain_2">不同国家食材供应链不统一，采购成本高</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="material-symbols-outlined text-red-400 text-lg mt-0.5">close</span>
+              <span data-i18n="sol_southeastasian_case_1_pain_3">跨国团队管理复杂，设备维护响应慢</span>
+            </li>
+                  </ul>
+                </div>
+
+                <div class="mb-6">
+                  <h4 class="text-lg font-bold mb-2 text-primary" data-i18n="sol_southeastasian_case_1_solution_title">YuKoLi 解决方案</h4>
+                  <p class="text-slate-600 dark:text-slate-400 leading-relaxed mb-4 text-sm" data-i18n="sol_southeastasian_case_1_solution_desc">部署 YuKoLi YK-SF800 智能炒菜机 ×2/店（共 40 台），云端菜谱系统按区域自动切换本地化菜单。ESL-GB90 智能保鲜柜统一食材管理，当地售后团队 24 小时响应。</p>
+                </div>
+
+                <div class="grid grid-cols-3 gap-3">
+          <div class="bg-blue-50 dark:bg-blue-900/20 rounded-xl p-4 p-3">
+            <p class="text-3xl font-black text-blue-600 dark:text-blue-400 text-2xl" data-i18n="sol_southeastasian_case_1_result_1_val">38%</p>
+            <p class="text-xs font-bold text-slate-400 uppercase" data-i18n="sol_southeastasian_case_1_result_1_label">人工降</p>
+          </div>
+          <div class="bg-green-50 dark:bg-green-900/20 rounded-xl p-4 p-3">
+            <p class="text-3xl font-black text-green-600 dark:text-green-400 text-2xl" data-i18n="sol_southeastasian_case_1_result_2_val">22%</p>
+            <p class="text-xs font-bold text-slate-400 uppercase" data-i18n="sol_southeastasian_case_1_result_2_label">食材浪费降</p>
+          </div>
+          <div class="bg-orange-50 dark:bg-orange-900/20 rounded-xl p-4 p-3">
+            <p class="text-3xl font-black text-orange-600 dark:text-orange-400 text-2xl" data-i18n="sol_southeastasian_case_1_result_3_val">15 个月</p>
+            <p class="text-xs font-bold text-slate-400 uppercase" data-i18n="sol_southeastasian_case_1_result_3_label">成本回收</p>
+          </div>
+                </div>
+              </div>
+
+              <!-- Quote -->
+              <div class="bg-white dark:bg-slate-800 rounded-2xl p-6 p-4 shadow-lg border-l-4 border-primary">
+                <div class="flex items-start gap-3">
+                  <span class="material-symbols-outlined text-primary text-2xl">format_quote</span>
+                  <div>
+                    <p class="text-lg font-bold italic mb-2" data-i18n="sol_southeastasian_case_1_quote">"三国家一个味道标准，YuKoLi 真正做到了。"</p>
+                    <p class="text-sm text-slate-500" data-i18n="sol_southeastasian_case_1_quote_author">— 暹罗美食集团 负责人</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Right: Visual Placeholder -->
+            <div class="rounded-xl overflow-hidden relative">
+              <div class="aspect-[4/3] bg-slate-200 dark:bg-slate-700 flex items-center justify-center">
+                <div class="text-center p-8">
+                  <span class="material-symbols-outlined text-6xl text-slate-300 dark:text-slate-600 mb-4 block">photo_camera</span>
+                  <p class="text-slate-400 text-sm" data-i18n="sol_southeastasian_case_1_img_placeholder">客户案例实景照片</p>
+                </div>
+              </div>
             </div>
           </div>
         </div>
