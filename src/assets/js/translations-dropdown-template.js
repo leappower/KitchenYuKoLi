@@ -20,17 +20,21 @@ window.LanguageDropdownTemplate = {
 
   // 创建单个语言选项按钮
   createLangOption: function (code, currentLang, name) {
-    var isActive = code === currentLang ? "active" : "";
+    var isActive = code === currentLang ? "is-active" : "";
+    var checkIcon = code === currentLang
+      ? '<span class="material-symbols-outlined text-sm" style="color:#ec5b13">check</span>'
+      : '<span style="width:20px"></span>';
     return (
-      '<button class="lang-option w-full flex items-center justify-between px-3 py-2 text-xs text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors ' +
+      '<button class="lang-option w-full flex items-center gap-2 px-3 py-2.5 text-sm font-medium text-slate-700 dark:text-slate-300 rounded-xl hover:bg-primary/[.06] active:bg-primary/[.12] active:scale-[.98] transition-all ' +
       isActive +
       '" data-code="' +
       code +
       '">' +
+      checkIcon +
       "<span>" +
       name +
       "</span>" +
-      '<span class="text-[10px] opacity-50">' +
+      '<span class="ml-auto text-[10px] opacity-40 font-normal">' +
       code.toUpperCase() +
       "</span>" +
       "</button>"
@@ -40,7 +44,7 @@ window.LanguageDropdownTemplate = {
   // 创建分组标题
   createGroupTitle: function (titleKey) {
     return (
-      '<div class="px-3 py-1 text-[10px] font-bold text-slate-400 uppercase tracking-widest" data-i18n="' +
+      '<div class="px-3 py-1.5 text-[10px] font-semibold text-slate-400 uppercase tracking-wider" data-i18n="' +
       titleKey +
       '">' +
       titleKey +
@@ -49,6 +53,22 @@ window.LanguageDropdownTemplate = {
   },
 
   // 创建下拉框 HTML
+  // Inject styles (idempotent)
+  _injectStyles: function() {
+    if (document.getElementById("lang-dropdown-styles")) return;
+    var s = document.createElement("style");
+    s.id = "lang-dropdown-styles";
+    s.textContent = [
+      ".lang-option.is-active { background: rgba(236,91,19,.08); color: #ec5b13; }",
+      ".lang-option.is-active span { color: #ec5b13; }",
+      "html.dark .lang-option.is-active { background: rgba(236,91,19,.14); color: #f97316; }",
+      "html.dark .lang-option.is-active span { color: #f97316; }",
+      "#language-dropdown { animation: langDropIn .2s cubic-bezier(.32,.72,0,1); }",
+      "@keyframes langDropIn { from { opacity:0; transform:translateY(-4px) scale(.97); } to { opacity:1; transform:translateY(0) scale(1); } }"
+    ].join("\n");
+    document.head.appendChild(s);
+  },
+
   createDropdownHTML: function (languages, currentLang) {
     var self = this;
     var langMap = {};
@@ -65,10 +85,11 @@ window.LanguageDropdownTemplate = {
       return langMap[code] || self.LANGUAGE_NAMES[code] || code;
     };
 
+    this._injectStyles();
     var groupHtml = "";
 
     // Common 组
-    groupHtml += '<div class="lang-group mt-1 border-t border-slate-100 dark:border-slate-800 pt-1">';
+    groupHtml += '<div class="lang-group">';
     groupHtml += this.createGroupTitle(this.LANG_GROUPS.common.titleKey);
     this.LANG_GROUPS.common.langs.forEach(function (code) {
       groupHtml += self.createLangOption(code, currentLang, getLangName(code));
@@ -76,16 +97,16 @@ window.LanguageDropdownTemplate = {
     groupHtml += "</div>";
 
     return (
-      '<div id="language-dropdown" class="fixed bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-2xl shadow-2xl z-[var(--z-language-dropdown)] overflow-hidden" style="display:none;width:280px;">' +
-      '<div class="p-2 bg-slate-50 dark:bg-slate-900/50 border-b border-primary/5">' +
+      '<div id="language-dropdown" class="fixed bg-white/[.98] dark:bg-slate-800/98 border border-slate-200/50 dark:border-slate-700/50 rounded-[13px] p-1 z-[var(--z-language-dropdown)] overflow-hidden" style="display:none;width:260px;box-shadow:0 0 0 .5px rgba(0,0,0,.04),0 8px 40px rgba(0,0,0,.12),0 2px 12px rgba(0,0,0,.08);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);">' +
+      '<div class="px-2 pt-2 pb-1 border-b border-slate-100 dark:border-slate-700/50">' +
       '<div class="relative">' +
-      '<span class="material-symbols-outlined absolute left-2 top-1/2 -translate-y-1/2 text-slate-400 text-xs">search</span>' +
-      '<input class="w-full text-xs pl-7 pr-2 py-2 rounded-lg bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all" ' +
+      '<span class="material-symbols-outlined absolute left-2.5 top-1/2 -translate-y-1/2 text-slate-400 text-sm">search</span>' +
+      '<input class="w-full text-sm pl-8 pr-2 py-2 rounded-lg bg-slate-50 dark:bg-slate-900/80 border border-slate-200/50 dark:border-slate-700/50 focus:ring-2 focus:ring-primary/30 focus:border-primary/40 outline-none transition-all placeholder:text-slate-400" ' +
       ' data-i18n-placeholder="lang_search_placeholder" placeholder="Search language..." ' +
       ' type="text" id="lang-search-input"/>' +
       "</div>" +
       "</div>" +
-      '<div class="overflow-y-auto max-h-80 p-2">' +
+      '<div class="overflow-y-auto max-h-72 py-1">' +
       groupHtml +
       "</div>" +
       "</div>"
