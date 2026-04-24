@@ -283,20 +283,19 @@
       if (el.placeholder !== translation) el.placeholder = translation;
       return;
     }
-    if (el.textContent !== translation) {
-      // Preserve child elements that are NOT data-i18n targets
-      // (e.g. <span class="text-red-500">*</span> in labels)
-      var preservedChildren = [];
-      for (var i = el.childNodes.length - 1; i >= 0; i--) {
-        var child = el.childNodes[i];
-        if (child.nodeType === 1 && !child.getAttribute("data-i18n")) {
-          preservedChildren.unshift(child);
-        }
+    // Replace only the first text node child, preserving all element children.
+    // This avoids the "textContent = ... then re-append children" approach which
+    // duplicates text when a <span> child contains the same fallback text.
+    var textReplaced = false;
+    for (var i = 0; i < el.childNodes.length; i++) {
+      if (el.childNodes[i].nodeType === 3) {
+        el.childNodes[i].textContent = translation;
+        textReplaced = true;
+        break;
       }
+    }
+    if (!textReplaced) {
       el.textContent = translation;
-      for (var j = 0; j < preservedChildren.length; j++) {
-        el.appendChild(preservedChildren[j]);
-      }
     }
   };
 
