@@ -3,14 +3,14 @@
 <html class="light" lang="zh-CN">
   <head>
     <!-- ═══ Responsive Redirect (injected by patch-responsive-redirect.py) ═══ -->
-    <link rel="canonical" href="/solutions/hotpot/" />
-    <link rel="alternate" media="only screen and (max-width: 767px)" href="/solutions/hotpot/index-mobile.html" />
+    <link rel="canonical" href="/solutions/deploy-hotpot/" />
+    <link rel="alternate" media="only screen and (max-width: 767px)" href="/solutions/deploy-hotpot/index-mobile.html" />
     <link
       rel="alternate"
       media="only screen and (min-width: 768px) and (max-width: 1279px)"
-      href="/solutions/hotpot/index-tablet.html"
+      href="/solutions/deploy-hotpot/index-tablet.html"
     />
-    <link rel="alternate" media="only screen and (min-width: 1280px)" href="/solutions/hotpot/index-pc.html" />
+    <link rel="alternate" media="only screen and (min-width: 1280px)" href="/solutions/deploy-hotpot/index-pc.html" />
     <script>
       /* Responsive redirect — runs before render, no flash */
       (function () {
@@ -48,9 +48,9 @@
       property="og:description"
       content="为火锅连锁提供汤底标准化、自动备菜、智能温控全套部署方案，实现人工降35%、出餐提速60%。"
     />
-    <meta property="og:url" content="https://www.kitchen.yukoli.com/solutions/hotpot/" />
+    <meta property="og:url" content="https://www.kitchen.yukoli.com/solutions/deploy-hotpot/" />
     <meta property="og:image" content="https://www.kitchen.yukoli.com/assets/images/logo_header.webp" />
-    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
     <title data-i18n="sol_hotpot_page_title">YuKoLi | 火锅连锁智能厨房部署方案</title>
     <link rel="preload" href="/assets/fonts/local-fonts.css" as="style" />
     <link rel="preload" href="/assets/css/styles.css" as="style" />
@@ -87,7 +87,7 @@
   "@type": "WebPage",
   "name": "YuKoLi 火锅连锁智能厨房部署方案",
   "description": "YuKoLi 火锅连锁部署方案 — 汤底标准化、中央备菜+门店组装、智能温控，帮助火锅连锁实现人工降35%、备菜效率升5倍。",
-  "url": "https://www.kitchen.yukoli.com/solutions/hotpot/",
+  "url": "https://www.kitchen.yukoli.com/solutions/deploy-hotpot/",
   "isPartOf": {
     "@type": "WebSite",
     "name": "YuKoLi 智能厨具",
@@ -102,7 +102,7 @@
     <!-- Top Navigation Bar -->
     <navigator
       data-component="navigator"
-      data-variant="mobile"
+      data-variant="tablet"
       data-active="solutions"
       data-cta-text-key="nav_get_quote"
       data-cta-href="/quote"
@@ -206,7 +206,7 @@
             <h2 class="text-3xl lg:text-4xl font-black tracking-tight mb-4" data-i18n="sol_hotpot_deploy_title">从需求到运营，完整解决路径</h2>
             <p class="text-lg text-slate-600 dark:text-slate-400 max-w-2xl mx-auto" data-i18n="sol_hotpot_deploy_desc">针对火锅连锁特点，提供汤底配方标准化、中央备菜+门店组装、智能温控的系统化部署方案。</p>
           </div>
-          <div class="grid grid-cols-1 gap-6">
+          <div class="grid md:grid-cols-5 gap-6">
             <!-- Step 1 -->
             <div class="relative bg-white dark:bg-slate-800 rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all text-center">
               <div class="w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center mx-auto mb-4">
@@ -299,7 +299,7 @@
             <h2 class="text-3xl lg:text-4xl font-black tracking-tight mb-4" data-i18n="sol_hotpot_workflow_title">火锅连锁厨房改造效果</h2>
             <p class="text-lg text-slate-600 dark:text-slate-400 max-w-2xl mx-auto" data-i18n="sol_hotpot_workflow_desc">传统模式 vs YuKoLi 智能部署方案，全方位对比。</p>
           </div>
-          <div class="grid grid-cols-1 gap-8">
+          <div class="grid md:grid-cols-2 gap-8">
             <!-- Before -->
             <div class="bg-red-50 dark:bg-red-900/10 rounded-2xl p-8 border border-red-100 dark:border-red-900/30">
               <div class="flex items-center gap-3 mb-6">
@@ -382,7 +382,7 @@
           </div>
 
           <!-- Key metrics -->
-          <div class="grid grid-cols-2 gap-4 mt-12">
+          <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-12">
             <div class="bg-white dark:bg-slate-800 rounded-2xl p-6 shadow-lg text-center">
               <div class="text-4xl font-black text-primary mb-2">35%</div>
               <p class="text-sm text-slate-600 dark:text-slate-400" data-i18n="sol_hotpot_metric_labor">人工成本降低</p>
@@ -414,7 +414,7 @@
             <h2 class="text-3xl lg:text-4xl font-black tracking-tight mb-4" data-i18n="sol_hotpot_equip_title">为您推荐的设备方案</h2>
             <p class="text-lg text-slate-600 dark:text-slate-400" data-i18n="sol_hotpot_equip_desc">针对火锅连锁场景定制的核心设备组合，聚焦汤底标准化与高效备菜。</p>
           </div>
-          <div class="grid grid-cols-1 gap-8">
+          <div class="grid md:grid-cols-3 gap-8">
             <!-- Equipment 1: 电磁大锅灶 -->
             <div
               class="bg-white dark:bg-slate-800 rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all group"
@@ -525,7 +525,7 @@
           </div>
 
           <div class="bg-white dark:bg-slate-800 rounded-3xl shadow-xl border border-slate-100 dark:border-slate-700 overflow-hidden">
-            <div class="grid grid-cols-1">
+            <div class="grid lg:grid-cols-2">
               <!-- Input Panel -->
               <div class="p-8 lg:p-10 space-y-6">
                 <h3 class="text-xl font-bold flex items-center gap-2">
@@ -831,7 +831,7 @@
             <p class="text-lg text-slate-600 dark:text-slate-400 max-w-2xl mx-auto" data-i18n="sol_support_desc">从设备交付到日常运营，YuKoLi 提供覆盖设备全生命周期的专业服务，让您无后顾之忧。</p>
           </div>
 
-          <div class="grid grid-cols-1 gap-6">
+          <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             <!-- Warranty -->
             <div class="bg-white dark:bg-slate-800 rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all border border-transparent hover:border-primary/30 group">
               <div class="w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
@@ -916,7 +916,7 @@
     </main>
 
     <!-- Footer -->
-    <footer data-component="footer" data-variant="mobile" data-cta="true"></footer>
+    <footer data-component="footer" data-variant="tablet" data-cta="true"></footer>
 
     <!-- Scripts -->
     <script defer src="/assets/js/router.js"></script>
@@ -933,6 +933,5 @@
     <script src="/assets/js/ui/navigator.js"></script>
     <script src="/assets/js/ui/footer.js"></script>
     <script defer src="/assets/js/ui/floating-actions.js"></script>
-  <script defer src="/assets/js/ui/search-engine.js"></script>
-</body>
+  </body>
 </html>

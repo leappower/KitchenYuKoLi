@@ -1277,7 +1277,7 @@
 
     var pageIds = [
       'home', 'about',
-      'solutions/fast-food', 'solutions/cloud-kitchen', 'solutions/canteen', 'solutions/southeast-asian',
+      'solutions/deploy-fast-food', 'solutions/deploy-cloud-kitchen', 'solutions/deploy-canteen', 'solutions/deploy-southeast-asian',
       'applications/cases'
     ];
 

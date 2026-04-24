@@ -2,10 +2,10 @@
 <html class="light" lang="zh-CN">
   <head>
     <!-- ═══ Responsive Redirect (injected by patch-responsive-redirect.py) ═══ -->
-    <link rel="canonical" href="/solutions/cloud-kitchen/" />
-    <link rel="alternate" media="only screen and (max-width: 767px)" href="/solutions/cloud-kitchen/index-mobile.html" />
-    <link rel="alternate" media="only screen and (min-width: 768px) and (max-width: 1279px)" href="/solutions/cloud-kitchen/index-tablet.html" />
-    <link rel="alternate" media="only screen and (min-width: 1280px)" href="/solutions/cloud-kitchen/index-pc.html" />
+    <link rel="canonical" href="/solutions/deploy-cloud-kitchen/" />
+    <link rel="alternate" media="only screen and (max-width: 767px)" href="/solutions/deploy-cloud-kitchen/index-mobile.html" />
+    <link rel="alternate" media="only screen and (min-width: 768px) and (max-width: 1279px)" href="/solutions/deploy-cloud-kitchen/index-tablet.html" />
+    <link rel="alternate" media="only screen and (min-width: 1280px)" href="/solutions/deploy-cloud-kitchen/index-pc.html" />
     <script>
       /* Responsive redirect — runs before render, no flash */
       (function () {
@@ -40,9 +40,9 @@
     <meta property="og:type" content="website" />
     <meta property="og:title" content="YuKoLi | 云厨房/外卖厨房智能部署方案" />
     <meta property="og:description" content="从需求评估到持续优化的全流程部署服务，让云厨房实现高密度产出、多品类快速切换、接单-烹饪-打包流水线一体化。" />
-    <meta property="og:url" content="https://www.kitchen.yukoli.com/solutions/cloud-kitchen/" />
+    <meta property="og:url" content="https://www.kitchen.yukoli.com/solutions/deploy-cloud-kitchen/" />
     <meta property="og:image" content="https://www.kitchen.yukoli.com/assets/images/logo_header.webp" />
-    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport" />
     <title data-i18n="sol_cloudkitchen_page_title">YuKoLi | 云厨房/外卖厨房智能部署方案</title>
     <link rel="preload" href="/assets/fonts/local-fonts.css" as="style" />
     <link rel="preload" href="/assets/css/styles.css" as="style" />
@@ -67,7 +67,7 @@
   "@type": "WebPage",
   "name": "YuKoLi 云厨房/外卖厨房智能部署方案",
   "description": "从需求评估到持续优化的全流程部署服务，实现日产能提升3倍、空间利用率升50%、出餐速度90秒/份。",
-  "url": "https://www.kitchen.yukoli.com/solutions/cloud-kitchen/",
+  "url": "https://www.kitchen.yukoli.com/solutions/deploy-cloud-kitchen/",
   "isPartOf": {
     "@type": "WebSite",
     "name": "YuKoLi 智能厨具",
@@ -77,7 +77,7 @@
     </script>
   </head>
   <body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 antialiased transition-colors duration-300 overflow-x-hidden">
-    <navigator data-component="navigator" data-variant="tablet" data-active="solutions" data-cta-text-key="nav_get_quote" data-cta-href="/quote"></navigator>
+    <navigator data-component="navigator" data-variant="mobile" data-active="solutions" data-cta-text-key="nav_get_quote" data-cta-href="/quote"></navigator>
 
     <main id="spa-content">
 
@@ -85,8 +85,8 @@
       <section class="relative py-20 overflow-hidden">
         <div class="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-orange-100/30 dark:from-primary/10 dark:to-orange-900/20"></div>
         <div class="relative max-w-7xl mx-auto px-6 lg:px-8">
-          <div class="flex flex-col lg:flex-row items-center gap-12">
-            <div class="w-full lg:w-1/2 flex flex-col gap-6">
+          <div class="flex flex-col items-center gap-12">
+            <div class="w-full flex flex-col gap-6">
               <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 text-primary text-sm font-bold uppercase tracking-wider w-fit">
                 <span class="material-symbols-outlined">delivery_dining</span>
                 <span data-i18n="sol_cloudkitchen_hero_badge">云厨房/外卖厨房部署方案</span>
@@ -900,7 +900,7 @@
 
     </main>
 
-    <footer data-component="footer" data-variant="tablet" data-cta="true"></footer>
+    <footer data-component="footer" data-variant="mobile" data-cta="true"></footer>
     <script defer src="/assets/js/router.js"></script>
     <script src="/assets/js/translations.js"></script>
     <script src="/assets/js/ui/language-dropdown.js"></script>
@@ -915,5 +915,6 @@
     <script src="/assets/js/ui/navigator.js"></script>
     <script src="/assets/js/ui/footer.js"></script>
     <script defer src="/assets/js/ui/floating-actions.js"></script>
-  </body>
+  <script defer src="/assets/js/ui/search-engine.js"></script>
+</body>
 </html>

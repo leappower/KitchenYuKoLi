@@ -3,10 +3,10 @@
 <html class="light" lang="zh-CN">
   <head>
     <!-- ═══ Responsive Redirect (injected by patch-responsive-redirect.py) ═══ -->
-    <link rel="canonical" href="/solutions/southeast-asian/" />
-    <link rel="alternate" media="only screen and (max-width: 767px)" href="/solutions/southeast-asian/index-mobile.html" />
-    <link rel="alternate" media="only screen and (min-width: 768px) and (max-width: 1279px)" href="/solutions/southeast-asian/index-tablet.html" />
-    <link rel="alternate" media="only screen and (min-width: 1280px)" href="/solutions/southeast-asian/index-pc.html" />
+    <link rel="canonical" href="/solutions/deploy-southeast-asian/" />
+    <link rel="alternate" media="only screen and (max-width: 767px)" href="/solutions/deploy-southeast-asian/index-mobile.html" />
+    <link rel="alternate" media="only screen and (min-width: 768px) and (max-width: 1279px)" href="/solutions/deploy-southeast-asian/index-tablet.html" />
+    <link rel="alternate" media="only screen and (min-width: 1280px)" href="/solutions/deploy-southeast-asian/index-pc.html" />
     <script>
       /* Responsive redirect — runs before render, no flash */
       (function () {
@@ -41,9 +41,9 @@
     <meta property="og:type" content="website" />
     <meta property="og:title" content="YuKoLi | 东南亚菜系餐饮智能厨房部署方案" />
     <meta property="og:description" content="针对东南亚菜系复杂调料与多元烹饪需求，提供本地化适配的智能厨房部署方案，覆盖东南亚多国服务网络。" />
-    <meta property="og:url" content="https://www.kitchen.yukoli.com/solutions/southeast-asian/" />
+    <meta property="og:url" content="https://www.kitchen.yukoli.com/solutions/deploy-southeast-asian/" />
     <meta property="og:image" content="https://www.kitchen.yukoli.com/assets/images/logo_header.webp" />
-    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
     <title data-i18n="sol_southeastasian_page_title">YuKoLi | 东南亚菜系餐饮智能厨房部署方案</title>
     <link rel="preload" href="/assets/fonts/local-fonts.css" as="style" />
     <link rel="preload" href="/assets/css/styles.css" as="style" />
@@ -68,7 +68,7 @@
   "@type": "WebPage",
   "name": "YuKoLi 东南亚菜系餐饮智能厨房部署方案",
   "description": "针对东南亚菜系复杂调料与多元烹饪需求，提供本地化适配的智能厨房部署方案，覆盖东南亚多国服务网络。",
-  "url": "https://www.kitchen.yukoli.com/solutions/southeast-asian/",
+  "url": "https://www.kitchen.yukoli.com/solutions/deploy-southeast-asian/",
   "isPartOf": {
     "@type": "WebSite",
     "name": "YuKoLi 智能厨具",
@@ -80,14 +80,14 @@
   <body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 antialiased transition-colors duration-300 overflow-x-hidden">
 
     <!-- Top Navigation Bar -->
-    <navigator data-component="navigator" data-variant="mobile" data-active="solutions" data-cta-text-key="nav_get_quote" data-cta-href="/quote"></navigator>
+    <navigator data-component="navigator" data-variant="pc" data-active="solutions" data-cta-text-key="nav_get_quote" data-cta-href="/quote"></navigator>
 
     <main id="spa-content">
 
       <!-- ═══ Section 1: Hero ═══ -->
-      <section class="relative py-20 overflow-hidden">
+      <section class="relative py-12 overflow-hidden">
         <div class="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-orange-100/30 dark:from-primary/10 dark:to-orange-900/20"></div>
-        <div class="relative max-w-7xl mx-auto px-6 lg:px-8">
+        <div class="relative max-w-7xl mx-auto">
           <div class="flex flex-col lg:flex-row items-center gap-12">
             <div class="w-full lg:w-1/2 flex flex-col gap-6">
               <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 text-primary text-sm font-bold uppercase tracking-wider w-fit">
@@ -108,7 +108,7 @@
                   <span data-i18n="sol_southeastasian_hero_cta1">获取专属方案</span>
                   <span class="material-symbols-outlined">arrow_forward</span>
                 </a>
-                <a href="#roi-section" class="px-8 py-4 rounded-xl font-bold flex items-center gap-2 border-2 border-slate-300 dark:border-slate-600 hover:border-primary hover:text-primary transition-all">
+                <a href="#roi-section" onclick="event.preventDefault();document.getElementById('roi-section').scrollIntoView({behavior:'smooth',block:'start'})" class="px-8 py-4 rounded-xl font-bold flex items-center gap-2 border-2 border-slate-300 dark:border-slate-600 hover:border-primary hover:text-primary transition-all">
                   <span class="material-symbols-outlined">calculate</span>
                   <span data-i18n="sol_southeastasian_hero_cta2">ROI计算</span>
                 </a>
@@ -141,8 +141,8 @@
       </section>
 
       <!-- ═══ Section 2: 部署架构图 ═══ -->
-      <section class="py-20 bg-slate-50 dark:bg-slate-900/50">
-        <div class="max-w-7xl mx-auto px-6 lg:px-8">
+      <section class="py-12 bg-slate-50 dark:bg-slate-900/50">
+        <div class="max-w-7xl mx-auto">
           <div class="text-center mb-16">
             <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-bold uppercase tracking-widest mb-4">
               <span class="material-symbols-outlined text-sm">account_tree</span>
@@ -231,8 +231,8 @@
       </section>
 
       <!-- ═══ Section 3: 工作流优化 (Before/After) ═══ -->
-      <section class="py-20">
-        <div class="max-w-7xl mx-auto px-6 lg:px-8">
+      <section class="py-12">
+        <div class="max-w-7xl mx-auto">
           <div class="text-center mb-16">
             <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-400 text-xs font-bold uppercase tracking-widest mb-4">
               <span class="material-symbols-outlined text-sm">compare_arrows</span>
@@ -333,8 +333,8 @@
       </section>
 
       <!-- ═══ Section 4: 推荐设备组合（简化版） ═══ -->
-      <section class="py-20 bg-slate-50 dark:bg-slate-900/50">
-        <div class="max-w-7xl mx-auto px-6 lg:px-8">
+      <section class="py-12 bg-slate-50 dark:bg-slate-900/50">
+        <div class="max-w-7xl mx-auto">
           <div class="text-center mb-16">
             <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-bold uppercase tracking-widest mb-4">
               <span class="material-symbols-outlined text-sm">devices</span>
@@ -436,8 +436,8 @@
 
       <!-- ═══ Section 5: ROI 计算器 (Inline Component) ═══ -->
       <!-- ROI Calculator Component (Inline) -->
-      <section id="roi-section" class="py-20 bg-gradient-to-b from-slate-50 to-white dark:from-slate-900/50 dark:to-transparent">
-        <div class="max-w-5xl mx-auto px-6 lg:px-8">
+      <section id="roi-section" class="py-16 bg-gradient-to-b from-slate-50 to-white dark:from-slate-900/50 dark:to-transparent">
+        <div class="max-w-5xl mx-auto">
           <div class="text-center mb-12">
             <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-bold uppercase tracking-widest mb-4">
               <span class="material-symbols-outlined text-sm">calculate</span>
@@ -584,8 +584,8 @@
       </script>
 
       <!-- ═══ Section 6: 实施时间线 (Inline Component) ═══ -->
-      <section class="py-20">
-        <div class="max-w-6xl mx-auto px-6 lg:px-8">
+      <section class="py-12">
+        <div class="max-w-5xl mx-auto">
           <div class="text-center mb-16">
             <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-400 text-xs font-bold uppercase tracking-widest mb-4">
               <span class="material-symbols-outlined text-sm">schedule</span>
@@ -732,8 +732,8 @@
       </section>
 
       <!-- ═══ Section 7: 售后保障 (Inline Component) ═══ -->
-      <section class="py-20 bg-slate-50 dark:bg-slate-900/50">
-        <div class="max-w-7xl mx-auto px-6 lg:px-8">
+      <section class="py-12 bg-slate-50 dark:bg-slate-900/50">
+        <div class="max-w-7xl mx-auto">
           <div class="text-center mb-16">
             <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400 text-xs font-bold uppercase tracking-widest mb-4">
               <span class="material-symbols-outlined text-sm">verified_user</span>
@@ -804,8 +804,8 @@
       </section>
 
       <!-- ═══ Section 8: CTA ═══ -->
-      <section class="py-20 bg-primary">
-        <div class="max-w-4xl mx-auto px-6 lg:px-8 text-center">
+      <section class="py-12 bg-primary">
+        <div class="max-w-5xl mx-auto text-center">
           <h2 class="text-3xl lg:text-4xl font-black text-white mb-6" data-i18n="sol_southeastasian_cta_title">开启您的智能厨房之旅</h2>
           <p class="text-xl text-white/80 mb-8" data-i18n="sol_southeastasian_cta_desc">获取专属东南亚菜系解决方案，让科技赋能您的餐饮事业</p>
           <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
@@ -824,7 +824,7 @@
     </main>
 
     <!-- Footer -->
-    <footer data-component="footer" data-variant="mobile" data-cta="true"></footer>
+    <footer data-component="footer" data-variant="pc" data-cta="true"></footer>
 
     <!-- Scripts -->
     <script defer src="/assets/js/router.js"></script>
@@ -841,6 +841,5 @@
     <script src="/assets/js/ui/navigator.js"></script>
     <script src="/assets/js/ui/footer.js"></script>
     <script defer src="/assets/js/ui/floating-actions.js"></script>
-  <script defer src="/assets/js/ui/search-engine.js"></script>
-</body>
+  </body>
 </html>

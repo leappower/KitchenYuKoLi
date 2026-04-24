@@ -12,10 +12,10 @@ function pagesRoutes(db) {
       var pages = [
         { page_id: 'home', label: '首页', icon: '🏠' },
         { page_id: 'about', label: '关于我们', icon: '🏢' },
-        { page_id: 'solutions/fast-food', label: '快餐连锁方案', icon: '🍔' },
-        { page_id: 'solutions/cloud-kitchen', label: '中央厨房方案', icon: '🏭' },
-        { page_id: 'solutions/canteen', label: '食堂方案', icon: '🏫' },
-        { page_id: 'solutions/southeast-asian', label: '东南亚方案', icon: '🌏' },
+        { page_id: 'solutions/deploy-fast-food', label: '快餐连锁方案', icon: '🍔' },
+        { page_id: 'solutions/deploy-cloud-kitchen', label: '中央厨房方案', icon: '🏭' },
+        { page_id: 'solutions/deploy-canteen', label: '食堂方案', icon: '🏫' },
+        { page_id: 'solutions/deploy-southeast-asian', label: '东南亚方案', icon: '🌏' },
         { page_id: 'applications/cases', label: '客户案例', icon: '📸' }
       ];
       // Add section count for each
