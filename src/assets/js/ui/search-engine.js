@@ -387,7 +387,9 @@
    * Should be called after navigator.js has rendered the search bar.
    */
   function init() {
-    var input = document.getElementById("ios-search-input");
+    // Support both PC (#ios-search-input) and mobile/tablet (#mobile-header-search-input)
+    var input = document.getElementById("ios-search-input")
+      || document.getElementById("mobile-header-search-input");
     if (!input) {
       return;
     }

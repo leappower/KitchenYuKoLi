@@ -242,21 +242,24 @@
   }
 
   function buildMobileSearchBox(i18nKey) {
-    // Compact inline search bar for mobile/tablet header
+    // iOS-style compact search bar for mobile/tablet header (matches PC ios-search-bar)
     return (
-      '<div class="mobile-header-search relative flex items-center w-full max-w-xs">' +
-      '<span class="material-symbols-outlined text-slate-400 text-base absolute left-2.5 pointer-events-none">search</span>' +
+      '<div class="ios-search-wrapper flex-1 flex justify-center mx-1" style="max-width:320px">' +
+      '<div class="ios-search-bar" id="mobile-ios-search-bar" style="width:100%;max-width:280px;padding:5px 12px">' +
+      '<span class="ios-search-icon material-symbols-outlined" style="font-size:18px">search</span>' +
       '<input' +
-      ' class="mobile-header-search-input w-full pl-8 pr-8 py-2 text-sm rounded-full bg-slate-100 dark:bg-slate-800 border border-transparent focus:border-primary/40 focus:bg-white dark:focus:bg-slate-700 outline-none transition-all"' +
+      ' class="ios-search-input"' +
+      ' id="mobile-header-search-input"' +
       ' placeholder="Search equipment..."' +
       ' data-i18n-placeholder="' + esc(i18nKey) + '"' +
       ' type="search"' +
       ' autocomplete="off"' +
       ' spellcheck="false"' +
-      ' id="mobile-header-search-input"/>' +
-      '<button class="mobile-header-search-clear absolute right-2 hidden" type="button" aria-label="Clear" id="mobile-header-search-clear">' +
-      '<span class="material-symbols-outlined text-base text-slate-400">cancel</span>' +
+      ' style="font-size:14px"/>' +
+      '<button class="ios-search-clear" type="button" aria-label="Clear" tabindex="-1">' +
+      '<span class="material-symbols-outlined" style="font-size:18px">cancel</span>' +
       '</button>' +
+      '</div>' +
       '</div>'
     );
   }

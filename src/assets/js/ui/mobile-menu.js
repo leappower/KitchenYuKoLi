@@ -709,12 +709,10 @@
     }
 
     // Mobile search toggle — open inline search overlay
-    // NOTE: This is intentionally outside the early-return above.
-    // The hamburger button may persist across SPA navigations while
-    // the search input is freshly rendered, so we must always check.
+    // NOTE: search-engine.js handles #mobile-header-search-input directly.
+    // Only bind the separate #mobile-search-toggle button (if present in HTML).
     var searchBtn = document.getElementById("mobile-search-toggle");
-    var inlineSearchBox = document.getElementById("mobile-header-search-input");
-    if ((searchBtn || inlineSearchBox) && !_searchToggleBound) {
+    if (searchBtn && !_searchToggleBound) {
       _searchToggleBound = true;
       onSearchClick = function (e) {
         e.preventDefault();
@@ -730,18 +728,7 @@
       if (searchBtn) {
         searchBtn.addEventListener("click", onSearchClick);
       }
-      if (inlineSearchBox) {
-        inlineSearchBox.addEventListener("click", onSearchClick);
-        inlineSearchBox.addEventListener("focus", function(e) {
-          // Don't prevent default on focus — let the input receive focus
-          // but still open the mobile search overlay
-          var existingOverlay = document.getElementById("mobile-search-overlay");
-          if (!existingOverlay) {
-            openMobileSearch();
-          }
-        });
-      }
-    } else if (!searchBtn && !inlineSearchBox) {
+    } else if (!searchBtn) {
       // Button not in DOM yet — allow future retry
       _searchToggleBound = false;
     }
