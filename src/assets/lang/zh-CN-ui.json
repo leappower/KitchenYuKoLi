@@ -1564,5 +1564,13 @@
   "support_faq_q6": "维修费用怎么算？",
   "support_faq_a6": "保修期内维修零费用（含人工+配件）。保修期外，工程师检测后提供详细报价单，你确认后才动手维修。没有任何隐形收费。",
   "support_faq_q7": "如果修不好怎么办？",
-  "support_faq_a7": "72 小时内无法修复的，我们提供备用设备，确保您的厨房正常运转。绝不因为设备问题影响您的生意。"
+  "support_faq_a7": "72 小时内无法修复的，我们提供备用设备，确保您的厨房正常运转。绝不因为设备问题影响您的生意。",
+  "app_recommended_title": "推荐设备方案",
+  "app_recommended_desc": "根据您的行业场景和产能需求，为您精选的智能厨房设备组合",
+  "app_rec_smart_kitchen": "智能炒菜机",
+  "app_rec_smart_kitchen_desc": "核心烹饪设备，1000+标准化菜谱一键烹饪，精准控温控时",
+  "app_rec_cooking_line": "烹饪流水线",
+  "app_rec_cooking_line_desc": "切配+烹饪+出餐一体化流水线，大幅提升出餐效率",
+  "app_rec_all_products": "查看全部产品",
+  "app_rec_all_products_desc": "浏览 YuKoLi 全系列智能厨房设备"
 }

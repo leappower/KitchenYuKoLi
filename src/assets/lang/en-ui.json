@@ -1564,5 +1564,13 @@
   "support_faq_q6": "How are repair costs calculated?",
   "support_faq_a6": "Zero-cost repairs during warranty (including labor + parts). After warranty, engineers provide a detailed quote after inspection — repairs only proceed after your confirmation. No hidden charges.",
   "support_faq_q7": "What if the equipment cannot be repaired?",
-  "support_faq_a7": "If repair cannot be completed within 72 hours, we provide backup equipment to ensure your kitchen keeps running. Your business will never be affected by equipment issues."
+  "support_faq_a7": "If repair cannot be completed within 72 hours, we provide backup equipment to ensure your kitchen keeps running. Your business will never be affected by equipment issues.",
+  "app_recommended_title": "Recommended Equipment",
+  "app_recommended_desc": "Curated smart kitchen equipment combinations tailored to your industry and capacity needs",
+  "app_rec_smart_kitchen": "Smart Stir-Fry Machine",
+  "app_rec_smart_kitchen_desc": "Core cooking equipment with 1000+ standardized recipes and precise temperature control",
+  "app_rec_cooking_line": "Cooking Production Line",
+  "app_rec_cooking_line_desc": "Integrated prep-cook-serve production line for significantly faster service",
+  "app_rec_all_products": "View All Products",
+  "app_rec_all_products_desc": "Browse the full range of YuKoLi smart kitchen equipment"
 }

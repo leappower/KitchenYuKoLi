@@ -1,17 +1,24 @@
 <!doctype html>
 <html class="light" lang="zh-CN">
   <head>
-    <meta charset="utf-8" />
+    <!-- ═══ Responsive Redirect ═══ -->
     <link rel="canonical" href="/solutions/southeast-asian/" />
     <link rel="alternate" media="only screen and (max-width: 767px)" href="/solutions/southeast-asian/index-mobile.html" />
     <link rel="alternate" media="only screen and (min-width: 768px) and (max-width: 1279px)" href="/solutions/southeast-asian/index-tablet.html" />
     <link rel="alternate" media="only screen and (min-width: 1280px)" href="/solutions/southeast-asian/index-pc.html" />
+    <meta charset="utf-8" />
+    <meta name="description" content=" YuKoLi 中式快餐连锁部署方案 — 从需求评估到持续运营的完整解决路径，标准化出餐流程，降低人工成本30%，翻台率提升40%。" />
+    <meta name="keywords" content="中式快餐,连锁餐饮,智能厨房部署方案,自动化炒菜机,商用厨房设备,餐饮自动化,中央厨房" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content=" YuKoLi | 中式快餐连锁部署方案" />
+    <meta property="og:description" content="从需求评估到持续运营，YuKoLi为中式快餐连锁提供完整的智能厨房部署方案，实现标准化出餐、多门店快速复制。" />
+    <meta property="og:url" content="https://www.kitchen.yukoli.com/solutions/southeast-asian/" />
+    <meta property="og:image" content="https://www.kitchen.yukoli.com/assets/images/logo_header.webp" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-    <title data-i18n="sol_southeastasian_page_title">Yukoli | 东南亚菜系餐饮智能厨房部署方案</title>
-    <meta name="description" content="YuKoLi 东南亚菜系餐饮部署方案 — 针对泰式、越南、印尼等东南亚菜系复杂调料与多元烹饪需求，提供本地化适配的智能厨房解决方案，支持220V/380V多国电压。" />
+    <title data-i18n="sol_fastfood_page_title"> YuKoLi | 中式快餐连锁部署方案</title>
     <link rel="icon" href="/assets/images/logo_header.webp" type="image/webp" />
     <script>
-      /* Responsive redirect — runs before render, no flash */
+      /* Responsive Entry — redirect to device-specific page */
       (function () {
         if (window.__redirectChecked) return;
         window.__redirectChecked = true;
@@ -22,23 +29,14 @@
           return;
         }
         if (window.__spaNavigating) return;
-        var currentFile = location.pathname.split("/").pop();
-        if (window.DeviceUtils && window.DeviceUtils.isDirectoryURL()) return;
-        if (window.DeviceUtils && window.DeviceUtils.shouldRedirect(currentFile)) {
-          var w = window.innerWidth;
-          var targetFile =
-            w < 768
-              ? "index-mobile.html"
-              : w < 1280
-                ? "index-tablet.html"
-                : "index-pc.html";
-          location.href = targetFile;
-        }
+        var w = window.innerWidth;
+        var target = w < 768 ? "index-mobile.html" : w < 1280 ? "index-tablet.html" : "index-pc.html";
+        location.replace(target);
       })();
     </script>
   </head>
   <body class="bg-background-light dark:bg-background-dark">
     <noscript><meta http-equiv="refresh" content="0;url=index-pc.html" /></noscript>
-    <p data-i18n="sol_southeastasian_loading">Loading...</p>
+    <p>Loading...</p>
   </body>
 </html>
