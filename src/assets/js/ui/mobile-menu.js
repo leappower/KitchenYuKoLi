@@ -179,6 +179,8 @@
       "html.dark .mobile-menu-l2-item { color: #f5f5f7; }",
       ".mobile-menu-l2-item:active { background: rgba(236,91,19,.06); }",
       "html.dark .mobile-menu-l2-item:active { background: rgba(236,91,19,.10); }",
+      ".mobile-menu-l2-viewall .mobile-menu-l2-icon { color: var(--color-primary, #ec5b13); }",
+      ".mobile-menu-l2-viewall:active .mobile-menu-l2-label { color: var(--color-primary, #ec5b13); }",
       ".mobile-menu-l2-icon {",
       "  width: 24px; height: 24px; border-radius: 6px;",
       "  background: rgba(236,91,19,.08);",
@@ -408,7 +410,7 @@
 
         childrenHtml = '<div class="mobile-menu-l2" data-menu-l2="' + esc(item.id) + '">' + itemsHtml;
         if (item.id === 'products') {
-          childrenHtml += '<a class="mobile-menu-l2-item" href="/products/" style="color:var(--color-primary);font-weight:600">' +
+          childrenHtml += '<a class="mobile-menu-l2-item mobile-menu-l2-viewall" href="/products/">' +
             '<span class="mobile-menu-l2-icon"><span class="material-symbols-outlined">arrow_forward</span></span>' +
             '<span class="mobile-menu-l2-label" data-i18n="nav_mega_view_all">查看全部产品</span></a>';
         }

@@ -139,10 +139,19 @@
             <div class="flex flex-wrap justify-center gap-3">
               <a
                 href="#products"
+                onclick="event.preventDefault();document.getElementById('products').scrollIntoView({behavior:'smooth',block:'start'})"
                 class="bg-primary text-white px-6 py-3 rounded-xl font-bold text-sm flex items-center gap-2"
               >
                 <span data-i18n="products_browse_products">浏览产品</span>
                 <span class="material-symbols-outlined text-sm">arrow_downward</span>
+              </a>
+              <a
+                href="/quote"
+                class="border-2 border-slate-200 dark:border-slate-800 px-6 py-3 rounded-xl font-bold text-sm flex items-center gap-2"
+                data-i18n="products_request_quote"
+              >
+                <span>获取报价</span>
+                <span class="material-symbols-outlined text-sm">request_quote</span>
               </a>
             </div>
           </div>
