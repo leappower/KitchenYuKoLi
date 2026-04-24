@@ -263,16 +263,14 @@
 
   function buildLangDropdown() {
     // Lang dropdown: static placeholder (dynamically generated options removed)
-
     return (
       '<div class="lang-dropdown-container relative">' +
       '<button id="lang-toggle-btn"' +
-      ' class="flex items-center gap-1.5 px-3 py-2 rounded-xl text-sm font-semibold text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"' +
+      ' class="flex items-center gap-1 px-2 py-2 rounded-xl text-sm font-semibold text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 active:bg-slate-200 dark:active:bg-slate-700 transition-colors"' +
       ' type="button" aria-label="Switch language" data-i18n-aria="lang_switcher_aria">' +
       '<span class="material-symbols-outlined text-base leading-none">language</span>' +
       '<span id="current-lang-label" data-i18n="current_lang">\u4e2d\u6587\uff08\u7b80\u4f53\uff09</span>' +
-      '<span class="material-symbols-outlined text-xs leading-none opacity-60">expand_more</span>' +
-      "</button>" +
+      '</button>' +
       '<div id="language-dropdown-anchor"></div>' +
       "</div>"
     );

@@ -652,7 +652,16 @@
     if (anchor) {
       var anchorRect = anchor.getBoundingClientRect();
       dropdown.style.top = anchorRect.bottom + 8 + "px";
-      dropdown.style.left = anchorRect.right - 256 + "px"; // 256px 是下拉框宽度
+      // 在窄屏上右对齐到 anchor，防止左侧溢出
+      var dropdownWidth = dropdown.offsetWidth || 240;
+      var rightPos = window.innerWidth - anchorRect.right;
+      if (rightPos + dropdownWidth > window.innerWidth) {
+        // anchor 太靠右，改为左对齐
+        dropdown.style.left = Math.max(8, window.innerWidth - dropdownWidth - 8) + "px";
+      } else {
+        dropdown.style.left = "";
+        dropdown.style.right = rightPos + "px";
+      }
     }
   };
 

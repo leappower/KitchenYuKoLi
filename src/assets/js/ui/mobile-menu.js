@@ -709,6 +709,9 @@
     }
 
     // Mobile search toggle — open inline search overlay
+    // NOTE: This is intentionally outside the early-return above.
+    // The hamburger button may persist across SPA navigations while
+    // the search input is freshly rendered, so we must always check.
     var searchBtn = document.getElementById("mobile-search-toggle");
     var inlineSearchBox = document.getElementById("mobile-header-search-input");
     if ((searchBtn || inlineSearchBox) && !_searchToggleBound) {
@@ -729,7 +732,14 @@
       }
       if (inlineSearchBox) {
         inlineSearchBox.addEventListener("click", onSearchClick);
-        inlineSearchBox.addEventListener("focus", onSearchClick);
+        inlineSearchBox.addEventListener("focus", function(e) {
+          // Don't prevent default on focus — let the input receive focus
+          // but still open the mobile search overlay
+          var existingOverlay = document.getElementById("mobile-search-overlay");
+          if (!existingOverlay) {
+            openMobileSearch();
+          }
+        });
       }
     } else if (!searchBtn && !inlineSearchBox) {
       // Button not in DOM yet — allow future retry

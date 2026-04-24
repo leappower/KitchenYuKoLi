@@ -92,7 +92,7 @@
     var pdpLink = '/products/' + encodeURIComponent(model) + '/';
     var badge = p.badge ? '<span class="px-2 py-0.5 bg-primary text-white text-[10px] font-bold rounded">' + esc(p.badge) + '</span>' : '';
 
-    return '<article class="product-card-tablet bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 overflow-hidden" data-category="' + esc(p._category) + '" data-model="' + model + '" data-tier="' + esc(p.tier || '') + ' data-sort-order="' + (p.sort_order || 0) + ' data-created="' + (p.created_at || '') + '">' +
+    return '<article class="product-card-tablet bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 overflow-hidden" data-category="' + esc(p._category) + '" data-model="' + model + '" data-tier="' + esc(p.tier || '') + '" data-sort-order="' + (p.sort_order || 0) + '" data-created="' + (p.created_at || '') + '">' +
       '<div class="relative aspect-[4/3] overflow-hidden bg-slate-100 dark:bg-slate-700">' +
       '<img loading="lazy" alt="' + name + '" class="w-full h-full object-cover" src="' + img + '" onerror="if(!this.dataset.errored){this.dataset.errored=\'1\';this.src=\'/assets/images/products/default.webp\' }">' +
       (badge ? '<div class="absolute top-3 left-3 flex gap-1.5">' + badge + '</div>' : '') +
@@ -116,7 +116,7 @@
     var img = esc(p._imageUrl);
     var pdpLink = '/products/' + encodeURIComponent(model) + '/';
 
-    return '<article class="product-card-mobile bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 overflow-hidden" data-category="' + esc(p._category) + '" data-model="' + model + '" data-tier="' + esc(p.tier || '') + ' data-sort-order="' + (p.sort_order || 0) + ' data-created="' + (p.created_at || '') + '">' +
+    return '<article class="product-card-mobile bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 overflow-hidden" data-category="' + esc(p._category) + '" data-model="' + model + '" data-tier="' + esc(p.tier || '') + '" data-sort-order="' + (p.sort_order || 0) + '" data-created="' + (p.created_at || '') + '">' +
       '<a href="' + pdpLink + '" class="flex gap-4 p-3">' +
       '<div class="w-24 h-24 rounded-lg bg-slate-100 dark:bg-slate-700 flex-shrink-0 overflow-hidden">' +
       '<img loading="lazy" alt="' + name + '" class="w-full h-full object-cover" src="' + img + '" onerror="if(!this.dataset.errored){this.dataset.errored=\'1\';this.src=\'/assets/images/products/default.webp\' }">' +
