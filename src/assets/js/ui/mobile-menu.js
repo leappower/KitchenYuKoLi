@@ -710,7 +710,8 @@
 
     // Mobile search toggle — open inline search overlay
     var searchBtn = document.getElementById("mobile-search-toggle");
-    if (searchBtn && !_searchToggleBound) {
+    var inlineSearchBox = document.getElementById("mobile-header-search-input");
+    if ((searchBtn || inlineSearchBox) && !_searchToggleBound) {
       _searchToggleBound = true;
       onSearchClick = function (e) {
         e.preventDefault();
@@ -723,8 +724,14 @@
         }
         openMobileSearch();
       };
-      searchBtn.addEventListener("click", onSearchClick);
-    } else if (!searchBtn) {
+      if (searchBtn) {
+        searchBtn.addEventListener("click", onSearchClick);
+      }
+      if (inlineSearchBox) {
+        inlineSearchBox.addEventListener("click", onSearchClick);
+        inlineSearchBox.addEventListener("focus", onSearchClick);
+      }
+    } else if (!searchBtn && !inlineSearchBox) {
       // Button not in DOM yet — allow future retry
       _searchToggleBound = false;
     }

@@ -241,6 +241,26 @@
     );
   }
 
+  function buildMobileSearchBox(i18nKey) {
+    // Compact inline search bar for mobile/tablet header
+    return (
+      '<div class="mobile-header-search relative flex items-center w-full max-w-xs">' +
+      '<span class="material-symbols-outlined text-slate-400 text-base absolute left-2.5 pointer-events-none">search</span>' +
+      '<input' +
+      ' class="mobile-header-search-input w-full pl-8 pr-8 py-2 text-sm rounded-full bg-slate-100 dark:bg-slate-800 border border-transparent focus:border-primary/40 focus:bg-white dark:focus:bg-slate-700 outline-none transition-all"' +
+      ' placeholder="Search equipment..."' +
+      ' data-i18n-placeholder="' + esc(i18nKey) + '"' +
+      ' type="search"' +
+      ' autocomplete="off"' +
+      ' spellcheck="false"' +
+      ' id="mobile-header-search-input"/>' +
+      '<button class="mobile-header-search-clear absolute right-2 hidden" type="button" aria-label="Clear" id="mobile-header-search-clear">' +
+      '<span class="material-symbols-outlined text-base text-slate-400">cancel</span>' +
+      '</button>' +
+      '</div>'
+    );
+  }
+
   function buildLangDropdown() {
     // Lang dropdown: static placeholder (dynamically generated options removed)
 
@@ -273,55 +293,65 @@
   function buildHeader(cfg) {
     var variant = cfg.variant;
 
-    // ── Mobile: hamburger + logo + search ──
+    // ── Mobile: hamburger + logo(left), search(center), lang(right) ──
     if (variant === "mobile") {
       return (
         '<div id="mobile-header-placeholder" style="height:65px;flex-shrink:0"></div>' +
         '<header id="mobile-header" class="fixed top-0 left-0 right-0 z-[var(--z-header)] border-b border-slate-200 dark:border-slate-800 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md transition-transform duration-300">' +
-        '<div class="px-4 py-3 flex items-center justify-between">' +
-        /* Left: Hamburger */
+        '<div class="px-3 py-3 flex items-center gap-2">' +
+        /* Left: Hamburger + Logo */
+        '<div class="flex items-center gap-1 flex-shrink-0">' +
         '<button id="mobile-menu-toggle" type="button" class="flex items-center justify-center w-10 h-10 -ml-2 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors" aria-label="Menu">' +
         '<span class="material-symbols-outlined text-2xl">menu</span>' +
         "</button>" +
-        /* Center: Logo */
         '<a class="nav-logo-link" href="' +
         (window.BASE_PATH || "") +
         '/home/">' +
         '<img loading="eager" src="' +
         (window.BASE_PATH || "") +
-        '/assets/images/logo_footer.webp" alt="Yukoli" width="36" height="36" style="width:36px;height:36px;object-fit:contain" />' +
+        '/assets/images/logo_footer.webp" alt="Yukoli" width="32" height="32" style="width:32px;height:32px;object-fit:contain" />' +
         "</a>" +
-        /* Right: Search */
-        '<button id="mobile-search-toggle" type="button" class="flex items-center justify-center w-10 h-10 -mr-2 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors" aria-label="Search">' +
-        '<span class="material-symbols-outlined text-2xl">search</span>' +
-        "</button>" +
+        "</div>" +
+        /* Center: Search box */
+        '<div class="flex-1 flex justify-center mx-1">' +
+        buildMobileSearchBox(cfg.searchI18n || "search_placeholder") +
+        "</div>" +
+        /* Right: Language switcher */
+        '<div class="flex-shrink-0">' +
+        buildLangDropdown() +
+        "</div>" +
         "</div>" +
         "</header>"
       );
     }
 
-    // ── Tablet: hamburger menu (same as mobile — compact screens can't fit 6 nav links) ──
+    // ── Tablet: hamburger + logo(left), search(center), lang(right) ──
     if (variant === "tablet") {
       return (
         '<div id="mobile-header-placeholder" style="height:65px;flex-shrink:0"></div>' +
         '<header id="mobile-header" class="fixed top-0 left-0 right-0 z-[var(--z-header)] border-b border-slate-200 dark:border-slate-800 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md transition-transform duration-300">' +
-        '<div class="px-4 py-3 flex items-center justify-between">' +
-        /* Left: Hamburger */
+        '<div class="px-3 py-3 flex items-center gap-2">' +
+        /* Left: Hamburger + Logo */
+        '<div class="flex items-center gap-1 flex-shrink-0">' +
         '<button id="mobile-menu-toggle" type="button" class="flex items-center justify-center w-10 h-10 -ml-2 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors" aria-label="Menu">' +
         '<span class="material-symbols-outlined text-2xl">menu</span>' +
         "</button>" +
-        /* Center: Logo */
         '<a class="nav-logo-link" href="' +
         (window.BASE_PATH || "") +
         '/home/">' +
         '<img loading="eager" src="' +
         (window.BASE_PATH || "") +
-        '/assets/images/logo_footer.webp" alt="Yukoli" width="36" height="36" style="width:36px;height:36px;object-fit:contain" />' +
+        '/assets/images/logo_footer.webp" alt="Yukoli" width="32" height="32" style="width:32px;height:32px;object-fit:contain" />' +
         "</a>" +
-        /* Right: Search + Lang */
-        '<button id="mobile-search-toggle" type="button" class="flex items-center justify-center w-10 h-10 -mr-2 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors" aria-label="Search">' +
-        '<span class="material-symbols-outlined text-2xl">search</span>' +
-        "</button>" +
+        "</div>" +
+        /* Center: Search box */
+        '<div class="flex-1 flex justify-center mx-1">' +
+        buildMobileSearchBox(cfg.searchI18n || "search_placeholder") +
+        "</div>" +
+        /* Right: Language switcher */
+        '<div class="flex-shrink-0">' +
+        buildLangDropdown() +
+        "</div>" +
         "</div>" +
         "</header>"
       );
