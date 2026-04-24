@@ -880,6 +880,12 @@
         support: "sup",
         about: "abt",
         contact: "cnt",
+        // Sub-pages that live inside a parent dropdown
+        "case-studies": "app",
+        roi: "sol",
+        news: "cnt",
+        quote: "cnt",
+        "thank-you": "cnt",
       };
       var prefix = prefixMap[activeId];
       if (prefix) {
