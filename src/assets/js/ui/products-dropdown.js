@@ -154,9 +154,9 @@
       "</a>" +
       '<div class="prod-dropdown-panel">' +
       '<div class="prod-dropdown-card">' +
-      viewAll +
       items +
       '<div class="prod-dropdown-separator" style="margin: 4px 0;"></div>' +
+      viewAll +
       "</div>" +
       "</div>" +
       "</div>";
