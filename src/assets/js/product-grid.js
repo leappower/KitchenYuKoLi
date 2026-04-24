@@ -159,20 +159,19 @@
       return;
     }
     // Detect device and render
-    if (document.getElementById('product-grid')) {
-      if (document.getElementById('product-list')) {
-        console.log('[ProductGrid] Rendering mobile:', getProducts().length, 'products');
-        renderGrid('product-list', renderMobileCard, 100);
+    if (document.getElementById('product-list')) {
+      // Mobile layout uses #product-list
+      console.log('[ProductGrid] Rendering mobile:', getProducts().length, 'products');
+      renderGrid('product-list', renderMobileCard, 100);
+    } else if (document.getElementById('product-grid')) {
+      // PC or Tablet — detect by grid cols
+      var grid = document.getElementById('product-grid');
+      if (grid && grid.classList.contains('md:grid-cols-2')) {
+        console.log('[ProductGrid] Rendering PC:', getProducts().length, 'products');
+        renderGrid('product-grid', renderPCCard, 100);
       } else {
-        // PC or Tablet — detect by grid cols
-        var grid = document.getElementById('product-grid');
-        if (grid && grid.classList.contains('md:grid-cols-2')) {
-          console.log('[ProductGrid] Rendering PC:', getProducts().length, 'products');
-          renderGrid('product-grid', renderPCCard, 100);
-        } else {
-          console.log('[ProductGrid] Rendering Tablet:', getProducts().length, 'products');
-          renderGrid('product-grid', renderTabletCard, 100);
-        }
+        console.log('[ProductGrid] Rendering Tablet:', getProducts().length, 'products');
+        renderGrid('product-grid', renderTabletCard, 100);
       }
     } else {
       console.log('[ProductGrid] No #product-grid or #product-list element found');
