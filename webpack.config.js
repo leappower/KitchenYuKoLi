@@ -4,6 +4,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const webpack = require('webpack');
+const CompressionPlugin = require('compression-webpack-plugin');
 
 /**
  * Scan src/pages/ and return HtmlWebpackPlugin instances for every .html file.
@@ -228,6 +229,15 @@ module.exports = (env = {}, argv = {}) => {
                 noErrorOnMissing: true,
               },
             ],
+          }),
+          // Pre-compress static assets with gzip for faster delivery
+          new CompressionPlugin({
+            filename: '[path][base].gz',
+            algorithm: 'gzip',
+            test: /\.(js|css|html|svg|json|ico|woff2?)$/,
+            threshold: 1024,
+            minRatio: 0.8,
+            deleteOriginalAssets: false,
           }),
         ]
         : []),
