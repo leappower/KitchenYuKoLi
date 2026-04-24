@@ -49,11 +49,11 @@
       ],
       support: [
         { key: 'nav_support_services', icon: 'grid_view', href: '/support/' },
-        { key: 'nav_support_installation', icon: 'construction', href: '/support/#installation' },
-        { key: 'nav_support_warranty', icon: 'verified', href: '/support/#warranty' },
-        { key: 'nav_support_spare_parts', icon: 'build_circle', href: '/support/#spare-parts' },
-        { key: 'nav_support_training', icon: 'school', href: '/support/#training' },
-        { key: 'nav_support_faq', icon: 'contact_support', href: '/support/#faq' }
+        { key: 'nav_support_installation', icon: 'construction', href: '/support/installation/' },
+        { key: 'nav_support_warranty', icon: 'verified', href: '/support/warranty/' },
+        { key: 'nav_support_spare_parts', icon: 'build_circle', href: '/support/spare-parts/' },
+        { key: 'nav_support_training', icon: 'school', href: '/support/training/' },
+        { key: 'nav_support_faq', icon: 'contact_support', href: '/support/faq/' }
       ],
       contact: [
         { key: 'nav_contact_us', icon: 'grid_view', href: '/contact/' },
