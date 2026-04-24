@@ -25,7 +25,7 @@ window.LanguageDropdownTemplate = {
       ? '<span class="material-symbols-outlined text-sm" style="color:#ec5b13">check</span>'
       : '<span style="width:20px"></span>';
     return (
-      '<button class="lang-option w-full flex items-center gap-2 px-3 py-2.5 text-sm font-medium text-slate-700 dark:text-slate-300 rounded-xl hover:bg-primary/[.06] active:bg-primary/[.12] active:scale-[.98] transition-all ' +
+      '<button class="lang-option w-full flex items-center gap-2 px-3 py-2.5 text-sm font-medium text-slate-700 dark:text-slate-300 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors ' +
       isActive +
       '" data-code="' +
       code +
@@ -97,7 +97,7 @@ window.LanguageDropdownTemplate = {
     groupHtml += "</div>";
 
     return (
-      '<div id="language-dropdown" class="fixed bg-white/[.98] dark:bg-slate-800/98 border border-slate-200/50 dark:border-slate-700/50 rounded-[13px] p-1 z-[var(--z-language-dropdown)] overflow-hidden" style="display:none;width:260px;box-shadow:0 0 0 .5px rgba(0,0,0,.04),0 8px 40px rgba(0,0,0,.12),0 2px 12px rgba(0,0,0,.08);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);">' +
+      '<div id="language-dropdown" class="fixed bg-white dark:bg-slate-800 border border-slate-200/50 dark:border-slate-700/50 rounded-[13px] p-1 z-[var(--z-language-dropdown)] overflow-hidden" style="display:none;width:260px;box-shadow:0 0 0 .5px rgba(0,0,0,.04),0 8px 40px rgba(0,0,0,.12),0 2px 12px rgba(0,0,0,.08)">' +
       '<div class="px-2 pt-2 pb-1 border-b border-slate-100 dark:border-slate-700/50">' +
       '<div class="relative">' +
       '<span class="material-symbols-outlined absolute left-2.5 top-1/2 -translate-y-1/2 text-slate-400 text-sm">search</span>' +
