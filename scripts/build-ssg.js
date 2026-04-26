@@ -386,7 +386,7 @@ function generate404() {
     '  <!-- Favicon -->',
     '  <link rel="icon" href="' + bp + '/assets/images/logo_header.webp" type="image/webp">',
     '</head>',
-    '<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 min-h-screen flex flex-col overflow-x-hidden">',
+    '<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 min-h-screen flex flex-col overflow-x-clip">',
     '',
     '  <!-- Navigator placeholder (rendered by navigator.js) -->',
     '  <div id="navigator" data-variant="auto"></div>',
