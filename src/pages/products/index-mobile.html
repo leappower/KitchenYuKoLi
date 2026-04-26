@@ -192,11 +192,21 @@
             <div class="flex items-center gap-2 overflow-x-auto scrollbar-hide category-tab-container">
               </div>
             <!-- Tier filter chips -->
-            <div class="flex items-center gap-2 overflow-x-auto scrollbar-hide">
-              <button class="filter-chip active px-2.5 py-1 rounded-full border border-slate-200 dark:border-slate-700 text-[10px] font-medium" data-filter="all" data-i18n="all">全部</button>
-              <button class="filter-chip px-2.5 py-1 rounded-full border border-slate-200 dark:border-slate-700 text-[10px] font-medium" data-filter="industrial" data-i18n="products_filter_industrial">工业级</button>
-              <button class="filter-chip px-2.5 py-1 rounded-full border border-slate-200 dark:border-slate-700 text-[10px] font-medium" data-filter="commercial" data-i18n="products_filter_commercial">商用级</button>
-              <button class="filter-chip px-2.5 py-1 rounded-full border border-slate-200 dark:border-slate-700 text-[10px] font-medium" data-filter="compact" data-i18n="products_filter_compact">紧凑型</button>
+            <div class="flex items-center justify-between gap-3">
+              <div class="flex items-center gap-2 overflow-x-auto scrollbar-hide">
+                <button class="filter-chip active px-2.5 py-1 rounded-full border border-slate-200 dark:border-slate-700 text-[10px] font-medium" data-filter="all" data-i18n="all">全部</button>
+                <button class="filter-chip px-2.5 py-1 rounded-full border border-slate-200 dark:border-slate-700 text-[10px] font-medium" data-filter="industrial" data-i18n="products_filter_industrial">工业级</button>
+                <button class="filter-chip px-2.5 py-1 rounded-full border border-slate-200 dark:border-slate-700 text-[10px] font-medium" data-filter="commercial" data-i18n="products_filter_commercial">商用级</button>
+                <button class="filter-chip px-2.5 py-1 rounded-full border border-slate-200 dark:border-slate-700 text-[10px] font-medium" data-filter="compact" data-i18n="products_filter_compact">紧凑型</button>
+              </div>
+              <div class="flex items-center gap-1 text-xs text-slate-500 flex-shrink-0">
+                <span class="material-symbols-outlined text-sm">sort</span>
+                <select class="bg-transparent border-none font-medium text-slate-900 dark:text-white focus:outline-none cursor-pointer text-xs">
+                  <option value="featured" data-i18n="products_sort_featured">推荐</option>
+                  <option value="newest" data-i18n="products_sort_newest">最新</option>
+                  <option value="capacity" data-i18n="products_sort_capacity">容量</option>
+                </select>
+              </div>
             </div>
           </div>
         </section>
