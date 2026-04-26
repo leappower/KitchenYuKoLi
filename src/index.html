@@ -3,6 +3,19 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script>
+  // Force clear stale Service Worker and caches on every load
+  if('serviceWorker' in navigator){
+    navigator.serviceWorker.getRegistrations().then(function(regs){
+      regs.forEach(function(r){r.unregister();console.log('[SW] unregistered:',r.scope)});
+    });
+  }
+  if('caches' in window){
+    caches.keys().then(function(names){
+      names.forEach(function(n){caches.delete(n);console.log('[SW] deleted cache:',n)});
+    });
+  }
+  </script>
   <style>
     /* Navigator skeleton: exact match of real PC header (109px = py-4 32px + content 76px + border 1px) */
     navigator[data-component="navigator"] {
