@@ -693,3 +693,8 @@ html.dark .skeleton {
   color: white;
   border-radius: 9999px;
 }
+
+/* Mobile smart header: hide on scroll down */
+#mobile-header.header-hidden {
+  transform: translateY(-100%);
+}
