@@ -185,35 +185,39 @@
           </div>
         </section>
 
-        <!-- Filter Bar -->
-        <section class="px-4 py-3 flex items-center justify-between border-b border-slate-100 dark:border-slate-800">
-          <span class="text-xs text-slate-500">
-            <span id="product-count">6</span>
-            <span data-i18n="products_products_count">个产品</span>
-          </span>
-          <button
-            id="filter-btn"
-            class="flex items-center gap-1 px-3 py-1.5 rounded-lg border border-slate-200 dark:border-slate-700 text-xs font-medium"
-          >
-            <span class="material-symbols-outlined text-sm">tune</span>
-            <span data-i18n="products_filter">筛选</span>
-          </button>
+        <!-- Category Filter & Sort (PC-style chips, compact for mobile) -->
+        <section class="w-full px-4 py-4">
+          <div class="flex flex-col gap-3">
+            <!-- Category tabs (horizontal scroll) -->
+            <div class="flex items-center gap-2 overflow-x-auto scrollbar-hide category-tab-container">
+              <button class="category-tab active px-3 py-1.5 text-xs font-bold whitespace-nowrap rounded-full border border-slate-200 dark:border-slate-700" data-category="all" data-i18n="products_filter_all">全部产品</button>
+            </div>
+            <!-- Tier filter chips -->
+            <div class="flex items-center gap-2 overflow-x-auto scrollbar-hide">
+              <button class="filter-chip active px-2.5 py-1 rounded-full border border-slate-200 dark:border-slate-700 text-[10px] font-medium" data-filter="all" data-i18n="all">全部</button>
+              <button class="filter-chip px-2.5 py-1 rounded-full border border-slate-200 dark:border-slate-700 text-[10px] font-medium" data-filter="industrial" data-i18n="products_filter_industrial">工业级</button>
+              <button class="filter-chip px-2.5 py-1 rounded-full border border-slate-200 dark:border-slate-700 text-[10px] font-medium" data-filter="commercial" data-i18n="products_filter_commercial">商用级</button>
+              <button class="filter-chip px-2.5 py-1 rounded-full border border-slate-200 dark:border-slate-700 text-[10px] font-medium" data-filter="compact" data-i18n="products_filter_compact">紧凑型</button>
+            </div>
+          </div>
         </section>
 
-        <!-- Product List -->
-        <section class="px-4 py-4 space-y-4" id="product-list">
-          <!-- Dynamically rendered by product-grid.js -->
+        <!-- Product Grid (2-col, uses tablet card style) -->
+        <section id="products" class="px-4 pb-4">
+          <div class="grid grid-cols-2 gap-3" id="product-grid">
+            <!-- Dynamically rendered by product-grid.js -->
+          </div>
+          <!-- Load More -->
+          <div class="flex justify-center mt-6">
+            <button
+              class="flex items-center gap-2 px-6 py-2.5 border-2 border-slate-200 dark:border-slate-700 rounded-xl font-bold text-xs text-slate-600 dark:text-slate-400 hover:border-primary hover:text-primary transition-all"
+              data-i18n="products_load_more"
+            >
+              加载更多产品
+              <span class="material-symbols-outlined text-sm">expand_more</span>
+            </button>
+          </div>
         </section>
-
-        <!-- Load More -->
-        <div class="px-4 py-4">
-          <button
-            class="w-full py-3 border border-slate-200 dark:border-slate-700 rounded-xl text-sm font-medium text-slate-600 dark:text-slate-400"
-            data-i18n="products_load_more"
-          >
-            加载更多产品
-          </button>
-        </div>
 
         <!-- CTA Section -->
         <section class="px-4 py-8">

@@ -207,35 +207,36 @@
           </div>
         </section>
 
-        <!-- Filter & Sort Bar -->
-        <section class="px-6 py-4 flex items-center justify-between border-b border-slate-100 dark:border-slate-800">
-          <div class="flex items-center gap-2">
-            <span class="text-sm text-slate-500" data-i18n="products_filter_by">筛选:</span>
-            <select
-              class="bg-transparent border border-slate-200 dark:border-slate-700 rounded-lg px-3 py-1.5 text-sm focus:outline-none focus:border-primary"
-            >
-              <option value="all" data-i18n="all">全部</option>
-              <option value="industrial" data-i18n="products_filter_industrial">工业级</option>
-              <option value="commercial" data-i18n="products_filter_commercial">商用级</option>
-              <option value="compact" data-i18n="products_filter_compact">紧凑型</option>
-            </select>
-          </div>
-          <div class="flex items-center gap-2 text-sm text-slate-500">
-            <span data-i18n="products_sort_by">排序:</span>
-            <select
-              class="bg-transparent border-none font-medium text-slate-900 dark:text-white focus:outline-none cursor-pointer"
-            >
-              <option value="featured" data-i18n="products_sort_featured">推荐</option>
-              <option value="newest" data-i18n="products_sort_newest">最新</option>
-              <option value="price_asc" data-i18n="products_sort_price_asc">价格: 低到高</option>
-              <option value="price_desc" data-i18n="products_sort_price_desc">价格: 高到低</option>
-            </select>
+        <!-- Category Filter & Sort (PC-style chips) -->
+        <section class="w-full px-6 py-5">
+          <div class="flex flex-col gap-4">
+            <!-- Category tabs -->
+            <div class="flex items-center gap-2 overflow-x-auto scrollbar-hide category-tab-container">
+              <button class="category-tab active px-4 py-2 text-sm font-bold whitespace-nowrap rounded-full border border-slate-200 dark:border-slate-700" data-category="all" data-i18n="products_filter_all">全部产品</button>
+            </div>
+            <!-- Tier filter + Sort -->
+            <div class="flex items-center justify-between gap-3">
+              <div class="flex items-center gap-2 overflow-x-auto scrollbar-hide">
+                <button class="filter-chip active px-3 py-1.5 rounded-full border border-slate-200 dark:border-slate-700 text-xs font-medium" data-filter="all" data-i18n="all">全部</button>
+                <button class="filter-chip px-3 py-1.5 rounded-full border border-slate-200 dark:border-slate-700 text-xs font-medium" data-filter="industrial" data-i18n="products_filter_industrial">工业级</button>
+                <button class="filter-chip px-3 py-1.5 rounded-full border border-slate-200 dark:border-slate-700 text-xs font-medium" data-filter="commercial" data-i18n="products_filter_commercial">商用级</button>
+                <button class="filter-chip px-3 py-1.5 rounded-full border border-slate-200 dark:border-slate-700 text-xs font-medium" data-filter="compact" data-i18n="products_filter_compact">紧凑型</button>
+              </div>
+              <div class="flex items-center gap-1.5 text-sm text-slate-500 flex-shrink-0">
+                <span class="material-symbols-outlined text-base">sort</span>
+                <select class="bg-transparent border-none font-medium text-slate-900 dark:text-white focus:outline-none cursor-pointer">
+                  <option value="featured" data-i18n="products_sort_featured">推荐</option>
+                  <option value="newest" data-i18n="products_sort_newest">最新</option>
+                  <option value="capacity" data-i18n="products_sort_capacity">容量</option>
+                </select>
+              </div>
+            </div>
           </div>
         </section>
 
         <!-- Product Grid -->
-        <section id="products" class="px-6 py-8">
-          <div class="grid grid-cols-2 lg:grid-cols-3 gap-6" id="product-grid">
+        <section id="products" class="px-6 pb-8">
+          <div class="grid grid-cols-3 gap-4" id="product-grid">
             <!-- Dynamically rendered by product-grid.js -->
           </div>
           <!-- Load More -->
