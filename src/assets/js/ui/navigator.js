@@ -247,7 +247,7 @@
       }), document.addEventListener("keydown", function(e) {
         "Escape" === e.key && document.activeElement === t && (t.value = "", r(), t.blur(), o())
       })))
-    })()();
+    })();
     for (var h = [".prod-dropdown-wrap", ".sol-dropdown-wrap", ".app-dropdown-wrap", ".sup-dropdown-wrap", ".abt-dropdown-wrap", ".cnt-dropdown-wrap"], w = 0; w < h.length; w++)(function(e) {
       for (var t = document.querySelectorAll(e), a = 0; a < t.length; a++)(function(e) {
         e._dropdownMutexBound || (e._dropdownMutexBound = !0, e.addEventListener("mouseenter", function() {
