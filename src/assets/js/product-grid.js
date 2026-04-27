@@ -165,10 +165,10 @@
   // ─── Category tabs ─────────────────────────────────────────────
 
   function getMaxVisibleTabs() {
+    // Placeholder — actual dynamic calc is in initCategoryTabs scope
     var w = window.innerWidth;
-    if (w >= 1280) return Infinity;  // PC: show all
-    if (w >= 768) return 5;          // Tablet: 5 tabs
-    return 3;                        // Mobile: 3 tabs
+    if (w >= 1280) return Infinity;
+    return 3;
   }
 
   function isMobileOrTablet() {
@@ -215,22 +215,80 @@
     // "More" toggle button
     var moreBtn = document.createElement('button');
     moreBtn.className = 'category-tab-more px-3 py-2 text-xs font-bold whitespace-nowrap rounded-full bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400 border border-slate-200 dark:border-slate-700 cursor-pointer';
+
+    // Dynamic visible tab count: measures actual tab widths against container
+    var dynamicMax = Infinity;
+    function calcDynamicMax() {
+      if (window.innerWidth >= 1280) { dynamicMax = Infinity; return; }
+      var totalAvailable = container.clientWidth || container.offsetWidth;
+      if (totalAvailable <= 0) { dynamicMax = 3; return; }
+      // Create a temp more-btn to measure its real width
+      var tmpMore = moreBtn.cloneNode(true);
+      tmpMore.style.cssText = 'position:absolute;visibility:hidden;pointer-events:none';
+      tmpMore.textContent = '+9 更多 \u25BC';  // worst-case width estimate
+      container.appendChild(tmpMore);
+      var moreBtnWidth = tmpMore.offsetWidth + 8;  // +8 for gap
+      container.removeChild(tmpMore);
+
+      // Create a hidden wrapper to measure all tab widths
+      var measureWrap = document.createElement('div');
+      measureWrap.style.cssText = 'display:inline-flex;position:absolute;visibility:hidden;pointer-events:none';
+      container.appendChild(measureWrap);
+      var used = 0;
+      var fit = 0;
+      for (var i = 0; i < allTabs.length; i++) {
+        var clone = allTabs[i].cloneNode(true);
+        measureWrap.appendChild(clone);
+        var w = clone.offsetWidth + 8;  // 8px gap between tabs
+        if (used + w > totalAvailable - moreBtnWidth) {
+          clone.remove();
+          break;
+        }
+        used += w;
+        fit++;
+      }
+      container.removeChild(measureWrap);
+      dynamicMax = Math.max(fit, 2);  // at least 2 visible
+    }
+
     var isExpanded = false;
+
+    function getVisibleCount() {
+      if (window.innerWidth >= 1280) return Infinity;
+      return dynamicMax;
+    }
 
     function renderTabs() {
       container.innerHTML = '';
-      var showCount = isExpanded ? allTabs.length : Math.min(getMaxVisibleTabs(), allTabs.length);
+      var maxVis = getVisibleCount();
+      var showCount = isExpanded ? allTabs.length : Math.min(maxVis, allTabs.length);
+      // Mobile: allow wrap when expanded, prevent when collapsed
+      if (isMobile) {
+        container.style.flexWrap = isExpanded ? 'wrap' : 'nowrap';
+        container.style.overflow = isExpanded ? 'visible' : 'hidden';
+      }
       for (var i = 0; i < showCount; i++) {
         container.appendChild(allTabs[i]);
       }
-      if (allTabs.length > getMaxVisibleTabs()) {
-        var remaining = allTabs.length - getMaxVisibleTabs();
+      if (allTabs.length > maxVis) {
+        var remaining = allTabs.length - maxVis;
         moreBtn.textContent = isExpanded ? ('收起 \u25B2') : ('\u002B' + remaining + ' 更多 \u25BC');
         container.appendChild(moreBtn);
       }
     }
 
+    calcDynamicMax();
     renderTabs();
+
+    // Recalculate on resize
+    var resizeTimer;
+    window.addEventListener('resize', function() {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(function() {
+        calcDynamicMax();
+        renderTabs();
+      }, 150);
+    });
 
     // More button toggle
     moreBtn.addEventListener('click', function(ev) {

@@ -209,23 +209,12 @@ window.addEventListener('DOMContentLoaded',function(){
       <!-- Category tabs -->
       <div class="flex items-center gap-2 flex-wrap gap-2 category-tab-container">
       </div>
-      <!-- Tier filter + Sort -->
+      <!-- Tier filter -->
       <div class="flex items-center gap-2 flex-shrink-0">
         <button class="filter-chip active px-3 py-1.5 rounded-full border border-slate-200 dark:border-slate-700 text-xs font-medium" data-filter="all" data-i18n="all">全部</button>
         <button class="filter-chip px-3 py-1.5 rounded-full border border-slate-200 dark:border-slate-700 text-xs font-medium" data-filter="industrial" data-i18n="products_filter_industrial">工业级</button>
         <button class="filter-chip px-3 py-1.5 rounded-full border border-slate-200 dark:border-slate-700 text-xs font-medium" data-filter="commercial" data-i18n="products_filter_commercial">商用级</button>
         <button class="filter-chip px-3 py-1.5 rounded-full border border-slate-200 dark:border-slate-700 text-xs font-medium" data-filter="compact" data-i18n="products_filter_compact">紧凑型</button>
-        <span class="w-px h-5 bg-slate-200 dark:bg-slate-700 mx-1"></span>
-        <div class="sort-trigger flex items-center gap-1.5 text-sm text-slate-500" data-sort-select="sort-menu-pc">
-          <span class="material-symbols-outlined text-base">sort</span>
-          <span class="sort-label font-medium text-slate-900 dark:text-white">推荐</span>
-          <span class="sort-arrow material-symbols-outlined text-sm">expand_more</span>
-          <select class="hidden" data-sort>
-            <option value="featured" data-i18n="products_sort_featured">推荐</option>
-            <option value="newest" data-i18n="products_sort_newest">最新</option>
-            <option value="capacity" data-i18n="products_sort_capacity">容量</option>
-          </select>
-        </div>
       </div>
     </div>
   </section>
