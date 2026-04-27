@@ -54,7 +54,7 @@ function pagesRoutes(db) {
       var contentJson = JSON.stringify(content || {});
       var existing = db.prepare('SELECT id FROM page_sections WHERE page_id = ? AND section_key = ?').get(pageId, sectionKey);
       if (existing) {
-        db.prepare('UPDATE page_sections SET section_type = ?, content_json = ?, sort_order = ?, is_active = ?, updated_at = datetime('now') WHERE id = ?')
+        db.prepare("UPDATE page_sections SET section_type = ?, content_json = ?, sort_order = ?, is_active = ?, updated_at = datetime('now') WHERE id = ?")
           .run(section_type || 'text', contentJson, parseInt(sort_order) || 0, is_active !== undefined ? parseInt(is_active) : 1, existing.id);
       } else {
         db.prepare('INSERT INTO page_sections (page_id, section_key, section_type, content_json, sort_order, is_active) VALUES (?, ?, ?, ?, ?, 1)')

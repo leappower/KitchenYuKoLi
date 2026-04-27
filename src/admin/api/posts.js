@@ -43,7 +43,7 @@ function postsRoutes(db) {
       var { title, slug, excerpt, content_markdown, cover_image, category, sort_order } = req.body;
       if (!title) return res.status(400).json({ error: 'title required' });
       slug = slug || title.toLowerCase().replace(/[^a-z0-9\u4e00-\u9fff]+/g, '-').replace(/^-+|-+$/g, '').slice(0, 100);
-      var result = db.prepare('INSERT INTO posts (title, slug, excerpt, content_markdown, cover_image, category, sort_order, published_at) VALUES (?, ?, ?, ?, ?, ?, ?, datetime("now"))').run(title, slug, excerpt || '', content_markdown || '', cover_image || '', category || 'news', parseInt(sort_order) || 0);
+      var result = db.prepare("INSERT INTO posts (title, slug, excerpt, content_markdown, cover_image, category, sort_order, published_at) VALUES (?, ?, ?, ?, ?, ?, ?, datetime('now'))").run(title, slug, excerpt || '', content_markdown || '', cover_image || '', category || 'news', parseInt(sort_order) || 0);
       var post = db.prepare('SELECT * FROM posts WHERE id = ?').get(result.lastInsertRowid);
       logAudit(db, req.user.userId, req.user.username, 'create', 'post', post.id, null, { title: title, slug: slug });
       res.json({ post: post });
@@ -57,7 +57,7 @@ function postsRoutes(db) {
       var existing = db.prepare('SELECT * FROM posts WHERE id = ?').get(req.params.id);
       if (!existing) return res.status(404).json({ error: 'Post not found' });
       var newSlug = slug || existing.slug;
-      if (title) db.prepare('UPDATE posts SET title = ?, slug = ?, excerpt = ?, content_markdown = ?, cover_image = ?, category = ?, sort_order = ?, is_active = ?, updated_at = datetime("now") WHERE id = ?').run(title, newSlug, excerpt !== undefined ? excerpt : existing.excerpt, content_markdown !== undefined ? content_markdown : existing.content_markdown, cover_image !== undefined ? cover_image : existing.cover_image, category !== undefined ? category : existing.category, sort_order !== undefined ? parseInt(sort_order) : existing.sort_order, is_active !== undefined ? parseInt(is_active) : existing.is_active, req.params.id);
+      if (title) db.prepare("UPDATE posts SET title = ?, slug = ?, excerpt = ?, content_markdown = ?, cover_image = ?, category = ?, sort_order = ?, is_active = ?, updated_at = datetime('now') WHERE id = ?").run(title, newSlug, excerpt !== undefined ? excerpt : existing.excerpt, content_markdown !== undefined ? content_markdown : existing.content_markdown, cover_image !== undefined ? cover_image : existing.cover_image, category !== undefined ? category : existing.category, sort_order !== undefined ? parseInt(sort_order) : existing.sort_order, is_active !== undefined ? parseInt(is_active) : existing.is_active, req.params.id);
       var post = db.prepare('SELECT * FROM posts WHERE id = ?').get(req.params.id);
       logAudit(db, req.user.userId, req.user.username, 'update', 'post', req.params.id, null, { title: title });
       res.json({ post: post });
@@ -78,7 +78,7 @@ function postsRoutes(db) {
   // POST /posts/:id/publish — set published_at
   router.post('/posts/:id/publish', requireAdmin, (req, res) => {
     try {
-      db.prepare('UPDATE posts SET published_at = datetime("now"), is_active = 1, updated_at = datetime("now") WHERE id = ?').run(req.params.id);
+      db.prepare("UPDATE posts SET published_at = datetime('now'), is_active = 1, updated_at = datetime('now') WHERE id = ?").run(req.params.id);
       var post = db.prepare('SELECT * FROM posts WHERE id = ?').get(req.params.id);
       logAudit(db, req.user.userId, req.user.username, 'publish', 'post', req.params.id, null, { slug: post.slug });
       res.json({ post: post });
