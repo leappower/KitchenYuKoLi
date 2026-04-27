@@ -325,7 +325,6 @@
       });
     });
 
-    // Sort select change handler (removed — sort feature disabled)
   }
 
   // ─── Tier filter ────────────────────────────────────────────────
