@@ -2119,5 +2119,11 @@
   "home_hero_btn_hardware_text": "Get Quote",
   "news_badge": "News",
   "support_faq_ticket_desc": "Can't find what you need?",
-  "support_faq_ticket_desc_label": "Submit a ticket and we'll respond within 24 hours"
+  "support_faq_ticket_desc_label": "Submit a ticket and we'll respond within 24 hours",
+  "support_install_hero_title_1": "Custom-Built, Fully Tested Before Shipping",
+  "support_install_hero_title_2": "Power On, Start Cooking",
+  "support_install_hero_float_label": "Ready to Use",
+  "support_install_hero_float_value": "Same Day",
+  "support_install_faq_a3": "You can choose our certified engineers for on-site installation, or install it yourself — every unit is fully tested and calibrated before shipping, so it's ready to use right out of the box. If you have an electrician, self-installation is straightforward.",
+  "support_install_faq_a4": "With engineer installation, they will power on and verify everything works, then provide a report, manual, and train your staff on-site. With self-installation, simply confirm the unit arrived in good condition and power it on. Either way, every unit is fully tested before leaving the factory."
 }

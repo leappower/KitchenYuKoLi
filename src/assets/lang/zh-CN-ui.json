@@ -2119,5 +2119,11 @@
   "home_hero_btn_hardware_text": "获取报价",
   "news_badge": "新闻资讯",
   "support_faq_ticket_desc": "无法通过以上方式解决？",
-  "support_faq_ticket_desc_label": "提交工单，我们将在 24 小时内回复"
+  "support_faq_ticket_desc_label": "提交工单，我们将在 24 小时内回复",
+  "support_install_hero_title_1": "按需定制，发货前调试完毕",
+  "support_install_hero_title_2": "到货通电，即刻开业",
+  "support_install_hero_float_label": "通电即用",
+  "support_install_hero_float_value": "当天",
+  "support_install_faq_a3": "您可以选择我们认证的工程师上门安装，也可以自行安装——每台设备出厂前都经过完整的调试和校准，开箱即可使用。如果有电工，自行安装也很简单。",
+  "support_install_faq_a4": "如果由工程师安装，他们会通电验证设备运行正常，然后提供验收报告、使用手册，并现场培训你的厨师。自行安装的话，确认设备到货完好后通电即可。无论哪种方式，每台设备出厂前都经过完整测试。"
 }
