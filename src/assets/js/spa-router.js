@@ -404,17 +404,22 @@
 
     // 更新 Footer active 状态
     updateFooterActiveNav: function (html) {
-      // 直接从 HTML 提取 data-active 属性（使用更健壮的正则，支持多行）
-      var footerMatch = html.match(/<footer[\s\S]*?data-component="footer"[\s\S]*?>/i);
-      if (!footerMatch) return;
-
-      var activeValue = footerMatch[0].match(/data-active="([^"]*)"/i);
-      if (!activeValue) return;
-
-      var activeNav = activeValue[1];
-      if (!activeNav) return;
-
-      // 使用 Footer.updateActive() 更新
+      var footerMatch = html && html.match(/<footer[\s\S]*?data-component="footer"[\s\S]*?>/i);
+      var activeNav = null;
+      if (footerMatch) {
+        var activeValue = footerMatch[0].match(/data-active="([^"]*)"/i);
+        if (activeValue) activeNav = activeValue[1];
+      }
+      // Fallback: derive from current route path
+      if (!activeNav) {
+        var path = window.location.pathname.replace(/\/$/, "");
+        var map = { "/home": "home", "/products": "products", "/solutions": "solutions", "/support": "support", "/about": "about", "/contact": "contact" };
+        var best = "";
+        for (var key in map) {
+          if (path.indexOf(key) === 0 && key.length > best.length) best = key;
+        }
+        activeNav = map[best] || "home";
+      }
       if (window.Footer && typeof window.Footer.updateActive === "function") {
         window.Footer.updateActive(activeNav);
       }
