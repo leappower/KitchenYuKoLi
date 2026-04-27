@@ -277,10 +277,29 @@
       }
     }
 
+    // First render with fallback, then recalculate after fonts + layout settle
     calcDynamicMax();
     renderTabs();
+    scheduleRecalc();
 
-    // Recalculate on resize
+    function scheduleRecalc() {
+      // Wait for fonts to load, then recalculate with accurate widths
+      if (document.fonts && document.fonts.ready) {
+        document.fonts.ready.then(function() {
+          requestAnimationFrame(function() {
+            calcDynamicMax();
+            renderTabs();
+          });
+        });
+      }
+      // Also recalculate after a short delay as a safety net (images, etc.)
+      setTimeout(function() {
+        calcDynamicMax();
+        renderTabs();
+      }, 300);
+    }
+
+    // Recalculate on resize (debounced)
     var resizeTimer;
     window.addEventListener('resize', function() {
       clearTimeout(resizeTimer);
