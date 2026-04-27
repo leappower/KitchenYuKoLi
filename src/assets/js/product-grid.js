@@ -295,8 +295,6 @@
       ev.stopPropagation();
       isExpanded = !isExpanded;
       renderTabs();
-      // Re-init sort dropdown after DOM change
-      if (window.SortDropdown) window.SortDropdown.init();
     });
 
     // Tab click handler
@@ -327,40 +325,20 @@
       });
     });
 
-    // Sort select change handler
-    var sortSel = document.querySelector('#products select[data-sort]');
-    if (sortSel) {
-      sortSel.addEventListener('change', function() { applyTierFilter(); });
-    }
-
-    // Init sort dropdown
-    if (window.SortDropdown) window.SortDropdown.init();
+    // Sort select change handler (removed — sort feature disabled)
   }
 
-  // ─── Tier filter + sort ────────────────────────────────────────
+  // ─── Tier filter ────────────────────────────────────────────────
 
   function applyTierFilter() {
     var activeChip = document.querySelector('.filter-chip.active');
     var tierFilter = (activeChip ? activeChip.dataset.filter : 'all') || 'all';
-    var sortSel = document.querySelector('#products select[data-sort]');
-    var sortVal = sortSel ? sortSel.value : 'featured';
-    var container = document.getElementById('product-grid') || document.getElementById('product-list');
-    if (!container) return;
-
     var cards = Array.from(container.children);
     // Filter by tier
     cards.forEach(function(card) {
       var tier = card.dataset.tier || '';
       card.style.display = (tierFilter === 'all' || tier === tierFilter) ? '' : 'none';
     });
-    // Sort visible cards
-    var visible = cards.filter(function(c) { return c.style.display !== 'none'; });
-    visible.sort(function(a, b) {
-      if (sortVal === 'newest') return (b.dataset.created || '').localeCompare(a.dataset.created || '');
-      if (sortVal === 'capacity') return (b.dataset.sortOrder || 0) - (a.dataset.sortOrder || 0);
-      return 0;
-    });
-    visible.forEach(function(c) { container.appendChild(c); });
   }
 
   // ─── Init ──────────────────────────────────────────────────────
