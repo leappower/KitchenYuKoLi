@@ -164,7 +164,12 @@
 
   // ─── Category tabs ─────────────────────────────────────────────
 
-  var MAX_VISIBLE_TABS = 3;
+  function getMaxVisibleTabs() {
+    var w = window.innerWidth;
+    if (w >= 1280) return Infinity;  // PC: show all
+    if (w >= 768) return 5;          // Tablet: 5 tabs
+    return 3;                        // Mobile: 3 tabs
+  }
 
   function isMobileOrTablet() {
     return window.innerWidth < 1280;
@@ -210,12 +215,12 @@
 
     function renderTabs() {
       container.innerHTML = '';
-      var showCount = isExpanded ? allTabs.length : Math.min(MAX_VISIBLE_TABS, allTabs.length);
+      var showCount = isExpanded ? allTabs.length : Math.min(getMaxVisibleTabs(), allTabs.length);
       for (var i = 0; i < showCount; i++) {
         container.appendChild(allTabs[i]);
       }
-      if (allTabs.length > MAX_VISIBLE_TABS) {
-        var remaining = allTabs.length - MAX_VISIBLE_TABS;
+      if (allTabs.length > getMaxVisibleTabs()) {
+        var remaining = allTabs.length - getMaxVisibleTabs();
         moreBtn.textContent = isExpanded ? ('收起 \u25B2') : ('\u002B' + remaining + ' 更多 \u25BC');
         container.appendChild(moreBtn);
       }
