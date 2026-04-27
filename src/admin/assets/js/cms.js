@@ -11,9 +11,8 @@
     { key: 'products', label: '产品管理', icon: '🔧' },
     { key: 'media', label: '媒体库', icon: '🖼️' },
     { key: 'nav', label: '导航管理', icon: '📝' },
-    { key: 'i18n', label: '多语言', icon: '🌐' },
+    { key: 'i18n', label: '多语言与页面', icon: '🌐' },
     { key: 'posts', label: '新闻案例', icon: '📰' },
-    { key: 'pages', label: '页面管理', icon: '📄' },
   ];
 
   var currentPage = 'dashboard';
@@ -59,7 +58,6 @@
       case 'nav': renderNavPage(area); break;
       case 'i18n': renderI18nPage(area); break;
       case 'posts': renderPostsPage(area); break;
-      case 'pages': renderPagesPage(area); break;
       default: area.innerHTML = '<div class="text-center text-gray-400 py-16">功能开发中</div>';
     }
   }
@@ -234,7 +232,7 @@
         card.setAttribute('data-mtype', mtype);
         card.innerHTML = '<div class="thumb" style="aspect-ratio:1;position:relative;cursor:pointer" data-preview="' + esc(m.file_path) + '">' +
           (isImg ? '<img src="' + esc(m.file_path) + '" style="width:100%;height:100%;object-fit:cover">' :
-            '<div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:#0f172a;font-size:2rem">🎬</div>') +
+            '<div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:#f9fafb;font-size:2rem">🎬</div>') +
           '<button class="del-btn" title="删除">✕</button>' +
           (isImg ? '<div class="media-badge">' + (m.file_size < 500000 ? '< 500KB' : formatBytes(m.file_size)) + '</div>' : '') +
           '</div><div style="padding:0.5rem"><div class="text-xs truncate" style="max-width:100%;font-weight:500" title="' + esc(m.original_name) + '">' + esc(m.original_name) + '</div>' +
@@ -568,7 +566,7 @@
     var wrap = document.createElement('div');
     wrap.style.cssText = 'position:relative;width:5.5rem;height:5.5rem;border-radius:0.5rem;border:1px dashed #a5b4fc;overflow:hidden;flex-shrink:0';
     if (isVid) {
-      wrap.appendChild(Object.assign(document.createElement('div'), { style: 'width:100%;height:100%;background:#0f172a;display:flex;align-items:center;justify-content:center;font-size:1.5rem', textContent: '🎬' }));
+      wrap.appendChild(Object.assign(document.createElement('div'), { style: 'width:100%;height:100%;background:#f9fafb;display:flex;align-items:center;justify-content:center;font-size:1.5rem', textContent: '🎬' }));
     } else {
       var img = document.createElement('img');
       img.style.cssText = 'width:100%;height:100%;object-fit:cover';
@@ -628,7 +626,7 @@
       };
       reader.readAsDataURL(file);
     } else {
-      wrap.innerHTML = '<div style="width:100%;height:100%;background:#0f172a;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:0.25rem"><span style="font-size:1.25rem">🎬</span><span style="color:#fff;font-size:0.5rem">' + esc(file.name) + '</span></div>';
+      wrap.innerHTML = '<div style="width:100%;height:100%;background:#f9fafb;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:0.25rem"><span style="font-size:1.25rem">🎬</span><span style="color:#fff;font-size:0.5rem">' + esc(file.name) + '</span></div>';
     }
     wrap.innerHTML += '<div style="position:absolute;top:0.25rem;left:0.25rem;background:#6366f1;color:#fff;font-size:0.5rem;padding:1px 4px;border-radius:0.25rem">待上传</div>';
     wrap.innerHTML += '<button title="移除" style="position:absolute;top:0.25rem;right:0.25rem;background:rgba(239,68,68,0.85);color:#fff;border:none;width:1rem;height:1rem;border-radius:9999px;font-size:0.55rem;cursor:pointer">✕</button>';
@@ -657,7 +655,7 @@
       var wrap = document.createElement('div');
       wrap.style.cssText = 'position:relative;width:5.5rem;height:5.5rem;border-radius:0.5rem;border:1px solid ' + (img.is_primary ? '#4f46e5' : '#e5e7eb') + ';overflow:hidden;flex-shrink:0';
       var html = isVid
-        ? '<div style="width:100%;height:100%;background:#0f172a;display:flex;align-items:center;justify-content:center;font-size:1.5rem">🎬</div>'
+        ? '<div style="width:100%;height:100%;background:#f9fafb;display:flex;align-items:center;justify-content:center;font-size:1.5rem">🎬</div>'
         : '<img src="' + esc(img.file_path) + '" style="width:100%;height:100%;object-fit:cover">';
       if (img.is_primary) {
         html += '<div style="position:absolute;top:0;left:0;background:#4f46e5;color:#fff;font-size:0.6rem;padding:1px 6px;border-radius:0 0 0.375rem 0">主图</div>';
@@ -868,7 +866,7 @@
         var promise;
         if (isEdit) promise = api('/nav/' + id, { method: 'PUT', body: body });
         else promise = api('/nav', { method: 'POST', body: body });
-        promise.then(function() { toast(isEdit ? '已更新' : '已创建'); loadNavData(); });
+        promise.then(function() { toast(isEdit ? '已更新' : '已创建'); document.getElementById('nav-modal').remove(); loadNavData(); });
       });
     });
   }
@@ -924,7 +922,7 @@
       empty.style.display = 'none';
       posts.forEach(function(p) {
         var tr = document.createElement('tr');
-        tr.style.cssText = 'background:#0f172a;color:#e2e8f0;transition:background 0.15s';
+        tr.style.cssText = 'background:#f9fafb;color:#e2e8f0;transition:background 0.15s';
         tr.onmouseenter = function() { tr.style.background = '#1e293b'; };
         tr.onmouseleave = function() { tr.style.background = '#0f172a'; };
         var statusBadge = p.is_active
@@ -933,15 +931,15 @@
         var catLabel = p.category === 'case' ? '案例' : (p.category === 'news' ? '新闻' : esc(p.category));
         var pubDate = p.published_at ? new Date(p.published_at).toLocaleDateString('zh-CN') : '—';
         tr.innerHTML =
-          '<td style="padding:0.6rem 0.75rem;border-bottom:1px solid #1e293b">' +
+          '<td style="padding:0.6rem 0.75rem;border-bottom:1px solid #f3f4f6">' +
             '<div class="font-medium" style="max-width:260px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">' + esc(p.title) + '</div>' +
             (p.cover_image ? '<div style="margin-top:0.25rem"><img src="' + esc(p.cover_image) + '" style="width:32px;height:22px;object-fit:cover;border-radius:0.25rem;vertical-align:middle"></div>' : '') +
           '</td>' +
-          '<td style="padding:0.6rem 0.75rem;border-bottom:1px solid #1e293b;color:#94a3b8;font-size:0.8rem;max-width:140px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">' + esc(p.slug) + '</td>' +
-          '<td style="padding:0.6rem 0.75rem;border-bottom:1px solid #1e293b">' + catLabel + '</td>' +
-          '<td style="padding:0.6rem 0.75rem;border-bottom:1px solid #1e293b">' + statusBadge + '</td>' +
-          '<td style="padding:0.6rem 0.75rem;border-bottom:1px solid #1e293b;color:#94a3b8;font-size:0.8rem">' + pubDate + '</td>' +
-          '<td style="padding:0.6rem 0.75rem;border-bottom:1px solid #1e293b;text-align:right">' +
+          '<td style="padding:0.6rem 0.75rem;border-bottom:1px solid #f3f4f6;color:#94a3b8;font-size:0.8rem;max-width:140px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">' + esc(p.slug) + '</td>' +
+          '<td style="padding:0.6rem 0.75rem;border-bottom:1px solid #f3f4f6">' + catLabel + '</td>' +
+          '<td style="padding:0.6rem 0.75rem;border-bottom:1px solid #f3f4f6">' + statusBadge + '</td>' +
+          '<td style="padding:0.6rem 0.75rem;border-bottom:1px solid #f3f4f6;color:#94a3b8;font-size:0.8rem">' + pubDate + '</td>' +
+          '<td style="padding:0.6rem 0.75rem;border-bottom:1px solid #f3f4f6;text-align:right">' +
             '<button class="btn-ghost" style="font-size:0.78rem;padding:0.2rem 0.5rem" onclick="CMS.openPostForm(' + p.id + ')">编辑</button> ' +
             '<button class="btn-ghost" style="font-size:0.78rem;padding:0.2rem 0.5rem;color:' + (p.is_active ? '#fbbf24' : '#6ee7b7') + '" onclick="CMS.togglePostPublish(' + p.id + ',' + (p.is_active ? 0 : 1) + ')">' + (p.is_active ? '取消发布' : '发布') + '</button> ' +
             '<button class="btn-ghost" style="font-size:0.78rem;padding:0.2rem 0.5rem;color:#f87171" onclick="CMS.deletePost(' + p.id + ')">删除</button>' +
@@ -1082,19 +1080,17 @@
   var pagesState = { currentView: 'list', currentPageId: null };
 
   function renderPagesPage(area) {
-    area.innerHTML = '<div class="fade-in" id="pages-root">' +
-      '<div class="flex items-center justify-between mb-4">' +
-        '<h2 class="text-lg font-semibold">页面内容管理</h2>' +
-        '<div class="flex gap-2">' +
-          '<button id="pages-sync-btn" style="font-size:0.8rem;padding:0.375rem 0.75rem;background:#374151;color:#e2e8f0;border:none;border-radius:0.375rem;cursor:pointer">🔄 从 HTML 自动检测</button>' +
-        '</div>' +
-      '</div>' +
-      '<div id="pages-list"></div>' +
-      '<div id="pages-editor" style="display:none"></div>' +
-      '</div>';
-
-    document.getElementById('pages-sync-btn').addEventListener('click', syncAllPages);
-    loadPagesList();
+    currentPage = 'i18n';
+    document.getElementById('breadcrumb').textContent = '多语言与页面';
+    var nav = document.getElementById('nav-menu');
+    nav.querySelectorAll('.sidebar-link').forEach(function(b) { b.classList.remove('active'); });
+    nav.querySelector('[data-key="i18n"]') || nav.querySelectorAll('.sidebar-link').forEach(function(b) { if (b.textContent.includes('多语言')) b.classList.add('active'); });
+    renderI18nPage(area);
+    // Auto-switch to pages tab after render
+    setTimeout(function() {
+      var tabPages = document.getElementById('i18n-tab-pages');
+      if (tabPages) tabPages.click();
+    }, 50);
   }
 
   function loadPagesList() {
@@ -1107,14 +1103,14 @@
 
       var html = '<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">';
       d.pages.forEach(function(p) {
-        html += '<div class="p-4 rounded-xl border border-slate-700 bg-slate-800/50 cursor-pointer hover:border-indigo-500/50 transition-all" data-page="' + esc(p.page_id) + '">' +
+        html += '<div class="p-4 rounded-xl border border-gray-200 bg-white cursor-pointer hover:border-indigo-300 transition-all" data-page="' + esc(p.page_id) + '">' +
           '<div class="flex items-center gap-3 mb-2">' +
           '<span class="text-2xl">' + p.icon + '</span>' +
           '<div class="flex-1 min-w-0">' +
-          '<div class="font-medium text-slate-200">' + esc(p.label) + '</div>' +
-          '<div class="text-xs text-slate-500 font-mono">' + esc(p.page_id) + '</div>' +
+          '<div class="font-medium text-gray-900">' + esc(p.label) + '</div>' +
+          '<div class="text-xs text-gray-500 font-mono">' + esc(p.page_id) + '</div>' +
           '</div>' +
-          '<span class="text-xs px-2 py-0.5 rounded-full ' + (p.section_count > 0 ? 'bg-green-500/10 text-green-400' : 'bg-slate-700 text-slate-500') + '">' + p.section_count + ' sections</span>' +
+          '<span class="text-xs px-2 py-0.5 rounded-full ' + (p.section_count > 0 ? 'bg-green-50 text-green-700' : 'bg-gray-100 text-gray-500') + '">' + p.section_count + ' sections</span>' +
           '</div></div>';
       });
       html += '</div>';
@@ -1141,10 +1137,10 @@
         '<h3 class="text-lg font-semibold mb-4">' + esc(pageId) + ' — 内容编辑</h3>';
 
       if (sections.length === 0) {
-        html += '<div class="py-12 text-center text-slate-400"><div class="text-4xl mb-3">📭</div><div>暂无内容，点击"从 HTML 自动检测"按钮导入</div></div>';
+        html += '<div class="py-12 text-center text-gray-400"><div class="text-4xl mb-3">📭</div><div>暂无内容，点击"从 HTML 自动检测"按钮导入</div></div>';
       } else {
         html += '<table style="width:100%;border-collapse:collapse;font-size:0.85rem">' +
-          '<thead><tr style="border-bottom:2px solid #334155;text-align:left">' +
+          '<thead><tr style="border-bottom:2px solid #e5e7eb;text-align:left">' +
           '<th style="padding:0.5rem">Section Key</th>' +
           '<th style="padding:0.5rem">类型</th>' +
           '<th style="padding:0.5rem">内容预览</th>' +
@@ -1161,9 +1157,9 @@
           if (s.section_key) {
             i18nHint = '<div style="margin-top:2px;font-size:0.7rem;color:#94a3b8" title="翻译 key: ' + esc(s.section_key) + '">' + esc(s.section_key) + '</div>';
           }
-          html += '<tr style="border-bottom:1px solid #1e293b" data-section="' + esc(s.section_key) + '">' +
+          html += '<tr style="border-bottom:1px solid #f3f4f6" data-section="' + esc(s.section_key) + '">' +
             '<td style="padding:0.5rem;font-family:monospace;font-size:0.75rem;color:#94a3b8">' + esc(s.section_key) + i18nHint + '</td>' +
-            '<td style="padding:0.5rem"><span style="font-size:0.7rem;padding:0.125rem 0.375rem;border-radius:0.25rem;background:#334155;color:#94a3b8">' + esc(s.section_type) + '</span></td>' +
+            '<td style="padding:0.5rem"><span style="font-size:0.7rem;padding:0.125rem 0.375rem;border-radius:0.25rem;background:#f3f4f6;color:#94a3b8">' + esc(s.section_type) + '</span></td>' +
             '<td style="padding:0.5rem;color:#64748b;font-size:0.8rem;max-width:300px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="' + esc(preview) + '">' + esc(preview) + '</td>' +
             '<td style="padding:0.5rem;text-align:center"><button class="btn-ghost edit-section-btn" style="font-size:0.75rem;padding:0.2rem 0.5rem">编辑</button></td>' +
             '</tr>';
@@ -1196,7 +1192,7 @@
     var isI18n = section.section_type === 'i18n_text';
 
     var bodyHtml = '<div style="display:flex;flex-direction:column;gap:0.85rem">' +
-      '<div class="text-sm text-slate-400 mb-2">Section: <span class="font-mono text-slate-200">' + esc(section.section_key) + '</span>' +
+      '<div class="text-sm text-gray-400 mb-2">Section: <span class="font-mono text-gray-900">' + esc(section.section_key) + '</span>' +
       (isI18n ? ' <span class="text-xs text-amber-400 ml-2">💡 此字段可通过多语言管理编辑</span>' : '') + '</div>';
 
     // Content fields
@@ -1219,12 +1215,12 @@
       bodyHtml += '<div><label style="color:#94a3b8;font-size:0.8rem;display:block;margin-bottom:0.25rem">图片</label>';
       images.forEach(function(img, idx) {
         bodyHtml += '<div class="flex items-center gap-2 mb-2">' +
-          (img.image_url ? '<img src="' + esc(img.image_url) + '" style="width:48px;height:48px;object-fit:cover;border-radius:0.25rem">' : '<div style="width:48px;height:48px;background:#334155;border-radius:0.25rem"></div>') +
+          (img.image_url ? '<img src="' + esc(img.image_url) + '" style="width:48px;height:48px;object-fit:cover;border-radius:0.25rem">' : '<div style="width:48px;height:48px;background:#f3f4f6;border-radius:0.25rem"></div>') +
           '<input class="img-url" data-idx="' + idx + '" value="' + esc(img.image_url || '') + '" placeholder="图片 URL" style="flex:1;background:#1e293b;color:#e2e8f0;border:1px solid #334155;border-radius:0.375rem;padding:0.375rem 0.5rem;font-size:0.8rem">' +
           '<button class="remove-img-btn" data-idx="' + idx + '" style="color:#f87171;font-size:0.8rem;padding:0.25rem 0.5rem;background:none;border:none;cursor:pointer">✕</button>' +
           '</div>';
       });
-      bodyHtml += '<button id="add-img-btn" style="font-size:0.8rem;padding:0.25rem 0.5rem;background:#334155;color:#94a3b8;border:none;border-radius:0.25rem;cursor:pointer">+ 添加图片</button>';
+      bodyHtml += '<button id="add-img-btn" style="font-size:0.8rem;padding:0.25rem 0.5rem;background:#f3f4f6;color:#94a3b8;border:none;border-radius:0.25rem;cursor:pointer">+ 添加图片</button>';
       bodyHtml += '</div>';
     }
 
@@ -1268,7 +1264,7 @@
           var idx = container.querySelectorAll('.img-url').length;
           var row = document.createElement('div');
           row.className = 'flex items-center gap-2 mb-2';
-          row.innerHTML = '<div style="width:48px;height:48px;background:#334155;border-radius:0.25rem"></div>' +
+          row.innerHTML = '<div style="width:48px;height:48px;background:#f3f4f6;border-radius:0.25rem"></div>' +
             '<input class="img-url" data-idx="' + idx + '" placeholder="图片 URL" style="flex:1;background:#1e293b;color:#e2e8f0;border:1px solid #334155;border-radius:0.375rem;padding:0.375rem 0.5rem;font-size:0.8rem">' +
             '<button class="remove-img-btn" data-idx="' + idx + '" style="color:#f87171;font-size:0.8rem;padding:0.25rem 0.5rem;background:none;border:none;cursor:pointer">✕</button>';
           addBtn.before(row);
@@ -1335,46 +1331,79 @@
 
   function renderI18nPage(area) {
     area.innerHTML = '<div class="fade-in">' +
-      // Header
+      // Header with tabs
       '<div class="flex items-center justify-between mb-4 flex-wrap gap-3">' +
-        '<h2 class="text-lg font-semibold">多语言管理</h2>' +
-        '<div class="flex gap-2 flex-wrap">' +
-          '<select id="i18n-lang" style="border:1px solid #374151;background:#1e293b;color:#e2e8f0;padding:0.375rem 0.5rem;border-radius:0.375rem;font-size:0.8rem">' +
-            '<option value="zh-CN"' + (i18nState.lang === 'zh-CN' ? ' selected' : '') + '>中文</option>' +
-            '<option value="en"' + (i18nState.lang === 'en' ? ' selected' : '') + '>English</option>' +
-          '</select>' +
-          '<select id="i18n-type" style="border:1px solid #374151;background:#1e293b;color:#e2e8f0;padding:0.375rem 0.5rem;border-radius:0.375rem;font-size:0.8rem">' +
-            '<option value="ui"' + (i18nState.type === 'ui' ? ' selected' : '') + '>UI 文案 (' + (i18nState.lang === 'zh-CN' ? '1558' : '1558') + ')</option>' +
-            '<option value="product"' + (i18nState.type === 'product' ? ' selected' : '') + '>产品翻译 (' + (i18nState.lang === 'zh-CN' ? '2217' : '2217') + ')</option>' +
-          '</select>' +
+        '<div class="flex items-center gap-1 bg-gray-100 rounded-lg p-0.5">' +
+          '<button id="i18n-tab-trans" class="i18n-tab active" style="padding:0.375rem 0.875rem;border:none;border-radius:0.5rem;font-size:0.85rem;font-weight:500;cursor:pointer;transition:all 0.15s">🌐 翻译管理</button>' +
+          '<button id="i18n-tab-pages" class="i18n-tab" style="padding:0.375rem 0.875rem;border:none;border-radius:0.5rem;font-size:0.85rem;font-weight:500;cursor:pointer;transition:all 0.15s">📄 页面内容</button>' +
         '</div>' +
       '</div>' +
-      // Stats bar
-      '<div id="i18n-stats" class="flex items-center gap-4 mb-4 text-sm text-slate-400"></div>' +
-      // Search
-      '<div class="flex gap-2 mb-4">' +
-        '<input id="i18n-search" placeholder="搜索翻译键或值..." value="' + esc(i18nState.search) + '" style="flex:1;border:1px solid #374151;background:#1e293b;color:#e2e8f0;padding:0.5rem;border-radius:0.375rem;font-size:0.8rem">' +
-        '<button id="i18n-search-btn" style="padding:0.5rem 1rem;background:#4f46e5;color:#fff;border:none;border-radius:0.375rem;cursor:pointer;font-size:0.8rem">搜索</button>' +
-      '</div>' +
-      // Unsaved changes bar
-      '<div id="i18n-unsaved-bar" class="hidden mb-4 flex items-center justify-between px-4 py-2 bg-amber-500/10 border border-amber-500/30 rounded-lg">' +
-        '<span class="text-sm text-amber-400" id="i18n-unsaved-text">0 条未保存修改</span>' +
-        '<div class="flex gap-2">' +
-          '<button id="i18n-discard-btn" style="font-size:0.8rem;padding:0.25rem 0.75rem;background:#374151;color:#e2e8f0;border:none;border-radius:0.25rem;cursor:pointer">放弃</button>' +
-          '<button id="i18n-unsaved-save-btn" style="font-size:0.8rem;padding:0.25rem 0.75rem;background:#f59e0b;color:#000;border:none;border-radius:0.25rem;cursor:pointer;font-weight:600">保存修改</button>' +
+      // Translation panel
+      '<div id="i18n-trans-panel">' +
+        '<div class="flex items-center justify-between mb-4 flex-wrap gap-3">' +
+          '<h2 class="text-lg font-semibold">翻译管理</h2>' +
+          '<div class="flex gap-3 flex-wrap">' +
+            '<select id="i18n-lang" style="border:1px solid #d1d5db;background:#fff;color:#111827;padding:0.375rem 0.6rem;border-radius:0.5rem;font-size:0.85rem">' +
+              '<option value="zh-CN"' + (i18nState.lang === 'zh-CN' ? ' selected' : '') + '>中文</option>' +
+              '<option value="en"' + (i18nState.lang === 'en' ? ' selected' : '') + '>English</option>' +
+            '</select>' +
+            '<select id="i18n-type" style="border:1px solid #d1d5db;background:#fff;color:#111827;padding:0.375rem 0.6rem;border-radius:0.5rem;font-size:0.85rem">' +
+              '<option value="ui"' + (i18nState.type === 'ui' ? ' selected' : '') + '>UI 文案</option>' +
+              '<option value="product"' + (i18nState.type === 'product' ? ' selected' : '') + '>产品翻译</option>' +
+            '</select>' +
+          '</div>' +
+        '</div>' +
+        // Stats bar
+        '<div id="i18n-stats" class="flex items-center gap-4 mb-4 text-sm text-gray-500"></div>' +
+        // Search
+        '<div class="flex gap-3 mb-4">' +
+          '<input id="i18n-search" placeholder="搜索翻译键或值..." value="' + esc(i18nState.search) + '" style="flex:1;border:1px solid #d1d5db;background:#fff;color:#111827;padding:0.5rem 0.75rem;border-radius:0.5rem;font-size:0.85rem">' +
+          '<button id="i18n-search-btn" class="btn-primary" style="font-size:0.85rem">搜索</button>' +
+        '</div>' +
+        // Unsaved changes bar
+        '<div id="i18n-unsaved-bar" class="hidden mb-4 flex items-center justify-between px-4 py-2 bg-amber-50 border border-amber-200 rounded-lg">' +
+          '<span class="text-sm text-amber-700" id="i18n-unsaved-text">0 条未保存修改</span>' +
+          '<div class="flex gap-3">' +
+            '<button id="i18n-discard-btn" class="btn-ghost" style="font-size:0.85rem;padding:0.35rem 0.875rem">放弃</button>' +
+            '<button id="i18n-unsaved-save-btn" class="btn-primary" style="font-size:0.85rem;padding:0.35rem 0.875rem;background:#f59e0b">保存修改</button>' +
+          '</div>' +
+        '</div>' +
+        // Table container
+        '<div id="i18n-container" style="overflow-x:auto"><div class="text-center py-8 text-gray-400">加载中...</div></div>' +
+        // Pagination
+        '<div id="i18n-pagination" class="flex items-center justify-between mt-4 text-sm text-gray-500"></div>' +
+        // Import/Export bar
+        '<div class="flex items-center justify-end gap-3 mt-4">' +
+          '<button id="i18n-export-btn" class="btn-ghost" style="font-size:0.85rem;padding:0.375rem 0.875rem">📥 导出 JSON</button>' +
+          '<button id="i18n-import-btn" class="btn-ghost" style="font-size:0.85rem;padding:0.375rem 0.875rem">📤 导入 JSON</button>' +
+          '<input type="file" id="i18n-import-file" accept=".json" style="display:none">' +
         '</div>' +
       '</div>' +
-      // Table container
-      '<div id="i18n-container" style="overflow-x:auto"><div class="text-center py-8 text-gray-400">加载中...</div></div>' +
-      // Pagination
-      '<div id="i18n-pagination" class="flex items-center justify-between mt-4 text-sm text-slate-400"></div>' +
-      // Import/Export bar
-      '<div class="flex items-center justify-end gap-2 mt-4">' +
-        '<button id="i18n-export-btn" style="font-size:0.8rem;padding:0.375rem 0.75rem;background:#374151;color:#e2e8f0;border:none;border-radius:0.375rem;cursor:pointer">📥 导出 JSON</button>' +
-        '<button id="i18n-import-btn" style="font-size:0.8rem;padding:0.375rem 0.75rem;background:#374151;color:#e2e8f0;border:none;border-radius:0.375rem;cursor:pointer">📤 导入 JSON</button>' +
-        '<input type="file" id="i18n-import-file" accept=".json" style="display:none">' +
+      // Pages panel (hidden by default)
+      '<div id="i18n-pages-panel" style="display:none">' +
+        '<div class="flex items-center justify-between mb-4">' +
+          '<h2 class="text-lg font-semibold">页面内容管理</h2>' +
+          '<button id="pages-sync-btn" class="btn-ghost" style="font-size:0.85rem;padding:0.375rem 0.875rem">🔄 从 HTML 自动检测</button>' +
+        '</div>' +
+        '<div id="pages-list"></div>' +
+        '<div id="pages-editor" style="display:none"></div>' +
       '</div>' +
       '</div>';
+
+    // Tab switching
+    var tabTrans = document.getElementById('i18n-tab-trans');
+    var tabPages = document.getElementById('i18n-tab-pages');
+    var panelTrans = document.getElementById('i18n-trans-panel');
+    var panelPages = document.getElementById('i18n-pages-panel');
+    function activateTab(active, inactive, showPanel, hidePanel) {
+      active.style.background = '#fff'; active.style.color = '#111827'; active.style.boxShadow = '0 1px 3px rgba(0,0,0,0.1)';
+      inactive.style.background = 'transparent'; inactive.style.color = '#6b7280'; inactive.style.boxShadow = 'none';
+      showPanel.style.display = ''; hidePanel.style.display = 'none';
+    }
+    activateTab(tabTrans, tabPages, panelTrans, panelPages);
+    tabTrans.addEventListener('click', function() { activateTab(tabTrans, tabPages, panelTrans, panelPages); });
+    tabPages.addEventListener('click', function() { activateTab(tabPages, tabTrans, panelPages, panelTrans); loadPagesList(); });
+    document.getElementById('pages-sync-btn').addEventListener('click', syncAllPages);
 
     // Bind events
     document.getElementById('i18n-lang').addEventListener('change', function() {
@@ -1449,11 +1478,11 @@
           var statsEl = document.getElementById('i18n-stats');
           if (statsEl) {
             statsEl.innerHTML =
-              '<span>当前语言: <strong class="text-slate-200">' + i18nState.lang + '</strong></span>' +
-              '<span>对照: <strong class="text-slate-200">' + lang2 + '</strong></span>' +
-              '<span>总条目: <strong class="text-slate-200">' + i18nState.total + '</strong></span>' +
-              '<span class="text-red-400">缺失翻译: <strong>' + missingCount + '</strong></span>' +
-              '<span>覆盖率: <strong class="' + (missingCount === 0 ? 'text-green-400' : 'text-amber-400') + '">' +
+              '<span>当前语言: <strong class="text-gray-900">' + i18nState.lang + '</strong></span>' +
+              '<span>对照: <strong class="text-gray-900">' + lang2 + '</strong></span>' +
+              '<span>总条目: <strong class="text-gray-900">' + i18nState.total + '</strong></span>' +
+              '<span class="text-red-500">缺失翻译: <strong>' + missingCount + '</strong></span>' +
+              '<span>覆盖率: <strong class="' + (missingCount === 0 ? 'text-green-600' : 'text-amber-600') + '">' +
                 (data1.keys.length ? Math.round((1 - missingCount / data1.keys.length) * 100) : 0) + '%</strong></span>';
           }
 
@@ -1470,7 +1499,7 @@
     if (!container) return;
 
     if (!entries.length) {
-      container.innerHTML = '<div class="text-center py-12 text-slate-400"><div class="text-4xl mb-3">📭</div><div>没有找到匹配的翻译条目</div></div>';
+      container.innerHTML = '<div class="text-center py-12 text-gray-400"><div class="text-4xl mb-3">📭</div><div>没有找到匹配的翻译条目</div></div>';
       return;
     }
 
@@ -1483,10 +1512,10 @@
     });
 
     var html = '<table style="width:100%;border-collapse:collapse;font-size:0.875rem">' +
-      '<thead style="position:sticky;top:0;z-index:1;background:#0f172a"><tr style="border-bottom:2px solid #334155">' +
+      '<thead style="position:sticky;top:0;z-index:1;background:#f9fafb"><tr style="border-bottom:2px solid #e5e7eb">' +
       '<th style="padding:0.625rem 0.5rem;text-align:left;width:25%">Key</th>' +
-      '<th style="padding:0.625rem 0.5rem;text-align:left;width:35%">' + i18nState.lang + ' <span class="text-xs text-slate-500">(可编辑)</span></th>' +
-      '<th style="padding:0.625rem 0.5rem;text-align:left;width:35%">' + lang2 + ' <span class="text-xs text-slate-500">(可编辑)</span></th>' +
+      '<th style="padding:0.625rem 0.5rem;text-align:left;width:35%">' + i18nState.lang + ' <span class="text-xs text-gray-400">(可编辑)</span></th>' +
+      '<th style="padding:0.625rem 0.5rem;text-align:left;width:35%">' + lang2 + ' <span class="text-xs text-gray-400">(可编辑)</span></th>' +
       '<th style="padding:0.625rem 0.5rem;text-align:center;width:5%">状态</th>' +
       '</tr></thead><tbody>';
 
@@ -1496,9 +1525,9 @@
       // Group separator row
       if (prefix !== lastPrefix && Object.keys(groups).length > 1) {
         if (lastPrefix) html += '<tr><td colspan="4" style="padding:0;height:0.5rem"></td></tr>';
-        html += '<tr style="border-bottom:1px solid #1e293b"><td colspan="4" style="padding:0.375rem 0.5rem">' +
-          '<span style="font-size:0.7rem;font-weight:700;color:#64748b;text-transform:uppercase;letter-spacing:0.05em">' +
-          esc(prefix) + ' <span style="color:#475569">(' + groups[prefix].length + ')</span></span></td></tr>';
+        html += '<tr style="border-bottom:1px solid #e5e7eb"><td colspan="4" style="padding:0.375rem 0.5rem">' +
+          '<span style="font-size:0.7rem;font-weight:700;color:#6b7280;text-transform:uppercase;letter-spacing:0.05em">' +
+          esc(prefix) + ' <span style="color:#9ca3af">(' + groups[prefix].length + ')</span></span></td></tr>';
         lastPrefix = prefix;
       }
 
@@ -1508,15 +1537,14 @@
       var currentVal = i18nState.edits.hasOwnProperty(entry.key) ? i18nState.edits[entry.key] : entry.value;
       var currentV2 = i18nState.edits.hasOwnProperty(entry.key + ':' + lang2) ? i18nState.edits[entry.key + ':' + lang2] : v2;
 
-      html += '<tr style="border-bottom:1px solid #1e293b;' +
-        (missing && !i18nState.edits.hasOwnProperty(entry.key + ':' + lang2) ? 'background:#1a0a0a' : '') +
-        (i18nState.edits.hasOwnProperty(entry.key) ? 'background:#1a1a0a' : '') +
+      var rowBg = missing && !i18nState.edits.hasOwnProperty(entry.key + ':' + lang2) ? '#fef2f2' : (i18nState.edits.hasOwnProperty(entry.key) ? '#fffbeb' : '');
+      html += '<tr style="border-bottom:1px solid #f3f4f6;' + (rowBg ? 'background:' + rowBg : '') +
         '" data-key="' + esc(entry.key) + '">' +
-        '<td style="padding:0.5rem;font-family:monospace;font-size:0.7rem;color:#94a3b8;word-break:break-all;line-height:1.4" title="' + esc(entry.key) + '">' + esc(entry.key) + '</td>' +
+        '<td style="padding:0.5rem;font-family:monospace;font-size:0.7rem;color:#6b7280;word-break:break-all;line-height:1.4" title="' + esc(entry.key) + '">' + esc(entry.key) + '</td>' +
         '<td style="padding:0.25rem 0.5rem"><input class="i18n-edit" data-lang="' + i18nState.lang + '" data-key="' + esc(entry.key) + '" value="' + esc(currentVal) + '" ' +
-        'style="width:100%;border:1px solid #334155;background:#1e293b;color:#e2e8f0;padding:0.375rem 0.5rem;border-radius:0.25rem;font-size:0.8rem;line-height:1.4"></td>' +
+        'style="width:100%;border:1px solid #d1d5db;background:#fff;color:#111827;padding:0.375rem 0.5rem;border-radius:0.375rem;font-size:0.8rem;line-height:1.4"></td>' +
         '<td style="padding:0.25rem 0.5rem"><input class="i18n-edit" data-lang="' + lang2 + '" data-key="' + esc(entry.key) + '" value="' + esc(currentV2) + '" ' +
-        'style="width:100%;border:1px solid #334155;background:#1e293b;color:' + (missing ? '#fca5a5' : '#e2e8f0') + ';padding:0.375rem 0.5rem;border-radius:0.25rem;font-size:0.8rem;line-height:1.4" ' +
+        'style="width:100%;border:1px solid #d1d5db;background:#fff;color:' + (missing ? '#dc2626' : '#111827') + ';padding:0.375rem 0.5rem;border-radius:0.375rem;font-size:0.8rem;line-height:1.4" ' +
         'placeholder="' + esc(v2 || '(点击输入翻译)') + '"></td>' +
         '<td style="padding:0.5rem;text-align:center">' +
         (i18nState.edits.hasOwnProperty(entry.key) || i18nState.edits.hasOwnProperty(entry.key + ':' + lang2)
@@ -1540,7 +1568,7 @@
         updateUnsavedBar();
         // Update row highlight
         var row = input.closest('tr');
-        if (row) row.style.background = input.value ? '#1a1a0a' : '';
+        if (row) row.style.background = input.value ? '#fffbeb' : '';
       });
     });
   }
@@ -1565,8 +1593,8 @@
     var btns = pages.map(function(p) {
       var active = p.n === page;
       return '<button data-page="' + p.n + '" style="padding:0.25rem 0.5rem;border:1px solid ' +
-        (active ? '#4f46e5' : '#334155') + ';background:' + (active ? '#4f46e5' : 'transparent') +
-        ';color:' + (active ? '#fff' : '#94a3b8') + ';border-radius:0.25rem;cursor:pointer;font-size:0.8rem;min-width:2rem">' + p.t + '</button>';
+        (active ? '#4f46e5' : '#d1d5db') + ';background:' + (active ? '#4f46e5' : '#fff') +
+        ';color:' + (active ? '#fff' : '#374151') + ';border-radius:0.375rem;cursor:pointer;font-size:0.8rem;min-width:2rem">' + p.t + '</button>';
     }).join('');
 
     el.innerHTML = '<span>显示 ' + start + '-' + end + ' / 共 ' + i18nState.total + ' 条</span>' +

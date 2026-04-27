@@ -59,9 +59,16 @@ function navRoutes(db) {
     try {
       const { parent_id, sort_order, is_active, i18n_key, default_label, path, icon, badge, target, group_key } = req.body;
       if (!i18n_key) return res.status(400).json({ error: 'i18n_key is required' });
+      // Check duplicate i18n_key
+      const existing = db.prepare('SELECT id FROM nav_items WHERE i18n_key = ? AND id != ?').get(i18n_key, req.body.id || 0);
+      if (existing) return res.status(409).json({ error: 'i18n_key "' + i18n_key + '" 已存在，请使用不同的 key' });
+      // Auto-assign sort_order if not provided or is 0
+      const pid = parent_id || null;
+      const maxSort = db.prepare('SELECT COALESCE(MAX(sort_order), 0) as max_sort FROM nav_items WHERE (parent_id IS ? AND ? IS NULL) OR parent_id = ?').get(pid, pid, pid);
+      const autoSort = (sort_order && sort_order !== 0) ? sort_order : (maxSort.max_sort + 1);
       const result = db.prepare(
         'INSERT INTO nav_items (parent_id, sort_order, is_active, i18n_key, default_label, path, icon, badge, target, group_key) VALUES (?,?,?,?,?,?,?,?,?,?)'
-      ).run(parent_id || null, sort_order || 0, is_active !== undefined ? is_active : 1, i18n_key, default_label || '', path || '', icon || '', badge || 0, target || '', group_key || '');
+      ).run(pid, autoSort, is_active !== undefined ? is_active : 1, i18n_key, default_label || '', path || '', icon || '', badge || 0, target || '', group_key || '');
       logAudit(db, req.user.userId, req.user.username, 'create', 'nav_items', result.lastInsertRowid, null, req.body);
       res.json({ id: result.lastInsertRowid, message: '已创建' });
     } catch (e) {
