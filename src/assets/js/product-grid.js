@@ -164,6 +164,8 @@
 
   // ─── Category tabs ─────────────────────────────────────────────
 
+  var MAX_VISIBLE_TABS = 3;
+
   function isMobileOrTablet() {
     return window.innerWidth < 1280;
   }
@@ -184,37 +186,51 @@
     if (!categories.length) return;
 
     // Build tab buttons
-    var tabs = [];
+    var allTabs = [];
 
     // "全部产品" button
     var allBtn = document.createElement('button');
     allBtn.className = 'category-tab active px-4 py-2 text-sm font-bold whitespace-nowrap rounded-full border border-slate-200 dark:border-slate-700';
     allBtn.dataset.category = 'all';
     allBtn.textContent = '全部产品';
-    tabs.push(allBtn);
+    allTabs.push(allBtn);
 
     categories.forEach(function(cat) {
       var btn = document.createElement('button');
       btn.className = 'category-tab px-4 py-2 text-sm font-medium whitespace-nowrap rounded-full border border-slate-200 dark:border-slate-700';
       btn.dataset.category = cat.key;
       btn.textContent = cat.name;
-      tabs.push(btn);
+      allTabs.push(btn);
     });
 
-    // Mobile/tablet: horizontal scroll with fade edges
-    if (isMobileOrTablet()) {
-      container.classList.add('category-scroll-container');
-      // Remove flex-wrap, enable horizontal scroll
-      container.style.flexWrap = 'nowrap';
-      container.style.overflowX = 'auto';
-      container.style.scrollbarWidth = 'none';
-      container.style.msOverflowStyle = 'none';
-      container.style.webkitOverflowScrolling = 'touch';
-      container.style.paddingRight = '16px';
+    // "More" toggle button
+    var moreBtn = document.createElement('button');
+    moreBtn.className = 'category-tab-more px-3 py-2 text-xs font-bold whitespace-nowrap rounded-full bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400 border border-slate-200 dark:border-slate-700 cursor-pointer';
+    var isExpanded = false;
+
+    function renderTabs() {
+      container.innerHTML = '';
+      var showCount = isExpanded ? allTabs.length : Math.min(MAX_VISIBLE_TABS, allTabs.length);
+      for (var i = 0; i < showCount; i++) {
+        container.appendChild(allTabs[i]);
+      }
+      if (allTabs.length > MAX_VISIBLE_TABS) {
+        var remaining = allTabs.length - MAX_VISIBLE_TABS;
+        moreBtn.textContent = isExpanded ? ('收起 \u25B2') : ('\u002B' + remaining + ' 更多 \u25BC');
+        container.appendChild(moreBtn);
+      }
     }
 
-    // Append all tabs
-    tabs.forEach(function(tab) { container.appendChild(tab); });
+    renderTabs();
+
+    // More button toggle
+    moreBtn.addEventListener('click', function(ev) {
+      ev.stopPropagation();
+      isExpanded = !isExpanded;
+      renderTabs();
+      // Re-init sort dropdown after DOM change
+      if (window.SortDropdown) window.SortDropdown.init();
+    });
 
     // Tab click handler
     container.addEventListener('click', function(ev) {
