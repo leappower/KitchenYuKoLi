@@ -14,6 +14,54 @@ function initCMS(app) {
   app.use('/api/cms', apiRouter);
   console.log('[CMS] API routes mounted at /api/cms');
 
+  // Public nav config endpoint (no auth required — frontend needs this)
+  app.get('/api/nav-config', (req, res) => {
+    try {
+      const items = db.prepare('SELECT * FROM nav_items WHERE is_active = 1 ORDER BY sort_order ASC, id ASC').all();
+      // Build parent map (key = the frontend dropdown id like 'products', 'solutions')
+      const parents = {};
+      items.forEach(item => {
+        if (!item.parent_id) {
+          // Derive dropdown id from group_key or i18n_key
+          // nav_products -> products, nav_solutions -> solutions, nav_service -> support
+          var dropId = item.group_key;
+          if (dropId === 'main') {
+            dropId = item.i18n_key.replace('nav_', ''); // nav_products -> products
+          }
+          // Special mapping to match frontend nav-config.js keys
+          if (dropId === 'service') dropId = 'support';
+          if (dropId === 'applications') dropId = 'applications'; // already correct
+          parents[item.id] = {
+            key: item.i18n_key,
+            label: item.default_label || item.i18n_key,
+            path: item.path || '/',
+            id: dropId,
+            hasDropdown: !!(item.i18n_key && items.some(c => c.parent_id === item.id))
+          };
+        }
+      });
+      const mainNav = items.filter(i => !i.parent_id).sort((a, b) => a.sort_order - b.sort_order).map(p => parents[p.id]);
+      // Build dropdowns — key must match parent's id field
+      const dropdowns = {};
+      items.filter(i => i.parent_id).forEach(child => {
+        const parent = parents[child.parent_id];
+        if (!parent) return;
+        const groupId = parent.id; // e.g. 'products', 'solutions'
+        if (!dropdowns[groupId]) dropdowns[groupId] = [];
+        dropdowns[groupId].push({
+          key: child.i18n_key,
+          icon: child.icon || '',
+          href: child.path || '',
+          badge: !!child.badge,
+          isWhatsApp: child.target === '_blank' && child.path && child.path.includes('whatsapp')
+        });
+      });
+      res.json({ mainNav, dropdowns });
+    } catch (e) {
+      res.status(500).json({ error: e.message });
+    }
+  });
+
   // Serve admin panel static files
   const adminDir = path.join(__dirname);
   app.use('/admin', (req, res, next) => {

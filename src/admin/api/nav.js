@@ -123,6 +123,45 @@ function navRoutes(db) {
     }
   });
 
+  // GET /nav/frontend-config — returns NAV_CONFIG format for frontend consumption
+  router.get('/nav/frontend-config', (req, res) => {
+    try {
+      const items = db.prepare('SELECT * FROM nav_items WHERE is_active = 1 ORDER BY sort_order ASC, id ASC').all();
+      // Build parent map
+      const parents = {};
+      items.forEach(item => {
+        if (!item.parent_id) {
+          parents[item.id] = {
+            key: item.i18n_key,
+            label: item.default_label || item.i18n_key,
+            path: item.path || '/',
+            id: item.group_key || item.i18n_key,
+            hasDropdown: !!(item.i18n_key && items.some(c => c.parent_id === item.id))
+          };
+        }
+      });
+      const mainNav = items.filter(i => !i.parent_id).sort((a, b) => a.sort_order - b.sort_order).map(p => parents[p.id]);
+      // Build dropdowns
+      const dropdowns = {};
+      items.filter(i => i.parent_id).forEach(child => {
+        const parent = parents[child.parent_id];
+        if (!parent) return;
+        const groupId = parent.id;
+        if (!dropdowns[groupId]) dropdowns[groupId] = [];
+        dropdowns[groupId].push({
+          key: child.i18n_key,
+          icon: child.icon || '',
+          href: child.path || '',
+          badge: !!child.badge,
+          isWhatsApp: child.target === '_blank' && child.path && child.path.includes('whatsapp')
+        });
+      });
+      res.json({ mainNav, dropdowns });
+    } catch (e) {
+      res.status(500).json({ error: e.message });
+    }
+  });
+
   return router;
 }
 

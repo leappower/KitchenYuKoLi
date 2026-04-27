@@ -790,8 +790,9 @@
           childDiv.innerHTML = '<div class="flex items-center gap-2">' +
             '<span>' + esc(child.icon || '') + '</span>' +
             '<span class="text-sm">' + esc(child.default_label || child.i18n_key) + '</span>' +
-            '<span class="text-xs text-gray-400">' + esc(child.path || child.href || '') + '</span>' +
+            '<span class="text-xs text-gray-400 font-mono">' + esc(child.path || child.href || '') + '</span>' +
             (child.badge ? '<span class="text-xs bg-amber-100 text-amber-700 px-1 rounded">HOT</span>' : '') +
+            (child.target === '_blank' ? '<span class="text-xs bg-blue-100 text-blue-700 px-1 rounded">↗</span>' : '') +
             '</div>' +
             '<div class="flex gap-1">' +
             '<button class="nav-action" data-id="' + child.id + '" data-action="edit" style="font-size:0.7rem;padding:0.125rem 0.375rem;background:#4f46e5;color:#fff;border:none;border-radius:0.25rem;cursor:pointer">编辑</button>' +
@@ -833,6 +834,12 @@
       }
     };
     done(function(item) {
+      // Build parent select options from cached tree
+      var parentOpts = '<option value="">无（主菜单）</option>';
+      if (typeof renderNavTree === 'undefined' || !window._navTree) {
+        parentOpts = '<div><label class="text-sm font-medium">父级菜单</label><select id="ne-parent" style="width:100%;background:#1e293b;color:#e2e8f0;border:1px solid #334155;border-radius:0.375rem;padding:0.375rem 0.5rem;font-size:0.85rem"><option value="">无（主菜单）</option></select></div>';
+      }
+
       var html = '<div class="form-grid">' +
         '<div><label class="text-sm font-medium">i18n Key</label><input id="ne-key" value="' + esc(item.i18n_key) + '" placeholder="nav_xxx"></div>' +
         '<div><label class="text-sm font-medium">默认标签</label><input id="ne-label" value="' + esc(item.default_label) + '" placeholder="产品中心"></div>' +
@@ -840,6 +847,7 @@
         '<div><label class="text-sm font-medium">图标</label><input id="ne-icon" value="' + esc(item.icon) + '" placeholder="kitchen"></div>' +
         '<div><label class="text-sm font-medium">分组</label><input id="ne-group" value="' + esc(item.group_key) + '" placeholder="products/solutions/..."></div>' +
         '<div><label class="text-sm font-medium">排序</label><input id="ne-sort" type="number" value="' + item.sort_order + '"></div>' +
+        '<div><label class="text-sm font-medium">打开方式</label><select id="ne-target" style="width:100%;background:#1e293b;color:#e2e8f0;border:1px solid #334155;border-radius:0.375rem;padding:0.375rem 0.5rem;font-size:0.85rem"><option value=""' + (!item.target ? ' selected' : '') + '>当前窗口</option><option value="_blank"' + (item.target === '_blank' ? ' selected' : '') + '>新窗口</option></select></div>' +
         '<div><label class="text-sm font-medium">父级 ID</label><input id="ne-parent" type="number" value="' + (item.parent_id || '') + '" placeholder="留空=主菜单"></div>' +
         '<div class="flex items-end gap-2"><label class="text-sm font-medium flex items-center gap-2"><input id="ne-active" type="checkbox" ' + (item.is_active ? 'checked' : '') + '> 启用</label>' +
         '<label class="text-sm font-medium flex items-center gap-2"><input id="ne-badge" type="checkbox" ' + (item.badge ? 'checked' : '') + '> HOT 标签</label></div></div>';
@@ -853,7 +861,8 @@
           sort_order: parseInt(document.getElementById('ne-sort').value) || 0,
           parent_id: document.getElementById('ne-parent').value ? parseInt(document.getElementById('ne-parent').value) : null,
           is_active: document.getElementById('ne-active').checked ? 1 : 0,
-          badge: document.getElementById('ne-badge').checked ? 1 : 0
+          badge: document.getElementById('ne-badge').checked ? 1 : 0,
+          target: document.getElementById('ne-target').value || ''
         };
         if (!body.i18n_key) { toast('请输入 i18n Key', true); return; }
         var promise;
@@ -1148,10 +1157,14 @@
             var vals = Object.values(s.content);
             preview = vals.map(function(v) { return typeof v === 'string' ? v : JSON.stringify(v); }).join(', ').slice(0, 80);
           }
+          var i18nHint = '';
+          if (s.section_key) {
+            i18nHint = '<div style="margin-top:2px;font-size:0.7rem;color:#94a3b8" title="翻译 key: ' + esc(s.section_key) + '">' + esc(s.section_key) + '</div>';
+          }
           html += '<tr style="border-bottom:1px solid #1e293b" data-section="' + esc(s.section_key) + '">' +
-            '<td style="padding:0.5rem;font-family:monospace;font-size:0.75rem;color:#94a3b8">' + esc(s.section_key) + '</td>' +
+            '<td style="padding:0.5rem;font-family:monospace;font-size:0.75rem;color:#94a3b8">' + esc(s.section_key) + i18nHint + '</td>' +
             '<td style="padding:0.5rem"><span style="font-size:0.7rem;padding:0.125rem 0.375rem;border-radius:0.25rem;background:#334155;color:#94a3b8">' + esc(s.section_type) + '</span></td>' +
-            '<td style="padding:0.5rem;color:#64748b;font-size:0.8rem;max-width:300px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">' + esc(preview) + '</td>' +
+            '<td style="padding:0.5rem;color:#64748b;font-size:0.8rem;max-width:300px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="' + esc(preview) + '">' + esc(preview) + '</td>' +
             '<td style="padding:0.5rem;text-align:center"><button class="btn-ghost edit-section-btn" style="font-size:0.75rem;padding:0.2rem 0.5rem">编辑</button></td>' +
             '</tr>';
         });
