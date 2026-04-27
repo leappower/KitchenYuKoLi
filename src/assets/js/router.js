@@ -1,1 +1,386 @@
-!function(t){"use strict";var e=t.Contacts&&t.Contacts.whatsapp||"8613163756465",n=Object.freeze({home:"/home/",products:"/products/",quote:"/quote/",thankYou:"/thank-you/",landing:"/landing/",support:"/support/",esg:"/esg/",roiCalculator:"/roi/"});function o(e){t.location.href=e}function r(t){var n="https://wa.me/"+e;return t?n+"?text="+encodeURIComponent(t):n}function a(t){this.isNavigating=!1,this.debounceMs=t||150}a.prototype.back=function(){if(!this.isNavigating){this.isNavigating=!0;var e=this;setTimeout(function(){e.isNavigating=!1},this.debounceMs),t.history&&t.history.length>1?t.history.back():o(n.home)}};const i=new a;function u(){i.back()}function c(t,e){for(var n=document.querySelectorAll(t),o=0;o<n.length;o++)n[o].addEventListener("click",e)}function s(){var e=t.location.pathname;"/"!==e&&-1===e.indexOf("/home/")&&-1===e.indexOf("/index")||c("button",function(t){var e=t.currentTarget.getAttribute("data-i18n")||"",r=t.currentTarget.textContent.trim();"home_roi_cta"!==e&&"home_launch_roi"!==e&&-1===r.indexOf("ROI Calculator")&&-1===r.indexOf("Profit Calculator")||o(n.roiCalculator)}),-1!==e.indexOf("/products/")&&c("button",function(t){var e=t.currentTarget.getAttribute("data-i18n")||"",n=t.currentTarget.textContent.trim();"products_view_summary"!==e&&"View Summary"!==n||function(){const t=document.getElementById("download-form");t&&t.scrollIntoView({behavior:"smooth",block:"start"})}()})}function l(){t.addEventListener("pageshow",function(e){e.persisted&&(d(),"function"==typeof t.recoverTranslationsFromBfcache?t.recoverTranslationsFromBfcache():"function"==typeof t.applyTranslations&&t.applyTranslations())})}function d(){!function(){for(var t={footer_hardware_title:n.products,nav_hardware:n.products,nav_solutions:n.home,nav_case_studies:n.caseStudies,footer_support_title:n.support,nav_support:n.support,nav_contact:n.quote,footer_case_studies:n.caseStudies,quote_equipment:n.products},e=document.querySelectorAll('a[href="#"], nav a'),o=0;o<e.length;o++){var r=e[o],a=null,i=r.getAttribute("data-i18n");i&&t[i]&&(a=t[i]),a&&(r.href=a)}}(),function(){for(var t=document.querySelectorAll('a[href*="wa.me"], a[href*="whatsapp"]'),e=r("Hello Yukoli, I need support."),n=0;n<t.length;n++){var o=t[n],a=o.getAttribute("href")||"";"#"!==a&&-1===a.indexOf("yournumber")&&-1===a.indexOf("yourlink")||(o.href=e,o.target="_blank",o.rel="noopener noreferrer")}}(),function(){if("function"!=typeof t.showSmartPopupManual)for(var e=["nav_get_quote","landing_request_quote","quote_get_a_quote"],r=document.querySelectorAll("button"),a=0;a<r.length;a++)(function(t){var r=t.getAttribute("data-i18n");-1!==e.indexOf(r)&&t.addEventListener("click",function(){o(n.quote)})})(r[a])}(),function(){for(var t=document.querySelectorAll('a[href="/"], a[href="./"], a[href="#home"], a[href="#"]'),e=0;e<t.length;e++){var o=t[e],r=o.querySelector('[data-icon="restaurant"], .material-symbols-outlined'),a=-1!==o.textContent.toLowerCase().indexOf("yukoli");("/"===o.getAttribute("href")||"./"===o.getAttribute("href")||r||a)&&(o.href=n.home)}}(),function(){for(var t=document.querySelectorAll("form"),e=0;e<t.length;e++)(function(t){t.addEventListener("submit",function(e){e.preventDefault();for(var r=t.querySelectorAll('input[type="text"], input[type="email"], input[type="number"], input[type="url"]'),a=!0,i=0;i<r.length;i++)if(r[i].required&&!r[i].value.trim()){r[i].focus(),a=!1;break}if(a){var u=t.querySelector('[type="submit"]');u&&(u.disabled=!0,u.dataset.originalText=u.textContent,u.textContent="Sending…"),setTimeout(function(){o(n.thankYou)},800)}})})(t[e])}();var e=t.location.pathname;"/"!==e&&-1===e.indexOf("/home/")&&-1===e.indexOf("/index")||(s(),function(){for(var e=t.location.pathname,n=document.querySelectorAll(".fixed.bottom-0 a"),o=0;o<n.length;o++){var r=n[o],a=r.textContent.trim().toLowerCase(),i=!1;("home"!==a||"/"!==e&&-1===e.indexOf("home")&&-1===e.indexOf("index"))&&("hardware"!==a&&"equipment"!==a&&"inventory"!==a||-1===e.indexOf("products"))?"quotes"===a&&-1!==e.indexOf("quote")&&(i=!0):i=!0,i&&(r.classList.add("text-primary"),r.classList.remove("text-slate-400","text-slate-500"))}}()),-1!==e.indexOf("/products/")&&s()}t.CommonUtils&&"function"==typeof t.CommonUtils.ready?t.CommonUtils.ready(d):"loading"===document.readyState?document.addEventListener("DOMContentLoaded",d):d(),l(),t.YukoliRouter={navigate:o,whatsappHref:r,safeBack:u,PAGES:n},t.CommonUtils&&"function"==typeof t.CommonUtils.ready?t.CommonUtils.ready(d):"loading"===document.readyState?document.addEventListener("DOMContentLoaded",d):d(),l(),t.YukoliRouter={navigate:o,whatsappHref:r,safeBack:u,PAGES:n}}(window);
+/**
+ * router.js — Yukoli Site-wide Navigation Utilities
+ *
+ * Provides: back button control, WhatsApp links, form submission,
+ * bfcache recovery, and link wiring utilities.
+ *
+ * NOTE: Primary navigation (header/footer) is handled by navigator.js
+ * and footer.js. This module provides supplementary utilities only.
+ *
+ * SSG: All page paths use directory URLs (/home/, /products/, etc.)
+ *
+ * @module router
+ */
+(function (global) {
+  "use strict";
+  /* ═══════════════════════════════════════════════════════════════════
+     SECTION 1: CONSTANTS & CONFIGURATION
+     ═══════════════════════════════════════════════════════════════════ */
+  var WHATSAPP_NUMBER = (global.Contacts && global.Contacts.whatsapp) || "8613163756465";
+  var PAGES = Object.freeze({
+    home: "/home/",
+    products: "/products/",
+    quote: "/quote/",
+    thankYou: "/thank-you/",
+    landing: "/landing/",
+    support: "/support/",
+    esg: "/esg/",
+    roiCalculator: "/roi/",
+  });
+  /* ═══════════════════════════════════════════════════════════════════
+     SECTION 2: DEPRECATED (removed getDeviceType, resolveDeviceUrl)
+     ═══════════════════════════════════════════════════════════════════ */
+  /* ═══════════════════════════════════════════════════════════════════
+     SECTION 3: NAVIGATION FUNCTIONS
+     ═══════════════════════════════════════════════════════════════════ */
+  function navigate(url) {
+    global.location.href = url;
+  }
+  function whatsappHref(msg) {
+    var base = "https://wa.me/" + WHATSAPP_NUMBER;
+    return msg ? base + "?text=" + encodeURIComponent(msg) : base;
+  }
+  /* ═══════════════════════════════════════════════════════════════════
+     SECTION 4: BACK BUTTON CONTROLLER (State-Based, Reliable)
+     ═══════════════════════════════════════════════════════════════════ */
+  /**
+   * BackButtonController: Manages back button state with reliable debouncing
+   * Uses isNavigating flag instead of time-based debounce (more predictable)
+   */
+  function BackButtonController(debounceMs) {
+    this.isNavigating = false;
+    this.debounceMs = debounceMs || 150;
+  }
+  BackButtonController.prototype.back = function () {
+    if (this.isNavigating) return;
+    this.isNavigating = true;
+    var self = this;
+    setTimeout(function () {
+      self.isNavigating = false;
+    }, this.debounceMs);
+    if (global.history && global.history.length > 1) {
+      global.history.back();
+    } else {
+      navigate(PAGES.home);
+    }
+  };
+  const backController = new BackButtonController();
+  function safeBack() {
+    backController.back();
+  }
+  /* ═══════════════════════════════════════════════════════════════════
+     SECTION 5: UTILITY FUNCTIONS
+     ═══════════════════════════════════════════════════════════════════ */
+  /**
+   * Attach click handler to elements matching selector (using forEach)
+   */
+  function on(selector, handler) {
+    var els = document.querySelectorAll(selector);
+    for (var i = 0; i < els.length; i++) {
+      els[i].addEventListener("click", handler);
+    }
+  }
+  /**
+   * Smooth scroll to element by ID
+   */
+  function scrollTo(id) {
+    const el = document.getElementById(id);
+    if (el) {
+      el.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  }
+  /* ═══════════════════════════════════════════════════════════════════
+     SECTION 6: LINK WIRING (OPTIMIZED: Single Pass)
+     ═══════════════════════════════════════════════════════════════════ */
+  /**
+   * Wire navigation links - Single pass, high-performance
+   *
+   * Two-tier lookup strategy:
+   * 1. data-i18n attribute (language-agnostic, highest priority)
+   * 2. Text content fallback (language-dependent, for legacy links)
+   *
+   * This allows gradual migration to data-i18n-based navigation
+   * while maintaining backward compatibility.
+   */
+  function wireNavLinks() {
+    // Priority 1: i18n key to page mapping (language-agnostic)
+    var i18nLinkMap = {
+      footer_hardware_title: PAGES.products,
+      nav_hardware: PAGES.products,
+      nav_solutions: PAGES.home,
+      nav_case_studies: PAGES.caseStudies,
+      footer_support_title: PAGES.support,
+      nav_support: PAGES.support,
+      nav_contact: PAGES.quote,
+      footer_case_studies: PAGES.caseStudies,
+      quote_equipment: PAGES.products,
+    };
+
+    var allLinks = document.querySelectorAll('a[href="#"], nav a');
+
+    for (var i = 0; i < allLinks.length; i++) {
+      var el = allLinks[i];
+      var href = null;
+
+      // Priority 1: Match by data-i18n attribute
+      var key = el.getAttribute("data-i18n");
+      if (key && i18nLinkMap[key]) {
+        href = i18nLinkMap[key];
+      }
+
+      // Apply resolved href
+      if (href) {
+        el.href = href;
+      }
+    }
+  }
+  /* ═══════════════════════════════════════════════════════════════════
+     SECTION 7: WHATSAPP LINKS
+     ═══════════════════════════════════════════════════════════════════ */
+  function wireWhatsAppLinks() {
+    var wa = document.querySelectorAll('a[href*="wa.me"], a[href*="whatsapp"]');
+    var href = whatsappHref("Hello Yukoli, I need support.");
+    for (var i = 0; i < wa.length; i++) {
+      var link = wa[i];
+      var current = link.getAttribute("href") || "";
+      if (current === "#" || current.indexOf("yournumber") !== -1 || current.indexOf("yourlink") !== -1) {
+        link.href = href;
+        link.target = "_blank";
+        link.rel = "noopener noreferrer";
+      }
+    }
+  }
+  /* ═══════════════════════════════════════════════════════════════════
+     SECTION 8: QUOTE BUTTONS
+     ═══════════════════════════════════════════════════════════════════ */
+  function wireQuoteButtons() {
+    if (typeof global.showSmartPopupManual === "function") return;
+    var quoteI18nKeys = ["nav_get_quote", "landing_request_quote", "quote_get_a_quote"];
+    var btns = document.querySelectorAll("button");
+    for (var i = 0; i < btns.length; i++) {
+      (function (btn) {
+        var key = btn.getAttribute("data-i18n");
+        if (quoteI18nKeys.indexOf(key) !== -1) {
+          btn.addEventListener("click", function () {
+            navigate(PAGES.quote);
+          });
+        }
+      })(btns[i]);
+    }
+  }
+  /* ═══════════════════════════════════════════════════════════════════
+     SECTION 9: LOGO / HOME LINKS
+     ═══════════════════════════════════════════════════════════════════ */
+  function wireHomeLogo() {
+    var logos = document.querySelectorAll('a[href="/"], a[href="./"], a[href="#home"], a[href="#"]');
+    for (var i = 0; i < logos.length; i++) {
+      var el = logos[i];
+      var hasIcon = el.querySelector('[data-icon="restaurant"], .material-symbols-outlined');
+      var hasBrand = el.textContent.toLowerCase().indexOf("yukoli") !== -1;
+      var isRoot = el.getAttribute("href") === "/" || el.getAttribute("href") === "./";
+      if (isRoot || hasIcon || hasBrand) {
+        el.href = PAGES.home;
+      }
+    }
+  }
+  /* ═══════════════════════════════════════════════════════════════════
+     SECTION 10: FORM SUBMISSION
+     ═══════════════════════════════════════════════════════════════════ */
+  function wireFormSubmit() {
+    var forms = document.querySelectorAll("form");
+    for (var i = 0; i < forms.length; i++) {
+      (function (form) {
+        form.addEventListener("submit", function (e) {
+          e.preventDefault();
+          var inputs = form.querySelectorAll(
+            'input[type="text"], input[type="email"], input[type="number"], input[type="url"]'
+          );
+          var valid = true;
+          for (var j = 0; j < inputs.length; j++) {
+            if (inputs[j].required && !inputs[j].value.trim()) {
+              inputs[j].focus();
+              valid = false;
+              break;
+            }
+          }
+          if (!valid) return;
+          var submitBtn = form.querySelector('[type="submit"]');
+          if (submitBtn) {
+            submitBtn.disabled = true;
+            submitBtn.dataset.originalText = submitBtn.textContent;
+            submitBtn.textContent = "Sending\u2026";
+          }
+          setTimeout(function () {
+            navigate(PAGES.thankYou);
+          }, 800);
+        });
+      })(forms[i]);
+    }
+  }
+  /* ═══════════════════════════════════════════════════════════════════
+     SECTION 11: BOTTOM NAV ACTIVE STATE
+     ═══════════════════════════════════════════════════════════════════ */
+  function wireBottomNav() {
+    var path = global.location.pathname;
+    var bottomLinks = document.querySelectorAll(".fixed.bottom-0 a");
+    for (var i = 0; i < bottomLinks.length; i++) {
+      var link = bottomLinks[i];
+      var label = link.textContent.trim().toLowerCase();
+      var isActive = false;
+      if (label === "home" && (path === "/" || path.indexOf("home") !== -1 || path.indexOf("index") !== -1)) {
+        isActive = true;
+      } else if (
+        (label === "hardware" || label === "equipment" || label === "inventory") &&
+        path.indexOf("products") !== -1
+      ) {
+        isActive = true;
+      } else if (label === "quotes" && path.indexOf("quote") !== -1) {
+        isActive = true;
+      }
+      if (isActive) {
+        link.classList.add("text-primary");
+        link.classList.remove("text-slate-400", "text-slate-500");
+      }
+    }
+  }
+  /* ═══════════════════════════════════════════════════════════════════
+     SECTION 12: PAGE-SPECIFIC INITIALIZATION
+     ═══════════════════════════════════════════════════════════════════ */
+
+  /**
+   * Page-specific button action handlers
+   *
+   * Centralized event delegation for page-specific button actions.
+   * Uses the existing `on()` helper for consistent event handling.
+   *
+   * Supported actions:
+   * - ROI Calculator navigation (home page)
+   * - View Summary scroll (catalog page)
+   */
+  function setupPageSpecificActions() {
+    var path = global.location.pathname;
+
+    // Home page: ROI Calculator buttons
+    if (path === "/" || path.indexOf("/home/") !== -1 || path.indexOf("/index") !== -1) {
+      on("button", function (e) {
+        var key = e.currentTarget.getAttribute("data-i18n") || "";
+        var text = e.currentTarget.textContent.trim();
+
+        // Navigate to ROI Calculator on specific button clicks
+        if (
+          key === "home_roi_cta" ||
+          key === "home_launch_roi" ||
+          text.indexOf("ROI Calculator") !== -1 ||
+          text.indexOf("Profit Calculator") !== -1
+        ) {
+          navigate(PAGES.roiCalculator);
+        }
+      });
+    }
+
+    // Products page: View Summary button
+    if (path.indexOf("/products/") !== -1) {
+      on("button", function (e) {
+        var key = e.currentTarget.getAttribute("data-i18n") || "";
+        var text = e.currentTarget.textContent.trim();
+
+        // Scroll to download form on View Summary button
+        if (key === "products_view_summary" || text === "View Summary") {
+          scrollTo("download-form");
+        }
+      });
+    }
+  }
+
+  // Legacy aliases for backward compatibility
+  function initHome() {
+    setupPageSpecificActions();
+    wireBottomNav();
+  }
+
+  function initProducts() {
+    setupPageSpecificActions();
+  }
+  /* ═══════════════════════════════════════════════════════════════════
+     SECTION 13: BFCACHE RECOVERY (Event-Driven, Reliable)
+     ═══════════════════════════════════════════════════════════════════ */
+  /**
+   * Setup bfcache recovery using pageshow event
+   * IMPORTANT: No delayed checks, no unreliable state inspection
+   * Event-driven recovery is the correct modern approach
+   */
+  function setupBfcacheRecovery() {
+    global.addEventListener("pageshow", function (event) {
+      if (!event.persisted) return;
+      if (typeof init === "function") {
+        init();
+      }
+      if (typeof global.recoverTranslationsFromBfcache === "function") {
+        global.recoverTranslationsFromBfcache();
+      } else if (typeof global.applyTranslations === "function") {
+        global.applyTranslations();
+      }
+    });
+  }
+  /* ═══════════════════════════════════════════════════════════════════
+     SECTION 14: MAIN INITIALIZATION
+     ═══════════════════════════════════════════════════════════════════ */
+  /**
+   * Main init function: Sets up all page wiring and initialization
+   */
+  function init() {
+    // Common wiring for all pages
+    wireNavLinks();
+    wireWhatsAppLinks();
+    wireQuoteButtons();
+    wireHomeLogo();
+    wireFormSubmit();
+    // Page-specific initialization
+    var path = global.location.pathname;
+    if (path === "/" || path.indexOf("/home/") !== -1 || path.indexOf("/index") !== -1) {
+      initHome();
+    }
+    if (path.indexOf("/products/") !== -1) {
+      initProducts();
+    }
+    // Other pages can be extended as needed
+  }
+  /* ═══════════════════════════════════════════════════════════════════
+     SECTION 15: AUTO-START & EXPORTS
+     ═══════════════════════════════════════════════════════════════════ */
+  // Auto-initialize when DOM is ready
+  if (global.CommonUtils && typeof global.CommonUtils.ready === "function") {
+    global.CommonUtils.ready(init);
+  } else if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", init);
+  } else {
+    init();
+  }
+  // Setup bfcache recovery handlers
+  setupBfcacheRecovery();
+  // Export public API for debugging and external use
+  global.YukoliRouter = {
+    navigate: navigate,
+    whatsappHref: whatsappHref,
+    safeBack: safeBack,
+    PAGES: PAGES,
+  };
+
+  // Auto-initialize when DOM is ready
+  if (global.CommonUtils && typeof global.CommonUtils.ready === "function") {
+    global.CommonUtils.ready(init);
+  } else if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", init);
+  } else {
+    init();
+  }
+  // Setup bfcache recovery handlers
+  setupBfcacheRecovery();
+  // Export public API for debugging and external use
+  global.YukoliRouter = {
+    navigate: navigate,
+    whatsappHref: whatsappHref,
+    safeBack: safeBack,
+    PAGES: PAGES,
+  };
+})(window);

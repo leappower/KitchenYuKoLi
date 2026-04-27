@@ -1,1 +1,331 @@
-!function(a){"use strict";var n="undefined"!=typeof NAV_CONFIG&&NAV_CONFIG.dropdowns&&NAV_CONFIG.dropdowns.applications||[{key:"nav_applications_fastfood",icon:"ramen_dining",href:"/applications/fast-food/",emoji:""},{key:"nav_applications_hotpot",icon:"local_fire_department",href:"/applications/hotpot/",emoji:""},{key:"nav_applications_cloud_kitchen",icon:"delivery_dining",href:"/applications/cloud-kitchen/",emoji:""},{key:"nav_applications_canteen",icon:"restaurant",href:"/applications/canteen/",emoji:""},{key:"nav_applications_thai",icon:"public",href:"/applications/southeast-asian/",emoji:""}],p=[{key:"nav_cases",icon:"monitoring",href:"/applications/cases/",badge:!1},{key:"nav_roi",icon:"calculate",href:"/roi/",badge:!0}];function e(a){return String(a).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;")}function o(a){var o=n.map(function(a,p){var o,t,i,r=(t=(o=a).href||"/applications/",i=o.emoji?'<span class="app-dropdown-emoji">'+o.emoji+"</span>":"",'<a href="'+e(t)+'" class="app-dropdown-item"><span class="app-dropdown-icon"><span class="material-symbols-outlined">'+e(o.icon)+'</span></span><span class="app-dropdown-label" data-i18n="'+e(o.key)+'">'+e(o.key)+"</span>"+i+'<span class="material-symbols-outlined app-dropdown-chevron">chevron_right</span></a>');return p<n.length-1&&(r+='<div class="app-dropdown-separator"></div>'),r}).join("\n"),t=p.map(function(a,n){var o,t,i=(t=(o=a).badge?'<span class="app-roi-badge" data-i18n="nav_roi_badge">HOT</span>':'<span class="material-symbols-outlined app-dropdown-chevron">chevron_right</span>','<a href="'+e(o.href)+'" class="app-dropdown-item"><span class="app-dropdown-icon"><span class="material-symbols-outlined">'+e(o.icon)+'</span></span><span class="app-dropdown-label" data-i18n="'+e(o.key)+'">'+e(o.key)+"</span>"+t+"</a>");return n<p.length-1&&(i+='<div class="app-dropdown-separator"></div>'),i}).join("\n");return'<div class="app-dropdown-wrap'+("ontouchstart"in window||navigator.maxTouchPoints>0?" touch-device":"")+'"><a href="#" class="'+e(a.activeClass||"")+' app-dropdown-trigger" data-app-trigger-label="'+e(a.labelKey||a.label)+'"><span data-i18n="'+e(a.labelKey||a.label)+'">'+e(a.label||a.labelKey)+'</span><span class="material-symbols-outlined app-dropdown-arrow">expand_more</span></a><div class="app-dropdown-panel"><div class="app-dropdown-card">'+o+'<div class="app-dropdown-separator" style="margin: 4px 0;"></div>'+t+"</div></div></div>"}function t(o){i();var t=document.createElement("div");t.className="app-popup-overlay";var r=document.createElement("div");r.className="app-popup-panel";var s=n.map(function(a){var n=a.href||"/applications/",p=a.emoji?'<span class="app-popup-emoji">'+a.emoji+"</span>":"";return'<a href="'+e(n)+'" class="app-popup-item"><span class="app-dropdown-icon"><span class="material-symbols-outlined">'+e(a.icon)+'</span></span><span class="app-popup-label" data-i18n="'+e(a.key)+'">'+e(a.key)+"</span>"+p+'<span class="material-symbols-outlined app-popup-chevron">chevron_right</span></a>'}).join("\n"),l=p.map(function(a){var n=a.badge?'<span class="app-roi-badge" data-i18n="nav_roi_badge">HOT</span>':'<span class="material-symbols-outlined app-popup-chevron">chevron_right</span>';return'<a href="'+e(a.href)+'" class="app-popup-item"><span class="app-dropdown-icon"><span class="material-symbols-outlined">'+e(a.icon)+'</span></span><span class="app-popup-label" data-i18n="'+e(a.key)+'">'+e(a.key)+"</span>"+n+"</a>"}).join("\n");r.innerHTML='<div class="app-popup-handle"></div>'+s+l,t.onclick=i,document.body.appendChild(t),document.body.appendChild(r),a.translationManager&&r.querySelectorAll("[data-i18n]").forEach(function(n){var p=n.getAttribute("data-i18n"),e=a.translationManager.translate(p);e&&e!==p&&(n.textContent=e)});for(var d=r.querySelectorAll(".app-popup-item"),c=0;c<d.length;c++)d[c].addEventListener("click",function(n){var p=n.currentTarget.getAttribute("href");i(),p&&a.SpaRouter&&(n.preventDefault(),a.SpaRouter.navigate(p))});requestAnimationFrame(function(){r.classList.add("is-open"),navigator.vibrate&&navigator.vibrate(12)})}function i(){document.querySelectorAll(".app-popup-overlay,.app-popup-panel").forEach(function(a){a.parentNode&&a.parentNode.removeChild(a)})}document.addEventListener("spa:load",function(){i()}),a.ApplicationsDropdown={SUBSERIES:n,EXTRAS:p,renderPC:o,renderTablet:o,initDropdownClick:function(){document.addEventListener("click",function(){document.querySelectorAll(".app-dropdown-wrap.is-open").forEach(function(a){a.classList.remove("is-open")})}),document.querySelectorAll(".app-dropdown-trigger").forEach(function(a){a.addEventListener("click",function(n){window.innerWidth<=720||(n.preventDefault(),n.stopPropagation(),a.closest(".app-dropdown-wrap").classList.toggle("is-open"))})})},openPopup:t,closePopup:i,bindAllPopupTriggers:function(){for(var a=document.querySelectorAll("[data-app-popup]"),n=0;n<a.length;n++){var p=a[n];p._appPopupBound||(p._appPopupBound=!0,p.addEventListener("click",function(a){a.preventDefault(),a.stopPropagation(),p.getAttribute("data-app-popup-href")||p.getAttribute("href"),t()}))}},injectAllStyles:function(){if(window.DropdownBaseStyles&&window.DropdownBaseStyles.inject(),!document.getElementById("app-dropdown-styles-v1")){var a=document.createElement("style");a.id="app-dropdown-styles-v1",a.setAttribute("data-ver","2026-03-22-v1"),a.textContent=[".app-dropdown-card { min-width: 320px; max-width: 420px; }",".app-dropdown-emoji {","  margin-left: auto; font-size: 13px; line-height: 1; opacity: .85; flex-shrink: 0;","}",".app-roi-badge {","  display: inline-flex; align-items: center; padding: 2px 7px;","  font-size: 10px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase;","  background: #ec5b13; color: #fff; border-radius: 20px;","  flex-shrink: 0; line-height: 1.4;","}",".app-popup-emoji {","  margin-left: auto; font-size: 15px; opacity: .85; flex-shrink: 0;","}"].join("\n"),document.head.appendChild(a)}}}}(window);
+/**
+ * applications-dropdown.js — iOS Style Responsive Applications Dropdown
+ * Desktop / Tablet / Mobile adaptive
+ */
+
+(function (global) {
+  "use strict";
+
+  /* ───────────────────────── DATA ───────────────────────── */
+
+  /** Application scenarios (5 items) */
+  var SUBSERIES = (typeof NAV_CONFIG !== 'undefined' && NAV_CONFIG.dropdowns && NAV_CONFIG.dropdowns.applications) || [
+    { key: "nav_applications_fastfood", icon: "ramen_dining", href: "/applications/fast-food/", emoji: "" },
+    { key: "nav_applications_hotpot", icon: "local_fire_department", href: "/applications/hotpot/", emoji: "" },
+    { key: "nav_applications_cloud_kitchen", icon: "delivery_dining", href: "/applications/cloud-kitchen/", emoji: "" },
+    { key: "nav_applications_canteen", icon: "restaurant", href: "/applications/canteen/", emoji: "" },
+    { key: "nav_applications_thai", icon: "public", href: "/applications/southeast-asian/", emoji: "" },
+  ];
+
+  /** Bottom links (Case Studies + ROI) */
+  var EXTRAS = [
+    { key: "nav_cases", icon: "monitoring", href: "/applications/cases/", badge: false },
+    { key: "nav_roi", icon: "calculate", href: "/roi/", badge: true },
+  ];
+
+  /* ───────────────────────── HELPERS ───────────────────────── */
+
+  function esc(str) {
+    return String(str).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+  }
+
+  function isTouch() {
+    return "ontouchstart" in window || navigator.maxTouchPoints > 0;
+  }
+
+  /* ───────────────────────── CSS ───────────────────────── */
+
+  function injectStyles() {
+    // Shared base styles
+    if (window.DropdownBaseStyles) window.DropdownBaseStyles.inject();
+    // Unique overrides: card size, ROI badge, emoji
+    if (document.getElementById("app-dropdown-styles-v1")) return;
+    var style = document.createElement("style");
+    style.id = "app-dropdown-styles-v1";
+    style.setAttribute("data-ver", "2026-03-22-v1");
+    style.textContent = [
+      /* Card size override */
+      ".app-dropdown-card { min-width: 320px; max-width: 420px; }",
+
+      /* Emoji Badge */
+      ".app-dropdown-emoji {",
+      "  margin-left: auto; font-size: 13px; line-height: 1; opacity: .85; flex-shrink: 0;",
+      "}",
+
+      /* ROI Badge */
+      ".app-roi-badge {",
+      "  display: inline-flex; align-items: center; padding: 2px 7px;",
+      "  font-size: 10px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase;",
+      "  background: #ec5b13; color: #fff; border-radius: 20px;",
+      "  flex-shrink: 0; line-height: 1.4;",
+      "}",
+
+      /* Popup emoji */
+      ".app-popup-emoji {",
+      "  margin-left: auto; font-size: 15px; opacity: .85; flex-shrink: 0;",
+      "}",
+    ].join("\n");
+    document.head.appendChild(style);
+  }
+
+  /* ───────────────────────── BUILDERS ───────────────────────── */
+
+  function buildItem(sub, href) {
+    var itemHref = sub.href || href;
+    var chevron = '<span class="material-symbols-outlined app-dropdown-chevron">chevron_right</span>';
+    var emojiHtml = sub.emoji ? '<span class="app-dropdown-emoji">' + sub.emoji + "</span>" : "";
+    return (
+      '<a href="' +
+      esc(itemHref) +
+      '" class="app-dropdown-item">' +
+      '<span class="app-dropdown-icon">' +
+      '<span class="material-symbols-outlined">' +
+      esc(sub.icon) +
+      "</span>" +
+      "</span>" +
+      '<span class="app-dropdown-label" data-i18n="' +
+      esc(sub.key) +
+      '">' +
+      esc(sub.key) +
+      "</span>" +
+      emojiHtml +
+      chevron +
+      "</a>"
+    );
+  }
+
+  function buildSeparator() {
+    return '<div class="app-dropdown-separator"></div>';
+  }
+
+  function buildDropdownItem(item) {
+    var badgeHtml = item.badge
+      ? '<span class="app-roi-badge" data-i18n="nav_roi_badge">HOT</span>'
+      : '<span class="material-symbols-outlined app-dropdown-chevron">chevron_right</span>';
+    return (
+      '<a href="' +
+      esc(item.href) +
+      '" class="app-dropdown-item">' +
+      '<span class="app-dropdown-icon">' +
+      '<span class="material-symbols-outlined">' +
+      esc(item.icon) +
+      "</span>" +
+      "</span>" +
+      '<span class="app-dropdown-label" data-i18n="' +
+      esc(item.key) +
+      '">' +
+      esc(item.key) +
+      "</span>" +
+      badgeHtml +
+      "</a>"
+    );
+  }
+
+  function renderDropdown(cfg) {
+    var parentHref = "/applications/";
+
+    var items = SUBSERIES.map(function (s, idx) {
+      var html = buildItem(s, parentHref);
+      if (idx < SUBSERIES.length - 1) {
+        html += buildSeparator();
+      }
+      return html;
+    }).join("\n");
+
+    var extrasHtml = EXTRAS.map(function (s, idx) {
+      var row = buildDropdownItem(s);
+      if (idx < EXTRAS.length - 1) row += '<div class="app-dropdown-separator"></div>';
+      return row;
+    }).join("\n");
+
+    var html =
+      '<div class="app-dropdown-wrap' +
+      (isTouch() ? " touch-device" : "") +
+      '">' +
+      '<a href="#"' +
+      ' class="' +
+      esc(cfg.activeClass || "") +
+      ' app-dropdown-trigger"' +
+      ' data-app-trigger-label="' +
+      esc(cfg.labelKey || cfg.label) +
+      '">' +
+      '<span data-i18n="' +
+      esc(cfg.labelKey || cfg.label) +
+      '">' +
+      esc(cfg.label || cfg.labelKey) +
+      "</span>" +
+      '<span class="material-symbols-outlined app-dropdown-arrow">expand_more</span>' +
+      "</a>" +
+      '<div class="app-dropdown-panel">' +
+      '<div class="app-dropdown-card">' +
+      items +
+      '<div class="app-dropdown-separator" style="margin: 4px 0;"></div>' +
+      extrasHtml +
+      "</div>" +
+      "</div>" +
+      "</div>";
+
+    return html;
+  }
+
+  /* ───────────────────────── INTERACTION ───────────────────────── */
+
+  function initDropdownClick() {
+    document.addEventListener("click", function () {
+      document.querySelectorAll(".app-dropdown-wrap.is-open").forEach(function (d) {
+        d.classList.remove("is-open");
+      });
+    });
+
+    document.querySelectorAll(".app-dropdown-trigger").forEach(function (t) {
+      t.addEventListener("click", function (e) {
+        if (window.innerWidth <= 720) return;
+        e.preventDefault();
+        e.stopPropagation();
+        t.closest(".app-dropdown-wrap").classList.toggle("is-open");
+      });
+    });
+  }
+
+  /* ───────────────────────── MOBILE POPUP ───────────────────────── */
+
+  function openPopup(href) {
+    closePopup();
+
+    var overlay = document.createElement("div");
+    overlay.className = "app-popup-overlay";
+
+    var panel = document.createElement("div");
+    panel.className = "app-popup-panel";
+
+    var handle = '<div class="app-popup-handle"></div>';
+
+    var items = SUBSERIES.map(function (s) {
+      var itemHref = s.href || "/applications/";
+      var chevron = '<span class="material-symbols-outlined app-popup-chevron">chevron_right</span>';
+      var emojiHtml = s.emoji ? '<span class="app-popup-emoji">' + s.emoji + "</span>" : "";
+      return (
+        '<a href="' +
+        esc(itemHref) +
+        '" class="app-popup-item">' +
+        '<span class="app-dropdown-icon">' +
+        '<span class="material-symbols-outlined">' +
+        esc(s.icon) +
+        "</span>" +
+        "</span>" +
+        '<span class="app-popup-label" data-i18n="' +
+        esc(s.key) +
+        '">' +
+        esc(s.key) +
+        "</span>" +
+        emojiHtml +
+        chevron +
+        "</a>"
+      );
+    }).join("\n");
+
+    var extrasItems = EXTRAS.map(function (s) {
+      var badgeHtml = s.badge
+        ? '<span class="app-roi-badge" data-i18n="nav_roi_badge">HOT</span>'
+        : '<span class="material-symbols-outlined app-popup-chevron">chevron_right</span>';
+      return (
+        '<a href="' +
+        esc(s.href) +
+        '" class="app-popup-item">' +
+        '<span class="app-dropdown-icon">' +
+        '<span class="material-symbols-outlined">' +
+        esc(s.icon) +
+        "</span>" +
+        "</span>" +
+        '<span class="app-popup-label" data-i18n="' +
+        esc(s.key) +
+        '">' +
+        esc(s.key) +
+        "</span>" +
+        badgeHtml +
+        "</a>"
+      );
+    }).join("\n");
+
+    panel.innerHTML = handle + items + extrasItems;
+
+    overlay.onclick = closePopup;
+    document.body.appendChild(overlay);
+    document.body.appendChild(panel);
+
+    // Translate popup items immediately after DOM insertion
+    if (global.translationManager) {
+      panel.querySelectorAll("[data-i18n]").forEach(function (el) {
+        var key = el.getAttribute("data-i18n");
+        var translated = global.translationManager.translate(key);
+        if (translated && translated !== key) {
+          el.textContent = translated;
+        }
+      });
+    }
+
+    // Bind close on popup item click
+    var popupItems = panel.querySelectorAll(".app-popup-item");
+    for (var k = 0; k < popupItems.length; k++) {
+      popupItems[k].addEventListener("click", function (e) {
+        var target = e.currentTarget;
+        var itemHref = target.getAttribute("href");
+        closePopup();
+        if (itemHref && global.SpaRouter) {
+          e.preventDefault();
+          global.SpaRouter.navigate(itemHref);
+        }
+      });
+    }
+
+    requestAnimationFrame(function () {
+      panel.classList.add("is-open");
+      navigator.vibrate && navigator.vibrate(12);
+    });
+  }
+
+  function closePopup() {
+    document.querySelectorAll(".app-popup-overlay,.app-popup-panel").forEach(function (el) {
+      el.parentNode && el.parentNode.removeChild(el);
+    });
+  }
+
+  /**
+   * Bind click handlers to all elements with data-app-popup attribute.
+   */
+  function bindAllPopupTriggers() {
+    var triggers = document.querySelectorAll("[data-app-popup]");
+    for (var i = 0; i < triggers.length; i++) {
+      var el = triggers[i];
+      if (el._appPopupBound) continue;
+      el._appPopupBound = true;
+
+      el.addEventListener("click", function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+        var href = el.getAttribute("data-app-popup-href") || el.getAttribute("href") || "/applications/";
+        openPopup(href);
+      });
+    }
+  }
+
+  /* ───────────────────────── SPA CLEANUP ───────────────────────── */
+
+  document.addEventListener("spa:load", function () {
+    closePopup();
+  });
+
+  /* ───────────────────────── PUBLIC API ───────────────────────── */
+
+  global.ApplicationsDropdown = {
+    SUBSERIES: SUBSERIES,
+    EXTRAS: EXTRAS,
+    renderPC: renderDropdown,
+    renderTablet: renderDropdown,
+    initDropdownClick: initDropdownClick,
+    openPopup: openPopup,
+    closePopup: closePopup,
+    bindAllPopupTriggers: bindAllPopupTriggers,
+    injectAllStyles: injectStyles,
+  };
+})(window);

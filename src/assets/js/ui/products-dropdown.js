@@ -1,1 +1,317 @@
-!function(o){"use strict";var e="undefined"!=typeof NAV_CONFIG&&NAV_CONFIG.dropdowns&&NAV_CONFIG.dropdowns.products||[{key:"nav_products_cutting",icon:"content_cut",emoji:"",href:"/products/cutting/"},{key:"nav_products_stirfry",icon:"local_fire_department",emoji:"🔥",href:"/products/stirfry/"},{key:"nav_products_frying",icon:"outdoor_grill",emoji:"",href:"/products/frying/"},{key:"nav_products_stewing",icon:"soup_kitchen",emoji:"",href:"/products/stewing/"},{key:"nav_products_steaming",icon:"cloud",emoji:"",href:"/products/steaming/"},{key:"nav_products_other",icon:"more_horiz",emoji:"",href:"/products/other/"}];function r(o){return String(o).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;")}function n(o){var n="/products/",a='<a href="'+r(n)+'" class="prod-dropdown-item prod-viewall-item"><span class="prod-dropdown-icon"><span class="material-symbols-outlined">grid_view</span></span><span class="prod-dropdown-label" data-i18n="nav_mega_view_all">View All Products</span><span class="material-symbols-outlined prod-dropdown-chevron">chevron_right</span></a>',t=e.map(function(o,a){var t,p,d,i,s=(p=n,d=(t=o).href||p,i=t.emoji?'<span class="prod-dropdown-emoji">'+t.emoji+"</span>":"",'<a href="'+r(d)+'" class="prod-dropdown-item"><span class="prod-dropdown-icon"><span class="material-symbols-outlined">'+r(t.icon)+'</span></span><span class="prod-dropdown-label" data-i18n="'+r(t.key)+'">'+r(t.key)+"</span>"+i+'<span class="material-symbols-outlined prod-dropdown-chevron">chevron_right</span></a>');return a<e.length-1&&(s+='<div class="prod-dropdown-separator"></div>'),s}).join("\n");return'<div class="prod-dropdown-wrap'+("ontouchstart"in window||navigator.maxTouchPoints>0?" touch-device":"")+'"><a href="#" class="'+r(o.activeClass||"")+' prod-dropdown-trigger" data-prod-trigger-label="'+r(o.labelKey||o.label)+'"><span data-i18n="'+r(o.labelKey||o.label)+'">'+r(o.label||o.labelKey)+'</span><span class="material-symbols-outlined prod-dropdown-arrow">expand_more</span></a><div class="prod-dropdown-panel"><div class="prod-dropdown-card">'+t+'<div class="prod-dropdown-separator" style="margin: 4px 0;"></div>'+a+"</div></div></div>"}function a(n){t();var a="/products/",p=document.createElement("div");p.className="prod-popup-overlay";var d=document.createElement("div");d.className="prod-popup-panel";var i='<a href="'+r(a)+'" class="prod-popup-item prod-viewall-item"><span class="prod-dropdown-icon"><span class="material-symbols-outlined">grid_view</span></span><span class="prod-popup-label" data-i18n="nav_mega_view_all">View All Products</span><span class="material-symbols-outlined prod-popup-chevron">chevron_right</span></a>',s=e.map(function(o){var e=o.href||a,n=o.emoji?'<span class="prod-popup-emoji">'+o.emoji+"</span>":"";return'<a href="'+r(e)+'" class="prod-popup-item"><span class="prod-dropdown-icon"><span class="material-symbols-outlined">'+r(o.icon)+'</span></span><span class="prod-popup-label" data-i18n="'+r(o.key)+'">'+r(o.key)+"</span>"+n+'<span class="material-symbols-outlined prod-popup-chevron">chevron_right</span></a>'}).join("\n");d.innerHTML='<div class="prod-popup-handle"></div>'+s+i,p.onclick=t,document.body.appendChild(p),document.body.appendChild(d),o.translationManager&&d.querySelectorAll("[data-i18n]").forEach(function(e){var r=e.getAttribute("data-i18n"),n=o.translationManager.translate(r);n&&n!==r&&(e.textContent=n)});for(var l=d.querySelectorAll(".prod-popup-item"),c=0;c<l.length;c++)l[c].addEventListener("click",function(e){var r=e.currentTarget.getAttribute("href");t(),r&&o.SpaRouter&&(e.preventDefault(),o.SpaRouter.navigate(r))});requestAnimationFrame(function(){d.classList.add("is-open"),navigator.vibrate&&navigator.vibrate(12)})}function t(){document.querySelectorAll(".prod-popup-overlay,.prod-popup-panel").forEach(function(o){o.parentNode&&o.parentNode.removeChild(o)})}document.addEventListener("spa:load",function(){t()}),o.ProductsDropdown={SUBSERIES:e,renderPC:n,renderTablet:n,initDropdownClick:function(){document.addEventListener("click",function(){document.querySelectorAll(".prod-dropdown-wrap.is-open").forEach(function(o){o.classList.remove("is-open")})}),document.querySelectorAll(".prod-dropdown-trigger").forEach(function(o){o.addEventListener("click",function(e){window.innerWidth<=720||(e.preventDefault(),e.stopPropagation(),o.closest(".prod-dropdown-wrap").classList.toggle("is-open"))})})},openPopup:a,closePopup:t,bindAllPopupTriggers:function(){for(var o=document.querySelectorAll("[data-prod-popup]"),e=0;e<o.length;e++){var r=o[e];r._prodPopupBound||(r._prodPopupBound=!0,r.addEventListener("click",function(o){o.preventDefault(),o.stopPropagation(),r.getAttribute("data-prod-popup-href")||r.getAttribute("href"),a()}))}},injectAllStyles:function(){if(window.DropdownBaseStyles&&window.DropdownBaseStyles.inject(),!document.getElementById("prod-dropdown-styles-v4")){["prod-ios-dropdown-styles","prod-dropdown-styles-2026","prod-dropdown-pc-styles","prod-dropdown-tablet-styles","prod-dropdown-styles-v2","prod-dropdown-styles-v3"].forEach(function(o){var e=document.getElementById(o);e&&e.remove()});var o=document.createElement("style");o.id="prod-dropdown-styles-v4",o.setAttribute("data-ver","2026-03-22-v4"),o.textContent=[".prod-dropdown-card { min-width: 320px; max-width: 420px; }",".prod-dropdown-emoji {","  margin-left: auto; font-size: 13px; line-height: 1; opacity: .85; flex-shrink: 0;","}",".prod-viewall-item {","  display: flex; align-items: center; gap: 8px;","  padding: 9px 12px; font-size: 13px; font-weight: 600; color: #1d1d1f;","  text-decoration: none; border-radius: 10px; transition: background .1s ease;","}",".prod-viewall-item:hover { background: rgba(236,91,19,.06); color: #ec5b13; }",".prod-viewall-item .material-symbols-outlined { font-size: 16px; }","html.dark .prod-viewall-item { color: #f5f5f7; }","html.dark .prod-viewall-item:hover { background: rgba(236,91,19,.10); color: #f97316; }",".prod-popup-emoji {","  margin-left: auto; font-size: 15px; opacity: .85; flex-shrink: 0;","}"].join("\n"),document.head.appendChild(o)}}}}(window);
+/**
+ * products-dropdown.js — Responsive Products Dropdown
+ * Desktop / Tablet: floating card style
+ * Mobile: iOS bottom sheet popup
+ */
+
+(function (global) {
+  "use strict";
+
+  /* ───────────────────────── DATA ───────────────────────── */
+
+  var SUBSERIES = (typeof NAV_CONFIG !== 'undefined' && NAV_CONFIG.dropdowns && NAV_CONFIG.dropdowns.products) || [
+    { key: "nav_products_cutting", icon: "content_cut", emoji: "", href: "/products/cutting/" },
+    { key: "nav_products_stirfry", icon: "local_fire_department", emoji: "🔥", href: "/products/stirfry/" },
+    { key: "nav_products_frying", icon: "outdoor_grill", emoji: "", href: "/products/frying/" },
+    { key: "nav_products_stewing", icon: "soup_kitchen", emoji: "", href: "/products/stewing/" },
+    { key: "nav_products_steaming", icon: "cloud", emoji: "", href: "/products/steaming/" },
+    { key: "nav_products_other", icon: "more_horiz", emoji: "", href: "/products/other/" },
+  ];
+
+  /* ───────────────────────── HELPERS ───────────────────────── */
+
+  function esc(str) {
+    return String(str).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+  }
+
+  function isTouch() {
+    return "ontouchstart" in window || navigator.maxTouchPoints > 0;
+  }
+
+  /* ───────────────────────── CSS ───────────────────────── */
+
+  function injectStyles() {
+    // Shared base styles
+    if (window.DropdownBaseStyles) window.DropdownBaseStyles.inject();
+    // Unique overrides: viewall-item, emoji sizes
+    if (document.getElementById("prod-dropdown-styles-v4")) return;
+
+    // Remove all old version style elements
+    [
+      "prod-ios-dropdown-styles",
+      "prod-dropdown-styles-2026",
+      "prod-dropdown-pc-styles",
+      "prod-dropdown-tablet-styles",
+      "prod-dropdown-styles-v2",
+      "prod-dropdown-styles-v3",
+    ].forEach(function (id) {
+      var old = document.getElementById(id);
+      if (old) old.remove();
+    });
+
+    var style = document.createElement("style");
+    style.id = "prod-dropdown-styles-v4";
+    style.setAttribute("data-ver", "2026-03-22-v4");
+    style.textContent = [
+      /* Card size override */
+      ".prod-dropdown-card { min-width: 320px; max-width: 420px; }",
+
+      /* Emoji Badge */
+      ".prod-dropdown-emoji {",
+      "  margin-left: auto; font-size: 13px; line-height: 1; opacity: .85; flex-shrink: 0;",
+      "}",
+
+      /* View All link */
+      ".prod-viewall-item {",
+      "  display: flex; align-items: center; gap: 8px;",
+      "  padding: 9px 12px; font-size: 13px; font-weight: 600; color: #1d1d1f;",
+      "  text-decoration: none; border-radius: 10px; transition: background .1s ease;",
+      "}",
+      ".prod-viewall-item:hover { background: rgba(236,91,19,.06); color: #ec5b13; }",
+      ".prod-viewall-item .material-symbols-outlined { font-size: 16px; }",
+      "html.dark .prod-viewall-item { color: #f5f5f7; }",
+      "html.dark .prod-viewall-item:hover { background: rgba(236,91,19,.10); color: #f97316; }",
+
+      /* Popup emoji */
+      ".prod-popup-emoji {",
+      "  margin-left: auto; font-size: 15px; opacity: .85; flex-shrink: 0;",
+      "}",
+    ].join("\n");
+    document.head.appendChild(style);
+  }
+
+  /* ───────────────────────── BUILDERS ───────────────────────── */
+
+  function buildItem(sub, href) {
+    var itemHref = sub.href || href;
+    var chevron = '<span class="material-symbols-outlined prod-dropdown-chevron">chevron_right</span>';
+    var emojiHtml = sub.emoji ? '<span class="prod-dropdown-emoji">' + sub.emoji + "</span>" : "";
+    return (
+      '<a href="' +
+      esc(itemHref) +
+      '" class="prod-dropdown-item">' +
+      '<span class="prod-dropdown-icon">' +
+      '<span class="material-symbols-outlined">' +
+      esc(sub.icon) +
+      "</span>" +
+      "</span>" +
+      '<span class="prod-dropdown-label" data-i18n="' +
+      esc(sub.key) +
+      '">' +
+      esc(sub.key) +
+      "</span>" +
+      emojiHtml +
+      chevron +
+      "</a>"
+    );
+  }
+
+  function buildSeparator() {
+    return '<div class="prod-dropdown-separator"></div>';
+  }
+
+  /* ── Unified dropdown: floating card for both PC and Tablet ── */
+  function renderDropdown(cfg) {
+    var parentHref = "/products/"; // default landing for this dropdown group
+
+    // "View All Products" link at TOP (first sub-item)
+    var viewAll =
+      '<a href="' +
+      esc(parentHref) +
+      '" class="prod-dropdown-item prod-viewall-item">' +
+      '<span class="prod-dropdown-icon">' +
+      '<span class="material-symbols-outlined">grid_view</span>' +
+      "</span>" +
+      '<span class="prod-dropdown-label" data-i18n="nav_mega_view_all">View All Products</span>' +
+      '<span class="material-symbols-outlined prod-dropdown-chevron">chevron_right</span>' +
+      "</a>";
+
+    var items = SUBSERIES.map(function (s, idx) {
+      var html = buildItem(s, parentHref);
+      if (idx < SUBSERIES.length - 1) {
+        html += buildSeparator();
+      }
+      return html;
+    }).join("\n");
+
+    var html =
+      '<div class="prod-dropdown-wrap' +
+      (isTouch() ? " touch-device" : "") +
+      '">' +
+      '<a href="#"' +
+      ' class="' +
+      esc(cfg.activeClass || "") +
+      ' prod-dropdown-trigger"' +
+      ' data-prod-trigger-label="' +
+      esc(cfg.labelKey || cfg.label) +
+      '">' +
+      '<span data-i18n="' +
+      esc(cfg.labelKey || cfg.label) +
+      '">' +
+      esc(cfg.label || cfg.labelKey) +
+      "</span>" +
+      '<span class="material-symbols-outlined prod-dropdown-arrow">expand_more</span>' +
+      "</a>" +
+      '<div class="prod-dropdown-panel">' +
+      '<div class="prod-dropdown-card">' +
+      items +
+      '<div class="prod-dropdown-separator" style="margin: 4px 0;"></div>' +
+      viewAll +
+      "</div>" +
+      "</div>" +
+      "</div>";
+
+    return html;
+  }
+
+  /* ───────────────────────── INTERACTION ───────────────────────── */
+
+  function initDropdownClick() {
+    document.addEventListener("click", function () {
+      document.querySelectorAll(".prod-dropdown-wrap.is-open").forEach(function (d) {
+        d.classList.remove("is-open");
+      });
+    });
+
+    document.querySelectorAll(".prod-dropdown-trigger").forEach(function (t) {
+      t.addEventListener("click", function (e) {
+        if (window.innerWidth <= 720) return;
+        e.preventDefault();
+        e.stopPropagation();
+        t.closest(".prod-dropdown-wrap").classList.toggle("is-open");
+      });
+    });
+  }
+
+  /* ───────────────────────── MOBILE POPUP ───────────────────────── */
+
+  function openPopup(href) {
+    closePopup();
+
+    var parentHref = "/products/"; // default landing page
+
+    var overlay = document.createElement("div");
+    overlay.className = "prod-popup-overlay";
+
+    var panel = document.createElement("div");
+    panel.className = "prod-popup-panel";
+
+    var handle = '<div class="prod-popup-handle"></div>';
+
+    // "View All Products" as first item in popup
+    var viewAllHtml =
+      '<a href="' +
+      esc(parentHref) +
+      '" class="prod-popup-item prod-viewall-item">' +
+      '<span class="prod-dropdown-icon">' +
+      '<span class="material-symbols-outlined">grid_view</span>' +
+      "</span>" +
+      '<span class="prod-popup-label" data-i18n="nav_mega_view_all">View All Products</span>' +
+      '<span class="material-symbols-outlined prod-popup-chevron">chevron_right</span>' +
+      "</a>";
+
+    var items = SUBSERIES.map(function (s) {
+      var itemHref = s.href || parentHref;
+      var chevron = '<span class="material-symbols-outlined prod-popup-chevron">chevron_right</span>';
+      var emojiHtml = s.emoji ? '<span class="prod-popup-emoji">' + s.emoji + "</span>" : "";
+      return (
+        '<a href="' +
+        esc(itemHref) +
+        '" class="prod-popup-item">' +
+        '<span class="prod-dropdown-icon">' +
+        '<span class="material-symbols-outlined">' +
+        esc(s.icon) +
+        "</span>" +
+        "</span>" +
+        '<span class="prod-popup-label" data-i18n="' +
+        esc(s.key) +
+        '">' +
+        esc(s.key) +
+        "</span>" +
+        emojiHtml +
+        chevron +
+        "</a>"
+      );
+    }).join("\n");
+
+    panel.innerHTML = handle + items + viewAllHtml;
+
+    overlay.onclick = closePopup;
+    document.body.appendChild(overlay);
+    document.body.appendChild(panel);
+
+    // Translate popup items immediately after DOM insertion
+    if (global.translationManager) {
+      panel.querySelectorAll("[data-i18n]").forEach(function (el) {
+        var key = el.getAttribute("data-i18n");
+        var translated = global.translationManager.translate(key);
+        if (translated && translated !== key) {
+          el.textContent = translated;
+        }
+      });
+    }
+
+    var popupItems = panel.querySelectorAll(".prod-popup-item");
+    for (var k = 0; k < popupItems.length; k++) {
+      popupItems[k].addEventListener("click", function (e) {
+        var target = e.currentTarget;
+        var itemHref = target.getAttribute("href");
+        closePopup();
+        if (itemHref && global.SpaRouter) {
+          e.preventDefault();
+          global.SpaRouter.navigate(itemHref);
+        }
+      });
+    }
+
+    requestAnimationFrame(function () {
+      panel.classList.add("is-open");
+      navigator.vibrate && navigator.vibrate(12);
+    });
+  }
+
+  function closePopup() {
+    document.querySelectorAll(".prod-popup-overlay,.prod-popup-panel").forEach(function (el) {
+      el.parentNode && el.parentNode.removeChild(el);
+    });
+  }
+
+  /**
+   * Bind click handlers to all elements with data-prod-popup attribute.
+   * Used by footer.js bottom nav (mobile/tablet) to open product category popup.
+   */
+  function bindAllPopupTriggers() {
+    var triggers = document.querySelectorAll("[data-prod-popup]");
+    for (var i = 0; i < triggers.length; i++) {
+      var el = triggers[i];
+      if (el._prodPopupBound) continue;
+      el._prodPopupBound = true;
+
+      el.addEventListener("click", function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+        var href = el.getAttribute("data-prod-popup-href") || el.getAttribute("href") || "/products/";
+        openPopup(href);
+      });
+    }
+  }
+
+  /* ───────────────────────── SPA CLEANUP ───────────────────────── */
+
+  document.addEventListener("spa:load", function () {
+    closePopup();
+  });
+
+  /* ───────────────────────── PUBLIC API ───────────────────────── */
+
+  global.ProductsDropdown = {
+    SUBSERIES: SUBSERIES,
+    renderPC: renderDropdown,
+    renderTablet: renderDropdown,
+    initDropdownClick: initDropdownClick,
+    openPopup: openPopup,
+    closePopup: closePopup,
+    bindAllPopupTriggers: bindAllPopupTriggers,
+    injectAllStyles: injectStyles,
+  };
+})(window);

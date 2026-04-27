@@ -1,1 +1,104 @@
-!function(e){"use strict";var t,a=[{id:"home",icon:"home",key:"nav_home",href:"/home/",fill:!0},{id:"products",icon:"kitchen",key:"nav_products",href:"/products/",fill:!1},{id:"solutions",icon:"build",key:"nav_solutions",href:"/solutions/",fill:!1},{id:"whatsapp",icon:"chat",key:"nav_whatsapp",href:"",fill:!1,isWhatsApp:!0}];function r(e){return String(e).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;")}function n(e,t){return'<div class="fixed bottom-0 left-0 right-0 z-[var(--z-footer)]"><div class="flex gap-2 border-t border-slate-200 dark:border-slate-800 bg-background-light/95 dark:bg-background-dark/95 backdrop-blur-md px-4 pb-6 pt-2">'+function(e,t){return e.map(function(e){var a=e.id===t,n=a?"text-primary":"text-slate-400 dark:text-slate-500",i=a&&e.fill?" style=\"font-variation-settings: 'FILL' 1;\"":"",o=e.key?'<p class="text-[10px] font-bold uppercase tracking-wider" data-i18n="'+r(e.key)+'">'+r(e.key)+"</p>":"";return e.isWhatsApp?'<a class="whatsapp-tab-item relative flex flex-1 flex-col items-center justify-center gap-1 '+(n="text-[#25d366]")+'" href="https://wa.me/8613163756465" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp"><span class="material-symbols-outlined relative" style="font-size:26px">'+r(e.icon)+"</span>"+o+"</a>":'<a class="relative flex flex-1 flex-col items-center justify-center gap-1 '+n+'" href="'+r(e.href)+'"><span class="material-symbols-outlined relative"'+i+'">'+r(e.icon)+"</span>"+o+"</a>"}).join("\n")}(a,t)+"</div></div>"}function i(){for(var t=document.querySelectorAll('footer[data-component="footer"]'),a=0;a<t.length;a++){var r=t[a],i={variant:r.getAttribute("data-variant")||"mobile",active:r.getAttribute("data-active")||""};if(window.innerWidth>=768)r.innerHTML="",r.style.display="none";else{r.style.display="";var o=n(0,i.active);r.innerHTML=o}}var l=document.querySelector(".fixed.bottom-0");l&&(l.style.opacity="0",l.style.transition="opacity 0.15s ease-out"),e.translationManager&&"function"==typeof e.translationManager.applyTranslations&&e.translationManager.applyTranslations(),e.requestAnimationFrame(function(){l&&(l.style.opacity="1")})}"loading"===document.readyState?document.addEventListener("DOMContentLoaded",i):i(),window.addEventListener("pageshow",function(e){if(e.persisted){for(var t=document.querySelectorAll('footer[data-component="footer"]'),a=!1,r=0;r<t.length;r++){var n=t[r];if(!n.querySelector||!n.querySelector(".fixed.bottom-0")){a=!0;break}}document.querySelector(".fixed.bottom-0")||(a=!0),a&&i()}}),e.Footer={mount:i,updateActive:function(e){e=e||"";var t=document.querySelectorAll(".fixed.bottom-0 a[href]");if(0===t.length)return;for(var r=0;r<t.length;r++){var n=t[r],i=n.getAttribute("href")||"",o=null;if(i.startsWith("http")||i.indexOf("wa.me")>=0)continue;for(var l=0;l<a.length;l++){var s=a[l].href,c=i;s.endsWith("/")&&(s=s.slice(0,-1));c.endsWith("/")&&(c=c.slice(0,-1));s===c&&(o=a[l])}var f=o&&o.id===e,d=n.querySelector(".material-symbols-outlined");f?(n.className="flex flex-1 flex-col items-center justify-center gap-1 text-primary",d&&o&&o.fill&&d.setAttribute("style","font-variation-settings: 'FILL' 1;")):(n.className="flex flex-1 flex-col items-center justify-center gap-1 text-slate-400 dark:text-slate-500",d&&d.removeAttribute("style"))}}},window.addEventListener("resize",function(){clearTimeout(t),t=setTimeout(function(){i()},200)})}(window);
+! function(e) {
+  "use strict";
+  var t, a = [{
+    id: "home",
+    icon: "home",
+    key: "nav_home",
+    href: "/home/",
+    fill: !0
+  }, {
+    id: "products",
+    icon: "kitchen",
+    key: "nav_products",
+    href: "/products/",
+    fill: !1
+  }, {
+    id: "solutions",
+    icon: "build",
+    key: "nav_solutions",
+    href: "/solutions/",
+    fill: !1
+  }, {
+    id: "whatsapp",
+    icon: "chat",
+    key: "nav_whatsapp",
+    href: "",
+    fill: !1,
+    isWhatsApp: !0
+  }];
+
+  function r(e) {
+    return String(e).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;")
+  }
+
+  function n(e, t) {
+    return '<div class="fixed bottom-0 left-0 right-0 z-[var(--z-footer)]"><div class="flex gap-2 border-t border-slate-200 dark:border-slate-800 bg-background-light/95 dark:bg-background-dark/95 backdrop-blur-md px-4 pb-6 pt-2">' + function(e, t) {
+      return e.map(function(e) {
+        var a = e.id === t,
+          n = a ? "text-primary" : "text-slate-400 dark:text-slate-500",
+          i = a && e.fill ? " style=\"font-variation-settings: 'FILL' 1;\"" : "",
+          o = e.key ? '<p class="text-[10px] font-bold uppercase tracking-wider" data-i18n="' + r(e.key) + '">' + r(e.key) + "</p>" : "";
+        return e.isWhatsApp ? '<a class="whatsapp-tab-item relative flex flex-1 flex-col items-center justify-center gap-1 ' + (n = "text-[#25d366]") + '" href="https://wa.me/8613163756465" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp"><span class="material-symbols-outlined relative" style="font-size:26px">' + r(e.icon) + "</span>" + o + "</a>" : '<a class="relative flex flex-1 flex-col items-center justify-center gap-1 ' + n + '" href="' + r(e.href) + '"><span class="material-symbols-outlined relative"' + i + '">' + r(e.icon) + "</span>" + o + "</a>"
+      }).join("\n")
+    }(a, t) + "</div></div>"
+  }
+
+  function i() {
+    for (var t = document.querySelectorAll('footer[data-component="footer"]'), a = 0; a < t.length; a++) {
+      var r = t[a],
+        i = {
+          variant: r.getAttribute("data-variant") || "mobile",
+          active: r.getAttribute("data-active") || ""
+        };
+      if (window.innerWidth >= 768) r.innerHTML = "", r.style.display = "none";
+      else {
+        r.style.display = "";
+        var o = n(0, i.active);
+        r.innerHTML = o
+      }
+    }
+    var l = document.querySelector(".fixed.bottom-0");
+    l && (l.style.opacity = "0", l.style.transition = "opacity 0.15s ease-out"), e.translationManager && "function" == typeof e.translationManager.applyTranslations && e.translationManager.applyTranslations(), e.requestAnimationFrame(function() {
+      l && (l.style.opacity = "1")
+    })
+  }
+  "loading" === document.readyState ? document.addEventListener("DOMContentLoaded", i) : i(), window.addEventListener("pageshow", function(e) {
+    if (e.persisted) {
+      for (var t = document.querySelectorAll('footer[data-component="footer"]'), a = !1, r = 0; r < t.length; r++) {
+        var n = t[r];
+        if (!n.querySelector || !n.querySelector(".fixed.bottom-0")) {
+          a = !0;
+          break
+        }
+      }
+      document.querySelector(".fixed.bottom-0") || (a = !0), a && i()
+    }
+  }), e.Footer = {
+    mount: i,
+    updateActive: function(e) {
+      e = e || "";
+      var t = document.querySelectorAll(".fixed.bottom-0 a[href]");
+      if (0 === t.length) return;
+      for (var r = 0; r < t.length; r++) {
+        var n = t[r],
+          i = n.getAttribute("href") || "",
+          o = null;
+        if (i.startsWith("http") || i.indexOf("wa.me") >= 0) continue;
+        for (var l = 0; l < a.length; l++) {
+          var s = a[l].href,
+            c = i;
+          s.endsWith("/") && (s = s.slice(0, -1));
+          c.endsWith("/") && (c = c.slice(0, -1));
+          s === c && (o = a[l])
+        }
+        var f = o && o.id === e,
+          d = n.querySelector(".material-symbols-outlined");
+        f ? (n.className = "flex flex-1 flex-col items-center justify-center gap-1 text-primary", d && o && o.fill && d.setAttribute("style", "font-variation-settings: 'FILL' 1;")) : (n.className = "flex flex-1 flex-col items-center justify-center gap-1 text-slate-400 dark:text-slate-500", d && d.removeAttribute("style"))
+      }
+    }
+  }, window.addEventListener("resize", function() {
+    clearTimeout(t), t = setTimeout(function() {
+      i()
+    }, 200)
+  })
+}(window);
