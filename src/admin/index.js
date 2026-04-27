@@ -56,6 +56,9 @@ function initCMS(app) {
           isWhatsApp: child.target === '_blank' && child.path && child.path.includes('whatsapp')
         });
       });
+      res.set('Cache-Control', 'no-cache, no-store, must-revalidate');
+      res.set('Pragma', 'no-cache');
+      res.set('Expires', '0');
       res.json({ mainNav, dropdowns });
     } catch (e) {
       res.status(500).json({ error: e.message });
