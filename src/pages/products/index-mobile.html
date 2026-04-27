@@ -66,6 +66,40 @@
       body {
         font-family: "Public Sans", sans-serif;
       }
+      .category-tab {
+        position: relative;
+        transition: all 0.2s ease;
+        -webkit-tap-highlight-color: transparent;
+      }
+      .category-tab.active::after {
+        content: "";
+        position: absolute;
+        bottom: -2px;
+        left: 0;
+        right: 0;
+        height: 2px;
+        background: #ec5b13;
+        border-radius: 1px;
+      }
+      .filter-chip {
+        transition: all 0.2s ease;
+        -webkit-tap-highlight-color: transparent;
+        cursor: pointer;
+      }
+      .filter-chip.active {
+        background: #ec5b13;
+        color: white;
+        border-color: #ec5b13;
+      }
+      html.dark .filter-chip.active {
+        background: #ec5b13;
+        color: white;
+        border-color: #ec5b13;
+      }
+      .category-tab-more {
+        transition: all 0.2s ease;
+        -webkit-tap-highlight-color: transparent;
+      }
       .product-card-mobile {
         transition: all 0.25s ease;
       }
@@ -134,15 +168,11 @@
             </p>
           </div>
         </section>
-
-        <!-- Category Pills -->
-        
-
-        <!-- Category Filter & Sort (PC-style chips, compact for mobile) -->
+        <!-- Category Filter & Sort -->
         <section class="w-full px-4 py-4">
           <div class="flex flex-col gap-3">
             <!-- Category tabs (horizontal scroll) -->
-            <div class="flex items-center gap-2 overflow-x-auto scrollbar-hide category-tab-container">
+            <div class="flex items-center gap-2 flex-wrap gap-2 category-tab-container">
               </div>
             <!-- Tier filter chips -->
             <div class="flex items-center justify-between gap-3">
@@ -152,9 +182,11 @@
                 <button class="filter-chip px-2.5 py-1 rounded-full border border-slate-200 dark:border-slate-700 text-[10px] font-medium" data-filter="commercial" data-i18n="products_filter_commercial">商用级</button>
                 <button class="filter-chip px-2.5 py-1 rounded-full border border-slate-200 dark:border-slate-700 text-[10px] font-medium" data-filter="compact" data-i18n="products_filter_compact">紧凑型</button>
               </div>
-              <div class="flex items-center gap-1 text-xs text-slate-500 flex-shrink-0">
+              <div class="sort-trigger flex items-center gap-1 text-xs text-slate-500 flex-shrink-0" data-sort-select="sort-menu-mobile">
                 <span class="material-symbols-outlined text-sm">sort</span>
-                <select class="bg-transparent border-none font-medium text-slate-900 dark:text-white focus:outline-none cursor-pointer text-xs">
+                <span class="sort-label font-medium text-slate-900 dark:text-white">推荐</span>
+                <span class="sort-arrow material-symbols-outlined text-sm">expand_more</span>
+                <select class="hidden" data-sort>
                   <option value="featured" data-i18n="products_sort_featured">推荐</option>
                   <option value="newest" data-i18n="products_sort_newest">最新</option>
                   <option value="capacity" data-i18n="products_sort_capacity">容量</option>
@@ -286,6 +318,7 @@
     <script defer src="/assets/js/contacts.js"></script>
     <script defer src="/assets/js/page-interactions.js"></script>
     <script src="/assets/js/product-data-table.js"></script>
+    <script defer src="/assets/js/sort-dropdown.js?v=20260426"></script>
     <script defer src="/assets/js/product-grid.js?v=20260415"></script>
     <script defer src="/assets/js/ui/search-engine.js"></script>
     <script defer src="/assets/js/product-detail.js?v=20260422"></script>

@@ -5,6 +5,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const webpack = require('webpack');
 const CompressionPlugin = require('compression-webpack-plugin');
+const TerserPlugin = require('terser-webpack-plugin');
 
 /**
  * Scan src/pages/ and return HtmlWebpackPlugin instances for every .html file.
@@ -56,6 +57,14 @@ module.exports = (env = {}, argv = {}) => {
       // runtimeChunk: isolates webpack runtime so contenthash of main bundle stays stable.
       // Only needed for production (where contenthash matters); devBuild has no hash so skip it.
       ...(isProduction ? { runtimeChunk: 'single' } : {}),
+      // Exclude CopyWebpackPlugin assets (assets/js/*, sw.js) from terser re-minification.
+      // Those files are either already minified or intentionally shipped as-is.
+      minimizer: [
+        new TerserPlugin({
+          exclude: /assets\/js\/|sw\.js$/,
+          extractComments: false,
+        }),
+      ],
       // splitChunks: split product-data into its own chunk to avoid blocking main bundle parse.
       // devBuild disables this to prevent "Multiple chunks → same filename" conflict
       // (no contenthash means all initial chunks would collide on bundle.js).

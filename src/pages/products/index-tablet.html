@@ -66,18 +66,12 @@
       body {
         font-family: "Public Sans", sans-serif;
       }
-      .product-card-tablet {
-        transition: all 0.3s ease;
-      }
-      .product-card-tablet:hover {
-        transform: translateY(-4px);
-        box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.12);
-      }
-      .category-tab-tablet {
+      .category-tab {
         position: relative;
         transition: all 0.2s ease;
+        -webkit-tap-highlight-color: transparent;
       }
-      .category-tab-tablet.active::after {
+      .category-tab.active::after {
         content: "";
         position: absolute;
         bottom: -2px;
@@ -87,6 +81,33 @@
         background: #ec5b13;
         border-radius: 1px;
       }
+      .filter-chip {
+        transition: all 0.2s ease;
+        -webkit-tap-highlight-color: transparent;
+        cursor: pointer;
+      }
+      .filter-chip.active {
+        background: #ec5b13;
+        color: white;
+        border-color: #ec5b13;
+      }
+      html.dark .filter-chip.active {
+        background: #ec5b13;
+        color: white;
+        border-color: #ec5b13;
+      }
+      .category-tab-more {
+        transition: all 0.2s ease;
+        -webkit-tap-highlight-color: transparent;
+      }
+      .product-card-tablet {
+        transition: all 0.3s ease;
+      }
+      .product-card-tablet:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.12);
+      }
+
     </style>
     <script>
       (function () {
@@ -157,14 +178,11 @@
           </div>
         </section>
 
-        <!-- Category Tabs -->
-        
-
-        <!-- Category Filter & Sort (PC-style) -->
+        <!-- Category Filter & Sort -->
         <section class="w-full px-6 py-5">
           <div class="flex flex-wrap items-center justify-between gap-4">
             <!-- Category tabs (auto-filled by product-grid.js) -->
-            <div class="flex items-center gap-2 overflow-x-auto scrollbar-hide category-tab-container">
+            <div class="flex items-center gap-2 flex-wrap gap-2 category-tab-container">
             </div>
             <!-- Tier filter + Sort -->
             <div class="flex items-center gap-2 flex-shrink-0">
@@ -173,9 +191,11 @@
               <button class="filter-chip px-3 py-1.5 rounded-full border border-slate-200 dark:border-slate-700 text-xs font-medium" data-filter="commercial" data-i18n="products_filter_commercial">商用级</button>
               <button class="filter-chip px-3 py-1.5 rounded-full border border-slate-200 dark:border-slate-700 text-xs font-medium" data-filter="compact" data-i18n="products_filter_compact">紧凑型</button>
               <span class="w-px h-5 bg-slate-200 dark:bg-slate-700 mx-1"></span>
-              <div class="flex items-center gap-1.5 text-sm text-slate-500">
+              <div class="sort-trigger flex items-center gap-1.5 text-sm text-slate-500" data-sort-select="sort-menu-tablet">
                 <span class="material-symbols-outlined text-base">sort</span>
-                <select class="bg-transparent border-none font-medium text-slate-900 dark:text-white focus:outline-none cursor-pointer">
+                <span class="sort-label font-medium text-slate-900 dark:text-white">推荐</span>
+                <span class="sort-arrow material-symbols-outlined text-sm">expand_more</span>
+                <select class="hidden" data-sort>
                   <option value="featured" data-i18n="products_sort_featured">推荐</option>
                   <option value="newest" data-i18n="products_sort_newest">最新</option>
                   <option value="capacity" data-i18n="products_sort_capacity">容量</option>
@@ -252,31 +272,13 @@
     <script defer src="/assets/js/router.js"></script>
     <script defer src="/assets/js/page-interactions.js"></script>
     <script src="/assets/js/product-data-table.js"></script>
+    <script defer src="/assets/js/sort-dropdown.js?v=20260426"></script>
     <script defer src="/assets/js/product-grid.js?v=20260415"></script>
     <script defer src="/assets/js/product-detail.js?v=20260422"></script>
 
     <script>
-      function renderProductPage_renderTablet() {
-        if (!window.ProductGrid) return;
-        if (!window.PRODUCT_DATA_TABLE || !window.PRODUCT_DATA_TABLE.length) return;
-        window.ProductGrid.renderTablet(18);
-        document.querySelectorAll(".category-tab-tablet").forEach(function(tab) {
-          tab.addEventListener("click", function() {
-            var cat = this.dataset.category;
-            document.querySelectorAll(".category-tab-tablet").forEach(function(t) { t.classList.remove("active"); });
-            this.classList.add("active");
-            document.querySelectorAll("#product-grid .product-card-tablet").forEach(function(card) {
-              card.style.display = (cat === "all" || card.dataset.category === cat) ? "" : "none";
-            });
-          });
-        });
-      }
-      if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', function() { renderProductPage_renderTablet(); });
-      } else {
-        renderProductPage_renderTablet();
-      }
-      window.addEventListener('product-data-ready', renderProductPage_renderTablet);
+      // Product grid rendering is handled by product-grid.js + sort-dropdown.js
+      // Category tabs are auto-generated and managed by product-grid.js initCategoryTabs()
     </script>
 
     <style>

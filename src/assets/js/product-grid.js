@@ -1,1 +1,312 @@
-!function(){"use strict";var e="PRODUCT_DATA_TABLE";function t(){return Array.isArray(window[e])?window[e]:[]}function a(){var e=[];return t().forEach(function(t){t.products&&Array.isArray(t.products)&&t.products.forEach(function(a){var r="/assets/images/products/"+(a.model||"default")+".webp";if(a.images&&Array.isArray(a.images)&&a.images.length>0){var o=a.images.find(function(e){return e.isPrimary})||a.images[0];o&&o.filePath&&(r=o.filePath)}else a.image?r=a.image:a.imageUrl&&(r=a.imageUrl);e.push(Object.assign({},a,{_category:t.category||t.slug||"",_imageUrl:r}))})}),e}function r(e){return e?String(e).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;"):""}function o(e){var t=r(e._category),a=r(e.model||""),o=r(e.name||a),d=r(e.description||e.card_desc||e.highlights||""),s=r(e._imageUrl),l=[];e.power&&l.push(r(e.power)),e.throughput&&l.push(r(e.throughput)),e.averageTime&&l.push(r(e.averageTime));var n=l.map(function(e){return'<span class="spec-badge px-2 py-1 rounded text-xs font-medium text-primary">'+e+"</span>"}).join(""),i="";e.badge&&(i='<span class="px-3 py-1 bg-primary text-white text-xs font-bold rounded-full">'+r(e.badge)+"</span>");var c="/products/"+encodeURIComponent(a)+"/";return'<article class="product-card group bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 overflow-hidden" data-category="'+t+'" data-tier="'+r(e.tier||"")+'" data-model="'+a+'" data-sort-order="'+(e.sort_order||0)+'" data-created="'+(e.created_at||"")+'"><div class="relative aspect-[4/3] overflow-hidden bg-slate-100 dark:bg-slate-700"><img loading="lazy" alt="'+o+'" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" src="'+s+"\" onerror=\"if(!this.dataset.errored){this.dataset.errored='1';this.src='/assets/images/products/default.webp' }\">"+(i?'<div class="absolute top-4 left-4 flex gap-2">'+i+"</div>":"")+'</div><div class="p-6"><div class="flex items-center gap-2 mb-3"><span class="material-symbols-outlined text-primary text-sm">local_fire_department</span><span class="text-xs font-bold text-primary uppercase tracking-wider">'+r(e.subCategory||t)+'</span></div><h3 class="text-xl font-bold mb-2 text-slate-900 dark:text-white">'+o+'</h3><p class="text-sm text-slate-500 dark:text-slate-400 mb-4 line-clamp-2">'+d+"</p>"+(n?'<div class="flex flex-wrap gap-2 mb-4">'+n+"</div>":"")+'<div class="flex items-center justify-between pt-4 border-t border-slate-100 dark:border-slate-700"><div><span class="text-xs text-slate-400">起售价</span><p class="text-xl font-black text-primary">询价</p></div><a href="'+c+'" class="flex items-center gap-2 bg-primary text-white px-5 py-2.5 rounded-lg font-bold text-sm hover:opacity-90 transition-opacity"><span>查看详情</span><span class="material-symbols-outlined text-sm">arrow_forward</span></a></div></div></article>'}function d(e){var t=r(e.model||""),a=r(e.name||t),o=r(e.description||e.card_desc||""),d=r(e._imageUrl),s="/products/"+encodeURIComponent(t)+"/",l=e.badge?'<span class="px-2 py-0.5 bg-primary text-white text-[10px] font-bold rounded">'+r(e.badge)+"</span>":"";return'<article class="product-card-tablet bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 overflow-hidden" data-category="'+r(e._category)+'" data-model="'+t+'" data-tier="'+r(e.tier||"")+'" data-sort-order="'+(e.sort_order||0)+'" data-created="'+(e.created_at||"")+'"><div class="relative aspect-[4/3] overflow-hidden bg-slate-100 dark:bg-slate-700"><img loading="lazy" alt="'+a+'" class="w-full h-full object-cover" src="'+d+"\" onerror=\"if(!this.dataset.errored){this.dataset.errored='1';this.src='/assets/images/products/default.webp' }\">"+(l?'<div class="absolute top-3 left-3 flex gap-1.5">'+l+"</div>":"")+'</div><div class="p-4"><div class="flex items-center gap-1.5 mb-2"><span class="material-symbols-outlined text-primary text-xs">local_fire_department</span><span class="text-[10px] font-bold text-primary uppercase tracking-wider">'+r(e.subCategory||e._category)+'</span></div><h3 class="text-base font-bold mb-1 text-slate-900 dark:text-white">'+a+'</h3><p class="text-xs text-slate-500 dark:text-slate-400 mb-3 line-clamp-2">'+o+'</p><div class="flex items-center justify-between pt-3 border-t border-slate-100 dark:border-slate-700"><span class="text-base font-black text-primary">询价</span><a href="'+s+'" class="flex items-center gap-1 text-primary text-sm font-bold hover:underline"><span>查看详情</span><span class="material-symbols-outlined text-xs">arrow_forward</span></a></div></div></article>'}function s(e){var t=r(e.model||""),a=r(e.name||t),o=r(e.description||e.card_desc||""),d=r(e._imageUrl),s="/products/"+encodeURIComponent(t)+"/";return'<article class="product-card-mobile bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 overflow-hidden" data-category="'+r(e._category)+'" data-model="'+t+'" data-tier="'+r(e.tier||"")+'" data-sort-order="'+(e.sort_order||0)+'" data-created="'+(e.created_at||"")+'"><a href="'+s+'" class="flex gap-4 p-3"><div class="w-24 h-24 rounded-lg bg-slate-100 dark:bg-slate-700 flex-shrink-0 overflow-hidden"><img loading="lazy" alt="'+a+'" class="w-full h-full object-cover" src="'+d+'" onerror="if(!this.dataset.errored){this.dataset.errored=\'1\';this.src=\'/assets/images/products/default.webp\' }"></div><div class="flex-1 min-w-0"><h3 class="text-sm font-bold text-slate-900 dark:text-white mb-1 truncate">'+a+'</h3><p class="text-xs text-slate-500 dark:text-slate-400 mb-2 line-clamp-2">'+o+'</p><div class="flex items-center justify-between"><span class="text-sm font-black text-primary">询价</span><span class="material-symbols-outlined text-slate-400 text-sm">arrow_forward</span></div></div></a></article>'}function l(e,t,r){var o=document.getElementById(e);if(o){var d=a(),s=d.length,l=Math.min(s,r||100),n=d.slice(0,r||100).map(t).join("");o.innerHTML=n;var i=o.parentElement&&o.parentElement.querySelector('[data-i18n="products_load_more"]')||document.querySelector('[data-i18n="products_load_more"]');i&&(i.style.display=s<=l?"none":"")}}function n(){if(console.log("[ProductGrid] autoRender called, readyState:",document.readyState,"PRODUCT_DATA_TABLE:",window.PRODUCT_DATA_TABLE?window.PRODUCT_DATA_TABLE.length+" items":"MISSING","grid:",!!document.getElementById("product-grid"),"list:",!!document.getElementById("product-list"),"url:",location.pathname),t().length){if(document.getElementById("product-list"))console.log("[ProductGrid] Rendering mobile:",t().length,"products"),l("product-list",s,100);else if(document.getElementById("product-grid")){var e=document.getElementById("product-grid");e&&e.classList.contains("md:grid-cols-2")?(console.log("[ProductGrid] Rendering PC:",t().length,"products"),l("product-grid",o,100)):(console.log("[ProductGrid] Rendering Tablet:",t().length,"products"),l("product-grid",d,100))}else console.log("[ProductGrid] No #product-grid or #product-list element found");i()}else console.log("[ProductGrid] No products data, skipping render")}function i(){var e=document.querySelector(".category-tab-container")||document.querySelector(".category-tab-tablet-container")||document.querySelector(".category-pill-container");if(e){var a=[];if(t().forEach(function(e){var t,r=e.categoryName||(t=e.category,window.translationManager&&window.translationManager.t&&window.translationManager.t(t)||t)||e.category;a.push({key:e.category,name:r,count:(e.products||[]).length})}),a.length){var o=document.createElement("button");o.className="category-tab active px-4 py-2 text-sm font-bold whitespace-nowrap rounded-full border border-slate-200 dark:border-slate-700",o.dataset.category="all",o.textContent="全部产品";var d=o.outerHTML+" ";a.forEach(function(e){var t=r(e.name)+(e.count,"");d+='<button class="category-tab px-4 py-2 text-sm font-medium whitespace-nowrap rounded-full border border-slate-200 dark:border-slate-700" data-category="'+r(e.key)+'">'+t+"</button> "}),e.innerHTML=d,e.addEventListener("click",function(t){var a=t.target.closest(".category-tab, .category-tab-tablet");if(a){var r=a.dataset.category;e.querySelectorAll(".category-tab, .category-tab-tablet").forEach(function(e){e.classList.remove("active")}),a.classList.add("active"),document.querySelectorAll("#product-grid .product-card, #product-grid .product-card-tablet, #product-list .product-card-mobile").forEach(function(e){e.style.display="all"===r||e.dataset.category===r?"":"none"})}}),document.querySelectorAll(".filter-chip").forEach(function(e){e.addEventListener("click",function(){this.dataset.filter,document.querySelectorAll(".filter-chip").forEach(function(e){e.classList.remove("active")}),this.classList.add("active"),l()})});var s=document.querySelector("#products .flex select");s&&s.addEventListener("change",function(){l()})}}function l(){var e=((document.querySelector(".filter-chip.active")||{}).dataset||{filter:"all"}).filter||"all",t=s?s.value:"featured",a=document.getElementById("product-grid")||document.getElementById("product-list");if(a){var r=Array.from(a.children);r.forEach(function(t){var a=t.dataset.tier||"";t.style.display="all"===e||a===e?"":"none"});var o=r.filter(function(e){return"none"!==e.style.display});o.sort(function(e,a){return"newest"===t?(a.dataset.created||"").localeCompare(e.dataset.created||""):"capacity"===t?(a.dataset.sortOrder||0)-(e.dataset.sortOrder||0):0}),o.forEach(function(e){a.appendChild(e)})}}}console.log("[ProductGrid] Script loaded, registering events"),"loading"!==document.readyState?n():document.addEventListener("DOMContentLoaded",n),window.addEventListener("product-data-ready",function(){console.log("[ProductGrid] product-data-ready event fired"),n(),setTimeout(i,50)}),document.addEventListener("spa:load",function(){console.log("[ProductGrid] spa:load event fired"),n(),setTimeout(i,50)}),window.ProductGrid={renderPC:function(e){l("product-grid",o,e)},renderTablet:function(e){l("product-grid",d,e)},renderMobile:function(e){l("product-list",s,e)},getAll:a,renderCustom:function(e,t,a){l(e,t,a)}}}();
+/**
+ * ProductGrid — renders product cards and manages category tabs
+ * Supports PC / tablet / mobile layouts via CSS classes
+ */
+(function() {
+  'use strict';
+
+  var STORE_KEY = 'PRODUCT_DATA_TABLE';
+
+  function getCategories() {
+    return Array.isArray(window[STORE_KEY]) ? window[STORE_KEY] : [];
+  }
+
+  function getAllProducts() {
+    var result = [];
+    getCategories().forEach(function(cat) {
+      if (!cat.products || !Array.isArray(cat.products)) return;
+      cat.products.forEach(function(p) {
+        var img = '/assets/images/products/' + (p.model || 'default') + '.webp';
+        if (p.images && Array.isArray(p.images) && p.images.length > 0) {
+          var primary = p.images.find(function(i) { return i.isPrimary; }) || p.images[0];
+          if (primary && primary.filePath) img = primary.filePath;
+        } else if (p.image) {
+          img = p.image;
+        } else if (p.imageUrl) {
+          img = p.imageUrl;
+        }
+        result.push(Object.assign({}, p, {
+          _category: cat.category || cat.slug || '',
+          _imageUrl: img
+        }));
+      });
+    });
+    return result;
+  }
+
+  function esc(str) {
+    if (!str) return '';
+    return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+  }
+
+  // ─── Card renderers ────────────────────────────────────────────
+
+  function renderPC(p) {
+    var cat = esc(p._category);
+    var model = esc(p.model || '');
+    var name = esc(p.name || model);
+    var desc = esc(p.description || p.card_desc || p.highlights || '');
+    var img = esc(p._imageUrl);
+    var subCat = esc(p.subCategory || cat);
+    var specs = [];
+    if (p.power) specs.push(esc(p.power));
+    if (p.throughput) specs.push(esc(p.throughput));
+    if (p.averageTime) specs.push(esc(p.averageTime));
+    var specHTML = specs.map(function(s) {
+      return '<span class="spec-badge px-2 py-1 rounded text-xs font-medium text-primary">' + s + '</span>';
+    }).join('');
+    var badge = '';
+    if (p.badge) {
+      badge = '<span class="px-3 py-1 bg-primary text-white text-xs font-bold rounded-full">' + esc(p.badge) + '</span>';
+    }
+    var link = '/products/' + encodeURIComponent(model) + '/';
+    return '<article class="product-card group bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 overflow-hidden" data-category="' + cat + '" data-tier="' + esc(p.tier || '') + '" data-model="' + model + '" data-sort-order="' + (p.sort_order || 0) + '" data-created="' + (p.created_at || '') + '">' +
+      '<div class="relative aspect-[4/3] overflow-hidden bg-slate-100 dark:bg-slate-700">' +
+        '<img loading="lazy" alt="' + name + '" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" src="' + img + '" onerror="if(!this.dataset.errored){this.dataset.errored=\'1\';this.src=\'/assets/images/products/default.webp\' }">' +
+        (badge ? '<div class="absolute top-4 left-4 flex gap-2">' + badge + '</div>' : '') +
+      '</div>' +
+      '<div class="p-6">' +
+        '<div class="flex items-center gap-2 mb-3"><span class="material-symbols-outlined text-primary text-sm">local_fire_department</span><span class="text-xs font-bold text-primary uppercase tracking-wider">' + subCat + '</span></div>' +
+        '<h3 class="text-xl font-bold mb-2 text-slate-900 dark:text-white">' + name + '</h3>' +
+        '<p class="text-sm text-slate-500 dark:text-slate-400 mb-4 line-clamp-2">' + desc + '</p>' +
+        (specHTML ? '<div class="flex flex-wrap gap-2 mb-4">' + specHTML + '</div>' : '') +
+        '<div class="flex items-center justify-between pt-4 border-t border-slate-100 dark:border-slate-700">' +
+          '<div><span class="text-xs text-slate-400">起售价</span><p class="text-xl font-black text-primary">询价</p></div>' +
+          '<a href="' + link + '" class="flex items-center gap-2 bg-primary text-white px-5 py-2.5 rounded-lg font-bold text-sm hover:opacity-90 transition-opacity"><span>查看详情</span><span class="material-symbols-outlined text-sm">arrow_forward</span></a>' +
+        '</div>' +
+      '</div>' +
+    '</article>';
+  }
+
+  function renderTablet(p) {
+    var cat = esc(p._category);
+    var model = esc(p.model || '');
+    var name = esc(p.name || model);
+    var desc = esc(p.description || p.card_desc || '');
+    var img = esc(p._imageUrl);
+    var subCat = esc(p.subCategory || cat);
+    var badge = '';
+    if (p.badge) {
+      badge = '<span class="px-2 py-0.5 bg-primary text-white text-[10px] font-bold rounded">' + esc(p.badge) + '</span>';
+    }
+    var link = '/products/' + encodeURIComponent(model) + '/';
+    return '<article class="product-card-tablet bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 overflow-hidden" data-category="' + cat + '" data-model="' + model + '" data-tier="' + esc(p.tier || '') + '" data-sort-order="' + (p.sort_order || 0) + '" data-created="' + (p.created_at || '') + '">' +
+      '<div class="relative aspect-[4/3] overflow-hidden bg-slate-100 dark:bg-slate-700">' +
+        '<img loading="lazy" alt="' + name + '" class="w-full h-full object-cover" src="' + img + '" onerror="if(!this.dataset.errored){this.dataset.errored=\'1\';this.src=\'/assets/images/products/default.webp\' }">' +
+        (badge ? '<div class="absolute top-3 left-3 flex gap-1.5">' + badge + '</div>' : '') +
+      '</div>' +
+      '<div class="p-4">' +
+        '<div class="flex items-center gap-1.5 mb-2"><span class="material-symbols-outlined text-primary text-xs">local_fire_department</span><span class="text-[10px] font-bold text-primary uppercase tracking-wider">' + subCat + '</span></div>' +
+        '<h3 class="text-base font-bold mb-1 text-slate-900 dark:text-white">' + name + '</h3>' +
+        '<p class="text-xs text-slate-500 dark:text-slate-400 mb-3 line-clamp-2">' + desc + '</p>' +
+        '<div class="flex items-center justify-between pt-3 border-t border-slate-100 dark:border-slate-700">' +
+          '<span class="text-base font-black text-primary">询价</span>' +
+          '<a href="' + link + '" class="flex items-center gap-1 text-primary text-sm font-bold hover:underline"><span>查看详情</span><span class="material-symbols-outlined text-xs">arrow_forward</span></a>' +
+        '</div>' +
+      '</div>' +
+    '</article>';
+  }
+
+  function renderMobile(p) {
+    var cat = esc(p._category);
+    var model = esc(p.model || '');
+    var name = esc(p.name || model);
+    var desc = esc(p.description || p.card_desc || '');
+    var img = esc(p._imageUrl);
+    var link = '/products/' + encodeURIComponent(model) + '/';
+    return '<article class="product-card-mobile bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 overflow-hidden" data-category="' + cat + '" data-model="' + model + '" data-tier="' + esc(p.tier || '') + '" data-sort-order="' + (p.sort_order || 0) + '" data-created="' + (p.created_at || '') + '">' +
+      '<a href="' + link + '" class="flex gap-4 p-3">' +
+        '<div class="w-24 h-24 rounded-lg bg-slate-100 dark:bg-slate-700 flex-shrink-0 overflow-hidden">' +
+          '<img loading="lazy" alt="' + name + '" class="w-full h-full object-cover" src="' + img + '" onerror="if(!this.dataset.errored){this.dataset.errored=\'1\';this.src=\'/assets/images/products/default.webp\' }">' +
+        '</div>' +
+        '<div class="flex-1 min-w-0">' +
+          '<h3 class="text-sm font-bold text-slate-900 dark:text-white mb-1 truncate">' + name + '</h3>' +
+          '<p class="text-xs text-slate-500 dark:text-slate-400 mb-2 line-clamp-2">' + desc + '</p>' +
+          '<div class="flex items-center justify-between">' +
+            '<span class="text-sm font-black text-primary">询价</span>' +
+            '<span class="material-symbols-outlined text-slate-400 text-sm">arrow_forward</span>' +
+          '</div>' +
+        '</div>' +
+      '</a>' +
+    '</article>';
+  }
+
+  // ─── Grid rendering ────────────────────────────────────────────
+
+  function renderGrid(containerId, renderer, maxCount) {
+    var container = document.getElementById(containerId);
+    if (!container) return;
+    var products = getAllProducts();
+    var total = products.length;
+    var show = Math.min(total, maxCount || 100);
+    container.innerHTML = products.slice(0, maxCount || 100).map(renderer).join('');
+    var loadMore = container.parentElement && container.parentElement.querySelector('[data-i18n="products_load_more"]')
+      || document.querySelector('[data-i18n="products_load_more"]');
+    if (loadMore) loadMore.style.display = total <= show ? 'none' : '';
+  }
+
+  // ─── Auto render ───────────────────────────────────────────────
+
+  function autoRender() {
+    if (!getCategories().length) return;
+    if (document.getElementById('product-list')) {
+      renderGrid('product-list', renderMobile, 100);
+    } else if (document.getElementById('product-grid')) {
+      var grid = document.getElementById('product-grid');
+      if (grid && grid.classList.contains('md:grid-cols-2')) {
+        renderGrid('product-grid', renderPC, 100);
+      } else {
+        renderGrid('product-grid', renderTablet, 100);
+      }
+    }
+    initCategoryTabs();
+  }
+
+  // ─── Category tabs ─────────────────────────────────────────────
+
+  function isMobileOrTablet() {
+    return window.innerWidth < 1280;
+  }
+
+  function initCategoryTabs() {
+    var container = document.querySelector('.category-tab-container');
+    if (!container) return;
+
+    // Prevent duplicate init
+    if (container._categoryTabsInit) return;
+    container._categoryTabsInit = true;
+
+    var categories = [];
+    getCategories().forEach(function(cat) {
+      var name = cat.categoryName || cat.category;
+      if (name) categories.push({ key: cat.category, name: name });
+    });
+    if (!categories.length) return;
+
+    // Build tab buttons
+    var tabs = [];
+
+    // "全部产品" button
+    var allBtn = document.createElement('button');
+    allBtn.className = 'category-tab active px-4 py-2 text-sm font-bold whitespace-nowrap rounded-full border border-slate-200 dark:border-slate-700';
+    allBtn.dataset.category = 'all';
+    allBtn.textContent = '全部产品';
+    tabs.push(allBtn);
+
+    categories.forEach(function(cat) {
+      var btn = document.createElement('button');
+      btn.className = 'category-tab px-4 py-2 text-sm font-medium whitespace-nowrap rounded-full border border-slate-200 dark:border-slate-700';
+      btn.dataset.category = cat.key;
+      btn.textContent = cat.name;
+      tabs.push(btn);
+    });
+
+    // Mobile/tablet: horizontal scroll with fade edges
+    if (isMobileOrTablet()) {
+      container.classList.add('category-scroll-container');
+      // Remove flex-wrap, enable horizontal scroll
+      container.style.flexWrap = 'nowrap';
+      container.style.overflowX = 'auto';
+      container.style.scrollbarWidth = 'none';
+      container.style.msOverflowStyle = 'none';
+      container.style.webkitOverflowScrolling = 'touch';
+      container.style.paddingRight = '16px';
+    }
+
+    // Append all tabs
+    tabs.forEach(function(tab) { container.appendChild(tab); });
+
+    // Tab click handler
+    container.addEventListener('click', function(ev) {
+      var btn = ev.target.closest('.category-tab');
+      if (!btn) return;
+      var cat = btn.dataset.category;
+
+      // Update active state
+      container.querySelectorAll('.category-tab').forEach(function(b) {
+        b.classList.remove('active');
+      });
+      btn.classList.add('active');
+
+      // Filter products
+      var selector = '#product-grid .product-card, #product-grid .product-card-tablet, #product-list .product-card-mobile';
+      document.querySelectorAll(selector).forEach(function(card) {
+        card.style.display = (cat === 'all' || card.dataset.category === cat) ? '' : 'none';
+      });
+    });
+
+    // Filter chip click handler
+    document.querySelectorAll('.filter-chip').forEach(function(chip) {
+      chip.addEventListener('click', function() {
+        document.querySelectorAll('.filter-chip').forEach(function(c) { c.classList.remove('active'); });
+        this.classList.add('active');
+        applyTierFilter();
+      });
+    });
+
+    // Sort select change handler
+    var sortSel = document.querySelector('#products select[data-sort]');
+    if (sortSel) {
+      sortSel.addEventListener('change', function() { applyTierFilter(); });
+    }
+
+    // Init sort dropdown
+    if (window.SortDropdown) window.SortDropdown.init();
+  }
+
+  // ─── Tier filter + sort ────────────────────────────────────────
+
+  function applyTierFilter() {
+    var activeChip = document.querySelector('.filter-chip.active');
+    var tierFilter = (activeChip ? activeChip.dataset.filter : 'all') || 'all';
+    var sortSel = document.querySelector('#products select[data-sort]');
+    var sortVal = sortSel ? sortSel.value : 'featured';
+    var container = document.getElementById('product-grid') || document.getElementById('product-list');
+    if (!container) return;
+
+    var cards = Array.from(container.children);
+    // Filter by tier
+    cards.forEach(function(card) {
+      var tier = card.dataset.tier || '';
+      card.style.display = (tierFilter === 'all' || tier === tierFilter) ? '' : 'none';
+    });
+    // Sort visible cards
+    var visible = cards.filter(function(c) { return c.style.display !== 'none'; });
+    visible.sort(function(a, b) {
+      if (sortVal === 'newest') return (b.dataset.created || '').localeCompare(a.dataset.created || '');
+      if (sortVal === 'capacity') return (b.dataset.sortOrder || 0) - (a.dataset.sortOrder || 0);
+      return 0;
+    });
+    visible.forEach(function(c) { container.appendChild(c); });
+  }
+
+  // ─── Init ──────────────────────────────────────────────────────
+
+  console.log('[ProductGrid] Script loaded');
+
+  if (document.readyState !== 'loading') {
+    autoRender();
+  } else {
+    document.addEventListener('DOMContentLoaded', autoRender);
+  }
+
+  window.addEventListener('product-data-ready', function() {
+    autoRender();
+  });
+
+  document.addEventListener('spa:load', function() {
+    // Reset init flag for SPA navigation
+    document.querySelectorAll('.category-tab-container').forEach(function(el) {
+      el._categoryTabsInit = false;
+    });
+    autoRender();
+  });
+
+  window.ProductGrid = {
+    renderPC: function(max) { renderGrid('product-grid', renderPC, max); },
+    renderTablet: function(max) { renderGrid('product-grid', renderTablet, max); },
+    renderMobile: function(max) { renderGrid('product-list', renderMobile, max); },
+    getAll: getAllProducts,
+    renderCustom: function(id, renderer, max) { renderGrid(id, renderer, max); }
+  };
+})();
