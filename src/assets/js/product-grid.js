@@ -192,17 +192,21 @@
 
     // Build tab buttons
     var allTabs = [];
+    var isMobile = window.innerWidth < 768;
+    var tabSizeClass = isMobile
+      ? 'px-3 py-1.5 text-xs'
+      : 'px-4 py-2 text-sm';
 
     // "全部产品" button
     var allBtn = document.createElement('button');
-    allBtn.className = 'category-tab active px-4 py-2 text-sm font-bold whitespace-nowrap rounded-full border border-slate-200 dark:border-slate-700';
+    allBtn.className = 'category-tab active ' + tabSizeClass + ' font-bold whitespace-nowrap rounded-full border border-slate-200 dark:border-slate-700';
     allBtn.dataset.category = 'all';
     allBtn.textContent = '全部产品';
     allTabs.push(allBtn);
 
     categories.forEach(function(cat) {
       var btn = document.createElement('button');
-      btn.className = 'category-tab px-4 py-2 text-sm font-medium whitespace-nowrap rounded-full border border-slate-200 dark:border-slate-700';
+      btn.className = 'category-tab ' + tabSizeClass + ' font-medium whitespace-nowrap rounded-full border border-slate-200 dark:border-slate-700';
       btn.dataset.category = cat.key;
       btn.textContent = cat.name;
       allTabs.push(btn);
