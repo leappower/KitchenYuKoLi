@@ -343,6 +343,7 @@ details[open] > summary {
   height: 1em;
   vertical-align: -0.15em;
   flex-shrink: 0;
+  overflow: hidden;
   /* Fallback: hide text content if font fails to load */
   font-family: 'Material Symbols Outlined', sans-serif;
 }
