@@ -436,7 +436,7 @@
         if (this.CATEGORY_SLUGS.indexOf(segment) >= 0) {
           pagePath = '/products/index.html';
         } else {
-          pagePath = '/product-detail/index.html';
+          pagePath = '/products/detail/index.html';
         }
       }
 

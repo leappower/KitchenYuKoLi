@@ -113,7 +113,7 @@ const ROUTES = [
   { slug: 'solutions/canteen',         navId: 'solutions' },
   { slug: 'solutions/southeast-asian', navId: 'solutions' },
   { slug: 'solutions/automation',      navId: 'solutions' },
-  { slug: 'pdp',          navId: 'pdp' },
+  { slug: 'products/detail', navId: 'products' },
   { slug: 'thank-you',    navId: 'thank-you' },
   { slug: 'landing',      navId: 'landing' },
 ];
