@@ -748,6 +748,8 @@
     container.innerHTML = '<div class="text-center py-8 text-gray-400">加载中...</div>';
     api('/nav').then(function(data) {
       if (!data) return;
+      // Cache flat items list for client-side duplicate checks
+      window._navItems = data.items || [];
       renderNavTree(data.tree, container);
     });
   }
@@ -863,6 +865,14 @@
           target: document.getElementById('ne-target').value || ''
         };
         if (!body.i18n_key) { toast('请输入 i18n Key', true); return; }
+        if (!body.default_label) { toast('请输入默认标签', true); return; }
+        if (!body.path) { toast('请输入路径', true); return; }
+        // Client-side duplicate check against cached nav data
+        var navItems = window._navItems || [];
+        var dupKey = navItems.find(function(n) { return n.i18n_key === body.i18n_key && (!isEdit || n.id !== id); });
+        if (dupKey) { toast('i18n Key "' + body.i18n_key + '" 已被 "' + (dupKey.default_label || dupKey.i18n_key) + '" 使用', true); return; }
+        var dupPath = navItems.find(function(n) { return n.path && n.path === body.path && (!isEdit || n.id !== id); });
+        if (dupPath) { toast('路径 "' + body.path + '" 已被 "' + (dupPath.default_label || dupPath.i18n_key) + '" 使用', true); return; }
         var promise;
         if (isEdit) promise = api('/nav/' + id, { method: 'PUT', body: body });
         else promise = api('/nav', { method: 'POST', body: body });
