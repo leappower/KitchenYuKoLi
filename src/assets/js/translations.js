@@ -1,11 +1,7 @@
 ! function(t) {
   "use strict";
   var e, n, a = (e = t.location && t.location.hostname || "", n = t.location && t.location.port || "", "localhost" === e || "127.0.0.1" === e || -1 !== ["8080", "3000", "3001", "5000", "9000"].indexOf(n) || !!/\b(test|staging|preview|dev|internal|local)\b/.test(e.toLowerCase())),
-    o = (t.LANG_REGISTRY ? t.LANG_REGISTRY : {
-      getNativeNames: function() {
-        return {}
-      }
-    }).getNativeNames();
+    getO = function() { return (t.LANG_REGISTRY && t.LANG_REGISTRY.getNativeNames) ? t.LANG_REGISTRY.getNativeNames() : {}; };
 
   function r() {
     this.currentLanguage = this.getInitialLanguage(), this.translationsCache = new Map, this.pendingLoads = new Map, this.keyPathCache = new Map, this.isInitialized = !1, this.eventListeners = new Map, this.dropdownEl = null;
@@ -237,7 +233,7 @@
     })
   }, r.prototype.setLanguage = function(e) {
     var n = this;
-    return o[e] ? this.currentLanguage === e ? (this.closeLanguageDropdown(), Promise.resolve()) : Promise.all([this.loadUITranslations(e), this.loadProductTranslations(e).catch(function(t) {
+    return getO()[e] ? this.currentLanguage === e ? (this.closeLanguageDropdown(), Promise.resolve()) : Promise.all([this.loadUITranslations(e), this.loadProductTranslations(e).catch(function(t) {
       console.warn("[i18n] setLanguage: product translations for " + e + " failed: " + t.message)
     })]).then(function() {
       // Pre-load English as fallback if target is not en
@@ -256,7 +252,7 @@
             }
           })), n.closeLanguageDropdown(), n.resetLanguageSearch(), t.showNotification) {
           var r = n.uiText("notify_language_changed", "Language changed to");
-          t.showNotification(r + " " + (o[e] || e), "success")
+          t.showNotification(r + " " + (getO()[e] || e), "success")
         }
         n.emit("languageChanged", {
           language: e,
