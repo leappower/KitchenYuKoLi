@@ -27,7 +27,7 @@
   }
   r.prototype.getInitialLanguage = function() {
     var t = localStorage.getItem("userLanguage");
-    return t && o[t] ? t : "zh-CN"
+    return t && o[t] ? t : "en"
   }, r.prototype.loadTranslations = function(t) {
     if (this.translationsCache.has(t) && this.translationsCache.has("ui-" + t) && this.translationsCache.has("product-" + t)) return Promise.resolve(this.translationsCache.get(t));
     if (this.pendingLoads.has(t)) return this.pendingLoads.get(t);
@@ -44,7 +44,7 @@
         return e.translationsCache.set(t, o), o
       })
     }).catch(function(n) {
-      if (console.error("Failed to load translations for " + t + ":", n), "zh-CN" !== t) return e.loadTranslations("zh-CN");
+      if (console.error("Failed to load translations for " + t + ":", n), "en" !== t) return e.loadTranslations("en");
       throw n
     })
   }, r.prototype.loadUITranslations = function(t) {
@@ -68,7 +68,7 @@
       } catch (t) {}
     }
     var l = this;
-    if ("function" != typeof fetch) return "zh-CN" !== t ? l.loadUITranslations("zh-CN") : Promise.reject(new Error("fetch not available"));
+    if ("function" != typeof fetch) return "en" !== t ? l.loadUITranslations("en") : Promise.reject(new Error("fetch not available"));
     var u = "undefined" != typeof window && window.BASE_PATH || "";
     return i(fetch(u + "/assets/lang/" + t + "-ui.json", {
       cache: a ? "no-store" : "default"
@@ -85,7 +85,7 @@
       } catch (t) {}
       return o
     }).catch(function(e) {
-      if (console.error("[i18n] loadUITranslations: FAILED for " + t + ":", e), "zh-CN" !== t) return l.loadUITranslations("zh-CN");
+      if (console.error("[i18n] loadUITranslations: FAILED for " + t + ":", e), "en" !== t) return l.loadUITranslations("en");
       throw e
     }), 15e3, "[i18n] loadUITranslations timeout for " + t)
   }, r.prototype.loadProductTranslations = function(t) {
@@ -99,11 +99,11 @@
       if (!t.ok) throw new Error("HTTP " + t.status);
       return t.json()
     }).then(function(a) {
-      if (0 === Object.keys(a).length && "zh-CN" !== t) return console.warn("[i18n] loadProductTranslations: empty data for " + t + ", falling back to zh-CN"), n.loadProductTranslations("zh-CN");
+      if (0 === Object.keys(a).length && "en" !== t) return console.warn("[i18n] loadProductTranslations: empty data for " + t + ", falling back to zh-CN"), n.loadProductTranslations("en");
       var o = n.normalizeTranslationKeys(a);
       return Object.keys(o).length, n.translationsCache.set(e, o), o
     }).catch(function(e) {
-      if (console.error("[i18n] loadProductTranslations: FAILED for " + t + ":", e), "zh-CN" !== t) return n.loadProductTranslations("zh-CN");
+      if (console.error("[i18n] loadProductTranslations: FAILED for " + t + ":", e), "en" !== t) return n.loadProductTranslations("en");
       throw e
     }), 15e3, "[i18n] loadProductTranslations timeout for " + t)
   }, r.prototype.mergeTranslations = function(t, e) {
@@ -223,7 +223,7 @@
         if (n && n !== t) return n
       }
     }
-    if ("zh-CN" !== this.currentLanguage) {
+    if ("en" !== this.currentLanguage) {
       var a = this.translationsCache.get("ui-zh-CN");
       if (a) return this.resolveTranslationValue(a, t)
     }
@@ -256,7 +256,7 @@
         })
       })
     }).catch(function(t) {
-      if (console.error("[i18n] setLanguage: FAILED for", e, t), "zh-CN" !== e) return n.setLanguage("zh-CN")
+      if (console.error("[i18n] setLanguage: FAILED for", e, t), "en" !== e) return n.setLanguage("en")
     }) : Promise.reject(new Error("Unsupported language: " + e))
   }, r.prototype.toggleLanguageDropdown = function(t) {
     t && t.stopPropagation();
@@ -269,7 +269,7 @@
   }, r.prototype.initDropdownContainer = function() {
     var t = this,
       e = this.languages || [],
-      n = this.currentLanguage || "zh-CN";
+      n = this.currentLanguage || "en";
     if (!document.getElementById("language-dropdown")) {
       if ("undefined" == typeof LanguageDropdownTemplate) {
         console.warn("[i18n] LanguageDropdownTemplate not found, attempting to load dynamically");
@@ -391,10 +391,10 @@
   }, r.prototype.detectBrowserLanguage = function() {
     var t = navigator.language || navigator.userLanguage || "en",
       e = {
-        zh: "zh-CN",
-        "zh-CN": "zh-CN",
-        "zh-TW": "zh-CN",
-        "zh-HK": "zh-CN",
+        zh: "en",
+        "en": "en",
+        "zh-TW": "en",
+        "zh-HK": "en",
         en: "en",
         "en-US": "en",
         "en-GB": "en"
@@ -424,11 +424,11 @@
         }
       }))
     }).catch(function(t) {
-      return console.error("[i18n] initialize: FAILED:", t), e.currentLanguage = "zh-CN", e.loadTranslations("zh-CN").then(function() {
+      return console.error("[i18n] initialize: FAILED:", t), e.currentLanguage = "en", e.loadTranslations("en").then(function() {
         return e.applyTranslations()
       }).then(function() {
-        document.documentElement.lang = "zh-CN", e.isInitialized = !0, e.emit("initialized", {
-          language: "zh-CN"
+        document.documentElement.lang = "en", e.isInitialized = !0, e.emit("initialized", {
+          language: "en"
         })
       }).catch(function(t) {
         console.error("[i18n] initialize: fallback also FAILED:", t)
@@ -441,7 +441,7 @@
         language: t.currentLanguage
       })
     }).catch(function(e) {
-      return console.error("[i18n] recoverFromBfcache: FAILED:", e), t.loadTranslations("zh-CN").then(function() {
+      return console.error("[i18n] recoverFromBfcache: FAILED:", e), t.loadTranslations("en").then(function() {
         return t.applyTranslations()
       })
     })
