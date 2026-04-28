@@ -468,18 +468,16 @@
                 <div>
                   <label class="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-2" data-i18n="sol_roi_price_label">平均客单价 (¥)</label>
                   <div class="relative">
-                    <span class="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 font-bold">¥</span>
                     <input id="roi-price" type="number" value="25" min="5" max="500" step="1"
-                      class="w-full pl-10 pr-4 py-3 rounded-xl border border-slate-200 dark:border-slate-600 bg-slate-50 dark:bg-slate-700 text-lg font-bold focus:ring-2 focus:ring-primary/50 focus:border-primary outline-none transition-all" />
+                      class="w-full pl-4 pr-4 py-3 rounded-xl border border-slate-200 dark:border-slate-600 bg-slate-50 dark:bg-slate-700 text-lg font-bold focus:ring-2 focus:ring-primary/50 focus:border-primary outline-none transition-all" />
                   </div>
                 </div>
 
                 <div>
                   <label class="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-2" data-i18n="sol_roi_labor_label">当前月人工成本 (¥)</label>
                   <div class="relative">
-                    <span class="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 font-bold">¥</span>
                     <input id="roi-labor" type="number" value="60000" min="5000" max="500000" step="1000"
-                      class="w-full pl-10 pr-4 py-3 rounded-xl border border-slate-200 dark:border-slate-600 bg-slate-50 dark:bg-slate-700 text-lg font-bold focus:ring-2 focus:ring-primary/50 focus:border-primary outline-none transition-all" />
+                      class="w-full pl-4 pr-4 py-3 rounded-xl border border-slate-200 dark:border-slate-600 bg-slate-50 dark:bg-slate-700 text-lg font-bold focus:ring-2 focus:ring-primary/50 focus:border-primary outline-none transition-all" />
                   </div>
                 </div>
 
@@ -518,70 +516,6 @@
           </p>
         </div>
       </section>
-
-      <script>
-      (function() {
-        window.calculateROI = function() {
-          var orders = Math.max(50, parseInt(document.getElementById('roi-orders').value) || 200);
-          var price = Math.max(5, parseInt(document.getElementById('roi-price').value) || 25);
-          var labor = Math.max(5000, parseInt(document.getElementById('roi-labor').value) || 60000);
-          var scale = document.getElementById('roi-scale').value;
-
-          var investmentMap = { small: 80000, medium: 180000, large: 350000 };
-          var investment = investmentMap[scale] || 180000;
-
-          var laborSaving = labor * 0.30;
-          var wasteSaving = orders * price * 30 * 0.05;
-          var efficiencyGain = orders * price * 30 * 0.03;
-          var totalMonthlySaving = laborSaving + wasteSaving + efficiencyGain;
-
-          var paybackMonths = Math.ceil(investment / totalMonthlySaving);
-          var annualSaving = totalMonthlySaving * 12;
-          var roi3Year = ((annualSaving * 3 - investment) / investment * 100).toFixed(0);
-
-          var container = document.getElementById('roi-results');
-          container.innerHTML =
-            '<div class="space-y-6">' +
-              '<h3 class="text-xl font-bold flex items-center gap-2">' +
-                '<span class="material-symbols-outlined text-primary">emoji_events</span>' +
-                '<span data-i18n="sol_roi_result_title">投资回报预测</span>' +
-              '</h3>' +
-              '<div class="grid grid-cols-2 gap-4">' +
-                '<div class="bg-white dark:bg-slate-800 rounded-2xl p-5 shadow-sm">' +
-                  '<div class="text-3xl font-black text-primary">' + paybackMonths + '</div>' +
-                  '<div class="text-sm text-slate-500 dark:text-slate-400 mt-1" data-i18n="sol_roi_payback_months">个月回本</div>' +
-                '</div>' +
-                '<div class="bg-white dark:bg-slate-800 rounded-2xl p-5 shadow-sm">' +
-                  '<div class="text-3xl font-black text-primary">¥' + (totalMonthlySaving / 10000).toFixed(1) + '万</div>' +
-                  '<div class="text-sm text-slate-500 dark:text-slate-400 mt-1" data-i18n="sol_roi_monthly_saving">月均节省</div>' +
-                '</div>' +
-                '<div class="bg-white dark:bg-slate-800 rounded-2xl p-5 shadow-sm">' +
-                  '<div class="text-3xl font-black text-green-600">' + roi3Year + '%</div>' +
-                  '<div class="text-sm text-slate-500 dark:text-slate-400 mt-1" data-i18n="sol_roi_3year_roi">3年投资回报率</div>' +
-                '</div>' +
-                '<div class="bg-white dark:bg-slate-800 rounded-2xl p-5 shadow-sm">' +
-                  '<div class="text-3xl font-black text-orange-600">¥' + (annualSaving / 10000).toFixed(0) + '万</div>' +
-                  '<div class="text-sm text-slate-500 dark:text-slate-400 mt-1" data-i18n="sol_roi_annual_saving">年节省总额</div>' +
-                '</div>' +
-              '</div>' +
-              '<div class="bg-white dark:bg-slate-800 rounded-2xl p-5 shadow-sm">' +
-                '<div class="flex justify-between items-center mb-2">' +
-                  '<span class="text-sm font-medium" data-i18n="sol_roi_investment_label">预计投资额</span>' +
-                  '<span class="text-lg font-black text-slate-900 dark:text-white">¥' + (investment / 10000).toFixed(1) + '万</span>' +
-                '</div>' +
-                '<div class="space-y-2 mt-3">' +
-                  '<div class="flex justify-between text-sm"><span class="text-slate-500 dark:text-slate-400" data-i18n="sol_roi_labor_save">人工成本节省</span><span class="font-semibold">¥' + (laborSaving / 10000).toFixed(1) + '万/月</span></div>' +
-                  '<div class="flex justify-between text-sm"><span class="text-slate-500 dark:text-slate-400" data-i18n="sol_roi_waste_save">食材损耗降低</span><span class="font-semibold">¥' + (wasteSaving / 10000).toFixed(1) + '万/月</span></div>' +
-                  '<div class="flex justify-between text-sm"><span class="text-slate-500 dark:text-slate-400" data-i18n="sol_roi_efficiency_gain">效率提升收益</span><span class="font-semibold">¥' + (efficiencyGain / 10000).toFixed(1) + '万/月</span></div>' +
-                '</div>' +
-              '</div>' +
-              '<a href="/quote/" class="block w-full bg-primary text-white py-3 rounded-xl font-bold text-center hover:shadow-lg transition-all">' +
-                '<span data-i18n="sol_roi_cta">获取精准报价方案 →</span>' +
-              '</a>' +
-            '</div>';
-        };
-      })();
-      </script>
 
       <!-- ═══ Section 6: 实施时间线 (Inline Component) ═══ -->
       <section class="py-20">
@@ -916,5 +850,6 @@
     <script src="/assets/js/ui/navigator.js"></script>
     <script src="/assets/js/ui/footer.js"></script>
     <script defer src="/assets/js/ui/floating-actions.js"></script>
-  </body>
+  <script defer="defer" src="/assets/js/ui/deploy-roi.js"></script>
+</body>
 </html>

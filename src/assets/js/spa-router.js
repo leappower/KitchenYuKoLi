@@ -720,6 +720,11 @@
         scripts.push({ src: "/assets/js/ui/pi-maps.js", id: "spa-pi-maps" });
       }
 
+      // Deploy 方案页面需要 deploy-roi.js
+      if (/\/deploy-/.test(path)) {
+        scripts.push({ src: "/assets/js/ui/deploy-roi.js", id: "spa-deploy-roi" });
+      }
+
       scripts.forEach(function(s) {
         if (document.getElementById(s.id)) return; // 已加载
         var el = document.createElement("script");
