@@ -57,7 +57,7 @@
       if (r) {
         var s = JSON.parse(r);
         if (s && "object" == typeof s && s.data && "object" == typeof s.data) {
-          if (s.timestamp && Date.now() - s.timestamp < 864e5) return o = s.data, this.translationsCache.set(e, o), Promise.resolve(o);
+          if (s.timestamp && Date.now() - s.timestamp < 864e5 && s._v === 2) return o = s.data, this.translationsCache.set(e, o), Promise.resolve(o);
           localStorage.removeItem(n)
         } else console.warn("[i18n] Invalid cache structure for " + t + ", clearing"), localStorage.removeItem(n)
       }
@@ -80,6 +80,7 @@
       if (l.translationsCache.set(e, o), !a) try {
         localStorage.setItem(n, JSON.stringify({
           timestamp: Date.now(),
+          _v: 2,
           data: o
         }))
       } catch (t) {}
