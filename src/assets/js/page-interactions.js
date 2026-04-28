@@ -208,6 +208,7 @@
   }
 
   // ─── 4. Page-jump buttons ─────────────────────────────────────────────────────
+  // 暂时未被使用 — 页面中无匹配按钮 (Start ROI Calculator / View Hardware Stack 等)
   function bindPageJumps() {
     var _count = 0;
 
@@ -385,15 +386,9 @@
   }
 
   // ─── D. Number counter animation (§3.2) ──────────────────────────────────────
-  /**
-   * Animate the text content of `el` from its current numeric value to `target`
-   * over `duration` ms using requestAnimationFrame.
-   * Supports optional `suffix` (e.g. "%", "k", " mo").
-   *
-   * ✅ Optimized: Update DOM every 2 frames instead of every frame
-   * to reduce layout thrashing and improve smoothness
-   */
-  function animateNumber(el, target, duration, suffix) {
+  // 暂时未被使用 — 仅 ROI Calculator 使用，已提取到 ui/pi-roi.js
+  // function animateNumber(
+  function _unused_animateNumber(el, target, duration, suffix) {
     if (!el) return;
     var start = parseFloat(el.textContent) || 0;
     var startTs = null;
@@ -468,6 +463,7 @@
   }
 
   // ─── 6. Download / Export buttons ─────────────────────────────────────────────
+  // 暂时未被使用 — 页面中无 Manual Download / Share with Team / Download PDF 等按钮
   function bindDownloadButtons() {
     // "Manual Download" on thank-you page
     bindByText("button", "manual download", function () {
@@ -515,6 +511,7 @@
   }
 
   // ─── 8. Case-study category filter ───────────────────────────────────────────
+  // 暂时未被使用 — 页面中无 case-study 筛选按钮
   function initCaseStudyFilter() {
     var filterBar = document.querySelector(".flex.flex-wrap.gap-3");
     if (!filterBar) return;
@@ -551,6 +548,7 @@
   }
 
   // ─── 9. Thank-you page: calendar slot selection + Confirm Slot ───────────────
+  // 暂时未被使用 — 页面中无 grid-cols-7 日历或 Confirm Slot 按钮
   function initCalendarWidget() {
     var calendarBtns = document.querySelectorAll(".grid.grid-cols-7 button");
     var timeBtns = document.querySelectorAll(".w-full.md\\:w-48 button:not(.font-black)");
@@ -594,6 +592,7 @@
   }
 
   // ─── 10. ESG chart toggle (Monthly / Quarterly) ───────────────────────────────
+  // 暂时未被使用 — 页面中无 Monthly/Quarterly 切换按钮
   function initESGChartToggle() {
     var toggleBtns = document.querySelectorAll(".flex.gap-2 button");
     if (toggleBtns.length < 2) return;
@@ -984,41 +983,15 @@
   }
 
   // ─── 12. "Request Technical Blueprint" (PDP) ──────────────────────────────────
-
+  // 暂时未被使用 — 页面中无 "Request Technical Blueprint" 按钮
   // ╔══════════════════════════════════════════════════════════════════════════════╗
   // ║  NOT-YET-IMPLEMENTABLE FEATURES (yukoli_2026 spec §2.2 / §2.3)             ║
   // ║  These require external assets, services, or libraries not yet integrated. ║
   // ╠══════════════════════════════════════════════════════════════════════════════╣
-  // ║                                                                              ║
-  // ║  [N1] PDP 3D Hero — 360° Product Rotation (§2.2)                           ║
-  // ║  Status : BLOCKED — requires three.js + GLTF/GLB 3D model assets           ║
-  // ║  Steps to enable:                                                           ║
-  // ║    1. Add three.js CDN: https://cdn.jsdelivr.net/npm/three@latest/build/    ║
-  // ║    2. Export 3D model as .glb from design team (Robot Pro, etc.)            ║
-  // ║    3. Implement OrbitControls for drag-to-rotate on #pdp-3d-hero canvas     ║
-  // ║    4. Add pointer-down/move listeners for touch drag on mobile              ║
-  // ║  Placeholder: PDP hero currently shows static high-res product image.       ║
-  // ║                                                                              ║
-  // ║  [N2] PDP Hotspot Spec Pop-overs (§2.2)                                    ║
-  // ║  Status : BLOCKED — requires HTML hotspot markup with x/y coordinates       ║
-  // ║  Steps to enable:                                                           ║
-  // ║    1. Add <button data-hotspot data-spec-title="..." data-spec-value="..."> ║
-  // ║       elements positioned absolutely over the product hero image            ║
-  // ║    2. CSS: position absolute, small dot with pulse animation (.iot-pulse)   ║
-  // ║    3. JS: on mouseenter show tooltip; on mouseleave hide                    ║
-  // ║  Placeholder: Spec info currently shown as static feature list below hero.  ║
-  // ║                                                                              ║
-  // ║  [N3] PDP IoT Layer Toggle — Real-Time Machine Telemetry (§2.2)            ║
-  // ║  Status : BLOCKED — requires WebSocket/SSE backend + IoT device pairing    ║
-  // ║  Steps to enable:                                                           ║
-  // ║    1. Stand up a WebSocket server (Node.js ws / socket.io)                 ║
-  // ║    2. Pair device serial number with session via Yukoli OS API              ║
-  // ║    3. On toggle ON: open WebSocket, stream sensor data to overlay canvas   ║
-  // ║    4. On toggle OFF: close socket, remove overlay                          ║
-  // ║  Placeholder: Toggle button present in PDP HTML, click shows notification.  ║
-  // ║                                                                              ║
+  // ║  [N1] PDP 3D Hero — requires three.js + GLTF/GLB assets                    ║
+  // ║  [N2] PDP Hotspot Spec Pop-overs — requires HTML hotspot markup             ║
+  // ║  [N3] PDP IoT Layer Toggle — requires WebSocket/SSE backend                 ║
   // ╚══════════════════════════════════════════════════════════════════════════════╝
-
   function bindTechnicalBlueprint() {
     bindByText("button", "request technical blueprint", function (e) {
       e.preventDefault();
@@ -1027,6 +1000,7 @@
   }
 
   // ─── 13. "Watch Video Tour" link ──────────────────────────────────────────────
+  // 暂时未被使用 — 页面中无 "Watch Video Tour" 链接
   function bindVideoTour() {
     bindByText("a", "watch video tour", function (e) {
       e.preventDefault();
@@ -1035,6 +1009,7 @@
   }
 
   // ─── 14. "Schedule Demo" (IoT support page CTA) ───────────────────────────────
+  // 暂时未被使用 — 页面中无 "Schedule Demo" 按钮
   function bindScheduleDemo() {
     bindByText("button", "schedule demo", function (e) {
       e.preventDefault();
