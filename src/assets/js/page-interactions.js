@@ -113,7 +113,7 @@
     }
     // Fallback if Contacts not loaded yet
     var phone = global.Contacts && global.Contacts.whatsapp ? global.Contacts.whatsapp : "";
-    var text = encodeURIComponent(msg || "Hello Yukoli, I'd like to learn more about your smart kitchen solutions.");
+    var text = encodeURIComponent(msg || "Hi YuKoLi");
     var url = phone ? "https://wa.me/" + phone.replace(/\D/g, "") + "?text=" + text : "https://wa.me/?text=" + text;
     global.open(url, "_blank");
   }

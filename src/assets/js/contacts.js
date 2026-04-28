@@ -67,11 +67,9 @@
     var button = opts.button || "";
     var message = opts.message || "";
 
-    var text = "您好 YuKoLi\n来源：" + pageName;
-    if (source) text += " - " + source;
-    if (button) text += "「" + button + "」";
-    text += "\n页面：" + global.location.href;
-    if (message) text += "\n---\n" + message;
+    var text = "Hi YuKoLi";
+    if (source) text += " [" + source + "]";
+    if (message) text += "\n" + message;
 
     return "https://wa.me/" + WHATSAPP_NUMBER + "?text=" + encodeURIComponent(text);
   }
