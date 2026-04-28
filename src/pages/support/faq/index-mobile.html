@@ -349,6 +349,21 @@
   <div class="px-6 md:px-8 xl:px-10">
     <h2 class="text-3xl font-black tracking-tight mb-10 text-center" data-i18n="support_faq_contact_title">联系我们</h2>
     <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
+      <div class="flex items-center gap-4 p-5 rounded-2xl bg-[#07C160]/5 border border-[#07C160]/20 transition-all duration-300 group relative cursor-pointer" onclick="this.querySelector('.mobile-qr-panel').classList.toggle('hidden')">
+        <div class="w-12 h-12 rounded-full bg-[#07C160] flex items-center justify-center shrink-0">
+          <span class="material-symbols-outlined text-white text-xl">chat</span>
+        </div>
+        <div>
+          <h3 class="font-bold text-base">微信</h3>
+          <p class="text-sm text-slate-500 dark:text-slate-400">扫码添加，在线咨询</p>
+        </div>
+        <div class="mobile-qr-panel hidden absolute bottom-full left-1/2 -translate-x-1/2 mb-3 z-50">
+          <div class="bg-white rounded-xl p-2 shadow-xl shadow-black/10 border border-slate-100">
+            <img src="/assets/images/wechat-qr.png" alt="微信二维码" class="w-36 h-36 object-contain rounded-lg">
+          </div>
+          <p class="text-center text-[11px] text-slate-500 mt-1.5">微信扫码添加</p>
+        </div>
+      </div>
       <a href="https://wa.me/8613163756465" data-wa-source="contact-card" target="_blank" class="flex flex-col items-center gap-3 p-8 rounded-2xl bg-[#06C755]/5 border border-[#06C755]/20 hover:bg-[#06C755]/10 hover:shadow-lg transition-all group">
         <div class="w-14 h-14 rounded-full bg-[#06C755] flex items-center justify-center group-hover:scale-110 transition-transform">
           <span class="material-symbols-outlined text-white text-2xl">chat</span>
