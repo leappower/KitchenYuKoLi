@@ -4,18 +4,27 @@
  */
 
 window.LanguageDropdownTemplate = {
-  // 按地区分组的语言配置（仅 zh-CN + en）
-  LANG_GROUPS: {
-    common: {
-      titleKey: "lang_group_common",
-      langs: ["zh-CN", "en"],
-    },
-  },
+  // 按地区分组的语言配置（从 LANG_REGISTRY 动态读取）
+  LANG_GROUPS: [
+    { id: 'common',        titleKey: 'lang_group_common' },
+    { id: 'southeast_asia', titleKey: 'lang_group_southeast_asia' },
+    { id: 'east_asia',      titleKey: 'lang_group_east_asia' },
+    { id: 'other',         titleKey: 'lang_group_other' },
+  ],
 
-  // 语言代码到显示名称的映射
-  LANGUAGE_NAMES: {
-    "zh-CN": "中文（简体）",
-    en: "English",
+  // 按分组存放语言列表：{ common: ['zh-CN','en'], southeast_asia: ['th','vi',...], ... }
+  _groupedLangs: {},
+
+  // 从 LANG_REGISTRY 初始化语言列表（在 DOMContentLoaded 后调用）
+  _initFromRegistry: function () {
+    var reg = window.LANG_REGISTRY;
+    if (!reg || !reg.LANGUAGES) return;
+    this._groupedLangs = {};
+    reg.LANGUAGES.forEach(function (l) {
+      var group = l.uiGroup || 'common';
+      if (!this._groupedLangs[group]) this._groupedLangs[group] = [];
+      this._groupedLangs[group].push(l.code);
+    }.bind(this));
   },
 
   // 创建单个语言选项按钮
@@ -88,13 +97,20 @@ window.LanguageDropdownTemplate = {
     this._injectStyles();
     var groupHtml = "";
 
-    // Common 组
-    groupHtml += '<div class="lang-group">';
-    groupHtml += this.createGroupTitle(this.LANG_GROUPS.common.titleKey);
-    this.LANG_GROUPS.common.langs.forEach(function (code) {
-      groupHtml += self.createLangOption(code, currentLang, getLangName(code));
+    // 确保已从 LANG_REGISTRY 初始化
+    this._initFromRegistry();
+
+    // 遍历所有分组，只渲染有语言条目的组
+    Object.keys(this.LANG_GROUPS).forEach(function (groupKey) {
+      var group = self.LANG_GROUPS[groupKey];
+      if (!group.langs || group.langs.length === 0) return;
+      groupHtml += '<div class="lang-group">';
+      groupHtml += self.createGroupTitle(group.titleKey);
+      group.langs.forEach(function (code) {
+        groupHtml += self.createLangOption(code, currentLang, getLangName(code));
+      });
+      groupHtml += "</div>";
     });
-    groupHtml += "</div>";
 
     return (
       '<div id="language-dropdown" class="fixed bg-white dark:bg-slate-800 border border-slate-200/50 dark:border-slate-700/50 rounded-[13px] p-1 z-[var(--z-language-dropdown)] overflow-hidden" style="display:none;width:260px;box-shadow:0 0 0 .5px rgba(0,0,0,.04),0 8px 40px rgba(0,0,0,.12),0 2px 12px rgba(0,0,0,.08)">' +
