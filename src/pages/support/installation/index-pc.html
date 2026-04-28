@@ -148,7 +148,7 @@
           <span class="text-4xl font-black text-primary/20">01</span>
         </div>
         <div>
-          <h3 class="text-lg font-bold" data-i18n="support_install_step_1_title">免费到店勘测</h3>
+          <h3 class="text-lg font-bold" data-i18n="support_install_step_1_title">预约到店勘测</h3>
           <p class="text-sm text-slate-500 mt-1" data-i18n="support_install_step_1_desc">工程师到你店里，评估厨房条件，提前排除安装隐患，不会花冤枉钱。</p>
         </div>
       </div>
@@ -168,8 +168,8 @@
           <span class="text-4xl font-black text-primary/20">03</span>
         </div>
         <div>
-          <h3 class="text-lg font-bold" data-i18n="support_install_step_3_title">验收 + 培训 + 交付</h3>
-          <p class="text-sm text-slate-500 mt-1" data-i18n="support_install_step_3_desc">当场演示性能，培训你的厨师操作，交付手册和保修卡。你满意签字，我们才离开。</p>
+          <h3 class="text-lg font-bold" data-i18n="support_install_step_3_title">验收交付</h3>
+          <p class="text-sm text-slate-500 mt-1" data-i18n="support_install_step_3_desc">演示性能，培训厨师操作，交付手册和保修卡。你满意签字，后续还有任何问题可随时线上联系我们。</p>
         </div>
       </div>
     </div>
@@ -253,21 +253,18 @@
 <section class="py-12 bg-white dark:bg-slate-900/50">
   <div class="px-6 md:px-8 xl:px-10">
     <h2 class="text-3xl font-black tracking-tight mb-10 text-center" data-i18n="support_install_contact_title">联系我们</h2>
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-5xl mx-auto">
-      <a href="https://wa.me/8613163756465" data-wa-source="contact-card" target="_blank" class="flex flex-col items-center gap-3 p-8 rounded-2xl bg-[#06C755]/5 border border-[#06C755]/20 hover:bg-[#06C755]/10 hover:shadow-lg transition-all group">
-        <div class="w-14 h-14 rounded-full bg-[#06C755] flex items-center justify-center group-hover:scale-110 transition-transform">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+      <div class="wechat-qr-card flex flex-col items-center gap-3 p-8 rounded-2xl bg-[#07C160]/5 border border-[#07C160]/20 hover:bg-[#07C160]/10 hover:shadow-lg transition-all group relative cursor-pointer">
+        <div class="qr-popup">
+          <img src="/assets/images/wechat-qr.png" alt="微信二维码" class="w-40 h-40 object-contain rounded-lg">
+          <p class="text-center text-xs text-slate-500 mt-1">微信扫码添加</p>
+        </div>
+        <div class="w-14 h-14 rounded-full bg-[#07C160] flex items-center justify-center group-hover:scale-110 transition-transform">
           <span class="material-symbols-outlined text-white text-2xl">chat</span>
         </div>
-        <h3 class="font-bold text-lg">WhatsApp（国内）</h3>
-        <p class="text-sm text-slate-500 dark:text-slate-400 text-center" data-i18n="support_install_contact_whatsapp_desc">预约安装咨询，2小时内回复</p>
-      </a>
-      <a href="https://wa.me/16478158194" data-wa-source="contact-card" target="_blank" class="flex flex-col items-center gap-3 p-8 rounded-2xl bg-[#06C755]/5 border border-[#06C755]/20 hover:bg-[#06C755]/10 hover:shadow-lg transition-all group">
-        <div class="w-14 h-14 rounded-full bg-[#06C755] flex items-center justify-center group-hover:scale-110 transition-transform">
-          <span class="material-symbols-outlined text-white text-2xl">chat</span>
-        </div>
-        <h3 class="font-bold text-lg">WhatsApp（海外）</h3>
-        <p class="text-sm text-slate-500 dark:text-slate-400 text-center" data-i18n="support_install_contact_whatsapp_overseas_desc">海外客户安装咨询，2小时内回复</p>
-      </a>
+        <h3 class="font-bold text-lg">微信</h3>
+        <p class="text-sm text-slate-500 dark:text-slate-400 text-center">扫码添加，在线咨询</p>
+      </div>
       <a href="mailto:support.kitchen@yukoli.com" class="flex flex-col items-center gap-3 p-8 rounded-2xl bg-primary/5 border border-primary/20 hover:bg-primary/10 hover:shadow-lg transition-all group">
         <div class="w-14 h-14 rounded-full bg-primary flex items-center justify-center group-hover:scale-110 transition-transform">
           <span class="material-symbols-outlined text-white text-2xl">email</span>
@@ -351,7 +348,7 @@
             <span class="material-symbols-outlined text-slate-400 transition-transform">expand_more</span>
           </summary>
           <div class="px-5 pb-5 text-slate-600 dark:text-slate-400 leading-relaxed" data-i18n="support_install_faq_a7">
-            整机保修1年，核心配件（IGBT模块、电磁线圈、锅体）3年，电机18个月，控制板1年。质保期内质量问题损坏的配件免费更换（损耗件除外）。自验收合格日起算。
+            整机保修1年（自验收合格日起）。质保期内质量问题损坏的配件免费更换。
           </div>
         </details>
         <details class="bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 overflow-hidden">
@@ -377,8 +374,10 @@
       <p class="text-slate-400 max-w-xl text-lg" data-i18n="support_install_cta_desc">200+ 套设备安装经验，覆盖东南亚 10 国。专业团队，快速可靠。</p>
       <div class="flex flex-wrap justify-center gap-4">
         <a href="/quote/" class="bg-primary text-white px-10 py-5 rounded-2xl font-black text-lg shadow-2xl shadow-primary/40 hover:scale-105 transition-transform" data-i18n="support_install_cta_btn_primary">免费获取方案</a>
-        <a href="https://wa.me/8613163756465" data-wa-source="bottom-cta" target="_blank" class="bg-white/10 text-white border border-white/20 backdrop-blur-sm px-10 py-5 rounded-2xl font-black text-lg hover:bg-white/20 transition-colors" data-i18n="support_install_cta_btn_secondary">WhatsApp（国内）直接聊</a>
-        <a href="https://wa.me/16478158194" data-wa-source="bottom-cta" target="_blank" class="bg-white/10 text-white border border-white/20 backdrop-blur-sm px-10 py-5 rounded-2xl font-black text-lg hover:bg-white/20 transition-colors" data-i18n="support_install_cta_btn_overseas">WhatsApp（海外）直接聊</a>
+        <span class="bg-[#07C160]/20 text-white border border-[#07C160]/30 backdrop-blur-sm px-10 py-5 rounded-2xl font-black text-lg flex items-center gap-3 hover:bg-[#07C160]/30 transition-colors cursor-pointer">
+          <span class="material-symbols-outlined">chat</span>
+          <span data-i18n="support_install_cta_btn_wechat">微信咨询</span>
+        </span>
       </div>
     </div>
   </div>
