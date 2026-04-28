@@ -20,7 +20,6 @@
   /** Bottom links (Case Studies + ROI) */
   var EXTRAS = [
     { key: "nav_cases", icon: "monitoring", href: "/applications/cases/", badge: false },
-    { key: "nav_roi", icon: "calculate", href: "/roi/", badge: true },
   ];
 
   /* ───────────────────────── HELPERS ───────────────────────── */
@@ -50,14 +49,6 @@
       /* Emoji Badge */
       ".app-dropdown-emoji {",
       "  margin-left: auto; font-size: 13px; line-height: 1; opacity: .85; flex-shrink: 0;",
-      "}",
-
-      /* ROI Badge */
-      ".app-roi-badge {",
-      "  display: inline-flex; align-items: center; padding: 2px 7px;",
-      "  font-size: 10px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase;",
-      "  background: #ec5b13; color: #fff; border-radius: 20px;",
-      "  flex-shrink: 0; line-height: 1.4;",
       "}",
 
       /* Popup emoji */
@@ -99,9 +90,7 @@
   }
 
   function buildDropdownItem(item) {
-    var badgeHtml = item.badge
-      ? '<span class="app-roi-badge" data-i18n="nav_roi_badge">HOT</span>'
-      : '<span class="material-symbols-outlined app-dropdown-chevron">chevron_right</span>';
+    var badgeHtml = '<span class="material-symbols-outlined app-dropdown-chevron">chevron_right</span>';
     return (
       '<a href="' +
       esc(item.href) +
@@ -225,9 +214,7 @@
     }).join("\n");
 
     var extrasItems = EXTRAS.map(function (s) {
-      var badgeHtml = s.badge
-        ? '<span class="app-roi-badge" data-i18n="nav_roi_badge">HOT</span>'
-        : '<span class="material-symbols-outlined app-popup-chevron">chevron_right</span>';
+      var badgeHtml = '<span class="material-symbols-outlined app-popup-chevron">chevron_right</span>';
       return (
         '<a href="' +
         esc(s.href) +
