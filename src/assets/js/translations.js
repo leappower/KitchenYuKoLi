@@ -83,6 +83,11 @@
           data: o
         }))
       } catch (t) {}
+      var filledCount = Object.keys(o).filter(function(k) { return o[k]; }).length;
+      if (filledCount === 0 && "en" !== t) {
+        console.warn("[i18n] loadUITranslations: all empty values for " + t + ", falling back to en");
+        return l.loadUITranslations("en");
+      }
       return o
     }).catch(function(e) {
       if (console.error("[i18n] loadUITranslations: FAILED for " + t + ":", e), "en" !== t) return l.loadUITranslations("en");
@@ -99,7 +104,7 @@
       if (!t.ok) throw new Error("HTTP " + t.status);
       return t.json()
     }).then(function(a) {
-      if (0 === Object.keys(a).length && "en" !== t) return console.warn("[i18n] loadProductTranslations: empty data for " + t + ", falling back to zh-CN"), n.loadProductTranslations("en");
+      if (0 === Object.keys(a).length && "en" !== t) return console.warn("[i18n] loadProductTranslations: empty data for " + t + ", falling back to en"), n.loadProductTranslations("en");
       var o = n.normalizeTranslationKeys(a);
       return Object.keys(o).length, n.translationsCache.set(e, o), o
     }).catch(function(e) {
