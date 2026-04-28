@@ -518,6 +518,9 @@
       container.style.opacity = "0";
       container.innerHTML = content;
 
+      // 动态加载页面专属脚本（SPA 移除了 script 标签，需手动补充）
+      _self.loadPageScripts(pagePath);
+
       // 隐藏骨架屏
       this.hideSkeleton();
 
@@ -697,6 +700,37 @@
       });
 
       this.log("Initialized successfully");
+    },
+
+    // 页面专属脚本映射（SPA 导航时按需加载）
+    loadPageScripts: function(pagePath) {
+      var scripts = [];
+      var path = pagePath.replace(/\/index-(pc|mobile|tablet)\.html$/, "/");
+
+      // ROI 计算器需要 Chart.js + pi-roi.js
+      if (path.indexOf("/roi/") !== -1) {
+        if (typeof global.Chart === "undefined") {
+          scripts.push({ src: "https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js", id: "spa-chart-js" });
+        }
+        scripts.push({ src: "/assets/js/ui/pi-roi.js", id: "spa-pi-roi" });
+      }
+
+      // Maps 页面需要 pi-maps.js
+      if (path.indexOf("/support/installation/") !== -1) {
+        scripts.push({ src: "/assets/js/ui/pi-maps.js", id: "spa-pi-maps" });
+      }
+
+      scripts.forEach(function(s) {
+        if (document.getElementById(s.id)) return; // 已加载
+        var el = document.createElement("script");
+        el.id = s.id;
+        el.src = s.src + (s.src.indexOf("?") === -1 ? "?v=" + Date.now() : "");
+        el.onload = function() {
+          // 触发 spa:load 让脚本有机会初始化
+          document.dispatchEvent(new Event("spa:load"));
+        };
+        document.body.appendChild(el);
+      });
     },
   };
 
