@@ -146,6 +146,13 @@
             plugins: {
               legend: { display: false },
               tooltip: {
+                backgroundColor: 'rgba(15,23,42,0.9)',
+                titleFont: { size: 12, weight: '600' },
+                bodyFont: { size: 13, weight: '600' },
+                padding: 10,
+                cornerRadius: 8,
+                displayColors: true,
+                boxPadding: 4,
                 callbacks: {
                   label: function (ctx) {
                     var cfg = window.Currency && window.Currency.getConfig();
@@ -156,8 +163,8 @@
               },
             },
             scales: {
-              x: { grid: { display: false }, ticks: { font: { size: 10, weight: "700" }, color: "#94a3b8" } },
-              y: { grid: { color: "rgba(148,163,184,0.15)" }, ticks: { font: { size: 10 }, color: "#94a3b8", callback: function (v) { return "$" + v + "k"; } } },
+              x: { grid: { display: false }, ticks: { font: { size: 12, weight: "700" }, color: "#475569" } },
+              y: { grid: { color: "rgba(148,163,184,0.15)" }, ticks: { font: { size: 11, weight: "500" }, color: "#475569", callback: function (v) { var c = window.Currency && window.Currency.getConfig(); var s = c ? c.symbol : '$'; return s + v + "k"; } } },
             },
           },
         });
@@ -195,10 +202,21 @@
             responsive: true,
             maintainAspectRatio: false,
             animation: { duration: 500 },
-            plugins: { legend: { display: false } },
+            plugins: {
+              legend: { display: false },
+              tooltip: {
+                backgroundColor: 'rgba(15,23,42,0.9)',
+                titleFont: { size: 12, weight: '600' },
+                bodyFont: { size: 13, weight: '600' },
+                padding: 10,
+                cornerRadius: 8,
+                boxPadding: 4,
+              },
+            },
             scales: {
-              x: { grid: { display: false }, ticks: { font: { size: 9 }, color: "#94a3b8" } },
-              y: { grid: { color: "rgba(148,163,184,0.15)" }, ticks: { font: { size: 9 }, color: "#94a3b8", callback: function (v) { return "$" + v + "k"; } } },
+              x: { grid: { display: false }, ticks: { font: { size: 11 }, color: "#475569" } },
+              y: { grid: { color: "rgba(148,163,184,0.15)" }, ticks: { font: { size: 11, weight: "500" }, color: "#475569", callback: function (v) { var c = window.Currency && window.Currency.getConfig(); var s = c ? c.symbol : '$'; return s + v + "k"; } } },
+            },
             },
           },
         });
