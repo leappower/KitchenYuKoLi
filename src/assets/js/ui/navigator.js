@@ -294,7 +294,7 @@
           var i = a,
             l = {
               "case-studies": "applications",
-              roi: "solutions",
+              roi: (window._prevSpaPath && window._prevSpaPath.indexOf("/applications/") !== -1) ? "applications" : "solutions",
               news: "contact",
               quote: "contact",
               "thank-you": "contact"
@@ -317,7 +317,7 @@
           about: "abt",
           contact: "cnt",
           "case-studies": "app",
-          roi: "sol",
+          roi: (window._prevSpaPath && window._prevSpaPath.indexOf("/applications/") !== -1) ? "app" : "sol",
           news: "cnt",
           quote: "cnt",
           "thank-you": "cnt"

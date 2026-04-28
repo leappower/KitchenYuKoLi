@@ -547,6 +547,10 @@
         }, 240);
       });
 
+      // 记录上一个路径（供 navigator 判断 ROI 来源菜单）
+      if (!window._prevSpaPath) window._prevSpaPath = this.currentRoute || "/";
+      else window._prevSpaPath = this.currentRoute || window._prevSpaPath;
+
       // 更新当前路由
       this.currentRoute = window.location.pathname;
 
