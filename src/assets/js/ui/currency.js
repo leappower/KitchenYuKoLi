@@ -145,15 +145,22 @@
     });
 
     // 2) 更新 [data-currency-unit] 元素（万元/年 → K/yr 等）
-    var periodMap = { '万元/年': cfg.unit + '/yr', '萬元/年': cfg.unit + '/yr', 'K/yr': cfg.unit + '/yr' };
     document.querySelectorAll('[data-currency-unit]').forEach(function(el) {
       var t = el.textContent.trim();
-      el.textContent = periodMap[t] || cfg.unit + '/yr';
+      // 匹配 "10K RMB/year"、"万元/年"、"K/yr" 等格式
+      var m = t.match(/^(\d*[\.]?\d*)\s*(万元|萬元|K|M|Lakh|ล้าน|Triệu|Juta|万円|백만)?\s*(RMB|USD|CNY|THB|VND|MYR|IDR|JPY|KRW|INR|TWD|SAR)?\s*\/\s*(year|yr|年)$/i);
+      if (m) {
+        el.textContent = cfg.unit + '/yr';
+      } else {
+        el.textContent = cfg.unit + '/yr';
+      }
     });
 
-    // 2b) 更新 [data-currency-label] 元素，替换 (¥) / (RMB) / ($)
+    // 2b) 更新 [data-currency-label] 元素，替换 (¥) / (RMB) / ($) 等
     document.querySelectorAll('[data-currency-label]').forEach(function(el) {
-      el.textContent = el.textContent.replace(/[\(（][¥$₹฿₫₩₤€£RpRMNT$ر.سRMBUSD]+[\)）]/, '(' + cfg.symbol + ')');
+      el.textContent = el.textContent
+        .replace(/[(（]\s*(RMB|USD|CNY|THB|VND|MYR|IDR|JPY|KRW|INR|TWD|SAR|[¥$₹฿₫₩₤€£]+)\s*[)）]/g, '(' + cfg.symbol + ')')
+        .replace(/\s+RMB\s*/g, ' ' + cfg.code + ' ');
     });
 
     // 3) 更新 ROI 输入框默认值（按汇率换算）
@@ -189,8 +196,23 @@
   }
 
   // ── 监听语言切换事件 ──
+  // languageChanged: 开始切换，用于清除缓存
+  // translationsApplied: i18n 翻译已应用到 DOM，此时再刷新币种标签
   if (root.addEventListener) {
-    root.addEventListener('languageChanged', refreshCurrencyUI);
+    root.addEventListener('languageChanged', function() {
+      _invalidateCache();
+    });
+    // 延迟监听 translationsApplied（translationManager 可能稍后初始化）
+ function listenApplied() {
+      if (root.translationManager && root.translationManager.on) {
+        root.translationManager.on('translationsApplied', function() {
+          refreshCurrencyUI();
+        });
+      } else {
+        setTimeout(listenApplied, 200);
+      }
+    }
+    listenApplied();
   }
 
   // ── DOM Ready 时也执行一次 ──
