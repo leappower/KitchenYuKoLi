@@ -59,7 +59,7 @@
     }
     var l = document.querySelector(".fixed.bottom-0");
     l && (l.style.opacity = "0", l.style.transition = "opacity 0.15s ease-out"), e.translationManager && "function" == typeof e.translationManager.applyTranslations && e.translationManager.applyTranslations(), e.requestAnimationFrame(function() {
-      l && (l.style.opacity = "1")
+      l && (l.style.opacity = "1"), document.body.style.paddingBottom || (document.body.style.paddingBottom = (l ? l.offsetHeight : 80) + 20 + "px")
     })
   }
   "loading" === document.readyState ? document.addEventListener("DOMContentLoaded", i) : i(), window.addEventListener("pageshow", function(e) {
