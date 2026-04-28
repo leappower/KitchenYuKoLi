@@ -236,4 +236,5 @@
   };
 
   document.addEventListener("DOMContentLoaded", initIoTSupportPage);
+  document.addEventListener("spa:load", initIoTSupportPage);
 })(window);

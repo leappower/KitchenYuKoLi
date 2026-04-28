@@ -387,4 +387,5 @@
     init();
   }
 
+  document.addEventListener("spa:load", init);
 })(window);

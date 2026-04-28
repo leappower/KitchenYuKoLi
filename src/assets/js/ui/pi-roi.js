@@ -80,6 +80,13 @@
     var CHART_PRIMARY = "rgb(236, 91, 19)";
     var CHART_PRIMARY_A = "rgba(236, 91, 19, 0.15)";
     var CHART_SLATE = "rgba(148, 163, 184, 0.6)";
+    // 销毁旧 Chart 实例（SPA 重复导航时 canvas 已被替换）
+    if (typeof global.Chart !== "undefined") {
+      var _cc = document.getElementById("roi-cumulative-chart");
+      if (_cc && _cc.chart) { try { _cc.chart.destroy(); } catch(e){} }
+      var _lc = document.getElementById("roi-labor-compare-chart");
+      if (_lc && _lc.chart) { try { _lc.chart.destroy(); } catch(e){} }
+    }
 
     /**
      * 初始化或重建 Chart.js 实例。
@@ -345,5 +352,14 @@
     runCalculation();
   }
 
-  document.addEventListener("DOMContentLoaded", initROICalculator);
+  // 防止重复初始化
+  var _roiInitialized = false;
+  function init() {
+    if (_roiInitialized) { initROICalculator(); return; }
+    _roiInitialized = true;
+    initROICalculator();
+  }
+
+  document.addEventListener("DOMContentLoaded", function () { _roiInitialized = true; initROICalculator(); });
+  document.addEventListener("spa:load", init);
 })(window);
