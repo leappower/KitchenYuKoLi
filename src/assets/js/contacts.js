@@ -67,8 +67,9 @@
     var button = opts.button || "";
     var message = opts.message || "";
 
-    var text = "Hi YuKoLi";
-    if (source) text += " [" + source + "]";
+    var text = "Hi YuKoLi [" + pageName;
+    if (source) text += "/" + source;
+    text += "]";
     if (message) text += "\n" + message;
 
     return "https://wa.me/" + WHATSAPP_NUMBER + "?text=" + encodeURIComponent(text);

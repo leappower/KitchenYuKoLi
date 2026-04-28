@@ -85,7 +85,8 @@
       return;
     }
     var phone = global.Contacts && global.Contacts.whatsapp ? global.Contacts.whatsapp : "";
-    var text = encodeURIComponent(msg || "Hi YuKoLi");
+    var prefix = source ? " [" + source + "]" : "";
+    var text = encodeURIComponent((msg || "Hi YuKoLi") + prefix);
     var url = phone ? "https://wa.me/" + phone.replace(/\D/g, "") + "?text=" + text : "https://wa.me/?text=" + text;
     global.open(url, "_blank");
   }
