@@ -269,11 +269,14 @@
     strategyBtns.forEach(function (btn) {
       btn.addEventListener("click", function () {
         strategyBtns.forEach(function (b) {
-          b.classList.remove("border-primary", "bg-primary\\/10", "text-primary");
-          b.classList.add("border-slate-200", "text-slate-500");
+          b.className = b.className.replace(/border-primary|bg-primary\/10|text-primary/g, "");
+          if (b.className.indexOf("border-slate-200") === -1) b.className += " border-slate-200";
+          if (b.className.indexOf("text-slate-500") === -1) b.className += " text-slate-500";
         });
-        btn.classList.add("border-primary", "bg-primary/10", "text-primary");
-        btn.classList.remove("border-slate-200", "text-slate-500");
+        btn.className = btn.className.replace(/border-slate-200|text-slate-500/g, "");
+        if (btn.className.indexOf("border-primary") === -1) btn.className += " border-primary";
+        if (btn.className.indexOf("bg-primary/10") === -1) btn.className += " bg-primary/10";
+        if (btn.className.indexOf("text-primary") === -1) btn.className += " text-primary";
         deployStrategy = btn.dataset.strategy || "phased";
         runCalculation();
       });
