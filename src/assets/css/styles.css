@@ -284,7 +284,13 @@ main#spa-content:not([class*="p-"], [class*="px-"], [class*="py-"]) .fullwidth-b
 /* ─── Navigator placeholder: prevent layout shift ─────────────── */
 navigator[data-component="navigator"] {
   display: block;
-  min-height: 108px;
+  min-height: 65px; /* mobile/tablet: matches placeholder height */
+}
+
+@media (min-width: 1280px) {
+  navigator[data-component="navigator"] {
+    min-height: 108px; /* PC: matches placeholder height */
+  }
 }
 
 /* ─── Scroll margin for sections (prevent navigator overlap) ───── */
