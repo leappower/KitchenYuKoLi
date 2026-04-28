@@ -188,7 +188,7 @@
           var p = c.children.length,
             u = c.firstElementChild,
             g = u ? u.nextElementSibling : c.firstChild;
-          console.log("[navigator] buildHeader children:", p, "| placeholder:", u ? u.tagName + "#" + u.id : "NULL", "| header:", g ? g.tagName + "#" + (g.id || "") : "NULL"), u && u.id && r.parentNode.insertBefore(u, r), console.log("[navigator] variant=" + s + " | header inserted, tag=" + (g ? g.tagName : "NULL")), r.parentNode.replaceChild(g, r)
+          console.log("[navigator] buildHeader children:", p, "| placeholder:", u ? u.tagName + "#" + u.id : "NULL", "| header:", g ? g.tagName + "#" + (g.id || "") : "NULL"), u && u.id && r.parentNode.insertBefore(u, r), console.log("[navigator] variant=" + s + " | header inserted, tag=" + (g ? g.tagName : "NULL")), r.parentNode.replaceChild(g, r), setTimeout(function() { e.SlideMenu && (e.SlideMenu.initToggle && e.SlideMenu.initToggle(), e.SlideMenu.initSmartHeader && e.SlideMenu.initSmartHeader()) }, 0)
         }
       } else console.warn("[navigator] Placeholder has no parent, skipping (already mounted?)")
     }
@@ -349,6 +349,6 @@
   }, document.addEventListener("spa:load", function() {
     document.querySelector("header") || i();
     var e = document.getElementById("mobile-header");
-    e && e.classList.remove("header-hidden")
+    e && e.classList.remove("header-hidden"), setTimeout(function() { window.SlideMenu && (window.SlideMenu.initToggle && window.SlideMenu.initToggle(), window.SlideMenu.initSmartHeader && window.SlideMenu.initSmartHeader()) }, 0)
   })
 }(window);
