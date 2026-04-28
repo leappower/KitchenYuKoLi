@@ -71,6 +71,7 @@
     { name: "Yukoli Los Angeles NA", lat: 34.0522, lng: -118.2437 },
   ];
 
+  // 暂时未被使用 — API key 未配置，当前显示静态 SVG fallback
   function initServiceCenterMap() {
     if (typeof global.google === "undefined" || !global.google.maps) {
       return;
@@ -138,6 +139,7 @@
    * Places API 文字搜索 — 在地图上定位并显示最近服务中心。
    * @param {string} query - 用户输入的地名/城市
    */
+  // 暂时未被使用 — 依赖 Google Maps Places API
   function serviceCenterSearch(query) {
     if (!global._yukolicServiceMap || !global.google || !global.google.maps) return;
 
@@ -174,6 +176,7 @@
   }
 
   // ─── 11. IoT Support page — Activate Diagnostics + Map Search ───────────────
+  // 暂时未被使用 — 页面暂无 "Activate Diagnostics" / "Client Portal" 按钮
   function initIoTSupportPage() {
     var diagBtn = findByText("button", "activate diagnostics")[0];
     if (diagBtn) {
@@ -250,6 +253,7 @@
    * the service center map on the IoT Support page.
    * On pages without #yukoli-service-map this is a safe no-op.
    */
+  // 暂时未被使用 — Google Maps API key 未配置
   global.initGoogleMapsCallback = function () {
     initServiceCenterMap();
   };
