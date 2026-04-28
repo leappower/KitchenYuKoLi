@@ -421,7 +421,7 @@
     var n = this.getInitialLanguage();
     return this.currentLanguage = n, e.setupEventListeners(), Promise.all([this.loadUITranslations(n), this.loadProductTranslations(n).catch(function(t) {
       console.warn("[i18n] initialize: product translations for " + n + " failed: " + t.message)
-    })]).then(function() {
+    }), ("en" !== n && !this.translationsCache.has("ui-en") ? this.loadUITranslations("en").catch(function(){}) : Promise.resolve())]).then(function() {
       return e.applyTranslations()
     }).then(function() {
       document.documentElement.lang = e.currentLanguage, e.isInitialized = !0, e.emit("initialized", {
