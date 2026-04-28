@@ -18,6 +18,101 @@
   var WHATSAPP_NUMBER = "8613163756465";
 
   // ============================================
+  // WHATSAPP SOURCE TRACKING
+  // ============================================
+  /** Page path → display name mapping for WhatsApp source tracking */
+  var PAGE_NAMES = {
+    "/support/": "售后支持",
+    "/support/installation/": "安装服务",
+    "/support/spare-parts/": "配件服务",
+    "/support/training/": "操作培训",
+    "/support/warranty/": "质保政策",
+    "/support/faq/": "常见问题",
+    "/products/": "产品中心",
+    "/product-detail/": "产品详情",
+    "/pdp/": "产品详情",
+    "/quote/": "在线询价",
+    "/contact/": "联系我们",
+    "/landing/": "着陆页",
+    "/home/": "首页",
+    "/solutions/": "解决方案",
+    "/roi/": "ROI计算器",
+    "/about/": "关于我们",
+    "/news/": "新闻资讯",
+    "/thank-you/": "感谢页",
+  };
+
+  function getPageName() {
+    var path = global.location.pathname.replace(/\/index-(pc|mobile|tablet)\.html$/, "/");
+    if (PAGE_NAMES[path]) return PAGE_NAMES[path];
+    var keys = Object.keys(PAGE_NAMES).sort(function (a, b) { return b.length - a.length; });
+    for (var i = 0; i < keys.length; i++) {
+      if (path.indexOf(keys[i]) !== -1) return PAGE_NAMES[keys[i]];
+    }
+    return "网站";
+  }
+
+  /**
+   * Build a tracked WhatsApp URL with source information.
+   * @param {Object} opts
+   * @param {string} [opts.pageName] - Override page name (auto-detected if omitted)
+   * @param {string} [opts.source] - Location description (e.g. "hero", "contact-card", "bottom-cta")
+   * @param {string} [opts.button] - Button/link text for identification
+   * @param {string} [opts.message] - Additional custom message to append
+   * @returns {string} Full wa.me URL with pre-filled text
+   */
+  function contactsWhatsApp(opts) {
+    opts = opts || {};
+    var pageName = opts.pageName || getPageName();
+    var source = opts.source || "";
+    var button = opts.button || "";
+    var message = opts.message || "";
+
+    var text = "您好 YuKoLi\n来源：" + pageName;
+    if (source) text += " - " + source;
+    if (button) text += "「" + button + "」";
+    text += "\n页面：" + global.location.href;
+    if (message) text += "\n---\n" + message;
+
+    return "https://wa.me/" + WHATSAPP_NUMBER + "?text=" + encodeURIComponent(text);
+  }
+
+  /**
+   * Extract visible text from a link element, ignoring icon children.
+   */
+  function getLinkText(el) {
+    var text = "";
+    if (el.textContent) {
+      text = el.textContent.trim().replace(/\s+/g, " ").substring(0, 30);
+    }
+    return text;
+  }
+
+  /**
+   * Initialize WhatsApp source tracking on all wa.me links.
+   * Intercepts clicks to add source/page/button info to the pre-filled message.
+   * Call on DOMContentLoaded or after SPA navigation.
+   */
+  function initWhatsAppLinks() {
+    var links = document.querySelectorAll('a[href*="wa.me"], a[href*="api.whatsapp.com"]');
+    for (var i = 0; i < links.length; i++) {
+      if (links[i].dataset.waInit === "1") continue;
+      links[i].dataset.waInit = "1";
+
+      (function (link) {
+        link.addEventListener("click", function (e) {
+          e.preventDefault();
+          e.stopPropagation();
+          var source = link.dataset.waSource || "";
+          var btnText = link.dataset.waBtn || getLinkText(link) || "";
+          var url = contactsWhatsApp({ source: source, button: btnText });
+          global.open(url, "_blank", "noopener,noreferrer");
+        });
+      })(links[i]);
+    }
+  }
+
+  // ============================================
   // QUOTE FORM MESSAGE BUILDER
   // ============================================
   function getVal(id) {
@@ -74,7 +169,7 @@
   // ============================================
   function startWhatsApp() {
     var text = buildQuoteMessage();
-    var url = "https://wa.me/" + WHATSAPP_NUMBER + "?text=" + encodeURIComponent(text);
+    var url = contactsWhatsApp({ source: "询价表单", message: text });
     global.open(url, "_blank");
   }
   function startLine() {
@@ -156,6 +251,10 @@
   // Expose to global
   global.Contacts = {
     whatsapp: WHATSAPP_NUMBER,
+    contactsWhatsApp: contactsWhatsApp,
+    whatsappUrl: contactsWhatsApp, // shorthand alias
+    getPageName: getPageName,
+    initWhatsAppLinks: initWhatsAppLinks,
     startWhatsApp: startWhatsApp,
     startLine: startLine,
     startPhone: startPhone,
@@ -184,4 +283,17 @@
   global.startTwitter = startTwitter;
   global.startLinkedIn = startLinkedIn;
   global.startTikTok = startTikTok;
+
+  // Auto-init WhatsApp source tracking on all wa.me links
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initWhatsAppLinks);
+  } else {
+    initWhatsAppLinks();
+  }
+  // Re-init after SPA navigation
+  document.addEventListener("spa:load", initWhatsAppLinks);
+  // Re-init after bfcache restore
+  global.addEventListener("pageshow", function (e) {
+    if (e.persisted) initWhatsAppLinks();
+  });
 })(window);

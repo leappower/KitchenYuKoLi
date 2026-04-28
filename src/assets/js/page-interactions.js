@@ -100,9 +100,18 @@
     });
   }
 
-  // ─── WhatsApp deep-link with preset message (§4) ─────────────────────────────
-  /** Open WhatsApp with a preset message deep-link */
-  function openWhatsAppWithPreset(msg) {
+  // ─── WhatsApp deep-link with source tracking ─────────────────────────────────
+  /** Open WhatsApp with source tracking + optional preset message.
+   *  @param {string} [msg] - Custom message to append after source info.
+   *  @param {string} [source] - Location description (e.g. "contact-card", "cta").
+   */
+  function openWhatsAppWithPreset(msg, source) {
+    if (global.Contacts && typeof global.Contacts.contactsWhatsApp === "function") {
+      var url = global.Contacts.contactsWhatsApp({ source: source || "", message: msg || "" });
+      global.open(url, "_blank");
+      return;
+    }
+    // Fallback if Contacts not loaded yet
     var phone = global.Contacts && global.Contacts.whatsapp ? global.Contacts.whatsapp : "";
     var text = encodeURIComponent(msg || "Hello Yukoli, I'd like to learn more about your smart kitchen solutions.");
     var url = phone ? "https://wa.me/" + phone.replace(/\D/g, "") + "?text=" + text : "https://wa.me/?text=" + text;
@@ -113,41 +122,20 @@
   function bindContactButtons() {
     var _count = 0;
 
-    // WhatsApp buttons / links — with preset message
+    // WhatsApp buttons / links — with source tracking (handled by contacts.js initWhatsAppLinks for <a> tags,
+    // here we handle <button> elements only)
     _count += bindByText("button", "whatsapp", function (e) {
       e.preventDefault();
-      openWhatsAppWithPreset("Hello Yukoli, I'd like to get a quote for your smart kitchen solutions.");
+      openWhatsAppWithPreset("I'd like to get a quote for your smart kitchen solutions.", "WhatsApp按钮");
     });
-    _count += bindByText("a", "whatsapp support", function (e) {
-      e.preventDefault();
-      openWhatsAppWithPreset("Hello Yukoli Support, I need assistance with my smart kitchen device.");
-    });
-    // Footer social-icon links with href="#" that wrap WhatsApp SVG
-    var waLinks = document.querySelectorAll('a[href="#"]');
-    waLinks.forEach(function (link) {
-      var svg = link.querySelector("svg");
-      if (svg) {
-        var pathD = svg.innerHTML;
-        // WhatsApp SVG path is recognisable by "17.472 14.382" from its brand path
-        if (pathD && pathD.indexOf("17.472") !== -1) {
-          link.addEventListener("click", function (e) {
-            e.preventDefault();
-            openWhatsAppWithPreset("Hello Yukoli, I found your website and would like to connect.");
-          });
-          _count++;
-        }
-      }
-    });
-
-    // Consult an Engineer → WhatsApp
     _count += bindByText("button", "consult an engineer", function (e) {
       e.preventDefault();
-      safeCall("startWhatsApp");
+      openWhatsAppWithPreset("I need to consult with a YuKoLi engineer.", "咨询工程师");
     });
     // Contact Sales → WhatsApp
     _count += bindByText("button", "contact sales", function (e) {
       e.preventDefault();
-      safeCall("startWhatsApp");
+      openWhatsAppWithPreset("I'd like to speak with a YuKoLi sales representative.", "联系销售");
     });
 
     // Footer icon links (public=home, mail=email, contact_support=whatsapp)
@@ -165,7 +153,7 @@
       } else if (iconName === "contact_support" || iconName === "share") {
         link.addEventListener("click", function (e) {
           e.preventDefault();
-          openWhatsAppWithPreset("Hello Yukoli Support, I need help. Please contact me.");
+          openWhatsAppWithPreset("I need help from YuKoLi support.", "图标入口");
         });
         _count++;
       } else if (iconName === "public") {

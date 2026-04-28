@@ -192,4 +192,4 @@ scripts/.archive/
 dist/
 build/
 coverage/
-skill/
+skill/.openclaw-project/

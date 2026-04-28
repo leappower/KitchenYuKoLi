@@ -29,6 +29,14 @@
     if (global.FLOATING_ACTIONS_CONFIG.threshold) SCROLL_THRESHOLD = global.FLOATING_ACTIONS_CONFIG.threshold;
   }
 
+  /** Build tracked WhatsApp URL via Contacts module (or fallback to static) */
+  function buildWhatsAppUrl() {
+    if (global.Contacts && typeof global.Contacts.contactsWhatsApp === "function") {
+      return global.Contacts.contactsWhatsApp({ source: "悬浮按钮" });
+    }
+    return WHATSAPP_HREF;
+  }
+
   /* ─────────────────────────────────────────────
    * 1. SVG ICONS
    * ───────────────────────────────────────────── */
@@ -196,7 +204,7 @@
     var wa = document.createElement("a");
     wa.id = "fab-whatsapp";
     wa.className = "fab-btn";
-    wa.href = WHATSAPP_HREF;
+    wa.href = buildWhatsAppUrl();
     wa.setAttribute("aria-label", "WhatsApp");
     wa.target = "_blank";
     wa.rel = "noopener noreferrer";
@@ -260,6 +268,14 @@
     if (this._btnBtt) {
       this._btnBtt.addEventListener("click", function () {
         global.scrollTo({ top: 0, behavior: "smooth" });
+      });
+    }
+    // WhatsApp click — build tracked URL dynamically (captures current page)
+    if (this._btnWa) {
+      this._btnWa.addEventListener("click", function (e) {
+        e.preventDefault();
+        var url = buildWhatsAppUrl();
+        global.open(url, "_blank", "noopener,noreferrer");
       });
     }
   };
