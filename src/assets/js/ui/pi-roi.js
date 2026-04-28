@@ -217,7 +217,6 @@
               x: { grid: { display: false }, ticks: { font: { size: 11 }, color: "#475569" } },
               y: { grid: { color: "rgba(148,163,184,0.15)" }, ticks: { font: { size: 11, weight: "500" }, color: "#475569", callback: function (v) { var c = window.Currency && window.Currency.getConfig(); var s = c ? c.symbol : '$'; return s + v + "k"; } } },
             },
-            },
           },
         });
       }
