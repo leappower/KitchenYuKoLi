@@ -39,6 +39,7 @@ var LANGUAGES = [
     hasTranslation: true,
     uiGroup: 'common',
     sortOrder: 1,
+    currency: { symbol: '¥', code: 'CNY', rate: 1, unit: '万元' },
   },
   {
     code: 'en',
@@ -47,6 +48,7 @@ var LANGUAGES = [
     hasTranslation: true,
     uiGroup: 'common',
     sortOrder: 2,
+    currency: { symbol: '$', code: 'USD', rate: 0.14, unit: 'K' },
   },
   // ── Phase 2: Southeast Asia ──
   {
@@ -56,6 +58,7 @@ var LANGUAGES = [
     hasTranslation: true,
     uiGroup: 'common',
     sortOrder: 3,
+    currency: { symbol: '฿', code: 'THB', rate: 5.0, unit: 'ล้าน' },
   },
   {
     code: 'vi',
@@ -64,6 +67,7 @@ var LANGUAGES = [
     hasTranslation: true,
     uiGroup: 'common',
     sortOrder: 4,
+    currency: { symbol: '₫', code: 'VND', rate: 3400, unit: 'Triệu' },
   },
   {
     code: 'ms',
@@ -72,6 +76,7 @@ var LANGUAGES = [
     hasTranslation: true,
     uiGroup: 'common',
     sortOrder: 5,
+    currency: { symbol: 'RM', code: 'MYR', rate: 0.65, unit: 'Juta' },
   },
   {
     code: 'id',
@@ -80,6 +85,54 @@ var LANGUAGES = [
     hasTranslation: true,
     uiGroup: 'common',
     sortOrder: 6,
+    currency: { symbol: 'Rp', code: 'IDR', rate: 2200, unit: 'Juta' },
+  },
+  // ── Phase 3: East Asia ──
+  {
+    code: 'ja',
+    nativeName: '日本語',
+    englishName: 'Japanese',
+    hasTranslation: true,
+    uiGroup: 'common',
+    sortOrder: 7,
+    currency: { symbol: '¥', code: 'JPY', rate: 21, unit: '万円' },
+  },
+  {
+    code: 'ko',
+    nativeName: '한국어',
+    englishName: 'Korean',
+    hasTranslation: true,
+    uiGroup: 'common',
+    sortOrder: 8,
+    currency: { symbol: '₩', code: 'KRW', rate: 188, unit: '백만' },
+  },
+  // ── Phase 4: South Asia + Others ──
+  {
+    code: 'hi',
+    nativeName: 'हिन्दी',
+    englishName: 'Hindi',
+    hasTranslation: true,
+    uiGroup: 'common',
+    sortOrder: 9,
+    currency: { symbol: '₹', code: 'INR', rate: 11.5, unit: 'Lakh' },
+  },
+  {
+    code: 'zh-TW',
+    nativeName: '中文（繁體）',
+    englishName: 'Chinese (Traditional)',
+    hasTranslation: true,
+    uiGroup: 'common',
+    sortOrder: 10,
+    currency: { symbol: 'NT$', code: 'TWD', rate: 4.4, unit: '萬元' },
+  },
+  {
+    code: 'ar',
+    nativeName: 'العربية',
+    englishName: 'Arabic',
+    hasTranslation: true,
+    uiGroup: 'common',
+    sortOrder: 11,
+    currency: { symbol: 'ر.س', code: 'SAR', rate: 0.52, unit: '' },
   },
 ];
 } // 结束重复加载保护

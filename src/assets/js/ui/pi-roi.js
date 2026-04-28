@@ -148,7 +148,9 @@
               tooltip: {
                 callbacks: {
                   label: function (ctx) {
-                    return ctx.dataset.label + ": $" + ctx.parsed.y.toFixed(0) + "k";
+                    var cfg = window.Currency && window.Currency.getConfig();
+                    var sym = cfg ? cfg.symbol : '$';
+                    return ctx.dataset.label + ": " + sym + ctx.parsed.y.toFixed(0) + "k";
                   },
                 },
               },
@@ -324,8 +326,8 @@
       if (kpiROI) animateNumber(kpiROI, Math.max(0, fiveYearROI), 500, "%");
       if (kpiPayback) animateNumber(kpiPayback, Math.min(99, Math.round(paybackMonths * 10) / 10), 500, "");
       if (kpiSavings) {
-        var savingsWan = annualSavings / 10000;
-        animateNumber(kpiSavings, Math.round(savingsWan), 500, "");
+        var savings = window.Currency ? window.Currency.formatCurrencyWan(annualSavings) : { display: String(Math.round(annualSavings / 10000)) };
+        animateNumber(kpiSavings, parseFloat(savings.display) || 0, 500, "");
       }
 
       // Update benefit bars
