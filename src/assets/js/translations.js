@@ -455,11 +455,7 @@
     return s.toggleLanguageDropdown(t)
   }, t.filterLanguages = function(t) {
     return s.filterLanguages(t)
-  }, t.setupLanguageSystem = function() {
-    return s.initialize()
-  }, t.translationManager = s, t.TranslationManager = r, t.debugTranslations = function() {
-    return s.debug()
-  }, t.reloadTranslations = function() {
+  }, t.translationManager = s, t.TranslationManager = r, t.reloadTranslations = function() {
     return s.reloadTranslations()
   }, t.recoverTranslationsFromBfcache = function() {
     return s.recoverFromBfcache()

@@ -26,25 +26,6 @@
     return IMAGE_PATH_PREFIX + "/" + key + ".webp";
   }
 
-  /** Generate <img> tag HTML */
-  function imgTag(key, altText, cssClass, extraAttrs) {
-    if (altText === undefined) altText = "";
-    if (cssClass === undefined) cssClass = "";
-    if (extraAttrs === undefined) extraAttrs = "";
-    var src = IMAGE_PATH_PREFIX + "/" + key + ".webp";
-    return (
-      '<img src="' +
-      src +
-      '" alt="' +
-      altText +
-      '" class="' +
-      cssClass +
-      '" ' +
-      extraAttrs +
-      ' loading="lazy" decoding="async">'
-    );
-  }
-
   // ─── Static image assets (non-product, paths are fixed) ──────────────────────
   var IMAGE_ASSETS = {
     logo: IMAGE_PATH_PREFIX + "/logo_html.webp",
@@ -117,7 +98,6 @@
   global.ImageAssets = {
     IMAGE_ASSETS: IMAGE_ASSETS,
     resolveImage: resolveImage,
-    imgTag: imgTag,
     loadFromManifest: loadFromManifest,
   };
 })(window);

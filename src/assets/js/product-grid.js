@@ -164,17 +164,6 @@
 
   // ─── Category tabs ─────────────────────────────────────────────
 
-  function getMaxVisibleTabs() {
-    // Placeholder — actual dynamic calc is in initCategoryTabs scope
-    var w = window.innerWidth;
-    if (w >= 1280) return Infinity;
-    return 3;
-  }
-
-  function isMobileOrTablet() {
-    return window.innerWidth < 1280;
-  }
-
   function initCategoryTabs() {
     var container = document.querySelector('.category-tab-container');
     if (!container) return;
