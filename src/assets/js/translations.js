@@ -23,7 +23,7 @@
   }
   r.prototype.getInitialLanguage = function() {
     var t = localStorage.getItem("userLanguage");
-    return t && o[t] ? t : "en"
+    return t && getO()[t] ? t : "en"
   }, r.prototype.loadTranslations = function(t) {
     if (this.translationsCache.has(t) && this.translationsCache.has("ui-" + t) && this.translationsCache.has("product-" + t)) return Promise.resolve(this.translationsCache.get(t));
     if (this.pendingLoads.has(t)) return this.pendingLoads.get(t);
@@ -190,7 +190,7 @@
               e.text ? t.setElementTranslation(e.el, e.text) : e.placeholder ? e.el.placeholder = e.placeholder : e.ariaLabel && e.el.setAttribute("aria-label", e.ariaLabel)
             })
           }), i) {
-          var g = o[t.currentLanguage] || t.currentLanguage.toUpperCase();
+          var g = getO()[t.currentLanguage] || t.currentLanguage.toUpperCase();
           i.textContent !== g && (i.textContent = g);
           var d = document.querySelector(".current-lang-btn-label");
           d && d.textContent !== g && (d.textContent = g)
