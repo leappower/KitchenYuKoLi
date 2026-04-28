@@ -9,14 +9,11 @@
 (function (global) {
   "use strict";
 
-  // ─── Local helpers (duplicated from page-interactions.js for self-containment) ──
-
-  /** Safely call a function if it exists on window */
-  function safeCall(fnName, args) {
-    if (typeof global[fnName] === "function") {
-      return global[fnName].apply(null, args || []);
-    }
-  }
+  // ─── Helpers (from PiHelpers) ─────────────────────────────────────────
+  var _h = global.PiHelpers || {};
+  var safeCall = _h.safeCall || function (fnName, args) {
+    if (typeof global[fnName] === "function") return global[fnName].apply(null, args || []);
+  };
 
   /**
    * Animate a numeric value from its current text content to `target`.

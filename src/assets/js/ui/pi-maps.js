@@ -9,41 +9,18 @@
 (function (global) {
   "use strict";
 
-  // ─── Local helpers (duplicated from page-interactions.js for self-containment) ──
-
-  /** Safely call a function if it exists on window */
-  function safeCall(fnName, args) {
-    if (typeof global[fnName] === "function") {
-      return global[fnName].apply(null, args || []);
-    }
-  }
-
-  /**
-   * Collect only the direct Text-node content of an element, ignoring child
-   * elements such as <span class="material-symbols-outlined"> icons.
-   */
-  function directText(el) {
-    var text = "";
-    el.childNodes.forEach(function (node) {
-      if (node.nodeType === 3 /* TEXT_NODE */) {
-        text += node.nodeValue;
-      }
-    });
-    return text.trim();
-  }
-
-  /** Find buttons/links by their visible text content (case-insensitive, trimmed). */
-  function findByText(tag, text) {
-    var els = document.querySelectorAll(tag);
-    var results = [];
-    var lower = text.toLowerCase();
-    els.forEach(function (el) {
-      if (directText(el).toLowerCase().indexOf(lower) !== -1) {
-        results.push(el);
-      }
-    });
-    return results;
-  }
+  // ─── Helpers (from PiHelpers) ─────────────────────────────────────────
+  var _h = global.PiHelpers || {};
+  var safeCall = _h.safeCall || function (fnName, args) {
+    if (typeof global[fnName] === "function") return global[fnName].apply(null, args || []);
+  };
+  var directText = _h.directText || function (el) {
+    var t = ""; el.childNodes.forEach(function (n) { if (n.nodeType === 3) t += n.nodeValue; }); return t.trim();
+  };
+  var findByText = _h.findByText || function (tag, text) {
+    var els = document.querySelectorAll(tag), r = [], l = text.toLowerCase();
+    els.forEach(function (el) { if (directText(el).toLowerCase().indexOf(l) !== -1) r.push(el); }); return r;
+  };
 
   // ─── 16. Google Maps Service Center — full architecture (§1.2) ───────────────
   /**

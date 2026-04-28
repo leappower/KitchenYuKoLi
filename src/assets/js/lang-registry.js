@@ -72,21 +72,6 @@ function getLangs(filter) {
   return result;
 }
 
-/**
- * 返回所有有翻译文件的语言代码列表（对应 config.js supportedLanguages）
- * @returns {string[]}
- */
-function getSupportedCodes() {
-  return getLangs({ hasTranslation: true }).map(function(l) { return l.code; });
-}
-
-/**
- * 返回所有语言代码（含待翻译语言，供前端弹窗使用）
- * @returns {string[]}
- */
-function getAllCodes() {
-  return getLangs().map(function(l) { return l.code; });
-}
 
 /**
  * 返回 { code: nativeName } 映射（对应 translations.js languageNames）
@@ -100,37 +85,7 @@ function getNativeNames(filter) {
   }, {});
 }
 
-/**
- * 返回 { code: englishName } 映射（对应 unified-translator.js LANGUAGE_NAMES）
- * 仅包含 hasTranslation: true 的语言
- * @returns {Object}
- */
-function getEnglishNames() {
-  return getLangs({ hasTranslation: true }).reduce(function(acc, l) {
-    acc[l.code] = l.englishName;
-    return acc;
-  }, {});
-}
 
-/**
- * 返回按分组归类的语言列表（用于 HTML 弹窗渲染）
- * @returns {{ common: Array, rtl: Array, european: Array, asian: Array }}
- */
-function getLangsByGroup() {
-  var result = { common: [], rtl: [], european: [], asian: [] };
-  getLangs().forEach(function(l) {
-    if (result[l.uiGroup]) result[l.uiGroup].push(l);
-  });
-  return result;
-}
-
-/**
- * 按 sortOrder 返回语言代码数组（对应 merge-translations.js languageOrder）
- * @returns {string[]}
- */
-function getSortedCodes() {
-  return getLangs().map(function(l) { return l.code; });
-}
 
 // ─────────────────────────────────────────────────────────────────────────────
 // 导出
@@ -141,12 +96,7 @@ if (typeof module !== 'undefined' && module.exports) {
   module.exports = {
     LANGUAGES,
     getLangs,
-    getSupportedCodes,
-    getAllCodes,
     getNativeNames,
-    getEnglishNames,
-    getLangsByGroup,
-    getSortedCodes,
   };
 }
 
@@ -155,10 +105,6 @@ if (typeof window !== 'undefined') {
   window.LANG_REGISTRY = {
     LANGUAGES: LANGUAGES,
     getLangs: getLangs,
-    getSupportedCodes: getSupportedCodes,
-    getAllCodes: getAllCodes,
     getNativeNames: getNativeNames,
-    getEnglishNames: getEnglishNames,
-    getLangsByGroup: getLangsByGroup,
   };
 }

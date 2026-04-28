@@ -8,15 +8,12 @@
 (function (global) {
   "use strict";
 
-  // ─── Helpers ─────────────────────────────────────────────────────────────────
-
-  /** Safely call a function if it exists on window */
-  function safeCall(fnName, args) {
-    if (typeof global[fnName] === "function") {
-      return global[fnName].apply(null, args || []);
-    }
-    console.warn("[FormInteractions] " + fnName + " not found — make sure the required script is loaded.");
-  }
+  // ─── Helpers (from PiHelpers) ─────────────────────────────────────────
+  var _h = global.PiHelpers || {};
+  var safeCall = _h.safeCall || function (fnName, args) {
+    if (typeof global[fnName] === "function") return global[fnName].apply(null, args || []);
+    console.warn("[FormInteractions] " + fnName + " not found.");
+  };
 
   // ─── B. On-blur inline validation ────────────────────────────────────────────
   var EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
