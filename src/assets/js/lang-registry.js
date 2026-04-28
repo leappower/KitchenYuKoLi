@@ -48,6 +48,39 @@ var LANGUAGES = [
     uiGroup: 'common',
     sortOrder: 2,
   },
+  // ── Phase 2: Southeast Asia ──
+  {
+    code: 'th',
+    nativeName: 'ไทย',
+    englishName: 'Thai',
+    hasTranslation: true,
+    uiGroup: 'common',
+    sortOrder: 3,
+  },
+  {
+    code: 'vi',
+    nativeName: 'Tiếng Việt',
+    englishName: 'Vietnamese',
+    hasTranslation: true,
+    uiGroup: 'common',
+    sortOrder: 4,
+  },
+  {
+    code: 'ms',
+    nativeName: 'Bahasa Melayu',
+    englishName: 'Malay',
+    hasTranslation: true,
+    uiGroup: 'common',
+    sortOrder: 5,
+  },
+  {
+    code: 'id',
+    nativeName: 'Bahasa Indonesia',
+    englishName: 'Indonesian',
+    hasTranslation: true,
+    uiGroup: 'common',
+    sortOrder: 6,
+  },
 ];
 } // 结束重复加载保护
 
