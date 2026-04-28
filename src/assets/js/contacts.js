@@ -30,7 +30,6 @@
     "/support/faq/": "常见问题",
     "/products/": "产品中心",
     "/product-detail/": "产品详情",
-    "/pdp/": "产品详情",
     "/quote/": "在线询价",
     "/contact/": "联系我们",
     "/landing/": "着陆页",

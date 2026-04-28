@@ -1,6 +1,6 @@
 /**
  * PDP Renderer - product detail page (SPA-safe)
- * URL: /products/<model>/ or /pdp/?model=<model> (backward compat)
+ * URL: /products/<model>/ or /product-detail/?model=<model>
  * Self-contained: creates #product-content and #related-products if missing
  */
 (function () {
