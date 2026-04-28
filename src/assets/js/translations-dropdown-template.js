@@ -61,7 +61,6 @@ window.LanguageDropdownTemplate = {
     );
   },
 
-  // 创建下拉框 HTML
   // Inject styles (idempotent)
   _injectStyles: function() {
     if (document.getElementById("lang-dropdown-styles")) return;
@@ -78,6 +77,7 @@ window.LanguageDropdownTemplate = {
     document.head.appendChild(s);
   },
 
+  // 创建下拉框 HTML
   createDropdownHTML: function (languages, currentLang) {
     var self = this;
     var langMap = {};
@@ -89,24 +89,29 @@ window.LanguageDropdownTemplate = {
       });
     }
 
-    // 使用 LANG_GROUPS 中的配置，如果没有则使用 LANGUAGE_NAMES
+    // 从 LANG_REGISTRY 获取名称
     var getLangName = function (code) {
-      return langMap[code] || self.LANGUAGE_NAMES[code] || code;
+      if (langMap[code]) return langMap[code];
+      var reg = window.LANG_REGISTRY;
+      if (reg && reg.LANGUAGES) {
+        var found = reg.LANGUAGES.find(function(l) { return l.code === code; });
+        if (found) return found.nativeName;
+      }
+      return code;
     };
 
     this._injectStyles();
-    var groupHtml = "";
-
-    // 确保已从 LANG_REGISTRY 初始化
     this._initFromRegistry();
 
+    var groupHtml = "";
+
     // 遍历所有分组，只渲染有语言条目的组
-    Object.keys(this.LANG_GROUPS).forEach(function (groupKey) {
-      var group = self.LANG_GROUPS[groupKey];
-      if (!group.langs || group.langs.length === 0) return;
+    this.LANG_GROUPS.forEach(function (group) {
+      var codes = self._groupedLangs[group.id] || [];
+      if (codes.length === 0) return;
       groupHtml += '<div class="lang-group">';
       groupHtml += self.createGroupTitle(group.titleKey);
-      group.langs.forEach(function (code) {
+      codes.forEach(function (code) {
         groupHtml += self.createLangOption(code, currentLang, getLangName(code));
       });
       groupHtml += "</div>";
