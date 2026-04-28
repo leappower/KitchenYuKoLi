@@ -83,11 +83,6 @@
           data: o
         }))
       } catch (t) {}
-      var filledCount = Object.keys(o).filter(function(k) { return o[k]; }).length;
-      if (filledCount === 0 && "en" !== t) {
-        console.warn("[i18n] loadUITranslations: all empty values for " + t + ", falling back to en");
-        return l.loadUITranslations("en");
-      }
       return o
     }).catch(function(e) {
       if (console.error("[i18n] loadUITranslations: FAILED for " + t + ":", e), "en" !== t) return l.loadUITranslations("en");
@@ -244,6 +239,13 @@
     return o[e] ? this.currentLanguage === e ? (this.closeLanguageDropdown(), Promise.resolve()) : Promise.all([this.loadUITranslations(e), this.loadProductTranslations(e).catch(function(t) {
       console.warn("[i18n] setLanguage: product translations for " + e + " failed: " + t.message)
     })]).then(function() {
+      // Pre-load English as fallback if target is not en
+      var preloads = [Promise.resolve()];
+      if ("en" !== e && !n.translationsCache.has("ui-en")) {
+        preloads.push(n.loadUITranslations("en").catch(function() {}));
+        preloads.push(n.loadProductTranslations("en").catch(function() {}));
+      }
+      return Promise.all(preloads).then(function() {
       var a = n.currentLanguage;
       return n.currentLanguage = e, localStorage.setItem("userLanguage", e), n.applyTranslations().then(function() {
         if (document.documentElement.lang = e, t.dispatchEvent(new CustomEvent("languageChanged", {
@@ -260,6 +262,7 @@
           previousLanguage: a
         })
       })
+      });
     }).catch(function(t) {
       if (console.error("[i18n] setLanguage: FAILED for", e, t), "en" !== e) return n.setLanguage("en")
     }) : Promise.reject(new Error("Unsupported language: " + e))
