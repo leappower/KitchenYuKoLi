@@ -187,7 +187,9 @@ docker-compose.override.yml
 ehthumbs.db
 
 scripts/ci/
+scripts/archive/
 scripts/.archive/
+.archive/
 
 dist/
 build/
