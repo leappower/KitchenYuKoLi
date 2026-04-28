@@ -126,16 +126,16 @@
     // here we handle <button> elements only)
     _count += bindByText("button", "whatsapp", function (e) {
       e.preventDefault();
-      openWhatsAppWithPreset("I'd like to get a quote for your smart kitchen solutions.", "WhatsApp按钮");
+      openWhatsAppWithPreset("", "quote-btn");
     });
     _count += bindByText("button", "consult an engineer", function (e) {
       e.preventDefault();
-      openWhatsAppWithPreset("I need to consult with a YuKoLi engineer.", "咨询工程师");
+      openWhatsAppWithPreset("", "consult-btn");
     });
     // Contact Sales → WhatsApp
     _count += bindByText("button", "contact sales", function (e) {
       e.preventDefault();
-      openWhatsAppWithPreset("I'd like to speak with a YuKoLi sales representative.", "联系销售");
+      openWhatsAppWithPreset("", "sales-btn");
     });
 
     // Footer icon links (public=home, mail=email, contact_support=whatsapp)
@@ -153,7 +153,7 @@
       } else if (iconName === "contact_support" || iconName === "share") {
         link.addEventListener("click", function (e) {
           e.preventDefault();
-          openWhatsAppWithPreset("I need help from YuKoLi support.", "图标入口");
+          openWhatsAppWithPreset("", "footer-icon");
         });
         _count++;
       } else if (iconName === "public") {

@@ -453,19 +453,19 @@
             var message = document.getElementById("q-message").value || "无";
 
             var msg =
-              "🔧 YuKoLi 智能厨具询价\n" +
+              "🔧 YuKoLi Quote\n" +
               "━━━━━━━━━━━━━━\n" +
-              "🏢 公司: " + company + "\n" +
-              "👤 联系人: " + contact + "\n" +
-              "📞 电话: " + phone + "\n" +
-              "📧 邮箱: " + email + "\n" +
-              "🌍 国家: " + countryText + "\n" +
+              "🏢 " + (company || "—") + "\n" +
+              "👤 " + (contact || "—") + "\n" +
+              "📞 " + (phone || "—") + "\n" +
+              "📧 " + (email || "—") + "\n" +
+              "🌍 " + (countryText || "—") + "\n" +
               "━━━━━━━━━━━━━━\n" +
-              "🍽️ 设备类型: " + equipText + "\n" +
-              "📦 数量: " + quantity + "\n" +
-              "🏭 厨房规模: " + capacityText + "\n" +
-              "💰 预算: " + budgetText + "\n" +
-              "📝 详细需求: " + message;
+              "🍽️ " + (equipText || "—") + "\n" +
+              "📦 " + (quantity || "—") + "\n" +
+              "🏭 " + (capacityText || "—") + "\n" +
+              "💰 " + (budgetText || "—") + "\n" +
+              "📝 " + (message || "—");
 
             var formData = {
               formType: "quote_form",

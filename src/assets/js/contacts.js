@@ -154,11 +154,9 @@
     if (capacity) lines.push("🏭 " + t("quote_kitchen_capacity") + ": " + capacity);
     if (budget) lines.push("💰 " + t("quote_budget_range") + ": " + budget);
     if (message) lines.push("📝 " + t("quote_detailed_requirements") + ": " + message);
-    lines.push("🔗 " + global.location.href);
-
-    return lines.length > 1
+    return lines.length > 0
       ? "🔧 " + t("quote_get_quote") + "\n" + lines.join("\n")
-      : "🔧 " + t("quote_get_quote") + " — " + global.location.href;
+      : "🔧 " + t("quote_get_quote");
   }
 
   // ============================================
