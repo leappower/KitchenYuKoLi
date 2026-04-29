@@ -687,6 +687,8 @@
 
         // 阻止默认行为，使用 SPA 导航
         event.preventDefault();
+        // 移除焦点，避免按钮/链接残留 active 样式
+        if (document.activeElement) document.activeElement.blur();
 
         if (scrollAnchor) {
           // 含锚点：导航到父页面后滚动到锚点
