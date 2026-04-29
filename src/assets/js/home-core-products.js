@@ -48,11 +48,10 @@
   function loadCoreProducts(callback) {
     var now = Date.now();
 
-    // Layer 1: Embedded data from product-data-table.js (no network)
+    // Layer 1: Embedded data from product-data-table.js (instant, but may be stale due to webpack overwrites)
     if (window.HOME_CORE_PRODUCTS && window.HOME_CORE_PRODUCTS.length > 0) {
-      // Async to allow other scripts to set HOME_CORE_PRODUCTS
       setTimeout(function() { callback(window.HOME_CORE_PRODUCTS, 'embedded'); }, 0);
-      // Still try to refresh in background
+      // Still try to refresh from API in background to get latest data
       _refreshInBackground(callback);
       return;
     }
@@ -76,7 +75,6 @@
       if (localData) {
         var localParsed = JSON.parse(localData);
         if (localParsed.timestamp && (now - localParsed.timestamp) < CACHE_TTL * 6) {
-          // Use cached but still refresh
           setTimeout(function() { callback(localParsed.data, 'local'); }, 0);
           _refreshInBackground(callback);
           return;
@@ -84,7 +82,7 @@
       }
     } catch(e) {}
 
-    // Layer 4: Network fetch
+    // Layer 4: Network fetch from CMS API
     _fetchFromNetwork(callback);
   }
 

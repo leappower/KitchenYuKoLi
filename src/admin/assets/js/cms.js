@@ -377,14 +377,16 @@
     var html = '<div class="form-grid">' +
       '<div class="full"><label class="text-sm font-medium text-gray-700" style="display:block;margin-bottom:0.25rem">型号 *</label>' +
       '<input id="pm-model" required value="' + esc(p ? p.model : '') + '"></div>' +
-      '<div><label class="text-sm font-medium text-gray-700" style="display:block;margin-bottom:0.25rem">子类</label>' +
-      '<input id="pm-sub" placeholder="如：P_ESL" value="' + esc(p ? (p.sub_category || '') : '') + '"></div>' +
       '<div><label class="text-sm font-medium text-gray-700" style="display:block;margin-bottom:0.25rem">产品系列</label>' +
       '<select id="pm-cat"><option value="">未分类</option>';
     categories.forEach(function(c) {
       html += '<option value="' + c.id + '"' + (p && p.category_id == c.id ? ' selected' : '') + '>' + esc(c.slug) + '</option>';
     });
     html += '</select></div>' +
+      '<div><label class="text-sm font-medium text-gray-700" style="display:block;margin-bottom:0.25rem">子类</label>' +
+      '<input id="pm-sub" placeholder="如：P_ESL" value="' + esc(p ? (p.sub_category || '') : '') + '"></div>' +
+      '<div><label class="text-sm font-medium text-gray-700" style="display:block;margin-bottom:0.25rem">排序</label>' +
+      '<input id="pm-sort" type="number" value="' + (p ? p.sort_order : 0) + '"></div>' +
       '<div><label class="text-sm font-medium text-gray-700" style="display:block;margin-bottom:0.25rem">状态</label>' +
       '<select id="pm-status"><option' + (p && p.status !== '在售' ? '' : ' selected') + '>在售</option><option' + (p && p.status === '停产' ? ' selected' : '') + '>停产</option><option' + (p && p.status === '预售' ? ' selected' : '') + '>预售</option></select></div>' +
       '<div><label class="text-sm font-medium text-gray-700" style="display:block;margin-bottom:0.25rem">Badge</label>' +
@@ -405,9 +407,7 @@
       '<div><label class="text-sm font-medium text-gray-700" style="display:block;margin-bottom:0.25rem">尺寸</label>' +
       '<input id="pm-dims" value="' + esc(p ? (p.product_dimensions || '') : '') + '"></div>' +
       '<div><label class="text-sm font-medium text-gray-700" style="display:block;margin-bottom:0.25rem">颜色</label>' +
-      '<input id="pm-color" value="' + esc(p ? (p.color || '') : '') + '"></div>' +
-      '<div><label class="text-sm font-medium text-gray-700" style="display:block;margin-bottom:0.25rem">排序</label>' +
-      '<input id="pm-sort" type="number" value="' + (p ? p.sort_order : 0) + '"></div></div>';
+      '<input id="pm-color" value="' + esc(p ? (p.color || '') : '') + '"></div></div>';
 
     // Media section (images + videos)
     var hasMedia = p && p.images && p.images.length > 0;
