@@ -430,7 +430,7 @@
     $$('button[data-i18n="cta_contact_sales"]').forEach(function (btn) {
       btn.addEventListener('click', function () {
           var wa = (window.Contacts && window.Contacts.whatsapp) || '8613163756465';
-          window.open('https://wa.me/' + wa + '?text=' + encodeURIComponent('[YuKoLi Cases Page] ' + location.href + ' \u2014 Hi! I\'m interested in your smart kitchen solutions. Please help me with more details.'), '_blank');
+          window.open('https://wa.me/' + wa + '?text=' + encodeURIComponent(location.href), '_blank');
         });
     });
   }
