@@ -112,6 +112,14 @@
     // 导航到路由（添加历史记录）
     navigate: function (path) {
       var normalizedPath = path.startsWith("/") ? path : "/" + path;
+
+      // Separate query string for route matching
+      var queryStr = "";
+      var qIdx = normalizedPath.indexOf("?");
+      if (qIdx !== -1) {
+        queryStr = normalizedPath.substring(qIdx);
+        normalizedPath = normalizedPath.substring(0, qIdx);
+      }
       if (!normalizedPath.endsWith("/")) {
         normalizedPath = normalizedPath + "/";
       }
@@ -137,7 +145,7 @@
         return;
       }
 
-      history.pushState({ path: normalizedPath }, "", normalizedPath);
+      history.pushState({ path: normalizedPath }, "", normalizedPath + queryStr);
 
       this.loadRoute(normalizedPath);
 
@@ -151,6 +159,14 @@
     // 替换当前路由（不添加历史记录）
     replace: function (path) {
       var normalizedPath = path.startsWith("/") ? path : "/" + path;
+
+      // Separate query string
+      var queryStr = "";
+      var qIdx = normalizedPath.indexOf("?");
+      if (qIdx !== -1) {
+        queryStr = normalizedPath.substring(qIdx);
+        normalizedPath = normalizedPath.substring(0, qIdx);
+      }
       if (!normalizedPath.endsWith("/")) {
         normalizedPath = normalizedPath + "/";
       }
@@ -158,7 +174,7 @@
       // 设置 SPA 导航标志,禁用响应式重定向
       window.__spaNavigating = true;
 
-      history.replaceState({ path: normalizedPath }, "", normalizedPath);
+      history.replaceState({ path: normalizedPath }, "", normalizedPath + queryStr);
 
       this.loadRoute(normalizedPath);
 
@@ -673,6 +689,15 @@
           targetPath = "/" + pagesMatch[1] + "/";
         }
 
+        // Separate query string from path for route matching
+        var queryStr = "";
+        var qIdx = targetPath.indexOf("?");
+        if (qIdx !== -1) {
+          queryStr = targetPath.substring(qIdx);
+          targetPath = targetPath.substring(0, qIdx);
+        }
+        if (!targetPath.endsWith("/")) targetPath += "/";
+
         // 只拦截已知路由的链接（含动态 /products/<slug>/ 路由），其他让浏览器默认处理
         var isKnown = !!_self.routes[targetPath];
         // Dynamic: /products/<slug>/ — category slug or PDP model
@@ -681,7 +706,7 @@
           if (dynMatch) isKnown = true;
         }
         if (!isKnown) {
-          _self.log("Skipping SPA for unknown route:", targetPath);
+          _self.log("Skipping SPA for unknown route:", targetPath + queryStr);
           return;
         }
 
