@@ -179,7 +179,8 @@
     var html = '<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"><div class="flex flex-col lg:flex-row gap-8 lg:items-start">' +
       '<div class="lg:w-1/2"><div class="rounded-xl overflow-hidden bg-white dark:bg-slate-800 shadow-lg"><div class="relative"><img loading="eager" alt="' + esc(product.model) + '" class="w-full h-[360px] object-cover" src="' + imgSrc + '" onerror="this.src=\'https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=800&h=600&fit=crop\'"></div></div></div>' +
       '<div class="lg:w-1/2 flex flex-col gap-5"><div><div class="flex items-center gap-3 mb-2"><span class="text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">' + esc(product.subCategory || product.categoryName) + '</span>' + badge + tier + '</div>' +
-      '<h1 class="text-2xl lg:text-3xl font-black tracking-tight mb-2">' + esc(product.model) + '</h1>' +
+      '<h1 id="detail-title" class="text-2xl lg:text-3xl font-black tracking-tight mb-2">' + esc(product.name || product.model) + '</h1>' +
+      (product.model && product.name && product.name !== product.model ? '<p class="text-sm text-slate-500 dark:text-slate-400 mt-1">型号: ' + esc(product.model) + '</p>' : '') +
       '<p class="text-base text-slate-500 dark:text-slate-400">' + esc(product.categoryName || product.category) + '</p></div>' +
       '<div class="flex items-center gap-3">' +
       '<a href="/quote/?model=' + encodeURIComponent(product.model) + '" class="flex-1 bg-primary text-white px-6 py-3 rounded-xl font-bold flex items-center justify-center gap-2 hover:shadow-lg hover:shadow-primary/20 transition-all text-sm"><span class="material-symbols-outlined text-lg">request_quote</span> 获取报价</a>' +

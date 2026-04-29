@@ -76,14 +76,14 @@
 
     var products = utils.buildProductCatalog();
     return products.map(function (p) {
-      var translatedName = getProductTranslation(p.i18nId, "name", p.name);
+      var translatedName = p.name || p.model;
       var translatedCategory = tr(
         utils.getCategoryI18nKey ? utils.getCategoryI18nKey(p.category) : "filter_" + p.category,
         p.category
       );
-      var translatedBadge = getProductTranslation(p.i18nId, "badge", p.badge);
-      var translatedScenarios = getProductTranslation(p.i18nId, "scenarios", p.scenarios);
-      var translatedUsage = getProductTranslation(p.i18nId, "usage", p.usage);
+      var translatedBadge = p.badge || "";
+      var translatedScenarios = p.scenarios || "";
+      var translatedUsage = p.usage || "";
 
       return Object.assign({}, p, {
         _displayName: translatedName || (translatedCategory + " " + (p.model || "")).trim(),

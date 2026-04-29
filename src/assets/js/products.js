@@ -501,7 +501,7 @@
     grid.innerHTML = pageProducts
       .map(function (p) {
         var displayName =
-          getProductI18nField(p, "name", p.name) ||
+          getProductI18nField(p, "name", p.name || p.model) ||
           (tr(getCategoryI18nKey(p.category), p.category) + " " + (p.model || "")).trim();
         var badgeColorClass = p.badgeColor || "bg-primary";
         var material = getProductI18nField(p, "material", p.material);
