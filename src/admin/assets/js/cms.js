@@ -871,7 +871,7 @@
       // Build parent select options from cached tree
       var parentOpts = '<option value="">无（主菜单）</option>';
       if (typeof renderNavTree === 'undefined' || !window._navTree) {
-        parentOpts = '<div><label class="text-sm font-medium">父级菜单</label><select id="ne-parent" style="width:100%;background:#1e293b;color:#e2e8f0;border:1px solid #334155;border-radius:0.375rem;padding:0.375rem 0.5rem;font-size:0.85rem"><option value="">无（主菜单）</option></select></div>';
+        parentOpts = '<div><label class="text-sm font-medium">父级菜单</label><select id="ne-parent"><option value="">无（主菜单）</option></select></div>';
       }
 
       var html = '<div class="form-grid">' +
@@ -881,7 +881,7 @@
         '<div><label class="text-sm font-medium">图标</label><input id="ne-icon" value="' + esc(item.icon) + '" placeholder="kitchen"></div>' +
         '<div><label class="text-sm font-medium">分组</label><input id="ne-group" value="' + esc(item.group_key) + '" placeholder="products/solutions/..."></div>' +
         '<div><label class="text-sm font-medium">排序</label><input id="ne-sort" type="number" value="' + item.sort_order + '"></div>' +
-        '<div><label class="text-sm font-medium">打开方式</label><select id="ne-target" style="width:100%;background:#1e293b;color:#e2e8f0;border:1px solid #334155;border-radius:0.375rem;padding:0.375rem 0.5rem;font-size:0.85rem"><option value=""' + (!item.target ? ' selected' : '') + '>当前窗口</option><option value="_blank"' + (item.target === '_blank' ? ' selected' : '') + '>新窗口</option></select></div>' +
+        '<div><label class="text-sm font-medium">打开方式</label><select id="ne-target"><option value=""' + (!item.target ? ' selected' : '') + '>当前窗口</option><option value="_blank"' + (item.target === '_blank' ? ' selected' : '') + '>新窗口</option></select></div>' +
         '<div><label class="text-sm font-medium">父级 ID</label><input id="ne-parent" type="number" value="' + (item.parent_id || '') + '" placeholder="留空=主菜单"></div>' +
         '<div class="flex items-end gap-2"><label class="text-sm font-medium flex items-center gap-2"><input id="ne-active" type="checkbox" ' + (item.is_active ? 'checked' : '') + '> 启用</label>' +
         '<label class="text-sm font-medium flex items-center gap-2"><input id="ne-badge" type="checkbox" ' + (item.badge ? 'checked' : '') + '> HOT 标签</label></div></div>';
@@ -965,27 +965,23 @@
       empty.style.display = 'none';
       posts.forEach(function(p) {
         var tr = document.createElement('tr');
-        tr.style.cssText = 'background:#f9fafb;color:#e2e8f0;transition:background 0.15s';
-        tr.onmouseenter = function() { tr.style.background = '#1e293b'; };
-        tr.onmouseleave = function() { tr.style.background = '#0f172a'; };
         var statusBadge = p.is_active
-          ? '<span style="background:#065f46;color:#6ee7b7;padding:0.15rem 0.5rem;border-radius:9999px;font-size:0.75rem">已发布</span>'
-          : '<span style="background:#78350f;color:#fcd34d;padding:0.15rem 0.5rem;border-radius:9999px;font-size:0.75rem">草稿</span>';
+          ? '<span class="badge badge-green">已发布</span>'
+          : '<span class="badge badge-gray">草稿</span>';
         var catLabel = p.category === 'case' ? '案例' : (p.category === 'news' ? '新闻' : esc(p.category));
         var pubDate = p.published_at ? new Date(p.published_at).toLocaleDateString('zh-CN') : '—';
         tr.innerHTML =
-          '<td style="padding:0.6rem 0.75rem;border-bottom:1px solid #f3f4f6">' +
-            '<div class="font-medium" style="max-width:260px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">' + esc(p.title) + '</div>' +
+          '<td><div class="font-medium text-sm" style="max-width:260px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">' + esc(p.title) + '</div>' +
             (p.cover_image ? '<div style="margin-top:0.25rem"><img src="' + esc(p.cover_image) + '" style="width:32px;height:22px;object-fit:cover;border-radius:0.25rem;vertical-align:middle"></div>' : '') +
           '</td>' +
-          '<td style="padding:0.6rem 0.75rem;border-bottom:1px solid #f3f4f6;color:#94a3b8;font-size:0.8rem;max-width:140px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">' + esc(p.slug) + '</td>' +
-          '<td style="padding:0.6rem 0.75rem;border-bottom:1px solid #f3f4f6">' + catLabel + '</td>' +
-          '<td style="padding:0.6rem 0.75rem;border-bottom:1px solid #f3f4f6">' + statusBadge + '</td>' +
-          '<td style="padding:0.6rem 0.75rem;border-bottom:1px solid #f3f4f6;color:#94a3b8;font-size:0.8rem">' + pubDate + '</td>' +
-          '<td style="padding:0.6rem 0.75rem;border-bottom:1px solid #f3f4f6;text-align:right">' +
+          '<td class="text-sm text-gray-500" style="font-family:monospace;max-width:140px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">' + esc(p.slug) + '</td>' +
+          '<td>' + catLabel + '</td>' +
+          '<td>' + statusBadge + '</td>' +
+          '<td class="text-sm text-gray-500">' + pubDate + '</td>' +
+          '<td style="text-align:right">' +
             '<button class="btn-ghost" style="font-size:0.78rem;padding:0.2rem 0.5rem" onclick="CMS.openPostForm(' + p.id + ')">编辑</button> ' +
-            '<button class="btn-ghost" style="font-size:0.78rem;padding:0.2rem 0.5rem;color:' + (p.is_active ? '#fbbf24' : '#6ee7b7') + '" onclick="CMS.togglePostPublish(' + p.id + ',' + (p.is_active ? 0 : 1) + ')">' + (p.is_active ? '取消发布' : '发布') + '</button> ' +
-            '<button class="btn-ghost" style="font-size:0.78rem;padding:0.2rem 0.5rem;color:#f87171" onclick="CMS.deletePost(' + p.id + ')">删除</button>' +
+            '<button class="btn-ghost" style="font-size:0.78rem;padding:0.2rem 0.5rem;color:' + (p.is_active ? '#fbbf24' : '#16a34a') + '" onclick="CMS.togglePostPublish(' + p.id + ',' + (p.is_active ? 0 : 1) + ')">' + (p.is_active ? '取消发布' : '发布') + '</button> ' +
+            '<button class="btn-ghost" style="font-size:0.78rem;padding:0.2rem 0.5rem;color:#ef4444" onclick="CMS.deletePost(' + p.id + ')">删除</button>' +
           '</td>';
         tbody.appendChild(tr);
       });
@@ -1037,22 +1033,22 @@
     function fillForm(id, data) {
       var bodyHtml =
         '<div style="display:flex;flex-direction:column;gap:0.85rem">' +
-          '<div><label style="color:#94a3b8;font-size:0.8rem;display:block;margin-bottom:0.25rem">标题</label>' +
-            '<input id="pf-title" type="text" value="' + esc(data.title) + '" style="width:100%;background:#1e293b;color:#e2e8f0;border:1px solid #334155;border-radius:0.5rem;padding:0.5rem 0.65rem;font-size:0.85rem" placeholder="文章标题"></div>' +
-          '<div><label style="color:#94a3b8;font-size:0.8rem;display:block;margin-bottom:0.25rem">Slug</label>' +
-            '<input id="pf-slug" type="text" value="' + esc(data.slug) + '" style="width:100%;background:#1e293b;color:#e2e8f0;border:1px solid #334155;border-radius:0.5rem;padding:0.5rem 0.65rem;font-size:0.85rem;font-family:monospace" placeholder="auto-generated"></div>' +
-          '<div><label style="color:#94a3b8;font-size:0.8rem;display:block;margin-bottom:0.25rem">分类</label>' +
-            '<select id="pf-category" style="width:100%;background:#1e293b;color:#e2e8f0;border:1px solid #334155;border-radius:0.5rem;padding:0.5rem 0.65rem;font-size:0.85rem">' +
+          '<div><label class="text-sm font-medium text-gray-700" style="display:block;margin-bottom:0.25rem">标题</label>' +
+            '<input id="pf-title" type="text" value="' + esc(data.title) + '" placeholder="文章标题"></div>' +
+          '<div><label class="text-sm font-medium text-gray-700" style="display:block;margin-bottom:0.25rem">Slug</label>' +
+            '<input id="pf-slug" type="text" value="' + esc(data.slug) + '" style="font-family:monospace" placeholder="auto-generated"></div>' +
+          '<div><label class="text-sm font-medium text-gray-700" style="display:block;margin-bottom:0.25rem">分类</label>' +
+            '<select id="pf-category">' +
               '<option value="news"' + (data.category === 'news' ? ' selected' : '') + '>新闻</option>' +
               '<option value="case"' + (data.category === 'case' ? ' selected' : '') + '>案例</option></select></div>' +
-          '<div><label style="color:#94a3b8;font-size:0.8rem;display:block;margin-bottom:0.25rem">摘要</label>' +
-            '<textarea id="pf-excerpt" style="width:100%;background:#1e293b;color:#e2e8f0;border:1px solid #334155;border-radius:0.5rem;padding:0.5rem 0.65rem;font-size:0.85rem;min-height:60px;resize:vertical" placeholder="简短描述...">' + esc(data.excerpt) + '</textarea></div>' +
-          '<div><label style="color:#94a3b8;font-size:0.8rem;display:block;margin-bottom:0.25rem">内容 (Markdown)</label>' +
-            '<textarea id="pf-content" style="width:100%;background:#1e293b;color:#e2e8f0;border:1px solid #334155;border-radius:0.5rem;padding:0.5rem 0.65rem;font-size:0.85rem;min-height:300px;resize:vertical;font-family:monospace" placeholder="Markdown 内容...">' + esc(data.content_markdown) + '</textarea></div>' +
-          '<div><label style="color:#94a3b8;font-size:0.8rem;display:block;margin-bottom:0.25rem">封面图 URL</label>' +
-            '<input id="pf-cover" type="text" value="' + esc(data.cover_image) + '" style="width:100%;background:#1e293b;color:#e2e8f0;border:1px solid #334155;border-radius:0.5rem;padding:0.5rem 0.65rem;font-size:0.85rem" placeholder="https://..."></div>' +
-          '<div><label style="color:#94a3b8;font-size:0.8rem;display:block;margin-bottom:0.25rem">排序权重</label>' +
-            '<input id="pf-sort" type="number" value="' + (data.sort_order || 0) + '" style="width:120px;background:#1e293b;color:#e2e8f0;border:1px solid #334155;border-radius:0.5rem;padding:0.5rem 0.65rem;font-size:0.85rem"></div>' +
+          '<div><label class="text-sm font-medium text-gray-700" style="display:block;margin-bottom:0.25rem">摘要</label>' +
+            '<textarea id="pf-excerpt" style="min-height:60px;resize:vertical" placeholder="简短描述...">' + esc(data.excerpt) + '</textarea></div>' +
+          '<div><label class="text-sm font-medium text-gray-700" style="display:block;margin-bottom:0.25rem">内容 (Markdown)</label>' +
+            '<textarea id="pf-content" style="min-height:300px;resize:vertical;font-family:monospace" placeholder="Markdown 内容...">' + esc(data.content_markdown) + '</textarea></div>' +
+          '<div><label class="text-sm font-medium text-gray-700" style="display:block;margin-bottom:0.25rem">封面图 URL</label>' +
+            '<input id="pf-cover" type="text" value="' + esc(data.cover_image) + '" placeholder="https://..."></div>' +
+          '<div><label class="text-sm font-medium text-gray-700" style="display:block;margin-bottom:0.25rem">排序权重</label>' +
+            '<input id="pf-sort" type="number" value="' + (data.sort_order || 0) + '" style="width:120px"></div>' +
         '</div>';
 
       showModal('post-form-modal', title, bodyHtml, function() {
