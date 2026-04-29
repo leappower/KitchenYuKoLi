@@ -115,7 +115,7 @@
       if (!re) {
         var section = document.createElement("section");
         section.className = "w-full py-12";
-        section.innerHTML = '<h2 class="text-xl font-bold mb-4 flex items-center gap-2"><span class="material-symbols-outlined text-primary">recommend</span> 推荐产品</h2><div class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-4" id="related-products"></div>';
+        section.innerHTML = '<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"><h2 class="text-xl font-bold mb-4 flex items-center gap-2"><span class="material-symbols-outlined text-primary">recommend</span> 推荐产品</h2><div class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-4" id="related-products"></div></div>';
         // Find the container's parent to append
         var target = ce.parentElement || container;
         target.appendChild(section);
