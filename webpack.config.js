@@ -256,6 +256,14 @@ module.exports = (env = {}, argv = {}) => {
       // SPA fallback: serve index.html for any route that doesn't match a static file
       // This allows clean URL testing (/home/, /catalog/) in development
       historyApiFallback: true,
+      // Proxy API requests to Express backend
+      proxy: [
+        {
+          context: ['/api', '/admin/uploads'],
+          target: 'http://localhost:3099',
+          changeOrigin: true,
+        },
+      ],
       static: [
         // Serve src/index.html at root
         {
