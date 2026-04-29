@@ -124,16 +124,11 @@
   }
 
   function renderPDP() {
-    // Read model from path: /products/<model>/ or query: /products/?model=<model>
+    // Read model from path: /products/<model>/
     var path = window.location.pathname.replace(/\/$/, '');
     var model = null;
     var m = path.match(/^\/products\/([^/]+)$/);
-    if (m) {
-      model = decodeURIComponent(m[1]);
-    } else if (path === '/products' || path === '/products/index') {
-      var params = new URLSearchParams(window.location.search);
-      model = params.get('model');
-    }
+    if (m) model = decodeURIComponent(m[1]);
     console.log('[ProductDetail] renderPDP called, pathname:', window.location.pathname, 'cleanPath:', path, 'model:', model);
     if (!model) return; // Not a PDP URL, skip silently
 
