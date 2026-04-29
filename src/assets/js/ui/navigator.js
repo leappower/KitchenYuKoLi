@@ -345,6 +345,18 @@
           t && t.classList && t.classList.add("is-active")
         }
       }
+    },
+    highlightCategory: function(categoryKey) {
+      if (!categoryKey) return;
+      var o = window.location.pathname.replace(/\/$/, "");
+      for (var g = document.querySelectorAll(".prod-dropdown-item.is-active"), b = 0; b < g.length; b++) g[b].classList.remove("is-active");
+      for (var w = document.querySelectorAll(".prod-dropdown-item"), m = 0; m < w.length; m++) {
+        var label = w[m].getAttribute("data-i18n") || "";
+        if (label === categoryKey) {
+          w[m].classList.add("is-active");
+          break;
+        }
+      }
     }
   }, document.addEventListener("spa:load", function() {
     document.querySelector("header") || i();

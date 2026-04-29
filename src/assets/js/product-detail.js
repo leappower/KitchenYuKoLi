@@ -152,6 +152,11 @@
     }
     document.title = product.model + " | Yukoli 智能商厨设备";
 
+    // Highlight matching category in navigator dropdown
+    if (product.category && window.Navigator && typeof window.Navigator.highlightCategory === "function") {
+      window.Navigator.highlightCategory(product.category);
+    }
+
     // Spec fields
     var specs = [
       { l: "型号", v: product.model }, { l: "分类", v: product.categoryName || product.category },
