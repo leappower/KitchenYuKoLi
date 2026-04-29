@@ -60,7 +60,7 @@
     var allProducts = getAllProducts();
     var el = document.getElementById("related-products");
     if (!el) return;
-    var cards = "", count = 0, max = 4;
+    var cards = "", count = 0, max = 8;
 
     // Plan A: manual related (if configured)
     if (product.relatedProducts && product.relatedProducts.length > 0) {
@@ -115,7 +115,7 @@
       if (!re) {
         var section = document.createElement("section");
         section.className = "w-full py-12";
-        section.innerHTML = '<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"><h2 class="text-xl font-bold mb-4 flex items-center gap-2"><span class="material-symbols-outlined text-primary">recommend</span> 推荐产品</h2><div class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-4" id="related-products"></div></div>';
+        section.innerHTML = '<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"><h2 class="text-xl font-bold mb-4 flex items-center gap-2"><span class="material-symbols-outlined text-primary">recommend</span> 推荐产品</h2><div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6" id="related-products"></div></div>';
         // Find the container's parent to append
         var target = ce.parentElement || container;
         target.appendChild(section);
@@ -186,7 +186,7 @@
       '<a href="https://wa.me/' + wa + '?text=' + encodeURIComponent((product.subCategory || product.categoryName ? (product.subCategory || product.categoryName) + ' ' : '') + product.model) + '" target="_blank" class="px-6 py-3 rounded-xl font-bold flex items-center gap-2 border-2 border-slate-300 dark:border-slate-600 hover:border-primary hover:text-primary transition-all text-sm"><span class="material-symbols-outlined text-lg">chat</span> 联系销售</a></div></div></div>' +
       '<section class="mt-8"><h2 class="text-xl font-bold mb-4 flex items-center gap-2"><span class="material-symbols-outlined text-primary">specifications</span> 产品规格</h2><div class="grid grid-cols-1 md:grid-cols-2 gap-3">' + specCards + '</div></section>' +
       '</div></div>' +
-      '<section class="mt-12 bg-primary py-12 px-4 sm:px-6 lg:px-8 text-center"><div class="max-w-7xl mx-auto"><h2 class="text-xl font-black text-white mb-3">需要定制方案？</h2><p class="text-white/80 mb-6 text-sm">告诉我们您的需求，我们为您提供专属解决方案。</p><a href="/quote/" class="inline-flex items-center gap-2 bg-white text-primary px-6 py-3 rounded-xl font-bold hover:shadow-lg transition-all"><span class="material-symbols-outlined">arrow_forward</span> 获取报价</a></div></section>';
+      '<section class="mt-12 bg-primary py-12 text-center"><div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"><h2 class="text-xl font-black text-white mb-3">需要定制方案？</h2><p class="text-white/80 mb-6 text-sm">告诉我们您的需求，我们为您提供专属解决方案。</p><a href="/quote/" class="inline-flex items-center gap-2 bg-white text-primary px-6 py-3 rounded-xl font-bold hover:shadow-lg transition-all"><span class="material-symbols-outlined">arrow_forward</span> 获取报价</a></div></section>';
 
     var ce = document.getElementById("product-content");
     if (ce) ce.className = "w-full py-10";
