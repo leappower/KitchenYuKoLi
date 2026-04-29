@@ -8,37 +8,17 @@
 
   var overlay = null;
   var scrollLocked = false;
-  var _savedScrollY = 0;
 
   function lockScroll() {
     if (scrollLocked) return;
     scrollLocked = true;
-    _savedScrollY = window.scrollY;
-    // Use overflow:hidden on html + body to prevent scroll without layout shift
-    var html = document.documentElement;
-    html.style.overflow = 'hidden';
-    html.style.height = '100%';
-    document.body.style.overflow = 'hidden';
-    document.body.style.height = '100%';
-    // Compensate for scrollbar disappearing
-    var scrollbarWidth = window.innerWidth - html.clientWidth;
-    if (scrollbarWidth > 0) {
-      document.body.style.paddingRight = scrollbarWidth + 'px';
-      document.body.style.boxSizing = 'border-box';
-    }
+    document.documentElement.style.overflow = 'hidden';
   }
 
   function unlockScroll() {
     if (!scrollLocked) return;
     scrollLocked = false;
-    var html = document.documentElement;
-    html.style.overflow = '';
-    html.style.height = '';
-    document.body.style.overflow = '';
-    document.body.style.height = '';
-    document.body.style.paddingRight = '';
-    document.body.style.boxSizing = '';
-    window.scrollTo(0, _savedScrollY);
+    document.documentElement.style.overflow = '';
   }
 
   // Responsive QR size: bigger on larger screens
