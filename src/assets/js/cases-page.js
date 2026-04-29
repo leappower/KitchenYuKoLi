@@ -332,7 +332,7 @@
 
         // CTA
         '<div style="margin-top:1.5rem;text-align:center;">' +
-          '<a href="/quote/" style="display:inline-block;background:var(--color-primary,#f97316);color:#fff;padding:0.875rem 2rem;border-radius:0.75rem;font-weight:800;text-decoration:none;font-size:0.875rem;">获取免费ROI方案</a>' +
+          '<a href="/roi/" style="display:inline-block;background:var(--color-primary,#f97316);color:#fff;padding:0.875rem 2rem;border-radius:0.75rem;font-weight:800;text-decoration:none;font-size:0.875rem;">获取免费ROI方案</a>' +
         '</div>' +
       '</div>';
 
@@ -425,10 +425,13 @@
      ═══════════════════════════════════════════════════ */
   function initCTAButtons() {
     $$('button[data-i18n="cta_get_proposal"]').forEach(function (btn) {
-      btn.addEventListener('click', function () { window.location.href = '/quote/'; });
+      btn.addEventListener('click', function () { window.location.href = '/roi/'; });
     });
     $$('button[data-i18n="cta_contact_sales"]').forEach(function (btn) {
-      btn.addEventListener('click', function () { window.location.href = '/contact/'; });
+      btn.addEventListener('click', function () {
+          var wa = (window.Contacts && window.Contacts.whatsapp) || '8613163756465';
+          window.open('https://wa.me/' + wa + '?text=' + encodeURIComponent("Hi YuKoLi! I'm interested in your smart kitchen equipment after reading your case studies."), '_blank');
+        });
     });
   }
 
