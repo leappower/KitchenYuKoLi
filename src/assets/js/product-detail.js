@@ -168,8 +168,8 @@
     ];
     var specCards = "";
     for (var s = 0; s < specs.length; s++) {
-      var val = specs[s].v || '—';
-      specCards += '<div class="flex justify-between items-start py-3 px-4 rounded-lg bg-slate-50 dark:bg-slate-700/50"><span class="text-sm text-slate-500 dark:text-slate-400 font-medium">' + esc(specs[s].l) + '</span><span class="text-sm font-semibold text-right">' + esc(val) + '</span></div>';
+      if (!specs[s].v) continue;
+      specCards += '<div class="flex justify-between items-start py-3 px-4 rounded-lg bg-slate-50 dark:bg-slate-700/50"><span class="text-sm text-slate-500 dark:text-slate-400 font-medium">' + esc(specs[s].l) + '</span><span class="text-sm font-semibold text-right">' + esc(specs[s].v) + '</span></div>';
     }
 
     var tier = product.tier ? '<span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-bold bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-300">' + esc(product.tier) + '</span>' : '';
