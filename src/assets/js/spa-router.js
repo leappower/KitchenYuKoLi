@@ -725,6 +725,11 @@
         scripts.push({ src: "/assets/js/ui/deploy-roi.js", id: "spa-deploy-roi" });
       }
 
+      // Cases 页面需要 cases-page.js（筛选、modal、CTA）
+      if (path.indexOf("/applications/cases/") !== -1) {
+        scripts.push({ src: "/assets/js/cases-page.js", id: "spa-cases-page" });
+      }
+
       // Home 页面需要 home-core-products.js（动态渲染核心产品卡片）
       if (path.indexOf("/home") !== -1) {
         scripts.push({ src: "/assets/js/home-core-products.js", id: "spa-home-core-products" });
