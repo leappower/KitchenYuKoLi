@@ -174,7 +174,8 @@
     var cfg = CONFIG[page] || CONFIG['support'];
     var device = getDevice();
     var html = device === 'mobile' ? renderList(cfg) : renderGrid(cfg);
-    el.outerHTML = html;
+    // Replace inner content, keep the placeholder <div> for re-mount on SPA navigation
+    el.innerHTML = html;
   }
 
   // Run on DOM ready and SPA navigation

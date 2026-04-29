@@ -115,10 +115,13 @@
   document.addEventListener('keydown', onKeydown);
 
   function bindClicks() {
-    var els = document.querySelectorAll('[data-action="show-wechat-qr"]');
-    els.forEach(function (el) {
-      el.removeEventListener('click', handleClick);
-      el.addEventListener('click', handleClick);
+    // Use rAF to ensure DOM is updated (contact-channels may have just rendered)
+    requestAnimationFrame(function () {
+      var els = document.querySelectorAll('[data-action="show-wechat-qr"]');
+      els.forEach(function (el) {
+        el.removeEventListener('click', handleClick);
+        el.addEventListener('click', handleClick);
+      });
     });
   }
 
