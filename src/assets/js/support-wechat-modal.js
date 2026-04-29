@@ -42,10 +42,10 @@
     overlay.setAttribute('role', 'dialog');
     overlay.setAttribute('aria-modal', 'true');
     overlay.setAttribute('aria-label', TITLE);
-    overlay.style.cssText = 'position:fixed;inset:0;z-index:9999;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.6);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);opacity:0;transition:opacity .25s ease;';
+    overlay.style.cssText = 'position:fixed;inset:0;z-index:9999;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.6);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);opacity:0;will-change:opacity,backdrop-filter;transition:opacity .2s ease,backdrop-filter .2s ease;';
 
     var card = document.createElement('div');
-    card.style.cssText = 'max-width:' + getCardMaxWidth() + ';width:100%;margin:1rem;background:#fff;border-radius:1rem;overflow:hidden;box-shadow:0 25px 50px -12px rgba(0,0,0,0.25);transform:scale(0.9);transition:transform .25s ease;';
+    card.style.cssText = 'max-width:' + getCardMaxWidth() + ';width:100%;margin:1rem;background:#fff;border-radius:1rem;overflow:hidden;box-shadow:0 25px 50px -12px rgba(0,0,0,0.25);transform:scale(0.95) translateY(8px);opacity:0;will-change:transform,opacity;transition:transform .25s cubic-bezier(0.16,1,0.3,1),opacity .2s ease;';
     card.className = 'dark:bg-slate-900';
 
     var inner = document.createElement('div');
@@ -103,13 +103,18 @@
     // Force reflow then animate in
     void overlay.offsetHeight;
     overlay.style.opacity = '1';
-    overlay.querySelector('div').style.transform = 'scale(1)';
+    overlay.style.backdropFilter = 'blur(8px)';
+    var card = overlay.querySelector('div');
+    card.style.opacity = '1';
+    card.style.transform = 'scale(1) translateY(0)';
   }
 
   function closeModal() {
     if (!overlay) return;
     overlay.style.opacity = '0';
-    overlay.querySelector('div').style.transform = 'scale(0.9)';
+    var card = overlay.querySelector('div');
+    card.style.opacity = '0';
+    card.style.transform = 'scale(0.95) translateY(8px)';
     setTimeout(function () {
       // Restore scroll position BEFORE hiding overlay to avoid jump
       unlockScroll();
