@@ -172,8 +172,10 @@
           },
           c = [];
         if (n.forEach(function(t) {
-            var e = t.getAttribute("data-i18n"),
-              n = u(e);
+            var e = t.getAttribute("data-i18n");
+            // Skip current-lang-label — managed by updateCurrentLanguageLabel
+            if ("current-lang-label" === t.id) return;
+            var n = u(e);
             n && n !== e && c.push({
               el: t,
               text: n
