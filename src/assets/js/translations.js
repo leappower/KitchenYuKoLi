@@ -117,7 +117,9 @@
   }, r.prototype.resolveTranslationValue = function(t, e) {
     if (!t || !e) return e;
     for (var n = this.getKeyPath(e), a = t, o = 0; o < n.length; o++) a = a ? a[n[o]] : void 0;
-    return 0 === e.indexOf("home_tablet") || 0 === e.indexOf("nav_") || e.indexOf("products_"), a || e
+    // Return resolved value (including empty string for skeleton keys)
+    // so caller can distinguish "found but empty" from "key not found"
+    return a !== void 0 ? a : e
   }, r.prototype.getKeyPath = function(t) {
     return this.keyPathCache.has(t) || this.keyPathCache.set(t, t.split(".")), this.keyPathCache.get(t)
   }, r.prototype.getDropdown = function() {
@@ -152,6 +154,11 @@
     var t = this,
       e = "ui-" + this.currentLanguage;
     return (this.translationsCache.has(e) ? Promise.resolve(this.translationsCache.get(e)) : this.loadUITranslations(this.currentLanguage)).then(function(e) {
+      // Ensure English is cached for fallback before processing
+      var ensureEn = ("en" !== t.currentLanguage && !t.translationsCache.has("ui-en"))
+        ? t.loadUITranslations("en").catch(function(){})
+        : Promise.resolve();
+      return ensureEn.then(function() {
       if (e) {
         var n = document.querySelectorAll("[data-i18n]"),
           a = document.querySelectorAll("[data-i18n-placeholder]"),
@@ -199,6 +206,7 @@
           language: t.currentLanguage
         })
       } else console.warn("[i18n] applyTranslations: uiTranslations is null/undefined for", t.currentLanguage)
+      });
     }).catch(function(t) {
       console.error("[i18n] applyTranslations: ERROR:", t)
     })
@@ -213,17 +221,15 @@
       e && "page_title" !== e && document.title !== e && (document.title = e)
     }
   }, r.prototype.getFallbackTranslation = function(t) {
+    // 1. 从 en 找（所有骨架语言的唯一 fallback）
     if ("en" !== this.currentLanguage) {
-      var e = this.translationsCache.get("ui-en");
-      if (e) {
-        var n = this.resolveTranslationValue(e, t);
-        if (n && n !== t) return n
+      var en = this.translationsCache.get("ui-en");
+      if (en) {
+        var v = this.resolveTranslationValue(en, t);
+        if (v && v !== t) return v;
       }
     }
-    if ("en" !== this.currentLanguage) {
-      var a = this.translationsCache.get("ui-zh-CN");
-      if (a) return this.resolveTranslationValue(a, t)
-    }
+    // 2. 返回 key 本身
     return t
   }, r.prototype.on = function(t, e) {
     this.eventListeners.has(t) || this.eventListeners.set(t, []), this.eventListeners.get(t).push(e)
@@ -236,13 +242,11 @@
     return getO()[e] ? this.currentLanguage === e ? (this.closeLanguageDropdown(), Promise.resolve()) : Promise.all([this.loadUITranslations(e), this.loadProductTranslations(e).catch(function(t) {
       console.warn("[i18n] setLanguage: product translations for " + e + " failed: " + t.message)
     })]).then(function() {
-      // Pre-load English as fallback if target is not en
-      var preloads = [Promise.resolve()];
-      if ("en" !== e && !n.translationsCache.has("ui-en")) {
-        preloads.push(n.loadUITranslations("en").catch(function() {}));
-        preloads.push(n.loadProductTranslations("en").catch(function() {}));
-      }
-      return Promise.all(preloads).then(function() {
+      // Ensure English is loaded for fallback (skeleton languages need it)
+      var ensureEn = ("en" !== e && !n.translationsCache.has("ui-en"))
+        ? n.loadUITranslations("en").catch(function(err) { console.warn("[i18n] en preload failed:", err); })
+        : Promise.resolve();
+      return ensureEn.then(function() {
       var a = n.currentLanguage;
       return n.currentLanguage = e, localStorage.setItem("userLanguage", e), n.applyTranslations().then(function() {
         if (document.documentElement.lang = e, t.dispatchEvent(new CustomEvent("languageChanged", {
