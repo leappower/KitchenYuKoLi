@@ -30,6 +30,9 @@ function productsRoutes(db) {
       where += ' AND p.status = ?';
       params.push(status);
     }
+    if (req.query.home_core === '1') {
+      where += ' AND p.is_home_core = 1';
+    }
 
     const countRow = db.prepare(`SELECT COUNT(*) as total FROM products p ${where}`).get(...params);
     const rows = db.prepare(
@@ -64,7 +67,7 @@ function productsRoutes(db) {
   router.post('/products', requireAuth, (req, res) => {
     const fields = ['category_id', 'sub_category', 'model', 'status', 'is_active', 'badge', 'badge_color',
       'power', 'throughput', 'average_time', 'voltage', 'frequency', 'material',
-      'product_dimensions', 'color', 'control_method', 'launch_time', 'tier', 'sort_order'];
+      'product_dimensions', 'color', 'control_method', 'launch_time', 'tier', 'sort_order', 'is_home_core'];
     const { model } = req.body;
     if (!model) return res.status(400).json({ error: 'model is required' });
 
@@ -104,7 +107,7 @@ function productsRoutes(db) {
       const vals = [];
       const fields = ['category_id', 'sub_category', 'model', 'status', 'is_active', 'badge', 'badge_color',
         'power', 'throughput', 'average_time', 'voltage', 'frequency', 'material',
-        'product_dimensions', 'color', 'control_method', 'launch_time', 'tier', 'sort_order'];
+        'product_dimensions', 'color', 'control_method', 'launch_time', 'tier', 'sort_order', 'is_home_core'];
 
       fields.forEach(f => {
         if (req.body[f] !== undefined) {

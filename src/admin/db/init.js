@@ -170,6 +170,11 @@ function initDatabase() {
     db.exec(`ALTER TABLE products ADD COLUMN tier TEXT DEFAULT ''`);
   } catch(e) { /* column already exists */ }
 
+  // Auto-migration: add is_home_core column if missing
+  try {
+    db.exec(`ALTER TABLE products ADD COLUMN is_home_core INTEGER DEFAULT 0`);
+  } catch(e) { /* column already exists */ }
+
   // Ensure default admin user
   const adminExists = db.prepare('SELECT id FROM cms_users WHERE username = ?').get('admin');
   if (!adminExists) {

@@ -156,7 +156,8 @@
           '<div class="img-area">' +
           (p.primary_image ? '<img src="' + esc(p.primary_image) + '">' : '<div style="font-size:2.5rem;color:#d1d5db">📦</div>') +
           '</div><div class="p-3"><div class="font-medium text-sm">' + esc(p.model) + '</div>' +
-          '<div class="text-xs text-gray-500 mt-1">' + esc(p.category_slug || '未分类') + '</div></div>';
+          '<div class="text-xs text-gray-500 mt-1">' + esc(p.category_slug || '未分类') + '</div>' +
+          (p.is_home_core ? '<div class="text-xs mt-1" style="color:#8b5cf6;font-weight:600">⭐ Home 核心</div>' : '') + '</div>';
         card.addEventListener('click', function(e) {
           if (e.target.closest('.product-del-btn')) return;
           CMS.openProductForm(p);
@@ -359,6 +360,7 @@
       '<input id="pm-badge" placeholder="如：热销" value="' + esc(p ? (p.badge || '') : '') + '"></div>' +
       '<div><label class="text-sm font-medium text-gray-700" style="display:block;margin-bottom:0.25rem">等级</label>' +
       '<select id="pm-tier"><option value="">全部</option><option value="工业级"' + (p && p.tier === '工业级' ? ' selected' : '') + '>工业级</option><option value="商用级"' + (p && p.tier === '商用级' ? ' selected' : '') + '>商用级</option><option value="紧凑型"' + (p && p.tier === '紧凑型' ? ' selected' : '') + '>紧凑型</option></select></div>' +
+      '<div><label class="text-sm font-medium text-gray-700" style="display:flex;align-items:center;gap:0.5rem;margin-bottom:0.25rem"><input id="pm-home-core" type="checkbox"' + (p && p.is_home_core ? ' checked' : '') + ' style="width:1rem;height:1rem;cursor:pointer"> Home 核心产品</label></div>' +
       '<div><label class="text-sm font-medium text-gray-700" style="display:block;margin-bottom:0.25rem">功率</label>' +
       '<input id="pm-power" value="' + esc(p ? (p.power || '') : '') + '"></div>' +
       '<div><label class="text-sm font-medium text-gray-700" style="display:block;margin-bottom:0.25rem">产能</label>' +
@@ -410,7 +412,8 @@
         material: document.getElementById('pm-material').value,
         product_dimensions: document.getElementById('pm-dims').value,
         color: document.getElementById('pm-color').value,
-        sort_order: parseInt(document.getElementById('pm-sort').value) || 0
+        sort_order: parseInt(document.getElementById('pm-sort').value) || 0,
+        is_home_core: document.getElementById('pm-home-core').checked ? 1 : 0
       };
       // Use global pending arrays (populated by file input change handlers)
       var pendingImages = window._pmPendingImages || [];
