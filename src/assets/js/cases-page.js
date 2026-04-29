@@ -428,10 +428,7 @@
       btn.addEventListener('click', function () { window.location.href = '/roi/'; });
     });
     $$('button[data-i18n="cta_contact_sales"]').forEach(function (btn) {
-      btn.addEventListener('click', function () {
-          var wa = (window.Contacts && window.Contacts.whatsapp) || '8613163756465';
-          window.open('https://wa.me/' + wa + '?text=' + encodeURIComponent(location.href), '_blank');
-        });
+      btn.addEventListener('click', function () { window.location.href = '/contact/?from=' + encodeURIComponent(location.pathname); });
     });
   }
 

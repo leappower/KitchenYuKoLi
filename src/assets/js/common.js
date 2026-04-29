@@ -65,6 +65,22 @@
     }
   }
 
+  /**
+   * Auto-append ?from=<current-page-url> to all /contact/ links.
+   * So the Contact page can display which page the visitor came from.
+   */
+  function trackContactLinks() {
+    document.addEventListener("click", function (e) {
+      var a = e.target.closest('a[href^="/contact/"]');
+      if (!a) return;
+      var base = a.getAttribute("href").split("?")[0].split("#")[0];
+      a.href = base + "?from=" + encodeURIComponent(location.pathname);
+    });
+  }
+
+  // Auto-init
+  ready(trackContactLinks);
+
   // Expose to global
   global.CommonUtils = {
     debounce: debounce,
