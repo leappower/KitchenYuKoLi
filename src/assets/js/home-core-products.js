@@ -232,11 +232,15 @@
       console.log('[HCP] ✓ Rendering ' + products.length + ' products');
 
       // Reapply i18n after render
-      var html = '<div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-8">';
-      products.forEach(function(p) {
+      var VIS_COUNT = 4; // PC: 1 row (4 columns)
+      var hasMore = products.length > VIS_COUNT;
+      var visProducts = hasMore ? products.slice(0, VIS_COUNT) : products;
+      var restProducts = hasMore ? products.slice(VIS_COUNT) : [];
+
+      function buildPCCard(p) {
         var img = getPrimaryImage(p);
         var href = getProductDetailHref(p);
-        html += '<div class="group bg-background-light dark:bg-background-dark p-4 rounded-2xl border border-slate-200 dark:border-slate-800 hover:border-primary transition-all shadow-sm">' +
+        return '<div class="group bg-background-light dark:bg-background-dark p-4 rounded-2xl border border-slate-200 dark:border-slate-800 hover:border-primary transition-all shadow-sm">' +
           '<a href="' + href + '" class="block">' +
           '<div class="aspect-[4/3] rounded-xl bg-slate-100 dark:bg-slate-800 overflow-hidden mb-6">' +
           (img ? '<img alt="' + escHtml(p.model) + '" class="w-full h-full object-contain p-2" src="' + escHtml(img) + '" loading="lazy">' :
@@ -248,8 +252,21 @@
           (p.badge ? '<span class="text-xs font-bold uppercase text-slate-400">' + escHtml(p.badge) + '</span>' : '<span></span>') +
           '<span class="text-primary font-black" data-i18n="home_hw_learn_more">了解更多</span>' +
           '</div></a></div>';
-      });
+      }
+
+      var html = '<div id="hcp-grid-pc" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-8">';
+      visProducts.forEach(function(p) { html += buildPCCard(p); });
       html += '</div>';
+
+      if (hasMore) {
+        html += '<div id="hcp-hidden-pc" style="display:none" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-8 mt-8">';
+        restProducts.forEach(function(p) { html += buildPCCard(p); });
+        html += '</div>';
+        html += '<div class="flex justify-center mt-10">';
+        html += '<button id="hcp-toggle-pc" onclick="(function(){var h=document.getElementById(\'hcp-hidden-pc\'),b=document.getElementById(\'hcp-toggle-pc\');if(h.style.display===\'none\'){h.style.display=\'\';b.textContent=\'收起 \\u25B2\'}else{h.style.display=\'none\';b.textContent=\'查看更多产品 \\u25BC\'}})()" class="px-8 py-3 rounded-full border-2 border-primary text-primary font-bold hover:bg-primary hover:text-white transition-all cursor-pointer" data-i18n="home_hw_show_more">查看更多产品 ▼</button>';
+        html += '</div>';
+      }
+
       container.innerHTML = html;
       console.log('[HCP] ✓ PC innerHTML set, length=' + container.innerHTML.length);
 
@@ -273,11 +290,15 @@
         return;
       }
 
-      var html = '<div class="grid grid-cols-2 gap-4">';
-      products.forEach(function(p) {
+      var VIS_COUNT = 4; // Tablet: 2 rows (2 columns)
+      var hasMore = products.length > VIS_COUNT;
+      var visProducts = hasMore ? products.slice(0, VIS_COUNT) : products;
+      var restProducts = hasMore ? products.slice(VIS_COUNT) : [];
+
+      function buildTabletCard(p) {
         var img = getPrimaryImage(p);
         var href = getProductDetailHref(p);
-        html += '<div class="bg-white dark:bg-background-dark p-3 rounded-xl border border-slate-200 dark:border-slate-800 hover:border-primary transition-all shadow-sm">' +
+        return '<div class="bg-white dark:bg-background-dark p-3 rounded-xl border border-slate-200 dark:border-slate-800 hover:border-primary transition-all shadow-sm">' +
           '<a href="' + href + '">' +
           '<div class="aspect-square rounded-lg bg-slate-200 dark:bg-slate-800 overflow-hidden mb-3">' +
           (img ? '<img alt="' + escHtml(p.model) + '" class="w-full h-full object-cover" src="' + escHtml(img) + '" loading="lazy">' : '') +
@@ -286,8 +307,21 @@
           (p.subCategory ? '<p class="text-xs text-slate-500 mb-3">' + escHtml(p.subCategory) + '</p>' : '<div class="mb-3"></div>') +
           '<span class="text-xs font-bold text-primary" data-i18n="home_hw_learn_more">了解更多</span>' +
           '</a></div>';
-      });
+      }
+
+      var html = '<div id="hcp-grid-tablet" class="grid grid-cols-2 gap-4">';
+      visProducts.forEach(function(p) { html += buildTabletCard(p); });
       html += '</div>';
+
+      if (hasMore) {
+        html += '<div id="hcp-hidden-tablet" style="display:none" class="grid grid-cols-2 gap-4 mt-4">';
+        restProducts.forEach(function(p) { html += buildTabletCard(p); });
+        html += '</div>';
+        html += '<div class="flex justify-center mt-8">';
+        html += '<button id="hcp-toggle-tablet" onclick="(function(){var h=document.getElementById(\'hcp-hidden-tablet\'),b=document.getElementById(\'hcp-toggle-tablet\');if(h.style.display===\'none\'){h.style.display=\'\';b.textContent=\'收起 \\u25B2\'}else{h.style.display=\'none\';b.textContent=\'查看更多产品 \\u25BC\'}})()" class="px-6 py-2.5 rounded-full border-2 border-primary text-primary font-bold hover:bg-primary hover:text-white transition-all cursor-pointer text-sm" data-i18n="home_hw_show_more">查看更多产品 ▼</button>';
+        html += '</div>';
+      }
+
       container.innerHTML = html;
 
       if (window.translationManager && window.translationManager.applyTo) {
