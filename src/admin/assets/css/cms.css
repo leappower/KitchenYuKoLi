@@ -198,3 +198,20 @@
     /* Form grid */
     .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
     .form-grid .full { grid-column: 1 / -1; }
+
+    /* Quick action buttons */
+    .quick-action-btn {
+      background: #f9fafb; border: 1px solid #e5e7eb; border-radius: 0.625rem;
+      padding: 0.65rem 1rem; font-size: 0.8125rem; color: #374151;
+      cursor: pointer; text-align: left; transition: all 0.15s;
+      font-weight: 500;
+    }
+    .quick-action-btn:hover { background: #f3f4f6; border-color: #c7d2fe; color: #4f46e5; }
+
+    /* Better top bar */
+    .top-bar { height: 3.25rem; }
+    .burger { font-size: 1.1rem; }
+
+    /* Card hover shadow */
+    .stat-card { transition: box-shadow 0.15s; }
+    .stat-card:hover { box-shadow: 0 2px 8px rgba(0,0,0,0.06); }

@@ -323,4 +323,29 @@
     return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
   }
 
+  /**
+   * Auto-init: detect device type and render on spa:load (or DOMContentLoaded fallback)
+   */
+  function _autoInit() {
+    var path = window.location.pathname || '/';
+    var device = window.innerWidth < 768 ? 'mobile' : (window.innerWidth < 1280 ? 'tablet' : 'pc');
+    if (path.indexOf('/home') !== -1) {
+      if (device === 'mobile') renderHomeCoreMobile('home-core-products-mobile');
+      else if (device === 'tablet') renderHomeCoreTablet('home-core-products-tablet');
+      else renderHomeCorePC('home-core-products-pc');
+    }
+  }
+
+  // Primary: listen for spa:load (SPA router re-renders content)
+  if (document.addEventListener) {
+    document.addEventListener('spa:load', _autoInit);
+  }
+  // Fallback: if SPA router is not active, use DOMContentLoaded
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', _autoInit);
+  } else {
+    // DOM already loaded (e.g. script loaded with no defer)
+    setTimeout(_autoInit, 0);
+  }
+
 })();
