@@ -725,6 +725,11 @@
         scripts.push({ src: "/assets/js/ui/deploy-roi.js", id: "spa-deploy-roi" });
       }
 
+      // Home 页面需要 home-core-products.js（动态渲染核心产品卡片）
+      if (path.indexOf("/home") !== -1) {
+        scripts.push({ src: "/assets/js/home-core-products.js", id: "spa-home-core-products" });
+      }
+
       scripts.forEach(function(s) {
         if (document.getElementById(s.id)) return; // 已加载
         var el = document.createElement("script");
