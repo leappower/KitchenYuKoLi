@@ -158,44 +158,8 @@ if(localStorage.getItem('darkMode')==='true')document.documentElement.classList.
           <span class="material-symbols-outlined text-sm">arrow_forward</span>
         </a>
       </div>
-      <div class="flex overflow-x-auto gap-3 no-scrollbar pb-2">
-        <!-- ESL-GQ90 -->
-        <div class="min-w-[260px] bg-white dark:bg-slate-900 rounded-xl overflow-hidden shadow-sm border border-slate-200 dark:border-slate-800">
-          <div class="h-36 bg-cover bg-center bg-slate-200 dark:bg-slate-800" style="background-image: url(&quot;/assets/images/products/esl-gq90.webp&quot;)"></div>
-          <div class="p-3">
-            <h3 class="font-bold text-sm mb-1" data-i18n="product_esl_gq90_name">ESL-GQ90 全自动语音炒菜机</h3>
-            <p class="text-xs text-slate-500 mb-2" data-i18n="product_esl_gq90_desc">900mm大容量全自动语音智能炒菜机，单锅日产500+份。</p>
-            <span class="text-xs font-bold text-primary" data-i18n="home_hw_learn_more">了解更多</span>
-          </div>
-        </div>
-        <!-- ESL-XC120 -->
-        <div class="min-w-[260px] bg-white dark:bg-slate-900 rounded-xl overflow-hidden shadow-sm border border-slate-200 dark:border-slate-800">
-          <div class="h-36 bg-cover bg-center bg-slate-200 dark:bg-slate-800" style="background-image: url(&quot;/assets/images/products/esl-xc120.webp&quot;)"></div>
-          <div class="p-3">
-            <h3 class="font-bold text-sm mb-1" data-i18n="product_esl_xc120_name">ESL-XC120 搅拌炒锅炖烩机</h3>
-            <p class="text-xs text-slate-500 mb-2" data-i18n="product_esl_xc120_desc">120L大容量搅拌炒锅，集翻炒、炖煮、烩制于一体。</p>
-            <span class="text-xs font-bold text-primary" data-i18n="home_hw_learn_more">了解更多</span>
-          </div>
-        </div>
-        <!-- ESL-GB80 -->
-        <div class="min-w-[260px] bg-white dark:bg-slate-900 rounded-xl overflow-hidden shadow-sm border border-slate-200 dark:border-slate-800">
-          <div class="h-36 bg-cover bg-center bg-slate-200 dark:bg-slate-800" style="background-image: url(&quot;/assets/images/products/esl-gb80.webp&quot;)"></div>
-          <div class="p-3">
-            <h3 class="font-bold text-sm mb-1" data-i18n="product_esl_gb80_name">ESL-GB80 座地式电磁爆炒机</h3>
-            <p class="text-xs text-slate-500 mb-2" data-i18n="product_esl_gb80_desc">座地式电磁加热爆炒机，还原铁锅爆炒口感。</p>
-            <span class="text-xs font-bold text-primary" data-i18n="home_hw_learn_more">了解更多</span>
-          </div>
-        </div>
-        <!-- Y50 -->
-        <div class="min-w-[260px] bg-white dark:bg-slate-900 rounded-xl overflow-hidden shadow-sm border border-slate-200 dark:border-slate-800">
-          <div class="h-36 bg-cover bg-center bg-slate-200 dark:bg-slate-800" style="background-image: url(&quot;/assets/images/products/y50-fryer.webp&quot;)"></div>
-          <div class="p-3">
-            <h3 class="font-bold text-sm mb-1" data-i18n="product_y50_name">Y50 升降油炸炉</h3>
-            <p class="text-xs text-slate-500 mb-2" data-i18n="product_y50_desc">50L大容量电加热升降油炸炉，精准控温。</p>
-            <span class="text-xs font-bold text-primary" data-i18n="home_hw_learn_more">了解更多</span>
-          </div>
-        </div>
-      </div>
+      <!-- Dynamic Home Core Products (rendered by home-core-products.js) -->
+      <div id="home-core-products-mobile"></div>
     </div>
   </section>
 
@@ -368,9 +332,13 @@ if(localStorage.getItem('darkMode')==='true')document.documentElement.classList.
     <script defer src="/assets/js/ui/page-effects.js"></script>
     <script defer src="/assets/js/ui/form-interactions.js"></script>
 <script defer src="/assets/js/page-interactions.js"></script>
+<script defer src="/assets/js/product-data-table.js"></script>
+<script defer src="/assets/js/home-core-products.js?v=20260429"></script>
 <script>
   document.addEventListener('DOMContentLoaded', function () {
     if (window.translationManager) window.translationManager.initialize();
+    // Initialize home core products rendering
+    if (window.renderHomeCoreMobile) window.renderHomeCoreMobile('home-core-products-mobile');
   });
 </script>
 
