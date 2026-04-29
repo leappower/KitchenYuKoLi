@@ -923,20 +923,19 @@
   function renderPostsPage(area) {
     area.innerHTML = '<div class="fade-in">' +
       '<div class="flex items-center gap-3 mb-4" style="flex-wrap:wrap">' +
-      '<select id="posts-cat-filter" style="width:auto;background:#1e293b;color:#e2e8f0;border:1px solid #334155;border-radius:0.5rem;padding:0.4rem 0.6rem;font-size:0.85rem">' +
+      '<select id="posts-cat-filter" style="width:auto">' +
         '<option value="all">全部分类</option><option value="news">新闻</option><option value="case">案例</option></select>' +
-      '<select id="posts-active-filter" style="width:auto;background:#1e293b;color:#e2e8f0;border:1px solid #334155;border-radius:0.5rem;padding:0.4rem 0.6rem;font-size:0.85rem">' +
+      '<select id="posts-active-filter" style="width:auto">' +
         '<option value="all">全部状态</option><option value="1">已发布</option><option value="0">草稿</option></select>' +
-      '<input id="posts-search" type="text" placeholder="搜索标题..." style="flex:1;min-width:150px;background:#1e293b;color:#e2e8f0;border:1px solid #334155;border-radius:0.5rem;padding:0.4rem 0.6rem;font-size:0.85rem">' +
+      '<input id="posts-search" type="text" placeholder="搜索标题..." style="flex:1;min-width:150px">' +
       '<button class="btn-primary ml-auto" onclick="CMS.openPostForm()">+ 新建文章</button></div>' +
-      '<div style="overflow-x:auto"><table class="w-full text-sm" style="border-collapse:collapse">' +
-        '<thead><tr style="background:#1e293b;color:#94a3b8;text-align:left">' +
-          '<th style="padding:0.6rem 0.75rem;border-bottom:1px solid #334155">标题</th>' +
-          '<th style="padding:0.6rem 0.75rem;border-bottom:1px solid #334155;width:140px">Slug</th>' +
-          '<th style="padding:0.6rem 0.75rem;border-bottom:1px solid #334155;width:80px">分类</th>' +
-          '<th style="padding:0.6rem 0.75rem;border-bottom:1px solid #334155;width:80px">状态</th>' +
-          '<th style="padding:0.6rem 0.75rem;border-bottom:1px solid #334155;width:110px">发布时间</th>' +
-          '<th style="padding:0.6rem 0.75rem;border-bottom:1px solid #334155;width:180px;text-align:right">操作</th>' +
+      '<div class="card" style="overflow:hidden"><table><thead style="background:#f9fafb"><tr>' +
+          '<th>标题</th>' +
+          '<th style="width:140px">Slug</th>' +
+          '<th style="width:80px">分类</th>' +
+          '<th style="width:80px">状态</th>' +
+          '<th style="width:110px">发布时间</th>' +
+          '<th style="width:180px;text-align:right">操作</th>' +
         '</tr></thead><tbody id="posts-tbody"></tbody></table></div>' +
       '<div id="posts-pagination" class="flex items-center justify-center gap-2 mt-4"></div>' +
       '<div id="posts-empty" class="py-16 text-center text-gray-400" style="display:none">暂无文章</div></div>';
