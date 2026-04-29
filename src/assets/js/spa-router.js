@@ -717,6 +717,11 @@
         scripts.push({ src: "/assets/js/ui/pi-roi.js", id: "spa-pi-roi" });
       }
 
+      // Support 页面需要 support-wechat-modal.js（微信二维码弹窗）
+      if (path.indexOf("/support/") !== -1) {
+        scripts.push({ src: "/assets/js/support-wechat-modal.js", id: "spa-support-wechat-modal" });
+      }
+
       // Maps 页面需要 pi-maps.js
       if (path.indexOf("/support/installation/") !== -1) {
         scripts.push({ src: "/assets/js/ui/pi-maps.js", id: "spa-pi-maps" });
