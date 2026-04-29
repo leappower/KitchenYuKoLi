@@ -706,6 +706,7 @@
 
     // 页面专属脚本映射（SPA 导航时按需加载）
     loadPageScripts: function(pagePath) {
+      console.log("[SPARouter] loadPageScripts called with:", pagePath);
       var scripts = [];
       var path = pagePath.replace(/\/index-(pc|mobile|tablet)\.html$/, "/");
 
@@ -717,8 +718,10 @@
         scripts.push({ src: "/assets/js/ui/pi-roi.js", id: "spa-pi-roi" });
       }
 
+      console.log("[SPARouter] loadPageScripts path:", path);
       // Support 页面需要 support-wechat-modal.js（微信二维码弹窗）
       if (path.indexOf("/support/") !== -1) {
+        console.log("[SPARouter] adding support-wechat-modal.js");
         scripts.push({ src: "/assets/js/support-wechat-modal.js", id: "spa-support-wechat-modal" });
       }
 

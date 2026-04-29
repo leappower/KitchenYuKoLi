@@ -469,9 +469,11 @@
     requestAnimationFrame(initCardTransitions);
   }
 
+  function runInit() { init(); }
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', init);
+    document.addEventListener('DOMContentLoaded', runInit);
   } else {
-    init();
+    runInit();
   }
+  document.addEventListener('spa:load', runInit);
 })();

@@ -1,38 +1,63 @@
 (function () {
   'use strict';
+  console.log('[WeChatModal] script loaded');
 
-  var QR_IMAGE = '/assets/images/wechat-qr.png';
+  var QR_IMAGE = '/assets/images/wechat-qr.webp';
   var TITLE = '微信扫码添加';
   var SUBTITLE = '添加企业微信，获取专属售后支持';
 
   var overlay = null;
   var scrollLocked = false;
+  var _savedScrollY = 0;
 
   function lockScroll() {
     if (scrollLocked) return;
     scrollLocked = true;
-    var y = window.scrollY;
-    document.body.style.position = 'fixed';
-    document.body.style.top = '-' + y + 'px';
-    document.body.style.left = '0';
-    document.body.style.right = '0';
+    _savedScrollY = window.scrollY;
+    // Use overflow:hidden on html + body to prevent scroll without layout shift
+    var html = document.documentElement;
+    html.style.overflow = 'hidden';
+    html.style.height = '100%';
     document.body.style.overflow = 'hidden';
-    document.body.dataset.scrollY = y;
+    document.body.style.height = '100%';
+    // Compensate for scrollbar disappearing
+    var scrollbarWidth = window.innerWidth - html.clientWidth;
+    if (scrollbarWidth > 0) {
+      document.body.style.paddingRight = scrollbarWidth + 'px';
+      document.body.style.boxSizing = 'border-box';
+    }
   }
 
   function unlockScroll() {
     if (!scrollLocked) return;
     scrollLocked = false;
-    var y = parseInt(document.body.dataset.scrollY || '0', 10);
-    document.body.style.position = '';
-    document.body.style.top = '';
-    document.body.style.left = '';
-    document.body.style.right = '';
+    var html = document.documentElement;
+    html.style.overflow = '';
+    html.style.height = '';
     document.body.style.overflow = '';
-    window.scrollTo(0, y);
+    document.body.style.height = '';
+    document.body.style.paddingRight = '';
+    document.body.style.boxSizing = '';
+    window.scrollTo(0, _savedScrollY);
   }
 
-  function createModal() {
+  // Responsive QR size: bigger on larger screens
+    function getQRSize() {
+      var vw = window.innerWidth;
+      if (vw >= 1280) return '20rem';   // xl: 320px
+      if (vw >= 1024) return '18rem';   // lg: 288px
+      if (vw >= 768)  return '16rem';   // md: 256px
+      return '14rem';                    // sm: 224px
+    }
+
+    function getCardMaxWidth() {
+      var vw = window.innerWidth;
+      if (vw >= 1280) return '28rem';   // xl
+      if (vw >= 1024) return '26rem';   // lg
+      return '22rem';                    // sm/md
+    }
+
+    function createModal() {
     overlay = document.createElement('div');
     overlay.setAttribute('role', 'dialog');
     overlay.setAttribute('aria-modal', 'true');
@@ -40,11 +65,11 @@
     overlay.style.cssText = 'position:fixed;inset:0;z-index:9999;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.6);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);opacity:0;transition:opacity .25s ease;';
 
     var card = document.createElement('div');
-    card.style.cssText = 'max-width:24rem;width:100%;margin:1rem;background:#fff;border-radius:1rem;overflow:hidden;box-shadow:0 25px 50px -12px rgba(0,0,0,0.25);transform:scale(0.9);transition:transform .25s ease;';
+    card.style.cssText = 'max-width:' + getCardMaxWidth() + ';width:100%;margin:1rem;background:#fff;border-radius:1rem;overflow:hidden;box-shadow:0 25px 50px -12px rgba(0,0,0,0.25);transform:scale(0.9);transition:transform .25s ease;';
     card.className = 'dark:bg-slate-900';
 
     var inner = document.createElement('div');
-    inner.style.cssText = 'position:relative;padding:1.5rem;text-align:center;';
+    inner.style.cssText = 'position:relative;padding:2rem 1.5rem;text-align:center;';
 
     // Close button
     var closeBtn = document.createElement('button');
@@ -73,10 +98,11 @@
     inner.appendChild(subtitle);
 
     // QR image
+    var qrSize = getQRSize();
     var img = document.createElement('img');
     img.src = QR_IMAGE;
     img.alt = TITLE;
-    img.style.cssText = 'width:12rem;height:12rem;object-fit:contain;border-radius:0.75rem;display:block;margin:0 auto;';
+    img.style.cssText = 'width:' + qrSize + ';height:' + qrSize + ';object-fit:contain;border-radius:0.75rem;display:block;margin:0 auto;';
     inner.appendChild(img);
 
     card.appendChild(inner);
@@ -105,8 +131,9 @@
     overlay.style.opacity = '0';
     overlay.querySelector('div').style.transform = 'scale(0.9)';
     setTimeout(function () {
-      overlay.style.display = 'none';
+      // Restore scroll position BEFORE hiding overlay to avoid jump
       unlockScroll();
+      overlay.style.display = 'none';
     }, 250);
   }
 
@@ -118,11 +145,33 @@
 
   document.addEventListener('keydown', onKeydown);
 
-  // Attach click handlers
-  document.querySelectorAll('[data-action="show-wechat-qr"]').forEach(function (el) {
-    el.addEventListener('click', function (e) {
-      e.preventDefault();
-      openModal();
+  // Attach click handlers (supports SPA re-navigation)
+  function bindClicks() {
+    var els = document.querySelectorAll('[data-action="show-wechat-qr"]');
+    console.log('[WeChatModal] bindClicks called, found', els.length, 'elements');
+    els.forEach(function (el) {
+      el.removeEventListener('click', handleClick);
+      el.addEventListener('click', handleClick);
+      console.log('[WeChatModal] bound click to', el.tagName, el.className.slice(0, 50));
     });
-  });
+  }
+  function handleClick(e) {
+    console.log('[WeChatModal] handleClick fired, overlay exists:', !!overlay);
+    e.preventDefault();
+    e.stopPropagation();
+    openModal();
+  }
+  function openModal() {
+    console.log('[WeChatModal] openModal called');
+    if (!overlay) createModal();
+    console.log('[WeChatModal] overlay display:', overlay.style.display, 'opacity:', overlay.style.opacity);
+    lockScroll();
+    overlay.style.display = 'flex';
+    void overlay.offsetHeight;
+    overlay.style.opacity = '1';
+    overlay.querySelector('div').style.transform = 'scale(1)';
+    console.log('[WeChatModal] modal opened');
+  }
+  bindClicks();
+  document.addEventListener('spa:load', bindClicks);
 })();
