@@ -58,7 +58,7 @@
 
   CMS.renderPagesPage = function(area) {
     CMS.currentPage = 'i18n';
-    document.getElementById('breadcrumb').textContent = '多语言与页面';
+    var bc = document.getElementById('breadcrumb'); if (bc) bc.textContent = '多语言与页面';
     var nav = document.getElementById('nav-menu');
     nav.querySelectorAll('.sidebar-link').forEach(function(b) { b.classList.remove('active'); });
     nav.querySelectorAll('.sidebar-link').forEach(function(b) { if (b.textContent.includes('多语言')) b.classList.add('active'); });

@@ -51,7 +51,8 @@
       if (item.disabled) return;
       currentPage = item.key;
       CMS.currentPage = currentPage;
-      document.getElementById('breadcrumb').textContent = item.label;
+      var bc = document.getElementById('breadcrumb');
+      if (bc) bc.textContent = item.label;
       nav.querySelectorAll('.sidebar-link').forEach(function(b) { b.classList.remove('active'); });
       btn.classList.add('active');
       closeSidebar();
