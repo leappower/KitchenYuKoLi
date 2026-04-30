@@ -12,7 +12,7 @@
   function _c() { return (global.Currency && global.Currency.getConfig()) || { symbol: '¥', unit: '万元', rate: 1 }; }
   function _fm(cny) {
     var cfg = _c(), local = cny * cfg.rate;
-    var uv = { '万元': 10000, '萬元': 10000, 'K': 1000, 'ล้าน': 1000000, 'Triệu': 1000000, 'Juta': 1000000, '万円': 10000, '백만': 1000000, 'Lakh': 100000, '': 1 };
+    var uv = global.Currency ? global.Currency.UNIT_VALUES : { '万元': 10000, '萬元': 10000, 'K': 1000, 'ล้าน': 1000000, 'Triệu': 1000000, 'Juta': 1000000, '万円': 10000, '백만': 1000000, 'Lakh': 100000, '': 1 };
     var unitVal = uv[cfg.unit] || 1;
     var val = local / unitVal;
     return val >= 100 ? Math.round(val) + cfg.unit : val.toFixed(1).replace(/\.0$/, '') + cfg.unit;
@@ -81,13 +81,20 @@
       '</div>';
   };
 
-  // Recalculate on language/currency change (input defaults updated by currency.js)
+  // Language change: do NOT auto-recalculate (input values stay CNY, recalc would produce
+  // inconsistent numbers). User can manually click calculate if they want to update.
+  // Just re-render if results exist, to pick up unit changes from _fm()
   global.addEventListener('languageChanged', function () {
-    setTimeout(function () {
-      if (document.getElementById('roi-results')) {
+    requestAnimationFrame(function () {
+      var el = document.getElementById('roi-results');
+      if (el && el.innerHTML) {
+        // Results exist — re-render to update unit labels (万元→K etc)
+        // but do NOT recalculate (input values unchanged)
+        // Note: _fm() already uses current Currency config, so just re-rendering
+        // the same CNY values will show correct local-currency display
         global.calculateROI();
       }
-    }, 300);
+    });
   });
 
 })(window);

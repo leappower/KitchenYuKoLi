@@ -158,15 +158,15 @@
                 callbacks: {
                   label: function (ctx) {
                     var cfg = window.Currency && window.Currency.getConfig();
-                    var sym = cfg ? cfg.symbol : '$';
-                    return ctx.dataset.label + ": " + sym + ctx.parsed.y.toFixed(0) + "k";
+                    if (!cfg) return ctx.dataset.label + ": " + ctx.parsed.y.toFixed(0) + "k";
+                    return ctx.dataset.label + ": " + ctx.parsed.y.toFixed(0) + (cfg.unit || 'K');
                   },
                 },
               },
             },
             scales: {
               x: { grid: { display: false }, ticks: { font: { size: 12, weight: "700" }, color: "#475569" } },
-              y: { grid: { color: "rgba(148,163,184,0.15)" }, ticks: { font: { size: 11, weight: "500" }, color: "#475569", callback: function (v) { var c = window.Currency && window.Currency.getConfig(); var s = c ? c.symbol : '$'; return s + v + "k"; } } },
+              y: { grid: { color: "rgba(148,163,184,0.15)" }, ticks: { font: { size: 11, weight: "500" }, color: "#475569", callback: function (v) { var c = window.Currency && window.Currency.getConfig(); var u = c ? (c.unit || 'K') : 'K'; return v + u; } } },
             },
           },
         });
@@ -227,21 +227,25 @@
     function updateCharts(annualSavings, labor, laborSavingRate) {
       if (!cumulativeChart && !laborCompareChart) return;
 
-      var annualK = annualSavings / 1000;
+      // 用 formatCurrencyWan 统一量级，chart Y 轴标签用 cfg.unit
+      var cfg = (window.Currency && window.Currency.getConfig()) || { rate: 1, unit: '万元' };
+      var unitVal = (window.Currency && window.Currency.UNIT_VALUES && window.Currency.UNIT_VALUES[cfg.unit]) || 10000;
+      var annualInUnit = (annualSavings * cfg.rate) / unitVal;
+      var laborInUnit = (labor * cfg.rate) / unitVal; // 始终以 K 为单位（chart 内部统一）
 
       var cumNetProfit = [
-        Math.round(annualK * 0.15),
-        Math.round(annualK * 0.45),
-        Math.round(annualK * 0.75),
-        Math.round(annualK * 1.1),
-        Math.round(annualK * 1.5),
+        Math.round(annualInUnit * 0.15),
+        Math.round(annualInUnit * 0.45),
+        Math.round(annualInUnit * 0.75),
+        Math.round(annualInUnit * 1.1),
+        Math.round(annualInUnit * 1.5),
       ];
       var cumBaseline = [
-        Math.round(annualK * 0.22),
-        Math.round(annualK * 0.22),
-        Math.round(annualK * 0.21),
-        Math.round(annualK * 0.23),
-        Math.round(annualK * 0.22),
+        Math.round(annualInUnit * 0.22),
+        Math.round(annualInUnit * 0.22),
+        Math.round(annualInUnit * 0.21),
+        Math.round(annualInUnit * 0.23),
+        Math.round(annualInUnit * 0.22),
       ];
 
       if (cumulativeChart) {
@@ -250,13 +254,13 @@
         cumulativeChart.update();
       }
 
-      var laborK = labor / 1000;
+      var laborVal = laborInUnit;
       var automatedMonths = [1, 3, 6, 9, 12, 18, 24].map(function (mo) {
         var factor = Math.max(1 - laborSavingRate * (mo / 24), 1 - laborSavingRate);
-        return parseFloat((laborK * factor).toFixed(1));
+        return parseFloat((laborVal * factor).toFixed(1));
       });
       var manualMonths = [1, 3, 6, 9, 12, 18, 24].map(function (mo) {
-        return parseFloat((laborK * (1 + (0.03 * mo) / 12)).toFixed(1));
+        return parseFloat((laborVal * (1 + (0.03 * mo) / 12)).toFixed(1));
       });
 
       if (laborCompareChart) {

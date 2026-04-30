@@ -132,7 +132,7 @@ var LANGUAGES = [
     hasTranslation: true,
     uiGroup: 'other',
     sortOrder: 11,
-    currency: { symbol: 'ر.س', code: 'SAR', rate: 0.52, unit: '' },
+    currency: { symbol: 'ر.س', code: 'SAR', rate: 0.52, unit: 'K' },
   },
 ];
 } // 结束重复加载保护
