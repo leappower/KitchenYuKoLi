@@ -7,6 +7,29 @@
 
   var STORE_KEY = 'PRODUCT_DATA_TABLE';
 
+  // ─── Data loader (fetch from API if not already loaded) ───────
+  var _dataLoaded = false;
+  var _dataCallbacks = [];
+
+  function loadFromAPI(callback) {
+    if (_dataLoaded) { callback(); return; }
+    _dataCallbacks.push(callback);
+    if (_dataCallbacks.length > 1) return; // already fetching
+    fetch('/api/cms/products-data', { cache: 'no-store' })
+      .then(function(r) { return r.json(); })
+      .then(function(data) {
+        window[STORE_KEY] = data;
+        _dataLoaded = true;
+        _dataCallbacks.forEach(function(cb) { cb(); });
+        _dataCallbacks = [];
+        window.dispatchEvent(new Event('product-data-ready'));
+      })
+      .catch(function(err) {
+        console.error('[ProductGrid] Failed to load product data:', err);
+        _dataCallbacks = [];
+      });
+  }
+
   function getCategories() {
     return Array.isArray(window[STORE_KEY]) ? window[STORE_KEY] : [];
   }
@@ -131,23 +154,54 @@
     '</article>';
   }
 
-  // ─── Grid rendering ────────────────────────────────────────────
+  // ─── Grid rendering with pagination ──────────────────────────
+  var _shownCount = {};
+  var PAGE_SIZE = 12; // products per page
 
   function renderGrid(containerId, renderer, maxCount) {
     var container = document.getElementById(containerId);
     if (!container) return;
     var products = getAllProducts();
     var total = products.length;
-    var show = Math.min(total, maxCount || 100);
-    container.innerHTML = products.slice(0, maxCount || 100).map(renderer).join('');
-    var loadMore = container.parentElement && container.parentElement.querySelector('[data-i18n="products_load_more"]')
-      || document.querySelector('[data-i18n="products_load_more"]');
-    if (loadMore) loadMore.style.display = total <= show ? 'none' : '';
+    var initial = Math.min(total, PAGE_SIZE);
+    _shownCount[containerId] = initial;
+    container.innerHTML = products.slice(0, initial).map(renderer).join('');
+    updateLoadMoreBtn(containerId, total, initial);
+    bindLoadMore(containerId, renderer, products);
+  }
+
+  function updateLoadMoreBtn(containerId, total, shown) {
+    var loadMore = document.querySelector('[data-i18n="products_load_more"]');
+    if (loadMore) loadMore.style.display = total <= shown ? 'none' : '';
+  }
+
+  function bindLoadMore(containerId, renderer, products) {
+    var loadMore = document.querySelector('[data-i18n="products_load_more"]');
+    if (!loadMore || loadMore._bound) return;
+    loadMore._bound = true;
+    loadMore.addEventListener('click', function() {
+      var container = document.getElementById(containerId);
+      if (!container) return;
+      var shown = _shownCount[containerId] || PAGE_SIZE;
+      var next = Math.min(shown + PAGE_SIZE, products.length);
+      _shownCount[containerId] = next;
+      // Append new products
+      container.innerHTML = products.slice(0, next).map(renderer).join('');
+      updateLoadMoreBtn(containerId, products.length, next);
+    });
   }
 
   // ─── Auto render ───────────────────────────────────────────────
 
   function autoRender() {
+    if (Array.isArray(window[STORE_KEY]) && window[STORE_KEY].length > 0) {
+      doRender();
+    } else {
+      loadFromAPI(doRender);
+    }
+  }
+
+  function doRender() {
     if (!getCategories().length) return;
     if (document.getElementById('product-list')) {
       renderGrid('product-list', renderMobile, 100);
@@ -368,10 +422,13 @@
   });
 
   document.addEventListener('spa:load', function() {
-    // Reset init flag for SPA navigation
+    // Reset init flag and pagination for SPA navigation
     document.querySelectorAll('.category-tab-container').forEach(function(el) {
       el._categoryTabsInit = false;
     });
+    _shownCount = {};
+    var loadMore = document.querySelector('[data-i18n="products_load_more"]');
+    if (loadMore) loadMore._bound = false;
     autoRender();
   });
 
