@@ -177,41 +177,24 @@
 
   // ── 监听语言切换事件 ──
   // languageChanged: 开始切换，用于清除缓存
-  // translationsApplied: i18n 翻译已应用到 DOM，此时再刷新币种标签
+  // ── 监听 i18n 事件 ──
+  // currency.js 是 defer 且排在 translations.js 之后，
+  // 加载时 translationManager 已存在，直接注册事件即可
   if (root.addEventListener) {
     root.addEventListener('languageChanged', function() {
       _invalidateCache();
     });
-    // 延迟监听 translationsApplied（translationManager 可能稍后初始化）
-    // 如果首次 translationsApplied 已错过，检测 isInitialized 补执行
- function listenApplied() {
-      if (root.translationManager && root.translationManager.on) {
-        // 如果 translationManager 已完成初始化（首次翻译已应用），立即刷新一次
-        if (root.translationManager.isInitialized) {
-          setTimeout(refreshCurrencyUI, 50);
-        }
-        root.translationManager.on('translationsApplied', function() {
-          // applyTranslations 内部用 requestAnimationFrame 替换 DOM，
-          // 所以需要在下一帧之后才能正确匹配新文本
-          requestAnimationFrame(function() {
-            refreshCurrencyUI();
-          });
-        });
-      } else {
-        setTimeout(listenApplied, 200);
+    if (root.translationManager && root.translationManager.on) {
+      // 首次翻译可能已完成，立即补刷新一次
+      if (root.translationManager.isInitialized) {
+        requestAnimationFrame(function() { refreshCurrencyUI(); });
       }
+      root.translationManager.on('translationsApplied', function() {
+        // applyTranslations 内部用 requestAnimationFrame 替换 DOM，
+        // 等下一帧再刷新币种标签
+        requestAnimationFrame(function() { refreshCurrencyUI(); });
+      });
     }
-    listenApplied();
-  }
-
-  // ── DOM Ready 时也执行一次 ──
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', function() {
-      // 延迟执行，确保 i18n 首次 applyTranslations 已完成
-      setTimeout(refreshCurrencyUI, 500);
-    });
-  } else {
-    setTimeout(refreshCurrencyUI, 100);
   }
 
   // ── SPA 导航后重新翻译+刷新币种 ──
