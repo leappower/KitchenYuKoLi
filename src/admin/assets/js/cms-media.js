@@ -9,7 +9,7 @@
   var showPreview = CMS._deps.showPreview;
 
   CMS.renderMedia = function(area) {
-    var typeFilterHtml = '<div class="flex items-center gap-2 mb-2">' +
+    var typeFilterHtml = '<div class="flex items-center gap-2">' +
       '<span class="text-xs text-gray-400 mr-1">类型:</span>' +
       '<button class="btn-primary media-type-btn active" data-filter="all" style="font-size:0.75rem;padding:0.3rem 0.6rem;border-radius:9999px">全部</button>' +
       '<button class="btn-ghost media-type-btn" data-filter="image" style="font-size:0.75rem;padding:0.3rem 0.6rem;border-radius:9999px">🖼️ 图片</button>' +
@@ -17,17 +17,20 @@
       '<button class="btn-ghost media-type-btn" data-filter="pdf" style="font-size:0.75rem;padding:0.3rem 0.6rem;border-radius:9999px">📄 PDF</button>' +
       '</div>';
 
-    var catFilterHtml = '<div class="flex items-center gap-2 mb-4 flex-wrap" id="category-filters">' +
+    var catFilterHtml = '<div class="flex items-center gap-2 flex-wrap" id="category-filters">' +
       '<span class="text-xs text-gray-400 mr-1">分类:</span>' +
       '<button class="btn-primary media-cat-btn active" data-cat="all" style="font-size:0.75rem;padding:0.3rem 0.6rem;border-radius:9999px">全部</button>' +
       '</div>';
 
-    area.innerHTML = '<div class="fade-in"><div class="flex items-center justify-between mb-4">' +
+    area.innerHTML = '<div class="fade-in">' +
+      '<div class="flex items-center justify-between mb-5">' +
       '<h2 class="text-lg font-semibold">媒体库</h2>' +
-      '<span class="text-sm text-gray-400" id="media-count"></span></div>' +
-      typeFilterHtml + catFilterHtml +
-      '<label class="btn-primary mb-3" style="cursor:pointer;display:inline-block">+ 上传文件' +
+      '<div class="flex items-center gap-3">' +
+      '<span class="text-sm text-gray-400" id="media-count"></span>' +
+      '<label class="btn-primary" style="cursor:pointer;display:inline-flex;align-items:center;gap:4px;font-size:0.8rem;padding:0.35rem 0.75rem;border-radius:8px">+ 上传文件' +
       '<input type="file" multiple accept="image/*,video/mp4,.pdf" style="display:none" id="media-upload"></label>' +
+      '</div></div>' +
+      '<div class="flex flex-col gap-3 mb-5">' + typeFilterHtml + catFilterHtml + '</div>' +
       '<div class="grid grid-cols-6 gap-3" id="media-grid"></div>' +
       '<div id="media-empty" class="py-16 text-center text-gray-400" style="display:none">暂无媒体文件</div></div>';
 
@@ -59,7 +62,7 @@
         var btn = document.createElement('button');
         btn.className = 'btn-ghost media-cat-btn';
         btn.setAttribute('data-cat', String(cat.id));
-        btn.style.cssText = 'font-size:0.75rem;padding:0.3rem 0.6rem;border-radius:9999px';
+        btn.style.cssText = 'font-size:0.75rem;padding:0.3rem 0.6rem;border-radius:9999px;margin:0 0.15rem';
         btn.textContent = cat.name + ' (' + cat.media_count + ')';
         btn.addEventListener('click', function() {
           container.querySelectorAll('.media-cat-btn').forEach(function(b) { b.classList.remove('btn-primary'); b.classList.add('btn-ghost'); b.classList.remove('active'); });
