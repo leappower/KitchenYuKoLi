@@ -732,18 +732,17 @@
     var srcVal = srcMap[key] || key;
     var meta = LANG_MAP[state.lang] || {};
 
-    api('/translate', {
+    api('/translate/texts', {
       method: 'POST',
       body: {
         texts: [srcVal],
         source_lang: 'zh-CN',
-        target_langs: [state.lang]
+        target_lang: state.lang
       }
     }).then(function(result) {
       if (result && result.translations && result.translations[0]) {
-        var t = result.translations[0];
-        var translated = t.name || t[meta.name] || '';
-        if (translated) {
+        var translated = result.translations[0];
+        if (translated && translated.trim()) {
           state.aiSuggestions[key] = translated;
           state.edits[key] = translated;
           state.expandedRow = key;
@@ -799,15 +798,15 @@
           var batch = keys.slice(idx, idx + BATCH_SIZE);
           var texts = batch.map(function(k) { return srcMap[k] || k; });
 
-          api('/translate', {
+          api('/translate/texts', {
             method: 'POST',
-            body: { texts: texts, source_lang: 'zh-CN', target_langs: [state.lang] }
+            body: { texts: texts, source_lang: 'zh-CN', target_lang: state.lang }
           }).then(function(result) {
-            if (result && result.translations) {
+            if (result && result.translations && Array.isArray(result.translations)) {
               result.translations.forEach(function(t, i) {
-                if (t && t.name) {
-                  state.edits[batch[i]] = t.name;
-                  state.aiSuggestions[batch[i]] = t.name;
+                if (t && t.trim()) {
+                  state.edits[batch[i]] = t;
+                  state.aiSuggestions[batch[i]] = t;
                   done++;
                 } else {
                   errors++;

@@ -526,4 +526,70 @@ ${texts.map((t, i) => `${i + 1}. ${t}`).join('\n')}
 }`;
 }
 
+// POST /translate/texts — pure text translation for i18n (not product-specific)
+router.post('/translate/texts', requireAuth, async (req, res) => {
+  try {
+    const { texts, source_lang, target_lang } = req.body;
+    if (!texts || !Array.isArray(texts) || texts.length === 0)
+      return res.status(400).json({ error: 'texts array is required' });
+    if (!target_lang)
+      return res.status(400).json({ error: 'target_lang is required' });
+
+    const srcName = SUPPORTED_LANGS[source_lang] || source_lang;
+    const tgtName = SUPPORTED_LANGS[target_lang] || target_lang;
+
+    const entries = texts.map(function(t, i) { return (i + 1) + '. ' + t; }).join('\n');
+
+    const prompt = '将以下网站UI文本从' + srcName + '翻译成' + tgtName + '。\n\n' +
+      '要求：\n' +
+      '1. 只输出JSON数组，不要包含任何其他文字或markdown代码块标记\n' +
+      '2. 翻译要简洁、专业、符合当地语言习惯\n' +
+      '3. 保留品牌名、专有名词、HTML标签不变\n' +
+      '4. 数字和单位保持原样\n' +
+      '5. 对话框、按钮、标题等UI文案要简短\n\n' +
+      entries + '\n\n' +
+      '输出JSON数组（与原文顺序对应）：\n["翻译1", "翻译2", ...]';
+
+    let translated = null;
+    let usedProvider = null;
+
+    for (const provider of providers) {
+      const wait = rateLimiter.waitMs;
+      if (wait > 0) await sleep(wait);
+
+      try {
+        const parsed = await callProvider(provider, prompt, config);
+        // parsed should be the raw JSON content string — try to extract array
+        let arr;
+        if (typeof parsed === 'string') {
+          try { arr = JSON.parse(parsed.replace(/^\x60\x60\x60json?\s*/, '').replace(/\s*\x60\x60\x60$/, '')); } catch(e) { arr = null; }
+        } else if (Array.isArray(parsed)) {
+          arr = parsed;
+        } else if (parsed && parsed.translations && Array.isArray(parsed.translations)) {
+          arr = parsed.translations;
+        }
+        if (Array.isArray(arr)) {
+          translated = arr;
+          usedProvider = provider.name + ' (' + provider.model + ')';
+          break;
+        }
+      } catch(e) {
+        // try next provider
+      }
+    }
+
+    if (!translated) {
+      return res.status(502).json({ error: '翻译服务暂不可用', translations: texts.map(function() { return ''; }) });
+    }
+
+    // Pad or trim to match texts length
+    while (translated.length < texts.length) translated.push('');
+    translated = translated.slice(0, texts.length);
+
+    res.json({ translations: translated, _meta: { provider: usedProvider } });
+  } catch(e) {
+    res.status(500).json({ error: e.message });
+  }
+});
+
 module.exports = { translateRoutes, SUPPORTED_LANGS };
