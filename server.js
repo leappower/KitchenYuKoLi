@@ -29,52 +29,25 @@ const {
 } = feishuProTables;
 
 // ─── API Server Proxy ───────────────────────────────────────────────
-// In dev, proxy /api/cms/* and /api/translations to KitchenYuKoLiServer.
-// In production, Caddy handles this — the server is not needed.
+// All API, admin, and upload requests go to KitchenYuKoLiServer.
+// Configurable via API_SERVER env var (default: http://127.0.0.1:8000).
 const API_SERVER = process.env.API_SERVER || 'http://127.0.0.1:8000';
 const { createProxyMiddleware } = require('http-proxy-middleware');
 
 const app = express();
 
-// API proxy — must be before static middleware and SPA fallback
-app.use('/api/cms', createProxyMiddleware({
+const apiProxy = createProxyMiddleware({
   target: API_SERVER,
   changeOrigin: true,
-  pathRewrite: { '^/api/cms': '/api/cms' },
+  pathFilter: ['/api/cms/**', '/api/translations/**', '/api/nav-config/**', '/admin/**'],
   logLevel: process.env.NODE_ENV !== 'production' ? 'warn' : 'silent',
   onError: (err, req, res) => {
-    console.error('[proxy] /api/cms error:', err.message);
+    console.error('[proxy] error:', err.message, req.path);
     if (!res.headersSent) res.status(502).json({ error: 'API server unavailable' });
   }
-}));
-
-app.use('/api/translations', createProxyMiddleware({
-  target: API_SERVER,
-  changeOrigin: true,
-  logLevel: process.env.NODE_ENV !== 'production' ? 'warn' : 'silent',
-  onError: (err, req, res) => {
-    console.error('[proxy] /api/translations error:', err.message);
-    if (!res.headersSent) res.status(502).json({ error: 'API server unavailable' });
-  }
-}));
-
-app.use('/api/nav-config', createProxyMiddleware({
-  target: API_SERVER,
-  changeOrigin: true,
-  logLevel: 'silent'
-}));
+});
+app.use(apiProxy);
 app.set('trust proxy', 1);
-
-// Proxy /admin (admin panel) and /admin/uploads (media files) to KitchenYuKoLiServer
-app.use('/admin', createProxyMiddleware({
-  target: API_SERVER,
-  changeOrigin: true,
-  logLevel: process.env.NODE_ENV !== 'production' ? 'warn' : 'silent',
-  onError: (err, req, res) => {
-    console.error('[proxy] /admin error:', err.message);
-    if (!res.headersSent) res.status(502).send('API server unavailable');
-  }
-}));
 
 // Strict CSP for main site
 // Remove problematic CORS headers after helmet (for non-HTTPS LAN origins)
