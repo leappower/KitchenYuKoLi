@@ -158,10 +158,7 @@
   var _shownCount = {};
 
   function getPageSize() {
-    var w = window.innerWidth || 1024;
-    if (w >= 1280) return 8;   // PC: 4 cols × 2 rows
-    if (w >= 768) return 6;    // Tablet: 3 cols × 2 rows
-    return 6;                 // Mobile: 2 cols × 3 rows
+    return 12;
   }
 
   function renderGrid(containerId, renderer, maxCount) {

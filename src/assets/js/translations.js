@@ -104,7 +104,6 @@
       console.error("[i18n] loadProductTranslations: FAILED for " + t + ":", i);
       return {}
     }), 15e3, "[i18n] loadProductTranslations timeout for " + t)
-    }), 15e3, "[i18n] loadProductTranslations timeout for " + t)
   }, r.prototype.mergeTranslations = function(t, e) {
     return Object.assign({}, t, e)
   }, r.prototype.normalizeTranslationKeys = function(t) {
