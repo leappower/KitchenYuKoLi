@@ -381,24 +381,24 @@
 
   // Re-render charts & recalculate on language/currency change
   global.addEventListener('languageChanged', function () {
+    // translationsApplied 已在 languageChanged 之前 emit（且内部用了 rAF），
+    // 所以需要等 2 帧：第 1 帧 applyTranslations 的 rAF 替换 DOM 文本，
+    // 第 2 帧 currency.js 的 rAF 更新输入框默认值
+    requestAnimationFrame(function () {
+      requestAnimationFrame(function () {
+        if (cumulativeChart) cumulativeChart.update();
+        if (laborCompareChart) laborCompareChart.update();
+        var recalcBtn = document.getElementById('roi-recalc-btn');
+        if (recalcBtn) recalcBtn.click();
+      });
+    });
+  });
+
+  // Also recalculate after SPA navigation (new DOM, need fresh values)
+  document.addEventListener('spa:load', function () {
     setTimeout(function () {
       if (cumulativeChart) cumulativeChart.update();
       if (laborCompareChart) laborCompareChart.update();
-    }, 150);
-    // Recalculate after currency.js refreshes input defaults (translationsApplied)
-    function _recalcAfterSwitch() {
-      if (global.translationManager && global.translationManager.on) {
-        global.translationManager.once('translationsApplied', function () {
-          var recalcBtn = document.getElementById('roi-recalc-btn');
-          if (recalcBtn) recalcBtn.click();
-        });
-      } else {
-        setTimeout(function () {
-          var recalcBtn = document.getElementById('roi-recalc-btn');
-          if (recalcBtn) recalcBtn.click();
-        }, 300);
-      }
-    }
-    _recalcAfterSwitch();
+    }, 200);
   });
 })(window);
