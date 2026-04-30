@@ -219,7 +219,11 @@
           setTimeout(refreshCurrencyUI, 50);
         }
         root.translationManager.on('translationsApplied', function() {
-          refreshCurrencyUI();
+          // applyTranslations 内部用 requestAnimationFrame 替换 DOM，
+          // 所以需要在下一帧之后才能正确匹配新文本
+          requestAnimationFrame(function() {
+            refreshCurrencyUI();
+          });
         });
       } else {
         setTimeout(listenApplied, 200);
@@ -240,10 +244,9 @@
 
   // ── SPA 导航后重新翻译+刷新币种 ──
   document.addEventListener('spa:load', function() {
-    // 先让 translationManager 翻译新注入的 data-i18n 元素
     if (root.translationManager && root.translationManager.isInitialized) {
       root.translationManager.applyTranslations().then(function() {
-        refreshCurrencyUI();
+        requestAnimationFrame(function() { refreshCurrencyUI(); });
       }).catch(function() {
         setTimeout(refreshCurrencyUI, 300);
       });
