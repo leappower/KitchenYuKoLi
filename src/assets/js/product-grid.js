@@ -175,7 +175,12 @@
     var categories = [];
     getCategories().forEach(function(cat) {
       var name = cat.categoryName || cat.category;
-      if (name) categories.push({ key: cat.category, name: name });
+      if (name) {
+        // Translate category if it's an i18n key (e.g. nav_products_stirfry)
+        var translated = (typeof window.t === 'function') ? window.t(cat.category) : null;
+        var label = (translated && translated !== cat.category) ? translated : name;
+        categories.push({ key: cat.category, name: label });
+      }
     });
     if (!categories.length) return;
 

@@ -24,8 +24,13 @@
   };
 
   function getCategoryI18nKey(category) {
+    // Support both i18n keys (nav_products_stirfry) and Chinese category names
+    if (!category) return 'filter_unknown';
+    // If it's already an i18n key (nav_products_xxx), use directly
+    if (category.indexOf('nav_products_') === 0 || category.indexOf('nav_') === 0) return category;
+    // Legacy: Chinese name → slug mapping
     var slug = CATEGORY_SLUG_MAP[category];
-    return slug ? "filter_" + slug : "filter_" + category;
+    return slug ? 'filter_' + slug : 'filter_' + category;
   }
 
   function getImageAssets() {

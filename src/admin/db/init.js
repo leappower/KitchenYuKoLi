@@ -183,6 +183,11 @@ function initDatabase() {
     );
   `);
 
+  // Auto-migration: add product_id to media_library if missing
+  try {
+    db.exec(`ALTER TABLE media_library ADD COLUMN product_id INTEGER REFERENCES products(id) ON DELETE SET NULL`);
+  } catch(e) { /* column already exists */ }
+
   // Auto-migration: add tier column if missing
   try {
     db.exec(`ALTER TABLE products ADD COLUMN tier TEXT DEFAULT ''`);
