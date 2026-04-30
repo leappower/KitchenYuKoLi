@@ -28,46 +28,55 @@ const {
   validateFeishuConfig
 } = feishuProTables;
 
+// ─── API Server Proxy ───────────────────────────────────────────────
+// In dev, proxy /api/cms/* and /api/translations to KitchenYuKoLiServer.
+// In production, Caddy handles this — the server is not needed.
+const API_SERVER = process.env.API_SERVER || 'http://127.0.0.1:8000';
+const { createProxyMiddleware } = require('http-proxy-middleware');
+
 const app = express();
+
+// API proxy — must be before static middleware and SPA fallback
+app.use('/api/cms', createProxyMiddleware({
+  target: API_SERVER,
+  changeOrigin: true,
+  pathRewrite: { '^/api/cms': '/api/cms' },
+  logLevel: process.env.NODE_ENV !== 'production' ? 'warn' : 'silent',
+  onError: (err, req, res) => {
+    console.error('[proxy] /api/cms error:', err.message);
+    if (!res.headersSent) res.status(502).json({ error: 'API server unavailable' });
+  }
+}));
+
+app.use('/api/translations', createProxyMiddleware({
+  target: API_SERVER,
+  changeOrigin: true,
+  logLevel: process.env.NODE_ENV !== 'production' ? 'warn' : 'silent',
+  onError: (err, req, res) => {
+    console.error('[proxy] /api/translations error:', err.message);
+    if (!res.headersSent) res.status(502).json({ error: 'API server unavailable' });
+  }
+}));
+
+app.use('/api/nav-config', createProxyMiddleware({
+  target: API_SERVER,
+  changeOrigin: true,
+  logLevel: 'silent'
+}));
 app.set('trust proxy', 1);
 
-// Security middleware with comprehensive protection
-// Admin panel needs relaxed security for CDN scripts (Tailwind, Alpine.js)
-app.use('/admin', (req, res, next) => {
-  // Remove restrictive headers that helmet may add elsewhere
-  const removeHeaders = [
-    'Cross-Origin-Embedder-Policy',
-    'Cross-Origin-Opener-Policy',
-    'Origin-Agent-Cluster',
-    'Strict-Transport-Security',
-  ];
-  const origSetHeader = res.setHeader.bind(res);
-  res.setHeader = function(name, value) {
-    if (removeHeaders.includes(name)) return this;
-    return origSetHeader(name, value);
-  };
+// Proxy /admin (admin panel) and /admin/uploads (media files) to KitchenYuKoLiServer
+app.use('/admin', createProxyMiddleware({
+  target: API_SERVER,
+  changeOrigin: true,
+  logLevel: process.env.NODE_ENV !== 'production' ? 'warn' : 'silent',
+  onError: (err, req, res) => {
+    console.error('[proxy] /admin error:', err.message);
+    if (!res.headersSent) res.status(502).send('API server unavailable');
+  }
+}));
 
-  helmet({
-    contentSecurityPolicy: {
-      directives: {
-        defaultSrc: ['\'self\''],
-        styleSrc: ['\'self\'', '\'unsafe-inline\''],
-        fontSrc: ['\'self\''],
-        scriptSrc: ['\'self\'', '\'unsafe-inline\'', '\'unsafe-eval\''],
-        scriptSrcAttr: ['\'unsafe-inline\''],
-        imgSrc: ['\'self\'', 'data:', 'https:', 'http:'],
-        connectSrc: ['\'self\''],
-        upgradeInsecureRequests: null,
-      },
-    },
-    crossOriginEmbedderPolicy: false,
-    crossOriginOpenerPolicy: false,
-    originAgentCluster: false,
-    hsts: false,
-  })(req, res, next);
-});
-
-// Strict CSP for main site — skip /admin (handled above)
+// Strict CSP for main site
 // Remove problematic CORS headers after helmet (for non-HTTPS LAN origins)
 const REMOVE_COEP = ['Cross-Origin-Embedder-Policy', 'Cross-Origin-Opener-Policy', 'Origin-Agent-Cluster'];
 app.use((req, res, next) => {
@@ -193,13 +202,8 @@ app.use((req, res, next) => {
   next();
 });
 
-// CMS admin panel
-try {
-  const { initCMS } = require('./src/admin');
-  initCMS(app);
-} catch (e) {
-  console.warn('[CMS] Failed to initialize:', e.message);
-}
+// CMS admin panel — now served by KitchenYuKoLiServer via /admin proxy
+// (local admin removed — all data/API goes through API_SERVER)
 
 // Health check endpoint
 app.get('/health', (req, res) => {
