@@ -13,7 +13,7 @@ function importRoutes(db) {
   // Separate multer instance for import (single file, different field name)
   const importUpload = multer({
     dest: path.join(__dirname, '..', 'data', 'tmp'),
-    limits: { fileSize: 50 * 1024 * 1024 } // 50MB
+    limits: { fileSize: 500 * 1024 * 1024 } // 500MB (Excel with embedded images)
   });
 
   // Category mapping rules: model prefix → category_id

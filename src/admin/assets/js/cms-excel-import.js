@@ -23,8 +23,8 @@
 
       var file = fileInput.files[0];
       // File size check
-      if (file.size > 50 * 1024 * 1024) {
-        toast('文件过大 (' + (file.size / 1024 / 1024).toFixed(1) + 'MB)，最大支持 50MB', true);
+      if (file.size > 500 * 1024 * 1024) {
+        toast('文件过大 (' + (file.size / 1024 / 1024).toFixed(1) + 'MB)，最大支持 500MB', true);
         return;
       }
       var fd = new FormData();
@@ -63,8 +63,8 @@
         if (!fileInput.files[0]) { toast('请先选择文件', true); return; }
         var file = fileInput.files[0];
         // File size check (50MB limit)
-        if (file.size > 50 * 1024 * 1024) {
-          toast('文件过大 (' + (file.size / 1024 / 1024).toFixed(1) + 'MB)，最大支持 50MB', true);
+        if (file.size > 500 * 1024 * 1024) {
+          toast('文件过大 (' + (file.size / 1024 / 1024).toFixed(1) + 'MB)，最大支持 500MB', true);
           return;
         }
         var fd = new FormData();

@@ -92,6 +92,15 @@ function getProviders() {
   };
   if (lastResort.apiKey) providers.push(lastResort);
 
+  // 4th provider (additional fallback)
+  const fallback3 = {
+    apiKey: process.env.TRANSLATE_FALLBACK3_KEY,
+    apiUrl: (process.env.TRANSLATE_FALLBACK3_URL || 'https://api.openai.com/v1').replace(/\/\+$/, ''),
+    model: process.env.TRANSLATE_FALLBACK3_MODEL || 'gpt-4o-mini',
+    name: 'fallback3'
+  };
+  if (fallback3.apiKey) providers.push(fallback3);
+
   return providers;
 }
 
