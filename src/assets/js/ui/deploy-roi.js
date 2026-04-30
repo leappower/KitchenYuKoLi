@@ -81,4 +81,13 @@
       '</div>';
   };
 
+  // Recalculate on language/currency change (input defaults updated by currency.js)
+  global.addEventListener('languageChanged', function () {
+    setTimeout(function () {
+      if (document.getElementById('roi-results')) {
+        global.calculateROI();
+      }
+    }, 300);
+  });
+
 })(window);

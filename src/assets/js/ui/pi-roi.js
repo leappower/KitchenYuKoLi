@@ -69,6 +69,13 @@
     }
   }
 
+  // ─── Chart instances (module-level for language change re-render) ──
+  var cumulativeChart = null;
+  var laborCompareChart = null;
+  var CHART_PRIMARY = "rgb(236, 91, 19)";
+  var CHART_PRIMARY_A = "rgba(236, 91, 19, 0.15)";
+  var CHART_SLATE = "rgba(148, 163, 184, 0.6)";
+
   // ─── 7. ROI Calculator logic ──────────────────────────────────────────
   function initROICalculator() {
     var recalcBtn = document.getElementById("roi-recalc-btn");
@@ -96,11 +103,6 @@
     var deployStrategy = "phased";
 
     // ─── §2.3 Chart.js ──────────────────────────────────────────────────
-    var cumulativeChart = null;
-    var laborCompareChart = null;
-    var CHART_PRIMARY = "rgb(236, 91, 19)";
-    var CHART_PRIMARY_A = "rgba(236, 91, 19, 0.15)";
-    var CHART_SLATE = "rgba(148, 163, 184, 0.6)";
 
     // 销毁旧 Chart 实例（SPA 重复导航时 canvas 已被替换）
     if (typeof global.Chart !== "undefined") {
@@ -376,4 +378,27 @@
 
   document.addEventListener("DOMContentLoaded", function () { _roiInitialized = true; initROICalculator(); });
   document.addEventListener("spa:load", init);
+
+  // Re-render charts & recalculate on language/currency change
+  global.addEventListener('languageChanged', function () {
+    setTimeout(function () {
+      if (cumulativeChart) cumulativeChart.update();
+      if (laborCompareChart) laborCompareChart.update();
+    }, 150);
+    // Recalculate after currency.js refreshes input defaults (translationsApplied)
+    function _recalcAfterSwitch() {
+      if (global.translationManager && global.translationManager.on) {
+        global.translationManager.once('translationsApplied', function () {
+          var recalcBtn = document.getElementById('roi-recalc-btn');
+          if (recalcBtn) recalcBtn.click();
+        });
+      } else {
+        setTimeout(function () {
+          var recalcBtn = document.getElementById('roi-recalc-btn');
+          if (recalcBtn) recalcBtn.click();
+        }, 300);
+      }
+    }
+    _recalcAfterSwitch();
+  });
 })(window);
