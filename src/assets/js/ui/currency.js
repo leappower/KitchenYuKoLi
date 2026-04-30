@@ -4,10 +4,10 @@
  * 从 lang-registry 读取当前语言的币种配置，
  * 提供金额格式化和单位切换功能。
  *
- * 汇率基准：1 CNY = rate * local currency
- * 内部计算始终使用人民币（CNY），只在展示时换算。
+ * ⚠ 不做汇率换算：数字始终以 CNY 计算，
+ *    只切换显示符号和万位单位名称（万元→K→ล้าน…）。
  *
- * unit 说明：
+ * unit 说明（仅用于显示标签）：
  *   CNY: 万元 (10,000 CNY)
  *   USD: K (1,000 USD)
  *   THB: ล้าน (1,000,000 THB)
@@ -18,7 +18,7 @@
  *   KRW: 백만 (1,000,000 KRW)
  *   INR: Lakh (100,000 INR)
  *   TWD: 萬元 (10,000 TWD)
- *   SAR: (无万位单位，直接显示)
+ *   SAR: K (1,000 SAR)
  */
 
 'use strict';
@@ -85,15 +85,15 @@
   }
 
   /**
-   * 将人民币金额转换为当前币种的万位显示值
+   * 将金额转换为万位显示值（不做汇率换算，始终以 CNY 计算）
+   * 数字不变，只切换单位名称和符号。
    * @param {number} cnyAmount
    * @returns {{ value: number, display: string, symbol: string, unit: string }}
    */
   function formatCurrencyWan(cnyAmount) {
     var cfg = getConfig();
-    var localAmount = cnyAmount * cfg.rate;
-    var unitValue = UNIT_VALUES[cfg.unit] || 1;
-    var wanValue = localAmount / unitValue;
+    // 始终以 CNY 万元为基准，不换算汇率
+    var wanValue = cnyAmount / 10000;
     var sym = cfg.label || cfg.symbol;
 
     var display = wanValue >= 100
@@ -104,35 +104,32 @@
   }
 
   /**
-   * 格式化每月金额（非万位）
+   * 格式化金额（不做汇率换算，始终以 CNY 计算）
    * @param {number} cnyAmount
    * @returns {{ value: number, display: string, symbol: string }}
    */
   function formatCurrency(cnyAmount) {
     var cfg = getConfig();
-    var localAmount = cnyAmount * cfg.rate;
     var display;
-    if (localAmount >= 1000000) display = (localAmount / 1000000).toFixed(1).replace(/\.0$/, '') + 'M';
-    else if (localAmount >= 10000) display = (localAmount / 1000).toFixed(1).replace(/\.0$/, '') + 'K';
-    else display = Math.round(localAmount).toString();
-    return { value: localAmount, display: display, symbol: cfg.label || cfg.symbol };
+    if (cnyAmount >= 1000000) display = (cnyAmount / 1000000).toFixed(1).replace(/\.0$/, '') + 'M';
+    else if (cnyAmount >= 10000) display = (cnyAmount / 1000).toFixed(1).replace(/\.0$/, '') + 'K';
+    else display = Math.round(cnyAmount).toString();
+    return { value: cnyAmount, display: display, symbol: cfg.label || cfg.symbol };
   }
 
   /**
-   * 获取输入框的 placeholder 和默认值（按币种调整）
+   * 获取输入框的 placeholder 和默认值（不换算汇率）
    * @param {number} cnyDefault
    * @returns {{ placeholder: string, defaultValue: number, label: string }}
    */
   function getInputConfig(cnyDefault) {
     var cfg = getConfig();
-    var localDefault = Math.round(cnyDefault * cfg.rate);
-    return { placeholder: localDefault.toString(), defaultValue: localDefault, label: cfg.label || cfg.symbol };
+    return { placeholder: cnyDefault.toString(), defaultValue: cnyDefault, label: cfg.label || cfg.symbol };
   }
 
-  /** 将当地币种金额转换回人民币 */
-  function toCNY(localAmount) {
-    var cfg = getConfig();
-    return localAmount / cfg.rate;
+  /** identity — 不做汇率换算 */
+  function toCNY(amount) {
+    return amount;
   }
 
   // ── 语言切换时自动刷新币种相关 DOM ──

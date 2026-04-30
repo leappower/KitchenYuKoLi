@@ -217,7 +217,7 @@
             },
             scales: {
               x: { grid: { display: false }, ticks: { font: { size: 11 }, color: "#475569" } },
-              y: { grid: { color: "rgba(148,163,184,0.15)" }, ticks: { font: { size: 11, weight: "500" }, color: "#475569", callback: function (v) { var c = window.Currency && window.Currency.getConfig(); var s = c ? c.symbol : '$'; return s + v + "k"; } } },
+              y: { grid: { color: "rgba(148,163,184,0.15)" }, ticks: { font: { size: 11, weight: "500" }, color: "#475569", callback: function (v) { var c = window.Currency && window.Currency.getConfig(); var u = c ? (c.unit || 'K') : 'K'; return v + u; } } },
             },
           },
         });
@@ -227,11 +227,10 @@
     function updateCharts(annualSavings, labor, laborSavingRate) {
       if (!cumulativeChart && !laborCompareChart) return;
 
-      // 用 formatCurrencyWan 统一量级，chart Y 轴标签用 cfg.unit
+      // Chart 数据始终以 CNY 万元为单位，不换算汇率，只换标签
       var cfg = (window.Currency && window.Currency.getConfig()) || { rate: 1, unit: '万元' };
-      var unitVal = (window.Currency && window.Currency.UNIT_VALUES && window.Currency.UNIT_VALUES[cfg.unit]) || 10000;
-      var annualInUnit = (annualSavings * cfg.rate) / unitVal;
-      var laborInUnit = (labor * cfg.rate) / unitVal; // 始终以 K 为单位（chart 内部统一）
+      var annualInUnit = annualSavings / 10000; // CNY 万元
+      var laborInUnit = labor / 10000; // CNY 万元
 
       var cumNetProfit = [
         Math.round(annualInUnit * 0.15),

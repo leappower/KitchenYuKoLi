@@ -11,10 +11,9 @@
   // ── Currency helpers ──
   function _c() { return (global.Currency && global.Currency.getConfig()) || { symbol: '¥', unit: '万元', rate: 1 }; }
   function _fm(cny) {
-    var cfg = _c(), local = cny * cfg.rate;
-    var uv = global.Currency ? global.Currency.UNIT_VALUES : { '万元': 10000, '萬元': 10000, 'K': 1000, 'ล้าน': 1000000, 'Triệu': 1000000, 'Juta': 1000000, '万円': 10000, '백만': 1000000, 'Lakh': 100000, '': 1 };
-    var unitVal = uv[cfg.unit] || 1;
-    var val = local / unitVal;
+    var cfg = _c();
+    // 不做汇率换算，始终以 CNY 万元为基准
+    var val = cny / 10000;
     return val >= 100 ? Math.round(val) + cfg.unit : val.toFixed(1).replace(/\.0$/, '') + cfg.unit;
   }
   function _mu() { var u = _c().unit; return u ? '/' + u : '/月'; }
