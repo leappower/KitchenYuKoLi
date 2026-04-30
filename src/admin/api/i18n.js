@@ -56,7 +56,34 @@ function i18nRoutes(db) {
     }
   });
 
-  // PUT /i18n/batch — 批量更新翻译
+  // ─── Shared HTML key scanner ────────────────────────────────────
+  // Collects all unique data-i18n="..." keys from src/pages/
+  function scanHtmlKeys() {
+    var keys = {};
+    var pagesDir = path.join(LANG_DIR, '..', 'pages');
+    if (!fs.existsSync(pagesDir)) return keys;
+    walkDir(pagesDir, function(filePath) {
+      if (!/\.html?$/.test(filePath)) return;
+      var content = fs.readFileSync(filePath, 'utf-8');
+      var re = /data-i18n="([^"]+)"/g;
+      var m;
+      while ((m = re.exec(content)) !== null) {
+        keys[m[1]] = true;
+      }
+    });
+    return keys;
+  }
+
+  function walkDir(dir, cb) {
+    var entries = fs.readdirSync(dir, { withFileTypes: true });
+    for (var i = 0; i < entries.length; i++) {
+      var full = path.join(dir, entries[i].name);
+      if (entries[i].isDirectory()) walkDir(full, cb);
+      else cb(full);
+    }
+  }
+
+  // PUT /i18n/batch — 批量更新翻译（含去重校验）
   router.put('/i18n/batch', requireAdmin, (req, res) => {
     try {
       var lang = req.body.lang || 'zh-CN';
@@ -69,15 +96,31 @@ function i18nRoutes(db) {
 
       var data = JSON.parse(fs.readFileSync(file, 'utf-8'));
       var count = 0;
+      var warnings = [];
+
       updates.forEach(function(u) {
-        if (u.key && u.value !== undefined) {
-          data[u.key] = u.value;
-          count++;
+        if (!u.key || u.value === undefined) return;
+
+        // Dedup: if key already has a non-empty value and new value is empty, warn
+        if (u.key in data && data[u.key] && data[u.key].trim() && (!u.value || !u.value.trim())) {
+          warnings.push('key "' + u.key + '": overwriting non-empty value with empty');
         }
+
+        // JSON objects can't have duplicate keys, but guard anyway
+        var keyCount = 0;
+        for (var k in data) { if (k === u.key) keyCount++; }
+        if (keyCount > 1) {
+          warnings.push('key "' + u.key + '": duplicate detected in file (impossible in JSON, skipping)');
+          return;
+        }
+
+        data[u.key] = u.value;
+        count++;
       });
+
       fs.writeFileSync(file, JSON.stringify(data, null, 2) + '\n', 'utf-8');
-      logAudit(db, req.user.userId, req.user.username, 'update', 'i18n', null, null, { lang: lang, type: type, count: count });
-      res.json({ message: '已更新 ' + count + ' 条翻译', count: count });
+      logAudit(db, req.user.userId, req.user.username, 'update', 'i18n', null, null, { lang: lang, type: type, count: count, warnings: warnings });
+      res.json({ message: '已更新 ' + count + ' 条翻译', count: count, warnings: warnings.length ? warnings : undefined });
     } catch (e) {
       res.status(500).json({ error: e.message });
     }
@@ -356,6 +399,138 @@ function i18nRoutes(db) {
       if (!file) return res.status(404).json({ error: 'File not found' });
       var data = JSON.parse(fs.readFileSync(file, 'utf-8'));
       res.json(data);
+    } catch (e) {
+      res.status(500).json({ error: e.message });
+    }
+  });
+
+  // ─── i18n key stats & audit ─────────────────────────────────────
+
+  // GET /i18n/stats — per-language key stats, orphaned & missing keys
+  router.get('/i18n/stats', (req, res) => {
+    try {
+      var type = req.query.type || 'ui';
+      var htmlKeys = scanHtmlKeys();
+      var htmlKeySet = Object.keys(htmlKeys);
+
+      // Find all lang files matching *-{type}.json
+      var files = fs.readdirSync(LANG_DIR).filter(function(f) {
+        return f.endsWith('-' + type + '.json');
+      }).sort();
+
+      var stats = [];
+      var allOrphaned = {}; // keys in JSON but not HTML (union across all langs)
+      var allMissing = {};  // keys in HTML but not JSON (union across all langs)
+
+      files.forEach(function(f) {
+        var langCode = f.slice(0, -(type.length + 6)); // e.g. "zh-CN" from "zh-CN-ui.json"
+        var fp = path.join(LANG_DIR, f);
+        var data = JSON.parse(fs.readFileSync(fp, 'utf-8'));
+        var jsonKeys = Object.keys(data);
+        var emptyCount = 0;
+
+        jsonKeys.forEach(function(k) {
+          if (!data[k] || !String(data[k]).trim()) emptyCount++;
+        });
+
+        // Orphaned: in JSON but not in HTML
+        var orphaned = jsonKeys.filter(function(k) { return !htmlKeys[k]; });
+ orphaned.forEach(function(k) { allOrphaned[k] = true; });
+
+        // Missing: in HTML but not in JSON
+        var jsonSet = {};
+        jsonKeys.forEach(function(k) { jsonSet[k] = true; });
+        var missing = htmlKeySet.filter(function(k) { return !jsonSet[k]; });
+        missing.forEach(function(k) { allMissing[k] = true; });
+
+        stats.push({
+          file: f,
+          lang: langCode,
+          total_keys: jsonKeys.length,
+          empty_keys: emptyCount,
+          translated_keys: jsonKeys.length - emptyCount,
+          orphaned_keys: orphaned,
+          missing_keys: missing,
+          orphaned_count: orphaned.length,
+          missing_count: missing.length
+        });
+      });
+
+      var totalHtmlKeys = htmlKeySet.length;
+      var totalOrphaned = Object.keys(allOrphaned).length;
+      var totalMissing = Object.keys(allMissing).length;
+
+      // Coverage: for zh-CN, what % of HTML keys have non-empty translations
+      var srcStat = stats.find(function(s) { return s.lang === 'zh-CN'; });
+      var coveragePercent = 0;
+      if (srcStat && totalHtmlKeys > 0) {
+        var covered = totalHtmlKeys - srcStat.missing_count;
+        var coveredTranslated = covered - srcStat.orphaned_keys.filter(function(k) {
+          var v = JSON.parse(fs.readFileSync(path.join(LANG_DIR, srcStat.file), 'utf-8'))[k];
+          return !v || !String(v).trim();
+        }).length;
+        // simpler: keys in both HTML and JSON with non-empty value
+        var srcData = JSON.parse(fs.readFileSync(path.join(LANG_DIR, srcStat.file), 'utf-8'));
+        var matched = htmlKeySet.filter(function(k) { return srcData[k] && String(srcData[k]).trim(); });
+        coveragePercent = Math.round(matched.length / totalHtmlKeys * 1000) / 10;
+      }
+
+      res.json({
+        html_unique_keys: totalHtmlKeys,
+        total_orphaned: totalOrphaned,
+        total_missing: totalMissing,
+        coverage_percent: coveragePercent,
+        languages: stats
+      });
+    } catch (e) {
+      res.status(500).json({ error: e.message });
+    }
+  });
+
+  // POST /i18n/cleanup — remove orphaned keys from JSON files
+  router.post('/i18n/cleanup', requireAdmin, (req, res) => {
+    try {
+      var type = req.body.type || 'ui';
+      var dryRun = req.body.dry_run !== false; // default true
+      var htmlKeys = scanHtmlKeys();
+
+      var files = fs.readdirSync(LANG_DIR).filter(function(f) {
+        return f.endsWith('-' + type + '.json');
+      }).sort();
+
+      var results = [];
+      var totalRemoved = 0;
+
+      files.forEach(function(f) {
+        var fp = path.join(LANG_DIR, f);
+        var data = JSON.parse(fs.readFileSync(fp, 'utf-8'));
+        var keys = Object.keys(data);
+        var orphaned = keys.filter(function(k) { return !htmlKeys[k]; });
+
+        if (orphaned.length === 0) {
+          results.push({ file: f, removed: 0, orphaned: [] });
+          return;
+        }
+
+        if (dryRun) {
+          results.push({ file: f, removed: 0, orphaned: orphaned, note: 'dry_run' });
+        } else {
+          orphaned.forEach(function(k) { delete data[k]; });
+          fs.writeFileSync(fp, JSON.stringify(data, null, 2) + '\n', 'utf-8');
+          totalRemoved += orphaned.length;
+          results.push({ file: f, removed: orphaned.length, orphaned: orphaned });
+        }
+      });
+
+      logAudit(db, req.user.userId, req.user.username, 'cleanup', 'i18n', null, null, {
+        type: type, dry_run: dryRun, total_removed: totalRemoved
+      });
+
+      res.json({
+        dry_run: dryRun,
+        total_removed: totalRemoved,
+        files: results
+      });
     } catch (e) {
       res.status(500).json({ error: e.message });
     }
