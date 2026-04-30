@@ -4,6 +4,22 @@ const fs = require('fs');
 const path = require('path');
 const helmet = require('helmet');
 const rateLimit = require('express-rate-limit');
+
+// ─── Translation API config (load from .env if exists) ───────
+try {
+  const dotenv = require('dotenv');
+  dotenv.config();
+} catch(e) {}
+// Hardcoded fallback for translation env vars if .env missing
+if (!process.env.TRANSLATE_API_KEY && fs.existsSync('.env')) {
+  try {
+    const envContent = fs.readFileSync('.env', 'utf8');
+    envContent.split('\n').forEach(line => {
+      const match = line.match(/^([A-Z_]+)=(.*)$/);
+      if (match && !process.env[match[1]]) process.env[match[1]] = match[2].replace(/^['"]|['"]$/g, '');
+    });
+  } catch(e) {}
+}
 const { feishuProTables } = require('./scripts/generate-products-data-table.js');
 const {
   runFeishuSyncOnce,
