@@ -39,9 +39,9 @@ function importRoutes(db) {
     if (!specText) return {};
     var result = {};
     var rules = [
-      { field: 'power', patterns: [/功率[：:]*\s*([\d.]+\s*[kKmM]?[wW])/i, /额定功率[：:]*\s*([\d.]+\s*[kK]?[wW][\-–—]?[\d.]*)/i, /电功率[：:]*\s*([\d.]+\s*[kK]?[wW])/i] },
-      { field: 'voltage', patterns: [/额定电压[：:]*\s*([\d.]+\s*[vV][\/]?[\d.]*)/i, /电压[：:]*\s*([\d.]+\s*[vV])/i] },
-      { field: 'frequency', patterns: [/频率[：:]*\s*([\d.]+\s*[hH][zZ])/i, /[/]50Hz/i] },
+      { field: 'power', patterns: [/额定功率[：:]*\s*([\d.]+[wW]\s*[-–—~～]\s*[\d.]+[wW])/i, /额定功率[：:]*\s*([\d.]+\s*[-–—~～]\s*[\d.]+\s*[kKmM]?[wW])/i, /额定功率[：:]*\s*([\d.]+\s*[kKmM]?[wW])/i, /功率[：:]*\s*([\d.]+[wW]\s*[-–—~～]\s*[\d.]+[wW])/i, /功率[：:]*\s*([\d.]+\s*[-–—~～]\s*[\d.]+\s*[kKmM]?[wW])/i, /功率[：:]*\s*([\d.]+\s*[kKmM]?[wW])/i, /电功率[：:]*\s*([\d.]+\s*[kKmM]?[wW])/i] },
+      { field: 'voltage', patterns: [/额定电压[：:]*\s*([\d.]+[vV]\s*[-–—~～]\s*[\d.]+[vV])/i, /额定电压[：:]*\s*([\d.]+\s*[vV][\/]?[\d]*)/i, /电压[：:]*\s*([\d.]+[vV]\s*[-–—~～]\s*[\d.]+[vV])/i, /电压[：:]*\s*([\d.]+\s*[vV][\/]?[\d]*)/i] },
+      { field: 'frequency', patterns: [/频率[：:]*\s*([\d.]+[hH][zZ]\s*[-–—~～]\s*[\d.]+[hH][zZ])/i, /频率[：:]*\s*([\d.]+[\/]\s*[\d.]+\s*[hH][zZ])/i, /频率[：:]*\s*([\d.]+\s*[hH][zZ])/i, /[/]50Hz/i] },
       { field: 'material', patterns: [/锅体材质[：:]*\s*([^\n，,]+)/, /产品材质[：:]*\s*([^\n，,]+)/, /水箱材质[：:]*\s*([^\n，,]+)/, /材质[：:]*\s*([^\n，,]+)/] },
       { field: 'throughput', patterns: [/产能[：:]*\s*([^\n。]+)/, /产品产能[：:]*\s*([^\n。]+)/, /炒菜重量[：:]*\s*([^\n，,]+)/] },
       { field: 'control_method', patterns: [/操作方式[：:]*\s*([^\n，,]+)/, /控制方式[：:]*\s*([^\n，,]+)/, /控制面板[：:]*\s*([^\n，,]+)/] },
