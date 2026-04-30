@@ -22,7 +22,7 @@
     'zh-TW': { name: '繁體中文', flag: '🇹🇼', dir: 'ltr' }
   };
 
-  var PAGE_SIZE = 20;
+  var PAGE_SIZE = 200;
 
   // ─── State ─────────────────────────────────────────────────────────
   var state = {
