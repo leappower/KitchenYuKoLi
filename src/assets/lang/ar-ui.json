@@ -2408,5 +2408,8 @@
   "support_warranty_unified_f2_title": "",
   "support_warranty_unified_f3_desc": "",
   "support_warranty_unified_f3_title": "",
-  "support_warranty_unified_title": ""
+  "support_warranty_unified_title": "",
+  "quote_budget_5w_10w": "26K - 52K SAR",
+  "quote_budget_10w_30w": "52K - 156K SAR",
+  "quote_budget_30w_50w": "156K - 260K SAR"
 }

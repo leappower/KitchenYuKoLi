@@ -2408,5 +2408,8 @@
   "support_warranty_unified_f2_title": "",
   "support_warranty_unified_f3_desc": "",
   "support_warranty_unified_f3_title": "",
-  "support_warranty_unified_title": ""
+  "support_warranty_unified_title": "",
+  "quote_budget_5w_10w": "RM 32.5K - 65K",
+  "quote_budget_10w_30w": "RM 65K - 195K",
+  "quote_budget_30w_50w": "RM 195K - 325K"
 }

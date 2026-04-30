@@ -29,7 +29,7 @@
   "about_advantage_capacity": "500 Servings/Batch",
   "about_advantage_capacity_desc": "800+ smart recipes, one-touch cooking. No dependency on chef mood or skill. Bangkok, Jakarta, KL — same brand, same taste.",
   "about_advantage_energy": "Energy Efficiency",
-  "about_advantage_energy_desc": "Electromagnetic induction ≥90% thermal efficiency, saving 50-60% vs gas. A 15kW unit saves ~¥26,000/year in fuel.",
+  "about_advantage_energy_desc": "Electromagnetic induction ≥90% thermal efficiency, saving 50-60% vs gas. A 15kW unit saves ~2.6万元/year in fuel.",
   "about_advantage_labor": "Save 70% Labor",
   "about_advantage_labor_desc": "One kitchen worker manages 2-5 machines easily. ROI in 3-6 months. No more hiring/keeping chefs.",
   "about_badge": "About YuKoLi",
@@ -1020,11 +1020,11 @@
   "quote_after_sales_desc": "Installation guidance, operation training and ongoing technical support.",
   "quote_btn_submit": "Submit Request",
   "quote_btn_submit_inquiry": "Submit Inquiry",
-  "quote_budget_50w_plus": "Over 500K RMB",
-  "quote_budget_5k_15k": "$5k - $15k",
+  "quote_budget_50w_plus": "Over 500K",
+  "quote_budget_5k_15k": "50K - 100K",
   "quote_budget_consult": "Consult (no set budget yet)",
   "quote_budget_range": "Budget Range",
-  "quote_budget_under_5k": "Under $5k",
+  "quote_budget_under_5k": "Under 50K",
   "quote_capacity_enterprise": "Chain/Central Kitchen (500+ servings/meal)",
   "quote_capacity_large": "Large Restaurant/Canteen (200-500 servings/meal)",
   "quote_capacity_medium": "Medium Restaurant (50-200 servings/meal)",
@@ -2408,5 +2408,8 @@
   "unit_precision": "Precision",
   "unit_temp_control": "Control",
   "unit_timer": "Timer",
-  "unit_trays": "Trays"
+  "unit_trays": "Trays",
+  "quote_budget_5w_10w": "50K - 100K RMB",
+  "quote_budget_10w_30w": "100K - 300K RMB",
+  "quote_budget_30w_50w": "300K - 500K RMB"
 }

@@ -2408,5 +2408,8 @@
   "support_warranty_unified_f2_title": "",
   "support_warranty_unified_f3_desc": "",
   "support_warranty_unified_f3_title": "",
-  "support_warranty_unified_title": ""
+  "support_warranty_unified_title": "",
+  "quote_budget_5w_10w": "Rp 110M - 220M",
+  "quote_budget_10w_30w": "Rp 220M - 660M",
+  "quote_budget_30w_50w": "Rp 660M - 1.1B"
 }

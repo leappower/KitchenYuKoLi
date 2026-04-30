@@ -2408,5 +2408,8 @@
   "support_warranty_unified_f2_title": "",
   "support_warranty_unified_f3_desc": "",
   "support_warranty_unified_f3_title": "",
-  "support_warranty_unified_title": ""
+  "support_warranty_unified_title": "",
+  "quote_budget_5w_10w": "940만 - 1,880만 원",
+  "quote_budget_10w_30w": "1,880만 - 5,640만 원",
+  "quote_budget_30w_50w": "5,640만 - 9,400만 원"
 }

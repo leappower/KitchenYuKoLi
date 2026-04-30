@@ -2408,5 +2408,8 @@
   "unit_precision": "精度",
   "unit_temp_control": "控温",
   "unit_timer": "定时",
-  "unit_trays": "层架"
+  "unit_trays": "层架",
+  "quote_budget_5w_10w": "5万-10万 人民币",
+  "quote_budget_10w_30w": "10万-30万 人民币",
+  "quote_budget_30w_50w": "30万-50万 人民币"
 }
