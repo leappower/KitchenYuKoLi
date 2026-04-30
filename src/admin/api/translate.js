@@ -83,6 +83,15 @@ function getProviders() {
   };
   if (fallback.apiKey) providers.push(fallback);
 
+  // Last-resort provider (lighter model, high availability)
+  const lastResort = {
+    apiKey: process.env.TRANSLATE_FALLBACK2_KEY,
+    apiUrl: (process.env.TRANSLATE_FALLBACK2_URL || 'https://api.openai.com/v1').replace(/\/\+$/, ''),
+    model: process.env.TRANSLATE_FALLBACK2_MODEL || 'gpt-4o-mini',
+    name: 'last-resort'
+  };
+  if (lastResort.apiKey) providers.push(lastResort);
+
   return providers;
 }
 
