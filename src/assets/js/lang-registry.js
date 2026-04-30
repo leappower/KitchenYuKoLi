@@ -95,7 +95,7 @@ var LANGUAGES = [
     hasTranslation: true,
     uiGroup: 'east_asia',
     sortOrder: 7,
-    currency: { symbol: '¥', code: 'JPY', rate: 21, unit: '万円' },
+    currency: { symbol: '¥', code: 'JPY', rate: 21, unit: '万円', label: 'JP¥' },
   },
   {
     code: 'ko',

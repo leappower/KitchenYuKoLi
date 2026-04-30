@@ -94,12 +94,13 @@
     var localAmount = cnyAmount * cfg.rate;
     var unitValue = UNIT_VALUES[cfg.unit] || 1;
     var wanValue = localAmount / unitValue;
+    var sym = cfg.label || cfg.symbol;
 
     var display = wanValue >= 100
       ? Math.round(wanValue).toString()
       : wanValue.toFixed(1).replace(/\.0$/, '');
 
-    return { value: wanValue, display: display, symbol: cfg.symbol, unit: cfg.unit };
+    return { value: wanValue, display: display, symbol: sym, unit: cfg.unit };
   }
 
   /**
@@ -114,7 +115,7 @@
     if (localAmount >= 1000000) display = (localAmount / 1000000).toFixed(1).replace(/\.0$/, '') + 'M';
     else if (localAmount >= 10000) display = (localAmount / 1000).toFixed(1).replace(/\.0$/, '') + 'K';
     else display = Math.round(localAmount).toString();
-    return { value: localAmount, display: display, symbol: cfg.symbol };
+    return { value: localAmount, display: display, symbol: cfg.label || cfg.symbol };
   }
 
   /**
@@ -125,7 +126,7 @@
   function getInputConfig(cnyDefault) {
     var cfg = getConfig();
     var localDefault = Math.round(cnyDefault * cfg.rate);
-    return { placeholder: localDefault.toString(), defaultValue: localDefault, label: cfg.symbol };
+    return { placeholder: localDefault.toString(), defaultValue: localDefault, label: cfg.label || cfg.symbol };
   }
 
   /** 将当地币种金额转换回人民币 */
@@ -138,10 +139,11 @@
   function refreshCurrencyUI() {
     _invalidateCache();
     var cfg = getConfig();
+    var sym = cfg.label || cfg.symbol; // label 用于区分同符号币种（JP¥ vs ¥）
 
     // 1) 更新 [data-currency-symbol] 元素（输入框前缀 ¥ → $ 等）
     document.querySelectorAll('[data-currency-symbol]').forEach(function(el) {
-      el.textContent = cfg.symbol;
+      el.textContent = sym;
     });
 
     // 2) 更新 [data-currency-unit] 元素（万元/年 → K/yr 等）
@@ -163,8 +165,8 @@
         .replace(/[(（]\s*(RMB|USD|CNY|THB|VND|MYR|IDR|JPY|KRW|INR|TWD|SAR|人民币|新台幣|新台币|新加坡元|泰铢|越南盾|令吉|卢比|韩元|日元|沙特里亚尔|[¥$₹฿₫₩₤€£]+)\s*[)）]/g,
           function(match) {
             return match.indexOf('（') === 0
-              ? '（' + cfg.symbol + '）'
-              : '(' + cfg.symbol + ')';
+              ? '（' + sym + '）'
+              : '(' + sym + ')';
           })
         .replace(/\s+RMB\s*/g, ' ' + cfg.code + ' ')
         .replace(/\s+人民币\s*/g, ' ' + cfg.code + ' ')
