@@ -325,7 +325,7 @@
       // 一次性部署: 全套设备(3.2万/台), 覆盖80%工序, 节能22%, 82折
       var isPhased = deployStrategy === "phased";
       var laborSavingRate = isPhased ? 0.40 : 0.72;
-      var energySavingRate = isPhased ? 0.12 : 0.22;
+      var energySavingRate = isPhased ? 0.30 : 0.50;
       var machineCoverage = isPhased ? 0.50 : 0.80;
       var machinesPerOutlet = Math.ceil(chefs * machineCoverage);
       var machineCost = isPhased ? 15000 : 32000;
