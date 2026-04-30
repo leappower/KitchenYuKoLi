@@ -150,17 +150,25 @@
       // 匹配 "10K RMB/year"、"万元/年"、"K/yr" 等格式
       var m = t.match(/^(\d*[\.]?\d*)\s*(万元|萬元|K|M|Lakh|ล้าน|Triệu|Juta|万円|백만)?\s*(RMB|USD|CNY|THB|VND|MYR|IDR|JPY|KRW|INR|TWD|SAR)?\s*\/\s*(year|yr|年)$/i);
       if (m) {
-        el.textContent = cfg.unit + '/yr';
+        var num = m[1] || '';
+        el.textContent = (num ? num + ' ' : '') + cfg.unit + '/yr';
       } else {
         el.textContent = cfg.unit + '/yr';
       }
     });
 
-    // 2b) 更新 [data-currency-label] 元素，替换 (¥) / (RMB) / ($) 等
+    // 2b) 更新 [data-currency-label] 元素，替换括号内的币种文字/符号
     document.querySelectorAll('[data-currency-label]').forEach(function(el) {
       el.textContent = el.textContent
-        .replace(/[(（]\s*(RMB|USD|CNY|THB|VND|MYR|IDR|JPY|KRW|INR|TWD|SAR|[¥$₹฿₫₩₤€£]+)\s*[)）]/g, '(' + cfg.symbol + ')')
-        .replace(/\s+RMB\s*/g, ' ' + cfg.code + ' ');
+        .replace(/[(（]\s*(RMB|USD|CNY|THB|VND|MYR|IDR|JPY|KRW|INR|TWD|SAR|人民币|新台幣|新台币|新加坡元|泰铢|越南盾|令吉|卢比|韩元|日元|沙特里亚尔|[¥$₹฿₫₩₤€£]+)\s*[)）]/g,
+          function(match) {
+            return match.indexOf('（') === 0
+              ? '（' + cfg.symbol + '）'
+              : '(' + cfg.symbol + ')';
+          })
+        .replace(/\s+RMB\s*/g, ' ' + cfg.code + ' ')
+        .replace(/\s+人民币\s*/g, ' ' + cfg.code + ' ')
+        .replace(/\s+新台幣?\s*/g, ' ' + cfg.code + ' ');
     });
 
     // 3) 更新 ROI 输入框默认值（按汇率换算）
