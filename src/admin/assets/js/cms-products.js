@@ -10,7 +10,7 @@
   CMS.renderProducts = function(area) {
     area.innerHTML = '<div class="fade-in"><div class="flex items-center gap-3 mb-4" style="flex-wrap:wrap">' +
       '<input type="hidden" id="prod-cat-filter" value="">' +
-      '<div id="prod-cat-btns" class="flex gap-2" style="flex-wrap:wrap"><button class="cat-filter-btn active" data-cat="" onclick="CMS.filterProducts(\'\',this)">全部</button></div>' +
+      '<div id="prod-cat-btns" class="flex gap-3" style="flex-wrap:wrap"><button class="cat-filter-btn active" data-cat="" onclick="CMS.filterProducts(\'\',this)">全部</button></div>' +
       '<input id="prod-search" type="text" placeholder="搜索型号..." style="flex:1;min-width:150px">' +
       '<button class="btn-ghost" style="color:#059669" onclick="CMS.openExcelImport()">📥 导入 Excel</button>' +
       '<button class="btn-primary ml-auto" onclick="CMS.openProductForm()">+ 新增产品</button></div>' +
