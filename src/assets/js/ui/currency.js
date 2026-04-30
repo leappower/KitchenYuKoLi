@@ -171,36 +171,8 @@
         .replace(/\s+新台幣?\s*/g, ' ' + cfg.code + ' ');
     });
 
-    // 3) 更新 ROI 输入框默认值（按汇率换算）
-    var salaryInput = document.getElementById('roi-salary');
-    if (salaryInput) {
-      var baseSalary = 5000; // 基准 5000 CNY/月
-      salaryInput.value = Math.round(baseSalary * cfg.rate);
-    }
-    var energyInput = document.getElementById('roi-energy');
-    if (energyInput) {
-      var baseEnergy = 3000; // 基准 3000 CNY/月
-      energyInput.value = Math.round(baseEnergy * cfg.rate);
-    }
-
-    // 4) 更新 deploy-roi 输入框默认值
-    var priceInput = document.getElementById('roi-price');
-    if (priceInput && !priceInput._userEdited) {
-      priceInput.value = Math.round(25 * cfg.rate);
-    }
-    var laborInput = document.getElementById('roi-labor');
-    if (laborInput && !laborInput._userEdited) {
-      laborInput.value = Math.round(60000 * cfg.rate);
-    }
-
-    // 5) 标记输入框为用户编辑过（避免语言切换覆盖用户输入）
-    ['roi-price', 'roi-labor'].forEach(function(id) {
-      var el = document.getElementById(id);
-      if (el) {
-        el._userEdited = false;
-        el.addEventListener('input', function() { this._userEdited = true; }, { once: true });
-      }
-    });
+    // 3) ROI / deploy 输入框不改动数值 — ROI 是比率，与币种无关
+    //    切换语言只更新标签符号，用户可手动调整数值
   }
 
   // ── 监听语言切换事件 ──

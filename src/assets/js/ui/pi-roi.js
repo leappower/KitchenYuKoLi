@@ -379,22 +379,15 @@
   document.addEventListener("DOMContentLoaded", function () { _roiInitialized = true; initROICalculator(); });
   document.addEventListener("spa:load", init);
 
-  // Re-render charts & recalculate on language/currency change
+  // Language change: only refresh chart labels (no recalculation needed — ROI is currency-independent)
   global.addEventListener('languageChanged', function () {
-    // translationsApplied 已在 languageChanged 之前 emit（且内部用了 rAF），
-    // 所以需要等 2 帧：第 1 帧 applyTranslations 的 rAF 替换 DOM 文本，
-    // 第 2 帧 currency.js 的 rAF 更新输入框默认值
     requestAnimationFrame(function () {
-      requestAnimationFrame(function () {
-        if (cumulativeChart) cumulativeChart.update();
-        if (laborCompareChart) laborCompareChart.update();
-        var recalcBtn = document.getElementById('roi-recalc-btn');
-        if (recalcBtn) recalcBtn.click();
-      });
+      if (cumulativeChart) cumulativeChart.update();
+      if (laborCompareChart) laborCompareChart.update();
     });
   });
 
-  // Also recalculate after SPA navigation (new DOM, need fresh values)
+  // SPA navigation: just refresh charts for new canvas
   document.addEventListener('spa:load', function () {
     setTimeout(function () {
       if (cumulativeChart) cumulativeChart.update();
