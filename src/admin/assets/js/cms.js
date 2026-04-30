@@ -148,6 +148,7 @@
     area.innerHTML = '<div class="fade-in"><div class="flex items-center gap-3 mb-4" style="flex-wrap:wrap">' +
       '<select id="prod-cat-filter" onchange="CMS.loadProducts()" style="width:auto"><option value="">全部系列</option></select>' +
       '<input id="prod-search" type="text" placeholder="搜索型号..." style="flex:1;min-width:150px">' +
+      '<button class="btn-ghost" style="color:#059669" onclick="CMS.openExcelImport()">📥 导入 Excel</button>' +
       '<button class="btn-primary ml-auto" onclick="CMS.openProductForm()">+ 新增产品</button></div>' +
       '<div class="grid grid-cols-6" id="prod-grid" style="gap:0.75rem"></div>' +
       '<div id="prod-empty" class="py-16 text-center text-gray-400" style="display:none">暂无产品</div></div>';
@@ -377,6 +378,10 @@
     var html = '<div class="form-grid">' +
       '<div class="full"><label class="text-sm font-medium text-gray-700" style="display:block;margin-bottom:0.25rem">型号 *</label>' +
       '<input id="pm-model" required value="' + esc(p ? p.model : '') + '"></div>' +
+      '<div class="full"><label class="text-sm font-medium text-gray-700" style="display:block;margin-bottom:0.25rem">产品名称</label>' +
+      '<input id="pm-name" placeholder="如：商用电磁翻转炒炉" value="' + esc(p ? (p.name || '') : '') + '"></div>' +
+      '<div class="full"><label class="text-sm font-medium text-gray-700" style="display:block;margin-bottom:0.25rem">产品配置</label>' +
+      '<textarea id="pm-specs" rows="3" placeholder="如：功率:15kW 电压:380V 频率:50Hz 材质:304不锈钢" style="width:100%;padding:0.5rem;border:1px solid #d1d5db;border-radius:0.375rem;font-size:0.85rem;resize:vertical">' + esc(p ? (p.specifications || '') : '') + '</textarea></div>' +
       '<div><label class="text-sm font-medium text-gray-700" style="display:block;margin-bottom:0.25rem">产品系列</label>' +
       '<select id="pm-cat"><option value="">未分类</option>';
     categories.forEach(function(c) {
@@ -423,7 +428,13 @@
       '<button id="pm-url-add" class="btn-primary" style="font-size:0.7rem;padding:0.25rem 0.75rem">添加链接</button>' +
       '</div>' +
       '<div class="flex" style="flex-wrap:wrap;gap:0.5rem" id="pm-images"></div>' +
-      '<div id="pm-no-media" class="text-sm text-gray-400" style="padding:1rem' + (hasMedia ? ';display:none' : '') + '">暂无图片或视频</div></div>';
+      '<div id="pm-no-media" class="text-sm text-gray-400" style="padding:1rem' + (hasMedia ? ';display:none' : '') + '">暂无图片或视频</div></div>' +
+      // Translations section
+      '<div style="margin-top:1rem;padding-top:1rem;border-top:1px solid #e5e7eb"><div class="flex items-center justify-between mb-2"><label class="text-sm font-medium text-gray-700">🌐 多语言翻译</label>' +
+      '<div class="flex gap-2">' +
+      '<button type="button" id="pm-auto-translate" style="font-size:0.75rem;color:#fff;background:#7c3aed;border:none;padding:0.25rem 0.75rem;border-radius:0.375rem;cursor:pointer">🤖 AI 一键翻译</button>' +
+      '</div></div>' +
+      '<div id="pm-translations" style="display:flex;flex-direction:column;gap:0.75rem"><div class="text-sm text-gray-400" style="padding:0.5rem">保存产品后可编辑翻译</div></div></div>';
 
     showModal('product-modal', p ? '编辑产品' : '新增产品', html, function() {
       // Validate model name
@@ -431,6 +442,8 @@
       if (!model) { toast('请输入型号', true); return; }
       var body = {
         model: model,
+        name: document.getElementById('pm-name').value.trim(),
+        specifications: document.getElementById('pm-specs').value.trim(),
         sub_category: document.getElementById('pm-sub').value,
         category_id: document.getElementById('pm-cat').value || null,
         status: document.getElementById('pm-status').value,
@@ -469,6 +482,8 @@
         renderPage();
         // Upload media after modal closed
         if (productId) {
+          // Save translations before other async tasks
+          _saveProductTranslations(productId);
           var pendingTasks = 0;
           var pendingDone = 0;
           function onTaskDone() {
@@ -518,6 +533,14 @@
       window._pmPendingVideos = [];
       window._pmPendingUrls = [];
       renderProductMedia(p);
+      // Load translations if editing existing product
+      if (p && p.id) {
+        api('/products/' + p.id + '/translations').then(function(d) {
+          if (d && d.translations && d.translations.length > 0) {
+            renderTranslationFields(d.translations);
+          }
+        });
+      }
       // Related products handlers
       var addRelBtn = document.getElementById('pm-add-related');
       if (addRelBtn) {
@@ -1929,6 +1952,242 @@
     if (!productId) return;
     api('/products/' + productId + '/related', { method: 'PUT', body: items || [] }).catch(function() {});
   }
+
+  // ─── TRANSLATIONS ─────────────────────────────────────────────────
+  var SUPPORTED_LANGS = [
+    { code: 'en', label: 'English' },
+    { code: 'ja', label: '日本語' },
+    { code: 'ko', label: '한국어' },
+    { code: 'th', label: 'ไทย' },
+    { code: 'vi', label: 'Tiếng Việt' },
+    { code: 'id', label: 'Bahasa Indonesia' },
+    { code: 'ms', label: 'Bahasa Melayu' },
+    { code: 'hi', label: 'हिन्दी' },
+    { code: 'ar', label: 'العربية' },
+    { code: 'zh-TW', label: '繁體中文' },
+  ];
+
+  function renderTranslationFields(translations) {
+    var container = document.getElementById('pm-translations');
+    if (!container) return;
+    container.innerHTML = '';
+    var existing = {};
+    (translations || []).forEach(function(t) { existing[t.lang] = t; });
+
+    SUPPORTED_LANGS.forEach(function(lang) {
+      var t = existing[lang.code] || {};
+      var div = document.createElement('div');
+      div.style.cssText = 'border:1px solid #e5e7eb;border-radius:0.5rem;padding:0.75rem;background:#fafafa';
+      div.innerHTML =
+        '<div style="font-weight:600;font-size:0.8rem;margin-bottom:0.5rem;color:#374151">' + esc(lang.label) + ' (' + lang.code + ')</div>' +
+        '<div style="display:flex;flex-direction:column;gap:0.35rem">' +
+        '<div style="display:flex;gap:0.5rem;align-items:center"><label style="font-size:0.75rem;color:#6b7280;width:48px;flex-shrink:0">名称</label>' +
+        '<input class="pt-name" data-lang="' + lang.code + '" value="' + esc(t.name || '') + '" placeholder="翻译产品名称" style="flex:1;padding:4px 8px;border:1px solid #d1d5db;border-radius:6px;font-size:0.8rem"></div>' +
+        '<div style="display:flex;gap:0.5rem;align-items:center"><label style="font-size:0.75rem;color:#6b7280;width:48px;flex-shrink:0">配置</label>' +
+        '<input class="pt-specs" data-lang="' + lang.code + '" value="' + esc(t.specifications || '') + '" placeholder="翻译配置信息" style="flex:1;padding:4px 8px;border:1px solid #d1d5db;border-radius:6px;font-size:0.8rem"></div>' +
+        '<div style="display:flex;gap:0.5rem;align-items:center"><label style="font-size:0.75rem;color:#6b7280;width:48px;flex-shrink:0">产能</label>' +
+        '<input class="pt-throughput" data-lang="' + lang.code + '" value="' + esc(t.throughput || '') + '" placeholder="翻译用途和产能" style="flex:1;padding:4px 8px;border:1px solid #d1d5db;border-radius:6px;font-size:0.8rem"></div>' +
+        '</div>';
+      container.appendChild(div);
+    });
+
+    // Bind auto-translate button
+    var autoBtn = document.getElementById('pm-auto-translate');
+    if (autoBtn) {
+      autoBtn.onclick = function() {
+        autoTranslateProduct();
+      };
+    }
+  }
+
+  function _saveProductTranslations(productId) {
+    var container = document.getElementById('pm-translations');
+    if (!container) return;
+    var items = [];
+    container.querySelectorAll('.pt-name').forEach(function(input) {
+      var lang = input.getAttribute('data-lang');
+      var specsInput = container.querySelector('.pt-specs[data-lang="' + lang + '"]');
+      var throughputInput = container.querySelector('.pt-throughput[data-lang="' + lang + '"]');
+      var name = input.value.trim();
+      var specs = specsInput ? specsInput.value.trim() : '';
+      var throughput = throughputInput ? throughputInput.value.trim() : '';
+      if (name || specs || throughput) {
+        items.push({ lang: lang, name: name, specifications: specs, usage: '', throughput: throughput });
+      }
+    });
+    if (items.length === 0) return;
+    api('/products/' + productId + '/translations', { method: 'PUT', body: items }).catch(function() {});
+  }
+
+  // AI Auto-translate using configured translation API
+  function autoTranslateProduct() {
+    var nameInput = document.getElementById('pm-name');
+    var specsInput = document.getElementById('pm-specs');
+    var throughputInput = document.getElementById('pm-throughput');
+    var name = nameInput ? nameInput.value.trim() : '';
+    var specs = specsInput ? specsInput.value.trim() : '';
+    var throughput = throughputInput ? throughputInput.value.trim() : '';
+
+    if (!name && !specs) {
+      toast('请先填写产品名称或配置', true);
+      return;
+    }
+
+    var btn = document.getElementById('pm-auto-translate');
+    if (btn) { btn.disabled = true; btn.textContent = '⏳ 翻译中...'; }
+
+    // Read current translation states to find which languages still need translation
+    var container = document.getElementById('pm-translations');
+    var alreadyTranslated = new Set();
+    if (container) {
+      container.querySelectorAll('.pt-name').forEach(function(input) {
+        if (input.value.trim()) alreadyTranslated.add(input.getAttribute('data-lang'));
+      });
+    }
+
+    var langsToTranslate = SUPPORTED_LANGS.filter(function(l) { return !alreadyTranslated.has(l.code); });
+    if (langsToTranslate.length === 0) {
+      toast('所有语言已翻译', true);
+      if (btn) { btn.disabled = false; btn.textContent = '🤖 AI 一键翻译'; }
+      return;
+    }
+
+    var texts = [];
+    if (name) texts.push('产品名称: ' + name);
+    if (specs) texts.push('产品配置: ' + specs);
+    if (throughput) texts.push('用途和产能: ' + throughput);
+
+    // Call the server-side translation API
+    fetch('/api/cms/translate', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + token },
+      body: JSON.stringify({
+        texts: texts,
+        source_lang: 'zh-CN',
+        target_langs: langsToTranslate.map(function(l) { return l.code; })
+      })
+    })
+    .then(function(r) { return r.json(); })
+    .then(function(data) {
+      if (!data || !data.translations) throw new Error('No translation data');
+      // Populate fields
+      data.translations.forEach(function(t) {
+        var nameField = container.querySelector('.pt-name[data-lang="' + t.lang + '"]');
+        var specsField = container.querySelector('.pt-specs[data-lang="' + t.lang + '"]');
+        var throughputField = container.querySelector('.pt-throughput[data-lang="' + t.lang + '"]');
+        if (nameField && !nameField.value && t.name) nameField.value = t.name;
+        if (specsField && !specsField.value && t.specifications) specsField.value = t.specifications;
+        if (throughputField && !throughputField.value && t.throughput) throughputField.value = t.throughput;
+      });
+      toast('已翻译 ' + langsToTranslate.length + ' 种语言');
+    })
+    .catch(function(err) {
+      toast('翻译失败: ' + (err.message || '请检查翻译服务配置'), true);
+    })
+    .finally(function() {
+      if (btn) { btn.disabled = false; btn.textContent = '🤖 AI 一键翻译'; }
+    });
+  }
+
+  // ─── EXCEL IMPORT ────────────────────────────────────────────────
+  CMS.openExcelImport = function() {
+    var html = '<div style="display:flex;flex-direction:column;gap:1rem">' +
+      '<div><label class="text-sm font-medium text-gray-700" style="display:block;margin-bottom:0.25rem">选择 Excel 文件</label>' +
+      '<input type="file" id="excel-file" accept=".xlsx,.xls" style="font-size:0.875rem">' +
+      '<div class="text-xs text-gray-400" style="margin-top:0.25rem">支持 .xlsx 格式，自动解析产品型号、名称、配置等信息</div></div>' +
+      '<div id="excel-preview" style="display:none">' +
+      '<div class="flex items-center justify-between mb-2"><span class="text-sm font-medium">预览结果</span>' +
+      '<span class="text-xs text-gray-400" id="excel-count"></span></div>' +
+      '<div id="excel-table" style="max-height:300px;overflow-y:auto;border:1px solid #e5e7eb;border-radius:8px"></div></div></div>';
+
+    showModal('excel-import-modal', '📥 导入 Excel 产品数据', html, function() {
+      // Execute import (no dry_run)
+      var fileInput = document.getElementById('excel-file');
+      if (!fileInput || !fileInput.files[0]) { toast('请选择文件', true); return; }
+
+      var fd = new FormData();
+      fd.append('file', fileInput.files[0]);
+
+      var saveBtn = document.getElementById('excel-import-modal-save');
+      if (saveBtn) { saveBtn.disabled = true; saveBtn.textContent = '导入中...'; }
+
+      fetch('/api/cms/import/excel', {
+        method: 'POST',
+        headers: { 'Authorization': 'Bearer ' + token },
+        body: fd
+      })
+      .then(function(r) { return r.json(); })
+      .then(function(d) {
+        if (d && d.mode === 'executed') {
+          toast('导入完成: 新增 ' + d.imported + '，更新 ' + d.updated + '，跳过 ' + d.skipped);
+          document.getElementById('excel-import-modal').remove();
+          renderPage();
+        } else {
+          toast('导入失败: ' + (d ? d.error : '未知错误'), true);
+        }
+      })
+      .catch(function(e) { toast('导入失败: ' + e.message, true); });
+    }, function() {
+      // onReady: bind preview
+      var fileInput = document.getElementById('excel-file');
+      if (!fileInput) return;
+      var previewBtn = document.createElement('button');
+      previewBtn.className = 'btn-ghost';
+      previewBtn.style.cssText = 'font-size:0.75rem;margin-top:0.5rem';
+      previewBtn.textContent = '👁️ 预览数据（不导入）';
+      previewBtn.type = 'button';
+      fileInput.parentElement.appendChild(previewBtn);
+      previewBtn.addEventListener('click', function() {
+        if (!fileInput.files[0]) { toast('请先选择文件', true); return; }
+        var fd = new FormData();
+        fd.append('file', fileInput.files[0]);
+        previewBtn.disabled = true;
+        previewBtn.textContent = '⏳ 解析中...';
+        fetch('/api/cms/import/excel?dry_run=true', {
+          method: 'POST',
+          headers: { 'Authorization': 'Bearer ' + token },
+          body: fd
+        })
+        .then(function(r) { return r.json(); })
+        .then(function(d) {
+          previewBtn.disabled = false;
+          previewBtn.textContent = '👁️ 预览数据（不导入）';
+          if (!d || d.error) { toast('解析失败: ' + (d ? d.error : ''), true); return; }
+          var preview = document.getElementById('excel-preview');
+          var count = document.getElementById('excel-count');
+          var table = document.getElementById('excel-table');
+          if (!preview) return;
+          preview.style.display = '';
+          if (count) count.textContent = d.products_found + ' 个产品';
+          var prods = d.products || [];
+          var html = '<table style="width:100%;font-size:0.75rem;border-collapse:collapse">' +
+            '<thead style="background:#f9fafb;position:sticky;top:0"><tr>' +
+            '<th style="padding:6px 8px;text-align:left;border-bottom:1px solid #e5e7eb">型号</th>' +
+            '<th style="padding:6px 8px;text-align:left;border-bottom:1px solid #e5e7eb">名称</th>' +
+            '<th style="padding:6px 8px;text-align:left;border-bottom:1px solid #e5e7eb">分类</th>' +
+            '<th style="padding:6px 8px;text-align:left;border-bottom:1px solid #e5e7eb">配置</th>' +
+            '</tr></thead><tbody>';
+          prods.slice(0, 50).forEach(function(p) {
+            html += '<tr>' +
+              '<td style="padding:4px 8px;border-bottom:1px solid #f3f4f6;font-weight:600">' + esc(p.model) + '</td>' +
+              '<td style="padding:4px 8px;border-bottom:1px solid #f3f4f6">' + esc(p.name || '—') + '</td>' +
+              '<td style="padding:4px 8px;border-bottom:1px solid #f3f4f6"><span style="background:#f0f9ff;padding:1px 6px;border-radius:4px;font-size:0.7rem">' + esc(p.category_name || '其他') + '</span></td>' +
+              '<td style="padding:4px 8px;border-bottom:1px solid #f3f4f6;max-width:200px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="' + esc(p.specifications || '') + '">' + esc(p.specifications || '—') + '</td>' +
+              '</tr>';
+          });
+          if (prods.length > 50) html += '<tr><td colspan="4" style="padding:8px;text-align:center;color:#9ca3af">...还有 ' + (prods.length - 50) + ' 个产品</td></tr>';
+          html += '</tbody></table>';
+          table.innerHTML = html;
+          toast('解析完成: ' + d.total_rows + ' 行，识别 ' + d.products_found + ' 个产品');
+        })
+        .catch(function(e) {
+          previewBtn.disabled = false;
+          previewBtn.textContent = '👁️ 预览数据（不导入）';
+          toast('解析失败: ' + e.message, true);
+        });
+      });
+    });
+  };
 
   // Initial render
   renderPage();

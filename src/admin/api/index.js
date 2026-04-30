@@ -11,6 +11,7 @@ const { postsRoutes } = require('./posts');
 const { pagesRoutes } = require('./pages');
 const { translationsRoutes } = require('./translations');
 const { importRoutes } = require('./import');
+const { translateRoutes } = require('./translate');
 
 function createApiRouter(db) {
   const express = require('express');
@@ -29,6 +30,7 @@ function createApiRouter(db) {
   router.use(pagesRoutes(db));
   router.use(translationsRoutes(db));
   router.use(importRoutes(db));
+  router.use(translateRoutes(db));
 
   return router;
 }

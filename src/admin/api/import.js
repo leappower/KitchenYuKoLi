@@ -10,7 +10,8 @@ function importRoutes(db) {
   const { requireAuth, requireAdmin } = require('./auth');
   const multer = require('multer');
 
-  const upload = multer({
+  // Separate multer instance for import (single file, different field name)
+  const importUpload = multer({
     dest: path.join(__dirname, '..', 'data', 'tmp'),
     limits: { fileSize: 50 * 1024 * 1024 } // 50MB
   });
@@ -165,7 +166,7 @@ function importRoutes(db) {
   }
 
   // POST /import/excel — preview (dry_run=true) or execute import
-  router.post('/import/excel', requireAdmin, upload.single('file'), async function(req, res) {
+  router.post('/import/excel', requireAdmin, importUpload.single('file'), async function(req, res) {
     try {
       if (!req.file) return res.status(400).json({ error: 'No file uploaded' });
 
