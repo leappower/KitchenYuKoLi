@@ -8,6 +8,7 @@ function i18nRoutes(db) {
   const router = express.Router();
   const { requireAdmin } = require('./auth');
   const { logAudit } = require('../db/init');
+  const { syncProductTranslationsToServer } = require('./sync-server');
 
   const LANG_DIR = path.join(__dirname, '..', '..', '..', 'src', 'assets', 'lang');
 
@@ -120,6 +121,16 @@ function i18nRoutes(db) {
 
       fs.writeFileSync(file, JSON.stringify(data, null, 2) + '\n', 'utf-8');
       logAudit(db, req.user.userId, req.user.username, 'update', 'i18n', null, null, { lang: lang, type: type, count: count, warnings: warnings });
+
+      // Auto-sync product translations to KitchenYuKoLiServer
+      if (type === 'product') {
+        try {
+          syncProductTranslationsToServer(lang);
+        } catch (syncErr) {
+          console.error('[i18n] product sync failed:', syncErr.message);
+        }
+      }
+
       res.json({ message: '已更新 ' + count + ' 条翻译', count: count, warnings: warnings.length ? warnings : undefined });
     } catch (e) {
       res.status(500).json({ error: e.message });
