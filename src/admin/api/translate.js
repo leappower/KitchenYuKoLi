@@ -317,16 +317,24 @@ ${texts.map((t, i) => `${i + 1}. ${t}`).join('\n')}
 2. 产品名称翻译要简洁专业
 3. 配置描述翻译要准确，技术术语保持原样
 4. 容量描述翻译要符合当地语言习惯
+5. 材质、子分类、等级、标签、控制方式、尺寸、颜色等字段如有则翻译
 
 请输出JSON格式，key为语言代码，value为对象，包含字段：
 - "产品名称": 翻译后的产品名称
 - "产品配置": 翻译后的配置信息
 - "用途和容量": 翻译后的用途和容量
+- "材质": 翻译后的材质
+- "子分类": 翻译后的子分类
+- "等级": 翻译后的等级
+- "标签": 翻译后的标签（如 Hot/New/Premium）
+- "控制方式": 翻译后的控制方式
+- "尺寸": 翻译后的尺寸
+- "颜色": 翻译后的颜色
 
 示例输出格式:
 {
-  "en": { "产品名称": "...", "产品配置": "...", "用途和容量": "..." },
-  "ja": { "产品名称": "...", "产品配置": "...", "用途和容量": "..." }
+  "en": { "产品名称": "...", "产品配置": "...", "用途和容量": "...", "材质": "...", "子分类": "...", "等级": "...", "标签": "...", "控制方式": "...", "尺寸": "...", "颜色": "..." },
+  "ja": { "产品名称": "...", "产品配置": "...", "用途和容量": "...", "材质": "...", "子分类": "...", "等级": "...", "标签": "...", "控制方式": "...", "尺寸": "...", "颜色": "..." }
 }`;
   }
 
@@ -403,7 +411,14 @@ ${texts.map((t, i) => `${i + 1}. ${t}`).join('\n')}
                 lang: lang,
                 name: langData['产品名称'] || langData['name'] || '',
                 specifications: langData['产品配置'] || langData['specifications'] || '',
-                throughput: langData['用途和容量'] || langData['throughput'] || ''
+                throughput: langData['用途和容量'] || langData['throughput'] || '',
+                material: langData['材质'] || langData['material'] || '',
+                sub_category: langData['子分类'] || langData['sub_category'] || '',
+                tier: langData['等级'] || langData['tier'] || '',
+                badge: langData['标签'] || langData['badge'] || '',
+                control_method: langData['控制方式'] || langData['control_method'] || '',
+                product_dimensions: langData['尺寸'] || langData['product_dimensions'] || '',
+                color: langData['颜色'] || langData['color'] || ''
               };
             });
 
@@ -426,7 +441,7 @@ ${texts.map((t, i) => `${i + 1}. ${t}`).join('\n')}
           warnings.push('⚠️ 所有 provider 都失败: [' + batch.join(', ') + ']');
           // Add empty results for failed batch
           batch.forEach(lang => {
-            allTranslations[lang] = { lang, name: '', specifications: '', throughput: '', _error: true };
+            allTranslations[lang] = { lang, name: '', specifications: '', throughput: '', material: '', sub_category: '', tier: '', badge: '', control_method: '', product_dimensions: '', color: '', _error: true };
           });
         }
       }
@@ -445,7 +460,7 @@ ${texts.map((t, i) => `${i + 1}. ${t}`).join('\n')}
       });
 
       // ─── Response ────────────────────────────────
-      const translations = target_langs.map(lang => allTranslations[lang] || { lang, name: '', specifications: '', throughput: '' });
+      const translations = target_langs.map(lang => allTranslations[lang] || { lang, name: '', specifications: '', throughput: '', material: '', sub_category: '', tier: '', badge: '', control_method: '', product_dimensions: '', color: '' });
 
       res.json({
         translations,

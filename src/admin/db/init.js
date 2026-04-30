@@ -166,6 +166,13 @@ function initDatabase() {
       specifications TEXT DEFAULT '',
       usage TEXT DEFAULT '',
       throughput TEXT DEFAULT '',
+      material TEXT DEFAULT '',
+      sub_category TEXT DEFAULT '',
+      tier TEXT DEFAULT '',
+      badge TEXT DEFAULT '',
+      control_method TEXT DEFAULT '',
+      product_dimensions TEXT DEFAULT '',
+      color TEXT DEFAULT '',
       created_at TEXT DEFAULT (datetime('now')),
       updated_at TEXT DEFAULT (datetime('now')),
       UNIQUE(product_id, lang)
@@ -207,6 +214,14 @@ function initDatabase() {
   try {
     db.exec(`ALTER TABLE products ADD COLUMN specifications TEXT DEFAULT ''`);
   } catch(e) { /* column already exists */ }
+
+  // Auto-migration: add new translation columns to product_translations
+  var newTransCols = ['material', 'sub_category', 'tier', 'badge', 'control_method', 'product_dimensions', 'color'];
+  newTransCols.forEach(function(col) {
+    try {
+      db.exec('ALTER TABLE product_translations ADD COLUMN ' + col + ' TEXT DEFAULT ""');
+    } catch(e) { /* column already exists */ }
+  });
 
   // Ensure default admin user
   const adminExists = db.prepare('SELECT id FROM cms_users WHERE username = ?').get('admin');

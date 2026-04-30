@@ -278,23 +278,32 @@ function productsRoutes(db) {
   router.put('/products/:id/translations', requireAuth, (req, res) => {
     try {
       const productId = parseInt(req.params.id);
-      const items = req.body; // [{lang: 'en', name: '...', specifications: '...', usage: '...', throughput: '...'}]
+      const items = req.body; // [{lang: 'en', name: '...', ...}]
       if (!Array.isArray(items)) return res.status(400).json({ error: 'Expected array' });
 
       const upsert = db.prepare(
-        `INSERT INTO product_translations (product_id, lang, name, specifications, usage, throughput, updated_at)
-         VALUES (?, ?, ?, ?, ?, ?, datetime('now'))
+        `INSERT INTO product_translations (product_id, lang, name, specifications, usage, throughput, material, sub_category, tier, badge, control_method, product_dimensions, color, updated_at)
+         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, datetime('now'))
          ON CONFLICT(product_id, lang) DO UPDATE SET
          name = excluded.name,
          specifications = excluded.specifications,
          usage = excluded.usage,
          throughput = excluded.throughput,
+         material = excluded.material,
+         sub_category = excluded.sub_category,
+         tier = excluded.tier,
+         badge = excluded.badge,
+         control_method = excluded.control_method,
+         product_dimensions = excluded.product_dimensions,
+         color = excluded.color,
          updated_at = excluded.updated_at`
       );
 
       const batch = db.transaction(() => {
         items.forEach(item => {
-          upsert.run(productId, item.lang, item.name || '', item.specifications || '', item.usage || '', item.throughput || '');
+          upsert.run(productId, item.lang || 'en', item.name || '', item.specifications || '', item.usage || '', item.throughput || '',
+            item.material || '', item.sub_category || '', item.tier || '', item.badge || '',
+            item.control_method || '', item.product_dimensions || '', item.color || '');
         });
       });
       batch();

@@ -322,15 +322,17 @@
   // ─── i18n field helper ────────────────────────────────────────────────────
   function getProductI18nField(product, field, fallback) {
     if (fallback === undefined) fallback = "";
-    var id = product && product.i18nId;
-    if (id) {
-      var key = id + "_" + field;
-      var translated = tr(key);
-      if (translated && translated !== key) return translated;
-      // Log miss only for 'name' field to avoid noise
-      if (field === "name") {
-        // intentionally left blank — no-op for missing translations
-      }
+    // Try window._productTranslations first (loaded via /api/translations)
+    var pid = product && (product._productId || product.id);
+    if (pid && window._productTranslations && window._productTranslations[pid]) {
+      var val = window._productTranslations[pid][field];
+      if (val) return val;
+    }
+    // Try model-based lookup
+    var model = product && product.model;
+    if (model && window._productTranslationsByModel && window._productTranslationsByModel[model]) {
+      var val2 = window._productTranslationsByModel[model][field];
+      if (val2) return val2;
     }
     return fallback;
   }

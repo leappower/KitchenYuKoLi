@@ -157,18 +157,21 @@
       window.Navigator.highlightCategory(product.category);
     }
 
-    // Spec fields
+    // Spec fields — values use getProductField() for i18n
     var specs = [
       { l: tl("型号"), v: product.model }, { l: tl("分类"), v: getCategoryName(product) },
-      { l: tl("子分类"), v: product.subCategory }, { l: tl("等级"), v: product.tier },
-      { l: tl("功率"), v: product.power }, { l: tl("容量"), v: product.throughput },
+      { l: tl("子分类"), v: getProductField(product, 'sub_category') || product.subCategory },
+      { l: tl("等级"), v: getProductField(product, 'tier') || product.tier },
+      { l: tl("功率"), v: product.power }, { l: tl("容量"), v: getProductField(product, 'throughput') || product.throughput },
       { l: tl("电压"), v: product.voltage }, { l: tl("频率"), v: product.frequency },
-      { l: tl("材质"), v: product.material }, { l: tl("尺寸"), v: product.productDimensions },
-      { l: tl("颜色"), v: product.color }, { l: tl("控制方式"), v: product.controlMethod },
+      { l: tl("材质"), v: getProductField(product, 'material') || product.material },
+      { l: tl("尺寸"), v: getProductField(product, 'product_dimensions') || product.productDimensions },
+      { l: tl("颜色"), v: getProductField(product, 'color') || product.color },
+      { l: tl("控制方式"), v: getProductField(product, 'control_method') || product.controlMethod },
     ];
     // Add specifications as full-width description card if present
     if (product.specifications) {
-      specs.unshift({ l: tl("配置"), v: product.specifications, full: true });
+      specs.unshift({ l: tl("配置"), v: getProductField(product, 'specifications') || product.specifications, full: true });
     }
     var specCards = "";
     for (var s = 0; s < specs.length; s++) {

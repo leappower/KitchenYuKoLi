@@ -27,12 +27,19 @@
     return v && v !== key ? v : fallback;
   }
 
-  /** Get translated product name using i18n key pattern */
-  function getProductTranslation(i18nId, field, fallback) {
-    if (!i18nId) return fallback || "";
-    var key = i18nId + "_" + field;
-    var val = tr(key);
-    if (val && val !== key) return val;
+  /** Get translated field from window._productTranslations */
+  function getProductTranslation(product, field, fallback) {
+    if (!product) return fallback || "";
+    var pid = product._productId || product.id;
+    if (pid && window._productTranslations && window._productTranslations[pid]) {
+      var val = window._productTranslations[pid][field];
+      if (val) return val;
+    }
+    var model = product.model;
+    if (model && window._productTranslationsByModel && window._productTranslationsByModel[model]) {
+      var val2 = window._productTranslationsByModel[model][field];
+      if (val2) return val2;
+    }
     return fallback || "";
   }
 
@@ -76,14 +83,14 @@
 
     var products = utils.buildProductCatalog();
     return products.map(function (p) {
-      var translatedName = p.name || p.model;
+      var translatedName = getProductTranslation(p, "name", p.name || p.model);
       var translatedCategory = tr(
         utils.getCategoryI18nKey ? utils.getCategoryI18nKey(p.category) : "filter_" + p.category,
         p.category
       );
-      var translatedBadge = p.badge || "";
+      var translatedBadge = getProductTranslation(p, "badge", p.badge || "");
       var translatedScenarios = p.scenarios || "";
-      var translatedUsage = p.usage || "";
+      var translatedUsage = getProductTranslation(p, "throughput", p.throughput || "");
 
       return Object.assign({}, p, {
         _displayName: translatedName || (translatedCategory + " " + (p.model || "")).trim(),
