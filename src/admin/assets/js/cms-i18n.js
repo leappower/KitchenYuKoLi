@@ -139,7 +139,7 @@
     }
 
     // Language cards grid
-    html += '<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 mb-6">';
+    html += '<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 mb-6">';
     data.languages.forEach(function(lang) {
       var pct = lang.percent;
       var color = pct >= 80 ? '#22c55e' : pct >= 30 ? '#eab308' : '#ef4444';
@@ -147,14 +147,14 @@
       var statusIcon = pct >= 100 ? '✅' : pct >= 80 ? '📝' : '❌';
       var statusText = pct >= 100 ? '已完成' : pct >= 80 ? '接近完成' : pct >= 30 ? '进行中' : '待翻译';
 
-      html += '<div class="lang-card cursor-pointer rounded-xl border border-gray-200 bg-white hover:border-indigo-300 hover:shadow-md transition-all p-4" data-lang="' + esc(lang.code) + '" style="border-left:4px solid ' + color + '">' +
-        '<div class="flex items-center gap-3 mb-3">' +
-          '<span class="text-2xl">' + lang.flag + '</span>' +
+      html += '<div class="lang-card cursor-pointer rounded-xl border border-gray-200 bg-white hover:border-indigo-300 hover:shadow-md transition-all p-5" data-lang="' + esc(lang.code) + '" style="border-left:4px solid ' + color + '">' +
+        '<div class="flex items-center gap-3 mb-4">' +
+          '<span class="text-3xl">' + lang.flag + '</span>' +
           '<div class="flex-1 min-w-0">' +
-            '<div class="font-semibold text-gray-900">' + esc(lang.name) + '</div>' +
-            '<div class="text-xs text-gray-400 font-mono">' + esc(lang.code) + '</div>' +
+            '<div class="font-semibold text-gray-900 text-base">' + esc(lang.name) + '</div>' +
+            '<div class="text-xs text-gray-400 font-mono mt-0.5">' + esc(lang.code) + '</div>' +
           '</div>' +
-          '<span class="text-sm">' + statusIcon + '</span>' +
+          '<span class="text-lg">' + statusIcon + '</span>' +
         '</div>' +
         '<div class="flex items-center justify-between mb-2">' +
           '<span class="text-sm text-gray-600">' + lang.translated + ' / ' + lang.total + '</span>' +
@@ -163,9 +163,11 @@
         '<div style="width:100%;height:6px;background:#f3f4f6;border-radius:3px;overflow:hidden">' +
           '<div style="width:' + Math.min(pct, 100) + '%;height:100%;background:' + color + ';border-radius:3px;transition:width 0.3s"></div>' +
         '</div>' +
-        '<div class="mt-2 text-xs text-gray-400">' + statusText + '</div>' +
+        '<div class="mt-2.5 text-xs text-gray-400">' + statusText + '</div>' +
+        '</div>' +
         '</div>';
     });
+        '</div>';
     html += '</div>';
 
     // Action buttons
@@ -224,25 +226,25 @@
 
     area.innerHTML = '<div class="fade-in">' +
       // Back button + header
-      '<div class="flex items-center gap-4 mb-4">' +
-        '<button id="btn-back-overview" class="btn-ghost" style="padding:0.375rem 0.75rem;font-size:0.85rem">← 返回总览</button>' +
+      '<div class="flex items-center gap-4 mb-5">' +
+        '<button id="btn-back-overview" class="btn-ghost" style="padding:0.4rem 0.875rem;font-size:0.85rem">← 返回总览</button>' +
         '<div class="flex items-center gap-2 flex-1">' +
-          '<span class="text-xl">' + (meta.flag || '') + '</span>' +
+          '<span class="text-2xl">' + (meta.flag || '') + '</span>' +
           '<h2 class="text-lg font-semibold">' + esc(meta.name || state.lang) + '</h2>' +
           '<span class="text-sm text-gray-400 font-mono">(' + esc(state.lang) + ')</span>' +
           '<span id="editor-stats" class="text-sm text-gray-500 ml-auto">加载中...</span>' +
         '</div>' +
       '</div>' +
       // Toolbar
-      '<div class="flex items-center gap-3 mb-4 flex-wrap">' +
+      '<div class="flex items-center gap-3 mb-5 flex-wrap">' +
         '<div class="flex items-center gap-1 bg-gray-100 rounded-lg p-0.5">' +
           _filterBtn('all', '全部') +
           _filterBtn('untranslated', '未翻译') +
           _filterBtn('translated', '已翻译') +
           _filterBtn('ai_review', 'AI待审核') +
         '</div>' +
-        '<input id="editor-search" placeholder="搜索 key 或原文..." value="' + esc(state.search) + '" style="border:1px solid #d1d5db;background:#fff;color:#111827;padding:0.375rem 0.75rem;border-radius:0.5rem;font-size:0.85rem;width:220px">' +
-        '<select id="editor-sort" style="border:1px solid #d1d5db;background:#fff;color:#111827;padding:0.375rem 0.6rem;border-radius:0.5rem;font-size:0.85rem">' +
+        '<input id="editor-search" placeholder="搜索 key 或原文..." value="' + esc(state.search) + '" style="border:1px solid #d1d5db;background:#fff;color:#111827;padding:0.4rem 0.75rem;border-radius:0.5rem;font-size:0.85rem;width:240px">' +
+        '<select id="editor-sort" style="border:1px solid #d1d5db;background:#fff;color:#111827;padding:0.4rem 0.6rem;border-radius:0.5rem;font-size:0.85rem">' +
           '<option value="key"' + (state.sortBy === 'key' ? ' selected' : '') + '>按 Key 排序</option>' +
           '<option value="status"' + (state.sortBy === 'status' ? ' selected' : '') + '>按状态排序</option>' +
         '</select>' +
@@ -403,11 +405,11 @@
 
     var html = '<table style="width:100%;border-collapse:collapse;font-size:0.85rem">' +
       '<thead style="position:sticky;top:0;z-index:1"><tr style="border-bottom:2px solid #e5e7eb;background:#f9fafb">' +
-      '<th style="padding:0.5rem 0.3rem;text-align:center;width:36px"><input type="checkbox" id="select-all-cb" style="cursor:pointer"></th>' +
-      '<th style="padding:0.5rem;text-align:left;width:20%">Key</th>' +
-      '<th style="padding:0.5rem;text-align:left;width:28%">🇨🇳 中文原文</th>' +
-      '<th style="padding:0.5rem;text-align:left;width:35%">翻译 <span class="text-xs text-gray-400">(点击编辑)</span></th>' +
-      '<th style="padding:0.5rem;text-align:center;width:60px">状态</th>' +
+      '<th style="padding:0.625rem 0.5rem;text-align:center;width:40px"><input type="checkbox" id="select-all-cb" style="cursor:pointer"></th>' +
+      '<th style="padding:0.625rem 0.5rem;text-align:left;width:18%">Key</th>' +
+      '<th style="padding:0.625rem 0.5rem;text-align:left;width:27%">🇨🇳 中文原文</th>' +
+      '<th style="padding:0.625rem 0.5rem;text-align:left;width:38%">翻译 <span class="text-xs text-gray-400">(点击编辑)</span></th>' +
+      '<th style="padding:0.625rem 0.5rem;text-align:center;width:60px">状态</th>' +
       '</tr></thead><tbody>';
 
     keys.forEach(function(entry) {
@@ -421,17 +423,17 @@
       var isExpanded = state.expandedRow === key;
 
       html += '<tr class="editor-row" data-key="' + esc(key) + '" style="border-bottom:1px solid #f3f4f6;cursor:pointer;' + (rowBg ? 'background:' + rowBg : '') + '">' +
-        '<td style="padding:0.5rem 0.3rem;text-align:center"><input type="checkbox" class="row-cb" data-key="' + esc(key) + '"' + (state.selected[key] ? ' checked' : '') + ' style="cursor:pointer"></td>' +
-        '<td style="padding:0.5rem;font-family:monospace;font-size:0.7rem;color:#6b7280;word-break:break-all;line-height:1.4;max-width:200px" title="' + esc(key) + '">' + esc(key) + '</td>' +
-        '<td style="padding:0.5rem;color:#374151;font-size:0.8rem;line-height:1.4;max-width:280px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="' + esc(srcVal) + '">' + esc(srcVal) + '</td>' +
-        '<td style="padding:0.25rem 0.5rem">' +
+        '<td style="padding:0.625rem 0.5rem;text-align:center"><input type="checkbox" class="row-cb" data-key="' + esc(key) + '"' + (state.selected[key] ? ' checked' : '') + ' style="cursor:pointer"></td>' +
+        '<td style="padding:0.625rem 0.5rem;font-family:monospace;font-size:0.72rem;color:#6b7280;word-break:break-all;line-height:1.5;max-width:220px" title="' + esc(key) + '">' + esc(key) + '</td>' +
+        '<td style="padding:0.625rem 0.5rem;color:#374151;font-size:0.82rem;line-height:1.5;max-width:320px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="' + esc(srcVal) + '">' + esc(srcVal) + '</td>' +
+        '<td style="padding:0.375rem 0.5rem">' +
           '<div class="cell-edit-wrapper" style="position:relative">' +
             '<input class="cell-edit-input" data-key="' + esc(key) + '" value="' + esc(curVal) + '" placeholder="点击输入翻译..." ' +
-            'style="width:100%;border:1px solid #d1d5db;background:#fff;color:' + (hasValue ? '#111827' : '#9ca3af') + ';padding:0.375rem 0.5rem;border-radius:0.375rem;font-size:0.8rem;line-height:1.4;transition:border-color 0.15s">' +
-            '<button class="cell-ai-btn" data-key="' + esc(key) + '" style="position:absolute;right:4px;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;font-size:0.85rem;opacity:0;transition:opacity 0.15s" title="AI 翻译此行">🤖</button>' +
+            'style="width:100%;border:1px solid #d1d5db;background:#fff;color:' + (hasValue ? '#111827' : '#9ca3af') + ';padding:0.4rem 0.625rem;border-radius:0.375rem;font-size:0.82rem;line-height:1.5;transition:border-color 0.15s">' +
+            '<button class="cell-ai-btn" data-key="' + esc(key) + '" style="position:absolute;right:6px;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;font-size:0.85rem;opacity:0;transition:opacity 0.15s" title="AI 翻译此行">🤖</button>' +
           '</div>' +
         '</td>' +
-        '<td style="padding:0.5rem;text-align:center">' +
+        '<td style="padding:0.625rem 0.5rem;text-align:center">' +
           (isEdited ? '<span style="color:#f59e0b" title="已修改未保存">✏️</span>' :
            hasAiSuggestion ? '<span style="color:#7c3aed" title="AI待审核">💡</span>' :
            !hasValue ? '<span class="text-xs px-1.5 py-0.5 rounded-full bg-red-50 text-red-500">待翻译</span>' :
@@ -442,20 +444,20 @@
       // Expanded row (AI suggestion / review)
       if (isExpanded) {
         html += '<tr class="expanded-detail" data-expanded-key="' + esc(key) + '" style="border-bottom:1px solid #e5e7eb;background:#fafbff">' +
-          '<td colspan="5" style="padding:0.75rem 1rem">' +
-            '<div style="max-width:800px">' +
-              '<div class="text-xs text-gray-400 mb-2 font-mono">' + esc(key) + '</div>' +
-              '<div class="grid gap-3" style="grid-template-columns:1fr 1fr">' +
+          '<td colspan="5" style="padding:1rem 1.25rem">' +
+            '<div style="max-width:900px">' +
+              '<div class="text-xs text-gray-400 mb-3 font-mono" style="font-size:0.72rem">' + esc(key) + '</div>' +
+              '<div class="grid gap-4" style="grid-template-columns:1fr 1fr">' +
                 '<div>' +
-                  '<div class="text-xs text-gray-500 mb-1">🇨🇳 中文原文</div>' +
-                  '<div class="text-sm text-gray-800 p-2 rounded-lg bg-gray-50">' + esc(srcVal) + '</div>' +
+                  '<div class="text-xs text-gray-500 mb-1.5" style="font-weight:500">🇨🇳 中文原文</div>' +
+                  '<div class="text-sm text-gray-800 p-3 rounded-lg bg-gray-50" style="line-height:1.6">' + esc(srcVal) + '</div>' +
                 '</div>' +
                 '<div>' +
-                  '<div class="text-xs text-gray-500 mb-1">' + meta.flag + ' ' + esc(meta.name) + ' 翻译</div>' +
-                  '<textarea class="expanded-edit" data-key="' + esc(key) + '" style="width:100%;min-height:40px;border:1px solid #d1d5db;background:#fff;color:#111827;padding:0.5rem;border-radius:0.375rem;font-size:0.85rem;resize:vertical">' + esc(curVal) + '</textarea>' +
+                  '<div class="text-xs text-gray-500 mb-1.5" style="font-weight:500">' + meta.flag + ' ' + esc(meta.name) + ' 翻译</div>' +
+                  '<textarea class="expanded-edit" data-key="' + esc(key) + '" style="width:100%;min-height:48px;border:1px solid #d1d5db;background:#fff;color:#111827;padding:0.625rem 0.75rem;border-radius:0.375rem;font-size:0.85rem;resize:vertical;line-height:1.6">' + esc(curVal) + '</textarea>' +
                 '</div>' +
               '</div>' +
-              (hasAiSuggestion ? '<div class="mt-3 p-3 rounded-lg border border-purple-100 bg-purple-50">' +
+              (hasAiSuggestion ? '<div class="mt-4 p-3 rounded-lg border border-purple-100 bg-purple-50">' +
                 '<div class="flex items-center gap-2 mb-2">' +
                   '<span class="text-sm">💡 AI 建议</span>' +
                   '<span class="text-xs text-gray-400">(deepseek-v4-flash)</span>' +
@@ -1076,9 +1078,9 @@
     api('/pages').then(function(d) {
       if (!d || !d.pages) { container.innerHTML = '<div class="text-center py-8 text-red-400">加载失败</div>'; return; }
 
-      var html = '<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">';
+      var html = '<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">';
       d.pages.forEach(function(p) {
-        html += '<div class="p-4 rounded-xl border border-gray-200 bg-white cursor-pointer hover:border-indigo-300 transition-all" data-page="' + esc(p.page_id) + '">' +
+        html += '<div class="p-5 rounded-xl border border-gray-200 bg-white cursor-pointer hover:border-indigo-300 transition-all" data-page="' + esc(p.page_id) + '">' +
           '<div class="flex items-center gap-3 mb-2">' +
           '<span class="text-2xl">' + p.icon + '</span>' +
           '<div class="flex-1 min-w-0">' +
@@ -1228,14 +1230,14 @@
   // ═══════════════════════════════════════════════════════════════════
 
   function _header(title, activeTab) {
-    return '<div class="flex items-center justify-between mb-4 flex-wrap gap-3">' +
+    return '<div class="flex items-center justify-between mb-5 flex-wrap gap-3">' +
       '<div class="flex items-center gap-1 bg-gray-100 rounded-lg p-0.5">' +
-        '<button id="i18n-tab-overview" class="i18n-main-tab' + (!activeTab ? ' active' : '') + '" style="padding:0.375rem 0.875rem;border:none;border-radius:0.5rem;font-size:0.85rem;font-weight:500;cursor:pointer;transition:all 0.15s">🌐 翻译总览</button>' +
-        '<button id="i18n-tab-pages" class="i18n-main-tab' + (activeTab === 'pages' ? ' active' : '') + '" style="padding:0.375rem 0.875rem;border:none;border-radius:0.5rem;font-size:0.85rem;font-weight:500;cursor:pointer;transition:all 0.15s">📄 页面内容</button>' +
+        '<button id="i18n-tab-overview" class="i18n-main-tab' + (!activeTab ? ' active' : '') + '" style="padding:0.4rem 1rem;border:none;border-radius:0.5rem;font-size:0.85rem;font-weight:500;cursor:pointer;transition:all 0.15s">🌐 翻译总览</button>' +
+        '<button id="i18n-tab-pages" class="i18n-main-tab' + (activeTab === 'pages' ? ' active' : '') + '" style="padding:0.4rem 1rem;border:none;border-radius:0.5rem;font-size:0.85rem;font-weight:500;cursor:pointer;transition:all 0.15s">📄 页面内容</button>' +
       '</div>' +
-      '<div class="flex gap-3">' +
-        '<button id="btn-i18n-export" class="btn-ghost" style="font-size:0.85rem;padding:0.375rem 0.875rem">📥 导出 JSON</button>' +
-        '<button id="btn-i18n-import" class="btn-ghost" style="font-size:0.85rem;padding:0.375rem 0.875rem">📤 导入 JSON</button>' +
+      '<div class="flex gap-2">' +
+        '<button id="btn-i18n-export" class="btn-ghost" style="font-size:0.85rem;padding:0.4rem 1rem">📥 导出 JSON</button>' +
+        '<button id="btn-i18n-import" class="btn-ghost" style="font-size:0.85rem;padding:0.4rem 1rem">📤 导入 JSON</button>' +
         '<input type="file" id="i18n-import-file" accept=".json" style="display:none">' +
       '</div>' +
     '</div>';
