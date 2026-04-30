@@ -49,6 +49,8 @@ function publishRoutes(db) {
           category: p.category_i18n_key || p.category_slug,
           subCategory: p.sub_category || null,
           model: p.model,
+          name: p.name || '',
+          specifications: p.specifications || '',
           status: p.status,
           is_active: p.is_active ? true : false,
           badge: p.badge || null,
