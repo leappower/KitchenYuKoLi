@@ -41,6 +41,8 @@ function initDatabase() {
       id INTEGER PRIMARY KEY AUTOINCREMENT,
       category_id INTEGER REFERENCES product_categories(id) ON DELETE SET NULL,
       sub_category TEXT DEFAULT '',
+      name TEXT DEFAULT '',
+      specifications TEXT DEFAULT '',
       model TEXT UNIQUE NOT NULL,
       status TEXT DEFAULT '在售',
       is_active INTEGER DEFAULT 1,
@@ -156,6 +158,22 @@ function initDatabase() {
     );
     CREATE UNIQUE INDEX IF NOT EXISTS idx_posts_slug ON posts(slug);
 
+    CREATE TABLE IF NOT EXISTS product_translations (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      product_id INTEGER NOT NULL REFERENCES products(id) ON DELETE CASCADE,
+      lang TEXT NOT NULL DEFAULT 'en',
+      name TEXT DEFAULT '',
+      specifications TEXT DEFAULT '',
+      usage TEXT DEFAULT '',
+      throughput TEXT DEFAULT '',
+      created_at TEXT DEFAULT (datetime('now')),
+      updated_at TEXT DEFAULT (datetime('now')),
+      UNIQUE(product_id, lang)
+    );
+
+    CREATE INDEX IF NOT EXISTS idx_translations_product ON product_translations(product_id);
+    CREATE INDEX IF NOT EXISTS idx_translations_lang ON product_translations(lang);
+
     CREATE TABLE IF NOT EXISTS related_products (
       id INTEGER PRIMARY KEY AUTOINCREMENT,
       product_id INTEGER NOT NULL REFERENCES products(id) ON DELETE CASCADE,
@@ -173,6 +191,16 @@ function initDatabase() {
   // Auto-migration: add is_home_core column if missing
   try {
     db.exec(`ALTER TABLE products ADD COLUMN is_home_core INTEGER DEFAULT 0`);
+  } catch(e) { /* column already exists */ }
+
+  // Auto-migration: add name column if missing
+  try {
+    db.exec(`ALTER TABLE products ADD COLUMN name TEXT DEFAULT ''`);
+  } catch(e) { /* column already exists */ }
+
+  // Auto-migration: add specifications column if missing
+  try {
+    db.exec(`ALTER TABLE products ADD COLUMN specifications TEXT DEFAULT ''`);
   } catch(e) { /* column already exists */ }
 
   // Ensure default admin user

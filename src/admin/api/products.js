@@ -65,7 +65,7 @@ function productsRoutes(db) {
 
   // POST /products — create
   router.post('/products', requireAuth, (req, res) => {
-    const fields = ['category_id', 'sub_category', 'model', 'status', 'is_active', 'badge', 'badge_color',
+    const fields = ['category_id', 'sub_category', 'model', 'name', 'specifications', 'status', 'is_active', 'badge', 'badge_color',
       'power', 'throughput', 'average_time', 'voltage', 'frequency', 'material',
       'product_dimensions', 'color', 'control_method', 'launch_time', 'tier', 'sort_order', 'is_home_core'];
     const { model } = req.body;
@@ -105,7 +105,7 @@ function productsRoutes(db) {
     try {
       const sets = [];
       const vals = [];
-      const fields = ['category_id', 'sub_category', 'model', 'status', 'is_active', 'badge', 'badge_color',
+      const fields = ['category_id', 'sub_category', 'model', 'name', 'specifications', 'status', 'is_active', 'badge', 'badge_color',
         'power', 'throughput', 'average_time', 'voltage', 'frequency', 'material',
         'product_dimensions', 'color', 'control_method', 'launch_time', 'tier', 'sort_order', 'is_home_core'];
 
@@ -258,6 +258,52 @@ function productsRoutes(db) {
       batch();
       logAudit(db, req.user.userId, req.user.username, 'update', 'related_products', productId, null, { related: items });
       res.json({ message: 'Related products updated' });
+    } catch (e) { res.status(500).json({ error: e.message }); }
+  });
+
+  // ─── Product Translations ───────────
+
+  // GET /products/:id/translations — list all translations for a product
+  router.get('/products/:id/translations', requireAuth, (req, res) => {
+    try {
+      const productId = parseInt(req.params.id);
+      const translations = db.prepare(
+        'SELECT * FROM product_translations WHERE product_id = ? ORDER BY lang ASC'
+      ).all(productId);
+      res.json({ translations });
+    } catch (e) { res.status(500).json({ error: e.message }); }
+  });
+
+  // PUT /products/:id/translations — upsert translations (bulk)
+  router.put('/products/:id/translations', requireAuth, (req, res) => {
+    try {
+      const productId = parseInt(req.params.id);
+      const items = req.body; // [{lang: 'en', name: '...', specifications: '...', usage: '...', throughput: '...'}]
+      if (!Array.isArray(items)) return res.status(400).json({ error: 'Expected array' });
+
+      const upsert = db.prepare(
+        `INSERT INTO product_translations (product_id, lang, name, specifications, usage, throughput, updated_at)
+         VALUES (?, ?, ?, ?, ?, ?, datetime('now'))
+         ON CONFLICT(product_id, lang) DO UPDATE SET
+         name = excluded.name,
+         specifications = excluded.specifications,
+         usage = excluded.usage,
+         throughput = excluded.throughput,
+         updated_at = excluded.updated_at`
+      );
+
+      const batch = db.transaction(() => {
+        items.forEach(item => {
+          upsert.run(productId, item.lang, item.name || '', item.specifications || '', item.usage || '', item.throughput || '');
+        });
+      });
+      batch();
+
+      logAudit(db, req.user.userId, req.user.username, 'update', 'product_translations', productId, null, { translations: items });
+      const translations = db.prepare(
+        'SELECT * FROM product_translations WHERE product_id = ? ORDER BY lang ASC'
+      ).all(productId);
+      res.json({ translations });
     } catch (e) { res.status(500).json({ error: e.message }); }
   });
 

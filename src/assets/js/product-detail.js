@@ -166,10 +166,18 @@
       { l: "材质", v: product.material }, { l: "尺寸", v: product.productDimensions },
       { l: "颜色", v: product.color }, { l: "控制方式", v: product.controlMethod },
     ];
+    // Add specifications as full-width description card if present
+    if (product.specifications) {
+      specs.unshift({ l: "配置", v: product.specifications, full: true });
+    }
     var specCards = "";
     for (var s = 0; s < specs.length; s++) {
       if (!specs[s].v) continue;
-      specCards += '<div class="flex justify-between items-start py-3 px-4 rounded-lg bg-slate-50 dark:bg-slate-700/50"><span class="text-sm text-slate-500 dark:text-slate-400 font-medium">' + esc(specs[s].l) + '</span><span class="text-sm font-semibold text-right">' + esc(specs[s].v) + '</span></div>';
+      if (specs[s].full) {
+        specCards += '<div class="md:col-span-2 py-3 px-4 rounded-lg bg-slate-50 dark:bg-slate-700/50"><span class="text-sm text-slate-500 dark:text-slate-400 font-medium block mb-1">' + esc(specs[s].l) + '</span><span class="text-sm font-semibold">' + esc(specs[s].v) + '</span></div>';
+      } else {
+        specCards += '<div class="flex justify-between items-start py-3 px-4 rounded-lg bg-slate-50 dark:bg-slate-700/50"><span class="text-sm text-slate-500 dark:text-slate-400 font-medium">' + esc(specs[s].l) + '</span><span class="text-sm font-semibold text-right">' + esc(specs[s].v) + '</span></div>';
+      }
     }
 
     var tier = product.tier ? '<span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-bold bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-300">' + esc(product.tier) + '</span>' : '';
@@ -203,26 +211,54 @@
 
   document.addEventListener("DOMContentLoaded", renderPDP);
   document.addEventListener("product-data-ready", renderPDP);
+  // Multi-language helper: get product field for current language
+  // Usage: getProductField(product, 'name') → returns translated name or fallback to Chinese
+  window.getProductField = function(product, field) {
+    if (!product) return '';
+    var lang = (window.CURRENT_LANG || document.documentElement.lang || 'zh-CN').replace('_', '-');
+    if (lang === 'zh-CN' || lang === 'zh') return product[field] || '';
+    // Check translations cache (loaded via API)
+    var tKey = product.model || product.id;
+    var translations = window._productTranslations || {};
+    var t = translations[tKey] || translations[product._productId];
+    if (t && t[field]) return t[field];
+    return product[field] || '';
+  };
+
+  // Load translations for a language (called when user switches language)
+  window.loadProductTranslations = function(lang, callback) {
+    if (lang === 'zh-CN' || lang === 'zh') { window._productTranslations = {}; if (callback) callback(); return; }
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', '/api/translations?lang=' + encodeURIComponent(lang), true);
+    xhr.onload = function() {
+      if (xhr.status === 200) {
+        try {
+          var data = JSON.parse(xhr.responseText);
+          // Build model → translation map (need product data to resolve model)
+          var products = getAllProducts();
+          var idToModel = {};
+          products.forEach(function(p) { if (p._productId) idToModel[p._productId] = p.model; });
+          // Map by product_id → need to enrich product data first
+          window._productTranslations = data.translations || {};
+          // Also build model-based lookup
+          window._productTranslationsByModel = {};
+          products.forEach(function(p) {
+            var t = data.translations[p._productId];
+            if (t) window._productTranslationsByModel[p.model] = t;
+          });
+        } catch(e) {}
+      }
+      if (callback) callback();
+    };
+    xhr.send();
+  };
+
   document.addEventListener("spa:load", function() {
     var segs = location.pathname.split("/").filter(Boolean);
     console.log('[ProductDetail] spa:load fired, pathname:', location.pathname, 'segs:', segs);
-    console.log('[ProductDetail] PRODUCT_DATA_TABLE:', window.PRODUCT_DATA_TABLE ? window.PRODUCT_DATA_TABLE.length + ' categories' : 'MISSING');
-    console.log('[ProductDetail] #product-content:', !!document.getElementById('product-content'), '#related-products:', !!document.getElementById('related-products'));
     if (segs.length === 2 && segs[0] === "products") {
       console.log('[ProductDetail] Will render PDP in 100ms');
       setTimeout(renderPDP, 100);
-    } else {
-      console.log('[ProductDetail] Skipping PDP render (not a product detail route)');
-    }
-    var segs = location.pathname.split("/").filter(Boolean);
-    console.log('[ProductDetail] spa:load fired, pathname:', location.pathname, 'segs:', segs);
-    console.log('[ProductDetail] PRODUCT_DATA_TABLE:', window.PRODUCT_DATA_TABLE ? window.PRODUCT_DATA_TABLE.length + ' categories' : 'MISSING');
-    console.log('[ProductDetail] #product-content:', !!document.getElementById('product-content'), '#related-products:', !!document.getElementById('related-products'));
-    if (segs.length === 2 && segs[0] === "products") {
-      console.log('[ProductDetail] Will render PDP in 100ms');
-      setTimeout(renderPDP, 100);
-    } else {
-      console.log('[ProductDetail] Skipping PDP render (not a product detail route)');
     }
   });
 })();

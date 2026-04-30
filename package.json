@@ -47,6 +47,7 @@
     "prepare": "git config core.hooksPath .githooks"
   },
   "dependencies": {
+    "adm-zip": "^0.5.17",
     "bcryptjs": "^3.0.3",
     "better-sqlite3": "^12.9.0",
     "compression": "^1.7.4",
@@ -55,7 +56,8 @@
     "helmet": "^7.1.0",
     "jsonwebtoken": "^9.0.3",
     "multer": "^2.1.1",
-    "puppeteer-core": "24.39.1"
+    "puppeteer-core": "24.39.1",
+    "xlsx": "^0.18.5"
   },
   "devDependencies": {
     "@babel/preset-env": "7.29.0",
