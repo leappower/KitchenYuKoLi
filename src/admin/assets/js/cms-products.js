@@ -165,7 +165,7 @@
       '<div class="flex gap-2">' +
       '<button type="button" id="pm-auto-translate" style="font-size:0.75rem;color:#fff;background:#7c3aed;border:none;padding:0.25rem 0.75rem;border-radius:0.375rem;cursor:pointer">🤖 AI 一键翻译</button>' +
       '</div></div>' +
-      '<div id="pm-translations" style="display:flex;flex-direction:column;gap:0.75rem"><div class="text-sm text-gray-400" style="padding:0.5rem">保存产品后可编辑翻译</div></div></div>';
+      '<div id="pm-translations" style="display:flex;flex-direction:column;gap:0.75rem"></div></div>';
 
     showModal('product-modal', p ? '编辑产品' : '新增产品', html, function() {
       // Validate model name
@@ -270,8 +270,14 @@
         api('/products/' + p.id + '/translations').then(function(d) {
           if (d && d.translations && d.translations.length > 0) {
             CMS.renderTranslationFields(d.translations);
+          } else {
+            // Existing product but no translations yet — still render empty fields so AI translate works
+            CMS.renderTranslationFields([]);
           }
         });
+      } else {
+        // New product — render empty translation fields so AI translate can populate them
+        CMS.renderTranslationFields([]);
       }
       // Related products handlers
       var addRelBtn = document.getElementById('pm-add-related');
