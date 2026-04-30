@@ -156,14 +156,20 @@
 
   // ─── Grid rendering with pagination ──────────────────────────
   var _shownCount = {};
-  var PAGE_SIZE = 12; // products per page
+
+  function getPageSize() {
+    var w = window.innerWidth || 1024;
+    if (w >= 1280) return 8;   // PC: 4 cols × 2 rows
+    if (w >= 768) return 6;    // Tablet: 3 cols × 2 rows
+    return 6;                 // Mobile: 2 cols × 3 rows
+  }
 
   function renderGrid(containerId, renderer, maxCount) {
     var container = document.getElementById(containerId);
     if (!container) return;
     var products = getAllProducts();
     var total = products.length;
-    var initial = Math.min(total, PAGE_SIZE);
+    var initial = Math.min(total, getPageSize());
     _shownCount[containerId] = initial;
     container.innerHTML = products.slice(0, initial).map(renderer).join('');
     updateLoadMoreBtn(containerId, total, initial);
@@ -182,8 +188,8 @@
     loadMore.addEventListener('click', function() {
       var container = document.getElementById(containerId);
       if (!container) return;
-      var shown = _shownCount[containerId] || PAGE_SIZE;
-      var next = Math.min(shown + PAGE_SIZE, products.length);
+      var shown = _shownCount[containerId] || getPageSize();
+      var next = Math.min(shown + getPageSize(), products.length);
       _shownCount[containerId] = next;
       // Append new products
       container.innerHTML = products.slice(0, next).map(renderer).join('');
