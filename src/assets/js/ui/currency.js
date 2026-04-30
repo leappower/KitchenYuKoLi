@@ -238,6 +238,20 @@
     setTimeout(refreshCurrencyUI, 100);
   }
 
+  // ── SPA 导航后重新翻译+刷新币种 ──
+  document.addEventListener('spa:load', function() {
+    // 先让 translationManager 翻译新注入的 data-i18n 元素
+    if (root.translationManager && root.translationManager.isInitialized) {
+      root.translationManager.applyTranslations().then(function() {
+        refreshCurrencyUI();
+      }).catch(function() {
+        setTimeout(refreshCurrencyUI, 300);
+      });
+    } else {
+      setTimeout(refreshCurrencyUI, 300);
+    }
+  });
+
   // ── Export ──
   var Currency = {
     getConfig: getConfig,
