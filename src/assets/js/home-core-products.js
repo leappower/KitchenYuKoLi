@@ -124,7 +124,16 @@
           });
         }
         console.log('[HCP] Network data: total categories=' + (Array.isArray(data) ? data.length : 0) + ', core products=' + coreProducts.length);
-        if (coreProducts.length === 0) return;
+        if (coreProducts.length === 0) {
+          console.log('[HCP] ⚠️ No home core products marked in database');
+          // Show empty state instead of blank
+          var emptyContainer = document.querySelector('[id^="home-core-products"]');
+          if (emptyContainer) {
+            emptyContainer.innerHTML = '<div class="text-center text-slate-400 py-8">暂无核心产品</div>';
+          }
+          callback([], 'network');
+          return;
+        }
         _saveCache(coreProducts);
         callback(coreProducts, 'network');
       })
