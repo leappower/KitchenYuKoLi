@@ -40,6 +40,7 @@ const apiProxy = createProxyMiddleware({
   target: API_SERVER,
   changeOrigin: true,
   pathFilter: ['/api/cms/**', '/api/translations/**', '/api/nav-config/**', '/admin/**'],
+  pathRewrite: { '^/api/translations': '/api/cms/translations' },
   logLevel: process.env.NODE_ENV !== 'production' ? 'warn' : 'silent',
   onError: (err, req, res) => {
     console.error('[proxy] error:', err.message, req.path);
