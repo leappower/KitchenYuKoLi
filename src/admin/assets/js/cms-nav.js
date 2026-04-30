@@ -10,8 +10,13 @@
   CMS.renderNavPage = function(area) {
     area.innerHTML = '<div class="fade-in"><div class="flex items-center justify-between mb-4">' +
       '<h2 class="text-lg font-semibold">导航管理</h2>' +
-      '<button class="btn-primary" onclick="openNavEditor()">+ 新增导航项</button></div>' +
+      '<div class="flex gap-2">' +
+      '<button id="btn-nav-batch-translate" class="btn-secondary" style="background:#7c3aed;color:#fff;border:none;padding:0.375rem 0.75rem;border-radius:0.375rem;cursor:pointer;font-size:0.875rem;white-space:nowrap">🤖 AI 批量翻译</button>' +
+      '<button class="btn-primary" onclick="openNavEditor()">+ 新增导航项</button>' +
+      '</div></div>' +
       '<div id="nav-container"><div class="text-center py-8 text-gray-400">加载中...</div></div></div>';
+
+    document.getElementById('btn-nav-batch-translate').addEventListener('click', openNavBatchTranslate);
     loadNavData();
   };
 
@@ -155,4 +160,59 @@
   }
 
   window.openNavEditor = openNavEditor;
+
+  function openNavBatchTranslate() {
+    var langCheckboxes = Object.entries({
+      'en': 'English', 'ja': '日本語', 'ko': '한국어', 'th': 'ไทย',
+      'vi': 'Tiếng Việt', 'id': 'Bahasa Indonesia', 'ms': 'Bahasa Melayu',
+      'hi': 'हिन्दी', 'ar': 'العربية', 'zh-TW': '繁體中文'
+    }).map(function(e) {
+      return '<label class="flex items-center gap-2 text-sm"><input type="checkbox" class="batch-lang-cb" value="' + e[0] + '" checked> ' + e[1] + ' (' + e[0] + ')</label>';
+    }).join('');
+
+    var html = '<div>' +
+      '<p class="text-sm text-gray-600 mb-3">将所有导航项的中文标签翻译为选中的语言，并写入对应的 i18n 语言文件。</p>' +
+      '<p class="text-sm text-gray-600 mb-2">目标语言：</p>' +
+      '<div class="grid grid-cols-2 gap-2 mb-4" style="max-height:200px;overflow-y:auto">' + langCheckboxes + '</div>' +
+      '<label class="flex items-center gap-2 text-sm mb-3"><input type="checkbox" id="bt-skip-done" checked> 跳过已有翻译的语言</label>' +
+      '<div id="bt-progress" class="text-sm text-gray-500 mb-2"></div>' +
+      '<div id="bt-result" class="text-sm"></div>' +
+      '</div>';
+
+    showModal('nav-bt-modal', '🤖 AI 批量翻译导航项', html, function() {
+      var selectedLangs = Array.from(document.querySelectorAll('.batch-lang-cb:checked')).map(function(cb) { return cb.value; });
+      if (!selectedLangs.length) { toast('请至少选择一个目标语言', true); return; }
+
+      var progressEl = document.getElementById('bt-progress');
+      var resultEl = document.getElementById('bt-result');
+      progressEl.textContent = '正在翻译，请稍候...';
+      resultEl.textContent = '';
+
+      api('/nav/batch-translate', {
+        method: 'POST',
+        body: { target_langs: selectedLangs, source_lang: 'zh-CN' }
+      }).then(function(data) {
+        if (!data) return;
+        progressEl.textContent = '';
+        if (data.errors && data.errors.length) {
+          resultEl.innerHTML = '<span class="text-amber-600">⚠️ 完成，但有 ' + data.errors.length + ' 个错误：</span><br>' +
+            data.errors.map(function(e) { return '<span class="text-xs text-red-500">' + esc(String(e)) + '</span>'; }).join('<br>');
+        } else {
+          resultEl.innerHTML = '<span class="text-green-600">✅ 翻译完成！共翻译 ' + (data.translated || 0) + ' 条。</span>';
+        }
+        if (data.langs) {
+          var summary = Object.entries(data.langs).map(function(e) {
+            if (e[1].status === 'ok') return '<span class="text-green-600">' + e[0] + ': ' + e[1].translated + '条</span>';
+            if (e[1].status === 'already_done') return '<span class="text-gray-400">' + e[0] + ': 已有翻译</span>';
+            return '<span class="text-red-500">' + e[0] + ': ' + (e[1].error || '失败') + '</span>';
+          }).join('<br>');
+          resultEl.innerHTML += '<div class="mt-2">' + summary + '</div>';
+        }
+        toast('翻译完成');
+      });
+
+      // Prevent closing the modal during translation
+      return false;
+    });
+  }
 })();

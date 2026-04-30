@@ -9,7 +9,8 @@
 
   CMS.renderProducts = function(area) {
     area.innerHTML = '<div class="fade-in"><div class="flex items-center gap-3 mb-4" style="flex-wrap:wrap">' +
-      '<select id="prod-cat-filter" onchange="CMS.loadProducts()" style="width:auto"><option value="">全部系列</option></select>' +
+      '<input type="hidden" id="prod-cat-filter" value="">' +
+      '<div id="prod-cat-btns" class="flex gap-2" style="flex-wrap:wrap"><button class="cat-filter-btn active" data-cat="" onclick="CMS.filterProducts(\'\',this)">全部</button></div>' +
       '<input id="prod-search" type="text" placeholder="搜索型号..." style="flex:1;min-width:150px">' +
       '<button class="btn-ghost" style="color:#059669" onclick="CMS.openExcelImport()">📥 导入 Excel</button>' +
       '<button class="btn-primary ml-auto" onclick="CMS.openProductForm()">+ 新增产品</button></div>' +
@@ -18,13 +19,24 @@
     api('/categories').then(function(d) {
       if (!d || !d.categories) return;
       CMS.categories = d.categories;
-      var sel = document.getElementById('prod-cat-filter');
+      var container = document.getElementById('prod-cat-btns');
       CMS.categories.forEach(function(c) {
-        var opt = document.createElement('option');
-        opt.value = c.id; opt.textContent = c.slug;
-        sel.appendChild(opt);
+        var btn = document.createElement('button');
+        btn.className = 'cat-filter-btn';
+        btn.dataset.cat = c.id;
+        btn.textContent = c.slug;
+        btn.onclick = function() { CMS.filterProducts(c.id, this); };
+        container.appendChild(btn);
       });
     });
+    CMS.loadProducts();
+  };
+
+  CMS.filterProducts = function(catId, btn) {
+    var btns = document.querySelectorAll('.cat-filter-btn');
+    btns.forEach(function(b) { b.classList.remove('active'); });
+    if (btn) btn.classList.add('active');
+    document.getElementById('prod-cat-filter').value = catId || '';
     CMS.loadProducts();
   };
 
@@ -126,6 +138,8 @@
       '<input id="pm-freq" value="' + esc(p ? (p.frequency || '') : '') + '"></div>' +
       '<div><label class="text-sm font-medium text-gray-700" style="display:block;margin-bottom:0.25rem">材质</label>' +
       '<input id="pm-material" value="' + esc(p ? (p.material || '') : '') + '"></div>' +
+      '<div><label class="text-sm font-medium text-gray-700" style="display:block;margin-bottom:0.25rem">控制方式</label>' +
+      '<input id="pm-control" value="' + esc(p ? (p.control_method || '') : '') + '"></div>' +
       '<div><label class="text-sm font-medium text-gray-700" style="display:block;margin-bottom:0.25rem">尺寸</label>' +
       '<input id="pm-dims" value="' + esc(p ? (p.product_dimensions || '') : '') + '"></div>' +
       '<div><label class="text-sm font-medium text-gray-700" style="display:block;margin-bottom:0.25rem">颜色</label>' +
@@ -171,6 +185,7 @@
         voltage: document.getElementById('pm-voltage').value,
         frequency: document.getElementById('pm-freq').value,
         material: document.getElementById('pm-material').value,
+        control_method: document.getElementById('pm-control').value,
         product_dimensions: document.getElementById('pm-dims').value,
         color: document.getElementById('pm-color').value,
         sort_order: parseInt(document.getElementById('pm-sort').value) || 0,

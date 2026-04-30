@@ -183,12 +183,12 @@ function navRoutes(db) {
   // POST /nav/batch-translate — AI 批量翻译导航项到各语言的 i18n JSON 文件
   router.post('/nav/batch-translate', requireAdmin, async (req, res) => {
     try {
-      const { target_langs, dry_run, source_lang } = req.body;
+      const { target_langs, source_lang } = req.body;
       const langs = (target_langs && target_langs.length > 0) ? target_langs : Object.keys(SUPPORTED_LANGS);
       const srcLang = source_lang || 'zh-CN';
 
       // 1. Get all nav items
-      const items = db.prepare('SELECT id, i18n_key, default_label, icon, badge, target, path FROM nav_items WHERE is_active = 1 ORDER BY sort_order ASC, id ASC').all();
+      const items = db.prepare('SELECT id, i18n_key, default_label FROM nav_items WHERE is_active = 1 ORDER BY sort_order ASC, id ASC').all();
       if (!items.length) return res.json({ translated: 0, message: '没有启用的导航项' });
 
       // 2. Read source language file for reference labels
@@ -198,113 +198,117 @@ function navRoutes(db) {
         srcData = JSON.parse(fs.readFileSync(srcFile, 'utf8'));
       }
 
-      // 3. Build text map: i18n_key → label to translate
-      // Use default_label as primary, fallback to srcData[i18n_key]
-      const textsToTranslate = [];
+      // 3. Build key→label map (use default_label, fallback to srcData)
+      const keyLabelMap = {};
       items.forEach(item => {
         const label = item.default_label || srcData[item.i18n_key] || item.i18n_key;
-        // Skip keys that already have good translations in all target langs (e.g. 'en')
-        textsToTranslate.push({ key: item.i18n_key, label });
+        if (label.trim()) keyLabelMap[item.i18n_key] = label;
       });
 
-      // 4. Filter out languages that already have all nav keys filled (e.g. 'en')
-      const langsToProcess = langs.filter(lang => {
-        if (lang === srcLang) return false;
+      // 4. For each target lang, find missing keys
+      const results = { total_keys: Object.keys(keyLabelMap).length, langs: {}, translated: 0, errors: [] };
+
+      // 5. Get translation provider config (reuse translate.js env vars)
+      const apiKey = process.env.TRANSLATE_API_KEY;
+      const apiUrl = (process.env.TRANSLATE_API_URL || 'https://api.openai.com/v1').replace(/\/+$/, '');
+      const model = process.env.TRANSLATE_MODEL || 'gpt-4o-mini';
+      if (!apiKey) return res.status(503).json({ error: '翻译服务未配置：请设置 TRANSLATE_API_KEY' });
+
+      for (const lang of langs) {
+        if (lang === srcLang) { results.skipped = (results.skipped || 0) + 1; continue; }
         const langFile = path.join(LANG_DIR, lang + '-ui.json');
-        if (!fs.existsSync(langFile)) return true;
+        if (!fs.existsSync(langFile)) { results.errors.push(lang + ': 文件不存在'); continue; }
+
         const langData = JSON.parse(fs.readFileSync(langFile, 'utf8'));
-        const missingKeys = textsToTranslate.filter(t => !langData[t.key] || langData[t.key].trim() === '');
-        return missingKeys.length > 0;
-      });
+        const missingKeys = Object.keys(keyLabelMap).filter(k => !langData[k] || langData[k].trim() === '');
 
-      if (langsToProcess.length === 0) {
-        return res.json({ translated: 0, message: '所有目标语言已有完整翻译' });
-      }
+        if (missingKeys.length === 0) {
+          results.langs[lang] = { status: 'already_done', count: 0 };
+          continue;
+        }
 
-      // 5. Call translate API for each batch of languages
-      const results = { total_keys: textsToTranslate.length, total_langs: langsToProcess.length, translated: 0, skipped: [], errors: [] };
+        // Build translation prompt for this language
+        const entries = missingKeys.map(k => [k, keyLabelMap[k]]);
+        const langName = SUPPORTED_LANGS[lang] || lang;
 
-      const labels = textsToTranslate.map(t => t.label);
-      const BATCH_SIZE = 5; // Match translate.js default
-
-      for (let i = 0; i < langsToProcess.length; i += BATCH_SIZE) {
-        const batchLangs = langsToProcess.slice(i, i + BATCH_SIZE);
-
-        // Call the internal translate API via localhost
-        // We reuse the existing /api/cms/translate endpoint
-        const translateUrl = 'http://localhost:' + (process.env.PORT || 3000) + '/api/cms/translate';
-        const adminToken = req.headers.authorization;
+        const prompt = '将以下网站导航菜单文本从' + (srcLang === 'zh-CN' ? '简体中文' : srcLang) + '翻译成' + langName + '。\n\n' +
+          '要求：\n' +
+          '1. 只输出JSON，不要包含任何其他文字或markdown代码块标记\n' +
+          '2. 翻译要简洁、专业、符合当地语言习惯\n' +
+          '3. 保留品牌名、专有名词不变\n' +
+          '4. 导航文本通常很短（2-8个字），翻译也要保持简洁\n\n' +
+          entries.map(function(e, i) { return (i + 1) + '. ' + e[0] + ' = ' + e[1]; }).join('\n') + '\n\n' +
+          '输出JSON格式，key为原文的i18n_key，value为翻译后的文本：\n' +
+          '{ "' + entries[0][0] + '": "...", "' + entries[1][0] + '": "..." }';
 
         try {
           const controller = new AbortController();
-          const timeout = setTimeout(() => controller.abort(), 120000);
+          const timeout = setTimeout(function() { controller.abort(); }, 60000);
 
-          const response = await fetch(translateUrl, {
+          const response = await fetch(apiUrl + '/chat/completions', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
-              ...(adminToken ? { 'Authorization': adminToken } : {})
+              'Authorization': 'Bearer ' + apiKey
             },
             body: JSON.stringify({
-              texts: labels,
-              source_lang: srcLang,
-              target_langs: batchLangs
+              model: model,
+              messages: [
+                { role: 'system', content: '你是专业的网站本地化翻译专家。只输出JSON，不要包含任何其他文字或markdown代码块标记。' },
+                { role: 'user', content: prompt }
+              ],
+              temperature: 0.3,
+              max_tokens: 4096,
+              response_format: { type: 'json_object' }
             }),
             signal: controller.signal
           });
 
           clearTimeout(timeout);
-          const data = await response.json();
 
           if (!response.ok) {
-            results.errors.push({ langs: batchLangs, error: data.error || 'API error ' + response.status });
+            const errText = await response.text();
+            results.errors.push(lang + ': API ' + response.status + ' ' + errText.substring(0, 100));
+            results.langs[lang] = { status: 'error', error: 'API ' + response.status };
             continue;
           }
 
-          // 6. Write translations to language files
-          const translations = data.translations || [];
-          translations.forEach(tr => {
-            if (tr._error || !tr.lang) return;
-            const langFile = path.join(LANG_DIR, tr.lang + '-ui.json');
-            if (!fs.existsSync(langFile)) return;
-            const langData = JSON.parse(fs.readFileSync(langFile, 'utf8'));
+          const data = await response.json();
+          let translated;
+          try {
+            const content = data.choices[0].message.content;
+            translated = JSON.parse(content.replace(/^```json?\s*/, '').replace(/\s*```$/, ''));
+          } catch (e) {
+            results.errors.push(lang + ': 解析失败');
+            results.langs[lang] = { status: 'error', error: 'parse_error' };
+            continue;
+          }
 
-            textsToTranslate.forEach(t => {
-              // Map translations: the translate API returns arrays aligned with input texts
-              // We need to find the right label in the response
-            });
-          });
+          // Merge translations into lang file
+          let written = 0;
+          for (const key of missingKeys) {
+            if (translated[key] && translated[key].trim()) {
+              langData[key] = translated[key];
+              written++;
+            }
+          }
 
-          // Re-map: the translate API returns translations per language, each containing product fields
-          // We need a simpler approach: translate nav labels as plain text
-          // The existing translate API is designed for products, so let's use it differently
-          // Actually, let's check if the response format matches what we need
+          // Write back to file
+          fs.writeFileSync(langFile, JSON.stringify(langData, null, 2) + '\n', 'utf-8');
+          results.langs[lang] = { status: 'ok', translated: written, total: missingKeys.length };
+          results.translated += written;
 
-          // The translate API returns: translations[].{ lang, name, specifications, throughput }
-          // But for nav, we just need label translations. The 'name' field maps to our labels.
-          // Since we pass labels as 'texts', and the API interprets them as product names,
-          // we can use the 'name' field from each translation.
-
-          // However, the translate API returns ONE set of fields per language, not per text.
-          // The API maps all texts into a single prompt and returns translations for all of them.
-          // Let me re-read the translate API response format more carefully.
-
-          // Looking at translate.js: it returns translations array, one per target_lang.
-          // Each translation has: lang, name, specifications, throughput
-          // But this is for a SINGLE product (one set of texts).
-          // When we pass multiple texts, the API sends them all in one prompt and expects
-          // the model to translate ALL of them. The response format is per-language with fields.
-          // This means we can't use the existing translate API for nav items directly —
-          // it's designed for product data (name, specs, throughput), not for arbitrary label arrays.
-
-          // We need a different approach: translate labels directly using the same provider.
-          results.errors.push({ langs: batchLangs, error: 'Need custom nav translation logic' });
-
+          // Rate limit: wait between requests
+          if (langs.indexOf(lang) < langs.length - 1) {
+            await new Promise(function(resolve) { setTimeout(resolve, 8000); });
+          }
         } catch (e) {
-          results.errors.push({ langs: batchLangs, error: e.message });
+          results.errors.push(lang + ': ' + e.message);
+          results.langs[lang] = { status: 'error', error: e.message };
         }
       }
 
+      logAudit(db, req.user.userId, req.user.username, 'translate', 'nav_items', null, null, results);
       res.json(results);
     } catch (e) {
       res.status(500).json({ error: e.message });

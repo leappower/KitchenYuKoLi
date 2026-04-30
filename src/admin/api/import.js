@@ -39,17 +39,18 @@ function importRoutes(db) {
     if (!specText) return {};
     var result = {};
     var rules = [
-      { field: 'power', patterns: [/功率[：:]\s*(\S+)/, /功率[：:]\s*([^\n,，]+)/] },
-      { field: 'voltage', patterns: [/电压[：:]\s*(\S+)/] },
-      { field: 'frequency', patterns: [/频率[：:]\s*(\S+)/] },
-      { field: 'material', patterns: [/材质[：:]\s*(\S+)/, /材质[：:]\s*([^\n,，]+)/] },
-      { field: 'throughput', patterns: [/产能[：:]\s*(\S+)/, /产能[：:]\s*([^\n,，]+)/] },
-      { field: 'control_method', patterns: [/控制方式[：:]\s*(\S+)/, /控制[：:]\s*(\S+)/] },
+      { field: 'power', patterns: [/功率[：:]*\s*([\d.]+\s*[kKmM]?[wW])/i, /额定功率[：:]*\s*([\d.]+\s*[kK]?[wW][\-–—]?[\d.]*)/i, /电功率[：:]*\s*([\d.]+\s*[kK]?[wW])/i] },
+      { field: 'voltage', patterns: [/额定电压[：:]*\s*([\d.]+\s*[vV][\/]?[\d.]*)/i, /电压[：:]*\s*([\d.]+\s*[vV])/i] },
+      { field: 'frequency', patterns: [/频率[：:]*\s*([\d.]+\s*[hH][zZ])/i, /[/]50Hz/i] },
+      { field: 'material', patterns: [/锅体材质[：:]*\s*([^\n，,]+)/, /产品材质[：:]*\s*([^\n，,]+)/, /水箱材质[：:]*\s*([^\n，,]+)/, /材质[：:]*\s*([^\n，,]+)/] },
+      { field: 'throughput', patterns: [/产能[：:]*\s*([^\n。]+)/, /产品产能[：:]*\s*([^\n。]+)/, /炒菜重量[：:]*\s*([^\n，,]+)/] },
+      { field: 'control_method', patterns: [/操作方式[：:]*\s*([^\n，,]+)/, /控制方式[：:]*\s*([^\n，,]+)/, /控制面板[：:]*\s*([^\n，,]+)/] },
+      { field: 'product_dimensions', patterns: [/机器尺寸[：:]*\s*([^\n，,]+)/, /外形尺寸[：:]*\s*([^\n，,]+)/, /配锅尺寸[^：:]*[：:]*\s*([^\n，,]+)/] },
     ];
     rules.forEach(function(rule) {
       for (var i = 0; i < rule.patterns.length; i++) {
         var m = specText.match(rule.patterns[i]);
-        if (m) { result[rule.field] = m[1].trim(); break; }
+        if (m && m[1]) { result[rule.field] = m[1].trim(); break; }
       }
     });
     return result;
@@ -63,21 +64,77 @@ function importRoutes(db) {
     const sheet = workbook.Sheets[sheetName];
     const rows = XLSX.utils.sheet_to_json(sheet, { defval: '' });
 
+    // Count embedded images in the Excel (ZIP scan, no decoding)
+    var imageCount = 0;
+    var imageFiles = [];
+    try {
+      const AdmZip = require('adm-zip');
+      var zip = new AdmZip(filePath);
+      zip.getEntries().forEach(function(entry) {
+        if (entry.entryName.match(/\.(png|jpg|jpeg|bmp|gif|emf|wmf|tiff)$/i) && !entry.isDirectory) {
+          imageCount++;
+          imageFiles.push(entry.entryName);
+        }
+      });
+    } catch(e) {
+      // Not a valid ZIP or adm-zip unavailable
+    }
+    console.log('[Import] Embedded images:', imageCount, imageFiles.length > 0 ? imageFiles.slice(0, 5) : []);
+
+    // Log actual column names for debugging
+    if (rows.length > 0) {
+      console.log('[Import] Excel columns:', JSON.stringify(Object.keys(rows[0])));
+    }
+
+    // Fuzzy column matcher: find key by partial match
+    function findCol(row, candidates) {
+      var keys = Object.keys(row);
+      for (var i = 0; i < candidates.length; i++) {
+        // Exact match first
+        if (row[candidates[i]] !== undefined) return row[candidates[i]];
+        // Partial match
+        for (var j = 0; j < keys.length; j++) {
+          if (keys[j].indexOf(candidates[i]) !== -1 || candidates[i].indexOf(keys[j]) !== -1) {
+            return row[keys[j]];
+          }
+        }
+      }
+      return '';
+    }
+
     var products = [];
     var errors = [];
     var seen = new Set();
 
     rows.forEach(function(row, idx) {
-      // Try to find the model column
-      var model = row['型号'] || row['型号（命名规则）'] || row['model'] || '';
-      var name = row['名称'] || row['产品名称'] || row['name'] || '';
-      var dims = row['尺寸'] || row['外形尺寸'] || row['dimensions'] || '';
-      var specs = row['配置'] || row['产品配置'] || row['specifications'] || '';
-      var throughput = row['用途和产能'] || row['产能'] || row['throughput'] || '';
-      var catHint = row['类别'] || row['分类'] || row['category'] || '';
+      // Try to find the model column (fuzzy matching)
+      var model = findCol(row, ['型号', 'model', 'Model', 'MODEL']);
+      var name = findCol(row, ['名称', '产品名称', 'name', 'Name']);
+      var dims = findCol(row, ['尺寸', '外形尺寸', 'dimensions', 'Dimensions', '外尺寸']);
+      var specs = findCol(row, ['配置', '产品配置', 'specifications', 'Specifications', '参数', '规格']);
+      var catHint = findCol(row, ['类别', '分类', 'category', 'Category', '系列']);
 
-      if (!model || !model.toString().trim()) return;
-      model = model.toString().trim();
+      // Normalize
+      model = model ? model.toString().trim() : '';
+      name = name ? name.toString().trim() : '';
+      dims = dims ? dims.toString().trim() : '';
+      specs = specs ? specs.toString().trim() : '';
+      catHint = catHint ? catHint.toString().trim() : '';
+
+      // If model is empty, try to derive from name (e.g. "台式360智能电磁炒菜机")
+      if (!model && name) {
+        // Try to find a model-like pattern in the name
+        var modelFromName = name.match(/[A-Z]{1,3}[-]?\d{2,}[A-Z]?[A-Z0-9]*/);
+        if (modelFromName) {
+          model = modelFromName[0];
+        } else {
+          // Use entire name as model if no pattern found
+          model = name;
+          name = '';
+        }
+      }
+
+      if (!model) return;
 
       // Handle compound models like "DLB-GQ40 / DLB-GQ40R"
       var models = model.split(/[/\\]/).map(function(m) { return m.trim(); }).filter(Boolean);
@@ -88,13 +145,14 @@ function importRoutes(db) {
 
         var cat = catHint ? matchCategoryByHint(catHint) : matchCategory(m);
         var extracted = extractSpecFields(specs);
+        var extractedDims = extracted.product_dimensions || '';
 
         products.push({
           model: m,
           name: name || '',
           specifications: specs || '',
-          product_dimensions: dims || '',
-          throughput: throughput || '',
+          product_dimensions: dims || extractedDims || '',
+          throughput: extracted.throughput || '',
           category_id: cat.categoryId,
           category_name: cat.name,
           power: extracted.power || '',
@@ -102,13 +160,11 @@ function importRoutes(db) {
           frequency: extracted.frequency || '',
           material: extracted.material || '',
           control_method: extracted.control_method || '',
-          // Override throughput if extracted from specs
-          throughput: extracted.throughput || throughput || '',
         });
       });
     });
 
-    return { products, errors, total: rows.length, sheet: sheetName };
+    return { products, errors, total: rows.length, sheet: sheetName, _columns: rows.length > 0 ? Object.keys(rows[0]) : [], image_count: imageCount, image_files: imageFiles };
   }
 
   function matchCategoryByHint(hint) {
@@ -185,7 +241,12 @@ function importRoutes(db) {
           total_rows: result.total,
           products_found: result.products.length,
           products: result.products,
-          errors: result.errors
+          errors: result.errors,
+          // Debug: include column names from first row
+          _debug_columns: result._columns,
+          _debug_first_product: result.products[0] || null,
+          image_count: result.image_count,
+          image_files: result.image_files
         });
       }
 
