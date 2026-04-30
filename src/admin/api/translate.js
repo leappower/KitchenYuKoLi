@@ -296,6 +296,40 @@ function translateRoutes(db) {
   const config = getConfig();
   const rateLimiter = new RateLimiter(config.rateLimit, 60000);
 
+  // ─── Prompt Builder ─────────────────────────────────────────────────
+  function buildTranslationPrompt(texts, source_lang, target_langs) {
+    const langList = target_langs.map(l => {
+      const name = SUPPORTED_LANGS[l] || l;
+      return `  "${l}" ("${name}")`;
+    }).join('\n');
+
+    return `将以下商用厨房设备的产品信息翻译成指定语言。
+
+源语言: ${source_lang}
+目标语言:
+${langList}
+
+原文信息:
+${texts.map((t, i) => `${i + 1}. ${t}`).join('\n')}
+
+要求:
+1. 保留型号（如 DLB-GQ40）、数字、技术参数不变
+2. 产品名称翻译要简洁专业
+3. 配置描述翻译要准确，技术术语保持原样
+4. 产能描述翻译要符合当地语言习惯
+
+请输出JSON格式，key为语言代码，value为对象，包含字段：
+- "产品名称": 翻译后的产品名称
+- "产品配置": 翻译后的配置信息
+- "用途和产能": 翻译后的用途和产能
+
+示例输出格式:
+{
+  "en": { "产品名称": "...", "产品配置": "...", "用途和产能": "..." },
+  "ja": { "产品名称": "...", "产品配置": "...", "用途和产能": "..." }
+}`;
+  }
+
   // POST /translate — batch translate with full protection
   router.post('/translate', requireAuth, async (req, res) => {
     try {
@@ -488,8 +522,7 @@ function translateRoutes(db) {
     res.json({ message: '配额已重置', quota });
   });
 
-  return router;
-  // POST /translate/texts — pure text translation for i18n
+    // POST /translate/texts — pure text translation for i18n
   router.post('/translate/texts', requireAuth, async (req, res) => {
     try {
       const { texts, source_lang, target_lang } = req.body;
@@ -497,6 +530,10 @@ function translateRoutes(db) {
         return res.status(400).json({ error: 'texts array is required' });
       if (!target_lang)
         return res.status(400).json({ error: 'target_lang is required' });
+
+      const providers = getProviders();
+      if (!providers.length)
+        return res.status(502).json({ error: 'No translation provider configured', translations: texts.map(function() { return ''; }) });
 
       const srcName = SUPPORTED_LANGS[source_lang] || source_lang;
       const tgtName = SUPPORTED_LANGS[target_lang] || target_lang;
@@ -515,6 +552,7 @@ function translateRoutes(db) {
 
       let translated = null;
       let usedProvider = null;
+      const config = getConfig();
 
       for (const provider of providers) {
         const wait = rateLimiter.waitMs;
