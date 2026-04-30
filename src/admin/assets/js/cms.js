@@ -2094,7 +2094,7 @@
     var html = '<div style="display:flex;flex-direction:column;gap:1rem">' +
       '<div><label class="text-sm font-medium text-gray-700" style="display:block;margin-bottom:0.25rem">选择 Excel 文件</label>' +
       '<input type="file" id="excel-file" accept=".xlsx,.xls" style="font-size:0.875rem">' +
-      '<div class="text-xs text-gray-400" style="margin-top:0.25rem">支持 .xlsx 格式，自动解析产品型号、名称、配置等信息</div></div>' +
+      '<div id="excel-file-info" class="text-xs text-gray-400" style="margin-top:0.25rem">支持 .xlsx 格式，自动解析产品型号、名称、配置等信息</div></div>' +
       '<div id="excel-preview" style="display:none">' +
       '<div class="flex items-center justify-between mb-2"><span class="text-sm font-medium">预览结果</span>' +
       '<span class="text-xs text-gray-400" id="excel-count"></span></div>' +
@@ -2105,11 +2105,17 @@
       var fileInput = document.getElementById('excel-file');
       if (!fileInput || !fileInput.files[0]) { toast('请选择文件', true); return; }
 
+      var file = fileInput.files[0];
+      // File size check
+      if (file.size > 50 * 1024 * 1024) {
+        toast('文件过大 (' + (file.size / 1024 / 1024).toFixed(1) + 'MB)，最大支持 50MB', true);
+        return;
+      }
       var fd = new FormData();
-      fd.append('file', fileInput.files[0]);
+      fd.append('file', file);
 
       var saveBtn = document.getElementById('excel-import-modal-save');
-      if (saveBtn) { saveBtn.disabled = true; saveBtn.textContent = '导入中...'; }
+      if (saveBtn) { saveBtn.disabled = true; saveBtn.textContent = '导入中 (' + (file.size / 1024 / 1024).toFixed(1) + 'MB)...'; }
 
       fetch('/api/cms/import/excel', {
         method: 'POST',
@@ -2139,10 +2145,16 @@
       fileInput.parentElement.appendChild(previewBtn);
       previewBtn.addEventListener('click', function() {
         if (!fileInput.files[0]) { toast('请先选择文件', true); return; }
+        var file = fileInput.files[0];
+        // File size check (50MB limit)
+        if (file.size > 50 * 1024 * 1024) {
+          toast('文件过大 (' + (file.size / 1024 / 1024).toFixed(1) + 'MB)，最大支持 50MB', true);
+          return;
+        }
         var fd = new FormData();
         fd.append('file', fileInput.files[0]);
         previewBtn.disabled = true;
-        previewBtn.textContent = '⏳ 解析中...';
+        previewBtn.textContent = '⏳ 解析中 (' + (file.size / 1024 / 1024).toFixed(1) + 'MB)...';
         fetch('/api/cms/import/excel?dry_run=true', {
           method: 'POST',
           headers: { 'Authorization': 'Bearer ' + token },

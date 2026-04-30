@@ -264,6 +264,11 @@ module.exports = (env = {}, argv = {}) => {
           changeOrigin: true,
         },
       ],
+      // Allow large file uploads (Excel with embedded images can be >10MB)
+      setupMiddlewares: function (middlewares, devServer) {
+        devServer.app.use(require('express').json({ limit: '100mb' }));
+        return middlewares;
+      },
       static: [
         // Serve src/index.html at root
         {
