@@ -6,7 +6,7 @@
   var esc = CMS._deps.esc;
   var toast = CMS._deps.toast;
   var showModal = CMS._deps.showModal;
-  var state = CMS._i18nState;
+  function st() { if (!CMS._i18nState) CMS._i18nState = { type: "ui", lang: "zh-CN", page: 1, filter: "all", search: "", view: "overview", selected: {}, edits: {} }; return CMS._i18nState; }
   var _header = function() { return CMS._i18nUtils.header.apply(null, arguments); };
   var _typeButtons = function() { return CMS._i18nUtils.typeButtons(); };
   var _bindTypeButtons = function(cb) { CMS._i18nUtils.bindTypeButtons(cb); };
@@ -34,9 +34,9 @@
     if (!container) return;
     container.innerHTML = '<div class="text-center py-12 text-gray-400">加载中...</div>';
 
-    api('/i18n/overview?type=' + state.type).then(function(data) {
+    api('/i18n/overview?type=' + st().type).then(function(data) {
       if (!data) { container.innerHTML = '<div class="text-center py-12 text-red-400">加载失败</div>'; return; }
-      state.overviewData = data;
+      st().overviewData = data;
       CMS._i18nOverview.renderCards(container, data);
     });
   };
@@ -123,14 +123,14 @@
     // Bind card clicks → switch to editor
     container.querySelectorAll('.lang-card').forEach(function(card) {
       card.addEventListener('click', function() {
-        state.lang = card.getAttribute('data-lang');
-        state.view = 'editor';
-        state.page = 1;
-        state.filter = 'all';
-        state.search = '';
-        state.selected = {};
-        state.edits = {};
-        state.expandedRow = null;
+        st().lang = card.getAttribute('data-lang');
+        st().view = 'editor';
+        st().page = 1;
+        st().filter = 'all';
+        st().search = '';
+        st().selected = {};
+        st().edits = {};
+        st().expandedRow = null;
         CMS._i18nMain.render(
           document.getElementById('main-content') || document.querySelector('.main-content') || document.querySelector('[id$="content"]') || container.closest('.fade-in')
         );
@@ -198,13 +198,13 @@
   CMS._i18nOverview.startBatchTranslate = function(targetLangs) {
     api('/i18n/batch-translate', {
       method: 'POST',
-      body: { source_lang: 'zh-CN', target_langs: targetLangs, type: state.type }
+      body: { source_lang: 'zh-CN', target_langs: targetLangs, type: st().type }
     }).then(function(result) {
       if (!result) { toast('启动失败', true); return; }
       if (result.status === 'already_done') { toast(result.message); return; }
       if (!result.job_id) { toast('未能启动翻译', true); return; }
 
-      state.batchJobId = result.job_id;
+      st().batchJobId = result.job_id;
       toast('已开始批量翻译');
       CMS._i18nOverview.showBatchProgress();
       CMS._i18nOverview.pollBatchProgress();
@@ -230,15 +230,15 @@
       '</div>';
 
     document.getElementById('btn-cancel-batch').addEventListener('click', function() {
-      api('/i18n/batch-translate/cancel', { method: 'POST', body: { job_id: state.batchJobId } });
+      api('/i18n/batch-translate/cancel', { method: 'POST', body: { job_id: st().batchJobId } });
       toast('已发送取消请求');
     });
   };
 
   CMS._i18nOverview.pollBatchProgress = function() {
-    if (state.batchPollTimer) clearInterval(state.batchPollTimer);
-    state.batchPollTimer = setInterval(function() {
-      api('/i18n/batch-translate/status?job_id=' + state.batchJobId).then(function(data) {
+    if (st().batchPollTimer) clearInterval(st().batchPollTimer);
+    st().batchPollTimer = setInterval(function() {
+      api('/i18n/batch-translate/status?job_id=' + st().batchJobId).then(function(data) {
         if (!data) return;
 
         var langArea = document.getElementById('batch-lang-progress');
@@ -279,9 +279,9 @@
         }
 
         if (data.status === 'completed' || data.status === 'cancelled' || data.status === 'failed') {
-          clearInterval(state.batchPollTimer);
-          state.batchPollTimer = null;
-          state.batchJobId = null;
+          clearInterval(st().batchPollTimer);
+          st().batchPollTimer = null;
+          st().batchJobId = null;
           if (totalP) {
             totalP.textContent = data.status === 'completed' ? '✅ 全部完成!' : data.status === 'cancelled' ? '⚠️ 已取消' : '❌ 翻译失败';
           }
@@ -296,8 +296,8 @@
   // ─── Export report ────────────────────────────────────────────────
 
   CMS._i18nOverview.exportReport = function() {
-    if (!state.overviewData) return;
-    var data = state.overviewData;
+    if (!st().overviewData) return;
+    var data = st().overviewData;
     var report = {
       generated_at: new Date().toISOString(),
       type: data.type,

@@ -6,7 +6,7 @@
   var esc = CMS._deps.esc;
   var toast = CMS._deps.toast;
   var showModal = CMS._deps.showModal;
-  var state = CMS._i18nState;
+  function st() { if (!CMS._i18nState) CMS._i18nState = { type: "ui", lang: "zh-CN", page: 1, filter: "all", search: "", view: "overview", selected: {}, edits: {} }; return CMS._i18nState; }
   var _filterBtn = function(f, l) { return CMS._i18nUtils.filterBtn(f, l); };
   var _updateFilterBtnStyles = function(f) { CMS._i18nUtils.updateFilterBtnStyles(f); };
   var _c = function() { return CMS._i18nConstants || {}; };
@@ -18,7 +18,7 @@
   CMS._i18nEditor.render = function(area) {
     var LM = _c().LANG_MAP || {};
     var PS = _c().PAGE_SIZE || 200;
-    var meta = LM[state.lang] || {};
+    var meta = LM[st().lang] || {};
     var area2 = document.getElementById('main-content') || area;
     if (area2 !== area && area2) area = area2;
 
@@ -28,8 +28,8 @@
         '<button id="btn-back-overview" class="btn-ghost" style="padding:0.4rem 0.875rem;font-size:0.85rem">← 返回总览</button>' +
         '<div class="flex items-center gap-2 flex-1">' +
           '<span class="text-2xl">' + (meta.flag || '') + '</span>' +
-          '<h2 class="text-lg font-semibold">' + esc(meta.name || state.lang) + '</h2>' +
-          '<span class="text-sm text-gray-400 font-mono">(' + esc(state.lang) + ')</span>' +
+          '<h2 class="text-lg font-semibold">' + esc(meta.name || st().lang) + '</h2>' +
+          '<span class="text-sm text-gray-400 font-mono">(' + esc(st().lang) + ')</span>' +
           '<span id="editor-stats" class="text-sm text-gray-500 ml-auto">加载中...</span>' +
         '</div>' +
       '</div>' +
@@ -41,10 +41,10 @@
           _filterBtn('translated', '已翻译') +
           _filterBtn('ai_review', 'AI待审核') +
         '</div>' +
-        '<input id="editor-search" placeholder="搜索 key 或原文..." value="' + esc(state.search) + '" style="border:1px solid #d1d5db;background:#fff;color:#111827;padding:0.4rem 0.75rem;border-radius:0.5rem;font-size:0.85rem;width:240px">' +
+        '<input id="editor-search" placeholder="搜索 key 或原文..." value="' + esc(st().search) + '" style="border:1px solid #d1d5db;background:#fff;color:#111827;padding:0.4rem 0.75rem;border-radius:0.5rem;font-size:0.85rem;width:240px">' +
         '<select id="editor-sort" style="border:1px solid #d1d5db;background:#fff;color:#111827;padding:0.4rem 0.6rem;border-radius:0.5rem;font-size:0.85rem">' +
-          '<option value="key"' + (state.sortBy === 'key' ? ' selected' : '') + '>按 Key 排序</option>' +
-          '<option value="status"' + (state.sortBy === 'status' ? ' selected' : '') + '>按状态排序</option>' +
+          '<option value="key"' + (st().sortBy === 'key' ? ' selected' : '') + '>按 Key 排序</option>' +
+          '<option value="status"' + (st().sortBy === 'status' ? ' selected' : '') + '>按状态排序</option>' +
         '</select>' +
       '</div>' +
       // Table
@@ -75,18 +75,18 @@
 
     // Bind events
     document.getElementById('btn-back-overview').addEventListener('click', function() {
-      state.view = 'overview';
-      state.selected = {};
-      state.edits = {};
+      st().view = 'overview';
+      st().selected = {};
+      st().edits = {};
       CMS._i18nMain.render(area);
     });
 
     // Filter buttons
     document.querySelectorAll('.editor-filter-btn').forEach(function(btn) {
       btn.addEventListener('click', function() {
-        state.filter = btn.getAttribute('data-filter');
-        state.page = 1;
-        _updateFilterBtnStyles(state.filter);
+        st().filter = btn.getAttribute('data-filter');
+        st().page = 1;
+        _updateFilterBtnStyles(st().filter);
         CMS._i18nEditor.loadData();
       });
     });
@@ -97,33 +97,33 @@
     searchInput.addEventListener('input', function() {
       clearTimeout(searchTimer);
       searchTimer = setTimeout(function() {
-        state.search = searchInput.value.trim();
-        state.page = 1;
+        st().search = searchInput.value.trim();
+        st().page = 1;
         CMS._i18nEditor.loadData();
       }, 300);
     });
     searchInput.addEventListener('keydown', function(e) {
-      if (e.key === 'Enter') { clearTimeout(searchTimer); state.search = searchInput.value.trim(); state.page = 1; CMS._i18nEditor.loadData(); }
+      if (e.key === 'Enter') { clearTimeout(searchTimer); st().search = searchInput.value.trim(); st().page = 1; CMS._i18nEditor.loadData(); }
     });
 
     // Sort
     document.getElementById('editor-sort').addEventListener('change', function() {
-      state.sortBy = this.value;
-      state.page = 1;
+      st().sortBy = this.value;
+      st().page = 1;
       CMS._i18nEditor.loadData();
     });
 
     // Selection actions
     document.getElementById('btn-batch-translate-selected').addEventListener('click', CMS._i18nEditor.translateSelected);
-    document.getElementById('btn-mark-reviewed').addEventListener('click', function() { toast('已标记 ' + Object.keys(state.selected).length + ' 条为已审核'); });
+    document.getElementById('btn-mark-reviewed').addEventListener('click', function() { toast('已标记 ' + Object.keys(st().selected).length + ' 条为已审核'); });
     document.getElementById('btn-export-selected').addEventListener('click', CMS._i18nEditor.exportSelected);
-    document.getElementById('btn-clear-selection').addEventListener('click', function() { state.selected = {}; CMS._i18nEditor.updateSelectionBar(); });
+    document.getElementById('btn-clear-selection').addEventListener('click', function() { st().selected = {}; CMS._i18nEditor.updateSelectionBar(); });
 
     // Save/discard
     document.getElementById('btn-save-edits').addEventListener('click', CMS._i18nEditor.saveEdits);
-    document.getElementById('btn-discard-edits').addEventListener('click', function() { state.edits = {}; CMS._i18nEditor.updateUnsavedBar(); CMS._i18nEditor.loadData(); });
+    document.getElementById('btn-discard-edits').addEventListener('click', function() { st().edits = {}; CMS._i18nEditor.updateUnsavedBar(); CMS._i18nEditor.loadData(); });
 
-    _updateFilterBtnStyles(state.filter);
+    _updateFilterBtnStyles(st().filter);
     CMS._i18nEditor.loadData();
 
     // Keyboard shortcuts
@@ -137,21 +137,21 @@
     if (!container) return;
     container.innerHTML = '<div class="text-center py-8 text-gray-400">加载中...</div>';
 
-    var params = '?lang=' + state.lang + '&type=' + state.type +
-      '&page=' + state.page + '&limit=' + PS +
-      (state.search ? '&search=' + encodeURIComponent(state.search) : '');
+    var params = '?lang=' + st().lang + '&type=' + st().type +
+      '&page=' + st().page + '&limit=' + PS +
+      (st().search ? '&search=' + encodeURIComponent(st().search) : '');
 
     api('/i18n/keys' + params).then(function(data) {
       if (!data) { container.innerHTML = '<div class="text-center py-8 text-red-400">加载失败</div>'; return; }
 
       // Fetch source (zh-CN) for comparison
-      var srcParams = '?lang=zh-CN&type=' + state.type + '&limit=1';
+      var srcParams = '?lang=zh-CN&type=' + st().type + '&limit=1';
       api('/i18n/keys' + srcParams).then(function(srcInfo) {
         var srcTotal = (srcInfo && srcInfo.total) || 0;
 
         // Fetch full source data for display
-        api('/i18n/export?lang=zh-CN&type=' + state.type).then(function(srcData) {
-          state.editorData = {
+        api('/i18n/export?lang=zh-CN&type=' + st().type).then(function(srcData) {
+          st().editorData = {
             keys: data.keys,
             total: data.total,
             srcMap: srcData || {}
@@ -170,17 +170,17 @@
   // ─── Filtered keys ────────────────────────────────────────────────
 
   CMS._i18nEditor.getFilteredKeys = function() {
-    var keys = state.editorData ? state.editorData.keys : [];
-    if (state.filter === 'untranslated') {
+    var keys = st().editorData ? st().editorData.keys : [];
+    if (st().filter === 'untranslated') {
       keys = keys.filter(function(k) { return !k.value || !k.value.trim(); });
-    } else if (state.filter === 'translated') {
+    } else if (st().filter === 'translated') {
       keys = keys.filter(function(k) { return k.value && k.value.trim(); });
-    } else if (state.filter === 'ai_review') {
-      keys = keys.filter(function(k) { return state.aiSuggestions[k.key]; });
+    } else if (st().filter === 'ai_review') {
+      keys = keys.filter(function(k) { return st().aiSuggestions[k.key]; });
     }
 
     // Sort
-    if (state.sortBy === 'status') {
+    if (st().sortBy === 'status') {
       keys = keys.slice().sort(function(a, b) {
         var aEmpty = (!a.value || !a.value.trim()) ? 0 : 1;
         var bEmpty = (!b.value || !b.value.trim()) ? 0 : 1;
@@ -195,11 +195,11 @@
 
   CMS._i18nEditor.renderTable = function() {
     var container = document.getElementById('editor-table-container');
-    if (!container || !state.editorData) return;
+    if (!container || !st().editorData) return;
 
     var keys = CMS._i18nEditor.getFilteredKeys();
-    var srcMap = state.editorData.srcMap;
-    var meta = LM[state.lang] || {};
+    var srcMap = st().editorData.srcMap;
+    var meta = LM[st().lang] || {};
 
     if (keys.length === 0) {
       container.innerHTML = '<div class="text-center py-12 text-gray-400"><div class="text-4xl mb-3">📭</div><div>没有找到匹配的条目</div></div>';
@@ -218,15 +218,15 @@
     keys.forEach(function(entry) {
       var key = entry.key;
       var srcVal = srcMap[key] || '';
-      var curVal = state.edits.hasOwnProperty(key) ? state.edits[key] : (entry.value || '');
+      var curVal = st().edits.hasOwnProperty(key) ? st().edits[key] : (entry.value || '');
       var hasValue = curVal && curVal.trim();
-      var isEdited = state.edits.hasOwnProperty(key);
-      var hasAiSuggestion = !!state.aiSuggestions[key];
+      var isEdited = st().edits.hasOwnProperty(key);
+      var hasAiSuggestion = !!st().aiSuggestions[key];
       var rowBg = isEdited ? '#fffbeb' : (!hasValue ? '#fef2f2' : '');
-      var isExpanded = state.expandedRow === key;
+      var isExpanded = st().expandedRow === key;
 
       html += '<tr class="editor-row" data-key="' + esc(key) + '" style="border-bottom:1px solid #f3f4f6;cursor:pointer;' + (rowBg ? 'background:' + rowBg : '') + '">' +
-        '<td style="padding:0.625rem 0.5rem;text-align:center"><input type="checkbox" class="row-cb" data-key="' + esc(key) + '"' + (state.selected[key] ? ' checked' : '') + ' style="cursor:pointer"></td>' +
+        '<td style="padding:0.625rem 0.5rem;text-align:center"><input type="checkbox" class="row-cb" data-key="' + esc(key) + '"' + (st().selected[key] ? ' checked' : '') + ' style="cursor:pointer"></td>' +
         '<td style="padding:0.625rem 0.5rem;font-family:monospace;font-size:0.72rem;color:#6b7280;word-break:break-all;line-height:1.5;max-width:220px" title="' + esc(key) + '">' + esc(key) + '</td>' +
         '<td style="padding:0.625rem 0.5rem;color:#374151;font-size:0.82rem;line-height:1.5;max-width:320px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="' + esc(srcVal) + '">' + esc(srcVal) + '</td>' +
         '<td style="padding:0.375rem 0.5rem">' +
@@ -265,7 +265,7 @@
                   '<span class="text-sm">💡 AI 建议</span>' +
                   '<span class="text-xs text-gray-400">(deepseek-v4-flash)</span>' +
                 '</div>' +
-                '<div class="text-sm text-gray-800 mb-2 p-2 rounded bg-white border">' + esc(state.aiSuggestions[key]) + '</div>' +
+                '<div class="text-sm text-gray-800 mb-2 p-2 rounded bg-white border">' + esc(st().aiSuggestions[key]) + '</div>' +
                 '<div class="flex gap-2">' +
                   '<button class="btn-primary expanded-accept" data-key="' + esc(key) + '" style="font-size:0.8rem;padding:0.25rem 0.75rem">✅ 采纳</button>' +
                   '<button class="btn-ghost expanded-edit-accept" data-key="' + esc(key) + '" style="font-size:0.8rem;padding:0.25rem 0.75rem">✏️ 编辑后采纳</button>' +
@@ -293,8 +293,8 @@
         container.querySelectorAll('.row-cb').forEach(function(cb) {
           var k = cb.getAttribute('data-key');
           cb.checked = checked;
-          if (checked) state.selected[k] = true;
-          else delete state.selected[k];
+          if (checked) st().selected[k] = true;
+          else delete st().selected[k];
         });
         CMS._i18nEditor.updateSelectionBar();
       });
@@ -305,8 +305,8 @@
       cb.addEventListener('change', function(e) {
         e.stopPropagation();
         var k = cb.getAttribute('data-key');
-        if (cb.checked) state.selected[k] = true;
-        else delete state.selected[k];
+        if (cb.checked) st().selected[k] = true;
+        else delete st().selected[k];
         CMS._i18nEditor.updateSelectionBar();
         CMS._i18nEditor.updateSelectAllState();
       });
@@ -317,7 +317,7 @@
       row.addEventListener('click', function(e) {
         if (e.target.tagName === 'INPUT' || e.target.tagName === 'BUTTON' || e.target.closest('.cell-edit-wrapper')) return;
         var key = row.getAttribute('data-key');
-        state.expandedRow = (state.expandedRow === key) ? null : key;
+        st().expandedRow = (st().expandedRow === key) ? null : key;
         CMS._i18nEditor.renderTable();
       });
     });
@@ -326,20 +326,20 @@
     container.querySelectorAll('.cell-edit-input').forEach(function(input) {
       input.addEventListener('focus', function(e) {
         e.stopPropagation();
-        state.editingCell = { key: input.getAttribute('data-key'), inputEl: input };
+        st().editingCell = { key: input.getAttribute('data-key'), inputEl: input };
         input.style.borderColor = '#6366f1';
       });
       input.addEventListener('blur', function() {
         var key = input.getAttribute('data-key');
         var newVal = input.value;
-        var origVal = state.editorData.keys.find(function(k) { return k.key === key; });
+        var origVal = st().editorData.keys.find(function(k) { return k.key === key; });
         origVal = origVal ? origVal.value : '';
         if (newVal !== origVal) {
-          state.edits[key] = newVal;
+          st().edits[key] = newVal;
         } else {
-          delete state.edits[key];
+          delete st().edits[key];
         }
-        state.editingCell = null;
+        st().editingCell = null;
         input.style.borderColor = '#d1d5db';
         CMS._i18nEditor.updateUnsavedBar();
         CMS._i18nEditor.updateSelectionBar();
@@ -373,9 +373,9 @@
       btn.addEventListener('click', function(e) {
         e.stopPropagation();
         var key = btn.getAttribute('data-key');
-        state.edits[key] = state.aiSuggestions[key];
-        delete state.aiSuggestions[key];
-        state.expandedRow = null;
+        st().edits[key] = st().aiSuggestions[key];
+        delete st().aiSuggestions[key];
+        st().expandedRow = null;
         CMS._i18nEditor.updateUnsavedBar();
         CMS._i18nEditor.renderTable();
         toast('已采纳 AI 建议');
@@ -387,9 +387,9 @@
         var key = btn.getAttribute('data-key');
         var textarea = container.querySelector('.expanded-edit[data-key="' + key + '"]');
         if (textarea) {
-          state.edits[key] = textarea.value;
-          delete state.aiSuggestions[key];
-          state.expandedRow = null;
+          st().edits[key] = textarea.value;
+          delete st().aiSuggestions[key];
+          st().expandedRow = null;
           CMS._i18nEditor.updateUnsavedBar();
           CMS._i18nEditor.renderTable();
           toast('已保存编辑');
@@ -400,8 +400,8 @@
       btn.addEventListener('click', function(e) {
         e.stopPropagation();
         var key = btn.getAttribute('data-key');
-        delete state.aiSuggestions[key];
-        state.expandedRow = null;
+        delete st().aiSuggestions[key];
+        st().expandedRow = null;
         CMS._i18nEditor.renderTable();
       });
     });
@@ -421,7 +421,7 @@
   CMS._i18nEditor.updateStats = function(total, srcTotal) {
     var el = document.getElementById('editor-stats');
     if (!el) return;
-    var translated = state.editorData.keys.filter(function(k) { return k.value && k.value.trim(); }).length;
+    var translated = st().editorData.keys.filter(function(k) { return k.value && k.value.trim(); }).length;
     var pct = total > 0 ? Math.round(translated / total * 1000) / 10 : 0;
     var color = pct >= 80 ? '#22c55e' : pct >= 30 ? '#eab308' : '#ef4444';
     el.innerHTML = '<span style="color:' + color + ';font-weight:600">' + translated + '/' + total + '</span>' +
@@ -432,7 +432,7 @@
     var el = document.getElementById('editor-pagination');
     if (!el) return;
     var totalPages = Math.ceil(total / PS);
-    var page = state.page;
+    var page = st().page;
     if (totalPages <= 1) { el.innerHTML = '<span>共 ' + total + ' 条</span><span></span>'; return; }
 
     var start = (page - 1) * PS + 1;
@@ -457,8 +457,8 @@
 
     el.querySelectorAll('[data-page]').forEach(function(btn) {
       btn.addEventListener('click', function() {
-        state.page = parseInt(this.getAttribute('data-page'));
-        state.expandedRow = null;
+        st().page = parseInt(this.getAttribute('data-page'));
+        st().expandedRow = null;
         CMS._i18nEditor.loadData();
       });
     });
@@ -466,7 +466,7 @@
 
   CMS._i18nEditor.updateSelectionBar = function() {
     var bar = document.getElementById('editor-selection-bar');
-    var count = Object.keys(state.selected).length;
+    var count = Object.keys(st().selected).length;
     if (!bar) return;
     if (count > 0) {
       bar.classList.remove('hidden');
@@ -492,7 +492,7 @@
     var bar = document.getElementById('editor-unsaved-bar');
     var text = document.getElementById('editor-unsaved-text');
     if (!bar) return;
-    var count = Object.keys(state.edits).length;
+    var count = Object.keys(st().edits).length;
     if (count > 0) {
       bar.classList.remove('hidden');
       if (text) text.textContent = count + ' 条未保存修改';
@@ -504,16 +504,16 @@
   // ─── Actions ──────────────────────────────────────────────────────
 
   CMS._i18nEditor.saveEdits = function() {
-    var count = Object.keys(state.edits).length;
+    var count = Object.keys(st().edits).length;
     if (count === 0) return;
 
-    var updates = Object.keys(state.edits).map(function(k) {
-      return { key: k, value: state.edits[k] };
+    var updates = Object.keys(st().edits).map(function(k) {
+      return { key: k, value: st().edits[k] };
     });
 
-    api('/i18n/batch', { method: 'PUT', body: { lang: state.lang, type: state.type, updates: updates } }).then(function(result) {
+    api('/i18n/batch', { method: 'PUT', body: { lang: st().lang, type: st().type, updates: updates } }).then(function(result) {
       if (result && result.count > 0) {
-        state.edits = {};
+        st().edits = {};
         CMS._i18nEditor.updateUnsavedBar();
         toast('已保存 ' + result.count + ' 条翻译');
         CMS._i18nEditor.loadData();
@@ -522,7 +522,7 @@
   };
 
   CMS._i18nEditor.translateSingleKey = function(key) {
-    var srcMap = state.editorData ? state.editorData.srcMap : {};
+    var srcMap = st().editorData ? st().editorData.srcMap : {};
     var srcVal = srcMap[key] || key;
 
     api('/translate/texts', {
@@ -530,15 +530,15 @@
       body: {
         texts: [srcVal],
         source_lang: 'zh-CN',
-        target_lang: state.lang
+        target_lang: st().lang
       }
     }).then(function(result) {
       if (result && result.translations && result.translations[0]) {
         var translated = result.translations[0];
         if (translated && translated.trim()) {
-          state.aiSuggestions[key] = translated;
-          state.edits[key] = translated;
-          state.expandedRow = key;
+          st().aiSuggestions[key] = translated;
+          st().edits[key] = translated;
+          st().expandedRow = key;
           CMS._i18nEditor.updateUnsavedBar();
           CMS._i18nEditor.renderTable();
           toast('AI 翻译完成');
@@ -554,7 +554,7 @@
   };
 
   CMS._i18nEditor.translateSelected = function() {
-    var selectedKeys = Object.keys(state.selected);
+    var selectedKeys = Object.keys(st().selected);
     if (selectedKeys.length === 0) return;
     CMS._i18nEditor.batchTranslateKeys(selectedKeys);
   };
@@ -562,7 +562,7 @@
   CMS._i18nEditor.batchTranslateKeys = function(keys) {
     if (!keys || keys.length === 0) return;
 
-    var srcMap = state.editorData ? state.editorData.srcMap : {};
+    var srcMap = st().editorData ? st().editorData.srcMap : {};
     var BATCH_SIZE = 5;
     var idx = 0;
     var total = keys.length;
@@ -593,13 +593,13 @@
 
           api('/translate/texts', {
             method: 'POST',
-            body: { texts: texts, source_lang: 'zh-CN', target_lang: state.lang }
+            body: { texts: texts, source_lang: 'zh-CN', target_lang: st().lang }
           }).then(function(result) {
             if (result && result.translations && Array.isArray(result.translations)) {
               result.translations.forEach(function(t, i) {
                 if (t && t.trim()) {
-                  state.edits[batch[i]] = t;
-                  state.aiSuggestions[batch[i]] = t;
+                  st().edits[batch[i]] = t;
+                  st().aiSuggestions[batch[i]] = t;
                   done++;
                 } else {
                   errors++;
@@ -623,13 +623,13 @@
   };
 
   CMS._i18nEditor.exportSelected = function() {
-    var keys = Object.keys(state.selected);
+    var keys = Object.keys(st().selected);
     if (keys.length === 0) return;
     var data = {};
     keys.forEach(function(k) {
-      data[k] = state.edits[k] || (state.editorData.keys.find(function(e) { return e.key === k; }) || {}).value || '';
+      data[k] = st().edits[k] || (st().editorData.keys.find(function(e) { return e.key === k; }) || {}).value || '';
     });
-    CMS._i18nUtils.downloadJSON(data, state.lang + '-selected.json');
+    CMS._i18nUtils.downloadJSON(data, st().lang + '-selected.json');
     toast('已导出 ' + keys.length + ' 条');
   };
 
@@ -637,26 +637,26 @@
 
   CMS._i18nEditor.bindShortcuts = function() {
     function handler(e) {
-      if (state.view !== 'editor') return;
-      if (!state.editingCell && !e.ctrlKey && !e.metaKey) return;
+      if (st().view !== 'editor') return;
+      if (!st().editingCell && !e.ctrlKey && !e.metaKey) return;
 
       // Ctrl+Enter — save current cell
       if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') {
-        if (state.editingCell && state.editingCell.inputEl) {
+        if (st().editingCell && st().editingCell.inputEl) {
           e.preventDefault();
-          state.editingCell.inputEl.blur();
+          st().editingCell.inputEl.blur();
         }
       }
 
       // Ctrl+↓ — jump to next untranslated
       if ((e.ctrlKey || e.metaKey) && e.key === 'ArrowDown') {
         e.preventDefault();
-        var keys = state.editorData ? state.editorData.keys : [];
-        var curKey = state.editingCell ? state.editingCell.key : null;
+        var keys = st().editorData ? st().editorData.keys : [];
+        var curKey = st().editingCell ? st().editingCell.key : null;
         var found = false;
         for (var i = 0; i < keys.length; i++) {
           if (found && (!keys[i].value || !keys[i].value.trim())) {
-            state.page = Math.floor(i / PS) + 1;
+            st().page = Math.floor(i / PS) + 1;
             CMS._i18nEditor.loadData();
             setTimeout(function() {
               var input = document.querySelector('.cell-edit-input[data-key="' + keys[i].key + '"]');
@@ -666,7 +666,7 @@
           }
           if (curKey && keys[i].key === curKey) found = true;
           if (!curKey && (!keys[i].value || !keys[i].value.trim())) {
-            state.page = Math.floor(i / PS) + 1;
+            st().page = Math.floor(i / PS) + 1;
             CMS._i18nEditor.loadData();
             setTimeout(function() {
               var input = document.querySelector('.cell-edit-input[data-key="' + keys[i].key + '"]');
@@ -680,18 +680,18 @@
       // Ctrl+T — AI translate current row
       if ((e.ctrlKey || e.metaKey) && e.key === 't') {
         e.preventDefault();
-        if (state.editingCell) {
-          CMS._i18nEditor.translateSingleKey(state.editingCell.key);
+        if (st().editingCell) {
+          CMS._i18nEditor.translateSingleKey(st().editingCell.key);
         }
       }
 
       // Esc — close expanded row / cancel editing
       if (e.key === 'Escape') {
-        if (state.expandedRow) {
-          state.expandedRow = null;
+        if (st().expandedRow) {
+          st().expandedRow = null;
           CMS._i18nEditor.renderTable();
-        } else if (state.editingCell) {
-          state.editingCell.inputEl.blur();
+        } else if (st().editingCell) {
+          st().editingCell.inputEl.blur();
         }
       }
     }
