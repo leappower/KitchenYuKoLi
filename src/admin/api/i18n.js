@@ -276,8 +276,8 @@ function i18nRoutes(db) {
 
       // Start async work
       (async function() {
-        var BATCH_SIZE = 20; // keys per API call
-        var DELAY_MS = 10000; // delay between API calls (rate limit)
+        var BATCH_SIZE = 5; // keys per API call (conservative for quality + rate limits)
+        var DELAY_MS = 7500; // ~8 calls per minute (rate limit safety)
 
         for (var wi = 0; wi < needsWork.length; wi++) {
           var work = needsWork[wi];
@@ -349,8 +349,10 @@ function i18nRoutes(db) {
                     }
                   });
                   job.results[work.code].translated += written;
-                  // Write back after each batch for progress safety
-                  fs.writeFileSync(langFile, JSON.stringify(langData, null, 2) + '\n', 'utf-8');
+                  // Atomic write: tmp file + rename for crash safety
+                  var tmpFile = langFile + '.tmp';
+                  fs.writeFileSync(tmpFile, JSON.stringify(langData, null, 2) + '\n', 'utf-8');
+                  fs.renameSync(tmpFile, langFile);
                 }
               }
             } catch (e) {
@@ -360,13 +362,15 @@ function i18nRoutes(db) {
 
             job.progress.done += batch.length;
             job.progress.percent = Math.round(job.progress.done / job.progress.total * 1000) / 10;
+
+            // Rate limit: delay between every API call
+            var isLastBatch = (bi + BATCH_SIZE >= work.missing.length) && (wi === needsWork.length - 1);
+            if (!isLastBatch) {
+              await new Promise(function(resolve) { setTimeout(resolve, DELAY_MS); });
+            }
           }
 
           job.results[work.code].status = 'done';
-          // Delay between languages for rate limiting
-          if (wi < needsWork.length - 1) {
-            await new Promise(function(resolve) { setTimeout(resolve, DELAY_MS); });
-          }
         }
         job.status = 'completed';
       })();

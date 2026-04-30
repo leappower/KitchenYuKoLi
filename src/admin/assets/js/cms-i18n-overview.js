@@ -5,6 +5,7 @@
   var api = CMS._deps.api;
   var esc = CMS._deps.esc;
   var toast = CMS._deps.toast;
+  var showModal = CMS._deps.showModal;
   var state = CMS._i18nState;
   var _header = function() { return CMS._i18nUtils.header.apply(null, arguments); };
   var _typeButtons = function() { return CMS._i18nUtils.typeButtons(); };
@@ -136,12 +137,12 @@
       });
     });
 
-    // Batch translate all
+    // Batch translate — show language selection modal
     var batchBtn = document.getElementById('btn-batch-translate-all');
     if (batchBtn) {
       batchBtn.addEventListener('click', function() {
         if (incompleteCodes.length === 0) { toast('所有语言已完成翻译'); return; }
-        CMS._i18nOverview.startBatchTranslate(incompleteCodes);
+        CMS._i18nOverview.showBatchLangModal(incompleteCodes, data.languages);
       });
     }
 
@@ -150,6 +151,46 @@
     if (exportBtn) {
       exportBtn.addEventListener('click', CMS._i18nOverview.exportReport);
     }
+  };
+
+  // ─── Batch translate language selection modal ─────────────────
+
+  CMS._i18nOverview.showBatchLangModal = function(incompleteCodes, allLanguages) {
+    var lm = LANG_MAP() || {};
+    var html = '<div class="mb-3 text-sm text-gray-600">选择需要翻译的目标语言：</div>';
+    incompleteCodes.forEach(function(code) {
+      var langInfo = allLanguages.find(function(l) { return l.code === code; });
+      var meta = lm[code] || {};
+      var pct = langInfo ? langInfo.percent : 0;
+      html += '<label class="flex items-center gap-3 py-2 px-3 rounded-lg hover:bg-gray-50 cursor-pointer mb-1" style="display:flex;align-items:center;gap:0.75rem;padding:0.5rem 0.75rem;border-radius:0.5rem">' +
+        '<input type="checkbox" class="batch-lang-cb" value="' + esc(code) + '" checked style="width:1.1rem;height:1.1rem;accent-color:#6366f1">' +
+        '<span class="text-base">' + (meta.flag || '') + '</span>' +
+        '<span class="flex-1 text-sm text-gray-900">' + esc(meta.name || code) + '</span>' +
+        '<span class="text-xs text-gray-400">' + (langInfo ? (langInfo.translated + '/' + langInfo.total) : '') + ' (' + pct + '%)</span>' +
+        '</label>';
+    });
+    html += '<div class="flex items-center justify-between mt-4">' +
+      '<button id="btn-batch-lang-select-all" class="btn-ghost" style="font-size:0.8rem;padding:0.3rem 0.75rem">全选</button>' +
+      '<button id="btn-start-batch" class="btn-primary" style="font-size:0.85rem;padding:0.5rem 1.5rem">🚀 开始翻译</button>' +
+      '</div>';
+
+    showModal('batch-lang-modal', '🤖 AI 批量翻译', html, function() {
+      // On confirm: collect checked langs and start
+      var checked = [];
+      document.querySelectorAll('.batch-lang-cb:checked').forEach(function(cb) { checked.push(cb.value); });
+      if (checked.length === 0) { toast('请至少选择一种语言', true); return false; }
+      CMS._i18nOverview.startBatchTranslate(checked);
+    }, function() {
+      // On mount: bind select-all toggle
+      var selectAll = document.getElementById('btn-batch-lang-select-all');
+      if (selectAll) {
+        selectAll.addEventListener('click', function() {
+          var allChecked = document.querySelectorAll('.batch-lang-cb:checked').length === document.querySelectorAll('.batch-lang-cb').length;
+          document.querySelectorAll('.batch-lang-cb').forEach(function(cb) { cb.checked = !allChecked; });
+          selectAll.textContent = allChecked ? '全选' : '取消全选';
+        });
+      }
+    });
   };
 
   // ─── Batch translate all (overview level) ─────────────────────────
@@ -206,9 +247,10 @@
 
         if (langArea) {
           var html = '';
+          var _lm = LANG_MAP() || {};
           for (var code in data.results) {
             var r = data.results[code];
-            var meta = LM[code] || {};
+            var meta = _lm[code] || {};
             var pct = r.total > 0 ? Math.round(r.translated / r.total * 100) : 0;
             var color = pct >= 100 ? '#22c55e' : pct > 0 ? '#6366f1' : '#d1d5db';
             var icon = r.status === 'done' ? '✅' : r.status === 'running' ? '⏳' : r.status === 'error' ? '❌' : '⏸️';
