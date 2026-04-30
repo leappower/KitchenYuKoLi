@@ -37,8 +37,8 @@
         '<input class="pt-name" data-lang="' + lang.code + '" value="' + esc(t.name || '') + '" placeholder="翻译产品名称" style="flex:1;padding:4px 8px;border:1px solid #d1d5db;border-radius:6px;font-size:0.8rem"></div>' +
         '<div style="display:flex;gap:0.5rem;align-items:center"><label style="font-size:0.75rem;color:#6b7280;width:48px;flex-shrink:0">配置</label>' +
         '<input class="pt-specs" data-lang="' + lang.code + '" value="' + esc(t.specifications || '') + '" placeholder="翻译配置信息" style="flex:1;padding:4px 8px;border:1px solid #d1d5db;border-radius:6px;font-size:0.8rem"></div>' +
-        '<div style="display:flex;gap:0.5rem;align-items:center"><label style="font-size:0.75rem;color:#6b7280;width:48px;flex-shrink:0">产能</label>' +
-        '<input class="pt-throughput" data-lang="' + lang.code + '" value="' + esc(t.throughput || '') + '" placeholder="翻译用途和产能" style="flex:1;padding:4px 8px;border:1px solid #d1d5db;border-radius:6px;font-size:0.8rem"></div>' +
+        '<div style="display:flex;gap:0.5rem;align-items:center"><label style="font-size:0.75rem;color:#6b7280;width:48px;flex-shrink:0">容量</label>' +
+        '<input class="pt-throughput" data-lang="' + lang.code + '" value="' + esc(t.throughput || '') + '" placeholder="翻译用途和容量" style="flex:1;padding:4px 8px;border:1px solid #d1d5db;border-radius:6px;font-size:0.8rem"></div>' +
         '</div>';
       container.appendChild(div);
     });
@@ -107,7 +107,7 @@
     var texts = [];
     if (name) texts.push('产品名称: ' + name);
     if (specs) texts.push('产品配置: ' + specs);
-    if (throughput) texts.push('用途和产能: ' + throughput);
+    if (throughput) texts.push('用途和容量: ' + throughput);
 
     // Call the server-side translation API
     fetch('/api/cms/translate', {

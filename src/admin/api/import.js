@@ -114,21 +114,21 @@ function importRoutes(db) {
       var specs = findCol(row, ['配置', '产品配置', 'specifications', 'Specifications', '参数', '规格']);
       var catHint = findCol(row, ['类别', '分类', 'category', 'Category', '系列']);
 
-      // Normalize
-      model = model ? model.toString().trim() : '';
-      name = name ? name.toString().trim() : '';
-      dims = dims ? dims.toString().trim() : '';
+      // Normalize — clean whitespace/newlines from Excel cells
+      model = model ? model.toString().replace(/[\r\n]+/g, '').replace(/\s{2,}/g, ' ').trim() : '';
+      name = name ? name.toString().replace(/[\r\n]+/g, '').replace(/\s{2,}/g, ' ').trim() : '';
+      dims = dims ? dims.toString().replace(/[\r\n]+/g, '').replace(/\s{2,}/g, ' ').trim() : '';
       specs = specs ? specs.toString().trim() : '';
-      catHint = catHint ? catHint.toString().trim() : '';
+      catHint = catHint ? catHint.toString().replace(/[\r\n]+/g, '').replace(/\s{2,}/g, ' ').trim() : '';
 
-      // If model is empty, try to derive from name (e.g. "台式360智能电磁炒菜机")
+      // If model is empty, try to derive from name (e.g. "台式360智能电磁炒菜机（电动）")
       if (!model && name) {
         // Try to find a model-like pattern in the name
         var modelFromName = name.match(/[A-Z]{1,3}[-]?\d{2,}[A-Z]?[A-Z0-9]*/);
         if (modelFromName) {
           model = modelFromName[0];
         } else {
-          // Use entire name as model if no pattern found
+          // No alphanumeric model code — use entire name as model
           model = name;
           name = '';
         }

@@ -130,7 +130,7 @@
       '<div><label class="text-sm font-medium text-gray-700" style="display:flex;align-items:center;gap:0.5rem;margin-bottom:0.25rem"><input id="pm-home-core" type="checkbox"' + (p && p.is_home_core ? ' checked' : '') + ' style="width:1rem;height:1rem;cursor:pointer"> Home 核心产品</label></div>' +
       '<div><label class="text-sm font-medium text-gray-700" style="display:block;margin-bottom:0.25rem">功率</label>' +
       '<input id="pm-power" value="' + esc(p ? (p.power || '') : '') + '"></div>' +
-      '<div><label class="text-sm font-medium text-gray-700" style="display:block;margin-bottom:0.25rem">产能</label>' +
+      '<div><label class="text-sm font-medium text-gray-700" style="display:block;margin-bottom:0.25rem">容量</label>' +
       '<input id="pm-throughput" value="' + esc(p ? (p.throughput || '') : '') + '"></div>' +
       '<div><label class="text-sm font-medium text-gray-700" style="display:block;margin-bottom:0.25rem">电压</label>' +
       '<input id="pm-voltage" value="' + esc(p ? (p.voltage || '') : '') + '"></div>' +
