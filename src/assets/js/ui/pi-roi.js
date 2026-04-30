@@ -318,17 +318,18 @@
       var outlets = parseInt((outletsInput && outletsInput.value) || 5, 10);
       var chefs = parseInt((chefsInput && chefsInput.value) || 3, 10);
       var salary = parseFloat((salaryInput && salaryInput.value) || 5000);
-      var energy = parseFloat((energyInput && energyInput.value) || 8000);
+      var energy = parseFloat((energyInput && energyInput.value) || 10000);
 
       // YuKoLi ROI model (RMB-based)
-      // 分批部署: 人工节省 70%, 机器按比例分批投入
-      // 一次性部署: 人工节省 80%, 全部机器一次到位，初期投资更高但节省更快
-      var laborSavingRate = deployStrategy === "phased" ? 0.55 : 0.85;
-      var energySavingRate = 0.30;
-      var machinesPerOutlet = Math.ceil(chefs * laborSavingRate);
-      var machineCost = 30000;
-      // 一次性部署成本更高（安装+培训+并行投入）
-      var costMultiplier = deployStrategy === "phased" ? 1.0 : 0.90;
+      // 分批部署: 基础设备(1.5万/台), 覆盖50%工序, 节能12%
+      // 一次性部署: 全套设备(3.2万/台), 覆盖80%工序, 节能22%, 82折
+      var isPhased = deployStrategy === "phased";
+      var laborSavingRate = isPhased ? 0.40 : 0.72;
+      var energySavingRate = isPhased ? 0.12 : 0.22;
+      var machineCoverage = isPhased ? 0.50 : 0.80;
+      var machinesPerOutlet = Math.ceil(chefs * machineCoverage);
+      var machineCost = isPhased ? 15000 : 32000;
+      var costMultiplier = isPhased ? 1.0 : 0.82;
       var totalMachineCost = outlets * machinesPerOutlet * machineCost * costMultiplier;
 
       var monthlyLaborSave = chefs * salary * laborSavingRate;
