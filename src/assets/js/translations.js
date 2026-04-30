@@ -88,20 +88,22 @@
   }, r.prototype.loadProductTranslations = function(t) {
     var e = "product-" + t;
     if (this.translationsCache.has(e)) return Promise.resolve(this.translationsCache.get(e));
-    var n = this,
-      o = "undefined" != typeof window && window.BASE_PATH || "";
-    return i(fetch(o + "/assets/lang/" + t + "-product.json", {
-      cache: a ? "no-store" : "default"
+    var n = this;
+    return i(fetch("/api/translations?lang=" + encodeURIComponent(t), {
+      cache: "no-store"
     }).then(function(t) {
       if (!t.ok) throw new Error("HTTP " + t.status);
       return t.json()
     }).then(function(a) {
-      if (0 === Object.keys(a).length && "en" !== t) return console.warn("[i18n] loadProductTranslations: empty data for " + t + ", falling back to en"), n.loadProductTranslations("en");
-      var o = n.normalizeTranslationKeys(a);
-      return Object.keys(o).length, n.translationsCache.set(e, o), o
-    }).catch(function(e) {
-      if (console.error("[i18n] loadProductTranslations: FAILED for " + t + ":", e), "en" !== t) return n.loadProductTranslations("en");
-      throw e
+      var o = a.translations || {};
+      if (0 === Object.keys(o).length && "zh-CN" !== t) return console.warn("[i18n] loadProductTranslations: empty data for " + t + ", skipping"), {};
+      n.translationsCache.set(e, o);
+      window._productTranslations = o;
+      return o
+    }).catch(function(i) {
+      console.error("[i18n] loadProductTranslations: FAILED for " + t + ":", i);
+      return {}
+    }), 15e3, "[i18n] loadProductTranslations timeout for " + t)
     }), 15e3, "[i18n] loadProductTranslations timeout for " + t)
   }, r.prototype.mergeTranslations = function(t, e) {
     return Object.assign({}, t, e)

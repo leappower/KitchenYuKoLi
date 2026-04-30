@@ -49,16 +49,7 @@
     var now = Date.now();
     console.log('[HCP] loadCoreProducts called at', now);
 
-    // Layer 1: Embedded data from product-data-table.js (instant, but may be stale due to webpack overwrites)
-    console.log('[HCP] Layer1 HOME_CORE_PRODUCTS:', window.HOME_CORE_PRODUCTS ? 'exists, length=' + window.HOME_CORE_PRODUCTS.length : 'undefined/empty');
-    if (window.HOME_CORE_PRODUCTS && window.HOME_CORE_PRODUCTS.length > 0) {
-      console.log('[HCP] → Using embedded data');
-      setTimeout(function() { callback(window.HOME_CORE_PRODUCTS, 'embedded'); }, 0);
-      _refreshInBackground(callback);
-      return;
-    }
-
-    // Layer 2: sessionStorage (session-level cache)
+    // Layer 1: sessionStorage (session-level cache)
     try {
       var sessionData = sessionStorage.getItem(CACHE_KEY);
       console.log('[HCP] Layer2 sessionStorage:', sessionData ? 'found, age=' + ((now - JSON.parse(sessionData).timestamp) / 1000) + 's' : 'empty');

@@ -337,7 +337,7 @@ app.use((req, res) => {
 });
 
 const PORT = process.env.PORT || 3099;
-const SSL_PORT = process.env.SSL_PORT ? parseInt(process.env.SSL_PORT) : 5443;
+const SSL_PORT = process.env.SSL_PORT ? parseInt(process.env.SSL_PORT) : 3000;
 const ENABLE_SSL = SSL_PORT > 0;
 const https = require('https');
 const sslOptions = {
