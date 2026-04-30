@@ -79,7 +79,7 @@
   };
 
   function loadMedia() {
-    api('/media?limit=100').then(function(d) {
+    api('/media?limit=500').then(function(d) {
       if (!d || !d.media) return;
       var grid = document.getElementById('media-grid');
       var empty = document.getElementById('media-empty');
