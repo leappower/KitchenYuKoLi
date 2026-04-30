@@ -44,7 +44,9 @@
     "release:gh-pages": "node scripts/release.js --skip-feishu --skip-translate --skip-download --gh-pages",
     "release:full-translate": "node scripts/release.js --full-translate",
     "release:skip-download": "node scripts/release.js --skip-download",
-    "prepare": "git config core.hooksPath .githooks"
+    "prepare": "git config core.hooksPath .githooks",
+    "sync:lang": "node scripts/deploy-lang-sync.js",
+    "sync:lang:check": "node scripts/deploy-lang-sync.js --dry-run"
   },
   "dependencies": {
     "adm-zip": "^0.5.17",
