@@ -24,9 +24,10 @@
   };
 
   CMS._i18nUtils.typeButtons = function() {
+    var s = CMS._i18nState || { type: 'ui' };
     return '<div class="flex items-center gap-1 bg-gray-100 rounded-lg p-0.5">' +
-      '<button class="i18n-type-btn' + (state.type === 'ui' ? ' active' : '') + '" data-type="ui" style="padding:0.25rem 0.625rem;border:none;border-radius:0.375rem;font-size:0.8rem;cursor:pointer;transition:all 0.15s">UI 文案</button>' +
-      '<button class="i18n-type-btn' + (state.type === 'product' ? ' active' : '') + '" data-type="product" style="padding:0.25rem 0.625rem;border:none;border-radius:0.375rem;font-size:0.8rem;cursor:pointer;transition:all 0.15s">产品翻译</button>' +
+      '<button class="i18n-type-btn' + (s.type === 'ui' ? ' active' : '') + '" data-type="ui" style="padding:0.25rem 0.625rem;border:none;border-radius:0.375rem;font-size:0.8rem;cursor:pointer;transition:all 0.15s">UI 文案</button>' +
+      '<button class="i18n-type-btn' + (s.type === 'product' ? ' active' : '') + '" data-type="product" style="padding:0.25rem 0.625rem;border:none;border-radius:0.375rem;font-size:0.8rem;cursor:pointer;transition:all 0.15s">产品翻译</button>' +
     '</div>';
   };
 
