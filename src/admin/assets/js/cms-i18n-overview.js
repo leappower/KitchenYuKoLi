@@ -6,15 +6,16 @@
   var esc = CMS._deps.esc;
   var toast = CMS._deps.toast;
   var state = CMS._i18nState;
-  var LANG_MAP = CMS._i18nConstants.LANG_MAP;
   var _header = function() { return CMS._i18nUtils.header.apply(null, arguments); };
   var _typeButtons = function() { return CMS._i18nUtils.typeButtons(); };
   var _bindTypeButtons = function(cb) { CMS._i18nUtils.bindTypeButtons(cb); };
   var _downloadJSON = function() { return CMS._i18nUtils.downloadJSON.apply(null, arguments); };
+  var LANG_MAP = function() { return CMS._i18nConstants && CMS._i18nConstants.LANG_MAP; };
 
   CMS._i18nOverview = {};
 
   CMS._i18nOverview.render = function(area) {
+    var LM = LANG_MAP() || {};
     area.innerHTML = '<div class="fade-in">' +
       _header('🌐 翻译总览') +
       '<div id="i18n-type-bar" class="flex items-center gap-3 mb-5">' +
@@ -207,7 +208,7 @@
           var html = '';
           for (var code in data.results) {
             var r = data.results[code];
-            var meta = LANG_MAP[code] || {};
+            var meta = LM[code] || {};
             var pct = r.total > 0 ? Math.round(r.translated / r.total * 100) : 0;
             var color = pct >= 100 ? '#22c55e' : pct > 0 ? '#6366f1' : '#d1d5db';
             var icon = r.status === 'done' ? '✅' : r.status === 'running' ? '⏳' : r.status === 'error' ? '❌' : '⏸️';

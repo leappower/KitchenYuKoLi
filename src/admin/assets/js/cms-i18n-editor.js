@@ -7,17 +7,18 @@
   var toast = CMS._deps.toast;
   var showModal = CMS._deps.showModal;
   var state = CMS._i18nState;
-  var LANG_MAP = CMS._i18nConstants.LANG_MAP;
-  var PAGE_SIZE = CMS._i18nConstants.PAGE_SIZE;
   var _filterBtn = function(f, l) { return CMS._i18nUtils.filterBtn(f, l); };
   var _updateFilterBtnStyles = function(f) { CMS._i18nUtils.updateFilterBtnStyles(f); };
+  var _c = function() { return CMS._i18nConstants || {}; };
 
   CMS._i18nEditor = {};
 
   // ─── Render ───────────────────────────────────────────────────────
 
   CMS._i18nEditor.render = function(area) {
-    var meta = LANG_MAP[state.lang] || {};
+    var LM = _c().LANG_MAP || {};
+    var PS = _c().PAGE_SIZE || 200;
+    var meta = LM[state.lang] || {};
     var area2 = document.getElementById('main-content') || area;
     if (area2 !== area && area2) area = area2;
 
@@ -137,7 +138,7 @@
     container.innerHTML = '<div class="text-center py-8 text-gray-400">加载中...</div>';
 
     var params = '?lang=' + state.lang + '&type=' + state.type +
-      '&page=' + state.page + '&limit=' + PAGE_SIZE +
+      '&page=' + state.page + '&limit=' + PS +
       (state.search ? '&search=' + encodeURIComponent(state.search) : '');
 
     api('/i18n/keys' + params).then(function(data) {
@@ -198,7 +199,7 @@
 
     var keys = CMS._i18nEditor.getFilteredKeys();
     var srcMap = state.editorData.srcMap;
-    var meta = LANG_MAP[state.lang] || {};
+    var meta = LM[state.lang] || {};
 
     if (keys.length === 0) {
       container.innerHTML = '<div class="text-center py-12 text-gray-400"><div class="text-4xl mb-3">📭</div><div>没有找到匹配的条目</div></div>';
@@ -430,12 +431,12 @@
   CMS._i18nEditor.renderPagination = function(total) {
     var el = document.getElementById('editor-pagination');
     if (!el) return;
-    var totalPages = Math.ceil(total / PAGE_SIZE);
+    var totalPages = Math.ceil(total / PS);
     var page = state.page;
     if (totalPages <= 1) { el.innerHTML = '<span>共 ' + total + ' 条</span><span></span>'; return; }
 
-    var start = (page - 1) * PAGE_SIZE + 1;
-    var end = Math.min(page * PAGE_SIZE, total);
+    var start = (page - 1) * PS + 1;
+    var end = Math.min(page * PS, total);
 
     var pages = [];
     if (page > 1) pages.push({ n: page - 1, t: '◀' });
@@ -655,7 +656,7 @@
         var found = false;
         for (var i = 0; i < keys.length; i++) {
           if (found && (!keys[i].value || !keys[i].value.trim())) {
-            state.page = Math.floor(i / PAGE_SIZE) + 1;
+            state.page = Math.floor(i / PS) + 1;
             CMS._i18nEditor.loadData();
             setTimeout(function() {
               var input = document.querySelector('.cell-edit-input[data-key="' + keys[i].key + '"]');
@@ -665,7 +666,7 @@
           }
           if (curKey && keys[i].key === curKey) found = true;
           if (!curKey && (!keys[i].value || !keys[i].value.trim())) {
-            state.page = Math.floor(i / PAGE_SIZE) + 1;
+            state.page = Math.floor(i / PS) + 1;
             CMS._i18nEditor.loadData();
             setTimeout(function() {
               var input = document.querySelector('.cell-edit-input[data-key="' + keys[i].key + '"]');

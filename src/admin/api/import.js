@@ -177,43 +177,45 @@ function importRoutes(db) {
     return null;
   }
 
-  // Extract images from Excel ZIP
-  function extractImages(filePath) {
+  // Extract images from Excel ZIP (async — returns {baseName: filePath} map)
+  async function extractImages(filePath) {
     const AdmZip = require('adm-zip');
     const sharp = require('sharp');
-    const images = {};
     const uploadsDir = path.join(__dirname, '..', 'uploads', 'products');
+    const images = {};
     
-    // Ensure directory exists
     fs.mkdirSync(uploadsDir, { recursive: true });
 
     try {
       var zip = new AdmZip(filePath);
       var entries = zip.getEntries();
       
-      entries.forEach(function(entry) {
-        if (entry.entryName.match(/\.(png|jpg|jpeg|bmp|gif)$/i) && !entry.isDirectory) {
+      for (var i = 0; i < entries.length; i++) {
+        var entry = entries[i];
+        if (entry.entryName.match(/\.(png|jpg|jpeg|bmp|gif|emf|wmf)$/i) && !entry.isDirectory) {
           var ext = path.extname(entry.entryName).toLowerCase();
           var baseName = path.basename(entry.entryName, ext);
+          // Skip generic names like image1, image2
+          if (/^image\d+$/.test(baseName)) {
+            baseName = baseName + '_' + i;
+          }
           var webpName = baseName + '.webp';
           var webpPath = path.join(uploadsDir, webpName);
           
           try {
             var buf = entry.getData();
-            sharp(buf)
+            // Skip tiny/invalid images (< 1KB)
+            if (buf.length < 1024) continue;
+            await sharp(buf)
+              .resize(800, 800, { fit: 'inside', withoutEnlargement: true })
               .webp({ quality: 80 })
-              .toFile(webpPath)
-              .then(function() {
-                images[baseName] = '/admin/uploads/products/' + webpName;
-              })
-              .catch(function(err) {
-                console.error('[Import] Failed to convert image:', baseName, err.message);
-              });
-          } catch(e) {
-            console.error('[Import] Failed to extract image:', baseName, e.message);
+              .toFile(webpPath);
+            images[baseName] = '/admin/uploads/products/' + webpName;
+          } catch(err) {
+            console.error('[Import] Failed to convert image:', baseName, err.message);
           }
         }
-      });
+      }
     } catch(e) {
       console.error('[Import] Failed to read ZIP:', e.message);
     }
@@ -254,6 +256,11 @@ function importRoutes(db) {
       var imported = 0;
       var skipped = 0;
       var updated = 0;
+      var imagesLinked = 0;
+
+      // Extract images from Excel (before writing products)
+      var images = await extractImages(filePath);
+      console.log('[Import] Extracted', Object.keys(images).length, 'images from Excel');
 
       var insertStmt = db.prepare(
         `INSERT INTO products (category_id, model, name, specifications, product_dimensions, throughput, power, voltage, frequency, material, control_method, status, is_active, sort_order)
@@ -266,6 +273,12 @@ function importRoutes(db) {
       );
 
       var checkStmt = db.prepare('SELECT id FROM products WHERE model = ?');
+
+      var insertImgStmt = db.prepare(
+        'INSERT INTO product_images (product_id, file_path, is_primary, sort_order) VALUES (?, ?, ?, ?)'
+      );
+
+      var checkImgStmt = db.prepare('SELECT COUNT(*) as cnt FROM product_images WHERE product_id = ? AND file_path = ?');
 
       var batch = db.transaction(function() {
         result.products.forEach(function(p) {
@@ -281,6 +294,33 @@ function importRoutes(db) {
       });
       batch();
 
+      // Link images to products (fuzzy match by model)
+      var imgKeys = Object.keys(images);
+      if (imgKeys.length > 0) {
+        var allProducts = db.prepare('SELECT id, model FROM products').all();
+        imgKeys.forEach(function(imgKey, imgIdx) {
+          var imgPath = images[imgKey];
+          // Try to match image to product by model substring
+          var matchedProduct = null;
+          for (var i = 0; i < allProducts.length; i++) {
+            var m = allProducts[i].model.replace(/[-\s]/g, '').toUpperCase();
+            var k = imgKey.replace(/[-\s]/g, '').toUpperCase();
+            if (m.indexOf(k) >= 0 || k.indexOf(m) >= 0) {
+              matchedProduct = allProducts[i];
+              break;
+            }
+          }
+          if (matchedProduct) {
+            var exists = checkImgStmt.get(matchedProduct.id, imgPath);
+            if (!exists || exists.cnt === 0) {
+              var isFirst = db.prepare('SELECT COUNT(*) as cnt FROM product_images WHERE product_id = ?').get(matchedProduct.id).cnt;
+              insertImgStmt.run(matchedProduct.id, imgPath, isFirst === 0 ? 1 : 0, imgIdx);
+              imagesLinked++;
+            }
+          }
+        });
+      }
+
       // Clean up temp file
       fs.unlinkSync(filePath);
 
@@ -288,7 +328,9 @@ function importRoutes(db) {
         total: result.products.length,
         imported: imported,
         updated: updated,
-        skipped: skipped
+        skipped: skipped,
+        images_extracted: Object.keys(images).length,
+        images_linked: imagesLinked
       });
 
       res.json({
@@ -298,6 +340,8 @@ function importRoutes(db) {
         imported: imported,
         updated: updated,
         skipped: skipped,
+        images_extracted: Object.keys(images).length,
+        images_linked: imagesLinked,
         errors: result.errors
       });
 
