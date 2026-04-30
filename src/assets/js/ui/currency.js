@@ -211,8 +211,13 @@
       _invalidateCache();
     });
     // 延迟监听 translationsApplied（translationManager 可能稍后初始化）
+    // 如果首次 translationsApplied 已错过，检测 isInitialized 补执行
  function listenApplied() {
       if (root.translationManager && root.translationManager.on) {
+        // 如果 translationManager 已完成初始化（首次翻译已应用），立即刷新一次
+        if (root.translationManager.isInitialized) {
+          setTimeout(refreshCurrencyUI, 50);
+        }
         root.translationManager.on('translationsApplied', function() {
           refreshCurrencyUI();
         });
@@ -226,8 +231,8 @@
   // ── DOM Ready 时也执行一次 ──
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', function() {
-      // 延迟执行，确保 translationManager 已初始化
-      setTimeout(refreshCurrencyUI, 100);
+      // 延迟执行，确保 i18n 首次 applyTranslations 已完成
+      setTimeout(refreshCurrencyUI, 500);
     });
   } else {
     setTimeout(refreshCurrencyUI, 100);
