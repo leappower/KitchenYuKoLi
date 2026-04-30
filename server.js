@@ -31,7 +31,7 @@ const {
 // ─── API Server Proxy ───────────────────────────────────────────────
 // All API, admin, and upload requests go to KitchenYuKoLiServer.
 // Configurable via API_SERVER env var (default: http://127.0.0.1:8000).
-const API_SERVER = process.env.API_SERVER || 'http://127.0.0.1:8000';
+const API_SERVER = process.env.API_SERVER || 'http://127.0.0.1:8001';
 const { createProxyMiddleware } = require('http-proxy-middleware');
 
 const app = express();
