@@ -282,21 +282,38 @@
       }
     },
 
-    // 获取骨架屏 HTML — 通用占位条，不模拟具体页面布局
+    // 获取骨架屏 HTML — 根据设备类型生成适配骨架
     getSkeletonHTML: function () {
+      var w = window.innerWidth || 1024;
+      var isMobile = w < 768;
+      var isTablet = w >= 768 && w < 1280;
+
+      // Hero: 标题 + 描述 + CTA（三屏共有的首屏结构）
+      var hero =
+        '<div class="sk-hero">' +
+          '<div class="sk-badge"></div>' +
+          '<div class="sk-line' + (isMobile ? ' sk-line--h2' : '') + '"></div>' +
+          '<div class="sk-line sk-line--desc"></div>' +
+          (isMobile
+            ? '<div class="sk-line sk-line--desc sk-line--short"></div>'
+            : '<div class="sk-line sk-line--desc sk-line--short"></div>') +
+          '<div class="sk-cta-group">' +
+            '<div class="sk-line sk-cta"></div>' +
+            (!isMobile ? '<div class="sk-line sk-cta sk-cta--outline"></div>' : '') +
+          '</div>' +
+        '</div>';
+
+      // Content: 响应式卡片网格
+      var cols = isMobile ? 1 : isTablet ? 2 : 3;
+      var cards = '';
+      for (var i = 0; i < cols; i++) {
+        cards += '<div class="sk-card"></div>';
+      }
+
       return (
         '<div class="skeleton-container">' +
-        '<div class="skeleton-hero">' +
-        '<div class="sk-line sk-line--title"></div>' +
-        '<div class="sk-line sk-line--subtitle"></div>' +
-        '<div class="sk-line sk-line--subtitle sk-line--short"></div>' +
-        '<div class="sk-line sk-line--cta"></div>' +
-        '</div>' +
-        '<div class="skeleton-content">' +
-        '<div class="skeleton-card"></div>' +
-        '<div class="skeleton-card"></div>' +
-        '<div class="skeleton-card"></div>' +
-        '</div>' +
+        hero +
+        '<div class="sk-grid">' + cards + '</div>' +
         '</div>'
       );
     },

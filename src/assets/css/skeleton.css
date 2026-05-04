@@ -1,12 +1,15 @@
 /**
- * skeleton.css - 骨架屏样式
+ * skeleton.css — 骨架屏样式（三屏适配）
  *
- * 通用占位骨架，不模拟具体页面布局。
- * 仅提供视觉"加载中"反馈，与页面容器边距对齐。
+ * JS 根据设备宽度动态生成不同骨架结构：
+ *   Mobile  (＜768px):  badge + h2 + 1 desc + 1 CTA     + 1 card
+ *   Tablet  (768-1279): badge + h1 + 2 desc + 2 CTAs     + 2 cards
+ *   PC      (≥1280px):  badge + h1 + 2 desc + 2 CTAs     + 3 cards
  *
- * PC:    px-6 md:px-8 xl:px-10
- * Tablet: px-6
- * Mobile: px-4
+ * 间距与实际页面对齐：
+ *   Mobile:  px-4, py-8 hero, gap-6
+ *   Tablet:  px-6, py-10 hero, gap-8
+ *   PC:      px-6 → md:px-8 → xl:px-10, py-10 hero, gap-6
  */
 
 /* ───────── 容器 ───────── */
@@ -14,69 +17,129 @@
   width: 100%;
   margin: 0 auto;
   min-height: 50vh;
-  padding: 2.5rem 16px 2rem;
+  padding: 2rem 16px; /* mobile: px-4 */
   animation: sk-fadeIn 0.15s ease-out;
 }
 
 @media (width >= 768px) {
-  .skeleton-container { padding: 2.5rem 24px 2rem; }
+  .skeleton-container { padding: 2.5rem 24px; } /* tablet: px-6 */
 }
 @media (width >= 1024px) {
-  .skeleton-container { padding: 2.5rem 32px 2rem; }
+  .skeleton-container { padding: 2.5rem 32px; } /* lg: px-8 */
 }
 @media (width >= 1280px) {
-  .skeleton-container { padding: 2.5rem 40px 2rem; }
+  .skeleton-container { padding: 2.5rem 40px; } /* xl: px-10 */
 }
 
-/* ───────── 通用骨架条 ───────── */
-.skeleton-hero {
-  margin-bottom: 2rem;
+/* ───────── Hero 区域（居中，与实际 hero 一致）───────── */
+.sk-hero {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  margin-bottom: 1.5rem;
 }
 
-/* 标题条 */
-.sk-line {
-  height: 16px;
-  border-radius: 6px;
+/* Badge（药丸标签） */
+.sk-badge {
+  width: 100px;
+  height: 22px;
+  border-radius: 9999px;
+  margin-bottom: 16px;
   background: linear-gradient(90deg, #e8e8e8 25%, #d4d4d4 50%, #e8e8e8 75%);
   background-size: 200% 100%;
   animation: sk-shimmer 1.5s infinite;
 }
 
-.sk-line--title {
-  width: 55%;
+/* 标题行 */
+.sk-hero .sk-line {
+  width: 65%;
   height: 32px;
   border-radius: 8px;
   margin-bottom: 12px;
 }
 
-.sk-line--subtitle {
-  width: 75%;
+/* Mobile h2 稍小 */
+.sk-hero .sk-line--h2 {
+  height: 26px;
+}
+
+/* 描述行 */
+.sk-line--desc {
+  width: 80%;
+  height: 18px;
   margin-bottom: 8px;
 }
 
 .sk-line--short {
-  width: 40%;
+  width: 45%;
 }
 
-.sk-line--cta {
-  width: 140px;
-  height: 40px;
-  border-radius: 10px;
+/* CTA 按钮组 */
+.sk-cta-group {
+  display: flex;
+  gap: 12px;
   margin-top: 20px;
+  justify-content: center;
 }
 
-/* 内容区网格 */
-.skeleton-content {
+.sk-cta {
+  width: 160px;
+  height: 44px;
+  border-radius: 12px;
+  flex-shrink: 0;
+}
+
+.sk-cta--outline {
+  width: 140px;
+  height: 44px;
+}
+
+/* ───────── 内容网格 ───────── */
+.sk-grid {
   display: grid;
   gap: 16px;
   margin-top: 2rem;
 }
 
-.skeleton-card {
-  border-radius: 12px;
+.sk-card {
+  height: 220px;
+  border-radius: 16px;
   background: linear-gradient(90deg, #e8e8e8 25%, #d4d4d4 50%, #e8e8e8 75%);
   background-size: 200% 100%;
   animation: sk-shimmer 1.5s infinite;
+}
+
+/* 通用线条 */
+.sk-line {
+  background: linear-gradient(90deg, #e8e8e8 25%, #d4d4d4 50%, #e8e8e8 75%);
+  background-size: 200% 100%;
+  animation: sk-shimmer 1.5s infinite;
+}
+
+/* ───────── 响应式：Mobile ───────── */
+@media (width <= 767px) {
+  .sk-hero { margin-bottom: 1rem; }
+  .sk-badge { width: 80px; height: 18px; }
+  .sk-hero .sk-line { width: 80%; height: 26px; }
+  .sk-line--desc { height: 14px; }
+  .sk-cta { width: 100%; height: 40px; border-radius: 10px; }
+  .sk-cta--outline { display: none; } /* mobile: 单 CTA */
+  .sk-cta-group { flex-direction: column; width: 100%; gap: 10px; }
+  .sk-grid { gap: 12px; }
+  .sk-card { height: 180px; border-radius: 12px; }
+}
+
+/* ───────── 响应式：Tablet ───────── */
+@media (width >= 768px) and (width <= 1279px) {
+  .sk-grid { grid-template-columns: repeat(2, 1fr); }
+  .sk-card { height: 220px; }
+}
+
+/* ───────── 响应式：PC ───────── */
+@media (width >= 1280px) {
+  .sk-grid { grid-template-columns: repeat(3, 1fr); }
+  .sk-card { height: 240px; }
 }
 
 /* ───────── Animations ───────── */
@@ -91,26 +154,10 @@
 }
 
 /* ───────── Dark Mode ───────── */
+.dark .sk-badge,
 .dark .sk-line,
-.dark .skeleton-card {
+.dark .sk-cta,
+.dark .sk-card {
   background: linear-gradient(90deg, #1e293b 25%, #334155 50%, #1e293b 75%);
   background-size: 200% 100%;
-}
-
-/* ───────── Responsive ───────── */
-@media (width <= 767px) {
-  .skeleton-content { grid-template-columns: 1fr; }
-  .skeleton-card   { height: 200px; }
-  .sk-line--title  { width: 80%; height: 24px; }
-  .sk-line--cta    { width: 120px; height: 36px; }
-}
-
-@media (width >= 768px) and (width <= 1279px) {
-  .skeleton-content { grid-template-columns: repeat(2, 1fr); }
-  .skeleton-card   { height: 240px; }
-}
-
-@media (width >= 1280px) {
-  .skeleton-content { grid-template-columns: repeat(3, 1fr); }
-  .skeleton-card   { height: 260px; }
 }
