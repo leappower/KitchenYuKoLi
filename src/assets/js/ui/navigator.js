@@ -263,7 +263,12 @@
    * @returns {string} HTML 字符串
    */
   function buildNavItemsHtml(activeId, variant) {
-    return navItems
+    // Always re-read NAV_CONFIG to pick up hot-reloaded changes
+    var items =
+      typeof NAV_CONFIG !== "undefined" && NAV_CONFIG.mainNav
+        ? NAV_CONFIG.mainNav
+        : DEFAULT_NAV_ITEMS;
+    return items
       .map(function (item) {
         return buildNavItemHtml(item, activeId, variant);
       })
