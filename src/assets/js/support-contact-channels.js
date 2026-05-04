@@ -122,13 +122,13 @@
 
   function renderWaCard(cfg, device) {
     if (device === 'mobile') {
-      return '<a href="https://wa.me/8613163756465" data-wa-source="contact-card" target="_blank" class="flex items-center gap-3 p-4 rounded-xl bg-[#06C755]/10 border border-[#06C755]/20 transition-all active:scale-95">' +
+      return '<a href="https://wa.me/8613163756465" data-wa-source="contact-card" data-wa-message="我想咨询 YuKoLi 设备售后相关问题。" target="_blank" rel="noopener noreferrer" class="flex items-center gap-3 p-4 rounded-xl bg-[#06C755]/10 border border-[#06C755]/20 transition-all active:scale-95">' +
         '<div class="w-10 h-10 rounded-lg bg-[#06C755] flex items-center justify-center shrink-0"><span class="material-symbols-outlined text-white text-xl">chat</span></div>' +
         '<div class="flex-1"><p class="font-bold text-sm text-slate-900 dark:text-slate-100">WhatsApp</p><p class="text-xs text-slate-500 dark:text-slate-400">' + cfg.wa + '</p></div>' +
         '<span class="material-symbols-outlined text-slate-400 text-lg shrink-0">open_in_new</span>' +
       '</a>';
     }
-    return '<a href="https://wa.me/8613163756465" data-wa-source="contact-card" target="_blank" class="flex flex-col items-center gap-3 p-8 rounded-2xl bg-[#06C755]/5 border border-[#06C755]/20 hover:bg-[#06C755]/10 hover:shadow-lg hover:border-[#06C755]/40 transition-all duration-300 group">' +
+    return '<a href="https://wa.me/8613163756465" data-wa-source="contact-card" data-wa-message="我想咨询 YuKoLi 设备售后相关问题。" target="_blank" rel="noopener noreferrer" class="flex flex-col items-center gap-3 p-8 rounded-2xl bg-[#06C755]/5 border border-[#06C755]/20 hover:bg-[#06C755]/10 hover:shadow-lg hover:border-[#06C755]/40 transition-all duration-300 group">' +
       '<div class="w-14 h-14 rounded-full bg-[#06C755] flex items-center justify-center group-hover:scale-110 transition-transform"><span class="material-symbols-outlined text-white text-2xl">chat</span></div>' +
       '<h3 class="font-bold text-lg">WhatsApp</h3>' +
       '<p class="text-sm text-slate-500 dark:text-slate-400 text-center">' + cfg.wa + '</p>' +

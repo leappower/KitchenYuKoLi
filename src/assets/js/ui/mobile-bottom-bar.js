@@ -13,11 +13,13 @@
   var BAR_ID = 'mobile-bottom-bar';
   var SPACER_ID = 'mobile-bottom-bar-spacer';
 
-  var WHATSAPP_URL =
-    'https://api.whatsapp.com/send/?phone=8613163756465' +
-    '&text=Hi%2C%20I%27m%20interested%20in%20YuKoLi%20commercial%20kitchen%20equipment.';
-
   /* ─── 1. Inject <style> (idempotent) ──────────────────────── */
+  function buildWhatsAppUrl() {
+    if (window.Contacts && typeof window.Contacts.contactsWhatsApp === 'function') {
+      return window.Contacts.contactsWhatsApp({ source: 'bottom-bar' });
+    }
+    return 'https://api.whatsapp.com/send/?phone=8613163756465';
+  }
   function injectStyles() {
     if (document.getElementById(STYLE_ID)) return;
 
@@ -106,9 +108,9 @@
       '</a>';
     }).join('\n');
 
-    // WhatsApp button (external link, highlighted)
+    // WhatsApp button (external link, highlighted) — use plain href so initWhatsAppLinks can intercept
     links += '\n' +
-      '<a class="bb-whatsapp" href="' + WHATSAPP_URL + '" target="_blank" rel="noopener">' +
+      '<a class="bb-whatsapp" href="https://wa.me/8613163756465" data-wa-source="bottom-bar" target="_blank" rel="noopener">' +
         '<span class="bb-icon">💬</span>' +
         '<span>WhatsApp</span>' +
       '</a>';

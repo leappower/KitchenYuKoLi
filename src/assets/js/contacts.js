@@ -29,6 +29,7 @@
     "/support/warranty/": "质保政策",
     "/support/faq/": "常见问题",
     "/products/": "产品中心",
+    "/products/compare/": "产品对比",
     "/products/detail/": "产品详情",
     "/quote/": "在线询价",
     "/contact/": "联系我们",
@@ -37,6 +38,14 @@
     "/about/": "关于我们",
     "/news/": "新闻资讯",
     "/thank-you/": "感谢页",
+    "/applications/central-kitchen/": "中央厨房",
+    "/applications/chain-restaurant/": "连锁餐饮",
+    "/applications/small-restaurant/": "小型餐饮",
+    "/applications/canteen/": "智慧食堂",
+    "/applications/menu-lab/": "菜系实验室",
+    "/applications/cloud-kitchen/": "云厨房",
+    "/profit-calculator/": "利润计算器",
+    "/cases/": "案例",
   };
 
   function getPageName() {
@@ -50,26 +59,30 @@
   }
 
   /**
-   * Build a tracked WhatsApp URL with source information.
+   * Build a tracked WhatsApp URL with natural message + source tracking.
+   * Message format:
+   *   [自然需求描述]
+   *   ---
+   *   yukoli.com/path [source]
+   *
    * @param {Object} opts
-   * @param {string} [opts.pageName] - Override page name (auto-detected if omitted)
+   * @param {string} [opts.message] - User-facing natural language message (from data-wa-message or custom)
    * @param {string} [opts.source] - Location description (e.g. "hero", "contact-card", "bottom-cta")
-   * @param {string} [opts.button] - Button/link text for identification
-   * @param {string} [opts.message] - Additional custom message to append
+   * @param {string} [opts.button] - Button/link text for identification (legacy, kept for compat)
    * @returns {string} Full wa.me URL with pre-filled text
    */
   function contactsWhatsApp(opts) {
     opts = opts || {};
-    var pageName = opts.pageName || getPageName();
+    var message = opts.message || "Hi YuKoLi";
     var source = opts.source || "";
-    var button = opts.button || "";
-    var message = opts.message || "";
 
-    var text = "Hi YuKoLi [" + pageName;
-    if (source) text += "/" + source;
-    text += "]";
-    if (message) text += "\n" + message;
+    // Build source tracking line
+    var cleanPath = global.location.pathname.replace(/\/index-(pc|mobile|tablet)\.html$/, "/");
+    if (!cleanPath || cleanPath === "/") cleanPath = "/home/";
+    var trackingLine = global.location.hostname + cleanPath;
+    if (source) trackingLine += " [" + source + "]";
 
+    var text = message + "\n---\n" + trackingLine;
     return "https://wa.me/" + WHATSAPP_NUMBER + "?text=" + encodeURIComponent(text);
   }
 
@@ -99,9 +112,9 @@
         link.addEventListener("click", function (e) {
           e.preventDefault();
           e.stopPropagation();
+          var waMessage = link.dataset.waMessage || "";
           var source = link.dataset.waSource || "";
-          var btnText = link.dataset.waBtn || getLinkText(link) || "";
-          var url = contactsWhatsApp({ source: source, button: btnText });
+          var url = contactsWhatsApp({ message: waMessage, source: source });
           global.open(url, "_blank", "noopener,noreferrer");
         });
       })(links[i]);

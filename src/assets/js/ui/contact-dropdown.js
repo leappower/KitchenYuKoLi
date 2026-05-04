@@ -12,7 +12,7 @@
 
   var ITEMS = (typeof NAV_CONFIG !== 'undefined' && NAV_CONFIG.dropdowns && NAV_CONFIG.dropdowns.contact) || [
     { key: "nav_contact_us", icon: "grid_view", href: "/contact/" },
-    { key: "nav_contact_whatsapp", icon: "chat", href: "https://api.whatsapp.com/send/?phone=8613163756465", isWhatsApp: true },
+    { key: "nav_contact_whatsapp", icon: "chat", href: "https://wa.me/8613163756465", isWhatsApp: true },
   ];
 
   /* ───────────────────────── HELPERS ───────────────────────── */
