@@ -33,6 +33,7 @@
       "/applications/small-restaurant/": "/applications/small-restaurant/index.html",
       "/applications/canteen/": "/applications/canteen/index.html",
       "/applications/menu-lab/": "/applications/menu-lab/index.html",
+      "/applications/cloud-kitchen/": "/applications/cloud-kitchen/index.html",
       "/cases/": "/cases/index.html",
       "/profit-calculator/": "/profit-calculator/index.html",
       "/products/compare/": "/products/compare/index.html",
