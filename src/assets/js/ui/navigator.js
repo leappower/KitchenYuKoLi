@@ -13,7 +13,6 @@
     id: "applications",
     hasDropdown: !0
   }, {
-  }, {
     key: "nav_service",
     label: "服务支持",
     path: "/support/",
@@ -62,14 +61,10 @@
             labelKey: t.key,
             label: t.label,
             activeClass: n
-<<<<<<< HEAD
-          if (t.hasDropdown && e.ApplicationsDropdown && "applications" === t.id) {
-=======
           })
         }
 
         if (t.hasDropdown && e.ApplicationsDropdown && "applications" === t.id) {
->>>>>>> origin/dev-p0a-chain
           if ("pc" === r) return e.ApplicationsDropdown.renderPC({
             href: i,
             labelKey: t.key,
@@ -109,17 +104,16 @@
             labelKey: t.key,
             label: t.label,
             activeClass: n
-          return t.hasDropdown ? '<span class="' + n + ' pointer-events-none">' + t.label + "</span>" : '<a class="' + n + '" href="' + a(i) + '" data-i18n="' + a(t.key) + '">' + a(t.label) + "</a>"
+          })
+        }
+        
+        return t.hasDropdown ? '<span class="' + n + ' pointer-events-none">' + t.label + "</span>" : '<a class="' + n + '" href="' + a(i) + '" data-i18n="' + a(t.key) + '">' + a(t.label) + "</a>"
       }).join("\n")
     }(o.active, o.variant) + '</nav></div><div class="flex items-center gap-6">' + s.join("\n") + "</div></div></header>"
   }
 
   function i() {
-<<<<<<< HEAD
     e.DropdownBaseStyles && e.DropdownBaseStyles.inject(), e.ProductsDropdown && e.ProductsDropdown.injectAllStyles(), e.ApplicationsDropdown && e.ApplicationsDropdown.injectAllStyles(), e.SupportDropdown && e.SupportDropdown.injectAllStyles(), e.AboutDropdown && e.AboutDropdown.injectAllStyles(),
-=======
-    e.DropdownBaseStyles && e.DropdownBaseStyles.inject(), e.ProductsDropdown && e.ProductsDropdown.injectAllStyles(), e.ApplicationsDropdown && e.ApplicationsDropdown.injectAllStyles(), e.SupportDropdown && e.SupportDropdown.injectAllStyles(), e.AboutDropdown && e.AboutDropdown.injectAllStyles(),
->>>>>>> origin/dev-p0a-chain
       function() {
         if (!document.getElementById("nav-logo-styles")) {
           var e = document.createElement("style");
@@ -162,7 +156,7 @@
     }
 
     function b(e) {
-      for (var t = [".prod-dropdown-wrap", , ".app-dropdown-wrap", ".sup-dropdown-wrap", ".abt-dropdown-wrap", ], a = 0; a < t.length; a++)
+      for (var t = [".prod-dropdown-wrap", ".app-dropdown-wrap", ".sup-dropdown-wrap", ".abt-dropdown-wrap"], a = 0; a < t.length; a++)
         for (var o = document.querySelectorAll(t[a] + ".is-open"), r = 0; r < o.length; r++) o[r] !== e && o[r].classList.remove("is-open")
     }! function() {
       var e = document.getElementById("ios-search-bar"),
@@ -216,7 +210,7 @@
         "Escape" === e.key && document.activeElement === t && (t.value = "", r(), t.blur(), o())
       })))
     })();
-    for (var h = [".prod-dropdown-wrap", , ".app-dropdown-wrap", ".sup-dropdown-wrap", ".abt-dropdown-wrap", ], w = 0; w < h.length; w++)(function(e) {
+    for (var h = [".prod-dropdown-wrap", ".app-dropdown-wrap", ".sup-dropdown-wrap", ".abt-dropdown-wrap"], w = 0; w < h.length; w++)(function(e) {
       for (var t = document.querySelectorAll(e), a = 0; a < t.length; a++)(function(e) {
         e._dropdownMutexBound || (e._dropdownMutexBound = !0, e.addEventListener("mouseenter", function() {
           e.classList.contains("touch-device") || b(e)
@@ -224,12 +218,8 @@
       })(t[a])
     })(h[w]);
     document.addEventListener("click", function(e) {
-      b(e.target.closest(".prod-dropdown-wrap, .sol-dropdown-wrap, .app-dropdown-wrap, .sup-dropdown-wrap, .abt-dropdown-wrap, .cnt-dropdown-wrap") || null)
-<<<<<<< HEAD
+      b(e.target.closest(".prod-dropdown-wrap, .app-dropdown-wrap, .sup-dropdown-wrap, .abt-dropdown-wrap") || null)
     }, !0), e.ProductsDropdown && e.ProductsDropdown.initDropdownClick(), e.ApplicationsDropdown && e.ApplicationsDropdown.initDropdownClick(), e.SupportDropdown && e.SupportDropdown.initDropdownClick(), e.AboutDropdown && e.AboutDropdown.initDropdownClick(), e.translationManager && ("function" == typeof e.translationManager.resetEventListeners && e.translationManager.resetEventListeners(), "function" == typeof e.translationManager.applyTranslations && e.translationManager.applyTranslations(), "function" == typeof e.translationManager.setupEventListeners && e.translationManager.setupEventListeners()), console.log("[navigator] MobileMenu exists:", !!e.SlideMenu, "| initToggle:", typeof(e.SlideMenu && e.SlideMenu.initToggle)), e.SlideMenu && ("function" == typeof e.SlideMenu.initToggle && (e.SlideMenu.initToggle(), console.log("[navigator] MobileMenu.initToggle() called")), "function" == typeof e.SlideMenu.initSmartHeader && e.SlideMenu.initSmartHeader());
-=======
-    }, !0), e.ProductsDropdown && e.ProductsDropdown.initDropdownClick(), e.ApplicationsDropdown && e.ApplicationsDropdown.initDropdownClick(), e.SupportDropdown && e.SupportDropdown.initDropdownClick(), e.AboutDropdown && e.AboutDropdown.initDropdownClick(), e.translationManager && ("function" == typeof e.translationManager.resetEventListeners && e.translationManager.resetEventListeners(), "function" == typeof e.translationManager.applyTranslations && e.translationManager.applyTranslations(), "function" == typeof e.translationManager.setupEventListeners && e.translationManager.setupEventListeners()), console.log("[navigator] MobileMenu exists:", !!e.SlideMenu, "| initToggle:", typeof(e.SlideMenu && e.SlideMenu.initToggle)), e.SlideMenu && ("function" == typeof e.SlideMenu.initToggle && (e.SlideMenu.initToggle(), console.log("[navigator] MobileMenu.initToggle() called")), "function" == typeof e.SlideMenu.initSmartHeader && e.SlideMenu.initSmartHeader());
->>>>>>> origin/dev-p0a-chain
     var m = document.getElementById("tablet-search-toggle");
     m && m.addEventListener("click", function(t) {
       t.preventDefault(), t.stopPropagation(), e.SlideMenu && "function" == typeof e.SlideMenu.openMobileSearch && e.SlideMenu.openMobileSearch()
@@ -259,17 +249,13 @@
     updateActive: function(a) {
       a = a || "";
       var o = window.location.pathname.replace(/\/$/, "") || "/";
-<<<<<<< HEAD
       e.DropdownBaseStyles && e.DropdownBaseStyles.inject(), e.ProductsDropdown && e.ProductsDropdown.injectAllStyles && e.ProductsDropdown.injectAllStyles(), e.ApplicationsDropdown && e.ApplicationsDropdown.injectAllStyles && e.ApplicationsDropdown.injectAllStyles(), e.SupportDropdown && e.SupportDropdown.injectAllStyles && e.SupportDropdown.injectAllStyles(), e.AboutDropdown && e.AboutDropdown.injectAllStyles && e.AboutDropdown.injectAllStyles();
-=======
-      e.DropdownBaseStyles && e.DropdownBaseStyles.inject(), e.ProductsDropdown && e.ProductsDropdown.injectAllStyles && e.ProductsDropdown.injectAllStyles(), e.ApplicationsDropdown && e.ApplicationsDropdown.injectAllStyles && e.ApplicationsDropdown.injectAllStyles(), e.SupportDropdown && e.SupportDropdown.injectAllStyles && e.SupportDropdown.injectAllStyles(), e.AboutDropdown && e.AboutDropdown.injectAllStyles && e.AboutDropdown.injectAllStyles();
->>>>>>> origin/dev-p0a-chain
-      var r = document.querySelectorAll("header nav a[data-i18n], header nav a.prod-dropdown-trigger, header nav a.sol-dropdown-trigger, header nav a.app-dropdown-trigger, header nav a.sup-dropdown-trigger, header nav a.abt-dropdown-trigger, header nav a.cnt-dropdown-trigger");
+      var r = document.querySelectorAll("header nav a[data-i18n], header nav a.prod-dropdown-trigger, header nav aheader nav a.app-dropdown-trigger, header nav a.sup-dropdown-trigger, header nav a.abt-dropdown-trigger, header nav a");
       if (r.length > 0)
         for (var n = 0; n < r.length; n++) {
           var i = a,
             l = {
-              "case-studies": "cases",
+              "case-studies": "applications",
               roi: "profit-calculator",
               news: "contact",
               quote: "contact",
@@ -281,9 +267,9 @@
               d = !0;
               break
             } var u = [];
-          (s.classList.contains("prod-dropdown-trigger") || s.classList.contains("sol-dropdown-trigger") || s.classList.contains("app-dropdown-trigger") || s.classList.contains("sup-dropdown-trigger") || s.classList.contains("abt-dropdown-trigger") || s.classList.contains("cnt-dropdown-trigger")) && (s.classList.contains("prod-dropdown-trigger") && u.push("prod-dropdown-trigger"), s.classList.contains("sol-dropdown-trigger") && u.push("sol-dropdown-trigger"), s.classList.contains("app-dropdown-trigger") && u.push("app-dropdown-trigger"), s.classList.contains("sup-dropdown-trigger") && u.push("sup-dropdown-trigger"), s.classList.contains("abt-dropdown-trigger") && u.push("abt-dropdown-trigger"), s.classList.contains("cnt-dropdown-trigger") && u.push("cnt-dropdown-trigger")), s.className = d ? "text-sm font-semibold text-primary" + (u.length ? " " + u.join(" ") : "") : "text-sm font-semibold hover:text-primary transition-colors" + (u.length ? " " + u.join(" ") : "")
+          (s.classList.contains("prod-dropdown-trigger") || s.classList.contains("app-dropdown-trigger") || s.classList.contains("sup-dropdown-trigger") || s.classList.contains("abt-dropdown-trigger")) && (s.classList.contains("prod-dropdown-trigger") && u.push("prod-dropdown-trigger"), s.classList.contains("app-dropdown-trigger") && u.push("app-dropdown-trigger"), s.classList.contains("sup-dropdown-trigger") && u.push("sup-dropdown-trigger"), s.classList.contains("abt-dropdown-trigger") && u.push("abt-dropdown-trigger")), s.className = d ? "text-sm font-semibold text-primary" + (u.length ? " " + u.join(" ") : "") : "text-sm font-semibold hover:text-primary transition-colors" + (u.length ? " " + u.join(" ") : "")
         }
-      for (var g = document.querySelectorAll(".prod-dropdown-item.is-active, .sol-dropdown-item.is-active, .app-dropdown-item.is-active, .sup-dropdown-item.is-active, .abt-dropdown-item.is-active, .cnt-dropdown-item.is-active"), b = 0; b < g.length; b++) g[b].classList.remove("is-active");
+      for (var g = document.querySelectorAll(".prod-dropdown-item.is-active, .app-dropdown-item.is-active, .sup-dropdown-item.is-active, .abt-dropdown-item.is-active, .is-active"), b = 0; b < g.length; b++) g[b].classList.remove("is-active");
       if (a) {
         var h = {
           products: "prod",
@@ -291,7 +277,7 @@
           
           support: "sup",
           about: "abt",
-          
+          contact: "cnt",
           "case-studies": "app",
           roi: "sol",
           news: "cnt",
