@@ -78,15 +78,23 @@
       }, {
         key: "nav_applications_chain_restaurant",
         icon: "ramen_dining",
-        href: "/applications/fast-food/"
+        href: "/applications/chain-restaurant/"
       }, {
-        key: "nav_applications_canteen",
-        icon: "restaurant",
-        href: "/applications/canteen/"
+        key: "nav_applications_central_kitchen",
+        icon: "apartment",
+        href: "/applications/central-kitchen/"
+      }, {
+        key: "nav_applications_food_factory",
+        icon: "factory",
+        href: "/applications/food-factory/"
       }, {
         key: "nav_applications_small_restaurant",
         icon: "storefront",
         href: "/applications/small-restaurant/"
+      }, {
+        key: "nav_applications_canteen",
+        icon: "restaurant",
+        href: "/applications/canteen/"
       }, {
         key: "nav_applications_menu_lab",
         icon: "science",
