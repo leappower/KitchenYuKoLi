@@ -29,18 +29,16 @@
       "/products/other/": "/products/index.html",
       "/applications/": "/applications/index.html",
       "/applications/chain-restaurant/": "/applications/chain-restaurant/index.html",
-      "/applications/food-factory/": "/applications/food-factory/index.html",
       "/applications/central-kitchen/": "/applications/central-kitchen/index.html",
       "/applications/small-restaurant/": "/applications/small-restaurant/index.html",
       "/applications/canteen/": "/applications/canteen/index.html",
       "/applications/menu-lab/": "/applications/menu-lab/index.html",
-      "/applications/trust/": "/applications/trust/index.html",
       "/cases/": "/cases/index.html",
       "/profit-calculator/": "/profit-calculator/index.html",
       "/products/compare/": "/products/compare/index.html",
       "/about/": "/about/index.html",
       "/news/detail/": "/news/detail-pc.html",
-      "/roi/": "/profit-calculator/index.html",
+      
       "/quote/": "/quote/index.html",
       "/contact/": "/contact/index.html",
       "/news/": "/news/index.html",
@@ -709,7 +707,7 @@
       var path = pagePath.replace(/\/index-(pc|mobile|tablet)\.html$/, "/");
 
       // Profit calculator needs Chart.js + pi-roi.js
-      if (path.indexOf("/profit-calculator/") !== -1 || path.indexOf("/roi/") !== -1) {
+      if (path.indexOf("/profit-calculator/") !== -1) {
         if (typeof global.Chart === "undefined") {
           scripts.push({ src: "https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js", id: "spa-chart-js" });
         }
@@ -727,9 +725,7 @@
         scripts.push({ src: "/assets/js/ui/pi-maps.js", id: "spa-pi-maps" });
       }
 
-      // Deploy 方案页面需要 deploy-roi.js
       if (/\/deploy-/.test(path)) {
-        scripts.push({ src: "/assets/js/ui/deploy-roi.js", id: "spa-deploy-roi" });
       }
 
       // Cases 页面需要 cases-page.js（筛选、modal、CTA）

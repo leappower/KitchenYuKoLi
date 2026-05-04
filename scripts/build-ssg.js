@@ -370,7 +370,7 @@ function generate404() {
     '    var path = window.location.pathname;',
     '    var normalized = path.replace(/\\/$/, "");',
     '    var routes = ' + routesJson + ';',
-    '    // Try full path first (for nested routes like solutions/fast-food)',
+    '    // Try full path first (for nested routes like applications/chain-restaurant)',
     '    var stripped = normalized.replace(/^\\//, "");',
     '    if (routes.indexOf(stripped) !== -1) {',
     '      window.location.replace(base + "/" + stripped + "/");',
