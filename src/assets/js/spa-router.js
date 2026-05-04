@@ -720,6 +720,7 @@
           scripts.push({ src: "https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js", id: "spa-chart-js" });
         }
         scripts.push({ src: "/assets/js/ui/pi-roi.js", id: "spa-pi-roi" });
+        scripts.push({ src: "/assets/js/profit-calculator.js", id: "spa-profit-calculator" });
       }
 
       // Support 页面需要 contact-channels 组件 + 微信弹窗
@@ -746,16 +747,28 @@
         scripts.push({ src: "/assets/js/home-core-products.js", id: "spa-home-core-products" });
       }
 
+      // Load scripts sequentially (each waits for previous onload)
+      var chain = Promise.resolve();
+      var loaded = 0;
       scripts.forEach(function(s) {
         if (document.getElementById(s.id)) return; // 已加载
-        var el = document.createElement("script");
-        el.id = s.id;
-        el.src = s.src + (s.src.indexOf("?") === -1 ? "?v=" + Date.now() : "");
-        el.onload = function() {
-          // 触发 spa:load 让脚本有机会初始化
-          document.dispatchEvent(new Event("spa:load"));
-        };
-        document.body.appendChild(el);
+        chain = chain.then(function() {
+          return new Promise(function(resolve) {
+            var el = document.createElement("script");
+            el.id = s.id;
+            el.src = s.src + (s.src.indexOf("?") === -1 ? "?v=" + Date.now() : "");
+            el.onload = function() {
+              // 触发 spa:load 让脚本有机会初始化
+              document.dispatchEvent(new Event("spa:load"));
+              resolve();
+            };
+            el.onerror = function() {
+              console.warn("[SPA] Failed to load script:", s.src);
+              resolve(); // continue chain even on error
+            };
+            document.body.appendChild(el);
+          });
+        });
       });
     },
   };

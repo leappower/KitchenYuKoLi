@@ -519,3 +519,55 @@
   window.ProfitCalculatorData = { DEFAULT_SALARIES: DEFAULT_SALARIES };
 
 })();
+
+/* ───────── SPA auto-init on spa:load ───────── */
+document.addEventListener("spa:load", function initProfitCalc() {
+  var form = document.getElementById("profit-calc-form");
+  if (!form || form._spaInitialized) return;
+  form._spaInitialized = true;
+
+  // Detect mobile by presence of back-btn (only mobile has steps mode)
+  var isMobile = !!document.getElementById("pc-back-btn");
+
+  var calc = new ProfitCalculator({
+    formId:        "profit-calc-form",
+    resultId:      "profit-result-panel",
+    chartCanvasId: "profit-chart",
+    countrySelectId: "pc-country",
+    laborInputId:  "pc-labor-cost",
+    stepsMode:     isMobile
+  });
+
+  // Bind buttons
+  var calcBtn = document.getElementById("pc-calc-btn");
+  var backBtn = document.getElementById("pc-back-btn");
+  var whatsappBtn = document.getElementById("pc-whatsapp-btn");
+  var pdfBtn = document.getElementById("pc-pdf-btn");
+  var placeholder = document.getElementById("profit-placeholder");
+
+  if (calcBtn) {
+    calcBtn.addEventListener("click", function () {
+      if (placeholder) placeholder.classList.add("hidden");
+      calc.run();
+    });
+  }
+  if (backBtn) {
+    backBtn.addEventListener("click", function () {
+      calc.resetSteps();
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+  }
+  if (whatsappBtn) {
+    whatsappBtn.addEventListener("click", function () {
+      calc.shareWhatsApp();
+    });
+  }
+  if (pdfBtn) {
+    pdfBtn.addEventListener("click", function () {
+      calc.downloadPDF();
+    });
+  }
+
+  // Apply URL presets if any
+  calc.applyPreset();
+});
