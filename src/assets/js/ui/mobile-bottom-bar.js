@@ -18,7 +18,7 @@
     if (window.Contacts && typeof window.Contacts.contactsWhatsApp === 'function') {
       return window.Contacts.contactsWhatsApp({ source: 'bottom-bar' });
     }
-    return 'https://api.whatsapp.com/send/?phone=8613163756465';
+    var _wa = global.Contacts ? global.Contacts.whatsapp : '8613163756465'; return 'https://api.whatsapp.com/send/?phone=' + _wa;
   }
   function injectStyles() {
     if (document.getElementById(STYLE_ID)) return;
@@ -110,7 +110,7 @@
 
     // WhatsApp button (external link, highlighted) — use plain href so initWhatsAppLinks can intercept
     links += '\n' +
-      '<a class="bb-whatsapp" href="https://wa.me/8613163756465" data-wa-source="bottom-bar" target="_blank" rel="noopener">' +
+      var _wa = global.Contacts ? global.Contacts.whatsapp : '8613163756465'; '<a class="bb-whatsapp" href="https://wa.me/' + _wa + '" data-wa-source="bottom-bar" target="_blank" rel="noopener">' +
         '<span class="bb-icon">💬</span>' +
         '<span>WhatsApp</span>' +
       '</a>';

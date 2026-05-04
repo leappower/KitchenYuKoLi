@@ -38,7 +38,7 @@
           n = a ? "text-primary" : "text-slate-400 dark:text-slate-500",
           i = a && e.fill ? " style=\"font-variation-settings: 'FILL' 1;\"" : "",
           o = e.key ? '<p class="text-[10px] font-bold uppercase tracking-wider" data-i18n="' + r(e.key) + '">' + r(e.key) + "</p>" : "";
-        return e.isWhatsApp ? '<a class="whatsapp-tab-item relative flex flex-1 flex-col items-center justify-center gap-1 ' + (n = "text-[#25d366]") + '" href="https://wa.me/8613163756465" data-wa-source="footer-tab" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp"><span class="material-symbols-outlined relative" style="font-size:26px">' + r(e.icon) + "</span>" + o + "</a>" : '<a class="relative flex flex-1 flex-col items-center justify-center gap-1 ' + n + '" href="' + r(e.href) + '"><span class="material-symbols-outlined relative"' + i + '">' + r(e.icon) + "</span>" + o + "</a>"
+        return e.isWhatsApp ? '<a class="whatsapp-tab-item relative flex flex-1 flex-col items-center justify-center gap-1 ' + (n = "text-[#25d366]") + '" href="https://wa.me/" + (global.Contacts ? global.Contacts.whatsapp : "8613163756465") + '" data-wa-message-key="wa_msg_contact" data-wa-source="footer-tab" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp"><span class="material-symbols-outlined relative" style="font-size:26px">' + r(e.icon) + "</span>" + o + "</a>" : '<a class="relative flex flex-1 flex-col items-center justify-center gap-1 ' + n + '" href="' + r(e.href) + '"><span class="material-symbols-outlined relative"' + i + '">' + r(e.icon) + "</span>" + o + "</a>"
       }).join("\n")
     }(a, t) + "</div></div>"
   }

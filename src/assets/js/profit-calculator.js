@@ -504,7 +504,7 @@
     var msg = buildWhatsAppMessage(this._lastInput, this._lastResult, this._lastInput.salaryInfo);
     var url = (window.Contacts && typeof window.Contacts.contactsWhatsApp === 'function')
       ? window.Contacts.contactsWhatsApp({ source: 'ROI Calculator', message: msg })
-      : 'https://wa.me/8613163756465?text=' + encodeURIComponent(msg);
+      : 'https://wa.me/' + (window.Contacts ? window.Contacts.whatsapp : '8613163756465') + '?text=' + encodeURIComponent(msg);
     window.open(url, '_blank', 'noopener');
   };
 
