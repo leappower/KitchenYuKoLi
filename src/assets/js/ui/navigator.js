@@ -250,7 +250,7 @@
       a = a || "";
       var o = window.location.pathname.replace(/\/$/, "") || "/";
       e.DropdownBaseStyles && e.DropdownBaseStyles.inject(), e.ProductsDropdown && e.ProductsDropdown.injectAllStyles && e.ProductsDropdown.injectAllStyles(), e.ApplicationsDropdown && e.ApplicationsDropdown.injectAllStyles && e.ApplicationsDropdown.injectAllStyles(), e.SupportDropdown && e.SupportDropdown.injectAllStyles && e.SupportDropdown.injectAllStyles(), e.AboutDropdown && e.AboutDropdown.injectAllStyles && e.AboutDropdown.injectAllStyles();
-      var r = document.querySelectorAll("header nav a[data-i18n], header nav a.prod-dropdown-trigger, header nav aheader nav a.app-dropdown-trigger, header nav a.sup-dropdown-trigger, header nav a.abt-dropdown-trigger, header nav a");
+      var r = document.querySelectorAll("header nav a.prod-dropdown-trigger, header nav a.app-dropdown-trigger, header nav a.sup-dropdown-trigger, header nav a.abt-dropdown-trigger, header nav a[data-sup-trigger-label], header nav a[data-prod-trigger-label], header nav a[data-app-trigger-label], header nav a[data-abt-trigger-label]");
       if (r.length > 0)
         for (var n = 0; n < r.length; n++) {
           var i = a,
@@ -267,7 +267,8 @@
               d = !0;
               break
             } var u = [];
-          (s.classList.contains("prod-dropdown-trigger") || s.classList.contains("app-dropdown-trigger") || s.classList.contains("sup-dropdown-trigger") || s.classList.contains("abt-dropdown-trigger")) && (s.classList.contains("prod-dropdown-trigger") && u.push("prod-dropdown-trigger"), s.classList.contains("app-dropdown-trigger") && u.push("app-dropdown-trigger"), s.classList.contains("sup-dropdown-trigger") && u.push("sup-dropdown-trigger"), s.classList.contains("abt-dropdown-trigger") && u.push("abt-dropdown-trigger")), s.className = d ? "text-sm font-semibold text-primary" + (u.length ? " " + u.join(" ") : "") : "text-sm font-semibold hover:text-primary transition-colors" + (u.length ? " " + u.join(" ") : "")
+          (s.classList.contains("prod-dropdown-trigger") || s.classList.contains("app-dropdown-trigger") || s.classList.contains("sup-dropdown-trigger") || s.classList.contains("abt-dropdown-trigger")) && (s.classList.contains("prod-dropdown-trigger") && u.push("prod-dropdown-trigger"), s.classList.contains("app-dropdown-trigger") && u.push("app-dropdown-trigger"), s.classList.contains("sup-dropdown-trigger") && u.push("sup-dropdown-trigger"), s.classList.contains("abt-dropdown-trigger") && u.push("abt-dropdown-trigger")), // Only update text color classes, preserve all structural classes (dropdown-item, etc.)
+            d ? (s.classList.add("text-primary"), s.classList.remove("hover\:text-primary", "transition-colors")) : (s.classList.remove("text-primary"), s.classList.add("hover\:text-primary", "transition-colors"))
         }
       for (var g = document.querySelectorAll(".prod-dropdown-item.is-active, .app-dropdown-item.is-active, .sup-dropdown-item.is-active, .abt-dropdown-item.is-active, .is-active"), b = 0; b < g.length; b++) g[b].classList.remove("is-active");
       if (a) {
