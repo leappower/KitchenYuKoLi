@@ -2411,5 +2411,11 @@
   "support_warranty_unified_title": "",
   "quote_budget_5w_10w": "₹5.75L - 11.5L",
   "quote_budget_10w_30w": "₹11.5L - 34.5L",
-  "quote_budget_30w_50w": "₹34.5L - 57.5L"
+  "quote_budget_30w_50w": "₹34.5L - 57.5L",
+  "nav_applications_trust": "विश्वास और गारंटी",
+  "nav_applications_chain_restaurant": "चेन रेस्टोरेंट",
+  "nav_applications_central_kitchen": "सेंट्रल किचन",
+  "nav_applications_food_factory": "फूड फैक्ट्री",
+  "nav_applications_small_restaurant": "छोटा रेस्टोरेंट",
+  "nav_applications_menu_lab": "मेन्यू लैब"
 }

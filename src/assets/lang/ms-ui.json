@@ -2411,5 +2411,11 @@
   "support_warranty_unified_title": "",
   "quote_budget_5w_10w": "RM 32.5K - 65K",
   "quote_budget_10w_30w": "RM 65K - 195K",
-  "quote_budget_30w_50w": "RM 195K - 325K"
+  "quote_budget_30w_50w": "RM 195K - 325K",
+  "nav_applications_trust": "Jaminan & Kepercayaan",
+  "nav_applications_chain_restaurant": "Restoran Rantaian",
+  "nav_applications_central_kitchen": "Dapur Pusat",
+  "nav_applications_food_factory": "Kilang Makanan",
+  "nav_applications_small_restaurant": "Restoran Kecil",
+  "nav_applications_menu_lab": "Makmal Menu"
 }
