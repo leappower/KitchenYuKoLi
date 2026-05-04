@@ -128,7 +128,7 @@
 
                   <!-- 3. Daily Meals Output -->
                   <div>
-                    <label class="block text-sm font-bold mb-1.5" data-i18n="profit_calc_daily_meals">Current Daily Meals Output <span class="text-red-500">*</span></label>
+                    <label class="block text-sm font-bold mb-1.5"><span data-i18n="profit_calc_daily_meals">Current Daily Meals Output</span> <span class="text-red-500">*</span></label>
                     <input id="pc-daily-meals" type="number" min="1" required class="w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg p-3 focus:ring-primary focus:border-primary text-sm" placeholder="e.g. 200" />
                   </div>
 
@@ -177,9 +177,8 @@
 
                   <!-- 6. Operator Reduction Slider -->
                   <div>
-                    <label class="block text-sm font-bold mb-1.5" data-i18n="profit_calc_operator_reduction">
-                      Expected Operator Reduction: <span id="pc-operator-value" class="text-primary font-black">2</span> 人
-                    </label>
+                    <label class="block text-sm font-bold mb-1.5" data-i18n="profit_calc_operator_reduction">Expected Operator Reduction</label>
+                    <div class="text-sm text-slate-600 dark:text-slate-400 -mt-0.5 mb-1"><span id="pc-operator-value" class="text-primary font-black">2</span> 人</div>
                     <input id="pc-operator-reduction" type="range" min="1" max="10" value="2" class="w-full accent-primary" />
                     <div class="flex justify-between text-xs text-slate-400 mt-1"><span>1</span><span>10</span></div>
                   </div>
