@@ -2411,5 +2411,11 @@
   "support_warranty_unified_title": "",
   "quote_budget_5w_10w": "170M - 340M VND",
   "quote_budget_10w_30w": "340M - 1B VND",
-  "quote_budget_30w_50w": "1B - 1.7B VND"
+  "quote_budget_30w_50w": "1B - 1.7B VND",
+  "nav_applications_trust": "Cam Kết Chất Lượng",
+  "nav_applications_chain_restaurant": "Nhà Hàng Chuỗi",
+  "nav_applications_central_kitchen": "Nhà Bếp Trung Tâm",
+  "nav_applications_food_factory": "Nhà Máy Thực Phẩm",
+  "nav_applications_small_restaurant": "Quán Ăn Nhỏ",
+  "nav_applications_menu_lab": "Phòng Thí Nghiệm Món"
 }

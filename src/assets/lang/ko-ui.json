@@ -2411,5 +2411,11 @@
   "support_warranty_unified_title": "",
   "quote_budget_5w_10w": "940만 - 1,880만 원",
   "quote_budget_10w_30w": "1,880만 - 5,640만 원",
-  "quote_budget_30w_50w": "5,640만 - 9,400만 원"
+  "quote_budget_30w_50w": "5,640만 - 9,400만 원",
+  "nav_applications_trust": "신뢰 및 품질 보증",
+  "nav_applications_chain_restaurant": "프랜차이즈 식당",
+  "nav_applications_central_kitchen": "중앙 주방",
+  "nav_applications_food_factory": "식품 공장",
+  "nav_applications_small_restaurant": "소형 식당",
+  "nav_applications_menu_lab": "메뉴 랩"
 }

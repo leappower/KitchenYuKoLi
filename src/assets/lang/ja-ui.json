@@ -2411,5 +2411,11 @@
   "support_warranty_unified_title": "",
   "quote_budget_5w_10w": "100万 - 210万円",
   "quote_budget_10w_30w": "210万 - 630万円",
-  "quote_budget_30w_50w": "630万 - 1,050万円"
+  "quote_budget_30w_50w": "630万 - 1,050万円",
+  "nav_applications_trust": "信頼と品質保証",
+  "nav_applications_chain_restaurant": "チェーンレストラン",
+  "nav_applications_central_kitchen": "セントラルキッチン",
+  "nav_applications_food_factory": "フードファクトリー",
+  "nav_applications_small_restaurant": "小規模飲食店",
+  "nav_applications_menu_lab": "メニューラボ"
 }

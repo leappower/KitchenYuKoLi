@@ -2411,5 +2411,11 @@
   "support_warranty_unified_title": "",
   "quote_budget_5w_10w": "Rp 110M - 220M",
   "quote_budget_10w_30w": "Rp 220M - 660M",
-  "quote_budget_30w_50w": "Rp 660M - 1.1B"
+  "quote_budget_30w_50w": "Rp 660M - 1.1B",
+  "nav_applications_trust": "Kepercayaan & Jaminan",
+  "nav_applications_chain_restaurant": "Restoran Rantai",
+  "nav_applications_central_kitchen": "Dapur Sentral",
+  "nav_applications_food_factory": "Pabrik Makanan",
+  "nav_applications_small_restaurant": "Restoran Kecil",
+  "nav_applications_menu_lab": "Lab Menu"
 }
