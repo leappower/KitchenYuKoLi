@@ -509,7 +509,7 @@
   "nav_about_profile": "公司簡介",
   "nav_analytics": "",
   "nav_applications": "場景應用",
-  "nav_applications_canteen": "食堂應用",
+  "nav_applications_canteen": "智慧食堂",
   "nav_applications_cloud_kitchen": "雲端廚房應用",
   "nav_applications_fastfood": "快餐應用",
   "nav_applications_hotpot": "火鍋應用",
@@ -522,7 +522,7 @@
   "nav_auto_kitchen": "",
   "nav_auto_prep": "",
   "nav_case_studies": "",
-  "nav_cases": "案例",
+  "nav_cases": "客戶案例",
   "nav_cases_app": "",
   "nav_cases_sol": "",
   "nav_config": "",
@@ -2411,5 +2411,11 @@
   "support_warranty_unified_title": "",
   "quote_budget_5w_10w": "22萬 - 44萬 TWD",
   "quote_budget_10w_30w": "44萬 - 132萬 TWD",
-  "quote_budget_30w_50w": "132萬 - 220萬 TWD"
+  "quote_budget_30w_50w": "132萬 - 220萬 TWD",
+  "nav_applications_trust": "信任基建",
+  "nav_applications_chain_restaurant": "連鎖餐飲",
+  "nav_applications_central_kitchen": "中央廚房",
+  "nav_applications_food_factory": "食品工廠",
+  "nav_applications_small_restaurant": "小型餐飲",
+  "nav_applications_menu_lab": "菜系實驗室"
 }
