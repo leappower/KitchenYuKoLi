@@ -109,7 +109,6 @@ const ROUTES = [
   { slug: 'thank-you',    navId: 'thank-you' },
   { slug: 'landing',      navId: 'landing' },
   // Application sub-pages
-  { slug: 'applications/trust',          navId: 'applications' },
   { slug: 'applications/chain-restaurant', navId: 'applications' },
   { slug: 'applications/food-factory',  navId: 'applications' },
   { slug: 'applications/central-kitchen', navId: 'applications' },

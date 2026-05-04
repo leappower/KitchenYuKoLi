@@ -260,7 +260,6 @@ app.get('/', (req, res) => {
 const SPA_ROUTES = ['/home', '/products', '/applications', '/cases', '/profit-calculator', '/products/compare', '/about', '/contact', '/quote',
   '/support', '/news', '/thank-you', '/landing',
   // New structure (P0 trust page first)
-  '/applications/trust',
   // New structure (P1 high-value pages)
   '/applications/chain-restaurant',  '/applications/central-kitchen',
   // New structure (P2 volume pages)
