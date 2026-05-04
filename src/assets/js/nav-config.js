@@ -9,18 +9,24 @@
       hasDropdown: !0
     }, {
       key: "nav_applications",
-      label: "场景应用",
+      label: "行业场景",
       path: "/applications/",
       id: "applications",
       hasDropdown: !0
     }, {
-      key: "nav_solutions",
-      label: "解决方案",
-      path: "/solutions/",
-      id: "solutions",
-      hasDropdown: !0
+      key: "nav_cases",
+      label: "真实案例",
+      path: "/cases/",
+      id: "cases",
+      hasDropdown: !1
     }, {
-      key: "nav_service",
+      key: "nav_profit_calculator",
+      label: "投资回报",
+      path: "/profit-calculator/",
+      id: "profit-calculator",
+      hasDropdown: !1
+    }, {
+      key: "nav_support",
       label: "服务支持",
       path: "/support/",
       id: "support",
@@ -30,12 +36,6 @@
       label: "关于我们",
       path: "/about/",
       id: "about",
-      hasDropdown: !0
-    }, {
-      key: "nav_contact",
-      label: "联系",
-      path: "/contact/",
-      id: "contact",
       hasDropdown: !0
     }],
     dropdowns: {
@@ -71,68 +71,29 @@
         href: "/products/other/"
       }],
       applications: [{
-        key: "nav_applications_trust",
-        icon: "verified_user",
-        href: "/applications/trust/",
-        badge: "P0"
-      }, {
-        key: "nav_applications_chain_restaurant",
-        icon: "ramen_dining",
-        href: "/applications/chain-restaurant/"
+        key: "nav_applications_small_restaurant",
+        icon: "storefront",
+        href: "/applications/small-restaurant/"
       }, {
         key: "nav_applications_central_kitchen",
         icon: "apartment",
         href: "/applications/central-kitchen/"
       }, {
-        key: "nav_applications_food_factory",
-        icon: "factory",
-        href: "/applications/food-factory/"
-      }, {
-        key: "nav_applications_small_restaurant",
-        icon: "storefront",
-        href: "/applications/small-restaurant/"
+        key: "nav_applications_chain_restaurant",
+        icon: "ramen_dining",
+        href: "/applications/chain-restaurant/"
       }, {
         key: "nav_applications_canteen",
         icon: "restaurant",
         href: "/applications/canteen/"
       }, {
+        key: "nav_applications_cloud_kitchen",
+        icon: "delivery_dining",
+        href: "/applications/cloud-kitchen/"
+      }, {
         key: "nav_applications_menu_lab",
         icon: "science",
         href: "/applications/menu-lab/"
-      }, {
-        key: "nav_cases",
-        icon: "monitoring",
-        href: "/applications/cases/"
-      }],
-      solutions: [{
-        key: "nav_solutions_automation",
-        icon: "grid_view",
-        href: "/solutions/"
-      }, {
-        key: "nav_solutions_fastfood",
-        icon: "ramen_dining",
-        href: "/solutions/deploy-fast-food/"
-      }, {
-        key: "nav_solutions_hotpot",
-        icon: "local_fire_department",
-        href: "/solutions/deploy-hotpot/"
-      }, {
-        key: "nav_solutions_cloud_kitchen",
-        icon: "delivery_dining",
-        href: "/solutions/deploy-cloud-kitchen/"
-      }, {
-        key: "nav_solutions_canteen",
-        icon: "restaurant",
-        href: "/solutions/deploy-canteen/"
-      }, {
-        key: "nav_solutions_thai",
-        icon: "public",
-        href: "/solutions/deploy-southeast-asian/"
-      }, {
-        key: "nav_roi",
-        icon: "calculate",
-        href: "/roi/",
-        badge: !0
       }],
       about: [{
         key: "nav_about_profile",
@@ -141,11 +102,15 @@
       }, {
         key: "nav_about_factory",
         icon: "factory",
-        href: "/about/#factory"
+        href: "/about/factory/"
       }, {
         key: "nav_about_cert",
         icon: "verified",
         href: "/about/#cert"
+      }, {
+        key: "nav_contact",
+        icon: "chat",
+        href: "/contact/"
       }],
       support: [{
         key: "nav_support_services",
@@ -171,16 +136,6 @@
         key: "nav_support_faq",
         icon: "contact_support",
         href: "/support/faq/"
-      }],
-      contact: [{
-        key: "nav_contact_us",
-        icon: "grid_view",
-        href: "/contact/"
-      }, {
-        key: "nav_contact_whatsapp",
-        icon: "chat",
-        href: "https://api.whatsapp.com/send/?phone=8613163756465",
-        isWhatsApp: !0
       }]
     }
   }

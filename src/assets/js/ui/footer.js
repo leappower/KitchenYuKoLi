@@ -13,10 +13,10 @@
     href: "/products/",
     fill: !1
   }, {
-    id: "solutions",
-    icon: "build",
-    key: "nav_solutions",
-    href: "/solutions/",
+    id: "cases",
+    icon: "monitoring",
+    key: "nav_cases",
+    href: "/cases/",
     fill: !1
   }, {
     id: "whatsapp",
