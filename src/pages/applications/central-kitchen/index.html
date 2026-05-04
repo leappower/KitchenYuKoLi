@@ -1,0 +1,34 @@
+<!doctype html>
+<html class="light" lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="canonical" href="/applications/central-kitchen/" />
+    <link rel="alternate" media="only screen and (max-width: 767px)" href="/applications/central-kitchen/index-mobile.html" />
+    <link
+      rel="alternate"
+      media="only screen and (min-width: 768px) and (max-width: 1279px)"
+      href="/applications/central-kitchen/index-tablet.html"
+    />
+    <link rel="alternate" media="only screen and (min-width: 1280px)" href="/applications/central-kitchen/index-pc.html" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title data-i18n="central_kitchen_page_title">YuKoLi | 团餐/中央厨房智能解决方案</title>
+    <meta
+      name="description"
+      content="YuKoLi 团餐/中央厨房智能解决方案 — 服务 500-10000 人用餐规模，批量烹饪产线、标准化菜谱 200+、智能温控确保食品安全，年省 30-80 万。"
+    />
+    <link rel="icon" href="/assets/images/logo_header.webp" type="image/webp" />
+    <script>
+      /* Responsive Entry — redirect to device-specific page */
+      (function () {
+        if (window.__redirectChecked) return;
+        window.__redirectChecked = true;
+        var w = window.innerWidth;
+        var target = w < 768 ? "index-mobile.html" : w < 1280 ? "index-tablet.html" : "index-pc.html";
+        location.replace(target);
+      })();
+    </script>
+  </head>
+  <body>
+    <p>Redirecting to <a href="index-pc.html">YuKoLi 团餐/中央厨房解决方案</a>…</p>
+  </body>
+</html>
