@@ -125,7 +125,7 @@
     // Estimate workers: assume 4 base workers for cost entered
     var estimatedWorkers = Math.max(Math.round(input.laborCost / (DEFAULT_SALARIES[input.country] || DEFAULT_SALARIES['Other']).monthly), input.operatorReduction);
     var perWorkerCost = input.laborCost / estimatedWorkers;
-    var monthlySavingsBase = perWorkerCost * input.operatorReduction * savingsRatio;
+    var monthlySavingsBase = perWorkerCost * input.operatorReduction * savingsRatio.mid;
 
     var monthlySavings = {
       min: Math.round(monthlySavingsBase * (savingsRatio.min / savingsRatio.mid)),
