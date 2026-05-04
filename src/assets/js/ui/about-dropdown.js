@@ -10,12 +10,18 @@
 
   /* ───────────────────────── DATA ───────────────────────── */
 
-  var ITEMS = (typeof NAV_CONFIG !== 'undefined' && NAV_CONFIG.dropdowns && NAV_CONFIG.dropdowns.about) || [
+  var DEFAULT_ITEMS = [
     { key: "nav_about_profile", icon: "apartment", href: "/about/#profile" },
     { key: "nav_about_factory", icon: "factory", href: "/about/factory/" },
     { key: "nav_about_cert", icon: "verified", href: "/about/#cert" },
-    { key: "nav_contact", icon: "chat", href: "/contact/" },
   ];
+
+  function getItems() {
+    if (typeof NAV_CONFIG !== 'undefined' && NAV_CONFIG.dropdowns && NAV_CONFIG.dropdowns.about) {
+      return NAV_CONFIG.dropdowns.about;
+    }
+    return DEFAULT_ITEMS;
+  }
 
   /* ───────────────────────── HELPERS ───────────────────────── */
 
@@ -57,8 +63,8 @@
   }
 
   function renderDropdown(cfg) {
-    var items = ITEMS.map(function (item, idx) {
-      return buildDropdownItem(item, idx < ITEMS.length - 1);
+    var items = getItems().map(function (item, idx) {
+      return buildDropdownItem(item, idx < getItems().length - 1);
     }).join("\n");
 
     return (
@@ -159,7 +165,7 @@
     var panel = document.createElement("div");
     panel.className = "abt-popup-panel";
 
-    var items = ITEMS.map(function (item) {
+    var items = getItems().map(function (item) {
       return (
         '<a href="' +
         esc(item.href) +
@@ -230,7 +236,7 @@
   /* ───────────────────────── PUBLIC API ───────────────────────── */
 
   global.AboutDropdown = {
-    ITEMS: ITEMS,
+    ITEMS: DEFAULT_ITEMS,
     renderPC: renderDropdown,
     renderTablet: renderDropdown,
     initDropdownClick: initDropdownClick,
