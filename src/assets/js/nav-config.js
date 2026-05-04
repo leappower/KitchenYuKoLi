@@ -142,4 +142,4 @@
     }
   }
 }("undefined" != typeof window ? window : "undefined" != typeof global ? global : this);
-!function(){try{var e=new XMLHttpRequest;e.open("GET","/api/nav-config",!1),e.send(),200===e.status&&(t=JSON.parse(e.responseText),t&&t.mainNav&&t.mainNav.length&&(window.NAV_CONFIG.mainNav=t.mainNav,window.NAV_CONFIG.dropdowns=t.dropdowns))}catch(e){}}();
+!function(){try{var e=new XMLHttpRequest;e.open("GET","/api/nav-config?_="+Date.now(),!1),e.send(),200===e.status&&(t=JSON.parse(e.responseText),t&&t.mainNav&&t.mainNav.length&&(window.NAV_CONFIG.mainNav=t.mainNav,window.NAV_CONFIG.dropdowns=t.dropdowns))}catch(e){}}();
