@@ -51,6 +51,18 @@
     '油炸炉':     0.7
   };
 
+
+  /* ───────── Scene presets (from application page deep-links) ───────── */
+
+  var SCENE_PRESETS = {
+    'chain-restaurant':  { meals: 500,  pain: '人工成本高', equipment: ['智能炒菜机', '蒸饭柜'], operators: 3 },
+    'central-kitchen':   { meals: 2000, pain: '招工难',   equipment: ['智能炒菜机', '蒸饭柜', '洗碗机'], operators: 5 },
+    'small-restaurant':  { meals: 150,  pain: '出餐慢',   equipment: ['智能炒菜机'], operators: 1 },
+    'canteen':           { meals: 1000, pain: '招工难',   equipment: ['智能炒菜机', '蒸饭柜', '洗碗机', '油炸炉'], operators: 4 },
+    'cloud-kitchen':     { meals: 300,  pain: '空间不足', equipment: ['智能炒菜机', '电磁炉'], operators: 2 },
+    'menu-lab':          { meals: 200,  pain: '出品不稳定', equipment: ['智能炒菜机'], operators: 2 }
+  };
+
   /* ───────── Helpers ───────── */
 
   function formatNumber(n, decimals) {
@@ -424,6 +436,82 @@
     var step2 = document.getElementById('pc-step-2');
     if (step1) step1.classList.remove('hidden');
     if (step2) step2.classList.add('hidden');
+  };
+
+
+  /**
+   * Apply URL parameters to auto-fill the form.
+   * Supports direct params (country, meals, pain, equipment, operators)
+   * and scene presets (scene=chain-restaurant).
+   */
+  ProfitCalculator.prototype.applyPreset = function () {
+    var params = new URLSearchParams(window.location.search);
+    var scene = params.get('scene');
+
+    // Load scene preset as defaults
+    var preset = scene && SCENE_PRESETS[scene] ? SCENE_PRESETS[scene] : {};
+
+    // URL params override preset values
+    var country    = params.get('country') || '';
+    var meals      = parseInt(params.get('meals'), 10) || preset.meals || 0;
+    var pain       = params.get('pain') || preset.pain || '';
+    var equipStr   = params.get('equipment') || '';
+    var equipment  = equipStr ? equipStr.split(',').map(function (s) { return s.trim(); })
+                              : (preset.equipment || []);
+    var operators  = parseInt(params.get('operators'), 10) || preset.operators || 2;
+    var autoCalc   = params.get('calc') !== '0'; // auto-calc by default when params exist
+
+    // No valid preset and no explicit params — do nothing
+    if (!scene && !params.has('meals') && !params.has('pain') && !params.has('equipment')) {
+      return false;
+    }
+
+    var self = this;
+
+    // Fill country (triggers labor cost auto-fill)
+    if (country) {
+      var countryEl = document.getElementById(this.countrySelectId);
+      if (countryEl) {
+        countryEl.value = country;
+        countryEl.dispatchEvent(new Event('change'));
+      }
+    }
+
+    // Fill daily meals
+    if (meals > 0) {
+      var mealsEl = document.getElementById('pc-daily-meals');
+      if (mealsEl) mealsEl.value = meals;
+    }
+
+    // Fill pain point
+    if (pain) {
+      var painEl = document.getElementById('pc-pain-point');
+      if (painEl) painEl.value = pain;
+    }
+
+    // Check equipment checkboxes
+    if (equipment.length) {
+      document.querySelectorAll('.pc-equipment').forEach(function (cb) {
+        cb.checked = equipment.indexOf(cb.value) !== -1;
+      });
+    }
+
+    // Set operator reduction slider
+    var rangeEl = document.getElementById('pc-operator-reduction');
+    var rangeValEl = document.getElementById('pc-operator-value');
+    if (rangeEl) {
+      rangeEl.value = operators;
+      if (rangeValEl) rangeValEl.textContent = operators;
+    }
+
+    // Auto-trigger calculation after a short delay (let DOM settle)
+    if (autoCalc) {
+      setTimeout(function () {
+        self.run();
+      }, 300);
+    }
+
+    return true;
   };
 
   /* ───────── Expose ───────── */

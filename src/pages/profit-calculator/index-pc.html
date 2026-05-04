@@ -307,6 +307,12 @@
           laborInputId: 'pc-labor-cost'
         });
 
+        // Auto-fill from URL params (e.g. ?scene=chain-restaurant&meals=500)
+        var presetApplied = calc.applyPreset();
+        if (presetApplied) {
+          document.getElementById('profit-placeholder').classList.add('hidden');
+        }
+
         document.getElementById('pc-calc-btn').addEventListener('click', function () {
           document.getElementById('profit-placeholder').classList.add('hidden');
           calc.run();
