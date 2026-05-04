@@ -906,17 +906,12 @@
     lastScrollY = 0;
     mobileHeaderEl = document.getElementById("mobile-header");
 
-    if (!mobileHeaderEl) {
-      console.log("[mobile-menu] initSmartHeader: no #mobile-header found");
-      return;
-    }
+    if (!mobileHeaderEl) return;
 
     // 判断是否为平板模式：<navigator data-variant="tablet"> 存在或在 768–1280px 之间
     var tabletNavigator = document.querySelector('navigator[data-variant="tablet"]');
     var isTablet = (tabletNavigator && tabletNavigator.parentNode) ||
                    (window.innerWidth >= 768 && window.innerWidth < 1280);
-
-    console.log("[mobile-menu] initSmartHeader: isTablet=", isTablet, "innerWidth=", window.innerWidth);
 
     if (isTablet) {
       console.log("[mobile-menu] Tablet mode — smart header hide disabled, header stays visible");
@@ -986,39 +981,27 @@
   function initToggle() {
     var toggleBtn = document.getElementById("mobile-menu-toggle");
 
-    console.log(
-      "[mobile-menu] initToggle: toggleBtn=", !!toggleBtn,
-      "| _toggleBound=", toggleBound,
-      "| _lastToggleBtn=", lastToggleBtn === toggleBtn
-    );
+    // PC 视图下无 mobile toggle 按钮，静默跳过
+    if (!toggleBtn) return;
 
-    if (toggleBound && toggleBtn === lastToggleBtn) {
-      console.log("[mobile-menu] initToggle: already bound to this button, skipping");
-      return;
-    }
+    if (toggleBound && toggleBtn === lastToggleBtn) return;
 
     // 如果按钮已被替换，解绑旧按钮
     if (toggleBound && toggleClickHandler && lastToggleBtn && lastToggleBtn !== toggleBtn) {
       try {
         lastToggleBtn.removeEventListener("click", toggleClickHandler);
       } catch (err) { /* 忽略解绑失败 */ }
-      console.log("[mobile-menu] initToggle: removed old handler from previous button");
     }
 
     // 绑定汉堡按钮
-    if (toggleBtn) {
-      toggleBound = true;
-      lastToggleBtn = toggleBtn;
-      toggleClickHandler = function (evt) {
-        evt.preventDefault();
-        evt.stopPropagation();
-        openMenu();
-      };
-      toggleBtn.addEventListener("click", toggleClickHandler);
-      console.log("[mobile-menu] initToggle: bound click to toggleBtn");
-    } else {
-      console.log("[mobile-menu] initToggle: #mobile-menu-toggle NOT FOUND in DOM");
-    }
+    toggleBound = true;
+    lastToggleBtn = toggleBtn;
+    toggleClickHandler = function (evt) {
+      evt.preventDefault();
+      evt.stopPropagation();
+      openMenu();
+    };
+    toggleBtn.addEventListener("click", toggleClickHandler);
 
     // 绑定搜索按钮
     var searchBtn = document.getElementById("mobile-search-toggle");

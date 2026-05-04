@@ -286,7 +286,7 @@
     xhr.send();
   };
 
-  document.addEventListener("languageChanged", renderPDP);
+  window.addEventListener("languageChanged", renderPDP);
   document.addEventListener("productTranslationsLoaded", renderPDP);
   document.addEventListener("spa:load", function() {
     var segs = location.pathname.split("/").filter(Boolean);

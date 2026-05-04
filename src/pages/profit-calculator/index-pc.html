@@ -78,8 +78,7 @@
       <main id="spa-content" class="pt-[110px]">
         <!-- Hero -->
         <section class="relative bg-gradient-to-br from-rose-50 via-white to-slate-50 dark:from-slate-900 dark:via-slate-900 dark:to-slate-950 py-16 overflow-hidden">
-          <!-- TODO: background decorative elements -->
-          <div class="max-w-7xl mx-auto px-6 lg:px-8 text-center relative z-10">
+          <div class="text-center relative z-10">
             <h1 class="text-4xl md:text-5xl lg:text-6xl font-black tracking-tight mb-4" data-i18n="profit_calc_hero_title">
               厨房设备投资回报计算器
             </h1>
@@ -93,7 +92,7 @@
         </section>
 
         <!-- Calculator: Left-Right Split -->
-        <section class="max-w-7xl mx-auto px-6 lg:px-8 py-12">
+        <section class="py-12">
           <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
 
             <!-- ── Left: Input Form (40%) ── -->
@@ -136,11 +135,12 @@
                   <div>
                     <label class="block text-sm font-bold mb-1.5" data-i18n="profit_calc_pain_point">Main Pain Point</label>
                     <select id="pc-pain-point" class="w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg p-3 focus:ring-primary focus:border-primary text-sm">
-                      <option value="招工难">招工难</option>
-                      <option value="人工成本高">人工成本高</option>
-                      <option value="出品不稳定">出品不稳定</option>
-                      <option value="空间不足">空间不足</option>
-                      <option value="出餐慢">出餐慢</option>
+                      <option value="" data-i18n="profit_calc_select_pain_point">选择主要痛点…</option>
+                      <option value="hiring_difficulty" data-i18n="profit_calc_pain_hiring">招工难</option>
+                      <option value="high_labor_cost" data-i18n="profit_calc_pain_labor">人工成本高</option>
+                      <option value="inconsistent_quality" data-i18n="profit_calc_pain_quality">出品不稳定</option>
+                      <option value="limited_space" data-i18n="profit_calc_pain_space">空间不足</option>
+                      <option value="slow_service" data-i18n="profit_calc_pain_speed">出餐慢</option>
                     </select>
                   </div>
 
@@ -149,24 +149,24 @@
                     <label class="block text-sm font-bold mb-2" data-i18n="profit_calc_equipment">Planned Equipment</label>
                     <div class="grid grid-cols-2 gap-2">
                       <label class="flex items-center gap-2 text-sm cursor-pointer bg-slate-50 dark:bg-slate-800 rounded-lg p-2.5 hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors">
-                        <input type="checkbox" class="accent-primary pc-equipment" value="智能炒菜机" />
-                        <span>智能炒菜机</span>
+                        <input type="checkbox" class="accent-primary pc-equipment" value="smart_wok" />
+                        <span data-i18n="profit_calc_eq_wok">智能炒菜机</span>
                       </label>
                       <label class="flex items-center gap-2 text-sm cursor-pointer bg-slate-50 dark:bg-slate-800 rounded-lg p-2.5 hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors">
-                        <input type="checkbox" class="accent-primary pc-equipment" value="蒸饭柜" />
-                        <span>蒸饭柜</span>
+                        <input type="checkbox" class="accent-primary pc-equipment" value="rice_cooker" />
+                        <span data-i18n="profit_calc_eq_rice">蒸饭柜</span>
                       </label>
                       <label class="flex items-center gap-2 text-sm cursor-pointer bg-slate-50 dark:bg-slate-800 rounded-lg p-2.5 hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors">
-                        <input type="checkbox" class="accent-primary pc-equipment" value="洗碗机" />
-                        <span>洗碗机</span>
+                        <input type="checkbox" class="accent-primary pc-equipment" value="dishwasher" />
+                        <span data-i18n="profit_calc_eq_dish">洗碗机</span>
                       </label>
                       <label class="flex items-center gap-2 text-sm cursor-pointer bg-slate-50 dark:bg-slate-800 rounded-lg p-2.5 hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors">
-                        <input type="checkbox" class="accent-primary pc-equipment" value="电磁炉" />
-                        <span>电磁炉</span>
+                        <input type="checkbox" class="accent-primary pc-equipment" value="induction_cooker" />
+                        <span data-i18n="profit_calc_eq_induction">电磁炉</span>
                       </label>
                       <label class="flex items-center gap-2 text-sm cursor-pointer bg-slate-50 dark:bg-slate-800 rounded-lg p-2.5 hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors">
-                        <input type="checkbox" class="accent-primary pc-equipment" value="油炸炉" />
-                        <span>油炸炉</span>
+                        <input type="checkbox" class="accent-primary pc-equipment" value="deep_fryer" />
+                        <span data-i18n="profit_calc_eq_fryer">油炸炉</span>
                       </label>
                       <label class="flex items-center gap-2 text-sm cursor-pointer bg-slate-50 dark:bg-slate-800 rounded-lg p-2.5 hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors">
                         <input type="checkbox" class="accent-primary pc-equipment" value="其他" />
@@ -194,6 +194,7 @@
 
             <!-- ── Right: Results Panel (60%) ── -->
             <div class="lg:col-span-7">
+              <div class="bg-white dark:bg-slate-900 rounded-2xl shadow-xl border border-slate-200 dark:border-slate-800 p-8">
               <div id="profit-result-panel" class="hidden space-y-6">
                 <!-- Summary Cards -->
                 <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
@@ -240,13 +241,13 @@
 
                 <!-- Action Buttons -->
                 <div class="flex flex-col sm:flex-row gap-3">
-                  <button id="pc-whatsapp-btn" class="flex-1 bg-green-500 hover:bg-green-600 text-white py-3 rounded-xl font-bold text-sm flex items-center justify-center gap-2 transition-all">
+                  <button id="pc-whatsapp-btn" class="flex-1 bg-green-500 hover:bg-green-600 text-white py-3.5 rounded-xl font-bold text-base flex items-center justify-center gap-2 transition-all">
                     <span class="material-symbols-outlined text-lg">chat</span>
-                    <span data-i18n="profit_calc_btn_whatsapp">💬 发给 WhatsApp</span>
+                    <span data-i18n="profit_calc_btn_whatsapp">发给 WhatsApp</span>
                   </button>
-                  <button id="pc-pdf-btn" class="flex-1 bg-slate-800 dark:bg-slate-700 hover:bg-slate-700 dark:hover:bg-slate-600 text-white py-3 rounded-xl font-bold text-sm flex items-center justify-center gap-2 transition-all">
+                  <button id="pc-pdf-btn" class="flex-1 bg-slate-800 dark:bg-slate-700 hover:bg-slate-700 dark:hover:bg-slate-600 text-white py-3.5 rounded-xl font-bold text-base flex items-center justify-center gap-2 transition-all">
                     <span class="material-symbols-outlined text-lg">picture_as_pdf</span>
-                    <span data-i18n="profit_calc_btn_pdf">📄 下载 PDF 报告</span>
+                    <span data-i18n="profit_calc_btn_pdf">下载 PDF 报告</span>
                   </button>
                 </div>
               </div>
@@ -260,7 +261,9 @@
                 <p class="text-lg font-bold text-slate-400 dark:text-slate-500" data-i18n="profit_calc_placeholder_title">填写左侧数据，即刻查看投资回报</p>
                 <p class="text-sm text-slate-300 dark:text-slate-600 mt-1" data-i18n="profit_calc_placeholder_desc">Enter your data to see the ROI estimate</p>
               </div>
+              </div>
             </div>
+          </div>
           </div>
         </section>
       </main>
@@ -292,7 +295,7 @@
     <!-- Chart.js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
     <!-- Calculator Engine -->
-    <script src="/assets/js/profit-calculator.js"></script>
+    <script src="/assets/js/profit-calculator.js?v=1777897588"></script>
 
     <script>
       document.addEventListener("DOMContentLoaded", function () {

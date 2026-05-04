@@ -112,9 +112,21 @@
         link.addEventListener("click", function (e) {
           e.preventDefault();
           e.stopPropagation();
-          var waMessage = link.dataset.waMessage || "";
           var source = link.dataset.waSource || "";
-          var url = contactsWhatsApp({ message: waMessage, source: source });
+
+          // 读取消息：优先 data-wa-message-key（i18n）→ data-wa-message（硬编码）→ 默认
+          var userMessage = "";
+          var msgKey = link.dataset.waMessageKey;
+          if (msgKey && global.translationManager) {
+            userMessage = global.translationManager.translate(msgKey);
+            // 翻译缺失时返回原 key，此时清空
+            if (userMessage === msgKey) userMessage = "";
+          }
+          if (!userMessage) {
+            userMessage = link.dataset.waMessage || "";
+          }
+
+          var url = contactsWhatsApp({ source: source, message: userMessage });
           global.open(url, "_blank", "noopener,noreferrer");
         });
       })(links[i]);

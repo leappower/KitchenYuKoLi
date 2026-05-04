@@ -17,60 +17,98 @@
 
   /* ───────── Savings ratio table ───────── */
   var SAVINGS_TABLE = {
-    '招工难':  { min: 0.40, mid: 0.50, max: 0.58 },
-    '人工成本高': { min: 0.45, mid: 0.55, max: 0.68 },
-    '出品不稳定': { min: 0.32, mid: 0.42, max: 0.52 },
-    '出餐慢':  { min: 0.36, mid: 0.46, max: 0.55 },
-    '空间不足': { min: 0.30, mid: 0.40, max: 0.48 }
+    'hiring_difficulty':      { min: 0.40, mid: 0.50, max: 0.58 },
+    'high_labor_cost':        { min: 0.45, mid: 0.55, max: 0.68 },
+    'inconsistent_quality':   { min: 0.32, mid: 0.42, max: 0.52 },
+    'slow_service':           { min: 0.36, mid: 0.46, max: 0.55 },
+    'limited_space':          { min: 0.30, mid: 0.40, max: 0.48 }
   };
 
   /* ───────── Equipment cost ranges (USD) ───────── */
   var EQUIPMENT_COST = {
-    '智能炒菜机': { min: 3000, max: 8000 },
-    '蒸饭柜':     { min: 1500, max: 4000 },
-    '洗碗机':     { min: 2000, max: 5000 },
-    '电磁炉':     { min: 500,  max: 2000 },
-    '油炸炉':     { min: 1000, max: 3000 }
+    'smart_wok':        { min: 3000, max: 8000 },
+    'rice_cooker':      { min: 1500, max: 4000 },
+    'dishwasher':       { min: 2000, max: 5000 },
+    'induction_cooker': { min: 500,  max: 2000 },
+    'deep_fryer':       { min: 1000, max: 3000 }
   };
 
   /* ───────── Equipment multipliers (boost savings) ───────── */
   var EQUIPMENT_MULTIPLIER = {
-    '智能炒菜机': 1.15,
-    '蒸饭柜':     1.05,
-    '洗碗机':     1.10,
-    '电磁炉':     1.03,
-    '油炸炉':     1.06
+    'smart_wok':        1.15,
+    'rice_cooker':      1.05,
+    'dishwasher':       1.10,
+    'induction_cooker': 1.03,
+    'deep_fryer':       1.06
   };
 
   /* ───────── CO₂ reduction per equipment (tonnes / year) ───────── */
   var CO2_PER_EQUIPMENT = {
-    '智能炒菜机': 2.1,
-    '蒸饭柜':     0.8,
-    '洗碗机':     1.2,
-    '电磁炉':     0.5,
-    '油炸炉':     0.7
+    'smart_wok':        2.1,
+    'rice_cooker':      0.8,
+    'dishwasher':       1.2,
+    'induction_cooker': 0.5,
+    'deep_fryer':       0.7
   };
 
 
   /* ───────── Scene presets (from application page deep-links) ───────── */
 
   var SCENE_PRESETS = {
-    'chain-restaurant':  { meals: 500,  pain: '人工成本高', equipment: ['智能炒菜机', '蒸饭柜'], operators: 3 },
-    'central-kitchen':   { meals: 2000, pain: '招工难',   equipment: ['智能炒菜机', '蒸饭柜', '洗碗机'], operators: 5 },
-    'small-restaurant':  { meals: 150,  pain: '出餐慢',   equipment: ['智能炒菜机'], operators: 1 },
-    'canteen':           { meals: 1000, pain: '招工难',   equipment: ['智能炒菜机', '蒸饭柜', '洗碗机', '油炸炉'], operators: 4 },
-    'cloud-kitchen':     { meals: 300,  pain: '空间不足', equipment: ['智能炒菜机', '电磁炉'], operators: 2 },
-    'menu-lab':          { meals: 200,  pain: '出品不稳定', equipment: ['智能炒菜机'], operators: 2 }
+    'chain-restaurant':  { meals: 500,  pain: 'high_labor_cost',      equipment: ['smart_wok', 'rice_cooker'], operators: 3 },
+    'central-kitchen':   { meals: 2000, pain: 'hiring_difficulty',    equipment: ['smart_wok', 'rice_cooker', 'dishwasher'], operators: 5 },
+    'small-restaurant':  { meals: 150,  pain: 'slow_service',        equipment: ['smart_wok'], operators: 1 },
+    'canteen':           { meals: 1000, pain: 'hiring_difficulty',    equipment: ['smart_wok', 'rice_cooker', 'dishwasher', 'deep_fryer'], operators: 4 },
+    'cloud-kitchen':     { meals: 300,  pain: 'limited_space',       equipment: ['smart_wok', 'induction_cooker'], operators: 2 },
+    'menu-lab':          { meals: 200,  pain: 'inconsistent_quality', equipment: ['smart_wok'], operators: 2 }
   };
 
   /* ───────── Helpers ───────── */
 
+  /** CJK languages use 万 (10K) and 億 (100M); others use K and M. */
+  function isCJK() {
+    if (!window.translationManager) return false;
+    var lang = window.translationManager.currentLanguage || '';
+    return /^zh|ja|ko/.test(lang);
+  }
+
+  /** Get currency info based on current UI language (not country). */
+  function langCurrency() {
+    if (!window.translationManager) return { symbol: '$', currency: 'USD' };
+    var lang = window.translationManager.currentLanguage || '';
+    var map = {
+      'zh-CN': { symbol: '¥', currency: 'CNY' },
+      'zh-TW': { symbol: 'NT$', currency: 'TWD' },
+      'ja':    { symbol: '¥', currency: 'JPY' },
+      'ko':    { symbol: '₩', currency: 'KRW' },
+      'th':    { symbol: '฿', currency: 'THB' },
+      'vi':    { symbol: '₫', currency: 'VND' },
+      'id':    { symbol: 'Rp', currency: 'IDR' },
+      'ms':    { symbol: 'RM', currency: 'MYR' },
+      'hi':    { symbol: '₹', currency: 'INR' },
+      'ar':    { symbol: '﷼', currency: 'SAR' }
+    };
+    // Match exact lang code or prefix
+    for (var key in map) {
+      if (lang === key || lang.indexOf(key) === 0) return map[key];
+    }
+    return { symbol: '$', currency: 'USD' };
+  }
+
   function formatNumber(n, decimals) {
     if (decimals === undefined) decimals = 0;
-    return n.toLocaleString('en-US', { minimumFractionDigits: decimals, maximumFractionDigits: decimals });
+    var locale = isCJK() ? 'zh-CN' : 'en-US';
+    return n.toLocaleString(locale, { minimumFractionDigits: decimals, maximumFractionDigits: decimals });
   }
 
   function shortCurrency(n, symbol) {
+    if (isCJK()) {
+      // CJK: 万 (10,000) and 億 (100,000,000)
+      if (n >= 100000000) return symbol + formatNumber(n / 100000000, 1) + t('profit_calc_unit_100m');
+      if (n >= 10000) return symbol + formatNumber(n / 10000, 1) + t('profit_calc_unit_10k');
+      return symbol + formatNumber(n);
+    }
+    // Western: K and M
     if (n >= 1000000) return symbol + formatNumber(n / 1000000, 1) + 'M';
     if (n >= 1000) return symbol + formatNumber(n / 1000, 1) + 'K';
     return symbol + formatNumber(n);
@@ -173,33 +211,69 @@
     };
   }
 
-  /* ───────── WhatsApp message builder ───────── */
+  
+  /* ───────── i18n helper ───────── */
+  function t(key) {
+    if (window.translationManager && typeof window.translationManager.translate === 'function') {
+      var v = window.translationManager.translate(key);
+      return v !== key ? v : key;
+    }
+    return key;
+  }
+
+  /* ───────── Pain point → i18n key mapping ───────── */
+  var PAIN_KEY_MAP = {
+    'hiring_difficulty':    'profit_calc_pain_hiring',
+    'high_labor_cost':      'profit_calc_pain_labor',
+    'inconsistent_quality': 'profit_calc_pain_quality',
+    'slow_service':         'profit_calc_pain_speed',
+    'limited_space':        'profit_calc_pain_space'
+  };
+
+  /* ───────── Equipment → i18n key mapping ───────── */
+  var EQUIP_KEY_MAP = {
+    'smart_wok':        'profit_calc_eq_wok',
+    'rice_cooker':      'profit_calc_eq_rice',
+    'dishwasher':       'profit_calc_eq_dish',
+    'induction_cooker': 'profit_calc_eq_induction',
+    'deep_fryer':       'profit_calc_eq_fryer'
+  };
+
+/* ───────── WhatsApp message builder ───────── */
 
   function buildWhatsAppMessage(input, result, salaryInfo) {
-    var eqList = (input.equipment && input.equipment.length) ? input.equipment.join(', ') : 'N/A';
+    var painLabel = PAIN_KEY_MAP[input.painPoint] ? t(PAIN_KEY_MAP[input.painPoint]) : input.painPoint;
+    var lc = langCurrency();
+    var eqNames = (input.equipment && input.equipment.length) ? input.equipment.map(function(eq) {
+      return EQUIP_KEY_MAP[eq] ? t(EQUIP_KEY_MAP[eq]) : eq;
+    }).join(', ') : 'N/A';
     return [
       'Hi YuKoLi, I calculated my ROI:',
       '',
-      'Country: ' + input.country,
-      'Monthly Labor Cost: ' + formatNumber(input.laborCost) + ' ' + salaryInfo.currency,
-      'Daily Output: ' + input.dailyMeals + ' meals',
-      'Main Challenge: ' + input.painPoint,
-      'Equipment: ' + eqList,
+      t('profit_calc_report_challenge') + ': ' + input.country,
+      t('profit_calc_labor_cost') + ': ' + formatNumber(input.laborCost) + ' ' + lc.currency,
+      t('profit_calc_report_daily_output') + ': ' + input.dailyMeals,
+      t('profit_calc_pain_point') + ': ' + painLabel,
+      t('profit_calc_report_equipment') + ': ' + eqNames,
       '',
-      'Estimated Monthly Savings: ' + salaryInfo.symbol + formatNumber(result.monthlySavings.min) + ' – ' + salaryInfo.symbol + formatNumber(result.monthlySavings.max) + ' ' + salaryInfo.currency,
-      'Estimated Payback: ' + result.payback.min + '–' + result.payback.max + ' months',
-      '5-Year Total Return: ' + salaryInfo.symbol + shortCurrency(result.fiveYearReturn.min, salaryInfo.symbol).replace(salaryInfo.symbol, '') + ' – ' + shortCurrency(result.fiveYearReturn.max, salaryInfo.symbol).replace(salaryInfo.symbol, '') + ' ' + salaryInfo.currency,
+      t('profit_calc_report_savings') + ': ' + lc.symbol + formatNumber(result.monthlySavings.min) + ' – ' + lc.symbol + formatNumber(result.monthlySavings.max) + ' ' + lc.currency,
+      t('profit_calc_payback') + ': ' + result.payback.min + '–' + result.payback.max + ' ' + t('profit_calc_months'),
+      t('profit_calc_report_5year') + ': ' + lc.symbol + shortCurrency(result.fiveYearReturn.min, lc.symbol).replace(lc.symbol, '') + ' – ' + shortCurrency(result.fiveYearReturn.max, lc.symbol).replace(lc.symbol, '') + ' ' + lc.currency,
       '',
-      'Please send me a detailed proposal.'
+      t('profit_calc_pdf_disclaimer').replace(t('profit_calc_pdf_disclaimer').split('.')[0] + '.', '')
     ].join('\n');
   }
 
   /* ───────── PDF generation (simple HTML→print) ───────── */
 
   function generatePDF(input, result, salaryInfo) {
-    var eqList = (input.equipment && input.equipment.length) ? input.equipment.join(', ') : 'N/A';
+    var painLabel = PAIN_KEY_MAP[input.painPoint] ? t(PAIN_KEY_MAP[input.painPoint]) : input.painPoint;
+    var lc = langCurrency();
+    var eqNames = (input.equipment && input.equipment.length) ? input.equipment.map(function(eq) {
+      return EQUIP_KEY_MAP[eq] ? t(EQUIP_KEY_MAP[eq]) : eq;
+    }).join(', ') : 'N/A';
     var html = [
-      '<!DOCTYPE html><html><head><meta charset="utf-8"><title>YuKoLi ROI Report</title>',
+      '<!DOCTYPE html><html><head><meta charset="utf-8"><title>' + t('profit_calc_pdf_title') + '</title>',
       '<style>',
       'body{font-family:system-ui,sans-serif;max-width:700px;margin:40px auto;padding:20px;color:#1e293b}',
       'h1{font-size:24px;border-bottom:3px solid #e11d48;padding-bottom:12px}',
@@ -211,28 +285,28 @@
       '.highlight .big{font-size:28px;font-weight:900;color:#e11d48}',
       '.footer{margin-top:32px;font-size:11px;color:#94a3b8;text-align:center}',
       '</style></head><body>',
-      '<h1>🍳 YuKoLi Kitchen Equipment — ROI Report</h1>',
-      '<h2>📋 Input Summary</h2>',
-      '<div class="row"><span class="label">Country</span><span class="value">' + input.country + '</span></div>',
-      '<div class="row"><span class="label">Monthly Labor Cost</span><span class="value">' + salaryInfo.symbol + formatNumber(input.laborCost) + ' ' + salaryInfo.currency + '</span></div>',
-      '<div class="row"><span class="label">Daily Meals Output</span><span class="value">' + input.dailyMeals + '</span></div>',
-      '<div class="row"><span class="label">Main Challenge</span><span class="value">' + input.painPoint + '</span></div>',
-      '<div class="row"><span class="label">Planned Equipment</span><span class="value">' + eqList + '</span></div>',
-      '<div class="row"><span class="label">Operator Reduction</span><span class="value">' + input.operatorReduction + ' people</span></div>',
-      '<h2>💰 Estimated Results</h2>',
+      '<h1>🍳 ' + t('profit_calc_pdf_title') + '</h1>',
+      '<h2>' + t('profit_calc_pdf_input') + '</h2>',
+      '<div class="row"><span class="label">' + t('profit_calc_pdf_country') + '</span><span class="value">' + input.country + '</span></div>',
+      '<div class="row"><span class="label">' + t('profit_calc_labor_cost') + '</span><span class="value">' + lc.symbol + formatNumber(input.laborCost) + ' ' + lc.currency + '</span></div>',
+      '<div class="row"><span class="label">' + t('profit_calc_pdf_daily_meals') + '</span><span class="value">' + input.dailyMeals + '</span></div>',
+      '<div class="row"><span class="label">' + t('profit_calc_pdf_main_challenge') + '</span><span class="value">' + painLabel + '</span></div>',
+      '<div class="row"><span class="label">' + t('profit_calc_pdf_planned_equipment') + '</span><span class="value">' + eqNames + '</span></div>',
+      '<div class="row"><span class="label">' + t('profit_calc_pdf_operator_reduction') + '</span><span class="value">' + input.operatorReduction + ' ' + t('profit_calc_operator_unit') + '</span></div>',
+      '<h2>' + t('profit_calc_pdf_results') + '</h2>',
       '<div class="highlight">',
-      '<div class="row"><span class="label">Monthly Savings</span><span class="value">' + salaryInfo.symbol + formatNumber(result.monthlySavings.min) + ' – ' + salaryInfo.symbol + formatNumber(result.monthlySavings.max) + '</span></div>',
-      '<div class="row"><span class="label">Equipment Investment</span><span class="value">' + salaryInfo.symbol + formatNumber(result.investment.min) + ' – ' + salaryInfo.symbol + formatNumber(result.investment.max) + '</span></div>',
-      '<div class="row"><span class="label">Payback Period</span><span class="value big">' + result.payback.min + '–' + result.payback.max + ' months</span></div>',
-      '<div class="row"><span class="label">5-Year Cumulative Return</span><span class="value">' + salaryInfo.symbol + shortCurrency(result.fiveYearReturn.min, salaryInfo.symbol) + ' – ' + salaryInfo.symbol + shortCurrency(result.fiveYearReturn.max, salaryInfo.symbol) + '</span></div>',
-      '<div class="row"><span class="label">Annual Savings</span><span class="value">' + salaryInfo.symbol + shortCurrency(result.annualSavings.mid, salaryInfo.symbol) + '</span></div>',
-      '<div class="row"><span class="label">CO₂ Reduction (est.)</span><span class="value">' + result.co2.toFixed(1) + ' tonnes/year</span></div>',
+      '<div class="row"><span class="label">' + t('profit_calc_pdf_monthly_savings') + '</span><span class="value">' + lc.symbol + formatNumber(result.monthlySavings.min) + ' – ' + lc.symbol + formatNumber(result.monthlySavings.max) + '</span></div>',
+      '<div class="row"><span class="label">' + t('profit_calc_pdf_equipment_investment') + '</span><span class="value">' + lc.symbol + formatNumber(result.investment.min) + ' – ' + lc.symbol + formatNumber(result.investment.max) + '</span></div>',
+      '<div class="row"><span class="label">' + t('profit_calc_pdf_payback_period') + '</span><span class="value big">' + result.payback.min + '–' + result.payback.max + ' ' + t('profit_calc_months') + '</span></div>',
+      '<div class="row"><span class="label">' + t('profit_calc_pdf_5year_return') + '</span><span class="value">' + lc.symbol + shortCurrency(result.fiveYearReturn.min, lc.symbol) + ' – ' + lc.symbol + shortCurrency(result.fiveYearReturn.max, lc.symbol) + '</span></div>',
+      '<div class="row"><span class="label">' + t('profit_calc_pdf_annual_savings') + '</span><span class="value">' + lc.symbol + shortCurrency(result.annualSavings.mid, lc.symbol) + '</span></div>',
+      '<div class="row"><span class="label">' + t('profit_calc_pdf_co2') + '</span><span class="value">' + result.co2.toFixed(1) + ' ' + t('profit_calc_co2_unit') + '</span></div>',
       '</div>',
-      '<div class="footer">Generated by YuKoLi Kitchen Equipment Profit Calculator — ' + new Date().toLocaleDateString() + '<br>Estimates are for reference only. Contact YuKoLi for a detailed proposal.</div>',
+      '<div class="footer">' + t('profit_calc_pdf_footer') + new Date().toLocaleDateString() + '<br>' + t('profit_calc_pdf_disclaimer') + '</div>',
       '</body></html>'
     ].join('');
 
-    var win = window.open('', '_blank');
+    var win = window.open('', '_blank', 'noopener');
     if (win) {
       win.document.write(html);
       win.document.close();
@@ -245,6 +319,7 @@
   function renderChart(canvasId, result, salaryInfo) {
     var canvas = document.getElementById(canvasId);
     if (!canvas) return;
+    var sym = langCurrency().symbol;
 
     // Destroy previous chart instance
     if (canvas._chartInstance) canvas._chartInstance.destroy();
@@ -253,17 +328,17 @@
     var chart = new Chart(ctx, {
       type: 'bar',
       data: {
-        labels: ['Monthly\nSavings', 'Annual\nSavings', 'Equipment\nInvestment', '5-Year\nReturn'],
+        labels: [t('profit_calc_chart_monthly_savings'), t('profit_calc_chart_annual_savings'), t('profit_calc_chart_investment'), t('profit_calc_chart_5year_return')],
         datasets: [
           {
-            label: 'Min',
+            label: t('profit_calc_chart_min'),
             data: [result.monthlySavings.min, result.annualSavings.min, -result.investment.max, result.fiveYearReturn.min],
             backgroundColor: 'rgba(225,29,72,0.2)',
             borderColor: 'rgba(225,29,72,0.6)',
             borderWidth: 1
           },
           {
-            label: 'Max',
+            label: t('profit_calc_chart_max'),
             data: [result.monthlySavings.max, result.annualSavings.max, -result.investment.min, result.fiveYearReturn.max],
             backgroundColor: 'rgba(225,29,72,0.6)',
             borderColor: 'rgba(225,29,72,1)',
@@ -280,7 +355,7 @@
             callbacks: {
               label: function (ctx) {
                 var v = ctx.raw;
-                return ctx.dataset.label + ': ' + salaryInfo.symbol + formatNumber(Math.abs(v));
+                return ctx.dataset.label + ': ' + sym + formatNumber(Math.abs(v));
               }
             }
           }
@@ -288,7 +363,7 @@
         scales: {
           y: {
             ticks: {
-              callback: function (v) { return salaryInfo.symbol + shortCurrency(Math.abs(v), salaryInfo.symbol).replace(salaryInfo.symbol, ''); }
+              callback: function (v) { return sym + shortCurrency(Math.abs(v), sym).replace(sym, ''); }
             }
           }
         }
@@ -307,6 +382,9 @@
     this.countrySelectId = opts.countrySelectId || 'pc-country';
     this.laborInputId = opts.laborInputId || 'pc-labor-cost';
     this.stepsMode = opts.stepsMode || false;
+
+    // Store reference for language change re-render
+    window._profitCalcInstance = this;
 
     this.init();
   }
@@ -356,7 +434,7 @@
       country: country,
       laborCost: parseFloat(document.getElementById(this.laborInputId).value) || salaryInfo.monthly,
       dailyMeals: parseInt(document.getElementById('pc-daily-meals').value, 10) || 200,
-      painPoint: document.getElementById('pc-pain-point').value || '人工成本高',
+      painPoint: document.getElementById('pc-pain-point').value || 'high_labor_cost',
       equipment: equipment,
       operatorReduction: parseInt(document.getElementById('pc-operator-reduction').value, 10) || 2,
       salaryInfo: salaryInfo
@@ -388,7 +466,7 @@
   };
 
   ProfitCalculator.prototype.renderResults = function (r, info) {
-    var sym = info.symbol;
+    var sym = langCurrency().symbol;
     var helpers = {
       fmt: formatNumber,
       short: function (n) { return shortCurrency(n, sym); }
@@ -419,13 +497,15 @@
     this._lastResult = result;
   };
 
+  ProfitCalculator.prototype.restoreLastResult = function () { return false; };
+
   ProfitCalculator.prototype.shareWhatsApp = function () {
     if (!this._lastInput || !this._lastResult) return;
     var msg = buildWhatsAppMessage(this._lastInput, this._lastResult, this._lastInput.salaryInfo);
     var url = (window.Contacts && typeof window.Contacts.contactsWhatsApp === 'function')
       ? window.Contacts.contactsWhatsApp({ source: 'ROI Calculator', message: msg })
       : 'https://wa.me/8613163756465?text=' + encodeURIComponent(msg);
-    window.open(url, '_blank');
+    window.open(url, '_blank', 'noopener');
   };
 
   ProfitCalculator.prototype.downloadPDF = function () {
@@ -520,6 +600,9 @@
   window.ProfitCalculator = ProfitCalculator;
   window.ProfitCalculatorData = { DEFAULT_SALARIES: DEFAULT_SALARIES };
 
+  // Expose for languageChanged listener (outside IIFE)
+  window._pcLangCurrency = langCurrency;
+  window._pcRenderChart = renderChart;
 })();
 
 /* ───────── SPA auto-init on spa:load ───────── */
@@ -539,6 +622,7 @@ document.addEventListener("spa:load", function initProfitCalc() {
     laborInputId:  "pc-labor-cost",
     stepsMode:     isMobile
   });
+  window._profitCalcInstance = calc;
 
   // Bind buttons
   var calcBtn = document.getElementById("pc-calc-btn");
@@ -572,4 +656,21 @@ document.addEventListener("spa:load", function initProfitCalc() {
 
   // Apply URL presets if any
   calc.applyPreset();
+
+
+});
+
+// Debug: verify script loaded and languageChanged works
+console.log('[PC] script loaded, testing languageChanged dispatch...');
+window.addEventListener("languageChanged", function (e) {
+  console.log('[PC langChange] EVENT RECEIVED', e && e.detail);
+}, true); // capture phase
+
+// On language change, re-render results with new currency/labels
+window.addEventListener("languageChanged", function () {
+  var calc = window._profitCalcInstance;
+  if (calc && calc._lastResult && calc._lastInput) {
+    calc.renderResults(calc._lastResult, calc._lastInput.salaryInfo);
+    calc.renderChart(calc._lastResult, calc._lastInput.salaryInfo);
+  }
 });

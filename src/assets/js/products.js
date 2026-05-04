@@ -786,7 +786,7 @@
   if (global.translationManager) {
     global.translationManager.on("translationsApplied", initFilterBarAndProducts);
   } else {
-    global.addEventListener("translationsApplied", initFilterBarAndProducts);
+    // translationsApplied is an EventEmitter event (not DOM), use .on() only
   }
 
   document.addEventListener("DOMContentLoaded", function () {
@@ -807,7 +807,7 @@
     if (global.translationManager) {
       global.translationManager.on("translationsApplied", clearTranslationTimeout);
     } else {
-      global.addEventListener("translationsApplied", clearTranslationTimeout);
+      // translationsApplied is an EventEmitter event (not DOM), use .on() only
     }
   });
 
