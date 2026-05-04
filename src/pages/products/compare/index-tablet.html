@@ -1,0 +1,504 @@
+<!doctype html>
+<html class="light" lang="zh-CN">
+  <head>
+    <!-- ═══ Responsive Redirect (injected by patch-responsive-redirect.py) ═══ -->
+    <link rel="canonical" href="/products/compare/" />
+    <link rel="alternate" media="only screen and (max-width: 767px)" href="/products/compare/index-mobile.html" />
+    <link rel="alternate" media="only screen and (min-width: 768px) and (max-width: 1279px)" href="/products/compare/index-tablet.html" />
+    <link rel="alternate" media="only screen and (min-width: 1280px)" href="/products/compare/index-pc.html" />
+    <script>
+      (function () {
+        if (window.__redirectChecked) return;
+        window.__redirectChecked = true;
+        var urlParams = new URLSearchParams(location.search);
+        var cleanUrl = urlParams.get("clean-url");
+        if (cleanUrl) {
+          history.replaceState({}, "", cleanUrl);
+          return;
+        }
+        if (window.__spaNavigating) return;
+        var currentFile = location.pathname.split("/").pop();
+        if (window.DeviceUtils && window.DeviceUtils.isDirectoryURL()) return;
+        if (window.DeviceUtils && window.DeviceUtils.shouldRedirect(currentFile)) {
+          var deviceType = window.DeviceUtils.getDeviceType();
+          var targetFile =
+            deviceType === window.DeviceUtils.DeviceType.MOBILE
+              ? "index-mobile.html"
+              : deviceType === window.DeviceUtils.DeviceType.TABLET
+                ? "index-tablet.html"
+                : "index-pc.html";
+          location.href = targetFile;
+        }
+      })();
+    </script>
+    <!-- ═══ End Responsive Redirect ═══ -->
+
+    <meta charset="utf-8" />
+    <meta name="description" content="对比 Yukoli 智能商厨设备参数，选择最适合您厨房的设备。" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="产品对比 | Yukoli 智能商厨设备" />
+    <meta property="og:description" content="对比 Yukoli 智能商厨设备参数，选择最适合您厨房的设备。" />
+    <meta property="og:url" content="https://www.kitchen.yukoli.com/products/compare/index-tablet.html" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>产品对比 | Yukoli 智能商厨设备</title>
+    <link rel="preload" href="/assets/fonts/local-fonts.css" as="style" />
+    <link rel="preload" href="/assets/css/styles.css" as="style" />
+    <link rel="preload" href="/assets/css/tailwind.css" as="style" />
+    <link href="/assets/fonts/local-fonts.css" rel="stylesheet" />
+    <link rel="stylesheet" href="/assets/css/styles.css" />
+    <link rel="stylesheet" href="/assets/css/tailwind.css" />
+    <link rel="stylesheet" href="/assets/css/z-index-system.css" />
+    <link rel="stylesheet" href="/assets/css/performance-optimizations.css" />
+    <style>
+      body { font-family: "Public Sans", sans-serif; }
+      .compare-card {
+        transition: all 0.3s ease;
+        cursor: pointer;
+      }
+      .compare-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.12);
+      }
+      .compare-card.selected {
+        box-shadow: 0 0 0 3px rgba(236, 91, 19, 0.4);
+      }
+      .compare-card.selected .select-badge {
+        display: flex;
+      }
+      .diff-highlight {
+        background: rgba(236, 91, 19, 0.08);
+        border-radius: 6px;
+        padding: 2px 6px;
+        font-weight: 600;
+      }
+      .scrollbar-hide::-webkit-scrollbar { display: none; }
+      .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
+      .category-tab {
+        position: relative;
+        transition: all 0.2s ease;
+        -webkit-tap-highlight-color: transparent;
+      }
+      .category-tab.active::after {
+        content: "";
+        position: absolute;
+        bottom: -2px;
+        left: 0;
+        right: 0;
+        height: 2px;
+        background: #ec5b13;
+        border-radius: 1px;
+      }
+    </style>
+    <script>
+      (function () {
+        if (localStorage.getItem("darkMode") === "true") document.documentElement.classList.add("dark");
+      })();
+    </script>
+    <link rel="stylesheet" href="/assets/css/skeleton.css" />
+    <link rel="icon" href="/assets/images/logo_header.webp" type="image/webp" />
+  </head>
+  <body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 transition-colors duration-300 overflow-x-clip">
+
+    <navigator
+      data-component="navigator"
+      data-variant="tablet"
+      data-active="products"
+      data-search="true"
+      data-cta-text-key="nav_get_quote"
+      data-cta-href="/quote"
+    ></navigator>
+
+    <main id="spa-content">
+    <div class="w-full pt-2">
+
+      <!-- Breadcrumb -->
+      <nav class="w-full px-6 py-3" aria-label="Breadcrumb">
+        <ol class="flex items-center gap-2 text-sm text-slate-500 dark:text-slate-400">
+          <li><a href="/home/" class="hover:text-primary transition-colors">首页</a></li>
+          <li><span class="material-symbols-outlined text-xs">chevron_right</span></li>
+          <li><a href="/products/" class="hover:text-primary transition-colors">产品中心</a></li>
+          <li><span class="material-symbols-outlined text-xs">chevron_right</span></li>
+          <li class="text-slate-900 dark:text-white font-medium">产品对比</li>
+        </ol>
+      </nav>
+
+      <!-- Page Header -->
+      <section class="w-full px-6 pb-6">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-bold uppercase tracking-wider mb-3">
+          <span class="material-symbols-outlined text-sm">compare</span>
+          <span>Product Compare</span>
+        </div>
+        <h1 class="text-3xl font-black leading-tight tracking-tight text-slate-900 dark:text-white mb-2">
+          产品对比
+        </h1>
+        <p class="text-sm text-slate-600 dark:text-slate-400">
+          选择最多 3 款产品，并排对比参数。
+        </p>
+      </section>
+
+      <!-- Selected Products Bar -->
+      <section id="compare-bar" class="w-full px-6 pb-4 sticky top-[72px] z-30 hidden">
+        <div class="bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-lg p-3 flex items-center gap-3">
+          <div class="flex items-center gap-1.5 text-xs font-bold text-slate-500 dark:text-slate-400 flex-shrink-0">
+            <span class="material-symbols-outlined text-primary text-base">compare_arrows</span>
+            <span>已选 <span id="compare-count" class="text-primary">0</span>/3</span>
+          </div>
+          <div id="compare-bar-items" class="flex items-center gap-2 flex-1 overflow-x-auto scrollbar-hide">
+          </div>
+          <button id="compare-clear-btn" class="flex-shrink-0 px-3 py-1.5 rounded-lg text-xs font-bold text-slate-500 hover:text-red-500 hover:bg-red-50 dark:hover:bg-red-900/20 transition-all border border-slate-200 dark:border-slate-700">
+            清空
+          </button>
+        </div>
+      </section>
+
+      <!-- Product Selection -->
+      <section id="product-selection" class="w-full px-6 pb-8">
+        <div class="flex items-center gap-2 mb-4 flex-wrap" id="compare-category-tabs"></div>
+        <div class="grid grid-cols-3 gap-3" id="compare-product-grid"></div>
+      </section>
+
+      <!-- Comparison Table -->
+      <section id="comparison-section" class="w-full px-6 pb-8 hidden">
+        <div class="flex items-center justify-between mb-4">
+          <h2 class="text-lg font-black text-slate-900 dark:text-white">参数对比</h2>
+          <a href="#product-selection" onclick="event.preventDefault();document.getElementById('product-selection').scrollIntoView({behavior:'smooth',block:'start'})" class="text-xs text-primary font-bold flex items-center gap-1 hover:underline">
+            <span class="material-symbols-outlined text-sm">add</span>
+            修改对比
+          </a>
+        </div>
+        <div class="bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 overflow-hidden shadow-sm">
+          <div id="comparison-table" class="overflow-x-auto"></div>
+        </div>
+      </section>
+
+      <!-- Empty State -->
+      <section id="compare-empty" class="w-full px-6 pb-8">
+        <div class="bg-gradient-to-br from-slate-50 dark:from-slate-900 to-white dark:to-black rounded-2xl border border-slate-200 dark:border-slate-700 p-8 text-center">
+          <div class="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-4">
+            <span class="material-symbols-outlined text-3xl text-primary">compare</span>
+          </div>
+          <h3 class="text-lg font-black text-slate-900 dark:text-white mb-2">选择产品开始对比</h3>
+          <p class="text-sm text-slate-500 dark:text-slate-400">
+            从上方选择 2~3 款产品查看详细参数对比。
+          </p>
+        </div>
+      </section>
+
+      <!-- CTA Section -->
+      <section class="w-full px-6 py-10">
+        <div class="bg-gradient-to-br from-primary/10 to-primary/5 rounded-2xl p-8 text-center">
+          <h2 class="text-xl font-bold mb-3 text-slate-900 dark:text-white">还不确定怎么选？</h2>
+          <p class="text-sm text-slate-600 dark:text-slate-400 mb-6">联系工程师团队，为您推荐最优方案。</p>
+          <div class="flex flex-wrap justify-center gap-3">
+            <a href="/quote" class="bg-primary text-white px-6 py-3 rounded-xl font-bold text-sm hover:shadow-lg hover:shadow-primary/20 transition-all flex items-center gap-2">
+              <span>获取报价</span>
+              <span class="material-symbols-outlined text-sm">request_quote</span>
+            </a>
+            <a href="https://api.whatsapp.com/send/?phone=8613163756465" target="_blank" class="bg-[#25D366] text-white px-6 py-3 rounded-xl font-bold text-sm hover:shadow-lg transition-all flex items-center gap-2">
+              <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.625.846 5.059 2.284 7.034L.789 23.492a.5.5 0 00.612.638l4.694-1.228A11.955 11.955 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-2.387 0-4.592-.838-6.317-2.236l-.44-.36-2.848.746.763-2.774-.403-.47A9.96 9.96 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
+              <span>WhatsApp</span>
+            </a>
+          </div>
+        </div>
+      </section>
+
+    </div>
+    </main>
+
+    <footer data-component="footer"></footer>
+
+    <!-- Scripts -->
+    <script src="/assets/js/ui/dropdown-styles.js"></script>
+    <script defer src="/assets/js/ui/products-dropdown.js?v=20260322-v3"></script>
+    <script defer src="/assets/js/ui/applications-dropdown.js?v=20260322-v3"></script>
+    <script defer src="/assets/js/ui/support-dropdown.js?v=20260322-v3"></script>
+    <script defer src="/assets/js/ui/about-dropdown.js?v=20260322-v3"></script>
+    <script defer src="/assets/js/nav-config.js?v=20260415"></script>
+    <script defer src="/assets/js/ui/mobile-bottom-bar.js"></script>
+    <script defer src="/assets/js/ui/navigator.js?v=20260322-v3"></script>
+    <script defer src="/assets/js/ui/slide-menu.js?v=20260322-v3"></script>
+    <script defer src="/assets/js/ui/search-engine.js"></script>
+    <script defer src="/assets/js/ui/footer.js?v=20260322-v3"></script>
+    <script defer src="/assets/js/lang-registry.js?v=20260429"></script>
+    <script defer src="/assets/js/translations.js?v=20260429"></script>
+    <script defer src="/assets/js/translations-dropdown-template.js?v=20260429"></script>
+    <script defer src="/assets/js/contacts.js"></script>
+    <script defer src="/assets/js/ui/smart-popup.js"></script>
+    <script defer src="/assets/js/router.js"></script>
+    <script defer src="/assets/js/ui/helpers.js"></script>
+    <script defer src="/assets/js/ui/page-effects.js"></script>
+    <script defer src="/assets/js/ui/form-interactions.js"></script>
+    <script defer src="/assets/js/page-interactions.js"></script>
+    <script defer src="/assets/js/product-grid.js?v=20260415"></script>
+    <script defer src="/assets/js/product-detail.js?v=20260422"></script>
+
+    <script>
+    (function() {
+      'use strict';
+      var MAX_COMPARE = 3;
+      var selected = [];
+
+      function esc(s) {
+        if (!s) return '';
+        return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+      }
+
+      function getImageUrl(p) {
+        if (p.images && Array.isArray(p.images) && p.images.length > 0) {
+          var primary = p.images.find(function(i){ return i.isPrimary; }) || p.images[0];
+          if (primary && primary.filePath) return primary.filePath;
+        }
+        if (p.image) return p.image;
+        if (p.imageUrl) return p.imageUrl;
+        return '/assets/images/products/' + (p.model || 'default') + '.webp';
+      }
+
+      function getProductList() {
+        var result = [];
+        if (!Array.isArray(window.PRODUCT_DATA_TABLE)) return result;
+        window.PRODUCT_DATA_TABLE.forEach(function(cat) {
+          if (!cat.products || !Array.isArray(cat.products)) return;
+          cat.products.forEach(function(p) {
+            result.push(Object.assign({}, p, {
+              _category: cat.category || cat.slug || '',
+              _categoryName: cat.categoryName || cat.category || '',
+              _imageUrl: getImageUrl(p)
+            }));
+          });
+        });
+        return result;
+      }
+
+      function getCategories() {
+        if (!Array.isArray(window.PRODUCT_DATA_TABLE)) return [];
+        return window.PRODUCT_DATA_TABLE.map(function(cat) {
+          var name = cat.categoryName || cat.category;
+          var translated = (typeof window.t === 'function') ? window.t(cat.category) : null;
+          var label = (translated && translated !== cat.category) ? translated : name;
+          return { key: cat.category || cat.slug, name: label };
+        }).filter(function(c){ return c.key; });
+      }
+
+      var activeCategory = 'all';
+
+      function renderCategoryTabs() {
+        var container = document.getElementById('compare-category-tabs');
+        if (!container) return;
+        var cats = getCategories();
+        var html = '<button class="category-tab active px-3 py-1.5 text-xs font-bold whitespace-nowrap rounded-full border bg-primary text-white border-primary" data-cat="all">全部</button>';
+        cats.forEach(function(c) {
+          html += '<button class="category-tab px-3 py-1.5 text-xs font-medium whitespace-nowrap rounded-full border border-slate-200 dark:border-slate-700 hover:border-primary hover:text-primary transition-all" data-cat="' + esc(c.key) + '">' + esc(c.name) + '</button>';
+        });
+        container.innerHTML = html;
+        container.addEventListener('click', function(e) {
+          var btn = e.target.closest('.category-tab');
+          if (!btn) return;
+          activeCategory = btn.dataset.cat;
+          container.querySelectorAll('.category-tab').forEach(function(b) {
+            b.classList.remove('active', 'bg-primary', 'text-white', 'border-primary');
+          });
+          btn.classList.add('active', 'bg-primary', 'text-white', 'border-primary');
+          renderProductCards();
+        });
+      }
+
+      function renderProductCards() {
+        var grid = document.getElementById('compare-product-grid');
+        if (!grid) return;
+        var products = getProductList();
+        if (activeCategory !== 'all') {
+          products = products.filter(function(p) { return p._category === activeCategory; });
+        }
+        grid.innerHTML = products.map(function(p) {
+          var model = esc(p.model || '');
+          var name = esc(p.name || model);
+          var img = esc(p._imageUrl);
+          var isSelected = selected.some(function(s){ return s.model === p.model; });
+          return '<div class="compare-card bg-white dark:bg-slate-800 rounded-xl border-2 ' + (isSelected ? 'border-primary shadow-lg shadow-primary/20 selected' : 'border-slate-200 dark:border-slate-700') + ' overflow-hidden relative" data-model="' + model + '">' +
+            (isSelected ? '<div class="select-badge absolute top-2 right-2 w-6 h-6 bg-primary text-white rounded-full items-center justify-center z-10"><span class="material-symbols-outlined text-base">check</span></div>' : '') +
+            '<div class="aspect-[4/3] overflow-hidden bg-slate-100 dark:bg-slate-700">' +
+              '<img loading="lazy" alt="' + name + '" class="w-full h-full object-cover" src="' + img + '" onerror="this.src=\'/assets/images/products/default.webp\'">' +
+            '</div>' +
+            '<div class="p-3">' +
+              '<h3 class="text-sm font-bold mb-0.5 text-slate-900 dark:text-white truncate">' + name + '</h3>' +
+              '<p class="text-[10px] text-slate-400 mb-2">' + esc(model) + '</p>' +
+              '<button class="compare-toggle w-full py-2 rounded-lg text-xs font-bold transition-all ' +
+                (isSelected ? 'bg-primary/10 text-primary border border-primary' : 'bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-300 hover:bg-primary hover:text-white border border-transparent') +
+                '">' +
+                (isSelected ? '✓ 已选' : '+ 对比') +
+              '</button>' +
+            '</div>' +
+          '</div>';
+        }).join('');
+        grid.querySelectorAll('.compare-card').forEach(function(card) {
+          card.addEventListener('click', function() {
+            var model = this.dataset.model;
+            var products = getProductList();
+            var product = products.find(function(p){ return p.model === model; });
+            if (!product) return;
+            toggleSelect(product);
+          });
+        });
+      }
+
+      function toggleSelect(product) {
+        var idx = selected.findIndex(function(s){ return s.model === product.model; });
+        if (idx >= 0) {
+          selected.splice(idx, 1);
+        } else {
+          if (selected.length >= MAX_COMPARE) { showToast('最多选择 ' + MAX_COMPARE + ' 款产品'); return; }
+          selected.push(product);
+        }
+        renderProductCards();
+        renderCompareBar();
+        renderComparisonTable();
+        updateEmptyState();
+      }
+
+      function removeSelected(model) {
+        selected = selected.filter(function(s){ return s.model !== model; });
+        renderProductCards();
+        renderCompareBar();
+        renderComparisonTable();
+        updateEmptyState();
+      }
+
+      function renderCompareBar() {
+        var bar = document.getElementById('compare-bar');
+        var items = document.getElementById('compare-bar-items');
+        var countEl = document.getElementById('compare-count');
+        if (!bar || !items) return;
+        if (selected.length === 0) { bar.classList.add('hidden'); return; }
+        bar.classList.remove('hidden');
+        countEl.textContent = selected.length;
+        items.innerHTML = selected.map(function(p) {
+          return '<div class="flex items-center gap-1.5 bg-slate-50 dark:bg-slate-700 rounded-lg px-2 py-1.5 flex-shrink-0">' +
+            '<img src="' + esc(p._imageUrl) + '" class="w-6 h-6 rounded object-cover" onerror="this.src=\'/assets/images/products/default.webp\'">' +
+            '<span class="text-xs font-bold text-slate-900 dark:text-white truncate max-w-[80px]">' + esc(p.name || p.model) + '</span>' +
+            '<button class="remove-compare flex-shrink-0 text-slate-400 hover:text-red-500" data-model="' + esc(p.model) + '">' +
+              '<span class="material-symbols-outlined text-sm">close</span>' +
+            '</button>' +
+          '</div>';
+        }).join('');
+        items.querySelectorAll('.remove-compare').forEach(function(btn) {
+          btn.addEventListener('click', function(e) { e.stopPropagation(); removeSelected(this.dataset.model); });
+        });
+      }
+
+      var clearBtn = document.getElementById('compare-clear-btn');
+      if (clearBtn) {
+        clearBtn.addEventListener('click', function() {
+          selected = [];
+          renderProductCards(); renderCompareBar(); renderComparisonTable(); updateEmptyState();
+        });
+      }
+
+      var COMPARE_ROWS = [
+        { key: 'name', label: '产品名称', fn: function(p){ return p.name || p.model || '—'; } },
+        { key: 'model', label: '型号', fn: function(p){ return p.model || '—'; } },
+        { key: 'category', label: '分类', fn: function(p){ return p.subCategory || p._categoryName || '—'; } },
+        { key: 'power', label: '功率', fn: function(p){ return p.power || '—'; } },
+        { key: 'voltage', label: '电压', fn: function(p){ return p.voltage || '—'; } },
+        { key: 'dimensions', label: '尺寸', fn: function(p){ return p.dimensions || '—'; } },
+        { key: 'throughput', label: '产能', fn: function(p){ return p.throughput || '—'; } },
+        { key: 'averageTime', label: '加工时间', fn: function(p){ return p.averageTime || '—'; } },
+        { key: 'weight', label: '净重', fn: function(p){ return p.weight || '—'; } },
+        { key: 'highlights', label: '核心亮点', fn: function(p){ return p.highlights || p.description || '—'; } },
+        { key: 'specifications', label: '规格参数', fn: function(p){
+          if (!p.specifications) return '—';
+          if (typeof p.specifications === 'string') return p.specifications;
+          if (Array.isArray(p.specifications)) return p.specifications.join('、');
+          return JSON.stringify(p.specifications);
+        }}
+      ];
+
+      function renderComparisonTable() {
+        var section = document.getElementById('comparison-section');
+        var tableContainer = document.getElementById('comparison-table');
+        if (!section || !tableContainer) return;
+        if (selected.length < 2) { section.classList.add('hidden'); return; }
+        section.classList.remove('hidden');
+
+        var colCount = selected.length;
+        var headerHTML = '<table class="w-full min-w-[480px]"><thead><tr>' +
+          '<th class="text-left px-4 py-3 text-xs font-bold text-slate-500 dark:text-slate-400 bg-slate-50 dark:bg-slate-900/50 min-w-[100px]">参数</th>';
+        selected.forEach(function(p) {
+          headerHTML += '<th class="px-3 py-3 text-center bg-slate-50 dark:bg-slate-900/50">' +
+            '<div class="flex flex-col items-center gap-1">' +
+              '<img src="' + esc(p._imageUrl) + '" class="w-12 h-12 rounded-lg object-cover" onerror="this.src=\'/assets/images/products/default.webp\'">' +
+              '<p class="text-xs font-bold text-slate-900 dark:text-white">' + esc(p.name || p.model) + '</p>' +
+            '</div></th>';
+        });
+        headerHTML += '</tr></thead><tbody>';
+
+        var bodyHTML = '';
+        COMPARE_ROWS.forEach(function(row, ri) {
+          var values = selected.map(function(p){ return String(row.fn(p)); });
+          var allSame = values.every(function(v){ return v === values[0]; });
+          var bgClass = ri % 2 === 0 ? '' : 'bg-slate-50/50 dark:bg-slate-800/50';
+          bodyHTML += '<tr class="' + bgClass + ' border-t border-slate-100 dark:border-slate-700/50">' +
+            '<td class="px-4 py-2.5 text-xs font-bold text-slate-700 dark:text-slate-300 whitespace-nowrap">' + row.label + '</td>';
+          selected.forEach(function(p) {
+            var val = row.fn(p);
+            var cellClass = (!allSame) ? 'diff-highlight text-primary' : '';
+            bodyHTML += '<td class="px-3 py-2.5 text-xs text-center ' + cellClass + '">' + esc(val) + '</td>';
+          });
+          bodyHTML += '</tr>';
+        });
+        tableContainer.innerHTML = headerHTML + bodyHTML + '</tbody></table>';
+      }
+
+      function updateEmptyState() {
+        var empty = document.getElementById('compare-empty');
+        if (!empty) return;
+        empty.classList.toggle('hidden', selected.length >= 2);
+      }
+
+      function showToast(msg) {
+        var toast = document.createElement('div');
+        toast.className = 'fixed top-[120px] right-4 bg-slate-900 dark:bg-white text-white dark:text-slate-900 px-5 py-2.5 rounded-xl shadow-xl z-[100] text-xs font-medium transition-all duration-300';
+        toast.style.opacity = '0'; toast.style.transform = 'translateY(-10px)';
+        toast.textContent = msg;
+        document.body.appendChild(toast);
+        requestAnimationFrame(function() { toast.style.opacity = '1'; toast.style.transform = 'translateY(0)'; });
+        setTimeout(function() {
+          toast.style.opacity = '0'; toast.style.transform = 'translateY(-10px)';
+          setTimeout(function(){ toast.remove(); }, 300);
+        }, 2000);
+      }
+
+      function initCompare() {
+        if (Array.isArray(window.PRODUCT_DATA_TABLE) && window.PRODUCT_DATA_TABLE.length > 0) {
+          renderCategoryTabs(); renderProductCards();
+        } else {
+          fetch('/api/cms/products-data', { cache: 'no-store' })
+            .then(function(r){ return r.json(); })
+            .then(function(data) {
+              window.PRODUCT_DATA_TABLE = data;
+              window.dispatchEvent(new Event('product-data-ready'));
+              renderCategoryTabs(); renderProductCards();
+            })
+            .catch(function(err) { console.error('[Compare] Failed:', err); });
+        }
+      }
+
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initCompare);
+      } else { initCompare(); }
+      document.addEventListener('spa:load', initCompare);
+      window.addEventListener('product-data-ready', function() { renderCategoryTabs(); renderProductCards(); });
+    })();
+    </script>
+
+    <script src="/assets/js/utils/device-utils.js"></script>
+    <script src="/assets/js/spa-router.js"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        if (window.SpaRouter && typeof window.SpaRouter.init === "function") {
+          window.SpaRouter.init();
+        }
+      });
+    </script>
+    <script defer src="/assets/js/ui/floating-actions.js"></script>
+  </body>
+</html>
