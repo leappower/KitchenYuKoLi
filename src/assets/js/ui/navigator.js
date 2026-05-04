@@ -75,20 +75,7 @@
             activeClass: n
           })
         }
-        if (t.hasDropdown && e.SolutionsDropdown && "solutions" === t.id) {
-          if ("pc" === r) return e.SolutionsDropdown.renderPC({
-            href: i,
-            labelKey: t.key,
-            label: t.label,
-            activeClass: n
-          });
-          if ("tablet" === r) return e.SolutionsDropdown.renderTablet({
-            href: i,
-            labelKey: t.key,
-            label: t.label,
-            activeClass: n
-          })
-        }
+
         if (t.hasDropdown && e.ApplicationsDropdown && "applications" === t.id) {
           if ("pc" === r) return e.ApplicationsDropdown.renderPC({
             href: i,
@@ -151,7 +138,7 @@
   }
 
   function i() {
-    e.DropdownBaseStyles && e.DropdownBaseStyles.inject(), e.ProductsDropdown && e.ProductsDropdown.injectAllStyles(), e.SolutionsDropdown && e.SolutionsDropdown.injectAllStyles(), e.ApplicationsDropdown && e.ApplicationsDropdown.injectAllStyles(), e.SupportDropdown && e.SupportDropdown.injectAllStyles(), e.AboutDropdown && e.AboutDropdown.injectAllStyles(), e.ContactDropdown && e.ContactDropdown.injectAllStyles(),
+    e.DropdownBaseStyles && e.DropdownBaseStyles.inject(), e.ProductsDropdown && e.ProductsDropdown.injectAllStyles(), e.ApplicationsDropdown && e.ApplicationsDropdown.injectAllStyles(), e.SupportDropdown && e.SupportDropdown.injectAllStyles(), e.AboutDropdown && e.AboutDropdown.injectAllStyles(), e.ContactDropdown && e.ContactDropdown.injectAllStyles(),
       function() {
         if (!document.getElementById("nav-logo-styles")) {
           var e = document.createElement("style");
@@ -257,7 +244,7 @@
     })(h[w]);
     document.addEventListener("click", function(e) {
       b(e.target.closest(".prod-dropdown-wrap, .sol-dropdown-wrap, .app-dropdown-wrap, .sup-dropdown-wrap, .abt-dropdown-wrap, .cnt-dropdown-wrap") || null)
-    }, !0), e.ProductsDropdown && e.ProductsDropdown.initDropdownClick(), e.SolutionsDropdown && e.SolutionsDropdown.initDropdownClick(), e.ApplicationsDropdown && e.ApplicationsDropdown.initDropdownClick(), e.SupportDropdown && e.SupportDropdown.initDropdownClick(), e.AboutDropdown && e.AboutDropdown.initDropdownClick(), e.ContactDropdown && e.ContactDropdown.initDropdownClick(), e.translationManager && ("function" == typeof e.translationManager.resetEventListeners && e.translationManager.resetEventListeners(), "function" == typeof e.translationManager.applyTranslations && e.translationManager.applyTranslations(), "function" == typeof e.translationManager.setupEventListeners && e.translationManager.setupEventListeners()), console.log("[navigator] MobileMenu exists:", !!e.SlideMenu, "| initToggle:", typeof(e.SlideMenu && e.SlideMenu.initToggle)), e.SlideMenu && ("function" == typeof e.SlideMenu.initToggle && (e.SlideMenu.initToggle(), console.log("[navigator] MobileMenu.initToggle() called")), "function" == typeof e.SlideMenu.initSmartHeader && e.SlideMenu.initSmartHeader());
+    }, !0), e.ProductsDropdown && e.ProductsDropdown.initDropdownClick(), e.ApplicationsDropdown && e.ApplicationsDropdown.initDropdownClick(), e.SupportDropdown && e.SupportDropdown.initDropdownClick(), e.AboutDropdown && e.AboutDropdown.initDropdownClick(), e.ContactDropdown && e.ContactDropdown.initDropdownClick(), e.translationManager && ("function" == typeof e.translationManager.resetEventListeners && e.translationManager.resetEventListeners(), "function" == typeof e.translationManager.applyTranslations && e.translationManager.applyTranslations(), "function" == typeof e.translationManager.setupEventListeners && e.translationManager.setupEventListeners()), console.log("[navigator] MobileMenu exists:", !!e.SlideMenu, "| initToggle:", typeof(e.SlideMenu && e.SlideMenu.initToggle)), e.SlideMenu && ("function" == typeof e.SlideMenu.initToggle && (e.SlideMenu.initToggle(), console.log("[navigator] MobileMenu.initToggle() called")), "function" == typeof e.SlideMenu.initSmartHeader && e.SlideMenu.initSmartHeader());
     var m = document.getElementById("tablet-search-toggle");
     m && m.addEventListener("click", function(t) {
       t.preventDefault(), t.stopPropagation(), e.SlideMenu && "function" == typeof e.SlideMenu.openMobileSearch && e.SlideMenu.openMobileSearch()
@@ -287,7 +274,7 @@
     updateActive: function(a) {
       a = a || "";
       var o = window.location.pathname.replace(/\/$/, "") || "/";
-      e.DropdownBaseStyles && e.DropdownBaseStyles.inject(), e.ProductsDropdown && e.ProductsDropdown.injectAllStyles && e.ProductsDropdown.injectAllStyles(), e.SolutionsDropdown && e.SolutionsDropdown.injectAllStyles && e.SolutionsDropdown.injectAllStyles(), e.ApplicationsDropdown && e.ApplicationsDropdown.injectAllStyles && e.ApplicationsDropdown.injectAllStyles(), e.SupportDropdown && e.SupportDropdown.injectAllStyles && e.SupportDropdown.injectAllStyles(), e.AboutDropdown && e.AboutDropdown.injectAllStyles && e.AboutDropdown.injectAllStyles(), e.ContactDropdown && e.ContactDropdown.injectAllStyles && e.ContactDropdown.injectAllStyles();
+      e.DropdownBaseStyles && e.DropdownBaseStyles.inject(), e.ProductsDropdown && e.ProductsDropdown.injectAllStyles && e.ProductsDropdown.injectAllStyles(), e.ApplicationsDropdown && e.ApplicationsDropdown.injectAllStyles && e.ApplicationsDropdown.injectAllStyles(), e.SupportDropdown && e.SupportDropdown.injectAllStyles && e.SupportDropdown.injectAllStyles(), e.AboutDropdown && e.AboutDropdown.injectAllStyles && e.AboutDropdown.injectAllStyles(), e.ContactDropdown && e.ContactDropdown.injectAllStyles && e.ContactDropdown.injectAllStyles();
       var r = document.querySelectorAll("header nav a[data-i18n], header nav a.prod-dropdown-trigger, header nav a.sol-dropdown-trigger, header nav a.app-dropdown-trigger, header nav a.sup-dropdown-trigger, header nav a.abt-dropdown-trigger, header nav a.cnt-dropdown-trigger");
       if (r.length > 0)
         for (var n = 0; n < r.length; n++) {
@@ -361,6 +348,26 @@
   }, document.addEventListener("spa:load", function() {
     document.querySelector("header") || i();
     var e = document.getElementById("mobile-header");
-    e && e.classList.remove("header-hidden"), setTimeout(function() { window.SlideMenu && (window.SlideMenu.initToggle && window.SlideMenu.initToggle(), window.SlideMenu.initSmartHeader && window.SlideMenu.initSmartHeader()) }, 0)
-  })
+    e && e.classList.remove("header-hidden"), setTimeout(function() { window.SlideMenu && (window.SlideMenu.initToggle && window.SlideMenu.initToggle(), window.SlideMenu.initSmartHeader && window.SlideMenu.initSmartHeader()) }, 0), p()
+  }), function p() {
+    if (document.getElementById("mobile-bottom-bar")) return;
+    if (window.innerWidth >= 768) return;
+    var bar = document.createElement("nav");
+    bar.id = "mobile-bottom-bar";
+    bar.setAttribute("aria-label", "Quick navigation");
+    bar.style.cssText = "position:fixed;bottom:0;left:0;right:0;z-index:var(--z-header,1000);height:56px;display:flex;align-items:center;justify-content:space-around;background:rgba(255,255,255,0.92);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-top:1px solid rgba(226,232,240,0.8);padding:0 8px;padding-bottom:env(safe-area-inset-bottom,0);";
+    bar.innerHTML = '<a href="' + (window.BASE_PATH || "") + '/products/" style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;text-decoration:none;color:#475569;font-size:10px;font-weight:600;padding:4px 12px;"><span style="font-size:20px;line-height:1;">🏠</span><span>产品</span></a>' + '<a href="' + (window.BASE_PATH || "") + '/applications/" style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;text-decoration:none;color:#475569;font-size:10px;font-weight:600;padding:4px 12px;"><span style="font-size:20px;line-height:1;">📊</span><span>场景</span></a>' + '<a href="' + (window.BASE_PATH || "") + '/profit-calculator/" style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;text-decoration:none;color:#475569;font-size:10px;font-weight:600;padding:4px 12px;"><span style="font-size:20px;line-height:1;">💰</span><span>回报</span></a>' + '<a href="https://api.whatsapp.com/send/?phone=8613163756465&amp;text=Hi%2C%20I%27m%20interested%20in%20YuKoLi%20commercial%20kitchen%20equipment.%20Please%20help%20me%20find%20the%20right%20machine." target="_blank" rel="noopener" style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;text-decoration:none;color:#16a34a;font-size:10px;font-weight:700;background:#f0fdf4;border-radius:12px;padding:4px 14px;"><span style="font-size:20px;line-height:1;">💬</span><span>WhatsApp</span></a>';
+    document.body.appendChild(bar);
+    if (!document.getElementById("mobile-bottom-bar-spacer")) {
+      var spacer = document.createElement("div");
+      spacer.id = "mobile-bottom-bar-spacer";
+      spacer.style.cssText = "height:56px;flex-shrink:0;";
+      var main = document.getElementById("spa-content");
+      if (main && main.parentNode) { main.parentNode.insertBefore(spacer, main.nextSibling); }
+    }
+    var styleEl = document.createElement("style");
+    styleEl.id = "mobile-bottom-bar-dark";
+    styleEl.textContent = "html.dark #mobile-bottom-bar{background:rgba(30,41,59,0.92);border-top-color:rgba(71,85,105,0.4);}html.dark #mobile-bottom-bar a{color:#cbd5e1;}html.dark #mobile-bottom-bar a:last-child{background:rgba(22,163,74,0.15);color:#4ade80;}";
+    document.head.appendChild(styleEl)
+  }()
 }(window);
