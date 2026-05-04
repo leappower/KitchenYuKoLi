@@ -76,13 +76,7 @@
     var message = opts.message || "Hi YuKoLi";
     var source = opts.source || "";
 
-    // Build source tracking line
-    var cleanPath = global.location.pathname.replace(/\/index-(pc|mobile|tablet)\.html$/, "/");
-    if (!cleanPath || cleanPath === "/") cleanPath = "/home/";
-    var trackingLine = global.location.hostname + cleanPath;
-    if (source) trackingLine += " [" + source + "]";
-
-    var text = message + "\n---\n" + trackingLine;
+    var text = message;
     return "https://wa.me/" + WHATSAPP_NUMBER + "?text=" + encodeURIComponent(text);
   }
 
