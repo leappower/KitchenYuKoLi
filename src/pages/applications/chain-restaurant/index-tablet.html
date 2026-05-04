@@ -1,0 +1,561 @@
+<!doctype html>
+
+<html class="light" lang="zh-CN">
+  <head>
+    <link rel="canonical" href="/applications/chain-restaurant/" />
+    <link rel="alternate" media="only screen and (max-width: 767px)" href="/applications/chain-restaurant/index-mobile.html" />
+    <link
+      rel="alternate"
+      media="only screen and (min-width: 768px) and (max-width: 1279px)"
+      href="/applications/chain-restaurant/index-tablet.html"
+    />
+    <link rel="alternate" media="only screen and (min-width: 1280px)" href="/applications/chain-restaurant/index-pc.html" />
+    <script>
+      (function () {
+        if (window.__redirectChecked) return;
+        window.__redirectChecked = true;
+        var urlParams = new URLSearchParams(location.search);
+        var cleanUrl = urlParams.get("clean-url");
+        if (cleanUrl) {
+          history.replaceState({}, "", cleanUrl);
+          return;
+        }
+        if (window.__spaNavigating) return;
+        var currentFile = location.pathname.split("/").pop();
+        if (window.DeviceUtils && window.DeviceUtils.isDirectoryURL()) return;
+        if (window.DeviceUtils && window.DeviceUtils.shouldRedirect(currentFile)) {
+          var deviceType = window.DeviceUtils.getDeviceType();
+          var targetFile =
+            deviceType === window.DeviceUtils.DeviceType.MOBILE
+              ? "index-mobile.html"
+              : deviceType === window.DeviceUtils.DeviceType.TABLET
+                ? "index-tablet.html"
+                : "index-pc.html";
+          location.href = targetFile;
+        }
+      })();
+    </script>
+    <meta charset="utf-8" />
+    <meta name="description" content="YuKoLi 连锁餐饮标准化解决方案 — 智能炒菜机、电磁大炒炉、汤锅系列，1名厨工日出餐500-5000份，出品一致性99.9%，投资回收期6-12个月。" />
+    <meta name="keywords" content="连锁餐饮,快餐连锁,火锅连锁,智能厨房,自动化炒菜机,商用厨房设备,标准化出餐" />
+    <meta property="og:title" content="YuKoLi | 连锁餐饮标准化解决方案" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title data-i18n="chain_restaurant_page_title">YuKoLi | 连锁餐饮标准化解决方案</title>
+    <link rel="preload" href="/assets/fonts/local-fonts.css" as="style" />
+    <link rel="preload" href="/assets/css/styles.css" as="style" />
+    <link rel="preload" href="/assets/css/tailwind.css" as="style" />
+    <link href="/assets/fonts/local-fonts.css" rel="stylesheet" />
+    <link rel="stylesheet" href="/assets/css/styles.css" />
+    <link rel="stylesheet" href="/assets/css/tailwind.css" />
+    <link rel="stylesheet" href="/assets/css/z-index-system.css" />
+    <link rel="stylesheet" href="/assets/css/performance-optimizations.css" />
+    <script>
+      (function () {
+        if (localStorage.getItem("darkMode") === "true") document.documentElement.classList.add("dark");
+      })();
+    </script>
+    <link rel="stylesheet" href="/assets/css/skeleton.css" />
+    <link rel="icon" href="/assets/images/logo_header.webp" type="image/webp" />
+  </head>
+  <body
+    class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 antialiased transition-colors duration-300 overflow-x-clip"
+  >
+    <navigator
+      data-component="navigator"
+      data-variant="tablet"
+      data-active="applications"
+      data-cta-text-key="nav_get_quote"
+      data-cta-href="/quote"
+    ></navigator>
+
+    <main id="spa-content">
+      <!-- ═══ Hero Section ═══ -->
+      <section class="relative py-12 overflow-hidden">
+        <div
+          class="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-orange-100/30 dark:from-primary/10 dark:to-orange-900/20"
+        ></div>
+        <div class="relative max-w-4xl mx-auto px-6">
+          <div class="flex flex-col gap-8">
+            <div class="flex flex-col gap-4">
+              <div
+                class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-primary/10 text-primary text-xs font-bold uppercase tracking-wider w-fit"
+              >
+                <span class="material-symbols-outlined text-sm">store</span>
+                <span data-i18n="chain_restaurant_hero_badge">连锁餐饮解决方案</span>
+              </div>
+              <h1 class="text-4xl font-black leading-tight tracking-tighter" data-i18n="chain_restaurant_hero_title">
+                连锁餐饮<br />
+                <span class="text-primary" data-i18n="chain_restaurant_hero_title_highlight">标准化解决方案</span>
+              </h1>
+              <p class="text-lg text-slate-600 dark:text-slate-400 leading-relaxed" data-i18n="chain_restaurant_hero_desc">
+                1 名厨工操作全套设备，日出餐 <span class="text-primary font-bold">500-5000</span> 份，出品一致性 <span class="text-primary font-bold">99.9%</span>。
+              </p>
+              <div class="flex flex-wrap items-center gap-3 pt-2">
+                <a
+                  href="/quote/"
+                  class="bg-primary text-white px-6 py-3 rounded-xl font-bold flex items-center gap-2 hover:shadow-lg transition-all text-sm"
+                >
+                  <span data-i18n="chain_restaurant_cta_free_consult">免费咨询</span>
+                  <span class="material-symbols-outlined text-sm">arrow_forward</span>
+                </a>
+                <a
+                  href="https://wa.me/8613163756465"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="px-6 py-3 rounded-xl font-bold flex items-center gap-2 border-2 border-green-500 text-green-600 hover:bg-green-50 dark:hover:bg-green-900/20 transition-all text-sm"
+                >
+                  <span class="material-symbols-outlined text-sm">chat</span>
+                  WhatsApp
+                </a>
+              </div>
+            </div>
+            <div class="relative rounded-2xl overflow-hidden shadow-xl">
+              <!-- TODO: Replace with real photo -->
+              <img
+                loading="eager"
+                alt="连锁餐饮智能后厨实拍"
+                class="w-full h-[300px] object-cover"
+                src="/assets/images/applications/chain-restaurant-hero.webp"
+                onerror="this.src = 'https://images.unsplash.com/photo-1556910103-1c02745aae4d?w=800&h=500&fit=crop'"
+              />
+              <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+              <div class="absolute bottom-0 left-0 right-0 p-6">
+                <div class="flex items-center gap-3 text-white">
+                  <div class="flex -space-x-2">
+                    <div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center text-xs font-bold">
+                      500+
+                    </div>
+                  </div>
+                  <div>
+                    <p class="text-sm font-semibold" data-i18n="chain_restaurant_hero_social_proof_num">连锁品牌信赖</p>
+                    <p class="text-xs opacity-80" data-i18n="chain_restaurant_hero_social_proof_area">覆盖全国30+省份</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ═══ Pain Points ═══ -->
+      <section class="py-12 bg-slate-50 dark:bg-slate-900/50">
+        <div class="max-w-4xl mx-auto px-6">
+          <div class="text-center mb-10">
+            <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-red-100 dark:bg-red-900/20 text-red-600 text-xs font-bold uppercase tracking-widest mb-4">
+              <span class="material-symbols-outlined text-sm">warning</span>
+              <span data-i18n="chain_restaurant_pain_badge">行业痛点</span>
+            </span>
+            <h2 class="text-2xl font-black tracking-tight mb-2" data-i18n="chain_restaurant_pain_title">
+              连锁餐饮四大核心痛点
+            </h2>
+            <p class="text-slate-600 dark:text-slate-400" data-i18n="chain_restaurant_pain_desc">规模化扩张路上，每一步都可能踩坑</p>
+          </div>
+          <div class="grid md:grid-cols-2 gap-4">
+            <div class="bg-white dark:bg-slate-800 rounded-xl p-6 shadow-md flex gap-4">
+              <div class="w-12 h-12 rounded-lg bg-red-100 dark:bg-red-900/30 flex items-center justify-center flex-shrink-0">
+                <span class="material-symbols-outlined text-2xl text-red-600">sync_problem</span>
+              </div>
+              <div>
+                <h3 class="font-bold mb-2" data-i18n="chain_restaurant_pain_1_title">出品不稳定</h3>
+                <p class="text-sm text-slate-600 dark:text-slate-400" data-i18n="chain_restaurant_pain_1_desc">依赖厨师水平，不同门店口味波动大，差评中"味道不稳定"占 40%+</p>
+              </div>
+            </div>
+            <div class="bg-white dark:bg-slate-800 rounded-xl p-6 shadow-md flex gap-4">
+              <div class="w-12 h-12 rounded-lg bg-orange-100 dark:bg-orange-900/30 flex items-center justify-center flex-shrink-0">
+                <span class="material-symbols-outlined text-2xl text-orange-600">trending_down</span>
+              </div>
+              <div>
+                <h3 class="font-bold mb-2" data-i18n="chain_restaurant_pain_2_title">扩张瓶颈</h3>
+                <p class="text-sm text-slate-600 dark:text-slate-400" data-i18n="chain_restaurant_pain_2_desc">新店标准化难复制，每开一家都要重新培养厨师，培训 3-6 个月</p>
+              </div>
+            </div>
+            <div class="bg-white dark:bg-slate-800 rounded-xl p-6 shadow-md flex gap-4">
+              <div class="w-12 h-12 rounded-lg bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center flex-shrink-0">
+                <span class="material-symbols-outlined text-2xl text-blue-600">payments</span>
+              </div>
+              <div>
+                <h3 class="font-bold mb-2" data-i18n="chain_restaurant_pain_3_title">人力成本高</h3>
+                <p class="text-sm text-slate-600 dark:text-slate-400" data-i18n="chain_restaurant_pain_3_desc">厨师月薪 8000-15000 元，难招难留，人工成本占营收 25%-35%</p>
+              </div>
+            </div>
+            <div class="bg-white dark:bg-slate-800 rounded-xl p-6 shadow-md flex gap-4">
+              <div class="w-12 h-12 rounded-lg bg-purple-100 dark:bg-purple-900/30 flex items-center justify-center flex-shrink-0">
+                <span class="material-symbols-outlined text-2xl text-purple-600">health_and_safety</span>
+              </div>
+              <div>
+                <h3 class="font-bold mb-2" data-i18n="chain_restaurant_pain_4_title">食安合规压力</h3>
+                <p class="text-sm text-slate-600 dark:text-slate-400" data-i18n="chain_restaurant_pain_4_desc">油烟排放、消防安全、卫生监管趋严，门店越多风险越大</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ═══ Solution / Core Advantages ═══ -->
+      <section class="py-12">
+        <div class="max-w-4xl mx-auto px-6">
+          <div class="text-center mb-10">
+            <div
+              class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-primary/10 text-primary text-xs font-bold uppercase tracking-wider mb-4"
+            >
+              <span class="material-symbols-outlined text-sm">lightbulb</span>
+              <span data-i18n="chain_restaurant_solution_badge">核心优势</span>
+            </div>
+            <h2 class="text-2xl font-black tracking-tight mb-2" data-i18n="chain_restaurant_solution_title">
+              智能厨房全流程标准化
+            </h2>
+            <p class="text-slate-600 dark:text-slate-400" data-i18n="chain_restaurant_solution_desc">
+              实现"去厨师化"运营，全流程标准化、自动化、数据化
+            </p>
+          </div>
+          <div class="space-y-4 mb-10">
+            <div class="flex gap-4 bg-white dark:bg-slate-800 rounded-xl p-5 shadow-md">
+              <div class="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
+                <span class="material-symbols-outlined text-primary">local_fire_department</span>
+              </div>
+              <div>
+                <h4 class="font-bold" data-i18n="chain_restaurant_adv_1_title">爆炒能力</h4>
+                <p class="text-sm text-slate-600 dark:text-slate-400" data-i18n="chain_restaurant_adv_1_desc">300°C 瞬间升温，保留锅气，完美还原川湘粤菜爆炒口感</p>
+              </div>
+            </div>
+            <div class="flex gap-4 bg-white dark:bg-slate-800 rounded-xl p-5 shadow-md">
+              <div class="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
+                <span class="material-symbols-outlined text-primary">science</span>
+              </div>
+              <div>
+                <h4 class="font-bold" data-i18n="chain_restaurant_adv_2_title">菜品标准化</h4>
+                <p class="text-sm text-slate-600 dark:text-slate-400" data-i18n="chain_restaurant_adv_2_desc">菜谱 100-800+ 道，温度曲线/翻炒速度/加料时间全固化，出品一致性 99.9%</p>
+              </div>
+            </div>
+            <div class="flex gap-4 bg-white dark:bg-slate-800 rounded-xl p-5 shadow-md">
+              <div class="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
+                <span class="material-symbols-outlined text-primary">group_remove</span>
+              </div>
+              <div>
+                <h4 class="font-bold" data-i18n="chain_restaurant_adv_3_title">人员精简</h4>
+                <p class="text-sm text-slate-600 dark:text-slate-400" data-i18n="chain_restaurant_adv_3_desc">1 名厨工操作全套设备，替代 3-5 名传统厨师</p>
+              </div>
+            </div>
+            <div class="flex gap-4 bg-white dark:bg-slate-800 rounded-xl p-5 shadow-md">
+              <div class="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
+                <span class="material-symbols-outlined text-primary">eco</span>
+              </div>
+              <div>
+                <h4 class="font-bold" data-i18n="chain_restaurant_adv_4_title">节能环保</h4>
+                <p class="text-sm text-slate-600 dark:text-slate-400" data-i18n="chain_restaurant_adv_4_desc">电磁热效率 ≥90%，比燃气省 60% 燃料费，油烟排放达标</p>
+              </div>
+            </div>
+            <div class="flex gap-4 bg-white dark:bg-slate-800 rounded-xl p-5 shadow-md">
+              <div class="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
+                <span class="material-symbols-outlined text-primary">rocket_launch</span>
+              </div>
+              <div>
+                <h4 class="font-bold" data-i18n="chain_restaurant_adv_5_title">快速扩张</h4>
+                <p class="text-sm text-slate-600 dark:text-slate-400" data-i18n="chain_restaurant_adv_5_desc">新店培训厨工 1-2 周即可上岗，无需培养厨师，标准化快速复制</p>
+              </div>
+            </div>
+          </div>
+          <div class="grid grid-cols-2 gap-4">
+            <div class="bg-white dark:bg-slate-800 rounded-xl p-5 shadow-md text-center">
+              <div class="text-3xl font-black text-primary mb-1">99.9%</div>
+              <p class="text-sm text-slate-600 dark:text-slate-400" data-i18n="chain_restaurant_stat_consistency">出品一致性</p>
+            </div>
+            <div class="bg-white dark:bg-slate-800 rounded-xl p-5 shadow-md text-center">
+              <div class="text-3xl font-black text-primary mb-1">60%</div>
+              <p class="text-sm text-slate-600 dark:text-slate-400" data-i18n="chain_restaurant_stat_energy">燃料费节省</p>
+            </div>
+            <div class="bg-white dark:bg-slate-800 rounded-xl p-5 shadow-md text-center">
+              <div class="text-3xl font-black text-primary mb-1">1人</div>
+              <p class="text-sm text-slate-600 dark:text-slate-400" data-i18n="chain_restaurant_stat_staff">操作全套设备</p>
+            </div>
+            <div class="bg-white dark:bg-slate-800 rounded-xl p-5 shadow-md text-center">
+              <div class="text-3xl font-black text-primary mb-1">300°C</div>
+              <p class="text-sm text-slate-600 dark:text-slate-400" data-i18n="chain_restaurant_stat_heat">瞬间升温</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ═══ Hotpot Section ═══ -->
+      <section id="hotpot" class="py-12 bg-slate-50 dark:bg-slate-900/50">
+        <div class="max-w-4xl mx-auto px-6">
+          <div class="text-center mb-10">
+            <div
+              class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-orange-100 dark:bg-orange-900/30 text-orange-700 dark:text-orange-400 text-xs font-bold uppercase tracking-wider mb-4"
+            >
+              <span class="material-symbols-outlined text-sm">local_fire_department</span>
+              <span data-i18n="chain_restaurant_hotpot_badge">火锅专区</span>
+            </div>
+            <h2 class="text-2xl font-black tracking-tight mb-2" data-i18n="chain_restaurant_hotpot_title">
+              火锅连锁专属方案
+            </h2>
+            <p class="text-slate-600 dark:text-slate-400" data-i18n="chain_restaurant_hotpot_desc">
+              从底料炒制到汤锅温控，确保每家门店锅底 100% 一致
+            </p>
+          </div>
+          <div class="grid md:grid-cols-3 gap-4 mb-8">
+            <div class="bg-white dark:bg-slate-800 rounded-xl p-6 shadow-md">
+              <div class="w-12 h-12 rounded-lg bg-orange-100 dark:bg-orange-900/30 flex items-center justify-center mb-4">
+                <span class="material-symbols-outlined text-2xl text-orange-600">soup_kitchen</span>
+              </div>
+              <h3 class="font-bold mb-2" data-i18n="chain_restaurant_hotpot_1_title">底料炒制专用</h3>
+              <p class="text-sm text-slate-600 dark:text-slate-400" data-i18n="chain_restaurant_hotpot_1_desc">
+                精确控制炒制温度和时间，多种底料一键炒制，口味 100% 统一
+              </p>
+            </div>
+            <div class="bg-white dark:bg-slate-800 rounded-xl p-6 shadow-md">
+              <div class="w-12 h-12 rounded-lg bg-orange-100 dark:bg-orange-900/30 flex items-center justify-center mb-4">
+                <span class="material-symbols-outlined text-2xl text-orange-600">outdoor_grill</span>
+              </div>
+              <h3 class="font-bold mb-2" data-i18n="chain_restaurant_hotpot_2_title">汤锅系列</h3>
+              <p class="text-sm text-slate-600 dark:text-slate-400" data-i18n="chain_restaurant_hotpot_2_desc">
+                鸳鸯锅、单锅多规格，电磁精准控温
+              </p>
+            </div>
+            <div class="bg-white dark:bg-slate-800 rounded-xl p-6 shadow-md">
+              <div class="w-12 h-12 rounded-lg bg-orange-100 dark:bg-orange-900/30 flex items-center justify-center mb-4">
+                <span class="material-symbols-outlined text-2xl text-orange-600">thermostat</span>
+              </div>
+              <h3 class="font-bold mb-2" data-i18n="chain_restaurant_hotpot_3_title">自动温控保持</h3>
+              <p class="text-sm text-slate-600 dark:text-slate-400" data-i18n="chain_restaurant_hotpot_3_desc">
+                全程自动温控，无需人工看火，食安温度达标
+              </p>
+            </div>
+          </div>
+          <div class="overflow-x-auto">
+            <table class="w-full text-sm border-collapse min-w-[360px]">
+              <thead>
+                <tr class="border-b-2 border-orange-500">
+                  <th class="text-left p-3 font-bold" data-i18n="chain_restaurant_hotpot_compare_dim">对比维度</th>
+                  <th class="text-left p-3 font-bold text-red-600" data-i18n="chain_restaurant_hotpot_compare_traditional">传统火锅店</th>
+                  <th class="text-left p-3 font-bold text-green-600" data-i18n="chain_restaurant_hotpot_compare_yukoli">YuKoLi 方案</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="border-b border-slate-200 dark:border-slate-700">
+                  <td class="p-3 font-medium" data-i18n="chain_restaurant_hotpot_compare_1_dim">锅底一致性</td>
+                  <td class="p-3 text-slate-500" data-i18n="chain_restaurant_hotpot_compare_1_old">依赖厨师，偏差大</td>
+                  <td class="p-3 text-green-600 font-bold" data-i18n="chain_restaurant_hotpot_compare_1_new">数字化配方，100%</td>
+                </tr>
+                <tr class="border-b border-slate-200 dark:border-slate-700">
+                  <td class="p-3 font-medium" data-i18n="chain_restaurant_hotpot_compare_2_dim">后厨人力</td>
+                  <td class="p-3 text-slate-500" data-i18n="chain_restaurant_hotpot_compare_2_old">8-12 人/店</td>
+                  <td class="p-3 text-green-600 font-bold" data-i18n="chain_restaurant_hotpot_compare_2_new">4-6 人/店</td>
+                </tr>
+                <tr class="border-b border-slate-200 dark:border-slate-700">
+                  <td class="p-3 font-medium" data-i18n="chain_restaurant_hotpot_compare_3_dim">翻台率</td>
+                  <td class="p-3 text-slate-500" data-i18n="chain_restaurant_hotpot_compare_3_old">1.5-2 次/天</td>
+                  <td class="p-3 text-green-600 font-bold" data-i18n="chain_restaurant_hotpot_compare_3_new">3-4 次/天</td>
+                </tr>
+                <tr>
+                  <td class="p-3 font-medium" data-i18n="chain_restaurant_hotpot_compare_4_dim">食材损耗</td>
+                  <td class="p-3 text-slate-500" data-i18n="chain_restaurant_hotpot_compare_4_old">15%-20%/天</td>
+                  <td class="p-3 text-green-600 font-bold" data-i18n="chain_restaurant_hotpot_compare_4_new">5%-8%/天</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ═══ Equipment ═══ -->
+      <section class="py-12">
+        <div class="max-w-4xl mx-auto px-6">
+          <div class="text-center mb-8">
+            <h2 class="text-2xl font-black tracking-tight mb-2" data-i18n="chain_restaurant_equipment_title">推荐设备组合</h2>
+            <p class="text-slate-600 dark:text-slate-400" data-i18n="chain_restaurant_equipment_desc">为连锁餐饮量身定制的智能设备方案</p>
+          </div>
+          <div class="grid md:grid-cols-3 gap-4">
+            <div class="bg-white dark:bg-slate-800 rounded-xl overflow-hidden shadow-md">
+              <div class="h-36 bg-slate-200 dark:bg-slate-700">
+                <!-- TODO: Replace with real photo -->
+                <img
+                  loading="lazy"
+                  alt="台式自动炒菜机"
+                  class="w-full h-full object-cover"
+                  src="/assets/images/products/stir-fry-1.webp"
+                  onerror="this.style.display = 'none'"
+                />
+              </div>
+              <div class="p-4">
+                <h3 class="font-bold mb-1 text-sm" data-i18n="chain_restaurant_eq_1_title">台式自动炒菜机</h3>
+                <p class="text-xs text-slate-600 dark:text-slate-400 mb-3" data-i18n="chain_restaurant_eq_1_desc">2-3 台，100-800+ 菜谱，单次出餐 6-8 份</p>
+                <span class="text-xs bg-primary/10 text-primary px-2 py-1 rounded-full" data-i18n="chain_restaurant_eq_1_badge">主力推荐</span>
+              </div>
+            </div>
+            <div class="bg-white dark:bg-slate-800 rounded-xl overflow-hidden shadow-md">
+              <div class="h-36 bg-slate-200 dark:bg-slate-700">
+                <!-- TODO: Replace with real photo -->
+                <img
+                  loading="lazy"
+                  alt="电磁大炒炉"
+                  class="w-full h-full object-cover"
+                  src="/assets/images/products/induction-wok-1.webp"
+                  onerror="this.style.display = 'none'"
+                />
+              </div>
+              <div class="p-4">
+                <h3 class="font-bold mb-1 text-sm" data-i18n="chain_restaurant_eq_2_title">电磁大炒炉</h3>
+                <p class="text-xs text-slate-600 dark:text-slate-400 mb-3" data-i18n="chain_restaurant_eq_2_desc">1-2 台，300°C 瞬间升温，满足爆炒需求</p>
+                <span class="text-xs bg-primary/10 text-primary px-2 py-1 rounded-full" data-i18n="chain_restaurant_eq_2_badge">标配</span>
+              </div>
+            </div>
+            <div class="bg-white dark:bg-slate-800 rounded-xl overflow-hidden shadow-md">
+              <div class="h-36 bg-slate-200 dark:bg-slate-700">
+                <!-- TODO: Replace with real photo -->
+                <img
+                  loading="lazy"
+                  alt="汤锅/压力锅系列"
+                  class="w-full h-full object-cover"
+                  src="/assets/images/products/soup-pot-1.webp"
+                  onerror="this.style.display = 'none'"
+                />
+              </div>
+              <div class="p-4">
+                <h3 class="font-bold mb-1 text-sm" data-i18n="chain_restaurant_eq_3_title">汤锅/压力锅系列</h3>
+                <p class="text-xs text-slate-600 dark:text-slate-400 mb-3" data-i18n="chain_restaurant_eq_3_desc">鸳鸯锅、单锅多规格，自动温控</p>
+                <span class="text-xs bg-primary/10 text-primary px-2 py-1 rounded-full" data-i18n="chain_restaurant_eq_3_badge">火锅推荐</span>
+              </div>
+            </div>
+          </div>
+          <div class="grid md:grid-cols-2 gap-4 mt-4">
+            <div class="bg-white dark:bg-slate-800 rounded-xl p-5 shadow-md flex gap-4 items-center">
+              <div class="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
+                <span class="material-symbols-outlined text-primary text-2xl">dishwasher_gen</span>
+              </div>
+              <div>
+                <h3 class="font-bold text-sm" data-i18n="chain_restaurant_eq_4_title">自动洗碗机</h3>
+                <p class="text-xs text-slate-600 dark:text-slate-400" data-i18n="chain_restaurant_eq_4_desc">高温消毒，替代 2-3 名洗碗工</p>
+              </div>
+            </div>
+            <div class="bg-white dark:bg-slate-800 rounded-xl p-5 shadow-md flex gap-4 items-center">
+              <div class="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
+                <span class="material-symbols-outlined text-primary text-2xl">air</span>
+              </div>
+              <div>
+                <h3 class="font-bold text-sm" data-i18n="chain_restaurant_eq_5_title">油烟净化设备</h3>
+                <p class="text-xs text-slate-600 dark:text-slate-400" data-i18n="chain_restaurant_eq_5_desc">高效油烟过滤，排放达标，标配必备</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ═══ ROI Section ═══ -->
+      <section class="py-12 bg-slate-50 dark:bg-slate-900/50">
+        <div class="max-w-4xl mx-auto px-6">
+          <div class="text-center mb-8">
+            <h2 class="text-2xl font-black tracking-tight mb-2" data-i18n="chain_restaurant_roi_title">投资回报分析</h2>
+            <p class="text-slate-600 dark:text-slate-400" data-i18n="chain_restaurant_roi_desc">投资回收期 6-12 个月</p>
+          </div>
+          <div class="grid md:grid-cols-2 gap-6 mb-6">
+            <div class="bg-white dark:bg-slate-800 rounded-xl p-6 shadow-lg">
+              <h3 class="font-bold mb-4" data-i18n="chain_restaurant_roi_staff_title">人员配置对比</h3>
+              <div class="space-y-4">
+                <div>
+                  <div class="flex justify-between mb-1 text-sm">
+                    <span data-i18n="chain_restaurant_roi_traditional">传统厨房</span>
+                    <span class="text-red-600 font-bold">3-5 名厨师 + 2 名帮厨</span>
+                  </div>
+                  <div class="h-2.5 bg-slate-200 dark:bg-slate-700 rounded-full overflow-hidden">
+                    <div class="h-full bg-red-500 rounded-full" style="width: 100%"></div>
+                  </div>
+                </div>
+                <div>
+                  <div class="flex justify-between mb-1 text-sm">
+                    <span data-i18n="chain_restaurant_roi_yukoli">YuKoLi 厨房</span>
+                    <span class="text-green-600 font-bold">1 名厨工</span>
+                  </div>
+                  <div class="h-2.5 bg-slate-200 dark:bg-slate-700 rounded-full overflow-hidden">
+                    <div class="h-full bg-green-500 rounded-full" style="width: 20%"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="bg-white dark:bg-slate-800 rounded-xl p-6 shadow-lg">
+              <h3 class="font-bold mb-4" data-i18n="chain_restaurant_roi_savings_title">年度节省</h3>
+              <div class="space-y-4">
+                <div>
+                  <div class="flex justify-between mb-1 text-sm">
+                    <span data-i18n="chain_restaurant_roi_labor">人工成本节省</span>
+                    <span class="text-green-600 font-bold">↓ 20-60 万/年</span>
+                  </div>
+                  <div class="h-2.5 bg-slate-200 dark:bg-slate-700 rounded-full overflow-hidden">
+                    <div class="h-full bg-green-500 rounded-full" style="width: 83%"></div>
+                  </div>
+                </div>
+                <div>
+                  <div class="flex justify-between mb-1 text-sm">
+                    <span data-i18n="chain_restaurant_roi_energy">能源成本节省</span>
+                    <span class="text-green-600 font-bold">↓ 3-5 万/年</span>
+                  </div>
+                  <div class="h-2.5 bg-slate-200 dark:bg-slate-700 rounded-full overflow-hidden">
+                    <div class="h-full bg-green-500 rounded-full" style="width: 60%"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="bg-primary rounded-xl p-6 text-center">
+            <div class="text-4xl font-black text-white mb-1">6-12</div>
+            <p class="text-lg text-white/80" data-i18n="chain_restaurant_roi_payback">个月投资回收期</p>
+            <p class="text-xs text-white/60 mt-1" data-i18n="chain_restaurant_roi_payback_note">* 基于标准门店配置，实际数据因规模和区域差异而不同</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ═══ CTA Section ═══ -->
+      <section class="py-12 bg-primary">
+        <div class="max-w-4xl mx-auto text-center px-6">
+          <h2 class="text-2xl font-black text-white mb-4" data-i18n="chain_restaurant_cta_title">
+            开启您的连锁标准化之旅
+          </h2>
+          <p class="text-lg text-white/80 mb-6" data-i18n="chain_restaurant_cta_desc">
+            免费获取专属连锁餐饮智能厨房解决方案
+          </p>
+          <div class="flex flex-col sm:flex-row items-center justify-center gap-3">
+            <a
+              href="/quote/"
+              class="bg-white text-primary px-6 py-3 rounded-xl font-bold flex items-center gap-2 hover:shadow-lg transition-all text-sm"
+            >
+              <span data-i18n="chain_restaurant_cta_free_consult">免费咨询</span>
+              <span class="material-symbols-outlined text-sm">arrow_forward</span>
+            </a>
+            <a
+              href="https://wa.me/8613163756465"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="bg-green-500 text-white px-6 py-3 rounded-xl font-bold flex items-center gap-2 hover:bg-green-600 transition-all text-sm"
+            >
+              <span class="material-symbols-outlined text-sm">chat</span>
+              WhatsApp +86 13163756465
+            </a>
+            <a
+              href="/contact/"
+              class="px-6 py-3 rounded-xl font-bold flex items-center gap-2 border-2 border-white text-white hover:bg-white/10 transition-all text-sm"
+            >
+              <span class="material-symbols-outlined text-sm">phone</span>
+              <span data-i18n="chain_restaurant_cta_contact_sales">联系销售</span>
+            </a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer data-component="footer" data-variant="tablet" data-cta="true"></footer>
+
+    <script defer src="/assets/js/router.js"></script>
+    <script src="/assets/js/translations.js?v=20260429"></script>
+    <script src="/assets/js/ui/slide-menu.js"></script>
+    <script src="/assets/js/ui/dropdown-styles.js"></script>
+    <script src="/assets/js/ui/products-dropdown.js"></script>
+    <script src="/assets/js/ui/solutions-dropdown.js"></script>
+    <script src="/assets/js/ui/support-dropdown.js"></script>
+    <script src="/assets/js/ui/about-dropdown.js"></script>
+    <script src="/assets/js/ui/contact-dropdown.js"></script>
+    <script src="/assets/js/nav-config.js?v=20260415"></script>
+    <script src="/assets/js/ui/navigator.js"></script>
+    <script src="/assets/js/ui/footer.js"></script>
+    <script defer src="/assets/js/ui/floating-actions.js"></script>
+  </body>
+</html>
