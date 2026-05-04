@@ -188,9 +188,8 @@ app.get('/health', (req, res) => {
   });
 });
 
-// ═══ 301 Redirects: old application pages → new structure ═══
-// Legacy redirects kept for SEO transition for known route directories
-// Handles /home → /home/, /catalog → /catalog/, etc.
+// ═══ Trailing slash redirect for known route directories
+// Handles /home → /home/, /products → /products/, etc.
 app.use((req, res, next) => {
   // Skip if path already ends with /
   if (req.path.endsWith('/')) return next();

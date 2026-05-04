@@ -100,7 +100,6 @@ const ROUTES = [
   { slug: 'profit-calculator', navId: 'profit-calculator' },
   { slug: 'products/compare', navId: 'products' },
   { slug: 'catalog',      navId: 'catalog' },
-  { slug: 'roi',          navId: 'profit-calculator' },
   { slug: 'quote',        navId: 'quote' },
   { slug: 'support',      navId: 'support' },
   { slug: 'news',         navId: 'news' },
