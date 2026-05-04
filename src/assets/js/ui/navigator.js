@@ -320,25 +320,23 @@
         }
       }
     }
-  }, function p() {
-    if (document.getElementById("mobile-bottom-bar")) return;
-    if (window.innerWidth >= 768) return;
-    var bar = document.createElement("nav");
-    bar.id = "mobile-bottom-bar";
-    bar.setAttribute("aria-label", "Quick navigation");
-    bar.style.cssText = "position:fixed;bottom:0;left:0;right:0;z-index:var(--z-header,1000);height:56px;display:flex;align-items:center;justify-content:space-around;background:rgba(255,255,255,0.92);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-top:1px solid rgba(226,232,240,0.8);padding:0 8px;padding-bottom:env(safe-area-inset-bottom,0);";
-    bar.innerHTML = '<a href="' + (window.BASE_PATH || "") + '/products/" style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;text-decoration:none;color:#475569;font-size:10px;font-weight:600;padding:4px 12px;"><span style="font-size:20px;line-height:1;">🏠</span><span>产品</span></a>' + '<a href="' + (window.BASE_PATH || "") + '/applications/" style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;text-decoration:none;color:#475569;font-size:10px;font-weight:600;padding:4px 12px;"><span style="font-size:20px;line-height:1;">📊</span><span>场景</span></a>' + '<a href="' + (window.BASE_PATH || "") + '/profit-calculator/" style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;text-decoration:none;color:#475569;font-size:10px;font-weight:600;padding:4px 12px;"><span style="font-size:20px;line-height:1;">💰</span><span>回报</span></a>' + '<a href="https://api.whatsapp.com/send/?phone=8613163756465&amp;text=Hi%2C%20I%27m%20interested%20in%20YuKoLi%20commercial%20kitchen%20equipment.%20Please%20help%20me%20find%20the%20right%20machine." target="_blank" rel="noopener" style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;text-decoration:none;color:#16a34a;font-size:10px;font-weight:700;background:#f0fdf4;border-radius:12px;padding:4px 14px;"><span style="font-size:20px;line-height:1;">💬</span><span>WhatsApp</span></a>';
-    document.body.appendChild(bar);
-    if (!document.getElementById("mobile-bottom-bar-spacer")) {
-      var spacer = document.createElement("div");
-      spacer.id = "mobile-bottom-bar-spacer";
-      spacer.style.cssText = "height:56px;flex-shrink:0;";
-      var main = document.getElementById("spa-content");
-      if (main && main.parentNode) { main.parentNode.insertBefore(spacer, main.nextSibling); }
-    }
-    var styleEl = document.createElement("style");
-    styleEl.id = "mobile-bottom-bar-dark";
-    styleEl.textContent = "html.dark #mobile-bottom-bar{background:rgba(30,41,59,0.92);border-top-color:rgba(71,85,105,0.4);}html.dark #mobile-bottom-bar a{color:#cbd5e1;}html.dark #mobile-bottom-bar a:last-child{background:rgba(22,163,74,0.15);color:#4ade80;}";
-    document.head.appendChild(styleEl)
-  }()
+  };
+
+  // Mobile bottom bar (rendered from mobile-bottom-bar.js)
+  if (window.MobileBottomBar) window.MobileBottomBar.render();
+
+  // Re-init on SPA navigation
+  document.addEventListener("spa:load", function () {
+    document.querySelector("header") || i();
+    var hdr = document.getElementById("mobile-header");
+    if (hdr) hdr.classList.remove("header-hidden");
+    setTimeout(function () {
+      if (window.SlideMenu) {
+        if (window.SlideMenu.initToggle) window.SlideMenu.initToggle();
+        if (window.SlideMenu.initSmartHeader) window.SlideMenu.initSmartHeader();
+      }
+      if (window.MobileBottomBar) window.MobileBottomBar.render();
+    }, 0);
+  });
+
 }(window);
