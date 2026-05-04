@@ -102,7 +102,8 @@ if(localStorage.getItem('darkMode')==='true')document.documentElement.classList.
 
 <main id="spa-content" class="flex-1 px-4 py-5 pb-24 flex flex-col gap-4 overflow-x-hidden">
 
-  <!-- KPI Cards (2+1 layout) -->
+  <!-- KPI Cards -->
+  <section class="mb-8">
   <div class="grid grid-cols-2 gap-3">
     <div class="bg-white dark:bg-slate-900/50 p-4 rounded-xl border border-slate-200 dark:border-slate-800">
       <p class="text-slate-500 text-[10px] font-bold uppercase tracking-wider mb-1" data-i18n="Applications_5y_Applications">5Y Applications</p>
@@ -129,8 +130,10 @@ if(localStorage.getItem('darkMode')==='true')document.documentElement.classList.
       <div class="size-2 rounded-full bg-emerald-500 animate-pulse"></div>
     </div>
   </div>
+  </section>
 
-  <!-- Input Parameters (full width, always visible) -->
+  <!-- Input Parameters -->
+  <section class="mb-8">
   <div class="bg-white dark:bg-slate-900/50 p-4 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm">
     <div class="flex items-center gap-2 mb-4">
       <span class="material-symbols-outlined text-primary text-base">tune</span>
@@ -182,8 +185,10 @@ if(localStorage.getItem('darkMode')==='true')document.documentElement.classList.
       </button>
     </div>
   </div>
+  </section>
 
-  <!-- Confidence badge -->
+  <!-- Confidence Badge -->
+  <section class="mb-8">
   <div class="bg-primary p-4 rounded-xl text-white flex items-center gap-3">
     <div class="size-9 rounded-full bg-white/20 flex items-center justify-center flex-shrink-0">
       <span class="material-symbols-outlined text-sm">verified</span>
@@ -193,8 +198,10 @@ if(localStorage.getItem('darkMode')==='true')document.documentElement.classList.
       <h4 class="text-base font-black" data-i18n="Applications_98_4_accuracy">98.4% Accuracy</h4>
     </div>
   </div>
+  </section>
 
-  <!-- Results: collapsible on mobile -->
+  <!-- Results Chart -->
+  <section class="mb-8">
   <div class="bg-white dark:bg-slate-900/50 rounded-xl border border-slate-200 dark:border-slate-800 overflow-hidden">
     <button class="w-full flex items-center justify-between px-4 py-3 hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors" onclick="toggleResults()">
       <div class="flex items-center gap-2">
@@ -219,8 +226,10 @@ if(localStorage.getItem('darkMode')==='true')document.documentElement.classList.
       </div>
     </div>
   </div>
+  </section>
 
-  <!-- ESG & Labor charts stacked -->
+  <!-- ESG Profile -->
+  <section class="mb-8">
   <div class="bg-white dark:bg-slate-900/50 p-4 rounded-xl border border-slate-200 dark:border-slate-800">
     <h4 class="text-sm font-bold mb-3 flex items-center gap-2">
       <span class="inline-flex items-center gap-1"><span class="material-symbols-outlined text-primary text-base">eco</span>ESG Profile</span>
@@ -240,7 +249,10 @@ if(localStorage.getItem('darkMode')==='true')document.documentElement.classList.
       </div>
     </div>
   </div>
+  </section>
 
+  <!-- Labor Cost -->
+  <section class="mb-8">
   <div class="bg-white dark:bg-slate-900/50 p-4 rounded-xl border border-slate-200 dark:border-slate-800">
     <h4 class="text-sm font-bold mb-3 flex items-center gap-2">
       <span class="inline-flex items-center gap-1"><span class="material-symbols-outlined text-primary text-base">compare_arrows</span>Labor Cost</span>
@@ -257,6 +269,7 @@ if(localStorage.getItem('darkMode')==='true')document.documentElement.classList.
       </span>
     </div>
   </div>
+  </section>
 
 
 </main>
