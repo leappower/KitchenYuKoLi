@@ -7,7 +7,7 @@
   'use strict'
 
   /* ── Mock Data ──────────────────────────────────── */
-  var MOCK_CASES = [
+  var ROI_CASES = [
     { slug: 'manila-small-resto-labor-62', country: '🇵🇭 Philippines', industry: '小型餐饮', volume: '200-500', benefit: 'Labor Cost Reduction', dailyOutput: 350, laborBefore: 4, laborAfter: 2, monthlySaving: 'PHP 48,000', payback: 7.8, title: 'Manila 快餐店：引入炒菜机后人工成本降 62%', quote: '"以前每天炒菜 12 小时，现在只要 2.5 小时。"' },
     { slug: 'jakarta-central-kitchen-450', country: '🇮🇩 Indonesia', industry: '中央厨房', volume: '500-1000', benefit: 'Consistency', dailyOutput: 450, laborBefore: 11, laborAfter: 5, monthlySaving: 'IDR 18M', payback: 9.2, title: 'Jakarta 中央厨房：450 餐/天，出品一致性 97%', quote: '"口味终于稳定了，连锁店的投诉率下降了 80%。"' },
     { slug: 'hcmc-cloud-kitchen-compact', country: '🇻🇳 Vietnam', industry: '云厨房', volume: '<200', benefit: 'Space Saving', dailyOutput: 150, laborBefore: 3, laborAfter: 1, monthlySaving: 'VND 14M', payback: 5.5, title: '胡志明市云厨房：15㎡ 完成全品类出餐', quote: '"空间小但能做的菜很多，客户都以为是专业大厨房。"' },
@@ -166,7 +166,7 @@
    * Get filtered cases
    */
   function getFiltered() {
-    return MOCK_CASES.filter(function (c) {
+    return ROI_CASES.filter(function (c) {
       for (var key in activeFilters) {
         if (activeFilters[key] && c[key] !== activeFilters[key]) return false
       }
@@ -329,5 +329,5 @@
   }
 
   /* ── Auto-init based on data attribute ──────────── */
-  window.CaseGrid = { init: init, FILTERS: FILTERS, MOCK_CASES: MOCK_CASES }
+  window.CaseGrid = { init: init, FILTERS: FILTERS, ROI_CASES: ROI_CASES }
 })()

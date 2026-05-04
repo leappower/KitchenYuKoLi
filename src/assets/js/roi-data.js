@@ -1,5 +1,5 @@
 /**
- * mock-data.js — Mock data for development and static fallback
+ * roi-data.js — ROI reference data — savings coefficients, salaries, exchange rates, cases, WhatsApp templates
  *
  * Contains:
  * - ROI savings coefficient table
@@ -9,14 +9,14 @@
  * - Case studies (8 entries, shared with case-grid.js)
  * - WhatsApp pre-fill message templates
  *
- * All data is exported via window.MockData and individual window.* globals
+ * All data is exported via window.RoiData and individual window.* globals
  * for DataLoader fallback chain.
  */
 (function() {
   'use strict';
 
   // ── A. ROI Savings Coefficient Table ──────────────────────────────────
-  var MOCK_SAVINGS_TABLE = {
+  var ROI_SAVINGS_TABLE = {
     '招工难_智能炒菜机': { min: 0.45, mid: 0.52, max: 0.58 },
     '人工成本高_全套自动化': { min: 0.52, mid: 0.60, max: 0.68 },
     '出品不稳定_标准化设备': { min: 0.38, mid: 0.45, max: 0.52 },
@@ -25,7 +25,7 @@
   };
 
   // ── B. Default Salary References (5 countries) ────────────────────────
-  var MOCK_DEFAULT_SALARIES = {
+  var ROI_DEFAULT_SALARIES = {
     'Philippines': { monthly: 25000, currency: 'PHP', symbol: '₱' },
     'Indonesia':   { monthly: 4800000, currency: 'IDR', symbol: 'Rp' },
     'Vietnam':     { monthly: 7000000, currency: 'VND', symbol: '₫' },
@@ -34,7 +34,7 @@
   };
 
   // ── C. Equipment Investment Ranges (USD) ──────────────────────────────
-  var MOCK_EQUIPMENT_COST = {
+  var ROI_EQUIPMENT_COST = {
     '智能炒菜机': { minUSD: 3000, maxUSD: 8000 },
     '蒸饭柜':     { minUSD: 1500, maxUSD: 4000 },
     '洗碗机':     { minUSD: 2000, maxUSD: 5000 },
@@ -43,7 +43,7 @@
   };
 
   // ── D. Exchange Rates (simulated, 2025 median) ────────────────────────
-  window.MOCK_EXCHANGE_RATES = {
+  window.ROI_EXCHANGE_RATES = {
     base: 'USD',
     rates: {
       'PHP': 56.2,
@@ -58,7 +58,7 @@
   };
 
   // ── E. Case Studies (shared with case-grid.js) ────────────────────────
-  window.MOCK_CASES = {
+  window.ROI_CASES = {
     cases: [
       {
         id: 'case-01',
@@ -199,7 +199,7 @@
   };
 
   // ── F. WhatsApp Pre-fill Message Templates ────────────────────────────
-  var MOCK_WHATSAPP_TEMPLATES = {
+  var ROI_WHATSAPP_TEMPLATES = {
     'small-restaurant':  'Hi, I run a small restaurant (approx __ orders/day). I want to know the price for your smart cooking machines.',
     'central-kitchen':   'Hi, I am setting up a central kitchen. I need equipment for large volume production.',
     'chain-restaurant':  'Hi, I manage a chain restaurant with __ stores. I\'m looking for standardized cooking equipment.',
@@ -213,13 +213,13 @@
   };
 
   // ── Export ────────────────────────────────────────────────────────────
-  window.MockData = {
-    savingsTable:       MOCK_SAVINGS_TABLE,
-    salaries:           MOCK_DEFAULT_SALARIES,
-    equipmentCost:      MOCK_EQUIPMENT_COST,
-    exchangeRates:      window.MOCK_EXCHANGE_RATES,
-    cases:              window.MOCK_CASES,
-    whatsappTemplates:  MOCK_WHATSAPP_TEMPLATES
+  window.RoiData = {
+    savingsTable:       ROI_SAVINGS_TABLE,
+    salaries:           ROI_DEFAULT_SALARIES,
+    equipmentCost:      ROI_EQUIPMENT_COST,
+    exchangeRates:      window.ROI_EXCHANGE_RATES,
+    cases:              window.ROI_CASES,
+    whatsappTemplates:  ROI_WHATSAPP_TEMPLATES
   };
 
 })();

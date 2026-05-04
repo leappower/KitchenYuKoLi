@@ -33,13 +33,13 @@
     cases: {
       url: '/api/cases',
       localKey: 'yk_cases_data',
-      fallback: 'MOCK_CASES',  // reference to window.MOCK_CASES from mock-data.js
+      fallback: 'ROI_CASES',  // reference to window.ROI_CASES from roi-data.js
       versionField: 'cases'
     },
     exchangeRates: {
       url: '/api/exchange-rates',
       localKey: 'yk_exchange_rates',
-      fallback: 'MOCK_EXCHANGE_RATES',
+      fallback: 'ROI_EXCHANGE_RATES',
       versionField: null,  // uses TTL instead of version
       ttl: 24 * 60 * 60 * 1000  // 24 hours
     }
@@ -170,10 +170,10 @@
       .catch(function(err) {
         console.warn('[DataLoader] ' + type + ': network failed, using fallback', err);
         var fallback = null;
-        if (config.fallback === 'MOCK_CASES' && window.MOCK_CASES) {
-          fallback = window.MOCK_CASES;
-        } else if (config.fallback === 'MOCK_EXCHANGE_RATES' && window.MOCK_EXCHANGE_RATES) {
-          fallback = window.MOCK_EXCHANGE_RATES;
+        if (config.fallback === 'ROI_CASES' && window.ROI_CASES) {
+          fallback = window.ROI_CASES;
+        } else if (config.fallback === 'ROI_EXCHANGE_RATES' && window.ROI_EXCHANGE_RATES) {
+          fallback = window.ROI_EXCHANGE_RATES;
         } else if (config.fallback && window[config.fallback]) {
           fallback = window[config.fallback];
         } else if (type === 'nav' && window.NAV_CONFIG) {
