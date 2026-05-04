@@ -14,7 +14,7 @@
     fill: !1
   }, {
     id: "cases",
-    icon: "cases",
+    icon: "monitoring",
     key: "nav_cases",
     href: "/cases/",
     fill: !1

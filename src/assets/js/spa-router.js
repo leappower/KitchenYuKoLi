@@ -29,15 +29,18 @@
       "/products/other/": "/products/index.html",
       "/applications/": "/applications/index.html",
       "/applications/chain-restaurant/": "/applications/chain-restaurant/index.html",
+      "/applications/food-factory/": "/applications/food-factory/index.html",
       "/applications/central-kitchen/": "/applications/central-kitchen/index.html",
       "/applications/small-restaurant/": "/applications/small-restaurant/index.html",
       "/applications/canteen/": "/applications/canteen/index.html",
       "/applications/menu-lab/": "/applications/menu-lab/index.html",
-      "/applications/cloud-kitchen/": "/applications/cloud-kitchen/index.html",
+      "/applications/trust/": "/applications/trust/index.html",
+      "/cases/": "/cases/index.html",
+      "/profit-calculator/": "/profit-calculator/index.html",
+      "/products/compare/": "/products/compare/index.html",
       "/about/": "/about/index.html",
       "/news/detail/": "/news/detail-pc.html",
-      "/profit-calculator/": "/profit-calculator/index.html",
-      "/cases/": "/cases/index.html",
+      "/roi/": "/profit-calculator/index.html",
       "/quote/": "/quote/index.html",
       "/contact/": "/contact/index.html",
       "/news/": "/news/index.html",
@@ -49,7 +52,7 @@
       "/support/faq/": "/support/faq/index.html",
       "/thank-you/": "/thank-you/index.html",
       "/landing/": "/landing/index.html",
-
+      "/applications/cases/": "/cases/index.html",
     },
 
     // Category slugs used for /products/<slug>/ routing
@@ -409,7 +412,7 @@
       // Fallback: derive from current route path
       if (!activeNav) {
         var path = window.location.pathname.replace(/\/$/, "");
-        var map = { "/home": "home", "/products": "products", "/applications": "applications", "/cases": "cases", "/profit-calculator": "profit-calculator", "/support": "support", "/about": "about", "/contact": "contact" };
+        var map = { "/home": "home", "/products": "products", "/support": "support", "/about": "about", "/contact": "contact", "/cases": "cases", "/profit-calculator": "profit-calculator" };
         var best = "";
         for (var key in map) {
           if (path.indexOf(key) === 0 && key.length > best.length) best = key;
@@ -705,7 +708,13 @@
       var scripts = [];
       var path = pagePath.replace(/\/index-(pc|mobile|tablet)\.html$/, "/");
 
-
+      // Profit calculator needs Chart.js + pi-roi.js
+      if (path.indexOf("/profit-calculator/") !== -1 || path.indexOf("/roi/") !== -1) {
+        if (typeof global.Chart === "undefined") {
+          scripts.push({ src: "https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js", id: "spa-chart-js" });
+        }
+        scripts.push({ src: "/assets/js/ui/pi-roi.js", id: "spa-pi-roi" });
+      }
 
       // Support 页面需要 contact-channels 组件 + 微信弹窗
       if (path.indexOf("/support/") !== -1) {
@@ -718,11 +727,13 @@
         scripts.push({ src: "/assets/js/ui/pi-maps.js", id: "spa-pi-maps" });
       }
 
+      // Deploy 方案页面需要 deploy-roi.js
       if (/\/deploy-/.test(path)) {
+        scripts.push({ src: "/assets/js/ui/deploy-roi.js", id: "spa-deploy-roi" });
       }
 
       // Cases 页面需要 cases-page.js（筛选、modal、CTA）
-      if (path.indexOf("/applications/cases/") !== -1) {
+      if (path.indexOf("/cases/") !== -1 || path.indexOf("/applications/cases/") !== -1) {
         scripts.push({ src: "/assets/js/cases-page.js", id: "spa-cases-page" });
       }
 

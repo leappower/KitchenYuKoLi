@@ -188,7 +188,8 @@ app.get('/health', (req, res) => {
   });
 });
 
-// Trailing slash redirect for known route directories
+// ═══ 301 Redirects: old application pages → new structure ═══
+// Legacy redirects kept for SEO transition for known route directories
 // Handles /home → /home/, /catalog → /catalog/, etc.
 app.use((req, res, next) => {
   // Skip if path already ends with /
@@ -257,18 +258,21 @@ app.get('/', (req, res) => {
 
 // SPA fallback with proper 404 handling
 // Known SPA routes — always serve the root SPA shell, let the frontend router handle them
-const SPA_ROUTES = ['/home', '/catalog', '/about', '/contact', '/quote',
-  '/applications', '/products', '/support', '/news', '/thank-you', '/landing',
-  '/product-detail',
-  // Applications
-  '/applications/chain-restaurant', '/applications/central-kitchen',
+const SPA_ROUTES = ['/home', '/products', '/applications', '/cases', '/profit-calculator', '/products/compare', '/about', '/contact', '/quote',
+  '/support', '/news', '/thank-you', '/landing',
+  // New structure (P0 trust page first)
+  '/applications/trust',
+  // New structure (P1 high-value pages)
+  '/applications/chain-restaurant', '/applications/food-factory', '/applications/central-kitchen',
+  // New structure (P2 volume pages)
   '/applications/small-restaurant', '/applications/menu-lab', '/applications/canteen',
   '/applications/cloud-kitchen',
-  // New top-level pages
-  '/cases', '/profit-calculator',
+  // Product detail (dynamic PDP)
+  '/products/detail',
   // Support sub-pages
   '/support/installation', '/support/warranty', '/support/spare-parts', '/support/training', '/support/faq',
-  '/products/cutting', '/products/stirfry', '/products/frying', '/products/stewing', '/products/steaming', '/products/other'];
+  // ROI legacy redirect
+  '/roi'];
 
 app.get('*', (req, res) => {
   // Never intercept API routes
