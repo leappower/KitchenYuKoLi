@@ -2,6 +2,31 @@
 <html class="light" lang="zh-CN">
 <head>
 <meta charset="utf-8"/>
+    <script>
+      (function () {
+        if (window.__redirectChecked) return;
+        window.__redirectChecked = true;
+        var urlParams = new URLSearchParams(location.search);
+        var cleanUrl = urlParams.get("clean-url");
+        if (cleanUrl) {
+          history.replaceState({}, "", cleanUrl);
+          return;
+        }
+        if (window.__spaNavigating) return;
+        var currentFile = location.pathname.split("/").pop();
+        if (window.DeviceUtils && window.DeviceUtils.isDirectoryURL()) return;
+        if (window.DeviceUtils && window.DeviceUtils.shouldRedirect(currentFile)) {
+          var deviceType = window.DeviceUtils.getDeviceType();
+          var targetFile =
+            deviceType === window.DeviceUtils.DeviceType.MOBILE
+              ? "index-mobile.html"
+              : deviceType === window.DeviceUtils.DeviceType.TABLET
+                ? "index-tablet.html"
+                : "index-pc.html";
+          location.href = targetFile;
+        }
+      })();
+    </script>
 <meta name="description" content="YuKoLi 原厂配件直供 — 500+ 配件 SKU，100% 原厂品质，东南亚本地备件仓现货供应，常规配件 48 小时发货。">
 <meta property="og:type" content="website">
 <meta property="og:title" content="YuKoLi 智能厨具 | 原厂配件支持">
