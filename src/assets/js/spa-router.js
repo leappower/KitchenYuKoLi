@@ -282,21 +282,22 @@
       }
     },
 
-    // 获取骨架屏 HTML
+    // 获取骨架屏 HTML — 通用占位条，不模拟具体页面布局
     getSkeletonHTML: function () {
       return (
         '<div class="skeleton-container">' +
         '<div class="skeleton-hero">' +
-        '<div class="skeleton-title"></div>' +
-        '<div class="skeleton-subtitle"></div>' +
-        '<div class="skeleton-cta"></div>' +
-        "</div>" +
+        '<div class="sk-line sk-line--title"></div>' +
+        '<div class="sk-line sk-line--subtitle"></div>' +
+        '<div class="sk-line sk-line--subtitle sk-line--short"></div>' +
+        '<div class="sk-line sk-line--cta"></div>' +
+        '</div>' +
         '<div class="skeleton-content">' +
         '<div class="skeleton-card"></div>' +
         '<div class="skeleton-card"></div>' +
         '<div class="skeleton-card"></div>' +
-        "</div>" +
-        "</div>"
+        '</div>' +
+        '</div>'
       );
     },
 
