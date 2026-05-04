@@ -125,7 +125,7 @@ if(localStorage.getItem('darkMode')==='true')document.documentElement.classList.
 <p class="text-slate-500 text-[10px] font-bold uppercase tracking-wider mb-1">Carbon</p>
 <div class="flex items-end gap-1">
 <h3 class="text-2xl font-black text-slate-900 dark:text-slate-100" data-i18n="Applications_2_4k">2.4k</h3>
-<span class="text-slate-500 text-xs font-bold mb-0.5">CO2e</span>
+<span class="text-slate-500 text-xs font-bold mb-0.5" data-i18n="Applications_tons_co2e">Tons CO2e</span>
 </div>
 </div>
 </div>
@@ -153,7 +153,7 @@ if(localStorage.getItem('darkMode')==='true')document.documentElement.classList.
 </div>
 <!-- Labor Costs -->
 <div class="flex flex-col gap-2">
-<label class="text-sm font-semibold text-slate-600 dark:text-slate-400" data-i18n="Applications_monthly_labor_cost">Monthly Labor Cost ($)</label>
+<label class="text-sm font-semibold text-slate-600 dark:text-slate-400" data-i18n="Applications_current_monthly_labor_cost">Current Monthly Labor Cost ($)</label>
 <div class="flex rounded-lg overflow-hidden border border-slate-200 dark:border-slate-800">
 <span class="flex items-center justify-center bg-slate-50 dark:bg-slate-800 px-3 text-slate-500 border-r border-slate-200 dark:border-slate-800">
 <span class="material-symbols-outlined text-sm">payments</span>
@@ -163,7 +163,7 @@ if(localStorage.getItem('darkMode')==='true')document.documentElement.classList.
 </div>
 <!-- Energy Usage -->
 <div class="flex flex-col gap-2">
-<label class="text-sm font-semibold text-slate-600 dark:text-slate-400" data-i18n="Applications_energy_usage_kwh_mo">Energy Usage (kWh/mo)</label>
+<label class="text-sm font-semibold text-slate-600 dark:text-slate-400" data-i18n="Applications_average_energy_usage_kwh_mo">Average Energy Usage (kWh/mo)</label>
 <div class="flex rounded-lg overflow-hidden border border-slate-200 dark:border-slate-800">
 <span class="flex items-center justify-center bg-slate-50 dark:bg-slate-800 px-3 text-slate-500 border-r border-slate-200 dark:border-slate-800">
 <span class="material-symbols-outlined text-sm">bolt</span>
@@ -234,7 +234,7 @@ Recalculate Simulation
 </div>
 </div>
 <div>
-<div class="flex justify-between text-xs mb-1"><span class="text-slate-500" data-i18n="Applications_green_energy">Green Energy</span><span class="font-bold text-primary">42%</span></div>
+<div class="flex justify-between text-xs mb-1"><span class="text-slate-500" data-i18n="Applications_green_energy_transition">Green Energy Transition</span><span class="font-bold text-primary">42%</span></div>
 <div class="w-full h-1.5 bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden">
 <div class="h-full bg-primary rounded-full" style="width: 42%" ></div>
 </div>

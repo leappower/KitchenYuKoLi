@@ -80,8 +80,8 @@
           <span data-i18n="contact_hero_title">让我们开始</span>
           <span class="text-primary" data-i18n="contact_hero_title_highlight">对话</span>
         </h1>
-        <p class="text-slate-600 dark:text-slate-400 mb-6" data-i18n="contact_tablet_hero_desc">
-          无论您需要报价还是支持，我们的团队随时为您服务。
+        <p class="text-slate-600 dark:text-slate-400 mb-6" data-i18n="contact_hero_desc">
+          无论您需要报价、技术支持还是合作机会，我们的全球团队随时为您服务。
         </p>
       </section>
 
@@ -91,37 +91,52 @@
           <h3 id="contact-form" class="text-lg font-bold mb-4" data-i18n="contact_form_title">给我们留言</h3>
           <form class="space-y-3">
             <div class="grid grid-cols-2 gap-3">
+              <div>
+                <label class="block text-xs font-bold mb-1" data-i18n="contact_form_firstname_label">名</label>
+                <input
+                  type="text"
+                  class="w-full px-3 py-2.5 rounded-lg border border-slate-200 dark:border-slate-700 bg-transparent text-sm"
+                  placeholder="First Name"
+                  data-i18n-placeholder="contact_form_firstname_placeholder"
+                />
+              </div>
+              <div>
+                <label class="block text-xs font-bold mb-1" data-i18n="contact_form_lastname_label">姓</label>
+                <input
+                  type="text"
+                  class="w-full px-3 py-2.5 rounded-lg border border-slate-200 dark:border-slate-700 bg-transparent text-sm"
+                  placeholder="Last Name"
+                  data-i18n-placeholder="contact_form_lastname_placeholder"
+                />
+              </div>
+            </div>
+            <div>
+              <label class="block text-xs font-bold mb-1" data-i18n="contact_form_email_label">邮箱</label>
               <input
-                type="text"
+                type="email"
                 class="w-full px-3 py-2.5 rounded-lg border border-slate-200 dark:border-slate-700 bg-transparent text-sm"
-                placeholder="First Name"
-                data-i18n-placeholder="contact_form_firstname_placeholder"
-              />
-              <input
-                type="text"
-                class="w-full px-3 py-2.5 rounded-lg border border-slate-200 dark:border-slate-700 bg-transparent text-sm"
-                placeholder="Last Name"
-                data-i18n-placeholder="contact_form_lastname_placeholder"
+                placeholder="Email"
+                data-i18n-placeholder="contact_form_email_placeholder"
               />
             </div>
-            <input
-              type="email"
-              class="w-full px-3 py-2.5 rounded-lg border border-slate-200 dark:border-slate-700 bg-transparent text-sm"
-              placeholder="Email"
-              data-i18n-placeholder="contact_form_email_placeholder"
-            />
-            <input
-              type="text"
-              class="w-full px-3 py-2.5 rounded-lg border border-slate-200 dark:border-slate-700 bg-transparent text-sm"
-              placeholder="Company"
-              data-i18n-placeholder="contact_form_company_placeholder"
-            />
-            <textarea
-              rows="3"
-              class="w-full px-3 py-2.5 rounded-lg border border-slate-200 dark:border-slate-700 bg-transparent text-sm resize-none"
-              placeholder="How can we help?"
-              data-i18n-placeholder="contact_form_message_placeholder"
-            ></textarea>
+            <div>
+              <label class="block text-xs font-bold mb-1" data-i18n="contact_form_company_label">公司</label>
+              <input
+                type="text"
+                class="w-full px-3 py-2.5 rounded-lg border border-slate-200 dark:border-slate-700 bg-transparent text-sm"
+                placeholder="Company"
+                data-i18n-placeholder="contact_form_company_placeholder"
+              />
+            </div>
+            <div>
+              <label class="block text-xs font-bold mb-1" data-i18n="contact_form_message_label">留言</label>
+              <textarea
+                rows="3"
+                class="w-full px-3 py-2.5 rounded-lg border border-slate-200 dark:border-slate-700 bg-transparent text-sm resize-none"
+                placeholder="How can we help?"
+                data-i18n-placeholder="contact_form_message_placeholder"
+              ></textarea>
+            </div>
             <button
               type="submit"
               class="w-full bg-primary text-white py-3 rounded-lg font-bold text-sm"
@@ -140,14 +155,14 @@
             class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-4 text-center"
           >
             <span class="material-symbols-outlined text-primary text-xl mb-2">email</span>
-            <p class="text-xs font-bold" data-i18n="contact_tablet_card_email">邮件</p>
+            <p class="text-xs font-bold" data-i18n="contact_card_email_title">邮件联系</p>
             <p class="text-xs text-slate-500">support.kitchen@yukoli.com</p>
           </div>
           <div
             class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-4 text-center"
           >
             <span class="material-symbols-outlined text-primary text-xl mb-2">phone</span>
-            <p class="text-xs font-bold" data-i18n="contact_tablet_card_phone">电话</p>
+            <p class="text-xs font-bold" data-i18n="contact_card_phone_title">电话联系</p>
             <p class="text-xs text-slate-500">+86 13163756465</p>
           </div>
           <div
@@ -199,10 +214,10 @@
       <!-- Partner -->
       <section class="bg-slate-900 text-white rounded-2xl p-6 text-center">
         <h2 class="text-xl font-black mb-3" data-i18n="contact_partner_title">成为合作伙伴</h2>
-        <p class="text-slate-300 text-sm mb-4" data-i18n="contact_tablet_partner_desc">加入我们的全球分销商网络。</p>
+        <p class="text-slate-300 text-sm mb-4" data-i18n="contact_partner_desc">加入我们的全球分销商和经销商网络。我们提供具有竞争力的利润空间、全面的培训和专属支持。</p>
         <a href="#contact-form"
           class="inline-block bg-primary text-white px-6 py-2.5 rounded-lg font-bold text-sm"
-          data-i18n="contact_tablet_partner_btn"
+          data-i18n="contact_partner_btn"
         >
           立即申请
         </a>

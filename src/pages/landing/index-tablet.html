@@ -133,9 +133,7 @@
           <div class="w-full max-w-[800px] px-6 py-10 md:py-16">
             <!-- Hero Section Optimized for Tablet -->
             <div class="flex flex-col gap-10">
-              <div
-                class="relative w-full aspect-[16/10] overflow-hidden rounded-2xl bg-slate-200 dark:bg-slate-800 shadow-2xl"
-              >
+              <div class="relative w-full aspect-[16/10] overflow-hidden rounded-2xl bg-slate-200 dark:bg-slate-800 shadow-2xl">
                 <div class="absolute inset-0 bg-gradient-to-tr from-primary/20 to-transparent"></div>
                 <img
                   loading="lazy"
@@ -145,28 +143,23 @@
                   width="800"
                   height="600"
                 />
+                <span class="absolute top-4 left-4 inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary text-white text-xs font-bold" data-i18n="landing_case_study_badge">客户案例：连锁食堂自动化升级</span>
               </div>
               <div class="flex flex-col gap-6 text-center">
-                <h1
-                  class="text-slate-900 dark:text-white text-4xl md:text-5xl font-black leading-tight tracking-tight"
-                  data-i18n="landing_scale_your_restaurant_operations_with_yu"
-                >
-                  Scale Your Restaurant Operations with Yukoli
-                </h1>
-                <p
-                  class="text-slate-600 dark:text-slate-300 text-lg md:text-xl font-normal leading-relaxed max-w-2xl mx-auto"
-                >
-                  Download the 3D-optimized operations blueprint and boost your throughput by up to 150% with our proven
-                  touch-friendly systems.
+                <h1 class="text-slate-900 dark:text-white text-4xl md:text-5xl font-black leading-tight tracking-tight"><span data-i18n="landing_scale_your_restaurant_operations_with_yu">Scale Your Restaurant Operations with Yukoli</span></h1>
+                <p class="text-slate-600 dark:text-slate-300 text-lg md:text-xl font-normal leading-relaxed max-w-2xl mx-auto">
+                  <span data-i18n="landing_3x_throughput" class="text-primary font-bold">产能提升 3 倍</span> — Download the 3D-optimized operations blueprint and boost your throughput by up to 150% with our proven touch-friendly systems.
                 </p>
                 <div class="pt-4">
-                  <a
-                    class="inline-flex min-w-[240px] cursor-pointer items-center justify-center rounded-xl h-14 px-8 bg-primary text-white text-lg font-bold shadow-xl shadow-primary/30 hover:brightness-110 active:scale-95 transition-all"
-                    href="#download-form"
-                    data-i18n="landing_get_the_free_blueprint"
-                  >
-                    Get the Free Blueprint
-                  </a>
+                  <a class="inline-flex min-w-[240px] cursor-pointer items-center justify-center rounded-xl h-14 px-8 bg-primary text-white text-lg font-bold shadow-xl shadow-primary/30 hover:brightness-110 active:scale-95 transition-all" href="/quote/" data-i18n="landing_get_solution">免费获取定制方案</a>
+                  <div class="flex items-center gap-3 justify-center mt-4">
+                    <div class="flex -space-x-2">
+                      <div class="w-6 h-6 rounded-full border-2 border-white bg-slate-200"></div>
+                      <div class="w-6 h-6 rounded-full border-2 border-white bg-slate-300"></div>
+                      <div class="w-6 h-6 rounded-full border-2 border-white bg-slate-400"></div>
+                    </div>
+                    <span class="text-xs text-slate-500" data-i18n="landing_joined_by_2k_ops_managers">已有 2000+ 餐饮管理者获取</span>
+                  </div>
                 </div>
               </div>
             </div>
@@ -212,6 +205,12 @@
                   -20% Waste
                 </p>
               </div>
+            </div>
+            <!-- Impact Metrics Labels -->
+            <div class="flex flex-wrap justify-center gap-4 mt-6 text-xs font-bold">
+              <span class="text-green-400 flex items-center gap-1" data-i18n="landing_increased">↑ 提升</span>
+              <span class="text-primary flex items-center gap-1" data-i18n="landing_reduced">↓ 降低</span>
+              <span class="text-green-400 flex items-center gap-1" data-i18n="landing_peak">★ 优秀</span>
             </div>
             <!-- Social Proof / Testimonials -->
             <section class="py-20 bg-white dark:bg-slate-900 fullwidth-bg">
@@ -307,46 +306,88 @@
                 </div>
               </div>
             </section>
-            <!-- Subscription Section -->
-            <div
-              class="mt-20 rounded-3xl bg-slate-900 dark:bg-primary/10 p-8 md:p-14 text-center overflow-hidden relative"
-              id="download-form"
-            >
-              <div class="absolute top-0 right-0 w-64 h-64 bg-primary/20 rounded-full blur-3xl -mr-32 -mt-32"></div>
-              <div class="absolute bottom-0 left-0 w-64 h-64 bg-primary/10 rounded-full blur-3xl -ml-32 -mb-32"></div>
-              <div class="relative z-10 flex flex-col gap-8">
-                <div class="flex flex-col gap-4">
-                  <h2
-                    class="text-white text-3xl md:text-4xl font-black leading-tight"
-                    data-i18n="landing_download_the_blueprint"
-                  >
-                    Download the Blueprint
-                  </h2>
-                  <p class="text-slate-300 text-lg font-normal max-w-[500px] mx-auto leading-relaxed">
-                    Enter your work email to receive the high-conversion operations guide for modern restaurant chains.
+            <!-- Challenge Section -->
+            <section class="py-16">
+              <div class="text-center mb-12">
+                <h2 class="text-2xl md:text-3xl font-black mb-4" data-i18n="landing_challenge_title">
+                  餐饮连锁扩张的三大痛点
+                </h2>
+                <p class="text-slate-600 dark:text-slate-400 text-base max-w-2xl mx-auto" data-i18n="landing_challenge_desc">
+                  连锁门店扩张时，人工、能耗、租金三大成本持续攀升，利润空间被不断压缩。YuKoLi
+                  通过智能厨具设备，从根源上解决这些瓶颈。
+                </p>
+              </div>
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div class="p-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm">
+                  <span class="material-symbols-outlined text-primary text-3xl mb-3">person_remove</span>
+                  <h4 class="text-lg font-bold mb-2" data-i18n="landing_high_labor">人工成本高</h4>
+                  <p class="text-slate-500 dark:text-slate-400 text-sm" data-i18n="landing_rising_wages_and_employee_turnover_are_n">
+                    厨师招聘难、流动大，智能炒菜机和自动切配设备让一个厨师同时管理三台设备，大幅降低对熟练厨师的依赖。
                   </p>
                 </div>
-                <div class="flex flex-col gap-4 w-full max-w-[500px] mx-auto">
-                  <div class="flex flex-col md:flex-row gap-3">
-                    <input
-                      class="flex-1 rounded-xl h-16 bg-white/10 border-white/20 text-white placeholder:text-slate-400 px-6 text-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
-                      placeholder="Enter your work email"
-                      type="email"
-                    />
-                    <a
-                      class="md:w-auto w-full flex items-center justify-center rounded-xl h-16 px-8 bg-primary text-white text-lg font-bold shadow-lg hover:brightness-110 active:scale-95 transition-all"
-                      href="/quote/"
-                      data-i18n="landing_send_pdf"
-                    >
-                      获取免费方案
-                    </a>
-                  </div>
-                  <p class="text-slate-400 text-xs italic" data-i18n="landing_used_by_500_franchise_locations_worldwid">
-                    Used by 500+ franchise locations worldwide.
+                <div class="p-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm">
+                  <span class="material-symbols-outlined text-primary text-3xl mb-3">bolt</span>
+                  <h4 class="text-lg font-bold mb-2" data-i18n="landing_high_energy">能耗成本高</h4>
+                  <p class="text-slate-500 dark:text-slate-400 text-sm" data-i18n="landing_inefficient_appliance_usage_during_off_p">
+                    传统灶具能耗浪费严重，YuKoLi 电磁加热和智能温控技术，相比燃气设备节能 30% 以上，自动休眠模式杜绝空烧。
+                  </p>
+                </div>
+                <div class="p-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm">
+                  <span class="material-symbols-outlined text-primary text-3xl mb-3">storefront</span>
+                  <h4 class="text-lg font-bold mb-2" data-i18n="landing_high_rent">后厨空间小</h4>
+                  <p class="text-slate-500 dark:text-slate-400 text-sm" data-i18n="landing_maximize_every_square_foot_yukoli_hardwa">
+                    后厨面积有限，YuKoLi 紧凑型模块化设计，一台万能蒸烤箱替代蒸柜+烤箱+炸炉，释放更多操作空间。
+                  </p>
+                </div>
+                <div class="p-6 rounded-2xl bg-primary/10 border-2 border-primary/30 shadow-sm">
+                  <span class="material-symbols-outlined text-primary text-3xl mb-3">trending_down</span>
+                  <h4 class="text-lg font-black text-primary mb-2" data-i18n="landing_low_margin">利润被压缩</h4>
+                  <p class="text-slate-700 dark:text-slate-300 text-sm font-semibold" data-i18n="landing_the_result_we_flip_the_equation_turning">
+                    结果？YuKoLi 帮您逆转局面，把被压缩的利润空间转化为可持续的盈利能力。
                   </p>
                 </div>
               </div>
-            </div>
+            </section>
+            <!-- Lead Magnet / CTA Form -->
+            <section class="py-16" id="download-form">
+              <div class="rounded-2xl bg-slate-900 overflow-hidden shadow-2xl border border-slate-800">
+                <div class="p-6 text-white">
+                  <h2 class="text-2xl font-black mb-2" data-i18n="landing_download_blueprint_title">
+                    下载连锁餐饮自动化升级方案
+                  </h2>
+                  <p class="text-slate-300 text-sm mb-6" data-i18n="landing_inside_blueprint_desc">
+                    内含：东南亚连锁食堂真实升级案例、设备选型清单、投资回报分析。
+                  </p>
+                  <form class="space-y-4">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <div>
+                        <label class="block text-xs font-bold text-slate-300 mb-1" data-i18n="landing_work_email">工作邮箱</label>
+                        <input class="w-full bg-white/10 border-white/20 rounded-lg p-3 text-sm text-white placeholder:text-slate-400 focus:ring-2 focus:ring-primary focus:border-transparent" placeholder="您的邮箱地址" type="email" />
+                      </div>
+                      <div>
+                        <label class="block text-xs font-bold text-slate-300 mb-1" data-i18n="form_company">Company Name</label>
+                        <input class="w-full bg-white/10 border-white/20 rounded-lg p-3 text-sm text-white placeholder:text-slate-400 focus:ring-2 focus:ring-primary focus:border-transparent" placeholder="您的企业名称" type="text" />
+                      </div>
+                    </div>
+                    <div>
+                      <label class="block text-xs font-bold text-slate-300 mb-1" data-i18n="landing_fleet_size">门店数量</label>
+                      <select class="w-full bg-white/10 border-white/20 rounded-lg p-3 text-sm text-white focus:ring-2 focus:ring-primary focus:border-transparent">
+                        <option>1-10 家门店</option>
+                        <option>11-50 家门店</option>
+                        <option>51-200 家门店</option>
+                        <option>200+ 家门店</option>
+                      </select>
+                    </div>
+                    <a href="/quote/" class="w-full py-3 bg-primary text-white text-base font-bold rounded-xl hover:scale-[1.02] transition-transform shadow-lg shadow-primary/20 inline-flex items-center justify-center gap-2" data-i18n="landing_send_me_the_pdf_blueprint">
+                      获取免费方案
+                    </a>
+                    <p class="text-center text-xs text-slate-500" data-i18n="landing_by_downloading_you_agree_to_our_terms_of">
+                      提交即表示同意我们的服务条款和隐私政策。
+                    </p>
+                  </form>
+                </div>
+              </div>
+            </section>
           </div>
         </main>
         <!-- Simple Footer -->

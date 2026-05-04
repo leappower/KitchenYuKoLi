@@ -130,9 +130,13 @@
           >
             <form id="quote-form" class="space-y-6" novalidate>
               <!-- 企业信息 -->
+              <h2 class="text-lg font-bold mb-4 flex items-center gap-2">
+                <span class="material-symbols-outlined text-primary">business</span>
+                <span data-i18n="quote_company_info">企业信息</span>
+              </h2>
               <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <label class="flex flex-col gap-2">
-                  <span class="text-slate-700 dark:text-slate-200 text-sm font-semibold">
+                  <span class="text-slate-700 dark:text-slate-200 text-sm font-semibold" data-i18n="quote_company_name">
                     公司名称 <span class="text-red-500">*</span>
                   </span>
                   <input
@@ -144,7 +148,7 @@
                   />
                 </label>
                 <label class="flex flex-col gap-2">
-                  <span class="text-slate-700 dark:text-slate-200 text-sm font-semibold">
+                  <span class="text-slate-700 dark:text-slate-200 text-sm font-semibold" data-i18n="quote_contact_person">
                     联系人 <span class="text-red-500">*</span>
                   </span>
                   <input
@@ -158,7 +162,7 @@
               </div>
               <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <label class="flex flex-col gap-2">
-                  <span class="text-slate-700 dark:text-slate-200 text-sm font-semibold">
+                  <span class="text-slate-700 dark:text-slate-200 text-sm font-semibold" data-i18n="quote_phone">
                     联系电话 <span class="text-red-500">*</span>
                   </span>
                   <input
@@ -170,7 +174,7 @@
                   />
                 </label>
                 <label class="flex flex-col gap-2">
-                  <span class="text-slate-700 dark:text-slate-200 text-sm font-semibold">
+                  <span class="text-slate-700 dark:text-slate-200 text-sm font-semibold" data-i18n="quote_email_address">
                     邮箱地址 <span class="text-red-500">*</span>
                   </span>
                   <input
@@ -184,7 +188,7 @@
               </div>
               <div>
                 <label class="flex flex-col gap-2">
-                  <span class="text-slate-700 dark:text-slate-200 text-sm font-semibold">
+                  <span class="text-slate-700 dark:text-slate-200 text-sm font-semibold" data-i18n="quote_country_region">
                     国家/地区 <span class="text-red-500">*</span>
                   </span>
                   <select
@@ -192,7 +196,7 @@
                     class="h-14 rounded-xl border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white focus:border-primary focus:ring-primary text-base px-4 appearance-none"
                     required
                   >
-                    <option value="">请选择国家/地区</option>
+                    <option value="" data-i18n="quote_select_country">请选择国家/地区</option>
                     <option value="TH">🇹🇭 泰国</option>
                     <option value="VN">🇻🇳 越南</option>
                     <option value="MY">🇲🇾 马来西亚</option>
@@ -203,14 +207,18 @@
                     <option value="KH">🇰🇭 柬埔寨</option>
                     <option value="LA">🇱🇦 老挝</option>
                     <option value="CN">🇨🇳 中国</option>
-                    <option value="other">其他国家/地区</option>
+                    <option value="other" data-i18n="quote_other_countries">其他国家/地区</option>
                   </select>
                 </label>
               </div>
               <!-- 设备需求 -->
+              <h2 class="text-lg font-bold mb-4 flex items-center gap-2">
+                <span class="material-symbols-outlined text-primary">precision_manufacturing</span>
+                <span data-i18n="quote_equipment_needs">设备需求</span>
+              </h2>
               <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <label class="flex flex-col gap-2">
-                  <span class="text-slate-700 dark:text-slate-200 text-sm font-semibold">
+                  <span class="text-slate-700 dark:text-slate-200 text-sm font-semibold" data-i18n="quote_equipment_type">
                     设备类型 <span class="text-red-500">*</span>
                   </span>
                   <select
@@ -218,18 +226,18 @@
                     class="h-14 rounded-xl border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white focus:border-primary focus:ring-primary text-base px-4 appearance-none"
                     required
                   >
-                    <option value="">请选择设备类型</option>
-                    <option value="auto-wok">智能炒菜机</option>
-                    <option value="semi-auto-wok">半自动炒菜机</option>
-                    <option value="combi-oven">万能蒸烤箱</option>
-                    <option value="soup-machine">智能熬汤机</option>
-                    <option value="rice-machine">智能煮饭机</option>
-                    <option value="full-set">整套厨房设备方案</option>
-                    <option value="other">其他</option>
+                    <option value="" data-i18n="quote_select_equipment_type">请选择设备类型</option>
+                    <option value="auto-wok" data-i18n="quote_type_auto_wok">智能炒菜机</option>
+                    <option value="semi-auto-wok" data-i18n="quote_type_semi_auto_wok">半自动炒菜机</option>
+                    <option value="combi-oven" data-i18n="quote_type_combi_oven">万能蒸烤箱</option>
+                    <option value="soup-machine" data-i18n="quote_type_soup_machine">智能熬汤机</option>
+                    <option value="rice-machine" data-i18n="quote_type_rice_machine">智能煮饭机</option>
+                    <option value="full-set" data-i18n="quote_type_full_set">整套厨房设备方案</option>
+                    <option value="other" data-i18n="quote_other">其他</option>
                   </select>
                 </label>
                 <label class="flex flex-col gap-2">
-                  <span class="text-slate-700 dark:text-slate-200 text-sm font-semibold">设备数量</span>
+                  <span class="text-slate-700 dark:text-slate-200 text-sm font-semibold" data-i18n="quote_quantity">设备数量</span>
                   <input
                     id="q-quantity"
                     class="h-14 rounded-xl border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white focus:border-primary focus:ring-primary text-base px-4"
@@ -241,35 +249,35 @@
               </div>
               <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <label class="flex flex-col gap-2">
-                  <span class="text-slate-700 dark:text-slate-200 text-sm font-semibold">厨房规模</span>
+                  <span class="text-slate-700 dark:text-slate-200 text-sm font-semibold" data-i18n="quote_kitchen_capacity">厨房规模</span>
                   <select
                     id="q-capacity"
                     class="h-14 rounded-xl border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white focus:border-primary focus:ring-primary text-base px-4 appearance-none"
                   >
-                    <option value="">请选择厨房规模</option>
-                    <option value="small">小型餐厅（50份以内/餐）</option>
-                    <option value="medium">中型餐厅（50-200份/餐）</option>
-                    <option value="large">大型餐厅/食堂（200-500份/餐）</option>
-                    <option value="enterprise">连锁/中央厨房（500份以上/餐）</option>
+                    <option value="" data-i18n="quote_select_capacity">请选择厨房规模</option>
+                    <option value="small" data-i18n="quote_capacity_small">小型餐厅（50份以内/餐）</option>
+                    <option value="medium" data-i18n="quote_capacity_medium">中型餐厅（50-200份/餐）</option>
+                    <option value="large" data-i18n="quote_capacity_large">大型餐厅/食堂（200-500份/餐）</option>
+                    <option value="enterprise" data-i18n="quote_capacity_enterprise">连锁/中央厨房（500份以上/餐）</option>
                   </select>
                 </label>
                 <label class="flex flex-col gap-2">
-                  <span class="text-slate-700 dark:text-slate-200 text-sm font-semibold">预算范围</span>
+                  <span class="text-slate-700 dark:text-slate-200 text-sm font-semibold" data-i18n="quote_budget_range">预算范围</span>
                   <select
                     id="q-budget"
                     class="h-14 rounded-xl border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white focus:border-primary focus:ring-primary text-base px-4 appearance-none"
                   >
-                    <option value="">请选择预算范围</option>
-                    <option value="consult">需咨询（暂无明确预算）</option>
+                    <option value="" data-i18n="quote_select_budget">请选择预算范围</option>
+                    <option value="consult" data-i18n="quote_budget_consult">需咨询（暂无明确预算）</option>
                     <option value="5w-10w" data-i18n="quote_budget_5w_10w">5万 - 10万 人民币</option>
                     <option value="10w-30w" data-i18n="quote_budget_10w_30w">10万 - 30万 人民币</option>
                     <option value="30w-50w" data-i18n="quote_budget_30w_50w">30万 - 50万 人民币</option>
-                    <option value="50w+">50万以上 人民币</option>
+                    <option value="50w+" data-i18n="quote_budget_50w_plus">50万以上 人民币</option>
                   </select>
                 </label>
               </div>
               <label class="flex flex-col gap-2">
-                <span class="text-slate-700 dark:text-slate-200 text-sm font-semibold">详细需求描述</span>
+                <span class="text-slate-700 dark:text-slate-200 text-sm font-semibold" data-i18n="quote_detailed_requirements">详细需求描述</span>
                 <textarea
                   id="q-message"
                   class="min-h-[120px] rounded-xl border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white focus:border-primary focus:ring-primary text-base p-4"
@@ -324,6 +332,66 @@
                   通过 CE、UL、ISO 9001 认证，品质有保障。
                 </p>
               </div>
+            </div>
+          </div>
+          <!-- Why Yukoli -->
+          <div class="bg-white dark:bg-slate-900/50 border border-slate-200 dark:border-slate-800 rounded-xl p-6">
+            <h3 class="text-lg font-bold mb-4" data-i18n="quote_why_yukoli">为什么选择 YuKoLi？</h3>
+            <ul class="space-y-4">
+              <li class="flex gap-3">
+                <div class="flex-shrink-0 size-8 bg-primary/10 rounded-lg flex items-center justify-center">
+                  <span class="material-symbols-outlined text-primary text-sm">inventory_2</span>
+                </div>
+                <div>
+                  <p class="font-bold text-sm" data-i18n="quote_114_products">114款智能设备</p>
+                  <p class="text-xs text-slate-500 mt-0.5" data-i18n="quote_114_products_desc">覆盖炒菜、蒸烤、熬汤、煮饭等全套商用厨房场景。</p>
+                </div>
+              </li>
+              <li class="flex gap-3">
+                <div class="flex-shrink-0 size-8 bg-primary/10 rounded-lg flex items-center justify-center">
+                  <span class="material-symbols-outlined text-primary text-sm">public</span>
+                </div>
+                <div>
+                  <p class="font-bold text-sm" data-i18n="quote_50_countries">覆盖50+国家</p>
+                  <p class="text-xs text-slate-500 mt-0.5" data-i18n="quote_50_countries_desc">深耕东南亚市场，产品远销全球50多个国家和地区。</p>
+                </div>
+              </li>
+              <li class="flex gap-3">
+                <div class="flex-shrink-0 size-8 bg-primary/10 rounded-lg flex items-center justify-center">
+                  <span class="material-symbols-outlined text-primary text-sm">verified_user</span>
+                </div>
+                <div>
+                  <p class="font-bold text-sm" data-i18n="quote_certified">国际认证品质</p>
+                  <p class="text-xs text-slate-500 mt-0.5" data-i18n="quote_certified_desc">通过 CE、UL、ISO 9001 认证，品质有保障。</p>
+                </div>
+              </li>
+              <li class="flex gap-3">
+                <div class="flex-shrink-0 size-8 bg-primary/10 rounded-lg flex items-center justify-center">
+                  <span class="material-symbols-outlined text-primary text-sm">support_agent</span>
+                </div>
+                <div>
+                  <p class="font-bold text-sm" data-i18n="quote_after_sales">完善的售后服务</p>
+                  <p class="text-xs text-slate-500 mt-0.5">提供安装指导、操作培训和持续技术支持。</p>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <!-- Quick Contact -->
+          <div class="bg-primary p-6 rounded-xl text-white">
+            <div class="flex items-center gap-2 mb-3">
+              <span class="material-symbols-outlined">forum</span>
+              <h3 class="text-base font-bold" data-i18n="quote_prefer_chat">更喜欢直接沟通？</h3>
+            </div>
+            <p class="text-sm opacity-90 mb-4">我们的销售团队在线为您解答疑问，帮您快速找到合适的设备方案。</p>
+            <div class="flex gap-3">
+              <button onclick="startWhatsApp()" class="flex-1 bg-white text-primary py-2.5 rounded-lg font-bold text-sm flex items-center justify-center gap-2">
+                <span class="material-symbols-outlined text-base">chat</span>
+                WhatsApp
+              </button>
+              <button onclick="startEmail()" class="flex-1 bg-white/20 text-white py-2.5 rounded-lg font-bold text-sm flex items-center justify-center gap-2">
+                <span class="material-symbols-outlined text-base">mail</span>
+                <span data-i18n="quote_send_email">发邮件</span>
+              </button>
             </div>
           </div>
           <!-- Trust Badges -->
