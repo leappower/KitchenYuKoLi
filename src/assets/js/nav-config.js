@@ -71,25 +71,26 @@
         href: "/products/other/"
       }],
       applications: [{
-        key: "nav_applications_fastfood",
+        key: "nav_applications_trust",
+        icon: "verified_user",
+        href: "/applications/trust/",
+        badge: "P0"
+      }, {
+        key: "nav_applications_chain_restaurant",
         icon: "ramen_dining",
         href: "/applications/fast-food/"
-      }, {
-        key: "nav_applications_hotpot",
-        icon: "local_fire_department",
-        href: "/applications/hotpot/"
-      }, {
-        key: "nav_applications_cloud_kitchen",
-        icon: "delivery_dining",
-        href: "/applications/cloud-kitchen/"
       }, {
         key: "nav_applications_canteen",
         icon: "restaurant",
         href: "/applications/canteen/"
       }, {
-        key: "nav_applications_thai",
-        icon: "public",
-        href: "/applications/southeast-asian/"
+        key: "nav_applications_small_restaurant",
+        icon: "storefront",
+        href: "/applications/small-restaurant/"
+      }, {
+        key: "nav_applications_menu_lab",
+        icon: "science",
+        href: "/applications/menu-lab/"
       }, {
         key: "nav_cases",
         icon: "monitoring",

@@ -188,6 +188,13 @@ app.get('/health', (req, res) => {
   });
 });
 
+// ═══ 301 Redirects: old application pages → new structure ═══
+// TODO: Remove after search engines have indexed the new URLs (3-6 months)
+app.get('/applications/fast-food', (req, res) => res.redirect(301, '/applications/chain-restaurant' + req.url.slice('/applications/fast-food'.length)));
+app.get('/applications/hotpot', (req, res) => res.redirect(301, '/applications/chain-restaurant#hotpot'));
+app.get('/applications/cloud-kitchen', (req, res) => res.redirect(301, '/applications/small-restaurant' + req.url.slice('/applications/cloud-kitchen'.length)));
+app.get('/applications/southeast-asian', (req, res) => res.redirect(301, '/applications/menu-lab' + req.url.slice('/applications/southeast-asian'.length)));
+
 // Trailing slash redirect for known route directories
 // Handles /home → /home/, /catalog → /catalog/, etc.
 app.use((req, res, next) => {
@@ -259,9 +266,19 @@ app.get('/', (req, res) => {
 // Known SPA routes — always serve the root SPA shell, let the frontend router handle them
 const SPA_ROUTES = ['/home', '/catalog', '/solutions', '/about', '/contact', '/quote',
   '/applications', '/products', '/support', '/news', '/thank-you', '/landing',
-  '/product-detail', '/roi', '/applications/fast-food', '/applications/hotpot',
-  '/applications/cloud-kitchen', '/applications/canteen', '/applications/southeast-asian',
-  '/applications/cases', '/solutions/fast-food', '/solutions/hotpot',
+  '/product-detail', '/roi',
+  // New structure (P0 trust page first)
+  '/applications/trust',
+  // New structure (P1 high-value pages)
+  '/applications/chain-restaurant', '/applications/food-factory', '/applications/central-kitchen',
+  // New structure (P2 volume pages)
+  '/applications/small-restaurant', '/applications/menu-lab', '/applications/canteen',
+  '/applications/cases',
+  // Legacy routes (kept for SPA routing until pages are migrated)
+  '/applications/fast-food', '/applications/hotpot',
+  '/applications/cloud-kitchen', '/applications/southeast-asian',
+  // Solutions
+  '/solutions/fast-food', '/solutions/hotpot',
   '/solutions/cloud-kitchen', '/solutions/canteen', '/solutions/southeast-asian'];
 
 app.get('*', (req, res) => {
