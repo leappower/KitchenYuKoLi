@@ -37,6 +37,12 @@
       path: "/about/",
       id: "about",
       hasDropdown: !0
+    }, {
+      key: "nav_contact",
+      label: "联系我们",
+      path: "/contact/",
+      id: "contact",
+      hasDropdown: !1
     }],
     dropdowns: {
       products: [{
@@ -107,10 +113,6 @@
         key: "nav_about_cert",
         icon: "verified",
         href: "/about/#cert"
-      }, {
-        key: "nav_contact",
-        icon: "chat",
-        href: "/contact/"
       }],
       support: [{
         key: "nav_support_services",
