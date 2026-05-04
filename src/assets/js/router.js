@@ -24,7 +24,7 @@
     thankYou: "/thank-you/",
     landing: "/landing/",
     support: "/support/",
-    esg: "/esg/",
+    cases: "/cases/",
     roiCalculator: "/profit-calculator/",
   });
   /* ═══════════════════════════════════════════════════════════════════
@@ -107,12 +107,11 @@
     var i18nLinkMap = {
       footer_hardware_title: PAGES.products,
       nav_hardware: PAGES.products,
-      ,
-      nav_case_studies: PAGES.caseStudies,
+      nav_case_studies: PAGES.cases,
       footer_support_title: PAGES.support,
       nav_support: PAGES.support,
       nav_contact: PAGES.quote,
-      footer_case_studies: PAGES.caseStudies,
+      footer_cases: PAGES.cases,
       quote_equipment: PAGES.products,
     };
 
