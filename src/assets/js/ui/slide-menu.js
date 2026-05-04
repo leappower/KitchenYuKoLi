@@ -500,6 +500,7 @@
 
         return {
           key: navEntry.key,
+          label: navEntry.label || navEntry.key,
           href: navEntry.path,
           id: navEntry.id,
           icon: getL1Icon(navEntry.id),
@@ -507,15 +508,15 @@
         };
       });
     } else {
-      // 内置默认菜单（NAV_CONFIG 不可用时的回退）
+      // 内置默认菜单（NAV_CONFIG 不可用时的回退，与 navigator DEFAULT_NAV_ITEMS 对齐）
       items = [
-        { key: "nav_products",     href: "/products/",     id: "products",     icon: "kitchen",       children: [] },
-        { key: "nav_applications", href: "/applications/", id: "applications", icon: "apps",          children: [] },
-        { href: "/cases/",         id: "cases",            icon: "cases",       children: [] },
-        { href: "/profit-calculator/", id: "profit-calculator", icon: "calculate",  children: [] },
-        { key: "nav_service",      href: "/support/",      id: "support",      icon: "support_agent", children: [] },
-        { key: "nav_about",        href: "/about/",        id: "about",        icon: "info",          children: [] },
-        { key: "nav_contact",      href: "/contact/",      id: "contact",      icon: "mail",          children: [] },
+        { key: "nav_products",         label: "产品中心", href: "/products/",         id: "products",     icon: "kitchen",       children: [] },
+        { key: "nav_applications",     label: "行业场景", href: "/applications/",     id: "applications", icon: "apps",          children: [] },
+        { key: "nav_cases",            label: "真实案例", href: "/cases/",            id: "cases",        icon: "cases",        children: [] },
+        { key: "nav_profit_calculator", label: "投资回报", href: "/profit-calculator/", id: "profit-calculator", icon: "calculate",  children: [] },
+        { key: "nav_support",          label: "服务支持", href: "/support/",          id: "support",      icon: "support_agent", children: [] },
+        { key: "nav_about",            label: "关于我们", href: "/about/",            id: "about",        icon: "info",          children: [] },
+        { key: "nav_contact",          label: "联系我们", href: "/contact/",          id: "contact",      icon: "mail",          children: [] },
       ];
     }
 
@@ -639,7 +640,7 @@
             '<span class="material-symbols-outlined">' + escapeHtml(item.icon) + '</span>' +
           '</span>' +
           '<span class="mobile-menu-l1-label" data-i18n="' + escapeHtml(item.key) + '">' +
-            escapeHtml(item.key) +
+            escapeHtml(item.label || item.key) +
           '</span>' +
           '<span class="material-symbols-outlined mobile-menu-l1-arrow">chevron_right</span>' +
         '</button>' +
