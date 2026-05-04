@@ -1,0 +1,159 @@
+<!doctype html>
+<html class="light" lang="zh-CN">
+  <head>
+    <!-- ═══ Responsive Redirect (injected by patch-responsive-redirect.py) ═══ -->
+    <link rel="canonical" href="/cases/" />
+    <link rel="alternate" media="only screen and (max-width: 767px)" href="/cases/index-mobile.html" />
+    <link rel="alternate" media="only screen and (min-width: 768px) and (max-width: 1279px)" href="/cases/index-tablet.html" />
+    <link rel="alternate" media="only screen and (min-width: 1280px)" href="/cases/index-pc.html" />
+    <script>
+      (function () {
+        if (window.__redirectChecked) return;
+        window.__redirectChecked = true;
+        var urlParams = new URLSearchParams(location.search);
+        var cleanUrl = urlParams.get("clean-url");
+        if (cleanUrl) { history.replaceState({}, "", cleanUrl); return; }
+        if (window.__spaNavigating) return;
+        var currentFile = location.pathname.split("/").pop();
+        if (window.DeviceUtils && window.DeviceUtils.isDirectoryURL()) return;
+        if (window.DeviceUtils && window.DeviceUtils.shouldRedirect(currentFile)) {
+          var deviceType = window.DeviceUtils.getDeviceType();
+          var targetFile = deviceType === window.DeviceUtils.DeviceType.MOBILE ? "index-mobile.html" : deviceType === window.DeviceUtils.DeviceType.TABLET ? "index-tablet.html" : "index-pc.html";
+          location.href = targetFile;
+        }
+      })();
+    </script>
+    <!-- ═══ End Responsive Redirect ═══ -->
+
+    <meta charset="utf-8" />
+    <meta name="description" content="YuKoLi 商用厨房自动化案例 — 覆盖东南亚的真实案例，包含小型餐饮、中央厨房、连锁餐饮、智慧食堂、云厨房等场景。" />
+    <meta name="keywords" content="商用厨房案例,餐饮自动化案例,智能厨房案例,YuKoLi案例,厨房投资回报" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="YuKoLi | 商用厨房自动化案例" />
+    <meta property="og:description" content="覆盖东南亚的商用厨房自动化真实案例，查看真实投资回报数据。" />
+    <meta property="og:url" content="https://www.kitchen.yukoli.com/cases/" />
+    <meta property="og:image" content="https://www.kitchen.yukoli.com/assets/images/logo_header.webp" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title data-i18n="cases_page_title">YuKoLi | 商用厨房自动化案例</title>
+    <link rel="preload" href="/assets/fonts/local-fonts.css" as="style" />
+    <link rel="preload" href="/assets/css/styles.css" as="style" />
+    <link rel="preload" href="/assets/css/tailwind.css" as="style" />
+    <link rel="preload" href="/assets/fonts/public-sans-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/assets/fonts/public-sans-latin-700-normal.woff2" as="font" type="font/woff2" crossorigin />
+    <link href="/assets/fonts/local-fonts.css" rel="stylesheet" />
+    <link rel="stylesheet" href="/assets/css/styles.css" />
+    <link rel="stylesheet" href="/assets/css/tailwind.css" />
+    <link rel="stylesheet" href="/assets/css/z-index-system.css" />
+    <link rel="stylesheet" href="/assets/css/performance-optimizations.css" />
+    <script>
+      (function () {
+        if (localStorage.getItem("darkMode") === "true") document.documentElement.classList.add("dark");
+      })();
+    </script>
+    <link rel="stylesheet" href="/assets/css/skeleton.css" />
+    <link rel="icon" href="/assets/images/logo_header.webp" type="image/webp" />
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "YuKoLi 商用厨房自动化案例",
+  "description": "覆盖东南亚的商用厨房自动化真实案例，查看投资回报数据。",
+  "url": "https://www.kitchen.yukoli.com/cases/",
+  "isPartOf": {
+    "@type": "WebSite",
+    "name": "YuKoLi 智能厨具",
+    "url": "https://www.kitchen.yukoli.com"
+  }
+}
+    </script>
+  </head>
+  <body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 antialiased transition-colors duration-300 overflow-x-clip" data-case-variant="pc">
+    <!-- Top Navigation Bar -->
+    <navigator data-component="navigator" data-variant="pc" data-active="cases" data-cta-text-key="nav_get_quote" data-cta-href="/quote"></navigator>
+
+    <main id="spa-content">
+      <!-- Hero Section -->
+      <section class="relative py-16 overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-orange-100/30 dark:from-primary/10 dark:to-orange-900/20"></div>
+        <div class="relative max-w-7xl mx-auto text-center">
+          <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 text-primary text-sm font-bold uppercase tracking-wider w-fit mx-auto mb-6">
+            <span class="material-symbols-outlined">verified</span>
+            <span data-i18n="cases_hero_badge">真实案例</span>
+          </div>
+          <h1 class="text-4xl xl:text-6xl font-black leading-[1.1] tracking-tight mb-6" data-i18n="cases_hero_title">
+            真实厨房的<span class="text-primary">真实回报</span>
+          </h1>
+          <p class="text-xl text-slate-600 dark:text-slate-400 max-w-2xl mx-auto leading-relaxed mb-8" data-i18n="cases_hero_subtitle">
+            覆盖东南亚 7 个国家的商用厨房自动化案例
+          </p>
+          <a href="/profit-calculator/" class="inline-flex items-center gap-2 bg-primary text-white px-8 py-4 rounded-xl font-bold hover:shadow-lg hover:shadow-primary/20 transition-all">
+            <span class="material-symbols-outlined">calculate</span>
+            <span data-i18n="cases_hero_cta">计算你的回报</span>
+            <span class="material-symbols-outlined">arrow_forward</span>
+          </a>
+        </div>
+      </section>
+
+      <!-- Sticky Filter Bar -->
+      <div class="sticky top-0 z-30 bg-white/90 dark:bg-slate-900/90 backdrop-blur-md border-b border-slate-200 dark:border-slate-700">
+        <div class="max-w-7xl mx-auto px-6 py-4">
+          <div id="case-filters"></div>
+        </div>
+      </div>
+
+      <!-- Case Grid -->
+      <section class="py-12">
+        <div class="max-w-7xl mx-auto px-6">
+          <div class="flex items-center justify-between mb-8">
+            <h2 class="text-2xl font-bold" data-i18n="cases_grid_title">全部案例</h2>
+            <span id="case-count" class="text-sm font-semibold text-primary bg-primary/10 px-3 py-1 rounded-full">8 个案例</span>
+          </div>
+          <div id="case-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- Cards rendered by case-grid.js -->
+          </div>
+        </div>
+      </section>
+
+      <!-- Footer CTA -->
+      <section class="py-16 bg-primary">
+        <div class="max-w-4xl mx-auto text-center">
+          <h2 class="text-3xl lg:text-4xl font-black text-white mb-4" data-i18n="cases_footer_cta_title">
+            Still not sure?
+          </h2>
+          <p class="text-xl text-white/80 mb-8" data-i18n="cases_footer_cta_desc">
+            Calculate your own ROI in 45 seconds
+          </p>
+          <a href="/profit-calculator/" class="inline-flex items-center gap-2 bg-white text-primary px-8 py-4 rounded-xl font-bold hover:shadow-lg transition-all">
+            <span class="material-symbols-outlined">calculate</span>
+            <span data-i18n="cases_footer_cta_button">计算你的回报</span>
+            <span class="material-symbols-outlined">arrow_forward</span>
+          </a>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer data-component="footer" data-variant="pc" data-cta="true"></footer>
+
+    <!-- Scripts -->
+    <script defer src="/assets/js/router.js"></script>
+    <script src="/assets/js/translations.js?v=20260429"></script>
+    <script src="/assets/js/ui/slide-menu.js"></script>
+    <script src="/assets/js/ui/dropdown-styles.js"></script>
+    <script src="/assets/js/ui/products-dropdown.js"></script>
+    <script src="/assets/js/ui/solutions-dropdown.js"></script>
+    <script src="/assets/js/ui/support-dropdown.js"></script>
+    <script src="/assets/js/ui/about-dropdown.js"></script>
+    <script src="/assets/js/ui/contact-dropdown.js"></script>
+    <script src="/assets/js/nav-config.js?v=20260415"></script>
+    <script src="/assets/js/ui/navigator.js"></script>
+    <script src="/assets/js/ui/footer.js"></script>
+    <script defer src="/assets/js/ui/floating-actions.js"></script>
+    <script src="/assets/js/case-grid.js"></script>
+    <script>
+      document.addEventListener('DOMContentLoaded', function () {
+        if (window.CaseGrid) CaseGrid.init('pc');
+      });
+    </script>
+  </body>
+</html>
