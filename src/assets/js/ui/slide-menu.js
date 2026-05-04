@@ -34,7 +34,7 @@
             key: e.key,
             href: e.path,
             id: e.id,
-            icon: "products" === e.id ? "kitchen" : "applications" === e.id ? "apps" : "support.*? "support_agent" : "support" === e.id ? "support_agent" : "about" === e.id ? "info" : "mail",
+            icon: "products" === e.id ? "kitchen" : "applications" === e.id ? "apps" : "support" === e.id ? "support_agent" : "about" === e.id ? "info" : "mail",
             children: function(e, o) {
               var t = o.map(function(e) {
                 return {

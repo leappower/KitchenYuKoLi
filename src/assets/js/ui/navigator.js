@@ -320,11 +320,7 @@
         }
       }
     }
-  }, document.addEventListener("spa:load", function() {
-    document.querySelector("header") || i();
-    var e = document.getElementById("mobile-header");
-    e && e.classList.remove("header-hidden"), setTimeout(function() { window.SlideMenu && (window.SlideMenu.initToggle && window.SlideMenu.initToggle(), window.SlideMenu.initSmartHeader && window.SlideMenu.initSmartHeader()) }, 0), p()
-  }), function p() {
+  }, function p() {
     if (document.getElementById("mobile-bottom-bar")) return;
     if (window.innerWidth >= 768) return;
     var bar = document.createElement("nav");
