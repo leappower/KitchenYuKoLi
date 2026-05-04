@@ -25,7 +25,7 @@
     landing: "/landing/",
     support: "/support/",
     esg: "/esg/",
-    roiCalculator: "/roi/",
+    roiCalculator: "/profit-calculator/",
   });
   /* ═══════════════════════════════════════════════════════════════════
      SECTION 2: DEPRECATED (removed getDeviceType, resolveDeviceUrl)
@@ -107,7 +107,7 @@
     var i18nLinkMap = {
       footer_hardware_title: PAGES.products,
       nav_hardware: PAGES.products,
-      nav_solutions: PAGES.home,
+      ,
       nav_case_studies: PAGES.caseStudies,
       footer_support_title: PAGES.support,
       nav_support: PAGES.support,

@@ -34,8 +34,6 @@
     "/contact/": "联系我们",
     "/landing/": "着陆页",
     "/home/": "首页",
-    "/solutions/": "解决方案",
-    "/roi/": "ROI计算器",
     "/about/": "关于我们",
     "/news/": "新闻资讯",
     "/thank-you/": "感谢页",

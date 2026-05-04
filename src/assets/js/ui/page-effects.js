@@ -326,11 +326,9 @@
       "/",
       "/home/",
       "/products/",
-      "/roi/",
       "/quote/",
       "/support/",
       "/products/",
-      "/solutions/",
       "/thank-you/",
       "/landing/",
     ];

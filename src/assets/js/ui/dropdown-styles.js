@@ -5,8 +5,8 @@
  * Each dropdown's injectStyles() calls injectDropdownBaseStyles() first,
  * then adds only its own unique overrides (e.g. WhatsApp green, ROI badge, emoji).
  *
- * Consumed by: about-dropdown.js, contact-dropdown.js, products-dropdown.js,
- *              solutions-dropdown.js, support-dropdown.js, applications-dropdown.js
+ * Consumed by: about-dropdown.js, products-dropdown.js,
+ *              support-dropdown.js, applications-dropdown.js
  */
 
 (function (global) {

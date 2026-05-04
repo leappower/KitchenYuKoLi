@@ -332,7 +332,7 @@
 
         // CTA
         '<div style="margin-top:1.5rem;text-align:center;">' +
-          '<a href="/roi/" style="display:inline-block;background:var(--color-primary,#f97316);color:#fff;padding:0.875rem 2rem;border-radius:0.75rem;font-weight:800;text-decoration:none;font-size:0.875rem;">获取免费ROI方案</a>' +
+          '<a href="/profit-calculator/" style="display:inline-block;background:var(--color-primary,#f97316);color:#fff;padding:0.875rem 2rem;border-radius:0.75rem;font-weight:800;text-decoration:none;font-size:0.875rem;">获取免费ROI方案</a>' +
         '</div>' +
       '</div>';
 
@@ -425,7 +425,7 @@
      ═══════════════════════════════════════════════════ */
   function initCTAButtons() {
     $$('button[data-i18n="cta_get_proposal"]').forEach(function (btn) {
-      btn.addEventListener('click', function () { window.location.href = '/roi/'; });
+      btn.addEventListener('click', function () { window.location.href = '/profit-calculator/'; });
     });
     $$('button[data-i18n="cta_contact_sales"]').forEach(function (btn) {
       btn.addEventListener('click', function () { window.location.href = '/contact/?from=' + encodeURIComponent(location.pathname); });

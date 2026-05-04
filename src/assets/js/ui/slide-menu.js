@@ -23,7 +23,6 @@
         var t = {
           products: "products",
           applications: "applications",
-          solutions: "solutions",
           support: "support",
           about: "about",
           contact: "contact"
@@ -35,7 +34,7 @@
             key: e.key,
             href: e.path,
             id: e.id,
-            icon: "products" === e.id ? "kitchen" : "applications" === e.id ? "apps" : "solutions" === e.id ? "build" : "support" === e.id ? "support_agent" : "about" === e.id ? "info" : "mail",
+            icon: "products" === e.id ? "kitchen" : "applications" === e.id ? "apps" : "support.*? "support_agent" : "support" === e.id ? "support_agent" : "about" === e.id ? "info" : "mail",
             children: function(e, o) {
               var t = o.map(function(e) {
                 return {
@@ -63,10 +62,14 @@
         icon: "apps",
         children: []
       }, {
-        key: "nav_solutions",
-        href: "/solutions/",
-        id: "solutions",
-        icon: "build",
+        href: "/cases/",
+        id: "cases",
+        icon: "cases",
+        children: []
+      }, {
+        href: "/profit-calculator/",
+        id: "profit-calculator",
+        icon: "calculate",
         children: []
       }, {
         key: "nav_service",

@@ -10,10 +10,8 @@
 
   /** Application scenarios (5 items) */
   var SUBSERIES = (typeof NAV_CONFIG !== 'undefined' && NAV_CONFIG.dropdowns && NAV_CONFIG.dropdowns.applications) || [
-    { key: "nav_applications_trust", icon: "verified_user", href: "/applications/trust/", emoji: "", badge: "P0" },
     { key: "nav_applications_chain_restaurant", icon: "ramen_dining", href: "/applications/chain-restaurant/", emoji: "" },
     { key: "nav_applications_central_kitchen", icon: "apartment", href: "/applications/central-kitchen/", emoji: "" },
-    { key: "nav_applications_food_factory", icon: "factory", href: "/applications/food-factory/", emoji: "" },
     { key: "nav_applications_small_restaurant", icon: "storefront", href: "/applications/small-restaurant/", emoji: "" },
     { key: "nav_applications_canteen", icon: "restaurant", href: "/applications/canteen/", emoji: "" },
     { key: "nav_applications_menu_lab", icon: "science", href: "/applications/menu-lab/", emoji: "" },
