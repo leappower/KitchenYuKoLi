@@ -286,16 +286,6 @@
     getSkeletonHTML: function () {
       return (
         '<div class="skeleton-container">' +
-        '<div class="skeleton-header">' +
-        '<div class="skeleton-logo"></div>' +
-        '<div class="skeleton-nav">' +
-        '<div class="skeleton-nav-item"></div>' +
-        '<div class="skeleton-nav-item"></div>' +
-        '<div class="skeleton-nav-item"></div>' +
-        '<div class="skeleton-nav-item"></div>' +
-        '<div class="skeleton-nav-item"></div>' +
-        "</div>" +
-        "</div>" +
         '<div class="skeleton-hero">' +
         '<div class="skeleton-title"></div>' +
         '<div class="skeleton-subtitle"></div>' +

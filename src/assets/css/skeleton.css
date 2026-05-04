@@ -3,70 +3,57 @@
  *
  * 用于页面切换时的加载状态显示，提供流畅的用户体验
  * 避免白屏闪烁
+ *
+ * 布局与实际页面保持一致：
+ *   PC:    padding: 0 px-6 md:px-8 xl:px-10 (与各 section 容器对齐)
+ *   Tablet: padding: 0 px-6 (同上，md 断点生效)
+ *   Mobile: padding: 0 px-4 (与各 mobile 页面 hero/content 对齐)
+ *   顶部:  pt-10 (与 hero section py-10 的顶部间距对齐)
  */
 
-/* 骨架屏容器 — 与页面内容 max-w-7xl mx-auto px-6 lg:px-20 对齐
-   padding-top: 3rem 与各页面首 section 的 py-12 顶部间距一致 */
+/* ───────── 骨架屏容器 ───────── */
 .skeleton-container {
   width: 100%;
-  max-width: 80rem; /* max-w-7xl = 1280px */
   margin: 0 auto;
   min-height: 60vh;
-  padding: 3rem 24px 0; /* pt-12 px-6 */
+  padding: 2.5rem 16px 0; /* pt-10 px-4 (mobile first) */
   animation: fadeIn 0.2s ease-out;
 }
 
-@media (width >= 1024px) {
+/* Tablet: px-6 */
+@media (width >= 768px) {
   .skeleton-container {
-    padding: 3rem 80px 0; /* pt-12 lg:px-20 */
+    padding: 2.5rem 24px 0; /* pt-10 px-6 */
   }
 }
 
-/* Header Skeleton */
-.skeleton-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 32px;
-  padding: 16px 0;
+/* PC: px-8 then xl:px-10 */
+@media (width >= 1024px) {
+  .skeleton-container {
+    padding: 2.5rem 32px 0; /* pt-10 px-8 */
+  }
 }
 
-.skeleton-logo {
-  width: 120px;
-  height: 36px;
-  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
-  background-size: 200% 100%;
-  animation: shimmer 1.5s infinite;
-  border-radius: 8px;
+@media (width >= 1280px) {
+  .skeleton-container {
+    padding: 2.5rem 40px 0; /* pt-10 xl:px-10 */
+  }
 }
 
-.skeleton-nav {
-  display: flex;
-  gap: 16px;
-}
-
-.skeleton-nav-item {
-  width: 80px;
-  height: 32px;
-  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
-  background-size: 200% 100%;
-  animation: shimmer 1.5s infinite;
-  border-radius: 6px;
-}
-
-/* Hero Skeleton */
+/* ───────── Hero Skeleton ───────── */
 .skeleton-hero {
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
-  padding: 64px 0;
-  margin-bottom: 48px;
+  padding: 48px 0;
+  margin-bottom: 32px;
 }
 
 .skeleton-title {
   width: 60%;
-  height: 48px;
+  max-width: 400px;
+  height: 40px;
   background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
   background-size: 200% 100%;
   animation: shimmer 1.5s infinite;
@@ -76,7 +63,8 @@
 
 .skeleton-subtitle {
   width: 80%;
-  height: 32px;
+  max-width: 560px;
+  height: 20px;
   background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
   background-size: 200% 100%;
   animation: shimmer 1.5s infinite;
@@ -90,51 +78,37 @@
   background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
   background-size: 200% 100%;
   animation: shimmer 1.5s infinite;
-  border-radius: 8px;
-}
-
-/* Content Skeleton */
-.skeleton-content {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 24px;
-  margin-top: 32px;
-}
-
-.skeleton-card {
-  height: 300px;
-  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
-  background-size: 200% 100%;
-  animation: shimmer 1.5s infinite;
   border-radius: 12px;
 }
 
-/* Shimmer Animation */
+/* ───────── Content Skeleton ───────── */
+.skeleton-content {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 20px;
+  margin-top: 24px;
+}
+
+.skeleton-card {
+  height: 280px;
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  border-radius: 16px;
+}
+
+/* ───────── Shimmer Animation ───────── */
 @keyframes shimmer {
-  0% {
-    background-position: 200% 0;
-  }
-
-  100% {
-    background-position: -200% 0;
-  }
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
 }
 
-/* Fade In Animation */
-@keyframes fade-in {
-  from {
-    opacity: 0;
-  }
-
-  to {
-    opacity: 1;
-  }
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 
-/* Dark Mode Support */
-
-.dark .skeleton-logo,
-.dark .skeleton-nav-item,
+/* ───────── Dark Mode ───────── */
 .dark .skeleton-title,
 .dark .skeleton-subtitle,
 .dark .skeleton-cta,
@@ -143,44 +117,25 @@
   background-size: 200% 100%;
 }
 
-/* Mobile Responsive */
+/* ───────── Mobile Responsive ───────── */
 @media (width <= 767px) {
-  .skeleton-header {
-    padding: 12px 0;
+  .skeleton-hero {
+    padding: 32px 0;
     margin-bottom: 24px;
   }
 
-  .skeleton-logo {
-    width: 100px;
-    height: 30px;
-  }
-
-  .skeleton-nav {
-    gap: 12px;
-  }
-
-  .skeleton-nav-item {
-    width: 60px;
-    height: 28px;
-  }
-
-  .skeleton-hero {
-    padding: 48px 16px;
-    margin-bottom: 32px;
-  }
-
   .skeleton-title {
-    width: 90%;
-    height: 36px;
+    width: 85%;
+    height: 30px;
   }
 
   .skeleton-subtitle {
     width: 100%;
-    height: 28px;
+    height: 16px;
   }
 
   .skeleton-cta {
-    width: 180px;
+    width: 160px;
     height: 44px;
   }
 
@@ -190,11 +145,11 @@
   }
 
   .skeleton-card {
-    height: 250px;
+    height: 220px;
   }
 }
 
-/* Tablet Responsive */
+/* ───────── Tablet Responsive ───────── */
 @media (width >= 768px) and (width <= 1279px) {
   .skeleton-content {
     grid-template-columns: repeat(2, 1fr);
