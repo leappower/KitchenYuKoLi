@@ -115,7 +115,12 @@
       if (!re) {
         var section = document.createElement("section");
         section.className = "w-full py-12";
-        section.innerHTML = '<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"><h2 class="text-xl font-bold mb-4 flex items-center gap-2"><span class="material-symbols-outlined text-primary">recommend</span> 推荐产品</h2><div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6" id="related-products"></div></div>';
+        section.innerHTML =
+          '<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">' +
+          '<h2 class="text-xl font-bold mb-4 flex items-center gap-2">' +
+          '<span class="material-symbols-outlined text-primary">recommend</span> 推荐产品</h2>' +
+          '<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6" id="related-products"></div>' +
+          '</div>';
         // Find the container's parent to append
         var target = ce.parentElement || container;
         target.appendChild(section);
@@ -137,7 +142,14 @@
     if (!product) {
       ensureContainers();
       var ce = document.getElementById("product-content");
-      if (ce) ce.innerHTML = '<div class="max-w-3xl mx-auto px-4 py-16 text-center"><div class="w-20 h-20 bg-slate-100 dark:bg-slate-800 rounded-full flex items-center justify-center mx-auto mb-6"><span class="material-symbols-outlined text-3xl text-slate-400">search_off</span></div><h2 class="text-xl font-bold mb-3">' + tl('产品未找到') + '</h2><p class="text-slate-500 mb-6">' + tl('抱歉，未找到该产品。') + '</p><a href="/products/" class="inline-flex items-center gap-2 bg-primary text-white px-5 py-3 rounded-xl font-bold hover:shadow-lg transition-all"><span class="material-symbols-outlined">arrow_back</span> ' + tl('返回产品中心') + '</a></div>';
+      if (ce) ce.innerHTML =
+        '<div class="max-w-3xl mx-auto px-4 py-16 text-center">' +
+        '<div class="w-20 h-20 bg-slate-100 dark:bg-slate-800 rounded-full flex items-center justify-center mx-auto mb-6">' +
+        '<span class="material-symbols-outlined text-3xl text-slate-400">search_off</span></div>' +
+        '<h2 class="text-xl font-bold mb-3">' + tl('产品未找到') + '</h2>' +
+        '<p class="text-slate-500 mb-6">' + tl('抱歉，未找到该产品。') + '</p>' +
+        '<a href="/products/" class="inline-flex items-center gap-2 bg-primary text-white px-5 py-3 rounded-xl font-bold hover:shadow-lg transition-all">' +
+        '<span class="material-symbols-outlined">arrow_back</span> ' + tl('返回产品中心') + '</a></div>';
       return;
     }
 
@@ -177,9 +189,15 @@
     for (var s = 0; s < specs.length; s++) {
       if (!specs[s].v) continue;
       if (specs[s].full) {
-        specCards += '<div class="md:col-span-2 py-3 px-4 rounded-lg bg-slate-50 dark:bg-slate-700/50"><span class="text-sm text-slate-500 dark:text-slate-400 font-medium block mb-1">' + esc(specs[s].l) + '</span><span class="text-sm font-semibold">' + esc(specs[s].v) + '</span></div>';
+        specCards +=
+          '<div class="md:col-span-2 py-3 px-4 rounded-lg bg-slate-50 dark:bg-slate-700/50">' +
+          '<span class="text-sm text-slate-500 dark:text-slate-400 font-medium block mb-1">' + esc(specs[s].l) + '</span>' +
+          '<span class="text-sm font-semibold">' + esc(specs[s].v) + '</span></div>';
       } else {
-        specCards += '<div class="flex justify-between items-start py-3 px-4 rounded-lg bg-slate-50 dark:bg-slate-700/50"><span class="text-sm text-slate-500 dark:text-slate-400 font-medium">' + esc(specs[s].l) + '</span><span class="text-sm font-semibold text-right">' + esc(specs[s].v) + '</span></div>';
+        specCards +=
+          '<div class="flex justify-between items-start py-3 px-4 rounded-lg bg-slate-50 dark:bg-slate-700/50">' +
+          '<span class="text-sm text-slate-500 dark:text-slate-400 font-medium">' + esc(specs[s].l) + '</span>' +
+          '<span class="text-sm font-semibold text-right">' + esc(specs[s].v) + '</span></div>';
       }
     }
 
@@ -188,17 +206,38 @@
     var wa = window.Contacts ? window.Contacts.whatsapp : "8613163756465";
 
     var html = '<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"><div class="flex flex-col lg:flex-row gap-8 lg:items-start">' +
-      '<div class="lg:w-1/2"><div class="rounded-xl overflow-hidden bg-white dark:bg-slate-800 shadow-lg"><div class="relative"><img loading="eager" alt="' + esc(product.model) + '" class="w-full h-[360px] object-cover" src="' + imgSrc + '" onerror="this.src=\'https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=800&h=600&fit=crop\'"></div></div></div>' +
-      '<div class="lg:w-1/2 flex flex-col gap-5"><div><div class="flex items-center gap-3 mb-2"><span class="text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">' + esc(product.subCategory || getCategoryName(product)) + '</span>' + badge + tier + '</div>' +
+      '<div class="lg:w-1/2"><div class="rounded-xl overflow-hidden bg-white dark:bg-slate-800 shadow-lg">' +
+      '<div class="relative"><img loading="eager" alt="' + esc(product.model) + '"' +
+      ' class="w-full h-[360px] object-cover" src="' + imgSrc + '"' +
+      ' onerror="this.src=\'https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=800&h=600&fit=crop\'"></div></div></div>' +
+      '<div class="lg:w-1/2 flex flex-col gap-5"><div>' +
+      '<div class="flex items-center gap-3 mb-2">' +
+      '<span class="text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">' +
+        esc(product.subCategory || getCategoryName(product)) + '</span>' + badge + tier + '</div>' +
       '<h1 id="detail-title" class="text-2xl lg:text-3xl font-black tracking-tight mb-2">' + esc(product.name || product.model) + '</h1>' +
       (product.model && product.name && product.name !== product.model ? '<p class="text-sm text-slate-500 dark:text-slate-400 mt-1">' + tl('型号') + ': ' + esc(product.model) + '</p>' : '') +
       '<p class="text-base text-slate-500 dark:text-slate-400">' + esc(getCategoryName(product)) + '</p></div>' +
       '<div class="flex items-center gap-3">' +
-      '<a href="/quote/?model=' + encodeURIComponent(product.model) + '" class="flex-1 bg-primary text-white px-6 py-3 rounded-xl font-bold flex items-center justify-center gap-2 hover:shadow-lg hover:shadow-primary/20 transition-all text-sm"><span class="material-symbols-outlined text-lg">request_quote</span> ' + tl('获取报价') + '</a>' +
-      '<a href="https://wa.me/' + wa + '?text=' + encodeURIComponent((product.subCategory || getCategoryName(product) ? (product.subCategory || getCategoryName(product)) + ' ' : '') + product.model) + '" target="_blank" class="px-6 py-3 rounded-xl font-bold flex items-center gap-2 border-2 border-slate-300 dark:border-slate-600 hover:border-primary hover:text-primary transition-all text-sm"><span class="material-symbols-outlined text-lg">chat</span> ' + tl('联系销售') + '</a></div></div></div>' +
-      '<section class="mt-8"><h2 class="text-xl font-bold mb-4 flex items-center gap-2"><span class="material-symbols-outlined text-primary">specifications</span> ' + tl('产品规格') + '</h2><div class="grid grid-cols-1 md:grid-cols-2 gap-3">' + specCards + '</div></section>' +
+      '<a href="/quote/?model=' + encodeURIComponent(product.model) + '"' +
+        ' class="flex-1 bg-primary text-white px-6 py-3 rounded-xl font-bold' +
+        ' flex items-center justify-center gap-2 hover:shadow-lg hover:shadow-primary/20 transition-all text-sm">' +
+        '<span class="material-symbols-outlined text-lg">request_quote</span> ' + tl('获取报价') + '</a>' +
+      '<a href="https://wa.me/' + wa + '?text=' +
+        encodeURIComponent((product.subCategory || getCategoryName(product) ?
+          (product.subCategory || getCategoryName(product)) + ' ' : '') + product.model) +
+        '" target="_blank"' +
+        ' class="px-6 py-3 rounded-xl font-bold flex items-center gap-2' +
+        ' border-2 border-slate-300 dark:border-slate-600 hover:border-primary hover:text-primary transition-all text-sm">' +
+        '<span class="material-symbols-outlined text-lg">chat</span> ' + tl('联系销售') + '</a></div></div></div>' +
+      '<section class="mt-8"><h2 class="text-xl font-bold mb-4 flex items-center gap-2">' +
+      '<span class="material-symbols-outlined text-primary">specifications</span> ' + tl('产品规格') + '</h2>' +
+      '<div class="grid grid-cols-1 md:grid-cols-2 gap-3">' + specCards + '</div></section>' +
       '</div></div>' +
-      '<section class="mt-12"><div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 bg-primary rounded-xl p-8 text-center"><h2 class="text-xl font-black text-white mb-3">' + tl('需要定制方案？') + '</h2><p class="text-white/80 mb-6 text-sm">' + tl('告诉我们您的需求，我们为您提供专属解决方案。') + '</p><a href="/quote/" class="inline-flex items-center gap-2 bg-white text-primary px-6 py-3 rounded-xl font-bold hover:shadow-lg transition-all"><span class="material-symbols-outlined">arrow_forward</span> ' + tl('获取报价') + '</a></div></section>';
+      '<section class="mt-12"><div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 bg-primary rounded-xl p-8 text-center">' +
+      '<h2 class="text-xl font-black text-white mb-3">' + tl('需要定制方案？') + '</h2>' +
+      '<p class="text-white/80 mb-6 text-sm">' + tl('告诉我们您的需求，我们为您提供专属解决方案。') + '</p>' +
+      '<a href="/quote/" class="inline-flex items-center gap-2 bg-white text-primary px-6 py-3 rounded-xl font-bold hover:shadow-lg transition-all">' +
+      '<span class="material-symbols-outlined">arrow_forward</span> ' + tl('获取报价') + '</a></div></section>';
 
     var ce = document.getElementById("product-content");
     if (ce) ce.className = "w-full py-10";
