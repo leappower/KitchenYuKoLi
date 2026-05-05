@@ -178,7 +178,7 @@
               'transition-colors" aria-label="Menu">' +
               '<span class="material-symbols-outlined text-2xl">menu</span>' +
             '</button>' +
-            '<a class="nav-logo-link hidden md:block" href="' + basePath + '/home/">' +
+            '<a class="nav-logo-link hidden lg:block" href="' + basePath + '/home/">' +
               '<img loading="eager" ' +
                 'src="' + basePath + '/assets/images/logo_footer.webp" ' +
                 'alt="Yukoli" width="32" height="32" ' +
@@ -392,7 +392,7 @@
           'py-4 flex items-center justify-between" style="min-height:108px">' +
           /* 左侧：Logo + 导航 */
           '<div class="flex items-center gap-4 lg:gap-8">' +
-            '<a class="nav-logo-link" href="' + basePath + '/home/">' +
+            '<a class="nav-logo-link hidden lg:block" href="' + basePath + '/home/">' +
               '<img loading="eager" ' +
                 'src="' + basePath + '/assets/images/logo_footer.webp" ' +
                 'alt="Yukoli" width="44" height="44" ' +
