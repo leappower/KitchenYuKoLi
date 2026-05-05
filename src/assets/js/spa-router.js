@@ -717,10 +717,16 @@
       var scripts = [];
       var path = pagePath.replace(/\/index-(pc|mobile|tablet)\.html$/, "/");
 
-      // Profit calculator needs Chart.js + pi-roi.js
+      // Profit calculator needs Chart.js + html2canvas + jsPDF + pi-roi.js
       if (path.indexOf("/profit-calculator/") !== -1) {
         if (typeof global.Chart === "undefined") {
-          scripts.push({ src: "https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js", id: "spa-chart-js" });
+          scripts.push({ src: "/assets/js/vendor/chart.umd.min.js", id: "spa-chart-js" });
+        }
+        if (typeof global.html2canvas === "undefined") {
+          scripts.push({ src: "/assets/js/vendor/html2canvas.min.js", id: "spa-html2canvas" });
+        }
+        if (typeof global.jspdf === "undefined" && typeof global.jsPDF === "undefined") {
+          scripts.push({ src: "/assets/js/vendor/jspdf.umd.min.js", id: "spa-jspdf" });
         }
         scripts.push({ src: "/assets/js/ui/pi-roi.js", id: "spa-pi-roi" });
         scripts.push({ src: "/assets/js/profit-calculator.js", id: "spa-profit-calculator" });
