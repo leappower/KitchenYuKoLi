@@ -566,6 +566,10 @@
       // 等待动态脚本加载完成后，再触发 spa:load（避免重复触发）
       var _self2 = this;
       Promise.resolve(scriptsPromise).then(function() {
+        // Re-mount footer for SPA-loaded pages (footer.js already loaded, but DOM was replaced)
+        if (window.Footer && window.Footer.mount) {
+          try { window.Footer.mount(); } catch(e) { /* ignore */ }
+        }
         document.dispatchEvent(new Event("spa:load"));
         _self2.log("Content rendered for:", pagePath);
       });
