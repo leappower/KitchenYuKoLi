@@ -109,8 +109,9 @@
     }).join('\n');
 
     // WhatsApp button (external link, highlighted) — use plain href so initWhatsAppLinks can intercept
+    var _wa = window.Contacts ? window.Contacts.whatsapp : '8613163756465';
     links += '\n' +
-      var _wa = window.Contacts ? window.Contacts.whatsapp : '8613163756465'; '<a class="bb-whatsapp" href="https://wa.me/' + _wa + '" data-wa-source="bottom-bar" target="_blank" rel="noopener">' +
+      '<a class="bb-whatsapp" href="https://wa.me/' + _wa + '" data-wa-source="bottom-bar" target="_blank" rel="noopener">' +
         '<span class="bb-icon">💬</span>' +
         '<span>WhatsApp</span>' +
       '</a>';
