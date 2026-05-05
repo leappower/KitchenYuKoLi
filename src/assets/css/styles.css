@@ -302,6 +302,20 @@ main#spa-content:not([class*="p-"], [class*="px-"], [class*="py-"]) .fullwidth-b
   margin-inline: auto;
 }
 
+/* ─── section-content flex passthrough ───────────────────────── */
+/* When section-content is the sole child of a flex parent (hero, two-col layouts),
+   it must become transparent so flex columns are visible to the flex container.
+   padding/max-width are inherited by children via the padding-inline on the section itself. */
+.fullwidth-bg:has(> .section-content:only-child) {
+  padding-inline: var(--container-px, 0.75rem);
+}
+.fullwidth-bg:has(> .section-content:only-child) > .section-content {
+  display: contents;
+  padding-inline: 0;
+  max-width: none;
+  margin-inline: 0;
+}
+
 /* ─── Navigator placeholder: prevent layout shift ─────────────── */
 navigator[data-component="navigator"] {
   display: block;
