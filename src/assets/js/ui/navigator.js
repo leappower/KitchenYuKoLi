@@ -978,10 +978,15 @@
    *   (e.g. "products", "applications", "support", "about")
    */
   function updateActive(activeSectionId) {
-    var _stack = new Error().stack;
-    console.log('[NAV-ACTIVE] updateActive called: activeSectionId="' + activeSectionId + '" | pathname=' + window.location.pathname + '\n' + _stack.split('\n').slice(1,4).join('\n'));
     activeSectionId = activeSectionId || "";
     var currentPath = window.location.pathname.replace(/\/$/, "") || "/";
+
+    /* Re-read NAV_CONFIG on every call — module-level navItems may be stale (DEFAULT_NAV_ITEMS)
+     * if nav-config.js loaded after navigator.js */
+    var navItems =
+      typeof NAV_CONFIG !== "undefined" && NAV_CONFIG.mainNav
+        ? NAV_CONFIG.mainNav
+        : DEFAULT_NAV_ITEMS;
 
     /* 确保 dropdown 样式已注入（SPA 动态加载场景） */
     injectDropdownStyles();
@@ -1039,9 +1044,7 @@
     }
 
     /* ---------- 1b. 更新非 dropdown 普通链接导航项的高亮 ---------- */
-    console.log('[NAV-ACTIVE] plainLinks check: mappedId="' + mappedId + '" | navItems count=' + navItems.length + ' | navItems ids=' + navItems.map(function(n){return n.id}).join(','));
     var plainLinks = document.querySelectorAll("header nav a[data-i18n]");
-    console.log('[NAV-ACTIVE] plainLinks DOM count=' + plainLinks.length);
     for (var pi = 0; pi < plainLinks.length; pi++) {
       var plainEl = plainLinks[pi];
       /* Skip dropdown triggers (already handled above) */
@@ -1062,20 +1065,6 @@
       if (plainMatch) {
         plainEl.classList.add("text-primary");
         plainEl.classList.remove("hover\\:text-primary", "transition-colors");
-        console.log('[NAV-ACTIVE] ✅ plainLink ACTIVE:', plainKey);
-        /* Watch who removes text-primary from this element */
-        if (!plainEl._activeWatched) {
-          plainEl._activeWatched = true;
-          var _obs = new MutationObserver(function(mutations) {
-            mutations.forEach(function(m) {
-              if (m.attributeName === 'class' && !plainEl.classList.contains('text-primary')) {
-                var _s = new Error().stack;
-                console.warn('[NAV-ACTIVE] ⚠️ text-primary REMOVED from', plainKey, '\n', _s.split('\n').slice(1,5).join('\n'));
-              }
-            });
-          });
-          _obs.observe(plainEl, { attributes: true, attributeFilter: ['class'] });
-        }
       } else {
         plainEl.classList.remove("text-primary");
         plainEl.classList.add("hover\\:text-primary", "transition-colors");
