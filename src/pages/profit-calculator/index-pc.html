@@ -98,13 +98,13 @@
 
             <!-- ── Left: Input Form (40%) ── -->
             <div class="lg:col-span-5 flex flex-col">
-              <div class="bg-white dark:bg-slate-900 rounded-2xl shadow-xl border border-slate-200 dark:border-slate-800 p-8 sticky top-[130px] flex-1">
+              <div class="bg-white dark:bg-slate-900 rounded-2xl shadow-xl border border-slate-200 dark:border-slate-800 p-8 sticky top-[130px] flex-1 flex flex-col">
                 <h2 class="text-xl font-bold mb-6 flex items-center gap-2">
                   <span class="material-symbols-outlined text-primary">calculate</span>
                   <span data-i18n="profit_calc_form_title">输入运营数据</span>
                 </h2>
 
-                <form id="profit-calc-form" class="space-y-5" novalidate>
+                <form id="profit-calc-form" class="space-y-5 flex-1 flex flex-col justify-between" novalidate>
                   <!-- 1. Country -->
                   <div>
                     <label class="block text-sm font-bold mb-1.5" data-i18n="profit_calc_country">Country / 国家</label>
@@ -196,7 +196,7 @@
 
             <!-- ── Right: Results Panel (60%) ── -->
             <div class="lg:col-span-7 flex flex-col">
-              <div class="bg-white dark:bg-slate-900 rounded-2xl shadow-xl border border-slate-200 dark:border-slate-800 p-8 flex-1 flex flex-col justify-center">
+              <div class="bg-white dark:bg-slate-900 rounded-2xl shadow-xl border border-slate-200 dark:border-slate-800 p-8 flex-1 flex flex-col justify-between">
               <div id="profit-result-panel" class="hidden space-y-6">
                 <!-- Summary Cards -->
                 <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
