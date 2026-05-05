@@ -298,7 +298,7 @@
 
     // Build a hidden report container
     var container = document.createElement('div');
-    container.style.cssText = 'position:fixed;left:-9999px;top:0;width:680px;background:#fff;font-family:system-ui,-apple-system,sans-serif;color:#1e293b;padding:40px 32px;';
+    container.style.cssText = 'position:fixed;left:0;top:0;z-index:-1;width:680px;background:#fff;font-family:system-ui,-apple-system,sans-serif;color:#1e293b;padding:40px 32px;';
 
     container.innerHTML =
       '<div style="border-bottom:3px solid #e11d48;padding-bottom:16px;margin-bottom:24px">' +
@@ -333,6 +333,8 @@
       '</div>';
 
     document.body.appendChild(container);
+    // Force reflow so html2canvas can measure the element
+    void container.offsetHeight;
 
     html2canvas(container, {
       scale: 2,
