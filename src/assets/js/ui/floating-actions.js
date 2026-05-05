@@ -4,7 +4,6 @@
  * 功能：
  * - 回到顶部按钮（滚动 > threshold 时显示）
  * - WhatsApp 按钮（所有设备显示，Mobile 在 Tab Bar 中也有）
- * - LINE 按钮（所有设备显示）
  * - 定时闪烁动画：页面停止滚动 10s 后触发，滚动时取消
  * - 初次显示时触发一次闪烁动画
  *
@@ -19,13 +18,11 @@
    * ───────────────────────────────────────────── */
 
   var WHATSAPP_HREF = "https://wa.me/" + (window.Contacts ? window.Contacts.whatsapp : "8613163756465");
-  var LINE_HREF = "https://line.me/R/ti/p/@yourlineid";
   var SCROLL_THRESHOLD = 300;
 
   // 可通过 window 覆盖
   if (window.FLOATING_ACTIONS_CONFIG) {
     if (window.FLOATING_ACTIONS_CONFIG.whatsapp) WHATSAPP_HREF = window.FLOATING_ACTIONS_CONFIG.whatsapp;
-    if (window.FLOATING_ACTIONS_CONFIG.line) LINE_HREF = window.FLOATING_ACTIONS_CONFIG.line;
     if (window.FLOATING_ACTIONS_CONFIG.threshold) SCROLL_THRESHOLD = window.FLOATING_ACTIONS_CONFIG.threshold;
   }
 
@@ -113,13 +110,6 @@
       "  color: #fff;",
       "}",
 
-      "#fab-line {",
-      "  background: #06C755; display: none;",
-      "  color: #fff;",
-      "  width: 3.5rem;",
-      "  height: 3.5rem;",
-      "}",
-
       "#fab-backtotop {",
       "  background: #fff;",
       "  color: #1e293b;",
@@ -186,7 +176,6 @@
     this._container = null;
     this._btnBtt = null;
     this._btnWa = null;
-    this._btnLine = null;
   }
 
   FloatingActionsController.prototype.init = function () {
@@ -213,38 +202,6 @@
     wa.rel = "noopener noreferrer";
     wa.innerHTML = SVG_WHATSAPP;
 
-    // LINE
-    var line = document.createElement("a");
-    line.id = "fab-line";
-    line.className = "fab-btn";
-    line.href = LINE_HREF;
-    line.setAttribute("aria-label", "LINE");
-    line.target = "_blank";
-    line.rel = "noopener noreferrer";
-    line.innerHTML = '<svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">' +
-      '<path d="M19.365 9.863c.349 0 .63.285.63.631' +
-      " 0 .345-.281.63-.63.63H17.61v1.125h1.755c.349 0 .63.283.63.63" +
-      " 0 .344-.281.629-.63.629h-2.386c-.345 0-.627-.285-.627-.629V8.108" +
-      "c0-.345.282-.63.63-.63h2.386c.346 0 .627.285.627.63" +
-      " 0 .349-.281.63-.63.63H17.61v1.125h1.755zm-3.855 3.016" +
-      "c0 .27-.174.51-.432.596-.064.021-.133.031-.199.031" +
-      "-.211 0-.391-.09-.51-.25l-2.443-3.317v2.94" +
-      "c0 .344-.279.629-.631.629-.346 0-.626-.285-.626-.629V8.108" +
-      "c0-.27.173-.51.43-.595.06-.023.136-.033.194-.033" +
-      ".195 0 .375.104.495.254l2.462 3.33V8.108" +
-      "c0-.345.282-.63.63-.63.345 0 .63.285.63.63v4.771zm-5.741 0" +
-      "c0 .344-.282.629-.631.629-.345 0-.627-.285-.627-.629V8.108" +
-      "c0-.345.282-.63.63-.63.346 0 .628.285.628.63v4.771zm-2.466.629H4.917" +
-      "c-.345 0-.63-.285-.63-.629V8.108c0-.345.285-.63.63-.63" +
-      ".348 0 .63.285.63.63v4.141h1.756c.348 0 .629.283.629.63" +
-      " 0 .344-.281.629-.629.629M24 10.314" +
-      "C24 4.943 18.615.572 12 .572S0 4.943 0 10.314" +
-      "c0 4.811 4.27 8.842 10.035 9.608.391.082.923.258 1.058.59" +
-      ".12.301.079.766.038 1.08l-.164 1.02" +
-      "c-.045.301-.24 1.186 1.049.645 1.291-.539 6.916-4.078 9.436-6.975" +
-      'C23.176 14.393 24 12.458 24 10.314"></path>' +
-      "</svg>";
-
     // Back to top
     var btt = document.createElement("button");
     btt.id = "fab-backtotop";
@@ -253,7 +210,6 @@
     btt.innerHTML = SVG_BACKTOTOP;
 
     container.appendChild(btt);
-    container.appendChild(line);
     container.appendChild(wa);
 
     document.body.appendChild(container);
@@ -261,7 +217,6 @@
     this._container = container;
     this._btnBtt = btt;
     this._btnWa = wa;
-    this._btnLine = line;
   };
 
   FloatingActionsController.prototype._bindButtons = function () {
@@ -351,7 +306,6 @@
     clearTimeout(this._pulseTimer);
     this._pulseTimer = null;
     if (this._btnWa) this._btnWa.classList.remove("fab-pulsing");
-    if (this._btnLine) this._btnLine.classList.remove("fab-pulsing");
   };
 
   FloatingActionsController.prototype._clearScrollIdleTimer = function () {

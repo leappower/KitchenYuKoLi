@@ -453,7 +453,7 @@
       "  html.dark .nav-logo-link:active {",
       "    background: rgba(236,91,19,.18);",
       "  }",
-      "}""
+      "}"
     ].join("\n");
     document.head.appendChild(style);
   }
