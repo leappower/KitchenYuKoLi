@@ -360,7 +360,7 @@
     } else console.error("[i18n] openLanguageDropdown: dropdown still null, returning")
   }, r.prototype.closeLanguageDropdown = function() {
     var t = this.getDropdown();
-    t && (t.style.display = "none", t.classList.remove("show"))
+    t && (t.style.display = "none", t.style.left = "", t.style.right = "", t.style.width = "", t.classList.remove("show"))
   }, r.prototype.filterLanguages = function(t) {
     var e = document.querySelectorAll(".lang-option"),
       n = t.toLowerCase();
