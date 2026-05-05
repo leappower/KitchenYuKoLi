@@ -12,7 +12,23 @@
     'Vietnam':     { monthly: 7000000, currency: 'VND', symbol: '₫' },
     'Thailand':    { monthly: 15000, currency: 'THB', symbol: '฿' },
     'Malaysia':    { monthly: 2500, currency: 'MYR', symbol: 'RM' },
+    'China':       { monthly: 5000, currency: 'CNY', symbol: '¥' },
     'Other':       { monthly: 2000, currency: 'USD', symbol: '$' }
+  };
+
+  /* ───────── Language → Country auto-match ───────── */
+  var LANG_COUNTRY_MAP = {
+    'zh-CN': 'China',
+    'zh-TW': 'Other',
+    'zh':    'China',
+    'en':    'Other',
+    'th':    'Thailand',
+    'vi':    'Vietnam',
+    'id':    'Indonesia',
+    'ms':    'Malaysia',
+    'fil':   'Philippines',
+    'ja':    'Other',
+    'ko':    'Other'
   };
 
   /* ───────── Savings ratio table ───────── */
@@ -499,6 +515,26 @@
     var self = this;
     var countryEl = document.getElementById(this.countrySelectId);
     if (countryEl) {
+      // Auto-select country based on current language
+      if (!countryEl.value && window.translationManager) {
+        var lang = window.translationManager.currentLanguage || '';
+        var matchedCountry = null;
+        // Try exact match first, then prefix match
+        if (LANG_COUNTRY_MAP[lang]) {
+          matchedCountry = LANG_COUNTRY_MAP[lang];
+        } else {
+          var prefix = lang.split('-')[0];
+          matchedCountry = LANG_COUNTRY_MAP[prefix] || null;
+        }
+        if (matchedCountry) {
+          countryEl.value = matchedCountry;
+          // Trigger labor cost auto-fill
+          var info = DEFAULT_SALARIES[matchedCountry];
+          var laborEl = document.getElementById(self.laborInputId);
+          if (info && laborEl) laborEl.value = info.monthly;
+        }
+      }
+
       countryEl.addEventListener('change', function () {
         var info = DEFAULT_SALARIES[this.value];
         var laborEl = document.getElementById(self.laborInputId);
