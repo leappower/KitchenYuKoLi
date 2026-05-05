@@ -161,41 +161,43 @@ window.addEventListener('DOMContentLoaded',function(){
 <div class="w-full">
   <!-- Hero Section: aligned with home page (left text, right image) -->
   <section class="w-full flex flex-col lg:flex-row items-center py-10 gap-12 fullwidth-bg">
-    <div class="w-full lg:w-1/2 space-y-8 px-3 md:px-5 lg:px-5 xl:px-10">
-      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-bold uppercase tracking-widest">
-        <span class="material-symbols-outlined text-xs leading-none">inventory_2</span>
-        <span data-i18n="products_hero_badge">Industrial Excellence</span>
+    <div class="section-content">
+      <div class="w-full lg:w-1/2 space-y-8">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-bold uppercase tracking-widest">
+          <span class="material-symbols-outlined text-xs leading-none">inventory_2</span>
+          <span data-i18n="products_hero_badge">Industrial Excellence</span>
+        </div>
+        <h1 class="text-6xl xl:text-8xl font-black leading-[1.1] tracking-tight text-slate-900 dark:text-white" data-i18n="products_hero_title">
+          产品中心
+        </h1>
+        <p class="text-lg xl:text-xl text-slate-600 dark:text-slate-400 max-w-2xl leading-relaxed" data-i18n="products_hero_desc">
+          探索 Yukoli 全系列智能商厨设备，从爆炒到蒸煮，为您的商业厨房提供完整的自动化解决方案。
+        </p>
+        <div class="flex flex-wrap gap-4 pt-4">
+          <a href="#products" onclick="event.preventDefault();document.getElementById('products').scrollIntoView({behavior:'smooth',block:'start'})" class="bg-primary text-white px-8 py-4 rounded-xl font-bold text-lg flex items-center gap-2 hover:shadow-lg hover:shadow-primary/20 transition-all">
+            <span data-i18n="products_browse_products">浏览产品</span>
+            <span class="material-symbols-outlined">arrow_downward</span>
+          </a>
+          <a href="/quote" class="border-2 border-slate-200 dark:border-slate-800 px-8 py-4 rounded-xl font-bold text-lg hover:bg-slate-100 dark:hover:bg-slate-800 transition-all flex items-center gap-2">
+            <span data-i18n="products_request_quote">获取报价</span>
+            <span class="material-symbols-outlined">request_quote</span>
+          </a>
+        </div>
       </div>
-      <h1 class="text-6xl xl:text-8xl font-black leading-[1.1] tracking-tight text-slate-900 dark:text-white" data-i18n="products_hero_title">
-        产品中心
-      </h1>
-      <p class="text-lg xl:text-xl text-slate-600 dark:text-slate-400 max-w-2xl leading-relaxed" data-i18n="products_hero_desc">
-        探索 Yukoli 全系列智能商厨设备，从爆炒到蒸煮，为您的商业厨房提供完整的自动化解决方案。
-      </p>
-      <div class="flex flex-wrap gap-4 pt-4">
-        <a href="#products" onclick="event.preventDefault();document.getElementById('products').scrollIntoView({behavior:'smooth',block:'start'})" class="bg-primary text-white px-8 py-4 rounded-xl font-bold text-lg flex items-center gap-2 hover:shadow-lg hover:shadow-primary/20 transition-all">
-          <span data-i18n="products_browse_products">浏览产品</span>
-          <span class="material-symbols-outlined">arrow_downward</span>
-        </a>
-        <a href="/quote" class="border-2 border-slate-200 dark:border-slate-800 px-8 py-4 rounded-xl font-bold text-lg hover:bg-slate-100 dark:hover:bg-slate-800 transition-all flex items-center gap-2">
-          <span data-i18n="products_request_quote">获取报价</span>
-          <span class="material-symbols-outlined">request_quote</span>
-        </a>
-      </div>
-    </div>
-    <div class="w-full lg:w-1/2 relative">
-      <div class="aspect-square bg-gradient-to-br from-primary/20 to-transparent rounded-full absolute -top-10 -right-10 blur-3xl opacity-50 -z-10"></div>
-      <div class="relative w-full h-[500px] bg-slate-100 dark:bg-slate-800 rounded-3xl overflow-hidden shadow-2xl border border-slate-200/50 dark:border-slate-700/50">
-        <img alt="全系列智能商厨设备" class="w-full h-full object-contain p-6" src="/assets/images/products/esl-bxc800.webp" loading="eager">
-        <div class="absolute bottom-6 left-6 right-6 p-6 bg-white/10 backdrop-blur-xl border border-white/20 rounded-2xl">
-          <div class="flex justify-between items-center text-white">
-            <div>
-              <p class="text-xs font-bold uppercase opacity-70">Product Center</p>
-              <p class="text-xl font-black" data-i18n="products_hero_card_title">全系列智能商厨设备</p>
-            </div>
-            <div class="text-right">
-              <p class="text-xs font-bold uppercase opacity-70">Categories</p>
-              <p class="text-xl font-black text-primary">6+</p>
+      <div class="w-full lg:w-1/2 relative">
+        <div class="aspect-square bg-gradient-to-br from-primary/20 to-transparent rounded-full absolute -top-10 -right-10 blur-3xl opacity-50 -z-10"></div>
+        <div class="relative w-full h-[500px] bg-slate-100 dark:bg-slate-800 rounded-3xl overflow-hidden shadow-2xl border border-slate-200/50 dark:border-slate-700/50">
+          <img alt="全系列智能商厨设备" class="w-full h-full object-contain p-6" src="/assets/images/products/esl-bxc800.webp" loading="eager">
+          <div class="absolute bottom-6 left-6 right-6 p-6 bg-white/10 backdrop-blur-xl border border-white/20 rounded-2xl">
+            <div class="flex justify-between items-center text-white">
+              <div>
+                <p class="text-xs font-bold uppercase opacity-70">Product Center</p>
+                <p class="text-xl font-black" data-i18n="products_hero_card_title">全系列智能商厨设备</p>
+              </div>
+              <div class="text-right">
+                <p class="text-xs font-bold uppercase opacity-70">Categories</p>
+                <p class="text-xl font-black text-primary">6+</p>
+              </div>
             </div>
           </div>
         </div>
@@ -235,27 +237,29 @@ window.addEventListener('DOMContentLoaded',function(){
 
   <!-- CTA Section -->
   <section class="w-full py-16 fullwidth-bg">
-    <div class="w-full px-3 md:px-5 lg:px-5 xl:px-10 bg-gradient-to-br from-primary/10 to-primary/5 dark:from-primary/20 dark:to-primary/5 rounded-3xl p-12 lg:p-16 border border-primary/20">
-      <div class="max-w-3xl mx-auto text-center">
-        <h2 class="text-3xl lg:text-5xl font-black mb-6 text-slate-900 dark:text-white" data-i18n="products_cta_title">
-          需要定制化解决方案？
-        </h2>
-        <p class="text-lg text-slate-600 dark:text-slate-400 mb-8" data-i18n="products_cta_desc">
-          我们的工程师团队可以根据您的厨房布局和业务需求，为您量身定制最优的设备配置方案。
-        </p>
-        <div class="flex flex-wrap justify-center gap-4">
-          <a href="/quote" class="bg-primary text-white px-8 py-4 rounded-xl font-bold text-lg hover:shadow-lg hover:shadow-primary/20 transition-all flex items-center gap-2">
-            <span data-i18n="products_cta_btn_quote">获取定制报价</span>
-            <span class="material-symbols-outlined">request_quote</span>
-          </a>
-          <a
-            href="https://wa.me/8613163756465" data-wa-message-key="wa_msg_products"
-            target="_blank"
-            class="border-2 border-slate-300 dark:border-slate-600 px-8 py-4 rounded-xl font-bold text-lg hover:bg-slate-100 dark:hover:bg-slate-800 transition-all flex items-center gap-2"
-           rel="noopener noreferrer">
-            <span data-i18n="products_cta_btn_contact">联系销售团队</span>
-            <span class="material-symbols-outlined">support_agent</span>
-          </a>
+    <div class="section-content">
+      <div class="w-full bg-gradient-to-br from-primary/10 to-primary/5 dark:from-primary/20 dark:to-primary/5 rounded-3xl p-12 lg:p-16 border border-primary/20">
+        <div class="max-w-3xl mx-auto text-center">
+          <h2 class="text-3xl lg:text-5xl font-black mb-6 text-slate-900 dark:text-white" data-i18n="products_cta_title">
+            需要定制化解决方案？
+          </h2>
+          <p class="text-lg text-slate-600 dark:text-slate-400 mb-8" data-i18n="products_cta_desc">
+            我们的工程师团队可以根据您的厨房布局和业务需求，为您量身定制最优的设备配置方案。
+          </p>
+          <div class="flex flex-wrap justify-center gap-4">
+            <a href="/quote" class="bg-primary text-white px-8 py-4 rounded-xl font-bold text-lg hover:shadow-lg hover:shadow-primary/20 transition-all flex items-center gap-2">
+              <span data-i18n="products_cta_btn_quote">获取定制报价</span>
+              <span class="material-symbols-outlined">request_quote</span>
+            </a>
+            <a
+              href="https://wa.me/8613163756465" data-wa-message-key="wa_msg_products"
+              target="_blank"
+              class="border-2 border-slate-300 dark:border-slate-600 px-8 py-4 rounded-xl font-bold text-lg hover:bg-slate-100 dark:hover:bg-slate-800 transition-all flex items-center gap-2"
+             rel="noopener noreferrer">
+              <span data-i18n="products_cta_btn_contact">联系销售团队</span>
+              <span class="material-symbols-outlined">support_agent</span>
+            </a>
+          </div>
         </div>
       </div>
     </div>

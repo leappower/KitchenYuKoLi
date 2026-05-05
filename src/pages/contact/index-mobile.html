@@ -70,19 +70,21 @@
     <main id="spa-content" class="px-3 py-6">
       <!-- Hero -->
       <section class="mb-8 fullwidth-bg">
-        <div
-          class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-bold uppercase tracking-wider mb-3"
-        >
-          <span class="material-symbols-outlined text-sm">mail</span>
-          <span data-i18n="contact_hero_badge">联系我们</span>
+        <div class="section-content">
+          <div
+            class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-bold uppercase tracking-wider mb-3"
+          >
+            <span class="material-symbols-outlined text-sm">mail</span>
+            <span data-i18n="contact_hero_badge">联系我们</span>
+          </div>
+          <h1 class="text-3xl font-black leading-tight tracking-tighter mb-3">
+            <span data-i18n="contact_mobile_hero_title">联系</span>
+            <span class="text-primary" data-i18n="contact_mobile_hero_title_highlight">我们</span>
+          </h1>
+          <p class="text-slate-600 dark:text-slate-400 text-sm" data-i18n="contact_mobile_hero_desc">
+            我们随时为您提供报价、支持和合作服务。
+          </p>
         </div>
-        <h1 class="text-3xl font-black leading-tight tracking-tighter mb-3">
-          <span data-i18n="contact_mobile_hero_title">联系</span>
-          <span class="text-primary" data-i18n="contact_mobile_hero_title_highlight">我们</span>
-        </h1>
-        <p class="text-slate-600 dark:text-slate-400 text-sm" data-i18n="contact_mobile_hero_desc">
-          我们随时为您提供报价、支持和合作服务。
-        </p>
       </section>
 
       <!-- Quick Contact -->
@@ -114,68 +116,72 @@
 
       <!-- Contact Form -->
       <section class="mb-8 fullwidth-bg">
-        <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-4 px-3">
-          <h3 id="contact-form" class="font-bold mb-3" data-i18n="contact_mobile_form_title">发送留言</h3>
-          <form class="space-y-2">
-            <input
-              type="text"
-              class="w-full px-3 py-2 rounded-lg border border-slate-200 dark:border-slate-700 bg-transparent text-sm"
-              placeholder="Your Name"
-              data-i18n-placeholder="contact_mobile_form_name_placeholder"
-            />
-            <input
-              type="email"
-              class="w-full px-3 py-2 rounded-lg border border-slate-200 dark:border-slate-700 bg-transparent text-sm"
-              placeholder="Email"
-              data-i18n-placeholder="contact_mobile_form_email_placeholder"
-            />
-            <input
-              type="text"
-              class="w-full px-3 py-2 rounded-lg border border-slate-200 dark:border-slate-700 bg-transparent text-sm"
-              placeholder="Company"
-              data-i18n-placeholder="contact_mobile_form_company_placeholder"
-            />
-            <textarea
-              rows="3"
-              class="w-full px-3 py-2 rounded-lg border border-slate-200 dark:border-slate-700 bg-transparent text-sm resize-none"
-              placeholder="Message"
-              data-i18n-placeholder="contact_mobile_form_message_placeholder"
-            ></textarea>
-            <button
-              type="submit"
-              class="w-full bg-primary text-white py-2.5 rounded-lg font-bold text-sm"
-              data-i18n="contact_mobile_form_submit"
-            >
-              发送
-            </button>
-          </form>
+        <div class="section-content">
+          <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-4">
+            <h3 id="contact-form" class="font-bold mb-3" data-i18n="contact_mobile_form_title">发送留言</h3>
+            <form class="space-y-2">
+              <input
+                type="text"
+                class="w-full px-3 py-2 rounded-lg border border-slate-200 dark:border-slate-700 bg-transparent text-sm"
+                placeholder="Your Name"
+                data-i18n-placeholder="contact_mobile_form_name_placeholder"
+              />
+              <input
+                type="email"
+                class="w-full px-3 py-2 rounded-lg border border-slate-200 dark:border-slate-700 bg-transparent text-sm"
+                placeholder="Email"
+                data-i18n-placeholder="contact_mobile_form_email_placeholder"
+              />
+              <input
+                type="text"
+                class="w-full px-3 py-2 rounded-lg border border-slate-200 dark:border-slate-700 bg-transparent text-sm"
+                placeholder="Company"
+                data-i18n-placeholder="contact_mobile_form_company_placeholder"
+              />
+              <textarea
+                rows="3"
+                class="w-full px-3 py-2 rounded-lg border border-slate-200 dark:border-slate-700 bg-transparent text-sm resize-none"
+                placeholder="Message"
+                data-i18n-placeholder="contact_mobile_form_message_placeholder"
+              ></textarea>
+              <button
+                type="submit"
+                class="w-full bg-primary text-white py-2.5 rounded-lg font-bold text-sm"
+                data-i18n="contact_mobile_form_submit"
+              >
+                发送
+              </button>
+            </form>
+          </div>
         </div>
       </section>
 
       <!-- Office Address -->
       <section class="mb-8 fullwidth-bg">
-        <h2 class="text-lg font-bold mb-3" data-i18n="contact_mobile_offices_title">公司地址</h2>
-        <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-4 px-3">
-          <div class="flex items-start gap-3 mb-3">
-            <span class="text-xl">🇨🇳</span>
-            <div>
-              <p class="font-bold text-sm" data-i18n="contact_office_hq">中国总部</p>
-              <p class="text-xs text-slate-500" data-i18n="contact_company_name">佛山市跃迁力科技有限公司</p>
-            </div>
-          </div>
-          <div class="space-y-2 ml-8">
-            <div class="flex items-start gap-2">
-              <span class="material-symbols-outlined text-primary text-sm mt-0.5">apartment</span>
+        <div class="section-content">
+          <h2 class="text-lg font-bold mb-3" data-i18n="contact_mobile_offices_title">公司地址</h2>
+          <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-4">
+            <div class="flex items-start gap-3 mb-3">
+              <span class="text-xl">🇨🇳</span>
               <div>
-                <p class="text-xs font-bold">中文地址</p>
-                <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">广东省佛山市顺德区大良街道红岗社区展伦路83号万创园12栋502室之六</p>
+                <p class="font-bold text-sm" data-i18n="contact_office_hq">中国总部</p>
+                <p class="text-xs text-slate-500" data-i18n="contact_company_name">佛山市跃迁力科技有限公司</p>
               </div>
             </div>
-            <div class="flex items-start gap-2">
-              <span class="material-symbols-outlined text-primary text-sm mt-0.5">language</span>
-              <div>
-                <p class="text-xs font-bold">English Address</p>
-                <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">Room 6, 502, Building 12, Wanchuangyuan, No. 83, Zhanlun Road, Honggang Community, Daliang Subdistrict, Shunde District, Foshan City, Guangdong Province, China</p>
+            <div class="space-y-2 ml-8">
+              <div class="flex items-start gap-2">
+                <span class="material-symbols-outlined text-primary text-sm mt-0.5">apartment</span>
+                <div>
+                  <p class="text-xs font-bold">中文地址</p>
+                  <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">广东省佛山市顺德区大良街道红岗社区展伦路83号万创园12栋502室之六</p>
+                </div>
+              </div>
+              <div class="flex items-start gap-2">
+                <span class="material-symbols-outlined text-primary text-sm mt-0.5">language</span>
+                <div>
+                  <p class="text-xs font-bold">English Address</p>
+                  <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">Room 6, 502, Building 12, Wanchuangyuan, No. 83, Zhanlun Road, Honggang Community, Daliang Subdistrict, Shunde District, Foshan City, Guangdong Province, China</p>
+                </div>
               </div>
             </div>
           </div>

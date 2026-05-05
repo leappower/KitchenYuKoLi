@@ -186,41 +186,45 @@
 
         <!-- Product Grid (2-col, uses tablet card style) -->
         <section id="products" class="pb-4 fullwidth-bg">
-          <div class="px-3">
-          <div class="grid grid-cols-2 gap-3" id="product-grid">
-            <!-- Dynamically rendered by product-grid.js -->
-          </div>
-          <!-- Load More -->
-          <div class="flex justify-center mt-6">
-            <button
-              class="flex items-center gap-2 px-6 py-2.5 border-2 border-slate-200 dark:border-slate-700 rounded-xl font-bold text-xs text-slate-600 dark:text-slate-400 hover:border-primary hover:text-primary transition-all"
-              data-i18n="products_load_more"
-            >
-              加载更多产品
-              <span class="material-symbols-outlined text-sm">expand_more</span>
-            </button>
-          </div>
+          <div class="section-content">
+            <div class="">
+            <div class="grid grid-cols-2 gap-3" id="product-grid">
+              <!-- Dynamically rendered by product-grid.js -->
+            </div>
+            <!-- Load More -->
+            <div class="flex justify-center mt-6">
+              <button
+                class="flex items-center gap-2 px-6 py-2.5 border-2 border-slate-200 dark:border-slate-700 rounded-xl font-bold text-xs text-slate-600 dark:text-slate-400 hover:border-primary hover:text-primary transition-all"
+                data-i18n="products_load_more"
+              >
+                加载更多产品
+                <span class="material-symbols-outlined text-sm">expand_more</span>
+              </button>
+            </div>
+            </div>
           </div>
         </section>
 
         <!-- CTA Section -->
         <section class="py-8 fullwidth-bg">
-          <div class="px-3">
-          <div class="bg-gradient-to-br from-primary/10 to-primary/5 rounded-2xl p-6 text-center">
-            <h2 class="text-lg font-bold mb-2 text-slate-900 dark:text-white" data-i18n="products_cta_title_mobile">
-              需要定制方案？
-            </h2>
-            <p class="text-sm text-slate-600 dark:text-slate-400 mb-4" data-i18n="products_cta_desc_mobile">
-              我们的工程师团队为您量身定制
-            </p>
-            <a
-              href="/quote"
-              class="inline-flex items-center gap-2 bg-primary text-white px-6 py-3 rounded-xl font-bold text-sm"
-            >
-              <span data-i18n="products_cta_btn_quote">获取报价</span>
-              <span class="material-symbols-outlined text-sm">arrow_forward</span>
-            </a>
-          </div>
+          <div class="section-content">
+            <div class="">
+            <div class="bg-gradient-to-br from-primary/10 to-primary/5 rounded-2xl p-6 text-center">
+              <h2 class="text-lg font-bold mb-2 text-slate-900 dark:text-white" data-i18n="products_cta_title_mobile">
+                需要定制方案？
+              </h2>
+              <p class="text-sm text-slate-600 dark:text-slate-400 mb-4" data-i18n="products_cta_desc_mobile">
+                我们的工程师团队为您量身定制
+              </p>
+              <a
+                href="/quote"
+                class="inline-flex items-center gap-2 bg-primary text-white px-6 py-3 rounded-xl font-bold text-sm"
+              >
+                <span data-i18n="products_cta_btn_quote">获取报价</span>
+                <span class="material-symbols-outlined text-sm">arrow_forward</span>
+              </a>
+            </div>
+            </div>
           </div>
         </section>
       </div>

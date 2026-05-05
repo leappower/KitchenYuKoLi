@@ -58,38 +58,40 @@
 
 <!-- ═══ Section 1: Hero ═══ -->
 <section class="w-full flex flex-col lg:flex-row items-center py-10 gap-12 fullwidth-bg">
-  <div class="w-full lg:w-1/2 space-y-8 px-3 md:px-5 lg:px-5 xl:px-10">
-    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-bold uppercase tracking-widest">
-      <span class="material-symbols-outlined text-xs leading-none">check_circle</span>
-      <span data-i18n="support_install_hero_badge">200+ 套设备成功安装</span>
+  <div class="section-content">
+    <div class="w-full lg:w-1/2 space-y-8">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-bold uppercase tracking-widest">
+        <span class="material-symbols-outlined text-xs leading-none">check_circle</span>
+        <span data-i18n="support_install_hero_badge">200+ 套设备成功安装</span>
+      </div>
+      <h1 class="text-4xl xl:text-6xl font-black leading-[1.1] tracking-tight text-slate-900 dark:text-white">
+        <span data-i18n="support_install_hero_title_1">按需定制，发货前调试完毕</span><br/>
+        <span class="text-primary" data-i18n="support_install_hero_title_2">到货通电，即刻开业</span>
+      </h1>
+      <p class="text-lg xl:text-xl text-slate-600 dark:text-slate-400 max-w-2xl leading-relaxed" data-i18n="support_install_hero_desc">
+        每台设备在出厂前都会经过完整的调试和测试，到店后通电就能用。我们的工程师帮你规划最佳摆放位置、完成管线连接，并教会你的厨师操作，确保顺利开业。
+      </p>
+      <div class="flex flex-wrap gap-4 pt-4">
+        <a href="/quote/" class="bg-primary text-white px-8 py-4 rounded-xl font-bold text-lg flex items-center gap-2 hover:shadow-lg hover:shadow-primary/20 transition-all">
+          <span data-i18n="support_install_cta_primary">免费获取方案</span>
+          <span class="material-symbols-outlined">bolt</span>
+        </a>
+        <a href="/support/training/" class="border-2 border-slate-200 dark:border-slate-800 px-8 py-4 rounded-xl font-bold text-lg hover:bg-slate-100 dark:hover:bg-slate-800 transition-all flex items-center gap-2">
+          <span data-i18n="support_install_cta_secondary">查看培训服务</span>
+          <span class="material-symbols-outlined">description</span>
+        </a>
+      </div>
     </div>
-    <h1 class="text-4xl xl:text-6xl font-black leading-[1.1] tracking-tight text-slate-900 dark:text-white">
-      <span data-i18n="support_install_hero_title_1">按需定制，发货前调试完毕</span><br/>
-      <span class="text-primary" data-i18n="support_install_hero_title_2">到货通电，即刻开业</span>
-    </h1>
-    <p class="text-lg xl:text-xl text-slate-600 dark:text-slate-400 max-w-2xl leading-relaxed" data-i18n="support_install_hero_desc">
-      每台设备在出厂前都会经过完整的调试和测试，到店后通电就能用。我们的工程师帮你规划最佳摆放位置、完成管线连接，并教会你的厨师操作，确保顺利开业。
-    </p>
-    <div class="flex flex-wrap gap-4 pt-4">
-      <a href="/quote/" class="bg-primary text-white px-8 py-4 rounded-xl font-bold text-lg flex items-center gap-2 hover:shadow-lg hover:shadow-primary/20 transition-all">
-        <span data-i18n="support_install_cta_primary">免费获取方案</span>
-        <span class="material-symbols-outlined">bolt</span>
-      </a>
-      <a href="/support/training/" class="border-2 border-slate-200 dark:border-slate-800 px-8 py-4 rounded-xl font-bold text-lg hover:bg-slate-100 dark:hover:bg-slate-800 transition-all flex items-center gap-2">
-        <span data-i18n="support_install_cta_secondary">查看培训服务</span>
-        <span class="material-symbols-outlined">description</span>
-      </a>
-    </div>
-  </div>
-  <div class="w-full lg:w-1/2 relative">
-    <div class="aspect-square bg-gradient-to-br from-primary/20 to-transparent rounded-full absolute -top-10 -right-10 blur-3xl opacity-50 -z-10"></div>
-    <div class="relative w-full h-[600px] bg-slate-200 dark:bg-slate-800 rounded-3xl overflow-hidden shadow-2xl border border-white/10" style="background-image: url('/assets/images/support-install-hero.webp'); background-size: cover; background-position: center;">
-      <div class="absolute bottom-6 left-6 bg-white/90 dark:bg-slate-900/90 backdrop-blur p-5 rounded-2xl shadow-xl border border-slate-100 dark:border-slate-800 w-[200px]">
-        <div class="flex items-center gap-3 mb-1">
-          <span class="material-symbols-outlined text-primary text-2xl">schedule</span>
-          <span class="text-xl font-black" data-i18n="support_install_hero_float_value">出厂即调好</span>
+    <div class="w-full lg:w-1/2 relative">
+      <div class="aspect-square bg-gradient-to-br from-primary/20 to-transparent rounded-full absolute -top-10 -right-10 blur-3xl opacity-50 -z-10"></div>
+      <div class="relative w-full h-[600px] bg-slate-200 dark:bg-slate-800 rounded-3xl overflow-hidden shadow-2xl border border-white/10" style="background-image: url('/assets/images/support-install-hero.webp'); background-size: cover; background-position: center;">
+        <div class="absolute bottom-6 left-6 bg-white/90 dark:bg-slate-900/90 backdrop-blur p-5 rounded-2xl shadow-xl border border-slate-100 dark:border-slate-800 w-[200px]">
+          <div class="flex items-center gap-3 mb-1">
+            <span class="material-symbols-outlined text-primary text-2xl">schedule</span>
+            <span class="text-xl font-black" data-i18n="support_install_hero_float_value">出厂即调好</span>
+          </div>
+          <p class="text-[11px] font-medium text-slate-500 uppercase tracking-wide" data-i18n="support_install_hero_float_label">到店即用</p>
         </div>
-        <p class="text-[11px] font-medium text-slate-500 uppercase tracking-wide" data-i18n="support_install_hero_float_label">到店即用</p>
       </div>
     </div>
   </div>
@@ -98,62 +100,66 @@
 
 <!-- ═══ Trust Bar ═══ -->
 <section class="py-6 border-y border-slate-200 dark:border-slate-800 fullwidth-bg">
-  <div class="px-3 md:px-5 lg:px-5 xl:px-10">
-    <div class="flex flex-wrap items-center justify-center gap-6 md:gap-10 text-slate-400 dark:text-slate-500">
-      <div class="flex items-center gap-2 text-xs font-medium">
-        <span class="material-symbols-outlined text-base">verified</span>
-        <span data-i18n="support_install_trust_cert">CE / ISO / ROHS 认证</span>
-      </div>
-      <div class="flex items-center gap-2 text-xs font-medium">
-        <span class="material-symbols-outlined text-base">public</span>
-        <span data-i18n="support_install_trust_export">出口 68+ 国家</span>
-      </div>
-      <div class="flex items-center gap-2 text-xs font-medium">
-        <span class="material-symbols-outlined text-base">apartment</span>
-        <span data-i18n="support_install_trust_clients">200+ 安装案例</span>
-      </div>
-      <div class="flex items-center gap-2 text-xs font-medium">
-        <span class="material-symbols-outlined text-base">factory</span>
-        <span data-i18n="support_install_trust_factory">20 年源头工厂</span>
+  <div class="section-content">
+    <div class="md:px-5 lg:px-5 xl:px-10">
+      <div class="flex flex-wrap items-center justify-center gap-6 md:gap-10 text-slate-400 dark:text-slate-500">
+        <div class="flex items-center gap-2 text-xs font-medium">
+          <span class="material-symbols-outlined text-base">verified</span>
+          <span data-i18n="support_install_trust_cert">CE / ISO / ROHS 认证</span>
+        </div>
+        <div class="flex items-center gap-2 text-xs font-medium">
+          <span class="material-symbols-outlined text-base">public</span>
+          <span data-i18n="support_install_trust_export">出口 68+ 国家</span>
+        </div>
+        <div class="flex items-center gap-2 text-xs font-medium">
+          <span class="material-symbols-outlined text-base">apartment</span>
+          <span data-i18n="support_install_trust_clients">200+ 安装案例</span>
+        </div>
+        <div class="flex items-center gap-2 text-xs font-medium">
+          <span class="material-symbols-outlined text-base">factory</span>
+          <span data-i18n="support_install_trust_factory">20 年源头工厂</span>
+        </div>
       </div>
     </div>
   </div>
 </section>
 <!-- ═══ Section 2: Core Values ═══ -->
 <section class="py-12 fullwidth-bg">
-  <div class="px-3 md:px-5 lg:px-5 xl:px-10">
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-      <!-- Card 1 -->
-      <div class="bg-white dark:bg-slate-800 rounded-2xl p-6 shadow-sm border border-slate-200 dark:border-slate-700 hover:shadow-lg transition-all">
-        <div class="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center text-primary">
-          <span class="material-symbols-outlined">assignment_turned_in</span>
+  <div class="section-content">
+    <div class="md:px-5 lg:px-5 xl:px-10">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <!-- Card 1 -->
+        <div class="bg-white dark:bg-slate-800 rounded-2xl p-6 shadow-sm border border-slate-200 dark:border-slate-700 hover:shadow-lg transition-all">
+          <div class="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center text-primary">
+            <span class="material-symbols-outlined">assignment_turned_in</span>
+          </div>
+          <h3 class="text-lg font-bold mt-4" data-i18n="support_install_value_1_title">你的厨房，我们替你看</h3>
+          <p class="text-sm text-slate-500 dark:text-slate-400 mt-2 leading-relaxed" data-i18n="support_install_value_1_desc">工程师到店实地评估电力、水路、通风条件，帮你规划设备最佳摆放位置，提前排除安装隐患。</p>
         </div>
-        <h3 class="text-lg font-bold mt-4" data-i18n="support_install_value_1_title">你的厨房，我们替你看</h3>
-        <p class="text-sm text-slate-500 dark:text-slate-400 mt-2 leading-relaxed" data-i18n="support_install_value_1_desc">工程师到店实地评估电力、水路、通风条件，帮你规划设备最佳摆放位置，提前排除安装隐患。</p>
-      </div>
-      <!-- Card 2 -->
-      <div class="bg-white dark:bg-slate-800 rounded-2xl p-6 shadow-sm border border-slate-200 dark:border-slate-700 hover:shadow-lg transition-all">
-        <div class="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center text-primary">
-          <span class="material-symbols-outlined">construction</span>
+        <!-- Card 2 -->
+        <div class="bg-white dark:bg-slate-800 rounded-2xl p-6 shadow-sm border border-slate-200 dark:border-slate-700 hover:shadow-lg transition-all">
+          <div class="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center text-primary">
+            <span class="material-symbols-outlined">construction</span>
+          </div>
+          <h3 class="text-lg font-bold mt-4" data-i18n="support_install_value_2_title">不用你操心，我们全搞定</h3>
+          <p class="text-sm text-slate-500 dark:text-slate-400 mt-2 leading-relaxed" data-i18n="support_install_value_2_desc">设备到店后，工程师帮你规划摆放位置、完成管线连接。设备出厂前已调试完毕，到店安装就位后即可投入使用。</p>
         </div>
-        <h3 class="text-lg font-bold mt-4" data-i18n="support_install_value_2_title">不用你操心，我们全搞定</h3>
-        <p class="text-sm text-slate-500 dark:text-slate-400 mt-2 leading-relaxed" data-i18n="support_install_value_2_desc">设备到店后，工程师帮你规划摆放位置、完成管线连接。设备出厂前已调试完毕，到店安装就位后即可投入使用。</p>
-      </div>
-      <!-- Card 3 -->
-      <div class="bg-white dark:bg-slate-800 rounded-2xl p-6 shadow-sm border border-slate-200 dark:border-slate-700 hover:shadow-lg transition-all">
-        <div class="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center text-primary">
-          <span class="material-symbols-outlined">tune</span>
+        <!-- Card 3 -->
+        <div class="bg-white dark:bg-slate-800 rounded-2xl p-6 shadow-sm border border-slate-200 dark:border-slate-700 hover:shadow-lg transition-all">
+          <div class="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center text-primary">
+            <span class="material-symbols-outlined">tune</span>
+          </div>
+          <h3 class="text-lg font-bold mt-4" data-i18n="support_install_value_3_title">出厂已调好，到店通电即用</h3>
+          <p class="text-sm text-slate-500 dark:text-slate-400 mt-2 leading-relaxed" data-i18n="support_install_value_3_desc">每台设备在工厂都会经过完整的调试和测试，确保到货后通电即可正常使用，性能和出厂测试时完全一致。</p>
         </div>
-        <h3 class="text-lg font-bold mt-4" data-i18n="support_install_value_3_title">出厂已调好，到店通电即用</h3>
-        <p class="text-sm text-slate-500 dark:text-slate-400 mt-2 leading-relaxed" data-i18n="support_install_value_3_desc">每台设备在工厂都会经过完整的调试和测试，确保到货后通电即可正常使用，性能和出厂测试时完全一致。</p>
-      </div>
-      <!-- Card 4 -->
-      <div class="bg-white dark:bg-slate-800 rounded-2xl p-6 shadow-sm border border-slate-200 dark:border-slate-700 hover:shadow-lg transition-all">
-        <div class="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center text-primary">
-          <span class="material-symbols-outlined">verified</span>
+        <!-- Card 4 -->
+        <div class="bg-white dark:bg-slate-800 rounded-2xl p-6 shadow-sm border border-slate-200 dark:border-slate-700 hover:shadow-lg transition-all">
+          <div class="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center text-primary">
+            <span class="material-symbols-outlined">verified</span>
+          </div>
+          <h3 class="text-lg font-bold mt-4" data-i18n="support_install_value_4_title">教会你的厨师，我们不撤</h3>
+          <p class="text-sm text-slate-500 dark:text-slate-400 mt-2 leading-relaxed" data-i18n="support_install_value_4_desc">设备通电确认正常后，工程师现场演示操作，并培训你的团队直到能独立使用。附赠操作手册和视频教程，随时复习。</p>
         </div>
-        <h3 class="text-lg font-bold mt-4" data-i18n="support_install_value_4_title">教会你的厨师，我们不撤</h3>
-        <p class="text-sm text-slate-500 dark:text-slate-400 mt-2 leading-relaxed" data-i18n="support_install_value_4_desc">设备通电确认正常后，工程师现场演示操作，并培训你的团队直到能独立使用。附赠操作手册和视频教程，随时复习。</p>
       </div>
     </div>
   </div>
@@ -161,40 +167,42 @@
 
 <!-- ═══ Section 3: Process Steps ═══ -->
 <section class="py-12 bg-slate-50 dark:bg-slate-900/30 fullwidth-bg">
-  <div class="px-3 md:px-5 lg:px-5 xl:px-10">
-    <div class="flex flex-col items-center text-center mb-12 gap-4">
-      <h2 class="text-4xl font-black tracking-tight" data-i18n="support_install_process_title">三步装好你的厨房</h2>
-      <p class="text-slate-600 dark:text-slate-400 max-w-2xl" data-i18n="support_install_process_desc">从工程师到店到交付使用，每一步都透明可控，让你省心。</p>
-    </div>
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 relative">
-      <!-- Step 1 -->
-      <div class="flex gap-4">
-        <div class="flex flex-col items-center">
-          <span class="text-4xl font-black text-primary/20">01</span>
-        </div>
-        <div>
-          <h3 class="text-lg font-bold" data-i18n="support_install_step_1_title">预约到店勘测</h3>
-          <p class="text-sm text-slate-500 mt-1" data-i18n="support_install_step_1_desc">工程师到你店里，评估厨房条件，提前排除安装隐患，不会花冤枉钱。</p>
-        </div>
+  <div class="section-content">
+    <div class="md:px-5 lg:px-5 xl:px-10">
+      <div class="flex flex-col items-center text-center mb-12 gap-4">
+        <h2 class="text-4xl font-black tracking-tight" data-i18n="support_install_process_title">三步装好你的厨房</h2>
+        <p class="text-slate-600 dark:text-slate-400 max-w-2xl" data-i18n="support_install_process_desc">从工程师到店到交付使用，每一步都透明可控，让你省心。</p>
       </div>
-      <!-- Step 2 -->
-      <div class="flex gap-4">
-        <div class="flex flex-col items-center">
-          <span class="text-4xl font-black text-primary/20">02</span>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 relative">
+        <!-- Step 1 -->
+        <div class="flex gap-4">
+          <div class="flex flex-col items-center">
+            <span class="text-4xl font-black text-primary/20">01</span>
+          </div>
+          <div>
+            <h3 class="text-lg font-bold" data-i18n="support_install_step_1_title">预约到店勘测</h3>
+            <p class="text-sm text-slate-500 mt-1" data-i18n="support_install_step_1_desc">工程师到你店里，评估厨房条件，提前排除安装隐患，不会花冤枉钱。</p>
+          </div>
         </div>
-        <div>
-          <h3 class="text-lg font-bold" data-i18n="support_install_step_2_title">上门安装就位</h3>
-          <p class="text-sm text-slate-500 mt-1" data-i18n="support_install_step_2_desc">工程师按约定时间上门，帮你规划摆放位置、完成管线连接。设备出厂前已调试完毕，到店安装就位后通电即可使用。</p>
+        <!-- Step 2 -->
+        <div class="flex gap-4">
+          <div class="flex flex-col items-center">
+            <span class="text-4xl font-black text-primary/20">02</span>
+          </div>
+          <div>
+            <h3 class="text-lg font-bold" data-i18n="support_install_step_2_title">上门安装就位</h3>
+            <p class="text-sm text-slate-500 mt-1" data-i18n="support_install_step_2_desc">工程师按约定时间上门，帮你规划摆放位置、完成管线连接。设备出厂前已调试完毕，到店安装就位后通电即可使用。</p>
+          </div>
         </div>
-      </div>
-      <!-- Step 3 -->
-      <div class="flex gap-4">
-        <div class="flex flex-col items-center">
-          <span class="text-4xl font-black text-primary/20">03</span>
-        </div>
-        <div>
-          <h3 class="text-lg font-bold" data-i18n="support_install_step_3_title">验收交付</h3>
-          <p class="text-sm text-slate-500 mt-1" data-i18n="support_install_step_3_desc">演示性能，培训厨师操作，交付手册和保修卡。你满意签字，后续还有任何问题可随时线上联系我们。</p>
+        <!-- Step 3 -->
+        <div class="flex gap-4">
+          <div class="flex flex-col items-center">
+            <span class="text-4xl font-black text-primary/20">03</span>
+          </div>
+          <div>
+            <h3 class="text-lg font-bold" data-i18n="support_install_step_3_title">验收交付</h3>
+            <p class="text-sm text-slate-500 mt-1" data-i18n="support_install_step_3_desc">演示性能，培训厨师操作，交付手册和保修卡。你满意签字，后续还有任何问题可随时线上联系我们。</p>
+          </div>
         </div>
       </div>
     </div>
@@ -203,43 +211,45 @@
 
 <!-- ═══ Section 4: Environment Requirements ═══ -->
 <section class="py-12 fullwidth-bg">
-  <div class="px-3 md:px-5 lg:px-5 xl:px-10">
-    <div class="flex flex-col items-center text-center mb-12 gap-4">
-      <h2 class="text-4xl font-black tracking-tight" data-i18n="support_install_env_title">你的厨房需要什么条件</h2>
-      <p class="text-slate-600 dark:text-slate-400 max-w-2xl" data-i18n="support_install_env_desc">这些是设备正常运转的基础条件。如果不确定？工程师到店时会帮你确认。</p>
-    </div>
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-      <!-- Requirement 1 -->
-      <div class="bg-white dark:bg-slate-800 rounded-2xl p-6 shadow-sm border border-slate-200 dark:border-slate-700 hover:shadow-lg transition-all">
-        <div class="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center text-primary">
-          <span class="material-symbols-outlined">electrical_services</span>
-        </div>
-        <h3 class="text-lg font-bold mt-4" data-i18n="support_install_env_1_title">需要三相电（380V/220V）</h3>
-        <p class="text-sm text-slate-500 dark:text-slate-400 mt-2 leading-relaxed" data-i18n="support_install_env_1_desc">大部分商业厨房都已具备。不确定？勘测时工程师帮你确认。</p>
+  <div class="section-content">
+    <div class="md:px-5 lg:px-5 xl:px-10">
+      <div class="flex flex-col items-center text-center mb-12 gap-4">
+        <h2 class="text-4xl font-black tracking-tight" data-i18n="support_install_env_title">你的厨房需要什么条件</h2>
+        <p class="text-slate-600 dark:text-slate-400 max-w-2xl" data-i18n="support_install_env_desc">这些是设备正常运转的基础条件。如果不确定？工程师到店时会帮你确认。</p>
       </div>
-      <!-- Requirement 2 -->
-      <div class="bg-white dark:bg-slate-800 rounded-2xl p-6 shadow-sm border border-slate-200 dark:border-slate-700 hover:shadow-lg transition-all">
-        <div class="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center text-primary">
-          <span class="material-symbols-outlined">water_drop</span>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <!-- Requirement 1 -->
+        <div class="bg-white dark:bg-slate-800 rounded-2xl p-6 shadow-sm border border-slate-200 dark:border-slate-700 hover:shadow-lg transition-all">
+          <div class="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center text-primary">
+            <span class="material-symbols-outlined">electrical_services</span>
+          </div>
+          <h3 class="text-lg font-bold mt-4" data-i18n="support_install_env_1_title">需要三相电（380V/220V）</h3>
+          <p class="text-sm text-slate-500 dark:text-slate-400 mt-2 leading-relaxed" data-i18n="support_install_env_1_desc">大部分商业厨房都已具备。不确定？勘测时工程师帮你确认。</p>
         </div>
-        <h3 class="text-lg font-bold mt-4" data-i18n="support_install_env_2_title">需要有进水和排水</h3>
-        <p class="text-sm text-slate-500 dark:text-slate-400 mt-2 leading-relaxed" data-i18n="support_install_env_2_desc">标准的商业厨房水槽配置即可。水压不够可以加装增压泵。</p>
-      </div>
-      <!-- Requirement 3 -->
-      <div class="bg-white dark:bg-slate-800 rounded-2xl p-6 shadow-sm border border-slate-200 dark:border-slate-700 hover:shadow-lg transition-all">
-        <div class="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center text-primary">
-          <span class="material-symbols-outlined">air</span>
+        <!-- Requirement 2 -->
+        <div class="bg-white dark:bg-slate-800 rounded-2xl p-6 shadow-sm border border-slate-200 dark:border-slate-700 hover:shadow-lg transition-all">
+          <div class="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center text-primary">
+            <span class="material-symbols-outlined">water_drop</span>
+          </div>
+          <h3 class="text-lg font-bold mt-4" data-i18n="support_install_env_2_title">需要有进水和排水</h3>
+          <p class="text-sm text-slate-500 dark:text-slate-400 mt-2 leading-relaxed" data-i18n="support_install_env_2_desc">标准的商业厨房水槽配置即可。水压不够可以加装增压泵。</p>
         </div>
-        <h3 class="text-lg font-bold mt-4" data-i18n="support_install_env_3_title">需要有排烟系统</h3>
-        <p class="text-sm text-slate-500 dark:text-slate-400 mt-2 leading-relaxed" data-i18n="support_install_env_3_desc">厨房需要配备排烟设施。如果还没有，我们可以推荐合作的排烟工程商。</p>
-      </div>
-      <!-- Requirement 4 -->
-      <div class="bg-white dark:bg-slate-800 rounded-2xl p-6 shadow-sm border border-slate-200 dark:border-slate-700 hover:shadow-lg transition-all">
-        <div class="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center text-primary">
-          <span class="material-symbols-outlined">square_foot</span>
+        <!-- Requirement 3 -->
+        <div class="bg-white dark:bg-slate-800 rounded-2xl p-6 shadow-sm border border-slate-200 dark:border-slate-700 hover:shadow-lg transition-all">
+          <div class="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center text-primary">
+            <span class="material-symbols-outlined">air</span>
+          </div>
+          <h3 class="text-lg font-bold mt-4" data-i18n="support_install_env_3_title">需要有排烟系统</h3>
+          <p class="text-sm text-slate-500 dark:text-slate-400 mt-2 leading-relaxed" data-i18n="support_install_env_3_desc">厨房需要配备排烟设施。如果还没有，我们可以推荐合作的排烟工程商。</p>
         </div>
-        <h3 class="text-lg font-bold mt-4" data-i18n="support_install_env_4_title">需要一定的操作空间</h3>
-        <p class="text-sm text-slate-500 dark:text-slate-400 mt-2 leading-relaxed" data-i18n="support_install_env_4_desc">具体空间要求取决于你选择的设备型号。勘测时工程师会精确测量，确保安装后操作和维修都方便。</p>
+        <!-- Requirement 4 -->
+        <div class="bg-white dark:bg-slate-800 rounded-2xl p-6 shadow-sm border border-slate-200 dark:border-slate-700 hover:shadow-lg transition-all">
+          <div class="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center text-primary">
+            <span class="material-symbols-outlined">square_foot</span>
+          </div>
+          <h3 class="text-lg font-bold mt-4" data-i18n="support_install_env_4_title">需要一定的操作空间</h3>
+          <p class="text-sm text-slate-500 dark:text-slate-400 mt-2 leading-relaxed" data-i18n="support_install_env_4_desc">具体空间要求取决于你选择的设备型号。勘测时工程师会精确测量，确保安装后操作和维修都方便。</p>
+        </div>
       </div>
     </div>
   </div>
@@ -247,29 +257,31 @@
 
 <!-- ═══ Section 5: Stats Row ═══ -->
 <section class="bg-slate-900 py-12 fullwidth-bg">
-  <div class="px-3 md:px-5 lg:px-5 xl:px-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-    <div class="flex flex-col gap-1 border-l-2 border-primary/40 pl-6">
-      <span class="text-slate-400 text-sm font-semibold uppercase" data-i18n="support_install_stat_1_label">紧急响应</span>
-      <span class="text-white text-3xl font-black" data-i18n="support_install_stat_1_value">2h</span>
-      <span class="text-emerald-400 text-sm flex items-center gap-1">
-        <span class="material-symbols-outlined text-xs">arrow_upward</span>
-        <span data-i18n="support_install_stat_1_sub">SLA 保障</span>
-      </span>
-    </div>
-    <div class="flex flex-col gap-1 border-l-2 border-primary/40 pl-6">
-      <span class="text-slate-400 text-sm font-semibold uppercase" data-i18n="support_install_stat_2_label">成功安装</span>
-      <span class="text-white text-3xl font-black" data-i18n="support_install_stat_2_value">200+</span>
-      <span class="text-slate-400 text-sm" data-i18n="support_install_stat_2_sub">套设备</span>
-    </div>
-    <div class="flex flex-col gap-1 border-l-2 border-primary/40 pl-6">
-      <span class="text-slate-400 text-sm font-semibold uppercase" data-i18n="support_install_stat_3_label">一次验收率</span>
-      <span class="text-white text-3xl font-black" data-i18n="support_install_stat_3_value">98%</span>
-      <span class="text-slate-400 text-sm" data-i18n="support_install_stat_3_sub">一次安装到位</span>
-    </div>
-    <div class="flex flex-col gap-1 border-l-2 border-primary/40 pl-6">
-      <span class="text-slate-400 text-sm font-semibold uppercase" data-i18n="support_install_stat_4_label">服务国家</span>
-      <span class="text-white text-3xl font-black" data-i18n="support_install_stat_4_value">10</span>
-      <span class="text-slate-400 text-sm" data-i18n="support_install_stat_4_sub">东南亚覆盖</span>
+  <div class="section-content">
+    <div class="md:px-5 lg:px-5 xl:px-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+      <div class="flex flex-col gap-1 border-l-2 border-primary/40 pl-6">
+        <span class="text-slate-400 text-sm font-semibold uppercase" data-i18n="support_install_stat_1_label">紧急响应</span>
+        <span class="text-white text-3xl font-black" data-i18n="support_install_stat_1_value">2h</span>
+        <span class="text-emerald-400 text-sm flex items-center gap-1">
+          <span class="material-symbols-outlined text-xs">arrow_upward</span>
+          <span data-i18n="support_install_stat_1_sub">SLA 保障</span>
+        </span>
+      </div>
+      <div class="flex flex-col gap-1 border-l-2 border-primary/40 pl-6">
+        <span class="text-slate-400 text-sm font-semibold uppercase" data-i18n="support_install_stat_2_label">成功安装</span>
+        <span class="text-white text-3xl font-black" data-i18n="support_install_stat_2_value">200+</span>
+        <span class="text-slate-400 text-sm" data-i18n="support_install_stat_2_sub">套设备</span>
+      </div>
+      <div class="flex flex-col gap-1 border-l-2 border-primary/40 pl-6">
+        <span class="text-slate-400 text-sm font-semibold uppercase" data-i18n="support_install_stat_3_label">一次验收率</span>
+        <span class="text-white text-3xl font-black" data-i18n="support_install_stat_3_value">98%</span>
+        <span class="text-slate-400 text-sm" data-i18n="support_install_stat_3_sub">一次安装到位</span>
+      </div>
+      <div class="flex flex-col gap-1 border-l-2 border-primary/40 pl-6">
+        <span class="text-slate-400 text-sm font-semibold uppercase" data-i18n="support_install_stat_4_label">服务国家</span>
+        <span class="text-white text-3xl font-black" data-i18n="support_install_stat_4_value">10</span>
+        <span class="text-slate-400 text-sm" data-i18n="support_install_stat_4_sub">东南亚覆盖</span>
+      </div>
     </div>
   </div>
 </section>
@@ -278,97 +290,101 @@
 
 <!-- ═══ Section 7: FAQ ═══ -->
 <section class="py-12 bg-slate-50 dark:bg-slate-900/30 fullwidth-bg">
-  <div class="px-3 md:px-5 lg:px-5 xl:px-10">
-      <h2 class="text-3xl font-black tracking-tight mb-8" data-i18n="support_install_faq_title">常见问题</h2>
-      <div class="space-y-4">
-        <details class="bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 overflow-hidden">
-          <summary class="flex items-center justify-between p-5 cursor-pointer font-bold text-slate-900 dark:text-slate-100 hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-colors">
-            <span data-i18n="support_install_faq_q1">安装设备需要提前准备什么？</span>
-            <span class="material-symbols-outlined text-slate-400 transition-transform">expand_more</span>
-          </summary>
-          <div class="px-5 py-5 text-slate-600 dark:text-slate-400 leading-relaxed" data-i18n="support_install_faq_a1">
-            请确保安装现场具备基本电力、给排水和通风条件。每台设备在出厂前已经过完整调试和测试，到货后通电即可使用，安装服务主要是帮你规划摆放位置、完成管线连接。我们会提前提供环境要求清单，并在勘测阶段做最终确认。
-          </div>
-        </details>
-        <details class="bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 overflow-hidden">
-          <summary class="flex items-center justify-between p-5 cursor-pointer font-bold text-slate-900 dark:text-slate-100 hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-colors">
-            <span data-i18n="support_install_faq_q2">安装一套设备需要多长时间？</span>
-            <span class="material-symbols-outlined text-slate-400 transition-transform">expand_more</span>
-          </summary>
-          <div class="px-5 py-5 text-slate-600 dark:text-slate-400 leading-relaxed" data-i18n="support_install_faq_a2">
-            单台设备到店后安装就位通常半天即可完成，整线配置（3台以上）一般 1-2 天。设备在出厂前已经完成全部调试和测试，到店安装就位后通电即可使用，无需额外调试时间。
-          </div>
-        </details>
-        <details class="bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 overflow-hidden">
-          <summary class="flex items-center justify-between p-5 cursor-pointer font-bold text-slate-900 dark:text-slate-100 hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-colors">
-            <span data-i18n="support_install_faq_q3">谁来负责设备安装？</span>
-            <span class="material-symbols-outlined text-slate-400 transition-transform">expand_more</span>
-          </summary>
-          <div class="px-5 py-5 text-slate-600 dark:text-slate-400 leading-relaxed" data-i18n="support_install_faq_a3">
-            您可以选择由 YuKoLi 认证工程师上门安装，也可以自行安装——每台设备在发货前已经完成全部调试和测试，到货后通电即可正常使用。如果您有电工，自行安装非常简单。
-          </div>
-        </details>
-        <details class="bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 overflow-hidden">
-          <summary class="flex items-center justify-between p-5 cursor-pointer font-bold text-slate-900 dark:text-slate-100 hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-colors">
-            <span data-i18n="support_install_faq_q4">安装后如何验收？</span>
-            <span class="material-symbols-outlined text-slate-400 transition-transform">expand_more</span>
-          </summary>
-          <div class="px-5 py-5 text-slate-600 dark:text-slate-400 leading-relaxed" data-i18n="support_install_faq_a4">
-            如果选择工程师上门安装，安装就位后工程师会通电确认设备运行正常，并提供验收报告和操作手册，同时现场培训您的厨师。如果选择自行安装，只需确认设备到货完好、通电正常即可开始使用。无论哪种方式，设备在出厂前均已完成全部调试和测试。
-          </div>
-        </details>
-        <details class="bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 overflow-hidden">
-          <summary class="flex items-center justify-between p-5 cursor-pointer font-bold text-slate-900 dark:text-slate-100 hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-colors">
-            <span data-i18n="support_install_faq_q5">安装费用怎么算？</span>
-            <span class="material-symbols-outlined text-slate-400 transition-transform">expand_more</span>
-          </summary>
-          <div class="px-5 py-5 text-slate-600 dark:text-slate-400 leading-relaxed" data-i18n="support_install_faq_a5">
-            安装费用包含工程师上门人工费和常规配件。我们先提供免费报价单，确认后再安排上门。没有隐形收费。
-          </div>
-        </details>
-        <details class="bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 overflow-hidden">
-          <summary class="flex items-center justify-between p-5 cursor-pointer font-bold text-slate-900 dark:text-slate-100 hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-colors">
-            <span data-i18n="support_install_faq_q6">安装期间我的店要停业吗？</span>
-            <span class="material-symbols-outlined text-slate-400 transition-transform">expand_more</span>
-          </summary>
-          <div class="px-5 py-5 text-slate-600 dark:text-slate-400 leading-relaxed" data-i18n="support_install_faq_a6">
-            单台设备安装通常需要几小时，对营业影响较小。整线安装我们会提前协商时间，尽量安排在非营业时段，最大限度减少对你的影响。
-          </div>
-        </details>
-        <details class="bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 overflow-hidden">
-          <summary class="flex items-center justify-between p-5 cursor-pointer font-bold text-slate-900 dark:text-slate-100 hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-colors">
-            <span data-i18n="support_install_faq_q7">安装后设备质保多久？</span>
-            <span class="material-symbols-outlined text-slate-400 transition-transform">expand_more</span>
-          </summary>
-          <div class="px-5 py-5 text-slate-600 dark:text-slate-400 leading-relaxed" data-i18n="support_install_faq_a7">
-            整机保修1年（自验收合格日起）。质保期内质量问题损坏的配件免费更换。
-          </div>
-        </details>
-        <details class="bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 overflow-hidden">
-          <summary class="flex items-center justify-between p-5 cursor-pointer font-bold text-slate-900 dark:text-slate-100 hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-colors">
-            <span data-i18n="support_install_faq_q8">设备出问题怎么办？</span>
-            <span class="material-symbols-outlined text-slate-400 transition-transform">expand_more</span>
-          </summary>
-          <div class="px-5 py-5 text-slate-600 dark:text-slate-400 leading-relaxed" data-i18n="support_install_faq_a8">
-            WhatsApp/电话/邮箱报修，紧急故障1小时内响应，60%以上故障可通过远程指导解决。
-          </div>
-        </details>
-      </div>
+  <div class="section-content">
+    <div class="md:px-5 lg:px-5 xl:px-10">
+        <h2 class="text-3xl font-black tracking-tight mb-8" data-i18n="support_install_faq_title">常见问题</h2>
+        <div class="space-y-4">
+          <details class="bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 overflow-hidden">
+            <summary class="flex items-center justify-between p-5 cursor-pointer font-bold text-slate-900 dark:text-slate-100 hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-colors">
+              <span data-i18n="support_install_faq_q1">安装设备需要提前准备什么？</span>
+              <span class="material-symbols-outlined text-slate-400 transition-transform">expand_more</span>
+            </summary>
+            <div class="px-5 py-5 text-slate-600 dark:text-slate-400 leading-relaxed" data-i18n="support_install_faq_a1">
+              请确保安装现场具备基本电力、给排水和通风条件。每台设备在出厂前已经过完整调试和测试，到货后通电即可使用，安装服务主要是帮你规划摆放位置、完成管线连接。我们会提前提供环境要求清单，并在勘测阶段做最终确认。
+            </div>
+          </details>
+          <details class="bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 overflow-hidden">
+            <summary class="flex items-center justify-between p-5 cursor-pointer font-bold text-slate-900 dark:text-slate-100 hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-colors">
+              <span data-i18n="support_install_faq_q2">安装一套设备需要多长时间？</span>
+              <span class="material-symbols-outlined text-slate-400 transition-transform">expand_more</span>
+            </summary>
+            <div class="px-5 py-5 text-slate-600 dark:text-slate-400 leading-relaxed" data-i18n="support_install_faq_a2">
+              单台设备到店后安装就位通常半天即可完成，整线配置（3台以上）一般 1-2 天。设备在出厂前已经完成全部调试和测试，到店安装就位后通电即可使用，无需额外调试时间。
+            </div>
+          </details>
+          <details class="bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 overflow-hidden">
+            <summary class="flex items-center justify-between p-5 cursor-pointer font-bold text-slate-900 dark:text-slate-100 hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-colors">
+              <span data-i18n="support_install_faq_q3">谁来负责设备安装？</span>
+              <span class="material-symbols-outlined text-slate-400 transition-transform">expand_more</span>
+            </summary>
+            <div class="px-5 py-5 text-slate-600 dark:text-slate-400 leading-relaxed" data-i18n="support_install_faq_a3">
+              您可以选择由 YuKoLi 认证工程师上门安装，也可以自行安装——每台设备在发货前已经完成全部调试和测试，到货后通电即可正常使用。如果您有电工，自行安装非常简单。
+            </div>
+          </details>
+          <details class="bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 overflow-hidden">
+            <summary class="flex items-center justify-between p-5 cursor-pointer font-bold text-slate-900 dark:text-slate-100 hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-colors">
+              <span data-i18n="support_install_faq_q4">安装后如何验收？</span>
+              <span class="material-symbols-outlined text-slate-400 transition-transform">expand_more</span>
+            </summary>
+            <div class="px-5 py-5 text-slate-600 dark:text-slate-400 leading-relaxed" data-i18n="support_install_faq_a4">
+              如果选择工程师上门安装，安装就位后工程师会通电确认设备运行正常，并提供验收报告和操作手册，同时现场培训您的厨师。如果选择自行安装，只需确认设备到货完好、通电正常即可开始使用。无论哪种方式，设备在出厂前均已完成全部调试和测试。
+            </div>
+          </details>
+          <details class="bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 overflow-hidden">
+            <summary class="flex items-center justify-between p-5 cursor-pointer font-bold text-slate-900 dark:text-slate-100 hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-colors">
+              <span data-i18n="support_install_faq_q5">安装费用怎么算？</span>
+              <span class="material-symbols-outlined text-slate-400 transition-transform">expand_more</span>
+            </summary>
+            <div class="px-5 py-5 text-slate-600 dark:text-slate-400 leading-relaxed" data-i18n="support_install_faq_a5">
+              安装费用包含工程师上门人工费和常规配件。我们先提供免费报价单，确认后再安排上门。没有隐形收费。
+            </div>
+          </details>
+          <details class="bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 overflow-hidden">
+            <summary class="flex items-center justify-between p-5 cursor-pointer font-bold text-slate-900 dark:text-slate-100 hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-colors">
+              <span data-i18n="support_install_faq_q6">安装期间我的店要停业吗？</span>
+              <span class="material-symbols-outlined text-slate-400 transition-transform">expand_more</span>
+            </summary>
+            <div class="px-5 py-5 text-slate-600 dark:text-slate-400 leading-relaxed" data-i18n="support_install_faq_a6">
+              单台设备安装通常需要几小时，对营业影响较小。整线安装我们会提前协商时间，尽量安排在非营业时段，最大限度减少对你的影响。
+            </div>
+          </details>
+          <details class="bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 overflow-hidden">
+            <summary class="flex items-center justify-between p-5 cursor-pointer font-bold text-slate-900 dark:text-slate-100 hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-colors">
+              <span data-i18n="support_install_faq_q7">安装后设备质保多久？</span>
+              <span class="material-symbols-outlined text-slate-400 transition-transform">expand_more</span>
+            </summary>
+            <div class="px-5 py-5 text-slate-600 dark:text-slate-400 leading-relaxed" data-i18n="support_install_faq_a7">
+              整机保修1年（自验收合格日起）。质保期内质量问题损坏的配件免费更换。
+            </div>
+          </details>
+          <details class="bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 overflow-hidden">
+            <summary class="flex items-center justify-between p-5 cursor-pointer font-bold text-slate-900 dark:text-slate-100 hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-colors">
+              <span data-i18n="support_install_faq_q8">设备出问题怎么办？</span>
+              <span class="material-symbols-outlined text-slate-400 transition-transform">expand_more</span>
+            </summary>
+            <div class="px-5 py-5 text-slate-600 dark:text-slate-400 leading-relaxed" data-i18n="support_install_faq_a8">
+              WhatsApp/电话/邮箱报修，紧急故障1小时内响应，60%以上故障可通过远程指导解决。
+            </div>
+          </details>
+        </div>
+    </div>
   </div>
 </section>
 
 <!-- ═══ Section 8: CTA ═══ -->
 <section class="py-16 fullwidth-bg">
-  <div class="px-3 md:px-5 lg:px-5 xl:px-10">
-    <div class="bg-slate-900 rounded-[3rem] p-12 md:p-20 text-center flex flex-col items-center gap-8 relative overflow-hidden">
-      <div class="absolute top-0 right-0 w-64 h-64 bg-primary/10 blur-[100px] rounded-full"></div>
-      <div class="absolute bottom-0 left-0 w-96 h-96 bg-primary/5 blur-[120px] rounded-full"></div>
-      <h2 class="text-4xl md:text-5xl font-black text-white leading-tight" data-i18n="support_install_cta_title">设备买好了？我们来帮你装。</h2>
-      <p class="text-slate-400 max-w-xl text-lg" data-i18n="support_install_cta_desc">200+ 套设备安装经验，覆盖东南亚 10 国。专业团队，快速可靠。</p>
-      <div class="flex flex-wrap justify-center gap-4">
-        <a href="/quote/" class="bg-primary text-white px-10 py-5 rounded-2xl font-black text-lg shadow-2xl shadow-primary/40 hover:scale-105 transition-transform" data-i18n="support_install_cta_btn_primary">免费获取方案</a>
-        <a href="https://wa.me/8613163756465" data-wa-message-key="wa_msg_support_installation" data-wa-source="bottom-cta" target="_blank" class="bg-white/10 text-white border border-white/20 backdrop-blur-sm px-10 py-5 rounded-2xl font-black text-lg hover:bg-white/20 transition-colors" rel="noopener noreferrer">WhatsApp</a>
-        </span>
+  <div class="section-content">
+    <div class="md:px-5 lg:px-5 xl:px-10">
+      <div class="bg-slate-900 rounded-[3rem] p-12 md:p-20 text-center flex flex-col items-center gap-8 relative overflow-hidden">
+        <div class="absolute top-0 right-0 w-64 h-64 bg-primary/10 blur-[100px] rounded-full"></div>
+        <div class="absolute bottom-0 left-0 w-96 h-96 bg-primary/5 blur-[120px] rounded-full"></div>
+        <h2 class="text-4xl md:text-5xl font-black text-white leading-tight" data-i18n="support_install_cta_title">设备买好了？我们来帮你装。</h2>
+        <p class="text-slate-400 max-w-xl text-lg" data-i18n="support_install_cta_desc">200+ 套设备安装经验，覆盖东南亚 10 国。专业团队，快速可靠。</p>
+        <div class="flex flex-wrap justify-center gap-4">
+          <a href="/quote/" class="bg-primary text-white px-10 py-5 rounded-2xl font-black text-lg shadow-2xl shadow-primary/40 hover:scale-105 transition-transform" data-i18n="support_install_cta_btn_primary">免费获取方案</a>
+          <a href="https://wa.me/8613163756465" data-wa-message-key="wa_msg_support_installation" data-wa-source="bottom-cta" target="_blank" class="bg-white/10 text-white border border-white/20 backdrop-blur-sm px-10 py-5 rounded-2xl font-black text-lg hover:bg-white/20 transition-colors" rel="noopener noreferrer">WhatsApp</a>
+          </span>
+        </div>
       </div>
     </div>
   </div>
