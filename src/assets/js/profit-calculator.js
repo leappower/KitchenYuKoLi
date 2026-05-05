@@ -7,19 +7,24 @@
 
   /* ───────── Default salary data per country ───────── */
   var DEFAULT_SALARIES = {
-    'Philippines': { monthly: 25000, currency: 'PHP', symbol: '₱' },
-    'Indonesia':   { monthly: 4800000, currency: 'IDR', symbol: 'Rp' },
-    'Vietnam':     { monthly: 7000000, currency: 'VND', symbol: '₫' },
-    'Thailand':    { monthly: 15000, currency: 'THB', symbol: '฿' },
-    'Malaysia':    { monthly: 2500, currency: 'MYR', symbol: 'RM' },
-    'China':       { monthly: 5000, currency: 'CNY', symbol: '¥' },
-    'Other':       { monthly: 2000, currency: 'USD', symbol: '$' }
+    'Philippines':  { monthly: 25000,   currency: 'PHP', symbol: '₱' },
+    'Indonesia':    { monthly: 4800000, currency: 'IDR', symbol: 'Rp' },
+    'Vietnam':      { monthly: 7000000, currency: 'VND', symbol: '₫' },
+    'Thailand':     { monthly: 15000,   currency: 'THB', symbol: '฿' },
+    'Malaysia':     { monthly: 2500,    currency: 'MYR', symbol: 'RM' },
+    'China':        { monthly: 5000,    currency: 'CNY', symbol: '¥' },
+    'Japan':        { monthly: 220000,  currency: 'JPY', symbol: '¥' },
+    'South Korea':  { monthly: 2800000, currency: 'KRW', symbol: '₩' },
+    'India':        { monthly: 25000,   currency: 'INR', symbol: '₹' },
+    'Saudi Arabia': { monthly: 4000,    currency: 'SAR', symbol: 'ر.س' },
+    'Taiwan':       { monthly: 40000,   currency: 'TWD', symbol: 'NT$' },
+    'Other':        { monthly: 2000,    currency: 'USD', symbol: '$' }
   };
 
   /* ───────── Language → Country auto-match ───────── */
   var LANG_COUNTRY_MAP = {
     'zh-CN': 'China',
-    'zh-TW': 'Other',
+    'zh-TW': 'Taiwan',
     'zh':    'China',
     'en':    'Other',
     'th':    'Thailand',
@@ -27,8 +32,10 @@
     'id':    'Indonesia',
     'ms':    'Malaysia',
     'fil':   'Philippines',
-    'ja':    'Other',
-    'ko':    'Other'
+    'ja':    'Japan',
+    'ko':    'South Korea',
+    'hi':    'India',
+    'ar':    'Saudi Arabia'
   };
 
   /* ───────── Savings ratio table ───────── */
@@ -90,6 +97,14 @@
 
   /** Get currency info based on current UI language (not country). */
   function langCurrency() {
+    /* Currency determined by country selection, not language.
+     * Falls back to language-based mapping only when no country is selected. */
+    var countrySelect = document.getElementById('pc-country');
+    if (countrySelect && countrySelect.value) {
+      var info = DEFAULT_SALARIES[countrySelect.value];
+      if (info) return { symbol: info.symbol, currency: info.currency };
+    }
+    /* Fallback: derive from current language */
     if (!window.translationManager) return { symbol: '$', currency: 'USD' };
     var lang = window.translationManager.currentLanguage || '';
     var map = {
@@ -102,9 +117,8 @@
       'id':    { symbol: 'Rp', currency: 'IDR' },
       'ms':    { symbol: 'RM', currency: 'MYR' },
       'hi':    { symbol: '₹', currency: 'INR' },
-      'ar':    { symbol: '﷼', currency: 'SAR' }
+      'ar':    { symbol: 'ر.س', currency: 'SAR' }
     };
-    // Match exact lang code or prefix
     for (var key in map) {
       if (lang === key || lang.indexOf(key) === 0) return map[key];
     }
@@ -569,6 +583,10 @@
         var laborEl = document.getElementById(self.laborInputId);
         if (info && laborEl && !laborEl.dataset.touched) {
           laborEl.value = info.monthly;
+        }
+        /* Re-calculate if results are already showing */
+        if (document.getElementById('profit-result-panel') && !document.getElementById('profit-result-panel').classList.contains('hidden')) {
+          self.run();
         }
       });
     }
