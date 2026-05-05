@@ -346,9 +346,16 @@
       if (t.style.position = "fixed", t.style.zIndex = "9999", t.style.display = "block", t.classList.add("show"), e) {
         var n = e.getBoundingClientRect();
         t.style.top = n.bottom + 8 + "px";
-        var a = t.offsetWidth || 240,
-          o = window.innerWidth - n.right;
-        o + a > window.innerWidth ? t.style.left = Math.max(8, window.innerWidth - a - 8) + "px" : (t.style.left = "", t.style.right = o + "px")
+        /* On small screens, center the dropdown */
+        if (window.innerWidth < 768) {
+          t.style.left = "16px";
+          t.style.right = "16px";
+          t.style.width = "auto";
+        } else {
+          var a = t.offsetWidth || 240,
+            o = window.innerWidth - n.right;
+          o + a > window.innerWidth ? t.style.left = Math.max(8, window.innerWidth - a - 8) + "px" : (t.style.left = "", t.style.right = o + "px")
+        }
       }
     } else console.error("[i18n] openLanguageDropdown: dropdown still null, returning")
   }, r.prototype.closeLanguageDropdown = function() {
