@@ -281,6 +281,27 @@ main#spa-content:not([class*="p-"], [class*="px-"], [class*="py-"]) .fullwidth-b
   }
 }
 
+/* ─── fullwidth-bg: content padding system ───────────────────────
+ *
+ * Pattern:
+ *   <section class="py-8 fullwidth-bg">
+ *     <div class="section-content">          ← auto padded
+ *       ...content...
+ *     </div>
+ *   </section>
+ *
+ * .section-content uses var(--container-px) responsive padding.
+ * Mobile/tablet pages (where main has inline px classes) also work:
+ * the selector targets ALL .fullwidth-bg, not just those inside
+ * the main#spa-content:not() rule.
+ */
+
+.fullwidth-bg > .section-content {
+  padding-inline: var(--container-px, 0.75rem);
+  max-width: 1920px;
+  margin-inline: auto;
+}
+
 /* ─── Navigator placeholder: prevent layout shift ─────────────── */
 navigator[data-component="navigator"] {
   display: block;
