@@ -63,6 +63,12 @@
     "thank-you":    "contact"
   };
 
+  /* Sections whose nav item id differs from the activeSectionId (version drift) */
+  var ID_ALIASES = {
+    "profit-calculator": ["profit", "profit-calculator"],
+    "profit":            ["profit", "profit-calculator"]
+  };
+
   /**
    * 导航 id → dropdown item 前缀的映射
    * @type {Object<string, string>}
@@ -1026,8 +1032,9 @@
         "";
 
       var isMatch = false;
+      var matchIds = ID_ALIASES[mappedId] || [mappedId];
       for (var j = 0; j < navItems.length; j++) {
-        if (navItems[j].id === mappedId && triggerKey === navItems[j].key) {
+        if (matchIds.indexOf(navItems[j].id) !== -1 && triggerKey === navItems[j].key) {
           isMatch = true;
           break;
         }
@@ -1056,8 +1063,9 @@
       }
       var plainKey = plainEl.getAttribute("data-i18n") || "";
       var plainMatch = false;
+      var matchIds2 = ID_ALIASES[mappedId] || [mappedId];
       for (var pk = 0; pk < navItems.length; pk++) {
-        if (navItems[pk].id === mappedId && plainKey === navItems[pk].key) {
+        if (matchIds2.indexOf(navItems[pk].id) !== -1 && plainKey === navItems[pk].key) {
           plainMatch = true;
           break;
         }
