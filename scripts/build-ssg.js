@@ -535,18 +535,23 @@ function main() {
   var _srcJsDir = path.resolve(__dirname, '..', 'src', 'assets', 'js');
   var _distJsDir = path.join(DIST_DIR, 'assets', 'js');
   var _jsCopied = 0;
-  if (fs.existsSync(_srcJsDir) && fs.existsSync(_distJsDir)) {
-    var _jsFiles = fs.readdirSync(_srcJsDir).filter(function(f) { return f.endsWith('.js'); });
-    for (var _jf = 0; _jf < _jsFiles.length; _jf++) {
-      var _srcFile = path.join(_srcJsDir, _jsFiles[_jf]);
-      var _dstFile = path.join(_distJsDir, _jsFiles[_jf]);
-      if (fs.statSync(_srcFile).isFile()) {
-        fs.copyFileSync(_srcFile, _dstFile);
+  function copyJsRecursive(srcDir, dstDir) {
+    if (!fs.existsSync(srcDir)) return;
+    if (!fs.existsSync(dstDir)) fs.mkdirSync(dstDir, { recursive: true });
+    var entries = fs.readdirSync(srcDir);
+    for (var i = 0; i < entries.length; i++) {
+      var srcPath = path.join(srcDir, entries[i]);
+      var dstPath = path.join(dstDir, entries[i]);
+      if (fs.statSync(srcPath).isDirectory()) {
+        copyJsRecursive(srcPath, dstPath);
+      } else if (entries[i].endsWith('.js')) {
+        fs.copyFileSync(srcPath, dstPath);
         _jsCopied++;
       }
     }
-    log('  ✓ Copied ' + _jsCopied + ' JS files to assets/js/');
   }
+  copyJsRecursive(_srcJsDir, _distJsDir);
+  if (_jsCopied > 0) log('  ✓ Copied ' + _jsCopied + ' JS files to assets/js/');
 
   // Step 6: Patch CSS files for basePath (font URLs in local-fonts.css)
   if (BASE_PATH) {
