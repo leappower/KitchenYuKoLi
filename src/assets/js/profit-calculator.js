@@ -200,8 +200,8 @@
       mid: Math.round(investment.mid * rate)
     };
 
-    var paybackMin = localInvestment.max / Math.max(monthlySavings.max, 1);
-    var paybackMax = localInvestment.min / Math.max(monthlySavings.min, 1);
+    var paybackMin = localInvestment.min / Math.max(monthlySavings.max, 1);
+    var paybackMax = localInvestment.max / Math.max(monthlySavings.min, 1);
 
     var fiveYearReturn = {
       min: (monthlySavings.mid * 60) - localInvestment.max,
