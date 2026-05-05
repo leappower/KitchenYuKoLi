@@ -127,7 +127,7 @@
 
                   <!-- 2. Monthly Labor Cost -->
                   <div>
-                    <label class="block text-sm font-bold mb-1.5" data-i18n="profit_calc_labor_cost">Current Monthly Labor Cost</label>
+                    <label class="block text-sm font-bold mb-1.5" data-i18n="profit_calc_labor_cost">Monthly Labor Cost</label>
                     <input id="pc-labor-cost" type="number" min="0" class="w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg p-3 focus:ring-primary focus:border-primary text-sm" placeholder="Auto-filled per country" />
                     <p class="text-sm text-slate-400 mt-1" data-i18n="profit_calc_labor_hint">选国家后自动填充默认值</p>
                   </div>
@@ -192,8 +192,7 @@
 
                   <!-- Submit -->
                   <button type="button" id="pc-calc-btn" class="mt-auto w-full bg-primary text-white py-3.5 rounded-xl font-black text-lg hover:bg-primary/90 transition-all flex items-center justify-center gap-2 shadow-lg shadow-primary/20 uppercase tracking-widest">
-                    <span data-i18n="profit_calc_btn_calculate">Calculate Now</span>
-                    <span class="material-symbols-outlined">trending_up</span>
+                    <span data-i18n="profit_calc_btn_calculate">计算 →</span>
                   </button>
                 </form>
               </div>
@@ -274,7 +273,9 @@
         </section>
       </main>
 
-      <footer class="mt-auto"></footer>
+      <footer data-component="footer"
+  data-variant="pc"
+  data-active=""></footer>
     </div>
 
     <!-- Scripts -->
