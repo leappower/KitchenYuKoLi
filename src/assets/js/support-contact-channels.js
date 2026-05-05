@@ -61,7 +61,21 @@
     }
   };
 
-  var WECHAT_ICON = '<svg viewBox="0 0 24 24" class="w-6 h-6 fill-white"><path d="M8.691 2.188C3.891 2.188 0 5.476 0 9.53c0 2.212 1.17 4.203 3.002 5.55a.59.59 0 0 1 .213.665l-.39 1.48c-.019.07-.048.141-.048.213 0 .163.13.295.29.295a.326.326 0 0 0 .167-.054l1.903-1.114a.864.864 0 0 1 .717-.098 10.16 10.16 0 0 0 2.837.403c.276 0 .543-.027.811-.05-.857-2.578.157-4.972 1.932-6.446 1.703-1.415 3.882-1.98 5.853-1.838-.576-3.583-4.196-6.348-8.596-6.348zM5.785 5.991c.642 0 1.162.529 1.162 1.18a1.17 1.17 0 0 1-1.162 1.178A1.17 1.17 0 0 1 4.623 7.17c0-.651.52-1.18 1.162-1.18zm5.813 0c.642 0 1.162.529 1.162 1.18a1.17 1.17 0 0 1-1.162 1.178 1.17 1.17 0 0 1-1.162-1.178c0-.651.52-1.18 1.162-1.18zm5.34 2.867c-1.797-.052-3.746.512-5.28 1.786-1.72 1.428-2.687 3.72-1.78 6.22.942 2.453 3.666 4.229 6.884 4.229.826 0 1.622-.12 2.361-.336a.722.722 0 0 1 .598.082l1.584.926a.272.272 0 0 0 .14.045c.134 0 .24-.108.24-.245 0-.06-.024-.12-.04-.178l-.326-1.233a.492.492 0 0 1 .177-.554C23.028 18.55 24 16.803 24 14.86c0-3.255-2.907-5.952-7.062-6.002zm-2.18 2.859c.534 0 .967.44.967.982a.975.975 0 0 1-.967.983.975.975 0 0 1-.966-.983c0-.542.432-.982.966-.982zm4.832 0c.535 0 .967.44.967.982a.975.975 0 0 1-.967.983.975.975 0 0 1-.966-.983c0-.542.432-.982.966-.982z"/></svg>';
+  var WECHAT_ICON = '<svg viewBox="0 0 24 24" class="w-6 h-6 fill-white"><path d="' +
+    'M8.691 2.188C3.891 2.188 0 5.476 0 9.53c0 2.212 1.17 4.203 3.002 5.55a.59.59 0 0 1 ' +
+    '.213.665l-.39 1.48c-.019.07-.048.141-.048.213 0 .163.13.295.29.295a.326.326 0 ' +
+    '0 0 .167-.054l1.903-1.114a.864.864 0 0 1 .717-.098 10.16 10.16 0 0 0 2.837.403c.276 ' +
+    '0 .543-.027.811-.05-.857-2.578.157-4.972 1.932-6.446 1.703-1.415 3.882-1.98 5.853-1.838' +
+    '-.576-3.583-4.196-6.348-8.596-6.348zM5.785 5.991c.642 0 1.162.529 1.162 1.18a1.17 1.17 0 0 ' +
+    '1-1.162 1.178A1.17 1.17 0 0 1 4.623 7.17c0-.651.52-1.18 1.162-1.18zm5.813 0c.642 0 1.162' +
+    '.529 1.162 1.18a1.17 1.17 0 0 1-1.162 1.178 1.17 1.17 0 0 1-1.162-1.178c0-.651.52-1.18 ' +
+    '1.162-1.18zm5.34 2.867c-1.797-.052-3.746.512-5.28 1.786-1.72 1.428-2.687 3.72-1.78 6.22' +
+    '.942 2.453 3.666 4.229 6.884 4.229.826 0 1.622-.12 2.361-.336a.722.722 0 0 1 .598.082l1.584' +
+    '.926a.272.272 0 0 0 .14.045c.134 0 .24-.108.24-.245 0-.06-.024-.12-.04-.178l-.326-1.233a' +
+    '.492.492 0 0 1 .177-.554C23.028 18.55 24 16.803 24 14.86c0-3.255-2.907-5.952-7.062-6.002zm-2.18' +
+    ' 2.859c.534 0 .967.44.967.982a.975.975 0 0 1-.967.983.975.975 0 0 1-.966-.983c0-.542' +
+    '.432-.982.966-.982zm4.832 0c.535 0 .967.44.967.982a.975.975 0 0 1-.967.983.975.975 0 0 ' +
+    '1-.966-.983c0-.542.432-.982.966-.982z"/></svg>';
 
   function attr(key) {
     return key ? ' data-i18n="' + key + '"' : '';
@@ -122,13 +136,23 @@
 
   function renderWaCard(cfg, device) {
     if (device === 'mobile') {
-      var _wa = window.Contacts ? window.Contacts.whatsapp : '8613163756465'; return '<a href="https://wa.me/' + _wa + '" data-wa-source="contact-card" data-wa-message-key="wa_msg_support" target="_blank" rel="noopener noreferrer" class="flex items-center gap-3 p-4 rounded-xl bg-[#06C755]/10 border border-[#06C755]/20 transition-all active:scale-95">' +
+      var _wa = window.Contacts ? window.Contacts.whatsapp : '8613163756465';
+      return '<a href="https://wa.me/' + _wa + '"' +
+        ' data-wa-source="contact-card" data-wa-message-key="wa_msg_support"' +
+        ' target="_blank" rel="noopener noreferrer"' +
+        ' class="flex items-center gap-3 p-4 rounded-xl bg-[#06C755]/10 border border-[#06C755]/20 transition-all active:scale-95">' +
         '<div class="w-10 h-10 rounded-lg bg-[#06C755] flex items-center justify-center shrink-0"><span class="material-symbols-outlined text-white text-xl">chat</span></div>' +
         '<div class="flex-1"><p class="font-bold text-sm text-slate-900 dark:text-slate-100">WhatsApp</p><p class="text-xs text-slate-500 dark:text-slate-400">' + cfg.wa + '</p></div>' +
         '<span class="material-symbols-outlined text-slate-400 text-lg shrink-0">open_in_new</span>' +
       '</a>';
     }
-    var _wa = window.Contacts ? window.Contacts.whatsapp : '8613163756465'; return '<a href="https://wa.me/' + _wa + '" data-wa-source="contact-card" data-wa-message-key="wa_msg_support" target="_blank" rel="noopener noreferrer" class="flex flex-col items-center gap-3 p-8 rounded-2xl bg-[#06C755]/5 border border-[#06C755]/20 hover:bg-[#06C755]/10 hover:shadow-lg hover:border-[#06C755]/40 transition-all duration-300 group">' +
+    var _wa = window.Contacts ? window.Contacts.whatsapp : '8613163756465';
+    return '<a href="https://wa.me/' + _wa + '"' +
+      ' data-wa-source="contact-card" data-wa-message-key="wa_msg_support"' +
+      ' target="_blank" rel="noopener noreferrer"' +
+      ' class="flex flex-col items-center gap-3 p-8 rounded-2xl bg-[#06C755]/5' +
+      ' border border-[#06C755]/20 hover:bg-[#06C755]/10 hover:shadow-lg' +
+      ' hover:border-[#06C755]/40 transition-all duration-300 group">' +
       '<div class="w-14 h-14 rounded-full bg-[#06C755] flex items-center justify-center group-hover:scale-110 transition-transform"><span class="material-symbols-outlined text-white text-2xl">chat</span></div>' +
       '<h3 class="font-bold text-lg">WhatsApp</h3>' +
       '<p class="text-sm text-slate-500 dark:text-slate-400 text-center">' + cfg.wa + '</p>' +
@@ -160,7 +184,11 @@
     }
     var phoneKey = cfg.phoneKey || 'support_contact_phone_label';
     var phoneDescKey = cfg.phoneDescKey || 'support_contact_phone_desc';
-    var _tel = window.Contacts ? window.Contacts.whatsapp : '8613163756465'; return '<a href="tel:+' + _tel + '" class="flex flex-col items-center gap-3 p-8 rounded-2xl bg-blue-500/5 border border-blue-500/20 hover:bg-blue-500/10 hover:shadow-lg hover:border-blue-500/40 transition-all duration-300 group">' +
+    var _tel = window.Contacts ? window.Contacts.whatsapp : '8613163756465';
+    return '<a href="tel:+' + _tel + '"' +
+      ' class="flex flex-col items-center gap-3 p-8 rounded-2xl bg-blue-500/5' +
+      ' border border-blue-500/20 hover:bg-blue-500/10 hover:shadow-lg' +
+      ' hover:border-blue-500/40 transition-all duration-300 group">' +
       '<div class="w-14 h-14 rounded-full bg-blue-500 flex items-center justify-center group-hover:scale-110 transition-transform"><span class="material-symbols-outlined text-white text-2xl">call</span></div>' +
       '<h3 class="font-bold text-lg"' + attr(phoneKey) + '>电话</h3>' +
       '<p class="text-sm text-slate-500 dark:text-slate-400 text-center"' + attr(phoneDescKey) + '>' + cfg.phone + '</p>' +
