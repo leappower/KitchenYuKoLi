@@ -6,10 +6,10 @@
  *   Tablet  (768-1279): badge + h1 + 2 desc + 2 CTAs     + 2 cards
  *   PC      (≥1280px):  badge + h1 + 2 desc + 2 CTAs     + 3 cards
  *
- * 间距与实际页面对齐：
- *   Mobile:  px-4, py-8 hero, gap-6
- *   Tablet:  px-6, py-10 hero, gap-8
- *   PC:      px-6 → md:px-8 → xl:px-10, py-10 hero, gap-6
+ * 间距与实际页面对齐（使用 --container-px 变量）：
+ *   Mobile:  --container-px 12px, py-8 hero, gap-6
+ *   Tablet:  --container-px 20px, py-10 hero, gap-8
+ *   PC:      --container-px 40px, pt-[110px] for navigator, py-10 hero
  */
 
 /* ───────── 容器 ───────── */
@@ -17,18 +17,21 @@
   width: 100%;
   margin: 0 auto;
   min-height: 50vh;
-  padding: 2rem 16px; /* mobile: px-4 */
+  padding: 2rem var(--container-px, 0.75rem); /* mobile: aligned with section-content */
   animation: sk-fadeIn 0.15s ease-out;
 }
 
 @media (width >= 768px) {
-  .skeleton-container { padding: 2.5rem 24px; } /* tablet: px-6 */
+  .skeleton-container { padding: 2.5rem var(--container-px, 1.25rem); } /* tablet: aligned */
 }
 @media (width >= 1024px) {
-  .skeleton-container { padding: 2.5rem 32px; } /* lg: px-8 */
+  .skeleton-container { padding: 2.5rem var(--container-px, 1.25rem); } /* lg: aligned */
 }
 @media (width >= 1280px) {
-  .skeleton-container { padding: 2.5rem 40px; } /* xl: px-10 */
+  /* PC: padding-top 110px to clear fixed navigator, then 2.5rem content gap */
+  .skeleton-container {
+    padding: calc(110px + 2.5rem) var(--container-px, 2.5rem) 2.5rem;
+  }
 }
 
 /* ───────── Hero 区域（居中，与实际 hero 一致）───────── */
