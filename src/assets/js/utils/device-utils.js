@@ -244,7 +244,7 @@
   }
 
   // 公开 API
-  global.DeviceUtils = {
+  window.DeviceUtils = {
     DeviceType: DeviceType,
     Breakpoints: Breakpoints,
     getScreenSize: getScreenSize,

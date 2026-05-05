@@ -18,21 +18,21 @@
    * 0. CONFIG
    * ───────────────────────────────────────────── */
 
-  var WHATSAPP_HREF = "https://wa.me/" + (global.Contacts ? global.Contacts.whatsapp : "8613163756465");
+  var WHATSAPP_HREF = "https://wa.me/" + (window.Contacts ? window.Contacts.whatsapp : "8613163756465");
   var LINE_HREF = "https://line.me/R/ti/p/@yourlineid";
   var SCROLL_THRESHOLD = 300;
 
   // 可通过 window 覆盖
-  if (global.FLOATING_ACTIONS_CONFIG) {
-    if (global.FLOATING_ACTIONS_CONFIG.whatsapp) WHATSAPP_HREF = global.FLOATING_ACTIONS_CONFIG.whatsapp;
-    if (global.FLOATING_ACTIONS_CONFIG.line) LINE_HREF = global.FLOATING_ACTIONS_CONFIG.line;
-    if (global.FLOATING_ACTIONS_CONFIG.threshold) SCROLL_THRESHOLD = global.FLOATING_ACTIONS_CONFIG.threshold;
+  if (window.FLOATING_ACTIONS_CONFIG) {
+    if (window.FLOATING_ACTIONS_CONFIG.whatsapp) WHATSAPP_HREF = window.FLOATING_ACTIONS_CONFIG.whatsapp;
+    if (window.FLOATING_ACTIONS_CONFIG.line) LINE_HREF = window.FLOATING_ACTIONS_CONFIG.line;
+    if (window.FLOATING_ACTIONS_CONFIG.threshold) SCROLL_THRESHOLD = window.FLOATING_ACTIONS_CONFIG.threshold;
   }
 
   /** Build tracked WhatsApp URL via Contacts module (or fallback to static) */
   function buildWhatsAppUrl() {
-    if (global.Contacts && typeof global.Contacts.contactsWhatsApp === "function") {
-      return global.Contacts.contactsWhatsApp({ source: "悬浮按钮" });
+    if (window.Contacts && typeof window.Contacts.contactsWhatsApp === "function") {
+      return window.Contacts.contactsWhatsApp({ source: "悬浮按钮" });
     }
     return WHATSAPP_HREF;
   }
@@ -267,7 +267,7 @@
     // Back to top click
     if (this._btnBtt) {
       this._btnBtt.addEventListener("click", function () {
-        global.scrollTo({ top: 0, behavior: "smooth" });
+        window.scrollTo({ top: 0, behavior: "smooth" });
       });
     }
     // WhatsApp click — build tracked URL dynamically (captures current page)
@@ -275,7 +275,7 @@
       this._btnWa.addEventListener("click", function (e) {
         e.preventDefault();
         var url = buildWhatsAppUrl();
-        global.open(url, "_blank", "noopener,noreferrer");
+        window.open(url, "_blank", "noopener,noreferrer");
       });
     }
   };
@@ -296,14 +296,14 @@
       }, 10000);
     }, 50);
 
-    global.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("scroll", onScroll, { passive: true });
 
     // 初始检查
     this._updateBackToTop();
   };
 
   FloatingActionsController.prototype._updateBackToTop = function () {
-    var visible = global.scrollY > SCROLL_THRESHOLD;
+    var visible = window.scrollY > SCROLL_THRESHOLD;
     if (visible === this.backToTopVisible) return;
     this.backToTopVisible = visible;
     this._animateBackToTop(visible);
@@ -407,11 +407,11 @@
   });
 
   // bfcache 恢复
-  global.addEventListener("pageshow", function (event) {
+  window.addEventListener("pageshow", function (event) {
     if (event.persisted) {
       mount();
     }
   });
 
-  global.FloatingActions = { mount: mount };
+  window.FloatingActions = { mount: mount };
 })(window);

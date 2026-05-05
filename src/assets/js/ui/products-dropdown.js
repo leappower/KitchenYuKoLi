@@ -241,10 +241,10 @@
     document.body.appendChild(panel);
 
     // Translate popup items immediately after DOM insertion
-    if (global.translationManager) {
+    if (window.translationManager) {
       panel.querySelectorAll("[data-i18n]").forEach(function (el) {
         var key = el.getAttribute("data-i18n");
-        var translated = global.translationManager.translate(key);
+        var translated = window.translationManager.translate(key);
         if (translated && translated !== key) {
           el.textContent = translated;
         }
@@ -257,9 +257,9 @@
         var target = e.currentTarget;
         var itemHref = target.getAttribute("href");
         closePopup();
-        if (itemHref && global.SpaRouter) {
+        if (itemHref && window.SpaRouter) {
           e.preventDefault();
-          global.SpaRouter.navigate(itemHref);
+          window.SpaRouter.navigate(itemHref);
         }
       });
     }
@@ -304,7 +304,7 @@
 
   /* ───────────────────────── PUBLIC API ───────────────────────── */
 
-  global.ProductsDropdown = {
+  window.ProductsDropdown = {
     SUBSERIES: SUBSERIES,
     renderPC: renderDropdown,
     renderTablet: renderDropdown,

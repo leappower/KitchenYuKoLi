@@ -48,7 +48,7 @@
    * products.js 和 smart-popup.js 的同名函数可删除，改调 CommonUtils.tr。
    */
   function tr(key, fallback) {
-    var value = typeof global.t === "function" ? global.t(key) : key;
+    var value = typeof window.t === "function" ? window.t(key) : key;
     return value && value !== key ? value : fallback;
   }
 
@@ -82,7 +82,7 @@
   ready(trackContactLinks);
 
   // Expose to global
-  global.CommonUtils = {
+  window.CommonUtils = {
     debounce: debounce,
     throttle: throttle,
     tr: tr,
@@ -90,5 +90,5 @@
   };
 
   // Also keep legacy window.common alias for compatibility
-  global.common = global.CommonUtils;
+  window.common = window.CommonUtils;
 })(window);

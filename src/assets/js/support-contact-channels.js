@@ -122,13 +122,13 @@
 
   function renderWaCard(cfg, device) {
     if (device === 'mobile') {
-      var _wa = global.Contacts ? global.Contacts.whatsapp : '8613163756465'; return '<a href="https://wa.me/' + _wa + '" data-wa-source="contact-card" data-wa-message-key="wa_msg_support" target="_blank" rel="noopener noreferrer" class="flex items-center gap-3 p-4 rounded-xl bg-[#06C755]/10 border border-[#06C755]/20 transition-all active:scale-95">' +
+      var _wa = window.Contacts ? window.Contacts.whatsapp : '8613163756465'; return '<a href="https://wa.me/' + _wa + '" data-wa-source="contact-card" data-wa-message-key="wa_msg_support" target="_blank" rel="noopener noreferrer" class="flex items-center gap-3 p-4 rounded-xl bg-[#06C755]/10 border border-[#06C755]/20 transition-all active:scale-95">' +
         '<div class="w-10 h-10 rounded-lg bg-[#06C755] flex items-center justify-center shrink-0"><span class="material-symbols-outlined text-white text-xl">chat</span></div>' +
         '<div class="flex-1"><p class="font-bold text-sm text-slate-900 dark:text-slate-100">WhatsApp</p><p class="text-xs text-slate-500 dark:text-slate-400">' + cfg.wa + '</p></div>' +
         '<span class="material-symbols-outlined text-slate-400 text-lg shrink-0">open_in_new</span>' +
       '</a>';
     }
-    var _wa = global.Contacts ? global.Contacts.whatsapp : '8613163756465'; return '<a href="https://wa.me/' + _wa + '" data-wa-source="contact-card" data-wa-message-key="wa_msg_support" target="_blank" rel="noopener noreferrer" class="flex flex-col items-center gap-3 p-8 rounded-2xl bg-[#06C755]/5 border border-[#06C755]/20 hover:bg-[#06C755]/10 hover:shadow-lg hover:border-[#06C755]/40 transition-all duration-300 group">' +
+    var _wa = window.Contacts ? window.Contacts.whatsapp : '8613163756465'; return '<a href="https://wa.me/' + _wa + '" data-wa-source="contact-card" data-wa-message-key="wa_msg_support" target="_blank" rel="noopener noreferrer" class="flex flex-col items-center gap-3 p-8 rounded-2xl bg-[#06C755]/5 border border-[#06C755]/20 hover:bg-[#06C755]/10 hover:shadow-lg hover:border-[#06C755]/40 transition-all duration-300 group">' +
       '<div class="w-14 h-14 rounded-full bg-[#06C755] flex items-center justify-center group-hover:scale-110 transition-transform"><span class="material-symbols-outlined text-white text-2xl">chat</span></div>' +
       '<h3 class="font-bold text-lg">WhatsApp</h3>' +
       '<p class="text-sm text-slate-500 dark:text-slate-400 text-center">' + cfg.wa + '</p>' +
@@ -152,7 +152,7 @@
 
   function renderPhoneCard(cfg, device) {
     if (device === 'mobile') {
-      var _tel = global.Contacts ? global.Contacts.whatsapp : '8613163756465'; return '<a href="tel:+' + _tel + '" class="flex items-center gap-3 p-4 rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 transition-all active:scale-95">' +
+      var _tel = window.Contacts ? window.Contacts.whatsapp : '8613163756465'; return '<a href="tel:+' + _tel + '" class="flex items-center gap-3 p-4 rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 transition-all active:scale-95">' +
         '<div class="w-10 h-10 rounded-lg bg-blue-500/10 flex items-center justify-center shrink-0"><span class="material-symbols-outlined text-blue-500 text-xl">call</span></div>' +
         '<div class="flex-1"><p class="font-bold text-sm text-slate-900 dark:text-slate-100">电话</p><p class="text-xs text-slate-500 dark:text-slate-400">' + cfg.phone + '</p></div>' +
         '<span class="material-symbols-outlined text-slate-400 text-lg shrink-0">open_in_new</span>' +
@@ -160,7 +160,7 @@
     }
     var phoneKey = cfg.phoneKey || 'support_contact_phone_label';
     var phoneDescKey = cfg.phoneDescKey || 'support_contact_phone_desc';
-    var _tel = global.Contacts ? global.Contacts.whatsapp : '8613163756465'; return '<a href="tel:+' + _tel + '" class="flex flex-col items-center gap-3 p-8 rounded-2xl bg-blue-500/5 border border-blue-500/20 hover:bg-blue-500/10 hover:shadow-lg hover:border-blue-500/40 transition-all duration-300 group">' +
+    var _tel = window.Contacts ? window.Contacts.whatsapp : '8613163756465'; return '<a href="tel:+' + _tel + '" class="flex flex-col items-center gap-3 p-8 rounded-2xl bg-blue-500/5 border border-blue-500/20 hover:bg-blue-500/10 hover:shadow-lg hover:border-blue-500/40 transition-all duration-300 group">' +
       '<div class="w-14 h-14 rounded-full bg-blue-500 flex items-center justify-center group-hover:scale-110 transition-transform"><span class="material-symbols-outlined text-white text-2xl">call</span></div>' +
       '<h3 class="font-bold text-lg"' + attr(phoneKey) + '>电话</h3>' +
       '<p class="text-sm text-slate-500 dark:text-slate-400 text-center"' + attr(phoneDescKey) + '>' + cfg.phone + '</p>' +

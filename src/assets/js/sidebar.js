@@ -8,10 +8,10 @@
 
   /** 读取移动端断点状态。优先 MediaQueries.isMobile()，降级 mqMobile 属性。 */
   function getMqMobile() {
-    return global.MediaQueries
-      ? typeof global.MediaQueries.isMobile === "function"
-        ? global.MediaQueries.isMobile()
-        : !!global.MediaQueries.mqMobile
+    return window.MediaQueries
+      ? typeof window.MediaQueries.isMobile === "function"
+        ? window.MediaQueries.isMobile()
+        : !!window.MediaQueries.mqMobile
       : false;
   }
 
@@ -43,8 +43,8 @@
       btn.classList.remove("expanded");
     }
 
-    if (global.translationManager && typeof global.translationManager.applyTranslations === "function") {
-      global.translationManager.applyTranslations();
+    if (window.translationManager && typeof window.translationManager.applyTranslations === "function") {
+      window.translationManager.applyTranslations();
     }
   }
 
@@ -61,7 +61,7 @@
       setSecondaryContactsExpanded(false);
     });
 
-    global.addEventListener(
+    window.addEventListener(
       "scroll",
       function () {
         if (!secondaryExpanded) return;
@@ -99,7 +99,7 @@
 
     var elapsedSeconds = Math.floor((Date.now() - indicatorState.pageEnterAt) / 1000);
     var scrollPercent = Math.round(
-      (global.scrollY / Math.max(1, document.body.scrollHeight - global.innerHeight)) * 100
+      (window.scrollY / Math.max(1, document.body.scrollHeight - window.innerHeight)) * 100
     );
     var isMobile = getMqMobile();
     var minWaitSeconds = isMobile ? 6 : 12;
@@ -247,8 +247,8 @@
           var isVisible =
             rect.top >= -100 &&
             rect.left >= -100 &&
-            rect.bottom <= global.innerHeight + 100 &&
-            rect.right <= global.innerWidth + 100;
+            rect.bottom <= window.innerHeight + 100 &&
+            rect.right <= window.innerWidth + 100;
           if (isVisible && !nextBtn.matches(":hover")) {
             currentIndex = nextIndex;
             break;
@@ -275,7 +275,7 @@
       };
       currentBtn.classList.add("jump-active");
       var bRect = currentBtn.getBoundingClientRect();
-      if (bRect.top < 0 || bRect.bottom > global.innerHeight) {
+      if (bRect.top < 0 || bRect.bottom > window.innerHeight) {
         currentBtn.scrollIntoView({ behavior: "smooth", block: "nearest" });
       }
       setTimeout(function () {
@@ -332,7 +332,7 @@
 
     function init() {
       if (document.readyState !== "complete") {
-        global.addEventListener("load", function () {
+        window.addEventListener("load", function () {
           setTimeout(init, 500);
         });
         return;
@@ -348,7 +348,7 @@
         }
       }, 10000);
       ["mousemove", "click", "keydown", "scroll"].forEach(function (evt) {
-        global.addEventListener(
+        window.addEventListener(
           evt,
           function () {
             lastActivity = Date.now();
@@ -363,7 +363,7 @@
   }
 
   // ─── Expose ───────────────────────────────────────────────────────────────
-  global.Sidebar = {
+  window.Sidebar = {
     setSecondaryContactsExpanded: setSecondaryContactsExpanded,
     toggleSecondaryContacts: toggleSecondaryContacts,
     setupSecondaryContactsAutoCollapse: setupSecondaryContactsAutoCollapse,
@@ -374,9 +374,9 @@
   };
 
   // Direct window bindings for HTML inline calls
-  global.setSecondaryContactsExpanded = setSecondaryContactsExpanded;
-  global.toggleSecondaryContacts = toggleSecondaryContacts;
-  global.showIndicator = showIndicator;
-  global.hideIndicator = hideIndicator;
-  global.setupJumpingAnimation = setupJumpingAnimation;
+  window.setSecondaryContactsExpanded = setSecondaryContactsExpanded;
+  window.toggleSecondaryContacts = toggleSecondaryContacts;
+  window.showIndicator = showIndicator;
+  window.hideIndicator = hideIndicator;
+  window.setupJumpingAnimation = setupJumpingAnimation;
 })(window);

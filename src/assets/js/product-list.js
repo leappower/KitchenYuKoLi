@@ -7,10 +7,10 @@
 
   // ─── Safe references to globals ───────────────────────────────────────────
   function getImageAssets() {
-    return (global.ImageAssets && global.ImageAssets.IMAGE_ASSETS) || {};
+    return (window.ImageAssets && window.ImageAssets.IMAGE_ASSETS) || {};
   }
 
-  var SAFE_PRODUCT_DATA_TABLE = Array.isArray(global.PRODUCT_DATA_TABLE) ? global.PRODUCT_DATA_TABLE : [];
+  var SAFE_PRODUCT_DATA_TABLE = Array.isArray(window.PRODUCT_DATA_TABLE) ? window.PRODUCT_DATA_TABLE : [];
 
   // ─── Defaults ─────────────────────────────────────────────────────────────
   var PRODUCT_DEFAULTS = {
@@ -307,7 +307,7 @@
   // so the Products module (bundle.js) picks up new categories/products.
   function rebuildProductSeries() {
     // Read from RUNTIME global, not closure snapshot
-    var liveData = Array.isArray(global.PRODUCT_DATA_TABLE) ? global.PRODUCT_DATA_TABLE : [];
+    var liveData = Array.isArray(window.PRODUCT_DATA_TABLE) ? window.PRODUCT_DATA_TABLE : [];
     var rebuilt = liveData.map(function (series) {
       return Object.assign({}, series, {
         products: filterValidProducts(series.products).map(function (product) {
@@ -318,22 +318,22 @@
     // Merge with any appended series
     var combined = rebuilt.concat(APPENDED_PRODUCT_SERIES_NORMALIZED);
     PRODUCT_SERIES = withImageUrl(mergeSeriesByIdentity(combined));
-    global.PRODUCT_SERIES = PRODUCT_SERIES;
+    window.PRODUCT_SERIES = PRODUCT_SERIES;
     // Re-render products if the module is available
-    if (global.Products && typeof global.Products.renderProducts === 'function') {
-      global.Products.initFilterBarAndProducts();
+    if (window.Products && typeof window.Products.renderProducts === 'function') {
+      window.Products.initFilterBarAndProducts();
     }
-    if (global.ProductGrid && typeof global.ProductGrid.renderPC === 'function') {
-      global.ProductGrid.renderPC();
+    if (window.ProductGrid && typeof window.ProductGrid.renderPC === 'function') {
+      window.ProductGrid.renderPC();
     }
   }
 
   window.addEventListener('product-data-ready', rebuildProductSeries);
 
   // ─── Exports ───────────────────────────────────────────────────────────────
-  global.PRODUCT_DEFAULTS = PRODUCT_DEFAULTS;
-  global.ProductEntity = ProductEntity;
-  global.assembleProductSeries = assembleProductSeries;
-  global.PRODUCT_SERIES = PRODUCT_SERIES;
-  global.rebuildProductSeries = rebuildProductSeries;
+  window.PRODUCT_DEFAULTS = PRODUCT_DEFAULTS;
+  window.ProductEntity = ProductEntity;
+  window.assembleProductSeries = assembleProductSeries;
+  window.PRODUCT_SERIES = PRODUCT_SERIES;
+  window.rebuildProductSeries = rebuildProductSeries;
 })(window);

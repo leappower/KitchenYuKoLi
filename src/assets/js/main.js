@@ -146,25 +146,25 @@
 
   ErrorHandlingModule.prototype.setupErrorHandling = function () {
     var self = this;
-    global.addEventListener("error", function (e) {
+    window.addEventListener("error", function (e) {
       console.error("JavaScript error:", e.error);
       self.reportError(e.error);
     });
-    global.addEventListener("unhandledrejection", function (e) {
+    window.addEventListener("unhandledrejection", function (e) {
       console.error("Unhandled promise rejection:", e.reason);
       self.reportError(e.reason);
     });
-    global.addEventListener("offline", function () {
+    window.addEventListener("offline", function () {
       self.showNetworkStatus("You are currently offline", "warning");
     });
-    global.addEventListener("online", function () {
+    window.addEventListener("online", function () {
       self.showNetworkStatus("You are back online", "success");
     });
   };
 
   ErrorHandlingModule.prototype.reportError = function (error) {
-    if (global.gtag) {
-      global.gtag("event", "exception", {
+    if (window.gtag) {
+      window.gtag("event", "exception", {
         description: error && error.message ? error.message : String(error),
         fatal: false,
       });
@@ -175,8 +175,8 @@
     // 优先使用统一的 Toast 系统（page-interactions.js 注册后生效），
     // 降级使用 contacts.js 的 showNotification，最终 fallback 到 console.warn。
     var notifyType = type === "warning" ? "error" : "success";
-    if (typeof global.showNotification === "function") {
-      global.showNotification(message, notifyType);
+    if (typeof window.showNotification === "function") {
+      window.showNotification(message, notifyType);
     } else {
       console.warn("[NetworkStatus]", type, message);
     }
@@ -188,8 +188,8 @@
   app.registerModule("lazyLoading", new LazyLoadingModule());
   app.registerModule("errorHandling", new ErrorHandlingModule());
 
-  if (global.CommonUtils && typeof global.CommonUtils.ready === "function") {
-    global.CommonUtils.ready(function () {
+  if (window.CommonUtils && typeof window.CommonUtils.ready === "function") {
+    window.CommonUtils.ready(function () {
       app.initialize();
     });
   } else if (document.readyState === "loading") {
@@ -200,5 +200,5 @@
     app.initialize();
   }
 
-  global.app = app;
+  window.app = app;
 })(window);

@@ -654,7 +654,7 @@
    * @returns {string}
    */
   function renderMenuPanelContent() {
-    var basePath = global.BASE_PATH || "";
+    var basePath = window.BASE_PATH || "";
 
     var headerHtml =
       '<div class="mobile-menu-header">' +
@@ -719,10 +719,10 @@
     panelEl.innerHTML = renderMenuPanelContent();
 
     // 应用翻译
-    if (global.translationManager) {
+    if (window.translationManager) {
       panelEl.querySelectorAll("[data-i18n]").forEach(function (el) {
         var key = el.getAttribute("data-i18n");
-        var translated = global.translationManager.translate(key);
+        var translated = window.translationManager.translate(key);
         if (translated && translated !== key) {
           el.textContent = translated;
         }
@@ -848,9 +848,9 @@
 
         // 常规链接：关闭菜单并尝试 SPA 路由
         closeMenu();
-        if (href && global.SpaRouter) {
+        if (href && window.SpaRouter) {
           evt.preventDefault();
-          global.SpaRouter.navigate(href);
+          window.SpaRouter.navigate(href);
         }
       });
     }
@@ -876,9 +876,9 @@
       ctaButtons[n].addEventListener("click", function (evt) {
         var href = this.getAttribute("href") || this.getAttribute("data-nav");
         closeMenu();
-        if (href && global.SpaRouter) {
+        if (href && window.SpaRouter) {
           evt.preventDefault();
-          global.SpaRouter.navigate(href);
+          window.SpaRouter.navigate(href);
         }
       });
     }
@@ -1062,11 +1062,11 @@
     document.body.style.overflow = "hidden";
 
     // 翻译搜索框占位符
-    if (global.translationManager) {
+    if (window.translationManager) {
       var placeholderEl = searchOverlayEl.querySelector("[data-i18n-placeholder]");
       if (placeholderEl) {
         var placeholderKey = placeholderEl.getAttribute("data-i18n-placeholder");
-        var translatedPlaceholder = global.translationManager.translate(placeholderKey);
+        var translatedPlaceholder = window.translationManager.translate(placeholderKey);
         if (translatedPlaceholder && translatedPlaceholder !== placeholderKey) {
           placeholderEl.placeholder = translatedPlaceholder;
         }
@@ -1158,8 +1158,8 @@
     // 防抖搜索
     searchDebounceTimer = setTimeout(function () {
       var results = [];
-      if (global.ProductSearchEngine && typeof global.ProductSearchEngine.search === "function") {
-        results = global.ProductSearchEngine.search(query);
+      if (window.ProductSearchEngine && typeof window.ProductSearchEngine.search === "function") {
+        results = window.ProductSearchEngine.search(query);
       }
       renderSearchResults(results);
     }, 200);
@@ -1214,7 +1214,7 @@
       }
     } else {
       // 空结果提示
-      var trFn = (global.CommonUtils && global.CommonUtils.tr) || global.t;
+      var trFn = (window.CommonUtils && window.CommonUtils.tr) || window.t;
       var emptyText = trFn
         ? trFn("search_no_results", "No matching products found")
         : "No matching products found";
@@ -1289,7 +1289,7 @@
    * @namespace SlideMenu
    * @global
    */
-  global.SlideMenu = {
+  window.SlideMenu = {
     /** 打开移动端滑出菜单 */
     open: openMenu,
 

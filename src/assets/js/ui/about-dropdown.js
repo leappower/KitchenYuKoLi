@@ -129,7 +129,7 @@
           var anchorId = hashMatch[2];
           if (!targetPath.endsWith("/")) targetPath += "/";
 
-          var currentPath = global.SpaRouter ? global.SpaRouter.getCurrentPath() : window.location.pathname;
+          var currentPath = window.SpaRouter ? window.SpaRouter.getCurrentPath() : window.location.pathname;
           if (!currentPath.endsWith("/")) currentPath += "/";
 
           if (targetPath === currentPath) {
@@ -138,16 +138,16 @@
               var el = document.getElementById(anchorId);
               if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
             }, 100);
-          } else if (global.SpaRouter) {
-            global.SpaRouter._pendingScroll = anchorId;
-            global.SpaRouter.navigate(targetPath);
+          } else if (window.SpaRouter) {
+            window.SpaRouter._pendingScroll = anchorId;
+            window.SpaRouter.navigate(targetPath);
           } else {
             window.location.href = href;
           }
         } else {
           // No hash — regular SPA navigation
-          if (global.SpaRouter) {
-            global.SpaRouter.navigate(href);
+          if (window.SpaRouter) {
+            window.SpaRouter.navigate(href);
           } else {
             window.location.href = href;
           }
@@ -185,9 +185,9 @@
 
     panel.innerHTML = '<div class="abt-popup-handle"></div>' + items;
 
-    if (global.translationManager) {
+    if (window.translationManager) {
       panel.querySelectorAll("[data-i18n]").forEach(function (el) {
-        var val = global.translationManager.translate(el.getAttribute("data-i18n"));
+        var val = window.translationManager.translate(el.getAttribute("data-i18n"));
         if (val && val !== el.getAttribute("data-i18n")) el.textContent = val;
       });
     }
@@ -200,9 +200,9 @@
       item.addEventListener("click", function (e) {
         var itemHref = item.getAttribute("href");
         closePopup();
-        if (itemHref && global.SpaRouter) {
+        if (itemHref && window.SpaRouter) {
           e.preventDefault();
-          global.SpaRouter.navigate(itemHref);
+          window.SpaRouter.navigate(itemHref);
         }
       });
     });
@@ -235,7 +235,7 @@
 
   /* ───────────────────────── PUBLIC API ───────────────────────── */
 
-  global.AboutDropdown = {
+  window.AboutDropdown = {
     ITEMS: DEFAULT_ITEMS,
     renderPC: renderDropdown,
     renderTablet: renderDropdown,

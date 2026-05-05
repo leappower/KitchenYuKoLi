@@ -12,10 +12,10 @@
   // ─── matchMedia 缓存 ──────────────────────────────────────────────────────────
   // 将 window.matchMedia 结果缓存为布尔变量，避免在每次渲染 / 事件回调里重复触发
   // 布局计算。通过 'change' 事件保持与实际视口同步。
-  var _mq768 = global.matchMedia("(max-width: 768px)");
-  var _mq640 = global.matchMedia("(max-width: 640px)");
-  var _mq1024 = global.matchMedia("(min-width: 1024px)");
-  var _mq768min = global.matchMedia("(min-width: 768px)");
+  var _mq768 = window.matchMedia("(max-width: 768px)");
+  var _mq640 = window.matchMedia("(max-width: 640px)");
+  var _mq1024 = window.matchMedia("(min-width: 1024px)");
+  var _mq768min = window.matchMedia("(min-width: 768px)");
 
   /** 视口宽度 ≤ 768px */
   var mqMobile = _mq768.matches;
@@ -28,22 +28,22 @@
 
   _mq768.addEventListener("change", function (e) {
     mqMobile = e.matches;
-    global.MediaQueries.mqMobile = e.matches;
+    window.MediaQueries.mqMobile = e.matches;
   });
   _mq640.addEventListener("change", function (e) {
     mqMobileSmall = e.matches;
-    global.MediaQueries.mqMobileSmall = e.matches;
+    window.MediaQueries.mqMobileSmall = e.matches;
   });
   _mq1024.addEventListener("change", function (e) {
     mqDesktop = e.matches;
-    global.MediaQueries.mqDesktop = e.matches;
+    window.MediaQueries.mqDesktop = e.matches;
   });
   _mq768min.addEventListener("change", function (e) {
     mqTablet = e.matches;
-    global.MediaQueries.mqTablet = e.matches;
+    window.MediaQueries.mqTablet = e.matches;
   });
 
-  global.MediaQueries = {
+  window.MediaQueries = {
     get mqMobile() {
       return mqMobile;
     },

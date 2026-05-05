@@ -9,7 +9,7 @@
   "use strict";
 
   // ─── Helpers (from PiHelpers) ─────────────────────────────────────────
-  var _h = global.PiHelpers || {};
+  var _h = window.PiHelpers || {};
   var safeCall = _h.safeCall || function (fnName, args) {
     if (typeof global[fnName] === "function") return global[fnName].apply(null, args || []);
     console.warn("[FormInteractions] " + fnName + " not found.");
@@ -149,10 +149,10 @@
             showFormSuccess(form, function () {
               calSection.scrollIntoView({ behavior: "smooth", block: "start" });
             });
-          } else if (typeof global.submitContactForm === "function") {
+          } else if (typeof window.submitContactForm === "function") {
             // Call submitContactForm immediately (keeps test compatibility),
             // then show the visual success overlay
-            global.submitContactForm(e);
+            window.submitContactForm(e);
             showFormSuccess(form, null);
           } else {
             showFormSuccess(form, function () {

@@ -8,7 +8,7 @@
 
   // ─── Fallbacks ─────────────────────────────────────────────────────────────
   function getMq() {
-    return global.MediaQueries || {};
+    return window.MediaQueries || {};
   }
 
   /**
@@ -17,8 +17,8 @@
    * 否则内联最小 fallback，避免硬依赖加载顺序。
    */
   function getDebounce() {
-    if (global.CommonUtils && typeof global.CommonUtils.debounce === "function") {
-      return global.CommonUtils.debounce;
+    if (window.CommonUtils && typeof window.CommonUtils.debounce === "function") {
+      return window.CommonUtils.debounce;
     }
     return function debounce(func, wait) {
       var timeout;
@@ -39,10 +39,10 @@
    * Fallback：CommonUtils 未加载时直接调用 window.t，再降级返回 fallback。
    */
   function tr(key, fallback) {
-    if (global.CommonUtils && typeof global.CommonUtils.tr === "function") {
-      return global.CommonUtils.tr(key, fallback);
+    if (window.CommonUtils && typeof window.CommonUtils.tr === "function") {
+      return window.CommonUtils.tr(key, fallback);
     }
-    var value = typeof global.t === "function" ? global.t(key) : key;
+    var value = typeof window.t === "function" ? window.t(key) : key;
     return value && value !== key ? value : fallback;
   }
 
@@ -61,7 +61,7 @@
 
   // ─── AppUtils accessor ─────────────────────────────────────────────────────
   function getAppUtils() {
-    return global.AppUtils || null;
+    return window.AppUtils || null;
   }
 
   function resolveImage(imageKey) {
@@ -109,7 +109,7 @@
   // ─── Schedule render ───────────────────────────────────────────────────────
   function scheduleRenderProducts() {
     if (productRenderRafId) return;
-    productRenderRafId = global.requestAnimationFrame(function () {
+    productRenderRafId = window.requestAnimationFrame(function () {
       productRenderRafId = 0;
       renderProducts();
     });
@@ -121,7 +121,7 @@
     if (!grid) return 280;
     var firstCard = grid.querySelector(".product-card");
     if (!firstCard) return Math.max(240, Math.floor(grid.clientWidth * 0.82));
-    var cardStyles = global.getComputedStyle(firstCard);
+    var cardStyles = window.getComputedStyle(firstCard);
     var cardWidth = firstCard.getBoundingClientRect().width;
     var cardMarginRight = parseFloat(cardStyles.marginRight || "0") || 0;
     return Math.max(220, Math.round(cardWidth + cardMarginRight + 14));
@@ -254,11 +254,11 @@
     if (!grid) return;
     var stepWidth = getMobileProductStepWidth();
     grid.scrollBy({ left: direction * stepWidth, behavior: "smooth" });
-    global.setTimeout(updateMobileProductNavState, 220);
+    window.setTimeout(updateMobileProductNavState, 220);
   }
 
   lastItemsPerPage = getItemsPerPage();
-  global.addEventListener(
+  window.addEventListener(
     "resize",
     getDebounce()(function () {
       var nextItemsPerPage = getItemsPerPage();
@@ -286,7 +286,7 @@
     var filterBar = document.getElementById("product-filter-bar");
     if (!filterBar) return;
     filterBar.addEventListener("scroll", updateProductFilterSwipeHint, { passive: true });
-    global.addEventListener("resize", getDebounce()(updateProductFilterSwipeHint, 150));
+    window.addEventListener("resize", getDebounce()(updateProductFilterSwipeHint, 150));
     var hint = document.getElementById("product-filter-swipe-hint");
     if (hint) {
       hint.addEventListener("click", function () {
@@ -607,7 +607,7 @@
       grid.addEventListener("scroll", resetMobileCtrlFadeTimer, { passive: true });
       _mobileCtrlCenterRevealHandler = function () {
         if (_mobileCtrlCenterRevealRaf) return;
-        _mobileCtrlCenterRevealRaf = global.requestAnimationFrame(function () {
+        _mobileCtrlCenterRevealRaf = window.requestAnimationFrame(function () {
           _mobileCtrlCenterRevealRaf = 0;
           revealMobileControlsOnCenteredCard();
         });
@@ -619,7 +619,7 @@
         resetMobileCtrlFadeTimer();
       };
       _mobileCtrlTouchEndHandler = function () {
-        global.setTimeout(function () {
+        window.setTimeout(function () {
           updateMobileProductNavState();
           revealMobileControlsOnCenteredCard();
           resetMobileCtrlFadeTimer();
@@ -627,7 +627,7 @@
       };
       grid.addEventListener("touchstart", _mobileCtrlTouchHandler, { passive: true });
       grid.addEventListener("touchend", _mobileCtrlTouchEndHandler, { passive: true });
-      global.setTimeout(updateMobileProductNavState, 30);
+      window.setTimeout(updateMobileProductNavState, 30);
     } else {
       grid.className = "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8";
       renderMobileProductSideControls(false);
@@ -638,7 +638,7 @@
         _mobileCtrlCenterRevealHandler = null;
       }
       if (_mobileCtrlCenterRevealRaf) {
-        global.cancelAnimationFrame(_mobileCtrlCenterRevealRaf);
+        window.cancelAnimationFrame(_mobileCtrlCenterRevealRaf);
         _mobileCtrlCenterRevealRaf = 0;
       }
       if (_mobileCtrlTouchHandler) {
@@ -660,8 +660,8 @@
 
     grid.querySelectorAll('[data-action="show-popup"]').forEach(function (btn) {
       btn.addEventListener("click", function () {
-        if (global.smartPopup && typeof global.smartPopup.showPopup === "function") {
-          global.smartPopup.showPopup("manual-click", { manual: true });
+        if (window.smartPopup && typeof window.smartPopup.showPopup === "function") {
+          window.smartPopup.showPopup("manual-click", { manual: true });
         }
       });
     });
@@ -783,15 +783,15 @@
   }
 
   // ─── Translation event wiring ─────────────────────────────────────────────
-  if (global.translationManager) {
-    global.translationManager.on("translationsApplied", initFilterBarAndProducts);
+  if (window.translationManager) {
+    window.translationManager.on("translationsApplied", initFilterBarAndProducts);
   } else {
     // translationsApplied is an EventEmitter event (not DOM), use .on() only
   }
 
   document.addEventListener("DOMContentLoaded", function () {
-    var tmDone = global.translationManager && global.translationManager.isInitialized;
-    if (tmDone || !global.translationManager) {
+    var tmDone = window.translationManager && window.translationManager.isInitialized;
+    if (tmDone || !window.translationManager) {
       initFilterBarAndProducts();
       return;
     }
@@ -804,14 +804,14 @@
     var clearTranslationTimeout = function () {
       clearTimeout(translationTimeout);
     };
-    if (global.translationManager) {
-      global.translationManager.on("translationsApplied", clearTranslationTimeout);
+    if (window.translationManager) {
+      window.translationManager.on("translationsApplied", clearTranslationTimeout);
     } else {
       // translationsApplied is an EventEmitter event (not DOM), use .on() only
     }
   });
 
-  global.addEventListener("languageChanged", function () {
+  window.addEventListener("languageChanged", function () {
     filterBarRendered = false;
     var defaultFilter = renderProductFilters();
     filterBarRendered = true;
@@ -820,12 +820,12 @@
     scheduleRenderProducts();
   });
 
-  global.addEventListener("productTranslationsLoaded", function () {
+  window.addEventListener("productTranslationsLoaded", function () {
     scheduleRenderProducts();
   });
 
   // ─── Expose ───────────────────────────────────────────────────────────────
-  global.Products = {
+  window.Products = {
     getProducts: getProducts,
     filterProducts: filterProducts,
     renderProducts: renderProducts,
@@ -840,7 +840,7 @@
   };
 
   // Direct window bindings for HTML inline calls
-  global.filterProducts = filterProducts;
-  global.scrollMobileProducts = scrollMobileProducts;
-  global.updateProductFilterButtonState = updateProductFilterButtonState;
+  window.filterProducts = filterProducts;
+  window.scrollMobileProducts = scrollMobileProducts;
+  window.updateProductFilterButtonState = updateProductFilterButtonState;
 })(window);

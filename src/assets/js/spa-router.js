@@ -723,13 +723,13 @@
 
       // Profit calculator needs Chart.js + html2canvas + jsPDF + pi-roi.js
       if (path.indexOf("/profit-calculator/") !== -1) {
-        if (typeof global.Chart === "undefined") {
+        if (typeof window.Chart === "undefined") {
           scripts.push({ src: "/assets/js/vendor/chart.umd.min.js", id: "spa-chart-js" });
         }
-        if (typeof global.html2canvas === "undefined") {
+        if (typeof window.html2canvas === "undefined") {
           scripts.push({ src: "/assets/js/vendor/html2canvas.min.js", id: "spa-html2canvas" });
         }
-        if (typeof global.jspdf === "undefined" && typeof global.jsPDF === "undefined") {
+        if (typeof window.jspdf === "undefined" && typeof window.jsPDF === "undefined") {
           scripts.push({ src: "/assets/js/vendor/jspdf.umd.min.js", id: "spa-jspdf" });
         }
         scripts.push({ src: "/assets/js/ui/pi-roi.js", id: "spa-pi-roi" });
@@ -786,5 +786,5 @@
   };
 
   // 导出到全局
-  global.SpaRouter = SpaRouter;
+  window.SpaRouter = SpaRouter;
 })(window);

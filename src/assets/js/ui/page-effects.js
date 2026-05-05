@@ -9,7 +9,7 @@
   "use strict";
 
   // ─── Helpers (from PiHelpers) ─────────────────────────────────────────
-  var _h = global.PiHelpers || {};
+  var _h = window.PiHelpers || {};
   var safeCall = _h.safeCall || function (fnName, args) {
     if (typeof global[fnName] === "function") return global[fnName].apply(null, args || []);
     console.warn("[PageEffects] " + fnName + " not found.");
@@ -89,7 +89,7 @@
    */
   function initStickyCTA() {
     // Skip on form-heavy pages (thank-you / quote) and email-only pages
-    var path = global.location.pathname;
+    var path = window.location.pathname;
     var skipPages = ["thank-you", "quote", "emails", "linkedin"];
     for (var i = 0; i < skipPages.length; i++) {
       if (path.indexOf(skipPages[i]) !== -1) return;
@@ -155,7 +155,7 @@
     var lastScrollTime = 0;
     var scrollThrottle = 100; // 每 100ms 最多检查一次（10 times/sec）
 
-    global.addEventListener(
+    window.addEventListener(
       "scroll",
       function () {
         if (dismissed) return;
@@ -163,8 +163,8 @@
         if (now - lastScrollTime < scrollThrottle) return;
         lastScrollTime = now;
 
-        if (global.scrollY > 200 && !shown) showBar();
-        if (global.scrollY <= 200 && shown) hideBar();
+        if (window.scrollY > 200 && !shown) showBar();
+        if (window.scrollY <= 200 && shown) hideBar();
       },
       { passive: true }
     );
@@ -297,7 +297,7 @@
     }
 
     // Override / set window.showNotification
-    global.showNotification = showToast;
+    window.showNotification = showToast;
   }
 
   // ─── F7. Page Transition (fade between pages) ─────────────────────────────────
@@ -367,7 +367,7 @@
       e.preventDefault();
       document.body.classList.add("page-fade-out");
       setTimeout(function () {
-        global.location.href = href;
+        window.location.href = href;
       }, 200);
     });
   }

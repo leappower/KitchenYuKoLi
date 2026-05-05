@@ -20,11 +20,11 @@
   // ─── Read dependencies from window ──────────────────────────────────────────
   /** 读取移动端断点状态。优先 MediaQueries.isMobile()，降级 innerWidth < 768。 */
   function getMqMobile() {
-    return global.MediaQueries ? global.MediaQueries.isMobile() : global.innerWidth < 768;
+    return window.MediaQueries ? window.MediaQueries.isMobile() : window.innerWidth < 768;
   }
 
   function debounce(func, wait) {
-    if (global.CommonUtils) return global.CommonUtils.debounce(func, wait);
+    if (window.CommonUtils) return window.CommonUtils.debounce(func, wait);
     // Inline fallback
     if (wait === undefined) wait = 300;
     var timeout;
@@ -48,25 +48,25 @@
     backToTopBtn.classList.add("hide");
 
     var checkScrollPosition = function () {
-      var windowHeight = global.innerHeight;
+      var windowHeight = window.innerHeight;
       var documentHeight = document.documentElement.scrollHeight;
       var scrollableHeight = documentHeight - windowHeight;
       var isMobile = getMqMobile();
       var threshold = isMobile ? 0.3 : 0.5;
       var scrollThreshold = scrollableHeight * threshold;
 
-      if (global.pageYOffset > scrollThreshold) {
+      if (window.pageYOffset > scrollThreshold) {
         backToTopBtn.classList.remove("hide");
       } else {
         backToTopBtn.classList.add("hide");
       }
     };
 
-    global.addEventListener("scroll", checkScrollPosition, { passive: true });
-    global.addEventListener("resize", debounce(checkScrollPosition, 150), { passive: true });
+    window.addEventListener("scroll", checkScrollPosition, { passive: true });
+    window.addEventListener("resize", debounce(checkScrollPosition, 150), { passive: true });
     backToTopBtn.addEventListener("click", function (e) {
       e.preventDefault();
-      global.scrollTo({ top: 0, behavior: "smooth" });
+      window.scrollTo({ top: 0, behavior: "smooth" });
     });
 
     checkScrollPosition();
@@ -84,7 +84,7 @@
       sectionPositions = [];
       sections.forEach(function (section) {
         var rect = section.getBoundingClientRect();
-        var scrollY = global.scrollY || global.pageYOffset;
+        var scrollY = window.scrollY || window.pageYOffset;
         var offset = 100;
         if (section.id) {
           sectionPositions.push({
@@ -101,7 +101,7 @@
 
     function updateActiveNavLink() {
       if (sectionPositions.length === 0) return;
-      var currentScroll = global.scrollY || global.pageYOffset;
+      var currentScroll = window.scrollY || window.pageYOffset;
       var currentSection = null;
       for (var i = 0; i < sectionPositions.length; i++) {
         var section = sectionPositions[i];
@@ -126,11 +126,11 @@
 
     calculateSectionPositions();
     var scrollTimeout;
-    global.addEventListener("scroll", function () {
+    window.addEventListener("scroll", function () {
       if (scrollTimeout) clearTimeout(scrollTimeout);
       scrollTimeout = setTimeout(updateActiveNavLink, 100);
     });
-    global.addEventListener("resize", function () {
+    window.addEventListener("resize", function () {
       calculateSectionPositions();
       updateActiveNavLink();
     });
@@ -150,7 +150,7 @@
             l.classList.remove("active");
           });
           link.classList.add("active");
-          global.scrollTo({ top: targetElement.offsetTop - 80, behavior: "smooth" });
+          window.scrollTo({ top: targetElement.offsetTop - 80, behavior: "smooth" });
           history.pushState(null, null, targetId);
         }
       });
@@ -170,8 +170,8 @@
     });
 
     // ─── Handle browser back button (popstate event) ──────────────────────────
-    global.addEventListener("popstate", function () {
-      var currentHash = global.location.hash;
+    window.addEventListener("popstate", function () {
+      var currentHash = window.location.hash;
       if (currentHash) {
         var targetElement = document.querySelector(currentHash);
         if (targetElement) {
@@ -180,7 +180,7 @@
           });
           var matchingLink = document.querySelector('header nav a[href="' + currentHash + '"]');
           if (matchingLink) matchingLink.classList.add("active");
-          global.scrollTo({ top: targetElement.offsetTop - 80, behavior: "smooth" });
+          window.scrollTo({ top: targetElement.offsetTop - 80, behavior: "smooth" });
         }
       } else {
         navLinks.forEach(function (l) {
@@ -236,7 +236,7 @@
       setMobileMenuOpen(false);
     });
 
-    global.addEventListener("resize", function () {
+    window.addEventListener("resize", function () {
       if (!getMqMobile()) setMobileMenuOpen(false);
     });
   }
@@ -261,7 +261,7 @@
   }
 
   // Expose to global
-  global.Navigation = {
+  window.Navigation = {
     setupBackToTopButton: setupBackToTopButton,
     setupNavHighlight: setupNavHighlight,
     setMobileMenuOpen: setMobileMenuOpen,
@@ -272,8 +272,8 @@
   };
 
   // Also expose individual functions at window level for inline onclick usage
-  global.setMobileMenuOpen = setMobileMenuOpen;
-  global.toggleMobileMenu = toggleMobileMenu;
-  global.ensureMobileMenuClosed = ensureMobileMenuClosed;
-  global.initDarkMode = initDarkMode;
+  window.setMobileMenuOpen = setMobileMenuOpen;
+  window.toggleMobileMenu = toggleMobileMenu;
+  window.ensureMobileMenuClosed = ensureMobileMenuClosed;
+  window.initDarkMode = initDarkMode;
 })(window);

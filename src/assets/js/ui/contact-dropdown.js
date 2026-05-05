@@ -12,7 +12,7 @@
 
   var ITEMS = (typeof NAV_CONFIG !== 'undefined' && NAV_CONFIG.dropdowns && NAV_CONFIG.dropdowns.contact) || [
     { key: "nav_contact_us", icon: "grid_view", href: "/contact/" },
-    { key: "nav_contact_whatsapp", icon: "chat", href: "https://wa.me/" + (global.Contacts ? global.Contacts.whatsapp : "8613163756465"), isWhatsApp: true },
+    { key: "nav_contact_whatsapp", icon: "chat", href: "https://wa.me/" + (window.Contacts ? window.Contacts.whatsapp : "8613163756465"), isWhatsApp: true },
   ];
 
   /* ───────────────────────── HELPERS ───────────────────────── */
@@ -149,9 +149,9 @@
 
     panel.innerHTML = '<div class="cnt-popup-handle"></div>' + items;
 
-    if (global.translationManager) {
+    if (window.translationManager) {
       panel.querySelectorAll("[data-i18n]").forEach(function (el) {
-        var val = global.translationManager.translate(el.getAttribute("data-i18n"));
+        var val = window.translationManager.translate(el.getAttribute("data-i18n"));
         if (val && val !== el.getAttribute("data-i18n")) el.textContent = val;
       });
     }
@@ -170,9 +170,9 @@
           window.open(itemHref, "_blank");
           return;
         }
-        if (itemHref && global.SpaRouter) {
+        if (itemHref && window.SpaRouter) {
           e.preventDefault();
-          global.SpaRouter.navigate(itemHref);
+          window.SpaRouter.navigate(itemHref);
         }
       });
     });
@@ -205,7 +205,7 @@
 
   /* ───────────────────────── PUBLIC API ───────────────────────── */
 
-  global.ContactDropdown = {
+  window.ContactDropdown = {
     ITEMS: ITEMS,
     renderPC: renderDropdown,
     renderTablet: renderDropdown,

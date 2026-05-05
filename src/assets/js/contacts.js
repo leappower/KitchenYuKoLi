@@ -49,7 +49,7 @@
   };
 
   function getPageName() {
-    var path = global.location.pathname.replace(/\/index-(pc|mobile|tablet)\.html$/, "/");
+    var path = window.location.pathname.replace(/\/index-(pc|mobile|tablet)\.html$/, "/");
     if (PAGE_NAMES[path]) return PAGE_NAMES[path];
     var keys = Object.keys(PAGE_NAMES).sort(function (a, b) { return b.length - a.length; });
     for (var i = 0; i < keys.length; i++) {
@@ -111,8 +111,8 @@
           // 读取消息：优先 data-wa-message-key（i18n）→ data-wa-message（硬编码）→ 默认
           var userMessage = "";
           var msgKey = link.dataset.waMessageKey;
-          if (msgKey && global.translationManager) {
-            userMessage = global.translationManager.translate(msgKey);
+          if (msgKey && window.translationManager) {
+            userMessage = window.translationManager.translate(msgKey);
             // 翻译缺失时返回原 key，此时清空
             if (userMessage === msgKey) userMessage = "";
           }
@@ -121,7 +121,7 @@
           }
 
           var url = contactsWhatsApp({ source: source, message: userMessage });
-          global.open(url, "_blank", "noopener,noreferrer");
+          window.open(url, "_blank", "noopener,noreferrer");
         });
       })(links[i]);
     }
@@ -141,8 +141,8 @@
   function buildQuoteMessage() {
     // Use i18n for labels if available, otherwise raw key (English fallback)
     var t = function(key) {
-      if (global.translationManager && typeof global.translationManager.translate === 'function') {
-        var v = global.translationManager.translate(key);
+      if (window.translationManager && typeof window.translationManager.translate === 'function') {
+        var v = window.translationManager.translate(key);
         if (v && v !== key) return v;
       }
       // Fallback: strip quote_ prefix, replace _ with space
@@ -183,40 +183,40 @@
   function startWhatsApp() {
     var text = buildQuoteMessage();
     var url = contactsWhatsApp({ source: "询价表单", message: text });
-    global.open(url, "_blank");
+    window.open(url, "_blank");
   }
   function startLine() {
-    global.open("https://line.me/ti/p/+66840273150", "_blank");
+    window.open("https://line.me/ti/p/+66840273150", "_blank");
   }
   function startPhone() {
-    global.location.href = "tel:+" + WHATSAPP_NUMBER;
+    window.location.href = "tel:+" + WHATSAPP_NUMBER;
   }
   function startTelegram() {
-    global.open("https://t.me/baeckerei-profi", "_blank");
+    window.open("https://t.me/baeckerei-profi", "_blank");
   }
   function startEmail() {
     var subject = "YuKoLi 智能厨具询价";
     var body = buildQuoteMessage();
-    global.location.href = "mailto:support@yukoli.com?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(body);
+    window.location.href = "mailto:support@yukoli.com?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(body);
   }
   function startFacebook() {
-    global.open("https://www.facebook.com/people/Yukoli-Technology-Co-Ltd/61579549730250/", "_blank");
+    window.open("https://www.facebook.com/people/Yukoli-Technology-Co-Ltd/61579549730250/", "_blank");
   }
   function startInstagram() {
-    global.open("https://instagram.com/baeckerei.profi", "_blank");
+    window.open("https://instagram.com/baeckerei.profi", "_blank");
   }
   function startTwitter() {
-    global.open("https://twitter.com/baeckerei_profi", "_blank");
+    window.open("https://twitter.com/baeckerei_profi", "_blank");
   }
   function startLinkedIn() {
-    global.open("https://linkedin.com/company/baeckereitechnik-profi", "_blank");
+    window.open("https://linkedin.com/company/baeckereitechnik-profi", "_blank");
   }
   /**
    * startTikTok 优先调用 window.showNotification（page-interactions.js Toast 注册后）。
    * 若 Toast 尚未就绪（脚本早于 DOMContentLoaded 执行），降级到 _showNotification。
    */
   function startTikTok() {
-    var notify = typeof global.showNotification === "function" ? global.showNotification : _showNotification;
+    var notify = typeof window.showNotification === "function" ? window.showNotification : _showNotification;
     notify("Coming Soon", "success");
   }
 
@@ -262,7 +262,7 @@
   }
 
   // Expose to global
-  global.Contacts = {
+  window.Contacts = {
     whatsapp: WHATSAPP_NUMBER,
     contactsWhatsApp: contactsWhatsApp,
     whatsappUrl: contactsWhatsApp, // shorthand alias
@@ -286,16 +286,16 @@
   // Also expose individual functions at window level for inline onclick usage
   // 注意：window.showNotification 和 createNotificationContainer 不再由此文件注册，
   //       改由 page-interactions.js initToastSystem() 在 DOMContentLoaded 后统一管理。
-  global.startWhatsApp = startWhatsApp;
-  global.startLine = startLine;
-  global.startPhone = startPhone;
-  global.startTelegram = startTelegram;
-  global.startEmail = startEmail;
-  global.startFacebook = startFacebook;
-  global.startInstagram = startInstagram;
-  global.startTwitter = startTwitter;
-  global.startLinkedIn = startLinkedIn;
-  global.startTikTok = startTikTok;
+  window.startWhatsApp = startWhatsApp;
+  window.startLine = startLine;
+  window.startPhone = startPhone;
+  window.startTelegram = startTelegram;
+  window.startEmail = startEmail;
+  window.startFacebook = startFacebook;
+  window.startInstagram = startInstagram;
+  window.startTwitter = startTwitter;
+  window.startLinkedIn = startLinkedIn;
+  window.startTikTok = startTikTok;
 
   // Auto-init WhatsApp source tracking on all wa.me links
   if (document.readyState === "loading") {
@@ -306,7 +306,7 @@
   // Re-init after SPA navigation
   document.addEventListener("spa:load", initWhatsAppLinks);
   // Re-init after bfcache restore
-  global.addEventListener("pageshow", function (e) {
+  window.addEventListener("pageshow", function (e) {
     if (e.persisted) initWhatsAppLinks();
   });
 })(window);

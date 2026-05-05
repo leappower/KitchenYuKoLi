@@ -28,10 +28,10 @@
    * @returns {boolean}
    */
   function getMqMobile() {
-    return global.MediaQueries
-      ? typeof global.MediaQueries.isMobile === "function"
-        ? global.MediaQueries.isMobile()
-        : !!global.MediaQueries.mqMobile
+    return window.MediaQueries
+      ? typeof window.MediaQueries.isMobile === "function"
+        ? window.MediaQueries.isMobile()
+        : !!window.MediaQueries.mqMobile
       : false;
   }
 
@@ -42,10 +42,10 @@
    * @param {string} type     - 通知类型（"success" | "error" 等）
    */
   function showNotification(message, type) {
-    if (global.Contacts && typeof global.Contacts.showNotification === "function") {
-      global.Contacts.showNotification(message, type);
-    } else if (typeof global.showNotification === "function") {
-      global.showNotification(message, type);
+    if (window.Contacts && typeof window.Contacts.showNotification === "function") {
+      window.Contacts.showNotification(message, type);
+    } else if (typeof window.showNotification === "function") {
+      window.showNotification(message, type);
     }
   }
 
@@ -55,7 +55,7 @@
    * @returns {boolean}
    */
   function isTestEnvironment() {
-    var hostname = global.location.hostname;
+    var hostname = window.location.hostname;
     return (
       hostname === "localhost" ||
       hostname === "127.0.0.1" ||
@@ -115,10 +115,10 @@
 
   /** 更新当前会话的滚动深度（取最大值），同时更新历史记录。 */
   function trackScrollDepth() {
-    var scrollableHeight = document.body.scrollHeight - global.innerHeight;
+    var scrollableHeight = document.body.scrollHeight - window.innerHeight;
     var scrollPercent =
       scrollableHeight > 0
-        ? Math.round((global.scrollY / scrollableHeight) * 100)
+        ? Math.round((window.scrollY / scrollableHeight) * 100)
         : 0;
     userState.scrollDepth = Math.max(userState.scrollDepth, scrollPercent);
     userState.maxScrollReached = Math.max(userState.maxScrollReached, scrollPercent);
@@ -141,10 +141,10 @@
    * @returns {string}
    */
   function translate(key, fallback) {
-    if (global.CommonUtils && typeof global.CommonUtils.tr === "function") {
-      return global.CommonUtils.tr(key, fallback);
+    if (window.CommonUtils && typeof window.CommonUtils.tr === "function") {
+      return window.CommonUtils.tr(key, fallback);
     }
-    var value = typeof global.t === "function" ? global.t(key) : key;
+    var value = typeof window.t === "function" ? window.t(key) : key;
     return value && value !== key ? value : fallback;
   }
 
@@ -155,7 +155,7 @@
    */
   function getCurrentLanguage() {
     return (
-      (global.translationManager && global.translationManager.currentLanguage) ||
+      (window.translationManager && window.translationManager.currentLanguage) ||
       document.documentElement.lang ||
       "zh-CN"
     );
@@ -353,8 +353,8 @@
      */
     initWithComponent: function () {
       var self = this;
-      if (global.SmartPopupComponent) {
-        return global.SmartPopupComponent.init().then(function (success) {
+      if (window.SmartPopupComponent) {
+        return window.SmartPopupComponent.init().then(function (success) {
           if (success) self.init();
           return success;
         });
@@ -391,9 +391,9 @@
      * @returns {number} 0-100 的整数值
      */
     getScrollPercent: function () {
-      var scrollableHeight = document.documentElement.scrollHeight - global.innerHeight;
+      var scrollableHeight = document.documentElement.scrollHeight - window.innerHeight;
       if (scrollableHeight <= 0) return 0;
-      return Math.round((global.scrollY / scrollableHeight) * 100);
+      return Math.round((window.scrollY / scrollableHeight) * 100);
     },
 
     // ── 自动弹窗判断 ────────────────────────────────────────────────────
@@ -501,7 +501,7 @@
       requestAnimationFrame(measureHeroHeight);
 
       // 使用 passive scroll 监听 + rAF 节流
-      global.addEventListener(
+      window.addEventListener(
         "scroll",
         function () {
           if (rafPending) return;
@@ -510,9 +510,9 @@
           requestAnimationFrame(function () {
             rafPending = false;
 
-            var currentScrollY = global.scrollY;
+            var currentScrollY = window.scrollY;
             var scrollableHeight =
-              document.documentElement.scrollHeight - global.innerHeight;
+              document.documentElement.scrollHeight - window.innerHeight;
             var scrollPercent =
               scrollableHeight > 0
                 ? Math.round((currentScrollY / scrollableHeight) * 100)
@@ -742,7 +742,7 @@
       applyPopupVisibility();
 
       // 防止背景滚动：补偿滚动条宽度
-      var scrollbarWidth = global.innerWidth - document.documentElement.clientWidth;
+      var scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
       document.body.style.paddingRight = scrollbarWidth + "px";
       document.body.style.overflow = "hidden";
 
@@ -889,12 +889,12 @@
       language: getCurrentLanguage(),
       browserLanguage: navigator.language,
       screenWidth:
-        global.DeviceUtils && global.DeviceUtils.getScreenSize
-          ? global.DeviceUtils.getScreenSize()
-          : global.screen.width,
-      screenHeight: global.screen.height,
+        window.DeviceUtils && window.DeviceUtils.getScreenSize
+          ? window.DeviceUtils.getScreenSize()
+          : window.screen.width,
+      screenHeight: window.screen.height,
       timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
-      pageUrl: global.location.href,
+      pageUrl: window.location.href,
       timeOnPage: (userState && userState.timeOnPage) || 0,
       scrollDepth: (userState && userState.scrollDepth) || 0,
       userAgent: navigator.userAgent,
@@ -1006,9 +1006,9 @@
    */
   function submitViaMailto(formData, formType) {
     var screenWidth =
-      global.DeviceUtils && global.DeviceUtils.getScreenSize
-        ? global.DeviceUtils.getScreenSize()
-        : global.screen.width;
+      window.DeviceUtils && window.DeviceUtils.getScreenSize
+        ? window.DeviceUtils.getScreenSize()
+        : window.screen.width;
 
     // 构建邮件主题
     var subjectPrefix =
@@ -1036,10 +1036,10 @@
       translate("mailto_label_user_language", "User Language") + ": " + getCurrentLanguage(),
       translate("mailto_label_browser_language", "Browser Language") + ": " + navigator.language,
       translate("mailto_label_screen_resolution", "Screen Resolution") + ": " +
-        screenWidth + "x" + global.screen.height,
+        screenWidth + "x" + window.screen.height,
       translate("mailto_label_timezone", "Timezone") + ": " +
         Intl.DateTimeFormat().resolvedOptions().timeZone,
-      translate("mailto_label_page_url", "Page URL") + ": " + global.location.href,
+      translate("mailto_label_page_url", "Page URL") + ": " + window.location.href,
       translate("mailto_label_submit_time", "Submit Time") + ": " + new Date().toLocaleString(),
       translate("mailto_label_time_on_page", "Time on Page") + ": " +
         (userState.timeOnPage || 0) + translate("mailto_unit_seconds", "s"),
@@ -1050,23 +1050,23 @@
       translate("mailto_label_user_agent", "User Agent") + ": " + navigator.userAgent,
     ].join("\n"));
 
-    global.location.href =
+    window.location.href =
       "mailto:179564128@qq.com?subject=" + mailSubject + "&body=" + mailBody;
   }
 
   // ─── 全局导出 ─────────────────────────────────────────────────────────────
   // 保持与原始代码完全一致的公开 API，确保所有调用方不受影响。
 
-  global.smartPopup = smartPopup;                          // 弹窗核心对象
-  global.userState = userState;                            // 用户行为状态
-  global.isTestEnvironment = isTestEnvironment;            // 测试环境判断
-  global.loadUserState = loadUserState;                    // 加载用户状态
-  global.saveUserState = saveUserState;                    // 保存用户状态
-  global.trackScrollDepth = trackScrollDepth;              // 追踪滚动深度
-  global.trackTimeOnPage = trackTimeOnPage;                // 追踪页面停留时间
-  global.showSmartPopupManual = showSmartPopupManual;      // 手动触发弹窗
-  global.closeSmartPopup = closeSmartPopup;                // 关闭弹窗
-  global.submitSmartPopupForm = submitSmartPopupForm;      // 弹窗表单提交
-  global.submitContactForm = submitContactForm;            // 联系页表单提交
-  global.submitViaMailto = submitViaMailto;                // mailto 降级提交
+  window.smartPopup = smartPopup;                          // 弹窗核心对象
+  window.userState = userState;                            // 用户行为状态
+  window.isTestEnvironment = isTestEnvironment;            // 测试环境判断
+  window.loadUserState = loadUserState;                    // 加载用户状态
+  window.saveUserState = saveUserState;                    // 保存用户状态
+  window.trackScrollDepth = trackScrollDepth;              // 追踪滚动深度
+  window.trackTimeOnPage = trackTimeOnPage;                // 追踪页面停留时间
+  window.showSmartPopupManual = showSmartPopupManual;      // 手动触发弹窗
+  window.closeSmartPopup = closeSmartPopup;                // 关闭弹窗
+  window.submitSmartPopupForm = submitSmartPopupForm;      // 弹窗表单提交
+  window.submitContactForm = submitContactForm;            // 联系页表单提交
+  window.submitViaMailto = submitViaMailto;                // mailto 降级提交
 })(window);

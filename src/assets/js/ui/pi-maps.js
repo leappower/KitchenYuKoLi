@@ -10,7 +10,7 @@
   "use strict";
 
   // ─── Helpers (from PiHelpers) ─────────────────────────────────────────
-  var _h = global.PiHelpers || {};
+  var _h = window.PiHelpers || {};
   var safeCall = _h.safeCall || function (fnName, args) {
     if (typeof global[fnName] === "function") return global[fnName].apply(null, args || []);
   };
@@ -50,7 +50,7 @@
 
   // 暂时未被使用 — API key 未配置，当前显示静态 SVG fallback
   function initServiceCenterMap() {
-    if (typeof global.google === "undefined" || !global.google.maps) {
+    if (typeof window.google === "undefined" || !window.google.maps) {
       return;
     }
 
@@ -62,7 +62,7 @@
     if (fallback) fallback.style.display = "none";
 
     // Initialize map centered on Southeast Asia (primary market)
-    var map = new global.google.maps.Map(mapEl, {
+    var map = new window.google.maps.Map(mapEl, {
       center: { lat: 5.0, lng: 105.0 },
       zoom: 4,
       styles: [
@@ -78,16 +78,16 @@
     });
 
     // Store map instance for zoom buttons
-    global._yukolicServiceMap = map;
+    window._yukolicServiceMap = map;
 
     // Place service center markers
     YUKOLI_SERVICE_CENTERS.forEach(function (center) {
-      var marker = new global.google.maps.Marker({
+      var marker = new window.google.maps.Marker({
         position: { lat: center.lat, lng: center.lng },
         map: map,
         title: center.name,
         icon: {
-          path: global.google.maps.SymbolPath.CIRCLE,
+          path: window.google.maps.SymbolPath.CIRCLE,
           scale: 8,
           fillColor: "#ec5b13",
           fillOpacity: 0.9,
@@ -96,7 +96,7 @@
         },
       });
 
-      var infoWindow = new global.google.maps.InfoWindow({
+      var infoWindow = new window.google.maps.InfoWindow({
         content:
           "<div style=\"font-family:'Public Sans',sans-serif;padding:4px 8px;\">" +
           '<strong style="color:#ec5b13;">' +
@@ -118,14 +118,14 @@
    */
   // 暂时未被使用 — 依赖 Google Maps Places API
   function serviceCenterSearch(query) {
-    if (!global._yukolicServiceMap || !global.google || !global.google.maps) return;
+    if (!window._yukolicServiceMap || !window.google || !window.google.maps) return;
 
-    var geocoder = new global.google.maps.Geocoder();
+    var geocoder = new window.google.maps.Geocoder();
     geocoder.geocode({ address: query }, function (results, status) {
       if (status === "OK" && results[0]) {
         var loc = results[0].geometry.location;
-        global._yukolicServiceMap.panTo(loc);
-        global._yukolicServiceMap.setZoom(8);
+        window._yukolicServiceMap.panTo(loc);
+        window._yukolicServiceMap.setZoom(8);
 
         // Find nearest Yukoli service center to the geocoded point
         var nearestCenter = null;
@@ -182,16 +182,16 @@
       var iconName = icon.textContent.trim();
       if (iconName === "add") {
         btn.addEventListener("click", function () {
-          if (global._yukolicServiceMap) {
-            global._yukolicServiceMap.setZoom(global._yukolicServiceMap.getZoom() + 1);
+          if (window._yukolicServiceMap) {
+            window._yukolicServiceMap.setZoom(window._yukolicServiceMap.getZoom() + 1);
           } else {
             safeCall("showNotification", ["Interactive map: set API key to activate.", "success"]);
           }
         });
       } else if (iconName === "remove") {
         btn.addEventListener("click", function () {
-          if (global._yukolicServiceMap) {
-            global._yukolicServiceMap.setZoom(global._yukolicServiceMap.getZoom() - 1);
+          if (window._yukolicServiceMap) {
+            window._yukolicServiceMap.setZoom(window._yukolicServiceMap.getZoom() - 1);
           } else {
             safeCall("showNotification", ["Interactive map: set API key to activate.", "success"]);
           }
@@ -210,7 +210,7 @@
         var query = input ? input.value.trim() : "";
         if (!query) return;
 
-        if (global._yukolicServiceMap && global.google && global.google.maps) {
+        if (window._yukolicServiceMap && window.google && window.google.maps) {
           // Google Maps Places API loaded — run geocode search
           serviceCenterSearch(query);
         } else {
@@ -231,7 +231,7 @@
    * On pages without #yukoli-service-map this is a safe no-op.
    */
   // 暂时未被使用 — Google Maps API key 未配置
-  global.initGoogleMapsCallback = function () {
+  window.initGoogleMapsCallback = function () {
     initServiceCenterMap();
   };
 

@@ -95,7 +95,7 @@
       });
   }
 
-  global.ImageAssets = {
+  window.ImageAssets = {
     IMAGE_ASSETS: IMAGE_ASSETS,
     resolveImage: resolveImage,
     loadFromManifest: loadFromManifest,

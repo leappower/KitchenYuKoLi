@@ -16,7 +16,7 @@
   /* ═══════════════════════════════════════════════════════════════════
      SECTION 1: CONSTANTS & CONFIGURATION
      ═══════════════════════════════════════════════════════════════════ */
-  var WHATSAPP_NUMBER = (global.Contacts && global.Contacts.whatsapp) || "8613163756465";
+  var WHATSAPP_NUMBER = (window.Contacts && window.Contacts.whatsapp) || "8613163756465";
   var PAGES = Object.freeze({
     home: "/home/",
     products: "/products/",
@@ -34,7 +34,7 @@
      SECTION 3: NAVIGATION FUNCTIONS
      ═══════════════════════════════════════════════════════════════════ */
   function navigate(url) {
-    global.location.href = url;
+    window.location.href = url;
   }
   function whatsappHref(msg) {
     var base = "https://wa.me/" + WHATSAPP_NUMBER;
@@ -58,8 +58,8 @@
     setTimeout(function () {
       self.isNavigating = false;
     }, this.debounceMs);
-    if (global.history && global.history.length > 1) {
-      global.history.back();
+    if (window.history && window.history.length > 1) {
+      window.history.back();
     } else {
       navigate(PAGES.home);
     }
@@ -153,7 +153,7 @@
      SECTION 8: QUOTE BUTTONS
      ═══════════════════════════════════════════════════════════════════ */
   function wireQuoteButtons() {
-    if (typeof global.showSmartPopupManual === "function") return;
+    if (typeof window.showSmartPopupManual === "function") return;
     var quoteI18nKeys = ["nav_get_quote", "landing_request_quote", "quote_get_a_quote"];
     var btns = document.querySelectorAll("button");
     for (var i = 0; i < btns.length; i++) {
@@ -220,7 +220,7 @@
      SECTION 11: BOTTOM NAV ACTIVE STATE
      ═══════════════════════════════════════════════════════════════════ */
   function wireBottomNav() {
-    var path = global.location.pathname;
+    var path = window.location.pathname;
     var bottomLinks = document.querySelectorAll(".fixed.bottom-0 a");
     for (var i = 0; i < bottomLinks.length; i++) {
       var link = bottomLinks[i];
@@ -257,7 +257,7 @@
    * - View Summary scroll (catalog page)
    */
   function setupPageSpecificActions() {
-    var path = global.location.pathname;
+    var path = window.location.pathname;
 
     // Home page: ROI Calculator buttons
     if (path === "/" || path.indexOf("/home/") !== -1 || path.indexOf("/index") !== -1) {
@@ -309,15 +309,15 @@
    * Event-driven recovery is the correct modern approach
    */
   function setupBfcacheRecovery() {
-    global.addEventListener("pageshow", function (event) {
+    window.addEventListener("pageshow", function (event) {
       if (!event.persisted) return;
       if (typeof init === "function") {
         init();
       }
-      if (typeof global.recoverTranslationsFromBfcache === "function") {
-        global.recoverTranslationsFromBfcache();
-      } else if (typeof global.applyTranslations === "function") {
-        global.applyTranslations();
+      if (typeof window.recoverTranslationsFromBfcache === "function") {
+        window.recoverTranslationsFromBfcache();
+      } else if (typeof window.applyTranslations === "function") {
+        window.applyTranslations();
       }
     });
   }
@@ -335,7 +335,7 @@
     wireHomeLogo();
     wireFormSubmit();
     // Page-specific initialization
-    var path = global.location.pathname;
+    var path = window.location.pathname;
     if (path === "/" || path.indexOf("/home/") !== -1 || path.indexOf("/index") !== -1) {
       initHome();
     }
@@ -348,8 +348,8 @@
      SECTION 15: AUTO-START & EXPORTS
      ═══════════════════════════════════════════════════════════════════ */
   // Auto-initialize when DOM is ready
-  if (global.CommonUtils && typeof global.CommonUtils.ready === "function") {
-    global.CommonUtils.ready(init);
+  if (window.CommonUtils && typeof window.CommonUtils.ready === "function") {
+    window.CommonUtils.ready(init);
   } else if (document.readyState === "loading") {
     document.addEventListener("DOMContentLoaded", init);
   } else {
@@ -358,7 +358,7 @@
   // Setup bfcache recovery handlers
   setupBfcacheRecovery();
   // Export public API for debugging and external use
-  global.YukoliRouter = {
+  window.YukoliRouter = {
     navigate: navigate,
     whatsappHref: whatsappHref,
     safeBack: safeBack,
@@ -366,8 +366,8 @@
   };
 
   // Auto-initialize when DOM is ready
-  if (global.CommonUtils && typeof global.CommonUtils.ready === "function") {
-    global.CommonUtils.ready(init);
+  if (window.CommonUtils && typeof window.CommonUtils.ready === "function") {
+    window.CommonUtils.ready(init);
   } else if (document.readyState === "loading") {
     document.addEventListener("DOMContentLoaded", init);
   } else {
@@ -376,7 +376,7 @@
   // Setup bfcache recovery handlers
   setupBfcacheRecovery();
   // Export public API for debugging and external use
-  global.YukoliRouter = {
+  window.YukoliRouter = {
     navigate: navigate,
     whatsappHref: whatsappHref,
     safeBack: safeBack,

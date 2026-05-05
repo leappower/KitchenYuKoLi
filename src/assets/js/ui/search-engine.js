@@ -20,10 +20,10 @@
 
   /** Fallback tr() if CommonUtils is not loaded yet */
   function tr(key, fallback) {
-    if (global.CommonUtils && typeof global.CommonUtils.tr === "function") {
-      return global.CommonUtils.tr(key, fallback);
+    if (window.CommonUtils && typeof window.CommonUtils.tr === "function") {
+      return window.CommonUtils.tr(key, fallback);
     }
-    var v = typeof global.t === "function" ? global.t(key) : key;
+    var v = typeof window.t === "function" ? window.t(key) : key;
     return v && v !== key ? v : fallback;
   }
 
@@ -78,7 +78,7 @@
    * Each product gets an additional `_searchName` field combining all searchable fields.
    */
   function buildSearchableProducts() {
-    var utils = global.AppUtils;
+    var utils = window.AppUtils;
     if (!utils || typeof utils.buildProductCatalog !== "function") return [];
 
     var products = utils.buildProductCatalog();
@@ -449,8 +449,8 @@
             e.preventDefault();
             hidePanel();
             // Navigate to products page
-            if (global.SpaRouter && global.SpaRouter.navigate) {
-              global.SpaRouter.navigate("/products/");
+            if (window.SpaRouter && window.SpaRouter.navigate) {
+              window.SpaRouter.navigate("/products/");
             } else {
               window.location.href = "/products/";
             }
@@ -720,21 +720,21 @@
   });
 
   // Re-init on language change
-  if (global.translationManager) {
-    global.translationManager.on("languageChanged", function () {
+  if (window.translationManager) {
+    window.translationManager.on("languageChanged", function () {
       // Clear current query and hide panel
       currentQuery = "";
       hidePanel();
     });
   }
-  global.addEventListener("languageChanged", function () {
+  window.addEventListener("languageChanged", function () {
     currentQuery = "";
     hidePanel();
   });
 
   // ─── Expose ──────────────────────────────────────────────────────────────
 
-  global.ProductSearchEngine = {
+  window.ProductSearchEngine = {
     init: init,
     reinit: reinit,
     destroy: destroy,

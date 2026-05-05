@@ -10,7 +10,7 @@
   "use strict";
 
   // ─── Helpers (from PiHelpers) ─────────────────────────────────────────
-  var _h = global.PiHelpers || {};
+  var _h = window.PiHelpers || {};
   var safeCall = _h.safeCall || function (fnName, args) {
     if (typeof global[fnName] === "function") return global[fnName].apply(null, args || []);
   };
@@ -105,7 +105,7 @@
     // ─── §2.3 Chart.js ──────────────────────────────────────────────────
 
     // 销毁旧 Chart 实例（SPA 重复导航时 canvas 已被替换）
-    if (typeof global.Chart !== "undefined") {
+    if (typeof window.Chart !== "undefined") {
       var _cc = document.getElementById("roi-cumulative-chart");
       if (_cc && _cc.chart) { try { _cc.chart.destroy(); } catch (e) { } }
       var _lc = document.getElementById("roi-labor-compare-chart");
@@ -113,11 +113,11 @@
     }
 
     function initCharts() {
-      if (typeof global.Chart === "undefined") return;
+      if (typeof window.Chart === "undefined") return;
 
       var cumulativeCanvas = document.getElementById("roi-cumulative-chart");
       if (cumulativeCanvas && !cumulativeChart) {
-        cumulativeChart = new global.Chart(cumulativeCanvas, {
+        cumulativeChart = new window.Chart(cumulativeCanvas, {
           type: "bar",
           data: {
             labels: ["YEAR 1", "YEAR 2", "YEAR 3", "YEAR 4", "YEAR 5"],
@@ -174,7 +174,7 @@
 
       var laborCanvas = document.getElementById("roi-labor-compare-chart");
       if (laborCanvas && !laborCompareChart) {
-        laborCompareChart = new global.Chart(laborCanvas, {
+        laborCompareChart = new window.Chart(laborCanvas, {
           type: "line",
           data: {
             labels: ["Mo 1", "Mo 3", "Mo 6", "Mo 9", "Mo 12", "Mo 18", "Mo 24"],
@@ -384,7 +384,7 @@
   document.addEventListener("spa:load", init);
 
   // Language change: only refresh chart labels (no recalculation needed — ROI is currency-independent)
-  global.addEventListener('languageChanged', function () {
+  window.addEventListener('languageChanged', function () {
     requestAnimationFrame(function () {
       if (cumulativeChart) cumulativeChart.update();
       if (laborCompareChart) laborCompareChart.update();

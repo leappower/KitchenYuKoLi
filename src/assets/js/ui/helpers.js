@@ -30,5 +30,5 @@
     return results;
   }
 
-  global.PiHelpers = { safeCall: safeCall, directText: directText, findByText: findByText };
+  window.PiHelpers = { safeCall: safeCall, directText: directText, findByText: findByText };
 })(window);

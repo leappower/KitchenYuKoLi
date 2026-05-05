@@ -220,7 +220,7 @@
     document.head.appendChild(style);
   }
 
-  global.DropdownBaseStyles = {
+  window.DropdownBaseStyles = {
     inject: injectDropdownBaseStyles,
     STYLE_ID: STYLE_ID,
   };

@@ -16,7 +16,7 @@
   "use strict";
 
   // ─── Helpers (from PiHelpers — fallback if helpers.js not loaded) ──────
-  var _h = global.PiHelpers || {};
+  var _h = window.PiHelpers || {};
   var safeCall = _h.safeCall || function (fnName, args) {
     if (typeof global[fnName] === "function") {
       return global[fnName].apply(null, args || []);
@@ -79,16 +79,16 @@
 
   // ─── WhatsApp deep-link with source tracking ─────────────────────────────────
   function openWhatsAppWithPreset(msg, source) {
-    if (global.Contacts && typeof global.Contacts.contactsWhatsApp === "function") {
-      var url = global.Contacts.contactsWhatsApp({ source: source || "", message: msg || "" });
-      global.open(url, "_blank");
+    if (window.Contacts && typeof window.Contacts.contactsWhatsApp === "function") {
+      var url = window.Contacts.contactsWhatsApp({ source: source || "", message: msg || "" });
+      window.open(url, "_blank");
       return;
     }
-    var phone = global.Contacts && global.Contacts.whatsapp ? global.Contacts.whatsapp : "";
+    var phone = window.Contacts && window.Contacts.whatsapp ? window.Contacts.whatsapp : "";
     var prefix = source ? " [" + source + "]" : "";
     var text = encodeURIComponent((msg || "Hi YuKoLi") + prefix);
     var url = phone ? "https://wa.me/" + phone.replace(/\D/g, "") + "?text=" + text : "https://wa.me/?text=" + text;
-    global.open(url, "_blank");
+    window.open(url, "_blank");
   }
 
   // ─── 2. WhatsApp / Contact channel buttons ────────────────────────────────────
@@ -125,7 +125,7 @@
       } else if (iconName === "public") {
         link.addEventListener("click", function (e) {
           e.preventDefault();
-          global.location.href = "/";
+          window.location.href = "/";
         });
       }
     });
@@ -205,13 +205,13 @@
     }
 
     // Initialise smart-popup engagement tracking (auto-popup system)
-    if (global.smartPopup && typeof global.smartPopup.init === "function") {
-      global.smartPopup.init();
+    if (window.smartPopup && typeof window.smartPopup.init === "function") {
+      window.smartPopup.init();
     }
   }
 
-  if (global.CommonUtils && typeof global.CommonUtils.ready === "function") {
-    global.CommonUtils.ready(init);
+  if (window.CommonUtils && typeof window.CommonUtils.ready === "function") {
+    window.CommonUtils.ready(init);
   } else if (document.readyState === "loading") {
     document.addEventListener("DOMContentLoaded", init);
   } else {
@@ -236,7 +236,7 @@
     return isDark;
   }
 
-  global.PageInteractions = { init: init, toggleDarkMode: toggleDarkMode };
-  global.toggleDarkMode = toggleDarkMode;
+  window.PageInteractions = { init: init, toggleDarkMode: toggleDarkMode };
+  window.toggleDarkMode = toggleDarkMode;
 
 })(window);

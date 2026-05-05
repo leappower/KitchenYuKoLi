@@ -34,15 +34,15 @@
   }
 
   function getImageAssets() {
-    return (global.ImageAssets && global.ImageAssets.IMAGE_ASSETS) || {};
+    return (window.ImageAssets && window.ImageAssets.IMAGE_ASSETS) || {};
   }
 
   function getProductSeries() {
-    return global.PRODUCT_SERIES || [];
+    return window.PRODUCT_SERIES || [];
   }
 
   function getProductDefaults() {
-    return global.PRODUCT_DEFAULTS || {};
+    return window.PRODUCT_DEFAULTS || {};
   }
 
   function isProductActive(product) {
@@ -114,7 +114,7 @@
       });
   }
 
-  global.AppUtils = {
+  window.AppUtils = {
     get IMAGE_ASSETS() {
       return getImageAssets();
     },

@@ -232,10 +232,10 @@
     /* ---------- 有 dropdown 的导航项 ---------- */
     if (navItem.hasDropdown) {
       var dropdownModules = {
-        products:     global.ProductsDropdown,
-        applications: global.ApplicationsDropdown,
-        support:      global.SupportDropdown,
-        about:        global.AboutDropdown
+        products:     window.ProductsDropdown,
+        applications: window.ApplicationsDropdown,
+        support:      window.SupportDropdown,
+        about:        window.AboutDropdown
       };
       var dropdown = dropdownModules[navItem.id];
 
@@ -575,11 +575,11 @@
    * 注入所有 dropdown 模块的基础样式
    */
   function injectDropdownStyles() {
-    if (global.DropdownBaseStyles) global.DropdownBaseStyles.inject();
-    if (global.ProductsDropdown) global.ProductsDropdown.injectAllStyles();
-    if (global.ApplicationsDropdown) global.ApplicationsDropdown.injectAllStyles();
-    if (global.SupportDropdown) global.SupportDropdown.injectAllStyles();
-    if (global.AboutDropdown) global.AboutDropdown.injectAllStyles();
+    if (window.DropdownBaseStyles) window.DropdownBaseStyles.inject();
+    if (window.ProductsDropdown) window.ProductsDropdown.injectAllStyles();
+    if (window.ApplicationsDropdown) window.ApplicationsDropdown.injectAllStyles();
+    if (window.SupportDropdown) window.SupportDropdown.injectAllStyles();
+    if (window.AboutDropdown) window.AboutDropdown.injectAllStyles();
   }
 
   /* ================================================================
@@ -778,10 +778,10 @@
    * 初始化各 dropdown 模块的点击事件
    */
   function initDropdownClickHandlers() {
-    if (global.ProductsDropdown) global.ProductsDropdown.initDropdownClick();
-    if (global.ApplicationsDropdown) global.ApplicationsDropdown.initDropdownClick();
-    if (global.SupportDropdown) global.SupportDropdown.initDropdownClick();
-    if (global.AboutDropdown) global.AboutDropdown.initDropdownClick();
+    if (window.ProductsDropdown) window.ProductsDropdown.initDropdownClick();
+    if (window.ApplicationsDropdown) window.ApplicationsDropdown.initDropdownClick();
+    if (window.SupportDropdown) window.SupportDropdown.initDropdownClick();
+    if (window.AboutDropdown) window.AboutDropdown.initDropdownClick();
   }
 
   /* ================================================================
@@ -792,16 +792,16 @@
    * 重新绑定翻译管理器的事件监听并应用当前语言翻译
    */
   function reinitTranslationManager() {
-    if (!global.translationManager) return;
+    if (!window.translationManager) return;
 
-    if (typeof global.translationManager.resetEventListeners === "function") {
-      global.translationManager.resetEventListeners();
+    if (typeof window.translationManager.resetEventListeners === "function") {
+      window.translationManager.resetEventListeners();
     }
-    if (typeof global.translationManager.applyTranslations === "function") {
-      global.translationManager.applyTranslations();
+    if (typeof window.translationManager.applyTranslations === "function") {
+      window.translationManager.applyTranslations();
     }
-    if (typeof global.translationManager.setupEventListeners === "function") {
-      global.translationManager.setupEventListeners();
+    if (typeof window.translationManager.setupEventListeners === "function") {
+      window.translationManager.setupEventListeners();
     }
   }
 
@@ -809,13 +809,13 @@
    * 初始化 SlideMenu（侧滑菜单）
    */
   function initSlideMenu() {
-    if (!global.SlideMenu) return;
+    if (!window.SlideMenu) return;
 
-    if (typeof global.SlideMenu.initToggle === "function") {
-      global.SlideMenu.initToggle();
+    if (typeof window.SlideMenu.initToggle === "function") {
+      window.SlideMenu.initToggle();
     }
-    if (typeof global.SlideMenu.initSmartHeader === "function") {
-      global.SlideMenu.initSmartHeader();
+    if (typeof window.SlideMenu.initSmartHeader === "function") {
+      window.SlideMenu.initSmartHeader();
     }
   }
 
@@ -829,8 +829,8 @@
     toggleBtn.addEventListener("click", function (e) {
       e.preventDefault();
       e.stopPropagation();
-      if (global.SlideMenu && typeof global.SlideMenu.openMobileSearch === "function") {
-        global.SlideMenu.openMobileSearch();
+      if (window.SlideMenu && typeof window.SlideMenu.openMobileSearch === "function") {
+        window.SlideMenu.openMobileSearch();
       }
     });
   }
@@ -963,8 +963,8 @@
 
     /* 6. SlideMenu 初始化 */
     console.log(
-      "[navigator] MobileMenu exists:", !!global.SlideMenu,
-      "| initToggle:", typeof (global.SlideMenu && global.SlideMenu.initToggle)
+      "[navigator] MobileMenu exists:", !!window.SlideMenu,
+      "| initToggle:", typeof (window.SlideMenu && window.SlideMenu.initToggle)
     );
     initSlideMenu();
 
@@ -1191,9 +1191,9 @@
         mountNavigator();
 
         /* 移动端变体需要重新初始化菜单切换 */
-        if (newVariant === "mobile" && global.SlideMenu) {
-          if (typeof global.SlideMenu.initToggle === "function") {
-            global.SlideMenu.initToggle();
+        if (newVariant === "mobile" && window.SlideMenu) {
+          if (typeof window.SlideMenu.initToggle === "function") {
+            window.SlideMenu.initToggle();
           }
         }
       }
@@ -1233,7 +1233,7 @@
    *  公开 API — window.Navigator
    * ================================================================ */
 
-  global.Navigator = {
+  window.Navigator = {
     /**
      * 挂载导航栏（查找占位符并替换）
      */

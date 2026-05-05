@@ -32,7 +32,7 @@
         });
 
         navigator.serviceWorker.addEventListener("controllerchange", function () {
-          if (pendingSwReload) global.location.reload();
+          if (pendingSwReload) window.location.reload();
         });
 
         if (registration.waiting) showServiceWorkerUpdateNotification();
@@ -213,7 +213,7 @@
     observer.observe(productSection);
   }
 
-  global.userActivity = userActivity;
+  window.userActivity = userActivity;
 
   // ============================================
   // IoT Pulse — breathing light on sensor nodes (§3.1)
