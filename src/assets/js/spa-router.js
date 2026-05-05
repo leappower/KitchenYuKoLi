@@ -363,6 +363,10 @@
       // 检查是否已经有 footer 元素存在（由 footer.js 的 mount() 创建）
       var existingFooter = document.querySelector('footer[data-component="footer"]');
       if (existingFooter) {
+        // Footer placeholder exists, mount component into it
+        if (window.Footer && window.Footer.mount) {
+          window.Footer.mount();
+        }
         this.footerMounted = true;
         this.updateFooterActiveNav(html);
         return;
@@ -566,9 +570,9 @@
       // 等待动态脚本加载完成后，再触发 spa:load（避免重复触发）
       var _self2 = this;
       Promise.resolve(scriptsPromise).then(function() {
-        // Re-mount footer for SPA-loaded pages (footer.js already loaded, but DOM was replaced)
-        if (window.Footer && window.Footer.mount) {
-          try { window.Footer.mount(); } catch(e) { /* ignore */ }
+        // Re-mount footer for SPA-loaded pages (only if not already mounted)
+        if (window.Footer && window.Footer.mount && !_self2.footerMounted) {
+          try { window.Footer.mount(); _self2.footerMounted = true; } catch(e) { /* ignore */ }
         }
         document.dispatchEvent(new Event("spa:load"));
         _self2.log("Content rendered for:", pagePath);

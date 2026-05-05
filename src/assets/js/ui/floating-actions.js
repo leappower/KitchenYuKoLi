@@ -83,6 +83,9 @@
       "  align-items: center;",
       "  gap: 0.75rem;",
       "}",
+      "@media (max-width: 767px) {",
+      "  #floating-actions-container { bottom: 7.5rem; }",
+      "}",
 
       "#floating-actions-container .fab-btn {",
       "  display: flex;",
