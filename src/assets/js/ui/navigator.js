@@ -1069,8 +1069,7 @@
       ".prod-dropdown-item.is-active, " +
       ".app-dropdown-item.is-active, " +
       ".sup-dropdown-item.is-active, " +
-      ".abt-dropdown-item.is-active, " +
-      ".is-active"
+      ".abt-dropdown-item.is-active"
     );
     for (var k = 0; k < activeItems.length; k++) {
       activeItems[k].classList.remove("is-active");

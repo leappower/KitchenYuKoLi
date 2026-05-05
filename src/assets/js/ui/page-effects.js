@@ -331,6 +331,8 @@
       "/products/",
       "/thank-you/",
       "/landing/",
+      "/profit-calculator/",
+      "/cases/",
     ];
 
     document.addEventListener("click", function (e) {
