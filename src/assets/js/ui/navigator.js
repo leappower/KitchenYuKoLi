@@ -223,7 +223,8 @@
    * @returns {string} HTML 字符串
    */
   function buildNavItemHtml(navItem, activeId, variant) {
-    var isActive = navItem.id === activeId;
+    var activeIds = ID_ALIASES[activeId] || [activeId];
+    var isActive = activeIds.indexOf(navItem.id) !== -1;
     var activeClass = isActive
       ? "text-sm font-semibold text-primary"
       : "text-sm font-semibold hover:text-primary transition-colors";
