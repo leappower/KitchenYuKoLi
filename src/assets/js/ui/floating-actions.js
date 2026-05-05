@@ -114,7 +114,7 @@
       "}",
 
       "#fab-line {",
-      "  background: #06C755;",
+      "  background: #06C755; display: none;",
       "  color: #fff;",
       "  width: 3.5rem;",
       "  height: 3.5rem;",
