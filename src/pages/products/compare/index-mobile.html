@@ -231,7 +231,8 @@
     (function() {
       'use strict';
       var MAX_COMPARE = 3;
-      var selected = [];
+      var COMPARE_KEY = 'YUKOLI_COMPARE_ITEMS';
+      var selected = (function() { try { var d = localStorage.getItem(COMPARE_KEY); return d ? JSON.parse(d) : []; } catch(e) { return []; } })();
 
       function esc(s) {
         if (!s) return '';
@@ -345,6 +346,10 @@
         });
       }
 
+      function saveToStorage() {
+        try { localStorage.setItem(COMPARE_KEY, JSON.stringify(selected)); } catch(e) {}
+      }
+
       function toggleSelect(product) {
         var idx = selected.findIndex(function(s){ return s.model === product.model; });
         if (idx >= 0) { selected.splice(idx, 1); }
@@ -352,11 +357,13 @@
           if (selected.length >= MAX_COMPARE) { showToast('最多选择 ' + MAX_COMPARE + ' 款'); return; }
           selected.push(product);
         }
+        saveToStorage();
         renderProductCards(); renderCompareBar(); renderComparisonTable(); updateEmptyState();
       }
 
       function removeSelected(model) {
         selected = selected.filter(function(s){ return s.model !== model; });
+        saveToStorage();
         renderProductCards(); renderCompareBar(); renderComparisonTable(); updateEmptyState();
       }
 
@@ -384,6 +391,7 @@
       if (clearBtn) {
         clearBtn.addEventListener('click', function() {
           selected = [];
+          try { localStorage.removeItem(COMPARE_KEY); } catch(e) {}
           renderProductCards(); renderCompareBar(); renderComparisonTable(); updateEmptyState();
         });
       }
@@ -467,6 +475,14 @@
             .catch(function(err) { console.error('[Compare] Failed:', err); });
         }
       }
+
+      // Listen for storage events from other tabs
+      window.addEventListener('storage', function(e) {
+        if (e.key === COMPARE_KEY) {
+          try { selected = e.newValue ? JSON.parse(e.newValue) : []; } catch(err) { selected = []; }
+          renderProductCards(); renderCompareBar(); renderComparisonTable(); updateEmptyState();
+        }
+      });
 
       if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', initCompare);

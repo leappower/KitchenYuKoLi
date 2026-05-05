@@ -1,11 +1,243 @@
 /**
  * ProductGrid — renders product cards and manages category tabs
  * Supports PC / tablet / mobile layouts via CSS classes
+ * Includes product compare integration (cross-page via localStorage)
  */
 (function() {
   'use strict';
 
   var STORE_KEY = 'PRODUCT_DATA_TABLE';
+  var COMPARE_KEY = 'YUKOLI_COMPARE_ITEMS';
+  var MAX_COMPARE = 3;
+
+  // ─── Compare helpers ───────────────────────────────────────────
+
+  function getCompareItems() {
+    try {
+      var data = localStorage.getItem(COMPARE_KEY);
+      return data ? JSON.parse(data) : [];
+    } catch(e) { return []; }
+  }
+
+  function saveCompareItems(items) {
+    try {
+      if (items.length === 0) {
+        localStorage.removeItem(COMPARE_KEY);
+      } else {
+        localStorage.setItem(COMPARE_KEY, JSON.stringify(items));
+      }
+    } catch(e) {}
+  }
+
+  function isProductCompared(model) {
+    return getCompareItems().some(function(item) { return item.model === model; });
+  }
+
+  function toggleCompareFromCard(model) {
+    var products = getAllProducts();
+    var product = products.find(function(p) { return p.model === model; });
+    if (!product) return;
+    var items = getCompareItems();
+    var idx = items.findIndex(function(s) { return s.model === model; });
+    if (idx >= 0) {
+      items.splice(idx, 1);
+    } else {
+      if (items.length >= MAX_COMPARE) {
+        showToast('最多只能选择 ' + MAX_COMPARE + ' 款产品进行对比');
+        return;
+      }
+      items.push(product);
+    }
+    saveCompareItems(items);
+    updateCompareButtons();
+    updateFloatingBar();
+  }
+
+  function clearCompareItems() {
+    saveCompareItems([]);
+    updateCompareButtons();
+    updateFloatingBar();
+  }
+
+  function removeCompareItem(model) {
+    var items = getCompareItems().filter(function(s) { return s.model !== model; });
+    saveCompareItems(items);
+    updateCompareButtons();
+    updateFloatingBar();
+  }
+
+  // ─── Compare button state sync ─────────────────────────────────
+
+  function updateCompareButtons() {
+    var items = getCompareItems();
+    document.querySelectorAll('.compare-btn[data-model]').forEach(function(btn) {
+      var model = btn.dataset.model;
+      var isSelected = items.some(function(s) { return s.model === model; });
+      btn.classList.toggle('compare-btn-active', isSelected);
+      // Update visual
+      var icon = btn.querySelector('.compare-icon');
+      var article = btn.closest('article') || btn.closest('.product-card-mobile');
+      if (isSelected) {
+        if (icon) icon.textContent = 'check';
+        if (article) article.classList.add('compare-selected');
+        btn.classList.add('bg-primary', 'text-white', 'border-primary');
+        btn.classList.remove('bg-slate-100', 'dark:bg-slate-700', 'text-slate-500', 'border-slate-200', 'dark:border-slate-600');
+      } else {
+        if (icon) icon.textContent = 'compare_arrows';
+        if (article) article.classList.remove('compare-selected');
+        btn.classList.remove('bg-primary', 'text-white', 'border-primary');
+        btn.classList.add('bg-slate-100', 'dark:bg-slate-700', 'text-slate-500', 'border-slate-200', 'dark:border-slate-600');
+      }
+    });
+  }
+
+  // ─── Toast ─────────────────────────────────────────────────────
+
+  function showToast(msg) {
+    var toast = document.createElement('div');
+    toast.className = 'compare-toast fixed top-24 left-1/2 -translate-x-1/2 bg-slate-900 dark:bg-white text-white dark:text-slate-900 px-5 py-3 rounded-xl shadow-xl z-[200] text-sm font-medium transition-all duration-300';
+    toast.style.cssText = 'opacity:0;transform:translate(-50%,-10px)';
+    toast.textContent = msg;
+    document.body.appendChild(toast);
+    requestAnimationFrame(function() {
+      toast.style.opacity = '1';
+      toast.style.transform = 'translate(-50%,0)';
+    });
+    setTimeout(function() {
+      toast.style.opacity = '0';
+      toast.style.transform = 'translate(-50%,-10px)';
+      setTimeout(function() { toast.remove(); }, 300);
+    }, 2000);
+  }
+
+  // ─── Floating Compare Bar ──────────────────────────────────────
+
+  var floatingBarId = 'compare-floating-bar';
+
+  function injectFloatingBarStyles() {
+    if (document.getElementById('compare-bar-styles')) return;
+    var style = document.createElement('style');
+    style.id = 'compare-bar-styles';
+    style.textContent =
+      '#compare-floating-bar { transition: transform 0.3s cubic-bezier(0.4,0,0.2,1), opacity 0.3s ease; transform: translateY(100%); opacity: 0; pointer-events: none; }' +
+      '#compare-floating-bar.visible { transform: translateY(0); opacity: 1; pointer-events: auto; }' +
+      '.compare-selected { box-shadow: 0 0 0 2px rgba(236,91,19,0.5); }' +
+      '.compare-btn { transition: all 0.2s ease; }' +
+      '.compare-btn:hover { opacity: 0.85; }' +
+      '.compare-btn-mobile { position: absolute; top: 8px; right: 8px; z-index: 10; }' +
+      '@media (max-width: 767px) { body { padding-bottom: 70px; } }';
+    document.head.appendChild(style);
+  }
+
+  function getDeviceType() {
+    var w = window.innerWidth;
+    if (w < 768) return 'mobile';
+    if (w < 1280) return 'tablet';
+    return 'pc';
+  }
+
+  function updateFloatingBar() {
+    var bar = document.getElementById(floatingBarId);
+    if (!bar) return;
+    var items = getCompareItems();
+    if (items.length === 0) {
+      bar.classList.remove('visible');
+      return;
+    }
+    bar.classList.add('visible');
+    var device = getDeviceType();
+    var container = bar.querySelector('.compare-bar-inner');
+    if (!container) return;
+
+    if (device === 'mobile') {
+      container.innerHTML = renderMobileBar(items);
+    } else {
+      container.innerHTML = renderDesktopBar(items);
+    }
+    bindFloatingBarEvents(container);
+  }
+
+  function renderMobileBar(items) {
+    var thumbs = items.map(function(p) {
+      return '<div class="flex items-center gap-1.5 bg-slate-100 dark:bg-slate-700 rounded-lg px-2 py-1.5 flex-shrink-0">' +
+        '<img src="' + esc(p._imageUrl) + '" class="w-6 h-6 rounded object-cover" onerror="this.src=\'/assets/images/products/default.webp\'">' +
+        '<span class="text-[10px] font-bold text-slate-900 dark:text-white truncate max-w-[56px]">' + esc(p.name || p.model) + '</span>' +
+        '<button class="float-remove flex-shrink-0 text-slate-400 hover:text-red-500" data-model="' + esc(p.model) + '"><span class="material-symbols-outlined text-sm">close</span></button>' +
+      '</div>';
+    }).join('');
+
+    return '<div class="flex items-center gap-2 w-full">' +
+      '<div class="flex items-center gap-2 flex-1 overflow-x-auto scrollbar-hide py-1">' + thumbs + '</div>' +
+      '<a href="/products/compare/" class="flex-shrink-0 bg-primary text-white px-4 py-2 rounded-xl text-sm font-bold">对比(' + items.length + ')</a>' +
+    '</div>';
+  }
+
+  function renderDesktopBar(items) {
+    var thumbs = items.map(function(p) {
+      return '<div class="flex items-center gap-2 bg-slate-50 dark:bg-slate-700 rounded-xl px-3 py-2 flex-shrink-0">' +
+        '<img src="' + esc(p._imageUrl) + '" class="w-8 h-8 rounded-lg object-cover" onerror="this.src=\'/assets/images/products/default.webp\'">' +
+        '<div class="min-w-0"><p class="text-sm font-bold text-slate-900 dark:text-white truncate max-w-[120px]">' + esc(p.name || p.model) + '</p></div>' +
+        '<button class="float-remove flex-shrink-0 text-slate-400 hover:text-red-500 transition-colors" data-model="' + esc(p.model) + '"><span class="material-symbols-outlined text-base">close</span></button>' +
+      '</div>';
+    }).join('');
+
+    return '<div class="flex items-center gap-3 flex-wrap sm:flex-nowrap">' +
+      '<div class="flex items-center gap-2 text-sm font-bold text-slate-500 dark:text-slate-400 flex-shrink-0">' +
+        '<span class="material-symbols-outlined text-primary">compare_arrows</span>' +
+        '<span>已选 <span class="text-primary">' + items.length + '</span>/3</span>' +
+      '</div>' +
+      '<div class="flex items-center gap-3 flex-1 overflow-x-auto scrollbar-hide">' + thumbs + '</div>' +
+      '<div class="flex items-center gap-2 flex-shrink-0">' +
+        '<button class="float-clear px-3 py-2 rounded-xl text-xs font-bold text-slate-500 hover:text-red-500 hover:bg-red-50 dark:hover:bg-red-900/20 transition-all border border-slate-200 dark:border-slate-700 hover:border-red-300">清空</button>' +
+        '<a href="/products/compare/" class="bg-primary text-white px-5 py-2 rounded-xl text-sm font-bold hover:opacity-90 transition-opacity flex items-center gap-1"><span>开始对比</span><span class="material-symbols-outlined text-sm">arrow_forward</span></a>' +
+      '</div>' +
+    '</div>';
+  }
+
+  function bindFloatingBarEvents(container) {
+    container.querySelectorAll('.float-remove').forEach(function(btn) {
+      btn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        e.preventDefault();
+        removeCompareItem(this.dataset.model);
+      });
+    });
+    var clearBtn = container.querySelector('.float-clear');
+    if (clearBtn) {
+      clearBtn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        e.preventDefault();
+        clearCompareItems();
+      });
+    }
+  }
+
+  function createFloatingBar() {
+    if (document.getElementById(floatingBarId)) return;
+    injectFloatingBarStyles();
+
+    var device = getDeviceType();
+    var bar = document.createElement('div');
+    bar.id = floatingBarId;
+
+    if (device === 'mobile') {
+      bar.className = 'fixed bottom-0 left-0 right-0 bg-white dark:bg-slate-800 border-t border-slate-200 dark:border-slate-700 px-4 py-3 z-50';
+    } else {
+      bar.className = 'fixed bottom-6 left-1/2 -translate-x-1/2 bg-white dark:bg-slate-800 rounded-2xl shadow-2xl border border-slate-200 dark:border-slate-700 px-6 py-4 z-50 max-w-4xl w-[calc(100%-3rem)]';
+    }
+
+    bar.innerHTML = '<div class="compare-bar-inner"></div>';
+    document.body.appendChild(bar);
+    updateFloatingBar();
+  }
+
+  // Listen for storage events from other tabs
+  window.addEventListener('storage', function(e) {
+    if (e.key === COMPARE_KEY) {
+      updateCompareButtons();
+      updateFloatingBar();
+    }
+  });
 
   // ─── Data loader (fetch from API if not already loaded) ───────
   var _dataLoaded = false;
@@ -62,6 +294,25 @@
     return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
   }
 
+  // ─── Compare button HTML builder ───────────────────────────────
+
+  function buildCompareBtnHTML(model) {
+    var isSelected = isProductCompared(model);
+    var activeClass = isSelected ? 'bg-primary text-white border-primary' : 'bg-slate-100 dark:bg-slate-700 text-slate-500 border-slate-200 dark:border-slate-600';
+    return '<button class="compare-btn ' + activeClass + ' flex items-center justify-center w-9 h-9 rounded-lg border text-sm font-bold flex-shrink-0" data-model="' + model + '" onclick="event.preventDefault();event.stopPropagation();window.ProductGrid.toggleCompare(\'' + model.replace(/'/g, "\\'") + '\')">' +
+      '<span class="compare-icon material-symbols-outlined text-lg">' + (isSelected ? 'check' : 'compare_arrows') + '</span>' +
+    '</button>';
+  }
+
+  function buildMobileCompareBtnHTML(model) {
+    var isSelected = isProductCompared(model);
+    var bgClass = isSelected ? 'bg-primary text-white' : 'bg-white dark:bg-slate-800 text-slate-400';
+    var borderClass = isSelected ? 'border-primary' : 'border-slate-200 dark:border-slate-600';
+    return '<button class="compare-btn compare-btn-mobile ' + bgClass + ' w-7 h-7 rounded-full border ' + borderClass + ' flex items-center justify-center shadow-sm" data-model="' + model + '" onclick="event.preventDefault();event.stopPropagation();window.ProductGrid.toggleCompare(\'' + model.replace(/'/g, "\\'") + '\')">' +
+      '<span class="compare-icon material-symbols-outlined text-sm">' + (isSelected ? 'check' : 'compare_arrows') + '</span>' +
+    '</button>';
+  }
+
   // ─── Card renderers ────────────────────────────────────────────
 
   function renderPC(p) {
@@ -83,7 +334,9 @@
       badge = '<span class="px-3 py-1 bg-primary text-white text-xs font-bold rounded-full">' + esc(p.badge) + '</span>';
     }
     var link = '/products/' + encodeURIComponent(model) + '/';
-    return '<article class="product-card group bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 overflow-hidden" data-category="' + cat + '" data-tier="' + esc(p.tier || '') + '" data-model="' + model + '" data-sort-order="' + (p.sort_order || 0) + '" data-created="' + (p.created_at || '') + '">' +
+    var isSelected = isProductCompared(p.model);
+    var selectedClass = isSelected ? ' compare-selected' : '';
+    return '<article class="product-card group bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 overflow-hidden' + selectedClass + '" data-category="' + cat + '" data-tier="' + esc(p.tier || '') + '" data-model="' + model + '" data-sort-order="' + (p.sort_order || 0) + '" data-created="' + (p.created_at || '') + '">' +
       '<div class="relative aspect-[4/3] overflow-hidden bg-slate-100 dark:bg-slate-700">' +
         '<img loading="lazy" alt="' + name + '" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" src="' + img + '" onerror="if(!this.dataset.errored){this.dataset.errored=\'1\';this.src=\'/assets/images/products/default.webp\' }">' +
         (badge ? '<div class="absolute top-4 left-4 flex gap-2">' + badge + '</div>' : '') +
@@ -95,7 +348,10 @@
         (specHTML ? '<div class="flex flex-wrap gap-2 mb-4">' + specHTML + '</div>' : '') +
         '<div class="flex items-center justify-between pt-4 border-t border-slate-100 dark:border-slate-700">' +
           '<div><span class="text-xs text-slate-400">起售价</span><p class="text-xl font-black text-primary">询价</p></div>' +
-          '<a href="' + link + '" class="flex items-center gap-2 bg-primary text-white px-5 py-2.5 rounded-lg font-bold text-sm hover:opacity-90 transition-opacity"><span>查看详情</span><span class="material-symbols-outlined text-sm">arrow_forward</span></a>' +
+          '<div class="flex items-center gap-2">' +
+            '<a href="' + link + '" class="flex items-center gap-2 bg-primary text-white px-5 py-2.5 rounded-lg font-bold text-sm hover:opacity-90 transition-opacity"><span>查看详情</span><span class="material-symbols-outlined text-sm">arrow_forward</span></a>' +
+            buildCompareBtnHTML(model) +
+          '</div>' +
         '</div>' +
       '</div>' +
     '</article>';
@@ -113,7 +369,9 @@
       badge = '<span class="px-2 py-0.5 bg-primary text-white text-[10px] font-bold rounded">' + esc(p.badge) + '</span>';
     }
     var link = '/products/' + encodeURIComponent(model) + '/';
-    return '<article class="product-card-tablet bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 overflow-hidden" data-category="' + cat + '" data-model="' + model + '" data-tier="' + esc(p.tier || '') + '" data-sort-order="' + (p.sort_order || 0) + '" data-created="' + (p.created_at || '') + '">' +
+    var isSelected = isProductCompared(p.model);
+    var selectedClass = isSelected ? ' compare-selected' : '';
+    return '<article class="product-card-tablet bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 overflow-hidden' + selectedClass + '" data-category="' + cat + '" data-model="' + model + '" data-tier="' + esc(p.tier || '') + '" data-sort-order="' + (p.sort_order || 0) + '" data-created="' + (p.created_at || '') + '">' +
       '<div class="relative aspect-[4/3] overflow-hidden bg-slate-100 dark:bg-slate-700">' +
         '<img loading="lazy" alt="' + name + '" class="w-full h-full object-cover" src="' + img + '" onerror="if(!this.dataset.errored){this.dataset.errored=\'1\';this.src=\'/assets/images/products/default.webp\' }">' +
         (badge ? '<div class="absolute top-3 left-3 flex gap-1.5">' + badge + '</div>' : '') +
@@ -124,7 +382,10 @@
         '<p class="text-xs text-slate-500 dark:text-slate-400 mb-3 line-clamp-2">' + desc + '</p>' +
         '<div class="flex items-center justify-between pt-3 border-t border-slate-100 dark:border-slate-700">' +
           '<span class="text-base font-black text-primary">询价</span>' +
-          '<a href="' + link + '" class="flex items-center gap-1 text-primary text-sm font-bold hover:underline"><span>查看详情</span><span class="material-symbols-outlined text-xs">arrow_forward</span></a>' +
+          '<div class="flex items-center gap-2">' +
+            '<a href="' + link + '" class="flex items-center gap-1 text-primary text-sm font-bold hover:underline"><span>查看详情</span><span class="material-symbols-outlined text-xs">arrow_forward</span></a>' +
+            buildCompareBtnHTML(model) +
+          '</div>' +
         '</div>' +
       '</div>' +
     '</article>';
@@ -137,7 +398,10 @@
     var desc = esc(p.description || p.card_desc || '');
     var img = esc(p._imageUrl);
     var link = '/products/' + encodeURIComponent(model) + '/';
-    return '<article class="product-card-mobile bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 overflow-hidden" data-category="' + cat + '" data-model="' + model + '" data-tier="' + esc(p.tier || '') + '" data-sort-order="' + (p.sort_order || 0) + '" data-created="' + (p.created_at || '') + '">' +
+    var isSelected = isProductCompared(p.model);
+    var selectedClass = isSelected ? ' compare-selected' : '';
+    return '<article class="product-card-mobile bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 overflow-hidden relative' + selectedClass + '" data-category="' + cat + '" data-model="' + model + '" data-tier="' + esc(p.tier || '') + '" data-sort-order="' + (p.sort_order || 0) + '" data-created="' + (p.created_at || '') + '">' +
+      buildMobileCompareBtnHTML(model) +
       '<a href="' + link + '" class="flex gap-4 p-3">' +
         '<div class="w-24 h-24 rounded-lg bg-slate-100 dark:bg-slate-700 flex-shrink-0 overflow-hidden">' +
           '<img loading="lazy" alt="' + name + '" class="w-full h-full object-cover" src="' + img + '" onerror="if(!this.dataset.errored){this.dataset.errored=\'1\';this.src=\'/assets/images/products/default.webp\' }">' +
@@ -174,6 +438,8 @@
     container.innerHTML = products.slice(0, initial).map(renderer).join('');
     updateLoadMoreBtn(containerId, total, initial);
     bindLoadMore(containerId, renderer, products);
+    // Init floating bar after grid render
+    createFloatingBar();
   }
 
   function updateLoadMoreBtn(containerId, total, shown) {
@@ -194,6 +460,8 @@
       // Append new products
       container.innerHTML = products.slice(0, next).map(renderer).join('');
       updateLoadMoreBtn(containerId, products.length, next);
+      // Re-sync compare button states for newly rendered cards
+      updateCompareButtons();
     });
   }
 
@@ -438,11 +706,17 @@
     autoRender();
   });
 
+  // Public API
   window.ProductGrid = {
     renderPC: function(max) { renderGrid('product-grid', renderPC, max); },
     renderTablet: function(max) { renderGrid('product-grid', renderTablet, max); },
     renderMobile: function(max) { renderGrid('product-list', renderMobile, max); },
     getAll: getAllProducts,
-    renderCustom: function(id, renderer, max) { renderGrid(id, renderer, max); }
+    renderCustom: function(id, renderer, max) { renderGrid(id, renderer, max); },
+    toggleCompare: toggleCompareFromCard,
+    getCompareItems: getCompareItems,
+    saveCompareItems: saveCompareItems,
+    clearCompareItems: clearCompareItems,
+    removeCompareItem: removeCompareItem
   };
 })();

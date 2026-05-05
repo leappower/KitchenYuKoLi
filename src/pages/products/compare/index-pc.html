@@ -254,7 +254,8 @@ if(localStorage.getItem('darkMode')==='true')document.documentElement.classList.
   'use strict';
 
   var MAX_COMPARE = 3;
-  var selected = []; // array of product objects
+  var COMPARE_KEY = 'YUKOLI_COMPARE_ITEMS';
+  var selected = (function() { try { var d = localStorage.getItem(COMPARE_KEY); return d ? JSON.parse(d) : []; } catch(e) { return []; } })();
 
   // ─── Utility ──────────────────────────────────────────────
   function esc(s) {
@@ -376,6 +377,10 @@ if(localStorage.getItem('darkMode')==='true')document.documentElement.classList.
   }
 
   // ─── Select / Deselect ────────────────────────────────────
+  function saveToStorage() {
+    try { localStorage.setItem(COMPARE_KEY, JSON.stringify(selected)); } catch(e) {}
+  }
+
   function toggleSelect(product) {
     var idx = selected.findIndex(function(s){ return s.model === product.model; });
     if (idx >= 0) {
@@ -387,6 +392,7 @@ if(localStorage.getItem('darkMode')==='true')document.documentElement.classList.
       }
       selected.push(product);
     }
+    saveToStorage();
     renderProductCards();
     renderCompareBar();
     renderComparisonTable();
@@ -395,6 +401,7 @@ if(localStorage.getItem('darkMode')==='true')document.documentElement.classList.
 
   function removeSelected(model) {
     selected = selected.filter(function(s){ return s.model !== model; });
+    saveToStorage();
     renderProductCards();
     renderCompareBar();
     renderComparisonTable();
@@ -440,6 +447,7 @@ if(localStorage.getItem('darkMode')==='true')document.documentElement.classList.
   if (clearBtn) {
     clearBtn.addEventListener('click', function() {
       selected = [];
+      try { localStorage.removeItem(COMPARE_KEY); } catch(e) {}
       renderProductCards();
       renderCompareBar();
       renderComparisonTable();
@@ -568,6 +576,17 @@ if(localStorage.getItem('darkMode')==='true')document.documentElement.classList.
         });
     }
   }
+
+  // Listen for storage events from other tabs (e.g. product listing page)
+  window.addEventListener('storage', function(e) {
+    if (e.key === COMPARE_KEY) {
+      try { selected = e.newValue ? JSON.parse(e.newValue) : []; } catch(err) { selected = []; }
+      renderProductCards();
+      renderCompareBar();
+      renderComparisonTable();
+      updateEmptyState();
+    }
+  });
 
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', initCompare);
