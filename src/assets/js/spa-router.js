@@ -723,7 +723,7 @@
           scripts.push({ src: "https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js", id: "spa-chart-js" });
         }
         scripts.push({ src: "/assets/js/ui/pi-roi.js", id: "spa-pi-roi" });
-        scripts.push({ src: "/assets/js/profit-calculator.js?v=1777895563", id: "spa-profit-calculator" });
+        scripts.push({ src: "/assets/js/profit-calculator.js", id: "spa-profit-calculator" });
       }
 
       // Support 页面需要 contact-channels 组件 + 微信弹窗
