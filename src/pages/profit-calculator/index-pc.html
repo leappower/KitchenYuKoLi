@@ -72,12 +72,13 @@
   </head>
 
   <body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 antialiased overflow-x-clip">
+    <span id="page-title" data-i18n="profit_calc_page_title" class="hidden">YuKoLi 智能厨具 | 投资回报计算器</span>
     <div class="relative flex min-h-screen flex-col">
       <navigator data-component="navigator" data-variant="pc" data-active="profit-calculator"></navigator>
 
       <main id="spa-content" class="pt-[110px]">
         <!-- Hero -->
-        <section class="relative bg-gradient-to-br from-rose-50 via-white to-slate-50 dark:from-slate-900 dark:via-slate-900 dark:to-slate-950 py-16 overflow-hidden">
+        <section class="relative bg-gradient-to-br from-rose-50 via-white to-slate-50 dark:from-slate-900 dark:via-slate-900 dark:to-slate-950 py-16 overflow-hidden fullwidth-bg">
           <div class="w-full text-center relative z-10 px-6 md:px-10 lg:px-10 xl:px-20">
             <h1 class="text-4xl md:text-5xl lg:text-6xl font-black tracking-tight mb-4" data-i18n="profit_calc_hero_title">
               厨房设备投资回报计算器
@@ -85,7 +86,7 @@
             <p class="text-xl text-slate-500 dark:text-slate-400 max-w-2xl mx-auto" data-i18n="profit_calc_hero_subtitle">
               输入运营数据，45秒看到投资回报预估
             </p>
-            <p class="text-base text-slate-400 mt-2" data-i18n="">
+            <p class="text-base text-slate-400 mt-2" data-i18n="profit_calc_hero_subtitle_en">
               Kitchen Equipment Profit Calculator
             </p>
           </div>
@@ -122,7 +123,7 @@
                   <div>
                     <label class="block text-sm font-bold mb-1.5" data-i18n="profit_calc_labor_cost">Current Monthly Labor Cost</label>
                     <input id="pc-labor-cost" type="number" min="0" class="w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg p-3 focus:ring-primary focus:border-primary text-sm" placeholder="Auto-filled per country" />
-                    <p class="text-sm text-slate-400 mt-1" data-i18n="">选国家后自动填充默认值</p>
+                    <p class="text-sm text-slate-400 mt-1" data-i18n="profit_calc_labor_hint">选国家后自动填充默认值</p>
                   </div>
 
                   <!-- 3. Daily Meals Output -->
@@ -169,7 +170,7 @@
                         <span data-i18n="profit_calc_eq_fryer">油炸炉</span>
                       </label>
                       <label class="flex items-center gap-2 text-sm cursor-pointer bg-slate-50 dark:bg-slate-800 rounded-lg p-2.5 hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors">
-                        <input type="checkbox" class="accent-primary pc-equipment" value="其他" />
+                        <input type="checkbox" class="accent-primary pc-equipment" value="other" />
                         <span data-i18n="profit_calc_other">其他</span>
                       </label>
                     </div>
@@ -178,7 +179,7 @@
                   <!-- 6. Operator Reduction Slider -->
                   <div>
                     <label class="block text-sm font-bold mb-1.5" data-i18n="profit_calc_operator_reduction">Expected Operator Reduction</label>
-                    <div class="text-sm text-slate-600 dark:text-slate-400 -mt-0.5 mb-1"><span id="pc-operator-value" class="text-primary font-black">2</span> 人</div>
+                    <div class="text-sm text-slate-600 dark:text-slate-400 -mt-0.5 mb-1"><span id="pc-operator-value" class="text-primary font-black">2</span> <span data-i18n="profit_calc_people">人</span></div>
                     <input id="pc-operator-reduction" type="range" min="1" max="10" value="2" class="w-full accent-primary" />
                     <div class="flex justify-between text-xs text-slate-400 mt-1"><span>1</span><span>10</span></div>
                   </div>
@@ -259,7 +260,7 @@
                   <span class="material-symbols-outlined text-5xl text-slate-300 dark:text-slate-600">analytics</span>
                 </div>
                 <p class="text-lg font-bold text-slate-400 dark:text-slate-500" data-i18n="profit_calc_placeholder_title">填写左侧数据，即刻查看投资回报</p>
-                <p class="text-base text-slate-300 dark:text-slate-600 mt-1" data-i18n="">Enter your data to see the ROI estimate</p>
+                <p class="text-base text-slate-300 dark:text-slate-600 mt-1" data-i18n="profit_calc_placeholder_desc">Enter your data to see the ROI estimate</p>
               </div>
               </div>
             </div>

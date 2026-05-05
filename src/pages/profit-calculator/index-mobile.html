@@ -78,6 +78,7 @@
   </head>
 
   <body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 antialiased overflow-x-clip">
+    <span id="page-title" data-i18n="profit_calc_page_title" class="hidden">YuKoLi 智能厨具 | 投资回报计算器</span>
     <div class="relative flex min-h-screen flex-col">
       <navigator data-component="navigator" data-variant="mobile" data-active="profit-calculator"></navigator>
 
@@ -157,7 +158,7 @@
                     <input type="checkbox" class="accent-primary pc-equipment" value="deep_fryer" /><span data-i18n="profit_calc_eq_fryer">油炸炉</span>
                   </label>
                   <label class="flex items-center gap-2 text-sm cursor-pointer bg-white dark:bg-slate-900 rounded-lg p-2.5 border border-slate-200 dark:border-slate-700 active:bg-slate-50 dark:active:bg-slate-800">
-                    <input type="checkbox" class="accent-primary pc-equipment" value="其他" /><span data-i18n="profit_calc_other">其他</span>
+                    <input type="checkbox" class="accent-primary pc-equipment" value="other" /><span data-i18n="profit_calc_other">其他</span>
                   </label>
                 </div>
               </div>
@@ -165,7 +166,7 @@
               <!-- Operator Reduction -->
               <div>
                 <label class="block text-sm font-bold mb-1" data-i18n="profit_calc_operator_reduction">
-                  Operator Reduction: <span id="pc-operator-value" class="text-primary font-black">2</span> 人
+                  Operator Reduction: <span id="pc-operator-value" class="text-primary font-black">2</span> <span data-i18n="profit_calc_people">人</span>
                 </label>
                 <input id="pc-operator-reduction" type="range" min="1" max="10" value="2" class="w-full accent-primary" />
                 <div class="flex justify-between text-xs text-slate-400 mt-0.5"><span>1</span><span>10</span></div>
