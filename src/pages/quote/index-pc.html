@@ -122,6 +122,7 @@
           <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
             <!-- Form Section -->
             <div class="lg:col-span-8">
+              <div class="bg-white dark:bg-slate-900/50 border border-slate-200 dark:border-slate-800 rounded-xl p-6 md:p-10 shadow-sm">
               <form id="quote-form" class="space-y-6" novalidate>
                 <p class="text-xs text-slate-400 mb-2"><span class="text-red-500 font-bold">*</span> 为必填项</p>
                 <!-- Basic Info Section -->
@@ -138,7 +139,7 @@
                       </label>
                       <input
                         id="q-company"
-                        class="w-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-lg p-3 focus:ring-primary focus:border-primary"
+                        class="h-14 w-full rounded-xl border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white focus:border-primary focus:ring-primary text-base px-4"
                         placeholder="请输入公司全称"
                         type="text"
                         required
@@ -151,7 +152,7 @@
                       </label>
                       <input
                         id="q-contact"
-                        class="w-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-lg p-3 focus:ring-primary focus:border-primary"
+                        class="h-14 w-full rounded-xl border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white focus:border-primary focus:ring-primary text-base px-4"
                         placeholder="请输入联系人姓名"
                         type="text"
                         required
@@ -164,7 +165,7 @@
                       </label>
                       <input
                         id="q-phone"
-                        class="w-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-lg p-3 focus:ring-primary focus:border-primary"
+                        class="h-14 w-full rounded-xl border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white focus:border-primary focus:ring-primary text-base px-4"
                         placeholder="请输入联系电话（含国际区号）"
                         type="tel"
                         required
@@ -177,7 +178,7 @@
                       </label>
                       <input
                         id="q-email"
-                        class="w-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-lg p-3 focus:ring-primary focus:border-primary"
+                        class="h-14 w-full rounded-xl border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white focus:border-primary focus:ring-primary text-base px-4"
                         placeholder="请输入工作邮箱"
                         type="email"
                         required
@@ -190,7 +191,7 @@
                       </label>
                       <select
                         id="q-country"
-                        class="w-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-lg p-3 focus:ring-primary focus:border-primary"
+                        class="h-14 w-full rounded-xl border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white focus:border-primary focus:ring-primary text-base px-4 appearance-none"
                         required
                       >
                         <option value="" data-i18n="quote_select_country">请选择国家/地区</option>
@@ -224,7 +225,7 @@
                       </label>
                       <select
                         id="q-equipment-type"
-                        class="w-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-lg p-3 focus:ring-primary focus:border-primary"
+                        class="h-14 w-full rounded-xl border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white focus:border-primary focus:ring-primary text-base px-4 appearance-none"
                         required
                       >
                         <option value="" data-i18n="quote_select_equipment_type">请选择设备类型</option>
@@ -241,7 +242,7 @@
                       <label class="block text-sm font-bold mb-2" data-i18n="quote_quantity">设备数量</label>
                       <input
                         id="q-quantity"
-                        class="w-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-lg p-3 focus:ring-primary focus:border-primary"
+                        class="h-14 w-full rounded-xl border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white focus:border-primary focus:ring-primary text-base px-4"
                         placeholder="请输入所需数量"
                         type="number"
                         min="1"
@@ -251,7 +252,7 @@
                       <label class="block text-sm font-bold mb-2" data-i18n="quote_kitchen_capacity">厨房规模 <span class="text-red-500 font-bold text-base align-middle">*</span></label>
                       <select
                         id="q-capacity"
-                        class="w-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-lg p-3 focus:ring-primary focus:border-primary"
+                        class="h-14 w-full rounded-xl border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white focus:border-primary focus:ring-primary text-base px-4 appearance-none"
                         required
                       >
                         <option value="" data-i18n="quote_select_capacity">请选择厨房规模</option>
@@ -267,7 +268,7 @@
                       <label class="block text-sm font-bold mb-2" data-i18n="quote_budget_range">预算范围</label>
                       <select
                         id="q-budget"
-                        class="w-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-lg p-3 focus:ring-primary focus:border-primary"
+                        class="h-14 w-full rounded-xl border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white focus:border-primary focus:ring-primary text-base px-4 appearance-none"
                       >
                         <option value="" data-i18n="quote_select_budget">请选择预算范围</option>
                         <option value="consult" data-i18n="quote_budget_consult">需咨询（暂无明确预算）</option>
@@ -283,8 +284,7 @@
                       </label>
                       <textarea
                         id="q-message"
-                        rows="4"
-                        class="w-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-lg p-3 focus:ring-primary focus:border-primary"
+                        class="min-h-[120px] w-full rounded-xl border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white focus:border-primary focus:ring-primary text-base p-4"
                         placeholder="请描述您的具体需求，如菜系类型、出餐量、特殊要求等"
                       ></textarea>
                     </div>
@@ -295,7 +295,7 @@
                 <div class="pt-2">
                   <label class="flex items-start gap-3 mb-6 cursor-pointer">
                     <input id="q-consent" type="checkbox" class="mt-1 accent-primary" checked />
-                    <span class="text-base text-slate-500" data-i18n="quote_consent_text">
+                    <span class="text-sm text-slate-600 dark:text-slate-400" data-i18n="quote_consent_text">
                       我同意 YuKoLi 的隐私政策，并允许通过以上联系方式接收报价方案。
                     </span>
                   </label>
@@ -309,6 +309,7 @@
                   </button>
                 </div>
               </form>
+              </div>
             </div>
 
             <!-- Trust Sidebar -->
@@ -325,7 +326,7 @@
                     </div>
                     <div>
                       <p class="font-bold text-sm" data-i18n="quote_114_products">114款智能设备</p>
-                      <p class="text-sm text-slate-500 mt-1" data-i18n="">
+                      <p class="text-sm text-slate-500 mt-1" data-i18n="quote_114_products_desc">
                         覆盖炒菜、蒸烤、熬汤、煮饭等全套商用厨房场景。
                       </p>
                     </div>
@@ -336,7 +337,7 @@
                     </div>
                     <div>
                       <p class="font-bold text-sm" data-i18n="quote_50_countries">覆盖50+国家</p>
-                      <p class="text-sm text-slate-500 mt-1" data-i18n="">
+                      <p class="text-sm text-slate-500 mt-1" data-i18n="quote_50_countries_desc">
                         深耕东南亚市场，产品远销全球50多个国家和地区。
                       </p>
                     </div>
@@ -347,7 +348,7 @@
                     </div>
                     <div>
                       <p class="font-bold text-sm" data-i18n="quote_certified">国际认证品质</p>
-                      <p class="text-sm text-slate-500 mt-1" data-i18n="">
+                      <p class="text-sm text-slate-500 mt-1" data-i18n="quote_certified_desc">
                         通过 CE、UL、ISO 9001 认证，品质有保障。
                       </p>
                     </div>
@@ -358,7 +359,7 @@
                     </div>
                     <div>
                       <p class="font-bold text-sm" data-i18n="quote_after_sales">完善的售后服务</p>
-                      <p class="text-sm text-slate-500 mt-1" data-i18n="">
+                      <p class="text-sm text-slate-500 mt-1" data-i18n="quote_after_sales_desc">
                         提供安装指导、操作培训和持续技术支持。
                       </p>
                     </div>
@@ -410,7 +411,7 @@
                   <span class="material-symbols-outlined text-3xl">forum</span>
                   <h3 class="text-lg font-bold" data-i18n="quote_prefer_chat">更喜欢直接沟通？</h3>
                 </div>
-                <p class="text-base opacity-90 mb-6" data-i18n="">
+                <p class="text-base opacity-90 mb-6" data-i18n="quote_prefer_chat_desc">
                   我们的销售团队在线为您解答疑问，帮您快速找到合适的设备方案。
                 </p>
                 <div class="flex gap-3">
@@ -473,5 +474,6 @@
       });
     </script>
       <script defer src="/assets/js/ui/floating-actions.js"></script>
+    <footer data-component="footer" data-variant="pc" data-active="quote"></footer>
   </body>
 </html>

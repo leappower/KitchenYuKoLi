@@ -97,7 +97,10 @@
 if(localStorage.getItem('darkMode')==='true')document.documentElement.classList.add('dark')})()</script>
 <link rel="stylesheet" href="/assets/css/skeleton.css"/>
 <link rel="icon" href="/assets/images/logo_header.webp" type="image/webp">
-</head>
+    <script type="application/ld+json">
+    {"@context":"https://schema.org","@type":"WebPage","name":"YuKoLi 智能厨具获取报价","description":"获取 YuKoLi 智能厨具定制报价，商用厨房设备解决方案","url":"https://www.kitchen.yukoli.com/quote/"}
+    </script>
+  </head>
 <body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 min-h-screen flex flex-col overflow-x-clip">
 <navigator data-component="navigator"
   data-variant="mobile"
@@ -299,7 +302,7 @@ header button:active {
       <span class="material-symbols-outlined">forum</span>
       <h3 class="text-base font-bold" data-i18n="quote_prefer_chat">更喜欢直接沟通？</h3>
     </div>
-    <p class="text-sm opacity-90 mb-4">我们的销售团队在线为您解答疑问，帮您快速找到合适的设备方案。</p>
+    <p class="text-sm opacity-90 mb-4" data-i18n="quote_prefer_chat_desc">我们的销售团队在线为您解答疑问，帮您快速找到合适的设备方案。</p>
     <div class="flex gap-3">
       <button onclick="startWhatsApp()" class="flex-1 bg-white text-primary py-2.5 rounded-lg font-bold text-sm flex items-center justify-center gap-2">
         <span class="material-symbols-outlined text-base">chat</span> WhatsApp
@@ -334,9 +337,9 @@ header button:active {
 <section class="mb-8">
 <div class="sticky bottom-0 bg-white dark:bg-slate-900 border-t border-primary/10 thumb-zone-bottom shadow-[0_-10px_30px_rgba(0,0,0,0.05)]">
 <div class="px-4 pt-4 pb-2">
-<a id="quote-submit-mobile" class="flex items-center justify-center w-full h-14 bg-primary text-white font-bold text-lg rounded-xl shadow-lg shadow-primary/30 active:scale-[0.98] transition-all gap-2" href="#">
+<a id="quote-submit-mobile" class="flex items-center justify-center w-full h-14 bg-primary text-white font-black text-lg rounded-xl shadow-xl shadow-primary/20 transition-all gap-2 uppercase tracking-widest" href="#">
                 <span data-i18n="quote_btn_submit_inquiry">提交咨询</span>
-                <span class="material-symbols-outlined">send</span>
+                <span class="material-symbols-outlined">arrow_forward</span>
 </a>
 </div>
 

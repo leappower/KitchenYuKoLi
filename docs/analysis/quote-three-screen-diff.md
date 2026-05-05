@@ -306,45 +306,56 @@
 
 ### 🔴 高优先级（功能缺陷）
 
-| # | 问题 | 影响 |
-|---|------|------|
-| 1 | Mobile footer `data-active=""` | Footer 高亮状态错误 |
-| 11 | Consent ID 不一致 | JS 引用可能失败 |
-| 13 | Mobile 表单提交逻辑独立维护 | 行为可能不一致 |
-| 18 | Tablet 缺少 "为什么选择 YuKoLi？" | 内容缺失 |
+| # | 问题 | 影响 | 状态 |
+|---|------|------|------|
+| 1 | Mobile footer `data-active=""` | Footer 高亮状态错误 | ✅ 已修复 |
+| 11 | Consent ID 不一致 | JS 引用可能失败 | ⏭ 已知约束 |
+| 13 | Mobile 表单提交逻辑独立维护 | 行为可能不一致 | ⏭ 已知约束 |
+| 18 | Tablet 缺少 "为什么选择 YuKoLi？" | 内容缺失 | ⚠️ 误报，已存在 |
 
 ### 🟡 中优先级（体验不一致）
 
-| # | 问题 | 影响 |
-|---|------|------|
-| 6 | PC 表单无卡片容器 | 视觉风格不统一 |
-| 8-10 | 输入框样式差异 (radius/height/border) | 三屏体验割裂 |
-| 14 | 提交按钮 icon 不统一 | send vs arrow_forward |
-| 16 | Tablet 缺少 Trust Cards | 信息展示不足 |
-| 19 | PC "为什么选择" 描述文本 data-i18n 为空 | 多语言缺失 |
+| # | 问题 | 影响 | 状态 |
+|---|------|------|------|
+| 6 | PC 表单无卡片容器 | 视觉风格不统一 | ✅ 已修复 |
+| 8-10 | 输入框样式差异 (radius/height/border) | 三屏体验割裂 | ✅ 已修复 |
+| 14 | 提交按钮 icon 不统一 | send vs arrow_forward | ✅ 已修复 |
+| 16 | Tablet 缺少 Trust Cards | 信息展示不足 | ⚠️ 误报，已存在 |
+| 19 | PC "为什么选择" 描述文本 data-i18n 为空 | 多语言缺失 | ✅ 已修复 |
 
 ### 🟢 低优先级（优化建议）
 
-| # | 问题 | 影响 |
-|---|------|------|
-| 2 | PC 缺少 `<footer>` 组件 | 导航不完整 |
-| 5 | PC tracking 值不同 | 微观排版差异 |
-| 12 | Consent label 字号不统一 | 视觉差异 |
-| 15 | 提交按钮字号差异 | 视觉差异 |
-| 20 | Quick Contact 描述未 i18n | 多语言缺失 |
-| 21 | PC meta description 重复 | SEO 冗余 |
-| 22 | Mobile/tablet 缺少 JSON-LD | SEO 不完整 |
-| 23-24 | Mobile 不用 quote-form.js | 维护成本 |
+| # | 问题 | 影响 | 状态 |
+|---|------|------|------|
+| 2 | PC 缺少 `<footer>` 组件 | 导航不完整 | ✅ 已修复 |
+| 5 | PC tracking 值不同 | 微观排版差异 | ⏭ 无影响 |
+| 12 | Consent label 字号不统一 | 视觉差异 | ✅ 已修复 |
+| 15 | 提交按钮字号差异 | 视觉差异 | ✅ 已修复 |
+| 20 | Quick Contact 描述未 i18n | 多语言缺失 | ✅ 已修复 |
+| 21 | PC meta description 重复 | SEO 冗余 | ⚠️ 已不存在 |
+| 22 | Mobile/tablet 缺少 JSON-LD | SEO 不完整 | ✅ 已修复 |
+| 23-24 | Mobile 不用 quote-form.js | 维护成本 | ⏭ 已知约束 |
 
 ---
 
-## 13. 建议修复顺序
+## 13. 修复记录 (2026-05-05)
 
-1. **Fix #1** — Mobile footer `data-active="quote"`
-2. **Fix #18** — Tablet 补充 "为什么选择 YuKoLi？" 区域
-3. **Fix #6** — PC 表单加白色卡片容器
-4. **Fix #8-10** — 统一三屏输入框样式
-5. **Fix #19** — PC 补充 `data-i18n` 描述键
-6. **Fix #20** — 三屏 Quick Contact 描述加 `data-i18n`
-7. **Fix #14** — 统一提交按钮 icon 为 `arrow_forward`
-8. **Fix #21-22** — PC 去重 meta description，mobile/tablet 加 JSON-LD
+| Fix | 说明 |
+|-----|------|
+| #1 | Mobile footer `data-active="quote"` |
+| #2 | PC 添加 `<footer>` 组件 |
+| #6 | PC 表单添加白色卡片容器 `bg-white rounded-xl p-6 md:p-10 shadow-sm` |
+| #8-10 | PC 输入框样式统一：`h-14 rounded-xl border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-base px-4` |
+| #12 | PC consent label `text-base` → `text-sm` |
+| #14 | Mobile 提交按钮 icon `send` → `arrow_forward` |
+| #15 | Mobile 提交按钮 `font-bold` → `font-black uppercase tracking-widest` |
+| #19 | PC sidebar "为什么选择" 描述 `data-i18n=""` → `quote_114_products_desc` 等 |
+| #20 | 三屏 Quick Contact 描述加 `data-i18n="quote_prefer_chat_desc"` |
+| #22 | Mobile/tablet 补充 Schema.org JSON-LD |
+
+### 跳过（已知约束）
+| Fix | 原因 |
+|-----|------|
+| #11 | Mobile consent ID `q-consent-m` 为已知约束 |
+| #13 | Mobile inline JS 表单提交为已知约束 |
+| #23-24 | Mobile 不引用 `quote-form.js` 为已知约束 |
