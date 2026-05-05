@@ -587,7 +587,9 @@
     return (
       '<a href="' + escapeHtml(child.href) + '"' +
       ' class="mobile-menu-l2-item' + whatsappClass + isActive + '"' +
-      targetAttr + '>' +
+      targetAttr +
+      ' onclick="event.preventDefault();var h=this.href;if(window.SpaRouter){try{window.SpaRouter.navigate(h)}catch(e){location.href=h}}else{location.href=h}if(window.SlideMenu&&window.SlideMenu.close)try{window.SlideMenu.close()}catch(e){}"' +
+      '>' +
         '<span class="mobile-menu-l2-icon">' +
           '<span class="material-symbols-outlined">' + escapeHtml(child.icon) + '</span>' +
         '</span>' +
@@ -850,7 +852,9 @@
         closeMenu();
         if (href && window.SpaRouter) {
           evt.preventDefault();
-          window.SpaRouter.navigate(href);
+          try { window.SpaRouter.navigate(href); } catch(e) { location.href = href; }
+        } else if (href) {
+          location.href = href;
         }
       });
     }
@@ -863,9 +867,23 @@
         var subMenu = panelEl.querySelector('[data-menu-l2="' + menuId + '"]');
 
         // 如果子菜单存在且不为空，折叠逻辑由上面的 toggleButtons 处理
-        // 如果子菜单为空或不存在，则关闭整个菜单
+        // 如果子菜单为空或不存在，则关闭整个菜单并导航
         if (!subMenu || subMenu.children.length === 0) {
+          var href = this.getAttribute("data-menu-toggle");
+          // Find href from menu items data
+          var navItems = getMenuItems();
+          var targetItem = null;
+          for (var idx = 0; idx < navItems.length; idx++) {
+            if (navItems[idx].id === menuId) { targetItem = navItems[idx]; break; }
+          }
           closeMenu();
+          if (targetItem && targetItem.href) {
+            if (window.SpaRouter) {
+              try { window.SpaRouter.navigate(targetItem.href); } catch(e) { location.href = targetItem.href; }
+            } else {
+              location.href = targetItem.href;
+            }
+          }
         }
       });
     }

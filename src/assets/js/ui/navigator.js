@@ -255,9 +255,11 @@
     }
 
     /* ---------- 普通链接导航项 ---------- */
+    var safeHref = escapeHtml(href);
     return (
-      '<a class="' + activeClass + '" href="' + escapeHtml(href) + '" ' +
-      'data-i18n="' + escapeHtml(navItem.key) + '">' +
+      '<a class="' + activeClass + '" href="' + safeHref + '" ' +
+      'data-i18n="' + escapeHtml(navItem.key) + '" ' +
+      'onclick="event.preventDefault();var h=this.href;if(window.SpaRouter){try{window.SpaRouter.navigate(h)}catch(e){location.href=h}}else{location.href=h}">' +
       escapeHtml(navItem.label) + '</a>'
     );
   }
