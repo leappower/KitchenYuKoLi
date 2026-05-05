@@ -120,8 +120,8 @@
   function shortCurrency(n, symbol) {
     if (isCJK()) {
       // CJK: 万 (10,000) and 億 (100,000,000)
-      if (n >= 100000000) return symbol + formatNumber(n / 100000000, 1) + t('profit_calc_unit_100m');
-      if (n >= 10000) return symbol + formatNumber(n / 10000, 1) + t('profit_calc_unit_10k');
+      if (n >= 100000000) return symbol + formatNumber(n / 100000000, 1) + '億';
+      if (n >= 10000) return symbol + formatNumber(n / 10000, 1) + '万';
       return symbol + formatNumber(n);
     }
     // Western: K and M
@@ -334,8 +334,8 @@
           '<span style="color:#64748b;font-size:13px">' + t('profit_calc_pdf_payback_period') + '</span>' +
           '<span style="font-weight:900;font-size:20px;color:#e11d48">' + result.payback.min + '–' + result.payback.max + ' ' + t('profit_calc_months') + '</span>' +
         '</div>' +
-        pdfRow(t('profit_calc_pdf_5year_return'), lc.symbol + shortCurrency(result.fiveYearReturn.min, lc.symbol) + ' – ' + lc.symbol + shortCurrency(result.fiveYearReturn.max, lc.symbol)) +
-        pdfRow(t('profit_calc_pdf_annual_savings'), lc.symbol + shortCurrency(result.annualSavings.mid, lc.symbol)) +
+        pdfRow(t('profit_calc_pdf_5year_return'), shortCurrency(result.fiveYearReturn.min, lc.symbol) + ' – ' + shortCurrency(result.fiveYearReturn.max, lc.symbol)) +
+        pdfRow(t('profit_calc_pdf_annual_savings'), shortCurrency(result.annualSavings.mid, lc.symbol)) +
         pdfRow(t('profit_calc_pdf_co2'), result.co2.toFixed(1) + ' ' + t('profit_calc_co2_unit')) +
       '</div>' +
 
@@ -449,8 +449,8 @@
       '<div class="row"><span class="label">' + t('profit_calc_pdf_monthly_savings') + '</span><span class="value">' + lc.symbol + formatNumber(result.monthlySavings.min) + ' – ' + lc.symbol + formatNumber(result.monthlySavings.max) + '</span></div>',
       '<div class="row"><span class="label">' + t('profit_calc_pdf_equipment_investment') + '</span><span class="value">' + lc.symbol + formatNumber(result.investment.min) + ' – ' + lc.symbol + formatNumber(result.investment.max) + '</span></div>',
       '<div class="row"><span class="label">' + t('profit_calc_pdf_payback_period') + '</span><span class="value big">' + result.payback.min + '–' + result.payback.max + ' ' + t('profit_calc_months') + '</span></div>',
-      '<div class="row"><span class="label">' + t('profit_calc_pdf_5year_return') + '</span><span class="value">' + lc.symbol + shortCurrency(result.fiveYearReturn.min, lc.symbol) + ' – ' + lc.symbol + shortCurrency(result.fiveYearReturn.max, lc.symbol) + '</span></div>',
-      '<div class="row"><span class="label">' + t('profit_calc_pdf_annual_savings') + '</span><span class="value">' + lc.symbol + shortCurrency(result.annualSavings.mid, lc.symbol) + '</span></div>',
+      '<div class="row"><span class="label">' + t('profit_calc_pdf_5year_return') + '</span><span class="value">' + shortCurrency(result.fiveYearReturn.min, lc.symbol) + ' – ' + shortCurrency(result.fiveYearReturn.max, lc.symbol) + '</span></div>',
+      '<div class="row"><span class="label">' + t('profit_calc_pdf_annual_savings') + '</span><span class="value">' + shortCurrency(result.annualSavings.mid, lc.symbol) + '</span></div>',
       '<div class="row"><span class="label">' + t('profit_calc_pdf_co2') + '</span><span class="value">' + result.co2.toFixed(1) + ' ' + t('profit_calc_co2_unit') + '</span></div>',
       '</div>',
       '<div class="footer">' + t('profit_calc_pdf_footer') + new Date().toLocaleDateString() + '<br>' + t('profit_calc_pdf_disclaimer') + '</div>',
