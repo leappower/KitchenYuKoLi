@@ -1036,6 +1036,34 @@
       }
     }
 
+    /* ---------- 1b. 更新非 dropdown 普通链接导航项的高亮 ---------- */
+    var plainLinks = document.querySelectorAll("header nav a[data-i18n]");
+    for (var pi = 0; pi < plainLinks.length; pi++) {
+      var plainEl = plainLinks[pi];
+      /* Skip dropdown triggers (already handled above) */
+      if (plainEl.classList.contains("prod-dropdown-trigger") ||
+          plainEl.classList.contains("app-dropdown-trigger") ||
+          plainEl.classList.contains("sup-dropdown-trigger") ||
+          plainEl.classList.contains("abt-dropdown-trigger")) {
+        continue;
+      }
+      var plainKey = plainEl.getAttribute("data-i18n") || "";
+      var plainMatch = false;
+      for (var pk = 0; pk < navItems.length; pk++) {
+        if (navItems[pk].id === mappedId && plainKey === navItems[pk].key) {
+          plainMatch = true;
+          break;
+        }
+      }
+      if (plainMatch) {
+        plainEl.classList.add("text-primary");
+        plainEl.classList.remove("hover\\:text-primary", "transition-colors");
+      } else {
+        plainEl.classList.remove("text-primary");
+        plainEl.classList.add("hover\\:text-primary", "transition-colors");
+      }
+    }
+
     /* ---------- 2. 清除所有 dropdown item 的 is-active ---------- */
     var activeItems = document.querySelectorAll(
       ".prod-dropdown-item.is-active, " +
