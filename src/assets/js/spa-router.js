@@ -525,7 +525,7 @@
       container.innerHTML = content;
 
       // 动态加载页面专属脚本（SPA 移除了 script 标签，需手动补充）
-      _self.loadPageScripts(pagePath);
+      var scriptsPromise = _self.loadPageScripts(pagePath);
 
       // 隐藏骨架屏
       this.hideSkeleton();
@@ -563,10 +563,12 @@
       // 更新当前路由
       this.currentRoute = window.location.pathname;
 
-      // 触发事件（翻译初始化等）
-      document.dispatchEvent(new Event("spa:load"));
-
-      this.log("Content rendered for:", pagePath);
+      // 等待动态脚本加载完成后，再触发 spa:load（避免重复触发）
+      var _self2 = this;
+      Promise.resolve(scriptsPromise).then(function() {
+        document.dispatchEvent(new Event("spa:load"));
+        _self2.log("Content rendered for:", pagePath);
+      });
     },
 
     // 处理 popstate（浏览器返回）
@@ -759,8 +761,6 @@
             el.id = s.id;
             el.src = s.src + (s.src.indexOf("?") === -1 ? "?v=" + Date.now() : "");
             el.onload = function() {
-              // 触发 spa:load 让脚本有机会初始化
-              document.dispatchEvent(new Event("spa:load"));
               resolve();
             };
             el.onerror = function() {
@@ -771,6 +771,7 @@
           });
         });
       });
+      return chain;
     },
   };
 

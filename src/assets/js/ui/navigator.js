@@ -1039,7 +1039,9 @@
     }
 
     /* ---------- 1b. 更新非 dropdown 普通链接导航项的高亮 ---------- */
+    console.log('[NAV-ACTIVE] plainLinks check: mappedId="' + mappedId + '" | navItems count=' + navItems.length + ' | navItems ids=' + navItems.map(function(n){return n.id}).join(','));
     var plainLinks = document.querySelectorAll("header nav a[data-i18n]");
+    console.log('[NAV-ACTIVE] plainLinks DOM count=' + plainLinks.length);
     for (var pi = 0; pi < plainLinks.length; pi++) {
       var plainEl = plainLinks[pi];
       /* Skip dropdown triggers (already handled above) */
@@ -1061,6 +1063,19 @@
         plainEl.classList.add("text-primary");
         plainEl.classList.remove("hover\\:text-primary", "transition-colors");
         console.log('[NAV-ACTIVE] ✅ plainLink ACTIVE:', plainKey);
+        /* Watch who removes text-primary from this element */
+        if (!plainEl._activeWatched) {
+          plainEl._activeWatched = true;
+          var _obs = new MutationObserver(function(mutations) {
+            mutations.forEach(function(m) {
+              if (m.attributeName === 'class' && !plainEl.classList.contains('text-primary')) {
+                var _s = new Error().stack;
+                console.warn('[NAV-ACTIVE] ⚠️ text-primary REMOVED from', plainKey, '\n', _s.split('\n').slice(1,5).join('\n'));
+              }
+            });
+          });
+          _obs.observe(plainEl, { attributes: true, attributeFilter: ['class'] });
+        }
       } else {
         plainEl.classList.remove("text-primary");
         plainEl.classList.add("hover\\:text-primary", "transition-colors");
