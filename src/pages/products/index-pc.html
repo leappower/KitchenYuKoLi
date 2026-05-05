@@ -160,7 +160,7 @@ window.addEventListener('DOMContentLoaded',function(){
 <main id="spa-content" class="pt-[110px]">
 <div class="w-full">
   <!-- Hero Section: aligned with home page (left text, right image) -->
-  <section class="w-full flex flex-col lg:flex-row items-center py-10 gap-12 fullwidth-bg">
+  <section class="section-passthrough w-full flex flex-col lg:flex-row items-center py-10 gap-12">
     <div class="section-content">
       <div class="w-full lg:w-1/2 space-y-8">
         <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-bold uppercase tracking-widest">
@@ -236,8 +236,8 @@ window.addEventListener('DOMContentLoaded',function(){
   </section>
 
   <!-- CTA Section -->
-  <section class="w-full py-16 fullwidth-bg">
-    <div class="section-content">
+  <section class="w-full py-16">
+    
       <div class="w-full bg-gradient-to-br from-primary/10 to-primary/5 dark:from-primary/20 dark:to-primary/5 rounded-3xl p-12 lg:p-16 border border-primary/20">
         <div class="max-w-3xl mx-auto text-center">
           <h2 class="text-3xl lg:text-5xl font-black mb-6 text-slate-900 dark:text-white" data-i18n="products_cta_title">
@@ -262,7 +262,6 @@ window.addEventListener('DOMContentLoaded',function(){
           </div>
         </div>
       </div>
-    </div>
   </section>
 </div>
 </main>
