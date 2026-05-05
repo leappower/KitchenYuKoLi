@@ -264,9 +264,115 @@
     ].join('\n');
   }
 
-  /* ───────── PDF generation (simple HTML→print) ───────── */
+  /* ───────── PDF generation (html2canvas + jsPDF) ───────── */
 
   function generatePDF(input, result, salaryInfo) {
+    // Check for required libraries
+    if (typeof html2canvas === 'undefined' || typeof window.jspdf === 'undefined' && typeof jsPDF === 'undefined') {
+      // Fallback to print-based method
+      generatePDFFallback(input, result, salaryInfo);
+      return;
+    }
+
+    var painLabel = PAIN_KEY_MAP[input.painPoint] ? t(PAIN_KEY_MAP[input.painPoint]) : input.painPoint;
+    var lc = langCurrency();
+    var eqNames = (input.equipment && input.equipment.length) ? input.equipment.map(function(eq) {
+      return EQUIP_KEY_MAP[eq] ? t(EQUIP_KEY_MAP[eq]) : eq;
+    }).join(', ') : 'N/A';
+
+    // Build a hidden report container
+    var container = document.createElement('div');
+    container.style.cssText = 'position:fixed;left:-9999px;top:0;width:680px;background:#fff;font-family:system-ui,-apple-system,sans-serif;color:#1e293b;padding:40px 32px;';
+
+    container.innerHTML =
+      '<div style="border-bottom:3px solid #e11d48;padding-bottom:16px;margin-bottom:24px">' +
+        '<h1 style="font-size:22px;font-weight:900;margin:0 0 4px;color:#1e293b">🍳 ' + t('profit_calc_pdf_title') + '</h1>' +
+        '<p style="font-size:12px;color:#94a3b8;margin:0">' + t('profit_calc_pdf_footer') + ' ' + new Date().toLocaleDateString() + '</p>' +
+      '</div>' +
+
+      '<h2 style="font-size:15px;font-weight:700;color:#64748b;margin:0 0 12px;text-transform:uppercase;letter-spacing:0.05em">' + t('profit_calc_pdf_input') + '</h2>' +
+      pdfRow(t('profit_calc_pdf_country'), input.country) +
+      pdfRow(t('profit_calc_labor_cost'), lc.symbol + formatNumber(input.laborCost) + ' ' + lc.currency) +
+      pdfRow(t('profit_calc_pdf_daily_meals'), input.dailyMeals) +
+      pdfRow(t('profit_calc_pdf_main_challenge'), painLabel) +
+      pdfRow(t('profit_calc_pdf_planned_equipment'), eqNames) +
+      pdfRow(t('profit_calc_pdf_operator_reduction'), input.operatorReduction + ' ' + t('profit_calc_operator_unit')) +
+
+      '<h2 style="font-size:15px;font-weight:700;color:#64748b;margin:24px 0 12px;text-transform:uppercase;letter-spacing:0.05em">' + t('profit_calc_pdf_results') + '</h2>' +
+
+      '<div style="background:#fff1f2;border-radius:12px;padding:20px;margin-bottom:16px">' +
+        pdfRow(t('profit_calc_pdf_monthly_savings'), lc.symbol + formatNumber(result.monthlySavings.min) + ' – ' + lc.symbol + formatNumber(result.monthlySavings.max)) +
+        pdfRow(t('profit_calc_pdf_equipment_investment'), lc.symbol + formatNumber(result.investment.min) + ' – ' + lc.symbol + formatNumber(result.investment.max)) +
+        '<div style="display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid #fecdd3">' +
+          '<span style="color:#64748b;font-size:13px">' + t('profit_calc_pdf_payback_period') + '</span>' +
+          '<span style="font-weight:900;font-size:20px;color:#e11d48">' + result.payback.min + '–' + result.payback.max + ' ' + t('profit_calc_months') + '</span>' +
+        '</div>' +
+        pdfRow(t('profit_calc_pdf_5year_return'), lc.symbol + shortCurrency(result.fiveYearReturn.min, lc.symbol) + ' – ' + lc.symbol + shortCurrency(result.fiveYearReturn.max, lc.symbol)) +
+        pdfRow(t('profit_calc_pdf_annual_savings'), lc.symbol + shortCurrency(result.annualSavings.mid, lc.symbol)) +
+        pdfRow(t('profit_calc_pdf_co2'), result.co2.toFixed(1) + ' ' + t('profit_calc_co2_unit')) +
+      '</div>' +
+
+      '<div style="margin-top:24px;padding-top:16px;border-top:1px solid #e2e8f0">' +
+        '<p style="font-size:10px;color:#94a3b8;text-align:center;margin:0">' + t('profit_calc_pdf_disclaimer') + '</p>' +
+      '</div>';
+
+    document.body.appendChild(container);
+
+    html2canvas(container, {
+      scale: 2,
+      useCORS: true,
+      backgroundColor: '#ffffff',
+      logging: false
+    }).then(function(canvas) {
+      document.body.removeChild(container);
+
+      var JSPDF = window.jspdf.jsPDF || jsPDF;
+      var pdf = new JSPDF('p', 'mm', 'a4');
+      var pageWidth = pdf.internal.pageSize.getWidth();
+      var pageHeight = pdf.internal.pageSize.getHeight();
+      var margin = 10;
+      var contentWidth = pageWidth - margin * 2;
+      var imgHeight = canvas.height * contentWidth / canvas.width;
+
+      // Single page (content fits in A4)
+      if (imgHeight <= pageHeight - margin * 2) {
+        pdf.addImage(canvas.toDataURL('image/jpeg', 0.92), 'JPEG', margin, margin, contentWidth, imgHeight);
+      } else {
+        // Multi-page support
+        var pageImgHeight = pageHeight - margin * 2;
+        var remainingHeight = imgHeight;
+        var position = 0;
+        var page = 0;
+        while (remainingHeight > 0) {
+          if (page > 0) pdf.addPage();
+          pdf.addImage(canvas.toDataURL('image/jpeg', 0.92), 'JPEG',
+            margin, margin - position, contentWidth, imgHeight);
+          remainingHeight -= pageImgHeight;
+          position += pageImgHeight;
+          page++;
+        }
+      }
+
+      var filename = 'YuKoLi-ROI-Report-' + new Date().toISOString().slice(0, 10) + '.pdf';
+      pdf.save(filename);
+    }).catch(function(err) {
+      document.body.removeChild(container);
+      console.error('[ProfitCalc] PDF generation failed:', err);
+      // Fallback
+      generatePDFFallback(input, result, salaryInfo);
+    });
+  }
+
+  /** Simple table row helper */
+  function pdfRow(label, value) {
+    return '<div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid #e2e8f0">' +
+      '<span style="color:#64748b;font-size:13px">' + label + '</span>' +
+      '<span style="font-weight:700;font-size:13px;color:#1e293b">' + value + '</span>' +
+    '</div>';
+  }
+
+  /** Fallback: open print dialog */
+  function generatePDFFallback(input, result, salaryInfo) {
     var painLabel = PAIN_KEY_MAP[input.painPoint] ? t(PAIN_KEY_MAP[input.painPoint]) : input.painPoint;
     var lc = langCurrency();
     var eqNames = (input.equipment && input.equipment.length) ? input.equipment.map(function(eq) {
