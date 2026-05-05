@@ -1254,6 +1254,7 @@
     searchBound = false;
     initToggle();
     initSmartHeader();
+    if (typeof SlideMenu !== 'undefined' && SlideMenu.updateActive) SlideMenu.updateActive();
   });
 
   // 初始样式注入（立即执行）
@@ -1303,5 +1304,26 @@
 
     /** 关闭移动端搜索覆盖层 */
     closeMobileSearch: closeMobileSearch,
+
+    /** 更新子菜单项的 is-active 高亮（SPA 导航后调用） */
+    updateActive: function () {
+      var menuItems = getMenuItems();
+      var currentPath = location.pathname.replace(/\/$/, "");
+      menuItems.forEach(function (item) {
+        if (!item.children || item.children.length === 0) return;
+        var activeHref = findActiveChildHref(item.children);
+        var panel = document.querySelector('[data-menu-l2="' + item.id + '"]');
+        if (!panel) return;
+        var items = panel.querySelectorAll('.mobile-menu-l2-item');
+        for (var i = 0; i < items.length; i++) {
+          var href = items[i].getAttribute('href') || '';
+          if (href.replace(/\/$/, "") === activeHref.replace(/\/$/, "")) {
+            items[i].classList.add('is-active');
+          } else {
+            items[i].classList.remove('is-active');
+          }
+        }
+      });
+    },
   };
 })(window);
