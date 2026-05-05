@@ -286,9 +286,17 @@
   /* ───────── PDF generation (html2canvas + jsPDF) ───────── */
 
   function generatePDF(input, result, salaryInfo) {
+    // Debug: check library availability
+    console.log('[PC-PDF] html2canvas:', typeof html2canvas, '| window.jspdf:', typeof window.jspdf, '| jsPDF:', typeof jsPDF);
+
     // Check for required libraries
-    if (typeof html2canvas === 'undefined' || typeof window.jspdf === 'undefined' && typeof jsPDF === 'undefined') {
-      // Fallback to print-based method
+    if (typeof html2canvas === 'undefined') {
+      console.error('[PC-PDF] html2canvas not loaded!');
+      generatePDFFallback(input, result, salaryInfo);
+      return;
+    }
+    if (typeof window.jspdf === 'undefined' && typeof jsPDF === 'undefined') {
+      console.error('[PC-PDF] jsPDF not loaded! window.jspdf:', window.jspdf, '| jsPDF:', jsPDF);
       generatePDFFallback(input, result, salaryInfo);
       return;
     }
@@ -343,10 +351,11 @@
       scale: 2,
       useCORS: true,
       backgroundColor: '#ffffff',
-      logging: false,
+      logging: true,
       onclone: function(clonedDoc) {
         // Force visible in the cloned document for accurate capture
         var cloned = clonedDoc.body.lastChild;
+        console.log('[PC-PDF] onclone fired, cloned element:', cloned ? cloned.tagName : 'NULL', '| size:', cloned ? cloned.offsetWidth + 'x' + cloned.offsetHeight : 'N/A');
         if (cloned) {
           cloned.style.opacity = '1';
           cloned.style.position = 'absolute';
@@ -357,6 +366,7 @@
       }
     }).then(function(canvas) {
       document.body.removeChild(container);
+      console.log('[PC-PDF] canvas created:', canvas.width + 'x' + canvas.height);
 
       var JSPDF = window.jspdf.jsPDF || jsPDF;
       var pdf = new JSPDF('p', 'mm', 'a4');
@@ -386,10 +396,12 @@
       }
 
       var filename = 'YuKoLi-ROI-Report-' + new Date().toISOString().slice(0, 10) + '.pdf';
+      console.log('[PC-PDF] saving:', filename);
       pdf.save(filename);
+      console.log('[PC-PDF] save() completed');
     }).catch(function(err) {
       document.body.removeChild(container);
-      console.error('[ProfitCalc] PDF generation failed:', err);
+      console.error('[PC-PDF] html2canvas error:', err);
       // Fallback
       generatePDFFallback(input, result, salaryInfo);
     });
@@ -405,6 +417,7 @@
 
   /** Fallback: open print dialog */
   function generatePDFFallback(input, result, salaryInfo) {
+    console.warn('[PC-PDF] Using fallback (print) method');
     var painLabel = PAIN_KEY_MAP[input.painPoint] ? t(PAIN_KEY_MAP[input.painPoint]) : input.painPoint;
     var lc = langCurrency();
     var eqNames = (input.equipment && input.equipment.length) ? input.equipment.map(function(eq) {
