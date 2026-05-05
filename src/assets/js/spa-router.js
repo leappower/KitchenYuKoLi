@@ -283,31 +283,24 @@
       }
     },
 
-    // 获取骨架屏 HTML — 根据设备类型生成适配骨架
+    // 获取骨架屏 HTML — 三屏/全页面统一通用骨架
     getSkeletonHTML: function () {
-      var w = window.innerWidth || 1024;
-      var isMobile = w < 768;
-      var isTablet = w >= 768 && w < 1280;
-
-      // Hero: 标题 + 描述 + CTA（三屏共有的首屏结构）
+      // Hero: 标题 + 描述 + 2 个 CTA（三屏统一）
       var hero =
         '<div class="sk-hero">' +
           '<div class="sk-badge"></div>' +
-          '<div class="sk-line' + (isMobile ? ' sk-line--h2' : '') + '"></div>' +
+          '<div class="sk-line"></div>' +
           '<div class="sk-line sk-line--desc"></div>' +
-          (isMobile
-            ? '<div class="sk-line sk-line--desc sk-line--short"></div>'
-            : '<div class="sk-line sk-line--desc sk-line--short"></div>') +
+          '<div class="sk-line sk-line--desc sk-line--short"></div>' +
           '<div class="sk-cta-group">' +
             '<div class="sk-line sk-cta"></div>' +
-            (!isMobile ? '<div class="sk-line sk-cta sk-cta--outline"></div>' : '') +
+            '<div class="sk-line sk-cta sk-cta--outline"></div>' +
           '</div>' +
         '</div>';
 
-      // Content: 响应式卡片网格
-      var cols = isMobile ? 1 : isTablet ? 2 : 3;
+      // Content: 通用 3 卡片，交给 CSS 响应式排列
       var cards = '';
-      for (var i = 0; i < cols; i++) {
+      for (var i = 0; i < 3; i++) {
         cards += '<div class="sk-card"></div>';
       }
 

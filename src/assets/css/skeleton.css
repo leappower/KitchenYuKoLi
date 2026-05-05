@@ -127,7 +127,7 @@
   .sk-hero .sk-line { width: 80%; height: 26px; }
   .sk-line--desc { height: 14px; }
   .sk-cta { width: 100%; height: 40px; border-radius: 10px; }
-  .sk-cta--outline { display: none; } /* mobile: 单 CTA */
+  .sk-cta--outline { width: 100%; height: 40px; border-radius: 10px; }
   .sk-cta-group { flex-direction: column; width: 100%; gap: 10px; }
   .sk-grid { gap: 12px; }
   .sk-card { height: 180px; border-radius: 12px; }
