@@ -301,7 +301,7 @@
 
     // Build a hidden report container
     var container = document.createElement('div');
-    container.style.cssText = 'position:fixed;left:0;top:0;z-index:-1;width:680px;background:#fff;font-family:system-ui,-apple-system,sans-serif;color:#1e293b;padding:40px 32px;';
+    container.style.cssText = 'position:fixed;left:0;top:0;width:680px;background:#fff;font-family:system-ui,-apple-system,sans-serif;color:#1e293b;padding:40px 32px;opacity:0;pointer-events:none;';
 
     container.innerHTML =
       '<div style="border-bottom:3px solid #e11d48;padding-bottom:16px;margin-bottom:24px">' +
@@ -343,7 +343,18 @@
       scale: 2,
       useCORS: true,
       backgroundColor: '#ffffff',
-      logging: false
+      logging: false,
+      onclone: function(clonedDoc) {
+        // Force visible in the cloned document for accurate capture
+        var cloned = clonedDoc.body.lastChild;
+        if (cloned) {
+          cloned.style.opacity = '1';
+          cloned.style.position = 'absolute';
+          cloned.style.left = '0';
+          cloned.style.top = '0';
+          cloned.style.zIndex = '99999';
+        }
+      }
     }).then(function(canvas) {
       document.body.removeChild(container);
 
