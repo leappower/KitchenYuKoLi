@@ -178,7 +178,7 @@
               'transition-colors" aria-label="Menu">' +
               '<span class="material-symbols-outlined text-2xl">menu</span>' +
             '</button>' +
-            '<a class="nav-logo-link" href="' + basePath + '/home/">' +
+            '<a class="nav-logo-link hidden md:block" href="' + basePath + '/home/">' +
               '<img loading="eager" ' +
                 'src="' + basePath + '/assets/images/logo_footer.webp" ' +
                 'alt="Yukoli" width="32" height="32" ' +
@@ -201,7 +201,7 @@
                 'data-i18n-aria="lang_switcher_aria">' +
                 '<span class="material-symbols-outlined text-base ' +
                 'leading-none">language</span>' +
-                '<span id="current-lang-label" data-i18n="current_lang" class="hidden md:inline">' +
+                '<span id="current-lang-label" data-i18n="current_lang">' +
                 '中文（简体）</span>' +
                 '<span class="material-symbols-outlined text-xs opacity-40">' +
                 'expand_more</span>' +
