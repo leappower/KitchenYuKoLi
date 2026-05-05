@@ -380,7 +380,7 @@
       '<header class="fixed top-0 left-0 right-0 z-[var(--z-header)] ' +
         'border-b border-slate-200 dark:border-slate-800 ' +
         'bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md">' +
-        '<div class="max-w-[1920px] mx-auto px-6 md:px-10 lg:px-16 xl:px-20 ' +
+        '<div class="max-w-[1920px] mx-auto px-3 md:px-5 lg:px-5 xl:px-10 ' +
           'py-4 flex items-center justify-between" style="min-height:108px">' +
           /* 左侧：Logo + 导航 */
           '<div class="flex items-center gap-4 lg:gap-8">' +
