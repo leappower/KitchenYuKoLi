@@ -81,10 +81,10 @@
       '<div class="px-6 md:px-8 xl:px-10">' +
         '<h2 class="text-3xl font-black tracking-tight mb-10 text-center"' + attr(cfg.titleKey) + '>' + cfg.title + '</h2>' +
         '<div class="grid grid-cols-2 md:grid-cols-4 gap-6 ' + maxW + ' mx-auto">' +
-          renderWechatCard(cfg, 'pc') +
           renderWaCard(cfg, 'pc') +
           renderEmailCard(cfg, 'pc') +
           renderPhoneCard(cfg, 'pc') +
+          renderWechatCard(cfg, 'pc') +
         '</div>' +
       '</div>' +
     '</section>';
@@ -96,10 +96,10 @@
       '<div class="px-4">' +
         '<h3 class="text-slate-900 dark:text-slate-100 text-xl font-bold leading-tight mb-4"' + attr(cfg.titleKey) + '>' + cfg.title + '</h3>' +
         '<div class="flex flex-col gap-3">' +
-          renderWechatCard(cfg, 'mobile') +
           renderWaCard(cfg, 'mobile') +
           renderEmailCard(cfg, 'mobile') +
           renderPhoneCard(cfg, 'mobile') +
+          renderWechatCard(cfg, 'mobile') +
         '</div>' +
       '</div>' +
     '</section>';
