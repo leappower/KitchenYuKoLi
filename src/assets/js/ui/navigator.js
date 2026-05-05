@@ -978,6 +978,8 @@
    *   (e.g. "products", "applications", "support", "about")
    */
   function updateActive(activeSectionId) {
+    var _stack = new Error().stack;
+    console.log('[NAV-ACTIVE] updateActive called: activeSectionId="' + activeSectionId + '" | pathname=' + window.location.pathname + '\n' + _stack.split('\n').slice(1,4).join('\n'));
     activeSectionId = activeSectionId || "";
     var currentPath = window.location.pathname.replace(/\/$/, "") || "/";
 
@@ -1058,6 +1060,7 @@
       if (plainMatch) {
         plainEl.classList.add("text-primary");
         plainEl.classList.remove("hover\\:text-primary", "transition-colors");
+        console.log('[NAV-ACTIVE] ✅ plainLink ACTIVE:', plainKey);
       } else {
         plainEl.classList.remove("text-primary");
         plainEl.classList.add("hover\\:text-primary", "transition-colors");
