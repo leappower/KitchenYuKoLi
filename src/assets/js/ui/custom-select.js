@@ -66,7 +66,6 @@
       "  width: 100%; cursor: pointer; user-select: none;",
       "  -webkit-tap-highlight-color: transparent;",
       "  position: relative;",
-      "  border-width: 1px; border-style: solid;",
       "}",
       ".cs-trigger-text {",
       "  flex: 1; min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;",
@@ -363,6 +362,18 @@
     // Apply Tailwind classes
     if (bgClasses.length > 0) {
       this.trigger.classList.add.apply(this.trigger.classList, bgClasses);
+    }
+
+    // Ensure trigger has visible border (some selects only have border-color class
+    // but no border-width — Tailwind reset sets border-width: 0)
+    var hasBorderWidth = selectEl.classList.contains('border') ||
+      selectEl.classList.contains('border-2') ||
+      selectEl.classList.contains('border-y') ||
+      selectEl.classList.contains('border-t') ||
+      selectEl.classList.contains('border-b');
+    if (!hasBorderWidth) {
+      this.trigger.style.borderWidth = '1px';
+      this.trigger.style.borderStyle = 'solid';
     }
     this.trigger.setAttribute("tabindex", selectEl.disabled ? "-1" : "0");
     this.trigger.setAttribute("role", "combobox");
