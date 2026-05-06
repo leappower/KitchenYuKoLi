@@ -757,6 +757,11 @@
         scripts.push({ src: "/assets/js/home-core-products.js", id: "spa-home-core-products" });
       }
 
+      // Compare 页面需要 compare.js
+      if (path.indexOf("/products/compare/") !== -1) {
+        scripts.push({ src: "/assets/js/compare.js", id: "spa-compare" });
+      }
+
       // Load scripts sequentially (each waits for previous onload)
       var chain = Promise.resolve();
       var loaded = 0;
