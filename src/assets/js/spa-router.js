@@ -752,8 +752,8 @@
         scripts.push({ src: "/assets/js/cases-page.js", id: "spa-cases-page" });
       }
 
-      // Quote / profit-calculator / support/faq 需要 custom-select.js
-      if (path.indexOf("/quote/") !== -1 || path.indexOf("/profit-calculator/") !== -1 || path.indexOf("/support/") !== -1) {
+      // Quote / profit-calculator / support / landing 需要 custom-select.js
+      if (path.indexOf("/quote/") !== -1 || path.indexOf("/profit-calculator/") !== -1 || path.indexOf("/support/") !== -1 || path.indexOf("/landing/") !== -1) {
         if (!window.CustomSelect) {
           scripts.push({ src: "/assets/js/ui/dropdown-styles.js", id: "spa-dropdown-styles" });
           scripts.push({ src: "/assets/js/ui/custom-select.js", id: "spa-custom-select" });
