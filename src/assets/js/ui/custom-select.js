@@ -88,14 +88,14 @@
       "}",
 
       /* ─── Wrapper ─── */
-      ".cs-trigger-wrap { position: relative; }",
+      ".cs-trigger-wrap { position: relative; width: 100%; }",
       ".cs-trigger-wrap" + "." + DISABLED_CLASS + " .cs-trigger {",
       "  cursor: not-allowed; opacity: .5; pointer-events: none;",
       "}",
 
-      /* ─── Floating Panel (PC/Tablet) ─── */
+      /* ─── Floating Panel (PC/Tablet) — uses position:fixed to avoid overflow clipping ─── */
       ".cs-panel {",
-      "  position: absolute; left: 0; right: 0;",
+      "  position: fixed;",
       "  background: rgba(248,250,252,1);",
       "  border: .5px solid rgba(0,0,0,.08);",
       "  border-radius: 12px; padding: 4px;",
@@ -114,8 +114,8 @@
       "  transform: translateY(0) scale(1);",
       "  transition: opacity .15s ease, transform .25s cubic-bezier(.32,.72,0,1), visibility 0s 0s;",
       "}",
-      ".cs-panel-below { top: calc(100% + 6px); }",
-      ".cs-panel-above { bottom: calc(100% + 6px); }",
+      ".cs-panel-below { transform-origin: top center; }",
+      ".cs-panel-above { transform-origin: bottom center; }",
 
       /* ─── Items ─── */
       ".cs-item {",
@@ -548,22 +548,70 @@
     this.wrap.classList.add(OPEN_CLASS);
     this.trigger.setAttribute("aria-expanded", "true");
 
-    // Determine above/below based on viewport space
-    var rect = this.wrap.getBoundingClientRect();
+    // Position panel using fixed coordinates from trigger rect
+    var rect = this.trigger.getBoundingClientRect();
+    var panelWidth = rect.width;
+    var gap = 6;
     var spaceBelow = window.innerHeight - rect.bottom;
     var spaceAbove = rect.top;
-    if (spaceBelow < 280 && spaceAbove > spaceBelow) {
+    var openAbove = spaceBelow < 280 && spaceAbove > spaceBelow;
+
+    // Set position
+    this.panel.style.left = rect.left + "px";
+    this.panel.style.width = panelWidth + "px";
+
+    if (openAbove) {
       this.panel.classList.remove("cs-panel-below");
       this.panel.classList.add("cs-panel-above");
+      this.panel.style.top = "";
+      this.panel.style.bottom = (window.innerHeight - rect.top + gap) + "px";
     } else {
       this.panel.classList.remove("cs-panel-above");
       this.panel.classList.add("cs-panel-below");
+      this.panel.style.bottom = "";
+      this.panel.style.top = (rect.bottom + gap) + "px";
     }
+
+    // Bind scroll/resize reposition for this instance
+    var self = this;
+    this._onScrollResize = function () {
+      if (!self.wrap.classList.contains(OPEN_CLASS)) {
+        self._removeScrollResize();
+        return;
+      }
+      var r = self.trigger.getBoundingClientRect();
+      self.panel.style.left = r.left + "px";
+      self.panel.style.width = r.width + "px";
+      var sb = window.innerHeight - r.bottom;
+      var sa = r.top;
+      var above = sb < 280 && sa > sb;
+      if (above) {
+        self.panel.style.top = "";
+        self.panel.style.bottom = (window.innerHeight - r.top + gap) + "px";
+        self.panel.classList.remove("cs-panel-below");
+        self.panel.classList.add("cs-panel-above");
+      } else {
+        self.panel.style.bottom = "";
+        self.panel.style.top = (r.bottom + gap) + "px";
+        self.panel.classList.remove("cs-panel-above");
+        self.panel.classList.add("cs-panel-below");
+      }
+    };
+    window.addEventListener("scroll", this._onScrollResize, true);
+    window.addEventListener("resize", this._onScrollResize);
 
     // Focus search if available
     var searchInput = this.panel.querySelector(".cs-search");
     if (searchInput) {
       setTimeout(function () { searchInput.focus(); }, 50);
+    }
+  };
+
+  CustomSelectInstance.prototype._removeScrollResize = function () {
+    if (this._onScrollResize) {
+      window.removeEventListener("scroll", this._onScrollResize, true);
+      window.removeEventListener("resize", this._onScrollResize);
+      this._onScrollResize = null;
     }
   };
 
@@ -672,6 +720,14 @@
     this.wrap && this.wrap.classList.remove(OPEN_CLASS);
     this.trigger && this.trigger.setAttribute("aria-expanded", "false");
     this._closePopup();
+    this._removeScrollResize();
+    // Reset inline positioning so it doesn't linger
+    if (this.panel) {
+      this.panel.style.left = "";
+      this.panel.style.top = "";
+      this.panel.style.bottom = "";
+      this.panel.style.width = "";
+    }
   };
 
   /* Bind events */
