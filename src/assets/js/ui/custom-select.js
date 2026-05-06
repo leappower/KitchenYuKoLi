@@ -320,15 +320,22 @@
     }
 
     // Copy Tailwind classes from select to trigger (before mutating)
+    // Use indexOf with the class suffix portion, so dark:text-white matches text-white etc.
     var classList = selectEl.classList;
-    var styleTokens = ['border', 'bg-white', 'bg-white/', 'bg-slate-50', 'bg-transparent', 'dark:bg-slate', 'dark:border-slate', 'focus:ring', 'focus:border', 'rounded', 'transition', 'text-base', 'text-sm', 'text-slate', 'text-white', 'outline-none'];
+    var SKIP = { 'appearance-none': 1, 'w-full': 1, 'h-14': 1, 'h-12': 1, 'p-3': 1, 'p-2\.5': 1, 'px-4': 1, 'px-3': 1, 'py-3': 1 };
     var bgClasses = [];
     for (var c = 0; c < classList.length; c++) {
       var cls = classList[c];
-      if (cls === 'appearance-none') continue;
-      for (var t = 0; t < styleTokens.length; t++) {
-        if (cls.indexOf(styleTokens[t]) === 0) { bgClasses.push(cls); break; }
+      if (SKIP[cls]) continue;
+      // Strip responsive/state prefixes to get the raw Tailwind token
+      var token = cls.replace(/^(sm:|md:|lg:|xl:|dark:|focus:|hover:|active:)+/, '');
+      // Match visual-property prefixes (everything except layout/spacing)
+      var visPrefixes = ['border', 'bg', 'rounded', 'text', 'outline', 'transition', 'shadow', 'ring'];
+      var matched = false;
+      for (var v = 0; v < visPrefixes.length; v++) {
+        if (token.indexOf(visPrefixes[v]) === 0) { matched = true; break; }
       }
+      if (matched) bgClasses.push(cls);
     }
 
     // ★ NOW hide native select (after reading styles)
