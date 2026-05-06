@@ -66,7 +66,7 @@
       "  width: 100%; cursor: pointer; user-select: none;",
       "  -webkit-tap-highlight-color: transparent;",
       "  position: relative;",
-      "  border: 1px solid transparent;",
+      "  border-width: 1px; border-style: solid;",
       "}",
       ".cs-trigger-text {",
       "  flex: 1; min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;",
