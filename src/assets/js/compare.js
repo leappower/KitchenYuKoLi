@@ -342,6 +342,10 @@
 
   // ─── Init ────────────────────────────────────────────────────
   function init() {
+    // Hide product-grid.js floating bar on compare page (we have our own)
+    var floatBar = document.getElementById('compare-floating-bar');
+    if (floatBar) floatBar.style.display = 'none';
+
     var data = getProductData();
     if (!data) {
       // No cached data — fetch from API
