@@ -66,6 +66,7 @@
       "  width: 100%; cursor: pointer; user-select: none;",
       "  -webkit-tap-highlight-color: transparent;",
       "  position: relative;",
+      "  border: 1px solid transparent;",
       "}",
       ".cs-trigger-text {",
       "  flex: 1; min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;",
@@ -320,7 +321,7 @@
 
     // Copy Tailwind classes from select to trigger (before mutating)
     var classList = selectEl.classList;
-    var styleTokens = ['border', 'bg-white', 'dark:bg-slate', 'dark:bg-slate-8', 'dark:bg-slate-9', 'focus:ring', 'focus:border', 'rounded', 'transition', 'text-base', 'text-sm'];
+    var styleTokens = ['border', 'bg-white', 'bg-white/', 'bg-slate-50', 'bg-transparent', 'dark:bg-slate', 'dark:border-slate', 'focus:ring', 'focus:border', 'rounded', 'transition', 'text-base', 'text-sm', 'text-slate', 'text-white', 'outline-none'];
     var bgClasses = [];
     for (var c = 0; c < classList.length; c++) {
       var cls = classList[c];
