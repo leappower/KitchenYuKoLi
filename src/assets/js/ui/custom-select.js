@@ -309,7 +309,28 @@
 
     var selectEl = this.select;
 
-    // Hide native select
+    // ★ Read computed styles BEFORE hiding the native select
+    var selectStyle = window.getComputedStyle(selectEl);
+    var inheritProps = ['height', 'paddingTop', 'paddingRight', 'paddingBottom', 'paddingLeft', 'borderRadius', 'fontSize', 'fontWeight', 'letterSpacing', 'lineHeight'];
+    var computedStyle = {};
+    for (var p = 0; p < inheritProps.length; p++) {
+      var cssProp = inheritProps[p].replace(/([A-Z])/g, '-$1').toLowerCase();
+      computedStyle[inheritProps[p]] = selectStyle.getPropertyValue(cssProp);
+    }
+
+    // Copy Tailwind classes from select to trigger (before mutating)
+    var classList = selectEl.classList;
+    var styleTokens = ['border', 'bg-white', 'dark:bg-slate', 'dark:bg-slate-8', 'dark:bg-slate-9', 'focus:ring', 'focus:border', 'rounded', 'transition', 'text-base', 'text-sm'];
+    var bgClasses = [];
+    for (var c = 0; c < classList.length; c++) {
+      var cls = classList[c];
+      if (cls === 'appearance-none') continue;
+      for (var t = 0; t < styleTokens.length; t++) {
+        if (cls.indexOf(styleTokens[t]) === 0) { bgClasses.push(cls); break; }
+      }
+    }
+
+    // ★ NOW hide native select (after reading styles)
     selectEl.style.cssText = "position:absolute;width:1px;height:1px;overflow:hidden;opacity:0;pointer-events:none;clip:rect(0,0,0,0);";
 
     // Build trigger
@@ -318,30 +339,18 @@
 
     this.wrap = document.createElement("div");
     this.wrap.className = "cs-trigger-wrap" + (selectEl.disabled ? " " + DISABLED_CLASS : "");
-
     this.wrap.style.width = "100%";
 
     this.trigger = document.createElement("div");
     this.trigger.className = "cs-trigger";
 
-    // Inherit visual styles from native select so trigger looks identical
-    var selectStyle = window.getComputedStyle(selectEl);
-    var inheritProps = ['height', 'paddingTop', 'paddingRight', 'paddingBottom', 'paddingLeft', 'borderRadius', 'fontSize', 'fontWeight', 'letterSpacing', 'lineHeight'];
-    for (var p = 0; p < inheritProps.length; p++) {
-      var val = selectStyle.getPropertyValue(inheritProps[p].replace(/([A-Z])/g, '-$1').toLowerCase());
-      if (val) this.trigger.style[inheritProps[p]] = val;
+    // Apply pre-read computed styles (use array order, not for-in)
+    for (var s = 0; s < inheritProps.length; s++) {
+      var val = computedStyle[inheritProps[s]];
+      if (val) this.trigger.style[inheritProps[s]] = val;
     }
-    // Copy border/bg/focus from select classList to trigger
-    var bgClasses = [];
-    var classList = selectEl.classList;
-    var styleTokens = ['border', 'bg-white', 'dark:bg-slate', 'dark:bg-slate-8', 'dark:bg-slate-9', 'focus:ring', 'focus:border', 'rounded', 'transition', 'text-base', 'text-sm'];
-    for (var c = 0; c < classList.length; c++) {
-      var cls = classList[c];
-      if (cls === 'appearance-none') continue;
-      for (var t = 0; t < styleTokens.length; t++) {
-        if (cls.indexOf(styleTokens[t]) === 0) { bgClasses.push(cls); break; }
-      }
-    }
+
+    // Apply Tailwind classes
     if (bgClasses.length > 0) {
       this.trigger.classList.add.apply(this.trigger.classList, bgClasses);
     }
