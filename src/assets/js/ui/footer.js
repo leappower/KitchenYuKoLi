@@ -40,7 +40,9 @@
           o = e.key ? '<p class="text-[10px] font-bold uppercase tracking-wider" data-i18n="' + r(e.key) + '">' + r(e.key) + "</p>" : "";
         var whatsappHref = 'https://wa.me/' + (window.Contacts ? window.Contacts.whatsapp : '8613163756465');
         return e.isWhatsApp
-          ? '<a class="whatsapp-tab-item relative flex flex-1 flex-col items-center justify-center gap-1 ' + (n = "text-[#25d366]") + '" href="' + whatsappHref + '" data-wa-message-key="wa_msg_contact" data-wa-source="footer-tab" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp"><span class="material-symbols-outlined relative" style="font-size:26px">' + r(e.icon) + "</span>" + o + "</a>"
+                    ? '<a class="whatsapp-tab-item relative flex flex-1 flex-col items-center justify-center gap-1 ' + (n = "text-[#25d366]") + '" href="' + whatsappHref +
+            '" data-wa-message-key="wa_msg_contact" data-wa-source="footer-tab" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp"><span class="material-symbols-outlined relative" style="font-size:26px">' + r(e.icon) + "</span>" + o +
+            "</a>"
           : '<a class="relative flex flex-1 flex-col items-center justify-center gap-1 ' + n + '" href="' + r(e.href) + '"><span class="material-symbols-outlined relative"' + i + '>' + r(e.icon) + "</span>" + o + "</a>";
       }).join("\n")
     }(a, t) + "</div></div>"
@@ -96,7 +98,10 @@
         }
         var f = o && o.id === e,
           d = n.querySelector(".material-symbols-outlined");
-        f ? (n.className = "flex flex-1 flex-col items-center justify-center gap-1 text-primary", d && o && o.fill && d.setAttribute("style", "font-variation-settings: 'FILL' 1;")) : (n.className = "flex flex-1 flex-col items-center justify-center gap-1 text-slate-400 dark:text-slate-500", d && d.removeAttribute("style"))
+        f ? (n.className = "flex flex-1 flex-col items-center justify-center gap-1 text-primary",
+          d && o && o.fill && d.setAttribute("style", "font-variation-settings: 'FILL' 1;"))
+        : (n.className = "flex flex-1 flex-col items-center justify-center gap-1 text-slate-400 dark:text-slate-500",
+          d && d.removeAttribute("style"))
       }
     }
   }, window.addEventListener("resize", function() {

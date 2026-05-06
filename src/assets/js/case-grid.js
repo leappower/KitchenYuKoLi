@@ -8,14 +8,54 @@
 
   /* ── Mock Data ──────────────────────────────────── */
   var ROI_CASES = [
-    { slug: 'manila-small-resto-labor-62', country: '🇵🇭 Philippines', industry: '小型餐饮', volume: '200-500', benefit: 'Labor Cost Reduction', dailyOutput: 350, laborBefore: 4, laborAfter: 2, monthlySaving: 'PHP 48,000', payback: 7.8, title: 'Manila 快餐店：引入炒菜机后人工成本降 62%', quote: '"以前每天炒菜 12 小时，现在只要 2.5 小时。"' },
-    { slug: 'jakarta-central-kitchen-450', country: '🇮🇩 Indonesia', industry: '中央厨房', volume: '500-1000', benefit: 'Consistency', dailyOutput: 450, laborBefore: 11, laborAfter: 5, monthlySaving: 'IDR 18M', payback: 9.2, title: 'Jakarta 中央厨房：450 餐/天，出品一致性 97%', quote: '"口味终于稳定了，连锁店的投诉率下降了 80%。"' },
-    { slug: 'hcmc-cloud-kitchen-compact', country: '🇻🇳 Vietnam', industry: '云厨房', volume: '<200', benefit: 'Space Saving', dailyOutput: 150, laborBefore: 3, laborAfter: 1, monthlySaving: 'VND 14M', payback: 5.5, title: '胡志明市云厨房：15㎡ 完成全品类出餐', quote: '"空间小但能做的菜很多，客户都以为是专业大厨房。"' },
-    { slug: 'bangkok-chain-8-stores', country: '🇹🇭 Thailand', industry: '连锁餐饮', volume: '1000+', benefit: 'Consistency', dailyOutput: 1200, laborBefore: 24, laborAfter: 12, monthlySaving: 'THB 270K', payback: 11.3, title: '曼谷火锅连锁 8 店：口味标准化 + 培训周期缩短 75%', quote: '"新店开业第 2 周就能正常出餐，以前至少要 2 个月。"' },
-    { slug: 'kl-canteen-2000-meals', country: '🇲🇾 Malaysia', industry: '智慧食堂', volume: '1000+', benefit: 'Fast Payback', dailyOutput: 2000, laborBefore: 15, laborAfter: 6, monthlySaving: 'MYR 13,500', payback: 6.2, title: '吉隆坡工厂食堂：2000 餐/天，6.2 个月回本', quote: '"工人最喜欢的是清洗方便，10 分钟就能搞定。"' },
-    { slug: 'cebu-small-resto-payback', country: '🇵🇭 Philippines', industry: '小型餐饮', volume: '200-500', benefit: 'Fast Payback', dailyOutput: 280, laborBefore: 3, laborAfter: 1, monthlySaving: 'PHP 32,000', payback: 4.8, title: 'Cebu 小吃店：投资 1 台，4.8 个月回本', quote: '"最好的投资决定，省下来的钱已经买第二台了。"' },
-    { slug: 'surabaya-central-automation', country: '🇮🇩 Indonesia', industry: '中央厨房', volume: '500-1000', benefit: 'Labor Cost Reduction', dailyOutput: 800, laborBefore: 18, laborAfter: 8, monthlySaving: 'IDR 24M', payback: 8.5, title: '泗水中央厨房：自动化后废品率从 8% 降至 1.2%', quote: '"食品浪费大幅减少，每个月节省的食材钱就很可观。"' },
-    { slug: 'hanoi-street-food-modern', country: '🇻🇳 Vietnam', industry: '小型餐饮', volume: '<200', benefit: 'Consistency', dailyOutput: 180, laborBefore: 2, laborAfter: 1, monthlySaving: 'VND 8M', payback: 5.1, title: '河内街头小吃升级：1 台机器 + 1 个人 = 全品类菜单', quote: '"Phở 和 Bánh Mì 都能用，外国游客也夸味道好。"' }
+    { slug: 'manila-small-resto-labor-62', country: '🇵🇭 Philippines',
+      industry: '小型餐饮', volume: '200-500', benefit: 'Labor Cost Reduction',
+      dailyOutput: 350, laborBefore: 4, laborAfter: 2, monthlySaving: 'PHP 48,000',
+      payback: 7.8,
+      title: 'Manila 快餐店：引入炒菜机后人工成本降 62%',
+      quote: '"以前每天炒菜 12 小时，现在只要 2.5 小时。"' },
+    { slug: 'jakarta-central-kitchen-450', country: '🇮🇩 Indonesia',
+      industry: '中央厨房', volume: '500-1000', benefit: 'Consistency',
+      dailyOutput: 450, laborBefore: 11, laborAfter: 5, monthlySaving: 'IDR 18M',
+      payback: 9.2,
+      title: 'Jakarta 中央厨房：450 餐/天，出品一致性 97%',
+      quote: '"口味终于稳定了，连锁店的投诉率下降了 80%。"' },
+    { slug: 'hcmc-cloud-kitchen-compact', country: '🇻🇳 Vietnam',
+      industry: '云厨房', volume: '<200', benefit: 'Space Saving',
+      dailyOutput: 150, laborBefore: 3, laborAfter: 1, monthlySaving: 'VND 14M',
+      payback: 5.5,
+      title: '胡志明市云厨房：15㎡ 完成全品类出餐',
+      quote: '"空间小但能做的菜很多，客户都以为是专业大厨房。"' },
+    { slug: 'bangkok-chain-8-stores', country: '🇹🇭 Thailand',
+      industry: '连锁餐饮', volume: '1000+', benefit: 'Consistency',
+      dailyOutput: 1200, laborBefore: 24, laborAfter: 12, monthlySaving: 'THB 270K',
+      payback: 11.3,
+      title: '曼谷火锅连锁 8 店：口味标准化 + 培训周期缩短 75%',
+      quote: '"新店开业第 2 周就能正常出餐，以前至少要 2 个月。"' },
+    { slug: 'kl-canteen-2000-meals', country: '🇲🇾 Malaysia',
+      industry: '智慧食堂', volume: '1000+', benefit: 'Fast Payback',
+      dailyOutput: 2000, laborBefore: 15, laborAfter: 6, monthlySaving: 'MYR 13,500',
+      payback: 6.2,
+      title: '吉隆坡工厂食堂：2000 餐/天，6.2 个月回本',
+      quote: '"工人最喜欢的是清洗方便，10 分钟就能搞定。"' },
+    { slug: 'cebu-small-resto-payback', country: '🇵🇭 Philippines',
+      industry: '小型餐饮', volume: '200-500', benefit: 'Fast Payback',
+      dailyOutput: 280, laborBefore: 3, laborAfter: 1, monthlySaving: 'PHP 32,000',
+      payback: 4.8,
+      title: 'Cebu 小吃店：投资 1 台，4.8 个月回本',
+      quote: '"最好的投资决定，省下来的钱已经买第二台了。"' },
+    { slug: 'surabaya-central-automation', country: '🇮🇩 Indonesia',
+      industry: '中央厨房', volume: '500-1000', benefit: 'Labor Cost Reduction',
+      dailyOutput: 800, laborBefore: 18, laborAfter: 8, monthlySaving: 'IDR 24M',
+      payback: 8.5,
+      title: '泗水中央厨房：自动化后废品率从 8% 降至 1.2%',
+      quote: '"食品浪费大幅减少，每个月节省的食材钱就很可观。"' },
+    { slug: 'hanoi-street-food-modern', country: '🇻🇳 Vietnam',
+      industry: '小型餐饮', volume: '<200', benefit: 'Consistency',
+      dailyOutput: 180, laborBefore: 2, laborAfter: 1, monthlySaving: 'VND 8M',
+      payback: 5.1,
+      title: '河内街头小吃升级：1 台机器 + 1 个人 = 全品类菜单',
+      quote: '"Phở 和 Bánh Mì 都能用，外国游客也夸味道好。"' }
   ]
 
   /* ── Filter Definitions ─────────────────────────── */
@@ -213,7 +253,8 @@
         '<div class="flex gap-1">'
       html += '<button data-filter="' + key + '" data-value="" class="case-filter-btn px-3 py-1.5 text-xs font-semibold rounded-full border transition-all border-primary bg-primary text-white">全部</button>'
       for (var i = 0; i < f.options.length; i++) {
-        html += '<button data-filter="' + key + '" data-value="' + f.options[i] + '" class="case-filter-btn px-3 py-1.5 text-xs font-semibold rounded-full border transition-all border-slate-300 dark:border-slate-600 text-slate-600 dark:text-slate-300 hover:border-primary hover:text-primary">' + f.options[i] + '</button>'
+                html += '<button data-filter="' + key + '" data-value="' + f.options[i] +
+          '" class="case-filter-btn px-3 py-1.5 text-xs font-semibold rounded-full border transition-all border-slate-300 dark:border-slate-600 text-slate-600 dark:text-slate-300 hover:border-primary hover:text-primary">' + f.options[i] + '</button>'
       }
       html += '</div></div>'
     }
@@ -243,7 +284,8 @@
         '<div class="flex flex-wrap gap-1.5">'
       html += '<button data-filter="' + key + '" data-value="" class="case-filter-btn px-3 py-1.5 text-xs font-semibold rounded-full border transition-all border-primary bg-primary text-white">全部</button>'
       for (var i = 0; i < f.options.length; i++) {
-        html += '<button data-filter="' + key + '" data-value="' + f.options[i] + '" class="case-filter-btn px-3 py-1.5 text-xs font-semibold rounded-full border transition-all border-slate-300 dark:border-slate-600 text-slate-600 dark:text-slate-300 hover:border-primary hover:text-primary">' + f.options[i] + '</button>'
+                html += '<button data-filter="' + key + '" data-value="' + f.options[i] +
+          '" class="case-filter-btn px-3 py-1.5 text-xs font-semibold rounded-full border transition-all border-slate-300 dark:border-slate-600 text-slate-600 dark:text-slate-300 hover:border-primary hover:text-primary">' + f.options[i] + '</button>'
       }
       html += '</div></div>'
     }
@@ -273,7 +315,16 @@
     var html = '<div class="flex items-center gap-2 overflow-x-auto scrollbar-hide pb-1">'
     for (var key in FILTERS) {
       var f = FILTERS[key]
-      html += '<select data-filter-select="' + key + '" class="case-filter-select flex-shrink-0 px-3 py-2 text-xs font-semibold rounded-lg border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 appearance-none cursor-pointer min-w-[110px]" style="background-image: url(\'data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%2212%22 height=%2212%22 viewBox=%220 0 24 24%22 fill=%22none%22 stroke=%22%2394a3b8%22 stroke-width=%222%22><path d=%22M6 9l6 6 6-6%22/></svg>\'); background-repeat: no-repeat; background-position: right 8px center; padding-right: 28px;">'
+            html +=
+        '<select data-filter-select="' + key + '"' +
+        ' class="case-filter-select flex-shrink-0 px-3 py-2 text-xs font-semibold' +
+        ' rounded-lg border border-slate-300 dark:border-slate-600' +
+        ' bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200' +
+        ' appearance-none cursor-pointer min-w-[110px]"' +
+        " style='background-image: url(\"data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22" +
+        " width=%2212%22 height=%2212%22 viewBox=%220 0 24 24%22 fill=%22none%22" +
+        " stroke=%22%2394a3b8%22 stroke-width=%222%22><path d=%22M6 9l6 6 6-6%22/></svg>\');" +
+        " background-repeat: no-repeat; background-position: right 8px center; padding-right: 28px;'>";
       html += '<option value="">' + f.label + '</option>'
       for (var i = 0; i < f.options.length; i++) {
         html += '<option value="' + f.options[i] + '">' + f.options[i] + '</option>'
@@ -331,3 +382,4 @@
   /* ── Auto-init based on data attribute ──────────── */
   window.CaseGrid = { init: init, FILTERS: FILTERS, ROI_CASES: ROI_CASES }
 })()
+
