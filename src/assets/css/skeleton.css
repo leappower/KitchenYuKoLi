@@ -50,6 +50,8 @@
   height: 22px;
   border-radius: 9999px;
   margin-bottom: 16px;
+  margin-left: auto;
+  margin-right: auto;
   background: linear-gradient(90deg, #e8e8e8 25%, #d4d4d4 50%, #e8e8e8 75%);
   background-size: 200% 100%;
   animation: sk-shimmer 1.5s infinite;
@@ -61,6 +63,8 @@
   height: 32px;
   border-radius: 8px;
   margin-bottom: 12px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 /* Mobile h2 稍小 */
@@ -90,6 +94,8 @@
   margin-top: 20px;
   justify-content: center;
   width: 100%;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .sk-cta {
@@ -126,20 +132,14 @@
   animation: sk-shimmer 1.5s infinite;
 }
 
-/* 确保 hero 内所有子元素居中（覆盖可能的 width 继承） */
-.sk-hero > * {
-  margin-left: auto;
-  margin-right: auto;
-}
-
 /* ───────── 响应式：Mobile ───────── */
 @media (width <= 767px) {
   .sk-hero { margin-bottom: 1rem; }
   .sk-badge { width: 80px; height: 18px; }
   .sk-hero .sk-line { width: 80%; height: 26px; }
   .sk-line--desc { height: 14px; }
-  .sk-cta { width: 100%; height: 40px; border-radius: 10px; }
-  .sk-cta--outline { width: 100%; height: 40px; border-radius: 10px; }
+  .sk-cta { width: 100%; height: 40px; border-radius: 10px; margin-left: auto; margin-right: auto; }
+  .sk-cta--outline { width: 100%; height: 40px; border-radius: 10px; margin-left: auto; margin-right: auto; }
   .sk-cta-group { flex-direction: column; width: 100%; gap: 10px; }
   .sk-grid { gap: 12px; }
   .sk-card { height: 180px; border-radius: 12px; }
