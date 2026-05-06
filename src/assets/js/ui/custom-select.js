@@ -276,22 +276,24 @@
       });
     }
     // optgroups
-    for (var g = 0; g < this.select.children.length; g++) {
-      var child = this.select.children[g];
-      if (child.tagName && child.tagName.toLowerCase() === "optgroup") {
-        var label = child.getAttribute("label") || "";
-        var groupOpts = [];
-        for (var j = 0; j < child.options.length; j++) {
-          var go = child.options[j];
-          groupOpts.push({
+    if (this.select.children) {
+      for (var g = 0; g < this.select.children.length; g++) {
+        var child = this.select.children[g];
+        if (child.tagName && child.tagName.toLowerCase() === "optgroup") {
+          var label = child.getAttribute("label") || "";
+          var groupOpts = [];
+          for (var j = 0; j < (child.options && child.options.length || 0); j++) {
+            var go = child.options[j];
+            groupOpts.push({
             value: go.value,
             text: go.text,
             selected: go.selected,
             disabled: go.disabled,
             i18n: go.getAttribute("data-i18n") || "",
           });
+          }
+          groups.push({ label: label, options: groupOpts });
         }
-        groups.push({ label: label, options: groupOpts });
       }
     }
     return { options: opts, groups: groups };
@@ -858,6 +860,8 @@
     for (var i = 0; i < els.length; i++) {
       // Skip if already initialized
       if (els[i]._customSelectInstance) continue;
+      // Skip selects with no options (may be populated later by JS)
+      if (els[i].options.length === 0 && els[i].children.length === 0) continue;
       var inst = new CustomSelectInstance(els[i]);
       inst.render();
       els[i]._customSelectInstance = inst;
