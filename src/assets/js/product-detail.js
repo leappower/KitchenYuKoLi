@@ -330,7 +330,7 @@
   document.addEventListener("spa:load", function() {
     var segs = location.pathname.split("/").filter(Boolean);
     console.log('[ProductDetail] spa:load fired, pathname:', location.pathname, 'segs:', segs);
-    if (segs.length === 2 && segs[0] === "products") {
+    if (segs.length === 2 && segs[0] === "products" && segs[1] !== "compare") {
       console.log('[ProductDetail] Will render PDP in 100ms');
       setTimeout(renderPDP, 100);
     }
