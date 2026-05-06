@@ -51,20 +51,6 @@
     <link rel="stylesheet" href="/assets/css/performance-optimizations.css" />
     <style>
       body { font-family: "Public Sans", sans-serif; }
-      .compare-card {
-        transition: all 0.25s ease;
-        cursor: pointer;
-        -webkit-tap-highlight-color: transparent;
-      }
-      .compare-card:active {
-        transform: scale(0.98);
-      }
-      .compare-card.selected {
-        box-shadow: 0 0 0 2px #ec5b13;
-      }
-      .compare-card.selected .select-badge {
-        display: flex;
-      }
       .diff-highlight {
         background: rgba(236, 91, 19, 0.08);
         border-radius: 4px;
@@ -73,15 +59,6 @@
       }
       .scrollbar-hide::-webkit-scrollbar { display: none; }
       .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
-      .category-pill {
-        transition: all 0.2s ease;
-        white-space: nowrap;
-      }
-      .category-pill.active {
-        background: #ec5b13;
-        color: white;
-        border-color: #ec5b13;
-      }
     </style>
     <script>
       (function () {
@@ -142,25 +119,16 @@
         </div>
       </section>
 
-      <!-- Product Selection -->
-      <section id="product-selection" class="w-full px-4 pb-6">
-        <!-- Category pills (scrollable) -->
-        <div class="flex items-center gap-2 overflow-x-auto scrollbar-hide pb-3" id="compare-category-tabs"></div>
-        <!-- Product list (compact list style) -->
-        <div id="compare-product-grid" class="flex flex-col gap-2"></div>
-      </section>
-
       <!-- Comparison Table (vertical stack for mobile) -->
       <section id="comparison-section" class="w-full px-4 pb-6 hidden">
         <div class="flex items-center justify-between mb-3">
           <h2 class="text-base font-black text-slate-900 dark:text-white">参数对比</h2>
-          <a href="#product-selection" onclick="event.preventDefault();document.getElementById('product-selection').scrollIntoView({behavior:'smooth',block:'start'})" class="text-[10px] text-primary font-bold flex items-center gap-0.5 hover:underline">
+          <a href="/products/" id="compare-add-more" class="text-[10px] text-primary font-bold flex items-center gap-0.5 hover:underline">
             <span class="material-symbols-outlined text-xs">edit</span>
             修改
           </a>
         </div>
         <div id="comparison-table" class="flex flex-col gap-3">
-          <!-- JS renders stacked product comparison cards -->
         </div>
       </section>
 
@@ -171,9 +139,13 @@
             <span class="material-symbols-outlined text-2xl text-primary">compare</span>
           </div>
           <h3 class="text-base font-black text-slate-900 dark:text-white mb-1.5">选择产品对比</h3>
-          <p class="text-xs text-slate-500 dark:text-slate-400">
-            从下方选择 2~3 款产品查看参数对比。
+          <p class="text-xs text-slate-500 dark:text-slate-400 mb-4">
+            请先在<a href="/products/" class="text-primary font-bold hover:underline">产品页</a>选择 2~3 款产品。
           </p>
+          <a href="/products/" class="inline-flex items-center gap-1 bg-primary text-white px-5 py-2.5 rounded-xl font-bold text-xs">
+            <span class="material-symbols-outlined text-sm">arrow_forward</span>
+            前往产品页
+          </a>
         </div>
       </section>
 
@@ -226,282 +198,7 @@
     <script defer src="/assets/js/product-grid.js?v=20260506"></script>
     <script defer src="/assets/js/ui/search-engine.js"></script>
     <script defer src="/assets/js/product-detail.js?v=20260422"></script>
-
-    <script>
-    (function() {
-      'use strict';
-      var MAX_COMPARE = 3;
-      var COMPARE_KEY = 'YUKOLI_COMPARE_ITEMS';
-      var selected = (function() { try { var d = localStorage.getItem(COMPARE_KEY); return d ? JSON.parse(d) : []; } catch(e) { return []; } })();
-
-      function esc(s) {
-        if (!s) return '';
-        return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
-      }
-
-      function getImageUrl(p) {
-        if (p.images && Array.isArray(p.images) && p.images.length > 0) {
-          var primary = p.images.find(function(i){ return i.isPrimary; }) || p.images[0];
-          if (primary && primary.filePath) return primary.filePath;
-        }
-        if (p.image) return p.image;
-        if (p.imageUrl) return p.imageUrl;
-        return '/assets/images/products/' + (p.model || 'default') + '.webp';
-      }
-
-      function getProductList() {
-        var result = [];
-        if (!Array.isArray(window.PRODUCT_DATA_TABLE)) return result;
-        window.PRODUCT_DATA_TABLE.forEach(function(cat) {
-          if (!cat.products || !Array.isArray(cat.products)) return;
-          cat.products.forEach(function(p) {
-            result.push(Object.assign({}, p, {
-              _category: cat.category || cat.slug || '',
-              _categoryName: cat.categoryName || cat.category || '',
-              _imageUrl: getImageUrl(p)
-            }));
-          });
-        });
-        return result;
-      }
-
-      function getCategories() {
-        if (!Array.isArray(window.PRODUCT_DATA_TABLE)) return [];
-        return window.PRODUCT_DATA_TABLE.map(function(cat) {
-          var name = cat.categoryName || cat.category;
-          var translated = (typeof window.t === 'function') ? window.t(cat.category) : null;
-          var label = (translated && translated !== cat.category) ? translated : name;
-          return { key: cat.category || cat.slug, name: label };
-        }).filter(function(c){ return c.key; });
-      }
-
-      var activeCategory = 'all';
-
-      function renderCategoryTabs() {
-        var container = document.getElementById('compare-category-tabs');
-        if (!container) return;
-        var cats = getCategories();
-        var html = '<button class="category-pill active px-3 py-1.5 text-[11px] font-bold rounded-full border border-primary bg-primary text-white" data-cat="all">全部</button>';
-        cats.forEach(function(c) {
-          html += '<button class="category-pill px-3 py-1.5 text-[11px] font-medium rounded-full border border-slate-200 dark:border-slate-700" data-cat="' + esc(c.key) + '">' + esc(c.name) + '</button>';
-        });
-        container.innerHTML = html;
-        container.addEventListener('click', function(e) {
-          var btn = e.target.closest('.category-pill');
-          if (!btn) return;
-          activeCategory = btn.dataset.cat;
-          container.querySelectorAll('.category-pill').forEach(function(b) {
-            b.classList.remove('active', 'bg-primary', 'text-white', 'border-primary');
-          });
-          btn.classList.add('active', 'bg-primary', 'text-white', 'border-primary');
-          renderProductCards();
-        });
-      }
-
-      function renderProductCards() {
-        var grid = document.getElementById('compare-product-grid');
-        if (!grid) return;
-        var products = getProductList();
-        if (activeCategory !== 'all') {
-          products = products.filter(function(p) { return p._category === activeCategory; });
-        }
-        grid.innerHTML = products.map(function(p) {
-          var model = esc(p.model || '');
-          var name = esc(p.name || model);
-          var img = esc(p._imageUrl);
-          var isSelected = selected.some(function(s){ return s.model === p.model; });
-          var specs = [];
-          if (p.power) specs.push(esc(p.power));
-          if (p.throughput) specs.push(esc(p.throughput));
-          var specHTML = specs.slice(0,2).map(function(s) {
-            return '<span class="px-1.5 py-0.5 bg-primary/10 text-primary text-[10px] font-medium rounded">' + s + '</span>';
-          }).join('');
-
-          return '<div class="compare-card flex items-center gap-3 p-3 bg-white dark:bg-slate-800 rounded-xl border-2 ' +
-            (isSelected ? 'border-primary selected' : 'border-slate-200 dark:border-slate-700') + ' relative" data-model="' + model + '">' +
-            (isSelected ? '<div class="select-badge absolute top-2 right-2 w-5 h-5 bg-primary text-white rounded-full items-center justify-center z-10"><span class="material-symbols-outlined text-xs">check</span></div>' : '') +
-            '<div class="w-16 h-16 rounded-lg bg-slate-100 dark:bg-slate-700 flex-shrink-0 overflow-hidden">' +
-              '<img loading="lazy" alt="' + name + '" class="w-full h-full object-cover" src="' + img + '" onerror="this.src=\'/assets/images/products/default.webp\'">' +
-            '</div>' +
-            '<div class="flex-1 min-w-0">' +
-              '<h3 class="text-sm font-bold text-slate-900 dark:text-white mb-0.5 truncate">' + name + '</h3>' +
-              '<p class="text-[10px] text-slate-400 mb-1.5">' + esc(model) + '</p>' +
-              (specHTML ? '<div class="flex flex-wrap gap-1 mb-1.5">' + specHTML + '</div>' : '') +
-            '</div>' +
-            '<button class="compare-toggle flex-shrink-0 px-3 py-2 rounded-lg text-[11px] font-bold transition-all ' +
-              (isSelected ? 'bg-primary/10 text-primary border border-primary' : 'bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-300 border border-transparent') +
-              '">' +
-              (isSelected ? '✓' : '+') +
-            '</button>' +
-          '</div>';
-        }).join('');
-        grid.querySelectorAll('.compare-card').forEach(function(card) {
-          card.addEventListener('click', function() {
-            var model = this.dataset.model;
-            var products = getProductList();
-            var product = products.find(function(p){ return p.model === model; });
-            if (!product) return;
-            toggleSelect(product);
-          });
-        });
-      }
-
-      function saveToStorage() {
-        try { localStorage.setItem(COMPARE_KEY, JSON.stringify(selected)); } catch(e) {}
-      }
-
-      function toggleSelect(product) {
-        var idx = selected.findIndex(function(s){ return s.model === product.model; });
-        if (idx >= 0) { selected.splice(idx, 1); }
-        else {
-          if (selected.length >= MAX_COMPARE) { showToast('最多选择 ' + MAX_COMPARE + ' 款'); return; }
-          selected.push(product);
-        }
-        saveToStorage();
-        renderProductCards(); renderCompareBar(); renderComparisonTable(); updateEmptyState();
-      }
-
-      function removeSelected(model) {
-        selected = selected.filter(function(s){ return s.model !== model; });
-        saveToStorage();
-        renderProductCards(); renderCompareBar(); renderComparisonTable(); updateEmptyState();
-      }
-
-      function renderCompareBar() {
-        var bar = document.getElementById('compare-bar');
-        var items = document.getElementById('compare-bar-items');
-        var countEl = document.getElementById('compare-count');
-        if (!bar || !items) return;
-        if (selected.length === 0) { bar.classList.add('hidden'); return; }
-        bar.classList.remove('hidden');
-        countEl.textContent = selected.length;
-        items.innerHTML = selected.map(function(p) {
-          return '<div class="flex items-center gap-1 bg-slate-100 dark:bg-slate-700 rounded-md px-2 py-1 flex-shrink-0">' +
-            '<img src="' + esc(p._imageUrl) + '" class="w-5 h-5 rounded object-cover" onerror="this.src=\'/assets/images/products/default.webp\'">' +
-            '<span class="text-[10px] font-bold text-slate-900 dark:text-white truncate max-w-[60px]">' + esc(p.name || p.model) + '</span>' +
-            '<button class="remove-compare flex-shrink-0 text-slate-400 hover:text-red-500" data-model="' + esc(p.model) + '">' +
-              '<span class="material-symbols-outlined text-xs">close</span></button></div>';
-        }).join('');
-        items.querySelectorAll('.remove-compare').forEach(function(btn) {
-          btn.addEventListener('click', function(e) { e.stopPropagation(); removeSelected(this.dataset.model); });
-        });
-      }
-
-      var clearBtn = document.getElementById('compare-clear-btn');
-      if (clearBtn) {
-        clearBtn.addEventListener('click', function() {
-          selected = [];
-          try { localStorage.removeItem(COMPARE_KEY); } catch(e) {}
-          renderProductCards(); renderCompareBar(); renderComparisonTable(); updateEmptyState();
-        });
-      }
-
-      var COMPARE_ROWS = [
-        { key: 'name', label: '产品名称', fn: function(p){ return p.name || p.model || '—'; } },
-        { key: 'model', label: '型号', fn: function(p){ return p.model || '—'; } },
-        { key: 'category', label: '分类', fn: function(p){ return p.subCategory || p._categoryName || '—'; } },
-        { key: 'power', label: '功率', fn: function(p){ return p.power || '—'; } },
-        { key: 'voltage', label: '电压', fn: function(p){ return p.voltage || '—'; } },
-        { key: 'dimensions', label: '尺寸', fn: function(p){ return p.dimensions || '—'; } },
-        { key: 'throughput', label: '产能', fn: function(p){ return p.throughput || '—'; } },
-        { key: 'averageTime', label: '加工时间', fn: function(p){ return p.averageTime || '—'; } },
-        { key: 'weight', label: '净重', fn: function(p){ return p.weight || '—'; } },
-        { key: 'highlights', label: '核心亮点', fn: function(p){ return p.highlights || p.description || '—'; } }
-      ];
-
-      function renderComparisonTable() {
-        var section = document.getElementById('comparison-section');
-        var tableContainer = document.getElementById('comparison-table');
-        if (!section || !tableContainer) return;
-        if (selected.length < 2) { section.classList.add('hidden'); return; }
-        section.classList.remove('hidden');
-
-        // Mobile: stacked cards per parameter row
-        var html = '';
-        COMPARE_ROWS.forEach(function(row, ri) {
-          var values = selected.map(function(p){ return String(row.fn(p)); });
-          var allSame = values.every(function(v){ return v === values[0]; });
-
-          html += '<div class="bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 overflow-hidden">' +
-            '<div class="px-3 py-2 bg-slate-50 dark:bg-slate-900/50 text-xs font-bold text-slate-700 dark:text-slate-300">' + row.label + '</div>' +
-            '<div class="flex flex-col divide-y divide-slate-100 dark:divide-slate-700">';
-
-          selected.forEach(function(p) {
-            var val = row.fn(p);
-            var cellClass = (!allSame) ? 'diff-highlight text-primary' : 'text-slate-600 dark:text-slate-400';
-            html += '<div class="flex items-center gap-2 px-3 py-2">' +
-              '<img src="' + esc(p._imageUrl) + '" class="w-6 h-6 rounded object-cover flex-shrink-0" onerror="this.src=\'/assets/images/products/default.webp\'">' +
-              '<span class="text-[10px] text-slate-400 flex-shrink-0 truncate max-w-[60px]">' + esc(p.model) + '</span>' +
-              '<span class="text-xs ' + cellClass + ' flex-1">' + esc(val) + '</span>' +
-            '</div>';
-          });
-
-          html += '</div></div>';
-        });
-
-        tableContainer.innerHTML = html;
-      }
-
-      function updateEmptyState() {
-        var empty = document.getElementById('compare-empty');
-        if (!empty) return;
-        empty.classList.toggle('hidden', selected.length >= 2);
-      }
-
-      function showToast(msg) {
-        var toast = document.createElement('div');
-        toast.className = 'fixed top-24 left-1/2 -translate-x-1/2 bg-slate-900 dark:bg-white text-white dark:text-slate-900 px-4 py-2 rounded-xl shadow-xl z-[100] text-xs font-medium transition-all duration-300';
-        toast.style.opacity = '0'; toast.style.transform = 'translate(-50%, -10px)';
-        toast.textContent = msg;
-        document.body.appendChild(toast);
-        requestAnimationFrame(function() { toast.style.opacity = '1'; toast.style.transform = 'translate(-50%, 0)'; });
-        setTimeout(function() {
-          toast.style.opacity = '0'; toast.style.transform = 'translate(-50%, -10px)';
-          setTimeout(function(){ toast.remove(); }, 300);
-        }, 2000);
-      }
-
-      function initCompare() {
-        if (Array.isArray(window.PRODUCT_DATA_TABLE) && window.PRODUCT_DATA_TABLE.length > 0) {
-          renderCategoryTabs(); renderProductCards();
-        } else {
-          // Restore from localStorage cache first
-            try {
-              var cached = JSON.parse(localStorage.getItem('pdt_v2'));
-              if (Array.isArray(cached) && cached.length > 0) {
-                window.PRODUCT_DATA_TABLE = cached;
-                window.dispatchEvent(new Event('product-data-ready'));
-                renderCategoryTabs(); renderProductCards();
-                return;
-              }
-            } catch(e) {}
-            fetch('/api/cms/products-data', { cache: 'no-store' })
-              .then(function(r){ return r.json(); })
-              .then(function(data) {
-                window.PRODUCT_DATA_TABLE = data;
-                window.dispatchEvent(new Event('product-data-ready'));
-                renderCategoryTabs(); renderProductCards();
-              })
-              .catch(function(err) { console.error('[Compare] Failed:', err); });
-        }
-      }
-
-      // Listen for storage events from other tabs
-      window.addEventListener('storage', function(e) {
-        if (e.key === COMPARE_KEY) {
-          try { selected = e.newValue ? JSON.parse(e.newValue) : []; } catch(err) { selected = []; }
-          renderProductCards(); renderCompareBar(); renderComparisonTable(); updateEmptyState();
-        }
-      });
-
-      if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', initCompare);
-      } else { initCompare(); }
-      document.addEventListener('spa:load', initCompare);
-      window.addEventListener('product-data-ready', function() { renderCategoryTabs(); renderProductCards(); });
-    })();
-    </script>
-
+    <script defer src="/assets/js/compare.js?v=20260506"></script>
     <script defer src="/assets/js/ui/floating-actions.js"></script>
   </body>
 </html>
