@@ -370,7 +370,11 @@
     if (addMoreLink) {
       addMoreLink.addEventListener('click', function(e) {
         e.preventDefault();
-        window.location.href = '/products/';
+        if (window.SpaRouter && window.SpaRouter.navigateTo) {
+          window.SpaRouter.navigateTo('/products/');
+        } else {
+          window.location.href = '/products/';
+        }
       });
     }
 
