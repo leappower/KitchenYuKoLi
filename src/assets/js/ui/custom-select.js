@@ -803,6 +803,9 @@
 
   var instances = [];
 
+  /* CustomSelect constructor (factory — delegates to Instance) */
+  function CustomSelect(el) { return CustomSelect.init(el); }
+
   CustomSelect.closeAll = function () {
     for (var i = 0; i < instances.length; i++) {
       instances[i].close();
