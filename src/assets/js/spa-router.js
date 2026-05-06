@@ -186,23 +186,6 @@
       bodyContent = bodyContent.replace(/<navigator[^>]*>[\s\S]*?<\/navigator>/gi, "");
       bodyContent = bodyContent.replace(/<footer[^>]*>[\s\S]*?<\/footer>/gi, "");
 
-      // 提取 <script src="..."> 并按需加载（防止 SPA 导航时丢失 UI 组件）
-      var scriptSrcRe = /<script[^>]*src=["']([^"']+\/assets\/js\/ui\/[^"']+)["'][^>]*><\/script>/gi;
-      var m;
-      var uiScriptsToLoad = [];
-      while ((m = scriptSrcRe.exec(bodyContent)) !== null) {
-        var src = m[1];
-        if (!document.querySelector('script[src="' + src + '"]')) {
-          uiScriptsToLoad.push(src);
-        }
-      }
-      // 异步加载缺失的 UI 脚本（加载后会触发 CustomSelect 等的 spa:load 重初始化）
-      uiScriptsToLoad.forEach(function (src) {
-        var s = document.createElement('script');
-        s.src = src;
-        document.body.appendChild(s);
-      });
-
       // 移除所有 <script> 标签（SPA 导航不需要重新执行内联脚本）
       bodyContent = bodyContent.replace(/<script[\s\S]*?<\/script>/gi, "");
 
@@ -767,6 +750,14 @@
       // Cases 页面需要 cases-page.js（筛选、modal、CTA）
       if (path.indexOf("/cases/") !== -1 || path.indexOf("/applications/cases/") !== -1) {
         scripts.push({ src: "/assets/js/cases-page.js", id: "spa-cases-page" });
+      }
+
+      // Quote / profit-calculator / support/faq 需要 custom-select.js
+      if (path.indexOf("/quote/") !== -1 || path.indexOf("/profit-calculator/") !== -1 || path.indexOf("/support/") !== -1) {
+        if (!window.CustomSelect) {
+          scripts.push({ src: "/assets/js/ui/dropdown-styles.js", id: "spa-dropdown-styles" });
+          scripts.push({ src: "/assets/js/ui/custom-select.js", id: "spa-custom-select" });
+        }
       }
 
       // Home 页面需要 home-core-products.js（动态渲染核心产品卡片）
