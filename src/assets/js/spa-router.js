@@ -186,7 +186,24 @@
       bodyContent = bodyContent.replace(/<navigator[^>]*>[\s\S]*?<\/navigator>/gi, "");
       bodyContent = bodyContent.replace(/<footer[^>]*>[\s\S]*?<\/footer>/gi, "");
 
-      // 移除所有 <script> 标签（SPA 导航不需要重新执行）
+      // 提取 <script src="..."> 并按需加载（防止 SPA 导航时丢失 UI 组件）
+      var scriptSrcRe = /<script[^>]*src=["']([^"']+\/assets\/js\/ui\/[^"']+)["'][^>]*><\/script>/gi;
+      var m;
+      var uiScriptsToLoad = [];
+      while ((m = scriptSrcRe.exec(bodyContent)) !== null) {
+        var src = m[1];
+        if (!document.querySelector('script[src="' + src + '"]')) {
+          uiScriptsToLoad.push(src);
+        }
+      }
+      // 异步加载缺失的 UI 脚本（加载后会触发 CustomSelect 等的 spa:load 重初始化）
+      uiScriptsToLoad.forEach(function (src) {
+        var s = document.createElement('script');
+        s.src = src;
+        document.body.appendChild(s);
+      });
+
+      // 移除所有 <script> 标签（SPA 导航不需要重新执行内联脚本）
       bodyContent = bodyContent.replace(/<script[\s\S]*?<\/script>/gi, "");
 
       // 移除骨架屏容器（如果存在）
