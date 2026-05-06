@@ -465,14 +465,24 @@
         if (Array.isArray(window.PRODUCT_DATA_TABLE) && window.PRODUCT_DATA_TABLE.length > 0) {
           renderCategoryTabs(); renderProductCards();
         } else {
-          fetch('/api/cms/products-data', { cache: 'no-store' })
-            .then(function(r){ return r.json(); })
-            .then(function(data) {
-              window.PRODUCT_DATA_TABLE = data;
-              window.dispatchEvent(new Event('product-data-ready'));
-              renderCategoryTabs(); renderProductCards();
-            })
-            .catch(function(err) { console.error('[Compare] Failed:', err); });
+          // Restore from localStorage cache first
+            try {
+              var cached = JSON.parse(localStorage.getItem('pdt_v2'));
+              if (Array.isArray(cached) && cached.length > 0) {
+                window.PRODUCT_DATA_TABLE = cached;
+                window.dispatchEvent(new Event('product-data-ready'));
+                renderCategoryTabs(); renderProductCards();
+                return;
+              }
+            } catch(e) {}
+            fetch('/api/cms/products-data', { cache: 'no-store' })
+              .then(function(r){ return r.json(); })
+              .then(function(data) {
+                window.PRODUCT_DATA_TABLE = data;
+                window.dispatchEvent(new Event('product-data-ready'));
+                renderCategoryTabs(); renderProductCards();
+              })
+              .catch(function(err) { console.error('[Compare] Failed:', err); });
         }
       }
 

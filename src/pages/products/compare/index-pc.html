@@ -562,6 +562,18 @@ if(localStorage.getItem('darkMode')==='true')document.documentElement.classList.
       renderCategoryTabs();
       renderProductCards();
     } else {
+      // Restore from localStorage cache (same key as index.html product-data-loader)
+      try {
+        var cached = JSON.parse(localStorage.getItem('pdt_v2'));
+        if (Array.isArray(cached) && cached.length > 0) {
+          window.PRODUCT_DATA_TABLE = cached;
+          window.dispatchEvent(new Event('product-data-ready'));
+          renderCategoryTabs();
+          renderProductCards();
+          return;
+        }
+      } catch(e) {}
+      // Fallback: try API
       fetch('/api/cms/products-data', { cache: 'no-store' })
         .then(function(r){ return r.json(); })
         .then(function(data) {

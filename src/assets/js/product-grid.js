@@ -189,7 +189,7 @@
       '<div class="flex items-center gap-3 flex-1 overflow-x-auto scrollbar-hide">' + thumbs + '</div>' +
       '<div class="flex items-center gap-2 flex-shrink-0">' +
         '<button class="float-clear px-3 py-2 rounded-xl text-xs font-bold text-slate-500 hover:text-red-500 hover:bg-red-50 dark:hover:bg-red-900/20 transition-all border border-slate-200 dark:border-slate-700 hover:border-red-300">清空</button>' +
-        '<a href="/products/compare/" class="bg-primary text-white px-5 py-2 rounded-xl text-sm font-bold hover:opacity-90 transition-opacity flex items-center gap-1"><span>开始对比</span><span class="material-symbols-outlined text-sm">arrow_forward</span></a>' +
+        '<a href="/products/compare/" class="bg-primary text-white px-5 py-2 rounded-xl text-sm font-bold hover:opacity-90 transition-opacity flex items-center gap-1"><span>对比</span><span class="material-symbols-outlined text-sm">arrow_forward</span></a>' +
       '</div>' +
     '</div>';
   }
@@ -299,7 +299,8 @@
   function buildCompareBtnHTML(model) {
     var isSelected = isProductCompared(model);
     var activeClass = isSelected ? 'bg-primary text-white border-primary' : 'bg-slate-100 dark:bg-slate-700 text-slate-500 border-slate-200 dark:border-slate-600';
-    return '<button class="compare-btn ' + activeClass + ' flex items-center justify-center w-9 h-9 rounded-lg border text-sm font-bold flex-shrink-0" data-model="' + model + '" onclick="event.preventDefault();event.stopPropagation();window.ProductGrid.toggleCompare(\'' + model.replace(/'/g, "\\'") + '\')">' +
+        return '<button class="compare-btn ' + activeClass + ' flex items-center justify-center w-9 h-9 rounded-lg border text-sm font-bold flex-shrink-0" data-model="' + model +
+      '" onclick="event.preventDefault();event.stopPropagation();window.ProductGrid.toggleCompare(\'' + model.replace(/'/g, "\\'") + '\')">' +
       '<span class="compare-icon material-symbols-outlined text-lg">' + (isSelected ? 'check' : 'compare_arrows') + '</span>' +
     '</button>';
   }
@@ -308,7 +309,8 @@
     var isSelected = isProductCompared(model);
     var bgClass = isSelected ? 'bg-primary text-white' : 'bg-white dark:bg-slate-800 text-slate-400';
     var borderClass = isSelected ? 'border-primary' : 'border-slate-200 dark:border-slate-600';
-    return '<button class="compare-btn compare-btn-mobile ' + bgClass + ' w-7 h-7 rounded-full border ' + borderClass + ' flex items-center justify-center shadow-sm" data-model="' + model + '" onclick="event.preventDefault();event.stopPropagation();window.ProductGrid.toggleCompare(\'' + model.replace(/'/g, "\\'") + '\')">' +
+        return '<button class="compare-btn compare-btn-mobile ' + bgClass + ' w-7 h-7 rounded-full border ' + borderClass + ' flex items-center justify-center shadow-sm" data-model="' + model +
+      '" onclick="event.preventDefault();event.stopPropagation();window.ProductGrid.toggleCompare(\'' + model.replace(/'/g, "\\'") + '\')">' +
       '<span class="compare-icon material-symbols-outlined text-sm">' + (isSelected ? 'check' : 'compare_arrows') + '</span>' +
     '</button>';
   }
@@ -336,7 +338,8 @@
     var link = '/products/' + encodeURIComponent(model) + '/';
     var isSelected = isProductCompared(p.model);
     var selectedClass = isSelected ? ' compare-selected' : '';
-    return '<article class="product-card group bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 overflow-hidden' + selectedClass + '" data-category="' + cat + '" data-tier="' + esc(p.tier || '') + '" data-model="' + model + '" data-sort-order="' + (p.sort_order || 0) + '" data-created="' + (p.created_at || '') + '">' +
+        return '<article class="product-card group bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 overflow-hidden' + selectedClass + '" data-category="' + cat + '" data-tier="' + esc(p.tier || '') +
+      '" data-model="' + model + '" data-sort-order="' + (p.sort_order || 0) + '" data-created="' + (p.created_at || '') + '">' +
       '<div class="relative aspect-[4/3] overflow-hidden bg-slate-100 dark:bg-slate-700">' +
         '<img loading="lazy" alt="' + name + '" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" src="' + img + '" onerror="if(!this.dataset.errored){this.dataset.errored=\'1\';this.src=\'/assets/images/products/default.webp\' }">' +
         (badge ? '<div class="absolute top-4 left-4 flex gap-2">' + badge + '</div>' : '') +
@@ -371,7 +374,8 @@
     var link = '/products/' + encodeURIComponent(model) + '/';
     var isSelected = isProductCompared(p.model);
     var selectedClass = isSelected ? ' compare-selected' : '';
-    return '<article class="product-card-tablet bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 overflow-hidden' + selectedClass + '" data-category="' + cat + '" data-model="' + model + '" data-tier="' + esc(p.tier || '') + '" data-sort-order="' + (p.sort_order || 0) + '" data-created="' + (p.created_at || '') + '">' +
+        return '<article class="product-card-tablet bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 overflow-hidden' + selectedClass + '" data-category="' + cat + '" data-model="' + model + '" data-tier="' +
+      esc(p.tier || '') + '" data-sort-order="' + (p.sort_order || 0) + '" data-created="' + (p.created_at || '') + '">' +
       '<div class="relative aspect-[4/3] overflow-hidden bg-slate-100 dark:bg-slate-700">' +
         '<img loading="lazy" alt="' + name + '" class="w-full h-full object-cover" src="' + img + '" onerror="if(!this.dataset.errored){this.dataset.errored=\'1\';this.src=\'/assets/images/products/default.webp\' }">' +
         (badge ? '<div class="absolute top-3 left-3 flex gap-1.5">' + badge + '</div>' : '') +
@@ -400,7 +404,8 @@
     var link = '/products/' + encodeURIComponent(model) + '/';
     var isSelected = isProductCompared(p.model);
     var selectedClass = isSelected ? ' compare-selected' : '';
-    return '<article class="product-card-mobile bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 overflow-hidden relative' + selectedClass + '" data-category="' + cat + '" data-model="' + model + '" data-tier="' + esc(p.tier || '') + '" data-sort-order="' + (p.sort_order || 0) + '" data-created="' + (p.created_at || '') + '">' +
+        return '<article class="product-card-mobile bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 overflow-hidden relative' + selectedClass + '" data-category="' + cat + '" data-model="' + model + '" data-tier="' +
+      esc(p.tier || '') + '" data-sort-order="' + (p.sort_order || 0) + '" data-created="' + (p.created_at || '') + '">' +
       buildMobileCompareBtnHTML(model) +
       '<a href="' + link + '" class="flex gap-4 p-3">' +
         '<div class="w-24 h-24 rounded-lg bg-slate-100 dark:bg-slate-700 flex-shrink-0 overflow-hidden">' +
@@ -720,3 +725,4 @@
     removeCompareItem: removeCompareItem
   };
 })();
+
