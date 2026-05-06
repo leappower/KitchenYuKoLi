@@ -428,6 +428,21 @@
     '</article>';
   }
 
+  // ─── Filter state ────────────────────────────────────────────
+  var _activeCategory = 'all';
+  var _activeTier = 'all';
+
+  function getFilteredProducts() {
+    var products = getAllProducts();
+    if (_activeCategory !== 'all') {
+      products = products.filter(function(p) { return p._category === _activeCategory; });
+    }
+    if (_activeTier !== 'all') {
+      products = products.filter(function(p) { return (p.tier || '') === _activeTier; });
+    }
+    return products;
+  }
+
   // ─── Grid rendering with pagination ──────────────────────────
   var _shownCount = {};
 
@@ -441,7 +456,7 @@
   function renderGrid(containerId, renderer, maxCount) {
     var container = document.getElementById(containerId);
     if (!container) return;
-    var products = getAllProducts();
+    var products = getFilteredProducts();
     var total = products.length;
     var initial = Math.min(total, getPageSize());
     _shownCount[containerId] = initial;
@@ -662,9 +677,10 @@
 
       // Filter products
       var selector = '#product-grid .product-card, #product-grid .product-card-tablet, #product-list .product-card-mobile';
-      document.querySelectorAll(selector).forEach(function(card) {
-        card.style.display = (cat === 'all' || card.dataset.category === cat) ? '' : 'none';
-      });
+      // Update active category and re-render
+      _activeCategory = cat;
+      _shownCount = {};
+      doRender();
     });
 
     // Filter chip click handler
@@ -672,23 +688,12 @@
       chip.addEventListener('click', function() {
         document.querySelectorAll('.filter-chip').forEach(function(c) { c.classList.remove('active'); });
         this.classList.add('active');
-        applyTierFilter();
+        _activeTier = this.dataset.filter || 'all';
+        _shownCount = {};
+        doRender();
       });
     });
 
-  }
-
-  // ─── Tier filter ────────────────────────────────────────────────
-
-  function applyTierFilter() {
-    var activeChip = document.querySelector('.filter-chip.active');
-    var tierFilter = (activeChip ? activeChip.dataset.filter : 'all') || 'all';
-    var cards = Array.from(container.children);
-    // Filter by tier
-    cards.forEach(function(card) {
-      var tier = card.dataset.tier || '';
-      card.style.display = (tierFilter === 'all' || tier === tierFilter) ? '' : 'none';
-    });
   }
 
   // ─── Init ──────────────────────────────────────────────────────
@@ -711,6 +716,8 @@
       el._categoryTabsInit = false;
     });
     _shownCount = {};
+    _activeCategory = 'all';
+    _activeTier = 'all';
     var loadMore = document.querySelector('[data-i18n="products_load_more"]');
     if (loadMore) loadMore._bound = false;
     autoRender();
