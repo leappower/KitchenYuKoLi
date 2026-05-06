@@ -191,23 +191,7 @@
           '</div>' +
           /* 右侧：语言切换 */
           '<div class="flex-shrink-0">' +
-            '<div class="lang-dropdown-container relative">' +
-              '<button id="lang-toggle-btn" ' +
-                'class="flex items-center gap-1 px-2 py-2 rounded-xl ' +
-                'text-sm font-medium text-slate-600 dark:text-slate-300 ' +
-                'hover:bg-slate-100 dark:hover:bg-slate-800 ' +
-                'active:bg-slate-200 dark:active:bg-slate-700 ' +
-                'transition-colors md:gap-1.5 md:px-3" type="button" aria-label="Switch language" ' +
-                'data-i18n-aria="lang_switcher_aria">' +
-                '<span class="material-symbols-outlined text-base ' +
-                'leading-none">language</span>' +
-                '<span id="current-lang-label" data-i18n="current_lang">' +
-                '中文（简体）</span>' +
-                '<span class="material-symbols-outlined text-xs opacity-40">' +
-                'expand_more</span>' +
-              '</button>' +
-              '<div id="language-dropdown-anchor"></div>' +
-            '</div>' +
+              buildLangSelectorHtml() +
           '</div>' +
         '</div>' +
       '</header>'
@@ -313,29 +297,48 @@
   }
 
   /**
-   * 构建语言切换按钮 HTML
-   * @returns {string} HTML 字符串
+   * Build language <select> with optgroups (uses custom-select component)
+   * @returns {string} HTML string
    */
-  function buildLangSwitcherHtml() {
-    return (
-      '<div class="lang-dropdown-container relative flex-shrink-0">' +
-        '<button id="lang-toggle-btn" ' +
-          'class="flex items-center gap-1.5 px-3 py-2 rounded-xl ' +
-          'text-sm font-medium text-slate-600 dark:text-slate-300 ' +
-          'hover:bg-slate-100 dark:hover:bg-slate-800 ' +
-          'active:bg-slate-200 dark:active:bg-slate-700 ' +
-          'transition-colors" type="button" aria-label="Switch language" ' +
-          'data-i18n-aria="lang_switcher_aria">' +
-          '<span class="material-symbols-outlined text-base leading-none">' +
-          'language</span>' +
-          '<span id="current-lang-label" data-i18n="current_lang">' +
-          '中文（简体）</span>' +
-          '<span class="material-symbols-outlined text-xs opacity-40">' +
-          'expand_more</span>' +
-        '</button>' +
-        '<div id="language-dropdown-anchor"></div>' +
-      '</div>'
-    );
+  function buildLangSelectorHtml() {
+    var reg = (typeof window !== 'undefined' && window.LANG_REGISTRY) || null;
+    if (!reg || !reg.LANGUAGES) {
+      // Fallback if registry not yet loaded
+      return '<select id="lang-selector" class="h-9 px-3 text-sm rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-300"></select>';
+    }
+    var currentLang = (typeof window !== 'undefined' && localStorage.getItem('userLanguage')) || 'zh-CN';
+    var groups = {
+      common: { label: '常用 / Common', langs: [] },
+      southeast_asia: { label: '东南亚 / Southeast Asia', langs: [] },
+      east_asia: { label: '东亚 / East Asia', langs: [] },
+      other: { label: '其他 / Other', langs: [] }
+    };
+    var groupTitles = {
+      common: '常用 / Common',
+      southeast_asia: '东南亚 / Southeast Asia',
+      east_asia: '东亚 / East Asia',
+      other: '其他 / Other'
+    };
+    reg.LANGUAGES.forEach(function(l) {
+      var g = l.uiGroup || 'common';
+      if (!groups[g]) groups[g] = { label: g, langs: [] };
+      groups[g].langs.push(l);
+    });
+    var html = '<select id="lang-selector" data-custom-select data-custom-search="true" ' +
+      'class="h-9 px-3 text-sm rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-300 appearance-none">';
+    var groupOrder = ['common', 'southeast_asia', 'east_asia', 'other'];
+    groupOrder.forEach(function(gid) {
+      var grp = groups[gid];
+      if (!grp || grp.langs.length === 0) return;
+      html += '<optgroup label="' + (groupTitles[gid] || gid) + '">';
+      grp.langs.forEach(function(l) {
+        var sel = l.code === currentLang ? ' selected' : '';
+        html += '<option value="' + l.code + '"' + sel + '>' + escapeHtml(l.nativeName) + '</option>';
+      });
+      html += '</optgroup>';
+    });
+    html += '</select>';
+    return html;
   }
 
   /**
@@ -374,7 +377,7 @@
       }));
     }
     if (opts.showLang) {
-      rightSideItems.push(buildLangSwitcherHtml());
+      rightSideItems.push(buildLangSelectorHtml());
     }
     if (opts.showCta) {
       rightSideItems.push(buildCtaButtonHtml({

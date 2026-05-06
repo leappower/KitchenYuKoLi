@@ -299,28 +299,9 @@
       document.body.appendChild(i), this.dropdownEl = i, this.bindDropdownEvents(), this.updateCurrentLanguageLabel(n)
     }
   }, r.prototype.updateCurrentLanguageLabel = function(t) {
-    var e = t;
-    if (this.languages && Array.isArray(this.languages)) {
-      var n = this.languages.find(function(e) {
-        return e.code === t
-      });
-      n && (e = n.name)
-    }
-    var a = document.getElementById("lang-toggle-btn");
-    if (a) {
-      var o = a.querySelector(".lang-label") || a;
-      if (o !== a) o.textContent = e;
-      else {
-        var r = a.querySelector("span:not(.material-symbols-outlined)");
-        r && (r.textContent = e)
-      }
-    }
-    var i = this.getDropdown();
-    i && i.querySelectorAll(".lang-option").forEach(function(e) {
-      var a = e.getAttribute("data-code"),
-        n = e.querySelector("span");
-      e.classList.remove("is-active"), a === t ? (e.classList.add("is-active"), n && (n.className = "material-symbols-outlined text-sm", n.style.color = "#ec5b13", n.textContent = "check")) : n && (n.className = "", n.style.color = "", n.textContent = "")
-    })
+    // Sync lang-selector <select> value
+    var sel = document.getElementById("lang-selector");
+    if (sel && sel.value !== t) sel.value = t;
   }, r.prototype.bindDropdownEvents = function() {
     var t = this,
       e = this.getDropdown();
@@ -398,12 +379,12 @@
           t.filterLanguages(e.target.value)
         })
       }
-      var o = document.querySelectorAll("#lang-toggle-btn");
-      o.length > 1 && console.warn("[i18n] setupEventListeners: found " + o.length + ' elements with id="lang-toggle-btn". Only the first will be bound. Each page should have exactly one language switcher.');
-      var r = document.getElementById("lang-toggle-btn");
-      r ? r.addEventListener("click", function(e) {
-        t.toggleLanguageDropdown(e)
-      }) : console.warn("[i18n] lang-toggle-btn not found!")
+      // Bind lang-selector (custom-select) change event
+      var r = document.getElementById("lang-selector");
+      r ? r.addEventListener("change", function(e) {
+        var code = e.target.value;
+        if (code) t.setLanguage(code);
+      }) : console.warn("[i18n] lang-selector not found!")
     }
   }, r.prototype.resetEventListeners = function() {
     this._eventListenersSetup = !1, this.dropdownEl = null
