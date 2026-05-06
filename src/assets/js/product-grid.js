@@ -149,7 +149,7 @@
     var container = bar.querySelector('.compare-bar-inner');
     if (!container) return;
 
-    if (device === 'mobile') {
+    if (device === 'mobile' || device === 'tablet') {
       container.innerHTML = renderMobileBar(items);
     } else {
       container.innerHTML = renderDesktopBar(items);
@@ -223,6 +223,8 @@
 
     if (device === 'mobile') {
       bar.className = 'fixed bottom-0 left-0 right-0 bg-white dark:bg-slate-800 border-t border-slate-200 dark:border-slate-700 px-4 py-3 z-50';
+    } else if (device === 'tablet') {
+      bar.className = 'fixed bottom-4 left-1/2 -translate-x-1/2 bg-white dark:bg-slate-800 rounded-2xl shadow-xl border border-slate-200 dark:border-slate-700 px-4 py-3 z-50 w-[calc(100%-2rem)]';
     } else {
       bar.className = 'fixed bottom-6 left-1/2 -translate-x-1/2 bg-white dark:bg-slate-800 rounded-2xl shadow-2xl border border-slate-200 dark:border-slate-700 px-6 py-4 z-50 max-w-4xl w-[calc(100%-3rem)]';
     }
