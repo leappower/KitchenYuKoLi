@@ -41,6 +41,7 @@
   align-items: center;
   text-align: center;
   margin-bottom: 1.5rem;
+  width: 100%;
 }
 
 /* Badge（药丸标签） */
@@ -72,10 +73,14 @@
   width: 80%;
   height: 18px;
   margin-bottom: 8px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .sk-line--short {
   width: 45%;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 /* CTA 按钮组 */
@@ -84,6 +89,7 @@
   gap: 12px;
   margin-top: 20px;
   justify-content: center;
+  width: 100%;
 }
 
 .sk-cta {
@@ -118,6 +124,12 @@
   background: linear-gradient(90deg, #e8e8e8 25%, #d4d4d4 50%, #e8e8e8 75%);
   background-size: 200% 100%;
   animation: sk-shimmer 1.5s infinite;
+}
+
+/* 确保 hero 内所有子元素居中（覆盖可能的 width 继承） */
+.sk-hero > * {
+  margin-left: auto;
+  margin-right: auto;
 }
 
 /* ───────── 响应式：Mobile ───────── */
