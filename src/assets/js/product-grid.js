@@ -307,11 +307,11 @@
 
   function buildMobileCompareBtnHTML(model) {
     var isSelected = isProductCompared(model);
-    var bgClass = isSelected ? 'bg-primary text-white' : 'bg-white dark:bg-slate-800 text-slate-400';
-    var borderClass = isSelected ? 'border-primary' : 'border-slate-200 dark:border-slate-600';
-        return '<button class="compare-btn compare-btn-mobile ' + bgClass + ' w-7 h-7 rounded-full border ' + borderClass + ' flex items-center justify-center shadow-sm" data-model="' + model +
+    var bgClass = isSelected ? 'bg-primary text-white' : 'bg-white/90 dark:bg-slate-800/90 text-primary';
+    var borderClass = isSelected ? 'border-primary' : 'border-slate-300 dark:border-slate-500';
+        return '<button class="compare-btn compare-btn-mobile ' + bgClass + ' w-8 h-8 rounded-lg border-2 ' + borderClass + ' flex items-center justify-center shadow-md backdrop-blur-sm" data-model="' + model +
       '" onclick="event.preventDefault();event.stopPropagation();window.ProductGrid.toggleCompare(\'' + model.replace(/'/g, "\\'") + '\')">' +
-      '<span class="compare-icon material-symbols-outlined text-sm">' + (isSelected ? 'check' : 'compare_arrows') + '</span>' +
+      '<span class="compare-icon material-symbols-outlined text-[18px]">' + (isSelected ? 'check' : 'compare_arrows') + '</span>' +
     '</button>';
   }
 
