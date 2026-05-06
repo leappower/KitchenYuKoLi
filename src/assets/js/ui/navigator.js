@@ -1275,6 +1275,11 @@
     /* 如果 header 丢失则重新挂载 */
     if (!document.querySelector("header")) mountNavigator();
 
+    /* 重新初始化 custom-select（navigator 可能创建了新的 lang-selector） */
+    if (typeof CustomSelect !== 'undefined' && CustomSelect.initAll) {
+      setTimeout(function () { CustomSelect.initAll(); }, 0);
+    }
+
     /* 确保 mobile header 可见 */
     var mobileHeader = document.getElementById("mobile-header");
     if (mobileHeader) mobileHeader.classList.remove("header-hidden");
