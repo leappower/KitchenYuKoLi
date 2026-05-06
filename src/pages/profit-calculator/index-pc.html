@@ -111,7 +111,7 @@
                     <!-- 1. Country -->
                     <div>
                       <label class="block text-sm font-bold mb-1.5" data-i18n="profit_calc_country">Country / 国家</label>
-                      <select id="pc-country" class="w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg p-3 focus:ring-primary focus:border-primary text-sm">
+                      <select data-custom-select id="pc-country" class="w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg p-3 focus:ring-primary focus:border-primary text-sm">
                         <option value="" data-i18n="profit_calc_select_country">Select country…</option>
                         <option value="Philippines">🇵🇭 Philippines</option>
                         <option value="Indonesia">🇮🇩 Indonesia</option>
@@ -144,7 +144,7 @@
                     <!-- 4. Pain Point -->
                     <div>
                       <label class="block text-sm font-bold mb-1.5" data-i18n="profit_calc_pain_point">Main Pain Point</label>
-                      <select id="pc-pain-point" class="w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg p-3 focus:ring-primary focus:border-primary text-sm">
+                      <select data-custom-select id="pc-pain-point" class="w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg p-3 focus:ring-primary focus:border-primary text-sm">
                         <option value="" data-i18n="profit_calc_select_pain_point">选择主要痛点…</option>
                         <option value="hiring_difficulty" data-i18n="profit_calc_pain_hiring">招工难</option>
                         <option value="high_labor_cost" data-i18n="profit_calc_pain_labor">人工成本高</option>
@@ -284,6 +284,7 @@
 
     <!-- Scripts -->
     <script src="/assets/js/ui/dropdown-styles.js"></script>
+    <script src="/assets/js/ui/custom-select.js"></script>
     <script defer src="/assets/js/ui/products-dropdown.js?v=20260322-v3"></script>
     <script defer src="/assets/js/ui/applications-dropdown.js?v=20260322-v3"></script>
     <script defer src="/assets/js/ui/support-dropdown.js?v=20260322-v3"></script>

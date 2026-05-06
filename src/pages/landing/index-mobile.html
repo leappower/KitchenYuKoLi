@@ -316,7 +316,7 @@ if(localStorage.getItem('darkMode')==='true')document.documentElement.classList.
   <input class="w-full px-3 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder:text-white/60 focus:ring-2 focus:ring-white outline-none" placeholder="Business Email" type="email"/>
   </div>
   <div>
-  <select class="w-full px-3 py-3 rounded-xl bg-white/10 border border-white/20 text-white focus:ring-2 focus:ring-white outline-none">
+  <select data-custom-select class="w-full px-3 py-3 rounded-xl bg-white/10 border border-white/20 text-white focus:ring-2 focus:ring-white outline-none">
   <option class="text-slate-900">1-5 Locations</option>
   <option class="text-slate-900">5-20 Locations</option>
   <option class="text-slate-900">20+ Locations</option>
@@ -349,6 +349,7 @@ if(localStorage.getItem('darkMode')==='true')document.documentElement.classList.
 
 
     <script src="/assets/js/ui/dropdown-styles.js"></script>
+    <script src="/assets/js/ui/custom-select.js"></script>
 <script defer src="/assets/js/ui/products-dropdown.js?v=20260322-v3"></script>
     <script defer src="/assets/js/ui/applications-dropdown.js?v=20260322-v3"></script>
     <script defer src="/assets/js/ui/support-dropdown.js?v=20260322-v3"></script>

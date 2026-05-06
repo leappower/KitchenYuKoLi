@@ -158,7 +158,7 @@ header button:active {
       <!-- 国家/地区 -->
       <div class="space-y-1.5">
         <label class="block text-sm font-bold text-slate-700 dark:text-slate-300 ml-1" data-i18n="quote_country_region">国家/地区 <span class="text-red-500">*</span></label>
-        <select id="q-country" class="w-full h-14 px-4 rounded-xl border-primary/20 bg-white dark:bg-slate-800 focus:ring-2 focus:ring-primary focus:border-primary transition-all text-base appearance-none" required>
+        <select id="q-country" data-custom-select class="w-full h-14 px-4 rounded-xl border-primary/20 bg-white dark:bg-slate-800 focus:ring-2 focus:ring-primary focus:border-primary transition-all text-base appearance-none" required>
           <option value="" data-i18n="quote_select_country">请选择国家/地区</option>
           <option value="TH">🇹🇭 泰国</option>
           <option value="VN">🇻🇳 越南</option>
@@ -181,7 +181,7 @@ header button:active {
       <!-- 设备类型 -->
       <div class="space-y-1.5">
         <label class="block text-sm font-bold text-slate-700 dark:text-slate-300 ml-1" data-i18n="quote_equipment_type">设备类型 <span class="text-red-500">*</span></label>
-        <select id="q-equipment-type" class="w-full h-14 px-4 rounded-xl border-primary/20 bg-white dark:bg-slate-800 focus:ring-2 focus:ring-primary focus:border-primary transition-all text-base appearance-none" required>
+        <select id="q-equipment-type" data-custom-select class="w-full h-14 px-4 rounded-xl border-primary/20 bg-white dark:bg-slate-800 focus:ring-2 focus:ring-primary focus:border-primary transition-all text-base appearance-none" required>
           <option value="" data-i18n="quote_select_equipment_type">请选择设备类型</option>
           <option value="auto-wok" data-i18n="quote_type_auto_wok">智能炒菜机</option>
           <option value="semi-auto-wok" data-i18n="quote_type_semi_auto_wok">半自动炒菜机</option>
@@ -200,7 +200,7 @@ header button:active {
       <!-- 厨房规模 -->
       <div class="space-y-1.5">
         <label class="block text-sm font-bold text-slate-700 dark:text-slate-300 ml-1" data-i18n="quote_kitchen_capacity">厨房规模</label>
-        <select id="q-capacity" class="w-full h-14 px-4 rounded-xl border-primary/20 bg-white dark:bg-slate-800 focus:ring-2 focus:ring-primary focus:border-primary transition-all text-base appearance-none">
+        <select id="q-capacity" data-custom-select class="w-full h-14 px-4 rounded-xl border-primary/20 bg-white dark:bg-slate-800 focus:ring-2 focus:ring-primary focus:border-primary transition-all text-base appearance-none">
           <option value="" data-i18n="quote_select_capacity">请选择厨房规模</option>
           <option value="small" data-i18n="quote_capacity_small">小型餐厅（50份以内/餐）</option>
           <option value="medium" data-i18n="quote_capacity_medium">中型餐厅（50-200份/餐）</option>
@@ -211,7 +211,7 @@ header button:active {
       <!-- 预算范围 -->
       <div class="space-y-1.5">
         <label class="block text-sm font-bold text-slate-700 dark:text-slate-300 ml-1" data-i18n="quote_budget_range">预算范围</label>
-        <select id="q-budget" class="w-full h-14 px-4 rounded-xl border-primary/20 bg-white dark:bg-slate-800 focus:ring-2 focus:ring-primary focus:border-primary transition-all text-base appearance-none">
+        <select id="q-budget" data-custom-select class="w-full h-14 px-4 rounded-xl border-primary/20 bg-white dark:bg-slate-800 focus:ring-2 focus:ring-primary focus:border-primary transition-all text-base appearance-none">
           <option value="" data-i18n="quote_select_budget">请选择预算范围</option>
           <option value="consult" data-i18n="quote_budget_consult">需咨询（暂无明确预算）</option>
           <option value="5w-10w" data-i18n="quote_budget_5w_10w">5万 - 10万 人民币</option>
@@ -349,6 +349,7 @@ header button:active {
 
 
     <script src="/assets/js/ui/dropdown-styles.js"></script>
+    <script src="/assets/js/ui/custom-select.js"></script>
 <script defer src="/assets/js/ui/products-dropdown.js?v=20260322-v3"></script>
     <script defer src="/assets/js/ui/applications-dropdown.js?v=20260322-v3"></script>
     <script defer src="/assets/js/ui/support-dropdown.js?v=20260322-v3"></script>
