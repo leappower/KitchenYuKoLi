@@ -168,6 +168,7 @@
 
     return '<div class="flex items-center gap-2 w-full">' +
       '<div class="flex items-center gap-2 flex-1 overflow-x-auto scrollbar-hide py-1">' + thumbs + '</div>' +
+      '<button class="float-clear flex-shrink-0 px-2.5 py-2 rounded-lg text-[10px] font-bold text-slate-500 hover:text-red-500 transition-colors">清空</button>' +
       '<a href="/products/compare/" class="flex-shrink-0 bg-primary text-white px-4 py-2 rounded-xl text-sm font-bold">对比(' + items.length + ')</a>' +
     '</div>';
   }

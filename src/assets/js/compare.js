@@ -95,7 +95,28 @@
         return cached;
       }
     } catch(e) {}
-    return [];
+    return null; // null = not found, caller should fetch
+  }
+
+  var _dataFetched = false;
+  function fetchProductData() {
+    if (_dataFetched) return Promise.resolve(window[STORE_KEY] || []);
+    _dataFetched = true;
+    return fetch('/api/cms/products-data', { cache: 'no-store' })
+      .then(function(r) {
+        if (!r.ok) throw new Error('API ' + r.status);
+        return r.json();
+      })
+      .then(function(data) {
+        if (Array.isArray(data) && data.length > 0) {
+          window[STORE_KEY] = data;
+          try { localStorage.setItem(DATA_KEY, JSON.stringify(data)); } catch(e) {}
+        }
+        return data || [];
+      })
+      .catch(function() {
+        return window[STORE_KEY] || [];
+      });
   }
 
   // ─── Selected items management ───────────────────────────────
@@ -321,8 +342,16 @@
 
   // ─── Init ────────────────────────────────────────────────────
   function init() {
-    // Load product data from localStorage
-    getProductData();
+    var data = getProductData();
+    if (!data) {
+      // No cached data — fetch from API
+      fetchProductData().then(function() {
+        selected = enrichProducts(selected);
+        render();
+      });
+    } else {
+      window[STORE_KEY] = data;
+    }
 
     // Bind clear button
     var clearBtn = document.getElementById('compare-clear-btn');
