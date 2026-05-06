@@ -101,7 +101,7 @@
 
               <!-- ── Left: Input Form (40%) ── -->
               <div class="lg:col-span-5 flex flex-col">
-                <div class="bg-white dark:bg-slate-900 rounded-2xl shadow-xl border border-slate-200 dark:border-slate-800 p-8 sticky top-[130px] flex-1 flex flex-col">
+                <div class="bg-white dark:bg-slate-900 rounded-2xl shadow-xl border border-slate-300 dark:border-slate-800 p-8 sticky top-[130px] flex-1 flex flex-col">
                   <h2 class="text-xl font-bold mb-6 flex items-center gap-2">
                     <span class="material-symbols-outlined text-primary">calculate</span>
                     <span data-i18n="profit_calc_form_title">输入运营数据</span>
@@ -111,7 +111,7 @@
                     <!-- 1. Country -->
                     <div>
                       <label class="block text-sm font-bold mb-1.5" data-i18n="profit_calc_country">Country / 国家</label>
-                      <select data-custom-select id="pc-country" class="w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg p-3 focus:ring-primary focus:border-primary text-sm">
+                      <select data-custom-select id="pc-country" class="w-full bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-lg p-3 focus:ring-primary focus:border-primary text-sm">
                         <option value="" data-i18n="profit_calc_select_country">Select country…</option>
                         <option value="Philippines">🇵🇭 Philippines</option>
                         <option value="Indonesia">🇮🇩 Indonesia</option>
@@ -131,20 +131,20 @@
                     <!-- 2. Monthly Labor Cost -->
                     <div>
                       <label class="block text-sm font-bold mb-1.5" data-i18n="profit_calc_labor_cost">Monthly Labor Cost</label>
-                      <input id="pc-labor-cost" type="number" min="0" class="w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg p-3 focus:ring-primary focus:border-primary text-sm" placeholder="Auto-filled per country" />
+                      <input id="pc-labor-cost" type="number" min="0" class="w-full bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-lg p-3 focus:ring-primary focus:border-primary text-sm" placeholder="Auto-filled per country" />
                       <p class="text-sm text-slate-400 mt-1" data-i18n="profit_calc_labor_hint">选国家后自动填充默认值</p>
                     </div>
 
                     <!-- 3. Daily Meals Output -->
                     <div>
                       <label class="block text-sm font-bold mb-1.5"><span data-i18n="profit_calc_daily_meals">Current Daily Meals Output</span> <span class="text-red-500">*</span></label>
-                      <input id="pc-daily-meals" type="number" min="1" required class="w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg p-3 focus:ring-primary focus:border-primary text-sm" placeholder="e.g. 200" />
+                      <input id="pc-daily-meals" type="number" min="1" required class="w-full bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-lg p-3 focus:ring-primary focus:border-primary text-sm" placeholder="e.g. 200" />
                     </div>
 
                     <!-- 4. Pain Point -->
                     <div>
                       <label class="block text-sm font-bold mb-1.5" data-i18n="profit_calc_pain_point">Main Pain Point</label>
-                      <select data-custom-select id="pc-pain-point" class="w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg p-3 focus:ring-primary focus:border-primary text-sm">
+                      <select data-custom-select id="pc-pain-point" class="w-full bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-lg p-3 focus:ring-primary focus:border-primary text-sm">
                         <option value="" data-i18n="profit_calc_select_pain_point">选择主要痛点…</option>
                         <option value="hiring_difficulty" data-i18n="profit_calc_pain_hiring">招工难</option>
                         <option value="high_labor_cost" data-i18n="profit_calc_pain_labor">人工成本高</option>
@@ -203,7 +203,7 @@
 
               <!-- ── Right: Results Panel (60%) ── -->
               <div class="lg:col-span-7 flex flex-col">
-                <div class="bg-white dark:bg-slate-900 rounded-2xl shadow-xl border border-slate-200 dark:border-slate-800 p-8 flex-1 flex flex-col">
+                <div class="bg-white dark:bg-slate-900 rounded-2xl shadow-xl border border-slate-300 dark:border-slate-800 p-8 flex-1 flex flex-col">
                 <div id="profit-result-panel" class="hidden flex flex-col flex-1 gap-6">
                   <!-- Summary Cards -->
                   <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
@@ -222,11 +222,11 @@
                   </div>
 
                   <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div class="bg-white dark:bg-slate-900 rounded-xl p-5 border border-slate-200 dark:border-slate-800">
+                    <div class="bg-white dark:bg-slate-900 rounded-xl p-5 border border-slate-300 dark:border-slate-800">
                       <p class="text-xs font-bold text-slate-500 uppercase tracking-wider mb-1" data-i18n="profit_calc_five_year">5-Year Cumulative Return</p>
                       <p id="res-five-year" class="text-3xl font-black text-primary">—</p>
                     </div>
-                    <div class="bg-white dark:bg-slate-900 rounded-xl p-5 border border-slate-200 dark:border-slate-800">
+                    <div class="bg-white dark:bg-slate-900 rounded-xl p-5 border border-slate-300 dark:border-slate-800">
                       <p class="text-xs font-bold text-slate-500 uppercase tracking-wider mb-1" data-i18n="profit_calc_annual">Annual Savings</p>
                       <p id="res-annual" class="text-3xl font-black text-slate-800 dark:text-slate-200">—</p>
                     </div>
@@ -244,7 +244,7 @@
                   </div>
 
                   <!-- Chart -->
-                  <div class="bg-white dark:bg-slate-900 rounded-xl p-5 border border-slate-200 dark:border-slate-800" style="height:320px">
+                  <div class="bg-white dark:bg-slate-900 rounded-xl p-5 border border-slate-300 dark:border-slate-800" style="height:320px">
                     <canvas id="profit-chart"></canvas>
                   </div>
 
