@@ -1,9 +1,19 @@
 /**
  * PDP Renderer - product detail page (SPA-safe)
- * URL: /products/<model>/ or /products/detail/?model=<model>
+ * URL: /products/detail/<model>/ or /products/detail/?model=<model>
  * Self-contained: creates #product-content and #related-products if missing
+ *
+ * NOTE: /products/<category>/ (cutting, stirfry, etc.) are PRODUCT LISTING pages,
+ *       NOT PDP pages. Only render PDP for /products/detail/<model>/ paths.
  */
 (function () {
+
+  // Category slugs used for product listing — NOT PDP pages
+  var CATEGORY_SLUGS = ['cutting', 'stirfry', 'frying', 'stewing', 'steaming', 'other'];
+
+  function isCategorySlug(slug) {
+    return CATEGORY_SLUGS.indexOf(slug) >= 0;
+  }
 
   function esc(str) {
     var d = document.createElement("div");
@@ -129,11 +139,19 @@
   }
 
   function renderPDP() {
-    // Read model from path: /products/<model>/
+    // Read model from path: /products/detail/<model>/ or legacy /products/<model>/
     var path = window.location.pathname.replace(/\/$/, '');
     var model = null;
-    var m = path.match(/^\/products\/([^/]+)$/);
-    if (m) model = decodeURIComponent(m[1]);
+    var m = path.match(/^\/products\/detail\/([^/]+)$/);
+    if (m) {
+      model = decodeURIComponent(m[1]);
+    } else {
+      // Legacy path: /products/<model>/ — skip category slugs
+      m = path.match(/^\/products\/([^/]+)$/);
+      if (m && !isCategorySlug(m[1])) {
+        model = decodeURIComponent(m[1]);
+      }
+    }
     console.log('[ProductDetail] renderPDP called, pathname:', window.location.pathname, 'cleanPath:', path, 'model:', model);
     if (!model) return; // Not a PDP URL, skip silently
 
@@ -330,14 +348,28 @@
   document.addEventListener("spa:load", function() {
     var segs = location.pathname.split("/").filter(Boolean);
     console.log('[ProductDetail] spa:load fired, pathname:', location.pathname, 'segs:', segs);
-    if (segs.length === 2 && segs[0] === "products" && segs[1] !== "compare") {
-      console.log('[ProductDetail] Rendering PDP');
-      renderPDP();
+    // Only render PDP on /products/detail/<model>/ or /products/<model>/ (non-category)
+    if (segs[0] === "products") {
+      if (segs[1] === 'detail' && segs[2]) {
+        console.log('[ProductDetail] Rendering PDP (detail path)');
+        renderPDP();
+      } else if (segs[1] && segs[1] !== 'compare' && !isCategorySlug(segs[1])) {
+        console.log('[ProductDetail] Rendering PDP (legacy model path)');
+        renderPDP();
+      } else {
+        console.log('[ProductDetail] Skipping PDP (category/listing page):', segs[1]);
+      }
     }
   });
   document.addEventListener('spa:ready', function () {
     var segs = location.pathname.split("/").filter(Boolean);
-    if (segs.length === 2 && segs[0] === "products" && segs[1] !== "compare") {
+    if (segs[0] === "products") {
+      if (segs[1] === 'detail' && segs[2]) {
+        renderPDP();
+      } else if (segs[1] && segs[1] !== 'compare' && !isCategorySlug(segs[1])) {
+        renderPDP();
+      }
+    }
       renderPDP();
     }
   });
