@@ -221,10 +221,28 @@
     var v = document.getElementById("about-story-video");
     if (!v || v._visBound) return;
     v._visBound = true;
+
+    // Pause when tab is hidden
     document.addEventListener("visibilitychange", function () {
       if (document.hidden) v.pause();
-      else v.play().catch(function(){});
+      else if (v._wasInViewport) v.play().catch(function(){});
     });
+
+    // Pause when scrolled out of viewport
+    if ("IntersectionObserver" in window) {
+      v._wasInViewport = false;
+      new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          var vid = e.target;
+          if (e.isIntersecting) {
+            vid._wasInViewport = true;
+            if (!document.hidden) vid.play().catch(function(){});
+          } else {
+            vid.pause();
+          }
+        });
+      }, { threshold: 0.25 }).observe(v);
+    }
   }
 
   // Re-bind on SPA navigation

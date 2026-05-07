@@ -91,10 +91,10 @@
   // PC/Tablet: 4-column grid cards
   function renderGrid(cfg) {
     var maxW = cfg.maxW || 'max-w-4xl';
-    return '<section class="py-12 bg-white dark:bg-slate-900/50">' +
-      '<div class="px-6 md:px-8 xl:px-10">' +
+    return '<section class="py-12 bg-white dark:bg-slate-900/50 fullwidth-bg">' +
+      '<div class="section-content">' +
         '<h2 class="text-3xl font-black tracking-tight mb-10 text-center"' + attr(cfg.titleKey) + '>' + cfg.title + '</h2>' +
-        '<div class="grid grid-cols-2 md:grid-cols-4 gap-6 ' + maxW + ' mx-auto">' +
+        '<div class="grid grid-cols-2 md:grid-cols-4 gap-6">' +
           renderWaCard(cfg, 'pc') +
           renderEmailCard(cfg, 'pc') +
           renderPhoneCard(cfg, 'pc') +
