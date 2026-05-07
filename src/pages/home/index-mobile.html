@@ -121,9 +121,28 @@ if(localStorage.getItem('darkMode')==='true')document.documentElement.classList.
       </p>
       <div
         class="relative w-full h-[220px] bg-slate-200 dark:bg-slate-800 rounded-2xl overflow-hidden shadow-xl border border-white/10 mb-5"
-        style="background-image: url(&quot;/assets/images/products/esl-bxc800.webp&quot;); background-size: cover; background-position: center;"
+        data-hero-video
       >
-        <div class="absolute bottom-3 left-3 right-3 p-3 bg-white/10 backdrop-blur-xl border border-white/20 rounded-xl">
+        <img
+          class="hero-video-poster w-full h-full object-cover"
+          src="/assets/images/products/esl-bxc800.webp"
+          loading="eager"
+          alt="Yukoli flagship"
+        />
+        <video
+          class="hero-video-player"
+          src="/assets/video/aboutus.mp4"
+          poster="/assets/images/products/esl-bxc800.webp"
+          preload="metadata"
+          muted
+          playsinline
+          loop
+        ></video>
+        <div class="hero-video-overlay">
+          <button class="hero-video-mute" aria-label="Toggle mute">🔇</button>
+        </div>
+        <button class="hero-video-fallback-btn" aria-label="Play video">▶</button>
+        <div class="hero-video-info absolute bottom-3 left-3 right-3 p-3 bg-white/10 backdrop-blur-xl border border-white/20 rounded-xl">
           <div class="flex justify-between items-center text-white">
             <div>
               <p class="text-[10px] font-bold uppercase opacity-70" data-i18n="home_hero_flagship_label">旗舰型号</p>
@@ -328,6 +347,7 @@ if(localStorage.getItem('darkMode')==='true')document.documentElement.classList.
 <script defer src="/assets/js/nav-config.js?v=20260415"></script>
     <script defer src="/assets/js/ui/mobile-bottom-bar.js"></script>
     <script defer src="/assets/js/ui/navigator.js?v=20260322-v3"></script>
+  <script src="/assets/js/ui/hero-video.js"></script>
 <script defer src="/assets/js/ui/slide-menu.js?v=20260322-v3"></script>
 <script defer src="/assets/js/ui/search-engine.js"></script>
 <script defer src="/assets/js/ui/footer.js?v=20260322-v3"></script>

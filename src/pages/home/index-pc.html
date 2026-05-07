@@ -260,14 +260,28 @@
             ></div>
             <div
               class="relative w-full h-[600px] bg-slate-100 dark:bg-slate-800 rounded-3xl overflow-hidden shadow-2xl border border-white/10"
+              data-hero-video
             >
               <img
                 alt="Yukoli 旗舰产品"
-                class="w-full h-full object-contain p-8"
+                class="hero-video-poster w-full h-full object-contain p-8"
                 src="/assets/images/products/esl-bxc800.webp"
                 loading="eager"
               />
-              <div class="absolute bottom-6 left-6 right-6 p-8 bg-white/10 backdrop-blur-xl border border-white/20 rounded-2xl"
+              <video
+                class="hero-video-player"
+                src="/assets/video/aboutus.mp4"
+                poster="/assets/images/products/esl-bxc800.webp"
+                preload="metadata"
+                muted
+                playsinline
+                loop
+              ></video>
+              <div class="hero-video-overlay">
+                <button class="hero-video-mute" aria-label="Toggle mute">🔇</button>
+              </div>
+              <button class="hero-video-fallback-btn" aria-label="Play video">▶</button>
+              <div class="hero-video-info absolute bottom-6 left-6 right-6 p-8 bg-white/10 backdrop-blur-xl border border-white/20 rounded-2xl"
               >
                 <div class="flex justify-between items-center text-white">
                   <div>
@@ -561,6 +575,7 @@
     <script defer src="/assets/js/nav-config.js?v=20260415"></script>
     <script defer src="/assets/js/ui/mobile-bottom-bar.js"></script>
     <script defer src="/assets/js/ui/navigator.js?v=20260322-v3"></script>
+    <script src="/assets/js/ui/hero-video.js"></script>
     <script defer src="/assets/js/ui/search-engine.js"></script>
     <script defer src="/assets/js/ui/footer.js?v=20260322-v3"></script>
     <script defer src="/assets/js/lang-registry.js?v=20260429"></script>

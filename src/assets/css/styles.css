@@ -635,3 +635,114 @@ button.bg-primary[class*="hover:"]:hover {
 #mobile-header.header-hidden {
   transform: translateY(-100%);
 }
+
+/* ─── Hero Video: Apple-style progressive enhancement ─────────── */
+
+/* Container */
+[data-hero-video] {
+  position: relative;
+}
+
+/* Poster (封面图) — 初始可见，crossfade 后隐藏 */
+.hero-video-poster {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  transition: opacity 1.5s ease;
+  z-index: 1;
+}
+
+/* Video player — 初始透明，crossfade 后显示 */
+.hero-video-player {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  opacity: 0;
+  z-index: 2;
+  outline: none;
+}
+
+/* Overlay — 静音按钮容器，初始隐藏 */
+.hero-video-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 3;
+  display: flex;
+  justify-content: flex-end;
+  padding: 12px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 1.5s ease;
+}
+
+/* 静音切换按钮 */
+.hero-video-mute {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: auto;
+  transition: background 0.2s;
+}
+
+.hero-video-mute:hover {
+  background: rgba(0, 0, 0, 0.6);
+}
+
+/* 底部信息卡片 — 始终在最上层 */
+.hero-video-info {
+  position: absolute;
+  z-index: 10;
+}
+
+/* 降级播放按钮 */
+.hero-video-fallback-btn {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 5;
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  color: white;
+  font-size: 24px;
+  cursor: pointer;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s, background 0.2s;
+}
+
+.hero-video-fallback-btn:hover {
+  transform: translate(-50%, -50%) scale(1.1);
+  background: rgba(255, 255, 255, 0.25);
+}
+
+/* PC: hover 时隐藏自定义 overlay（显示原生 controls） */
+@media (min-width: 1024px) {
+  [data-hero-video]:hover .hero-video-overlay {
+    opacity: 0 !important;
+    pointer-events: none !important;
+  }
+}
