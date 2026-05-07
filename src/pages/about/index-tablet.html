@@ -193,14 +193,13 @@
         <div class="section-content">
         <h2 class="text-2xl font-black tracking-tighter mb-4" data-i18n="about_story_title" id="story">我们的故事</h2>
         <div class="relative h-[250px] rounded-2xl overflow-hidden mb-4">
-          <img
-            loading="lazy"
-            alt="我们的历史"
+          <video id="about-story-video"
+            autoplay muted loop playsinline
             class="w-full h-full object-cover"
-            src="/assets/images/about-story-rd.webp"
-          />
-        </div>
-        <p class="text-slate-600 dark:text-slate-400 text-base mb-4">
+            poster="/assets/images/about-story-rd.webp"
+          >
+            <source src="/assets/video/aboutus.mp4" type="video/mp4">
+          </video>        <p class="text-slate-600 dark:text-slate-400 text-base mb-4">
           <span data-i18n="about_story_p1">
             佛山市跃迁力科技有限公司成立于2006年，坐落于中国厨具制造重镇——广东佛山。从一间小型工程车间起步，我们始终聚焦一个目标：用智能自动化改变商用厨房的工作方式。经过20年的技术积累和市场验证，YuKoLi
             已发展成为集研发、制造、销售于一体的专业智能厨具制造商。

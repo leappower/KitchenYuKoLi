@@ -213,7 +213,25 @@
     if (typeof window.updateBudgetOptions === "function") {
       setTimeout(window.updateBudgetOptions, 100);
     }
+
+    bindAboutVideo();
   }
+
+  function bindAboutVideo() {
+    var v = document.getElementById("about-story-video");
+    if (!v || v._visBound) return;
+    v._visBound = true;
+    document.addEventListener("visibilitychange", function () {
+      if (document.hidden) v.pause();
+      else v.play().catch(function(){});
+    });
+  }
+
+  // Re-bind on SPA navigation
+  document.addEventListener("spa:load", function () {
+    addCTAHoverClass();
+    bindAboutVideo();
+  });
 
   if (window.CommonUtils && typeof window.CommonUtils.ready === "function") {
     window.CommonUtils.ready(init);
