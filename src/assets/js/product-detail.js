@@ -370,7 +370,5 @@
         renderPDP();
       }
     }
-      renderPDP();
-    }
   });
 })();
