@@ -266,43 +266,18 @@
     // 显示骨架屏
     showSkeleton: function () {
       var container = document.getElementById("spa-content");
-      if (!container) {
-        this.log("[SK] showSkeleton: #spa-content not found");
-        return;
-      }
-
-      // 检查是否已存在骨架屏
-      var existing = container.querySelector(".skeleton-container");
-      if (existing) {
-        this.log("[SK] showSkeleton: skeleton already exists, skipping");
-        return;
-      }
-
-      // 标记 container 正在加载 — CSS 隐藏非骨架子元素
-      container.classList.add('skeleton-loading');
-      this.log("[SK] showSkeleton: added skeleton-loading class");
-
-      // 创建骨架屏
-      var skeletonHTML = this.getSkeletonHTML();
-      var tempDiv = document.createElement("div");
-      tempDiv.innerHTML = skeletonHTML;
-      var skeletonElement = tempDiv.firstChild;
-
-      container.appendChild(skeletonElement);
-      this.log("[SK] showSkeleton: skeleton appended, container children:", container.children.length);
+      if (!container) return;
+      this.log("[SK] showSkeleton: clearing container, inserting skeleton");
+      // 直接清空并替换为骨架——没有 class 要管理，不可能残留
+      container.innerHTML = this.getSkeletonHTML();
     },
 
-    // 隐藏骨架屏
+    // 隐藏骨架屏（兜底：innerHTML 替换时骨架已消失，此函数通常无操作）
     hideSkeleton: function () {
       var skeleton = document.querySelector(".skeleton-container");
       if (skeleton) {
-        this.log("[SK] hideSkeleton: removing .skeleton-container");
+        this.log("[SK] hideSkeleton: removing stale .skeleton-container");
         skeleton.remove();
-      }
-      var container = document.getElementById("spa-content");
-      if (container && container.classList.contains('skeleton-loading')) {
-        container.classList.remove('skeleton-loading');
-        this.log("[SK] hideSkeleton: removed skeleton-loading class");
       }
     },
 
@@ -554,11 +529,10 @@
       }
 
       // 替换内容并触发 fade-in 动画
-      this.log("[SK] renderContent: setting opacity 0, removing skeleton-loading");
+      this.log("[SK] renderContent: setting opacity 0");
       container.style.opacity = "0";
-      container.classList.remove('skeleton-loading');
       container.innerHTML = content;
-      this.log("[SK] renderContent: innerHTML set, content length:", content ? content.length : 0);
+      this.log("[SK] renderContent: innerHTML set, length:", content ? content.length : 0);
 
       // 动态加载页面专属脚本（SPA 移除了 script 标签，需手动补充）
       var scriptsPromise = _self.loadPageScripts(pagePath);
