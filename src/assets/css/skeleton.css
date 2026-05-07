@@ -1,3 +1,6 @@
+/* Prevent horizontal overflow from affecting fixed-positioned elements */
+html, body { overflow-x: hidden; }
+
 /* Prevent layout shift: <navigator> custom elements must be block-level */
 [data-component="navigator"] { display: block; }
 
