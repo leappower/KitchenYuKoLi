@@ -133,9 +133,9 @@
     <div class="w-full pt-2">
         <!-- Hero Section -->
         <section
-          class="relative w-full py-14 px-6 bg-gradient-to-br from-slate-50 dark:from-slate-900 to-white dark:to-black overflow-hidden"
+          class="fullwidth-bg section-passthrough relative w-full py-14 bg-gradient-to-br from-slate-50 dark:from-slate-900 to-white dark:to-black overflow-hidden"
         >
-          <div class="absolute inset-0 opacity-25">
+          <div class="section-content"><div class="absolute inset-0 opacity-25">
             <div class="absolute top-16 right-16 w-72 h-72 bg-primary/10 rounded-full blur-3xl"></div>
             <div class="absolute bottom-16 left-16 w-56 h-56 bg-primary/5 rounded-full blur-2xl"></div>
           </div>
@@ -177,10 +177,11 @@
               </a>
             </div>
           </div>
-        </section>
+        </div></section>
 
         <!-- Category Filter & Sort -->
-        <section class="w-full py-5">
+        <section class="w-full py-5 fullwidth-bg">
+          <div class="section-content">
           <div class="flex flex-col gap-3">
             <!-- Category tabs (auto-filled, full width) -->
             <div class="flex items-center gap-2 flex-wrap gap-2 category-tab-container">
@@ -188,14 +189,13 @@
             <!-- Tier filter (right-aligned) -->
             <div class="flex items-center justify-end gap-2">
               <button class="filter-chip active px-3 py-1.5 rounded-full border border-slate-200 dark:border-slate-700 text-xs font-medium" data-filter="all" data-i18n="all">全部</button>
-              <button class="filter-chip px-3 py-1.5 rounded-full border border-slate-200 dark:border-slate-700 text-xs font-medium" data-filter="industrial" data-i18n="products_filter_industrial">工业级</button>
-              <button class="filter-chip px-3 py-1.5 rounded-full border border-slate-200 dark:border-slate-700 text-xs font-medium" data-filter="commercial" data-i18n="products_filter_commercial">商用级</button>
-              <button class="filter-chip px-3 py-1.5 rounded-full border border-slate-200 dark:border-slate-700 text-xs font-medium" data-filter="compact" data-i18n="products_filter_compact">紧凑型</button>
+              <button class="filter-chip px-3 py-1.5 rounded-full border border-slate-200 dark:border-slate-700 text-xs font-medium" data-filter="入门" data-i18n="products_filter_starter">入门</button>
+              <button class="filter-chip px-3 py-1.5 rounded-full border border-slate-200 dark:border-slate-700 text-xs font-medium" data-filter="智能" data-i18n="products_filter_smart">智能</button>
+              
             </div>
           </div>
+          </div>
         </section>
-
-        <!-- Product Grid -->
         <section id="products" class="fullwidth-bg pb-8">
           <div class="section-content">
             <div class="grid grid-cols-3 gap-4" id="product-grid">

@@ -215,7 +215,7 @@
     var thText = isTablet ? 'text-xs' : 'text-sm';
     var tdPad = isTablet ? 'px-3 py-2.5' : 'px-4 py-3';
     var tdText = isTablet ? 'text-xs' : 'text-sm';
-    var imgSize = isTablet ? 'w-12 h-12 rounded-lg' : 'w-16 h-16 rounded-xl';
+    var imgSize = isTablet ? 'w-20 h-20 rounded-lg' : 'w-28 h-28 rounded-xl';
     var nameClass = isTablet ? 'text-xs font-bold' : 'text-sm font-black';
     var modelClass = isTablet ? 'text-[10px] text-slate-400' : 'text-xs text-slate-400';
 

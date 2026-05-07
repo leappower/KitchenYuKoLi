@@ -226,7 +226,7 @@
         encodeURIComponent((product.subCategory || getCategoryName(product) ?
           (product.subCategory || getCategoryName(product)) + ' ' : '') + product.model) +
         '" target="_blank"' +
-        ' class="px-6 py-3 rounded-xl font-bold flex items-center gap-2' +
+        ' class="flex-1 px-6 py-3 rounded-xl font-bold flex items-center justify-center gap-2' +
         ' border-2 border-slate-300 dark:border-slate-600 hover:border-primary hover:text-primary transition-all text-sm">' +
         '<span class="material-symbols-outlined text-lg">chat</span> ' + tl('联系销售') + '</a></div></div></div>' +
       '<section class="mt-8"><h2 class="text-xl font-bold mb-4 flex items-center gap-2">' +
@@ -336,7 +336,7 @@
     }
   });
   document.addEventListener('spa:ready', function () {
-    // Re-render PDP after translations applied (for non-products pages it's a no-op)
+    var segs = location.pathname.split("/").filter(Boolean);
     if (segs.length === 2 && segs[0] === "products" && segs[1] !== "compare") {
       renderPDP();
     }

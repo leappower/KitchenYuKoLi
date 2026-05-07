@@ -34,9 +34,10 @@ html, body { overflow-x: hidden; }
   .skeleton-container { padding: 2.5rem var(--container-px, 1.25rem); } /* lg: aligned */
 }
 @media (width >= 1280px) {
-  /* PC: padding-top 110px to clear fixed navigator, then 2.5rem content gap */
+  /* PC: nav-mounted clears CSS padding-top (navigator placeholder handles spacing);
+   no extra padding-top needed here since main#spa-content provides it */
   .skeleton-container {
-    padding: calc(110px + 2.5rem) var(--container-px, 2.5rem) 2.5rem;
+    padding: 2.5rem var(--container-px, 2.5rem);
   }
 }
 

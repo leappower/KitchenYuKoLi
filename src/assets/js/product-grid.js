@@ -328,7 +328,9 @@
     var name = esc(p.name || model);
     var desc = esc(p.description || p.card_desc || p.highlights || '');
     var img = esc(p._imageUrl);
-    var subCat = esc(p.subCategory || cat);
+    var subCatRaw = p.subCategory || cat;
+    var subCat = esc(subCatRaw);
+    var subCatDataI18n = ' data-i18n="' + esc(subCatRaw) + '"';
     var specs = [];
     if (p.power) specs.push(esc(p.power));
     if (p.throughput) specs.push(esc(p.throughput));
@@ -345,12 +347,12 @@
     var selectedClass = isSelected ? ' compare-selected' : '';
         return '<article class="product-card group bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 overflow-hidden' + selectedClass + '" data-category="' + cat + '" data-tier="' + esc(p.tier || '') +
       '" data-model="' + model + '" data-sort-order="' + (p.sort_order || 0) + '" data-created="' + (p.created_at || '') + '">' +
-      '<div class="relative aspect-[4/3] overflow-hidden bg-slate-100 dark:bg-slate-700">' +
-        '<img loading="lazy" alt="' + name + '" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" src="' + img + '" onerror="if(!this.dataset.errored){this.dataset.errored=\'1\';this.src=\'/assets/images/products/default.webp\' }">' +
+      '<div class="relative aspect-[4/3] overflow-hidden bg-white dark:bg-slate-800 flex items-center justify-center">' +
+        '<img loading="lazy" alt="' + name + '" class="w-full h-full object-contain p-2 transition-transform duration-500 group-hover:scale-105" src="' + img + '" onerror="if(!this.dataset.errored){this.dataset.errored=\'1\';this.src=\'/assets/images/products/default.webp\' }">' +
         (badge ? '<div class="absolute top-4 left-4 flex gap-2">' + badge + '</div>' : '') +
       '</div>' +
       '<div class="p-6">' +
-        '<div class="flex items-center gap-2 mb-3"><span class="material-symbols-outlined text-primary text-sm">local_fire_department</span><span class="text-xs font-bold text-primary uppercase tracking-wider">' + subCat + '</span></div>' +
+        '<div class="flex items-center gap-2 mb-3"><span class="material-symbols-outlined text-primary">local_fire_department</span><span class="text-sm font-bold text-primary uppercase tracking-wider"' + subCatDataI18n + '>' + subCat + '</span></div>' +
         '<h3 class="text-xl font-bold mb-2 text-slate-900 dark:text-white">' + name + '</h3>' +
         '<p class="text-sm text-slate-500 dark:text-slate-400 mb-4 line-clamp-2">' + desc + '</p>' +
         (specHTML ? '<div class="flex flex-wrap gap-2 mb-4">' + specHTML + '</div>' : '') +
@@ -371,9 +373,10 @@
     var name = esc(p.name || model);
     var desc = esc(p.description || p.card_desc || '');
     var img = esc(p._imageUrl);
-    var subCat = esc(p.subCategory || cat);
-    var badge = '';
-    if (p.badge) {
+    var subCatRaw = p.subCategory || cat;
+    var subCat = esc(subCatRaw);
+    var subCatDataI18n = ' data-i18n="' + esc(subCatRaw) + '"';
+    var badge = '';    if (p.badge) {
       badge = '<span class="px-2 py-0.5 bg-primary text-white text-[10px] font-bold rounded">' + esc(p.badge) + '</span>';
     }
     var link = '/products/' + encodeURIComponent(model) + '/';
@@ -381,12 +384,12 @@
     var selectedClass = isSelected ? ' compare-selected' : '';
         return '<article class="product-card-tablet bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 overflow-hidden' + selectedClass + '" data-category="' + cat + '" data-model="' + model + '" data-tier="' +
       esc(p.tier || '') + '" data-sort-order="' + (p.sort_order || 0) + '" data-created="' + (p.created_at || '') + '">' +
-      '<div class="relative aspect-[4/3] overflow-hidden bg-slate-100 dark:bg-slate-700">' +
-        '<img loading="lazy" alt="' + name + '" class="w-full h-full object-cover" src="' + img + '" onerror="if(!this.dataset.errored){this.dataset.errored=\'1\';this.src=\'/assets/images/products/default.webp\' }">' +
+      '<div class="relative aspect-[4/3] overflow-hidden bg-white dark:bg-slate-800 flex items-center justify-center">' +
+        '<img loading="lazy" alt="' + name + '" class="w-full h-full object-contain p-2" src="' + img + '" onerror="if(!this.dataset.errored){this.dataset.errored=\'1\';this.src=\'/assets/images/products/default.webp\' }">' +
         (badge ? '<div class="absolute top-3 left-3 flex gap-1.5">' + badge + '</div>' : '') +
       '</div>' +
       '<div class="p-4">' +
-        '<div class="flex items-center gap-1.5 mb-2"><span class="material-symbols-outlined text-primary text-xs">local_fire_department</span><span class="text-[10px] font-bold text-primary uppercase tracking-wider">' + subCat + '</span></div>' +
+        '<div class="flex items-center gap-1.5 mb-2"><span class="material-symbols-outlined text-primary text-sm">local_fire_department</span><span class="text-xs font-bold text-primary uppercase tracking-wider"' + subCatDataI18n + '>' + subCat + '</span></div>' +
         '<h3 class="text-base font-bold mb-1 text-slate-900 dark:text-white">' + name + '</h3>' +
         '<p class="text-xs text-slate-500 dark:text-slate-400 mb-3 line-clamp-2">' + desc + '</p>' +
         '<div class="flex items-center justify-between pt-3 border-t border-slate-100 dark:border-slate-700">' +
@@ -413,8 +416,8 @@
       esc(p.tier || '') + '" data-sort-order="' + (p.sort_order || 0) + '" data-created="' + (p.created_at || '') + '">' +
       buildMobileCompareBtnHTML(model) +
       '<a href="' + link + '" class="flex gap-4 p-3">' +
-        '<div class="w-24 h-24 rounded-lg bg-slate-100 dark:bg-slate-700 flex-shrink-0 overflow-hidden">' +
-          '<img loading="lazy" alt="' + name + '" class="w-full h-full object-cover" src="' + img + '" onerror="if(!this.dataset.errored){this.dataset.errored=\'1\';this.src=\'/assets/images/products/default.webp\' }">' +
+        '<div class="w-24 h-24 rounded-lg bg-white dark:bg-slate-800 flex-shrink-0 overflow-hidden flex items-center justify-center">' +
+          '<img loading="lazy" alt="' + name + '" class="w-full h-full object-contain p-1" src="' + img + '" onerror="if(!this.dataset.errored){this.dataset.errored=\'1\';this.src=\'/assets/images/products/default.webp\' }">' +
         '</div>' +
         '<div class="flex-1 min-w-0">' +
           '<h3 class="text-sm font-bold text-slate-900 dark:text-white mb-1 truncate">' + name + '</h3>' +
@@ -724,13 +727,8 @@
   });
 
   // Translations may load after product-data-ready; refresh tab labels once ready
-  document.addEventListener('spa:ready', function() {
-    if (typeof window.t === 'function') {
-      document.querySelectorAll('.category-tab-container').forEach(function(el) {
-        el._categoryTabsInit = false;
-      });
-    }
-  });
+  // No spa:ready re-render needed — category labels use data-i18n attributes
+  // so applyTranslations() handles them on every spa:load cycle.
 
   // Public API
   window.ProductGrid = {

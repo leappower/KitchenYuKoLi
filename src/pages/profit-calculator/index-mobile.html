@@ -82,7 +82,7 @@
     <div class="relative flex min-h-screen flex-col">
       <navigator data-component="navigator" data-variant="mobile" data-active="profit-calculator"></navigator>
 
-      <main id="spa-content" class="pt-[72px]">
+      <main id="spa-content">
         <!-- Hero (compact) -->
         <section class="bg-gradient-to-br from-rose-50 via-white to-slate-50 dark:from-slate-900 dark:via-slate-900 dark:to-slate-950 py-8 fullwidth-bg">
           <div class="section-content">
@@ -127,7 +127,7 @@
               <!-- Business Type -->
               <div>
                 <label class="block text-sm font-bold mb-1" data-i18n="profit_calc_business_type">Business Type</label>
-                <select id="pc-business-type" class="w-full bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 rounded-lg p-3 focus:ring-primary focus:border-primary text-base">
+                <select id="pc-business-type" data-custom-select class="w-full bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 rounded-lg p-3 focus:ring-primary focus:border-primary text-base">
                   <option value="" data-i18n="profit_calc_select_business_type">Select business type…</option>
                         <option value="chain-restaurant" data-i18n="profit_calc_scene_chain">Chain Restaurant</option>
                         <option value="central-kitchen" data-i18n="profit_calc_scene_central">Central Kitchen</option>

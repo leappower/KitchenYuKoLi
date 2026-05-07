@@ -157,7 +157,7 @@ window.addEventListener('DOMContentLoaded',function(){
   data-cta-text-key="nav_get_quote"
   data-cta-href="/quote"></navigator>
 
-<main id="spa-content" class="pt-[110px]">
+<main id="spa-content">
 <div class="w-full">
   <!-- Hero Section: aligned with home page (left text, right image) -->
   <section class="fullwidth-bg section-passthrough w-full flex flex-col lg:flex-row items-center py-10 gap-12">
@@ -206,7 +206,8 @@ window.addEventListener('DOMContentLoaded',function(){
   </section>
 
   <!-- Category Filter: between hero and product grid -->
-  <section id="products" class="w-full py-10">
+  <section id="products" class="w-full py-10 fullwidth-bg">
+    <div class="section-content">
     <div class="flex flex-wrap items-center justify-between gap-4">
       <!-- Category tabs -->
       <div class="flex items-center gap-2 flex-wrap gap-2 category-tab-container">
@@ -214,15 +215,17 @@ window.addEventListener('DOMContentLoaded',function(){
       <!-- Tier filter -->
       <div class="flex items-center gap-2 flex-shrink-0">
         <button class="filter-chip active px-3 py-1.5 rounded-full border border-slate-200 dark:border-slate-700 text-xs font-medium" data-filter="all" data-i18n="all">全部</button>
-        <button class="filter-chip px-3 py-1.5 rounded-full border border-slate-200 dark:border-slate-700 text-xs font-medium" data-filter="industrial" data-i18n="products_filter_industrial">工业级</button>
-        <button class="filter-chip px-3 py-1.5 rounded-full border border-slate-200 dark:border-slate-700 text-xs font-medium" data-filter="commercial" data-i18n="products_filter_commercial">商用级</button>
-        <button class="filter-chip px-3 py-1.5 rounded-full border border-slate-200 dark:border-slate-700 text-xs font-medium" data-filter="compact" data-i18n="products_filter_compact">紧凑型</button>
+        <button class="filter-chip px-3 py-1.5 rounded-full border border-slate-200 dark:border-slate-700 text-xs font-medium" data-filter="入门" data-i18n="products_filter_starter">入门</button>
+        <button class="filter-chip px-3 py-1.5 rounded-full border border-slate-200 dark:border-slate-700 text-xs font-medium" data-filter="智能" data-i18n="products_filter_smart">智能</button>
+        
       </div>
+    </div>
     </div>
   </section>
 
   <!-- Product Grid Section -->
-  <section class="w-full py-12">
+  <section class="w-full py-12 fullwidth-bg">
+    <div class="section-content">
     <!-- Product Grid -->
     <div class="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-6" id="product-grid">
       <!-- Dynamically rendered by product-grid.js -->
@@ -233,12 +236,13 @@ window.addEventListener('DOMContentLoaded',function(){
         <span class="material-symbols-outlined">expand_more</span>
       </button>
     </div>
+    </div>
   </section>
 
   <!-- CTA Section -->
-  <section class="w-full py-16">
-    
-      <div class="w-full bg-gradient-to-br from-primary/10 to-primary/5 dark:from-primary/20 dark:to-primary/5 rounded-3xl p-12 lg:p-16 border border-primary/20">
+  <section class="w-full py-16 fullwidth-bg">
+    <div class="section-content">
+    <div class="w-full bg-gradient-to-br from-primary/10 to-primary/5 dark:from-primary/20 dark:to-primary/5 rounded-3xl p-12 lg:p-16 border border-primary/20">
         <div class="max-w-3xl mx-auto text-center">
           <h2 class="text-3xl lg:text-5xl font-black mb-6 text-slate-900 dark:text-white" data-i18n="products_cta_title">
             需要定制化解决方案？
@@ -262,6 +266,7 @@ window.addEventListener('DOMContentLoaded',function(){
           </div>
         </div>
       </div>
+    </div>
   </section>
 </div>
 </main>

@@ -224,19 +224,37 @@ html.dark ::-webkit-scrollbar-thumb {
 
 /* ─── Layout: main#spa-content unified padding ──────────────────── */
 
-/* PC pages have no inline padding class on <main>, so CSS provides it.
- * Tablet/mobile pages set their own padding via Tailwind (py-*, etc.),
- * so we skip CSS padding for those by matching only "bare" main elements.
+/* main#spa-content has a JS-injected placeholder sibling (fixed navigator spacer)
+ * that provides the base top offset. However, the placeholder may not exist in
+ * all scenarios (SPA mid-navigation, deferred JS, direct page loads before mount).
+ * CSS padding-top on main guarantees navigator clearance regardless.
  *
- * Breakpoints aligned with DeviceUtils: mobile <768, tablet 768-1279, PC >=1280 */
+ * Breakpoints aligned with Navigator.resolveVariant:
+ *   mobile  < 768px  → mobile header (65px)
+ *   tablet  768–1023 → mobile header (65px)
+ *   PC      ≥ 1024px → desktop header (109px) */
 
 main#spa-content {
   max-width: 1920px;
   margin-left: auto;
   margin-right: auto;
+  padding-top: 65px; /* mobile/tablet: clear 65px mobile header (fallback before JS mount) */
 }
 
-/* Only apply CSS padding when the main element has NO Tailwind padding class */
+@media (min-width: 1024px) {
+  main#spa-content {
+    padding-top: 109px; /* PC: clear 109px desktop header (fallback before JS mount) */
+  }
+}
+
+/* After Navigator.mount() inserts the placeholder div, the body gets class
+ * "nav-mounted". The placeholder handles top spacing, so CSS padding-top
+ * is zeroed out to prevent double spacing. */
+body.nav-mounted main#spa-content {
+  padding-top: 0;
+}
+
+/* Left/right inline padding — only when main has NO Tailwind padding class */
 main#spa-content:not([class*="p-"], [class*="px-"], [class*="py-"]) {
   padding-left: 0.75rem; /* 12px */
   padding-right: 0.75rem;

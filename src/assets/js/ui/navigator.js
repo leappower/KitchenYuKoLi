@@ -1199,6 +1199,9 @@
    * 同时注入样式、绑定交互事件。
    */
   function mountNavigator() {
+    /* 0. Mark body so CSS knows navigator placeholder is active */
+    document.body.classList.add('nav-mounted');
+
     /* 1. 注入样式 */
     injectDropdownStyles();
     injectLogoStyles();
