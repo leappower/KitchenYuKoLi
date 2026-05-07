@@ -74,8 +74,10 @@
   data-cta-href="/quote"></navigator>
 
 <!-- Main content area - content will be dynamically loaded by SPA router -->
-<main id="spa-content">
-  <!-- Initial skeleton screen -->
+<main id="spa-content"></main>
+
+<!-- Skeleton overlay: independent from content, toggled by SPA router -->
+<div id="skeleton-overlay">
   <div class="skeleton-container">
     <div class="sk-hero">
       <div class="sk-badge"></div>
@@ -93,7 +95,7 @@
       <div class="sk-card"></div>
     </div>
   </div>
-</main>
+</div>
 
 <!-- Footer placeholder - will be replaced by Footer component -->
 <footer data-component="footer" data-active="home"></footer>

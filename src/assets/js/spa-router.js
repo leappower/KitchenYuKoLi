@@ -264,50 +264,22 @@
     },
 
     // 显示骨架屏
+    // 显示骨架屏：切换覆盖层的 display
     showSkeleton: function () {
-      var container = document.getElementById("spa-content");
-      if (!container) return;
-      this.log("[SK] showSkeleton: clearing container, inserting skeleton");
-      // 直接清空并替换为骨架——没有 class 要管理，不可能残留
-      container.innerHTML = this.getSkeletonHTML();
+      var overlay = document.getElementById("skeleton-overlay");
+      if (overlay) {
+        this.log("[SK] showSkeleton: overlay visible");
+        overlay.removeAttribute("hidden");
+      }
     },
 
-    // 隐藏骨架屏（兜底：innerHTML 替换时骨架已消失，此函数通常无操作）
+    // 隐藏骨架屏
     hideSkeleton: function () {
-      var skeleton = document.querySelector(".skeleton-container");
-      if (skeleton) {
-        this.log("[SK] hideSkeleton: removing stale .skeleton-container");
-        skeleton.remove();
+      var overlay = document.getElementById("skeleton-overlay");
+      if (overlay) {
+        this.log("[SK] hideSkeleton: overlay hidden");
+        overlay.setAttribute("hidden", "");
       }
-    },
-
-    // 获取骨架屏 HTML — 三屏/全页面统一通用骨架
-    getSkeletonHTML: function () {
-      // Hero: 标题 + 描述 + 2 个 CTA（三屏统一）
-      var hero =
-        '<div class="sk-hero">' +
-          '<div class="sk-badge"></div>' +
-          '<div class="sk-line"></div>' +
-          '<div class="sk-line sk-line--desc"></div>' +
-          '<div class="sk-line sk-line--desc sk-line--short"></div>' +
-          '<div class="sk-cta-group">' +
-            '<div class="sk-line sk-cta"></div>' +
-            '<div class="sk-line sk-cta sk-cta--outline"></div>' +
-          '</div>' +
-        '</div>';
-
-      // Content: 通用 3 卡片，交给 CSS 响应式排列
-      var cards = '';
-      for (var i = 0; i < 3; i++) {
-        cards += '<div class="sk-card"></div>';
-      }
-
-      return (
-        '<div class="skeleton-container">' +
-        hero +
-        '<div class="sk-grid">' + cards + '</div>' +
-        '</div>'
-      );
     },
 
     // 挂载 Header（首次）
@@ -528,17 +500,13 @@
         this.updateFooterActiveNav(html);
       }
 
-      // 替换内容并触发 fade-in 动画
-      this.log("[SK] renderContent: setting opacity 0");
+      // 隐藏骨架 → 替换内容 → fade in
+      this.hideSkeleton();
       container.style.opacity = "0";
       container.innerHTML = content;
-      this.log("[SK] renderContent: innerHTML set, length:", content ? content.length : 0);
 
       // 动态加载页面专属脚本（SPA 移除了 script 标签，需手动补充）
       var scriptsPromise = _self.loadPageScripts(pagePath);
-
-      // 隐藏骨架屏（兜底：innerHTML 已移除，这里通常找不到匹配）
-      this.hideSkeleton();
 
       // 滚动到页面顶部
       if (this._pendingScroll) {

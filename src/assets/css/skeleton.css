@@ -18,6 +18,20 @@ html, body { overflow-x: hidden; }
  *   PC:      --container-px 40px, --nav-height CSS variable for navigator, py-10 hero
  */
 
+/* ───────── 骨架覆盖层：独立于内容，只由 JS toggle display ───────── */
+#skeleton-overlay {
+  position: fixed;
+  top: var(--nav-height, 65px);
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1;
+  pointer-events: none;
+}
+#skeleton-overlay[hidden] {
+  display: none;
+}
+
 /* ───────── 容器 ───────── */
 .skeleton-container {
   width: 100%;
