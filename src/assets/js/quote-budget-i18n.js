@@ -111,16 +111,16 @@
     if (listenersRegistered) return;
     listenersRegistered = true;
 
-    /* Listen for language changes via DOM CustomEvent (dispatched on window) */
-    window.addEventListener("languageChanged", function () {
-      setTimeout(updateBudgetOptions, 80);
+    /* Listen for language changes — translationsApplied fires after DOM is updated */
+    window.addEventListener("translationsApplied", function () {
+      updateBudgetOptions();
     });
 
     /* Also try the translationManager.on API as backup */
     function tryRegisterOnManager() {
       if (window.translationManager && typeof window.translationManager.on === "function") {
-        window.translationManager.on("languageChanged", function () {
-          setTimeout(updateBudgetOptions, 80);
+        window.translationManager.on("translationsApplied", function () {
+          updateBudgetOptions();
         });
         return true;
       }
@@ -136,14 +136,14 @@
 
   /* Run on current page */
   if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", function () { setTimeout(init, 50); });
+    document.addEventListener("DOMContentLoaded", init);
   } else {
-    setTimeout(init, 50);
+    init();
   }
 
-  /* On SPA navigation: re-check and update */
-  document.addEventListener("spa:load", function () {
-    setTimeout(init, 120);
+  /* On SPA navigation: re-check and update (spa:ready fires after translations applied) */
+  document.addEventListener("spa:ready", function () {
+    init();
   });
 
   /* Expose for manual trigger */

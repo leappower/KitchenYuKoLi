@@ -331,8 +331,14 @@
     var segs = location.pathname.split("/").filter(Boolean);
     console.log('[ProductDetail] spa:load fired, pathname:', location.pathname, 'segs:', segs);
     if (segs.length === 2 && segs[0] === "products" && segs[1] !== "compare") {
-      console.log('[ProductDetail] Will render PDP in 100ms');
-      setTimeout(renderPDP, 100);
+      console.log('[ProductDetail] Rendering PDP');
+      renderPDP();
+    }
+  });
+  document.addEventListener('spa:ready', function () {
+    // Re-render PDP after translations applied (for non-products pages it's a no-op)
+    if (segs.length === 2 && segs[0] === "products" && segs[1] !== "compare") {
+      renderPDP();
     }
   });
 })();

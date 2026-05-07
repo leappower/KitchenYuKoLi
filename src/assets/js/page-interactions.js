@@ -209,10 +209,12 @@
       window.smartPopup.init();
     }
 
-    // Update budget options for quote page (if present)
-    if (typeof window.updateBudgetOptions === "function") {
-      setTimeout(window.updateBudgetOptions, 100);
-    }
+    // Update budget options after translations are applied
+    document.addEventListener("spa:ready", function () {
+      if (typeof window.updateBudgetOptions === "function") {
+        window.updateBudgetOptions();
+      }
+    });
 
     bindAboutVideo();
   }

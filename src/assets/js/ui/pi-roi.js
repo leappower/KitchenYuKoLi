@@ -392,10 +392,8 @@
   });
 
   // SPA navigation: just refresh charts for new canvas
-  document.addEventListener('spa:load', function () {
-    setTimeout(function () {
-      if (cumulativeChart) cumulativeChart.update();
-      if (laborCompareChart) laborCompareChart.update();
-    }, 200);
+  document.addEventListener('spa:ready', function () {
+    if (cumulativeChart) cumulativeChart.update();
+    if (laborCompareChart) laborCompareChart.update();
   });
 })(window);

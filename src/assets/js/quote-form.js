@@ -199,7 +199,7 @@
   // Bind on DOM ready + SPA navigation
   if (document.readyState !== "loading") initQuoteForm();
   else document.addEventListener("DOMContentLoaded", initQuoteForm);
-  document.addEventListener("spa:load", function () {
-    setTimeout(initQuoteForm, 100);
+  document.addEventListener("spa:ready", function () {
+    initQuoteForm();
   });
 })();

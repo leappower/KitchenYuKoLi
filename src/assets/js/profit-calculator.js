@@ -1057,11 +1057,13 @@
       if (rangeValEl) rangeValEl.textContent = operators;
     }
 
-    // Auto-trigger calculation after a short delay (let DOM settle)
+    // Auto-trigger calculation (use microtask to let change handlers run first)
     if (autoCalc) {
-      setTimeout(function () {
+      Promise.resolve().then(function () {
+        var ph = document.getElementById('profit-placeholder');
+        if (ph) ph.classList.add('hidden');
         self.run();
-      }, 300);
+      });
     }
 
     return true;

@@ -705,18 +705,16 @@
   if (document.readyState === "loading") {
     document.addEventListener("DOMContentLoaded", function () {
       injectStyles();
-      // Wait for navigator to render, then init search
-      setTimeout(init, 100);
+      init();
     });
   } else {
     injectStyles();
-    // If DOM already loaded (SPA re-init scenario)
-    setTimeout(init, 100);
+    init();
   }
 
-  // Re-init on SPA navigation (header may have been re-rendered)
-  document.addEventListener("spa:load", function () {
-    setTimeout(reinit, 150);
+  // Re-init on SPA navigation (spa:ready ensures translations + DOM are ready)
+  document.addEventListener("spa:ready", function () {
+    reinit();
   });
 
   // Re-init on language change

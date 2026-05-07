@@ -473,8 +473,11 @@
   }, t.recoverTranslationsFromBfcache = function() {
     return s.recoverFromBfcache()
   }, document.addEventListener("spa:load", function() {
-    s.resetEventListeners(), s.applyTranslations().catch(function(t) {
+    s.resetEventListeners(), s.applyTranslations().then(function() {
+      document.dispatchEvent(new Event("spa:ready"));
+    }).catch(function(t) {
       console.warn("[i18n] spa:load translation apply failed:", t)
+      document.dispatchEvent(new Event("spa:ready"));
     })
-  })
+ })
 }(window);
