@@ -618,7 +618,15 @@
         container.style.overflow = isExpanded ? 'visible' : 'hidden';
       }
       for (var i = 0; i < showCount; i++) {
-        container.appendChild(allTabs[i]);
+        var tab = allTabs[i];
+        // Set active state based on current category
+        if ((_activeCategory === 'all' && tab.dataset.category === 'all') ||
+            (tab.dataset.category === _activeCategory)) {
+          tab.classList.add('active');
+        } else {
+          tab.classList.remove('active');
+        }
+        container.appendChild(tab);
       }
       if (allTabs.length > maxVis) {
         var remaining = allTabs.length - maxVis;
@@ -719,10 +727,18 @@
       el._categoryTabsInit = false;
     });
     _shownCount = {};
-    _activeCategory = 'all';
     _activeTier = 'all';
     var loadMore = document.querySelector('[data-i18n="products_load_more"]');
     if (loadMore) loadMore._bound = false;
+
+    // Auto-select category from URL (e.g. /products/stewing/)
+    var categoryFromUrl = '';
+    var match = window.location.pathname.match(/^\/products\/([^/]+)\/$/);
+    if (match) {
+      categoryFromUrl = match[1];
+    }
+    _activeCategory = categoryFromUrl || 'all';
+
     autoRender();
   });
 
