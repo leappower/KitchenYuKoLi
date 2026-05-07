@@ -197,3 +197,9 @@ coverage/
 skill/.openclaw-project/
 .openclaw-project
 translate-quota.json
+
+# Git hooks
+.githooks/
+
+# Reference files
+.reference/
