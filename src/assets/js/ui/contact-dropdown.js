@@ -170,10 +170,7 @@
           window.open(itemHref, "_blank");
           return;
         }
-        if (itemHref && window.SpaRouter) {
-          e.preventDefault();
-          window.SpaRouter.navigate(itemHref);
-        }
+        // Navigate 由全局 click handler (spa-router.js) 统一处理
       });
     });
 

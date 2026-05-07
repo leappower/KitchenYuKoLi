@@ -20,7 +20,12 @@ html, body { overflow-x: hidden; }
 
 /* ───────── 骨架层：文档流中 header 和 footer 之间，独立于 #spa-content ───────── */
 #skeleton-overlay {
-  /* 普通 document flow，不 fixed 不 absolute */
+  padding-top: var(--nav-height, 65px);
+}
+@media (min-width: 1024px) {
+  #skeleton-overlay {
+    padding-top: var(--nav-height, 109px);
+  }
 }
 #skeleton-overlay[hidden] {
   display: none;

@@ -588,7 +588,6 @@
       '<a href="' + escapeHtml(child.href) + '"' +
       ' class="mobile-menu-l2-item' + whatsappClass + isActive + '"' +
       targetAttr +
-      ' onclick="event.preventDefault();var h=this.href;if(window.SpaRouter){try{window.SpaRouter.navigate(h)}catch(e){location.href=h}}else{location.href=h}if(window.SlideMenu&&window.SlideMenu.close)try{window.SlideMenu.close()}catch(e){}"' +
       '>' +
         '<span class="mobile-menu-l2-icon">' +
           '<span class="material-symbols-outlined">' + escapeHtml(child.icon) + '</span>' +
@@ -840,22 +839,14 @@
     var subItems = panelEl.querySelectorAll(".mobile-menu-l2-item");
     for (var k = 0; k < subItems.length; k++) {
       subItems[k].addEventListener("click", function (evt) {
-        var href = this.getAttribute("href");
-
         // WhatsApp 链接不在 SPA 内处理，关闭菜单后让默认行为生效
         if (this.classList.contains("is-whatsapp")) {
           closeMenu();
           return;
         }
 
-        // 常规链接：关闭菜单并尝试 SPA 路由
+        // 常规链接：关闭菜单，navigate 由全局 click handler 处理
         closeMenu();
-        if (href && window.SpaRouter) {
-          evt.preventDefault();
-          try { window.SpaRouter.navigate(href); } catch(e) { location.href = href; }
-        } else if (href) {
-          location.href = href;
-        }
       });
     }
 
@@ -892,12 +883,8 @@
     var ctaButtons = panelEl.querySelectorAll(".mobile-menu-cta-btn[data-nav]");
     for (var n = 0; n < ctaButtons.length; n++) {
       ctaButtons[n].addEventListener("click", function (evt) {
-        var href = this.getAttribute("href") || this.getAttribute("data-nav");
         closeMenu();
-        if (href && window.SpaRouter) {
-          evt.preventDefault();
-          window.SpaRouter.navigate(href);
-        }
+        // Navigate 由全局 click handler (spa-router.js) 统一处理
       });
     }
   }

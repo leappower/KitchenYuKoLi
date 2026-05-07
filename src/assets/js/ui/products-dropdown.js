@@ -254,13 +254,8 @@
     var popupItems = panel.querySelectorAll(".prod-popup-item");
     for (var k = 0; k < popupItems.length; k++) {
       popupItems[k].addEventListener("click", function (e) {
-        var target = e.currentTarget;
-        var itemHref = target.getAttribute("href");
         closePopup();
-        if (itemHref && window.SpaRouter) {
-          e.preventDefault();
-          window.SpaRouter.navigate(itemHref);
-        }
+        // Navigate 由全局 click handler (spa-router.js) 统一处理
       });
     }
 

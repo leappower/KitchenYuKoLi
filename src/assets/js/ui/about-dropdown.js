@@ -198,12 +198,8 @@
 
     panel.querySelectorAll(".abt-popup-item").forEach(function (item) {
       item.addEventListener("click", function (e) {
-        var itemHref = item.getAttribute("href");
         closePopup();
-        if (itemHref && window.SpaRouter) {
-          e.preventDefault();
-          window.SpaRouter.navigate(itemHref);
-        }
+        // Navigate 由全局 click handler (spa-router.js) 统一处理
       });
     });
 

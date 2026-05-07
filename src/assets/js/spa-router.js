@@ -118,14 +118,11 @@
       // 设置 SPA 导航标志,禁用响应式重定向
       window.__spaNavigating = true;
 
-      // 取消上一次未完成的导航（防止竞态）
-      this._navVersion = (this._navVersion || 0) + 1;
-      var navVersion = this._navVersion;
-
-      // Same-page navigation (hash anchor on current page): just scroll, don't reload
+      // Same-page navigation: don't increment navVersion or reload
       var currentPath = this.getCurrentPath();
+      console.log("[SK] navigate same-page check: currentPath=", currentPath, "target=", normalizedPath, "match=", normalizedPath === currentPath);
       if (normalizedPath === currentPath || normalizedPath.replace(/\/$/, "") === currentPath.replace(/\/$/, "")) {
-        // Same page — just scroll to anchor if pending
+        console.log("[SK] navigate: same page, skipping. path=", normalizedPath);
         if (this._pendingScroll) {
           var anchorId = this._pendingScroll;
           this._pendingScroll = null;
@@ -139,6 +136,11 @@
         window.__spaNavigating = false;
         return;
       }
+
+      // 取消上一次未完成的导航（防止竞态）
+      this._navVersion = (this._navVersion || 0) + 1;
+      var navVersion = this._navVersion;
+      console.log("[SK] navigate:", path, "→", normalizedPath, "navVersion:", navVersion);
 
       history.pushState({ path: normalizedPath }, "", normalizedPath);
 
@@ -268,10 +270,12 @@
     showSkeleton: function () {
       var overlay = document.getElementById("skeleton-overlay");
       var container = document.getElementById("spa-content");
+      console.log("[SK] showSkeleton called from:", new Error().stack.split('\n')[2]?.trim());
       if (overlay) {
         overlay.removeAttribute("hidden");
       }
       if (container) {
+        console.log("[SK] showSkeleton: container.display was", container.style.display, "→ none");
         container.style.display = "none";
       }
     },
@@ -280,10 +284,12 @@
     hideSkeleton: function () {
       var overlay = document.getElementById("skeleton-overlay");
       var container = document.getElementById("spa-content");
+      console.log("[SK] hideSkeleton called");
       if (overlay) {
         overlay.setAttribute("hidden", "");
       }
       if (container) {
+        console.log("[SK] hideSkeleton: container.display was", container.style.display, "→ ''");
         container.style.display = "";
       }
     },
@@ -448,7 +454,8 @@
         .then(function (html) {
           // 竞态保护：丢弃过期导航的结果
           if (navVersion && navVersion !== _self._navVersion) {
-            _self.log("Stale navigation discarded:", routePath, "(v" + navVersion + " vs v" + _self._navVersion + ")");
+            console.log("[SK] Stale nav discarded:", routePath, "v" + navVersion + " vs v" + _self._navVersion);
+            _self.hideSkeleton(); // 安全恢复：防止 display:none 残留
             return;
           }
           _self.renderContent(devicePath, html);
@@ -507,7 +514,9 @@
       }
 
       // 隐藏骨架 → 替换内容 → fade in
+      console.log("[SK] renderContent: calling hideSkeleton, then setting content");
       this.hideSkeleton();
+      console.log("[SK] renderContent: after hideSkeleton, container.display=", container.style.display);
       container.style.opacity = "0";
       container.innerHTML = content;
 
