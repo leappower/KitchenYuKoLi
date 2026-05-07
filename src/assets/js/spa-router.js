@@ -264,21 +264,27 @@
     },
 
     // 显示骨架屏
-    // 显示骨架屏：切换覆盖层的 display
+    // 显示骨架屏：overlay 可见，内容隐藏
     showSkeleton: function () {
       var overlay = document.getElementById("skeleton-overlay");
+      var container = document.getElementById("spa-content");
       if (overlay) {
-        this.log("[SK] showSkeleton: overlay visible");
         overlay.removeAttribute("hidden");
+      }
+      if (container) {
+        container.style.display = "none";
       }
     },
 
-    // 隐藏骨架屏
+    // 隐藏骨架屏：overlay 隐藏，内容恢复
     hideSkeleton: function () {
       var overlay = document.getElementById("skeleton-overlay");
+      var container = document.getElementById("spa-content");
       if (overlay) {
-        this.log("[SK] hideSkeleton: overlay hidden");
         overlay.setAttribute("hidden", "");
+      }
+      if (container) {
+        container.style.display = "";
       }
     },
 
