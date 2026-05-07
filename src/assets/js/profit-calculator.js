@@ -189,11 +189,10 @@
   function calculate(input) {
     var savingsRatio = getSavingsRatio(input.painPoint, input.equipment);
 
-    // Monthly savings = (monthly labor / workers) * reduction * ratio
-    // Estimate workers: assume 4 base workers for cost entered
-    var estimatedWorkers = Math.max(Math.round(input.laborCost / (DEFAULT_SALARIES[input.country] || DEFAULT_SALARIES['Other']).monthly), input.operatorReduction);
-    var perWorkerCost = input.laborCost / estimatedWorkers;
-    var monthlySavingsBase = perWorkerCost * input.operatorReduction * savingsRatio.mid;
+    // Monthly savings = default per-worker salary × operator reduction × efficiency ratio
+    // Use country's default single-worker salary so that changing operator count directly affects the result.
+    var perWorkerSalary = (DEFAULT_SALARIES[input.country] || DEFAULT_SALARIES['Other']).monthly;
+    var monthlySavingsBase = perWorkerSalary * input.operatorReduction * savingsRatio.mid;
 
     var monthlySavings = {
       min: Math.round(monthlySavingsBase * (savingsRatio.min / savingsRatio.mid)),
@@ -559,24 +558,41 @@
     var countryEl = document.getElementById(this.countrySelectId);
     if (countryEl) {
       // Auto-select country based on current language
-      if (!countryEl.value && window.translationManager) {
+      function applyCountryFromLang() {
+        if (!window.translationManager) return;
         var lang = window.translationManager.currentLanguage || '';
         var matchedCountry = null;
-        // Try exact match first, then prefix match
         if (LANG_COUNTRY_MAP[lang]) {
           matchedCountry = LANG_COUNTRY_MAP[lang];
         } else {
           var prefix = lang.split('-')[0];
           matchedCountry = LANG_COUNTRY_MAP[prefix] || null;
         }
-        if (matchedCountry) {
+        if (matchedCountry && countryEl.value !== matchedCountry) {
           countryEl.value = matchedCountry;
-          // Trigger labor cost auto-fill
           var info = DEFAULT_SALARIES[matchedCountry];
           var laborEl = document.getElementById(self.laborInputId);
-          if (info && laborEl) laborEl.value = info.monthly;
+          if (info && laborEl && !laborEl.dataset.touched) {
+            laborEl.value = info.monthly;
+          }
+          updateCurrencySymbol();
+          /* Dispatch change so CustomSelect syncs */
+          countryEl.dispatchEvent(new Event('change'));
         }
       }
+      applyCountryFromLang();
+
+      // Re-apply on language change (user manually toggled lang)
+      window.addEventListener('languageChanged', function () {
+        applyCountryFromLang();
+      });
+
+      function updateCurrencySymbol() {
+        var info = DEFAULT_SALARIES[countryEl.value];
+        var symEl = document.getElementById('pc-currency-symbol');
+        if (symEl) symEl.textContent = info ? ('(' + info.currency + ')') : '';
+      }
+      updateCurrencySymbol();
 
       countryEl.addEventListener('change', function () {
         var info = DEFAULT_SALARIES[this.value];
@@ -584,6 +600,7 @@
         if (info && laborEl && !laborEl.dataset.touched) {
           laborEl.value = info.monthly;
         }
+        updateCurrencySymbol();
         /* Re-calculate if results are already showing */
         if (document.getElementById('profit-result-panel') && !document.getElementById('profit-result-panel').classList.contains('hidden')) {
           self.run();
