@@ -529,7 +529,7 @@
     style.id = "ios-search-styles";
     style.textContent = [
       /* 搜索容器 */
-      ".ios-search-wrapper { display: flex; align-items: center; }",
+      ".ios-search-wrapper { display: flex; align-items: center; min-width: 0; }",
 
       /* 搜索栏 */
       ".ios-search-bar {",
@@ -544,17 +544,19 @@
       "  -webkit-backdrop-filter: blur(12px);",
       "  border: 1px solid rgba(120,120,128,0.18);",
       "  transition: width 320ms cubic-bezier(0.4, 0, 0.2, 1),",
+      "              max-width 320ms cubic-bezier(0.4, 0, 0.2, 1),",
       "              background 200ms ease,",
       "              border-color 200ms ease,",
       "              box-shadow 200ms ease;",
       "  overflow: hidden;",
       "}",
-      /* Mobile: fill available space */
+      /* Mobile: fill available space, capped at 320px */
       "#mobile-ios-search-bar {",
-      "  width: 100%;",
-      "  padding: 5px 12px;",
+      "  width: auto;",
+      "  flex: 1 1 0%;",
       "  max-width: 320px;",
-      "}",,
+      "  padding: 5px 12px;",
+      "}",
       ".ios-search-bar.is-focused {",
       "  width: 280px;",
       "  background: rgba(120,120,128,0.08);",
