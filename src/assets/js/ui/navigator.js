@@ -132,7 +132,7 @@
    */
   function buildSearchBarHtml(placeholderI18nKey) {
     return (
-      '<div class="ios-search-wrapper flex-1 flex justify-center mx-1">' +
+      '<div class="ios-search-wrapper">' +
         '<div class="ios-search-bar" id="mobile-ios-search-bar">' +
           '<span class="ios-search-icon material-symbols-outlined">search</span>' +
           '<input class="ios-search-input" id="mobile-header-search-input" ' +

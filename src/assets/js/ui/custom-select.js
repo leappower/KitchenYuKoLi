@@ -293,8 +293,10 @@
         if (child.tagName && child.tagName.toLowerCase() === "optgroup") {
           var label = child.getAttribute("label") || "";
           var groupOpts = [];
-          for (var j = 0; j < (child.options && child.options.length || 0); j++) {
-            var go = child.options[j];
+          var groupChildren = child.children || child.childNodes;
+          for (var j = 0; j < groupChildren.length; j++) {
+            var go = groupChildren[j];
+            if (!go || (go.tagName && go.tagName.toLowerCase() !== "option")) continue;
             groupOpts.push({
             value: go.value,
             text: go.text,
