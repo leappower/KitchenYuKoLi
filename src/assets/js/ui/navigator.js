@@ -1199,9 +1199,6 @@
    * 同时注入样式、绑定交互事件。
    */
   function mountNavigator() {
-    /* 0. Mark body so CSS knows navigator placeholder is active */
-    document.body.classList.add('nav-mounted');
-
     /* 1. 注入样式 */
     injectDropdownStyles();
     injectLogoStyles();
@@ -1239,29 +1236,27 @@
       wrapper.innerHTML = buildHeaderHtml(config);
 
       /*
-       * buildHeaderHtml 可能返回两个顶级元素：
-       *   [0] placeholder div (id="mobile-header-placeholder" 或 "pc-header-placeholder")
+       * buildHeaderHtml 返回两个顶级元素：
+       *   [0] spacer div (旧 placeholder，不再使用)
        *   [1] <header> 元素
+       *
+       * 间距统一由 CSS main#spa-content { padding-top: var(--nav-height) } 控制，
+       * 不再需要 spacer DOM 元素。
        */
-      var placeholderEl = wrapper.firstElementChild;
-      var headerEl = placeholderEl ? placeholderEl.nextElementSibling : wrapper.firstChild;
+      var spacerEl = wrapper.firstElementChild;
+      var headerEl = spacerEl ? spacerEl.nextElementSibling : wrapper.firstChild;
 
-      console.log(
-        "[navigator] buildHeader children:", wrapper.children.length,
-        "| placeholder:", placeholderEl ? placeholderEl.tagName + "#" + placeholderEl.id : "NULL",
-        "| header:", headerEl ? headerEl.tagName + "#" + (headerEl.id || "") : "NULL"
-      );
+      /* 设置 CSS 变量 --nav-height，作为间距的唯一来源 */
+      var navHeight = (config.variant === "pc") ? "109px" : "65px";
+      document.documentElement.style.setProperty("--nav-height", navHeight);
 
-      /* 插入 placeholder（保留高度占位） */
-      if (placeholderEl && placeholderEl.id) {
-        placeholder.parentNode.insertBefore(placeholderEl, placeholder);
-      }
-
-      /* 替换占位符为 header */
       console.log(
         "[navigator] variant=" + config.variant,
+        "| --nav-height=" + navHeight,
         "| header inserted, tag=" + (headerEl ? headerEl.tagName : "NULL")
       );
+
+      /* 替换占位符为 header（不再插入 spacer） */
       placeholder.parentNode.replaceChild(headerEl, placeholder);
 
       /* 延迟初始化 SlideMenu（等 DOM 完成） */

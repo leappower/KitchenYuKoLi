@@ -15,7 +15,7 @@ html, body { overflow-x: hidden; }
  * 间距与实际页面对齐（使用 --container-px 变量）：
  *   Mobile:  --container-px 12px, py-8 hero, gap-6
  *   Tablet:  --container-px 20px, py-10 hero, gap-8
- *   PC:      --container-px 40px, pt-[110px] for navigator, py-10 hero
+ *   PC:      --container-px 40px, --nav-height CSS variable for navigator, py-10 hero
  */
 
 /* ───────── 容器 ───────── */
@@ -34,8 +34,8 @@ html, body { overflow-x: hidden; }
   .skeleton-container { padding: 2.5rem var(--container-px, 1.25rem); } /* lg: aligned */
 }
 @media (width >= 1280px) {
-  /* PC: nav-mounted clears CSS padding-top (navigator placeholder handles spacing);
-   no extra padding-top needed here since main#spa-content provides it */
+  /* PC: main#spa-content already has padding-top from --nav-height CSS variable;
+   skeleton-container just needs content padding */
   .skeleton-container {
     padding: 2.5rem var(--container-px, 2.5rem);
   }
