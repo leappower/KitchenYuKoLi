@@ -271,21 +271,14 @@
       // 检查是否已存在骨架屏
       if (container.querySelector(".skeleton-container")) return;
 
+      // 标记 container 正在加载 — CSS 隐藏非骨架子元素
+      container.classList.add('skeleton-loading');
+
       // 创建骨架屏
       var skeletonHTML = this.getSkeletonHTML();
       var tempDiv = document.createElement("div");
       tempDiv.innerHTML = skeletonHTML;
       var skeletonElement = tempDiv.firstChild;
-
-      // 骨架屏绝对定位覆盖整个 container，遮住旧内容
-      skeletonElement.style.position = "absolute";
-      skeletonElement.style.inset = "0";
-      skeletonElement.style.zIndex = "10";
-      skeletonElement.style.backgroundColor = "inherit";
-
-      // container 需要是 relative 才能让骨架覆盖
-      var pos = getComputedStyle(container).position;
-      if (pos === "static") container.style.position = "relative";
 
       container.appendChild(skeletonElement);
     },
@@ -547,8 +540,8 @@
       }
 
       // 替换内容并触发 fade-in 动画
-      // 骨架是 container 的子元素，innerHTML 替换时会一并移除
       container.style.opacity = "0";
+      container.classList.remove('skeleton-loading');
       container.innerHTML = content;
 
       // 动态加载页面专属脚本（SPA 移除了 script 标签，需手动补充）

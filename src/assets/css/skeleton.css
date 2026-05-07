@@ -18,6 +18,14 @@ html, body { overflow-x: hidden; }
  *   PC:      --container-px 40px, --nav-height CSS variable for navigator, py-10 hero
  */
 
+/* ───────── 加载态：隐藏旧内容，只显示骨架 ───────── */
+#spa-content.skeleton-loading > :not(.skeleton-container) {
+  visibility: hidden;
+}
+#spa-content.skeleton-loading > .skeleton-container {
+  visibility: visible;
+}
+
 /* ───────── 容器 ───────── */
 .skeleton-container {
   width: 100%;
