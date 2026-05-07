@@ -277,8 +277,17 @@
       tempDiv.innerHTML = skeletonHTML;
       var skeletonElement = tempDiv.firstChild;
 
-      // 插入骨架屏（在现有内容之前）
-      container.insertBefore(skeletonElement, container.firstChild);
+      // 骨架屏绝对定位覆盖整个 container，遮住旧内容
+      skeletonElement.style.position = "absolute";
+      skeletonElement.style.inset = "0";
+      skeletonElement.style.zIndex = "10";
+      skeletonElement.style.backgroundColor = "inherit";
+
+      // container 需要是 relative 才能让骨架覆盖
+      var pos = getComputedStyle(container).position;
+      if (pos === "static") container.style.position = "relative";
+
+      container.appendChild(skeletonElement);
     },
 
     // 隐藏骨架屏
