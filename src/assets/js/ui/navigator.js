@@ -157,6 +157,27 @@
   function buildMobileHeaderHtml(opts) {
     var basePath = window.BASE_PATH || "";
     var searchI18n = opts.searchI18n || "search_placeholder";
+    var isTablet = opts.variant === "tablet";
+
+    /* 右侧区域：tablet 显示 CTA + 语言切换，mobile 只显示语言切换 */
+    var rightSide = "";
+    if (isTablet && opts.showCta) {
+      rightSide =
+        '<div class="flex items-center gap-2 flex-shrink-0">' +
+          '<a href="' + escapeHtml(opts.ctaHref || "/quote/") + '" ' +
+            'class="bg-primary text-white px-4 py-2 rounded-lg font-bold ' +
+            'text-xs whitespace-nowrap active:scale-95 transition-all" ' +
+            'data-i18n="' + escapeHtml(opts.ctaTextKey || "nav_get_quote") + '">' +
+            '获取报价' +
+          '</a>' +
+          buildLangSelectorHtml() +
+        '</div>';
+    } else {
+      rightSide =
+        '<div class="flex-shrink-0">' +
+            buildLangSelectorHtml() +
+        '</div>';
+    }
 
     return (
       '<div id="mobile-header-placeholder" style="height:65px;flex-shrink:0"></div>' +
@@ -184,10 +205,8 @@
           '<div class="flex-1 flex justify-center mx-1">' +
             buildSearchBarHtml(searchI18n) +
           '</div>' +
-          /* 右侧：语言切换 */
-          '<div class="flex-shrink-0">' +
-              buildLangSelectorHtml() +
-          '</div>' +
+          /* 右侧 */
+          rightSide +
         '</div>' +
       '</header>'
     );
