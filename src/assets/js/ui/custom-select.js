@@ -1,5 +1,5 @@
 /**
- * custom-select.js — Universal Custom Select Component
+ * custom-select.js - Universal Custom Select Component
  *
  * Replaces native <select> elements with a styled custom dropdown.
  * - PC/Tablet: floating dropdown panel (above/below trigger)
@@ -16,9 +16,9 @@
  *   </select>
  *
  * Options (via data attributes):
- *   data-custom-select        — auto-init on DOMContentLoaded
- *   data-custom-search="true" — enable search filter in dropdown
- *   data-placeholder          — override placeholder text
+ *   data-custom-select        - auto-init on DOMContentLoaded
+ *   data-custom-search="true" - enable search filter in dropdown
+ *   data-placeholder          - override placeholder text
  */
 
 (function (global) {
@@ -93,7 +93,7 @@
       "  cursor: not-allowed; opacity: .5; pointer-events: none;",
       "}",
 
-      /* ─── Floating Panel (PC/Tablet) — uses position:fixed to avoid overflow clipping ─── */
+      /* ─── Floating Panel (PC/Tablet) - uses position:fixed to avoid overflow clipping ─── */
       ".cs-panel {",
       "  position: fixed;",
       "  background: rgba(248,250,252,1);",
@@ -109,7 +109,7 @@
       "  background: rgba(30,41,59,1); border-color: rgba(255,255,255,.10);",
       "  box-shadow: 0 0 0 .5px rgba(255,255,255,.06), 0 8px 32px rgba(0,0,0,.4), 0 2px 8px rgba(0,0,0,.3);",
       "}",
-      ".cs-is-open .cs-panel {",
+      ".cs-is-open .cs-panel,.cs-panel.cs-is-open {",
       "  opacity: 1; visibility: visible; pointer-events: auto;",
       "  transform: translateY(0) scale(1);",
       "  transition: opacity .15s ease, transform .25s cubic-bezier(.32,.72,0,1), visibility 0s 0s;",
@@ -143,10 +143,12 @@
 
       /* ─── Optgroup ─── */
       ".cs-group-label {",
-      "  padding: 8px 12px 4px; font-size: 11px; font-weight: 700; text-transform: uppercase;",
-      "  letter-spacing: .05em; color: #94a3b8; pointer-events: none;",
+      "  padding: 10px 12px 4px; font-size: 11px; font-weight: 600; letter-spacing: .03em;",
+      "  color: #64748b; pointer-events: none;",
+      "  border-top: 1px solid rgba(0,0,0,.06); margin-top: 2px;",
       "}",
-      "html.dark .cs-group-label { color: #64748b; }",
+      ".cs-group-label:first-child { border-top: none; margin-top: 0; }",
+      "html.dark .cs-group-label { color: #94a3b8; border-top-color: rgba(255,255,255,.08); }",
 
       /* ─── Search ─── */
       ".cs-search-wrap {",
@@ -181,7 +183,7 @@
       "}",
       "html.dark .cs-no-results { color: #64748b; }",
 
-      /* ─── Mobile — hide float panel ─── */
+      /* ─── Mobile - hide float panel ─── */
       "@media (max-width: " + MOBILE_BREAKPOINT + "px) {",
       "  .cs-panel { display: none !important; }",
       "}",
@@ -212,6 +214,14 @@
       "  padding: 4px 12px 8px; font-size: 15px; font-weight: 600; color: #1e293b;",
       "}",
       "html.dark .cs-popup-title { color: #e2e8f0; }",
+      /* ─── Mobile Popup Optgroup ─── */
+      ".cs-popup-panel .cs-group-label {",
+      "  padding: 10px 12px 4px; font-size: 11px; font-weight: 600; letter-spacing: .03em;",
+      "  color: #64748b; pointer-events: none;",
+      "  border-top: 1px solid rgba(0,0,0,.06); margin-top: 2px;",
+      "}",
+      ".cs-popup-panel .cs-group-label:first-child { border-top: none; margin-top: 0; }",
+      "html.dark .cs-popup-panel .cs-group-label { color: #94a3b8; border-top-color: rgba(255,255,255,.08); }",
       ".cs-popup-list {",
       "  max-height: 50vh; overflow-y: auto; -webkit-overflow-scrolling: touch;",
       "}",
@@ -365,7 +375,7 @@
     }
 
     // Ensure trigger has visible border (some selects only have border-color class
-    // but no border-width — Tailwind reset sets border-width: 0)
+    // but no border-width - Tailwind reset sets border-width: 0)
     var hasBorderWidth = selectEl.classList.contains('border') ||
       selectEl.classList.contains('border-2') ||
       selectEl.classList.contains('border-y') ||
@@ -502,10 +512,15 @@
     var html = "";
     var hasGroups = data.groups && data.groups.length > 0;
 
+    // Filter out placeholder options (value="") — shown as popup-title, not as item
+    function withoutPlaceholder(opts) {
+      return opts.filter(function (o) { return o.value !== ""; });
+    }
+
     if (hasGroups) {
       for (var g = 0; g < data.groups.length; g++) {
         html += '<div class="cs-group-label">' + esc(data.groups[g].label) + "</div>";
-        html += this._buildOptionItemsHTML(data.groups[g].options);
+        html += this._buildOptionItemsHTML(withoutPlaceholder(data.groups[g].options));
       }
       // Also add non-grouped options
       if (data.options.length > 0) {
@@ -516,13 +531,13 @@
             groupedValues[data.groups[gg].options[oo].value] = true;
           }
         }
-        var ungrouped = data.options.filter(function (o) { return !groupedValues[o.value]; });
+        var ungrouped = data.options.filter(function (o) { return !groupedValues[o.value] && o.value !== ""; });
         if (ungrouped.length > 0) {
           html += this._buildOptionItemsHTML(ungrouped);
         }
       }
     } else {
-      html += this._buildOptionItemsHTML(data.options);
+      html += this._buildOptionItemsHTML(withoutPlaceholder(data.options));
     }
 
     return html;
@@ -559,12 +574,14 @@
     var evt = new Event("change", { bubbles: true });
     this.select.dispatchEvent(evt);
 
-    // Update trigger text
+    // Update trigger text (may be null when using buildPanel without render)
     var isPlaceholder = !value;
-    var textEl = this.trigger.querySelector(".cs-trigger-text");
-    if (textEl) {
-      textEl.textContent = isPlaceholder ? (this.placeholder || text) : text;
-      textEl.className = "cs-trigger-text" + (isPlaceholder ? " cs-placeholder" : "");
+    if (this.trigger) {
+      var textEl = this.trigger.querySelector(".cs-trigger-text");
+      if (textEl) {
+        textEl.textContent = isPlaceholder ? (this.placeholder || text) : text;
+        textEl.className = "cs-trigger-text" + (isPlaceholder ? " cs-placeholder" : "");
+      }
     }
 
     // Update active state
@@ -598,8 +615,9 @@
     this.wrap.classList.add(OPEN_CLASS);
     this.trigger.setAttribute("aria-expanded", "true");
 
-    // Position panel using fixed coordinates from trigger rect
-    var rect = this.trigger.getBoundingClientRect();
+    // Position panel using fixed coordinates from trigger rect (or override anchor)
+    var anchor = this._positionAnchor || this.trigger;
+    var rect = anchor.getBoundingClientRect();
     var panelWidth = rect.width;
     var gap = 6;
     var spaceBelow = window.innerHeight - rect.bottom;
@@ -629,7 +647,8 @@
         self._removeScrollResize();
         return;
       }
-      var r = self.trigger.getBoundingClientRect();
+      var anchor = self._positionAnchor || self.trigger;
+      var r = anchor.getBoundingClientRect();
       self.panel.style.left = r.left + "px";
       self.panel.style.width = r.width + "px";
       var sb = window.innerHeight - r.bottom;
@@ -724,12 +743,26 @@
       searchInput.addEventListener("input", function () {
         var q = this.value.trim().toLowerCase();
         var items = self._popupPanel.querySelectorAll(".cs-item");
+        var groupLabels = self._popupPanel.querySelectorAll(".cs-group-label");
         var hasVisible = false;
         for (var j = 0; j < items.length; j++) {
           var text = (items[j].getAttribute("data-text") || "").toLowerCase();
           var show = !q || text.indexOf(q) !== -1;
           items[j].style.display = show ? "" : "none";
           if (show) hasVisible = true;
+        }
+        // Hide group labels whose items are all filtered out
+        for (var g = 0; g < groupLabels.length; g++) {
+          var next = groupLabels[g].nextElementSibling;
+          var anyVisible = false;
+          while (next && !next.classList.contains("cs-group-label")) {
+            if (next.classList.contains("cs-item") && next.style.display !== "none") {
+              anyVisible = true;
+              break;
+            }
+            next = next.nextElementSibling;
+          }
+          groupLabels[g].style.display = anyVisible ? "" : "none";
         }
         var noRes = self._popupPanel.querySelector(".cs-no-results");
         if (!hasVisible && q) {
@@ -836,7 +869,7 @@
 
   var instances = [];
 
-  /* CustomSelect constructor (factory — delegates to Instance) */
+  /* CustomSelect constructor (factory - delegates to Instance) */
   function CustomSelect(el) { return CustomSelect.init(el); }
 
   CustomSelect.closeAll = function () {
@@ -871,6 +904,8 @@
     for (var i = 0; i < els.length; i++) {
       // Skip if already initialized
       if (els[i]._customSelectInstance) continue;
+      // Skip lang-selector — managed manually by navigator.js (buildPanel)
+      if (els[i].id === 'lang-selector') continue;
       // Skip selects with no options (may be populated later by JS)
       if (els[i].options.length === 0 && els[i].children.length === 0) continue;
       var inst = new CustomSelectInstance(els[i]);
@@ -884,6 +919,7 @@
   CustomSelect.init = function (selectEl) {
     injectStyles();
     if (selectEl._customSelectInstance) return selectEl._customSelectInstance;
+    if (selectEl.id === 'lang-selector') return null; // managed by navigator.js
     var inst = new CustomSelectInstance(selectEl);
     inst.render();
     selectEl._customSelectInstance = inst;
@@ -894,6 +930,19 @@
   /* Get instance by native select element */
   CustomSelect.getInstance = function (selectEl) {
     return selectEl._customSelectInstance || null;
+  };
+
+  /**
+   * Lightweight panel factory — builds a dropdown panel without rendering trigger/wrap.
+   * Useful for custom button-triggered selects (e.g. language switcher).
+   * Returns { panel: HTMLElement, data: Object } — caller manages show/hide/position.
+   */
+  CustomSelect.buildPanel = function (selectEl) {
+    injectStyles();
+    var tempInst = new CustomSelectInstance(selectEl);
+    var data = tempInst.getOptions();
+    var panel = tempInst._buildPanel();
+    return { panel: panel, data: data, inst: tempInst };
   };
 
   /* ────────────────────────────────────────────────────────────────

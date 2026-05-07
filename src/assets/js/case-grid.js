@@ -316,7 +316,7 @@
     for (var key in FILTERS) {
       var f = FILTERS[key]
             html +=
-        '<select data-custom-select data-filter-select="' + key + '"' +
+        '<select data-filter-select="' + key + '"' +
         ' class="case-filter-select flex-shrink-0 px-3 py-2 text-xs font-semibold' +
         ' rounded-lg border border-slate-300 dark:border-slate-600' +
         ' bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200' +

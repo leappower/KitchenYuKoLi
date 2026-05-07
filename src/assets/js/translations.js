@@ -302,6 +302,19 @@
     // Sync lang-selector <select> value
     var sel = document.getElementById("lang-selector");
     if (sel && sel.value !== t) sel.value = t;
+    // Sync lang-toggle-btn text label
+    var btn = document.getElementById("lang-toggle-btn");
+    if (btn) {
+      var labelEl = document.getElementById("current-lang-label");
+      if (labelEl) {
+        var langName = t;
+        if (this.languages && Array.isArray(this.languages)) {
+          var found = this.languages.find(function(l) { return l.code === t; });
+          if (found) langName = found.name;
+        }
+        labelEl.textContent = langName;
+      }
+    }
   }, r.prototype.bindDropdownEvents = function() {
     var t = this,
       e = this.getDropdown();

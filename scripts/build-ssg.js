@@ -194,6 +194,30 @@ function patchHtmlPaths(html) {
 }
 
 /**
+ * Inject lang-registry.js script tag before translations.js in HTML content.
+ * This ensures all pages have lang-registry available before translations initializes,
+ * regardless of whether the source HTML already includes it (idempotent check).
+ *
+ * The script is injected with `defer` to match the pattern used in pages that
+ * already include it statically (e.g. home, landing, 404).
+ */
+function injectLangRegistry(html) {
+  // Already has lang-registry.js — skip (idempotent)
+  if (/lang-registry\.js/.test(html)) return html;
+
+  // Insert before translations.js (which navigator.js depends on)
+  // Pattern: <script ... src="/assets/js/translations.js">
+  var bp = BASE_PATH ? BASE_PATH.replace(/\/$/, '') : '';
+  var tag = '<script defer src="' + bp + '/assets/js/lang-registry.js"></script>\n    ';
+  html = html.replace(
+    /(\s*)(<script[^>]*src=["'][^"']*\/assets\/js\/translations\.js[^>]*>[^<]*<\/script>)/i,
+    '$1' + tag + '$2'
+  );
+
+  return html;
+}
+
+/**
  * Generate a route-specific index.html that serves as the directory entry.
  *
  * This file is similar to src/pages/<route>/index.html but with:
@@ -227,6 +251,9 @@ function generateRouteIndex(route) {
     /<meta\s+property="og:url"\s+content="[^"]*"\s*>/gi,
     '<meta property="og:url" content="' + canonicalUrl + '">'
   );
+
+  // Inject lang-registry.js before translations.js (if not already present)
+  html = injectLangRegistry(html);
 
   // Patch all root-absolute paths with BASE_PATH prefix
   html = patchHtmlPaths(html);
@@ -271,13 +298,13 @@ function copyDeviceFiles(route) {
     const srcFile = path.join(srcPagesDir, file);
     const destFile = path.join(destRouteDir, file);
 
+    let content = fs.readFileSync(srcFile, 'utf-8');
+    // Inject lang-registry.js before translations.js (if not already present)
+    content = injectLangRegistry(content);
     if (BASE_PATH) {
-      let content = fs.readFileSync(srcFile, 'utf-8');
       content = patchHtmlPaths(content);
-      fs.writeFileSync(destFile, content, 'utf-8');
-    } else {
-      fs.copyFileSync(srcFile, destFile);
     }
+    fs.writeFileSync(destFile, content, 'utf-8');
     copied++;
   }
 

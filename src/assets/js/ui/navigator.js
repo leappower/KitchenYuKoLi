@@ -18,6 +18,16 @@
 (function (global) {
   "use strict";
 
+  /* Prevent layout shift: ensure <navigator> custom elements render as block */
+  (function () {
+    var s = document.getElementById("nav-placeholder-styles");
+    if (s) return;
+    s = document.createElement("style");
+    s.id = "nav-placeholder-styles";
+    s.textContent = '[data-component="navigator"] { display: block; }';
+    document.head.appendChild(s);
+  })();
+
   /* ================================================================
    *  常量 & 配置
    * ================================================================ */
@@ -132,21 +142,16 @@
    */
   function buildSearchBarHtml(placeholderI18nKey) {
     return (
-      '<div class="ios-search-wrapper flex-1 flex justify-center mx-1" ' +
-      'style="max-width:320px">' +
-        '<div class="ios-search-bar" id="mobile-ios-search-bar" ' +
-        'style="width:100%;padding:5px 12px">' +
-          '<span class="ios-search-icon material-symbols-outlined" ' +
-          'style="font-size:18px">search</span>' +
+      '<div class="ios-search-wrapper flex-1 flex justify-center mx-1">' +
+        '<div class="ios-search-bar" id="mobile-ios-search-bar">' +
+          '<span class="ios-search-icon material-symbols-outlined">search</span>' +
           '<input class="ios-search-input" id="mobile-header-search-input" ' +
           'placeholder="Search equipment..." ' +
           'data-i18n-placeholder="' + escapeHtml(placeholderI18nKey) + '" ' +
-          'type="search" autocomplete="off" spellcheck="false" ' +
-          'style="font-size:14px"/>' +
+          'type="search" autocomplete="off" spellcheck="false"/>' +
           '<button class="ios-search-clear" type="button" aria-label="Clear" ' +
           'tabindex="-1">' +
-            '<span class="material-symbols-outlined" ' +
-            'style="font-size:18px">cancel</span>' +
+            '<span class="material-symbols-outlined">cancel</span>' +
           '</button>' +
         '</div>' +
       '</div>'
@@ -297,48 +302,111 @@
   }
 
   /**
-   * Build language <select> with optgroups (uses custom-select component)
-   * @returns {string} HTML string
+   * Ensure custom-select.js is loaded (dynamic loader)
+   * Idempotent — safe to call multiple times.
    */
-  function buildLangSelectorHtml() {
-    var reg = (typeof window !== 'undefined' && window.LANG_REGISTRY) || null;
-    if (!reg || !reg.LANGUAGES) {
-      // Fallback if registry not yet loaded
-      return '<select id="lang-selector" class="h-9 px-3 text-sm rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-300"></select>';
-    }
-    var currentLang = (typeof window !== 'undefined' && localStorage.getItem('userLanguage')) || 'zh-CN';
+  function _loadScript(src, id) {
+    if (document.getElementById(id)) return Promise.resolve();
+    return new Promise(function (resolve, reject) {
+      var s = document.createElement('script');
+      s.src = src;
+      s.id = id;
+      s.onload = resolve;
+      s.onerror = reject;
+      document.head.appendChild(s);
+    });
+  }
+
+  function ensureCustomSelect() {
+    if (typeof CustomSelect !== 'undefined') return Promise.resolve();
+    var basePath = window.BASE_PATH || '';
+    return _loadScript(basePath + '/assets/js/ui/custom-select.js', 'custom-select-dynamic');
+  }
+
+  function ensureLangRegistry() {
+    if (typeof window.LANG_REGISTRY !== 'undefined') return Promise.resolve();
+    var basePath = window.BASE_PATH || '';
+    return _loadScript(basePath + '/assets/js/lang-registry.js', 'lang-registry-dynamic');
+  }
+
+  /**
+   * Populate hidden <select> with optgroups from LANG_REGISTRY.
+   * Safe to call multiple times — clears and rebuilds.
+   */
+  function _populateLangSelect(selectEl) {
+    var reg = window.LANG_REGISTRY;
+    if (!reg || !reg.LANGUAGES || !selectEl) return;
+
+    // Clear existing content
+    selectEl.innerHTML = '';
+
+    var currentLang = localStorage.getItem('userLanguage') || 'zh-CN';
     var groups = {
       common: { label: '常用 / Common', langs: [] },
       southeast_asia: { label: '东南亚 / Southeast Asia', langs: [] },
       east_asia: { label: '东亚 / East Asia', langs: [] },
       other: { label: '其他 / Other', langs: [] }
     };
-    var groupTitles = {
-      common: '常用 / Common',
-      southeast_asia: '东南亚 / Southeast Asia',
-      east_asia: '东亚 / East Asia',
-      other: '其他 / Other'
-    };
-    reg.LANGUAGES.forEach(function(l) {
+
+    reg.LANGUAGES.forEach(function (l) {
       var g = l.uiGroup || 'common';
       if (!groups[g]) groups[g] = { label: g, langs: [] };
       groups[g].langs.push(l);
     });
-    var html = '<select id="lang-selector" data-custom-select data-custom-search="true" ' +
-      'class="h-9 px-3 text-sm rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-300 appearance-none">';
+
     var groupOrder = ['common', 'southeast_asia', 'east_asia', 'other'];
-    groupOrder.forEach(function(gid) {
+    groupOrder.forEach(function (gid) {
       var grp = groups[gid];
       if (!grp || grp.langs.length === 0) return;
-      html += '<optgroup label="' + (groupTitles[gid] || gid) + '">';
-      grp.langs.forEach(function(l) {
-        var sel = l.code === currentLang ? ' selected' : '';
-        html += '<option value="' + l.code + '"' + sel + '>' + escapeHtml(l.nativeName) + '</option>';
+      var og = document.createElement('optgroup');
+      og.setAttribute('label', grp.label);
+      grp.langs.forEach(function (l) {
+        var opt = document.createElement('option');
+        opt.value = l.code;
+        opt.textContent = l.nativeName;
+        if (l.code === currentLang) opt.selected = true;
+        og.appendChild(opt);
       });
-      html += '</optgroup>';
+      selectEl.appendChild(og);
     });
-    html += '</select>';
-    return html;
+  }
+
+  /**
+   * Build language switcher — icon+text button (original style) + hidden <select> with optgroups.
+   * The button triggers custom-select's dropdown on click via initLangSwitcher().
+   * @returns {string} HTML string
+   */
+  function buildLangSelectorHtml() {
+    // Always generate the button + empty hidden <select>.
+    // The <select> is populated lazily on first click (when LANG_REGISTRY is available),
+    // so this works even on pages that don't load lang-registry.js directly.
+    var currentLang = localStorage.getItem('userLanguage') || 'zh-CN';
+    var currentLangName = currentLang;
+    var reg = window.LANG_REGISTRY;
+    if (reg && reg.LANGUAGES) {
+      var found = reg.LANGUAGES.find(function (l) { return l.code === currentLang; });
+      if (found) currentLangName = found.nativeName;
+    }
+
+    return (
+      '<div class="lang-dropdown-container relative flex-shrink-0">' +
+        '<button id="lang-toggle-btn" ' +
+          'class="flex items-center gap-1 px-2 py-2 rounded-xl ' +
+          'text-sm font-medium text-slate-600 dark:text-slate-300 ' +
+          'hover:bg-slate-100 dark:hover:bg-slate-800 ' +
+          'active:bg-slate-200 dark:active:bg-slate-700 ' +
+          'transition-colors md:gap-1.5 md:px-3" type="button" aria-label="Switch language" ' +
+          'data-i18n-aria="lang_switcher_aria">' +
+          '<span class="material-symbols-outlined text-base ' +
+          'leading-none">language</span>' +
+          '<span id="current-lang-label" data-i18n="current_lang">' +
+          escapeHtml(currentLangName) + '</span>' +
+          '<span class="material-symbols-outlined text-xs opacity-40">' +
+          'expand_more</span>' +
+        '</button>' +
+        '<select id="lang-selector" style="display:none"></select>' +
+      '</div>'
+    );
   }
 
   /**
@@ -491,6 +559,12 @@
       "              box-shadow 200ms ease;",
       "  overflow: hidden;",
       "}",
+      /* Mobile: fill available space */
+      "#mobile-ios-search-bar {",
+      "  width: 100%;",
+      "  padding: 5px 12px;",
+      "  max-width: 320px;",
+      "}",,
       ".ios-search-bar.is-focused {",
       "  width: 280px;",
       "  background: rgba(120,120,128,0.08);",
@@ -498,10 +572,11 @@
       "  box-shadow: 0 0 0 3px rgba(236,91,19,0.12);",
       "}",
       "#mobile-ios-search-bar.is-focused {",
+      "  max-width: 100%;",
       "  background: rgba(120,120,128,0.08);",
       "  border-color: rgba(236,91,19,0.4);",
       "  box-shadow: 0 0 0 3px rgba(236,91,19,0.12);",
-      "}",
+      "}",,
 
       /* 暗色模式搜索栏 */
       "html.dark .ios-search-bar {",
@@ -842,6 +917,247 @@
     });
   }
 
+  /* ── Language switcher panel management (lightweight, no full CustomSelectInstance render) ── */
+  var _langPanel = null;
+  var _langOverlay = null;
+  var _langAnchor = null;
+
+  function initLangSwitcher() {
+    var btn = document.getElementById("lang-toggle-btn");
+    if (!btn) return;
+
+    // Remove old listeners by replacing node
+    var clone = btn.cloneNode(true);
+    btn.parentNode.replaceChild(clone, btn);
+
+    clone.addEventListener("click", function (e) {
+      e.stopPropagation();
+      _closeLangPanel();
+
+      var selectEl = document.getElementById("lang-selector");
+      if (!selectEl) return;
+
+      // Ensure lang-registry.js + custom-select.js are loaded, then open
+      Promise.all([ensureLangRegistry(), ensureCustomSelect()]).then(function () {
+        // Populate <select> with optgroups from LANG_REGISTRY (idempotent)
+        _populateLangSelect(selectEl);
+        _openLangPanel(selectEl, clone);
+      }).catch(function (err) {
+        console.warn('[Navigator] Failed to load lang dependencies:', err);
+      });
+    });
+  }
+
+  function _closeLangPanel() {
+    if (_langPanel) {
+      _langPanel.parentNode && _langPanel.parentNode.removeChild(_langPanel);
+      _langPanel = null;
+    }
+    if (_langOverlay) {
+      _langOverlay.parentNode && _langOverlay.parentNode.removeChild(_langOverlay);
+      _langOverlay = null;
+    }
+    document.removeEventListener("scroll", _onLangScroll, true);
+    document.removeEventListener("resize", _onLangScroll);
+    document.removeEventListener("keydown", _onLangKeydown);
+    // Remove outside-click listener
+    if (_langOutsideClickHandler) {
+      document.removeEventListener("click", _langOutsideClickHandler, true);
+      _langOutsideClickHandler = null;
+    }
+  }
+
+  var _langOutsideClickHandler = null;
+  function _onLangKeydown(e) { if (e.key === "Escape") _closeLangPanel(); }
+
+  /**
+   * Handle language change from hidden <select>.
+   * Called when custom-select's _selectItem fires change event on the <select>.
+   * Updates localStorage, button label, and closes the panel.
+   */
+  function _onLangChange() {
+    var selectEl = document.getElementById("lang-selector");
+    if (!selectEl) return;
+    var langCode = selectEl.value;
+    if (!langCode) return;
+
+    // Update localStorage
+    localStorage.setItem('userLanguage', langCode);
+
+    // Update button label
+    var labelEl = document.getElementById("current-lang-label");
+    if (labelEl && window.LANG_REGISTRY) {
+      var found = window.LANG_REGISTRY.LANGUAGES.find(function(l) { return l.code === langCode; });
+      labelEl.textContent = found ? found.nativeName : langCode;
+    }
+
+    // Close panel
+    _closeLangPanel();
+
+    // Trigger full page language change via translationManager
+    if (window.translationManager && typeof window.translationManager.setLanguage === 'function') {
+      window.translationManager.setLanguage(langCode);
+    }
+  }
+
+  function _onLangScroll() {
+    if (!_langPanel || !_langAnchor) return;
+    _positionLangPanel(_langAnchor.getBoundingClientRect());
+  }
+
+  function _positionLangPanel(rect) {
+    if (!_langPanel) return;
+    var spaceBelow = window.innerHeight - rect.bottom;
+    var spaceAbove = rect.top;
+    var openAbove = spaceBelow < 280 && spaceAbove > spaceBelow;
+    var gap = 6;
+    var panelWidth = Math.min(280, Math.max(rect.width, 220));
+    var left = rect.right - panelWidth;
+    if (left < 8) left = Math.min(rect.left, 8);
+    if (left + panelWidth > window.innerWidth - 8) left = window.innerWidth - 8 - panelWidth;
+    _langPanel.style.left = left + "px";
+    _langPanel.style.width = panelWidth + "px";
+    if (openAbove) {
+      _langPanel.classList.remove("cs-panel-below");
+      _langPanel.classList.add("cs-panel-above");
+      _langPanel.style.top = "";
+      _langPanel.style.bottom = (window.innerHeight - rect.top + gap) + "px";
+    } else {
+      _langPanel.classList.remove("cs-panel-above");
+      _langPanel.classList.add("cs-panel-below");
+      _langPanel.style.bottom = "";
+      _langPanel.style.top = (rect.bottom + gap) + "px";
+    }
+  }
+
+  function _openLangPanel(selectEl, anchorBtn) {
+    _closeLangPanel();
+    _langAnchor = anchorBtn;
+
+    if (window.innerWidth <= 720) {
+      _openLangMobile(selectEl, anchorBtn);
+      return;
+    }
+
+    // ── PC/Tablet: floating panel ──
+    // Use lightweight panel factory — no full render, no trigger/wrap
+    var result = CustomSelect.buildPanel(selectEl);
+    _langPanel = result.panel;
+    document.body.appendChild(_langPanel);
+
+    // Intercept item clicks to handle close ourselves (before custom-select's _selectItem.close)
+    _langPanel.addEventListener("click", function (e) {
+      var item = e.target.closest(".cs-item");
+      if (!item || item.classList.contains("cs-item-disabled")) return;
+      e.stopImmediatePropagation(); // prevent custom-select's handler
+      selectEl.value = item.getAttribute("data-value");
+      selectEl.dispatchEvent(new Event("change", { bubbles: true }));
+      // _onLangChange will handle the rest
+    }, true);
+
+    // Listen for change on the hidden <select> (fired by item click handlers)
+    // to close the panel and update the button label
+    selectEl.addEventListener("change", _onLangChange);
+
+    _positionLangPanel(anchorBtn.getBoundingClientRect());
+    requestAnimationFrame(function() { _langPanel.classList.add("cs-is-open"); });
+
+    document.addEventListener("scroll", _onLangScroll, true);
+    document.addEventListener("resize", _onLangScroll);
+    document.addEventListener("keydown", _onLangKeydown);
+
+    _langOutsideClickHandler = function(e) {
+      if (!_langPanel) return;
+      if (_langPanel.contains(e.target) || anchorBtn.contains(e.target)) return;
+      _closeLangPanel();
+    };
+    setTimeout(function() {
+      document.addEventListener("click", _langOutsideClickHandler, true);
+    }, 0);
+  }
+
+  function _openLangMobile(selectEl, anchorBtn) {
+    _langOverlay = document.createElement("div");
+    _langOverlay.className = "cs-popup-overlay";
+    _langPanel = document.createElement("div");
+    _langPanel.className = "cs-popup-panel";
+
+    // Listen for change on hidden <select> (fired by item click handlers)
+    selectEl.addEventListener("change", _onLangChange);
+
+    var result = CustomSelect.buildPanel(selectEl);
+    var data = result.data;
+
+    var html = '<div class="cs-popup-handle"></div>';
+    var labelEl = anchorBtn.querySelector("#current-lang-label");
+    html += '<div class="cs-popup-title">' + escapeHtml(labelEl ? labelEl.textContent : "") + '</div>';
+    html += '<div class="cs-popup-search-wrap">' +
+      '<span class="material-symbols-outlined cs-popup-search-icon">search</span>' +
+      '<input type="text" class="cs-popup-search" placeholder="搜索...">' +
+      '</div>';
+    html += '<div class="cs-popup-list">' + result.inst._buildItemsHTML(data) + '</div>';
+    _langPanel.innerHTML = html;
+
+    document.body.appendChild(_langOverlay);
+    document.body.appendChild(_langPanel);
+
+    _langOverlay.addEventListener("click", function() { _closeLangPanel(); });
+
+    var items = _langPanel.querySelectorAll(".cs-item");
+    for (var i = 0; i < items.length; i++) {
+      (function(item) {
+        item.addEventListener("click", function() {
+          selectEl.value = item.getAttribute("data-value");
+          selectEl.dispatchEvent(new Event("change", { bubbles: true }));
+          // _onLangChange will handle the rest (label update, close, setLanguage)
+        });
+      })(items[i]);
+    }
+
+    var searchInput = _langPanel.querySelector(".cs-popup-search");
+    if (searchInput) {
+      searchInput.addEventListener("input", function() {
+        var q = this.value.trim().toLowerCase();
+        var panelItems = _langPanel.querySelectorAll(".cs-item");
+        var groupLabels = _langPanel.querySelectorAll(".cs-group-label");
+        var hasVisible = false;
+        for (var j = 0; j < panelItems.length; j++) {
+          var text = (panelItems[j].getAttribute("data-text") || "").toLowerCase();
+          var show = !q || text.indexOf(q) !== -1;
+          panelItems[j].style.display = show ? "" : "none";
+          if (show) hasVisible = true;
+        }
+        for (var g = 0; g < groupLabels.length; g++) {
+          var next = groupLabels[g].nextElementSibling;
+          var anyVisible = false;
+          while (next && !next.classList.contains("cs-group-label")) {
+            if (next.classList.contains("cs-item") && next.style.display !== "none") {
+              anyVisible = true;
+              break;
+            }
+            next = next.nextElementSibling;
+          }
+          groupLabels[g].style.display = anyVisible ? "" : "none";
+        }
+        var noRes = _langPanel.querySelector(".cs-no-results");
+        if (!hasVisible && q) {
+          if (!noRes) {
+            noRes = document.createElement("div");
+            noRes.className = "cs-no-results";
+            noRes.textContent = "无匹配结果";
+            _langPanel.querySelector(".cs-popup-list").appendChild(noRes);
+          }
+          noRes.style.display = "";
+        } else if (noRes) {
+          noRes.style.display = "none";
+        }
+      });
+    }
+
+    requestAnimationFrame(function() { _langPanel.classList.add("cs-popup-open"); });
+    document.addEventListener("keydown", _onLangKeydown);
+  }
+
   /* ================================================================
    *  从 placeholder 解析配置
    * ================================================================ */
@@ -977,6 +1293,9 @@
 
     /* 7. 平板端搜索切换 */
     initTabletSearchToggle();
+
+    /* 8. 语言切换按钮 → custom-select bridge */
+    initLangSwitcher();
   }
 
   /* ================================================================
@@ -1272,13 +1591,18 @@
    * SPA 路由导航事件——重新初始化导航和底部栏
    */
   document.addEventListener("spa:load", function () {
+    /* 关闭语言面板 */
+    _closeLangPanel();
+
     /* 如果 header 丢失则重新挂载 */
     if (!document.querySelector("header")) mountNavigator();
 
     /* 重新初始化 custom-select（navigator 可能创建了新的 lang-selector） */
     if (typeof CustomSelect !== 'undefined' && CustomSelect.initAll) {
-      setTimeout(function () { CustomSelect.initAll(); }, 0);
+      CustomSelect.initAll();
     }
+    // Re-init lang switcher bridge (uses Promise-based ensureCustomSelect internally)
+    initLangSwitcher();
 
     /* 确保 mobile header 可见 */
     var mobileHeader = document.getElementById("mobile-header");
