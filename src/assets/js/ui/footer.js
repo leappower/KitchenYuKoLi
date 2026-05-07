@@ -1,112 +1,186 @@
-! function(e) {
+/**
+ * footer.js — Mobile & Tablet Bottom Navigation Bar
+ *
+ * Mobile (<768px): 4 items — 首页/产品/案例/WhatsApp
+ * Tablet (768-1024px): 6 items — 首页/产品/场景/回报/关于/WhatsApp
+ * PC (>=1024px): hidden
+ */
+;(function (window) {
   "use strict";
-  var t, a = [{
-    id: "home",
-    icon: "home",
-    key: "nav_home",
-    href: "/home/",
-    fill: !0
-  }, {
-    id: "products",
-    icon: "kitchen",
-    key: "nav_products",
-    href: "/products/",
-    fill: !1
-  }, {
-    id: "cases",
-    icon: "monitoring",
-    key: "nav_cases",
-    href: "/cases/",
-    fill: !1
-  }, {
-    id: "whatsapp",
-    icon: "chat",
-    key: "nav_whatsapp",
-    href: "",
-    fill: !1,
-    isWhatsApp: !0
-  }];
 
-  function r(e) {
-    return String(e).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;")
+  var resizeTimer;
+
+  /* ─── Mobile items (4) ─── */
+  var mobileItems = [
+    { id: "home",      icon: "home",       key: "nav_home",      href: "/home/",   fill: true },
+    { id: "products",  icon: "kitchen",    key: "nav_products",  href: "/products/", fill: false },
+    { id: "cases",     icon: "monitoring", key: "nav_cases",     href: "/cases/",  fill: false },
+    { id: "whatsapp",  icon: "chat",       key: "nav_whatsapp",  href: "",         fill: false, isWhatsApp: true }
+  ];
+
+  /* ─── Tablet items (6) ─── */
+  var tabletItems = [
+    { id: "home",      icon: "home",       key: "nav_home",      href: "/home/",   fill: true },
+    { id: "products",  icon: "kitchen",    key: "nav_products",  href: "/products/", fill: false },
+    { id: "cases",     icon: "monitoring", key: "nav_cases",     href: "/cases/",  fill: false },
+    { id: "profit",    icon: "calculate",  key: "nav_roi",       href: "/profit-calculator/", fill: false },
+    { id: "about",     icon: "info",       key: "nav_about",     href: "/about/",  fill: false },
+    { id: "whatsapp",  icon: "chat",       key: "nav_whatsapp",  href: "",         fill: false, isWhatsApp: true }
+  ];
+
+  function esc(s) {
+    return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
   }
 
-  function n(e, t) {
-    return '<div class="fixed bottom-0 left-0 right-0 z-[var(--z-footer)]"><div class="flex gap-2 border-t border-slate-200 dark:border-slate-800 bg-background-light/95 dark:bg-background-dark/95 backdrop-blur-md px-4 pb-6 pt-2">' + function(e, t) {
-      return e.map(function(e) {
-        var a = e.id === t,
-          n = a ? "text-primary" : "text-slate-400 dark:text-slate-500",
-          i = a && e.fill ? ' style="font-variation-settings: \'FILL\' 1;"' : "",
-          o = e.key ? '<p class="text-[10px] font-bold uppercase tracking-wider" data-i18n="' + r(e.key) + '">' + r(e.key) + "</p>" : "";
-        var whatsappHref = 'https://wa.me/' + (window.Contacts ? window.Contacts.whatsapp : '8613163756465');
-        return e.isWhatsApp
-                    ? '<a class="whatsapp-tab-item relative flex flex-1 flex-col items-center justify-center gap-1 ' + (n = "text-[#25d366]") + '" href="' + whatsappHref +
-            '" data-wa-message-key="wa_msg_contact" data-wa-source="footer-tab" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp"><span class="material-symbols-outlined relative" style="font-size:26px">' + r(e.icon) + "</span>" + o +
-            "</a>"
-          : '<a class="relative flex flex-1 flex-col items-center justify-center gap-1 ' + n + '" href="' + r(e.href) + '"><span class="material-symbols-outlined relative"' + i + '>' + r(e.icon) + "</span>" + o + "</a>";
-      }).join("\n")
-    }(a, t) + "</div></div>"
+  function getItemsForVariant(variant) {
+    return variant === "tablet" ? tabletItems : mobileItems;
   }
 
-  function i() {
-    for (var t = document.querySelectorAll('footer[data-component="footer"]'), a = 0; a < t.length; a++) {
-      var r = t[a],
-        i = {
-          variant: r.getAttribute("data-variant") || "mobile",
-          active: r.getAttribute("data-active") || ""
-        };
-      if (window.innerWidth >= 768) r.innerHTML = "", r.style.display = "none";
-      else {
-        r.style.display = "";
-        var o = n(0, i.active);
-        r.innerHTML = o
+  function buildItemHtml(item, activeId) {
+    var isActive = item.id === activeId;
+    var colorClass = isActive ? "text-primary" : "text-slate-400 dark:text-slate-500";
+    var fillStyle = isActive && item.fill ? ' style="font-variation-settings: \'FILL\' 1;"' : "";
+    var label = item.key ? '<p class="text-[10px] font-bold uppercase tracking-wider" data-i18n="' + esc(item.key) + '">' + esc(item.key) + "</p>" : "";
+    var waHref = 'https://wa.me/' + (window.Contacts ? window.Contacts.whatsapp : '8613163756465');
+
+    if (item.isWhatsApp) {
+      return '<a class="whatsapp-tab-item relative flex flex-1 flex-col items-center justify-center gap-1 text-[#25d366]" ' +
+        'href="' + waHref + '" data-wa-message-key="wa_msg_contact" data-wa-source="footer-tab" ' +
+        'target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">' +
+        '<span class="material-symbols-outlined relative" style="font-size:26px">' + esc(item.icon) + '</span>' +
+        label + '</a>';
+    }
+
+    return '<a class="relative flex flex-1 flex-col items-center justify-center gap-1 ' + colorClass + '" href="' + esc(item.href) + '">' +
+      '<span class="material-symbols-outlined relative"' + fillStyle + '>' + esc(item.icon) + '</span>' +
+      label + '</a>';
+  }
+
+  function buildBarHtml(variant, activeId) {
+    var items = getItemsForVariant(variant);
+    var tabletClass = variant === "tablet" ? " max-w-3xl mx-auto" : "";
+    var pbSafe = variant === "tablet" ? " pb-3" : " pb-6";
+
+    var itemsHtml = items.map(function (item) {
+      return buildItemHtml(item, activeId);
+    }).join("\n");
+
+    return '<div class="fixed bottom-0 left-0 right-0 z-[var(--z-footer)]">' +
+      '<div class="flex gap-2 border-t border-slate-200 dark:border-slate-800 ' +
+      'bg-background-light/95 dark:bg-background-dark/95 backdrop-blur-md px-4' + pbSafe + ' pt-2' + tabletClass + '">' +
+      itemsHtml +
+      '</div></div>';
+  }
+
+  function mount() {
+    var footers = document.querySelectorAll('footer[data-component="footer"]');
+    var w = window.innerWidth;
+
+    for (var i = 0; i < footers.length; i++) {
+      var footer = footers[i];
+      var variant = footer.getAttribute("data-variant") || "mobile";
+      var activeId = footer.getAttribute("data-active") || "";
+
+      // PC (>=1024px) → hidden
+      // Resolve real variant based on screen width
+      if (w >= 1024) {
+        footer.innerHTML = "";
+        footer.style.display = "none";
+        continue;
+      }
+
+      // Use tablet items for 768-1024, mobile items for <768
+      var resolvedVariant = w >= 768 ? "tablet" : "mobile";
+
+      footer.style.display = "";
+      footer.innerHTML = buildBarHtml(resolvedVariant, activeId);
+    }
+
+    // Fade-in animation
+    var bar = document.querySelector(".fixed.bottom-0");
+    if (bar) {
+      bar.style.opacity = "0";
+      bar.style.transition = "opacity 0.15s ease-out";
+    }
+
+    // Apply translations
+    if (window.translationManager && typeof window.translationManager.applyTranslations === "function") {
+      window.translationManager.applyTranslations();
+    }
+
+    window.requestAnimationFrame(function () {
+      if (bar) bar.style.opacity = "1";
+      if (!document.body.style.paddingBottom) {
+        document.body.style.paddingBottom = (bar ? bar.offsetHeight : 80) + 20 + "px";
+      }
+    });
+  }
+
+  /* ─── Handle bfcache (back/forward) ─── */
+  window.addEventListener("pageshow", function (e) {
+    if (!e.persisted) return;
+    var needsRemount = false;
+    var footers = document.querySelectorAll('footer[data-component="footer"]');
+    for (var i = 0; i < footers.length; i++) {
+      if (!footers[i].querySelector || !footers[i].querySelector(".fixed.bottom-0")) {
+        needsRemount = true;
+        break;
       }
     }
-    var l = document.querySelector(".fixed.bottom-0");
-    l && (l.style.opacity = "0", l.style.transition = "opacity 0.15s ease-out"), e.translationManager && "function" == typeof e.translationManager.applyTranslations && e.translationManager.applyTranslations(), e.requestAnimationFrame(function() {
-      l && (l.style.opacity = "1"), document.body.style.paddingBottom || (document.body.style.paddingBottom = (l ? l.offsetHeight : 80) + 20 + "px")
-    })
-  }
-  "loading" === document.readyState ? document.addEventListener("DOMContentLoaded", i) : i(), window.addEventListener("pageshow", function(e) {
-    if (e.persisted) {
-      for (var t = document.querySelectorAll('footer[data-component="footer"]'), a = !1, r = 0; r < t.length; r++) {
-        var n = t[r];
-        if (!n.querySelector || !n.querySelector(".fixed.bottom-0")) {
-          a = !0;
-          break
+    if (!document.querySelector(".fixed.bottom-0")) needsRemount = true;
+    if (needsRemount) mount();
+  });
+
+  /* ─── Public API ─── */
+  window.Footer = {
+    mount: mount,
+    updateActive: function (newActiveId) {
+      newActiveId = newActiveId || "";
+      // Collect all items from both lists
+      var allItems = mobileItems.concat(tabletItems);
+      var links = document.querySelectorAll(".fixed.bottom-0 a[href]");
+      if (links.length === 0) return;
+
+      for (var i = 0; i < links.length; i++) {
+        var link = links[i];
+        var href = link.getAttribute("href") || "";
+        // Skip external links
+        if (href.startsWith("http") || href.indexOf("wa.me") >= 0) continue;
+
+        var matched = null;
+        for (var j = 0; j < allItems.length; j++) {
+          var itemHref = allItems[j].href;
+          var linkHref = href;
+          if (itemHref.endsWith("/")) itemHref = itemHref.slice(0, -1);
+          if (linkHref.endsWith("/")) linkHref = linkHref.slice(0, -1);
+          if (itemHref === linkHref) { matched = allItems[j]; break; }
+        }
+
+        var isActive = matched && matched.id === newActiveId;
+        var icon = link.querySelector(".material-symbols-outlined");
+
+        if (isActive) {
+          link.className = "flex flex-1 flex-col items-center justify-center gap-1 text-primary";
+          if (icon && matched.fill) icon.setAttribute("style", "font-variation-settings: 'FILL' 1;");
+        } else {
+          link.className = "flex flex-1 flex-col items-center justify-center gap-1 text-slate-400 dark:text-slate-500";
+          if (icon) icon.removeAttribute("style");
         }
       }
-      document.querySelector(".fixed.bottom-0") || (a = !0), a && i()
     }
-  }), e.Footer = {
-    mount: i,
-    updateActive: function(e) {
-      e = e || "";
-      var t = document.querySelectorAll(".fixed.bottom-0 a[href]");
-      if (0 === t.length) return;
-      for (var r = 0; r < t.length; r++) {
-        var n = t[r],
-          i = n.getAttribute("href") || "",
-          o = null;
-        if (i.startsWith("http") || i.indexOf("wa.me") >= 0) continue;
-        for (var l = 0; l < a.length; l++) {
-          var s = a[l].href,
-            c = i;
-          s.endsWith("/") && (s = s.slice(0, -1));
-          c.endsWith("/") && (c = c.slice(0, -1));
-          s === c && (o = a[l])
-        }
-        var f = o && o.id === e,
-          d = n.querySelector(".material-symbols-outlined");
-        f ? (n.className = "flex flex-1 flex-col items-center justify-center gap-1 text-primary",
-          d && o && o.fill && d.setAttribute("style", "font-variation-settings: 'FILL' 1;"))
-        : (n.className = "flex flex-1 flex-col items-center justify-center gap-1 text-slate-400 dark:text-slate-500",
-          d && d.removeAttribute("style"))
-      }
-    }
-  }, window.addEventListener("resize", function() {
-    clearTimeout(t), t = setTimeout(function() {
-      i()
-    }, 200)
-  })
-}(window);
+  };
+
+  /* ─── Init ─── */
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", mount);
+  } else {
+    mount();
+  }
+
+  /* ─── Resize handler ─── */
+  window.addEventListener("resize", function () {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(mount, 200);
+  });
+
+})(window);
