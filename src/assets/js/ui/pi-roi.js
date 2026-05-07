@@ -123,7 +123,7 @@
             labels: ["YEAR 1", "YEAR 2", "YEAR 3", "YEAR 4", "YEAR 5"],
             datasets: [
               {
-                label: "Net Profit ($k)",
+                label: "Net Profit",
                 data: [0, 0, 0, 0, 0],
                 backgroundColor: [CHART_PRIMARY_A, CHART_PRIMARY_A, CHART_PRIMARY_A, CHART_PRIMARY_A, CHART_PRIMARY],
                 borderColor: CHART_PRIMARY,
@@ -132,7 +132,7 @@
                 order: 1,
               },
               {
-                label: "Baseline Cost ($k)",
+                label: "Baseline Cost",
                 data: [0, 0, 0, 0, 0],
                 backgroundColor: CHART_SLATE,
                 borderWidth: 0,
@@ -180,7 +180,7 @@
             labels: ["Mo 1", "Mo 3", "Mo 6", "Mo 9", "Mo 12", "Mo 18", "Mo 24"],
             datasets: [
               {
-                label: "Manual Labor ($k)",
+                label: "Manual Labor",
                 data: [0, 0, 0, 0, 0, 0, 0],
                 borderColor: CHART_SLATE,
                 backgroundColor: "transparent",
@@ -189,7 +189,7 @@
                 tension: 0.3,
               },
               {
-                label: "Automated ($k)",
+                label: "Automated",
                 data: [0, 0, 0, 0, 0, 0, 0],
                 borderColor: CHART_PRIMARY,
                 backgroundColor: CHART_PRIMARY_A,
