@@ -149,6 +149,7 @@
       "}",
       ".cs-group-label:first-child { border-top: none; margin-top: 0; }",
       "html.dark .cs-group-label { color: #94a3b8; border-top-color: rgba(255,255,255,.08); }",
+      ".cs-group-items .cs-item { padding-left: 20px; font-size: 13px; }",
 
       /* ─── Search ─── */
       ".cs-search-wrap {",
@@ -222,6 +223,7 @@
       "}",
       ".cs-popup-panel .cs-group-label:first-child { border-top: none; margin-top: 0; }",
       "html.dark .cs-popup-panel .cs-group-label { color: #94a3b8; border-top-color: rgba(255,255,255,.08); }",
+      ".cs-popup-panel .cs-group-items .cs-item { padding-left: 20px; font-size: 13px; }",
       ".cs-popup-list {",
       "  max-height: 50vh; overflow-y: auto; -webkit-overflow-scrolling: touch;",
       "}",
@@ -469,14 +471,16 @@
         }
         // show/hide group labels
         for (var g = 0; g < groups.length; g++) {
-          var next = groups[g].nextElementSibling;
+          var wrapper = groups[g].nextElementSibling;
           var anyVisible = false;
-          while (next && !next.classList.contains("cs-group-label")) {
-            if (next.classList.contains("cs-item") && next.style.display !== "none") {
-              anyVisible = true;
-              break;
+          if (wrapper && wrapper.classList.contains("cs-group-items")) {
+            var wrappedItems = wrapper.querySelectorAll(".cs-item");
+            for (var w = 0; w < wrappedItems.length; w++) {
+              if (wrappedItems[w].style.display !== "none") {
+                anyVisible = true;
+                break;
+              }
             }
-            next = next.nextElementSibling;
           }
           groups[g].style.display = anyVisible ? "" : "none";
         }
@@ -520,7 +524,7 @@
     if (hasGroups) {
       for (var g = 0; g < data.groups.length; g++) {
         html += '<div class="cs-group-label">' + esc(data.groups[g].label) + "</div>";
-        html += this._buildOptionItemsHTML(withoutPlaceholder(data.groups[g].options));
+        html += '<div class="cs-group-items">' + this._buildOptionItemsHTML(withoutPlaceholder(data.groups[g].options)) + '</div>';
       }
       // Also add non-grouped options
       if (data.options.length > 0) {
@@ -753,14 +757,16 @@
         }
         // Hide group labels whose items are all filtered out
         for (var g = 0; g < groupLabels.length; g++) {
-          var next = groupLabels[g].nextElementSibling;
+          var wrapper = groupLabels[g].nextElementSibling;
           var anyVisible = false;
-          while (next && !next.classList.contains("cs-group-label")) {
-            if (next.classList.contains("cs-item") && next.style.display !== "none") {
-              anyVisible = true;
-              break;
+          if (wrapper && wrapper.classList.contains("cs-group-items")) {
+            var wrappedItems = wrapper.querySelectorAll(".cs-item");
+            for (var w = 0; w < wrappedItems.length; w++) {
+              if (wrappedItems[w].style.display !== "none") {
+                anyVisible = true;
+                break;
+              }
             }
-            next = next.nextElementSibling;
           }
           groupLabels[g].style.display = anyVisible ? "" : "none";
         }

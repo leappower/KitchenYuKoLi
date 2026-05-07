@@ -18,16 +18,6 @@
 (function (global) {
   "use strict";
 
-  /* Prevent layout shift: ensure <navigator> custom elements render as block */
-  (function () {
-    var s = document.getElementById("nav-placeholder-styles");
-    if (s) return;
-    s = document.createElement("style");
-    s.id = "nav-placeholder-styles";
-    s.textContent = '[data-component="navigator"] { display: block; }';
-    document.head.appendChild(s);
-  })();
-
   /* ================================================================
    *  常量 & 配置
    * ================================================================ */

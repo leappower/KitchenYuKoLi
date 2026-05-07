@@ -1,3 +1,6 @@
+/* Prevent layout shift: <navigator> custom elements must be block-level */
+[data-component="navigator"] { display: block; }
+
 /**
  * skeleton.css — 骨架屏样式（三屏适配）
  *
