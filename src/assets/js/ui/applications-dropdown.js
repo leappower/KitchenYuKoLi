@@ -15,6 +15,7 @@
     { key: "nav_applications_chain_restaurant", icon: "ramen_dining", href: "/applications/chain-restaurant/", emoji: "" },
     { key: "nav_applications_canteen", icon: "restaurant", href: "/applications/canteen/", emoji: "" },
     { key: "nav_applications_cloud_kitchen", icon: "delivery_dining", href: "/applications/cloud-kitchen/", emoji: "" },
+    { key: "nav_applications_food_factory", icon: "factory", href: "/applications/food-factory/", emoji: "" },
     { key: "nav_applications_menu_lab", icon: "science", href: "/applications/menu-lab/", emoji: "" },
   ];
 

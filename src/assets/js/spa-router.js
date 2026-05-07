@@ -34,6 +34,7 @@
       "/applications/canteen/": "/applications/canteen/index.html",
       "/applications/menu-lab/": "/applications/menu-lab/index.html",
       "/applications/cloud-kitchen/": "/applications/cloud-kitchen/index.html",
+      "/applications/food-factory/": "/applications/food-factory/index.html",
       "/cases/": "/cases/index.html",
       "/profit-calculator/": "/profit-calculator/index.html",
       "/products/compare/": "/products/compare/index.html",
@@ -758,6 +759,11 @@
           scripts.push({ src: "/assets/js/ui/dropdown-styles.js", id: "spa-dropdown-styles" });
           scripts.push({ src: "/assets/js/ui/custom-select.js", id: "spa-custom-select" });
         }
+      }
+
+      // Quote 页面需要预算 i18n 脚本
+      if (path.indexOf("/quote/") !== -1) {
+        scripts.push({ src: "/assets/js/quote-budget-i18n.js?v=20260507", id: "spa-quote-budget-i18n" });
       }
 
       // Home 页面需要 home-core-products.js（动态渲染核心产品卡片）

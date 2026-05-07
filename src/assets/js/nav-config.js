@@ -97,6 +97,10 @@
         icon: "delivery_dining",
         href: "/applications/cloud-kitchen/"
       }, {
+        key: "nav_applications_food_factory",
+        icon: "factory",
+        href: "/applications/food-factory/"
+      }, {
         key: "nav_applications_menu_lab",
         icon: "science",
         href: "/applications/menu-lab/"

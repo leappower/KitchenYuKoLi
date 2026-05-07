@@ -67,13 +67,22 @@
 
   /* ───────── CO₂ reduction per equipment (tonnes / year) ───────── */
   var CO2_PER_EQUIPMENT = {
-    'smart_wok':        2.1,
-    'rice_cooker':      0.8,
+    'smart_wok':        1.8,
+    'rice_cooker':      0.6,
     'dishwasher':       1.2,
     'induction_cooker': 0.5,
-    'deep_fryer':       0.7
+    'deep_fryer':       0.9
   };
 
+
+  /* ───────── Equipment → CMS category mapping ───────── */
+  var EQUIPMENT_CATEGORY_MAP = {
+    'smart_wok':        ['stirfry'],
+    'rice_cooker':      ['steaming'],
+    'dishwasher':       ['other'],
+    'induction_cooker': ['other'],
+    'deep_fryer':       ['frying']
+  };
 
   /* ───────── Scene presets (from application page deep-links) ───────── */
 
@@ -83,7 +92,8 @@
     'small-restaurant':  { meals: 150,  pain: 'slow_service',        equipment: ['smart_wok'], operators: 1 },
     'canteen':           { meals: 1000, pain: 'hiring_difficulty',    equipment: ['smart_wok', 'rice_cooker', 'dishwasher', 'deep_fryer'], operators: 4 },
     'cloud-kitchen':     { meals: 300,  pain: 'limited_space',       equipment: ['smart_wok', 'induction_cooker'], operators: 2 },
-    'menu-lab':          { meals: 200,  pain: 'inconsistent_quality', equipment: ['smart_wok'], operators: 2 }
+    'menu-lab':          { meals: 200,  pain: 'inconsistent_quality', equipment: ['smart_wok'], operators: 2 },
+    'food-factory':     { meals: 3000, pain: 'high_labor_cost',     equipment: ['smart_wok', 'rice_cooker', 'dishwasher', 'induction_cooker'], operators: 8 }
   };
 
   /* ───────── Helpers ───────── */
@@ -213,16 +223,20 @@
       mid: Math.round(investment.mid * rate)
     };
 
-    // Use mid values for a realistic single-point payback estimate
+    // Payback: based on mid estimate, with ±30% range for realistic best/worst
     var paybackMid = localInvestment.mid / Math.max(monthlySavings.mid, 1);
-    paybackMid = Math.max(3, paybackMid); // minimum 3 months
-    var paybackMin = Math.max(3, Math.round(paybackMid) - 1);
-    var paybackMax = Math.round(paybackMid) + 1;
+    paybackMid = Math.max(3, paybackMid);
+    var payback = {
+      min: Math.max(3, Math.round(paybackMid * 0.7)),
+      mid: Math.max(3, Math.round(paybackMid)),
+      max: Math.round(paybackMid * 1.3)
+    };
 
+    // 5-year return: best = max monthly savings × 60 − min investment; worst = min savings × 60 − max investment
     var fiveYearReturn = {
-      min: (monthlySavings.mid * 60) - localInvestment.max,
+      min: (monthlySavings.min * 60) - localInvestment.max,
       mid: (monthlySavings.mid * 60) - localInvestment.mid,
-      max: (monthlySavings.mid * 60) - localInvestment.min
+      max: (monthlySavings.max * 60) - localInvestment.min
     };
 
     var annualSavings = {
@@ -233,13 +247,16 @@
 
     var co2 = getCO2(input.equipment, input.operatorReduction);
 
+    var roiMultiplier = investment.mid > 0 ? (fiveYearReturn.mid / investment.mid) : 0;
+
     return {
       monthlySavings: monthlySavings,
       investment: localInvestment,
-      payback: { min: Math.ceil(paybackMin), max: Math.ceil(paybackMax) },
+      payback: payback,
       fiveYearReturn: fiveYearReturn,
       annualSavings: annualSavings,
-      co2: co2
+      co2: co2,
+      roiMultiplier: roiMultiplier
     };
   }
 
@@ -270,6 +287,171 @@
     'induction_cooker': 'profit_calc_eq_induction',
     'deep_fryer':       'profit_calc_eq_fryer'
   };
+
+/* ───────── Recommend products from CMS catalog ───────── */
+
+  function recommendProducts(equipment, dailyMeals) {
+    try {
+      if (!window.AppUtils || typeof window.AppUtils.buildProductCatalog !== 'function') return null;
+      var catalog = window.AppUtils.buildProductCatalog();
+      if (!catalog || !catalog.length) return null;
+      var lang = (window.translationManager && window.translationManager.currentLanguage) || 'en';
+      var results = [];
+      equipment.forEach(function (eq) {
+        var categories = EQUIPMENT_CATEGORY_MAP[eq] || [];
+        if (!categories.length) return;
+        var candidates = catalog.filter(function (p) {
+          if (!p.isActive) return false;
+          return categories.indexOf(p.category) !== -1;
+        });
+        if (!candidates.length) return;
+        // Parse throughput number
+        candidates.forEach(function (p) {
+          var tpStr = p.throughput || '';
+          var tpMatch = tpStr.match(/(\d+)/);
+          p._tpNum = tpMatch ? parseInt(tpMatch[1], 10) : 0;
+          var prStr = p.referencePrice || '';
+          var prMatch = prStr.match(/(\d+)/);
+          p._prNum = prMatch ? parseInt(prMatch[1], 10) : 999999999;
+          var nm = p.name;
+          p._displayName = (typeof nm === 'object' && nm !== null) ? (nm[lang] || nm.zh || nm.en || '') : (nm || '');
+        });
+        // Prefer throughput >= dailyMeals, then lowest price
+        var sufficient = candidates.filter(function (p) { return p._tpNum >= dailyMeals; });
+        var pick = sufficient.length ? sufficient : candidates;
+        pick.sort(function (a, b) { return a._prNum - b._prNum; });
+        if (pick.length) {
+          results.push({
+            equipment: eq,
+            model: pick[0].model || '',
+            name: pick[0]._displayName,
+            price: pick[0]._prNum
+          });
+        }
+      });
+      return results.length ? results : null;
+    } catch (e) {
+      console.warn('[PC] recommendProducts error:', e);
+      return null;
+    }
+  }
+
+/* ───────── Before vs After comparison HTML ───────── */
+
+  /* Equipment-specific comparison dimensions */
+  var EQUIP_COMPARISON_MAP = {
+    smart_wok: [
+      ['profit_calc_comp_quality',       'profit_calc_comp_quality_before',       'profit_calc_comp_quality_after'],
+      ['profit_calc_comp_consistency',    'profit_calc_comp_consistency_before',    'profit_calc_comp_consistency_after'],
+      ['profit_calc_comp_speed',          'profit_calc_comp_speed_before',          'profit_calc_comp_speed_after'],
+      ['profit_calc_comp_wok_safety',     'profit_calc_comp_wok_safety_before',     'profit_calc_comp_wok_safety_after'],
+      ['profit_calc_comp_space',          'profit_calc_comp_space_before',          'profit_calc_comp_space_after']
+    ],
+    rice_cooker: [
+      ['profit_calc_comp_consistency',    'profit_calc_comp_consistency_before',    'profit_calc_comp_consistency_after'],
+      ['profit_calc_comp_rice_capacity',  'profit_calc_comp_rice_capacity_before',  'profit_calc_comp_rice_capacity_after'],
+      ['profit_calc_comp_energy',         'profit_calc_comp_energy_before',         'profit_calc_comp_energy_after'],
+      ['profit_calc_comp_safety',         'profit_calc_comp_safety_before',         'profit_calc_comp_safety_after']
+    ],
+    dishwasher: [
+      ['profit_calc_comp_hygiene',        'profit_calc_comp_hygiene_before',        'profit_calc_comp_hygiene_after'],
+      ['profit_calc_comp_water_usage',    'profit_calc_comp_water_usage_before',    'profit_calc_comp_water_usage_after'],
+      ['profit_calc_comp_speed',          'profit_calc_comp_speed_before',          'profit_calc_comp_speed_after'],
+      ['profit_calc_comp_labor_intensity','profit_calc_comp_labor_intensity_before','profit_calc_comp_labor_intensity_after']
+    ],
+    induction_cooker: [
+      ['profit_calc_comp_energy',         'profit_calc_comp_energy_before',         'profit_calc_comp_energy_after'],
+      ['profit_calc_comp_temp_control',   'profit_calc_comp_temp_control_before',   'profit_calc_comp_temp_control_after'],
+      ['profit_calc_comp_safety',         'profit_calc_comp_safety_before',         'profit_calc_comp_safety_after'],
+      ['profit_calc_comp_space',          'profit_calc_comp_space_before',          'profit_calc_comp_space_after']
+    ],
+    deep_fryer: [
+      ['profit_calc_comp_quality',        'profit_calc_comp_quality_before',        'profit_calc_comp_quality_after'],
+      ['profit_calc_comp_oil_mgmt',       'profit_calc_comp_oil_mgmt_before',       'profit_calc_comp_oil_mgmt_after'],
+      ['profit_calc_comp_safety',         'profit_calc_comp_safety_before',         'profit_calc_comp_safety_after'],
+      ['profit_calc_comp_temp_control',   'profit_calc_comp_temp_control_before',   'profit_calc_comp_temp_control_after']
+    ]
+  };
+
+  function buildComparisonHTML(input, result, lc, _t) {
+    var tFunc = _t || t;
+    var laborBefore = lc.symbol + formatNumber(input.laborCost);
+    var laborAfter = lc.symbol + formatNumber(input.laborCost - result.monthlySavings.mid);
+    var outputBefore = input.dailyMeals;
+    var outputAfter = Math.ceil(input.dailyMeals * 1.3);
+
+    // Universal rows (always shown)
+    var rows = [
+      [tFunc('profit_calc_comp_monthly_labor'), laborBefore, laborAfter],
+      [tFunc('profit_calc_comp_daily_output'), outputBefore, outputAfter]
+    ];
+
+    // Equipment-specific rows (deduplicated by key)
+    var seen = {};
+    var eqList = input.equipment || [];
+    if (eqList.length === 0) eqList = ['smart_wok']; // default fallback
+    eqList.forEach(function (eq) {
+      var dims = EQUIP_COMPARISON_MAP[eq];
+      if (!dims) return;
+      dims.forEach(function (d) {
+        if (!seen[d[0]]) {
+          seen[d[0]] = true;
+          rows.push([tFunc(d[0]), tFunc(d[1]), tFunc(d[2])]);
+        }
+      });
+    });
+
+    // Always append training + scalability
+    rows.push([tFunc('profit_calc_comp_training'), tFunc('profit_calc_comp_training_before'), tFunc('profit_calc_comp_training_after')]);
+    rows.push([tFunc('profit_calc_comp_maintenance'), tFunc('profit_calc_comp_maintenance_before'), tFunc('profit_calc_comp_maintenance_after')]);
+    rows.push([tFunc('profit_calc_comp_scalability'), tFunc('profit_calc_comp_scalability_before'), tFunc('profit_calc_comp_scalability_after')]);
+
+    var html = '<h3 style="font-size:15px;font-weight:700;color:#065f46;margin:24px 0 12px">★ ' + tFunc('profit_calc_comparison_title') + '</h3>';
+    html += '<table style="width:100%;border-collapse:collapse;font-size:12px;border:1px solid #a7f3d0;border-radius:8px;overflow:hidden">';
+    html += '<tr style="background:#ecfdf5"><th style="padding:8px;text-align:left;border-bottom:2px solid #10b981;width:30%">' + tFunc('profit_calc_comp_dimension') + '</th><th style="padding:8px;text-align:left;border-bottom:2px solid #10b981;width:35%">' + tFunc('profit_calc_comparison_before') + '</th><th style="padding:8px;text-align:left;border-bottom:2px solid #10b981;width:35%">' + tFunc('profit_calc_comparison_after') + '</th></tr>';
+    rows.forEach(function (r) {
+      html += '<tr><td style="padding:6px 8px;border-bottom:1px solid #d1fae5;color:#475569">' + r[0] + '</td><td style="padding:6px 8px;border-bottom:1px solid #d1fae5;color:#b91c1c;font-weight:600">' + r[1] + '</td><td style="padding:6px 8px;border-bottom:1px solid #d1fae5;font-weight:600;color:#059669">' + r[2] + '</td></tr>';
+    });
+    html += '</table>';
+    return html;
+  }
+
+/* ───────── 5-Year TCO Analysis HTML ───────── */
+
+  function buildTCOHTML(input, result, lc, _t) {
+    var tFunc = _t || t;
+    var inflation = 0.03;
+    var maintenanceRate = 0.05;
+    var investmentMid = result.investment.mid;
+    var maintenanceBase = investmentMid * maintenanceRate;
+    var annualLabor = input.laborCost * 12;
+    var afterLaborBase = annualLabor - result.annualSavings.mid;
+    var html = '<h3 style="font-size:15px;font-weight:700;color:#64748b;margin:24px 0 12px">' + tFunc('profit_calc_tco_title') + '</h3>';
+    html += '<table style="width:100%;border-collapse:collapse;font-size:12px">';
+    html += '<tr style="background:#f1f5f9"><th style="padding:8px;text-align:right;border-bottom:2px solid #cbd5e1"></th>';
+    html += '<th style="padding:8px;text-align:right;border-bottom:2px solid #cbd5e1">' + tFunc('profit_calc_tco_traditional') + '</th>';
+    html += '<th style="padding:8px;text-align:right;border-bottom:2px solid #cbd5e1">' + tFunc('profit_calc_tco_yukoli') + '</th>';
+    html += '<th style="padding:8px;text-align:right;border-bottom:2px solid #cbd5e1">' + tFunc('profit_calc_tco_annual_savings') + '</th>';
+    html += '<th style="padding:8px;text-align:right;border-bottom:2px solid #cbd5e1">' + tFunc('profit_calc_tco_cumulative') + '</th></tr>';
+    var cumulative = 0;
+    for (var yr = 1; yr <= 5; yr++) {
+      var factor = Math.pow(1 + inflation, yr - 1);
+      var tradCost = annualLabor * factor;
+      var yukoliCost = afterLaborBase * factor + maintenanceBase * factor;
+      if (yr === 1) yukoliCost += investmentMid;
+      var annualSave = tradCost - yukoliCost;
+      cumulative += annualSave;
+      html += '<tr>';
+      html += '<td style="padding:6px 8px;border-bottom:1px solid #e2e8f0;font-weight:600">' + tFunc('profit_calc_tco_year').replace('{n}', yr) + '</td>';
+      html += '<td style="padding:6px 8px;border-bottom:1px solid #e2e8f0;text-align:right">' + lc.symbol + formatNumber(Math.round(tradCost)) + '</td>';
+      html += '<td style="padding:6px 8px;border-bottom:1px solid #e2e8f0;text-align:right">' + lc.symbol + formatNumber(Math.round(yukoliCost)) + '</td>';
+      html += '<td style="padding:6px 8px;border-bottom:1px solid #e2e8f0;text-align:right;color:' + (annualSave >= 0 ? '#059669' : '#dc2626') + '">' + lc.symbol + formatNumber(Math.round(annualSave)) + '</td>';
+      html += '<td style="padding:6px 8px;border-bottom:1px solid #e2e8f0;text-align:right;font-weight:700;color:#059669">' + lc.symbol + formatNumber(Math.round(cumulative)) + '</td>';
+      html += '</tr>';
+    }
+    html += '</table>';
+    return html;
+  }
 
 /* ───────── WhatsApp message builder ───────── */
 
@@ -352,8 +534,22 @@
         pdfRow(t('profit_calc_pdf_co2'), result.co2.toFixed(1) + ' ' + t('profit_calc_co2_unit')) +
       '</div>' +
 
+      /* ROI multiplier — spacer to push to page 2 (A4 ≈ 1123px at 96dpi, minus margins ~960px content area) */
+      '<div style="height:1px;margin-bottom:' + Math.max(0, 920 - 600) + 'px"></div>' +
+      '<div style="text-align:center;background:linear-gradient(135deg,#fef2f2,#fff1f2);border-radius:12px;padding:20px;margin-bottom:16px">' +
+        '<div style="font-size:13px;color:#64748b;margin-bottom:4px">' + t('profit_calc_roi_multiplier') + '</div>' +
+        '<div style="font-size:28px;font-weight:900;color:#e11d48">★ ' + t('profit_calc_roi_per_dollar').replace('{n}', result.roiMultiplier.toFixed(1)) + '</div>' +
+      '</div>' +
+
+      /* Recommended equipment + Before vs After comparison (combined) */
+      buildRecommendedEquipmentHTML(input, result, lc, t) +
+      buildComparisonHTML(input, result, lc, t) +
+
+      /* 5-Year TCO Analysis */
+      buildTCOHTML(input, result, lc, t) +
+
       '<div style="margin-top:24px;padding-top:16px;border-top:1px solid #e2e8f0">' +
-        '<p style="font-size:10px;color:#94a3b8;text-align:center;margin:0">' + t('profit_calc_pdf_disclaimer') + '</p>' +
+        '<p style="font-size:10px;color:#94a3b8;text-align:center;margin:0">' + t('profit_calc_pdf_cta') + '</p>' +
       '</div>';
 
     document.body.appendChild(container);
@@ -420,6 +616,33 @@
     });
   }
 
+  /* ───────── Recommended equipment HTML ───────── */
+  function buildRecommendedEquipmentHTML(input, result, lc, _t) {
+    var tFunc = _t || t;
+    var html = '<h3 style="font-size:15px;font-weight:700;color:#1e40af;margin:24px 0 12px">★ ' + tFunc('profit_calc_recommended_equipment') + '</h3>';
+    var recs = recommendProducts(input.equipment, input.dailyMeals);
+    if (recs && recs.length) {
+      html += '<table style="width:100%;border-collapse:collapse;font-size:12px;border:1px solid #bfdbfe;border-radius:8px;overflow:hidden">';
+      html += '<tr style="background:#eff6ff"><th style="padding:8px;text-align:left;border-bottom:2px solid #3b82f6">Model</th><th style="padding:8px;text-align:left;border-bottom:2px solid #3b82f6">' + tFunc('profit_calc_recommended_product') + '</th><th style="padding:8px;text-align:right;border-bottom:2px solid #3b82f6">' + tFunc('profit_calc_recommended_price') + '</th></tr>';
+      recs.forEach(function (r) {
+        html += '<tr><td style="padding:6px 8px;border-bottom:1px solid #dbeafe;font-weight:600;color:#1e40af">' + r.model + '</td><td style="padding:6px 8px;border-bottom:1px solid #dbeafe">' + r.name + '</td><td style="padding:6px 8px;border-bottom:1px solid #dbeafe;text-align:right;color:#1e40af">' + lc.symbol + formatNumber(r.price) + '</td></tr>';
+      });
+      html += '</table>';
+    } else {
+      // Fallback: show equipment names + price ranges
+      html += '<table style="width:100%;border-collapse:collapse;font-size:12px;border:1px solid #bfdbfe;border-radius:8px;overflow:hidden">';
+      html += '<tr style="background:#eff6ff"><th style="padding:8px;text-align:left;border-bottom:2px solid #3b82f6">' + tFunc('profit_calc_recommended_equipment_type') + '</th><th style="padding:8px;text-align:right;border-bottom:2px solid #3b82f6">' + tFunc('profit_calc_recommended_price_range') + '</th></tr>';
+      (input.equipment || []).forEach(function (eq) {
+        var cost = EQUIPMENT_COST[eq];
+        if (!cost) return;
+        var name = EQUIP_KEY_MAP[eq] ? tFunc(EQUIP_KEY_MAP[eq]) : eq;
+        html += '<tr><td style="padding:6px 8px;border-bottom:1px solid #dbeafe;font-weight:600;color:#1e40af">' + name + '</td><td style="padding:6px 8px;border-bottom:1px solid #dbeafe;text-align:right;color:#1e40af">' + lc.symbol + formatNumber(cost.min) + ' – ' + lc.symbol + formatNumber(cost.max) + '</td></tr>';
+      });
+      html += '</table>';
+    }
+    return html;
+  }
+
   /** Simple table row helper */
   function pdfRow(label, value) {
     return '<div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid #e2e8f0">' +
@@ -466,7 +689,17 @@
       '<div class="row"><span class="label">' + t('profit_calc_pdf_annual_savings') + '</span><span class="value">' + shortCurrency(result.annualSavings.mid, lc.symbol) + '</span></div>',
       '<div class="row"><span class="label">' + t('profit_calc_pdf_co2') + '</span><span class="value">' + result.co2.toFixed(1) + ' ' + t('profit_calc_co2_unit') + '</span></div>',
       '</div>',
-      '<div class="footer">' + t('profit_calc_pdf_footer') + new Date().toLocaleDateString() + '<br>' + t('profit_calc_pdf_disclaimer') + '</div>',
+      /* ROI multiplier — spacer for print page break */
+      '<div style="page-break-before:always;text-align:center;background:linear-gradient(135deg,#fef2f2,#fff1f2);padding:16px;border-radius:8px;margin:16px 0">',
+      '<div style="font-size:14px;color:#64748b;margin-bottom:4px">' + t('profit_calc_roi_multiplier') + '</div>',
+      '<div style="font-size:24px;font-weight:900;color:#e11d48">★ ' + t('profit_calc_roi_per_dollar').replace('{n}', result.roiMultiplier.toFixed(1)) + '</div>',
+      '</div>',
+      /* Recommended equipment + Before vs After comparison (combined) */
+      buildRecommendedEquipmentHTML(input, result, lc, t),
+      buildComparisonHTML(input, result, lc, t),
+      /* 5-Year TCO Analysis */
+      buildTCOHTML(input, result, lc, t),
+      '<div class="footer">' + t('profit_calc_pdf_footer') + new Date().toLocaleDateString() + '<br>' + t('profit_calc_pdf_cta') + '</div>',
       '</body></html>'
     ].join('');
 
@@ -608,6 +841,34 @@
       });
     }
 
+    // Business type select → auto-fill preset
+    var businessTypeEl = document.getElementById('pc-business-type');
+    if (businessTypeEl) {
+      businessTypeEl.addEventListener('change', function () {
+        var preset = SCENE_PRESETS[this.value];
+        if (!preset) return;
+        var mealsEl = document.getElementById('pc-daily-meals');
+        if (mealsEl && preset.meals) mealsEl.value = preset.meals;
+        var painEl = document.getElementById('pc-pain-point');
+        if (painEl && preset.pain) painEl.value = preset.pain;
+        if (preset.equipment && preset.equipment.length) {
+          document.querySelectorAll('.pc-equipment').forEach(function (cb) {
+            cb.checked = preset.equipment.indexOf(cb.value) !== -1;
+          });
+        }
+        var rangeEl = document.getElementById('pc-operator-reduction');
+        var rangeValEl = document.getElementById('pc-operator-value');
+        if (rangeEl && preset.operators) {
+          rangeEl.value = preset.operators;
+          if (rangeValEl) rangeValEl.textContent = preset.operators;
+        }
+        // Re-calculate if results visible
+        if (document.getElementById('profit-result-panel') && !document.getElementById('profit-result-panel').classList.contains('hidden')) {
+          self.run();
+        }
+      });
+    }
+
     // Mark labor input as touched on manual edit
     var laborEl = document.getElementById(this.laborInputId);
     if (laborEl) {
@@ -636,6 +897,9 @@
       equipment.push(cb.value);
     });
 
+    var businessTypeEl = document.getElementById('pc-business-type');
+    var businessType = businessTypeEl ? businessTypeEl.value : '';
+
     return {
       country: country,
       laborCost: parseFloat(document.getElementById(this.laborInputId).value) || salaryInfo.monthly,
@@ -643,7 +907,8 @@
       painPoint: document.getElementById('pc-pain-point').value || 'high_labor_cost',
       equipment: equipment,
       operatorReduction: parseInt(document.getElementById('pc-operator-reduction').value, 10) || 2,
-      salaryInfo: salaryInfo
+      salaryInfo: salaryInfo,
+      businessType: businessType
     };
   };
 

@@ -208,6 +208,11 @@
     if (window.smartPopup && typeof window.smartPopup.init === "function") {
       window.smartPopup.init();
     }
+
+    // Update budget options for quote page (if present)
+    if (typeof window.updateBudgetOptions === "function") {
+      setTimeout(window.updateBudgetOptions, 100);
+    }
   }
 
   if (window.CommonUtils && typeof window.CommonUtils.ready === "function") {
