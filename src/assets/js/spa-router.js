@@ -266,13 +266,21 @@
     // 显示骨架屏
     showSkeleton: function () {
       var container = document.getElementById("spa-content");
-      if (!container) return;
+      if (!container) {
+        this.log("[SK] showSkeleton: #spa-content not found");
+        return;
+      }
 
       // 检查是否已存在骨架屏
-      if (container.querySelector(".skeleton-container")) return;
+      var existing = container.querySelector(".skeleton-container");
+      if (existing) {
+        this.log("[SK] showSkeleton: skeleton already exists, skipping");
+        return;
+      }
 
       // 标记 container 正在加载 — CSS 隐藏非骨架子元素
       container.classList.add('skeleton-loading');
+      this.log("[SK] showSkeleton: added skeleton-loading class");
 
       // 创建骨架屏
       var skeletonHTML = this.getSkeletonHTML();
@@ -281,14 +289,20 @@
       var skeletonElement = tempDiv.firstChild;
 
       container.appendChild(skeletonElement);
+      this.log("[SK] showSkeleton: skeleton appended, container children:", container.children.length);
     },
 
     // 隐藏骨架屏
     hideSkeleton: function () {
       var skeleton = document.querySelector(".skeleton-container");
       if (skeleton) {
-        this.log("hideSkeleton: removing .skeleton-container");
+        this.log("[SK] hideSkeleton: removing .skeleton-container");
         skeleton.remove();
+      }
+      var container = document.getElementById("spa-content");
+      if (container && container.classList.contains('skeleton-loading')) {
+        container.classList.remove('skeleton-loading');
+        this.log("[SK] hideSkeleton: removed skeleton-loading class");
       }
     },
 
@@ -540,9 +554,11 @@
       }
 
       // 替换内容并触发 fade-in 动画
+      this.log("[SK] renderContent: setting opacity 0, removing skeleton-loading");
       container.style.opacity = "0";
       container.classList.remove('skeleton-loading');
       container.innerHTML = content;
+      this.log("[SK] renderContent: innerHTML set, content length:", content ? content.length : 0);
 
       // 动态加载页面专属脚本（SPA 移除了 script 标签，需手动补充）
       var scriptsPromise = _self.loadPageScripts(pagePath);
