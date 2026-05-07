@@ -285,6 +285,7 @@
     hideSkeleton: function () {
       var skeleton = document.querySelector(".skeleton-container");
       if (skeleton) {
+        this.log("hideSkeleton: removing .skeleton-container");
         skeleton.remove();
       }
     },
@@ -536,15 +537,15 @@
         this.updateFooterActiveNav(html);
       }
 
+      // 隐藏骨架屏（在 innerHTML 替换之前，确保移除）
+      this.hideSkeleton();
+
       // 替换内容并触发 fade-in 动画
       container.style.opacity = "0";
       container.innerHTML = content;
 
       // 动态加载页面专属脚本（SPA 移除了 script 标签，需手动补充）
       var scriptsPromise = _self.loadPageScripts(pagePath);
-
-      // 隐藏骨架屏
-      this.hideSkeleton();
 
       // 滚动到页面顶部
       if (this._pendingScroll) {
@@ -578,6 +579,15 @@
           doFadeIn();
         }
       }, 300);
+
+      // 安全网：2s 后若骨架屏仍残留，强制移除
+      setTimeout(function () {
+        var staleSkeleton = document.querySelector(".skeleton-container");
+        if (staleSkeleton) {
+          _self.log("Forced stale skeleton removal");
+          staleSkeleton.remove();
+        }
+      }, 2000);
 
       // 记录上一个路径（供 navigator 判断 ROI 来源菜单）
       if (!window._prevSpaPath) window._prevSpaPath = this.currentRoute || "/";

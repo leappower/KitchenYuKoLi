@@ -101,19 +101,21 @@ html, body { overflow-x: hidden; }
   margin-top: 20px;
   justify-content: center;
   width: 100%;
+  max-width: 340px;
   margin-left: auto;
   margin-right: auto;
 }
 
 .sk-cta {
-  width: 160px;
+  flex: 1 1 0;
+  max-width: 160px;
   height: 44px;
   border-radius: 12px;
-  flex-shrink: 0;
 }
 
 .sk-cta--outline {
-  width: 140px;
+  flex: 1 1 0;
+  max-width: 140px;
   height: 44px;
 }
 
@@ -145,9 +147,9 @@ html, body { overflow-x: hidden; }
   .sk-badge { width: 80px; height: 18px; }
   .sk-hero .sk-line { width: 80%; height: 26px; }
   .sk-line--desc { height: 14px; }
-  .sk-cta { width: 100%; height: 40px; border-radius: 10px; margin-left: auto; margin-right: auto; }
-  .sk-cta--outline { width: 100%; height: 40px; border-radius: 10px; margin-left: auto; margin-right: auto; }
-  .sk-cta-group { flex-direction: column; width: 100%; gap: 10px; }
+  .sk-cta { width: 100%; max-width: none; height: 40px; border-radius: 10px; margin-left: auto; margin-right: auto; }
+  .sk-cta--outline { width: 100%; max-width: none; height: 40px; border-radius: 10px; margin-left: auto; margin-right: auto; }
+  .sk-cta-group { flex-direction: column; width: 100%; max-width: none; gap: 10px; }
   .sk-grid { gap: 12px; }
   .sk-card { height: 180px; border-radius: 12px; }
 }
