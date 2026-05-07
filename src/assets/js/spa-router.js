@@ -118,6 +118,10 @@
       // 设置 SPA 导航标志,禁用响应式重定向
       window.__spaNavigating = true;
 
+      // 取消上一次未完成的导航（防止竞态）
+      this._navVersion = (this._navVersion || 0) + 1;
+      var navVersion = this._navVersion;
+
       // Same-page navigation (hash anchor on current page): just scroll, don't reload
       var currentPath = this.getCurrentPath();
       if (normalizedPath === currentPath || normalizedPath.replace(/\/$/, "") === currentPath.replace(/\/$/, "")) {
@@ -138,7 +142,7 @@
 
       history.pushState({ path: normalizedPath }, "", normalizedPath);
 
-      this.loadRoute(normalizedPath);
+      this.loadRoute(normalizedPath, navVersion);
 
       // 清除标志(延迟以确保导航完成)
       var _self = this;
@@ -159,7 +163,8 @@
 
       history.replaceState({ path: normalizedPath }, "", normalizedPath);
 
-      this.loadRoute(normalizedPath);
+      this._navVersion = (this._navVersion || 0) + 1;
+      this.loadRoute(normalizedPath, this._navVersion);
 
       // 清除标志(延迟以确保导航完成)
       var _self = this;
@@ -430,7 +435,7 @@
     },
 
     // 加载路由
-    loadRoute: function (routePath) {
+    loadRoute: function (routePath, navVersion) {
       var _self = this;
       var pagePath = this.routes[routePath];
 
@@ -471,9 +476,16 @@
           return response.text();
         })
         .then(function (html) {
+          // 竞态保护：丢弃过期导航的结果
+          if (navVersion && navVersion !== _self._navVersion) {
+            _self.log("Stale navigation discarded:", routePath, "(v" + navVersion + " vs v" + _self._navVersion + ")");
+            return;
+          }
           _self.renderContent(devicePath, html);
         })
         .catch(function (error) {
+          // 竞态保护：丢弃过期导航的错误
+          if (navVersion && navVersion !== _self._navVersion) return;
           _self.log("Failed to load:", devicePath, error);
           _self.hideSkeleton();
         });
@@ -489,6 +501,12 @@
 
       if (!container) {
         this.log("Content container not found");
+        this.hideSkeleton();
+        return;
+      }
+
+      if (!content) {
+        this.log("No content extracted from:", pagePath);
         this.hideSkeleton();
         return;
       }
@@ -543,16 +561,23 @@
         window.scrollTo({ top: 0, left: 0, behavior: "instant" });
       }
 
-      // Fade in 新内容
-      requestAnimationFrame(function () {
+      // Fade in 新内容（双 rAF 保险：单次 rAF 在 tab 后台/Chrome 节流时可能跳过）
+      function doFadeIn() {
         container.style.transition = "opacity 0.6s ease-out";
         container.style.opacity = "1";
-        // 动画结束后清除内联样式，避免影响后续过渡
         setTimeout(function () {
           container.style.transition = "";
           container.style.opacity = "";
         }, 240);
-      });
+      }
+      requestAnimationFrame(function () { doFadeIn(); });
+      // 安全网：300ms 后若仍不可见，强制显示（防止 rAF 被节流/跳过）
+      setTimeout(function () {
+        if (container.style.opacity === "0") {
+          _self.log("Forced opacity recovery in renderContent");
+          doFadeIn();
+        }
+      }, 300);
 
       // 记录上一个路径（供 navigator 判断 ROI 来源菜单）
       if (!window._prevSpaPath) window._prevSpaPath = this.currentRoute || "/";
@@ -580,7 +605,8 @@
 
       var path = this.getCurrentPath();
       this.log("Popstate to:", path);
-      this.loadRoute(path);
+      this._navVersion = (this._navVersion || 0) + 1;
+      this.loadRoute(path, this._navVersion);
 
       // 清除标志(延迟以确保导航完成)
       var _self = this;

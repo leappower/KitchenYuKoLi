@@ -723,6 +723,15 @@
     autoRender();
   });
 
+  // Translations may load after product-data-ready; refresh tab labels once ready
+  document.addEventListener('spa:ready', function() {
+    if (typeof window.t === 'function') {
+      document.querySelectorAll('.category-tab-container').forEach(function(el) {
+        el._categoryTabsInit = false;
+      });
+    }
+  });
+
   // Public API
   window.ProductGrid = {
     renderPC: function(max) { renderGrid('product-grid', renderPC, max); },

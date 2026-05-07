@@ -343,8 +343,9 @@
   // ─── Init ────────────────────────────────────────────────────
   function init() {
     // Hide product-grid.js floating bar on compare page (we have our own)
+    // Use classList instead of inline style so it auto-recovers on SPA navigation
     var floatBar = document.getElementById('compare-floating-bar');
-    if (floatBar) floatBar.style.display = 'none';
+    if (floatBar) floatBar.classList.remove('visible');
 
     var data = getProductData();
     if (!data) {
