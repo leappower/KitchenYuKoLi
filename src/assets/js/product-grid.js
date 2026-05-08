@@ -540,6 +540,11 @@
     });
     if (!categories.length) return;
 
+    // Emoji map for category tabs
+    var CATEGORY_EMOJI = {
+      'nav_products_stirfry': '🔥'
+    };
+
     // Build tab buttons
     var allTabs = [];
     var isMobile = window.innerWidth < 768;
@@ -558,7 +563,8 @@
       var btn = document.createElement('button');
       btn.className = 'category-tab ' + tabSizeClass + ' font-medium whitespace-nowrap rounded-full border border-slate-200 dark:border-slate-700';
       btn.dataset.category = cat.key;
-      btn.textContent = cat.name;
+      var emoji = CATEGORY_EMOJI[cat.key] || '';
+      btn.textContent = emoji ? emoji + ' ' + cat.name : cat.name;
       allTabs.push(btn);
     });
 
