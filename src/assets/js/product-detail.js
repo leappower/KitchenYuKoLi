@@ -122,10 +122,18 @@
       if (listing) listing.style.display = "none";
 
       if (!ce) {
+        // Insert breadcrumb bar before product-content
+        var bc = document.getElementById("pdp-breadcrumb");
+        if (!bc) {
+          bc = document.createElement("div");
+          bc.id = "pdp-breadcrumb";
+          bc.className = "w-full";
+          container.insertBefore(bc, container.firstChild);
+        }
         ce = document.createElement("div");
         ce.id = "product-content";
         ce.className = "w-full py-10";
-        container.insertBefore(ce, container.firstChild);
+        container.insertBefore(ce, bc.nextSibling);
       }
       if (!re) {
         var section = document.createElement("section");
@@ -178,6 +186,41 @@
 
     // Ensure containers exist (for products listing page)
     ensureContainers();
+
+    // Render breadcrumb using Breadcrumb module if available
+    (function() {
+      var bcEl = document.getElementById("pdp-breadcrumb");
+      if (!bcEl) return;
+      var catKey = product.category || '';
+      var slugMap = (window.Breadcrumb && window.Breadcrumb.CATEGORY_KEY_TO_SLUG) || {};
+      var slugMapRev = (window.Breadcrumb && window.Breadcrumb.SLUG_TO_CATEGORY_KEY) || {};
+      var slug = slugMap[catKey] || '';
+      var catLabel = slug ? ((window.Breadcrumb && window.Breadcrumb.PRODUCT_SLUGS && window.Breadcrumb.PRODUCT_SLUGS[slug]) || {}).label : '';
+      // Track referrer for back navigation
+      if (slug) sessionStorage.setItem('pdp_referrer', '/products/' + slug + '/');
+      var model = product.model || '';
+      // PC/Tablet breadcrumb
+      var html = '<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-4 pb-0 hidden md:block">' +
+        '<nav class="text-sm text-slate-500 dark:text-slate-400" aria-label="Breadcrumb">' +
+        '<ol class="flex items-center gap-1 flex-wrap">' +
+        '<li><a href="/products/" class="hover:text-primary transition-colors">产品中心</a></li>' +
+        '<li class="mx-1.5 text-slate-300 dark:text-slate-600">/</li>';
+      if (catLabel && slug) {
+        html += '<li><a href="/products/' + slug + '/" class="hover:text-primary transition-colors">' + catLabel + '</a></li>' +
+          '<li class="mx-1.5 text-slate-300 dark:text-slate-600">/</li>';
+      }
+      html += '<li><span class="text-slate-900 dark:text-white font-medium">' + model + '</span></li>' +
+        '</ol></nav></div>';
+      // Mobile back bar
+      html += '<div class="max-w-7xl mx-auto px-4 pt-3 pb-0 md:hidden">' +
+        '<div class="flex items-center gap-3">' +
+        '<button onclick="window.Breadcrumb&&window.Breadcrumb.goBack()" class="flex items-center justify-center w-9 h-9 rounded-full bg-slate-100 dark:bg-slate-800 hover:bg-primary hover:text-white text-slate-600 dark:text-slate-400 transition-all" aria-label="返回">' +
+        '<span class="material-symbols-outlined text-xl">arrow_back</span></button>' +
+        '<div><div class="text-xs text-slate-500 dark:text-slate-400">' + (catLabel || '产品中心') + '</div>' +
+        '<div class="text-sm font-bold text-slate-900 dark:text-white truncate max-w-[200px]">' + model + '</div></div>' +
+        '</div></div>';
+      bcEl.innerHTML = html;
+    })();
 
     // Image: CMS upload > static
     var imgSrc = "/assets/images/products/" + modelToSnake(product.model) + "_1.webp";
