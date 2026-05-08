@@ -396,7 +396,9 @@
 
   console.log('[HCP] home-core-products.js loaded, registering listeners...');
   // Primary: listen for spa:load (SPA router re-renders content)
-  if (document.addEventListener) {
+  // Guard against duplicate registration when script loads multiple times
+  if (!window._hcpSpaBound && document.addEventListener) {
+    window._hcpSpaBound = true;
     document.addEventListener('spa:load', function() {
       console.log('[HCP] spa:load event received!');
       _autoInit();

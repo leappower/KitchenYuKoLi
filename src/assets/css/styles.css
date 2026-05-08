@@ -244,9 +244,19 @@ main#spa-content {
   padding-top: var(--nav-height, 65px); /* fallback before JS; JS sets exact value */
 }
 
+/* Hero overlap: first section pulls up to overlap with fixed navigator.
+   Uses a dedicated class instead of Tailwind arbitrary value (-mt-[var(...)])
+   because the comma inside arbitrary values causes unreliable CSS selector matching. */
+main#spa-content > .hero-overlap {
+  margin-top: calc(var(--nav-height, 65px) * -1);
+}
+
 @media (min-width: 1024px) {
   main#spa-content {
     padding-top: var(--nav-height, 109px);
+  }
+  main#spa-content > .hero-overlap {
+    margin-top: calc(var(--nav-height, 109px) * -1);
   }
 }
 

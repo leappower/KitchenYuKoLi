@@ -246,27 +246,29 @@
 
   // ─── Data loader (fetch from API if not already loaded) ───────
   var _dataLoaded = false;
+  var _fetchPromise = null;
   var _dataCallbacks = [];
 
   function loadFromAPI(callback) {
     if (_dataLoaded) { callback(); return; }
-    _dataCallbacks.push(callback);
-    if (_dataCallbacks.length > 1) return; // already fetching
-    fetch('/api/public/products-data', { cache: 'no-store' })
-      .then(function(r) {
-        console.log('[ProductGrid] API response status:', r.status, r.ok);
-        if (!r.ok) throw new Error('HTTP ' + r.status);
-        return r.json();
-      })
-      .then(function(data) {
-        console.log('[ProductGrid] API data received', { categories: Array.isArray(data) ? data.length : 'not array', firstCatProds: Array.isArray(data) && data[0] ? data[0].products?.length : 'n/a' });
-        window[STORE_KEY] = data;
-        try { localStorage.setItem('pdt_v2', JSON.stringify(data)); } catch(e) {}
-        _dataLoaded = true;
-        _dataCallbacks.forEach(function(cb) { cb(); });
-        _dataCallbacks = [];
-        window.dispatchEvent(new Event('product-data-ready'));
-      })
+    // Deduplicate: use a single canonical callback, ignore extras
+    if (!_fetchPromise) {
+      _fetchPromise = fetch('/api/public/products-data', { cache: 'no-store' })
+        .then(function(r) {
+          console.log('[ProductGrid] API response status:', r.status, r.ok);
+          if (!r.ok) throw new Error('HTTP ' + r.status);
+          return r.json();
+        })
+        .then(function(data) {
+          console.log('[ProductGrid] API data received', { categories: Array.isArray(data) ? data.length : 'not array', firstCatProds: Array.isArray(data) && data[0] ? data[0].products?.length : 'n/a' });
+          window[STORE_KEY] = data;
+          try { localStorage.setItem('pdt_v2', JSON.stringify(data)); } catch(e) {}
+          _dataLoaded = true;
+          _dataCallbacks.forEach(function(cb) { cb(); });
+          _dataCallbacks = [];
+          _fetchPromise = null;
+          window.dispatchEvent(new Event('product-data-ready'));
+        })
       .catch(function(err) {
         console.error('[ProductGrid] Failed to load product data:', err);
         // Fallback: restore from localStorage
@@ -508,17 +510,21 @@
     });
   }
 
-  // ─── Auto render ───────────────────────────────────────────────
+  // ─── Auto render (deduped) ─────────────────────────────────────
+
+  var _renderPending = false;
 
   function autoRender() {
+    if (_renderPending) return;
     var data = window[STORE_KEY];
     var hasData = Array.isArray(data) && data.length > 0;
     console.log('[ProductGrid] autoRender called', { hasData: hasData, dataLen: hasData ? data.length : 0, url: location.href });
     if (hasData) {
+      _renderPending = false;
       doRender();
     } else {
-      console.log('[ProductGrid] No data yet, calling loadFromAPI...');
-      loadFromAPI(doRender);
+      _renderPending = true;
+      loadFromAPI(function() { _renderPending = false; doRender(); });
     }
   }
 
@@ -751,50 +757,62 @@
 
   console.log('[ProductGrid] Script loaded');
 
-  if (document.readyState !== 'loading') {
-    autoRender();
+  // Guard: ensure init runs once even if script loads multiple times
+  if (window._productGridInited) {
+    console.log('[ProductGrid] Skipping duplicate init (already initialized)');
   } else {
-    document.addEventListener('DOMContentLoaded', autoRender);
+    window._productGridInited = true;
+    if (document.readyState !== 'loading') {
+      autoRender();
+    } else {
+      document.addEventListener('DOMContentLoaded', autoRender);
+    }
   }
 
+  // product-data-ready: only useful if data arrives after page scripts run
   window.addEventListener('product-data-ready', function() {
+    console.log('[ProductGrid] product-data-ready received');
     autoRender();
   });
 
-  document.addEventListener('spa:load', function() {
-    console.log('[ProductGrid] spa:load received', { url: location.href });
-    // Reset init flag and pagination for SPA navigation
-    document.querySelectorAll('.category-tab-container').forEach(function(el) {
-      el._categoryTabsInit = false;
+  // spa:load: prevent duplicate handler registration
+  if (!window._productGridSpaBound) {
+    window._productGridSpaBound = true;
+    document.addEventListener('spa:load', function() {
+      console.log('[ProductGrid] spa:load received', { url: location.href });
+      _renderPending = false; // reset dedup flag for new page
+      // Reset init flag and pagination for SPA navigation
+      document.querySelectorAll('.category-tab-container').forEach(function(el) {
+        el._categoryTabsInit = false;
+      });
+      _shownCount = {};
+      _activeTier = 'all';
+      var loadMore = document.querySelector('[data-i18n="products_load_more"]');
+      if (loadMore) loadMore._bound = false;
+
+      // Init tier filter (independent of category tabs)
+      initTierFilter();
+
+      // Auto-select category from URL (e.g. /products/stewing/)
+      var categoryFromUrl = '';
+      var match = window.location.pathname.match(/^\/products\/([^/]+)\/$/);
+      if (match) {
+        var slug = match[1];
+        var SLUG_MAP = {
+          'cutting': 'nav_products_cutting',
+          'stirfry': 'nav_products_stirfry',
+          'frying': 'nav_products_frying',
+          'stewing': 'nav_products_stewing',
+          'steaming': 'nav_products_steaming',
+          'other': 'nav_products_other'
+        };
+        categoryFromUrl = SLUG_MAP[slug] || slug;
+      }
+      _activeCategory = categoryFromUrl || 'all';
+
+      autoRender();
     });
-    _shownCount = {};
-    _activeTier = 'all';
-    var loadMore = document.querySelector('[data-i18n="products_load_more"]');
-    if (loadMore) loadMore._bound = false;
-
-    // Init tier filter (independent of category tabs)
-    initTierFilter();
-
-    // Auto-select category from URL (e.g. /products/stewing/)
-    var categoryFromUrl = '';
-    var match = window.location.pathname.match(/^\/products\/([^/]+)\/$/);
-    if (match) {
-      var slug = match[1];
-      // Map URL slug (stirfry) to category key (nav_products_stirfry)
-      var SLUG_MAP = {
-        'cutting': 'nav_products_cutting',
-        'stirfry': 'nav_products_stirfry',
-        'frying': 'nav_products_frying',
-        'stewing': 'nav_products_stewing',
-        'steaming': 'nav_products_steaming',
-        'other': 'nav_products_other'
-      };
-      categoryFromUrl = SLUG_MAP[slug] || slug;
-    }
-    _activeCategory = categoryFromUrl || 'all';
-
-    autoRender();
-  });
+  }
 
   // Translations may load after product-data-ready; refresh tab labels once ready
   // No spa:ready re-render needed — category labels use data-i18n attributes

@@ -283,22 +283,7 @@ if(localStorage.getItem('darkMode')==='true')document.documentElement.classList.
     <script defer src="/assets/js/product-grid.js?v=20260508"></script>
     <script defer src="/assets/js/product-detail.js?v=20260508"></script>
 
-<script>
-    function renderProductPage() {
-      console.log('[products-page] renderProductPage called', { hasPG: !!window.ProductGrid, hasData: !!window.PRODUCT_DATA_TABLE, url: location.href });
-      if (window.ProductGrid && window.ProductGrid.autoRender) {
-        window.ProductGrid.autoRender();
-      } else {
-        console.warn('[products-page] ProductGrid not ready, waiting for product-data-ready...');
-      }
-    }
-    if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', renderProductPage);
-    } else {
-      renderProductPage();
-    }
-    window.addEventListener('product-data-ready', renderProductPage);
-</script>
+
 
 <style>
   @keyframes fadeIn {

@@ -323,20 +323,7 @@
     <script defer src="/assets/js/ui/search-engine.js"></script>
     <script defer src="/assets/js/product-detail.js?v=20260508"></script>
 
-    <script>
-      function renderProductPage_renderMobile() {
-        console.log('[products-mobile] renderProductPage called', { hasPG: !!window.ProductGrid, url: location.href });
-        if (window.ProductGrid && window.ProductGrid.autoRender) {
-          window.ProductGrid.autoRender();
-        }
-      }
-      if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', renderProductPage_renderMobile);
-      } else {
-        renderProductPage_renderMobile();
-      }
-      window.addEventListener('product-data-ready', renderProductPage_renderMobile);
-    </script>
+    
       <script defer src="/assets/js/ui/floating-actions.js"></script>
   <script defer src="/assets/js/spa-router.js?v=20260508"></script>
 </body>
