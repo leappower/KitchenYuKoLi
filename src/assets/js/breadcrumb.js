@@ -413,19 +413,14 @@
     var html = renderBreadcrumb(page);
     container.innerHTML = html;
 
-    // Render cross-sell and scene entry on category pages
-    var crossSellContainer = document.getElementById('cross-sell-container');
-    if (crossSellContainer) {
-      // Insert sibling nav before cross-sell
-      var siblingsHtml = renderSiblings(page);
-      var crossSellHtml = renderCrossSell(page);
-      var sceneHtml = renderSceneEntry(page);
-      crossSellContainer.innerHTML = (siblingsHtml ? '<div id="sibling-wrapper">' + siblingsHtml + '</div>' : '') +
-        (crossSellHtml ? '<div id="cross-sell-wrapper" class="mt-8">' + crossSellHtml + '</div>' : '');
-    }
-    var sceneEntryContainer = document.getElementById('scene-entry-container');
-    if (sceneEntryContainer) {
-      sceneEntryContainer.innerHTML = renderSceneEntry(page);
+    // Cross-sell and scene-entry rendering is handled by cross-sell.js
+    // (richer cards with highlight badges, descriptions, responsive grid)
+    // Only render sibling nav here if no cross-sell container exists.
+    if (!document.getElementById('cross-sell-container')) {
+      var siblingContainer = document.getElementById('sibling-container');
+      if (siblingContainer && page.siblings && page.siblings.length > 1) {
+        siblingContainer.innerHTML = renderSiblings(page);
+      }
     }
 
     // For pages with dedicated sibling-container
