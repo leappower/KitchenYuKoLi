@@ -1,3 +1,6 @@
+// Production caching only when explicitly enabled (NODE_ENV=production)
+// Default: no cache, suitable for development
+const IS_PROD = process.env.NODE_ENV === 'production';
 const express = require('express');
 const compression = require('compression');
 const fs = require('fs');
@@ -42,7 +45,7 @@ const apiProxy = createProxyMiddleware({
   pathFilter: ['/api/cms/**', '/api/public/**', '/api/translations/**', '/api/nav-config/**', '/admin/**'],
   // No rewrite needed — backend has /api/public/* and /api/cms/* natively
   // pathRewrite removed since API_SERVER (https://127.0.0.1:8000) serves /api/public/* directly
-  logLevel: process.env.NODE_ENV !== 'production' ? 'warn' : 'silent',
+  logLevel: !IS_PROD ? 'warn' : 'silent',
   onError: (err, req, res) => {
     console.error('[proxy] error:', err.message, req.path);
     if (!res.headersSent) res.status(502).json({ error: 'API server unavailable' });
@@ -137,7 +140,7 @@ app.use((req, res, next) => {
 // Advanced caching middleware with content-based cache keys
 app.use((req, res, next) => {
   // ─── Development: disable ALL HTTP caching for live reload ───
-  if (process.env.NODE_ENV !== 'production') {
+  if (!IS_PROD) {
     res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate, proxy-revalidate');
     res.setHeader('Pragma', 'no-cache');
     res.setHeader('Expires', '0');
@@ -219,7 +222,7 @@ app.use(express.static(path.join(__dirname, 'dist'), {
   index: false, // Disable default index file serving - we handle it explicitly
   setHeaders: (res, path) => {
     // Development: no cache at all
-    if (process.env.NODE_ENV !== 'production') {
+    if (!IS_PROD) {
       res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate');
       res.setHeader('Pragma', 'no-cache');
       return;
@@ -316,7 +319,7 @@ app.use((err, req, res, _next) => {
   console.error('Server error:', err);
 
   // Don't leak error details in production
-  const isDevelopment = process.env.NODE_ENV !== 'production';
+  const isDevelopment = !IS_PROD;
 
   res.status(err.status || 500).json({
     error: isDevelopment ? err.message : 'Internal Server Error',
@@ -352,7 +355,7 @@ const server = app.listen(PORT, (err) => {
   console.log('🛡️  Rate limiting: Enabled');
   console.log(`🏥 Health check: http://localhost:${PORT}/health`);
 
-  if (process.env.NODE_ENV === 'development') {
+  if (!IS_PROD) {
     console.log('🔧 Development mode: Error details enabled');
   }
 
