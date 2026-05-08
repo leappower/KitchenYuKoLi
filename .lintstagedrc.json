@@ -1,0 +1,6 @@
+{
+  "*.js": ["eslint", "prettier --check"],
+  "*.html": ["htmlhint", "prettier --check"],
+  "*.css": ["stylelint --ignore-pattern tailwind.css --ignore-pattern tailwind-entry.css", "prettier --check"],
+  "*.json": ["prettier --check"]
+}

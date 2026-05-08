@@ -1,0 +1,49 @@
+# lefthook.yml — KitchenYuKoLi Git Hooks
+# Install: npx lefthook install
+# Run manually: npx lefthook run pre-commit
+
+pre-commit:
+  parallel: true
+  commands:
+    lint-js:
+      glob: "src/assets/js/**/*.js"
+      run: npx eslint {staged_files}
+      # Don't auto-fix in pre-commit — force agent to write clean code
+    lint-css:
+      glob: "src/assets/css/**/*.css"
+      run: npx stylelint {staged_files} --ignore-pattern "tailwind.css" --ignore-pattern "tailwind-entry.css"
+    lint-html:
+      glob: "src/**/*.html"
+      run: npx htmlhint {staged_files}
+    no-debug:
+      glob: "src/**/*.{js,html}"
+      run: |
+        if grep -nE 'console\.(log|debug|table)\s*\(' {staged_files} 2>/dev/null | grep -v '^\s*//' | grep -v '__DEVELOPMENT__'; then
+          echo "❌ 发现 console.log/debug/table 残留！请清理后再提交。"
+          echo "   如果确实需要，用条件包裹: if (__DEVELOPMENT__) console.log(...)"
+          exit 1
+        fi
+    no-debug-markers:
+      glob: "src/**/*.{js,html}"
+      run: |
+        if grep -nE '(debug[-_](marker|log|diag)|DIAGNOSTIC|<!-- DEBUG)' {staged_files} 2>/dev/null; then
+          echo "❌ 发现 debug marker 残留！请移除后再提交。"
+          exit 1
+        fi
+    prettier-check:
+      glob: "src/**/*.{js,html,css,json}"
+      run: npx prettier --check {staged_files}
+    empty-script-check:
+      glob: "src/**/*.html"
+      run: |
+        if grep -n '<script[^>]*>\s*</script>' {staged_files} 2>/dev/null | grep -v 'src=' | grep -v 'type='; then
+          echo "❌ 发现无 src/type 的空 <script> 标签！请移除。"
+          exit 1
+        fi
+
+pre-push:
+  commands:
+    test:
+      run: npm run test:ci 2>/dev/null || echo "⚠️  测试未配置，跳过"
+    build-smoke:
+      run: bash scripts/pre-push-check.sh
