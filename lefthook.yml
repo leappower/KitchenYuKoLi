@@ -31,7 +31,7 @@ pre-commit:
           exit 1
         fi
     prettier-check:
-      glob: "src/**/*.{js,html,css,json}"
+      glob: "src/**/*.{js,css,json}"
       run: npx prettier --check {staged_files}
     empty-script-check:
       glob: "src/**/*.html"

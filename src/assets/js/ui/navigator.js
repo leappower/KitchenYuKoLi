@@ -1259,6 +1259,15 @@
       var navHeight = (config.variant === "pc") ? "109px" : "65px";
       document.documentElement.style.setProperty("--nav-height", navHeight);
 
+      // Insert spacer + header in place of placeholder
+      // Spacer maintains document flow height so #spa-content doesn't overlap the fixed header
+      if (spacerEl && spacerEl !== headerEl) {
+        // Avoid duplicate spacers on re-mount
+        var existingSpacer = document.getElementById(spacerEl.id);
+        if (!existingSpacer) {
+          placeholder.parentNode.insertBefore(spacerEl, placeholder);
+        }
+      }
       placeholder.parentNode.replaceChild(headerEl, placeholder);
     }
 
