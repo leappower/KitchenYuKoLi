@@ -624,11 +624,6 @@
 
     // 初始化路由器
     init: function () {
-      if (this._initialized) {
-        this.log("Already initialized, skipping");
-        return;
-      }
-      this._initialized = true;
       var _self = this;
 
       this.log("Initializing...");

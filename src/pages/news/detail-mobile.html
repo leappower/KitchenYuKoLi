@@ -118,13 +118,7 @@
     if (window.translationManager) window.translationManager.initialize();
   });
 </script>
-<script>
-  document.addEventListener('DOMContentLoaded', function() {
-    if (window.SpaRouter && typeof window.SpaRouter.init === 'function') {
-      window.SpaRouter.init();
-    }
-  });
-</script>
+
 <script>
 document.addEventListener('DOMContentLoaded', function() {
   var params = new URLSearchParams(window.location.search);

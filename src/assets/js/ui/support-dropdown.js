@@ -33,7 +33,6 @@
     // Shared base styles
     if (window.DropdownBaseStyles) window.DropdownBaseStyles.inject();
     // Unique overrides: card size, emoji
-    if (document.getElementById("sup-dropdown-styles-v1")) return;
     var style = document.createElement("style");
     style.id = "sup-dropdown-styles-v1";
     style.setAttribute("data-ver", "2026-03-22-v1");

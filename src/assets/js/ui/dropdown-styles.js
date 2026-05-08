@@ -201,8 +201,6 @@
    * Idempotent — safe to call multiple times.
    */
   function injectDropdownBaseStyles() {
-    if (document.getElementById(STYLE_ID)) return;
-
     var style = document.createElement("style");
     style.id = STYLE_ID;
     style.setAttribute("data-ver", "2026-03-25-v1");

@@ -31,7 +31,6 @@
     // Shared base styles
     if (window.DropdownBaseStyles) window.DropdownBaseStyles.inject();
     // WhatsApp green accent (unique to contact dropdown)
-    if (document.getElementById("cnt-dropdown-styles")) return;
     var style = document.createElement("style");
     style.id = "cnt-dropdown-styles";
     style.textContent = [

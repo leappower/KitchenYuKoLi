@@ -34,7 +34,6 @@
     // Shared base styles
     if (window.DropdownBaseStyles) window.DropdownBaseStyles.inject();
     // Unique overrides: viewall-item, emoji sizes
-    if (document.getElementById("prod-dropdown-styles-v4")) return;
 
     // Remove all old version style elements
     [

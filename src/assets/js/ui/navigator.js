@@ -514,8 +514,6 @@
    * 注入 Logo 链接的基础样式（仅注入一次）
    */
   function injectLogoStyles() {
-    if (document.getElementById("nav-logo-styles")) return;
-
     var style = document.createElement("style");
     style.id = "nav-logo-styles";
     style.textContent = [
@@ -544,8 +542,6 @@
    * 注入 iOS 风格搜索栏样式（仅注入一次）
    */
   function injectSearchStyles() {
-    if (document.getElementById("ios-search-styles")) return;
-
     var style = document.createElement("style");
     style.id = "ios-search-styles";
     style.textContent = [
@@ -1183,6 +1179,11 @@
    * These listeners survive SPA navigations (document is not destroyed).
    */
   function registerListeners() {
+    /* Inject CSS (one-time — these functions check by ID internally) */
+    injectDropdownStyles();
+    injectLogoStyles();
+    injectSearchStyles();
+
     initDesktopSearchInteraction();
     initMobileSearchInteraction();
 
@@ -1225,12 +1226,7 @@
    * Can be called multiple times safely (idempotent by nature).
    */
   function mountNavigator() {
-    /* 1. 注入样式 */
-    injectDropdownStyles();
-    injectLogoStyles();
-    injectSearchStyles();
-
-    /* 2. 遍历占位符并替换 */
+    /* 遍历占位符并替换 */
     var placeholders = document.querySelectorAll('[data-component="navigator"]');
 
     for (var i = 0; i < placeholders.length; i++) {

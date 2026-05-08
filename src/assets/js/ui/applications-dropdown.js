@@ -38,7 +38,6 @@
     // Shared base styles
     if (window.DropdownBaseStyles) window.DropdownBaseStyles.inject();
     // Unique overrides: card size, ROI badge, emoji
-    if (document.getElementById("app-dropdown-styles-v1")) return;
     var style = document.createElement("style");
     style.id = "app-dropdown-styles-v1";
     style.setAttribute("data-ver", "2026-03-22-v1");
