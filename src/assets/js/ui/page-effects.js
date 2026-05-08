@@ -308,6 +308,7 @@
    * 限于同源内部链接（.html），避免影响外部跳转。
    */
   function initPageTransition() {
+    // Inject fade animation CSS
     if (!document.getElementById("pi-transition-style")) {
       var s = document.createElement("style");
       s.id = "pi-transition-style";
@@ -323,45 +324,15 @@
     // Fade in on load
     document.body.classList.add("page-fade-in");
 
-    // SPA routes — these are handled by SpaRouter, skip fade+redirect
-    // NOTE: SPA_ROUTES list is kept for reference but NOT used as primary gate.
-    // The real guard is e.defaultPrevented (set by SpaRouter). This list
-    // is only a secondary check for non-link clicks that bypass SPA router.
-    var SPA_ROUTES = [
-      "/",
-      "/home/",
-      "/products/",
-      "/quote/",
-      "/support/",
-      "/thank-you/",
-      "/landing/",
-      "/profit-calculator/",
-      "/cases/",
-      "/about/",
-      "/contact/",
-      "/news/",
-    ];
-
-    // Include all /products/<slug>/ dynamic routes
-    function isSpaRoute(path) {
-      if (SPA_ROUTES.indexOf(path) !== -1) return true;
-      // /products/<segment>/ — all product category and detail pages
-      if (/^\/products\/[^/]+\/$/.test(path)) return true;
-      // /applications/<segment>/ — all application scenario pages
-      if (/^\/applications\/[^/]+\/$/.test(path)) return true;
-      // /support/<segment>/ — support sub-pages
-      if (/^\/support\/[^/]+\/$/.test(path)) return true;
-      // /news/<segment>/
-      if (/^\/news\/[^/]+\/$/.test(path)) return true;
-      return false;
-    }
+    // Navigation is handled entirely by SpaRouter.
+    // When SpaRouter is present, do NOT register a document click handler —
+    // doing so creates two systems fighting over the same navigation event.
+    // If SpaRouter is absent (e.g. legacy page), fall back to fade+redirect.
+    if (window.SpaRouter) return;
 
     document.addEventListener("click", function (e) {
       var link = e.target.closest("a[href]");
       if (!link) return;
-
-      // If SpaRouter handled this navigation, do nothing
-      if (e.defaultPrevented) return;
 
       var href = link.getAttribute("href");
       if (
@@ -374,22 +345,6 @@
         return;
       if (link.target === "_blank") return;
 
-      // Normalize path to match SPA route format
-      var normalized = href.startsWith("/") ? href : "/" + href;
-      if (!normalized.endsWith("/")) {
-        // Strip filename to get directory path
-        if (normalized.endsWith(".html")) {
-          var idx = normalized.lastIndexOf("/");
-          normalized = normalized.substring(0, idx + 1);
-        } else {
-          normalized = normalized + "/";
-        }
-      }
-
-      // Skip SPA routes — let SpaRouter handle them (no fade, no location.href)
-      if (isSpaRoute(normalized)) return;
-
-      // Non-SPA route: use page fade transition
       e.preventDefault();
       document.body.classList.add("page-fade-out");
       setTimeout(function () {
