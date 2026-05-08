@@ -520,6 +520,20 @@
 
   // ─── Category tabs ─────────────────────────────────────────────
 
+  function initTierFilter() {
+    document.querySelectorAll('.filter-chip').forEach(function(chip) {
+      if (chip._tierFilterBound) return;
+      chip._tierFilterBound = true;
+      chip.addEventListener('click', function() {
+        document.querySelectorAll('.filter-chip').forEach(function(c) { c.classList.remove('active'); });
+        this.classList.add('active');
+        _activeTier = this.dataset.filter || 'all';
+        _shownCount = {};
+        doRender();
+      });
+    });
+  }
+
   function initCategoryTabs() {
     var container = document.querySelector('.category-tab-container');
     if (!container) return;
@@ -540,6 +554,11 @@
     });
     if (!categories.length) return;
 
+    // Emoji map for category tabs
+    var CATEGORY_EMOJI = {
+      'nav_products_stirfry': '🔥'
+    };
+
     // Build tab buttons
     var allTabs = [];
     var isMobile = window.innerWidth < 768;
@@ -558,7 +577,8 @@
       var btn = document.createElement('button');
       btn.className = 'category-tab ' + tabSizeClass + ' font-medium whitespace-nowrap rounded-full border border-slate-200 dark:border-slate-700';
       btn.dataset.category = cat.key;
-      btn.textContent = cat.name;
+      var emoji = CATEGORY_EMOJI[cat.key] || '';
+      btn.textContent = emoji ? emoji + ' ' + cat.name : cat.name;
       allTabs.push(btn);
     });
 
@@ -694,16 +714,8 @@
       doRender();
     });
 
-    // Filter chip click handler
-    document.querySelectorAll('.filter-chip').forEach(function(chip) {
-      chip.addEventListener('click', function() {
-        document.querySelectorAll('.filter-chip').forEach(function(c) { c.classList.remove('active'); });
-        this.classList.add('active');
-        _activeTier = this.dataset.filter || 'all';
-        _shownCount = {};
-        doRender();
-      });
-    });
+    // Filter chip click handler (moved to initTierFilter)
+    initTierFilter();
 
   }
 
@@ -731,11 +743,24 @@
     var loadMore = document.querySelector('[data-i18n="products_load_more"]');
     if (loadMore) loadMore._bound = false;
 
+    // Init tier filter (independent of category tabs)
+    initTierFilter();
+
     // Auto-select category from URL (e.g. /products/stewing/)
     var categoryFromUrl = '';
     var match = window.location.pathname.match(/^\/products\/([^/]+)\/$/);
     if (match) {
-      categoryFromUrl = match[1];
+      var slug = match[1];
+      // Map URL slug (stirfry) to category key (nav_products_stirfry)
+      var SLUG_MAP = {
+        'cutting': 'nav_products_cutting',
+        'stirfry': 'nav_products_stirfry',
+        'frying': 'nav_products_frying',
+        'stewing': 'nav_products_stewing',
+        'steaming': 'nav_products_steaming',
+        'other': 'nav_products_other'
+      };
+      categoryFromUrl = SLUG_MAP[slug] || slug;
     }
     _activeCategory = categoryFromUrl || 'all';
 

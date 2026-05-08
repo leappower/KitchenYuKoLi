@@ -33,7 +33,12 @@
     var flat = [];
     for (var i = 0; i < table.length; i++) {
       var ps = table[i].products || [];
-      for (var j = 0; j < ps.length; j++) flat.push(ps[j]);
+      var catName = table[i].categoryName || table[i].category || '';
+      for (var j = 0; j < ps.length; j++) {
+        var p = ps[j];
+        if (!p._categoryName && catName) p._categoryName = catName;
+        flat.push(p);
+      }
     }
     return flat;
   }
@@ -223,11 +228,54 @@
     var badge = product.badge ? '<span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-bold bg-primary text-white">' + esc(product.badge) + '</span>' : '';
     var wa = window.Contacts ? window.Contacts.whatsapp : "8613163756465";
 
+    // Video support: product.video or product.videoUrl from CMS
+    var videoUrl = product.video || product.videoUrl || '';
+    var isVideo = !!videoUrl;
+    var isYouTube = /youtu\.?be(\/|\.com\/)/.test(videoUrl);
+    var embedUrl = '';
+    if (isYouTube) {
+      var m = videoUrl.match(/(?:v=|youtu\.be\/|embed\/)([\w-]{11})/);
+      if (m) embedUrl = 'https://www.youtube.com/embed/' + m[1] + '?autoplay=1&rel=0';
+    }
+
+    var mediaHtml;
+    if (isVideo) {
+      if (isYouTube) {
+        mediaHtml = '<div class="relative group cursor-pointer" onclick="(function(el){var f=document.createElement(\'iframe\');f.src=\'' + embedUrl + '\';f.className=\'absolute inset-0 w-full h-full\';f.allow=\'autoplay;encrypted-media\';f.allowFullscreen=true;f.style.border=\'none\';el.querySelector(\'.pdp-play-btn\').style.display=\'none\';el.querySelector(\'img\').style.display=\'none\';el.appendChild(f);})(this)">' +
+          '<img loading="eager" alt="' + esc(product.model) + '" class="w-full h-[360px] object-cover" src="' + imgSrc + '"' +
+          ' onerror="this.src=\'https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=800&h=600&fit=crop\'">' +
+          '<div class="pdp-play-btn absolute inset-0 flex items-center justify-center bg-black/20 group-hover:bg-black/30 transition-colors">' +
+          '<div class="w-16 h-16 rounded-full bg-white/90 flex items-center justify-center shadow-xl group-hover:scale-110 transition-transform">' +
+          '<span class="material-symbols-outlined text-3xl text-primary ml-1">play_arrow</span>' +
+          '</div></div></div>';
+      } else {
+        mediaHtml = '<div class="relative group cursor-pointer" onclick="(function(el){var v=document.createElement(\'video\');v.src=\'' + videoUrl + '\';v.className=\'absolute inset-0 w-full h-full object-cover\';v.controls=true;v.autoplay=true;v.playsInline=true;el.querySelector(\'.pdp-play-btn\').style.display=\'none\';el.querySelector(\'img\').style.display=\'none\';el.appendChild(v);v.play();})(this)">' +
+          '<img loading="eager" alt="' + esc(product.model) + '" class="w-full h-[360px] object-cover" src="' + imgSrc + '"' +
+          ' onerror="this.src=\'https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=800&h=600&fit=crop\'">' +
+          '<div class="pdp-play-btn absolute inset-0 flex items-center justify-center bg-black/20 group-hover:bg-black/30 transition-colors">' +
+          '<div class="w-16 h-16 rounded-full bg-white/90 flex items-center justify-center shadow-xl group-hover:scale-110 transition-transform">' +
+          '<span class="material-symbols-outlined text-3xl text-primary ml-1">play_arrow</span>' +
+          '</div></div></div>';
+      }
+    } else {
+      mediaHtml = '<div class="relative"><img loading="eager" alt="' + esc(product.model) + '"' +
+        ' class="w-full h-[360px] object-cover" src="' + imgSrc + '"' +
+        ' onerror="this.src=\'https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=800&h=600&fit=crop\'">';
+      // Check for additional images (gallery)
+      if (product.images && product.images.length > 1) {
+        mediaHtml += '<div class="absolute bottom-3 left-3 flex gap-1.5">';
+        for (var im = 0; im < Math.min(product.images.length, 5); im++) {
+          var isActive = product.images[im].isPrimary || im === 0;
+          mediaHtml += '<div class="w-2 h-2 rounded-full ' + (isActive ? 'bg-white' : 'bg-white/50') + '"></div>';
+        }
+        mediaHtml += '</div>';
+      }
+      mediaHtml += '</div>';
+    }
+
     var html = '<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"><div class="flex flex-col lg:flex-row gap-8 lg:items-start">' +
       '<div class="lg:w-1/2"><div class="rounded-xl overflow-hidden bg-white dark:bg-slate-800 shadow-lg">' +
-      '<div class="relative"><img loading="eager" alt="' + esc(product.model) + '"' +
-      ' class="w-full h-[360px] object-cover" src="' + imgSrc + '"' +
-      ' onerror="this.src=\'https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=800&h=600&fit=crop\'"></div></div></div>' +
+      mediaHtml + '</div></div>' +
       '<div class="lg:w-1/2 flex flex-col gap-5"><div>' +
       '<div class="flex items-center gap-3 mb-2">' +
       '<span class="text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">' +
@@ -295,11 +343,14 @@
   // Get translated category name (from UI i18n, not product_translations)
   function getCategoryName(product) {
     var cat = product.category || product.categoryName || '';
-    if (!cat || typeof window.t !== 'function') return cat;
-    var lang = (window.CURRENT_LANG || document.documentElement.lang || 'zh-CN').replace('_', '-');
-    if (lang === 'zh-CN' || lang === 'zh') return product.categoryName || cat;
-    var translated = window.t(cat);
-    return (translated && translated !== cat) ? translated : (product.categoryName || cat);
+    if (!cat) return '';
+    // Priority: product._categoryName (enriched from parent) > i18n translate > product.categoryName > raw key
+    if (product._categoryName) return product._categoryName;
+    if (typeof window.t === 'function') {
+      var translated = window.t(cat);
+      if (translated && translated !== cat) return translated;
+    }
+    return product.categoryName || cat;
   }
 
   // Usage: getProductField(product, 'name') → returns translated name or fallback to Chinese

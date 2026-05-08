@@ -159,18 +159,19 @@
     var searchI18n = opts.searchI18n || "search_placeholder";
     var isTablet = opts.variant === "tablet";
 
-    /* 右侧区域：tablet 显示 CTA + 语言切换，mobile 只显示语言切换 */
+    /* 右侧区域：tablet 显示 语言切换 + CTA（和 PC 顺序一致），mobile 只显示语言切换 */
     var rightSide = "";
     if (isTablet && opts.showCta) {
       rightSide =
         '<div class="flex items-center gap-2 flex-shrink-0">' +
+          buildLangSelectorHtml() +
           '<a href="' + escapeHtml(opts.ctaHref || "/quote/") + '" ' +
             'class="bg-primary text-white px-4 py-2 rounded-lg font-bold ' +
-            'text-xs whitespace-nowrap active:scale-95 transition-all" ' +
+            'text-xs whitespace-nowrap active:scale-95 transition-all outline-none" ' +
+            'style="-webkit-tap-highlight-color:transparent;color:#fff!important;"' +
             'data-i18n="' + escapeHtml(opts.ctaTextKey || "nav_get_quote") + '">' +
             '获取报价' +
           '</a>' +
-          buildLangSelectorHtml() +
         '</div>';
     } else {
       rightSide =
@@ -185,7 +186,7 @@
         'class="fixed top-0 left-0 right-0 z-[var(--z-header)] ' +
         'border-b border-slate-200 dark:border-slate-800 ' +
         'bg-background-light/90 dark:bg-background-dark/90 transition-transform duration-300">' +
-        '<div class="px-3 py-3 flex items-center gap-2">' +
+        '<div class="px-4 py-3 flex items-center gap-3">' +
           /* 左侧：汉堡菜单 + Logo */
           '<div class="flex items-center gap-1 flex-shrink-0">' +
             '<button id="mobile-menu-toggle" type="button" ' +
@@ -202,7 +203,7 @@
             '</a>' +
           '</div>' +
           /* 中间：搜索栏 */
-          '<div class="flex-1 flex justify-center mx-1">' +
+          '<div class="flex-1 min-w-0 mx-1">' +
             buildSearchBarHtml(searchI18n) +
           '</div>' +
           /* 右侧 */
@@ -430,7 +431,9 @@
         '<a href="' + escapeHtml(opts.ctaHref) + '" ' +
           'class="bg-primary text-white px-6 py-2.5 rounded-xl font-bold ' +
           'text-sm whitespace-nowrap hover:opacity-90 active:scale-95 ' +
-          'transition-all outline-none" data-i18n="' + escapeHtml(opts.ctaTextKey) + '">' +
+          'transition-all outline-none" ' +
+          'style="-webkit-tap-highlight-color:transparent;color:#fff!important;" ' +
+          'data-i18n="' + escapeHtml(opts.ctaTextKey) + '">' +
           '获取报价' +
         '</a>' +
       '</div>'
@@ -569,11 +572,18 @@
       "              box-shadow 200ms ease;",
       "  overflow: hidden;",
       "}",
-      /* Mobile/Tablet: default ~65% width, expand to ~100% on focus */
+      /* Mobile: fill available space */
       "#mobile-ios-search-bar {",
-      "  flex: 1 1 65%;",
-      "  max-width: 320px;",
+      "  flex: 1 1 0;",
+      "  max-width: 100%;",
       "  padding: 5px 12px;",
+      "}",
+      "/* Tablet: narrower default, stretch on focus */",
+      "@media (min-width: 768px) {",
+      "  #mobile-ios-search-bar {",
+      "    flex: 1 1 55%;",
+      "    max-width: 380px;",
+      "  }",
       "}",
       ".ios-search-bar.is-focused {",
       "  width: 280px;",
@@ -587,7 +597,7 @@
       "  background: rgba(120,120,128,0.08);",
       "  border-color: rgba(236,91,19,0.4);",
       "  box-shadow: 0 0 0 3px rgba(236,91,19,0.12);",
-      "}",,
+      "}",
 
       /* 暗色模式搜索栏 */
       "html.dark .ios-search-bar {",
