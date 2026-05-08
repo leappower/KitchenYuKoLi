@@ -66,7 +66,11 @@ sync_assets "lang"         "*.json"
 sync_assets "images"       "*"  incremental
 sync_assets "video"        "*"  incremental
 
-# ─── 3. Version bump ────────────────────────────────────────────
+# ─── 3. Fix permissions ────────────────────────────────────────────
+# Ensure dist files are readable (may have been created by root/sudo)
+chmod -R a+rX "$DIST" 2>/dev/null || true
+
+# ─── 4. Version bump ────────────────────────────────────────────
 echo "🔄 Bumping JS version to $VERSION..."
 find "$DIST" -name '*.html' -exec sed -i '' "s|?v=[0-9][0-9]*|?$VERSION|g" {} +
 find "$SRC/pages" -name '*.html' -exec sed -i '' "s|?v=[0-9][0-9]*|?$VERSION|g" {} +
