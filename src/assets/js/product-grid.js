@@ -741,7 +741,17 @@
     var categoryFromUrl = '';
     var match = window.location.pathname.match(/^\/products\/([^/]+)\/$/);
     if (match) {
-      categoryFromUrl = match[1];
+      var slug = match[1];
+      // Map URL slug (stirfry) to category key (nav_products_stirfry)
+      var SLUG_MAP = {
+        'cutting': 'nav_products_cutting',
+        'stirfry': 'nav_products_stirfry',
+        'frying': 'nav_products_frying',
+        'stewing': 'nav_products_stewing',
+        'steaming': 'nav_products_steaming',
+        'other': 'nav_products_other'
+      };
+      categoryFromUrl = SLUG_MAP[slug] || slug;
     }
     _activeCategory = categoryFromUrl || 'all';
 
