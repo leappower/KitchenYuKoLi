@@ -278,10 +278,23 @@
         console.log("[SK] showSkeleton: container.display was", container.style.display, "→ none");
         container.style.display = "none";
       }
+      // Debug: if skeleton still visible after 3s, show visible warning
+      clearTimeout(this._skeletonDebugTimer);
+      this._skeletonDebugTimer = setTimeout(function() {
+        var ov = document.getElementById("skeleton-overlay");
+        if (ov && !ov.hasAttribute("hidden")) {
+          console.error("[SKELETON-BUG] Skeleton still visible after 3s!");
+          var banner = document.createElement('div');
+          banner.style.cssText = 'position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);z-index:99999;background:red;color:white;padding:20px 30px;font-size:18px;font-weight:bold;border-radius:12px;box-shadow:0 4px 20px rgba(0,0,0,0.3);';
+          banner.textContent = '⚠️ SKELETON STUCK! hideSkeleton never called. Check console for [SKELETON-BUG].';
+          document.body.appendChild(banner);
+        }
+      }, 3000);
     },
 
     // 隐藏骨架屏：overlay 隐藏，内容恢复
     hideSkeleton: function () {
+      clearTimeout(this._skeletonDebugTimer);
       var overlay = document.getElementById("skeleton-overlay");
       var container = document.getElementById("spa-content");
       console.log("[SK] hideSkeleton called");
