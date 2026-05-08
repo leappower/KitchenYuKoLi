@@ -943,7 +943,13 @@
    * Called when custom-select's _selectItem fires change event on the <select>.
    * Updates localStorage, button label, and closes the panel.
    */
+  var _langChanging = false;
+
   function _onLangChange() {
+    if (_langChanging) return; // Prevent duplicate toast from double-trigger
+    _langChanging = true;
+    setTimeout(function() { _langChanging = false; }, 500);
+
     var selectEl = document.getElementById("lang-selector");
     if (!selectEl) return;
     var langCode = selectEl.value;
@@ -1025,7 +1031,10 @@
 
     // Listen for change on the hidden <select> (fired by item click handlers)
     // to close the panel and update the button label
-    selectEl.addEventListener("change", _onLangChange);
+    if (!selectEl._langChangeBound) {
+      selectEl._langChangeBound = true;
+      selectEl.addEventListener("change", _onLangChange);
+    }
 
     _positionLangPanel(anchorBtn.getBoundingClientRect());
     requestAnimationFrame(function() { _langPanel.classList.add("cs-is-open"); });
@@ -1051,7 +1060,10 @@
     _langPanel.className = "cs-popup-panel";
 
     // Listen for change on hidden <select> (fired by item click handlers)
-    selectEl.addEventListener("change", _onLangChange);
+    if (!selectEl._langChangeBound) {
+      selectEl._langChangeBound = true;
+      selectEl.addEventListener("change", _onLangChange);
+    }
 
     var result = CustomSelect.buildPanel(selectEl);
     var data = result.data;
