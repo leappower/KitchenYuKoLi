@@ -538,6 +538,12 @@
       }
     }
     initCategoryTabs();
+
+    // Hide skeleton overlay after first successful render
+    var overlay = document.getElementById('skeleton-overlay');
+    if (overlay) overlay.setAttribute('hidden', '');
+    var container = document.getElementById('spa-content');
+    if (container) container.style.display = '';
   }
 
   // ─── Category tabs ─────────────────────────────────────────────
@@ -756,6 +762,7 @@
   });
 
   document.addEventListener('spa:load', function() {
+    console.log('[ProductGrid] spa:load received', { url: location.href });
     // Reset init flag and pagination for SPA navigation
     document.querySelectorAll('.category-tab-container').forEach(function(el) {
       el._categoryTabsInit = false;
