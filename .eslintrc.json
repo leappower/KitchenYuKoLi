@@ -13,8 +13,8 @@
     "eslint:recommended"
   ],
   "rules": {
-    "no-console": ["warn", { allow: ["warn", "error", "info"] }],
-    "no-unused-vars": ["warn", {"vars": "all", "args": "after-used", "varsIgnorePattern": "^_", "argsIgnorePattern": "^_"}],
+    "no-console": ["warn", { "allow": ["warn", "error", "info"] }],
+    "no-unused-vars": ["warn", { "vars": "all", "args": "after-used", "varsIgnorePattern": "^_", "argsIgnorePattern": "^_" }],
     "no-undef": "error",
     "no-empty": ["error", { "allowEmptyCatch": true }]
   },
