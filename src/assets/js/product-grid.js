@@ -282,6 +282,7 @@
         } catch(e) {}
         _dataCallbacks = [];
       });
+    }
   }
 
   function getCategories() {
