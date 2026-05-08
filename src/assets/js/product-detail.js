@@ -33,7 +33,12 @@
     var flat = [];
     for (var i = 0; i < table.length; i++) {
       var ps = table[i].products || [];
-      for (var j = 0; j < ps.length; j++) flat.push(ps[j]);
+      var catName = table[i].categoryName || table[i].category || '';
+      for (var j = 0; j < ps.length; j++) {
+        var p = ps[j];
+        if (!p._categoryName && catName) p._categoryName = catName;
+        flat.push(p);
+      }
     }
     return flat;
   }
@@ -338,11 +343,14 @@
   // Get translated category name (from UI i18n, not product_translations)
   function getCategoryName(product) {
     var cat = product.category || product.categoryName || '';
-    if (!cat || typeof window.t !== 'function') return cat;
-    var lang = (window.CURRENT_LANG || document.documentElement.lang || 'zh-CN').replace('_', '-');
-    if (lang === 'zh-CN' || lang === 'zh') return product.categoryName || cat;
-    var translated = window.t(cat);
-    return (translated && translated !== cat) ? translated : (product.categoryName || cat);
+    if (!cat) return '';
+    // Priority: product._categoryName (enriched from parent) > i18n translate > product.categoryName > raw key
+    if (product._categoryName) return product._categoryName;
+    if (typeof window.t === 'function') {
+      var translated = window.t(cat);
+      if (translated && translated !== cat) return translated;
+    }
+    return product.categoryName || cat;
   }
 
   // Usage: getProductField(product, 'name') → returns translated name or fallback to Chinese
