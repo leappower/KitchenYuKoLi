@@ -47,7 +47,8 @@
     ".prod-dropdown-wrap",
     ".app-dropdown-wrap",
     ".sup-dropdown-wrap",
-    ".abt-dropdown-wrap"
+    ".abt-dropdown-wrap",
+    ".cnt-dropdown-wrap"
   ];
 
   /**
@@ -1208,7 +1209,7 @@
     /* Global click to close all dropdowns */
     document.addEventListener("click", function (e) {
       var clickedWrap = e.target.closest(
-        ".prod-dropdown-wrap, .app-dropdown-wrap, .sup-dropdown-wrap, .abt-dropdown-wrap"
+        ".prod-dropdown-wrap, .app-dropdown-wrap, .sup-dropdown-wrap, .abt-dropdown-wrap, .cnt-dropdown-wrap"
       );
       closeOtherDropdowns(clickedWrap || null);
     }, true);
