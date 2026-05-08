@@ -628,6 +628,7 @@ button.bg-primary[class*="hover:"]:hover {
 .category-tab.active {
   background: #ec5b13;
   color: white;
+  border-color: #ec5b13;
   border-radius: 9999px;
 }
 
