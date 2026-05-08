@@ -256,6 +256,7 @@
       .then(function(r) { return r.json(); })
       .then(function(data) {
         window[STORE_KEY] = data;
+        try { localStorage.setItem('pdt_v2', JSON.stringify(data)); } catch(e) {}
         _dataLoaded = true;
         _dataCallbacks.forEach(function(cb) { cb(); });
         _dataCallbacks = [];
@@ -263,6 +264,15 @@
       })
       .catch(function(err) {
         console.error('[ProductGrid] Failed to load product data:', err);
+        // Fallback: restore from localStorage
+        try {
+          var cached = JSON.parse(localStorage.getItem('pdt_v2'));
+          if (Array.isArray(cached) && cached.length > 0) {
+            window[STORE_KEY] = cached;
+            _dataLoaded = true;
+            window.dispatchEvent(new Event('product-data-ready'));
+          }
+        } catch(e) {}
         _dataCallbacks = [];
       });
   }
