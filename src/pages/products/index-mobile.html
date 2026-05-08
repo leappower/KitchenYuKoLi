@@ -325,12 +325,13 @@
 
     <script>
       function renderProductPage_renderMobile() {
-        if (!window.ProductGrid) return;
-        if (!window.PRODUCT_DATA_TABLE || !window.PRODUCT_DATA_TABLE.length) return;
-        window.ProductGrid.renderMobile(18);
+        console.log('[products-mobile] renderProductPage called', { hasPG: !!window.ProductGrid, url: location.href });
+        if (window.ProductGrid && window.ProductGrid.autoRender) {
+          window.ProductGrid.autoRender();
+        }
       }
       if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', function() { renderProductPage_renderMobile(); });
+        document.addEventListener('DOMContentLoaded', renderProductPage_renderMobile);
       } else {
         renderProductPage_renderMobile();
       }

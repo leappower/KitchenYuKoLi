@@ -285,19 +285,19 @@ if(localStorage.getItem('darkMode')==='true')document.documentElement.classList.
 
 <script>
     function renderProductPage() {
-    // ProductGrid.autoRender() handles rendering + setupCategoryTabs()
-    // Just ensure data is ready and trigger auto render
-  }
-
-  // Try immediately if data already loaded
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', function() { renderProductPage(); });
-  } else {
-    renderProductPage();
-  }
-
-  // Also listen for async data ready event
-  window.addEventListener('product-data-ready', renderProductPage);
+      console.log('[products-page] renderProductPage called', { hasPG: !!window.ProductGrid, hasData: !!window.PRODUCT_DATA_TABLE, url: location.href });
+      if (window.ProductGrid && window.ProductGrid.autoRender) {
+        window.ProductGrid.autoRender();
+      } else {
+        console.warn('[products-page] ProductGrid not ready, waiting for product-data-ready...');
+      }
+    }
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', renderProductPage);
+    } else {
+      renderProductPage();
+    }
+    window.addEventListener('product-data-ready', renderProductPage);
 </script>
 
 <style>

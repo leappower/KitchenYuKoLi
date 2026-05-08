@@ -274,6 +274,18 @@
 
     <script>
       // Category tabs are auto-generated and managed by product-grid.js initCategoryTabs()
+      function renderProductPage_tablet() {
+        console.log('[products-tablet] renderProductPage called', { hasPG: !!window.ProductGrid, url: location.href });
+        if (window.ProductGrid && window.ProductGrid.autoRender) {
+          window.ProductGrid.autoRender();
+        }
+      }
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', renderProductPage_tablet);
+      } else {
+        renderProductPage_tablet();
+      }
+      window.addEventListener('product-data-ready', renderProductPage_tablet);
     </script>
 
     <style>

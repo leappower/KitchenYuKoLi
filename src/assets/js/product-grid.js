@@ -253,8 +253,13 @@
     _dataCallbacks.push(callback);
     if (_dataCallbacks.length > 1) return; // already fetching
     fetch('/api/public/products-data', { cache: 'no-store' })
-      .then(function(r) { return r.json(); })
+      .then(function(r) {
+        console.log('[ProductGrid] API response status:', r.status, r.ok);
+        if (!r.ok) throw new Error('HTTP ' + r.status);
+        return r.json();
+      })
       .then(function(data) {
+        console.log('[ProductGrid] API data received', { categories: Array.isArray(data) ? data.length : 'not array', firstCatProds: Array.isArray(data) && data[0] ? data[0].products?.length : 'n/a' });
         window[STORE_KEY] = data;
         try { localStorage.setItem('pdt_v2', JSON.stringify(data)); } catch(e) {}
         _dataLoaded = true;
@@ -506,15 +511,22 @@
   // ─── Auto render ───────────────────────────────────────────────
 
   function autoRender() {
-    if (Array.isArray(window[STORE_KEY]) && window[STORE_KEY].length > 0) {
+    var data = window[STORE_KEY];
+    var hasData = Array.isArray(data) && data.length > 0;
+    console.log('[ProductGrid] autoRender called', { hasData: hasData, dataLen: hasData ? data.length : 0, url: location.href });
+    if (hasData) {
       doRender();
     } else {
+      console.log('[ProductGrid] No data yet, calling loadFromAPI...');
       loadFromAPI(doRender);
     }
   }
 
   function doRender() {
-    if (!getCategories().length) return;
+    var cats = getCategories();
+    var prods = getAllProducts();
+    console.log('[ProductGrid] doRender', { categories: cats.length, products: prods.length, activeCategory: _activeCategory, activeTier: _activeTier, url: location.href, hasGrid: !!document.getElementById('product-grid'), hasList: !!document.getElementById('product-list') });
+    if (!cats.length) { console.warn('[ProductGrid] doRender ABORT: no categories'); return; }
     if (document.getElementById('product-list')) {
       renderGrid('product-list', renderMobile, 100);
     } else if (document.getElementById('product-grid')) {
