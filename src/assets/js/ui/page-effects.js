@@ -345,6 +345,10 @@
         return;
       if (link.target === "_blank") return;
 
+      // If another handler (e.g. SpaRouter) already handled this click,
+      // don't interfere with a second redirect.
+      if (e.defaultPrevented) return;
+
       e.preventDefault();
       document.body.classList.add("page-fade-out");
       setTimeout(function () {

@@ -678,6 +678,7 @@
     }
 
     // 拦截链接点击 - 只拦截已知路由的链接
+      // Use capture phase to run BEFORE page-effects.js bubble handler
       document.addEventListener("click", function (event) {
         var link = event.target.closest("a");
         console.warn('[DEBUG-SPA] document click fired', { tagName: link?.tagName, href: link?.getAttribute?.('href'), text: link?.textContent?.trim()?.slice(0, 30) });
@@ -732,7 +733,7 @@
           _self.log("SPA navigation to:", targetPath);
           _self.navigate(targetPath);
         }
-      });
+      }, true);
 
       this.log("Initialized successfully");
       console.warn('[DEBUG-SPA] init() completed — click handler registered');
