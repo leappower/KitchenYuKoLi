@@ -31,15 +31,15 @@
   --z-drawer: 320; /* 抽屉式菜单 */
   --z-dialog: 330; /* 对话框 */
 
-  /* 通知层级 */
-  --z-toast: 400; /* 消息提示 */
-  --z-notification: 410; /* 通知提醒 */
-  --z-alert: 420; /* 警告提示 */
+  /* 通知层级 (must be above header at 2000) */
+  --z-toast: 3000; /* 消息提示 */
+  --z-notification: 3010; /* 通知提醒 */
+  --z-alert: 3020; /* 警告提示 */
 
-  /* 最高层级 */
-  --z-tooltip: 500; /* 工具提示 */
-  --z-loading: 600; /* 加载遮罩 */
-  --z-overlay: 700; /* 遮罩层 (最高) */
+  /* 最高层级 (must be above toast at 3000) */
+  --z-tooltip: 3100; /* 工具提示 */
+  --z-loading: 3200; /* 加载遮罩 */
+  --z-overlay: 3300; /* 遮罩层 (最高) */
 }
 
 /* Tailwind CSS 映射类

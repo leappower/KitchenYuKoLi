@@ -528,8 +528,9 @@
       this.hideSkeleton();
       console.log("[SK] renderContent: after hideSkeleton, container.display=", container.style.display);
       container.style.opacity = "0";
-      console.warn('[DEBUG-SPA] renderContent: replacing innerHTML', { pagePath, contentLength: content.length });
+      console.warn('[DEBUG-SPA] renderContent: BEFORE innerHTML', { pagePath, contentLength: content.length, hasHeader: !!document.querySelector('header'), hasNavigator: !!document.querySelector('navigator'), spaNavigating: window.__spaNavigating, url: location.href });
       container.innerHTML = content;
+      console.warn('[DEBUG-SPA] renderContent: AFTER innerHTML', { hasHeader: !!document.querySelector('header'), hasNavigator: !!document.querySelector('navigator'), url: location.href });
 
       // 动态加载页面专属脚本（SPA 移除了 script 标签，需手动补充）
       var scriptsPromise = _self.loadPageScripts(pagePath);
@@ -576,7 +577,9 @@
 
       // 等待动态脚本加载完成后，再触发 spa:load（避免重复触发）
       var _self2 = this;
+      console.warn('[DEBUG-SPA] renderContent: waiting for scriptsPromise...');
       Promise.resolve(scriptsPromise).then(function() {
+        console.warn('[DEBUG-SPA] renderContent: scriptsPromise resolved, dispatching spa:load');
         // Re-mount footer for SPA-loaded pages (only if not already mounted)
         if (window.Footer && window.Footer.mount && !_self2.footerMounted) {
           try { window.Footer.mount(); _self2.footerMounted = true; } catch(e) { /* ignore */ }
@@ -621,6 +624,11 @@
 
     // 初始化路由器
     init: function () {
+      if (this._initialized) {
+        this.log("Already initialized, skipping");
+        return;
+      }
+      this._initialized = true;
       var _self = this;
 
       this.log("Initializing...");
@@ -652,9 +660,15 @@
       } else if (currentPath === "/" || currentPath === "//") {
         this.replace("/home/");
       } else if (currentPath.match(/^\/products\/[^/]+\/$/)) {
-        // Dynamic PDP/category route — load it directly
-        this.log("Dynamic route on init:", currentPath);
-        this.loadRoute(currentPath);
+        // Dynamic PDP/category route — only load if container is empty
+        // (SGS pages already have content in DOM; SPA shell has empty container)
+        var container = document.getElementById("spa-content");
+        if (!container || !container.innerHTML.trim()) {
+          this.log("Dynamic route on init (empty container):", currentPath);
+          this.loadRoute(currentPath);
+        } else {
+          this.log("Dynamic route on init (content exists, skip loadRoute):", currentPath);
+        }
       } else {
         // Standalone SSG page — don't load route (content already in DOM),
         // just register click handler for future SPA navigation.
@@ -727,6 +741,11 @@
 
       this.log("Initialized successfully");
       console.warn('[DEBUG-SPA] init() completed — click handler registered');
+
+      // 监控全页面导航
+      window.addEventListener('beforeunload', function(e) {
+        console.warn('[DEBUG-SPA] beforeunload fired!', { url: location.href, spaNavigating: window.__spaNavigating });
+      });
     },
 
     // 页面专属脚本映射（SPA 导航时按需加载）
@@ -790,6 +809,21 @@
         scripts.push({ src: "/assets/js/compare.js", id: "spa-compare" });
       }
 
+      // 产品分类页需要 cross-sell.js（买了X还配了Y推荐）
+      if (path.match(/\/products\/(cutting|stirfry|frying|stewing|steaming|other)\//)) {
+        scripts.push({ src: "/assets/js/cross-sell.js", id: "spa-cross-sell" });
+      }
+
+      // 产品详情页需要 product-detail.js
+      if (path.indexOf("/products/detail/") !== -1) {
+        scripts.push({ src: "/assets/js/product-detail.js", id: "spa-product-detail" });
+      }
+
+      // Cases 页面需要 case-grid.js
+      if (path.indexOf("/cases/") !== -1 && !path.match(/\/applications\/cases\//)) {
+        scripts.push({ src: "/assets/js/case-grid.js", id: "spa-case-grid" });
+      }
+
       // Load scripts sequentially (each waits for previous onload)
       var chain = Promise.resolve();
       var loaded = 0;
@@ -817,4 +851,16 @@
 
   // 导出到全局
   window.SpaRouter = SpaRouter;
+
+  // 自动初始化：只要页面加载了 spa-router.js，SPA 就立即可用
+  // 不再需要每个页面手动调用 SpaRouter.init()
+  // 在 DOMContentLoaded 后自动注册 click handler
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', function () {
+      try { SpaRouter.init(); } catch (e) { /* init 内部会 log */ }
+    });
+  } else {
+    // DOM 已就绪（script 在 body 末尾或 defer 加载时可能发生）
+    try { SpaRouter.init(); } catch (e) { /* init 内部会 log */ }
+  }
 })(window);

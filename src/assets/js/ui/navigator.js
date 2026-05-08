@@ -881,6 +881,7 @@
    * 初始化各 dropdown 模块的点击事件
    */
   function initDropdownClickHandlers() {
+    console.warn('[DEBUG-NAV] initDropdownClickHandlers() called', { stack: new Error().stack.split('\n').slice(1, 3).join('\n') });
     if (window.ProductsDropdown) window.ProductsDropdown.initDropdownClick();
     if (window.ApplicationsDropdown) window.ApplicationsDropdown.initDropdownClick();
     if (window.SupportDropdown) window.SupportDropdown.initDropdownClick();
@@ -1228,6 +1229,7 @@
    */
   function mountNavigator() {
     /* 1. 注入样式 */
+    console.warn('[DEBUG-NAV] mountNavigator() called', { stack: new Error().stack.split('\n').slice(1, 5).join('\n'), existingHeader: !!document.querySelector('header'), placeholders: document.querySelectorAll('[data-component="navigator"]').length });
     injectDropdownStyles();
     injectLogoStyles();
     injectSearchStyles();
