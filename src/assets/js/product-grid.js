@@ -520,6 +520,20 @@
 
   // ─── Category tabs ─────────────────────────────────────────────
 
+  function initTierFilter() {
+    document.querySelectorAll('.filter-chip').forEach(function(chip) {
+      if (chip._tierFilterBound) return;
+      chip._tierFilterBound = true;
+      chip.addEventListener('click', function() {
+        document.querySelectorAll('.filter-chip').forEach(function(c) { c.classList.remove('active'); });
+        this.classList.add('active');
+        _activeTier = this.dataset.filter || 'all';
+        _shownCount = {};
+        doRender();
+      });
+    });
+  }
+
   function initCategoryTabs() {
     var container = document.querySelector('.category-tab-container');
     if (!container) return;
@@ -700,16 +714,8 @@
       doRender();
     });
 
-    // Filter chip click handler
-    document.querySelectorAll('.filter-chip').forEach(function(chip) {
-      chip.addEventListener('click', function() {
-        document.querySelectorAll('.filter-chip').forEach(function(c) { c.classList.remove('active'); });
-        this.classList.add('active');
-        _activeTier = this.dataset.filter || 'all';
-        _shownCount = {};
-        doRender();
-      });
-    });
+    // Filter chip click handler (moved to initTierFilter)
+    initTierFilter();
 
   }
 
@@ -736,6 +742,9 @@
     _activeTier = 'all';
     var loadMore = document.querySelector('[data-i18n="products_load_more"]');
     if (loadMore) loadMore._bound = false;
+
+    // Init tier filter (independent of category tabs)
+    initTierFilter();
 
     // Auto-select category from URL (e.g. /products/stewing/)
     var categoryFromUrl = '';
