@@ -23,6 +23,7 @@
     ".{{PREFIX}}-dropdown-trigger {",
     "  display: inline-flex; align-items: center; gap: 4px;",
     "  cursor: pointer; user-select: none;",
+    "  border: none; background: none; color: inherit; font: inherit;",
     "  -webkit-tap-highlight-color: transparent;",
     "  padding-bottom: 8px; margin-bottom: -8px;",
     "}",

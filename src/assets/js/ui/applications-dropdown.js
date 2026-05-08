@@ -130,7 +130,7 @@
       '<div class="app-dropdown-wrap' +
       (isTouch() ? " touch-device" : "") +
       '">' +
-      '<a href="#"' +
+      '<button type="button"' +
       ' class="' +
       esc(cfg.activeClass || "") +
       ' app-dropdown-trigger"' +
@@ -143,7 +143,7 @@
       esc(cfg.label || cfg.labelKey) +
       "</span>" +
       '<span class="material-symbols-outlined app-dropdown-arrow">expand_more</span>' +
-      "</a>" +
+      "</button>" +
       '<div class="app-dropdown-panel">' +
       '<div class="app-dropdown-card">' +
       items +

@@ -71,7 +71,7 @@
       '<div class="abt-dropdown-wrap' +
       (isTouch() ? " touch-device" : "") +
       '">' +
-      '<a href="#"' +
+      '<button type="button"' +
       ' class="' +
       esc(cfg.activeClass || "") +
       ' abt-dropdown-trigger"' +
@@ -84,7 +84,7 @@
       esc(cfg.label || cfg.labelKey) +
       "</span>" +
       '<span class="material-symbols-outlined abt-dropdown-arrow">expand_more</span>' +
-      "</a>" +
+      "</button>" +
       '<div class="abt-dropdown-panel"><div class="abt-dropdown-card">' +
       items +
       "</div></div>" +
