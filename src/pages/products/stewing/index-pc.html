@@ -142,6 +142,8 @@ window.addEventListener('DOMContentLoaded',function(){
   data-search="true"
   data-cta-text-key="nav_get_quote"
   data-cta-href="/quote"></navigator>
+<!-- Breadcrumb -->
+<div class="w-full fullwidth-bg"><div class="section-content pt-4 pb-0"><div id="breadcrumb-container"></div><div id="sibling-container"></div></div></div>
 
 <main id="spa-content">
 <div class="w-full">
@@ -222,7 +224,16 @@ window.addEventListener('DOMContentLoaded',function(){
     </div>
   </section>
 
-  <!-- CTA Section -->
+  
+  <!-- Cross-sell & Scene Entry Section -->
+  <section id="category-extras" class="w-full py-8 fullwidth-bg">
+    <div class="section-content">
+      <div id="cross-sell-container"></div>
+      <div id="scene-entry-container" class="mt-8"></div>
+    </div>
+  </section>
+
+<!-- CTA Section -->
   <section class="w-full py-12 fullwidth-bg">
     <div class="section-content">
     <div class="w-full bg-gradient-to-br from-primary/10 to-primary/5 dark:from-primary/20 dark:to-primary/5 rounded-3xl p-12 lg:p-16 border border-primary/20">
@@ -318,4 +329,5 @@ window.addEventListener('DOMContentLoaded',function(){
   });
 </script>
     <script defer src="/assets/js/ui/floating-actions.js"></script>
+      <script defer src="/assets/js/breadcrumb.js?v=20260508"></script>
   </body></html>

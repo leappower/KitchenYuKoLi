@@ -111,6 +111,8 @@
       data-active="products"
       data-search="true"
     ></navigator>
+<!-- Breadcrumb -->
+<div class="w-full px-4 pt-3 pb-0"><div id="breadcrumb-container"></div><div id="sibling-container"></div></div>
 
     <main id="spa-content">
       <div class="w-full">
@@ -175,7 +177,16 @@
           </div>
         </section>
 
-        <!-- CTA Section -->
+        
+  <!-- Cross-sell & Scene Entry Section -->
+  <section id="category-extras" class="w-full py-8 fullwidth-bg">
+    <div class="section-content">
+      <div id="cross-sell-container"></div>
+      <div id="scene-entry-container" class="mt-8"></div>
+    </div>
+  </section>
+
+<!-- CTA Section -->
         <section class="fullwidth-bg py-8">
           <div class="section-content">
             <div class="bg-gradient-to-br from-primary/10 to-primary/5 rounded-2xl p-6 text-center">
@@ -302,5 +313,6 @@
       window.addEventListener('product-data-ready', renderProductPage_renderMobile);
     </script>
       <script defer src="/assets/js/ui/floating-actions.js"></script>
+      <script defer src="/assets/js/breadcrumb.js?v=20260508"></script>
   </body>
 </html>
