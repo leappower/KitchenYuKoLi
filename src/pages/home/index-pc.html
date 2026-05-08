@@ -594,27 +594,18 @@
     var pr = prod.getBoundingClientRect();
     var hcs = getComputedStyle(hero);
     var pcs = getComputedStyle(prod);
-    console.table({
-      'hero bottom': hr.bottom,
-      'hero pb-10 (computed)': hcs.paddingBottom,
-      'hero marginBottom': hcs.marginBottom,
-      'products top': pr.top,
-      'products pt-16 (computed)': pcs.paddingTop,
-      'products marginTop': pcs.marginTop,
-      'gap (bottom-top)': hr.bottom - pr.top,
-      'hero bg': hcs.backgroundColor,
-      'products bg': pcs.backgroundColor
-    });
-    /* Also check section-content children */
+    console.log('[DEBUG-SECTION] hero bottom:', hr.bottom, '| hero paddingBottom:', hcs.paddingBottom, '| hero marginBottom:', hcs.marginBottom, '| hero bg:', hcs.backgroundColor);
+    console.log('[DEBUG-SECTION] products top:', pr.top, '| products paddingTop:', pcs.paddingTop, '| products marginTop:', pcs.marginTop, '| products bg:', pcs.backgroundColor);
+    console.log('[DEBUG-SECTION] gap (hero.bottom - products.top):', hr.bottom, '-', pr.top, '=', (hr.bottom - pr.top));
     var hsc = hero.querySelector('.section-content');
     var psc = prod.querySelector('.section-content');
     if (hsc) {
       var hs = getComputedStyle(hsc);
-      console.table({ 'hero section-content': { marginBottom: hs.marginBottom, paddingBottom: hs.paddingBottom } });
+      console.log('[DEBUG-SECTION] hero .section-content marginBottom:', hs.marginBottom, '| paddingBottom:', hs.paddingBottom);
     }
     if (psc) {
       var ps = getComputedStyle(psc);
-      console.table({ 'products section-content': { marginTop: ps.marginTop, paddingTop: ps.paddingTop } });
+      console.log('[DEBUG-SECTION] products .section-content marginTop:', ps.marginTop, '| paddingTop:', ps.paddingTop);
     }
   });
   </script>
