@@ -255,33 +255,7 @@
     <script defer src="/assets/js/page-interactions.js"></script>
     <script defer src="/assets/js/product-grid.js?v=20260508"></script>
 
-    <script>
-      // Category tabs are auto-generated and managed by product-grid.js initCategoryTabs()
-      function renderProductPage_tablet() {
-      // Auto-detect category from URL (e.g. /products/stirfry/)
-      var match = window.location.pathname.match(/^\/products\/([^/]+)\/$/);
-      if (match && window.ProductGrid && window.ProductGrid.setCategory) {
-        var SLUG_TO_CAT = {
-          'stirfry': 'nav_products_stirfry',
-          'cutting': 'nav_products_cutting',
-          'frying': 'nav_products_frying',
-          'stewing': 'nav_products_stewing',
-          'steaming': 'nav_products_steaming',
-          'other': 'nav_products_other'
-        };
-        window.ProductGrid.setCategory(SLUG_TO_CAT[match[1]] || match[1]);
-      }
-      if (window.ProductGrid && window.ProductGrid.autoRender) {
-        window.ProductGrid.autoRender();
-      }
-    }
-      if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', renderProductPage_tablet);
-      } else {
-        renderProductPage_tablet();
-      }
-      window.addEventListener('product-data-ready', renderProductPage_tablet);
-    </script>
+    
 
     <style>
       @keyframes fadeIn {
