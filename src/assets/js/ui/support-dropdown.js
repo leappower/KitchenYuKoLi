@@ -126,12 +126,15 @@
   /* ───────────────────────── INTERACTION ───────────────────────── */
 
   function initDropdownClick() {
+    // Idempotent: only bind document-level listener once
+    if (initDropdownClick._bound) return;
+    initDropdownClick._bound = true;
+
     document.addEventListener("click", function () {
       document.querySelectorAll(".sup-dropdown-wrap.is-open").forEach(function (d) {
         d.classList.remove("is-open");
       });
     });
-
     document.querySelectorAll(".sup-dropdown-trigger").forEach(function (t) {
       t.addEventListener("click", function (e) {
         if (window.innerWidth <= 720) return;

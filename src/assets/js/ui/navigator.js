@@ -842,33 +842,26 @@
    * 为所有 dropdown 容器绑定 mouseenter 互斥逻辑（仅绑定一次）
    */
   function bindDropdownHoverMutex() {
+    if (bindDropdownHoverMutex._bound) return;
+    bindDropdownHoverMutex._bound = true;
     for (var i = 0; i < DROPDOWN_WRAP_SELECTORS.length; i++) {
       var wraps = document.querySelectorAll(DROPDOWN_WRAP_SELECTORS[i]);
       for (var j = 0; j < wraps.length; j++) {
-        bindSingleDropdownMutex(wraps[j]);
+        wraps[j].addEventListener("mouseenter", function () {
+          if (!this.classList.contains("touch-device")) {
+            closeOtherDropdowns(this);
+          }
+        });
       }
     }
-  }
-
-  /**
-   * 为单个 dropdown 容器绑定 mouseenter 互斥逻辑
-   * @param {HTMLElement} wrapEl - dropdown 容器元素
-   */
-  function bindSingleDropdownMutex(wrapEl) {
-    if (wrapEl._dropdownMutexBound) return;
-    wrapEl._dropdownMutexBound = true;
-
-    wrapEl.addEventListener("mouseenter", function () {
-      if (!wrapEl.classList.contains("touch-device")) {
-        closeOtherDropdowns(wrapEl);
-      }
-    });
   }
 
   /**
    * 绑定全局 click 事件——点击空白区域关闭所有 dropdown
    */
   function bindGlobalDropdownClose() {
+    if (bindGlobalDropdownClose._bound) return;
+    bindGlobalDropdownClose._bound = true;
     document.addEventListener("click", function (e) {
       var clickedWrap = e.target.closest(
         ".prod-dropdown-wrap, .app-dropdown-wrap, .sup-dropdown-wrap, .abt-dropdown-wrap"
@@ -881,7 +874,6 @@
    * 初始化各 dropdown 模块的点击事件
    */
   function initDropdownClickHandlers() {
-    console.warn('[DEBUG-NAV] initDropdownClickHandlers() called', { stack: new Error().stack.split('\n').slice(1, 3).join('\n') });
     if (window.ProductsDropdown) window.ProductsDropdown.initDropdownClick();
     if (window.ApplicationsDropdown) window.ApplicationsDropdown.initDropdownClick();
     if (window.SupportDropdown) window.SupportDropdown.initDropdownClick();
@@ -1227,29 +1219,24 @@
    * 查找所有 [data-component="navigator"] 占位符并替换为实际的 header。
    * 同时注入样式、绑定交互事件。
    */
+  // Track whether interactions have been bound (document-level listeners)
+  var _interactionsBound = false;
+
   function mountNavigator() {
     /* 1. 注入样式 */
-    console.warn('[DEBUG-NAV] mountNavigator() called', { stack: new Error().stack.split('\n').slice(1, 5).join('\n'), existingHeader: !!document.querySelector('header'), placeholders: document.querySelectorAll('[data-component="navigator"]').length });
     injectDropdownStyles();
     injectLogoStyles();
     injectSearchStyles();
 
-    console.log(
-      "[navigator] mount() called, found",
-      document.querySelectorAll('[data-component="navigator"]').length,
-      "placeholder(s)"
-    );
-
     /* 2. 遍历占位符并替换 */
     var placeholders = document.querySelectorAll('[data-component="navigator"]');
+
+    var didBuild = false;
 
     for (var i = 0; i < placeholders.length; i++) {
       var placeholder = placeholders[i];
 
-      if (!placeholder.parentNode) {
-        console.warn("[navigator] Placeholder has no parent, skipping (already mounted?)");
-        continue;
-      }
+      if (!placeholder.parentNode) continue;
 
       /* 如果 placeholder 内已有 <header>，直接提取替换 */
       var existingHeader = placeholder.querySelector("header");
@@ -1265,57 +1252,34 @@
       var wrapper = document.createElement("div");
       wrapper.innerHTML = buildHeaderHtml(config);
 
-      /*
-       * buildHeaderHtml 返回两个顶级元素：
-       *   [0] spacer div (旧 placeholder，不再使用)
-       *   [1] <header> 元素
-       *
-       * 间距统一由 CSS main#spa-content { padding-top: var(--nav-height) } 控制，
-       * 不再需要 spacer DOM 元素。
-       */
       var spacerEl = wrapper.firstElementChild;
       var headerEl = spacerEl ? spacerEl.nextElementSibling : wrapper.firstChild;
 
-      /* 设置 CSS 变量 --nav-height，作为间距的唯一来源 */
       var navHeight = (config.variant === "pc") ? "109px" : "65px";
       document.documentElement.style.setProperty("--nav-height", navHeight);
 
-      console.log(
-        "[navigator] variant=" + config.variant,
-        "| --nav-height=" + navHeight,
-        "| header inserted, tag=" + (headerEl ? headerEl.tagName : "NULL")
-      );
-
-      /* 替换占位符为 header（不再插入 spacer） */
       placeholder.parentNode.replaceChild(headerEl, placeholder);
-
-      /* 延迟初始化 SlideMenu（等 DOM 完成） */
-      setTimeout(initSlideMenu, 0);
+      didBuild = true;
     }
 
-    /* 3. 初始化搜索栏交互 */
-    initDesktopSearchInteraction();
-    initMobileSearchInteraction();
+    /* 3. 初始化交互事件——只在首次构建 header 时执行，不重复注册 document listener */
+    if (!_interactionsBound) {
+      _interactionsBound = true;
 
-    /* 4. Dropdown 互斥 & 点击事件 */
-    bindDropdownHoverMutex();
-    bindGlobalDropdownClose();
-    initDropdownClickHandlers();
+      initDesktopSearchInteraction();
+      initMobileSearchInteraction();
 
-    /* 5. 翻译管理器 */
+      /* Dropdown 互斥 & 点击事件 */
+      bindDropdownHoverMutex();
+      bindGlobalDropdownClose();
+      initDropdownClickHandlers();
+
+      initTabletSearchToggle();
+    }
+
+    /* 4. 这些需要每次 mount 后执行（重新查找 DOM 元素） */
     reinitTranslationManager();
-
-    /* 6. SlideMenu 初始化 */
-    console.log(
-      "[navigator] MobileMenu exists:", !!window.SlideMenu,
-      "| initToggle:", typeof (window.SlideMenu && window.SlideMenu.initToggle)
-    );
     initSlideMenu();
-
-    /* 7. 平板端搜索切换 */
-    initTabletSearchToggle();
-
-    /* 8. 语言切换按钮 → custom-select bridge */
     initLangSwitcher();
   }
 

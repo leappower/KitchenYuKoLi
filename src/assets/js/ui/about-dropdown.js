@@ -95,6 +95,10 @@
   /* ───────────────────────── INTERACTION ───────────────────────── */
 
   function initDropdownClick() {
+    // Idempotent: only bind document-level listener once
+    if (initDropdownClick._bound) return;
+    initDropdownClick._bound = true;
+
     document.addEventListener("click", function () {
       document.querySelectorAll(".abt-dropdown-wrap.is-open").forEach(function (d) {
         d.classList.remove("is-open");
