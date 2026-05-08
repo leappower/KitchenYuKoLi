@@ -425,10 +425,16 @@
      ═══════════════════════════════════════════════════ */
   function initCTAButtons() {
     $$('button[data-i18n="cta_get_proposal"]').forEach(function (btn) {
-      btn.addEventListener('click', function () { window.location.href = '/profit-calculator/'; });
+      btn.addEventListener('click', function () {
+        if (window.SpaRouter) { window.SpaRouter.navigate('/profit-calculator/'); }
+        else { window.location.href = '/profit-calculator/'; }
+      });
     });
     $$('button[data-i18n="cta_contact_sales"]').forEach(function (btn) {
-      btn.addEventListener('click', function () { window.location.href = '/contact/?from=' + encodeURIComponent(location.pathname); });
+      btn.addEventListener('click', function () {
+        if (window.SpaRouter) { window.SpaRouter.navigate('/quote/'); }
+        else { window.location.href = '/contact/?from=' + encodeURIComponent(location.pathname); }
+      });
     });
   }
 

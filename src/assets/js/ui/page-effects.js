@@ -168,7 +168,11 @@
     );
 
     document.getElementById("sc-quote-btn").addEventListener("click", function () {
-      window.location.href = "/quote";
+      if (window.SpaRouter) {
+        window.SpaRouter.navigate("/quote/");
+      } else {
+        window.location.href = "/quote";
+      }
     });
     document.getElementById("sc-close-btn").addEventListener("click", function () {
       dismissed = true;
@@ -320,22 +324,45 @@
     document.body.classList.add("page-fade-in");
 
     // SPA routes — these are handled by SpaRouter, skip fade+redirect
+    // NOTE: SPA_ROUTES list is kept for reference but NOT used as primary gate.
+    // The real guard is e.defaultPrevented (set by SpaRouter). This list
+    // is only a secondary check for non-link clicks that bypass SPA router.
     var SPA_ROUTES = [
       "/",
       "/home/",
       "/products/",
       "/quote/",
       "/support/",
-      "/products/",
       "/thank-you/",
       "/landing/",
       "/profit-calculator/",
       "/cases/",
+      "/about/",
+      "/contact/",
+      "/news/",
     ];
+
+    // Include all /products/<slug>/ dynamic routes
+    function isSpaRoute(path) {
+      if (SPA_ROUTES.indexOf(path) !== -1) return true;
+      // /products/<segment>/ — all product category and detail pages
+      if (/^\/products\/[^/]+\/$/.test(path)) return true;
+      // /applications/<segment>/ — all application scenario pages
+      if (/^\/applications\/[^/]+\/$/.test(path)) return true;
+      // /support/<segment>/ — support sub-pages
+      if (/^\/support\/[^/]+\/$/.test(path)) return true;
+      // /news/<segment>/
+      if (/^\/news\/[^/]+\/$/.test(path)) return true;
+      return false;
+    }
 
     document.addEventListener("click", function (e) {
       var link = e.target.closest("a[href]");
       if (!link) return;
+
+      // If SpaRouter handled this navigation, do nothing
+      if (e.defaultPrevented) return;
+
       var href = link.getAttribute("href");
       if (
         !href ||
@@ -360,8 +387,9 @@
       }
 
       // Skip SPA routes — let SpaRouter handle them (no fade, no location.href)
-      if (SPA_ROUTES.indexOf(normalized) !== -1) return;
+      if (isSpaRoute(normalized)) return;
 
+      // Non-SPA route: use page fade transition
       e.preventDefault();
       document.body.classList.add("page-fade-out");
       setTimeout(function () {

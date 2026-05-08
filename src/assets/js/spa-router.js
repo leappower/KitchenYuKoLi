@@ -725,6 +725,7 @@
         // 阻止默认行为，使用 SPA 导航
         console.warn('[DEBUG-SPA] click intercepted', { href, targetPath, link: link.tagName, linkText: link.textContent.trim().slice(0, 40), isDropdownLink: !!link.closest('.dropdown-panel, [class*="-dropdown-panel"]') });
         event.preventDefault();
+        event.stopPropagation();
         // 移除焦点，避免按钮/链接残留 active 样式
         if (document.activeElement) document.activeElement.blur();
 

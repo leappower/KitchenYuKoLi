@@ -34,7 +34,11 @@
      SECTION 3: NAVIGATION FUNCTIONS
      ═══════════════════════════════════════════════════════════════════ */
   function navigate(url) {
-    window.location.href = url;
+    if (window.SpaRouter && typeof window.SpaRouter.navigate === "function") {
+      window.SpaRouter.navigate(url);
+    } else {
+      window.location.href = url;
+    }
   }
   function whatsappHref(msg) {
     var base = "https://wa.me/" + WHATSAPP_NUMBER;

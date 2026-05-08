@@ -185,13 +185,19 @@
         if (typeof window.showNotification === "function") {
           window.showNotification("提交成功！我们将尽快与您联系", "success");
         }
-        setTimeout(function () { location.href = "/thank-you/"; }, 1000);
+        setTimeout(function () {
+          if (window.SpaRouter) { window.SpaRouter.navigate("/thank-you/"); }
+          else { location.href = "/thank-you/"; }
+        }, 1000);
       }).catch(function () {
         // no-cors returns opaque response, treat as success
         if (typeof window.showNotification === "function") {
           window.showNotification("提交成功！我们将尽快与您联系", "success");
         }
-        setTimeout(function () { location.href = "/thank-you/"; }, 1000);
+        setTimeout(function () {
+          if (window.SpaRouter) { window.SpaRouter.navigate("/thank-you/"); }
+          else { location.href = "/thank-you/"; }
+        }, 1000);
       });
     });
   }

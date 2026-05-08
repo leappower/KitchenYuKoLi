@@ -51,15 +51,18 @@
   function bindQuoteButtons() {
     bindByText("button", "get a quote", function (e) {
       e.preventDefault();
-      window.location.href = "/quote";
+      if (window.SpaRouter) { window.SpaRouter.navigate("/quote/"); }
+      else { window.location.href = "/quote"; }
     });
     bindByText("button", "request a quote", function (e) {
       e.preventDefault();
-      window.location.href = "/quote";
+      if (window.SpaRouter) { window.SpaRouter.navigate("/quote/"); }
+      else { window.location.href = "/quote"; }
     });
     bindByText("button", "get quote", function (e) {
       e.preventDefault();
-      window.location.href = "/quote";
+      if (window.SpaRouter) { window.SpaRouter.navigate("/quote/"); }
+      else { window.location.href = "/quote"; }
     });
   }
 
@@ -111,7 +114,8 @@
       } else if (iconName === "public") {
         link.addEventListener("click", function (e) {
           e.preventDefault();
-          window.location.href = "/";
+          if (window.SpaRouter) { window.SpaRouter.navigate("/home/"); }
+          else { window.location.href = "/"; }
         });
       }
     });

@@ -16,6 +16,16 @@ VERSION="v=$(date +%Y%m%d)"
 
 echo "🏗️  Building..."
 
+# ─── Pre-flight checks ───────────────────────────────────────────
+# Catch corrupted source files before they propagate to dist
+INDEX_SIZE=$(wc -c < "$SRC/index.html")
+if [ "$INDEX_SIZE" -lt 1000 ]; then
+  echo "❌ ERROR: src/index.html is suspiciously small (${INDEX_SIZE} bytes)."
+  echo "   Expected ~8000+ bytes. File may be corrupted."
+  echo "   Restore with: git checkout -- src/index.html"
+  exit 1
+fi
+
 # ─── Generic sync helper ─────────────────────────────────────────
 # Usage: sync_assets <src_subdir> <ext_glob> [incremental]
 #   incremental: only copy if newer or missing (for large dirs)
