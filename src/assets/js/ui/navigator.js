@@ -838,48 +838,6 @@
    *  Dropdown 鼠标互斥 & 点击事件绑定
    * ================================================================ */
 
-  /**
-   * 为所有 dropdown 容器绑定 mouseenter 互斥逻辑（仅绑定一次）
-   */
-  function bindDropdownHoverMutex() {
-    if (bindDropdownHoverMutex._bound) return;
-    bindDropdownHoverMutex._bound = true;
-    for (var i = 0; i < DROPDOWN_WRAP_SELECTORS.length; i++) {
-      var wraps = document.querySelectorAll(DROPDOWN_WRAP_SELECTORS[i]);
-      for (var j = 0; j < wraps.length; j++) {
-        wraps[j].addEventListener("mouseenter", function () {
-          if (!this.classList.contains("touch-device")) {
-            closeOtherDropdowns(this);
-          }
-        });
-      }
-    }
-  }
-
-  /**
-   * 绑定全局 click 事件——点击空白区域关闭所有 dropdown
-   */
-  function bindGlobalDropdownClose() {
-    if (bindGlobalDropdownClose._bound) return;
-    bindGlobalDropdownClose._bound = true;
-    document.addEventListener("click", function (e) {
-      var clickedWrap = e.target.closest(
-        ".prod-dropdown-wrap, .app-dropdown-wrap, .sup-dropdown-wrap, .abt-dropdown-wrap"
-      );
-      closeOtherDropdowns(clickedWrap || null);
-    }, true);
-  }
-
-  /**
-   * 初始化各 dropdown 模块的点击事件
-   */
-  function initDropdownClickHandlers() {
-    if (window.ProductsDropdown) window.ProductsDropdown.initDropdownClick();
-    if (window.ApplicationsDropdown) window.ApplicationsDropdown.initDropdownClick();
-    if (window.SupportDropdown) window.SupportDropdown.initDropdownClick();
-    if (window.AboutDropdown) window.AboutDropdown.initDropdownClick();
-  }
-
   /* ================================================================
    *  翻译 & SlideMenu 初始化
    * ================================================================ */
@@ -1219,9 +1177,53 @@
    * 查找所有 [data-component="navigator"] 占位符并替换为实际的 header。
    * 同时注入样式、绑定交互事件。
    */
-  // Track whether interactions have been bound (document-level listeners)
-  var _interactionsBound = false;
+  /**
+   * Register all document-level event listeners.
+   * Called exactly ONCE — at the end of this IIFE.
+   * These listeners survive SPA navigations (document is not destroyed).
+   */
+  function registerListeners() {
+    initDesktopSearchInteraction();
+    initMobileSearchInteraction();
 
+    /* Dropdown hover mutex */
+    for (var i = 0; i < DROPDOWN_WRAP_SELECTORS.length; i++) {
+      var wraps = document.querySelectorAll(DROPDOWN_WRAP_SELECTORS[i]);
+      for (var j = 0; j < wraps.length; j++) {
+        wraps[j].addEventListener("mouseenter", function () {
+          if (!this.classList.contains("touch-device")) {
+            closeOtherDropdowns(this);
+          }
+        });
+      }
+    }
+
+    /* Global click to close all dropdowns */
+    document.addEventListener("click", function (e) {
+      var clickedWrap = e.target.closest(
+        ".prod-dropdown-wrap, .app-dropdown-wrap, .sup-dropdown-wrap, .abt-dropdown-wrap"
+      );
+      closeOtherDropdowns(clickedWrap || null);
+    }, true);
+
+    /* Init each dropdown module's click handler */
+    if (window.ProductsDropdown) window.ProductsDropdown.initDropdownClick();
+    if (window.ApplicationsDropdown) window.ApplicationsDropdown.initDropdownClick();
+    if (window.SupportDropdown) window.SupportDropdown.initDropdownClick();
+    if (window.AboutDropdown) window.AboutDropdown.initDropdownClick();
+
+    initTabletSearchToggle();
+  }
+
+  /**
+   * mountNavigator — Build the header DOM from placeholder config.
+   *
+   * This function only deals with DOM: injecting styles and replacing
+   * <navigator> placeholders with actual <header> elements.
+   * It does NOT register any document-level event listeners.
+   *
+   * Can be called multiple times safely (idempotent by nature).
+   */
   function mountNavigator() {
     /* 1. 注入样式 */
     injectDropdownStyles();
@@ -1230,8 +1232,6 @@
 
     /* 2. 遍历占位符并替换 */
     var placeholders = document.querySelectorAll('[data-component="navigator"]');
-
-    var didBuild = false;
 
     for (var i = 0; i < placeholders.length; i++) {
       var placeholder = placeholders[i];
@@ -1259,25 +1259,9 @@
       document.documentElement.style.setProperty("--nav-height", navHeight);
 
       placeholder.parentNode.replaceChild(headerEl, placeholder);
-      didBuild = true;
     }
 
-    /* 3. 初始化交互事件——只在首次构建 header 时执行，不重复注册 document listener */
-    if (!_interactionsBound) {
-      _interactionsBound = true;
-
-      initDesktopSearchInteraction();
-      initMobileSearchInteraction();
-
-      /* Dropdown 互斥 & 点击事件 */
-      bindDropdownHoverMutex();
-      bindGlobalDropdownClose();
-      initDropdownClickHandlers();
-
-      initTabletSearchToggle();
-    }
-
-    /* 4. 这些需要每次 mount 后执行（重新查找 DOM 元素） */
+    /* 3. 每次构建后需要重新执行的 DOM 相关初始化 */
     reinitTranslationManager();
     initSlideMenu();
     initLangSwitcher();
@@ -1515,7 +1499,10 @@
    *  初始化入口
    * ================================================================ */
 
-  /* 首次加载：DOM ready 后挂载 */
+  /* Register document-level listeners exactly ONCE */
+  registerListeners();
+
+  /* 首次加载：DOM ready 后构建 header DOM */
   if (document.readyState === "loading") {
     document.addEventListener("DOMContentLoaded", mountNavigator);
   } else {
