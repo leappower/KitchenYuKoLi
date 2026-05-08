@@ -306,23 +306,32 @@ app.get('*', (req, res) => {
   } else if (fs.existsSync(pagesPcPath) && fs.statSync(pagesPcPath).isFile()) {
     res.sendFile(pagesPcPath);
   } else {
-    // SPA fallback — only if no dedicated page exists
-    var cleanPath = req.path.replace(/\/+$/, '') || '/';
-    var isSpaRoute = SPA_ROUTES.includes(cleanPath) ||
-      SPA_ROUTES.some(function(route) { return cleanPath.startsWith(route + '/'); });
-    if (isSpaRoute) {
-      return res.sendFile(path.join(__dirname, 'dist', 'index.html'));
-    }
-
-    if (process.env.NODE_ENV !== 'production') {
-      var srcPath = path.join(__dirname, 'src', req.path);
-      if (fs.existsSync(srcPath) && fs.statSync(srcPath).isFile()) {
-        res.sendFile(srcPath);
+    // No index.html or index-pc.html found — check for <path>-pc.html pattern
+    // e.g. /news/detail/ → dist/pages/news/detail-pc.html
+    var cleanPath = req.path.replace(/\/+$/, '');
+    var pcFile = path.join(__dirname, 'dist', 'pages', cleanPath + '-pc.html');
+    var pcFileRoot = path.join(__dirname, 'dist', cleanPath + '-pc.html');
+    if (fs.existsSync(pcFile) && fs.statSync(pcFile).isFile()) {
+      res.sendFile(pcFile);
+    } else if (fs.existsSync(pcFileRoot) && fs.statSync(pcFileRoot).isFile()) {
+      res.sendFile(pcFileRoot);
+    } else {
+      // SPA fallback — only if no dedicated page exists
+      var isSpaRoute = SPA_ROUTES.includes(cleanPath) ||
+        SPA_ROUTES.some(function(route) { return cleanPath.startsWith(route + '/'); });
+      if (isSpaRoute) {
+        return res.sendFile(path.join(__dirname, 'dist', 'index.html'));
+      }
+      if (process.env.NODE_ENV !== 'production') {
+        var srcPath = path.join(__dirname, 'src', req.path);
+        if (fs.existsSync(srcPath) && fs.statSync(srcPath).isFile()) {
+          res.sendFile(srcPath);
+        } else {
+          res.sendFile(path.join(__dirname, 'dist', 'index.html'));
+        }
       } else {
         res.sendFile(path.join(__dirname, 'dist', 'index.html'));
       }
-    } else {
-      res.sendFile(path.join(__dirname, 'dist', 'index.html'));
     }
   }
 });
