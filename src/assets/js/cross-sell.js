@@ -318,83 +318,44 @@
 
   // ─── Init ─────────────────────────────────────────────────────
 
-  function init() {
-    console.log('[CrossSell] init called, readyState:', document.readyState, 'url:', location.href, '_crossSellInited:', !!window._crossSellInited);
-    if (window._crossSellInited) {
-      console.log('[CrossSell] init skipped: already initialized (SPA dynamic reload)');
-      // Re-render for new page content (container may have been replaced)
-      var reSlug = detectCategorySlug();
-      if (reSlug) {
-        var csc = document.getElementById('cross-sell-container');
-        if (csc && !csc.innerHTML.trim()) {
-          csc.innerHTML = renderCrossSell(reSlug) || '';
-          console.log('[CrossSell] re-rendered cross-sell on re-init');
-        }
-        var sec = document.getElementById('scene-entry-container');
-        if (sec && !sec.innerHTML.trim()) {
-          sec.innerHTML = renderSceneEntry(reSlug) || '';
-          console.log('[CrossSell] re-rendered scene-entry on re-init');
-        }
-      }
-      return;
-    }
-    window._crossSellInited = true;
-    trackPdpReferrer();
-
+  // ─── Render helper (always available) ─────────────────────────
+  function renderCrossSellForCurrentPage() {
     var slug = detectCategorySlug();
-    console.log('[CrossSell] init slug:', slug);
-    if (slug) {
-      var render = function() {
-        console.log('[CrossSell] render() called, slug:', slug, 'url:', location.href);
-        var crossSellContainer = document.getElementById('cross-sell-container');
-        console.log('[CrossSell] cross-sell-container:', !!crossSellContainer);
-        if (crossSellContainer) {
-          var crossSellHtml = renderCrossSell(slug);
-          if (crossSellHtml) {
-            crossSellContainer.innerHTML = crossSellHtml;
-            console.log('[CrossSell] cross-sell rendered, html length:', crossSellHtml.length);
-          } else {
-            console.log('[CrossSell] cross-sell: no HTML generated for slug:', slug);
-          }
-        }
-        var sceneEntryContainer = document.getElementById('scene-entry-container');
-        console.log('[CrossSell] scene-entry-container:', !!sceneEntryContainer);
-        if (sceneEntryContainer) {
-          var sceneHtml = renderSceneEntry(slug);
-          if (sceneHtml) {
-            sceneEntryContainer.innerHTML = sceneHtml;
-            console.log('[CrossSell] scene-entry rendered, html length:', sceneHtml.length);
-          } else {
-            console.log('[CrossSell] scene-entry: no HTML generated for slug:', slug);
-          }
-        }
-      };
-
-      if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', render);
+    console.log('[CrossSell] renderCrossSellForCurrentPage', { url: location.href, slug: slug });
+    if (!slug) return;
+    var crossSellContainer = document.getElementById('cross-sell-container');
+    console.log('[CrossSell] cross-sell-container:', !!crossSellContainer);
+    if (crossSellContainer) {
+      var crossSellHtml = renderCrossSell(slug);
+      if (crossSellHtml) {
+        crossSellContainer.innerHTML = crossSellHtml;
+        console.log('[CrossSell] cross-sell rendered, html length:', crossSellHtml.length);
       } else {
-        render();
+        console.log('[CrossSell] cross-sell: no HTML generated for slug:', slug);
       }
-
-      window.addEventListener('spa:load', function onSpaLoad() {
-        console.log('[CrossSell] spa:load fired, url:', location.href);
-        var newSlug = detectCategorySlug();
-        console.log('[CrossSell] spa:load newSlug:', newSlug, 'oldSlug:', slug);
-        if (newSlug) {
-          slug = newSlug;
-          render();
-        } else {
-          console.log('[CrossSell] spa:load skipped: not a category page');
-        }
-      });
+    } else {
+      console.log('[CrossSell] cross-sell: container not found in DOM');
     }
+    var sceneEntryContainer = document.getElementById('scene-entry-container');
+    console.log('[CrossSell] scene-entry-container:', !!sceneEntryContainer);
+    if (sceneEntryContainer) {
+      var sceneHtml = renderSceneEntry(slug);
+      if (sceneHtml) {
+        sceneEntryContainer.innerHTML = sceneHtml;
+        console.log('[CrossSell] scene-entry rendered, html length:', sceneHtml.length);
+      } else {
+        console.log('[CrossSell] scene-entry: no HTML generated for slug:', slug);
+      }
+    }
+  }
 
+  // ─── Init ─────────────────────────────────────────────────────
+
+  function init() {
+    console.log('[CrossSell] init called, readyState:', document.readyState, 'url:', location.href);
+    trackPdpReferrer();
     updatePdpCategoryNav();
-
-    window.addEventListener('spa:load', function() {
-      trackPdpReferrer();
-      updatePdpCategoryNav();
-    });
+    renderCrossSellForCurrentPage();
   }
 
   // ─── Public API ────────────────────────────────────────────────
@@ -418,10 +379,19 @@
     PRODUCT_SLUGS: PRODUCT_SLUGS
   };
 
+  // Initial render
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', init);
   } else {
     init();
   }
+
+  // SPA navigation — always registered, always re-renders for category pages
+  document.addEventListener('spa:load', function() {
+    console.log('[CrossSell] spa:load fired, url:', location.href);
+    trackPdpReferrer();
+    updatePdpCategoryNav();
+    renderCrossSellForCurrentPage();
+  });
 
 })();
