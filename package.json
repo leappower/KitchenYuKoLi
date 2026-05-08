@@ -7,7 +7,7 @@
     "start": "webpack serve --mode development",
     "dev": "NODE_ENV=development nodemon server.js",
     "build:css": "tailwindcss -i src/assets/css/tailwind-entry.css -o src/assets/css/tailwind.css --minify",
-    "build": "npm run build:css && webpack --mode=production && node scripts/build-ssg.js",
+    "build": "./build.sh",
     "build:dev": "rm -rf dist && npm run build:css && webpack --env devBuild && node scripts/build-ssg.js",
     "build:production": "node scripts/ensure-product-data-table.js && npm run i18n:extract && npm run product:sync:source && npm run translate:products:incremental && npm run product:sync && npm run build:css && webpack --mode=production && node scripts/verify-static-build.js && node scripts/build-ssg.js",
     "build:production:full": "node scripts/ensure-product-data-table.js && npm run i18n:extract && npm run product:sync:source && npm run translate:products && npm run product:sync && npm run build:css && webpack --mode=production && node scripts/verify-static-build.js && node scripts/build-ssg.js",
@@ -46,7 +46,8 @@
     "release:skip-download": "node scripts/release.js --skip-download",
     "prepare": "git config core.hooksPath .githooks",
     "sync:lang": "node scripts/deploy-lang-sync.js",
-    "sync:lang:check": "node scripts/deploy-lang-sync.js --dry-run"
+    "sync:lang:check": "node scripts/deploy-lang-sync.js --dry-run",
+    "sync": "./build.sh"
   },
   "dependencies": {
     "adm-zip": "^0.5.17",

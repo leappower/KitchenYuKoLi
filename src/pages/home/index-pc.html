@@ -146,20 +146,6 @@
     <link rel="stylesheet" href="/assets/css/skeleton.css" />
     <link rel="icon" href="/assets/images/logo_header.webp" type="image/webp" />
 
-    <script>
-      window.addEventListener('DOMContentLoaded',function(){
-        setTimeout(function(){
-          var m=document.getElementById('spa-content');
-          if(!m)return;
-          var s=getComputedStyle(m);
-          var ok=s.maxWidth==='none'||parseInt(s.maxWidth)>=1920;
-          console.log('%c['+location.pathname.replace(/\/
-,'')+'] main: max-w='+s.maxWidth+' px='+s.paddingLeft+'/'+s.paddingRight+' w='+m.offsetWidth,ok?'color:green':'color:orange;font-weight:bold');
-          if(!ok)console.warn('Expected max-width: 1920px, got:',s.maxWidth);
-        },200);
-      });
-    </script>
-
     <!-- SEO JSON-LD: Organization + WebSite -->
     <script type="application/ld+json">
       {
@@ -212,7 +198,7 @@
     ></navigator>
     <main id="spa-content">
       <!-- Hero Section: 50% Focus on Hardware -->
-      <section class="fullwidth-bg section-passthrough w-full flex flex-col lg:flex-row items-center py-10 gap-12">
+      <section class="fullwidth-bg section-passthrough w-full flex flex-col lg:flex-row items-center -mt-[var(--nav-height,109px)] pt-10 pb-10 gap-12">
         <div class="section-content">
           <div class="w-full lg:w-1/2 space-y-8">
             <div
@@ -568,22 +554,21 @@
     </script>
 
     <script src="/assets/js/ui/dropdown-styles.js"></script>
-    <script defer src="/assets/js/ui/products-dropdown.js?v=20260322-v3"></script>
-    <script defer src="/assets/js/ui/applications-dropdown.js?v=20260322-v3"></script>
-    <script defer src="/assets/js/ui/support-dropdown.js?v=20260322-v3"></script>
-    <script defer src="/assets/js/ui/about-dropdown.js?v=20260322-v3"></script>
-    <script defer src="/assets/js/nav-config.js?v=20260415"></script>
+    <script defer src="/assets/js/ui/products-dropdown.js?v=20260508-v3"></script>
+    <script defer src="/assets/js/ui/applications-dropdown.js?v=20260508-v3"></script>
+    <script defer src="/assets/js/ui/support-dropdown.js?v=20260508-v3"></script>
+    <script defer src="/assets/js/ui/about-dropdown.js?v=20260508-v3"></script>
+    <script defer src="/assets/js/nav-config.js?v=20260508"></script>
     <script defer src="/assets/js/ui/mobile-bottom-bar.js"></script>
     <script defer src="/assets/js/ui/navigator.js?v=20260508"></script>
     <script src="/assets/js/ui/hero-video.js"></script>
     <script defer src="/assets/js/ui/search-engine.js"></script>
-    <script defer src="/assets/js/ui/footer.js?v=20260507-v4"></script>
-    <script defer src="/assets/js/lang-registry.js?v=20260429"></script>
-    <script defer src="/assets/js/translations.js?v=20260429"></script>
-    <script defer src="/assets/js/translations-dropdown-template.js?v=20260429"></script>
-    <script defer src="/assets/js/home-core-products.js?v=20260429"></script>
+    <script defer src="/assets/js/ui/footer.js?v=20260508-v4"></script>
+    <script defer src="/assets/js/lang-registry.js?v=20260508"></script>
+    <script defer src="/assets/js/translations.js?v=20260508"></script>
+    <script defer src="/assets/js/translations-dropdown-template.js?v=20260508"></script>
+    <script defer src="/assets/js/home-core-products.js?v=20260508"></script>
     <script defer src="/assets/js/contacts.js"></script>
-    <script defer src="/assets/js/ui/smart-popup.js"></script>
     <script defer src="/assets/js/router.js"></script>
 
     <script defer src="/assets/js/ui/helpers.js"></script>
@@ -597,7 +582,7 @@
     </script>
 
     <script src="/assets/js/utils/device-utils.js"></script>
-    <script src="/assets/js/spa-router.js"></script>
+    <script src="/assets/js/spa-router.js?v=20260508"></script>
     <script>
       document.addEventListener("DOMContentLoaded", function () {
         if (window.SpaRouter && typeof window.SpaRouter.init === "function") {

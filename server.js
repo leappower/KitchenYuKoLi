@@ -31,7 +31,7 @@ const {
 // ─── API Server Proxy ───────────────────────────────────────────────
 // All API, admin, and upload requests go to KitchenYuKoLiServer.
 // Configurable via API_SERVER env var (default: http://127.0.0.1:8000).
-const API_SERVER = process.env.API_SERVER || 'http://127.0.0.1:8001';
+const API_SERVER = process.env.API_SERVER || 'https://127.0.0.1:8000';
 const { createProxyMiddleware } = require('http-proxy-middleware');
 
 const app = express();
@@ -39,8 +39,9 @@ const app = express();
 const apiProxy = createProxyMiddleware({
   target: API_SERVER,
   changeOrigin: true,
-  pathFilter: ['/api/cms/**', '/api/translations/**', '/api/nav-config/**', '/admin/**'],
-  pathRewrite: { '^/api/translations': '/api/cms/translations' },
+  pathFilter: ['/api/cms/**', '/api/public/**', '/api/translations/**', '/api/nav-config/**', '/admin/**'],
+  // No rewrite needed — backend has /api/public/* and /api/cms/* natively
+  // pathRewrite removed since API_SERVER (https://127.0.0.1:8000) serves /api/public/* directly
   logLevel: process.env.NODE_ENV !== 'production' ? 'warn' : 'silent',
   onError: (err, req, res) => {
     console.error('[proxy] error:', err.message, req.path);
@@ -255,75 +256,59 @@ app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'dist', 'index.html'));
 });
 
-// SPA fallback with proper 404 handling
-// Known SPA routes — always serve the root SPA shell, let the frontend router handle them
-const SPA_ROUTES = ['/home', '/products', '/applications', '/cases', '/profit-calculator', '/products/compare', '/about', '/contact', '/quote',
-  '/support', '/news', '/thank-you', '/landing',
-  // New structure (P0 trust page first)
-  // New structure (P1 high-value pages)
-  '/applications/chain-restaurant',  '/applications/central-kitchen',
-  // New structure (P2 volume pages)
-  '/applications/small-restaurant', '/applications/menu-lab', '/applications/canteen',
-  '/applications/cloud-kitchen',
-  // Product detail (dynamic PDP)
-  '/products/detail',
-  // Support sub-pages
-  '/support/installation', '/support/warranty', '/support/spare-parts', '/support/training', '/support/faq',
-  // ROI legacy redirect
-  '/roi'];
+// ─── Universal page resolver ─────────────────────────────────────────────
+//
+// Architecture: file-system as single source of truth.
+// No hardcoded route lists.  New pages?  Just drop the HTML into dist/pages/.
+//
+// Resolution order (first match wins):
+//   1. Exact file in dist/              (CSS, JS, images, fonts)
+//   2. Exact file in dist/pages/        (SPA router fetches like /products/index-pc.html)
+//   3. dist/pages/<path>/index.html     (SSG directory index)
+//   4. dist/pages/<path>/index-pc.html  (SSG device-specific index)
+//   5. dist/pages/<path>-pc.html        (flat-file pattern, e.g. news/detail-pc.html)
+//   6. SPA shell (dist/index.html)      (catch-all — SPA router handles the rest)
+//
+// Security: only serves files under dist/ (and src/ in dev mode).
+//
+
+function resolvePage(reqPath) {
+  var clean = reqPath.replace(/\/+$/, '');
+  if (!clean) clean = '/';
+
+  // 1. Exact file: dist/<reqPath>  (assets, fonts, images)
+  var f = path.join(__dirname, 'dist', reqPath);
+  if (isFile(f)) return f;
+
+  // 2. Exact file: dist/pages/<reqPath>  (SPA router fetches)
+  f = path.join(__dirname, 'dist', 'pages', reqPath);
+  if (isFile(f)) return f;
+
+  // 3–5. Page resolution under dist/pages/
+  //    Try index.html → index-pc.html → <clean>-pc.html
+  var candidates = [
+    path.join(__dirname, 'dist', 'pages', clean, 'index.html'),
+    path.join(__dirname, 'dist', 'pages', clean, 'index-pc.html'),
+    path.join(__dirname, 'dist', 'pages', clean + '-pc.html'),
+  ];
+  for (var i = 0; i < candidates.length; i++) {
+    if (isFile(candidates[i])) return candidates[i];
+  }
+
+  // 6. SPA shell
+  return path.join(__dirname, 'dist', 'index.html');
+}
+
+function isFile(p) {
+  try { return fs.statSync(p).isFile(); } catch(e) { return false; }
+}
 
 app.get('*', (req, res) => {
   // Never intercept API routes
   if (req.path.startsWith('/api/')) return res.status(404).json({ error: 'Not found' });
 
-  var fs = require('fs');
-
-  // Only look inside dist/ — never expose project root files (scripts/, .env, etc.)
-  var filePath = path.join(__dirname, 'dist', req.path);
-
-  // Check if it's an exact file match (CSS, JS, images, etc.)
-  if (fs.existsSync(filePath) && fs.statSync(filePath).isFile()) {
-    return res.sendFile(filePath);
-  }
-
-  // Webpack outputs pages under dist/pages/ — SPA router fetches /products/index-pc.html
-  // but the file lives at dist/pages/products/index-pc.html
-  var pagesFilePath = path.join(__dirname, 'dist', 'pages', req.path);
-  if (fs.existsSync(pagesFilePath) && fs.statSync(pagesFilePath).isFile()) {
-    return res.sendFile(pagesFilePath);
-  }
-
-  // Check if the path matches a known SPA route (with or without trailing slash)
-  // Also match sub-paths like /products/炒菜机/ → matches /products
-  var cleanPath = req.path.replace(/\/+$/, '') || '/';
-  var isSpaRoute = SPA_ROUTES.includes(cleanPath) ||
-    SPA_ROUTES.some(function(route) { return cleanPath.startsWith(route + '/'); });
-  if (isSpaRoute) {
-    return res.sendFile(path.join(__dirname, 'dist', 'index.html'));
-  }
-
-  // Check if path is a directory with index.html (e.g. /some/route/)
-  var indexPath = path.join(__dirname, 'dist', req.path, 'index.html');
-  if (fs.existsSync(indexPath) && fs.statSync(indexPath).isFile()) {
-    res.sendFile(indexPath);
-  } else {
-    // Also try dist/pages/ for directory index.html
-    var pagesIndexPath = path.join(__dirname, 'dist', 'pages', req.path, 'index.html');
-    if (fs.existsSync(pagesIndexPath) && fs.statSync(pagesIndexPath).isFile()) {
-      res.sendFile(pagesIndexPath);
-    } else if (process.env.NODE_ENV !== 'production') {
-      // Dev fallback: serve from src/ for files not yet built (e.g. lang JSON, images)
-      var srcPath = path.join(__dirname, 'src', req.path);
-      if (fs.existsSync(srcPath) && fs.statSync(srcPath).isFile()) {
-        res.sendFile(srcPath);
-      } else {
-        res.sendFile(path.join(__dirname, 'dist', 'index.html'));
-      }
-    } else {
-      // For unknown routes, serve root SPA shell (SPA router will show 404 if needed)
-      res.sendFile(path.join(__dirname, 'dist', 'index.html'));
-    }
-  }
+  var resolved = resolvePage(req.path);
+  res.sendFile(resolved);
 });
 
 // Global error handling middleware

@@ -67,7 +67,6 @@
       data-cta-text-key="nav_get_quote"
       data-cta-href="/quote"
     ></navigator>
-
     <main id="spa-content">
       <!-- Hero Section -->
       <section class="relative py-12 overflow-hidden bg-gradient-to-br from-primary/5 via-transparent to-orange-100/30 dark:from-primary/10 dark:to-orange-900/20 fullwidth-bg">
@@ -75,11 +74,13 @@
           <div class="w-full relative">
           <div class="flex flex-col gap-8">
           <div class="flex flex-col gap-4">
-          <div
-          class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-primary/10 text-primary text-xs font-bold uppercase tracking-wider w-fit"
-          >
-          <span class="material-symbols-outlined text-sm">store</span>
-          小型餐饮 / 云厨房解决方案
+                    <div class="flex items-center gap-2 flex-wrap">
+            <a href="/applications/" class="text-sm text-slate-500 hover:text-primary transition-colors" data-i18n="nav_applications">行业场景</a>
+            <span class="material-symbols-outlined text-sm text-slate-300">chevron_right</span>
+            <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-bold uppercase tracking-widest">
+              <span class="material-symbols-outlined text-xs leading-none">store</span>
+              <span data-i18n="sr_hero_badge">小型餐饮 / 云厨房</span>
+            </span>
           </div>
           <h1 class="text-4xl font-black leading-tight tracking-tighter" data-i18n="small_restaurant_hero_title">
           小型创业
@@ -116,7 +117,7 @@
           loading="eager"
           alt="小型餐饮/云厨房智能设备"
           class="w-full h-[300px] object-cover"
-          src="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=800&h=500&fit=crop"
+          src="/assets/images/applications/small-restaurant/sr-hero.webp"
           />
           <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
           <div class="absolute bottom-0 left-0 right-0 p-6">
@@ -266,7 +267,7 @@
           loading="lazy"
           alt="外卖专营店"
           class="w-full h-full object-cover"
-          src="https://images.unsplash.com/photo-1526367790999-0150786686a2?w=600&h=400&fit=crop"
+          src="/assets/images/applications/small-restaurant/sr-scene1.webp"
           />
           </div>
           <div class="p-4">
@@ -282,7 +283,7 @@
           loading="lazy"
           alt="社区餐饮店"
           class="w-full h-full object-cover"
-          src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=600&h=400&fit=crop"
+          src="/assets/images/applications/small-restaurant/sr-scene2.webp"
           />
           </div>
           <div class="p-4">
@@ -298,7 +299,7 @@
           loading="lazy"
           alt="小吃特色店"
           class="w-full h-full object-cover"
-          src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=600&h=400&fit=crop"
+          src="/assets/images/applications/small-restaurant/sr-scene3.webp"
           />
           </div>
           <div class="p-4">
@@ -343,7 +344,7 @@
           loading="lazy"
           alt="小型电磁炉"
           class="w-full h-full object-cover"
-          src="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=600&h=400&fit=crop"
+          src="/assets/images/applications/small-restaurant/sr-hero.webp"
           />
           </div>
           <div class="p-4">
@@ -359,7 +360,7 @@
           loading="lazy"
           alt="小型洗碗机"
           class="w-full h-full object-cover"
-          src="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=600&h=400&fit=crop"
+          src="/assets/images/applications/small-restaurant/sr-hero.webp"
           />
           </div>
           <div class="p-4">
@@ -375,7 +376,7 @@
           loading="lazy"
           alt="操作台/货架"
           class="w-full h-full object-cover"
-          src="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=600&h=400&fit=crop"
+          src="/assets/images/applications/small-restaurant/sr-hero.webp"
           />
           </div>
           <div class="p-4">
@@ -602,17 +603,18 @@
     <footer data-component="footer" data-variant="tablet" data-cta="true"></footer>
 
     <script defer src="/assets/js/router.js"></script>
-    <script src="/assets/js/translations.js?v=20260429"></script>
+<script defer src="/assets/js/spa-router.js?v=20260508"></script>
+    <script src="/assets/js/translations.js?v=20260508"></script>
     <script src="/assets/js/ui/slide-menu.js"></script>
     <script src="/assets/js/ui/dropdown-styles.js"></script>
     <script src="/assets/js/ui/products-dropdown.js"></script>
-    <script defer src="/assets/js/ui/applications-dropdown.js?v=20260322-v3"></script>
+    <script defer src="/assets/js/ui/applications-dropdown.js?v=20260508-v3"></script>
     <script src="/assets/js/ui/support-dropdown.js"></script>
     <script src="/assets/js/ui/about-dropdown.js"></script>
     <script src="/assets/js/ui/contact-dropdown.js"></script>
-    <script src="/assets/js/nav-config.js?v=20260415"></script>
+    <script src="/assets/js/nav-config.js?v=20260508"></script>
     <script src="/assets/js/ui/navigator.js?v=20260508"></script>
-    <script src="/assets/js/ui/footer.js?v=20260507-v4"></script>
+    <script src="/assets/js/ui/footer.js?v=20260508-v4"></script>
     <script defer src="/assets/js/ui/floating-actions.js"></script>
-  </body>
+</body>
 </html>

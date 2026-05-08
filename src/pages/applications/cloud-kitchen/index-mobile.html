@@ -78,17 +78,20 @@
       data-cta-text-key="nav_get_quote"
       data-cta-href="/quote"
     ></navigator>
-    <main id="spa-content">
+<!-- Breadcrumb -->
+<main id="spa-content">
       <section class="relative py-8 overflow-hidden bg-gradient-to-br from-primary/5 via-transparent to-orange-100/30 dark:from-primary/10 dark:to-orange-900/20 fullwidth-bg">
         <div class="section-content">
           <div class="w-full relative">
           <div class="flex flex-col lg:flex-row items-center gap-12">
           <div class="w-full lg:w-1/2 flex flex-col gap-6">
-          <div
-          class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 text-primary text-sm font-bold uppercase tracking-wider w-fit"
-          >
-          <span class="material-symbols-outlined">delivery_dining</span>
-          云厨房/外卖解决方案
+                    <div class="flex items-center gap-2 mb-4">
+            <a href="/applications/" class="text-xs text-slate-400 hover:text-primary transition-colors" data-i18n="nav_applications">行业场景</a>
+            <span class="material-symbols-outlined text-xs text-slate-300">chevron_right</span>
+            <span class="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-bold uppercase tracking-wider">
+              <span class="material-symbols-outlined text-xs">delivery_dining</span>
+              <span>云厨房/外卖解决方案</span>
+            </span>
           </div>
           <h1 class="text-3xl font-black leading-tight tracking-tighter">
           智能厨房
@@ -123,7 +126,7 @@
           alt="云厨房/外卖智能厨房"
           class="w-full h-[500px] object-cover"
           src="/assets/images/applications/cloud-kitchen-hero.webp"
-          onerror="this.src = 'https://images.unsplash.com/photo-1556910103-1c02745aae4d?w=1200&h=800&fit=crop'"
+          onerror="this.src = '/assets/images/applications/canteen-hero.webp'"
           />
           <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
           <div class="absolute bottom-0 left-0 right-0 p-8">
@@ -634,16 +637,17 @@
     </main>
     <footer data-component="footer" data-variant="mobile" data-cta="true"></footer>
     <script defer src="/assets/js/router.js"></script>
-    <script src="/assets/js/translations.js?v=20260429"></script>
+<script defer src="/assets/js/spa-router.js?v=20260508"></script>
+    <script src="/assets/js/translations.js?v=20260508"></script>
     <script src="/assets/js/ui/slide-menu.js"></script>
     <script src="/assets/js/ui/dropdown-styles.js"></script>
     <script src="/assets/js/ui/products-dropdown.js"></script>
     <script src="/assets/js/ui/support-dropdown.js"></script>
     <script src="/assets/js/ui/about-dropdown.js"></script>
-    <script src="/assets/js/nav-config.js?v=20260415"></script>
+    <script src="/assets/js/nav-config.js?v=20260508"></script>
     <script defer src="/assets/js/ui/mobile-bottom-bar.js"></script>
     <script src="/assets/js/ui/navigator.js?v=20260508"></script>
-    <script src="/assets/js/ui/footer.js?v=20260507-v4"></script>
+    <script src="/assets/js/ui/footer.js?v=20260508-v4"></script>
     <script defer src="/assets/js/ui/floating-actions.js"></script>
   <script defer src="/assets/js/ui/search-engine.js"></script>
 </body>

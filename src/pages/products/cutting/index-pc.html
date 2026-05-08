@@ -109,19 +109,6 @@ if(localStorage.getItem('darkMode')==='true')document.documentElement.classList.
 <link rel="stylesheet" href="/assets/css/skeleton.css"/>
 <link rel="icon" href="/assets/images/logo_header.webp" type="image/webp">
 
-<script>
-window.addEventListener('DOMContentLoaded',function(){
-  setTimeout(function(){
-    var m=document.getElementById('spa-content');
-    if(!m)return;
-    var s=getComputedStyle(m);
-    var ok=s.maxWidth==='none'||parseInt(s.maxWidth)>=1920;
-    console.log('%c['+location.pathname.replace(/\/
-,'')+'] main: max-w='+s.maxWidth+' px='+s.paddingLeft+'/'+s.paddingRight+' w='+m.offsetWidth,ok?'color:green':'color:orange;font-weight:bold');
-    if(!ok)console.warn('Expected max-width: 1920px, got:',s.maxWidth);
-  },200);
-});
-</script>
 
 <!-- SEO JSON-LD: CollectionPage -->
 <script type="application/ld+json">
@@ -142,16 +129,19 @@ window.addEventListener('DOMContentLoaded',function(){
   data-search="true"
   data-cta-text-key="nav_get_quote"
   data-cta-href="/quote"></navigator>
-
 <main id="spa-content">
 <div class="w-full">
   <!-- Hero Section: aligned with home page (left text, right image) -->
-  <section class="fullwidth-bg section-passthrough w-full flex flex-col lg:flex-row items-center py-10 gap-12">
+  <section class="fullwidth-bg section-passthrough w-full flex flex-col lg:flex-row items-center -mt-[var(--nav-height,109px)] pt-10 pb-10 gap-12">
     <div class="section-content">
       <div class="w-full lg:w-1/2 space-y-8">
-        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-bold uppercase tracking-widest">
-          <span class="material-symbols-outlined text-xs leading-none">restaurant</span>
-          <span data-i18n="cutting_hero_badge">🔪 切配系列</span>
+                <div class="flex items-center gap-2 flex-wrap">
+          <a href="/products/" class="text-sm text-slate-500 hover:text-primary transition-colors" data-i18n="nav_products">产品中心</a>
+          <span class="material-symbols-outlined text-sm text-slate-300">chevron_right</span>
+          <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-bold uppercase tracking-widest">
+            <span class="material-symbols-outlined text-xs leading-none">content_cut</span>
+            <span data-i18n="cutting_hero_badge">🔪 切配系列</span>
+          </span>
         </div>
         <h1 class="text-6xl xl:text-8xl font-black leading-[1.1] tracking-tight text-slate-900 dark:text-white" data-i18n="cutting_hero_title">
           智能切配设备
@@ -190,7 +180,6 @@ window.addEventListener('DOMContentLoaded',function(){
       </div>
     </div>
   </section>
-
   <!-- Tier Filter: between hero and product grid -->
   <section id="products" class="w-full py-10 fullwidth-bg">
     <div class="section-content">
@@ -222,7 +211,16 @@ window.addEventListener('DOMContentLoaded',function(){
     </div>
   </section>
 
-  <!-- CTA Section -->
+  
+  <!-- Cross-sell & Scene Entry Section -->
+  <section id="category-extras" class="w-full py-8 fullwidth-bg">
+    <div class="section-content">
+      <div id="cross-sell-container"></div>
+      <div id="scene-entry-container" class="mt-8"></div>
+    </div>
+  </section>
+
+<!-- CTA Section -->
   <section class="w-full py-12 fullwidth-bg">
     <div class="section-content">
     <div class="w-full bg-gradient-to-br from-primary/10 to-primary/5 dark:from-primary/20 dark:to-primary/5 rounded-3xl p-12 lg:p-16 border border-primary/20">
@@ -255,27 +253,25 @@ window.addEventListener('DOMContentLoaded',function(){
 </main>
 
     <script src="/assets/js/ui/dropdown-styles.js"></script>
-<script defer src="/assets/js/ui/products-dropdown.js?v=20260322-v3"></script>
-    <script defer src="/assets/js/ui/applications-dropdown.js?v=20260322-v3"></script>
-    <script defer src="/assets/js/ui/support-dropdown.js?v=20260322-v3"></script>
-    <script defer src="/assets/js/ui/about-dropdown.js?v=20260322-v3"></script>
-<script defer src="/assets/js/nav-config.js?v=20260415"></script>
+<script defer src="/assets/js/ui/products-dropdown.js?v=20260508-v3"></script>
+    <script defer src="/assets/js/ui/applications-dropdown.js?v=20260508-v3"></script>
+    <script defer src="/assets/js/ui/support-dropdown.js?v=20260508-v3"></script>
+    <script defer src="/assets/js/ui/about-dropdown.js?v=20260508-v3"></script>
+<script defer src="/assets/js/nav-config.js?v=20260508"></script>
     <script defer src="/assets/js/ui/mobile-bottom-bar.js"></script>
     <script defer src="/assets/js/ui/navigator.js?v=20260508"></script>
 <script defer src="/assets/js/ui/search-engine.js"></script>
-<script defer src="/assets/js/ui/footer.js?v=20260507-v4"></script>
-<script defer src="/assets/js/lang-registry.js?v=20260429"></script>
-<script defer src="/assets/js/translations.js?v=20260429"></script>
-<script defer src="/assets/js/translations-dropdown-template.js?v=20260429"></script>
+<script defer src="/assets/js/ui/footer.js?v=20260508-v4"></script>
+<script defer src="/assets/js/lang-registry.js?v=20260508"></script>
+<script defer src="/assets/js/translations.js?v=20260508"></script>
+<script defer src="/assets/js/translations-dropdown-template.js?v=20260508"></script>
 <script defer src="/assets/js/contacts.js"></script>
-<script defer src="/assets/js/ui/smart-popup.js"></script>
 <script defer src="/assets/js/router.js"></script>
     <script defer src="/assets/js/ui/helpers.js"></script>
     <script defer src="/assets/js/ui/page-effects.js"></script>
     <script defer src="/assets/js/ui/form-interactions.js"></script>
 <script defer src="/assets/js/page-interactions.js"></script>
     <script defer src="/assets/js/product-grid.js?v=20260508"></script>
-    <script defer src="/assets/js/product-detail.js?v=20260508"></script>
 
 <script>
     function renderProductPage() {
@@ -309,13 +305,7 @@ window.addEventListener('DOMContentLoaded',function(){
 </style>
 
 <script src="/assets/js/utils/device-utils.js"></script>
-<script src="/assets/js/spa-router.js"></script>
-<script>
-  document.addEventListener('DOMContentLoaded', function() {
-    if (window.SpaRouter && typeof window.SpaRouter.init === 'function') {
-      window.SpaRouter.init();
-    }
-  });
-</script>
+<script src="/assets/js/spa-router.js?v=20260508"></script>
     <script defer src="/assets/js/ui/floating-actions.js"></script>
-  </body></html>
+  <script defer src="/assets/js/cross-sell.js?v=20260508"></script>
+</body></html>

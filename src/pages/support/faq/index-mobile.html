@@ -53,7 +53,7 @@
 <div class="relative flex h-auto min-h-screen w-full flex-col">
 
 <navigator data-component="navigator" data-variant="mobile" data-active="support" data-cta-text-key="nav_get_quote" data-cta-href="/quote"></navigator>
-
+<!-- Breadcrumb -->
 <main id="spa-content">
 
 <!-- ═══ Section 1: Hero ═══ -->
@@ -62,9 +62,13 @@
   <div class="section-content">
     <div class="">
     <div class="w-full space-y-6">
-      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-bold uppercase tracking-widest">
-        <span class="material-symbols-outlined text-xs leading-none">contact_support</span>
-        <span data-i18n="support_faq_hero_badge">智能客服</span>
+            <div class="flex items-center gap-2 mb-4">
+        <a href="/support/" class="text-xs text-slate-400 hover:text-primary transition-colors" data-i18n="nav_support">服务支持</a>
+        <span class="material-symbols-outlined text-xs text-slate-300">chevron_right</span>
+        <span class="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-bold uppercase tracking-wider">
+          <span class="material-symbols-outlined text-xs">contact_support</span>
+          <span data-i18n="support_faq_hero_badge">智能客服</span>
+        </span>
       </div>
       <h1 class="text-3xl font-black leading-[1.1] tracking-tight text-slate-900 dark:text-white">
         <span data-i18n="support_faq_hero_title_1">智能问答系统</span><br/>
@@ -471,23 +475,50 @@
 </main>
 </div>
 
+<!-- Service Flow Navigation -->
+<section class="py-8">
+  <div class="px-4">
+    <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-3" data-i18n="support_flow_label">服务全流程</p>
+    <div class="flex items-center gap-2 overflow-x-auto pb-2 scrollbar-hide">
+<a href="/support/faq/" class="flex items-center gap-2 px-3 py-2.5 rounded-lg bg-primary/10 border border-primary/30">
+        <span class="material-symbols-outlined text-primary text-sm">contact_support</span>
+        <span class="text-xs font-bold text-primary" data-i18n="nav_support_faq">技术问答</span>
+      </a>
+<a href="/support/installation/" class="flex items-center gap-2 px-3 py-2.5 rounded-lg border border-slate-200 dark:border-slate-700">
+        <span class="material-symbols-outlined text-slate-400 text-sm">construction</span>
+        <span class="text-xs font-medium text-slate-500 dark:text-slate-400" data-i18n="nav_support_installation">安装调试</span>
+      </a>
+<a href="/support/warranty/" class="flex items-center gap-2 px-3 py-2.5 rounded-lg border border-slate-200 dark:border-slate-700">
+        <span class="material-symbols-outlined text-slate-400 text-sm">verified</span>
+        <span class="text-xs font-medium text-slate-500 dark:text-slate-400" data-i18n="nav_support_warranty">质保维护</span>
+      </a>
+<a href="/support/spare-parts/" class="flex items-center gap-2 px-3 py-2.5 rounded-lg border border-slate-200 dark:border-slate-700">
+        <span class="material-symbols-outlined text-slate-400 text-sm">build_circle</span>
+        <span class="text-xs font-medium text-slate-500 dark:text-slate-400" data-i18n="nav_support_spare_parts">配件支持</span>
+      </a>
+<a href="/support/training/" class="flex items-center gap-2 px-3 py-2.5 rounded-lg border border-slate-200 dark:border-slate-700">
+        <span class="material-symbols-outlined text-slate-400 text-sm">school</span>
+        <span class="text-xs font-medium text-slate-500 dark:text-slate-400" data-i18n="nav_support_training">培训下载</span>
+      </a>
+    </div>
+  </div>
+</section>
 <!-- ═══ Scripts ═══ -->
 <script src="/assets/js/ui/dropdown-styles.js"></script>
     <script src="/assets/js/ui/custom-select.js"></script>
-<script defer src="/assets/js/ui/products-dropdown.js?v=20260322-v3"></script>
-<script defer src="/assets/js/ui/applications-dropdown.js?v=20260322-v3"></script>
-<script defer src="/assets/js/ui/support-dropdown.js?v=20260322-v3"></script>
-<script defer src="/assets/js/ui/about-dropdown.js?v=20260322-v3"></script>
-<script defer src="/assets/js/nav-config.js?v=20260415"></script>
+<script defer src="/assets/js/ui/products-dropdown.js?v=20260508-v3"></script>
+<script defer src="/assets/js/ui/applications-dropdown.js?v=20260508-v3"></script>
+<script defer src="/assets/js/ui/support-dropdown.js?v=20260508-v3"></script>
+<script defer src="/assets/js/ui/about-dropdown.js?v=20260508-v3"></script>
+<script defer src="/assets/js/nav-config.js?v=20260508"></script>
 <script defer src="/assets/js/ui/mobile-bottom-bar.js"></script>
     <script defer src="/assets/js/ui/navigator.js?v=20260508"></script>
 <script defer src="/assets/js/ui/search-engine.js"></script>
-<script defer src="/assets/js/ui/footer.js?v=20260507-v4"></script>
-<script defer src="/assets/js/lang-registry.js?v=20260429"></script>
-<script defer src="/assets/js/translations.js?v=20260429"></script>
-<script defer src="/assets/js/translations-dropdown-template.js?v=20260429"></script>
+<script defer src="/assets/js/ui/footer.js?v=20260508-v4"></script>
+<script defer src="/assets/js/lang-registry.js?v=20260508"></script>
+<script defer src="/assets/js/translations.js?v=20260508"></script>
+<script defer src="/assets/js/translations-dropdown-template.js?v=20260508"></script>
 <script defer src="/assets/js/contacts.js"></script>
-<script defer src="/assets/js/ui/smart-popup.js"></script>
 <script defer src="/assets/js/router.js"></script>
     <script defer src="/assets/js/ui/helpers.js"></script>
     <script defer src="/assets/js/ui/page-effects.js"></script>
@@ -499,7 +530,7 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 </script>
 <script src="/assets/js/utils/device-utils.js"></script>
-<script src="/assets/js/spa-router.js"></script>
+<script src="/assets/js/spa-router.js?v=20260508"></script>
 <script>
 document.addEventListener('DOMContentLoaded', function() {
     if (window.SpaRouter && typeof window.SpaRouter.init === 'function') {
@@ -508,5 +539,5 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 </script>
     <script defer src="/assets/js/ui/floating-actions.js"></script>
-  </body>
+</body>
 </html>

@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 
 
 <html class="light" lang="zh-CN">
@@ -192,7 +193,9 @@
         <section id="products" class="fullwidth-bg pb-4">
           <div class="section-content">
             <div class="grid grid-cols-2 gap-3" id="product-grid">
-              <!-- Dynamically rendered by product-grid.js -->
+              <!-- Skeleton placeholders (cleared by product-grid.js) -->
+              <div class="sk-product-card"><div class="sk-product-img"></div><div class="sk-product-text"></div></div>
+              <div class="sk-product-card"><div class="sk-product-img"></div><div class="sk-product-text"></div></div>
             </div>
             <!-- Load More -->
             <div class="flex justify-center mt-6">
@@ -308,9 +311,9 @@
     </div>
     <div id="filter-overlay" class="fixed inset-0 bg-black/50 z-[55] hidden"></div>
 
-    <script defer src="/assets/js/lang-registry.js?v=20260429"></script>
-    <script defer src="/assets/js/translations.js?v=20260429"></script>
-    <script defer src="/assets/js/translations-dropdown-template.js?v=20260429"></script>
+    <script defer src="/assets/js/lang-registry.js?v=20260508"></script>
+    <script defer src="/assets/js/translations.js?v=20260508"></script>
+    <script defer src="/assets/js/translations-dropdown-template.js?v=20260508"></script>
     <script defer src="/assets/js/contacts.js"></script>
     <script defer src="/assets/js/ui/helpers.js"></script>
     <script defer src="/assets/js/ui/page-effects.js"></script>
@@ -334,5 +337,6 @@
       window.addEventListener('product-data-ready', renderProductPage_renderMobile);
     </script>
       <script defer src="/assets/js/ui/floating-actions.js"></script>
-  </body>
+  <script defer src="/assets/js/spa-router.js?v=20260508"></script>
+</body>
 </html>

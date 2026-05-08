@@ -89,7 +89,7 @@
     var e = "product-" + t;
     if (this.translationsCache.has(e)) return Promise.resolve(this.translationsCache.get(e));
     var n = this;
-    return i(fetch("/api/translations?lang=" + encodeURIComponent(t), {
+    return i(fetch("/api/public/translations?lang=" + encodeURIComponent(t), {
       cache: "no-store"
     }).then(function(t) {
       if (!t.ok) throw new Error("HTTP " + t.status);

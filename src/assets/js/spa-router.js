@@ -1,3 +1,17 @@
+/* ─── Suppress third-party DOM errors (frame_start.js etc.) ─────────────
+ * Must run early — before any deferred scripts fire their callbacks.
+ * Uses capture-phase listener to catch async errors that window.onerror misses. */
+(function() {
+  window.onerror = function(msg) {
+    if (msg && /removeChild.*not a child of/i.test(msg)) return true;
+  };
+  document.addEventListener('error', function(e) {
+    if (e.message && /removeChild.*not a child of/i.test(e.message)) {
+      e.preventDefault(); e.stopPropagation();
+    }
+  }, true);
+})();
+
 /**
  * spa-router.js - 混合 SPA + SSG 路由器
  *
@@ -16,42 +30,26 @@
   "use strict";
 
   var SpaRouter = {
-    // 路由定义（SEO 友好目录 URL）
+    //
+    // Route resolution: convention over configuration.
+    // No hardcoded route table — the server's file-system resolver is
+    // the single source of truth.  The SPA router mirrors the same logic:
+    //   /foo/          → fetch /foo/index-pc.html   (server resolves to dist/pages/foo/index-pc.html)
+    //   /news/detail/  → fetch /news/detail/index-pc.html  (server resolves to dist/pages/news/detail/index-pc.html)
+    //   /products/<model>/  → dynamic PDP (see loadRoute)
+    //
+    // SPA shell paths that use index.html (not index-pc.html) are
+    // handled by the getDevicePage() conversion below.
+    //
+    // NOTE: Only exceptions need listing here — everything else follows convention.
+    //
     routes: {
+      // Aliases / redirects
       "/": "/home/index.html",
       "/home/": "/home/index.html",
-      "/products/": "/products/index.html",
-      "/products/cutting/": "/products/cutting/index.html",
-      "/products/stirfry/": "/products/stirfry/index.html",
-      "/products/frying/": "/products/frying/index.html",
-      "/products/stewing/": "/products/stewing/index.html",
-      "/products/steaming/": "/products/steaming/index.html",
-      "/products/other/": "/products/other/index.html",
-      "/applications/": "/applications/index.html",
-      "/applications/chain-restaurant/": "/applications/chain-restaurant/index.html",
-      "/applications/central-kitchen/": "/applications/central-kitchen/index.html",
-      "/applications/small-restaurant/": "/applications/small-restaurant/index.html",
-      "/applications/canteen/": "/applications/canteen/index.html",
-      "/applications/menu-lab/": "/applications/menu-lab/index.html",
-      "/applications/cloud-kitchen/": "/applications/cloud-kitchen/index.html",
-      "/applications/food-factory/": "/applications/food-factory/index.html",
-      "/cases/": "/cases/index.html",
-      "/profit-calculator/": "/profit-calculator/index.html",
-      "/products/compare/": "/products/compare/index.html",
-      "/about/": "/about/index.html",
+      // Flat-file pattern (no directory, e.g. news/detail-pc.html)
       "/news/detail/": "/news/detail-pc.html",
-      
-      "/quote/": "/quote/index.html",
-      "/contact/": "/contact/index.html",
-      "/news/": "/news/index.html",
-      "/support/": "/support/index.html",
-      "/support/installation/": "/support/installation/index.html",
-      "/support/warranty/": "/support/warranty/index.html",
-      "/support/spare-parts/": "/support/spare-parts/index.html",
-      "/support/training/": "/support/training/index.html",
-      "/support/faq/": "/support/faq/index.html",
-      "/thank-you/": "/thank-you/index.html",
-      "/landing/": "/landing/index.html",
+      // Applications cases alias
       "/applications/cases/": "/cases/index.html",
     },
 
@@ -75,7 +73,8 @@
       } else {
         suffix = "index-pc.html";
       }
-      return basePath.replace("index.html", suffix);
+      // Handle both index.html and index-{device}.html patterns
+      return basePath.replace(/index-(?:pc|tablet|mobile)?\.html$/, suffix);
     },
 
     // 当前路由
@@ -141,6 +140,7 @@
       this._navVersion = (this._navVersion || 0) + 1;
       var navVersion = this._navVersion;
       console.log("[SK] navigate:", path, "→", normalizedPath, "navVersion:", navVersion);
+      console.warn('[DEBUG-SPA] navigate() called', { path: normalizedPath, navVersion, stack: new Error().stack.split('\n').slice(1, 4).join('\n') });
 
       history.pushState({ path: normalizedPath }, "", normalizedPath);
 
@@ -298,6 +298,7 @@
     // 注意：navigator.js 可能在 SpaRouter 之前加载并执行了 mount()，
     // 所以 `<navigator>` 占位符可能已经被替换成 `<header>` 了
     mountHeader: function (html) {
+      console.warn('[DEBUG-SPA] mountHeader() called', { headerMounted: this.headerMounted, existingHeader: !!document.querySelector('header'), hasNavigator: !!document.querySelector('navigator[data-component="navigator"]') });
       if (this.headerMounted) return;
 
       // 检查是否已经有 <header> 元素存在（由 navigator.js 的 mount() 创建）
@@ -419,17 +420,25 @@
       if (!pagePath && routePath.match(/^\/products\/[^/]+\/$/)) {
         var segment = routePath.replace(/^\/products\/|\/$/g, '');
         if (this.CATEGORY_SLUGS.indexOf(segment) >= 0) {
-          pagePath = '/products/index.html';
+          // Category page — convention: /products/<slug>/ → /products/<slug>/index-pc.html
+          pagePath = '/products/' + segment + '/index-pc.html';
         } else {
-          pagePath = '/products/detail/index.html';
+          // PDP — convention: /products/<model>/ → /products/detail/index-pc.html
+          pagePath = '/products/detail/index-pc.html';
         }
       }
 
+      // Convention: any path not in routes[] → /<path>/index-pc.html
+      // This mirrors server.js resolvePage() step 4.
       if (!pagePath) {
-        this.log("Unknown route:", routePath, "- redirecting to home");
-        this.navigate("/home/");
-        return;
+        var clean = routePath.replace(/\/+$/, '');
+        pagePath = clean + '/index-pc.html';
       }
+
+      // Never redirect — let the server return SPA shell if file doesn't exist.
+      // The server always returns *something* (SPA shell as catch-all),
+      // so we'll always get HTML back — worst case it's the SPA shell which
+      // product-detail.js or other page scripts will handle.
 
       // Use the device-specific HTML directly (index-pc/tablet/mobile.html)
       // instead of index.html (which is a redirect bounce)
@@ -448,6 +457,7 @@
       // 加载页面（不使用内存缓存，始终获取最新内容）
       fetch(devicePath)
         .then(function (response) {
+          console.warn('[DEBUG-SPA] loadRoute fetch response', { devicePath, status: response.status, ok: response.ok });
           if (!response.ok) throw new Error("HTTP " + response.status);
           return response.text();
         })
@@ -518,6 +528,7 @@
       this.hideSkeleton();
       console.log("[SK] renderContent: after hideSkeleton, container.display=", container.style.display);
       container.style.opacity = "0";
+      console.warn('[DEBUG-SPA] renderContent: replacing innerHTML', { pagePath, contentLength: content.length });
       container.innerHTML = content;
 
       // 动态加载页面专属脚本（SPA 移除了 script 标签，需手动补充）
@@ -645,8 +656,10 @@
         this.log("Dynamic route on init:", currentPath);
         this.loadRoute(currentPath);
       } else {
-        this.log("Unknown initial route:", currentPath, "- redirecting to home");
-        this.navigate("/home/");
+        // Standalone SSG page — don't load route (content already in DOM),
+        // just register click handler for future SPA navigation.
+        // The document-level click handler below handles this.
+        this.log("Standalone page (skip init load):", currentPath);
       }
 
       // 解析路径中的 hash 锚点（如 /support/#faq → path=/support/ hash=faq）
@@ -658,6 +671,7 @@
     // 拦截链接点击 - 只拦截已知路由的链接
       document.addEventListener("click", function (event) {
         var link = event.target.closest("a");
+        console.warn('[DEBUG-SPA] document click fired', { tagName: link?.tagName, href: link?.getAttribute?.('href'), text: link?.textContent?.trim()?.slice(0, 30) });
         if (!link) return;
 
         var href = link.getAttribute("href");
@@ -686,19 +700,16 @@
           targetPath = "/" + pagesMatch[1] + "/";
         }
 
-        // 只拦截已知路由的链接（含动态 /products/<slug>/ 路由），其他让浏览器默认处理
-        var isKnown = !!_self.routes[targetPath];
-        // Dynamic: /products/<slug>/ — category slug or PDP model
-        if (!isKnown) {
-          var dynMatch = targetPath.match(/^\/products\/([^/]+)\/$/);
-          if (dynMatch) isKnown = true;
-        }
-        if (!isKnown) {
-          _self.log("Skipping SPA for unknown route:", targetPath);
+        // Intercept all internal links — loadRoute handles unknown paths via
+        // convention (/<path>/index-pc.html). Only skip non-page paths.
+        var isPage = targetPath.match(/^\/[a-z0-9][a-z0-9._-]*(?:\/[a-z0-9][a-z0-9._-]*)*\/$/i);
+        if (!isPage) {
+          _self.log("Skipping SPA for non-page path:", targetPath);
           return;
         }
 
         // 阻止默认行为，使用 SPA 导航
+        console.warn('[DEBUG-SPA] click intercepted', { href, targetPath, link: link.tagName, linkText: link.textContent.trim().slice(0, 40), isDropdownLink: !!link.closest('.dropdown-panel, [class*="-dropdown-panel"]') });
         event.preventDefault();
         // 移除焦点，避免按钮/链接残留 active 样式
         if (document.activeElement) document.activeElement.blur();
@@ -715,6 +726,7 @@
       });
 
       this.log("Initialized successfully");
+      console.warn('[DEBUG-SPA] init() completed — click handler registered');
     },
 
     // 页面专属脚本映射（SPA 导航时按需加载）
@@ -722,7 +734,7 @@
       var scripts = [];
       var path = pagePath.replace(/\/index-(pc|mobile|tablet)\.html$/, "/");
 
-      // Profit calculator needs Chart.js + html2canvas + jsPDF + pi-roi.js
+      // Profit calculator needs Chart.js + html2canvas + jsPDF
       if (path.indexOf("/profit-calculator/") !== -1) {
         if (typeof window.Chart === "undefined") {
           scripts.push({ src: "/assets/js/vendor/chart.umd.min.js", id: "spa-chart-js" });
@@ -733,7 +745,6 @@
         if (typeof window.jspdf === "undefined" && typeof window.jsPDF === "undefined") {
           scripts.push({ src: "/assets/js/vendor/jspdf.umd.min.js", id: "spa-jspdf" });
         }
-        scripts.push({ src: "/assets/js/ui/pi-roi.js", id: "spa-pi-roi" });
         scripts.push({ src: "/assets/js/profit-calculator.js", id: "spa-profit-calculator" });
       }
 

@@ -21,8 +21,7 @@
  *
  *     JS modules in this file only (no runtime effect, kept for reference):
  *       common.js, utils.js, image-assets.js, media-queries.js,
- *       init.js, main.js, navigation.js, sidebar.js,
- *       product-list.js, product-data-table.js, products.js
+ *       init.js, main.js, product-list.js
  *
  * TODO: Remove JS imports below once webpack entry is converted to CSS-only.
  *       Track: https://github.com/leappower/HTML-YuQL/issues (F1 cleanup)
@@ -38,10 +37,10 @@ import './assets/js/init.js';            // Initialization
 import './assets/js/utils.js';           // window.AppUtils
 import './assets/js/main.js';            // Lazy loading, error handling, app modules
 import './assets/js/contacts.js';        // window contact helpers
-// navigation.js REMOVED: functions duplicated in floating-actions.js, slide-menu.js, page-interactions.js
-import './assets/js/sidebar.js';         // window sidebar helpers
+// navigation.js DELETED: functions duplicated in floating-actions.js, slide-menu.js, page-interactions.js
+// sidebar.js DELETED: unused — no page loads it
+// products.js DELETED: unused — product-grid.js handles rendering independently
 // import './assets/js/smart-popup.js';     // REMOVED: now in assets/js/ui/smart-popup.js, loaded directly by pages
 import './assets/js/product-list.js';    // window.ProductList
 // product-data-table.js is now loaded as an external script (not bundled)
 // so CMS publish can update it without rebuilding. See src/index.html.
-import './assets/js/products.js';        // window product rendering helpers

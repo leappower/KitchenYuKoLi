@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 
 <html class="light" lang="zh-CN">
   <head>
@@ -108,7 +109,6 @@
       data-cta-text-key="nav_get_quote"
       data-cta-href="/quote"
     ></navigator>
-
     <main id="spa-content">
     <div class="w-full pt-2">
         <!-- Hero Section -->
@@ -120,11 +120,13 @@
             <div class="absolute bottom-16 left-16 w-56 h-56 bg-primary/5 rounded-full blur-2xl"></div>
           </div>
           <div class="relative max-w-4xl mx-auto text-center">
-            <div
-              class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-primary/10 text-primary text-xs font-bold uppercase tracking-wider mb-4"
-            >
-              <span class="material-symbols-outlined text-sm">restaurant</span>
-              <span data-i18n="cutting_hero_badge">🔪 切配系列</span>
+                        <div class="flex items-center gap-2 flex-wrap">
+              <a href="/products/" class="text-sm text-slate-500 hover:text-primary transition-colors" data-i18n="nav_products">产品中心</a>
+              <span class="material-symbols-outlined text-sm text-slate-300">chevron_right</span>
+              <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-bold uppercase tracking-widest">
+                <span class="material-symbols-outlined text-xs leading-none">content_cut</span>
+                <span data-i18n="cutting_hero_badge">🔪 切配系列</span>
+              </span>
             </div>
             <h1
               class="text-4xl font-black leading-tight tracking-tight text-slate-900 dark:text-white mb-4"
@@ -191,7 +193,16 @@
           </div>
         </section>
 
-        <!-- CTA Section -->
+        
+  <!-- Cross-sell & Scene Entry Section -->
+  <section id="category-extras" class="w-full py-8 fullwidth-bg">
+    <div class="section-content">
+      <div id="cross-sell-container"></div>
+      <div id="scene-entry-container" class="mt-8"></div>
+    </div>
+  </section>
+
+<!-- CTA Section -->
         <section class="fullwidth-bg py-10">
           <div class="section-content">
             <div class="bg-gradient-to-br from-primary/10 to-primary/5 rounded-2xl p-8 text-center">
@@ -223,28 +234,26 @@
     </main>
 
     <script src="/assets/js/ui/dropdown-styles.js"></script>
-    <script defer src="/assets/js/ui/products-dropdown.js?v=20260322-v3"></script>
-    <script defer src="/assets/js/ui/applications-dropdown.js?v=20260322-v3"></script>
-    <script defer src="/assets/js/ui/support-dropdown.js?v=20260322-v3"></script>
-    <script defer src="/assets/js/ui/about-dropdown.js?v=20260322-v3"></script>
-    <script defer src="/assets/js/nav-config.js?v=20260415"></script>
+    <script defer src="/assets/js/ui/products-dropdown.js?v=20260508-v3"></script>
+    <script defer src="/assets/js/ui/applications-dropdown.js?v=20260508-v3"></script>
+    <script defer src="/assets/js/ui/support-dropdown.js?v=20260508-v3"></script>
+    <script defer src="/assets/js/ui/about-dropdown.js?v=20260508-v3"></script>
+    <script defer src="/assets/js/nav-config.js?v=20260508"></script>
     <script defer src="/assets/js/ui/mobile-bottom-bar.js"></script>
     <script defer src="/assets/js/ui/navigator.js?v=20260508"></script>
-<script defer src="/assets/js/ui/slide-menu.js?v=20260322-v3"></script>
+<script defer src="/assets/js/ui/slide-menu.js?v=20260508-v3"></script>
     <script defer src="/assets/js/ui/search-engine.js"></script>
-    <script defer src="/assets/js/ui/footer.js?v=20260507-v4"></script>
-    <script defer src="/assets/js/lang-registry.js?v=20260429"></script>
-    <script defer src="/assets/js/translations.js?v=20260429"></script>
-    <script defer src="/assets/js/translations-dropdown-template.js?v=20260429"></script>
+    <script defer src="/assets/js/ui/footer.js?v=20260508-v4"></script>
+    <script defer src="/assets/js/lang-registry.js?v=20260508"></script>
+    <script defer src="/assets/js/translations.js?v=20260508"></script>
+    <script defer src="/assets/js/translations-dropdown-template.js?v=20260508"></script>
     <script defer src="/assets/js/contacts.js"></script>
-    <script defer src="/assets/js/ui/smart-popup.js"></script>
     <script defer src="/assets/js/router.js"></script>
     <script defer src="/assets/js/ui/helpers.js"></script>
     <script defer src="/assets/js/ui/page-effects.js"></script>
     <script defer src="/assets/js/ui/form-interactions.js"></script>
     <script defer src="/assets/js/page-interactions.js"></script>
     <script defer src="/assets/js/product-grid.js?v=20260508"></script>
-    <script defer src="/assets/js/product-detail.js?v=20260508"></script>
 
     <script>
       // Category tabs are auto-generated and managed by product-grid.js initCategoryTabs()
@@ -277,7 +286,7 @@
     </style>
 
     <script src="/assets/js/utils/device-utils.js"></script>
-    <script src="/assets/js/spa-router.js"></script>
+    <script src="/assets/js/spa-router.js?v=20260508"></script>
     <script>
       document.addEventListener("DOMContentLoaded", function () {
         if (window.SpaRouter && typeof window.SpaRouter.init === "function") {
@@ -286,5 +295,6 @@
       });
     </script>
       <script defer src="/assets/js/ui/floating-actions.js"></script>
-  </body>
+  <script defer src="/assets/js/cross-sell.js?v=20260508"></script>
+</body>
 </html>

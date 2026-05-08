@@ -4,12 +4,10 @@
  *
  * Depends on (load before this file):
  *   contacts.js    → window.Contacts, window.startWhatsApp, window.startEmail, etc.
- *   smart-popup.js → window.showSmartPopupManual, window.closeSmartPopup, window.smartPopup
  *
  * Companion scripts (load before this file via <script defer>):
  *   ui/page-effects.js      → scroll animation, sticky CTA, toast, disclosure, page transition
  *   ui/form-interactions.js → form validation, submission, success state
- *   ui/pi-roi.js            → ROI Calculator (self-init on ROI pages only)
  *   ui/pi-maps.js           → Google Maps + IoT Support (self-init on support page only)
  */
 (function (global) {
@@ -21,7 +19,7 @@
     if (typeof global[fnName] === "function") {
       return global[fnName].apply(null, args || []);
     }
-    console.warn("[PageInteractions] " + fnName + " not found — make sure contacts.js / smart-popup.js is loaded.");
+    console.warn("[PageInteractions] " + fnName + " not found — make sure contacts.js is loaded.");
   };
   var directText = _h.directText || function (el) {
     var text = "";
@@ -49,31 +47,19 @@
     return matched.length;
   }
 
-  // ─── 1. Get a Quote / Request a Quote CTA ────────────────────────────────────
+  // ─── 1. Get a Quote CTA → navigate to /quote page ─────────────────────────
   function bindQuoteButtons() {
     bindByText("button", "get a quote", function (e) {
       e.preventDefault();
-      safeCall("showSmartPopupManual");
+      window.location.href = "/quote";
     });
     bindByText("button", "request a quote", function (e) {
       e.preventDefault();
-      safeCall("showSmartPopupManual");
+      window.location.href = "/quote";
     });
     bindByText("button", "get quote", function (e) {
       e.preventDefault();
-      safeCall("showSmartPopupManual");
-    });
-    bindByText("button", "speak with an expert", function (e) {
-      e.preventDefault();
-      safeCall("showSmartPopupManual");
-    });
-    bindByText("button", "request full audit data", function (e) {
-      e.preventDefault();
-      safeCall("showSmartPopupManual");
-    });
-    bindByText("button", "request a physical copy", function (e) {
-      e.preventDefault();
-      safeCall("showSmartPopupManual");
+      window.location.href = "/quote";
     });
   }
 
@@ -138,8 +124,6 @@
       var formSection = document.getElementById("download-form") || document.querySelector("form");
       if (formSection) {
         formSection.scrollIntoView({ behavior: "smooth", block: "start" });
-      } else {
-        safeCall("showSmartPopupManual");
       }
     });
 
@@ -195,19 +179,6 @@
     bindQuoteButtons();
     bindContactButtons();
     bindNavCTAs();
-
-    // Bind smart-popup close button (onclick was removed for CSP compliance)
-    var popupCloseBtn = document.getElementById("smart-popup-close");
-    if (popupCloseBtn) {
-      popupCloseBtn.addEventListener("click", function () {
-        safeCall("closeSmartPopup");
-      });
-    }
-
-    // Initialise smart-popup engagement tracking (auto-popup system)
-    if (window.smartPopup && typeof window.smartPopup.init === "function") {
-      window.smartPopup.init();
-    }
 
     // Update budget options after translations are applied
     document.addEventListener("spa:ready", function () {

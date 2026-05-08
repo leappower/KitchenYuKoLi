@@ -118,13 +118,12 @@
 <script defer src="/assets/js/ui/footer.js"></script>
 <script defer src="/assets/js/ui/floating-actions.js"></script>
 <script defer src="/assets/js/contacts.js"></script>
-<script defer src="/assets/js/ui/smart-popup.js"></script>
 <script defer src="/assets/js/product-grid.js?v=1776830049"></script>
-<script defer src="/assets/js/product-detail.js?v=20260422"></script>
+<script defer src="/assets/js/product-detail.js?v=20260508"></script>
 <script defer src="/assets/js/home-core-products.js?v=20260429"></script>
 <script defer src="/assets/js/quote-form.js?v=20260423"></script>
 <script defer src="/assets/js/ui/currency.js?v=20260430"></script>
-<script defer src="/assets/js/spa-router.js"></script>
+<script defer src="/assets/js/spa-router.js?v=20260508"></script>
 
 <!-- Product data: static initial data → API refresh with ETag → localStorage cache -->
 <script>
@@ -146,7 +145,7 @@
   // Use cached > initial (only if version matches)
   window.PRODUCT_DATA_TABLE = cached || initial;
   // Step 3: fetch latest from API (skip cache to always get fresh data after publish)
-  fetch('/api/cms/products-data?_t=' + Date.now())
+  fetch('/api/public/products-data?_t=' + Date.now())
     .then(function(r) {
       if (!r.ok) throw new Error('API ' + r.status);
       return r.json().then(function(data) {
@@ -169,25 +168,7 @@
 })();
 </script>
 
-<!-- Suppress DOM errors from injected third-party scripts (e.g. frame_start.js)
-     that try to removeChild a node already removed by SPA navigation or
-     component re-mounting. These errors are harmless but noisy in console. -->
-<script>
-  // Use window.onerror (direct assignment) for maximum priority —
-  // it catches errors BEFORE any other handler, including third-party scripts.
-  var _origOnerror = window.onerror;
-  window.onerror = function(msg, url, line, col, error) {
-    if (msg && /removeChild.*not a child of/i.test(msg)) {
-      console.debug('[DOM] Suppressed removeChild error from third-party script:', url);
-      return true; // prevent default console.error
-    }
-    if (typeof _origOnerror === 'function') {
-      return _origOnerror(msg, url, line, col, error);
-    }
-  };
-</script>
-
-<!-- Initialize SPA -->
+<!-- Scripts -->
 <script>
   (function() {
     // Wait for DOM to be ready
@@ -225,5 +206,6 @@
     }
   })();
 </script>
-</body>
+    <script defer src="/assets/js/breadcrumb.js?v=20260508"></script>
+  </body>
 </html>

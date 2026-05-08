@@ -76,16 +76,20 @@
       data-active="products"
       data-search="true"
     ></navigator>
-
-    <main id="spa-content">
+<!-- Breadcrumb -->
+<main id="spa-content">
     <div class="w-full">
 
       <!-- Page Header -->
       <section class="fullwidth-bg py-6">
         <div class="section-content">
-        <div class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-primary/10 text-primary text-[10px] font-bold uppercase tracking-wider mb-3">
-          <span class="material-symbols-outlined text-xs">compare</span>
-          <span>Product Compare</span>
+                <div class="flex items-center gap-2 mb-4">
+          <a href="/products/" class="text-xs text-slate-400 hover:text-primary transition-colors" data-i18n="nav_products">产品中心</a>
+          <span class="material-symbols-outlined text-xs text-slate-300">chevron_right</span>
+          <span class="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-bold uppercase tracking-wider">
+            <span class="material-symbols-outlined text-xs">compare</span>
+            <span>产品对比</span>
+          </span>
         </div>
         <h1 class="text-2xl font-black leading-tight text-slate-900 dark:text-white mb-1">
           产品对比
@@ -186,9 +190,9 @@
     </nav>
 
     <!-- Scripts -->
-    <script defer src="/assets/js/lang-registry.js?v=20260429"></script>
-    <script defer src="/assets/js/translations.js?v=20260429"></script>
-    <script defer src="/assets/js/translations-dropdown-template.js?v=20260429"></script>
+    <script defer src="/assets/js/lang-registry.js?v=20260508"></script>
+    <script defer src="/assets/js/translations.js?v=20260508"></script>
+    <script defer src="/assets/js/translations-dropdown-template.js?v=20260508"></script>
     <script defer src="/assets/js/contacts.js"></script>
     <script defer src="/assets/js/ui/helpers.js"></script>
     <script defer src="/assets/js/ui/page-effects.js"></script>
@@ -196,8 +200,8 @@
     <script defer src="/assets/js/page-interactions.js"></script>
     <script defer src="/assets/js/product-grid.js?v=20260508"></script>
     <script defer src="/assets/js/ui/search-engine.js"></script>
-    <script defer src="/assets/js/product-detail.js?v=20260506"></script>
-    <script defer src="/assets/js/compare.js?v=20260506"></script>
+    <script defer src="/assets/js/compare.js?v=20260508"></script>
     <script defer src="/assets/js/ui/floating-actions.js"></script>
-  </body>
+<script defer src="/assets/js/spa-router.js?v=20260508"></script>
+</body>
 </html>
