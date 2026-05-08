@@ -272,6 +272,23 @@ const SPA_ROUTES = ['/home', '/products', '/applications', '/cases', '/profit-ca
   // ROI legacy redirect
   '/roi'];
 
+// Dedicated pages that have their own index-pc.html (not SPA routes)
+var DEDICATED_PREFIXES = [
+  '/products/stirfry', '/products/cutting', '/products/frying',
+  '/products/stewing', '/products/steaming', '/products/other',
+  '/applications/small-restaurant', '/applications/central-kitchen',
+  '/applications/canteen', '/applications/chain-restaurant',
+  '/applications/cloud-kitchen', '/applications/food-factory',
+  '/applications/menu-lab',
+  '/support/faq', '/support/installation', '/support/warranty',
+  '/support/spare-parts', '/support/training',
+  '/news/detail'
+];
+
+function isDedicatedPage(cleanPath) {
+  return DEDICATED_PREFIXES.some(function(p) { return cleanPath === p || cleanPath.startsWith(p + '/'); });
+}
+
 app.get('*', (req, res) => {
   // Never intercept API routes
   if (req.path.startsWith('/api/')) return res.status(404).json({ error: 'Not found' });
@@ -294,46 +311,50 @@ app.get('*', (req, res) => {
   }
 
   // Check if path is a directory with a page index
-  // Priority: index.html > index-pc.html > SPA fallback
+  // Only for DEDICATED pages (categories, sub-pages) — NOT for SPA routes
   var indexPath = path.join(__dirname, 'dist', req.path, 'index.html');
   var pagesIndexPath = path.join(__dirname, 'dist', 'pages', req.path, 'index.html');
   var pagesPcPath = path.join(__dirname, 'dist', 'pages', req.path, 'index-pc.html');
 
-  if (fs.existsSync(indexPath) && fs.statSync(indexPath).isFile()) {
-    res.sendFile(indexPath);
-  } else if (fs.existsSync(pagesIndexPath) && fs.statSync(pagesIndexPath).isFile()) {
-    res.sendFile(pagesIndexPath);
-  } else if (fs.existsSync(pagesPcPath) && fs.statSync(pagesPcPath).isFile()) {
-    res.sendFile(pagesPcPath);
-  } else {
-    // No index.html or index-pc.html found — check for <path>-pc.html pattern
-    // e.g. /news/detail/ → dist/pages/news/detail-pc.html
-    var cleanPath = req.path.replace(/\/+$/, '');
+  // Determine if this is a dedicated page (has index-pc.html) or a SPA route
+  var cleanPath = req.path.replace(/\/+$/, '') || '/';
+  var isSpaRoute = (SPA_ROUTES.includes(cleanPath) && !isDedicatedPage(cleanPath)) ||
+    SPA_ROUTES.some(function(route) { return cleanPath.startsWith(route + '/') && !isDedicatedPage(cleanPath); });
+
+  if (!isSpaRoute) {
+    // Dedicated page — serve directory index
+    if (fs.existsSync(indexPath) && fs.statSync(indexPath).isFile()) {
+      return res.sendFile(indexPath);
+    }
+    if (fs.existsSync(pagesIndexPath) && fs.statSync(pagesIndexPath).isFile()) {
+      return res.sendFile(pagesIndexPath);
+    }
+    if (fs.existsSync(pagesPcPath) && fs.statSync(pagesPcPath).isFile()) {
+      return res.sendFile(pagesPcPath);
+    }
+    // Check for <path>-pc.html pattern (e.g. /news/detail/ → detail-pc.html)
     var pcFile = path.join(__dirname, 'dist', 'pages', cleanPath + '-pc.html');
     var pcFileRoot = path.join(__dirname, 'dist', cleanPath + '-pc.html');
     if (fs.existsSync(pcFile) && fs.statSync(pcFile).isFile()) {
-      res.sendFile(pcFile);
-    } else if (fs.existsSync(pcFileRoot) && fs.statSync(pcFileRoot).isFile()) {
-      res.sendFile(pcFileRoot);
-    } else {
-      // SPA fallback — only if no dedicated page exists
-      var isSpaRoute = SPA_ROUTES.includes(cleanPath) ||
-        SPA_ROUTES.some(function(route) { return cleanPath.startsWith(route + '/'); });
-      if (isSpaRoute) {
-        return res.sendFile(path.join(__dirname, 'dist', 'index.html'));
-      }
-      if (process.env.NODE_ENV !== 'production') {
-        var srcPath = path.join(__dirname, 'src', req.path);
-        if (fs.existsSync(srcPath) && fs.statSync(srcPath).isFile()) {
-          res.sendFile(srcPath);
-        } else {
-          res.sendFile(path.join(__dirname, 'dist', 'index.html'));
-        }
-      } else {
-        res.sendFile(path.join(__dirname, 'dist', 'index.html'));
-      }
+      return res.sendFile(pcFile);
+    }
+    if (fs.existsSync(pcFileRoot) && fs.statSync(pcFileRoot).isFile()) {
+      return res.sendFile(pcFileRoot);
     }
   }
+
+  // SPA fallback
+  if (isSpaRoute) {
+    return res.sendFile(path.join(__dirname, 'dist', 'index.html'));
+  }
+
+  if (process.env.NODE_ENV !== 'production') {
+    var srcPath = path.join(__dirname, 'src', req.path);
+    if (fs.existsSync(srcPath) && fs.statSync(srcPath).isFile()) {
+      return res.sendFile(srcPath);
+    }
+  }
+  return res.sendFile(path.join(__dirname, 'dist', 'index.html'));
 });
 
 // Global error handling middleware
