@@ -293,26 +293,28 @@ app.get('*', (req, res) => {
     return res.sendFile(pagesFilePath);
   }
 
-  // Check if the path matches a known SPA route (with or without trailing slash)
-  // Also match sub-paths like /products/炒菜机/ → matches /products
-  var cleanPath = req.path.replace(/\/+$/, '') || '/';
-  var isSpaRoute = SPA_ROUTES.includes(cleanPath) ||
-    SPA_ROUTES.some(function(route) { return cleanPath.startsWith(route + '/'); });
-  if (isSpaRoute) {
-    return res.sendFile(path.join(__dirname, 'dist', 'index.html'));
-  }
-
-  // Check if path is a directory with index.html (e.g. /some/route/)
+  // Check if path is a directory with a page index
+  // Priority: index.html > index-pc.html > SPA fallback
   var indexPath = path.join(__dirname, 'dist', req.path, 'index.html');
+  var pagesIndexPath = path.join(__dirname, 'dist', 'pages', req.path, 'index.html');
+  var pagesPcPath = path.join(__dirname, 'dist', 'pages', req.path, 'index-pc.html');
+
   if (fs.existsSync(indexPath) && fs.statSync(indexPath).isFile()) {
     res.sendFile(indexPath);
+  } else if (fs.existsSync(pagesIndexPath) && fs.statSync(pagesIndexPath).isFile()) {
+    res.sendFile(pagesIndexPath);
+  } else if (fs.existsSync(pagesPcPath) && fs.statSync(pagesPcPath).isFile()) {
+    res.sendFile(pagesPcPath);
   } else {
-    // Also try dist/pages/ for directory index.html
-    var pagesIndexPath = path.join(__dirname, 'dist', 'pages', req.path, 'index.html');
-    if (fs.existsSync(pagesIndexPath) && fs.statSync(pagesIndexPath).isFile()) {
-      res.sendFile(pagesIndexPath);
-    } else if (process.env.NODE_ENV !== 'production') {
-      // Dev fallback: serve from src/ for files not yet built (e.g. lang JSON, images)
+    // SPA fallback — only if no dedicated page exists
+    var cleanPath = req.path.replace(/\/+$/, '') || '/';
+    var isSpaRoute = SPA_ROUTES.includes(cleanPath) ||
+      SPA_ROUTES.some(function(route) { return cleanPath.startsWith(route + '/'); });
+    if (isSpaRoute) {
+      return res.sendFile(path.join(__dirname, 'dist', 'index.html'));
+    }
+
+    if (process.env.NODE_ENV !== 'production') {
       var srcPath = path.join(__dirname, 'src', req.path);
       if (fs.existsSync(srcPath) && fs.statSync(srcPath).isFile()) {
         res.sendFile(srcPath);
@@ -320,7 +322,6 @@ app.get('*', (req, res) => {
         res.sendFile(path.join(__dirname, 'dist', 'index.html'));
       }
     } else {
-      // For unknown routes, serve root SPA shell (SPA router will show 404 if needed)
       res.sendFile(path.join(__dirname, 'dist', 'index.html'));
     }
   }
