@@ -1,3 +1,17 @@
+/* ─── Suppress third-party DOM errors (frame_start.js etc.) ─────────────
+ * Must run early — before any deferred scripts fire their callbacks.
+ * Uses capture-phase listener to catch async errors that window.onerror misses. */
+(function() {
+  window.onerror = function(msg) {
+    if (msg && /removeChild.*not a child of/i.test(msg)) return true;
+  };
+  document.addEventListener('error', function(e) {
+    if (e.message && /removeChild.*not a child of/i.test(e.message)) {
+      e.preventDefault(); e.stopPropagation();
+    }
+  }, true);
+})();
+
 /**
  * spa-router.js - 混合 SPA + SSG 路由器
  *
