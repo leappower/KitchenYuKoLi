@@ -792,7 +792,10 @@
     getCompareItems: getCompareItems,
     saveCompareItems: saveCompareItems,
     clearCompareItems: clearCompareItems,
-    removeCompareItem: removeCompareItem
+    removeCompareItem: removeCompareItem,
+    autoRender: autoRender,
+    setCategory: function(catKey) { _activeCategory = catKey; },
+    setActiveTier: function(tier) { _activeTier = tier; }
   };
 })();
 
