@@ -147,18 +147,6 @@
     <link rel="icon" href="/assets/images/logo_header.webp" type="image/webp" />
 
     <script>
-      window.addEventListener('DOMContentLoaded',function(){
-        setTimeout(function(){
-          var m=document.getElementById('spa-content');
-          if(!m)return;
-          var s=getComputedStyle(m);
-          var ok=s.maxWidth==='none'||parseInt(s.maxWidth)>=1920;
-          console.log('%c['+location.pathname.replace(/\/
-,'')+'] main: max-w='+s.maxWidth+' px='+s.paddingLeft+'/'+s.paddingRight+' w='+m.offsetWidth,ok?'color:green':'color:orange;font-weight:bold');
-          if(!ok)console.warn('Expected max-width: 1920px, got:',s.maxWidth);
-        },200);
-      });
-    </script>
 
     <!-- SEO JSON-LD: Organization + WebSite -->
     <script type="application/ld+json">
@@ -596,7 +584,7 @@
     </script>
 
     <script src="/assets/js/utils/device-utils.js"></script>
-    <script src="/assets/js/spa-router.js"></script>
+    <script src="/assets/js/spa-router.js?v=20260508"></script>
     <script>
       document.addEventListener("DOMContentLoaded", function () {
         if (window.SpaRouter && typeof window.SpaRouter.init === "function") {
