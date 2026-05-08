@@ -45,7 +45,7 @@
   /**
    * i18n 翻译辅助函数（权威实现）。
    * 调用 window.t(key) 获取翻译，若未翻译或 t() 不存在则返回 fallback。
-   * products.js 和 smart-popup.js 的同名函数可删除，改调 CommonUtils.tr。
+   * smart-popup.js 的同名函数可删除，改调 CommonUtils.tr。
    */
   function tr(key, fallback) {
     var value = typeof window.t === "function" ? window.t(key) : key;

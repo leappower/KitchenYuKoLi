@@ -140,6 +140,7 @@
       this._navVersion = (this._navVersion || 0) + 1;
       var navVersion = this._navVersion;
       console.log("[SK] navigate:", path, "→", normalizedPath, "navVersion:", navVersion);
+      console.warn('[DEBUG-SPA] navigate() called', { path: normalizedPath, navVersion, stack: new Error().stack.split('\n').slice(1, 4).join('\n') });
 
       history.pushState({ path: normalizedPath }, "", normalizedPath);
 
@@ -297,6 +298,7 @@
     // 注意：navigator.js 可能在 SpaRouter 之前加载并执行了 mount()，
     // 所以 `<navigator>` 占位符可能已经被替换成 `<header>` 了
     mountHeader: function (html) {
+      console.warn('[DEBUG-SPA] mountHeader() called', { headerMounted: this.headerMounted, existingHeader: !!document.querySelector('header'), hasNavigator: !!document.querySelector('navigator[data-component="navigator"]') });
       if (this.headerMounted) return;
 
       // 检查是否已经有 <header> 元素存在（由 navigator.js 的 mount() 创建）
@@ -455,6 +457,7 @@
       // 加载页面（不使用内存缓存，始终获取最新内容）
       fetch(devicePath)
         .then(function (response) {
+          console.warn('[DEBUG-SPA] loadRoute fetch response', { devicePath, status: response.status, ok: response.ok });
           if (!response.ok) throw new Error("HTTP " + response.status);
           return response.text();
         })
@@ -525,6 +528,7 @@
       this.hideSkeleton();
       console.log("[SK] renderContent: after hideSkeleton, container.display=", container.style.display);
       container.style.opacity = "0";
+      console.warn('[DEBUG-SPA] renderContent: replacing innerHTML', { pagePath, contentLength: content.length });
       container.innerHTML = content;
 
       // 动态加载页面专属脚本（SPA 移除了 script 标签，需手动补充）
@@ -667,6 +671,7 @@
     // 拦截链接点击 - 只拦截已知路由的链接
       document.addEventListener("click", function (event) {
         var link = event.target.closest("a");
+        console.warn('[DEBUG-SPA] document click fired', { tagName: link?.tagName, href: link?.getAttribute?.('href'), text: link?.textContent?.trim()?.slice(0, 30) });
         if (!link) return;
 
         var href = link.getAttribute("href");
@@ -704,6 +709,7 @@
         }
 
         // 阻止默认行为，使用 SPA 导航
+        console.warn('[DEBUG-SPA] click intercepted', { href, targetPath, link: link.tagName, linkText: link.textContent.trim().slice(0, 40), isDropdownLink: !!link.closest('.dropdown-panel, [class*="-dropdown-panel"]') });
         event.preventDefault();
         // 移除焦点，避免按钮/链接残留 active 样式
         if (document.activeElement) document.activeElement.blur();
@@ -720,6 +726,7 @@
       });
 
       this.log("Initialized successfully");
+      console.warn('[DEBUG-SPA] init() completed — click handler registered');
     },
 
     // 页面专属脚本映射（SPA 导航时按需加载）
@@ -727,7 +734,7 @@
       var scripts = [];
       var path = pagePath.replace(/\/index-(pc|mobile|tablet)\.html$/, "/");
 
-      // Profit calculator needs Chart.js + html2canvas + jsPDF + pi-roi.js
+      // Profit calculator needs Chart.js + html2canvas + jsPDF
       if (path.indexOf("/profit-calculator/") !== -1) {
         if (typeof window.Chart === "undefined") {
           scripts.push({ src: "/assets/js/vendor/chart.umd.min.js", id: "spa-chart-js" });
@@ -738,7 +745,6 @@
         if (typeof window.jspdf === "undefined" && typeof window.jsPDF === "undefined") {
           scripts.push({ src: "/assets/js/vendor/jspdf.umd.min.js", id: "spa-jspdf" });
         }
-        scripts.push({ src: "/assets/js/ui/pi-roi.js", id: "spa-pi-roi" });
         scripts.push({ src: "/assets/js/profit-calculator.js", id: "spa-profit-calculator" });
       }
 

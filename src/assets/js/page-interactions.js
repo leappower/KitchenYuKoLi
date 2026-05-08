@@ -8,7 +8,6 @@
  * Companion scripts (load before this file via <script defer>):
  *   ui/page-effects.js      → scroll animation, sticky CTA, toast, disclosure, page transition
  *   ui/form-interactions.js → form validation, submission, success state
- *   ui/pi-roi.js            → ROI Calculator (self-init on ROI pages only)
  *   ui/pi-maps.js           → Google Maps + IoT Support (self-init on support page only)
  */
 (function (global) {
