@@ -16,42 +16,26 @@
   "use strict";
 
   var SpaRouter = {
-    // 路由定义（SEO 友好目录 URL）
+    //
+    // Route resolution: convention over configuration.
+    // No hardcoded route table — the server's file-system resolver is
+    // the single source of truth.  The SPA router mirrors the same logic:
+    //   /foo/          → fetch /foo/index-pc.html   (server resolves to dist/pages/foo/index-pc.html)
+    //   /news/detail/  → fetch /news/detail/index-pc.html  (server resolves to dist/pages/news/detail/index-pc.html)
+    //   /products/<model>/  → dynamic PDP (see loadRoute)
+    //
+    // SPA shell paths that use index.html (not index-pc.html) are
+    // handled by the getDevicePage() conversion below.
+    //
+    // NOTE: Only exceptions need listing here — everything else follows convention.
+    //
     routes: {
+      // Aliases / redirects
       "/": "/home/index.html",
       "/home/": "/home/index.html",
-      "/products/": "/products/index.html",
-      "/products/cutting/": "/products/cutting/index-pc.html",
-      "/products/stirfry/": "/products/stirfry/index-pc.html",
-      "/products/frying/": "/products/frying/index-pc.html",
-      "/products/stewing/": "/products/stewing/index-pc.html",
-      "/products/steaming/": "/products/steaming/index-pc.html",
-      "/products/other/": "/products/other/index-pc.html",
-      "/applications/": "/applications/index.html",
-      "/applications/chain-restaurant/": "/applications/chain-restaurant/index.html",
-      "/applications/central-kitchen/": "/applications/central-kitchen/index.html",
-      "/applications/small-restaurant/": "/applications/small-restaurant/index.html",
-      "/applications/canteen/": "/applications/canteen/index.html",
-      "/applications/menu-lab/": "/applications/menu-lab/index.html",
-      "/applications/cloud-kitchen/": "/applications/cloud-kitchen/index.html",
-      "/applications/food-factory/": "/applications/food-factory/index.html",
-      "/cases/": "/cases/index.html",
-      "/profit-calculator/": "/profit-calculator/index.html",
-      "/products/compare/": "/products/compare/index.html",
-      "/about/": "/about/index.html",
+      // Flat-file pattern (no directory, e.g. news/detail-pc.html)
       "/news/detail/": "/news/detail-pc.html",
-      
-      "/quote/": "/quote/index.html",
-      "/contact/": "/contact/index.html",
-      "/news/": "/news/index.html",
-      "/support/": "/support/index.html",
-      "/support/installation/": "/support/installation/index.html",
-      "/support/warranty/": "/support/warranty/index.html",
-      "/support/spare-parts/": "/support/spare-parts/index.html",
-      "/support/training/": "/support/training/index.html",
-      "/support/faq/": "/support/faq/index.html",
-      "/thank-you/": "/thank-you/index.html",
-      "/landing/": "/landing/index.html",
+      // Applications cases alias
       "/applications/cases/": "/cases/index.html",
     },
 
@@ -420,17 +404,25 @@
       if (!pagePath && routePath.match(/^\/products\/[^/]+\/$/)) {
         var segment = routePath.replace(/^\/products\/|\/$/g, '');
         if (this.CATEGORY_SLUGS.indexOf(segment) >= 0) {
-          pagePath = '/products/index-pc.html';
+          // Category page — convention: /products/<slug>/ → /products/<slug>/index-pc.html
+          pagePath = '/products/' + segment + '/index-pc.html';
         } else {
+          // PDP — convention: /products/<model>/ → /products/detail/index-pc.html
           pagePath = '/products/detail/index-pc.html';
         }
       }
 
+      // Convention: any path not in routes[] → /<path>/index-pc.html
+      // This mirrors server.js resolvePage() step 4.
       if (!pagePath) {
-        this.log("Unknown route:", routePath, "- redirecting to home");
-        this.navigate("/home/");
-        return;
+        var clean = routePath.replace(/\/+$/, '');
+        pagePath = clean + '/index-pc.html';
       }
+
+      // Never redirect — let the server return SPA shell if file doesn't exist.
+      // The server always returns *something* (SPA shell as catch-all),
+      // so we'll always get HTML back — worst case it's the SPA shell which
+      // product-detail.js or other page scripts will handle.
 
       // Use the device-specific HTML directly (index-pc/tablet/mobile.html)
       // instead of index.html (which is a redirect bounce)
