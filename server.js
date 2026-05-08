@@ -39,8 +39,14 @@ const app = express();
 const apiProxy = createProxyMiddleware({
   target: API_SERVER,
   changeOrigin: true,
-  pathFilter: ['/api/cms/**', '/api/translations/**', '/api/nav-config/**', '/admin/**'],
-  pathRewrite: { '^/api/translations': '/api/cms/translations' },
+  pathFilter: ['/api/cms/**', '/api/public/**', '/api/translations/**', '/api/nav-config/**', '/admin/**'],
+  pathRewrite: {
+    '^/api/translations': '/api/cms/translations',
+    '^/api/public/categories/config': '/api/cms/categories/config',
+    '^/api/public/translations': '/api/cms/translations',
+    '^/api/public/products-data': '/api/cms/products-data',
+    '^/api/public/nav-config': '/api/cms/nav-config',
+  },
   logLevel: process.env.NODE_ENV !== 'production' ? 'warn' : 'silent',
   onError: (err, req, res) => {
     console.error('[proxy] error:', err.message, req.path);

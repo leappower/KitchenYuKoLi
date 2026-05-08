@@ -5,14 +5,14 @@
  * 1. Embedded: window.HOME_CORE_PRODUCTS from product-data-table.js (no network)
  * 2. sessionStorage: latest fetched data for this session
  * 3. localStorage: cross-session cache with version check
- * 4. Network: fetch /api/cms/products-data with ETag validation
+ * 4. Network: fetch /api/public/products-data with ETag validation
  */
 (function() {
   'use strict';
 
   var CACHE_KEY = 'home_core_products';
   var CACHE_VERSION_KEY = 'home_core_products_version';
-  var API_URL = '/api/cms/products-data';
+  var API_URL = '/api/public/products-data';
   var CACHE_TTL = 5 * 60 * 1000; // 5 minutes
 
   /**

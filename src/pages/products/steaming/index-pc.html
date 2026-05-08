@@ -109,19 +109,6 @@ if(localStorage.getItem('darkMode')==='true')document.documentElement.classList.
 <link rel="stylesheet" href="/assets/css/skeleton.css"/>
 <link rel="icon" href="/assets/images/logo_header.webp" type="image/webp">
 
-<script>
-window.addEventListener('DOMContentLoaded',function(){
-  setTimeout(function(){
-    var m=document.getElementById('spa-content');
-    if(!m)return;
-    var s=getComputedStyle(m);
-    var ok=s.maxWidth==='none'||parseInt(s.maxWidth)>=1920;
-    console.log('%c['+location.pathname.replace(/\/
-,'')+'] main: max-w='+s.maxWidth+' px='+s.paddingLeft+'/'+s.paddingRight+' w='+m.offsetWidth,ok?'color:green':'color:orange;font-weight:bold');
-    if(!ok)console.warn('Expected max-width: 1920px, got:',s.maxWidth);
-  },200);
-});
-</script>
 
 <!-- SEO JSON-LD: CollectionPage -->
 <script type="application/ld+json">
@@ -319,13 +306,6 @@ window.addEventListener('DOMContentLoaded',function(){
 
 <script src="/assets/js/utils/device-utils.js"></script>
 <script src="/assets/js/spa-router.js"></script>
-<script>
-  document.addEventListener('DOMContentLoaded', function() {
-    if (window.SpaRouter && typeof window.SpaRouter.init === 'function') {
-      window.SpaRouter.init();
-    }
-  });
-</script>
     <script defer src="/assets/js/ui/floating-actions.js"></script>
       <script defer src="/assets/js/breadcrumb.js?v=20260508"></script>
   </body></html>

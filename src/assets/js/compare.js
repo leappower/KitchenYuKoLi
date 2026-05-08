@@ -102,7 +102,7 @@
   function fetchProductData() {
     if (_dataFetched) return Promise.resolve(window[STORE_KEY] || []);
     _dataFetched = true;
-    return fetch('/api/cms/products-data', { cache: 'no-store' })
+    return fetch('/api/public/products-data', { cache: 'no-store' })
       .then(function(r) {
         if (!r.ok) throw new Error('API ' + r.status);
         return r.json();

@@ -252,7 +252,7 @@
     if (_dataLoaded) { callback(); return; }
     _dataCallbacks.push(callback);
     if (_dataCallbacks.length > 1) return; // already fetching
-    fetch('/api/cms/products-data', { cache: 'no-store' })
+    fetch('/api/public/products-data', { cache: 'no-store' })
       .then(function(r) { return r.json(); })
       .then(function(data) {
         window[STORE_KEY] = data;
