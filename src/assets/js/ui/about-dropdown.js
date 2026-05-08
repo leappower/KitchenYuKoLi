@@ -12,7 +12,7 @@
 
   var DEFAULT_ITEMS = [
     { key: "nav_about_profile", icon: "apartment", href: "/about/#profile" },
-    { key: "nav_about_factory", icon: "factory", href: "/about/factory/" },
+    { key: "nav_about_factory", icon: "factory", href: "/about/#factory" },
     { key: "nav_about_cert", icon: "verified", href: "/about/#cert" },
   ];
 
