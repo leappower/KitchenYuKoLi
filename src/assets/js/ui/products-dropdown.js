@@ -165,21 +165,35 @@
 
   /* ───────────────────────── INTERACTION ───────────────────────── */
 
+  var _dropdownClickBound = false;
+
   function initDropdownClick() {
+    if (_dropdownClickBound) return;
+    _dropdownClickBound = true;
+
     document.addEventListener("click", function () {
       document.querySelectorAll(".prod-dropdown-wrap.is-open").forEach(function (d) {
         d.classList.remove("is-open");
       });
     });
 
-    document.querySelectorAll(".prod-dropdown-trigger").forEach(function (t) {
-      t.addEventListener("click", function (e) {
-        if (window.innerWidth <= 720) return;
-        e.preventDefault();
-        e.stopPropagation();
-        t.closest(".prod-dropdown-wrap").classList.toggle("is-open");
+    function bindTriggers() {
+      document.querySelectorAll(".prod-dropdown-trigger").forEach(function (t) {
+        if (t._prodDropdownBound) return;
+        t._prodDropdownBound = true;
+        t.addEventListener("click", function (e) {
+          if (window.innerWidth <= 720) return;
+          e.preventDefault();
+          e.stopPropagation();
+          t.closest(".prod-dropdown-wrap").classList.toggle("is-open");
+        });
       });
-    });
+    }
+
+    bindTriggers();
+
+    /* After SPA navigation or remount, new trigger elements may appear */
+    document.addEventListener("spa:load", bindTriggers);
   }
 
   /* ───────────────────────── MOBILE POPUP ───────────────────────── */

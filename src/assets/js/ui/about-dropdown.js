@@ -94,20 +94,34 @@
 
   /* ───────────────────────── INTERACTION ───────────────────────── */
 
+  var _dropdownClickBound = false;
+
   function initDropdownClick() {
+    if (_dropdownClickBound) return;
+    _dropdownClickBound = true;
+
     document.addEventListener("click", function () {
       document.querySelectorAll(".abt-dropdown-wrap.is-open").forEach(function (d) {
         d.classList.remove("is-open");
       });
     });
-    document.querySelectorAll(".abt-dropdown-trigger").forEach(function (t) {
-      t.addEventListener("click", function (e) {
-        if (window.innerWidth <= 720) return;
-        e.preventDefault();
-        e.stopPropagation();
-        t.closest(".abt-dropdown-wrap").classList.toggle("is-open");
+
+    function bindTriggers() {
+      document.querySelectorAll(".abt-dropdown-trigger").forEach(function (t) {
+        if (t._abtDropdownBound) return;
+        t._abtDropdownBound = true;
+        t.addEventListener("click", function (e) {
+          if (window.innerWidth <= 720) return;
+          e.preventDefault();
+          e.stopPropagation();
+          t.closest(".abt-dropdown-wrap").classList.toggle("is-open");
+        });
       });
-    });
+    }
+
+    bindTriggers();
+    document.addEventListener("spa:load", bindTriggers);
+
     // SPA navigation for dropdown sub-items (prevent full page refresh)
     document.querySelectorAll(".abt-dropdown-item").forEach(function (item) {
       if (item._abtNavBound) return;

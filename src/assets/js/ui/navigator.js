@@ -1207,11 +1207,9 @@
       closeOtherDropdowns(clickedWrap || null);
     }, true);
 
-    /* Init each dropdown module's click handler */
-    if (window.ProductsDropdown) window.ProductsDropdown.initDropdownClick();
-    if (window.ApplicationsDropdown) window.ApplicationsDropdown.initDropdownClick();
-    if (window.SupportDropdown) window.SupportDropdown.initDropdownClick();
-    if (window.AboutDropdown) window.AboutDropdown.initDropdownClick();
+    /* Dropdown click handlers are initialized in mountNavigator() after
+     * trigger elements exist in the DOM. Each dropdown module has its own
+     * _dropdownClickBound guard to prevent duplicate listeners. */
 
     initTabletSearchToggle();
   }
@@ -1261,6 +1259,13 @@
     reinitTranslationManager();
     initSlideMenu();
     initLangSwitcher();
+
+    /* Re-bind dropdown click handlers after mount — trigger elements
+     * may not have existed when registerListeners() first called initDropdownClick() */
+    if (window.ProductsDropdown) window.ProductsDropdown.initDropdownClick();
+    if (window.ApplicationsDropdown) window.ApplicationsDropdown.initDropdownClick();
+    if (window.SupportDropdown) window.SupportDropdown.initDropdownClick();
+    if (window.AboutDropdown) window.AboutDropdown.initDropdownClick();
   }
 
   /* ================================================================
