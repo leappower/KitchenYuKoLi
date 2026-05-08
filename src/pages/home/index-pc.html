@@ -198,7 +198,7 @@
     ></navigator>
     <main id="spa-content">
       <!-- Hero Section: 50% Focus on Hardware -->
-      <section class="fullwidth-bg section-passthrough w-full flex flex-col lg:flex-row items-center -mt-[var(--nav-height,109px)] pt-10 pb-10 gap-12 bg-white dark:bg-slate-950">
+      <section id="debug-hero" class="fullwidth-bg section-passthrough w-full flex flex-col lg:flex-row items-center -mt-[var(--nav-height,109px)] pt-10 pb-10 gap-12 bg-white dark:bg-slate-950">
         <div class="section-content">
           <div class="w-full lg:w-1/2 space-y-8">
             <div
@@ -289,7 +289,7 @@
         </div>
       </section>
       <!-- Product Matrix -->
-      <section class="pt-16 pb-12 bg-slate-100 dark:bg-slate-900/50 fullwidth-bg">
+      <section id="debug-products" class="pt-16 pb-12 bg-slate-100 dark:bg-slate-900/50 fullwidth-bg">
         <div class="section-content">
 
           <div class="w-full">
@@ -584,5 +584,39 @@
     <script src="/assets/js/utils/device-utils.js"></script>
     <script src="/assets/js/spa-router.js?v=20260508"></script>
       <script defer src="/assets/js/ui/floating-actions.js"></script>
+  <script>
+  /* DEBUG: section gap diagnostics */
+  requestAnimationFrame(function() {
+    var hero = document.getElementById('debug-hero');
+    var prod = document.getElementById('debug-products');
+    if (!hero || !prod) { console.warn('[DEBUG-SECTION] elements not found'); return; }
+    var hr = hero.getBoundingClientRect();
+    var pr = prod.getBoundingClientRect();
+    var hcs = getComputedStyle(hero);
+    var pcs = getComputedStyle(prod);
+    console.table({
+      'hero bottom': hr.bottom,
+      'hero pb-10 (computed)': hcs.paddingBottom,
+      'hero marginBottom': hcs.marginBottom,
+      'products top': pr.top,
+      'products pt-16 (computed)': pcs.paddingTop,
+      'products marginTop': pcs.marginTop,
+      'gap (bottom-top)': hr.bottom - pr.top,
+      'hero bg': hcs.backgroundColor,
+      'products bg': pcs.backgroundColor
+    });
+    /* Also check section-content children */
+    var hsc = hero.querySelector('.section-content');
+    var psc = prod.querySelector('.section-content');
+    if (hsc) {
+      var hs = getComputedStyle(hsc);
+      console.table({ 'hero section-content': { marginBottom: hs.marginBottom, paddingBottom: hs.paddingBottom } });
+    }
+    if (psc) {
+      var ps = getComputedStyle(psc);
+      console.table({ 'products section-content': { marginTop: ps.marginTop, paddingTop: ps.paddingTop } });
+    }
+  });
+  </script>
   </body>
 </html>

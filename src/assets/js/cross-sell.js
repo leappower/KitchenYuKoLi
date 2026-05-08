@@ -1,16 +1,16 @@
 /**
  * cross-sell.js — Cross-sell recommendations & scene entry links
- * 
- * Renders on product category pages only:
- *   - "买了 X 的客户还配了" cross-sell cards
- *   - "适用场景解决方案" scene entry links
- * 
- * Also populates PDP category navigation (#product-category-nav)
- * 
- * Usage: Include this script on product category and detail pages.
- *        Requires <div id="cross-sell-container"></div> and
- *              <div id="scene-entry-container"></div> in HTML (category pages),
- *              <div id="product-category-nav"></div> (PDP pages).
+ *
+ * Renders on product category pages:
+ *   - "搭配推荐" cross-sell cards (3-4 per category)
+ *   - "适用场景" scene entry links (3 per category, with descriptions)
+ *
+ * Also populates PDP category navigation (#product-category-nav).
+ *
+ * Responsive layout:
+ *   PC (≥1280px): 4 cols cross-sell, 3 cols scene
+ *   Tablet (768-1279px): 2-3 cols
+ *   Mobile (<768px): horizontal scroll or stacked cards
  */
 ;(function() {
   'use strict';
@@ -39,61 +39,93 @@
     CATEGORY_KEY_TO_SLUG[PRODUCT_SLUGS[slug].key] = slug;
   });
 
-  // ─── Cross-sell map ───────────────────────────────────────────
+  // ─── Cross-sell: 3-4 items per category with rich copy ────────
 
   var CROSS_SELL_MAP = {
-    'stirfry':  [
-      { slug: 'cutting',  reason: '备料+翻炒一条龙', emoji: '🔪' },
-      { slug: 'steaming', reason: '蒸炒搭配出餐更快', emoji: '⬆️' },
-      { slug: 'other',    reason: '后厨动线完整配置', emoji: '⚙️' }
+    'stirfry': [
+      { slug: 'cutting',  reason: '切配后直接翻炒，备料到出餐无缝衔接', highlight: '效率 +200%' },
+      { slug: 'steaming', reason: '蒸饭蒸菜同步进行，午高峰不排队',     highlight: '出餐 -40min' },
+      { slug: 'other',    reason: '洗碗机+保温台，后厨动线一次到位',     highlight: '人手 -3人' },
+      { slug: 'stewing',  reason: '炖汤+炒菜双线出餐，菜品更丰富',      highlight: '菜品 +30%' }
     ],
-    'cutting':  [
-      { slug: 'stirfry',  reason: '切配+烹饪全程自动化', emoji: '🔥' },
-      { slug: 'steaming', reason: '前处理+蒸煮一体化', emoji: '⬆️' }
+    'cutting': [
+      { slug: 'stirfry',  reason: '切好直接下锅，备料到烹饪零等待',      highlight: '效率 +180%' },
+      { slug: 'steaming', reason: '切配+蒸煮一体化，前处理更高效',       highlight: '备料 -60min' },
+      { slug: 'other',    reason: '传送带+分拣台，流水线式切配作业',     highlight: '产能 +4倍' }
     ],
-    'frying':   [
-      { slug: 'stirfry',  reason: '炸+炒双线出餐', emoji: '🔥' },
-      { slug: 'cutting',  reason: '备料效率翻倍', emoji: '🔪' }
+    'frying': [
+      { slug: 'stirfry',  reason: '炸+炒双线并行，出餐速度翻倍',        highlight: '出餐 +100%' },
+      { slug: 'cutting',  reason: '切配备料跟上油炸节奏，不缺料',       highlight: '备料 0等待' },
+      { slug: 'other',    reason: '滤油台+排烟系统，油炸区干净整洁',    highlight: '油烟 -80%' }
     ],
-    'stewing':  [
-      { slug: 'stirfry',  reason: '炖+炒组合满足多样菜品', emoji: '🔥' },
-      { slug: 'steaming', reason: '炖煮+蒸饭同步进行', emoji: '⬆️' }
+    'stewing': [
+      { slug: 'stirfry',  reason: '炖汤+炒菜组合，满足多样化菜单',      highlight: '菜品 +25%' },
+      { slug: 'steaming', reason: '炖煮蒸饭同步，大锅饭不再手忙脚乱',   highlight: '同步出餐' },
+      { slug: 'cutting',  reason: '自动切配炖菜食材，规格统一味道稳',   highlight: '口味一致' }
     ],
     'steaming': [
-      { slug: 'stirfry',  reason: '蒸+炒搭档，菜单更丰富', emoji: '🔥' },
-      { slug: 'cutting',  reason: '蒸前备料效率提升', emoji: '🔪' }
+      { slug: 'stirfry',  reason: '蒸+炒搭档，炒菜蒸饭同时搞定',        highlight: '效率 +150%' },
+      { slug: 'cutting',  reason: '蒸前切配自动完成，食材现切现蒸',     highlight: '鲜度提升' },
+      { slug: 'stewing',  reason: '蒸+炖组合，汤饭粥一灶全出',          highlight: '一灶多用' },
+      { slug: 'other',    reason: '保温分餐台搭配蒸柜，热菜直达窗口',   highlight: '温度不降' }
     ],
-    'other':    [
-      { slug: 'stirfry',  reason: '核心烹饪设备搭配', emoji: '🔥' },
-      { slug: 'cutting',  reason: '后厨流水线完整配置', emoji: '🔪' }
+    'other': [
+      { slug: 'stirfry',  reason: '核心烹饪+辅助设备，后厨全套配齐',    highlight: '一站式' },
+      { slug: 'cutting',  reason: '切配+辅助传送，流水线完整配置',      highlight: '流水线化' },
+      { slug: 'steaming', reason: '蒸柜+保温台，从蒸到分餐不断链',     highlight: '温度可控' }
     ]
   };
 
+  // ─── Scene entry: 3 scenes per category with descriptions ─────
+
   var SCENE_ENTRY_MAP = {
-    'stirfry':  [
-      { href: '/applications/small-restaurant/', slug: 'small-restaurant', icon: 'storefront' },
-      { href: '/applications/canteen/',          slug: 'canteen',          icon: 'school' },
-      { href: '/applications/central-kitchen/',  slug: 'central-kitchen',  icon: 'apartment' }
+    'stirfry': [
+      { href: '/applications/small-restaurant/', slug: 'small-restaurant', icon: 'storefront',
+        desc: '2-5人小后厨，一台炒菜机顶3个厨师' },
+      { href: '/applications/canteen/', slug: 'canteen', icon: 'restaurant',
+        desc: '食堂午高峰500-5000人，90分钟出完热菜' },
+      { href: '/applications/central-kitchen/', slug: 'central-kitchen', icon: 'apartment',
+        desc: '中央厨房批量出餐，菜品口味标准化' }
     ],
-    'cutting':  [
-      { href: '/applications/central-kitchen/',  slug: 'central-kitchen',  icon: 'apartment' },
-      { href: '/applications/food-factory/',     slug: 'food-factory',     icon: 'factory' }
+    'cutting': [
+      { href: '/applications/central-kitchen/', slug: 'central-kitchen', icon: 'apartment',
+        desc: '千份级备料，切配规格统一不出错' },
+      { href: '/applications/food-factory/', slug: 'food-factory', icon: 'factory',
+        desc: '食品工厂流水线切配，日产能提升6倍' },
+      { href: '/applications/canteen/', slug: 'canteen', icon: 'restaurant',
+        desc: '食堂切菜工序自动化，2小时→20分钟' }
     ],
-    'frying':   [
-      { href: '/applications/small-restaurant/', slug: 'small-restaurant', icon: 'storefront' },
-      { href: '/applications/chain-restaurant/', slug: 'chain-restaurant', icon: 'store' }
+    'frying': [
+      { href: '/applications/small-restaurant/', slug: 'small-restaurant', icon: 'storefront',
+        desc: '炸鸡炸薯条出餐快，外卖高峰不爆单' },
+      { href: '/applications/chain-restaurant/', slug: 'chain-restaurant', icon: 'store',
+        desc: '连锁店炸品口味统一，每批出品标准化' },
+      { href: '/applications/cloud-kitchen/', slug: 'cloud-kitchen', icon: 'delivery_dining',
+        desc: '云厨房多品牌共用，炸炉轮流出餐' }
     ],
-    'stewing':  [
-      { href: '/applications/canteen/',          slug: 'canteen',          icon: 'school' },
-      { href: '/applications/central-kitchen/',  slug: 'central-kitchen',  icon: 'apartment' }
+    'stewing': [
+      { href: '/applications/canteen/', slug: 'canteen', icon: 'restaurant',
+        desc: '食堂炖汤一大锅，千人份同时供应' },
+      { href: '/applications/central-kitchen/', slug: 'central-kitchen', icon: 'apartment',
+        desc: '中央厨房炖品批量出，口味稳定如一' },
+      { href: '/applications/chain-restaurant/', slug: 'chain-restaurant', icon: 'store',
+        desc: '连锁店招牌炖品，每家店味道都一样' }
     ],
     'steaming': [
-      { href: '/applications/canteen/',          slug: 'canteen',          icon: 'school' },
-      { href: '/applications/central-kitchen/',  slug: 'central-kitchen',  icon: 'apartment' }
+      { href: '/applications/canteen/', slug: 'canteen', icon: 'restaurant',
+        desc: '食堂蒸饭蒸菜同步，千人份量轻松搞定' },
+      { href: '/applications/central-kitchen/', slug: 'central-kitchen', icon: 'apartment',
+        desc: '中央厨房批量蒸制，配送前锁鲜保味' },
+      { href: '/applications/food-factory/', slug: 'food-factory', icon: 'factory',
+        desc: '食品工厂蒸煮工序，全自动温度控制' }
     ],
-    'other':    [
-      { href: '/applications/canteen/',          slug: 'canteen',          icon: 'school' },
-      { href: '/applications/chain-restaurant/', slug: 'chain-restaurant', icon: 'store' }
+    'other': [
+      { href: '/applications/canteen/', slug: 'canteen', icon: 'restaurant',
+        desc: '食堂洗碗分餐一体，后厨人手省一半' },
+      { href: '/applications/chain-restaurant/', slug: 'chain-restaurant', icon: 'store',
+        desc: '连锁店排烟+清洗标准化，后厨干净合规' },
+      { href: '/applications/central-kitchen/', slug: 'central-kitchen', icon: 'apartment',
+        desc: '中央厨房传送+包装，全流程自动化' }
     ]
   };
 
@@ -124,50 +156,108 @@
     return /^\/products\/(detail\/?(?:\?model=([^&]+))?|([^/]+))$/.test(path);
   }
 
-  // ─── Renderers ─────────────────────────────────────────────────
+  // ─── Helpers ───────────────────────────────────────────────────
 
   function esc(str) {
     if (!str) return '';
     return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
   }
 
+  // ─── Cross-sell renderer ──────────────────────────────────────
+
   function renderCrossSell(slug) {
     var items = CROSS_SELL_MAP[slug];
     if (!items || !items.length) return '';
 
     var catLabel = tl(PRODUCT_SLUGS[slug].label, PRODUCT_SLUGS[slug].label);
-    var html = '<div>';
-    html += '<h3 class="text-xl font-bold mb-4 text-slate-900 dark:text-white">' + tl('买了{cat}客户还配了', '买了' + catLabel + '的客户还配了').replace('{cat}', esc(catLabel)) + '</h3>';
-    html += '<div class="grid grid-cols-1 md:grid-cols-3 gap-4">';
+    var html = '<div class="text-center mb-8">';
+    html += '<h3 class="text-2xl lg:text-3xl font-black text-slate-900 dark:text-white mb-2">' +
+      tl('cross_sell_title', '搭配推荐') + '</h3>';
+    html += '<p class="text-sm text-slate-500 dark:text-slate-400">' +
+      tl('cross_sell_subtitle', '买了' + catLabel + '的客户还配了').replace('{cat}', esc(catLabel)) + '</p>';
+    html += '</div>';
+
+    // Responsive grid: 2 cols mobile, 3 cols tablet, 4 cols PC (when 4 items)
+    var gridCols = items.length >= 4
+      ? 'grid-cols-2 md:grid-cols-2 lg:grid-cols-4'
+      : 'grid-cols-2 md:grid-cols-3';
+    html += '<div class="grid ' + gridCols + ' gap-4 lg:gap-6">';
+
     items.forEach(function(item) {
       var info = PRODUCT_SLUGS[item.slug];
       var label = tl(info.label, info.label);
-      html += '<a href="/products/' + item.slug + '/" class="group flex items-center gap-4 p-5 rounded-2xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 hover:border-primary/50 hover:shadow-lg transition-all">';
-      html += '<div class="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center shrink-0"><span class="text-xl">' + item.emoji + '</span></div>';
-      html += '<div class="flex-1 min-w-0"><div class="font-bold text-slate-900 dark:text-white group-hover:text-primary transition-colors">' + esc(label) + '</div>';
-      html += '<div class="text-sm text-slate-500 dark:text-slate-400 mt-0.5">' + esc(item.reason) + '</div></div>';
-      html += '<span class="material-symbols-outlined text-slate-300 group-hover:text-primary transition-colors">arrow_forward</span>';
+
+      html += '<a href="/products/' + item.slug + '/" class="group relative block p-5 lg:p-6 rounded-2xl bg-white dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700/60 hover:border-primary/40 hover:shadow-xl hover:shadow-primary/5 transition-all">';
+
+      // Icon + category name row
+      html += '<div class="flex items-center gap-3 mb-3">';
+      html += '<div class="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center shrink-0">';
+      html += '<span class="material-symbols-outlined text-primary text-lg">' + info.icon + '</span>';
+      html += '</div>';
+      html += '<span class="font-bold text-slate-900 dark:text-white group-hover:text-primary transition-colors">' + esc(label) + '</span>';
+      html += '</div>';
+
+      // Description
+      html += '<p class="text-sm text-slate-500 dark:text-slate-400 leading-relaxed mb-3">' + esc(item.reason) + '</p>';
+
+      // Highlight badge + arrow
+      html += '<div class="flex items-center justify-between">';
+      html += '<span class="inline-flex items-center px-2.5 py-1 rounded-lg bg-primary/8 text-primary text-xs font-bold">' + esc(item.highlight) + '</span>';
+      html += '<span class="material-symbols-outlined text-slate-300 group-hover:text-primary group-hover:translate-x-1 transition-all text-lg">arrow_forward</span>';
+      html += '</div>';
+
       html += '</a>';
     });
-    html += '</div></div>';
+    html += '</div>';
     return html;
   }
+
+  // ─── Scene entry renderer ─────────────────────────────────────
 
   function renderSceneEntry(slug) {
     var scenes = SCENE_ENTRY_MAP[slug];
     if (!scenes || !scenes.length) return '';
 
-    var html = '<div>';
-    html += '<h3 class="text-xl font-bold mb-4 text-slate-900 dark:text-white">' + tl('适用场景解决方案', '适用场景解决方案') + '</h3>';
-    html += '<div class="grid grid-cols-1 md:grid-cols-3 gap-4">';
+    var html = '<div class="text-center mb-8">';
+    html += '<h3 class="text-2xl lg:text-3xl font-black text-slate-900 dark:text-white mb-2">' +
+      tl('scene_entry_title', '适用场景') + '</h3>';
+    html += '<p class="text-sm text-slate-500 dark:text-slate-400">' +
+      tl('scene_entry_subtitle', '看看这些场景怎么用') + '</p>';
+    html += '</div>';
+
+    html += '<div class="grid grid-cols-1 md:grid-cols-3 gap-4 lg:gap-6">';
+
     scenes.forEach(function(scene) {
-      html += '<a href="' + scene.href + '" class="group flex items-center gap-4 p-5 rounded-2xl bg-gradient-to-br from-slate-50 to-white dark:from-slate-800 dark:to-slate-900 border border-slate-200 dark:border-slate-700 hover:border-primary/50 hover:shadow-lg transition-all">';
-      html += '<span class="material-symbols-outlined text-2xl text-primary">' + scene.icon + '</span>';
-      html += '<div class="font-bold text-slate-900 dark:text-white group-hover:text-primary transition-colors">' + esc(getAppLabel(scene.slug)) + '</div>';
-      html += '<span class="material-symbols-outlined text-slate-300 group-hover:text-primary ml-auto transition-colors">arrow_forward</span>';
+      var label = getAppLabel(scene.slug);
+
+      html += '<a href="' + scene.href + '" class="group relative block p-5 lg:p-6 rounded-2xl bg-gradient-to-br from-slate-50 to-white dark:from-slate-800/60 dark:to-slate-900/60 border border-slate-200 dark:border-slate-700/60 hover:border-primary/40 hover:shadow-xl hover:shadow-primary/5 transition-all overflow-hidden">';
+
+      // Decorative gradient blob
+      html += '<div class="absolute -top-8 -right-8 w-24 h-24 bg-primary/5 rounded-full blur-2xl group-hover:bg-primary/10 transition-colors"></div>';
+
+      html += '<div class="relative">';
+
+      // Icon
+      html += '<div class="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mb-4">';
+      html += '<span class="material-symbols-outlined text-primary text-xl">' + scene.icon + '</span>';
+      html += '</div>';
+
+      // Label
+      html += '<h4 class="font-bold text-slate-900 dark:text-white group-hover:text-primary transition-colors mb-2">' + esc(label) + '</h4>';
+
+      // Description
+      html += '<p class="text-sm text-slate-500 dark:text-slate-400 leading-relaxed">' + esc(scene.desc) + '</p>';
+
+      // Arrow indicator
+      html += '<div class="flex items-center gap-1 mt-4 text-xs font-bold text-slate-400 group-hover:text-primary transition-colors">';
+      html += '<span>' + tl('scene_view_detail', '查看方案') + '</span>';
+      html += '<span class="material-symbols-outlined text-sm group-hover:translate-x-1 transition-all">arrow_forward</span>';
+      html += '</div>';
+
+      html += '</div>';
       html += '</a>';
     });
-    html += '</div></div>';
+    html += '</div>';
     return html;
   }
 
@@ -175,11 +265,9 @@
 
   function updatePdpCategoryNav() {
     if (!isPdpPage()) return;
-
     var nav = document.getElementById('product-category-nav');
     if (!nav) return;
 
-    // Try sessionStorage referrer first
     var referrer = sessionStorage.getItem('pdp_referrer') || '';
     var refSlug = referrer.replace(/\/$/, '').split('/').pop();
     if (refSlug && PRODUCT_SLUGS[refSlug]) {
@@ -187,7 +275,6 @@
       return;
     }
 
-    // Try to detect from product data (async)
     window.addEventListener('product-data-ready', function onReady() {
       window.removeEventListener('product-data-ready', onReady);
       if (window.ProductGrid && window.ProductGrid.getAllProducts) {
@@ -231,7 +318,6 @@
   function init() {
     trackPdpReferrer();
 
-    // Category pages: render cross-sell + scene entry
     var slug = detectCategorySlug();
     if (slug) {
       var render = function() {
@@ -239,7 +325,7 @@
         if (crossSellContainer) {
           var crossSellHtml = renderCrossSell(slug);
           if (crossSellHtml) {
-            crossSellContainer.innerHTML = '<div id="cross-sell-wrapper">' + crossSellHtml + '</div>';
+            crossSellContainer.innerHTML = crossSellHtml;
           }
         }
         var sceneEntryContainer = document.getElementById('scene-entry-container');
@@ -266,17 +352,15 @@
       });
     }
 
-    // PDP pages: populate category nav
     updatePdpCategoryNav();
 
-    // Re-init on SPA navigation
     window.addEventListener('spa:load', function() {
       trackPdpReferrer();
       updatePdpCategoryNav();
     });
   }
 
-  // ─── Public API (for compatibility) ────────────────────────────
+  // ─── Public API ────────────────────────────────────────────────
 
   window.Breadcrumb = {
     goBack: function() {
@@ -297,7 +381,6 @@
     PRODUCT_SLUGS: PRODUCT_SLUGS
   };
 
-  // Auto-init
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', init);
   } else {
