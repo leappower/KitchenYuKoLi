@@ -326,13 +326,13 @@
       }
     }
 
-    // For pages with dedicated sibling-container
-    var siblingContainer = document.getElementById('sibling-container');
-    if (siblingContainer && page.type !== 'category') {
-      siblingContainer.innerHTML = renderSiblings(page);
+    // For pages with dedicated sibling-container (non-category pages)
+    var siblingContainer2 = document.getElementById('sibling-container');
+    if (siblingContainer2 && page.type !== 'category') {
+      siblingContainer2.innerHTML = renderSiblings(page);
     }
     // Fallback: if no sibling-container but has siblings, append to breadcrumb-container
-    else if (!siblingContainer && !crossSellContainer && page.siblings && page.siblings.length > 1) {
+    else if (!siblingContainer2 && page.siblings && page.siblings.length > 1) {
       var fallbackSiblings = renderSiblings(page);
       if (fallbackSiblings) {
         container.innerHTML += '<div id="sibling-wrapper">' + fallbackSiblings + '</div>';
