@@ -112,7 +112,7 @@
       }, {
         key: "nav_about_factory",
         icon: "factory",
-        href: "/about/factory/"
+        href: "/about/#factory"
       }, {
         key: "nav_about_cert",
         icon: "verified",
