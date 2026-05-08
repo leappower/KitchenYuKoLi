@@ -413,7 +413,7 @@
   window.loadProductTranslations = function(lang, callback) {
     if (lang === 'zh-CN' || lang === 'zh') { window._productTranslations = {}; if (callback) callback(); return; }
     var xhr = new XMLHttpRequest();
-    xhr.open('GET', '/api/translations?lang=' + encodeURIComponent(lang), true);
+    xhr.open('GET', '/api/public/translations?lang=' + encodeURIComponent(lang), true);
     xhr.onload = function() {
       if (xhr.status === 200) {
         try {
