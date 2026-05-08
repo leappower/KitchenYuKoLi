@@ -106,6 +106,13 @@ const ROUTES = [
   { slug: 'about',        navId: 'about' },
   { slug: 'contact',      navId: 'contact' },
   { slug: 'products/detail', navId: 'products' },
+  // Product category sub-pages
+  { slug: 'products/stirfry',  navId: 'products' },
+  { slug: 'products/cutting',  navId: 'products' },
+  { slug: 'products/frying',   navId: 'products' },
+  { slug: 'products/stewing',  navId: 'products' },
+  { slug: 'products/steaming', navId: 'products' },
+  { slug: 'products/other',    navId: 'products' },
   { slug: 'thank-you',    navId: 'thank-you' },
   { slug: 'landing',      navId: 'landing' },
   // Application sub-pages
