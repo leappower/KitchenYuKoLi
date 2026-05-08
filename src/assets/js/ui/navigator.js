@@ -943,13 +943,7 @@
    * Called when custom-select's _selectItem fires change event on the <select>.
    * Updates localStorage, button label, and closes the panel.
    */
-  var _langChanging = false;
-
   function _onLangChange() {
-    if (_langChanging) return; // Prevent duplicate toast from double-trigger
-    _langChanging = true;
-    setTimeout(function() { _langChanging = false; }, 500);
-
     var selectEl = document.getElementById("lang-selector");
     if (!selectEl) return;
     var langCode = selectEl.value;
