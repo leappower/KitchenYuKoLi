@@ -72,8 +72,9 @@ chmod -R a+rX "$DIST" 2>/dev/null || true
 
 # ─── 4. Version bump ────────────────────────────────────────────
 echo "🔄 Bumping JS version to $VERSION..."
-find "$DIST" -name '*.html' -exec sed -i '' "s|?v=[0-9][0-9]*|?$VERSION|g" {} +
-find "$SRC/pages" -name '*.html' -exec sed -i '' "s|?v=[0-9][0-9]*|?$VERSION|g" {} +
+# Replace all version query params (handles v=20260508, v=20260508-v3, v=anystring, v=this)
+find "$DIST" -name '*.html' -exec sed -i '' "s|?v=[a-zA-Z0-9._-]*|?$VERSION|g" {} +
+find "$SRC/pages" -name '*.html' -exec sed -i '' "s|?v=[a-zA-Z0-9._-]*|?$VERSION|g" {} +
 
 FILES=$(find "$DIST" -type f | wc -l | tr -d ' ')
 echo ""

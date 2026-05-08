@@ -203,3 +203,15 @@ translate-quota.json
 
 # Reference files
 .reference/
+-e 
+# Playwright
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/
+-e 
+# Playwright
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/

@@ -8,6 +8,7 @@ module.exports = {
     './src/router-test.html',
     './src/**/*.html',
     './src/**/*.{js,jsx,ts,tsx}',
+    './src/**/*.json',  // i18n lang files may contain Tailwind classes
   ],
   darkMode: 'class',
   theme: {
@@ -67,7 +68,19 @@ module.exports = {
   },
   plugins: [],
   safelist: [
-    // Padding classes used in HTML but sometimes purged incorrectly
-    'pb-10', 'pb-2', 'pb-1', 'pb-0', 'pb-3',
+    // ── Padding ──────────────────────────────────────────
+    { pattern: /^p[btxy]?-(\d+|auto|px|0\.5|1|1\.5|2|2\.5|3|3\.5|4|5|6|7|8|9|10|11|12|14|16|20|24|28|32|36|40|44|48|52|56|60|64|72|80|96)$/ },
+    // ── Margin ───────────────────────────────────────────
+    { pattern: /^-?m[btxy]?-(\d+|auto|px|0\.5|1|1\.5|2|2\.5|3|3\.5|4|5|6|7|8|9|10|11|12|14|16|20|24|28|32|36|40|44|48|52|56|60|64|72|80|96)$/ },
+    // ── Gap ──────────────────────────────────────────────
+    { pattern: /^gap-(\d+|0\.5|1|1\.5|2|2\.5|3|4|5|6|7|8|9|10|11|12|14|16|20|24|28|32)$/ },
+    // ── Common utility classes that get dynamically used ──
+    'bg-white',
+    { pattern: /^max-w-(\d+px|\w+)$/ },
+    { pattern: /^w-(\d+px|\d+\/\d+|full|auto|screen|\w+)$/ },
+    { pattern: /^h-(\d+px|\d+\/\d+|full|auto|screen|\w+)$/ },
+    // ── Spacing for fullwidth-bg / section-content ───────
+    'py-8', 'py-10', 'py-12', 'py-16', 'py-20', 'py-24',
+    'px-4', 'px-6', 'px-8', 'px-10', 'px-12', 'px-16',
   ],
 };
