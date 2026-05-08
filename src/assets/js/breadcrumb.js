@@ -18,6 +18,14 @@
 
   // ─── Category slug ↔ key ↔ label maps ──────────────────────────
 
+  function tl(key, fallback) {
+    if (typeof window.t === 'function') {
+      var result = window.t(key);
+      if (result && result !== key) return result;
+    }
+    return fallback || key;
+  }
+
   var PRODUCT_SLUGS = {
     'stirfry':  { key: 'nav_products_stirfry',  label: '翻炒系列', icon: 'local_fire_department', emoji: '🔥' },
     'cutting':  { key: 'nav_products_cutting',  label: '切配系列', icon: 'content_cut',            emoji: '🔪' },
@@ -36,6 +44,11 @@
     'food-factory':     { label: '食品工厂',   icon: 'factory' },
     'menu-lab':         { label: '菜系实验室', icon: 'science' }
   };
+
+  // i18n-wrapped labels (lazy resolved at render time)
+  function getProductLabel(slug) { return tl(PRODUCT_SLUGS[slug].label, PRODUCT_SLUGS[slug].label); }
+  function getAppLabel(slug) { return tl(APP_SLUGS[slug].label, APP_SLUGS[slug].label); }
+  function getSupportLabel(slug) { return tl(SUPPORT_SLUGS[slug].label, SUPPORT_SLUGS[slug].label); }
 
   var SUPPORT_SLUGS = {
     'faq':         { label: '技术问答', icon: 'help' },
@@ -72,7 +85,7 @@
       result.type = 'category';
       result.slug = slug;
       result.parentPath = '/products/';
-      result.parentLabel = '产品中心';
+      result.parentLabel = tl('产品中心', '产品中心');
       result.currentLabel = info.label;
       result.siblings = buildSiblingLinks('products', slug);
       return result;
@@ -90,7 +103,7 @@
       result.type = 'pdp';
       result.slug = 'pdp';
       result.parentPath = refSlug ? '/products/' + refSlug + '/' : '/products/';
-      result.parentLabel = '产品中心';
+      result.parentLabel = tl('产品中心', '产品中心');
       result.currentLabel = model;
       result.refSlug = refSlug;
       result.refCategoryLabel = refSlug ? PRODUCT_SLUGS[refSlug].label : '';
@@ -101,8 +114,8 @@
     if (path === '/products/compare' || path === '/products/compare/') {
       result.type = 'compare';
       result.parentPath = '/products/';
-      result.parentLabel = '产品中心';
-      result.currentLabel = '产品对比';
+      result.parentLabel = tl('产品中心', '产品中心');
+      result.currentLabel = tl('产品对比', '产品对比');
       return result;
     }
 
@@ -113,7 +126,7 @@
       result.type = 'application';
       result.slug = appSlug;
       result.parentPath = '/applications/';
-      result.parentLabel = '行业场景';
+      result.parentLabel = tl('行业场景', '行业场景');
       result.currentLabel = APP_SLUGS[appSlug].label;
       result.siblings = buildSiblingLinks('applications', appSlug);
       return result;
@@ -126,7 +139,7 @@
       result.type = 'support';
       result.slug = supSlug;
       result.parentPath = '/support/';
-      result.parentLabel = '服务支持';
+      result.parentLabel = tl('服务支持', '服务支持');
       result.currentLabel = SUPPORT_SLUGS[supSlug].label;
       result.siblings = buildSiblingLinks('support', supSlug);
       return result;
@@ -137,7 +150,7 @@
     if (newsMatch) {
       result.type = 'news-detail';
       result.parentPath = '/news/';
-      result.parentLabel = '新闻动态';
+      result.parentLabel = tl('新闻动态', '新闻动态');
       result.currentLabel = '';
       return result;
     }
@@ -154,7 +167,7 @@
         var info = PRODUCT_SLUGS[slug];
         links.push({
           href: '/products/' + slug + '/',
-          label: info.label,
+          label: getProductLabel(slug),
           icon: info.icon,
           emoji: info.emoji,
           active: slug === currentSlug
@@ -165,7 +178,7 @@
         var info = APP_SLUGS[slug];
         links.push({
           href: '/applications/' + slug + '/',
-          label: info.label,
+          label: getAppLabel(slug),
           icon: info.icon,
           active: slug === currentSlug
         });
@@ -175,7 +188,7 @@
         var info = SUPPORT_SLUGS[slug];
         links.push({
           href: '/support/' + slug + '/',
-          label: info.label,
+          label: getSupportLabel(slug),
           icon: info.icon,
           active: slug === currentSlug
         });
@@ -195,7 +208,7 @@
     if (page.type === 'none') return '';
 
     // PC/Tablet breadcrumb
-    var bc = '<nav class="breadcrumb-nav text-sm text-slate-500 dark:text-slate-400 mb-6 hidden md:block" aria-label="Breadcrumb">';
+    var bc = '<nav class="breadcrumb-nav text-sm text-slate-500 dark:text-slate-400 py-4 mb-0 hidden md:block" aria-label="Breadcrumb">';
     bc += '<ol class="flex items-center gap-1 flex-wrap">';
     bc += '<li><a href="' + page.parentPath + '" class="hover:text-primary transition-colors">' + esc(page.parentLabel) + '</a></li>';
     bc += '<li class="mx-1.5 text-slate-300 dark:text-slate-600">/</li>';
@@ -227,9 +240,9 @@
     var siblings = page.siblings;
 
     // PC/Tablet
-    var siblingLabel = '其他品类';
-    if (page.type === 'application') siblingLabel = '其他场景';
-    if (page.type === 'support') siblingLabel = '其他服务';
+    var siblingLabel = tl('其他品类', '其他品类');
+    if (page.type === 'application') siblingLabel = tl('其他场景', '其他场景');
+    if (page.type === 'support') siblingLabel = tl('其他服务', '其他服务');
     var pc = '<div class="sibling-nav hidden md:block mb-8">';
     pc += '<div class="text-xs font-bold text-slate-400 dark:text-slate-500 uppercase tracking-widest mb-3">' + siblingLabel + '</div>';
     pc += '<div class="flex items-center gap-2 flex-wrap">';
@@ -298,57 +311,57 @@
 
   var CROSS_SELL_MAP = {
     'stirfry':  [
-      { slug: 'cutting',  label: '切配系列', reason: '备料+翻炒一条龙', emoji: '🔪' },
-      { slug: 'steaming', label: '蒸煮系列', reason: '蒸炒搭配出餐更快', emoji: '⬆️' },
-      { slug: 'other',    label: '辅助设备', reason: '后厨动线完整配置', emoji: '⚙️' }
+      { slug: 'cutting',  reason: '备料+翻炒一条龙', emoji: '🔪' },
+      { slug: 'steaming', reason: '蒸炒搭配出餐更快', emoji: '⬆️' },
+      { slug: 'other',    reason: '后厨动线完整配置', emoji: '⚙️' }
     ],
     'cutting':  [
-      { slug: 'stirfry',  label: '翻炒系列', reason: '切配+烹饪全程自动化', emoji: '🔥' },
-      { slug: 'steaming', label: '蒸煮系列', reason: '前处理+蒸煮一体化', emoji: '⬆️' }
+      { slug: 'stirfry',  reason: '切配+烹饪全程自动化', emoji: '🔥' },
+      { slug: 'steaming', reason: '前处理+蒸煮一体化', emoji: '⬆️' }
     ],
     'frying':   [
-      { slug: 'stirfry',  label: '翻炒系列', reason: '炸+炒双线出餐', emoji: '🔥' },
-      { slug: 'cutting',  label: '切配系列', reason: '备料效率翻倍', emoji: '🔪' }
+      { slug: 'stirfry',  reason: '炸+炒双线出餐', emoji: '🔥' },
+      { slug: 'cutting',  reason: '备料效率翻倍', emoji: '🔪' }
     ],
     'stewing':  [
-      { slug: 'stirfry',  label: '翻炒系列', reason: '炖+炒组合满足多样菜品', emoji: '🔥' },
-      { slug: 'steaming', label: '蒸煮系列', reason: '炖煮+蒸饭同步进行', emoji: '⬆️' }
+      { slug: 'stirfry',  reason: '炖+炒组合满足多样菜品', emoji: '🔥' },
+      { slug: 'steaming', reason: '炖煮+蒸饭同步进行', emoji: '⬆️' }
     ],
     'steaming': [
-      { slug: 'stirfry',  label: '翻炒系列', reason: '蒸+炒搭档，菜单更丰富', emoji: '🔥' },
-      { slug: 'cutting',  label: '切配系列', reason: '蒸前备料效率提升', emoji: '🔪' }
+      { slug: 'stirfry',  reason: '蒸+炒搭档，菜单更丰富', emoji: '🔥' },
+      { slug: 'cutting',  reason: '蒸前备料效率提升', emoji: '🔪' }
     ],
     'other':    [
-      { slug: 'stirfry',  label: '翻炒系列', reason: '核心烹饪设备搭配', emoji: '🔥' },
-      { slug: 'cutting',  label: '切配系列', reason: '后厨流水线完整配置', emoji: '🔪' }
+      { slug: 'stirfry',  reason: '核心烹饪设备搭配', emoji: '🔥' },
+      { slug: 'cutting',  reason: '后厨流水线完整配置', emoji: '🔪' }
     ]
   };
 
   var SCENE_ENTRY_MAP = {
     'stirfry':  [
-      { href: '/applications/small-restaurant/', label: '小型餐饮', icon: 'storefront' },
-      { href: '/applications/canteen/',          label: '智慧食堂', icon: 'school' },
-      { href: '/applications/central-kitchen/',  label: '中央厨房', icon: 'apartment' }
+      { href: '/applications/small-restaurant/', slug: 'small-restaurant', icon: 'storefront' },
+      { href: '/applications/canteen/',          slug: 'canteen',          icon: 'school' },
+      { href: '/applications/central-kitchen/',  slug: 'central-kitchen',  icon: 'apartment' }
     ],
     'cutting':  [
-      { href: '/applications/central-kitchen/',  label: '中央厨房', icon: 'apartment' },
-      { href: '/applications/food-factory/',     label: '食品工厂', icon: 'factory' }
+      { href: '/applications/central-kitchen/',  slug: 'central-kitchen',  icon: 'apartment' },
+      { href: '/applications/food-factory/',     slug: 'food-factory',     icon: 'factory' }
     ],
     'frying':   [
-      { href: '/applications/small-restaurant/', label: '小型餐饮', icon: 'storefront' },
-      { href: '/applications/chain-restaurant/', label: '连锁餐饮', icon: 'store' }
+      { href: '/applications/small-restaurant/', slug: 'small-restaurant', icon: 'storefront' },
+      { href: '/applications/chain-restaurant/', slug: 'chain-restaurant', icon: 'store' }
     ],
     'stewing':  [
-      { href: '/applications/canteen/',          label: '智慧食堂', icon: 'school' },
-      { href: '/applications/central-kitchen/',  label: '中央厨房', icon: 'apartment' }
+      { href: '/applications/canteen/',          slug: 'canteen',          icon: 'school' },
+      { href: '/applications/central-kitchen/',  slug: 'central-kitchen',  icon: 'apartment' }
     ],
     'steaming': [
-      { href: '/applications/canteen/',          label: '智慧食堂', icon: 'school' },
-      { href: '/applications/central-kitchen/',  label: '中央厨房', icon: 'apartment' }
+      { href: '/applications/canteen/',          slug: 'canteen',          icon: 'school' },
+      { href: '/applications/central-kitchen/',  slug: 'central-kitchen',  icon: 'apartment' }
     ],
     'other':    [
-      { href: '/applications/canteen/',          label: '智慧食堂', icon: 'school' },
-      { href: '/applications/chain-restaurant/', label: '连锁餐饮', icon: 'store' }
+      { href: '/applications/canteen/',          slug: 'canteen',          icon: 'school' },
+      { href: '/applications/chain-restaurant/', slug: 'chain-restaurant', icon: 'store' }
     ]
   };
 
@@ -358,12 +371,12 @@
     if (!items || !items.length) return '';
 
     var html = '<div class="mb-8">';
-    html += '<h3 class="text-xl font-bold mb-4 text-slate-900 dark:text-white">买了' + esc(page.currentLabel) + '的客户还配了</h3>';
+    html += '<h3 class="text-xl font-bold mb-4 text-slate-900 dark:text-white">' + tl('买了{cat}客户还配了', '买了' + page.currentLabel + '的客户还配了').replace('{cat}', esc(page.currentLabel)) + '</h3>';
     html += '<div class="grid grid-cols-1 md:grid-cols-3 gap-4">';
     items.forEach(function(item) {
       html += '<a href="/products/' + item.slug + '/" class="group flex items-center gap-4 p-5 rounded-2xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 hover:border-primary/50 hover:shadow-lg transition-all">';
       html += '<span class="text-2xl">' + item.emoji + '</span>';
-      html += '<div><div class="font-bold text-slate-900 dark:text-white group-hover:text-primary transition-colors">' + esc(item.label) + '</div>';
+      html += '<div><div class="font-bold text-slate-900 dark:text-white group-hover:text-primary transition-colors">' + esc(getProductLabel(item.slug)) + '</div>';
       html += '<div class="text-sm text-slate-500 dark:text-slate-400">' + esc(item.reason) + '</div></div>';
       html += '<span class="material-symbols-outlined text-slate-300 group-hover:text-primary ml-auto transition-colors">arrow_forward</span>';
       html += '</a>';
@@ -378,12 +391,12 @@
     if (!scenes || !scenes.length) return '';
 
     var html = '<div>';
-    html += '<h3 class="text-xl font-bold mb-4 text-slate-900 dark:text-white">适用场景解决方案</h3>';
+    html += '<h3 class="text-xl font-bold mb-4 text-slate-900 dark:text-white">' + tl('适用场景解决方案', '适用场景解决方案') + '</h3>';
     html += '<div class="grid grid-cols-1 md:grid-cols-3 gap-4">';
     scenes.forEach(function(scene) {
       html += '<a href="' + scene.href + '" class="group flex items-center gap-4 p-5 rounded-2xl bg-gradient-to-br from-slate-50 to-white dark:from-slate-800 dark:to-slate-900 border border-slate-200 dark:border-slate-700 hover:border-primary/50 hover:shadow-lg transition-all">';
       html += '<span class="material-symbols-outlined text-2xl text-primary">' + scene.icon + '</span>';
-      html += '<div class="font-bold text-slate-900 dark:text-white group-hover:text-primary transition-colors">' + esc(scene.label) + '</div>';
+      html += '<div class="font-bold text-slate-900 dark:text-white group-hover:text-primary transition-colors">' + esc(getAppLabel(scene.slug)) + '</div>';
       html += '<span class="material-symbols-outlined text-slate-300 group-hover:text-primary ml-auto transition-colors">arrow_forward</span>';
       html += '</a>';
     });
@@ -415,10 +428,17 @@
       sceneEntryContainer.innerHTML = renderSceneEntry(page);
     }
 
-    // For non-category pages with sibling-container, render there
+    // For pages with dedicated sibling-container
     var siblingContainer = document.getElementById('sibling-container');
     if (siblingContainer && page.type !== 'category') {
       siblingContainer.innerHTML = renderSiblings(page);
+    }
+    // Fallback: if no sibling-container but has siblings, append to breadcrumb-container
+    else if (!siblingContainer && !crossSellContainer && page.siblings && page.siblings.length > 1) {
+      var fallbackSiblings = renderSiblings(page);
+      if (fallbackSiblings) {
+        container.innerHTML += '<div id="sibling-wrapper">' + fallbackSiblings + '</div>';
+      }
     }
   }
 
@@ -455,7 +475,11 @@
     goBack: function() {
       var referrer = sessionStorage.getItem('pdp_referrer');
       if (referrer && window.location.pathname.indexOf('/products/') === 0 && !/stirfry|cutting|frying|stewing|steaming|other|compare/.test(window.location.pathname.replace('/products/', ''))) {
-        window.location.href = referrer;
+        if (window.SpaRouter && typeof window.SpaRouter.navigate === 'function') {
+          window.SpaRouter.navigate(referrer);
+        } else {
+          window.location.href = referrer;
+        }
       } else {
         window.history.back();
       }

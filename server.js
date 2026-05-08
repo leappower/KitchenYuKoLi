@@ -31,7 +31,7 @@ const {
 // ─── API Server Proxy ───────────────────────────────────────────────
 // All API, admin, and upload requests go to KitchenYuKoLiServer.
 // Configurable via API_SERVER env var (default: http://127.0.0.1:8000).
-const API_SERVER = process.env.API_SERVER || 'http://127.0.0.1:8001';
+const API_SERVER = process.env.API_SERVER || 'https://127.0.0.1:8000';
 const { createProxyMiddleware } = require('http-proxy-middleware');
 
 const app = express();
@@ -40,13 +40,8 @@ const apiProxy = createProxyMiddleware({
   target: API_SERVER,
   changeOrigin: true,
   pathFilter: ['/api/cms/**', '/api/public/**', '/api/translations/**', '/api/nav-config/**', '/admin/**'],
-  pathRewrite: {
-    '^/api/translations': '/api/cms/translations',
-    '^/api/public/categories/config': '/api/cms/categories/config',
-    '^/api/public/translations': '/api/cms/translations',
-    '^/api/public/products-data': '/api/cms/products-data',
-    '^/api/public/nav-config': '/api/cms/nav-config',
-  },
+  // No rewrite needed — backend has /api/public/* and /api/cms/* natively
+  // pathRewrite removed since API_SERVER (https://127.0.0.1:8000) serves /api/public/* directly
   logLevel: process.env.NODE_ENV !== 'production' ? 'warn' : 'silent',
   onError: (err, req, res) => {
     console.error('[proxy] error:', err.message, req.path);
