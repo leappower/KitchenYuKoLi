@@ -429,6 +429,11 @@
       var _self = this;
       var pagePath = this.routes[routePath];
 
+      // Special page: /products/compare/
+      if (!pagePath && routePath === '/products/compare/') {
+        pagePath = '/products/compare/index-pc.html';
+      }
+
       // Dynamic route: /products/<segment>/ — category or PDP
       if (!pagePath && routePath.match(/^\/products\/[^/]+\/$/)) {
         var segment = routePath.replace(/^\/products\/|\/$/g, '');

@@ -251,7 +251,8 @@
 
   function loadFromAPI(callback) {
     if (_dataLoaded) { callback(); return; }
-    // Deduplicate: use a single canonical callback, ignore extras
+    if (callback) _dataCallbacks.push(callback);
+    // Deduplicate: use a single canonical promise
     if (!_fetchPromise) {
       _fetchPromise = fetch('/api/public/products-data', { cache: 'no-store' })
         .then(function(r) {

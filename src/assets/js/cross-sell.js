@@ -148,6 +148,7 @@
   function detectCategorySlug() {
     var path = (window.location.pathname || '/').replace(/\/$/, '');
     var match = path.match(/^\/products\/(stirfry|cutting|frying|stewing|steaming|other)$/);
+    console.log('[CrossSell] detectCategorySlug', { path: path, slug: match ? match[1] : null });
     return match ? match[1] : null;
   }
 
@@ -167,6 +168,7 @@
 
   function renderCrossSell(slug) {
     var items = CROSS_SELL_MAP[slug];
+    console.log('[CrossSell] renderCrossSell', { slug: slug, items: items ? items.length : 0 });
     if (!items || !items.length) return '';
 
     var catLabel = tl(PRODUCT_SLUGS[slug].label, PRODUCT_SLUGS[slug].label);
@@ -216,6 +218,7 @@
 
   function renderSceneEntry(slug) {
     var scenes = SCENE_ENTRY_MAP[slug];
+    console.log('[CrossSell] renderSceneEntry', { slug: slug, scenes: scenes ? scenes.length : 0 });
     if (!scenes || !scenes.length) return '';
 
     var html = '<div class="text-center mb-8">';
@@ -316,23 +319,53 @@
   // ─── Init ─────────────────────────────────────────────────────
 
   function init() {
+    console.log('[CrossSell] init called, readyState:', document.readyState, 'url:', location.href, '_crossSellInited:', !!window._crossSellInited);
+    if (window._crossSellInited) {
+      console.log('[CrossSell] init skipped: already initialized (SPA dynamic reload)');
+      // Re-render for new page content (container may have been replaced)
+      var reSlug = detectCategorySlug();
+      if (reSlug) {
+        var csc = document.getElementById('cross-sell-container');
+        if (csc && !csc.innerHTML.trim()) {
+          csc.innerHTML = renderCrossSell(reSlug) || '';
+          console.log('[CrossSell] re-rendered cross-sell on re-init');
+        }
+        var sec = document.getElementById('scene-entry-container');
+        if (sec && !sec.innerHTML.trim()) {
+          sec.innerHTML = renderSceneEntry(reSlug) || '';
+          console.log('[CrossSell] re-rendered scene-entry on re-init');
+        }
+      }
+      return;
+    }
+    window._crossSellInited = true;
     trackPdpReferrer();
 
     var slug = detectCategorySlug();
+    console.log('[CrossSell] init slug:', slug);
     if (slug) {
       var render = function() {
+        console.log('[CrossSell] render() called, slug:', slug, 'url:', location.href);
         var crossSellContainer = document.getElementById('cross-sell-container');
+        console.log('[CrossSell] cross-sell-container:', !!crossSellContainer);
         if (crossSellContainer) {
           var crossSellHtml = renderCrossSell(slug);
           if (crossSellHtml) {
             crossSellContainer.innerHTML = crossSellHtml;
+            console.log('[CrossSell] cross-sell rendered, html length:', crossSellHtml.length);
+          } else {
+            console.log('[CrossSell] cross-sell: no HTML generated for slug:', slug);
           }
         }
         var sceneEntryContainer = document.getElementById('scene-entry-container');
+        console.log('[CrossSell] scene-entry-container:', !!sceneEntryContainer);
         if (sceneEntryContainer) {
           var sceneHtml = renderSceneEntry(slug);
           if (sceneHtml) {
             sceneEntryContainer.innerHTML = sceneHtml;
+            console.log('[CrossSell] scene-entry rendered, html length:', sceneHtml.length);
+          } else {
+            console.log('[CrossSell] scene-entry: no HTML generated for slug:', slug);
           }
         }
       };
@@ -343,11 +376,15 @@
         render();
       }
 
-      window.addEventListener('spa:load', function() {
+      window.addEventListener('spa:load', function onSpaLoad() {
+        console.log('[CrossSell] spa:load fired, url:', location.href);
         var newSlug = detectCategorySlug();
+        console.log('[CrossSell] spa:load newSlug:', newSlug, 'oldSlug:', slug);
         if (newSlug) {
           slug = newSlug;
           render();
+        } else {
+          console.log('[CrossSell] spa:load skipped: not a category page');
         }
       });
     }
