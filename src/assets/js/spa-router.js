@@ -21,12 +21,12 @@
       "/": "/home/index.html",
       "/home/": "/home/index.html",
       "/products/": "/products/index.html",
-      "/products/cutting/": "/products/cutting/index.html",
-      "/products/stirfry/": "/products/stirfry/index.html",
-      "/products/frying/": "/products/frying/index.html",
-      "/products/stewing/": "/products/stewing/index.html",
-      "/products/steaming/": "/products/steaming/index.html",
-      "/products/other/": "/products/other/index.html",
+      "/products/cutting/": "/products/cutting/index-pc.html",
+      "/products/stirfry/": "/products/stirfry/index-pc.html",
+      "/products/frying/": "/products/frying/index-pc.html",
+      "/products/stewing/": "/products/stewing/index-pc.html",
+      "/products/steaming/": "/products/steaming/index-pc.html",
+      "/products/other/": "/products/other/index-pc.html",
       "/applications/": "/applications/index.html",
       "/applications/chain-restaurant/": "/applications/chain-restaurant/index.html",
       "/applications/central-kitchen/": "/applications/central-kitchen/index.html",
@@ -75,7 +75,8 @@
       } else {
         suffix = "index-pc.html";
       }
-      return basePath.replace("index.html", suffix);
+      // Handle both index.html and index-{device}.html patterns
+      return basePath.replace(/index-(?:pc|tablet|mobile)?\.html$/, suffix);
     },
 
     // 当前路由
@@ -419,9 +420,9 @@
       if (!pagePath && routePath.match(/^\/products\/[^/]+\/$/)) {
         var segment = routePath.replace(/^\/products\/|\/$/g, '');
         if (this.CATEGORY_SLUGS.indexOf(segment) >= 0) {
-          pagePath = '/products/index.html';
+          pagePath = '/products/index-pc.html';
         } else {
-          pagePath = '/products/detail/index.html';
+          pagePath = '/products/detail/index-pc.html';
         }
       }
 
