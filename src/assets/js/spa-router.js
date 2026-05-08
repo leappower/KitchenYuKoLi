@@ -530,7 +530,7 @@
       container.style.opacity = "0";
       console.warn('[DEBUG-SPA] renderContent: BEFORE innerHTML', { pagePath, contentLength: content.length, hasHeader: !!document.querySelector('header'), hasNavigator: !!document.querySelector('navigator'), spaNavigating: window.__spaNavigating, url: location.href });
       container.innerHTML = content;
-      console.warn('[DEBUG-SPA] renderContent: AFTER innerHTML', { hasHeader: !!document.querySelector('header'), hasNavigator: !!document.querySelector('navigator'), url: location.href });
+      console.warn('[DEBUG-SPA] renderContent: AFTER innerHTML', { pagePath, hasHeader: !!document.querySelector('header'), hasNavigator: !!document.querySelector('navigator'), url: location.href, hasCompareEmpty: !!document.getElementById('compare-empty'), hasSpaPage: !!document.querySelector('[data-spa-page]') });
 
       // 动态加载页面专属脚本（SPA 移除了 script 标签，需手动补充）
       var scriptsPromise = _self.loadPageScripts(pagePath);
