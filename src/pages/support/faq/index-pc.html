@@ -59,9 +59,13 @@
 <section class="fullwidth-bg section-passthrough w-full flex flex-col lg:flex-row items-center py-10 gap-12">
   <div class="section-content">
     <div class="w-full lg:w-1/2 space-y-8">
-      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-bold uppercase tracking-widest">
-        <span class="material-symbols-outlined text-xs leading-none">contact_support</span>
-        <span data-i18n="support_faq_hero_badge">智能客服</span>
+            <div class="flex items-center gap-2 flex-wrap">
+        <a href="/support/" class="text-sm text-slate-500 hover:text-primary transition-colors" data-i18n="nav_support">服务支持</a>
+        <span class="material-symbols-outlined text-sm text-slate-300">chevron_right</span>
+        <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-bold uppercase tracking-widest">
+          <span class="material-symbols-outlined text-xs leading-none">contact_support</span>
+          <span data-i18n="support_faq_hero_badge">智能客服</span>
+        </span>
       </div>
       <h1 class="text-4xl xl:text-6xl font-black leading-[1.1] tracking-tight text-slate-900 dark:text-white">
         <span data-i18n="support_faq_hero_title_1">智能问答系统</span><br/>
@@ -85,10 +89,6 @@
     </div>
   </div>
 </section>
-  <!-- Breadcrumb -->
-  <div class="w-full fullwidth-bg"><div class="section-content pt-4 pb-0"><div id="breadcrumb-container"></div></div></div>
-
-
 <!-- ═══ Section 2: Core Values ═══ -->
 <section class="fullwidth-bg py-12">
   <div class="section-content">
@@ -504,6 +504,5 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 </script>
     <script defer src="/assets/js/ui/floating-actions.js"></script>
-      <script defer src="/assets/js/breadcrumb.js?v=20260508"></script>
-  </body>
+</body>
 </html>

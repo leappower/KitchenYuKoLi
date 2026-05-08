@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 
 <html class="light" lang="zh-CN">
   <head>
@@ -112,9 +113,7 @@
       data-search="true"
     ></navigator>
 <!-- Breadcrumb -->
-<div class="w-full px-4 pt-3 pb-0"><div id="breadcrumb-container"></div></div>
-
-    <main id="spa-content">
+<main id="spa-content">
       <div class="w-full">
         <!-- Hero Section -->
         <section
@@ -126,11 +125,13 @@
             <div class="absolute top-10 right-10 w-48 h-48 bg-primary/10 rounded-full blur-2xl"></div>
           </div>
           <div class="relative">
-            <div
-              class="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-bold uppercase tracking-wider mb-4"
-            >
-              <span class="material-symbols-outlined text-xs">whatshot</span>
-              <span data-i18n="other_hero_badge">🔥 翻炒系列</span>
+                        <div class="flex items-center gap-2 mb-4">
+              <a href="/products/" class="text-xs text-slate-400 hover:text-primary transition-colors" data-i18n="nav_products">产品中心</a>
+              <span class="material-symbols-outlined text-xs text-slate-300">chevron_right</span>
+              <span class="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-bold uppercase tracking-wider">
+                <span class="material-symbols-outlined text-xs">more_horiz</span>
+                <span data-i18n="other_hero_badge">⚙️ 辅助设备</span>
+              </span>
             </div>
             <h1
               class="text-3xl font-black leading-tight tracking-tight text-slate-900 dark:text-white mb-3"
@@ -312,7 +313,6 @@
       window.addEventListener('product-data-ready', renderProductPage_renderMobile);
     </script>
       <script defer src="/assets/js/ui/floating-actions.js"></script>
-      <script defer src="/assets/js/breadcrumb.js?v=20260508"></script>
-  <script defer src="/assets/js/spa-router.js?v=20260508"></script>
+<script defer src="/assets/js/spa-router.js?v=20260508"></script>
 </body>
 </html>

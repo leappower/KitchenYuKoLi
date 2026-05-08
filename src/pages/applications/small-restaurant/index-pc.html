@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 
 
 <html class="light" lang="zh-CN">
@@ -111,9 +112,13 @@
   <div class="section-content">
     <div class="flex flex-col lg:flex-row items-center gap-12">
       <div class="lg:w-1/2">
-        <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 text-primary uppercase text-sm font-bold mb-6" data-i18n="sr_hero_badge">
-          <span class="material-symbols-outlined text-3xl" aria-hidden="true">store</span>
-          <span>外卖专营 / 社区快餐 / 特色小吃 / 云厨房</span>
+                <div class="flex items-center gap-2 flex-wrap">
+          <a href="/applications/" class="text-sm text-slate-500 hover:text-primary transition-colors" data-i18n="nav_applications">行业场景</a>
+          <span class="material-symbols-outlined text-sm text-slate-300">chevron_right</span>
+          <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-bold uppercase tracking-widest">
+            <span class="material-symbols-outlined text-xs leading-none">store</span>
+            <span data-i18n="sr_hero_badge">小型餐饮 / 云厨房</span>
+          </span>
         </div>
 
         <h1 class="text-4xl xl:text-6xl font-black tracking-tight mb-4" data-i18n="sr_hero_title">
@@ -158,10 +163,6 @@
     </div>
   </div>
 </section>
-  <!-- Breadcrumb -->
-  <div class="w-full fullwidth-bg"><div class="section-content pt-4 pb-0"><div id="breadcrumb-container"></div></div></div>
-
-
 <section class="fullwidth-bg py-12 bg-slate-50 dark:bg-slate-900/50">
   <div class="section-content">
     <div class="text-center max-w-3xl mx-auto mb-12">
@@ -486,6 +487,5 @@
     <script src="/assets/js/ui/navigator.js?v=20260508"></script>
     <script src="/assets/js/ui/footer.js?v=20260508-v4"></script>
     <script defer src="/assets/js/ui/floating-actions.js"></script>
-      <script defer src="/assets/js/breadcrumb.js?v=20260508"></script>
-  </body>
+</body>
 </html>

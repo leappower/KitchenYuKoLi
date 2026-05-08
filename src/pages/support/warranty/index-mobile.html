@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 
 <html class="light" lang="zh-CN">
 <head>
@@ -67,16 +68,19 @@
 <div class="relative flex h-auto min-h-screen w-full flex-col">
 <navigator data-component="navigator" data-variant="mobile" data-active="support" data-cta-text-key="nav_get_quote" data-cta-href="/quote"></navigator>
 <!-- Breadcrumb -->
-<div class="w-full px-4 pt-3 pb-0"><div id="breadcrumb-container"></div></div>
 <main id="spa-content">
 
 <!-- ═══ Section 1: Hero ═══ -->
 <section class="fullwidth-bg w-full flex flex-col items-center py-8 gap-8">
   <div class="section-content">
     <div class="w-full space-y-6">
-      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-bold uppercase tracking-widest">
-        <span class="material-symbols-outlined text-xs leading-none">verified</span>
-        <span data-i18n="support_warranty_hero_badge">质保证书</span>
+            <div class="flex items-center gap-2 mb-4">
+        <a href="/support/" class="text-xs text-slate-400 hover:text-primary transition-colors" data-i18n="nav_support">服务支持</a>
+        <span class="material-symbols-outlined text-xs text-slate-300">chevron_right</span>
+        <span class="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-bold uppercase tracking-wider">
+          <span class="material-symbols-outlined text-xs">verified</span>
+          <span data-i18n="support_warranty_hero_badge">质保证书</span>
+        </span>
       </div>
       <h1 class="text-3xl font-black leading-[1.1] tracking-tight text-slate-900 dark:text-white">
         <span data-i18n="support_warranty_hero_title_prefix">1 年质保</span><br/>
@@ -435,6 +439,5 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 </script>
     <script defer src="/assets/js/ui/floating-actions.js"></script>
-      <script defer src="/assets/js/breadcrumb.js?v=20260508"></script>
-  </body>
+</body>
 </html>
