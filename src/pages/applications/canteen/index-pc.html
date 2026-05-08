@@ -85,6 +85,8 @@
       data-cta-href="/quote"
     ></navigator>
     <main id="spa-content">
+
+      <!-- ========== Section 1: Hero（保留不动）========== -->
       <section class="relative py-10 overflow-hidden bg-gradient-to-br from-primary/5 via-transparent to-orange-100/30 dark:from-primary/10 dark:to-orange-900/20 fullwidth-bg">
         <div class="section-content">
           <div class="w-full relative">
@@ -152,6 +154,51 @@
         </div>
       </section>
 
+      <!-- ========== Section 2: 痛点区（从底部移上来）========== -->
+      <section class="fullwidth-bg py-16">
+        <div class="section-content">
+          <div class="w-full text-center mb-12">
+            <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-red-100 dark:bg-red-900/20 text-red-600 text-xs font-bold uppercase tracking-widest mb-4">
+              <span class="material-symbols-outlined text-sm">warning</span>
+              <span data-i18n="app_pain_badge">行业痛点</span>
+            </span>
+            <h2 class="text-3xl font-bold mb-4" data-i18n="ct_pain_title">食堂负责人的日常</h2>
+            <p class="text-slate-500 dark:text-slate-400 max-w-2xl mx-auto" data-i18n="ct_pain_desc">除了做饭供餐，这些事每天都在发生。</p>
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="flex gap-4 p-8 rounded-2xl bg-red-50/50 dark:bg-red-900/10 border border-red-100 dark:border-red-900/30">
+              <div class="w-10 h-10 rounded-xl bg-red-100 dark:bg-red-900/30 flex items-center justify-center shrink-0"><span class="material-symbols-outlined text-red-600">local_fire_department</span></div>
+              <div>
+                <h3 class="font-bold mb-1" data-i18n="ct_pain_1_title">燃气灶又出问题</h3>
+                <p class="text-base text-slate-600 dark:text-slate-400" data-i18n="ct_pain_1_desc">一台风机坏了，火苗不稳，炒菜慢了一半。维修等三天，午高峰怎么办？</p>
+              </div>
+            </div>
+            <div class="flex gap-4 p-8 rounded-2xl bg-red-50/50 dark:bg-red-900/10 border border-red-100 dark:border-red-900/30">
+              <div class="w-10 h-10 rounded-xl bg-red-100 dark:bg-red-900/30 flex items-center justify-center shrink-0"><span class="material-symbols-outlined text-red-600">person_off</span></div>
+              <div>
+                <h3 class="font-bold mb-1" data-i18n="ct_pain_2_title">厨师又请假了</h3>
+                <p class="text-base text-slate-600 dark:text-slate-400" data-i18n="ct_pain_2_desc">炒菜岗位本来只多配了 1 个人，今天请病假，窗口直接少两个菜。</p>
+              </div>
+            </div>
+            <div class="flex gap-4 p-8 rounded-2xl bg-red-50/50 dark:bg-red-900/10 border border-red-100 dark:border-red-900/30">
+              <div class="w-10 h-10 rounded-xl bg-red-100 dark:bg-red-900/30 flex items-center justify-center shrink-0"><span class="material-symbols-outlined text-red-600">receipt_long</span></div>
+              <div>
+                <h3 class="font-bold mb-1" data-i18n="ct_pain_3_title">月底盘点，食材浪费又超标</h3>
+                <p class="text-base text-slate-600 dark:text-slate-400" data-i18n="ct_pain_3_desc">备餐量全凭老师傅经验，有时候菜剩很多倒掉，有时候不够吃被投诉。</p>
+              </div>
+            </div>
+            <div class="flex gap-4 p-8 rounded-2xl bg-red-50/50 dark:bg-red-900/10 border border-red-100 dark:border-red-900/30">
+              <div class="w-10 h-10 rounded-xl bg-red-100 dark:bg-red-900/30 flex items-center justify-center shrink-0"><span class="material-symbols-outlined text-red-600">soup_kitchen</span></div>
+              <div>
+                <h3 class="font-bold mb-1" data-i18n="ct_pain_4_title">菜品轮换慢，吃一个月就腻了</h3>
+                <p class="text-base text-slate-600 dark:text-slate-400" data-i18n="ct_pain_4_desc">老师傅只会做那几道菜，学生连着吃两周就开始抱怨。想加新品又怕厨师掌握不好，最后菜单永远只有那几个。</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ========== Section 3: 方案区（改写原解决方案区）========== -->
       <section class="fullwidth-bg py-12">
         <div class="section-content">
           <div class="w-full flex flex-col lg:flex-row gap-16 items-center">
@@ -160,12 +207,12 @@
           class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 text-primary text-sm font-bold uppercase tracking-wider mb-6"
           >
           <span class="material-symbols-outlined">lightbulb</span>
-          午高峰实战
+          <span data-i18n="ct_solution_badge">食堂运营</span>
           </div>
-          <h2 class="text-3xl lg:text-4xl font-black tracking-tight mb-6" data-i18n="canteen_solution_title">
-          食堂午高峰 90 分钟，怎么让每个人都能吃上热饭热菜？
+          <h2 class="text-3xl lg:text-4xl font-black tracking-tight mb-6" data-i18n="ct_solution_title">
+          几百人同时吃饭，窗口不能断菜
           </h2>
-          <p class="text-lg text-slate-600 dark:text-slate-400 mb-8" data-i18n="canteen_solution_subtitle">
+          <p class="text-lg text-slate-600 dark:text-slate-400 mb-8" data-i18n="ct_solution_subtitle">
           为学校、医院、机关食堂设计的厨房方案。
           </p>
           <div class="space-y-6">
@@ -174,8 +221,8 @@
           <span class="material-symbols-outlined text-primary">soup_kitchen</span>
           </div>
           <div>
-          <h4 class="font-bold text-lg" data-i18n="canteen_solution_1_title">现场烹饪</h4>
-          <p class="text-slate-600 dark:text-slate-400" data-i18n="canteen_solution_1_desc">电磁大炒炉+蒸饭柜，标准化出品，菜品口味稳定</p>
+          <h4 class="font-bold text-lg" data-i18n="ct_solution_1_title">现场烹饪 + 恒温保温</h4>
+          <p class="text-slate-600 dark:text-slate-400" data-i18n="ct_solution_1_desc">电磁大炒炉+蒸饭柜出餐，保温分餐台恒温供应，保持菜品温度和口感</p>
           </div>
           </div>
           <div class="flex gap-4">
@@ -183,8 +230,8 @@
           <span class="material-symbols-outlined text-primary">thermostat</span>
           </div>
           <div>
-          <h4 class="font-bold text-lg" data-i18n="canteen_solution_2_title">恒温保温分餐</h4>
-          <p class="text-slate-600 dark:text-slate-400" data-i18n="canteen_solution_2_desc">保温分餐台恒温供应，确保每位用餐者都能吃到热菜热饭</p>
+          <h4 class="font-bold text-lg" data-i18n="ct_solution_2_title">标准化出餐</h4>
+          <p class="text-slate-600 dark:text-slate-400" data-i18n="ct_solution_2_desc">菜谱预设好火候和翻炒节奏，不依赖厨师经验，每份口味一致</p>
           </div>
           </div>
           <div class="flex gap-4">
@@ -192,8 +239,8 @@
           <span class="material-symbols-outlined text-primary">eco</span>
           </div>
           <div>
-          <h4 class="font-bold text-lg" data-i18n="canteen_solution_3_title">营养管理有记录</h4>
-          <p class="text-slate-600 dark:text-slate-400" data-i18n="canteen_solution_3_desc">标准化菜谱管理，营养搭配科学化，有记录，方便做内控与检查</p>
+          <h4 class="font-bold text-lg" data-i18n="ct_solution_3_title">营养管理</h4>
+          <p class="text-slate-600 dark:text-slate-400" data-i18n="ct_solution_3_desc">标准化菜谱管理，菜品记录可追溯，方便做内控与检查</p>
           </div>
           </div>
           <div class="flex gap-4">
@@ -201,26 +248,33 @@
           <span class="material-symbols-outlined text-primary">savings</span>
           </div>
           <div>
-          <h4 class="font-bold text-lg" data-i18n="canteen_solution_4_title">减少食材浪费</h4>
-          <p class="text-slate-600 dark:text-slate-400" data-i18n="canteen_solution_4_desc">精准用材、按需备餐，食材浪费更少</p>
+          <h4 class="font-bold text-lg" data-i18n="ct_solution_4_title">减少浪费</h4>
+          <p class="text-slate-600 dark:text-slate-400" data-i18n="ct_solution_4_desc">精准投料、按需备餐，降低食材损耗，节省运营成本</p>
           </div>
           </div>
           </div>
           </div>
 
           </div>
+          <!-- 过渡句 -->
+          <div class="text-center mt-10 pt-8 border-t border-slate-200 dark:border-slate-700 w-full">
+            <p class="text-lg text-slate-600 dark:text-slate-400 max-w-2xl mx-auto" data-i18n="ct_solution_transition">
+              食堂选设备，核心看供餐人数和菜品数量。
+            </p>
+          </div>
         </div>
       </section>
+
+      <!-- ========== Section 4: 设备推荐区（保留食堂专属设备区）========== -->
       <section class="py-12 fullwidth-bg bg-slate-50 dark:bg-slate-900/50">
         <div class="section-content">
         <div class="">
 
-
           <div class="w-full text-center mb-16">
-          <h2 class="text-3xl lg:text-4xl font-black tracking-tight mb-4" data-i18n="canteen_equipment_title">
+          <h2 class="text-3xl lg:text-4xl font-black tracking-tight mb-4" data-i18n="ct_equip_title">
           食堂需要什么设备？
           </h2>
-          <p class="text-lg text-slate-600 dark:text-slate-400 max-w-3xl mx-auto" data-i18n="canteen_equipment_subtitle">午高峰能不能不断菜、不排长队，取决于三件事：大锅炒菜够不够快、米饭能不能一次出够、分餐窗口能不能恒温供餐。洗碗效率则决定了后厨收尾时间。</p>
+          <p class="text-lg text-slate-600 dark:text-slate-400 max-w-3xl mx-auto" data-i18n="ct_equip_subtitle">午高峰能不能不断菜、不排长队，取决于三件事：大锅炒菜够不够快、米饭能不能一次出够、分餐窗口能不能恒温供餐。洗碗效率则决定了后厨收尾时间。</p>
           </div>
           <div class="text-center">
           <a href="/products/" class="inline-flex items-center gap-2 bg-primary text-white px-8 py-4 rounded-xl font-bold hover:shadow-lg hover:shadow-primary/20 transition-all">
@@ -233,96 +287,104 @@
         </div>
       </section>
 
-      <!-- Recommended Equipment -->
+      <!-- ========== Section 5: 场景分类区（新增）========== -->
       <section class="fullwidth-bg py-12">
         <div class="section-content">
           <div class="w-full text-center mb-12">
-          <h2 class="text-3xl lg:text-4xl font-black tracking-tight mb-4" data-i18n="app_recommended_title">推荐设备方案</h2>
-          <p class="text-lg text-slate-600 dark:text-slate-400 max-w-2xl mx-auto" data-i18n="app_recommended_desc">
-          根据您的行业场景，我们推荐以下厨房设备组合。
-          </p>
+            <h2 class="text-3xl lg:text-4xl font-black tracking-tight mb-4" data-i18n="ct_scenarios_title">不同类型的食堂，设备搭配不同</h2>
           </div>
-          <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-          <a href="/applications/" class="group bg-white dark:bg-slate-800 rounded-2xl p-8 border border-slate-200 dark:border-slate-700 hover:border-primary/50 hover:shadow-lg transition-all">
-          <div class="size-14 rounded-xl bg-primary/10 flex items-center justify-center mb-6">
-          <span class="material-symbols-outlined text-primary text-2xl">restaurant</span>
-          </div>
-          <h3 class="text-xl font-bold mb-3" data-i18n="app_rec_smart_kitchen">炒菜设备</h3>
-          <p class="text-slate-600 dark:text-slate-400 mb-4" data-i18n="app_rec_smart_kitchen_desc">大/中/小型炒菜机器人，满足不同规模的烹饪需求。</p>
-          <span class="inline-flex items-center gap-1 text-primary font-bold text-sm group-hover:gap-2 transition-all">
-          了解更多 <span class="material-symbols-outlined text-base">arrow_forward</span>
-          </span>
-          </a>
-          <a href="/applications/" class="group bg-white dark:bg-slate-800 rounded-2xl p-8 border border-slate-200 dark:border-slate-700 hover:border-primary/50 hover:shadow-lg transition-all">
-          <div class="size-14 rounded-xl bg-orange-100 dark:bg-orange-900/30 flex items-center justify-center mb-6">
-          <span class="material-symbols-outlined text-orange-600 text-2xl">soup_kitchen</span>
-          </div>
-          <h3 class="text-xl font-bold mb-3" data-i18n="app_rec_cooking_line">烹饪流水线</h3>
-          <p class="text-slate-600 dark:text-slate-400 mb-4" data-i18n="app_rec_cooking_line_desc">全自动烹饪流水线，实现标准化大批量生产。</p>
-          <span class="inline-flex items-center gap-1 text-orange-600 font-bold text-sm group-hover:gap-2 transition-all">
-          了解更多 <span class="material-symbols-outlined text-base">arrow_forward</span>
-          </span>
-          </a>
-          <a href="/products/" class="group bg-white dark:bg-slate-800 rounded-2xl p-8 border border-slate-200 dark:border-slate-700 hover:border-primary/50 hover:shadow-lg transition-all">
-          <div class="size-14 rounded-xl bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center mb-6">
-          <span class="material-symbols-outlined text-blue-600 text-2xl">grid_view</span>
-          </div>
-          <h3 class="text-xl font-bold mb-3" data-i18n="app_rec_all_products">全系列产品</h3>
-          <p class="text-slate-600 dark:text-slate-400 mb-4" data-i18n="app_rec_all_products_desc">浏览 200 款智能商厨设备，涵盖炒菜、炸、蒸、煮、切配等。</p>
-          <p class="text-slate-600 dark:text-slate-400 mb-4" data-i18n="app_rec_all_products_desc">浏览 114 款商用厨具，涵盖炒菜、炸、蒸、煮、切配等。</p>
-          <span class="inline-flex items-center gap-1 text-blue-600 font-bold text-sm group-hover:gap-2 transition-all">
-          了解更多 <span class="material-symbols-outlined text-base">arrow_forward</span>
-          </span>
-          </a>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <!-- 学校食堂 -->
+            <div class="group bg-white dark:bg-slate-800 rounded-2xl p-8 border border-slate-200 dark:border-slate-700 hover:border-primary/50 hover:shadow-lg transition-all">
+              <div class="size-14 rounded-xl bg-primary/10 flex items-center justify-center mb-6">
+                <span class="material-symbols-outlined text-primary text-2xl">school</span>
+              </div>
+              <h3 class="text-xl font-bold mb-3" data-i18n="ct_scenario_1_title">学校食堂</h3>
+              <p class="text-slate-600 dark:text-slate-400" data-i18n="ct_scenario_1_body">日供几百到几千份，需要快速出餐+恒温保温，出餐时段集中在中午。</p>
+            </div>
+            <!-- 企业食堂 -->
+            <div class="group bg-white dark:bg-slate-800 rounded-2xl p-8 border border-slate-200 dark:border-slate-700 hover:border-primary/50 hover:shadow-lg transition-all">
+              <div class="size-14 rounded-xl bg-orange-100 dark:bg-orange-900/30 flex items-center justify-center mb-6">
+                <span class="material-symbols-outlined text-orange-600 text-2xl">business</span>
+              </div>
+              <h3 class="text-xl font-bold mb-3" data-i18n="ct_scenario_2_title">企业食堂</h3>
+              <p class="text-slate-600 dark:text-slate-400" data-i18n="ct_scenario_2_body">菜品种类多，需要多设备并行出餐，可能涉及多菜系。</p>
+            </div>
+            <!-- 医院食堂 -->
+            <div class="group bg-white dark:bg-slate-800 rounded-2xl p-8 border border-slate-200 dark:border-slate-700 hover:border-primary/50 hover:shadow-lg transition-all">
+              <div class="size-14 rounded-xl bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center mb-6">
+                <span class="material-symbols-outlined text-blue-600 text-2xl">local_hospital</span>
+              </div>
+              <h3 class="text-xl font-bold mb-3" data-i18n="ct_scenario_3_title">医院食堂</h3>
+              <p class="text-slate-600 dark:text-slate-400" data-i18n="ct_scenario_3_body">对食品安全要求最高，温控精准+批次可追溯。</p>
+            </div>
+            <!-- 社区长者食堂 -->
+            <div class="group bg-white dark:bg-slate-800 rounded-2xl p-8 border border-slate-200 dark:border-slate-700 hover:border-primary/50 hover:shadow-lg transition-all">
+              <div class="size-14 rounded-xl bg-green-100 dark:bg-green-900/30 flex items-center justify-center mb-6">
+                <span class="material-symbols-outlined text-green-600 text-2xl">diversity_3</span>
+              </div>
+              <h3 class="text-xl font-bold mb-3" data-i18n="ct_scenario_4_title">社区长者食堂</h3>
+              <p class="text-slate-600 dark:text-slate-400" data-i18n="ct_scenario_4_body">份量精准+菜品软烂适口，需要炖煮设备。</p>
+            </div>
           </div>
         </div>
       </section>
 
-      <!-- Industry Pain Points -->
-      <section class="fullwidth-bg py-16">
+      <!-- ========== Section 6: FAQ（新增）========== -->
+      <section class="fullwidth-bg py-12 bg-slate-50 dark:bg-slate-900/50">
         <div class="section-content">
-          <div class="w-full text-center mb-12">
-            <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-red-100 dark:bg-red-900/20 text-red-600 text-xs font-bold uppercase tracking-widest mb-4">
-              <span class="material-symbols-outlined text-sm">warning</span>
-              <span data-i18n="app_pain_badge">行业痛点</span>
-            </span>
-            <h2 class="text-3xl font-bold mb-4" data-i18n="canteen_pain_bottom_title">食堂负责人的日常</h2>
-            <p class="text-slate-500 dark:text-slate-400 max-w-2xl mx-auto" data-i18n="canteen_pain_bottom_desc">除了做饭供餐，这些事每天都在发生。</p>
+          <div class="text-center max-w-3xl mx-auto mb-12">
+            <h2 class="text-3xl lg:text-4xl font-black tracking-tight mb-4" data-i18n="ct_faq_title">食堂负责人常问的问题</h2>
+            <p class="text-slate-600 dark:text-slate-400" data-i18n="ct_faq_subtitle">下单之前先把疑惑弄清楚，避免踩坑。</p>
           </div>
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div class="flex gap-4 p-8 rounded-2xl bg-red-50/50 dark:bg-red-900/10 border border-red-100 dark:border-red-900/30">
-              <div class="w-10 h-10 rounded-xl bg-red-100 dark:bg-red-900/30 flex items-center justify-center shrink-0"><span class="material-symbols-outlined text-red-600">local_fire_department</span></div>
-              <div>
-                <h3 class="font-bold mb-1" data-i18n="canteen_pain_bottom_1_title">燃气灶又出问题</h3>
-                <p class="text-base text-slate-600 dark:text-slate-400" data-i18n="canteen_pain_bottom_1_desc">一台风机坏了，火苗不稳，炒菜慢了一半。维修等三天，午高峰怎么办？</p>
-              </div>
-            </div>
-            <div class="flex gap-4 p-8 rounded-2xl bg-red-50/50 dark:bg-red-900/10 border border-red-100 dark:border-red-900/30">
-              <div class="w-10 h-10 rounded-xl bg-red-100 dark:bg-red-900/30 flex items-center justify-center shrink-0"><span class="material-symbols-outlined text-red-600">person_off</span></div>
-              <div>
-                <h3 class="font-bold mb-1" data-i18n="canteen_pain_bottom_2_title">厨师又请假了</h3>
-                <p class="text-base text-slate-600 dark:text-slate-400" data-i18n="canteen_pain_bottom_2_desc">炒菜岗位本来只多配了 1 个人，今天请病假，窗口直接少两个菜。</p>
-              </div>
-            </div>
-            <div class="flex gap-4 p-8 rounded-2xl bg-red-50/50 dark:bg-red-900/10 border border-red-100 dark:border-red-900/30">
-              <div class="w-10 h-10 rounded-xl bg-red-100 dark:bg-red-900/30 flex items-center justify-center shrink-0"><span class="material-symbols-outlined text-red-600">receipt_long</span></div>
-              <div>
-                <h3 class="font-bold mb-1" data-i18n="canteen_pain_bottom_3_title">月底盘点，食材浪费又超标</h3>
-                <p class="text-base text-slate-600 dark:text-slate-400" data-i18n="canteen_pain_bottom_3_desc">备餐量全凭老师傅经验，有时候菜剩很多倒掉，有时候不够吃被投诉。</p>
-              </div>
-            </div>
-            <div class="flex gap-4 p-8 rounded-2xl bg-red-50/50 dark:bg-red-900/10 border border-red-100 dark:border-red-900/30">
-              <div class="w-10 h-10 rounded-xl bg-red-100 dark:bg-red-900/30 flex items-center justify-center shrink-0"><span class="material-symbols-outlined text-red-600">water_drop</span></div>
-              <div>
-                <h3 class="font-bold mb-1" data-i18n="canteen_pain_bottom_4_title">洗碗阿姨干到腰疼</h3>
-                <p class="text-base text-slate-600 dark:text-slate-400" data-i18n="canteen_pain_bottom_4_desc">3000 人的餐具，4 个人洗到下午 2 点，月底总有人提离职。</p>
-              </div>
-            </div>
+          <div class="max-w-3xl mx-auto space-y-4">
+            <details class="group bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 overflow-hidden">
+              <summary class="flex items-center justify-between p-6 cursor-pointer font-bold text-lg select-none">
+                <span data-i18n="ct_faq1_q">食堂设备能满足几百人的供餐需求吗？</span>
+                <span class="material-symbols-outlined text-slate-400 group-open:rotate-180 transition-transform">expand_more</span>
+              </summary>
+              <div class="px-6 pb-6 text-slate-600 dark:text-slate-400 leading-relaxed" data-i18n="ct_faq1_a">能。根据供餐人数选择不同容量的设备，小到几百人的学校食堂，大到数千人的企业食堂都有对应方案。建议带上供餐人数和菜品数量来咨询。</div>
+            </details>
+            <details class="group bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 overflow-hidden">
+              <summary class="flex items-center justify-between p-6 cursor-pointer font-bold text-lg select-none">
+                <span data-i18n="ct_faq2_q">设备能保持菜品温度吗？</span>
+                <span class="material-symbols-outlined text-slate-400 group-open:rotate-180 transition-transform">expand_more</span>
+              </summary>
+              <div class="px-6 pb-6 text-slate-600 dark:text-slate-400 leading-relaxed" data-i18n="ct_faq2_a">能。设备支持恒温保温功能，出餐后可以在保温模式下保持菜品温度和口感，避免顾客吃到凉菜。</div>
+            </details>
+            <details class="group bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 overflow-hidden">
+              <summary class="flex items-center justify-between p-6 cursor-pointer font-bold text-lg select-none">
+                <span data-i18n="ct_faq3_q">没有厨师经验的人能操作吗？</span>
+                <span class="material-symbols-outlined text-slate-400 group-open:rotate-180 transition-transform">expand_more</span>
+              </summary>
+              <div class="px-6 pb-6 text-slate-600 dark:text-slate-400 leading-relaxed" data-i18n="ct_faq3_a">能。菜谱预设好火候和翻炒节奏，选菜、投料、按启动即可。新手培训 30 分钟就能独立操作。</div>
+            </details>
+            <details class="group bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 overflow-hidden">
+              <summary class="flex items-center justify-between p-6 cursor-pointer font-bold text-lg select-none">
+                <span data-i18n="ct_faq4_q">质保和维修怎么保障？</span>
+                <span class="material-symbols-outlined text-slate-400 group-open:rotate-180 transition-transform">expand_more</span>
+              </summary>
+              <div class="px-6 pb-6 text-slate-600 dark:text-slate-400 leading-relaxed" data-i18n="ct_faq4_a">整机质保 1 年，核心配件（IGBT 模块、电磁线圈、锅体）质保 3 年。10 个仓库覆盖，质保期内非人为损坏免费维修。</div>
+            </details>
+            <details class="group bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 overflow-hidden">
+              <summary class="flex items-center justify-between p-6 cursor-pointer font-bold text-lg select-none">
+                <span data-i18n="ct_faq5_q">能做清真餐或其他特殊饮食吗？</span>
+                <span class="material-symbols-outlined text-slate-400 group-open:rotate-180 transition-transform">expand_more</span>
+              </summary>
+              <div class="px-6 pb-6 text-slate-600 dark:text-slate-400 leading-relaxed" data-i18n="ct_faq5_a">可以。设备不涉及食材交叉污染问题，不同菜品使用同一台设备只需简单清洁即可。自定义菜谱可以录入特殊饮食的烹饪参数。</div>
+            </details>
+            <details class="group bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 overflow-hidden">
+              <summary class="flex items-center justify-between p-6 cursor-pointer font-bold text-lg select-none">
+                <span data-i18n="ct_faq6_q">耗电量大吗？食堂的电力够用吗？</span>
+                <span class="material-symbols-outlined text-slate-400 group-open:rotate-180 transition-transform">expand_more</span>
+              </summary>
+              <div class="px-6 pb-6 text-slate-600 dark:text-slate-400 leading-relaxed" data-i18n="ct_faq6_a">电磁加热设备热效率 90%+，比传统燃气灶节能。具体耗电根据使用频率和型号而异，建议联系销售获取针对性的电力评估方案。</div>
+            </details>
           </div>
         </div>
       </section>
 
-
+      <!-- ========== Section 7: CTA（保留不动）========== -->
       <section class="py-12 fullwidth-bg bg-primary">
         <div class="section-content">
         <div class="">
