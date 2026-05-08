@@ -584,7 +584,7 @@
       "    flex: 1 1 55%;",
       "    max-width: 380px;",
       "  }",
-      "}"
+      "}",
       ".ios-search-bar.is-focused {",
       "  width: 280px;",
       "  background: rgba(120,120,128,0.08);",

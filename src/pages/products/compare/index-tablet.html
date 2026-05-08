@@ -80,10 +80,11 @@
     ></navigator>
 
     <main id="spa-content">
-    <div class="w-full pt-2">
+    <div class="w-full">
 
       <!-- Page Header -->
-      <section class="w-full px-6 pb-6">
+      <section class="fullwidth-bg py-10">
+        <div class="section-content">
         <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-bold uppercase tracking-wider mb-3">
           <span class="material-symbols-outlined text-sm">compare</span>
           <span>Product Compare</span>
@@ -94,10 +95,12 @@
         <p class="text-sm text-slate-600 dark:text-slate-400">
           选择最多 3 款产品，并排对比参数。
         </p>
+        </div>
       </section>
 
       <!-- Selected Products Bar -->
-      <section id="compare-bar" class="w-full px-6 pb-4 sticky top-[72px] z-30 hidden">
+      <section id="compare-bar" class="fullwidth-bg py-4 sticky top-[72px] z-30 hidden">
+        <div class="section-content">
         <div class="bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-lg p-3 flex items-center gap-3">
           <div class="flex items-center gap-1.5 text-xs font-bold text-slate-500 dark:text-slate-400 flex-shrink-0">
             <span class="material-symbols-outlined text-primary text-base">compare_arrows</span>
@@ -109,10 +112,12 @@
             清空
           </button>
         </div>
+        </div>
       </section>
 
       <!-- Comparison Table -->
-      <section id="comparison-section" class="w-full px-6 pb-8 hidden">
+      <section id="comparison-section" class="fullwidth-bg py-8 hidden">
+        <div class="section-content">
         <div class="flex items-center justify-between mb-4">
           <h2 class="text-lg font-black text-slate-900 dark:text-white">参数对比</h2>
           <a href="/products/" id="compare-add-more" class="text-xs text-primary font-bold flex items-center gap-1 hover:underline">
@@ -123,11 +128,13 @@
         <div class="bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 overflow-hidden shadow-sm">
           <div id="comparison-table" class="overflow-x-auto"></div>
         </div>
+        </div>
       </section>
 
       <!-- Empty State -->
-      <section id="compare-empty" class="w-full px-6 pb-8">
-        <div class="bg-gradient-to-br from-slate-50 dark:from-slate-900 to-white dark:to-black rounded-2xl border border-slate-200 dark:border-slate-700 p-8 text-center">
+      <section id="compare-empty" class="fullwidth-bg py-8">
+        <div class="section-content">
+        <div class="bg-gradient-to-br from-slate-50 dark:from-slate-900 to-white dark:bg-black rounded-2xl border border-slate-200 dark:border-slate-700 p-8 text-center">
           <div class="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-4">
             <span class="material-symbols-outlined text-3xl text-primary">compare</span>
           </div>
@@ -140,10 +147,12 @@
             前往产品页选择
           </a>
         </div>
+        </div>
       </section>
 
       <!-- CTA Section -->
-      <section class="w-full px-6 py-10">
+      <section class="fullwidth-bg py-12">
+        <div class="section-content">
         <div class="bg-gradient-to-br from-primary/10 to-primary/5 rounded-2xl p-8 text-center">
           <h2 class="text-xl font-bold mb-3 text-slate-900 dark:text-white">还不确定怎么选？</h2>
           <p class="text-sm text-slate-600 dark:text-slate-400 mb-6">联系工程师团队，为您推荐最优方案。</p>
@@ -156,6 +165,7 @@
               <span>WhatsApp</span>
             </a>
           </div>
+        </div>
         </div>
       </section>
 
@@ -172,7 +182,7 @@
     <script defer src="/assets/js/ui/about-dropdown.js?v=20260322-v3"></script>
     <script defer src="/assets/js/nav-config.js?v=20260415"></script>
     <script defer src="/assets/js/ui/mobile-bottom-bar.js"></script>
-    <script defer src="/assets/js/ui/navigator.js?v=20260322-v3"></script>
+    <script defer src="/assets/js/ui/navigator.js?v=20260508"></script>
     <script defer src="/assets/js/ui/slide-menu.js?v=20260322-v3"></script>
     <script defer src="/assets/js/ui/search-engine.js"></script>
     <script defer src="/assets/js/ui/footer.js?v=20260507-v4"></script>
