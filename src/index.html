@@ -171,20 +171,30 @@
 
 <!-- Suppress DOM errors from injected third-party scripts (e.g. frame_start.js)
      that try to removeChild a node already removed by SPA navigation or
-     component re-mounting. These errors are harmless but noisy in console. -->
+     component re-mounting. These errors are harmless but noisy in console.
+     Uses both window.onerror (sync) and capture-phase error listener (async). -->
 <script>
-  // Use window.onerror (direct assignment) for maximum priority —
-  // it catches errors BEFORE any other handler, including third-party scripts.
+  // 1) window.onerror catches synchronous errors
   var _origOnerror = window.onerror;
   window.onerror = function(msg, url, line, col, error) {
     if (msg && /removeChild.*not a child of/i.test(msg)) {
-      console.debug('[DOM] Suppressed removeChild error from third-party script:', url);
-      return true; // prevent default console.error
+      return true;
     }
     if (typeof _origOnerror === 'function') {
       return _origOnerror(msg, url, line, col, error);
     }
   };
+
+  // 2) Capture-phase error listener catches async errors (event callbacks,
+    //    timeouts, etc.) that window.onerror misses — e.g. frame_start.js
+    //    throws inside an onload handler.
+  document.addEventListener('error', function(e) {
+    if (e.message && /removeChild.*not a child of/i.test(e.message)) {
+      e.preventDefault();
+      e.stopPropagation();
+      return;
+    }
+  }, true);
 </script>
 
 <!-- Initialize SPA -->
