@@ -400,20 +400,25 @@
     var html = renderBreadcrumb(page);
     container.innerHTML = html;
 
-    // Render siblings at sibling-container if exists
-    var siblingContainer = document.getElementById('sibling-container');
-    if (siblingContainer) {
-      siblingContainer.innerHTML = renderSiblings(page);
-    }
-
     // Render cross-sell and scene entry on category pages
     var crossSellContainer = document.getElementById('cross-sell-container');
     if (crossSellContainer) {
-      crossSellContainer.innerHTML = renderCrossSell(page);
+      // Insert sibling nav before cross-sell
+      var siblingsHtml = renderSiblings(page);
+      var crossSellHtml = renderCrossSell(page);
+      var sceneHtml = renderSceneEntry(page);
+      crossSellContainer.innerHTML = (siblingsHtml ? '<div id="sibling-wrapper">' + siblingsHtml + '</div>' : '') +
+        (crossSellHtml ? '<div id="cross-sell-wrapper" class="mt-8">' + crossSellHtml + '</div>' : '');
     }
     var sceneEntryContainer = document.getElementById('scene-entry-container');
     if (sceneEntryContainer) {
       sceneEntryContainer.innerHTML = renderSceneEntry(page);
+    }
+
+    // For non-category pages with sibling-container, render there
+    var siblingContainer = document.getElementById('sibling-container');
+    if (siblingContainer && page.type !== 'category') {
+      siblingContainer.innerHTML = renderSiblings(page);
     }
   }
 
