@@ -3,7 +3,7 @@
  * Extracted from page-interactions.js; self-initializes on DOMContentLoaded.
  *
  * Depends on (may be loaded after this file):
- *   contacts.js / smart-popup.js → used via safeCall() at runtime
+ *   contacts.js → used via safeCall() at runtime
  */
 (function (global) {
   "use strict";
@@ -142,8 +142,6 @@
 
     function showBar() {
       if (dismissed) return;
-      var overlay = document.getElementById("smart-popup-overlay");
-      if (overlay && overlay.style.display !== "none") return;
       bar.classList.add("visible");
       shown = true;
     }
@@ -170,7 +168,7 @@
     );
 
     document.getElementById("sc-quote-btn").addEventListener("click", function () {
-      safeCall("showSmartPopupManual");
+      window.location.href = "/quote";
     });
     document.getElementById("sc-close-btn").addEventListener("click", function () {
       dismissed = true;
