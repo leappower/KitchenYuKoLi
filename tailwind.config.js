@@ -66,4 +66,8 @@ module.exports = {
     },
   },
   plugins: [],
+  safelist: [
+    // Padding classes used in HTML but sometimes purged incorrectly
+    'pb-10', 'pb-2', 'pb-1', 'pb-0', 'pb-3',
+  ],
 };
