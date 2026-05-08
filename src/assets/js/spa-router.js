@@ -652,8 +652,10 @@
         this.log("Dynamic route on init:", currentPath);
         this.loadRoute(currentPath);
       } else {
-        this.log("Unknown initial route:", currentPath, "- redirecting to home");
-        this.navigate("/home/");
+        // Standalone SSG page — don't load route (content already in DOM),
+        // just register click handler for future SPA navigation.
+        // The document-level click handler below handles this.
+        this.log("Standalone page (skip init load):", currentPath);
       }
 
       // 解析路径中的 hash 锚点（如 /support/#faq → path=/support/ hash=faq）
