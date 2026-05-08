@@ -679,15 +679,11 @@
           targetPath = "/" + pagesMatch[1] + "/";
         }
 
-        // 只拦截已知路由的链接（含动态 /products/<slug>/ 路由），其他让浏览器默认处理
-        var isKnown = !!_self.routes[targetPath];
-        // Dynamic: /products/<slug>/ — category slug or PDP model
-        if (!isKnown) {
-          var dynMatch = targetPath.match(/^\/products\/([^/]+)\/$/);
-          if (dynMatch) isKnown = true;
-        }
-        if (!isKnown) {
-          _self.log("Skipping SPA for unknown route:", targetPath);
+        // Intercept all internal links — loadRoute handles unknown paths via
+        // convention (/<path>/index-pc.html). Only skip non-page paths.
+        var isPage = targetPath.match(/^\/[a-z0-9][a-z0-9._-]*(?:\/[a-z0-9][a-z0-9._-]*)*\/$/i);
+        if (!isPage) {
+          _self.log("Skipping SPA for non-page path:", targetPath);
           return;
         }
 
