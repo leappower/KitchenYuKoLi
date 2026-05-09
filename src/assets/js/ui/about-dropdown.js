@@ -8,6 +8,14 @@
 (function (global) {
   "use strict";
 
+  var _spaRegs = {};
+  function _spaOn(tgt, evt, fn, key) {
+    if (_spaRegs[key]) _spaRegs[key].abort();
+    var ac = new AbortController();
+    _spaRegs[key] = ac;
+    tgt.addEventListener(evt, fn, { signal: ac.signal });
+  }
+
   /* ───────────────────────── DATA ───────────────────────── */
 
   var DEFAULT_ITEMS = [
@@ -17,7 +25,7 @@
   ];
 
   function getItems() {
-    if (typeof NAV_CONFIG !== 'undefined' && NAV_CONFIG.dropdowns && NAV_CONFIG.dropdowns.about) {
+    if (typeof NAV_CONFIG !== "undefined" && NAV_CONFIG.dropdowns && NAV_CONFIG.dropdowns.about) {
       return NAV_CONFIG.dropdowns.about;
     }
     return DEFAULT_ITEMS;
@@ -63,9 +71,11 @@
   }
 
   function renderDropdown(cfg) {
-    var items = getItems().map(function (item, idx) {
-      return buildDropdownItem(item, idx < getItems().length - 1);
-    }).join("\n");
+    var items = getItems()
+      .map(function (item, idx) {
+        return buildDropdownItem(item, idx < getItems().length - 1);
+      })
+      .join("\n");
 
     return (
       '<div class="abt-dropdown-wrap' +
@@ -120,7 +130,7 @@
     }
 
     bindTriggers();
-    document.addEventListener("spa:load", bindTriggers);
+    _spaOn(document, "spa:load", bindTriggers, "spa:load:bindTriggers");
 
     // SPA navigation for dropdown sub-items (prevent full page refresh)
     document.querySelectorAll(".abt-dropdown-item").forEach(function (item) {
@@ -179,23 +189,25 @@
     var panel = document.createElement("div");
     panel.className = "abt-popup-panel";
 
-    var items = getItems().map(function (item) {
-      return (
-        '<a href="' +
-        esc(item.href) +
-        '" class="abt-popup-item">' +
-        '<span class="abt-dropdown-icon"><span class="material-symbols-outlined">' +
-        esc(item.icon) +
-        "</span></span>" +
-        '<span class="abt-popup-label" data-i18n="' +
-        esc(item.key) +
-        '">' +
-        esc(item.key) +
-        "</span>" +
-        '<span class="material-symbols-outlined abt-popup-chevron">chevron_right</span>' +
-        "</a>"
-      );
-    }).join("\n");
+    var items = getItems()
+      .map(function (item) {
+        return (
+          '<a href="' +
+          esc(item.href) +
+          '" class="abt-popup-item">' +
+          '<span class="abt-dropdown-icon"><span class="material-symbols-outlined">' +
+          esc(item.icon) +
+          "</span></span>" +
+          '<span class="abt-popup-label" data-i18n="' +
+          esc(item.key) +
+          '">' +
+          esc(item.key) +
+          "</span>" +
+          '<span class="material-symbols-outlined abt-popup-chevron">chevron_right</span>' +
+          "</a>"
+        );
+      })
+      .join("\n");
 
     panel.innerHTML = '<div class="abt-popup-handle"></div>' + items;
 
@@ -241,7 +253,7 @@
     });
   }
 
-  document.addEventListener("spa:load", closePopup);
+  _spaOn(document, "spa:load", closePopup, "spa:load:closePopup");
 
   /* ───────────────────────── PUBLIC API ───────────────────────── */
 

@@ -21,22 +21,31 @@
  *   SAR: K (1,000 SAR)
  */
 
-'use strict';
+"use strict";
 
 (function (root) {
-  'use strict';
+  "use strict";
+
+  var _spaRegs = {};
+  function _spaOn(tgt, evt, fn, key) {
+    if (_spaRegs[key]) _spaRegs[key].abort();
+    var ac = new AbortController();
+    _spaRegs[key] = ac;
+    tgt.addEventListener(evt, fn, { signal: ac.signal });
+  }
 
   // 万位单位的本地数值（该单位代表多少当地货币）
   var UNIT_VALUES = {
-    '万元': 10000, '萬元': 10000,
-    'K': 1000,
-    'ล้าน': 1000000,
-    'Triệu': 1000000,
-    'Juta': 1000000,
-    '万円': 10000,
-    '백만': 1000000,
-    'Lakh': 100000,
-    '': 1
+    万元: 10000,
+    萬元: 10000,
+    K: 1000,
+    ล้าน: 1000000,
+    Triệu: 1000000,
+    Juta: 1000000,
+    万円: 10000,
+    백만: 1000000,
+    Lakh: 100000,
+    "": 1,
   };
 
   // ── 缓存 ──
@@ -48,7 +57,7 @@
       return root.translationManager.currentLanguage;
     }
     if (root.LANGUAGE_CODE) return root.LANGUAGE_CODE;
-    return 'en';
+    return "en";
   }
 
   /**
@@ -61,19 +70,20 @@
 
     var reg = root.LANG_REGISTRY;
     if (!reg || !reg.LANGUAGES) {
-      _cachedConfig = { symbol: '$', code: 'USD', rate: 0.14, unit: 'K' };
+      _cachedConfig = { symbol: "$", code: "USD", rate: 0.14, unit: "K" };
       _cachedLang = lang;
       return _cachedConfig;
     }
 
     var found = null;
     for (var i = 0; i < reg.LANGUAGES.length; i++) {
-      if (reg.LANGUAGES[i].code === lang) { found = reg.LANGUAGES[i]; break; }
+      if (reg.LANGUAGES[i].code === lang) {
+        found = reg.LANGUAGES[i];
+        break;
+      }
     }
 
-    _cachedConfig = (found && found.currency)
-      ? found.currency
-      : { symbol: '$', code: 'USD', rate: 0.14, unit: 'K' };
+    _cachedConfig = found && found.currency ? found.currency : { symbol: "$", code: "USD", rate: 0.14, unit: "K" };
     _cachedLang = lang;
     return _cachedConfig;
   }
@@ -96,9 +106,7 @@
     var wanValue = cnyAmount / 10000;
     var sym = cfg.label || cfg.symbol;
 
-    var display = wanValue >= 100
-      ? Math.round(wanValue).toString()
-      : wanValue.toFixed(1).replace(/\.0$/, '');
+    var display = wanValue >= 100 ? Math.round(wanValue).toString() : wanValue.toFixed(1).replace(/\.0$/, "");
 
     return { value: wanValue, display: display, symbol: sym, unit: cfg.unit };
   }
@@ -111,8 +119,8 @@
   function formatCurrency(cnyAmount) {
     var cfg = getConfig();
     var display;
-    if (cnyAmount >= 1000000) display = (cnyAmount / 1000000).toFixed(1).replace(/\.0$/, '') + 'M';
-    else if (cnyAmount >= 10000) display = (cnyAmount / 1000).toFixed(1).replace(/\.0$/, '') + 'K';
+    if (cnyAmount >= 1000000) display = (cnyAmount / 1000000).toFixed(1).replace(/\.0$/, "") + "M";
+    else if (cnyAmount >= 10000) display = (cnyAmount / 1000).toFixed(1).replace(/\.0$/, "") + "K";
     else display = Math.round(cnyAmount).toString();
     return { value: cnyAmount, display: display, symbol: cfg.label || cfg.symbol };
   }
@@ -139,35 +147,37 @@
     var sym = cfg.label || cfg.symbol; // label 用于区分同符号币种（JP¥ vs ¥）
 
     // 1) 更新 [data-currency-symbol] 元素（输入框前缀 ¥ → $ 等）
-    document.querySelectorAll('[data-currency-symbol]').forEach(function(el) {
+    document.querySelectorAll("[data-currency-symbol]").forEach(function (el) {
       el.textContent = sym;
     });
 
     // 2) 更新 [data-currency-unit] 元素（万元/年 → K/yr 等）
-    document.querySelectorAll('[data-currency-unit]').forEach(function(el) {
+    document.querySelectorAll("[data-currency-unit]").forEach(function (el) {
       var t = el.textContent.trim();
       // 匹配 "10K RMB/year"、"万元/年"、"K/yr" 等格式
-      var m = t.match(/^(\d*[\.]?\d*)\s*(万元|萬元|K|M|Lakh|ล้าน|Triệu|Juta|万円|백만)?\s*(RMB|USD|CNY|THB|VND|MYR|IDR|JPY|KRW|INR|TWD|SAR)?\s*\/\s*(year|yr|年)$/i);
+      var m = t.match(
+        /^(\d*[\.]?\d*)\s*(万元|萬元|K|M|Lakh|ล้าน|Triệu|Juta|万円|백만)?\s*(RMB|USD|CNY|THB|VND|MYR|IDR|JPY|KRW|INR|TWD|SAR)?\s*\/\s*(year|yr|年)$/i
+      );
       if (m) {
-        var num = m[1] || '';
-        el.textContent = (num ? num + ' ' : '') + cfg.unit + '/yr';
+        var num = m[1] || "";
+        el.textContent = (num ? num + " " : "") + cfg.unit + "/yr";
       } else {
-        el.textContent = cfg.unit + '/yr';
+        el.textContent = cfg.unit + "/yr";
       }
     });
 
     // 2b) 更新 [data-currency-label] 元素，替换括号内的币种文字/符号
-    document.querySelectorAll('[data-currency-label]').forEach(function(el) {
+    document.querySelectorAll("[data-currency-label]").forEach(function (el) {
       el.textContent = el.textContent
-        .replace(/[(（]\s*(RMB|USD|CNY|THB|VND|MYR|IDR|JPY|KRW|INR|TWD|SAR|人民币|新台幣|新台币|新加坡元|泰铢|越南盾|令吉|卢比|韩元|日元|沙特里亚尔|[¥$₹฿₫₩₤€£]+)\s*[)）]/g,
-          function(match) {
-            return match.indexOf('（') === 0
-              ? '（' + sym + '）'
-              : '(' + sym + ')';
-          })
-        .replace(/\s+RMB\s*/g, ' ' + cfg.code + ' ')
-        .replace(/\s+人民币\s*/g, ' ' + cfg.code + ' ')
-        .replace(/\s+新台幣?\s*/g, ' ' + cfg.code + ' ');
+        .replace(
+          /[(（]\s*(RMB|USD|CNY|THB|VND|MYR|IDR|JPY|KRW|INR|TWD|SAR|人民币|新台幣|新台币|新加坡元|泰铢|越南盾|令吉|卢比|韩元|日元|沙特里亚尔|[¥$₹฿₫₩₤€£]+)\s*[)）]/g,
+          function (match) {
+            return match.indexOf("（") === 0 ? "（" + sym + "）" : "(" + sym + ")";
+          }
+        )
+        .replace(/\s+RMB\s*/g, " " + cfg.code + " ")
+        .replace(/\s+人民币\s*/g, " " + cfg.code + " ")
+        .replace(/\s+新台幣?\s*/g, " " + cfg.code + " ");
     });
 
     // 3) ROI / deploy 输入框不改动数值 — ROI 是比率，与币种无关
@@ -180,34 +190,53 @@
   // currency.js 是 defer 且排在 translations.js 之后，
   // 加载时 translationManager 已存在，直接注册事件即可
   if (root.addEventListener) {
-    root.addEventListener('languageChanged', function() {
-      _invalidateCache();
-    });
+    _spaOn(
+      root,
+      "languageChanged",
+      function () {
+        _invalidateCache();
+      },
+      "languageChanged:cache"
+    );
     if (root.translationManager && root.translationManager.on) {
       // 首次翻译可能已完成，立即补刷新一次
       if (root.translationManager.isInitialized) {
-        requestAnimationFrame(function() { refreshCurrencyUI(); });
+        requestAnimationFrame(function () {
+          refreshCurrencyUI();
+        });
       }
-      root.translationManager.on('translationsApplied', function() {
+      root.translationManager.on("translationsApplied", function () {
         // applyTranslations 内部用 requestAnimationFrame 替换 DOM，
         // 等下一帧再刷新币种标签
-        requestAnimationFrame(function() { refreshCurrencyUI(); });
+        requestAnimationFrame(function () {
+          refreshCurrencyUI();
+        });
       });
     }
   }
 
   // ── SPA 导航后重新翻译+刷新币种 ──
-  document.addEventListener('spa:load', function() {
-    if (root.translationManager && root.translationManager.isInitialized) {
-      root.translationManager.applyTranslations().then(function() {
-        requestAnimationFrame(function() { refreshCurrencyUI(); });
-      }).catch(function() {
+  _spaOn(
+    document,
+    "spa:load",
+    function () {
+      if (root.translationManager && root.translationManager.isInitialized) {
+        root.translationManager
+          .applyTranslations()
+          .then(function () {
+            requestAnimationFrame(function () {
+              refreshCurrencyUI();
+            });
+          })
+          .catch(function () {
+            setTimeout(refreshCurrencyUI, 300);
+          });
+      } else {
         setTimeout(refreshCurrencyUI, 300);
-      });
-    } else {
-      setTimeout(refreshCurrencyUI, 300);
-    }
-  });
+      }
+    },
+    "spa:load:currencyRefresh"
+  );
 
   // ── Export ──
   var Currency = {
@@ -217,11 +246,11 @@
     getInputConfig: getInputConfig,
     toCNY: toCNY,
     refreshCurrencyUI: refreshCurrencyUI,
-    UNIT_VALUES: UNIT_VALUES
+    UNIT_VALUES: UNIT_VALUES,
   };
 
-  if (typeof module !== 'undefined' && module.exports) {
+  if (typeof module !== "undefined" && module.exports) {
     module.exports = Currency;
   }
   root.Currency = Currency;
-})(typeof window !== 'undefined' ? window : this);
+})(typeof window !== "undefined" ? window : this);

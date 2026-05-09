@@ -7,9 +7,17 @@
 (function (global) {
   "use strict";
 
+  var _spaRegs = {};
+  function _spaOn(tgt, evt, fn, key) {
+    if (_spaRegs[key]) _spaRegs[key].abort();
+    var ac = new AbortController();
+    _spaRegs[key] = ac;
+    tgt.addEventListener(evt, fn, { signal: ac.signal });
+  }
+
   /* ───────────────────────── DATA ───────────────────────── */
 
-  var SUBSERIES = (typeof NAV_CONFIG !== 'undefined' && NAV_CONFIG.dropdowns && NAV_CONFIG.dropdowns.products) || [
+  var SUBSERIES = (typeof NAV_CONFIG !== "undefined" && NAV_CONFIG.dropdowns && NAV_CONFIG.dropdowns.products) || [
     { key: "nav_products_cutting", icon: "content_cut", emoji: "", href: "/products/cutting/" },
     { key: "nav_products_stirfry", icon: "local_fire_department", emoji: "🔥", href: "/products/stirfry/" },
     { key: "nav_products_frying", icon: "outdoor_grill", emoji: "", href: "/products/frying/" },
@@ -193,7 +201,7 @@
     bindTriggers();
 
     /* After SPA navigation or remount, new trigger elements may appear */
-    document.addEventListener("spa:load", bindTriggers);
+    _spaOn(document, "spa:load", bindTriggers, "spa:load:bindTriggers");
   }
 
   /* ───────────────────────── MOBILE POPUP ───────────────────────── */
@@ -306,9 +314,14 @@
 
   /* ───────────────────────── SPA CLEANUP ───────────────────────── */
 
-  document.addEventListener("spa:load", function () {
-    closePopup();
-  });
+  _spaOn(
+    document,
+    "spa:load",
+    function () {
+      closePopup();
+    },
+    "spa:load:closePopup"
+  );
 
   /* ───────────────────────── PUBLIC API ───────────────────────── */
 

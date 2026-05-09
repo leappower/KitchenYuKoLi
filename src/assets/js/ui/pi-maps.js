@@ -9,18 +9,41 @@
 (function (global) {
   "use strict";
 
+  var _spaRegs = {};
+  function _spaOn(tgt, evt, fn, key) {
+    if (_spaRegs[key]) _spaRegs[key].abort();
+    var ac = new AbortController();
+    _spaRegs[key] = ac;
+    tgt.addEventListener(evt, fn, { signal: ac.signal });
+  }
+
   // ─── Helpers (from PiHelpers) ─────────────────────────────────────────
   var _h = window.PiHelpers || {};
-  var safeCall = _h.safeCall || function (fnName, args) {
-    if (typeof global[fnName] === "function") return global[fnName].apply(null, args || []);
-  };
-  var directText = _h.directText || function (el) {
-    var t = ""; el.childNodes.forEach(function (n) { if (n.nodeType === 3) t += n.nodeValue; }); return t.trim();
-  };
-  var findByText = _h.findByText || function (tag, text) {
-    var els = document.querySelectorAll(tag), r = [], l = text.toLowerCase();
-    els.forEach(function (el) { if (directText(el).toLowerCase().indexOf(l) !== -1) r.push(el); }); return r;
-  };
+  var safeCall =
+    _h.safeCall ||
+    function (fnName, args) {
+      if (typeof global[fnName] === "function") return global[fnName].apply(null, args || []);
+    };
+  var directText =
+    _h.directText ||
+    function (el) {
+      var t = "";
+      el.childNodes.forEach(function (n) {
+        if (n.nodeType === 3) t += n.nodeValue;
+      });
+      return t.trim();
+    };
+  var findByText =
+    _h.findByText ||
+    function (tag, text) {
+      var els = document.querySelectorAll(tag),
+        r = [],
+        l = text.toLowerCase();
+      els.forEach(function (el) {
+        if (directText(el).toLowerCase().indexOf(l) !== -1) r.push(el);
+      });
+      return r;
+    };
 
   // ─── 16. Google Maps Service Center — full architecture (§1.2) ───────────────
   /**
@@ -236,5 +259,5 @@
   };
 
   document.addEventListener("DOMContentLoaded", initIoTSupportPage);
-  document.addEventListener("spa:load", initIoTSupportPage);
+  _spaOn(document, "spa:load", initIoTSupportPage, "spa:load:initIoTSupportPage");
 })(window);

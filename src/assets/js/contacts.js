@@ -11,6 +11,14 @@
 (function (global) {
   "use strict";
 
+  var _spaRegs = {};
+  function _spaOn(tgt, evt, fn, key) {
+    if (_spaRegs[key]) _spaRegs[key].abort();
+    var ac = new AbortController();
+    _spaRegs[key] = ac;
+    tgt.addEventListener(evt, fn, { signal: ac.signal });
+  }
+
   // ============================================
   // CONTACT CHANNEL CONFIG
   // ============================================
@@ -51,7 +59,9 @@
   function getPageName() {
     var path = window.location.pathname.replace(/\/index-(pc|mobile|tablet)\.html$/, "/");
     if (PAGE_NAMES[path]) return PAGE_NAMES[path];
-    var keys = Object.keys(PAGE_NAMES).sort(function (a, b) { return b.length - a.length; });
+    var keys = Object.keys(PAGE_NAMES).sort(function (a, b) {
+      return b.length - a.length;
+    });
     for (var i = 0; i < keys.length; i++) {
       if (path.indexOf(keys[i]) !== -1) return PAGE_NAMES[keys[i]];
     }
@@ -140,13 +150,13 @@
   }
   function buildQuoteMessage() {
     // Use i18n for labels if available, otherwise raw key (English fallback)
-    var t = function(key) {
-      if (window.translationManager && typeof window.translationManager.translate === 'function') {
+    var t = function (key) {
+      if (window.translationManager && typeof window.translationManager.translate === "function") {
         var v = window.translationManager.translate(key);
         if (v && v !== key) return v;
       }
       // Fallback: strip quote_ prefix, replace _ with space
-      return key.replace('quote_', '').replace(/_/g, ' ');
+      return key.replace("quote_", "").replace(/_/g, " ");
     };
 
     var company = getVal("q-company");
@@ -172,9 +182,7 @@
     if (capacity) lines.push("🏭 " + t("quote_kitchen_capacity") + ": " + capacity);
     if (budget) lines.push("💰 " + t("quote_budget_range") + ": " + budget);
     if (message) lines.push("📝 " + t("quote_detailed_requirements") + ": " + message);
-    return lines.length > 0
-      ? "🔧 " + t("quote_get_quote") + "\n" + lines.join("\n")
-      : "🔧 " + t("quote_get_quote");
+    return lines.length > 0 ? "🔧 " + t("quote_get_quote") + "\n" + lines.join("\n") : "🔧 " + t("quote_get_quote");
   }
 
   // ============================================
@@ -197,7 +205,8 @@
   function startEmail() {
     var subject = "YuKoLi 智能厨具询价";
     var body = buildQuoteMessage();
-    window.location.href = "mailto:support@yukoli.com?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(body);
+    window.location.href =
+      "mailto:support@yukoli.com?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(body);
   }
   function startFacebook() {
     window.open("https://www.facebook.com/people/Yukoli-Technology-Co-Ltd/61579549730250/", "_blank");
@@ -304,7 +313,7 @@
     initWhatsAppLinks();
   }
   // Re-init after SPA navigation
-  document.addEventListener("spa:load", initWhatsAppLinks);
+  _spaOn(document, "spa:load", initWhatsAppLinks, "spa:load");
   // Re-init after bfcache restore
   window.addEventListener("pageshow", function (e) {
     if (e.persisted) initWhatsAppLinks();

@@ -13,6 +13,14 @@
 (function (global) {
   "use strict";
 
+  var _spaRegs = {};
+  function _spaOn(tgt, evt, fn, key) {
+    if (_spaRegs[key]) _spaRegs[key].abort();
+    var ac = new AbortController();
+    _spaRegs[key] = ac;
+    tgt.addEventListener(evt, fn, { signal: ac.signal });
+  }
+
   /* ─────────────────────────────────────────────
    * 0. CONFIG
    * ───────────────────────────────────────────── */
@@ -142,7 +150,6 @@
       ".fab-pulsing {",
       "  animation: fab-pulse 1.2s cubic-bezier(.36,.07,.19,.97) 1 !important;",
       "}",
-
     ].join("\n");
     document.head.appendChild(style);
   }
@@ -359,9 +366,14 @@
   }
 
   // SPA 导航后保活
-  document.addEventListener("spa:load", function () {
-    mount();
-  });
+  _spaOn(
+    document,
+    "spa:load",
+    function () {
+      mount();
+    },
+    "spa:load:mount"
+  );
 
   // bfcache 恢复
   window.addEventListener("pageshow", function (event) {

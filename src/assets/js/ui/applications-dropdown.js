@@ -6,13 +6,31 @@
 (function (global) {
   "use strict";
 
+  var _spaRegs = {};
+  function _spaOn(tgt, evt, fn, key) {
+    if (_spaRegs[key]) _spaRegs[key].abort();
+    var ac = new AbortController();
+    _spaRegs[key] = ac;
+    tgt.addEventListener(evt, fn, { signal: ac.signal });
+  }
+
   /* ───────────────────────── DATA ───────────────────────── */
 
   /** Application scenarios (6 items) */
-  var SUBSERIES = (typeof NAV_CONFIG !== 'undefined' && NAV_CONFIG.dropdowns && NAV_CONFIG.dropdowns.applications) || [
-    { key: "nav_applications_small_restaurant", icon: "storefront", href: "/applications/small-restaurant/", emoji: "" },
+  var SUBSERIES = (typeof NAV_CONFIG !== "undefined" && NAV_CONFIG.dropdowns && NAV_CONFIG.dropdowns.applications) || [
+    {
+      key: "nav_applications_small_restaurant",
+      icon: "storefront",
+      href: "/applications/small-restaurant/",
+      emoji: "",
+    },
     { key: "nav_applications_central_kitchen", icon: "apartment", href: "/applications/central-kitchen/", emoji: "" },
-    { key: "nav_applications_chain_restaurant", icon: "ramen_dining", href: "/applications/chain-restaurant/", emoji: "" },
+    {
+      key: "nav_applications_chain_restaurant",
+      icon: "ramen_dining",
+      href: "/applications/chain-restaurant/",
+      emoji: "",
+    },
     { key: "nav_applications_canteen", icon: "restaurant", href: "/applications/canteen/", emoji: "" },
     { key: "nav_applications_cloud_kitchen", icon: "delivery_dining", href: "/applications/cloud-kitchen/", emoji: "" },
     { key: "nav_applications_food_factory", icon: "factory", href: "/applications/food-factory/", emoji: "" },
@@ -183,7 +201,7 @@
     }
 
     bindTriggers();
-    document.addEventListener("spa:load", bindTriggers);
+    _spaOn(document, "spa:load", bindTriggers, "spa:load:bindTriggers");
   }
 
   /* ───────────────────────── MOBILE POPUP ───────────────────────── */
@@ -303,9 +321,14 @@
 
   /* ───────────────────────── SPA CLEANUP ───────────────────────── */
 
-  document.addEventListener("spa:load", function () {
-    closePopup();
-  });
+  _spaOn(
+    document,
+    "spa:load",
+    function () {
+      closePopup();
+    },
+    "spa:load:closePopup"
+  );
 
   /* ───────────────────────── PUBLIC API ───────────────────────── */
 

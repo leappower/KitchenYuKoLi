@@ -16,6 +16,14 @@
 (function (global) {
   "use strict";
 
+  var _spaRegs = {};
+  function _spaOn(tgt, evt, fn, key) {
+    if (_spaRegs[key]) _spaRegs[key].abort();
+    var ac = new AbortController();
+    _spaRegs[key] = ac;
+    tgt.addEventListener(evt, fn, { signal: ac.signal });
+  }
+
   // ─── Helpers ──────────────────────────────────────────────────────────────
 
   /** Fallback tr() if CommonUtils is not loaded yet */
@@ -395,8 +403,7 @@
    */
   function init() {
     // Support both PC (#ios-search-input) and mobile/tablet (#mobile-header-search-input)
-    var input = document.getElementById("ios-search-input")
-      || document.getElementById("mobile-header-search-input");
+    var input = document.getElementById("ios-search-input") || document.getElementById("mobile-header-search-input");
     if (!input) {
       return;
     }
@@ -408,8 +415,8 @@
 
     // Focus — show results panel + is-focused style
     input.addEventListener("focus", function () {
-      var bar = input.closest && input.closest('.ios-search-bar');
-      if (bar) bar.classList.add('is-focused');
+      var bar = input.closest && input.closest(".ios-search-bar");
+      if (bar) bar.classList.add("is-focused");
       if (currentQuery && currentQuery.length >= 1) {
         showPanel();
       }
@@ -417,8 +424,8 @@
 
     // Blur — remove is-focused
     input.addEventListener("blur", function () {
-      var bar = input.closest && input.closest('.ios-search-bar');
-      if (bar) bar.classList.remove('is-focused');
+      var bar = input.closest && input.closest(".ios-search-bar");
+      if (bar) bar.classList.remove("is-focused");
     });
 
     // Keyboard navigation
@@ -713,9 +720,14 @@
   }
 
   // Re-init on SPA navigation (spa:ready ensures translations + DOM are ready)
-  document.addEventListener("spa:ready", function () {
-    reinit();
-  });
+  _spaOn(
+    document,
+    "spa:ready",
+    function () {
+      reinit();
+    },
+    "spa:ready:reinit"
+  );
 
   // Re-init on language change
   if (window.translationManager) {
@@ -725,10 +737,15 @@
       hidePanel();
     });
   }
-  window.addEventListener("languageChanged", function () {
-    currentQuery = "";
-    hidePanel();
-  });
+  _spaOn(
+    window,
+    "languageChanged",
+    function () {
+      currentQuery = "";
+      hidePanel();
+    },
+    "languageChanged"
+  );
 
   // ─── Expose ──────────────────────────────────────────────────────────────
 

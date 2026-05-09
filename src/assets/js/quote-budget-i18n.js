@@ -6,22 +6,65 @@
 (function () {
   "use strict";
 
+  var _spaRegs = {};
+  function _spaOn(tgt, evt, fn, key) {
+    if (_spaRegs[key]) _spaRegs[key].abort();
+    var ac = new AbortController();
+    _spaRegs[key] = ac;
+    tgt.addEventListener(evt, fn, { signal: ac.signal });
+  }
+
   /* Budget values (universal — used for submission, not display) */
   var TIER_VALUES = ["5k-1w", "1w-5w", "5w-10w", "10w-30w", "30w-50w", "50w+"];
 
   /* Display labels per language */
   var LABELS = {
-    "zh-CN": ["5千-1万 人民币", "1万-5万 人民币", "5万-10万 人民币", "10万-30万 人民币", "30万-50万 人民币", "50万以上 人民币"],
+    "zh-CN": [
+      "5千-1万 人民币",
+      "1万-5万 人民币",
+      "5万-10万 人民币",
+      "10万-30万 人民币",
+      "30万-50万 人民币",
+      "50万以上 人民币",
+    ],
     "zh-TW": ["5千-1萬 台幣", "1萬-5萬 台幣", "5萬-10萬 台幣", "10萬-30萬 台幣", "30萬-50萬 台幣", "50萬以上 台幣"],
-    "en":    ["$700 – $1,400", "$1,400 – $7,000", "$7,000 – $14,000", "$14,000 – $42,000", "$42,000 – $70,000", "Over $70,000"],
-    "ja":    ["7千–1.4万円", "1.4万–7万円", "7万–14万円", "14万–42万円", "42万–70万円", "70万円以上"],
-    "ko":    ["700만–1,400만 원", "1,400만–7,000만 원", "7,000만–1.4억 원", "1.4억–4.2억 원", "4.2억–7억 원", "7억 이상"],
-    "th":    ["5千–1万 ฿", "1万–5万 ฿", "5万–10万 ฿", "10万–30万 ฿", "30万–50万 ฿", "50万以上 ฿"],
-    "vi":    ["5 nghìn–1 vạn ₫", "1–5 vạn ₫", "5–10 vạn ₫", "10–30 vạn ₫", "30–50 vạn ₫", "Trên 50 vạn ₫"],
-    "id":    ["Rp 5 jt–10 jt", "Rp 10 jt–50 jt", "Rp 50 jt–100 jt", "Rp 100 jt–300 jt", "Rp 300 jt–500 jt", "Di atas Rp 500 jt"],
-    "ms":    ["RM 3,000–7,000", "RM 7,000–35,000", "RM 35,000–70,000", "RM 70,000–200,000", "RM 200,000–350,000", "Melebihi RM 350,000"],
-    "hi":    ["₹50K – ₹1L", "₹1L – ₹5L", "₹5L – ₹10L", "₹10L – ₹30L", "₹30L – ₹50L", "₹50L से अधिक"],
-    "ar":    ["3,500–7,000 ر.س", "7,000–35,000 ر.س", "35,000–70,000 ر.س", "70,000–200,000 ر.س", "200,000–350,000 ر.س", "أكثر من 350,000 ر.س"]
+    en: [
+      "$700 – $1,400",
+      "$1,400 – $7,000",
+      "$7,000 – $14,000",
+      "$14,000 – $42,000",
+      "$42,000 – $70,000",
+      "Over $70,000",
+    ],
+    ja: ["7千–1.4万円", "1.4万–7万円", "7万–14万円", "14万–42万円", "42万–70万円", "70万円以上"],
+    ko: ["700만–1,400만 원", "1,400만–7,000만 원", "7,000만–1.4억 원", "1.4억–4.2억 원", "4.2억–7억 원", "7억 이상"],
+    th: ["5千–1万 ฿", "1万–5万 ฿", "5万–10万 ฿", "10万–30万 ฿", "30万–50万 ฿", "50万以上 ฿"],
+    vi: ["5 nghìn–1 vạn ₫", "1–5 vạn ₫", "5–10 vạn ₫", "10–30 vạn ₫", "30–50 vạn ₫", "Trên 50 vạn ₫"],
+    id: [
+      "Rp 5 jt–10 jt",
+      "Rp 10 jt–50 jt",
+      "Rp 50 jt–100 jt",
+      "Rp 100 jt–300 jt",
+      "Rp 300 jt–500 jt",
+      "Di atas Rp 500 jt",
+    ],
+    ms: [
+      "RM 3,000–7,000",
+      "RM 7,000–35,000",
+      "RM 35,000–70,000",
+      "RM 70,000–200,000",
+      "RM 200,000–350,000",
+      "Melebihi RM 350,000",
+    ],
+    hi: ["₹50K – ₹1L", "₹1L – ₹5L", "₹5L – ₹10L", "₹10L – ₹30L", "₹30L – ₹50L", "₹50L से अधिक"],
+    ar: [
+      "3,500–7,000 ر.س",
+      "7,000–35,000 ر.س",
+      "35,000–70,000 ر.س",
+      "70,000–200,000 ر.س",
+      "200,000–350,000 ر.س",
+      "أكثر من 350,000 ر.س",
+    ],
   };
 
   function getCurrentLang() {
@@ -71,7 +114,7 @@
     }
 
     for (var i = 0; i < TIER_VALUES.length; i++) {
-      var selected = (TIER_VALUES[i] === prev) ? ' selected' : "";
+      var selected = TIER_VALUES[i] === prev ? " selected" : "";
       html += '<option value="' + TIER_VALUES[i] + '"' + selected + ">" + (labels[i] || TIER_VALUES[i]) + "</option>";
     }
 
@@ -93,7 +136,9 @@
           sel.style.cssText = "";
         }
         window.CustomSelect.init(sel);
-      } catch(e) { /* ignore */ }
+      } catch (e) {
+        /* ignore */
+      }
     }
 
     console.log("[QuoteBudget] Updated budget options for language:", lang);
@@ -142,9 +187,14 @@
   }
 
   /* On SPA navigation: re-check and update (spa:ready fires after translations applied) */
-  document.addEventListener("spa:ready", function () {
-    init();
-  });
+  _spaOn(
+    document,
+    "spa:ready",
+    function () {
+      init();
+    },
+    "spa:ready"
+  );
 
   /* Expose for manual trigger */
   window.updateBudgetOptions = updateBudgetOptions;

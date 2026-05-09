@@ -18,6 +18,14 @@
 (function (global) {
   "use strict";
 
+  var _spaRegs = {};
+  function _spaOn(tgt, evt, fn, key) {
+    if (_spaRegs[key]) _spaRegs[key].abort();
+    var ac = new AbortController();
+    _spaRegs[key] = ac;
+    tgt.addEventListener(evt, fn, { signal: ac.signal });
+  }
+
   /* ================================================================
    *  常量 & 配置
    * ================================================================ */
@@ -27,17 +35,14 @@
    * @type {Array<{key:string, label:string, path:string, id:string, hasDropdown:boolean}>}
    */
   var DEFAULT_NAV_ITEMS = [
-    { key: "nav_products",      label: "产品中心", path: "/products/",      id: "products",     hasDropdown: true },
-    { key: "nav_applications",  label: "场景应用", path: "/applications/",  id: "applications", hasDropdown: true },
-    { key: "nav_service",       label: "服务支持", path: "/support/",       id: "support",      hasDropdown: true },
-    { key: "nav_about",         label: "关于我们", path: "/about/",         id: "about",        hasDropdown: true }
+    { key: "nav_products", label: "产品中心", path: "/products/", id: "products", hasDropdown: true },
+    { key: "nav_applications", label: "场景应用", path: "/applications/", id: "applications", hasDropdown: true },
+    { key: "nav_service", label: "服务支持", path: "/support/", id: "support", hasDropdown: true },
+    { key: "nav_about", label: "关于我们", path: "/about/", id: "about", hasDropdown: true },
   ];
 
   /** @type {Array} 当前生效的导航项 */
-  var navItems =
-    typeof NAV_CONFIG !== "undefined" && NAV_CONFIG.mainNav
-      ? NAV_CONFIG.mainNav
-      : DEFAULT_NAV_ITEMS;
+  var navItems = typeof NAV_CONFIG !== "undefined" && NAV_CONFIG.mainNav ? NAV_CONFIG.mainNav : DEFAULT_NAV_ITEMS;
 
   /**
    * 所有 dropdown 容器的 CSS 类名（用于互斥开关）
@@ -48,7 +53,7 @@
     ".app-dropdown-wrap",
     ".sup-dropdown-wrap",
     ".abt-dropdown-wrap",
-    ".cnt-dropdown-wrap"
+    ".cnt-dropdown-wrap",
   ];
 
   /**
@@ -58,16 +63,16 @@
    */
   var PATH_TO_ACTIVE_MAP = {
     "case-studies": "applications",
-    "roi":          "profit-calculator",
-    "news":         "contact",
-    "quote":        "contact",
-    "thank-you":    "contact"
+    roi: "profit-calculator",
+    news: "contact",
+    quote: "contact",
+    "thank-you": "contact",
   };
 
   /* Sections whose nav item id differs from the activeSectionId (version drift) */
   var ID_ALIASES = {
     "profit-calculator": ["profit", "profit-calculator"],
-    "profit":            ["profit", "profit-calculator"]
+    profit: ["profit", "profit-calculator"],
   };
 
   /**
@@ -75,16 +80,16 @@
    * @type {Object<string, string>}
    */
   var ACTIVE_TO_PREFIX_MAP = {
-    products:     "prod",
+    products: "prod",
     applications: "app",
-    support:      "sup",
-    about:        "abt",
-    contact:      "cnt",
+    support: "sup",
+    about: "abt",
+    contact: "cnt",
     "case-studies": "app",
-    roi:          "sol",
-    news:         "cnt",
-    quote:        "cnt",
-    "thank-you":  "cnt"
+    roi: "sol",
+    news: "cnt",
+    quote: "cnt",
+    "thank-you": "cnt",
   };
 
   /** @type {string} 当前检测到的设备变体（mobile / tablet / pc） */
@@ -103,11 +108,7 @@
    * @returns {string} 转义后的安全字符串
    */
   function escapeHtml(str) {
-    return String(str)
-      .replace(/&/g, "&amp;")
-      .replace(/</g, "&lt;")
-      .replace(/>/g, "&gt;")
-      .replace(/"/g, "&quot;");
+    return String(str).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
   }
 
   /**
@@ -134,18 +135,20 @@
   function buildSearchBarHtml(placeholderI18nKey) {
     return (
       '<div class="ios-search-wrapper">' +
-        '<div class="ios-search-bar" id="mobile-ios-search-bar">' +
-          '<span class="ios-search-icon material-symbols-outlined">search</span>' +
-          '<input class="ios-search-input" id="mobile-header-search-input" ' +
-          'placeholder="Search equipment..." ' +
-          'data-i18n-placeholder="' + escapeHtml(placeholderI18nKey) + '" ' +
-          'type="search" autocomplete="off" spellcheck="false"/>' +
-          '<button class="ios-search-clear" type="button" aria-label="Clear" ' +
-          'tabindex="-1">' +
-            '<span class="material-symbols-outlined">cancel</span>' +
-          '</button>' +
-        '</div>' +
-      '</div>'
+      '<div class="ios-search-bar" id="mobile-ios-search-bar">' +
+      '<span class="ios-search-icon material-symbols-outlined">search</span>' +
+      '<input class="ios-search-input" id="mobile-header-search-input" ' +
+      'placeholder="Search equipment..." ' +
+      'data-i18n-placeholder="' +
+      escapeHtml(placeholderI18nKey) +
+      '" ' +
+      'type="search" autocomplete="off" spellcheck="false"/>' +
+      '<button class="ios-search-clear" type="button" aria-label="Clear" ' +
+      'tabindex="-1">' +
+      '<span class="material-symbols-outlined">cancel</span>' +
+      "</button>" +
+      "</div>" +
+      "</div>"
     );
   }
 
@@ -165,52 +168,57 @@
     if (isTablet && opts.showCta) {
       rightSide =
         '<div class="flex items-center gap-2 flex-shrink-0">' +
-          buildLangSelectorHtml() +
-          '<a href="' + escapeHtml(opts.ctaHref || "/quote/") + '" ' +
-            'class="bg-primary text-white px-4 py-2 rounded-lg font-bold ' +
-            'text-xs whitespace-nowrap active:scale-95 transition-all outline-none" ' +
-            'style="-webkit-tap-highlight-color:transparent;color:#fff!important;"' +
-            'data-i18n="' + escapeHtml(opts.ctaTextKey || "nav_get_quote") + '">' +
-            '获取报价' +
-          '</a>' +
-        '</div>';
+        buildLangSelectorHtml() +
+        '<a href="' +
+        escapeHtml(opts.ctaHref || "/quote/") +
+        '" ' +
+        'class="bg-primary text-white px-4 py-2 rounded-lg font-bold ' +
+        'text-xs whitespace-nowrap active:scale-95 transition-all outline-none" ' +
+        'style="-webkit-tap-highlight-color:transparent;color:#fff!important;"' +
+        'data-i18n="' +
+        escapeHtml(opts.ctaTextKey || "nav_get_quote") +
+        '">' +
+        "获取报价" +
+        "</a>" +
+        "</div>";
     } else {
-      rightSide =
-        '<div class="flex-shrink-0">' +
-            buildLangSelectorHtml() +
-        '</div>';
+      rightSide = '<div class="flex-shrink-0">' + buildLangSelectorHtml() + "</div>";
     }
 
     return (
       '<div id="mobile-header-placeholder" style="height:65px;flex-shrink:0"></div>' +
       '<header id="mobile-header" ' +
-        'class="fixed top-0 left-0 right-0 z-[var(--z-header)] ' +
-        'border-b border-slate-200 dark:border-slate-800 ' +
-        'bg-background-light/90 dark:bg-background-dark/90 transition-transform duration-300">' +
-        '<div class="px-4 py-3 flex items-center gap-3">' +
-          /* 左侧：汉堡菜单 + Logo */
-          '<div class="flex items-center gap-1 flex-shrink-0">' +
-            '<button id="mobile-menu-toggle" type="button" ' +
-              'class="flex items-center justify-center w-10 h-10 -ml-2 ' +
-              'rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800 ' +
-              'transition-colors" aria-label="Menu">' +
-              '<span class="material-symbols-outlined text-2xl">menu</span>' +
-            '</button>' +
-            '<a class="nav-logo-link hidden lg:block" href="' + basePath + '/home/">' +
-              '<img loading="eager" ' +
-                'src="' + basePath + '/assets/images/logo_footer.webp" ' +
-                'alt="Yukoli" width="32" height="32" ' +
-                'style="width:32px;height:32px;object-fit:contain" />' +
-            '</a>' +
-          '</div>' +
-          /* 中间：搜索栏 */
-          '<div class="flex-1 min-w-0 mx-1">' +
-            buildSearchBarHtml(searchI18n) +
-          '</div>' +
-          /* 右侧 */
-          rightSide +
-        '</div>' +
-      '</header>'
+      'class="fixed top-0 left-0 right-0 z-[var(--z-header)] ' +
+      "border-b border-slate-200 dark:border-slate-800 " +
+      'bg-background-light/90 dark:bg-background-dark/90 transition-transform duration-300">' +
+      '<div class="px-4 py-3 flex items-center gap-3">' +
+      /* 左侧：汉堡菜单 + Logo */
+      '<div class="flex items-center gap-1 flex-shrink-0">' +
+      '<button id="mobile-menu-toggle" type="button" ' +
+      'class="flex items-center justify-center w-10 h-10 -ml-2 ' +
+      "rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800 " +
+      'transition-colors" aria-label="Menu">' +
+      '<span class="material-symbols-outlined text-2xl">menu</span>' +
+      "</button>" +
+      '<a class="nav-logo-link hidden lg:block" href="' +
+      basePath +
+      '/home/">' +
+      '<img loading="eager" ' +
+      'src="' +
+      basePath +
+      '/assets/images/logo_footer.webp" ' +
+      'alt="Yukoli" width="32" height="32" ' +
+      'style="width:32px;height:32px;object-fit:contain" />' +
+      "</a>" +
+      "</div>" +
+      /* 中间：搜索栏 */
+      '<div class="flex-1 min-w-0 mx-1">' +
+      buildSearchBarHtml(searchI18n) +
+      "</div>" +
+      /* 右侧 */
+      rightSide +
+      "</div>" +
+      "</header>"
     );
   }
 
@@ -232,10 +240,10 @@
     /* ---------- 有 dropdown 的导航项 ---------- */
     if (navItem.hasDropdown) {
       var dropdownModules = {
-        products:     window.ProductsDropdown,
+        products: window.ProductsDropdown,
         applications: window.ApplicationsDropdown,
-        support:      window.SupportDropdown,
-        about:        window.AboutDropdown
+        support: window.SupportDropdown,
+        about: window.AboutDropdown,
       };
       var dropdown = dropdownModules[navItem.id];
 
@@ -257,9 +265,16 @@
     /* ---------- 普通链接导航项 ---------- */
     var safeHref = escapeHtml(href);
     return (
-      '<a class="' + activeClass + '" href="' + safeHref + '" ' +
-      'data-i18n="' + escapeHtml(navItem.key) + '">' +
-      escapeHtml(navItem.label) + '</a>'
+      '<a class="' +
+      activeClass +
+      '" href="' +
+      safeHref +
+      '" ' +
+      'data-i18n="' +
+      escapeHtml(navItem.key) +
+      '">' +
+      escapeHtml(navItem.label) +
+      "</a>"
     );
   }
 
@@ -271,10 +286,7 @@
    */
   function buildNavItemsHtml(activeId, variant) {
     // Always re-read NAV_CONFIG to pick up hot-reloaded changes
-    var items =
-      typeof NAV_CONFIG !== "undefined" && NAV_CONFIG.mainNav
-        ? NAV_CONFIG.mainNav
-        : DEFAULT_NAV_ITEMS;
+    var items = typeof NAV_CONFIG !== "undefined" && NAV_CONFIG.mainNav ? NAV_CONFIG.mainNav : DEFAULT_NAV_ITEMS;
     return items
       .map(function (item) {
         return buildNavItemHtml(item, activeId, variant);
@@ -290,24 +302,26 @@
    * @returns {string} HTML 字符串
    */
   function buildDesktopSearchHtml(opts) {
-    var hiddenClass = opts.searchBp === "lg"
-      ? "hidden lg:flex"
-      : "hidden xl:flex";
+    var hiddenClass = opts.searchBp === "lg" ? "hidden lg:flex" : "hidden xl:flex";
 
     return (
-      '<div class="' + hiddenClass + ' ios-search-wrapper items-center flex-shrink-0">' +
-        '<div class="ios-search-bar" id="ios-search-bar">' +
-          '<span class="ios-search-icon material-symbols-outlined">search</span>' +
-          '<input class="ios-search-input" id="ios-search-input" ' +
-            'placeholder="Search equipment..." ' +
-            'data-i18n-placeholder="' + escapeHtml(opts.searchI18n) + '" ' +
-            'type="search" autocomplete="off" spellcheck="false"/>' +
-          '<button class="ios-search-clear" id="ios-search-clear" type="button" ' +
-            'aria-label="Clear search" tabindex="-1">' +
-            '<span class="material-symbols-outlined">cancel</span>' +
-          '</button>' +
-        '</div>' +
-      '</div>'
+      '<div class="' +
+      hiddenClass +
+      ' ios-search-wrapper items-center flex-shrink-0">' +
+      '<div class="ios-search-bar" id="ios-search-bar">' +
+      '<span class="ios-search-icon material-symbols-outlined">search</span>' +
+      '<input class="ios-search-input" id="ios-search-input" ' +
+      'placeholder="Search equipment..." ' +
+      'data-i18n-placeholder="' +
+      escapeHtml(opts.searchI18n) +
+      '" ' +
+      'type="search" autocomplete="off" spellcheck="false"/>' +
+      '<button class="ios-search-clear" id="ios-search-clear" type="button" ' +
+      'aria-label="Clear search" tabindex="-1">' +
+      '<span class="material-symbols-outlined">cancel</span>' +
+      "</button>" +
+      "</div>" +
+      "</div>"
     );
   }
 
@@ -318,7 +332,7 @@
   function _loadScript(src, id) {
     if (document.getElementById(id)) return Promise.resolve();
     return new Promise(function (resolve, reject) {
-      var s = document.createElement('script');
+      var s = document.createElement("script");
       s.src = src;
       s.id = id;
       s.onload = resolve;
@@ -328,15 +342,15 @@
   }
 
   function ensureCustomSelect() {
-    if (typeof CustomSelect !== 'undefined') return Promise.resolve();
-    var basePath = window.BASE_PATH || '';
-    return _loadScript(basePath + '/assets/js/ui/custom-select.js', 'custom-select-dynamic');
+    if (typeof CustomSelect !== "undefined") return Promise.resolve();
+    var basePath = window.BASE_PATH || "";
+    return _loadScript(basePath + "/assets/js/ui/custom-select.js", "custom-select-dynamic");
   }
 
   function ensureLangRegistry() {
-    if (typeof window.LANG_REGISTRY !== 'undefined') return Promise.resolve();
-    var basePath = window.BASE_PATH || '';
-    return _loadScript(basePath + '/assets/js/lang-registry.js', 'lang-registry-dynamic');
+    if (typeof window.LANG_REGISTRY !== "undefined") return Promise.resolve();
+    var basePath = window.BASE_PATH || "";
+    return _loadScript(basePath + "/assets/js/lang-registry.js", "lang-registry-dynamic");
   }
 
   /**
@@ -348,30 +362,30 @@
     if (!reg || !reg.LANGUAGES || !selectEl) return;
 
     // Clear existing content
-    selectEl.innerHTML = '';
+    selectEl.innerHTML = "";
 
-    var currentLang = localStorage.getItem('userLanguage') || 'zh-CN';
+    var currentLang = localStorage.getItem("userLanguage") || "zh-CN";
     var groups = {
-      common: { label: '常用 / Common', langs: [] },
-      southeast_asia: { label: '东南亚 / Southeast Asia', langs: [] },
-      east_asia: { label: '东亚 / East Asia', langs: [] },
-      other: { label: '其他 / Other', langs: [] }
+      common: { label: "常用 / Common", langs: [] },
+      southeast_asia: { label: "东南亚 / Southeast Asia", langs: [] },
+      east_asia: { label: "东亚 / East Asia", langs: [] },
+      other: { label: "其他 / Other", langs: [] },
     };
 
     reg.LANGUAGES.forEach(function (l) {
-      var g = l.uiGroup || 'common';
+      var g = l.uiGroup || "common";
       if (!groups[g]) groups[g] = { label: g, langs: [] };
       groups[g].langs.push(l);
     });
 
-    var groupOrder = ['common', 'southeast_asia', 'east_asia', 'other'];
+    var groupOrder = ["common", "southeast_asia", "east_asia", "other"];
     groupOrder.forEach(function (gid) {
       var grp = groups[gid];
       if (!grp || grp.langs.length === 0) return;
-      var og = document.createElement('optgroup');
-      og.setAttribute('label', grp.label);
+      var og = document.createElement("optgroup");
+      og.setAttribute("label", grp.label);
       grp.langs.forEach(function (l) {
-        var opt = document.createElement('option');
+        var opt = document.createElement("option");
         opt.value = l.code;
         opt.textContent = l.nativeName;
         if (l.code === currentLang) opt.selected = true;
@@ -390,32 +404,35 @@
     // Always generate the button + empty hidden <select>.
     // The <select> is populated lazily on first click (when LANG_REGISTRY is available),
     // so this works even on pages that don't load lang-registry.js directly.
-    var currentLang = localStorage.getItem('userLanguage') || 'zh-CN';
+    var currentLang = localStorage.getItem("userLanguage") || "zh-CN";
     var currentLangName = currentLang;
     var reg = window.LANG_REGISTRY;
     if (reg && reg.LANGUAGES) {
-      var found = reg.LANGUAGES.find(function (l) { return l.code === currentLang; });
+      var found = reg.LANGUAGES.find(function (l) {
+        return l.code === currentLang;
+      });
       if (found) currentLangName = found.nativeName;
     }
 
     return (
       '<div class="lang-dropdown-container relative flex-shrink-0">' +
-        '<button id="lang-toggle-btn" ' +
-          'class="flex items-center gap-1 px-2 py-2 rounded-xl ' +
-          'text-sm font-medium text-slate-600 dark:text-slate-300 ' +
-          'hover:bg-slate-100 dark:hover:bg-slate-800 ' +
-          'active:bg-slate-200 dark:active:bg-slate-700 ' +
-          'transition-colors md:gap-1.5 md:px-3" type="button" aria-label="Switch language" ' +
-          'data-i18n-aria="lang_switcher_aria">' +
-          '<span class="material-symbols-outlined text-base ' +
-          'leading-none">language</span>' +
-          '<span id="current-lang-label" data-i18n="current_lang">' +
-          escapeHtml(currentLangName) + '</span>' +
-          '<span class="material-symbols-outlined text-xs opacity-40">' +
-          'expand_more</span>' +
-        '</button>' +
-        '<select id="lang-selector" style="display:none"></select>' +
-      '</div>'
+      '<button id="lang-toggle-btn" ' +
+      'class="flex items-center gap-1 px-2 py-2 rounded-xl ' +
+      "text-sm font-medium text-slate-600 dark:text-slate-300 " +
+      "hover:bg-slate-100 dark:hover:bg-slate-800 " +
+      "active:bg-slate-200 dark:active:bg-slate-700 " +
+      'transition-colors md:gap-1.5 md:px-3" type="button" aria-label="Switch language" ' +
+      'data-i18n-aria="lang_switcher_aria">' +
+      '<span class="material-symbols-outlined text-base ' +
+      'leading-none">language</span>' +
+      '<span id="current-lang-label" data-i18n="current_lang">' +
+      escapeHtml(currentLangName) +
+      "</span>" +
+      '<span class="material-symbols-outlined text-xs opacity-40">' +
+      "expand_more</span>" +
+      "</button>" +
+      '<select id="lang-selector" style="display:none"></select>' +
+      "</div>"
     );
   }
 
@@ -429,15 +446,19 @@
   function buildCtaButtonHtml(opts) {
     return (
       '<div class="hidden lg:block flex-shrink-0">' +
-        '<a href="' + escapeHtml(opts.ctaHref) + '" ' +
-          'class="bg-primary text-white px-6 py-2.5 rounded-xl font-bold ' +
-          'text-sm whitespace-nowrap hover:opacity-90 active:scale-95 ' +
-          'transition-all outline-none" ' +
-          'style="-webkit-tap-highlight-color:transparent;color:#fff!important;" ' +
-          'data-i18n="' + escapeHtml(opts.ctaTextKey) + '">' +
-          '获取报价' +
-        '</a>' +
-      '</div>'
+      '<a href="' +
+      escapeHtml(opts.ctaHref) +
+      '" ' +
+      'class="bg-primary text-white px-6 py-2.5 rounded-xl font-bold ' +
+      "text-sm whitespace-nowrap hover:opacity-90 active:scale-95 " +
+      'transition-all outline-none" ' +
+      'style="-webkit-tap-highlight-color:transparent;color:#fff!important;" ' +
+      'data-i18n="' +
+      escapeHtml(opts.ctaTextKey) +
+      '">' +
+      "获取报价" +
+      "</a>" +
+      "</div>"
     );
   }
 
@@ -451,46 +472,54 @@
     var rightSideItems = [];
 
     if (opts.showSearch) {
-      rightSideItems.push(buildDesktopSearchHtml({
-        searchI18n: opts.searchI18n,
-        searchBp: opts.searchBp
-      }));
+      rightSideItems.push(
+        buildDesktopSearchHtml({
+          searchI18n: opts.searchI18n,
+          searchBp: opts.searchBp,
+        })
+      );
     }
     if (opts.showLang) {
       rightSideItems.push(buildLangSelectorHtml());
     }
     if (opts.showCta) {
-      rightSideItems.push(buildCtaButtonHtml({
-        ctaTextKey: opts.ctaTextKey,
-        ctaHref: opts.ctaHref
-      }));
+      rightSideItems.push(
+        buildCtaButtonHtml({
+          ctaTextKey: opts.ctaTextKey,
+          ctaHref: opts.ctaHref,
+        })
+      );
     }
 
     return (
       '<div id="pc-header-placeholder" style="height:109px;flex-shrink:0"></div>' +
       '<header class="fixed top-0 left-0 right-0 z-[var(--z-header)] ' +
-        'border-b border-slate-200 dark:border-slate-800 ' +
-        'bg-background-light/90 dark:bg-background-dark/90">' +
-        '<div class="max-w-[1920px] mx-auto px-3 md:px-5 lg:px-5 xl:px-10 ' +
-          'py-4 flex items-center justify-between" style="min-height:108px">' +
-          /* 左侧：Logo + 导航 */
-          '<div class="flex items-center gap-4 lg:gap-8">' +
-            '<a class="nav-logo-link hidden lg:block" href="' + basePath + '/home/">' +
-              '<img loading="eager" ' +
-                'src="' + basePath + '/assets/images/logo_footer.webp" ' +
-                'alt="Yukoli" width="44" height="44" ' +
-                'style="width:44px;height:44px;object-fit:contain" />' +
-            '</a>' +
-            '<nav class="hidden md:flex items-center gap-4 lg:gap-8">' +
-              buildNavItemsHtml(opts.active, opts.variant) +
-            '</nav>' +
-          '</div>' +
-          /* 右侧：搜索 / 语言 / CTA */
-          '<div class="flex items-center gap-6">' +
-            rightSideItems.join("\n") +
-          '</div>' +
-        '</div>' +
-      '</header>'
+      "border-b border-slate-200 dark:border-slate-800 " +
+      'bg-background-light/90 dark:bg-background-dark/90">' +
+      '<div class="max-w-[1920px] mx-auto px-3 md:px-5 lg:px-5 xl:px-10 ' +
+      'py-4 flex items-center justify-between" style="min-height:108px">' +
+      /* 左侧：Logo + 导航 */
+      '<div class="flex items-center gap-4 lg:gap-8">' +
+      '<a class="nav-logo-link hidden lg:block" href="' +
+      basePath +
+      '/home/">' +
+      '<img loading="eager" ' +
+      'src="' +
+      basePath +
+      '/assets/images/logo_footer.webp" ' +
+      'alt="Yukoli" width="44" height="44" ' +
+      'style="width:44px;height:44px;object-fit:contain" />' +
+      "</a>" +
+      '<nav class="hidden md:flex items-center gap-4 lg:gap-8">' +
+      buildNavItemsHtml(opts.active, opts.variant) +
+      "</nav>" +
+      "</div>" +
+      /* 右侧：搜索 / 语言 / CTA */
+      '<div class="flex items-center gap-6">' +
+      rightSideItems.join("\n") +
+      "</div>" +
+      "</div>" +
+      "</header>"
     );
   }
 
@@ -534,7 +563,7 @@
       "  html.dark .nav-logo-link:active {",
       "    background: rgba(236,91,19,.18);",
       "  }",
-      "}"
+      "}",
     ].join("\n");
     document.head.appendChild(style);
   }
@@ -666,7 +695,7 @@
       "  color: rgba(235,235,245,0.55);",
       "}",
       ".ios-search-clear:hover { opacity: 0.75; }",
-      ".ios-search-clear.is-visible { display: flex; }"
+      ".ios-search-clear.is-visible { display: flex; }",
     ].join("\n");
     document.head.appendChild(style);
   }
@@ -692,9 +721,7 @@
    */
   function closeOtherDropdowns(keepOpen) {
     for (var i = 0; i < DROPDOWN_WRAP_SELECTORS.length; i++) {
-      var openDropdowns = document.querySelectorAll(
-        DROPDOWN_WRAP_SELECTORS[i] + ".is-open"
-      );
+      var openDropdowns = document.querySelectorAll(DROPDOWN_WRAP_SELECTORS[i] + ".is-open");
       for (var j = 0; j < openDropdowns.length; j++) {
         if (openDropdowns[j] !== keepOpen) {
           openDropdowns[j].classList.remove("is-open");
@@ -907,13 +934,15 @@
       if (!selectEl) return;
 
       // Ensure lang-registry.js + custom-select.js are loaded, then open
-      Promise.all([ensureLangRegistry(), ensureCustomSelect()]).then(function () {
-        // Populate <select> with optgroups from LANG_REGISTRY (idempotent)
-        _populateLangSelect(selectEl);
-        _openLangPanel(selectEl, clone);
-      }).catch(function (err) {
-        console.warn('[Navigator] Failed to load lang dependencies:', err);
-      });
+      Promise.all([ensureLangRegistry(), ensureCustomSelect()])
+        .then(function () {
+          // Populate <select> with optgroups from LANG_REGISTRY (idempotent)
+          _populateLangSelect(selectEl);
+          _openLangPanel(selectEl, clone);
+        })
+        .catch(function (err) {
+          console.warn("[Navigator] Failed to load lang dependencies:", err);
+        });
     });
   }
 
@@ -937,7 +966,9 @@
   }
 
   var _langOutsideClickHandler = null;
-  function _onLangKeydown(e) { if (e.key === "Escape") _closeLangPanel(); }
+  function _onLangKeydown(e) {
+    if (e.key === "Escape") _closeLangPanel();
+  }
 
   /**
    * Handle language change from hidden <select>.
@@ -951,12 +982,14 @@
     if (!langCode) return;
 
     // Update localStorage
-    localStorage.setItem('userLanguage', langCode);
+    localStorage.setItem("userLanguage", langCode);
 
     // Update button label
     var labelEl = document.getElementById("current-lang-label");
     if (labelEl && window.LANG_REGISTRY) {
-      var found = window.LANG_REGISTRY.LANGUAGES.find(function(l) { return l.code === langCode; });
+      var found = window.LANG_REGISTRY.LANGUAGES.find(function (l) {
+        return l.code === langCode;
+      });
       labelEl.textContent = found ? found.nativeName : langCode;
     }
 
@@ -964,7 +997,7 @@
     _closeLangPanel();
 
     // Trigger full page language change via translationManager
-    if (window.translationManager && typeof window.translationManager.setLanguage === 'function') {
+    if (window.translationManager && typeof window.translationManager.setLanguage === "function") {
       window.translationManager.setLanguage(langCode);
     }
   }
@@ -990,12 +1023,12 @@
       _langPanel.classList.remove("cs-panel-below");
       _langPanel.classList.add("cs-panel-above");
       _langPanel.style.top = "";
-      _langPanel.style.bottom = (window.innerHeight - rect.top + gap) + "px";
+      _langPanel.style.bottom = window.innerHeight - rect.top + gap + "px";
     } else {
       _langPanel.classList.remove("cs-panel-above");
       _langPanel.classList.add("cs-panel-below");
       _langPanel.style.bottom = "";
-      _langPanel.style.top = (rect.bottom + gap) + "px";
+      _langPanel.style.top = rect.bottom + gap + "px";
     }
   }
 
@@ -1015,14 +1048,18 @@
     document.body.appendChild(_langPanel);
 
     // Intercept item clicks to handle close ourselves (before custom-select's _selectItem.close)
-    _langPanel.addEventListener("click", function (e) {
-      var item = e.target.closest(".cs-item");
-      if (!item || item.classList.contains("cs-item-disabled")) return;
-      e.stopImmediatePropagation(); // prevent custom-select's handler
-      selectEl.value = item.getAttribute("data-value");
-      selectEl.dispatchEvent(new Event("change", { bubbles: true }));
-      // _onLangChange will handle the rest
-    }, true);
+    _langPanel.addEventListener(
+      "click",
+      function (e) {
+        var item = e.target.closest(".cs-item");
+        if (!item || item.classList.contains("cs-item-disabled")) return;
+        e.stopImmediatePropagation(); // prevent custom-select's handler
+        selectEl.value = item.getAttribute("data-value");
+        selectEl.dispatchEvent(new Event("change", { bubbles: true }));
+        // _onLangChange will handle the rest
+      },
+      true
+    );
 
     // Listen for change on the hidden <select> (fired by item click handlers)
     // to close the panel and update the button label
@@ -1032,18 +1069,20 @@
     }
 
     _positionLangPanel(anchorBtn.getBoundingClientRect());
-    requestAnimationFrame(function() { _langPanel.classList.add("cs-is-open"); });
+    requestAnimationFrame(function () {
+      _langPanel.classList.add("cs-is-open");
+    });
 
     document.addEventListener("scroll", _onLangScroll, true);
     document.addEventListener("resize", _onLangScroll);
     document.addEventListener("keydown", _onLangKeydown);
 
-    _langOutsideClickHandler = function(e) {
+    _langOutsideClickHandler = function (e) {
       if (!_langPanel) return;
       if (_langPanel.contains(e.target) || anchorBtn.contains(e.target)) return;
       _closeLangPanel();
     };
-    setTimeout(function() {
+    setTimeout(function () {
       document.addEventListener("click", _langOutsideClickHandler, true);
     }, 0);
   }
@@ -1065,23 +1104,26 @@
 
     var html = '<div class="cs-popup-handle"></div>';
     var labelEl = anchorBtn.querySelector("#current-lang-label");
-    html += '<div class="cs-popup-title">' + escapeHtml(labelEl ? labelEl.textContent : "") + '</div>';
-    html += '<div class="cs-popup-search-wrap">' +
+    html += '<div class="cs-popup-title">' + escapeHtml(labelEl ? labelEl.textContent : "") + "</div>";
+    html +=
+      '<div class="cs-popup-search-wrap">' +
       '<span class="material-symbols-outlined cs-popup-search-icon">search</span>' +
       '<input type="text" class="cs-popup-search" placeholder="搜索...">' +
-      '</div>';
-    html += '<div class="cs-popup-list">' + result.inst._buildItemsHTML(data) + '</div>';
+      "</div>";
+    html += '<div class="cs-popup-list">' + result.inst._buildItemsHTML(data) + "</div>";
     _langPanel.innerHTML = html;
 
     document.body.appendChild(_langOverlay);
     document.body.appendChild(_langPanel);
 
-    _langOverlay.addEventListener("click", function() { _closeLangPanel(); });
+    _langOverlay.addEventListener("click", function () {
+      _closeLangPanel();
+    });
 
     var items = _langPanel.querySelectorAll(".cs-item");
     for (var i = 0; i < items.length; i++) {
-      (function(item) {
-        item.addEventListener("click", function() {
+      (function (item) {
+        item.addEventListener("click", function () {
           selectEl.value = item.getAttribute("data-value");
           selectEl.dispatchEvent(new Event("change", { bubbles: true }));
           // _onLangChange will handle the rest (label update, close, setLanguage)
@@ -1091,7 +1133,7 @@
 
     var searchInput = _langPanel.querySelector(".cs-popup-search");
     if (searchInput) {
-      searchInput.addEventListener("input", function() {
+      searchInput.addEventListener("input", function () {
         var q = this.value.trim().toLowerCase();
         var panelItems = _langPanel.querySelectorAll(".cs-item");
         var groupLabels = _langPanel.querySelectorAll(".cs-group-label");
@@ -1129,7 +1171,9 @@
       });
     }
 
-    requestAnimationFrame(function() { _langPanel.classList.add("cs-popup-open"); });
+    requestAnimationFrame(function () {
+      _langPanel.classList.add("cs-popup-open");
+    });
     document.addEventListener("keydown", _onLangKeydown);
   }
 
@@ -1160,15 +1204,15 @@
     var variant = resolveVariant(placeholder.getAttribute("data-variant") || "pc");
 
     return {
-      variant:    variant,
-      active:     placeholder.getAttribute("data-active") || "",
+      variant: variant,
+      active: placeholder.getAttribute("data-active") || "",
       showSearch: parseBooleanAttr(placeholder.getAttribute("data-search"), false),
       searchI18n: placeholder.getAttribute("data-search-i18n") || "search_placeholder",
-      searchBp:   placeholder.getAttribute("data-search-bp") || "xl",
-      showLang:   parseBooleanAttr(placeholder.getAttribute("data-lang"), true),
-      showCta:    parseBooleanAttr(placeholder.getAttribute("data-cta"), true),
+      searchBp: placeholder.getAttribute("data-search-bp") || "xl",
+      showLang: parseBooleanAttr(placeholder.getAttribute("data-lang"), true),
+      showCta: parseBooleanAttr(placeholder.getAttribute("data-cta"), true),
       ctaTextKey: placeholder.getAttribute("data-cta-text-key") || "nav_get_quote",
-      ctaHref:    placeholder.getAttribute("data-cta-href") || "/quote/"
+      ctaHref: placeholder.getAttribute("data-cta-href") || "/quote/",
     };
   }
 
@@ -1207,12 +1251,16 @@
     }
 
     /* Global click to close all dropdowns */
-    document.addEventListener("click", function (e) {
-      var clickedWrap = e.target.closest(
-        ".prod-dropdown-wrap, .app-dropdown-wrap, .sup-dropdown-wrap, .abt-dropdown-wrap, .cnt-dropdown-wrap"
-      );
-      closeOtherDropdowns(clickedWrap || null);
-    }, true);
+    document.addEventListener(
+      "click",
+      function (e) {
+        var clickedWrap = e.target.closest(
+          ".prod-dropdown-wrap, .app-dropdown-wrap, .sup-dropdown-wrap, .abt-dropdown-wrap, .cnt-dropdown-wrap"
+        );
+        closeOtherDropdowns(clickedWrap || null);
+      },
+      true
+    );
 
     /* Dropdown click handlers are initialized in mountNavigator() after
      * trigger elements exist in the DOM. Each dropdown module has its own
@@ -1256,7 +1304,7 @@
       var spacerEl = wrapper.firstElementChild;
       var headerEl = spacerEl ? spacerEl.nextElementSibling : wrapper.firstChild;
 
-      var navHeight = (config.variant === "pc") ? "109px" : "65px";
+      var navHeight = config.variant === "pc" ? "109px" : "65px";
       document.documentElement.style.setProperty("--nav-height", navHeight);
 
       // Insert spacer + header in place of placeholder
@@ -1301,10 +1349,7 @@
 
     /* Re-read NAV_CONFIG on every call — module-level navItems may be stale (DEFAULT_NAV_ITEMS)
      * if nav-config.js loaded after navigator.js */
-    var navItems =
-      typeof NAV_CONFIG !== "undefined" && NAV_CONFIG.mainNav
-        ? NAV_CONFIG.mainNav
-        : DEFAULT_NAV_ITEMS;
+    var navItems = typeof NAV_CONFIG !== "undefined" && NAV_CONFIG.mainNav ? NAV_CONFIG.mainNav : DEFAULT_NAV_ITEMS;
 
     /* 确保 dropdown 样式已注入（SPA 动态加载场景） */
     injectDropdownStyles();
@@ -1318,7 +1363,7 @@
       "header nav a[data-sup-trigger-label]",
       "header nav a[data-prod-trigger-label]",
       "header nav a[data-app-trigger-label]",
-      "header nav a[data-abt-trigger-label]"
+      "header nav a[data-abt-trigger-label]",
     ];
 
     var triggers = document.querySelectorAll(triggerSelectors.join(", "));
@@ -1367,10 +1412,12 @@
     for (var pi = 0; pi < plainLinks.length; pi++) {
       var plainEl = plainLinks[pi];
       /* Skip dropdown triggers (already handled above) */
-      if (plainEl.classList.contains("prod-dropdown-trigger") ||
-          plainEl.classList.contains("app-dropdown-trigger") ||
-          plainEl.classList.contains("sup-dropdown-trigger") ||
-          plainEl.classList.contains("abt-dropdown-trigger")) {
+      if (
+        plainEl.classList.contains("prod-dropdown-trigger") ||
+        plainEl.classList.contains("app-dropdown-trigger") ||
+        plainEl.classList.contains("sup-dropdown-trigger") ||
+        plainEl.classList.contains("abt-dropdown-trigger")
+      ) {
         continue;
       }
       var plainKey = plainEl.getAttribute("data-i18n") || "";
@@ -1394,9 +1441,9 @@
     /* ---------- 2. 清除所有 dropdown item 的 is-active ---------- */
     var activeItems = document.querySelectorAll(
       ".prod-dropdown-item.is-active, " +
-      ".app-dropdown-item.is-active, " +
-      ".sup-dropdown-item.is-active, " +
-      ".abt-dropdown-item.is-active"
+        ".app-dropdown-item.is-active, " +
+        ".sup-dropdown-item.is-active, " +
+        ".abt-dropdown-item.is-active"
     );
     for (var k = 0; k < activeItems.length; k++) {
       activeItems[k].classList.remove("is-active");
@@ -1564,7 +1611,7 @@
      * 高亮指定的产品分类
      * @param {string} categoryKey - 分类 i18n key
      */
-    highlightCategory: highlightCategory
+    highlightCategory: highlightCategory,
   };
 
   /* ================================================================
@@ -1579,7 +1626,7 @@
   /**
    * SPA 路由导航事件——重新初始化导航和底部栏
    */
-  document.addEventListener("spa:load", function () {
+  _spaOn(document, "spa:load", function () {
     /* 关闭语言面板 */
     _closeLangPanel();
 
@@ -1587,7 +1634,7 @@
     if (!document.querySelector("header")) mountNavigator();
 
     /* 重新初始化 custom-select（navigator 可能创建了新的 lang-selector） */
-    if (typeof CustomSelect !== 'undefined' && CustomSelect.initAll) {
+    if (typeof CustomSelect !== "undefined" && CustomSelect.initAll) {
       CustomSelect.initAll();
     }
     // Re-init lang switcher bridge (uses Promise-based ensureCustomSelect internally)
@@ -1606,5 +1653,4 @@
       if (window.MobileBottomBar) window.MobileBottomBar.render();
     }, 0);
   });
-
 })(window);

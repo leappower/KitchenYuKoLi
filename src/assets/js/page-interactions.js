@@ -13,30 +13,44 @@
 (function (global) {
   "use strict";
 
+  var _spaRegs = {};
+  function _spaOn(tgt, evt, fn, key) {
+    if (_spaRegs[key]) _spaRegs[key].abort();
+    var ac = new AbortController();
+    _spaRegs[key] = ac;
+    tgt.addEventListener(evt, fn, { signal: ac.signal });
+  }
+
   // ─── Helpers (from PiHelpers — fallback if helpers.js not loaded) ──────
   var _h = window.PiHelpers || {};
-  var safeCall = _h.safeCall || function (fnName, args) {
-    if (typeof global[fnName] === "function") {
-      return global[fnName].apply(null, args || []);
-    }
-    console.warn("[PageInteractions] " + fnName + " not found — make sure contacts.js is loaded.");
-  };
-  var directText = _h.directText || function (el) {
-    var text = "";
-    el.childNodes.forEach(function (node) {
-      if (node.nodeType === 3) text += node.nodeValue;
-    });
-    return text.trim();
-  };
-  var findByText = _h.findByText || function (tag, text) {
-    var els = document.querySelectorAll(tag);
-    var results = [];
-    var lower = text.toLowerCase();
-    els.forEach(function (el) {
-      if (directText(el).toLowerCase().indexOf(lower) !== -1) results.push(el);
-    });
-    return results;
-  };
+  var safeCall =
+    _h.safeCall ||
+    function (fnName, args) {
+      if (typeof global[fnName] === "function") {
+        return global[fnName].apply(null, args || []);
+      }
+      console.warn("[PageInteractions] " + fnName + " not found — make sure contacts.js is loaded.");
+    };
+  var directText =
+    _h.directText ||
+    function (el) {
+      var text = "";
+      el.childNodes.forEach(function (node) {
+        if (node.nodeType === 3) text += node.nodeValue;
+      });
+      return text.trim();
+    };
+  var findByText =
+    _h.findByText ||
+    function (tag, text) {
+      var els = document.querySelectorAll(tag);
+      var results = [];
+      var lower = text.toLowerCase();
+      els.forEach(function (el) {
+        if (directText(el).toLowerCase().indexOf(lower) !== -1) results.push(el);
+      });
+      return results;
+    };
 
   /** Attach click to buttons/links whose text matches a keyword */
   function bindByText(tag, text, handler) {
@@ -51,18 +65,27 @@
   function bindQuoteButtons() {
     bindByText("button", "get a quote", function (e) {
       e.preventDefault();
-      if (window.SpaRouter) { window.SpaRouter.navigate("/quote/"); }
-      else { window.location.href = "/quote"; }
+      if (window.SpaRouter) {
+        window.SpaRouter.navigate("/quote/");
+      } else {
+        window.location.href = "/quote";
+      }
     });
     bindByText("button", "request a quote", function (e) {
       e.preventDefault();
-      if (window.SpaRouter) { window.SpaRouter.navigate("/quote/"); }
-      else { window.location.href = "/quote"; }
+      if (window.SpaRouter) {
+        window.SpaRouter.navigate("/quote/");
+      } else {
+        window.location.href = "/quote";
+      }
     });
     bindByText("button", "get quote", function (e) {
       e.preventDefault();
-      if (window.SpaRouter) { window.SpaRouter.navigate("/quote/"); }
-      else { window.location.href = "/quote"; }
+      if (window.SpaRouter) {
+        window.SpaRouter.navigate("/quote/");
+      } else {
+        window.location.href = "/quote";
+      }
     });
   }
 
@@ -114,8 +137,11 @@
       } else if (iconName === "public") {
         link.addEventListener("click", function (e) {
           e.preventDefault();
-          if (window.SpaRouter) { window.SpaRouter.navigate("/home/"); }
-          else { window.location.href = "/"; }
+          if (window.SpaRouter) {
+            window.SpaRouter.navigate("/home/");
+          } else {
+            window.location.href = "/";
+          }
         });
       }
     });
@@ -185,11 +211,16 @@
     bindNavCTAs();
 
     // Update budget options after translations are applied
-    document.addEventListener("spa:ready", function () {
-      if (typeof window.updateBudgetOptions === "function") {
-        window.updateBudgetOptions();
-      }
-    });
+    _spaOn(
+      document,
+      "spa:ready",
+      function () {
+        if (typeof window.updateBudgetOptions === "function") {
+          window.updateBudgetOptions();
+        }
+      },
+      "spa:ready"
+    );
 
     bindAboutVideo();
   }
@@ -202,28 +233,31 @@
     // Pause when tab is hidden
     document.addEventListener("visibilitychange", function () {
       if (document.hidden) v.pause();
-      else if (v._wasInViewport) v.play().catch(function(){});
+      else if (v._wasInViewport) v.play().catch(function () {});
     });
 
     // Pause when scrolled out of viewport
     if ("IntersectionObserver" in window) {
       v._wasInViewport = false;
-      new IntersectionObserver(function (entries) {
-        entries.forEach(function (e) {
-          var vid = e.target;
-          if (e.isIntersecting) {
-            vid._wasInViewport = true;
-            if (!document.hidden) vid.play().catch(function(){});
-          } else {
-            vid.pause();
-          }
-        });
-      }, { threshold: 0.25 }).observe(v);
+      new IntersectionObserver(
+        function (entries) {
+          entries.forEach(function (e) {
+            var vid = e.target;
+            if (e.isIntersecting) {
+              vid._wasInViewport = true;
+              if (!document.hidden) vid.play().catch(function () {});
+            } else {
+              vid.pause();
+            }
+          });
+        },
+        { threshold: 0.25 }
+      ).observe(v);
     }
   }
 
   // Re-bind on SPA navigation
-  document.addEventListener("spa:load", function () {
+  _spaOn(document, "spa:load", function () {
     addCTAHoverClass();
     bindAboutVideo();
   });
@@ -256,5 +290,4 @@
 
   window.PageInteractions = { init: init, toggleDarkMode: toggleDarkMode };
   window.toggleDarkMode = toggleDarkMode;
-
 })(window);

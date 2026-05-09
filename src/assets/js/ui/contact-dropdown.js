@@ -8,11 +8,24 @@
 (function (global) {
   "use strict";
 
+  var _spaRegs = {};
+  function _spaOn(tgt, evt, fn, key) {
+    if (_spaRegs[key]) _spaRegs[key].abort();
+    var ac = new AbortController();
+    _spaRegs[key] = ac;
+    tgt.addEventListener(evt, fn, { signal: ac.signal });
+  }
+
   /* ───────────────────────── DATA ───────────────────────── */
 
-  var ITEMS = (typeof NAV_CONFIG !== 'undefined' && NAV_CONFIG.dropdowns && NAV_CONFIG.dropdowns.contact) || [
+  var ITEMS = (typeof NAV_CONFIG !== "undefined" && NAV_CONFIG.dropdowns && NAV_CONFIG.dropdowns.contact) || [
     { key: "nav_contact_us", icon: "grid_view", href: "/contact/" },
-    { key: "nav_contact_whatsapp", icon: "chat", href: "https://wa.me/" + (window.Contacts ? window.Contacts.whatsapp : "8613163756465"), isWhatsApp: true },
+    {
+      key: "nav_contact_whatsapp",
+      icon: "chat",
+      href: "https://wa.me/" + (window.Contacts ? window.Contacts.whatsapp : "8613163756465"),
+      isWhatsApp: true,
+    },
   ];
 
   /* ───────────────────────── HELPERS ───────────────────────── */
@@ -197,7 +210,7 @@
     });
   }
 
-  document.addEventListener("spa:load", closePopup);
+  _spaOn(document, "spa:load", closePopup, "spa:load:closePopup");
 
   /* ───────────────────────── PUBLIC API ───────────────────────── */
 
