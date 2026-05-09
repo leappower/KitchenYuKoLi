@@ -57,19 +57,16 @@
    */
   function loadCoreProducts(callback) {
     var now = Date.now();
-    console.log("[HCP] loadCoreProducts called at", now);
 
     // Layer 1: sessionStorage (session-level cache)
     try {
       var sessionData = sessionStorage.getItem(CACHE_KEY);
       console.log(
-        "[HCP] Layer2 sessionStorage:",
         sessionData ? "found, age=" + (now - JSON.parse(sessionData).timestamp) / 1000 + "s" : "empty"
       );
       if (sessionData) {
         var parsed = JSON.parse(sessionData);
         if (parsed.timestamp && now - parsed.timestamp < CACHE_TTL) {
-          console.log("[HCP] → Using session cache");
           setTimeout(function () {
             callback(parsed.data, "session");
           }, 0);
@@ -78,17 +75,14 @@
         }
       }
     } catch (e) {
-      console.log("[HCP] Layer2 error:", e.message);
     }
 
     // Layer 3: localStorage (cross-session cache)
     try {
       var localData = localStorage.getItem(CACHE_KEY);
-      console.log("[HCP] Layer3 localStorage:", localData ? "found" : "empty");
       if (localData) {
         var localParsed = JSON.parse(localData);
         if (localParsed.timestamp && now - localParsed.timestamp < CACHE_TTL * 6) {
-          console.log("[HCP] → Using local cache");
           setTimeout(function () {
             callback(localParsed.data, "local");
           }, 0);
@@ -97,11 +91,9 @@
         }
       }
     } catch (e) {
-      console.log("[HCP] Layer3 error:", e.message);
     }
 
     // Layer 4: Network fetch from CMS API
-    console.log("[HCP] → Falling back to network fetch...");
     _fetchFromNetwork(callback);
   }
 
@@ -119,7 +111,6 @@
 
     fetch(API_URL + "?home_core=1&_t=" + Date.now(), { headers: headers })
       .then(function (res) {
-        console.log("[HCP] Network response status:", res.status);
         // Save new ETag
         var newEtag = res.headers.get("ETag");
         if (newEtag) {
@@ -129,7 +120,6 @@
         }
 
         if (res.status === 304) {
-          console.log("[HCP] → 304 Not Modified, using cache fallback");
           _loadCachedFallback(callback);
           return null;
         }
@@ -149,13 +139,11 @@
           });
         }
         console.log(
-          "[HCP] Network data: total categories=" +
             (Array.isArray(data) ? data.length : 0) +
             ", core products=" +
             coreProducts.length
         );
         if (coreProducts.length === 0) {
-          console.log("[HCP] ⚠️ No home core products marked in database");
           // Show empty state instead of blank
           var emptyContainer = document.querySelector('[id^="home-core-products"]');
           if (emptyContainer) {
@@ -168,7 +156,6 @@
         callback(coreProducts, "network");
       })
       .catch(function (err) {
-        console.log("[HCP] Network fetch error:", err.message);
         _loadCachedFallback(callback);
       });
   }
@@ -257,22 +244,16 @@
    * PC: 4-column grid with full product cards
    */
   window.renderHomeCorePC = function (containerId) {
-    console.log("[HCP] renderHomeCorePC called, containerId=" + containerId);
     var container = document.getElementById(containerId);
     if (!container) {
-      console.log("[HCP] ❌ Container #" + containerId + " NOT FOUND in DOM");
       return;
     }
-    console.log("[HCP] ✓ Container found");
 
     loadCoreProducts(function (products, source) {
-      console.log("[HCP] PC callback fired: source=" + source + ", count=" + (products ? products.length : 0));
       if (!products || products.length === 0) {
-        console.log("[HCP] ❌ No products to render");
         container.innerHTML = '<div class="text-center text-slate-400 py-8">暂无核心产品数据</div>';
         return;
       }
-      console.log("[HCP] ✓ Rendering " + products.length + " products");
 
       // Reapply i18n after render
       var VIS_COUNT = 4; // PC: 1 row (4 columns)
@@ -332,7 +313,6 @@
       }
 
       container.innerHTML = html;
-      console.log("[HCP] ✓ PC innerHTML set, length=" + container.innerHTML.length);
 
       // Trigger i18n if available
       if (window.translationManager && window.translationManager.applyTo) {
@@ -472,37 +452,29 @@
   function _autoInit() {
     var path = window.location.pathname || "/";
     var device = window.innerWidth < 768 ? "mobile" : window.innerWidth < 1280 ? "tablet" : "pc";
-    console.log("[HCP] _autoInit fired: path=" + path + ", device=" + device + ", readyState=" + document.readyState);
-    console.log("[HCP] DOM has container?", !!document.getElementById("home-core-products-pc"));
     if (path.indexOf("/home") !== -1) {
       if (device === "mobile") renderHomeCoreMobile("home-core-products-mobile");
       else if (device === "tablet") renderHomeCoreTablet("home-core-products-tablet");
       else renderHomeCorePC("home-core-products-pc");
     } else {
-      console.log("[HCP] Skipping _autoInit: not on /home/ path");
     }
   }
 
   // Make init callable from outside (for SPA router loadPageScripts)
   window.__hcpInit = function () {
-    console.log("[HCP] __hcpInit called externally");
     _autoInit();
   };
 
-  console.log("[HCP] home-core-products.js loaded, registering listeners...");
   // Primary: listen for spa:load (SPA router re-renders content)
   _spaOn(document, "spa:load", function () {
-    console.log("[HCP] spa:load event received!");
     _autoInit();
   });
   // Fallback: if SPA router is not active, use DOMContentLoaded
   if (document.readyState === "loading") {
     document.addEventListener("DOMContentLoaded", function () {
-      console.log("[HCP] DOMContentLoaded fired");
       _autoInit();
     });
   } else {
-    console.log("[HCP] DOM already loaded (readyState=" + document.readyState + "), using setTimeout");
     setTimeout(_autoInit, 0);
   }
 })();

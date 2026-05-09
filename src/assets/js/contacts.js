@@ -246,10 +246,11 @@
     notification.innerHTML =
       '<span class="material-symbols-outlined">' +
       (type === "success" ? "check_circle" : "error") +
-      "</span>" +
-      '<span class="text-sm font-medium">' +
-      message +
       "</span>";
+    var msgSpan = document.createElement('span');
+    msgSpan.className = 'text-sm font-medium';
+    msgSpan.textContent = message;
+    notification.appendChild(msgSpan);
     container.appendChild(notification);
     setTimeout(function () {
       notification.classList.remove("translate-x-full");

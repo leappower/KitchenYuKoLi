@@ -391,7 +391,7 @@
           '" class="w-full h-[360px] object-cover" src="' +
           imgSrc +
           '"' +
-          " onerror=\"this.src='https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=800&h=600&fit=crop'\">" +
+          " onerror=\"this.src='/assets/images/default.webp'\">" +
           '<div class="pdp-play-btn absolute inset-0 flex items-center justify-center bg-black/20 group-hover:bg-black/30 transition-colors">' +
           '<div class="w-16 h-16 rounded-full bg-white/90 flex items-center justify-center shadow-xl group-hover:scale-110 transition-transform">' +
           '<span class="material-symbols-outlined text-3xl text-primary ml-1">play_arrow</span>' +
@@ -406,7 +406,7 @@
           '" class="w-full h-[360px] object-cover" src="' +
           imgSrc +
           '"' +
-          " onerror=\"this.src='https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=800&h=600&fit=crop'\">" +
+          " onerror=\"this.src='/assets/images/default.webp'\">" +
           '<div class="pdp-play-btn absolute inset-0 flex items-center justify-center bg-black/20 group-hover:bg-black/30 transition-colors">' +
           '<div class="w-16 h-16 rounded-full bg-white/90 flex items-center justify-center shadow-xl group-hover:scale-110 transition-transform">' +
           '<span class="material-symbols-outlined text-3xl text-primary ml-1">play_arrow</span>' +
@@ -420,7 +420,7 @@
         ' class="w-full h-[360px] object-cover" src="' +
         imgSrc +
         '"' +
-        " onerror=\"this.src='https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=800&h=600&fit=crop'\">";
+        " onerror=\"this.src='/assets/images/default.webp'\">";
       // Check for additional images (gallery)
       if (product.images && product.images.length > 1) {
         mediaHtml += '<div class="absolute bottom-3 left-3 flex gap-1.5">';

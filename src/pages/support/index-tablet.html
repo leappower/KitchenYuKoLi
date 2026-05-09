@@ -171,7 +171,7 @@
     </div>
     <div class="relative bg-white dark:bg-slate-900 rounded-[2rem] border border-slate-200 dark:border-slate-800 overflow-hidden min-h-[400px] shadow-xl">
       <div id="yukoli-service-map" class="absolute inset-0" style="min-height:400px;"></div>
-      <div id="yukoli-service-map-fallback" class="absolute inset-0 bg-cover bg-center grayscale opacity-40 dark:opacity-20" data-alt="Stylized world map showing service nodes" data-location="Global" style="background-image: url('/assets/images/world-map.svg')"></div>
+      <div id="yukoli-service-map-fallback" class="absolute inset-0 bg-cover bg-center grayscale opacity-40 dark:opacity-20" role="img" aria-label="Stylized world map showing service nodes" data-location="Global" style="background-image: url('/assets/images/world-map.svg')"></div>
       <div class="relative h-full w-full p-8 flex flex-col justify-between pointer-events-none">
         <div class="flex justify-between items-start pointer-events-auto">
           <div class="flex flex-col gap-2">
@@ -206,7 +206,7 @@
     <div class="w-full flex flex-col gap-12 items-center">
       <div class="relative w-full">
         <div class="rounded-3xl overflow-hidden shadow-2xl relative aspect-[4/3] bg-slate-200 dark:bg-slate-800">
-          <img loading="lazy" class="w-full h-full object-cover" data-alt="YuKoLi engineer servicing commercial kitchen equipment in a professional kitchen" src="/assets/images/support-service-engineer.webp" width="800" height="600" onerror="this.style.display='none'">
+          <img loading="lazy" class="w-full h-full object-cover" alt="YuKoLi engineer servicing commercial kitchen equipment in a professional kitchen" src="/assets/images/support-service-engineer.webp" width="800" height="600" onerror="this.style.display='none'">
           <div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
           <div class="absolute bottom-6 left-6 right-6">
             <div class="bg-white/90 dark:bg-slate-900/90 backdrop-blur p-4 rounded-xl">
@@ -327,7 +327,7 @@
           href="https://wa.me/8613163756465"
           data-wa-message-key="wa_msg_support"
           data-wa-source="bottom-cta"
-          target="_blank"
+          target="_blank" rel="noopener noreferrer"
           class="bg-white/10 text-white border border-white/20 backdrop-blur-sm px-10 py-5 rounded-2xl font-black text-base hover:bg-white/20 transition-colors"
           rel="noopener noreferrer"
         >WhatsApp</a>
