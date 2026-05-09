@@ -1,15 +1,20 @@
 /* ─── Suppress third-party DOM errors (frame_start.js etc.) ─────────────
  * Must run early — before any deferred scripts fire their callbacks.
  * Uses capture-phase listener to catch async errors that window.onerror misses. */
-(function() {
-  window.onerror = function(msg) {
+(function () {
+  window.onerror = function (msg) {
     if (msg && /removeChild.*not a child of/i.test(msg)) return true;
   };
-  document.addEventListener('error', function(e) {
-    if (e.message && /removeChild.*not a child of/i.test(e.message)) {
-      e.preventDefault(); e.stopPropagation();
-    }
-  }, true);
+  document.addEventListener(
+    "error",
+    function (e) {
+      if (e.message && /removeChild.*not a child of/i.test(e.message)) {
+        e.preventDefault();
+        e.stopPropagation();
+      }
+    },
+    true
+  );
 })();
 
 /**
@@ -55,7 +60,7 @@
 
     // Category slugs used for /products/<slug>/ routing
     // Known categories map to products list; everything else → PDP
-    CATEGORY_SLUGS: ['cutting', 'stirfry', 'frying', 'stewing', 'steaming', 'other'],
+    CATEGORY_SLUGS: ["cutting", "stirfry", "frying", "stewing", "steaming", "other"],
 
     // 设备特定页面映射
     getDevicePage: function (basePath) {
@@ -119,9 +124,7 @@
 
       // Same-page navigation: don't increment navVersion or reload
       var currentPath = this.getCurrentPath();
-      console.log("[SK] navigate same-page check: currentPath=", currentPath, "target=", normalizedPath, "match=", normalizedPath === currentPath);
       if (normalizedPath === currentPath || normalizedPath.replace(/\/$/, "") === currentPath.replace(/\/$/, "")) {
-        console.log("[SK] navigate: same page, skipping. path=", normalizedPath);
         if (this._pendingScroll) {
           var anchorId = this._pendingScroll;
           this._pendingScroll = null;
@@ -139,7 +142,6 @@
       // 取消上一次未完成的导航（防止竞态）
       this._navVersion = (this._navVersion || 0) + 1;
       var navVersion = this._navVersion;
-      console.log("[SK] navigate:", path, "→", normalizedPath, "navVersion:", navVersion);
 
       history.pushState({ path: normalizedPath }, "", normalizedPath);
 
@@ -269,23 +271,22 @@
     showSkeleton: function () {
       var overlay = document.getElementById("skeleton-overlay");
       var container = document.getElementById("spa-content");
-      console.log("[SK] showSkeleton called from:", new Error().stack.split('\n')[2]?.trim());
       if (overlay) {
         overlay.removeAttribute("hidden");
       }
       if (container) {
-        console.log("[SK] showSkeleton: container.display was", container.style.display, "→ none");
         container.style.display = "none";
       }
       // Debug: if skeleton still visible after 3s, show visible warning
       clearTimeout(this._skeletonDebugTimer);
-      this._skeletonDebugTimer = setTimeout(function() {
+      this._skeletonDebugTimer = setTimeout(function () {
         var ov = document.getElementById("skeleton-overlay");
         if (ov && !ov.hasAttribute("hidden")) {
           console.error("[SKELETON-BUG] Skeleton still visible after 3s!");
-          var banner = document.createElement('div');
-          banner.style.cssText = 'position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);z-index:99999;background:red;color:white;padding:20px 30px;font-size:18px;font-weight:bold;border-radius:12px;box-shadow:0 4px 20px rgba(0,0,0,0.3);';
-          banner.textContent = '⚠️ SKELETON STUCK! hideSkeleton never called. Check console for [SKELETON-BUG].';
+          var banner = document.createElement("div");
+          banner.style.cssText =
+            "position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);z-index:99999;background:red;color:white;padding:20px 30px;font-size:18px;font-weight:bold;border-radius:12px;box-shadow:0 4px 20px rgba(0,0,0,0.3);";
+          banner.textContent = "⚠️ SKELETON STUCK! hideSkeleton never called. Check console for [SKELETON-BUG].";
           document.body.appendChild(banner);
         }
       }, 3000);
@@ -296,12 +297,10 @@
       clearTimeout(this._skeletonDebugTimer);
       var overlay = document.getElementById("skeleton-overlay");
       var container = document.getElementById("spa-content");
-      console.log("[SK] hideSkeleton called");
       if (overlay) {
         overlay.setAttribute("hidden", "");
       }
       if (container) {
-        console.log("[SK] hideSkeleton: container.display was", container.style.display, "→ ''");
         container.style.display = "";
       }
     },
@@ -410,7 +409,15 @@
       // Fallback: derive from current route path
       if (!activeNav) {
         var path = window.location.pathname.replace(/\/$/, "");
-        var map = { "/home": "home", "/products": "products", "/support": "support", "/about": "about", "/contact": "contact", "/cases": "cases", "/profit-calculator": "profit-calculator" };
+        var map = {
+          "/home": "home",
+          "/products": "products",
+          "/support": "support",
+          "/about": "about",
+          "/contact": "contact",
+          "/cases": "cases",
+          "/profit-calculator": "profit-calculator",
+        };
         var best = "";
         for (var key in map) {
           if (path.indexOf(key) === 0 && key.length > best.length) best = key;
@@ -428,27 +435,27 @@
       var pagePath = this.routes[routePath];
 
       // Special page: /products/compare/
-      if (!pagePath && routePath === '/products/compare/') {
-        pagePath = '/products/compare/index-pc.html';
+      if (!pagePath && routePath === "/products/compare/") {
+        pagePath = "/products/compare/index-pc.html";
       }
 
       // Dynamic route: /products/<segment>/ — category or PDP
       if (!pagePath && routePath.match(/^\/products\/[^/]+\/$/)) {
-        var segment = routePath.replace(/^\/products\/|\/$/g, '');
+        var segment = routePath.replace(/^\/products\/|\/$/g, "");
         if (this.CATEGORY_SLUGS.indexOf(segment) >= 0) {
           // Category page — convention: /products/<slug>/ → /products/<slug>/index-pc.html
-          pagePath = '/products/' + segment + '/index-pc.html';
+          pagePath = "/products/" + segment + "/index-pc.html";
         } else {
           // PDP — convention: /products/<model>/ → /products/detail/index-pc.html
-          pagePath = '/products/detail/index-pc.html';
+          pagePath = "/products/detail/index-pc.html";
         }
       }
 
       // Convention: any path not in routes[] → /<path>/index-pc.html
       // This mirrors server.js resolvePage() step 4.
       if (!pagePath) {
-        var clean = routePath.replace(/\/+$/, '');
-        pagePath = clean + '/index-pc.html';
+        var clean = routePath.replace(/\/+$/, "");
+        pagePath = clean + "/index-pc.html";
       }
 
       // Never redirect — let the server return SPA shell if file doesn't exist.
@@ -479,7 +486,6 @@
         .then(function (html) {
           // 竞态保护：丢弃过期导航的结果
           if (navVersion && navVersion !== _self._navVersion) {
-            console.log("[SK] Stale nav discarded:", routePath, "v" + navVersion + " vs v" + _self._navVersion);
             _self.hideSkeleton(); // 安全恢复：防止 display:none 残留
             return;
           }
@@ -539,9 +545,7 @@
       }
 
       // 隐藏骨架 → 替换内容 → fade in
-      console.log("[SK] renderContent: calling hideSkeleton, then setting content");
       this.hideSkeleton();
-      console.log("[SK] renderContent: after hideSkeleton, container.display=", container.style.display);
       container.style.opacity = "0";
       container.innerHTML = content;
 
@@ -572,7 +576,9 @@
           container.style.opacity = "";
         }, 240);
       }
-      requestAnimationFrame(function () { doFadeIn(); });
+      requestAnimationFrame(function () {
+        doFadeIn();
+      });
       // 安全网：300ms 后若仍不可见，强制显示（防止 rAF 被节流/跳过）
       setTimeout(function () {
         if (container.style.opacity === "0") {
@@ -590,10 +596,15 @@
 
       // 等待动态脚本加载完成后，再触发 spa:load（避免重复触发）
       var _self2 = this;
-      Promise.resolve(scriptsPromise).then(function() {
+      Promise.resolve(scriptsPromise).then(function () {
         // Re-mount footer for SPA-loaded pages (only if not already mounted)
         if (window.Footer && window.Footer.mount && !_self2.footerMounted) {
-          try { window.Footer.mount(); _self2.footerMounted = true; } catch(e) { /* ignore */ }
+          try {
+            window.Footer.mount();
+            _self2.footerMounted = true;
+          } catch (e) {
+            /* ignore */
+          }
         }
         document.dispatchEvent(new Event("spa:load"));
         _self2.log("Content rendered for:", pagePath);
@@ -683,77 +694,81 @@
       }
 
       // 解析路径中的 hash 锚点（如 /support/#faq → path=/support/ hash=faq）
-    function parseHashHref(href) {
-      var match = href.match(/^(\/[^#]*?)#([^#]*)$/);
-      return match ? { path: match[1], hash: match[2] } : null;
-    }
+      function parseHashHref(href) {
+        var match = href.match(/^(\/[^#]*?)#([^#]*)$/);
+        return match ? { path: match[1], hash: match[2] } : null;
+      }
 
-    // 拦截链接点击 - 只拦截已知路由的链接
+      // 拦截链接点击 - 只拦截已知路由的链接
       // Use capture phase to run BEFORE page-effects.js bubble handler
-      document.addEventListener("click", function (event) {
-        var link = event.target.closest("a");
-        if (!link) return;
-        if (event.defaultPrevented) return;
+      document.addEventListener(
+        "click",
+        function (event) {
+          var link = event.target.closest("a");
+          if (!link) return;
+          if (event.defaultPrevented) return;
 
-        var href = link.getAttribute("href");
-        if (!href) return;
-        if (href.startsWith("http")) return; // 外部链接
-        if (href.startsWith("#")) return; // 纯 Hash 链接（当前页面滚动）
-        if (href.startsWith("mailto:")) return;
-        if (href.startsWith("tel:")) return;
+          var href = link.getAttribute("href");
+          if (!href) return;
+          if (href.startsWith("http")) return; // 外部链接
+          if (href.startsWith("#")) return; // 纯 Hash 链接（当前页面滚动）
+          if (href.startsWith("mailto:")) return;
+          if (href.startsWith("tel:")) return;
 
-        // 检查是否含 hash 锚点（/support/#faq）
-        var hashInfo = parseHashHref(href);
-        var targetPath, scrollAnchor = null;
+          // 检查是否含 hash 锚点（/support/#faq）
+          var hashInfo = parseHashHref(href);
+          var targetPath,
+            scrollAnchor = null;
 
-        if (hashInfo) {
-          targetPath = hashInfo.path;
-          scrollAnchor = hashInfo.hash;
-          if (!targetPath.endsWith("/")) targetPath += "/";
-        } else {
-          targetPath = href.startsWith("/") ? href : "/" + href;
-          if (!targetPath.endsWith("/")) targetPath += "/";
-        }
+          if (hashInfo) {
+            targetPath = hashInfo.path;
+            scrollAnchor = hashInfo.hash;
+            if (!targetPath.endsWith("/")) targetPath += "/";
+          } else {
+            targetPath = href.startsWith("/") ? href : "/" + href;
+            if (!targetPath.endsWith("/")) targetPath += "/";
+          }
 
-        // 处理 /pages/.../index*.html -> /<basename>
-        var pagesMatch = targetPath.match(/^\/pages\/([^/]+)\/index(?:-[a-z0-9-]+)?\.html$/i);
-        if (pagesMatch && pagesMatch[1]) {
-          targetPath = "/" + pagesMatch[1] + "/";
-        }
+          // 处理 /pages/.../index*.html -> /<basename>
+          var pagesMatch = targetPath.match(/^\/pages\/([^/]+)\/index(?:-[a-z0-9-]+)?\.html$/i);
+          if (pagesMatch && pagesMatch[1]) {
+            targetPath = "/" + pagesMatch[1] + "/";
+          }
 
-        // Intercept all internal links — loadRoute handles unknown paths via
-        // convention (/<path>/index-pc.html). Only skip non-page paths.
-        var isPage = targetPath.match(/^\/[a-z0-9][a-z0-9._-]*(?:\/[a-z0-9][a-z0-9._-]*)*\/$/i);
-        if (!isPage) {
-          _self.log("Skipping SPA for non-page path:", targetPath);
-          return;
-        }
+          // Intercept all internal links — loadRoute handles unknown paths via
+          // convention (/<path>/index-pc.html). Only skip non-page paths.
+          var isPage = targetPath.match(/^\/[a-z0-9][a-z0-9._-]*(?:\/[a-z0-9][a-z0-9._-]*)*\/$/i);
+          if (!isPage) {
+            _self.log("Skipping SPA for non-page path:", targetPath);
+            return;
+          }
 
-        // 阻止默认行为，使用 SPA 导航
-        event.preventDefault();
-        // 移除焦点，避免按钮/链接残留 active 样式
-        if (document.activeElement) document.activeElement.blur();
+          // 阻止默认行为，使用 SPA 导航
+          event.preventDefault();
+          // 移除焦点，避免按钮/链接残留 active 样式
+          if (document.activeElement) document.activeElement.blur();
 
-        if (scrollAnchor) {
-          // 含锚点：导航到父页面后滚动到锚点
-          _self.log("SPA navigation to:", targetPath, "scroll to #", scrollAnchor);
-          _self._pendingScroll = scrollAnchor;
-          _self.navigate(targetPath);
-        } else {
-          _self.log("SPA navigation to:", targetPath);
-          _self.navigate(targetPath);
-        }
-      }, true);
+          if (scrollAnchor) {
+            // 含锚点：导航到父页面后滚动到锚点
+            _self.log("SPA navigation to:", targetPath, "scroll to #", scrollAnchor);
+            _self._pendingScroll = scrollAnchor;
+            _self.navigate(targetPath);
+          } else {
+            _self.log("SPA navigation to:", targetPath);
+            _self.navigate(targetPath);
+          }
+        },
+        true
+      );
 
       this.log("Initialized successfully");
 
       // 监控全页面导航
-      window.addEventListener('beforeunload', function(e) {
-      });
+      window.addEventListener("beforeunload", function (e) {});
     },
 
     // 页面专属脚本映射（SPA 导航时按需加载）
-    loadPageScripts: function(pagePath) {
+    loadPageScripts: function (pagePath) {
       var scripts = [];
       var path = pagePath.replace(/\/index-(pc|mobile|tablet)\.html$/, "/");
 
@@ -791,16 +806,27 @@
       }
 
       // Quote / profit-calculator / support / landing 需要 custom-select.js
-      if (path.indexOf("/quote/") !== -1 || path.indexOf("/profit-calculator/") !== -1 || path.indexOf("/support/") !== -1 || path.indexOf("/landing/") !== -1) {
+      if (
+        path.indexOf("/quote/") !== -1 ||
+        path.indexOf("/profit-calculator/") !== -1 ||
+        path.indexOf("/support/") !== -1 ||
+        path.indexOf("/landing/") !== -1
+      ) {
         if (!window.CustomSelect) {
           scripts.push({ src: "/assets/js/ui/dropdown-styles.js", id: "spa-dropdown-styles" });
           scripts.push({ src: "/assets/js/ui/custom-select.js", id: "spa-custom-select" });
         }
       }
 
-      // Quote 页面需要预算 i18n 脚本
+      // Quote 页面需要表单逻辑 + 预算 i18n 脚本
       if (path.indexOf("/quote/") !== -1) {
+        scripts.push({ src: "/assets/js/quote-form.js", id: "spa-quote-form" });
         scripts.push({ src: "/assets/js/quote-budget-i18n.js?v=20260507", id: "spa-quote-budget-i18n" });
+      }
+
+      // News detail 页面需要 news-detail.js
+      if (path.indexOf("/news/detail") !== -1) {
+        scripts.push({ src: "/assets/js/news-detail.js", id: "spa-news-detail" });
       }
 
       // Home 页面需要 home-core-products.js（动态渲染核心产品卡片）
@@ -836,17 +862,17 @@
       // Load scripts sequentially (each waits for previous onload)
       var chain = Promise.resolve();
       var loaded = 0;
-      scripts.forEach(function(s) {
+      scripts.forEach(function (s) {
         if (document.getElementById(s.id)) return; // 已加载
-        chain = chain.then(function() {
-          return new Promise(function(resolve) {
+        chain = chain.then(function () {
+          return new Promise(function (resolve) {
             var el = document.createElement("script");
             el.id = s.id;
             el.src = s.src + (s.src.indexOf("?") === -1 ? "?v=" + Date.now() : "");
-            el.onload = function() {
+            el.onload = function () {
               resolve();
             };
-            el.onerror = function() {
+            el.onerror = function () {
               console.warn("[SPA] Failed to load script:", s.src);
               resolve(); // continue chain even on error
             };
@@ -864,12 +890,20 @@
   // 自动初始化：只要页面加载了 spa-router.js，SPA 就立即可用
   // 不再需要每个页面手动调用 SpaRouter.init()
   // 在 DOMContentLoaded 后自动注册 click handler
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', function () {
-      try { SpaRouter.init(); } catch (e) { /* init 内部会 log */ }
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", function () {
+      try {
+        SpaRouter.init();
+      } catch (e) {
+        /* init 内部会 log */
+      }
     });
   } else {
     // DOM 已就绪（script 在 body 末尾或 defer 加载时可能发生）
-    try { SpaRouter.init(); } catch (e) { /* init 内部会 log */ }
+    try {
+      SpaRouter.init();
+    } catch (e) {
+      /* init 内部会 log */
+    }
   }
 })(window);

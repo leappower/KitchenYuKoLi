@@ -108,42 +108,9 @@
 </footer>
 
 <script src="/assets/js/utils/device-utils.js"></script>
-<script src="/assets/js/spa-router.js?v=20260509"></script>
-<script defer src="/assets/js/lang-registry.js?v=20260509"></script>
-<script defer src="/assets/js/translations.js?v=20260509"></script>
-<script defer src="/assets/js/translations-dropdown-template.js?v=20260509"></script><script>
-document.addEventListener('DOMContentLoaded', function() {
-  var params = new URLSearchParams(window.location.search);
-  var id = params.get('id') || 'news_1';
-  var titleEl = document.getElementById('article-title');
-  var bodyEl = document.getElementById('article-body');
-  var dateEl = document.getElementById('article-date');
-
-  if (titleEl) {
-    titleEl.setAttribute('data-i18n', id + '_title');
-    if (window.translationManager && window.translationManager.t) {
-      titleEl.textContent = window.translationManager.t(id + '_title') || '';
-    }
-  }
-
-  if (dateEl) {
-    var dateKey = id + '_date';
-    if (window.translationManager && window.translationManager.t) {
-      var i18nPrefix = window.translationManager.t('news_detail_published') || '';
-      var dateVal = window.translationManager.t(dateKey) || '';
-      dateEl.innerHTML = i18nPrefix + ' ' + dateVal;
-    }
-  }
-
-  if (bodyEl) {
-    var bodyKey = id + '_body';
-    if (window.translationManager && window.translationManager.t) {
-      var bodyHtml = window.translationManager.t(bodyKey) || '';
-      bodyHtml = bodyHtml.split('\n\n').map(function(p) { return '<p>' + p.trim() + '</p>'; }).join('');
-      bodyEl.innerHTML = bodyHtml;
-    }
-  }
-});
-</script>
+<script src="/assets/js/spa-router.js?v=202605091705"></script>
+<script defer src="/assets/js/lang-registry.js?v=202605091705"></script>
+<script defer src="/assets/js/translations.js?v=202605091705"></script>
+<script defer src="/assets/js/translations-dropdown-template.js?v=202605091705"></script>
 </body>
 </html>

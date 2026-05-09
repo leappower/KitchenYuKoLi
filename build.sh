@@ -12,7 +12,7 @@ set -euo pipefail
 
 SRC="src"
 DIST="dist"
-VERSION="v=$(date +%Y%m%d)"
+VERSION="v=$(date +%Y%m%d%H%M)"
 
 echo "🏗️  Building..."
 

@@ -6,6 +6,7 @@
   "scripts": {
     "start": "webpack serve --mode development",
     "dev": "NODE_ENV=development nodemon server.js",
+    "watch": "fswatch -o src/ | xargs -n1 -I{} ./build.sh",
     "build:css": "tailwindcss -i src/assets/css/tailwind-entry.css -o src/assets/css/tailwind.css --minify",
     "build": "./build.sh",
     "build:dev": "rm -rf dist && npm run build:css && webpack --env devBuild && node scripts/build-ssg.js",

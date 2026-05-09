@@ -4,15 +4,15 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script>
-  // Force clear stale Service Worker and caches on every load
+  // Force unregister any stale Service Worker from previous versions
   if('serviceWorker' in navigator){
     navigator.serviceWorker.getRegistrations().then(function(regs){
-      regs.forEach(function(r){r.unregister();console.log('[SW] unregistered:',r.scope)});
+      regs.forEach(function(r){r.unregister()});
     });
   }
   if('caches' in window){
     caches.keys().then(function(names){
-      names.forEach(function(n){caches.delete(n);console.log('[SW] deleted cache:',n)});
+      names.forEach(function(n){caches.delete(n)});
     });
   }
   </script>

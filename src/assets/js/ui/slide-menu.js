@@ -671,7 +671,6 @@
   function openMenu() {
     if (panelEl) return; // 已打开，忽略重复调用
 
-    // 确保样式已注入
     injectStyles();
 
     // 创建遮罩层
@@ -886,13 +885,13 @@
 
     if (!mobileHeaderEl) return;
 
-    // 判断是否为平板模式：<navigator data-variant="tablet"> 存在或在 768–1280px 之间
-    var tabletNavigator = document.querySelector('navigator[data-variant="tablet"]');
-    var isTablet =
-      (tabletNavigator && tabletNavigator.parentNode) || (window.innerWidth >= 768 && window.innerWidth < 1280);
+    // 判断是否为平板模式：innerWidth 768–1280px
+    // Note: navigator.js replaces <navigator> placeholder with <header> element,
+    // so document.querySelector('navigator[data-variant]') always returns null.
+    // We rely solely on innerWidth for tablet detection.
+    var isTablet = window.innerWidth >= 768 && window.innerWidth < 1280;
 
     if (isTablet) {
-      if (__DEVELOPMENT__) console.log("[mobile-menu] Tablet mode — smart header hide disabled, header stays visible");
       mobileHeaderEl.classList.remove("header-hidden");
       return;
     }
@@ -901,7 +900,6 @@
     window.removeEventListener("scroll", onScroll);
     window.addEventListener("scroll", onScroll, { passive: true });
     mobileHeaderEl.classList.remove("header-hidden");
-    if (__DEVELOPMENT__) console.log("[mobile-menu] Smart header scroll listener attached (mobile mode)");
   }
 
   /**
@@ -918,13 +916,9 @@
 
       if (currentY > 50 && currentY > lastScrollY) {
         // 向下滚动：隐藏头部
-        if (__DEVELOPMENT__) console.log("[mobile-menu] hide header", currentY, lastScrollY);
         mobileHeaderEl.classList.add("header-hidden");
       } else {
         // 向上滚动：显示头部
-        if (mobileHeaderEl.classList.contains("header-hidden")) {
-          if (__DEVELOPMENT__) console.log("[mobile-menu] show header", currentY, lastScrollY);
-        }
         mobileHeaderEl.classList.remove("header-hidden");
       }
 
@@ -1260,7 +1254,6 @@
       initSmartHeader();
     });
   } else {
-    // DOMContentLoaded 已触发（脚本在 body 底部或使用 defer/async）
     initToggle();
     initSmartHeader();
   }

@@ -214,13 +214,18 @@ app.use((req, res, next) => {
     // Translation files - no cache for dev
     res.setHeader('Cache-Control', 'no-cache');
   } else if (isAsset) {
-    // Static assets - long-term cache with immutable
-    const maxAge = 60 * 60 * 24 * 30; // 30 days
-    res.setHeader('Cache-Control', `public, max-age=${maxAge}, immutable`);
-    res.setHeader('Expires', new Date(Date.now() + maxAge * 1000).toUTCString());
+    if (IS_PROD) {
+      // Static assets - long-term cache with immutable
+      const maxAge = 60 * 60 * 24 * 30; // 30 days
+      res.setHeader('Cache-Control', `public, max-age=${maxAge}, immutable`);
+      res.setHeader('Expires', new Date(Date.now() + maxAge * 1000).toUTCString());
+    } else {
+      // Dev: no cache for static assets
+      res.setHeader('Cache-Control', 'no-store');
+    }
   } else {
-    // Other routes - short cache
-    res.setHeader('Cache-Control', 'public, max-age=300, must-revalidate'); // 5 minutes
+    // Other routes
+    res.setHeader('Cache-Control', IS_PROD ? 'public, max-age=300, must-revalidate' : 'no-store');
   }
 
   next();

@@ -81,8 +81,6 @@
     if (!form || form.dataset.quoteFormBound) return;
     form.dataset.quoteFormBound = "1";
 
-    console.log("[QuoteForm] Initialized (v" + VERSION + ")");
-
     // Restore * markers if needed (translations.js now preserves child spans, but safety net)
     restoreAsterisks();
 
@@ -186,10 +184,10 @@
 
       // Submit via server proxy (hides Google Apps Script URL)
       fetch("/api/quote-submit", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(formData),
-        })
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      })
         .then(function (response) {
           if (!response.ok) {
             return response.json().then(function (err) {
@@ -231,5 +229,16 @@
       initQuoteForm();
     },
     "spa:ready"
+  );
+  _spaOn(
+    document,
+    "spa:load",
+    function initQuoteFormSPA() {
+      var form = document.getElementById("quote-form") || document.getElementById("quote-calc-form");
+      if (!form || form._spaLoadInitialized) return;
+      form._spaLoadInitialized = true;
+      initQuoteForm();
+    },
+    "spa:load"
   );
 })();

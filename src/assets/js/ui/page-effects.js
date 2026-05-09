@@ -110,7 +110,8 @@
    * 向下滚动 200 px 后，底部出现一个悬浮 CTA 条（"Get a Quote" + 联系按钮）。
    * 仅在没有 #smart-popup-overlay 打开的情况下显示，且在表单页或感谢页上隐藏。
    */
-  function initStickyCTA() {
+  /* function initStickyCTA() { DISABLED */
+  /*
     // Skip on form-heavy pages (thank-you / quote) and email-only pages
     var path = window.location.pathname;
     var skipPages = ["thank-you", "quote", "emails", "linkedin"];
@@ -123,7 +124,7 @@
       var s = document.createElement("style");
       s.id = "pi-sticky-cta-style";
       s.textContent = [
-        "#yukoli-sticky-cta{position:fixed;bottom:0;left:0;right:0;z-index:var(--z-fab, 50);",
+        "#yukoli-sticky-cta{position:fixed;bottom:0;left:0;right:0;z-index:calc(var(--z-footer, 10) + 1);",
         "background:#fff;border-top:2px solid #ec5b13;padding:10px 24px;",
         "display:flex;align-items:center;justify-content:space-between;",
         "box-shadow:0 -4px 24px rgba(0,0,0,.12);",
@@ -158,6 +159,17 @@
         "</div>",
       ].join("");
       document.body.appendChild(bar);
+    }
+
+    // If footer nav bar exists, offset sticky-cta above it
+    var footerBar = document.querySelector('footer[data-component="footer"] .fixed');
+    if (footerBar) {
+      var updateOffset = function () {
+        var h = footerBar.offsetHeight;
+        bar.style.bottom = h + 'px';
+      };
+      updateOffset();
+      new ResizeObserver(updateOffset).observe(footerBar);
     }
 
     var dismissed = false;
@@ -202,6 +214,7 @@
       hideBar();
     });
   }
+  */
 
   // ─── F3. Progressive Disclosure ──────────────────────────────────────────────
   /**
@@ -384,7 +397,7 @@
   function init() {
     initToastSystem(); // must be first — others use it
     initScrollAnimation();
-    initStickyCTA();
+    // initStickyCTA(); // disabled
     initProgressiveDisclosure();
     initPageTransition();
   }

@@ -365,16 +365,16 @@ header button:active {
     <script src="/assets/js/ui/dropdown-styles.js"></script>
     <script src="/assets/js/ui/dropdown-base.js"></script>
     <script src="/assets/js/ui/custom-select.js"></script>
-<script defer src="/assets/js/ui/products-dropdown.js?v=20260509"></script>
-    <script defer src="/assets/js/ui/applications-dropdown.js?v=20260509"></script>
-    <script defer src="/assets/js/ui/support-dropdown.js?v=20260509"></script>
-    <script defer src="/assets/js/ui/about-dropdown.js?v=20260509"></script>
-    <script defer src="/assets/js/ui/navigator.js?v=20260509"></script>
-<script defer src="/assets/js/ui/slide-menu.js?v=20260509"></script>
+<script defer src="/assets/js/ui/products-dropdown.js?v=202605091705"></script>
+    <script defer src="/assets/js/ui/applications-dropdown.js?v=202605091705"></script>
+    <script defer src="/assets/js/ui/support-dropdown.js?v=202605091705"></script>
+    <script defer src="/assets/js/ui/about-dropdown.js?v=202605091705"></script>
+    <script defer src="/assets/js/ui/navigator.js?v=202605091705"></script>
+<script defer src="/assets/js/ui/slide-menu.js?v=202605091705"></script>
 <script defer src="/assets/js/ui/search-engine.js"></script>
-<script defer src="/assets/js/ui/footer.js?v=20260509"></script>
-<script defer src="/assets/js/lang-registry.js?v=20260509"></script>
-<script defer src="/assets/js/translations.js?v=20260509"></script><script defer src="/assets/js/translations-dropdown-template.js?v=20260509"></script>
+<script defer src="/assets/js/ui/footer.js?v=202605091705"></script>
+<script defer src="/assets/js/lang-registry.js?v=202605091705"></script>
+<script defer src="/assets/js/translations.js?v=202605091705"></script><script defer src="/assets/js/translations-dropdown-template.js?v=202605091705"></script>
 <script defer src="/assets/js/contacts.js"></script>
 <script defer src="/assets/js/router.js"></script>
 
@@ -405,30 +405,7 @@ header button:active {
 }
 </style>
 
-<script>
-(function() {
-  var currentPath = window.location.pathname;
-  var navItems = document.querySelectorAll('.nav-item');
-  
-  navItems.forEach(function(item) {
-    var href = item.getAttribute('href');
-    if (href && currentPath.includes(href)) {
-      item.classList.add('active');
-      item.classList.remove('text-slate-400', 'dark:text-slate-500');
-      item.classList.add('text-primary');
-    }
-  });
-  
-  navItems.forEach(function(item) {
-    item.addEventListener('touchstart', function() {
-      this.style.transform = 'scale(0.95)';
-    });
-    item.addEventListener('touchend', function() {
-      this.style.transform = '';
-    });
-  });
-})();
-</script>
+
 
 <footer data-component="footer"
   data-variant="mobile"
@@ -438,116 +415,9 @@ header button:active {
 
 
 <script src="/assets/js/utils/device-utils.js"></script>
-<script src="/assets/js/spa-router.js?v=20260509"></script>
+<script src="/assets/js/spa-router.js?v=202605091705"></script>
 
-<script>
-(function(){
-  var btn = document.getElementById('quote-submit-mobile');
-  if(!btn) return;
-  btn.addEventListener('click', function(e){
-    e.preventDefault();
 
-    // Required field validation
-    var required = ["q-company", "q-contact", "q-phone", "q-email", "q-country", "q-equipment-type"];
-    var valid = true;
-    required.forEach(function(id) {
-      var el = document.getElementById(id);
-      if (!el) return;
-      if (!el.value.trim()) {
-        el.classList.add("border-red-500");
-        valid = false;
-      } else {
-        el.classList.remove("border-red-500");
-      }
-    });
-
-    // Email validation
-    var emailEl = document.getElementById("q-email");
-    if (emailEl && emailEl.value && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailEl.value)) {
-      emailEl.classList.add("border-red-500");
-      valid = false;
-    }
-
-    // Consent validation
-    var consent = document.getElementById('q-consent-m');
-    if(consent && !consent.checked){
-      if(window.showNotification) window.showNotification('请先同意隐私政策','error');
-      return;
-    }
-
-    if (!valid) {
-      if(window.showNotification) window.showNotification('请填写所有必填项','error');
-      return;
-    }
-
-    // Collect form data
-    var company = document.getElementById("q-company").value;
-    var contact = document.getElementById("q-contact").value;
-    var phone = document.getElementById("q-phone").value;
-    var email = document.getElementById("q-email").value;
-    var country = document.getElementById("q-country");
-    var countryText = country.options[country.selectedIndex].text;
-    var equipType = document.getElementById("q-equipment-type");
-    var equipText = equipType.options[equipType.selectedIndex].text;
-    var quantity = document.getElementById("q-quantity").value || "未指定";
-    var capacity = document.getElementById("q-capacity");
-    var capacityText = capacity.value ? capacity.options[capacity.selectedIndex].text : "未指定";
-    var budget = document.getElementById("q-budget");
-    var budgetText = budget.value ? budget.options[budget.selectedIndex].text : "未指定";
-    var message = document.getElementById("q-message").value || "无";
-
-    // Google Sheets submit
-    var formData = {
-      formType: "quote_form",
-      company: company,
-      contact: contact,
-      phone: phone,
-      email: email,
-      country: countryText,
-      equipmentType: equipText,
-      quantity: quantity,
-      kitchenCapacity: capacityText,
-      budget: budgetText,
-      message: message,
-      language: (window.translationManager && window.translationManager.currentLang) || navigator.language,
-      pageUrl: location.href
-    };
-    fetch("https://script.google.com/macros/s/AKfycbyikM1ArEFhJhQUSAp6l4DHJcGzDDK1cckL-KOrVbjipoMGSKsOOlhFWJGTPB6qOys/exec", {
-      method: "POST",
-      mode: "no-cors",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(formData)
-    }).catch(function(){});
-
-    // WhatsApp redirect
-    var msg =
-      "🔧 YuKoLi Quote\n" +
-      "━━━━━━━━━━━━━━\n" +
-      "🏢 " + (company || "—") + "\n" +
-      "👤 " + (contact || "—") + "\n" +
-      "📞 " + (phone || "—") + "\n" +
-      "📧 " + (email || "—") + "\n" +
-      "🌍 " + (countryText || "—") + "\n" +
-      "━━━━━━━━━━━━━━\n" +
-      "🍽️ " + (equipText || "—") + "\n" +
-      "📦 " + (quantity || "—") + "\n" +
-      "🏭 " + (capacityText || "—") + "\n" +
-      "💰 " + (budgetText || "—") + "\n" +
-      "📝 " + (message || "—");
-
-    var encoded = encodeURIComponent(msg);
-    window.open(
-      "https://wa.me/" + (window.Contacts ? window.Contacts.whatsapp : "8613163756465") + "?text=" + encoded,
-      "_blank"
-    );
-
-    if(window.showNotification) window.showNotification("正在跳转到 WhatsApp，请发送询价信息", "success");
-
-    // Redirect to thank-you page
-    setTimeout(function(){ location.href = '/thank-you/'; }, 1500);
-  });
-})();
-</script>
     <script defer src="/assets/js/ui/floating-actions.js"></script>
 </body>
 </html>

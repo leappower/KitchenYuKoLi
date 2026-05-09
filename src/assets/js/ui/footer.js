@@ -106,6 +106,16 @@
 
   function mount() {
     var footers = document.querySelectorAll('footer[data-component="footer"]');
+
+    // Defensive: if no footer placeholder exists, create one
+    if (footers.length === 0) {
+      var f = document.createElement("footer");
+      f.setAttribute("data-component", "footer");
+      f.setAttribute("data-active", "");
+      document.body.appendChild(f);
+      footers = [f];
+    }
+
     var w = window.innerWidth;
 
     for (var i = 0; i < footers.length; i++) {
