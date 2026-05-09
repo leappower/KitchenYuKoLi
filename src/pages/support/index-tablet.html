@@ -16,25 +16,20 @@
   var urlParams = new URLSearchParams(location.search);
   var cleanUrl = urlParams.get('clean-url');
   if (cleanUrl) {
-    console.log('[Responsive Redirect] Cleaning URL to:', cleanUrl);
     history.replaceState({}, '', cleanUrl);
     return;
   }
 
   // SPA 导航时跳过响应式重定向
-  console.log('[Responsive Redirect] Checking SPA flag: window.__spaNavigating =', window.__spaNavigating);
   if (window.__spaNavigating) {
-    console.log('[Responsive Redirect] SPA navigation detected, skipping redirect');
     return;
   }
 
   // 使用 DeviceUtils 统一管理设备判断
   var currentFile = location.pathname.split('/').pop();
-  console.log('[Responsive Redirect] Current file:', currentFile, 'Pathname:', location.pathname);
 
   // 当访问目录 URL(以 / 结尾)时,不要重定向(SPA 导航使用干净的目录 URL)
   if (window.DeviceUtils && window.DeviceUtils.isDirectoryURL()) {
-    console.log('[Responsive Redirect] Directory URL detected, skipping redirect');
     return;
   }
 
@@ -51,12 +46,10 @@
       targetFile = 'index-pc.html';
     }
 
-    console.log('[Responsive Redirect] Redirecting to:', targetFile);
     location.href = targetFile;
     return;
   }
 
-  console.log('[Responsive Redirect] No redirect needed');
 })();</script>
     <meta charset="utf-8"/>
     <meta name="description" content="YuKoLi 智能厨具售后服务与技术支持：安装指导、操作培训、故障排查、原厂配件供应。覆盖东南亚 10 国，48 小时上门响应。">
@@ -329,7 +322,6 @@
           data-wa-source="bottom-cta"
           target="_blank" rel="noopener noreferrer"
           class="bg-white/10 text-white border border-white/20 backdrop-blur-sm px-10 py-5 rounded-2xl font-black text-base hover:bg-white/20 transition-colors"
-          rel="noopener noreferrer"
         >WhatsApp</a>
       </div>
     </div>
