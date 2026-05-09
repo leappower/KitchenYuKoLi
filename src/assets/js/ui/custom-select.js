@@ -440,8 +440,10 @@
     // Insert into DOM
     selectEl.parentNode.insertBefore(this.wrap, selectEl);
     this.wrap.appendChild(this.trigger);
-    this.wrap.appendChild(this.panel);
     this.wrap.appendChild(selectEl);
+    // Panel goes to <body> to avoid being affected by ancestor transforms
+    // (e.g. .animate-hidden translate3d) which break position:fixed
+    document.body.appendChild(this.panel);
 
     // Debug: log sizing after DOM insertion
     if (window.__CS_DEBUG) {
@@ -672,6 +674,7 @@
     CustomSelect.closeAll();
 
     this.wrap.classList.add(OPEN_CLASS);
+    this.panel.classList.add(OPEN_CLASS);
     this.trigger.setAttribute("aria-expanded", "true");
 
     // Position panel using fixed coordinates from trigger rect (or override anchor)
@@ -868,6 +871,7 @@
   /* Close */
   CustomSelectInstance.prototype.close = function () {
     this.wrap && this.wrap.classList.remove(OPEN_CLASS);
+    this.panel && this.panel.classList.remove(OPEN_CLASS);
     this.trigger && this.trigger.setAttribute("aria-expanded", "false");
     this._closePopup();
     this._removeScrollResize();
