@@ -145,10 +145,13 @@
       '<div class="prod-dropdown-wrap' +
       (isTouch() ? " touch-device" : "") +
       '">' +
-      '<button type="button"' +
+      "<a" +
       ' class="' +
       esc(cfg.activeClass || "") +
       ' prod-dropdown-trigger"' +
+      ' href="' +
+      esc(cfg.href || "#") +
+      '"' +
       ' data-prod-trigger-label="' +
       esc(cfg.labelKey || cfg.label) +
       '">' +
@@ -158,7 +161,7 @@
       esc(cfg.label || cfg.labelKey) +
       "</span>" +
       '<span class="material-symbols-outlined prod-dropdown-arrow">expand_more</span>' +
-      "</button>" +
+      "</a>" +
       '<div class="prod-dropdown-panel">' +
       '<div class="prod-dropdown-card">' +
       items +

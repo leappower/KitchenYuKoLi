@@ -148,10 +148,13 @@
       '<div class="app-dropdown-wrap' +
       (isTouch() ? " touch-device" : "") +
       '">' +
-      '<button type="button"' +
+      "<a" +
       ' class="' +
       esc(cfg.activeClass || "") +
       ' app-dropdown-trigger"' +
+      ' href="' +
+      esc(cfg.href || "#") +
+      '"' +
       ' data-app-trigger-label="' +
       esc(cfg.labelKey || cfg.label) +
       '">' +
@@ -161,7 +164,7 @@
       esc(cfg.label || cfg.labelKey) +
       "</span>" +
       '<span class="material-symbols-outlined app-dropdown-arrow">expand_more</span>' +
-      "</button>" +
+      "</a>" +
       '<div class="app-dropdown-panel">' +
       '<div class="app-dropdown-card">' +
       items +

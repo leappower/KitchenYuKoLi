@@ -143,10 +143,11 @@
       escapeHtml(placeholderI18nKey) +
       '" ' +
       'type="search" autocomplete="off" spellcheck="false"/>' +
-      '<button class="ios-search-clear" type="button" aria-label="Clear" ' +
-      'tabindex="-1">' +
+      '<a class="ios-search-clear" href="javascript:void(0)" ' +
+      'aria-label="Clear" role="button" tabindex="-1" ' +
+      'style="text-decoration:none;-webkit-tap-highlight-color:transparent">' +
       '<span class="material-symbols-outlined">cancel</span>' +
-      "</button>" +
+      "</a>" +
       "</div>" +
       "</div>"
     );
@@ -194,12 +195,13 @@
       '<div class="px-4 py-3 flex items-center gap-3">' +
       /* 左侧：汉堡菜单 + Logo */
       '<div class="flex items-center gap-1 flex-shrink-0">' +
-      '<button id="mobile-menu-toggle" type="button" ' +
+      '<a id="mobile-menu-toggle" href="javascript:void(0)" ' +
       'class="flex items-center justify-center w-10 h-10 -ml-2 ' +
       "rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800 " +
-      'transition-colors" aria-label="Menu">' +
+      'transition-colors" role="button" aria-label="Menu" ' +
+      'style="text-decoration:none;-webkit-tap-highlight-color:transparent">' +
       '<span class="material-symbols-outlined text-2xl">menu</span>' +
-      "</button>" +
+      "</a>" +
       '<a class="nav-logo-link hidden lg:block" href="' +
       basePath +
       '/home/">' +
@@ -316,10 +318,11 @@
       escapeHtml(opts.searchI18n) +
       '" ' +
       'type="search" autocomplete="off" spellcheck="false"/>' +
-      '<button class="ios-search-clear" id="ios-search-clear" type="button" ' +
-      'aria-label="Clear search" tabindex="-1">' +
+      '<a class="ios-search-clear" id="ios-search-clear" href="javascript:void(0)" ' +
+      'aria-label="Clear search" role="button" tabindex="-1" ' +
+      'style="text-decoration:none;-webkit-tap-highlight-color:transparent">' +
       '<span class="material-symbols-outlined">cancel</span>' +
-      "</button>" +
+      "</a>" +
       "</div>" +
       "</div>"
     );
@@ -416,13 +419,15 @@
 
     return (
       '<div class="lang-dropdown-container relative flex-shrink-0">' +
-      '<button id="lang-toggle-btn" ' +
+      '<a id="lang-toggle-btn" href="javascript:void(0)" ' +
       'class="flex items-center gap-1 px-2 py-2 rounded-xl ' +
       "text-sm font-medium text-slate-600 dark:text-slate-300 " +
       "hover:bg-slate-100 dark:hover:bg-slate-800 " +
       "active:bg-slate-200 dark:active:bg-slate-700 " +
-      'transition-colors md:gap-1.5 md:px-3" type="button" aria-label="Switch language" ' +
-      'data-i18n-aria="lang_switcher_aria">' +
+      'transition-colors md:gap-1.5 md:px-3" role="button" ' +
+      'aria-label="Switch language" ' +
+      'data-i18n-aria="lang_switcher_aria" ' +
+      'style="text-decoration:none;-webkit-tap-highlight-color:transparent">' +
       '<span class="material-symbols-outlined text-base ' +
       'leading-none">language</span>' +
       '<span id="current-lang-label" data-i18n="current_lang">' +
@@ -430,7 +435,7 @@
       "</span>" +
       '<span class="material-symbols-outlined text-xs opacity-40">' +
       "expand_more</span>" +
-      "</button>" +
+      "</a>" +
       '<select id="lang-selector" style="display:none"></select>' +
       "</div>"
     );

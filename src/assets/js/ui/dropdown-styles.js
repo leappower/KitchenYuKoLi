@@ -23,7 +23,7 @@
     ".{{PREFIX}}-dropdown-trigger {",
     "  display: inline-flex; align-items: center; gap: 4px;",
     "  cursor: pointer; user-select: none;",
-    "  border: none; background: none; color: inherit; font: inherit;",
+    "  color: inherit; text-decoration: none;",
     "  -webkit-tap-highlight-color: transparent;",
     "  padding-bottom: 8px; margin-bottom: -8px;",
     "}",
@@ -206,11 +206,9 @@
     style.id = STYLE_ID;
     style.setAttribute("data-ver", "2026-03-25-v1");
 
-    var css = PREFIXES
-      .map(function (pfx) {
-        return TEMPLATE.replace(/\{\{PREFIX\}\}/g, pfx);
-      })
-      .join("\n\n");
+    var css = PREFIXES.map(function (pfx) {
+      return TEMPLATE.replace(/\{\{PREFIX\}\}/g, pfx);
+    }).join("\n\n");
 
     // Shared @keyframes (only once)
     css += "\n@keyframes dd-fade-in { from { opacity: 0; } to { opacity: 1; } }\n";

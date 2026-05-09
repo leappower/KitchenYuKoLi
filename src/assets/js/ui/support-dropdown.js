@@ -106,10 +106,13 @@
       '<div class="sup-dropdown-wrap' +
       (isTouch() ? " touch-device" : "") +
       '">' +
-      '<button type="button"' +
+      "<a" +
       ' class="' +
       esc(cfg.activeClass || "") +
       ' sup-dropdown-trigger"' +
+      ' href="' +
+      esc(cfg.href || "#") +
+      '"' +
       ' data-sup-trigger-label="' +
       esc(cfg.labelKey || cfg.label) +
       '">' +
@@ -119,7 +122,7 @@
       esc(cfg.label || cfg.labelKey) +
       "</span>" +
       '<span class="material-symbols-outlined sup-dropdown-arrow">expand_more</span>' +
-      "</button>" +
+      "</a>" +
       '<div class="sup-dropdown-panel">' +
       '<div class="sup-dropdown-card">' +
       items +

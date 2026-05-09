@@ -81,10 +81,13 @@
       '<div class="abt-dropdown-wrap' +
       (isTouch() ? " touch-device" : "") +
       '">' +
-      '<button type="button"' +
+      "<a" +
       ' class="' +
       esc(cfg.activeClass || "") +
       ' abt-dropdown-trigger"' +
+      ' href="' +
+      esc(cfg.href || "#") +
+      '"' +
       ' data-abt-trigger-label="' +
       esc(cfg.labelKey || cfg.label) +
       '">' +
@@ -94,7 +97,7 @@
       esc(cfg.label || cfg.labelKey) +
       "</span>" +
       '<span class="material-symbols-outlined abt-dropdown-arrow">expand_more</span>' +
-      "</button>" +
+      "</a>" +
       '<div class="abt-dropdown-panel"><div class="abt-dropdown-card">' +
       items +
       "</div></div>" +
