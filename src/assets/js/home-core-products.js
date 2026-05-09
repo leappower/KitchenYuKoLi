@@ -1,18 +1,26 @@
 /**
  * home-core-products.js — Dynamic Home Core Products renderer
- * 
+ *
  * Caching strategy (3 layers):
  * 1. Embedded: window.HOME_CORE_PRODUCTS from product-data-table.js (no network)
  * 2. sessionStorage: latest fetched data for this session
  * 3. localStorage: cross-session cache with version check
  * 4. Network: fetch /api/public/products-data with ETag validation
  */
-(function() {
-  'use strict';
+(function () {
+  "use strict";
 
-  var CACHE_KEY = 'home_core_products';
-  var CACHE_VERSION_KEY = 'home_core_products_version';
-  var API_URL = '/api/public/products-data';
+  var _spaRegs = {};
+  function _spaOn(tgt, evt, fn, key) {
+    if (_spaRegs[key]) _spaRegs[key].abort();
+    var ac = new AbortController();
+    _spaRegs[key] = ac;
+    tgt.addEventListener(evt, fn, { signal: ac.signal });
+  }
+
+  var CACHE_KEY = "home_core_products";
+  var CACHE_VERSION_KEY = "home_core_products_version";
+  var API_URL = "/api/public/products-data";
   var CACHE_TTL = 5 * 60 * 1000; // 5 minutes
 
   /**
@@ -20,7 +28,9 @@
    */
   function getPrimaryImage(product) {
     if (!product.images || !product.images.length) return null;
-    var primary = product.images.find(function(img) { return img.isPrimary; });
+    var primary = product.images.find(function (img) {
+      return img.isPrimary;
+    });
     return primary ? primary.filePath : product.images[0].filePath;
   }
 
@@ -29,16 +39,16 @@
    */
   function getProductHref(product) {
     if (product.category) {
-      return '/products/?category=' + encodeURIComponent(product.category);
+      return "/products/?category=" + encodeURIComponent(product.category);
     }
-    return '/products/';
+    return "/products/";
   }
 
   /**
    * Get product detail link (to specific product)
    */
   function getProductDetailHref(product) {
-    return '/products/' + encodeURIComponent(product.model) + '/';
+    return "/products/" + encodeURIComponent(product.model) + "/";
   }
 
   /**
@@ -47,40 +57,43 @@
    */
   function loadCoreProducts(callback) {
     var now = Date.now();
-    console.log('[HCP] loadCoreProducts called at', now);
 
     // Layer 1: sessionStorage (session-level cache)
     try {
       var sessionData = sessionStorage.getItem(CACHE_KEY);
-      console.log('[HCP] Layer2 sessionStorage:', sessionData ? 'found, age=' + ((now - JSON.parse(sessionData).timestamp) / 1000) + 's' : 'empty');
+      console.log(
+        sessionData ? "found, age=" + (now - JSON.parse(sessionData).timestamp) / 1000 + "s" : "empty"
+      );
       if (sessionData) {
         var parsed = JSON.parse(sessionData);
-        if (parsed.timestamp && (now - parsed.timestamp) < CACHE_TTL) {
-          console.log('[HCP] → Using session cache');
-          setTimeout(function() { callback(parsed.data, 'session'); }, 0);
+        if (parsed.timestamp && now - parsed.timestamp < CACHE_TTL) {
+          setTimeout(function () {
+            callback(parsed.data, "session");
+          }, 0);
           _refreshInBackground(callback);
           return;
         }
       }
-    } catch(e) { console.log('[HCP] Layer2 error:', e.message); }
+    } catch (e) {
+    }
 
     // Layer 3: localStorage (cross-session cache)
     try {
       var localData = localStorage.getItem(CACHE_KEY);
-      console.log('[HCP] Layer3 localStorage:', localData ? 'found' : 'empty');
       if (localData) {
         var localParsed = JSON.parse(localData);
-        if (localParsed.timestamp && (now - localParsed.timestamp) < CACHE_TTL * 6) {
-          console.log('[HCP] → Using local cache');
-          setTimeout(function() { callback(localParsed.data, 'local'); }, 0);
+        if (localParsed.timestamp && now - localParsed.timestamp < CACHE_TTL * 6) {
+          setTimeout(function () {
+            callback(localParsed.data, "local");
+          }, 0);
           _refreshInBackground(callback);
           return;
         }
       }
-    } catch(e) { console.log('[HCP] Layer3 error:', e.message); }
+    } catch (e) {
+    }
 
     // Layer 4: Network fetch from CMS API
-    console.log('[HCP] → Falling back to network fetch...');
     _fetchFromNetwork(callback);
   }
 
@@ -89,56 +102,60 @@
    */
   function _fetchFromNetwork(callback) {
     var etag = null;
-    try { etag = localStorage.getItem(CACHE_VERSION_KEY); } catch(e) {}
+    try {
+      etag = localStorage.getItem(CACHE_VERSION_KEY);
+    } catch (e) {}
 
     var headers = {};
-    if (etag) headers['If-None-Match'] = etag;
+    if (etag) headers["If-None-Match"] = etag;
 
-    fetch(API_URL + '?home_core=1&_t=' + Date.now(), { headers: headers })
-      .then(function(res) {
-        console.log('[HCP] Network response status:', res.status);
+    fetch(API_URL + "?home_core=1&_t=" + Date.now(), { headers: headers })
+      .then(function (res) {
         // Save new ETag
-        var newEtag = res.headers.get('ETag');
+        var newEtag = res.headers.get("ETag");
         if (newEtag) {
-          try { localStorage.setItem(CACHE_VERSION_KEY, newEtag); } catch(e) {}
+          try {
+            localStorage.setItem(CACHE_VERSION_KEY, newEtag);
+          } catch (e) {}
         }
 
         if (res.status === 304) {
-          console.log('[HCP] → 304 Not Modified, using cache fallback');
           _loadCachedFallback(callback);
           return null;
         }
         return res.json();
       })
-      .then(function(data) {
+      .then(function (data) {
         if (!data) return;
         // Extract home core products from full table
         var coreProducts = [];
         if (Array.isArray(data)) {
-          data.forEach(function(cat) {
+          data.forEach(function (cat) {
             if (cat.products) {
-              cat.products.forEach(function(p) {
+              cat.products.forEach(function (p) {
                 if (p.is_home_core) coreProducts.push(p);
               });
             }
           });
         }
-        console.log('[HCP] Network data: total categories=' + (Array.isArray(data) ? data.length : 0) + ', core products=' + coreProducts.length);
+        console.log(
+            (Array.isArray(data) ? data.length : 0) +
+            ", core products=" +
+            coreProducts.length
+        );
         if (coreProducts.length === 0) {
-          console.log('[HCP] ⚠️ No home core products marked in database');
           // Show empty state instead of blank
           var emptyContainer = document.querySelector('[id^="home-core-products"]');
           if (emptyContainer) {
             emptyContainer.innerHTML = '<div class="text-center text-slate-400 py-8">暂无核心产品</div>';
           }
-          callback([], 'network');
+          callback([], "network");
           return;
         }
         _saveCache(coreProducts);
-        callback(coreProducts, 'network');
+        callback(coreProducts, "network");
       })
-      .catch(function(err) {
-        console.log('[HCP] Network fetch error:', err.message);
+      .catch(function (err) {
         _loadCachedFallback(callback);
       });
   }
@@ -148,27 +165,31 @@
    */
   function _refreshInBackground(callback) {
     var etag = null;
-    try { etag = localStorage.getItem(CACHE_VERSION_KEY); } catch(e) {}
+    try {
+      etag = localStorage.getItem(CACHE_VERSION_KEY);
+    } catch (e) {}
 
     var headers = {};
-    if (etag) headers['If-None-Match'] = etag;
+    if (etag) headers["If-None-Match"] = etag;
 
-    fetch(API_URL + '?home_core=1&_bg=' + Date.now(), { headers: headers })
-      .then(function(res) {
-        var newEtag = res.headers.get('ETag');
+    fetch(API_URL + "?home_core=1&_bg=" + Date.now(), { headers: headers })
+      .then(function (res) {
+        var newEtag = res.headers.get("ETag");
         if (newEtag) {
-          try { localStorage.setItem(CACHE_VERSION_KEY, newEtag); } catch(e) {}
+          try {
+            localStorage.setItem(CACHE_VERSION_KEY, newEtag);
+          } catch (e) {}
         }
         if (res.status === 304) return null;
         return res.json();
       })
-      .then(function(data) {
+      .then(function (data) {
         if (!data) return;
         var coreProducts = [];
         if (Array.isArray(data)) {
-          data.forEach(function(cat) {
+          data.forEach(function (cat) {
             if (cat.products) {
-              cat.products.forEach(function(p) {
+              cat.products.forEach(function (p) {
                 if (p.is_home_core) coreProducts.push(p);
               });
             }
@@ -179,7 +200,7 @@
           window.HOME_CORE_PRODUCTS = coreProducts;
         }
       })
-      .catch(function() {});
+      .catch(function () {});
   }
 
   /**
@@ -190,7 +211,7 @@
     try {
       sessionStorage.setItem(CACHE_KEY, JSON.stringify(entry));
       localStorage.setItem(CACHE_KEY, JSON.stringify(entry));
-    } catch(e) {}
+    } catch (e) {}
   }
 
   /**
@@ -199,14 +220,20 @@
   function _loadCachedFallback(callback) {
     try {
       var sessionData = sessionStorage.getItem(CACHE_KEY);
-      if (sessionData) { callback(JSON.parse(sessionData).data, 'session-fallback'); return; }
-    } catch(e) {}
+      if (sessionData) {
+        callback(JSON.parse(sessionData).data, "session-fallback");
+        return;
+      }
+    } catch (e) {}
     try {
       var localData = localStorage.getItem(CACHE_KEY);
-      if (localData) { callback(JSON.parse(localData).data, 'local-fallback'); return; }
-    } catch(e) {}
+      if (localData) {
+        callback(JSON.parse(localData).data, "local-fallback");
+        return;
+      }
+    } catch (e) {}
     // No data at all
-    callback([], 'none');
+    callback([], "none");
   }
 
   /**
@@ -216,20 +243,17 @@
   /**
    * PC: 4-column grid with full product cards
    */
-  window.renderHomeCorePC = function(containerId) {
-    console.log('[HCP] renderHomeCorePC called, containerId=' + containerId);
+  window.renderHomeCorePC = function (containerId) {
     var container = document.getElementById(containerId);
-    if (!container) { console.log('[HCP] ❌ Container #' + containerId + ' NOT FOUND in DOM'); return; }
-    console.log('[HCP] ✓ Container found');
+    if (!container) {
+      return;
+    }
 
-    loadCoreProducts(function(products, source) {
-      console.log('[HCP] PC callback fired: source=' + source + ', count=' + (products ? products.length : 0));
+    loadCoreProducts(function (products, source) {
       if (!products || products.length === 0) {
-        console.log('[HCP] ❌ No products to render');
         container.innerHTML = '<div class="text-center text-slate-400 py-8">暂无核心产品数据</div>';
         return;
       }
-      console.log('[HCP] ✓ Rendering ' + products.length + ' products');
 
       // Reapply i18n after render
       var VIS_COUNT = 4; // PC: 1 row (4 columns)
@@ -240,35 +264,55 @@
       function buildPCCard(p) {
         var img = getPrimaryImage(p);
         var href = getProductDetailHref(p);
-        return '<div class="group bg-background-light dark:bg-background-dark p-4 rounded-2xl border border-slate-200 dark:border-slate-800 hover:border-primary transition-all shadow-sm">' +
-          '<a href="' + href + '" class="block">' +
+        return (
+          '<div class="group bg-background-light dark:bg-background-dark p-4 rounded-2xl border border-slate-200 dark:border-slate-800 hover:border-primary transition-all shadow-sm">' +
+          '<a href="' +
+          href +
+          '" class="block">' +
           '<div class="aspect-[4/3] rounded-xl bg-slate-100 dark:bg-slate-800 overflow-hidden mb-6">' +
-          (img ? '<img alt="' + escHtml(p.model) + '" class="w-full h-full object-contain p-2" src="' + escHtml(img) + '" loading="lazy">' :
-                  '<div style="font-size:2.5rem;color:#d1d5db;display:flex;align-items:center;justify-content:center;height:100%">📦</div>') +
-          '</div>' +
-          '<h3 class="text-xl font-bold mb-2">' + escHtml(p.model) + '</h3>' +
-          (p.subCategory ? '<p class="text-sm text-slate-500 mb-6">' + escHtml(p.subCategory) + '</p>' : '<div class="mb-6"></div>') +
+          (img
+            ? '<img alt="' +
+              escHtml(p.model) +
+              '" class="w-full h-full object-contain p-2" src="' +
+              escHtml(img) +
+              '" loading="lazy">'
+            : '<div style="font-size:2.5rem;color:#d1d5db;display:flex;align-items:center;justify-content:center;height:100%">📦</div>') +
+          "</div>" +
+          '<h3 class="text-xl font-bold mb-2">' +
+          escHtml(p.model) +
+          "</h3>" +
+          (p.subCategory
+            ? '<p class="text-sm text-slate-500 mb-6">' + escHtml(p.subCategory) + "</p>"
+            : '<div class="mb-6"></div>') +
           '<div class="flex justify-between items-center border-t border-slate-100 dark:border-slate-800 pt-4">' +
-          (p.badge ? '<span class="text-xs font-bold uppercase text-slate-400">' + escHtml(p.badge) + '</span>' : '<span></span>') +
+          (p.badge
+            ? '<span class="text-xs font-bold uppercase text-slate-400">' + escHtml(p.badge) + "</span>"
+            : "<span></span>") +
           '<span class="text-primary font-black" data-i18n="home_hw_learn_more">了解更多</span>' +
-          '</div></a></div>';
+          "</div></a></div>"
+        );
       }
 
       var html = '<div id="hcp-grid-pc" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-8">';
-      visProducts.forEach(function(p) { html += buildPCCard(p); });
-      html += '</div>';
+      visProducts.forEach(function (p) {
+        html += buildPCCard(p);
+      });
+      html += "</div>";
 
       if (hasMore) {
-        html += '<div id="hcp-hidden-pc" style="display:none" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-8 mt-8">';
-        restProducts.forEach(function(p) { html += buildPCCard(p); });
-        html += '</div>';
+        html +=
+          '<div id="hcp-hidden-pc" style="display:none" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-8 mt-8">';
+        restProducts.forEach(function (p) {
+          html += buildPCCard(p);
+        });
+        html += "</div>";
         html += '<div class="flex justify-center mt-10">';
-        html += '<button id="hcp-toggle-pc" onclick="(function(){var h=document.getElementById(\'hcp-hidden-pc\'),b=document.getElementById(\'hcp-toggle-pc\');if(h.style.display===\'none\'){h.style.display=\'\';b.textContent=\'收起 \\u25B2\'}else{h.style.display=\'none\';b.textContent=\'查看更多产品 \\u25BC\'}})()" class="px-8 py-3 rounded-full border-2 border-primary text-primary font-bold hover:bg-primary hover:text-white transition-all cursor-pointer" data-i18n="home_hw_show_more">查看更多产品 ▼</button>';
-        html += '</div>';
+        html +=
+          "<button id=\"hcp-toggle-pc\" onclick=\"(function(){var h=document.getElementById('hcp-hidden-pc'),b=document.getElementById('hcp-toggle-pc');if(h.style.display==='none'){h.style.display='';b.textContent='收起 \\u25B2'}else{h.style.display='none';b.textContent='查看更多产品 \\u25BC'}})()\" class=\"px-8 py-3 rounded-full border-2 border-primary text-primary font-bold hover:bg-primary hover:text-white transition-all cursor-pointer\" data-i18n=\"home_hw_show_more\">查看更多产品 ▼</button>";
+        html += "</div>";
       }
 
       container.innerHTML = html;
-      console.log('[HCP] ✓ PC innerHTML set, length=' + container.innerHTML.length);
 
       // Trigger i18n if available
       if (window.translationManager && window.translationManager.applyTo) {
@@ -280,11 +324,11 @@
   /**
    * Tablet: 2-column grid with compact cards
    */
-  window.renderHomeCoreTablet = function(containerId) {
+  window.renderHomeCoreTablet = function (containerId) {
     var container = document.getElementById(containerId);
     if (!container) return;
 
-    loadCoreProducts(function(products) {
+    loadCoreProducts(function (products) {
       if (!products || products.length === 0) {
         container.innerHTML = '<div class="text-center text-slate-400 py-6">暂无核心产品数据</div>';
         return;
@@ -298,28 +342,47 @@
       function buildTabletCard(p) {
         var img = getPrimaryImage(p);
         var href = getProductDetailHref(p);
-        return '<div class="bg-white dark:bg-background-dark p-3 rounded-xl border border-slate-200 dark:border-slate-800 hover:border-primary transition-all shadow-sm">' +
-          '<a href="' + href + '">' +
+        return (
+          '<div class="bg-white dark:bg-background-dark p-3 rounded-xl border border-slate-200 dark:border-slate-800 hover:border-primary transition-all shadow-sm">' +
+          '<a href="' +
+          href +
+          '">' +
           '<div class="aspect-square rounded-lg bg-slate-200 dark:bg-slate-800 overflow-hidden mb-3">' +
-          (img ? '<img alt="' + escHtml(p.model) + '" class="w-full h-full object-cover" src="' + escHtml(img) + '" loading="lazy">' : '') +
-          '</div>' +
-          '<h3 class="text-base font-bold mb-1">' + escHtml(p.model) + '</h3>' +
-          (p.subCategory ? '<p class="text-xs text-slate-500 mb-3">' + escHtml(p.subCategory) + '</p>' : '<div class="mb-3"></div>') +
+          (img
+            ? '<img alt="' +
+              escHtml(p.model) +
+              '" class="w-full h-full object-cover" src="' +
+              escHtml(img) +
+              '" loading="lazy">'
+            : "") +
+          "</div>" +
+          '<h3 class="text-base font-bold mb-1">' +
+          escHtml(p.model) +
+          "</h3>" +
+          (p.subCategory
+            ? '<p class="text-xs text-slate-500 mb-3">' + escHtml(p.subCategory) + "</p>"
+            : '<div class="mb-3"></div>') +
           '<span class="text-xs font-bold text-primary" data-i18n="home_hw_learn_more">了解更多</span>' +
-          '</a></div>';
+          "</a></div>"
+        );
       }
 
       var html = '<div id="hcp-grid-tablet" class="grid grid-cols-2 gap-4">';
-      visProducts.forEach(function(p) { html += buildTabletCard(p); });
-      html += '</div>';
+      visProducts.forEach(function (p) {
+        html += buildTabletCard(p);
+      });
+      html += "</div>";
 
       if (hasMore) {
         html += '<div id="hcp-hidden-tablet" style="display:none" class="grid grid-cols-2 gap-4 mt-4">';
-        restProducts.forEach(function(p) { html += buildTabletCard(p); });
-        html += '</div>';
+        restProducts.forEach(function (p) {
+          html += buildTabletCard(p);
+        });
+        html += "</div>";
         html += '<div class="flex justify-center mt-8">';
-        html += '<button id="hcp-toggle-tablet" onclick="(function(){var h=document.getElementById(\'hcp-hidden-tablet\'),b=document.getElementById(\'hcp-toggle-tablet\');if(h.style.display===\'none\'){h.style.display=\'\';b.textContent=\'收起 \\u25B2\'}else{h.style.display=\'none\';b.textContent=\'查看更多产品 \\u25BC\'}})()" class="px-6 py-2.5 rounded-full border-2 border-primary text-primary font-bold hover:bg-primary hover:text-white transition-all cursor-pointer text-sm" data-i18n="home_hw_show_more">查看更多产品 ▼</button>';
-        html += '</div>';
+        html +=
+          "<button id=\"hcp-toggle-tablet\" onclick=\"(function(){var h=document.getElementById('hcp-hidden-tablet'),b=document.getElementById('hcp-toggle-tablet');if(h.style.display==='none'){h.style.display='';b.textContent='收起 \\u25B2'}else{h.style.display='none';b.textContent='查看更多产品 \\u25BC'}})()\" class=\"px-6 py-2.5 rounded-full border-2 border-primary text-primary font-bold hover:bg-primary hover:text-white transition-all cursor-pointer text-sm\" data-i18n=\"home_hw_show_more\">查看更多产品 ▼</button>";
+        html += "</div>";
       }
 
       container.innerHTML = html;
@@ -333,31 +396,43 @@
   /**
    * Mobile: horizontal scroll cards
    */
-  window.renderHomeCoreMobile = function(containerId) {
+  window.renderHomeCoreMobile = function (containerId) {
     var container = document.getElementById(containerId);
     if (!container) return;
 
-    loadCoreProducts(function(products) {
+    loadCoreProducts(function (products) {
       if (!products || products.length === 0) {
         container.innerHTML = '<div class="text-center text-slate-400 py-4">暂无核心产品数据</div>';
         return;
       }
 
       var html = '<div class="flex overflow-x-auto gap-3 no-scrollbar pb-2">';
-      products.forEach(function(p) {
+      products.forEach(function (p) {
         var img = getPrimaryImage(p);
         var href = getProductDetailHref(p);
-        html += '<div class="min-w-[260px] bg-white dark:bg-slate-900 rounded-xl overflow-hidden shadow-sm border border-slate-200 dark:border-slate-800">' +
-          '<a href="' + href + '" class="block">' +
+        html +=
+          '<div class="min-w-[260px] bg-white dark:bg-slate-900 rounded-xl overflow-hidden shadow-sm border border-slate-200 dark:border-slate-800">' +
+          '<a href="' +
+          href +
+          '" class="block">' +
           '<div class="h-36 bg-cover bg-center bg-slate-200 dark:bg-slate-800"' +
-          (img ? ' style="background-image: url(&quot;' + escHtml(img) + '&quot;); background-size: cover; background-position: center;"' : '') + '></div>' +
+          (img
+            ? ' style="background-image: url(&quot;' +
+              escHtml(img) +
+              '&quot;); background-size: cover; background-position: center;"'
+            : "") +
+          "></div>" +
           '<div class="p-3">' +
-          '<h3 class="font-bold text-sm mb-1">' + escHtml(p.model) + '</h3>' +
-          (p.subCategory ? '<p class="text-xs text-slate-500 mb-2">' + escHtml(p.subCategory) + '</p>' : '<div class="mb-2"></div>') +
+          '<h3 class="font-bold text-sm mb-1">' +
+          escHtml(p.model) +
+          "</h3>" +
+          (p.subCategory
+            ? '<p class="text-xs text-slate-500 mb-2">' + escHtml(p.subCategory) + "</p>"
+            : '<div class="mb-2"></div>') +
           '<span class="text-xs font-bold text-primary" data-i18n="home_hw_learn_more">了解更多</span>' +
-          '</div></a></div>';
+          "</div></a></div>";
       });
-      html += '</div>';
+      html += "</div>";
       container.innerHTML = html;
 
       if (window.translationManager && window.translationManager.applyTo) {
@@ -367,52 +442,39 @@
   };
 
   function escHtml(str) {
-    if (!str) return '';
-    return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+    if (!str) return "";
+    return String(str).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
   }
 
   /**
    * Auto-init: detect device type and render on spa:load (or DOMContentLoaded fallback)
    */
   function _autoInit() {
-    var path = window.location.pathname || '/';
-    var device = window.innerWidth < 768 ? 'mobile' : (window.innerWidth < 1280 ? 'tablet' : 'pc');
-    console.log('[HCP] _autoInit fired: path=' + path + ', device=' + device + ', readyState=' + document.readyState);
-    console.log('[HCP] DOM has container?', !!document.getElementById('home-core-products-pc'));
-    if (path.indexOf('/home') !== -1) {
-      if (device === 'mobile') renderHomeCoreMobile('home-core-products-mobile');
-      else if (device === 'tablet') renderHomeCoreTablet('home-core-products-tablet');
-      else renderHomeCorePC('home-core-products-pc');
+    var path = window.location.pathname || "/";
+    var device = window.innerWidth < 768 ? "mobile" : window.innerWidth < 1280 ? "tablet" : "pc";
+    if (path.indexOf("/home") !== -1) {
+      if (device === "mobile") renderHomeCoreMobile("home-core-products-mobile");
+      else if (device === "tablet") renderHomeCoreTablet("home-core-products-tablet");
+      else renderHomeCorePC("home-core-products-pc");
     } else {
-      console.log('[HCP] Skipping _autoInit: not on /home/ path');
     }
   }
 
   // Make init callable from outside (for SPA router loadPageScripts)
-  window.__hcpInit = function() {
-    console.log('[HCP] __hcpInit called externally');
+  window.__hcpInit = function () {
     _autoInit();
   };
 
-  console.log('[HCP] home-core-products.js loaded, registering listeners...');
   // Primary: listen for spa:load (SPA router re-renders content)
-  // Guard against duplicate registration when script loads multiple times
-  if (!window._hcpSpaBound && document.addEventListener) {
-    window._hcpSpaBound = true;
-    document.addEventListener('spa:load', function() {
-      console.log('[HCP] spa:load event received!');
-      _autoInit();
-    });
-  }
+  _spaOn(document, "spa:load", function () {
+    _autoInit();
+  });
   // Fallback: if SPA router is not active, use DOMContentLoaded
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', function() {
-      console.log('[HCP] DOMContentLoaded fired');
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", function () {
       _autoInit();
     });
   } else {
-    console.log('[HCP] DOM already loaded (readyState=' + document.readyState + '), using setTimeout');
     setTimeout(_autoInit, 0);
   }
-
 })();

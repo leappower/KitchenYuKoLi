@@ -29,7 +29,7 @@
     <meta property="og:title" content="YuKoLi 智能厨具 | 售后服务与技术支持">
     <meta property="og:description" content="YuKoLi 智能厨具售后服务：安装指导、操作培训、故障排查、原厂配件供应。覆盖东南亚 10 国。">
     <meta property="og:url" content="https://www.kitchen.yukoli.com/support/index-pc.html">
-    <meta property="og:image" content="https://www.kitchen.yukoli.com/assets/images/og-home.webp">
+    <meta property="og:image" content="/assets/images/og-home.webp">
     <meta content="width=device-width,initial-scale=1" name="viewport"/>
     <title>YuKoLi 智能厨具 | 售后服务与技术支持</title>
     <link rel="preload" href="/assets/fonts/local-fonts.css" as="style">
@@ -75,7 +75,7 @@
   data-cta-href="/quote"></navigator>
 <main id="spa-content">
 <!-- Hero Section: Predictive Maintenance -->
-<section class="fullwidth-bg section-passthrough w-full flex flex-col lg:flex-row items-center py-10 gap-12">
+<section class="hero-overlap fullwidth-bg section-passthrough w-full flex flex-col lg:flex-row items-center py-10 gap-12">
   <div class="section-content">
   <div class="w-full lg:w-1/2 space-y-8">
   <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-bold uppercase tracking-widest">
@@ -113,7 +113,7 @@
   </div>
 </section>
 <!-- Trust Signals / Metric Bar -->
-<section class="bg-slate-900 py-12 fullwidth-bg">
+<section class="bg-slate-900 py-20 fullwidth-bg">
   <div class="section-content">
 
   <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
@@ -137,7 +137,7 @@
   </div>
 </section>
 <!-- Global Service Network (Map Section) -->
-<section class="py-12 bg-tech-silver/30 dark:bg-obsidian/20 fullwidth-bg">
+<section class="py-20 bg-tech-silver/30 dark:bg-obsidian/20 fullwidth-bg">
   <div class="section-content">
 
   <div>
@@ -148,7 +148,7 @@
   <!-- §1.2 Google Maps 服务中心地图 — 容器 id 供 JS 挂载 -->
   <!-- 当 Google Maps API 未加载时，显示静态背景图作为 fallback -->
   <div id="yukoli-service-map" class="absolute inset-0" style="min-height:500px;" ></div>
-  <div id="yukoli-service-map-fallback" class="absolute inset-0 bg-cover bg-center grayscale opacity-40 dark:opacity-20" data-alt="Stylized world map showing service nodes" data-location="Global" style="background-image: url('/assets/images/world-map.svg')" ></div>
+  <div id="yukoli-service-map-fallback" class="absolute inset-0 bg-cover bg-center grayscale opacity-40 dark:opacity-20" role="img" aria-label="Stylized world map showing service nodes" data-location="Global" style="background-image: url('/assets/images/world-map.svg')" ></div>
   <div class="relative h-full w-full p-8 flex flex-col justify-between pointer-events-none">
   <div class="flex justify-between items-start pointer-events-auto">
   <div class="flex flex-col gap-2">
@@ -178,12 +178,12 @@
 </section>
 <div id="support-contact-channels" data-page="support"></div>
 <!-- Yukoli OS Section -->
-<section id="installation" class="fullwidth-bg py-12">
+<section id="installation" class="fullwidth-bg py-20">
   <div class="section-content">
   <div class="w-full grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
   <div class="order-2 lg:order-1 relative">
   <div class="rounded-3xl overflow-hidden shadow-2xl relative aspect-[4/3] bg-slate-200 dark:bg-slate-800">
-  <img loading="lazy" class="w-full h-full object-cover" data-alt="YuKoLi engineer servicing commercial kitchen equipment in a professional kitchen" src="/assets/images/support-service-engineer.webp" width="800" height="600" onerror="this.style.display='none'">
+  <img loading="lazy" class="w-full h-full object-cover" alt="YuKoLi engineer servicing commercial kitchen equipment in a professional kitchen" src="/assets/images/support-service-engineer.webp" width="800" height="600" onerror="this.style.display='none'">
   <div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
   <div class="absolute bottom-6 left-6 right-6">
   <div class="bg-white/90 dark:bg-slate-900/90 backdrop-blur p-4 rounded-xl">
@@ -234,7 +234,7 @@
 </section>
 
 <!-- FAQ Section -->
-<section id="faq" class="py-12 fullwidth-bg bg-slate-50 dark:bg-slate-900/30">
+<section id="faq" class="py-20 fullwidth-bg bg-slate-50 dark:bg-slate-900/30">
   <div class="section-content">
   <h2 class="text-3xl lg:text-4xl font-black tracking-tight mb-8" data-i18n="support_faq_title">常见问题</h2>
   <div class="space-y-4">
@@ -298,7 +298,7 @@
 </section>
 
 <!-- CTA Section -->
-<section class="fullwidth-bg py-12">
+<section class="fullwidth-bg py-20">
   <div class="section-content">
   <div>
   <div class="w-full bg-slate-900 rounded-[3rem] p-12 md:p-20 text-center flex flex-col items-center gap-8 relative overflow-hidden">
@@ -315,9 +315,8 @@
                         href="https://wa.me/8613163756465"
                         data-wa-message-key="wa_msg_support"
                         data-wa-source="bottom-cta"
-                        target="_blank"
+                        target="_blank" rel="noopener noreferrer"
                         class="bg-white/10 text-white border border-white/20 backdrop-blur-sm px-10 py-5 rounded-2xl font-black text-lg hover:bg-white/20 transition-colors"
-                        rel="noopener noreferrer"
                       >WhatsApp</a>
   </div>
   </div>
@@ -330,17 +329,16 @@
 
 
     <script src="/assets/js/ui/dropdown-styles.js"></script>
-<script defer src="/assets/js/ui/products-dropdown.js?v=20260508"></script>
-    <script defer src="/assets/js/ui/applications-dropdown.js?v=20260508"></script>
-    <script defer src="/assets/js/ui/support-dropdown.js?v=20260508"></script>
-    <script defer src="/assets/js/ui/about-dropdown.js?v=20260508"></script>
-<script defer src="/assets/js/nav-config.js?v=20260508"></script>
-    <script defer src="/assets/js/ui/mobile-bottom-bar.js"></script>
-    <script defer src="/assets/js/ui/navigator.js?v=20260508"></script>
+    <script src="/assets/js/ui/dropdown-base.js"></script>
+<script defer src="/assets/js/ui/products-dropdown.js?v=20260509"></script>
+    <script defer src="/assets/js/ui/applications-dropdown.js?v=20260509"></script>
+    <script defer src="/assets/js/ui/support-dropdown.js?v=20260509"></script>
+    <script defer src="/assets/js/ui/about-dropdown.js?v=20260509"></script>
+    <script defer src="/assets/js/ui/navigator.js?v=20260509"></script>
 <script defer src="/assets/js/ui/search-engine.js"></script>
-<script defer src="/assets/js/ui/footer.js?v=20260508"></script>
-<script defer src="/assets/js/lang-registry.js?v=20260508"></script>
-<script defer src="/assets/js/translations.js?v=20260508"></script><script defer src="/assets/js/translations-dropdown-template.js?v=20260508"></script>
+<script defer src="/assets/js/ui/footer.js?v=20260509"></script>
+<script defer src="/assets/js/lang-registry.js?v=20260509"></script>
+<script defer src="/assets/js/translations.js?v=20260509"></script><script defer src="/assets/js/translations-dropdown-template.js?v=20260509"></script>
 <script defer src="/assets/js/contacts.js"></script>
 <!--
   ═══ Google Maps JavaScript API — §1.2 服务中心地图 ═══
@@ -362,11 +360,7 @@
 
     <script defer src="/assets/js/ui/page-effects.js"></script>
     <script defer src="/assets/js/ui/form-interactions.js"></script>
-<script defer src="/assets/js/page-interactions.js"></script>
-<script>
-  document.addEventListener('DOMContentLoaded', function () {
-    if (window.translationManager) window.translationManager.initialize();
-  });</script><script src="/assets/js/utils/device-utils.js"></script><script src="/assets/js/spa-router.js?v=20260508"></script>
+<script defer src="/assets/js/page-interactions.js"></script><script src="/assets/js/utils/device-utils.js"></script><script src="/assets/js/spa-router.js?v=20260509"></script>
 <script defer src="/assets/js/support-wechat-modal.js"></script>
     <script defer src="/assets/js/ui/floating-actions.js"></script>
   </body></html>

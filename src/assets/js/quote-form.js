@@ -3,6 +3,14 @@
  * Works with both direct page load and SPA navigation.
  */
 (function () {
+  var _spaRegs = {};
+  function _spaOn(tgt, evt, fn, key) {
+    if (_spaRegs[key]) _spaRegs[key].abort();
+    var ac = new AbortController();
+    _spaRegs[key] = ac;
+    tgt.addEventListener(evt, fn, { signal: ac.signal });
+  }
+
   var VERSION = "20260423b";
 
   // Record page load time for TimeOnPage calculation
@@ -22,12 +30,12 @@
       var input = document.getElementById(id);
       if (!input) return;
       var container = input.parentElement;
-      while (container && container.tagName !== 'DIV') container = container.parentElement;
+      while (container && container.tagName !== "DIV") container = container.parentElement;
       if (!container) return;
-      var label = container.querySelector('label');
+      var label = container.querySelector("label");
       if (!label) return;
-      if (!label.querySelector('.text-red-500')) {
-        label.insertAdjacentHTML('beforeend', ASTERISK_HTML);
+      if (!label.querySelector(".text-red-500")) {
+        label.insertAdjacentHTML("beforeend", ASTERISK_HTML);
       }
     });
   }
@@ -36,7 +44,8 @@
     if (document.getElementById("quote-form-error")) return;
     var banner = document.createElement("div");
     banner.id = "quote-form-error";
-    banner.style.cssText = "display:none;background:#fef2f2;border:1px solid #fca5a5;color:#dc2626;padding:12px 16px;border-radius:8px;margin-bottom:16px;font-size:14px;font-weight:600;text-align:center;";
+    banner.style.cssText =
+      "display:none;background:#fef2f2;border:1px solid #fca5a5;color:#dc2626;padding:12px 16px;border-radius:8px;margin-bottom:16px;font-size:14px;font-weight:600;text-align:center;";
     banner.textContent = "";
     var form = document.getElementById("quote-form");
     if (form) form.insertBefore(banner, form.firstChild);
@@ -146,7 +155,7 @@
         "数量: " + quantity,
         "厨房规模: " + capacityText,
         "预算: " + budgetText,
-        "需求: " + message
+        "需求: " + message,
       ].join(" | ");
 
       var formData = {
@@ -164,7 +173,7 @@
         timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
         pageUrl: location.href,
         timeOnPage: Math.round((Date.now() - (window._quotePageLoadTime || Date.now())) / 1000) + "s",
-        userAgent: navigator.userAgent
+        userAgent: navigator.userAgent,
       };
 
       // Disable button + show loading
@@ -175,37 +184,52 @@
         btn.innerHTML = '<span class="material-symbols-outlined animate-spin">progress_activity</span> 提交中...';
       }
 
-      // Submit to Google Sheets
-      fetch("https://script.google.com/macros/s/AKfycbyikM1ArEFhJhQUSAp6l4DHJcGzDDK1cckL-KOrVbjipoMGSKsOOlhFWJGTPB6qOys/exec", {
-        method: "POST",
-        mode: "no-cors",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData)
-      }).then(function () {
-        if (typeof window.showNotification === "function") {
-          window.showNotification("提交成功！我们将尽快与您联系", "success");
-        }
-        setTimeout(function () {
-          if (window.SpaRouter) { window.SpaRouter.navigate("/thank-you/"); }
-          else { location.href = "/thank-you/"; }
-        }, 1000);
-      }).catch(function () {
-        // no-cors returns opaque response, treat as success
-        if (typeof window.showNotification === "function") {
-          window.showNotification("提交成功！我们将尽快与您联系", "success");
-        }
-        setTimeout(function () {
-          if (window.SpaRouter) { window.SpaRouter.navigate("/thank-you/"); }
-          else { location.href = "/thank-you/"; }
-        }, 1000);
-      });
+      // Submit via server proxy (hides Google Apps Script URL)
+      fetch("/api/quote-submit", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(formData),
+        })
+        .then(function (response) {
+          if (!response.ok) {
+            return response.json().then(function (err) {
+              throw new Error(err.error || "Submission failed");
+            });
+          }
+          return response.json();
+        })
+        .then(function () {
+          if (typeof window.showNotification === "function") {
+            window.showNotification("提交成功！我们将尽快与您联系", "success");
+          }
+          setTimeout(function () {
+            if (window.SpaRouter) {
+              window.SpaRouter.navigate("/thank-you/");
+            } else {
+              location.href = "/thank-you/";
+            }
+          }, 1000);
+        })
+        .catch(function (err) {
+          showError(err.message || "提交失败，请稍后重试");
+          // Re-enable button on error
+          if (btn) {
+            btn.disabled = false;
+            btn.innerHTML = btnOrig;
+          }
+        });
     });
   }
 
   // Bind on DOM ready + SPA navigation
   if (document.readyState !== "loading") initQuoteForm();
   else document.addEventListener("DOMContentLoaded", initQuoteForm);
-  document.addEventListener("spa:ready", function () {
-    initQuoteForm();
-  });
+  _spaOn(
+    document,
+    "spa:ready",
+    function () {
+      initQuoteForm();
+    },
+    "spa:ready"
+  );
 })();

@@ -4,3 +4,4 @@ dist/
 *.min.js
 *.min.css
 src/assets/js/tailwind.cdn.js
+src/assets/css/tailwind.css

@@ -131,7 +131,7 @@
     return '<div class="case-card bg-white dark:bg-slate-800 rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all group border border-slate-200 dark:border-slate-700 hover:border-' + bc + '-500/50">' +
       '<!-- TODO: 替换为 ' + c.slug + ' 案例场景图 -->' +
       '<div class="h-44 bg-slate-200 dark:bg-slate-700 overflow-hidden">' +
-        '<img loading="lazy" alt="' + c.title + '" class="w-full h-full object-cover group-hover:scale-105 transition-transform" src="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=600&h=400&fit=crop" />' +
+        '<img loading="lazy" alt="' + c.title + '" class="w-full h-full object-cover group-hover:scale-105 transition-transform" src="/assets/images/default.webp" />' +
       '</div>' +
       '<div class="p-6 flex flex-col gap-3">' +
         '<div class="flex flex-wrap items-center gap-2 text-sm text-slate-500 dark:text-slate-400">' +

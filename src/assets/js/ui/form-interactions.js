@@ -8,12 +8,22 @@
 (function (global) {
   "use strict";
 
+  var _spaRegs = {};
+  function _spaOn(tgt, evt, fn, key) {
+    if (_spaRegs[key]) _spaRegs[key].abort();
+    var ac = new AbortController();
+    _spaRegs[key] = ac;
+    tgt.addEventListener(evt, fn, { signal: ac.signal });
+  }
+
   // ─── Helpers (from PiHelpers) ─────────────────────────────────────────
   var _h = window.PiHelpers || {};
-  var safeCall = _h.safeCall || function (fnName, args) {
-    if (typeof global[fnName] === "function") return global[fnName].apply(null, args || []);
-    console.warn("[FormInteractions] " + fnName + " not found.");
-  };
+  var safeCall =
+    _h.safeCall ||
+    function (fnName, args) {
+      if (typeof global[fnName] === "function") return global[fnName].apply(null, args || []);
+      console.warn("[FormInteractions] " + fnName + " not found.");
+    };
 
   // ─── B. On-blur inline validation ────────────────────────────────────────────
   var EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -176,5 +186,5 @@
     init();
   }
 
-  document.addEventListener("spa:load", init);
+  _spaOn(document, "spa:load", init, "spa:load:init");
 })(window);

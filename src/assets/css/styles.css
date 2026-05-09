@@ -128,7 +128,6 @@ html.dark body {
    区块圆角:           rounded-3xl (24px)
 */
 
-
 /* ─── Brand Utility Classes ──────────────────────────────────────── */
 .text-primary {
   color: var(--color-primary);
@@ -260,6 +259,53 @@ main#spa-content > .hero-overlap {
   }
 }
 
+/* ── Section Spacing Collapse ────────────────────────────────────────
+ *
+ * Prevents double-padding between adjacent sections.
+ * Each section keeps its py-* for first/last position, but consecutive
+ * sections collapse their overlapping padding.
+ *
+ * Net gap between consecutive same-bg sections:
+ *   Mobile (<768px):   ~2.5rem (40px)  ← py-12 − collapse
+ *   Tablet (768-1279): ~3rem   (48px)  ← py-16 − collapse
+ *   PC (≥1280px):      ~4rem   (64px)  ← py-20 − collapse
+ */
+
+main > section + section {
+  margin-top: -3.5rem;
+}
+
+@media (min-width: 768px) {
+  main > section + section {
+    margin-top: -5rem;
+  }
+}
+
+/* Don't collapse after hero sections (they have their own spacing logic) */
+main > section.section-passthrough + section,
+main > section.hero-overlap + section {
+  margin-top: 0;
+}
+
+/* Alternating background sections need more visual separation (less collapse) */
+main > section + section[class*="bg-slate-100"],
+main > section + section[class*="bg-slate-900"],
+main > section + section[class*="bg-primary"],
+main > section + section[class*="bg-slate-800/"] {
+  margin-top: -1rem;
+}
+
+@media (min-width: 768px) {
+  main > section + section[class*="bg-slate-100"],
+  main > section + section[class*="bg-slate-900"],
+  main > section + section[class*="bg-primary"],
+  main > section + section[class*="bg-slate-800/"] {
+    margin-top: -1.5rem;
+  }
+}
+
+/* ── End Section Spacing Collapse ───────────────────────────────────── */
+
 /* Left/right inline padding — only when main has NO Tailwind padding class */
 main#spa-content:not([class*="p-"], [class*="px-"], [class*="py-"]) {
   padding-left: 0.75rem; /* 12px */
@@ -376,10 +422,37 @@ main[class*="px-"] > section > .section-content {
   padding-inline: 0;
 }
 
-/* ─── Navigator placeholder: prevent layout shift ─────────────── */
+/* ─── Navigator placeholder: prevent layout shift before JS mount ───── */
 navigator[data-component="navigator"] {
   display: block;
   min-height: 108px;
+}
+
+/* Spacer divs from navigator.js are no longer created (removed to fix double-spacing).
+ * If any stale spacers remain in cached HTML, hide them. */
+#mobile-header-placeholder,
+#pc-header-placeholder {
+  display: none !important;
+}
+
+/* ─── Navigator: top-level menu text uniformity ─────────────────── */
+/*
+ * All nav items (dropdown triggers and plain links) must render with
+ * identical font metrics. Dropdown triggers use <button> with font:inherit;
+ * plain links use <a>. This rule ensures visual parity regardless of tag.
+ */
+header nav > *,
+header nav > a,
+header nav > .prod-dropdown-wrap > a.prod-dropdown-trigger,
+header nav > .app-dropdown-wrap > a.app-dropdown-trigger,
+header nav > .sup-dropdown-wrap > a.sup-dropdown-trigger,
+header nav > .abt-dropdown-wrap > a.abt-dropdown-trigger,
+header nav > .cnt-dropdown-wrap > a.cnt-dropdown-trigger {
+  font-size: 0.875rem; /* text-sm = 14px */
+  font-weight: 600; /* font-semibold */
+  line-height: 1.25rem; /* text-sm line-height */
+  letter-spacing: 0;
+  font-family: var(--font-display);
 }
 
 /* ─── Scroll margin for sections (prevent navigator overlap) ───── */
@@ -430,7 +503,7 @@ details[open] > summary {
   flex-shrink: 0;
   overflow: hidden;
   /* Fallback: hide text content if font fails to load */
-  font-family: 'Material Symbols Outlined', sans-serif;
+  font-family: "Material Symbols Outlined", sans-serif;
 }
 
 /* In flex containers, let align-items handle centering */
@@ -453,7 +526,6 @@ select {
   padding-right: 2.5rem;
   cursor: pointer;
 }
-
 
 /* ─── §3.2 Button Hover — CTA lift & deepen ─────────────────────────────── */
 
@@ -742,7 +814,9 @@ button.bg-primary[class*="hover:"]:hover {
   display: none;
   align-items: center;
   justify-content: center;
-  transition: transform 0.2s, background 0.2s;
+  transition:
+    transform 0.2s,
+    background 0.2s;
 }
 
 .hero-video-fallback-btn:hover {

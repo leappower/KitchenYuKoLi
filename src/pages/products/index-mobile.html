@@ -72,16 +72,6 @@
         transition: all 0.2s ease;
         -webkit-tap-highlight-color: transparent;
       }
-      .category-tab.active::after {
-        content: "";
-        position: absolute;
-        bottom: -2px;
-        left: 0;
-        right: 0;
-        height: 2px;
-        background: #ec5b13;
-        border-radius: 1px;
-      }
       .filter-chip {
         transition: all 0.2s ease;
         -webkit-tap-highlight-color: transparent;
@@ -143,10 +133,9 @@
     ></navigator>
 
     <main id="spa-content">
-      <div class="w-full">
         <!-- Hero Section -->
         <section
-          class="fullwidth-bg relative w-full py-8 px-4 bg-gradient-to-br from-slate-50 dark:from-slate-900 to-white dark:to-black"
+          class="hero-overlap fullwidth-bg relative w-full py-8 px-4 bg-gradient-to-br from-slate-50 dark:from-slate-900 to-white dark:to-black"
         >
 
           <div class="section-content">
@@ -174,7 +163,7 @@
 
           </div></section>
         <!-- Category Filter & Sort -->
-        <section class="w-full py-4 fullwidth-bg">
+        <section class="w-full py-10 fullwidth-bg">
           <div class="section-content">
           <div class="flex flex-col gap-3">
             <!-- Category tabs (single line, JS auto-fills with more toggle) -->
@@ -211,7 +200,7 @@
         </section>
 
         <!-- CTA Section -->
-        <section class="fullwidth-bg py-10">
+        <section class="fullwidth-bg py-12">
           <div class="section-content">
             <div class="bg-gradient-to-br from-primary/10 to-primary/5 rounded-2xl p-6 text-center">
               <h2 class="text-lg font-bold mb-2 text-slate-900 dark:text-white" data-i18n="products_cta_title_mobile">
@@ -230,7 +219,6 @@
             </div>
           </div>
         </section>
-      </div>
     </main>
 
     <!-- Bottom Navigation -->
@@ -311,20 +299,19 @@
     </div>
     <div id="filter-overlay" class="fixed inset-0 bg-black/50 z-[55] hidden"></div>
 
-    <script defer src="/assets/js/lang-registry.js?v=20260508"></script>
-    <script defer src="/assets/js/translations.js?v=20260508"></script>
-    <script defer src="/assets/js/translations-dropdown-template.js?v=20260508"></script>
+    <script defer src="/assets/js/lang-registry.js?v=20260509"></script>
+    <script defer src="/assets/js/translations.js?v=20260509"></script><script defer src="/assets/js/translations-dropdown-template.js?v=20260509"></script>
     <script defer src="/assets/js/contacts.js"></script>
     <script defer src="/assets/js/ui/helpers.js"></script>
     <script defer src="/assets/js/ui/page-effects.js"></script>
     <script defer src="/assets/js/ui/form-interactions.js"></script>
     <script defer src="/assets/js/page-interactions.js"></script>
-    <script defer src="/assets/js/product-grid.js?v=20260508"></script>
+    <script defer src="/assets/js/product-grid.js?v=20260509"></script>
     <script defer src="/assets/js/ui/search-engine.js"></script>
-    <script defer src="/assets/js/product-detail.js?v=20260508"></script>
+    <script defer src="/assets/js/product-detail.js?v=20260509"></script>
 
     
       <script defer src="/assets/js/ui/floating-actions.js"></script>
-  <script defer src="/assets/js/spa-router.js?v=20260508"></script>
+  <script defer src="/assets/js/spa-router.js?v=20260509"></script>
 </body>
 </html>

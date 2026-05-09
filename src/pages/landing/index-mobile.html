@@ -20,25 +20,20 @@
   var urlParams = new URLSearchParams(location.search);
   var cleanUrl = urlParams.get('clean-url');
   if (cleanUrl) {
-    console.log('[Responsive Redirect] Cleaning URL to:', cleanUrl);
     history.replaceState({}, '', cleanUrl);
     return;
   }
 
   // SPA 导航时跳过响应式重定向
-  console.log('[Responsive Redirect] Checking SPA flag: window.__spaNavigating =', window.__spaNavigating);
   if (window.__spaNavigating) {
-    console.log('[Responsive Redirect] SPA navigation detected, skipping redirect');
     return;
   }
 
   // 使用 DeviceUtils 统一管理设备判断
   var currentFile = location.pathname.split('/').pop();
-  console.log('[Responsive Redirect] Current file:', currentFile, 'Pathname:', location.pathname);
 
   // 当访问目录 URL(以 / 结尾)时,不要重定向(SPA 导航使用干净的目录 URL)
   if (window.DeviceUtils && window.DeviceUtils.isDirectoryURL()) {
-    console.log('[Responsive Redirect] Directory URL detected, skipping redirect');
     return;
   }
 
@@ -55,12 +50,10 @@
       targetFile = 'index-pc.html';
     }
 
-    console.log('[Responsive Redirect] Redirecting to:', targetFile);
     location.href = targetFile;
     return;
   }
 
-  console.log('[Responsive Redirect] No redirect needed');
 })();
 </script>
 <!-- ═══ End Responsive Redirect ═══ -->
@@ -117,7 +110,7 @@ if(localStorage.getItem('darkMode')==='true')document.documentElement.classList.
   <div class="section-content">
   <div class="relative w-full aspect-[4/3] rounded-xl overflow-hidden shadow-2xl">
   <div class="absolute inset-0 bg-primary/20 mix-blend-multiply"></div>
-  <div class="w-full h-full bg-center bg-cover" data-alt="Modern busy high-end restaurant interior" style="background-image: none">
+  <div class="w-full h-full bg-center bg-cover" role="img" aria-label="Modern busy high-end restaurant interior" style="background-image: none">
   <div class="flex flex-col gap-4">
   <span class="inline-flex items-center px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-bold uppercase tracking-wider w-fit">2024 F&amp;B Excellence</span>
   <h1 class="text-4xl font-black leading-[1.1] tracking-tight text-slate-900 dark:text-white" data-i18n="landing_scale_your_restaurant_roi_with_yukoli">
@@ -349,37 +342,25 @@ if(localStorage.getItem('darkMode')==='true')document.documentElement.classList.
 
 
     <script src="/assets/js/ui/dropdown-styles.js"></script>
+    <script src="/assets/js/ui/dropdown-base.js"></script>
     <script src="/assets/js/ui/custom-select.js"></script>
-<script defer src="/assets/js/ui/products-dropdown.js?v=20260508"></script>
-    <script defer src="/assets/js/ui/applications-dropdown.js?v=20260508"></script>
-    <script defer src="/assets/js/ui/support-dropdown.js?v=20260508"></script>
-    <script defer src="/assets/js/ui/about-dropdown.js?v=20260508"></script>
-<script defer src="/assets/js/nav-config.js?v=20260508"></script>
-    <script defer src="/assets/js/ui/mobile-bottom-bar.js"></script>
-    <script defer src="/assets/js/ui/navigator.js?v=20260508"></script>
-<script defer src="/assets/js/ui/slide-menu.js?v=20260508"></script>
+<script defer src="/assets/js/ui/products-dropdown.js?v=20260509"></script>
+    <script defer src="/assets/js/ui/applications-dropdown.js?v=20260509"></script>
+    <script defer src="/assets/js/ui/support-dropdown.js?v=20260509"></script>
+    <script defer src="/assets/js/ui/about-dropdown.js?v=20260509"></script>
+    <script defer src="/assets/js/ui/navigator.js?v=20260509"></script>
+<script defer src="/assets/js/ui/slide-menu.js?v=20260509"></script>
 <script defer src="/assets/js/ui/search-engine.js"></script>
-<script defer src="/assets/js/ui/footer.js?v=20260508"></script>
-<script defer src="/assets/js/lang-registry.js?v=20260508"></script>
-<script defer src="/assets/js/translations.js?v=20260508"></script><script defer src="/assets/js/translations-dropdown-template.js?v=20260508"></script>
+<script defer src="/assets/js/ui/footer.js?v=20260509"></script>
+<script defer src="/assets/js/lang-registry.js?v=20260509"></script>
+<script defer src="/assets/js/translations.js?v=20260509"></script><script defer src="/assets/js/translations-dropdown-template.js?v=20260509"></script>
 <script defer src="/assets/js/contacts.js"></script>
 <script defer src="/assets/js/router.js"></script>
 
     <script defer src="/assets/js/ui/helpers.js"></script>
     <script defer src="/assets/js/ui/page-effects.js"></script>
     <script defer src="/assets/js/ui/form-interactions.js"></script>
-<script defer src="/assets/js/page-interactions.js"></script>
-<script>
-  document.addEventListener('DOMContentLoaded', function () {
-    if (window.translationManager) window.translationManager.initialize();
-  });
-</script>
-
-    
-    
-    
-
-<footer data-component="footer"
+<script defer src="/assets/js/page-interactions.js"></script><footer data-component="footer"
   data-variant="mobile"
   data-active="">
 </footer>
@@ -387,7 +368,7 @@ if(localStorage.getItem('darkMode')==='true')document.documentElement.classList.
 
 
 <script src="/assets/js/utils/device-utils.js"></script>
-<script src="/assets/js/spa-router.js?v=20260508"></script>
+<script src="/assets/js/spa-router.js?v=20260509"></script>
 
     <script defer src="/assets/js/ui/floating-actions.js"></script>
   </body></html>

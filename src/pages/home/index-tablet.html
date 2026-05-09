@@ -22,25 +22,20 @@
         var urlParams = new URLSearchParams(location.search);
         var cleanUrl = urlParams.get("clean-url");
         if (cleanUrl) {
-          console.log("[Responsive Redirect] Cleaning URL to:", cleanUrl);
           history.replaceState({}, "", cleanUrl);
           return;
         }
 
         // SPA 导航时跳过响应式重定向
-        console.log("[Responsive Redirect] Checking SPA flag: window.__spaNavigating =", window.__spaNavigating);
         if (window.__spaNavigating) {
-          console.log("[Responsive Redirect] SPA navigation detected, skipping redirect");
           return;
         }
 
         // 使用 DeviceUtils 统一管理设备判断
         var currentFile = location.pathname.split("/").pop();
-        console.log("[Responsive Redirect] Current file:", currentFile, "Pathname:", location.pathname);
 
         // 当访问目录 URL(以 / 结尾)时,不要重定向(SPA 导航使用干净的目录 URL)
         if (window.DeviceUtils && window.DeviceUtils.isDirectoryURL()) {
-          console.log("[Responsive Redirect] Directory URL detected, skipping redirect");
           return;
         }
 
@@ -57,12 +52,10 @@
             targetFile = "index-pc.html";
           }
 
-          console.log("[Responsive Redirect] Redirecting to:", targetFile);
           location.href = targetFile;
           return;
         }
 
-        console.log("[Responsive Redirect] No redirect needed");
       })();
     </script>
     <!-- ═══ End Responsive Redirect ═══ -->
@@ -132,7 +125,7 @@
 
     <main id="spa-content" class="max-w-[1024px] mx-auto space-y-6 pb-24">
       <!-- Hero Section -->
-      <section class="fullwidth-bg flex flex-col items-center gap-8 py-12">
+      <section class="fullwidth-bg flex flex-col items-center gap-8 py-16">
         <div class="section-content">
           <div class="w-full space-y-5">
             <div
@@ -209,7 +202,7 @@
       </section>
 
       <!-- Product Matrix -->
-      <section class="fullwidth-bg py-6">
+      <section class="fullwidth-bg py-12">
         <div class="section-content">
         <div class="flex justify-between items-end mb-6">
             <h2 class="text-2xl font-black tracking-tight mb-2" data-i18n="home_hw_title">核心产品</h2>
@@ -225,7 +218,7 @@
       </section>
 
       <!-- 行业解决方案 + Stats -->
-      <section class="fullwidth-bg py-12">
+      <section class="fullwidth-bg py-16">
         <div class="section-content">
         
           <!-- Solutions -->
@@ -278,7 +271,7 @@
       </section>
 
       <!-- 核心优势 -->
-      <section class="fullwidth-bg py-12">
+      <section class="fullwidth-bg py-16">
         <div class="section-content">
           <div class="w-full text-center mb-6">
             <h2 class="text-2xl font-black tracking-tight mb-2" data-i18n="home_advantage_title">为什么选择 YuKoLi</h2>
@@ -346,7 +339,7 @@
       </section>
 
       <!-- CTA Bottom -->
-      <section class="fullwidth-bg py-12">
+      <section class="fullwidth-bg py-16">
         <div class="section-content">
           <div class="w-full bg-primary rounded-2xl p-8 text-center text-white relative overflow-hidden">
             <div class="absolute top-0 right-0 size-48 bg-white/10 rounded-full -mr-24 -mt-24"></div>
@@ -370,20 +363,19 @@
     </main>
 
     <script src="/assets/js/ui/dropdown-styles.js"></script>
-    <script defer src="/assets/js/ui/products-dropdown.js?v=20260508"></script>
-    <script defer src="/assets/js/ui/applications-dropdown.js?v=20260508"></script>
-    <script defer src="/assets/js/ui/support-dropdown.js?v=20260508"></script>
-    <script defer src="/assets/js/ui/about-dropdown.js?v=20260508"></script>
-    <script defer src="/assets/js/nav-config.js?v=20260508"></script>
-    <script defer src="/assets/js/ui/mobile-bottom-bar.js"></script>
-    <script defer src="/assets/js/ui/navigator.js?v=20260508"></script>
+    <script src="/assets/js/ui/dropdown-base.js"></script>
+    <script defer src="/assets/js/ui/products-dropdown.js?v=20260509"></script>
+    <script defer src="/assets/js/ui/applications-dropdown.js?v=20260509"></script>
+    <script defer src="/assets/js/ui/support-dropdown.js?v=20260509"></script>
+    <script defer src="/assets/js/ui/about-dropdown.js?v=20260509"></script>
+    <script defer src="/assets/js/ui/navigator.js?v=20260509"></script>
     <script src="/assets/js/ui/hero-video.js"></script>
-<script defer src="/assets/js/ui/slide-menu.js?v=20260508"></script>
+<script defer src="/assets/js/ui/slide-menu.js?v=20260509"></script>
     <script defer src="/assets/js/ui/search-engine.js"></script>
-    <script defer src="/assets/js/ui/footer.js?v=20260508"></script>
-    <script defer src="/assets/js/lang-registry.js?v=20260508"></script>
-    <script defer src="/assets/js/translations.js?v=20260508"></script>
-    <script defer src="/assets/js/translations-dropdown-template.js?v=20260508"></script>
+    <script defer src="/assets/js/ui/footer.js?v=20260509"></script>
+    <script defer src="/assets/js/lang-registry.js?v=20260509"></script>
+    <script defer src="/assets/js/translations.js?v=20260509"></script>
+    <script defer src="/assets/js/translations-dropdown-template.js?v=20260509"></script>
     <script defer src="/assets/js/contacts.js"></script>
     <script defer src="/assets/js/router.js"></script>
 
@@ -391,17 +383,10 @@
     <script defer src="/assets/js/ui/page-effects.js"></script>
     <script defer src="/assets/js/ui/form-interactions.js"></script>
     <script defer src="/assets/js/page-interactions.js"></script>
-    <script defer src="/assets/js/home-core-products.js?v=20260508"></script>
-    <script>
-      document.addEventListener("DOMContentLoaded", function () {
-        if (window.translationManager) window.translationManager.initialize();
-      });
-    </script>
-
-    <footer data-component="footer" data-variant="tablet" data-active="home"></footer>
+    <script defer src="/assets/js/home-core-products.js?v=20260509"></script><footer data-component="footer" data-variant="tablet" data-active="home"></footer>
 
     <script src="/assets/js/utils/device-utils.js"></script>
-    <script src="/assets/js/spa-router.js?v=20260508"></script>
+    <script src="/assets/js/spa-router.js?v=20260509"></script>
       <script defer src="/assets/js/ui/floating-actions.js"></script>
   </body>
 </html>

@@ -20,25 +20,20 @@
   var urlParams = new URLSearchParams(location.search);
   var cleanUrl = urlParams.get('clean-url');
   if (cleanUrl) {
-    console.log('[Responsive Redirect] Cleaning URL to:', cleanUrl);
     history.replaceState({}, '', cleanUrl);
     return;
   }
 
   // SPA 导航时跳过响应式重定向
-  console.log('[Responsive Redirect] Checking SPA flag: window.__spaNavigating =', window.__spaNavigating);
   if (window.__spaNavigating) {
-    console.log('[Responsive Redirect] SPA navigation detected, skipping redirect');
     return;
   }
 
   // 使用 DeviceUtils 统一管理设备判断
   var currentFile = location.pathname.split('/').pop();
-  console.log('[Responsive Redirect] Current file:', currentFile, 'Pathname:', location.pathname);
 
   // 当访问目录 URL(以 / 结尾)时,不要重定向(SPA 导航使用干净的目录 URL)
   if (window.DeviceUtils && window.DeviceUtils.isDirectoryURL()) {
-    console.log('[Responsive Redirect] Directory URL detected, skipping redirect');
     return;
   }
 
@@ -55,12 +50,10 @@
       targetFile = 'index-pc.html';
     }
 
-    console.log('[Responsive Redirect] Redirecting to:', targetFile);
     location.href = targetFile;
     return;
   }
 
-  console.log('[Responsive Redirect] No redirect needed');
 })();
 </script>
 <!-- ═══ End Responsive Redirect ═══ -->
@@ -101,7 +94,7 @@ if(localStorage.getItem('darkMode')==='true')document.documentElement.classList.
 
 <main id="spa-content" class="flex-1 overflow-x-hidden">
   <!-- Hero Section -->
-  <section class="fullwidth-bg py-6">
+  <section class="fullwidth-bg py-10">
     <div class="section-content">
       <div
         class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-bold uppercase tracking-widest mb-4"
@@ -160,7 +153,7 @@ if(localStorage.getItem('darkMode')==='true')document.documentElement.classList.
           <span data-i18n="home_hero_btn_products">浏览全系列产品</span>
           <span class="material-symbols-outlined text-lg">inventory_2</span>
         </a>
-        <a href="/quote" class="flex-1 border-2 border-slate-200 dark:border-slate-800 px-5 py-3 rounded-xl font-bold text-sm flex items-center justify-center gap-2" data-i18n="home_hero_btn_hardware">
+        <a href="/quote" class="flex-1 border-2 border-slate-200 dark:border-slate-800 px-5 py-3 rounded-xl font-bold text-sm flex items-center justify-center gap-2" data-i18n="home_hero_btn_hardware_text">
           获取报价
         </a>
       </div>
@@ -168,7 +161,7 @@ if(localStorage.getItem('darkMode')==='true')document.documentElement.classList.
   </section>
 
   <!-- Product Matrix -->
-  <section class="py-6 bg-slate-100 dark:bg-slate-900/50 fullwidth-bg">
+  <section class="py-10 bg-slate-100 dark:bg-slate-900/50 fullwidth-bg">
     <div class="section-content">
         <div class="flex justify-between items-end mb-4">
           <div>
@@ -186,7 +179,7 @@ if(localStorage.getItem('darkMode')==='true')document.documentElement.classList.
   </section>
 
   <!-- 行业解决方案 -->
-  <section class="fullwidth-bg py-6">
+  <section class="fullwidth-bg py-10">
     <div class="section-content">
       <h2 class="text-xl font-black tracking-tight mb-4" data-i18n="home_int_title">覆盖全行业的智慧厨房方案</h2>
       <div class="space-y-3">
@@ -216,7 +209,7 @@ if(localStorage.getItem('darkMode')==='true')document.documentElement.classList.
   </section>
 
   <!-- Stats -->
-  <section class="py-6 bg-slate-100 dark:bg-slate-900/50 fullwidth-bg">
+  <section class="py-10 bg-slate-100 dark:bg-slate-900/50 fullwidth-bg">
     <div class="section-content">
         <div class="grid grid-cols-2 gap-3">
           <div class="bg-white dark:bg-slate-800 rounded-xl p-4 text-center border border-slate-200 dark:border-slate-700">
@@ -240,7 +233,7 @@ if(localStorage.getItem('darkMode')==='true')document.documentElement.classList.
   </section>
 
   <!-- 核心优势 -->
-  <section class="fullwidth-bg py-6">
+  <section class="fullwidth-bg py-10">
     <div class="section-content">
       <div class="text-center mb-4">
         <h2 class="text-xl font-black tracking-tight mb-1" data-i18n="home_advantage_title">为什么选择 YuKoLi</h2>
@@ -288,7 +281,7 @@ if(localStorage.getItem('darkMode')==='true')document.documentElement.classList.
   </section>
 
   <!-- 资质认证 -->
-  <section class="fullwidth-bg py-6 border-t border-slate-200 dark:border-slate-800">
+  <section class="fullwidth-bg py-10 border-t border-slate-200 dark:border-slate-800">
     <div class="section-content">
         <div class="text-center mb-4">
           <h3 class="text-lg font-black mb-1" data-i18n="home_trust_title">品质保障，全球信赖</h3>
@@ -316,7 +309,7 @@ if(localStorage.getItem('darkMode')==='true')document.documentElement.classList.
   </section>
 
   <!-- CTA Bottom -->
-  <section class="fullwidth-bg py-8">
+  <section class="fullwidth-bg py-12">
     <div class="section-content">
       <div class="bg-primary rounded-2xl p-6 text-center text-white relative overflow-hidden">
         <div class="absolute top-0 right-0 size-32 bg-white/10 rounded-full -mr-16 -mt-16"></div>
@@ -340,19 +333,18 @@ if(localStorage.getItem('darkMode')==='true')document.documentElement.classList.
 </main>
 
     <script src="/assets/js/ui/dropdown-styles.js"></script>
-<script defer src="/assets/js/ui/products-dropdown.js?v=20260508"></script>
-    <script defer src="/assets/js/ui/applications-dropdown.js?v=20260508"></script>
-    <script defer src="/assets/js/ui/support-dropdown.js?v=20260508"></script>
-    <script defer src="/assets/js/ui/about-dropdown.js?v=20260508"></script>
-<script defer src="/assets/js/nav-config.js?v=20260508"></script>
-    <script defer src="/assets/js/ui/mobile-bottom-bar.js"></script>
-    <script defer src="/assets/js/ui/navigator.js?v=20260508"></script>
+    <script src="/assets/js/ui/dropdown-base.js"></script>
+<script defer src="/assets/js/ui/products-dropdown.js?v=20260509"></script>
+    <script defer src="/assets/js/ui/applications-dropdown.js?v=20260509"></script>
+    <script defer src="/assets/js/ui/support-dropdown.js?v=20260509"></script>
+    <script defer src="/assets/js/ui/about-dropdown.js?v=20260509"></script>
+    <script defer src="/assets/js/ui/navigator.js?v=20260509"></script>
   <script src="/assets/js/ui/hero-video.js"></script>
-<script defer src="/assets/js/ui/slide-menu.js?v=20260508"></script>
+<script defer src="/assets/js/ui/slide-menu.js?v=20260509"></script>
 <script defer src="/assets/js/ui/search-engine.js"></script>
-<script defer src="/assets/js/ui/footer.js?v=20260508"></script>
-<script defer src="/assets/js/lang-registry.js?v=20260508"></script>
-<script defer src="/assets/js/translations.js?v=20260508"></script><script defer src="/assets/js/translations-dropdown-template.js?v=20260508"></script>
+<script defer src="/assets/js/ui/footer.js?v=20260509"></script>
+<script defer src="/assets/js/lang-registry.js?v=20260509"></script>
+<script defer src="/assets/js/translations.js?v=20260509"></script><script defer src="/assets/js/translations-dropdown-template.js?v=20260509"></script>
 <script defer src="/assets/js/contacts.js"></script>
 <script defer src="/assets/js/router.js"></script>
 
@@ -360,21 +352,14 @@ if(localStorage.getItem('darkMode')==='true')document.documentElement.classList.
     <script defer src="/assets/js/ui/page-effects.js"></script>
     <script defer src="/assets/js/ui/form-interactions.js"></script>
 <script defer src="/assets/js/page-interactions.js"></script>
-<script defer src="/assets/js/home-core-products.js?v=20260508"></script>
-<script>
-  document.addEventListener('DOMContentLoaded', function () {
-    if (window.translationManager) window.translationManager.initialize();
-  });
-</script>
-
-<!-- ═══ Footer Component ═══ -->
+<script defer src="/assets/js/home-core-products.js?v=20260509"></script><!-- ═══ Footer Component ═══ -->
 <footer data-component="footer"
   data-variant="mobile"
   data-active="home">
 </footer>
 
 <script src="/assets/js/utils/device-utils.js"></script>
-<script src="/assets/js/spa-router.js?v=20260508"></script>
+<script src="/assets/js/spa-router.js?v=20260509"></script>
 
     <script defer src="/assets/js/ui/floating-actions.js"></script>
   </body></html>

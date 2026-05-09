@@ -24,6 +24,14 @@
 (function (global) {
   "use strict";
 
+  var _spaRegs = {};
+  function _spaOn(tgt, evt, fn, key) {
+    if (_spaRegs[key]) _spaRegs[key].abort();
+    var ac = new AbortController();
+    _spaRegs[key] = ac;
+    tgt.addEventListener(evt, fn, { signal: ac.signal });
+  }
+
   /* ────────────────────────────────────────────────────────────────
    *  CONFIG
    * ──────────────────────────────────────────────────────────────── */
@@ -41,11 +49,7 @@
    * ──────────────────────────────────────────────────────────────── */
 
   function esc(str) {
-    return String(str)
-      .replace(/&/g, "&amp;")
-      .replace(/</g, "&lt;")
-      .replace(/>/g, "&gt;")
-      .replace(/"/g, "&quot;");
+    return String(str).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
   }
 
   function isMobile() {
@@ -298,12 +302,12 @@
             var go = groupChildren[j];
             if (!go || (go.tagName && go.tagName.toLowerCase() !== "option")) continue;
             groupOpts.push({
-            value: go.value,
-            text: go.text,
-            selected: go.selected,
-            disabled: go.disabled,
-            i18n: go.getAttribute("data-i18n") || "",
-          });
+              value: go.value,
+              text: go.text,
+              selected: go.selected,
+              disabled: go.disabled,
+              i18n: go.getAttribute("data-i18n") || "",
+            });
           }
           groups.push({ label: label, options: groupOpts });
         }
@@ -327,34 +331,59 @@
 
     // ★ Read computed styles BEFORE hiding the native select
     var selectStyle = window.getComputedStyle(selectEl);
-    var inheritProps = ['height', 'paddingTop', 'paddingRight', 'paddingBottom', 'paddingLeft', 'borderRadius', 'fontSize', 'fontWeight', 'letterSpacing', 'lineHeight'];
+    var inheritProps = [
+      "height",
+      "paddingTop",
+      "paddingRight",
+      "paddingBottom",
+      "paddingLeft",
+      "borderRadius",
+      "fontSize",
+      "fontWeight",
+      "letterSpacing",
+      "lineHeight",
+    ];
     var computedStyle = {};
     for (var p = 0; p < inheritProps.length; p++) {
-      var cssProp = inheritProps[p].replace(/([A-Z])/g, '-$1').toLowerCase();
+      var cssProp = inheritProps[p].replace(/([A-Z])/g, "-$1").toLowerCase();
       computedStyle[inheritProps[p]] = selectStyle.getPropertyValue(cssProp);
     }
 
     // Copy Tailwind classes from select to trigger (before mutating)
     // Use indexOf with the class suffix portion, so dark:text-white matches text-white etc.
     var classList = selectEl.classList;
-    var SKIP = { 'appearance-none': 1, 'w-full': 1, 'h-14': 1, 'h-12': 1, 'p-3': 1, 'p-2\.5': 1, 'px-4': 1, 'px-3': 1, 'py-3': 1 };
+    var SKIP = {
+      "appearance-none": 1,
+      "w-full": 1,
+      "h-14": 1,
+      "h-12": 1,
+      "p-3": 1,
+      "p-2\.5": 1,
+      "px-4": 1,
+      "px-3": 1,
+      "py-3": 1,
+    };
     var bgClasses = [];
     for (var c = 0; c < classList.length; c++) {
       var cls = classList[c];
       if (SKIP[cls]) continue;
       // Strip responsive/state prefixes to get the raw Tailwind token
-      var token = cls.replace(/^(sm:|md:|lg:|xl:|dark:|focus:|hover:|active:)+/, '');
+      var token = cls.replace(/^(sm:|md:|lg:|xl:|dark:|focus:|hover:|active:)+/, "");
       // Match visual-property prefixes (everything except layout/spacing)
-      var visPrefixes = ['border', 'bg', 'rounded', 'text', 'outline', 'transition', 'shadow', 'ring'];
+      var visPrefixes = ["border", "bg", "rounded", "text", "outline", "transition", "shadow", "ring"];
       var matched = false;
       for (var v = 0; v < visPrefixes.length; v++) {
-        if (token.indexOf(visPrefixes[v]) === 0) { matched = true; break; }
+        if (token.indexOf(visPrefixes[v]) === 0) {
+          matched = true;
+          break;
+        }
       }
       if (matched) bgClasses.push(cls);
     }
 
     // ★ NOW hide native select (after reading styles)
-    selectEl.style.cssText = "position:absolute;width:1px;height:1px;overflow:hidden;opacity:0;pointer-events:none;clip:rect(0,0,0,0);";
+    selectEl.style.cssText =
+      "position:absolute;width:1px;height:1px;overflow:hidden;opacity:0;pointer-events:none;clip:rect(0,0,0,0);";
 
     // Build trigger
     var displayText = this.getDisplayText();
@@ -380,14 +409,15 @@
 
     // Ensure trigger has visible border (some selects only have border-color class
     // but no border-width - Tailwind reset sets border-width: 0)
-    var hasBorderWidth = selectEl.classList.contains('border') ||
-      selectEl.classList.contains('border-2') ||
-      selectEl.classList.contains('border-y') ||
-      selectEl.classList.contains('border-t') ||
-      selectEl.classList.contains('border-b');
+    var hasBorderWidth =
+      selectEl.classList.contains("border") ||
+      selectEl.classList.contains("border-2") ||
+      selectEl.classList.contains("border-y") ||
+      selectEl.classList.contains("border-t") ||
+      selectEl.classList.contains("border-b");
     if (!hasBorderWidth) {
-      this.trigger.style.borderWidth = '1px';
-      this.trigger.style.borderStyle = 'solid';
+      this.trigger.style.borderWidth = "1px";
+      this.trigger.style.borderStyle = "solid";
     }
     this.trigger.setAttribute("tabindex", selectEl.disabled ? "-1" : "0");
     this.trigger.setAttribute("role", "combobox");
@@ -397,8 +427,11 @@
     if (selectEl.id) this.trigger.setAttribute("aria-labelledby", selectEl.id);
 
     this.trigger.innerHTML =
-      '<span class="cs-trigger-text' + (isPlaceholder ? " cs-placeholder" : "") + '">' +
-      esc(displayText) + "</span>" +
+      '<span class="cs-trigger-text' +
+      (isPlaceholder ? " cs-placeholder" : "") +
+      '">' +
+      esc(displayText) +
+      "</span>" +
       '<span class="material-symbols-outlined cs-trigger-chevron">expand_more</span>';
 
     // Build float panel
@@ -407,26 +440,32 @@
     // Insert into DOM
     selectEl.parentNode.insertBefore(this.wrap, selectEl);
     this.wrap.appendChild(this.trigger);
-    this.wrap.appendChild(this.panel);
     this.wrap.appendChild(selectEl);
+    // Panel goes to <body> to avoid being affected by ancestor transforms
+    // (e.g. .animate-hidden translate3d) which break position:fixed
+    document.body.appendChild(this.panel);
 
     // Debug: log sizing after DOM insertion
     if (window.__CS_DEBUG) {
       var wR = this.wrap.getBoundingClientRect();
       var tR = this.trigger.getBoundingClientRect();
-      console.log('[CS-DEBUG] id=' + (selectEl.id || '?'),
-        'wrap=' + Math.round(wR.width) + 'x' + Math.round(wR.height),
-        'trigger=' + Math.round(tR.width) + 'x' + Math.round(tR.height),
-        'triggerClasses=' + this.trigger.className,
-        'computedH=' + computedStyle.height,
-        'computedPL=' + computedStyle.paddingLeft);
+      console.log(
+        "[CS-DEBUG] id=" + (selectEl.id || "?"),
+        "wrap=" + Math.round(wR.width) + "x" + Math.round(wR.height),
+        "trigger=" + Math.round(tR.width) + "x" + Math.round(tR.height),
+        "triggerClasses=" + this.trigger.className,
+        "computedH=" + computedStyle.height,
+        "computedPL=" + computedStyle.paddingLeft
+      );
       // Compare with nearby input if any
-      var siblingInput = this.wrap.parentNode.querySelector('input');
+      var siblingInput = this.wrap.parentNode.querySelector("input");
       if (siblingInput) {
         var iR = siblingInput.getBoundingClientRect();
-        console.log('[CS-DEBUG] nearby input=' + Math.round(iR.width) + 'x' + Math.round(iR.height),
-          'diff w=' + (iR.width - tR.width).toFixed(1),
-          'diff h=' + (iR.height - tR.height).toFixed(1));
+        console.log(
+          "[CS-DEBUG] nearby input=" + Math.round(iR.width) + "x" + Math.round(iR.height),
+          "diff w=" + (iR.width - tR.width).toFixed(1),
+          "diff h=" + (iR.height - tR.height).toFixed(1)
+        );
       }
     }
 
@@ -520,13 +559,18 @@
 
     // Filter out placeholder options (value="") — shown as popup-title, not as item
     function withoutPlaceholder(opts) {
-      return opts.filter(function (o) { return o.value !== ""; });
+      return opts.filter(function (o) {
+        return o.value !== "";
+      });
     }
 
     if (hasGroups) {
       for (var g = 0; g < data.groups.length; g++) {
         html += '<div class="cs-group-label">' + esc(data.groups[g].label) + "</div>";
-        html += '<div class="cs-group-items">' + this._buildOptionItemsHTML(withoutPlaceholder(data.groups[g].options)) + '</div>';
+        html +=
+          '<div class="cs-group-items">' +
+          this._buildOptionItemsHTML(withoutPlaceholder(data.groups[g].options)) +
+          "</div>";
       }
       // Also add non-grouped options
       if (data.options.length > 0) {
@@ -537,7 +581,9 @@
             groupedValues[data.groups[gg].options[oo].value] = true;
           }
         }
-        var ungrouped = data.options.filter(function (o) { return !groupedValues[o.value] && o.value !== ""; });
+        var ungrouped = data.options.filter(function (o) {
+          return !groupedValues[o.value] && o.value !== "";
+        });
         if (ungrouped.length > 0) {
           html += this._buildOptionItemsHTML(ungrouped);
         }
@@ -557,12 +603,21 @@
       var disabled = o.disabled ? " cs-item-disabled" : "";
       var i18nAttr = o.i18n ? ' data-i18n="' + esc(o.i18n) + '"' : "";
       html +=
-        '<div class="cs-item' + active + disabled + '"' +
-        ' data-value="' + esc(o.value) + '"' +
-        ' data-text="' + esc(o.text) + '"' +
+        '<div class="cs-item' +
+        active +
+        disabled +
+        '"' +
+        ' data-value="' +
+        esc(o.value) +
+        '"' +
+        ' data-text="' +
+        esc(o.text) +
+        '"' +
         i18nAttr +
         ' role="option">' +
-        '<span>' + esc(o.text) + "</span>" +
+        "<span>" +
+        esc(o.text) +
+        "</span>" +
         '<span class="material-symbols-outlined cs-check">check</span>' +
         "</div>";
     }
@@ -585,7 +640,7 @@
     if (this.trigger) {
       var textEl = this.trigger.querySelector(".cs-trigger-text");
       if (textEl) {
-        textEl.textContent = isPlaceholder ? (this.placeholder || text) : text;
+        textEl.textContent = isPlaceholder ? this.placeholder || text : text;
         textEl.className = "cs-trigger-text" + (isPlaceholder ? " cs-placeholder" : "");
       }
     }
@@ -619,6 +674,7 @@
     CustomSelect.closeAll();
 
     this.wrap.classList.add(OPEN_CLASS);
+    this.panel.classList.add(OPEN_CLASS);
     this.trigger.setAttribute("aria-expanded", "true");
 
     // Position panel using fixed coordinates from trigger rect (or override anchor)
@@ -638,12 +694,12 @@
       this.panel.classList.remove("cs-panel-below");
       this.panel.classList.add("cs-panel-above");
       this.panel.style.top = "";
-      this.panel.style.bottom = (window.innerHeight - rect.top + gap) + "px";
+      this.panel.style.bottom = window.innerHeight - rect.top + gap + "px";
     } else {
       this.panel.classList.remove("cs-panel-above");
       this.panel.classList.add("cs-panel-below");
       this.panel.style.bottom = "";
-      this.panel.style.top = (rect.bottom + gap) + "px";
+      this.panel.style.top = rect.bottom + gap + "px";
     }
 
     // Bind scroll/resize reposition for this instance
@@ -662,12 +718,12 @@
       var above = sb < 280 && sa > sb;
       if (above) {
         self.panel.style.top = "";
-        self.panel.style.bottom = (window.innerHeight - r.top + gap) + "px";
+        self.panel.style.bottom = window.innerHeight - r.top + gap + "px";
         self.panel.classList.remove("cs-panel-below");
         self.panel.classList.add("cs-panel-above");
       } else {
         self.panel.style.bottom = "";
-        self.panel.style.top = (r.bottom + gap) + "px";
+        self.panel.style.top = r.bottom + gap + "px";
         self.panel.classList.remove("cs-panel-above");
         self.panel.classList.add("cs-panel-below");
       }
@@ -678,7 +734,9 @@
     // Focus search if available
     var searchInput = this.panel.querySelector(".cs-search");
     if (searchInput) {
-      setTimeout(function () { searchInput.focus(); }, 50);
+      setTimeout(function () {
+        searchInput.focus();
+      }, 50);
     }
   };
 
@@ -732,7 +790,9 @@
 
     // Bind overlay close
     var self = this;
-    this._popupOverlay.addEventListener("click", function () { self.close(); });
+    this._popupOverlay.addEventListener("click", function () {
+      self.close();
+    });
 
     // Bind item click
     var popupItems = this._popupPanel.querySelectorAll(".cs-item");
@@ -785,7 +845,9 @@
           noRes.style.display = "none";
         }
       });
-      setTimeout(function () { searchInput.focus(); }, 100);
+      setTimeout(function () {
+        searchInput.focus();
+      }, 100);
     }
 
     // Animate open
@@ -809,6 +871,7 @@
   /* Close */
   CustomSelectInstance.prototype.close = function () {
     this.wrap && this.wrap.classList.remove(OPEN_CLASS);
+    this.panel && this.panel.classList.remove(OPEN_CLASS);
     this.trigger && this.trigger.setAttribute("aria-expanded", "false");
     this._closePopup();
     this._removeScrollResize();
@@ -878,7 +941,9 @@
   var instances = [];
 
   /* CustomSelect constructor (factory - delegates to Instance) */
-  function CustomSelect(el) { return CustomSelect.init(el); }
+  function CustomSelect(el) {
+    return CustomSelect.init(el);
+  }
 
   CustomSelect.closeAll = function () {
     for (var i = 0; i < instances.length; i++) {
@@ -899,21 +964,26 @@
   });
 
   /* Close on spa:load */
-  document.addEventListener("spa:load", function () {
-    CustomSelect.closeAll();
-  });
+  _spaOn(
+    document,
+    "spa:load",
+    function () {
+      CustomSelect.closeAll();
+    },
+    "spa:load:closeAll"
+  );
 
   /* Init all [data-custom-select] elements */
   CustomSelect.initAll = function (root) {
     injectStyles();
     root = root || document;
     var els = root.querySelectorAll("select[" + ATTR + "]");
-    console.log('[CS] initAll: found ' + els.length + ' select(s) on page: ' + location.pathname);
+    console.log("[CS] initAll: found " + els.length + " select(s) on page: " + location.pathname);
     for (var i = 0; i < els.length; i++) {
       // Skip if already initialized
       if (els[i]._customSelectInstance) continue;
       // Skip lang-selector — managed manually by navigator.js (buildPanel)
-      if (els[i].id === 'lang-selector') continue;
+      if (els[i].id === "lang-selector") continue;
       // Skip selects with no options (may be populated later by JS)
       if (els[i].options.length === 0 && els[i].children.length === 0) continue;
       var inst = new CustomSelectInstance(els[i]);
@@ -927,7 +997,7 @@
   CustomSelect.init = function (selectEl) {
     injectStyles();
     if (selectEl._customSelectInstance) return selectEl._customSelectInstance;
-    if (selectEl.id === 'lang-selector') return null; // managed by navigator.js
+    if (selectEl.id === "lang-selector") return null; // managed by navigator.js
     var inst = new CustomSelectInstance(selectEl);
     inst.render();
     selectEl._customSelectInstance = inst;
@@ -966,9 +1036,14 @@
   }
 
   /* Re-init on spa:load (SPA navigation may inject new selects) */
-  document.addEventListener("spa:load", function () {
-    CustomSelect.initAll();
-  });
+  _spaOn(
+    document,
+    "spa:load",
+    function () {
+      CustomSelect.initAll();
+    },
+    "spa:load:initAll"
+  );
 
   /* ────────────────────────────────────────────────────────────────
    *  EXPORT

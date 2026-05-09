@@ -16,25 +16,20 @@
   var urlParams = new URLSearchParams(location.search);
   var cleanUrl = urlParams.get('clean-url');
   if (cleanUrl) {
-    console.log('[Responsive Redirect] Cleaning URL to:', cleanUrl);
     history.replaceState({}, '', cleanUrl);
     return;
   }
 
   // SPA 导航时跳过响应式重定向
-  console.log('[Responsive Redirect] Checking SPA flag: window.__spaNavigating =', window.__spaNavigating);
   if (window.__spaNavigating) {
-    console.log('[Responsive Redirect] SPA navigation detected, skipping redirect');
     return;
   }
 
   // 使用 DeviceUtils 统一管理设备判断
   var currentFile = location.pathname.split('/').pop();
-  console.log('[Responsive Redirect] Current file:', currentFile, 'Pathname:', location.pathname);
 
   // 当访问目录 URL(以 / 结尾)时,不要重定向(SPA 导航使用干净的目录 URL)
   if (window.DeviceUtils && window.DeviceUtils.isDirectoryURL()) {
-    console.log('[Responsive Redirect] Directory URL detected, skipping redirect');
     return;
   }
 
@@ -51,12 +46,10 @@
       targetFile = 'index-pc.html';
     }
 
-    console.log('[Responsive Redirect] Redirecting to:', targetFile);
     location.href = targetFile;
     return;
   }
 
-  console.log('[Responsive Redirect] No redirect needed');
 })();</script>
     <meta charset="utf-8"/>
     <meta name="description" content="YuKoLi 智能厨具售后服务与技术支持：安装指导、操作培训、故障排查、原厂配件供应。覆盖东南亚 10 国，48 小时上门响应。">
@@ -102,7 +95,7 @@
         <main id="spa-content" class="flex-1 w-full py-8 pb-24">
 
 <!-- Hero Section -->
-<section class="fullwidth-bg section-passthrough w-full flex flex-col items-center py-12 gap-12">
+<section class="hero-overlap fullwidth-bg section-passthrough w-full flex flex-col items-center py-12 gap-12">
   <div class="section-content max-w-4xl mx-auto">
     <div class="w-full space-y-8">
       <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-bold uppercase tracking-widest">
@@ -140,7 +133,7 @@
 </section>
 
 <!-- Trust Signals -->
-<section class="bg-slate-900 py-12 fullwidth-bg">
+<section class="bg-slate-900 py-16 fullwidth-bg">
   <div class="section-content max-w-4xl mx-auto">
     <div class="grid grid-cols-3 gap-8">
       <div class="flex flex-col gap-1 border-l-2 border-primary/40 pl-6">
@@ -163,7 +156,7 @@
 </section>
 
 <!-- Service Map -->
-<section class="py-12 bg-tech-silver/30 dark:bg-obsidian/20 fullwidth-bg">
+<section class="py-16 bg-tech-silver/30 dark:bg-obsidian/20 fullwidth-bg">
   <div class="section-content max-w-4xl mx-auto">
     <div class="flex flex-col items-center text-center mb-10 gap-4">
       <h2 class="text-2xl font-black tracking-tight" data-i18n="support_global_response_network">售后服务网络</h2>
@@ -171,7 +164,7 @@
     </div>
     <div class="relative bg-white dark:bg-slate-900 rounded-[2rem] border border-slate-200 dark:border-slate-800 overflow-hidden min-h-[400px] shadow-xl">
       <div id="yukoli-service-map" class="absolute inset-0" style="min-height:400px;"></div>
-      <div id="yukoli-service-map-fallback" class="absolute inset-0 bg-cover bg-center grayscale opacity-40 dark:opacity-20" data-alt="Stylized world map showing service nodes" data-location="Global" style="background-image: url('/assets/images/world-map.svg')"></div>
+      <div id="yukoli-service-map-fallback" class="absolute inset-0 bg-cover bg-center grayscale opacity-40 dark:opacity-20" role="img" aria-label="Stylized world map showing service nodes" data-location="Global" style="background-image: url('/assets/images/world-map.svg')"></div>
       <div class="relative h-full w-full p-8 flex flex-col justify-between pointer-events-none">
         <div class="flex justify-between items-start pointer-events-auto">
           <div class="flex flex-col gap-2">
@@ -201,12 +194,12 @@
 <div id="support-contact-channels" data-page="support"></div>
 
 <!-- Service System -->
-<section id="installation" class="fullwidth-bg py-12">
+<section id="installation" class="fullwidth-bg py-16">
   <div class="section-content max-w-4xl mx-auto">
     <div class="w-full flex flex-col gap-12 items-center">
       <div class="relative w-full">
         <div class="rounded-3xl overflow-hidden shadow-2xl relative aspect-[4/3] bg-slate-200 dark:bg-slate-800">
-          <img loading="lazy" class="w-full h-full object-cover" data-alt="YuKoLi engineer servicing commercial kitchen equipment in a professional kitchen" src="/assets/images/support-service-engineer.webp" width="800" height="600" onerror="this.style.display='none'">
+          <img loading="lazy" class="w-full h-full object-cover" alt="YuKoLi engineer servicing commercial kitchen equipment in a professional kitchen" src="/assets/images/support-service-engineer.webp" width="800" height="600" onerror="this.style.display='none'">
           <div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
           <div class="absolute bottom-6 left-6 right-6">
             <div class="bg-white/90 dark:bg-slate-900/90 backdrop-blur p-4 rounded-xl">
@@ -257,7 +250,7 @@
 </section>
 
 <!-- FAQ -->
-<section id="faq" class="py-12 fullwidth-bg bg-slate-50 dark:bg-slate-900/30">
+<section id="faq" class="py-16 fullwidth-bg bg-slate-50 dark:bg-slate-900/30">
   <div class="section-content max-w-4xl mx-auto">
     <h2 class="text-2xl font-black tracking-tight mb-8" data-i18n="support_faq_title">常见问题</h2>
     <div class="space-y-4">
@@ -314,7 +307,7 @@
 </section>
 
 <!-- CTA -->
-<section class="fullwidth-bg py-12">
+<section class="fullwidth-bg py-16">
   <div class="section-content max-w-4xl mx-auto">
     <div class="w-full bg-slate-900 rounded-[3rem] p-12 text-center flex flex-col items-center gap-8 relative overflow-hidden">
       <div class="absolute top-0 right-0 w-64 h-64 bg-primary/10 blur-[100px] rounded-full"></div>
@@ -327,9 +320,8 @@
           href="https://wa.me/8613163756465"
           data-wa-message-key="wa_msg_support"
           data-wa-source="bottom-cta"
-          target="_blank"
+          target="_blank" rel="noopener noreferrer"
           class="bg-white/10 text-white border border-white/20 backdrop-blur-sm px-10 py-5 rounded-2xl font-black text-base hover:bg-white/20 transition-colors"
-          rel="noopener noreferrer"
         >WhatsApp</a>
       </div>
     </div>
@@ -339,15 +331,14 @@
 </main>
 
 <script src="/assets/js/ui/dropdown-styles.js"></script>
-<script defer src="/assets/js/ui/products-dropdown.js?v=20260508"></script>
-<script defer src="/assets/js/ui/applications-dropdown.js?v=20260508"></script>
-<script defer src="/assets/js/ui/support-dropdown.js?v=20260508"></script>
-<script defer src="/assets/js/ui/about-dropdown.js?v=20260508"></script>
-<script defer src="/assets/js/ui/nav-config.js?v=20260508"></script>
-<script defer src="/assets/js/ui/mobile-bottom-bar.js"></script>
-<script defer src="/assets/js/ui/navigator.js?v=20260508"></script>
+    <script src="/assets/js/ui/dropdown-base.js"></script>
+<script defer src="/assets/js/ui/products-dropdown.js?v=20260509"></script>
+<script defer src="/assets/js/ui/applications-dropdown.js?v=20260509"></script>
+<script defer src="/assets/js/ui/support-dropdown.js?v=20260509"></script>
+<script defer src="/assets/js/ui/about-dropdown.js?v=20260509"></script>
+<script defer src="/assets/js/ui/navigator.js?v=20260509"></script>
 <script defer src="/assets/js/ui/search-engine.js"></script>
-<script defer src="/assets/js/ui/footer.js?v=20260508"></script>
+<script defer src="/assets/js/ui/footer.js?v=20260509"></script>
 <script defer src="/assets/js/lang-registry.js"></script>
 <script defer src="/assets/js/translations.js"></script>
 <script defer src="/assets/js/translations-dropdown-template.js"></script>
@@ -368,14 +359,8 @@
 <script defer src="/assets/js/router.js"></script>
 <script defer src="/assets/js/ui/page-effects.js"></script>
 <script defer src="/assets/js/ui/form-interactions.js"></script>
-<script defer src="/assets/js/page-interactions.js"></script>
-<script>
-  document.addEventListener('DOMContentLoaded', function () {
-    if (window.translationManager) window.translationManager.initialize();
-  });
-</script>
-<script src="/assets/js/utils/device-utils.js"></script>
-<script src="/assets/js/spa-router.js?v=20260508"></script>
+<script defer src="/assets/js/page-interactions.js"></script><script src="/assets/js/utils/device-utils.js"></script>
+<script src="/assets/js/spa-router.js?v=20260509"></script>
 
 
 <script defer src="/assets/js/support-wechat-modal.js"></script>

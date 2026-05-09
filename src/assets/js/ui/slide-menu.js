@@ -13,8 +13,17 @@
  *
  * @module SlideMenu
  */
-;(function (global) {
+/* global SlideMenu */
+(function (global) {
   "use strict";
+
+  var _spaRegs = {};
+  function _spaOn(tgt, evt, fn, key) {
+    if (_spaRegs[key]) _spaRegs[key].abort();
+    var ac = new AbortController();
+    _spaRegs[key] = ac;
+    tgt.addEventListener(evt, fn, { signal: ac.signal });
+  }
 
   /* ================================================================
    *  工具函数
@@ -26,11 +35,7 @@
    * @returns {string} 转义后的安全字符串
    */
   function escapeHtml(value) {
-    return String(value)
-      .replace(/&/g, "&amp;")
-      .replace(/</g, "&lt;")
-      .replace(/>/g, "&gt;")
-      .replace(/"/g, "&quot;");
+    return String(value).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
   }
 
   /* ================================================================
@@ -423,108 +428,50 @@
   /** @type {Array|null} 缓存的菜单项，避免重复构建 */
   var cachedMenuItems = null;
 
-  /**
-   * 一级菜单 ID → NAV_CONFIG.dropdowns 键名的映射
-   */
-  var DROPDOWN_KEY_MAP = {
-    products: "products",
-    applications: "applications",
-    support: "support",
-    about: "about",
-    contact: "contact",
-  };
-
-  /**
-   * 一级菜单 ID → Material Symbols 图标名的映射
-   */
   var L1_ICON_MAP = {
     products: "kitchen",
     applications: "apps",
+    cases: "cases",
+    "profit-calculator": "calculate",
     support: "support_agent",
     about: "info",
     contact: "mail",
   };
 
-  /**
-   * 根据一级菜单项 ID 获取对应的 Material Symbol 图标名
-   * @param {string} navId - 导航 ID (products / applications / support / about / contact)
-   * @returns {string} 图标名
-   */
   function getL1Icon(navId) {
     return L1_ICON_MAP[navId] || "menu";
   }
 
   /**
-   * 将 NAV_CONFIG 的下拉子项转换为统一的子菜单数据格式
-   * @param {Object} parentItem - 父级导航项
-   * @param {Array}  rawChildren - 原始子项数组
-   * @returns {Array} 标准化后的子项数组
-   */
-  function normalizeChildren(parentItem, rawChildren) {
-    var children = rawChildren.map(function (child) {
-      return {
-        key: child.key,
-        icon: child.icon,
-        href: child.href || child.path || "/",
-        badge: child.badge,
-        emoji: child.emoji || "",
-      };
-    });
-
-    // 在 applications 分类下，第 6 项之前插入分隔线
-    if (parentItem.id === "applications" && children.length > 5) {
-      children[5]._separator = true;
-    }
-
-    return children;
-  }
-
-  /**
-   * 构建导航菜单项数组
-   * 优先从全局 NAV_CONFIG 读取，若不存在则使用内置默认菜单
+   * 构建导航菜单项数组（使用内置默认菜单）
    * @returns {Array<{key, href, id, icon, children}>} 菜单项列表
    */
   function getMenuItems() {
     if (cachedMenuItems) return cachedMenuItems;
 
-    var items;
-
-    if (typeof NAV_CONFIG !== "undefined" && NAV_CONFIG.mainNav) {
-      items = NAV_CONFIG.mainNav.map(function (navEntry) {
-        var dropdownKey = DROPDOWN_KEY_MAP[navEntry.id];
-        var rawChildren = [];
-
-        if (dropdownKey && NAV_CONFIG.dropdowns && NAV_CONFIG.dropdowns[dropdownKey]) {
-          rawChildren = NAV_CONFIG.dropdowns[dropdownKey];
-        }
-
-        return {
-          key: navEntry.key,
-          label: navEntry.label || navEntry.key,
-          href: navEntry.path,
-          id: navEntry.id,
-          icon: getL1Icon(navEntry.id),
-          children: normalizeChildren(navEntry, rawChildren),
-        };
-      });
-    } else {
-      // 内置默认菜单（NAV_CONFIG 不可用时的回退，与 navigator DEFAULT_NAV_ITEMS 对齐）
-      items = [
-        { key: "nav_products",         label: "产品中心", href: "/products/",         id: "products",     icon: "kitchen",       children: [] },
-        { key: "nav_applications",     label: "行业场景", href: "/applications/",     id: "applications", icon: "apps",          children: [] },
-        { key: "nav_cases",            label: "真实案例", href: "/cases/",            id: "cases",        icon: "cases",        children: [] },
-        { key: "nav_profit_calculator", label: "投资回报", href: "/profit-calculator/", id: "profit-calculator", icon: "calculate",  children: [] },
-        { key: "nav_support",          label: "服务支持", href: "/support/",          id: "support",      icon: "support_agent", children: [] },
-        { key: "nav_about",            label: "关于我们", href: "/about/",            id: "about",        icon: "info",          children: [] },
-        { key: "nav_contact",          label: "联系我们", href: "/contact/",          id: "contact",      icon: "mail",          children: [] },
-      ];
-    }
-
-    console.log(
-      "[mobile-menu] getMenuItems(): NAV_CONFIG=" + (typeof NAV_CONFIG !== "undefined") +
-      " items=" + items.length +
-      " children=[" + items.map(function (item) { return item.id + ":" + item.children.length; }).join(",") + "]"
-    );
+    var items = [
+      { key: "nav_products", label: "产品中心", href: "/products/", id: "products", icon: "kitchen", children: [] },
+      {
+        key: "nav_applications",
+        label: "行业场景",
+        href: "/applications/",
+        id: "applications",
+        icon: "apps",
+        children: [],
+      },
+      { key: "nav_cases", label: "真实案例", href: "/cases/", id: "cases", icon: "cases", children: [] },
+      {
+        key: "nav_profit_calculator",
+        label: "投资回报",
+        href: "/profit-calculator/",
+        id: "profit-calculator",
+        icon: "calculate",
+        children: [],
+      },
+      { key: "nav_support", label: "服务支持", href: "/support/", id: "support", icon: "support_agent", children: [] },
+      { key: "nav_about", label: "关于我们", href: "/about/", id: "about", icon: "info", children: [] },
+      { key: "nav_contact", label: "联系我们", href: "/contact/", id: "contact", icon: "mail", children: [] },
+    ];
 
     cachedMenuItems = items;
     return items;
@@ -572,9 +519,7 @@
    */
   function renderChildItem(child, activeHref) {
     var whatsappClass = child.isWhatsApp ? " is-whatsapp" : "";
-    var badgeHtml = child.badge
-      ? '<span class="mobile-menu-badge" data-i18n="nav_roi_badge">HOT</span>'
-      : "";
+    var badgeHtml = child.badge ? '<span class="mobile-menu-badge" data-i18n="nav_roi_badge">HOT</span>' : "";
     var targetAttr = child.isWhatsApp ? ' target="_blank" rel="noopener noreferrer"' : "";
 
     // 分隔线（applications 分类的第 6 项之后）
@@ -585,19 +530,28 @@
     var isActive = child.href === activeHref ? " is-active" : "";
 
     return (
-      '<a href="' + escapeHtml(child.href) + '"' +
-      ' class="mobile-menu-l2-item' + whatsappClass + isActive + '"' +
+      '<a href="' +
+      escapeHtml(child.href) +
+      '"' +
+      ' class="mobile-menu-l2-item' +
+      whatsappClass +
+      isActive +
+      '"' +
       targetAttr +
-      '>' +
-        '<span class="mobile-menu-l2-icon">' +
-          '<span class="material-symbols-outlined">' + escapeHtml(child.icon) + '</span>' +
-        '</span>' +
-        '<span class="mobile-menu-l2-label" data-i18n="' + escapeHtml(child.key) + '">' +
-          escapeHtml(child.key) +
-        '</span>' +
-        (child.emoji ? '<span class="mobile-menu-l2-emoji">' + escapeHtml(child.emoji) + '</span>' : "") +
-        badgeHtml +
-      '</a>'
+      ">" +
+      '<span class="mobile-menu-l2-icon">' +
+      '<span class="material-symbols-outlined">' +
+      escapeHtml(child.icon) +
+      "</span>" +
+      "</span>" +
+      '<span class="mobile-menu-l2-label" data-i18n="' +
+      escapeHtml(child.key) +
+      '">' +
+      escapeHtml(child.key) +
+      "</span>" +
+      (child.emoji ? '<span class="mobile-menu-l2-emoji">' + escapeHtml(child.emoji) + "</span>" : "") +
+      badgeHtml +
+      "</a>"
     );
   }
 
@@ -613,22 +567,22 @@
       var activeHref = findActiveChildHref(item.children);
 
       var childItemsHtml = item.children
-        .map(function (child) { return renderChildItem(child, activeHref); })
+        .map(function (child) {
+          return renderChildItem(child, activeHref);
+        })
         .join("\n");
 
-      subMenuHtml =
-        '<div class="mobile-menu-l2" data-menu-l2="' + escapeHtml(item.id) + '">' +
-          childItemsHtml;
+      subMenuHtml = '<div class="mobile-menu-l2" data-menu-l2="' + escapeHtml(item.id) + '">' + childItemsHtml;
 
       // products 分类末尾追加「查看全部产品」链接
       if (item.id === "products") {
         subMenuHtml +=
           '<a class="mobile-menu-l2-item mobile-menu-l2-viewall" href="/products/">' +
-            '<span class="mobile-menu-l2-icon">' +
-              '<span class="material-symbols-outlined">grid_view</span>' +
-            '</span>' +
-            '<span class="mobile-menu-l2-label" data-i18n="nav_mega_view_all">查看全部产品</span>' +
-          '</a>';
+          '<span class="mobile-menu-l2-icon">' +
+          '<span class="material-symbols-outlined">grid_view</span>' +
+          "</span>" +
+          '<span class="mobile-menu-l2-label" data-i18n="nav_mega_view_all">查看全部产品</span>' +
+          "</a>";
       }
 
       subMenuHtml += "</div>";
@@ -636,17 +590,23 @@
 
     return (
       '<div class="mobile-menu-l1-wrap">' +
-        '<button class="mobile-menu-l1" data-menu-toggle="' + escapeHtml(item.id) + '" type="button">' +
-          '<span class="mobile-menu-l1-icon">' +
-            '<span class="material-symbols-outlined">' + escapeHtml(item.icon) + '</span>' +
-          '</span>' +
-          '<span class="mobile-menu-l1-label" data-i18n="' + escapeHtml(item.key) + '">' +
-            escapeHtml(item.label || item.key) +
-          '</span>' +
-          '<span class="material-symbols-outlined mobile-menu-l1-arrow">chevron_right</span>' +
-        '</button>' +
-        subMenuHtml +
-      '</div>'
+      '<button class="mobile-menu-l1" data-menu-toggle="' +
+      escapeHtml(item.id) +
+      '" type="button">' +
+      '<span class="mobile-menu-l1-icon">' +
+      '<span class="material-symbols-outlined">' +
+      escapeHtml(item.icon) +
+      "</span>" +
+      "</span>" +
+      '<span class="mobile-menu-l1-label" data-i18n="' +
+      escapeHtml(item.key) +
+      '">' +
+      escapeHtml(item.label || item.key) +
+      "</span>" +
+      '<span class="material-symbols-outlined mobile-menu-l1-arrow">chevron_right</span>' +
+      "</button>" +
+      subMenuHtml +
+      "</div>"
     );
   }
 
@@ -659,29 +619,35 @@
 
     var headerHtml =
       '<div class="mobile-menu-header">' +
-        '<a class="mobile-menu-logo" href="' + basePath + '/home/">' +
-          '<img src="' + basePath + '/assets/images/logo_footer.webp" alt="Yukoli" width="32" height="32" />' +
-        '</a>' +
-        '<button id="mobile-menu-close" type="button" class="mobile-menu-close" aria-label="Close menu">' +
-          '<span class="material-symbols-outlined">close</span>' +
-        '</button>' +
-      '</div>';
+      '<a class="mobile-menu-logo" href="' +
+      basePath +
+      '/home/">' +
+      '<img src="' +
+      basePath +
+      '/assets/images/logo_footer.webp" alt="Yukoli" width="32" height="32" />' +
+      "</a>" +
+      '<button id="mobile-menu-close" type="button" class="mobile-menu-close" aria-label="Close menu">' +
+      '<span class="material-symbols-outlined">close</span>' +
+      "</button>" +
+      "</div>";
 
     var menuItemsHtml = getMenuItems()
-      .map(function (item) { return renderMenuItem(item); })
+      .map(function (item) {
+        return renderMenuItem(item);
+      })
       .join("\n");
 
     var ctaBarHtml =
       '<div class="mobile-menu-cta-bar">' +
-        '<a class="mobile-menu-cta-btn secondary" href="/contact/" data-nav="/contact/">' +
-          '<span class="material-symbols-outlined">mail</span>' +
-          '<span data-i18n="btn_contact_us">Contact Us</span>' +
-        '</a>' +
-        '<a class="mobile-menu-cta-btn primary" href="/quote/" data-nav="/quote/">' +
-          '<span class="material-symbols-outlined">request_quote</span>' +
-          '<span data-i18n="nav_get_quote">Get Quote</span>' +
-        '</a>' +
-      '</div>';
+      '<a class="mobile-menu-cta-btn secondary" href="/contact/" data-nav="/contact/">' +
+      '<span class="material-symbols-outlined">mail</span>' +
+      '<span data-i18n="btn_contact_us">Contact Us</span>' +
+      "</a>" +
+      '<a class="mobile-menu-cta-btn primary" href="/quote/" data-nav="/quote/">' +
+      '<span class="material-symbols-outlined">request_quote</span>' +
+      '<span data-i18n="nav_get_quote">Get Quote</span>' +
+      "</a>" +
+      "</div>";
 
     return headerHtml + menuItemsHtml + ctaBarHtml;
   }
@@ -865,12 +831,19 @@
           var navItems = getMenuItems();
           var targetItem = null;
           for (var idx = 0; idx < navItems.length; idx++) {
-            if (navItems[idx].id === menuId) { targetItem = navItems[idx]; break; }
+            if (navItems[idx].id === menuId) {
+              targetItem = navItems[idx];
+              break;
+            }
           }
           closeMenu();
           if (targetItem && targetItem.href) {
             if (window.SpaRouter) {
-              try { window.SpaRouter.navigate(targetItem.href); } catch(e) { location.href = targetItem.href; }
+              try {
+                window.SpaRouter.navigate(targetItem.href);
+              } catch (e) {
+                location.href = targetItem.href;
+              }
             } else {
               location.href = targetItem.href;
             }
@@ -915,11 +888,11 @@
 
     // 判断是否为平板模式：<navigator data-variant="tablet"> 存在或在 768–1280px 之间
     var tabletNavigator = document.querySelector('navigator[data-variant="tablet"]');
-    var isTablet = (tabletNavigator && tabletNavigator.parentNode) ||
-                   (window.innerWidth >= 768 && window.innerWidth < 1280);
+    var isTablet =
+      (tabletNavigator && tabletNavigator.parentNode) || (window.innerWidth >= 768 && window.innerWidth < 1280);
 
     if (isTablet) {
-      console.log("[mobile-menu] Tablet mode — smart header hide disabled, header stays visible");
+      if (__DEVELOPMENT__) console.log("[mobile-menu] Tablet mode — smart header hide disabled, header stays visible");
       mobileHeaderEl.classList.remove("header-hidden");
       return;
     }
@@ -928,7 +901,7 @@
     window.removeEventListener("scroll", onScroll);
     window.addEventListener("scroll", onScroll, { passive: true });
     mobileHeaderEl.classList.remove("header-hidden");
-    console.log("[mobile-menu] Smart header scroll listener attached (mobile mode)");
+    if (__DEVELOPMENT__) console.log("[mobile-menu] Smart header scroll listener attached (mobile mode)");
   }
 
   /**
@@ -945,12 +918,12 @@
 
       if (currentY > 50 && currentY > lastScrollY) {
         // 向下滚动：隐藏头部
-        console.log("[mobile-menu] onScroll: hiding header, currentY=", currentY, "lastScrollY=", lastScrollY);
+        if (__DEVELOPMENT__) console.log("[mobile-menu] hide header", currentY, lastScrollY);
         mobileHeaderEl.classList.add("header-hidden");
       } else {
         // 向上滚动：显示头部
         if (mobileHeaderEl.classList.contains("header-hidden")) {
-          console.log("[mobile-menu] onScroll: showing header, currentY=", currentY, "lastScrollY=", lastScrollY);
+          if (__DEVELOPMENT__) console.log("[mobile-menu] show header", currentY, lastScrollY);
         }
         mobileHeaderEl.classList.remove("header-hidden");
       }
@@ -995,7 +968,9 @@
     if (toggleBound && toggleClickHandler && lastToggleBtn && lastToggleBtn !== toggleBtn) {
       try {
         lastToggleBtn.removeEventListener("click", toggleClickHandler);
-      } catch (err) { /* 忽略解绑失败 */ }
+      } catch (err) {
+        /* 忽略解绑失败 */
+      }
     }
 
     // 绑定汉堡按钮
@@ -1053,14 +1028,14 @@
     searchOverlayEl.className = "mobile-search-overlay";
     searchOverlayEl.innerHTML =
       '<div class="mobile-search-bar">' +
-        '<span class="material-symbols-outlined mobile-search-icon">search</span>' +
-        '<input type="search" id="mobile-search-input" class="mobile-search-input"' +
-          ' placeholder="Search..." data-i18n-placeholder="search_placeholder"' +
-          ' autocomplete="off" spellcheck="false" />' +
-        '<button id="mobile-search-clear" type="button" class="mobile-search-clear" aria-label="Clear">' +
-          '<span class="material-symbols-outlined">cancel</span>' +
-        '</button>' +
-      '</div>' +
+      '<span class="material-symbols-outlined mobile-search-icon">search</span>' +
+      '<input type="search" id="mobile-search-input" class="mobile-search-input"' +
+      ' placeholder="Search..." data-i18n-placeholder="search_placeholder"' +
+      ' autocomplete="off" spellcheck="false" />' +
+      '<button id="mobile-search-clear" type="button" class="mobile-search-clear" aria-label="Clear">' +
+      '<span class="material-symbols-outlined">cancel</span>' +
+      "</button>" +
+      "</div>" +
       '<div id="mobile-search-results" class="mobile-search-results"></div>';
 
     document.body.appendChild(searchOverlayEl);
@@ -1183,7 +1158,7 @@
       for (var i = 0; i < results.length; i++) {
         var item = results[i];
 
-        var displayName = (item._displayName || (item._displayCategory + " " + item.model))
+        var displayName = (item._displayName || item._displayCategory + " " + item.model)
           .replace(/</g, "&lt;")
           .replace(/>/g, "&gt;");
         var model = (item.model || "").replace(/</g, "&lt;");
@@ -1196,16 +1171,24 @@
 
         html +=
           '<a class="mobile-search-result-item" href="/products/">' +
-            '<div class="mobile-search-result-img">' + imageHtml + '</div>' +
-            '<div class="mobile-search-result-info">' +
-              '<div class="mobile-search-result-name">' + displayName + '</div>' +
-              '<div class="mobile-search-result-meta">' +
-                '<span>' + model + '</span>' +
-                '<span class="mobile-search-result-sep">·</span>' +
-                '<span>' + category + '</span>' +
-              '</div>' +
-            '</div>' +
-          '</a>';
+          '<div class="mobile-search-result-img">' +
+          imageHtml +
+          "</div>" +
+          '<div class="mobile-search-result-info">' +
+          '<div class="mobile-search-result-name">' +
+          displayName +
+          "</div>" +
+          '<div class="mobile-search-result-meta">' +
+          "<span>" +
+          model +
+          "</span>" +
+          '<span class="mobile-search-result-sep">·</span>' +
+          "<span>" +
+          category +
+          "</span>" +
+          "</div>" +
+          "</div>" +
+          "</a>";
       }
 
       container.innerHTML = html;
@@ -1220,15 +1203,15 @@
     } else {
       // 空结果提示
       var trFn = (window.CommonUtils && window.CommonUtils.tr) || window.t;
-      var emptyText = trFn
-        ? trFn("search_no_results", "No matching products found")
-        : "No matching products found";
+      var emptyText = trFn ? trFn("search_no_results", "No matching products found") : "No matching products found";
 
       container.innerHTML =
         '<div class="mobile-search-empty">' +
-          '<span class="material-symbols-outlined">search_off</span>' +
-          '<p>' + escapeHtml(emptyText) + '</p>' +
-        '</div>';
+        '<span class="material-symbols-outlined">search_off</span>' +
+        "<p>" +
+        escapeHtml(emptyText) +
+        "</p>" +
+        "</div>";
     }
   }
 
@@ -1252,15 +1235,20 @@
    * - 重置按钮绑定状态
    * - 重新初始化按钮和智能头部
    */
-  document.addEventListener("spa:load", function () {
-    closeMenu();
-    lastToggleBtn = null;
-    toggleBound = false;
-    searchBound = false;
-    initToggle();
-    initSmartHeader();
-    if (typeof SlideMenu !== 'undefined' && SlideMenu.updateActive) SlideMenu.updateActive();
-  });
+  _spaOn(
+    document,
+    "spa:load",
+    function () {
+      closeMenu();
+      lastToggleBtn = null;
+      toggleBound = false;
+      searchBound = false;
+      initToggle();
+      initSmartHeader();
+      if (typeof SlideMenu !== "undefined" && SlideMenu.updateActive) SlideMenu.updateActive();
+    },
+    "spa:load:cleanup"
+  );
 
   // 初始样式注入（立即执行）
   injectStyles();
@@ -1319,13 +1307,13 @@
         var activeHref = findActiveChildHref(item.children);
         var panel = document.querySelector('[data-menu-l2="' + item.id + '"]');
         if (!panel) return;
-        var items = panel.querySelectorAll('.mobile-menu-l2-item');
+        var items = panel.querySelectorAll(".mobile-menu-l2-item");
         for (var i = 0; i < items.length; i++) {
-          var href = items[i].getAttribute('href') || '';
+          var href = items[i].getAttribute("href") || "";
           if (href.replace(/\/$/, "") === activeHref.replace(/\/$/, "")) {
-            items[i].classList.add('is-active');
+            items[i].classList.add("is-active");
           } else {
-            items[i].classList.remove('is-active');
+            items[i].classList.remove("is-active");
           }
         }
       });

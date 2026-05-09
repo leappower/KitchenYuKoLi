@@ -27,16 +27,24 @@
  *   </div>
  */
 (function () {
-  'use strict';
+  "use strict";
 
-  var ATTR = 'data-hero-video';
+  var _spaRegs = {};
+  function _spaOn(tgt, evt, fn, key) {
+    if (_spaRegs[key]) _spaRegs[key].abort();
+    var ac = new AbortController();
+    _spaRegs[key] = ac;
+    tgt.addEventListener(evt, fn, { signal: ac.signal });
+  }
+
+  var ATTR = "data-hero-video";
   var CROSSFADE_MS = 1500;
-  var PLAY_THRESHOLD = 0.3;   // 30% 可见时播放
-  var PAUSE_THRESHOLD = 0.1;  // 10% 可见时暂停
+  var PLAY_THRESHOLD = 0.3; // 30% 可见时播放
+  var PAUSE_THRESHOLD = 0.1; // 10% 可见时暂停
 
   /* ── 找到所有 hero-video 容器 ── */
   function init() {
-    var containers = document.querySelectorAll('[' + ATTR + ']');
+    var containers = document.querySelectorAll("[" + ATTR + "]");
     if (!containers.length) return;
 
     for (var i = 0; i < containers.length; i++) {
@@ -45,11 +53,11 @@
   }
 
   function setupContainer(container) {
-    var poster = container.querySelector('.hero-video-poster');
-    var video  = container.querySelector('.hero-video-player');
-    var overlay = container.querySelector('.hero-video-overlay');
-    var muteBtn = container.querySelector('.hero-video-mute');
-    var info   = container.querySelector('.hero-video-info');
+    var poster = container.querySelector(".hero-video-poster");
+    var video = container.querySelector(".hero-video-player");
+    var overlay = container.querySelector(".hero-video-overlay");
+    var muteBtn = container.querySelector(".hero-video-mute");
+    var info = container.querySelector(".hero-video-info");
 
     if (!video || !poster) return;
 
@@ -60,16 +68,16 @@
       savedTime: 0,
       observer: null,
       crossfadeTimer: null,
-      failed: false
+      failed: false,
     };
 
     /* ── 封面图加载失败 → 立即尝试播放 ── */
-    poster.addEventListener('error', function () {
+    poster.addEventListener("error", function () {
       attemptPlay(state, video, poster, overlay, info);
     });
 
     /* ── 封面图加载成功 → 等 IntersectionObserver 触发 ── */
-    poster.addEventListener('load', function () {
+    poster.addEventListener("load", function () {
       setupIntersection(state, container, video, poster, overlay, info);
     });
 
@@ -79,7 +87,7 @@
     }
 
     /* ── 视频事件 ── */
-    video.addEventListener('play', function () {
+    video.addEventListener("play", function () {
       state.isPlaying = true;
       if (!state.hasStarted) {
         state.hasStarted = true;
@@ -87,18 +95,18 @@
       }
     });
 
-    video.addEventListener('pause', function () {
+    video.addEventListener("pause", function () {
       state.isPlaying = false;
     });
 
-    video.addEventListener('ended', function () {
+    video.addEventListener("ended", function () {
       state.isPlaying = false;
       state.hasStarted = false;
       state.savedTime = 0;
       crossfadeToPoster(video, poster, overlay);
     });
 
-    video.addEventListener('error', function () {
+    video.addEventListener("error", function () {
       state.failed = true;
       state.hasStarted = false;
       showFallback(container, video, poster, overlay);
@@ -106,33 +114,33 @@
 
     /* ── 静音切换 ── */
     if (muteBtn) {
-      muteBtn.addEventListener('click', function (e) {
+      muteBtn.addEventListener("click", function (e) {
         e.stopPropagation();
         state.isMuted = !state.isMuted;
         video.muted = state.isMuted;
-        muteBtn.textContent = state.isMuted ? '🔇' : '🔊';
-        muteBtn.setAttribute('data-i18n', state.isMuted ? 'hero_video_mute' : 'hero_video_unmute');
+        muteBtn.textContent = state.isMuted ? "🔇" : "🔊";
+        muteBtn.setAttribute("data-i18n", state.isMuted ? "hero_video_mute" : "hero_video_unmute");
       });
     }
 
     /* ── 点击视频 → 切换静音（移动端友好） ── */
-    video.addEventListener('click', function () {
+    video.addEventListener("click", function () {
       state.isMuted = !state.isMuted;
       video.muted = state.isMuted;
       if (muteBtn) {
-        muteBtn.textContent = state.isMuted ? '🔇' : '🔊';
+        muteBtn.textContent = state.isMuted ? "🔇" : "🔊";
       }
     });
 
     /* ── PC: hover 显示原生 controls ── */
     if (muteBtn && overlay) {
-      container.addEventListener('mouseenter', function () {
+      container.addEventListener("mouseenter", function () {
         video.controls = true;
-        if (overlay) overlay.style.opacity = '0';
+        if (overlay) overlay.style.opacity = "0";
       });
-      container.addEventListener('mouseleave', function () {
+      container.addEventListener("mouseleave", function () {
         video.controls = false;
-        if (overlay) overlay.style.opacity = '';
+        if (overlay) overlay.style.opacity = "";
       });
     }
   }
@@ -141,30 +149,33 @@
   function setupIntersection(state, container, video, poster, overlay, info) {
     if (state.observer) return;
 
-    state.observer = new IntersectionObserver(function (entries) {
-      var entry = entries[0];
-      if (!entry.isIntersecting) {
-        pauseVideo(state, video);
-        return;
-      }
-
-      var ratio = entry.intersectionRatio;
-      if (ratio >= PLAY_THRESHOLD && !state.isPlaying && !state.failed) {
-        /* 延迟 1.5s 后自动播放（给封面图展示时间） */
-        if (state.crossfadeTimer) clearTimeout(state.crossfadeTimer);
-        state.crossfadeTimer = setTimeout(function () {
-          attemptPlay(state, video, poster, overlay, info);
-        }, CROSSFADE_MS);
-      } else if (ratio <= PAUSE_THRESHOLD) {
-        pauseVideo(state, video);
-        if (state.crossfadeTimer) {
-          clearTimeout(state.crossfadeTimer);
-          state.crossfadeTimer = null;
+    state.observer = new IntersectionObserver(
+      function (entries) {
+        var entry = entries[0];
+        if (!entry.isIntersecting) {
+          pauseVideo(state, video);
+          return;
         }
+
+        var ratio = entry.intersectionRatio;
+        if (ratio >= PLAY_THRESHOLD && !state.isPlaying && !state.failed) {
+          /* 延迟 1.5s 后自动播放（给封面图展示时间） */
+          if (state.crossfadeTimer) clearTimeout(state.crossfadeTimer);
+          state.crossfadeTimer = setTimeout(function () {
+            attemptPlay(state, video, poster, overlay, info);
+          }, CROSSFADE_MS);
+        } else if (ratio <= PAUSE_THRESHOLD) {
+          pauseVideo(state, video);
+          if (state.crossfadeTimer) {
+            clearTimeout(state.crossfadeTimer);
+            state.crossfadeTimer = null;
+          }
+        }
+      },
+      {
+        threshold: [PAUSE_THRESHOLD, PLAY_THRESHOLD, 0.5, 0.8, 1.0],
       }
-    }, {
-      threshold: [PAUSE_THRESHOLD, PLAY_THRESHOLD, 0.5, 0.8, 1.0]
-    });
+    );
 
     state.observer.observe(container);
   }
@@ -179,10 +190,10 @@
     }
 
     var playPromise = video.play();
-    if (playPromise && typeof playPromise.catch === 'function') {
+    if (playPromise && typeof playPromise.catch === "function") {
       playPromise.catch(function (err) {
         /* Autoplay blocked or other error → 降级 */
-        console.warn('[hero-video] play() rejected:', err.message);
+        console.warn("[hero-video] play() rejected:", err.message);
         state.failed = true;
         showFallback(null, video, poster, overlay);
       });
@@ -199,68 +210,68 @@
 
   /* ── Crossfade: poster → video ── */
   function crossfadeToVideo(video, poster, overlay) {
-    poster.style.transition = 'opacity ' + (CROSSFADE_MS / 1000) + 's ease';
-    poster.style.opacity = '0';
-    poster.style.pointerEvents = 'none';
+    poster.style.transition = "opacity " + CROSSFADE_MS / 1000 + "s ease";
+    poster.style.opacity = "0";
+    poster.style.pointerEvents = "none";
 
-    video.style.transition = 'opacity ' + (CROSSFADE_MS / 1000) + 's ease';
-    video.style.opacity = '1';
+    video.style.transition = "opacity " + CROSSFADE_MS / 1000 + "s ease";
+    video.style.opacity = "1";
 
     if (overlay) {
-      overlay.style.transition = 'opacity ' + (CROSSFADE_MS / 1000) + 's ease';
-      overlay.style.opacity = '1';
+      overlay.style.transition = "opacity " + CROSSFADE_MS / 1000 + "s ease";
+      overlay.style.opacity = "1";
     }
 
     setTimeout(function () {
-      poster.style.display = 'none';
+      poster.style.display = "none";
     }, CROSSFADE_MS);
   }
 
   /* ── Crossfade: video → poster ── */
   function crossfadeToPoster(video, poster, overlay) {
-    poster.style.display = '';
+    poster.style.display = "";
     /* Force reflow */
     void poster.offsetHeight;
 
-    poster.style.transition = 'opacity ' + (CROSSFADE_MS / 1000) + 's ease';
-    poster.style.opacity = '1';
-    poster.style.pointerEvents = '';
+    poster.style.transition = "opacity " + CROSSFADE_MS / 1000 + "s ease";
+    poster.style.opacity = "1";
+    poster.style.pointerEvents = "";
 
-    video.style.transition = 'opacity ' + (CROSSFADE_MS / 1000) + 's ease';
-    video.style.opacity = '0';
+    video.style.transition = "opacity " + CROSSFADE_MS / 1000 + "s ease";
+    video.style.opacity = "0";
 
     if (overlay) {
-      overlay.style.transition = 'opacity ' + (CROSSFADE_MS / 1000) + 's ease';
-      overlay.style.opacity = '0';
+      overlay.style.transition = "opacity " + CROSSFADE_MS / 1000 + "s ease";
+      overlay.style.opacity = "0";
     }
   }
 
   /* ── 降级：显示静态封面图 + 播放按钮 ── */
   function showFallback(container, video, poster, overlay) {
     if (poster) {
-      poster.style.opacity = '1';
-      poster.style.display = '';
-      poster.style.pointerEvents = '';
+      poster.style.opacity = "1";
+      poster.style.display = "";
+      poster.style.pointerEvents = "";
     }
     if (video) {
-      video.style.opacity = '0';
-      video.style.pointerEvents = 'none';
+      video.style.opacity = "0";
+      video.style.pointerEvents = "none";
     }
     if (overlay) {
-      overlay.style.opacity = '0';
-      overlay.style.pointerEvents = 'none';
+      overlay.style.opacity = "0";
+      overlay.style.pointerEvents = "none";
     }
 
     /* 如果容器有 data-fallback-btn，显示播放按钮 */
     if (container) {
-      var btn = container.querySelector('.hero-video-fallback-btn');
+      var btn = container.querySelector(".hero-video-fallback-btn");
       if (btn) {
-        btn.style.display = 'flex';
-        btn.addEventListener('click', function () {
-          btn.style.display = 'none';
+        btn.style.display = "flex";
+        btn.addEventListener("click", function () {
+          btn.style.display = "none";
           video.muted = true;
-          video.style.opacity = '1';
-          video.style.pointerEvents = '';
+          video.style.opacity = "1";
+          video.style.pointerEvents = "";
           video.play().catch(function () {});
         });
       }
@@ -268,14 +279,19 @@
   }
 
   /* ── 初始化时机 ── */
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', init);
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", init);
   } else {
     init();
   }
 
   /* SPA 导航后重新初始化 */
-  document.addEventListener('spa:ready', function () {
-    setTimeout(init, 100);
-  });
+  _spaOn(
+    document,
+    "spa:ready",
+    function () {
+      setTimeout(init, 100);
+    },
+    "spa:ready:init"
+  );
 })();
