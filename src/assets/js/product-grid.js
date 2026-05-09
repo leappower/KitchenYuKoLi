@@ -184,7 +184,9 @@
     var container = bar.querySelector(".compare-bar-inner");
     if (!container) return;
 
-    if (device === "mobile" || device === "tablet") {
+    if (device === "tablet") {
+      container.innerHTML = renderTabletBar(items);
+    } else if (device === "mobile") {
       container.innerHTML = renderMobileBar(items);
     } else {
       container.innerHTML = renderDesktopBar(items);
@@ -223,6 +225,40 @@
       ")</a>" +
       "</div>" +
       "</div>"
+    );
+  }
+
+  function renderTabletBar(items) {
+    var thumbs = items
+      .map(function (p) {
+        return (
+          '<div class="flex items-center gap-1.5 bg-slate-100 dark:bg-slate-700 rounded-lg px-2 py-1.5 flex-shrink-0">' +
+          '<img src="' +
+          esc(p._imageUrl) +
+          '" class="w-7 h-7 rounded object-cover" onerror="this.src=\'/assets/images/products/default.webp\'">' +
+          '<span class="text-xs font-bold text-slate-900 dark:text-white truncate max-w-[80px]">' +
+          esc(p.name || p.model) +
+          '</span>' +
+          '<button class="float-remove flex-shrink-0 text-slate-400 hover:text-red-500" data-model="' +
+          esc(p.model) +
+          '"><span class="material-symbols-outlined text-sm">close</span></button>' +
+          '</div>'
+        );
+      })
+      .join("");
+
+    return (
+      '<div class="flex flex-col gap-2 w-full">' +
+      '<div class="flex items-center gap-2 overflow-x-auto scrollbar-hide py-0.5">' +
+      thumbs +
+      '</div>' +
+      '<div class="flex items-center justify-end gap-2">' +
+      '<button class="float-clear px-3 py-1.5 rounded-lg text-xs font-bold text-slate-500 dark:text-slate-400 hover:text-red-500 hover:bg-red-50 dark:hover:bg-red-900/20 transition-colors">清空</button>' +
+      '<a href="/products/compare/" class="bg-primary text-white px-4 py-1.5 rounded-lg text-xs font-bold hover:opacity-90 transition-opacity">对比(' +
+      items.length +
+      ')</a>' +
+      '</div>' +
+      '</div>'
     );
   }
 

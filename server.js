@@ -23,13 +23,7 @@ if (!process.env.TRANSLATE_API_KEY && fs.existsSync('.env')) {
     });
   } catch(e) {}
 }
-const { feishuProTables } = require('./scripts/generate-products-data-table.js');
-const {
-  runFeishuSyncOnce,
-  startDailyFeishuSyncScheduler,
-  buildFeishuConfigFromEnv,
-  validateFeishuConfig
-} = feishuProTables;
+// Feishu sync removed — product data no longer sourced from Feishu
 
 // ─── API Server Proxy ───────────────────────────────────────────────
 // All API, admin, and upload requests go to KitchenYuKoLiServer.
@@ -359,21 +353,7 @@ const server = app.listen(PORT, (err) => {
     console.log('🔧 Development mode: Error details enabled');
   }
 
-  const feishuConfig = buildFeishuConfigFromEnv();
-  if (validateFeishuConfig(feishuConfig)) {
-    runFeishuSyncOnce()
-      .then((result) => {
-        console.log('[feishu-sync] initial sync finished:', JSON.stringify(result));
-      })
-      .catch((err) => {
-        console.error('[feishu-sync] initial sync failed:', err.message);
-      });
-  } else {
-    console.log('[feishu-sync] initial sync skipped: missing FEISHU env config');
-  }
-
-  startDailyFeishuSyncScheduler();
-  console.log('[feishu-sync] daily scheduler enabled (04:00)');
+  // Feishu daily sync removed
 
   // Start HTTPS server (only if SSL_PORT > 0 — skip when behind reverse proxy)
   if (ENABLE_SSL) {
