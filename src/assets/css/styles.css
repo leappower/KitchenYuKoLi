@@ -259,6 +259,53 @@ main#spa-content > .hero-overlap {
   }
 }
 
+/* ── Section Spacing Collapse ────────────────────────────────────────
+ *
+ * Prevents double-padding between adjacent sections.
+ * Each section keeps its py-* for first/last position, but consecutive
+ * sections collapse their overlapping padding.
+ *
+ * Net gap between consecutive same-bg sections:
+ *   Mobile (<768px):   ~2.5rem (40px)  ← py-12 − collapse
+ *   Tablet (768-1279): ~3rem   (48px)  ← py-16 − collapse
+ *   PC (≥1280px):      ~4rem   (64px)  ← py-20 − collapse
+ */
+
+main > section + section {
+  margin-top: -3.5rem;
+}
+
+@media (min-width: 768px) {
+  main > section + section {
+    margin-top: -5rem;
+  }
+}
+
+/* Don't collapse after hero sections (they have their own spacing logic) */
+main > section.section-passthrough + section,
+main > section.hero-overlap + section {
+  margin-top: 0;
+}
+
+/* Alternating background sections need more visual separation (less collapse) */
+main > section + section[class*="bg-slate-100"],
+main > section + section[class*="bg-slate-900"],
+main > section + section[class*="bg-primary"],
+main > section + section[class*="bg-slate-800/"] {
+  margin-top: -1rem;
+}
+
+@media (min-width: 768px) {
+  main > section + section[class*="bg-slate-100"],
+  main > section + section[class*="bg-slate-900"],
+  main > section + section[class*="bg-primary"],
+  main > section + section[class*="bg-slate-800/"] {
+    margin-top: -1.5rem;
+  }
+}
+
+/* ── End Section Spacing Collapse ───────────────────────────────────── */
+
 /* Left/right inline padding — only when main has NO Tailwind padding class */
 main#spa-content:not([class*="p-"], [class*="px-"], [class*="py-"]) {
   padding-left: 0.75rem; /* 12px */
