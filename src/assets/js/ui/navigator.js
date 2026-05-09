@@ -270,11 +270,12 @@
       activeClass +
       '" href="' +
       safeHref +
-      '" ' +
-      'data-i18n="' +
+      '">' +
+      '<span data-i18n="' +
       escapeHtml(navItem.key) +
       '">' +
       escapeHtml(navItem.label) +
+      "</span>" +
       "</a>"
     );
   }
@@ -1404,9 +1405,10 @@
     }
 
     /* ---------- 1b. 更新非 dropdown 普通链接导航项的高亮 ---------- */
-    var plainLinks = document.querySelectorAll("header nav a[data-i18n]");
+    var plainLinks = document.querySelectorAll("header nav a > span[data-i18n]");
     for (var pi = 0; pi < plainLinks.length; pi++) {
-      var plainEl = plainLinks[pi];
+      var plainSpan = plainLinks[pi];
+      var plainEl = plainSpan.parentElement;
       /* Skip dropdown triggers (already handled above) */
       if (
         plainEl.classList.contains("prod-dropdown-trigger") ||
@@ -1416,7 +1418,7 @@
       ) {
         continue;
       }
-      var plainKey = plainEl.getAttribute("data-i18n") || "";
+      var plainKey = plainSpan.getAttribute("data-i18n") || "";
       var plainMatch = false;
       var matchIds2 = ID_ALIASES[mappedId] || [mappedId];
       for (var pk = 0; pk < navItems.length; pk++) {
