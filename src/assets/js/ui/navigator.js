@@ -187,7 +187,6 @@
     }
 
     return (
-      '<div id="mobile-header-placeholder" style="height:65px;flex-shrink:0"></div>' +
       '<header id="mobile-header" ' +
       'class="fixed top-0 left-0 right-0 z-[var(--z-header)] ' +
       "border-b border-slate-200 dark:border-slate-800 " +
@@ -497,7 +496,6 @@
     }
 
     return (
-      '<div id="pc-header-placeholder" style="height:109px;flex-shrink:0"></div>' +
       '<header class="fixed top-0 left-0 right-0 z-[var(--z-header)] ' +
       "border-b border-slate-200 dark:border-slate-800 " +
       'bg-background-light/90 dark:bg-background-dark/90">' +
@@ -1306,21 +1304,14 @@
       var wrapper = document.createElement("div");
       wrapper.innerHTML = buildHeaderHtml(config);
 
-      var spacerEl = wrapper.firstElementChild;
-      var headerEl = spacerEl ? spacerEl.nextElementSibling : wrapper.firstChild;
+      var headerEl = wrapper.firstElementChild;
 
       var navHeight = config.variant === "pc" ? "109px" : "65px";
       document.documentElement.style.setProperty("--nav-height", navHeight);
 
-      // Insert spacer + header in place of placeholder
-      // Spacer maintains document flow height so #spa-content doesn't overlap the fixed header
-      if (spacerEl && spacerEl !== headerEl) {
-        // Avoid duplicate spacers on re-mount
-        var existingSpacer = document.getElementById(spacerEl.id);
-        if (!existingSpacer) {
-          placeholder.parentNode.insertBefore(spacerEl, placeholder);
-        }
-      }
+      // Replace placeholder with header directly.
+      // Main content spacing is handled by CSS: main#spa-content { padding-top: var(--nav-height) }
+      // No spacer div needed — prevents double-spacing bug on non-home pages.
       placeholder.parentNode.replaceChild(headerEl, placeholder);
     }
 

@@ -128,7 +128,6 @@ html.dark body {
    区块圆角:           rounded-3xl (24px)
 */
 
-
 /* ─── Brand Utility Classes ──────────────────────────────────────── */
 .text-primary {
   color: var(--color-primary);
@@ -376,10 +375,17 @@ main[class*="px-"] > section > .section-content {
   padding-inline: 0;
 }
 
-/* ─── Navigator placeholder: prevent layout shift ─────────────── */
+/* ─── Navigator placeholder: prevent layout shift before JS mount ───── */
 navigator[data-component="navigator"] {
   display: block;
   min-height: 108px;
+}
+
+/* Spacer divs from navigator.js are no longer created (removed to fix double-spacing).
+ * If any stale spacers remain in cached HTML, hide them. */
+#mobile-header-placeholder,
+#pc-header-placeholder {
+  display: none !important;
 }
 
 /* ─── Scroll margin for sections (prevent navigator overlap) ───── */
@@ -430,7 +436,7 @@ details[open] > summary {
   flex-shrink: 0;
   overflow: hidden;
   /* Fallback: hide text content if font fails to load */
-  font-family: 'Material Symbols Outlined', sans-serif;
+  font-family: "Material Symbols Outlined", sans-serif;
 }
 
 /* In flex containers, let align-items handle centering */
@@ -453,7 +459,6 @@ select {
   padding-right: 2.5rem;
   cursor: pointer;
 }
-
 
 /* ─── §3.2 Button Hover — CTA lift & deepen ─────────────────────────────── */
 
@@ -742,7 +747,9 @@ button.bg-primary[class*="hover:"]:hover {
   display: none;
   align-items: center;
   justify-content: center;
-  transition: transform 0.2s, background 0.2s;
+  transition:
+    transform 0.2s,
+    background 0.2s;
 }
 
 .hero-video-fallback-btn:hover {
