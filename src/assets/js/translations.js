@@ -145,33 +145,53 @@
         "[i18n] loadUITranslations timeout for " + t
       );
     }),
-    (r.prototype.loadProductTranslations = function (t) {
-      var e = "product-" + t;
+    (r.prototype.loadProductTranslations = function (lang) {
+      var e = "product-" + lang;
       if (this.translationsCache.has(e)) return Promise.resolve(this.translationsCache.get(e));
       var n = this;
-      return i(
-        fetch("/api/public/translations?lang=" + encodeURIComponent(t), {
-          cache: "no-store",
-        })
-          .then(function (t) {
-            if (!t.ok) throw new Error("HTTP " + t.status);
-            return t.json();
-          })
-          .then(function (a) {
-            var o = a.translations || {};
-            if (0 === Object.keys(o).length && "zh-CN" !== t)
-              return (console.warn("[i18n] loadProductTranslations: empty data for " + t + ", skipping"), {});
-            n.translationsCache.set(e, o);
-            window._productTranslations = o;
-            return o;
-          })
-          .catch(function (i) {
-            console.error("[i18n] loadProductTranslations: FAILED for " + t + ":", i);
-            return {};
-          }),
-        15e3,
-        "[i18n] loadProductTranslations timeout for " + t
-      );
+      // Extract product translations from the already-loaded PRODUCT_DATA_TABLE
+      // (translations are embedded as nameEn, specificationsEn, etc. on each product)
+      return Promise.resolve().then(function () {
+        var suffix =
+          lang.charAt(0).toUpperCase() +
+          lang.slice(1).replace(/-([a-z])/g, function (m, c) {
+            return c.toUpperCase();
+          });
+        var table = window.PRODUCT_DATA_TABLE || [];
+        var map = {};
+        var fields = [
+          "name",
+          "specifications",
+          "usage",
+          "throughput",
+          "material",
+          "sub_category",
+          "tier",
+          "badge",
+          "control_method",
+          "product_dimensions",
+          "color",
+        ];
+        table.forEach(function (cat) {
+          var prods = cat.products || [];
+          prods.forEach(function (p) {
+            var pid = p._productId || p.id;
+            if (!pid) return;
+            var entry = {};
+            fields.forEach(function (f) {
+              var val = p[f + suffix];
+              if (val) entry[f] = val;
+            });
+            if (Object.keys(entry).length > 0) map[pid] = entry;
+          });
+        });
+        if (Object.keys(map).length === 0 && lang !== "zh-CN") {
+          console.warn("[i18n] loadProductTranslations: no embedded translations for " + lang);
+        }
+        n.translationsCache.set(e, map);
+        window._productTranslations = map;
+        return map;
+      });
     }),
     (r.prototype.mergeTranslations = function (t, e) {
       return Object.assign({}, t, e);
@@ -364,58 +384,66 @@
     }),
     (r.prototype.setLanguage = function (e) {
       var n = this;
-      return getO()[e]
-        ? this.currentLanguage === e
-          ? (this.closeLanguageDropdown(), Promise.resolve())
-          : Promise.all([
-              this.loadUITranslations(e),
-              this.loadProductTranslations(e).catch(function (t) {
-                console.warn("[i18n] setLanguage: product translations for " + e + " failed: " + t.message);
-              }),
-            ])
-              .then(function () {
-                // Ensure English is loaded for fallback (skeleton languages need it)
-                var ensureEn =
-                  "en" !== e && !n.translationsCache.has("ui-en")
-                    ? n.loadUITranslations("en").catch(function (err) {
-                        console.warn("[i18n] en preload failed:", err);
+      // Idempotent lock: prevent duplicate calls from firing multiple toasts
+      if (n._switchingTo === e) return Promise.resolve();
+      n._switchingTo = e;
+      return (
+        getO()[e]
+          ? this.currentLanguage === e
+            ? ((n._switchingTo = null), this.closeLanguageDropdown(), Promise.resolve())
+            : Promise.all([
+                this.loadUITranslations(e),
+                this.loadProductTranslations(e).catch(function (t) {
+                  console.warn("[i18n] setLanguage: product translations for " + e + " failed: " + t.message);
+                }),
+              ])
+                .then(function () {
+                  // Ensure English is loaded for fallback (skeleton languages need it)
+                  var ensureEn =
+                    "en" !== e && !n.translationsCache.has("ui-en")
+                      ? n.loadUITranslations("en").catch(function (err) {
+                          console.warn("[i18n] en preload failed:", err);
+                        })
+                      : Promise.resolve();
+                  return ensureEn.then(function () {
+                    var a = n.currentLanguage;
+                    return (
+                      (n.currentLanguage = e),
+                      localStorage.setItem("userLanguage", e),
+                      n.applyTranslations().then(function () {
+                        if (
+                          ((document.documentElement.lang = e),
+                          t.dispatchEvent(
+                            new CustomEvent("languageChanged", {
+                              detail: {
+                                language: e,
+                                previousLanguage: a,
+                              },
+                            })
+                          ),
+                          n.closeLanguageDropdown(),
+                          n.resetLanguageSearch(),
+                          t.showNotification)
+                        ) {
+                          var r = n.uiText("notify_language_changed", "Language changed to");
+                          t.showNotification(r + " " + (getO()[e] || e), "success");
+                        }
+                        n.emit("languageChanged", {
+                          language: e,
+                          previousLanguage: a,
+                        });
                       })
-                    : Promise.resolve();
-                return ensureEn.then(function () {
-                  var a = n.currentLanguage;
-                  return (
-                    (n.currentLanguage = e),
-                    localStorage.setItem("userLanguage", e),
-                    n.applyTranslations().then(function () {
-                      if (
-                        ((document.documentElement.lang = e),
-                        t.dispatchEvent(
-                          new CustomEvent("languageChanged", {
-                            detail: {
-                              language: e,
-                              previousLanguage: a,
-                            },
-                          })
-                        ),
-                        n.closeLanguageDropdown(),
-                        n.resetLanguageSearch(),
-                        t.showNotification)
-                      ) {
-                        var r = n.uiText("notify_language_changed", "Language changed to");
-                        t.showNotification(r + " " + (getO()[e] || e), "success");
-                      }
-                      n.emit("languageChanged", {
-                        language: e,
-                        previousLanguage: a,
-                      });
-                    })
-                  );
-                });
-              })
-              .catch(function (t) {
-                if ((console.error("[i18n] setLanguage: FAILED for", e, t), "en" !== e)) return n.setLanguage("en");
-              })
-        : Promise.reject(new Error("Unsupported language: " + e));
+                    );
+                  });
+                })
+                .catch(function (t) {
+                  n._switchingTo = null;
+                  if ((console.error("[i18n] setLanguage: FAILED for", e, t), "en" !== e)) return n.setLanguage("en");
+                })
+          : ((n._switchingTo = null), Promise.reject(new Error("Unsupported language: " + e)))
+      ).finally(function () {
+        n._switchingTo = null;
+      });
     }),
     (r.prototype.toggleLanguageDropdown = function (t) {
       t && t.stopPropagation();
@@ -577,14 +605,9 @@
               t.filterLanguages(e.target.value);
             });
         }
-        // Bind lang-selector (custom-select) change event
-        var r = document.getElementById("lang-selector");
-        r
-          ? r.addEventListener("change", function (e) {
-              var code = e.target.value;
-              if (code) t.setLanguage(code);
-            })
-          : console.warn("[i18n] lang-selector not found!");
+        // lang-selector change event is handled by navigator.js _onLangChange().
+        // Removed duplicate binding here — it caused double setLanguage() calls
+        // and consequently double toasts on every language switch.
       }
     }),
     (r.prototype.resetEventListeners = function () {
@@ -694,9 +717,11 @@
     }));
   var s = new r();
   (function autoInit() {
-    function tryInit() { if (!s.isInitialized) s.initialize(); }
-    if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', tryInit);
+    function tryInit() {
+      if (!s.isInitialized) s.initialize();
+    }
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", tryInit);
     } else {
       tryInit();
     }
