@@ -59,7 +59,7 @@
 
     <main id="spa-content">
       <!-- Hero Section -->
-      <section class="relative py-8 overflow-hidden bg-gradient-to-br from-primary/5 via-transparent to-orange-100/30 dark:from-primary/10 dark:to-orange-900/20 fullwidth-bg">
+      <section class="hero-overlap relative py-8 overflow-hidden bg-gradient-to-br from-primary/5 via-transparent to-orange-100/30 dark:from-primary/10 dark:to-orange-900/20 fullwidth-bg">
         <div class="section-content">
           <div class="max-w-lg mx-auto text-center">
           <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-primary/10 text-primary text-xs font-bold uppercase tracking-wider w-fit mx-auto mb-3">
@@ -125,6 +125,11 @@
     <script defer src="/assets/js/router.js"></script>
 <script defer src="/assets/js/spa-router.js?v=20260509"></script>
     <script src="/assets/js/translations.js?v=20260509"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        if (window.translationManager) window.translationManager.initialize();
+      });
+    </script>
     <script src="/assets/js/ui/slide-menu.js"></script>
     <script src="/assets/js/ui/dropdown-styles.js"></script>
     <script src="/assets/js/ui/products-dropdown.js"></script>

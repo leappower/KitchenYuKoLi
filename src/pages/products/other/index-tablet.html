@@ -113,7 +113,7 @@
     <div class="w-full pt-2">
         <!-- Hero Section -->
         <section
-          class="fullwidth-bg section-passthrough relative w-full py-10 bg-gradient-to-br from-slate-50 dark:from-slate-900 to-white dark:to-black overflow-hidden"
+          class="hero-overlap fullwidth-bg section-passthrough relative w-full py-10 bg-gradient-to-br from-slate-50 dark:from-slate-900 to-white dark:to-black overflow-hidden"
         >
           <div class="section-content"><div class="absolute inset-0 opacity-25">
             <div class="absolute top-16 right-16 w-72 h-72 bg-primary/10 rounded-full blur-3xl"></div>
@@ -246,6 +246,11 @@
     <script defer src="/assets/js/ui/footer.js?v=20260509"></script>
     <script defer src="/assets/js/lang-registry.js?v=20260509"></script>
     <script defer src="/assets/js/translations.js?v=20260509"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        if (window.translationManager) window.translationManager.initialize();
+      });
+    </script>
     <script defer src="/assets/js/translations-dropdown-template.js?v=20260509"></script>
     <script defer src="/assets/js/contacts.js"></script>
     <script defer src="/assets/js/router.js"></script>

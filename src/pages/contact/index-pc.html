@@ -108,7 +108,7 @@
 
     <main id="spa-content">
       <!-- Hero Section -->
-      <section class="fullwidth-bg section-passthrough flex flex-col lg:flex-row items-center py-10 gap-12">
+      <section class="hero-overlap fullwidth-bg section-passthrough flex flex-col lg:flex-row items-center py-10 gap-12">
         <div class="section-content">
           <div class="w-full lg:w-1/2 flex flex-col gap-6">
             <div
@@ -311,6 +311,11 @@
     <script defer src="/assets/js/ui/footer.js?v=20260509"></script>
     <script defer src="/assets/js/lang-registry.js?v=20260509"></script>
     <script defer src="/assets/js/translations.js?v=20260509"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        if (window.translationManager) window.translationManager.initialize();
+      });
+    </script>
     <script defer src="/assets/js/ui/helpers.js"></script>
     <script defer src="/assets/js/ui/page-effects.js"></script>
     <script defer src="/assets/js/ui/form-interactions.js"></script>
