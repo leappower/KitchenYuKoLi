@@ -1,3 +1,4 @@
+/* global NAV_CONFIG */
 /**
  * products-dropdown.js — Responsive Products Dropdown
  * Desktop / Tablet: floating card style
@@ -7,13 +8,8 @@
 (function (global) {
   "use strict";
 
-  var _spaRegs = {};
-  function _spaOn(tgt, evt, fn, key) {
-    if (_spaRegs[key]) _spaRegs[key].abort();
-    var ac = new AbortController();
-    _spaRegs[key] = ac;
-    tgt.addEventListener(evt, fn, { signal: ac.signal });
-  }
+  var esc = global.DropdownBase.esc;
+  var isTouch = global.DropdownBase.isTouch;
 
   /* ───────────────────────── DATA ───────────────────────── */
 
@@ -26,24 +22,11 @@
     { key: "nav_products_other", icon: "more_horiz", emoji: "", href: "/products/other/" },
   ];
 
-  /* ───────────────────────── HELPERS ───────────────────────── */
-
-  function esc(str) {
-    return String(str).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
-  }
-
-  function isTouch() {
-    return "ontouchstart" in window || navigator.maxTouchPoints > 0;
-  }
-
   /* ───────────────────────── CSS ───────────────────────── */
 
   function injectStyles() {
-    // Shared base styles
     if (window.DropdownBaseStyles) window.DropdownBaseStyles.inject();
-    // Unique overrides: viewall-item, emoji sizes
 
-    // Remove all old version style elements
     [
       "prod-ios-dropdown-styles",
       "prod-dropdown-styles-2026",
@@ -60,15 +43,10 @@
     style.id = "prod-dropdown-styles-v4";
     style.setAttribute("data-ver", "2026-03-22-v4");
     style.textContent = [
-      /* Card size override */
       ".prod-dropdown-card { min-width: 320px; max-width: 420px; }",
-
-      /* Emoji Badge */
       ".prod-dropdown-emoji {",
       "  margin-left: auto; font-size: 13px; line-height: 1; opacity: .85; flex-shrink: 0;",
       "}",
-
-      /* View All link */
       ".prod-viewall-item {",
       "  display: flex; align-items: center; gap: 8px;",
       "  padding: 9px 12px; font-size: 13px; font-weight: 600; color: #1d1d1f;",
@@ -78,8 +56,6 @@
       ".prod-viewall-item .material-symbols-outlined { font-size: 16px; }",
       "html.dark .prod-viewall-item { color: #f5f5f7; }",
       "html.dark .prod-viewall-item:hover { background: rgba(236,91,19,.10); color: #f97316; }",
-
-      /* Popup emoji */
       ".prod-popup-emoji {",
       "  margin-left: auto; font-size: 15px; opacity: .85; flex-shrink: 0;",
       "}",
@@ -87,10 +63,59 @@
     document.head.appendChild(style);
   }
 
-  /* ───────────────────────── BUILDERS ───────────────────────── */
+  /* ───────────────────────── RENDER ───────────────────────── */
 
-  function buildItem(sub, href) {
-    var itemHref = sub.href || href;
+  function renderDropdown(cfg) {
+    var parentHref = "/products/";
+
+    var viewAll =
+      '<a href="' +
+      esc(parentHref) +
+      '" class="prod-dropdown-item prod-viewall-item">' +
+      '<span class="prod-dropdown-icon">' +
+      '<span class="material-symbols-outlined">grid_view</span>' +
+      "</span>" +
+      '<span class="prod-dropdown-label" data-i18n="nav_mega_view_all">View All Products</span>' +
+      '<span class="material-symbols-outlined prod-dropdown-chevron">chevron_right</span>' +
+      "</a>";
+
+    var items = SUBSERIES.map(function (s, idx) {
+      var html = _buildItem(s, parentHref);
+      if (idx < SUBSERIES.length - 1) html += '<div class="prod-dropdown-separator"></div>';
+      return html;
+    }).join("\n");
+
+    return (
+      '<div class="prod-dropdown-wrap' +
+      (isTouch() ? " touch-device" : "") +
+      '">' +
+      '<a class="' +
+      esc(cfg.activeClass || "") +
+      ' prod-dropdown-trigger"' +
+      ' href="' +
+      esc(cfg.href || "#") +
+      '"' +
+      ' data-prod-trigger-label="' +
+      esc(cfg.labelKey || cfg.label) +
+      '">' +
+      '<span data-i18n="' +
+      esc(cfg.labelKey || cfg.label) +
+      '">' +
+      esc(cfg.label || cfg.labelKey) +
+      "</span>" +
+      '<span class="material-symbols-outlined prod-dropdown-arrow">expand_more</span>' +
+      "</a>" +
+      '<div class="prod-dropdown-panel"><div class="prod-dropdown-card">' +
+      items +
+      '<div class="prod-dropdown-separator" style="margin: 4px 0;"></div>' +
+      viewAll +
+      "</div></div>" +
+      "</div>"
+    );
+  }
+
+  function _buildItem(sub, parentHref) {
+    var itemHref = sub.href || parentHref;
     var chevron = '<span class="material-symbols-outlined prod-dropdown-chevron">chevron_right</span>';
     var emojiHtml = sub.emoji ? '<span class="prod-dropdown-emoji">' + sub.emoji + "</span>" : "";
     return (
@@ -113,115 +138,9 @@
     );
   }
 
-  function buildSeparator() {
-    return '<div class="prod-dropdown-separator"></div>';
-  }
+  /* ───────────────────────── POPUP CONTENT ───────────────────────── */
 
-  /* ── Unified dropdown: floating card for both PC and Tablet ── */
-  function renderDropdown(cfg) {
-    var parentHref = "/products/"; // default landing for this dropdown group
-
-    // "View All Products" link at TOP (first sub-item)
-    var viewAll =
-      '<a href="' +
-      esc(parentHref) +
-      '" class="prod-dropdown-item prod-viewall-item">' +
-      '<span class="prod-dropdown-icon">' +
-      '<span class="material-symbols-outlined">grid_view</span>' +
-      "</span>" +
-      '<span class="prod-dropdown-label" data-i18n="nav_mega_view_all">View All Products</span>' +
-      '<span class="material-symbols-outlined prod-dropdown-chevron">chevron_right</span>' +
-      "</a>";
-
-    var items = SUBSERIES.map(function (s, idx) {
-      var html = buildItem(s, parentHref);
-      if (idx < SUBSERIES.length - 1) {
-        html += buildSeparator();
-      }
-      return html;
-    }).join("\n");
-
-    var html =
-      '<div class="prod-dropdown-wrap' +
-      (isTouch() ? " touch-device" : "") +
-      '">' +
-      "<a" +
-      ' class="' +
-      esc(cfg.activeClass || "") +
-      ' prod-dropdown-trigger"' +
-      ' href="' +
-      esc(cfg.href || "#") +
-      '"' +
-      ' data-prod-trigger-label="' +
-      esc(cfg.labelKey || cfg.label) +
-      '">' +
-      '<span data-i18n="' +
-      esc(cfg.labelKey || cfg.label) +
-      '">' +
-      esc(cfg.label || cfg.labelKey) +
-      "</span>" +
-      '<span class="material-symbols-outlined prod-dropdown-arrow">expand_more</span>' +
-      "</a>" +
-      '<div class="prod-dropdown-panel">' +
-      '<div class="prod-dropdown-card">' +
-      items +
-      '<div class="prod-dropdown-separator" style="margin: 4px 0;"></div>' +
-      viewAll +
-      "</div>" +
-      "</div>" +
-      "</div>";
-
-    return html;
-  }
-
-  /* ───────────────────────── INTERACTION ───────────────────────── */
-
-  var _docClickBound = false;
-  var _spaBound = false;
-
-  function bindTriggers() {
-    document.querySelectorAll(".prod-dropdown-trigger").forEach(function (t) {
-      if (t._prodDropdownBound) return;
-      t._prodDropdownBound = true;
-      t.addEventListener("click", function (e) {
-        if (window.innerWidth <= 720) return;
-        e.preventDefault();
-        e.stopPropagation();
-        t.closest(".prod-dropdown-wrap").classList.toggle("is-open");
-      });
-    });
-  }
-
-  function initDropdownClick() {
-    /* Document-level click-to-close: bind once */
-    if (!_docClickBound) {
-      _docClickBound = true;
-      document.addEventListener("click", function () {
-        document.querySelectorAll(".prod-dropdown-wrap.is-open").forEach(function (d) {
-          d.classList.remove("is-open");
-        });
-      });
-    }
-    /* Always rebind new trigger elements (safe — per-element flag prevents dupes) */
-    bindTriggers();
-  }
-
-  /* ───────────────────────── MOBILE POPUP ───────────────────────── */
-
-  function openPopup(href) {
-    closePopup();
-
-    var parentHref = "/products/"; // default landing page
-
-    var overlay = document.createElement("div");
-    overlay.className = "prod-popup-overlay";
-
-    var panel = document.createElement("div");
-    panel.className = "prod-popup-panel";
-
-    var handle = '<div class="prod-popup-handle"></div>';
-
-    // "View All Products" as first item in popup
+  function buildPopupContent(items, parentHref) {
     var viewAllHtml =
       '<a href="' +
       esc(parentHref) +
@@ -233,108 +152,45 @@
       '<span class="material-symbols-outlined prod-popup-chevron">chevron_right</span>' +
       "</a>";
 
-    var items = SUBSERIES.map(function (s) {
-      var itemHref = s.href || parentHref;
-      var chevron = '<span class="material-symbols-outlined prod-popup-chevron">chevron_right</span>';
-      var emojiHtml = s.emoji ? '<span class="prod-popup-emoji">' + s.emoji + "</span>" : "";
-      return (
-        '<a href="' +
-        esc(itemHref) +
-        '" class="prod-popup-item">' +
-        '<span class="prod-dropdown-icon">' +
-        '<span class="material-symbols-outlined">' +
-        esc(s.icon) +
-        "</span>" +
-        "</span>" +
-        '<span class="prod-popup-label" data-i18n="' +
-        esc(s.key) +
-        '">' +
-        esc(s.key) +
-        "</span>" +
-        emojiHtml +
-        chevron +
-        "</a>"
-      );
-    }).join("\n");
+    var list = items
+      .map(function (s) {
+        var itemHref = s.href || parentHref;
+        var chevron = '<span class="material-symbols-outlined prod-popup-chevron">chevron_right</span>';
+        var emojiHtml = s.emoji ? '<span class="prod-popup-emoji">' + s.emoji + "</span>" : "";
+        return (
+          '<a href="' +
+          esc(itemHref) +
+          '" class="prod-popup-item">' +
+          '<span class="prod-dropdown-icon">' +
+          '<span class="material-symbols-outlined">' +
+          esc(s.icon) +
+          "</span>" +
+          "</span>" +
+          '<span class="prod-popup-label" data-i18n="' +
+          esc(s.key) +
+          '">' +
+          esc(s.key) +
+          "</span>" +
+          emojiHtml +
+          chevron +
+          "</a>"
+        );
+      })
+      .join("\n");
 
-    panel.innerHTML = handle + items + viewAllHtml;
-
-    overlay.onclick = closePopup;
-    document.body.appendChild(overlay);
-    document.body.appendChild(panel);
-
-    // Translate popup items immediately after DOM insertion
-    if (window.translationManager) {
-      panel.querySelectorAll("[data-i18n]").forEach(function (el) {
-        var key = el.getAttribute("data-i18n");
-        var translated = window.translationManager.translate(key);
-        if (translated && translated !== key) {
-          el.textContent = translated;
-        }
-      });
-    }
-
-    var popupItems = panel.querySelectorAll(".prod-popup-item");
-    for (var k = 0; k < popupItems.length; k++) {
-      popupItems[k].addEventListener("click", function (e) {
-        closePopup();
-        // Navigate 由全局 click handler (spa-router.js) 统一处理
-      });
-    }
-
-    requestAnimationFrame(function () {
-      panel.classList.add("is-open");
-      navigator.vibrate && navigator.vibrate(12);
-    });
+    return list + viewAllHtml;
   }
-
-  function closePopup() {
-    document.querySelectorAll(".prod-popup-overlay,.prod-popup-panel").forEach(function (el) {
-      el.parentNode && el.parentNode.removeChild(el);
-    });
-  }
-
-  /**
-   * Bind click handlers to all elements with data-prod-popup attribute.
-   * Used by footer.js bottom nav (mobile/tablet) to open product category popup.
-   */
-  function bindAllPopupTriggers() {
-    var triggers = document.querySelectorAll("[data-prod-popup]");
-    for (var i = 0; i < triggers.length; i++) {
-      var el = triggers[i];
-      if (el._prodPopupBound) continue;
-      el._prodPopupBound = true;
-
-      el.addEventListener("click", function (e) {
-        e.preventDefault();
-        e.stopPropagation();
-        var href = el.getAttribute("data-prod-popup-href") || el.getAttribute("href") || "/products/";
-        openPopup(href);
-      });
-    }
-  }
-
-  /* ───────────────────────── SPA CLEANUP ───────────────────────── */
-
-  _spaOn(
-    document,
-    "spa:load",
-    function () {
-      closePopup();
-    },
-    "spa:load:closePopup"
-  );
 
   /* ───────────────────────── PUBLIC API ───────────────────────── */
 
-  window.ProductsDropdown = {
-    SUBSERIES: SUBSERIES,
-    renderPC: renderDropdown,
-    renderTablet: renderDropdown,
-    initDropdownClick: initDropdownClick,
-    openPopup: openPopup,
-    closePopup: closePopup,
-    bindAllPopupTriggers: bindAllPopupTriggers,
-    injectAllStyles: injectStyles,
-  };
+  global.ProductsDropdown = global.DropdownBase.create({
+    prefix: "prod",
+    getItems: function () {
+      return SUBSERIES;
+    },
+    injectStyles: injectStyles,
+    renderDropdown: renderDropdown,
+    buildPopupContent: buildPopupContent,
+    defaultHref: "/products/",
+  });
 })(window);

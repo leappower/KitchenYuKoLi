@@ -11,6 +11,7 @@ export default defineConfig({
 
   use: {
     baseURL: 'http://localhost:3000',
+    ignoreHTTPSErrors: true,
     trace: 'on-first-retry',
     screenshot: 'only-on-failure',
   },
@@ -18,7 +19,8 @@ export default defineConfig({
   projects: [
     { name: 'chromium', use: { ...devices['Desktop Chrome'] } },
     { name: 'Mobile Chrome', use: { ...devices['Pixel 5'] } },
-    { name: 'iPad', use: { ...devices['iPad Pro 11'] } },
+    // iPad: uncomment after `npx playwright install webkit`
+    // { name: 'iPad', use: { ...devices['iPad Pro 11'] } },
   ],
 
   webServer: {
