@@ -178,33 +178,31 @@
 
   /* ───────────────────────── INTERACTION ───────────────────────── */
 
-  var _dropdownClickBound = false;
+  var _docClickBound = false;
 
-  function initDropdownClick() {
-    if (_dropdownClickBound) return;
-    _dropdownClickBound = true;
-
-    document.addEventListener("click", function () {
-      document.querySelectorAll(".app-dropdown-wrap.is-open").forEach(function (d) {
-        d.classList.remove("is-open");
+  function bindTriggers() {
+    document.querySelectorAll(".app-dropdown-trigger").forEach(function (t) {
+      if (t._appDropdownBound) return;
+      t._appDropdownBound = true;
+      t.addEventListener("click", function (e) {
+        if (window.innerWidth <= 720) return;
+        e.preventDefault();
+        e.stopPropagation();
+        t.closest(".app-dropdown-wrap").classList.toggle("is-open");
       });
     });
+  }
 
-    function bindTriggers() {
-      document.querySelectorAll(".app-dropdown-trigger").forEach(function (t) {
-        if (t._appDropdownBound) return;
-        t._appDropdownBound = true;
-        t.addEventListener("click", function (e) {
-          if (window.innerWidth <= 720) return;
-          e.preventDefault();
-          e.stopPropagation();
-          t.closest(".app-dropdown-wrap").classList.toggle("is-open");
+  function initDropdownClick() {
+    if (!_docClickBound) {
+      _docClickBound = true;
+      document.addEventListener("click", function () {
+        document.querySelectorAll(".app-dropdown-wrap.is-open").forEach(function (d) {
+          d.classList.remove("is-open");
         });
       });
     }
-
     bindTriggers();
-    _spaOn(document, "spa:load", bindTriggers, "spa:load:bindTriggers");
   }
 
   /* ───────────────────────── MOBILE POPUP ───────────────────────── */

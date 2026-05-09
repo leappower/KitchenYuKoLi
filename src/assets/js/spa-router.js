@@ -693,6 +693,7 @@
       document.addEventListener("click", function (event) {
         var link = event.target.closest("a");
         if (!link) return;
+        if (event.defaultPrevented) return;
 
         var href = link.getAttribute("href");
         if (!href) return;

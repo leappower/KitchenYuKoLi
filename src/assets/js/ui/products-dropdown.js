@@ -176,35 +176,34 @@
 
   /* ───────────────────────── INTERACTION ───────────────────────── */
 
-  var _dropdownClickBound = false;
+  var _docClickBound = false;
+  var _spaBound = false;
 
-  function initDropdownClick() {
-    if (_dropdownClickBound) return;
-    _dropdownClickBound = true;
-
-    document.addEventListener("click", function () {
-      document.querySelectorAll(".prod-dropdown-wrap.is-open").forEach(function (d) {
-        d.classList.remove("is-open");
+  function bindTriggers() {
+    document.querySelectorAll(".prod-dropdown-trigger").forEach(function (t) {
+      if (t._prodDropdownBound) return;
+      t._prodDropdownBound = true;
+      t.addEventListener("click", function (e) {
+        if (window.innerWidth <= 720) return;
+        e.preventDefault();
+        e.stopPropagation();
+        t.closest(".prod-dropdown-wrap").classList.toggle("is-open");
       });
     });
+  }
 
-    function bindTriggers() {
-      document.querySelectorAll(".prod-dropdown-trigger").forEach(function (t) {
-        if (t._prodDropdownBound) return;
-        t._prodDropdownBound = true;
-        t.addEventListener("click", function (e) {
-          if (window.innerWidth <= 720) return;
-          e.preventDefault();
-          e.stopPropagation();
-          t.closest(".prod-dropdown-wrap").classList.toggle("is-open");
+  function initDropdownClick() {
+    /* Document-level click-to-close: bind once */
+    if (!_docClickBound) {
+      _docClickBound = true;
+      document.addEventListener("click", function () {
+        document.querySelectorAll(".prod-dropdown-wrap.is-open").forEach(function (d) {
+          d.classList.remove("is-open");
         });
       });
     }
-
+    /* Always rebind new trigger elements (safe — per-element flag prevents dupes) */
     bindTriggers();
-
-    /* After SPA navigation or remount, new trigger elements may appear */
-    _spaOn(document, "spa:load", bindTriggers, "spa:load:bindTriggers");
   }
 
   /* ───────────────────────── MOBILE POPUP ───────────────────────── */

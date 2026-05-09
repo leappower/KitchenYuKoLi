@@ -1242,17 +1242,36 @@
     initDesktopSearchInteraction();
     initMobileSearchInteraction();
 
-    /* Dropdown hover mutex */
-    for (var i = 0; i < DROPDOWN_WRAP_SELECTORS.length; i++) {
-      var wraps = document.querySelectorAll(DROPDOWN_WRAP_SELECTORS[i]);
-      for (var j = 0; j < wraps.length; j++) {
-        wraps[j].addEventListener("mouseenter", function () {
-          if (!this.classList.contains("touch-device")) {
-            closeOtherDropdowns(this);
-          }
-        });
-      }
-    }
+    /* Intercept dropdown trigger clicks BEFORE spa-router (capture phase).
+     * Toggle dropdown and stop propagation so spa-router ignores these links. */
+    document.addEventListener(
+      "click",
+      function (e) {
+        var trigger = e.target.closest(".prod-dropdown-trigger, .app-dropdown-trigger, .sup-dropdown-trigger, .abt-dropdown-trigger, .cnt-dropdown-trigger");
+        if (!trigger) return;
+        if (window.innerWidth <= 720) return;
+        e.stopImmediatePropagation();
+        e.preventDefault();
+        var wrap = trigger.closest(".prod-dropdown-wrap, .app-dropdown-wrap, .sup-dropdown-wrap, .abt-dropdown-wrap, .cnt-dropdown-wrap");
+        if (wrap) {
+          closeOtherDropdowns(wrap); // mutex: close others before toggling this one
+          wrap.classList.toggle("is-open");
+        }
+      },
+      true
+    );
+
+    /* Dropdown hover mutex via event delegation (works even after mountNavigator rebuilds DOM) */
+    document.addEventListener(
+      "mouseover",
+      function (e) {
+        var wrap = e.target.closest(DROPDOWN_WRAP_SELECTORS.join(", "));
+        if (wrap && !wrap.classList.contains("touch-device")) {
+          closeOtherDropdowns(wrap);
+        }
+      },
+      true
+    );
 
     /* Global click to close all dropdowns */
     document.addEventListener(
@@ -1283,7 +1302,8 @@
    * Can be called multiple times safely (idempotent by nature).
    */
   function mountNavigator() {
-    /* 遍历占位符并替换 */
+    /* Close all open dropdowns before remounting */
+    closeOtherDropdowns(null);
     var placeholders = document.querySelectorAll('[data-component="navigator"]');
 
     for (var i = 0; i < placeholders.length; i++) {
@@ -1625,11 +1645,14 @@
    * SPA 路由导航事件——重新初始化导航和底部栏
    */
   _spaOn(document, "spa:load", function () {
-    /* 关闭语言面板 */
-    _closeLangPanel();
+    /* 关闭所有打开的 dropdown（SPA 导航前未关闭的） */
+    closeOtherDropdowns(null);
 
-    /* 如果 header 丢失则重新挂载 */
-    if (!document.querySelector("header")) mountNavigator();
+    /* 重新绑定 dropdown click handlers（mountNavigator 可能未调用） */
+    if (window.ProductsDropdown) window.ProductsDropdown.initDropdownClick();
+    if (window.ApplicationsDropdown) window.ApplicationsDropdown.initDropdownClick();
+    if (window.SupportDropdown) window.SupportDropdown.initDropdownClick();
+    if (window.AboutDropdown) window.AboutDropdown.initDropdownClick();
 
     /* 重新初始化 custom-select（navigator 可能创建了新的 lang-selector） */
     if (typeof CustomSelect !== "undefined" && CustomSelect.initAll) {
