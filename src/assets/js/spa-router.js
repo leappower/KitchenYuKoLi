@@ -818,6 +818,11 @@
         scripts.push({ src: "/assets/js/home-core-products.js", id: "spa-home-core-products" });
       }
 
+      // 产品列表页需要 product-grid.js
+      if (path.match(/\/products\/$/) || path.match(/\/products\/index/)) {
+        scripts.push({ src: "/assets/js/product-grid.js", id: "spa-product-grid" });
+      }
+
       // Compare 页面需要 compare.js
       if (path.indexOf("/products/compare/") !== -1) {
         scripts.push({ src: "/assets/js/compare.js", id: "spa-compare" });
