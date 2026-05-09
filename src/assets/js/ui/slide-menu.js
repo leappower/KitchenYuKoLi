@@ -13,6 +13,7 @@
  *
  * @module SlideMenu
  */
+/* global SlideMenu */
 (function (global) {
   "use strict";
 
@@ -427,137 +428,50 @@
   /** @type {Array|null} 缓存的菜单项，避免重复构建 */
   var cachedMenuItems = null;
 
-  /**
-   * 一级菜单 ID → NAV_CONFIG.dropdowns 键名的映射
-   */
-  var DROPDOWN_KEY_MAP = {
-    products: "products",
-    applications: "applications",
-    support: "support",
-    about: "about",
-    contact: "contact",
-  };
-
-  /**
-   * 一级菜单 ID → Material Symbols 图标名的映射
-   */
   var L1_ICON_MAP = {
     products: "kitchen",
     applications: "apps",
+    cases: "cases",
+    "profit-calculator": "calculate",
     support: "support_agent",
     about: "info",
     contact: "mail",
   };
 
-  /**
-   * 根据一级菜单项 ID 获取对应的 Material Symbol 图标名
-   * @param {string} navId - 导航 ID (products / applications / support / about / contact)
-   * @returns {string} 图标名
-   */
   function getL1Icon(navId) {
     return L1_ICON_MAP[navId] || "menu";
   }
 
   /**
-   * 将 NAV_CONFIG 的下拉子项转换为统一的子菜单数据格式
-   * @param {Object} parentItem - 父级导航项
-   * @param {Array}  rawChildren - 原始子项数组
-   * @returns {Array} 标准化后的子项数组
-   */
-  function normalizeChildren(parentItem, rawChildren) {
-    var children = rawChildren.map(function (child) {
-      return {
-        key: child.key,
-        icon: child.icon,
-        href: child.href || child.path || "/",
-        badge: child.badge,
-        emoji: child.emoji || "",
-      };
-    });
-
-    // 在 applications 分类下，第 6 项之前插入分隔线
-    if (parentItem.id === "applications" && children.length > 5) {
-      children[5]._separator = true;
-    }
-
-    return children;
-  }
-
-  /**
-   * 构建导航菜单项数组
-   * 优先从全局 NAV_CONFIG 读取，若不存在则使用内置默认菜单
+   * 构建导航菜单项数组（使用内置默认菜单）
    * @returns {Array<{key, href, id, icon, children}>} 菜单项列表
    */
   function getMenuItems() {
     if (cachedMenuItems) return cachedMenuItems;
 
-    var items;
-
-    if (typeof NAV_CONFIG !== "undefined" && NAV_CONFIG.mainNav) {
-      items = NAV_CONFIG.mainNav.map(function (navEntry) {
-        var dropdownKey = DROPDOWN_KEY_MAP[navEntry.id];
-        var rawChildren = [];
-
-        if (dropdownKey && NAV_CONFIG.dropdowns && NAV_CONFIG.dropdowns[dropdownKey]) {
-          rawChildren = NAV_CONFIG.dropdowns[dropdownKey];
-        }
-
-        return {
-          key: navEntry.key,
-          label: navEntry.label || navEntry.key,
-          href: navEntry.path,
-          id: navEntry.id,
-          icon: getL1Icon(navEntry.id),
-          children: normalizeChildren(navEntry, rawChildren),
-        };
-      });
-    } else {
-      // 内置默认菜单（NAV_CONFIG 不可用时的回退，与 navigator DEFAULT_NAV_ITEMS 对齐）
-      items = [
-        { key: "nav_products", label: "产品中心", href: "/products/", id: "products", icon: "kitchen", children: [] },
-        {
-          key: "nav_applications",
-          label: "行业场景",
-          href: "/applications/",
-          id: "applications",
-          icon: "apps",
-          children: [],
-        },
-        { key: "nav_cases", label: "真实案例", href: "/cases/", id: "cases", icon: "cases", children: [] },
-        {
-          key: "nav_profit_calculator",
-          label: "投资回报",
-          href: "/profit-calculator/",
-          id: "profit-calculator",
-          icon: "calculate",
-          children: [],
-        },
-        {
-          key: "nav_support",
-          label: "服务支持",
-          href: "/support/",
-          id: "support",
-          icon: "support_agent",
-          children: [],
-        },
-        { key: "nav_about", label: "关于我们", href: "/about/", id: "about", icon: "info", children: [] },
-        { key: "nav_contact", label: "联系我们", href: "/contact/", id: "contact", icon: "mail", children: [] },
-      ];
-    }
-
-    console.log(
-      "[mobile-menu] getMenuItems(): NAV_CONFIG=" +
-        (typeof NAV_CONFIG !== "undefined") +
-        " items=" +
-        items.length +
-        " children=[" +
-        items
-          .map(function (item) {
-            return item.id + ":" + item.children.length;
-          })
-          .join(",") +
-        "]"
-    );
+    var items = [
+      { key: "nav_products", label: "产品中心", href: "/products/", id: "products", icon: "kitchen", children: [] },
+      {
+        key: "nav_applications",
+        label: "行业场景",
+        href: "/applications/",
+        id: "applications",
+        icon: "apps",
+        children: [],
+      },
+      { key: "nav_cases", label: "真实案例", href: "/cases/", id: "cases", icon: "cases", children: [] },
+      {
+        key: "nav_profit_calculator",
+        label: "投资回报",
+        href: "/profit-calculator/",
+        id: "profit-calculator",
+        icon: "calculate",
+        children: [],
+      },
+      { key: "nav_support", label: "服务支持", href: "/support/", id: "support", icon: "support_agent", children: [] },
+      { key: "nav_about", label: "关于我们", href: "/about/", id: "about", icon: "info", children: [] },
+      { key: "nav_contact", label: "联系我们", href: "/contact/", id: "contact", icon: "mail", children: [] },
+    ];
 
     cachedMenuItems = items;
     return items;
@@ -978,7 +892,7 @@
       (tabletNavigator && tabletNavigator.parentNode) || (window.innerWidth >= 768 && window.innerWidth < 1280);
 
     if (isTablet) {
-      console.log("[mobile-menu] Tablet mode — smart header hide disabled, header stays visible");
+      if (__DEVELOPMENT__) console.log("[mobile-menu] Tablet mode — smart header hide disabled, header stays visible");
       mobileHeaderEl.classList.remove("header-hidden");
       return;
     }
@@ -987,7 +901,7 @@
     window.removeEventListener("scroll", onScroll);
     window.addEventListener("scroll", onScroll, { passive: true });
     mobileHeaderEl.classList.remove("header-hidden");
-    console.log("[mobile-menu] Smart header scroll listener attached (mobile mode)");
+    if (__DEVELOPMENT__) console.log("[mobile-menu] Smart header scroll listener attached (mobile mode)");
   }
 
   /**
@@ -1004,12 +918,12 @@
 
       if (currentY > 50 && currentY > lastScrollY) {
         // 向下滚动：隐藏头部
-        console.log("[mobile-menu] onScroll: hiding header, currentY=", currentY, "lastScrollY=", lastScrollY);
+        if (__DEVELOPMENT__) console.log("[mobile-menu] hide header", currentY, lastScrollY);
         mobileHeaderEl.classList.add("header-hidden");
       } else {
         // 向上滚动：显示头部
         if (mobileHeaderEl.classList.contains("header-hidden")) {
-          console.log("[mobile-menu] onScroll: showing header, currentY=", currentY, "lastScrollY=", lastScrollY);
+          if (__DEVELOPMENT__) console.log("[mobile-menu] show header", currentY, lastScrollY);
         }
         mobileHeaderEl.classList.remove("header-hidden");
       }

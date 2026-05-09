@@ -1,4 +1,3 @@
-/* global NAV_CONFIG */
 /**
  * about-dropdown.js — About Dropdown (L2)
  *
@@ -22,9 +21,6 @@
   ];
 
   function getItems() {
-    if (typeof NAV_CONFIG !== "undefined" && NAV_CONFIG.dropdowns && NAV_CONFIG.dropdowns.about) {
-      return NAV_CONFIG.dropdowns.about;
-    }
     return DEFAULT_ITEMS;
   }
 

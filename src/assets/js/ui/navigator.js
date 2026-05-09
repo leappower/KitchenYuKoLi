@@ -6,7 +6,7 @@
  * 并提供 updateActive / highlightCategory 等公开 API 供 SPA 路由调用。
  *
  * 依赖：
- *   - window.NAV_CONFIG             (nav-config.js)
+ *   - (nav-config removed — uses built-in defaults)
  *   - window.ProductsDropdown       (dropdown/products-dropdown.js)
  *   - window.ApplicationsDropdown   (dropdown/applications-dropdown.js)
  *   - window.SupportDropdown        (dropdown/support-dropdown.js)
@@ -15,6 +15,7 @@
  *   - window.MobileBottomBar        (mobile-bottom-bar.js)
  *   - window.DropdownBaseStyles     (dropdown-styles.js)
  */
+/* global CustomSelect */
 (function (global) {
   "use strict";
 
@@ -31,7 +32,7 @@
    * ================================================================ */
 
   /**
-   * 默认主导航项（当 NAV_CONFIG.mainNav 不可用时兜底）
+   * 主导航项
    * @type {Array<{key:string, label:string, path:string, id:string, hasDropdown:boolean}>}
    */
   var DEFAULT_NAV_ITEMS = [
@@ -41,8 +42,7 @@
     { key: "nav_about", label: "关于我们", path: "/about/", id: "about", hasDropdown: true },
   ];
 
-  /** @type {Array} 当前生效的导航项 */
-  var navItems = typeof NAV_CONFIG !== "undefined" && NAV_CONFIG.mainNav ? NAV_CONFIG.mainNav : DEFAULT_NAV_ITEMS;
+  /** @type {Array} 当前生效的导航项 (recomputed per-call to avoid stale closure) */
 
   /**
    * 所有 dropdown 容器的 CSS 类名（用于互斥开关）
@@ -287,8 +287,7 @@
    * @returns {string} HTML 字符串
    */
   function buildNavItemsHtml(activeId, variant) {
-    // Always re-read NAV_CONFIG to pick up hot-reloaded changes
-    var items = typeof NAV_CONFIG !== "undefined" && NAV_CONFIG.mainNav ? NAV_CONFIG.mainNav : DEFAULT_NAV_ITEMS;
+    var items = DEFAULT_NAV_ITEMS;
     return items
       .map(function (item) {
         return buildNavItemHtml(item, activeId, variant);
@@ -1247,12 +1246,16 @@
     document.addEventListener(
       "click",
       function (e) {
-        var trigger = e.target.closest(".prod-dropdown-trigger, .app-dropdown-trigger, .sup-dropdown-trigger, .abt-dropdown-trigger, .cnt-dropdown-trigger");
+        var trigger = e.target.closest(
+          ".prod-dropdown-trigger, .app-dropdown-trigger, .sup-dropdown-trigger, .abt-dropdown-trigger, .cnt-dropdown-trigger"
+        );
         if (!trigger) return;
         if (window.innerWidth <= 720) return;
         e.stopImmediatePropagation();
         e.preventDefault();
-        var wrap = trigger.closest(".prod-dropdown-wrap, .app-dropdown-wrap, .sup-dropdown-wrap, .abt-dropdown-wrap, .cnt-dropdown-wrap");
+        var wrap = trigger.closest(
+          ".prod-dropdown-wrap, .app-dropdown-wrap, .sup-dropdown-wrap, .abt-dropdown-wrap, .cnt-dropdown-wrap"
+        );
         if (wrap) {
           closeOtherDropdowns(wrap); // mutex: close others before toggling this one
           wrap.classList.toggle("is-open");
@@ -1364,9 +1367,7 @@
     activeSectionId = activeSectionId || "";
     var currentPath = window.location.pathname.replace(/\/$/, "") || "/";
 
-    /* Re-read NAV_CONFIG on every call — module-level navItems may be stale (DEFAULT_NAV_ITEMS)
-     * if nav-config.js loaded after navigator.js */
-    var navItems = typeof NAV_CONFIG !== "undefined" && NAV_CONFIG.mainNav ? NAV_CONFIG.mainNav : DEFAULT_NAV_ITEMS;
+    var navItems = DEFAULT_NAV_ITEMS;
 
     /* 确保 dropdown 样式已注入（SPA 动态加载场景） */
     injectDropdownStyles();

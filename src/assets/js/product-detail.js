@@ -207,21 +207,9 @@
         model = decodeURIComponent(m[1]);
       }
     }
-    console.log(
-      "[ProductDetail] renderPDP called, pathname:",
-      window.location.pathname,
-      "cleanPath:",
-      path,
-      "model:",
-      model
-    );
     if (!model) return; // Not a PDP URL, skip silently
 
     var product = findProduct(model);
-    console.log(
-      "[ProductDetail] findProduct result:",
-      product ? product.model + " (category: " + (product.category || product.categoryName) + ")" : "NOT FOUND"
-    );
     if (!product) {
       ensureContainers();
       var ce = document.getElementById("product-content");
@@ -581,48 +569,61 @@
       if (callback) callback();
       return;
     }
-    var xhr = new XMLHttpRequest();
-    xhr.open("GET", "/api/public/translations?lang=" + encodeURIComponent(lang), true);
-    xhr.onload = function () {
-      if (xhr.status === 200) {
-        try {
-          var data = JSON.parse(xhr.responseText);
-          // Build model → translation map (need product data to resolve model)
-          var products = getAllProducts();
-          var idToModel = {};
-          products.forEach(function (p) {
-            if (p._productId) idToModel[p._productId] = p.model;
-          });
-          // Map by product_id → need to enrich product data first
-          window._productTranslations = data.translations || {};
-          // Also build model-based lookup
-          window._productTranslationsByModel = {};
-          products.forEach(function (p) {
-            var t = data.translations[p._productId];
-            if (t) window._productTranslationsByModel[p.model] = t;
-          });
-        } catch (e) {}
-      }
-      if (callback) callback();
-    };
-    xhr.send();
+    // Extract translations from the already-loaded PRODUCT_DATA_TABLE
+    var suffix =
+      lang.charAt(0).toUpperCase() +
+      lang.slice(1).replace(/-([a-z])/g, function (m, c) {
+        return c.toUpperCase();
+      });
+    var products = getAllProducts();
+    var map = {};
+    var fields = [
+      "name",
+      "specifications",
+      "usage",
+      "throughput",
+      "material",
+      "sub_category",
+      "tier",
+      "badge",
+      "control_method",
+      "product_dimensions",
+      "color",
+    ];
+    products.forEach(function (p) {
+      var pid = p._productId || p.id;
+      if (!pid) return;
+      var entry = {};
+      fields.forEach(function (f) {
+        var val = p[f + suffix];
+        if (val) entry[f] = val;
+      });
+      if (Object.keys(entry).length > 0) map[pid] = entry;
+    });
+    window._productTranslations = map;
+    window._productTranslationsByModel = {};
+    products.forEach(function (p) {
+      var t = map[p._ProductId || p.id];
+      if (t) window._productTranslationsByModel[p.model] = t;
+    });
+    if (callback) callback();
   };
 
   _spaOn(window, "languageChanged", renderPDP, "languageChanged");
   document.addEventListener("productTranslationsLoaded", renderPDP);
   _spaOn(document, "spa:load", function () {
     var segs = location.pathname.split("/").filter(Boolean);
-    console.log("[ProductDetail] spa:load fired, pathname:", location.pathname, "segs:", segs);
+    if (__DEVELOPMENT__) console.log("[ProductDetail] spa:load fired, pathname:", location.pathname, "segs:", segs);
     // Only render PDP on /products/detail/<model>/ or /products/<model>/ (non-category)
     if (segs[0] === "products") {
       if (segs[1] === "detail" && segs[2]) {
-        console.log("[ProductDetail] Rendering PDP (detail path)");
+        if (__DEVELOPMENT__) console.log("[ProductDetail] Rendering PDP (detail path)");
         renderPDP();
       } else if (segs[1] && segs[1] !== "compare" && !isCategorySlug(segs[1])) {
-        console.log("[ProductDetail] Rendering PDP (legacy model path)");
+        if (__DEVELOPMENT__) console.log("[ProductDetail] Rendering PDP (legacy model path)");
         renderPDP();
       } else {
-        console.log("[ProductDetail] Skipping PDP (category/listing page):", segs[1]);
+        if (__DEVELOPMENT__) console.log("[ProductDetail] Skipping PDP (category/listing page):", segs[1]);
       }
     }
   });

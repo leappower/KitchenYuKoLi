@@ -1,4 +1,3 @@
-/* global NAV_CONFIG */
 /**
  * products-dropdown.js — Responsive Products Dropdown
  * Desktop / Tablet: floating card style
@@ -13,7 +12,7 @@
 
   /* ───────────────────────── DATA ───────────────────────── */
 
-  var SUBSERIES = (typeof NAV_CONFIG !== "undefined" && NAV_CONFIG.dropdowns && NAV_CONFIG.dropdowns.products) || [
+  var SUBSERIES = [
     { key: "nav_products_cutting", icon: "content_cut", emoji: "", href: "/products/cutting/" },
     { key: "nav_products_stirfry", icon: "local_fire_department", emoji: "🔥", href: "/products/stirfry/" },
     { key: "nav_products_frying", icon: "outdoor_grill", emoji: "", href: "/products/frying/" },

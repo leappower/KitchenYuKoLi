@@ -1,4 +1,3 @@
-/* global NAV_CONFIG */
 /**
  * applications-dropdown.js — Responsive Applications Dropdown
  * Desktop / Tablet / Mobile adaptive
@@ -12,7 +11,7 @@
 
   /* ───────────────────────── DATA ───────────────────────── */
 
-  var SUBSERIES = (typeof NAV_CONFIG !== "undefined" && NAV_CONFIG.dropdowns && NAV_CONFIG.dropdowns.applications) || [
+  var SUBSERIES = [
     {
       key: "nav_applications_small_restaurant",
       icon: "storefront",

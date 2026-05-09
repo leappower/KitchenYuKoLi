@@ -1,4 +1,3 @@
-/* global NAV_CONFIG */
 /**
  * support-dropdown.js — Responsive Support Dropdown
  * Desktop / Tablet / Mobile adaptive
@@ -12,7 +11,7 @@
 
   /* ───────────────────────── DATA ───────────────────────── */
 
-  var SUBSERIES = (typeof NAV_CONFIG !== "undefined" && NAV_CONFIG.dropdowns && NAV_CONFIG.dropdowns.support) || [
+  var SUBSERIES = [
     { key: "nav_support_services", icon: "grid_view", href: "/support/", emoji: "" },
     { key: "nav_support_installation", icon: "construction", href: "/support/installation/", emoji: "" },
     { key: "nav_support_warranty", icon: "verified", href: "/support/warranty/", emoji: "" },

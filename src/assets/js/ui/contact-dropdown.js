@@ -5,7 +5,7 @@
  * CSS prefix:  cnt-dropdown-* / cnt-popup-*
  */
 
-(function (global) {
+(function () {
   "use strict";
 
   var _spaRegs = {};
@@ -18,7 +18,7 @@
 
   /* ───────────────────────── DATA ───────────────────────── */
 
-  var ITEMS = (typeof NAV_CONFIG !== "undefined" && NAV_CONFIG.dropdowns && NAV_CONFIG.dropdowns.contact) || [
+  var ITEMS = [
     { key: "nav_contact_us", icon: "grid_view", href: "/contact/" },
     {
       key: "nav_contact_whatsapp",
