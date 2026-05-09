@@ -865,7 +865,7 @@
 
   /**
    * Google Apps Script 表单提交端点。
-   * 接收 JSON 格式的表单数据，通过 no-cors 模式发送。
+   * 接收 JSON 格式的表单数据，通过服务端代理发送。
    * @constant {string}
    */
   var FORM_ENDPOINT = "/api/quote-submit";
@@ -958,7 +958,7 @@
           smartPopup.closePopup({ converted: true });
         }, 500);
       },
-      // 失败降级回调（no-cors 下即使成功也可能进入 catch，仍视为成功）
+      // 失败降级回调
       function () {
         showNotification(
           translate("notify_submit_received", "Submitted successfully! We have received your information."),

@@ -109,6 +109,42 @@ app.use(compression({
   }
 }));
 
+// ─── Quote Submission API (proxies to Google Apps Script) ─────────────
+const GOOGLE_FORM_URL = process.env.GOOGLE_FORM_URL;
+const quoteLimiter = rateLimit({
+  windowMs: 60 * 1000,  // 1 minute
+  max: 3,                // max 3 submissions per IP per minute
+  message: { error: '提交过于频繁，请稍后再试' },
+  standardHeaders: true,
+  legacyHeaders: false,
+});
+app.post('/api/quote-submit', quoteLimiter, express.json({ limit: '100kb' }), async (req, res) => {
+  if (!GOOGLE_FORM_URL) {
+    return res.status(503).json({ error: 'Quote service not configured' });
+  }
+  // Validate required fields
+  const body = req.body;
+  if (!body || typeof body !== 'object') {
+    return res.status(400).json({ error: 'Invalid request body' });
+  }
+  try {
+    const response = await fetch(GOOGLE_FORM_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+      body: JSON.stringify(body),
+    });
+    if (!response.ok) {
+      console.error('[quote-submit] upstream error:', response.status);
+      return res.status(502).json({ error: 'Submission service error' });
+    }
+    const text = await response.text();
+    res.json({ ok: true });
+  } catch (err) {
+    console.error('[quote-submit] fetch error:', err.message);
+    res.status(502).json({ error: 'Failed to submit quote' });
+  }
+});
+
 // Allowed origins for CORS (same-origin + production domain)
 const ALLOWED_ORIGINS = new Set([
   'https://www.yukoli.com',
