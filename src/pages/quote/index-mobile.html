@@ -18,22 +18,22 @@
   var urlParams = new URLSearchParams(location.search);
   var cleanUrl = urlParams.get('clean-url');
   if (cleanUrl) {
-    console.log('[Responsive Redirect] Cleaning URL to:', cleanUrl);
+
     history.replaceState({}, '', cleanUrl);
     return;
   }
 
-  console.log('[Responsive Redirect] Checking SPA flag: window.__spaNavigating =', window.__spaNavigating);
+
   if (window.__spaNavigating) {
-    console.log('[Responsive Redirect] SPA navigation detected, skipping redirect');
+
     return;
   }
 
   var currentFile = location.pathname.split('/').pop();
-  console.log('[Responsive Redirect] Current file:', currentFile, 'Pathname:', location.pathname);
+
 
   if (window.DeviceUtils && window.DeviceUtils.isDirectoryURL()) {
-    console.log('[Responsive Redirect] Directory URL detected, skipping redirect');
+
     return;
   }
 
@@ -49,12 +49,12 @@
       targetFile = 'index-pc.html';
     }
 
-    console.log('[Responsive Redirect] Redirecting to:', targetFile);
+
     location.href = targetFile;
     return;
   }
 
-  console.log('[Responsive Redirect] No redirect needed');
+
 })();
 </script>
 <!-- ═══ End Responsive Redirect ═══ -->
@@ -558,3 +558,5 @@ header button:active {
 })();
 </script>
     <script defer src="/assets/js/ui/floating-actions.js"></script>
+</body>
+</html>
