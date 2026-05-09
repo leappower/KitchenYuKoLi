@@ -388,6 +388,26 @@ navigator[data-component="navigator"] {
   display: none !important;
 }
 
+/* ─── Navigator: top-level menu text uniformity ─────────────────── */
+/*
+ * All nav items (dropdown triggers and plain links) must render with
+ * identical font metrics. Dropdown triggers use <button> with font:inherit;
+ * plain links use <a>. This rule ensures visual parity regardless of tag.
+ */
+header nav > *,
+header nav > a,
+header nav > .prod-dropdown-wrap > a.prod-dropdown-trigger,
+header nav > .app-dropdown-wrap > a.app-dropdown-trigger,
+header nav > .sup-dropdown-wrap > a.sup-dropdown-trigger,
+header nav > .abt-dropdown-wrap > a.abt-dropdown-trigger,
+header nav > .cnt-dropdown-wrap > a.cnt-dropdown-trigger {
+  font-size: 0.875rem; /* text-sm = 14px */
+  font-weight: 600; /* font-semibold */
+  line-height: 1.25rem; /* text-sm line-height */
+  letter-spacing: 0;
+  font-family: var(--font-display);
+}
+
 /* ─── Scroll margin for sections (prevent navigator overlap) ───── */
 main#spa-content > section,
 main#spa-content [id] {
