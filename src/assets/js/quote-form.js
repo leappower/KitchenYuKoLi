@@ -184,16 +184,20 @@
         btn.innerHTML = '<span class="material-symbols-outlined animate-spin">progress_activity</span> 提交中...';
       }
 
-      // Submit to Google Sheets
-      fetch(
-        "https://script.google.com/macros/s/AKfycbyikM1ArEFhJhQUSAp6l4DHJcGzDDK1cckL-KOrVbjipoMGSKsOOlhFWJGTPB6qOys/exec",
-        {
+      // Submit via server proxy (hides Google Apps Script URL)
+      fetch("/api/quote-submit", {
           method: "POST",
-          mode: "no-cors",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(formData),
-        }
-      )
+        })
+        .then(function (response) {
+          if (!response.ok) {
+            return response.json().then(function (err) {
+              throw new Error(err.error || "Submission failed");
+            });
+          }
+          return response.json();
+        })
         .then(function () {
           if (typeof window.showNotification === "function") {
             window.showNotification("提交成功！我们将尽快与您联系", "success");
@@ -206,18 +210,13 @@
             }
           }, 1000);
         })
-        .catch(function () {
-          // no-cors returns opaque response, treat as success
-          if (typeof window.showNotification === "function") {
-            window.showNotification("提交成功！我们将尽快与您联系", "success");
+        .catch(function (err) {
+          showError(err.message || "提交失败，请稍后重试");
+          // Re-enable button on error
+          if (btn) {
+            btn.disabled = false;
+            btn.innerHTML = btnOrig;
           }
-          setTimeout(function () {
-            if (window.SpaRouter) {
-              window.SpaRouter.navigate("/thank-you/");
-            } else {
-              location.href = "/thank-you/";
-            }
-          }, 1000);
         });
     });
   }

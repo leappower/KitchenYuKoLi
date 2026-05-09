@@ -868,8 +868,7 @@
    * 接收 JSON 格式的表单数据，通过 no-cors 模式发送。
    * @constant {string}
    */
-  var FORM_ENDPOINT =
-    "https://script.google.com/macros/s/AKfycbyikM1ArEFhJhQUSAp6l4DHJcGzDDK1cckL-KOrVbjipoMGSKsOOlhFWJGTPB6qOys/exec";
+  var FORM_ENDPOINT = "/api/quote-submit";
 
   /**
    * 从表单元素中收集提交数据，附加用户环境信息。
@@ -913,10 +912,17 @@
 
     fetch(FORM_ENDPOINT, {
       method: "POST",
-      mode: "no-cors",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(formData),
     })
+      .then(function (response) {
+        if (!response.ok) {
+          return response.json().then(function (err) {
+            throw new Error(err.error || "Submission failed");
+          });
+        }
+        return response.json();
+      })
       .then(function () {
         onSuccess();
       })

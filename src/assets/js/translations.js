@@ -616,6 +616,7 @@
     }),
     (r.prototype.initialize = function () {
       var e = this;
+      if (e.isInitialized) return Promise.resolve(e);
       localStorage.getItem("browserLang") || localStorage.setItem("browserLang", this.detectBrowserLanguage());
       var n = this.getInitialLanguage();
       return (
@@ -692,6 +693,14 @@
       );
     }));
   var s = new r();
+  (function autoInit() {
+    function tryInit() { if (!s.isInitialized) s.initialize(); }
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', tryInit);
+    } else {
+      tryInit();
+    }
+  })();
   ((t.t = function (t) {
     return s.translate(t);
   }),

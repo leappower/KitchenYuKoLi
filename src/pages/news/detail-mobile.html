@@ -111,14 +111,7 @@
 <script src="/assets/js/spa-router.js?v=20260509"></script>
 <script defer src="/assets/js/lang-registry.js?v=20260509"></script>
 <script defer src="/assets/js/translations.js?v=20260509"></script>
-<script defer src="/assets/js/translations-dropdown-template.js?v=20260509"></script>
-<script>
-  document.addEventListener('DOMContentLoaded', function () {
-    if (window.translationManager) window.translationManager.initialize();
-  });
-</script>
-
-<script>
+<script defer src="/assets/js/translations-dropdown-template.js?v=20260509"></script><script>
 document.addEventListener('DOMContentLoaded', function() {
   var params = new URLSearchParams(window.location.search);
   var id = params.get('id') || 'news_1';
