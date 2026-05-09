@@ -10,10 +10,7 @@
  *   node scripts/release.js --dry-run              # 预演：只打印计划，不执行任何操作
  *   node scripts/release.js --skip-build           # 跳过打包（已有 dist 时调试用）
  *   node scripts/release.js --skip-lint            # 跳过 lint 检查
- *   node scripts/release.js --skip-feishu          # 跳过飞书数据拉取（保留翻译步骤）
  *   node scripts/release.js --skip-translate       # 跳过多语言翻译（仅用已有翻译数据打包）
- *   node scripts/release.js --skip-download        # 跳过图片下载（图片已全部本地化时使用）
- *   node scripts/release.js --no-feishu            # 同 --skip-feishu（别名）
  *   node scripts/release.js --no-translate         # 同 --skip-translate（别名）
  *   node scripts/release.js --full-translate       # 全量翻译（默认为增量翻译）
  *   node scripts/release.js --gh-pages             # 同时部署到 gh-pages 分支（GitHub Pages）
@@ -30,11 +27,10 @@
  *   1. 从远端读取最新 release 分支，解析当前版本号
  *   2. 计算新版本号
  *   3. lint 检查（--skip-lint 可跳过）
- *   4. 飞书数据同步（--skip-feishu 可跳过）
- *   5. 多语言翻译（--skip-translate 可跳过）
- *   6. 图片下载（--download-remote，增量；--skip-download 可跳过）
- *   7. webpack 打包 + 验证（--skip-build 可跳过，含图片增量压缩）
- *   8. 创建新的 release/vX.Y.Z 分支（孤立分支，仅含产物）
+ *   4. 多语言翻译（--skip-translate 可跳过）
+ *   5. 图片下载（--download-remote，增量；--skip-download 可跳过）
+ *   6. webpack 打包 + 验证（--skip-build 可跳过，含图片增量压缩）
+ *   7. 创建新的 release/vX.Y.Z 分支（孤立分支，仅含产物）
  *   9. 提交产物并推送到远端
  *  10. [可选] 部署到 gh-pages 分支（--gh-pages）
  *  11. 打印发布摘要
@@ -72,9 +68,7 @@ const opts = {
   dryRun:        args.includes('--dry-run'),
   skipBuild:     args.includes('--skip-build'),
   skipLint:      args.includes('--skip-lint'),
-  // 飞书数据拉取：--skip-feishu 或 --no-feishu
-  skipFeishu:    args.includes('--skip-feishu') || args.includes('--no-feishu'),
-  // 多语言翻译：--skip-translate 或 --no-translate
+  // --skip-feishu removed: feishu pipeline no longer exists
   skipTranslate: args.includes('--skip-translate') || args.includes('--no-translate'),
   // 图片下载：--skip-download（图片已全部本地化时使用）
   skipDownload:  args.includes('--skip-download'),
@@ -237,13 +231,12 @@ if (opts.dryRun) {
   drylog(`目标分支: ${releaseBranch}`);
   drylog('');
   drylog('构建模式:');
-  drylog(`  飞书数据拉取: ${opts.skipFeishu    ? '跳过 (--skip-feishu)'    : '执行'}`);
   drylog(`  多语言翻译:   ${opts.skipTranslate ? '跳过 (--skip-translate)' : opts.fullTranslate ? '全量翻译 (--full-translate)' : '增量翻译（默认）'}`);
   drylog(`  图片下载:     ${opts.skipDownload  ? '跳过 (--skip-download)'  : '增量下载（已有文件自动跳过）'}`);
   drylog(`  webpack 打包: ${opts.skipBuild     ? '跳过 (--skip-build)'     : '执行（含图片增量压缩）'}`);
   drylog(`  GitHub Pages:  ${opts.ghPages       ? '部署 (--gh-pages)'      : '不部署'}`);
   drylog('');
-  drylog('后续步骤: lint → feishu → translate → build → 推送产物');
+  drylog('后续步骤: lint → translate → build → 推送产物');
   drylog('dry-run 模式，不执行任何实际操作');
   drylog('─────────────────────────────────────────');
   process.exit(0);
@@ -264,29 +257,7 @@ if (opts.skipLint) {
   }
 }
 
-// ─── Step 4: 飞书数据同步 ─────────────────────────────────────────────────────
-title('Step 4  飞书数据同步');
-
-if (opts.skipFeishu || opts.skipBuild) {
-  warn(opts.skipBuild ? '已跳过飞书同步（--skip-build 包含此步骤）' : '已跳过飞书同步（--skip-feishu）');
-} else {
-  try {
-    log('拉取飞书产品数据表...');
-    runLive('node scripts/ensure-product-data-table.js');
-    ok('飞书数据同步完成');
-
-    log('提取 i18n key...');
-    runLive('npm run i18n:extract');
-
-    log('同步中文源文件...');
-    runLive('npm run product:sync:source');
-
-    ok('i18n 处理完成');
-  } catch (e) {
-    fail('飞书数据同步失败，请检查网络和飞书配置（或使用 --skip-feishu 跳过）', e);
-    process.exit(1);
-  }
-}
+// Step 4 removed — feishu data sync pipeline has been eliminated
 
 // ─── Step 5: 多语言翻译 ───────────────────────────────────────────────────────
 title('Step 5  多语言翻译');
