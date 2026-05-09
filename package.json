@@ -34,7 +34,7 @@
     "docker:build": "docker build -t html-yuql .",
     "docker:run": "docker run -p 3000:3000 html-yuql",
     "prestart": "node scripts/init-dev.js",
-    "sync:feishu": "node scripts/ensure-product-data-table.js",
+    "ensure-data-table": "node scripts/ensure-product-data-table.js",
     "translate:products": "node scripts/product-translate-adapter.js",
     "translate:products:incremental": "node scripts/product-translate-adapter.js --incremental",
     "i18n:extract": "node scripts/product-i18n-adapter.js --generate",
@@ -46,9 +46,8 @@
     "release:dry": "node scripts/release.js --dry-run",
     "release:version": "node scripts/release.js --version",
     "release:no-translate": "node scripts/release.js --skip-translate",
-    "release:no-feishu": "node scripts/release.js --skip-feishu",
-    "release:pack-only": "node scripts/release.js --skip-feishu --skip-translate",
-    "release:gh-pages": "node scripts/release.js --skip-feishu --skip-translate --skip-download --gh-pages",
+    "release:pack-only": "node scripts/release.js --skip-translate",
+    "release:gh-pages": "node scripts/release.js --skip-translate --skip-download --gh-pages",
     "release:full-translate": "node scripts/release.js --full-translate",
     "release:skip-download": "node scripts/release.js --skip-download",
     "prepare": "npx lefthook install",
@@ -70,8 +69,7 @@
     "jsonwebtoken": "^9.0.3",
     "jspdf": "^4.2.1",
     "multer": "^2.1.1",
-    "puppeteer-core": "24.39.1",
-    "xlsx": "^0.18.5"
+    "puppeteer-core": "24.39.1"
   },
   "devDependencies": {
     "@babel/preset-env": "7.29.0",
