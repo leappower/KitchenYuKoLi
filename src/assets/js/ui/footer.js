@@ -5,27 +5,27 @@
  * Tablet (768-1024px): 6 items — 首页/产品/场景/回报/关于/WhatsApp
  * PC (>=1024px): hidden
  */
-;(function (window) {
+(function (window) {
   "use strict";
 
   var resizeTimer;
 
   /* ─── Mobile items (4) ─── */
   var mobileItems = [
-    { id: "home",      icon: "home",       key: "nav_home",      href: "/home/",   fill: true },
-    { id: "products",  icon: "kitchen",    key: "nav_products",  href: "/products/", fill: false },
-    { id: "cases",     icon: "monitoring", key: "nav_cases",     href: "/cases/",  fill: false },
-    { id: "whatsapp",  icon: "chat",       key: "nav_whatsapp",  href: "",         fill: false, isWhatsApp: true }
+    { id: "home", icon: "home", key: "nav_home", href: "/home/", fill: true },
+    { id: "products", icon: "kitchen", key: "nav_products", href: "/products/", fill: false },
+    { id: "profit", icon: "calculate", key: "nav_roi", href: "/profit-calculator/", fill: false },
+    { id: "whatsapp", icon: "chat", key: "nav_whatsapp", href: "", fill: false, isWhatsApp: true },
   ];
 
   /* ─── Tablet items (6) ─── */
   var tabletItems = [
-    { id: "home",      icon: "home",       key: "nav_home",      href: "/home/",   fill: true },
-    { id: "products",  icon: "kitchen",    key: "nav_products",  href: "/products/", fill: false },
-    { id: "cases",     icon: "monitoring", key: "nav_cases",     href: "/cases/",  fill: false },
-    { id: "profit",    icon: "calculate",  key: "nav_roi",       href: "/profit-calculator/", fill: false },
-    { id: "about",     icon: "info",       key: "nav_about",     href: "/about/",  fill: false },
-    { id: "whatsapp",  icon: "chat",       key: "nav_whatsapp",  href: "",         fill: false, isWhatsApp: true }
+    { id: "home", icon: "home", key: "nav_home", href: "/home/", fill: true },
+    { id: "products", icon: "kitchen", key: "nav_products", href: "/products/", fill: false },
+    { id: "cases", icon: "monitoring", key: "nav_cases", href: "/cases/", fill: false },
+    { id: "profit", icon: "calculate", key: "nav_roi", href: "/profit-calculator/", fill: false },
+    { id: "about", icon: "info", key: "nav_about", href: "/about/", fill: false },
+    { id: "whatsapp", icon: "chat", key: "nav_whatsapp", href: "", fill: false, isWhatsApp: true },
   ];
 
   function esc(s) {
@@ -39,21 +39,45 @@
   function buildItemHtml(item, activeId) {
     var isActive = item.id === activeId;
     var colorClass = isActive ? "text-primary" : "text-slate-400 dark:text-slate-500";
-    var fillStyle = isActive && item.fill ? ' style="font-variation-settings: \'FILL\' 1;"' : "";
-    var label = item.key ? '<p class="text-[10px] font-bold uppercase tracking-wider" data-i18n="' + esc(item.key) + '">' + esc(item.key) + "</p>" : "";
-    var waHref = 'https://wa.me/' + (window.Contacts ? window.Contacts.whatsapp : '8613163756465');
+    var fillStyle = isActive && item.fill ? " style=\"font-variation-settings: 'FILL' 1;\"" : "";
+    var label = item.key
+      ? '<p class="text-[10px] font-bold uppercase tracking-wider" data-i18n="' +
+        esc(item.key) +
+        '">' +
+        esc(item.key) +
+        "</p>"
+      : "";
+    var waHref = "https://wa.me/" + (window.Contacts ? window.Contacts.whatsapp : "8613163756465");
 
     if (item.isWhatsApp) {
-      return '<a class="whatsapp-tab-item relative flex flex-1 flex-col items-center justify-center gap-1 text-[#25d366]" ' +
-        'href="' + waHref + '" data-wa-message-key="wa_msg_contact" data-wa-source="footer-tab" ' +
+      return (
+        '<a class="whatsapp-tab-item relative flex flex-1 flex-col items-center justify-center gap-1 text-[#25d366]" ' +
+        'href="' +
+        waHref +
+        '" data-wa-message-key="wa_msg_contact" data-wa-source="footer-tab" ' +
         'target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">' +
-        '<span class="material-symbols-outlined relative" style="font-size:26px">' + esc(item.icon) + '</span>' +
-        label + '</a>';
+        '<span class="material-symbols-outlined relative" style="font-size:26px">' +
+        esc(item.icon) +
+        "</span>" +
+        label +
+        "</a>"
+      );
     }
 
-    return '<a class="relative flex flex-1 flex-col items-center justify-center gap-1 ' + colorClass + '" href="' + esc(item.href) + '">' +
-      '<span class="material-symbols-outlined relative"' + fillStyle + '>' + esc(item.icon) + '</span>' +
-      label + '</a>';
+    return (
+      '<a class="relative flex flex-1 flex-col items-center justify-center gap-1 ' +
+      colorClass +
+      '" href="' +
+      esc(item.href) +
+      '">' +
+      '<span class="material-symbols-outlined relative"' +
+      fillStyle +
+      ">" +
+      esc(item.icon) +
+      "</span>" +
+      label +
+      "</a>"
+    );
   }
 
   function buildBarHtml(variant, activeId) {
@@ -61,15 +85,23 @@
     var tabletClass = variant === "tablet" ? " max-w-3xl mx-auto" : "";
     var pbSafe = variant === "tablet" ? " pb-3" : " pb-6";
 
-    var itemsHtml = items.map(function (item) {
-      return buildItemHtml(item, activeId);
-    }).join("\n");
+    var itemsHtml = items
+      .map(function (item) {
+        return buildItemHtml(item, activeId);
+      })
+      .join("\n");
 
-    return '<div class="fixed bottom-0 left-0 right-0 z-[var(--z-footer)]">' +
+    return (
+      '<div class="fixed bottom-0 left-0 right-0 z-[var(--z-footer)]">' +
       '<div class="flex gap-2 border-t border-slate-200 dark:border-slate-800 ' +
-      'bg-background-light/95 dark:bg-background-dark/95 backdrop-blur-md px-4' + pbSafe + ' pt-2' + tabletClass + '">' +
+      "bg-background-light/95 dark:bg-background-dark/95 backdrop-blur-md px-4" +
+      pbSafe +
+      " pt-2" +
+      tabletClass +
+      '">' +
       itemsHtml +
-      '</div></div>';
+      "</div></div>"
+    );
   }
 
   function mount() {
@@ -78,7 +110,7 @@
 
     for (var i = 0; i < footers.length; i++) {
       var footer = footers[i];
-      var variant = footer.getAttribute("data-variant") || "mobile";
+      var _variant = footer.getAttribute("data-variant") || "mobile";
       var activeId = footer.getAttribute("data-active") || "";
 
       // PC (>=1024px) → hidden
@@ -153,7 +185,10 @@
           var linkHref = href;
           if (itemHref.endsWith("/")) itemHref = itemHref.slice(0, -1);
           if (linkHref.endsWith("/")) linkHref = linkHref.slice(0, -1);
-          if (itemHref === linkHref) { matched = allItems[j]; break; }
+          if (itemHref === linkHref) {
+            matched = allItems[j];
+            break;
+          }
         }
 
         var isActive = matched && matched.id === newActiveId;
@@ -167,7 +202,7 @@
           if (icon) icon.removeAttribute("style");
         }
       }
-    }
+    },
   };
 
   /* ─── Init ─── */
@@ -182,5 +217,4 @@
     clearTimeout(resizeTimer);
     resizeTimer = setTimeout(mount, 200);
   });
-
 })(window);

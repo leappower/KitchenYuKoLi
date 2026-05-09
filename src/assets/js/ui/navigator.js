@@ -12,11 +12,10 @@
  *   - window.SupportDropdown        (dropdown/support-dropdown.js)
  *   - window.AboutDropdown          (dropdown/about-dropdown.js)
  *   - window.SlideMenu              (slide-menu.js)
- *   - window.MobileBottomBar        (mobile-bottom-bar.js)
  *   - window.DropdownBaseStyles     (dropdown-styles.js)
  */
 /* global CustomSelect */
-(function (global) {
+(function (_global) {
   "use strict";
 
   var _spaRegs = {};
@@ -37,9 +36,18 @@
    */
   var DEFAULT_NAV_ITEMS = [
     { key: "nav_products", label: "产品中心", path: "/products/", id: "products", hasDropdown: true },
-    { key: "nav_applications", label: "场景应用", path: "/applications/", id: "applications", hasDropdown: true },
-    { key: "nav_service", label: "服务支持", path: "/support/", id: "support", hasDropdown: true },
+    { key: "nav_applications", label: "行业场景", path: "/applications/", id: "applications", hasDropdown: true },
+    { key: "nav_cases", label: "真实案例", path: "/cases/", id: "cases", hasDropdown: false },
+    {
+      key: "nav_profit_calculator",
+      label: "投资回报",
+      path: "/profit-calculator/",
+      id: "profit-calculator",
+      hasDropdown: false,
+    },
+    { key: "nav_support", label: "服务支持", path: "/support/", id: "support", hasDropdown: true },
     { key: "nav_about", label: "关于我们", path: "/about/", id: "about", hasDropdown: true },
+    { key: "nav_contact", label: "联系我们", path: "/contact/", id: "contact", hasDropdown: false },
   ];
 
   /** @type {Array} 当前生效的导航项 (recomputed per-call to avoid stale closure) */
@@ -1638,11 +1646,6 @@
    * ================================================================ */
 
   /**
-   * 移动端底部栏（由 mobile-bottom-bar.js 提供）
-   */
-  if (window.MobileBottomBar) window.MobileBottomBar.render();
-
-  /**
    * SPA 路由导航事件——重新初始化导航和底部栏
    */
   _spaOn(document, "spa:load", function () {
@@ -1672,7 +1675,6 @@
         if (window.SlideMenu.initToggle) window.SlideMenu.initToggle();
         if (window.SlideMenu.initSmartHeader) window.SlideMenu.initSmartHeader();
       }
-      if (window.MobileBottomBar) window.MobileBottomBar.render();
     }, 0);
   });
 })(window);
