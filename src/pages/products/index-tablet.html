@@ -65,33 +65,6 @@
       body {
         font-family: 'Public Sans', sans-serif;
       }
-      .product-card {
-        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-      }
-      .product-card:hover {
-        transform: translateY(-8px);
-        box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
-      }
-      .category-tab {
-        position: relative;
-        transition: all 0.3s ease;
-      }
-      .filter-chip {
-        transition: all 0.2s ease;
-      }
-      .filter-chip:hover {
-        background: rgba(236, 91, 19, 0.1);
-        border-color: #ec5b13;
-      }
-      .filter-chip.active {
-        background: #ec5b13;
-        color: white;
-        border-color: #ec5b13;
-      }
-      .spec-badge {
-        background: linear-gradient(135deg, rgba(236, 91, 19, 0.1) 0%, rgba(236, 91, 19, 0.05) 100%);
-        border: 1px solid rgba(236, 91, 19, 0.2);
-      }
     </style>
     <!-- Dark mode: apply saved preference before first paint -->
     <script>
@@ -107,8 +80,8 @@
     {
       "@context": "https:/schema.org",
       "@type": "CollectionPage",
-      "name": "YuKoLi 智能商厨设备产品目录",
-      "description": "YuKoLi 智能商用厨房设备全系列，涵盖炒菜机、油炸炉、蒸煮设备、切配设备等。",
+      "name": "YuKoLi 智能商厨设备产品中心",
+      "description": "150+ 款智能商厨设备一站式选型，涵盖爆炒、切配、油炸、蒸煮、炖煮 6 大产品系列。",
       "url": "https://www.kitchen.yukoli.com/products/"
     }
     </script>
@@ -125,118 +98,146 @@
     ></navigator>
 
     <main id="spa-content">
-        <!-- Hero Section: aligned with home page (left text, right image) -->
-        <section class="fullwidth-bg hero-overlap section-passthrough w-full flex flex-col lg:flex-row items-center py-8 gap-10">
-          <div class="section-content">
-            <div class="w-full lg:w-1/2 space-y-6">
-              <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-bold uppercase tracking-widest">
-                <span class="material-symbols-outlined text-xs leading-none">inventory_2</span>
-                <span data-i18n="products_hero_badge">Industrial Excellence</span>
-              </div>
-              <h1 class="text-5xl font-black leading-[1.1] tracking-tight text-slate-900 dark:text-white" data-i18n="products_hero_title">
-                产品中心
-              </h1>
-              <p class="text-base text-slate-600 dark:text-slate-400 max-w-2xl leading-relaxed" data-i18n="products_hero_desc">
-                探索 Yukoli 全系列智能商厨设备，从爆炒到蒸煮，为您的商业厨房提供完整的自动化解决方案。
-              </p>
-              <div class="flex flex-wrap gap-4 pt-4">
-                <a href="#products" onclick="event.preventDefault();document.getElementById('products').scrollIntoView({behavior:'smooth',block:'start'})" class="bg-primary text-white px-6 py-3 rounded-xl font-bold text-base flex items-center gap-2 hover:shadow-lg hover:shadow-primary/20 transition-all">
-                  <span data-i18n="products_browse_products">浏览产品</span>
-                  <span class="material-symbols-outlined">arrow_downward</span>
-                </a>
-                <a href="/quote" class="border-2 border-slate-200 dark:border-slate-800 px-6 py-3 rounded-xl font-bold text-base hover:bg-slate-100 dark:hover:bg-slate-800 transition-all flex items-center gap-2">
-                  <span data-i18n="products_request_quote">获取报价</span>
-                  <span class="material-symbols-outlined">request_quote</span>
-                </a>
-              </div>
+      <!-- Hero -->
+      <section class="fullwidth-bg hero-overlap section-passthrough py-12 overflow-hidden bg-gradient-to-br from-primary/5 via-transparent to-orange-100/30 dark:from-primary/10 dark:to-orange-900/20">
+        <div class="section-content">
+          <div class="w-full text-center max-w-2xl mx-auto">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-bold uppercase tracking-widest mb-4">
+              <span class="material-symbols-outlined text-xs leading-none">inventory_2</span>
+              <span data-i18n="products_hero_badge">Industrial Excellence</span>
             </div>
-            <div class="w-full lg:w-1/2 relative">
-              <div class="aspect-square bg-gradient-to-br from-primary/20 to-transparent rounded-full absolute -top-10 -right-10 blur-3xl opacity-50 -z-10"></div>
-              <div class="relative w-full h-[400px] bg-slate-100 dark:bg-slate-800 rounded-3xl overflow-hidden shadow-2xl border border-slate-200/50 dark:border-slate-700/50">
-                <img alt="全系列智能商厨设备" class="w-full h-full object-contain p-6" src="/assets/images/products/esl-bxc800.webp" loading="eager">
-                <div class="absolute bottom-6 left-6 right-6 p-6 bg-white/10 backdrop-blur-xl border border-white/20 rounded-2xl">
-                  <div class="flex justify-between items-center text-white">
-                    <div>
-                      <p class="text-xs font-bold uppercase opacity-70">Product Center</p>
-                      <p class="text-lg font-black" data-i18n="products_hero_card_title">全系列智能商厨设备</p>
-                    </div>
-                    <div class="text-right">
-                      <p class="text-xs font-bold uppercase opacity-70">Categories</p>
-                      <p class="text-lg font-black text-primary">6+</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+            <h1 class="text-4xl font-black tracking-tight mb-3" data-i18n="products_page_title_hero">
+              150+ 款智能商厨设备，一站式选型
+            </h1>
+            <p class="text-base text-slate-600 dark:text-slate-400 max-w-lg mx-auto leading-relaxed" data-i18n="products_page_desc">
+              从爆炒到切配，从油炸到蒸煮，6 大产品系列覆盖你的全部后厨需求。
+            </p>
           </div>
-        </section>
+        </div>
+      </section>
 
-        <!-- Category Filter: between hero and product grid -->
-        <section id="products" class="fullwidth-bg w-full py-16">
-          <div class="section-content">
-            <div class="flex flex-wrap items-center justify-between gap-4">
-              <!-- Category tabs -->
-              <div class="flex items-center gap-2 flex-wrap gap-2 category-tab-container">
-              </div>
-              <!-- Tier filter -->
-              <div class="flex items-center gap-2 flex-shrink-0">
-                <button class="filter-chip active px-3 py-1.5 rounded-full border border-slate-200 dark:border-slate-700 text-xs font-medium" data-filter="all" data-i18n="all">全部</button>
-                <button class="filter-chip px-3 py-1.5 rounded-full border border-slate-200 dark:border-slate-700 text-xs font-medium" data-filter="入门" data-i18n="products_filter_starter">入门</button>
-                <button class="filter-chip px-3 py-1.5 rounded-full border border-slate-200 dark:border-slate-700 text-xs font-medium" data-filter="智能" data-i18n="products_filter_smart">智能</button>
-              </div>
-            </div>
-          </div>
-        </section>
+      <!-- Category Cards -->
+      <section class="fullwidth-bg py-12">
+        <div class="section-content">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-5 max-w-4xl mx-auto">
 
-        <!-- Product Grid Section -->
-        <section class="fullwidth-bg w-full py-16">
-          <div class="section-content">
-            <!-- Product Grid -->
-            <div class="grid grid-cols-2 gap-6" id="product-grid">
-              <!-- Skeleton placeholders (cleared by product-grid.js) -->
-              <div class="sk-product-card"><div class="sk-product-img"></div><div class="sk-product-text"></div></div>
-              <div class="sk-product-card"><div class="sk-product-img"></div><div class="sk-product-text"></div></div>
-              <div class="sk-product-card"><div class="sk-product-img"></div><div class="sk-product-text"></div></div>
-              <div class="sk-product-card"><div class="sk-product-img"></div><div class="sk-product-text"></div></div>
-            </div>
-            <div class="flex justify-center mt-10">
-              <button class="flex items-center gap-2 px-6 py-3 border-2 border-slate-200 dark:border-slate-700 rounded-xl font-bold text-base text-slate-600 dark:text-slate-400 hover:border-primary hover:text-primary transition-all" data-i18n="products_load_more">
-                加载更多产品
-                <span class="material-symbols-outlined">expand_more</span>
-              </button>
-            </div>
-          </div>
-        </section>
-
-        <!-- CTA Section -->
-        <section class="fullwidth-bg w-full py-16">
-          <div class="section-content">
-            <div class="w-full bg-gradient-to-br from-primary/10 to-primary/5 dark:from-primary/20 dark:to-primary/5 rounded-3xl p-10 border border-primary/20">
-              <div class="max-w-3xl mx-auto text-center">
-                <h2 class="text-3xl font-black mb-6 text-slate-900 dark:text-white" data-i18n="products_cta_title">
-                  需要定制化解决方案？
-                </h2>
-                <p class="text-base text-slate-600 dark:text-slate-400 mb-8" data-i18n="products_cta_desc">
-                  我们的工程师团队可以根据您的厨房布局和业务需求，为您量身定制最优的设备配置方案。
-                </p>
-                <div class="flex flex-wrap justify-center gap-4">
-                  <a href="/quote" class="bg-primary text-white px-6 py-3 rounded-xl font-bold text-base hover:shadow-lg hover:shadow-primary/20 transition-all flex items-center gap-2">
-                    <span data-i18n="products_cta_btn_quote">获取定制报价</span>
-                    <span class="material-symbols-outlined">request_quote</span>
-                  </a>
-                  <a
-                    href="https:/wa.me/8613163756465" data-wa-message-key="wa_msg_products"
-                    target="_blank" rel="noopener noreferrer"
-                    class="border-2 border-slate-300 dark:border-slate-600 px-6 py-3 rounded-xl font-bold text-base hover:bg-slate-100 dark:hover:bg-slate-800 transition-all flex items-center gap-2"
-                  >
-                    <span data-i18n="products_cta_btn_contact">联系销售团队</span>
-                    <span class="material-symbols-outlined">support_agent</span>
-                  </a>
-                </div>
+            <!-- 翻炒系列 -->
+            <a href="/products/stirfry/" class="group bg-white dark:bg-slate-800 rounded-2xl overflow-hidden shadow-sm border border-slate-200/70 dark:border-slate-700 hover:shadow-xl hover:border-primary/30 transition-all duration-300 hover:-translate-y-1">
+              <div class="h-40 bg-gradient-to-br from-orange-400 to-red-500 flex items-center justify-center">
+                <span class="material-symbols-outlined text-white text-6xl" style="font-variation-settings: 'FILL' 0, 'wght' 200">local_fire_department</span>
               </div>
+              <div class="p-5">
+                <h3 class="text-lg font-bold mb-2" data-i18n="nav_products_stirfry">智能爆炒机</h3>
+                <p class="text-slate-600 dark:text-slate-400 leading-relaxed mb-3 text-sm" data-i18n="prod_card_stirfry_desc">107+ 款型号覆盖入门到智能全线，一人操控 6 口灶，出餐效率提升 5 倍。</p>
+                <span class="inline-flex items-center gap-1 text-primary font-bold text-sm group-hover:gap-2 transition-all">
+                  <span data-i18n="app_card_cta">查看系列</span>
+                  <span class="material-symbols-outlined text-base">arrow_forward</span>
+                </span>
+              </div>
+            </a>
+
+            <!-- 切配系列 -->
+            <a href="/products/cutting/" class="group bg-white dark:bg-slate-800 rounded-2xl overflow-hidden shadow-sm border border-slate-200/70 dark:border-slate-700 hover:shadow-xl hover:border-primary/30 transition-all duration-300 hover:-translate-y-1">
+              <div class="h-40 bg-gradient-to-br from-blue-400 to-indigo-500 flex items-center justify-center">
+                <span class="material-symbols-outlined text-white text-6xl" style="font-variation-settings: 'FILL' 0, 'wght' 200">content_cut</span>
+              </div>
+              <div class="p-5">
+                <h3 class="text-lg font-bold mb-2" data-i18n="nav_products_cutting">智能切配设备</h3>
+                <p class="text-slate-600 dark:text-slate-400 leading-relaxed mb-3 text-sm" data-i18n="prod_card_cutting_desc">切丝切片切丁规格统一，替代 3-5 个切菜工，备料效率提升 6 倍。</p>
+                <span class="inline-flex items-center gap-1 text-primary font-bold text-sm group-hover:gap-2 transition-all">
+                  <span data-i18n="app_card_cta">查看系列</span>
+                  <span class="material-symbols-outlined text-base">arrow_forward</span>
+                </span>
+              </div>
+            </a>
+
+            <!-- 油炸系列 -->
+            <a href="/products/frying/" class="group bg-white dark:bg-slate-800 rounded-2xl overflow-hidden shadow-sm border border-slate-200/70 dark:border-slate-700 hover:shadow-xl hover:border-primary/30 transition-all duration-300 hover:-translate-y-1">
+              <div class="h-40 bg-gradient-to-br from-amber-400 to-yellow-500 flex items-center justify-center">
+                <span class="material-symbols-outlined text-white text-6xl" style="font-variation-settings: 'FILL' 0, 'wght' 200">outdoor_grill</span>
+              </div>
+              <div class="p-5">
+                <h3 class="text-lg font-bold mb-2" data-i18n="nav_products_frying">智能油炸机</h3>
+                <p class="text-slate-600 dark:text-slate-400 leading-relaxed mb-3 text-sm" data-i18n="prod_card_frying_desc">精准控温 ±1°C，自动过滤换油，炸物品质批次稳定。</p>
+                <span class="inline-flex items-center gap-1 text-primary font-bold text-sm group-hover:gap-2 transition-all">
+                  <span data-i18n="app_card_cta">查看系列</span>
+                  <span class="material-symbols-outlined text-base">arrow_forward</span>
+                </span>
+              </div>
+            </a>
+
+            <!-- 蒸煮系列 -->
+            <a href="/products/steaming/" class="group bg-white dark:bg-slate-800 rounded-2xl overflow-hidden shadow-sm border border-slate-200/70 dark:border-slate-700 hover:shadow-xl hover:border-primary/30 transition-all duration-300 hover:-translate-y-1">
+              <div class="h-40 bg-gradient-to-br from-teal-400 to-cyan-500 flex items-center justify-center">
+                <span class="material-symbols-outlined text-white text-6xl" style="font-variation-settings: 'FILL' 0, 'wght' 200">cloud</span>
+              </div>
+              <div class="p-5">
+                <h3 class="text-lg font-bold mb-2" data-i18n="nav_products_steaming">智能蒸煮设备</h3>
+                <p class="text-slate-600 dark:text-slate-400 leading-relaxed mb-3 text-sm" data-i18n="prod_card_steaming_desc">大容量多层蒸制，自动控温不滴水，早餐高峰 500 份准时出笼。</p>
+                <span class="inline-flex items-center gap-1 text-primary font-bold text-sm group-hover:gap-2 transition-all">
+                  <span data-i18n="app_card_cta">查看系列</span>
+                  <span class="material-symbols-outlined text-base">arrow_forward</span>
+                </span>
+              </div>
+            </a>
+
+            <!-- 炖煮系列 -->
+            <a href="/products/stewing/" class="group bg-white dark:bg-slate-800 rounded-2xl overflow-hidden shadow-sm border border-slate-200/70 dark:border-slate-700 hover:shadow-xl hover:border-primary/30 transition-all duration-300 hover:-translate-y-1">
+              <div class="h-40 bg-gradient-to-br from-purple-400 to-pink-500 flex items-center justify-center">
+                <span class="material-symbols-outlined text-white text-6xl" style="font-variation-settings: 'FILL' 0, 'wght' 200">soup_kitchen</span>
+              </div>
+              <div class="p-5">
+                <h3 class="text-lg font-bold mb-2" data-i18n="nav_products_stewing">智能炖煮设备</h3>
+                <p class="text-slate-600 dark:text-slate-400 leading-relaxed mb-3 text-sm" data-i18n="prod_card_stewing_desc">精准控温慢炖，自动保温，汤底味道批次间零偏差。</p>
+                <span class="inline-flex items-center gap-1 text-primary font-bold text-sm group-hover:gap-2 transition-all">
+                  <span data-i18n="app_card_cta">查看系列</span>
+                  <span class="material-symbols-outlined text-base">arrow_forward</span>
+                </span>
+              </div>
+            </a>
+
+            <!-- 辅助设备 -->
+            <a href="/products/other/" class="group bg-white dark:bg-slate-800 rounded-2xl overflow-hidden shadow-sm border border-slate-200/70 dark:border-slate-700 hover:shadow-xl hover:border-primary/30 transition-all duration-300 hover:-translate-y-1">
+              <div class="h-40 bg-gradient-to-br from-slate-400 to-gray-500 flex items-center justify-center">
+                <span class="material-symbols-outlined text-white text-6xl" style="font-variation-settings: 'FILL' 0, 'wght' 200">settings</span>
+              </div>
+              <div class="p-5">
+                <h3 class="text-lg font-bold mb-2" data-i18n="nav_products_other">厨房配套设备</h3>
+                <p class="text-slate-600 dark:text-slate-400 leading-relaxed mb-3 text-sm" data-i18n="prod_card_other_desc">洗碗机、保温柜、展示柜、工作台，一站式补齐后厨。</p>
+                <span class="inline-flex items-center gap-1 text-primary font-bold text-sm group-hover:gap-2 transition-all">
+                  <span data-i18n="app_card_cta">查看系列</span>
+                  <span class="material-symbols-outlined text-base">arrow_forward</span>
+                </span>
+              </div>
+            </a>
+
+          </div>
+        </div>
+      </section>
+
+      <!-- CTA -->
+      <section class="fullwidth-bg py-12 bg-primary relative overflow-hidden">
+        <div class="section-content">
+          <div class="text-center max-w-xl mx-auto">
+            <h2 class="text-2xl font-black tracking-tight text-white mb-3" data-i18n="products_cta_title">
+              找到适合你后厨的设备方案
+            </h2>
+            <p class="text-base text-white/80 mb-6" data-i18n="products_cta_desc">
+              工程师根据你的菜单、出餐量和场地，定制整套设备方案。
+            </p>
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-3">
+              <a href="/quote/" class="bg-white text-primary px-6 py-3 rounded-xl font-bold hover:shadow-lg transition-all flex items-center gap-2">
+                <span class="material-symbols-outlined">description</span>
+                <span data-i18n="products_cta_btn_quote">获取方案报价</span>
+              </a>
+              <a href="/contact/" class="bg-transparent border-2 border-white text-white px-6 py-3 rounded-xl font-bold hover:bg-white/10 transition-all flex items-center gap-2">
+                <span class="material-symbols-outlined">support_agent</span>
+                <span data-i18n="products_cta_btn_contact">联系销售团队</span>
+              </a>
             </div>
           </div>
-        </section>
+        </div>
+      </section>
     </main>
 
     <script src="/assets/js/ui/dropdown-styles.js"></script>
