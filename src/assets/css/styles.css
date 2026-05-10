@@ -286,10 +286,13 @@ main > section + section {
   }
 }
 
-/* Don't collapse after hero sections (they have their own spacing logic) */
+/* After hero sections: use mild collapse instead of full collapse.
+ * Full collapse (margin-top: -3.5rem) conflicts with hero's negative margin-top,
+ * but margin-top: 0 leaves short-hero pages too cramped.
+ * 0.5rem provides ~8px extra breathing room for short heroes. */
 main > section.section-passthrough + section,
 main > section.hero-overlap + section {
-  margin-top: 0;
+  margin-top: 0.5rem;
 }
 
 /* Alternating background sections need more visual separation (less collapse) */
