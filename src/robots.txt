@@ -1,0 +1,9 @@
+User-agent: *
+Allow: /
+Disallow: /api/
+Disallow: /admin/
+Disallow: /products/detail/
+Disallow: /quote/
+Disallow: /thank-you/
+
+Sitemap: https://www.kitchen.yukoli.com/sitemap.xml

@@ -307,7 +307,7 @@ app.use(express.static(path.join(__dirname, 'dist'), {
 // The entry handler script in index.html will handle device-specific routing
 // without page redirect, maintaining header/body/footer structure
 app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'dist', 'index.html'));
+  res.redirect(301, '/home/');
 });
 
 // ─── Universal page resolver ─────────────────────────────────────────────
@@ -362,6 +362,10 @@ app.get('*', (req, res) => {
   if (req.path.startsWith('/api/')) return res.status(404).json({ error: 'Not found' });
 
   var resolved = resolvePage(req.path);
+  if (resolved.endsWith('index.html')) {
+    res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate');
+    res.setHeader('Pragma', 'no-cache');
+  }
   res.sendFile(resolved);
 });
 

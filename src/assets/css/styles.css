@@ -245,9 +245,13 @@ main#spa-content {
 
 /* Hero overlap: first section pulls up to overlap with fixed navigator.
    Uses a dedicated class instead of Tailwind arbitrary value (-mt-[var(...)])
-   because the comma inside arbitrary values causes unreliable CSS selector matching. */
+   because the comma inside arbitrary values causes unreliable CSS selector matching.
+   Padding-top on the hero section itself ensures content stays below the header.
+   The inline pt-* class on the section provides additional breathing room beyond
+   the nav clearance (e.g. pt-6 after this base padding). */
 main#spa-content > .hero-overlap {
   margin-top: calc(var(--nav-height, 65px) * -1);
+  padding-top: calc(var(--nav-height, 65px) + 1.5rem);
 }
 
 @media (min-width: 1024px) {
@@ -256,6 +260,7 @@ main#spa-content > .hero-overlap {
   }
   main#spa-content > .hero-overlap {
     margin-top: calc(var(--nav-height, 109px) * -1);
+    padding-top: calc(var(--nav-height, 109px) + 1.5rem);
   }
 }
 
@@ -423,9 +428,21 @@ main[class*="px-"] > section > .section-content {
 }
 
 /* ─── Navigator placeholder: prevent layout shift before JS mount ───── */
+/* Exact match of real header heights to avoid CLS before navigator.js replaces placeholder. */
 navigator[data-component="navigator"] {
   display: block;
-  min-height: 108px;
+  height: 109px;
+  background: rgba(248, 246, 246, 0.8);
+  border-bottom: 1px solid rgba(226, 232, 240, 1);
+}
+@media (max-width: 767px) {
+  navigator[data-component="navigator"] {
+    height: 61px;
+  }
+}
+html.dark navigator[data-component="navigator"] {
+  background: rgba(34, 22, 16, 0.8);
+  border-bottom-color: rgba(30, 41, 59, 1);
 }
 
 /* Spacer divs from navigator.js are no longer created (removed to fix double-spacing).

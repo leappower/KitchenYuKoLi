@@ -687,10 +687,16 @@
           this.log("Dynamic route on init (content exists, skip loadRoute):", currentPath);
         }
       } else {
-        // Standalone SSG page — don't load route (content already in DOM),
-        // just register click handler for future SPA navigation.
-        // The document-level click handler below handles this.
-        this.log("Standalone page (skip init load):", currentPath);
+        // Standalone SSG page — content may already be in DOM (production),
+        // or empty if served SPA shell (dev mode / hot reload).
+        // Always check container and load if empty.
+        var container = document.getElementById("spa-content");
+        if (!container || !container.innerHTML.trim()) {
+          this.log("Standalone page but container empty — loading:", currentPath);
+          this.loadRoute(currentPath);
+        } else {
+          this.log("Standalone page (content exists, skip load):", currentPath);
+        }
       }
 
       // 解析路径中的 hash 锚点（如 /support/#faq → path=/support/ hash=faq）

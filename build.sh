@@ -57,6 +57,8 @@ find "$SRC/pages" -name '*.html' -print0 | while IFS= read -r -d '' f; do
   cp "$f" "$DIST/$rel"
 done
 cp "$SRC/index.html" "$DIST/index.html"
+# Copy robots.txt if it exists
+[ -f "$SRC/robots.txt" ] && cp "$SRC/robots.txt" "$DIST/robots.txt"
 
 # ─── 2. Assets ──────────────────────────────────────────────────
 sync_assets "js"           "*.js"
@@ -75,6 +77,11 @@ echo "🔄 Bumping JS version to $VERSION..."
 # Replace all version query params (handles v=20260508, v=20260508-v3, v=anystring, v=this)
 find "$DIST" -name '*.html' -exec sed -i '' "s|?v=[a-zA-Z0-9._-]*|?$VERSION|g" {} +
 find "$SRC/pages" -name '*.html' -exec sed -i '' "s|?v=[a-zA-Z0-9._-]*|?$VERSION|g" {} +
+
+# Generate sitemap.xml
+if command -v node &>/dev/null; then
+  node scripts/generate-sitemap.js 2>/dev/null || true
+fi
 
 FILES=$(find "$DIST" -type f | wc -l | tr -d ' ')
 echo ""

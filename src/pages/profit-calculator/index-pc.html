@@ -2,7 +2,10 @@
 <html class="light" lang="zh-CN">
   <head>
     <!-- ═══ Responsive Redirect ═══ -->
-    <link rel="canonical" href="/profit-calculator/" />
+    <link rel="canonical" href="https://www.kitchen.yukoli.com/profit-calculator/" />
+  <link rel="alternate" hreflang="zh-CN" href="https://www.kitchen.yukoli.com/profit-calculator/" />
+  <link rel="alternate" hreflang="en" href="https://www.kitchen.yukoli.com/profit-calculator/" />
+  <link rel="alternate" hreflang="x-default" href="https://www.kitchen.yukoli.com/profit-calculator/" />
     <link rel="alternate" media="only screen and (max-width: 767px)" href="/profit-calculator/index-mobile.html" />
     <link rel="alternate" media="only screen and (min-width: 768px) and (max-width: 1279px)" href="/profit-calculator/index-tablet.html" />
     <link rel="alternate" media="only screen and (min-width: 1280px)" href="/profit-calculator/index-pc.html" />
@@ -57,7 +60,7 @@
 
     <script type="application/ld+json">
     {
-      "@context": "https://schema.org",
+      "@context": "https:/schema.org",
       "@type": "WebPage",
       "name": "YuKoLi Kitchen Equipment Profit Calculator",
       "description": "Calculate your commercial kitchen equipment ROI in 45 seconds",
@@ -298,16 +301,17 @@
     <script src="/assets/js/ui/dropdown-styles.js"></script>
     <script src="/assets/js/ui/dropdown-base.js"></script>
     <script src="/assets/js/ui/custom-select.js"></script>
-    <script defer src="/assets/js/ui/products-dropdown.js?v=202605091705"></script>
-    <script defer src="/assets/js/ui/applications-dropdown.js?v=202605091705"></script>
-    <script defer src="/assets/js/ui/support-dropdown.js?v=202605091705"></script>
-    <script defer src="/assets/js/ui/about-dropdown.js?v=202605091705"></script>
-    <script defer src="/assets/js/ui/navigator.js?v=202605091705"></script>
+    <script defer src="/assets/js/ui/products-dropdown.js?v=202605101659"></script>
+    <script defer src="/assets/js/ui/applications-dropdown.js?v=202605101659"></script>
+    <script defer src="/assets/js/ui/support-dropdown.js?v=202605101659"></script>
+    <script defer src="/assets/js/ui/about-dropdown.js?v=202605101659"></script>
+    <script defer src="/assets/js/ui/navigator.js?v=202605101659"></script>
+<script defer src="/assets/js/ui/slide-menu.js?v=202605101659"></script>
     <script defer src="/assets/js/ui/search-engine.js"></script>
-    <script defer src="/assets/js/ui/footer.js?v=202605091705"></script>
-    <script defer src="/assets/js/lang-registry.js?v=202605091705"></script>
-    <script defer src="/assets/js/translations.js?v=202605091705"></script>
-    <script defer src="/assets/js/translations-dropdown-template.js?v=202605091705"></script>
+    <script defer src="/assets/js/ui/footer.js?v=202605101659"></script>
+    <script defer src="/assets/js/lang-registry.js?v=202605101659"></script>
+    <script defer src="/assets/js/translations.js?v=202605101659"></script>
+    <script defer src="/assets/js/translations-dropdown-template.js?v=202605101659"></script>
     <script defer src="/assets/js/contacts.js"></script>
     <script defer src="/assets/js/router.js"></script>
     <script defer src="/assets/js/ui/helpers.js"></script>
@@ -320,7 +324,7 @@
     <script src="/assets/js/vendor/html2canvas.min.js"></script>
     <script src="/assets/js/vendor/jspdf.umd.min.js"></script>
     <!-- Calculator Engine -->
-    <script src="/assets/js/profit-calculator.js?v=202605091705"></script>
+    <script src="/assets/js/profit-calculator.js?v=202605101659"></script>
 
     <script>
       document.addEventListener("DOMContentLoaded", function () {
@@ -333,7 +337,7 @@
           laborInputId: 'pc-labor-cost'
         });
 
-        // Auto-fill from URL params (e.g. ?scene=chain-restaurant&meals=500)
+// Auto-fill from URL params (e.g. ?scene=chain-restaurant&meals=500)
         var presetApplied = calc.applyPreset();
         if (presetApplied) {
           document.getElementById('profit-placeholder').classList.add('hidden');
@@ -355,7 +359,7 @@
     </script>
 
     <script src="/assets/js/utils/device-utils.js"></script>
-    <script src="/assets/js/spa-router.js?v=202605091705"></script>
+    <script src="/assets/js/spa-router.js?v=202605101659"></script>
       <script defer src="/assets/js/ui/floating-actions.js"></script>
   </body>
 </html>
