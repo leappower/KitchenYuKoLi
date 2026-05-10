@@ -164,18 +164,104 @@
           </div>
         </div></section>
 
-        <!-- Tier Filter -->
-        <section class="fullwidth-bg w-full py-10">
+        <!-- 痛点区 -->
+        <section class="fullwidth-bg py-12">
           <div class="section-content">
-          <div class="flex flex-col gap-3">
-            <!-- Tier filter (right-aligned) -->
-            <div class="flex items-center justify-end gap-2">
-              <button class="filter-chip active px-3 py-1.5 rounded-full border border-slate-200 dark:border-slate-700 text-xs font-medium" data-filter="all" data-i18n="all">全部</button>
-              <button class="filter-chip px-3 py-1.5 rounded-full border border-slate-200 dark:border-slate-700 text-xs font-medium" data-filter="入门" data-i18n="products_filter_starter">入门</button>
-              <button class="filter-chip px-3 py-1.5 rounded-full border border-slate-200 dark:border-slate-700 text-xs font-medium" data-filter="智能" data-i18n="products_filter_smart">智能</button>
-              
+            <div class="w-full text-center mb-10">
+              <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-red-100 dark:bg-red-900/20 text-red-600 text-xs font-bold uppercase tracking-widest mb-4">
+                <span class="material-symbols-outlined text-sm">warning</span>
+                <span data-i18n="app_pain_badge">行业痛点</span>
+              </span>
+              <h2 class="text-2xl font-bold mb-3" data-i18n="cutting_pain_title">切配师傅的日常烦恼</h2>
+              <p class="text-slate-500 dark:text-slate-400 max-w-2xl mx-auto text-sm" data-i18n="cutting_pain_desc">备料慢、规格乱、成本高——后厨最不起眼的环节，反而是效率黑洞。</p>
+            </div>
+            <div class="grid grid-cols-1 gap-4">
+              <div class="flex gap-4 p-6 rounded-2xl bg-red-50/50 dark:bg-red-900/10 border border-red-100 dark:border-red-900/30">
+                <div class="w-10 h-10 rounded-xl bg-red-100 dark:bg-red-900/30 flex items-center justify-center shrink-0"><span class="material-symbols-outlined text-red-600">schedule</span></div>
+                <div>
+                  <h3 class="font-bold mb-1" data-i18n="cutting_pain_1_title">备料要两小时</h3>
+                  <p class="text-sm text-slate-600 dark:text-slate-400" data-i18n="cutting_pain_1_desc">3 个人切一上午，切丝切片规格不统一，午高峰经常来不及。</p>
+                </div>
+              </div>
+              <div class="flex gap-4 p-6 rounded-2xl bg-red-50/50 dark:bg-red-900/10 border border-red-100 dark:border-red-900/30">
+                <div class="w-10 h-10 rounded-xl bg-red-100 dark:bg-red-900/30 flex items-center justify-center shrink-0"><span class="material-symbols-outlined text-red-600">groups</span></div>
+                <div>
+                  <h3 class="font-bold mb-1" data-i18n="cutting_pain_2_title">请不到切菜工</h3>
+                  <p class="text-sm text-slate-600 dark:text-slate-400" data-i18n="cutting_pain_2_desc">切菜工工资低、活累，年轻人不愿干，旺季招人难、留人更难。</p>
+                </div>
+              </div>
+              <div class="flex gap-4 p-6 rounded-2xl bg-red-50/50 dark:bg-red-900/10 border border-red-100 dark:border-red-900/30">
+                <div class="w-10 h-10 rounded-xl bg-red-100 dark:bg-red-900/30 flex items-center justify-center shrink-0"><span class="material-symbols-outlined text-red-600">trending_up</span></div>
+                <div>
+                  <h3 class="font-bold mb-1" data-i18n="cutting_pain_3_title">食材浪费大</h3>
+                  <p class="text-sm text-slate-600 dark:text-slate-400" data-i18n="cutting_pain_3_desc">手工切配损耗率高，胡萝卜切完丢三分之一，一个月光损耗就上千。</p>
+                </div>
+              </div>
+              <div class="flex gap-4 p-6 rounded-2xl bg-red-50/50 dark:bg-red-900/10 border border-red-100 dark:border-red-900/30">
+                <div class="w-10 h-10 rounded-xl bg-red-100 dark:bg-red-900/30 flex items-center justify-center shrink-0"><span class="material-symbols-outlined text-red-600">ruler</span></div>
+                <div>
+                  <h3 class="font-bold mb-1" data-i18n="cutting_pain_4_title">规格不统一</h3>
+                  <p class="text-sm text-slate-600 dark:text-slate-400" data-i18n="cutting_pain_4_desc">切丝粗细不同、切片厚薄不均，同一道菜每份口感都不一样。</p>
+                </div>
+              </div>
             </div>
           </div>
+        </section>
+
+        <!-- 方案优势区 -->
+        <section class="fullwidth-bg py-10">
+          <div class="section-content">
+            <div class="w-full flex flex-col gap-8">
+              <div class="w-full">
+                <span class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 text-primary text-sm font-bold uppercase tracking-wider mb-4">
+                  <span class="material-symbols-outlined">lightbulb</span>
+                  <span data-i18n="cutting_solution_badge">智能切配</span>
+                </span>
+                <h2 class="text-2xl font-black tracking-tight mb-4" data-i18n="cutting_solution_title">一键切配，规格统一，备料效率提升 6 倍</h2>
+                <p class="text-base text-slate-600 dark:text-slate-400 mb-6" data-i18n="cutting_solution_subtitle">从切菜机到切片机，一站式的智能切配解决方案。</p>
+                <div class="space-y-4">
+                  <div class="flex gap-4">
+                    <div class="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0">
+                      <span class="material-symbols-outlined text-primary">speed</span>
+                    </div>
+                    <div>
+                      <h4 class="font-bold" data-i18n="cutting_solution_1_title">备料提速 6 倍</h4>
+                      <p class="text-sm text-slate-600 dark:text-slate-400" data-i18n="cutting_solution_1_desc">2 小时备料 → 20 分钟，切配效率质的飞跃。</p>
+                    </div>
+                  </div>
+                  <div class="flex gap-4">
+                    <div class="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0">
+                      <span class="material-symbols-outlined text-primary">straighten</span>
+                    </div>
+                    <div>
+                      <h4 class="font-bold" data-i18n="cutting_solution_2_title">规格统一一致</h4>
+                      <p class="text-sm text-slate-600 dark:text-slate-400" data-i18n="cutting_solution_2_desc">丝、片、丁一键切换，每一刀都精准如一。</p>
+                    </div>
+                  </div>
+                  <div class="flex gap-4">
+                    <div class="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0">
+                      <span class="material-symbols-outlined text-primary">group_remove</span>
+                    </div>
+                    <div>
+                      <h4 class="font-bold" data-i18n="cutting_solution_3_title">替代 3-5 人</h4>
+                      <p class="text-sm text-slate-600 dark:text-slate-400" data-i18n="cutting_solution_3_desc">一台切菜机替代 3-5 个切菜工，人力成本直接下降。</p>
+                    </div>
+                  </div>
+                  <div class="flex gap-4">
+                    <div class="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0">
+                      <span class="material-symbols-outlined text-primary">eco</span>
+                    </div>
+                    <div>
+                      <h4 class="font-bold" data-i18n="cutting_solution_4_title">降低损耗 40%</h4>
+                      <p class="text-sm text-slate-600 dark:text-slate-400" data-i18n="cutting_solution_4_desc">机械切配损耗率远低于手工，食材利用率显著提升。</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="text-center mt-8 pt-6 border-t border-slate-200 dark:border-slate-700 w-full">
+              <p class="text-base text-slate-600 dark:text-slate-400 max-w-2xl mx-auto" data-i18n="cutting_solution_transition">切配选设备，核心看日均备料量和菜品类型。</p>
+            </div>
           </div>
         </section>
         <section id="products" class="fullwidth-bg pb-8">
@@ -197,11 +283,42 @@
         </section>
 
         
-  <!-- Cross-sell & Scene Entry Section -->
-  <section id="category-extras" class="fullwidth-bg w-full py-10">
+  <!-- FAQ 区 -->
+  <section class="fullwidth-bg py-10 bg-slate-50 dark:bg-slate-900/50">
     <div class="section-content">
-      <div id="cross-sell-container"></div>
-      <div id="scene-entry-container" class="mt-8"></div>
+      <div class="text-center max-w-3xl mx-auto mb-10">
+        <h2 class="text-2xl font-black tracking-tight mb-4" data-i18n="cutting_faq_title">切配设备常见问题</h2>
+      </div>
+      <div class="max-w-3xl mx-auto space-y-3">
+        <details class="group bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 overflow-hidden">
+          <summary class="flex items-center justify-between p-5 cursor-pointer font-bold text-base select-none">
+            <span data-i18n="cutting_faq1_q">切配机能处理哪些食材？</span>
+            <span class="material-symbols-outlined text-slate-400 group-open:rotate-180 transition-transform">expand_more</span>
+          </summary>
+          <div class="px-5 pt-5 pb-5 text-sm text-slate-600 dark:text-slate-400 leading-relaxed" data-i18n="cutting_faq1_a">蔬菜、根茎类、硬质食材都可以。常见支持：土豆、胡萝卜、白菜、洋葱、黄瓜、芹菜等。特殊食材建议先寄样测试。</div>
+        </details>
+        <details class="group bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 overflow-hidden">
+          <summary class="flex items-center justify-between p-5 cursor-pointer font-bold text-base select-none">
+            <span data-i18n="cutting_faq2_q">切出来的规格能调吗？</span>
+            <span class="material-symbols-outlined text-slate-400 group-open:rotate-180 transition-transform">expand_more</span>
+          </summary>
+          <div class="px-5 pt-5 pb-5 text-sm text-slate-600 dark:text-slate-400 leading-relaxed" data-i18n="cutting_faq2_a">可以。切丝粗细、切片厚薄、切丁大小都可以通过更换刀片或调节参数控制，通常提供多种规格可选。</div>
+        </details>
+        <details class="group bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 overflow-hidden">
+          <summary class="flex items-center justify-between p-5 cursor-pointer font-bold text-base select-none">
+            <span data-i18n="cutting_faq3_q">清洗方便吗？</span>
+            <span class="material-symbols-outlined text-slate-400 group-open:rotate-180 transition-transform">expand_more</span>
+          </summary>
+          <div class="px-5 pt-5 pb-5 text-sm text-slate-600 dark:text-slate-400 leading-relaxed" data-i18n="cutting_faq3_a">采用快拆设计，刀片和送料槽可以快速拆卸清洗，日常清洁 5-10 分钟完成。</div>
+        </details>
+        <details class="group bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 overflow-hidden">
+          <summary class="flex items-center justify-between p-5 cursor-pointer font-bold text-base select-none">
+            <span data-i18n="cutting_faq4_q">切配机适合多大产能的后厨？</span>
+            <span class="material-symbols-outlined text-slate-400 group-open:rotate-180 transition-transform">expand_more</span>
+          </summary>
+          <div class="px-5 pt-5 pb-5 text-sm text-slate-600 dark:text-slate-400 leading-relaxed" data-i18n="cutting_faq4_a">从小型餐饮（日备料 50kg）到中央厨房（日备料 500kg+）都有对应型号。建议根据日均备料量选型。</div>
+        </details>
+      </div>
     </div>
   </section>
 
