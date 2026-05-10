@@ -249,8 +249,8 @@
           <div class="h-48 rounded-xl overflow-hidden mb-4">
           <img src="/assets/images/applications/central-kitchen/pain5.webp" alt="能源成本高" class="w-full h-full object-cover" loading="lazy" />
           </div>
-          <h3 class="text-xl font-bold mb-3 px-8">能源成本高</h3>
-          <p class="text-slate-600 dark:text-slate-400 px-8 pb-8">
+          <h3 class="text-xl font-bold mb-3 px-8" data-i18n="central_kitchen_pain_5_title">能源成本高</h3>
+          <p class="text-slate-600 dark:text-slate-400 px-8 pb-8" data-i18n="central_kitchen_pain_5_desc">
           传统灶台燃气费用居高不下，中央厨房月均燃气费上万元，能耗账单是食堂负责人的心病。
           </p>
           </div>
@@ -259,8 +259,8 @@
           <div class="h-48 rounded-xl overflow-hidden mb-4">
           <img src="/assets/images/applications/central-kitchen/pain6.webp" alt="食材浪费大" class="w-full h-full object-cover" loading="lazy" />
           </div>
-          <h3 class="text-xl font-bold mb-3 px-8">食材浪费大</h3>
-          <p class="text-slate-600 dark:text-slate-400 px-8 pb-8">
+          <h3 class="text-xl font-bold mb-3 px-8" data-i18n="central_kitchen_pain_6_title">食材浪费大</h3>
+          <p class="text-slate-600 dark:text-slate-400 px-8 pb-8" data-i18n="central_kitchen_pain_6_desc">
           手工控量不准确，每餐多备15%-20%以防断供，大量食材浪费。
           </p>
           </div>
@@ -369,13 +369,13 @@
 
           <div class="w-full text-center mb-16">
           <h2 class="text-3xl lg:text-4xl font-black tracking-tight mb-4" data-i18n="central_kitchen_scenario_title">
-          覆盖四大核心场景
+          覆盖三大核心场景
           </h2>
           <p class="text-lg text-slate-600 dark:text-slate-400" data-i18n="central_kitchen_scenario_subtitle">
-          从院校到企业到社区，灵活适配不同规模的团餐需求
+          从院校到企业到医院，灵活适配不同规模的团餐需求
           </p>
           </div>
-          <div class="grid md:grid-cols-4 gap-8">
+          <div class="grid md:grid-cols-3 gap-8">
           <!-- Scenario 1: Schools -->
           <div
           class="bg-white dark:bg-slate-800 rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all group"
@@ -385,7 +385,7 @@
           loading="lazy"
           alt="院校食堂"
           class="w-full h-full object-cover group-hover:scale-105 transition-transform"
-          src="/assets/images/applications/central-kitchen-school.webp"
+          src="/assets/images/applications/central-kitchen/scene-school.webp"
           onerror="this.src='/assets/images/default.webp'"
           />
           </div>
@@ -412,7 +412,7 @@
           loading="lazy"
           alt="企业食堂"
           class="w-full h-full object-cover group-hover:scale-105 transition-transform"
-          src="/assets/images/applications/central-kitchen-enterprise.webp"
+          src="/assets/images/applications/central-kitchen/scene-enterprise.webp"
           onerror="this.src='/assets/images/default.webp'"
           />
           </div>
@@ -439,7 +439,7 @@
           loading="lazy"
           alt="医院机关食堂"
           class="w-full h-full object-cover group-hover:scale-105 transition-transform"
-          src="/assets/images/applications/central-kitchen-hospital.webp"
+          src="/assets/images/applications/central-kitchen/scene-hospital.webp"
           onerror="this.src='/assets/images/default.webp'"
           />
           </div>
@@ -457,29 +457,85 @@
           </div>
           </div>
           </div>
-          <!-- Scenario 4: Community -->
-          <div class="bg-white dark:bg-slate-800 rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all group">
-          <div class="h-48 bg-slate-200 dark:bg-slate-700 overflow-hidden">
-          <img loading="lazy" alt="社区配餐中心" class="w-full h-full object-cover group-hover:scale-105 transition-transform"
-          src="/assets/images/applications/central-kitchen/scene-community.webp" />
-          </div>
-          <div class="p-6">
-          <div class="flex items-center gap-2 mb-3">
-          <span class="material-symbols-outlined text-primary">volunteer_activism</span>
-          <h3 class="text-xl font-bold">社区配餐中心</h3>
-          </div>
-          <p class="text-slate-600 dark:text-slate-400 text-base mb-4">
-          社区养老配餐、居家养老送餐。日均 200-800 份，菜品要求软烂适老、低盐低油，保温配送是关键。
-          </p>
-          <div class="flex items-center gap-2 text-xs text-primary font-bold">
-          <span class="material-symbols-outlined text-sm">group</span>
-          200-800 人
-          </div>
-          </div>
-          </div>
+
           </div>
 
         </div>
+        </div>
+      </section>
+
+      <!-- ═══════════════════════════════════════════ -->
+      <!-- RECOMMENDED PRODUCTS                         -->
+      <!-- ═══════════════════════════════════════════ -->
+      <section class="fullwidth-bg py-12 bg-slate-50 dark:bg-slate-900/50">
+        <div class="section-content">
+          <div class="text-center max-w-3xl mx-auto mb-12">
+            <h2 class="text-3xl lg:text-4xl font-black tracking-tight mb-4" data-i18n="ck_products_title">中央厨房，这些设备最刚需</h2>
+            <p class="text-slate-600 dark:text-slate-400" data-i18n="ck_products_subtitle">大容量批量出餐、蒸饭保温、洗碗消毒——一条线配齐</p>
+          </div>
+
+          <div class="grid grid-cols-2 lg:grid-cols-4 gap-8">
+            <!-- Product 1: ESL-BXC800 -->
+            <div class="group bg-white dark:bg-slate-800 rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow hover:scale-105">
+              <img src="/assets/images/products/esl-bxc800.webp" alt="ESL-BXC800 大容量炒菜机" class="w-full h-48 object-cover" onerror="this.onerror=null;this.src='/assets/images/placeholders/product-fallback.webp';">
+              <div class="p-6">
+                <div class="inline-flex items-center px-3 py-1 rounded-full bg-primary/10 text-primary text-sm font-bold mb-4">核心设备</div>
+                <h3 class="text-lg font-bold mb-2" data-i18n="ck_prod1_title">ESL-BXC800 大容量炒菜机</h3>
+                <p class="text-slate-600 dark:text-slate-400 mb-4 text-sm" data-i18n="ck_prod1_body">中央厨房主力。单锅大份量，全程自动翻炒，高峰期多台并行出餐 5000+ 份。</p>
+                <a href="/products/" class="text-primary font-bold hover:underline" data-i18n="ck_prod1_link">查看产品</a>
+              </div>
+            </div>
+
+            <!-- Product 2: ESL-PZJ120 -->
+            <div class="group bg-white dark:bg-slate-800 rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow hover:scale-105">
+              <img src="/assets/images/products/esl-pzj120.webp" alt="ESL-PZJ120 炖煮设备" class="w-full h-48 object-cover" onerror="this.onerror=null;this.src='/assets/images/placeholders/product-fallback.webp';">
+              <div class="p-6">
+                <div class="inline-flex items-center px-3 py-1 rounded-full bg-orange-100 dark:bg-orange-900/30 text-orange-600 text-sm font-bold mb-4">热销</div>
+                <h3 class="text-lg font-bold mb-2" data-i18n="ck_prod2_title">ESL-PZJ120 炖煮设备</h3>
+                <p class="text-slate-600 dark:text-slate-400 mb-4 text-sm" data-i18n="ck_prod2_body">煲汤、卤味、预制菜一机搞定。开档前炖好保温，中午来了直接打餐。</p>
+                <a href="/products/" class="text-primary font-bold hover:underline" data-i18n="ck_prod2_link">查看产品</a>
+              </div>
+            </div>
+
+            <!-- Product 3: Central Kitchen Dishwasher -->
+            <div class="group bg-white dark:bg-slate-800 rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow hover:scale-105">
+              <img src="/assets/images/products/central-kitchen-dishwasher.webp" alt="商用洗碗机" class="w-full h-48 object-cover" onerror="this.onerror=null;this.src='/assets/images/placeholders/product-fallback.webp';">
+              <div class="p-6">
+                <div class="inline-flex items-center px-3 py-1 rounded-full bg-blue-100 dark:bg-blue-900/30 text-blue-600 text-sm font-bold mb-4">必备</div>
+                <h3 class="text-lg font-bold mb-2" data-i18n="ck_prod3_title">商用洗碗机</h3>
+                <p class="text-slate-600 dark:text-slate-400 mb-4 text-sm" data-i18n="ck_prod3_body">数千份餐的餐具清洗量，人工洗不现实。高温消毒、快速周转，符合卫生监管要求。</p>
+                <a href="/products/" class="text-primary font-bold hover:underline" data-i18n="ck_prod3_link">查看产品</a>
+              </div>
+            </div>
+
+            <!-- Product 4: ESL-GB80 -->
+            <div class="group bg-white dark:bg-slate-800 rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow hover:scale-105">
+              <img src="/assets/images/products/esl-gb80.webp" alt="ESL-GB80 备料设备" class="w-full h-48 object-cover" onerror="this.onerror=null;this.src='/assets/images/placeholders/product-fallback.webp';">
+              <div class="p-6">
+                <div class="inline-flex items-center px-3 py-1 rounded-full bg-purple-100 dark:bg-purple-900/30 text-purple-600 text-sm font-bold mb-4">推荐</div>
+                <h3 class="text-lg font-bold mb-2" data-i18n="ck_prod4_title">ESL-GB80 备料设备</h3>
+                <p class="text-slate-600 dark:text-slate-400 mb-4 text-sm" data-i18n="ck_prod4_body">高峰前批量备料，切配一键完成。减少人工依赖，让操作员专注出餐线。</p>
+                <a href="/products/" class="text-primary font-bold hover:underline" data-i18n="ck_prod4_link">查看产品</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="grid md:grid-cols-2 gap-8 mt-8">
+            <div class="bg-white dark:bg-slate-800 rounded-2xl p-6 shadow-lg flex gap-6 items-center">
+              <img src="/assets/images/products/esl-xc120.webp" alt="ESL-XC120 中型炒菜机" class="w-32 h-32 rounded-xl object-cover" onerror="this.onerror=null;this.src='/assets/images/placeholders/product-thumb-fallback.webp';">
+              <div>
+                <h3 class="text-xl font-bold mb-2" data-i18n="ck_prod5_title">ESL-XC120 中型炒菜机</h3>
+                <p class="text-slate-600 dark:text-slate-400 text-sm" data-i18n="ck_prod5_body">中型食堂主力。单锅容量适中，4-6 菜轮换出品，日供 1000-2000 份轻松应对。</p>
+              </div>
+            </div>
+            <div class="bg-white dark:bg-slate-800 rounded-2xl p-6 shadow-lg flex gap-6 items-center">
+              <img src="/assets/images/products/stir-fry-1.webp" alt="电磁大炒炉" class="w-32 h-32 rounded-xl object-cover" onerror="this.onerror=null;this.src='/assets/images/placeholders/product-thumb-fallback.webp';">
+              <div>
+                <h3 class="text-xl font-bold mb-2" data-i18n="ck_prod6_title">电磁大炒炉</h3>
+                <p class="text-slate-600 dark:text-slate-400 text-sm" data-i18n="ck_prod6_body">猛火快炒，适合需要锅气的大锅菜。节能省气，比传统燃气灶降低 40% 能耗。</p>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
