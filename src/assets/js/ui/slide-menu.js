@@ -652,6 +652,17 @@
           "</a>";
       }
 
+      // applications 分类末尾追加「查看全部行业场景」链接
+      if (item.id === "applications") {
+        subMenuHtml +=
+          '<a class="mobile-menu-l2-item mobile-menu-l2-viewall" href="/applications/">' +
+          '<span class="mobile-menu-l2-icon">' +
+          '<span class="material-symbols-outlined">grid_view</span>' +
+          "</span>" +
+          '<span class="mobile-menu-l2-label" data-i18n="nav_applications_view_all">查看全部行业场景</span>' +
+          "</a>";
+      }
+
       subMenuHtml += "</div>";
     }
 
