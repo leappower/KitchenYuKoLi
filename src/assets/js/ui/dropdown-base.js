@@ -145,9 +145,15 @@
         t[boundFlag] = true;
         t.addEventListener("click", function (e) {
           if (window.innerWidth <= 720) return;
-          e.preventDefault();
-          e.stopPropagation();
-          t.closest("." + wrapClass).classList.toggle("is-open");
+          /* Touch devices: toggle dropdown & prevent navigation.
+           * Non-touch devices: let click propagate to SPA router (hover handles dropdown). */
+          if (isTouch()) {
+            e.preventDefault();
+            e.stopPropagation();
+            t.closest("." + wrapClass).classList.toggle("is-open");
+          }
+          /* Non-touch: do nothing — hover already opened the dropdown,
+           * and the click should navigate to the overview page via SPA router. */
         });
       });
     }

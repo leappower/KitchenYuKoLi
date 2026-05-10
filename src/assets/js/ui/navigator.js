@@ -1249,8 +1249,8 @@
     initDesktopSearchInteraction();
     initMobileSearchInteraction();
 
-    /* Intercept dropdown trigger clicks BEFORE spa-router (capture phase).
-     * Toggle dropdown and stop propagation so spa-router ignores these links. */
+    /* Dropdown trigger click — close other dropdowns on trigger click.
+     * DropdownBase.bindTriggers() handles toggle (touch) or pass-through (non-touch). */
     document.addEventListener(
       "click",
       function (e) {
@@ -1259,8 +1259,6 @@
         );
         if (!trigger) return;
         if (window.innerWidth <= 720) return;
-        /* On desktop, close any open dropdown then navigate (SPA router handles the link).
-         * Dropdown opens on hover; clicking the title navigates to the overview page. */
         var wrap = trigger.closest(
           ".prod-dropdown-wrap, .app-dropdown-wrap, .sup-dropdown-wrap, .abt-dropdown-wrap, .cnt-dropdown-wrap"
         );
