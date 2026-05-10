@@ -149,18 +149,104 @@
         
 
           </div></section>
-        <!-- Tier Filter -->
-        <section class="fullwidth-bg w-full py-6">
+        <!-- 痛点区 -->
+        <section class="fullwidth-bg py-8 px-4">
           <div class="section-content">
-          <div class="flex flex-col gap-3">
-            <!-- Tier filter chips -->
-            <div class="flex items-center gap-2 overflow-x-auto scrollbar-hide">
-              <button class="filter-chip active px-2.5 py-1 rounded-full border border-slate-200 dark:border-slate-700 text-[10px] font-medium" data-filter="all" data-i18n="all">全部</button>
-              <button class="filter-chip px-2.5 py-1 rounded-full border border-slate-200 dark:border-slate-700 text-[10px] font-medium" data-filter="入门" data-i18n="products_filter_starter">入门</button>
-              <button class="filter-chip px-2.5 py-1 rounded-full border border-slate-200 dark:border-slate-700 text-[10px] font-medium" data-filter="智能" data-i18n="products_filter_smart">智能</button>
-              
+            <div class="w-full text-center mb-8">
+              <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-red-100 dark:bg-red-900/20 text-red-600 text-[10px] font-bold uppercase tracking-widest mb-3">
+                <span class="material-symbols-outlined text-xs">warning</span>
+                <span data-i18n="app_pain_badge">行业痛点</span>
+              </span>
+              <h2 class="text-xl font-bold mb-2" data-i18n="stirfry_pain_title">炒菜师傅的日常烦恼</h2>
+              <p class="text-slate-500 dark:text-slate-400 max-w-xl mx-auto text-xs" data-i18n="stirfry_pain_desc">人手不够、口味不稳、出餐慢——后厨的核心瓶颈，往往在灶台。</p>
+            </div>
+            <div class="grid grid-cols-1 gap-3">
+              <div class="flex gap-3 p-5 rounded-xl bg-red-50/50 dark:bg-red-900/10 border border-red-100 dark:border-red-900/30">
+                <div class="w-9 h-9 rounded-lg bg-red-100 dark:bg-red-900/30 flex items-center justify-center shrink-0"><span class="material-symbols-outlined text-red-600 text-sm">person_off</span></div>
+                <div>
+                  <h3 class="font-bold text-sm mb-1" data-i18n="stirfry_pain_1_title">师傅请假就停摆</h3>
+                  <p class="text-xs text-slate-600 dark:text-slate-400" data-i18n="stirfry_pain_1_desc">炒菜岗只配 1-2 人，请假一天午高峰直接瘫痪。</p>
+                </div>
+              </div>
+              <div class="flex gap-3 p-5 rounded-xl bg-red-50/50 dark:bg-red-900/10 border border-red-100 dark:border-red-900/30">
+                <div class="w-9 h-9 rounded-lg bg-red-100 dark:bg-red-900/30 flex items-center justify-center shrink-0"><span class="material-symbols-outlined text-red-600 text-sm">swap_horiz</span></div>
+                <div>
+                  <h3 class="font-bold text-sm mb-1" data-i18n="stirfry_pain_2_title">口味不稳定</h3>
+                  <p class="text-xs text-slate-600 dark:text-slate-400" data-i18n="stirfry_pain_2_desc">同一道宫保鸡丁，张师傅和李师傅炒出来味道差很远，顾客投诉"不如上次"。</p>
+                </div>
+              </div>
+              <div class="flex gap-3 p-5 rounded-xl bg-red-50/50 dark:bg-red-900/10 border border-red-100 dark:border-red-900/30">
+                <div class="w-9 h-9 rounded-lg bg-red-100 dark:bg-red-900/30 flex items-center justify-center shrink-0"><span class="material-symbols-outlined text-red-600 text-sm">schedule</span></div>
+                <div>
+                  <h3 class="font-bold text-sm mb-1" data-i18n="stirfry_pain_3_title">午高峰出餐慢</h3>
+                  <p class="text-xs text-slate-600 dark:text-slate-400" data-i18n="stirfry_pain_3_desc">手工翻炒 8-12 份一批，高峰期订单积压，超时掉单。</p>
+                </div>
+              </div>
+              <div class="flex gap-3 p-5 rounded-xl bg-red-50/50 dark:bg-red-900/10 border border-red-100 dark:border-red-900/30">
+                <div class="w-9 h-9 rounded-lg bg-red-100 dark:bg-red-900/30 flex items-center justify-center shrink-0"><span class="material-symbols-outlined text-red-600 text-sm">school</span></div>
+                <div>
+                  <h3 class="font-bold text-sm mb-1" data-i18n="stirfry_pain_4_title">培训新人太慢</h3>
+                  <p class="text-xs text-slate-600 dark:text-slate-400" data-i18n="stirfry_pain_4_desc">一个炒菜师傅要培养 2-3 年，新人上手前只能打杂，人力成本居高不下。</p>
+                </div>
+              </div>
             </div>
           </div>
+        </section>
+
+        <!-- 方案优势区 -->
+        <section class="fullwidth-bg py-8 px-4">
+          <div class="section-content">
+            <div class="w-full flex flex-col gap-6">
+              <div class="w-full">
+                <span class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-primary/10 text-primary text-xs font-bold uppercase tracking-wider mb-3">
+                  <span class="material-symbols-outlined text-sm">lightbulb</span>
+                  <span data-i18n="stirfry_solution_badge">智能爆炒</span>
+                </span>
+                <h2 class="text-xl font-black tracking-tight mb-3" data-i18n="stirfry_solution_title">智能温控还原锅气，让每道菜都是招牌菜</h2>
+                <p class="text-sm text-slate-600 dark:text-slate-400 mb-5" data-i18n="stirfry_solution_subtitle">107+ 款爆炒机覆盖入门到智能全线，工程师根据你的菜单精准推荐。</p>
+                <div class="space-y-3">
+                  <div class="flex gap-3">
+                    <div class="w-9 h-9 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
+                      <span class="material-symbols-outlined text-primary text-sm">thermostat</span>
+                    </div>
+                    <div>
+                      <h4 class="font-bold text-sm" data-i18n="stirfry_solution_1_title">精准温控</h4>
+                      <p class="text-xs text-slate-600 dark:text-slate-400" data-i18n="stirfry_solution_1_desc">智能温控系统还原传统锅气，精准复刻大厨手感。</p>
+                    </div>
+                  </div>
+                  <div class="flex gap-3">
+                    <div class="w-9 h-9 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
+                      <span class="material-symbols-outlined text-primary text-sm">bolt</span>
+                    </div>
+                    <div>
+                      <h4 class="font-bold text-sm" data-i18n="stirfry_solution_2_title">一人多机</h4>
+                      <p class="text-xs text-slate-600 dark:text-slate-400" data-i18n="stirfry_solution_2_desc">一人同时操作多台爆炒机，出餐效率提升 5 倍。</p>
+                    </div>
+                  </div>
+                  <div class="flex gap-3">
+                    <div class="w-9 h-9 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
+                      <span class="material-symbols-outlined text-primary text-sm">restaurant_menu</span>
+                    </div>
+                    <div>
+                      <h4 class="font-bold text-sm" data-i18n="stirfry_solution_3_title">800+ 菜谱</h4>
+                      <p class="text-xs text-slate-600 dark:text-slate-400" data-i18n="stirfry_solution_3_desc">800+ 预设菜谱，泰餐、马来菜、印尼菜、中餐全覆盖。</p>
+                    </div>
+                  </div>
+                  <div class="flex gap-3">
+                    <div class="w-9 h-9 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
+                      <span class="material-symbols-outlined text-primary text-sm">sync</span>
+                    </div>
+                    <div>
+                      <h4 class="font-bold text-sm" data-i18n="stirfry_solution_4_title">口味零偏差</h4>
+                      <p class="text-xs text-slate-600 dark:text-slate-400" data-i18n="stirfry_solution_4_desc">菜谱预设火候和翻炒节奏，不依赖厨师经验，每份口味一致。</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="text-center mt-6 pt-4 border-t border-slate-200 dark:border-slate-700 w-full">
+              <p class="text-sm text-slate-600 dark:text-slate-400 max-w-xl mx-auto" data-i18n="stirfry_solution_transition">爆炒机选型，核心看菜品种类和午高峰出餐量。</p>
+            </div>
           </div>
         </section>
         <section id="products" class="fullwidth-bg pb-4">
@@ -182,11 +268,42 @@
         </section>
 
         
-  <!-- Cross-sell & Scene Entry Section -->
-  <section id="category-extras" class="fullwidth-bg w-full py-8">
+  <!-- FAQ 区 -->
+  <section class="fullwidth-bg py-8 bg-slate-50 dark:bg-slate-900/50 px-4">
     <div class="section-content">
-      <div id="cross-sell-container"></div>
-      <div id="scene-entry-container" class="mt-8"></div>
+      <div class="text-center max-w-xl mx-auto mb-8">
+        <h2 class="text-xl font-black tracking-tight mb-3" data-i18n="stirfry_faq_title">爆炒机常见问题</h2>
+      </div>
+      <div class="max-w-xl mx-auto space-y-2">
+        <details class="group bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 overflow-hidden">
+          <summary class="flex items-center justify-between p-4 cursor-pointer font-bold text-sm select-none">
+            <span data-i18n="stirfry_faq1_q">爆炒机能炒哪些菜？</span>
+            <span class="material-symbols-outlined text-slate-400 text-sm group-open:rotate-180 transition-transform">expand_more</span>
+          </summary>
+          <div class="px-4 pt-4 pb-4 text-xs text-slate-600 dark:text-slate-400 leading-relaxed" data-i18n="stirfry_faq1_a">800+ 菜谱覆盖中餐、泰餐、马来菜、印尼菜、越南菜。从炒青菜到红烧肉都可以，菜谱持续更新。</div>
+        </details>
+        <details class="group bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 overflow-hidden">
+          <summary class="flex items-center justify-between p-4 cursor-pointer font-bold text-sm select-none">
+            <span data-i18n="stirfry_faq2_q">爆炒的锅气比得上明火吗？</span>
+            <span class="material-symbols-outlined text-slate-400 text-sm group-open:rotate-180 transition-transform">expand_more</span>
+          </summary>
+          <div class="px-4 pt-4 pb-4 text-xs text-slate-600 dark:text-slate-400 leading-relaxed" data-i18n="stirfry_faq2_a">YuKoLi 智能温控系统精准还原传统锅气，实际盲测中多数厨师无法区分电磁爆炒和明火翻炒的差别。</div>
+        </details>
+        <details class="group bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 overflow-hidden">
+          <summary class="flex items-center justify-between p-4 cursor-pointer font-bold text-sm select-none">
+            <span data-i18n="stirfry_faq3_q">没有厨师经验的人能操作吗？</span>
+            <span class="material-symbols-outlined text-slate-400 text-sm group-open:rotate-180 transition-transform">expand_more</span>
+          </summary>
+          <div class="px-4 pt-4 pb-4 text-xs text-slate-600 dark:text-slate-400 leading-relaxed" data-i18n="stirfry_faq3_a">能。选菜、投料、按启动，新手培训 30 分钟就能独立操作。菜谱预设好火候和翻炒节奏。</div>
+        </details>
+        <details class="group bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 overflow-hidden">
+          <summary class="flex items-center justify-between p-4 cursor-pointer font-bold text-sm select-none">
+            <span data-i18n="stirfry_faq4_q">一台爆炒机能同时炒几份？</span>
+            <span class="material-symbols-outlined text-slate-400 text-sm group-open:rotate-180 transition-transform">expand_more</span>
+          </summary>
+          <div class="px-4 pt-4 pb-4 text-xs text-slate-600 dark:text-slate-400 leading-relaxed" data-i18n="stirfry_faq4_a">根据型号不同，单次可翻炒 8-12 份，一人同时操作多台设备。</div>
+        </details>
+      </div>
     </div>
   </section>
 
