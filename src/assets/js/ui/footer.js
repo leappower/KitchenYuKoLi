@@ -18,11 +18,11 @@
     { id: "whatsapp", icon: "chat", key: "nav_whatsapp", href: "", fill: false, isWhatsApp: true },
   ];
 
-  /* ─── Tablet items (6) ─── */
+  /* ─── Tablet items (6) — matches footer spec ─── */
   var tabletItems = [
     { id: "home", icon: "home", key: "nav_home", href: "/home/", fill: true },
     { id: "products", icon: "kitchen", key: "nav_products", href: "/products/", fill: false },
-    { id: "cases", icon: "monitoring", key: "nav_cases", href: "/cases/", fill: false },
+    { id: "applications", icon: "monitoring", key: "nav_applications", href: "/applications/", fill: false },
     { id: "profit", icon: "calculate", key: "nav_roi", href: "/profit-calculator/", fill: false },
     { id: "about", icon: "info", key: "nav_about", href: "/about/", fill: false },
     { id: "whatsapp", icon: "chat", key: "nav_whatsapp", href: "", fill: false, isWhatsApp: true },

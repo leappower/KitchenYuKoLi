@@ -60,7 +60,7 @@
 
     // Category slugs used for /products/<slug>/ routing
     // Known categories map to products list; everything else → PDP
-    CATEGORY_SLUGS: ["cutting", "stirfry", "frying", "stewing", "steaming", "other"],
+    CATEGORY_SLUGS: ["all", "cutting", "stirfry", "frying", "stewing", "steaming", "other"],
 
     // 设备特定页面映射
     getDevicePage: function (basePath) {

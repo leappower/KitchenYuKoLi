@@ -192,6 +192,15 @@
         desc: "中央厨房传送+包装，全流程自动化",
       },
     ],
+    all: [
+      { href: "/applications/small-restaurant/", slug: "small-restaurant", icon: "storefront", desc: "2-5人小后厨，一台炒菜机顶3个厨师" },
+      { href: "/applications/canteen/", slug: "canteen", icon: "restaurant", desc: "食堂午高峰500-5000人，90分钟出完热菜" },
+      { href: "/applications/central-kitchen/", slug: "central-kitchen", icon: "apartment", desc: "中央厨房批量出餐，菜品口味标准化" },
+      { href: "/applications/chain-restaurant/", slug: "chain-restaurant", icon: "dining", desc: "连锁门店统一出品，告别厨师依赖" },
+      { href: "/applications/cloud-kitchen/", slug: "cloud-kitchen", icon: "delivery_dining", desc: "外卖云厨房，单店日产能3000+单" },
+      { href: "/applications/food-factory/", slug: "food-factory", icon: "factory", desc: "食品工厂产线自动化，日产能万份以上" },
+      { href: "/applications/menu-lab/", slug: "menu-lab", icon: "science", desc: "菜系实验室，一键复制各国风味" },
+    ],
   };
 
   var APP_LABELS = {
@@ -212,7 +221,7 @@
 
   function detectCategorySlug() {
     var path = (window.location.pathname || "/").replace(/\/$/, "");
-    var match = path.match(/^\/products\/(stirfry|cutting|frying|stewing|steaming|other)$/);
+    var match = path.match(/^\/products\/(all|stirfry|cutting|frying|stewing|steaming|other)$/);
     console.log("[CrossSell] detectCategorySlug", { path: path, slug: match ? match[1] : null });
     return match ? match[1] : null;
   }
