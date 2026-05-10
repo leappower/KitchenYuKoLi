@@ -70,18 +70,6 @@
       return row;
     }).join("\n");
 
-    var viewAll =
-      '<div class="app-dropdown-separator" style="margin-top:8px;"></div>' +
-      '<a href="' +
-      esc(parentHref) +
-      '" class="app-dropdown-item app-viewall-item">' +
-      '<span class="app-dropdown-icon">' +
-      '<span class="material-symbols-outlined">grid_view</span>' +
-      "</span>" +
-      '<span class="app-dropdown-label" data-i18n="nav_applications_view_all">View All Applications</span>' +
-      '<span class="material-symbols-outlined app-dropdown-chevron">chevron_right</span>' +
-      "</a>";
-
     return (
       '<div class="app-dropdown-wrap' +
       (isTouch() ? " touch-device" : "") +
@@ -105,7 +93,6 @@
       '<div class="app-dropdown-panel"><div class="app-dropdown-card">' +
       items +
       extrasHtml +
-      viewAll +
       "</div></div>" +
       "</div>"
     );
@@ -204,18 +191,7 @@
       );
     }).join("\n");
 
-    var viewAllHtml =
-      '<a href="' +
-      esc(parentHref) +
-      '" class="app-popup-item app-viewall-item">' +
-      '<span class="app-dropdown-icon">' +
-      '<span class="material-symbols-outlined">grid_view</span>' +
-      "</span>" +
-      '<span class="app-popup-label" data-i18n="nav_applications_view_all">View All Applications</span>' +
-      '<span class="material-symbols-outlined app-popup-chevron">chevron_right</span>' +
-      "</a>";
-
-    return list + extrasItems + viewAllHtml;
+    return list + extrasItems;
   }
 
   /* ───────────────────────── PUBLIC API ───────────────────────── */

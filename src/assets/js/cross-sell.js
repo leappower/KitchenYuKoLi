@@ -411,8 +411,10 @@
   // ─── Init ─────────────────────────────────────────────────────
 
   // ─── Render helper (always available) ─────────────────────────
-  function renderCrossSellForCurrentPage() {
-    var slug = detectCategorySlug();
+  var _externalSlug = null;
+
+  function renderCrossSellForCurrentPage(overrideSlug) {
+    var slug = overrideSlug || _externalSlug || detectCategorySlug();
     console.log("[CrossSell] renderCrossSellForCurrentPage", { url: location.href, slug: slug });
     if (!slug) return;
     var crossSellContainer = document.getElementById("cross-sell-container");
@@ -474,6 +476,21 @@
     SLUG_TO_CATEGORY_KEY: {},
     CATEGORY_KEY_TO_SLUG: CATEGORY_KEY_TO_SLUG,
     PRODUCT_SLUGS: PRODUCT_SLUGS,
+  };
+
+  // ─── Public API: allow external category control (e.g. /products/all/ Tab switching) ──
+  window.CrossSell = {
+    setCategory: function (slug) {
+      _externalSlug = slug;
+      renderCrossSellForCurrentPage(slug);
+    },
+    clearCategory: function () {
+      _externalSlug = null;
+      var cc = document.getElementById("cross-sell-container");
+      var sc = document.getElementById("scene-entry-container");
+      if (cc) cc.innerHTML = "";
+      if (sc) sc.innerHTML = "";
+    },
   };
 
   // Initial render

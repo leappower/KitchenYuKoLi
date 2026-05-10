@@ -1259,14 +1259,13 @@
         );
         if (!trigger) return;
         if (window.innerWidth <= 720) return;
-        e.stopImmediatePropagation();
-        e.preventDefault();
+        /* On desktop, close any open dropdown then navigate (SPA router handles the link).
+         * Dropdown opens on hover; clicking the title navigates to the overview page. */
         var wrap = trigger.closest(
           ".prod-dropdown-wrap, .app-dropdown-wrap, .sup-dropdown-wrap, .abt-dropdown-wrap, .cnt-dropdown-wrap"
         );
         if (wrap) {
-          closeOtherDropdowns(wrap); // mutex: close others before toggling this one
-          wrap.classList.toggle("is-open");
+          closeOtherDropdowns(wrap);
         }
       },
       true

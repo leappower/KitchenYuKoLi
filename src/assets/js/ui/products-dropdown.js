@@ -66,10 +66,11 @@
 
   function renderDropdown(cfg) {
     var parentHref = "/products/";
+    var viewAllHref = "/products/all/";
 
     var viewAll =
       '<a href="' +
-      esc(parentHref) +
+      esc(viewAllHref) +
       '" class="prod-dropdown-item prod-viewall-item">' +
       '<span class="prod-dropdown-icon">' +
       '<span class="material-symbols-outlined">grid_view</span>' +
@@ -141,9 +142,7 @@
 
   function buildPopupContent(items, parentHref) {
     var viewAllHtml =
-      '<a href="' +
-      esc(parentHref) +
-      '" class="prod-popup-item prod-viewall-item">' +
+      '<a href="/products/all/" class="prod-popup-item prod-viewall-item">' +
       '<span class="prod-dropdown-icon">' +
       '<span class="material-symbols-outlined">grid_view</span>' +
       "</span>" +

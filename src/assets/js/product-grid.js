@@ -1008,6 +1008,23 @@
       _activeCategory = cat;
       _shownCount = {};
       doRender();
+
+      // Notify cross-sell module of category change (for /products/all/ page)
+      if (cat === "all") {
+        if (window.CrossSell && window.CrossSell.clearCategory) window.CrossSell.clearCategory();
+      } else {
+        // Map category key (e.g. "nav_products_cutting") back to slug (e.g. "cutting")
+        var KEY_TO_SLUG = {
+          nav_products_stirfry: "stirfry",
+          nav_products_cutting: "cutting",
+          nav_products_frying: "frying",
+          nav_products_stewing: "stewing",
+          nav_products_steaming: "steaming",
+          nav_products_other: "other",
+        };
+        var slug = KEY_TO_SLUG[cat] || cat;
+        if (window.CrossSell && window.CrossSell.setCategory) window.CrossSell.setCategory(slug);
+      }
     });
 
     // Filter chip click handler (moved to initTierFilter)
