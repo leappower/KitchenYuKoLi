@@ -426,18 +426,21 @@
     var slug = overrideSlug || _externalSlug || detectCategorySlug();
     console.log("[CrossSell] renderCrossSellForCurrentPage", { url: location.href, slug: slug });
     if (!slug) return;
-    var crossSellContainer = document.getElementById("cross-sell-container");
-    console.log("[CrossSell] cross-sell-container:", !!crossSellContainer);
-    if (crossSellContainer) {
-      var crossSellHtml = renderCrossSell(slug);
-      if (crossSellHtml) {
-        crossSellContainer.innerHTML = crossSellHtml;
-        console.log("[CrossSell] cross-sell rendered, html length:", crossSellHtml.length);
+    // Cross-sell: skip on /products/all/ (no single category to recommend from)
+    if (slug !== "all") {
+      var crossSellContainer = document.getElementById("cross-sell-container");
+      console.log("[CrossSell] cross-sell-container:", !!crossSellContainer);
+      if (crossSellContainer) {
+        var crossSellHtml = renderCrossSell(slug);
+        if (crossSellHtml) {
+          crossSellContainer.innerHTML = crossSellHtml;
+          console.log("[CrossSell] cross-sell rendered, html length:", crossSellHtml.length);
+        } else {
+          console.log("[CrossSell] cross-sell: no HTML generated for slug:", slug);
+        }
       } else {
-        console.log("[CrossSell] cross-sell: no HTML generated for slug:", slug);
+        console.log("[CrossSell] cross-sell: container not found in DOM");
       }
-    } else {
-      console.log("[CrossSell] cross-sell: container not found in DOM");
     }
     var sceneEntryContainer = document.getElementById("scene-entry-container");
     console.log("[CrossSell] scene-entry-container:", !!sceneEntryContainer);
