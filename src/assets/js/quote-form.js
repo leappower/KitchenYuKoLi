@@ -121,12 +121,12 @@
       // Consent validation
       var consentEl = document.getElementById("q-consent");
       if (consentEl && !consentEl.checked) {
-        showError("请先同意隐私政策");
+        showError("Please agree to the privacy policy first");
         return;
       }
 
       if (!valid) {
-        showError("请填写所有必填项（红色边框的字段为必填）");
+        showError("Please fill in all required fields (marked with red border)");
         if (firstInvalid) firstInvalid.focus();
         return;
       }
@@ -140,20 +140,20 @@
       var countryText = country.options[country.selectedIndex].text;
       var equipType = document.getElementById("q-equipment-type");
       var equipText = equipType.options[equipType.selectedIndex].text;
-      var quantity = document.getElementById("q-quantity").value || "未指定";
+      var quantity = document.getElementById("q-quantity").value || "Not specified";
       var capacity = document.getElementById("q-capacity");
-      var capacityText = capacity.value ? capacity.options[capacity.selectedIndex].text : "未指定";
+      var capacityText = capacity.value ? capacity.options[capacity.selectedIndex].text : "Not specified";
       var budget = document.getElementById("q-budget");
-      var budgetText = budget.value ? budget.options[budget.selectedIndex].text : "未指定";
-      var message = document.getElementById("q-message").value || "无";
+      var budgetText = budget.value ? budget.options[budget.selectedIndex].text : "Not specified";
+      var message = document.getElementById("q-message").value || "None";
 
       // Build rich message from all fields
       var richMsg = [
-        "设备类型: " + equipText,
-        "数量: " + quantity,
-        "厨房规模: " + capacityText,
-        "预算: " + budgetText,
-        "需求: " + message,
+        "Equipment Type: " + equipText,
+        "Quantity: " + quantity,
+        "Kitchen Capacity: " + capacityText,
+        "Budget: " + budgetText,
+        "Requirements: " + message,
       ].join(" | ");
 
       var formData = {
@@ -179,7 +179,7 @@
       var btnOrig = btn ? btn.innerHTML : "";
       if (btn) {
         btn.disabled = true;
-        btn.innerHTML = '<span class="material-symbols-outlined animate-spin">progress_activity</span> 提交中...';
+        btn.innerHTML = '<span class="material-symbols-outlined animate-spin">progress_activity</span> Submitting...';
       }
 
       // Submit via server proxy (hides Google Apps Script URL)
@@ -198,7 +198,7 @@
         })
         .then(function () {
           if (typeof window.showNotification === "function") {
-            window.showNotification("提交成功！我们将尽快与您联系", "success");
+            window.showNotification("Submitted successfully! We'll contact you soon.", "success");
           }
           setTimeout(function () {
             if (window.SpaRouter) {
@@ -209,7 +209,7 @@
           }, 1000);
         })
         .catch(function (err) {
-          showError(err.message || "提交失败，请稍后重试");
+          showError(err.message || "Submission failed. Please try again later.");
           // Re-enable button on error
           if (btn) {
             btn.disabled = false;
