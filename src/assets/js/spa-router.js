@@ -824,7 +824,7 @@
       }
 
       // 产品列表页需要 product-grid.js（含 /products/all/ 和 6 个分类子页）
-      if (path.match(/\/products\/(all\/?$|cutting|stirfry|frying|stewing|steaming|other)\//)) {
+      if (path.match(/\/products\/(all|cutting|stirfry|frying|stewing|steaming|other)\//)) {
         scripts.push({ src: "/assets/js/product-grid.js", id: "spa-product-grid" });
       }
 
@@ -834,7 +834,7 @@
       }
 
       // 产品分类页需要 cross-sell.js（搭配推荐 + 适用场景，/products/all/ 只显示适用场景）
-      if (path.match(/\/products\/(all\/?(?:$)|cutting|stirfry|frying|stewing|steaming|other)\//)) {
+      if (path.match(/\/products\/(all|cutting|stirfry|frying|stewing|steaming|other)\//)) {
         scripts.push({ src: "/assets/js/cross-sell.js", id: "spa-cross-sell" });
       }
 
