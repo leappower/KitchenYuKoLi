@@ -113,7 +113,7 @@
   <footer-component></footer-component>
 
   <!-- SPA Shell: Scripts -->
-  <script src="/assets/js/utils/spa-events.js?v=202605111845"></script>
+  <script>window._spaOn=function(t,e,n,k){var r=window._spaAC_={};if(r[k])r[k].abort();var a=new AbortController;r[k]=a;t.addEventListener(e,n,{signal:a.signal});return a};window.__onSpaEvent=function(t,e,n,g){var k=t+"::"+e;if(g.has(k))g.get(k).abort();var a=new AbortController;t.addEventListener(e,n,{signal:a.signal});g.set(k,a)};</script>
   <script src="/assets/js/ui/dropdown-styles.js"></script>
   <script src="/assets/js/ui/dropdown-base.js"></script>
   <script defer src="/assets/js/ui/products-dropdown.js"></script>
