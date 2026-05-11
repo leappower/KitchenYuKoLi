@@ -193,12 +193,42 @@
       },
     ],
     all: [
-      { href: "/applications/small-restaurant/", slug: "small-restaurant", icon: "storefront", desc: "2-5人小后厨，一台炒菜机顶3个厨师" },
-      { href: "/applications/canteen/", slug: "canteen", icon: "restaurant", desc: "食堂午高峰500-5000人，90分钟出完热菜" },
-      { href: "/applications/central-kitchen/", slug: "central-kitchen", icon: "apartment", desc: "中央厨房批量出餐，菜品口味标准化" },
-      { href: "/applications/chain-restaurant/", slug: "chain-restaurant", icon: "dining", desc: "连锁门店统一出品，告别厨师依赖" },
-      { href: "/applications/cloud-kitchen/", slug: "cloud-kitchen", icon: "delivery_dining", desc: "外卖云厨房，单店日产能3000+单" },
-      { href: "/applications/food-factory/", slug: "food-factory", icon: "factory", desc: "食品工厂产线自动化，日产能万份以上" },
+      {
+        href: "/applications/small-restaurant/",
+        slug: "small-restaurant",
+        icon: "storefront",
+        desc: "2-5人小后厨，一台炒菜机顶3个厨师",
+      },
+      {
+        href: "/applications/canteen/",
+        slug: "canteen",
+        icon: "restaurant",
+        desc: "食堂午高峰500-5000人，90分钟出完热菜",
+      },
+      {
+        href: "/applications/central-kitchen/",
+        slug: "central-kitchen",
+        icon: "apartment",
+        desc: "中央厨房批量出餐，菜品口味标准化",
+      },
+      {
+        href: "/applications/chain-restaurant/",
+        slug: "chain-restaurant",
+        icon: "dining",
+        desc: "连锁门店统一出品，告别厨师依赖",
+      },
+      {
+        href: "/applications/cloud-kitchen/",
+        slug: "cloud-kitchen",
+        icon: "delivery_dining",
+        desc: "外卖云厨房，单店日产能3000+单",
+      },
+      {
+        href: "/applications/food-factory/",
+        slug: "food-factory",
+        icon: "factory",
+        desc: "食品工厂产线自动化，日产能万份以上",
+      },
       { href: "/applications/menu-lab/", slug: "menu-lab", icon: "science", desc: "菜系实验室，一键复制各国风味" },
     ],
   };
@@ -222,7 +252,6 @@
   function detectCategorySlug() {
     var path = (window.location.pathname || "/").replace(/\/$/, "");
     var match = path.match(/^\/products\/(all|stirfry|cutting|frying|stewing|steaming|other)$/);
-    console.log("[CrossSell] detectCategorySlug", { path: path, slug: match ? match[1] : null });
     return match ? match[1] : null;
   }
 
@@ -242,7 +271,6 @@
 
   function renderCrossSell(slug) {
     var items = CROSS_SELL_MAP[slug];
-    console.log("[CrossSell] renderCrossSell", { slug: slug, items: items ? items.length : 0 });
     if (!items || !items.length) return "";
 
     var catLabel = tl(PRODUCT_SLUGS[slug].label, PRODUCT_SLUGS[slug].label);
@@ -257,9 +285,9 @@
       "</p>";
     html += "</div>";
 
-    // Responsive grid: 2 cols mobile, 3 cols tablet, 4 cols PC (when 4 items)
-    var gridCols = items.length >= 4 ? "grid-cols-2 md:grid-cols-2 lg:grid-cols-4" : "grid-cols-2 md:grid-cols-3";
-    html += '<div class="grid ' + gridCols + ' gap-4 lg:gap-6">';
+    // Responsive grid: 1 col mobile (single row, no squeeze), 2 cols tablet, 4 cols PC
+    var gridCols = items.length >= 4 ? "grid-cols-1 md:grid-cols-2 lg:grid-cols-4" : "grid-cols-1 md:grid-cols-2";
+    html += '<div class="grid ' + gridCols + ' gap-3 lg:gap-6">';
 
     items.forEach(function (item) {
       var info = PRODUCT_SLUGS[item.slug];
@@ -268,31 +296,34 @@
       html +=
         '<a href="/products/' +
         item.slug +
-        '/" class="group relative block p-5 lg:p-6 rounded-2xl bg-white dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700/60 hover:border-primary/40 hover:shadow-xl hover:shadow-primary/5 transition-all">';
+        '/" class="group relative flex items-center gap-3 p-3 md:p-5 lg:p-6 rounded-2xl bg-white dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700/60 hover:border-primary/40 hover:shadow-xl hover:shadow-primary/5 transition-all">';
 
-      // Icon + category name row
-      html += '<div class="flex items-center gap-3 mb-3">';
+      // Icon
       html += '<div class="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center shrink-0">';
       html += '<span class="material-symbols-outlined text-primary text-lg">' + info.icon + "</span>";
       html += "</div>";
+
+      // Text content (name + description)
+      html += '<div class="flex-1 min-w-0">';
       html +=
-        '<span class="font-bold text-slate-900 dark:text-white group-hover:text-primary transition-colors">' +
+        '<div class="flex items-center justify-between gap-2">' +
+        '<span class="font-bold text-sm text-slate-900 dark:text-white group-hover:text-primary transition-colors">' +
         esc(label) +
         "</span>";
+      html +=
+        '<span class="material-symbols-outlined text-slate-300 group-hover:text-primary group-hover:translate-x-1 transition-all text-lg shrink-0">arrow_forward</span>';
+      html += "</div>";
+      html +=
+        '<p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed mt-0.5 truncate">' +
+        esc(item.reason) +
+        "</p>";
       html += "</div>";
 
-      // Description
-      html += '<p class="text-sm text-slate-500 dark:text-slate-400 leading-relaxed mb-3">' + esc(item.reason) + "</p>";
-
-      // Highlight badge + arrow
-      html += '<div class="flex items-center justify-between">';
+      // Highlight badge (hidden on mobile, shown md+)
       html +=
-        '<span class="inline-flex items-center px-2.5 py-1 rounded-lg bg-primary/8 text-primary text-xs font-bold">' +
+        '<span class="hidden md:inline-flex items-center px-2.5 py-1 rounded-lg bg-primary/8 text-primary text-xs font-bold shrink-0">' +
         esc(item.highlight) +
         "</span>";
-      html +=
-        '<span class="material-symbols-outlined text-slate-300 group-hover:text-primary group-hover:translate-x-1 transition-all text-lg">arrow_forward</span>';
-      html += "</div>";
 
       html += "</a>";
     });
@@ -304,7 +335,6 @@
 
   function renderSceneEntry(slug) {
     var scenes = SCENE_ENTRY_MAP[slug];
-    console.log("[CrossSell] renderSceneEntry", { slug: slug, scenes: scenes ? scenes.length : 0 });
     if (!scenes || !scenes.length) return "";
 
     var html = '<div class="text-center mb-8">';
@@ -424,33 +454,25 @@
 
   function renderCrossSellForCurrentPage(overrideSlug) {
     var slug = overrideSlug || _externalSlug || detectCategorySlug();
-    console.log("[CrossSell] renderCrossSellForCurrentPage", { url: location.href, slug: slug });
     if (!slug) return;
     // Cross-sell: skip on /products/all/ (no single category to recommend from)
     if (slug !== "all") {
       var crossSellContainer = document.getElementById("cross-sell-container");
-      console.log("[CrossSell] cross-sell-container:", !!crossSellContainer);
       if (crossSellContainer) {
         var crossSellHtml = renderCrossSell(slug);
         if (crossSellHtml) {
           crossSellContainer.innerHTML = crossSellHtml;
-          console.log("[CrossSell] cross-sell rendered, html length:", crossSellHtml.length);
         } else {
-          console.log("[CrossSell] cross-sell: no HTML generated for slug:", slug);
         }
       } else {
-        console.log("[CrossSell] cross-sell: container not found in DOM");
       }
     }
     var sceneEntryContainer = document.getElementById("scene-entry-container");
-    console.log("[CrossSell] scene-entry-container:", !!sceneEntryContainer);
     if (sceneEntryContainer) {
       var sceneHtml = renderSceneEntry(slug);
       if (sceneHtml) {
         sceneEntryContainer.innerHTML = sceneHtml;
-        console.log("[CrossSell] scene-entry rendered, html length:", sceneHtml.length);
       } else {
-        console.log("[CrossSell] scene-entry: no HTML generated for slug:", slug);
       }
     }
   }
@@ -458,7 +480,6 @@
   // ─── Init ─────────────────────────────────────────────────────
 
   function init() {
-    console.log("[CrossSell] init called, readyState:", document.readyState, "url:", location.href);
     trackPdpReferrer();
     updatePdpCategoryNav();
     renderCrossSellForCurrentPage();
@@ -514,7 +535,6 @@
 
   // SPA navigation — always registered, always re-renders for category pages
   _spaOn(document, "spa:load", function () {
-    console.log("[CrossSell] spa:load fired, url:", location.href);
     trackPdpReferrer();
     updatePdpCategoryNav();
     renderCrossSellForCurrentPage();
