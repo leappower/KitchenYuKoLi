@@ -30,7 +30,7 @@
   "use strict";
 
   // _spaOn is now in utils/spa-events.js (window._spaOn)
-  var _spaOn = window._spaOn;
+  var _spaOn = window._spaOn || (window._spaOn = function(t,e,n,k){var a=new AbortController;window["_spaAC_"+k]=a;t.addEventListener(e,n,{signal:a.signal});return a});
 
   var ATTR = "data-hero-video";
   var CROSSFADE_MS = 1500;

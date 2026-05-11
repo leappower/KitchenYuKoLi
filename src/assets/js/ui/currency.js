@@ -27,7 +27,7 @@
   "use strict";
 
   // _spaOn is now in utils/spa-events.js (window._spaOn)
-  var _spaOn = window._spaOn;
+  var _spaOn = window._spaOn || (window._spaOn = function(t,e,n,k){var a=new AbortController;window["_spaAC_"+k]=a;t.addEventListener(e,n,{signal:a.signal});return a});
 
   // 万位单位的本地数值（该单位代表多少当地货币）
   var UNIT_VALUES = {
