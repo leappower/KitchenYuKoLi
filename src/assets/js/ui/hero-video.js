@@ -29,8 +29,13 @@
 (function () {
   "use strict";
 
-  // _spaOn is now in utils/spa-events.js (window._spaOn)
-  var _spaOn = window._spaOn;
+  var _spaRegs = {};
+  function _spaOn(tgt, evt, fn, key) {
+    if (_spaRegs[key]) _spaRegs[key].abort();
+    var ac = new AbortController();
+    _spaRegs[key] = ac;
+    tgt.addEventListener(evt, fn, { signal: ac.signal });
+  }
 
   var ATTR = "data-hero-video";
   var CROSSFADE_MS = 1500;

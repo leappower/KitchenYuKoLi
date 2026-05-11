@@ -72,17 +72,7 @@ sync_assets "video"        "*"  incremental
 # Ensure dist files are readable (may have been created by root/sudo)
 chmod -R a+rX "$DIST" 2>/dev/null || true
 
-# ─── 4. Inject _spaOn definition into all page HTML files ─────────
-# This must run BEFORE version bump so it's present in all dist HTML.
-SPA_ON='<script>window._spaOn=function(t,e,n,k){var r=window._spaAC_={};if(r[k])r[k].abort();var a=new AbortController;r[k]=a;t.addEventListener(e,n,{signal:a.signal});return a};window.__onSpaEvent=function(t,e,n,g){var k=t+"::"+e;if(g.has(k))g.get(k).abort();var a=new AbortController;t.addEventListener(e,n,{signal:a.signal});g.set(k,a)};</script>'
-echo "💉 Injecting _spaOn into page HTML files..."
-find "$DIST/pages" -name '*.html' | while IFS= read -r f; do
-  grep -q 'window._spaOn' "$f" || sed -i '' "s|<head>|<head>$SPA_ON|" "$f"
-done
-# index.html already has _spaOn from src, but ensure it's there
-grep -q 'window._spaOn' "$DIST/index.html" || sed -i '' "s|<head>|<head>$SPA_ON|" "$DIST/index.html"
-
-# ─── 5. Version bump ────────────────────────────────────────────
+# ─── 4. Version bump ────────────────────────────────────────────
 echo "🔄 Bumping JS version to $VERSION..."
 # Replace all version query params (handles v=20260508, v=20260508-v3, v=anystring, v=this)
 find "$DIST" -name '*.html' -exec sed -i '' "s|?v=[a-zA-Z0-9._-]*|?$VERSION|g" {} +
