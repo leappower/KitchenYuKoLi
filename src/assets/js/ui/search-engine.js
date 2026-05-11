@@ -213,7 +213,7 @@
     // Close on click outside
     document.addEventListener("mousedown", function (e) {
       if (panel && !panel.contains(e.target)) {
-        var bar = document.getElementById("ios-search-bar") || document.getElementById("mobile-ios-search-bar");
+        var bar = document.querySelector(".ios-search-bar");
         if (!bar || !bar.contains(e.target)) {
           hidePanel();
         }
@@ -243,19 +243,8 @@
   }
 
   function positionPanel() {
-    var bar = document.getElementById("ios-search-bar") || document.getElementById("mobile-ios-search-bar");
+    var bar = document.querySelector(".ios-search-bar");
     if (!bar || !panel) return;
-
-    // Prefer the visible bar (both may exist in DOM)
-    var mobileBar = document.getElementById("mobile-ios-search-bar");
-    if (mobileBar && bar !== mobileBar) {
-      var barRect = bar.getBoundingClientRect();
-      var mobileRect = mobileBar.getBoundingClientRect();
-      // If PC bar is hidden (0 width or off-screen), use mobile bar
-      if (barRect.width === 0 || barRect.height === 0) {
-        bar = mobileBar;
-      }
-    }
 
     var rect = bar.getBoundingClientRect();
     var isRTL = document.documentElement.dir === "rtl";
@@ -425,8 +414,8 @@
    * Should be called after navigator.js has rendered the search bar.
    */
   function init() {
-    // Support both PC (#ios-search-input) and mobile/tablet (#mobile-header-search-input)
-    var input = document.getElementById("ios-search-input") || document.getElementById("mobile-header-search-input");
+    // Support unified search bar input (.ios-search-input)
+    var input = document.querySelector(".ios-search-bar .ios-search-input");
     if (!input) {
       return;
     }

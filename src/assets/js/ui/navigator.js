@@ -140,15 +140,35 @@
    * @param {string} placeholderI18nKey - i18n placeholder key
    * @returns {string} HTML 字符串
    */
-  function buildSearchBarHtml(placeholderI18nKey) {
+  /**
+   * 统一搜索栏构建（PC / Mobile / Tablet 共用）
+   * @param {Object} opts
+   * @param {string} opts.id          - 搜索栏 DOM id（如 'search-bar'）
+   * @param {string} opts.inputId     - 搜索输入框 id（如 'search-input'）
+   * @param {string} opts.placeholderI18n - i18n placeholder key
+   * @param {string} [opts.wrapperClass] - 可选 wrapper 额外 class
+   * @param {string} [opts.barClass]    - 可选 bar 额外 class
+   * @returns {string} HTML 字符串
+   */
+  function buildSearchBarHtml(opts) {
+    var id = opts.id || "search-bar";
+    var inputId = opts.inputId || id + "-input";
     return (
-      '<div class="ios-search-wrapper">' +
-      '<div class="ios-search-bar" id="mobile-ios-search-bar">' +
+      '<div class="ios-search-wrapper ' +
+      (opts.wrapperClass || "") +
+      '">' +
+      '<div class="ios-search-bar" id="' +
+      id +
+      '" ' +
+      (opts.barClass || "") +
+      ">" +
       '<span class="ios-search-icon material-symbols-outlined">search</span>' +
-      '<input class="ios-search-input" id="mobile-header-search-input" ' +
+      '<input class="ios-search-input" id="' +
+      inputId +
+      '" ' +
       'placeholder="Search equipment..." ' +
       'data-i18n-placeholder="' +
-      escapeHtml(placeholderI18nKey) +
+      escapeHtml(opts.placeholderI18n || "search_placeholder") +
       '" ' +
       'type="search" autocomplete="off" spellcheck="false"/>' +
       '<a class="ios-search-clear" href="javascript:void(0)" ' +
@@ -222,7 +242,7 @@
       "</div>" +
       /* 中间：搜索栏 */
       '<div class="flex-1 min-w-0 mx-1">' +
-      buildSearchBarHtml(searchI18n) +
+      buildSearchBarHtml({ id: "mobile-search-bar", inputId: "mobile-search-input", placeholderI18n: searchI18n }) +
       "</div>" +
       /* 右侧 */
       rightSide +
@@ -312,27 +332,13 @@
    */
   function buildDesktopSearchHtml(opts) {
     var hiddenClass = opts.searchBp === "lg" ? "hidden lg:flex" : "hidden xl:flex";
-
-    return (
-      '<div class="' +
-      hiddenClass +
-      ' ios-search-wrapper items-center flex-shrink-0">' +
-      '<div class="ios-search-bar" id="ios-search-bar">' +
-      '<span class="ios-search-icon material-symbols-outlined">search</span>' +
-      '<input class="ios-search-input" id="ios-search-input" ' +
-      'placeholder="Search equipment..." ' +
-      'data-i18n-placeholder="' +
-      escapeHtml(opts.searchI18n) +
-      '" ' +
-      'type="search" autocomplete="off" spellcheck="false"/>' +
-      '<a class="ios-search-clear" id="ios-search-clear" href="javascript:void(0)" ' +
-      'aria-label="Clear search" role="button" tabindex="-1" ' +
-      'style="text-decoration:none;-webkit-tap-highlight-color:transparent">' +
-      '<span class="material-symbols-outlined">cancel</span>' +
-      "</a>" +
-      "</div>" +
-      "</div>"
-    );
+    return buildSearchBarHtml({
+      id: "search-bar",
+      inputId: "search-input",
+      placeholderI18n: opts.searchI18n,
+      wrapperClass: hiddenClass + " items-center flex-shrink-0",
+      barClass: "",
+    });
   }
 
   /**
@@ -610,14 +616,17 @@
       "  overflow: hidden;",
       "}",
       /* Mobile: fill available space */
-      "#mobile-ios-search-bar {",
-      "  flex: 1 1 0;",
-      "  max-width: 100%;",
-      "  padding: 5px 12px;",
+      "@media (max-width: 767px) {",
+      "  .ios-search-bar {",
+      "    flex: 1 1 0;",
+      "    max-width: 100%;",
+      "    width: auto;",
+      "    padding: 5px 12px;",
+      "  }",
       "}",
       "/* Tablet: narrower default, stretch on focus */",
-      "@media (min-width: 768px) {",
-      "  #mobile-ios-search-bar {",
+      "@media (min-width: 768px) and (max-width: 1279px) {",
+      "  .ios-search-bar {",
       "    flex: 0 1 55%;",
       "    max-width: 380px;",
       "  }",
@@ -628,12 +637,13 @@
       "  border-color: rgba(236,91,19,0.4);",
       "  box-shadow: 0 0 0 3px rgba(236,91,19,0.12);",
       "}",
-      "#mobile-ios-search-bar.is-focused {",
-      "  flex: 0 0 100%;",
-      "  max-width: 100%;",
-      "  background: rgba(120,120,128,0.08);",
-      "  border-color: rgba(236,91,19,0.4);",
-      "  box-shadow: 0 0 0 3px rgba(236,91,19,0.12);",
+      "/* Mobile focused: stretch to full width */",
+      "@media (max-width: 767px) {",
+      "  .ios-search-bar.is-focused {",
+      "    flex: 0 0 100%;",
+      "    max-width: 100%;",
+      "    width: auto;",
+      "  }",
       "}",
 
       /* 暗色模式搜索栏 */
@@ -642,11 +652,6 @@
       "  border-color: rgba(255,255,255,0.12);",
       "}",
       "html.dark .ios-search-bar.is-focused {",
-      "  background: rgba(255,255,255,0.10);",
-      "  border-color: rgba(236,91,19,0.5);",
-      "  box-shadow: 0 0 0 3px rgba(236,91,19,0.15);",
-      "}",
-      "html.dark #mobile-ios-search-bar.is-focused {",
       "  background: rgba(255,255,255,0.10);",
       "  border-color: rgba(236,91,19,0.5);",
       "  box-shadow: 0 0 0 3px rgba(236,91,19,0.15);",
@@ -746,127 +751,64 @@
    * ================================================================ */
 
   /**
-   * 初始化桌面端搜索栏的交互（focus / blur / input / clear / Escape）
+   * 统一搜索栏交互初始化（focus / blur / input / clear / Escape）
+   * 自动检测页面上存在的搜索栏并绑定事件
    */
-  function initDesktopSearchInteraction() {
-    var searchBar = document.getElementById("ios-search-bar");
-    var searchInput = document.getElementById("ios-search-input");
-    var clearBtn = document.getElementById("ios-search-clear");
+  function initSearchInteraction() {
+    var bars = document.querySelectorAll(".ios-search-bar");
+    if (bars.length === 0) return;
 
-    if (!searchBar || !searchInput || !clearBtn) return;
+    bars.forEach(function (bar) {
+      var searchInput = bar.querySelector(".ios-search-input");
+      var clearBtn = bar.querySelector(".ios-search-clear");
+      if (!searchInput) return;
 
-    /**
-     * 移除搜索栏聚焦状态
-     */
-    function removeFocus() {
-      searchBar.classList.remove("is-focused");
-    }
-
-    /**
-     * 根据输入框内容切换清除按钮可见性
-     */
-    function updateClearVisibility() {
-      if (searchInput.value.length > 0) {
-        clearBtn.classList.add("is-visible");
-      } else {
-        clearBtn.classList.remove("is-visible");
+      function removeFocus() {
+        bar.classList.remove("is-focused");
       }
-    }
 
-    searchInput.addEventListener("focus", function () {
-      searchBar.classList.add("is-focused");
-    });
-
-    searchInput.addEventListener("blur", function () {
-      setTimeout(function () {
-        if (document.activeElement !== searchInput) removeFocus();
-      }, 150);
-    });
-
-    searchInput.addEventListener("input", updateClearVisibility);
-
-    /* 阻止清除按钮的 mousedown 以免抢走 focus */
-    clearBtn.addEventListener("mousedown", function (e) {
-      e.preventDefault();
-    });
-
-    clearBtn.addEventListener("click", function () {
-      searchInput.value = "";
-      updateClearVisibility();
-      searchInput.focus();
-    });
-
-    document.addEventListener("keydown", function (e) {
-      if (e.key === "Escape" && document.activeElement === searchInput) {
-        searchInput.value = "";
-        updateClearVisibility();
-        searchInput.blur();
-        removeFocus();
+      function updateClearVisibility() {
+        if (!clearBtn) return;
+        if (searchInput.value.length > 0) {
+          clearBtn.classList.add("is-visible");
+        } else {
+          clearBtn.classList.remove("is-visible");
+        }
       }
-    });
-  }
 
-  /**
-   * 初始化移动端搜索栏的交互
-   */
-  function initMobileSearchInteraction() {
-    var searchBar = document.getElementById("mobile-ios-search-bar");
-    var searchInput = document.getElementById("mobile-header-search-input");
-    var clearBtn = searchBar ? searchBar.querySelector(".ios-search-clear") : null;
-
-    if (!searchBar || !searchInput) return;
-
-    /**
-     * 移除移动端搜索栏聚焦状态
-     */
-    function removeFocus() {
-      searchBar.classList.remove("is-focused");
-    }
-
-    /**
-     * 根据输入框内容切换清除按钮可见性
-     */
-    function updateClearVisibility() {
-      if (!clearBtn) return;
-      if (searchInput.value.length > 0) {
-        clearBtn.classList.add("is-visible");
-      } else {
-        clearBtn.classList.remove("is-visible");
-      }
-    }
-
-    searchInput.addEventListener("focus", function () {
-      searchBar.classList.add("is-focused");
-    });
-
-    searchInput.addEventListener("blur", function () {
-      setTimeout(function () {
-        if (document.activeElement !== searchInput) removeFocus();
-      }, 150);
-    });
-
-    searchInput.addEventListener("input", updateClearVisibility);
-
-    if (clearBtn) {
-      clearBtn.addEventListener("mousedown", function (e) {
-        e.preventDefault();
+      searchInput.addEventListener("focus", function () {
+        bar.classList.add("is-focused");
       });
 
-      clearBtn.addEventListener("click", function () {
-        searchInput.value = "";
-        updateClearVisibility();
-        searchInput.focus();
+      searchInput.addEventListener("blur", function () {
+        setTimeout(function () {
+          if (document.activeElement !== searchInput) removeFocus();
+        }, 150);
       });
 
-      document.addEventListener("keydown", function (e) {
-        if (e.key === "Escape" && document.activeElement === searchInput) {
+      searchInput.addEventListener("input", updateClearVisibility);
+
+      if (clearBtn) {
+        clearBtn.addEventListener("mousedown", function (e) {
+          e.preventDefault();
+        });
+
+        clearBtn.addEventListener("click", function () {
           searchInput.value = "";
           updateClearVisibility();
-          searchInput.blur();
-          removeFocus();
-        }
-      });
-    }
+          searchInput.focus();
+        });
+
+        document.addEventListener("keydown", function (e) {
+          if (e.key === "Escape" && document.activeElement === searchInput) {
+            searchInput.value = "";
+            updateClearVisibility();
+            searchInput.blur();
+            removeFocus();
+          }
+        });
+      }
+    });
   }
 
   /* ================================================================
@@ -1246,8 +1188,7 @@
     injectLogoStyles();
     injectSearchStyles();
 
-    initDesktopSearchInteraction();
-    initMobileSearchInteraction();
+    initSearchInteraction();
 
     /* Dropdown trigger click — close other dropdowns on trigger click.
      * DropdownBase.bindTriggers() handles toggle (touch) or pass-through (non-touch). */
