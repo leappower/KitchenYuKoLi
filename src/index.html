@@ -87,8 +87,6 @@
 <!-- Footer placeholder - will be replaced by Footer component -->
 <footer data-component="footer" data-active="home"></footer>
 
-<!-- _spaOn must be defined BEFORE all deferred scripts that use it -->
-<script>window._spaOn=function(t,e,n,k){var r=window._spaAC_={};if(r[k])r[k].abort();var a=new AbortController;r[k]=a;t.addEventListener(e,n,{signal:a.signal});return a};window.__onSpaEvent=function(t,e,n,g){var k=t+"::"+e;if(g.has(k))g.get(k).abort();var a=new AbortController;t.addEventListener(e,n,{signal:a.signal});g.set(k,a)};</script>
 <!-- All scripts deferred: browser parses HTML + renders skeleton immediately,
      scripts download in parallel and execute in order after DOM is ready -->
 <script defer src="/assets/js/utils/device-utils.js"></script>
