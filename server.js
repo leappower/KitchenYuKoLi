@@ -33,18 +33,28 @@ const { createProxyMiddleware } = require('http-proxy-middleware');
 
 const app = express();
 
+const API_PATHS = ['/api/cms', '/api/public', '/api/translations', '/api/nav-config', '/admin'];
+
 const apiProxy = createProxyMiddleware({
   target: API_SERVER,
   changeOrigin: true,
-  pathFilter: ['/api/cms/**', '/api/public/**', '/api/translations/**', '/api/nav-config/**', '/admin/**'],
-  // No rewrite needed — backend has /api/public/* and /api/cms/* natively
-  // pathRewrite removed since API_SERVER (https://127.0.0.1:8000) serves /api/public/* directly
+  // pathFilter has a bug in v2.0.9 that intercepts ALL requests;
+  // use manual path checking via a wrapper middleware instead.
   logLevel: !IS_PROD ? 'warn' : 'silent',
   onError: (err, req, res) => {
     console.error('[proxy] error:', err.message, req.path);
     if (!res.headersSent) res.status(502).json({ error: 'API server unavailable' });
   }
 });
+
+// Wrapper: only pass matching paths to the proxy
+const apiProxyGuard = (req, res, next) => {
+  if (API_PATHS.some(p => req.originalUrl.startsWith(p))) {
+    apiProxy(req, res, next);
+  } else {
+    next();
+  }
+};
 app.use(helmet({
   contentSecurityPolicy: {
     directives: {
@@ -61,7 +71,7 @@ app.use(helmet({
   },
 }));
 
-app.use(apiProxy);
+app.use(apiProxyGuard);
 app.set('trust proxy', 1);
 
 // Strict CSP for main site
