@@ -857,11 +857,13 @@
 
   /** Show a toast notification when PDF generation fails */
   function _showPDFErrorToast() {
-    var msg = t("profit_calc_pdf_error") !== "profit_calc_pdf_error"
-      ? t("profit_calc_pdf_error")
-      : "PDF generation failed, please try again later";
+    var msg =
+      t("profit_calc_pdf_error") !== "profit_calc_pdf_error"
+        ? t("profit_calc_pdf_error")
+        : "PDF generation failed, please try again later";
     var toast = document.createElement("div");
-    toast.className = "fixed top-24 left-1/2 -translate-x-1/2 bg-red-600 text-white px-5 py-3 rounded-xl shadow-xl z-[200] text-sm font-medium transition-all duration-300";
+    toast.className =
+      "fixed top-24 left-1/2 -translate-x-1/2 bg-red-600 text-white px-5 py-3 rounded-xl shadow-xl z-[200] text-sm font-medium transition-all duration-300";
     toast.style.cssText = "opacity:0;transform:translate(-50%,-10px)";
     toast.textContent = msg;
     document.body.appendChild(toast);
@@ -1484,13 +1486,7 @@ _spaOn(document, "spa:load", function initProfitCalc() {
 });
 
 // Debug: verify script loaded and languageChanged works
-_spaOn(
-  window,
-  "languageChanged",
-  function (e) {
-  },
-  true
-); // capture phase
+_spaOn(window, "languageChanged", function (e) {}, true); // capture phase
 
 // On language change, re-render results with new currency/labels
 _spaOn(window, "languageChanged", function () {
