@@ -57,10 +57,7 @@
   function isTestEnvironment() {
     var hostname = window.location.hostname;
     return (
-      hostname === "localhost" ||
-      hostname === "127.0.0.1" ||
-      hostname.includes(".local") ||
-      hostname.includes("test")
+      hostname === "localhost" || hostname === "127.0.0.1" || hostname.includes(".local") || hostname.includes("test")
     );
   }
 
@@ -73,21 +70,22 @@
    * 记录访问次数、滚动深度、页面停留时间、产品浏览等信息。
    */
   var userState = {
-    firstVisit: Date.now(),     // 首次访问时间戳
-    visitCount: 0,              // 累计访问次数
-    scrollDepth: 0,             // 当前会话的最大滚动深度 (%)
-    timeOnPage: 0,              // 当前会话的页面停留时间 (秒)
-    productViews: [],           // 已浏览的产品 ID 列表
-    formInteractions: 0,        // 表单交互次数
-    popupShown: false,          // 是否已展示过弹窗（历史标记）
-    popupCount: {               // 各类型弹窗展示计数
+    firstVisit: Date.now(), // 首次访问时间戳
+    visitCount: 0, // 累计访问次数
+    scrollDepth: 0, // 当前会话的最大滚动深度 (%)
+    timeOnPage: 0, // 当前会话的页面停留时间 (秒)
+    productViews: [], // 已浏览的产品 ID 列表
+    formInteractions: 0, // 表单交互次数
+    popupShown: false, // 是否已展示过弹窗（历史标记）
+    popupCount: {
+      // 各类型弹窗展示计数
       header: 0,
       hero: 0,
       custom: 0,
       product: {},
     },
-    lastPopupTime: 0,           // 上次弹窗展示时间戳
-    maxScrollReached: 0,        // 历史最大滚动深度 (%)
+    lastPopupTime: 0, // 上次弹窗展示时间戳
+    maxScrollReached: 0, // 历史最大滚动深度 (%)
   };
 
   /**
@@ -116,18 +114,31 @@
   /** 更新当前会话的滚动深度（取最大值），同时更新历史记录。 */
   function trackScrollDepth() {
     var scrollableHeight = document.body.scrollHeight - window.innerHeight;
-    var scrollPercent =
-      scrollableHeight > 0
-        ? Math.round((window.scrollY / scrollableHeight) * 100)
-        : 0;
+    var scrollPercent = scrollableHeight > 0 ? Math.round((window.scrollY / scrollableHeight) * 100) : 0;
     userState.scrollDepth = Math.max(userState.scrollDepth, scrollPercent);
     userState.maxScrollReached = Math.max(userState.maxScrollReached, scrollPercent);
   }
 
-  /** 每秒调用一次，递增页面停留时间计数器并持久化。 */
+  /** 每秒调用一次，递增页面停留时间计数器并持久化。
+   *  使用脏标记减少 localStorage 写入频率：每 5 秒保存一次，
+   *  页面 hidden 时立即保存。*/
+  var _timeOnPageDirty = false;
+  var _timeOnPageSaveInterval = setInterval(function () {
+    if (_timeOnPageDirty) {
+      _timeOnPageDirty = false;
+      saveUserState();
+    }
+  }, 5000);
+  document.addEventListener("visibilitychange", function () {
+    if (document.visibilityState === "hidden" && _timeOnPageDirty) {
+      _timeOnPageDirty = false;
+      saveUserState();
+    }
+  });
+
   function trackTimeOnPage() {
     userState.timeOnPage++;
-    saveUserState();
+    _timeOnPageDirty = true;
   }
 
   // ============================================
@@ -176,53 +187,52 @@
   // ─── 智能弹窗核心对象 ──────────────────────────────────────────────────────
 
   var smartPopup = {
-
     /**
      * 弹窗运行时状态。
      * 控制弹窗的展示频率、冷却时间、参与度评分、滚动阈值等。
      */
     state: {
-      popupShownThisSession: 0,        // 当前会话已展示弹窗数
-      maxPopupsPerSession: 2,          // 每会话最大自动弹窗数
-      lastPopupTime: null,             // 上次弹窗展示时间戳
-      popupCooldown: 30000,            // 两次弹窗最小间隔 (ms)
-      pageStartAt: Date.now(),         // 页面加载时间戳
+      popupShownThisSession: 0, // 当前会话已展示弹窗数
+      maxPopupsPerSession: 2, // 每会话最大自动弹窗数
+      lastPopupTime: null, // 上次弹窗展示时间戳
+      popupCooldown: 30000, // 两次弹窗最小间隔 (ms)
+      pageStartAt: Date.now(), // 页面加载时间戳
 
       autoPopupDisabledForSession: false, // 手动关闭后禁用自动弹窗
-      initialDelayReached: false,      // 是否已过初始延迟
+      initialDelayReached: false, // 是否已过初始延迟
 
-      engagementScore: 0,              // 用户参与度累计评分
-      scoreThresholdDesktop: 50,       // 桌面端触发弹窗的参与度阈值
-      scoreThresholdMobile: 60,        // 移动端触发弹窗的参与度阈值
-      minScrollPercentBeforeAuto: 20,  // 自动弹窗所需的最小滚动深度 (%)
+      engagementScore: 0, // 用户参与度累计评分
+      scoreThresholdDesktop: 50, // 桌面端触发弹窗的参与度阈值
+      scoreThresholdMobile: 60, // 移动端触发弹窗的参与度阈值
+      minScrollPercentBeforeAuto: 20, // 自动弹窗所需的最小滚动深度 (%)
 
-      delayDesktopSeconds: 20,         // 桌面端初始延迟 (秒)
-      delayMobileSeconds: 25,          // 移动端初始延迟 (秒)
-      forceShowAfterDesktopSeconds: 35,// 桌面端强制展示时间 (秒)
+      delayDesktopSeconds: 20, // 桌面端初始延迟 (秒)
+      delayMobileSeconds: 25, // 移动端初始延迟 (秒)
+      forceShowAfterDesktopSeconds: 35, // 桌面端强制展示时间 (秒)
       forceShowAfterMobileSeconds: 40, // 移动端强制展示时间 (秒)
 
-      isActivelyScrolling: false,      // 是否正在滚动（用于避免滚动中弹窗）
-      scrollIdleTimer: null,           // 滚动空闲计时器
+      isActivelyScrolling: false, // 是否正在滚动（用于避免滚动中弹窗）
+      scrollIdleTimer: null, // 滚动空闲计时器
 
       storageKeys: {
         convertedUntil: "smartPopupConvertedUntil", // 转化抑制截止时间的 localStorage 键
       },
       suppression: {
-        convertedUntil: 0,             // 转化抑制截止时间戳（48 小时）
+        convertedUntil: 0, // 转化抑制截止时间戳（48 小时）
       },
 
       // 缓存值，避免在轮询间隔中频繁读取布局信息
-      cachedScrollPercent: 0,          // 缓存的滚动百分比
-      cachedHasFocus: false,           // 缓存的表单焦点状态
+      cachedScrollPercent: 0, // 缓存的滚动百分比
+      cachedHasFocus: false, // 缓存的表单焦点状态
 
       /** 各种行为评分的防重复标志 */
       flags: {
-        nonLinkClickScored: false,      // 非链接点击是否已评分
-        productInteractionScored: false,// 产品交互是否已评分
-        scrollDepthScored: false,       // 滚动深度是否已评分
-        productDwellScored: false,      // 产品区域停留是否已评分
-        nonHeroDwellScored: false,      // 非 Hero 区域停留是否已评分
-        friendlyHandlersBound: false,   // 关闭事件处理器是否已绑定
+        nonLinkClickScored: false, // 非链接点击是否已评分
+        productInteractionScored: false, // 产品交互是否已评分
+        scrollDepthScored: false, // 滚动深度是否已评分
+        productDwellScored: false, // 产品区域停留是否已评分
+        nonHeroDwellScored: false, // 非 Hero 区域停留是否已评分
+        friendlyHandlersBound: false, // 关闭事件处理器是否已绑定
       },
     },
 
@@ -268,54 +278,54 @@
         '<div id="smart-popup-overlay">' +
         // 弹窗内容卡片
         '<div style="background:#fff;border-radius:1rem;padding:2rem;max-width:480px;width:90%;' +
-          'position:relative;box-shadow:0 20px 60px rgba(0,0,0,.3);">' +
+        'position:relative;box-shadow:0 20px 60px rgba(0,0,0,.3);">' +
         // 关闭按钮
         '<button id="smart-popup-close" style="position:absolute;top:.75rem;right:.75rem;' +
-          'width:2rem;height:2rem;display:flex;align-items:center;justify-content:center;' +
-          'background:#f1f5f9;border:none;border-radius:50%;cursor:pointer;font-size:1rem;' +
-          'color:#64748b;transition:background .15s,color .15s,transform .15s;' +
-          '-webkit-tap-highlight-color:transparent;touch-action:manipulation;" ' +
-          'aria-label="Close">&#x2715;</button>' +
+        "width:2rem;height:2rem;display:flex;align-items:center;justify-content:center;" +
+        "background:#f1f5f9;border:none;border-radius:50%;cursor:pointer;font-size:1rem;" +
+        "color:#64748b;transition:background .15s,color .15s,transform .15s;" +
+        '-webkit-tap-highlight-color:transparent;touch-action:manipulation;" ' +
+        'aria-label="Close">&#x2715;</button>' +
         // 调试：触发原因（测试环境显示）
         '<div id="trigger-reason" style="display:none;font-size:.75rem;color:#94a3b8;' +
-          'margin-bottom:.5rem;align-items:center;gap:.25rem;"></div>' +
+        'margin-bottom:.5rem;align-items:center;gap:.25rem;"></div>' +
         // 调试：弹窗计数（测试环境显示）
         '<div id="popup-today-count" style="display:none;font-size:.75rem;color:#94a3b8;' +
-          'margin-bottom:.5rem;"></div>' +
+        'margin-bottom:.5rem;"></div>' +
         // 标题区域
         '<div style="margin-bottom:1.25rem;">' +
         '<h3 style="font-size:1.25rem;font-weight:700;color:#0f172a;margin:0 0 .25rem;" ' +
-          'data-i18n="popup_get_custom_quote">Get a Custom Quote</h3>' +
+        'data-i18n="popup_get_custom_quote">Get a Custom Quote</h3>' +
         '<p style="font-size:.875rem;color:#64748b;margin:0;" ' +
-          'data-i18n="popup_tell_us">' +
-          'Tell us about your kitchen needs — our team will respond within 24 hours.</p>' +
+        'data-i18n="popup_tell_us">' +
+        "Tell us about your kitchen needs — our team will respond within 24 hours.</p>" +
         "</div>" +
         // 联系表单
         '<form id="smart-popup-form" action="/api/contact" method="POST" ' +
-          'style="display:flex;flex-direction:column;gap:.75rem;">' +
+        'style="display:flex;flex-direction:column;gap:.75rem;">' +
         '<input name="name" type="text" placeholder="Full Name *" ' +
-          'data-i18n-placeholder="popup_input_fullname" required ' +
-          'style="border:1px solid #e2e8f0;border-radius:.5rem;padding:.625rem .75rem;' +
-          'font-size:.875rem;outline:none;"/>' +
+        'data-i18n-placeholder="popup_input_fullname" required ' +
+        'style="border:1px solid #e2e8f0;border-radius:.5rem;padding:.625rem .75rem;' +
+        'font-size:.875rem;outline:none;"/>' +
         '<input name="email" type="email" placeholder="Business Email *" ' +
-          'data-i18n-placeholder="popup_input_biz_email" required ' +
-          'style="border:1px solid #e2e8f0;border-radius:.5rem;padding:.625rem .75rem;' +
-          'font-size:.875rem;outline:none;"/>' +
+        'data-i18n-placeholder="popup_input_biz_email" required ' +
+        'style="border:1px solid #e2e8f0;border-radius:.5rem;padding:.625rem .75rem;' +
+        'font-size:.875rem;outline:none;"/>' +
         '<input name="phone" type="tel" placeholder="Phone / WhatsApp" ' +
-          'data-i18n-placeholder="popup_input_phone_wa" ' +
-          'style="border:1px solid #e2e8f0;border-radius:.5rem;padding:.625rem .75rem;' +
-          'font-size:.875rem;outline:none;"/>' +
+        'data-i18n-placeholder="popup_input_phone_wa" ' +
+        'style="border:1px solid #e2e8f0;border-radius:.5rem;padding:.625rem .75rem;' +
+        'font-size:.875rem;outline:none;"/>' +
         '<input name="country" type="text" placeholder="Country / Region" ' +
-          'data-i18n-placeholder="popup_input_country" ' +
-          'style="border:1px solid #e2e8f0;border-radius:.5rem;padding:.625rem .75rem;' +
-          'font-size:.875rem;outline:none;"/>' +
+        'data-i18n-placeholder="popup_input_country" ' +
+        'style="border:1px solid #e2e8f0;border-radius:.5rem;padding:.625rem .75rem;' +
+        'font-size:.875rem;outline:none;"/>' +
         '<textarea name="message" placeholder="Describe your requirements\u2026" ' +
-          'data-i18n-placeholder="popup_input_requirements" rows="3" ' +
-          'style="border:1px solid #e2e8f0;border-radius:.5rem;padding:.625rem .75rem;' +
-          'font-size:.875rem;outline:none;resize:vertical;"></textarea>' +
+        'data-i18n-placeholder="popup_input_requirements" rows="3" ' +
+        'style="border:1px solid #e2e8f0;border-radius:.5rem;padding:.625rem .75rem;' +
+        'font-size:.875rem;outline:none;resize:vertical;"></textarea>' +
         '<button type="submit" style="background:#2563eb;color:#fff;border:none;' +
-          'border-radius:.5rem;padding:.75rem;font-size:.875rem;font-weight:600;cursor:pointer;" ' +
-          'data-i18n="form_title">Send Inquiry</button>' +
+        'border-radius:.5rem;padding:.75rem;font-size:.875rem;font-weight:600;cursor:pointer;" ' +
+        'data-i18n="form_title">Send Inquiry</button>' +
         "</form>" +
         "</div>" +
         "</div>";
@@ -423,10 +433,7 @@
       if (this.isSuppressedByStorage()) return false;
 
       // 冷却期检查
-      if (
-        this.state.lastPopupTime &&
-        Date.now() - this.state.lastPopupTime < this.state.popupCooldown
-      ) {
+      if (this.state.lastPopupTime && Date.now() - this.state.lastPopupTime < this.state.popupCooldown) {
         return false;
       }
 
@@ -464,9 +471,9 @@
         // 检测产品相关交互（产品卡片、筛选、分页）
         var isProductInteraction = clickedElement.closest(
           "#products .product-card, " +
-          "#product-filter-bar .filter-btn, " +
-          "#pagination .pagination-btn, " +
-          "#product-grid-mobile-controls button"
+            "#product-filter-bar .filter-btn, " +
+            "#pagination .pagination-btn, " +
+            "#product-grid-mobile-controls button"
         );
 
         if (isProductInteraction) {
@@ -484,10 +491,10 @@
      */
     setupScrollTracking: function () {
       var self = this;
-      var nonHeroDwellSeconds = 0;       // 非 Hero 区域停留秒数
-      var nonHeroDwellInterval = null;   // 非 Hero 停留计时器
-      var heroSectionHeight = 0;         // Hero 区域高度（缓存）
-      var rafPending = false;            // rAF 节流标志
+      var nonHeroDwellSeconds = 0; // 非 Hero 区域停留秒数
+      var nonHeroDwellInterval = null; // 非 Hero 停留计时器
+      var heroSectionHeight = 0; // Hero 区域高度（缓存）
+      var rafPending = false; // rAF 节流标志
 
       /**
        * 测量首个 section 元素的高度作为 Hero 区域高度。
@@ -511,12 +518,8 @@
             rafPending = false;
 
             var currentScrollY = window.scrollY;
-            var scrollableHeight =
-              document.documentElement.scrollHeight - window.innerHeight;
-            var scrollPercent =
-              scrollableHeight > 0
-                ? Math.round((currentScrollY / scrollableHeight) * 100)
-                : 0;
+            var scrollableHeight = document.documentElement.scrollHeight - window.innerHeight;
+            var scrollPercent = scrollableHeight > 0 ? Math.round((currentScrollY / scrollableHeight) * 100) : 0;
 
             // 更新缓存值供轮询使用
             self.state.cachedScrollPercent = scrollPercent;
@@ -569,8 +572,8 @@
       var productSection = document.getElementById("products");
       if (!productSection) return;
 
-      var productDwellSeconds = 0;      // 产品区域停留秒数
-      var productDwellInterval = null;  // 产品区域停留计时器
+      var productDwellSeconds = 0; // 产品区域停留秒数
+      var productDwellInterval = null; // 产品区域停留计时器
 
       var observer = new IntersectionObserver(
         function (entries) {
@@ -613,9 +616,7 @@
     checkConditionsLoop: function () {
       var self = this;
       var isMobile = getMqMobile();
-      var initialDelaySeconds = isMobile
-        ? this.state.delayMobileSeconds
-        : this.state.delayDesktopSeconds;
+      var initialDelaySeconds = isMobile ? this.state.delayMobileSeconds : this.state.delayDesktopSeconds;
 
       // 通过事件缓存焦点状态，避免在轮询中读取 document.activeElement
       document.addEventListener("focusin", function () {
@@ -661,9 +662,7 @@
       }
 
       // 参与度触发：评分达到阈值后展示
-      var scoreThreshold = isMobile
-        ? this.state.scoreThresholdMobile
-        : this.state.scoreThresholdDesktop;
+      var scoreThreshold = isMobile ? this.state.scoreThresholdMobile : this.state.scoreThresholdDesktop;
       if (this.state.engagementScore >= scoreThreshold) {
         this.showPopup("engagement-score", { manual: false });
       }
@@ -677,8 +676,7 @@
     updateSessionCount: function () {
       var countElement = document.getElementById("today-popup-count");
       if (!countElement) return;
-      countElement.textContent =
-        this.state.popupShownThisSession + "/" + this.state.maxPopupsPerSession;
+      countElement.textContent = this.state.popupShownThisSession + "/" + this.state.maxPopupsPerSession;
     },
 
     /**
@@ -691,20 +689,13 @@
 
       var displayMessage;
       if (triggerReason === "manual-click") {
-        displayMessage = translate(
-          "popup_trigger_manual_click",
-          "You clicked the consultation button"
-        );
+        displayMessage = translate("popup_trigger_manual_click", "You clicked the consultation button");
       } else {
-        displayMessage = translate(
-          "popup_trigger_default",
-          "We noticed your interest in our products"
-        );
+        displayMessage = translate("popup_trigger_default", "We noticed your interest in our products");
       }
 
       reasonElement.innerHTML =
-        '<span class="material-symbols-outlined">info</span>' +
-        "<span>" + displayMessage + "</span>";
+        '<span class="material-symbols-outlined">info</span>' + "<span>" + displayMessage + "</span>";
     },
 
     // ── 弹窗展示与关闭 ──────────────────────────────────────────────────
@@ -724,10 +715,7 @@
 
       if (!isManual) {
         // 自动弹窗：再次检查限制条件
-        if (!this.isAutoPopupAllowed(
-          this.state.cachedScrollPercent,
-          this.state.cachedHasFocus
-        )) {
+        if (!this.isAutoPopupAllowed(this.state.cachedScrollPercent, this.state.cachedHasFocus)) {
           return;
         }
         this.state.popupShownThisSession++;
@@ -799,10 +787,7 @@
     saveConversionSuppression: function () {
       var suppressUntil = Date.now() + 48 * 60 * 60 * 1000; // 48 小时
       this.state.suppression.convertedUntil = suppressUntil;
-      localStorage.setItem(
-        this.state.storageKeys.convertedUntil,
-        String(suppressUntil)
-      );
+      localStorage.setItem(this.state.storageKeys.convertedUntil, String(suppressUntil));
     },
 
     /**
@@ -1012,9 +997,7 @@
    */
   function submitViaMailto(formData, formType) {
     var screenWidth =
-      window.DeviceUtils && window.DeviceUtils.getScreenSize
-        ? window.DeviceUtils.getScreenSize()
-        : window.screen.width;
+      window.DeviceUtils && window.DeviceUtils.getScreenSize ? window.DeviceUtils.getScreenSize() : window.screen.width;
 
     // 构建邮件主题
     var subjectPrefix =
@@ -1022,57 +1005,62 @@
         ? translate("mailto_subject_smart_popup", "Smart Popup")
         : translate("mailto_subject_contact_form", "Contact Form");
     var mailSubject = encodeURIComponent(
-      subjectPrefix + " " +
-      translate("mailto_subject_inquiry", "Inquiry") + " - " + formData.name
+      subjectPrefix + " " + translate("mailto_subject_inquiry", "Inquiry") + " - " + formData.name
     );
 
     // 构建邮件正文
-    var mailBody = encodeURIComponent([
-      translate("mailto_label_name", "Name") + ": " + formData.name,
-      translate("mailto_label_email", "Email") + ": " + formData.email,
-      translate("mailto_label_phone", "Phone") + ": " + formData.phone,
-      translate("mailto_label_company", "Company") + ": " +
-        (formData.company || translate("mailto_not_provided", "Not provided")),
-      translate("mailto_label_country", "Country") + ": " +
-        (formData.country || translate("mailto_not_provided", "Not provided")),
-      translate("mailto_label_message", "Message") + ": " + formData.message,
-      "",
-      // 用户环境信息分隔线
-      "------------ " + translate("mailto_section_user_info", "User Information") + " ------------",
-      translate("mailto_label_user_language", "User Language") + ": " + getCurrentLanguage(),
-      translate("mailto_label_browser_language", "Browser Language") + ": " + navigator.language,
-      translate("mailto_label_screen_resolution", "Screen Resolution") + ": " +
-        screenWidth + "x" + window.screen.height,
-      translate("mailto_label_timezone", "Timezone") + ": " +
-        Intl.DateTimeFormat().resolvedOptions().timeZone,
-      translate("mailto_label_page_url", "Page URL") + ": " + window.location.href,
-      translate("mailto_label_submit_time", "Submit Time") + ": " + new Date().toLocaleString(),
-      translate("mailto_label_time_on_page", "Time on Page") + ": " +
-        (userState.timeOnPage || 0) + translate("mailto_unit_seconds", "s"),
-      translate("mailto_label_scroll_depth", "Scroll Depth") + ": " +
-        (userState.scrollDepth || 0) + "%",
-      // 浏览器信息分隔线
-      "------------ " + translate("mailto_section_browser_info", "Browser Information") + " ------------",
-      translate("mailto_label_user_agent", "User Agent") + ": " + navigator.userAgent,
-    ].join("\n"));
+    var mailBody = encodeURIComponent(
+      [
+        translate("mailto_label_name", "Name") + ": " + formData.name,
+        translate("mailto_label_email", "Email") + ": " + formData.email,
+        translate("mailto_label_phone", "Phone") + ": " + formData.phone,
+        translate("mailto_label_company", "Company") +
+          ": " +
+          (formData.company || translate("mailto_not_provided", "Not provided")),
+        translate("mailto_label_country", "Country") +
+          ": " +
+          (formData.country || translate("mailto_not_provided", "Not provided")),
+        translate("mailto_label_message", "Message") + ": " + formData.message,
+        "",
+        // 用户环境信息分隔线
+        "------------ " + translate("mailto_section_user_info", "User Information") + " ------------",
+        translate("mailto_label_user_language", "User Language") + ": " + getCurrentLanguage(),
+        translate("mailto_label_browser_language", "Browser Language") + ": " + navigator.language,
+        translate("mailto_label_screen_resolution", "Screen Resolution") +
+          ": " +
+          screenWidth +
+          "x" +
+          window.screen.height,
+        translate("mailto_label_timezone", "Timezone") + ": " + Intl.DateTimeFormat().resolvedOptions().timeZone,
+        translate("mailto_label_page_url", "Page URL") + ": " + window.location.href,
+        translate("mailto_label_submit_time", "Submit Time") + ": " + new Date().toLocaleString(),
+        translate("mailto_label_time_on_page", "Time on Page") +
+          ": " +
+          (userState.timeOnPage || 0) +
+          translate("mailto_unit_seconds", "s"),
+        translate("mailto_label_scroll_depth", "Scroll Depth") + ": " + (userState.scrollDepth || 0) + "%",
+        // 浏览器信息分隔线
+        "------------ " + translate("mailto_section_browser_info", "Browser Information") + " ------------",
+        translate("mailto_label_user_agent", "User Agent") + ": " + navigator.userAgent,
+      ].join("\n")
+    );
 
-    window.location.href =
-      "mailto:179564128@qq.com?subject=" + mailSubject + "&body=" + mailBody;
+    window.location.href = "mailto:179564128@qq.com?subject=" + mailSubject + "&body=" + mailBody;
   }
 
   // ─── 全局导出 ─────────────────────────────────────────────────────────────
   // 保持与原始代码完全一致的公开 API，确保所有调用方不受影响。
 
-  window.smartPopup = smartPopup;                          // 弹窗核心对象
-  window.userState = userState;                            // 用户行为状态
-  window.isTestEnvironment = isTestEnvironment;            // 测试环境判断
-  window.loadUserState = loadUserState;                    // 加载用户状态
-  window.saveUserState = saveUserState;                    // 保存用户状态
-  window.trackScrollDepth = trackScrollDepth;              // 追踪滚动深度
-  window.trackTimeOnPage = trackTimeOnPage;                // 追踪页面停留时间
-  window.showSmartPopupManual = showSmartPopupManual;      // 手动触发弹窗
-  window.closeSmartPopup = closeSmartPopup;                // 关闭弹窗
-  window.submitSmartPopupForm = submitSmartPopupForm;      // 弹窗表单提交
-  window.submitContactForm = submitContactForm;            // 联系页表单提交
-  window.submitViaMailto = submitViaMailto;                // mailto 降级提交
+  window.smartPopup = smartPopup; // 弹窗核心对象
+  window.userState = userState; // 用户行为状态
+  window.isTestEnvironment = isTestEnvironment; // 测试环境判断
+  window.loadUserState = loadUserState; // 加载用户状态
+  window.saveUserState = saveUserState; // 保存用户状态
+  window.trackScrollDepth = trackScrollDepth; // 追踪滚动深度
+  window.trackTimeOnPage = trackTimeOnPage; // 追踪页面停留时间
+  window.showSmartPopupManual = showSmartPopupManual; // 手动触发弹窗
+  window.closeSmartPopup = closeSmartPopup; // 关闭弹窗
+  window.submitSmartPopupForm = submitSmartPopupForm; // 弹窗表单提交
+  window.submitContactForm = submitContactForm; // 联系页表单提交
+  window.submitViaMailto = submitViaMailto; // mailto 降级提交
 })(window);

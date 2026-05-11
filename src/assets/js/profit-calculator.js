@@ -607,11 +607,13 @@
     // Check for required libraries
     if (typeof html2canvas === "undefined") {
       console.error("[PC-PDF] html2canvas not loaded!");
+      _showPDFErrorToast();
       generatePDFFallback(input, result, salaryInfo);
       return;
     }
     if (typeof window.jspdf === "undefined" && typeof jsPDF === "undefined") {
       console.error("[PC-PDF] jsPDF not loaded! window.jspdf:", window.jspdf, "| jsPDF:", jsPDF);
+      _showPDFErrorToast();
       generatePDFFallback(input, result, salaryInfo);
       return;
     }
@@ -774,6 +776,7 @@
       .catch(function (err) {
         document.body.removeChild(container);
         console.error("[PC-PDF] html2canvas error:", err);
+        _showPDFErrorToast();
         // Fallback
         generatePDFFallback(input, result, salaryInfo);
       });
@@ -850,6 +853,29 @@
       "</span>" +
       "</div>"
     );
+  }
+
+  /** Show a toast notification when PDF generation fails */
+  function _showPDFErrorToast() {
+    var msg = t("profit_calc_pdf_error") !== "profit_calc_pdf_error"
+      ? t("profit_calc_pdf_error")
+      : "PDF generation failed, please try again later";
+    var toast = document.createElement("div");
+    toast.className = "fixed top-24 left-1/2 -translate-x-1/2 bg-red-600 text-white px-5 py-3 rounded-xl shadow-xl z-[200] text-sm font-medium transition-all duration-300";
+    toast.style.cssText = "opacity:0;transform:translate(-50%,-10px)";
+    toast.textContent = msg;
+    document.body.appendChild(toast);
+    requestAnimationFrame(function () {
+      toast.style.opacity = "1";
+      toast.style.transform = "translate(-50%,0)";
+    });
+    setTimeout(function () {
+      toast.style.opacity = "0";
+      toast.style.transform = "translate(-50%,-10px)";
+      setTimeout(function () {
+        toast.remove();
+      }, 300);
+    }, 3000);
   }
 
   /** Fallback: open print dialog */

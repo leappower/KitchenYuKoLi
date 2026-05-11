@@ -368,22 +368,4 @@
     safeBack: safeBack,
     PAGES: PAGES,
   };
-
-  // Auto-initialize when DOM is ready
-  if (window.CommonUtils && typeof window.CommonUtils.ready === "function") {
-    window.CommonUtils.ready(init);
-  } else if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", init);
-  } else {
-    init();
-  }
-  // Setup bfcache recovery handlers
-  setupBfcacheRecovery();
-  // Export public API for debugging and external use
-  window.YukoliRouter = {
-    navigate: navigate,
-    whatsappHref: whatsappHref,
-    safeBack: safeBack,
-    PAGES: PAGES,
-  };
 })(window);

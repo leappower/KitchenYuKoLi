@@ -26,13 +26,8 @@
 (function (root) {
   "use strict";
 
-  var _spaRegs = {};
-  function _spaOn(tgt, evt, fn, key) {
-    if (_spaRegs[key]) _spaRegs[key].abort();
-    var ac = new AbortController();
-    _spaRegs[key] = ac;
-    tgt.addEventListener(evt, fn, { signal: ac.signal });
-  }
+  // _spaOn is now in utils/spa-events.js (window._spaOn)
+  var _spaOn = window._spaOn;
 
   // 万位单位的本地数值（该单位代表多少当地货币）
   var UNIT_VALUES = {

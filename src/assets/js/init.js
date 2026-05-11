@@ -27,35 +27,62 @@
     },
   };
 
-  setInterval(function () {
-    userActivity.timeOnPage++;
-    if (userActivity.inProductSection) userActivity.timeOnProductSection++;
-  }, 1000);
+  var _activityInterval = null;
+  var _activityAbortCtrl = new AbortController();
 
-  document.addEventListener("mousemove", function () {
-    userActivity.lastActivityTime = Date.now();
-  });
+  function startActivityTracking() {
+    // Clear previous interval if any (SPA re-entry)
+    if (_activityInterval) clearInterval(_activityInterval);
+    _activityInterval = setInterval(function () {
+      userActivity.timeOnPage++;
+      if (userActivity.inProductSection) userActivity.timeOnProductSection++;
+    }, 1000);
 
-  document.addEventListener("scroll", function () {
-    userActivity.lastActivityTime = Date.now();
-    userActivity.hasScrolled = true;
-    var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
-    var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-    userActivity.scrollDepth = (winScroll / height) * 100;
-  });
+    // Abort previous global listeners and create new ones
+    _activityAbortCtrl.abort();
+    _activityAbortCtrl = new AbortController();
+    var opts = { signal: _activityAbortCtrl.signal };
 
-  document.addEventListener("click", function (e) {
-    userActivity.lastActivityTime = Date.now();
-    var isLink = e.target.closest('a, button, [role="button"]');
-    var isInput = e.target.closest("input, textarea, select");
-    var isInteractive = e.target.closest(".product-card, .certificate-card, nav, header, .floating-sidebar");
-    if (!isLink && !isInput && !isInteractive && userActivity.inProductSection) {
-      userActivity.nonLinkClickCount++;
-    }
-  });
+    document.addEventListener(
+      "mousemove",
+      function () {
+        userActivity.lastActivityTime = Date.now();
+      },
+      opts
+    );
+
+    document.addEventListener(
+      "scroll",
+      function () {
+        userActivity.lastActivityTime = Date.now();
+        userActivity.hasScrolled = true;
+        var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+        var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+        userActivity.scrollDepth = (winScroll / height) * 100;
+      },
+      opts
+    );
+
+    document.addEventListener(
+      "click",
+      function (e) {
+        userActivity.lastActivityTime = Date.now();
+        var isLink = e.target.closest('a, button, [role="button"]');
+        var isInput = e.target.closest("input, textarea, select");
+        var isInteractive = e.target.closest(".product-card, .certificate-card, nav, header, .floating-sidebar");
+        if (!isLink && !isInput && !isInteractive && userActivity.inProductSection) {
+          userActivity.nonLinkClickCount++;
+        }
+      },
+      opts
+    );
+  }
+
+  // Initial start
+  startActivityTracking();
 
   function setupProductSectionTracking() {
-    var productSection = document.getElementById("produkten");
+    var productSection = document.getElementById("products");
     if (!productSection) return;
     var observer = new IntersectionObserver(
       function (entries) {
@@ -188,5 +215,12 @@
     setupProductSectionTracking();
     initIoTPulse();
     initGeoHero();
+  });
+
+  // Re-start tracking on SPA navigation
+  document.addEventListener("spa:load", function () {
+    startActivityTracking();
+    setupProductSectionTracking();
+    initIoTPulse();
   });
 })(window);

@@ -1037,21 +1037,35 @@
     var list = document.getElementById("product-list");
     if (grid && grid.querySelector(".sk-product-card")) {
       console.warn("[ProductGrid] Skeleton still present after 5s — clearing");
+      var errorMsg = typeof window.t === "function"
+        ? window.t("products_load_error", "产品加载失败，请刷新页面重试")
+        : "产品加载失败，请刷新页面重试";
+      var retryText = typeof window.t === "function"
+        ? window.t("products_load_retry", "重新加载")
+        : "重新加载";
       grid.innerHTML =
-        '<div class="col-span-full text-center py-16"><p class="text-slate-500 dark:text-slate-400 text-lg">' +
-        (typeof window.t === "function"
-          ? window.t("products_load_error", "产品加载失败，请刷新页面重试")
-          : "产品加载失败，请刷新页面重试") +
-        "</p></div>";
+        '<div class="col-span-full text-center py-16"><p class="text-slate-500 dark:text-slate-400 text-lg" data-i18n="products_load_error">' +
+        errorMsg +
+        '</p><button class="mt-4 inline-flex items-center gap-2 bg-primary text-white px-5 py-2.5 rounded-xl font-bold text-sm hover:opacity-90 transition-all" data-i18n="products_load_retry" onclick="window.ProductGrid.retryLoad()">' +
+        '<span class="material-symbols-outlined text-sm">refresh</span>' +
+        retryText +
+        '</button></div>';
     }
     if (list && list.querySelector(".sk-product-card")) {
       console.warn("[ProductGrid] Skeleton still present in list after 5s — clearing");
+      var errorMsg = typeof window.t === "function"
+        ? window.t("products_load_error", "产品加载失败，请刷新页面重试")
+        : "产品加载失败，请刷新页面重试";
+      var retryText = typeof window.t === "function"
+        ? window.t("products_load_retry", "重新加载")
+        : "重新加载";
       list.innerHTML =
-        '<div class="text-center py-16"><p class="text-slate-500 dark:text-slate-400 text-lg">' +
-        (typeof window.t === "function"
-          ? window.t("products_load_error", "产品加载失败，请刷新页面重试")
-          : "产品加载失败，请刷新页面重试") +
-        "</p></div>";
+        '<div class="text-center py-16"><p class="text-slate-500 dark:text-slate-400 text-lg" data-i18n="products_load_error">' +
+        errorMsg +
+        '</p><button class="mt-4 inline-flex items-center gap-2 bg-primary text-white px-5 py-2.5 rounded-xl font-bold text-sm hover:opacity-90 transition-all" data-i18n="products_load_retry" onclick="window.ProductGrid.retryLoad()">' +
+        '<span class="material-symbols-outlined text-sm">refresh</span>' +
+        retryText +
+        '</button></div>';
     }
   }, 5000);
 
@@ -1120,6 +1134,13 @@
     },
     setActiveTier: function (tier) {
       _activeTier = tier;
+    },
+    retryLoad: function () {
+      _dataLoaded = false;
+      _fetchPromise = null;
+      _renderPending = false;
+      delete window[STORE_KEY];
+      autoRender();
     },
   };
 })();

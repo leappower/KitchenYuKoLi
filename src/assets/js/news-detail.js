@@ -55,6 +55,38 @@
         bodyEl.innerHTML = bodyHtml;
       }
     }
+
+    // Check for invalid article: if title or body has no meaningful content
+    var hasContent = false;
+    if (titleEl && titleEl.textContent.trim()) {
+      var tKey = id + "_title";
+      var rawTitle = window.translationManager && window.translationManager.t
+        ? window.translationManager.t(tKey) : titleEl.textContent;
+      hasContent = rawTitle && rawTitle !== tKey;
+    }
+    if (!hasContent && bodyEl) {
+      var bKey = id + "_body";
+      var rawBody = window.translationManager && window.translationManager.t
+        ? window.translationManager.t(bKey) : bodyEl.textContent;
+      hasContent = rawBody && rawBody !== bKey && rawBody.trim().length > 0;
+    }
+    if (!hasContent) {
+      var mainEl = document.getElementById("spa-content");
+      if (mainEl) {
+        mainEl.innerHTML =
+          '<div class="flex flex-col items-center justify-center py-24 px-6 text-center">' +
+          '<div class="w-20 h-20 rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center mb-6">' +
+          '<span class="material-symbols-outlined text-4xl text-slate-400">article</span>' +
+          '</div>' +
+          '<h1 class="text-3xl font-black mb-3" data-i18n="news_not_found_title">Article Not Found</h1>' +
+          '<p class="text-slate-500 dark:text-slate-400 mb-8 max-w-md" data-i18n="news_not_found_desc">The article you are looking for does not exist or has been removed.</p>' +
+          '<a href="/news/" class="inline-flex items-center gap-2 bg-primary text-white px-6 py-3 rounded-xl font-bold hover:shadow-lg hover:shadow-primary/20 transition-all">' +
+          '<span class="material-symbols-outlined">arrow_back</span>' +
+          '<span data-i18n="news_not_found_back">Back to News</span>' +
+          '</a>' +
+          '</div>';
+      }
+    }
   }
 
   // Direct page load

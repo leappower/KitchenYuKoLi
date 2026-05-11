@@ -39,4 +39,24 @@
   }
 
   global.__onSpaEvent = onSpaEvent;
+
+  // Global _spaOn — shared AbortController registry for SPA-safe event binding
+  // Used by multiple modules that previously defined this function locally.
+  var _spaRegs = {};
+
+  /**
+   * Register an event listener with automatic deduplication by key.
+   * @param {EventTarget} tgt   - target element (document, window, etc.)
+   * @param {string} evt        - event name
+   * @param {Function} fn       - handler
+   * @param {string} key        - unique key for deduplication
+   */
+  function _spaOn(tgt, evt, fn, key) {
+    if (_spaRegs[key]) _spaRegs[key].abort();
+    var ac = new AbortController();
+    _spaRegs[key] = ac;
+    tgt.addEventListener(evt, fn, { signal: ac.signal });
+  }
+
+  global._spaOn = _spaOn;
 })(window);

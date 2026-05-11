@@ -16,13 +16,8 @@
 
   /* ───────────────────────── SHARED UTILITIES ───────────────────────── */
 
-  var _spaRegs = {};
-  function _spaOn(tgt, evt, fn, key) {
-    if (_spaRegs[key]) _spaRegs[key].abort();
-    var ac = new AbortController();
-    _spaRegs[key] = ac;
-    tgt.addEventListener(evt, fn, { signal: ac.signal });
-  }
+  // _spaOn is now in utils/spa-events.js (window._spaOn)
+  var _spaOn = window._spaOn;
 
   function esc(str) {
     return String(str).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
@@ -238,8 +233,57 @@
       }
     }
 
+    /* ── KEYBOARD NAVIGATION ── */
+    function _bindKeyboardNav() {
+      document.addEventListener("keydown", function (e) {
+        var key = e.key;
+
+        // Escape: close any open dropdown or popup
+        if (key === "Escape") {
+          var openDropdown = document.querySelector("." + wrapClass + ".is-open");
+          if (openDropdown) {
+            openDropdown.classList.remove("is-open");
+            // Move focus back to trigger
+            var trigger = openDropdown.querySelector("." + triggerClass);
+            if (trigger) trigger.focus();
+            return;
+          }
+          // Also close mobile popup if open
+          var openPanel = document.querySelector("." + panelClass + ".is-open");
+          if (openPanel) {
+            closePopup();
+            return;
+          }
+        }
+
+        // Tab: close dropdown when focus moves away
+        if (key === "Tab") {
+          var activeEl = document.activeElement;
+          if (activeEl) {
+            var openWrap = activeEl.closest("." + wrapClass);
+            if (!openWrap) {
+              document.querySelectorAll("." + wrapClass + ".is-open").forEach(function (d) {
+                d.classList.remove("is-open");
+              });
+            }
+          }
+        }
+      });
+    }
+
     /* ── SPA CLEANUP ── */
-    _spaOn(document, "spa:load", closePopup, "spa:load:closePopup:" + prefix);
+    _spaOn(
+      document,
+      "spa:load",
+      function () {
+        closePopup();
+        _bindKeyboardNav();
+      },
+      "spa:load:closePopup:" + prefix
+    );
+
+    // Also bind keyboard nav on first call
+    _bindKeyboardNav();
 
     /* ── PUBLIC API ── */
     var api = {

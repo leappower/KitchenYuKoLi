@@ -178,30 +178,9 @@
 
     // 提取主要内容（<main id="spa-content"> 内部内容）
     extractContent: function (html) {
-      // 优先提取 <main id="spa-content"> 内部内容
-      var mainMatch = html.match(/<main[^>]*id="spa-content"[^>]*>([\s\S]*)<\/main>/i);
-      if (mainMatch) {
-        return mainMatch[1].trim();
-      }
-
-      // 回退：提取 <body> 内容，移除 Header/Footer/Navigator
-      var bodyMatch = html.match(/<body[^>]*>([\s\S]*)<\/body>/i);
-      if (!bodyMatch) return null;
-
-      var bodyContent = bodyMatch[1];
-
-      // 移除 Header/Footer/Navigator（因为已经持久化）
-      bodyContent = bodyContent.replace(/<header[^>]*>[\s\S]*?<\/header>/gi, "");
-      bodyContent = bodyContent.replace(/<navigator[^>]*>[\s\S]*?<\/navigator>/gi, "");
-      bodyContent = bodyContent.replace(/<footer[^>]*>[\s\S]*?<\/footer>/gi, "");
-
-      // 移除所有 <script> 标签（SPA 导航不需要重新执行内联脚本）
-      bodyContent = bodyContent.replace(/<script[\s\S]*?<\/script>/gi, "");
-
-      // 移除骨架屏容器（如果存在）
-      bodyContent = bodyContent.replace(/<div[^>]*class="[^"]*skeleton-container[^"]*"[^>]*>[\s\S]*?<\/div>/gi, "");
-
-      return bodyContent.trim();
+      var doc = new DOMParser().parseFromString(html, "text/html");
+      var main = doc.getElementById("spa-content");
+      return main ? main.innerHTML : null;
     },
 
     // 提取标题
@@ -279,17 +258,19 @@
       }
       // Debug: if skeleton still visible after 3s, show visible warning
       clearTimeout(this._skeletonDebugTimer);
-      this._skeletonDebugTimer = setTimeout(function () {
-        var ov = document.getElementById("skeleton-overlay");
-        if (ov && !ov.hasAttribute("hidden")) {
-          console.error("[SKELETON-BUG] Skeleton still visible after 3s!");
-          var banner = document.createElement("div");
-          banner.style.cssText =
-            "position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);z-index:99999;background:red;color:white;padding:20px 30px;font-size:18px;font-weight:bold;border-radius:12px;box-shadow:0 4px 20px rgba(0,0,0,0.3);";
-          banner.textContent = "⚠️ SKELETON STUCK! hideSkeleton never called. Check console for [SKELETON-BUG].";
-          document.body.appendChild(banner);
-        }
-      }, 3000);
+      if (window.__DEVELOPMENT__) {
+        this._skeletonDebugTimer = setTimeout(function () {
+          var ov = document.getElementById("skeleton-overlay");
+          if (ov && !ov.hasAttribute("hidden")) {
+            console.error("[SKELETON-BUG] Skeleton still visible after 3s!");
+            var banner = document.createElement("div");
+            banner.style.cssText =
+              "position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);z-index:99999;background:red;color:white;padding:20px 30px;font-size:18px;font-weight:bold;border-radius:12px;box-shadow:0 4px 20px rgba(0,0,0,0.3);";
+            banner.textContent = "⚠️ SKELETON STUCK! hideSkeleton never called. Check console for [SKELETON-BUG].";
+            document.body.appendChild(banner);
+          }
+        }, 3000);
+      }
     },
 
     // 隐藏骨架屏：overlay 隐藏，内容恢复
@@ -546,6 +527,8 @@
 
       // 隐藏骨架 → 替换内容 → fade in
       this.hideSkeleton();
+      // Dispatch spa:beforeunload before replacing content
+      container.dispatchEvent(new CustomEvent("spa:beforeunload", { bubbles: true }));
       container.style.opacity = "0";
       container.innerHTML = content;
 
@@ -865,26 +848,58 @@
         scripts.push({ src: "/assets/js/case-grid.js", id: "spa-case-grid" });
       }
 
-      // Load scripts sequentially (each waits for previous onload)
-      var chain = Promise.resolve();
-      var loaded = 0;
+      // Load scripts: vendor scripts in parallel, dependent scripts after
+      // Identify vendor (non-dependent) vs dependent scripts
+      var vendorScripts = [];
+      var dependentScripts = [];
       scripts.forEach(function (s) {
-        if (document.getElementById(s.id)) return; // 已加载
-        chain = chain.then(function () {
-          return new Promise(function (resolve) {
-            var el = document.createElement("script");
-            el.id = s.id;
-            el.src = s.src + (s.src.indexOf("?") === -1 ? "?v=" + Date.now() : "");
-            el.onload = function () {
-              resolve();
-            };
-            el.onerror = function () {
-              console.warn("[SPA] Failed to load script:", s.src);
-              resolve(); // continue chain even on error
-            };
-            document.body.appendChild(el);
+        // Scripts that don't depend on other dynamically loaded scripts
+        var isVendor =
+          /^\/assets\/js\/vendor\//.test(s.src) ||
+          s.id === "spa-dropdown-styles" ||
+          s.id === "spa-custom-select" ||
+          s.id === "spa-support-contact-channels" ||
+          s.id === "spa-support-wechat-modal" ||
+          s.id === "spa-pi-maps" ||
+          s.id === "spa-quote-budget-i18n" ||
+          s.id === "spa-cases-page" ||
+          s.id === "spa-case-grid" ||
+          s.id === "spa-news-detail" ||
+          s.id === "spa-home-core-products";
+        if (isVendor) {
+          if (!document.getElementById(s.id)) vendorScripts.push(s);
+        } else {
+          if (!document.getElementById(s.id)) dependentScripts.push(s);
+        }
+      });
+
+      function loadScript(s) {
+        return new Promise(function (resolve) {
+          var el = document.createElement("script");
+          el.id = s.id;
+          el.src = s.src;
+          el.onload = function () {
+            resolve();
+          };
+          el.onerror = function () {
+            console.warn("[SPA] Failed to load script:", s.src);
+            resolve(); // continue chain even on error
+          };
+          document.body.appendChild(el);
+        });
+      }
+
+      // Load vendor scripts in parallel, then dependent scripts sequentially
+      var vendorPromise = vendorScripts.length > 0 ? Promise.all(vendorScripts.map(loadScript)) : Promise.resolve();
+
+      var chain = vendorPromise.then(function () {
+        var depChain = Promise.resolve();
+        dependentScripts.forEach(function (s) {
+          depChain = depChain.then(function () {
+            return loadScript(s);
           });
         });
+        return depChain;
       });
       return chain;
     },
