@@ -365,13 +365,10 @@
     if (!_fetchPromise) {
       _fetchPromise = fetch("/api/public/products-data", { cache: "no-store" })
         .then(function (r) {
-          if (__DEVELOPMENT__) console.log("[ProductGrid] API response status:", r.status, r.ok);
           if (!r.ok) throw new Error("HTTP " + r.status);
           return r.json();
         })
         .then(function (data) {
-          if (__DEVELOPMENT__) {
-          }
           window[STORE_KEY] = data;
           try {
             localStorage.setItem("pdt_v2", JSON.stringify(data));
@@ -747,8 +744,6 @@
     if (_renderPending) return;
     var data = window[STORE_KEY];
     var hasData = Array.isArray(data) && data.length > 0;
-    if (__DEVELOPMENT__) {
-    }
     if (hasData) {
       _renderPending = false;
       doRender();
@@ -1024,11 +1019,8 @@
 
   // ─── Init ──────────────────────────────────────────────────────
 
-  if (__DEVELOPMENT__) console.log("[ProductGrid] Script loaded");
-
   // Guard: ensure init runs once even if script loads multiple times
   if (window._productGridInited) {
-    if (__DEVELOPMENT__) console.log("[ProductGrid] Skipping duplicate init (already initialized)");
   } else {
     window._productGridInited = true;
     if (document.readyState !== "loading") {
@@ -1040,7 +1032,6 @@
 
   // product-data-ready: only useful if data arrives after page scripts run
   window.addEventListener("product-data-ready", function () {
-    if (__DEVELOPMENT__) console.log("[ProductGrid] product-data-ready received");
     autoRender();
   });
 
@@ -1071,7 +1062,6 @@
 
   // spa:load: prevent duplicate handler registration
   _spaOn(document, "spa:load", function () {
-    if (__DEVELOPMENT__) console.log("[ProductGrid] spa:load received", { url: location.href });
     _renderPending = false; // reset dedup flag for new page
     // Reset init flag and pagination for SPA navigation
     document.querySelectorAll(".category-tab-container").forEach(function (el) {
