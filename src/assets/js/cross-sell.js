@@ -337,7 +337,8 @@
     var scenes = SCENE_ENTRY_MAP[slug];
     if (!scenes || !scenes.length) return "";
 
-    var html = '<div class="text-center mb-8">';
+    var html = '<div class="mt-10 lg:mt-12">';
+    html += '<div class="text-center mb-8">';
     html +=
       '<h3 class="text-2xl lg:text-3xl font-black text-slate-900 dark:text-white mb-2">' +
       tl("scene_entry_title", "适用场景") +
@@ -389,7 +390,8 @@
       html += "</div>";
       html += "</a>";
     });
-    html += "</div>";
+    html += "</div>"; // close grid
+    html += "</div>"; // close mt-10 wrapper
     return html;
   }
 
