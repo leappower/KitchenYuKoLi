@@ -850,8 +850,8 @@
         scripts.push({ src: "/assets/js/compare.js", id: "spa-compare" });
       }
 
-      // 产品分类页需要 cross-sell.js（搭配推荐 + 适用场景，/products/all/ 不需要）
-      if (path.match(/\/products\/(cutting|stirfry|frying|stewing|steaming|other)\//)) {
+      // 产品分类页需要 cross-sell.js（搭配推荐 + 适用场景，/products/all/ 只显示适用场景）
+      if (path.match(/\/products\/(all\/?(?:$)|cutting|stirfry|frying|stewing|steaming|other)\//)) {
         scripts.push({ src: "/assets/js/cross-sell.js", id: "spa-cross-sell" });
       }
 

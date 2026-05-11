@@ -238,11 +238,11 @@
           '" class="w-7 h-7 rounded object-cover" onerror="this.src=\'/assets/images/products/default.webp\'">' +
           '<span class="text-xs font-bold text-slate-900 dark:text-white truncate max-w-[80px]">' +
           esc(p.name || p.model) +
-          '</span>' +
+          "</span>" +
           '<button class="float-remove flex-shrink-0 text-slate-400 hover:text-red-500" data-model="' +
           esc(p.model) +
           '"><span class="material-symbols-outlined text-sm">close</span></button>' +
-          '</div>'
+          "</div>"
         );
       })
       .join("");
@@ -251,14 +251,14 @@
       '<div class="flex flex-col gap-2 w-full">' +
       '<div class="flex items-center gap-2 overflow-x-auto scrollbar-hide py-0.5">' +
       thumbs +
-      '</div>' +
+      "</div>" +
       '<div class="flex items-center justify-end gap-2">' +
       '<button class="float-clear px-3 py-1.5 rounded-lg text-xs font-bold text-slate-500 dark:text-slate-400 hover:text-red-500 hover:bg-red-50 dark:hover:bg-red-900/20 transition-colors">清空</button>' +
       '<a href="/products/compare/" class="bg-primary text-white px-4 py-1.5 rounded-lg text-xs font-bold hover:opacity-90 transition-opacity">对比(' +
       items.length +
-      ')</a>' +
-      '</div>' +
-      '</div>'
+      ")</a>" +
+      "</div>" +
+      "</div>"
     );
   }
 
@@ -365,15 +365,13 @@
     if (!_fetchPromise) {
       _fetchPromise = fetch("/api/public/products-data", { cache: "no-store" })
         .then(function (r) {
-          console.log("[ProductGrid] API response status:", r.status, r.ok);
+          if (__DEVELOPMENT__) console.log("[ProductGrid] API response status:", r.status, r.ok);
           if (!r.ok) throw new Error("HTTP " + r.status);
           return r.json();
         })
         .then(function (data) {
-          console.log("[ProductGrid] API data received", {
-            categories: Array.isArray(data) ? data.length : "not array",
-            firstCatProds: Array.isArray(data) && data[0] ? data[0].products?.length : "n/a",
-          });
+          if (__DEVELOPMENT__) {
+          }
           window[STORE_KEY] = data;
           try {
             localStorage.setItem("pdt_v2", JSON.stringify(data));
@@ -749,11 +747,8 @@
     if (_renderPending) return;
     var data = window[STORE_KEY];
     var hasData = Array.isArray(data) && data.length > 0;
-    console.log("[ProductGrid] autoRender called", {
-      hasData: hasData,
-      dataLen: hasData ? data.length : 0,
-      url: location.href,
-    });
+    if (__DEVELOPMENT__) {
+    }
     if (hasData) {
       _renderPending = false;
       doRender();
@@ -769,15 +764,6 @@
   function doRender() {
     var cats = getCategories();
     var prods = getAllProducts();
-    console.log("[ProductGrid] doRender", {
-      categories: cats.length,
-      products: prods.length,
-      activeCategory: _activeCategory,
-      activeTier: _activeTier,
-      url: location.href,
-      hasGrid: !!document.getElementById("product-grid"),
-      hasList: !!document.getElementById("product-list"),
-    });
     if (!cats.length) {
       console.warn("[ProductGrid] doRender ABORT: no categories");
       return;
@@ -1038,11 +1024,11 @@
 
   // ─── Init ──────────────────────────────────────────────────────
 
-  console.log("[ProductGrid] Script loaded");
+  if (__DEVELOPMENT__) console.log("[ProductGrid] Script loaded");
 
   // Guard: ensure init runs once even if script loads multiple times
   if (window._productGridInited) {
-    console.log("[ProductGrid] Skipping duplicate init (already initialized)");
+    if (__DEVELOPMENT__) console.log("[ProductGrid] Skipping duplicate init (already initialized)");
   } else {
     window._productGridInited = true;
     if (document.readyState !== "loading") {
@@ -1054,13 +1040,38 @@
 
   // product-data-ready: only useful if data arrives after page scripts run
   window.addEventListener("product-data-ready", function () {
-    console.log("[ProductGrid] product-data-ready received");
+    if (__DEVELOPMENT__) console.log("[ProductGrid] product-data-ready received");
     autoRender();
   });
 
+  // Safety net: if API fails and no cached data, clear skeleton after 5s
+  // to prevent permanent skeleton display
+  setTimeout(function () {
+    var grid = document.getElementById("product-grid");
+    var list = document.getElementById("product-list");
+    if (grid && grid.querySelector(".sk-product-card")) {
+      console.warn("[ProductGrid] Skeleton still present after 5s — clearing");
+      grid.innerHTML =
+        '<div class="col-span-full text-center py-16"><p class="text-slate-500 dark:text-slate-400 text-lg">' +
+        (typeof window.t === "function"
+          ? window.t("products_load_error", "产品加载失败，请刷新页面重试")
+          : "产品加载失败，请刷新页面重试") +
+        "</p></div>";
+    }
+    if (list && list.querySelector(".sk-product-card")) {
+      console.warn("[ProductGrid] Skeleton still present in list after 5s — clearing");
+      list.innerHTML =
+        '<div class="text-center py-16"><p class="text-slate-500 dark:text-slate-400 text-lg">' +
+        (typeof window.t === "function"
+          ? window.t("products_load_error", "产品加载失败，请刷新页面重试")
+          : "产品加载失败，请刷新页面重试") +
+        "</p></div>";
+    }
+  }, 5000);
+
   // spa:load: prevent duplicate handler registration
   _spaOn(document, "spa:load", function () {
-    console.log("[ProductGrid] spa:load received", { url: location.href });
+    if (__DEVELOPMENT__) console.log("[ProductGrid] spa:load received", { url: location.href });
     _renderPending = false; // reset dedup flag for new page
     // Reset init flag and pagination for SPA navigation
     document.querySelectorAll(".category-tab-container").forEach(function (el) {
