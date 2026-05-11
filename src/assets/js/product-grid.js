@@ -804,11 +804,6 @@
     var container = document.querySelector(".category-tab-container");
     if (!container) return;
 
-    // On /products/all/ page, skip category tabs — the page shows ALL products
-    // and only uses tier filter chips (全部/入门/智能). Do not overwrite them.
-    var isAllPage = /\/products\/all\/?/.test(window.location.pathname);
-    if (isAllPage) return;
-
     // Prevent duplicate init
     if (container._categoryTabsInit) return;
     container._categoryTabsInit = true;
