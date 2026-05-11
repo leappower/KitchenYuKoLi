@@ -840,8 +840,8 @@
         scripts.push({ src: "/assets/js/home-core-products.js", id: "spa-home-core-products" });
       }
 
-      // 产品列表页需要 product-grid.js
-      if (path.match(/\/products\/$/) || path.match(/\/products\/index/)) {
+      // 产品列表页需要 product-grid.js（含 /products/all/ 和 6 个分类子页）
+      if (path.match(/\/products\/(all\/?$|cutting|stirfry|frying|stewing|steaming|other)\//)) {
         scripts.push({ src: "/assets/js/product-grid.js", id: "spa-product-grid" });
       }
 
@@ -850,7 +850,7 @@
         scripts.push({ src: "/assets/js/compare.js", id: "spa-compare" });
       }
 
-      // 产品分类页需要 cross-sell.js（买了X还配了Y推荐）
+      // 产品分类页需要 cross-sell.js（搭配推荐 + 适用场景，/products/all/ 不需要）
       if (path.match(/\/products\/(cutting|stirfry|frying|stewing|steaming|other)\//)) {
         scripts.push({ src: "/assets/js/cross-sell.js", id: "spa-cross-sell" });
       }
