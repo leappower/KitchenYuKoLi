@@ -246,6 +246,17 @@
     var bar = document.getElementById("ios-search-bar") || document.getElementById("mobile-ios-search-bar");
     if (!bar || !panel) return;
 
+    // Prefer the visible bar (both may exist in DOM)
+    var mobileBar = document.getElementById("mobile-ios-search-bar");
+    if (mobileBar && bar !== mobileBar) {
+      var barRect = bar.getBoundingClientRect();
+      var mobileRect = mobileBar.getBoundingClientRect();
+      // If PC bar is hidden (0 width or off-screen), use mobile bar
+      if (barRect.width === 0 || barRect.height === 0) {
+        bar = mobileBar;
+      }
+    }
+
     var rect = bar.getBoundingClientRect();
     var isRTL = document.documentElement.dir === "rtl";
 
@@ -253,15 +264,27 @@
     panel.style.top = rect.bottom + 6 + "px";
     panel.style.zIndex = "9998";
 
+    var panelWidth = Math.max(rect.width, 320);
+    var vpWidth = window.innerWidth;
+
     if (isRTL) {
       panel.style.right = "auto";
       panel.style.left = rect.left + "px";
     } else {
+      // Align panel right edge to bar right edge, but clamp within viewport
+      var rightEdge = rect.right;
+      if (rightEdge + 8 > vpWidth) rightEdge = vpWidth - 8;
       panel.style.left = "auto";
-      panel.style.right = window.innerWidth - rect.right + "px";
+      panel.style.right = vpWidth - rightEdge + "px";
     }
 
-    panel.style.width = Math.max(rect.width, 320) + "px";
+    // Ensure panel doesn't overflow left edge
+    if (vpWidth - parseFloat(panel.style.right || 0) - panelWidth < 8) {
+      panel.style.left = "8px";
+      panel.style.right = "auto";
+    }
+
+    panel.style.width = panelWidth + "px";
   }
 
   function renderResults(results, query) {
