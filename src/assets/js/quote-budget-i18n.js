@@ -141,7 +141,6 @@
       }
     }
 
-    console.log("[QuoteBudget] Updated budget options for language:", lang);
   }
 
   /* ── Init ── */

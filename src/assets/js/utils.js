@@ -128,5 +128,3 @@
     getCategoryI18nKey: getCategoryI18nKey,
   };
 })(window);
-// test debug
-console.log("debug test");

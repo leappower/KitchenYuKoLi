@@ -603,14 +603,6 @@
 
   function generatePDF(input, result, salaryInfo) {
     // Debug: check library availability
-    console.log(
-      "[PC-PDF] html2canvas:",
-      typeof html2canvas,
-      "| window.jspdf:",
-      typeof window.jspdf,
-      "| jsPDF:",
-      typeof jsPDF
-    );
 
     // Check for required libraries
     if (typeof html2canvas === "undefined") {
@@ -732,12 +724,6 @@
       onclone: function (clonedDoc) {
         // Force visible in the cloned document for accurate capture
         var cloned = clonedDoc.body.lastChild;
-        console.log(
-          "[PC-PDF] onclone fired, cloned element:",
-          cloned ? cloned.tagName : "NULL",
-          "| size:",
-          cloned ? cloned.offsetWidth + "x" + cloned.offsetHeight : "N/A"
-        );
         if (cloned) {
           cloned.style.opacity = "1";
           cloned.style.position = "absolute";
@@ -749,8 +735,6 @@
     })
       .then(function (canvas) {
         document.body.removeChild(container);
-        console.log("[PC-PDF] canvas created:", canvas.width + "x" + canvas.height);
-
         var JSPDF = window.jspdf.jsPDF || jsPDF;
         var pdf = new JSPDF("p", "mm", "a4");
         var pageWidth = pdf.internal.pageSize.getWidth();
@@ -785,9 +769,7 @@
         }
 
         var filename = "YuKoLi-ROI-Report-" + new Date().toISOString().slice(0, 10) + ".pdf";
-        console.log("[PC-PDF] saving:", filename);
         pdf.save(filename);
-        console.log("[PC-PDF] save() completed");
       })
       .catch(function (err) {
         document.body.removeChild(container);
@@ -1476,12 +1458,10 @@ _spaOn(document, "spa:load", function initProfitCalc() {
 });
 
 // Debug: verify script loaded and languageChanged works
-console.log("[PC] script loaded, testing languageChanged dispatch...");
 _spaOn(
   window,
   "languageChanged",
   function (e) {
-    console.log("[PC langChange] EVENT RECEIVED", e && e.detail);
   },
   true
 ); // capture phase

@@ -61,9 +61,6 @@
     // Layer 1: sessionStorage (session-level cache)
     try {
       var sessionData = sessionStorage.getItem(CACHE_KEY);
-      console.log(
-        sessionData ? "found, age=" + (now - JSON.parse(sessionData).timestamp) / 1000 + "s" : "empty"
-      );
       if (sessionData) {
         var parsed = JSON.parse(sessionData);
         if (parsed.timestamp && now - parsed.timestamp < CACHE_TTL) {
@@ -138,11 +135,6 @@
             }
           });
         }
-        console.log(
-            (Array.isArray(data) ? data.length : 0) +
-            ", core products=" +
-            coreProducts.length
-        );
         if (coreProducts.length === 0) {
           // Show empty state instead of blank
           var emptyContainer = document.querySelector('[id^="home-core-products"]');

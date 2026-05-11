@@ -1,6 +1,5 @@
 (function () {
   "use strict";
-  console.log("[WeChatModal] script loaded");
 
   var _spaRegs = {};
   function _spaOn(tgt, evt, fn, key) {

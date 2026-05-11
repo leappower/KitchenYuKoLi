@@ -449,23 +449,10 @@
     if (window.__CS_DEBUG) {
       var wR = this.wrap.getBoundingClientRect();
       var tR = this.trigger.getBoundingClientRect();
-      console.log(
-        "[CS-DEBUG] id=" + (selectEl.id || "?"),
-        "wrap=" + Math.round(wR.width) + "x" + Math.round(wR.height),
-        "trigger=" + Math.round(tR.width) + "x" + Math.round(tR.height),
-        "triggerClasses=" + this.trigger.className,
-        "computedH=" + computedStyle.height,
-        "computedPL=" + computedStyle.paddingLeft
-      );
       // Compare with nearby input if any
       var siblingInput = this.wrap.parentNode.querySelector("input");
       if (siblingInput) {
         var iR = siblingInput.getBoundingClientRect();
-        console.log(
-          "[CS-DEBUG] nearby input=" + Math.round(iR.width) + "x" + Math.round(iR.height),
-          "diff w=" + (iR.width - tR.width).toFixed(1),
-          "diff h=" + (iR.height - tR.height).toFixed(1)
-        );
       }
     }
 
@@ -978,7 +965,6 @@
     injectStyles();
     root = root || document;
     var els = root.querySelectorAll("select[" + ATTR + "]");
-    console.log("[CS] initAll: found " + els.length + " select(s) on page: " + location.pathname);
     for (var i = 0; i < els.length; i++) {
       // Skip if already initialized
       if (els[i]._customSelectInstance) continue;
