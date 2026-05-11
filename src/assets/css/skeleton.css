@@ -1,8 +1,9 @@
-/* Prevent horizontal overflow from affecting fixed-positioned elements */
-html, body { overflow-x: hidden; }
+/* [navigator] custom elements must be block-level */
 
 /* Prevent layout shift: <navigator> custom elements must be block-level */
-[data-component="navigator"] { display: block; }
+[data-component="navigator"] {
+  display: block;
+}
 
 /**
  * skeleton.css — 骨架屏样式（三屏适配）
@@ -40,13 +41,17 @@ html, body { overflow-x: hidden; }
   animation: sk-fadeIn 0.15s ease-out;
 }
 
-@media (width >= 768px) {
-  .skeleton-container { padding: 2.5rem var(--container-px, 1.25rem); } /* tablet: aligned */
+@media (min-width: 768px) {
+  .skeleton-container {
+    padding: 2.5rem var(--container-px, 1.25rem);
+  } /* tablet: aligned */
 }
-@media (width >= 1024px) {
-  .skeleton-container { padding: 2.5rem var(--container-px, 1.25rem); } /* lg: aligned */
+@media (min-width: 1024px) {
+  .skeleton-container {
+    padding: 2.5rem var(--container-px, 1.25rem);
+  } /* lg: aligned */
 }
-@media (width >= 1280px) {
+@media (min-width: 1280px) {
   /* PC: main#spa-content already has padding-top from --nav-height CSS variable;
    skeleton-container just needs content padding */
   .skeleton-container {
@@ -155,39 +160,89 @@ html, body { overflow-x: hidden; }
 }
 
 /* ───────── 响应式：Mobile ───────── */
-@media (width <= 767px) {
-  .sk-hero { margin-bottom: 1rem; }
-  .sk-badge { width: 80px; height: 18px; }
-  .sk-hero .sk-line { width: 80%; height: 26px; }
-  .sk-line--desc { height: 14px; }
-  .sk-cta { width: 100%; max-width: none; height: 40px; border-radius: 10px; margin-left: auto; margin-right: auto; }
-  .sk-cta--outline { width: 100%; max-width: none; height: 40px; border-radius: 10px; margin-left: auto; margin-right: auto; }
-  .sk-cta-group { flex-direction: column; width: 100%; max-width: none; gap: 10px; }
-  .sk-grid { gap: 12px; }
-  .sk-card { height: 180px; border-radius: 12px; }
+@media (max-width: 767px) {
+  .sk-hero {
+    margin-bottom: 1rem;
+  }
+  .sk-badge {
+    width: 80px;
+    height: 18px;
+  }
+  .sk-hero .sk-line {
+    width: 80%;
+    height: 26px;
+  }
+  .sk-line--desc {
+    height: 14px;
+  }
+  .sk-cta {
+    width: 100%;
+    max-width: none;
+    height: 40px;
+    border-radius: 10px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .sk-cta--outline {
+    width: 100%;
+    max-width: none;
+    height: 40px;
+    border-radius: 10px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .sk-cta-group {
+    flex-direction: column;
+    width: 100%;
+    max-width: none;
+    gap: 10px;
+  }
+  .sk-grid {
+    gap: 12px;
+  }
+  .sk-card {
+    height: 180px;
+    border-radius: 12px;
+  }
 }
 
 /* ───────── 响应式：Tablet ───────── */
-@media (width >= 768px) and (width <= 1279px) {
-  .sk-grid { grid-template-columns: repeat(2, 1fr); }
-  .sk-card { height: 220px; }
+@media (min-width: 768px) and (max-width: 1279px) {
+  .sk-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .sk-card {
+    height: 220px;
+  }
 }
 
 /* ───────── 响应式：PC ───────── */
-@media (width >= 1280px) {
-  .sk-grid { grid-template-columns: repeat(3, 1fr); }
-  .sk-card { height: 240px; }
+@media (min-width: 1280px) {
+  .sk-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .sk-card {
+    height: 240px;
+  }
 }
 
 /* ───────── Animations ───────── */
 @keyframes sk-shimmer {
-  0%   { background-position: 200% 0; }
-  100% { background-position: -200% 0; }
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
 }
 
 @keyframes sk-fadeIn {
-  from { opacity: 0; }
-  to   { opacity: 1; }
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 /* ───────── Dark Mode ───────── */

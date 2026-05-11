@@ -32,25 +32,9 @@
    Transition Animations - 页面元素过渡动画
    ═══════════════════════════════════════════════════════════ */
 
-/* 颜色过渡 */
-.transition-colors {
-  will-change: background-color, border-color, color;
-}
-
-/* 变换过渡 */
-.transition-transform {
-  will-change: transform;
-}
-
-/* 透明度过渡 */
-.transition-opacity {
-  will-change: opacity;
-}
-
-/* 多属性过渡 (谨慎使用) */
-.transition-all {
-  will-change: transform, opacity;
-}
+/* ═══════════════════════════════════════════════════════════
+   Component-Specific Optimizations
+   ═══════════════════════════════════════════════════════════ */
 
 /* ═══════════════════════════════════════════════════════════
    Keyframe Animations - 持续动画
@@ -74,27 +58,6 @@
 /* ═══════════════════════════════════════════════════════════
    Component-Specific Optimizations
    ═══════════════════════════════════════════════════════════ */
-
-/* 按钮 - 点击反馈 */
-button {
-  will-change: transform, background-color;
-}
-
-button:active {
-  will-change: transform;
-}
-
-/* 链接 - 悬停效果 */
-a {
-  will-change: color;
-}
-
-/* 输入框 - 聚焦状态 */
-input:focus,
-textarea:focus,
-select:focus {
-  will-change: border-color, box-shadow;
-}
 
 /* 下拉菜单 - 打开/关闭动画 */
 .dropdown-menu {

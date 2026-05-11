@@ -513,7 +513,6 @@ details[open] > summary {
     "wght" 400,
     "GRAD" 0,
     "opsz" 24;
-  vertical-align: middle;
   line-height: 1;
   /* Ensure consistent sizing in all contexts */
   display: inline-block;
@@ -552,12 +551,12 @@ select {
 /* ─── §3.4 Primary Button Hover ───────────────────────────────────────── */
 /* 所有 bg-primary 按钮的 hover 效果：加深背景色 + 微上浮 + 阴影
    通过 Tailwind 的 group/peer 机制或直接 class 触发 */
-.btn-cta,
+.btn-cta:hover,
 a.bg-primary:hover,
 button.bg-primary:hover,
 a.bg-primary[class*="hover:"]:hover,
 button.bg-primary[class*="hover:"]:hover {
-  background-color: #d4521a !important;
+  background-color: #d4521a;
   transform: translateY(-2px);
   box-shadow: 0 6px 16px rgb(242 101 34 / 0.35);
 }
@@ -753,7 +752,7 @@ button.bg-primary[class*="hover:"]:hover {
   object-fit: cover;
   object-position: center;
   transition: opacity 1.5s ease;
-  z-index: 1;
+  z-index: var(--z-hero-poster);
 }
 
 /* Video player — 初始透明，crossfade 后显示 */
@@ -766,7 +765,7 @@ button.bg-primary[class*="hover:"]:hover {
   object-fit: cover;
   object-position: center;
   opacity: 0;
-  z-index: 2;
+  z-index: var(--z-hero-player);
   outline: none;
 }
 
@@ -776,7 +775,7 @@ button.bg-primary[class*="hover:"]:hover {
   top: 0;
   left: 0;
   right: 0;
-  z-index: 3;
+  z-index: var(--z-hero-overlay);
   display: flex;
   justify-content: flex-end;
   padding: 12px;
@@ -811,7 +810,7 @@ button.bg-primary[class*="hover:"]:hover {
 /* 底部信息卡片 — 始终在最上层 */
 .hero-video-info {
   position: absolute;
-  z-index: 10;
+  z-index: var(--z-hero-info);
 }
 
 /* 降级播放按钮 */
@@ -820,7 +819,7 @@ button.bg-primary[class*="hover:"]:hover {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  z-index: 5;
+  z-index: var(--z-hero-fallback);
   width: 64px;
   height: 64px;
   border-radius: 50%;
