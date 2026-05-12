@@ -229,7 +229,7 @@
     (r.prototype.setElementTranslation = function (t, e) {
       if ("INPUT" !== t.tagName && "TEXTAREA" !== t.tagName) {
         for (var n = !1, a = 0; a < t.childNodes.length; a++)
-          if (3 === t.childNodes[a].nodeType) {
+          if (3 === t.childNodes[a].nodeType && t.childNodes[a].textContent.trim()) {
             ((t.childNodes[a].textContent = e), (n = !0));
             break;
           }
