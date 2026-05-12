@@ -1774,5 +1774,14 @@
   "support_warranty_construction_installation_commissioning": "construction",
   "support_warranty_verified_nav_support_warranty": "verified",
   "support_warranty_nav_support_training": "school",
-  "btn_back_to_home": "home"
+  "btn_back_to_home": "home",
+  "profit_calc_err_country": "Please select a country",
+  "profit_calc_err_meals": "Please enter daily meals served",
+  "profit_calc_next_title": "Ready to Take the Next Step?",
+  "profit_calc_next_desc": "Explore our equipment lineup or get a customized solution for your kitchen.",
+  "profit_calc_next_products": "Browse Products",
+  "profit_calc_next_products_desc": "200+ smart kitchen equipment models",
+  "profit_calc_next_scenarios": "View Scenarios",
+  "profit_calc_next_scenarios_desc": "Solutions for restaurants, canteens & more",
+  "profit_calc_next_quote_desc": "Free customized solution in 24 hours"
 }

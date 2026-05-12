@@ -38,6 +38,16 @@
     ar: "Saudi Arabia",
   };
 
+  /** Detect country from browser language (works before translationManager is loaded) */
+  function detectCountryFromBrowser() {
+    var nav = navigator.language || navigator.userLanguage || "en";
+    var lang = nav.split("-")[0];
+    var full = nav;
+    if (LANG_COUNTRY_MAP[full]) return LANG_COUNTRY_MAP[full];
+    if (LANG_COUNTRY_MAP[lang]) return LANG_COUNTRY_MAP[lang];
+    return null;
+  }
+
   /* ───────── Savings ratio table ───────── */
   var SAVINGS_TABLE = {
     hiring_difficulty: { min: 0.4, mid: 0.5, max: 0.58 },
@@ -1099,6 +1109,66 @@
     canvas._chartInstance = chart;
   }
 
+  /** Show inline validation error on a form field */
+  function showFieldError(el, msg) {
+    // Remove existing error
+    var existing = el.parentNode.querySelector(".pc-field-error");
+    if (existing) existing.remove();
+    el.classList.add("border-red-400", "ring-2", "ring-red-200");
+    el.classList.remove("border-slate-300", "dark:border-slate-700");
+    var tip = document.createElement("p");
+    tip.className = "pc-field-error text-red-500 text-xs mt-1 font-medium";
+    tip.textContent = msg;
+    el.parentNode.appendChild(tip);
+    // Auto-clear on focus
+    el.addEventListener("focus", function onfocus() {
+      el.classList.remove("border-red-400", "ring-2", "ring-red-200");
+      el.classList.add("border-slate-300", "dark:border-slate-700");
+      var err = el.parentNode.querySelector(".pc-field-error");
+      if (err) err.remove();
+      el.removeEventListener("focus", onfocus);
+    });
+  }
+
+  /** Clear all validation errors */
+  function clearFieldErrors() {
+    document.querySelectorAll(".pc-field-error").forEach(function (el) {
+      el.remove();
+    });
+    document.querySelectorAll("#profit-calc-form .border-red-400").forEach(function (el) {
+      el.classList.remove("border-red-400", "ring-2", "ring-red-200");
+      el.classList.add("border-slate-300", "dark:border-slate-700");
+    });
+  }
+
+  /** Validate required fields, returns true if valid */
+  function validateForm() {
+    clearFieldErrors();
+    var valid = true;
+    var countryEl = document.getElementById("pc-country");
+    var mealsEl = document.getElementById("pc-daily-meals");
+
+    if (!countryEl || !countryEl.value) {
+      showFieldError(
+        countryEl,
+        t("profit_calc_err_country") !== "profit_calc_err_country"
+          ? t("profit_calc_err_country")
+          : "Please select a country"
+      );
+      valid = false;
+    }
+    if (!mealsEl || !mealsEl.value || parseInt(mealsEl.value, 10) <= 0) {
+      showFieldError(
+        mealsEl,
+        t("profit_calc_err_meals") !== "profit_calc_err_meals"
+          ? t("profit_calc_err_meals")
+          : "Please enter daily meals served"
+      );
+      valid = false;
+    }
+    return valid;
+  }
+
   /* ───────── UI Controller ───────── */
 
   function ProfitCalculator(opts) {
@@ -1113,6 +1183,21 @@
     window._profitCalcInstance = this;
 
     this.init();
+
+    // Auto-select country from browser language (immediate, no dependency on translationManager)
+    var browserCountry = detectCountryFromBrowser();
+    var countryEl2 = document.getElementById(this.countrySelectId);
+    if (browserCountry && countryEl2 && !countryEl2.value) {
+      countryEl2.value = browserCountry;
+      var info = DEFAULT_SALARIES[browserCountry];
+      var laborEl = document.getElementById(this.laborInputId);
+      if (info && laborEl && !laborEl.dataset.touched) {
+        laborEl.value = info.monthly;
+      }
+      var symEl = document.getElementById("pc-currency-symbol");
+      if (symEl && info) symEl.textContent = "(" + info.currency + ")";
+      countryEl2.dispatchEvent(new Event("change"));
+    }
   }
 
   ProfitCalculator.prototype.init = function () {
@@ -1236,9 +1321,9 @@
     var businessType = businessTypeEl ? businessTypeEl.value : "";
 
     return {
-      country: country,
+      country: country || "Other",
       laborCost: parseFloat(document.getElementById(this.laborInputId).value) || salaryInfo.monthly,
-      dailyMeals: parseInt(document.getElementById("pc-daily-meals").value, 10) || 200,
+      dailyMeals: parseInt(document.getElementById("pc-daily-meals").value, 10) || 0,
       painPoint: document.getElementById("pc-pain-point").value || "high_labor_cost",
       equipment: equipment,
       operatorReduction: parseInt(document.getElementById("pc-operator-reduction").value, 10) || 2,
@@ -1248,7 +1333,9 @@
   };
 
   ProfitCalculator.prototype.run = function () {
+    if (!validateForm()) return;
     var input = this.getInput();
+    if (input.dailyMeals <= 0) return;
     var result = calculate(input);
 
     // Show result panel
