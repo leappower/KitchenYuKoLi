@@ -6,10 +6,10 @@
 window.LanguageDropdownTemplate = {
   // 按地区分组的语言配置（从 LANG_REGISTRY 动态读取）
   LANG_GROUPS: [
-    { id: 'common',        titleKey: 'lang_group_common' },
-    { id: 'southeast_asia', titleKey: 'lang_group_southeast_asia' },
-    { id: 'east_asia',      titleKey: 'lang_group_east_asia' },
-    { id: 'other',         titleKey: 'lang_group_other' },
+    { id: "common", titleKey: "lang_group_common" },
+    { id: "southeast_asia", titleKey: "lang_group_southeast_asia" },
+    { id: "east_asia", titleKey: "lang_group_east_asia" },
+    { id: "other", titleKey: "lang_group_other" },
   ],
 
   // 按分组存放语言列表：{ common: ['zh-CN','en'], southeast_asia: ['th','vi',...], ... }
@@ -20,19 +20,22 @@ window.LanguageDropdownTemplate = {
     var reg = window.LANG_REGISTRY;
     if (!reg || !reg.LANGUAGES) return;
     this._groupedLangs = {};
-    reg.LANGUAGES.forEach(function (l) {
-      var group = l.uiGroup || 'common';
-      if (!this._groupedLangs[group]) this._groupedLangs[group] = [];
-      this._groupedLangs[group].push(l.code);
-    }.bind(this));
+    reg.LANGUAGES.forEach(
+      function (l) {
+        var group = l.uiGroup || "common";
+        if (!this._groupedLangs[group]) this._groupedLangs[group] = [];
+        this._groupedLangs[group].push(l.code);
+      }.bind(this)
+    );
   },
 
   // 创建单个语言选项按钮
   createLangOption: function (code, currentLang, name) {
     var isActive = code === currentLang ? "is-active" : "";
-    var checkIcon = code === currentLang
-      ? '<span class="material-symbols-outlined text-sm" style="color:#ec5b13">check</span>'
-      : '<span style="width:20px"></span>';
+    var checkIcon =
+      code === currentLang
+        ? '<span class="material-symbols-outlined text-sm" style="color:#ec5b13">check</span>'
+        : '<span style="width:20px"></span>';
     return (
       '<button class="lang-option w-full flex items-center gap-2 px-3 py-2.5 text-sm font-medium text-slate-700 dark:text-slate-300 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors ' +
       isActive +
@@ -62,7 +65,7 @@ window.LanguageDropdownTemplate = {
   },
 
   // Inject styles (idempotent)
-  _injectStyles: function() {
+  _injectStyles: function () {
     if (document.getElementById("lang-dropdown-styles")) return;
     var s = document.createElement("style");
     s.id = "lang-dropdown-styles";
@@ -72,7 +75,7 @@ window.LanguageDropdownTemplate = {
       "html.dark .lang-option.is-active { background: rgba(236,91,19,.14); color: #f97316; }",
       "html.dark .lang-option.is-active span { color: #f97316; }",
       "#language-dropdown { animation: langDropIn .2s cubic-bezier(.32,.72,0,1); }",
-      "@keyframes langDropIn { from { opacity:0; transform:translateY(-4px) scale(.97); } to { opacity:1; transform:translateY(0) scale(1); } }"
+      "@keyframes langDropIn { from { opacity:0; transform:translateY(-4px) scale(.97); } to { opacity:1; transform:translateY(0) scale(1); } }",
     ].join("\n");
     document.head.appendChild(s);
   },
@@ -94,7 +97,9 @@ window.LanguageDropdownTemplate = {
       if (langMap[code]) return langMap[code];
       var reg = window.LANG_REGISTRY;
       if (reg && reg.LANGUAGES) {
-        var found = reg.LANGUAGES.find(function(l) { return l.code === code; });
+        var found = reg.LANGUAGES.find(function (l) {
+          return l.code === code;
+        });
         if (found) return found.nativeName;
       }
       return code;

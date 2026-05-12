@@ -320,15 +320,15 @@
     PRODUCT_SERIES = withImageUrl(mergeSeriesByIdentity(combined));
     window.PRODUCT_SERIES = PRODUCT_SERIES;
     // Re-render products if the module is available
-    if (window.Products && typeof window.Products.renderProducts === 'function') {
+    if (window.Products && typeof window.Products.renderProducts === "function") {
       window.Products.initFilterBarAndProducts();
     }
-    if (window.ProductGrid && typeof window.ProductGrid.renderPC === 'function') {
+    if (window.ProductGrid && typeof window.ProductGrid.renderPC === "function") {
       window.ProductGrid.renderPC();
     }
   }
 
-  window.addEventListener('product-data-ready', rebuildProductSeries);
+  window.addEventListener("product-data-ready", rebuildProductSeries);
 
   // ─── Exports ───────────────────────────────────────────────────────────────
   window.PRODUCT_DEFAULTS = PRODUCT_DEFAULTS;

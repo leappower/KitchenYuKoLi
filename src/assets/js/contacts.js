@@ -244,11 +244,9 @@
       "notification flex items-center gap-3 p-4 rounded-lg shadow-lg mb-3 transform translate-x-full transition-transform duration-300 " +
       (type === "success" ? "bg-green-500 text-white" : "bg-red-500 text-white");
     notification.innerHTML =
-      '<span class="material-symbols-outlined">' +
-      (type === "success" ? "check_circle" : "error") +
-      "</span>";
-    var msgSpan = document.createElement('span');
-    msgSpan.className = 'text-sm font-medium';
+      '<span class="material-symbols-outlined">' + (type === "success" ? "check_circle" : "error") + "</span>";
+    var msgSpan = document.createElement("span");
+    msgSpan.className = "text-sm font-medium";
     msgSpan.textContent = message;
     notification.appendChild(msgSpan);
     container.appendChild(notification);

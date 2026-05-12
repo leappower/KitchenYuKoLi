@@ -71,8 +71,7 @@
           return;
         }
       }
-    } catch (e) {
-    }
+    } catch (e) {}
 
     // Layer 3: localStorage (cross-session cache)
     try {
@@ -87,8 +86,7 @@
           return;
         }
       }
-    } catch (e) {
-    }
+    } catch (e) {}
 
     // Layer 4: Network fetch from CMS API
     _fetchFromNetwork(callback);

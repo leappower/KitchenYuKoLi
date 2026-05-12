@@ -82,6 +82,7 @@
       "  position: fixed;",
       "  right: 1rem;",
       "  bottom: 5rem;",
+      "  @media (max-width: 767px) { right: 1.25rem; }",
       "  z-index: var(--z-fab, 1100);",
       "  display: flex;",
       "  flex-direction: column;",
