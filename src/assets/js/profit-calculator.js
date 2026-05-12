@@ -1297,15 +1297,25 @@
       });
     }
 
-    // Range slider value display
+    // Range slider sync (also done in SPA init for robustness)
+    syncRangeDisplay();
+  };
+
+  /** Sync slider value → display element */
+  function syncRangeDisplay() {
     var rangeEl = document.getElementById("pc-operator-reduction");
     var rangeValEl = document.getElementById("pc-operator-value");
-    if (rangeEl && rangeValEl) {
-      rangeEl.addEventListener("input", function () {
-        rangeValEl.textContent = this.value;
-      });
-    }
-  };
+    if (!rangeEl || !rangeValEl) return;
+    // Set display to current value
+    rangeValEl.textContent = rangeEl.value;
+    // Remove old listener by cloning (cleanest approach)
+    var newRange = rangeEl.cloneNode(true);
+    rangeEl.parentNode.replaceChild(newRange, rangeEl);
+    newRange.addEventListener("input", function () {
+      var val = document.getElementById("pc-operator-value");
+      if (val) val.textContent = this.value;
+    });
+  }
 
   ProfitCalculator.prototype.getInput = function () {
     var country = document.getElementById(this.countrySelectId).value;
@@ -1488,6 +1498,14 @@
       rangeEl.value = operators;
       if (rangeValEl) rangeValEl.textContent = operators;
     }
+    // Re-bind input listener on the slider (cloneNode replaced it in syncRangeDisplay)
+    var freshRange = document.getElementById("pc-operator-reduction");
+    if (freshRange) {
+      freshRange.addEventListener("input", function () {
+        var val = document.getElementById("pc-operator-value");
+        if (val) val.textContent = this.value;
+      });
+    }
 
     // Auto-trigger calculation (use microtask to let change handlers run first)
     if (autoCalc) {
@@ -1537,6 +1555,9 @@ _spaOn(document, "spa:load", function initProfitCalc() {
     stepsMode: isMobile,
   });
   window._profitCalcInstance = calc;
+
+  // Ensure slider display syncs (handles SPA re-navigation)
+  syncRangeDisplay();
 
   // Bind buttons
   var calcBtn = document.getElementById("pc-calc-btn");
