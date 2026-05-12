@@ -1,0 +1,358 @@
+# YuKoLi 智能烹饪设备 — 官网图片英文提示词
+
+> 生成日期：2026-05-09
+> 全局风格：商业实拍精修图（commercial photography, professionally retouched）
+> 场景设定：东南亚地区（Southeast Asian setting, Asian faces）
+> 色调：暖色调、明亮、专业商业摄影感
+> 痛点图规则：仅展示传统厨房痛点，不出现任何智能设备
+> Hero/Scene图规则：必须出现 YuKoLi 智能烹饪设备（银灰色不锈钢机身、触摸屏控制面板、紧凑台式设计）
+
+---
+
+## 一、食堂 canteen — Pain（4张）
+
+### canteen/pain1.webp
+类型：pain
+尺寸建议：16:9
+英文提示词：
+Commercial interior photography of a struggling institutional canteen kitchen in Southeast Asia. A traditional gas wok stove station with visible problems — one exhaust fan is broken with its blades visibly missing or dangling, and the remaining flames flicker unevenly, producing weak yellow-orange fire instead of a strong blue flame. A Southeast Asian chef in a sweat-soaked white chef coat stands helplessly beside the stove, holding a wok with a frustrated expression. Steam rises weakly from the wok while a long queue of stainless steel food containers sits empty behind the serving counter, visible through the kitchen pass. The kitchen environment shows wear: stained walls, old tiled floors, and grease buildup around the hood. Warm fluorescent overhead lighting casts a yellowish tint. Shot from a slightly low angle at eye level with the broken fan in the foreground and the anxious chef in the midground, emphasizing the equipment failure. Color palette: muted warm tones with orange-tinged lighting, conveying urgency and stress. Shallow depth of field with the unstable flames in sharp focus. Professionally retouched commercial photography, 16:9 aspect ratio.
+
+### canteen/pain2.webp
+类型：pain
+尺寸建议：4:3
+英文提示词：
+Commercial photography of a short-staffed Southeast Asian canteen kitchen during lunch rush. Only one exhausted middle-aged Southeast Asian chef is visible, frantically moving between two wok stations simultaneously. Sweat beads on his forehead as he stirs one wok with his right hand while reaching for ingredients with his left. Behind him, a second wok station sits completely dark and unused — the burner is off, the wok empty, with a handwritten "sick leave" note taped to the wall above it. Through the serving window, a long line of hungry students and workers wait impatiently, some checking their watches. The serving counter shows only a few dishes available, with several empty slots where dishes should be. The kitchen is cramped with traditional equipment — gas stoves, carbon steel woks, and cluttered prep tables with raw ingredients scattered. Overhead fluorescent lights create harsh shadows. Shot from a medium-wide angle capturing both the lone chef's struggle and the impatient crowd. Warm but slightly desaturated color palette conveying fatigue and understaffing. Commercial photography style, professionally retouched, 4:3 aspect ratio.
+
+### canteen/pain3.webp
+类型：pain
+尺寸建议：4:3
+英文提示词：
+Commercial photography of a Southeast Asian canteen kitchen showing severe food waste at month-end inventory time. A large stainless steel prep table is covered with containers of uneaten food — mountains of leftover rice, stir-fried vegetables, and curry dishes that have gone cold. One staff member, a middle-aged Southeast Asian woman in a kitchen uniform, reluctantly scoops large portions of leftover food into a black garbage bin that is already overflowing. Her expression is resigned and frustrated. In the background, another worker checks a clipboard with a concerned look, comparing expected versus actual consumption numbers. The kitchen floor has wet spots and scattered vegetable trimmings. Traditional cooking equipment — gas stoves, large stock pots, worn woks — fills the space. Near the serving window, nearly full food containers sit with barely any portions taken, indicating over-preparation. Lighting is warm fluorescent from above with some natural light filtering in, creating a somewhat somber atmosphere. Shot from a slightly elevated angle looking down at the prep table and overflowing bin. Color palette dominated by warm food tones contrasting with the cold steel of equipment and black garbage bags. Muted saturation to convey waste and disappointment. Commercial photography, 4:3 aspect ratio.
+
+### canteen/pain4.webp
+类型：pain
+尺寸建议：4:3
+英文提示词：
+Commercial photography of a Southeast Asian canteen showing a monotonous, unchanging menu board and bored diners. A large handwritten menu board on the wall displays the same limited dishes that have been served for weeks — simple stir-fried vegetables, one curry dish, fried rice, and soup. The board looks old and unchanged, with faded text. At the serving counter, a young Southeast Asian student picks at an unappetizing plate of food with a bored, disinterested expression. Another diner — an office worker — walks past the counter without stopping, clearly uninterested in the options. Behind the counter, a senior Southeast Asian chef stands by his traditional wok station looking uninspired, surrounded by the same basic ingredients he uses every day. The kitchen visible behind shows a cramped, traditional setup with limited variety of ingredients on the prep table — just a few vegetables, one type of protein, and basic condiments. Warm fluorescent lighting with a slightly dull atmosphere. Shot from a wide angle capturing the bored diner, the unchanged menu, and the uninspired kitchen. Desaturated warm tones to convey monotony and repetition. Commercial photography, professionally retouched, 4:3 aspect ratio.
+
+---
+
+## 二、云厨房 cloud-kitchen — Pain（4张）
+
+### cloud-kitchen/pain1.webp
+类型：pain
+尺寸建议：16:9
+英文提示词：
+Commercial interior photography of a small Southeast Asian cloud kitchen showing extremely poor space utilization. The entire kitchen area is dominated by bulky traditional cooking equipment — a massive commercial gas range with six burners takes up nearly 60% of the floor space. Large ventilation hoods hang overhead. Deep fryers, stock pots, and prep tables are crammed into the remaining narrow aisles, leaving almost no room for staff to move. A floor plan outline overlaid graphically shows that only about 35 square meters out of 80 are actually usable cooking space. Two delivery riders stand in a cramped corner waiting for orders, clearly hindered by the lack of space. The ceiling is low with industrial fluorescent tube lights. The walls are plain white with some grease stains near the cooking stations. Shot from a high angle looking down to emphasize how much space is wasted by the traditional equipment layout. Warm but slightly clinical lighting. Color palette: white/gray industrial tones with warm spots from cooking equipment. Commercial photography with clean lines emphasizing the spatial inefficiency problem, 16:9 aspect ratio.
+
+### cloud-kitchen/pain2.webp
+类型：pain
+尺寸建议：4:3
+英文提示词：
+Commercial photography of a Southeast Asian cloud kitchen during peak lunch rush, overwhelmed with orders. A digital order display mounted on the wall shows dozens of pending orders with red indicators — the queue keeps growing. A young Southeast Asian chef in a white coat works frantically at a traditional gas wok station, sweat on his face, flames leaping high as he tries to keep up. His phone on the counter displays a food delivery app with a warning message about order timeout rates exceeding 15%. Order tickets are piled up, spilling off a small shelf. In the background, a second station is also occupied with someone plating dishes rapidly. A stack of delivery bags waits near the door, but clearly not enough food is coming out fast enough. The kitchen is cluttered with takeout containers, condiment bottles, and scattered ingredients. Harsh fluorescent lighting mixed with the warm glow of the gas flames. Shot from a medium angle capturing the chaos — the chef's frantic movement, the order screen, and the pile of pending tickets. Warm tones with high contrast conveying urgency and stress. Commercial photography, 4:3 aspect ratio.
+
+### cloud-kitchen/pain3.webp
+类型：pain
+尺寸建议：4:3
+英文提示词：
+Commercial photography of a Southeast Asian cloud kitchen showing cross-contamination between multiple food brands sharing one space. The kitchen serves 3-5 different delivery brands simultaneously. Traditional woks and fryers are crowded together — a large deep fryer used for fried chicken sits directly next to a stock pot simmering noodle soup. Visible steam and oil vapor from the fryer drift toward the soup station. A Southeast Asian kitchen worker holds a container of fried chicken in one hand while checking a recipe card for a pho brand in the other, clearly confused about which brand's food to prepare next. Stacked food containers for different brands — labeled with competing logos — sit on a crowded shelf, some without proper sealing. The smell of fried chicken mixing with soup broth is visually suggested by wisps of steam crossing between stations. Traditional gas stoves and worn equipment everywhere. The environment feels chaotic and disorganized. Warm fluorescent lighting with oil haze in the air. Shot from a medium-wide angle capturing the proximity of conflicting cooking stations. Warm tones with slightly hazy atmosphere conveying flavor contamination and brand confusion. Commercial photography, 4:3 aspect ratio.
+
+### cloud-kitchen/pain4.webp
+类型：pain
+尺寸建议：4:3
+英文提示词：
+Commercial photography of a Southeast Asian cloud kitchen in a commercial building showing fire safety and ventilation compliance issues. A traditional gas wok station with open flame burners sits beneath an old, grease-caked exhaust hood that clearly isn't adequate. Thick grease buildup is visible on the hood filter and surrounding walls. A fire safety inspector (Southeast Asian man in a formal shirt) stands at the kitchen entrance holding a compliance violation notice, shaking his head. The kitchen lacks proper fire suppression systems — no visible fire extinguishers or sprinklers. Smoke and grease-laden vapor fills the air despite the running exhaust fan. Through a doorway, a modern shopping mall corridor is visible, highlighting the contrast between the building's fire safety standards and this kitchen's non-compliant setup. Warning signs about fire safety requirements are posted on the wall but ignored. Traditional open-flame gas stoves with large woks, stock pots, and deep fryers fill the tight space. Mixed fluorescent and warm gas-flame lighting creates a hazy, oily atmosphere. Shot from a medium angle with the inspector in the foreground and the problematic gas station in the background. Color palette: warm oranges and yellows from flames, gray from grease, with the inspector's white shirt providing contrast. Commercial photography, 4:3 aspect ratio.
+
+---
+
+## 三、连锁餐饮 chain-restaurant — Scene（4张）
+
+### chain-restaurant/scene1.webp
+类型：scene
+尺寸建议：16:9
+英文提示词：
+Commercial interior photography of a modern Southeast Asian fast-food chain kitchen featuring multiple YuKoLi smart cooking machines running simultaneously. The kitchen is clean, bright, and efficiently organized. Three sleek silver-gray stainless steel tabletop automatic cooking machines are arranged in a neat row, each with glowing touchscreen control panels displaying recipe information. Steam rises gently from the machines as they automatically stir-fry different dishes. A young Southeast Asian kitchen supervisor in a clean white uniform stands between the machines, monitoring the touchscreen displays with a confident, relaxed expression — no frantic cooking needed. Through a serving window, the bright dining area of a modern fast-food restaurant is partially visible with customers enjoying their meals. The kitchen floor is spotless white tile. LED strip lighting under cabinets provides modern, clean illumination. YuKoLi logo subtly visible on each machine. Shot from a slightly elevated angle capturing the full row of machines and the calm supervisor. Bright, warm color palette with clean whites and silver metallic tones from the equipment. High-end commercial photography with shallow depth of field focusing on the nearest machine's touchscreen while the row recedes into the background. 16:9 aspect ratio.
+
+### chain-restaurant/scene2.webp
+类型：scene
+尺寸建议：4:3
+英文提示词：
+Commercial photography of a Southeast Asian hot pot chain restaurant's back kitchen where YuKoLi smart cooking machines prepare soup bases and stir-fry ingredients. Two silver-gray stainless steel tabletop automatic cooking machines sit on a stainless steel prep counter, their touchscreen panels glowing as they simmer rich, aromatic hot pot soup bases. Steam rises from the machine's cooking chamber, carrying visible aromatic wisps suggesting spicy Sichuan-style broth. A Southeast Asian chef in a clean white chef coat stands nearby, confidently checking the machine's display while preparing fresh ingredients — sliced meat, mushrooms, and leafy greens — on a neat adjacent prep table. Jars of hot pot seasonings and chili oils line a shelf behind. The kitchen is modern and clean with stainless steel surfaces reflecting the warm light. A stack of branded takeout containers waits nearby for delivery orders. Warm ambient lighting with the reddish-orange glow of the soup visible through the machine. Shot from a medium angle at slightly eye level, focusing on the machine's touchscreen and the aromatic steam. Color palette: warm reds and oranges from the soup contrasting with cool silver metallic of the equipment. Commercial photography, professionally retouched, 4:3 aspect ratio.
+
+### chain-restaurant/scene3.webp
+类型：scene
+尺寸建议：4:3
+英文提示词：
+Commercial photography of a modern Southeast Asian bubble tea and bakery brand's preparation kitchen featuring a YuKoLi smart cooking machine for ingredient preparation. The kitchen is bright, clean, and contemporary with white subway tile walls and stainless steel workstations. A silver-gray stainless steel YuKoLi tabletop cooking machine with a glowing touchscreen panel sits on a central island, automatically cooking boba pearls and preparing syrup bases. The machine's digital display shows precise temperature and timing controls. A Southeast Asian woman in a branded apron and hairnet loads measured ingredients into the machine while a colleague nearby assembles bubble tea drinks at a dedicated beverage station with multiple flavor dispensers. Fresh fruit ingredients — mangoes, passion fruit, and Thai tea leaves — are neatly arranged on the prep counter. In the background, a small convection oven with baking trays suggests the bakery component. Clean, natural daylight mixes with warm LED lighting. Shot from a medium-wide angle capturing both the smart machine and the beverage assembly station. Color palette: warm pastels, white surfaces, and vibrant fruit colors. Fresh, inviting commercial photography, 4:3 aspect ratio.
+
+### chain-restaurant/scene4.webp
+类型：scene
+尺寸建议：4:3
+英文提示词：
+Commercial photography of a Southeast Asian snack food chain's central kitchen showing a multi-device production line with YuKoLi smart cooking machines. The large, well-organized kitchen features two silver-gray stainless steel tabletop automatic cooking machines positioned at different stations along a workflow line. At the first station, a machine automatically stir-fries snack fillings while a Southeast Asian worker in a clean uniform monitors the process and transfers finished portions to a cooling rack. At the second station, another machine prepares sauces and dips. Between stations, a conveyor-style prep area with neatly arranged ingredients — measured and pre-portioned in containers — ensures a smooth workflow. The floor is clean epoxy-coated with workflow markings. Bright overhead LED panel lights provide even, shadow-free illumination. Storage shelves with organized ingredient containers line the back wall. Branded packaging materials wait on a packing station at the end of the line. Shot from an elevated angle showing the two-machine production flow. Color palette: warm golden tones from cooking mixing with clean white and silver surfaces. Efficient, modern commercial photography emphasizing streamlined production, 4:3 aspect ratio.
+
+---
+
+## 四、中央厨房 central-kitchen — Scene（4张）
+
+### central-kitchen/hero.webp
+类型：hero
+尺寸建议：16:9
+英文提示词：
+Epic commercial interior photography of a large-scale Southeast Asian central commissary kitchen showcasing multiple YuKoLi smart cooking machines operating in parallel. The grand, warehouse-style kitchen spans a wide space with high ceilings and bright overhead industrial LED panel lights. Six silver-gray stainless steel tabletop automatic cooking machines are arranged in two neat rows of three, each with illuminated touchscreen control panels displaying active cooking programs. Gentle steam rises from several machines simultaneously. Southeast Asian kitchen staff in clean white uniforms and chef hats move calmly between stations — one checks a machine's progress, another transfers finished food to stainless steel holding pans, a third records data on a tablet. The space is impeccably clean with white tile floors and stainless steel walls. Large ventilation hoods above each station keep the air clear. Prepared food in uniform portions lines up on a stainless steel counter, ready for distribution. A large clock on the wall shows efficient time management. Shot from a wide elevated angle capturing the full impressive scale of the operation — multiple machines, organized staff, and professional environment. Color palette: bright, warm whites, silver metallics, and golden steam. Inspirational, professional commercial photography conveying scale and efficiency, 16:9 aspect ratio.
+
+### central-kitchen/scene-school.webp
+类型：scene
+尺寸建议：4:3
+英文提示词：
+Commercial interior photography of a Southeast Asian school cafeteria's back kitchen where YuKoLi smart cooking machines prepare meals for hundreds of students. Three silver-gray stainless steel tabletop automatic cooking machines operate on a stainless steel counter, their touchscreens showing different recipes being cooked simultaneously. Steam rises as one machine finishes a large batch of fried rice while another simmers a vegetable stir-fry and the third prepares a soup. A Southeast Asian kitchen manager in a clean white uniform confidently monitors all three machines with a clipboard, relaxed and in control. Through the serving window, rows of stainless steel food warmers are visible, already filled with colorful prepared dishes waiting for the lunch period. Large industrial rice cookers and steamer units sit alongside the smart machines. The kitchen is clean, bright, and well-organized with stainless steel shelves holding pre-measured ingredient containers. "Food Safety" posters are visible on the wall. Natural daylight from a window mixes with warm overhead fluorescent lights. Shot from a medium angle focusing on the machines and the calm manager. Color palette: warm, inviting food tones, clean silvers and whites. Commercial photography, 4:3 aspect ratio.
+
+### central-kitchen/scene-enterprise.webp
+类型：scene
+尺寸建议：4:3
+英文提示词：
+Commercial photography of a Southeast Asian corporate office campus cafeteria kitchen showcasing efficient meal production with YuKoLi smart cooking machines. The modern, clean kitchen features two silver-gray stainless steel tabletop automatic cooking machines positioned at the main cooking station, their glowing touchscreen panels displaying recipe progress. One machine actively stir-fries a wok-full of vegetables while the other prepares a curry dish. A Southeast Asian head chef in a pristine white chef coat observes the machines' output with satisfaction, sampling a small portion from a tasting spoon. Behind him, a line of stainless steel food warmers is being loaded with freshly completed dishes by an assistant — colorful vegetables, aromatic rice, and protein dishes arranged neatly. The kitchen has a professional corporate feel — clean epoxy floors, organized shelving with labeled ingredient bins, and digital menu displays. A production schedule board shows the day's meal plan. Bright, even lighting from overhead panels. Shot from a medium angle capturing both the machines in action and the serving line being prepared. Color palette: warm golden food tones, clean whites, professional silver equipment. Commercial photography conveying corporate efficiency and quality, 4:3 aspect ratio.
+
+### central-kitchen/scene-hospital.webp
+类型：scene
+尺寸建议：4:3
+英文提示词：
+Commercial interior photography of a Southeast Asian hospital cafeteria kitchen demonstrating strict hygiene standards with YuKoLi smart cooking machines. The ultra-clean, clinical-feeling kitchen features two silver-gray stainless steel tabletop automatic cooking machines on a spotless stainless steel counter. Their touchscreen panels display cooking programs with visible temperature and timing controls. A Southeast Asian kitchen supervisor wearing full PPE — white chef coat, hairnet, face mask, and gloves — operates the machine, loading pre-portioned ingredients from sealed containers. The kitchen environment emphasizes hygiene: handwashing stations are visible, color-coded cutting boards hang on a sanitized rack, and "HACCP" and food safety certification posters are prominently displayed on the walls. Stainless steel surfaces gleam under bright, even LED panel lighting. No open flames are present — only the closed, controlled cooking environment of the smart machines. Prepared meals in sealed individual containers are being loaded onto a distribution cart. The overall atmosphere is clinical, precise, and trustworthy. Shot from a medium angle emphasizing the hygienic operation and the clean machine interface. Color palette: cool whites, clinical silvers, with warm food colors providing contrast. Commercial photography conveying health, safety, and reliability, 4:3 aspect ratio.
+
+---
+
+## 五、中央厨房 central-kitchen — Pain（6张）
+
+### central-kitchen/pain1.webp
+类型：pain
+尺寸建议：4:3
+英文提示词：
+Commercial photography of a Southeast Asian central kitchen during peak lunch rush, showing traditional cooking chaos. Four to five Southeast Asian chefs in sweat-drenched white coats frantically work at traditional gas wok stations — flames are high, smoke billows, and oil splatters. Woks clang loudly as chefs simultaneously stir-fry, toss, and plate. One chef reaches across another's station, narrowly avoiding a collision. The serving window shows a digital clock with a countdown timer — only 30 minutes left before the cafeteria opens. Stainless steel counters are cluttered with half-prepped ingredients, used utensils, and spilled sauces. Stack of empty serving containers wait, but the food isn't ready. Steam and smoke fill the space, making visibility poor. A floor manager looks at his watch with an anxious expression, clipboard in hand. The kitchen is hot, humid, and intensely chaotic. Harsh fluorescent lighting mixed with warm gas flame glow creates dramatic shadows. Shot from a medium-wide angle capturing the frantic scene from the side — multiple chefs in motion, high flames, and visible stress. High-contrast warm tones conveying urgency and pressure. Commercial photography, 4:3 aspect ratio.
+
+### central-kitchen/pain2.webp
+类型：pain
+尺寸建议：4:3
+英文提示词：
+Commercial photography of a Southeast Asian school or workplace cafeteria showing a monotonous, repetitive menu that has been unchanged for weeks. The serving counter displays the same few dishes day after day — a simple vegetable stir-fry, a plain tofu dish, egg fried rice, and a basic soup. The food looks tired and unappetizing, presented in identical stainless steel warming trays. A young Southeast Asian student holds a tray with an unenthusiastic expression, looking at the limited options with clear boredom. Behind the counter, an older Southeast Asian chef ladles the same stir-fried vegetables he has made every day for a month, his expression also showing fatigue and lack of inspiration. The kitchen behind him is bare and basic — just traditional gas stoves, a few standard ingredients on the prep table (cabbage, carrots, tofu, basic soy sauce), and no sign of variety or experimentation. A faded menu board shows the same rotation of dishes. Warm but dull fluorescent lighting. Shot from the perspective of a diner looking at the serving counter, slightly low angle. Desaturated warm color palette conveying boredom and repetition. Commercial photography, 4:3 aspect ratio.
+
+### central-kitchen/pain3.webp
+类型：pain
+尺寸建议：4:3
+英文提示词：
+Commercial photography of a Southeast Asian central kitchen highlighting food safety and hygiene risks with traditional cooking methods. A traditional kitchen scene showing multiple concerning elements: a chef handles raw chicken and then immediately touches cooked rice without washing hands. A dirty cloth sits on the prep counter next to fresh vegetables. The gas stove area has accumulated grease splatters on surrounding walls and the floor appears wet and slippery. Cross-contamination is visible — raw meat sits on a cutting board right beside ready-to-eat ingredients. A Southeast Asian food safety inspector stands at the kitchen entrance, holding a clipboard with a failed inspection report, her expression serious and concerned. She points at multiple violation areas. The kitchen is old with peeling paint, stained ceiling tiles from grease, and outdated equipment. Traditional carbon steel woks, gas burners, and wooden handled utensils that are worn and difficult to sanitize. A thermometer on the wall shows the ambient temperature is too high. Mixed fluorescent and gas flame lighting. Shot from a medium angle with the inspector in foreground and the problematic kitchen behind her. Slightly cool color grading to emphasize the unhygienic conditions. Commercial photography, 4:3 aspect ratio.
+
+### central-kitchen/pain4.webp
+类型：pain
+尺寸建议：4:3
+英文提示词：
+Commercial photography of a Southeast Asian central kitchen showing excessive labor density — too many workers crammed into a traditional cooking space. Six to eight Southeast Asian kitchen workers crowd around traditional gas wok stations and prep tables, constantly bumping elbows and negotiating for space. The kitchen is visibly overcrowded with bodies filling every aisle. Workers squeeze past each other carrying heavy pots and hot woks, creating dangerous conditions. One chef has to wait for another to move before he can access his wok. Prep tables are packed with workers doing manual chopping, stirring, and portioning. The traditional stove line requires one person per burner, resulting in a long line of chefs shoulder-to-shoulder. The ceiling is low, trapping heat and steam. Sweat is visible on multiple workers' faces. The space feels claustrophobic and inefficient. Traditional equipment — gas ranges, manual woks, cleavers, and stock pots — all requiring individual human attention. Harsh warm fluorescent lighting with steam haze. Shot from an elevated angle emphasizing how many bodies are packed into the limited space. Warm, slightly oppressive color palette. Commercial photography, 4:3 aspect ratio.
+
+### central-kitchen/pain5.webp
+类型：pain
+尺寸建议：4:3
+英文提示词：
+Commercial photography of a Southeast Asian central kitchen showing high energy costs from traditional gas cooking. A row of traditional commercial gas stoves burn with large, wasteful open flames — six burners roaring at full power simultaneously, producing massive yellow-orange flames far larger than needed. Blue flame tips are barely visible under the excessive fire. A Southeast Asian kitchen manager in a white shirt stands beside the stove line, holding a gas bill statement with a shocked expression — the amount circled in red. The bill is visibly inflated. Above the stoves, old inefficient exhaust hoods struggle to handle the smoke and heat. Gas pipes run along the walls, suggesting high consumption. Unused burners nearby still have pilot lights burning, wasting gas even when not in active cooking. The kitchen feels hot and uncomfortable. Traditional woks and stock pots sit on the roaring flames. Steam and heat shimmer distort the air above the burners. Warm lighting from the gas flames dominates the scene. Shot from a medium angle with the excessive flames as the focal point and the manager with the bill in the foreground. Warm orange-yellow tones emphasizing energy waste. Commercial photography, 4:3 aspect ratio.
+
+### central-kitchen/pain6.webp
+类型：pain
+尺寸建议：4:3
+英文提示词：
+Commercial photography of a Southeast Asian central kitchen showing massive food waste at the end of a service day. Multiple large black garbage bins are overflowing with discarded food — whole untouched portions of rice, vegetables, and protein dishes are visible in the waste. A Southeast Asian kitchen worker dumps another large container of leftover food into an already-full bin, food spilling onto the floor. Another worker in the background scrapes uneaten food from stainless steel serving trays into a separate compost container. The scale of waste is shocking — at least 4-5 large bins are full. On the prep counter, a partially written waste log shows handwritten tallies with increasing numbers. A wall-mounted whiteboard displays "Daily Waste Target: 5%" with actual figures showing 15-20%. Traditional kitchen equipment — gas stoves (some still burning unnecessarily), large stock pots with remaining food, and cluttered prep surfaces — fills the background. The floor is wet and messy with food scraps. Warm fluorescent lighting creates a somber mood. Shot from a slightly elevated angle looking down at the overflowing bins and food on the floor. Desaturated warm tones conveying loss and waste. Commercial photography, 4:3 aspect ratio.
+
+---
+
+## 六、连锁餐饮 chain-restaurant — Pain（4张）
+
+### chain-restaurant/pain1.webp
+类型：pain
+尺寸建议：4:3
+英文提示词：
+Commercial photography illustrating inconsistent food quality across restaurant chain locations in Southeast Asia. A split-screen style composition showing the same dish — a signature stir-fried noodle — prepared differently at different locations. On the left side, a well-presented plate of noodles from the flagship store with perfect seasoning, vibrant colors, and professional plating. On the right side, the same dish from a branch location looks completely different — overcooked noodles, uneven seasoning visible as dry spots and oily puddles, sparse toppings, and careless plating. Two Southeast Asian customers sit at separate tables — one smiling while eating the flagship version, the other pushing the branch version aside with disappointment. Between them, a thought bubble or visual metaphor shows the chain's brand logo splitting in two. The kitchen behind the disappointed customer shows a traditional cooking setup with a junior chef struggling at the wok, unsure of the recipe. Warm restaurant lighting with slight color temperature differences between the two sides to emphasize inconsistency. Shot from a medium-wide angle with clear visual contrast between the two presentations. Commercial photography, 4:3 aspect ratio.
+
+### chain-restaurant/pain2.webp
+类型：pain
+尺寸建议：4:3
+英文提示词：
+Commercial photography of a Southeast Asian restaurant chain's new branch during its training period, showing the bottleneck of training new chefs. A brand-new, still-empty restaurant kitchen has training materials scattered everywhere — laminated recipe cards, printed manuals, and video tablets propped up on prep tables. A senior Southeast Asian executive chef stands over a nervous young trainee chef at a traditional gas wok station, pointing at the flame and correcting technique with a frustrated expression. The trainee looks overwhelmed, trying to follow a complex recipe card while managing the wok fire simultaneously. A calendar on the wall shows "Training Week 3 of 6" with a red circle around the planned opening date that is fast approaching. Construction dust is still visible in corners. Unused traditional woks and equipment wait along the walls. The kitchen is partially set up — some stations ready, others still being configured. A whiteboard shows a training schedule with several items unchecked. The overall mood conveys delay and frustration. Warm overhead lighting in an otherwise unfinished space. Shot from a medium angle capturing the training interaction and the unfinished kitchen. Muted warm tones with the incomplete environment conveying expansion difficulty. Commercial photography, 4:3 aspect ratio.
+
+### chain-restaurant/pain3.webp
+类型：pain
+尺寸建议：4:3
+英文提示词：
+Commercial photography of a Southeast Asian restaurant chain's finance office showing labor cost pressures. The scene shows two perspectives: through a glass partition, a busy restaurant kitchen is visible with a large team of Southeast Asian chefs working at traditional gas wok stations — at least 6-7 people visible. Back in the office, a Southeast Asian restaurant owner/manager sits at a desk covered in financial documents, rubbing his temples with stress. On his desk, a highlighted spreadsheet shows rapidly rising salary expenses with a red upward trend line. "Help Wanted" signs and recruitment flyers are scattered around, suggesting the difficulty of hiring. A calculator shows a large number. The contrast between the many workers needed in the kitchen (visible through the glass) and the financial pain on the manager's face tells the story clearly. The kitchen behind the glass shows the traditional cooking approach requiring many hands. Warm office lighting from a desk lamp mixed with the kitchen's fluorescent glow through the glass. Shot from the office side, medium angle with the stressed manager in foreground and the labor-intensive kitchen visible through the partition. Warm but slightly oppressive tones. Commercial photography, 4:3 aspect ratio.
+
+### chain-restaurant/pain4.webp
+类型：pain
+尺寸建议：4:3
+英文提示词：
+Commercial photography of a Southeast Asian restaurant chain kitchen failing a health and safety inspection. A Southeast Asian health inspector in a formal government uniform holds up a red violation notice to the camera, her expression stern. Behind her, the traditional restaurant kitchen shows multiple problems: grease-stained walls around the gas stove area, food stored at incorrect temperatures on a prep counter, a dripping faucet near food prep zones, and worn cutting boards that need replacement. A thermometer shows temperature is in the danger zone. The kitchen floor has puddles and scattered debris. Traditional cooking equipment — gas wok burners, carbon steel woks, wooden-handled utensils — looks old and poorly maintained. The restaurant's brand logo is visible on an apron hanging nearby, suggesting embarrassment for the chain. Staff members stand to the side with worried expressions. "FAILED" stamp is visible on an inspection form. Mixed fluorescent lighting with some areas darker and poorly lit, emphasizing the neglected maintenance. Shot from a medium angle with the inspector and violation notice in the foreground and the problematic kitchen behind her. Cool-tinged color grading to emphasize the serious compliance failure. Commercial photography, 4:3 aspect ratio.
+
+---
+
+## 七、连锁餐饮 chain-restaurant — Hero（1张）
+
+### chain-restaurant/hero.webp
+类型：hero
+尺寸建议：16:9
+英文提示词：
+Epic commercial interior photography of a modern Southeast Asian restaurant chain's flagship back kitchen showcasing a standardized, technology-driven cooking operation with YuKoLi smart cooking machines. The wide, clean, and professionally organized kitchen features four silver-gray stainless steel tabletop automatic cooking machines arranged in an efficient parallel line, each with illuminated touchscreen control panels displaying the same recipe program — emphasizing standardization across the chain. Gentle steam rises uniformly from all machines, suggesting synchronized, consistent cooking. Two Southeast Asian staff members in clean, branded white uniforms work calmly — one monitors two machines simultaneously while the other plates finished dishes with precision on branded serving ware. The kitchen has branded elements visible — a chain logo on the wall, uniform colors on equipment covers, and branded takeout containers stacked neatly. LED strip lighting under stainless steel shelves provides modern, even illumination. The floor is clean epoxy with subtle workflow markings. Everything looks identical, efficient, and perfectly controlled — no chaos, no inconsistency. Shot from a wide elevated angle capturing all four machines in a row with staff, emphasizing scale and standardization. Color palette: bright, clean whites, silver metallics, warm steam, and branded accent colors. Inspirational, premium commercial photography, 16:9 aspect ratio.
+
+---
+
+## 八、食品工厂 food-factory（5张）
+
+### food-factory/hero.webp
+类型：hero
+尺寸建议：16:9
+英文提示词：
+Epic commercial interior photography of a large-scale Southeast Asian food factory's intelligent cooking production line featuring multiple YuKoLi smart cooking machines. The impressive factory floor stretches wide with high industrial ceilings and bright overhead LED panel lighting. Six large-capacity silver-gray stainless steel automatic cooking machines are positioned in an efficient production line arrangement, each significantly larger than standard models, with wide touchscreen control panels showing production data, batch numbers, and recipe parameters. Gentle steam rises from the machines as they process large batches of food simultaneously. Southeast Asian factory workers in clean white uniforms and hairnets move efficiently between stations — some monitor machine outputs, others transfer finished batches to a stainless steel conveyor system. The production line flows smoothly from raw ingredient staging on the left through machine processing in the center to packaging on the right. Pre-measured ingredient bins line the back wall with clear labeling. A digital production dashboard mounted high on the wall shows real-time output statistics. The factory is immaculately clean with epoxy-coated floors and stainless steel surfaces reflecting the bright lighting. Shot from a wide elevated angle capturing the entire production line's impressive scale and efficiency. Color palette: bright industrial whites, silver metallics, warm steam accents. Professional, large-scale commercial photography, 16:9 aspect ratio.
+
+### food-factory/pain1.webp
+类型：pain
+尺寸建议：4:3
+英文提示词：
+Commercial photography of a Southeast Asian food factory showing inconsistent product quality from manual cooking methods. A production line scene where workers manually stir-fry in large traditional steel woks over open gas flames. A Southeast Asian factory worker strains to maneuver a large metal spatula in an enormous wok, sweat pouring down his face. The wok contents show uneven cooking — some ingredients are overcooked and charred while others are undercooked and raw. Two identical products side by side on a quality check table show visible differences in color, seasoning distribution, and consistency. A quality control inspector in a white lab coat holds two samples up to compare, frowning at the obvious inconsistency. The traditional cooking line requires constant human judgment — flame control, timing, stirring technique — all varying from worker to worker. Large gas burners roar beneath the woks. The factory floor has some grease stains and scattered ingredients. Mixed fluorescent and warm gas flame lighting. Shot from a medium-wide angle capturing the manual cooking struggle and the quality comparison. Warm but inconsistent tones mirroring the inconsistent output. Commercial photography, 4:3 aspect ratio.
+
+### food-factory/pain2.webp
+类型：pain
+尺寸建议：4:3
+英文提示词：
+Commercial photography of a Southeast Asian food factory showing excessive labor costs on the production line. A long traditional food processing line is staffed by a large number of Southeast Asian workers — at least 10-12 people visible along the production line. Each station requires individual workers: some manually stir-fry at gas wok stations, others hand-portion ingredients, several workers stand at packing stations doing manual filling and sealing. The line is labor-intensive with every step requiring human hands. The factory manager, a middle-aged Southeast Asian man in a white shirt, stands at the end of the line reviewing a cost analysis report on a clipboard, his expression showing concern about thin profit margins. The report shows labor costs highlighted as the dominant expense. Workers look tired from repetitive manual labor. Traditional equipment — manual woks, gas stoves, hand-operated filling machines — fills the production area. The contrast between the many workers needed and the relatively modest output is striking. Bright industrial fluorescent lighting illuminates the crowded production floor. Shot from an elevated angle emphasizing the large number of workers along the production line. Warm industrial tones. Commercial photography, 4:3 aspect ratio.
+
+### food-factory/pain3.webp
+类型：pain
+尺寸建议：4:3
+英文提示词：
+Commercial photography of a Southeast Asian food factory showing a failed quality inspection. A Southeast Asian quality assurance manager in a white lab coat stands at a testing station, holding a quality inspection report with a large red "FAILED" stamp. Her expression is grave and concerned. On the testing table before her, sample products from the production line are arranged with colored labels — some marked with red failure indicators for issues like inconsistent weight, improper sealing, and off-spec seasoning levels. Testing instruments — a digital scale showing weight discrepancy, a pH meter, and a moisture analyzer — are spread on the table with concerning readings visible. Behind her, the traditional production line continues running, workers unaware of the failed batch. Stacked crates of the questioned product batch wait in the background with a "HOLD - DO NOT SHIP" tag attached. The factory environment shows traditional manual processing with gas wok stations visible. The mood is tense and consequential — a failed inspection means product recall, financial loss, and reputation damage. Clinical bright lighting in the testing area contrasting with warmer tones in the factory. Shot from a medium angle with the QA manager and failed report as the focal point. Cool-warm contrast color palette. Commercial photography, 4:3 aspect ratio.
+
+### food-factory/pain4.webp
+类型：pain
+尺寸建议：4:3
+英文提示词：
+Commercial photography of a Southeast Asian food factory showing the challenge of replicating a production line in a new facility. A large, empty industrial space — the new factory floor — stretches out barren and unfinished. Concrete floors are bare, walls are unpainted, and overhead industrial lighting fixtures hang unpowered. A small group of Southeast Asian project stakeholders stand in the middle of the empty space: a factory manager holding architectural blueprints, an equipment supplier representative pointing at floor markings where machines should go, and a financial controller looking at a timeline document with concern. Against one wall, a few traditional gas wok stations and manual cooking equipment sit partially unpacked in wooden crates, clearly insufficient for the planned production capacity. A calendar or Gantt chart visible on a clipboard shows "Timeline: 6 months minimum." The vast empty space emphasizes how long it takes to set up traditional cooking operations from scratch. Natural daylight from large industrial windows mixed with some temporary construction lighting creates a partially lit, unfinished atmosphere. Shot from a wide angle capturing the vast empty space and the small group of concerned planners. Cool, muted tones with warm accents from the small group. Commercial photography, 4:3 aspect ratio.
+
+---
+
+## 九、食品工厂 food-factory — Scene（4张）
+
+### food-factory/scene1.webp
+类型：scene
+尺寸建议：4:3
+英文提示词：
+Commercial photography of a Southeast Asian pre-made meal (ready-meal) factory production line featuring YuKoLi smart cooking machines. The modern, clean production floor shows three silver-gray stainless steel automatic cooking machines integrated into a smooth production flow. The first machine automatically cooks main dish components — a rich curry visible being stirred inside the machine's chamber. The second machine prepares side dishes simultaneously. The third handles sauce preparation. Finished food flows from the machines to an automated packaging station where meals are portioned into individual sealed containers with branded labels. Southeast Asian workers in clean white uniforms and hairnets monitor the process — one checks the machine's touchscreen output data, another inspects sealed packages for quality. Pre-measured ingredient bins feed into each machine in precise quantities. The production line is efficient, clean, and quiet compared to traditional cooking. A digital display shows daily production targets and actual output — numbers are on track. Bright LED industrial lighting, clean epoxy floors, stainless steel surfaces. Shot from a medium-wide angle following the production flow from machines to packaging. Warm food tones with clean industrial whites and silvers. Commercial photography, 4:3 aspect ratio.
+
+### food-factory/scene2.webp
+类型：scene
+尺寸建议：4:3
+英文提示词：
+Commercial photography of a Southeast Asian condiment and seasoning factory where YuKoLi smart cooking machines prepare sauces and spice blends. Two silver-gray stainless steel automatic cooking machines operate on a dedicated sauce production line, their touchscreen panels displaying precise temperature, timing, and ingredient ratio parameters. One machine simmers a rich, aromatic curry sauce — deep orange-brown color visible through the machine's opening, with gentle steam carrying visible aromatic intensity. The second machine processes a lighter soy-based sauce. A Southeast Asian production supervisor in a clean white coat and hairnet carefully adds pre-measured spice ingredients into a loading chute while monitoring the digital display. Rows of ingredient containers — spices, pastes, oils — are organized on shelving behind with clear labels and batch numbers. Filled sauce jars move along a conveyor toward a labeling station. The factory environment is spotless with stainless steel everything reflecting bright overhead LED panel lights. Small sample jars of finished sauces are arranged on a quality check table showing consistent color and texture. Shot from a medium angle focusing on the machine producing sauce with the steam and rich colors. Warm amber and orange tones from the sauce contrasting with clean silver equipment. Commercial photography, 4:3 aspect ratio.
+
+### food-factory/scene3.webp
+类型：scene
+尺寸建议：4:3
+英文提示词：
+Commercial photography of a Southeast Asian sauce manufacturing facility featuring a large-capacity YuKoLi cooking machine for bulk sauce and paste production. A prominently featured large silver-gray stainless steel automatic cooking machine — noticeably larger than standard models — dominates the production area, its wide touchscreen panel displaying batch production data. The machine's large cooking chamber is shown mid-production, with a thick, rich chili paste or curry base being automatically stirred. Rich red-orange color of the sauce is visible with steam rising. A Southeast Asian factory technician in white uniform monitors the process through a viewing port while recording data on a tablet. Nearby, ingredient staging includes large containers of chili peppers, garlic, lemongrass, galangal, and other Southeast Asian aromatics. Finished sauce is pumped through a stainless steel pipe to a filling station where bottles are automatically filled, capped, and labeled. Drums of finished product are being sealed nearby for bulk distribution. The factory is clean and modern with industrial LED lighting, epoxy floors, and organized workflow. Shot from a medium-wide angle capturing the large machine, the rich sauce color, and the production flow. Warm rich reds and oranges of the sauce against clean silver industrial environment. Commercial photography, 4:3 aspect ratio.
+
+### food-factory/scene4.webp
+类型：scene
+尺寸建议：4:3
+英文提示词：
+Commercial photography of a Southeast Asian central kitchen distribution center showing the final packaging and dispatch stage. The scene focuses on a modern packaging line where freshly prepared meals — produced by YuKoLi smart cooking machines visible in the background — are being packed for distribution. In the foreground, sealed meal containers in branded packaging move along a conveyor belt toward a sorting station. A Southeast Asian logistics coordinator in a clean uniform checks shipping labels against a digital order manifest on a tablet. In the background, two silver-gray stainless steel YuKoLi cooking machines continue producing food, their touchscreens glowing with active recipes. Prepared meals in uniform containers cool on stainless steel racks before packaging. Distribution crates are being loaded onto a hand pallet jack, ready for refrigerated delivery trucks visible through a loading dock door. The space is clean, organized, and efficient with bright LED lighting, white walls, and stainless steel fixtures. Temperature displays show proper cold chain management. Shot from a medium angle following the flow from kitchen machines through packaging to dispatch. Warm food tones with clean industrial whites. Commercial photography, 4:3 aspect ratio.
+
+---
+
+## 十、菜品适配 menu-lab（5张）
+
+### menu-lab/hero.webp
+类型：hero
+尺寸建议：16:9
+英文提示词：
+Epic commercial interior photography of a YuKoLi menu development laboratory in a Southeast Asian setting, showcasing cross-cuisine cooking capabilities. The beautiful, modern test kitchen is designed like a professional culinary studio with warm wood accents, white tile backsplashes, and stainless steel countertops. Three silver-gray stainless steel tabletop automatic cooking machines are positioned at different stations, each preparing a different Southeast Asian cuisine simultaneously — visible ingredients suggest Thai (lemongrass, galangal, chilies), Malaysian (coconut milk, laksa paste), and Indonesian (kemiri nuts, kecap manis). The touchscreens on each machine display different language scripts and recipe names. A diverse team of Southeast Asian culinary professionals — a Thai chef, a Malaysian sous-chef, and an Indonesian food scientist — collaborate around a central tasting table where small plates of completed dishes from each cuisine are beautifully presented. The atmosphere is creative, professional, and inspiring. Warm natural light streams through large windows, supplemented by warm LED pendant lights. Fresh herbs and spices are arranged artfully on open shelving. The space feels like a fusion of a high-end restaurant kitchen and a modern R&D lab. Shot from a wide elevated angle capturing all three machines, the diverse team, and the beautiful kitchen environment. Color palette: rich warm tones — golds, greens from herbs, reds from chilies, clean silvers. Premium, aspirational commercial photography, 16:9 aspect ratio.
+
+### menu-lab/pain1.webp
+类型：pain
+尺寸建议：4:3
+英文提示词：
+Commercial photography illustrating the challenge of recipe replication across locations for a Southeast Asian restaurant chain. A traditional restaurant kitchen scene where a senior Thai chef (Southeast Asian, 50s, experienced) stands at a traditional gas wok station, attempting to teach a younger non-Thai chef (Southeast Asian, 20s) how to cook an authentic tom yum soup. The senior chef gestures toward the wok, holding up a handwritten recipe card with Thai script, while the younger chef looks confused and overwhelmed — the recipe calls for specific techniques like "pounding aromatics until fragrant" and "tasting for the balance of sour, salty, and spicy" that cannot be easily codified. On the prep table, traditional Thai ingredients — lemongrass, kaffir lime leaves, galangal, bird's eye chilies, fish sauce, lime juice — are laid out, but the proportions between them are unclear. A laptop screen on the counter shows a franchise location map with pins in different countries, suggesting the recipe needs to work in Sydney, Dubai, and Singapore. The senior chef's expression shows frustration that his years of intuitive cooking knowledge cannot be easily transferred. The kitchen has a traditional setup with gas woks and manual prep. Warm lighting from the gas flame and overhead lights. Shot from a medium angle capturing the teaching moment and the cultural knowledge transfer challenge. Warm tones conveying tradition and difficulty. Commercial photography, 4:3 aspect ratio.
+
+### menu-lab/pain2.webp
+类型：pain
+尺寸建议：4:3
+英文提示词：
+Commercial photography of a Southeast Asian restaurant kitchen showing the slow, costly process of developing a new menu item. The kitchen is littered with evidence of failed recipe attempts — stacks of dirty plates piled in the sink, multiple tasting bowls with partially eaten test portions, and crumpled recipe notes scattered on the prep counter. A Southeast Asian chef stands exhausted at a traditional gas wok station, holding a wok with yet another test batch, his apron stained from countless cooking attempts. On a nearby table, a whiteboard shows a recipe development timeline: "Week 1: Concept → Week 2: First tests → Week 3: Refinement → Week 4: Final testing." Most phases are marked with red X's indicating failures. A manager in a shirt and tie looks at the timeline with an impatient expression, checking his watch. The calendar shows it has already been 3 weeks since the project started. Ingredient costs from multiple failed batches are tallied on a notepad — the waste is significant. The kitchen feels exhausted and overworked. Traditional gas stove with multiple used woks and pots cluttering every surface. Warm but tired lighting. Shot from a medium angle capturing the chef's exhaustion and the evidence of many failed attempts. Muted warm tones conveying fatigue and wasted effort. Commercial photography, 4:3 aspect ratio.
+
+### menu-lab/pain3.webp
+类型：pain
+尺寸建议：4:3
+英文提示词：
+Commercial photography of a Southeast Asian restaurant chain's kitchen highlighting the high cost of hiring specialized chefs for multiple cuisines. The scene shows a traditional kitchen trying to produce diverse Southeast Asian dishes — Thai, Malaysian, Indonesian, Vietnamese — each requiring a different specialist chef. Three to four Southeast Asian chefs of different specializations work at separate traditional gas wok stations, each focusing on their own cuisine. The kitchen feels overcrowded with too many specialized staff. A restaurant manager stands at a desk reviewing a payroll spreadsheet that shows individual chef salaries highlighted — Thai cuisine specialist, Malay cuisine specialist, Indonesian cuisine specialist — each commanding premium wages. "Help Wanted" ads for specialized Southeast Asian chefs are pinned to a corkboard, suggesting recruitment difficulties. Particularly notable is a note about the scarcity of qualified Southeast Asian chefs in overseas markets. The kitchen has traditional equipment for each cuisine — different wok styles, specialized tools, separate prep areas — creating inefficiency. Mixed warm lighting from multiple gas burners. Shot from a medium-wide angle capturing the multiple specialized stations and the payroll concern. Warm tones with the cluttered, inefficient space. Commercial photography, 4:3 aspect ratio.
+
+### menu-lab/pain4.webp
+类型：pain
+尺寸建议：4:3
+英文提示词：
+Commercial photography illustrating taste inconsistency between different branches of a Southeast Asian restaurant chain. The scene is set in a quality comparison room or office. On a long stainless steel table, two versions of the same signature dish are placed side by side — a traditional Southeast Asian curry. The dish from Branch A looks perfect: vibrant color, consistent sauce, well-balanced garnish. The dish from Branch B is noticeably different: darker color, separated sauce, inconsistent portioning. A Southeast Asian quality manager holds both dishes, comparing them with a disappointed expression. Behind the dishes, a map or display board shows multiple branch locations across different cities, with several flagged in red for taste inconsistency issues. Customer review printouts are scattered on the table — some praise the flagship store's food, others complain about branch variations. The traditional cooking setup visible through a doorway shows different chefs at different wok stations, each cooking with their own style and intuition rather than a standardized process. The message is clear: human-dependent cooking leads to brand inconsistency. Warm restaurant lighting with slight color temperature differences between the two dish versions. Shot from a medium angle focusing on the side-by-side comparison. Commercial photography, 4:3 aspect ratio.
+
+---
+
+## 十一、菜品适配 menu-lab — 菜系图（4张）
+
+### menu-lab/cuisine-thai.webp
+类型：scene
+尺寸建议：4:3
+英文提示词：
+Premium commercial food photography showcasing authentic Thai cuisine beautifully presented on a dark wood table in a Southeast Asian restaurant setting. The composition features an artful arrangement of classic Thai dishes: a steaming bowl of tom yum goong (hot and sour shrimp soup) with whole prawns, mushrooms, and lemongrass visible in the fragrant broth as the central hero dish. Alongside it, a plate of pad thai with perfectly stir-fried rice noodles, plump shrimp, crushed peanuts, bean sprouts, and a lime wedge. Additional smaller plates include som tam (green papaya salad), mango sticky rice, and a small bowl of nam prik (chili dip) with fresh vegetables. Fresh Thai herbs — basil, cilantro, lemongrass — garnish the dishes and are scattered artfully as props. The table setting includes traditional Thai ceramics and a woven bamboo mat. Background shows soft bokeh of a warm, modern Thai restaurant interior with warm pendant lights and tropical green touches. Warm, golden lighting with subtle rim light on the hero dish. Shot from a slightly elevated 45-degree angle with the tom yum as the focal point. Color palette: vibrant greens, warm oranges, bright reds from chilies, and rich golden browns. Shot on a full-frame camera with shallow depth of field, professional food photography, 4:3 aspect ratio.
+
+### menu-lab/cuisine-malaysian.webp
+类型：scene
+尺寸建议：4:3
+英文提示词：
+Premium commercial food photography showcasing authentic Malaysian cuisine beautifully presented on a dark wood table in a Southeast Asian restaurant setting. The composition centers on a gorgeous plate of nasi lemak — fragrant coconut rice topped with a perfectly fried egg, crispy anchovies, roasted peanuts, sliced cucumber, and rich sambal in a small banana leaf wrap. Beside it, a steaming bowl of authentic laksa with thick rice noodles in a rich, creamy coconut curry broth with prawns, fish cake slices, tofu puffs, and fresh mint. Additional dishes include roti canai with curry dipping sauce, rendang beef in a small ceramic bowl, and kuih (colorful traditional Malay cakes). Fresh ingredients like pandan leaves, torch ginger flower, and lime are used as natural props and garnishes. The table setting includes Malaysian ceramic ware and a batik table runner. Background shows soft bokeh of a warm Malaysian eatery with warm wood tones and tropical elements. Warm, golden lighting with a slight glow on the laksa broth surface. Shot from a slightly elevated 45-degree angle with the nasi lemak as the focal hero. Color palette: warm coconut cream whites, rich curry golds, sambal reds, and pandan greens. Professional food photography, 4:3 aspect ratio.
+
+### menu-lab/cuisine-indonesian.webp
+类型：scene
+尺寸建议：4:3
+英文提示词：
+Premium commercial food photography showcasing authentic Indonesian cuisine beautifully presented on a dark wood table in a Southeast Asian restaurant setting. The composition features nasi goreng (Indonesian fried rice) as the hero dish — beautifully plated with a perfectly fried egg on top, crispy kerupuk (shrimp crackers), pickled vegetables (acar), and a sprinkle of fried shallots. Alongside it, a bowl of rendang — rich, dark brown slow-cooked beef in a thick coconut and spice sauce, served with steamed rice. Additional dishes include sate ayam (chicken satay) with peanut sauce in a small dipping bowl, gado-gado (vegetable salad with peanut dressing), and a serving of sambal oelek. Fresh Indonesian ingredients — turmeric leaves, lemongrass, kaffir lime — are arranged as natural garnishes. The table setting includes traditional Indonesian earthenware and a woven table mat. Background shows soft bokeh of a warm Indonesian warung-style interior with warm lighting and natural wood. Warm, amber lighting with golden highlights on the rendang sauce. Shot from a slightly elevated 45-degree angle with the nasi goreng as the focal hero. Color palette: deep rendang browns, golden fried rice tones, green herb accents, and vibrant sambal reds. Professional food photography, 4:3 aspect ratio.
+
+### menu-lab/cuisine-vietnamese.webp
+类型：scene
+尺寸建议：4:3
+英文提示词：
+Premium commercial food photography showcasing authentic Vietnamese cuisine beautifully presented on a dark wood table in a Southeast Asian restaurant setting. The composition centers on a large steaming bowl of pho bo (Vietnamese beef noodle soup) as the hero — clear amber broth with rice noodles, thinly sliced rare beef that is just cooking in the hot broth, bean sprouts, Thai basil, and a squeeze of lime on the side. Alongside it, a plate of fresh goi cuon (summer rolls) — translucent rice paper rolls filled with shrimp, vermicelli, herbs, and pork, served with hoisin peanut dipping sauce. Additional dishes include banh mi (Vietnamese baguette sandwich) cut in half showing the layers of pate, pickled vegetables, cilantro, and grilled pork, plus a small plate of banh xeo (crispy crepe) and a bowl of bun cha (grilled pork with noodles). Fresh herbs — mint, cilantro, Thai basil — are plentifully arranged as garnish. The table setting includes Vietnamese ceramic bowls and chopsticks. Background shows soft bokeh of a modern Vietnamese cafe with warm pendant lights and green plant touches. Bright, clean warm lighting that makes the pho broth glow. Shot from a slightly elevated 45-degree angle with the pho as the focal hero. Color palette: clear amber broth, fresh herb greens, warm bread tones, and vibrant herb colors. Professional food photography, 4:3 aspect ratio.
+
+---
+
+## 十二、食堂 canteen — Hero（1张）
+
+### canteen/hero.webp
+类型：hero
+尺寸建议：16:9
+英文提示词：
+Epic commercial interior photography of a modern Southeast Asian school/enterprise cafeteria back kitchen showcasing YuKoLi smart cooking machines serving large-scale meal production. The wide, bright, and professionally organized kitchen features five silver-gray stainless steel tabletop automatic cooking machines arranged in a curved production line, each with illuminated touchscreen control panels displaying active cooking programs for different dishes. Steam rises gently from multiple machines as they simultaneously prepare a diverse menu — fried rice, vegetable stir-fry, curry, soup, and a protein dish. Southeast Asian kitchen staff in clean white uniforms and hairnets work calmly and efficiently — one supervises two machines at once, another plates finished dishes onto a stainless steel service line, a third records production data on a wall-mounted digital display showing real-time meal counts approaching 500+. Through large service windows, a bright, modern cafeteria dining hall is visible, already filling with students/workers. The kitchen floor is gleaming white tile. Large organized ingredient storage with pre-measured containers ensures smooth workflow. A "Today's Menu" digital display shows 8 diverse dishes — far more variety than a traditional kitchen could offer. Bright LED panel lighting provides even, clean illumination. Shot from a wide elevated angle capturing the production line of machines, the calm staff, and the view into the dining hall. Color palette: bright, warm, inviting — white surfaces, silver equipment, colorful food, and golden steam. Inspirational commercial photography conveying technology, efficiency, and quality at scale, 16:9 aspect ratio.
+
+---
+
+## 十三、云厨房 cloud-kitchen — Hero（1张）
+
+### cloud-kitchen/hero.webp
+类型：hero
+尺寸建议：16:9
+英文提示词：
+Epic commercial interior photography of a modern Southeast Asian cloud kitchen (delivery-only ghost kitchen) showcasing compact, efficient YuKoLi smart cooking machines designed for space-constrained environments. The sleek, modern kitchen maximizes every square foot — five silver-gray stainless steel tabletop automatic cooking machines are arranged in an efficient compact configuration against the walls and center island, their small footprints leaving significantly more workspace than traditional equipment would. Each machine's touchscreen panel glows with active cooking programs for different delivery brands. The space is clean, modern, and technology-forward with minimalist design — white walls, stainless steel surfaces, and organized shelving. A Southeast Asian operations manager monitors a large digital dashboard mounted on the wall showing real-time order status, delivery timing, and production metrics across multiple brands. Through a receiving window, delivery riders in branded jackets quickly pick up sealed orders. The compact YuKoLi machines produce diverse cuisines simultaneously without cross-contamination — visible steam suggests different dishes being prepared. LED strip lighting under shelves and bright overhead panels create a modern, tech-forward atmosphere. The floor is clean with clear workflow path markings. No open flames, no grease buildup, no wasted space — everything is controlled, compact, and efficient. Shot from a wide elevated angle emphasizing the efficient use of space and the technology-driven workflow. Color palette: clean whites, silver metallics, warm food steam accents, and digital screen glows. Modern, premium commercial photography, 16:9 aspect ratio.
+类型：pain
+尺寸建议：4:3
+英文提示词：
+Commercial photography of a Southeast Asian restaurant chain's new branch during its training period, showing the bottleneck of training new chefs. A brand-new, still-empty restaurant kitchen has training materials scattered everywhere — laminated recipe cards, printed manuals, and video tablets propped up on prep tables. A senior Southeast Asian executive chef stands over a nervous young trainee chef at a traditional gas wok station, pointing at the flame and correcting technique with a frustrated expression. The trainee looks overwhelmed, trying to follow a complex recipe card while managing the wok fire simultaneously. A calendar on the wall shows "Training Week 3 of 6" with a red circle around the planned opening date that is fast approaching. Construction dust is still visible in corners. Unused traditional woks and equipment wait along the walls. The kitchen is partially set up — some stations ready, others still being configured. A whiteboard shows a training schedule with several items unchecked. The overall mood conveys delay and frustration. Warm overhead lighting in an otherwise unfinished space. Shot from a medium angle capturing the training interaction and the unfinished kitchen. Muted warm tones with the incomplete environment conveying expansion difficulty. Commercial photography, 4:3 aspect ratio.
+
+### chain-restaurant/pain3.webp
+类型：pain
+尺寸建议：4:3
+英文提示词：
+Commercial photography of a Southeast Asian restaurant chain's finance office showing labor cost pressures. The scene shows two perspectives: through a glass partition, a busy restaurant kitchen is visible with a large team of Southeast Asian chefs working at traditional gas wok stations — at least 6-7 people visible. Back in the office, a Southeast Asian restaurant owner/manager sits at a desk covered in financial documents, rubbing his temples with stress. On his desk, a highlighted spreadsheet shows rapidly rising salary expenses with a red upward trend line. "Help Wanted" signs and recruitment flyers are scattered around, suggesting the difficulty of hiring. A calculator shows a large number. The contrast between the many workers needed in the kitchen (visible through the glass) and the financial pain on the manager's face tells the story clearly. The kitchen behind the glass shows the traditional cooking approach requiring many hands. Warm office lighting from a desk lamp mixed with the kitchen's fluorescent glow through the glass. Shot from the office side, medium angle with the stressed manager in foreground and the labor-intensive kitchen visible through the partition. Warm but slightly oppressive tones. Commercial photography, 4:3 aspect ratio.
+
+### chain-restaurant/pain4.webp
+类型：pain
+尺寸建议：4:3
+英文提示词：
+Commercial photography of a Southeast Asian restaurant chain kitchen failing a health and safety inspection. A Southeast Asian health inspector in a formal government uniform holds up a red violation notice to the camera, her expression stern. Behind her, the traditional restaurant kitchen shows multiple problems: grease-stained walls around the gas stove area, food stored at incorrect temperatures on a prep counter, a dripping faucet near food prep zones, and worn cutting boards that need replacement. A thermometer shows temperature is in the danger zone. The kitchen floor has puddles and scattered debris. Traditional cooking equipment — gas wok burners, carbon steel woks, wooden-handled utensils — looks old and poorly maintained. The restaurant's brand logo is visible on an apron hanging nearby, suggesting embarrassment for the chain. Staff members stand to the side with worried expressions. "FAILED" stamp is visible on an inspection form. Mixed fluorescent lighting with some areas darker and poorly lit, emphasizing the neglected maintenance. Shot from a medium angle with the inspector and violation notice in the foreground and the problematic kitchen behind her. Cool-tinged color grading to emphasize the serious compliance failure. Commercial photography, 4:3 aspect ratio.
