@@ -22,7 +22,14 @@
   // ============================================
   // CONTACT CHANNEL CONFIG
   // ============================================
-  /** 规范 WhatsApp 号码（不含 +），其他模块可通过 window.Contacts.whatsapp 读取，避免多处硬编码 */
+  /**
+   * 规范 WhatsApp 号码（不含 +），其他模块可通过 window.Contacts.whatsapp 读取。
+   *
+   * ⚠️  SINGLE SOURCE OF TRUTH: 修改号码只改这里！
+   * HTML 中虽有 ~67 处 wa.me 硬编码作为 fallback，但 initWhatsAppLinks() 会拦截所有
+   * wa.me 链接的点击，用此号码动态生成 URL。floating-actions.js、footer.js、
+   * contact-dropdown.js、profit-calculator.js 等也通过 window.Contacts.whatsapp 读取此值。
+   */
   var WHATSAPP_NUMBER = "8613163756465";
 
   // ============================================

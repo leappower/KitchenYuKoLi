@@ -57,6 +57,8 @@ find "$SRC/pages" -name '*.html' -print0 | while IFS= read -r -d '' f; do
   cp "$f" "$DIST/$rel"
 done
 cp "$SRC/index.html" "$DIST/index.html"
+# Copy 404.html
+[ -f "$SRC/404.html" ] && cp "$SRC/404.html" "$DIST/404.html"
 # Copy robots.txt if it exists
 [ -f "$SRC/robots.txt" ] && cp "$SRC/robots.txt" "$DIST/robots.txt"
 

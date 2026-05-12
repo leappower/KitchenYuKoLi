@@ -1,7 +1,8 @@
 /**
  * router.js — Yukoli Site-wide Navigation Utilities
  *
- * Provides: back button control, WhatsApp links, form submission,
+// NOTE: This is a supplementary utility module. Core routing is handled by spa-router.js.
+// Do NOT add routing logic here — only utility helpers (back button, WhatsApp links, form submission). * Provides: back button control, WhatsApp links, form submission,
  * bfcache recovery, and link wiring utilities.
  *
  * NOTE: Primary navigation (header/footer) is handled by navigator.js
