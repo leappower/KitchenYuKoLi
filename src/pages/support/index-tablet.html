@@ -1,438 +1,569 @@
-<!DOCTYPE html>
+<!doctype html>
 
 <html class="light" lang="en">
-<head>
+  <head>
     <link rel="canonical" href="https://www.kitchen.yukoli.com/support/" />
-  <link rel="alternate" hreflang="zh-CN" href="pages/support/support.html" />
-  <!-- TODO: Update href to English URL when English version is available -->
-  <link rel="alternate" hreflang="en" href="pages/support/support.html" />
-  <link rel="alternate" hreflang="x-default" href="pages/support/support.html" />
-    <link rel="alternate" media="only screen and (max-width: 767px)" href="/support/index-mobile.html"/>
-    <link rel="alternate" media="only screen and (min-width: 768px) and (max-width: 1279px)" href="/support/index-tablet.html"/>
-    <link rel="alternate" media="only screen and (min-width: 1280px)" href="/support/index-pc.html"/>
-    <script>/* Responsive redirect — runs before render, no flash */
-(function(){
-  // Prevent duplicate redirect on bfcache restore
-  if (window.__redirectChecked) return;
-  window.__redirectChecked = true;
+    <link rel="alternate" hreflang="zh-CN" href="pages/support/support.html" />
+    <!-- TODO: Update href to English URL when English version is available -->
+    <link rel="alternate" hreflang="en" href="pages/support/support.html" />
+    <link rel="alternate" hreflang="x-default" href="pages/support/support.html" />
+    <link rel="alternate" media="only screen and (max-width: 767px)" href="/support/index-mobile.html" />
+    <link
+      rel="alternate"
+      media="only screen and (min-width: 768px) and (max-width: 1279px)"
+      href="/support/index-tablet.html"
+    />
+    <link rel="alternate" media="only screen and (min-width: 1280px)" href="/support/index-pc.html" />
+    <script>
+      /* Responsive redirect — runs before render, no flash */
+      (function () {
+        // Prevent duplicate redirect on bfcache restore
+        if (window.__redirectChecked) return;
+        window.__redirectChecked = true;
 
-  // Handle clean-url param: clean URL to directory format after redirect
-  var urlParams = new URLSearchParams(location.search);
-  var cleanUrl = urlParams.get('clean-url');
-  if (cleanUrl) {
-    history.replaceState({}, '', cleanUrl);
-    return;
-  }
+        // Handle clean-url param: clean URL to directory format after redirect
+        var urlParams = new URLSearchParams(location.search);
+        var cleanUrl = urlParams.get("clean-url");
+        if (cleanUrl) {
+          history.replaceState({}, "", cleanUrl);
+          return;
+        }
 
-  // Skip responsive redirect during SPA navigation
-  if (window.__spaNavigating) {
-    return;
-  }
+        // Skip responsive redirect during SPA navigation
+        if (window.__spaNavigating) {
+          return;
+        }
 
-  // Use DeviceUtils for unified device detection
-  var currentFile = location.pathname.split('/').pop();
+        // Use DeviceUtils for unified device detection
+        var currentFile = location.pathname.split("/").pop();
 
-  // When accessing directory URL (ending with /), do not redirect (SPA navigation uses clean directory URLs)
-  if (window.DeviceUtils && window.DeviceUtils.isDirectoryURL()) {
-    return;
-  }
+        // When accessing directory URL (ending with /), do not redirect (SPA navigation uses clean directory URLs)
+        if (window.DeviceUtils && window.DeviceUtils.isDirectoryURL()) {
+          return;
+        }
 
-  // Use DeviceUtils to determine if redirect is needed
-  if (window.DeviceUtils && window.DeviceUtils.shouldRedirect(currentFile)) {
-    var deviceType = window.DeviceUtils.getDeviceType();
-    var targetFile;
+        // Use DeviceUtils to determine if redirect is needed
+        if (window.DeviceUtils && window.DeviceUtils.shouldRedirect(currentFile)) {
+          var deviceType = window.DeviceUtils.getDeviceType();
+          var targetFile;
 
-    if (deviceType === window.DeviceUtils.DeviceType.MOBILE) {
-      targetFile = 'index-mobile.html';
-    } else if (deviceType === window.DeviceUtils.DeviceType.TABLET) {
-      targetFile = 'index-tablet.html';
-    } else {
-      targetFile = 'index-pc.html';
-    }
+          if (deviceType === window.DeviceUtils.DeviceType.MOBILE) {
+            targetFile = "index-mobile.html";
+          } else if (deviceType === window.DeviceUtils.DeviceType.TABLET) {
+            targetFile = "index-tablet.html";
+          } else {
+            targetFile = "index-pc.html";
+          }
 
-    location.href = targetFile;
-    return;
-  }
-
-})();</script>
-    <meta charset="utf-8"/>
-    <meta name="description" content="YuKoLi Commercial Kitchen Equipment After-sales Service & Technical Support: installation guidance, operation training, troubleshooting, and genuine parts supply. Covering 10 Southeast Asian countries with 48-hour on-site response.">
-    <meta property="og:type" content="website">
-    <meta property="og:title" content="YuKoLi Commercial Kitchen Equipment | After-sales Service & Technical Support">
-    <meta property="og:description" content="YuKoLi after-sales service: installation guidance, operation training, troubleshooting, and genuine parts supply. Covering 10 Southeast Asian countries.">
-    <meta property="og:url" content="https://www.kitchen.yukoli.com/support/">
-    <meta property="og:image" content="https://www.kitchen.yukoli.com/assets/images/og-home.webp">
-    <meta content="width=device-width,initial-scale=1" name="viewport"/>
+          location.href = targetFile;
+          return;
+        }
+      })();
+    </script>
+    <meta charset="utf-8" />
+    <meta
+      name="description"
+      content="YuKoLi Commercial Kitchen Equipment After-sales Service & Technical Support: installation guidance, operation training, troubleshooting, and genuine parts supply. Covering 10 Southeast Asian countries with 48-hour on-site response."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="YuKoLi Commercial Kitchen Equipment | After-sales Service & Technical Support" />
+    <meta
+      property="og:description"
+      content="YuKoLi after-sales service: installation guidance, operation training, troubleshooting, and genuine parts supply. Covering 10 Southeast Asian countries."
+    />
+    <meta property="og:url" content="https://www.kitchen.yukoli.com/support/" />
+    <meta property="og:image" content="https://www.kitchen.yukoli.com/assets/images/og-home.webp" />
+    <meta content="width=device-width,initial-scale=1" name="viewport" />
     <title>YuKoLi Commercial Kitchen Equipment | After-sales Service & Technical Support</title>
-    <link rel="preload" href="/assets/fonts/local-fonts.css" as="style">
-    <link rel="preload" href="/assets/css/styles.css" as="style">
-    <link rel="preload" href="/assets/css/tailwind.css" as="style">
-    <link rel="preload" href="/assets/fonts/public-sans-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="preload" href="/assets/fonts/public-sans-latin-700-normal.woff2" as="font" type="font/woff2" crossorigin>
-    <link href="/assets/fonts/local-fonts.css" rel="stylesheet"/>
-    <link rel="stylesheet" href="/assets/css/styles.css">
-    <link rel="stylesheet" href="/assets/css/tailwind.css">
-    <link rel="stylesheet" href="/assets/css/z-index-system.css">
-    <link rel="stylesheet" href="/assets/css/performance-optimizations.css"/>
-    <style>body { font-family: 'Public Sans', sans-serif; min-height: 100dvh; }
-  .no-scrollbar::-webkit-scrollbar { display: none; }
-  .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
-  .fill-1 { font-variation-settings: 'FILL' 1; }
+    <link rel="preload" href="/assets/fonts/local-fonts.css" as="style" />
+    <link rel="preload" href="/assets/css/styles.css" as="style" />
+    <link rel="preload" href="/assets/css/tailwind.css" as="style" />
+    <link
+      rel="preload"
+      href="/assets/fonts/public-sans-latin-400-normal.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href="/assets/fonts/public-sans-latin-700-normal.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link href="/assets/fonts/local-fonts.css" rel="stylesheet" />
+    <link rel="stylesheet" href="/assets/css/styles.css" />
+    <link rel="stylesheet" href="/assets/css/tailwind.css" />
+    <link rel="stylesheet" href="/assets/css/z-index-system.css" />
+    <link rel="stylesheet" href="/assets/css/performance-optimizations.css" />
+    <style>
+      body {
+        font-family: "Public Sans", sans-serif;
+        min-height: 100dvh;
+      }
+      .no-scrollbar::-webkit-scrollbar {
+        display: none;
+      }
+      .no-scrollbar {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+      }
+      .fill-1 {
+        font-variation-settings: "FILL" 1;
+      }
     </style>
-    <script>(function(){
-    if(localStorage.getItem('darkMode')==='true')document.documentElement.classList.add('dark')})()</script>
-    <link rel="stylesheet" href="/assets/css/skeleton.css"/>
-    <link rel="icon" href="/assets/images/logo_header.webp" type="image/webp">
-</head>
-<body
+    <script>
+      (function () {
+        if (localStorage.getItem("darkMode") === "true") document.documentElement.classList.add("dark");
+      })();
+    </script>
+    <link rel="stylesheet" href="/assets/css/skeleton.css" />
+    <link rel="icon" href="/assets/images/logo_header.webp" type="image/webp" />
+  </head>
+  <body
     class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 antialiased overflow-x-clip"
->
+  >
     <div class="relative flex min-h-screen flex-col">
-        <navigator
-            data-component="navigator"
-            data-variant="tablet"
-            data-search="true"
-            data-active="support"
-            data-cta-text-key="nav_get_quote"
-            data-cta-href="/quote"
-        ></navigator>
-        <main id="spa-content" class="flex-1 w-full py-8 pb-24">
-
-<!-- Hero Section -->
-<section class="fullwidth-bg hero-overlap section-passthrough w-full flex flex-col items-center py-12 gap-12">
-  <div class="section-content max-w-4xl mx-auto">
-    <div class="w-full space-y-8">
-      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-bold uppercase tracking-widest">
-        <span class="material-symbols-outlined text-xs leading-none">verified</span> <span data-i18n="support_hero_badge_text">
-Professional After-Sales Support
-</span>
-      </div>
-      <h1 class="text-2xl font-black leading-[1.1] tracking-tight text-slate-900 dark:text-white" data-i18n="support_professional_after_sales_support_worry_f">
-        <span data-i18n="support_hero_title_prefix">
-Professional After-Sales Support
-</span><br/><span class="text-primary" data-i18n="support_always_connected">
-Worry-Free Service
-</span>
-      </h1>
-      <p class="text-base text-slate-600 dark:text-slate-400 max-w-2xl leading-relaxed" data-i18n="support_hero_desc">
-YuKoLi provides full-lifecycle services from equipment installation to daily operations.
-</p>
-      <div class="flex flex-wrap gap-4 pt-4">
-        <a href="https://wa.me/8613163756465" data-wa-message-key="wa_msg_support" data-wa-source="hero" target="_blank" rel="noopener noreferrer" class="bg-primary text-white px-8 py-4 rounded-xl font-bold text-base flex items-center gap-2 hover:shadow-lg hover:shadow-primary/20 transition-all" data-i18n="support_service_support">
-          <span data-i18n="support_book_service">
-Service Support
-</span> <span class="material-symbols-outlined">bolt</span>
-        </a>
-        <a href="/products/" class="border-2 border-slate-200 dark:border-slate-800 px-8 py-4 rounded-xl font-bold text-base hover:bg-slate-100 dark:hover:bg-slate-800 transition-all flex items-center gap-2" data-i18n="support_technical_documentation">
-          <span data-i18n="support_technical_specs">
-Technical Documentation
-</span> <span class="material-symbols-outlined">description</span>
-        </a>
-      </div>
-    </div>
-    <div class="w-full relative mt-8">
-      <div
-        class="relative w-full h-[400px] bg-slate-200 dark:bg-slate-800 rounded-3xl overflow-hidden shadow-2xl border border-white/10"
-        data-alt="Industrial robot arm in high tech facility"
-        style="background-image: url('/assets/images/support-hero-engineer.webp'); background-size: cover; background-position: center"
-      >
-        <div class="absolute bottom-6 left-6 bg-white dark:bg-slate-900 p-5 rounded-2xl shadow-xl border border-slate-100 dark:border-slate-800 w-[180px]">
-          <div class="flex items-center gap-3 mb-1">
-            <span class="material-symbols-outlined text-primary text-2xl">sensors</span>
-            <span class="text-xl font-black" data-i18n="support_2_4ms">48h</span>
+      <navigator
+        data-component="navigator"
+        data-variant="tablet"
+        data-search="true"
+        data-active="support"
+        data-cta-text-key="nav_get_quote"
+        data-cta-href="/quote"
+      ></navigator>
+      <main id="spa-content" class="flex-1 w-full py-8 pb-24">
+        <!-- Hero Section -->
+        <section class="fullwidth-bg hero-overlap section-passthrough w-full flex flex-col items-center py-12 gap-12">
+          <div class="section-content max-w-4xl mx-auto">
+            <div class="w-full space-y-8">
+              <div
+                class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-bold uppercase tracking-widest"
+              >
+                <span class="material-symbols-outlined text-xs leading-none">verified</span>
+                <span data-i18n="support_hero_badge_text">Professional After-Sales Support</span>
+              </div>
+              <h1 class="text-2xl font-black leading-[1.1] tracking-tight text-slate-900 dark:text-white">
+                <span data-i18n="support_hero_title_prefix">Professional After-Sales Support</span>
+                <br />
+                <span class="text-primary" data-i18n="support_always_connected">Worry-Free Service</span>
+              </h1>
+              <p
+                class="text-base text-slate-600 dark:text-slate-400 max-w-2xl leading-relaxed"
+                data-i18n="support_hero_desc"
+              >
+                YuKoLi provides full-lifecycle services from equipment installation to daily operations.
+              </p>
+              <div class="flex flex-wrap gap-4 pt-4">
+                <a
+                  href="https://wa.me/8613163756465"
+                  data-wa-message-key="wa_msg_support"
+                  data-wa-source="hero"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="bg-primary text-white px-8 py-4 rounded-xl font-bold text-base flex items-center gap-2 hover:shadow-lg hover:shadow-primary/20 transition-all"
+                >
+                  <span data-i18n="support_book_service">Service Support</span>
+                  <span class="material-symbols-outlined">bolt</span>
+                </a>
+                <a
+                  href="/products/"
+                  class="border-2 border-slate-200 dark:border-slate-800 px-8 py-4 rounded-xl font-bold text-base hover:bg-slate-100 dark:hover:bg-slate-800 transition-all flex items-center gap-2"
+                >
+                  <span data-i18n="support_technical_specs">Technical Documentation</span>
+                  <span class="material-symbols-outlined">description</span>
+                </a>
+              </div>
+            </div>
+            <div class="w-full relative mt-8">
+              <div
+                class="relative w-full h-[400px] bg-slate-200 dark:bg-slate-800 rounded-3xl overflow-hidden shadow-2xl border border-white/10"
+                data-alt="Industrial robot arm in high tech facility"
+                style="
+                  background-image: url(&quot;/assets/images/support-hero-engineer.webp&quot;);
+                  background-size: cover;
+                  background-position: center;
+                "
+              >
+                <div
+                  class="absolute bottom-6 left-6 bg-white dark:bg-slate-900 p-5 rounded-2xl shadow-xl border border-slate-100 dark:border-slate-800 w-[180px]"
+                >
+                  <div class="flex items-center gap-3 mb-1">
+                    <span class="material-symbols-outlined text-primary text-2xl">sensors</span>
+                    <span class="text-xl font-black" data-i18n="support_2_4ms">48h</span>
+                  </div>
+                  <p
+                    class="text-[11px] font-medium text-slate-500 uppercase tracking-wide"
+                    data-i18n="support_average_latency_response"
+                  >
+                    On-Site Response Time
+                  </p>
+                </div>
+              </div>
+            </div>
           </div>
-          <p class="text-[11px] font-medium text-slate-500 uppercase tracking-wide" data-i18n="support_average_latency_response">
-On-Site Response Time
-</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
+        </section>
 
-<!-- Trust Signals -->
-<section class="fullwidth-bg bg-slate-900 py-16">
-  <div class="section-content max-w-4xl mx-auto">
-    <div class="grid grid-cols-3 gap-8">
-      <div class="flex flex-col gap-1 border-l-2 border-primary/40 pl-6">
-        <span class="text-slate-400 text-sm font-semibold uppercase" data-i18n="support_uptime_reliability">
-Equipment Uptime Rate
-</span>
-        <span class="text-white text-3xl font-black" data-i18n="support_99_8">99.8%</span>
-        <span class="text-emerald-400 text-sm flex items-center gap-1"><span class="material-symbols-outlined text-xs">arrow_upward</span> <span data-i18n="support_sla_guarantee">
-SLA Guarantee
-</span></span>
-      </div>
-      <div class="flex flex-col gap-1 border-l-2 border-primary/40 pl-6">
-        <span class="text-slate-400 text-sm font-semibold uppercase" data-i18n="support_global_support_hubs">
-Service Network Coverage
-</span>
-        <span class="text-white text-3xl font-black">14</span>
-        <span class="text-slate-400 text-sm italic" data-i18n="support_24_7_monitoring">
-Online Weekdays 8:00-20:00
-</span>
-      </div>
-      <div class="flex flex-col gap-1 border-l-2 border-primary/40 pl-6">
-        <span class="text-slate-400 text-sm font-semibold uppercase" data-i18n="support_original_parts">
-Genuine Parts
-</span>
-        <span class="text-white text-3xl font-black" data-i18n="support_48h">48h</span>
-        <span class="text-slate-400 text-sm" data-i18n="support_enterprise_encryption">
-Genuine Product Guarantee
-</span>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- Service Map -->
-<section class="fullwidth-bg py-16 bg-tech-silver/30 dark:bg-obsidian/20">
-  <div class="section-content max-w-4xl mx-auto">
-    <div class="flex flex-col items-center text-center mb-10 gap-4">
-      <h2 class="text-2xl font-black tracking-tight" data-i18n="support_global_response_network">
-After-sales Service Network
-</h2>
-      <p class="text-slate-600 dark:text-slate-400 max-w-2xl" data-i18n="support_map_desc">
-Covering major cities in 10 Southeast Asian countries including Thailand, Vietnam, Malaysia, Indonesia, Philippines, etc. On-site response within 48 hours. Supports remote video guidance to quickly resolve common issues.
-</p>
-    </div>
-    <div class="relative bg-white dark:bg-slate-900 rounded-[2rem] border border-slate-200 dark:border-slate-800 overflow-hidden min-h-[400px] shadow-xl">
-      <div id="yukoli-service-map" class="absolute inset-0" style="min-height:400px;"></div>
-      <div id="yukoli-service-map-fallback" class="absolute inset-0 bg-cover bg-center grayscale opacity-40 dark:opacity-20" role="img" aria-label="Stylized world map showing service nodes" data-location="Global" style="background-image: url('/assets/images/world-map.svg')"></div>
-      <div class="relative h-full w-full p-8 flex flex-col justify-between pointer-events-none">
-        <div class="flex justify-between items-start pointer-events-auto">
-          <div class="flex flex-col gap-2">
-            <button class="w-12 h-12 bg-white dark:bg-slate-800 rounded-xl shadow-lg flex items-center justify-center text-slate-900 dark:text-white hover:bg-slate-100">
-              <span class="material-symbols-outlined">add</span>
-            </button>
-            <button class="w-12 h-12 bg-white dark:bg-slate-800 rounded-xl shadow-lg flex items-center justify-center text-slate-900 dark:text-white hover:bg-slate-100">
-              <span class="material-symbols-outlined">remove</span>
-            </button>
+        <!-- Trust Signals -->
+        <section class="fullwidth-bg bg-slate-900 py-16">
+          <div class="section-content max-w-4xl mx-auto">
+            <div class="grid grid-cols-3 gap-8">
+              <div class="flex flex-col gap-1 border-l-2 border-primary/40 pl-6">
+                <span class="text-slate-400 text-sm font-semibold uppercase" data-i18n="support_uptime_reliability">
+                  Equipment Uptime Rate
+                </span>
+                <span class="text-white text-3xl font-black" data-i18n="support_99_8">99.8%</span>
+                <span class="text-emerald-400 text-sm flex items-center gap-1">
+                  <span class="material-symbols-outlined text-xs">arrow_upward</span>
+                  <span data-i18n="support_sla_guarantee">SLA Guarantee</span>
+                </span>
+              </div>
+              <div class="flex flex-col gap-1 border-l-2 border-primary/40 pl-6">
+                <span class="text-slate-400 text-sm font-semibold uppercase" data-i18n="support_global_support_hubs">
+                  Service Network Coverage
+                </span>
+                <span class="text-white text-3xl font-black">14</span>
+                <span class="text-slate-400 text-sm italic" data-i18n="support_24_7_monitoring">
+                  Online Weekdays 8:00-20:00
+                </span>
+              </div>
+              <div class="flex flex-col gap-1 border-l-2 border-primary/40 pl-6">
+                <span class="text-slate-400 text-sm font-semibold uppercase" data-i18n="support_original_parts">
+                  Genuine Parts
+                </span>
+                <span class="text-white text-3xl font-black" data-i18n="support_48h">48h</span>
+                <span class="text-slate-400 text-sm" data-i18n="support_enterprise_encryption">
+                  Genuine Product Guarantee
+                </span>
+              </div>
+            </div>
           </div>
-        </div>
-        <div class="flex justify-center pointer-events-auto">
-          <div class="max-w-xl w-full mx-auto">
-            <label class="flex items-center bg-white dark:bg-slate-800 rounded-2xl shadow-2xl p-2 border border-slate-100 dark:border-slate-700" data-i18n="support_location_on_search">
-              <span class="material-symbols-outlined px-4 text-slate-400">location_on</span>
-              <input class="flex-1 bg-transparent border-none focus:ring-0 text-base py-4 px-4 mr-4" data-i18n-placeholder="support_map_search_placeholder2" placeholder="Find the nearest service center..."/>
-              <button class="bg-primary text-white px-6 py-3 rounded-xl font-bold ml-2" data-i18n="support_map_search_btn">
-Search
-</button>
-            </label>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
+        </section>
 
-<!-- Contact Channels -->
-<div id="support-contact-channels" data-page="support"></div>
-
-<!-- Service System -->
-<section id="installation" class="fullwidth-bg py-16">
-  <div class="section-content max-w-4xl mx-auto">
-    <div class="w-full flex flex-col gap-12 items-center">
-      <div class="relative w-full">
-        <div class="rounded-3xl overflow-hidden shadow-2xl relative aspect-[4/3] bg-slate-200 dark:bg-slate-800">
-          <img loading="lazy" class="w-full h-full object-cover" alt="YuKoLi engineer servicing commercial kitchen equipment in a professional kitchen" src="/assets/images/support-service-engineer.webp" width="800" height="600" onerror="this.style.display='none'">
-          <div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
-          <div class="absolute bottom-6 left-6 right-6">
-            <div class="bg-white/90 dark:bg-slate-900/90 backdrop-blur p-4 rounded-xl">
-              <p class="font-bold text-sm text-slate-900 dark:text-white flex items-center gap-2" data-i18n="support_engineering_yukoli_in_house_engineers_ge">
-                <span class="material-symbols-outlined text-primary text-lg">engineering</span>
-                YuKoLi In-house Engineers · Genuine Parts · On-site Repair
+        <!-- Service Map -->
+        <section class="fullwidth-bg py-16 bg-tech-silver/30 dark:bg-obsidian/20">
+          <div class="section-content max-w-4xl mx-auto">
+            <div class="flex flex-col items-center text-center mb-10 gap-4">
+              <h2 class="text-2xl font-black tracking-tight" data-i18n="support_global_response_network">
+                After-sales Service Network
+              </h2>
+              <p class="text-slate-600 dark:text-slate-400 max-w-2xl" data-i18n="support_map_desc">
+                Covering major cities in 10 Southeast Asian countries including Thailand, Vietnam, Malaysia, Indonesia,
+                Philippines, etc. On-site response within 48 hours. Supports remote video guidance to quickly resolve
+                common issues.
               </p>
             </div>
+            <div
+              class="relative bg-white dark:bg-slate-900 rounded-[2rem] border border-slate-200 dark:border-slate-800 overflow-hidden min-h-[400px] shadow-xl"
+            >
+              <div id="yukoli-service-map" class="absolute inset-0" style="min-height: 400px"></div>
+              <div
+                id="yukoli-service-map-fallback"
+                class="absolute inset-0 bg-cover bg-center grayscale opacity-40 dark:opacity-20"
+                role="img"
+                aria-label="Stylized world map showing service nodes"
+                data-location="Global"
+                style="background-image: url(&quot;/assets/images/world-map.svg&quot;)"
+              ></div>
+              <div class="relative h-full w-full p-8 flex flex-col justify-between pointer-events-none">
+                <div class="flex justify-between items-start pointer-events-auto">
+                  <div class="flex flex-col gap-2">
+                    <button
+                      class="w-12 h-12 bg-white dark:bg-slate-800 rounded-xl shadow-lg flex items-center justify-center text-slate-900 dark:text-white hover:bg-slate-100"
+                    >
+                      <span class="material-symbols-outlined">add</span>
+                    </button>
+                    <button
+                      class="w-12 h-12 bg-white dark:bg-slate-800 rounded-xl shadow-lg flex items-center justify-center text-slate-900 dark:text-white hover:bg-slate-100"
+                    >
+                      <span class="material-symbols-outlined">remove</span>
+                    </button>
+                  </div>
+                </div>
+                <div class="flex justify-center pointer-events-auto">
+                  <div class="max-w-xl w-full mx-auto">
+                    <label
+                      class="flex items-center bg-white dark:bg-slate-800 rounded-2xl shadow-2xl p-2 border border-slate-100 dark:border-slate-700"
+                    >
+                      <span class="material-symbols-outlined px-4 text-slate-400">location_on</span>
+                      <input
+                        class="flex-1 bg-transparent border-none focus:ring-0 text-base py-4 px-4 mr-4"
+                        data-i18n-placeholder="support_map_search_placeholder2"
+                        placeholder="Find the nearest service center..."
+                      />
+                      <button
+                        class="bg-primary text-white px-6 py-3 rounded-xl font-bold ml-2"
+                        data-i18n="support_map_search_btn"
+                      >
+                        Search
+                      </button>
+                    </label>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
-        </div>
-      </div>
-      <div class="flex flex-col gap-6">
-        <h2 class="text-2xl font-black" data-i18n="support_service_system_title">
-Professional After-sales Service System
-</h2>
-        <p class="text-slate-600 dark:text-slate-400 leading-relaxed" data-i18n="support_service_system_desc">
-Provides online technical support and complete maintenance manuals, with 24/7 remote guidance. Most issues can be resolved online; engineers will visit for serious faults (excluding custom parts).
-</p>
-        <ul class="flex flex-col gap-4">
-          <li class="flex items-start gap-3" data-i18n="support_sync_smart_equipment_simple_operation_e">
-            <span class="material-symbols-outlined text-primary">cloud_sync</span>
-            <div>
-              <h4 class="font-bold" data-i18n="support_installation_guide">
-Smart Equipment, Simple Operation
-</h4>
-              <p class="text-base text-slate-500" data-i18n="support_installation_guide_desc">
-Equipment features a simple structure with clear installation and debugging steps. Detailed installation manuals and video tutorials are included, with remote technical team guidance throughout, enabling installation without an engineer on-site.
-</p>
-            </div>
-          </li>
-          <li id="training" class="flex items-start gap-3" data-i18n="support_biotech_online_guidance_quick_start_comp">
-            <span class="material-symbols-outlined text-primary">biotech</span>
-            <div>
-              <h4 class="font-bold" data-i18n="support_operation_training">
-Online Guidance, Quick Start
-</h4>
-              <p class="text-base text-slate-500" data-i18n="support_operation_training_desc">
-Complete operation manuals and video tutorials are provided; equipment operation is simple and intuitive. 24/7 online technical support is available, with remote guidance anytime issues arise for quick resolution.
-</p>
-            </div>
-          </li>
-          <li class="flex items-start gap-3" data-i18n="support_hub_online_troubleshooting_rapid_respons">
-            <span class="material-symbols-outlined text-primary">hub</span>
-            <div>
-              <h4 class="font-bold" data-i18n="support_troubleshooting">
-Online Troubleshooting, Rapid Response
-</h4>
-              <p class="text-base text-slate-500" data-i18n="support_troubleshooting_desc">
-Contact us online for a quick response and remote diagnosis to locate issues. 80% of common faults can be resolved through online guidance. For serious faults, engineers will visit within 48 hours for inspection (excluding custom parts).
-</p>
-            </div>
-          </li>
-          <li class="flex items-start gap-3" data-i18n="support_parts_supply_all_replacement_parts_are_1">
-            <span class="material-symbols-outlined text-primary">inventory_2</span>
-            <div>
-              <h4 class="font-bold" data-i18n="support_service_parts_title">
-Parts Supply
-</h4>
-              <p class="text-base text-slate-500" data-i18n="support_spare_parts_desc">
-All replacement parts are 100% original factory output, identical to when the equipment left the factory. Standard parts ship within 48 hours, with local spare parts warehouses in Southeast Asia. Third-party parts are not recommended or used.
-</p>
-            </div>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</section>
+        </section>
 
-<!-- FAQ -->
-<section id="faq" class="fullwidth-bg py-16 bg-slate-50 dark:bg-slate-900/30">
-  <div class="section-content max-w-4xl mx-auto">
-    <h2 class="text-2xl font-black tracking-tight mb-8" data-i18n="support_faq_title">
-FAQ
-</h2>
-    <div class="space-y-4">
-      <details class="bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 overflow-hidden">
-        <summary class="flex items-center justify-between p-5 cursor-pointer font-bold text-slate-900 dark:text-slate-100 hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-colors">
-          <span data-i18n="support_faq_q1">
-How to report equipment malfunction?
-</span>
-          <span class="material-symbols-outlined text-slate-400 transition-transform">expand_more</span>
-        </summary>
-        <div
-          class="px-5 py-5 text-slate-600 dark:text-slate-400 leading-relaxed"
-          data-i18n="support_faq_a1"
-        >
-You can contact our regional engineer via WhatsApp with one click, or call the service hotline. We support remote video diagnosis, and most issues can be resolved remotely within 2 hours. If on-site service is needed, we arrive within 48 hours.
-</div>
-      </details>
-      <details id="warranty" class="bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 overflow-hidden">
-        <summary class="flex items-center justify-between p-5 cursor-pointer font-bold text-slate-900 dark:text-slate-100 hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-colors">
-          <span data-i18n="support_faq_q2">
-What is the warranty period?
-</span>
-          <span class="material-symbols-outlined text-slate-400 transition-transform">expand_more</span>
-        </summary>
-        <div class="px-5 py-5 text-slate-600 dark:text-slate-400 leading-relaxed" data-i18n="support_faq_a2">
-All equipment is covered by a 1-year warranty from the date of shipment (excluding consumables). Repair costs arising from quality issues during the warranty period are borne by us.
-</div>
-      </details>
-      <details class="bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 overflow-hidden">
-        <summary class="flex items-center justify-between p-5 cursor-pointer font-bold text-slate-900 dark:text-slate-100 hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-colors">
-          <span data-i18n="support_faq_q3">
-Do you support overseas service?
-</span>
-          <span class="material-symbols-outlined text-slate-400 transition-transform">expand_more</span>
-        </summary>
-        <div class="px-5 py-5 text-slate-600 dark:text-slate-400 leading-relaxed" data-i18n="support_faq_a3">
-We have service stations in 10 Southeast Asian countries, including Thailand, Vietnam, Malaysia, Indonesia, and the Philippines, offering localized after-sales support. Other regions are covered via remote service.
-</div>
-      </details>
-      <details id="spare-parts" class="bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 overflow-hidden">
-        <summary class="flex items-center justify-between p-5 cursor-pointer font-bold text-slate-900 dark:text-slate-100 hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-colors">
-          <span data-i18n="support_faq_q4">
-What is the lead time for spare parts supply?
-</span>
-          <span class="material-symbols-outlined text-slate-400 transition-transform">expand_more</span>
-        </summary>
-        <div
-          class="px-5 py-5 text-slate-600 dark:text-slate-400 leading-relaxed"
-          data-i18n="support_faq_a4"
-        >
-Standard spare parts are dispatched from the Southeast Asia regional warehouse within 48 hours (some parts require stock reallocation). Non-standard parts can be delivered rapidly via express shipping. We recommend reviewing the manual to stock up on common wear parts in advance.
-</div>
-      </details>
-      <details class="bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 overflow-hidden">
-        <summary class="flex items-center justify-between p-5 cursor-pointer font-bold text-slate-900 dark:text-slate-100 hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-colors">
-          <span data-i18n="support_faq_q5">
-What are the qualifications of the repair engineers?
-</span>
-          <span class="material-symbols-outlined text-slate-400 transition-transform">expand_more</span>
-        </summary>
-        <div class="px-5 py-5 text-slate-600 dark:text-slate-400 leading-relaxed" data-i18n="support_faq_a5">
-All service engineers are trained and certified by YuKoLi headquarters, proficient in equipment structure and common fault troubleshooting. The Southeast Asia local team is stationed on-site to ensure rapid response.
-</div>
-      </details>
-      <details class="bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 overflow-hidden">
-        <summary class="flex items-center justify-between p-5 cursor-pointer font-bold text-slate-900 dark:text-slate-100 hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-colors">
-          <span data-i18n="support_faq_q6">
-How are repair costs calculated?
-</span>
-          <span class="material-symbols-outlined text-slate-400 transition-transform">expand_more</span>
-        </summary>
-        <div class="px-5 py-5 text-slate-600 dark:text-slate-400 leading-relaxed" data-i18n="support_faq_a6">
-Repairs are free of charge during the warranty period (including labor and parts). After the warranty period, engineers will provide a detailed quote after inspection, and repairs will only commence upon your confirmation. There are no hidden fees.
-</div>
-      </details>
-    </div>
-  </div>
-</section>
+        <!-- Contact Channels -->
+        <div id="support-contact-channels" data-page="support"></div>
 
-<!-- CTA -->
-<section class="fullwidth-bg py-16">
-  <div class="section-content max-w-4xl mx-auto">
-    <div class="w-full bg-slate-900 rounded-[3rem] p-12 text-center flex flex-col items-center gap-8 relative overflow-hidden">
-      <div class="absolute top-0 right-0 w-64 h-64 bg-primary/10 blur-[100px] rounded-full"></div>
-      <div class="absolute bottom-0 left-0 w-96 h-96 bg-primary/5 blur-[120px] rounded-full"></div>
-      <h2 class="text-2xl font-black text-white leading-tight relative" data-i18n="support_cta_title">
-Need professional commercial kitchen equipment after-sales service?
-</h2>
-      <p class="text-slate-400 max-w-xl text-base relative" data-i18n="support_join_2_500_enterprises_leveraging_yukoli">
-200+ installation cases, covering major markets in 10 Southeast Asian countries.
-</p>
-      <div class="flex flex-wrap justify-center gap-4 relative">
-        <a href="/quote/" class="bg-primary text-white px-10 py-5 rounded-2xl font-black text-base shadow-2xl shadow-primary/40 hover:scale-105 transition-transform" data-i18n="quote_schedule_demo">
-Contact Us
-</a>
-        <a
-          href="https://wa.me/8613163756465"
-          data-wa-message-key="wa_msg_support"
-          data-wa-source="bottom-cta"
-          target="_blank" rel="noopener noreferrer"
-          class="bg-white/10 text-white border border-white/20 backdrop-blur-sm px-10 py-5 rounded-2xl font-black text-base hover:bg-white/20 transition-colors"
-         data-i18n="cta_whatsapp">WhatsApp</a>
-      </div>
-    </div>
-  </div>
-</section>
+        <!-- Service System -->
+        <section id="installation" class="fullwidth-bg py-16">
+          <div class="section-content max-w-4xl mx-auto">
+            <div class="w-full flex flex-col gap-12 items-center">
+              <div class="relative w-full">
+                <div
+                  class="rounded-3xl overflow-hidden shadow-2xl relative aspect-[4/3] bg-slate-200 dark:bg-slate-800"
+                >
+                  <img
+                    loading="lazy"
+                    class="w-full h-full object-cover"
+                    alt="YuKoLi engineer servicing commercial kitchen equipment in a professional kitchen"
+                    src="/assets/images/support-service-engineer.webp"
+                    width="800"
+                    height="600"
+                    onerror="this.style.display = 'none'"
+                  />
+                  <div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
+                  <div class="absolute bottom-6 left-6 right-6">
+                    <div class="bg-white/90 dark:bg-slate-900/90 backdrop-blur p-4 rounded-xl">
+                      <p
+                        class="font-bold text-sm text-slate-900 dark:text-white flex items-center gap-2"
+                        data-i18n="support_engineering_yukoli_in_house_engineers_ge"
+                      >
+                        <span class="material-symbols-outlined text-primary text-lg">engineering</span>
+                        YuKoLi In-house Engineers · Genuine Parts · On-site Repair
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="flex flex-col gap-6">
+                <h2 class="text-2xl font-black" data-i18n="support_service_system_title">
+                  Professional After-sales Service System
+                </h2>
+                <p class="text-slate-600 dark:text-slate-400 leading-relaxed" data-i18n="support_service_system_desc">
+                  Provides online technical support and complete maintenance manuals, with 24/7 remote guidance. Most
+                  issues can be resolved online; engineers will visit for serious faults (excluding custom parts).
+                </p>
+                <ul class="flex flex-col gap-4">
+                  <li class="flex items-start gap-3" data-i18n="support_sync_smart_equipment_simple_operation_e">
+                    <span class="material-symbols-outlined text-primary">cloud_sync</span>
+                    <div>
+                      <h4 class="font-bold" data-i18n="support_installation_guide">
+                        Smart Equipment, Simple Operation
+                      </h4>
+                      <p class="text-base text-slate-500" data-i18n="support_installation_guide_desc">
+                        Equipment features a simple structure with clear installation and debugging steps. Detailed
+                        installation manuals and video tutorials are included, with remote technical team guidance
+                        throughout, enabling installation without an engineer on-site.
+                      </p>
+                    </div>
+                  </li>
+                  <li
+                    id="training"
+                    class="flex items-start gap-3"
+                    data-i18n="support_biotech_online_guidance_quick_start_comp"
+                  >
+                    <span class="material-symbols-outlined text-primary">biotech</span>
+                    <div>
+                      <h4 class="font-bold" data-i18n="support_operation_training">Online Guidance, Quick Start</h4>
+                      <p class="text-base text-slate-500" data-i18n="support_operation_training_desc">
+                        Complete operation manuals and video tutorials are provided; equipment operation is simple and
+                        intuitive. 24/7 online technical support is available, with remote guidance anytime issues arise
+                        for quick resolution.
+                      </p>
+                    </div>
+                  </li>
+                  <li class="flex items-start gap-3" data-i18n="support_hub_online_troubleshooting_rapid_respons">
+                    <span class="material-symbols-outlined text-primary">hub</span>
+                    <div>
+                      <h4 class="font-bold" data-i18n="support_troubleshooting">
+                        Online Troubleshooting, Rapid Response
+                      </h4>
+                      <p class="text-base text-slate-500" data-i18n="support_troubleshooting_desc">
+                        Contact us online for a quick response and remote diagnosis to locate issues. 80% of common
+                        faults can be resolved through online guidance. For serious faults, engineers will visit within
+                        48 hours for inspection (excluding custom parts).
+                      </p>
+                    </div>
+                  </li>
+                  <li class="flex items-start gap-3" data-i18n="support_parts_supply_all_replacement_parts_are_1">
+                    <span class="material-symbols-outlined text-primary">inventory_2</span>
+                    <div>
+                      <h4 class="font-bold" data-i18n="support_service_parts_title">Parts Supply</h4>
+                      <p class="text-base text-slate-500" data-i18n="support_spare_parts_desc">
+                        All replacement parts are 100% original factory output, identical to when the equipment left the
+                        factory. Standard parts ship within 48 hours, with local spare parts warehouses in Southeast
+                        Asia. Third-party parts are not recommended or used.
+                      </p>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </section>
 
-</main>
+        <!-- FAQ -->
+        <section id="faq" class="fullwidth-bg py-16 bg-slate-50 dark:bg-slate-900/30">
+          <div class="section-content max-w-4xl mx-auto">
+            <h2 class="text-2xl font-black tracking-tight mb-8" data-i18n="support_faq_title">FAQ</h2>
+            <div class="space-y-4">
+              <details
+                class="bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 overflow-hidden"
+              >
+                <summary
+                  class="flex items-center justify-between p-5 cursor-pointer font-bold text-slate-900 dark:text-slate-100 hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-colors"
+                >
+                  <span data-i18n="support_faq_q1">How to report equipment malfunction?</span>
+                  <span class="material-symbols-outlined text-slate-400 transition-transform">expand_more</span>
+                </summary>
+                <div class="px-5 py-5 text-slate-600 dark:text-slate-400 leading-relaxed" data-i18n="support_faq_a1">
+                  You can contact our regional engineer via WhatsApp with one click, or call the service hotline. We
+                  support remote video diagnosis, and most issues can be resolved remotely within 2 hours. If on-site
+                  service is needed, we arrive within 48 hours.
+                </div>
+              </details>
+              <details
+                id="warranty"
+                class="bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 overflow-hidden"
+              >
+                <summary
+                  class="flex items-center justify-between p-5 cursor-pointer font-bold text-slate-900 dark:text-slate-100 hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-colors"
+                >
+                  <span data-i18n="support_faq_q2">What is the warranty period?</span>
+                  <span class="material-symbols-outlined text-slate-400 transition-transform">expand_more</span>
+                </summary>
+                <div class="px-5 py-5 text-slate-600 dark:text-slate-400 leading-relaxed" data-i18n="support_faq_a2">
+                  All equipment is covered by a 1-year warranty from the date of shipment (excluding consumables).
+                  Repair costs arising from quality issues during the warranty period are borne by us.
+                </div>
+              </details>
+              <details
+                class="bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 overflow-hidden"
+              >
+                <summary
+                  class="flex items-center justify-between p-5 cursor-pointer font-bold text-slate-900 dark:text-slate-100 hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-colors"
+                >
+                  <span data-i18n="support_faq_q3">Do you support overseas service?</span>
+                  <span class="material-symbols-outlined text-slate-400 transition-transform">expand_more</span>
+                </summary>
+                <div class="px-5 py-5 text-slate-600 dark:text-slate-400 leading-relaxed" data-i18n="support_faq_a3">
+                  We have service stations in 10 Southeast Asian countries, including Thailand, Vietnam, Malaysia,
+                  Indonesia, and the Philippines, offering localized after-sales support. Other regions are covered via
+                  remote service.
+                </div>
+              </details>
+              <details
+                id="spare-parts"
+                class="bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 overflow-hidden"
+              >
+                <summary
+                  class="flex items-center justify-between p-5 cursor-pointer font-bold text-slate-900 dark:text-slate-100 hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-colors"
+                >
+                  <span data-i18n="support_faq_q4">What is the lead time for spare parts supply?</span>
+                  <span class="material-symbols-outlined text-slate-400 transition-transform">expand_more</span>
+                </summary>
+                <div class="px-5 py-5 text-slate-600 dark:text-slate-400 leading-relaxed" data-i18n="support_faq_a4">
+                  Standard spare parts are dispatched from the Southeast Asia regional warehouse within 48 hours (some
+                  parts require stock reallocation). Non-standard parts can be delivered rapidly via express shipping.
+                  We recommend reviewing the manual to stock up on common wear parts in advance.
+                </div>
+              </details>
+              <details
+                class="bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 overflow-hidden"
+              >
+                <summary
+                  class="flex items-center justify-between p-5 cursor-pointer font-bold text-slate-900 dark:text-slate-100 hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-colors"
+                >
+                  <span data-i18n="support_faq_q5">What are the qualifications of the repair engineers?</span>
+                  <span class="material-symbols-outlined text-slate-400 transition-transform">expand_more</span>
+                </summary>
+                <div class="px-5 py-5 text-slate-600 dark:text-slate-400 leading-relaxed" data-i18n="support_faq_a5">
+                  All service engineers are trained and certified by YuKoLi headquarters, proficient in equipment
+                  structure and common fault troubleshooting. The Southeast Asia local team is stationed on-site to
+                  ensure rapid response.
+                </div>
+              </details>
+              <details
+                class="bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 overflow-hidden"
+              >
+                <summary
+                  class="flex items-center justify-between p-5 cursor-pointer font-bold text-slate-900 dark:text-slate-100 hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-colors"
+                >
+                  <span data-i18n="support_faq_q6">How are repair costs calculated?</span>
+                  <span class="material-symbols-outlined text-slate-400 transition-transform">expand_more</span>
+                </summary>
+                <div class="px-5 py-5 text-slate-600 dark:text-slate-400 leading-relaxed" data-i18n="support_faq_a6">
+                  Repairs are free of charge during the warranty period (including labor and parts). After the warranty
+                  period, engineers will provide a detailed quote after inspection, and repairs will only commence upon
+                  your confirmation. There are no hidden fees.
+                </div>
+              </details>
+            </div>
+          </div>
+        </section>
 
-<script src="/assets/js/ui/dropdown-styles.js"></script>
-    <script src="/assets/js/ui/dropdown-base.js"></script>
-<script defer src="/assets/js/ui/products-dropdown.js?v=202605121141"></script>
-<script defer src="/assets/js/ui/applications-dropdown.js?v=202605121141"></script>
-<script defer src="/assets/js/ui/support-dropdown.js?v=202605121141"></script>
-<script defer src="/assets/js/ui/about-dropdown.js?v=202605121141"></script>
-<script defer src="/assets/js/ui/navigator.js?v=202605121141"></script>
-<script defer src="/assets/js/ui/slide-menu.js?v=202605121141"></script>
-<script defer src="/assets/js/ui/search-engine.js"></script>
-<script defer src="/assets/js/ui/footer.js?v=202605121141"></script>
-<script defer src="/assets/js/lang-registry.js"></script>
-<script defer src="/assets/js/translations.js"></script>
-<script defer src="/assets/js/translations-dropdown-template.js"></script>
-<script defer src="/assets/js/contacts.js"></script>
-<!--
+        <!-- CTA -->
+        <section class="fullwidth-bg py-16">
+          <div class="section-content max-w-4xl mx-auto">
+            <div
+              class="w-full bg-slate-900 rounded-[3rem] p-12 text-center flex flex-col items-center gap-8 relative overflow-hidden"
+            >
+              <div class="absolute top-0 right-0 w-64 h-64 bg-primary/10 blur-[100px] rounded-full"></div>
+              <div class="absolute bottom-0 left-0 w-96 h-96 bg-primary/5 blur-[120px] rounded-full"></div>
+              <h2 class="text-2xl font-black text-white leading-tight relative" data-i18n="support_cta_title">
+                Need professional commercial kitchen equipment after-sales service?
+              </h2>
+              <p
+                class="text-slate-400 max-w-xl text-base relative"
+                data-i18n="support_join_2_500_enterprises_leveraging_yukoli"
+              >
+                200+ installation cases, covering major markets in 10 Southeast Asian countries.
+              </p>
+              <div class="flex flex-wrap justify-center gap-4 relative">
+                <a
+                  href="/quote/"
+                  class="bg-primary text-white px-10 py-5 rounded-2xl font-black text-base shadow-2xl shadow-primary/40 hover:scale-105 transition-transform"
+                  data-i18n="quote_schedule_demo"
+                >
+                  Contact Us
+                </a>
+                <a
+                  href="https://wa.me/8613163756465"
+                  data-wa-message-key="wa_msg_support"
+                  data-wa-source="bottom-cta"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="bg-white/10 text-white border border-white/20 backdrop-blur-sm px-10 py-5 rounded-2xl font-black text-base hover:bg-white/20 transition-colors"
+                  data-i18n="cta_whatsapp"
+                >
+                  WhatsApp
+                </a>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <script src="/assets/js/ui/dropdown-styles.js"></script>
+      <script src="/assets/js/ui/dropdown-base.js"></script>
+      <script defer src="/assets/js/ui/products-dropdown.js?v=202605121200"></script>
+      <script defer src="/assets/js/ui/applications-dropdown.js?v=202605121200"></script>
+      <script defer src="/assets/js/ui/support-dropdown.js?v=202605121200"></script>
+      <script defer src="/assets/js/ui/about-dropdown.js?v=202605121200"></script>
+      <script defer src="/assets/js/ui/navigator.js?v=202605121200"></script>
+      <script defer src="/assets/js/ui/slide-menu.js?v=202605121200"></script>
+      <script defer src="/assets/js/ui/search-engine.js"></script>
+      <script defer src="/assets/js/ui/footer.js?v=202605121200"></script>
+      <script defer src="/assets/js/lang-registry.js"></script>
+      <script defer src="/assets/js/translations.js"></script>
+      <script defer src="/assets/js/translations-dropdown-template.js"></script>
+      <script defer src="/assets/js/contacts.js"></script>
+      <!--
   ═══ Google Maps JavaScript API — §1.2 服务中心地图 ═══
   TODO: 将下方 YOUR_GOOGLE_MAPS_API_KEY 替换为真实的 Google Maps API Key
   申请地址: https:/console.cloud.google.com/google/maps-apis/
@@ -445,14 +576,15 @@ Contact Us
     async defer>
   </script>
 -->
-<script defer src="/assets/js/router.js"></script>
-<script defer src="/assets/js/ui/page-effects.js"></script>
-<script defer src="/assets/js/ui/form-interactions.js"></script>
-<script defer src="/assets/js/page-interactions.js"></script><script src="/assets/js/utils/device-utils.js"></script>
-<script src="/assets/js/spa-router.js?v=202605121141"></script>
+      <script defer src="/assets/js/router.js"></script>
+      <script defer src="/assets/js/ui/page-effects.js"></script>
+      <script defer src="/assets/js/ui/form-interactions.js"></script>
+      <script defer src="/assets/js/page-interactions.js"></script>
+      <script src="/assets/js/utils/device-utils.js"></script>
+      <script src="/assets/js/spa-router.js?v=202605121200"></script>
 
-
-<script defer src="/assets/js/support-wechat-modal.js"></script>
-<script defer src="/assets/js/ui/floating-actions.js"></script>
-</div>
-</body></html>
+      <script defer src="/assets/js/support-wechat-modal.js"></script>
+      <script defer src="/assets/js/ui/floating-actions.js"></script>
+    </div>
+  </body>
+</html>

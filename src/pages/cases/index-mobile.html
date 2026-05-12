@@ -3,12 +3,16 @@
   <head>
     <!-- ═══ Responsive Redirect ═══ -->
     <link rel="canonical" href="https://www.kitchen.yukoli.com/cases/" />
-  <link rel="alternate" hreflang="zh-CN" href="https://www.kitchen.yukoli.com/cases/" />
-  <!-- TODO: Update href to English URL when English version is available -->
-  <link rel="alternate" hreflang="en" href="https://www.kitchen.yukoli.com/cases/" />
-  <link rel="alternate" hreflang="x-default" href="https://www.kitchen.yukoli.com/cases/" />
+    <link rel="alternate" hreflang="zh-CN" href="https://www.kitchen.yukoli.com/cases/" />
+    <!-- TODO: Update href to English URL when English version is available -->
+    <link rel="alternate" hreflang="en" href="https://www.kitchen.yukoli.com/cases/" />
+    <link rel="alternate" hreflang="x-default" href="https://www.kitchen.yukoli.com/cases/" />
     <link rel="alternate" media="only screen and (max-width: 767px)" href="/cases/index-mobile.html" />
-    <link rel="alternate" media="only screen and (min-width: 768px) and (max-width: 1279px)" href="/cases/index-tablet.html" />
+    <link
+      rel="alternate"
+      media="only screen and (min-width: 768px) and (max-width: 1279px)"
+      href="/cases/index-tablet.html"
+    />
     <link rel="alternate" media="only screen and (min-width: 1280px)" href="/cases/index-pc.html" />
     <script>
       (function () {
@@ -16,13 +20,21 @@
         window.__redirectChecked = true;
         var urlParams = new URLSearchParams(location.search);
         var cleanUrl = urlParams.get("clean-url");
-        if (cleanUrl) { history.replaceState({}, "", cleanUrl); return; }
+        if (cleanUrl) {
+          history.replaceState({}, "", cleanUrl);
+          return;
+        }
         if (window.__spaNavigating) return;
         var currentFile = location.pathname.split("/").pop();
         if (window.DeviceUtils && window.DeviceUtils.isDirectoryURL()) return;
         if (window.DeviceUtils && window.DeviceUtils.shouldRedirect(currentFile)) {
           var deviceType = window.DeviceUtils.getDeviceType();
-          var targetFile = deviceType === window.DeviceUtils.DeviceType.MOBILE ? "index-mobile.html" : deviceType === window.DeviceUtils.DeviceType.TABLET ? "index-tablet.html" : "index-pc.html";
+          var targetFile =
+            deviceType === window.DeviceUtils.DeviceType.MOBILE
+              ? "index-mobile.html"
+              : deviceType === window.DeviceUtils.DeviceType.TABLET
+                ? "index-tablet.html"
+                : "index-pc.html";
           location.href = targetFile;
         }
       })();
@@ -30,11 +42,20 @@
     <!-- ═══ End Responsive Redirect ═══ -->
 
     <meta charset="utf-8" />
-    <meta name="description" content="YuKoLi commercial kitchen automation case studies — real deployments across Southeast Asia covering small F&B outlets, central kitchens, restaurant chains, smart canteens, and cloud kitchens." />
-    <meta name="keywords" content="commercial kitchen case studies,kitchen automation case studies,smart kitchen case studies,YuKoLi case studies,kitchen ROI" />
+    <meta
+      name="description"
+      content="YuKoLi commercial kitchen automation case studies — real deployments across Southeast Asia covering small F&B outlets, central kitchens, restaurant chains, smart canteens, and cloud kitchens."
+    />
+    <meta
+      name="keywords"
+      content="commercial kitchen case studies,kitchen automation case studies,smart kitchen case studies,YuKoLi case studies,kitchen ROI"
+    />
     <meta property="og:type" content="website" />
     <meta property="og:title" content="YuKoLi | Commercial Kitchen Automation Case Studies" />
-    <meta property="og:description" content="Real commercial kitchen automation case studies across Southeast Asia. View verified ROI data." />
+    <meta
+      property="og:description"
+      content="Real commercial kitchen automation case studies across Southeast Asia. View verified ROI data."
+    />
     <meta property="og:url" content="https://www.kitchen.yukoli.com/cases/" />
     <meta property="og:image" content="https://www.kitchen.yukoli.com/assets/images/logo_header.webp" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
@@ -42,8 +63,20 @@
     <link rel="preload" href="/assets/fonts/local-fonts.css" as="style" />
     <link rel="preload" href="/assets/css/styles.css" as="style" />
     <link rel="preload" href="/assets/css/tailwind.css" as="style" />
-    <link rel="preload" href="/assets/fonts/public-sans-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin />
-    <link rel="preload" href="/assets/fonts/public-sans-latin-700-normal.woff2" as="font" type="font/woff2" crossorigin />
+    <link
+      rel="preload"
+      href="/assets/fonts/public-sans-latin-400-normal.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href="/assets/fonts/public-sans-latin-700-normal.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
     <link href="/assets/fonts/local-fonts.css" rel="stylesheet" />
     <link rel="stylesheet" href="/assets/css/styles.css" />
     <link rel="stylesheet" href="/assets/css/tailwind.css" />
@@ -57,33 +90,57 @@
     <link rel="stylesheet" href="/assets/css/skeleton.css" />
     <link rel="icon" href="/assets/images/logo_header.webp" type="image/webp" />
   </head>
-  <body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 antialiased transition-colors duration-300 overflow-x-clip" data-case-variant="mobile">
+  <body
+    class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 antialiased transition-colors duration-300 overflow-x-clip"
+    data-case-variant="mobile"
+  >
     <!-- Top Navigation Bar -->
-    <navigator data-component="navigator" data-variant="mobile" data-active="cases" data-cta-text-key="nav_get_quote" data-cta-href="/quote"></navigator>
+    <navigator
+      data-component="navigator"
+      data-variant="mobile"
+      data-active="cases"
+      data-cta-text-key="nav_get_quote"
+      data-cta-href="/quote"
+    ></navigator>
 
     <main id="spa-content">
       <!-- Hero Section -->
-      <section class="fullwidth-bg hero-overlap relative py-8 overflow-hidden bg-gradient-to-br from-primary/5 via-transparent to-orange-100/30 dark:from-primary/10 dark:to-orange-900/20">
+      <section
+        class="fullwidth-bg hero-overlap relative py-8 overflow-hidden bg-gradient-to-br from-primary/5 via-transparent to-orange-100/30 dark:from-primary/10 dark:to-orange-900/20"
+      >
         <div class="section-content">
           <div class="max-w-lg mx-auto text-center">
-          <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-primary/10 text-primary text-xs font-bold uppercase tracking-wider w-fit mx-auto mb-3">
-          <span class="material-symbols-outlined text-sm">verified</span>
-          <span data-i18n="cases_hero_badge">Case Studies</span>
-          </div>
-          <h1 class="text-2xl font-black leading-tight tracking-tight mb-3" data-i18n="cases_hero_title">
-          Real Results from<span class="text-primary"> Real Kitchens</span>
-          </h1>
-          <p class="text-base text-slate-600 dark:text-slate-400 leading-relaxed mb-5" data-i18n="cases_hero_subtitle">Commercial kitchen automation case studies across 7 Southeast Asian countries</p>
-          <a href="/profit-calculator/" class="inline-flex items-center gap-2 bg-primary text-white px-5 py-3 rounded-xl font-bold text-sm hover:shadow-lg hover:shadow-primary/20 transition-all" data-i18n="cta_calculate_roi">
-          <span class="material-symbols-outlined text-lg">calculate</span>
-          <span data-i18n="cases_hero_cta">Calculate Your ROI</span>
-          </a>
+            <div
+              class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-primary/10 text-primary text-xs font-bold uppercase tracking-wider w-fit mx-auto mb-3"
+            >
+              <span class="material-symbols-outlined text-sm">verified</span>
+              <span data-i18n="cases_hero_badge">Case Studies</span>
+            </div>
+            <h1 class="text-2xl font-black leading-tight tracking-tight mb-3" data-i18n="cases_hero_title">
+              Real Results from
+              <span class="text-primary">Real Kitchens</span>
+            </h1>
+            <p
+              class="text-base text-slate-600 dark:text-slate-400 leading-relaxed mb-5"
+              data-i18n="cases_hero_subtitle"
+            >
+              Commercial kitchen automation case studies across 7 Southeast Asian countries
+            </p>
+            <a
+              href="/profit-calculator/"
+              class="inline-flex items-center gap-2 bg-primary text-white px-5 py-3 rounded-xl font-bold text-sm hover:shadow-lg hover:shadow-primary/20 transition-all"
+            >
+              <span class="material-symbols-outlined text-lg">calculate</span>
+              <span data-i18n="cases_hero_cta">Calculate Your ROI</span>
+            </a>
           </div>
         </div>
       </section>
 
       <!-- Sticky Filter Bar (single-row dropdowns) -->
-      <div class="sticky top-0 z-30 bg-white/90 dark:bg-slate-900/90 backdrop-blur-md border-b border-slate-200 dark:border-slate-700">
+      <div
+        class="sticky top-0 z-30 bg-white/90 dark:bg-slate-900/90 backdrop-blur-md border-b border-slate-200 dark:border-slate-700"
+      >
         <div class="max-w-lg mx-auto px-3 py-2.5">
           <div id="case-filters"></div>
         </div>
@@ -91,27 +148,26 @@
 
       <!-- Case Grid -->
       <section class="fullwidth-bg py-6">
-
         <div class="section-content">
           <h2 class="text-lg font-bold mb-4" data-i18n="cases_grid_title">All Case Studies</h2>
           <div id="case-grid" class="grid grid-cols-1 gap-4">
             <!-- Cards rendered by case-grid.js -->
           </div>
-      
-
-        </div></section>
+        </div>
+      </section>
 
       <!-- Footer CTA -->
       <section class="fullwidth-bg py-10 bg-primary">
         <div class="section-content">
           <div class="max-w-lg mx-auto text-center">
-            <h2 class="text-xl font-black text-white mb-3" data-i18n="cases_footer_cta_title">
-              Still not sure?
-            </h2>
+            <h2 class="text-xl font-black text-white mb-3" data-i18n="cases_footer_cta_title">Still not sure?</h2>
             <p class="text-base text-white/80 mb-5" data-i18n="cases_footer_cta_desc">
               Calculate your own ROI in 45 seconds
             </p>
-            <a href="/profit-calculator/" class="inline-flex items-center gap-2 bg-white text-primary px-5 py-3 rounded-xl font-bold text-sm hover:shadow-lg transition-all" data-i18n="cta_calculate_roi">
+            <a
+              href="/profit-calculator/"
+              class="inline-flex items-center gap-2 bg-white text-primary px-5 py-3 rounded-xl font-bold text-sm hover:shadow-lg transition-all"
+            >
               <span class="material-symbols-outlined">calculate</span>
               <span data-i18n="cases_footer_cta_button">Calculate Your ROI</span>
             </a>
@@ -125,20 +181,21 @@
 
     <!-- Scripts -->
     <script defer src="/assets/js/router.js"></script>
-<script defer src="/assets/js/spa-router.js?v=202605121141"></script>
-    <script src="/assets/js/translations.js?v=202605121141"></script><script src="/assets/js/ui/slide-menu.js"></script>
+    <script defer src="/assets/js/spa-router.js?v=202605121200"></script>
+    <script src="/assets/js/translations.js?v=202605121200"></script>
+    <script src="/assets/js/ui/slide-menu.js"></script>
     <script src="/assets/js/ui/dropdown-styles.js"></script>
     <script src="/assets/js/ui/dropdown-base.js"></script>
     <script src="/assets/js/ui/products-dropdown.js"></script>
     <script src="/assets/js/ui/support-dropdown.js"></script>
     <script src="/assets/js/ui/about-dropdown.js"></script>
-    <script src="/assets/js/ui/navigator.js?v=202605121141"></script>
-    <script src="/assets/js/ui/footer.js?v=202605121141"></script>
+    <script src="/assets/js/ui/navigator.js?v=202605121200"></script>
+    <script src="/assets/js/ui/footer.js?v=202605121200"></script>
     <script defer src="/assets/js/ui/floating-actions.js"></script>
     <script src="/assets/js/case-grid.js"></script>
     <script>
-      document.addEventListener('DOMContentLoaded', function () {
-        if (window.CaseGrid) CaseGrid.init('mobile');
+      document.addEventListener("DOMContentLoaded", function () {
+        if (window.CaseGrid) CaseGrid.init("mobile");
       });
     </script>
   </body>

@@ -4,10 +4,10 @@
   <head>
     <!-- ═══ Responsive Redirect (injected by patch-responsive-redirect.py) ═══ -->
     <link rel="canonical" href="https://www.kitchen.yukoli.com/quote/" />
-  <link rel="alternate" hreflang="zh-CN" href="https://www.kitchen.yukoli.com/quote/" />
-  <!-- TODO: Update href to English URL when English version is available -->
-  <link rel="alternate" hreflang="en" href="https://www.kitchen.yukoli.com/quote/" />
-  <link rel="alternate" hreflang="x-default" href="https://www.kitchen.yukoli.com/quote/" />
+    <link rel="alternate" hreflang="zh-CN" href="https://www.kitchen.yukoli.com/quote/" />
+    <!-- TODO: Update href to English URL when English version is available -->
+    <link rel="alternate" hreflang="en" href="https://www.kitchen.yukoli.com/quote/" />
+    <link rel="alternate" hreflang="x-default" href="https://www.kitchen.yukoli.com/quote/" />
     <link rel="alternate" media="only screen and (max-width: 767px)" href="/quote/index-mobile.html" />
     <link
       rel="alternate"
@@ -23,19 +23,16 @@
         var urlParams = new URLSearchParams(location.search);
         var cleanUrl = urlParams.get("clean-url");
         if (cleanUrl) {
-
           history.replaceState({}, "", cleanUrl);
           return;
         }
 
         if (window.__spaNavigating) {
-
           return;
         }
         var currentFile = location.pathname.split("/").pop();
 
         if (window.DeviceUtils && window.DeviceUtils.isDirectoryURL()) {
-  
           return;
         }
         if (window.DeviceUtils && window.DeviceUtils.shouldRedirect(currentFile)) {
@@ -52,7 +49,6 @@
           location.href = targetFile;
           return;
         }
-
       })();
     </script>
     <!-- ═══ End Responsive Redirect ═══ -->
@@ -71,7 +67,10 @@
     <meta property="og:url" content="https://www.kitchen.yukoli.com/quote/" />
     <meta property="og:image" content="https://www.kitchen.yukoli.com/assets/images/logo_header.webp" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-    <meta name="description" content="Get a free quote for YuKoLi commercial smart kitchen equipment. Fill in your requirements and receive professional equipment recommendations within 24 hours." />
+    <meta
+      name="description"
+      content="Get a free quote for YuKoLi commercial smart kitchen equipment. Fill in your requirements and receive professional equipment recommendations within 24 hours."
+    />
     <title>YuKoLi Smart Kitchen | Get a Quote</title>
     <link rel="preload" href="/assets/fonts/local-fonts.css" as="style" />
     <link rel="preload" href="/assets/css/styles.css" as="style" />
@@ -103,7 +102,13 @@
     <link rel="stylesheet" href="/assets/css/skeleton.css" />
     <link rel="icon" href="/assets/images/logo_header.webp" type="image/webp" />
     <script type="application/ld+json">
-    {"@context":"https://schema.org","@type":"WebPage","name":"YuKoLi Smart Kitchen | Get a Quote","description":"Get a free quote for YuKoLi commercial smart kitchen equipment. Custom solutions within 24 hours.","url":"https://www.kitchen.yukoli.com/quote/"}
+      {
+        "@context": "https://schema.org",
+        "@type": "WebPage",
+        "name": "YuKoLi Smart Kitchen | Get a Quote",
+        "description": "Get a free quote for YuKoLi commercial smart kitchen equipment. Custom solutions within 24 hours.",
+        "url": "https://www.kitchen.yukoli.com/quote/"
+      }
     </script>
   </head>
   <body
@@ -122,331 +127,420 @@
         <!-- Hero Section -->
         <section class="fullwidth-bg py-8">
           <div class="section-content">
-        <div class="mb-10 text-center md:text-left">
-          <h1
-            class="text-slate-900 dark:text-slate-50 text-4xl md:text-5xl font-black leading-tight tracking-[-0.033em] mb-4"
-            data-i18n="quote_get_quote"
-          >
-            Get a Quote
-          </h1>
-          <p class="text-slate-600 dark:text-slate-400 text-lg max-w-2xl mb-5" data-i18n="quote_hero_desc">
-            Tell us about your commercial kitchen needs. We'll provide a customized smart equipment solution and quote within 24 hours.
-          </p>
-        </div>
+            <div class="mb-10 text-center md:text-left">
+              <h1
+                class="text-slate-900 dark:text-slate-50 text-4xl md:text-5xl font-black leading-tight tracking-[-0.033em] mb-4"
+                data-i18n="quote_get_quote"
+              >
+                Get a Quote
+              </h1>
+              <p class="text-slate-600 dark:text-slate-400 text-lg max-w-2xl mb-5" data-i18n="quote_hero_desc">
+                Tell us about your commercial kitchen needs. We'll provide a customized smart equipment solution and
+                quote within 24 hours.
+              </p>
+            </div>
           </div>
         </section>
 
         <section class="fullwidth-bg py-10">
           <div class="section-content">
-        <div class="grid grid-cols-1 gap-8">
-          <!-- Main Form Area -->
-          <div
-            class="bg-white dark:bg-slate-900/50 border border-slate-200 dark:border-slate-800 rounded-xl p-6 md:p-10 shadow-sm"
-          >
-            <form id="quote-form" class="space-y-6" novalidate>
-              <!-- Company Info -->
-              <h2 class="text-lg font-bold mb-4 flex items-center gap-2" data-i18n="quote_business_company_information">
-                <span class="material-symbols-outlined text-primary">business</span>
-                <span data-i18n="quote_company_info">Company Information</span>
-              </h2>
-              <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <label class="flex flex-col gap-2" data-i18n="quote_company_name">
-                  <span class="text-slate-700 dark:text-slate-200 text-sm font-semibold" data-i18n="quote_company_name">
-                    Company Name <span class="text-red-500">*</span>
-                  </span>
-                  <input
-                    id="q-company"
-                    class="h-14 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white focus:border-primary focus:ring-primary text-base px-4"
-                    placeholder="Enter company name"
-                    type="text"
-                    required
-                  />
-                </label>
-                <label class="flex flex-col gap-2" data-i18n="quote_contact_person">
-                  <span class="text-slate-700 dark:text-slate-200 text-sm font-semibold" data-i18n="quote_contact_person">
-                    Contact Person <span class="text-red-500">*</span>
-                  </span>
-                  <input
-                    id="q-contact"
-                    class="h-14 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white focus:border-primary focus:ring-primary text-base px-4"
-                    placeholder="Enter contact name"
-                    type="text"
-                    required
-                  />
-                </label>
-              </div>
-              <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <label class="flex flex-col gap-2">
-                  <span class="text-slate-700 dark:text-slate-200 text-sm font-semibold" data-i18n="quote_phone">
-                    Phone Number <span class="text-red-500">*</span>
-                  </span>
-                  <input
-                    id="q-phone"
-                    class="h-14 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white focus:border-primary focus:ring-primary text-base px-4"
-                    placeholder="Enter phone with country code"
-                    type="tel"
-                    required
-                  />
-                </label>
-                <label class="flex flex-col gap-2">
-                  <span class="text-slate-700 dark:text-slate-200 text-sm font-semibold" data-i18n="quote_email_address">
-                    Email Address <span class="text-red-500">*</span>
-                  </span>
-                  <input
-                    id="q-email"
-                    class="h-14 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white focus:border-primary focus:ring-primary text-base px-4"
-                    placeholder="Enter work email"
-                    type="email"
-                    required
-                  />
-                </label>
-              </div>
-              <div>
-                <label class="flex flex-col gap-2" data-i18n="quote_country_region_select_country_thailand_v">
-                  <span class="text-slate-700 dark:text-slate-200 text-sm font-semibold" data-i18n="quote_country_region">
-                    Country / Region <span class="text-red-500">*</span>
-                  </span>
-                  <select data-custom-select
-                    id="q-country"
-                    class="h-14 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white focus:border-primary focus:ring-primary text-base px-4 appearance-none"
-                    required
-                  >
-                    <option value="" data-i18n="quote_select_country">Select Country</option>
-                    <option value="TH">🇹🇭 Thailand</option>
-                    <option value="VN">🇻🇳 Vietnam</option>
-                    <option value="MY">🇲🇾 Malaysia</option>
-                    <option value="ID">🇮🇩 Indonesia</option>
-                    <option value="PH">🇵🇭 Philippines</option>
-                    <option value="SG">🇸🇬 Singapore</option>
-                    <option value="MM">🇲🇲 Myanmar</option>
-                    <option value="KH">🇰🇭 Cambodia</option>
-                    <option value="LA">🇱🇦 Laos</option>
-                    <option value="CN">🇨🇳 China</option>
-                    <option value="other" data-i18n="quote_other_countries">Other Countries</option>
-                  </select>
-                </label>
-              </div>
-              <!-- Equipment Needs -->
-              <h2 class="text-lg font-bold mb-4 flex items-center gap-2" data-i18n="quote_precision_manufacturing_equipment_needs">
-                <span class="material-symbols-outlined text-primary">precision_manufacturing</span>
-                <span data-i18n="quote_equipment_needs">Equipment Needs</span>
-              </h2>
-              <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <label class="flex flex-col gap-2" data-i18n="quote_equipment_type_select_equipment_type_aut">
-                  <span class="text-slate-700 dark:text-slate-200 text-sm font-semibold" data-i18n="quote_equipment_type">
-                    Equipment Type <span class="text-red-500">*</span>
-                  </span>
-                  <select data-custom-select
-                    id="q-equipment-type"
-                    class="h-14 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white focus:border-primary focus:ring-primary text-base px-4 appearance-none"
-                    required
-                  >
-                    <option value="" data-i18n="quote_select_equipment_type">Select Equipment Type</option>
-                    <option value="auto-wok" data-i18n="quote_type_auto_wok">Automatic Wok Machine</option>
-                    <option value="semi-auto-wok" data-i18n="quote_type_semi_auto_wok">Semi-Automatic Wok</option>
-                    <option value="combi-oven" data-i18n="quote_type_combi_oven">Combi Oven</option>
-                    <option value="soup-machine" data-i18n="quote_type_soup_machine">Soup Kettle</option>
-                    <option value="rice-machine" data-i18n="quote_type_rice_machine">Commercial Rice Cooker</option>
-                    <option value="full-set" data-i18n="quote_type_full_set">Full Equipment Set</option>
-                    <option value="other" data-i18n="quote_other">Other</option>
-                  </select>
-                </label>
-                <label class="flex flex-col gap-2" data-i18n="quote_quantity">
-                  <span class="text-slate-700 dark:text-slate-200 text-sm font-semibold" data-i18n="quote_quantity">Quantity</span>
-                  <input
-                    id="q-quantity"
-                    class="h-14 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white focus:border-primary focus:ring-primary text-base px-4"
-                    placeholder="Enter quantity needed"
-                    type="number"
-                    min="1"
-                  />
-                </label>
-              </div>
-              <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <label class="flex flex-col gap-2" data-i18n="quote_kitchen_capacity_select_kitchen_capacity">
-                  <span class="text-slate-700 dark:text-slate-200 text-sm font-semibold" data-i18n="quote_kitchen_capacity">Kitchen Capacity</span>
-                  <select data-custom-select
-                    id="q-capacity"
-                    class="h-14 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white focus:border-primary focus:ring-primary text-base px-4 appearance-none"
-                  >
-                    <option value="" data-i18n="quote_select_capacity">Select Kitchen Capacity</option>
-                    <option value="small" data-i18n="quote_capacity_small">Small (1–3 units)</option>
-                    <option value="medium" data-i18n="quote_capacity_medium">Medium (4–10 units)</option>
-                    <option value="large" data-i18n="quote_capacity_large">Large (10+ units)</option>
-                    <option value="enterprise" data-i18n="quote_capacity_enterprise">Enterprise (Full Kitchen Project)</option>
-                  </select>
-                </label>
-                <label class="flex flex-col gap-2" data-i18n="quote_budget_range_select_budget_range_budget">
-                  <span class="text-slate-700 dark:text-slate-200 text-sm font-semibold" data-i18n="quote_budget_range">Budget Range</span>
-                  <select data-custom-select
-                    id="q-budget"
-                    class="h-14 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white focus:border-primary focus:ring-primary text-base px-4 appearance-none"
-                  >
-                    <option value="" data-i18n="quote_select_budget">Select Budget Range</option>
-                    <option value="consult" data-i18n="quote_budget_consult">Budget Consultation</option>
-                    <option value="5k-1w">¥5K - ¥10K</option>
-                    <option value="1w-5w">¥10K - ¥50K</option>
-                    <option value="5w-10w">¥50K - ¥100K</option>
-                    <option value="10w-30w">¥100K - ¥300K</option>
-                    <option value="30w-50w">¥300K - ¥500K</option>
-                    <option value="50w+">¥500K+</option>
-                  </select>
-                </label>
-              </div>
-              <label class="flex flex-col gap-2" data-i18n="quote_detailed_requirements">
-                <span class="text-slate-700 dark:text-slate-200 text-sm font-semibold" data-i18n="quote_detailed_requirements">Detailed Requirements</span>
-                <textarea
-                  id="q-message"
-                  class="min-h-[120px] rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white focus:border-primary focus:ring-primary text-base p-4"
-                  placeholder="Describe your requirements, such as cuisine type, daily output, special needs, etc."
-                ></textarea>
-              </label>
-              <div class="flex items-center gap-3 pt-2">
-                <input
-                  id="q-consent"
-                  class="size-5 rounded border border-slate-300 dark:border-slate-700 text-primary focus:ring-primary bg-white dark:bg-slate-800"
-                  type="checkbox"
-                  checked
-                />
-                <label class="text-sm text-slate-600 dark:text-slate-400" for="q-consent" data-i18n="quote_consent_text">
-                  I agree to the Privacy Policy and Terms of Service.
-                </label>
-              </div>
-              <button
-                type="submit"
-                class="w-full md:w-auto min-w-[200px] h-14 bg-primary text-white font-bold text-lg rounded-xl shadow-lg hover:shadow-primary/20 transition-all inline-flex items-center justify-center"
-                data-i18n="quote_btn_submit_inquiry"
+            <div class="grid grid-cols-1 gap-8">
+              <!-- Main Form Area -->
+              <div
+                class="bg-white dark:bg-slate-900/50 border border-slate-200 dark:border-slate-800 rounded-xl p-6 md:p-10 shadow-sm"
               >
-                Submit Inquiry
-              </button>
-            </form>
-          </div>
-          <!-- Trust and Strategy Row (Tablet Optimized) -->
-          <div class="grid grid-cols-1 md:grid-cols-3 gap-6 py-8">
-            <div class="flex flex-col gap-4 p-6 bg-primary/5 dark:bg-primary/10 rounded-xl border border-primary/20">
-              <span class="material-symbols-outlined text-primary text-3xl">inventory_2</span>
-              <div>
-                <h3 class="font-bold text-slate-900 dark:text-slate-50" data-i18n="quote_114_products">200+ Smart Equipment</h3>
-                <p class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed" data-i18n="quote_114_products_desc">
-                  Covering wok, steaming, soup, rice cooking and all commercial kitchen scenarios.
-                </p>
+                <form id="quote-form" class="space-y-6" novalidate>
+                  <!-- Company Info -->
+                  <h2 class="text-lg font-bold mb-4 flex items-center gap-2">
+                    <span class="material-symbols-outlined text-primary">business</span>
+                    <span data-i18n="quote_company_info">Company Information</span>
+                  </h2>
+                  <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <label class="flex flex-col gap-2" data-i18n="quote_company_name">
+                      <span
+                        class="text-slate-700 dark:text-slate-200 text-sm font-semibold"
+                        data-i18n="quote_company_name"
+                      >
+                        Company Name
+                        <span class="text-red-500">*</span>
+                      </span>
+                      <input
+                        id="q-company"
+                        class="h-14 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white focus:border-primary focus:ring-primary text-base px-4"
+                        placeholder="Enter company name"
+                        type="text"
+                        required
+                      />
+                    </label>
+                    <label class="flex flex-col gap-2" data-i18n="quote_contact_person">
+                      <span
+                        class="text-slate-700 dark:text-slate-200 text-sm font-semibold"
+                        data-i18n="quote_contact_person"
+                      >
+                        Contact Person
+                        <span class="text-red-500">*</span>
+                      </span>
+                      <input
+                        id="q-contact"
+                        class="h-14 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white focus:border-primary focus:ring-primary text-base px-4"
+                        placeholder="Enter contact name"
+                        type="text"
+                        required
+                      />
+                    </label>
+                  </div>
+                  <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <label class="flex flex-col gap-2">
+                      <span class="text-slate-700 dark:text-slate-200 text-sm font-semibold" data-i18n="quote_phone">
+                        Phone Number
+                        <span class="text-red-500">*</span>
+                      </span>
+                      <input
+                        id="q-phone"
+                        class="h-14 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white focus:border-primary focus:ring-primary text-base px-4"
+                        placeholder="Enter phone with country code"
+                        type="tel"
+                        required
+                      />
+                    </label>
+                    <label class="flex flex-col gap-2">
+                      <span
+                        class="text-slate-700 dark:text-slate-200 text-sm font-semibold"
+                        data-i18n="quote_email_address"
+                      >
+                        Email Address
+                        <span class="text-red-500">*</span>
+                      </span>
+                      <input
+                        id="q-email"
+                        class="h-14 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white focus:border-primary focus:ring-primary text-base px-4"
+                        placeholder="Enter work email"
+                        type="email"
+                        required
+                      />
+                    </label>
+                  </div>
+                  <div>
+                    <label class="flex flex-col gap-2" data-i18n="quote_country_region_select_country_thailand_v">
+                      <span
+                        class="text-slate-700 dark:text-slate-200 text-sm font-semibold"
+                        data-i18n="quote_country_region"
+                      >
+                        Country / Region
+                        <span class="text-red-500">*</span>
+                      </span>
+                      <select
+                        data-custom-select
+                        id="q-country"
+                        class="h-14 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white focus:border-primary focus:ring-primary text-base px-4 appearance-none"
+                        required
+                      >
+                        <option value="" data-i18n="quote_select_country">Select Country</option>
+                        <option value="TH">🇹🇭 Thailand</option>
+                        <option value="VN">🇻🇳 Vietnam</option>
+                        <option value="MY">🇲🇾 Malaysia</option>
+                        <option value="ID">🇮🇩 Indonesia</option>
+                        <option value="PH">🇵🇭 Philippines</option>
+                        <option value="SG">🇸🇬 Singapore</option>
+                        <option value="MM">🇲🇲 Myanmar</option>
+                        <option value="KH">🇰🇭 Cambodia</option>
+                        <option value="LA">🇱🇦 Laos</option>
+                        <option value="CN">🇨🇳 China</option>
+                        <option value="other" data-i18n="quote_other_countries">Other Countries</option>
+                      </select>
+                    </label>
+                  </div>
+                  <!-- Equipment Needs -->
+                  <h2 class="text-lg font-bold mb-4 flex items-center gap-2">
+                    <span class="material-symbols-outlined text-primary">precision_manufacturing</span>
+                    <span data-i18n="quote_equipment_needs">Equipment Needs</span>
+                  </h2>
+                  <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <label class="flex flex-col gap-2" data-i18n="quote_equipment_type_select_equipment_type_aut">
+                      <span
+                        class="text-slate-700 dark:text-slate-200 text-sm font-semibold"
+                        data-i18n="quote_equipment_type"
+                      >
+                        Equipment Type
+                        <span class="text-red-500">*</span>
+                      </span>
+                      <select
+                        data-custom-select
+                        id="q-equipment-type"
+                        class="h-14 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white focus:border-primary focus:ring-primary text-base px-4 appearance-none"
+                        required
+                      >
+                        <option value="" data-i18n="quote_select_equipment_type">Select Equipment Type</option>
+                        <option value="auto-wok" data-i18n="quote_type_auto_wok">Automatic Wok Machine</option>
+                        <option value="semi-auto-wok" data-i18n="quote_type_semi_auto_wok">Semi-Automatic Wok</option>
+                        <option value="combi-oven" data-i18n="quote_type_combi_oven">Combi Oven</option>
+                        <option value="soup-machine" data-i18n="quote_type_soup_machine">Soup Kettle</option>
+                        <option value="rice-machine" data-i18n="quote_type_rice_machine">Commercial Rice Cooker</option>
+                        <option value="full-set" data-i18n="quote_type_full_set">Full Equipment Set</option>
+                        <option value="other" data-i18n="quote_other">Other</option>
+                      </select>
+                    </label>
+                    <label class="flex flex-col gap-2" data-i18n="quote_quantity">
+                      <span class="text-slate-700 dark:text-slate-200 text-sm font-semibold" data-i18n="quote_quantity">
+                        Quantity
+                      </span>
+                      <input
+                        id="q-quantity"
+                        class="h-14 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white focus:border-primary focus:ring-primary text-base px-4"
+                        placeholder="Enter quantity needed"
+                        type="number"
+                        min="1"
+                      />
+                    </label>
+                  </div>
+                  <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <label class="flex flex-col gap-2" data-i18n="quote_kitchen_capacity_select_kitchen_capacity">
+                      <span
+                        class="text-slate-700 dark:text-slate-200 text-sm font-semibold"
+                        data-i18n="quote_kitchen_capacity"
+                      >
+                        Kitchen Capacity
+                      </span>
+                      <select
+                        data-custom-select
+                        id="q-capacity"
+                        class="h-14 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white focus:border-primary focus:ring-primary text-base px-4 appearance-none"
+                      >
+                        <option value="" data-i18n="quote_select_capacity">Select Kitchen Capacity</option>
+                        <option value="small" data-i18n="quote_capacity_small">Small (1–3 units)</option>
+                        <option value="medium" data-i18n="quote_capacity_medium">Medium (4–10 units)</option>
+                        <option value="large" data-i18n="quote_capacity_large">Large (10+ units)</option>
+                        <option value="enterprise" data-i18n="quote_capacity_enterprise">
+                          Enterprise (Full Kitchen Project)
+                        </option>
+                      </select>
+                    </label>
+                    <label class="flex flex-col gap-2" data-i18n="quote_budget_range_select_budget_range_budget">
+                      <span
+                        class="text-slate-700 dark:text-slate-200 text-sm font-semibold"
+                        data-i18n="quote_budget_range"
+                      >
+                        Budget Range
+                      </span>
+                      <select
+                        data-custom-select
+                        id="q-budget"
+                        class="h-14 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white focus:border-primary focus:ring-primary text-base px-4 appearance-none"
+                      >
+                        <option value="" data-i18n="quote_select_budget">Select Budget Range</option>
+                        <option value="consult" data-i18n="quote_budget_consult">Budget Consultation</option>
+                        <option value="5k-1w">¥5K - ¥10K</option>
+                        <option value="1w-5w">¥10K - ¥50K</option>
+                        <option value="5w-10w">¥50K - ¥100K</option>
+                        <option value="10w-30w">¥100K - ¥300K</option>
+                        <option value="30w-50w">¥300K - ¥500K</option>
+                        <option value="50w+">¥500K+</option>
+                      </select>
+                    </label>
+                  </div>
+                  <label class="flex flex-col gap-2" data-i18n="quote_detailed_requirements">
+                    <span
+                      class="text-slate-700 dark:text-slate-200 text-sm font-semibold"
+                      data-i18n="quote_detailed_requirements"
+                    >
+                      Detailed Requirements
+                    </span>
+                    <textarea
+                      id="q-message"
+                      class="min-h-[120px] rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white focus:border-primary focus:ring-primary text-base p-4"
+                      placeholder="Describe your requirements, such as cuisine type, daily output, special needs, etc."
+                    ></textarea>
+                  </label>
+                  <div class="flex items-center gap-3 pt-2">
+                    <input
+                      id="q-consent"
+                      class="size-5 rounded border border-slate-300 dark:border-slate-700 text-primary focus:ring-primary bg-white dark:bg-slate-800"
+                      type="checkbox"
+                      checked
+                    />
+                    <label
+                      class="text-sm text-slate-600 dark:text-slate-400"
+                      for="q-consent"
+                      data-i18n="quote_consent_text"
+                    >
+                      I agree to the Privacy Policy and Terms of Service.
+                    </label>
+                  </div>
+                  <button
+                    type="submit"
+                    class="w-full md:w-auto min-w-[200px] h-14 bg-primary text-white font-bold text-lg rounded-xl shadow-lg hover:shadow-primary/20 transition-all inline-flex items-center justify-center"
+                    data-i18n="quote_btn_submit_inquiry"
+                  >
+                    Submit Inquiry
+                  </button>
+                </form>
               </div>
-            </div>
-            <div class="flex flex-col gap-4 p-6 bg-primary/5 dark:bg-primary/10 rounded-xl border border-primary/20">
-              <span class="material-symbols-outlined text-primary text-3xl">public</span>
-              <div>
-                <h3 class="font-bold text-slate-900 dark:text-slate-50" data-i18n="quote_50_countries">50+ Countries</h3>
-                <p class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed" data-i18n="quote_50_countries_desc">
-                  Deep roots in Southeast Asia, products sold to 50+ countries worldwide.
-                </p>
-              </div>
-            </div>
-            <div class="flex flex-col gap-4 p-6 bg-primary/5 dark:bg-primary/10 rounded-xl border border-primary/20">
-              <span class="material-symbols-outlined text-primary text-3xl">verified_user</span>
-              <div>
-                <h3 class="font-bold text-slate-900 dark:text-slate-50" data-i18n="quote_certified">Internationally Certified</h3>
-                <p class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed" data-i18n="quote_certified_desc">
-                  CE, UL, ISO 9001 certified for quality assurance.
-                </p>
-              </div>
-            </div>
-          </div>
-          <!-- Why Yukoli -->
-          <div class="bg-white dark:bg-slate-900/50 border border-slate-200 dark:border-slate-800 rounded-xl p-6">
-            <h3 class="text-lg font-bold mb-4" data-i18n="quote_why_yukoli">Why YuKoLi?</h3>
-            <ul class="space-y-4">
-              <li class="flex gap-3" data-i18n="quote_200_smart_equipment_covering_wok_steamin">
-                <div class="flex-shrink-0 size-8 bg-primary/10 rounded-lg flex items-center justify-center">
-                  <span class="material-symbols-outlined text-primary text-sm">inventory_2</span>
-                </div>
-                <div>
-                  <p class="font-bold text-sm" data-i18n="quote_114_products">200+ Smart Equipment</p>
-                  <p class="text-xs text-slate-500 mt-0.5" data-i18n="quote_114_products_desc">Covering wok, steaming, soup, rice cooking and all commercial kitchen scenarios.</p>
-                </div>
-              </li>
-              <li class="flex gap-3" data-i18n="quote_public_50_countries_deep_roots_in_southe">
-                <div class="flex-shrink-0 size-8 bg-primary/10 rounded-lg flex items-center justify-center">
-                  <span class="material-symbols-outlined text-primary text-sm">public</span>
-                </div>
-                <div>
-                  <p class="font-bold text-sm" data-i18n="quote_50_countries">50+ Countries</p>
-                  <p class="text-xs text-slate-500 mt-0.5" data-i18n="quote_50_countries_desc">Deep roots in Southeast Asia, products sold to 50+ countries worldwide.</p>
-                </div>
-              </li>
-              <li class="flex gap-3" data-i18n="quote_verified_user_internationally_certified">
-                <div class="flex-shrink-0 size-8 bg-primary/10 rounded-lg flex items-center justify-center">
-                  <span class="material-symbols-outlined text-primary text-sm">verified_user</span>
-                </div>
-                <div>
-                  <p class="font-bold text-sm" data-i18n="quote_certified">Internationally Certified</p>
-                  <p class="text-xs text-slate-500 mt-0.5" data-i18n="quote_certified_desc">CE, UL, ISO 9001 certified for quality assurance.</p>
-                </div>
-              </li>
-              <li class="flex gap-3" data-i18n="quote_comprehensive_after_sales_service_instal">
-                <div class="flex-shrink-0 size-8 bg-primary/10 rounded-lg flex items-center justify-center">
-                  <span class="material-symbols-outlined text-primary text-sm">support_agent</span>
-                </div>
-                <div>
-                  <p class="font-bold text-sm" data-i18n="quote_after_sales">Comprehensive After-Sales Service</p>
-                  <p class="text-xs text-slate-500 mt-0.5" data-i18n="quote_after_sales_desc">Installation guidance, operator training and ongoing technical support.</p>
-                </div>
-              </li>
-            </ul>
-          </div>
-          <!-- Quick Contact -->
-          <div class="bg-primary p-6 rounded-xl text-white">
-            <div class="flex items-center gap-2 mb-3">
-              <span class="material-symbols-outlined">forum</span>
-              <h3 class="text-base font-bold" data-i18n="quote_prefer_chat">Prefer Chat?</h3>
-            </div>
-            <p class="text-sm opacity-90 mb-4" data-i18n="quote_prefer_chat_desc">Reach us directly on WhatsApp for instant support.</p>
-            <div class="flex gap-3">
-              <button onclick="startWhatsApp()" class="flex-1 bg-white text-primary py-2.5 rounded-lg font-bold text-sm flex items-center justify-center gap-2" data-i18n="cta_whatsapp">
-                <span class="material-symbols-outlined text-base">chat</span>
-                WhatsApp
-              </button>
-              <button onclick="startEmail()" class="flex-1 bg-white/20 text-white py-2.5 rounded-lg font-bold text-sm flex items-center justify-center gap-2" data-i18n="quote_mail_send">
-                <span class="material-symbols-outlined text-base">mail</span>
-                <span data-i18n="quote_send_email">Send Email</span>
-              </button>
-            </div>
-          </div>
-          <!-- Trust Badges -->
-          <div class="border-t border-slate-200 dark:border-slate-800 pt-10 pb-16">
-            <p
-              class="text-center text-slate-500 text-xs font-bold uppercase tracking-widest mb-8"
-              data-i18n="quote_certifications"
-            >
-              Certifications
-            </p>
-            <div class="flex flex-wrap justify-center items-center gap-8 opacity-60 grayscale hover:grayscale-0 transition-all duration-500">
-              <div class="flex flex-col items-center">
+              <!-- Trust and Strategy Row (Tablet Optimized) -->
+              <div class="grid grid-cols-1 md:grid-cols-3 gap-6 py-8">
                 <div
-                  class="size-12 rounded border border-slate-300 dark:border-slate-700 flex items-center justify-center font-black text-xl mb-1"
+                  class="flex flex-col gap-4 p-6 bg-primary/5 dark:bg-primary/10 rounded-xl border border-primary/20"
                 >
-                  CE
+                  <span class="material-symbols-outlined text-primary text-3xl">inventory_2</span>
+                  <div>
+                    <h3 class="font-bold text-slate-900 dark:text-slate-50" data-i18n="quote_114_products">
+                      200+ Smart Equipment
+                    </h3>
+                    <p
+                      class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed"
+                      data-i18n="quote_114_products_desc"
+                    >
+                      Covering wok, steaming, soup, rice cooking and all commercial kitchen scenarios.
+                    </p>
+                  </div>
                 </div>
-                <span class="text-[10px] font-bold" data-i18n="quote_ce_standard">European Standard</span>
-              </div>
-              <div class="flex flex-col items-center">
                 <div
-                  class="size-12 rounded border border-slate-300 dark:border-slate-700 flex items-center justify-center font-black text-xl mb-1"
+                  class="flex flex-col gap-4 p-6 bg-primary/5 dark:bg-primary/10 rounded-xl border border-primary/20"
                 >
-                  UL
+                  <span class="material-symbols-outlined text-primary text-3xl">public</span>
+                  <div>
+                    <h3 class="font-bold text-slate-900 dark:text-slate-50" data-i18n="quote_50_countries">
+                      50+ Countries
+                    </h3>
+                    <p
+                      class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed"
+                      data-i18n="quote_50_countries_desc"
+                    >
+                      Deep roots in Southeast Asia, products sold to 50+ countries worldwide.
+                    </p>
+                  </div>
                 </div>
-                <span class="text-[10px] font-bold" data-i18n="quote_ul_safety">Safety Certified</span>
-              </div>
-              <div class="flex flex-col items-center">
                 <div
-                  class="size-12 rounded border border-slate-300 dark:border-slate-700 flex items-center justify-center font-black text-xl mb-1"
+                  class="flex flex-col gap-4 p-6 bg-primary/5 dark:bg-primary/10 rounded-xl border border-primary/20"
                 >
-                  ISO
+                  <span class="material-symbols-outlined text-primary text-3xl">verified_user</span>
+                  <div>
+                    <h3 class="font-bold text-slate-900 dark:text-slate-50" data-i18n="quote_certified">
+                      Internationally Certified
+                    </h3>
+                    <p
+                      class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed"
+                      data-i18n="quote_certified_desc"
+                    >
+                      CE, UL, ISO 9001 certified for quality assurance.
+                    </p>
+                  </div>
                 </div>
-                <span class="text-[10px] font-bold" data-i18n="quote_iso_quality">Quality System</span>
+              </div>
+              <!-- Why Yukoli -->
+              <div class="bg-white dark:bg-slate-900/50 border border-slate-200 dark:border-slate-800 rounded-xl p-6">
+                <h3 class="text-lg font-bold mb-4" data-i18n="quote_why_yukoli">Why YuKoLi?</h3>
+                <ul class="space-y-4">
+                  <li class="flex gap-3" data-i18n="quote_200_smart_equipment_covering_wok_steamin">
+                    <div class="flex-shrink-0 size-8 bg-primary/10 rounded-lg flex items-center justify-center">
+                      <span class="material-symbols-outlined text-primary text-sm">inventory_2</span>
+                    </div>
+                    <div>
+                      <p class="font-bold text-sm" data-i18n="quote_114_products">200+ Smart Equipment</p>
+                      <p class="text-xs text-slate-500 mt-0.5" data-i18n="quote_114_products_desc">
+                        Covering wok, steaming, soup, rice cooking and all commercial kitchen scenarios.
+                      </p>
+                    </div>
+                  </li>
+                  <li class="flex gap-3" data-i18n="quote_public_50_countries_deep_roots_in_southe">
+                    <div class="flex-shrink-0 size-8 bg-primary/10 rounded-lg flex items-center justify-center">
+                      <span class="material-symbols-outlined text-primary text-sm">public</span>
+                    </div>
+                    <div>
+                      <p class="font-bold text-sm" data-i18n="quote_50_countries">50+ Countries</p>
+                      <p class="text-xs text-slate-500 mt-0.5" data-i18n="quote_50_countries_desc">
+                        Deep roots in Southeast Asia, products sold to 50+ countries worldwide.
+                      </p>
+                    </div>
+                  </li>
+                  <li class="flex gap-3" data-i18n="quote_verified_user_internationally_certified">
+                    <div class="flex-shrink-0 size-8 bg-primary/10 rounded-lg flex items-center justify-center">
+                      <span class="material-symbols-outlined text-primary text-sm">verified_user</span>
+                    </div>
+                    <div>
+                      <p class="font-bold text-sm" data-i18n="quote_certified">Internationally Certified</p>
+                      <p class="text-xs text-slate-500 mt-0.5" data-i18n="quote_certified_desc">
+                        CE, UL, ISO 9001 certified for quality assurance.
+                      </p>
+                    </div>
+                  </li>
+                  <li class="flex gap-3" data-i18n="quote_comprehensive_after_sales_service_instal">
+                    <div class="flex-shrink-0 size-8 bg-primary/10 rounded-lg flex items-center justify-center">
+                      <span class="material-symbols-outlined text-primary text-sm">support_agent</span>
+                    </div>
+                    <div>
+                      <p class="font-bold text-sm" data-i18n="quote_after_sales">Comprehensive After-Sales Service</p>
+                      <p class="text-xs text-slate-500 mt-0.5" data-i18n="quote_after_sales_desc">
+                        Installation guidance, operator training and ongoing technical support.
+                      </p>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+              <!-- Quick Contact -->
+              <div class="bg-primary p-6 rounded-xl text-white">
+                <div class="flex items-center gap-2 mb-3">
+                  <span class="material-symbols-outlined">forum</span>
+                  <h3 class="text-base font-bold" data-i18n="quote_prefer_chat">Prefer Chat?</h3>
+                </div>
+                <p class="text-sm opacity-90 mb-4" data-i18n="quote_prefer_chat_desc">
+                  Reach us directly on WhatsApp for instant support.
+                </p>
+                <div class="flex gap-3">
+                  <button
+                    onclick="startWhatsApp()"
+                    class="flex-1 bg-white text-primary py-2.5 rounded-lg font-bold text-sm flex items-center justify-center gap-2"
+                    data-i18n="cta_whatsapp"
+                  >
+                    <span class="material-symbols-outlined text-base">chat</span>
+                    WhatsApp
+                  </button>
+                  <button
+                    onclick="startEmail()"
+                    class="flex-1 bg-white/20 text-white py-2.5 rounded-lg font-bold text-sm flex items-center justify-center gap-2"
+                  >
+                    <span class="material-symbols-outlined text-base">mail</span>
+                    <span data-i18n="quote_send_email">Send Email</span>
+                  </button>
+                </div>
+              </div>
+              <!-- Trust Badges -->
+              <div class="border-t border-slate-200 dark:border-slate-800 pt-10 pb-16">
+                <p
+                  class="text-center text-slate-500 text-xs font-bold uppercase tracking-widest mb-8"
+                  data-i18n="quote_certifications"
+                >
+                  Certifications
+                </p>
+                <div
+                  class="flex flex-wrap justify-center items-center gap-8 opacity-60 grayscale hover:grayscale-0 transition-all duration-500"
+                >
+                  <div class="flex flex-col items-center">
+                    <div
+                      class="size-12 rounded border border-slate-300 dark:border-slate-700 flex items-center justify-center font-black text-xl mb-1"
+                    >
+                      CE
+                    </div>
+                    <span class="text-[10px] font-bold" data-i18n="quote_ce_standard">European Standard</span>
+                  </div>
+                  <div class="flex flex-col items-center">
+                    <div
+                      class="size-12 rounded border border-slate-300 dark:border-slate-700 flex items-center justify-center font-black text-xl mb-1"
+                    >
+                      UL
+                    </div>
+                    <span class="text-[10px] font-bold" data-i18n="quote_ul_safety">Safety Certified</span>
+                  </div>
+                  <div class="flex flex-col items-center">
+                    <div
+                      class="size-12 rounded border border-slate-300 dark:border-slate-700 flex items-center justify-center font-black text-xl mb-1"
+                    >
+                      ISO
+                    </div>
+                    <span class="text-[10px] font-bold" data-i18n="quote_iso_quality">Quality System</span>
+                  </div>
+                </div>
               </div>
             </div>
-          </div>
-        </div>
           </div>
         </section>
       </main>
@@ -455,29 +549,29 @@
     <script src="/assets/js/ui/dropdown-styles.js"></script>
     <script src="/assets/js/ui/dropdown-base.js"></script>
     <script src="/assets/js/ui/custom-select.js"></script>
-    <script defer src="/assets/js/ui/products-dropdown.js?v=202605121141"></script>
-    <script defer src="/assets/js/ui/applications-dropdown.js?v=202605121141"></script>
-    <script defer src="/assets/js/ui/support-dropdown.js?v=202605121141"></script>
-    <script defer src="/assets/js/ui/about-dropdown.js?v=202605121141"></script>
-    <script defer src="/assets/js/ui/navigator.js?v=202605121141"></script>
-<script defer src="/assets/js/ui/slide-menu.js?v=202605121141"></script>
+    <script defer src="/assets/js/ui/products-dropdown.js?v=202605121200"></script>
+    <script defer src="/assets/js/ui/applications-dropdown.js?v=202605121200"></script>
+    <script defer src="/assets/js/ui/support-dropdown.js?v=202605121200"></script>
+    <script defer src="/assets/js/ui/about-dropdown.js?v=202605121200"></script>
+    <script defer src="/assets/js/ui/navigator.js?v=202605121200"></script>
+    <script defer src="/assets/js/ui/slide-menu.js?v=202605121200"></script>
     <script defer src="/assets/js/ui/search-engine.js"></script>
-    <script defer src="/assets/js/ui/footer.js?v=202605121141"></script>
-    <script defer src="/assets/js/lang-registry.js?v=202605121141"></script>
-    <script defer src="/assets/js/translations.js?v=202605121141"></script>
-    <script defer src="/assets/js/translations-dropdown-template.js?v=202605121141"></script>
+    <script defer src="/assets/js/ui/footer.js?v=202605121200"></script>
+    <script defer src="/assets/js/lang-registry.js?v=202605121200"></script>
+    <script defer src="/assets/js/translations.js?v=202605121200"></script>
+    <script defer src="/assets/js/translations-dropdown-template.js?v=202605121200"></script>
     <script defer src="/assets/js/contacts.js"></script>
     <script defer src="/assets/js/router.js"></script>
     <script defer src="/assets/js/ui/helpers.js"></script>
     <script defer src="/assets/js/ui/page-effects.js"></script>
     <script defer src="/assets/js/ui/form-interactions.js"></script>
-    <script defer src="/assets/js/page-interactions.js"></script><footer data-component="footer" data-variant="tablet" data-search="true" data-active="quote"></footer>
+    <script defer src="/assets/js/page-interactions.js"></script>
+    <footer data-component="footer" data-variant="tablet" data-search="true" data-active="quote"></footer>
 
     <!-- Quote form handler -->
 
-
     <script src="/assets/js/utils/device-utils.js"></script>
-    <script src="/assets/js/spa-router.js?v=202605121141"></script>
-      <script defer src="/assets/js/ui/floating-actions.js"></script>
-</body>
+    <script src="/assets/js/spa-router.js?v=202605121200"></script>
+    <script defer src="/assets/js/ui/floating-actions.js"></script>
+  </body>
 </html>
