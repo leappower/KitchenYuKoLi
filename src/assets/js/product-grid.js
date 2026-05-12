@@ -1014,6 +1014,25 @@
 
   // ─── Init ──────────────────────────────────────────────────────
 
+  // Resolve initial category from URL for SSG page loads (e.g. /products/cutting/ → "nav_products_cutting")
+  // This runs before autoRender so the first render filters correctly.
+  (function initCategoryFromUrl() {
+    var match = window.location.pathname.match(/^\/products\/([^/]+)\/$/);
+    if (match) {
+      var slug = match[1];
+      var SLUG_MAP = {
+        cutting: "nav_products_cutting",
+        stirfry: "nav_products_stirfry",
+        frying: "nav_products_frying",
+        stewing: "nav_products_stewing",
+        steaming: "nav_products_steaming",
+        other: "nav_products_other",
+      };
+      var cat = SLUG_MAP[slug] || slug;
+      if (cat) _activeCategory = cat;
+    }
+  })();
+
   // Guard: ensure init runs once even if script loads multiple times
   if (window._productGridInited) {
   } else {
