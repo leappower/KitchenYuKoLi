@@ -839,8 +839,10 @@
 
     // Animate open
     requestAnimationFrame(function () {
-      self._popupPanel.classList.add("cs-popup-open");
-      if (navigator.vibrate) navigator.vibrate(10);
+      if (self._popupPanel) {
+        self._popupPanel.classList.add("cs-popup-open");
+        if (navigator.vibrate) navigator.vibrate(10);
+      }
     });
   };
 
