@@ -105,7 +105,7 @@
             <!-- Input Form (2-col grid) -->
             <div class="px-4 md:">
             <div class="bg-white dark:bg-slate-900 rounded-2xl shadow-xl border border-slate-300 dark:border-slate-800 p-6 md:p-8">
-              <h2 class="text-lg font-bold mb-5 flex items-center gap-2">
+              <h2 class="text-lg font-bold mb-5 flex items-center gap-2" data-i18n="profit-calculator_enter_your_operating_data">
                 <span class="material-symbols-outlined text-primary">calculate</span>
                 <span data-i18n="profit_calc_form_title">Enter Your Operating Data</span>
               </h2>
@@ -148,7 +148,7 @@
 
                   <!-- Labor Cost -->
                   <div>
-                    <label class="block text-sm font-bold mb-1"><span data-i18n="profit_calc_labor_cost">Monthly Labor Cost</span> <span id="pc-currency-symbol" class="text-slate-500"></span></label>
+                    <label class="block text-sm font-bold mb-1" data-i18n="profit-calculator_monthly_labor_cost"><span data-i18n="profit_calc_labor_cost">Monthly Labor Cost</span> <span id="pc-currency-symbol" class="text-slate-500"></span></label>
                     <input id="pc-labor-cost" type="number" min="0" class="w-full bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-lg p-2.5 focus:ring-primary focus:border-primary text-sm" placeholder="Auto-filled" />
                   </div>
 
@@ -176,22 +176,22 @@
                 <div>
                   <label class="block text-sm font-bold mb-2" data-i18n="profit_calc_equipment">Equipment</label>
                   <div class="grid grid-cols-2 md:grid-cols-3 gap-2">
-                    <label class="flex items-center gap-2 text-sm cursor-pointer bg-slate-50 dark:bg-slate-800 rounded-lg p-2 hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors">
+                    <label class="flex items-center gap-2 text-sm cursor-pointer bg-slate-50 dark:bg-slate-800 rounded-lg p-2 hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors" data-i18n="profit-calculator_automatic_wok">
                       <input type="checkbox" class="accent-primary pc-equipment" value="smart_wok" /><span data-i18n="profit_calc_eq_wok">Automatic Wok</span>
                     </label>
-                    <label class="flex items-center gap-2 text-sm cursor-pointer bg-slate-50 dark:bg-slate-800 rounded-lg p-2 hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors">
+                    <label class="flex items-center gap-2 text-sm cursor-pointer bg-slate-50 dark:bg-slate-800 rounded-lg p-2 hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors" data-i18n="profit-calculator_rice_cooker">
                       <input type="checkbox" class="accent-primary pc-equipment" value="rice_cooker" /><span data-i18n="profit_calc_eq_rice">Rice Cooker</span>
                     </label>
-                    <label class="flex items-center gap-2 text-sm cursor-pointer bg-slate-50 dark:bg-slate-800 rounded-lg p-2 hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors">
+                    <label class="flex items-center gap-2 text-sm cursor-pointer bg-slate-50 dark:bg-slate-800 rounded-lg p-2 hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors" data-i18n="profit-calculator_dishwasher">
                       <input type="checkbox" class="accent-primary pc-equipment" value="dishwasher" /><span data-i18n="profit_calc_eq_dish">Dishwasher</span>
                     </label>
-                    <label class="flex items-center gap-2 text-sm cursor-pointer bg-slate-50 dark:bg-slate-800 rounded-lg p-2 hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors">
+                    <label class="flex items-center gap-2 text-sm cursor-pointer bg-slate-50 dark:bg-slate-800 rounded-lg p-2 hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors" data-i18n="profit-calculator_induction_cooker">
                       <input type="checkbox" class="accent-primary pc-equipment" value="induction_cooker" /><span data-i18n="profit_calc_eq_induction">Induction Cooker</span>
                     </label>
-                    <label class="flex items-center gap-2 text-sm cursor-pointer bg-slate-50 dark:bg-slate-800 rounded-lg p-2 hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors">
+                    <label class="flex items-center gap-2 text-sm cursor-pointer bg-slate-50 dark:bg-slate-800 rounded-lg p-2 hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors" data-i18n="profit-calculator_deep_fryer">
                       <input type="checkbox" class="accent-primary pc-equipment" value="deep_fryer" /><span data-i18n="profit_calc_eq_fryer">Deep Fryer</span>
                     </label>
-                    <label class="flex items-center gap-2 text-sm cursor-pointer bg-slate-50 dark:bg-slate-800 rounded-lg p-2 hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors">
+                    <label class="flex items-center gap-2 text-sm cursor-pointer bg-slate-50 dark:bg-slate-800 rounded-lg p-2 hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors" data-i18n="profit-calculator_other">
                       <input type="checkbox" class="accent-primary pc-equipment" value="other" /><span data-i18n="profit_calc_other">Other</span>
                     </label>
                   </div>
@@ -207,7 +207,7 @@
                 </div>
 
                 <!-- Submit -->
-                <button type="button" id="pc-calc-btn" class="w-full bg-primary text-white py-3 rounded-xl font-bold text-sm hover:bg-primary/90 transition-all flex items-center justify-center gap-2 shadow-lg shadow-primary/20">
+                <button type="button" id="pc-calc-btn" class="w-full bg-primary text-white py-3 rounded-xl font-bold text-sm hover:bg-primary/90 transition-all flex items-center justify-center gap-2 shadow-lg shadow-primary/20" data-i18n="btn_calculate_roi">
                   <span data-i18n="profit_calc_btn_calculate">Calculate ROI</span>
                 </button>
               </form>
@@ -226,7 +226,7 @@
                 </div>
                 <div class="bg-gradient-to-br from-rose-50 to-rose-100 dark:from-rose-900/30 dark:to-rose-900/10 rounded-xl p-4 border border-rose-200 dark:border-rose-800 col-span-2 md:col-span-1">
                   <p class="text-[10px] font-bold text-rose-600 dark:text-rose-400 uppercase tracking-wider mb-0.5" data-i18n="profit_calc_payback">Payback Period</p>
-                  <p class="text-lg font-black text-rose-700 dark:text-rose-300"><span id="res-payback">—</span> <span class="text-xs font-bold" data-i18n="profit_calc_months">months</span></p>
+                  <p class="text-lg font-black text-rose-700 dark:text-rose-300" data-i18n="profit-calculator_months"><span id="res-payback">—</span> <span class="text-xs font-bold" data-i18n="profit_calc_months">months</span></p>
                 </div>
               </div>
 
@@ -248,7 +248,7 @@
                 </div>
                 <div>
                   <p class="text-[10px] font-bold text-green-600 dark:text-green-400 uppercase tracking-wider" data-i18n="profit_calc_esg_label">ESG: CO₂ Reduction (est.)</p>
-                  <p class="text-lg font-black text-green-700 dark:text-green-300"><span id="res-co2">—</span> <span data-i18n="profit_calc_co2_unit">tonnes / year</span></p>
+                  <p class="text-lg font-black text-green-700 dark:text-green-300" data-i18n="profit-calculator_tonnes_year"><span id="res-co2">—</span> <span data-i18n="profit_calc_co2_unit">tonnes / year</span></p>
                 </div>
               </div>
 
@@ -259,11 +259,11 @@
 
               <!-- Action Buttons -->
               <div class="flex flex-col sm:flex-row gap-3">
-                <button id="pc-whatsapp-btn" class="flex-1 bg-green-500 hover:bg-green-600 text-white py-3 rounded-xl font-bold text-sm flex items-center justify-center gap-2 transition-all">
+                <button id="pc-whatsapp-btn" class="flex-1 bg-green-500 hover:bg-green-600 text-white py-3 rounded-xl font-bold text-sm flex items-center justify-center gap-2 transition-all" data-i18n="cta_share_whatsapp">
                   <span class="material-symbols-outlined text-lg">chat</span>
                   <span data-i18n="profit_calc_btn_whatsapp">Share via WhatsApp</span>
                 </button>
-                <button id="pc-pdf-btn" class="flex-1 bg-slate-800 dark:bg-slate-700 hover:bg-slate-700 dark:hover:bg-slate-600 text-white py-3 rounded-xl font-bold text-sm flex items-center justify-center gap-2 transition-all">
+                <button id="pc-pdf-btn" class="flex-1 bg-slate-800 dark:bg-slate-700 hover:bg-slate-700 dark:hover:bg-slate-600 text-white py-3 rounded-xl font-bold text-sm flex items-center justify-center gap-2 transition-all" data-i18n="profit-calculator_picture_as_pdf">
                   <span class="material-symbols-outlined text-lg">picture_as_pdf</span>
                   <span data-i18n="profit_calc_btn_pdf">Download PDF</span>
                 </button>
@@ -285,15 +285,15 @@
         <section class="fullwidth-bg py-10 bg-slate-50 dark:bg-slate-900/50">
           <div class="section-content">
             <div class="flex flex-wrap justify-center gap-4">
-              <a href="/products/" class="inline-flex items-center gap-2 px-6 py-3 border-2 border-slate-200 dark:border-slate-700 rounded-xl font-bold text-sm hover:border-primary hover:text-primary transition-all">
+              <a href="/products/" class="inline-flex items-center gap-2 px-6 py-3 border-2 border-slate-200 dark:border-slate-700 rounded-xl font-bold text-sm hover:border-primary hover:text-primary transition-all" data-i18n="nav_products">
                 <span class="material-symbols-outlined">kitchen</span>
                 <span data-i18n="nav_products">Products</span>
               </a>
-              <a href="/applications/" class="inline-flex items-center gap-2 px-6 py-3 border-2 border-slate-200 dark:border-slate-700 rounded-xl font-bold text-sm hover:border-primary hover:text-primary transition-all">
+              <a href="/applications/" class="inline-flex items-center gap-2 px-6 py-3 border-2 border-slate-200 dark:border-slate-700 rounded-xl font-bold text-sm hover:border-primary hover:text-primary transition-all" data-i18n="nav_applications">
                 <span class="material-symbols-outlined">monitoring</span>
                 <span data-i18n="nav_applications">Applications</span>
               </a>
-              <a href="/quote/" class="inline-flex items-center gap-2 px-5 py-3 bg-primary text-white rounded-xl font-bold text-base hover:shadow-lg hover:shadow-primary/20 transition-all">
+              <a href="/quote/" class="inline-flex items-center gap-2 px-5 py-3 bg-primary text-white rounded-xl font-bold text-base hover:shadow-lg hover:shadow-primary/20 transition-all" data-i18n="cta_get_quote">
                 <span class="material-symbols-outlined">description</span>
                 <span data-i18n="nav_get_quote">Get a Quote</span>
               </a>
@@ -310,17 +310,17 @@
     <script src="/assets/js/ui/dropdown-styles.js"></script>
     <script src="/assets/js/ui/dropdown-base.js"></script>
     <script src="/assets/js/ui/custom-select.js"></script>
-    <script defer src="/assets/js/ui/products-dropdown.js?v=202605112129"></script>
-    <script defer src="/assets/js/ui/applications-dropdown.js?v=202605112129"></script>
-    <script defer src="/assets/js/ui/support-dropdown.js?v=202605112129"></script>
-    <script defer src="/assets/js/ui/about-dropdown.js?v=202605112129"></script>
-    <script defer src="/assets/js/ui/navigator.js?v=202605112129"></script>
-<script defer src="/assets/js/ui/slide-menu.js?v=202605112129"></script>
+    <script defer src="/assets/js/ui/products-dropdown.js?v=202605121107"></script>
+    <script defer src="/assets/js/ui/applications-dropdown.js?v=202605121107"></script>
+    <script defer src="/assets/js/ui/support-dropdown.js?v=202605121107"></script>
+    <script defer src="/assets/js/ui/about-dropdown.js?v=202605121107"></script>
+    <script defer src="/assets/js/ui/navigator.js?v=202605121107"></script>
+<script defer src="/assets/js/ui/slide-menu.js?v=202605121107"></script>
     <script defer src="/assets/js/ui/search-engine.js"></script>
-    <script defer src="/assets/js/ui/footer.js?v=202605112129"></script>
-    <script defer src="/assets/js/lang-registry.js?v=202605112129"></script>
-    <script defer src="/assets/js/translations.js?v=202605112129"></script>
-    <script defer src="/assets/js/translations-dropdown-template.js?v=202605112129"></script>
+    <script defer src="/assets/js/ui/footer.js?v=202605121107"></script>
+    <script defer src="/assets/js/lang-registry.js?v=202605121107"></script>
+    <script defer src="/assets/js/translations.js?v=202605121107"></script>
+    <script defer src="/assets/js/translations-dropdown-template.js?v=202605121107"></script>
     <script defer src="/assets/js/contacts.js"></script>
     <script defer src="/assets/js/router.js"></script>
     <script defer src="/assets/js/ui/helpers.js"></script>
@@ -330,7 +330,7 @@
     <script src="/assets/js/vendor/chart.umd.min.js"></script>
     <script src="/assets/js/vendor/html2canvas.min.js"></script>
     <script src="/assets/js/vendor/jspdf.umd.min.js"></script>
-    <script src="/assets/js/profit-calculator.js?v=202605112129"></script>
+    <script src="/assets/js/profit-calculator.js?v=202605121107"></script>
 
     <script>
       document.addEventListener("DOMContentLoaded", function () {
@@ -360,7 +360,7 @@
     </script>
 
     <script src="/assets/js/utils/device-utils.js"></script>
-    <script src="/assets/js/spa-router.js?v=202605112129"></script>
+    <script src="/assets/js/spa-router.js?v=202605121107"></script>
 
       <script defer src="/assets/js/ui/floating-actions.js"></script>
   </body>

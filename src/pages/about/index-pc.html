@@ -175,12 +175,12 @@
               <span class="material-symbols-outlined text-xs leading-none">apartment</span>
               <span data-i18n="about_badge">About YuKoLi</span>
             </div>
-            <h1 class="text-5xl xl:text-7xl font-black leading-[1.1] tracking-tight text-slate-900 dark:text-white">
+            <h1 class="text-5xl xl:text-7xl font-black leading-[1.1] tracking-tight text-slate-900 dark:text-white" data-i18n="about_23_years_one_mission_every_dish_chef_ind">
               <span data-i18n="about_hero_title_1">23 Years, One Mission:</span>
               <br />
               <span class="text-primary" data-i18n="about_hero_title_2">Every Dish, Chef-Independent</span>
             </h1>
-            <p class="text-lg xl:text-xl text-slate-600 dark:text-slate-400 max-w-2xl leading-relaxed">
+            <p class="text-lg xl:text-xl text-slate-600 dark:text-slate-400 max-w-2xl leading-relaxed" data-i18n="about_headquartered_in_foshan_china_sequipment">
               <span data-i18n="about_hero_desc">
                 Headquartered in Foshan, China's kitchen equipment capital, YuKoLi has dedicated 23 years to the R&D and manufacturing of smart commercial kitchen equipment. From a single Automatic Wok Machine to 200+ smart equipment models across all categories, we help foodservice businesses in 68+ countries achieve cost reduction, efficiency gains, and consistent output.
               </span>
@@ -190,7 +190,7 @@
                 href="#story"
                 class="bg-primary text-white px-8 py-4 rounded-xl font-bold text-lg flex items-center gap-2 hover:shadow-lg hover:shadow-primary/20 transition-all"
                 onclick="event.preventDefault(); document.getElementById('story').scrollIntoView({behavior:'smooth',block:'start'})"
-              >
+               data-i18n="about_our_story">
                 <span data-i18n="about_hero_btn">Our Story</span>
                 <span class="material-symbols-outlined">arrow_downward</span>
               </a>
@@ -326,18 +326,18 @@
               </div>
             </div>
           <div class="flex flex-col gap-6">
-            <p class="text-slate-600 dark:text-slate-400 leading-relaxed">
+            <p class="text-slate-600 dark:text-slate-400 leading-relaxed" data-i18n="about_founded_in_2003_in_foshan_guangdong_chin">
               <span data-i18n="about_story_p1">
                 Founded in 2003 in Foshan, Guangdong — China's kitchen equipment manufacturing hub — YuKoLi started in a small engineering workshop with a single goal: transforming commercial kitchens through intelligent automation. Over 23 years of continuous R&D and market validation, YuKoLi has grown into a fully integrated smart kitchen equipment manufacturer spanning R&D, production, and sales.
               </span>
             </p>
-            <p class="text-slate-600 dark:text-slate-400">
+            <p class="text-slate-600 dark:text-slate-400" data-i18n="about_today_our_200_smart_equipment_models_ser">
               <span data-i18n="about_story_p2">
                 Today, our 200+ smart equipment models serve customers in 50+ countries — from chain restaurants in Bangkok to central kitchens in Ho Chi Minh City, from canteens in Kuala Lumpur to fast-food brands in Jakarta. Whether you run a street food stall or a thousand-store chain, YuKoLi can help you save labor, standardize output, and scale efficiently.
               </span>
             </p>
             <!-- Key stats -->
-              <div class="grid grid-cols-3 gap-4 mt-2">
+              <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-2">
                 <div class="bg-white dark:bg-slate-800 rounded-xl p-4 text-center shadow-sm">
                   <div class="text-2xl font-black text-primary">20+</div>
                   <div class="text-xs text-slate-500 font-bold mt-1" data-i18n="about_stat_years">Years of Experience</div>
@@ -354,11 +354,11 @@
               <div class="flex gap-4">
               <div class="flex items-center gap-2">
                 <span class="material-symbols-outlined text-primary">check_circle</span>
-                <span class="text-sm font-bold"><span data-i18n="about_check_1">In-House R&D</span></span>
+                <span class="text-sm font-bold" data-i18n="about_in_house_r_d"><span data-i18n="about_check_1">In-House R&D</span></span>
               </div>
               <div class="flex items-center gap-2">
                 <span class="material-symbols-outlined text-primary">check_circle</span>
-                <span class="text-sm font-bold"><span data-i18n="about_check_2">Quality Assurance</span></span>
+                <span class="text-sm font-bold" data-i18n="about_quality_assurance"><span data-i18n="about_check_2">Quality Assurance</span></span>
               </div>
             </div>
           </div>
@@ -382,7 +382,7 @@
             <div class="relative p-12 lg:p-20">
               <div class="max-w-3xl">
                 <h2 class="text-3xl lg:text-4xl font-black mb-6" data-i18n="about_mfg_title">Manufacturing Excellence</h2>
-                <p class="text-slate-300 text-lg mb-8">
+                <p class="text-slate-300 text-lg mb-8" data-i18n="about_yukoli_yukoli_s_foshan_manufacturing_bas">
                   <span data-i18n="about_mfg_desc">
                     YuKoLi
                     YuKoLi's Foshan manufacturing base is equipped with advanced CNC machining centers, automated welding systems, and full-process quality inspection lines. Every unit undergoes rigorous performance and safety testing before shipment, ensuring stable and reliable operation in demanding commercial kitchen environments.
@@ -438,39 +438,39 @@
           <h2 class="text-3xl lg:text-4xl font-bold text-center mb-12" data-i18n="about_cert_title" id="cert">Global Certifications</h2>
           <div class="w-full grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 lg:gap-6">
             <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-8 text-center hover:border-primary/50 transition-all">
-              <img src="/assets/images/certs/cert-ce.webp" alt="CE" class="w-16 h-16 mx-auto mb-3 object-contain" />
+              <img loading="lazy" src="/assets/images/certs/cert-ce.webp" alt="CE" class="w-16 h-16 mx-auto mb-3 object-contain" />
               <p class="text-sm font-bold text-slate-600 dark:text-slate-400" data-i18n="about_cert_ce">CE Certified</p>
             </div>
             <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-8 text-center hover:border-primary/50 transition-all">
-              <img src="/assets/images/certs/cert-iso9001.webp" alt="ISO 9001" class="w-16 h-16 mx-auto mb-3 object-contain" />
+              <img loading="lazy" src="/assets/images/certs/cert-iso9001.webp" alt="ISO 9001" class="w-16 h-16 mx-auto mb-3 object-contain" />
               <p class="text-sm font-bold text-slate-600 dark:text-slate-400" data-i18n="about_cert_iso">ISO 9001 Certified</p>
             </div>
             <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-8 text-center hover:border-primary/50 transition-all">
-              <img src="/assets/images/certs/cert-iso14001.webp" alt="ISO 14001" class="w-16 h-16 mx-auto mb-3 object-contain" />
+              <img loading="lazy" src="/assets/images/certs/cert-iso14001.webp" alt="ISO 14001" class="w-16 h-16 mx-auto mb-3 object-contain" />
               <p class="text-sm font-bold text-slate-600 dark:text-slate-400" data-i18n="about_cert_iso14001">ISO 14001 Certified</p>
             </div>
             <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-8 text-center hover:border-primary/50 transition-all">
-              <img src="/assets/images/certs/cert-rohs.webp" alt="RoHS" class="w-16 h-16 mx-auto mb-3 object-contain" />
+              <img loading="lazy" src="/assets/images/certs/cert-rohs.webp" alt="RoHS" class="w-16 h-16 mx-auto mb-3 object-contain" />
               <p class="text-sm font-bold text-slate-600 dark:text-slate-400" data-i18n="about_cert_rohs">RoHS Compliant</p>
             </div>
             <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-8 text-center hover:border-primary/50 transition-all">
-              <img src="/assets/images/certs/cert-cb.webp" alt="CB" class="w-16 h-16 mx-auto mb-3 object-contain" />
+              <img loading="lazy" src="/assets/images/certs/cert-cb.webp" alt="CB" class="w-16 h-16 mx-auto mb-3 object-contain" />
               <p class="text-sm font-bold text-slate-600 dark:text-slate-400" data-i18n="about_cert_cb">CB Certified</p>
             </div>
             <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-8 text-center hover:border-primary/50 transition-all">
-              <img src="/assets/images/certs/cert-sni.webp" alt="SNI" class="w-16 h-16 mx-auto mb-3 object-contain" />
+              <img loading="lazy" src="/assets/images/certs/cert-sni.webp" alt="SNI" class="w-16 h-16 mx-auto mb-3 object-contain" />
               <p class="text-sm font-bold text-slate-600 dark:text-slate-400" data-i18n="about_cert_sni">SNI Certified</p>
             </div>
             <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-8 text-center hover:border-primary/50 transition-all">
-              <img src="/assets/images/certs/cert-tis.webp" alt="TIS" class="w-16 h-16 mx-auto mb-3 object-contain" />
+              <img loading="lazy" src="/assets/images/certs/cert-tis.webp" alt="TIS" class="w-16 h-16 mx-auto mb-3 object-contain" />
               <p class="text-sm font-bold text-slate-600 dark:text-slate-400" data-i18n="about_cert_tis">TIS Certified</p>
             </div>
             <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-8 text-center hover:border-primary/50 transition-all">
-              <img src="/assets/images/certs/cert-pli.webp" alt="PLI" class="w-16 h-16 mx-auto mb-3 object-contain" />
+              <img loading="lazy" src="/assets/images/certs/cert-pli.webp" alt="PLI" class="w-16 h-16 mx-auto mb-3 object-contain" />
               <p class="text-sm font-bold text-slate-600 dark:text-slate-400" data-i18n="about_cert_pli">Product Liability Insurance</p>
             </div>
             <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-8 text-center hover:border-primary/50 transition-all hidden md:block lg:hidden">
-              <img src="/assets/images/certs/cert-custom.webp" alt="Custom" class="w-16 h-16 mx-auto mb-3 object-contain" />
+              <img loading="lazy" src="/assets/images/certs/cert-custom.webp" alt="Custom" class="w-16 h-16 mx-auto mb-3 object-contain" />
               <p class="text-sm font-bold text-slate-600 dark:text-slate-400" data-i18n="about_cert_custom">Custom Certification Service</p>
             </div>
           </div>
@@ -541,12 +541,12 @@
             </div>
             <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
               <div class="bg-white dark:bg-slate-800 rounded-2xl p-8 shadow-lg text-center">
-                <div class="text-5xl font-black text-primary mb-2">1<span class="text-2xl"> Yr</span></div>
+                <div class="text-5xl font-black text-primary mb-2">1<span class="text-2xl" data-i18n="about_yr"> Yr</span></div>
                 <h4 class="text-lg font-bold mb-2" data-i18n="about_sla_warranty">Whole-Machine Warranty</h4>
                 <p class="text-base text-slate-600 dark:text-slate-400 mb-6" data-i18n="about_sla_warranty_desc">Free repair for non-human-caused damage</p>
               </div>
               <div class="bg-white dark:bg-slate-800 rounded-2xl p-8 shadow-lg text-center">
-                <div class="text-5xl font-black text-primary mb-2">3<span class="text-2xl"> Yr</span></div>
+                <div class="text-5xl font-black text-primary mb-2">3<span class="text-2xl" data-i18n="about_yr"> Yr</span></div>
                 <h4 class="text-lg font-bold mb-2" data-i18n="about_sla_core">Core Component Warranty</h4>
                 <p class="text-base text-slate-600 dark:text-slate-400 mb-6" data-i18n="about_sla_core_desc">Motors, PLCs, heating elements</p>
               </div>
@@ -562,7 +562,7 @@
               </div>
             </div>
             <div class="mt-8 bg-white dark:bg-slate-800 rounded-2xl p-8 shadow-lg">
-              <h3 class="text-xl font-bold mb-6 flex items-center gap-2">
+              <h3 class="text-xl font-bold mb-6 flex items-center gap-2" data-i18n="about_assignment_service_commitment_details">
                 <span class="material-symbols-outlined text-primary">assignment</span>
                 <span data-i18n="about_sla_detail_title">Service Commitment Details</span>
               </h3>
@@ -607,7 +607,7 @@
             <div class="absolute top-0 right-0 size-64 bg-white/10 rounded-full -mr-32 -mt-32"></div>
             <div class="relative z-10">
               <h2 class="text-4xl lg:text-5xl font-black mb-6" data-i18n="about_cta_title">Ready to Upgrade Your Kitchen?</h2>
-              <p class="text-white/80 text-lg mb-10 max-w-2xl mx-auto">
+              <p class="text-white/80 text-lg mb-10 max-w-2xl mx-auto" data-i18n="about_partner_with_yukoli_and_join_3_000_foods">
                 <span data-i18n="about_cta_desc">
                   Partner with YuKoLi and join 3,000+ foodservice businesses worldwide in their smart upgrade journey. Get a free customized proposal — our engineers will respond within 24 hours.
                 </span>
@@ -649,7 +649,7 @@
             <a
               href="https://wa.me/8613163756465" data-wa-message-key="wa_msg_about"
               target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-3 bg-white text-[#25D366] px-10 py-5 rounded-xl font-bold text-lg hover:shadow-xl transition-all"
-            >
+             data-i18n="about_whatsapp_us">
               <svg class="w-6 h-6" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
               <span data-i18n="about_wa_cta_btn">WhatsApp Us</span>
             </a>
@@ -661,25 +661,25 @@
 
     <script src="/assets/js/ui/dropdown-styles.js"></script>
     <script src="/assets/js/ui/dropdown-base.js"></script>
-    <script defer src="/assets/js/ui/products-dropdown.js?v=202605112129"></script>
-    <script defer src="/assets/js/ui/applications-dropdown.js?v=202605112129"></script>
-    <script defer src="/assets/js/ui/support-dropdown.js?v=202605112129"></script>
-    <script defer src="/assets/js/ui/about-dropdown.js?v=202605112129"></script>
-    <script defer src="/assets/js/ui/navigator.js?v=202605112129"></script>
-<script defer src="/assets/js/ui/slide-menu.js?v=202605112129"></script>
+    <script defer src="/assets/js/ui/products-dropdown.js?v=202605121107"></script>
+    <script defer src="/assets/js/ui/applications-dropdown.js?v=202605121107"></script>
+    <script defer src="/assets/js/ui/support-dropdown.js?v=202605121107"></script>
+    <script defer src="/assets/js/ui/about-dropdown.js?v=202605121107"></script>
+    <script defer src="/assets/js/ui/navigator.js?v=202605121107"></script>
+<script defer src="/assets/js/ui/slide-menu.js?v=202605121107"></script>
     <script defer src="/assets/js/ui/search-engine.js"></script>
-    <script defer src="/assets/js/ui/footer.js?v=202605112129"></script>
-    <script defer src="/assets/js/lang-registry.js?v=202605112129"></script>
-    <script defer src="/assets/js/translations.js?v=202605112129"></script>
-    <script defer src="/assets/js/translations-dropdown-template.js?v=202605112129"></script>
+    <script defer src="/assets/js/ui/footer.js?v=202605121107"></script>
+    <script defer src="/assets/js/lang-registry.js?v=202605121107"></script>
+    <script defer src="/assets/js/translations.js?v=202605121107"></script>
+    <script defer src="/assets/js/translations-dropdown-template.js?v=202605121107"></script>
     <script defer src="/assets/js/contacts.js"></script>
     <script defer src="/assets/js/router.js"></script>
 
     <script defer src="/assets/js/ui/helpers.js"></script>
     <script defer src="/assets/js/ui/page-effects.js"></script>
     <script defer src="/assets/js/ui/form-interactions.js"></script>
-    <script defer src="/assets/js/page-interactions.js?v=202605112129"></script><script src="/assets/js/utils/device-utils.js"></script>
-    <script src="/assets/js/spa-router.js?v=202605112129"></script>
+    <script defer src="/assets/js/page-interactions.js?v=202605121107"></script><script src="/assets/js/utils/device-utils.js"></script>
+    <script src="/assets/js/spa-router.js?v=202605121107"></script>
       <script defer src="/assets/js/ui/floating-actions.js"></script>
   </body>
 </html>

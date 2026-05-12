@@ -141,7 +141,7 @@ header button:active {
   <div class="bg-white dark:bg-slate-900/50 border border-slate-300 dark:border-slate-800 rounded-xl p-4 shadow-sm">
     <form id="quote-form-mobile" class="space-y-5" novalidate>
       <!-- Company Info -->
-      <h2 class="text-base font-bold mb-3 flex items-center gap-2">
+      <h2 class="text-base font-bold mb-3 flex items-center gap-2" data-i18n="quote_business_company_information">
         <span class="material-symbols-outlined text-primary text-lg">business</span>
         <span data-i18n="quote_company_info">Company Information</span>
       </h2>
@@ -184,7 +184,7 @@ header button:active {
         </select>
       </div>
       <!-- Equipment Needs -->
-      <h2 class="text-base font-bold mb-3 mt-6 flex items-center gap-2">
+      <h2  class="line-clamp-2 text-base font-bold mb-3 mt-6 flex items-center gap-2" data-i18n="quote_precision_manufacturing_equipment_needs">
         <span class="material-symbols-outlined text-primary text-lg">precision_manufacturing</span>
         <span data-i18n="quote_equipment_needs">Equipment Needs</span>
       </h2>
@@ -246,7 +246,7 @@ header button:active {
   </div>
 
   <!-- Trust Cards -->
-  <div class="grid grid-cols-1 gap-3 mt-6">
+  <div class="grid grid-cols-1 gap-4 mt-6">
     <div class="flex items-center gap-3 p-3 bg-primary/5 dark:bg-primary/10 rounded-xl border border-slate-300 dark:border-slate-700">
       <span class="material-symbols-outlined text-primary text-2xl">inventory_2</span>
       <div>
@@ -316,10 +316,10 @@ header button:active {
     </div>
     <p class="text-sm opacity-90 mb-4" data-i18n="quote_prefer_chat_desc">Reach us directly on WhatsApp for instant support.</p>
     <div class="flex gap-3">
-      <button onclick="startWhatsApp()" class="flex-1 bg-white text-primary py-2.5 rounded-lg font-bold text-sm flex items-center justify-center gap-2">
+      <button onclick="startWhatsApp()" class="flex-1 bg-white text-primary py-2.5 rounded-lg font-bold text-sm flex items-center justify-center gap-2" data-i18n="cta_whatsapp">
         <span class="material-symbols-outlined text-base">chat</span> WhatsApp
       </button>
-      <button onclick="startEmail()" class="flex-1 bg-white/20 text-white py-2.5 rounded-lg font-bold text-sm flex items-center justify-center gap-2">
+      <button onclick="startEmail()" class="flex-1 bg-white/20 text-white py-2.5 rounded-lg font-bold text-sm flex items-center justify-center gap-2" data-i18n="quote_mail_send">
         <span class="material-symbols-outlined text-base">mail</span> <span data-i18n="quote_send_email">Send Email</span>
       </button>
     </div>
@@ -353,7 +353,7 @@ header button:active {
   <div class="section-content">
 <div class="sticky bottom-0 bg-white dark:bg-slate-900 border-t border-primary/10 thumb-zone-bottom shadow-[0_-10px_30px_rgba(0,0,0,0.05)]">
 <div class="px-4 pt-4 pb-2">
-<a id="quote-submit-mobile" class="flex items-center justify-center w-full h-14 bg-primary text-white font-black text-lg rounded-xl shadow-xl shadow-primary/20 transition-all gap-2 uppercase tracking-widest" href="#">
+<a id="quote-submit-mobile" class="flex items-center justify-center w-full h-14 bg-primary text-white font-black text-lg rounded-xl shadow-xl shadow-primary/20 transition-all gap-2 uppercase tracking-widest" href="#" data-i18n="cta_submit_inquiry">
                 <span data-i18n="quote_btn_submit_inquiry">Submit Inquiry</span>
                 <span class="material-symbols-outlined">arrow_forward</span>
 </a>
@@ -369,16 +369,16 @@ header button:active {
     <script src="/assets/js/ui/dropdown-styles.js"></script>
     <script src="/assets/js/ui/dropdown-base.js"></script>
     <script src="/assets/js/ui/custom-select.js"></script>
-<script defer src="/assets/js/ui/products-dropdown.js?v=202605112129"></script>
-    <script defer src="/assets/js/ui/applications-dropdown.js?v=202605112129"></script>
-    <script defer src="/assets/js/ui/support-dropdown.js?v=202605112129"></script>
-    <script defer src="/assets/js/ui/about-dropdown.js?v=202605112129"></script>
-    <script defer src="/assets/js/ui/navigator.js?v=202605112129"></script>
-<script defer src="/assets/js/ui/slide-menu.js?v=202605112129"></script>
+<script defer src="/assets/js/ui/products-dropdown.js?v=202605121107"></script>
+    <script defer src="/assets/js/ui/applications-dropdown.js?v=202605121107"></script>
+    <script defer src="/assets/js/ui/support-dropdown.js?v=202605121107"></script>
+    <script defer src="/assets/js/ui/about-dropdown.js?v=202605121107"></script>
+    <script defer src="/assets/js/ui/navigator.js?v=202605121107"></script>
+<script defer src="/assets/js/ui/slide-menu.js?v=202605121107"></script>
 <script defer src="/assets/js/ui/search-engine.js"></script>
-<script defer src="/assets/js/ui/footer.js?v=202605112129"></script>
-<script defer src="/assets/js/lang-registry.js?v=202605112129"></script>
-<script defer src="/assets/js/translations.js?v=202605112129"></script><script defer src="/assets/js/translations-dropdown-template.js?v=202605112129"></script>
+<script defer src="/assets/js/ui/footer.js?v=202605121107"></script>
+<script defer src="/assets/js/lang-registry.js?v=202605121107"></script>
+<script defer src="/assets/js/translations.js?v=202605121107"></script><script defer src="/assets/js/translations-dropdown-template.js?v=202605121107"></script>
 <script defer src="/assets/js/contacts.js"></script>
 <script defer src="/assets/js/router.js"></script>
 
@@ -419,7 +419,7 @@ header button:active {
 
 
 <script src="/assets/js/utils/device-utils.js"></script>
-<script src="/assets/js/spa-router.js?v=202605112129"></script>
+<script src="/assets/js/spa-router.js?v=202605121107"></script>
 
 
     <script defer src="/assets/js/ui/floating-actions.js"></script>
