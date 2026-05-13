@@ -1,0 +1,48 @@
+{
+  "ar": {
+    "status": "done",
+    "total": 4484,
+    "pending": 0,
+    "translated": 806,
+    "errors": 0,
+    "elapsed": "1157s",
+    "updatedAt": "2026-05-13T10:48:19.904Z"
+  },
+  "de": {
+    "status": "done",
+    "total": 4484,
+    "pending": 0,
+    "translated": 504,
+    "errors": 0,
+    "elapsed": "1602s",
+    "updatedAt": "2026-05-13T10:55:44.550Z"
+  },
+  "ja": {
+    "status": "running",
+    "total": 4484,
+    "pending": 253,
+    "translated": 50,
+    "errors": 0,
+    "batchNum": 2,
+    "lastKey": "ct_pain_desc",
+    "lastUpdate": "2026-05-13T11:47:36.201Z"
+  },
+  "hi": {
+    "status": "running",
+    "total": 4484,
+    "pending": 2121,
+    "translated": 250,
+    "errors": 0,
+    "batchNum": 10,
+    "lastKey": "cloud-kitchen_equipment_badge_standard",
+    "lastUpdate": "2026-05-13T11:48:19.560Z"
+  },
+  "vi": {
+    "status": "incomplete",
+    "totalKeys": 4484,
+    "remaining": 1693,
+    "translated": 0,
+    "errors": 11,
+    "lastUpdate": "2026-05-13T11:48:11.978Z"
+  }
+}
