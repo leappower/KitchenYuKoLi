@@ -1,0 +1,34 @@
+# KitchenYuKoLi + OpenClaw 统一 Caddy 配置
+#
+# https://192.168.3.181/           → KitchenYuKoLi (nodemon :3099)
+# https://192.168.3.181:18789/    → OpenClaw Gateway (直连，不经 Caddy)
+#
+# 启动: sudo caddy run --config Caddyfile.dev
+# 停止: sudo caddy stop --config Caddyfile.dev
+
+https://192.168.3.181 {
+	tls /Users/chee/certs/192.168.3.181-new.pem /Users/chee/certs/192.168.3.181-key.pem
+
+	# API 请求代理到 KitchenYuKoLiServer 后端
+	handle /api/* {
+		reverse_proxy localhost:8000
+	}
+
+	# Admin 后台代理到后端
+	handle /admin/* {
+		reverse_proxy localhost:8001
+	}
+
+	# 所有其他请求代理到 nodemon (KitchenYuKoLi 前端)
+	handle {
+		reverse_proxy localhost:3099
+	}
+
+	# 开发环境：所有响应强制不缓存
+	header {
+		Cache-Control "no-store, no-cache, must-revalidate, proxy-revalidate"
+		Pragma "no-cache"
+		Expires "0"
+		X-Dev-Mode "true"
+	}
+}
