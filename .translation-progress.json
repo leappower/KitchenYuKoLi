@@ -20,22 +20,22 @@
   "ja": {
     "status": "running",
     "total": 4484,
-    "pending": 253,
+    "pending": 203,
     "translated": 50,
     "errors": 0,
     "batchNum": 2,
-    "lastKey": "ct_pain_desc",
-    "lastUpdate": "2026-05-13T11:47:36.201Z"
+    "lastKey": "menu_lab_faq1_a",
+    "lastUpdate": "2026-05-13T12:03:55.291Z"
   },
   "hi": {
     "status": "running",
     "total": 4484,
-    "pending": 2121,
-    "translated": 250,
+    "pending": 1971,
+    "translated": 150,
     "errors": 0,
-    "batchNum": 10,
-    "lastKey": "cloud-kitchen_equipment_badge_standard",
-    "lastUpdate": "2026-05-13T11:48:19.560Z"
+    "batchNum": 6,
+    "lastKey": "landing_get_solution",
+    "lastUpdate": "2026-05-13T12:06:04.682Z"
   },
   "vi": {
     "status": "incomplete",
