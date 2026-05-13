@@ -567,6 +567,14 @@ button.bg-primary[class*="hover:"]:hover {
 .field-error {
   border-color: #ef4444 !important;
   outline: none !important;
+  box-shadow: 0 0 0 1px #ef4444 !important;
+}
+
+/* Fix: remove default border on buttons to prevent black edge */
+button[type="submit"],
+button.bg-primary,
+a.bg-primary {
+  border: none;
 }
 
 .field-error-msg {
