@@ -87,7 +87,7 @@ module.exports = {
     'bg-orange-100','bg-orange-500','bg-orange-600','bg-purple-100','bg-purple-500','bg-purple-600',
     'bg-primary-100','bg-primary-500','bg-primary-600',
     'text-blue-600','text-green-600','text-orange-600','text-purple-600','text-primary-600',
-    'border-blue-500','border-green-500','border-orange-500','border-purple-500','border-primary-500',
+    'border-slate-200','dark:border-slate-700','border-blue-500','border-green-500','border-orange-500','border-purple-500','border-primary-500',
     'border-blue-400','border-green-400','border-orange-400','border-purple-400',
     'dark:bg-blue-900','dark:bg-green-900','dark:bg-orange-900','dark:bg-purple-900','dark:bg-primary-900',
     'dark:bg-blue-900/30','dark:bg-green-900/30','dark:bg-orange-900/30','dark:bg-purple-900/30','dark:bg-primary-900/30',
