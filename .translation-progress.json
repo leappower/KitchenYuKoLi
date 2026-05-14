@@ -33,54 +33,50 @@
     "remaining": 0
   },
   "fil": {
-    "status": "running",
-    "total": 4484,
-    "pending": 1094,
-    "translated": 1749,
-    "errors": 2,
-    "batchNum": 37,
-    "lastKey": "applications_cloud-kitchen_space_utilization",
-    "lastUpdate": "2026-05-14T07:34:26.833Z"
+    "status": "incomplete",
+    "totalKeys": 4484,
+    "remaining": 898,
+    "translated": 2047,
+    "errors": 11,
+    "lastUpdate": "2026-05-14T07:52:59.524Z"
   },
   "he": {
     "status": "running",
     "total": 4485,
-    "pending": 2540,
-    "translated": 600,
-    "errors": 0,
-    "batchNum": 12,
-    "lastKey": "sol_cooling_cta",
-    "lastUpdate": "2026-05-14T06:20:15.340Z"
+    "pending": 640,
+    "translated": 1195,
+    "errors": 1,
+    "batchNum": 25,
+    "lastKey": "frying_pain_title",
+    "lastUpdate": "2026-05-14T09:18:22.780Z"
   },
   "fr": {
     "status": "running",
     "total": 4485,
-    "pending": 2540,
-    "translated": 600,
+    "pending": 840,
+    "translated": 1698,
     "errors": 0,
-    "batchNum": 12,
-    "lastKey": "sol_cooling_cta",
-    "lastUpdate": "2026-05-14T06:19:19.345Z"
+    "batchNum": 34,
+    "lastKey": "small_restaurant_cta_title",
+    "lastUpdate": "2026-05-14T08:55:18.648Z"
   },
   "es": {
-    "status": "running",
-    "total": 4485,
-    "pending": 1715,
-    "translated": 851,
+    "status": "incomplete",
+    "totalKeys": 4485,
+    "remaining": 8,
+    "translated": 2560,
     "errors": 0,
-    "batchNum": 17,
-    "lastKey": "training_manual_4_title",
-    "lastUpdate": "2026-05-14T07:35:19.254Z"
+    "lastUpdate": "2026-05-14T08:08:14.856Z"
   },
   "ru": {
     "status": "running",
     "total": 4484,
-    "pending": 2464,
-    "translated": 75,
+    "pending": 464,
+    "translated": 1994,
     "errors": 0,
-    "batchNum": 3,
-    "lastKey": "sol_fastfood_equip_desc",
-    "lastUpdate": "2026-05-14T04:21:45.994Z"
+    "batchNum": 40,
+    "lastKey": "products_stewing_smart_stewing",
+    "lastUpdate": "2026-05-14T08:54:37.955Z"
   },
   "pt": {
     "status": "incomplete",
@@ -133,12 +129,12 @@
   "km": {
     "status": "running",
     "total": 4484,
-    "pending": 1814,
-    "translated": 50,
+    "pending": 814,
+    "translated": 998,
     "errors": 0,
-    "batchNum": 2,
-    "lastKey": "support_warranty_term_4_title",
-    "lastUpdate": "2026-05-14T04:21:41.320Z"
+    "batchNum": 20,
+    "lastKey": "sr_feat3_title",
+    "lastUpdate": "2026-05-14T09:16:13.186Z"
   },
   "my": {
     "status": "running",
@@ -153,21 +149,21 @@
   "lo": {
     "status": "running",
     "total": 4484,
-    "pending": 1914,
-    "translated": 50,
+    "pending": 1364,
+    "translated": 549,
     "errors": 0,
-    "batchNum": 2,
-    "lastKey": "support_remote_diagnostics_via_yukoli_os",
-    "lastUpdate": "2026-05-14T04:21:40.288Z"
+    "batchNum": 11,
+    "lastKey": "canteen_bottom_metric_4_num",
+    "lastUpdate": "2026-05-14T09:14:34.424Z"
   },
   "it": {
     "status": "running",
     "total": 4484,
-    "pending": 1414,
-    "translated": 1499,
-    "errors": 1,
-    "batchNum": 31,
-    "lastKey": "canteen_metric_2_label",
-    "lastUpdate": "2026-05-14T07:32:52.083Z"
+    "pending": 114,
+    "translated": 2742,
+    "errors": 2,
+    "batchNum": 57,
+    "lastKey": "support_sp_cta_title",
+    "lastUpdate": "2026-05-14T08:16:33.835Z"
   }
 }
