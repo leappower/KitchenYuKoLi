@@ -35,12 +35,12 @@
   "fil": {
     "status": "running",
     "total": 4484,
-    "pending": 2944,
-    "translated": 120,
-    "errors": 0,
-    "batchNum": 4,
-    "lastKey": "roi_monthly_chef_salary",
-    "lastUpdate": "2026-05-14T06:00:45.308Z"
+    "pending": 1094,
+    "translated": 1749,
+    "errors": 2,
+    "batchNum": 37,
+    "lastKey": "applications_cloud-kitchen_space_utilization",
+    "lastUpdate": "2026-05-14T07:34:26.833Z"
   },
   "he": {
     "status": "running",
@@ -65,12 +65,12 @@
   "es": {
     "status": "running",
     "total": 4485,
-    "pending": 2565,
-    "translated": 600,
+    "pending": 1765,
+    "translated": 801,
     "errors": 0,
-    "batchNum": 20,
-    "lastKey": "sol_cool_case_2_metric1",
-    "lastUpdate": "2026-05-14T05:45:57.665Z"
+    "batchNum": 16,
+    "lastKey": "training_core_2_desc",
+    "lastUpdate": "2026-05-14T07:34:57.731Z"
   },
   "ru": {
     "status": "running",
@@ -83,14 +83,12 @@
     "lastUpdate": "2026-05-14T04:21:45.994Z"
   },
   "pt": {
-    "status": "running",
-    "total": 4484,
-    "pending": 2914,
-    "translated": 250,
-    "errors": 1,
-    "batchNum": 11,
-    "lastKey": "sol_bev_case_3_name",
-    "lastUpdate": "2026-05-14T02:40:24.582Z"
+    "status": "incomplete",
+    "totalKeys": 4484,
+    "remaining": 8,
+    "translated": 2932,
+    "errors": 0,
+    "lastUpdate": "2026-05-14T07:23:39.920Z"
   },
   "nl": {
     "status": "running",
@@ -165,11 +163,11 @@
   "it": {
     "status": "running",
     "total": 4484,
-    "pending": 2939,
-    "translated": 300,
+    "pending": 1414,
+    "translated": 1499,
     "errors": 1,
-    "batchNum": 13,
-    "lastKey": "roi_outlet_count",
-    "lastUpdate": "2026-05-14T02:40:32.827Z"
+    "batchNum": 31,
+    "lastKey": "canteen_metric_2_label",
+    "lastUpdate": "2026-05-14T07:32:52.083Z"
   }
 }
