@@ -32,7 +32,6 @@
     "test:e2e:headed": "npx playwright test --headed",
     "docker:build": "docker build -t html-yuql .",
     "docker:run": "docker run -p 3000:3000 html-yuql",
-    "prestart": "node scripts/init-dev.js",
     "prepare": "npx lefthook install",
     "sync:lang": "node scripts/deploy-lang-sync.js",
     "sync:lang:check": "node scripts/deploy-lang-sync.js --dry-run"
