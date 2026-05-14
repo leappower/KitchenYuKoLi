@@ -179,17 +179,17 @@
 
     // Only include filled fields, labels in current UI language
     var lines = [];
-    if (company) lines.push("🏢 " + t("quote_company_name") + ": " + company);
-    if (contact) lines.push("👤 " + t("quote_contact_person") + ": " + contact);
-    if (phone) lines.push("📞 " + t("quote_phone") + ": " + phone);
-    if (email) lines.push("📧 " + t("quote_email_address") + ": " + email);
-    if (country) lines.push("🌍 " + t("quote_country_region") + ": " + country);
-    if (equipType) lines.push("🍽️ " + t("quote_equipment_type") + ": " + equipType);
-    if (quantity) lines.push("📦 " + t("quote_quantity") + ": " + quantity);
-    if (capacity) lines.push("🏭 " + t("quote_kitchen_capacity") + ": " + capacity);
-    if (budget) lines.push("💰 " + t("quote_budget_range") + ": " + budget);
-    if (message) lines.push("📝 " + t("quote_detailed_requirements") + ": " + message);
-    return lines.length > 0 ? "🔧 " + t("quote_get_quote") + "\n" + lines.join("\n") : "🔧 " + t("quote_get_quote");
+    if (company) lines.push(t("quote_company_name") + ": " + company);
+    if (contact) lines.push(t("quote_contact_person") + ": " + contact);
+    if (phone) lines.push(t("quote_phone") + ": " + phone);
+    if (email) lines.push(t("quote_email_address") + ": " + email);
+    if (country) lines.push(t("quote_country_region") + ": " + country);
+    if (equipType) lines.push(t("quote_equipment_type") + ": " + equipType);
+    if (quantity) lines.push(t("quote_quantity") + ": " + quantity);
+    if (capacity) lines.push(t("quote_kitchen_capacity") + ": " + capacity);
+    if (budget) lines.push(t("quote_budget_range") + ": " + budget);
+    if (message) lines.push(t("quote_detailed_requirements") + ": " + message);
+    return lines.length > 0 ? t("quote_get_quote") + "\n" + lines.join("\n") : t("quote_get_quote");
   }
 
   // ============================================
