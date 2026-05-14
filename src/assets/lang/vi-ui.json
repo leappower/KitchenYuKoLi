@@ -4482,5 +4482,13 @@
   "sr_trust_stat3_label": "核心部件保修",
   "sr_trust_stat4_num": "48小时发货",
   "sr_trust_stat4_label": "3-7天送达",
-  "sr_trust_cases_link": "查看真实客户案例"
+  "sr_trust_cases_link": "查看真实客户案例",
+  "cases_hero_cta_products": "Browse Products",
+  "ck_cta_whatsapp": "WhatsApp Consultation",
+  "sr_hero_cta2": "WhatsApp",
+  "support_spare_faq_a1": "You can confirm via the following methods: 1) Check the model and serial number on the equipment nameplate; 2) Take a photo of the part to be replaced and send it to our spare parts specialist; 3) Describe the malfunction, and our engineers will help identify the required part. To avoid shipping errors, we recommend confirming before placing an order.",
+  "support_spare_faq_a2": "We strongly advise against using third-party parts. Non-original parts may differ in material, specifications, and performance, leading to reduced equipment performance, increased safety risks, and potential impact on warranty rights. YuKoLi original parts undergo strict quality testing to ensure perfect matching with the equipment.",
+  "support_spare_faq_a3": "Standard parts (blades, filters, seals, etc.) are in stock at Southeast Asia regional warehouses and will be shipped within 48 hours of order placement. Non-standard parts (control boards, custom components, etc.) may require 5-10 working days for allocation or production. We will inform you of the estimated delivery time in advance.",
+  "support_spare_faq_a4": "Based on customer usage data, we recommend stocking these consumables: vegetable cutter blades (3-6 months), oil mesh filters (clean monthly, replace every 3 months), sealing rings (replace every 6 months), and thermostats (replace annually if temperature is adjusted frequently). We provide personalized stocking recommendations based on your specific equipment model.",
+  "support_spare_value1_desc": "All parts are produced by YuKoLi original factory. Materials, specifications, and performance are completely consistent with equipment factory configuration, ensuring compatibility and service life."
 }

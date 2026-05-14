@@ -1,3 +1,18 @@
+/* ─── Production-safe console shim ───────────────────────────────────
+ * In production, suppress console.warn noise from i18n, SPA router, etc.
+ * Enable debug: localStorage.setItem('debug', '1')  */
+(function () {
+  if (!/debug=1/.test(location.search) && !localStorage.getItem("debug")) {
+    var origWarn = console.warn;
+    var origLog = console.log;
+    console.warn = function () {
+      // Keep errors visible, suppress routine warnings
+      var msg = Array.prototype.join.call(arguments, " ");
+      if (/error|fail|crash/i.test(msg)) origWarn.apply(console, arguments);
+    };
+    console.log = function () {};
+  }
+})();
 // main.js - Core functionality with modular architecture
 // IIFE wrapper for src2 (no build tools)
 // Outputs: window.app (App instance)
