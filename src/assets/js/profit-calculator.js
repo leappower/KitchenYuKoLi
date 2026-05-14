@@ -590,17 +590,17 @@
         ": " +
         lc.symbol +
         formatNumber(result.monthlySavings.min) +
-        " – " +
+        " - " +
         lc.symbol +
         formatNumber(result.monthlySavings.max) +
         " " +
         lc.currency,
-      t("profit_calc_payback") + ": " + result.payback.min + "–" + result.payback.max + " " + t("profit_calc_months"),
+      t("profit_calc_payback") + ": " + result.payback.min + "-" + result.payback.max + " " + t("profit_calc_months"),
       t("profit_calc_report_5year") +
         ": " +
         lc.symbol +
         shortCurrency(result.fiveYearReturn.min, lc.symbol).replace(lc.symbol, "") +
-        " – " +
+        " - " +
         shortCurrency(result.fiveYearReturn.max, lc.symbol).replace(lc.symbol, "") +
         " " +
         lc.currency,
@@ -672,13 +672,13 @@
         t("profit_calc_pdf_monthly_savings"),
         lc.symbol +
           formatNumber(result.monthlySavings.min) +
-          " – " +
+          " - " +
           lc.symbol +
           formatNumber(result.monthlySavings.max)
       ) +
       pdfRow(
         t("profit_calc_pdf_equipment_investment"),
-        lc.symbol + formatNumber(result.investment.min) + " – " + lc.symbol + formatNumber(result.investment.max)
+        lc.symbol + formatNumber(result.investment.min) + " - " + lc.symbol + formatNumber(result.investment.max)
       ) +
       '<div style="display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid #fecdd3">' +
       '<span style="color:#64748b;font-size:13px">' +
@@ -686,7 +686,7 @@
       "</span>" +
       '<span style="font-weight:900;font-size:20px;color:#e11d48">' +
       result.payback.min +
-      "–" +
+      "-" +
       result.payback.max +
       " " +
       t("profit_calc_months") +
@@ -695,7 +695,7 @@
       pdfRow(
         t("profit_calc_pdf_5year_return"),
         shortCurrency(result.fiveYearReturn.min, lc.symbol) +
-          " – " +
+          " - " +
           shortCurrency(result.fiveYearReturn.max, lc.symbol)
       ) +
       pdfRow(t("profit_calc_pdf_annual_savings"), shortCurrency(result.annualSavings.mid, lc.symbol)) +
@@ -841,7 +841,7 @@
           '</td><td style="padding:6px 8px;border-bottom:1px solid #dbeafe;text-align:right;color:#1e40af">' +
           lc.symbol +
           formatNumber(cost.min) +
-          " – " +
+          " - " +
           lc.symbol +
           formatNumber(cost.max) +
           "</td></tr>";
@@ -960,7 +960,7 @@
         '</span><span class="value">' +
         lc.symbol +
         formatNumber(result.monthlySavings.min) +
-        " – " +
+        " - " +
         lc.symbol +
         formatNumber(result.monthlySavings.max) +
         "</span></div>",
@@ -969,7 +969,7 @@
         '</span><span class="value">' +
         lc.symbol +
         formatNumber(result.investment.min) +
-        " – " +
+        " - " +
         lc.symbol +
         formatNumber(result.investment.max) +
         "</span></div>",
@@ -977,7 +977,7 @@
         t("profit_calc_pdf_payback_period") +
         '</span><span class="value big">' +
         result.payback.min +
-        "–" +
+        "-" +
         result.payback.max +
         " " +
         t("profit_calc_months") +
@@ -986,7 +986,7 @@
         t("profit_calc_pdf_5year_return") +
         '</span><span class="value">' +
         shortCurrency(result.fiveYearReturn.min, lc.symbol) +
-        " – " +
+        " - " +
         shortCurrency(result.fiveYearReturn.max, lc.symbol) +
         "</span></div>",
       '<div class="row"><span class="label">' +
@@ -1379,10 +1379,10 @@
 
     // Bind data attributes
     var els = {
-      "res-monthly-savings": sym + helpers.fmt(r.monthlySavings.min) + " – " + sym + helpers.fmt(r.monthlySavings.max),
-      "res-investment": sym + helpers.fmt(r.investment.min) + " – " + sym + helpers.fmt(r.investment.max),
-      "res-payback": r.payback.min + "–" + r.payback.max,
-      "res-five-year": helpers.short(r.fiveYearReturn.min) + " – " + helpers.short(r.fiveYearReturn.max),
+      "res-monthly-savings": sym + helpers.fmt(r.monthlySavings.min) + " - " + sym + helpers.fmt(r.monthlySavings.max),
+      "res-investment": sym + helpers.fmt(r.investment.min) + " - " + sym + helpers.fmt(r.investment.max),
+      "res-payback": r.payback.min + "-" + r.payback.max,
+      "res-five-year": helpers.short(r.fiveYearReturn.min) + " - " + helpers.short(r.fiveYearReturn.max),
       "res-annual": helpers.short(r.annualSavings.mid),
       "res-co2": r.co2.toFixed(1),
     };
