@@ -65,12 +65,12 @@
   "es": {
     "status": "running",
     "total": 4485,
-    "pending": 1765,
-    "translated": 801,
+    "pending": 1715,
+    "translated": 851,
     "errors": 0,
-    "batchNum": 16,
-    "lastKey": "training_core_2_desc",
-    "lastUpdate": "2026-05-14T07:34:57.731Z"
+    "batchNum": 17,
+    "lastKey": "training_manual_4_title",
+    "lastUpdate": "2026-05-14T07:35:19.254Z"
   },
   "ru": {
     "status": "running",
