@@ -555,7 +555,6 @@
   document.addEventListener("spa:load", function () {
     var grid = document.getElementById("case-grid");
     if (grid) {
-      if (__DEVELOPMENT__) console.log("[case-grid] spa:load detected, re-initializing case grid");
       init(getVariant());
     }
   });
