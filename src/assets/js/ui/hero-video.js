@@ -19,7 +19,7 @@
  *            preload="metadata" muted playsinline>          ← 视频（初始隐藏）
  *     </video>
  *     <div class="hero-video-overlay">                      ← 半透明磨砂覆盖层（初始隐藏）
- *       <button class="hero-video-mute">🔇</button>        ← 静音切换
+ *       <button class="hero-video-mute"><span class="material-symbols-outlined">volume_off</span></button>  ← 静音切换
  *     </div>
  *     <div class="hero-video-info">                         ← 底部信息卡片（保持不动）
  *       ...existing content...
@@ -118,7 +118,9 @@
         e.stopPropagation();
         state.isMuted = !state.isMuted;
         video.muted = state.isMuted;
-        muteBtn.textContent = state.isMuted ? "🔇" : "🔊";
+        muteBtn.innerHTML = state.isMuted
+          ? '<span class="material-symbols-outlined text-white text-xl">volume_off</span>'
+          : '<span class="material-symbols-outlined text-white text-xl">volume_up</span>';
         muteBtn.setAttribute("data-i18n", state.isMuted ? "hero_video_mute" : "hero_video_unmute");
       });
     }
@@ -128,7 +130,9 @@
       state.isMuted = !state.isMuted;
       video.muted = state.isMuted;
       if (muteBtn) {
-        muteBtn.textContent = state.isMuted ? "🔇" : "🔊";
+        muteBtn.innerHTML = state.isMuted
+          ? '<span class="material-symbols-outlined text-white text-xl">volume_off</span>'
+          : '<span class="material-symbols-outlined text-white text-xl">volume_up</span>';
       }
     });
 

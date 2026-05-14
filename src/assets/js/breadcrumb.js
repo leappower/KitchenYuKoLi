@@ -35,12 +35,12 @@
   }
 
   var PRODUCT_SLUGS = {
-    stirfry: { key: "nav_products_stirfry", label: "翻炒系列", icon: "local_fire_department", emoji: "🔥" },
-    cutting: { key: "nav_products_cutting", label: "切配系列", icon: "content_cut", emoji: "🔪" },
-    frying: { key: "nav_products_frying", label: "煎炸系列", icon: "outdoor_grill", emoji: "🍳" },
-    stewing: { key: "nav_products_stewing", label: "炖煮系列", icon: "soup_kitchen", emoji: "🥘" },
-    steaming: { key: "nav_products_steaming", label: "蒸煮系列", icon: "cloud", emoji: "⬆️" },
-    other: { key: "nav_products_other", label: "辅助设备", icon: "more_horiz", emoji: "⚙️" },
+    stirfry: { key: "nav_products_stirfry", label: "翻炒系列", icon: "local_fire_department" },
+    cutting: { key: "nav_products_cutting", label: "切配系列", icon: "content_cut" },
+    frying: { key: "nav_products_frying", label: "煎炸系列", icon: "outdoor_grill" },
+    stewing: { key: "nav_products_stewing", label: "炖煮系列", icon: "soup_kitchen" },
+    steaming: { key: "nav_products_steaming", label: "蒸煮系列", icon: "cloud" },
+    other: { key: "nav_products_other", label: "辅助设备", icon: "more_horiz" },
   };
 
   var APP_SLUGS = {

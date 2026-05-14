@@ -348,6 +348,15 @@ function resolvePage(reqPath) {
   f = path.join(__dirname, 'dist', 'pages', reqPath);
   if (isFile(f)) return f;
 
+  // 2b. Variant fallback: index-pc.html → index.html
+  //     Cases detail pages (bangkok, surabaya, etc.) only have index.html.
+  //     When SPA fetches /cases/<city>/index-pc.html, serve index.html instead.
+  if (/\/index-(pc|mobile|tablet)\.html$/.test(reqPath)) {
+    var variantFallback = reqPath.replace(/\/index-(pc|mobile|tablet)\.html$/, '/index.html');
+    f = path.join(__dirname, 'dist', 'pages', variantFallback);
+    if (isFile(f)) return f;
+  }
+
   // 3–5. Page resolution under dist/pages/
   //    Try index.html → index-pc.html → <clean>-pc.html
   var candidates = [
