@@ -87,7 +87,7 @@ IMPORTANT:
           'Authorization': `Bearer ${provider.apiKey}`
         },
         body: JSON.stringify(body),
-        signal: AbortSignal.timeout(300000)
+        signal: AbortSignal.timeout(60000)
       });
 
       if (!resp.ok) {

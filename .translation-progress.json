@@ -18,31 +18,158 @@
     "updatedAt": "2026-05-13T10:55:44.550Z"
   },
   "ja": {
+    "status": "done",
+    "totalKeys": 4484,
+    "remaining": 0
+  },
+  "hi": {
+    "status": "done",
+    "totalKeys": 4484,
+    "remaining": 0
+  },
+  "vi": {
+    "status": "done",
+    "totalKeys": 4484,
+    "remaining": 0
+  },
+  "fil": {
     "status": "running",
     "total": 4484,
-    "pending": 203,
+    "pending": 2944,
+    "translated": 120,
+    "errors": 0,
+    "batchNum": 4,
+    "lastKey": "roi_monthly_chef_salary",
+    "lastUpdate": "2026-05-14T06:00:45.308Z"
+  },
+  "he": {
+    "status": "running",
+    "total": 4485,
+    "pending": 2540,
+    "translated": 600,
+    "errors": 0,
+    "batchNum": 12,
+    "lastKey": "sol_cooling_cta",
+    "lastUpdate": "2026-05-14T06:20:15.340Z"
+  },
+  "fr": {
+    "status": "running",
+    "total": 4485,
+    "pending": 2540,
+    "translated": 600,
+    "errors": 0,
+    "batchNum": 12,
+    "lastKey": "sol_cooling_cta",
+    "lastUpdate": "2026-05-14T06:19:19.345Z"
+  },
+  "es": {
+    "status": "running",
+    "total": 4485,
+    "pending": 2565,
+    "translated": 600,
+    "errors": 0,
+    "batchNum": 20,
+    "lastKey": "sol_cool_case_2_metric1",
+    "lastUpdate": "2026-05-14T05:45:57.665Z"
+  },
+  "ru": {
+    "status": "running",
+    "total": 4484,
+    "pending": 2464,
+    "translated": 75,
+    "errors": 0,
+    "batchNum": 3,
+    "lastKey": "sol_fastfood_equip_desc",
+    "lastUpdate": "2026-05-14T04:21:45.994Z"
+  },
+  "pt": {
+    "status": "running",
+    "total": 4484,
+    "pending": 2914,
+    "translated": 250,
+    "errors": 1,
+    "batchNum": 11,
+    "lastKey": "sol_bev_case_3_name",
+    "lastUpdate": "2026-05-14T02:40:24.582Z"
+  },
+  "nl": {
+    "status": "running",
+    "total": 4484,
+    "pending": 1789,
+    "translated": 1200,
+    "errors": 0,
+    "batchNum": 24,
+    "lastKey": "support_warranty_value_1_title",
+    "lastUpdate": "2026-05-14T06:20:06.723Z"
+  },
+  "pl": {
+    "status": "running",
+    "total": 4484,
+    "pending": 1371,
+    "translated": 24,
+    "errors": 0,
+    "batchNum": 1,
+    "lastKey": "canteen_step_3_desc",
+    "lastUpdate": "2026-05-14T04:21:26.860Z"
+  },
+  "ko": {
+    "status": "done",
+    "totalKeys": 4484,
+    "remaining": 0
+  },
+  "tr": {
+    "status": "running",
+    "total": 4484,
+    "pending": 1614,
     "translated": 50,
     "errors": 0,
     "batchNum": 2,
-    "lastKey": "menu_lab_faq1_a",
-    "lastUpdate": "2026-05-13T12:03:55.291Z"
+    "lastKey": "ckc_eq4_title",
+    "lastUpdate": "2026-05-14T04:21:42.289Z"
   },
-  "hi": {
+  "ms": {
+    "status": "done",
+    "totalKeys": 4484,
+    "remaining": 0
+  },
+  "km": {
     "status": "running",
     "total": 4484,
-    "pending": 1971,
-    "translated": 150,
+    "pending": 1814,
+    "translated": 50,
     "errors": 0,
-    "batchNum": 6,
-    "lastKey": "landing_get_solution",
-    "lastUpdate": "2026-05-13T12:06:04.682Z"
+    "batchNum": 2,
+    "lastKey": "support_warranty_term_4_title",
+    "lastUpdate": "2026-05-14T04:21:41.320Z"
   },
-  "vi": {
-    "status": "incomplete",
-    "totalKeys": 4484,
-    "remaining": 1693,
-    "translated": 0,
-    "errors": 11,
-    "lastUpdate": "2026-05-13T11:48:11.978Z"
+  "my": {
+    "status": "running",
+    "total": 4484,
+    "pending": 1764,
+    "translated": 50,
+    "errors": 0,
+    "batchNum": 2,
+    "lastKey": "training_core_2_title",
+    "lastUpdate": "2026-05-14T04:21:39.554Z"
+  },
+  "lo": {
+    "status": "running",
+    "total": 4484,
+    "pending": 1914,
+    "translated": 50,
+    "errors": 0,
+    "batchNum": 2,
+    "lastKey": "support_remote_diagnostics_via_yukoli_os",
+    "lastUpdate": "2026-05-14T04:21:40.288Z"
+  },
+  "it": {
+    "status": "running",
+    "total": 4484,
+    "pending": 2939,
+    "translated": 300,
+    "errors": 1,
+    "batchNum": 13,
+    "lastKey": "roi_outlet_count",
+    "lastUpdate": "2026-05-14T02:40:32.827Z"
   }
 }
