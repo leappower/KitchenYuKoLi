@@ -381,5 +381,19 @@
 
   /* ── Auto-init based on data attribute ──────────── */
   window.CaseGrid = { init: init, FILTERS: FILTERS, ROI_CASES: ROI_CASES }
+
+  /* ── SPA navigation support ─────────────────────── */
+  function getVariant() {
+    return document.body.getAttribute('data-case-variant') || 'pc'
+  }
+
+  // spa:load fires after SPA router replaces content + loads page scripts
+  document.addEventListener('spa:load', function () {
+    var grid = document.getElementById('case-grid')
+    if (grid) {
+      console.log('[case-grid] spa:load detected, re-initializing case grid')
+      init(getVariant())
+    }
+  })
 })()
 

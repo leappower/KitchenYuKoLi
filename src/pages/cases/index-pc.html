@@ -89,28 +89,26 @@
           <p class="text-xl text-slate-600 dark:text-slate-400 max-w-2xl mx-auto leading-relaxed mb-8" data-i18n="cases_hero_subtitle">
               Commercial kitchen automation case studies across 7 Southeast Asian countries
             </p>
+          <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
           <a href="/profit-calculator/" class="inline-flex items-center gap-2 bg-primary text-white px-8 py-4 rounded-xl font-bold hover:shadow-lg hover:shadow-primary/20 transition-all">
           <span class="material-symbols-outlined">calculate</span>
           <span data-i18n="cases_hero_cta">Calculate Your ROI</span>
           <span class="material-symbols-outlined">arrow_forward</span>
           </a>
+          <a href="/products/" class="inline-flex items-center gap-2 border-2 border-slate-300 dark:border-slate-600 text-slate-700 dark:text-slate-200 px-8 py-4 rounded-xl font-bold hover:border-primary hover:text-primary transition-all">
+          <span class="material-symbols-outlined">kitchen</span>
+          <span data-i18n="cases_hero_cta_products">Browse Products</span>
+          </a>
+          </div>
           </div>
         </div>
       </section>
-
-      <!-- Sticky Filter Bar -->
-      <div class="sticky top-0 z-30 bg-white/90 dark:bg-slate-900/90 backdrop-blur-md border-b border-slate-200 dark:border-slate-700">
-        <div class="max-w-7xl mx-auto px-6 py-4">
-          <div id="case-filters"></div>
-        </div>
-      </div>
 
       <!-- Case Grid -->
       <section class="fullwidth-bg py-12">
           <div class="section-content">
           <div class="flex items-center justify-between mb-8">
             <h2 class="text-3xl lg:text-4xl font-bold" data-i18n="cases_grid_title">All Case Studies</h2>
-            <span id="case-count" class="text-sm font-semibold text-primary bg-primary/10 px-3 py-1 rounded-full">8 个案例</span>
           </div>
           <div id="case-grid" class="grid grid-cols-1 md:grid-cols-2 gap-6">
             <!-- Cards rendered by case-grid.js -->
@@ -124,16 +122,22 @@
 
           <div class="w-full max-w-4xl mx-auto text-center">
             <h2 class="text-3xl lg:text-4xl font-black text-white mb-4" data-i18n="cases_footer_cta_title">
-              Still not sure?
+              Ready to Transform Your Kitchen?
             </h2>
             <p class="text-xl text-white/80 mb-8" data-i18n="cases_footer_cta_desc">
-              Calculate your own ROI in 45 seconds
+              Tell us about your scenario — get a custom solution and ROI estimate in 45 seconds.
             </p>
-            <a href="/profit-calculator/" class="inline-flex items-center gap-2 bg-white text-primary px-8 py-4 rounded-xl font-bold hover:shadow-lg transition-all">
-              <span class="material-symbols-outlined">calculate</span>
-              <span data-i18n="cases_footer_cta_button">Calculate Your ROI</span>
-              <span class="material-symbols-outlined">arrow_forward</span>
-            </a>
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+              <a href="/quote/" class="inline-flex items-center gap-2 bg-white text-primary px-8 py-4 rounded-xl font-bold hover:shadow-lg transition-all">
+                <span class="material-symbols-outlined">description</span>
+                <span data-i18n="nav_get_quote">Get a Quote</span>
+                <span class="material-symbols-outlined">arrow_forward</span>
+              </a>
+              <a href="/profit-calculator/" class="inline-flex items-center gap-2 bg-white/10 border-2 border-white/60 text-white px-8 py-4 rounded-xl font-bold hover:bg-white/20 transition-all">
+                <span class="material-symbols-outlined">calculate</span>
+                <span data-i18n="cases_footer_cta_button">Calculate Your ROI</span>
+              </a>
+            </div>
 
         </div>
         </div>

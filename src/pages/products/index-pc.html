@@ -234,17 +234,6 @@ if(localStorage.getItem('darkMode')==='true')document.documentElement.classList.
     </div>
   </section>
 
-  <!-- View All Products -->
-  <section class="fullwidth-bg py-8 bg-slate-50 dark:bg-slate-900/50">
-    <div class="section-content text-center">
-      <a href="/products/all/" class="inline-flex items-center gap-3 px-8 py-4 bg-slate-900 dark:bg-white text-white dark:text-slate-900 rounded-xl font-bold text-lg hover:shadow-xl hover:shadow-primary/20 transition-all">
-        <span class="material-symbols-outlined">grid_view</span>
-        <span data-i18n="products_view_all_btn">View All 150+ Products</span>
-        <span class="material-symbols-outlined">arrow_forward</span>
-      </a>
-    </div>
-  </section>
-
   <!-- CTA -->
   <section class="fullwidth-bg py-12 bg-primary relative overflow-hidden">
     <div class="section-content">
@@ -262,6 +251,10 @@ if(localStorage.getItem('darkMode')==='true')document.documentElement.classList.
             <span data-i18n="products_cta_btn_quote">
                   Get a Quote
                 </span>
+          </a>
+          <a href="/products/all/" class="bg-white/10 border-2 border-white/60 text-white px-8 py-4 rounded-xl font-bold hover:bg-white/20 transition-all flex items-center gap-2">
+            <span class="material-symbols-outlined">grid_view</span>
+            <span data-i18n="products_view_all_btn">View All 150+ Products</span>
           </a>
           <a href="/contact/" class="bg-transparent border-2 border-white text-white px-8 py-4 rounded-xl font-bold hover:bg-white/10 transition-all flex items-center gap-2">
             <span class="material-symbols-outlined">support_agent</span>
