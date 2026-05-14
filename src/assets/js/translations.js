@@ -275,6 +275,7 @@
               var n = document.querySelectorAll("[data-i18n]"),
                 a = document.querySelectorAll("[data-i18n-placeholder]"),
                 r = document.querySelectorAll("[data-i18n-aria]"),
+                o = document.querySelectorAll("[data-i18n-alt]"),
                 i = document.getElementById("current-lang-label"),
                 s = t.translationsCache.get("product-" + t.currentLanguage) || {},
                 l = Object.assign({}, e, s),
@@ -317,14 +318,28 @@
                       ariaLabel: n,
                     });
                 }),
+                o.forEach(function (t) {
+                  var e = t.getAttribute("data-i18n-alt"),
+                    n = u(e);
+                  n &&
+                    n !== e &&
+                    c.push({
+                      el: t,
+                      alt: n,
+                    });
+                }),
                 c.length > 0 &&
                   requestAnimationFrame(function () {
                     c.forEach(function (e) {
-                      e.text
-                        ? t.setElementTranslation(e.el, e.text)
-                        : e.placeholder
-                          ? (e.el.placeholder = e.placeholder)
-                          : e.ariaLabel && e.el.setAttribute("aria-label", e.ariaLabel);
+                      if (e.text) {
+                        t.setElementTranslation(e.el, e.text);
+                      } else if (e.placeholder) {
+                        e.el.placeholder = e.placeholder;
+                      } else if (e.ariaLabel) {
+                        e.el.setAttribute("aria-label", e.ariaLabel);
+                      } else if (e.alt) {
+                        e.el.alt = e.alt;
+                      }
                     });
                   }),
                 i)

@@ -20,91 +20,130 @@
   var selected = [];
 
   // ─── COMPARE_ROWS definition ────────────────────────────────
+  // i18n key map for COMPARE_ROWS labels
+  var ROW_LABEL_KEYS = {
+    name: "compare_row_name",
+    model: "compare_row_model",
+    category: "compare_row_category",
+    power: "compare_row_power",
+    voltage: "compare_row_voltage",
+    dimensions: "compare_row_dimensions",
+    throughput: "compare_row_throughput",
+    averageTime: "compare_row_avg_time",
+    weight: "compare_row_weight",
+    tier: "compare_row_tier",
+    highlights: "compare_row_highlights",
+    specifications: "compare_row_specs",
+  };
+  var ROW_LABEL_DEFAULTS = {
+    name: "Product Name",
+    model: "Model",
+    category: "Category",
+    power: "Power",
+    voltage: "Voltage",
+    dimensions: "Dimensions",
+    throughput: "Throughput",
+    averageTime: "Avg Processing Time",
+    weight: "Net Weight",
+    tier: "Tier",
+    highlights: "Highlights",
+    specifications: "Specifications",
+  };
+
+  function getRowLabel(row) {
+    var key = ROW_LABEL_KEYS[row.key];
+    if (key && typeof window.t === "function") {
+      var v = window.t(key);
+      if (v && v !== key) return v;
+    }
+    return ROW_LABEL_DEFAULTS[row.key] || row.key;
+  }
+
   var COMPARE_ROWS = [
     {
       key: "name",
-      label: "产品名称",
+      label: "",
       fn: function (p) {
         return p.name || p.model || "—";
       },
     },
     {
       key: "model",
-      label: "型号",
+      label: "",
       fn: function (p) {
         return p.model || "—";
       },
     },
     {
       key: "category",
-      label: "产品分类",
+      label: "",
       fn: function (p) {
         return p.subCategory || p._categoryName || p._category || "—";
       },
     },
     {
       key: "power",
-      label: "功率",
+      label: "",
       fn: function (p) {
         return p.power || "—";
       },
     },
     {
       key: "voltage",
-      label: "电压",
+      label: "",
       fn: function (p) {
         return p.voltage || "—";
       },
     },
     {
       key: "dimensions",
-      label: "尺寸",
+      label: "",
       fn: function (p) {
         return p.dimensions || "—";
       },
     },
     {
       key: "throughput",
-      label: "产量/产能",
+      label: "",
       fn: function (p) {
         return p.throughput || "—";
       },
     },
     {
       key: "averageTime",
-      label: "平均加工时间",
+      label: "",
       fn: function (p) {
         return p.averageTime || "—";
       },
     },
     {
       key: "weight",
-      label: "净重",
+      label: "",
       fn: function (p) {
         return p.weight || "—";
       },
     },
     {
       key: "tier",
-      label: "等级",
+      label: "",
       fn: function (p) {
         return p.tier || "—";
       },
     },
     {
       key: "highlights",
-      label: "核心亮点",
+      label: "",
       fn: function (p) {
         return p.highlights || p.description || "—";
       },
     },
     {
       key: "specifications",
-      label: "规格参数",
+      label: "",
       fn: function (p) {
         if (!p.specifications) return "—";
         if (typeof p.specifications === "string") return p.specifications;
-        if (Array.isArray(p.specifications)) return p.specifications.join("、");
+        if (Array.isArray(p.specifications)) return p.specifications.join(", ");
         return JSON.stringify(p.specifications);
       },
     },
@@ -282,7 +321,7 @@
       html +=
         '<div class="bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 overflow-hidden">' +
         '<div class="px-3 py-2 bg-slate-50 dark:bg-slate-900/50 text-xs font-bold text-slate-700 dark:text-slate-300">' +
-        row.label +
+        esc(getRowLabel(row)) +
         "</div>" +
         '<div class="flex flex-col divide-y divide-slate-100 dark:divide-slate-700">';
 
@@ -333,7 +372,9 @@
       thPad +
       " " +
       thText +
-      ' font-bold text-slate-500 dark:text-slate-400 bg-slate-50 dark:bg-slate-900/50 min-w-[100px]">参数</th>';
+      ' font-bold text-slate-500 dark:text-slate-400 bg-slate-50 dark:bg-slate-900/50 min-w-[100px]">' +
+      esc(typeof window.t === "function" ? window.t("compare_bar_params", "Parameters") : "Parameters") +
+      "</th>";
     selected.forEach(function (p) {
       headerHTML +=
         '<th class="' +
@@ -377,7 +418,7 @@
         " " +
         thText +
         ' font-bold text-slate-700 dark:text-slate-300 whitespace-nowrap">' +
-        row.label +
+        esc(getRowLabel(row)) +
         "</td>";
       selected.forEach(function (p) {
         var val = row.fn(p);
@@ -575,6 +616,11 @@
 
   // SPA navigation
   _spaOn(document, "spa:load", init, "spa:load");
+
+  // Re-render on language change
+  document.addEventListener("languageChanged", function () {
+    if (selected.length > 0) render();
+  });
 
   // Public API
   window.ComparePage = {

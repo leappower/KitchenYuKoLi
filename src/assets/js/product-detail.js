@@ -506,34 +506,39 @@
   document.addEventListener("product-data-ready", renderPDP);
   // Multi-language helper: get product field for current language
   // Translate spec labels
+  // Chinese → i18n key mapping for product detail specs
+  var TL_MAP = {
+    型号: "pd_spec_model",
+    分类: "pd_spec_category",
+    子分类: "pd_spec_subcategory",
+    等级: "pd_spec_tier",
+    功率: "pd_spec_power",
+    容量: "pd_spec_capacity",
+    电压: "pd_spec_voltage",
+    频率: "pd_spec_frequency",
+    材质: "pd_spec_material",
+    尺寸: "pd_spec_dimensions",
+    颜色: "pd_spec_color",
+    控制方式: "pd_spec_control",
+    配置: "pd_spec_specifications",
+    产品规格: "pd_spec_product_specs",
+    "需要定制方案？": "pd_custom_solution",
+    "告诉我们您的需求，我们为您提供专属解决方案。": "pd_custom_solution_desc",
+    获取报价: "pd_get_quote",
+    联系销售: "pd_contact_sales",
+    产品未找到: "pd_product_not_found",
+    "抱歉，未找到该产品。": "pd_product_not_found_desc",
+    返回产品中心: "pd_back_to_products",
+  };
+
   function tl(chinese) {
-    if (typeof window.t !== "function") return chinese;
-    var lang = (window.CURRENT_LANG || document.documentElement.lang || "zh-CN").replace("_", "-");
-    if (lang === "zh-CN" || lang === "zh") return chinese;
-    var map = {
-      型号: "Model",
-      分类: "Category",
-      子分类: "Sub-Category",
-      等级: "Tier",
-      功率: "Power",
-      容量: "Capacity",
-      电压: "Voltage",
-      频率: "Frequency",
-      材质: "Material",
-      尺寸: "Dimensions",
-      颜色: "Color",
-      控制方式: "Control",
-      配置: "Specifications",
-      产品规格: "Product Specifications",
-      "需要定制方案？": "Need a Custom Solution?",
-      "告诉我们您的需求，我们为您提供专属解决方案。": "Tell us your needs and we'll provide a tailored solution.",
-      获取报价: "Get Quote",
-      联系销售: "Contact Sales",
-      产品未找到: "Product Not Found",
-      "抱歉，未找到该产品。": "Sorry, this product was not found.",
-      返回产品中心: "Back to Products",
-    };
-    return map[chinese] || chinese;
+    var key = TL_MAP[chinese];
+    if (key && typeof window.t === "function") {
+      var translated = window.t(key);
+      // If window.t returns the key itself (no translation found), fall back to Chinese
+      if (translated !== key) return translated;
+    }
+    return chinese;
   }
 
   // Get translated category name (from UI i18n, not product_translations)

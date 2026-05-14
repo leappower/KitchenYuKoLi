@@ -137,7 +137,9 @@
           // Show empty state instead of blank
           var emptyContainer = document.querySelector('[id^="home-core-products"]');
           if (emptyContainer) {
-            emptyContainer.innerHTML = '<div class="text-center text-slate-400 py-8">暂无核心产品</div>';
+            var emptyMsg =
+              typeof window.t === "function" ? window.t("no_core_products", "暂无核心产品") : "暂无核心产品";
+            emptyContainer.innerHTML = '<div class="text-center text-slate-400 py-8">' + escHtml(emptyMsg) + "</div>";
           }
           callback([], "network");
           return;
@@ -241,7 +243,9 @@
 
     loadCoreProducts(function (products, source) {
       if (!products || products.length === 0) {
-        container.innerHTML = '<div class="text-center text-slate-400 py-8">暂无核心产品数据</div>';
+        var noDataMsg =
+          typeof window.t === "function" ? window.t("no_core_products_data", "暂无核心产品数据") : "暂无核心产品数据";
+        container.innerHTML = '<div class="text-center text-slate-400 py-8">' + escHtml(noDataMsg) + "</div>";
         return;
       }
 
@@ -320,7 +324,12 @@
 
     loadCoreProducts(function (products) {
       if (!products || products.length === 0) {
-        container.innerHTML = '<div class="text-center text-slate-400 py-6">暂无核心产品数据</div>';
+        container.innerHTML =
+          '<div class="text-center text-slate-400 py-6">' +
+          escHtml(
+            typeof window.t === "function" ? window.t("no_core_products_data", "暂无核心产品数据") : "暂无核心产品数据"
+          ) +
+          "</div>";
         return;
       }
 
@@ -392,7 +401,12 @@
 
     loadCoreProducts(function (products) {
       if (!products || products.length === 0) {
-        container.innerHTML = '<div class="text-center text-slate-400 py-4">暂无核心产品数据</div>';
+        container.innerHTML =
+          '<div class="text-center text-slate-400 py-4">' +
+          escHtml(
+            typeof window.t === "function" ? window.t("no_core_products_data", "暂无核心产品数据") : "暂无核心产品数据"
+          ) +
+          "</div>";
         return;
       }
 
@@ -467,4 +481,9 @@
   } else {
     setTimeout(_autoInit, 0);
   }
+
+  // Re-render on language change
+  document.addEventListener("languageChanged", function () {
+    HomeCoreProducts.render();
+  });
 })();

@@ -1120,7 +1120,8 @@
           if (!noRes) {
             noRes = document.createElement("div");
             noRes.className = "cs-no-results";
-            noRes.textContent = "无匹配结果";
+            noRes.textContent =
+              typeof window.t === "function" ? window.t("no_matching_results", "无匹配结果") : "无匹配结果";
             _langPanel.querySelector(".cs-popup-list").appendChild(noRes);
           }
           noRes.style.display = "";
@@ -1621,4 +1622,19 @@
       }
     }, 0);
   });
+
+  /* ────────────────────────────────────────────────────────────────
+   *  languageChanged — update any visible "no results" text in navigator
+   * ──────────────────────────────────────────────────────────────── */
+  _spaOn(
+    document,
+    "languageChanged",
+    function () {
+      var noResEls = document.querySelectorAll(".cs-no-results");
+      noResEls.forEach(function (el) {
+        el.textContent = typeof window.t === "function" ? window.t("no_matching_results", "无匹配结果") : "无匹配结果";
+      });
+    },
+    "langChanged:navNoResults"
+  );
 })(window);

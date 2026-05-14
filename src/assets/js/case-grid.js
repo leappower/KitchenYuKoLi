@@ -248,7 +248,9 @@
       '-600">-' +
       pct +
       "%</div>" +
-      '<div class="text-xs text-slate-500 dark:text-slate-400">人工成本</div>' +
+      '<div class="text-xs text-slate-500 dark:text-slate-400">' +
+      (typeof window.t === "function" ? window.t("cases_labor_cost", "人工成本") : "人工成本") +
+      "</div>" +
       "</div>" +
       '<div class="bg-slate-50 dark:bg-slate-900/50 rounded-lg p-2.5 text-center">' +
       '<div class="text-lg font-black text-slate-700 dark:text-slate-200">' +
@@ -363,7 +365,11 @@
 
     // Update count
     var countEl = document.getElementById("case-count");
-    if (countEl) countEl.textContent = cases.length + " 个案例";
+    var caseCountText =
+      typeof window.t === "function"
+        ? window.t("cases_count", "{n} Case Studies").replace("{n}", cases.length)
+        : cases.length + " \u4e2a\u6848\u4f8b";
+    if (countEl) countEl.textContent = caseCountText;
   }
 
   /* ── Filter UI Builders ─────────────────────────── */
@@ -493,7 +499,7 @@
       html += "</select>";
     }
     html +=
-      '<span id="case-count" class="flex-shrink-0 text-xs font-bold text-primary whitespace-nowrap">8 个案例</span>';
+      '<span id="case-count" class="flex-shrink-0 text-xs font-bold text-primary whitespace-nowrap">8 \u4e2a\u6848\u4f8b</span>';
     html += "</div>";
     bar.innerHTML = html;
 
@@ -553,6 +559,14 @@
 
   // spa:load fires after SPA router replaces content + loads page scripts
   document.addEventListener("spa:load", function () {
+    var grid = document.getElementById("case-grid");
+    if (grid) {
+      init(getVariant());
+    }
+  });
+
+  // Re-render on language change
+  document.addEventListener("languageChanged", function () {
     var grid = document.getElementById("case-grid");
     if (grid) {
       init(getVariant());

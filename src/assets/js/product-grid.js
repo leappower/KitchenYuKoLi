@@ -14,6 +14,14 @@
     tgt.addEventListener(evt, fn, { signal: ac.signal });
   }
 
+  function tl(key, fallback) {
+    if (typeof window.t === "function") {
+      var v = window.t(key, fallback);
+      return v === key ? fallback : v;
+    }
+    return fallback;
+  }
+
   var STORE_KEY = "PRODUCT_DATA_TABLE";
   var COMPARE_KEY = "YUKOLI_COMPARE_ITEMS";
   var MAX_COMPARE = 3;
@@ -59,7 +67,7 @@
       items.splice(idx, 1);
     } else {
       if (items.length >= MAX_COMPARE) {
-        showToast("最多只能选择 " + MAX_COMPARE + " 款产品进行对比");
+        showToast(tl("compare_max_selected", "最多只能选择 " + MAX_COMPARE + " 款产品进行对比"));
         return;
       }
       items.push(product);
@@ -219,8 +227,12 @@
       thumbs +
       "</div>" +
       '<div class="flex items-center gap-1.5 flex-shrink-0">' +
-      '<button class="float-clear px-3 py-2 rounded-lg text-xs font-bold text-slate-500 dark:text-slate-400 hover:text-red-500 hover:bg-red-50 dark:hover:bg-red-900/20 transition-colors">清空</button>' +
-      '<a href="/products/compare/" class="bg-primary text-white px-4 py-2 rounded-lg text-xs font-bold hover:opacity-90 transition-opacity">对比(' +
+      '<button class="float-clear px-3 py-2 rounded-lg text-xs font-bold text-slate-500 dark:text-slate-400 hover:text-red-500 hover:bg-red-50 dark:hover:bg-red-900/20 transition-colors">' +
+      esc(tl("compare_clear", "清空")) +
+      "</button>" +
+      '<a href="/products/compare/" class="bg-primary text-white px-4 py-2 rounded-lg text-xs font-bold hover:opacity-90 transition-opacity">' +
+      esc(tl("compare_view", "对比")) +
+      "(" +
       items.length +
       ")</a>" +
       "</div>" +
@@ -253,8 +265,12 @@
       thumbs +
       "</div>" +
       '<div class="flex items-center justify-end gap-2">' +
-      '<button class="float-clear px-3 py-1.5 rounded-lg text-xs font-bold text-slate-500 dark:text-slate-400 hover:text-red-500 hover:bg-red-50 dark:hover:bg-red-900/20 transition-colors">清空</button>' +
-      '<a href="/products/compare/" class="bg-primary text-white px-4 py-1.5 rounded-lg text-xs font-bold hover:opacity-90 transition-opacity">对比(' +
+      '<button class="float-clear px-3 py-1.5 rounded-lg text-xs font-bold text-slate-500 dark:text-slate-400 hover:text-red-500 hover:bg-red-50 dark:hover:bg-red-900/20 transition-colors">' +
+      esc(tl("compare_clear", "清空")) +
+      "</button>" +
+      '<a href="/products/compare/" class="bg-primary text-white px-4 py-1.5 rounded-lg text-xs font-bold hover:opacity-90 transition-opacity">' +
+      esc(tl("compare_view", "对比")) +
+      "(" +
       items.length +
       ")</a>" +
       "</div>" +
@@ -285,7 +301,9 @@
       '<div class="flex items-center gap-3 flex-wrap sm:flex-nowrap">' +
       '<div class="flex items-center gap-2 text-sm font-bold text-slate-500 dark:text-slate-400 flex-shrink-0">' +
       '<span class="material-symbols-outlined text-primary">compare_arrows</span>' +
-      '<span>已选 <span class="text-primary">' +
+      "<span>" +
+      esc(tl("compare_selected_count", "已选")) +
+      ' <span class="text-primary">' +
       items.length +
       "</span>/3</span>" +
       "</div>" +
@@ -293,8 +311,12 @@
       thumbs +
       "</div>" +
       '<div class="flex items-center gap-2 flex-shrink-0">' +
-      '<button class="float-clear px-3 py-2 rounded-xl text-xs font-bold text-slate-500 hover:text-red-500 hover:bg-red-50 dark:hover:bg-red-900/20 transition-all border border-slate-200 dark:border-slate-700 hover:border-red-300">清空</button>' +
-      '<a href="/products/compare/" class="bg-primary text-white px-5 py-2 rounded-xl text-sm font-bold hover:opacity-90 transition-opacity flex items-center gap-1"><span>对比</span><span class="material-symbols-outlined text-sm">arrow_forward</span></a>' +
+      '<button class="float-clear px-3 py-2 rounded-xl text-xs font-bold text-slate-500 hover:text-red-500 hover:bg-red-50 dark:hover:bg-red-900/20 transition-all border border-slate-200 dark:border-slate-700 hover:border-red-300">' +
+      esc(tl("compare_clear", "清空")) +
+      "</button>" +
+      '<a href="/products/compare/" class="bg-primary text-white px-5 py-2 rounded-xl text-sm font-bold hover:opacity-90 transition-opacity flex items-center gap-1"><span>' +
+      esc(tl("compare_view", "对比")) +
+      '</span><span class="material-symbols-outlined text-sm">arrow_forward</span></a>' +
       "</div>" +
       "</div>"
     );
@@ -541,11 +563,17 @@
       "</p>" +
       (specHTML ? '<div class="flex flex-wrap gap-2 mb-4">' + specHTML + "</div>" : "") +
       '<div class="flex items-center justify-between pt-4 border-t border-slate-100 dark:border-slate-700">' +
-      '<div><span class="text-xs text-slate-400">起售价</span><p class="text-xl font-black text-primary">询价</p></div>' +
+      '<div><span class="text-xs text-slate-400">' +
+      esc(tl("products_starting_price", "起售价")) +
+      '</span><p class="text-xl font-black text-primary">' +
+      esc(tl("products_inquire", "询价")) +
+      "</p></div>" +
       '<div class="flex items-center gap-2">' +
       '<a href="' +
       link +
-      '" class="flex items-center gap-2 bg-primary text-white px-5 py-2.5 rounded-lg font-bold text-sm hover:opacity-90 transition-opacity"><span>查看详情</span><span class="material-symbols-outlined text-sm">arrow_forward</span></a>' +
+      '" class="flex items-center gap-2 bg-primary text-white px-5 py-2.5 rounded-lg font-bold text-sm hover:opacity-90 transition-opacity"><span>' +
+      esc(tl("btn_view_details", "查看详情")) +
+      '</span><span class="material-symbols-outlined text-sm">arrow_forward</span></a>' +
       buildCompareBtnHTML(model) +
       "</div>" +
       "</div>" +
@@ -606,11 +634,15 @@
       desc +
       "</p>" +
       '<div class="flex items-center justify-between pt-3 border-t border-slate-100 dark:border-slate-700">' +
-      '<span class="text-base font-black text-primary">询价</span>' +
+      '<span class="text-base font-black text-primary">' +
+      esc(tl("products_inquire", "询价")) +
+      "</span>" +
       '<div class="flex items-center gap-2">' +
       '<a href="' +
       link +
-      '" class="flex items-center gap-1 text-primary text-sm font-bold hover:underline"><span>查看详情</span><span class="material-symbols-outlined text-xs">arrow_forward</span></a>' +
+      '" class="flex items-center gap-1 text-primary text-sm font-bold hover:underline"><span>' +
+      esc(tl("btn_view_details", "查看详情")) +
+      '</span><span class="material-symbols-outlined text-xs">arrow_forward</span></a>' +
       buildCompareBtnHTML(model) +
       "</div>" +
       "</div>" +
@@ -661,7 +693,9 @@
       desc +
       "</p>" +
       '<div class="flex items-center justify-between">' +
-      '<span class="text-sm font-black text-primary">询价</span>' +
+      '<span class="text-sm font-black text-primary">' +
+      esc(tl("products_inquire", "询价")) +
+      "</span>" +
       '<span class="material-symbols-outlined text-slate-400 text-sm">arrow_forward</span>' +
       "</div>" +
       "</div>" +
@@ -837,7 +871,10 @@
       tabSizeClass +
       " font-bold whitespace-nowrap rounded-full border border-slate-200 dark:border-slate-700";
     allBtn.dataset.category = "all";
-    allBtn.textContent = "全部产品";
+    allBtn.textContent =
+      typeof window.t === "function"
+        ? window.t("products_all", "\u5168\u90e8\u4ea7\u54c1")
+        : "\u5168\u90e8\u4ea7\u54c1";
     allTabs.push(allBtn);
 
     categories.forEach(function (cat) {
@@ -872,7 +909,7 @@
       // Create a temp more-btn to measure its real width
       var tmpMore = moreBtn.cloneNode(true);
       tmpMore.style.cssText = "position:absolute;visibility:hidden;pointer-events:none";
-      tmpMore.textContent = "+9 更多 \u25BC"; // worst-case width estimate
+      tmpMore.textContent = tl("products_more", "+9 更多 ▼").replace("{n}", "9");
       container.appendChild(tmpMore);
       var moreBtnWidth = tmpMore.offsetWidth + 8; // +8 for gap
       container.removeChild(tmpMore);
@@ -926,7 +963,13 @@
       }
       if (allTabs.length > maxVis) {
         var remaining = allTabs.length - maxVis;
-        moreBtn.textContent = isExpanded ? "收起 \u25B2" : "\u002B" + remaining + " 更多 \u25BC";
+        var collapseText =
+          typeof window.t === "function" ? window.t("products_collapse", "\u6536\u8d77 \u25B2") : "\u6536\u8d77 \u25B2";
+        var moreText =
+          typeof window.t === "function"
+            ? window.t("products_more", "+" + remaining + " \u66f4\u591a \u25BC").replace("{n}", remaining)
+            : "\u002B" + remaining + " \u66f4\u591a \u25BC";
+        moreBtn.textContent = isExpanded ? collapseText : moreText;
         container.appendChild(moreBtn);
       }
     }
@@ -1047,6 +1090,11 @@
   // product-data-ready: only useful if data arrives after page scripts run
   window.addEventListener("product-data-ready", function () {
     autoRender();
+  });
+
+  // Re-render on language change
+  document.addEventListener("languageChanged", function () {
+    if (window._productGridInited) autoRender();
   });
 
   // Safety net: if API fails and no cached data, clear skeleton after 5s

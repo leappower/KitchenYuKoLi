@@ -358,7 +358,7 @@
       "h-14": 1,
       "h-12": 1,
       "p-3": 1,
-      "p-2\.5": 1,
+      "p-2.5": 1,
       "px-4": 1,
       "px-3": 1,
       "py-3": 1,
@@ -447,12 +447,12 @@
 
     // Debug: log sizing after DOM insertion
     if (window.__CS_DEBUG) {
-      var wR = this.wrap.getBoundingClientRect();
-      var tR = this.trigger.getBoundingClientRect();
+      var _wR = this.wrap.getBoundingClientRect();
+      var _tR = this.trigger.getBoundingClientRect();
       // Compare with nearby input if any
       var siblingInput = this.wrap.parentNode.querySelector("input");
       if (siblingInput) {
-        var iR = siblingInput.getBoundingClientRect();
+        var _iR = siblingInput.getBoundingClientRect();
       }
     }
 
@@ -518,7 +518,8 @@
           if (!noRes) {
             noRes = document.createElement("div");
             noRes.className = "cs-no-results";
-            noRes.textContent = "无匹配结果";
+            noRes.textContent =
+              typeof window.t === "function" ? window.t("no_matching_results", "无匹配结果") : "无匹配结果";
             panel.appendChild(noRes);
           }
           noRes.style.display = "";
@@ -529,11 +530,11 @@
     }
 
     // Bind item click
-    var self = this;
+    var _self = this;
     panel.addEventListener("click", function (e) {
       var item = e.target.closest(".cs-item");
       if (!item || item.classList.contains("cs-item-disabled")) return;
-      self._selectItem(item);
+      _self._selectItem(item);
     });
 
     return panel;
@@ -824,7 +825,8 @@
           if (!noRes) {
             noRes = document.createElement("div");
             noRes.className = "cs-no-results";
-            noRes.textContent = "无匹配结果";
+            noRes.textContent =
+              typeof window.t === "function" ? window.t("no_matching_results", "无匹配结果") : "无匹配结果";
             self._popupPanel.querySelector(".cs-popup-list").appendChild(noRes);
           }
           noRes.style.display = "";
@@ -1031,6 +1033,21 @@
       CustomSelect.initAll();
     },
     "spa:load:initAll"
+  );
+
+  /* ────────────────────────────────────────────────────────────────
+   *  languageChanged — update any visible "no results" text
+   * ──────────────────────────────────────────────────────────────── */
+  _spaOn(
+    document,
+    "languageChanged",
+    function () {
+      var noResEls = document.querySelectorAll(".cs-no-results");
+      noResEls.forEach(function (el) {
+        el.textContent = typeof window.t === "function" ? window.t("no_matching_results", "无匹配结果") : "无匹配结果";
+      });
+    },
+    "langChanged:noResults"
   );
 
   /* ────────────────────────────────────────────────────────────────

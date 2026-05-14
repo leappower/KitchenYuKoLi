@@ -34,13 +34,19 @@
   // ─── Category data ────────────────────────────────────────────
 
   var PRODUCT_SLUGS = {
-    stirfry: { key: "nav_products_stirfry", label: "翻炒系列", icon: "local_fire_department" },
-    cutting: { key: "nav_products_cutting", label: "切配系列", icon: "content_cut" },
-    frying: { key: "nav_products_frying", label: "煎炸系列", icon: "outdoor_grill" },
-    stewing: { key: "nav_products_stewing", label: "炖煮系列", icon: "soup_kitchen" },
-    steaming: { key: "nav_products_steaming", label: "蒸煮系列", icon: "cloud" },
-    other: { key: "nav_products_other", label: "辅助设备", icon: "more_horiz" },
+    stirfry: { key: "nav_products_stirfry", icon: "local_fire_department" },
+    cutting: { key: "nav_products_cutting", icon: "content_cut" },
+    frying: { key: "nav_products_frying", icon: "outdoor_grill" },
+    stewing: { key: "nav_products_stewing", icon: "soup_kitchen" },
+    steaming: { key: "nav_products_steaming", icon: "cloud" },
+    other: { key: "nav_products_other", icon: "more_horiz" },
   };
+
+  function getCatLabel(slug) {
+    var key = PRODUCT_SLUGS[slug] && PRODUCT_SLUGS[slug].key;
+    if (key) return tl(key, key);
+    return slug;
+  }
 
   var CATEGORY_KEY_TO_SLUG = {};
   Object.keys(PRODUCT_SLUGS).forEach(function (slug) {
@@ -234,13 +240,13 @@
   };
 
   var APP_LABELS = {
-    "small-restaurant": "小型餐饮",
-    "central-kitchen": "中央厨房",
-    canteen: "智慧食堂",
-    "chain-restaurant": "连锁餐饮",
-    "cloud-kitchen": "云厨房/外卖",
-    "food-factory": "食品工厂",
-    "menu-lab": "菜系实验室",
+    "small-restaurant": "app_small_restaurant",
+    "central-kitchen": "app_central_kitchen",
+    canteen: "app_canteen",
+    "chain-restaurant": "app_chain_restaurant",
+    "cloud-kitchen": "app_cloud_kitchen",
+    "food-factory": "app_food_factory",
+    "menu-lab": "app_menu_lab",
   };
 
   function getAppLabel(slug) {
@@ -273,7 +279,7 @@
     var items = CROSS_SELL_MAP[slug];
     if (!items || !items.length) return "";
 
-    var catLabel = tl(PRODUCT_SLUGS[slug].label, PRODUCT_SLUGS[slug].label);
+    var catLabel = getCatLabel(slug);
     var html = '<div class="text-center mb-8">';
     html +=
       '<h3 class="text-2xl lg:text-3xl font-black text-slate-900 dark:text-white mb-2">' +
@@ -291,7 +297,7 @@
 
     items.forEach(function (item) {
       var info = PRODUCT_SLUGS[item.slug];
-      var label = tl(info.label, info.label);
+      var label = getCatLabel(item.slug);
 
       html +=
         '<a href="/products/' +
@@ -539,6 +545,11 @@
   _spaOn(document, "spa:load", function () {
     trackPdpReferrer();
     updatePdpCategoryNav();
+    renderCrossSellForCurrentPage();
+  });
+
+  // Re-render on language change
+  document.addEventListener("languageChanged", function () {
     renderCrossSellForCurrentPage();
   });
 })();
