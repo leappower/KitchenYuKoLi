@@ -910,6 +910,11 @@
 
       function loadScript(s) {
         return new Promise(function (resolve) {
+          // If script already loaded (by id), skip re-loading
+          if (s.id && document.getElementById(s.id)) {
+            resolve();
+            return;
+          }
           var el = document.createElement("script");
           el.id = s.id;
           el.src = s.src;
