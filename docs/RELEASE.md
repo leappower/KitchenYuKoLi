@@ -39,7 +39,7 @@ chore: 构建/工具链变更
 ```bash
 git commit -m "fix: 修复产品图片无法显示的 bug"
 git commit -m "feat: 新增越南语支持"
-git commit -m "chore: 更新飞书产品数据"
+git commit -m "chore: 更新产品数据"
 git commit -m "docs: 更新 BUILD.md 构建说明"
 ```
 
@@ -75,7 +75,7 @@ git push --no-verify
 Step 1  读取远端 release 分支，解析当前版本号
 Step 2  计算新版本号
 Step 3  lint 检查（--skip-lint 可跳过）
-Step 4  飞书数据同步（--skip-feishu 可跳过）
+Step 4  产品数据同步（--skip-feishu 可跳过）
 Step 5  i18n 提取 + 产品翻译（--skip-translate 可跳过）
 Step 6  图片下载（增量）（--skip-download 可跳过）
 Step 7  图片压缩（增量）+ webpack 打包 + 产物验证
@@ -90,7 +90,7 @@ Step 10 打印发布摘要
 ```bash
 npm run release
 ```
-版本从 `1.2.3` 递增为 `1.2.4`，执行完整飞书+增量翻译流程。
+版本从 `1.2.3` 递增为 `1.2.4`，执行完整数据同步+增量翻译流程。
 
 ---
 
@@ -114,7 +114,7 @@ npm run release:major
 ```bash
 npm run release:no-translate
 ```
-拉取飞书数据，跳过 Gemini 翻译（使用已有翻译数据），其余流程正常。
+拉取产品数据，跳过翻译（使用已有翻译数据），其余流程正常。
 
 ---
 
@@ -122,7 +122,7 @@ npm run release:no-translate
 ```bash
 npm run release:pack-only
 ```
-跳过飞书 + 跳过翻译，最快完成打包推送。
+跳过数据同步 + 跳过翻译，最快完成打包推送。
 
 ---
 
@@ -143,7 +143,7 @@ npm run release:skip-download
 
 ### 发布命令对照表
 
-| 命令 | 飞书 | 翻译 | 图片下载 | 版本递增 | 适用场景 |
+| 命令 | 数据同步 | 翻译 | 图片下载 | 版本递增 | 适用场景 |
 |------|:---:|:---:|:---:|:---:|------|
 | `release` | ✅ | 增量 | ✅ | patch | **日常发布** |
 | `release:minor` | ✅ | 增量 | ✅ | minor | 新功能发布 |

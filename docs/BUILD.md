@@ -14,7 +14,7 @@ npm start
 **其他开发场景：**
 
 ```bash
-# 产品数据有更新时（先拉取飞书再启动）
+# 产品数据有更新时（先同步数据再启动）
 npm run dev:webpack
 
 # 跳过 prestart 直接启动 webpack（产品数据已是最新时）
@@ -62,10 +62,10 @@ npm run test:coverage
 
 ### 产品数据同步
 
-产品数据来自飞书，本地开发前需确保数据最新：
+产品数据来自产品数据表，本地开发前需确保数据最新：
 
 ```bash
-# 从飞书同步最新产品数据（更新 src/assets/js/product-data-table.js）
+# 同步最新产品数据（更新 src/assets/js/product-data-table.js）
 npm run sync:feishu
 ```
 
@@ -114,13 +114,13 @@ npm run build:pack
 
 ---
 
-**产品/翻译有更新（含飞书同步 + 增量翻译）：**
+**产品/翻译有更新（含数据同步 + 增量翻译）：**
 
 ```bash
 npm run build:withFeishu
 ```
 
-完整流程：飞书拉取 → i18n 提取 → 产品同步 → 合并 → 增量翻译 → 图片下载 → 图片压缩 → webpack → 复制翻译文件 → 构建 i18n。
+完整流程：数据同步 → i18n 提取 → 产品同步 → 合并 → 增量翻译 → 图片下载 → 图片压缩 → webpack → 复制翻译文件 → 构建 i18n。
 
 ---
 
@@ -136,7 +136,7 @@ npm run build:production
 
 ### 所有构建命令一览
 
-| 命令 | Hash | 图片下载 | 飞书同步 | 翻译 | 验证 | 适用场景 |
+| 命令 | Hash | 图片下载 | 数据同步 | 翻译 | 验证 | 适用场景 |
 |------|:---:|:---:|:---:|:---:|:---:|------|
 | `build:dev:pack` | ❌ | ❌ | ❌ | ❌ | ❌ | **日常测试，极速，仅重打包 JS/CSS** |
 | `build:dev` | ❌ | ❌ | ❌ | ❌ | ❌ | **日常测试，含语言包生成** |
@@ -184,7 +184,7 @@ dist/
 **Q：webpack 报找不到 `product-data-table.js`**
 
 ```bash
-# 先同步飞书数据
+# 先同步产品数据
 npm run sync:feishu
 ```
 
@@ -290,6 +290,6 @@ npm run docker:run         # 本地验证
 
 ## 版本发布
 
-发布使用专门的 `release.js` 脚本，自动化处理版本号递增、飞书同步、翻译、打包、推送全流程。
+发布使用专门的 `release.js` 脚本，自动化处理版本号递增、数据同步、翻译、打包、推送全流程。
 
 详见 [RELEASE.md](./RELEASE.md)。

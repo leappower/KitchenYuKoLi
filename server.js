@@ -23,7 +23,7 @@ if (!process.env.TRANSLATE_API_KEY && fs.existsSync('.env')) {
     });
   } catch(e) {}
 }
-// Feishu sync removed — product data no longer sourced from Feishu
+// Product sync removed — product data is now static
 
 // ─── API Server Proxy ───────────────────────────────────────────────
 // All API, admin, and upload requests go to KitchenYuKoLiServer.
@@ -424,7 +424,7 @@ const server = app.listen(PORT, (err) => {
     console.log('🔧 Development mode: Error details enabled');
   }
 
-  // Feishu daily sync removed
+  // Product daily sync removed
 
   // Start HTTPS server (only if SSL_PORT > 0 — skip when behind reverse proxy)
   if (ENABLE_SSL) {

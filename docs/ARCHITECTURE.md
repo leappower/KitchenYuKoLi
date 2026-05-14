@@ -25,7 +25,7 @@
 │  │       image-assets.js       window.ImageAssets                       │    │
 │  │       contacts.js           window.Contacts                          │    │
 │  │       navigation.js         window.Navigation                        │    │
-│  │       product-data-table.js window.PRODUCT_DATA_TABLE（自动同步）     │    │
+│  │       product-data-table.js window.PRODUCT_DATA_TABLE（产品数据表）     │    │
 │  │       product-list.js       window.PRODUCT_SERIES                    │    │
 │  │       utils.js              window.AppUtils                          │    │
 │  │       products.js           window.Products                          │    │
@@ -47,9 +47,9 @@
                              ↑ 数据/翻译写入
 ┌──────────────────────────────────────────────────────────────────────────────┐
 │              构建时数据层                                                     │
-│  飞书多维表格 → generate-products-data-table.js                               │
+│  产品数据源  → generate-products-data-table.js                               │
 │               → src/assets/js/product-data-table.js（webpack + 静态 HTML）   │
-│  Gemini API   → unified-translator.js → {lang}-product.json                  │
+│  翻译工具    → unified-translator.js → {lang}-product.json                  │
 └──────────────────────────────────────────────────────────────────────────────┘
 ```
 
@@ -266,7 +266,7 @@ imgTag('esl_gb60_1', 'alt')  // → '<img src="images/esl_gb60_1.webp" ...>'
 
 **用途区分：**
 - 开发环境：运行 Express 提供 webpack-dev-server 的代理
-- 生产环境：推荐使用 Nginx 直接托管 `src/`，Express 仅在需要服务端逻辑（如定时飞书同步）时使用
+- 生产环境：推荐使用 Nginx 直接托管 `src/`，Express 仅在需要服务端逻辑时使用
 
 ---
 
@@ -366,7 +366,7 @@ src/
 5. image-assets.js       → window.ImageAssets
 6. contacts.js           → window.Contacts
 7. navigation.js         → window.Navigation（依赖 MediaQueries + CommonUtils）
-8. product-data-table.js → window.PRODUCT_DATA_TABLE（自动同步，332KB 数据）
+8. product-data-table.js → window.PRODUCT_DATA_TABLE（产品数据表，332KB 数据）
 9. product-list.js       → window.PRODUCT_SERIES（依赖 PRODUCT_DATA_TABLE + ImageAssets）
 10. utils.js             → window.AppUtils（依赖 PRODUCT_SERIES + ImageAssets）
 11. products.js          → window.Products（依赖 MediaQueries + CommonUtils + AppUtils）
@@ -489,7 +489,7 @@ Tablet 导航项 ID：`home` / `catalog` / `solutions` / `iot` / `config`
 | 图片 | 本地 WebP（`src-backup/assets/images/`）| ImageAssets IIFE + loadFromManifest() |
 | 响应式 | 单 HTML + 媒体查询 | 每页面独立 PC/Tablet/Mobile 文件 |
 | JS 模块 | ESM（import/export） | IIFE + window.xxx（无构建依赖）|
-| 数据 | 飞书 → 动态渲染 | product-data-table.js IIFE（飞书同步写入）|
+| 数据 | 静态产品数据表 | product-data-table.js IIFE（产品数据同步写入）|
 | 发布 | GitHub Pages / Nginx / Docker（需 webpack build）| 直接托管 `src/` 目录，零构建 |
 
 ---
@@ -694,7 +694,7 @@ imgTag('esl_gb60_1', 'alt')  // → '<img src="images/esl_gb60_1.webp" ...>'
 
 **用途区分：**
 - 开发环境：运行 Express 提供 webpack-dev-server 的代理
-- 生产环境：推荐使用 Nginx 直接托管 `dist/`，Express 仅在需要服务端逻辑（如定时飞书同步）时使用
+- 生产环境：推荐使用 Nginx 直接托管 `dist/`，Express 仅在需要服务端逻辑时使用
 
 ---
 

@@ -223,7 +223,7 @@ WebP 加载失败
    ```
 
 5. **对应产品的型号/imageRecognitionKey**
-   - 确保飞书产品数据中的 `imageRecognitionKey` 或 `model` 经 `modelToImageKey()` 转换后与图片文件名一致
+   - 确保产品数据中的 `imageRecognitionKey` 或 `model` 经 `modelToImageKey()` 转换后与图片文件名一致
    - 详见 [PRODUCT_DATA.md](./PRODUCT_DATA.md) 的命名转换规则
 
 ---

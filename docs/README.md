@@ -1,6 +1,6 @@
 # YoKuLi Tech 文档中心
 
-商用厨房设备多语言专业网站，支持 25 种语言、模块化前端架构、飞书数据同步和一键发布流程。
+商用厨房设备多语言专业网站，支持 25 种语言、模块化前端架构和一键发布流程。
 
 ---
 
@@ -36,7 +36,7 @@ yukoli-tech/
 │       ├── init.js              # SW 注册 + 用户行为追踪
 │       ├── image-assets.js      # 图片路径映射（从 manifest 静态构建）
 │       ├── product-list.js      # 产品数据处理（normalize + assemble）
-│       ├── product-data-table.js# 产品数据表（飞书同步自动生成，勿手动编辑）
+│       ├── product-data-table.js# 产品数据表（自动生成，勿手动编辑）
 │       ├── common.js            # 公共逻辑
 │       ├── images/              # 图片资产（.webp，由 optimize-images.js 管理）
 │       ├── lang/                # 语言文件（{lang}-ui.json + {lang}-product.json）
@@ -62,7 +62,7 @@ yukoli-tech/
 | [BUILD.md](./BUILD.md) | 日常开发、构建打包、部署、Docker |
 | [RELEASE.md](./RELEASE.md) | 版本发布流程、release.js 使用、CI/CD |
 | [I18N.md](./I18N.md) | 多语言体系、翻译工具链、新增语言 |
-| [PRODUCT_DATA.md](./PRODUCT_DATA.md) | 产品数据流：飞书同步→代码→渲染 |
+| [PRODUCT_DATA.md](./PRODUCT_DATA.md) | 产品数据流：数据表→代码→渲染 |
 | [IMAGES.md](./IMAGES.md) | 图片资产管理、WebP 转换、懒加载 |
 | [CONTRIBUTING.md](./CONTRIBUTING.md) | 代码贡献规范 |
 | [CHANGELOG.md](./CHANGELOG.md) | 版本变更记录 |

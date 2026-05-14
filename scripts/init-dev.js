@@ -71,7 +71,7 @@ function main() {
       // 尝试运行merge:i18n
       if (!runScript('merge:i18n')) {
         console.error('\n❌ 无法生成翻译文件');
-        console.log('请先运行: npm run sync:feishu');
+        console.log('请先运行: npm run merge:i18n');
         process.exit(1);
       }
     } else {

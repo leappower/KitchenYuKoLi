@@ -496,6 +496,41 @@
 
       if (!content) {
         this.log("No content extracted from:", pagePath);
+        // Show 404 message when page not found
+        container.innerHTML =
+          '<div class="flex flex-col items-center justify-center px-4 sm:px-6 lg:px-8 py-12 sm:py-20 lg:py-24">' +
+          '<div class="max-w-2xl mx-auto text-center">' +
+          '<div class="relative flex items-center justify-center h-36 sm:h-44 lg:h-48 mb-8 sm:mb-10">' +
+          '<div class="float-anim relative z-10 w-24 h-24 sm:w-28 sm:h-28 rounded-full bg-gradient-to-br from-primary/10 to-orange-100/50 dark:from-primary/10 dark:to-orange-900/20 border border-primary/20 flex items-center justify-center">' +
+          '<span class="material-symbols-outlined text-primary" style="font-size:2.5rem">kitchen</span>' +
+          "</div></div>" +
+          '<div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-bold uppercase tracking-widest mb-3 sm:mb-4">' +
+          '<span class="material-symbols-outlined text-sm">error</span>' +
+          "<span>Error 404</span>" +
+          "</div>" +
+          '<h1 class="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight leading-tight mb-3 sm:mb-4">' +
+          'Page Not <span class="text-primary">Found</span></h1>' +
+          '<p class="text-base sm:text-lg text-slate-500 dark:text-slate-400 max-w-md mx-auto leading-relaxed mb-8 sm:mb-10">' +
+          "The page you're looking for doesn't exist or has been moved. Let's get you back on track.</p>" +
+          '<div class="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center mb-8 sm:mb-10">' +
+          '<a href="/home/" class="bg-primary text-white px-6 sm:px-8 py-3.5 sm:py-4 rounded-xl font-bold text-sm sm:text-base flex items-center justify-center gap-2 hover:shadow-lg hover:shadow-primary/20 transition-all">' +
+          '<span class="material-symbols-outlined text-lg">home</span> Go to Homepage</a>' +
+          '<a href="/products/" class="border-2 border-slate-200 dark:border-slate-700 px-6 sm:px-8 py-3.5 sm:py-4 rounded-xl font-bold text-sm sm:text-base flex items-center justify-center gap-2 hover:bg-slate-50 dark:hover:bg-slate-800 transition-all">' +
+          '<span class="material-symbols-outlined text-lg">inventory_2</span> Browse Products</a>' +
+          "</div>" +
+          '<div class="pt-6 sm:pt-8 border-t border-slate-200 dark:border-slate-800">' +
+          '<p class="text-xs text-slate-400 mb-3 sm:mb-4 font-semibold uppercase tracking-widest">Quick Links</p>' +
+          '<div class="flex flex-wrap gap-x-3 gap-y-2 sm:gap-x-4 justify-center">' +
+          '<a href="/cases/" class="text-sm text-slate-600 dark:text-slate-400 hover:text-primary transition-colors font-medium">Case Studies</a>' +
+          '<span class="text-slate-300 dark:text-slate-700 hidden sm:inline">·</span>' +
+          '<a href="/support/" class="text-sm text-slate-600 dark:text-slate-400 hover:text-primary transition-colors font-medium">Support</a>' +
+          '<span class="text-slate-300 dark:text-slate-700 hidden sm:inline">·</span>' +
+          '<a href="/profit-calculator/" class="text-sm text-slate-600 dark:text-slate-400 hover:text-primary transition-colors font-medium">ROI Calculator</a>' +
+          '<span class="text-slate-300 dark:text-slate-700 hidden sm:inline">·</span>' +
+          '<a href="/quote/" class="text-sm text-slate-600 dark:text-slate-400 hover:text-primary transition-colors font-medium">Get a Quote</a>' +
+          "</div></div>" +
+          "</div></div>";
+        document.title = "404 - Page Not Found";
         this.hideSkeleton();
         return;
       }

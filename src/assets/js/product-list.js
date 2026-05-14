@@ -220,9 +220,9 @@
     });
   });
 
-  // FEISHU_SYNC_APPEND_START
+  // APPENDED_PRODUCTS_START — manually add products outside of main data here
   var APPENDED_PRODUCT_SERIES = [];
-  // FEISHU_SYNC_APPEND_END
+  // APPENDED_PRODUCTS_END
 
   var APPENDED_PRODUCT_SERIES_NORMALIZED = APPENDED_PRODUCT_SERIES.map(function (series) {
     return Object.assign({}, series, {

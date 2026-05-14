@@ -157,27 +157,6 @@ class ErrorHandlingModule {
 
 ## 🚀 部署
 
-### GitHub Pages + 飞书多维表格定时同步
-
-项目已支持通过 GitHub Actions 定时从飞书多维表格拉取产品数据并自动提交：
-
-- 工作流文件：`.github/workflows/sync-feishu.yml`
-- 执行时间：每天北京时间 `04:00`（UTC `20:00`）
-- 支持手动触发：Actions -> `Sync Feishu Data` -> `Run workflow`
-
-需要在仓库 `Settings -> Secrets and variables -> Actions` 中配置以下 Secrets：
-
-- `FEISHU_APP_ID`
-- `FEISHU_APP_SECRET`
-- `FEISHU_SPREADSHEET_TOKEN`
-- `FEISHU_SHEET_RANGE`
-
-`FEISHU_SHEET_RANGE` 支持：
-
-- `table_id`
-- `table_id|view_id`
-- 飞书多维表格完整 URL（支持短链/分享链接跳转后自动提取）
-
 ### Docker部署
 ```dockerfile
 FROM node:16-alpine
