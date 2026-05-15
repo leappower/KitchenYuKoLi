@@ -21,51 +21,51 @@
   var CONFIG = {
     support: {
       titleKey: "support_contact_channels_title",
-      title: "联系我们",
-      wechat: "扫码添加，在线咨询",
-      wa: "多国语言支持，工作日2小时回复",
+      title: window.t("support_ch_support_title", "Contact Us"),
+      wechat: window.t("support_ch_support_wechat", "Scan to add, chat online"),
+      wa: window.t("support_ch_support_wa", "Multi-language support, 2h reply on weekdays"),
       email: "support.kitchen@yukoli.com",
-      phone: "紧急故障 随时待命 极速响应",
+      phone: window.t("support_ch_support_phone", "Emergency support 24/7"),
     },
     faq: {
       titleKey: "support_faq_contact_title",
-      title: "联系我们",
-      wechat: "扫码添加，在线咨询",
-      wa: "联系工程师",
-      email: "提交工单",
-      phone: "紧急故障",
+      title: window.t("support_ch_support_title", "Contact Us"),
+      wechat: window.t("support_ch_support_wechat", "Scan to add, chat online"),
+      wa: window.t("support_ch_faq_wa", "Contact engineer"),
+      email: window.t("support_ch_faq_email", "Submit a ticket"),
+      phone: window.t("support_ch_faq_phone", "Emergency support"),
     },
     installation: {
       titleKey: "support_install_contact_title",
-      title: "联系我们",
-      wechat: "扫码添加，在线咨询",
-      wa: "预约安装咨询",
-      email: "获取安装方案",
-      phone: "紧急安装需求",
+      title: window.t("support_ch_support_title", "Contact Us"),
+      wechat: window.t("support_ch_support_wechat", "Scan to add, chat online"),
+      wa: window.t("support_ch_installation_wa", "Book installation consultation"),
+      email: window.t("support_ch_installation_email", "Get installation plan"),
+      phone: window.t("support_ch_installation_phone", "Urgent installation"),
     },
     "spare-parts": {
       titleKey: "support_spare_contact_title",
-      title: "联系我们",
-      wechat: "扫码添加，在线咨询",
-      wa: "配件咨询",
-      email: "配件订购",
-      phone: "紧急配件需求",
+      title: window.t("support_ch_support_title", "Contact Us"),
+      wechat: window.t("support_ch_support_wechat", "Scan to add, chat online"),
+      wa: window.t("support_ch_spare_parts_wa", "Parts consultation"),
+      email: window.t("support_ch_spare_parts_email", "Order parts"),
+      phone: window.t("support_ch_spare_parts_phone", "Urgent parts needed"),
     },
     training: {
       titleKey: "support_contact_channels_title",
-      title: "联系我们",
-      wechat: "扫码添加，在线咨询",
-      wa: "预约培训",
-      email: "获取培训资料",
-      phone: "培训咨询",
+      title: window.t("support_ch_support_title", "Contact Us"),
+      wechat: window.t("support_ch_support_wechat", "Scan to add, chat online"),
+      wa: window.t("support_ch_training_wa", "Book training"),
+      email: window.t("support_ch_training_email", "Get training materials"),
+      phone: window.t("support_ch_training_phone", "Training inquiry"),
     },
     warranty: {
       titleKey: "support_warranty_contact_title",
-      title: "联系我们",
-      wechat: "扫码添加，在线咨询",
-      wa: "质保政策咨询",
-      email: "保修登记",
-      phone: "故障报修",
+      title: window.t("support_ch_support_title", "Contact Us"),
+      wechat: window.t("support_ch_support_wechat", "Scan to add, chat online"),
+      wa: window.t("support_ch_warranty_wa", "Warranty policy inquiry"),
+      email: window.t("support_ch_warranty_email", "Warranty registration"),
+      phone: window.t("support_ch_warranty_phone", "Fault report"),
     },
   };
 
@@ -147,7 +147,7 @@
         '<div class="w-10 h-10 rounded-lg bg-white/20 flex items-center justify-center shrink-0">' +
         WECHAT_ICON +
         "</div>" +
-        '<div class="flex-1"><p class="font-bold text-sm">微信</p><p class="text-xs text-white/80">' +
+        '<div class="flex-1"><p class="font-bold text-sm" data-i18n="support_wechat">微信</p><p class="text-xs text-white/80">' +
         cfg.wechat +
         "</p></div>" +
         '<span class="material-symbols-outlined text-white/60 text-lg shrink-0">qr_code_2</span>' +
@@ -159,7 +159,7 @@
       '<div class="w-14 h-14 rounded-full bg-[#07C160] flex items-center justify-center group-hover:scale-110 transition-transform duration-300">' +
       WECHAT_ICON +
       "</div>" +
-      '<h3 class="font-bold text-lg">微信</h3>' +
+      '<h3 class="font-bold text-lg" data-i18n="support_wechat">微信</h3>' +
       '<p class="text-sm text-slate-500 dark:text-slate-400 text-center">' +
       cfg.wechat +
       "</p>" +
@@ -235,7 +235,7 @@
         _tel +
         '" class="flex items-center gap-3 p-4 rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 transition-all active:scale-95">' +
         '<div class="w-10 h-10 rounded-lg bg-blue-500/10 flex items-center justify-center shrink-0"><span class="material-symbols-outlined text-blue-500 text-xl">call</span></div>' +
-        '<div class="flex-1"><p class="font-bold text-sm text-slate-900 dark:text-slate-100">电话</p><p class="text-xs text-slate-500 dark:text-slate-400">' +
+        '<div class="flex-1"><p class="font-bold text-sm text-slate-900 dark:text-slate-100" data-i18n="support_phone">电话</p><p class="text-xs text-slate-500 dark:text-slate-400">' +
         cfg.phone +
         "</p></div>" +
         '<span class="material-symbols-outlined text-slate-400 text-lg shrink-0">open_in_new</span>' +
@@ -255,7 +255,7 @@
       '<div class="w-14 h-14 rounded-full bg-blue-500 flex items-center justify-center group-hover:scale-110 transition-transform"><span class="material-symbols-outlined text-white text-2xl">call</span></div>' +
       '<h3 class="font-bold text-lg"' +
       attr(phoneKey) +
-      ">电话</h3>" +
+      ' data-i18n="support_phone">电话</h3>' +
       '<p class="text-sm text-slate-500 dark:text-slate-400 text-center"' +
       attr(phoneDescKey) +
       ">" +

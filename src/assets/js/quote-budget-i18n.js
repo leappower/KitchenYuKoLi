@@ -104,13 +104,20 @@
     var consult = sel.querySelector('option[value="consult"]');
 
     if (placeholder) {
-      html += '<option value="">' + (placeholder.textContent || "请选择预算范围") + "</option>";
+      html +=
+        '<option value="">' +
+        (placeholder.textContent ||
+          (typeof window.t === "function" ? window.t("quote_select_budget", "请选择预算范围") : "请选择预算范围")) +
+        "</option>";
     } else {
       html += '<option value="">—</option>';
     }
 
     if (consult) {
-      html += '<option value="consult">' + (consult.textContent || "需咨询") + "</option>";
+      html +=
+        '<option value="consult">' +
+        (consult.textContent || (typeof window.t === "function" ? window.t("quote_consult", "需咨询") : "需咨询")) +
+        "</option>";
     }
 
     for (var i = 0; i < TIER_VALUES.length; i++) {

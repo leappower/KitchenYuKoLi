@@ -253,7 +253,7 @@
         '<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-4 pb-0 hidden md:block">' +
         '<nav class="text-sm text-slate-500 dark:text-slate-400" aria-label="Breadcrumb">' +
         '<ol class="flex items-center gap-1 flex-wrap">' +
-        '<li><a href="/products/" class="hover:text-primary transition-colors">产品中心</a></li>' +
+        '<li><a href="/products/" class="hover:text-primary transition-colors">Products</a></li>' +
         '<li class="mx-1.5 text-slate-300 dark:text-slate-600">/</li>';
       if (catLabel && slug) {
         html +=
@@ -291,7 +291,7 @@
         }) || product.images[0];
       if (pi && pi.filePath) imgSrc = pi.filePath;
     }
-    document.title = product.model + " | Yukoli 智能商厨设备";
+    document.title = product.model + " | Yukoli Smart Commercial Kitchen";
 
     // Highlight matching category in navigator dropdown
     if (product.category && window.Navigator && typeof window.Navigator.highlightCategory === "function") {

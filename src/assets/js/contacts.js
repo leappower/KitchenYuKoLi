@@ -37,30 +37,30 @@
   // ============================================
   /** Page path → display name mapping for WhatsApp source tracking */
   var PAGE_NAMES = {
-    "/support/": "售后支持",
-    "/support/installation/": "安装服务",
-    "/support/spare-parts/": "配件服务",
-    "/support/training/": "操作培训",
-    "/support/warranty/": "质保政策",
-    "/support/faq/": "常见问题",
-    "/products/": "产品中心",
-    "/products/compare/": "产品对比",
-    "/products/detail/": "产品详情",
-    "/quote/": "在线询价",
-    "/contact/": "联系我们",
-    "/landing/": "着陆页",
-    "/home/": "首页",
-    "/about/": "关于我们",
-    "/news/": "新闻资讯",
-    "/thank-you/": "感谢页",
-    "/applications/central-kitchen/": "中央厨房",
-    "/applications/chain-restaurant/": "连锁餐饮",
-    "/applications/small-restaurant/": "小型餐饮",
-    "/applications/canteen/": "智慧食堂",
-    "/applications/menu-lab/": "菜系实验室",
-    "/applications/cloud-kitchen/": "云厨房",
-    "/profit-calculator/": "利润计算器",
-    "/cases/": "案例",
+    "/support/": window.t("nav_support", "Service & Support"),
+    "/support/installation/": window.t("nav_support_installation", "Installation & Commissioning"),
+    "/support/spare-parts/": window.t("nav_support_spare_parts", "Spare Parts Support"),
+    "/support/training/": window.t("nav_support_training", "Training & Manuals"),
+    "/support/warranty/": window.t("nav_support_warranty", "Warranty & Maintenance"),
+    "/support/faq/": window.t("nav_support_faq", "Technical FAQ & Contact"),
+    "/products/": window.t("nav_products", "Products"),
+    "/products/compare/": window.t("compare_view", "Compare"),
+    "/products/detail/": window.t("pd_spec_product_specs", "Product Details"),
+    "/quote/": window.t("nav_get_quote", "Get a Quote"),
+    "/contact/": window.t("nav_contact", "Contact Us"),
+    "/landing/": window.t("contact_landing", "Landing Page"),
+    "/home/": window.t("nav_home", "Home"),
+    "/about/": window.t("nav_about", "About Us"),
+    "/news/": window.t("contact_news", "News"),
+    "/thank-you/": window.t("contact_thank_you", "Thank You"),
+    "/applications/central-kitchen/": window.t("nav_applications_central_kitchen", "Central Kitchen"),
+    "/applications/chain-restaurant/": window.t("nav_applications_chain_restaurant", "Chain Restaurant"),
+    "/applications/small-restaurant/": window.t("nav_applications_small_restaurant", "Small Restaurant"),
+    "/applications/canteen/": window.t("nav_applications_canteen", "Canteen"),
+    "/applications/menu-lab/": window.t("nav_applications_menu_lab", "Menu Lab"),
+    "/applications/cloud-kitchen/": window.t("nav_applications_cloud_kitchen", "Cloud Kitchen"),
+    "/profit-calculator/": window.t("nav_profit_calculator", "ROI Calculator"),
+    "/cases/": window.t("nav_case_studies", "Case Studies"),
   };
 
   function getPageName() {
@@ -72,7 +72,7 @@
     for (var i = 0; i < keys.length; i++) {
       if (path.indexOf(keys[i]) !== -1) return PAGE_NAMES[keys[i]];
     }
-    return "网站";
+    return window.t("contact_website", "Website");
   }
 
   /**
@@ -197,7 +197,7 @@
   // ============================================
   function startWhatsApp() {
     var text = buildQuoteMessage();
-    var url = contactsWhatsApp({ source: "询价表单", message: text });
+    var url = contactsWhatsApp({ source: window.t("contact_quote_source", "Quote Form"), message: text });
     window.open(url, "_blank");
   }
   function startLine() {
@@ -323,5 +323,10 @@
   // Re-init after bfcache restore
   window.addEventListener("pageshow", function (e) {
     if (e.persisted) initWhatsAppLinks();
+  });
+  document.addEventListener("languageChanged", function () {
+    if (window.Contacts && window.Contacts.mount) {
+      window.Contacts.mount();
+    }
   });
 })(window);
