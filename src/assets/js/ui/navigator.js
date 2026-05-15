@@ -26,6 +26,11 @@
     tgt.addEventListener(evt, fn, { signal: ac.signal });
   }
 
+  /** Safe i18n helper — guards against scripts loading before translations.js */
+  function _t(key, fallback) {
+    return typeof window.t === "function" ? window.t(key, fallback) : fallback;
+  }
+
   /* ================================================================
    *  常量 & 配置
    * ================================================================ */
@@ -37,43 +42,43 @@
   var DEFAULT_NAV_ITEMS = [
     {
       key: "nav_products",
-      label: window.t("nav_products", "Products"),
+      label: _t("nav_products", "Products"),
       path: "/products/",
       id: "products",
       hasDropdown: true,
     },
     {
       key: "nav_applications",
-      label: window.t("nav_applications", "Application Scenarios"),
+      label: _t("nav_applications", "Application Scenarios"),
       path: "/applications/",
       id: "applications",
       hasDropdown: true,
     },
     {
       key: "nav_cases",
-      label: window.t("nav_case_studies", "Case Studies"),
+      label: _t("nav_case_studies", "Case Studies"),
       path: "/cases/",
       id: "cases",
       hasDropdown: false,
     },
     {
       key: "nav_profit_calculator",
-      label: window.t("nav_profit_calculator", "ROI Calculator"),
+      label: _t("nav_profit_calculator", "ROI Calculator"),
       path: "/profit-calculator/",
       id: "profit-calculator",
       hasDropdown: false,
     },
     {
       key: "nav_support",
-      label: window.t("nav_support", "Service & Support"),
+      label: _t("nav_support", "Service & Support"),
       path: "/support/",
       id: "support",
       hasDropdown: true,
     },
-    { key: "nav_about", label: window.t("nav_about", "About Us"), path: "/about/", id: "about", hasDropdown: true },
+    { key: "nav_about", label: _t("nav_about", "About Us"), path: "/about/", id: "about", hasDropdown: true },
     {
       key: "nav_contact",
-      label: window.t("nav_contact", "Contact Us"),
+      label: _t("nav_contact", "Contact Us"),
       path: "/contact/",
       id: "contact",
       hasDropdown: false,
@@ -237,7 +242,7 @@
         'data-i18n="' +
         escapeHtml(opts.ctaTextKey || "nav_get_quote") +
         '">' +
-        window.t("nav_get_quote", "Get a Quote") +
+        _t("nav_get_quote", "Get a Quote") +
         "</a>" +
         "</div>";
     } else {
@@ -412,10 +417,10 @@
 
     var currentLang = localStorage.getItem("userLanguage") || "zh-CN";
     var groups = {
-      common: { label: window.t("lang_group_common", "Common"), langs: [] },
-      southeast_asia: { label: window.t("lang_group_se_asia", "Southeast Asia"), langs: [] },
-      east_asia: { label: window.t("lang_group_east_asia", "East Asia"), langs: [] },
-      other: { label: window.t("lang_group_other", "Other"), langs: [] },
+      common: { label: _t("lang_group_common", "Common"), langs: [] },
+      southeast_asia: { label: _t("lang_group_se_asia", "Southeast Asia"), langs: [] },
+      east_asia: { label: _t("lang_group_east_asia", "East Asia"), langs: [] },
+      other: { label: _t("lang_group_other", "Other"), langs: [] },
     };
 
     reg.LANGUAGES.forEach(function (l) {
@@ -504,7 +509,7 @@
       'data-i18n="' +
       escapeHtml(opts.ctaTextKey) +
       '">' +
-      window.t("nav_get_quote", "Get a Quote") +
+      _t("nav_get_quote", "Get a Quote") +
       "</a>" +
       "</div>"
     );
