@@ -325,7 +325,7 @@
       c.quote +
       "</p>" +
       '<span class="inline-flex items-center gap-1 text-primary font-bold text-sm">' +
-      '<span data-i18n="cases_read_more">Read More</span>' +
+      '<span data-i18n="cases_read_more">阅读更多</span>' +
       '<span class="material-symbols-outlined text-base">arrow_forward</span>' +
       "</span>" +
       "</div>" +

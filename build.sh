@@ -63,6 +63,13 @@ cp "$SRC/index.html" "$DIST/index.html"
 [ -f "$SRC/robots.txt" ] && cp "$SRC/robots.txt" "$DIST/robots.txt"
 
 # ─── 2. Assets ──────────────────────────────────────────────────
+
+# Bump i18n localStorage cache version BEFORE sync
+# This forces browsers to re-fetch translation JSON instead of using stale cache
+I18N_CACHE_TS=$(date +%s)
+sed -i '' "s/var I18N_CACHE_V = .*/var I18N_CACHE_V = $I18N_CACHE_TS;/" "$SRC/assets/js/translations.js"
+echo "🔄 i18n cache version → $I18N_CACHE_TS"
+
 sync_assets "js"           "*.js"
 sync_assets "css"          "*.css"
 sync_assets "fonts"        "*"
@@ -79,6 +86,10 @@ echo "🔄 Bumping JS version to $VERSION..."
 # Replace all version query params (handles v=20260508, v=20260508-v3, v=anystring, v=this)
 find "$DIST" -name '*.html' -exec sed -i '' "s|?v=[a-zA-Z0-9._-]*|?$VERSION|g" {} +
 find "$SRC/pages" -name '*.html' -exec sed -i '' "s|?v=[a-zA-Z0-9._-]*|?$VERSION|g" {} +
+
+# Bump i18n localStorage cache version — already done before sync, above
+# I18N_CACHE_TS=$(date +%s)
+# sed -i '' "s/var I18N_CACHE_V = .*/var I18N_CACHE_V = $I18N_CACHE_TS;/" "$SRC/assets/js/translations.js"
 
 # Generate sitemap.xml
 if command -v node &>/dev/null; then

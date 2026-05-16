@@ -1,5 +1,6 @@
 !(function (t) {
   "use strict";
+  var I18N_CACHE_V = 1778920652;
   var _spaRegs = {};
   function _spaOn(tgt, evt, fn, key) {
     if (_spaRegs[key]) _spaRegs[key].abort();
@@ -98,7 +99,7 @@
           if (r) {
             var s = JSON.parse(r);
             if (s && "object" == typeof s && s.data && "object" == typeof s.data) {
-              if (s.timestamp && Date.now() - s.timestamp < 864e5 && s._v === 2)
+              if (s.timestamp && Date.now() - s.timestamp < 864e5 && s._v === I18N_CACHE_V)
                 return ((o = s.data), this.translationsCache.set(e, o), Promise.resolve(o));
               localStorage.removeItem(n);
             } else (console.warn("[i18n] Invalid cache structure for " + t + ", clearing"), localStorage.removeItem(n));
@@ -129,7 +130,7 @@
                   n,
                   JSON.stringify({
                     timestamp: Date.now(),
-                    _v: 2,
+                    _v: I18N_CACHE_V,
                     data: o,
                   })
                 );
@@ -228,12 +229,17 @@
     }),
     (r.prototype.setElementTranslation = function (t, e) {
       if ("INPUT" !== t.tagName && "TEXTAREA" !== t.tagName) {
-        for (var n = !1, a = 0; a < t.childNodes.length; a++)
-          if (3 === t.childNodes[a].nodeType && t.childNodes[a].textContent.trim()) {
-            ((t.childNodes[a].textContent = e), (n = !0));
-            break;
-          }
-        n || (t.textContent = e);
+        // If translation value contains HTML, use innerHTML for full replacement
+        if (/<[a-z][\s\S]*>/i.test(e)) {
+          t.innerHTML = e;
+        } else {
+          for (var n = !1, a = 0; a < t.childNodes.length; a++)
+            if (3 === t.childNodes[a].nodeType && t.childNodes[a].textContent.trim()) {
+              ((t.childNodes[a].textContent = e), (n = !0));
+              break;
+            }
+          n || (t.textContent = e);
+        }
       } else t.placeholder !== e && (t.placeholder = e);
     }),
     (r.prototype.translate = function (t) {
