@@ -411,8 +411,8 @@ const SSL_PORT = process.env.SSL_PORT ? parseInt(process.env.SSL_PORT) : 3000;
 const ENABLE_SSL = SSL_PORT > 0;
 const https = require('https');
 const sslOptions = {
-  key: fs.readFileSync('/Users/chee/certs/192.168.3.181-key.pem'),
-  cert: fs.readFileSync('/Users/chee/certs/192.168.3.181-new.pem'),
+  key: fs.readFileSync('/Users/chee/certs/192.168.3.180-key.pem'),
+  cert: fs.readFileSync('/Users/chee/certs/192.168.3.180.pem'),
 };
 
 // Start server with error handling
@@ -440,7 +440,7 @@ const server = app.listen(PORT, (err) => {
     const httpsServer = https.createServer(sslOptions, app);
     httpsServer.listen(SSL_PORT, (err) => {
       if (err) { console.error('Failed to start HTTPS server:', err); return; }
-      console.log(`🔒 HTTPS running on https://192.168.3.181:${SSL_PORT}`);
+      console.log(`🔒 HTTPS running on https://192.168.3.180:${SSL_PORT}`);
     });
   }
 });
