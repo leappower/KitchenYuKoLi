@@ -9,6 +9,7 @@
 (function () {
   var _spaRegs = {};
   function _spaOn(tgt, evt, fn, key) {
+    if (key == null) key = evt + ":" + (++_spaRegs.__k || (_spaRegs.__k = 1));
     if (_spaRegs[key]) _spaRegs[key].abort();
     var ac = new AbortController();
     _spaRegs[key] = ac;
@@ -616,25 +617,35 @@
 
   _spaOn(window, "languageChanged", renderPDP, "languageChanged");
   document.addEventListener("productTranslationsLoaded", renderPDP);
-  _spaOn(document, "spa:load", function () {
-    var segs = location.pathname.split("/").filter(Boolean);
-    // Only render PDP on /products/detail/<model>/ or /products/<model>/ (non-category)
-    if (segs[0] === "products") {
-      if (segs[1] === "detail" && segs[2]) {
-        renderPDP();
-      } else if (segs[1] && segs[1] !== "compare" && !isCategorySlug(segs[1])) {
-        renderPDP();
+  _spaOn(
+    document,
+    "spa:load",
+    function () {
+      var segs = location.pathname.split("/").filter(Boolean);
+      // Only render PDP on /products/detail/<model>/ or /products/<model>/ (non-category)
+      if (segs[0] === "products") {
+        if (segs[1] === "detail" && segs[2]) {
+          renderPDP();
+        } else if (segs[1] && segs[1] !== "compare" && !isCategorySlug(segs[1])) {
+          renderPDP();
+        }
       }
-    }
-  });
-  _spaOn(document, "spa:ready", function () {
-    var segs = location.pathname.split("/").filter(Boolean);
-    if (segs[0] === "products") {
-      if (segs[1] === "detail" && segs[2]) {
-        renderPDP();
-      } else if (segs[1] && segs[1] !== "compare" && !isCategorySlug(segs[1])) {
-        renderPDP();
+    },
+    "spa:load:renderPDP"
+  );
+  _spaOn(
+    document,
+    "spa:ready",
+    function () {
+      var segs = location.pathname.split("/").filter(Boolean);
+      if (segs[0] === "products") {
+        if (segs[1] === "detail" && segs[2]) {
+          renderPDP();
+        } else if (segs[1] && segs[1] !== "compare" && !isCategorySlug(segs[1])) {
+          renderPDP();
+        }
       }
-    }
-  });
+    },
+    "spa:ready:renderPDP"
+  );
 })();

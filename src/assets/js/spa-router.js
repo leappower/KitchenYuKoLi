@@ -17,6 +17,20 @@
   );
 })();
 
+// Auto-detect build version from the first script tag with ?v=...,
+// so that loadPageScripts can append the same cache-buster to dynamically
+// loaded scripts (preventing stale JS when the browser caches the unversioned URL)
+(function () {
+  var scripts = document.querySelectorAll('script[src*="?v="]');
+  for (var i = 0; i < scripts.length; i++) {
+    var m = scripts[i].src.match(/\?v=([a-zA-Z0-9._-]+)/);
+    if (m) {
+      window._spaScriptVersion = m[1];
+      break;
+    }
+  }
+})();
+
 /**
  * spa-router.js - 混合 SPA + SSG 路由器
  *
@@ -901,7 +915,12 @@
           }
           var el = document.createElement("script");
           el.id = s.id;
-          el.src = s.src;
+          // Append cache-busting version to avoid stale JS on SPA navigation
+          // Uses the same ?v=YYYYMMDDHHMM from the HTML page's script tags
+          var ver = window._spaScriptVersion;
+          el.src =
+            s.src +
+            (s.src.indexOf("?v=") === -1 && s.src.indexOf("?_") === -1 ? (ver ? "?v=" + ver : "?v=" + Date.now()) : "");
           el.onload = function () {
             resolve();
           };
