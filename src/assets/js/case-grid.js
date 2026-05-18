@@ -217,7 +217,9 @@
       '<div class="w-full aspect-video bg-slate-200 dark:bg-slate-700 overflow-hidden relative flex-shrink-0">' +
       '<img loading="lazy" alt="' +
       c.title +
-      '" class="w-full h-full object-cover group-hover:scale-105 transition-transform" src="/assets/images/cases/"' + c.slug + '"/cover.webp" />' +
+      '" class="w-full h-full object-cover group-hover:scale-105 transition-transform" src="/assets/images/cases/' +
+      c.slug +
+      '/cover.webp" />' +
       '<div class="absolute top-3 left-3 flex items-center gap-2">' +
       '<span class="px-3 py-1 rounded-full bg-white/90 dark:bg-slate-800/90 text-sm font-semibold text-slate-700 dark:text-slate-200 backdrop-blur-sm">' +
       c.country +
