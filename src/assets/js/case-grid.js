@@ -158,7 +158,11 @@
     云厨房: "cases_industry_cloud_kitchen",
   };
   function tOr(key, fallback) {
-    return typeof window.t === "function" ? window.t(key, fallback) : fallback;
+    if (typeof window.t === "function") {
+      var val = window.t(key);
+      return val !== key ? val : fallback;
+    }
+    return fallback;
   }
   function ti(name) {
     return tOr(INDUSTRY_I18N[name] || name, name);
