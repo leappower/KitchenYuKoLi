@@ -1,0 +1,58 @@
+=== Image Generation Started: Mon May 18 12:43:51 CST 2026 ===
+[12:43:51] Generating: /Users/chee/Projects/KitchenYuKoLi/src/assets/images/applications/central-kitchen/feature2.webp
+[12:43:51] Generating: /Users/chee/Projects/KitchenYuKoLi/src/assets/images/applications/central-kitchen/feature1.webp
+[12:43:51] Generating: /Users/chee/Projects/KitchenYuKoLi/src/assets/images/applications/central-kitchen/feature4.webp
+[12:43:51] Generating: /Users/chee/Projects/KitchenYuKoLi/src/assets/images/applications/central-kitchen/feature3.webp
+[12:43:51] Generating: /Users/chee/Projects/KitchenYuKoLi/src/assets/images/applications/chain-restaurant/feature2.webp
+[12:43:51] Generating: /Users/chee/Projects/KitchenYuKoLi/src/assets/images/applications/chain-restaurant/feature1.webp
+[12:43:51] Generating: /Users/chee/Projects/KitchenYuKoLi/src/assets/images/applications/chain-restaurant/feature3.webp
+[12:43:51] Generating: /Users/chee/Projects/KitchenYuKoLi/src/assets/images/applications/chain-restaurant/feature4.webp
+[12:43:51] Generating: /Users/chee/Projects/KitchenYuKoLi/src/assets/images/applications/canteen/feature1.webp
+[12:43:51] Generating: /Users/chee/Projects/KitchenYuKoLi/src/assets/images/applications/canteen/feature2.webp
+[12:43:51] Generating: /Users/chee/Projects/KitchenYuKoLi/src/assets/images/applications/food-factory/feature1.webp
+[12:43:51] Generating: /Users/chee/Projects/KitchenYuKoLi/src/assets/images/applications/canteen/feature3.webp
+[12:43:51] Generating: /Users/chee/Projects/KitchenYuKoLi/src/assets/images/applications/canteen/feature4.webp
+[12:43:51] Generating: /Users/chee/Projects/KitchenYuKoLi/src/assets/images/applications/food-factory/feature2.webp
+[12:43:51] Generating: /Users/chee/Projects/KitchenYuKoLi/src/assets/images/applications/food-factory/feature3.webp
+[12:43:51] Generating: /Users/chee/Projects/KitchenYuKoLi/src/assets/images/applications/food-factory/feature4.webp
+[12:43:51] Generating: /Users/chee/Projects/KitchenYuKoLi/src/assets/images/applications/menu-lab/feature1.webp
+[12:43:51] Generating: /Users/chee/Projects/KitchenYuKoLi/src/assets/images/applications/menu-lab/feature2.webp
+[12:43:51] Generating: /Users/chee/Projects/KitchenYuKoLi/src/assets/images/applications/menu-lab/feature3.webp
+[12:43:51] Generating: /Users/chee/Projects/KitchenYuKoLi/src/assets/images/applications/menu-lab/feature4.webp
+[12:43:51] Generating: /Users/chee/Projects/KitchenYuKoLi/src/assets/images/applications/small-restaurant/feature1.webp
+[12:43:51] Generating: /Users/chee/Projects/KitchenYuKoLi/src/assets/images/applications/small-restaurant/feature2.webp
+[12:43:51] Generating: /Users/chee/Projects/KitchenYuKoLi/src/assets/images/applications/small-restaurant/feature3.webp
+[12:43:51] Generating: /Users/chee/Projects/KitchenYuKoLi/src/assets/images/applications/small-restaurant/feature4.webp
+[12:43:51] Generating: /Users/chee/Projects/KitchenYuKoLi/src/assets/images/home/advantage-labor.webp
+[12:43:51] Generating: /Users/chee/Projects/KitchenYuKoLi/src/assets/images/home/advantage-quality.webp
+[12:43:51] Generating: /Users/chee/Projects/KitchenYuKoLi/src/assets/images/home/advantage-energy.webp
+[12:43:51] Generating: /Users/chee/Projects/KitchenYuKoLi/src/assets/images/home/advantage-service.webp
+[12:43:52] WARNING: /Users/chee/Projects/KitchenYuKoLi/src/assets/images/applications/food-factory/feature3.webp too small (0 bytes)
+[12:43:52] WARNING: /Users/chee/Projects/KitchenYuKoLi/src/assets/images/applications/chain-restaurant/feature2.webp too small (0 bytes)
+[12:43:52] WARNING: /Users/chee/Projects/KitchenYuKoLi/src/assets/images/applications/food-factory/feature4.webp too small (0 bytes)
+[12:43:52] WARNING: /Users/chee/Projects/KitchenYuKoLi/src/assets/images/applications/central-kitchen/feature4.webp too small (0 bytes)
+[12:43:52] WARNING: /Users/chee/Projects/KitchenYuKoLi/src/assets/images/applications/chain-restaurant/feature4.webp too small (0 bytes)
+[12:43:52] WARNING: /Users/chee/Projects/KitchenYuKoLi/src/assets/images/applications/small-restaurant/feature3.webp too small (0 bytes)
+[12:43:52] WARNING: /Users/chee/Projects/KitchenYuKoLi/src/assets/images/applications/central-kitchen/feature1.webp too small (0 bytes)
+[12:43:52] WARNING: /Users/chee/Projects/KitchenYuKoLi/src/assets/images/applications/canteen/feature2.webp too small (0 bytes)
+[12:43:52] WARNING: /Users/chee/Projects/KitchenYuKoLi/src/assets/images/applications/chain-restaurant/feature3.webp too small (0 bytes)
+[12:43:52] WARNING: /Users/chee/Projects/KitchenYuKoLi/src/assets/images/applications/menu-lab/feature2.webp too small (0 bytes)
+[12:43:52] WARNING: /Users/chee/Projects/KitchenYuKoLi/src/assets/images/applications/chain-restaurant/feature1.webp too small (0 bytes)
+[12:43:52] WARNING: /Users/chee/Projects/KitchenYuKoLi/src/assets/images/applications/food-factory/feature2.webp too small (0 bytes)
+[12:43:52] WARNING: /Users/chee/Projects/KitchenYuKoLi/src/assets/images/applications/menu-lab/feature1.webp too small (0 bytes)
+[12:43:52] WARNING: /Users/chee/Projects/KitchenYuKoLi/src/assets/images/applications/central-kitchen/feature2.webp too small (0 bytes)
+[12:43:52] WARNING: /Users/chee/Projects/KitchenYuKoLi/src/assets/images/applications/canteen/feature4.webp too small (0 bytes)
+[12:43:52] WARNING: /Users/chee/Projects/KitchenYuKoLi/src/assets/images/home/advantage-energy.webp too small (0 bytes)
+[12:43:52] WARNING: /Users/chee/Projects/KitchenYuKoLi/src/assets/images/applications/menu-lab/feature3.webp too small (0 bytes)
+[12:43:52] WARNING: /Users/chee/Projects/KitchenYuKoLi/src/assets/images/applications/central-kitchen/feature3.webp too small (0 bytes)
+[12:43:52] WARNING: /Users/chee/Projects/KitchenYuKoLi/src/assets/images/home/advantage-service.webp too small (0 bytes)
+[12:43:52] WARNING: /Users/chee/Projects/KitchenYuKoLi/src/assets/images/applications/small-restaurant/feature1.webp too small (0 bytes)
+[12:43:52] WARNING: /Users/chee/Projects/KitchenYuKoLi/src/assets/images/applications/small-restaurant/feature4.webp too small (0 bytes)
+[12:43:52] WARNING: /Users/chee/Projects/KitchenYuKoLi/src/assets/images/applications/menu-lab/feature4.webp too small (0 bytes)
+[12:43:52] WARNING: /Users/chee/Projects/KitchenYuKoLi/src/assets/images/home/advantage-quality.webp too small (0 bytes)
+[12:43:52] WARNING: /Users/chee/Projects/KitchenYuKoLi/src/assets/images/applications/canteen/feature1.webp too small (0 bytes)
+[12:43:52] WARNING: /Users/chee/Projects/KitchenYuKoLi/src/assets/images/applications/canteen/feature3.webp too small (0 bytes)
+[12:43:52] WARNING: /Users/chee/Projects/KitchenYuKoLi/src/assets/images/applications/food-factory/feature1.webp too small (0 bytes)
+[12:43:52] WARNING: /Users/chee/Projects/KitchenYuKoLi/src/assets/images/applications/small-restaurant/feature2.webp too small (0 bytes)
+[12:43:52] WARNING: /Users/chee/Projects/KitchenYuKoLi/src/assets/images/home/advantage-labor.webp too small (0 bytes)
+=== Generation Complete: Mon May 18 12:43:52 CST 2026 ===
