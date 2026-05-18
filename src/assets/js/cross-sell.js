@@ -372,9 +372,10 @@
 
       html += '<div class="relative">';
 
-      // Icon
-      html += '<div class="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mb-4">';
-      html += '<span class="material-symbols-outlined text-primary text-xl">' + scene.icon + "</span>";
+      // Scene image
+      var sceneImg = '/assets/images/applications/' + scene.slug + '/hero.webp';
+      html += '<div class="w-full h-36 rounded-xl overflow-hidden mb-4">';
+      html += '<img src="' + sceneImg + '" alt="' + esc(label) + '" class="w-full h-full object-cover" loading="lazy">';
       html += "</div>";
 
       // Label
