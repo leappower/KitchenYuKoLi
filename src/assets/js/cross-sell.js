@@ -374,7 +374,7 @@
 
       // Scene image
       var sceneImg = '/assets/images/applications/' + scene.slug + '/hero.webp';
-      html += '<div class="w-full h-36 rounded-xl overflow-hidden mb-4">';
+      html += '<div class="w-full aspect-[3/2] rounded-xl overflow-hidden mb-4">';
       html += '<img src="' + sceneImg + '" alt="' + esc(label) + '" class="w-full h-full object-cover" loading="lazy">';
       html += "</div>";
 
