@@ -149,6 +149,21 @@
   /* ── State ──────────────────────────────────────── */
   var activeFilters = { industry: null, volume: null, country: null, benefit: null };
 
+  /* ── i18n helpers ──────────────────────────────── */
+  var INDUSTRY_I18N = {
+    小型餐饮: "cases_industry_small_restaurant",
+    中央厨房: "cases_industry_central_kitchen",
+    连锁餐饮: "cases_industry_chain_restaurant",
+    智慧食堂: "cases_industry_smart_canteen",
+    云厨房: "cases_industry_cloud_kitchen",
+  };
+  function tOr(key, fallback) {
+    return typeof window.t === "function" ? window.t(key, fallback) : fallback;
+  }
+  function ti(name) {
+    return tOr(INDUSTRY_I18N[name] || name, name);
+  }
+
   /* ── Helpers ────────────────────────────────────── */
   function laborReduction(b, a) {
     return Math.round((1 - a / b) * 100);
@@ -156,10 +171,10 @@
 
   function benefitLabel(key) {
     var map = {
-      "Labor Cost Reduction": "降人工",
-      Consistency: "标准化",
-      "Space Saving": "省空间",
-      "Fast Payback": "快回本",
+      "Labor Cost Reduction": tOr("cases_benefit_labor", "降人工"),
+      Consistency: tOr("cases_benefit_consistency", "标准化"),
+      "Space Saving": tOr("cases_benefit_space", "省空间"),
+      "Fast Payback": tOr("cases_benefit_payback", "快回本"),
     };
     return map[key] || key;
   }
@@ -291,7 +306,7 @@
       "<span>" +
       c.country +
       " · " +
-      c.industry +
+      tOr("cases_industry_" + c.slug, c.industry) +
       "</span>" +
       '<span class="font-semibold text-slate-700 dark:text-slate-200">' +
       c.dailyOutput +
@@ -309,14 +324,14 @@
       '<span class="material-symbols-outlined text-sm">' +
       benefitIcon(c.benefit) +
       "</span>" +
-      "人工 -" +
+      (tOr("cases_labor_reduction", "人工") + " -") +
       pct +
       "%" +
       "</span>" +
       '<span class="inline-flex items-center gap-1 text-sm font-semibold text-slate-700 dark:text-slate-200">' +
       '<span class="material-symbols-outlined text-sm text-primary">schedule</span>' +
       c.payback +
-      " 月回本" +
+      tOr("cases_payback_months", "月回本") +
       "</span>" +
       "</div>" +
       '<p class="text-sm text-slate-600 dark:text-slate-400 italic" data-i18n="cases_quote_' +
@@ -368,7 +383,7 @@
     var caseCountText =
       typeof window.t === "function"
         ? window.t("cases_count", "{n} Case Studies").replace("{n}", cases.length)
-        : cases.length + " \u4e2a\u6848\u4f8b";
+        : cases.length + " " + tOr("cases_count_unit", "个案例");
     if (countEl) countEl.textContent = caseCountText;
   }
 
@@ -395,7 +410,9 @@
       html +=
         '<button data-filter="' +
         key +
-        '" data-value="" class="case-filter-btn px-3 py-1.5 text-xs font-semibold rounded-full border transition-all border-primary bg-primary text-white">全部</button>';
+        '" data-value="" class="case-filter-btn px-3 py-1.5 text-xs font-semibold rounded-full border transition-all border-primary bg-primary text-white">' +
+        tOr("cases_filter_all", "全部") +
+        "</button>";
       for (var i = 0; i < f.options.length; i++) {
         html +=
           '<button data-filter="' +
@@ -441,7 +458,9 @@
       html +=
         '<button data-filter="' +
         key +
-        '" data-value="" class="case-filter-btn px-3 py-1.5 text-xs font-semibold rounded-full border transition-all border-primary bg-primary text-white">全部</button>';
+        '" data-value="" class="case-filter-btn px-3 py-1.5 text-xs font-semibold rounded-full border transition-all border-primary bg-primary text-white">' +
+        tOr("cases_filter_all", "全部") +
+        "</button>";
       for (var i = 0; i < f.options.length; i++) {
         html +=
           '<button data-filter="' +
@@ -499,7 +518,9 @@
       html += "</select>";
     }
     html +=
-      '<span id="case-count" class="flex-shrink-0 text-xs font-bold text-primary whitespace-nowrap">8 \u4e2a\u6848\u4f8b</span>';
+      '<span id="case-count" class="flex-shrink-0 text-xs font-bold text-primary whitespace-nowrap">8 ' +
+      tOr("cases_count_unit", "个案例") +
+      "</span>";
     html += "</div>";
     bar.innerHTML = html;
 

@@ -18,6 +18,7 @@
 
   var _spaRegs = {};
   function _spaOn(tgt, evt, fn, key) {
+    if (key == null) key = evt + ":" + (++_spaRegs.__k || (_spaRegs.__k = 1));
     if (_spaRegs[key]) _spaRegs[key].abort();
     var ac = new AbortController();
     _spaRegs[key] = ac;
@@ -35,22 +36,22 @@
   }
 
   var PRODUCT_SLUGS = {
-    stirfry: { key: "nav_products_stirfry", label: "翻炒系列", icon: "local_fire_department" },
-    cutting: { key: "nav_products_cutting", label: "切配系列", icon: "content_cut" },
-    frying: { key: "nav_products_frying", label: "煎炸系列", icon: "outdoor_grill" },
-    stewing: { key: "nav_products_stewing", label: "炖煮系列", icon: "soup_kitchen" },
-    steaming: { key: "nav_products_steaming", label: "蒸煮系列", icon: "cloud" },
-    other: { key: "nav_products_other", label: "辅助设备", icon: "more_horiz" },
+    stirfry: { key: "nav_products_stirfry", label: "Stir-Fry Series", icon: "local_fire_department" },
+    cutting: { key: "nav_products_cutting", label: "Prep Series", icon: "content_cut" },
+    frying: { key: "nav_products_frying", label: "Deep Fryer", icon: "outdoor_grill" },
+    stewing: { key: "nav_products_stewing", label: "Stewing Series", icon: "soup_kitchen" },
+    steaming: { key: "nav_products_steaming", label: "Steaming Series", icon: "cloud" },
+    other: { key: "nav_products_other", label: "Auxiliary Equipment", icon: "more_horiz" },
   };
 
   var APP_SLUGS = {
-    "small-restaurant": { label: "小型餐饮", icon: "storefront" },
-    "central-kitchen": { label: "中央厨房", icon: "apartment" },
-    canteen: { label: "智慧食堂", icon: "school" },
-    "chain-restaurant": { label: "连锁餐饮", icon: "store" },
-    "cloud-kitchen": { label: "云厨房/外卖", icon: "cloud" },
-    "food-factory": { label: "食品工厂", icon: "factory" },
-    "menu-lab": { label: "菜系实验室", icon: "science" },
+    "small-restaurant": { key: "nav_applications_small_restaurant", label: "Small Restaurant", icon: "storefront" },
+    "central-kitchen": { key: "nav_applications_central_kitchen", label: "Central Kitchen", icon: "apartment" },
+    canteen: { key: "nav_applications_canteen", label: "Smart Canteen", icon: "school" },
+    "chain-restaurant": { key: "nav_applications_chain_restaurant", label: "Chain Restaurant", icon: "store" },
+    "cloud-kitchen": { key: "nav_applications_cloud_kitchen", label: "Cloud Kitchen / Delivery", icon: "cloud" },
+    "food-factory": { key: "nav_applications_food_factory", label: "Food Factory", icon: "factory" },
+    "menu-lab": { key: "nav_applications_menu_lab", label: "Menu Lab", icon: "science" },
   };
 
   // i18n-wrapped labels (lazy resolved at render time)
@@ -65,11 +66,11 @@
   }
 
   var SUPPORT_SLUGS = {
-    faq: { label: "技术问答", icon: "help" },
-    installation: { label: "安装调试", icon: "build" },
-    warranty: { label: "质保维护", icon: "verified" },
-    "spare-parts": { label: "配件支持", icon: "settings" },
-    training: { label: "培训下载", icon: "school" },
+    faq: { key: "nav_support_faq", label: "Technical FAQ", icon: "help" },
+    installation: { key: "nav_support_installation", label: "Installation", icon: "build" },
+    warranty: { key: "nav_support_warranty", label: "Warranty", icon: "verified" },
+    "spare-parts": { key: "nav_support_spare_parts", label: "Spare Parts", icon: "settings" },
+    training: { key: "nav_support_training", label: "Training", icon: "school" },
   };
 
   // ─── Page route config ─────────────────────────────────────────
@@ -99,7 +100,7 @@
       result.type = "category";
       result.slug = slug;
       result.parentPath = "/products/";
-      result.parentLabel = tl("产品中心", "产品中心");
+      result.parentLabel = tl("nav_products", "Products");
       result.currentLabel = info.label;
       result.siblings = buildSiblingLinks("products", slug);
       return result;
@@ -117,7 +118,7 @@
       result.type = "pdp";
       result.slug = "pdp";
       result.parentPath = refSlug ? "/products/" + refSlug + "/" : "/products/";
-      result.parentLabel = tl("产品中心", "产品中心");
+      result.parentLabel = tl("nav_products", "Products");
       result.currentLabel = model;
       result.refSlug = refSlug;
       result.refCategoryLabel = refSlug ? PRODUCT_SLUGS[refSlug].label : "";
@@ -128,8 +129,8 @@
     if (path === "/products/compare" || path === "/products/compare/") {
       result.type = "compare";
       result.parentPath = "/products/";
-      result.parentLabel = tl("产品中心", "产品中心");
-      result.currentLabel = tl("产品对比", "产品对比");
+      result.parentLabel = tl("nav_products", "Products");
+      result.currentLabel = tl("compare_view", "Compare");
       return result;
     }
 
@@ -142,7 +143,7 @@
       result.type = "application";
       result.slug = appSlug;
       result.parentPath = "/applications/";
-      result.parentLabel = tl("行业场景", "行业场景");
+      result.parentLabel = tl("nav_applications", "Applications");
       result.currentLabel = APP_SLUGS[appSlug].label;
       result.siblings = buildSiblingLinks("applications", appSlug);
       return result;
@@ -155,7 +156,7 @@
       result.type = "support";
       result.slug = supSlug;
       result.parentPath = "/support/";
-      result.parentLabel = tl("服务支持", "服务支持");
+      result.parentLabel = tl("nav_support", "Service & Support");
       result.currentLabel = SUPPORT_SLUGS[supSlug].label;
       result.siblings = buildSiblingLinks("support", supSlug);
       return result;
@@ -166,7 +167,7 @@
     if (newsMatch) {
       result.type = "news-detail";
       result.parentPath = "/news/";
-      result.parentLabel = tl("新闻动态", "新闻动态");
+      result.parentLabel = tl("contact_news", "News");
       result.currentLabel = "";
       return result;
     }
@@ -251,7 +252,9 @@
     // Mobile back bar
     var backBar = '<div class="breadcrumb-back flex items-center gap-3 mb-4 md:hidden">';
     backBar +=
-      '<button onclick="window.Breadcrumb.goBack()" class="flex items-center justify-center w-9 h-9 rounded-full bg-slate-100 dark:bg-slate-800 hover:bg-primary hover:text-white text-slate-600 dark:text-slate-400 transition-all" aria-label="返回">';
+      '<button onclick="window.Breadcrumb.goBack()" class="flex items-center justify-center w-9 h-9 rounded-full bg-slate-100 dark:bg-slate-800 hover:bg-primary hover:text-white text-slate-600 dark:text-slate-400 transition-all" aria-label="' +
+      window.t("btn_back", "Back") +
+      '">';
     backBar += '<span class="material-symbols-outlined text-xl">arrow_back</span>';
     backBar += "</button>";
     backBar += "<div>";
@@ -271,9 +274,9 @@
     var siblings = page.siblings;
 
     // PC/Tablet
-    var siblingLabel = tl("其他品类", "其他品类");
-    if (page.type === "application") siblingLabel = tl("其他场景", "其他场景");
-    if (page.type === "support") siblingLabel = tl("其他服务", "其他服务");
+    var siblingLabel = tl("breadcrumb_other_categories", "Other Categories");
+    if (page.type === "application") siblingLabel = tl("breadcrumb_other_scenarios", "Other Scenarios");
+    if (page.type === "support") siblingLabel = tl("breadcrumb_other_services", "Other Services");
     var pc = '<div class="sibling-nav hidden md:block mb-8">';
     pc +=
       '<div class="text-xs font-bold text-slate-400 dark:text-slate-500 uppercase tracking-widest mb-3">' +

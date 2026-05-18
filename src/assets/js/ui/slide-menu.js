@@ -19,6 +19,7 @@
 
   var _spaRegs = {};
   function _spaOn(tgt, evt, fn, key) {
+    if (key == null) key = evt + ":" + (++_spaRegs.__k || (_spaRegs.__k = 1));
     if (_spaRegs[key]) _spaRegs[key].abort();
     var ac = new AbortController();
     _spaRegs[key] = ac;
@@ -452,7 +453,7 @@
     var items = [
       {
         key: "nav_products",
-        label: "产品中心",
+        label: window.t("nav_products", "Products"),
         href: "/products/",
         id: "products",
         icon: "kitchen",
@@ -467,7 +468,7 @@
       },
       {
         key: "nav_applications",
-        label: "行业场景",
+        label: window.t("nav_applications", "Application Scenarios"),
         href: "/applications/",
         id: "applications",
         icon: "apps",
@@ -501,10 +502,17 @@
           { key: "nav_applications_menu_lab", icon: "science", emoji: "", href: "/applications/menu-lab/" },
         ],
       },
-      { key: "nav_cases", label: "真实案例", href: "/cases/", id: "cases", icon: "cases", children: [] },
+      {
+        key: "nav_cases",
+        label: window.t("nav_case_studies", "Case Studies"),
+        href: "/cases/",
+        id: "cases",
+        icon: "cases",
+        children: [],
+      },
       {
         key: "nav_profit_calculator",
-        label: "投资回报",
+        label: window.t("nav_profit_calculator", "ROI Calculator"),
         href: "/profit-calculator/",
         id: "profit-calculator",
         icon: "calculate",
@@ -512,7 +520,7 @@
       },
       {
         key: "nav_support",
-        label: "服务支持",
+        label: window.t("nav_support", "Service & Support"),
         href: "/support/",
         id: "support",
         icon: "support_agent",
@@ -527,7 +535,7 @@
       },
       {
         key: "nav_about",
-        label: "关于我们",
+        label: window.t("nav_about", "About Us"),
         href: "/about/",
         id: "about",
         icon: "info",
@@ -537,7 +545,14 @@
           { key: "nav_about_cert", icon: "verified", emoji: "", href: "/about/#cert" },
         ],
       },
-      { key: "nav_contact", label: "联系我们", href: "/contact/", id: "contact", icon: "mail", children: [] },
+      {
+        key: "nav_contact",
+        label: window.t("nav_contact", "Contact Us"),
+        href: "/contact/",
+        id: "contact",
+        icon: "mail",
+        children: [],
+      },
     ];
 
     cachedMenuItems = items;
@@ -1396,4 +1411,12 @@
       });
     },
   };
+  /* i18n: re-render on language change */
+  document.addEventListener("languageChanged", function () {
+    cachedMenuItems = null;
+    var panel = document.getElementById("slide-menu-panel");
+    if (panel) {
+      panel.innerHTML = renderMenuPanelContent();
+    }
+  });
 })(window);

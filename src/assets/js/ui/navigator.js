@@ -20,10 +20,16 @@
 
   var _spaRegs = {};
   function _spaOn(tgt, evt, fn, key) {
+    if (key == null) key = evt + ":" + (++_spaRegs.__k || (_spaRegs.__k = 1));
     if (_spaRegs[key]) _spaRegs[key].abort();
     var ac = new AbortController();
     _spaRegs[key] = ac;
     tgt.addEventListener(evt, fn, { signal: ac.signal });
+  }
+
+  /** Safe i18n helper — guards against scripts loading before translations.js */
+  function _t(key, fallback) {
+    return typeof window.t === "function" ? window.t(key, fallback) : fallback;
   }
 
   /* ================================================================
@@ -35,19 +41,49 @@
    * @type {Array<{key:string, label:string, path:string, id:string, hasDropdown:boolean}>}
    */
   var DEFAULT_NAV_ITEMS = [
-    { key: "nav_products", label: "产品中心", path: "/products/", id: "products", hasDropdown: true },
-    { key: "nav_applications", label: "行业场景", path: "/applications/", id: "applications", hasDropdown: true },
-    { key: "nav_cases", label: "真实案例", path: "/cases/", id: "cases", hasDropdown: false },
+    {
+      key: "nav_products",
+      label: _t("nav_products", "Products"),
+      path: "/products/",
+      id: "products",
+      hasDropdown: true,
+    },
+    {
+      key: "nav_applications",
+      label: _t("nav_applications", "Application Scenarios"),
+      path: "/applications/",
+      id: "applications",
+      hasDropdown: true,
+    },
+    {
+      key: "nav_cases",
+      label: _t("nav_case_studies", "Case Studies"),
+      path: "/cases/",
+      id: "cases",
+      hasDropdown: false,
+    },
     {
       key: "nav_profit_calculator",
-      label: "投资回报",
+      label: _t("nav_profit_calculator", "ROI Calculator"),
       path: "/profit-calculator/",
       id: "profit-calculator",
       hasDropdown: false,
     },
-    { key: "nav_support", label: "服务支持", path: "/support/", id: "support", hasDropdown: true },
-    { key: "nav_about", label: "关于我们", path: "/about/", id: "about", hasDropdown: true },
-    { key: "nav_contact", label: "联系我们", path: "/contact/", id: "contact", hasDropdown: false },
+    {
+      key: "nav_support",
+      label: _t("nav_support", "Service & Support"),
+      path: "/support/",
+      id: "support",
+      hasDropdown: true,
+    },
+    { key: "nav_about", label: _t("nav_about", "About Us"), path: "/about/", id: "about", hasDropdown: true },
+    {
+      key: "nav_contact",
+      label: _t("nav_contact", "Contact Us"),
+      path: "/contact/",
+      id: "contact",
+      hasDropdown: false,
+    },
   ];
 
   /** @type {Array} 当前生效的导航项 (recomputed per-call to avoid stale closure) */
@@ -207,7 +243,7 @@
         'data-i18n="' +
         escapeHtml(opts.ctaTextKey || "nav_get_quote") +
         '">' +
-        "获取报价" +
+        _t("nav_get_quote", "Get a Quote") +
         "</a>" +
         "</div>";
     } else {
@@ -382,10 +418,10 @@
 
     var currentLang = localStorage.getItem("userLanguage") || "zh-CN";
     var groups = {
-      common: { label: "常用 / Common", langs: [] },
-      southeast_asia: { label: "东南亚 / Southeast Asia", langs: [] },
-      east_asia: { label: "东亚 / East Asia", langs: [] },
-      other: { label: "其他 / Other", langs: [] },
+      common: { label: _t("lang_group_common", "Common"), langs: [] },
+      southeast_asia: { label: _t("lang_group_se_asia", "Southeast Asia"), langs: [] },
+      east_asia: { label: _t("lang_group_east_asia", "East Asia"), langs: [] },
+      other: { label: _t("lang_group_other", "Other"), langs: [] },
     };
 
     reg.LANGUAGES.forEach(function (l) {
@@ -474,7 +510,7 @@
       'data-i18n="' +
       escapeHtml(opts.ctaTextKey) +
       '">' +
-      "获取报价" +
+      _t("nav_get_quote", "Get a Quote") +
       "</a>" +
       "</div>"
     );

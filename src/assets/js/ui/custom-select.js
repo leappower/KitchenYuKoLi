@@ -26,6 +26,7 @@
 
   var _spaRegs = {};
   function _spaOn(tgt, evt, fn, key) {
+    if (key == null) key = evt + ":" + (++_spaRegs.__k || (_spaRegs.__k = 1));
     if (_spaRegs[key]) _spaRegs[key].abort();
     var ac = new AbortController();
     _spaRegs[key] = ac;
@@ -473,7 +474,9 @@
       html +=
         '<div class="cs-search-wrap" style="position:relative;">' +
         '<span class="material-symbols-outlined cs-search-icon">search</span>' +
-        '<input type="text" class="cs-search" placeholder="搜索...">' +
+        '<input type="text" class="cs-search" placeholder="' +
+        window.t("search_placeholder", "Search...") +
+        '">' +
         "</div>";
     }
 
@@ -763,7 +766,9 @@
       html +=
         '<div class="cs-popup-search-wrap">' +
         '<span class="material-symbols-outlined cs-popup-search-icon">search</span>' +
-        '<input type="text" class="cs-popup-search" placeholder="搜索...">' +
+        '<input type="text" class="cs-popup-search" placeholder="' +
+        window.t("search_placeholder", "Search...") +
+        '">' +
         "</div>";
     }
 

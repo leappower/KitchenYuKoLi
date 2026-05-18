@@ -3,6 +3,7 @@
 
   var _spaRegs = {};
   function _spaOn(tgt, evt, fn, key) {
+    if (key == null) key = evt + ":" + (++_spaRegs.__k || (_spaRegs.__k = 1));
     if (_spaRegs[key]) _spaRegs[key].abort();
     var ac = new AbortController();
     _spaRegs[key] = ac;
@@ -10,8 +11,8 @@
   }
 
   var QR_IMAGE = "/assets/images/wechat-qr.webp";
-  var TITLE = "微信扫码添加";
-  var SUBTITLE = "添加企业微信，获取专属售后支持";
+  var TITLE = window.t("wechat_modal_title", "Scan WeChat QR Code");
+  var SUBTITLE = window.t("wechat_modal_subtitle", "Add our enterprise WeChat for dedicated support");
 
   var overlay = null;
   var scrollLocked = false;
@@ -61,7 +62,7 @@
 
     // Close button
     var closeBtn = document.createElement("button");
-    closeBtn.setAttribute("aria-label", "关闭");
+    closeBtn.setAttribute("aria-label", window.t("wechat_modal_close", "Close"));
     closeBtn.style.cssText =
       "position:absolute;top:0.75rem;right:0.75rem;width:2rem;height:2rem;border-radius:50%;border:none;background:rgba(0,0,0,0.08);color:#64748b;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:1.25rem;line-height:1;transition:background .15s;";
     closeBtn.textContent = "×";

@@ -1302,7 +1302,7 @@
   };
 
   /** Sync slider value → display element */
-  function syncRangeDisplay() {
+  var syncRangeDisplay = function syncRangeDisplay() {
     var rangeEl = document.getElementById("pc-operator-reduction");
     var rangeValEl = document.getElementById("pc-operator-value");
     if (!rangeEl || !rangeValEl) return;
@@ -1315,7 +1315,7 @@
       var val = document.getElementById("pc-operator-value");
       if (val) val.textContent = this.value;
     });
-  }
+  };
 
   ProfitCalculator.prototype.getInput = function () {
     var country = document.getElementById(this.countrySelectId).value;
@@ -1526,81 +1526,82 @@
   // Expose for languageChanged listener (outside IIFE)
   window._pcLangCurrency = langCurrency;
   window._pcRenderChart = renderChart;
-})();
 
-/* ───────── SPA-safe event helper (outside IIFE) ───────── */
-var _spaRegs = {};
-function _spaOn(tgt, evt, fn, key) {
-  if (_spaRegs[key]) _spaRegs[key].abort();
-  var ac = new AbortController();
-  _spaRegs[key] = ac;
-  tgt.addEventListener(evt, fn, { signal: ac.signal });
-}
+  /* ───────── SPA-safe event helper ───────── */
+  var _spaRegs = {};
+  function _spaOn(tgt, evt, fn, key) {
+    if (key == null) key = evt + ":" + (++_spaRegs.__k || (_spaRegs.__k = 1));
+    if (_spaRegs[key]) _spaRegs[key].abort();
+    var ac = new AbortController();
+    _spaRegs[key] = ac;
+    tgt.addEventListener(evt, fn, { signal: ac.signal });
+  }
 
-/* ───────── SPA auto-init on spa:load ───────── */
-_spaOn(document, "spa:load", function initProfitCalc() {
-  var form = document.getElementById("profit-calc-form");
-  if (!form || form._spaInitialized) return;
-  form._spaInitialized = true;
+  /* ───────── SPA auto-init on spa:load ───────── */
+  _spaOn(document, "spa:load", function initProfitCalc() {
+    var form = document.getElementById("profit-calc-form");
+    if (!form || form._spaInitialized) return;
+    form._spaInitialized = true;
 
-  // Detect mobile by presence of back-btn (only mobile has steps mode)
-  var isMobile = !!document.getElementById("pc-back-btn");
+    // Detect mobile by presence of back-btn (only mobile has steps mode)
+    var isMobile = !!document.getElementById("pc-back-btn");
 
-  var calc = new ProfitCalculator({
-    formId: "profit-calc-form",
-    resultId: "profit-result-panel",
-    chartCanvasId: "profit-chart",
-    countrySelectId: "pc-country",
-    laborInputId: "pc-labor-cost",
-    stepsMode: isMobile,
+    var calc = new ProfitCalculator({
+      formId: "profit-calc-form",
+      resultId: "profit-result-panel",
+      chartCanvasId: "profit-chart",
+      countrySelectId: "pc-country",
+      laborInputId: "pc-labor-cost",
+      stepsMode: isMobile,
+    });
+    window._profitCalcInstance = calc;
+
+    // Ensure slider display syncs (handles SPA re-navigation)
+    syncRangeDisplay();
+
+    // Bind buttons
+    var calcBtn = document.getElementById("pc-calc-btn");
+    var backBtn = document.getElementById("pc-back-btn");
+    var whatsappBtn = document.getElementById("pc-whatsapp-btn");
+    var pdfBtn = document.getElementById("pc-pdf-btn");
+    var placeholder = document.getElementById("profit-placeholder");
+
+    if (calcBtn) {
+      calcBtn.addEventListener("click", function () {
+        if (placeholder) placeholder.classList.add("hidden");
+        calc.run();
+      });
+    }
+    if (backBtn) {
+      backBtn.addEventListener("click", function () {
+        calc.resetSteps();
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      });
+    }
+    if (whatsappBtn) {
+      whatsappBtn.addEventListener("click", function () {
+        calc.shareWhatsApp();
+      });
+    }
+    if (pdfBtn) {
+      pdfBtn.addEventListener("click", function () {
+        calc.downloadPDF();
+      });
+    }
+
+    // Apply URL presets if any
+    calc.applyPreset();
   });
-  window._profitCalcInstance = calc;
 
-  // Ensure slider display syncs (handles SPA re-navigation)
-  syncRangeDisplay();
+  /* On language change, capture phase (prevents other handlers from breaking) */
+  _spaOn(window, "languageChanged", function (e) {}, true);
 
-  // Bind buttons
-  var calcBtn = document.getElementById("pc-calc-btn");
-  var backBtn = document.getElementById("pc-back-btn");
-  var whatsappBtn = document.getElementById("pc-whatsapp-btn");
-  var pdfBtn = document.getElementById("pc-pdf-btn");
-  var placeholder = document.getElementById("profit-placeholder");
-
-  if (calcBtn) {
-    calcBtn.addEventListener("click", function () {
-      if (placeholder) placeholder.classList.add("hidden");
-      calc.run();
-    });
-  }
-  if (backBtn) {
-    backBtn.addEventListener("click", function () {
-      calc.resetSteps();
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    });
-  }
-  if (whatsappBtn) {
-    whatsappBtn.addEventListener("click", function () {
-      calc.shareWhatsApp();
-    });
-  }
-  if (pdfBtn) {
-    pdfBtn.addEventListener("click", function () {
-      calc.downloadPDF();
-    });
-  }
-
-  // Apply URL presets if any
-  calc.applyPreset();
-});
-
-// Debug: verify script loaded and languageChanged works
-_spaOn(window, "languageChanged", function (e) {}, true); // capture phase
-
-// On language change, re-render results with new currency/labels
-_spaOn(window, "languageChanged", function () {
-  var calc = window._profitCalcInstance;
-  if (calc && calc._lastResult && calc._lastInput) {
-    calc.renderResults(calc._lastResult, calc._lastInput.salaryInfo);
-    calc.renderChart(calc._lastResult, calc._lastInput.salaryInfo);
-  }
-});
+  /* On language change, re-render results with new currency/labels */
+  _spaOn(window, "languageChanged", function () {
+    var calc = window._profitCalcInstance;
+    if (calc && calc._lastResult && calc._lastInput) {
+      calc.renderResults(calc._lastResult, calc._lastInput.salaryInfo);
+      calc.renderChart(calc._lastResult, calc._lastInput.salaryInfo);
+    }
+  });
+})();

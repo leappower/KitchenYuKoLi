@@ -7,7 +7,7 @@ window.LanguageDropdownTemplate = {
   // 按地区分组的语言配置（从 LANG_REGISTRY 动态读取）
   LANG_GROUPS: [
     { id: "common", titleKey: "lang_group_common" },
-    { id: "southeast_asia", titleKey: "lang_group_southeast_asia" },
+    { id: "southeast_asia", titleKey: "lang_group_se_asia" },
     { id: "east_asia", titleKey: "lang_group_east_asia" },
     { id: "other", titleKey: "lang_group_other" },
   ],
@@ -55,11 +55,12 @@ window.LanguageDropdownTemplate = {
 
   // 创建分组标题
   createGroupTitle: function (titleKey) {
+    var label = typeof window.t === "function" ? window.t(titleKey, titleKey) : titleKey;
     return (
       '<div class="px-3 py-1.5 text-[10px] font-semibold text-slate-400 uppercase tracking-wider" data-i18n="' +
       titleKey +
       '">' +
-      titleKey +
+      label +
       "</div>"
     );
   },
