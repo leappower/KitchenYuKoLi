@@ -717,7 +717,7 @@
       '/home/">' +
       '<img src="' +
       basePath +
-      '/assets/images/logo_footer.webp" alt="Yukoli" width="32" height="32" />' +
+      '/assets/images/logo.webp" alt="Yukoli" width="32" height="32" />' +
       "</a>" +
       '<button id="mobile-menu-close" type="button" class="mobile-menu-close" aria-label="Close menu">' +
       '<span class="material-symbols-outlined">close</span>' +

@@ -13,8 +13,8 @@
  *          window.ImageAssets.loadFromManifest() after page load.
  *
  * Usage: <script src="../../assets/js/image-assets.js"></script>
- * Then:  window.ImageAssets.IMAGE_ASSETS.logo  // → "images/logo_html.webp"
- *        window.ImageAssets.resolveImage('logo_html')  // → "images/logo_html.webp"
+ * Then:  window.ImageAssets.IMAGE_ASSETS.logo  // → "images/logo.webp"
+ *        window.ImageAssets.resolveImage('logo')  // → "images/logo.webp"
  */
 (function (global) {
   "use strict";
@@ -28,8 +28,8 @@
 
   // ─── Static image assets (non-product, paths are fixed) ──────────────────────
   var IMAGE_ASSETS = {
-    logo: IMAGE_PATH_PREFIX + "/logo_html.webp",
-    logo_dark: IMAGE_PATH_PREFIX + "/logo_html_2.webp",
+    logo: IMAGE_PATH_PREFIX + "/logo.webp",
+    logo_dark: IMAGE_PATH_PREFIX + "/logo_dark.webp",
     hero_bg: IMAGE_PATH_PREFIX + "/workshop_bgm.webp",
     hero_main: IMAGE_PATH_PREFIX + "/hero_main.webp",
     factory_video_poster: IMAGE_PATH_PREFIX + "/factory_video_poster.webp",
@@ -57,8 +57,8 @@
    */
   function loadFromManifest() {
     var NON_PRODUCT_KEYS = new Set([
-      "logo_html",
-      "logo_html_2",
+      "logo",
+      "logo_dark",
       "workshop_bgm",
       "hero_main",
       "factory_video_poster",
