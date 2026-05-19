@@ -2,18 +2,30 @@
  * hero-video.js — Apple 风格渐进增强视频播放
  *
  * 两种模式：
- *   自动播放模式（首页/关于/应用场景）：进入视口 → 1.5s 后 crossfade 到静音自动播放
- *   手动播放模式（产品子分类/Support）：点击播放按钮后才开始播放
+ *   data-hero-video-mode="auto"   (默认) 页面加载后进入视口 → 自动播放一次
+ *   data-hero-video-mode="manual"         只通过用户点击播放
  *
- * 音频策略：默认静音，仅静音按钮可切换。暂停/恢复不会自动开启声音。
+ * 行为规则：
+ *   1. 音频始终默认静音，仅静音按钮可切换。暂停/恢复不会动声音。
+ *   2. 自动模式(auto)：页面加载后首次可见时自动播放一次。
+ *      之后划出视口→暂停，划回→不恢复（需用户手动点击）。
+ *   3. 手动模式(manual)：不自动播放，始终显示播放按钮等待点击。
+ *      划出视口→暂停，划回→不恢复。
+ *   4. 播放中 `data-hero-video-playing="true"` → CSS 控制各种元素显隐。
+ *   5. 相同页面内同时只允许一个视频播放（互斥）。
  *
- * 播放按钮：iOS 风格圆形按钮，覆盖在 poster 上方。
- *   播放中 → 按钮隐藏
- *   暂停中 → 按钮显示（pause 图标）
- *   停止后 → 按钮显示（play 图标）
- *
- * data-hero-video-mode="manual"  → 不自动播放，显示播放按钮等待点击
- * data-hero-video-mode="auto"    → 进入视口自动播放（默认）
+ * DOM 结构要求：
+ *   <div data-hero-video>
+ *     <img class="hero-video-poster" ... />
+ *     <video class="hero-video-player" ... />
+ *     <div class="hero-video-overlay">     ← 静音按钮等
+ *       <button class="hero-video-mute">...</button>
+ *       <button class="hero-video-playbtn">...</button>
+ *       <button class="hero-video-fallback-btn">...</button>
+ *     </div>
+ *     <div class="hero-video-info" ...>    ← 浮层信息卡片
+ *     </div>
+ *   </div>
  */
 (function () {
   "use strict";
@@ -30,64 +42,61 @@
   var ATTR = "data-hero-video";
   var CROSSFADE_MS = 1500;
 
-  /* ── 全局活跃视频跟踪（同一页面只允许1个播放） ── */
+  /* ── 全局活跃视频跟踪（互斥播放） ── */
   var _activeInstances = [];
 
-  function pauseAllExcept(currentState) {
+  function pauseAllExcept(exceptState) {
     for (var i = 0; i < _activeInstances.length; i++) {
       var inst = _activeInstances[i];
-      if (inst.state !== currentState && inst.state.isPlaying) {
-        doPause(inst.video, inst.state);
+      if (inst.state !== exceptState && inst.state.isPlaying) {
+        inst.video.pause();
       }
     }
   }
 
-  /* ── 找到所有 hero-video 容器 ── */
+  /* ── 初始化所有 hero-video 容器 ── */
   function init() {
     _activeInstances = [];
     var containers = document.querySelectorAll("[" + ATTR + "]");
     if (!containers.length) return;
-
     for (var i = 0; i < containers.length; i++) {
       setupContainer(containers[i]);
     }
   }
 
+  /* ── 设置单个容器 ── */
   function setupContainer(container) {
     var poster = container.querySelector(".hero-video-poster");
     var video = container.querySelector(".hero-video-player");
     var overlay = container.querySelector(".hero-video-overlay");
     var muteBtn = container.querySelector(".hero-video-mute");
     var playBtn = container.querySelector(".hero-video-playbtn");
-    var info = container.querySelector(".hero-video-info");
-    var fallbackBtn = container.querySelector(".hero-video-fallback-btn");
 
     if (!video || !poster) return;
 
-    /* 判断模式: manual 或 auto（默认） */
-    var mode = container.getAttribute("data-hero-video-mode") || "auto";
-    var isManual = mode === "manual";
+    var isManual = container.getAttribute("data-hero-video-mode") === "manual";
 
+    /* ── 状态 ── */
     var state = {
-      hasStarted: false,
+      hasStarted: false,     // 是否首次播放（控制 crossfade 只执行一次）
+      hasAutoPlayed: false,  // 是否已自动播放过（auto 模式初始行为，永不重置）
       isPlaying: false,
       isMuted: true,
       savedTime: 0,
       observer: null,
       crossfadeTimer: null,
       failed: false,
-      userPaused: false,  // 用户手动暂停
     };
 
-    /* ── 如果没有视频 src 或 src 为空，直接降级 ── */
+    /* ── 无视频 src → 降级 ── */
     if (!video.getAttribute("src")) {
       state.failed = true;
-      showFallback(container, video, poster, overlay, playBtn);
+      showFallback(container, poster, video, overlay, playBtn);
       _activeInstances.push({ state: state, video: video });
       return;
     }
 
-    /* ── 创建播放按钮（如果 HTML 中没有） ── */
+    /* ── 确保播放按钮存在 ── */
     if (!playBtn) {
       playBtn = document.createElement("button");
       playBtn.className = "hero-video-playbtn";
@@ -100,7 +109,7 @@
       }
     }
 
-    /* ── 播放/暂停按钮状态更新 ── */
+    /* ── 更新播放按钮外观 ── */
     function updatePlayBtn(isPlaying, isEnded) {
       if (!playBtn) return;
       if (isPlaying) {
@@ -116,76 +125,100 @@
       }
     }
 
-    /* ── 播放/暂停按钮点击 ── */
+    /* ── 播放（统一入口） ── */
+    function doPlay() {
+      if (state.failed) return;
+
+      /* 互斥：暂停其他视频 */
+      pauseAllExcept(state);
+
+      /* 播放 */
+      video.muted = state.isMuted;
+
+      var promise = video.play();
+      if (promise && typeof promise.catch === "function") {
+        promise.catch(function (err) {
+          console.warn("[hero-video] play() rejected:", err.message);
+          state.failed = true;
+          showFallback(container, poster, video, overlay, playBtn);
+        });
+      }
+    }
+
+    /* ── 自动模式首次播放 ── */
+    function triggerAutoPlay() {
+      if (state.failed || state.hasAutoPlayed) return;
+      state.hasAutoPlayed = true;
+      doPlay();
+    }
+
+    /* ── 播放按钮点击 ── */
     if (playBtn) {
       playBtn.addEventListener("click", function (e) {
         e.stopPropagation();
+
         if (state.isPlaying) {
-          /* 暂停 */
-          state.userPaused = true;
+          /* 正在播放 → 暂停 */
           video.pause();
-          /* 清除自动播放定时器 */
           if (state.crossfadeTimer) {
             clearTimeout(state.crossfadeTimer);
             state.crossfadeTimer = null;
           }
         } else if (state.failed) {
+          /* 视频之前出错 → 重试 */
           state.failed = false;
           video.muted = state.isMuted;
-          doPlay(state, video, poster, overlay, playBtn, info);
-        } else if (state.hasStarted || state.savedTime > 0) {
-          /* 恢复播放 */
-          state.userPaused = false;
-          video.currentTime = state.savedTime;
-          doPlay(state, video, poster, overlay, playBtn, info);
+          doPlay();
         } else {
-          /* 首次播放（仅适用于 manual 模式） */
-          state.userPaused = false;
-          doPlay(state, video, poster, overlay, playBtn, info);
+          /* 暂停/停止状态 → 恢复或首次播放 */
+          if (state.hasStarted || state.savedTime > 0) {
+            video.currentTime = state.savedTime;
+          }
+          doPlay();
         }
       });
     }
 
-    /* ── 封面图加载失败 → 尝试播放 ── */
+    /* ── poster 加载失败 → auto 模式尝试播放 ── */
     poster.addEventListener("error", function () {
       if (!isManual && !state.failed) {
-        attemptAutoPlay(state, video, poster, overlay, playBtn, info);
+        triggerAutoPlay();
       }
     });
 
-    /* ── 封面图加载成功 → 设置 Observer ── */
-    poster.addEventListener("load", function () {
-      setupIntersection(state, container, video, poster, overlay, playBtn, info, isManual, updatePlayBtn);
-      /* manual 模式：显示播放按钮，等待用户点击 */
+    /* ── poster 加载成功 → 设置 Observer ── */
+    function afterPosterReady() {
+      setupObserver();
       updatePlayBtn(false, false);
-    });
+    }
 
+    poster.addEventListener("load", afterPosterReady);
     if (poster.complete && poster.naturalWidth > 0) {
-      setupIntersection(state, container, video, poster, overlay, playBtn, info, isManual, updatePlayBtn);
-      /* manual 模式：显示播放按钮 */
-      updatePlayBtn(false, false);
+      afterPosterReady();
     }
 
     /* ── 视频事件 ── */
     video.addEventListener("play", function () {
       state.isPlaying = true;
+
       if (!state.hasStarted) {
+        /* 首次播放 → crossfade */
         state.hasStarted = true;
-        crossfadeToVideo(video, poster, overlay, playBtn, container);
-      } else {
-        /* 恢复播放时也同步 playing 状态 */
-        container.setAttribute('data-hero-video-playing', 'true');
+        crossfadeToVideo();
       }
+
+      container.setAttribute("data-hero-video-playing", "true");
       updatePlayBtn(true, false);
     });
 
     video.addEventListener("pause", function () {
       state.isPlaying = false;
-      container.removeAttribute('data-hero-video-playing');
+      container.removeAttribute("data-hero-video-playing");
+
       if (video.ended) {
         state.hasStarted = false;
         state.savedTime = 0;
-        crossfadeToPoster(video, poster, overlay, playBtn, container);
+        crossfadeToPoster();
         updatePlayBtn(false, true);
       } else {
         state.savedTime = video.currentTime;
@@ -197,19 +230,18 @@
       state.isPlaying = false;
       state.hasStarted = false;
       state.savedTime = 0;
-      state.userPaused = false;
-      container.removeAttribute('data-hero-video-playing');
-      crossfadeToPoster(video, poster, overlay, playBtn, container);
+      container.removeAttribute("data-hero-video-playing");
+      crossfadeToPoster();
       updatePlayBtn(false, true);
     });
 
     video.addEventListener("error", function () {
       state.failed = true;
       state.hasStarted = false;
-      showFallback(container, video, poster, overlay, playBtn);
+      showFallback(container, poster, video, overlay, playBtn);
     });
 
-    /* ── 静音切换 — 仅通过静音按钮操作 ── */
+    /* ── 静音按钮 ── */
     if (muteBtn) {
       muteBtn.addEventListener("click", function (e) {
         e.stopPropagation();
@@ -218,101 +250,60 @@
         muteBtn.innerHTML = state.isMuted
           ? '<span class="material-symbols-outlined text-white text-xl">volume_off</span>'
           : '<span class="material-symbols-outlined text-white text-xl">volume_up</span>';
-        muteBtn.setAttribute("data-i18n", state.isMuted ? "hero_video_mute" : "hero_video_unmute");
+        muteBtn.setAttribute(
+          "data-i18n",
+          state.isMuted ? "hero_video_mute" : "hero_video_unmute"
+        );
       });
     }
 
-    /* 点击视频本身不切换静音（防止误触） */
+    /* ── 点击视频切换播放/暂停（不切换音频） ── */
     video.addEventListener("click", function (e) {
-      /* 只有暂停/继续，不处理音频 */
       e.stopPropagation();
       if (state.isPlaying) {
-        state.userPaused = true;
         video.pause();
       } else {
-        state.userPaused = false;
-        /* 视频已经有断点，恢复播放 */
         if (state.hasStarted || state.savedTime > 0) {
           video.currentTime = state.savedTime;
         }
-        doPlay(state, video, poster, overlay, playBtn, info);
+        doPlay();
       }
     });
 
-    /* ── PC: hover 显示/隐藏自定义控制层 ── */
+    /* ── PC hover 显示原生 controls ── */
     container.addEventListener("mouseenter", function () {
-      /* if video is playing, show native controls */
-      if (state.isPlaying) {
-        video.controls = true;
-      }
+      if (state.isPlaying) video.controls = true;
     });
     container.addEventListener("mouseleave", function () {
       video.controls = false;
     });
 
-    /* 注册到全局 */
+    /* ── 注册到全局 ── */
     _activeInstances.push({ state: state, video: video });
   }
 
-  /* ── Video playback 逻辑 ── */
-
-  function doPlay(state, video, poster, overlay, playBtn, info) {
-    if (state.failed) return;
-
-    /* 暂停其他视频 */
-    pauseAllExcept(state);
-
-    if (state.savedTime > 0 && !state.hasStarted) {
-      /* 从断点恢复（video ended → poster 可见） */
-      video.currentTime = state.savedTime;
-      crossfadeToVideo(video, poster, overlay, playBtn, container);
-    }
-
-    /* 保持 mute 状态不变 */
-    video.muted = state.isMuted;
-
-    var playPromise = video.play();
-    if (playPromise && typeof playPromise.catch === "function") {
-      playPromise.catch(function (err) {
-        console.warn("[hero-video] play() rejected:", err.message);
-        state.failed = true;
-        showFallback(container, video, poster, overlay, playBtn);
-      });
-    }
-  }
-
-  /* Auto play 尝试（仅用于 auto 模式下的 IntersectionObserver 触发） */
-  function attemptAutoPlay(state, video, poster, overlay, playBtn, info) {
-    if (state.failed || state.userPaused) return;
-    doPlay(state, video, poster, overlay, playBtn, info);
-  }
-
-  function doPause(video, state) {
-    if (state.isPlaying) {
-      state.savedTime = video.currentTime;
-      state.isPlaying = false;
-      video.pause();
-    }
-  }
-
-  /* ── IntersectionObserver ── */
-  function setupIntersection(state, container, video, poster, overlay, playBtn, info, isManual, updateBtnFn) {
+  /* ════════════════════════════════════════
+     IntersectionObserver
+     仅处理「划出视口 → 暂停」
+     不处理「划入视口 → 播放」
+    （auto 模式首次播放由页面加载时的初始检测触发）
+     ════════════════════════════════════════ */
+  function setupObserver() {
+    /* 此函数通过 setupContainer 的闭包访问变量 */
     if (state.observer) return;
+
     var ROOT_MARGIN = "-20% 0px -20% 0px";
-    var PLAY_THRESHOLD = 0.3;
 
     state.observer = new IntersectionObserver(
       function (entries) {
         var entry = entries[0];
         var ratio = entry.intersectionRatio;
 
-        /* ratio===0: 快速滚过且容器短小的情况 */
+        /* ── 不可见 → 暂停 ── */
         if (!entry.isIntersecting || ratio === 0) {
           if (state.isPlaying) {
             state.savedTime = video.currentTime;
             video.pause();
-            /* pause 事件会导致 state.isPlaying=false，显式更新播放按钮 */
-            if (typeof updateBtnFn === 'function') updateBtnFn(false, video.ended);
           }
           if (state.crossfadeTimer) {
             clearTimeout(state.crossfadeTimer);
@@ -321,30 +312,34 @@
           return;
         }
 
-        if (isManual) {
-          /* manual 模式：仅用于暂停检测，不自动播放 */
-          return;
-        }
+        /* ── 可见 — 但不自动恢复播放 ── */
 
-        if (ratio >= PLAY_THRESHOLD && !state.isPlaying && !state.failed && !state.userPaused) {
-          if (state.crossfadeTimer) clearTimeout(state.crossfadeTimer);
-          state.crossfadeTimer = setTimeout(function () {
-            state.userPaused = false;
-            attemptAutoPlay(state, video, poster, overlay, playBtn, info);
-          }, CROSSFADE_MS);
-        }
+        /* 如果已经播放过或手动模式：不自动播放 */
+        if (state.hasStarted || state.hasAutoPlayed || isManual) return;
+
+        /* auto 模式且尚未自动播放过 → 一次性自动播放 */
+        if (state.isPlaying || state.failed) return;
+
+        if (state.crossfadeTimer) clearTimeout(state.crossfadeTimer);
+        state.crossfadeTimer = setTimeout(function () {
+          /* 再次检查防止竞态 */
+          if (state.hasAutoPlayed || state.hasStarted || state.failed) return;
+          triggerAutoPlay();
+        }, CROSSFADE_MS);
       },
       {
         rootMargin: ROOT_MARGIN,
-        threshold: [0, 0.3, 0.5, 0.8, 1.0],
+        threshold: [0, 0.5, 1.0],
       }
     );
 
     state.observer.observe(container);
   }
 
-  /* ── Crossfade: poster → video ── */
-  function crossfadeToVideo(video, poster, overlay, playBtn, container) {
+  /* ════════════════════════════════════════
+     Crossfade 动画
+     ════════════════════════════════════════ */
+  function crossfadeToVideo() {
     poster.style.transition = "opacity " + CROSSFADE_MS / 1000 + "s ease";
     poster.style.opacity = "0";
     poster.style.pointerEvents = "none";
@@ -352,16 +347,14 @@
     video.style.transition = "opacity " + CROSSFADE_MS / 1000 + "s ease";
     video.style.opacity = "1";
 
-    /* 播放中：使用 CSS 控制 overlay / playbtn / info 的显隐 */
-    container.setAttribute('data-hero-video-playing', 'true');
+    container.setAttribute("data-hero-video-playing", "true");
 
     setTimeout(function () {
       poster.style.display = "none";
     }, CROSSFADE_MS);
   }
 
-  /* ── Crossfade: video → poster ── */
-  function crossfadeToPoster(video, poster, overlay, playBtn, container) {
+  function crossfadeToPoster() {
     poster.style.display = "";
     void poster.offsetHeight;
 
@@ -371,16 +364,13 @@
 
     video.style.transition = "opacity " + CROSSFADE_MS / 1000 + "s ease";
     video.style.opacity = "0";
-
-    /* 恢复 poster：移除播放状态，CSS 恢复 overlay / playbtn / info 的可见性 */
-    container.removeAttribute('data-hero-video-playing');
   }
 
-  /* ── 降级：显示静态封面图 + 播放按钮 ── */
-  function showFallback(container, video, poster, overlay, playBtn) {
-    if (container) {
-      container.removeAttribute('data-hero-video-playing');
-    }
+  /* ════════════════════════════════════════
+     降级模式
+     ════════════════════════════════════════ */
+  function showFallback(container, poster, video, overlay, playBtn) {
+    container.removeAttribute("data-hero-video-playing");
 
     if (poster) {
       poster.style.opacity = "1";
@@ -396,23 +386,21 @@
       overlay.style.pointerEvents = "none";
     }
 
-    /* 显示播放按钮用于降级后手动播放 */
     if (playBtn) {
       playBtn.style.display = "flex";
       playBtn.innerHTML = '<span class="material-symbols-outlined">play_arrow</span>';
       playBtn.setAttribute("aria-label", "Play video");
     }
 
-    /* fallback-btn 兼容 */
-    if (container) {
-      var btn = container.querySelector(".hero-video-fallback-btn");
-      if (btn) {
-        btn.style.display = "flex";
-      }
+    var btn = container.querySelector(".hero-video-fallback-btn");
+    if (btn) {
+      btn.style.display = "flex";
     }
   }
 
-  /* ── 初始化 ── */
+  /* ════════════════════════════════════════
+     初始化
+     ════════════════════════════════════════ */
   if (document.readyState === "loading") {
     document.addEventListener("DOMContentLoaded", init);
   } else {
