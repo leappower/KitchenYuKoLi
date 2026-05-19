@@ -86,6 +86,8 @@
       observer: null,
       crossfadeTimer: null,
       failed: false,
+      pausedByScroll: false,
+      _scrollTimer: null,
     };
 
     /* ── 无视频 src → 降级 ── */
@@ -159,6 +161,7 @@
 
         if (state.isPlaying) {
           /* 正在播放 → 暂停 */
+          state.pausedByScroll = false;
           video.pause();
           if (state.crossfadeTimer) {
             clearTimeout(state.crossfadeTimer);
@@ -167,10 +170,12 @@
         } else if (state.failed) {
           /* 视频之前出错 → 重试 */
           state.failed = false;
+          state.pausedByScroll = false;
           video.muted = state.isMuted;
           doPlay();
         } else {
           /* 暂停/停止状态 → 恢复或首次播放 */
+          state.pausedByScroll = false;
           if (state.hasStarted || state.savedTime > 0) {
             video.currentTime = state.savedTime;
           }
@@ -217,6 +222,7 @@
           if (!entry.isIntersecting || ratio === 0) {
             if (state.isPlaying) {
               state.savedTime = video.currentTime;
+              state.pausedByScroll = true;
               video.pause();
             }
             if (state.crossfadeTimer) {
@@ -226,17 +232,24 @@
             return;
           }
 
-          /* ── 可见 — 但不自动恢复播放 ── */
+          /* ── 可见 → 如果之前因滚动暂停，恢复播放 ── */
+          if (state.pausedByScroll) {
+            state.pausedByScroll = false;
+            if (state.savedTime > 0) {
+              video.currentTime = state.savedTime;
+            }
+            if (!video.ended) {
+              doPlay();
+            }
+            return;
+          }
 
-          /* 如果已经播放过或手动模式：不自动播放 */
+          /* ── 可见 — 尚未播放过 → 自动播 ── */
           if (state.hasStarted || state.hasAutoPlayed || isManual) return;
-
-          /* auto 模式且尚未自动播放过 → 一次性自动播放 */
           if (state.isPlaying || state.failed) return;
 
           if (state.crossfadeTimer) clearTimeout(state.crossfadeTimer);
           state.crossfadeTimer = setTimeout(function () {
-            /* 再次检查防止竞态 */
             if (state.hasAutoPlayed || state.hasStarted || state.failed) return;
             triggerAutoPlay();
           }, CROSSFADE_MS);
@@ -318,6 +331,7 @@
     video.addEventListener("ended", function () {
       state.isPlaying = false;
       state.hasStarted = false;
+      state.pausedByScroll = false;
       state.savedTime = 0;
       container.removeAttribute("data-hero-video-playing");
       crossfadeToPoster();
@@ -350,6 +364,7 @@
     video.addEventListener("click", function (e) {
       e.stopPropagation();
       if (state.isPlaying) {
+        state.pausedByScroll = false;
         video.pause();
       } else {
         if (state.hasStarted || state.savedTime > 0) {
