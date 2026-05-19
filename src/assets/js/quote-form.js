@@ -182,7 +182,7 @@
         btn.disabled = true;
         btn.innerHTML =
           '<span class="material-symbols-outlined animate-spin">progress_activity</span> ' +
-          (typeof window.t === "function" ? window.t("form_submitting", "Submitting...") : "Submitting...");
+          (typeof window.t === "function" ? window.uiText("form_submitting", "Submitting...") : "Submitting...");
       }
 
       // Submit via server proxy (hides Google Apps Script URL)

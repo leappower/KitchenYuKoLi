@@ -415,8 +415,8 @@ const SSL_PORT = process.env.SSL_PORT ? parseInt(process.env.SSL_PORT) : 3000;
 const ENABLE_SSL = SSL_PORT > 0;
 const https = require('https');
 const sslOptions = {
-  key: fs.readFileSync('/Users/chee/certs/192.168.3.180-key.pem'),
-  cert: fs.readFileSync('/Users/chee/certs/192.168.3.180.pem'),
+  key: fs.readFileSync('/Users/chee/certs/192.168.3.181-key.pem'),
+  cert: fs.readFileSync('/Users/chee/certs/192.168.3.181-new.pem'),
 };
 
 // Start server with error handling

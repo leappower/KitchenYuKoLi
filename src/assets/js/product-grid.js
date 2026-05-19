@@ -874,7 +874,7 @@
     allBtn.dataset.category = "all";
     allBtn.textContent =
       typeof window.t === "function"
-        ? window.t("products_all", "\u5168\u90e8\u4ea7\u54c1")
+        ? window.uiText("products_all", "\u5168\u90e8\u4ea7\u54c1")
         : "\u5168\u90e8\u4ea7\u54c1";
     allTabs.push(allBtn);
 
@@ -965,10 +965,10 @@
       if (allTabs.length > maxVis) {
         var remaining = allTabs.length - maxVis;
         var collapseText =
-          typeof window.t === "function" ? window.t("products_collapse", "\u6536\u8d77 \u25B2") : "\u6536\u8d77 \u25B2";
+          typeof window.t === "function" ? window.uiText("products_collapse", "\u6536\u8d77 \u25B2") : "\u6536\u8d77 \u25B2";
         var moreText =
           typeof window.t === "function"
-            ? window.t("products_more", "+" + remaining + " \u66f4\u591a \u25BC").replace("{n}", remaining)
+            ? window.uiText("products_more", "+" + remaining + " \u66f4\u591a \u25BC").replace("{n}", remaining)
             : "\u002B" + remaining + " \u66f4\u591a \u25BC";
         moreBtn.textContent = isExpanded ? collapseText : moreText;
         container.appendChild(moreBtn);
@@ -1107,9 +1107,9 @@
       console.warn("[ProductGrid] Skeleton still present after 5s — clearing");
       var errorMsg =
         typeof window.t === "function"
-          ? window.t("products_load_error", window.t("products_load_error", "Failed to load products. Please refresh."))
-          : window.t("products_load_error", "Failed to load products. Please refresh.");
-      var retryText = typeof window.t === "function" ? window.t("products_load_retry", "重新加载") : "重新加载";
+          ? window.uiText("products_load_error", "Failed to load products. Please refresh.")
+          : window.uiText("products_load_error", "Failed to load products. Please refresh.");
+      var retryText = typeof window.t === "function" ? window.uiText("products_load_retry", "重新加载") : "重新加载";
       grid.innerHTML =
         '<div class="col-span-full text-center py-16"><p class="text-slate-500 dark:text-slate-400 text-lg" data-i18n="products_load_error">' +
         errorMsg +
@@ -1122,9 +1122,9 @@
       console.warn("[ProductGrid] Skeleton still present in list after 5s — clearing");
       var errorMsg =
         typeof window.t === "function"
-          ? window.t("products_load_error", window.t("products_load_error", "Failed to load products. Please refresh."))
-          : window.t("products_load_error", "Failed to load products. Please refresh.");
-      var retryText = typeof window.t === "function" ? window.t("products_load_retry", "重新加载") : "重新加载";
+          ? window.uiText("products_load_error", "Failed to load products. Please refresh.")
+          : window.uiText("products_load_error", "Failed to load products. Please refresh.");
+      var retryText = typeof window.t === "function" ? window.uiText("products_load_retry", "重新加载") : "重新加载";
       list.innerHTML =
         '<div class="text-center py-16"><p class="text-slate-500 dark:text-slate-400 text-lg" data-i18n="products_load_error">' +
         errorMsg +

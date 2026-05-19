@@ -374,7 +374,7 @@
       " " +
       thText +
       ' font-bold text-slate-500 dark:text-slate-400 bg-slate-50 dark:bg-slate-900/50 min-w-[100px]">' +
-      esc(typeof window.t === "function" ? window.t("compare_bar_params", "Parameters") : "Parameters") +
+      esc(typeof window.t === "function" ? window.uiText("compare_bar_params", "Parameters") : "Parameters") +
       "</th>";
     selected.forEach(function (p) {
       headerHTML +=

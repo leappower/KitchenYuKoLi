@@ -253,7 +253,7 @@
     var backBar = '<div class="breadcrumb-back flex items-center gap-3 mb-4 md:hidden">';
     backBar +=
       '<button onclick="window.Breadcrumb.goBack()" class="flex items-center justify-center w-9 h-9 rounded-full bg-slate-100 dark:bg-slate-800 hover:bg-primary hover:text-white text-slate-600 dark:text-slate-400 transition-all" aria-label="' +
-      window.t("btn_back", "Back") +
+      window.uiText("btn_back", "Back") +
       '">';
     backBar += '<span class="material-symbols-outlined text-xl">arrow_back</span>';
     backBar += "</button>";

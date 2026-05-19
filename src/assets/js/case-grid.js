@@ -286,7 +286,7 @@
       pct +
       "%</div>" +
       '<div class="text-xs text-slate-500 dark:text-slate-400">' +
-      (typeof window.t === "function" ? window.t("cases_labor_cost", "人工成本") : "人工成本") +
+      (typeof window.t === "function" ? window.uiText("cases_labor_cost", "人工成本") : "人工成本") +
       "</div>" +
       "</div>" +
       '<div class="bg-slate-50 dark:bg-slate-900/50 rounded-lg p-2.5 text-center">' +
@@ -410,7 +410,7 @@
     var countEl = document.getElementById("case-count");
     var caseCountText =
       typeof window.t === "function"
-        ? window.t("cases_count", "{n} Case Studies").replace("{n}", cases.length)
+        ? window.uiText("cases_count", "{n} Case Studies").replace("{n}", cases.length)
         : cases.length + " " + tOr("cases_count_unit", "个案例");
     if (countEl) countEl.textContent = caseCountText;
   }

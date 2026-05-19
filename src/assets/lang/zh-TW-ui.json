@@ -3319,5 +3319,22 @@
   "cases_industry_central_kitchen": "Central Kitchen",
   "cases_industry_chain_restaurant": "Chain Restaurant",
   "cases_industry_smart_canteen": "Smart Canteen",
-  "cases_industry_cloud_kitchen": "Cloud Kitchen"
+  "cases_industry_cloud_kitchen": "Cloud Kitchen",
+  "btn_back": "返回",
+  "contact_landing": "落地页",
+  "contact_news": "新闻",
+  "contact_quote_source": "报价表单",
+  "contact_thank_you": "谢谢",
+  "contact_website": "网站",
+  "floating_action_wa_source": "浮动按钮",
+  "home_hw_collapse": "收起 ▲",
+  "quote_consult": "需咨询",
+  "roi_equip_dishwasher": "洗碗机",
+  "roi_equip_fryer": "油炸机",
+  "roi_equip_induction": "电磁炉",
+  "roi_equip_steamer": "蒸柜",
+  "roi_equip_stirfry": "智能炒菜机",
+  "wechat_modal_title": "扫描微信二维码",
+  "wechat_modal_subtitle": "添加企业微信获取专属支持",
+  "wechat_modal_close": "关闭"
 }

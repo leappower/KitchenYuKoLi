@@ -3328,5 +3328,22 @@
   "cases_industry_central_kitchen": "Central Kitchen",
   "cases_industry_chain_restaurant": "Chain Restaurant",
   "cases_industry_smart_canteen": "Smart Canteen",
-  "cases_industry_cloud_kitchen": "Cloud Kitchen"
+  "cases_industry_cloud_kitchen": "Cloud Kitchen",
+  "btn_back": "Back",
+  "contact_landing": "Landing Page",
+  "contact_news": "News",
+  "contact_quote_source": "Quote Form",
+  "contact_thank_you": "Thank You",
+  "contact_website": "Website",
+  "floating_action_wa_source": "Floating Button",
+  "home_hw_collapse": "Collapse ▲",
+  "quote_consult": "需咨询",
+  "roi_equip_dishwasher": "Dishwasher",
+  "roi_equip_fryer": "Deep Fryer",
+  "roi_equip_induction": "Induction Cooker",
+  "roi_equip_steamer": "Steamer",
+  "roi_equip_stirfry": "Smart Wok",
+  "wechat_modal_title": "Scan WeChat QR Code",
+  "wechat_modal_subtitle": "Add our enterprise WeChat for dedicated support",
+  "wechat_modal_close": "Close"
 }

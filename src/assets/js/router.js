@@ -213,7 +213,7 @@
             submitBtn.disabled = true;
             submitBtn.dataset.originalText = submitBtn.textContent;
             submitBtn.textContent =
-              typeof window.t === "function" ? window.t("form_sending", "Sending\u2026") : "Sending\u2026";
+              typeof window.t === "function" ? window.uiText("form_sending", "Sending\u2026") : "Sending\u2026";
           }
           setTimeout(function () {
             navigate(PAGES.thankYou);

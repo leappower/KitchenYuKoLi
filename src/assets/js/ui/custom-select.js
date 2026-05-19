@@ -475,7 +475,7 @@
         '<div class="cs-search-wrap" style="position:relative;">' +
         '<span class="material-symbols-outlined cs-search-icon">search</span>' +
         '<input type="text" class="cs-search" placeholder="' +
-        window.t("search_placeholder", "Search...") +
+        window.uiText("search_placeholder", "Search...") +
         '">' +
         "</div>";
     }
@@ -522,7 +522,7 @@
             noRes = document.createElement("div");
             noRes.className = "cs-no-results";
             noRes.textContent =
-              typeof window.t === "function" ? window.t("no_matching_results", "无匹配结果") : "无匹配结果";
+              typeof window.t === "function" ? window.uiText("no_matching_results", "无匹配结果") : "无匹配结果";
             panel.appendChild(noRes);
           }
           noRes.style.display = "";
@@ -767,7 +767,7 @@
         '<div class="cs-popup-search-wrap">' +
         '<span class="material-symbols-outlined cs-popup-search-icon">search</span>' +
         '<input type="text" class="cs-popup-search" placeholder="' +
-        window.t("search_placeholder", "Search...") +
+        window.uiText("search_placeholder", "Search...") +
         '">' +
         "</div>";
     }
@@ -831,7 +831,7 @@
             noRes = document.createElement("div");
             noRes.className = "cs-no-results";
             noRes.textContent =
-              typeof window.t === "function" ? window.t("no_matching_results", "无匹配结果") : "无匹配结果";
+              typeof window.t === "function" ? window.uiText("no_matching_results", "无匹配结果") : "无匹配结果";
             self._popupPanel.querySelector(".cs-popup-list").appendChild(noRes);
           }
           noRes.style.display = "";
@@ -1049,7 +1049,7 @@
     function () {
       var noResEls = document.querySelectorAll(".cs-no-results");
       noResEls.forEach(function (el) {
-        el.textContent = typeof window.t === "function" ? window.t("no_matching_results", "无匹配结果") : "无匹配结果";
+        el.textContent = typeof window.t === "function" ? window.uiText("no_matching_results", "无匹配结果") : "无匹配结果";
       });
     },
     "langChanged:noResults"

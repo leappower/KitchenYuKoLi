@@ -38,7 +38,7 @@
   /** Build tracked WhatsApp URL via Contacts module (or fallback to static) */
   function buildWhatsAppUrl() {
     if (window.Contacts && typeof window.Contacts.contactsWhatsApp === "function") {
-      return window.Contacts.contactsWhatsApp({ source: window.t("floating_action_wa_source", "Floating Button") });
+      return window.Contacts.contactsWhatsApp({ source: window.uiText("floating_action_wa_source", "Floating Button") });
     }
     return WHATSAPP_HREF;
   }

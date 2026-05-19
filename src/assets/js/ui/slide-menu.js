@@ -455,7 +455,7 @@
     var items = [
       {
         key: "nav_products",
-        label: window.t("nav_products", "Products"),
+        label: window.uiText("nav_products", "Products"),
         href: "/products/",
         id: "products",
         icon: "kitchen",
@@ -470,7 +470,7 @@
       },
       {
         key: "nav_applications",
-        label: window.t("nav_applications", "Application Scenarios"),
+        label: window.uiText("nav_applications", "Application Scenarios"),
         href: "/applications/",
         id: "applications",
         icon: "apps",
@@ -506,7 +506,7 @@
       },
       {
         key: "nav_cases",
-        label: window.t("nav_cases", "Case Studies"),
+        label: window.uiText("nav_cases", "Case Studies"),
         href: "/cases/",
         id: "cases",
         icon: "cases",
@@ -514,7 +514,7 @@
       },
       {
         key: "nav_roi",
-        label: window.t("nav_roi", "ROI"),
+        label: window.uiText("nav_roi", "ROI"),
         href: "/profit-calculator/",
         id: "profit-calculator",
         icon: "calculate",
@@ -522,7 +522,7 @@
       },
       {
         key: "nav_support",
-        label: window.t("nav_support", "Service & Support"),
+        label: window.uiText("nav_support", "Service & Support"),
         href: "/support/",
         id: "support",
         icon: "support_agent",
@@ -537,7 +537,7 @@
       },
       {
         key: "nav_about",
-        label: window.t("nav_about", "About Us"),
+        label: window.uiText("nav_about", "About Us"),
         href: "/about/",
         id: "about",
         icon: "info",
@@ -549,7 +549,7 @@
       },
       {
         key: "nav_contact",
-        label: window.t("nav_contact", "Contact Us"),
+        label: window.uiText("nav_contact", "Contact Us"),
         href: "/contact/",
         id: "contact",
         icon: "mail",

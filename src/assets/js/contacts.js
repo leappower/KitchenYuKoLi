@@ -38,30 +38,30 @@
   // ============================================
   /** Page path → display name mapping for WhatsApp source tracking */
   var PAGE_NAMES = {
-    "/support/": window.t("nav_support", "Service & Support"),
-    "/support/installation/": window.t("nav_support_installation", "Installation & Commissioning"),
-    "/support/spare-parts/": window.t("nav_support_spare_parts", "Spare Parts Support"),
-    "/support/training/": window.t("nav_support_training", "Training & Manuals"),
-    "/support/warranty/": window.t("nav_support_warranty", "Warranty & Maintenance"),
-    "/support/faq/": window.t("nav_support_faq", "Technical FAQ & Contact"),
-    "/products/": window.t("nav_products", "Products"),
-    "/products/compare/": window.t("compare_view", "Compare"),
-    "/products/detail/": window.t("pd_spec_product_specs", "Product Details"),
-    "/quote/": window.t("nav_get_quote", "Get a Quote"),
-    "/contact/": window.t("nav_contact", "Contact Us"),
-    "/landing/": window.t("contact_landing", "Landing Page"),
-    "/home/": window.t("nav_home", "Home"),
-    "/about/": window.t("nav_about", "About Us"),
-    "/news/": window.t("contact_news", "News"),
-    "/thank-you/": window.t("contact_thank_you", "Thank You"),
-    "/applications/central-kitchen/": window.t("nav_applications_central_kitchen", "Central Kitchen"),
-    "/applications/chain-restaurant/": window.t("nav_applications_chain_restaurant", "Chain Restaurant"),
-    "/applications/small-restaurant/": window.t("nav_applications_small_restaurant", "Small Restaurant"),
-    "/applications/canteen/": window.t("nav_applications_canteen", "Canteen"),
-    "/applications/menu-lab/": window.t("nav_applications_menu_lab", "Menu Lab"),
-    "/applications/cloud-kitchen/": window.t("nav_applications_cloud_kitchen", "Cloud Kitchen"),
-    "/profit-calculator/": window.t("nav_roi", "ROI"),
-    "/cases/": window.t("nav_cases", "Case Studies"),
+    "/support/": window.uiText("nav_support", "Service & Support"),
+    "/support/installation/": window.uiText("nav_support_installation", "Installation & Commissioning"),
+    "/support/spare-parts/": window.uiText("nav_support_spare_parts", "Spare Parts Support"),
+    "/support/training/": window.uiText("nav_support_training", "Training & Manuals"),
+    "/support/warranty/": window.uiText("nav_support_warranty", "Warranty & Maintenance"),
+    "/support/faq/": window.uiText("nav_support_faq", "Technical FAQ & Contact"),
+    "/products/": window.uiText("nav_products", "Products"),
+    "/products/compare/": window.uiText("compare_view", "Compare"),
+    "/products/detail/": window.uiText("pd_spec_product_specs", "Product Details"),
+    "/quote/": window.uiText("nav_get_quote", "Get a Quote"),
+    "/contact/": window.uiText("nav_contact", "Contact Us"),
+    "/landing/": window.uiText("contact_landing", "Landing Page"),
+    "/home/": window.uiText("nav_home", "Home"),
+    "/about/": window.uiText("nav_about", "About Us"),
+    "/news/": window.uiText("contact_news", "News"),
+    "/thank-you/": window.uiText("contact_thank_you", "Thank You"),
+    "/applications/central-kitchen/": window.uiText("nav_applications_central_kitchen", "Central Kitchen"),
+    "/applications/chain-restaurant/": window.uiText("nav_applications_chain_restaurant", "Chain Restaurant"),
+    "/applications/small-restaurant/": window.uiText("nav_applications_small_restaurant", "Small Restaurant"),
+    "/applications/canteen/": window.uiText("nav_applications_canteen", "Canteen"),
+    "/applications/menu-lab/": window.uiText("nav_applications_menu_lab", "Menu Lab"),
+    "/applications/cloud-kitchen/": window.uiText("nav_applications_cloud_kitchen", "Cloud Kitchen"),
+    "/profit-calculator/": window.uiText("nav_roi", "ROI"),
+    "/cases/": window.uiText("nav_cases", "Case Studies"),
   };
 
   function getPageName() {
@@ -73,7 +73,7 @@
     for (var i = 0; i < keys.length; i++) {
       if (path.indexOf(keys[i]) !== -1) return PAGE_NAMES[keys[i]];
     }
-    return window.t("contact_website", "Website");
+    return window.uiText("contact_website", "Website");
   }
 
   /**
@@ -198,7 +198,7 @@
   // ============================================
   function startWhatsApp() {
     var text = buildQuoteMessage();
-    var url = contactsWhatsApp({ source: window.t("contact_quote_source", "Quote Form"), message: text });
+    var url = contactsWhatsApp({ source: window.uiText("contact_quote_source", "Quote Form"), message: text });
     window.open(url, "_blank");
   }
   function startLine() {
@@ -213,7 +213,7 @@
   function startEmail() {
     var subject =
       typeof window.t === "function"
-        ? window.t("contacts_email_subject", "YuKoLi 智能厨具询价")
+        ? window.uiText("contacts_email_subject", "YuKoLi 智能厨具询价")
         : "YuKoLi 智能厨具询价";
     var body = buildQuoteMessage();
     window.location.href =
