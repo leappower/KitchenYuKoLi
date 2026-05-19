@@ -171,11 +171,20 @@
           </div>
           <div class="w-full lg:w-1/2 mx-auto relative">
           <div class="absolute -inset-4 bg-primary/20 rounded-3xl blur-3xl"></div>
-          <div class="relative rounded-2xl overflow-hidden shadow-2xl">
+          <div class="relative rounded-2xl overflow-hidden shadow-2xl" data-hero-video>
+          <video
+          class="hero-video-player w-full aspect-[3/2] object-cover"
+          src="/assets/video/canteen-stirfry.mp4"
+          poster="/assets/images/applications/canteen/hero.webp"
+          preload="metadata"
+          muted
+          playsinline
+          loop
+          ></video>
           <img
           loading="eager"
           alt="YuKoLi 食堂设备方案" data-i18n-alt="alt_applications_canteen_index-pc_YuKoLi_食堂设备方案" data-i18n="canteen_hero_img_alt"
-          class="w-full aspect-[3/2] object-cover"
+          class="hero-video-poster w-full aspect-[3/2] object-cover"
           src="/assets/images/applications/canteen/hero.webp"
           onerror="this.src='/assets/images/default.webp'"
           />
@@ -543,5 +552,6 @@
     <script src="/assets/js/ui/navigator.js?v=202605191327"></script>
     <script src="/assets/js/ui/footer.js?v=202605191327"></script>
     <script defer src="/assets/js/ui/floating-actions.js"></script>
+    <script src="/assets/js/ui/hero-video.js"></script>
   </body>
 </html>

@@ -41,10 +41,22 @@
   var ATTR = "data-hero-video";
   var CROSSFADE_MS = 1500;
   var PLAY_THRESHOLD = 0.3; // 30% 可见时播放
-  var PAUSE_THRESHOLD = 0.1; // 10% 可见时暂停
+  var PAUSE_THRESHOLD = 0.3; // 30% 可见时暂停（即离开70%时暂停）
+
+  /* ── 全局活跃视频跟踪（同一页面只允许1个播放） ── */
+  var _activeInstances = [];
+  function pauseAllExcept(currentState) {
+    for (var i = 0; i < _activeInstances.length; i++) {
+      var inst = _activeInstances[i];
+      if (inst.state !== currentState && inst.state.isPlaying) {
+        pauseVideo(inst.state, inst.video);
+      }
+    }
+  }
 
   /* ── 找到所有 hero-video 容器 ── */
   function init() {
+    _activeInstances = [];
     var containers = document.querySelectorAll("[" + ATTR + "]");
     if (!containers.length) return;
 
@@ -148,6 +160,9 @@
         if (overlay) overlay.style.opacity = "";
       });
     }
+
+    /* 注册到全局实例列表（互斥播放用） */
+    _activeInstances.push({ state: state, video: video });
   }
 
   /* ── IntersectionObserver ── */
@@ -188,6 +203,9 @@
   /* ── 播放 ── */
   function attemptPlay(state, video, poster, overlay, info) {
     if (state.failed) return;
+
+    /* 暂停其他所有视频（同一页面只允许1个播放） */
+    pauseAllExcept(state);
 
     /* 恢复断点 */
     if (state.savedTime > 0) {

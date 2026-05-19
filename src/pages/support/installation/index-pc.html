@@ -96,7 +96,17 @@
     </div>
     <div class="w-full lg:w-1/2 relative">
       <div class="aspect-square bg-gradient-to-br from-primary/20 to-transparent rounded-full absolute -top-10 -right-10 blur-3xl opacity-50 -z-10"></div>
-      <div class="relative w-full h-[600px] bg-slate-200 dark:bg-slate-800 rounded-3xl overflow-hidden shadow-2xl border border-white/10" style="background-image: url('/assets/images/support-install-hero.webp'); background-size: cover; background-position: center;">
+      <div class="relative w-full h-[600px] bg-slate-200 dark:bg-slate-800 rounded-3xl overflow-hidden shadow-2xl border border-white/10" data-hero-video>
+        <video
+          class="hero-video-player w-full h-full object-cover"
+          src="/assets/video/installation-packaging.mp4"
+          poster="/assets/images/support-install-hero.webp"
+          preload="metadata"
+          muted
+          playsinline
+          loop
+        ></video>
+        <img class="hero-video-poster w-full h-full object-cover" src="/assets/images/support-install-hero.webp" alt="Professional installation service" style="position:absolute; inset:0;" />
         <div class="absolute bottom-6 left-6 bg-white/90 dark:bg-slate-900/90 backdrop-blur p-5 rounded-2xl shadow-xl border border-slate-100 dark:border-slate-800 w-[200px]">
           <div class="flex items-center gap-3 mb-1">
             <span class="material-symbols-outlined text-primary text-2xl">schedule</span>
@@ -165,7 +175,7 @@
         <!-- Card 3 -->
         <div class="bg-white dark:bg-slate-800 rounded-2xl p-6 shadow-sm border border-slate-200 dark:border-slate-700 hover:shadow-lg transition-all">
           <div class="w-full aspect-[3/2] overflow-hidden rounded-xl">
-            <img src="/assets/images/support/installation/value3.png" alt="Commissioning alt="Commissioning & Testing" Testing" data-i18n-alt="alt_install_commissioning" class="w-full h-full object-cover" />
+            <img src="/assets/images/support/installation/value3.png" alt="Commissioning & Testing" data-i18n-alt="alt_install_commissioning" class="w-full h-full object-cover" />
           </div>
           <h3 class="text-lg font-bold mt-4" data-i18n="support_install_value_3_title">
                     Commissioning & Testing
@@ -271,7 +281,7 @@
         <!-- Requirement 2 -->
         <div class="bg-white dark:bg-slate-800 rounded-2xl p-6 shadow-sm border border-slate-200 dark:border-slate-700 hover:shadow-lg transition-all">
           <div class="w-full aspect-[3/2] overflow-hidden rounded-xl">
-            <img src="/assets/images/support/installation/env2.png" alt="Water Supply alt="Water Supply & Drainage" Drainage" data-i18n-alt="alt_install_water_supply" class="w-full h-full object-cover" />
+            <img src="/assets/images/support/installation/env2.png" alt="Water Supply & Drainage" data-i18n-alt="alt_install_water_supply" class="w-full h-full object-cover" />
           </div>
           <h3 class="text-lg font-bold mt-4" data-i18n="support_install_env_2_title">
                     Water supply and drainage are required
@@ -549,5 +559,6 @@
 <script src="/assets/js/spa-router.js?v=202605191327"></script>
 
     <script defer src="/assets/js/ui/floating-actions.js"></script>
+    <script src="/assets/js/ui/hero-video.js"></script>
 </body>
 </html>

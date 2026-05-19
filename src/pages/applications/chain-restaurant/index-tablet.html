@@ -144,12 +144,21 @@
           </a>
           </div>
           </div>
-          <div class="relative rounded-2xl overflow-hidden shadow-xl">
+          <div class="relative rounded-2xl overflow-hidden shadow-xl" data-hero-video>
           <!-- TODO: Replace with real photo — 连锁后厨实拍 -->
+          <video
+          class="hero-video-player w-full aspect-[3/2] object-cover"
+          src="/assets/video/chain-restaurant-delivery.mp4"
+          poster="/assets/images/applications/chain-restaurant-hero.webp"
+          preload="metadata"
+          muted
+          playsinline
+          loop
+          ></video>
           <img
           loading="eager"
           alt="连锁餐饮智能后厨" data-i18n-alt="alt_applications_chain-restaurant_index-tablet_连锁餐饮智能后厨"
-          class="w-full aspect-[3/2] object-cover"
+          class="hero-video-poster w-full aspect-[3/2] object-cover"
           src="/assets/images/applications/chain-restaurant-hero.webp"
           onerror="this.src = '/assets/images/applications/canteen-hero.webp'"
           />
@@ -694,5 +703,6 @@
     <script src="/assets/js/ui/navigator.js?v=202605191327"></script>
     <script src="/assets/js/ui/footer.js?v=202605191327"></script>
     <script defer src="/assets/js/ui/floating-actions.js"></script>
+    <script src="/assets/js/ui/hero-video.js"></script>
 </body>
 </html>

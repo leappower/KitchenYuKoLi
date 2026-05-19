@@ -191,6 +191,11 @@ module.exports = (env = {}, argv = {}) => {
                 noErrorOnMissing: true,
               },
               {
+                from: 'src/assets/video',
+                to: 'assets/video',
+                noErrorOnMissing: true,
+              },
+              {
                 from: 'src/sw.js',
                 to: 'sw.js',
                 noErrorOnMissing: true,
@@ -317,6 +322,11 @@ module.exports = (env = {}, argv = {}) => {
         {
           directory: path.join(__dirname, 'src/assets/images'),
           publicPath: '/images',
+        },
+        // Serve video files
+        {
+          directory: path.join(__dirname, 'src/assets/video'),
+          publicPath: '/assets/video',
         },
         // Page HTML files — serve src/pages/ and src/internal/ so in-page links
         // like /pages/support/iot-index-pc.html work in dev without a full build
