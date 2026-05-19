@@ -1,6 +1,6 @@
 !(function (t) {
   "use strict";
-  var I18N_CACHE_V = 1779183790;
+  var I18N_CACHE_V = 1779184624;
   var _spaRegs = {};
   function _spaOn(tgt, evt, fn, key) {
     if (_spaRegs[key]) _spaRegs[key].abort();
@@ -750,6 +750,9 @@
   ((t.t = function (t) {
     return s.translate(t);
   }),
+    (t.uiText = function (t, e) {
+      return s.uiText(t, e);
+    }),
     (t.setLanguage = function (t) {
       return s.setLanguage(t);
     }),

@@ -118,6 +118,8 @@
       "}",
       "html.dark .mobile-menu-l1 { color: #f5f5f7; }",
       "html.dark .mobile-menu-l1 { border-color: rgba(235,235,245,.08); }",
+      ".mobile-menu-l1.is-active { background: rgba(236,91,19,.06); }",
+      "html.dark .mobile-menu-l1.is-active { background: rgba(236,91,19,.10); }",
       ".mobile-menu-l1:active { background: rgba(236,91,19,.06); }",
       "html.dark .mobile-menu-l1:active { background: rgba(236,91,19,.10); }",
       ".mobile-menu-l1-icon {",
@@ -656,6 +658,9 @@
 
       subMenuHtml = '<div class="mobile-menu-l2" data-menu-l2="' + escapeHtml(item.id) + '">' + childItemsHtml;
 
+      /* 判断一级菜单是否有子项匹配当前路径 */
+      var l1ActiveClass = activeHref ? " is-active" : "";
+
       // products 分类末尾追加「查看全部产品」链接
       if (item.id === "products") {
         subMenuHtml +=
@@ -683,7 +688,9 @@
 
     return (
       '<div class="mobile-menu-l1-wrap">' +
-      '<button class="mobile-menu-l1" data-menu-toggle="' +
+      '<button class="mobile-menu-l1' +
+      l1ActiveClass +
+      '" data-menu-toggle="' +
       escapeHtml(item.id) +
       '" type="button">' +
       '<span class="mobile-menu-l1-icon">' +
@@ -1395,17 +1402,34 @@
       var menuItems = getMenuItems();
       var currentPath = location.pathname.replace(/\/$/, "");
       menuItems.forEach(function (item) {
-        if (!item.children || item.children.length === 0) return;
-        var activeHref = findActiveChildHref(item.children);
-        var panel = document.querySelector('[data-menu-l2="' + item.id + '"]');
-        if (!panel) return;
-        var items = panel.querySelectorAll(".mobile-menu-l2-item");
-        for (var i = 0; i < items.length; i++) {
-          var href = items[i].getAttribute("href") || "";
-          if (href.replace(/\/$/, "") === activeHref.replace(/\/$/, "")) {
-            items[i].classList.add("is-active");
+        /* 更新一级菜单 L1 的 is-active */
+        var l1Button = document.querySelector('.mobile-menu-l1[data-menu-toggle="' + item.id + '"]');
+        var hasActiveChild = false;
+
+        if (item.children && item.children.length > 0) {
+          var activeHref = findActiveChildHref(item.children);
+          hasActiveChild = !!activeHref;
+
+          var panel = document.querySelector('[data-menu-l2="' + item.id + '"]');
+          if (panel) {
+            var items = panel.querySelectorAll(".mobile-menu-l2-item");
+            for (var i = 0; i < items.length; i++) {
+              var href = items[i].getAttribute("href") || "";
+              if (href.replace(/\/$/, "") === activeHref.replace(/\/$/, "")) {
+                items[i].classList.add("is-active");
+              } else {
+                items[i].classList.remove("is-active");
+              }
+            }
+          }
+        }
+
+        /* 更新 L1 按钮的 is-active */
+        if (l1Button) {
+          if (hasActiveChild) {
+            l1Button.classList.add("is-active");
           } else {
-            items[i].classList.remove("is-active");
+            l1Button.classList.remove("is-active");
           }
         }
       });
