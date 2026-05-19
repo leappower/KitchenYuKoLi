@@ -211,7 +211,10 @@
     window.open("https://t.me/baeckerei-profi", "_blank");
   }
   function startEmail() {
-    var subject = "YuKoLi 智能厨具询价";
+    var subject =
+      typeof window.t === "function"
+        ? window.t("contacts_email_subject", "YuKoLi 智能厨具询价")
+        : "YuKoLi 智能厨具询价";
     var body = buildQuoteMessage();
     window.location.href =
       "mailto:support@yukoli.com?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(body);

@@ -58,36 +58,116 @@
 
   var CROSS_SELL_MAP = {
     stirfry: [
-      { slug: "cutting", reason: "切配后直接翻炒，备料到出餐无缝衔接", highlight: "效率 +200%" },
-      { slug: "steaming", reason: "蒸饭蒸菜同步进行，午高峰不排队", highlight: "出餐 -40min" },
-      { slug: "other", reason: "洗碗机+保温台，后厨动线一次到位", highlight: "人手 -3人" },
-      { slug: "stewing", reason: "炖汤+炒菜双线出餐，菜品更丰富", highlight: "菜品 +30%" },
+      {
+        slug: "cutting",
+        reason: tl("cross_sell_stirfry_cutting_reason", "切配后直接翻炒，备料到出餐无缝衔接"),
+        highlight: tl("cross_sell_stirfry_cutting_hl", "效率 +200%"),
+      },
+      {
+        slug: "steaming",
+        reason: tl("cross_sell_stirfry_steaming_reason", "蒸饭蒸菜同步进行，午高峰不排队"),
+        highlight: tl("cross_sell_stirfry_steaming_hl", "出餐 -40min"),
+      },
+      {
+        slug: "other",
+        reason: tl("cross_sell_stirfry_other_reason", "洗碗机+保温台，后厨动线一次到位"),
+        highlight: tl("cross_sell_stirfry_other_hl", "人手 -3人"),
+      },
+      {
+        slug: "stewing",
+        reason: tl("cross_sell_stirfry_stewing_reason", "炖汤+炒菜双线出餐，菜品更丰富"),
+        highlight: tl("cross_sell_stirfry_stewing_hl", "菜品 +30%"),
+      },
     ],
     cutting: [
-      { slug: "stirfry", reason: "切好直接下锅，备料到烹饪零等待", highlight: "效率 +180%" },
-      { slug: "steaming", reason: "切配+蒸煮一体化，前处理更高效", highlight: "备料 -60min" },
-      { slug: "other", reason: "传送带+分拣台，流水线式切配作业", highlight: "产能 +4倍" },
+      {
+        slug: "stirfry",
+        reason: tl("cross_sell_cutting_stirfry_reason", "切好直接下锅，备料到烹饪零等待"),
+        highlight: tl("cross_sell_cutting_stirfry_hl", "效率 +180%"),
+      },
+      {
+        slug: "steaming",
+        reason: tl("cross_sell_cutting_steaming_reason", "切配+蒸煮一体化，前处理更高效"),
+        highlight: tl("cross_sell_cutting_steaming_hl", "备料 -60min"),
+      },
+      {
+        slug: "other",
+        reason: tl("cross_sell_cutting_other_reason", "传送带+分拣台，流水线式切配作业"),
+        highlight: tl("cross_sell_cutting_other_hl", "产能 +4倍"),
+      },
     ],
     frying: [
-      { slug: "stirfry", reason: "炸+炒双线并行，出餐速度翻倍", highlight: "出餐 +100%" },
-      { slug: "cutting", reason: "切配备料跟上油炸节奏，不缺料", highlight: "备料 0等待" },
-      { slug: "other", reason: "滤油台+排烟系统，油炸区干净整洁", highlight: "油烟 -80%" },
+      {
+        slug: "stirfry",
+        reason: tl("cross_sell_frying_stirfry_reason", "炸+炒双线并行，出餐速度翻倍"),
+        highlight: tl("cross_sell_frying_stirfry_hl", "出餐 +100%"),
+      },
+      {
+        slug: "cutting",
+        reason: tl("cross_sell_frying_cutting_reason", "切配备料跟上油炸节奏，不缺料"),
+        highlight: tl("cross_sell_frying_cutting_hl", "备料 0等待"),
+      },
+      {
+        slug: "other",
+        reason: tl("cross_sell_frying_other_reason", "滤油台+排烟系统，油炸区干净整洁"),
+        highlight: tl("cross_sell_frying_other_hl", "油烟 -80%"),
+      },
     ],
     stewing: [
-      { slug: "stirfry", reason: "炖汤+炒菜组合，满足多样化菜单", highlight: "菜品 +25%" },
-      { slug: "steaming", reason: "炖煮蒸饭同步，大锅饭不再手忙脚乱", highlight: "同步出餐" },
-      { slug: "cutting", reason: "自动切配炖菜食材，规格统一味道稳", highlight: "口味一致" },
+      {
+        slug: "stirfry",
+        reason: tl("cross_sell_stewing_stirfry_reason", "炖汤+炒菜组合，满足多样化菜单"),
+        highlight: tl("cross_sell_stewing_stirfry_hl", "菜品 +25%"),
+      },
+      {
+        slug: "steaming",
+        reason: tl("cross_sell_stewing_steaming_reason", "炖煮蒸饭同步，大锅饭不再手忙脚乱"),
+        highlight: tl("cross_sell_stewing_steaming_hl", "同步出餐"),
+      },
+      {
+        slug: "cutting",
+        reason: tl("cross_sell_stewing_cutting_reason", "自动切配炖菜食材，规格统一味道稳"),
+        highlight: tl("cross_sell_stewing_cutting_hl", "口味一致"),
+      },
     ],
     steaming: [
-      { slug: "stirfry", reason: "蒸+炒搭档，炒菜蒸饭同时搞定", highlight: "效率 +150%" },
-      { slug: "cutting", reason: "蒸前切配自动完成，食材现切现蒸", highlight: "鲜度提升" },
-      { slug: "stewing", reason: "蒸+炖组合，汤饭粥一灶全出", highlight: "一灶多用" },
-      { slug: "other", reason: "保温分餐台搭配蒸柜，热菜直达窗口", highlight: "温度不降" },
+      {
+        slug: "stirfry",
+        reason: tl("cross_sell_steaming_stirfry_reason", "蒸+炒搭档，炒菜蒸饭同时搞定"),
+        highlight: tl("cross_sell_steaming_stirfry_hl", "效率 +150%"),
+      },
+      {
+        slug: "cutting",
+        reason: tl("cross_sell_steaming_cutting_reason", "蒸前切配自动完成，食材现切现蒸"),
+        highlight: tl("cross_sell_steaming_cutting_hl", "鲜度提升"),
+      },
+      {
+        slug: "stewing",
+        reason: tl("cross_sell_steaming_stewing_reason", "蒸+炖组合，汤饭粥一灶全出"),
+        highlight: tl("cross_sell_steaming_stewing_hl", "一灶多用"),
+      },
+      {
+        slug: "other",
+        reason: tl("cross_sell_steaming_other_reason", "保温分餐台搭配蒸柜，热菜直达窗口"),
+        highlight: tl("cross_sell_steaming_other_hl", "温度不降"),
+      },
     ],
     other: [
-      { slug: "stirfry", reason: "核心烹饪+辅助设备，后厨全套配齐", highlight: "一站式" },
-      { slug: "cutting", reason: "切配+辅助传送，流水线完整配置", highlight: "流水线化" },
-      { slug: "steaming", reason: "蒸柜+保温台，从蒸到分餐不断链", highlight: "温度可控" },
+      {
+        slug: "stirfry",
+        reason: tl("cross_sell_other_stirfry_reason", "核心烹饪+辅助设备，后厨全套配齐"),
+        highlight: tl("cross_sell_other_stirfry_hl", "一站式"),
+      },
+      {
+        slug: "cutting",
+        reason: tl("cross_sell_other_cutting_reason", "切配+辅助传送，流水线完整配置"),
+        highlight: tl("cross_sell_other_cutting_hl", "流水线化"),
+      },
+      {
+        slug: "steaming",
+        reason: tl("cross_sell_other_steaming_reason", "蒸柜+保温台，从蒸到分餐不断链"),
+        highlight: tl("cross_sell_other_steaming_hl", "温度可控"),
+      },
     ],
   };
 
@@ -99,19 +179,19 @@
         href: "/applications/small-restaurant/",
         slug: "small-restaurant",
         icon: "storefront",
-        desc: "2-5人小后厨，一台炒菜机顶3个厨师",
+        desc: tl("scene_stirfry_small_restaurant", "2-5人小后厨，一台炒菜机顶3个厨师"),
       },
       {
         href: "/applications/canteen/",
         slug: "canteen",
         icon: "restaurant",
-        desc: "食堂午高峰500-5000人，90分钟出完热菜",
+        desc: tl("scene_stirfry_canteen", "食堂午高峰500-5000人，90分钟出完热菜"),
       },
       {
         href: "/applications/central-kitchen/",
         slug: "central-kitchen",
         icon: "apartment",
-        desc: "中央厨房批量出餐，菜品口味标准化",
+        desc: tl("scene_stirfry_central_kitchen", "中央厨房批量出餐，菜品口味标准化"),
       },
     ],
     cutting: [
@@ -119,49 +199,59 @@
         href: "/applications/central-kitchen/",
         slug: "central-kitchen",
         icon: "apartment",
-        desc: "千份级备料，切配规格统一不出错",
+        desc: tl("scene_cutting_central_kitchen", "千份级备料，切配规格统一不出错"),
       },
       {
         href: "/applications/food-factory/",
         slug: "food-factory",
         icon: "factory",
-        desc: "食品工厂流水线切配，日产能提升6倍",
+        desc: tl("scene_cutting_food_factory", "食品工厂流水线切配，日产能提升6倍"),
       },
-      { href: "/applications/canteen/", slug: "canteen", icon: "restaurant", desc: "食堂切菜工序自动化，2小时→20分钟" },
+      {
+        href: "/applications/canteen/",
+        slug: "canteen",
+        icon: "restaurant",
+        desc: tl("scene_cutting_canteen", "食堂切菜工序自动化，2小时→20分钟"),
+      },
     ],
     frying: [
       {
         href: "/applications/small-restaurant/",
         slug: "small-restaurant",
         icon: "storefront",
-        desc: "炸鸡炸薯条出餐快，外卖高峰不爆单",
+        desc: tl("scene_frying_small_restaurant", "炸鸡炸薯条出餐快，外卖高峰不爆单"),
       },
       {
         href: "/applications/chain-restaurant/",
         slug: "chain-restaurant",
         icon: "store",
-        desc: "连锁店炸品口味统一，每批出品标准化",
+        desc: tl("scene_frying_chain_restaurant", "连锁店炸品口味统一，每批出品标准化"),
       },
       {
         href: "/applications/cloud-kitchen/",
         slug: "cloud-kitchen",
         icon: "delivery_dining",
-        desc: "云厨房多品牌共用，炸炉轮流出餐",
+        desc: tl("scene_frying_cloud_kitchen", "云厨房多品牌共用，炸炉轮流出餐"),
       },
     ],
     stewing: [
-      { href: "/applications/canteen/", slug: "canteen", icon: "restaurant", desc: "食堂炖汤一大锅，千人份同时供应" },
+      {
+        href: "/applications/canteen/",
+        slug: "canteen",
+        icon: "restaurant",
+        desc: tl("scene_stewing_canteen", "食堂炖汤一大锅，千人份同时供应"),
+      },
       {
         href: "/applications/central-kitchen/",
         slug: "central-kitchen",
         icon: "apartment",
-        desc: "中央厨房炖品批量出，口味稳定如一",
+        desc: tl("scene_stewing_central_kitchen", "中央厨房炖品批量出，口味稳定如一"),
       },
       {
         href: "/applications/chain-restaurant/",
         slug: "chain-restaurant",
         icon: "store",
-        desc: "连锁店招牌炖品，每家店味道都一样",
+        desc: tl("scene_stewing_chain_restaurant", "连锁店招牌炖品，每家店味道都一样"),
       },
     ],
     steaming: [
@@ -169,34 +259,39 @@
         href: "/applications/canteen/",
         slug: "canteen",
         icon: "restaurant",
-        desc: "食堂蒸饭蒸菜同步，千人份量轻松搞定",
+        desc: tl("scene_steaming_canteen", "食堂蒸饭蒸菜同步，千人份量轻松搞定"),
       },
       {
         href: "/applications/central-kitchen/",
         slug: "central-kitchen",
         icon: "apartment",
-        desc: "中央厨房批量蒸制，配送前锁鲜保味",
+        desc: tl("scene_steaming_central_kitchen", "中央厨房批量蒸制，配送前锁鲜保味"),
       },
       {
         href: "/applications/food-factory/",
         slug: "food-factory",
         icon: "factory",
-        desc: "食品工厂蒸煮工序，全自动温度控制",
+        desc: tl("scene_steaming_food_factory", "食品工厂蒸煮工序，全自动温度控制"),
       },
     ],
     other: [
-      { href: "/applications/canteen/", slug: "canteen", icon: "restaurant", desc: "食堂洗碗分餐一体，后厨人手省一半" },
+      {
+        href: "/applications/canteen/",
+        slug: "canteen",
+        icon: "restaurant",
+        desc: tl("scene_other_canteen", "食堂洗碗分餐一体，后厨人手省一半"),
+      },
       {
         href: "/applications/chain-restaurant/",
         slug: "chain-restaurant",
         icon: "store",
-        desc: "连锁店排烟+清洗标准化，后厨干净合规",
+        desc: tl("scene_other_chain_restaurant", "连锁店排烟+清洗标准化，后厨干净合规"),
       },
       {
         href: "/applications/central-kitchen/",
         slug: "central-kitchen",
         icon: "apartment",
-        desc: "中央厨房传送+包装，全流程自动化",
+        desc: tl("scene_other_central_kitchen", "中央厨房传送+包装，全流程自动化"),
       },
     ],
     all: [
@@ -204,39 +299,44 @@
         href: "/applications/small-restaurant/",
         slug: "small-restaurant",
         icon: "storefront",
-        desc: "2-5人小后厨，一台炒菜机顶3个厨师",
+        desc: tl("scene_all_small_restaurant", "2-5人小后厨，一台炒菜机顶3个厨师"),
       },
       {
         href: "/applications/canteen/",
         slug: "canteen",
         icon: "restaurant",
-        desc: "食堂午高峰500-5000人，90分钟出完热菜",
+        desc: tl("scene_all_canteen", "食堂午高峰500-5000人，90分钟出完热菜"),
       },
       {
         href: "/applications/central-kitchen/",
         slug: "central-kitchen",
         icon: "apartment",
-        desc: "中央厨房批量出餐，菜品口味标准化",
+        desc: tl("scene_all_central_kitchen", "中央厨房批量出餐，菜品口味标准化"),
       },
       {
         href: "/applications/chain-restaurant/",
         slug: "chain-restaurant",
         icon: "dining",
-        desc: "连锁门店统一出品，告别厨师依赖",
+        desc: tl("scene_all_chain_restaurant", "连锁门店统一出品，告别厨师依赖"),
       },
       {
         href: "/applications/cloud-kitchen/",
         slug: "cloud-kitchen",
         icon: "delivery_dining",
-        desc: "外卖云厨房，单店日产能3000+单",
+        desc: tl("scene_all_cloud_kitchen", "外卖云厨房，单店日产能3000+单"),
       },
       {
         href: "/applications/food-factory/",
         slug: "food-factory",
         icon: "factory",
-        desc: "食品工厂产线自动化，日产能万份以上",
+        desc: tl("scene_all_food_factory", "食品工厂产线自动化，日产能万份以上"),
       },
-      { href: "/applications/menu-lab/", slug: "menu-lab", icon: "science", desc: "菜系实验室，一键复制各国风味" },
+      {
+        href: "/applications/menu-lab/",
+        slug: "menu-lab",
+        icon: "science",
+        desc: tl("scene_all_menu_lab", "菜系实验室，一键复制各国风味"),
+      },
     ],
   };
 
@@ -288,7 +388,7 @@
       "</h3>";
     html +=
       '<p class="text-sm text-slate-500 dark:text-slate-400">' +
-      tl("cross_sell_subtitle", "买了" + catLabel + "的客户还配了").replace("{cat}", esc(catLabel)) +
+      tl("cross_sell_subtitle", "买了{cat}的客户还配了").replace("{cat}", esc(catLabel)) +
       "</p>";
     html += "</div>";
 
@@ -373,7 +473,7 @@
       html += '<div class="relative">';
 
       // Scene image
-      var sceneImg = '/assets/images/applications/' + scene.slug + '/hero.webp';
+      var sceneImg = "/assets/images/applications/" + scene.slug + "/hero.webp";
       html += '<div class="w-full aspect-[3/2] rounded-xl overflow-hidden mb-4">';
       html += '<img src="' + sceneImg + '" alt="' + esc(label) + '" class="w-full h-full object-cover" loading="lazy">';
       html += "</div>";

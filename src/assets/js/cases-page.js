@@ -14,140 +14,161 @@
     tgt.addEventListener(evt, fn, { signal: ac.signal });
   }
 
+  /* ─── i18n helper ─── */
+  function tl(key, fallback) {
+    if (typeof window.t === "function") {
+      var result = window.t(key);
+      if (result && result !== key) return result;
+    }
+    return fallback || key;
+  }
+
   /* ─── Case Study Data ─── */
   var CASES = {
     1: {
-      title: "暹罗快炒 (Siam Wok Express)",
-      subtitle: "泰国 · 连锁餐饮 · 86家门店",
+      title: tl("casepage_1_title", "暹罗快炒 (Siam Wok Express)"),
+      subtitle: tl("casepage_1_subtitle", "泰国 · 连锁餐饮 · 86家门店"),
       flag: "🇹🇭",
       category: "chain",
-      client: "泰国炒菜连锁品牌，覆盖曼谷、清迈、芭提雅共86家门店",
-      challenge: "门店间菜品配方一致性差，厨师流动率高，新店开业周期长达6周，培训成本居高不下。",
-      solution: "部署172台YuKoLi自动炒菜机（YK-AW2000），每台内置200+道菜谱，实现一键标准化烹饪。",
+      client: tl("casepage_1_client", "泰国炒菜连锁品牌，覆盖曼谷、清迈、芭提雅共86家门店"),
+      challenge: tl(
+        "casepage_1_challenge",
+        "门店间菜品配方一致性差，厨师流动率高，新店开业周期长达6周，培训成本居高不下。"
+      ),
+      solution: tl(
+        "casepage_1_solution",
+        "部署172台YuKoLi自动炒菜机（YK-AW2000），每台内置200+道菜谱，实现一键标准化烹饪。"
+      ),
       results: [
-        { value: "70%", label: "人力缩减（5人→1.5人/店）" },
-        { value: "32%", label: "能耗降低" },
-        { value: "10天", label: "新店开业周期（原6周）" },
-        { value: "99.2%", label: "配方一致性评分" },
+        { value: "70%", label: tl("casepage_1_r1", "人力缩减（5人→1.5人/店）") },
+        { value: "32%", label: tl("casepage_1_r2", "能耗降低") },
+        { value: "10天", label: tl("casepage_1_r3", "新店开业周期（原6周）") },
+        { value: "99.2%", label: tl("casepage_1_r4", "配方一致性评分") },
       ],
       equipment: [
-        { model: "YK-AW2000", name: "自动炒菜机", qty: "172台" },
-        { model: "YK-RC800", name: "商用饭煲", qty: "86台" },
+        { model: "YK-AW2000", name: tl("eq_auto_wok", "自动炒菜机"), qty: "172" },
+        { model: "YK-RC800", name: tl("eq_rice_cooker", "商用饭煲"), qty: "86" },
       ],
-      timeline: "18个月（第一阶段：曼谷30家店 → 第二阶段：全国扩展）",
+      timeline: tl("casepage_1_timeline", "18个月（第一阶段：曼谷30家店 → 第二阶段：全国扩展）"),
       testimonial: {
         text: "We went from 12 stores to 86 in 18 months. Without YuKoLi, we'd still be at 20.",
-        textCn: "我们18个月内从12家店扩展到86家。没有YuKoLi，可能还停留在20家。",
+        textCn: tl("casepage_1_testimonial", "我们18个月内从12家店扩展到86家。没有YuKoLi，可能还停留在20家。"),
         author: "Chef Somchai",
-        role: "运营总监 (Operations Director)",
+        role: tl("casepage_1_role", "运营总监 (Operations Director)"),
       },
     },
     2: {
-      title: "越快河粉 (Phở Việt Quick)",
-      subtitle: "越南 · 连锁餐饮 · 45家门店",
+      title: tl("casepage_2_title", "越快河粉 (Phở Việt Quick)"),
+      subtitle: tl("casepage_2_subtitle", "越南 · 连锁餐饮 · 45家门店"),
       flag: "🇻🇳",
       category: "chain",
-      client: "胡志明市河粉连锁品牌，45家门店，高峰期日供500+碗",
-      challenge: "人力成本高，高峰期上菜慢，每店需3-5名厨师，日营业压力大。",
-      solution: "部署YK-SP600智能汤锅 + YK-AW1200自动炒菜机（配料），实现汤底标准化烹饪。",
+      client: tl("casepage_2_client", "胡志明市河粉连锁品牌，45家门店，高峰期日供500+碗"),
+      challenge: tl("casepage_2_challenge", "人力成本高，高峰期上菜慢，每店需3-5名厨师，日营业压力大。"),
+      solution: tl("casepage_2_solution", "部署YK-SP600智能汤锅 + YK-AW1200自动炒菜机（配料），实现汤底标准化烹饪。"),
       results: [
-        { value: "3→1", label: "每店厨师人数" },
-        { value: "500+", label: "日供河粉碗数" },
-        { value: "15分钟", label: "平均等餐时间（原25分钟）" },
-        { value: "¥12万", label: "单店年节省成本" },
+        { value: "3→1", label: tl("casepage_2_r1", "每店厨师人数") },
+        { value: "500+", label: tl("casepage_2_r2", "日供河粉碗数") },
+        { value: "15分钟", label: tl("casepage_2_r3", "平均等餐时间（原25分钟）") },
+        { value: "¥12万", label: tl("casepage_2_r4", "单店年节省成本") },
       ],
       equipment: [
-        { model: "YK-SP600", name: "智能汤锅", qty: "45台" },
-        { model: "YK-AW1200", name: "自动炒菜机", qty: "45台" },
-        { model: "YK-IC300", name: "电磁炉", qty: "90台" },
+        { model: "YK-SP600", name: tl("eq_soup_pot", "智能汤锅"), qty: "45" },
+        { model: "YK-AW1200", name: tl("eq_auto_wok", "自动炒菜机"), qty: "45" },
+        { model: "YK-IC300", name: tl("eq_induction", "电磁炉"), qty: "90" },
       ],
-      timeline: "8个月，完成全部45家门店升级",
+      timeline: tl("casepage_2_timeline", "8个月，完成全部45家门店升级"),
       testimonial: {
         text: "Our broth consistency went from 80% to 99.5% overnight. Customers noticed immediately.",
-        textCn: "我们的汤底一致性一夜之间从80%提升到99.5%。顾客立刻就注意到了。",
+        textCn: tl("casepage_2_testimonial", "我们的汤底一致性一夜之间从80%提升到99.5%。顾客立刻就注意到了。"),
         author: "Mr. Nguyen Van Minh",
-        role: "创始人 (Founder)",
+        role: tl("casepage_2_role", "创始人 (Founder)"),
       },
     },
     3: {
-      title: "吉隆坡工厂食堂 (KL Industrial Canteen)",
-      subtitle: "马来西亚 · 团餐 · 3,000人/天",
+      title: tl("casepage_3_title", "吉隆坡工厂食堂 (KL Industrial Canteen)"),
+      subtitle: tl("casepage_3_subtitle", "马来西亚 · 团餐 · 3,000人/天"),
       flag: "🇲🇾",
       category: "catering",
-      client: "吉隆坡电子工厂食堂，服务3,000名工人，需符合马来西亚卫生部食品安全标准",
-      challenge: "场地有限、人手不足，需在有限空间内满足3,000人用餐，同时通过政府食品安全检查。",
-      solution: "部署YK-ST3000商用蒸柜 + YK-RC2000电饭煲 + 自动洗碗线，实现大规模标准化出餐。",
+      client: tl("casepage_3_client", "吉隆坡电子工厂食堂，服务3,000名工人，需符合马来西亚卫生部食品安全标准"),
+      challenge: tl(
+        "casepage_3_challenge",
+        "场地有限、人手不足，需在有限空间内满足3,000人用餐，同时通过政府食品安全检查。"
+      ),
+      solution: tl(
+        "casepage_3_solution",
+        "部署YK-ST3000商用蒸柜 + YK-RC2000电饭煲 + 自动洗碗线，实现大规模标准化出餐。"
+      ),
       results: [
-        { value: "75%", label: "人力缩减（16人→4人）" },
-        { value: "3,000", label: "日均供餐份数" },
-        { value: "40%", label: "食材浪费减少" },
-        { value: "100%", label: "卫生部检查通过率" },
+        { value: "75%", label: tl("casepage_3_r1", "人力缩减（16人→4人）") },
+        { value: "3,000", label: tl("casepage_3_r2", "日均供餐份数") },
+        { value: "40%", label: tl("casepage_3_r3", "食材浪费减少") },
+        { value: "100%", label: tl("casepage_3_r4", "卫生部检查通过率") },
       ],
       equipment: [
-        { model: "YK-ST3000", name: "商用蒸柜", qty: "6台" },
-        { model: "YK-RC2000", name: "商用饭煲", qty: "8台" },
-        { model: "YK-DF500", name: "商用洗碗机", qty: "3台" },
+        { model: "YK-ST3000", name: tl("eq_steamer", "商用蒸柜"), qty: "6" },
+        { model: "YK-RC2000", name: tl("eq_rice_cooker", "商用饭煲"), qty: "8" },
+        { model: "YK-DF500", name: tl("eq_dishwasher", "商用洗碗机"), qty: "3" },
       ],
-      timeline: "3个月安装 + 1个月培训",
+      timeline: tl("casepage_3_timeline", "3个月安装 + 1个月培训"),
       testimonial: {
         text: "We used to struggle with food safety audits. Now we pass with flying colors every time.",
-        textCn: "以前食品安全检查总是提心吊胆，现在每次都轻松通过。",
+        textCn: tl("casepage_3_testimonial", "以前食品安全检查总是提心吊胆，现在每次都轻松通过。"),
         author: "Puan Aisyah",
-        role: "设施经理 (Facilities Manager)",
+        role: tl("casepage_3_role", "设施经理 (Facilities Manager)"),
       },
     },
     4: {
-      title: "雅加达云厨房 (Jakarta Cloud Kitchen Hub)",
-      subtitle: "印度尼西亚 · 云厨房 · 8个站点",
+      title: tl("casepage_4_title", "雅加达云厨房 (Jakarta Cloud Kitchen Hub)"),
+      subtitle: tl("casepage_4_subtitle", "印度尼西亚 · 云厨房 · 8个站点"),
       flag: "🇮🇩",
       category: "ghost",
-      client: "GoFood合作商，雅加达8个纯外卖站点，日均800+订单",
-      challenge: "订单量大、空间有限，需同时支持多菜系烹饪，快速出餐是核心诉求。",
-      solution: "部署YK-AW2000自动炒菜机 + YK-ST1500蒸柜 + 紧凑型厨房布局设计，一站多菜系。",
+      client: tl("casepage_4_client", "GoFood合作商，雅加达8个纯外卖站点，日均800+订单"),
+      challenge: tl("casepage_4_challenge", "订单量大、空间有限，需同时支持多菜系烹饪，快速出餐是核心诉求。"),
+      solution: tl("casepage_4_solution", "部署YK-AW2000自动炒菜机 + YK-ST1500蒸柜 + 紧凑型厨房布局设计，一站多菜系。"),
       results: [
-        { value: "800+", label: "8站日均总订单量" },
-        { value: "28%", label: "出餐速度提升" },
-        { value: "¥15万", label: "年节省成本" },
-        { value: "4.8★", label: "GoFood评分（原4.2★）" },
+        { value: "800+", label: tl("casepage_4_r1", "8站日均总订单量") },
+        { value: "28%", label: tl("casepage_4_r2", "出餐速度提升") },
+        { value: "¥15万", label: tl("casepage_4_r3", "年节省成本") },
+        { value: "4.8★", label: tl("casepage_4_r4", "GoFood评分（原4.2★）") },
       ],
       equipment: [
-        { model: "YK-AW2000", name: "自动炒菜机", qty: "16台" },
-        { model: "YK-ST1500", name: "蒸柜", qty: "8台" },
-        { model: "YK-IC500", name: "电磁炉", qty: "16台" },
+        { model: "YK-AW2000", name: tl("eq_auto_wok", "自动炒菜机"), qty: "16" },
+        { model: "YK-ST1500", name: tl("eq_steamer_compact", "蒸柜"), qty: "8" },
+        { model: "YK-IC500", name: tl("eq_induction", "电磁炉"), qty: "16" },
       ],
-      timeline: "6个月分阶段部署",
+      timeline: tl("casepage_4_timeline", "6个月分阶段部署"),
       testimonial: {
         text: "We run 3 cuisines from one station now. The auto-wok handles Thai, Chinese, and Indonesian dishes perfectly.",
-        textCn: "现在一个站点能同时做三种菜系。自动炒菜机完美支持泰式、中式和印尼菜。",
+        textCn: tl("casepage_4_testimonial", "现在一个站点能同时做三种菜系。自动炒菜机完美支持泰式、中式和印尼菜。"),
         author: "Andi Pratama",
-        role: "站点经理 (Hub Manager)",
+        role: tl("casepage_4_role", "站点经理 (Hub Manager)"),
       },
     },
     5: {
-      title: "马尼拉大学食堂 (Manila University Cafeteria)",
-      subtitle: "菲律宾 · 团餐 · 15,000名学生",
+      title: tl("casepage_5_title", "马尼拉大学食堂 (Manila University Cafeteria)"),
+      subtitle: tl("casepage_5_subtitle", "菲律宾 · 团餐 · 15,000名学生"),
       flag: "🇵🇭",
       category: "catering",
-      client: "马尼拉大都会区大学，15,000名学生，2个食堂，每食堂日供2,000+餐",
-      challenge: "每食堂日供2,000+餐，员工流动率高，菜品质量不稳定，学生投诉频繁。",
-      solution: "部署YK-ST2000蒸柜 + YK-AW1500自动炒菜机 + 智能库存管理系统。",
+      client: tl("casepage_5_client", "马尼拉大都会区大学，15,000名学生，2个食堂，每食堂日供2,000+餐"),
+      challenge: tl("casepage_5_challenge", "每食堂日供2,000+餐，员工流动率高，菜品质量不稳定，学生投诉频繁。"),
+      solution: tl("casepage_5_solution", "部署YK-ST2000蒸柜 + YK-AW1500自动炒菜机 + 智能库存管理系统。"),
       results: [
-        { value: "67%", label: "人力缩减（12人→4人/食堂）" },
-        { value: "99.5%", label: "菜品一致性" },
-        { value: "¥20万", label: "年节省成本" },
-        { value: "+35%", label: "学生满意度提升" },
+        { value: "67%", label: tl("casepage_5_r1", "人力缩减（12人→4人/食堂）") },
+        { value: "99.5%", label: tl("casepage_5_r2", "菜品一致性") },
+        { value: "¥20万", label: tl("casepage_5_r3", "年节省成本") },
+        { value: "+35%", label: tl("casepage_5_r4", "学生满意度提升") },
       ],
       equipment: [
-        { model: "YK-ST2000", name: "蒸柜", qty: "4台" },
-        { model: "YK-AW1500", name: "自动炒菜机", qty: "6台" },
-        { model: "YK-RC1500", name: "电饭煲", qty: "6台" },
+        { model: "YK-ST2000", name: tl("eq_steamer_compact", "蒸柜"), qty: "4" },
+        { model: "YK-AW1500", name: tl("eq_auto_wok", "自动炒菜机"), qty: "6" },
+        { model: "YK-RC1500", name: tl("eq_rice_cooker_sm", "电饭煲"), qty: "6" },
       ],
-      timeline: "4个月",
+      timeline: tl("casepage_5_timeline", "4个月"),
       testimonial: {
         text: "Student complaints about food quality dropped by 90%. The rice and stir-fry dishes are identical every single day.",
-        textCn: "学生对食品质量的投诉下降了90%。米饭和炒菜每天都一模一样。",
+        textCn: tl("casepage_5_testimonial", "学生对食品质量的投诉下降了90%。米饭和炒菜每天都一模一样。"),
         author: "Dr. Reyes",
-        role: "大学行政主管 (University Administrator)",
+        role: tl("casepage_5_role", "大学行政主管 (University Administrator)"),
       },
     },
   };
@@ -344,33 +365,43 @@
       "</p>" +
       // Challenge
       '<div style="margin-bottom:1.5rem;">' +
-      '<h3 style="font-weight:800;font-size:0.875rem;text-transform:uppercase;letter-spacing:0.05em;color:#64748b;margin-bottom:0.5rem;" class="dark:text-slate-400">💡 客户挑战</h3>' +
+      '<h3 style="font-weight:800;font-size:0.875rem;text-transform:uppercase;letter-spacing:0.05em;color:#64748b;margin-bottom:0.5rem;" class="dark:text-slate-400">' +
+      tl("casepage_challenge", "客户挑战") +
+      "</h3>" +
       '<p style="line-height:1.7;">' +
       c.challenge +
       "</p>" +
       "</div>" +
       // Solution
       '<div style="margin-bottom:1.5rem;">' +
-      '<h3 style="font-weight:800;font-size:0.875rem;text-transform:uppercase;letter-spacing:0.05em;color:#64748b;margin-bottom:0.5rem;" class="dark:text-slate-400">🔧 解决方案</h3>' +
+      '<h3 style="font-weight:800;font-size:0.875rem;text-transform:uppercase;letter-spacing:0.05em;color:#64748b;margin-bottom:0.5rem;" class="dark:text-slate-400">' +
+      tl("casepage_solution", "解决方案") +
+      "</h3>" +
       '<p style="line-height:1.7;">' +
       c.solution +
       "</p>" +
       "</div>" +
       // Key Results
       '<div style="margin-bottom:1.5rem;">' +
-      '<h3 style="font-weight:800;font-size:0.875rem;text-transform:uppercase;letter-spacing:0.05em;color:#64748b;margin-bottom:0.75rem;" class="dark:text-slate-400">📊 核心成果</h3>' +
+      '<h3 style="font-weight:800;font-size:0.875rem;text-transform:uppercase;letter-spacing:0.05em;color:#64748b;margin-bottom:0.75rem;" class="dark:text-slate-400">' +
+      tl("casepage_results", "核心成果") +
+      "</h3>" +
       '<div style="display:grid;grid-template-columns:repeat(2,1fr);gap:0.75rem;">' +
       resultsHTML +
       "</div>" +
       "</div>" +
       // Equipment
       '<div style="margin-bottom:1.5rem;">' +
-      '<h3 style="font-weight:800;font-size:0.875rem;text-transform:uppercase;letter-spacing:0.05em;color:#64748b;margin-bottom:0.5rem;" class="dark:text-slate-400">🏗️ 部署设备</h3>' +
+      '<h3 style="font-weight:800;font-size:0.875rem;text-transform:uppercase;letter-spacing:0.05em;color:#64748b;margin-bottom:0.5rem;" class="dark:text-slate-400">' +
+      tl("casepage_equipment", "部署设备") +
+      "</h3>" +
       equipHTML +
       "</div>" +
       // Timeline
       '<div style="margin-bottom:1.5rem;">' +
-      '<h3 style="font-weight:800;font-size:0.875rem;text-transform:uppercase;letter-spacing:0.05em;color:#64748b;margin-bottom:0.5rem;" class="dark:text-slate-400">⏱️ 项目周期</h3>' +
+      '<h3 style="font-weight:800;font-size:0.875rem;text-transform:uppercase;letter-spacing:0.05em;color:#64748b;margin-bottom:0.5rem;" class="dark:text-slate-400">' +
+      tl("casepage_timeline_label", "项目周期") +
+      "</h3>" +
       "<p>" +
       c.timeline +
       "</p>" +
@@ -392,7 +423,9 @@
       "</div>" +
       // CTA
       '<div style="margin-top:1.5rem;text-align:center;">' +
-      '<a href="/profit-calculator/" style="display:inline-block;background:var(--color-primary,#f97316);color:#fff;padding:0.875rem 2rem;border-radius:0.75rem;font-weight:800;text-decoration:none;font-size:0.875rem;">获取免费ROI方案</a>' +
+      '<a href="/profit-calculator/" style="display:inline-block;background:var(--color-primary,#f97316);color:#fff;padding:0.875rem 2rem;border-radius:0.75rem;font-weight:800;text-decoration:none;font-size:0.875rem;">' +
+      tl("casepage_get_roi", "获取免费ROI方案") +
+      "</a>" +
       "</div>" +
       "</div>";
 
@@ -478,8 +511,12 @@
       '<button style="position:absolute;top:0.75rem;right:0.75rem;background:rgba(255,255,255,0.9);border:none;border-radius:0.5rem;width:2.25rem;height:2.25rem;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:1.25rem;z-index:1;" class="dark:bg-slate-800 dark:text-white" id="video-modal-close">&times;</button>' +
       '<div style="aspect-ratio:16/9;background:#0f172a;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1rem;">' +
       '<span class="material-symbols-outlined" style="font-size:4rem;color:#f97316;">play_circle</span>' +
-      '<p style="color:#e2e8f0;font-weight:700;font-size:1.125rem;">视频即将上线</p>' +
-      '<p style="color:#94a3b8;font-size:0.875rem;">YuKoLi智能炒菜机自动化演示</p>' +
+      '<p style="color:#e2e8f0;font-weight:700;font-size:1.125rem;">' +
+      tl("casepage_video_coming", "视频即将上线") +
+      "</p>" +
+      '<p style="color:#94a3b8;font-size:0.875rem;">' +
+      tl("casepage_video_subtitle", "YuKoLi Smart Cooking Demo") +
+      "</p>" +
       "</div>" +
       "</div>";
 

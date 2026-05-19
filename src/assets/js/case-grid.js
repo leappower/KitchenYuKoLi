@@ -19,8 +19,11 @@
       laborAfter: 1,
       monthlySaving: "PHP 36,000",
       payback: 5.2,
-      title: "马尼拉 Liempo 快餐店：从 3 个厨师到 1 台机器",
-      quote: '"开业三年一直为招不到稳定的炒锅师傅发愁。现在一个人就能搞定，出餐速度还更快了。"',
+      title: tl("casegrid_manila_title", "马尼拉 Liempo 快餐店：从 3 个厨师到 1 台机器"),
+      quote: tl(
+        "casegrid_manila_quote",
+        '"开业三年一直为招不到稳定的炒锅师傅发愁。现在一个人就能搞定，出餐速度还更快了。"'
+      ),
     },
     {
       slug: "jakarta",
@@ -33,8 +36,11 @@
       laborAfter: 5,
       monthlySaving: "IDR 22M",
       payback: 8.0,
-      title: "雅加达送餐中央厨房：6 家门店统一出品",
-      quote: '"以前每个门店味道都不一样，客户经常投诉。现在六家店的味道完全一样，回头客明显多了。"',
+      title: tl("casegrid_jakarta_title", "雅加达送餐中央厨房：6 家门店统一出品"),
+      quote: tl(
+        "casegrid_jakarta_quote",
+        '"以前每个门店味道都不一样，客户经常投诉。现在六家店的味道完全一样，回头客明显多了。"'
+      ),
     },
     {
       slug: "hcmc",
@@ -47,8 +53,8 @@
       laborAfter: 1,
       monthlySaving: "VND 14M",
       payback: 5.5,
-      title: "胡志明市云厨房：15㎡ 完成全品类出餐",
-      quote: '"空间小但能做的菜很多，客户都以为是专业大厨房。"',
+      title: tl("casegrid_hcmc_title", "胡志明市云厨房：15㎡ 完成全品类出餐"),
+      quote: tl("casegrid_hcmc_quote", '"空间小但能做的菜很多，客户都以为是专业大厨房。"'),
     },
     {
       slug: "bangkok",
@@ -61,8 +67,8 @@
       laborAfter: 12,
       monthlySaving: "THB 270K",
       payback: 11.3,
-      title: "曼谷火锅连锁 8 店：口味标准化 + 培训周期缩短 75%",
-      quote: '"新店开业第 2 周就能正常出餐，以前至少要 2 个月。"',
+      title: tl("casegrid_bangkok_title", "曼谷火锅连锁 8 店：口味标准化 + 培训周期缩短 75%"),
+      quote: tl("casegrid_bangkok_quote", '"新店开业第 2 周就能正常出餐，以前至少要 2 个月。"'),
     },
     {
       slug: "kl",
@@ -75,8 +81,8 @@
       laborAfter: 6,
       monthlySaving: "MYR 13,500",
       payback: 6.2,
-      title: "吉隆坡工厂食堂：2000 餐/天，6.2 个月回本",
-      quote: '"工人最喜欢的是清洗方便，10 分钟就能搞定。"',
+      title: tl("casegrid_kl_title", "吉隆坡工厂食堂：2000 餐/天，6.2 个月回本"),
+      quote: tl("casegrid_kl_quote", '"工人最喜欢的是清洗方便，10 分钟就能搞定。"'),
     },
     {
       slug: "cebu",
@@ -89,8 +95,8 @@
       laborAfter: 1,
       monthlySaving: "PHP 32,000",
       payback: 4.8,
-      title: "Cebu 小吃店：投资 1 台，4.8 个月回本",
-      quote: '"最好的投资决定，省下来的钱已经买第二台了。"',
+      title: tl("casegrid_cebu_title", "Cebu 小吃店：投资 1 台，4.8 个月回本"),
+      quote: tl("casegrid_cebu_quote", '"最好的投资决定，省下来的钱已经买第二台了。"'),
     },
     {
       slug: "surabaya",
@@ -103,8 +109,8 @@
       laborAfter: 8,
       monthlySaving: "IDR 24M",
       payback: 8.5,
-      title: "泗水中央厨房：自动化后废品率从 8% 降至 1.2%",
-      quote: '"食品浪费大幅减少，每个月节省的食材钱就很可观。"',
+      title: tl("casegrid_surabaya_title", "泗水中央厨房：自动化后废品率从 8% 降至 1.2%"),
+      quote: tl("casegrid_surabaya_quote", '"食品浪费大幅减少，每个月节省的食材钱就很可观。"'),
     },
     {
       slug: "hanoi",
@@ -117,30 +123,30 @@
       laborAfter: 1,
       monthlySaving: "VND 8M",
       payback: 5.1,
-      title: "河内街头小吃升级：1 台机器 + 1 个人 = 全品类菜单",
-      quote: '"Phở 和 Bánh Mì 都能用，外国游客也夸味道好。"',
+      title: tl("casegrid_hanoi_title", "河内街头小吃升级：1 台机器 + 1 个人 = 全品类菜单"),
+      quote: tl("casegrid_hanoi_quote", '"Phở 和 Bánh Mì 都能用，外国游客也夸味道好。"'),
     },
   ];
 
   /* ── Filter Definitions ─────────────────────────── */
   var FILTERS = {
     industry: {
-      label: "行业",
+      label: tl("cases_filter_industry", "行业"),
       i18n: "cases_filter_industry",
       options: ["小型餐饮", "中央厨房", "连锁餐饮", "智慧食堂", "云厨房"],
     },
     volume: {
-      label: "日单量",
+      label: tl("cases_filter_volume", "日单量"),
       i18n: "cases_filter_volume",
       options: ["<200", "200-500", "500-1000", "1000+"],
     },
     country: {
-      label: "国家",
+      label: tl("cases_filter_country", "国家"),
       i18n: "cases_filter_country",
       options: ["🇵🇭 Philippines", "🇮🇩 Indonesia", "🇻🇳 Vietnam", "🇹🇭 Thailand", "🇲🇾 Malaysia"],
     },
     benefit: {
-      label: "核心收益",
+      label: tl("cases_filter_benefit", "核心收益"),
       i18n: "cases_filter_benefit",
       options: ["Labor Cost Reduction", "Consistency", "Space Saving", "Fast Payback"],
     },
@@ -249,11 +255,12 @@
       '<span class="text-slate-300 dark:text-slate-600">·</span>' +
       '<span class="flex items-center gap-1"><span class="material-symbols-outlined text-base">restaurant</span>' +
       c.dailyOutput +
-      " 餐/天</span>" +
+      tl("casegrid_meals_per_day", " 餐/天") +
+      "</span>" +
       '<span class="text-slate-300 dark:text-slate-600">·</span>' +
       '<span class="flex items-center gap-1"><span class="material-symbols-outlined text-base">schedule</span>' +
       c.payback +
-      " 月回本</span>" +
+      tl("casegrid_months_payback", " 月回本") +
       "</div>" +
       '<p class="text-sm leading-relaxed text-slate-600 dark:text-slate-300 italic border-l-4 border-' +
       bc +
@@ -279,13 +286,17 @@
       "→" +
       c.laborAfter +
       "</div>" +
-      '<div class="text-xs text-slate-500 dark:text-slate-400">人数变化</div>' +
+      '<div class="text-xs text-slate-500 dark:text-slate-400">' +
+      tl("casegrid_staff_change", "人数变化") +
+      "</div>" +
       "</div>" +
       '<div class="bg-slate-50 dark:bg-slate-900/50 rounded-lg p-2.5 text-center">' +
       '<div class="text-base font-black text-primary">' +
       c.monthlySaving +
       "</div>" +
-      '<div class="text-xs text-slate-500 dark:text-slate-400">月节省</div>' +
+      '<div class="text-xs text-slate-500 dark:text-slate-400">' +
+      tl("casegrid_monthly_saving", "月节省") +
+      "</div>" +
       "</div>" +
       "</div>" +
       '<span class="inline-flex items-center gap-1 text-primary font-bold text-sm group-hover:gap-2 transition-all mt-auto pt-1">' +
@@ -314,9 +325,9 @@
       " · " +
       tOr("cases_industry_" + c.slug, c.industry) +
       "</span>" +
-      '<span class="font-semibold text-slate-700 dark:text-slate-200">' +
+      'span class="font-semibold text-slate-700 dark:text-slate-200">' +
       c.dailyOutput +
-      " 餐/天</span>" +
+      tl("casegrid_meals_per_day", " 餐/天") +
       "</div>" +
       '<h3 class="font-bold text-base leading-snug" data-i18n="cases_title_' +
       c.slug +
@@ -337,7 +348,7 @@
       '<span class="inline-flex items-center gap-1 text-sm font-semibold text-slate-700 dark:text-slate-200">' +
       '<span class="material-symbols-outlined text-sm text-primary">schedule</span>' +
       c.payback +
-      tOr("cases_payback_months", "月回本") +
+      tl("casegrid_months_payback", "月回本") +
       "</span>" +
       "</div>" +
       '<p class="text-sm text-slate-600 dark:text-slate-400 italic" data-i18n="cases_quote_' +
@@ -375,7 +386,9 @@
     var cases = getFiltered();
     if (cases.length === 0) {
       container.innerHTML =
-        '<div class="col-span-full text-center py-16"><p class="text-slate-500 dark:text-slate-400 text-lg" data-i18n="cases_no_results">没有找到匹配的案例，试试调整筛选条件。</p></div>';
+        '<div class="col-span-full text-center py-16"><p class="text-slate-500 dark:text-slate-400 text-lg" data-i18n="cases_no_results">' +
+        tl("cases_no_results", "没有找到匹配的案例，试试调整筛选条件。") +
+        "</p></div>";
       return;
     }
     var html = "";

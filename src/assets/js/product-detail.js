@@ -23,6 +23,14 @@
     return CATEGORY_SLUGS.indexOf(slug) >= 0;
   }
 
+  function tl(key, fallback) {
+    if (typeof window.t === "function") {
+      var result = window.t(key);
+      if (result && result !== key) return result;
+    }
+    return fallback || key;
+  }
+
   function esc(str) {
     var d = document.createElement("div");
     d.textContent = str || "";
@@ -95,7 +103,8 @@
       '</h4><p class="text-xs text-slate-500 dark:text-slate-400 mb-2">' +
       esc(getCategoryName(rp)) +
       '</p><span class="inline-flex items-center gap-1 text-sm font-bold text-primary group-hover:gap-2 transition-all">' +
-      '查看详情<span class="material-symbols-outlined text-sm">arrow_forward</span></span></div></a>'
+      tl("btn_view_details", "查看详情") +
+      '<span class="material-symbols-outlined text-sm">arrow_forward</span></span></div></a>'
     );
   }
 
@@ -184,7 +193,9 @@
         section.innerHTML =
           '<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">' +
           '<h2 class="text-xl font-bold mb-4 flex items-center gap-2">' +
-          '<span class="material-symbols-outlined text-primary">recommend</span> 推荐产品</h2>' +
+          '<span class="material-symbols-outlined text-primary">recommend</span> ' +
+          tl("detail_recommended", "推荐产品") +
+          "</h2>" +
           '<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6" id="related-products"></div>' +
           "</div>";
         // Find the container's parent to append
@@ -220,14 +231,14 @@
           '<div class="w-20 h-20 bg-slate-100 dark:bg-slate-800 rounded-full flex items-center justify-center mx-auto mb-6">' +
           '<span class="material-symbols-outlined text-3xl text-slate-400">search_off</span></div>' +
           '<h2 class="text-xl font-bold mb-3">' +
-          tl("产品未找到") +
+          tl("pd_product_not_found", "产品未找到") +
           "</h2>" +
           '<p class="text-slate-500 mb-6">' +
-          tl("抱歉，未找到该产品。") +
+          tl("pd_product_not_found_desc", "抱歉，未找到该产品。") +
           "</p>" +
           '<a href="/products/" class="inline-flex items-center gap-2 bg-primary text-white px-5 py-3 rounded-xl font-bold hover:shadow-lg transition-all">' +
           '<span class="material-symbols-outlined">arrow_back</span> ' +
-          tl("返回产品中心") +
+          tl("pd_back_to_products", "返回产品中心") +
           "</a></div>";
       return;
     }
@@ -271,10 +282,12 @@
       html +=
         '<div class="max-w-7xl mx-auto px-4 pt-3 pb-0 md:hidden">' +
         '<div class="flex items-center gap-3">' +
-        '<button onclick="window.Breadcrumb&&window.Breadcrumb.goBack()" class="flex items-center justify-center w-9 h-9 rounded-full bg-slate-100 dark:bg-slate-800 hover:bg-primary hover:text-white text-slate-600 dark:text-slate-400 transition-all" aria-label="返回">' +
+        '<button onclick="window.Breadcrumb&&window.Breadcrumb.goBack()" class="flex items-center justify-center w-9 h-9 rounded-full bg-slate-100 dark:bg-slate-800 hover:bg-primary hover:text-white text-slate-600 dark:text-slate-400 transition-all" aria-label="' +
+        tl("pd_back", "Back") +
+        '">' +
         '<span class="material-symbols-outlined text-xl">arrow_back</span></button>' +
         '<div><div class="text-xs text-slate-500 dark:text-slate-400">' +
-        (catLabel || "产品中心") +
+        (catLabel || tl("pd_product_center", "产品中心")) +
         "</div>" +
         '<div class="text-sm font-bold text-slate-900 dark:text-white truncate max-w-[200px]">' +
         model +
@@ -301,23 +314,26 @@
 
     // Spec fields — values use getProductField() for i18n
     var specs = [
-      { l: tl("型号"), v: product.model },
-      { l: tl("分类"), v: getCategoryName(product) },
-      { l: tl("子分类"), v: getProductField(product, "sub_category") || product.subCategory },
-      { l: tl("等级"), v: getProductField(product, "tier") || product.tier },
-      { l: tl("功率"), v: product.power },
-      { l: tl("容量"), v: getProductField(product, "throughput") || product.throughput },
-      { l: tl("电压"), v: product.voltage },
-      { l: tl("频率"), v: product.frequency },
-      { l: tl("材质"), v: getProductField(product, "material") || product.material },
-      { l: tl("尺寸"), v: getProductField(product, "product_dimensions") || product.productDimensions },
-      { l: tl("颜色"), v: getProductField(product, "color") || product.color },
-      { l: tl("控制方式"), v: getProductField(product, "control_method") || product.controlMethod },
+      { l: tl("pd_spec_model", "型号"), v: product.model },
+      { l: tl("pd_spec_category", "分类"), v: getCategoryName(product) },
+      { l: tl("pd_spec_subcategory", "子分类"), v: getProductField(product, "sub_category") || product.subCategory },
+      { l: tl("pd_spec_tier", "等级"), v: getProductField(product, "tier") || product.tier },
+      { l: tl("pd_spec_power", "功率"), v: product.power },
+      { l: tl("pd_spec_capacity", "容量"), v: getProductField(product, "throughput") || product.throughput },
+      { l: tl("pd_spec_voltage", "电压"), v: product.voltage },
+      { l: tl("pd_spec_frequency", "频率"), v: product.frequency },
+      { l: tl("pd_spec_material", "材质"), v: getProductField(product, "material") || product.material },
+      {
+        l: tl("pd_spec_dimensions", "尺寸"),
+        v: getProductField(product, "product_dimensions") || product.productDimensions,
+      },
+      { l: tl("pd_spec_color", "颜色"), v: getProductField(product, "color") || product.color },
+      { l: tl("pd_spec_control", "控制方式"), v: getProductField(product, "control_method") || product.controlMethod },
     ];
     // Add specifications as full-width description card if present
     if (product.specifications) {
       specs.unshift({
-        l: tl("配置"),
+        l: tl("pd_spec_specifications", "配置"),
         v: getProductField(product, "specifications") || product.specifications,
         full: true,
       });
@@ -440,7 +456,7 @@
       "</h1>" +
       (product.model && product.name && product.name !== product.model
         ? '<p class="text-sm text-slate-500 dark:text-slate-400 mt-1">' +
-          tl("型号") +
+          tl("pd_spec_model", "型号") +
           ": " +
           esc(product.model) +
           "</p>"
@@ -455,7 +471,7 @@
       ' class="flex-1 bg-primary text-white px-6 py-3 rounded-xl font-bold' +
       ' flex items-center justify-center gap-2 hover:shadow-lg hover:shadow-primary/20 transition-all text-sm">' +
       '<span class="material-symbols-outlined text-lg">request_quote</span> ' +
-      tl("获取报价") +
+      tl("pd_get_quote", "获取报价") +
       "</a>" +
       '<a href="https://wa.me/' +
       wa +
@@ -469,11 +485,11 @@
       ' class="flex-1 px-6 py-3 rounded-xl font-bold flex items-center justify-center gap-2' +
       ' border-2 border-slate-300 dark:border-slate-600 hover:border-primary hover:text-primary transition-all text-sm">' +
       '<span class="material-symbols-outlined text-lg">chat</span> ' +
-      tl("联系销售") +
+      tl("pd_contact_sales", "联系销售") +
       "</a></div></div></div>" +
       '<section class="mt-8"><h2 class="text-xl font-bold mb-4 flex items-center gap-2">' +
       '<span class="material-symbols-outlined text-primary">specifications</span> ' +
-      tl("产品规格") +
+      tl("pd_spec_product_specs", "产品规格") +
       "</h2>" +
       '<div class="grid grid-cols-1 md:grid-cols-2 gap-3">' +
       specCards +
@@ -481,14 +497,14 @@
       "</div></div>" +
       '<section class="mt-12"><div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 bg-primary rounded-xl p-8 text-center">' +
       '<h2 class="text-xl font-black text-white mb-3">' +
-      tl("需要定制方案？") +
+      tl("pd_custom_solution", "需要定制方案？") +
       "</h2>" +
       '<p class="text-white/80 mb-6 text-sm">' +
-      tl("告诉我们您的需求，我们为您提供专属解决方案。") +
+      tl("pd_custom_solution_desc", "告诉我们您的需求，我们为您提供专属解决方案。") +
       "</p>" +
       '<a href="/quote/" class="inline-flex items-center gap-2 bg-white text-primary px-6 py-3 rounded-xl font-bold hover:shadow-lg transition-all">' +
       '<span class="material-symbols-outlined">arrow_forward</span> ' +
-      tl("获取报价") +
+      tl("pd_get_quote", "获取报价") +
       "</a></div></section>";
 
     var ce = document.getElementById("product-content");
@@ -505,43 +521,6 @@
 
   document.addEventListener("DOMContentLoaded", renderPDP);
   document.addEventListener("product-data-ready", renderPDP);
-  // Multi-language helper: get product field for current language
-  // Translate spec labels
-  // Chinese → i18n key mapping for product detail specs
-  var TL_MAP = {
-    型号: "pd_spec_model",
-    分类: "pd_spec_category",
-    子分类: "pd_spec_subcategory",
-    等级: "pd_spec_tier",
-    功率: "pd_spec_power",
-    容量: "pd_spec_capacity",
-    电压: "pd_spec_voltage",
-    频率: "pd_spec_frequency",
-    材质: "pd_spec_material",
-    尺寸: "pd_spec_dimensions",
-    颜色: "pd_spec_color",
-    控制方式: "pd_spec_control",
-    配置: "pd_spec_specifications",
-    产品规格: "pd_spec_product_specs",
-    "需要定制方案？": "pd_custom_solution",
-    "告诉我们您的需求，我们为您提供专属解决方案。": "pd_custom_solution_desc",
-    获取报价: "pd_get_quote",
-    联系销售: "pd_contact_sales",
-    产品未找到: "pd_product_not_found",
-    "抱歉，未找到该产品。": "pd_product_not_found_desc",
-    返回产品中心: "pd_back_to_products",
-  };
-
-  function tl(chinese) {
-    var key = TL_MAP[chinese];
-    if (key && typeof window.t === "function") {
-      var translated = window.t(key);
-      // If window.t returns the key itself (no translation found), fall back to Chinese
-      if (translated !== key) return translated;
-    }
-    return chinese;
-  }
-
   // Get translated category name (from UI i18n, not product_translations)
   function getCategoryName(product) {
     var cat = product.category || product.categoryName || "";
