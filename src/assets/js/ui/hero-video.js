@@ -155,17 +155,13 @@
 
     /* ── 封面图加载成功 → 设置 Observer ── */
     poster.addEventListener("load", function () {
-      if (!isManual) {
-        setupIntersection(state, container, video, poster, overlay, playBtn, info);
-      }
+      setupIntersection(state, container, video, poster, overlay, playBtn, info, isManual, updatePlayBtn);
       /* manual 模式：显示播放按钮，等待用户点击 */
       updatePlayBtn(false, false);
     });
 
     if (poster.complete && poster.naturalWidth > 0) {
-      if (!isManual) {
-        setupIntersection(state, container, video, poster, overlay, playBtn, info);
-      }
+      setupIntersection(state, container, video, poster, overlay, playBtn, info, isManual, updatePlayBtn);
       /* manual 模式：显示播放按钮 */
       updatePlayBtn(false, false);
     }
@@ -292,23 +288,29 @@
   function doPause(video, state) {
     if (state.isPlaying) {
       state.savedTime = video.currentTime;
+      state.isPlaying = false;
       video.pause();
     }
   }
 
-  /* ── IntersectionObserver（仅 auto 模式使用） ── */
-  function setupIntersection(state, container, video, poster, overlay, playBtn, info) {
+  /* ── IntersectionObserver ── */
+  function setupIntersection(state, container, video, poster, overlay, playBtn, info, isManual, updateBtnFn) {
     if (state.observer) return;
+    var ROOT_MARGIN = "-20% 0px -20% 0px";
     var PLAY_THRESHOLD = 0.3;
-    var PAUSE_THRESHOLD = 0.3;
 
     state.observer = new IntersectionObserver(
       function (entries) {
         var entry = entries[0];
-        if (!entry.isIntersecting) {
-          /* 不可见 → 暂停 */
+        var ratio = entry.intersectionRatio;
+
+        /* ratio===0: 快速滚过且容器短小的情况 */
+        if (!entry.isIntersecting || ratio === 0) {
           if (state.isPlaying) {
-            doPause(video, state);
+            state.savedTime = video.currentTime;
+            video.pause();
+            /* pause 事件会导致 state.isPlaying=false，显式更新播放按钮 */
+            if (typeof updateBtnFn === 'function') updateBtnFn(false, video.ended);
           }
           if (state.crossfadeTimer) {
             clearTimeout(state.crossfadeTimer);
@@ -317,27 +319,22 @@
           return;
         }
 
-        var ratio = entry.intersectionRatio;
+        if (isManual) {
+          /* manual 模式：仅用于暂停检测，不自动播放 */
+          return;
+        }
 
         if (ratio >= PLAY_THRESHOLD && !state.isPlaying && !state.failed && !state.userPaused) {
-          /* 可见 → 1.5s 后自动播放 */
           if (state.crossfadeTimer) clearTimeout(state.crossfadeTimer);
           state.crossfadeTimer = setTimeout(function () {
             state.userPaused = false;
             attemptAutoPlay(state, video, poster, overlay, playBtn, info);
           }, CROSSFADE_MS);
-        } else if (ratio <= PAUSE_THRESHOLD) {
-          if (state.isPlaying) {
-            doPause(video, state);
-          }
-          if (state.crossfadeTimer) {
-            clearTimeout(state.crossfadeTimer);
-            state.crossfadeTimer = null;
-          }
         }
       },
       {
-        threshold: [PAUSE_THRESHOLD, PLAY_THRESHOLD, 0.5, 0.8, 1.0],
+        rootMargin: ROOT_MARGIN,
+        threshold: [0, 0.3, 0.5, 0.8, 1.0],
       }
     );
 
