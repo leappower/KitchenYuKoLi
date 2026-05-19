@@ -134,6 +134,10 @@
       /* 互斥：暂停其他视频 */
       pauseAllExcept(state);
 
+      /* 确保视频可见（crossfadeToPoster 可能设了 display:none） */
+      video.style.display = "";
+      video.style.opacity = "1";
+
       /* 播放 */
       video.muted = state.isMuted;
 
