@@ -448,7 +448,7 @@
           '" data-value="' +
           f.options[i] +
           '" class="case-filter-btn px-3 py-1.5 text-xs font-semibold rounded-full border transition-all border-slate-300 dark:border-slate-600 text-slate-600 dark:text-slate-300 hover:border-primary hover:text-primary">' +
-          f.options[i] +
+          ti(f.options[i]) +
           "</button>";
       }
       html += "</div></div>";
@@ -496,7 +496,7 @@
           '" data-value="' +
           f.options[i] +
           '" class="case-filter-btn px-3 py-1.5 text-xs font-semibold rounded-full border transition-all border-slate-300 dark:border-slate-600 text-slate-600 dark:text-slate-300 hover:border-primary hover:text-primary">' +
-          f.options[i] +
+          ti(f.options[i]) +
           "</button>";
       }
       html += "</div></div>";
@@ -541,7 +541,7 @@
         " background-repeat: no-repeat; background-position: right 8px center; padding-right: 28px;'>";
       html += '<option value="">' + f.label + "</option>";
       for (var i = 0; i < f.options.length; i++) {
-        html += '<option value="' + f.options[i] + '">' + f.options[i] + "</option>";
+        html += '<option value="' + f.options[i] + '">' + ti(f.options[i]) + "</option>";
       }
       html += "</select>";
     }
