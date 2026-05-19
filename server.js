@@ -368,7 +368,11 @@ function resolvePage(reqPath) {
     if (isFile(candidates[i])) return candidates[i];
   }
 
-  // 6. SPA shell
+  // 6. 404 page — return 404.html for non-asset, non-API, non-spa routes
+  var f404 = path.join(__dirname, 'dist', '404.html');
+  if (isFile(f404)) return f404;
+
+  // 7. SPA shell (fallback)
   return path.join(__dirname, 'dist', 'index.html');
 }
 
@@ -440,7 +444,9 @@ const server = app.listen(PORT, (err) => {
     const httpsServer = https.createServer(sslOptions, app);
     httpsServer.listen(SSL_PORT, (err) => {
       if (err) { console.error('Failed to start HTTPS server:', err); return; }
-      console.log(`🔒 HTTPS running on https://192.168.3.180:${SSL_PORT}`);
+      const nets = require('os').networkInterfaces();
+      const localIp = Object.values(nets).flat().find(i => i.family === 'IPv4' && !i.internal)?.address || 'localhost';
+      console.log(`🔒 HTTPS running on https://${localIp}:${SSL_PORT}`);
     });
   }
 });

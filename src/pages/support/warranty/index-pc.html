@@ -106,8 +106,16 @@
           preload="metadata"
           muted
           playsinline
-          loop
+          loop controlsList="nodownload" disableRemotePlayback
         ></video>
+        <div class="hero-video-overlay">
+        <button class="hero-video-mute" aria-label="Toggle mute" data-i18n-aria="aria_toggle_mute">
+        <span class="material-symbols-outlined text-white text-xl">volume_off</span>
+        </button>
+        </div>
+        <button class="hero-video-fallback-btn" aria-label="Play video" data-i18n-aria="aria_play_video">
+        <span class="material-symbols-outlined text-white text-3xl">play_circle</span>
+        </button>
         <img class="hero-video-poster w-full h-full object-cover" src="/assets/images/support-hero-warranty.webp" alt="YuKoLi engineer performing quality inspection on commercial kitchen equipment" style="position:absolute; inset:0;" />
         <div class="absolute bottom-6 left-6 bg-white/90 dark:bg-slate-900/90 backdrop-blur p-5 rounded-2xl shadow-xl border border-slate-100 dark:border-slate-800 w-[200px]">
           <div class="flex items-center gap-3 mb-1">
@@ -480,6 +488,8 @@
     <div>
       <div class="w-full bg-slate-900 rounded-[3rem] p-12 md:p-20 text-center flex flex-col items-center gap-8 relative overflow-hidden">
         <div class="absolute top-0 right-0 w-64 h-64 bg-primary/10 blur-[100px] rounded-full"></div>
+        <div class="hero-video-info">
+
         <div class="absolute bottom-0 left-0 w-96 h-96 bg-primary/5 blur-[120px] rounded-full"></div>
         <h2 class="text-4xl md:text-5xl font-black text-white leading-tight" data-i18n="support_warranty_cta_title">
                   Equipment needs warranty or maintenance service?
@@ -494,6 +504,8 @@
           <a href="https://wa.me/8613163756465" data-wa-message-key="wa_msg_support_warranty" data-wa-source="bottom-cta" target="_blank" rel="noopener noreferrer" class="bg-white/10 text-white border border-white/20 backdrop-blur-sm px-10 py-5 rounded-2xl font-black text-lg hover:bg-white/20 transition-colors" data-i18n="support_warranty_cta_secondary" >
             WhatsApp
           </a>
+
+        </div>
         </div>
       </div>
     </div>
@@ -547,23 +559,23 @@
 
 <script src="/assets/js/ui/dropdown-styles.js"></script>
     <script src="/assets/js/ui/dropdown-base.js"></script>
-<script defer src="/assets/js/ui/products-dropdown.js?v=202605191406"></script>
-<script defer src="/assets/js/ui/applications-dropdown.js?v=202605191406"></script>
-<script defer src="/assets/js/ui/support-dropdown.js?v=202605191406"></script>
-<script defer src="/assets/js/ui/about-dropdown.js?v=202605191406"></script>
-    <script defer src="/assets/js/ui/navigator.js?v=202605191406"></script>
-<script defer src="/assets/js/ui/slide-menu.js?v=202605191406"></script>
+<script defer src="/assets/js/ui/products-dropdown.js?v=202605191418"></script>
+<script defer src="/assets/js/ui/applications-dropdown.js?v=202605191418"></script>
+<script defer src="/assets/js/ui/support-dropdown.js?v=202605191418"></script>
+<script defer src="/assets/js/ui/about-dropdown.js?v=202605191418"></script>
+    <script defer src="/assets/js/ui/navigator.js?v=202605191418"></script>
+<script defer src="/assets/js/ui/slide-menu.js?v=202605191418"></script>
 <script defer src="/assets/js/ui/search-engine.js"></script>
-<script defer src="/assets/js/ui/footer.js?v=202605191406"></script>
-<script defer src="/assets/js/lang-registry.js?v=202605191406"></script>
-<script defer src="/assets/js/translations.js?v=202605191406"></script>
-<script defer src="/assets/js/translations-dropdown-template.js?v=202605191406"></script>
+<script defer src="/assets/js/ui/footer.js?v=202605191418"></script>
+<script defer src="/assets/js/lang-registry.js?v=202605191418"></script>
+<script defer src="/assets/js/translations.js?v=202605191418"></script>
+<script defer src="/assets/js/translations-dropdown-template.js?v=202605191418"></script>
 <script defer src="/assets/js/contacts.js"></script>
 <script defer src="/assets/js/router.js"></script>
     <script defer src="/assets/js/ui/page-effects.js"></script>
     <script defer src="/assets/js/ui/form-interactions.js"></script>
 <script defer src="/assets/js/page-interactions.js"></script><script src="/assets/js/utils/device-utils.js"></script>
-<script src="/assets/js/spa-router.js?v=202605191406"></script>
+<script src="/assets/js/spa-router.js?v=202605191418"></script>
 
     <script defer src="/assets/js/ui/floating-actions.js"></script>
     <script src="/assets/js/ui/hero-video.js"></script>
