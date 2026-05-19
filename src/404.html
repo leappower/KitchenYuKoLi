@@ -1,124 +1,206 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="zh-CN">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>404 — Page Not Found | YuKoLi</title>
-  <link rel="canonical" href="https://www.kitchen.yukoli.com/"/>
-  <meta name="robots" content="noindex">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>404 — Page Not Found | YuKoLi</title>
+    <link rel="canonical" href="https://www.kitchen.yukoli.com/" />
+    <meta name="robots" content="noindex" />
 
-  <link rel="preload" href="/assets/fonts/local-fonts.css" as="style">
-  <link rel="preload" href="/assets/css/styles.css" as="style">
-  <link rel="preload" href="/assets/css/tailwind.css" as="style">
-  <link href="/assets/fonts/local-fonts.css" rel="stylesheet"/>
-  <link rel="stylesheet" href="/assets/css/styles.css">
-  <link rel="stylesheet" href="/assets/css/tailwind.css">
-  <link rel="stylesheet" href="/assets/css/z-index-system.css">
-  <link rel="stylesheet" href="/assets/css/performance-optimizations.css">
+    <link rel="preload" href="/assets/fonts/local-fonts.css" as="style" />
+    <link rel="preload" href="/assets/css/styles.css" as="style" />
+    <link rel="preload" href="/assets/css/tailwind.css" as="style" />
+    <link href="/assets/fonts/local-fonts.css" rel="stylesheet" />
+    <link rel="stylesheet" href="/assets/css/styles.css" />
+    <link rel="stylesheet" href="/assets/css/tailwind.css" />
+    <link rel="stylesheet" href="/assets/css/z-index-system.css" />
+    <link rel="stylesheet" href="/assets/css/performance-optimizations.css" />
 
-  <script>(function(){if(localStorage.getItem('darkMode')==='true')document.documentElement.classList.add('dark')})()</script>
-  <link rel="icon" href="/assets/images/logo.webp" type="image/webp">
+    <script>
+      (function () {
+        if (localStorage.getItem("darkMode") === "true") document.documentElement.classList.add("dark");
+      })();
+    </script>
+    <link rel="icon" href="/assets/images/logo.webp" type="image/webp" />
 
-  <style>
-    @keyframes float {
-      0%, 100% { transform: translateY(0px); }
-      50% { transform: translateY(-10px); }
-    }
-    .float-anim { animation: float 3s ease-in-out infinite; }
-    @keyframes pulse-ring {
-      0% { transform: scale(0.8); opacity: 0.6; }
-      100% { transform: scale(1.8); opacity: 0; }
-    }
-    .pulse-ring { animation: pulse-ring 2.5s ease-out infinite; }
-    @keyframes fade-up {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-    .fade-up { animation: fade-up 0.6s ease-out both; }
-    .fade-up-d1 { animation-delay: 0.1s; }
-    .fade-up-d2 { animation-delay: 0.2s; }
-    .fade-up-d3 { animation-delay: 0.3s; }
-    .fade-up-d4 { animation-delay: 0.4s; }
-  </style>
-</head>
-<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 antialiased transition-colors duration-300 min-h-screen flex flex-col overflow-x-clip">
+    <style>
+      @keyframes float {
+        0%,
+        100% {
+          transform: translateY(0px);
+        }
+        50% {
+          transform: translateY(-10px);
+        }
+      }
+      .float-anim {
+        animation: float 3s ease-in-out infinite;
+      }
+      @keyframes pulse-ring {
+        0% {
+          transform: scale(0.8);
+          opacity: 0.6;
+        }
+        100% {
+          transform: scale(1.8);
+          opacity: 0;
+        }
+      }
+      .pulse-ring {
+        animation: pulse-ring 2.5s ease-out infinite;
+      }
+      @keyframes fade-up {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      .fade-up {
+        animation: fade-up 0.6s ease-out both;
+      }
+      .fade-up-d1 {
+        animation-delay: 0.1s;
+      }
+      .fade-up-d2 {
+        animation-delay: 0.2s;
+      }
+      .fade-up-d3 {
+        animation-delay: 0.3s;
+      }
+      .fade-up-d4 {
+        animation-delay: 0.4s;
+      }
+    </style>
+  </head>
+  <body
+    class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 antialiased transition-colors duration-300 min-h-screen flex flex-col overflow-x-clip"
+  >
+    <!-- Navigator -->
+    <navigator
+      data-component="navigator"
+      data-variant="pc"
+      data-active=""
+      data-cta-text-key="nav_get_quote"
+      data-cta-href="/quote"
+    ></navigator>
 
-  <!-- Navigator -->
-  <navigator data-component="navigator" data-variant="pc" data-active="" data-cta-text-key="nav_get_quote" data-cta-href="/quote"></navigator>
+    <!-- 404 Content -->
+    <main class="flex-1 flex items-center justify-center px-4 sm:px-6 lg:px-8 py-12 sm:py-20 lg:py-24">
+      <div class="max-w-2xl mx-auto text-center">
+        <!-- Animated 404 Graphic -->
+        <div class="relative flex items-center justify-center h-36 sm:h-44 lg:h-48 mb-8 sm:mb-10 fade-up">
+          <!-- Pulse rings -->
+          <div class="absolute w-32 h-32 sm:w-40 sm:h-40 rounded-full border-2 border-primary/20 pulse-ring"></div>
+          <div
+            class="absolute w-32 h-32 sm:w-40 sm:h-40 rounded-full border-2 border-primary/10 pulse-ring"
+            style="animation-delay: 0.8s"
+          ></div>
+          <!-- Icon -->
+          <div class="float-anim relative z-10">
+            <img src="/assets/images/logo.webp" alt="YuKoLi Logo" class="w-28 h-28 sm:w-32 sm:h-32 object-contain" />
+          </div>
+        </div>
 
-  <!-- 404 Content -->
-  <main class="flex-1 flex items-center justify-center px-4 sm:px-6 lg:px-8 py-12 sm:py-20 lg:py-24">
-    <div class="max-w-2xl mx-auto text-center">
+        <!-- Text -->
+        <div class="space-y-3 sm:space-y-4 mb-8 sm:mb-10">
+          <div
+            class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-bold uppercase tracking-widest fade-up fade-up-d1"
+          >
+            <span class="material-symbols-outlined text-sm">error</span>
+            <span data-i18n="error_404_badge">Error 404</span>
+          </div>
+          <h1 class="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight leading-tight fade-up fade-up-d1">
+            Page Not
+            <span class="text-primary">Found</span>
+          </h1>
+          <p
+            class="text-base sm:text-lg text-slate-500 dark:text-slate-400 max-w-md mx-auto leading-relaxed fade-up fade-up-d2"
+            data-i18n="error_404_desc"
+          >
+            The page you're looking for doesn't exist or has been moved. Let's get you back on track.
+          </p>
+        </div>
 
-      <!-- Animated 404 Graphic -->
-      <div class="relative flex items-center justify-center h-36 sm:h-44 lg:h-48 mb-8 sm:mb-10 fade-up">
-        <!-- Pulse rings -->
-        <div class="absolute w-32 h-32 sm:w-40 sm:h-40 rounded-full border-2 border-primary/20 pulse-ring"></div>
-        <div class="absolute w-32 h-32 sm:w-40 sm:h-40 rounded-full border-2 border-primary/10 pulse-ring" style="animation-delay: 0.8s;"></div>
-        <!-- Icon -->
-        <div class="float-anim relative z-10">
-          <img src="/assets/images/logo.webp" alt="YuKoLi Logo" class="w-28 h-28 sm:w-32 sm:h-32 object-contain" />
+        <!-- Navigation Buttons -->
+        <div class="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center mb-8 sm:mb-10 fade-up fade-up-d3">
+          <a
+            href="/home/"
+            class="bg-primary text-white px-6 sm:px-8 py-3.5 sm:py-4 rounded-xl font-bold text-sm sm:text-base flex items-center justify-center gap-2 hover:shadow-lg hover:shadow-primary/20 transition-all"
+          >
+            <span class="material-symbols-outlined text-lg">home</span>
+            <span data-i18n="nav_home">Go to Homepage</span>
+          </a>
+          <a
+            href="/products/"
+            class="border-2 border-slate-200 dark:border-slate-700 px-6 sm:px-8 py-3.5 sm:py-4 rounded-xl font-bold text-sm sm:text-base flex items-center justify-center gap-2 hover:bg-slate-50 dark:hover:bg-slate-800 transition-all"
+          >
+            <span class="material-symbols-outlined text-lg">inventory_2</span>
+            <span data-i18n="nav_hardware">Browse Products</span>
+          </a>
+        </div>
+
+        <!-- Quick Links -->
+        <div class="pt-6 sm:pt-8 border-t border-slate-200 dark:border-slate-800 fade-up fade-up-d4">
+          <p
+            class="text-xs text-slate-400 mb-3 sm:mb-4 font-semibold uppercase tracking-widest"
+            data-i18n="error_404_quick_links"
+          >
+            Quick Links
+          </p>
+          <div class="flex flex-wrap gap-x-3 gap-y-2 sm:gap-x-4 justify-center">
+            <a
+              href="/cases/"
+              class="text-sm text-slate-600 dark:text-slate-400 hover:text-primary transition-colors font-medium"
+              data-i18n="nav_cases"
+            >
+              Case Studies
+            </a>
+            <span class="text-slate-300 dark:text-slate-700 hidden sm:inline">·</span>
+            <a
+              href="/support/"
+              class="text-sm text-slate-600 dark:text-slate-400 hover:text-primary transition-colors font-medium"
+              data-i18n="nav_support"
+            >
+              Support
+            </a>
+            <span class="text-slate-300 dark:text-slate-700 hidden sm:inline">·</span>
+            <a
+              href="/profit-calculator/"
+              class="text-sm text-slate-600 dark:text-slate-400 hover:text-primary transition-colors font-medium"
+              data-i18n="cases_hero_cta"
+            >
+              ROI
+            </a>
+            <span class="text-slate-300 dark:text-slate-700 hidden sm:inline">·</span>
+            <a
+              href="/quote/"
+              class="text-sm text-slate-600 dark:text-slate-400 hover:text-primary transition-colors font-medium"
+              data-i18n="nav_get_quote"
+            >
+              Get a Quote
+            </a>
+          </div>
         </div>
       </div>
+    </main>
 
-      <!-- Text -->
-      <div class="space-y-3 sm:space-y-4 mb-8 sm:mb-10">
-        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-bold uppercase tracking-widest fade-up fade-up-d1">
-          <span class="material-symbols-outlined text-sm">error</span>
-          <span data-i18n="error_404_badge">Error 404</span>
-        </div>
-        <h1 class="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight leading-tight fade-up fade-up-d1">
-          Page Not <span class="text-primary">Found</span>
-        </h1>
-        <p class="text-base sm:text-lg text-slate-500 dark:text-slate-400 max-w-md mx-auto leading-relaxed fade-up fade-up-d2" data-i18n="error_404_desc">
-          The page you're looking for doesn't exist or has been moved. Let's get you back on track.
-        </p>
-      </div>
+    <!-- Footer -->
+    <footer data-component="footer" data-variant="pc" data-cta="true"></footer>
 
-      <!-- Navigation Buttons -->
-      <div class="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center mb-8 sm:mb-10 fade-up fade-up-d3">
-        <a href="/home/"
-           class="bg-primary text-white px-6 sm:px-8 py-3.5 sm:py-4 rounded-xl font-bold text-sm sm:text-base flex items-center justify-center gap-2 hover:shadow-lg hover:shadow-primary/20 transition-all">
-          <span class="material-symbols-outlined text-lg">home</span>
-          <span data-i18n="nav_home">Go to Homepage</span>
-        </a>
-        <a href="/products/"
-           class="border-2 border-slate-200 dark:border-slate-700 px-6 sm:px-8 py-3.5 sm:py-4 rounded-xl font-bold text-sm sm:text-base flex items-center justify-center gap-2 hover:bg-slate-50 dark:hover:bg-slate-800 transition-all">
-          <span class="material-symbols-outlined text-lg">inventory_2</span>
-          <span data-i18n="nav_hardware">Browse Products</span>
-        </a>
-      </div>
-
-      <!-- Quick Links -->
-      <div class="pt-6 sm:pt-8 border-t border-slate-200 dark:border-slate-800 fade-up fade-up-d4">
-        <p class="text-xs text-slate-400 mb-3 sm:mb-4 font-semibold uppercase tracking-widest" data-i18n="error_404_quick_links">Quick Links</p>
-        <div class="flex flex-wrap gap-x-3 gap-y-2 sm:gap-x-4 justify-center">
-          <a href="/cases/" class="text-sm text-slate-600 dark:text-slate-400 hover:text-primary transition-colors font-medium" data-i18n="nav_cases">Case Studies</a>
-          <span class="text-slate-300 dark:text-slate-700 hidden sm:inline">·</span>
-          <a href="/support/" class="text-sm text-slate-600 dark:text-slate-400 hover:text-primary transition-colors font-medium" data-i18n="nav_support">Support</a>
-          <span class="text-slate-300 dark:text-slate-700 hidden sm:inline">·</span>
-          <a href="/profit-calculator/" class="text-sm text-slate-600 dark:text-slate-400 hover:text-primary transition-colors font-medium" data-i18n="cases_hero_cta">ROI Calculator</a>
-          <span class="text-slate-300 dark:text-slate-700 hidden sm:inline">·</span>
-          <a href="/quote/" class="text-sm text-slate-600 dark:text-slate-400 hover:text-primary transition-colors font-medium" data-i18n="nav_get_quote">Get a Quote</a>
-        </div>
-      </div>
-
-    </div>
-  </main>
-
-  <!-- Footer -->
-  <footer data-component="footer" data-variant="pc" data-cta="true"></footer>
-
-  <!-- Scripts -->
-  <script src="/assets/js/ui/dropdown-styles.js"></script>
-  <script src="/assets/js/ui/dropdown-base.js"></script>
-  <script defer src="/assets/js/ui/products-dropdown.js"></script>
-  <script defer src="/assets/js/ui/support-dropdown.js"></script>
-  <script defer src="/assets/js/ui/about-dropdown.js"></script>
-  <script defer src="/assets/js/ui/navigator.js"></script>
-  <script defer src="/assets/js/ui/slide-menu.js"></script>
-  <script defer src="/assets/js/ui/footer.js"></script>
-  <script defer src="/assets/js/translations.js"></script>
-  <script defer src="/assets/js/ui/floating-actions.js"></script>
-</body>
+    <!-- Scripts -->
+    <script src="/assets/js/ui/dropdown-styles.js"></script>
+    <script src="/assets/js/ui/dropdown-base.js"></script>
+    <script defer src="/assets/js/ui/products-dropdown.js"></script>
+    <script defer src="/assets/js/ui/support-dropdown.js"></script>
+    <script defer src="/assets/js/ui/about-dropdown.js"></script>
+    <script defer src="/assets/js/ui/navigator.js"></script>
+    <script defer src="/assets/js/ui/slide-menu.js"></script>
+    <script defer src="/assets/js/ui/footer.js"></script>
+    <script defer src="/assets/js/translations.js"></script>
+    <script defer src="/assets/js/ui/floating-actions.js"></script>
+  </body>
 </html>

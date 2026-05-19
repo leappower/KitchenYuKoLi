@@ -60,7 +60,7 @@
     "/applications/canteen/": window.t("nav_applications_canteen", "Canteen"),
     "/applications/menu-lab/": window.t("nav_applications_menu_lab", "Menu Lab"),
     "/applications/cloud-kitchen/": window.t("nav_applications_cloud_kitchen", "Cloud Kitchen"),
-    "/profit-calculator/": window.t("nav_roi", "ROI Calculator"),
+    "/profit-calculator/": window.t("nav_roi", "ROI"),
     "/cases/": window.t("nav_cases", "Case Studies"),
   };
 

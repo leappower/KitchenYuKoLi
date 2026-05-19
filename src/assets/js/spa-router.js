@@ -523,7 +523,7 @@
           '<span class="text-slate-300 dark:text-slate-700 hidden sm:inline">·</span>' +
           '<a href="/support/" class="text-sm text-slate-600 dark:text-slate-400 hover:text-primary transition-colors font-medium">Support</a>' +
           '<span class="text-slate-300 dark:text-slate-700 hidden sm:inline">·</span>' +
-          '<a href="/profit-calculator/" class="text-sm text-slate-600 dark:text-slate-400 hover:text-primary transition-colors font-medium">ROI Calculator</a>' +
+          '<a href="/profit-calculator/" class="text-sm text-slate-600 dark:text-slate-400 hover:text-primary transition-colors font-medium">ROI</a>' +
           '<span class="text-slate-300 dark:text-slate-700 hidden sm:inline">·</span>' +
           '<a href="/quote/" class="text-sm text-slate-600 dark:text-slate-400 hover:text-primary transition-colors font-medium">Get a Quote</a>' +
           "</div></div>" +

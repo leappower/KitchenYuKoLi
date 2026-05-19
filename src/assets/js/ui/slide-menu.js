@@ -512,7 +512,7 @@
       },
       {
         key: "nav_roi",
-        label: window.t("nav_roi", "ROI Calculator"),
+        label: window.t("nav_roi", "ROI"),
         href: "/profit-calculator/",
         id: "profit-calculator",
         icon: "calculate",

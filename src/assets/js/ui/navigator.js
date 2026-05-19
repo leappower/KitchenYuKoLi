@@ -64,7 +64,7 @@
     },
     {
       key: "nav_roi",
-      label: _t("nav_roi", "ROI Calculator"),
+      label: _t("nav_roi", "ROI"),
       path: "/profit-calculator/",
       id: "profit-calculator",
       hasDropdown: false,
