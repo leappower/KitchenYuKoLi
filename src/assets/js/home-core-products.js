@@ -338,7 +338,7 @@
         container.innerHTML =
           '<div class="text-center text-slate-400 py-6">' +
           escHtml(
-            typeof window.t === "function" ? window.t("no_core_products_data", "暂无核心产品数据") : "暂无核心产品数据"
+            tl("no_core_products_data", "暂无核心产品数据")
           ) +
           "</div>";
         return;
@@ -417,7 +417,7 @@
         container.innerHTML =
           '<div class="text-center text-slate-400 py-4">' +
           escHtml(
-            typeof window.t === "function" ? window.t("no_core_products_data", "暂无核心产品数据") : "暂无核心产品数据"
+            tl("no_core_products_data", "暂无核心产品数据")
           ) +
           "</div>";
         return;

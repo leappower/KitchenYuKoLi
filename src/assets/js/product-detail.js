@@ -283,7 +283,7 @@
         '<div class="max-w-7xl mx-auto px-4 pt-3 pb-0 md:hidden">' +
         '<div class="flex items-center gap-3">' +
         '<button onclick="window.Breadcrumb&&window.Breadcrumb.goBack()" class="flex items-center justify-center w-9 h-9 rounded-full bg-slate-100 dark:bg-slate-800 hover:bg-primary hover:text-white text-slate-600 dark:text-slate-400 transition-all" aria-label="' +
-        tl("pd_back", "Back") +
+        tl("pd_back", "返回") +
         '">' +
         '<span class="material-symbols-outlined text-xl">arrow_back</span></button>' +
         '<div><div class="text-xs text-slate-500 dark:text-slate-400">' +

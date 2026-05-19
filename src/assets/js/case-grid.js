@@ -6,6 +6,15 @@
 (function () {
   "use strict";
 
+  /* ── i18n helper ─── */
+  function tl(key, fallback) {
+    if (typeof window.t === "function") {
+      var result = window.t(key);
+      if (result && result !== key) return result;
+    }
+    return fallback || key;
+  }
+
   /* ── Mock Data ──────────────────────────────────── */
   var ROI_CASES = [
     {
@@ -250,7 +259,7 @@
       "</h3>" +
       '<div class="flex flex-wrap items-center gap-x-3 gap-y-1 text-sm text-slate-500 dark:text-slate-400">' +
       '<span class="flex items-center gap-1"><span class="material-symbols-outlined text-base">storefront</span>' +
-      c.industry +
+      ti(c.industry) +
       "</span>" +
       '<span class="text-slate-300 dark:text-slate-600">·</span>' +
       '<span class="flex items-center gap-1"><span class="material-symbols-outlined text-base">restaurant</span>' +
@@ -300,7 +309,7 @@
       "</div>" +
       "</div>" +
       '<span class="inline-flex items-center gap-1 text-primary font-bold text-sm group-hover:gap-2 transition-all mt-auto pt-1">' +
-      '<span data-i18n="cases_read_story">查看详情</span>' +
+      '<span data-i18n="cases_read_story">' + tl("casegrid_read_story", "查看详情") + '</span>' +
       '<span class="material-symbols-outlined text-base">arrow_forward</span>' +
       "</span>" +
       "</div>" +
@@ -323,9 +332,9 @@
       "<span>" +
       c.country +
       " · " +
-      tOr("cases_industry_" + c.slug, c.industry) +
+      ti(c.industry) +
       "</span>" +
-      'span class="font-semibold text-slate-700 dark:text-slate-200">' +
+      '<span class="font-semibold text-slate-700 dark:text-slate-200">' +
       c.dailyOutput +
       tl("casegrid_meals_per_day", " 餐/天") +
       "</div>" +
@@ -357,7 +366,7 @@
       c.quote +
       "</p>" +
       '<span class="inline-flex items-center gap-1 text-primary font-bold text-sm">' +
-      '<span data-i18n="cases_read_more">阅读更多</span>' +
+      '<span data-i18n="cases_read_more">' + tl("casegrid_read_more", "阅读更多") + '</span>' +
       '<span class="material-symbols-outlined text-base">arrow_forward</span>' +
       "</span>" +
       "</div>" +
@@ -458,7 +467,7 @@
     var html =
       '<button id="case-filter-toggle" class="flex items-center gap-2 px-4 py-2 rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-sm font-semibold shadow-sm hover:shadow-md transition-all">' +
       '<span class="material-symbols-outlined text-primary">tune</span>' +
-      '<span data-i18n="cases_filter_toggle">筛选案例</span>' +
+      '<span data-i18n="cases_filter_toggle">' + tl("casegrid_filter_toggle", "筛选案例") + '</span>' +
       '<span id="case-count" class="ml-1 bg-primary/10 text-primary px-2 py-0.5 rounded-full text-xs font-bold">8</span>' +
       '<span class="material-symbols-outlined ml-auto transition-transform" id="case-filter-arrow">expand_more</span>' +
       "</button>" +
