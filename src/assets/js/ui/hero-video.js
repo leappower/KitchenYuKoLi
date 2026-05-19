@@ -333,6 +333,10 @@
     });
 
     video.addEventListener("ended", function () {
+      /* loop 视频自动重播，不 crossfade 回 poster */
+      if (video.loop) {
+        return;
+      }
       state.isPlaying = false;
       state.hasStarted = false;
       state.pausedByScroll = false;
