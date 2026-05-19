@@ -729,8 +729,8 @@
   "compare_go_to_products": "Go to Products",
   "compare_go_to_products_mobile": "Go to Products",
   "compare_not_sure": "Not Sure Which to Choose?",
-  "compare_select_empty": "Select products on product page first.",
-  "compare_select_empty_mobile": "Select 2–3 products from product page.",
+  "compare_select_empty": "اختر أولاً <a href=\"/products/\" class=\"text-primary font-bold hover:underline\">2-3 منتجات</a> لعرض <span class=\"font-semibold\">معلمات المقارنة</span>. الاختلافات <span class=\"text-orange-500 font-semibold\">مميزة باللون البرتقالي</span>.",
+  "compare_select_empty_mobile": "اختر <a href=\"/products/\" class=\"text-primary font-bold hover:underline\">2-3 منتجات</a> للمقارنة.",
   "compare_select_hint": "Select 2–3 products to compare side-by-side.",
   "compare_select_hint_mobile": "Select 2–3 products, compare parameters.",
   "compare_title": "Product Comparison",
@@ -2385,5 +2385,6 @@
   "training_step_4_title": "التقييم والشهادة",
   "training_step_5_desc": "دعم عبر الإنترنت بعد التدريب مع تحديثات منتظمة للدورات والتقنيات الجديدة",
   "training_step_5_title": "دعم مستمر",
-  "ty_meta_title": "YuKoLi | Submission Received"
+  "ty_meta_title": "YuKoLi | Submission Received",
+  "compare_title_label": "مقارنة المنتجات"
 }

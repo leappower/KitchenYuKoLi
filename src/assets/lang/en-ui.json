@@ -770,8 +770,8 @@
   "compare_row_tier": "Tier",
   "compare_row_voltage": "Voltage",
   "compare_row_weight": "Net Weight",
-  "compare_select_empty": "Select products on product page first.",
-  "compare_select_empty_mobile": "Select 2–3 products from product page.",
+  "compare_select_empty": "Select <a href=\"/products/\" class=\"text-primary font-bold hover:underline\">2–3 products</a> first to view <span class=\"font-semibold\">Compare Parameters</span>. Differences are <span class=\"text-orange-500 font-semibold\">highlighted in orange</span>.",
+  "compare_select_empty_mobile": "Select <a href=\"/products/\" class=\"text-primary font-bold hover:underline\">2–3 products</a> to compare.",
   "compare_select_hint": "Select 2–3 products to compare side-by-side.",
   "compare_select_hint_mobile": "Select 2–3 products, compare parameters.",
   "compare_selected_count": "Selected",
@@ -2640,5 +2640,6 @@
   "support_spare_parts_sol_1": "Over 60% of common faults can be resolved remotely — here's how",
   "support_spare_parts_hero_1": "CE / ISO / ROHS Certified",
   "products_compare_hint": "Select up to 3 products to compare specifications side by side.",
-  "cloud_kitchen_hero_story": "4 people guard one station, 5 brands share an 80㎡ kitchen — every minute of equipment switching and scheduling determines whether the lunch rush causes timeout and lost orders."
+  "cloud_kitchen_hero_story": "4 people guard one station, 5 brands share an 80㎡ kitchen — every minute of equipment switching and scheduling determines whether the lunch rush causes timeout and lost orders.",
+  "compare_title_label": "Product Comparison"
 }

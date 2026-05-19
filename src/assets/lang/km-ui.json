@@ -729,8 +729,8 @@
   "compare_go_to_products": "Go to Products",
   "compare_go_to_products_mobile": "Go to Products",
   "compare_not_sure": "Not Sure Which to Choose?",
-  "compare_select_empty": "Select products on product page first.",
-  "compare_select_empty_mobile": "Select 2–3 products from product page.",
+  "compare_select_empty": "សូមជ្រើសរើស<a href=\"/products/\" class=\"text-primary font-bold hover:underline\">ផលិតផល 2-3</a> ជាមុន ដើម្បីមើល <span class=\"font-semibold\">ប៉ារ៉ាម៉ែត្រប្រៀបធៀប</span>។ ភាពខុសគ្នាត្រូវបាន<span class=\"text-orange-500 font-semibold\">បន្លិចពណ៌ទឹកក្រូច</span>។",
+  "compare_select_empty_mobile": "ជ្រើសរើស<a href=\"/products/\" class=\"text-primary font-bold hover:underline\">ផលិតផល 2-3</a>ដើម្បីប្រៀបធៀប។",
   "compare_select_hint": "Select 2–3 products to compare side-by-side.",
   "compare_select_hint_mobile": "Select 2–3 products, compare parameters.",
   "compare_title": "Product Comparison",
@@ -2385,5 +2385,6 @@
   "training_step_4_title": "评估与认证",
   "training_step_5_desc": "培训后在线支持，定期更新新课程和技术",
   "training_step_5_title": "持续支持",
-  "ty_meta_title": "YuKoLi | Submission Received"
+  "ty_meta_title": "YuKoLi | Submission Received",
+  "compare_title_label": "ប្រៀបធៀបផលិតផល"
 }

@@ -738,8 +738,8 @@
   "compare_go_to_products": "Go to Products",
   "compare_go_to_products_mobile": "Go to Products",
   "compare_not_sure": "Not Sure Which to Choose?",
-  "compare_select_empty": "Select products on product page first.",
-  "compare_select_empty_mobile": "Select 2–3 products from product page.",
+  "compare_select_empty": "Wybierz najpierw <a href=\"/products/\" class=\"text-primary font-bold hover:underline\">2–3 produkty</a>, aby zobaczyć <span class=\"font-semibold\">Parametry Porównania</span>. Różnice są <span class=\"text-orange-500 font-semibold\">wyróżnione na pomarańczowo</span>.",
+  "compare_select_empty_mobile": "Wybierz <a href=\"/products/\" class=\"text-primary font-bold hover:underline\">2–3 produkty</a> do porównania.",
   "compare_select_hint": "Select 2–3 products to compare side-by-side.",
   "compare_select_hint_mobile": "Select 2–3 products, compare parameters.",
   "compare_title": "Product Comparison",
@@ -2394,5 +2394,6 @@
   "training_step_4_title": "Egzamin i certyfikacja",
   "training_step_5_desc": "Ciągłe wsparcie online po szkoleniu, regularne aktualizacje nowych kursów i wskazówek obsługi",
   "training_step_5_title": "Ciągłe wsparcie",
-  "ty_meta_title": "YuKoLi | Submission Received"
+  "ty_meta_title": "YuKoLi | Submission Received",
+  "compare_title_label": "Porównanie Produktów"
 }

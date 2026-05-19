@@ -729,8 +729,8 @@
   "compare_go_to_products": "Go to Products",
   "compare_go_to_products_mobile": "Go to Products",
   "compare_not_sure": "Not Sure Which to Choose?",
-  "compare_select_empty": "Select products on product page first.",
-  "compare_select_empty_mobile": "Select 2–3 products from product page.",
+  "compare_select_empty": "Pilih <a href=\"/products/\" class=\"text-primary font-bold hover:underline\">2–3 produk</a> terlebih dahulu untuk melihat <span class=\"font-semibold\">Parameter Perbandingan</span>. Perbedaan ditandai dengan <span class=\"text-orange-500 font-semibold\">warna oranye</span>.",
+  "compare_select_empty_mobile": "Pilih <a href=\"/products/\" class=\"text-primary font-bold hover:underline\">2–3 produk</a> untuk dibandingkan.",
   "compare_select_hint": "Select 2–3 products to compare side-by-side.",
   "compare_select_hint_mobile": "Select 2–3 products, compare parameters.",
   "compare_title": "Product Comparison",
@@ -2385,5 +2385,6 @@
   "training_step_4_title": "Sertifikasi",
   "training_step_5_desc": "Dukungan online berkelanjutan, pembaruan kursus dan tips operasional rutin",
   "training_step_5_title": "Dukungan Berkelanjutan",
-  "ty_meta_title": "YuKoLi | Submission Received"
+  "ty_meta_title": "YuKoLi | Submission Received",
+  "compare_title_label": "Perbandingan Produk"
 }

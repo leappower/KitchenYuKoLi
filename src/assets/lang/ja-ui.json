@@ -729,8 +729,8 @@
   "compare_go_to_products": "Go to Products",
   "compare_go_to_products_mobile": "Go to Products",
   "compare_not_sure": "Not Sure Which to Choose?",
-  "compare_select_empty": "Select products on product page first.",
-  "compare_select_empty_mobile": "Select 2–3 products from product page.",
+  "compare_select_empty": "<a href=\"/products/\" class=\"text-primary font-bold hover:underline\">製品ページ</a>で2～3製品を選択すると、<span class=\"font-semibold\">比較パラメータ</span>が表示されます。<span class=\"text-orange-500 font-semibold\">オレンジ色</span>でハイライトされます。",
+  "compare_select_empty_mobile": "<a href=\"/products/\" class=\"text-primary font-bold hover:underline\">製品ページ</a>で2～3製品を選択してください。",
   "compare_select_hint": "Select 2–3 products to compare side-by-side.",
   "compare_select_hint_mobile": "Select 2–3 products, compare parameters.",
   "compare_title": "Product Comparison",
@@ -2385,5 +2385,6 @@
   "training_step_4_title": "評価認定",
   "training_step_5_desc": "トレーニング後のオンラインサポートと新コンテンツ提供",
   "training_step_5_title": "継続サポート",
-  "ty_meta_title": "YuKoLi | Submission Received"
+  "ty_meta_title": "YuKoLi | Submission Received",
+  "compare_title_label": "製品比較"
 }

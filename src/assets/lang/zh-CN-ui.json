@@ -770,8 +770,8 @@
   "compare_row_tier": "智能等级",
   "compare_row_voltage": "电压",
   "compare_row_weight": "净重",
-  "compare_select_empty": "请先在产品页选择 2~3 款产品，即可在此查看详细参数对比。不同参数会以橙色高亮标注。",
-  "compare_select_empty_mobile": "请先在产品页选择 2~3 款产品。",
+  "compare_select_empty": "请先在<a href=\"/products/\" class=\"text-primary font-bold hover:underline\">产品页</a>选择 2~3 款产品，即可在此查看详细<span class=\"font-semibold\">参数对比</span>。不同参数会以<span class=\"text-orange-500 font-semibold\">橙色高亮</span>标注。",
+  "compare_select_empty_mobile": "请先在<a href=\"/products/\" class=\"text-primary font-bold hover:underline\">产品页</a>选择 2~3 款产品。",
   "compare_select_hint": "选择最多 3 款产品，并排对比参数，找到最适合您厨房的设备。",
   "compare_select_hint_mobile": "选择最多 3 款产品，对比参数。",
   "compare_selected_count": "已选",
@@ -2640,5 +2640,6 @@
   "support_spare_parts_sol_1": "常见故障 60% 以上可远程解决，如何操作？",
   "support_spare_parts_hero_1": "CE / ISO / ROHS 认证",
   "products_compare_hint": "选择最多 3 款产品，并排对比参数。",
-  "cloud_kitchen_hero_story": "4个人守一个站点，5个品牌共享80㎡的厨房——设备切换和排程的每一分钟，都决定午高峰会不会超时掉单。"
+  "cloud_kitchen_hero_story": "4个人守一个站点，5个品牌共享80㎡的厨房——设备切换和排程的每一分钟，都决定午高峰会不会超时掉单。",
+  "compare_title_label": "选择产品对比"
 }

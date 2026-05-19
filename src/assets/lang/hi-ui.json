@@ -729,8 +729,8 @@
   "compare_go_to_products": "Go to Products",
   "compare_go_to_products_mobile": "Go to Products",
   "compare_not_sure": "Not Sure Which to Choose?",
-  "compare_select_empty": "Select products on product page first.",
-  "compare_select_empty_mobile": "Select 2–3 products from product page.",
+  "compare_select_empty": "पहले <a href=\"/products/\" class=\"text-primary font-bold hover:underline\">2-3 उत्पाद</a> चुनें, <span class=\"font-semibold\">तुलना पैरामीटर</span> देखने के लिए। अंतर <span class=\"text-orange-500 font-semibold\">ऑरेंज में हाइलाइट</span> किए गए हैं।",
+  "compare_select_empty_mobile": "<a href=\"/products/\" class=\"text-primary font-bold hover:underline\">2-3 उत्पाद</a> चुनें।",
   "compare_select_hint": "Select 2–3 products to compare side-by-side.",
   "compare_select_hint_mobile": "Select 2–3 products, compare parameters.",
   "compare_title": "Product Comparison",
@@ -2385,5 +2385,6 @@
   "training_step_4_title": "मूल्यांकन और प्रमाणन",
   "training_step_5_desc": "प्रशिक्षण के बाद निरंतर ऑनलाइन समर्थन, नियमित रूप से नए पाठ्यक्रम और संचालन तकनीकें प्रदान की जाती हैं",
   "training_step_5_title": "निरंतर समर्थन",
-  "ty_meta_title": "YuKoLi | Submission Received"
+  "ty_meta_title": "YuKoLi | Submission Received",
+  "compare_title_label": "उत्पाद तुलना"
 }

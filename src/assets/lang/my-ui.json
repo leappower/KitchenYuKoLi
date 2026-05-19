@@ -729,8 +729,8 @@
   "compare_go_to_products": "Go to Products",
   "compare_go_to_products_mobile": "Go to Products",
   "compare_not_sure": "Not Sure Which to Choose?",
-  "compare_select_empty": "Select products on product page first.",
-  "compare_select_empty_mobile": "Select 2–3 products from product page.",
+  "compare_select_empty": "<a href=\"/products/\" class=\"text-primary font-bold hover:underline\">2-3 ထုတ်ကုန်</a>ကို ရွေးချယ်ပြီး <span class=\"font-semibold\">နှုန်းခြင်းပြဿနာ</span> များကို ကြည့်ရန်။ ကွဲနေချက်များကို <span class=\"text-orange-500 font-semibold\">မြန်မာရောင်ဖြင့်</span> ဖော်ပြထားသည်။",
+  "compare_select_empty_mobile": "<a href=\"/products/\" class=\"text-primary font-bold hover:underline\">2-3 ထုတ်ကုန်</a> ရွေးချယ်ပါ။",
   "compare_select_hint": "Select 2–3 products to compare side-by-side.",
   "compare_select_hint_mobile": "Select 2–3 products, compare parameters.",
   "compare_title": "Product Comparison",
@@ -2385,5 +2385,6 @@
   "training_step_4_title": "TRANSLATE: Assessment & Certification",
   "training_step_5_desc": "TRANSLATE: Post-training online support with regular updates on new courses and techniques",
   "training_step_5_title": "TRANSLATE: Ongoing Support",
-  "ty_meta_title": "YuKoLi | Submission Received"
+  "ty_meta_title": "YuKoLi | Submission Received",
+  "compare_title_label": "ထုတ်ကုန်နှုန်းခြင်း"
 }

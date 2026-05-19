@@ -735,8 +735,8 @@
   "compare_go_to_products": "Go to Products",
   "compare_go_to_products_mobile": "Go to Products",
   "compare_not_sure": "Not Sure Which to Choose?",
-  "compare_select_empty": "Select products on product page first.",
-  "compare_select_empty_mobile": "Select 2–3 products from product page.",
+  "compare_select_empty": "ເລືອກ<a href=\"/products/\" class=\"text-primary font-bold hover:underline\">2-3 ສິນຄ້າ</a> ກ່ອນ ເພື່ອເບິ່ງ <span class=\"font-semibold\">ພາຣາມິເຕີປຽບທຽບ</span>. ຄວາມແຕກຕ່າງແມ່ນ <span class=\"text-orange-500 font-semibold\">ໄຮໄລທ໌ສີສົ້ມ</span>.",
+  "compare_select_empty_mobile": "ເລືອກ<a href=\"/products/\" class=\"text-primary font-bold hover:underline\">2-3 ສິນຄ້າ</a>ເພື່ອປຽບທຽບ.",
   "compare_select_hint": "Select 2–3 products to compare side-by-side.",
   "compare_select_hint_mobile": "Select 2–3 products, compare parameters.",
   "compare_title": "Product Comparison",
@@ -2391,5 +2391,6 @@
   "training_step_4_title": "ການທົດສອບ ແລະ ຢັ້ງຢືນ",
   "training_step_5_desc": "ການສະໜັບສະໜູນ online ຕະຫຼອດເວລາຫຼັງການຝຶກອົບຮົມ, ແບ່ງປັນຫຼັກສູດໃໝ່ ແລະ ເຕັກນິກການໃຊ້ງານເປັນປະຈຳ",
   "training_step_5_title": "ການສະໜັບສະໜູນຕໍ່ເນື່ອງ",
-  "ty_meta_title": "YuKoLi | Submission Received"
+  "ty_meta_title": "YuKoLi | Submission Received",
+  "compare_title_label": "ປຽບທຽບສິນຄ້າ"
 }

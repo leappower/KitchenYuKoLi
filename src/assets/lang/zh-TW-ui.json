@@ -729,8 +729,8 @@
   "compare_go_to_products": "Go to Products",
   "compare_go_to_products_mobile": "Go to Products",
   "compare_not_sure": "Not Sure Which to Choose?",
-  "compare_select_empty": "Select products on product page first.",
-  "compare_select_empty_mobile": "Select 2–3 products from product page.",
+  "compare_select_empty": "請先在<a href=\"/products/\" class=\"text-primary font-bold hover:underline\">產品頁</a>選擇 2~3 款產品，即可在此查看詳細<span class=\"font-semibold\">參數對比</span>。不同參數會以<span class=\"text-orange-500 font-semibold\">橙色高亮</span>標註。",
+  "compare_select_empty_mobile": "請先在<a href=\"/products/\" class=\"text-primary font-bold hover:underline\">產品頁</a>選擇 2~3 款產品。",
   "compare_select_hint": "Select 2–3 products to compare side-by-side.",
   "compare_select_hint_mobile": "Select 2–3 products, compare parameters.",
   "compare_title": "Product Comparison",
@@ -2385,5 +2385,6 @@
   "training_step_4_title": "考核與認證",
   "training_step_5_desc": "培訓後線上支援，定期更新新課程和技術",
   "training_step_5_title": "持續支援",
-  "ty_meta_title": "YuKoLi | Submission Received"
+  "ty_meta_title": "YuKoLi | Submission Received",
+  "compare_title_label": "選擇產品對比"
 }
