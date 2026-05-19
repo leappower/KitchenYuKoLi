@@ -171,20 +171,21 @@
       state.isPlaying = true;
       if (!state.hasStarted) {
         state.hasStarted = true;
-        crossfadeToVideo(video, poster, overlay, playBtn);
+        crossfadeToVideo(video, poster, overlay, playBtn, container);
+      } else {
+        /* 恢复播放时也同步 playing 状态 */
+        container.setAttribute('data-hero-video-playing', 'true');
       }
       updatePlayBtn(true, false);
-      /* PC hover 时显示原生 controls */
-      if (overlay) overlay.style.pointerEvents = "auto";
-      /* 覆盖 overlay 上的 pointer-events 恢复 (PC hover 逻辑) */
     });
 
     video.addEventListener("pause", function () {
       state.isPlaying = false;
+      container.removeAttribute('data-hero-video-playing');
       if (video.ended) {
         state.hasStarted = false;
         state.savedTime = 0;
-        crossfadeToPoster(video, poster, overlay, playBtn);
+        crossfadeToPoster(video, poster, overlay, playBtn, container);
         updatePlayBtn(false, true);
       } else {
         state.savedTime = video.currentTime;
@@ -197,7 +198,8 @@
       state.hasStarted = false;
       state.savedTime = 0;
       state.userPaused = false;
-      crossfadeToPoster(video, poster, overlay, playBtn);
+      container.removeAttribute('data-hero-video-playing');
+      crossfadeToPoster(video, poster, overlay, playBtn, container);
       updatePlayBtn(false, true);
     });
 
@@ -263,7 +265,7 @@
     if (state.savedTime > 0 && !state.hasStarted) {
       /* 从断点恢复（video ended → poster 可见） */
       video.currentTime = state.savedTime;
-      crossfadeToVideo(video, poster, overlay, playBtn);
+      crossfadeToVideo(video, poster, overlay, playBtn, container);
     }
 
     /* 保持 mute 状态不变 */
@@ -342,7 +344,7 @@
   }
 
   /* ── Crossfade: poster → video ── */
-  function crossfadeToVideo(video, poster, overlay, playBtn) {
+  function crossfadeToVideo(video, poster, overlay, playBtn, container) {
     poster.style.transition = "opacity " + CROSSFADE_MS / 1000 + "s ease";
     poster.style.opacity = "0";
     poster.style.pointerEvents = "none";
@@ -350,14 +352,8 @@
     video.style.transition = "opacity " + CROSSFADE_MS / 1000 + "s ease";
     video.style.opacity = "1";
 
-    if (overlay) {
-      overlay.style.transition = "opacity " + CROSSFADE_MS / 1000 + "s ease";
-      overlay.style.opacity = "1";
-    }
-
-    if (playBtn) {
-      playBtn.style.display = "none";
-    }
+    /* 播放中：使用 CSS 控制 overlay / playbtn / info 的显隐 */
+    container.setAttribute('data-hero-video-playing', 'true');
 
     setTimeout(function () {
       poster.style.display = "none";
@@ -365,7 +361,7 @@
   }
 
   /* ── Crossfade: video → poster ── */
-  function crossfadeToPoster(video, poster, overlay, playBtn) {
+  function crossfadeToPoster(video, poster, overlay, playBtn, container) {
     poster.style.display = "";
     void poster.offsetHeight;
 
@@ -376,18 +372,16 @@
     video.style.transition = "opacity " + CROSSFADE_MS / 1000 + "s ease";
     video.style.opacity = "0";
 
-    if (overlay) {
-      overlay.style.transition = "opacity " + CROSSFADE_MS / 1000 + "s ease";
-      overlay.style.opacity = "0";
-    }
-
-    if (playBtn) {
-      playBtn.style.display = "flex";
-    }
+    /* 恢复 poster：移除播放状态，CSS 恢复 overlay / playbtn / info 的可见性 */
+    container.removeAttribute('data-hero-video-playing');
   }
 
   /* ── 降级：显示静态封面图 + 播放按钮 ── */
   function showFallback(container, video, poster, overlay, playBtn) {
+    if (container) {
+      container.removeAttribute('data-hero-video-playing');
+    }
+
     if (poster) {
       poster.style.opacity = "1";
       poster.style.display = "";

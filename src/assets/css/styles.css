@@ -871,6 +871,13 @@ a.bg-primary {
   pointer-events: none;
 }
 
+/* 视频播放中 → overlay 隐藏（静音/降级按钮） */
+[data-hero-video-playing="true"] .hero-video-overlay,
+[data-hero-video-playing="true"] [data-hide-on-play] {
+  opacity: 0;
+  pointer-events: none;
+}
+
 /* 降级播放按钮 */
 .hero-video-fallback-btn {
   position: absolute;
@@ -901,10 +908,10 @@ a.bg-primary {
   background: rgba(255, 255, 255, 0.25);
 }
 
-/* PC: hover 时隐藏自定义 overlay（显示原生 controls） */
+/* PC: 视频播放中 hover 显示 overlay（方便调音量/静音） */
 @media (min-width: 1024px) {
-  [data-hero-video]:hover .hero-video-overlay {
-    opacity: 0 !important;
-    pointer-events: none !important;
+  [data-hero-video-playing="true"]:hover .hero-video-overlay {
+    opacity: 1 !important;
+    pointer-events: auto !important;
   }
 }
