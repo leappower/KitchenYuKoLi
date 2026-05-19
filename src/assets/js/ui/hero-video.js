@@ -197,6 +197,95 @@
       afterPosterReady();
     }
 
+    /* ════════════════════════════════════════
+       IntersectionObserver
+       仅处理「划出视口 → 暂停」
+       不处理「划入视口 → 播放」
+      （auto 模式首次播放由页面加载时的初始检测触发）
+       ════════════════════════════════════════ */
+    function setupObserver() {
+      if (state.observer) return;
+
+      var ROOT_MARGIN = "-20% 0px -20% 0px";
+
+      state.observer = new IntersectionObserver(
+        function (entries) {
+          var entry = entries[0];
+          var ratio = entry.intersectionRatio;
+
+          /* ── 不可见 → 暂停 ── */
+          if (!entry.isIntersecting || ratio === 0) {
+            if (state.isPlaying) {
+              state.savedTime = video.currentTime;
+              video.pause();
+            }
+            if (state.crossfadeTimer) {
+              clearTimeout(state.crossfadeTimer);
+              state.crossfadeTimer = null;
+            }
+            return;
+          }
+
+          /* ── 可见 — 但不自动恢复播放 ── */
+
+          /* 如果已经播放过或手动模式：不自动播放 */
+          if (state.hasStarted || state.hasAutoPlayed || isManual) return;
+
+          /* auto 模式且尚未自动播放过 → 一次性自动播放 */
+          if (state.isPlaying || state.failed) return;
+
+          if (state.crossfadeTimer) clearTimeout(state.crossfadeTimer);
+          state.crossfadeTimer = setTimeout(function () {
+            /* 再次检查防止竞态 */
+            if (state.hasAutoPlayed || state.hasStarted || state.failed) return;
+            triggerAutoPlay();
+          }, CROSSFADE_MS);
+        },
+        {
+          rootMargin: ROOT_MARGIN,
+          threshold: [0, 0.5, 1.0],
+        }
+      );
+
+      state.observer.observe(container);
+    }
+
+    /* ════════════════════════════════════════
+       Crossfade 动画
+       ════════════════════════════════════════ */
+    function crossfadeToVideo() {
+      poster.style.transition = "opacity " + CROSSFADE_MS / 1000 + "s ease";
+      poster.style.opacity = "0";
+      poster.style.pointerEvents = "none";
+
+      video.style.transition = "opacity " + CROSSFADE_MS / 1000 + "s ease";
+      video.style.opacity = "1";
+
+      container.setAttribute("data-hero-video-playing", "true");
+
+      setTimeout(function () {
+        poster.style.display = "none";
+      }, CROSSFADE_MS);
+    }
+
+    function crossfadeToPoster() {
+      poster.style.display = "";
+      void poster.offsetHeight;
+
+      poster.style.transition = "opacity " + CROSSFADE_MS / 1000 + "s ease";
+      poster.style.opacity = "1";
+      poster.style.pointerEvents = "";
+
+      video.style.transition = "opacity " + CROSSFADE_MS / 1000 + "s ease";
+      video.style.opacity = "0";
+
+      container.removeAttribute("data-hero-video-playing");
+
+      setTimeout(function () {
+        video.style.display = "none";
+      }, CROSSFADE_MS);
+    }
+
     /* ── 视频事件 ── */
     video.addEventListener("play", function () {
       state.isPlaying = true;
@@ -280,90 +369,6 @@
 
     /* ── 注册到全局 ── */
     _activeInstances.push({ state: state, video: video });
-  }
-
-  /* ════════════════════════════════════════
-     IntersectionObserver
-     仅处理「划出视口 → 暂停」
-     不处理「划入视口 → 播放」
-    （auto 模式首次播放由页面加载时的初始检测触发）
-     ════════════════════════════════════════ */
-  function setupObserver() {
-    /* 此函数通过 setupContainer 的闭包访问变量 */
-    if (state.observer) return;
-
-    var ROOT_MARGIN = "-20% 0px -20% 0px";
-
-    state.observer = new IntersectionObserver(
-      function (entries) {
-        var entry = entries[0];
-        var ratio = entry.intersectionRatio;
-
-        /* ── 不可见 → 暂停 ── */
-        if (!entry.isIntersecting || ratio === 0) {
-          if (state.isPlaying) {
-            state.savedTime = video.currentTime;
-            video.pause();
-          }
-          if (state.crossfadeTimer) {
-            clearTimeout(state.crossfadeTimer);
-            state.crossfadeTimer = null;
-          }
-          return;
-        }
-
-        /* ── 可见 — 但不自动恢复播放 ── */
-
-        /* 如果已经播放过或手动模式：不自动播放 */
-        if (state.hasStarted || state.hasAutoPlayed || isManual) return;
-
-        /* auto 模式且尚未自动播放过 → 一次性自动播放 */
-        if (state.isPlaying || state.failed) return;
-
-        if (state.crossfadeTimer) clearTimeout(state.crossfadeTimer);
-        state.crossfadeTimer = setTimeout(function () {
-          /* 再次检查防止竞态 */
-          if (state.hasAutoPlayed || state.hasStarted || state.failed) return;
-          triggerAutoPlay();
-        }, CROSSFADE_MS);
-      },
-      {
-        rootMargin: ROOT_MARGIN,
-        threshold: [0, 0.5, 1.0],
-      }
-    );
-
-    state.observer.observe(container);
-  }
-
-  /* ════════════════════════════════════════
-     Crossfade 动画
-     ════════════════════════════════════════ */
-  function crossfadeToVideo() {
-    poster.style.transition = "opacity " + CROSSFADE_MS / 1000 + "s ease";
-    poster.style.opacity = "0";
-    poster.style.pointerEvents = "none";
-
-    video.style.transition = "opacity " + CROSSFADE_MS / 1000 + "s ease";
-    video.style.opacity = "1";
-
-    container.setAttribute("data-hero-video-playing", "true");
-
-    setTimeout(function () {
-      poster.style.display = "none";
-    }, CROSSFADE_MS);
-  }
-
-  function crossfadeToPoster() {
-    poster.style.display = "";
-    void poster.offsetHeight;
-
-    poster.style.transition = "opacity " + CROSSFADE_MS / 1000 + "s ease";
-    poster.style.opacity = "1";
-    poster.style.pointerEvents = "";
-
-    video.style.transition = "opacity " + CROSSFADE_MS / 1000 + "s ease";
-    video.style.opacity = "0";
   }
 
   /* ════════════════════════════════════════
