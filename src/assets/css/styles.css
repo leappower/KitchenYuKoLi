@@ -332,8 +332,6 @@ main#spa-content:not([class*="p-"], [class*="px-"], [class*="py-"]) {
 /* Full-width background sections: break out of main padding.
  * Only applies when main uses CSS padding (PC pages with fullwidth-bg).
  * Tablet/mobile pages handle their own layout differently.
- * Does NOT apply when inside a max-w-md container (phone mockup) —
- * those pages are self-contained and negative margins cause overflow.
  * Usage: <section class="... fullwidth-bg bg-slate-100">
  * Child div keeps px-6 md:px-10 lg:px-16 xl:px-20 for content alignment. */
 
@@ -354,14 +352,6 @@ main#spa-content:not([class*="p-"], [class*="px-"], [class*="py-"]) .fullwidth-b
     margin-left: -2.5rem;
     margin-right: -2.5rem;
   }
-}
-
-/* Phone mockup pages (max-w-md): .fullwidth-bg should NOT break out
- * beyond the mockup boundary. The negative margins above would push
- * sections wider than 384px, causing horizontal scroll. */
-.max-w-md .fullwidth-bg {
-  margin-left: 0;
-  margin-right: 0;
 }
 
 /* ─── fullwidth-bg: background full-width breakout ───────────────
