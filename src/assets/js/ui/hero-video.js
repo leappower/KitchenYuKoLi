@@ -279,10 +279,6 @@
       video.style.opacity = "1";
 
       container.setAttribute("data-hero-video-playing", "true");
-
-      setTimeout(function () {
-        poster.style.display = "none";
-      }, CROSSFADE_MS);
     }
 
     function crossfadeToPoster() {
