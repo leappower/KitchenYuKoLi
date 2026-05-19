@@ -4,9 +4,9 @@
   <head>
     <!-- ═══ Responsive Redirect (injected by patch-responsive-redirect.py) ═══ -->
     <link rel="canonical" href="https://www.kitchen.yukoli.com/home/" />
-  <link rel="alternate" hreflang="zh-CN" href="https://www.kitchen.yukoli.com/home/" />
-  <link rel="alternate" hreflang="en" href="https://www.kitchen.yukoli.com/home/" />
-  <link rel="alternate" hreflang="x-default" href="https://www.kitchen.yukoli.com/home/" />
+    <link rel="alternate" hreflang="zh-CN" href="https://www.kitchen.yukoli.com/home/" />
+    <link rel="alternate" hreflang="en" href="https://www.kitchen.yukoli.com/home/" />
+    <link rel="alternate" hreflang="x-default" href="https://www.kitchen.yukoli.com/home/" />
     <link rel="alternate" media="only screen and (max-width: 767px)" href="/home/index-mobile.html" />
     <link
       rel="alternate"
@@ -58,7 +58,6 @@
           location.href = targetFile;
           return;
         }
-
       })();
     </script>
     <!-- ═══ End Responsive Redirect ═══ -->
@@ -77,6 +76,15 @@
     />
     <meta property="og:url" content="https://www.kitchen.yukoli.com/home/" />
     <meta property="og:image" content="https://www.kitchen.yukoli.com/assets/images/logo.webp" />
+    <meta property="og:site_name" content="YuKoLi 智能厨具" />
+    <meta property="og:locale" content="zh_CN" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="YuKoLi 智能厨具 | 专业商用厨房设备制造商" />
+    <meta
+      name="twitter:description"
+      content="YuKoLi 智能厨具 - 专业商用厨房设备制造商，提供智能炒菜机、炖煮机、油炸炉、蒸煮设备等200款产品。"
+    />
+    <meta name="twitter:image" content="https://www.kitchen.yukoli.com/assets/images/logo.webp" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
     <title>YuKoLi 智能厨具 | 专业商用厨房设备制造商</title>
     <link rel="preload" href="/assets/fonts/local-fonts.css" as="style" />
@@ -102,7 +110,10 @@
     <link rel="stylesheet" href="/assets/css/z-index-system.css" />
     <link rel="stylesheet" href="/assets/css/performance-optimizations.css" />
     <style>
-      body { font-family: "Public Sans", sans-serif; min-height: 100dvh; }
+      body {
+        font-family: "Public Sans", sans-serif;
+        min-height: 100dvh;
+      }
     </style>
     <!-- Dark mode: apply saved preference before first paint (prevents flash) -->
     <script>
@@ -141,9 +152,16 @@
               <span data-i18n="home_hero_badge">Leading Smart Commercial Kitchen Equipment Brand</span>
             </div>
             <h1 class="text-4xl xl:text-5xl font-black leading-[1.1] tracking-tight text-slate-900 dark:text-white">
-              智能<span class="text-primary" data-i18n="home_hero_title_2">Cooking</span>，<span data-i18n="cases_roi_standardized">标准化</span>出品。
+              智能
+              <span class="text-primary" data-i18n="home_hero_title_2">Cooking</span>
+              ，
+              <span data-i18n="cases_roi_standardized">标准化</span>
+              出品。
             </h1>
-            <p class="text-base text-slate-600 dark:text-slate-400 max-w-2xl leading-relaxed" data-i18n="home_hero_desc">
+            <p
+              class="text-base text-slate-600 dark:text-slate-400 max-w-2xl leading-relaxed"
+              data-i18n="home_hero_desc"
+            >
               YuKoLi's full range of smart commercial kitchen equipment covers stir-frying, stewing, steaming, frying,
               and prep — delivering one-stop automation solutions for canteens, central kitchens, and chain restaurants.
               Products exported to 50+ countries worldwide.
@@ -164,48 +182,55 @@
                 <span class="material-symbols-outlined">request_quote</span>
               </a>
             </div>
-          <div class="w-full relative">
-            <div
-              class="relative w-full aspect-[3/2] bg-slate-200 dark:bg-slate-800 rounded-2xl overflow-hidden shadow-2xl border border-white/10"
-              data-hero-video
-            >
-              <img
-                class="hero-video-poster w-full h-full object-cover"
-                src="/assets/images/products/esl-bxc800.webp"
-                loading="eager"
-                alt="YuKoLi 旗舰产品" data-i18n-alt="alt_home_flagship"
-              />
-              <video
-                class="hero-video-player"
-                src="/assets/video/aboutus.mp4"
-                poster="/assets/images/products/esl-bxc800.webp"
-                preload="metadata"
-                muted
-                playsinline
-                loop
-              ></video>
-              <div class="hero-video-overlay">
-                <button class="hero-video-mute" aria-label="Toggle mute" data-i18n-aria="aria_toggle_mute"><span class="material-symbols-outlined text-white text-xl">volume_off</span></button>
-              </div>
-              <button class="hero-video-fallback-btn" aria-label="Play video" data-i18n-aria="aria_play_video"><span class="material-symbols-outlined text-white text-3xl">play_circle</span></button>
-              <div class="hero-video-info absolute bottom-5 left-5 right-5 p-5 bg-white/10 backdrop-blur-xl border border-white/20 rounded-xl">
-                <div class="flex justify-between items-center text-white">
-                  <div>
-                    <p class="text-xs font-bold uppercase opacity-70" data-i18n="home_hero_flagship_label">
+            <div class="w-full relative">
+              <div
+                class="relative w-full aspect-[3/2] bg-slate-200 dark:bg-slate-800 rounded-2xl overflow-hidden shadow-2xl border border-white/10"
+                data-hero-video
+              >
+                <img
+                  class="hero-video-poster w-full h-full object-cover"
+                  src="/assets/images/products/esl-bxc800.webp"
+                  loading="eager"
+                  alt="YuKoLi 旗舰产品"
+                  data-i18n-alt="alt_home_flagship"
+                />
+                <video
+                  class="hero-video-player"
+                  src="/assets/video/aboutus.mp4"
+                  poster="/assets/images/products/esl-bxc800.webp"
+                  preload="metadata"
+                  muted
+                  playsinline
+                  loop
+                ></video>
+                <div class="hero-video-overlay">
+                  <button class="hero-video-mute" aria-label="Toggle mute" data-i18n-aria="aria_toggle_mute">
+                    <span class="material-symbols-outlined text-white text-xl">volume_off</span>
+                  </button>
+                </div>
+                <button class="hero-video-fallback-btn" aria-label="Play video" data-i18n-aria="aria_play_video">
+                  <span class="material-symbols-outlined text-white text-3xl">play_circle</span>
+                </button>
+                <div
+                  class="hero-video-info absolute bottom-5 left-5 right-5 p-5 bg-white/10 backdrop-blur-xl border border-white/20 rounded-xl"
+                >
+                  <div class="flex justify-between items-center text-white">
+                    <div>
+                      <p class="text-xs font-bold uppercase opacity-70" data-i18n="home_hero_flagship_label">
                         Flagship Model
                       </p>
-                    <p class="text-lg font-black" data-i18n="home_hero_product_name">ESL-GQ90 全自动语音炒菜机</p>
-                  </div>
-                  <div class="text-right">
-                    <p class="text-xs font-bold uppercase opacity-70" data-i18n="home_hero_efficiency_label">
+                      <p class="text-lg font-black" data-i18n="home_hero_product_name">ESL-GQ90 全自动语音炒菜机</p>
+                    </div>
+                    <div class="text-right">
+                      <p class="text-xs font-bold uppercase opacity-70" data-i18n="home_hero_efficiency_label">
                         Efficiency Boost
                       </p>
-                    <p class="text-lg font-black text-primary" data-i18n="home_hero_efficiency_value">+340%</p>
+                      <p class="text-lg font-black text-primary" data-i18n="home_hero_efficiency_value">+340%</p>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
           </div>
         </div>
       </section>
@@ -213,7 +238,7 @@
       <!-- Product Matrix -->
       <section class="fullwidth-bg py-12">
         <div class="section-content">
-        <div class="flex justify-between items-end mb-6">
+          <div class="flex justify-between items-end mb-6">
             <h2 class="text-2xl font-black tracking-tight mb-2" data-i18n="home_hw_title">Core Products</h2>
             <p class="text-slate-500 text-sm" data-i18n="home_hw_subtitle">
               200+ smart commercial kitchen appliances covering the entire cooking process
@@ -221,7 +246,9 @@
           </div>
           <a class="text-primary font-bold text-sm flex items-center gap-1 group" href="/products/">
             <span data-i18n="home_hw_view_inventory">View All</span>
-            <span class="material-symbols-outlined text-sm group-hover:translate-x-1 transition-transform">arrow_forward</span>
+            <span class="material-symbols-outlined text-sm group-hover:translate-x-1 transition-transform">
+              arrow_forward
+            </span>
           </a>
         </div>
         <!-- Dynamic Home Core Products (rendered by home-core-products.js) -->
@@ -231,7 +258,6 @@
       <!-- 行业解决方案 + Stats -->
       <section class="fullwidth-bg py-16">
         <div class="section-content">
-        
           <!-- Solutions -->
           <div class="w-full bg-primary text-white rounded-2xl p-6">
             <h2 class="text-2xl font-black mb-5" data-i18n="home_int_title">
@@ -270,23 +296,29 @@
           </div>
           <!-- Stats -->
           <div class="grid grid-cols-4 gap-3 mt-6">
-            <div class="bg-white dark:bg-slate-900 rounded-xl p-4 text-center border border-slate-200 dark:border-slate-800">
+            <div
+              class="bg-white dark:bg-slate-900 rounded-xl p-4 text-center border border-slate-200 dark:border-slate-800"
+            >
               <p class="text-2xl font-black text-primary" data-i18n="home_stat_products">200+</p>
               <p class="text-xs font-bold text-slate-500 uppercase" data-i18n="home_stat_products">200+</p>
             </div>
-            <div class="bg-white dark:bg-slate-900 rounded-xl p-4 text-center border border-slate-200 dark:border-slate-800">
+            <div
+              class="bg-white dark:bg-slate-900 rounded-xl p-4 text-center border border-slate-200 dark:border-slate-800"
+            >
               <p class="text-2xl font-black text-primary" data-i18n="home_stat_countries">50+</p>
               <p class="text-xs font-bold text-slate-500 uppercase" data-i18n="home_stat_countries_label">
                 Export Countries
               </p>
             </div>
-            <div class="bg-white dark:bg-slate-900 rounded-xl p-4 text-center border border-slate-200 dark:border-slate-800">
+            <div
+              class="bg-white dark:bg-slate-900 rounded-xl p-4 text-center border border-slate-200 dark:border-slate-800"
+            >
               <p class="text-2xl font-black text-primary" data-i18n="home_stat_years_value">20+</p>
-              <p class="text-xs font-bold text-slate-500 uppercase" data-i18n="home_stat_years">
-                Years of Experience
-              </p>
+              <p class="text-xs font-bold text-slate-500 uppercase" data-i18n="home_stat_years">Years of Experience</p>
             </div>
-            <div class="bg-white dark:bg-slate-900 rounded-xl p-4 text-center border border-slate-200 dark:border-slate-800">
+            <div
+              class="bg-white dark:bg-slate-900 rounded-xl p-4 text-center border border-slate-200 dark:border-slate-800"
+            >
               <p class="text-2xl font-black text-primary" data-i18n="home_stat_cert_value">CE/UL</p>
               <p class="text-xs font-bold text-slate-500 uppercase" data-i18n="home_stat_certified">Certifications</p>
             </div>
@@ -304,36 +336,84 @@
             </p>
           </div>
           <div class="grid grid-cols-2 gap-4">
-            <div class="bg-white dark:bg-slate-900 rounded-xl p-6 text-center border border-slate-200 dark:border-slate-700">
+            <div
+              class="bg-white dark:bg-slate-900 rounded-xl p-6 text-center border border-slate-200 dark:border-slate-700"
+            >
               <div class="w-full h-20 rounded-xl overflow-hidden mx-auto mb-3">
-                <img src="/assets/images/home/advantage-labor.webp" alt="Save 70% Labor" data-i18n-alt="alt_home_save_labor" class="w-full h-full object-cover" loading="lazy" onerror="this.onerror=null;this.src='/assets/images/placeholders/product-fallback.webp';">
+                <img
+                  src="/assets/images/home/advantage-labor.webp"
+                  alt="Save 70% Labor"
+                  data-i18n-alt="alt_home_save_labor"
+                  class="w-full h-full object-cover"
+                  loading="lazy"
+                  onerror="
+                    this.onerror = null;
+                    this.src = '/assets/images/placeholders/product-fallback.webp';
+                  "
+                />
               </div>
               <h3 class="text-base font-bold mb-1" data-i18n="home_advantage_labor_title">Save 70% Labor</h3>
               <p class="text-xs text-slate-500" data-i18n="home_advantage_labor_desc">
                 One smart cooking machine replaces 3–5 chefs, significantly reducing labor costs
               </p>
             </div>
-            <div class="bg-white dark:bg-slate-900 rounded-xl p-6 text-center border border-slate-200 dark:border-slate-700">
+            <div
+              class="bg-white dark:bg-slate-900 rounded-xl p-6 text-center border border-slate-200 dark:border-slate-700"
+            >
               <div class="w-full h-20 rounded-xl overflow-hidden mx-auto mb-3">
-                <img src="/assets/images/home/advantage-quality.webp" alt="Standardized Output" data-i18n-alt="alt_home_standardized" class="w-full h-full object-cover" loading="lazy" onerror="this.onerror=null;this.src='/assets/images/placeholders/product-fallback.webp';">
+                <img
+                  src="/assets/images/home/advantage-quality.webp"
+                  alt="Standardized Output"
+                  data-i18n-alt="alt_home_standardized"
+                  class="w-full h-full object-cover"
+                  loading="lazy"
+                  onerror="
+                    this.onerror = null;
+                    this.src = '/assets/images/placeholders/product-fallback.webp';
+                  "
+                />
               </div>
               <h3 class="text-base font-bold mb-1" data-i18n="home_advantage_quality_title">Standardized Output</h3>
               <p class="text-xs text-slate-500" data-i18n="home_advantage_quality_desc">
                 Smart temperature and timing control with 800+ recipe programs for consistent quality
               </p>
             </div>
-            <div class="bg-white dark:bg-slate-900 rounded-xl p-6 text-center border border-slate-200 dark:border-slate-700">
+            <div
+              class="bg-white dark:bg-slate-900 rounded-xl p-6 text-center border border-slate-200 dark:border-slate-700"
+            >
               <div class="w-full h-20 rounded-xl overflow-hidden mx-auto mb-3">
-                <img src="/assets/images/home/advantage-energy.webp" alt="Energy Saving 30%+" data-i18n-alt="alt_home_energy_saving" class="w-full h-full object-cover" loading="lazy" onerror="this.onerror=null;this.src='/assets/images/placeholders/product-fallback.webp';">
+                <img
+                  src="/assets/images/home/advantage-energy.webp"
+                  alt="Energy Saving 30%+"
+                  data-i18n-alt="alt_home_energy_saving"
+                  class="w-full h-full object-cover"
+                  loading="lazy"
+                  onerror="
+                    this.onerror = null;
+                    this.src = '/assets/images/placeholders/product-fallback.webp';
+                  "
+                />
               </div>
               <h3 class="text-base font-bold mb-1" data-i18n="home_advantage_energy_title">Energy Saving 30%+</h3>
               <p class="text-xs text-slate-500" data-i18n="home_advantage_energy_desc">
                 Induction heating technology saves 30%+ energy compared to traditional gas stoves
               </p>
             </div>
-            <div class="bg-white dark:bg-slate-900 rounded-xl p-6 text-center border border-slate-200 dark:border-slate-700">
+            <div
+              class="bg-white dark:bg-slate-900 rounded-xl p-6 text-center border border-slate-200 dark:border-slate-700"
+            >
               <div class="w-full h-20 rounded-xl overflow-hidden mx-auto mb-3">
-                <img src="/assets/images/home/advantage-service.webp" alt="Global Service" data-i18n-alt="alt_home_global_service" class="w-full h-full object-cover" loading="lazy" onerror="this.onerror=null;this.src='/assets/images/placeholders/product-fallback.webp';">
+                <img
+                  src="/assets/images/home/advantage-service.webp"
+                  alt="Global Service"
+                  data-i18n-alt="alt_home_global_service"
+                  class="w-full h-full object-cover"
+                  loading="lazy"
+                  onerror="
+                    this.onerror = null;
+                    this.src = '/assets/images/placeholders/product-fallback.webp';
+                  "
+                />
               </div>
               <h3 class="text-base font-bold mb-1" data-i18n="home_advantage_service_title">Global Service</h3>
               <p class="text-xs text-slate-500" data-i18n="home_advantage_service_desc">
@@ -354,19 +434,31 @@
             </p>
           </div>
           <div class="flex flex-wrap justify-center gap-4">
-            <div data-i18n="home_cert_ce" class="flex items-center gap-2 border border-slate-300 dark:border-slate-700 px-4 py-2 rounded-lg font-bold text-sm">
+            <div
+              data-i18n="home_cert_ce"
+              class="flex items-center gap-2 border border-slate-300 dark:border-slate-700 px-4 py-2 rounded-lg font-bold text-sm"
+            >
               <span class="material-symbols-outlined">verified</span>
               CE 认证
             </div>
-            <div data-i18n="home_cert_ul" class="flex items-center gap-2 border border-slate-300 dark:border-slate-700 px-4 py-2 rounded-lg font-bold text-sm">
+            <div
+              data-i18n="home_cert_ul"
+              class="flex items-center gap-2 border border-slate-300 dark:border-slate-700 px-4 py-2 rounded-lg font-bold text-sm"
+            >
               <span class="material-symbols-outlined">electric_bolt</span>
               UL 认证
             </div>
-            <div data-i18n="home_cert_iso" class="flex items-center gap-2 border border-slate-300 dark:border-slate-700 px-4 py-2 rounded-lg font-bold text-sm">
+            <div
+              data-i18n="home_cert_iso"
+              class="flex items-center gap-2 border border-slate-300 dark:border-slate-700 px-4 py-2 rounded-lg font-bold text-sm"
+            >
               <span class="material-symbols-outlined">health_and_safety</span>
               ISO 9001
             </div>
-            <div data-i18n="home_cert_20yr" class="flex items-center gap-2 border border-slate-300 dark:border-slate-700 px-4 py-2 rounded-lg font-bold text-sm">
+            <div
+              data-i18n="home_cert_20yr"
+              class="flex items-center gap-2 border border-slate-300 dark:border-slate-700 px-4 py-2 rounded-lg font-bold text-sm"
+            >
               <span class="material-symbols-outlined">workspace_premium</span>
               <span data-i18n="home_brand_20yr">20年品牌</span>
             </div>
@@ -378,20 +470,30 @@
       <section class="fullwidth-bg bg-primary py-10 overflow-hidden">
         <div class="section-content">
           <div class="text-center max-w-2xl mx-auto">
-            <h2 class="text-3xl font-black mb-4 text-white" data-i18n="home_cta_title">Ready to Upgrade Your Kitchen?</h2>
+            <h2 class="text-3xl font-black mb-4 text-white" data-i18n="home_cta_title">
+              Ready to Upgrade Your Kitchen?
+            </h2>
             <p class="text-white/80 text-sm mb-6" data-i18n="home_cta_desc">
-                Join 3,000+ food service businesses worldwide in their smart kitchen transformation with YuKoLi. Get a
-                free customized solution — our engineers respond within 24 hours.
-              </p>
+              Join 3,000+ food service businesses worldwide in their smart kitchen transformation with YuKoLi. Get a
+              free customized solution — our engineers respond within 24 hours.
+            </p>
             <div class="flex flex-wrap justify-center gap-3">
-              <a href="/quote" class="bg-white text-primary px-8 py-3 rounded-xl font-bold text-sm hover:shadow-lg transition-all flex items-center gap-2" data-i18n="home_cta_btn_quote">
+              <a
+                href="/quote"
+                class="bg-white text-primary px-8 py-3 rounded-xl font-bold text-sm hover:shadow-lg transition-all flex items-center gap-2"
+                data-i18n="home_cta_btn_quote"
+              >
                 <span class="material-symbols-outlined">description</span>
-                  Get a Free Quote
-                </a>
-              <a href="/products/" class="bg-white/10 border-2 border-white/60 text-white px-8 py-3 rounded-xl font-bold text-sm hover:bg-white/20 transition-all flex items-center gap-2" data-i18n="home_cta_btn_products">
+                Get a Free Quote
+              </a>
+              <a
+                href="/products/"
+                class="bg-white/10 border-2 border-white/60 text-white px-8 py-3 rounded-xl font-bold text-sm hover:bg-white/20 transition-all flex items-center gap-2"
+                data-i18n="home_cta_btn_products"
+              >
                 <span class="material-symbols-outlined">inventory_2</span>
-                  View All Products
-                </a>
+                View All Products
+              </a>
             </div>
           </div>
         </div>
@@ -400,18 +502,18 @@
 
     <script src="/assets/js/ui/dropdown-styles.js"></script>
     <script src="/assets/js/ui/dropdown-base.js"></script>
-    <script defer src="/assets/js/ui/products-dropdown.js?v=202605191301"></script>
-    <script defer src="/assets/js/ui/applications-dropdown.js?v=202605191301"></script>
-    <script defer src="/assets/js/ui/support-dropdown.js?v=202605191301"></script>
-    <script defer src="/assets/js/ui/about-dropdown.js?v=202605191301"></script>
-    <script defer src="/assets/js/ui/navigator.js?v=202605191301"></script>
+    <script defer src="/assets/js/ui/products-dropdown.js?v=202605191327"></script>
+    <script defer src="/assets/js/ui/applications-dropdown.js?v=202605191327"></script>
+    <script defer src="/assets/js/ui/support-dropdown.js?v=202605191327"></script>
+    <script defer src="/assets/js/ui/about-dropdown.js?v=202605191327"></script>
+    <script defer src="/assets/js/ui/navigator.js?v=202605191327"></script>
     <script src="/assets/js/ui/hero-video.js"></script>
-<script defer src="/assets/js/ui/slide-menu.js?v=202605191301"></script>
+    <script defer src="/assets/js/ui/slide-menu.js?v=202605191327"></script>
     <script defer src="/assets/js/ui/search-engine.js"></script>
-    <script defer src="/assets/js/ui/footer.js?v=202605191301"></script>
-    <script defer src="/assets/js/lang-registry.js?v=202605191301"></script>
-    <script defer src="/assets/js/translations.js?v=202605191301"></script>
-    <script defer src="/assets/js/translations-dropdown-template.js?v=202605191301"></script>
+    <script defer src="/assets/js/ui/footer.js?v=202605191327"></script>
+    <script defer src="/assets/js/lang-registry.js?v=202605191327"></script>
+    <script defer src="/assets/js/translations.js?v=202605191327"></script>
+    <script defer src="/assets/js/translations-dropdown-template.js?v=202605191327"></script>
     <script defer src="/assets/js/contacts.js"></script>
     <script defer src="/assets/js/router.js"></script>
 
@@ -419,10 +521,11 @@
     <script defer src="/assets/js/ui/page-effects.js"></script>
     <script defer src="/assets/js/ui/form-interactions.js"></script>
     <script defer src="/assets/js/page-interactions.js"></script>
-    <script defer src="/assets/js/home-core-products.js?v=202605191301"></script><footer data-component="footer" data-variant="tablet" data-active="home"></footer>
+    <script defer src="/assets/js/home-core-products.js?v=202605191327"></script>
+    <footer data-component="footer" data-variant="tablet" data-active="home"></footer>
 
     <script src="/assets/js/utils/device-utils.js"></script>
-    <script src="/assets/js/spa-router.js?v=202605191301"></script>
-      <script defer src="/assets/js/ui/floating-actions.js"></script>
+    <script src="/assets/js/spa-router.js?v=202605191327"></script>
+    <script defer src="/assets/js/ui/floating-actions.js"></script>
   </body>
 </html>

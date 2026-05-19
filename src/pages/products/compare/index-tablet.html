@@ -3,11 +3,15 @@
   <head>
     <!-- ═══ Responsive Redirect (injected by patch-responsive-redirect.py) ═══ -->
     <link rel="canonical" href="https://www.kitchen.yukoli.com/products/compare/" />
-  <link rel="alternate" hreflang="zh-CN" href="https://www.kitchen.yukoli.com/products/compare/" />
-  <link rel="alternate" hreflang="en" href="https://www.kitchen.yukoli.com/products/compare/" />
-  <link rel="alternate" hreflang="x-default" href="https://www.kitchen.yukoli.com/products/compare/" />
+    <link rel="alternate" hreflang="zh-CN" href="https://www.kitchen.yukoli.com/products/compare/" />
+    <link rel="alternate" hreflang="en" href="https://www.kitchen.yukoli.com/products/compare/" />
+    <link rel="alternate" hreflang="x-default" href="https://www.kitchen.yukoli.com/products/compare/" />
     <link rel="alternate" media="only screen and (max-width: 767px)" href="/products/compare/index-mobile.html" />
-    <link rel="alternate" media="only screen and (min-width: 768px) and (max-width: 1279px)" href="/products/compare/index-tablet.html" />
+    <link
+      rel="alternate"
+      media="only screen and (min-width: 768px) and (max-width: 1279px)"
+      href="/products/compare/index-tablet.html"
+    />
     <link rel="alternate" media="only screen and (min-width: 1280px)" href="/products/compare/index-pc.html" />
     <script>
       (function () {
@@ -42,6 +46,11 @@
     <meta property="og:title" content="产品对比 | Yukoli 智能商厨设备" />
     <meta property="og:description" content="对比 Yukoli 智能商厨设备参数，选择最适合您厨房的设备。" />
     <meta property="og:url" content="https://www.kitchen.yukoli.com/products/compare/" />
+    <meta property="og:site_name" content="YuKoLi 智能厨具" />
+    <meta property="og:locale" content="zh_CN" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="产品对比 | Yukoli 智能商厨设备" />
+    <meta name="twitter:description" content="对比 Yukoli 智能商厨设备参数，选择最适合您厨房的设备。" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
     <title><span data-i18n="compare_title">产品对比</span> | Yukoli 智能商厨设备</title>
     <link rel="preload" href="/assets/fonts/local-fonts.css" as="style" />
@@ -53,15 +62,22 @@
     <link rel="stylesheet" href="/assets/css/z-index-system.css" />
     <link rel="stylesheet" href="/assets/css/performance-optimizations.css" />
     <style>
-      body { font-family: "Public Sans", sans-serif; }
+      body {
+        font-family: "Public Sans", sans-serif;
+      }
       .diff-highlight {
         background: rgba(236, 91, 19, 0.08);
         border-radius: 6px;
         padding: 2px 6px;
         font-weight: 600;
       }
-      .scrollbar-hide::-webkit-scrollbar { display: none; }
-      .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
+      .scrollbar-hide::-webkit-scrollbar {
+        display: none;
+      }
+      .scrollbar-hide {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+      }
     </style>
     <script>
       (function () {
@@ -71,8 +87,9 @@
     <link rel="stylesheet" href="/assets/css/skeleton.css" />
     <link rel="icon" href="/assets/images/logo.webp" type="image/webp" />
   </head>
-  <body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 transition-colors duration-300 overflow-x-clip">
-
+  <body
+    class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 transition-colors duration-300 overflow-x-clip"
+  >
     <navigator
       data-component="navigator"
       data-variant="tablet"
@@ -82,98 +99,148 @@
       data-cta-href="/quote"
     ></navigator>
     <main id="spa-content">
-<div class="w-full">
-      <!-- Page Header -->
-      <section class="fullwidth-bg py-10">
-        <div class="section-content">
-                <div class="flex items-center gap-2 flex-wrap">
-          <a href="/products/" class="text-sm text-slate-500 hover:text-primary transition-colors" data-i18n="nav_products">Products</a>
-          <span class="material-symbols-outlined text-sm text-slate-300">chevron_right</span>
-          <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-bold uppercase tracking-widest">
-            <span class="material-symbols-outlined text-xs leading-none">compare</span>
-            <span><span data-i18n="compare_title">产品对比</span></span>
-          </span>
-        </div>
-        <h1 class="text-3xl font-black leading-tight tracking-tight text-slate-900 dark:text-white mb-2">
-          <span data-i18n="compare_title">产品对比</span>
-        </h1>
-        <p class="text-sm text-slate-600 dark:text-slate-400" data-i18n="products_compare_hint">
-          选择最多 3 款产品，并排对比参数。
-        </p>
-        </div>
-      </section>
-
-      <!-- Selected Products Bar -->
-      <section id="compare-bar" class="fullwidth-bg py-4 sticky top-[72px] z-30 hidden">
-        <div class="section-content">
-        <div class="bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-lg p-3 flex items-center gap-3">
-          <div class="flex items-center gap-1.5 text-xs font-bold text-slate-500 dark:text-slate-400 flex-shrink-0">
-            <span class="material-symbols-outlined text-primary text-base">compare_arrows</span>
-            <span data-i18n="compare_selected_prefix">已选</span> <span id="compare-count" class="text-primary">0</span>/3
+      <div class="w-full">
+        <!-- Page Header -->
+        <section class="fullwidth-bg py-10">
+          <div class="section-content">
+            <div class="flex items-center gap-2 flex-wrap">
+              <a
+                href="/products/"
+                class="text-sm text-slate-500 hover:text-primary transition-colors"
+                data-i18n="nav_products"
+              >
+                Products
+              </a>
+              <span class="material-symbols-outlined text-sm text-slate-300">chevron_right</span>
+              <span
+                class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-bold uppercase tracking-widest"
+              >
+                <span class="material-symbols-outlined text-xs leading-none">compare</span>
+                <span><span data-i18n="compare_title">产品对比</span></span>
+              </span>
+            </div>
+            <h1 class="text-3xl font-black leading-tight tracking-tight text-slate-900 dark:text-white mb-2">
+              <span data-i18n="compare_title">产品对比</span>
+            </h1>
+            <p class="text-sm text-slate-600 dark:text-slate-400" data-i18n="products_compare_hint">
+              选择最多 3 款产品，并排对比参数。
+            </p>
           </div>
-          <div id="compare-bar-items" class="flex items-center gap-2 flex-1 overflow-x-auto scrollbar-hide">
-          </div>
-          <button id="compare-clear-btn" class="flex-shrink-0 px-3 py-1.5 rounded-lg text-xs font-bold text-slate-500 hover:text-red-500 hover:bg-red-50 dark:hover:bg-red-900/20 transition-all border border-slate-200 dark:border-slate-700">
-            <span data-i18n="compare_clear">清空</span>
-          </button>
-        </div>
-        </div>
-      </section>
+        </section>
 
-      <!-- Comparison Table -->
-      <section id="comparison-section" class="fullwidth-bg py-8 hidden">
-        <div class="section-content">
-        <div class="flex items-center justify-between mb-4">
-          <h2 class="text-lg font-black text-slate-900 dark:text-white"><span data-i18n="compare_compare_params">参数对比</span></h2>
-          <a href="/products/" id="compare-add-more" class="text-xs text-primary font-bold flex items-center gap-1 hover:underline">
-            <span class="material-symbols-outlined text-sm">edit</span>
-            <span data-i18n="compare_edit_selection"><span data-i18n="compare_edit">修改</span>对比产品</span>
-          </a>
-        </div>
-        <div class="bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 overflow-hidden shadow-sm">
-          <div id="comparison-table" class="overflow-x-auto"></div>
-        </div>
-        </div>
-      </section>
-
-      <!-- Empty State -->
-      <section id="compare-empty" class="fullwidth-bg py-8">
-        <div class="section-content">
-        <div class="bg-gradient-to-br from-slate-50 dark:from-slate-900 to-white dark:bg-black rounded-2xl border border-slate-200 dark:border-slate-700 p-8 text-center">
-          <div class="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-4">
-            <span class="material-symbols-outlined text-3xl text-primary">compare</span>
+        <!-- Selected Products Bar -->
+        <section id="compare-bar" class="fullwidth-bg py-4 sticky top-[72px] z-30 hidden">
+          <div class="section-content">
+            <div
+              class="bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-lg p-3 flex items-center gap-3"
+            >
+              <div class="flex items-center gap-1.5 text-xs font-bold text-slate-500 dark:text-slate-400 flex-shrink-0">
+                <span class="material-symbols-outlined text-primary text-base">compare_arrows</span>
+                <span data-i18n="compare_selected_prefix">已选</span>
+                <span id="compare-count" class="text-primary">0</span>
+                /3
+              </div>
+              <div id="compare-bar-items" class="flex items-center gap-2 flex-1 overflow-x-auto scrollbar-hide"></div>
+              <button
+                id="compare-clear-btn"
+                class="flex-shrink-0 px-3 py-1.5 rounded-lg text-xs font-bold text-slate-500 hover:text-red-500 hover:bg-red-50 dark:hover:bg-red-900/20 transition-all border border-slate-200 dark:border-slate-700"
+              >
+                <span data-i18n="compare_clear">清空</span>
+              </button>
+            </div>
           </div>
-          <h3 class="text-lg font-black text-slate-900 dark:text-white mb-2"><span data-i18n="compare_title_label">选择产品对比</span></h3>
-          <p class="text-sm text-slate-500 dark:text-slate-400 mb-4" data-i18n="compare_select_empty">
-            请先在产品页选择 2~3 款产品查看详细参数对比。
-          </p>
-          <a href="/products/" class="inline-flex items-center gap-2 bg-primary text-white px-5 py-2.5 rounded-xl font-bold text-sm hover:shadow-lg hover:shadow-primary/20 transition-all">
-            <span class="material-symbols-outlined text-sm">arrow_forward</span>
-            <span data-i18n="compare_go_to_products"><span data-i18n="compare_go_to_products_mobile">前往产品页</span>选择</span>
-          </a>
-        </div>
-        </div>
-      </section>
+        </section>
 
-      <!-- CTA Section -->
-      <section class="fullwidth-bg py-12">
-        <div class="section-content">
-        <div class="bg-gradient-to-br from-primary/10 to-primary/5 rounded-2xl p-8 text-center">
-          <h2 class="text-xl font-bold mb-3 text-slate-900 dark:text-white"><span data-i18n="compare_not_sure">还不确定怎么选？</span></h2>
-          <p class="text-sm text-slate-600 dark:text-slate-400 mb-6" data-i18n="compare_contact_engineer_short">联系工程师团队，为您<span data-i18n="central_kitchen_recommended">推荐</span>最优方案。</p>
-          <div class="flex flex-wrap justify-center gap-3">
-            <a href="/quote" class="bg-primary text-white px-6 py-3 rounded-xl font-bold text-sm hover:shadow-lg hover:shadow-primary/20 transition-all flex items-center gap-2">
-              <span><span data-i18n="compare_get_quote">获取报价</span></span>
-            </a>
-            <a href="https://wa.me/8613163756465" data-wa-message-key="wa_msg_products_compare" target="_blank" rel="noopener noreferrer" class="bg-[#25D366] text-white px-6 py-3 rounded-xl font-bold text-sm hover:shadow-lg transition-all flex items-center gap-2" >
-              <span class="material-symbols-outlined text-base">chat</span>
-              <span>WhatsApp</span>
-            </a>
+        <!-- Comparison Table -->
+        <section id="comparison-section" class="fullwidth-bg py-8 hidden">
+          <div class="section-content">
+            <div class="flex items-center justify-between mb-4">
+              <h2 class="text-lg font-black text-slate-900 dark:text-white">
+                <span data-i18n="compare_compare_params">参数对比</span>
+              </h2>
+              <a
+                href="/products/"
+                id="compare-add-more"
+                class="text-xs text-primary font-bold flex items-center gap-1 hover:underline"
+              >
+                <span class="material-symbols-outlined text-sm">edit</span>
+                <span data-i18n="compare_edit_selection">
+                  <span data-i18n="compare_edit">修改</span>
+                  对比产品
+                </span>
+              </a>
+            </div>
+            <div
+              class="bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 overflow-hidden shadow-sm"
+            >
+              <div id="comparison-table" class="overflow-x-auto"></div>
+            </div>
           </div>
-        </div>
-        </div>
-      </section>
-    </div>
+        </section>
+
+        <!-- Empty State -->
+        <section id="compare-empty" class="fullwidth-bg py-8">
+          <div class="section-content">
+            <div
+              class="bg-gradient-to-br from-slate-50 dark:from-slate-900 to-white dark:bg-black rounded-2xl border border-slate-200 dark:border-slate-700 p-8 text-center"
+            >
+              <div class="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-4">
+                <span class="material-symbols-outlined text-3xl text-primary">compare</span>
+              </div>
+              <h3 class="text-lg font-black text-slate-900 dark:text-white mb-2">
+                <span data-i18n="compare_title_label">选择产品对比</span>
+              </h3>
+              <p class="text-sm text-slate-500 dark:text-slate-400 mb-4" data-i18n="compare_select_empty">
+                请先在产品页选择 2~3 款产品查看详细参数对比。
+              </p>
+              <a
+                href="/products/"
+                class="inline-flex items-center gap-2 bg-primary text-white px-5 py-2.5 rounded-xl font-bold text-sm hover:shadow-lg hover:shadow-primary/20 transition-all"
+              >
+                <span class="material-symbols-outlined text-sm">arrow_forward</span>
+                <span data-i18n="compare_go_to_products">
+                  <span data-i18n="compare_go_to_products_mobile">前往产品页</span>
+                  选择
+                </span>
+              </a>
+            </div>
+          </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="fullwidth-bg py-12">
+          <div class="section-content">
+            <div class="bg-gradient-to-br from-primary/10 to-primary/5 rounded-2xl p-8 text-center">
+              <h2 class="text-xl font-bold mb-3 text-slate-900 dark:text-white">
+                <span data-i18n="compare_not_sure">还不确定怎么选？</span>
+              </h2>
+              <p class="text-sm text-slate-600 dark:text-slate-400 mb-6" data-i18n="compare_contact_engineer_short">
+                联系工程师团队，为您
+                <span data-i18n="central_kitchen_recommended">推荐</span>
+                最优方案。
+              </p>
+              <div class="flex flex-wrap justify-center gap-3">
+                <a
+                  href="/quote"
+                  class="bg-primary text-white px-6 py-3 rounded-xl font-bold text-sm hover:shadow-lg hover:shadow-primary/20 transition-all flex items-center gap-2"
+                >
+                  <span><span data-i18n="compare_get_quote">获取报价</span></span>
+                </a>
+                <a
+                  href="https://wa.me/8613163756465"
+                  data-wa-message-key="wa_msg_products_compare"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="bg-[#25D366] text-white px-6 py-3 rounded-xl font-bold text-sm hover:shadow-lg transition-all flex items-center gap-2"
+                >
+                  <span class="material-symbols-outlined text-base">chat</span>
+                  <span>WhatsApp</span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
     </main>
 
     <footer data-component="footer"></footer>
@@ -181,27 +248,28 @@
     <!-- Scripts -->
     <script src="/assets/js/ui/dropdown-styles.js"></script>
     <script src="/assets/js/ui/dropdown-base.js"></script>
-    <script defer src="/assets/js/ui/products-dropdown.js?v=202605191301"></script>
-    <script defer src="/assets/js/ui/applications-dropdown.js?v=202605191301"></script>
-    <script defer src="/assets/js/ui/support-dropdown.js?v=202605191301"></script>
-    <script defer src="/assets/js/ui/about-dropdown.js?v=202605191301"></script>
-    <script defer src="/assets/js/ui/navigator.js?v=202605191301"></script>
-    <script defer src="/assets/js/ui/slide-menu.js?v=202605191301"></script>
+    <script defer src="/assets/js/ui/products-dropdown.js?v=202605191327"></script>
+    <script defer src="/assets/js/ui/applications-dropdown.js?v=202605191327"></script>
+    <script defer src="/assets/js/ui/support-dropdown.js?v=202605191327"></script>
+    <script defer src="/assets/js/ui/about-dropdown.js?v=202605191327"></script>
+    <script defer src="/assets/js/ui/navigator.js?v=202605191327"></script>
+    <script defer src="/assets/js/ui/slide-menu.js?v=202605191327"></script>
     <script defer src="/assets/js/ui/search-engine.js"></script>
-    <script defer src="/assets/js/ui/footer.js?v=202605191301"></script>
-    <script defer src="/assets/js/lang-registry.js?v=202605191301"></script>
-    <script defer src="/assets/js/translations.js?v=202605191301"></script><script defer src="/assets/js/translations-dropdown-template.js?v=202605191301"></script>
+    <script defer src="/assets/js/ui/footer.js?v=202605191327"></script>
+    <script defer src="/assets/js/lang-registry.js?v=202605191327"></script>
+    <script defer src="/assets/js/translations.js?v=202605191327"></script>
+    <script defer src="/assets/js/translations-dropdown-template.js?v=202605191327"></script>
     <script defer src="/assets/js/contacts.js"></script>
     <script defer src="/assets/js/router.js"></script>
     <script defer src="/assets/js/ui/helpers.js"></script>
     <script defer src="/assets/js/ui/page-effects.js"></script>
     <script defer src="/assets/js/ui/form-interactions.js"></script>
     <script defer src="/assets/js/page-interactions.js"></script>
-    <script defer src="/assets/js/product-grid.js?v=202605191301"></script>
-    <script defer src="/assets/js/compare.js?v=202605191301"></script>
+    <script defer src="/assets/js/product-grid.js?v=202605191327"></script>
+    <script defer src="/assets/js/compare.js?v=202605191327"></script>
 
     <script src="/assets/js/utils/device-utils.js"></script>
-    <script src="/assets/js/spa-router.js?v=202605191301"></script>
+    <script src="/assets/js/spa-router.js?v=202605191327"></script>
     <script defer src="/assets/js/ui/floating-actions.js"></script>
-</body>
+  </body>
 </html>
