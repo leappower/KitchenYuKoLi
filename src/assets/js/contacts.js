@@ -60,8 +60,8 @@
     "/applications/canteen/": window.t("nav_applications_canteen", "Canteen"),
     "/applications/menu-lab/": window.t("nav_applications_menu_lab", "Menu Lab"),
     "/applications/cloud-kitchen/": window.t("nav_applications_cloud_kitchen", "Cloud Kitchen"),
-    "/profit-calculator/": window.t("nav_profit_calculator", "ROI Calculator"),
-    "/cases/": window.t("nav_case_studies", "Case Studies"),
+    "/profit-calculator/": window.t("nav_roi", "ROI Calculator"),
+    "/cases/": window.t("nav_cases", "Case Studies"),
   };
 
   function getPageName() {

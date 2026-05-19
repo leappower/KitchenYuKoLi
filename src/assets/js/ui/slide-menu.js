@@ -504,15 +504,15 @@
       },
       {
         key: "nav_cases",
-        label: window.t("nav_case_studies", "Case Studies"),
+        label: window.t("nav_cases", "Case Studies"),
         href: "/cases/",
         id: "cases",
         icon: "cases",
         children: [],
       },
       {
-        key: "nav_profit_calculator",
-        label: window.t("nav_profit_calculator", "ROI Calculator"),
+        key: "nav_roi",
+        label: window.t("nav_roi", "ROI Calculator"),
         href: "/profit-calculator/",
         id: "profit-calculator",
         icon: "calculate",

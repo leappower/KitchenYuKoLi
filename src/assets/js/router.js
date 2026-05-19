@@ -112,7 +112,7 @@
     var i18nLinkMap = {
       footer_hardware_title: PAGES.products,
       nav_hardware: PAGES.products,
-      nav_case_studies: PAGES.cases,
+      nav_cases: PAGES.cases,
       footer_support_title: PAGES.support,
       nav_support: PAGES.support,
       nav_contact: PAGES.quote,

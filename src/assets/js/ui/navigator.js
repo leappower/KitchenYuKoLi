@@ -57,14 +57,14 @@
     },
     {
       key: "nav_cases",
-      label: _t("nav_case_studies", "Case Studies"),
+      label: _t("nav_cases", "Case Studies"),
       path: "/cases/",
       id: "cases",
       hasDropdown: false,
     },
     {
-      key: "nav_profit_calculator",
-      label: _t("nav_profit_calculator", "ROI Calculator"),
+      key: "nav_roi",
+      label: _t("nav_roi", "ROI Calculator"),
       path: "/profit-calculator/",
       id: "profit-calculator",
       hasDropdown: false,

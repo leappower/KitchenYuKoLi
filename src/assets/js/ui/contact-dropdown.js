@@ -20,9 +20,9 @@
   /* ───────────────────────── DATA ───────────────────────── */
 
   var ITEMS = [
-    { key: "nav_contact_us", icon: "grid_view", href: "/contact/" },
+    { key: "nav_contact", icon: "grid_view", href: "/contact/" },
     {
-      key: "nav_contact_whatsapp",
+      key: "nav_whatsapp",
       icon: "chat",
       href: "https://wa.me/" + (window.Contacts ? window.Contacts.whatsapp : "8613163756465"),
       isWhatsApp: true,
