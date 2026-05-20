@@ -1056,6 +1056,12 @@
         }, { passive: true });
       }
     });
+
+    /* Preload search index for faster first search */
+    if (typeof window.SearchEngine !== 'undefined' && window.SearchEngine &&
+        typeof window.SearchEngine.preload === 'function') {
+      window.SearchEngine.preload();
+    }
   }
 
   /* ================================================================
@@ -1438,11 +1444,6 @@
 
     initSearchInteraction();
     
-    // Preload search index for faster first search
-    if (typeof window.SearchEngine !== 'undefined' && window.SearchEngine) {
-      window.SearchEngine.preload();
-    }
-    
     /* Dropdown trigger click — close other dropdowns on trigger click.
      * DropdownBase.bindTriggers() handles toggle (touch) or pass-through (non-touch). */
     document.addEventListener(
@@ -1716,6 +1717,9 @@
     if (matchedItem && matchedItem.classList) {
       matchedItem.classList.add("is-active");
     }
+
+    /* Re-initialize search interaction after mount (DOM now has .ios-search-bar) */
+    initSearchInteraction();
   }
 
   /* ================================================================
