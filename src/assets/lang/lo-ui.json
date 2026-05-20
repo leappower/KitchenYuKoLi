@@ -3342,5 +3342,12 @@
   "roi_equip_stirfry": "Smart Wok",
   "wechat_modal_title": "Scan WeChat QR Code",
   "wechat_modal_subtitle": "Add our enterprise WeChat for dedicated support",
-  "wechat_modal_close": "Close"
+  "home_solution_small_restaurant": "Small Dining",
+  "home_solution_cloud_kitchen": "Cloud Kitchen / Delivery",
+  "home_solution_food_factory": "Food Factory",
+  "home_solution_menu_lab": "Culinary Lab",
+  "home_int_small_restaurant_desc": "Maximize space and efficiency. Compact commercial kitchen solutions delivering versatile cooking in a minimal footprint, boosting space utilization and accelerating ROI.",
+  "home_int_cloud_kitchen_desc": "Rapid output, stable under pressure. Designed for high-volume orders with standardized workflows, ensuring consistent quality and efficient turnover during peak hours.",
+  "home_int_food_factory_desc": "Scaled smart manufacturing, rigorous quality control. High-capacity equipment seamlessly integrating with automated lines, meeting food safety standards for lean mass production.",
+  "home_int_menu_lab_desc": "Precision temp control, inspiration incubation. Customized for R&D, offering extreme parameter adjustment and flexible modular combinations to empower culinary innovation and standardization."
 }

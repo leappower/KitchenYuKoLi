@@ -3336,5 +3336,12 @@
   "roi_equip_stirfry": "智能炒菜机",
   "wechat_modal_title": "扫描微信二维码",
   "wechat_modal_subtitle": "添加企业微信获取专属支持",
-  "wechat_modal_close": "关闭"
+  "home_solution_small_restaurant": "小型餐饮",
+  "home_solution_cloud_kitchen": "云厨房/外卖",
+  "home_solution_food_factory": "食品工厂",
+  "home_solution_menu_lab": "菜系实验室",
+  "home_int_small_restaurant_desc": "寸土寸金，高效出餐。紧凑型商厨方案，以极小占地实现多功能烹饪，提升坪效，加速回本。",
+  "home_int_cloud_kitchen_desc": "极速出餐，稳定抗压。专为高并发订单设计，标准化作业流程，确保高峰期出品一致与高效流转。",
+  "home_int_food_factory_desc": "规模智造，严苛品控。大产能设备矩阵，无缝对接自动化产线，符合食安标准，实现精益量产。",
+  "home_int_menu_lab_desc": "精准温控，灵感孵化。为菜品研发定制，极致参数调节与灵活模块组合，赋能烹饪创新与标准定义。"
 }

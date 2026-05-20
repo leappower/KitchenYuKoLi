@@ -3299,5 +3299,12 @@
   "cases_industry_central_kitchen": "セントラルキッチン",
   "cases_industry_chain_restaurant": "チェーン店",
   "cases_industry_smart_canteen": "スマート食堂",
-  "cases_industry_cloud_kitchen": "クラウドキッチン"
+  "home_solution_small_restaurant": "小規模飲食店",
+  "home_solution_cloud_kitchen": "クラウドキッチン/宅配",
+  "home_solution_food_factory": "食品工場",
+  "home_solution_menu_lab": "料理研究室",
+  "home_int_small_restaurant_desc": "多機能コンパクト設計で提供スピード向上、人手不足を解消。少ない投資で効果的に。",
+  "home_int_cloud_kitchen_desc": "宅配特化の効率的な運用、ピーク時も安定した提供、イートインコスト不要。",
+  "home_int_food_factory_desc": "バッチ品質が安定、検査合格もスムーズ、自動化で人件費30%削減。",
+  "home_int_menu_lab_desc": "革新的な料理を正確に再現、レシピから製品まで全工程をパラメータ管理。"
 }
