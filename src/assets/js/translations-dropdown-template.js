@@ -55,7 +55,7 @@ window.LanguageDropdownTemplate = {
 
   // 创建分组标题
   createGroupTitle: function (titleKey) {
-    var label = typeof window.t === "function" ? window.t(titleKey, titleKey) : titleKey;
+    var label = typeof window.uiText === "function" ? window.uiText(titleKey, titleKey) : titleKey;
     return (
       '<div class="px-3 py-1.5 text-[10px] font-semibold text-slate-400 uppercase tracking-wider" data-i18n="' +
       titleKey +

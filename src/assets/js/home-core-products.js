@@ -20,9 +20,8 @@
   }
 
   function tl(key, fallback) {
-    if (typeof window.t === "function") {
-      var result = window.t(key);
-      if (result && result !== key) return result;
+    if (typeof window.uiText === "function") {
+      return window.uiText(key, fallback);
     }
     return fallback || key;
   }
@@ -146,8 +145,7 @@
           // Show empty state instead of blank
           var emptyContainer = document.querySelector('[id^="home-core-products"]');
           if (emptyContainer) {
-            var emptyMsg =
-              tl("no_core_products", "暂无核心产品");
+            var emptyMsg = tl("no_core_products", "暂无核心产品");
             emptyContainer.innerHTML = '<div class="text-center text-slate-400 py-8">' + escHtml(emptyMsg) + "</div>";
           }
           callback([], "network");
@@ -252,8 +250,7 @@
 
     loadCoreProducts(function (products, source) {
       if (!products || products.length === 0) {
-        var noDataMsg =
-          tl("no_core_products_data", "暂无核心产品数据");
+        var noDataMsg = tl("no_core_products_data", "暂无核心产品数据");
         container.innerHTML = '<div class="text-center text-slate-400 py-8">' + escHtml(noDataMsg) + "</div>";
         return;
       }
@@ -311,7 +308,7 @@
         html += "</div>";
         html += '<div class="flex justify-center mt-10">';
         html +=
-          "<button id=\"hcp-toggle-pc\" onclick=\"(function(){var h=document.getElementById('hcp-hidden-pc'),b=document.getElementById('hcp-toggle-pc');if(h.style.display==='none'){h.style.display='';b.textContent=typeof window.t==='function'?window.t('home_hw_collapse','Collapse ▲'):'Collapse ▲'}else{h.style.display='none';b.textContent=typeof window.t==='function'?window.t('home_hw_show_more','View More Products ▼'):'View More Products ▼'}})()\" class=\"px-8 py-3 rounded-full border-2 border-primary text-primary font-bold hover:bg-primary hover:text-white transition-all cursor-pointer\" data-i18n=\"home_hw_show_more\">" +
+          "<button id=\"hcp-toggle-pc\" onclick=\"(function(){var h=document.getElementById('hcp-hidden-pc'),b=document.getElementById('hcp-toggle-pc');if(h.style.display==='none'){h.style.display='';b.textContent=typeof window.uiText==='function'?window.uiText('home_hw_collapse','Collapse ▲'):'Collapse ▲'}else{h.style.display='none';b.textContent=typeof window.uiText==='function'?window.uiText('home_hw_show_more','View More Products ▼'):'View More Products ▼'}})()\" class=\"px-8 py-3 rounded-full border-2 border-primary text-primary font-bold hover:bg-primary hover:text-white transition-all cursor-pointer\" data-i18n=\"home_hw_show_more\">" +
           tl("home_hw_show_more", "查看更多产品 ▼") +
           "</button>";
         html += "</div>";
@@ -337,9 +334,7 @@
       if (!products || products.length === 0) {
         container.innerHTML =
           '<div class="text-center text-slate-400 py-6">' +
-          escHtml(
-            tl("no_core_products_data", "暂无核心产品数据")
-          ) +
+          escHtml(tl("no_core_products_data", "暂无核心产品数据")) +
           "</div>";
         return;
       }
@@ -391,7 +386,7 @@
         html += "</div>";
         html += '<div class="flex justify-center mt-8">';
         html +=
-          "<button id=\"hcp-toggle-tablet\" onclick=\"(function(){var h=document.getElementById('hcp-hidden-tablet'),b=document.getElementById('hcp-toggle-tablet');if(h.style.display==='none'){h.style.display='';b.textContent=typeof window.t==='function'?window.t('home_hw_collapse','Collapse ▲'):'Collapse ▲'}else{h.style.display='none';b.textContent=typeof window.t==='function'?window.t('home_hw_show_more','View More Products ▼'):'View More Products ▼'}})()\" class=\"px-6 py-2.5 rounded-full border-2 border-primary text-primary font-bold hover:bg-primary hover:text-white transition-all cursor-pointer text-sm\" data-i18n=\"home_hw_show_more\">" +
+          "<button id=\"hcp-toggle-tablet\" onclick=\"(function(){var h=document.getElementById('hcp-hidden-tablet'),b=document.getElementById('hcp-toggle-tablet');if(h.style.display==='none'){h.style.display='';b.textContent=typeof window.uiText==='function'?window.uiText('home_hw_collapse','Collapse ▲'):'Collapse ▲'}else{h.style.display='none';b.textContent=typeof window.uiText==='function'?window.uiText('home_hw_show_more','View More Products ▼'):'View More Products ▼'}})()\" class=\"px-6 py-2.5 rounded-full border-2 border-primary text-primary font-bold hover:bg-primary hover:text-white transition-all cursor-pointer text-sm\" data-i18n=\"home_hw_show_more\">" +
           tl("home_hw_show_more", "查看更多产品 ▼") +
           "</button>";
         html += "</div>";
@@ -416,9 +411,7 @@
       if (!products || products.length === 0) {
         container.innerHTML =
           '<div class="text-center text-slate-400 py-4">' +
-          escHtml(
-            tl("no_core_products_data", "暂无核心产品数据")
-          ) +
+          escHtml(tl("no_core_products_data", "暂无核心产品数据")) +
           "</div>";
         return;
       }

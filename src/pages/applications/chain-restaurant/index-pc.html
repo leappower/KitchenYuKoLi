@@ -176,14 +176,15 @@
           </div>
           <div class="w-full lg:w-1/2 relative">
           <div class="absolute -inset-4 bg-primary/20 rounded-3xl blur-3xl"></div>
-          <div class="relative rounded-3xl overflow-hidden shadow-2xl border border-white/10" data-hero-video>
+          <div class="relative rounded-3xl overflow-hidden shadow-2xl border border-white/10 aspect-[3/2]" data-hero-video>
           <video
-          class="hero-video-player w-full aspect-[3/2] object-cover"
+          class="hero-video-player"
           src="/assets/video/chain-restaurant-delivery.mp4"
           poster="/assets/images/applications/chain-restaurant/hero.webp"
           preload="metadata"
           muted
           playsinline
+          webkit-playsinline
           loop controlsList="nodownload" disableRemotePlayback
           ></video>
           <div class="hero-video-overlay">
@@ -197,7 +198,7 @@
           <img
           loading="eager"
           alt="连锁餐饮智能后厨" data-i18n-alt="alt_applications_chain-restaurant_index-pc_连锁餐饮智能后厨"
-          class="hero-video-poster w-full aspect-[3/2] object-cover"
+          class="hero-video-poster w-full h-full object-cover"
           src="/assets/images/applications/chain-restaurant/hero.webp"
           onerror="this.src='/assets/images/default.webp'"
           />
@@ -703,17 +704,17 @@
 
     <!-- Scripts -->
     <script defer src="/assets/js/router.js"></script>
-    <script src="/assets/js/translations.js?v=202605191829"></script>
+    <script src="/assets/js/translations.js?v=202605201031"></script>
     <script src="/assets/js/ui/slide-menu.js"></script>
     <script src="/assets/js/ui/dropdown-styles.js"></script>
     <script src="/assets/js/ui/dropdown-base.js"></script>
     <script src="/assets/js/ui/products-dropdown.js"></script>
-    <script defer src="/assets/js/ui/applications-dropdown.js?v=202605191829"></script>
+    <script defer src="/assets/js/ui/applications-dropdown.js?v=202605201031"></script>
     <script src="/assets/js/ui/support-dropdown.js"></script>
     <script src="/assets/js/ui/about-dropdown.js"></script>
     <script src="/assets/js/ui/contact-dropdown.js"></script>
-    <script src="/assets/js/ui/navigator.js?v=202605191829"></script>
-    <script src="/assets/js/ui/footer.js?v=202605191829"></script>
+    <script src="/assets/js/ui/navigator.js?v=202605201031"></script>
+    <script src="/assets/js/ui/footer.js?v=202605201031"></script>
     <script defer src="/assets/js/ui/floating-actions.js"></script>
     <script src="/assets/js/ui/hero-video.js"></script>
   </body>

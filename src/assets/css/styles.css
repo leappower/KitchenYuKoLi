@@ -755,6 +755,16 @@ a.bg-primary {
   position: relative;
 }
 
+/* iOS: 隐藏系统原生播放按钮覆盖层 */
+[data-hero-video] video::-webkit-media-controls-start-playback-button {
+  display: none !important;
+  -webkit-appearance: none;
+}
+
+[data-hero-video] video::-webkit-media-controls {
+  display: none !important;
+}
+
 /* Poster (封面图) — 初始可见，crossfade 后隐藏 */
 .hero-video-poster {
   width: 100%;

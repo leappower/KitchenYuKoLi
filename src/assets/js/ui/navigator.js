@@ -29,7 +29,7 @@
 
   /** Safe i18n helper — guards against scripts loading before translations.js */
   function _t(key, fallback) {
-    return typeof window.t === "function" ? window.t(key, fallback) : fallback;
+    return typeof window.uiText === "function" ? window.uiText(key, fallback) : fallback;
   }
 
   /* ================================================================
@@ -1668,7 +1668,8 @@
     function () {
       var noResEls = document.querySelectorAll(".cs-no-results");
       noResEls.forEach(function (el) {
-        el.textContent = typeof window.t === "function" ? window.uiText("no_matching_results", "无匹配结果") : "无匹配结果";
+        el.textContent =
+          typeof window.t === "function" ? window.uiText("no_matching_results", "无匹配结果") : "无匹配结果";
       });
     },
     "langChanged:navNoResults"

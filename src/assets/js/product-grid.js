@@ -16,9 +16,8 @@
   }
 
   function tl(key, fallback) {
-    if (typeof window.t === "function") {
-      var v = window.t(key, fallback);
-      return v === key ? fallback : v;
+    if (typeof window.uiText === "function") {
+      return window.uiText(key, fallback);
     }
     return fallback;
   }
@@ -965,7 +964,9 @@
       if (allTabs.length > maxVis) {
         var remaining = allTabs.length - maxVis;
         var collapseText =
-          typeof window.t === "function" ? window.uiText("products_collapse", "\u6536\u8d77 \u25B2") : "\u6536\u8d77 \u25B2";
+          typeof window.t === "function"
+            ? window.uiText("products_collapse", "\u6536\u8d77 \u25B2")
+            : "\u6536\u8d77 \u25B2";
         var moreText =
           typeof window.t === "function"
             ? window.uiText("products_more", "+" + remaining + " \u66f4\u591a \u25BC").replace("{n}", remaining)
