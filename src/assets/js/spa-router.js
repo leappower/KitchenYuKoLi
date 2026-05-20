@@ -396,6 +396,7 @@
           "/contact": "contact",
           "/cases": "cases",
           "/profit-calculator": "profit",
+          "/applications": "applications",
         };
         var best = "";
         for (var key in map) {
