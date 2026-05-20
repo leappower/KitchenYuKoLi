@@ -97,6 +97,14 @@ const ROUTES = [
   { slug: 'products',     navId: 'products' },
   { slug: 'applications', navId: 'applications' },
   { slug: 'cases',        navId: 'cases' },
+  { slug: 'cases/bangkok',    navId: 'cases' },
+  { slug: 'cases/cebu',       navId: 'cases' },
+  { slug: 'cases/hanoi',      navId: 'cases' },
+  { slug: 'cases/hcmc',       navId: 'cases' },
+  { slug: 'cases/jakarta',    navId: 'cases' },
+  { slug: 'cases/kl',         navId: 'cases' },
+  { slug: 'cases/manila',     navId: 'cases' },
+  { slug: 'cases/surabaya',    navId: 'cases' },
   { slug: 'profit-calculator', navId: 'profit-calculator' },
   { slug: 'products/compare', navId: 'products' },
   { slug: 'catalog',      navId: 'catalog' },
@@ -225,6 +233,59 @@ function injectLangRegistry(html) {
 }
 
 /**
+ * Generate a minimal responsive entry page for routes that have device-specific
+ * HTML files (index-pc.html etc.) but no src/pages/<route>/index.html entry point.
+ *
+ * This creates a responsive redirect similar to what the SPA normally does:
+ * load device-specific file based on screen width.
+ */
+function generateResponsiveEntry(route) {
+  var bp = BASE_PATH || '';
+  var slug = route.slug;
+  var canonicalUrl = 'https://www.kitchen.yukoli.com/' + (bp ? bp.replace(/^\//, '') + '/' : '') + slug + '/';
+  var title = 'YuKoLi | Smart Kitchen Solutions - ' + slug.split('/').pop().replace(/-/g, ' ').replace(/\w\S*/g, function(w){return w.charAt(0).toUpperCase()+w.substr(1);});
+
+  return [
+    '<!DOCTYPE html>',
+    '<html class="light" lang="en">',
+    '<head>',
+    '  <meta charset="UTF-8">',
+    '  <meta name="viewport" content="width=device-width, initial-scale=1.0">',
+    '  <title>' + title + '</title>',
+    '  <link rel="canonical" href="' + canonicalUrl + '"/>',
+    '  <meta property="og:url" content="' + canonicalUrl + '">',
+    '  <meta property="og:type" content="website">',
+    '  <meta property="og:title" content="' + title + '">',
+    '  <meta name="robots" content="index, follow">',
+    '',
+    '  <script defer src="' + bp + '/assets/js/i18n/navigator.js"></script>',
+    '  <script defer src="' + bp + '/assets/js/i18n/dropdown.js"></script>',
+    '  <script defer src="' + bp + '/assets/js/i18n/lang-registry.js"></script>',
+    '  <script defer src="' + bp + '/assets/js/i18n/translations.js"></script>',
+    '  <script>',
+    '    (function() {',
+    '      var w = window.innerWidth;',
+    '      var file;',
+    '      if (w < 768) { file = "index-mobile.html"; }',
+    '      else if (w < 1280) { file = "index-tablet.html"; }',
+    '      else { file = "index-pc.html"; }',
+    '      var lang = localStorage.getItem("lang") || "en";',
+    '      var href = file + "?lang=" + lang;',
+    '      window.location.replace(href);',
+    '    })();',
+    '  </script>',
+    '</head>',
+    '<body>',
+    '  <noscript>',
+    '    <meta http-equiv="refresh" content="0;url=index-pc.html?lang=en">',
+    '  </noscript>',
+    '  <p>Redirecting to the appropriate device view...</p>',
+    '</body>',
+    '</html>'
+  ].join('\n');
+}
+
+/**
  * Generate a route-specific index.html that serves as the directory entry.
  *
  * This file is similar to src/pages/<route>/index.html but with:
@@ -238,8 +299,15 @@ function generateRouteIndex(route) {
   const srcEntryFile = path.join(srcDir, 'index.html');
 
   if (!fs.existsSync(srcEntryFile)) {
-    log('WARN: No index.html found for route: ' + route.slug);
-    return false;
+    // Auto-generate a responsive entry for routes without index.html
+    // (e.g., case city pages like cases/manila/)
+    log('AUTO: Generating responsive entry for route: ' + route.slug);
+    const autoHtml = generateResponsiveEntry(route);
+    const distRouteDir = path.join(DIST_DIR, route.slug);
+    ensureDir(distRouteDir);
+    const distFile = path.join(distRouteDir, 'index.html');
+    fs.writeFileSync(distFile, autoHtml, 'utf-8');
+    return true;
   }
 
   // Read the source entry file
