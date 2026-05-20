@@ -101,6 +101,11 @@ if command -v node &>/dev/null; then
 fi
 fi
 
+# Run SSG: generate route index pages and copy device files to dist/<route>/
+if command -v node &>/dev/null; then
+  node scripts/build-ssg.js 2>&1 | grep -E 'Step|✓|✅|WARN|ERROR' || true
+fi
+
 FILES=$(find "$DIST" -type f | wc -l | tr -d ' ')
 echo ""
 echo "✅ Build complete: $FILES files in dist/"
