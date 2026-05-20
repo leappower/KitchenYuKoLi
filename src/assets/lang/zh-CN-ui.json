@@ -2334,7 +2334,7 @@
   "support_training_desc": "提供完整操作手册和视频教程，设备操作简单直观。全天候在线技术支持，遇到问题随时远程指导，快速解决。",
   "support_troubleshooting": "在线排障，极速响应",
   "support_uptime_reliability": "设备正常运行率",
-  "support_warranty_1yr_desc": "整机保修 1 年。质保期内因质量问题损坏的配件免费更换（损耗件除外）。核心配件（IGBT 模块、电磁线圈、锅体）享 3 年质保。",
+  "support_warranty_1yr_desc": "整机保修 1 年。质保期内因质量问题损坏的配件免费更换（损耗件除外）。核心配件（IGBT 模块、电磁线圈、锅体）享 3 年质",
   "support_warranty_control_board_desc": "控制板保修 1 年（非质量问题除外）。如需更换，提供原厂全新配件，48 小时发货，必要时安排工程师远程或上门指导安装。",
   "support_warranty_cta_desc": "YuKoLi 统一 1 年质保服务，让您专注运营，售后无忧。",
   "support_warranty_cta_primary": "获取质保方案",
@@ -3475,5 +3475,16 @@
   "profit_calc_tco_yukoli": "YuKoLi方案",
   "profit_calc_tco_year": "第{n}年",
   "profit_calc_tco_annual_savings": "年度节省",
-  "profit_calc_tco_cumulative": "累计节省"
+  "profit_calc_tco_cumulative": "累计节省",
+  "landing_sp_c1_title": "Operations Director ·",
+  "landing_sp_c2_title": "Central Kitchen Manager ·",
+  "landing_sp_c3_title": "Executive Chef ·",
+  "quote_budget_5k_1w": "5K - 10K",
+  "quote_budget_1w_5w": "10K - 50K",
+  "quote_budget_5w_10w": "50K - 100K",
+  "quote_budget_10w_30w": "100K - 300K",
+  "quote_budget_30w_50w": "300K - 500K",
+  "quote_budget_50w_plus": "500K+",
+  "support_overview_page_title": "Service & Support | YuKoLi Smart Kitchen Equipment",
+  "support_services_page_title": "After-Sales Service Center | YuKoLi Smart Kitchen Equipment"
 }

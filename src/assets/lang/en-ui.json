@@ -3475,5 +3475,16 @@
   "profit_calc_tco_yukoli": "YuKoLi Solution",
   "profit_calc_tco_year": "Year {n}",
   "profit_calc_tco_annual_savings": "Annual Savings",
-  "profit_calc_tco_cumulative": "Cumulative Savings"
+  "profit_calc_tco_cumulative": "Cumulative Savings",
+  "landing_sp_c1_title": "Operations Director ·",
+  "landing_sp_c2_title": "Central Kitchen Manager ·",
+  "landing_sp_c3_title": "Executive Chef ·",
+  "quote_budget_5k_1w": "5K - 10K",
+  "quote_budget_1w_5w": "10K - 50K",
+  "quote_budget_5w_10w": "50K - 100K",
+  "quote_budget_10w_30w": "100K - 300K",
+  "quote_budget_30w_50w": "300K - 500K",
+  "quote_budget_50w_plus": "500K+",
+  "support_overview_page_title": "Service & Support | YuKoLi Smart Kitchen Equipment",
+  "support_services_page_title": "After-Sales Service Center | YuKoLi Smart Kitchen Equipment"
 }
