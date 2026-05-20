@@ -1363,10 +1363,10 @@
 
     /* ---------- 1. 更新 dropdown trigger 元素的高亮 ---------- */
     var triggerSelectors = [
-      "header nav a.prod-dropdown-trigger",
-      "header nav a.app-dropdown-trigger",
-      "header nav a.sup-dropdown-trigger",
-      "header nav a.abt-dropdown-trigger",
+      "header nav a.prod-dropdown-link",
+      "header nav a.app-dropdown-link",
+      "header nav a.sup-dropdown-link",
+      "header nav a.abt-dropdown-link",
       "header nav a[data-sup-trigger-label]",
       "header nav a[data-prod-trigger-label]",
       "header nav a[data-app-trigger-label]",
@@ -1375,14 +1375,14 @@
 
     var triggers = document.querySelectorAll(triggerSelectors.join(", "));
 
+    /* 应用路径映射（提前计算，确保 plain-link 段能正确取到值） */
+    var mappedId = activeSectionId;
+    if (PATH_TO_ACTIVE_MAP[activeSectionId]) {
+      mappedId = PATH_TO_ACTIVE_MAP[activeSectionId];
+    }
+
     for (var i = 0; i < triggers.length; i++) {
       var triggerEl = triggers[i];
-
-      /* 应用路径映射 */
-      var mappedId = activeSectionId;
-      if (PATH_TO_ACTIVE_MAP[activeSectionId]) {
-        mappedId = PATH_TO_ACTIVE_MAP[activeSectionId];
-      }
 
       /* 判断该 trigger 是否属于当前激活的 section */
       var triggerKey =
@@ -1424,7 +1424,11 @@
         plainEl.classList.contains("prod-dropdown-trigger") ||
         plainEl.classList.contains("app-dropdown-trigger") ||
         plainEl.classList.contains("sup-dropdown-trigger") ||
-        plainEl.classList.contains("abt-dropdown-trigger")
+        plainEl.classList.contains("abt-dropdown-trigger") ||
+        plainEl.classList.contains("prod-dropdown-link") ||
+        plainEl.classList.contains("app-dropdown-link") ||
+        plainEl.classList.contains("sup-dropdown-link") ||
+        plainEl.classList.contains("abt-dropdown-link")
       ) {
         continue;
       }

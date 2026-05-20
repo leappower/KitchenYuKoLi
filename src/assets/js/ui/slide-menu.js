@@ -114,7 +114,6 @@
       "  font-size: 17px; font-weight: 600;",
       "  color: #1d1d1f; text-decoration: none;",
       "  -webkit-tap-highlight-color: transparent;",
-      "  border-bottom: .5px solid rgba(60,60,67,.08);",
       "}",
       "html.dark .mobile-menu-l1 { color: #f5f5f7; }",
       "html.dark .mobile-menu-l1 { border-color: rgba(235,235,245,.08); }",
@@ -152,8 +151,8 @@
 
       /* 二级菜单分隔线 & 表情标签 */
       ".mobile-menu-l2-separator {",
-      "  height: .5px; background: rgba(60,60,67,.12);",
-      "  margin: 8px 20px 8px 60px;",
+      "  height: .5px; background: rgba(60,60,67,.08);",
+      "  margin: 6px 0;",
       "}",
       "html.dark .mobile-menu-l2-separator {",
       "  background: rgba(235,235,245,.15);",
@@ -192,21 +191,17 @@
       "  font-size: 14px; color: #ec5b13;",
       "}",
 
-      /* 二级菜单项标签 */
+      /* 二级菜单项标签 — 去掉下划线 */
       ".mobile-menu-l2-label {",
-      "  flex: 1; min-width: 0; text-decoration: underline;",
-      "  text-underline-offset: 4px;",
-      "  text-decoration-color: rgba(60,60,67,.15);",
-      "  text-decoration-thickness: 1px;",
-      "  transition: text-decoration-color .2s, text-decoration-thickness .2s;",
+      "  flex: 1; min-width: 0;",
       "}",
-      ".mobile-menu-l2-item:active .mobile-menu-l2-label {",
-      "  text-decoration-color: rgba(60,60,67,.35);",
+      /* 左侧激活指示器 — 用 box-shadow 避免伪元素布局冲突 */
+      ".mobile-menu-l2-item {",
+      "  box-shadow: inset 3px 0 0 0 transparent;",
+      "  transition: box-shadow .2s ease;",
       "}",
-      ".mobile-menu-l2-item.is-active .mobile-menu-l2-label {",
-      "  text-decoration: underline; text-decoration-style: solid;",
-      "  text-decoration-color: var(--color-primary, #ec5b13);",
-      "  text-decoration-thickness: 2px;",
+      ".mobile-menu-l2-item.is-active {",
+      "  box-shadow: inset 3px 0 0 0 var(--color-primary, #ec5b13);",
       "}",
 
       /* 徽章（如 HOT） */
@@ -460,6 +455,8 @@
         id: "products",
         icon: "kitchen",
         children: [
+          { key: "nav_products_overview", icon: "apps", emoji: "", href: "/products/" },
+          { key: "_sep", _separator: true },
           { key: "nav_products_cutting", icon: "content_cut", emoji: "", href: "/products/cutting/" },
           { key: "nav_products_stirfry", icon: "local_fire_department", emoji: "🔥", href: "/products/stirfry/" },
           { key: "nav_products_frying", icon: "outdoor_grill", emoji: "", href: "/products/frying/" },
@@ -475,6 +472,13 @@
         id: "applications",
         icon: "apps",
         children: [
+          {
+            key: "nav_applications_overview",
+            icon: "apps",
+            emoji: "",
+            href: "/applications/",
+          },
+          { key: "_sep_app", _separator: true },
           {
             key: "nav_applications_small_restaurant",
             icon: "storefront",
@@ -527,7 +531,9 @@
         id: "support",
         icon: "support_agent",
         children: [
-          { key: "nav_support_services", icon: "grid_view", emoji: "", href: "/support/" },
+          { key: "nav_support_overview", icon: "apps", emoji: "", href: "/support/" },
+          { key: "_sep_sup", _separator: true },
+          { key: "nav_support_services", icon: "grid_view", emoji: "", href: "/support/services/" },
           { key: "nav_support_installation", icon: "construction", emoji: "", href: "/support/installation/" },
           { key: "nav_support_warranty", icon: "verified", emoji: "", href: "/support/warranty/" },
           { key: "nav_support_spare_parts", icon: "build_circle", emoji: "", href: "/support/spare-parts/" },
@@ -578,6 +584,8 @@
     var matchedLength = 0;
 
     children.forEach(function (child) {
+      // Skip separator items (no href)
+      if (!child.href) return;
       var childPath = child.href.replace(/\/$/, "");
 
       // 精确匹配优先
@@ -646,6 +654,7 @@
    */
   function renderMenuItem(item) {
     var subMenuHtml = "";
+    var l1ActiveClass = "";
 
     if (item.children && item.children.length > 0) {
       var activeHref = findActiveChildHref(item.children);
@@ -659,7 +668,7 @@
       subMenuHtml = '<div class="mobile-menu-l2" data-menu-l2="' + escapeHtml(item.id) + '">' + childItemsHtml;
 
       /* 判断一级菜单是否有子项匹配当前路径 */
-      var l1ActiveClass = activeHref ? " is-active" : "";
+      if (activeHref) l1ActiveClass = " is-active";
 
       // products 分类末尾追加「查看全部产品」链接
       if (item.id === "products") {
@@ -672,42 +681,55 @@
           "</a>";
       }
 
-      // applications 分类末尾追加「查看全部行业场景」链接
-      if (item.id === "applications") {
-        subMenuHtml +=
-          '<a class="mobile-menu-l2-item mobile-menu-l2-viewall" href="/applications/">' +
-          '<span class="mobile-menu-l2-icon">' +
-          '<span class="material-symbols-outlined">grid_view</span>' +
-          "</span>" +
-          '<span class="mobile-menu-l2-label" data-i18n="nav_applications_view_all">查看全部行业场景</span>' +
-          "</a>";
-      }
-
       subMenuHtml += "</div>";
     }
 
-    return (
-      '<div class="mobile-menu-l1-wrap">' +
-      '<button class="mobile-menu-l1' +
-      l1ActiveClass +
-      '" data-menu-toggle="' +
-      escapeHtml(item.id) +
-      '" type="button">' +
-      '<span class="mobile-menu-l1-icon">' +
-      '<span class="material-symbols-outlined">' +
-      escapeHtml(item.icon) +
-      "</span>" +
-      "</span>" +
-      '<span class="mobile-menu-l1-label" data-i18n="' +
-      escapeHtml(item.key) +
-      '">' +
-      escapeHtml(item.label || item.key) +
-      "</span>" +
-      '<span class="material-symbols-outlined mobile-menu-l1-arrow">chevron_right</span>' +
-      "</button>" +
-      subMenuHtml +
-      "</div>"
-    );
+    /* 有子菜单 → button 含箭头；无子菜单 → a 链接无箭头 */
+    if (item.children && item.children.length > 0) {
+      return (
+        '<div class="mobile-menu-l1-wrap">' +
+        '<button class="mobile-menu-l1' +
+        l1ActiveClass +
+        '" data-menu-toggle="' +
+        escapeHtml(item.id) +
+        '" type="button">' +
+        '<span class="mobile-menu-l1-icon">' +
+        '<span class="material-symbols-outlined">' +
+        escapeHtml(item.icon) +
+        "</span>" +
+        "</span>" +
+        '<span class="mobile-menu-l1-label" data-i18n="' +
+        escapeHtml(item.key) +
+        '">' +
+        escapeHtml(item.label || item.key) +
+        "</span>" +
+        '<span class="material-symbols-outlined mobile-menu-l1-arrow">chevron_right</span>' +
+        "</button>" +
+        subMenuHtml +
+        "</div>"
+      );
+    } else {
+      return (
+        '<div class="mobile-menu-l1-wrap">' +
+        '<a class="mobile-menu-l1' +
+        l1ActiveClass +
+        '" href="' +
+        escapeHtml(item.href || "#") +
+        '">' +
+        '<span class="mobile-menu-l1-icon">' +
+        '<span class="material-symbols-outlined">' +
+        escapeHtml(item.icon) +
+        "</span>" +
+        "</span>" +
+        '<span class="mobile-menu-l1-label" data-i18n="' +
+        escapeHtml(item.key) +
+        '">' +
+        escapeHtml(item.label || item.key) +
+        "</span>" +
+        "</a>" +
+        "</div>"
+      );
+    }
   }
 
   /**
@@ -920,11 +942,19 @@
     for (var m = 0; m < l1Buttons.length; m++) {
       l1Buttons[m].addEventListener("click", function (evt) {
         var menuId = this.getAttribute("data-menu-toggle");
-        var subMenu = panelEl.querySelector('[data-menu-l2="' + menuId + '"]');
+        var subMenu = menuId ? panelEl.querySelector('[data-menu-l2="' + menuId + '"]') : null;
 
         // 如果子菜单存在且不为空，折叠逻辑由上面的 toggleButtons 处理
         // 如果子菜单为空或不存在，则关闭整个菜单并导航
         if (!subMenu || subMenu.children.length === 0) {
+          closeMenu();
+
+          // <a> 元素使用自身的 href 导航（默认行为）
+          var tagName = this.tagName.toLowerCase();
+          if (tagName === "a") {
+            return; // 让浏览器默认行为导航
+          }
+
           var href = this.getAttribute("data-menu-toggle");
           // Find href from menu items data
           var navItems = getMenuItems();
@@ -935,7 +965,6 @@
               break;
             }
           }
-          closeMenu();
           if (targetItem && targetItem.href) {
             if (window.SpaRouter) {
               try {

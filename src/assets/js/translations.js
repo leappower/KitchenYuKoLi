@@ -1,22 +1,43 @@
 !(function (t) {
   "use strict";
-  var I18N_CACHE_V = 1779186571;
+  var I18N_CACHE_V = 1779258773;
   var _spaRegs = {};
+
+  // ─── Ensure LANG_REGISTRY is loaded ─────────────────────────
+  // Some standalone HTML pages (case studies, applications, etc.)
+  // may not include lang-registry.js in their <script> tags.
+  // Runtime fallback: load via synchronous XHR + script element injection.
+  // Uses <script>.text assignment instead of new Function()/eval() so it
+  // works under strict CSP (script-src with unsafe-inline but no unsafe-eval).
+  (function _ensureLangRegistry() {
+    if (typeof t !== "undefined" && t.LANG_REGISTRY) return;
+    try {
+      var xhr = new XMLHttpRequest();
+      xhr.open("GET", "/assets/js/lang-registry.js", false);
+      xhr.overrideMimeType("text/javascript");
+      xhr.send();
+      if (xhr.status === 200) {
+        var s = document.createElement("script");
+        s.text = xhr.responseText;
+        document.head.appendChild(s);
+      }
+    } catch (e) {
+      console.warn("[i18n] Failed to load lang-registry.js:", e.message);
+    }
+  })();
   function _spaOn(tgt, evt, fn, key) {
     if (_spaRegs[key]) _spaRegs[key].abort();
     var ac = new AbortController();
     _spaRegs[key] = ac;
     tgt.addEventListener(evt, fn, { signal: ac.signal });
   }
-  var e,
-    n,
+  var e = (t.location && t.location.hostname) || "",
+    n = (t.location && t.location.port) || "",
     a =
-      ((e = (t.location && t.location.hostname) || ""),
-      (n = (t.location && t.location.port) || ""),
       "localhost" === e ||
-        "127.0.0.1" === e ||
-        -1 !== ["8080", "3000", "3001", "5000", "9000"].indexOf(n) ||
-        !!/\b(test|staging|preview|dev|internal|local)\b/.test(e.toLowerCase())),
+      "127.0.0.1" === e ||
+      -1 !== ["8080", "3000", "3001", "5000", "9000"].indexOf(n) ||
+      !!/\b(test|staging|preview|dev|internal|local)\b/.test(e.toLowerCase()),
     getO = function () {
       return t.LANG_REGISTRY && t.LANG_REGISTRY.getNativeNames ? t.LANG_REGISTRY.getNativeNames() : {};
     };
@@ -514,11 +535,19 @@
         var labelEl = document.getElementById("current-lang-label");
         if (labelEl) {
           var langName = t;
+          // Try cached this.languages first
           if (this.languages && Array.isArray(this.languages)) {
             var found = this.languages.find(function (l) {
               return l.code === t;
             });
             if (found) langName = found.name;
+          }
+          // Fallback: read nativeName directly from LANG_REGISTRY
+          if (langName === t && window.LANG_REGISTRY && window.LANG_REGISTRY.LANGUAGES) {
+            var found2 = window.LANG_REGISTRY.LANGUAGES.find(function (l) {
+              return l.code === t;
+            });
+            if (found2 && found2.nativeName) langName = found2.nativeName;
           }
           labelEl.textContent = langName;
         }

@@ -395,7 +395,7 @@
           "/about": "about",
           "/contact": "contact",
           "/cases": "cases",
-          "/profit-calculator": "profit-calculator",
+          "/profit-calculator": "profit",
         };
         var best = "";
         for (var key in map) {

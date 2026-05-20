@@ -9,6 +9,7 @@ window.LanguageDropdownTemplate = {
     { id: "common", titleKey: "lang_group_common" },
     { id: "southeast_asia", titleKey: "lang_group_se_asia" },
     { id: "east_asia", titleKey: "lang_group_east_asia" },
+    { id: "european", titleKey: "lang_group_europe" },
     { id: "other", titleKey: "lang_group_other" },
   ],
 

@@ -141,21 +141,39 @@
     /* ── INTERACTION ── */
 
     function bindTriggers() {
-      document.querySelectorAll("." + triggerClass).forEach(function (t) {
+      /* New split trigger: only intercept clicks on toggle button (<button>),
+       * let parent <a> links navigate normally. */
+      var toggleSelector = "." + prefix + "-dropdown-toggle";
+      document.querySelectorAll(toggleSelector).forEach(function (t) {
         if (t[boundFlag]) return;
         t[boundFlag] = true;
         t.addEventListener("click", function (e) {
           if (window.innerWidth <= 720) return;
-          /* Touch devices: toggle dropdown & prevent navigation.
-           * Non-touch devices: let click propagate to SPA router (hover handles dropdown). */
           if (isTouch()) {
             e.preventDefault();
             e.stopPropagation();
-            t.closest("." + wrapClass).classList.toggle("is-open");
+            var wrap = t.closest("." + wrapClass);
+            if (wrap) wrap.classList.toggle("is-open");
           }
-          /* Non-touch: do nothing — hover already opened the dropdown,
-           * and the click should navigate to the overview page via SPA router. */
+          /* Non-touch: do nothing — hover already opened the dropdown. */
         });
+      });
+
+      /* Also check for legacy single-<a> triggers (backward compat, removes old bindings) */
+      document.querySelectorAll("." + triggerClass).forEach(function (t) {
+        if (t[boundFlag + "_legacy"]) return;
+        t[boundFlag + "_legacy"] = true;
+        /* Only intercept if this <a> does NOT contain a separate toggle button (old structure) */
+        if (t.matches("a") && !t.querySelector("." + prefix + "-dropdown-toggle")) {
+          t.addEventListener("click", function (e) {
+            if (window.innerWidth <= 720) return;
+            if (isTouch()) {
+              e.preventDefault();
+              e.stopPropagation();
+              t.closest("." + wrapClass).classList.toggle("is-open");
+            }
+          });
+        }
       });
     }
 
