@@ -536,6 +536,7 @@ function generate404() {
     '  <script defer src="' + bp + '/assets/js/lang-registry.js"></script>',
     '  <script defer src="' + bp + '/assets/js/translations.js"></script>',
     '  <script src="' + bp + '/assets/js/translations-dropdown-template.js"></script>',
+    '  <script defer src="' + bp + '/assets/js/search-engine.js"></script>',
     '  <script defer src="' + bp + '/assets/js/ui/navigator.js"></script>',
     '  <script defer src="' + bp + '/assets/js/ui/footer.js"></script>',
     '  <script defer src="' + bp + '/assets/js/ui/floating-actions.js"></script>',
@@ -552,7 +553,90 @@ function generate404() {
   return true;
 }
 
-// ─── Main ────────────────────────────────────────────────────────
+/**
+ * Generate search-index.json from all generated pages
+ * Extracts title, description, headings for client-side search
+ */
+function generateSearchIndex() {
+  log('Generating search index...');
+  var index = [];
+  var htmlFiles = [];
+
+  // Collect all index-pc.html files (one per route is enough for search)
+  function collectHtml(dir) {
+    if (!fs.existsSync(dir)) return;
+    var entries = fs.readdirSync(dir);
+    for (var i = 0; i < entries.length; i++) {
+      var fullPath = path.join(dir, entries[i]);
+      var stat = fs.statSync(fullPath);
+      if (stat.isDirectory()) {
+        collectHtml(fullPath);
+      } else if (entries[i] === 'index-pc.html') {
+        htmlFiles.push(fullPath);
+      }
+    }
+  }
+
+  var pagesDir = path.join(DIST_DIR, 'pages');
+  collectHtml(pagesDir);
+
+  for (var i = 0; i < htmlFiles.length; i++) {
+    var filePath = htmlFiles[i];
+    var content = fs.readFileSync(filePath, 'utf-8');
+
+    // Extract path relative to dist
+    var relPath = path.relative(DIST_DIR, filePath).replace(/\/g, '/');
+    var urlPath = '/' + path.dirname(relPath).replace(/^pages//, '') + '/';
+    if (urlPath === '//') urlPath = '/';
+    else if (urlPath.indexOf('/pages/') === 0) urlPath = urlPath.replace('/pages', '');
+
+    // Extract title
+    var titleMatch = content.match(/<title>([^<]*)</title>/i);
+    var title = titleMatch ? titleMatch[1].trim() : '';
+
+    // Extract meta description
+    var descMatch = content.match(/<meta[^>]*name="description"[^>]*content="([^"]*)"[^>]*/?>/i);
+    var description = descMatch ? descMatch[1].trim() : '';
+
+    // Extract h1 headings
+    var headings = [];
+    var h1Regex = /<h1[^>]*>([\s\S]*?)</h1>/gi;
+    var h1Match;
+    while ((h1Match = h1Regex.exec(content)) !== null) {
+      var h1Text = h1Match[1].replace(/<[^>]*>/g, '').trim();
+      if (h1Text) headings.push(h1Text);
+    }
+    var h2Regex = /<h2[^>]*>([\s\S]*?)</h2>/gi;
+    var h2Match;
+    while ((h2Match = h2Regex.exec(content)) !== null) {
+      var h2Text = h2Match[1].replace(/<[^>]*>/g, '').trim();
+      if (h2Text) headings.push(h2Text);
+    }
+
+    // Determine category from path
+    var pathParts = urlPath.split('/').filter(Boolean);
+    var category = pathParts[0] || '';
+
+    if (title || description) {
+      index.push({
+        path: urlPath,
+        title: title,
+        description: description,
+        headings: headings.slice(0, 5), // Keep top 5
+        category: category,
+      });
+    }
+  }
+
+  // Write index
+  var indexDir = path.join(DIST_DIR, 'assets', 'data');
+  if (!fs.existsSync(indexDir)) {
+    fs.mkdirSync(indexDir, { recursive: true });
+  }
+  fs.writeFileSync(path.join(indexDir, 'search-index.json'), JSON.stringify(index, null, 2), 'utf-8');
+  log('  ✓ search-index.json with ' + index.length + ' entries');
+  return index;
+}
 
 function main() {
   log('Starting SSG build...');
@@ -666,6 +750,10 @@ function main() {
   }
   copyJsRecursive(_srcJsDir, _distJsDir);
   if (_jsCopied > 0) log('  ✓ Copied ' + _jsCopied + ' JS files to assets/js/');
+
+  // Step 5.75: Generate search index
+  log('\nStep 5.75: Generating search index...');
+  generateSearchIndex();
 
   // Step 6: Patch CSS files for basePath (font URLs in local-fonts.css)
   if (BASE_PATH) {

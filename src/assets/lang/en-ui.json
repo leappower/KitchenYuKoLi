@@ -2551,6 +2551,7 @@
   "central_kitchen_roi_10": "4-6 → 8-12 dishes",
   "central_kitchen_sol_6": "From 500 to 10,000 meals — YuKoLi has proven solutions for every central kitchen",
   "cloud_kitchen_sol_1": "Empowering Cloud Kitchens & Delivery",
+  "cloud_kitchen_sol_1_title": "Compact Design",
   "cloud_kitchen_pain_1": "Low space utilization",
   "cloud_kitchen_pain_2": "Inefficient kitchen layout, serious space waste",
   "cloud_kitchen_body_1": "High peak-hour pressure",
@@ -2620,6 +2621,7 @@
   "small_restaurant_scenario_5": "Community restaurant",
   "small_restaurant_scenario_6": "Consistent quality, word-of-mouth growth, higher repeat orders",
   "small_restaurant_scenario_7": "Specialty snack shop",
+  "small_restaurant_scenario_7_desc": "Standardized output, quick replication & scaling",
   "small_restaurant_body_5": "Desktop Auto Wok",
   "small_restaurant_equip_6": "Compact Induction Cooker",
   "small_restaurant_hero_1": "Supplementary heating, soup & noodle cooking",
@@ -3485,6 +3487,7 @@
   "quote_budget_10w_30w": "100K - 300K",
   "quote_budget_30w_50w": "300K - 500K",
   "quote_budget_50w_plus": "500K+",
+  "cloudkitchen_testimonial": "After using YuKoLi Compact equipment, a single cloud kitchen site can operate 5 brands simultaneously, breaking through 2,000 daily orders.",
   "support_overview_page_title": "Service & Support | YuKoLi Smart Kitchen Equipment",
   "support_services_page_title": "After-Sales Service Center | YuKoLi Smart Kitchen Equipment"
 }

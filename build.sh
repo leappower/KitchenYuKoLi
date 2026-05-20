@@ -94,6 +94,11 @@ find "$SRC/pages" -name '*.html' -exec sed -i '' "s|?v=[a-zA-Z0-9._-]*|?$VERSION
 # Generate sitemap.xml
 if command -v node &>/dev/null; then
   node scripts/generate-sitemap.js 2>/dev/null || true
+
+# Generate search index for client-side search
+if command -v node &>/dev/null; then
+  node scripts/generate-search-index.js 2>/dev/null || true
+fi
 fi
 
 FILES=$(find "$DIST" -type f | wc -l | tr -d ' ')
