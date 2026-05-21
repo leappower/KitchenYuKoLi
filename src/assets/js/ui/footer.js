@@ -41,7 +41,7 @@
     var colorClass = isActive ? "text-primary" : "text-slate-400 dark:text-slate-500";
     var fillStyle = isActive && item.fill ? " style=\"font-variation-settings: 'FILL' 1;\"" : "";
     var label = item.key
-      ? '<p class="text-[10px] font-bold uppercase tracking-wider" data-i18n="' +
+      ? '<p class="text-[10px] font-bold uppercase tracking-wider text-center" data-i18n="' +
         esc(item.key) +
         '">' +
         esc(item.key) +
