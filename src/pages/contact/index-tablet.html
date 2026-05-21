@@ -1,52 +1,99 @@
-<!DOCTYPE html>
-
+<!doctype html>
 
 <html class="light" lang="zh-CN">
   <head>
-    <link rel="canonical" href="https://www.kitchen.yukoli.com/contact/" />
-  <link rel="alternate" hreflang="zh-CN" href="https://www.kitchen.yukoli.com/contact/" />
-  <link rel="alternate" hreflang="en" href="https://www.kitchen.yukoli.com/contact/" />
-  <link rel="alternate" hreflang="x-default" href="https://www.kitchen.yukoli.com/contact/" />
-    <link rel="alternate" media="only screen and (max-width: 767px)" href="/contact/index-mobile.html" />
+    <!-- ═══ Responsive Redirect (injected by patch-responsive-redirect.py) ═══ -->
+    <link rel="canonical" href="https://www.kitchen.yukoli.com/quote/" />
+  <link rel="alternate" hreflang="zh-CN" href="https://www.kitchen.yukoli.com/quote/" />
+  <link rel="alternate" hreflang="en" href="https://www.kitchen.yukoli.com/quote/" />
+  <link rel="alternate" hreflang="x-default" href="https://www.kitchen.yukoli.com/quote/" />
+    <link rel="alternate" media="only screen and (max-width: 767px)" href="/quote/index-mobile.html" />
     <link
       rel="alternate"
       media="only screen and (min-width: 768px) and (max-width: 1279px)"
-      href="/contact/index-tablet.html"
+      href="/quote/index-tablet.html"
     />
-    <link rel="alternate" media="only screen and (min-width: 1280px)" href="/contact/index-pc.html" />
+    <link rel="alternate" media="only screen and (min-width: 1280px)" href="/quote/index-pc.html" />
     <script>
+      /* Responsive redirect — runs before render, no flash */
       (function () {
         if (window.__redirectChecked) return;
         window.__redirectChecked = true;
         var urlParams = new URLSearchParams(location.search);
         var cleanUrl = urlParams.get("clean-url");
         if (cleanUrl) {
+
           history.replaceState({}, "", cleanUrl);
           return;
         }
-        if (window.__spaNavigating) return;
+
+        if (window.__spaNavigating) {
+
+          return;
+        }
         var currentFile = location.pathname.split("/").pop();
-        if (window.DeviceUtils && window.DeviceUtils.isDirectoryURL()) return;
+
+        if (window.DeviceUtils && window.DeviceUtils.isDirectoryURL()) {
+  
+          return;
+        }
         if (window.DeviceUtils && window.DeviceUtils.shouldRedirect(currentFile)) {
           var deviceType = window.DeviceUtils.getDeviceType();
-          var targetFile =
-            deviceType === window.DeviceUtils.DeviceType.MOBILE
-              ? "index-mobile.html"
-              : deviceType === window.DeviceUtils.DeviceType.TABLET
-                ? "index-tablet.html"
-                : "index-pc.html";
+          var targetFile;
+          if (deviceType === window.DeviceUtils.DeviceType.MOBILE) {
+            targetFile = "index-mobile.html";
+          } else if (deviceType === window.DeviceUtils.DeviceType.TABLET) {
+            targetFile = "index-tablet.html";
+          } else {
+            targetFile = "index-pc.html";
+          }
+
           location.href = targetFile;
+          return;
         }
+
       })();
     </script>
+    <!-- ═══ End Responsive Redirect ═══ -->
 
     <meta charset="utf-8" />
-    <meta name="description" content="联系 YuKoLi — 获取智能商用厨房设备报价和技术咨询，全球服务网络覆盖东南亚、中东、南亚市场。" />
+    <meta
+      name="description"
+      content="获取 YuKoLi 智能商用厨房设备免费报价 — 填写需求表单，24小时内获得专业设备选型建议和定制方案。"
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="YuKoLi 智能厨具 | 获取报价" />
+    <meta
+      property="og:description"
+      content="获取 YuKoLi 智能厨具定制报价 — 告诉我们您的商用厨房需求，我们将为您提供专属的智能设备解决方案。"
+    />
+    <meta property="og:url" content="https://www.kitchen.yukoli.com/quote/" />
+    <meta property="og:image" content="https://www.kitchen.yukoli.com/assets/images/logo.webp" />
+    <meta property="og:site_name" content="YuKoLi 智能厨具"/>
+    <meta property="og:locale" content="zh_CN"/>
+    <meta name="twitter:card" content="summary_large_image"/>
+    <meta name="twitter:title" content="YuKoLi 智能厨具 | 获取报价"/>
+    <meta name="twitter:description" content="获取 YuKoLi 智能厨具定制报价 — 告诉我们您的商用厨房需求，我们将为您提供专属的智能设备解决方案。"/>
+    <meta name="twitter:image" content="https://www.kitchen.yukoli.com/assets/images/logo.webp"/>
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-    <title>YuKoLi | 联系我们</title>
+    <title>YuKoLi 智能厨具 | <span data-i18n="compare_get_quote">Get Quote</span></title>
     <link rel="preload" href="/assets/fonts/local-fonts.css" as="style" />
     <link rel="preload" href="/assets/css/styles.css" as="style" />
     <link rel="preload" href="/assets/css/tailwind.css" as="style" />
+    <link
+      rel="preload"
+      href="/assets/fonts/public-sans-latin-400-normal.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href="/assets/fonts/public-sans-latin-700-normal.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
     <link href="/assets/fonts/local-fonts.css" rel="stylesheet" />
     <link rel="stylesheet" href="/assets/css/styles.css" />
     <link rel="stylesheet" href="/assets/css/tailwind.css" />
@@ -59,237 +106,306 @@
     </script>
     <link rel="stylesheet" href="/assets/css/skeleton.css" />
     <link rel="icon" href="/assets/images/logo.webp" type="image/webp" />
+    <script type="application/ld+json">
+    {"@context":"https://schema.org","@type":"WebPage","name":"YuKoLi 智能厨具<span data-i18n="compare_get_quote">Get Quote</span>","description":"获取 YuKoLi 智能厨具定制报价，商用厨房设备<span data-i18n="central_kitchen_solutions">Solutions</span>","url":"https://www.kitchen.yukoli.com/quote/"}
+    </script>
   </head>
   <body
-    class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 antialiased transition-colors duration-300 overflow-x-clip"
+    class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 min-h-screen overflow-x-clip"
   >
-    <navigator data-search="true"
-      data-component="navigator"
-      data-variant="tablet"
-      data-active="contact"
-      data-cta-text-key="nav_get_quote"
-      data-cta-href="/quote"
-    ></navigator>
+    <div class="layout-container flex h-full grow flex-col">
+      <navigator
+        data-component="navigator"
+        data-variant="tablet"
+        data-search="true"
+        data-active="quote"
+        data-cta-text-key="nav_get_quote"
+        data-cta-href="/quote"
+      ></navigator>
+      <main id="spa-content" class="flex-1 max-w-[1024px] mx-auto w-full py-8 pb-24 md:py-12">
+        <!-- Hero Section -->
+        <section class="fullwidth-bg py-8">
+          <div class="section-content">
+        <div class="mb-10 text-center md:text-left">
+          <h1
+            class="text-slate-900 dark:text-slate-50 text-4xl md:text-5xl font-black leading-tight tracking-[-0.033em] mb-4"
+            data-i18n="quote_get_quote"
+          >Get Quote</h1>
+          <p class="text-slate-600 dark:text-slate-400 text-lg max-w-2xl" data-i18n="quote_hero_desc">Tell us your commercial kitchen needs. We'll provide customized smart equipment solutions and quotes within 24 hours.</p>
+        </div>
+          </div>
+        </section>
 
-    <main id="spa-content" class="py-8">
-      <!-- Hero -->
-      <section class="fullwidth-bg hero-overlap py-16">
-        <div class="section-content">
+        <section class="fullwidth-bg py-10">
+          <div class="section-content">
+        <div class="grid grid-cols-1 gap-8">
+          <!-- Main Form Area -->
           <div
-            class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-bold uppercase tracking-wider mb-4"
+            class="bg-white dark:bg-slate-900/50 border border-slate-200 dark:border-slate-800 rounded-xl p-6 md:p-10 shadow-sm"
           >
-            <span class="material-symbols-outlined text-sm">mail</span>
-            <span data-i18n="contact_hero_badge">Contact Us</span>
-          </div>
-          <h1 class="text-4xl font-black leading-tight tracking-tighter mb-4">
-            <span data-i18n="contact_hero_title">Contact Our</span>
-            <span class="text-primary" data-i18n="contact_hero_title_highlight">Expert Team</span>
-          </h1>
-          <p class="text-slate-600 dark:text-slate-400 mb-6" data-i18n="contact_hero_desc">From manual prep to fully automated cooking - one machine replaces 3 chefs. YuKoLi smart kitchen equipment has helped hotels and F&B businesses in 68+ countries reduce labor costs by 60% and increase meal output efficiency by 5x.</p>
-        </div>
-      </section>
+            
 
-      <!-- Contact Form -->
-      <section class="fullwidth-bg py-16">
+<form id="quote-form" class="space-y-5" novalidate>
+              <!-- Step 1: Info -->
+              <div id="quote-step-1">
+                <h2 class="text-base font-bold mb-4 flex items-center gap-2">
+                  <span class="inline-flex items-center justify-center size-7 rounded-full bg-primary text-white text-xs font-black">1</span>
+                  <span>基本信息</span>
+                </h2>
+                <div class="grid grid-cols-2 gap-4">
+                  <label class="flex flex-col gap-1.5"><span class="text-sm font-bold">国家 <span class="text-red-500">*</span></span>
+                    <select data-custom-select id="q-country" required onchange="window._onCountryChange&&window._onCountryChange(this.value)" class="h-12 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white focus:border-primary text-sm px-3 py-3 appearance-none">
+                      <option value="" data-i18n="select_country">选择国家/地区</option>
+<option value="ID">🇮🇩 Indonesia</option><option value="MY">🇲🇾 Malaysia</option><option value="PH">🇵🇭 Pilipinas</option><option value="VN">🇻🇳 Việt Nam</option><option value="TH">🇹🇭 ไทย</option><option value="SG">🇸🇬 Singapore</option><option value="MM">🇲🇲 မြန်မာ</option><option value="KH">🇰🇭 កង្ពុជា</option><option value="LA">🇱🇦 ລາວ</option><option value="BN">🇧🇳 Brunei</option><option value="CN">🇨🇳 中国</option><option value="IN">🇮🇳 भारत</option><option value="JP">🇯🇵 日本</option><option value="KR">🇰🇷 대한민국</option><option value="SA">🇸🇦 السعودية</option><option value="TW">🇹🇼 台渾</option><option value="HK">🇭🇰 香港</option><option value="DE">🇩🇪 Deutschland</option><option value="ES">🇪🇸 España</option><option value="FR">🇫🇷 France</option><option value="PT">🇵🇹 Portugal</option><option value="RU">🇷🇺 Россия</option><option value="NL">🇳🇱 Nederland</option><option value="PL">🇵🇱 Polska</option><option value="IT">🇮🇹 Italia</option><option value="TR">🇹🇷 Türkiye</option><option value="IL">🇮🇱 ישראל</option><option value="other">其他/Other</option>
+                    </select>
+                  </label>
+                  <label class="flex flex-col gap-1.5"><span class="text-sm font-bold">怎么称呼您 <span class="text-red-500">*</span></span>
+                    <input id="q-contact" type="text" required class="h-12 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white focus:border-primary text-sm px-3 py-3" placeholder="您的姓名" />
+                  </label>
+                  <label class="flex flex-col gap-1.5"><span class="text-sm font-bold">餐厅类型 <span class="text-red-500">*</span></span>
+                    <select data-custom-select id="q-restaurant-type" required class="h-12 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white focus:border-primary text-sm px-3 py-3 appearance-none">
+                      <option value="">选择餐厅类型</option><option value="small-restaurant">小型餐饮</option><option value="central-kitchen">中央厨房</option><option value="chain-restaurant">连锁餐饮</option><option value="smart-canteen">智慧食堂</option><option value="cloud-kitchen">云厨房</option><option value="takeaway">外卖</option><option value="food-factory">食品工厂</option><option value="other">其他</option>
+                    </select>
+                  </label>
+                  <label class="flex flex-col gap-1.5"><span class="text-sm font-bold">餐厅名称</span>
+                    <input id="q-company" type="text" class="h-12 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white focus:border-primary text-sm px-3 py-3" placeholder="选填" />
+                  </label>
+                  <label class="flex flex-col gap-1.5"><span class="text-sm font-bold">手机号码 <span class="text-red-500">*</span></span>
+                    <div class="flex gap-2">
+                      <select id="q-phone-code" class="w-28 shrink-0 h-12 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white focus:border-primary text-sm px-3 py-3 appearance-none">
+                        <option value="+62">🇮🇩 +62</option><option value="+60">🇲🇾 +60</option><option value="+63">🇵🇭 +63</option><option value="+84">🇻🇳 +84</option><option value="+66">🇹🇭 +66</option><option value="+65">🇸🇬 +65</option><option value="+95">🇲🇲 +95</option><option value="+855">🇰🇭 +855</option><option value="+856">🇱🇦 +856</option><option value="+673">🇧🇳 +673</option><option value="+86">🇨🇳 +86</option><option value="+91">🇮🇳 +91</option><option value="+81">🇯🇵 +81</option><option value="+82">🇰🇷 +82</option><option value="+966">🇸🇦 +966</option><option value="+886">🇹🇼 +886</option><option value="+852">🇭🇰 +852</option><option value="+49">🇩🇪 +49</option><option value="+34">🇪🇸 +34</option><option value="+33">🇫🇷 +33</option><option value="+351">🇵🇹 +351</option><option value="+7">🇷🇺 +7</option><option value="+31">🇳🇱 +31</option><option value="+48">🇵🇱 +48</option><option value="+39">🇮🇹 +39</option><option value="+90">🇹🇷 +90</option><option value="+972">🇮🇱 +972</option><option value="+1">🇺🇸 +1</option><option value="+44">🇬🇧 +44</option><option value="+61">🇦🇺 +61</option><option value="+other">其他</option>
+                      </select>
+                      <input id="q-phone" type="tel" required class="flex-1 h-12 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white focus:border-primary text-sm px-3 py-3" placeholder="手机号码" />
+                    </div>
+                  </label>
+                  <div class="flex gap-2">
+                    <label class="flex-1 flex flex-col gap-1.5"><span class="text-sm font-bold">期望通过 <span class="text-red-500">*</span></span>
+                      <select data-custom-select id="q-contact-channel" required class="h-12 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white focus:border-primary text-sm px-3 py-3 appearance-none">
+                        <option value="">选择联系方式</option><option value="WhatsApp">WhatsApp</option><option value="LINE">LINE</option><option value="Zalo">Zalo</option><option value="Facebook Messenger">Messenger</option><option value="Viber">Viber</option><option value="Telegram">Telegram</option><option value="WeChat">WeChat</option><option value="Phone Call">电话</option><option value="other">其他</option>
+                      </select>
+                    </label>
+                    <label class="flex-1 flex flex-col gap-1.5"><span class="text-sm font-bold">账号</span>
+                      <input id="q-contact-account" type="text" class="h-12 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white focus:border-primary text-sm px-3 py-3" placeholder="留空用手机号" />
+                    </label>
+                  </div>
+                </div>
+                <label class="flex flex-col gap-1.5"><span class="text-sm font-bold">电子邮箱</span>
+                  <input id="q-email" type="email" class="h-12 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white focus:border-primary text-sm px-3 py-3" placeholder="您的邮箱" />
+                </label>
+                <button type="button" id="quote-next-btn" class="w-full mt-3 bg-primary text-white py-3.5 rounded-lg font-black text-sm hover:bg-primary/90 transition-all flex items-center justify-center gap-2 uppercase tracking-widest">
+                  下一步：设备需求 <span class="material-symbols-outlined">arrow_forward</span>
+                </button>
+              </div>
 
-        <div class="section-content">
-        
-          <div class="w-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-6">
-            <h3 id="contact-form" class="text-lg font-bold mb-4" data-i18n="contact_form_title">Contact Us</h3>
-            <form class="space-y-3">
-              <div class="grid grid-cols-2 gap-3">
-                <div>
-                  <label class="block text-xs font-bold mb-1" data-i18n="contact_form_firstname_label">First Name</label>
-                  <input
-                    type="text"
-                    name="firstname"
-                    required
-                    class="w-full px-3 py-2.5 rounded-lg border border-slate-200 dark:border-slate-700 bg-transparent text-sm"
-                    placeholder="名"
-                    data-i18n-placeholder="contact_form_firstname_placeholder"
-                  />
+              <!-- Step 2: Equip -->
+              <div id="quote-step-2" class="hidden">
+                <h2 class="text-base font-bold mb-3 flex items-center gap-2">
+                  <span class="inline-flex items-center justify-center size-7 rounded-full bg-primary text-white text-xs font-black">2</span>
+                  <span>设备需求</span>
+                </h2>
+                <div class="mb-4">
+                  <span class="text-sm font-bold">需要哪些设备？<span class="text-red-500">*</span></span>
+                  <div class="grid grid-cols-3 gap-2 gap-2 mt-2">
+                    <label class="flex items-center gap-1.5 p-2 rounded-lg border border-slate-200 cursor-pointer hover:border-primary transition-all text-sm"><input type="checkbox" class="accent-primary" value="cutting" /> 切配</label>
+                    <label class="flex items-center gap-1.5 p-2 rounded-lg border border-slate-200 cursor-pointer hover:border-primary transition-all text-sm"><input type="checkbox" class="accent-primary" value="stirfry" /> 翻炒</label>
+                    <label class="flex items-center gap-1.5 p-2 rounded-lg border border-slate-200 cursor-pointer hover:border-primary transition-all text-sm"><input type="checkbox" class="accent-primary" value="frying" /> 煎炸</label>
+                    <label class="flex items-center gap-1.5 p-2 rounded-lg border border-slate-200 cursor-pointer hover:border-primary transition-all text-sm"><input type="checkbox" class="accent-primary" value="stewing" /> 炖煮</label>
+                    <label class="flex items-center gap-1.5 p-2 rounded-lg border border-slate-200 cursor-pointer hover:border-primary transition-all text-sm"><input type="checkbox" class="accent-primary" value="steaming" /> 蒸煮</label>
+                    <label class="flex items-center gap-1.5 p-2 rounded-lg border border-slate-200 cursor-pointer hover:border-primary transition-all text-sm"><input type="checkbox" class="accent-primary" value="auxiliary" /> 辅助</label>
+                  </div>
+                  <div class="flex items-center gap-2 mt-1.5"><input type="checkbox" id="q-equip-other-cb" class="accent-primary" value="other" /><span class="text-sm">其他：</span><input type="text" id="q-equip-other" class="flex-1 px-3 py-2 rounded-lg border border-slate-200 bg-transparent text-sm" placeholder="请描述" /></div>
                 </div>
-                <div>
-                  <label class="block text-xs font-bold mb-1" data-i18n="contact_form_lastname_label">Last Name</label>
-                  <input
-                    type="text"
-                    name="lastname"
-                    required
-                    class="w-full px-3 py-2.5 rounded-lg border border-slate-200 dark:border-slate-700 bg-transparent text-sm"
-                    placeholder="姓"
-                    data-i18n-placeholder="contact_form_lastname_placeholder"
-                  />
+                <div class="grid grid-cols-3 gap-3">
+                  <label class="flex flex-col gap-1.5"><span class="text-sm font-bold">日均产量 <span class="text-red-500">*</span></span>
+                    <select data-custom-select id="q-capacity" required class="h-12 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white focus:border-primary text-sm px-3 py-3 appearance-none"><option value="">选择</option><option value="<50">&lt;50</option><option value="50-100">50-100</option><option value="100-300">100-300</option><option value="300+">300+</option></select>
+                  </label>
+                  <label class="flex flex-col gap-1.5"><span class="text-sm font-bold">预算 <span class="text-red-500">*</span></span>
+                    <select data-custom-select id="q-budget" required class="h-12 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white focus:border-primary text-sm px-3 py-3 appearance-none"><option value="">选择</option><option value="<$800">&lt;$800</option><option value="$800-1500">$800-1500</option><option value="$1500-3000">$1500-3000</option><option value="$3000-8000">$3000-8000</option><option value="$8000+">$8000+</option></select>
+                  </label>
+                  <div class="flex flex-col gap-1.5"><span class="text-sm font-bold">采购时间 <span class="text-red-500">*</span></span>
+                    <div class="space-y-1.5">
+                      <label class="flex items-center gap-1.5 text-sm cursor-pointer"><input type="radio" name="q-timeline" class="accent-primary" value="1month" /> 1个月内</label>
+                      <label class="flex items-center gap-1.5 text-sm cursor-pointer"><input type="radio" name="q-timeline" class="accent-primary" value="3months" /> 3个月内</label>
+                      <label class="flex items-center gap-1.5 text-sm cursor-pointer"><input type="radio" name="q-timeline" class="accent-primary" value="6months" /> 6个月内</label>
+                      <label class="flex items-center gap-1.5 text-sm cursor-pointer"><input type="radio" name="q-timeline" class="accent-primary" value="nodate" checked /> 先了解</label>
+                    </div>
+                  </div>
                 </div>
+                <div class="mt-3">
+                  <span class="text-sm font-bold">最大挑战？（多选）</span>
+                  <div class="flex flex-wrap gap-2 mt-1.5">
+                    <label class="flex items-center gap-1.5 text-sm cursor-pointer"><input type="checkbox" class="accent-primary" value="招聘困难" /> 招不到厨师</label>
+                    <label class="flex items-center gap-1.5 text-sm cursor-pointer"><input type="checkbox" class="accent-primary" value="出餐慢" /> 出餐慢</label>
+                    <label class="flex items-center gap-1.5 text-sm cursor-pointer"><input type="checkbox" class="accent-primary" value="品质不稳" /> 品质不稳</label>
+                    <label class="flex items-center gap-1.5 text-sm cursor-pointer"><input type="checkbox" class="accent-primary" value="成本高" /> 成本高</label>
+                    <label class="flex items-center gap-1.5 text-sm cursor-pointer"><input type="checkbox" class="accent-primary" value="新店" /> 开新店</label>
+                  </div>
+                  <div class="flex items-center gap-2 mt-1.5"><input type="checkbox" id="q-pain-other-cb" class="accent-primary" value="其他" /><span class="text-sm">其他：</span><input type="text" id="q-pain-other" class="flex-1 px-3 py-2 rounded-lg border border-slate-200 bg-transparent text-sm" placeholder="请描述" /></div>
+                </div>
+                <div class="flex gap-3 mt-4">
+                  <button type="button" id="quote-prev-btn" class="px-5 py-3 rounded-lg font-bold text-slate-600 border border-slate-300 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800 transition-all flex items-center gap-1.5 text-sm"><span class="material-symbols-outlined text-sm">arrow_back</span> 上一步</button>
+                  <button type="submit" id="quote-submit-btn" class="flex-1 bg-primary text-white py-3.5 rounded-lg font-bold hover:bg-primary/90 transition-all flex items-center justify-center gap-2 text-sm">提交获取报价 <span class="material-symbols-outlined">arrow_forward</span></button>
+                </div>
+                <p class="text-xs text-center text-slate-400 mt-1.5">提交后 2 小时内专人联系</p>
               </div>
-              <div>
-                <label class="block text-xs font-bold mb-1" data-i18n="contact_form_email_label">Email</label>
-                <input
-                  type="email"
-                  name="email"
-                  required
-                  class="w-full px-3 py-2.5 rounded-lg border border-slate-200 dark:border-slate-700 bg-transparent text-sm"
-                  placeholder="邮箱"
-                  data-i18n-placeholder="contact_form_email_placeholder"
-                />
-              </div>
-              <div>
-                <label class="block text-xs font-bold mb-1" data-i18n="contact_form_company_label">Company</label>
-                <input
-                  type="text"
-                  name="company"
-                  class="w-full px-3 py-2.5 rounded-lg border border-slate-200 dark:border-slate-700 bg-transparent text-sm"
-                  placeholder="公司名称"
-                  data-i18n-placeholder="contact_form_company_placeholder"
-                />
-              </div>
-              <div>
-                <label class="block text-xs font-bold mb-1" data-i18n="contact_form_message_label">Message</label>
-                <textarea
-                  rows="3"
-                  name="message"
-                  required
-                  class="w-full px-3 py-2.5 rounded-lg border border-slate-200 dark:border-slate-700 bg-transparent text-sm resize-none"
-                  placeholder="请描述您的需求"
-                  data-i18n-placeholder="contact_form_message_placeholder"
-                ></textarea>
-              </div>
-              <button
-                type="submit"
-                class="w-full bg-primary text-white py-3 rounded-lg font-bold text-sm"
-                data-i18n="contact_form_submit"
-              >Get Quote</button>
             </form>
+
+
           </div>
-      
-
-        </div></section>
-
-      <!-- Contact Info -->
-      <section class="fullwidth-bg py-16">
-        <div class="section-content">
-          <div class="w-full grid grid-cols-3 gap-3">
-            <div
-              class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-4 text-center"
-            >
-              <span class="material-symbols-outlined text-primary text-xl mb-2">email</span>
-              <p class="text-xs font-bold" data-i18n="contact_card_email_title">Email</p>
-              <p class="text-xs text-slate-500">support.kitchen@yukoli.com</p>
-            </div>
-            <div
-              class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-4 text-center"
-            >
-              <span class="material-symbols-outlined text-primary text-xl mb-2">phone</span>
-              <p class="text-xs font-bold" data-i18n="contact_card_phone_title">Phone</p>
-              <p class="text-xs text-slate-500">+86 13163756465</p>
-            </div>
-            <div
-              class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-4 text-center"
-            >
-              <span class="material-symbols-outlined text-primary text-xl mb-2">chat</span>
-              <p class="text-xs font-bold">WhatsApp</p>
-              <p class="text-xs text-slate-500">+86 13163756465</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- Office Address -->
-      <section class="fullwidth-bg py-16">
-        <div class="section-content">
-          <h2 class="text-xl font-bold mb-4" data-i18n="contact_offices_title">Global Offices</h2>
-          <div class="w-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-6">
-            <div class="flex items-start gap-3 mb-5">
-              <div class="size-10 bg-primary/10 rounded-xl flex items-center justify-center flex-shrink-0">
-                <span class="material-symbols-outlined text-primary text-lg">location_on</span>
-              </div>
+          <!-- Trust and Strategy Row (Tablet Optimized) -->
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6 py-8">
+            <div class="flex flex-col gap-4 p-6 bg-primary/5 dark:bg-primary/10 rounded-xl border border-primary/20">
+              <span class="material-symbols-outlined text-primary text-3xl">inventory_2</span>
               <div>
-                <div class="flex items-center gap-2 mb-1">
-                  <span class="text-xl">🇨🇳</span>
-                  <h3 class="font-bold" data-i18n="contact_office_hq">Headquarters</h3>
-                </div>
-                <p class="text-xs text-slate-500" data-i18n="contact_company_name">Foshan YuKoLi Technology Co., Ltd</p>
+                <h3 class="font-bold text-slate-900 dark:text-slate-50" data-i18n="quote_114_products">200+ Smart Appliances</h3>
+                <p class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed" data-i18n="quote_114_products_desc">Complete commercial kitchen solutions for stir-frying, steaming, roasting, soup-making, and rice cooking.</p>
               </div>
             </div>
-            <div class="space-y-3">
-              <div class="flex items-start gap-2">
-                <span class="material-symbols-outlined text-primary text-base mt-0.5">apartment</span>
-                <div>
-                  <p class="text-sm font-bold mb-0.5" data-i18n="contact_addr_zh_label">Chinese Address</p>
-                  <p class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed" data-i18n="contact_addr_zh_value">广东省佛山市顺德区大良街道红岗社区展伦路83号万创园12栋502室之六</p>
-                </div>
+            <div class="flex flex-col gap-4 p-6 bg-primary/5 dark:bg-primary/10 rounded-xl border border-primary/20">
+              <span class="material-symbols-outlined text-primary text-3xl">public</span>
+              <div>
+                <h3 class="font-bold text-slate-900 dark:text-slate-50" data-i18n="quote_50_countries">68+ Countries Covered</h3>
+                <p class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed" data-i18n="quote_50_countries_desc">Strong presence in Southeast Asia, exporting to 50+ countries worldwide.</p>
               </div>
-              <div class="border-t border-slate-100 dark:border-slate-800"></div>
-              <div class="flex items-start gap-2">
-                <span class="material-symbols-outlined text-primary text-base mt-0.5">language</span>
-                <div>
-                  <p class="text-sm font-bold mb-0.5" data-i18n="contact_addr_en_label">English Address</p>
-                  <p class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed" data-i18n="contact_addr_en_value">Room 502-6, Building 12, WANCHUANG Park, No.83 Zhanlun Road, Honggang Community, Daliang Street, Shunde District, Foshan City, Guangdong Province, China</p>
+            </div>
+            <div class="flex flex-col gap-4 p-6 bg-primary/5 dark:bg-primary/10 rounded-xl border border-primary/20">
+              <span class="material-symbols-outlined text-primary text-3xl">verified_user</span>
+              <div>
+                <h3 class="font-bold text-slate-900 dark:text-slate-50" data-i18n="quote_certified">Internationally Certified Quality</h3>
+                <p class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed" data-i18n="quote_certified_desc">CE, UL, ISO 9001 certified for guaranteed quality.</p>
+              </div>
+            </div>
+          </div>
+          <!-- Why Yukoli -->
+          <div class="bg-white dark:bg-slate-900/50 border border-slate-200 dark:border-slate-800 rounded-xl p-6">
+            <h3 class="text-lg font-bold mb-4" data-i18n="quote_why_yukoli">Why Choose YuKoLi?</h3>
+            <ul class="space-y-4">
+              <li class="flex gap-3">
+                <div class="flex-shrink-0 size-8 bg-primary/10 rounded-lg flex items-center justify-center">
+                  <span class="material-symbols-outlined text-primary text-sm">inventory_2</span>
                 </div>
+                <div>
+                  <p class="font-bold text-sm" data-i18n="quote_114_products">200+ Smart Appliances</p>
+                  <p class="text-xs text-slate-500 mt-0.5" data-i18n="quote_114_products_desc">Complete commercial kitchen solutions for stir-frying, steaming, roasting, soup-making, and rice cooking.</p>
+                </div>
+              </li>
+              <li class="flex gap-3">
+                <div class="flex-shrink-0 size-8 bg-primary/10 rounded-lg flex items-center justify-center">
+                  <span class="material-symbols-outlined text-primary text-sm">public</span>
+                </div>
+                <div>
+                  <p class="font-bold text-sm" data-i18n="quote_50_countries">68+ Countries Covered</p>
+                  <p class="text-xs text-slate-500 mt-0.5" data-i18n="quote_50_countries_desc">Strong presence in Southeast Asia, exporting to 50+ countries worldwide.</p>
+                </div>
+              </li>
+              <li class="flex gap-3">
+                <div class="flex-shrink-0 size-8 bg-primary/10 rounded-lg flex items-center justify-center">
+                  <span class="material-symbols-outlined text-primary text-sm">verified_user</span>
+                </div>
+                <div>
+                  <p class="font-bold text-sm" data-i18n="quote_certified">Internationally Certified Quality</p>
+                  <p class="text-xs text-slate-500 mt-0.5" data-i18n="quote_certified_desc">CE, UL, ISO 9001 certified for guaranteed quality.</p>
+                </div>
+              </li>
+              <li class="flex gap-3">
+                <div class="flex-shrink-0 size-8 bg-primary/10 rounded-lg flex items-center justify-center">
+                  <span class="material-symbols-outlined text-primary text-sm">support_agent</span>
+                </div>
+                <div>
+                  <p class="font-bold text-sm" data-i18n="quote_after_sales">Comprehensive After-Sales</p>
+                  <p class="text-xs text-slate-500 mt-0.5" data-i18n="quote_body_1">Installation guidance, operation training, and ongoing technical support.</p>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <!-- Quick Contact -->
+          <div class="bg-primary p-6 rounded-xl text-white">
+            <div class="flex items-center gap-2 mb-3">
+              <span class="material-symbols-outlined">forum</span>
+              <h3 class="text-base font-bold" data-i18n="quote_prefer_chat">Prefer direct chat?</h3>
+            </div>
+            <p class="text-sm opacity-90 mb-4" data-i18n="quote_prefer_chat_desc">Our sales team is online to answer questions and help you find the right equipment quickly.</p>
+            <div class="flex gap-3">
+              <button onclick="startWhatsApp()" class="flex-1 bg-white text-primary py-2.5 rounded-lg font-bold text-sm flex items-center justify-center gap-2">
+                <span class="material-symbols-outlined text-base">chat</span>
+                WhatsApp
+              </button>
+              <button onclick="startEmail()" class="flex-1 bg-white/20 text-white py-2.5 rounded-lg font-bold text-sm flex items-center justify-center gap-2">
+                <span class="material-symbols-outlined text-base">mail</span>
+                <span data-i18n="quote_send_email">Email Us</span>
+              </button>
+            </div>
+          </div>
+          <!-- Trust Badges -->
+          <div class="border-t border-slate-200 dark:border-slate-800 pt-10 pb-16">
+            <p
+              class="text-center text-slate-500 text-xs font-bold uppercase tracking-widest mb-8"
+              data-i18n="quote_certifications"
+            >
+                  Certifications
+                </p>
+            <div class="flex flex-wrap justify-center items-center gap-8 opacity-60 grayscale hover:grayscale-0 transition-all duration-500">
+              <div class="flex flex-col items-center">
+                <div
+                  class="size-12 rounded border border-slate-300 dark:border-slate-700 flex items-center justify-center font-black text-xl mb-1"
+                >
+                  CE
+                </div>
+                <span class="text-[10px] font-bold" data-i18n="quote_ce_standard">European Standards</span>
+              </div>
+              <div class="flex flex-col items-center">
+                <div
+                  class="size-12 rounded border border-slate-300 dark:border-slate-700 flex items-center justify-center font-black text-xl mb-1"
+                >
+                  UL
+                </div>
+                <span class="text-[10px] font-bold" data-i18n="quote_ul_safety">Safety Certified</span>
+              </div>
+              <div class="flex flex-col items-center">
+                <div
+                  class="size-12 rounded border border-slate-300 dark:border-slate-700 flex items-center justify-center font-black text-xl mb-1"
+                >
+                  ISO
+                </div>
+                <span class="text-[10px] font-bold" data-i18n="quote_iso_quality">Quality System</span>
               </div>
             </div>
           </div>
         </div>
-      </section>
-
-      <!-- Partner -->
-      <section class="bg-slate-900 text-white rounded-2xl p-6 text-center mt-8 mb-6 no-collapse">
-
-        <div>
-        <h2 class="text-xl font-black mb-3" data-i18n="contact_partner_title">Become a Partner</h2>
-        <p class="text-slate-300 text-sm mb-4" data-i18n="contact_partner_desc">YuKoLi focuses on helping every client grow their business through smart kitchen equipment - whether improving meal efficiency, reducing labor costs, or expanding new categories. We seek like-minded regional partners, offering complete product training, localized technical support, and regional protection policies. Let's build a long-term win-win ecosystem where technology and services continuously create value.</p>
-        <a href="#contact-form"
-          class="inline-block bg-primary text-white px-6 py-2.5 rounded-lg font-bold text-sm"
-          data-i18n="contact_partner_btn"
-        >Apply for Partnership</a>
-      
-
-        </div></section>
-    
-  <!-- Quick Navigation -->
-  <section class="fullwidth-bg bg-primary py-10 overflow-hidden">
-    <div class="section-content relative">
-          <div class="relative z-10 text-center">
-        <h2 class="text-2xl font-black text-white mb-2" data-i18n="contact_quicknav_title">Still Exploring?</h2>
-        <p class="text-white/80 text-base mb-8 max-w-xl mx-auto" data-i18n="contact_quicknav_desc">Browse products, view case scenarios, or get customized quotes - we're here to serve you.</p>
-        <div class="flex flex-wrap justify-center gap-3">
-          <a href="/products/" class="inline-flex items-center gap-2 bg-white text-primary px-6 py-3.5 rounded-xl font-bold text-sm hover:shadow-lg hover:scale-105 transition-all">
-            <span class="material-symbols-outlined">kitchen</span>
-            <span data-i18n="nav_products">Products</span>
-            <span class="material-symbols-outlined">arrow_forward</span>
-          </a>
-          <a href="/cases/" class="inline-flex items-center gap-2 bg-white/10 border-2 border-white/30 text-white px-6 py-3.5 rounded-xl font-bold text-sm hover:bg-white/20 transition-all">
-            <span class="material-symbols-outlined">monitoring</span>
-            <span data-i18n="nav_applications">Applications</span>
-          </a>
-          <a href="/quote/" class="inline-flex items-center gap-2 bg-white/10 border-2 border-white/30 text-white px-6 py-3.5 rounded-xl font-bold text-sm hover:bg-white/20 transition-all">
-            <span class="material-symbols-outlined">request_quote</span>
-            <span data-i18n="nav_get_quote">Get Quote</span>
-          </a>
-        </div>
-      </div>
+          </div>
+        </section>
+      </main>
     </div>
-  </section>
-</main>
 
     <script src="/assets/js/ui/dropdown-styles.js"></script>
     <script src="/assets/js/ui/dropdown-base.js"></script>
-    <script defer src="/assets/js/ui/products-dropdown.js"></script>
-    <script defer src="/assets/js/ui/applications-dropdown.js?v=202605212051"></script>
-    <script defer src="/assets/js/ui/support-dropdown.js?v=202605212051"></script>
-    <script defer src="/assets/js/ui/about-dropdown.js?v=202605212051"></script>
+    <script src="/assets/js/ui/custom-select.js"></script>
+    <script defer src="/assets/js/ui/products-dropdown.js?v=202605212102"></script>
+    <script defer src="/assets/js/ui/applications-dropdown.js?v=202605212102"></script>
+    <script defer src="/assets/js/ui/support-dropdown.js?v=202605212102"></script>
+    <script defer src="/assets/js/ui/about-dropdown.js?v=202605212102"></script>
     <script src="/assets/js/product-list.js"></script>
     <script src="/assets/js/utils.js"></script>
     <script defer src="/assets/js/ui/search-engine.js"></script>
-        <script defer src="/assets/js/ui/navigator.js?v=202605212051"></script>
-<script defer src="/assets/js/ui/slide-menu.js?v=202605212051"></script>
-    <script defer src="/assets/js/ui/footer.js?v=202605212051"></script>
-    <script defer src="/assets/js/lang-registry.js?v=202605212051"></script>
-    <script defer src="/assets/js/translations.js?v=202605212051"></script><script defer src="/assets/js/ui/helpers.js"></script>
+    <script defer src="/assets/js/ui/navigator.js?v=202605212102"></script>
+<script defer src="/assets/js/ui/slide-menu.js?v=202605212102"></script>
+    <script defer src="/assets/js/ui/footer.js?v=202605212102"></script>
+    <script defer src="/assets/js/lang-registry.js?v=202605212102"></script>
+    <script defer src="/assets/js/translations.js?v=202605212102"></script>
+    <script defer src="/assets/js/translations-dropdown-template.js?v=202605212102"></script>
+    <script defer src="/assets/js/contacts.js"></script>
+    <script defer src="/assets/js/router.js"></script>
+    <script defer src="/assets/js/ui/helpers.js"></script>
     <script defer src="/assets/js/ui/page-effects.js"></script>
     <script defer src="/assets/js/ui/form-interactions.js"></script>
-    <script defer src="/assets/js/page-interactions.js"></script>
+<script defer src="/assets/js/quote-form.js?v=202605212102"></script>
+    <script defer src="/assets/js/page-interactions.js"></script><footer data-component="footer" data-variant="tablet" data-search="true" data-active="quote"></footer>
+
+    <!-- Quote form handler -->
+
+
     <script src="/assets/js/utils/device-utils.js"></script>
-    <script src="/assets/js/spa-router.js?v=202605212051"></script>
+    <script src="/assets/js/spa-router.js?v=202605212102"></script>
       <script defer src="/assets/js/ui/floating-actions.js"></script>
-  </body>
+</body>
 </html>
