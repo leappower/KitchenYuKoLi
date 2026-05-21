@@ -150,6 +150,38 @@
       global.__spaNavigating = true;
     });
 
+    // Handle fetch errors — render 404 content in #spa-content
+    // instead of letting Swup crash with 'Container mismatch'
+    swup.on("fetch:error", function () {
+      global.__spaNavigating = false;
+      var spaContent = document.getElementById("spa-content");
+      if (spaContent) {
+        spaContent.innerHTML = '' +
+          '<div class="flex-1 flex items-center justify-center px-6 py-20">' +
+          '  <div class="text-center max-w-lg">' +
+          '    <div class="mb-6">' +
+          '      <span class="text-8xl font-black tracking-tighter text-primary/20">404</span>' +
+          '    </div>' +
+          '    <h1 class="text-3xl md:text-4xl font-black tracking-tight mb-4">Page Not Found</h1>' +
+          '    <p class="text-slate-500 dark:text-slate-400 text-lg mb-8">' +
+          '      The page you are looking for does not exist or has been moved.' +
+          '    </p>' +
+          '    <div class="flex flex-col sm:flex-row gap-4 justify-center">' +
+          '      <a href="/home/" class="inline-flex items-center justify-center px-8 py-3 bg-primary text-white font-bold rounded-lg hover:bg-primary/90 transition-colors shadow-lg hover:shadow-xl">' +
+          '        <span class="material-symbols-outlined mr-2" style="font-size:20px">home</span>' +
+          '        <span>Go Home</span>' +
+          '      </a>' +
+          '      <a href="/products/" class="inline-flex items-center justify-center px-8 py-3 border-2 border-slate-200 dark:border-slate-700 font-bold rounded-lg hover:border-primary hover:text-primary transition-colors">' +
+          '        <span class="material-symbols-outlined mr-2" style="font-size:20px">kitchen</span>' +
+          '        <span>Browse Equipment</span>' +
+          '      </a>' +
+          '    </div>' +
+          '  </div>' +
+          '</div>';
+        dispatchSpaLoad();
+      }
+    });
+
     // Handle popstate (browser back/forward) — scroll to top
     global.addEventListener("popstate", function () {
       global.scrollTo({ top: 0, left: 0, behavior: "instant" });

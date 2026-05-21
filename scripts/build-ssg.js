@@ -110,6 +110,7 @@ const ROUTES = [
 
   { slug: 'quote',        navId: 'quote' },
   { slug: 'support',      navId: 'support' },
+  { slug: 'support/faq',  navId: 'support' },
   { slug: 'news',         navId: 'news' },
   { slug: 'about',        navId: 'about' },
   { slug: 'contact',      navId: 'contact' },
