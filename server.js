@@ -347,7 +347,7 @@ app.get('/', (req, res) => {
 // Security: only serves files under dist/ (and src/ in dev mode).
 //
 
-function resolvePage(reqPath, req) {
+function resolvePage(reqPath) {
   var clean = reqPath.replace(/\/+$/, '');
   if (!clean) clean = '/';
 
@@ -356,24 +356,8 @@ function resolvePage(reqPath, req) {
   if (isFile(f)) return f;
 
   // 2. dist/<path>/index.html (SSG-generated route entry)
-  //    Device-aware: detect UA and return the correct device variant.
-  //    This ensures Swup (SPA fetch) gets the right HTML for the device,
-  //    instead of the mobile redirect shell.
-  var baseF = path.join(__dirname, 'dist', clean, 'index.html');
-  if (isFile(baseF)) {
-    var ua = (req.headers['user-agent'] || '').toLowerCase();
-    var deviceType = 'mobile'; // default (current index.html is mobile)
-    if (/\b(macintosh|windows nt|linux x86_64)\b/.test(ua) && !/\b(mobile|android(?!.*tablet)|iphone|ipod)\b/.test(ua)) {
-      deviceType = 'pc';
-    } else if (/\b(ipad|tablet|android(?!.*mobile))\b/.test(ua)) {
-      deviceType = 'tablet';
-    }
-    if (deviceType !== 'mobile') {
-      var variantF = path.join(__dirname, 'dist', clean, 'index-' + deviceType + '.html');
-      if (isFile(variantF)) return variantF;
-    }
-    return baseF;
-  }
+  f = path.join(__dirname, 'dist', clean, 'index.html');
+  if (isFile(f)) return f;
 
   // 2b. Variant fallback: index-{pc,mobile,tablet}.html → index.html
   //     When SPA fetches /cases/<city>/index-pc.html, serve index.html instead.
@@ -406,7 +390,7 @@ app.get('*', (req, res) => {
   // Never intercept API routes
   if (req.path.startsWith('/api/')) return res.status(404).json({ error: 'Not found' });
 
-  var resolved = resolvePage(req.path, req);
+  var resolved = resolvePage(req.path);
   if (resolved.endsWith('index.html')) {
     res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate');
     res.setHeader('Pragma', 'no-cache');

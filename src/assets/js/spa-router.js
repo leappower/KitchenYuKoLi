@@ -109,6 +109,36 @@
 
     global.swupInstance = swup;
 
+    // ── Client-side device-aware fetch ─────────────────────────────
+    // Static hosts (GitHub Pages, S3, etc.) serve index.html (mobile)
+    // for all requests. Swup fetch gets mobile HTML → wrong layout on PC.
+    // Fix: intercept Swup's fetch:request and rewrite the URL to point
+    // to index-{device}.html based on the current device type.
+    (function () {
+      var deviceUtils = global.DeviceUtils;
+      if (!deviceUtils || !deviceUtils.getDeviceType) return;
+      var deviceType = deviceUtils.getDeviceType();
+      // deviceType is a number enum: 0=MOBILE, 1=TABLET, 2=PC
+      var suffixMap = { 0: "index-mobile.html", 1: "index-tablet.html", 2: "index-pc.html" };
+      var suffix = suffixMap[deviceType];
+      if (!suffix) return; // safety
+
+      swupHooks.on("fetch:request", function (visit, { args }) {
+        if (!args || !args.url) return;
+        var url = args.url;
+        // Only rewrite directory URLs like /profit-calculator/ or /about/
+        // Do NOT touch: /assets/js/..., /index-pc.html (already device-specific), etc.
+        if (!/\/$/.test(url) && !/\/index\.html$/.test(url)) return;
+        // If already requesting a device-specific file, skip
+        if (/index-(mobile|pc|tablet)\.html$/.test(url)) return;
+        // Rewrite: /profit-calculator/ → /profit-calculator/index-pc.html
+        //          /about/ → /about/index-pc.html
+        var base = url.replace(/\/index\.html$/, "");
+        var newUrl = base + suffix;
+        args.url = newUrl;
+      });
+    })();
+
     // Reload ALL page-specific scripts after SPA navigation.
     //
     // Why: Swup v4 only replaces #spa-content. Page scripts live in <head>
