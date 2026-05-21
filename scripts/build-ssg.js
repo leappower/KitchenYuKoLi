@@ -265,17 +265,19 @@ function injectSwupScripts(html) {
   if (/swup\.min\.js/.test(html)) return html;
 
   var bp = BASE_PATH ? BASE_PATH.replace(/\/$/, '') : '';
-  // Insert swup + plugins before spa-router.js (which initializes Swup)
-  // Pattern: <script ... src="/assets/js/spa-router.js">
   var swupTag =
     '    <script defer src="' + bp + '/assets/js/swup.min.js"></script>\n' +
     '    <script defer src="' + bp + '/assets/js/swup-head-plugin.min.js"></script>\n' +
     '    <script defer src="' + bp + '/assets/js/swup-preload-plugin.min.js"></script>';
-  html = html.replace(
-    /(<script[^>]*src=["'][^"']*\/assets\/js\/spa-router\.js[^>]*>[^<]*<\/script>)/i,
-    swupTag + '\n    ' + '$1'
-  );
-  return html;
+
+  // Preferred: insert before spa-router.js
+  var spaRouterPattern = /(<script[^>]*src=["'][^"']*\/assets\/js\/spa-router\.js[^>]*>[^<]*<\/script>)/i;
+  if (spaRouterPattern.test(html)) {
+    return html.replace(spaRouterPattern, swupTag + '\n    ' + '$1');
+  }
+
+  // Fallback: insert before </body>
+  return html.replace(/<\/body>/i, swupTag + '\n  </body>');
 }
 
 /**
@@ -335,9 +337,13 @@ function generateResponsiveEntry(route) {
     '  <script defer src="' + bp + '/assets/js/ui/navigator.js"></script>',
     '  <script defer src="' + bp + '/assets/js/lang-registry.js"></script>',
     '  <script defer src="' + bp + '/assets/js/translations.js"></script>',
+    '  <script defer src="' + bp + '/assets/js/translations.js"></script>',
     '  <script defer src="' + bp + '/assets/js/translations-dropdown-template.js"></script>',
     '</head>',
     '<body>',
+    '  <navigator data-component="navigator" data-active="' + route.slug.split('/')[0] + '" data-search="true"></navigator>',
+    '  <main id="spa-content"></main>',
+    '  <footer data-component="footer" data-active="' + route.slug.split('/')[0] + '"></footer>',
     '  <noscript>',
     '    <meta http-equiv="refresh" content="0;url=index-mobile.html?lang=en">',
     '  </noscript>',
