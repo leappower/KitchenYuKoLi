@@ -253,6 +253,18 @@ app.get('/health', (req, res) => {
   });
 });
 
+// ─── Known routes list (SSG-generated) — used by resolvePage for non-trailing-slash redirects ───
+var ROUTE_SLUGS = [
+  'home','products','products/compare','products/stirfry','products/cutting','products/frying',
+  'products/stewing','products/steaming','products/other','products/detail',
+  'applications','applications/chain-restaurant','applications/food-factory',
+  'applications/central-kitchen','applications/small-restaurant','applications/canteen',
+  'applications/menu-lab','applications/cloud-kitchen',
+  'cases','cases/bangkok','cases/cebu','cases/hanoi','cases/hcmc','cases/jakarta',
+  'cases/kl','cases/manila','cases/surabaya',
+  'support','news','about','contact','quote','profit-calculator','catalog','thank-you','landing'
+];
+
 // ═══ Trailing slash redirect for known route directories
 // Handles /home → /home/, /products → /products/, etc.
 app.use((req, res, next) => {
@@ -359,15 +371,21 @@ function resolvePage(reqPath) {
   f = path.join(__dirname, 'dist', clean + '-pc.html');
   if (isFile(f)) return f;
 
-  // 6. 404 page — return 404.html for non-asset, non-API, non-spa routes
-  var f404 = path.join(__dirname, 'dist', '404.html');
-  if (isFile(f404)) return f404;
+  // 4. Check if this is a known route without trailing slash — redirect
+  //    (handles /home → /home/, /products → /products/, etc.)
+  //    This check uses ROUTE_SLUGS compiled from the build config.
+  if (typeof ROUTE_SLUGS !== 'undefined') {
+    var stripped = clean.replace(/^\//, '');
+    if (ROUTE_SLUGS.indexOf(stripped) !== -1) {
+      var target = clean + '/' + (req.url.slice(req.path.length) || '');
+      // Already handled by trailing-slash middleware above — fall through
+    }
+  }
 
-  // 6. 404 page — return 404.html for non-asset, non-API, non-spa routes
-  var f404 = path.join(__dirname, 'dist', '404.html');
-  if (isFile(f404)) return f404;
-
-  // 7. SPA shell (fallback)
+  // 5. SPA shell (catch-all — unknown routes get SPA shell for client-side routing)
+  //    Unknown routes must NOT return 404.html, as Swup expects SPA shell for
+  //    client-side navigation and 404.html has no #spa-content.
+  //    404.html is ONLY used by GitHub Pages / CDNs when the path has no file.
   return path.join(__dirname, 'dist', 'index.html');
 }
 
