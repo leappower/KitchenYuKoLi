@@ -107,7 +107,7 @@ const ROUTES = [
   { slug: 'cases/surabaya',    navId: 'cases' },
   { slug: 'profit-calculator', navId: 'profit-calculator' },
   { slug: 'products/compare', navId: 'products' },
-  { slug: 'catalog',      navId: 'catalog' },
+
   { slug: 'quote',        navId: 'quote' },
   { slug: 'support',      navId: 'support' },
   { slug: 'news',         navId: 'news' },
@@ -362,9 +362,6 @@ function generateResponsiveEntry(route) {
     '    <meta http-equiv="refresh" content="0;url=index-mobile.html?lang=en">',
     '  </noscript>',
     '  <p>Loading...</p>',
-    '  <script defer src="' + bp + '/assets/js/swup.min.js"></script>',
-    '  <script defer src="' + bp + '/assets/js/swup-head-plugin.min.js"></script>',
-    '  <script defer src="' + bp + '/assets/js/swup-preload-plugin.min.js"></script>',
     '  <script defer src="' + bp + '/assets/js/spa-router.js"></script>',
     '</body>',
     '</html>'
@@ -617,7 +614,7 @@ function generate404() {
     '          <span class="material-symbols-outlined mr-2" style="font-size:20px">home</span>',
     '          <span data-i18n="nav_home">Go Home</span>',
     '        </a>',
-    '        <a href="' + bp + '/catalog/" class="inline-flex items-center justify-center px-8 py-3 border-2 border-slate-200 dark:border-slate-700 font-bold rounded-lg hover:border-primary hover:text-primary transition-colors">',
+    '        <a href="' + bp + '/products/" class="inline-flex items-center justify-center px-8 py-3 border-2 border-slate-200 dark:border-slate-700 font-bold rounded-lg hover:border-primary hover:text-primary transition-colors">',
     '          <span class="material-symbols-outlined mr-2" style="font-size:20px">kitchen</span>',
     '          <span data-i18n="nav_products">Browse Equipment</span>',
     '        </a>',

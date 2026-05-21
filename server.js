@@ -262,7 +262,7 @@ var ROUTE_SLUGS = [
   'applications/menu-lab','applications/cloud-kitchen',
   'cases','cases/bangkok','cases/cebu','cases/hanoi','cases/hcmc','cases/jakarta',
   'cases/kl','cases/manila','cases/surabaya',
-  'support','news','about','contact','quote','profit-calculator','catalog','thank-you','landing'
+  'support','news','about','contact','quote','profit-calculator','thank-you','landing'
 ];
 
 // ═══ Trailing slash redirect for known route directories
