@@ -78,6 +78,11 @@
 
     // 设备特定页面映射
     getDevicePage: function (basePath) {
+      // SSG-generated index.html contains mobile content directly.
+      // No device switch needed — the page is already responsive via Tailwind.
+      if (/\/index\.html$/.test(basePath)) {
+        return basePath;
+      }
       // Use DeviceUtils if available
       if (typeof DeviceUtils !== "undefined" && DeviceUtils && DeviceUtils.getDevicePagePath) {
         return DeviceUtils.getDevicePagePath(basePath);
@@ -431,11 +436,12 @@
         }
       }
 
-      // Convention: any path not in routes[] → /<path>/index-pc.html
-      // This mirrors server.js resolvePage() step 4.
+      // Convention: any path not in routes[] → /<path>/index.html
+      // SSG generates index.html with responsive content from index-mobile.html
+      // SPA should load this directly without device switching.
       if (!pagePath) {
         var clean = routePath.replace(/\/+$/, "");
-        pagePath = clean + "/index-pc.html";
+        pagePath = clean + "/index.html";
       }
 
       // Never redirect — let the server return SPA shell if file doesn't exist.

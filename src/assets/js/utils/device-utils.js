@@ -122,29 +122,15 @@
    * @returns {string} 设备特定路径，如 '/pages/home/index-mobile.html'
    */
   function getDevicePagePath(basePath) {
-    // 如果不是标准的 index.html 路径，返回原值
+    // SSG-generated index.html contains mobile content directly via
+    // build-ssg.js generateResponsiveEntry(). No device switch needed
+    // — the page is already responsive via Tailwind classes (sm:, md:, lg:).
     if (!basePath || !basePath.endsWith("/index.html")) {
       return basePath;
     }
 
-    var deviceType = getDeviceType();
-    var suffix;
-
-    switch (deviceType) {
-      case DeviceType.MOBILE:
-        suffix = "index-mobile.html";
-        break;
-      case DeviceType.TABLET:
-        suffix = "index-tablet.html";
-        break;
-      case DeviceType.PC:
-        suffix = "index-pc.html";
-        break;
-      default:
-        suffix = "index.html";
-    }
-
-    return basePath.replace("index.html", suffix);
+    // Return as-is: SSG index.html is self-contained responsive content
+    return basePath;
   }
 
   /**
