@@ -252,9 +252,9 @@
       "</div>" +
       "<!-- 下方内容 -->" +
       '<div class="flex-1 p-5 lg:p-6 flex flex-col gap-2.5">' +
-      '<h3 class="font-bold text-lg lg:text-xl leading-snug text-slate-900 dark:text-white" data-i18n="cases_title_' +
+      '<h3 class="font-bold text-lg lg:text-xl leading-snug text-slate-900 dark:text-white" data-i18n="cases_' +
       c.slug +
-      '">' +
+      '_title">' +
       c.title +
       "</h3>" +
       '<div class="flex flex-wrap items-center gap-x-3 gap-y-1 text-sm text-slate-500 dark:text-slate-400">' +
@@ -309,7 +309,9 @@
       "</div>" +
       "</div>" +
       '<span class="inline-flex items-center gap-1 text-primary font-bold text-sm group-hover:gap-2 transition-all mt-auto pt-1">' +
-      '<span data-i18n="cases_read_story">' + tl("casegrid_read_story", "查看详情") + '</span>' +
+      '<span data-i18n="cases_read_story">' +
+      tl("casegrid_read_story", "查看详情") +
+      "</span>" +
       '<span class="material-symbols-outlined text-base">arrow_forward</span>' +
       "</span>" +
       "</div>" +
@@ -338,9 +340,9 @@
       c.dailyOutput +
       tl("casegrid_meals_per_day", " 餐/天") +
       "</div>" +
-      '<h3 class="font-bold text-base leading-snug" data-i18n="cases_title_' +
+      '<h3 class="font-bold text-base leading-snug" data-i18n="cases_' +
       c.slug +
-      '">' +
+      '_title">' +
       c.title +
       "</h3>" +
       '<div class="flex items-center gap-3">' +
@@ -366,7 +368,9 @@
       c.quote +
       "</p>" +
       '<span class="inline-flex items-center gap-1 text-primary font-bold text-sm">' +
-      '<span data-i18n="cases_read_more">' + tl("casegrid_read_more", "阅读更多") + '</span>' +
+      '<span data-i18n="cases_read_more">' +
+      tl("casegrid_read_more", "阅读更多") +
+      "</span>" +
       '<span class="material-symbols-outlined text-base">arrow_forward</span>' +
       "</span>" +
       "</div>" +
@@ -467,7 +471,9 @@
     var html =
       '<button id="case-filter-toggle" class="flex items-center gap-2 px-4 py-2 rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-sm font-semibold shadow-sm hover:shadow-md transition-all">' +
       '<span class="material-symbols-outlined text-primary">tune</span>' +
-      '<span data-i18n="cases_filter_toggle">' + tl("casegrid_filter_toggle", "筛选案例") + '</span>' +
+      '<span data-i18n="cases_filter_toggle">' +
+      tl("casegrid_filter_toggle", "筛选案例") +
+      "</span>" +
       '<span id="case-count" class="ml-1 bg-primary/10 text-primary px-2 py-0.5 rounded-full text-xs font-bold">8</span>' +
       '<span class="material-symbols-outlined ml-auto transition-transform" id="case-filter-arrow">expand_more</span>' +
       "</button>" +
