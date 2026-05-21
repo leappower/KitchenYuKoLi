@@ -109,38 +109,60 @@
 
     global.swupInstance = swup;
 
-    // Reload page-specific <script src="..."> found in the new content.
-    // Swup does NOT execute <script> tags inside replaced containers,
-    // so we need to load them dynamically into <head>.
-    var _loadedPageScripts = {};
-    function reloadPageScripts() {
-      var spaContent = document.getElementById("spa-content");
-      if (!spaContent) return;
-      var scripts = spaContent.querySelectorAll("script[src]");
-      for (var i = 0; i < scripts.length; i++) {
-        var src = scripts[i].getAttribute("src");
+    // Reload ALL page-specific scripts after SPA navigation.
+    //
+    // Why: Swup v4 only replaces #spa-content. Page scripts live in <head>
+    // (defer) and body (after </main>). Neither is re-executed by Swup.
+    //
+    // Strategy: On every navigation, remove all previously injected scripts,
+    // then reload every non-global script the new page needs. The browser
+    // executes each <script> synchronously (no defer/async) on appendChild.
+    var _dynamicScripts = [];
+    var _globalScriptPatterns = /spa-router\.js|swup|translations\.js|lang-registry\.js|spa-events\.js$/;
+    function reloadPageScripts(newDoc) {
+      if (!newDoc) return;
+      // 1. Remove all previously injected script tags
+      for (var d = 0; d < _dynamicScripts.length; d++) {
+        if (_dynamicScripts[d].parentNode) {
+          _dynamicScripts[d].parentNode.removeChild(_dynamicScripts[d]);
+        }
+      }
+      _dynamicScripts = [];
+      // 2. Collect all script[src] from the new page (head + body)
+      var headScripts = newDoc.head.querySelectorAll("script[src]");
+      var bodyScripts = newDoc.body.querySelectorAll("script[src]");
+      var allNewScripts = Array.prototype.slice.call(headScripts).concat(Array.prototype.slice.call(bodyScripts));
+      // 3. Get current document script srcs for dedup
+      var currentScripts = document.querySelectorAll("script[src]");
+      var currentSrcs = {};
+      for (var c = 0; c < currentScripts.length; c++) {
+        var curKey = currentScripts[c].getAttribute("src").replace(/\?.*$/, "");
+        currentSrcs[curKey] = true;
+      }
+      // 4. Inject missing scripts as synchronous (forces re-execution)
+      for (var i = 0; i < allNewScripts.length; i++) {
+        var src = allNewScripts[i].getAttribute("src");
         if (!src) continue;
-        // Normalize: strip query string for dedup
         var srcKey = src.replace(/\?.*$/, "");
-        // Skip scripts that should run once (swup, spa-router, translations)
-        if (/spa-router\.js|swup|translations\.js$/.test(srcKey)) continue;
-        // Dedup: skip if already loaded in a prior navigation
-        if (_loadedPageScripts[srcKey]) continue;
-        _loadedPageScripts[srcKey] = true;
+        if (_globalScriptPatterns.test(srcKey)) continue;
+        if (currentSrcs[srcKey]) continue;
         var newScript = document.createElement("script");
         newScript.src = src;
         document.head.appendChild(newScript);
+        _dynamicScripts.push(newScript);
+        currentSrcs[srcKey] = true; // prevent duplicate within same navigation
       }
     }
 
     // Forward Swup lifecycle to spa:load event
     // Swup v4 uses hooks.on() instead of .on()
     var swupHooks = swup.hooks || swup;
-    swupHooks.on("content:replace", function () {
+    swupHooks.on("content:replace", function (visit) {
       global.__spaNavigating = false;
       _spaState.currentRoute = global.location.pathname.replace(/\/$/, "") || "/";
-      // Reload page-specific scripts from the new content
-      reloadPageScripts();
+      // Reload page-specific scripts from the NEW page (not just #spa-content)
+      var newDoc = visit && visit.to && visit.to.document ? visit.to.document : null;
+      reloadPageScripts(newDoc);
       // Update navigator active state
       if (global.Navigator && typeof global.Navigator.updateActive === "function") {
         global.Navigator.updateActive(_spaState.currentRoute);
