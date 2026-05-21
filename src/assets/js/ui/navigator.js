@@ -995,10 +995,9 @@
       };
 
       var doSearch = function(query) {
-        if (typeof window.SearchEngine !== "undefined" && window.SearchEngine) {
-          window.SearchEngine.search(query, 8).then(function(results) {
-            renderResults(results, query);
-          });
+        if (typeof window.ProductSearchEngine !== "undefined" && window.ProductSearchEngine) {
+          var results = window.ProductSearchEngine.search(query);
+          renderResults(results, query);
         } else {
           resultsPanel.classList.remove("is-open");
         }
@@ -1058,9 +1057,9 @@
     });
 
     /* Preload search index for faster first search */
-    if (typeof window.SearchEngine !== 'undefined' && window.SearchEngine &&
-        typeof window.SearchEngine.preload === 'function') {
-      window.SearchEngine.preload();
+    if (typeof window.ProductSearchEngine !== 'undefined' && window.ProductSearchEngine &&
+        typeof window.ProductSearchEngine.preload === 'function') {
+      window.ProductSearchEngine.preload();
     }
   }
 
@@ -1550,6 +1549,9 @@
     if (window.ApplicationsDropdown) window.ApplicationsDropdown.initDropdownClick();
     if (window.SupportDropdown) window.SupportDropdown.initDropdownClick();
     if (window.AboutDropdown) window.AboutDropdown.initDropdownClick();
+
+    /* Re-initialize search interaction after mount (DOM now has .ios-search-bar) */
+    initSearchInteraction();
   }
 
   /* ================================================================
@@ -1718,9 +1720,7 @@
       matchedItem.classList.add("is-active");
     }
 
-    /* Re-initialize search interaction after mount (DOM now has .ios-search-bar) */
-    initSearchInteraction();
-  }
+    }
 
   /* ================================================================
    *  highlightCategory() — 手动高亮产品分类
