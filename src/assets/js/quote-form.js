@@ -1,6 +1,6 @@
 /**
- * quote-form.js — Quote form validation + Google Sheets submission + WhatsApp redirect
- * Works with both direct page load and SPA navigation.
+ * quote-form.js — Two-step quote form + Contact form
+ * Features: step navigation, country→phone-code sync, phone→account auto-fill, pain-point/equip "other" toggle
  */
 (function () {
   var _spaRegs = {};
@@ -12,158 +12,252 @@
     tgt.addEventListener(evt, fn, { signal: ac.signal });
   }
 
-  var VERSION = "20260423b";
-
-  // Record page load time for TimeOnPage calculation
   window._quotePageLoadTime = window._quotePageLoadTime || Date.now();
 
-  // Required field IDs whose labels need * markers
-  var REQUIRED_IDS = ["q-company", "q-contact", "q-phone", "q-email", "q-country", "q-equipment-type", "q-capacity"];
-  var ASTERISK_HTML = ' <span class="text-red-500 font-bold text-base align-middle">*</span>';
+  // Country → phone code mapping
+  var COUNTRY_CODE_MAP = {
+    ID: "+62", MY: "+60", PH: "+63", VN: "+84", TH: "+66", SG: "+65",
+    MM: "+95", KH: "+855", LA: "+856", BN: "+673", CN: "+86", IN: "+91",
+    JP: "+81", KR: "+82", SA: "+966", TW: "+886", HK: "+852",
+    DE: "+49", ES: "+34", FR: "+33", PT: "+351", RU: "+7", NL: "+31",
+    PL: "+48", IT: "+39", TR: "+90", IL: "+972"
+  };
 
-  /**
-   * Re-inject * markers into labels after i18n overwrites textContent.
-   * Since translations.js now preserves non-data-i18n child elements,
-   * this is only a safety net for edge cases.
-   */
-  function restoreAsterisks() {
-    REQUIRED_IDS.forEach(function (id) {
-      var input = document.getElementById(id);
-      if (!input) return;
-      var container = input.parentElement;
-      while (container && container.tagName !== "DIV") container = container.parentElement;
-      if (!container) return;
-      var label = container.querySelector("label");
-      if (!label) return;
-      if (!label.querySelector(".text-red-500")) {
-        label.insertAdjacentHTML("beforeend", ASTERISK_HTML);
+  // Set a native phone-code select to a given code value
+  function setPhoneCode(selectEl, code) {
+    if (!selectEl) return;
+    for (var i = 0; i < selectEl.options.length; i++) {
+      if (selectEl.options[i].value === code) {
+        selectEl.selectedIndex = i;
+        return;
       }
-    });
+    }
+    for (var j = 0; j < selectEl.options.length; j++) {
+      if (selectEl.options[j].value === "+other") {
+        selectEl.selectedIndex = j;
+        return;
+      }
+    }
   }
 
-  function ensureErrorBanner() {
-    if (document.getElementById("quote-form-error")) return;
+  // Global handler called from inline onchange on country selects
+  window._onCountryChange = function (countryCode) {
+    var phoneCode = COUNTRY_CODE_MAP[countryCode];
+    if (!phoneCode) return;
+    // Sync all phone-code selects on the page
+    var selects = document.querySelectorAll("[id$=-phone-code]");
+    for (var i = 0; i < selects.length; i++) {
+      setPhoneCode(selects[i], phoneCode);
+    }
+  };
+
+  function ensureErrorBanner(form) {
+    var id = (form.id || "quote-form") + "-error";
+    var existing = document.getElementById(id);
+    if (existing) return existing;
     var banner = document.createElement("div");
-    banner.id = "quote-form-error";
-    banner.style.cssText =
-      "display:none;background:#fef2f2;border:1px solid #fca5a5;color:#dc2626;padding:12px 16px;border-radius:8px;margin-bottom:16px;font-size:14px;font-weight:600;text-align:center;";
-    banner.textContent = "";
-    var form = document.getElementById("quote-form");
-    if (form) form.insertBefore(banner, form.firstChild);
+    banner.id = id;
+    banner.style.cssText = "display:none;background:#fef2f2;border:1px solid #fca5a5;color:#dc2626;padding:12px 16px;border-radius:8px;margin-bottom:16px;font-size:14px;font-weight:600;text-align:center;";
+    form.insertBefore(banner, form.firstChild);
     return banner;
   }
 
-  function showError(msg) {
-    // Try toast notification first
-    if (typeof window.showNotification === "function") {
-      window.showNotification(msg, "error");
-    }
-    // Always show inline banner as fallback
-    var banner = ensureErrorBanner();
-    if (banner) {
-      banner.textContent = "⚠ " + msg;
-      banner.style.display = "block";
-      banner.scrollIntoView({ behavior: "smooth", block: "center" });
-    }
-    // Also try alert as last resort
-    setTimeout(function () {
-      if (banner && banner.style.display !== "none") return;
-      alert(msg);
-    }, 300);
+  function showError(form, msg) {
+    if (typeof window.showNotification === "function") window.showNotification(msg, "error");
+    var banner = ensureErrorBanner(form);
+    banner.textContent = "⚠ " + msg;
+    banner.style.display = "block";
+    banner.scrollIntoView({ behavior: "smooth", block: "center" });
   }
 
-  function clearError() {
-    var banner = document.getElementById("quote-form-error");
+  function clearError(form) {
+    var id = (form.id || "quote-form") + "-error";
+    var banner = document.getElementById(id);
     if (banner) banner.style.display = "none";
   }
 
+  function bindPhoneToAccount(form, phoneId, phoneCodeId, accountId) {
+    var phoneEl = form.querySelector("#" + phoneId);
+    var phoneCodeEl = form.querySelector("#" + phoneCodeId);
+    var accountEl = form.querySelector("#" + accountId);
+    if (!phoneEl || !accountEl) return;
+
+    var fillAccount = function () {
+      var code = phoneCodeEl ? phoneCodeEl.value : "";
+      var num = phoneEl.value.trim();
+      if (num && !accountEl.value.trim()) {
+        accountEl.value = (code && code !== "+other" ? code + " " : "") + num;
+      }
+    };
+    phoneEl.addEventListener("blur", fillAccount);
+    if (phoneCodeEl) phoneCodeEl.addEventListener("change", fillAccount);
+  }
+
+  function initStepNavigation(form) {
+    var step1 = form.querySelector("#quote-step-1");
+    var step2 = form.querySelector("#quote-step-2");
+    if (!step1 || !step2) return;
+
+    var nextBtn = form.querySelector("#quote-next-btn");
+    var prevBtn = form.querySelector("#quote-prev-btn");
+
+    // Bind phone → account auto-fill for quote form
+    bindPhoneToAccount(form, "q-phone", "q-phone-code", "q-contact-account");
+
+    // Equipment "other" toggle
+    var equipOtherCb = form.querySelector("#q-equip-other-cb");
+    var equipOther = form.querySelector("#q-equip-other");
+    if (equipOtherCb && equipOther) {
+      equipOtherCb.addEventListener("change", function () {
+        if (equipOtherCb.checked) { equipOther.classList.remove("hidden"); equipOther.focus(); }
+        else { equipOther.classList.add("hidden"); equipOther.value = ""; }
+      });
+    }
+
+    // Pain-point "other" toggle
+    var painOtherCb = form.querySelector("#q-pain-other-cb");
+    var painOther = form.querySelector("#q-pain-other");
+    if (painOtherCb && painOther) {
+      painOtherCb.addEventListener("change", function () {
+        if (painOtherCb.checked) { painOther.classList.remove("hidden"); painOther.focus(); }
+        else { painOther.classList.add("hidden"); painOther.value = ""; }
+      });
+    }
+
+    // Next button
+    if (nextBtn) {
+      nextBtn.addEventListener("click", function () {
+        clearError(form);
+        var required = ["q-country", "q-contact", "q-restaurant-type", "q-phone", "q-contact-channel"];
+        var valid = true, firstInvalid = null;
+        required.forEach(function (id) {
+          var el = form.querySelector("#" + id);
+          if (!el) return;
+          if (!el.value.trim()) {
+            el.classList.add("border-red-500", "ring-2", "ring-red-300");
+            valid = false;
+            if (!firstInvalid) firstInvalid = el;
+          } else {
+            el.classList.remove("border-red-500", "ring-2", "ring-red-300");
+          }
+        });
+        if (!valid) {
+          showError(form, "请填写所有必填字段（标记 * 的项）");
+          if (firstInvalid) firstInvalid.focus();
+          return;
+        }
+        step1.classList.add("hidden");
+        step2.classList.remove("hidden");
+        step2.scrollIntoView({ behavior: "smooth", block: "start" });
+      });
+    }
+
+    // Prev button
+    if (prevBtn) {
+      prevBtn.addEventListener("click", function () {
+        step2.classList.add("hidden");
+        step1.classList.remove("hidden");
+        step1.scrollIntoView({ behavior: "smooth", block: "start" });
+      });
+    }
+  }
+
   function initQuoteForm() {
-    var form = document.getElementById("quote-form");
+    var form = document.getElementById("quote-form") || document.getElementById("quote-form-mobile");
     if (!form || form.dataset.quoteFormBound) return;
     form.dataset.quoteFormBound = "1";
 
-    // Restore * markers if needed (translations.js now preserves child spans, but safety net)
-    restoreAsterisks();
-
-    // Clear errors on input
-    form.addEventListener("input", clearError);
-    form.addEventListener("change", clearError);
+    initStepNavigation(form);
+    form.addEventListener("input", function () { clearError(form); });
+    form.addEventListener("change", function () { clearError(form); });
 
     form.addEventListener("submit", function (e) {
       e.preventDefault();
-      clearError();
+      clearError(form);
 
-      // Required fields
-      var required = ["q-company", "q-contact", "q-phone", "q-email", "q-country", "q-equipment-type", "q-capacity"];
-      var valid = true;
-      var firstInvalid = null;
-      required.forEach(function (id) {
-        var el = document.getElementById(id);
+      // Validate step 2
+      var requiredStep2 = ["q-capacity", "q-budget"];
+      var timelineChecked = form.querySelector('input[name="q-timeline"]:checked');
+      var valid = true, firstInvalid = null;
+
+      requiredStep2.forEach(function (id) {
+        var el = form.querySelector("#" + id);
         if (!el) return;
         if (!el.value.trim()) {
-          el.classList.add("border-red-500");
-          el.classList.add("ring-2", "ring-red-300");
+          el.classList.add("border-red-500", "ring-2", "ring-red-300");
           valid = false;
           if (!firstInvalid) firstInvalid = el;
         } else {
-          el.classList.remove("border-red-500");
-          el.classList.remove("ring-2", "ring-red-300");
+          el.classList.remove("border-red-500", "ring-2", "ring-red-300");
         }
       });
-
-      // Email validation
-      var emailEl = document.getElementById("q-email");
-      if (emailEl && emailEl.value && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailEl.value)) {
-        emailEl.classList.add("border-red-500", "ring-2", "ring-red-300");
-        valid = false;
-        if (!firstInvalid) firstInvalid = emailEl;
-      }
-
-      // Consent validation
-      var consentEl = document.getElementById("q-consent");
-      if (consentEl && !consentEl.checked) {
-        showError("Please agree to the privacy policy first");
-        return;
-      }
+      if (!timelineChecked) valid = false;
 
       if (!valid) {
-        showError("Please fill in all required fields (marked with red border)");
+        showError(form, "请填写所有必填字段（标记 * 的项）");
         if (firstInvalid) firstInvalid.focus();
         return;
       }
 
-      // Build WhatsApp message
-      var company = document.getElementById("q-company").value;
-      var contact = document.getElementById("q-contact").value;
-      var phone = document.getElementById("q-phone").value;
-      var email = document.getElementById("q-email").value;
-      var country = document.getElementById("q-country");
-      var countryText = country.options[country.selectedIndex].text;
-      var equipType = document.getElementById("q-equipment-type");
-      var equipText = equipType.options[equipType.selectedIndex].text;
-      var quantity = document.getElementById("q-quantity").value || "Not specified";
-      var capacity = document.getElementById("q-capacity");
-      var capacityText = capacity.value ? capacity.options[capacity.selectedIndex].text : "Not specified";
-      var budget = document.getElementById("q-budget");
-      var budgetText = budget.value ? budget.options[budget.selectedIndex].text : "Not specified";
-      var message = document.getElementById("q-message").value || "None";
+      // Collect all data
+      var country = form.querySelector("#q-country");
+      var phone = form.querySelector("#q-phone");
+      var phoneCode = form.querySelector("#q-phone-code");
+      var email = form.querySelector("#q-email");
+      var contact = form.querySelector("#q-contact");
+      var company = form.querySelector("#q-company");
+      var restaurantType = form.querySelector("#q-restaurant-type");
+      var contactChannel = form.querySelector("#q-contact-channel");
+      var contactAccount = form.querySelector("#q-contact-account");
+      var capacity = form.querySelector("#q-capacity");
+      var budget = form.querySelector("#q-budget");
+      var timeline = form.querySelector('input[name="q-timeline"]:checked');
 
-      // Build rich message from all fields
+      var countryText = country && country.value ? country.options[country.selectedIndex].text : "";
+      var restaurantText = restaurantType && restaurantType.value ? restaurantType.options[restaurantType.selectedIndex].text : "";
+
+      var equipments = [];
+      form.querySelectorAll('#quote-step-2 input[type="checkbox"][value="cutting"],#quote-step-2 input[type="checkbox"][value="stirfry"],#quote-step-2 input[type="checkbox"][value="frying"],#quote-step-2 input[type="checkbox"][value="stewing"],#quote-step-2 input[type="checkbox"][value="steaming"],#quote-step-2 input[type="checkbox"][value="auxiliary"]').forEach(function (cb) {
+        if (cb.checked) equipments.push(cb.value);
+      });
+      var equipOther = form.querySelector("#q-equip-other");
+      if (equipOther && equipOther.value.trim()) equipments.push("Other: " + equipOther.value.trim());
+
+      var pains = [];
+      form.querySelectorAll('#quote-step-2 input[type="checkbox"][value="招聘困难"],#quote-step-2 input[type="checkbox"][value="出餐慢"],#quote-step-2 input[type="checkbox"][value="品质不稳"],#quote-step-2 input[type="checkbox"][value="成本高"],#quote-step-2 input[type="checkbox"][value="新店"]').forEach(function (cb) {
+        if (cb.checked) pains.push(cb.value);
+      });
+      var painOtherCb = form.querySelector("#q-pain-other-cb");
+      var painOther = form.querySelector("#q-pain-other");
+      if (painOtherCb && painOtherCb.checked && painOther && painOther.value.trim()) {
+        pains.push("Other: " + painOther.value.trim());
+      }
+
       var richMsg = [
-        "Equipment Type: " + equipText,
-        "Quantity: " + quantity,
-        "Kitchen Capacity: " + capacityText,
-        "Budget: " + budgetText,
-        "Requirements: " + message,
+        "Restaurant Type: " + restaurantText,
+        "Contact Via: " + (contactChannel ? contactChannel.value : "") + (contactAccount && contactAccount.value ? " (" + contactAccount.value + ")" : ""),
+        "Equipment: " + (equipments.length ? equipments.join(", ") : "Not specified"),
+        "Daily Output: " + (capacity && capacity.value ? capacity.options[capacity.selectedIndex].text : ""),
+        "Budget: " + (budget && budget.value ? budget.options[budget.selectedIndex].text : ""),
+        "Timeline: " + (timeline ? timeline.value : ""),
+        "Pain Points: " + (pains.length ? pains.join(", ") : "None"),
       ].join(" | ");
 
       var formData = {
         formType: "quote_form",
-        name: contact,
-        email: email,
-        phone: phone,
+        name: contact ? contact.value : "",
+        email: email ? email.value : "",
+        phone: (phoneCode && phoneCode.value !== "+other" ? phoneCode.value : "") + " " + (phone ? phone.value : ""),
         country: countryText,
-        company: company,
+        company: company ? company.value : "",
+        restaurantType: restaurantText,
+        contactChannel: contactChannel ? contactChannel.value : "",
+        contactAccount: contactAccount ? contactAccount.value : "",
+        equipment: equipments.join(", "),
+        dailyOutput: capacity && capacity.value ? capacity.options[capacity.selectedIndex].text : "",
+        budget: budget && budget.value ? budget.options[budget.selectedIndex].text : "",
+        timeline: timeline ? timeline.value : "",
+        painPoints: pains.join(", "),
         message: richMsg,
         language: (window.translationManager && window.translationManager.currentLang) || navigator.language,
         browserLanguage: navigator.language,
@@ -175,73 +269,64 @@
         userAgent: navigator.userAgent,
       };
 
-      // Disable button + show loading
-      var btn = document.getElementById("quote-submit-btn");
+      var btn = form.querySelector("#quote-submit-btn");
       var btnOrig = btn ? btn.innerHTML : "";
       if (btn) {
         btn.disabled = true;
-        btn.innerHTML =
-          '<span class="material-symbols-outlined animate-spin">progress_activity</span> ' +
-          (typeof window.t === "function" ? window.uiText("form_submitting", "Submitting...") : "Submitting...");
+        btn.innerHTML = '<span class="material-symbols-outlined animate-spin">progress_activity</span> 提交中...';
       }
 
-      // Submit via server proxy (hides Google Apps Script URL)
       fetch("/api/quote-submit", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
       })
-        .then(function (response) {
-          if (!response.ok) {
-            return response.json().then(function (err) {
-              throw new Error(err.error || "Submission failed");
-            });
-          }
-          return response.json();
+        .then(function (res) {
+          if (!res.ok) return res.json().then(function (err) { throw new Error(err.error || "Submission failed"); });
+          return res.json();
         })
         .then(function () {
-          if (typeof window.showNotification === "function") {
-            window.showNotification("Submitted successfully! We'll contact you soon.", "success");
-          }
+          if (typeof window.showNotification === "function") window.showNotification("提交成功！我们将尽快与您联系。", "success");
           setTimeout(function () {
-            if (window.SpaRouter) {
-              window.SpaRouter.navigate("/thank-you/");
-            } else {
-              location.href = "/thank-you/";
-            }
+            if (window.SpaRouter) window.SpaRouter.navigate("/thank-you/");
+            else location.href = "/thank-you/";
           }, 1000);
         })
         .catch(function (err) {
-          showError(err.message || "Submission failed. Please try again later.");
-          // Re-enable button on error
-          if (btn) {
-            btn.disabled = false;
-            btn.innerHTML = btnOrig;
-          }
+          showError(form, err.message || "提交失败，请稍后重试。");
+          if (btn) { btn.disabled = false; btn.innerHTML = btnOrig; }
         });
     });
   }
 
+  // Contact form init
+  function initContactForm() {
+    var form = document.querySelector("#contact-form-el");
+    if (!form || form.dataset.contactFormBound) return;
+    form.dataset.contactFormBound = "1";
+
+    bindPhoneToAccount(form, "c-phone", "c-phone-code", "c-contact-account");
+
+    // Pain point "other" toggle
+    var pain6 = form.querySelector("#c-pain-6");
+    var painOther = form.querySelector("#c-pain-other");
+    if (pain6 && painOther) {
+      pain6.addEventListener("change", function () {
+        if (pain6.checked) { painOther.classList.remove("hidden"); painOther.focus(); }
+        else { painOther.classList.add("hidden"); painOther.value = ""; }
+      });
+    }
+  }
+
   // Bind on DOM ready + SPA navigation
-  if (document.readyState !== "loading") initQuoteForm();
-  else document.addEventListener("DOMContentLoaded", initQuoteForm);
-  _spaOn(
-    document,
-    "spa:ready",
-    function () {
-      initQuoteForm();
-    },
-    "spa:ready"
-  );
-  _spaOn(
-    document,
-    "spa:load",
-    function initQuoteFormSPA() {
-      var form = document.getElementById("quote-form") || document.getElementById("quote-calc-form");
-      if (!form || form._spaLoadInitialized) return;
-      form._spaLoadInitialized = true;
-      initQuoteForm();
-    },
-    "spa:load"
-  );
+  if (document.readyState !== "loading") { initQuoteForm(); initContactForm(); }
+  else document.addEventListener("DOMContentLoaded", function () { initQuoteForm(); initContactForm(); });
+
+  _spaOn(document, "spa:ready", function () { initQuoteForm(); initContactForm(); }, "spa:ready");
+  _spaOn(document, "spa:load", function () {
+    var qf = document.getElementById("quote-form") || document.getElementById("quote-form-mobile");
+    if (qf && !qf._spaLoadInitialized) { qf._spaLoadInitialized = true; initQuoteForm(); }
+    var cf = document.querySelector("#contact-form-el");
+    if (cf && !cf._spaLoadInitialized) { cf._spaLoadInitialized = true; initContactForm(); }
+  }, "spa:load");
 })();
