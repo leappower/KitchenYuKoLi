@@ -156,26 +156,17 @@
       global.__spaNavigating = true;
     });
 
-    // Handle fetch errors — render 404 content in #spa-content
-    // instead of letting Swup crash with 'Container mismatch'
-    // NOTE: fetch:error is also triggered by SwupPreloadPlugin background
-    // preloading. Guard with __spaNavigating to avoid rendering 404
-    // ── Graceful degradation: Swup failure → native navigation ─────
-    // If Swup aborts a visit (container mismatch, timeout, etc.),
-    // fall back to full page reload so the page is never left broken.
+    // ── Graceful degradation ──────────────────────────────────────
+    // Do NOT do location.href jumps on abort/error — that breaks user
+    // interaction (SwupPreloadPlugin also triggers these for hovered links).
+    // Instead, just reset the navigating flag so the page stays usable.
     swupHooks.on("visit:abort", function (visit) {
-      if (!global.__spaNavigating) return;
-      console.warn("[spa-router] Swup aborted, falling back to native: " + visit.to.url);
       global.__spaNavigating = false;
-      global.location.href = visit.to.url;
     });
 
-    // Handle fetch errors — fall back to native navigation
-    // instead of rendering inline 404 (which can leave the page in a broken state)
-    swupHooks.on("fetch:error", function () {
-      if (!global.__spaNavigating) return;
+    swupHooks.on("fetch:error", function (visit, args) {
+      // Silently reset — Swup will not navigate, page stays intact
       global.__spaNavigating = false;
-      global.location.reload();
     });
 
     // Safety net: if Swup intercepts a click but navigation hangs >3s,
