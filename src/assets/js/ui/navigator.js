@@ -899,25 +899,32 @@
 
   function initLangSwitcher() {
     var btn = document.getElementById("lang-toggle-btn");
-    if (!btn) return;
+    console.log("[navigator] initLangSwitcher called, btn:", !!btn);
+    if (!btn) { console.warn("[navigator] #lang-toggle-btn not found in document"); return; }
 
     // Remove old listeners by replacing node
     var clone = btn.cloneNode(true);
     btn.parentNode.replaceChild(clone, btn);
 
     clone.addEventListener("click", function (e) {
+      console.log("[navigator] lang-toggle-btn CLICKED");
       e.stopPropagation();
       _closeLangPanel();
 
       var selectEl = document.getElementById("lang-selector");
-      if (!selectEl) return;
+      console.log("[navigator] lang-selector:", !!selectEl);
+      if (!selectEl) { console.warn("[navigator] #lang-selector not found"); return; }
 
       // Ensure lang-registry.js + custom-select.js are loaded, then open
+      console.log("[navigator] loading lang dependencies...");
       Promise.all([ensureLangRegistry(), ensureCustomSelect()])
-        .then(function () {
+        .then(function (results) {
+          console.log("[navigator] lang deps loaded, populating select");
           // Populate <select> with optgroups from LANG_REGISTRY (idempotent)
           _populateLangSelect(selectEl);
+          console.log("[navigator] select populated, options count:", selectEl.options.length);
           _openLangPanel(selectEl, clone);
+          console.log("[navigator] _openLangPanel done");
         })
         .catch(function (err) {
           console.warn("[Navigator] Failed to load lang dependencies:", err);
@@ -1278,6 +1285,7 @@
     /* Close all open dropdowns before remounting */
     closeOtherDropdowns(null);
     var placeholders = document.querySelectorAll('[data-component="navigator"]');
+    console.log("[navigator] mountNavigator called, placeholders:", placeholders.length);
 
     for (var i = 0; i < placeholders.length; i++) {
       var placeholder = placeholders[i];

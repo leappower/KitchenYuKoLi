@@ -61,6 +61,206 @@
    *  CSS INJECTION (idempotent)
    * ──────────────────────────────────────────────────────────────── */
 
+  function injectStyles() {
+    if (document.getElementById(STYLE_ID)) return;
+
+    var css = [
+      /* ─── Trigger (the visible button) ─── */
+      ".cs-trigger {",
+      "  display: flex; align-items: center; justify-content: space-between;",
+      "  width: 100%; cursor: pointer; user-select: none;",
+      "  -webkit-tap-highlight-color: transparent;",
+      "  position: relative;",
+      "}",
+      ".cs-trigger-text {",
+      "  flex: 1; min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;",
+      "}",
+      ".cs-trigger-text.cs-placeholder {",
+      "  color: #94a3b8;",
+      "}",
+      "html.dark .cs-trigger-text.cs-placeholder {",
+      "  color: #64748b;",
+      "}",
+      ".cs-trigger-chevron {",
+      "  font-size: 20px; color: #94a3b8; flex-shrink: 0;",
+      "  transition: transform .25s cubic-bezier(.4,0,.2,1);",
+      "  margin-left: 4px;",
+      "}",
+      "html.dark .cs-trigger-chevron { color: #64748b; }",
+      ".cs-is-open .cs-trigger-chevron,",
+      ".cs-trigger-wrap:hover .cs-trigger-chevron {",
+      "  transform: rotate(180deg);",
+      "}",
+
+      /* ─── Wrapper ─── */
+      ".cs-trigger-wrap { position: relative; width: 100%; }",
+      ".cs-trigger-wrap" + "." + DISABLED_CLASS + " .cs-trigger {",
+      "  cursor: not-allowed; opacity: .5; pointer-events: none;",
+      "}",
+
+      /* ─── Floating Panel (PC/Tablet) - uses position:fixed to avoid overflow clipping ─── */
+      ".cs-panel {",
+      "  position: fixed;",
+      "  background: rgba(248,250,252,1);",
+      "  border: .5px solid rgba(0,0,0,.08);",
+      "  border-radius: 12px; padding: 4px;",
+      "  box-shadow: 0 0 0 .5px rgba(0,0,0,.04), 0 8px 32px rgba(0,0,0,.10), 0 2px 8px rgba(0,0,0,.06);",
+      "  z-index: 3000; max-height: 260px; overflow-y: auto;",
+      "  opacity: 0; visibility: hidden; pointer-events: none;",
+      "  transform: translateY(-4px) scale(.98); transform-origin: top center;",
+      "  transition: opacity .15s ease, transform .2s cubic-bezier(.32,.72,0,1), visibility 0s .15s;",
+      "}",
+      "html.dark .cs-panel {",
+      "  background: rgba(30,41,59,1); border-color: rgba(255,255,255,.10);",
+      "  box-shadow: 0 0 0 .5px rgba(255,255,255,.06), 0 8px 32px rgba(0,0,0,.4), 0 2px 8px rgba(0,0,0,.3);",
+      "}",
+      ".cs-is-open .cs-panel,.cs-panel.cs-is-open {",
+      "  opacity: 1; visibility: visible; pointer-events: auto;",
+      "  transform: translateY(0) scale(1);",
+      "  transition: opacity .15s ease, transform .25s cubic-bezier(.32,.72,0,1), visibility 0s 0s;",
+      "}",
+      ".cs-panel-below { transform-origin: top center; }",
+      ".cs-panel-above { transform-origin: bottom center; }",
+
+      /* ─── Items ─── */
+      ".cs-item {",
+      "  display: flex; align-items: center; gap: 8px; padding: 10px 12px;",
+      "  font-size: 14px; font-weight: 400; color: #1e293b; cursor: pointer;",
+      "  border-radius: 8px; transition: background .1s ease;",
+      "}",
+      "html.dark .cs-item { color: #e2e8f0; }",
+      ".cs-item:hover, .cs-item" + "." + HOVER_CLASS + " { background: rgba(236,91,19,.06); }",
+      ".cs-item:active { background: rgba(236,91,19,.12); }",
+      "html.dark .cs-item:hover, html.dark .cs-item" + "." + HOVER_CLASS + " { background: rgba(236,91,19,.10); }",
+      ".cs-item" + "." + ACTIVE_CLASS + " {",
+      "  background: rgba(236,91,19,.08); color: #ec5b13; font-weight: 600;",
+      "}",
+      "html.dark .cs-item" + "." + ACTIVE_CLASS + " { background: rgba(236,91,19,.14); color: #f97316; }",
+      ".cs-item.cs-item-disabled {",
+      "  opacity: .4; pointer-events: none;",
+      "}",
+      ".cs-check {",
+      "  margin-left: auto; font-size: 18px; color: #ec5b13; opacity: 0; flex-shrink: 0;",
+      "  transition: opacity .15s ease;",
+      "}",
+      "html.dark .cs-check { color: #f97316; }",
+      ".cs-item" + "." + ACTIVE_CLASS + " .cs-check { opacity: 1; }",
+
+      /* ─── Optgroup ─── */
+      ".cs-group-label {",
+      "  padding: 10px 12px 4px; font-size: 11px; font-weight: 600; letter-spacing: .03em;",
+      "  color: #64748b; pointer-events: none;",
+      "  border-top: 1px solid rgba(0,0,0,.06); margin-top: 2px;",
+      "}",
+      ".cs-group-label:first-child { border-top: none; margin-top: 0; }",
+      "html.dark .cs-group-label { color: #94a3b8; border-top-color: rgba(255,255,255,.08); }",
+      ".cs-group-items .cs-item { padding-left: 20px; font-size: 13px; }",
+
+      /* ─── Search ─── */
+      ".cs-search-wrap {",
+      "  padding: 4px 4px 0; position: sticky; top: 0; z-index: 1;",
+      "  background: inherit; border-radius: 8px 8px 0 0;",
+      "}",
+      ".cs-search {",
+      "  width: 100%; padding: 8px 10px 8px 32px; font-size: 13px;",
+      "  border: .5px solid rgba(0,0,0,.06); border-radius: 8px;",
+      "  background: rgba(255,255,255,.8); color: #1e293b; outline: none;",
+      "}",
+      ".cs-search:focus { border-color: #ec5b13; box-shadow: 0 0 0 2px rgba(236,91,19,.15); }",
+      "html.dark .cs-search {",
+      "  background: rgba(51,65,85,.8); color: #e2e8f0; border-color: rgba(255,255,255,.08);",
+      "}",
+      "html.dark .cs-search:focus { border-color: #f97316; box-shadow: 0 0 0 2px rgba(249,115,22,.15); }",
+      ".cs-search-icon {",
+      "  position: absolute; left: 12px; top: 50%; transform: translateY(-50%);",
+      "  font-size: 16px; color: #94a3b8; pointer-events: none;",
+      "}",
+      "html.dark .cs-search-icon { color: #64748b; }",
+      ".cs-search-wrap .cs-search {",
+      "  background: rgba(248,250,252,.95);",
+      "}",
+      "html.dark .cs-search-wrap .cs-search {",
+      "  background: rgba(30,41,59,.95);",
+      "}",
+
+      /* ─── No Results ─── */
+      ".cs-no-results {",
+      "  padding: 16px; text-align: center; font-size: 13px; color: #94a3b8;",
+      "}",
+      "html.dark .cs-no-results { color: #64748b; }",
+
+      /* ─── Mobile - hide float panel ─── */
+      "@media (max-width: " + MOBILE_BREAKPOINT + "px) {",
+      "  .cs-panel { display: none !important; }",
+      "}",
+
+      /* ─── Mobile Popup (bottom sheet) ─── */
+      ".cs-popup-overlay {",
+      "  position: fixed; inset: 0; background: rgba(0,0,0,.35); z-index: 998;",
+      "  animation: cs-fade-in .2s ease;",
+      "}",
+      ".cs-popup-panel {",
+      "  position: fixed; left: 8px; right: 8px; bottom: 0;",
+      "  background: rgba(248,250,252,.98);",
+      "  border-radius: 14px 14px 0 0; transform: translateY(100%);",
+      "  transition: transform .35s cubic-bezier(.32,.72,0,1);",
+      "  z-index: 999; padding: 8px 4px calc(16px + env(safe-area-inset-bottom)) 4px;",
+      "  box-shadow: 0 -2px 20px rgba(0,0,0,.1);",
+      "}",
+      ".cs-popup-panel.cs-popup-open { transform: translateY(0); }",
+      "html.dark .cs-popup-panel {",
+      "  background: rgba(30,41,59,.98); box-shadow: 0 -2px 20px rgba(0,0,0,.4);",
+      "}",
+      ".cs-popup-handle {",
+      "  width: 36px; height: 5px; border-radius: 3px;",
+      "  background: rgba(100,116,139,.25); margin: 0 auto 8px;",
+      "}",
+      "html.dark .cs-popup-handle { background: rgba(100,116,139,.35); }",
+      ".cs-popup-title {",
+      "  padding: 4px 12px 8px; font-size: 15px; font-weight: 600; color: #1e293b;",
+      "}",
+      "html.dark .cs-popup-title { color: #e2e8f0; }",
+      /* ─── Mobile Popup Optgroup ─── */
+      ".cs-popup-panel .cs-group-label {",
+      "  padding: 10px 12px 4px; font-size: 11px; font-weight: 600; letter-spacing: .03em;",
+      "  color: #64748b; pointer-events: none;",
+      "  border-top: 1px solid rgba(0,0,0,.06); margin-top: 2px;",
+      "}",
+      ".cs-popup-panel .cs-group-label:first-child { border-top: none; margin-top: 0; }",
+      "html.dark .cs-popup-panel .cs-group-label { color: #94a3b8; border-top-color: rgba(255,255,255,.08); }",
+      ".cs-popup-panel .cs-group-items .cs-item { padding-left: 20px; font-size: 13px; }",
+      ".cs-popup-list {",
+      "  max-height: 50vh; overflow-y: auto; -webkit-overflow-scrolling: touch;",
+      "}",
+      ".cs-popup-search-wrap {",
+      "  padding: 0 4px 8px; position: relative;",
+      "}",
+      ".cs-popup-search {",
+      "  width: 100%; padding: 10px 10px 10px 36px; font-size: 15px;",
+      "  border: .5px solid rgba(0,0,0,.06); border-radius: 10px;",
+      "  background: rgba(255,255,255,.8); color: #1e293b; outline: none;",
+      "}",
+      ".cs-popup-search:focus { border-color: #ec5b13; box-shadow: 0 0 0 2px rgba(236,91,19,.15); }",
+      "html.dark .cs-popup-search {",
+      "  background: rgba(51,65,85,.8); color: #e2e8f0; border-color: rgba(255,255,255,.08);",
+      "}",
+      "html.dark .cs-popup-search:focus { border-color: #f97316; box-shadow: 0 0 0 2px rgba(249,115,22,.15); }",
+      ".cs-popup-search-icon {",
+      "  position: absolute; left: 16px; top: 50%; transform: translateY(-50%);",
+      "  font-size: 18px; color: #94a3b8; pointer-events: none;",
+      "}",
+      "html.dark .cs-popup-search-icon { color: #64748b; }",
+
+      /* shared keyframes */
+      "@keyframes cs-fade-in { from { opacity: 0; } to { opacity: 1; } }",
+    ].join("\n");
+
+    var style = document.createElement("style");
+    style.id = STYLE_ID;
+    style.textContent = css;
+    document.head.appendChild(style);
+  }
+
   /* ────────────────────────────────────────────────────────────────
    *  SINGLE INSTANCE
    * ──────────────────────────────────────────────────────────────── */
@@ -771,6 +971,7 @@
 
   /* Init all [data-custom-select] elements */
   CustomSelect.initAll = function (root) {
+    injectStyles();
     root = root || document;
     var els = root.querySelectorAll("select[" + ATTR + "]");
     for (var i = 0; i < els.length; i++) {
@@ -789,6 +990,7 @@
 
   /* Init a single element and return the instance */
   CustomSelect.init = function (selectEl) {
+    injectStyles();
     if (selectEl._customSelectInstance) return selectEl._customSelectInstance;
     if (selectEl.id === "lang-selector") return null; // managed by navigator.js
     var inst = new CustomSelectInstance(selectEl);
@@ -809,6 +1011,7 @@
    * Returns { panel: HTMLElement, data: Object } — caller manages show/hide/position.
    */
   CustomSelect.buildPanel = function (selectEl) {
+    injectStyles();
     var tempInst = new CustomSelectInstance(selectEl);
     var data = tempInst.getOptions();
     var panel = tempInst._buildPanel();

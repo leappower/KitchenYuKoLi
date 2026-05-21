@@ -135,6 +135,7 @@
         //          /about/ → /about/index-pc.html
         var base = url.replace(/\/index\.html$/, "");
         var newUrl = base + suffix;
+        console.log("[spa-router] fetch:request rewrite:", url, "→", newUrl, "(device:", suffix, ")");
         args.url = newUrl;
       });
     })();
