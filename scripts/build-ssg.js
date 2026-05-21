@@ -378,15 +378,15 @@ function generateRouteIndex(route) {
  * Copy device-specific files (index-pc.html, index-mobile.html, index-tablet.html)
  * from dist/pages/<route>/ to dist/<route>/
  *
- * Webpack already outputs these to dist/pages/<route>/
+ * Source is src/pages/<route>/
  * We copy them to dist/<route>/ so the directory URL structure works
  */
 function copyDeviceFiles(route) {
-  const srcPagesDir = path.join(DIST_DIR, 'pages', route.slug);
+  const srcPagesDir = path.join(SRC_PAGES_DIR, route.slug);
   const destRouteDir = path.join(DIST_DIR, route.slug);
 
   if (!fs.existsSync(srcPagesDir)) {
-    log('WARN: No dist/pages/' + route.slug + '/ directory found');
+    log('WARN: No src/pages/' + route.slug + '/ directory found');
     return 0;
   }
 
@@ -397,6 +397,7 @@ function copyDeviceFiles(route) {
   for (const file of files) {
     if (!file.endsWith('.html')) continue;
     // Skip index.html — we generate our own with updated URLs
+    // Also skip src/pages/index.html (the SPA shell) — handled separately
     if (file === 'index.html') continue;
 
     const srcFile = path.join(srcPagesDir, file);

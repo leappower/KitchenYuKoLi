@@ -122,53 +122,17 @@
    * @returns {string} 设备特定路径，如 '/pages/home/index-mobile.html'
    */
   function getDevicePagePath(basePath) {
-    // SSG-generated index.html contains mobile content directly via
-    // build-ssg.js generateResponsiveEntry(). No device switch needed
-    // — the page is already responsive via Tailwind classes (sm:, md:, lg:).
-    if (!basePath || !basePath.endsWith("/index.html")) {
-      return basePath;
-    }
-
-    // Return as-is: SSG index.html is self-contained responsive content
+    // SSG generates index.html with responsive content directly.
+    // No device version switching needed. Return path as-is.
     return basePath;
   }
 
   /**
-   * 判断是否需要重定向到设备特定页面
-   *
-   * @param {string} currentFile - 当前文件名，如 'index.html' 或 'index-mobile.html'
-   * @returns {boolean} 是否需要重定向
+   * @deprecated SSG 已生成 index.html，不再需要设备重定向。
+   * 始终返回 false。
    */
   function shouldRedirect(currentFile) {
-    // 如果当前文件名为空（目录 URL），不需要重定向
-    if (!currentFile || currentFile === "") {
-      return false;
-    }
-
-    var deviceType = getDeviceType();
-    var targetFile;
-
-    switch (deviceType) {
-      case DeviceType.MOBILE:
-        targetFile = "index-mobile.html";
-        break;
-      case DeviceType.TABLET:
-        targetFile = "index-tablet.html";
-        break;
-      case DeviceType.PC:
-        targetFile = "index-pc.html";
-        break;
-      default:
-        targetFile = "index.html";
-    }
-
-    // 特殊情况：PC 访问 index.html 不需要重定向（保持干净 URL）
-    if (deviceType === DeviceType.PC && currentFile === "index.html") {
-      return false;
-    }
-
-    // 如果当前文件不是目标文件，需要重定向
-    return currentFile !== targetFile;
+    return false;
   }
 
   /**

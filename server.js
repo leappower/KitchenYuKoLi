@@ -322,16 +322,15 @@ app.get('/', (req, res) => {
 
 // ─── Universal page resolver ─────────────────────────────────────────────
 //
-// Architecture: file-system as single source of truth.
-// No hardcoded route lists.  New pages?  Just drop the HTML into dist/pages/.
+// Architecture: SSG-first. All pages built by build-ssg.js to dist/<route>/
+// No dist/pages/ fallback — that directory is a webpack intermediate.
 //
 // Resolution order (first match wins):
 //   1. Exact file in dist/              (CSS, JS, images, fonts)
-//   2. Exact file in dist/pages/        (SPA router fetches like /products/index-pc.html)
-//   3. dist/pages/<path>/index.html     (SSG directory index)
-//   4. dist/pages/<path>/index-pc.html  (SSG device-specific index)
-//   5. dist/pages/<path>-pc.html        (flat-file pattern, e.g. news/detail-pc.html)
-//   6. SPA shell (dist/index.html)      (catch-all — SPA router handles the rest)
+//   2. dist/<path>/index.html           (SSG route entry — preferred)
+//   3. dist/<path>/index-mobile.html    (SPA router fallback from page list)
+//   4. dist/<path>-pc.html              (flat-file pattern, e.g. news/detail-pc.html)
+//   5. SPA shell (dist/index.html)      (catch-all)
 //
 // Security: only serves files under dist/ (and src/ in dev mode).
 //
@@ -340,39 +339,33 @@ function resolvePage(reqPath) {
   var clean = reqPath.replace(/\/+$/, '');
   if (!clean) clean = '/';
 
-  // 1. Exact file: dist/<reqPath>  (assets, fonts, images)
+  // 1. Exact file: dist/<reqPath>  (assets, fonts, images, index-{mobile,pc,tablet}.html)
   var f = path.join(__dirname, 'dist', reqPath);
   if (isFile(f)) return f;
 
-  // 2. Exact file: dist/pages/<reqPath>  (SPA router fetches)
-  f = path.join(__dirname, 'dist', 'pages', reqPath);
+  // 2. dist/<path>/index.html (SSG-generated route entry)
+  f = path.join(__dirname, 'dist', clean, 'index.html');
   if (isFile(f)) return f;
 
-  // 2b. Variant fallback: index-pc.html → index.html
-  //     Cases detail pages (bangkok, surabaya, etc.) only have index.html.
+  // 2b. Variant fallback: index-{pc,mobile,tablet}.html → index.html
   //     When SPA fetches /cases/<city>/index-pc.html, serve index.html instead.
   if (/\/index-(pc|mobile|tablet)\.html$/.test(reqPath)) {
     var variantFallback = reqPath.replace(/\/index-(pc|mobile|tablet)\.html$/, '/index.html');
-    f = path.join(__dirname, 'dist', 'pages', variantFallback);
+    f = path.join(__dirname, 'dist', variantFallback);
     if (isFile(f)) return f;
   }
 
-  // 3–5. Page resolution under dist/pages/ and dist/
-  //    dist/pages/<path>/index.html (with JS device redirect) — preferred
-  //    dist/<path>/index.html (SSG-generated, same redirect logic)
-  //    dist/pages/<path>/index-pc.html (fallback for routes without redirect)
-  //    dist/<path>/index-pc.html
-  //    dist/pages/<path>-pc.html (flat-file pattern)
-  var candidates = [
-    path.join(__dirname, 'dist', 'pages', clean, 'index.html'),
-    path.join(__dirname, 'dist', clean, 'index.html'),
-    path.join(__dirname, 'dist', 'pages', clean, 'index-pc.html'),
-    path.join(__dirname, 'dist', clean, 'index-pc.html'),
-    path.join(__dirname, 'dist', 'pages', clean + '-pc.html'),
-  ];
-  for (var i = 0; i < candidates.length; i++) {
-    if (isFile(candidates[i])) return candidates[i];
-  }
+  // 3. dist/<path>-pc.html (flat-file pattern, e.g. news/detail-pc.html)
+  f = path.join(__dirname, 'dist', clean + '-pc.html');
+  if (isFile(f)) return f;
+
+  // 6. 404 page — return 404.html for non-asset, non-API, non-spa routes
+  var f404 = path.join(__dirname, 'dist', '404.html');
+  if (isFile(f404)) return f404;
+
+  // 7. SPA shell catch-all (shouldn't normally reach here)
+  return null;
+}
 
   // 6. 404 page — return 404.html for non-asset, non-API, non-spa routes
   var f404 = path.join(__dirname, 'dist', '404.html');

@@ -78,27 +78,10 @@
 
     // 设备特定页面映射
     getDevicePage: function (basePath) {
-      // SSG-generated index.html contains mobile content directly.
-      // No device switch needed — the page is already responsive via Tailwind.
-      if (/\/index\.html$/.test(basePath)) {
-        return basePath;
-      }
-      // Use DeviceUtils if available
-      if (typeof DeviceUtils !== "undefined" && DeviceUtils && DeviceUtils.getDevicePagePath) {
-        return DeviceUtils.getDevicePagePath(basePath);
-      }
-      // Fallback: inline device detection via viewport width
-      var w = window.innerWidth;
-      var suffix;
-      if (w < 768) {
-        suffix = "index-mobile.html";
-      } else if (w < 1280) {
-        suffix = "index-tablet.html";
-      } else {
-        suffix = "index-pc.html";
-      }
-      // Handle both index.html and index-{device}.html patterns
-      return basePath.replace(/index-(?:pc|tablet|mobile)?\.html$/, suffix);
+      // SSG 模式：所有 index.html 和 index-{mobile,pc,tablet}.html
+      // 都不再做设备切换，直接返回原路径。
+      // SSG 已生成响应式内容，Tailwind 的 sm:/md:/lg: 处理断点。
+      return basePath;
     },
 
     // 当前路由
