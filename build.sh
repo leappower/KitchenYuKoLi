@@ -1,18 +1,23 @@
 #!/bin/bash
 # build.sh — 唯一入口：SSG 构建，无双轨
-# Usage: npm run build (or ./build.sh)
+# Usage: ./build.sh [dev|production]
+#   (no arg) = production build (default)
+#   dev      = development build (no version bump)
 #
 # 不再同步 src/pages/ → dist/pages/。
 # 唯一页面来源 = build-ssg.js 生成到 dist/<route>/。
-# webpack 输出 dist/pages/ 作为中转，SSG 读它然后输出 dist/<route>/。
+# webpack 输出 dist/ 作为中转，SSG 读它然后输出 dist/<route>/。
 
 set -euo pipefail
+
+BUILD_MODE="${1:-production}"
+[ "$BUILD_MODE" = "dev" ] && WEBPACK_MODE="development" || WEBPACK_MODE="production"
+
+echo "🏗️  Building ($BUILD_MODE)..."
 
 SRC="src"
 DIST="dist"
 VERSION="v=$(date +%Y%m%d%H%M)"
-
-echo "🏗️  Building..."
 
 # ─── Pre-flight checks ───────────────────────────────────────────
 INDEX_SIZE=$(wc -c < "$SRC/index.html")
@@ -22,15 +27,24 @@ if [ "$INDEX_SIZE" -lt 1000 ]; then
   exit 1
 fi
 
-# ─── 0. Clean stale dist/pages/ (SSG output is the source of truth) ──
-rm -rf "$DIST/pages"
-
-# ─── 1. Bump i18n cache BEFORE webpack ──────────────────────────
+# ─── 0. Bump i18n cache BEFORE webpack ──────────────────────────
 I18N_CACHE_TS=$(date +%s)
 sed -i '' "s/var I18N_CACHE_V = .*/var I18N_CACHE_V = $I18N_CACHE_TS;/" "$SRC/assets/js/translations.js"
 echo "🔄 i18n cache version → $I18N_CACHE_TS"
 
-# ─── 2. Assets (JS, CSS, fonts, lang, images, video) ────────────
+# ─── 1. Clean dist (webpack output.clean: true also cleans, but explicit) ──
+rm -rf "$DIST"
+
+# ─── 2. Tailwind CSS + Webpack ──────────────────────────────────
+echo "📦 Webpack ($BUILD_MODE)..."
+npm run build:css 2>&1 | tail -1
+if [ "$BUILD_MODE" = "dev" ]; then
+  npx webpack --env devBuild 2>&1 | tail -3
+else
+  npx webpack --mode=production 2>&1 | tail -3 || echo "  ⚠️  Webpack had non-fatal errors (html-minifier)"
+fi
+
+# ─── 3. Assets (JS, CSS, fonts, lang, images, video) ────────────
 # Assets don't go through webpack, copy directly
 echo "📦 Syncing assets..."
 sync_assets() {
@@ -52,26 +66,28 @@ sync_assets "lang"         "*.json"
 sync_assets "images"       "*"  
 sync_assets "video"        "*"
 
-# ─── 3. SPA shell (index.html + 404.html + robots.txt) ──────────
+# ─── 4. SPA shell (index.html + 404.html + robots.txt) ──────────
 cp "$SRC/index.html" "$DIST/index.html"
 [ -f "$SRC/404.html" ] && cp "$SRC/404.html" "$DIST/404.html"
 [ -f "$SRC/robots.txt" ] && cp "$SRC/robots.txt" "$DIST/robots.txt"
 
-# ─── 4. Version bump in dist/ ───────────────────────────────────
-echo "🔄 Bumping JS version to $VERSION..."
-find "$DIST" -name '*.html' -exec sed -i '' "s|?v=[a-zA-Z0-9._-]*|?$VERSION|g" {} +
-find "$SRC/pages" -name '*.html' -exec sed -i '' "s|?v=[a-zA-Z0-9._-]*|?$VERSION|g" {} +
+# ─── 5. Version bump (production only) ───────────────────────────
+if [ "$BUILD_MODE" != "dev" ]; then
+  echo "🔄 Bumping JS version to $VERSION..."
+  find "$DIST" -name '*.html' -exec sed -i '' "s|?v=[a-zA-Z0-9._-]*|?$VERSION|g" {} +
+  find "$SRC/pages" -name '*.html' -exec sed -i '' "s|?v=[a-zA-Z0-9._-]*|?$VERSION|g" {} +
+fi
 
-# ─── 5. Sitemap / search index ──────────────────────────────────
+# ─── 6. Sitemap / search index ──────────────────────────────────
 node scripts/generate-sitemap.js 2>/dev/null || true
 node scripts/generate-search-index.js 2>/dev/null || true
 
-# ─── 6. SSG: build route index.html + copy device files ──────────
-# webpack 需要在 SSG 前运行（但 webpack 由 package.json 的 build 脚本运行）
+# ─── 7. SSG: build route index.html + copy device files ──────────
 # SSG 读取 webpack 的输出 dist/pages/ 然后生成 dist/<route>/
+# SSG also copies Swup + plugins from node_modules and fresh JS from src
 node scripts/build-ssg.js 2>&1 | grep -E 'Step|✓|✅|WARN|ERROR' || true
 
-# ─── 7. Fix permissions ─────────────────────────────────────────
+# ─── 8. Fix permissions ─────────────────────────────────────────
 chmod -R a+rX "$DIST" 2>/dev/null || true
 
 FILES=$(find "$DIST" -type f | wc -l | tr -d ' ')

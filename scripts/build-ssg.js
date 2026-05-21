@@ -718,6 +718,23 @@ function main() {
   copyJsRecursive(_srcJsDir, _distJsDir);
   if (_jsCopied > 0) log('  ✓ Copied ' + _jsCopied + ' JS files to assets/js/');
 
+  // Step 5.6: Copy Swup + plugins from node_modules (for build:production / build:dev)
+  var swupVendors = [
+    { src: 'node_modules/swup/dist/Swup.umd.js', dest: 'swup.min.js' },
+    { src: 'node_modules/@swup/head-plugin/dist/index.umd.js', dest: 'swup-head-plugin.min.js' },
+    { src: 'node_modules/@swup/preload-plugin/dist/index.umd.js', dest: 'swup-preload-plugin.min.js' },
+  ];
+  var swupJsDir = path.join(DIST_DIR, 'assets', 'js');
+  if (!fs.existsSync(swupJsDir)) fs.mkdirSync(swupJsDir, { recursive: true });
+  for (var s = 0; s < swupVendors.length; s++) {
+    var vSrc = path.resolve(__dirname, '..', swupVendors[s].src);
+    var vDst = path.join(swupJsDir, swupVendors[s].dest);
+    if (fs.existsSync(vSrc)) {
+      fs.copyFileSync(vSrc, vDst);
+      log('  ✓ swup vendor: ' + swupVendors[s].dest);
+    }
+  }
+
   // Step 6: Patch CSS files for basePath (font URLs in local-fonts.css)
   if (BASE_PATH) {
     log('\nStep 6: Patching CSS files for basePath...');
