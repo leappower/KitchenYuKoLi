@@ -70,7 +70,11 @@
     // Destroy any previous Swup instance (e.g., after navigation to 404 page
     // that left Swup in a broken state due to container mismatch)
     if (global.swupInstance) {
-      try { global.swupInstance.destroy(); } catch (e) { /* ignore */ }
+      try {
+        global.swupInstance.destroy();
+      } catch (e) {
+        /* ignore */
+      }
       global.swupInstance = null;
     }
 
@@ -130,7 +134,9 @@
     }
 
     // Forward Swup lifecycle to spa:load event
-    swup.on("contentReplaced", function () {
+    // Swup v4 uses hooks.on() instead of .on()
+    var swupHooks = swup.hooks || swup;
+    swupHooks.on("content:replace", function () {
       global.__spaNavigating = false;
       _spaState.currentRoute = global.location.pathname.replace(/\/$/, "") || "/";
       // Reload page-specific scripts from the new content
@@ -146,43 +152,56 @@
       dispatchSpaLoad();
     });
 
-    swup.on("willReplaceContent", function () {
+    swupHooks.on("visit:start", function () {
       global.__spaNavigating = true;
     });
 
     // Handle fetch errors — render 404 content in #spa-content
     // instead of letting Swup crash with 'Container mismatch'
-    swup.on("fetch:error", function () {
+    // NOTE: fetch:error is also triggered by SwupPreloadPlugin background
+    // preloading. Guard with __spaNavigating to avoid rendering 404
+    // ── Graceful degradation: Swup failure → native navigation ─────
+    // If Swup aborts a visit (container mismatch, timeout, etc.),
+    // fall back to full page reload so the page is never left broken.
+    swupHooks.on("visit:abort", function (visit) {
+      if (!global.__spaNavigating) return;
+      console.warn("[spa-router] Swup aborted, falling back to native: " + visit.to.url);
       global.__spaNavigating = false;
-      var spaContent = document.getElementById("spa-content");
-      if (spaContent) {
-        spaContent.innerHTML = '' +
-          '<div class="flex-1 flex items-center justify-center px-6 py-20">' +
-          '  <div class="text-center max-w-lg">' +
-          '    <div class="mb-6">' +
-          '      <span class="text-8xl font-black tracking-tighter text-primary/20">404</span>' +
-          '    </div>' +
-          '    <h1 class="text-3xl md:text-4xl font-black tracking-tight mb-4">Page Not Found</h1>' +
-          '    <p class="text-slate-500 dark:text-slate-400 text-lg mb-8">' +
-          '      The page you are looking for does not exist or has been moved.' +
-          '    </p>' +
-          '    <div class="flex flex-col sm:flex-row gap-4 justify-center">' +
-          '      <a href="/home/" class="inline-flex items-center justify-center px-8 py-3 bg-primary text-white font-bold rounded-lg hover:bg-primary/90 transition-colors shadow-lg hover:shadow-xl">' +
-          '        <span class="material-symbols-outlined mr-2" style="font-size:20px">home</span>' +
-          '        <span>Go Home</span>' +
-          '      </a>' +
-          '      <a href="/products/" class="inline-flex items-center justify-center px-8 py-3 border-2 border-slate-200 dark:border-slate-700 font-bold rounded-lg hover:border-primary hover:text-primary transition-colors">' +
-          '        <span class="material-symbols-outlined mr-2" style="font-size:20px">kitchen</span>' +
-          '        <span>Browse Equipment</span>' +
-          '      </a>' +
-          '    </div>' +
-          '  </div>' +
-          '</div>';
-        dispatchSpaLoad();
-      }
+      global.location.href = visit.to.url;
     });
 
-    // Handle popstate (browser back/forward) — scroll to top
+    // Handle fetch errors — fall back to native navigation
+    // instead of rendering inline 404 (which can leave the page in a broken state)
+    swupHooks.on("fetch:error", function () {
+      if (!global.__spaNavigating) return;
+      global.__spaNavigating = false;
+      global.location.reload();
+    });
+
+    // Safety net: if Swup intercepts a click but navigation hangs >3s,
+    // allow the next click to bypass Swup entirely.
+    var _lastSwupNavStart = 0;
+    swupHooks.on("visit:start", function () {
+      _lastSwupNavStart = Date.now();
+    });
+    swupHooks.on("content:replace", function () {
+      _lastSwupNavStart = 0;
+    });
+    swupHooks.on("visit:abort", function () {
+      _lastSwupNavStart = 0;
+    });
+    document.addEventListener(
+      "click",
+      function (e) {
+        if (global.__spaNavigating && Date.now() - _lastSwupNavStart > 3000) {
+          global.__spaNavigating = false;
+          _lastSwupNavStart = 0;
+        }
+      },
+      true
+    );
+
+    // Handle popstate (browser back/forward)// Handle popstate (browser back/forward) — scroll to top
     global.addEventListener("popstate", function () {
       global.scrollTo({ top: 0, left: 0, behavior: "instant" });
     });

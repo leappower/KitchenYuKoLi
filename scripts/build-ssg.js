@@ -90,49 +90,45 @@ const path = require('path');
 const DIST_DIR = path.resolve(__dirname, '..', 'dist');
 const SRC_PAGES_DIR = path.resolve(__dirname, '..', 'src', 'pages');
 
-// Route definitions: URL path → source directory name
-// Each entry has a source page directory under src/pages/
-const ROUTES = [
-  { slug: 'home',         navId: 'home' },
-  { slug: 'products',     navId: 'products' },
-  { slug: 'applications', navId: 'applications' },
-  { slug: 'cases',        navId: 'cases' },
-  { slug: 'cases/bangkok',    navId: 'cases' },
-  { slug: 'cases/cebu',       navId: 'cases' },
-  { slug: 'cases/hanoi',      navId: 'cases' },
-  { slug: 'cases/hcmc',       navId: 'cases' },
-  { slug: 'cases/jakarta',    navId: 'cases' },
-  { slug: 'cases/kl',         navId: 'cases' },
-  { slug: 'cases/manila',     navId: 'cases' },
-  { slug: 'cases/surabaya',    navId: 'cases' },
-  { slug: 'profit-calculator', navId: 'profit-calculator' },
-  { slug: 'products/compare', navId: 'products' },
+// ─── Auto-discover routes from src/pages/ directory ───────
+// Scans src/pages/ recursively for directories containing HTML files.
+// Adding a new page directory under src/pages/ is all that's needed.
+// Excludes: news/detail (dynamic SPA template, not a static route).
+function discoverRoutes() {
+  var routes = [];
+  var excludeDirs = ['node_modules', '.git', 'assets'];
+  var excludeSlugs = ['news/detail']; // dynamic SPA template, not a static route
 
-  { slug: 'quote',        navId: 'quote' },
-  { slug: 'support',      navId: 'support' },
-  { slug: 'support/faq',  navId: 'support' },
-  { slug: 'news',         navId: 'news' },
-  { slug: 'about',        navId: 'about' },
-  { slug: 'contact',      navId: 'contact' },
-  { slug: 'products/detail', navId: 'products' },
-  // Product category sub-pages
-  { slug: 'products/stirfry',  navId: 'products' },
-  { slug: 'products/cutting',  navId: 'products' },
-  { slug: 'products/frying',   navId: 'products' },
-  { slug: 'products/stewing',  navId: 'products' },
-  { slug: 'products/steaming', navId: 'products' },
-  { slug: 'products/other',    navId: 'products' },
-  { slug: 'thank-you',    navId: 'thank-you' },
-  { slug: 'landing',      navId: 'landing' },
-  // Application sub-pages
-  { slug: 'applications/chain-restaurant', navId: 'applications' },
-  { slug: 'applications/food-factory',  navId: 'applications' },
-  { slug: 'applications/central-kitchen', navId: 'applications' },
-  { slug: 'applications/small-restaurant', navId: 'applications' },
-  { slug: 'applications/canteen',       navId: 'applications' },
-  { slug: 'applications/menu-lab',      navId: 'applications' },
-  { slug: 'applications/cloud-kitchen', navId: 'applications' },
-];
+  function walk(dir, prefix) {
+    if (!fs.existsSync(dir)) return;
+    var entries = fs.readdirSync(dir, { withFileTypes: true });
+    for (var i = 0; i < entries.length; i++) {
+      if (!entries[i].isDirectory()) continue;
+      if (excludeDirs.indexOf(entries[i].name) !== -1) continue;
+      var fullPath = path.join(dir, entries[i].name);
+      var slug = prefix ? prefix + '/' + entries[i].name : entries[i].name;
+      if (excludeSlugs.indexOf(slug) !== -1) { walk(fullPath, slug); continue; }
+      var htmlFiles = fs.readdirSync(fullPath).filter(function (f) { return f.endsWith('.html'); });
+      if (htmlFiles.length > 0) {
+        var topSection = slug.split('/')[0];
+        routes.push({ slug: slug, navId: topSection });
+      }
+      walk(fullPath, slug);
+    }
+  }
+
+  walk(SRC_PAGES_DIR, '');
+  routes.sort(function (a, b) {
+    var aParts = a.slug.split('/'), bParts = b.slug.split('/');
+    for (var i = 0; i < Math.min(aParts.length, bParts.length); i++) {
+      if (aParts[i] !== bParts[i]) return aParts[i].localeCompare(bParts[i]);
+    }
+    return aParts.length - bParts.length;
+  });
+  return routes;
+}
+
+const ROUTES = discoverRoutes();
 
 // Parse CLI args
 const args = process.argv.slice(2);
@@ -527,123 +523,44 @@ function generateRootIndex() {
  * GitHub Pages uses 404.html for any unmatched URL.
  */
 function generate404() {
-  var bp = BASE_PATH; // alias for shorter references
+  var bp = BASE_PATH;
   var routesJson = JSON.stringify(ROUTES.map(function (r) { return r.slug; }));
-  var html = [
-    '<!DOCTYPE html>',
-    '<html class="light" lang="en">',
-    '<head>',
-    '  <meta charset="UTF-8">',
-    '  <meta name="viewport" content="width=device-width, initial-scale=1.0">',
-    '  <title>Page Not Found - Yukoli Technology</title>',
-    '  <meta name="description" content="The page you requested does not exist or has been moved.">',
-    '  <meta property="og:type" content="website">',
-    '  <meta property="og:title" content="Page Not Found - Yukoli Technology">',
-    '  <meta property="og:description" content="The page you are looking for does not exist or has been moved.">',
-    '  <meta property="og:url" content="https://www.kitchen.yukoli.com/' + (bp ? bp.replace(/^\//, '') + '/' : '') + '404.html">',
-    '  <meta name="robots" content="noindex, follow">',
-    '',
-    '  <!-- Fonts & Styles (same as other pages) -->',
-    '  <link rel="preload" href="' + bp + '/assets/fonts/local-fonts.css" as="style">',
-    '  <link rel="preload" href="' + bp + '/assets/css/tailwind.css" as="style">',
-    '  <link href="' + bp + '/assets/fonts/local-fonts.css" rel="stylesheet"/>',
-    '  <link rel="stylesheet" href="' + bp + '/assets/css/tailwind.css">',
-    '  <link rel="stylesheet" href="' + bp + '/assets/css/z-index-system.css">',
-    '  <link rel="stylesheet" href="' + bp + '/assets/css/performance-optimizations.css"/>',
-    '',
-    '  <style>',
-    '    body { font-family: "Public Sans", sans-serif; min-height: 100dvh; }',
-    '  </style>',
-    '',
-    '  <!-- Dark mode -->',
-    '  <script>(function(){if(localStorage.getItem("darkMode")==="true")document.documentElement.classList.add("dark")})()</script>',
-    '',
-    '  <!-- Redirect script: /home → /home/, unknown → show 404 -->',
-    '  <script>',
-    '  (function () {',
-    '    var base = "' + (bp || '') + '";',
-    '    var path = window.location.pathname;',
-    '    var normalized = path.replace(/\\/$/, "");',
-    '    var routes = ' + routesJson + ';',
-    '    // Product category slugs (/products/stewing/, /products/stirfry/, etc.)',
-    '    var categorySlugs = ["cutting", "stirfry", "frying", "stewing", "steaming", "other"];',
-    '    if (/^\\/products\\//.test(path)) {',
-    '      var productSegment = path.replace(/^\\/products\\//, "").replace(/\\/$/, "");',
-    '      if (categorySlugs.indexOf(productSegment) !== -1) {',
-    '        // Known product category — redirect to SPA shell with preserved path',
-    '        window.location.replace(base + "/?redirect=" + encodeURIComponent(path));',
-    '      } else if (productSegment) {',
-    '        // Could be a PDP slug (product model) — redirect to SPA shell',
-    '        window.location.replace(base + "/?redirect=" + encodeURIComponent(path));',
-    '      }',
-    '    }',
-    '    // Try full path first (for nested routes like applications/chain-restaurant)',
-    '    var stripped = normalized.replace(/^\\//, "");',
-    '    if (routes.indexOf(stripped) !== -1) {',
-    '      window.location.replace(base + "/" + stripped + "/");',
-    '    } else {',
-    '      // Fallback: try last segment only',
-    '      var segment = normalized.split("/").pop();',
-    '      if (routes.indexOf(segment) !== -1) {',
-    '        window.location.replace(base + "/" + segment + "/");',
-    '      }',
-    '    }',
-    '    // Unknown routes stay on this 404 page (no redirect)',
-    '  }());',
-    '  </script>',
-    '',
-    '  <!-- Favicon -->',
-    '  <link rel="icon" href="' + bp + '/assets/images/logo.webp" type="image/webp">',
-    '</head>',
-    '<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 min-h-screen flex flex-col overflow-x-clip">',
-    '',
-    '  <!-- Navigator placeholder (rendered by navigator.js) -->',
-    '  <div id="navigator" data-variant="auto"></div>',
-    '',
-    '  <!-- 404 Content -->',
-    '  <main class="flex-1 flex items-center justify-center px-6 py-20">',
-    '    <div class="text-center max-w-lg">',
-    '      <div class="mb-6">',
-    '        <span class="text-8xl font-black tracking-tighter text-primary/20">404</span>',
-    '      </div>',
-    '      <h1 class="text-3xl md:text-4xl font-black tracking-tight mb-4" data-i18n="error_404_badge">Page Not Found</h1>',
-    '      <p class="text-slate-500 dark:text-slate-400 text-lg mb-8" data-i18n="error_404_desc">',
-    '        The page you are looking for does not exist or has been moved.',
-    '      </p>',
-    '      <div class="flex flex-col sm:flex-row gap-4 justify-center">',
-    '        <a href="' + bp + '/home/" class="inline-flex items-center justify-center px-8 py-3 bg-primary text-white font-bold rounded-lg hover:bg-primary/90 transition-colors shadow-lg hover:shadow-xl">',
-    '          <span class="material-symbols-outlined mr-2" style="font-size:20px">home</span>',
-    '          <span data-i18n="nav_home">Go Home</span>',
-    '        </a>',
-    '        <a href="' + bp + '/products/" class="inline-flex items-center justify-center px-8 py-3 border-2 border-slate-200 dark:border-slate-700 font-bold rounded-lg hover:border-primary hover:text-primary transition-colors">',
-    '          <span class="material-symbols-outlined mr-2" style="font-size:20px">kitchen</span>',
-    '          <span data-i18n="nav_products">Browse Equipment</span>',
-    '        </a>',
-    '      </div>',
-    '    </div>',
-    '  </main>',
-    '',
-    '  <!-- Footer placeholder (rendered by footer.js) -->',
-    '  <div id="footer" data-variant="auto"></div>',
-    '',
-    '  <!-- Shared scripts (same as other pages) -->',
-    '  <script defer src="' + bp + '/assets/js/router.js"></script>',
-    '  <script defer src="' + bp + '/assets/js/lang-registry.js"></script>',
-    '  <script defer src="' + bp + '/assets/js/translations.js"></script>',
-    '  <script src="' + bp + '/assets/js/translations-dropdown-template.js"></script>',
-    '  <script defer src="' + bp + '/assets/js/search-engine.js"></script>',
-    '  <script defer src="' + bp + '/assets/js/ui/navigator.js"></script>',
-    '  <script defer src="' + bp + '/assets/js/ui/footer.js"></script>',
-    '  <script defer src="' + bp + '/assets/js/ui/floating-actions.js"></script>',
-    '  <script>',
-    '  document.addEventListener("DOMContentLoaded", function () {',
-    '    if (window.translationManager) window.translationManager.initialize();',
-    '  });',
-    '  </script>',
-    '</body>',
-    '</html>',
-  ].join('\n');
+  var src404 = path.resolve(__dirname, '..', 'src', '404.html');
+  if (!fs.existsSync(src404)) {
+    log('  WARN: src/404.html not found, skipping 404 generation');
+    return false;
+  }
+  var html = fs.readFileSync(src404, 'utf-8');
 
+  var redirectScript =
+    '  <!-- SSG redirect: missing trailing slash -->\n' +
+    '  <script>\n' +
+    '  (function () {\n' +
+    '    var base = "' + (bp || '') + '";\n' +
+    '    var path = window.location.pathname;\n' +
+    '    var normalized = path.replace(/\\/$/, "");\n' +
+    '    var routes = ' + routesJson + ';\n' +
+    '    var categorySlugs = ["cutting","stirfry","frying","stewing","steaming","other","all","detail","compare"];\n' +
+    '    if (/^\\/products\\//.test(path)) {\n' +
+    '      var productSegment = path.replace(/^\\/products\\//, "").replace(/\\/$/, "");\n' +
+    '      if (categorySlugs.indexOf(productSegment) !== -1 || productSegment) {\n' +
+    '        window.location.replace(base + "/?redirect=" + encodeURIComponent(path));\n' +
+    '      }\n' +
+    '    }\n' +
+    '    var stripped = normalized.replace(/^\\//, "");\n' +
+    '    if (routes.indexOf(stripped) !== -1) {\n' +
+    '      window.location.replace(base + "/" + stripped + "/");\n' +
+    '    } else {\n' +
+    '      var segment = normalized.split("/").pop();\n' +
+    '      if (routes.indexOf(segment) !== -1) {\n' +
+    '        window.location.replace(base + "/" + segment + "/");\n' +
+    '      }\n' +
+    '    }\n' +
+    '  }());\n' +
+    '  </script>';
+
+  html = html.replace('</head>', redirectScript + '\n  </head>');
+  if (bp) { html = patchHtmlPaths(html); }
   fs.writeFileSync(path.join(DIST_DIR, '404.html'), html, 'utf-8');
   return true;
 }
