@@ -67,6 +67,7 @@
 
   // ── Swup initialization ────────────────────────────────────────────
   function initSwup() {
+    if (global.swupInstance) return; // Already initialized
     if (global.Swup === undefined) {
       // Swup not loaded yet — retry on DOMContentLoaded
       if (document.readyState === "loading") {
@@ -80,7 +81,10 @@
       linkSelector:
         'a[href^="/"]:not([href$=".pdf"]):not([href$=".zip"]):not([href$=".doc"]):not([href*="mailto:"]):not([href*="tel:"]):not([target="_blank"])',
       plugins: [
-        new global.SwupHeadPlugin(),
+        new global.SwupHeadPlugin({
+          persistTags: 'style[id], style[data-swup-persist], link[rel="stylesheet"][href], script[src]',
+          persistAssets: true,
+        }),
         new global.SwupPreloadPlugin({ preloadHoveredLinks: true, preloadInitialPage: true }),
       ],
       animateHistoryBrowsing: false,
