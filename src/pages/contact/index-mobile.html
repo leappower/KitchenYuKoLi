@@ -125,43 +125,44 @@
         <div class="section-content">
           <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-4">
             <h3 id="contact-form" class="font-bold mb-3" data-i18n="contact_form_title">Contact Us</h3>
-            
-<form id="contact-form-el" class="space-y-2" novalidate>
-                <select data-custom-select id="c-country" required onchange="window._onCountryChange&&window._onCountryChange(this.value)" class="w-full h-12 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white focus:border-primary text-sm px-3 py-3 appearance-none">
-                  <option value="" data-i18n="select_country">选择国家/地区</option>
-<option value="ID">🇮🇩 Indonesia</option><option value="MY">🇲🇾 Malaysia</option><option value="PH">🇵🇭 Pilipinas</option><option value="VN">🇻🇳 Việt Nam</option><option value="TH">🇹🇭 ไทย</option><option value="SG">🇸🇬 Singapore</option><option value="MM">🇲🇲 မြန်မာ</option><option value="KH">🇰🇭 កង្ពុជា</option><option value="LA">🇱🇦 ລາວ</option><option value="BN">🇧🇳 Brunei</option><option value="CN">🇨🇳 中国</option><option value="IN">🇮🇳 भारत</option><option value="JP">🇯🇵 日本</option><option value="KR">🇰🇷 대한민국</option><option value="SA">🇸🇦 السعودية</option><option value="TW">🇹🇼 台渾</option><option value="HK">🇭🇰 香港</option><option value="DE">🇩🇪 Deutschland</option><option value="ES">🇪🇸 España</option><option value="FR">🇫🇷 France</option><option value="PT">🇵🇹 Portugal</option><option value="RU">🇷🇺 Россия</option><option value="NL">🇳🇱 Nederland</option><option value="PL">🇵🇱 Polska</option><option value="IT">🇮🇹 Italia</option><option value="TR">🇹🇷 Türkiye</option><option value="IL">🇮🇱 ישראל</option><option value="other">其他/Other</option>
-                </select>
-                <input type="text" id="c-contact" required class="w-full h-12 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white focus:border-primary text-sm px-3 py-3" placeholder="怎么称呼您 *" />
-                <select data-custom-select id="c-restaurant-type" required class="w-full h-12 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white focus:border-primary text-sm px-3 py-3 appearance-none">
-                  <option value="">选择餐厅类型</option><option value="small-restaurant">小型餐饮</option><option value="central-kitchen">中央厨房</option><option value="chain-restaurant">连锁餐饮</option><option value="smart-canteen">智慧食堂</option><option value="cloud-kitchen">云厨房</option><option value="takeaway">外卖</option><option value="food-factory">食品工厂</option><option value="other">其他</option>
-                </select>
-                <div class="flex gap-2">
-                  <select id="c-phone-code" class="w-28 shrink-0 h-12 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white focus:border-primary text-sm px-3 py-3 appearance-none">
-                    <option value="+62">🇮🇩 +62</option><option value="+60">🇲🇾 +60</option><option value="+63">🇵🇭 +63</option><option value="+84">🇻🇳 +84</option><option value="+66">🇹🇭 +66</option><option value="+65">🇸🇬 +65</option><option value="+95">🇲🇲 +95</option><option value="+855">🇰🇭 +855</option><option value="+856">🇱🇦 +856</option><option value="+673">🇧🇳 +673</option><option value="+86">🇨🇳 +86</option><option value="+91">🇮🇳 +91</option><option value="+81">🇯🇵 +81</option><option value="+82">🇰🇷 +82</option><option value="+966">🇸🇦 +966</option><option value="+886">🇹🇼 +886</option><option value="+852">🇭🇰 +852</option><option value="+49">🇩🇪 +49</option><option value="+34">🇪🇸 +34</option><option value="+33">🇫🇷 +33</option><option value="+351">🇵🇹 +351</option><option value="+7">🇷🇺 +7</option><option value="+31">🇳🇱 +31</option><option value="+48">🇵🇱 +48</option><option value="+39">🇮🇹 +39</option><option value="+90">🇹🇷 +90</option><option value="+972">🇮🇱 +972</option><option value="+1">🇺🇸 +1</option><option value="+44">🇬🇧 +44</option><option value="+61">🇦🇺 +61</option><option value="+other">其他</option>
-                  </select>
-                  <input type="tel" id="c-phone" required class="flex-1 h-12 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white focus:border-primary text-sm px-3 py-3" placeholder="手机号码 *" />
-                </div>
-                <div class="flex gap-2">
-                  <select data-custom-select id="c-contact-channel" required class="flex-1 h-12 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white focus:border-primary text-sm px-3 py-3 appearance-none">
-                    <option value="">选择联系方式</option><option value="WhatsApp">WhatsApp</option><option value="LINE">LINE</option><option value="Zalo">Zalo</option><option value="Facebook Messenger">Messenger</option><option value="Viber">Viber</option><option value="Telegram">Telegram</option><option value="WeChat">WeChat</option><option value="Phone Call">电话</option><option value="other">其他</option>
-                  </select>
-                  <input type="text" id="c-contact-account" class="flex-1 h-12 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white focus:border-primary text-sm px-3 py-3" placeholder="账号(留空用手机号)" />
-                </div>
-                <input type="email" id="c-email" class="w-full h-12 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white focus:border-primary text-sm px-3 py-3" placeholder="电子邮箱" />
-                <div>
-                  <span class="text-sm font-bold">最大挑战？（多选）</span>
-                  <div class="flex flex-wrap gap-2 mt-1">
-                    <label class="flex items-center gap-1 text-xs"><input type="checkbox" class="accent-primary" value="招聘困难" /> 招不到厨师</label>
-                    <label class="flex items-center gap-1 text-xs"><input type="checkbox" class="accent-primary" value="出餐慢" /> 出餐速度慢</label>
-                    <label class="flex items-center gap-1 text-xs"><input type="checkbox" class="accent-primary" value="品质不稳" /> 品质不稳定</label>
-                    <label class="flex items-center gap-1 text-xs"><input type="checkbox" class="accent-primary" value="成本高" /> 人力成本高</label>
-                    <label class="flex items-center gap-1 text-xs"><input type="checkbox" class="accent-primary" value="新店" /> 准备开新店</label>
-                    <label class="flex items-center gap-1 text-xs"><input type="checkbox" class="accent-primary" value="其他" /> 其他</label>
-                  </div>
-                  <input type="text" id="c-pain-other" class="hidden w-full mt-1 px-3 py-2 rounded-lg border border-slate-300 dark:border-slate-700 bg-transparent focus:border-primary text-xs" placeholder="请描述" />
-                </div>
-                <button type="submit" class="w-full bg-primary text-white py-3.5 rounded-lg font-bold hover:bg-primary/90 transition-all text-sm">获取免费方案评估</button>
-              </form>
+            <form class="space-y-2">
+              <input
+                type="text"
+                name="firstname"
+                required
+                class="w-full px-3 py-2 rounded-lg border border-slate-200 dark:border-slate-700 bg-transparent text-sm"
+                placeholder="您的姓名 *"
+                data-i18n-placeholder="contact_form_firstname_placeholder"
+              />
+              <input
+                type="email"
+                name="email"
+                required
+                class="w-full px-3 py-2 rounded-lg border border-slate-200 dark:border-slate-700 bg-transparent text-sm"
+                placeholder="邮箱 *"
+                data-i18n-placeholder="contact_form_email_placeholder"
+              />
+              <input
+                type="text"
+                name="company"
+                class="w-full px-3 py-2 rounded-lg border border-slate-200 dark:border-slate-700 bg-transparent text-sm"
+                placeholder="公司名称"
+                data-i18n-placeholder="contact_form_company_placeholder"
+              />
+              <textarea
+                rows="3"
+                name="message"
+                required
+                class="w-full px-3 py-2 rounded-lg border border-slate-200 dark:border-slate-700 bg-transparent text-sm resize-none"
+                placeholder="留言 *"
+                data-i18n-placeholder="contact_form_message_placeholder"
+              ></textarea>
+              <button
+                type="submit"
+                class="w-full bg-primary text-white py-2.5 rounded-lg font-bold text-sm"
+                data-i18n="contact_form_submit"
+              >Get Quote</button>
+            </form>
 
           </div>
         </div>
@@ -201,6 +202,7 @@
 
       <!-- Partner -->
       <section class="bg-slate-900 text-white rounded-xl p-5 text-center mt-8 mb-6">
+
 
         <div>
         <h2 class="text-lg font-black mb-2" data-i18n="contact_partner_title">Become a Partner</h2>
@@ -242,23 +244,23 @@
     <script src="/assets/js/ui/dropdown-styles.js"></script>
     <script src="/assets/js/ui/dropdown-base.js"></script>
     <script defer src="/assets/js/ui/products-dropdown.js"></script>
-    <script defer src="/assets/js/ui/applications-dropdown.js?v=202605212047"></script>
-    <script defer src="/assets/js/ui/support-dropdown.js?v=202605212047"></script>
-    <script defer src="/assets/js/ui/about-dropdown.js?v=202605212047"></script>
+    <script defer src="/assets/js/ui/applications-dropdown.js?v=202605212122"></script>
+    <script defer src="/assets/js/ui/support-dropdown.js?v=202605212122"></script>
+    <script defer src="/assets/js/ui/about-dropdown.js?v=202605212122"></script>
   <script src="/assets/js/product-list.js"></script>
   <script src="/assets/js/utils.js"></script>
   <script defer src="/assets/js/ui/search-engine.js"></script>
-    <script defer src="/assets/js/ui/navigator.js?v=202605212047"></script>
-<script defer src="/assets/js/ui/slide-menu.js?v=202605212047"></script>
-    <script defer src="/assets/js/ui/footer.js?v=202605212047"></script>
-    <script defer src="/assets/js/lang-registry.js?v=202605212047"></script>
-    <script defer src="/assets/js/translations.js?v=202605212047"></script><script defer src="/assets/js/ui/helpers.js"></script>
+    <script defer src="/assets/js/ui/navigator.js?v=202605212122"></script>
+<script defer src="/assets/js/ui/slide-menu.js?v=202605212122"></script>
+    <script defer src="/assets/js/ui/footer.js?v=202605212122"></script>
+    <script defer src="/assets/js/lang-registry.js?v=202605212122"></script>
+    <script defer src="/assets/js/translations.js?v=202605212122"></script><script defer src="/assets/js/ui/helpers.js"></script>
     <script defer src="/assets/js/ui/page-effects.js"></script>
     <script defer src="/assets/js/ui/form-interactions.js"></script>
-    <script defer src="/assets/js/quote-form.js?v=202605212047"></script>
     <script defer src="/assets/js/page-interactions.js"></script>
     <script src="/assets/js/utils/device-utils.js"></script>
-    <script src="/assets/js/spa-router.js?v=202605212047"></script>
+    <script src="/assets/js/spa-router.js?v=202605212122"></script>
+
     <script defer src="/assets/js/ui/floating-actions.js"></script>
   </body>
 </html>

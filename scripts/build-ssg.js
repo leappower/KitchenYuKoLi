@@ -373,7 +373,6 @@ function generateResponsiveEntry(route) {
     '  <script defer src="' + bp + '/assets/js/ui/navigator.js"></script>',
     '  <script defer src="' + bp + '/assets/js/lang-registry.js"></script>',
     '  <script defer src="' + bp + '/assets/js/translations.js"></script>',
-    '  <script defer src="' + bp + '/assets/js/translations.js"></script>',
     '  <script defer src="' + bp + '/assets/js/translations-dropdown-template.js"></script>',
     '</head>',
     '<body>',

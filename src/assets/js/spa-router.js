@@ -109,6 +109,9 @@
 
     global.swupInstance = swup;
 
+    // Swup v4 uses hooks.on() instead of .on()
+    var swupHooks = swup.hooks || swup;
+
     // ── Client-side device-aware fetch ─────────────────────────────
     // Static hosts (GitHub Pages, S3, etc.) serve index.html (mobile)
     // for all requests. Swup fetch gets mobile HTML → wrong layout on PC.
@@ -123,28 +126,17 @@
       if (!suffix) return; // safety
 
       swupHooks.on("fetch:request", function (visit, { args }) {
-        if (!args || !args.url) {
-          console.log("[spa-router] fetch:request: no args/url, skipping");
-          return;
-        }
+        if (!args || !args.url) return;
         var url = args.url;
-        console.log("[spa-router] fetch:request url:", url);
         // Only rewrite directory URLs like /profit-calculator/ or /about/
         // Do NOT touch: /assets/js/..., /index-pc.html (already device-specific), etc.
-        if (!/\/$/.test(url) && !/\/index\.html$/.test(url)) {
-          console.log("[spa-router] fetch:request: not a directory URL, skipping");
-          return;
-        }
+        if (!/\/$/.test(url) && !/\/index\.html$/.test(url)) return;
         // If already requesting a device-specific file, skip
-        if (/index-(mobile|pc|tablet)\.html$/.test(url)) {
-          console.log("[spa-router] fetch:request: already device-specific, skipping");
-          return;
-        }
+        if (/index-(mobile|pc|tablet)\.html$/.test(url)) return;
         // Rewrite: /profit-calculator/ → /profit-calculator/index-pc.html
         //          /about/ → /about/index-pc.html
         var base = url.replace(/\/index\.html$/, "");
         var newUrl = base + suffix;
-        console.log("[spa-router] fetch:request rewrite:", url, "→", newUrl, "(device:", suffix, ")");
         args.url = newUrl;
       });
     })();
@@ -195,31 +187,20 @@
     }
 
     // Forward Swup lifecycle to spa:load event
-    // Swup v4 uses hooks.on() instead of .on()
-    var swupHooks = swup.hooks || swup;
     swupHooks.on("content:replace", function (visit) {
-      console.log("[spa-router] content:replace fired");
-      console.log("[spa-router] content:replace visit.from.url:", visit.from ? visit.from.url : "null");
-      console.log("[spa-router] content:replace visit.to.url:", visit.to ? visit.to.url : "null");
       global.__spaNavigating = false;
       _spaState.currentRoute = global.location.pathname.replace(/\/$/, "") || "/";
-      console.log("[spa-router] currentRoute:", _spaState.currentRoute);
       // Reload page-specific scripts from the NEW page (not just #spa-content)
       var newDoc = visit && visit.to && visit.to.document ? visit.to.document : null;
-      console.log("[spa-router] about to reloadPageScripts, newDoc:", newDoc ? "present" : "null");
       reloadPageScripts(newDoc);
-      console.log("[spa-router] reloadPageScripts done");
       // Update navigator active state
       if (global.Navigator && typeof global.Navigator.updateActive === "function") {
-        console.log("[spa-router] calling Navigator.updateActive");
         global.Navigator.updateActive(_spaState.currentRoute);
       }
       if (global.Footer && typeof global.Footer.updateActive === "function") {
-        console.log("[spa-router] calling Footer.updateActive");
         global.Footer.updateActive(_spaState.currentRoute);
       }
       // Trigger spa:load for other modules
-      console.log("[spa-router] dispatching spa:load");
       dispatchSpaLoad();
     });
 
