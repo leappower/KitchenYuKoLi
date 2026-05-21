@@ -77,7 +77,8 @@
 
     var swup = new global.Swup({
       containers: ["#spa-content"],
-      linkSelector: 'a[href^="/"]:not([href$=".pdf"]):not([href$=".zip"]):not([href$=".doc"]):not([href*="mailto:"]):not([href*="tel:"]):not([target="_blank"])',
+      linkSelector:
+        'a[href^="/"]:not([href$=".pdf"]):not([href$=".zip"]):not([href$=".doc"]):not([href*="mailto:"]):not([href*="tel:"]):not([target="_blank"])',
       plugins: [
         new global.SwupHeadPlugin(),
         new global.SwupPreloadPlugin({ preloadHoveredLinks: true, preloadInitialPage: true }),
@@ -87,10 +88,36 @@
 
     global.swupInstance = swup;
 
+    // Reload page-specific <script src="..."> found in the new content.
+    // Swup does NOT execute <script> tags inside replaced containers,
+    // so we need to load them dynamically into <head>.
+    var _loadedPageScripts = {};
+    function reloadPageScripts() {
+      var spaContent = document.getElementById("spa-content");
+      if (!spaContent) return;
+      var scripts = spaContent.querySelectorAll("script[src]");
+      for (var i = 0; i < scripts.length; i++) {
+        var src = scripts[i].getAttribute("src");
+        if (!src) continue;
+        // Normalize: strip query string for dedup
+        var srcKey = src.replace(/\?.*$/, "");
+        // Skip scripts that should run once (swup, spa-router, translations)
+        if (/spa-router\.js|swup|translations\.js$/.test(srcKey)) continue;
+        // Dedup: skip if already loaded in a prior navigation
+        if (_loadedPageScripts[srcKey]) continue;
+        _loadedPageScripts[srcKey] = true;
+        var newScript = document.createElement("script");
+        newScript.src = src;
+        document.head.appendChild(newScript);
+      }
+    }
+
     // Forward Swup lifecycle to spa:load event
     swup.on("contentReplaced", function () {
       global.__spaNavigating = false;
       _spaState.currentRoute = global.location.pathname.replace(/\/$/, "") || "/";
+      // Reload page-specific scripts from the new content
+      reloadPageScripts();
       // Update navigator active state
       if (global.Navigator && typeof global.Navigator.updateActive === "function") {
         global.Navigator.updateActive(_spaState.currentRoute);

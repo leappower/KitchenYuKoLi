@@ -3489,5 +3489,8 @@
   "ty_meta_title": "YuKoLi | 提交成功",
   "wechat_modal_close": "关闭",
   "wechat_modal_subtitle": "添加企业微信获取专属支持",
-  "wechat_modal_title": "扫描微信二维码"
+  "wechat_modal_title": "扫描微信二维码",
+  "breadcrumb_other_categories": "zh",
+  "breadcrumb_other_scenarios": "zh",
+  "breadcrumb_other_services": "zh"
 }

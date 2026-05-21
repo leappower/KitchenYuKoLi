@@ -3489,5 +3489,8 @@
   "ty_meta_title": "YuKoLi | Erfolgreich übermittelt",
   "wechat_modal_close": "Close",
   "wechat_modal_subtitle": "Add our enterprise WeChat for dedicated support",
-  "wechat_modal_title": "Scan WeChat QR Code"
+  "wechat_modal_title": "Scan WeChat QR Code",
+  "breadcrumb_other_categories": "Andere Kategorien",
+  "breadcrumb_other_scenarios": "Andere Szenarien",
+  "breadcrumb_other_services": "Andere Dienstleistungen"
 }

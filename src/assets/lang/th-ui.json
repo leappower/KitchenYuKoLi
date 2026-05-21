@@ -3489,5 +3489,8 @@
   "ty_meta_title": "YuKoLi | ส่งข้อมูลสำเร็จ",
   "wechat_modal_close": "Close",
   "wechat_modal_subtitle": "Add our enterprise WeChat for dedicated support",
-  "wechat_modal_title": "Scan WeChat QR Code"
+  "wechat_modal_title": "Scan WeChat QR Code",
+  "breadcrumb_other_categories": "หมวดหมู่อื่น",
+  "breadcrumb_other_scenarios": "สถานการณ์อื่น",
+  "breadcrumb_other_services": "บริการอื่น"
 }
