@@ -40,6 +40,9 @@ pre-commit:
           echo "❌ 发现无 src/type 的空 <script> 标签！请移除。"
           exit 1
         fi
+    i18n-keys:
+      glob: "src/**/*.{js,html}"
+      run: node scripts/lint-i18n-keys.js {staged_files}
 
 pre-push:
   commands:

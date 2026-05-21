@@ -78,7 +78,17 @@ else
   PASS=$((PASS + 1))
 fi
 
-# ─── 5. Build check ───────────────────────────────────────────
+# ─── 5. i18n key check ─────────────────────────────────────
+echo ""
+echo "🌐 Checking i18n keys..."
+if node scripts/lint-i18n-keys.js 2>&1; then
+  PASS=$((PASS + 1))
+else
+  echo "  ❌ i18n key check failed"
+  FAIL=$((FAIL + 1))
+fi
+
+# ─── 6. Build check ───────────────────────────────────────────
 echo ""
 echo "🏗️  Running build..."
 if npm run build:css 2>&1 | tail -3; then
