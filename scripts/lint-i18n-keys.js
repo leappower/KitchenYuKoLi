@@ -83,6 +83,15 @@ function scanFiles(dirs) {
     if (!fs.existsSync(dir)) return;
 
     function walk(d) {
+      var stat;
+      try { stat = fs.statSync(d); } catch (e) { return; }
+      if (stat.isFile()) {
+        var ext = path.extname(d);
+        if (CHECK_EXTS.indexOf(ext) !== -1) {
+          scanFile(d, results);
+        }
+        return;
+      }
       var entries = fs.readdirSync(d, { withFileTypes: true });
       entries.forEach(function (entry) {
         var fullPath = path.join(d, entry.name);
