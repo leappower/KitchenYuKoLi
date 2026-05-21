@@ -134,12 +134,8 @@ header button:active {
     <div class="section-content">
   <!-- Hero -->
   <div class="mb-8">
-    <h1 class="text-3xl font-black leading-tight text-slate-900 dark:text-slate-50 mb-2" data-i18n="quote_get_quote">
-              Get a Quote
-            </h1>
-    <p class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed" data-i18n="quote_hero_desc">
-              Tell us about your commercial kitchen needs. We'll provide a customized smart equipment solution and quote within 24 hours.
-            </p>
+    <h1 class="text-3xl font-black leading-tight text-slate-900 dark:text-slate-50 mb-2" data-i18n="quote_get_quote">Get Quote</h1>
+    <p class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed" data-i18n="quote_hero_desc">Tell us your commercial kitchen needs. We'll provide customized smart equipment solutions and quotes within 24 hours.</p>
   </div>
     </div>
   </section>
@@ -152,38 +148,33 @@ header button:active {
       <!-- 企业信息 -->
       <h2 class="text-base font-bold mb-3 flex items-center gap-2">
         <span class="material-symbols-outlined text-primary text-lg">business</span>
-        <span data-i18n="quote_company_info">Company Information</span>
+        <span data-i18n="quote_company_info">Company Info</span>
       </h2>
       <!-- 公司名称 -->
       <div class="space-y-1.5">
-        <label class="block text-sm font-bold text-slate-700 dark:text-slate-300 ml-1" data-i18n="quote_company_name"><span class="text-red-500">*</span>
-              Company Name</label>
+        <label class="block text-sm font-bold text-slate-700 dark:text-slate-300 ml-1" data-i18n="quote_company_name">Company Name</label>
         <input id="q-company" class="w-full h-14 px-4 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 focus:ring-2 focus:ring-primary focus:border-primary transition-all text-base" placeholder="请输入公司全称" data-i18n-placeholder="quote_company_placeholder" type="text" required/>
       </div>
       <!-- 联系人 -->
       <div class="space-y-1.5">
-        <label class="block text-sm font-bold text-slate-700 dark:text-slate-300 ml-1" data-i18n="quote_contact_person"><span class="text-red-500">*</span>
-              Contact Person</label>
+        <label class="block text-sm font-bold text-slate-700 dark:text-slate-300 ml-1" data-i18n="quote_contact_person">Contact Person</label>
         <input id="q-contact" class="w-full h-14 px-4 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 focus:ring-2 focus:ring-primary focus:border-primary transition-all text-base" placeholder="请输入联系人姓名" data-i18n-placeholder="quote_contact_placeholder" type="text" required/>
       </div>
       <!-- 联系电话 -->
       <div class="space-y-1.5">
-        <label class="block text-sm font-bold text-slate-700 dark:text-slate-300 ml-1" data-i18n="quote_phone"><span class="text-red-500">*</span>
-              Phone Number</label>
+        <label class="block text-sm font-bold text-slate-700 dark:text-slate-300 ml-1" data-i18n="quote_phone">Phone</label>
         <input id="q-phone" class="w-full h-14 px-4 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 focus:ring-2 focus:ring-primary focus:border-primary transition-all text-base" placeholder="请输入联系电话（含国际区号）" data-i18n-placeholder="quote_phone_placeholder" type="tel" required/>
       </div>
       <!-- 邮箱 -->
       <div class="space-y-1.5">
-        <label class="block text-sm font-bold text-slate-700 dark:text-slate-300 ml-1" data-i18n="quote_email_address"><span class="text-red-500">*</span>
-              Email Address</label>
+        <label class="block text-sm font-bold text-slate-700 dark:text-slate-300 ml-1" data-i18n="quote_email_address">Email</label>
         <input id="q-email" class="w-full h-14 px-4 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 focus:ring-2 focus:ring-primary focus:border-primary transition-all text-base" placeholder="请输入工作邮箱" data-i18n-placeholder="quote_email_placeholder" type="email" required/>
       </div>
       <!-- 国家/地区 -->
       <div class="space-y-1.5">
-        <label class="block text-sm font-bold text-slate-700 dark:text-slate-300 ml-1" data-i18n="quote_country_region"><span class="text-red-500">*</span>
-              Country / Region</label>
+        <label class="block text-sm font-bold text-slate-700 dark:text-slate-300 ml-1" data-i18n="quote_country_region">Country/Region</label>
         <select id="q-country" data-custom-select class="w-full h-14 px-4 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 focus:ring-2 focus:ring-primary focus:border-primary transition-all text-base appearance-none" required>
-          <option value="" data-i18n="quote_select_country">Select Country</option>
+          <option value="" data-i18n="quote_select_country">Select Country/Region</option>
         <option value="SG" data-i18n="quote_country_sg">🇸🇬 Singapore</option>
         <option value="MY" data-i18n="quote_country_my">🇲🇾 Malaysia</option>
         <option value="ID" data-i18n="quote_country_id">🇮🇩 Indonesia</option>
@@ -212,7 +203,7 @@ header button:active {
         <option value="HK" data-i18n="quote_country_hk">🇭🇰 Hong Kong SAR</option>
         <option value="MO" data-i18n="quote_country_mo">🇲🇴 Macau SAR</option>
         <option value="BN" data-i18n="quote_country_bn">🇧🇳 Brunei</option>
-        <option value="other" data-i18n="quote_other_countries">Other Countries</option>
+        <option value="other" data-i18n="quote_other_countries">Other Countries/Regions</option>
         </select>
       </div>
       <!-- 设备需求 -->
@@ -222,16 +213,15 @@ header button:active {
       </h2>
       <!-- 设备类型 -->
       <div class="space-y-1.5">
-        <label class="block text-sm font-bold text-slate-700 dark:text-slate-300 ml-1" data-i18n="quote_equipment_type"><span class="text-red-500">*</span>
-              Equipment Type</label>
+        <label class="block text-sm font-bold text-slate-700 dark:text-slate-300 ml-1" data-i18n="quote_equipment_type">Equipment Type</label>
         <select id="q-equipment-type" data-custom-select class="w-full h-14 px-4 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 focus:ring-2 focus:ring-primary focus:border-primary transition-all text-base appearance-none" required>
           <option value="" data-i18n="quote_select_equipment_type">Select Equipment Type</option>
-          <option value="auto-wok" data-i18n="quote_type_auto_wok">Automatic Wok Machine</option>
-          <option value="semi-auto-wok" data-i18n="quote_type_semi_auto_wok">Semi-Automatic Wok</option>
+          <option value="auto-wok" data-i18n="quote_type_auto_wok">Smart Wok Machine</option>
+          <option value="semi-auto-wok" data-i18n="quote_type_semi_auto_wok">Semi-Auto Wok Machine</option>
           <option value="combi-oven" data-i18n="quote_type_combi_oven">Combi Oven</option>
-          <option value="soup-machine" data-i18n="quote_type_soup_machine">Soup Kettle</option>
-          <option value="rice-machine" data-i18n="quote_type_rice_machine">Commercial Rice Cooker</option>
-          <option value="full-set" data-i18n="quote_type_full_set">Full Equipment Set</option>
+          <option value="soup-machine" data-i18n="quote_type_soup_machine">Smart Soup Maker</option>
+          <option value="rice-machine" data-i18n="quote_type_rice_machine">Smart Rice Cooker</option>
+          <option value="full-set" data-i18n="quote_type_full_set">Complete Kitchen Solution</option>
           <option value="other" data-i18n="quote_other">Other</option>
         </select>
       </div>
@@ -244,17 +234,13 @@ header button:active {
       </div>
       <!-- 厨房规模 -->
       <div class="space-y-1.5">
-        <label class="block text-sm font-bold text-slate-700 dark:text-slate-300 ml-1" data-i18n="quote_kitchen_capacity">
-                  Kitchen Capacity
-                </label>
+        <label class="block text-sm font-bold text-slate-700 dark:text-slate-300 ml-1" data-i18n="quote_kitchen_capacity">Kitchen Scale</label>
         <select id="q-capacity" data-custom-select class="w-full h-14 px-4 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 focus:ring-2 focus:ring-primary focus:border-primary transition-all text-base appearance-none">
-          <option value="" data-i18n="quote_select_capacity">Select Kitchen Capacity</option>
-          <option value="small" data-i18n="quote_capacity_small">Small (1–3 units)</option>
-          <option value="medium" data-i18n="quote_capacity_medium">Medium (4–10 units)</option>
-          <option value="large" data-i18n="quote_capacity_large">Large (10+ units)</option>
-          <option value="enterprise" data-i18n="quote_capacity_enterprise">
-                    Enterprise (Full Kitchen Project)
-                  </option>
+          <option value="" data-i18n="quote_select_capacity">Select Kitchen Scale</option>
+          <option value="small" data-i18n="quote_capacity_small">Small Restaurant (<50 meals/serving)</option>
+          <option value="medium" data-i18n="quote_capacity_medium">Medium Restaurant (50-200 meals/serving)</option>
+          <option value="large" data-i18n="quote_capacity_large">Large Restaurant/Cafeteria (200-500 meals/serving)</option>
+          <option value="enterprise" data-i18n="quote_capacity_enterprise">Chain/Central Kitchen (500+ meals/serving)</option>
         </select>
       </div>
       <!-- 预算范围 -->
@@ -264,19 +250,13 @@ header button:active {
                 </label>
         <select id="q-budget" data-custom-select class="w-full h-14 px-4 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 focus:ring-2 focus:ring-primary focus:border-primary transition-all text-base appearance-none">
           <option value="" data-i18n="quote_select_budget">Select Budget Range</option>
-          <option value="consult" data-i18n="quote_budget_consult">Budget Consultation</option>
-          <option value="5k-1w" data-i18n="quote_budget_5k_1w"><span data-i18n="quote_currency_cny">CNY (¥)</span>
-              5K - 10Kpan></option>
-          <option value="1w-5w" data-i18n="quote_budget_1w_5w"><span data-i18n="quote_currency_cny">CNY (¥)</span>
-              10K - 50Kpan></option>
-          <option value="5w-10w" data-i18n="quote_budget_5w_10w"><span data-i18n="quote_currency_cny">CNY (¥)</span>
-              50K - 100Kpan></option>
-          <option value="10w-30w" data-i18n="quote_budget_10w_30w"><span data-i18n="quote_currency_cny">CNY (¥)</span>
-              100K - 300Kpan></option>
-          <option value="30w-50w" data-i18n="quote_budget_30w_50w"><span data-i18n="quote_currency_cny">CNY (¥)</span>
-              300K - 500Kpan></option>
-          <option value="50w+" data-i18n="quote_budget_50w_plus"><span data-i18n="quote_currency_cny">CNY (¥)</span>
-              500K+pan></option>
+          <option value="consult" data-i18n="quote_budget_consult">Need Consultation (No Budget Yet)</option>
+          <option value="5k-1w" data-i18n="quote_budget_5k_1w">5K - 10K</option>
+          <option value="1w-5w" data-i18n="quote_budget_1w_5w">10K - 50K</option>
+          <option value="5w-10w" data-i18n="quote_budget_5w_10w">50K - 100K</option>
+          <option value="10w-30w" data-i18n="quote_budget_10w_30w">100K - 300K</option>
+          <option value="30w-50w" data-i18n="quote_budget_30w_50w">300K - 500K</option>
+          <option value="50w+" data-i18n="quote_budget_50w_plus">500K+</option>
         </select>
       </div>
       <!-- 详细需求 -->
@@ -289,9 +269,7 @@ header button:active {
       <!-- Consent -->
       <div class="flex items-start gap-2 pt-4">
         <input id="q-consent-m" type="checkbox" class="mt-1 accent-primary size-5" checked />
-        <label for="q-consent-m" class="text-xs text-slate-500" data-i18n="quote_consent_text">
-                  I agree to the Privacy Policy and Terms of Service.
-                </label>
+        <label for="q-consent-m" class="text-xs text-slate-500" data-i18n="quote_consent_text">I agree to YuKoLi's Privacy Policy and consent to receive quotes via the provided contact details.</label>
       </div>
     </form>
   </div>
@@ -301,28 +279,22 @@ header button:active {
     <div class="flex items-center gap-3 p-3 bg-primary/5 dark:bg-primary/10 rounded-xl border border-slate-300 dark:border-slate-700">
       <span class="material-symbols-outlined text-primary text-2xl">inventory_2</span>
       <div>
-        <p class="font-bold text-sm text-slate-900 dark:text-slate-50" data-i18n="quote_114_products">200+ Smart Equipment</p>
-        <p class="text-xs text-slate-500 leading-relaxed" data-i18n="quote_114_products_desc">
-                    Covering wok, steaming, soup, rice cooking and all commercial kitchen scenarios.
-                  </p>
+        <p class="font-bold text-sm text-slate-900 dark:text-slate-50" data-i18n="quote_114_products">200+ Smart Appliances</p>
+        <p class="text-xs text-slate-500 leading-relaxed" data-i18n="quote_114_products_desc">Complete commercial kitchen solutions for stir-frying, steaming, roasting, soup-making, and rice cooking.</p>
       </div>
     </div>
     <div class="flex items-center gap-3 p-3 bg-primary/5 dark:bg-primary/10 rounded-xl border border-slate-300 dark:border-slate-700">
       <span class="material-symbols-outlined text-primary text-2xl">public</span>
       <div>
-        <p class="font-bold text-sm text-slate-900 dark:text-slate-50" data-i18n="quote_50_countries">50+ Countries</p>
-        <p class="text-xs text-slate-500 leading-relaxed" data-i18n="quote_50_countries_desc">
-                    Deep roots in Southeast Asia, products sold to 50+ countries worldwide.
-                  </p>
+        <p class="font-bold text-sm text-slate-900 dark:text-slate-50" data-i18n="quote_50_countries">68+ Countries Covered</p>
+        <p class="text-xs text-slate-500 leading-relaxed" data-i18n="quote_50_countries_desc">Strong presence in Southeast Asia, exporting to 50+ countries worldwide.</p>
       </div>
     </div>
     <div class="flex items-center gap-3 p-3 bg-primary/5 dark:bg-primary/10 rounded-xl border border-slate-300 dark:border-slate-700">
       <span class="material-symbols-outlined text-primary text-2xl">verified_user</span>
       <div>
-        <p class="font-bold text-sm text-slate-900 dark:text-slate-50" data-i18n="quote_certified">Internationally Certified</p>
-        <p class="text-xs text-slate-500 leading-relaxed" data-i18n="quote_certified_desc">
-                    CE, UL, ISO 9001 certified for quality assurance.
-                  </p>
+        <p class="font-bold text-sm text-slate-900 dark:text-slate-50" data-i18n="quote_certified">Internationally Certified Quality</p>
+        <p class="text-xs text-slate-500 leading-relaxed" data-i18n="quote_certified_desc">CE, UL, ISO 9001 certified for guaranteed quality.</p>
       </div>
     </div>
   </div>
@@ -330,46 +302,36 @@ header button:active {
   <!-- Why Yukoli (collapsible) -->
   <details class="group mt-6">
     <summary class="flex items-center justify-between cursor-pointer list-none">
-      <h3 class="text-sm font-bold uppercase tracking-widest text-slate-500 dark:text-slate-400" data-i18n="quote_why_yukoli">
-                Why YuKoLi?
-              </h3>
+      <h3 class="text-sm font-bold uppercase tracking-widest text-slate-500 dark:text-slate-400" data-i18n="quote_why_yukoli">Why Choose YuKoLi?</h3>
       <span class="material-symbols-outlined transition-transform group-open:rotate-180 text-slate-400">expand_more</span>
     </summary>
     <div class="mt-4 grid grid-cols-1 gap-4">
       <div class="flex items-center gap-4 p-3 rounded-lg bg-primary/5">
         <span class="material-symbols-outlined text-primary">inventory_2</span>
         <div>
-          <p class="font-bold text-sm" data-i18n="quote_114_products">200+ Smart Equipment</p>
-          <p class="text-xs text-slate-500" data-i18n="quote_114_products_desc">
-                    Covering wok, steaming, soup, rice cooking and all commercial kitchen scenarios.
-                  </p>
+          <p class="font-bold text-sm" data-i18n="quote_114_products">200+ Smart Appliances</p>
+          <p class="text-xs text-slate-500" data-i18n="quote_114_products_desc">Complete commercial kitchen solutions for stir-frying, steaming, roasting, soup-making, and rice cooking.</p>
         </div>
       </div>
       <div class="flex items-center gap-4 p-3 rounded-lg bg-primary/5">
         <span class="material-symbols-outlined text-primary">public</span>
         <div>
-          <p class="font-bold text-sm" data-i18n="quote_50_countries">50+ Countries</p>
-          <p class="text-xs text-slate-500" data-i18n="quote_50_countries_desc">
-                    Deep roots in Southeast Asia, products sold to 50+ countries worldwide.
-                  </p>
+          <p class="font-bold text-sm" data-i18n="quote_50_countries">68+ Countries Covered</p>
+          <p class="text-xs text-slate-500" data-i18n="quote_50_countries_desc">Strong presence in Southeast Asia, exporting to 50+ countries worldwide.</p>
         </div>
       </div>
       <div class="flex items-center gap-4 p-3 rounded-lg bg-primary/5">
         <span class="material-symbols-outlined text-primary">verified_user</span>
         <div>
-          <p class="font-bold text-sm" data-i18n="quote_certified">Internationally Certified</p>
-          <p class="text-xs text-slate-500" data-i18n="quote_certified_desc">
-                    CE, UL, ISO 9001 certified for quality assurance.
-                  </p>
+          <p class="font-bold text-sm" data-i18n="quote_certified">Internationally Certified Quality</p>
+          <p class="text-xs text-slate-500" data-i18n="quote_certified_desc">CE, UL, ISO 9001 certified for guaranteed quality.</p>
         </div>
       </div>
       <div class="flex items-center gap-4 p-3 rounded-lg bg-primary/5">
         <span class="material-symbols-outlined text-primary">support_agent</span>
         <div>
-          <p class="font-bold text-sm" data-i18n="quote_after_sales">Comprehensive After-Sales Service</p>
-          <p class="text-xs text-slate-500" data-i18n="quote_after_sales_desc">
-                    Installation guidance, operator training and ongoing technical support.
-                  </p>
+          <p class="font-bold text-sm" data-i18n="quote_after_sales">Comprehensive After-Sales</p>
+          <p class="text-xs text-slate-500" data-i18n="quote_after_sales_desc">Installation guidance, operation training, and ongoing technical support.</p>
         </div>
       </div>
     </div>
@@ -379,17 +341,15 @@ header button:active {
   <div class="bg-primary p-5 rounded-xl text-white mt-6">
     <div class="flex items-center gap-2 mb-3">
       <span class="material-symbols-outlined">forum</span>
-      <h3 class="text-base font-bold" data-i18n="quote_prefer_chat">Prefer Chat?</h3>
+      <h3 class="text-base font-bold" data-i18n="quote_prefer_chat">Prefer direct chat?</h3>
     </div>
-    <p class="text-sm opacity-90 mb-4" data-i18n="quote_prefer_chat_desc">
-              Reach us directly on WhatsApp for instant support.
-            </p>
+    <p class="text-sm opacity-90 mb-4" data-i18n="quote_prefer_chat_desc">Our sales team is online to answer questions and help you find the right equipment quickly.</p>
     <div class="flex gap-3">
       <button onclick="startWhatsApp()" class="flex-1 bg-white text-primary py-2.5 rounded-lg font-bold text-sm flex items-center justify-center gap-2">
         <span class="material-symbols-outlined text-base">chat</span> WhatsApp
       </button>
       <button onclick="startEmail()" class="flex-1 bg-white/20 text-white py-2.5 rounded-lg font-bold text-sm flex items-center justify-center gap-2">
-        <span class="material-symbols-outlined text-base">mail</span> <span data-i18n="quote_send_email">Send Email</span>
+        <span class="material-symbols-outlined text-base">mail</span> <span data-i18n="quote_send_email">Email Us</span>
       </button>
     </div>
   </div>
@@ -402,7 +362,7 @@ header button:active {
     <div class="flex justify-center items-center gap-8 opacity-60 grayscale hover:grayscale-0 transition-all duration-500">
       <div class="flex flex-col items-center">
         <div class="size-12 rounded border border-slate-300 dark:border-slate-700 flex items-center justify-center font-black text-xl mb-1">CE</div>
-        <span class="text-[10px] font-bold" data-i18n="quote_ce_standard">European Standard</span>
+        <span class="text-[10px] font-bold" data-i18n="quote_ce_standard">European Standards</span>
       </div>
       <div class="flex flex-col items-center">
         <div class="size-12 rounded border border-slate-300 dark:border-slate-700 flex items-center justify-center font-black text-xl mb-1">UL</div>
@@ -440,18 +400,18 @@ header button:active {
     <script src="/assets/js/ui/dropdown-styles.js"></script>
     <script src="/assets/js/ui/dropdown-base.js"></script>
     <script src="/assets/js/ui/custom-select.js"></script>
-<script defer src="/assets/js/ui/products-dropdown.js?v=202605211253"></script>
-    <script defer src="/assets/js/ui/applications-dropdown.js?v=202605211253"></script>
-    <script defer src="/assets/js/ui/support-dropdown.js?v=202605211253"></script>
-    <script defer src="/assets/js/ui/about-dropdown.js?v=202605211253"></script>
+<script defer src="/assets/js/ui/products-dropdown.js?v=202605211314"></script>
+    <script defer src="/assets/js/ui/applications-dropdown.js?v=202605211314"></script>
+    <script defer src="/assets/js/ui/support-dropdown.js?v=202605211314"></script>
+    <script defer src="/assets/js/ui/about-dropdown.js?v=202605211314"></script>
 <script src="/assets/js/product-list.js"></script>
 <script src="/assets/js/utils.js"></script>
 <script defer src="/assets/js/ui/search-engine.js"></script>
-    <script defer src="/assets/js/ui/navigator.js?v=202605211253"></script>
-<script defer src="/assets/js/ui/slide-menu.js?v=202605211253"></script>
-<script defer src="/assets/js/ui/footer.js?v=202605211253"></script>
-<script defer src="/assets/js/lang-registry.js?v=202605211253"></script>
-<script defer src="/assets/js/translations.js?v=202605211253"></script><script defer src="/assets/js/translations-dropdown-template.js?v=202605211253"></script>
+    <script defer src="/assets/js/ui/navigator.js?v=202605211314"></script>
+<script defer src="/assets/js/ui/slide-menu.js?v=202605211314"></script>
+<script defer src="/assets/js/ui/footer.js?v=202605211314"></script>
+<script defer src="/assets/js/lang-registry.js?v=202605211314"></script>
+<script defer src="/assets/js/translations.js?v=202605211314"></script><script defer src="/assets/js/translations-dropdown-template.js?v=202605211314"></script>
 <script defer src="/assets/js/contacts.js"></script>
 <script defer src="/assets/js/router.js"></script>
 
@@ -492,7 +452,7 @@ header button:active {
 
 
 <script src="/assets/js/utils/device-utils.js"></script>
-<script src="/assets/js/spa-router.js?v=202605211253"></script>
+<script src="/assets/js/spa-router.js?v=202605211314"></script>
 
 
     <script defer src="/assets/js/ui/floating-actions.js"></script>

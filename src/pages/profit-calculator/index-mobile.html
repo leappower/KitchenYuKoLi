@@ -110,12 +110,8 @@
             <h1 class="text-2xl font-black tracking-tight text-center mb-1" data-i18n="profit_calc_hero_title">
               Kitchen Equipment ROI Calculator
             </h1>
-            <p class="text-sm text-slate-500 dark:text-slate-400 text-center" data-i18n="profit_calc_hero_subtitle">
-              Enter your operating data and see your ROI estimate in 45 seconds
-            </p>
-            <p class="text-xs text-slate-400 text-center mt-1" data-i18n="profit_calc_hero_subtitle_en">
-              Kitchen Equipment Profit Calculator
-            </p>
+            <p class="text-sm text-slate-500 dark:text-slate-400 text-center" data-i18n="profit_calc_hero_subtitle">Enter your data, get ROI estimate in 45 seconds</p>
+            <p class="text-xs text-slate-400 text-center mt-1" data-i18n="profit_calc_hero_subtitle_en">Kitchen Equipment ROI Calculator</p>
           </div>
         </section>
 
@@ -133,7 +129,7 @@
                       id="pc-country"
                       class="w-full bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 rounded-lg p-3 focus:ring-primary focus:border-primary text-base"
                     >
-                      <option value="" data-i18n="profit_calc_select_country">Select country…</option>
+                      <option value="" data-i18n="profit_calc_select_country">Select country...</option>
                                             <option value="Singapore" data-i18n="profit_country_sg">🇸🇬 Singapore</option>
                       <option value="Malaysia" data-i18n="profit_country_my">🇲🇾 Malaysia</option>
                       <option value="Indonesia" data-i18n="profit_country_id">🇮🇩 Indonesia</option>
@@ -144,11 +140,11 @@
                       <option value="Cambodia" data-i18n="profit_country_kh">🇰🇭 Cambodia</option>
                       <option value="Laos" data-i18n="profit_country_la">🇱🇦 Laos</option>
                       <option value="China" data-i18n="profit_country_china">🇨🇳 China</option>
-                      <option value="Japan" data-i18n="profit_country_jp">🇯🇵 Japan</option>
-                      <option value="South Korea" data-i18n="profit_country_kr">🇰🇷 South Korea</option>
-                      <option value="India" data-i18n="profit_country_in">🇮🇳 India</option>
-                      <option value="Saudi Arabia" data-i18n="profit_country_sa">🇸🇦 Saudi Arabia</option>
-                      <option value="Taiwan" data-i18n="profit_country_tw">🇹🇼 Taiwan</option>
+                      <option value="Japan" data-i18n="profit_country_jp">🇯🇵 Japan / 日本</option>
+                      <option value="South Korea" data-i18n="profit_country_kr">🇰🇷 South Korea / 한국</option>
+                      <option value="India" data-i18n="profit_country_in">🇮🇳 India / भारत</option>
+                      <option value="Saudi Arabia" data-i18n="profit_country_sa">🇸🇦 Saudi Arabia / السعودية</option>
+                      <option value="Taiwan" data-i18n="profit_country_tw">🇹🇼 Taiwan / 台灣</option>
                       <option value="Germany" data-i18n="profit_country_de">🇩🇪 Germany</option>
                       <option value="Spain" data-i18n="profit_country_es">🇪🇸 Spain</option>
                       <option value="France" data-i18n="profit_country_fr">🇫🇷 France</option>
@@ -162,7 +158,7 @@
                       <option value="Hong Kong SAR" data-i18n="profit_country_hk">🇭🇰 Hong Kong SAR</option>
                       <option value="Macau SAR" data-i18n="profit_country_mo">🇲🇴 Macau SAR</option>
                       <option value="Brunei" data-i18n="profit_country_bn">🇧🇳 Brunei</option>
-                      <option value="Other" data-i18n="profit_calc_other">Other (USD)</option>
+                      <option value="Other" data-i18n="profit_calc_other">Other</option>
                     </select>
                   </div>
 
@@ -176,7 +172,7 @@
                       data-custom-select
                       class="w-full bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 rounded-lg p-3 focus:ring-primary focus:border-primary text-base"
                     >
-                      <option value="" data-i18n="profit_calc_select_business_type">Select business type…</option>
+                      <option value="" data-i18n="profit_calc_select_business_type">Select business type...</option>
                       <option value="chain-restaurant" data-i18n="profit_calc_scene_chain">Chain Restaurant</option>
                       <option value="central-kitchen" data-i18n="profit_calc_scene_central">Central Kitchen</option>
                       <option value="small-restaurant" data-i18n="profit_calc_scene_small">Small Restaurant</option>
@@ -190,7 +186,7 @@
                   <!-- Labor Cost -->
                   <div>
                     <label class="block text-sm font-bold mb-1">
-                      <span data-i18n="profit_calc_labor_cost">Monthly Labor Cost</span>
+                      <span data-i18n="profit_calc_labor_cost">Current Monthly Labor Cost</span>
                       <span id="pc-currency-symbol" class="text-slate-500"></span>
                     </label>
                     <input
@@ -204,8 +200,7 @@
 
                   <!-- Daily Meals -->
                   <div>
-                    <label class="block text-sm font-bold mb-1" data-i18n="profit_calc_daily_meals"><span class="text-red-500">*</span>
-              Daily Meals Served</label>
+                    <label class="block text-sm font-bold mb-1" data-i18n="profit_calc_daily_meals">Daily Meals Served (units)</label>
                     <input
                       id="pc-daily-meals"
                       type="number"
@@ -218,40 +213,36 @@
 
                   <!-- Pain Point -->
                   <div>
-                    <label class="block text-sm font-bold mb-1" data-i18n="profit_calc_pain_point">
-                      Main Pain Point
-                    </label>
+                    <label class="block text-sm font-bold mb-1" data-i18n="profit_calc_pain_point">Main Challenges</label>
                     <select
                       data-custom-select
                       id="pc-pain-point"
                       class="w-full bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 rounded-lg p-3 focus:ring-primary focus:border-primary text-base"
                     >
-                      <option value="" data-i18n="profit_calc_select_pain_point">Select your main challenge…</option>
-                      <option value="hiring_difficulty" data-i18n="profit_calc_pain_hiring">Hard to Hire</option>
-                      <option value="high_labor_cost" data-i18n="profit_calc_pain_labor">High Labor Cost</option>
-                      <option value="inconsistent_quality" data-i18n="profit_calc_pain_quality">
-                        Inconsistent Quality
-                      </option>
-                      <option value="limited_space" data-i18n="profit_calc_pain_space">Limited Space</option>
+                      <option value="" data-i18n="profit_calc_select_pain_point">Select main challenges...</option>
+                      <option value="hiring_difficulty" data-i18n="profit_calc_pain_hiring">Hiring Difficulties</option>
+                      <option value="high_labor_cost" data-i18n="profit_calc_pain_labor">High Labor Costs</option>
+                      <option value="inconsistent_quality" data-i18n="profit_calc_pain_quality">Inconsistent Output</option>
+                      <option value="limited_space" data-i18n="profit_calc_pain_space">Space Constraints</option>
                       <option value="slow_service" data-i18n="profit_calc_pain_speed">Slow Service</option>
                     </select>
                   </div>
 
                   <!-- Equipment -->
                   <div>
-                    <label class="block text-sm font-bold mb-2" data-i18n="profit_calc_equipment">Equipment</label>
+                    <label class="block text-sm font-bold mb-2" data-i18n="profit_calc_equipment">Planned Equipment</label>
                     <div class="grid grid-cols-2 gap-2">
                       <label
                         class="flex items-center gap-2 text-sm cursor-pointer bg-white dark:bg-slate-900 rounded-lg p-2.5 border border-slate-300 dark:border-slate-700 active:bg-slate-50 dark:active:bg-slate-800"
                       >
                         <input type="checkbox" class="accent-primary pc-equipment" value="smart_wok" />
-                        <span data-i18n="profit_calc_eq_wok">Automatic Wok</span>
+                        <span data-i18n="profit_calc_eq_wok">Smart Wok</span>
                       </label>
                       <label
                         class="flex items-center gap-2 text-sm cursor-pointer bg-white dark:bg-slate-900 rounded-lg p-2.5 border border-slate-300 dark:border-slate-700 active:bg-slate-50 dark:active:bg-slate-800"
                       >
                         <input type="checkbox" class="accent-primary pc-equipment" value="rice_cooker" />
-                        <span data-i18n="profit_calc_eq_rice">Rice Cooker</span>
+                        <span data-i18n="profit_calc_eq_rice">Rice Steamer</span>
                       </label>
                       <label
                         class="flex items-center gap-2 text-sm cursor-pointer bg-white dark:bg-slate-900 rounded-lg p-2.5 border border-slate-300 dark:border-slate-700 active:bg-slate-50 dark:active:bg-slate-800"
@@ -269,21 +260,20 @@
                         class="flex items-center gap-2 text-sm cursor-pointer bg-white dark:bg-slate-900 rounded-lg p-2.5 border border-slate-300 dark:border-slate-700 active:bg-slate-50 dark:active:bg-slate-800"
                       >
                         <input type="checkbox" class="accent-primary pc-equipment" value="deep_fryer" />
-                        <span data-i18n="profit_calc_eq_fryer">Deep Fryer</span>
+                        <span data-i18n="profit_calc_eq_fryer">Fryer</span>
                       </label>
                       <label
                         class="flex items-center gap-2 text-sm cursor-pointer bg-white dark:bg-slate-900 rounded-lg p-2.5 border border-slate-300 dark:border-slate-700 active:bg-slate-50 dark:active:bg-slate-800"
                       >
                         <input type="checkbox" class="accent-primary pc-equipment" value="other" />
-                        <span data-i18n="profit_calc_other">Other (USD)</span>
+                        <span data-i18n="profit_calc_other">Other</span>
                       </label>
                     </div>
                   </div>
 
                   <!-- Operator Reduction -->
                   <div>
-                    <label class="block text-sm font-bold mb-1" data-i18n="profit_calc_operator_reduction"><span id="pc-operator-value" class="text-primary font-black">2</span>
-              Expected Operator Reduction</label>
+                    <label class="block text-sm font-bold mb-1" data-i18n="profit_calc_operator_reduction">Estimated Staff Reduction</label>
                     <input
                       id="pc-operator-reduction"
                       type="range"
@@ -304,7 +294,7 @@
                     id="pc-calc-btn"
                     class="w-full bg-primary text-white py-3 rounded-xl font-bold text-sm hover:bg-primary/90 active:scale-[0.98] transition-all flex items-center justify-center gap-2 shadow-lg shadow-primary/20"
                   >
-                    <span data-i18n="profit_calc_btn_calculate">Calculate ROI</span>
+                    <span data-i18n="profit_calc_btn_calculate">Calculate Now</span>
                   </button>
                 </form>
               </div>
@@ -338,9 +328,7 @@
                       <p
                         class="text-[10px] font-bold text-emerald-600 dark:text-emerald-400 uppercase tracking-wider mb-0.5"
                         data-i18n="profit_calc_monthly_savings"
-                      >
-                        Monthly Savings
-                      </p>
+                      >Monthly Cost Savings</p>
                       <p id="res-monthly-savings" class="text-lg font-black text-emerald-700 dark:text-emerald-300">
                         —
                       </p>
@@ -351,9 +339,7 @@
                       <p
                         class="text-[10px] font-bold text-blue-600 dark:text-blue-400 uppercase tracking-wider mb-0.5"
                         data-i18n="profit_calc_investment"
-                      >
-                        Equipment Investment
-                      </p>
+                      >Investment Range</p>
                       <p id="res-investment" class="text-lg font-black text-blue-700 dark:text-blue-300">—</p>
                     </div>
                   </div>
@@ -365,9 +351,7 @@
                     <p
                       class="text-[10px] font-bold text-slate-500 uppercase tracking-wider mb-0.5"
                       data-i18n="profit_calc_five_year"
-                    >
-                      5-Year Savings
-                    </p>
+                    >5-Year Cumulative ROI</p>
                     <p id="res-five-year" class="text-2xl font-black text-primary">—</p>
                   </div>
 
@@ -391,12 +375,10 @@
                       <p
                         class="text-[10px] font-bold text-green-600 dark:text-green-400 uppercase tracking-wider"
                         data-i18n="profit_calc_esg_label"
-                      >
-                        ESG: CO₂ Reduction (est.)
-                      </p>
+                      >ESG: Estimated CO2 Reduction</p>
                       <p class="text-base font-black text-green-700 dark:text-green-300">
                         <span id="res-co2">—</span>
-                        <span data-i18n="profit_calc_co2_unit">tonnes / year</span>
+                        <span data-i18n="profit_calc_co2_unit">tons/year</span>
                       </p>
                     </div>
                   </div>
@@ -416,7 +398,7 @@
                       class="w-full bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-slate-300 py-3 rounded-xl font-bold text-sm flex items-center justify-center gap-2 active:scale-[0.98] transition-all"
                     >
                       <span class="material-symbols-outlined text-lg">arrow_back</span>
-                      <span data-i18n="profit_calc_btn_modify">Modify</span>
+                      <span data-i18n="profit_calc_btn_modify">Modify ↩</span>
                     </button>
                     <button
                       id="pc-whatsapp-btn"
@@ -430,7 +412,7 @@
                       class="w-full bg-slate-800 dark:bg-slate-700 hover:bg-slate-700 dark:hover:bg-slate-600 text-white py-3 rounded-xl font-bold text-sm flex items-center justify-center gap-2 active:scale-[0.98] transition-all"
                     >
                       <span class="material-symbols-outlined text-lg">picture_as_pdf</span>
-                      <span data-i18n="profit_calc_btn_pdf">Download PDF</span>
+                      <span data-i18n="profit_calc_btn_pdf">Download PDF Report</span>
                     </button>
                   </div>
                 </div>
@@ -442,17 +424,15 @@
           <section class="fullwidth-bg py-10 bg-primary">
             <div class="section-content">
               <div class="w-full text-center">
-                <h2 class="text-2xl font-black text-white mb-3" data-i18n="cases_footer_cta_title">Still not sure?</h2>
-                <p class="text-lg text-white/80 mb-6" data-i18n="cases_footer_cta_desc">
-                  Calculate ROI in 45 seconds
-                </p>
+                <h2 class="text-2xl font-black text-white mb-3" data-i18n="cases_footer_cta_title">Still unsure?</h2>
+                <p class="text-lg text-white/80 mb-6" data-i18n="cases_footer_cta_desc">Get your ROI in 45 seconds</p>
                 <div class="flex flex-col items-center gap-3">
                   <a
                     href="/quote/"
                     class="inline-flex items-center gap-2 bg-white text-primary px-6 py-3 rounded-xl font-bold text-sm hover:shadow-lg transition-all w-full max-w-xs justify-center"
                   >
                     <span class="material-symbols-outlined">description</span>
-                    <span data-i18n="nav_get_quote">Get a Quote</span>
+                    <span data-i18n="nav_get_quote">Get Quote</span>
                     <span class="material-symbols-outlined">arrow_forward</span>
                   </a>
                   <a
@@ -460,7 +440,7 @@
                     class="inline-flex items-center gap-2 bg-white/10 border-2 border-white/60 text-white px-6 py-3 rounded-xl font-bold hover:bg-white/20 transition-all w-full max-w-xs justify-center"
                   >
                     <span class="material-symbols-outlined">calculate</span>
-                    <span data-i18n="cases_footer_cta_button">Calculate Your ROI</span>
+                    <span data-i18n="cases_footer_cta_button">Calculate ROI</span>
                   </a>
                 </div>
               </div>
@@ -476,19 +456,19 @@
     <script src="/assets/js/ui/dropdown-styles.js"></script>
     <script src="/assets/js/ui/dropdown-base.js"></script>
     <script src="/assets/js/ui/custom-select.js"></script>
-    <script defer src="/assets/js/ui/products-dropdown.js?v=202605211253"></script>
-    <script defer src="/assets/js/ui/applications-dropdown.js?v=202605211253"></script>
-    <script defer src="/assets/js/ui/support-dropdown.js?v=202605211253"></script>
-    <script defer src="/assets/js/ui/about-dropdown.js?v=202605211253"></script>
+    <script defer src="/assets/js/ui/products-dropdown.js?v=202605211314"></script>
+    <script defer src="/assets/js/ui/applications-dropdown.js?v=202605211314"></script>
+    <script defer src="/assets/js/ui/support-dropdown.js?v=202605211314"></script>
+    <script defer src="/assets/js/ui/about-dropdown.js?v=202605211314"></script>
     <script src="/assets/js/product-list.js"></script>
     <script src="/assets/js/utils.js"></script>
     <script defer src="/assets/js/ui/search-engine.js"></script>
-    <script defer src="/assets/js/ui/navigator.js?v=202605211253"></script>
-    <script defer src="/assets/js/ui/slide-menu.js?v=202605211253"></script>
-    <script defer src="/assets/js/ui/footer.js?v=202605211253"></script>
-    <script defer src="/assets/js/lang-registry.js?v=202605211253"></script>
-    <script defer src="/assets/js/translations.js?v=202605211253"></script>
-    <script defer src="/assets/js/translations-dropdown-template.js?v=202605211253"></script>
+    <script defer src="/assets/js/ui/navigator.js?v=202605211314"></script>
+    <script defer src="/assets/js/ui/slide-menu.js?v=202605211314"></script>
+    <script defer src="/assets/js/ui/footer.js?v=202605211314"></script>
+    <script defer src="/assets/js/lang-registry.js?v=202605211314"></script>
+    <script defer src="/assets/js/translations.js?v=202605211314"></script>
+    <script defer src="/assets/js/translations-dropdown-template.js?v=202605211314"></script>
     <script defer src="/assets/js/contacts.js"></script>
     <script defer src="/assets/js/router.js"></script>
     <script defer src="/assets/js/ui/helpers.js"></script>
@@ -498,7 +478,7 @@
     <script src="/assets/js/vendor/chart.umd.min.js"></script>
     <script src="/assets/js/vendor/html2canvas.min.js"></script>
     <script src="/assets/js/vendor/jspdf.umd.min.js"></script>
-    <script src="/assets/js/profit-calculator.js?v=202605211253"></script>
+    <script src="/assets/js/profit-calculator.js?v=202605211314"></script>
 
     <script>
       document.addEventListener("DOMContentLoaded", function () {
@@ -536,7 +516,7 @@
     </script>
 
     <script src="/assets/js/utils/device-utils.js"></script>
-    <script src="/assets/js/spa-router.js?v=202605211253"></script>
+    <script src="/assets/js/spa-router.js?v=202605211314"></script>
 
     <script defer src="/assets/js/ui/floating-actions.js"></script>
   </body>
