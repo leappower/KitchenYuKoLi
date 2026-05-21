@@ -371,10 +371,14 @@ function resolvePage(reqPath) {
   f = path.join(__dirname, 'dist', clean + '-pc.html');
   if (isFile(f)) return f;
 
-  // 5. SPA shell (catch-all — unknown routes get SPA shell for client-side routing)
-  //    Unknown routes must NOT return 404.html, as Swup expects SPA shell for
-  //    client-side navigation and 404.html has no #spa-content.
-  //    404.html is ONLY used by GitHub Pages / CDNs when the path has no file.
+  // 4. Unknown route — return 404.html.
+  //    404.html is a complete page with navigator, footer, and 404 content.
+  //    It also has JS that redirects known routes (e.g., /home → /home/).
+  //    For truly unknown routes, it shows 'Page Not Found' without redirecting.
+  var f404 = path.join(__dirname, 'dist', '404.html');
+  if (isFile(f404)) return f404;
+
+  // 5. Last resort: SPA shell (fallback for servers without 404.html)
   return path.join(__dirname, 'dist', 'index.html');
 }
 
