@@ -247,6 +247,19 @@ function injectLangRegistry(html) {
   return html;
 }
 
+function injectTranslationsDropdown(html) {
+  // Already has translations-dropdown-template.js — skip (idempotent)
+  if (/translations-dropdown-template\.js/.test(html)) return html;
+  var bp = BASE_PATH ? BASE_PATH.replace(/\/$/, '') : '';
+  var tag = '<script defer src="' + bp + '/assets/js/translations-dropdown-template.js"></script>';
+  // Insert right after translations.js
+  html = html.replace(
+    /(\s*)(<script[^>]*src=["'][^"']*\/assets\/js\/translations\.js[^>]*>[^<]*<\/script>)/i,
+    '$1$2\n    ' + tag
+  );
+  return html;
+}
+
 /**
  * Generate a minimal responsive entry page for routes that have device-specific
  * HTML files (index-pc.html etc.) but no src/pages/<route>/index.html entry point.
@@ -275,6 +288,8 @@ function generateResponsiveEntry(route) {
       '<meta property="og:url" content="' + canonicalUrl + '">'
     );
     html = injectLangUrlSync(html);
+    html = injectLangRegistry(html);
+    html = injectTranslationsDropdown(html);
     if (BASE_PATH) {
       html = patchHtmlPaths(html);
     }
@@ -301,6 +316,7 @@ function generateResponsiveEntry(route) {
     '  <script defer src="' + bp + '/assets/js/ui/navigator.js"></script>',
     '  <script defer src="' + bp + '/assets/js/lang-registry.js"></script>',
     '  <script defer src="' + bp + '/assets/js/translations.js"></script>',
+    '  <script defer src="' + bp + '/assets/js/translations-dropdown-template.js"></script>',
     '</head>',
     '<body>',
     '  <noscript>',
@@ -358,6 +374,7 @@ function generateRouteIndex(route) {
   html = injectLangUrlSync(html);
   // Inject lang-registry.js before translations.js (if not already present)
   html = injectLangRegistry(html);
+  html = injectTranslationsDropdown(html);
 
   // Patch all root-absolute paths with BASE_PATH prefix
   html = patchHtmlPaths(html);
@@ -408,6 +425,7 @@ function copyDeviceFiles(route) {
     content = injectLangUrlSync(content);
     // Inject lang-registry.js before translations.js (if not already present)
     content = injectLangRegistry(content);
+    content = injectTranslationsDropdown(content);
     if (BASE_PATH) {
       content = patchHtmlPaths(content);
     }
