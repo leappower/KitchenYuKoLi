@@ -357,11 +357,17 @@ function resolvePage(reqPath) {
     if (isFile(f)) return f;
   }
 
-  // 3–5. Page resolution under dist/pages/
-  //    Try index.html → index-pc.html → <clean>-pc.html
+  // 3–5. Page resolution under dist/pages/ and dist/
+  //    dist/pages/<path>/index.html (with JS device redirect) — preferred
+  //    dist/<path>/index.html (SSG-generated, same redirect logic)
+  //    dist/pages/<path>/index-pc.html (fallback for routes without redirect)
+  //    dist/<path>/index-pc.html
+  //    dist/pages/<path>-pc.html (flat-file pattern)
   var candidates = [
     path.join(__dirname, 'dist', 'pages', clean, 'index.html'),
+    path.join(__dirname, 'dist', clean, 'index.html'),
     path.join(__dirname, 'dist', 'pages', clean, 'index-pc.html'),
+    path.join(__dirname, 'dist', clean, 'index-pc.html'),
     path.join(__dirname, 'dist', 'pages', clean + '-pc.html'),
   ];
   for (var i = 0; i < candidates.length; i++) {
