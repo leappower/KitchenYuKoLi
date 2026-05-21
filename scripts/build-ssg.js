@@ -298,11 +298,6 @@ function normalizeSpaContent(html) {
  * load device-specific file based on screen width.
  */
 function generateResponsiveEntry(route) {
-  // Serve index-pc.html content directly as index.html.
-  // PC variant provides the most complete layout (Tailwind responsive classes
-  // handle mobile/tablet/desktop via sm:/md:/lg:). Using index-mobile.html
-  // makes navigator variant="mobile" on desktop, breaking structure.
-  // Language handled by [i18n-url-sync] + translations.js.
   var srcDir = path.join(SRC_PAGES_DIR, route.slug);
   var srcFile = path.join(srcDir, 'index-pc.html');
   if (!fs.existsSync(srcFile)) {
@@ -313,6 +308,32 @@ function generateResponsiveEntry(route) {
     var html = fs.readFileSync(srcFile, 'utf-8');
     var bp = BASE_PATH || '';
     var canonicalUrl = 'https://www.kitchen.yukoli.com/' + (bp ? bp.replace(/^\//, '') + '/' : '') + route.slug + '/';
+
+    // Device-aware redirect: inject inline script to jump to correct version
+    // on direct SSG hit (SPA fetch uses index-mobile.html etc. and skips this).
+    // Device-aware redirect script (SSG直出时根据屏幕宽度跳转到正确版本)
+    // SPA fetch不经过此路径，不会触发跳转
+    // Note: JS string中 \\/ 输出为 \/，在HTML中成为正则字面量 \/index\.html$
+    var deviceRedirect = [
+      '<script>',
+      '!function(){',
+      'var w=window.innerWidth;',
+      'var t="";',
+      'if(w<768)t="index-mobile.html";',
+      'else if(w<1280)t="index-tablet.html";',
+      'if(t){',
+      'var p=location.pathname.replace(/\\/index\\.html$/,"").replace(/\\/+$/,"");',
+      'location.replace(p+"/"+t);',
+      '}',
+      '}();',
+      '</script>'
+    ].join('\n');
+    // Inject after <meta charset> (before external resources)
+    html = html.replace(
+      /<meta\s+charset[^>]*>/i,
+      '$&\n' + deviceRedirect
+    );
+
     html = html.replace(
       /<link\s+rel="canonical"\s+href="[^"]*"\s*\/?>/i,
       '<link rel="canonical" href="' + canonicalUrl + '"/>'

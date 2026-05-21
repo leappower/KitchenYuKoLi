@@ -118,8 +118,7 @@
       var deviceUtils = global.DeviceUtils;
       if (!deviceUtils || !deviceUtils.getDeviceType) return;
       var deviceType = deviceUtils.getDeviceType();
-      // deviceType is a number enum: 0=MOBILE, 1=TABLET, 2=PC
-      var suffixMap = { 0: "index-mobile.html", 1: "index-tablet.html", 2: "index-pc.html" };
+      var suffixMap = { mobile: "index-mobile.html", tablet: "index-tablet.html", pc: "index-pc.html" };
       var suffix = suffixMap[deviceType];
       if (!suffix) return; // safety
 
