@@ -596,254 +596,14 @@
   /**
    * 注入 Logo 链接的基础样式（仅注入一次）
    */
-  function injectLogoStyles() {
-    var style = document.createElement("style");
-    style.id = "nav-logo-styles";
-    style.textContent = [
-      "@media (min-width: 1024px) {",
-      "  .nav-logo-link {",
-      "    display: flex;",
-      "    align-items: center;",
-      "    border-radius: 8px;",
-      "    padding: 4px;",
-      "    transition: background .15s ease, transform .15s cubic-bezier(.32,.72,0,1), opacity .15s ease;",
-      "    -webkit-tap-highlight-color: transparent;",
-      "  }",
-      "  .nav-logo-link:active {",
-      "    background: rgba(236,91,19,.12);",
-      "    transform: scale(.92);",
-      "  }",
-      "  html.dark .nav-logo-link:active {",
-      "    background: rgba(236,91,19,.18);",
-      "  }",
-      "}",
-    ].join("\n");
-    document.head.appendChild(style);
-  }
 
   /**
    * 注入 iOS 风格搜索栏样式（仅注入一次）
    */
-  function injectSearchStyles() {
-    var style = document.createElement("style");
-    style.id = "ios-search-styles";
-    style.textContent = [
-      /* 搜索容器 */
-      ".ios-search-wrapper { display: flex; align-items: center; min-width: 0; }",
-
-      /* 搜索栏 */
-      ".ios-search-bar {",
-      "  display: flex;",
-      "  align-items: center;",
-      "  gap: 6px;",
-      "  width: 200px;",
-      "  padding: 7px 14px;",
-      "  border-radius: 9999px;",
-      "  background: rgba(120,120,128,0.12);",
-      "  backdrop-filter: blur(12px);",
-      "  -webkit-backdrop-filter: blur(12px);",
-      "  border: 1px solid rgba(120,120,128,0.18);",
-      "  transition: width 320ms cubic-bezier(0.4, 0, 0.2, 1),",
-      "              max-width 320ms cubic-bezier(0.4, 0, 0.2, 1),",
-      "              flex-basis 320ms cubic-bezier(0.4, 0, 0.2, 1),",
-      "              flex-grow 320ms cubic-bezier(0.4, 0, 0.2, 1),",
-      "              flex-shrink 320ms cubic-bezier(0.4, 0, 0.2, 1),",
-      "              background 200ms ease,",
-      "              border-color 200ms ease,",
-      "              box-shadow 200ms ease;",
-      "  overflow: visible;",
-      "  position: relative;",
-      "}",
-      /* Mobile: fill available space */
-      "@media (max-width: 767px) {",
-      "  .ios-search-bar {",
-      "    flex: 1 1 0;",
-      "    max-width: 100%;",
-      "    width: auto;",
-      "    padding: 5px 12px;",
-      "  }",
-      "}",
-      "/* Tablet: narrower default, stretch on focus */",
-      "@media (min-width: 768px) and (max-width: 1279px) {",
-      "  .ios-search-bar {",
-      "    flex: 0 1 55%;",
-      "    max-width: 380px;",
-      "  }",
-      "  .ios-search-bar.is-focused {",
-      "    flex: 0 0 70%;",
-      "    max-width: 480px;",
-      "  }",
-      "}",
-      ".ios-search-bar.is-focused {",
-      "  width: 280px;",
-      "  background: rgba(120,120,128,0.08);",
-      "  border-color: rgba(236,91,19,0.4);",
-      "  box-shadow: 0 0 0 3px rgba(236,91,19,0.12);",
-      "}",
-      "/* Mobile focused: stretch to full width */",
-      "@media (max-width: 767px) {",
-      "  .ios-search-bar.is-focused {",
-      "    flex: 1 1 100%;",
-      "    max-width: 100%;",
-      "    width: auto;",
-      "  }",
-      "}",
-
-      /* 暗色模式搜索栏 */
-      "html.dark .ios-search-bar {",
-      "  background: rgba(255,255,255,0.08);",
-      "  border-color: rgba(255,255,255,0.12);",
-      "}",
-      "html.dark .ios-search-bar.is-focused {",
-      "  background: rgba(255,255,255,0.10);",
-      "  border-color: rgba(236,91,19,0.5);",
-      "  box-shadow: 0 0 0 3px rgba(236,91,19,0.15);",
-      "}",
-
-      /* 搜索图标 */
-      ".ios-search-icon {",
-      "  font-size: 17px !important;",
-      "  line-height: 1;",
-      "  flex-shrink: 0;",
-      "  color: rgba(60,60,67,0.6);",
-      "  transition: color 200ms ease;",
-      "}",
-      "html.dark .ios-search-icon { color: rgba(235,235,245,0.6); }",
-      ".ios-search-bar.is-focused .ios-search-icon { color: #ec5b13; }",
-
-      /* 搜索输入框 */
-      ".ios-search-input {",
-      "  flex: 1;",
-      "  min-width: 0;",
-      "  background: transparent;",
-      "  border: none;",
-      "  outline: none;",
-      "  box-shadow: none;",
-      "  font-size: 14px;",
-      "  font-family: inherit;",
-      "  color: inherit;",
-      "  line-height: 1.4;",
-      "  -webkit-appearance: none;",
-      "}",
-      ".ios-search-input::-webkit-search-cancel-button { display: none; }",
-      ".ios-search-input::placeholder { color: rgba(60,60,67,0.45); }",
-      "html.dark .ios-search-input::placeholder { color: rgba(235,235,245,0.4); }",
-
-      /* 清除按钮 */
-      ".ios-search-clear {",
-      "  display: none;",
-      "  align-items: center;",
-      "  justify-content: center;",
-      "  flex-shrink: 0;",
-      "  background: rgba(120,120,128,0.28);",
-      "  border: none;",
-      "  border-radius: 50%;",
-      "  width: 18px;",
-      "  height: 18px;",
-      "  padding: 0;",
-      "  cursor: pointer;",
-      "  transition: opacity 150ms ease, background 150ms ease;",
-      "}",
-      ".ios-search-clear .material-symbols-outlined {",
-      "  font-size: 14px !important;",
-      "  color: rgba(60,60,67,0.55);",
-      "  line-height: 1;",
-      "}",
-      "html.dark .ios-search-clear { background: rgba(255,255,255,0.20); }",
-      "html.dark .ios-search-clear .material-symbols-outlined {",
-      "  color: rgba(235,235,245,0.55);",
-      "}",
-      ".ios-search-clear:hover { opacity: 0.75; }",
-      ".ios-search-clear.is-visible { display: flex; }",
-      /* Search Results Dropdown */
-      ".search-results-panel {",
-      "  position: absolute;",
-      "  top: calc(100% + 6px);",
-      "  left: 0;",
-      "  right: 0;",
-      "  background: #fff;",
-      "  border: 1px solid rgba(0,0,0,0.08);",
-      "  border-radius: 12px;",
-      "  box-shadow: 0 8px 30px rgba(0,0,0,0.12);",
-      "  max-height: 60vh;",
-      "  overflow-y: auto;",
-      "  z-index: 9999;",
-      "  display: none;",
-      "  padding: 6px 0;",
-      "}",
-      "html.dark .search-results-panel {",
-      "  background: #1c1c1e;",
-      "  border-color: rgba(255,255,255,0.08);",
-      "  box-shadow: 0 8px 30px rgba(0,0,0,0.4);",
-      "}",
-      ".search-results-panel.is-open { display: block; }",
-      ".search-results-panel .sr-item {",
-      "  display: block;",
-      "  padding: 10px 16px;",
-      "  cursor: pointer;",
-      "  text-decoration: none;",
-      "  color: inherit;",
-      "  border-bottom: 1px solid rgba(0,0,0,0.04);",
-      "  transition: background 100ms ease;",
-      "}",
-      "html.dark .search-results-panel .sr-item {",
-      "  border-color: rgba(255,255,255,0.04);",
-      "}",
-      ".search-results-panel .sr-item:last-child { border-bottom: none; }",
-      ".search-results-panel .sr-item:hover,",
-      ".search-results-panel .sr-item.is-highlighted {",
-      "  background: rgba(236,91,19,0.06);",
-      "}",
-      ".search-results-panel .sr-title {",
-      "  font-size: 14px;",
-      "  font-weight: 600;",
-      "  color: #1c1c1e;",
-      "  margin-bottom: 2px;",
-      "  white-space: nowrap;",
-      "  overflow: hidden;",
-      "  text-overflow: ellipsis;",
-      "}",
-      "html.dark .search-results-panel .sr-title {",
-      "  color: #f5f5f7;",
-      "}",
-      ".search-results-panel .sr-snippet {",
-      "  font-size: 12px;",
-      "  color: #8e8e93;",
-      "  line-height: 1.3;",
-      "  display: -webkit-box;",
-      "  -webkit-line-clamp: 2;",
-      "  -webkit-box-orient: vertical;",
-      "  overflow: hidden;",
-      "}",
-      ".search-results-panel .sr-empty {",
-      "  padding: 20px 16px;",
-      "  text-align: center;",
-      "  color: #8e8e93;",
-      "  font-size: 13px;",
-      "}",
-      ".search-results-panel .sr-category {",
-      "  display: inline-block;",
-      "  font-size: 10px;",
-      "  font-weight: 600;",
-      "  text-transform: uppercase;",
-      "  letter-spacing: 0.5px;",
-      "  color: #ec5b13;",
-      "  margin-bottom: 2px;",
-      "}",
-    ].join("\n");
-    document.head.appendChild(style);
-  }
 
   /**
    * 注入所有 dropdown 模块的基础样式
    */
-  function injectDropdownStyles() {
-    if (window.DropdownBaseStyles) window.DropdownBaseStyles.inject();
-    if (window.ProductsDropdown) window.ProductsDropdown.injectAllStyles();
-    if (window.ApplicationsDropdown) window.ApplicationsDropdown.injectAllStyles();
-    if (window.SupportDropdown) window.SupportDropdown.injectAllStyles();
-    if (window.AboutDropdown) window.AboutDropdown.injectAllStyles();
-  }
 
   /* ================================================================
    *  Dropdown 互斥逻辑
@@ -937,12 +697,12 @@
       var searchTimer = null;
       var selectedIndex = -1;
 
-      var closeResults = function() {
+      var closeResults = function () {
         resultsPanel.classList.remove("is-open");
         selectedIndex = -1;
       };
 
-      var renderResults = function(results, query) {
+      var renderResults = function (results, query) {
         resultsPanel.innerHTML = "";
         if (!query || query.length === 0) {
           closeResults();
@@ -950,9 +710,7 @@
         }
 
         if (results.length === 0) {
-          resultsPanel.innerHTML = '<div class="sr-empty">' +
-            'No results found' +
-            '</div>';
+          resultsPanel.innerHTML = '<div class="sr-empty">' + "No results found" + "</div>";
           resultsPanel.classList.add("is-open");
           selectedIndex = -1;
           return;
@@ -961,12 +719,21 @@
         var html = "";
         for (var i = 0; i < results.length; i++) {
           var r = results[i];
-          var cat = r.category ? '<div class="sr-category">' + escapeHtml(r.category) + '</div>' : "";
-          html += '<a class="sr-item" href="' + escapeHtml(r.path) + '" data-index="' + i + '">' +
+          var cat = r.category ? '<div class="sr-category">' + escapeHtml(r.category) + "</div>" : "";
+          html +=
+            '<a class="sr-item" href="' +
+            escapeHtml(r.path) +
+            '" data-index="' +
+            i +
+            '">' +
             cat +
-            '<div class="sr-title">' + escapeHtml(r.title || "Untitled") + '</div>' +
-            '<div class="sr-snippet">' + escapeHtml(r.snippet || "") + '</div>' +
-            '</a>';
+            '<div class="sr-title">' +
+            escapeHtml(r.title || "Untitled") +
+            "</div>" +
+            '<div class="sr-snippet">' +
+            escapeHtml(r.snippet || "") +
+            "</div>" +
+            "</a>";
         }
         resultsPanel.innerHTML = html;
         resultsPanel.classList.add("is-open");
@@ -975,11 +742,11 @@
         // Add click handlers
         var items = resultsPanel.querySelectorAll(".sr-item");
         for (var j = 0; j < items.length; j++) {
-          (function(item) {
-            item.addEventListener("mousedown", function(e) {
+          (function (item) {
+            item.addEventListener("mousedown", function (e) {
               e.preventDefault();
             });
-            item.addEventListener("click", function() {
+            item.addEventListener("click", function () {
               var href = item.getAttribute("href");
               if (href) {
                 if (window.SpaRouter && typeof window.SpaRouter.navigate === "function") {
@@ -994,7 +761,7 @@
         }
       };
 
-      var doSearch = function(query) {
+      var doSearch = function (query) {
         if (typeof window.ProductSearchEngine !== "undefined" && window.ProductSearchEngine) {
           var results = window.ProductSearchEngine.search(query);
           renderResults(results, query);
@@ -1003,7 +770,7 @@
         }
       };
 
-      searchInput.addEventListener("input", function() {
+      searchInput.addEventListener("input", function () {
         updateClearVisibility();
         var val = searchInput.value.trim();
         if (val.length === 0) {
@@ -1011,13 +778,13 @@
           return;
         }
         clearTimeout(searchTimer);
-        searchTimer = setTimeout(function() {
+        searchTimer = setTimeout(function () {
           doSearch(val);
         }, 200);
       });
 
       // Keyboard navigation for results
-      searchInput.addEventListener("keydown", function(e) {
+      searchInput.addEventListener("keydown", function (e) {
         if (!resultsPanel.classList.contains("is-open")) return;
         var items = resultsPanel.querySelectorAll(".sr-item");
         if (items.length === 0) return;
@@ -1041,7 +808,7 @@
       });
 
       // Close on outside click
-      document.addEventListener("mousedown", function(e) {
+      document.addEventListener("mousedown", function (e) {
         if (!bar.contains(e.target)) {
           closeResults();
         }
@@ -1049,16 +816,23 @@
 
       // Close on scroll (debounced, only if panel is open)
       var scrollTimer = null;
-      document.addEventListener("scroll", function() {
-        if (!resultsPanel.classList.contains("is-open")) return;
-        clearTimeout(scrollTimer);
-        scrollTimer = setTimeout(closeResults, 100);
-      }, { passive: true });
+      document.addEventListener(
+        "scroll",
+        function () {
+          if (!resultsPanel.classList.contains("is-open")) return;
+          clearTimeout(scrollTimer);
+          scrollTimer = setTimeout(closeResults, 100);
+        },
+        { passive: true }
+      );
     });
 
     /* Preload search index for faster first search */
-    if (typeof window.ProductSearchEngine !== 'undefined' && window.ProductSearchEngine &&
-        typeof window.ProductSearchEngine.preload === 'function') {
+    if (
+      typeof window.ProductSearchEngine !== "undefined" &&
+      window.ProductSearchEngine &&
+      typeof window.ProductSearchEngine.preload === "function"
+    ) {
       window.ProductSearchEngine.preload();
     }
   }
@@ -1437,12 +1211,9 @@
    */
   function registerListeners() {
     /* Inject CSS (one-time — these functions check by ID internally) */
-    injectDropdownStyles();
-    injectLogoStyles();
-    injectSearchStyles();
 
     initSearchInteraction();
-    
+
     /* Dropdown trigger click — close other dropdowns on trigger click.
      * DropdownBase.bindTriggers() handles toggle (touch) or pass-through (non-touch). */
     document.addEventListener(
@@ -1572,7 +1343,6 @@
     var navItems = DEFAULT_NAV_ITEMS;
 
     /* 确保 dropdown 样式已注入（SPA 动态加载场景） */
-    injectDropdownStyles();
 
     /* ---------- 1. 更新 dropdown trigger 元素的高亮 ---------- */
     var triggerSelectors = [
@@ -1719,8 +1489,7 @@
     if (matchedItem && matchedItem.classList) {
       matchedItem.classList.add("is-active");
     }
-
-    }
+  }
 
   /* ================================================================
    *  highlightCategory() — 手动高亮产品分类

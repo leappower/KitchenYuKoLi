@@ -38,7 +38,9 @@
   /** Build tracked WhatsApp URL via Contacts module (or fallback to static) */
   function buildWhatsAppUrl() {
     if (window.Contacts && typeof window.Contacts.contactsWhatsApp === "function") {
-      return window.Contacts.contactsWhatsApp({ source: window.uiText("floating_action_wa_source", "Floating Button") });
+      return window.Contacts.contactsWhatsApp({
+        source: window.uiText("floating_action_wa_source", "Floating Button"),
+      });
     }
     return WHATSAPP_HREF;
   }
@@ -74,88 +76,6 @@
    * 2. STYLES
    * ───────────────────────────────────────────── */
 
-  function injectStyles() {
-    if (document.getElementById("floating-actions-styles")) return;
-    var style = document.createElement("style");
-    style.id = "floating-actions-styles";
-    style.textContent = [
-      "#floating-actions-container {",
-      "  position: fixed;",
-      "  right: 1rem;",
-      "  bottom: 5rem;",
-      "  @media (max-width: 767px) { right: 1.25rem; }",
-      "  z-index: var(--z-fab, 1100);",
-      "  display: flex;",
-      "  flex-direction: column;",
-      "  align-items: center;",
-      "  gap: 0.75rem;",
-      "}",
-      "@media (max-width: 767px) {",
-      "  #floating-actions-container { bottom: 7.5rem; }",
-      "}",
-
-      "#floating-actions-container .fab-btn {",
-      "  display: flex;",
-      "  align-items: center;",
-      "  justify-content: center;",
-      "  width: 3.5rem;",
-      "  height: 3.5rem;",
-      "  border-radius: 9999px;",
-      "  box-shadow: 0 4px 20px rgba(0,0,0,.25);",
-      "  transition: transform .2s ease, box-shadow .2s ease;",
-      "  flex-shrink: 0;",
-      "  text-decoration: none;",
-      "}",
-
-      "#floating-actions-container .fab-btn:hover {",
-      "  transform: scale(1.15);",
-      "}",
-
-      "#floating-actions-container .fab-btn:active {",
-      "  transform: scale(0.93);",
-      "}",
-
-      "#fab-whatsapp {",
-      "  background: #25D366;",
-      "  color: #fff;",
-      "}",
-
-      "#fab-backtotop {",
-      "  background: #fff;",
-      "  color: #1e293b;",
-      "  box-shadow: 0 4px 20px rgba(0,0,0,.18);",
-      "  border: none;",
-      "  cursor: pointer;",
-      "  opacity: 0;",
-      "  pointer-events: none;",
-      "  transform: scale(0) translateY(8px);",
-      "  transition: opacity .3s ease, transform .3s ease, box-shadow .2s ease;",
-      "}",
-
-      "#fab-backtotop.visible {",
-      "  opacity: 1;",
-      "  pointer-events: auto;",
-      "  transform: scale(1) translateY(0);",
-      "}",
-
-      "#fab-backtotop:hover {",
-      "  box-shadow: 0 6px 24px rgba(0,0,0,.22);",
-      "}",
-
-      /* Pulse animation — gentle, single pulse */
-      "@keyframes fab-pulse {",
-      "  0%   { transform: scale(1);    box-shadow: 0 4px 20px rgba(0,0,0,.25), 0 0 0 0 rgba(37,211,102,.6); }",
-      "  40%  { transform: scale(1.12); box-shadow: 0 6px 24px rgba(0,0,0,.28), 0 0 0 10px rgba(37,211,102,.2); }",
-      "  100% { transform: scale(1);    box-shadow: 0 4px 20px rgba(0,0,0,.25), 0 0 0 16px rgba(37,211,102,0); }",
-      "}",
-
-      ".fab-pulsing {",
-      "  animation: fab-pulse 1.2s cubic-bezier(.36,.07,.19,.97) 1 !important;",
-      "}",
-    ].join("\n");
-    document.head.appendChild(style);
-  }
-
   /* ─────────────────────────────────────────────
    * 3. HELPERS
    * ───────────────────────────────────────────── */
@@ -188,7 +108,6 @@
   }
 
   FloatingActionsController.prototype.init = function () {
-    injectStyles();
     this._createDOM();
     this._bindButtons();
     this._bindScroll();

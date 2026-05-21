@@ -551,7 +551,7 @@ function generate404() {
     '  <link href="' + bp + '/assets/fonts/local-fonts.css" rel="stylesheet"/>',
     '  <link rel="stylesheet" href="' + bp + '/assets/css/tailwind.css">',
     '  <link rel="stylesheet" href="' + bp + '/assets/css/z-index-system.css">',
-    '  <link rel="stylesheet" href="' + bp + '/assets/css/performance-optimized.css"/>',
+    '  <link rel="stylesheet" href="' + bp + '/assets/css/performance-optimizations.css"/>',
     '',
     '  <style>',
     '    body { font-family: "Public Sans", sans-serif; min-height: 100dvh; }',
@@ -799,6 +799,54 @@ function main() {
       log('  ✓ Patched local-fonts.css font URLs');
     }
   }
+
+// Step 6.5: Inject components.css into all SSG pages and SPA shell
+  // This replaces previously dynamic injectStyles() calls with static CSS.
+  log('\nStep 6.5: Injecting components.css...');
+  var _componentsCssPath = path.join(DIST_DIR, 'assets', 'css', 'components.css');
+  var _componentsInjected = 0;
+
+  // Copy components.css from src to dist
+  var _srcComponentsCss = path.resolve(__dirname, '..', 'src', 'assets', 'css', 'components.css');
+  if (fs.existsSync(_srcComponentsCss)) {
+    fs.copyFileSync(_srcComponentsCss, _componentsCssPath);
+    log('  ✓ Copied components.css to dist/assets/css/');
+  } else {
+    log('  ⚠ components.css not found at src/assets/css/components.css');
+  }
+
+  // Inject <link> into all HTML files in dist/
+  function _injectComponentsCss(html) {
+    if (html.indexOf('components.css') !== -1) return html; // already injected
+    // Insert as the LAST <link> before </head> to ensure highest priority
+    // (same as original JS injectStyles which appended <style> after all CSS)
+    var tag = '  <link rel="stylesheet" href="/assets/css/components.css" />';
+    // Insert before </head>
+    html = html.replace('</head>', '  ' + tag + '\n</head>');
+    return html;
+  }
+
+  // Walk dist/ for all .html files
+  function _walkHtml(dir) {
+    if (!fs.existsSync(dir)) return;
+    var entries = fs.readdirSync(dir, { withFileTypes: true });
+    entries.forEach(function (entry) {
+      var fullPath = path.join(dir, entry.name);
+      if (entry.isDirectory()) {
+        _walkHtml(fullPath);
+      } else if (entry.name.endsWith('.html')) {
+        var html = fs.readFileSync(fullPath, 'utf-8');
+        var modified = _injectComponentsCss(html);
+        if (modified !== html) {
+          fs.writeFileSync(fullPath, modified);
+          _componentsInjected++;
+        }
+      }
+    });
+  }
+
+  _walkHtml(DIST_DIR);
+  log('  ✓ Injected components.css into ' + _componentsInjected + ' HTML files');
 
   // Summary
   log('\n────────────────────────────────────────');

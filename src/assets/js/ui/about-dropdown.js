@@ -26,42 +26,6 @@
 
   /* ───────────────────────── CSS ───────────────────────── */
 
-  function injectStyles() {
-    if (window.DropdownBaseStyles) window.DropdownBaseStyles.inject();
-
-    if (document.getElementById("abt-dropdown-styles")) return;
-    var style = document.createElement("style");
-    style.id = "abt-dropdown-styles";
-    style.textContent = [
-      /* Split trigger toggle button */
-      ".abt-dropdown-trigger {",
-      "  display: flex; align-items: center; gap: 4px;",
-      "}",
-      ".abt-dropdown-link {",
-      "  text-decoration: none; color: inherit;",
-      "}",
-      ".abt-dropdown-toggle {",
-      "  display: flex; align-items: center; justify-content: center;",
-      "  width: 28px; height: 28px; padding: 0; border: none;",
-      "  background: transparent; cursor: pointer; border-radius: 6px;",
-      "  -webkit-tap-highlight-color: transparent;",
-      "  transition: background .15s ease;",
-      "}",
-      ".abt-dropdown-toggle:active { background: rgba(0,0,0,.06); }",
-      "html.dark .abt-dropdown-toggle:active { background: rgba(255,255,255,.08); }",
-      ".abt-dropdown-toggle .abt-dropdown-arrow {",
-      "  font-size: 20px; color: rgba(60,60,67,.4); transition: transform .2s ease;",
-      "}",
-      ".abt-dropdown-wrap.is-open .abt-dropdown-toggle .abt-dropdown-arrow {",
-      "  transform: rotate(180deg);",
-      "}",
-      "html.dark .abt-dropdown-toggle .abt-dropdown-arrow {",
-      "  color: rgba(235,235,245,.35);",
-      "}",
-    ].join("\n");
-    document.head.appendChild(style);
-  }
-
   /* ───────────────────────── RENDER ───────────────────────── */
 
   function renderDropdown(cfg) {
@@ -196,7 +160,6 @@
   global.AboutDropdown = global.DropdownBase.create({
     prefix: "abt",
     getItems: getItems,
-    injectStyles: injectStyles,
     renderDropdown: renderDropdown,
     buildPopupContent: buildPopupContent,
     defaultHref: "/about/",

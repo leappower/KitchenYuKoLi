@@ -67,20 +67,6 @@ window.LanguageDropdownTemplate = {
   },
 
   // Inject styles (idempotent)
-  _injectStyles: function () {
-    if (document.getElementById("lang-dropdown-styles")) return;
-    var s = document.createElement("style");
-    s.id = "lang-dropdown-styles";
-    s.textContent = [
-      ".lang-option.is-active { background: rgba(236,91,19,.08); color: #ec5b13; }",
-      ".lang-option.is-active span { color: #ec5b13; }",
-      "html.dark .lang-option.is-active { background: rgba(236,91,19,.14); color: #f97316; }",
-      "html.dark .lang-option.is-active span { color: #f97316; }",
-      "#language-dropdown { animation: langDropIn .2s cubic-bezier(.32,.72,0,1); }",
-      "@keyframes langDropIn { from { opacity:0; transform:translateY(-4px) scale(.97); } to { opacity:1; transform:translateY(0) scale(1); } }",
-    ].join("\n");
-    document.head.appendChild(s);
-  },
 
   // 创建下拉框 HTML
   createDropdownHTML: function (languages, currentLang) {
@@ -107,7 +93,6 @@ window.LanguageDropdownTemplate = {
       return code;
     };
 
-    this._injectStyles();
     this._initFromRegistry();
 
     var groupHtml = "";

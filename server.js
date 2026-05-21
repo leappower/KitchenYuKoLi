@@ -371,17 +371,6 @@ function resolvePage(reqPath) {
   f = path.join(__dirname, 'dist', clean + '-pc.html');
   if (isFile(f)) return f;
 
-  // 4. Check if this is a known route without trailing slash — redirect
-  //    (handles /home → /home/, /products → /products/, etc.)
-  //    This check uses ROUTE_SLUGS compiled from the build config.
-  if (typeof ROUTE_SLUGS !== 'undefined') {
-    var stripped = clean.replace(/^\//, '');
-    if (ROUTE_SLUGS.indexOf(stripped) !== -1) {
-      var target = clean + '/' + (req.url.slice(req.path.length) || '');
-      // Already handled by trailing-slash middleware above — fall through
-    }
-  }
-
   // 5. SPA shell (catch-all — unknown routes get SPA shell for client-side routing)
   //    Unknown routes must NOT return 404.html, as Swup expects SPA shell for
   //    client-side navigation and 404.html has no #spa-content.

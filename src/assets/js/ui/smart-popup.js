@@ -247,31 +247,7 @@
       if (document.getElementById("smart-popup-overlay")) return;
 
       // 注入弹窗样式
-      var overlayStyle = document.createElement("style");
-      overlayStyle.textContent = [
-        // 基础隐藏状态
-        "#smart-popup-overlay{visibility:hidden;opacity:0;pointer-events:none;" +
-          "position:fixed;inset:0;z-index:var(--z-modal,1000);" +
-          "display:flex;align-items:center;justify-content:center;" +
-          "background:rgba(0,0,0,.5);backdrop-filter:blur(4px);" +
-          "transition:opacity .25s ease,visibility .25s ease}",
-        // 展示状态
-        "#smart-popup-overlay.show{visibility:visible;opacity:1;pointer-events:auto}",
-        // 关闭动画状态
-        "#smart-popup-overlay.closing{opacity:0;pointer-events:none;" +
-          "transition:opacity .2s ease,visibility 0s .2s;visibility:hidden}",
-        // 进入动画
-        "@keyframes popup-enter{from{opacity:0;transform:translateY(16px) scale(.97)}" +
-          "to{opacity:1;transform:translateY(0) scale(1)}}",
-        "#smart-popup-overlay.show > div{animation:popup-enter .25s cubic-bezier(.34,1.2,.64,1) both;" +
-          "will-change:transform,opacity}",
-        // 退出动画
-        "@keyframes popup-exit{from{opacity:1;transform:translateY(0) scale(1)}" +
-          "to{opacity:0;transform:translateY(10px) scale(.97)}}",
-        "#smart-popup-overlay.closing > div{animation:popup-exit .2s ease forwards}",
-      ].join("\n");
-      document.head.appendChild(overlayStyle);
-
+      // [style in components.css]
       // 注入弹窗 HTML 结构
       var container = document.createElement("div");
       container.innerHTML =

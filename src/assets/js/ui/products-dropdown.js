@@ -23,81 +23,6 @@
 
   /* ───────────────────────── CSS ───────────────────────── */
 
-  function injectStyles() {
-    if (window.DropdownBaseStyles) window.DropdownBaseStyles.inject();
-
-    [
-      "prod-ios-dropdown-styles",
-      "prod-dropdown-styles-2026",
-      "prod-dropdown-pc-styles",
-      "prod-dropdown-tablet-styles",
-      "prod-dropdown-styles-v2",
-      "prod-dropdown-styles-v3",
-    ].forEach(function (id) {
-      var old = document.getElementById(id);
-      if (old) old.remove();
-    });
-
-    var style = document.createElement("style");
-    style.id = "prod-dropdown-styles-v4";
-    style.setAttribute("data-ver", "2026-05-20-v5");
-    style.textContent = [
-      ".prod-dropdown-card { min-width: 320px; max-width: 420px; }",
-      ".prod-dropdown-emoji {",
-      "  margin-left: auto; font-size: 13px; line-height: 1; opacity: .85; flex-shrink: 0;",
-      "}",
-      ".prod-viewall-item {",
-      "  display: flex; align-items: center; gap: 8px;",
-      "  padding: 9px 12px; font-size: 13px; font-weight: 600; color: #1d1d1f;",
-      "  text-decoration: none; border-radius: 10px; transition: background .1s ease;",
-      "}",
-      ".prod-viewall-item:hover { background: rgba(236,91,19,.06); color: #ec5b13; }",
-      ".prod-viewall-item .material-symbols-outlined { font-size: 16px; }",
-      "html.dark .prod-viewall-item { color: #f5f5f7; }",
-      "html.dark .prod-viewall-item:hover { background: rgba(236,91,19,.10); color: #f97316; }",
-      ".prod-popup-emoji {",
-      "  margin-left: auto; font-size: 15px; opacity: .85; flex-shrink: 0;",
-      "}",
-      /* Overview item styling */
-      ".prod-overview-item {",
-      "  display: flex; align-items: center; gap: 8px;",
-      "  padding: 9px 12px; font-size: 13px; font-weight: 700; color: #1d1d1f;",
-      "  text-decoration: none; border-radius: 10px; transition: background .1s ease;",
-      "}",
-      ".prod-overview-item:hover { background: rgba(236,91,19,.06); color: #ec5b13; }",
-      "html.dark .prod-overview-item { color: #f5f5f7; }",
-      "html.dark .prod-overview-item:hover { background: rgba(236,91,19,.10); color: #f97316; }",
-      /* Split trigger toggle button */
-      ".prod-dropdown-trigger {",
-      "  display: flex; align-items: center; gap: 4px;",
-      "}",
-      ".prod-dropdown-link {",
-      "  text-decoration: none; color: inherit;",
-      "}",
-      ".prod-dropdown-toggle {",
-      "  display: flex; align-items: center; justify-content: center;",
-      "  width: 28px; height: 28px; padding: 0; border: none;",
-      "  background: transparent; cursor: pointer; border-radius: 6px;",
-      "  -webkit-tap-highlight-color: transparent;",
-      "  transition: background .15s ease;",
-      "}",
-      ".prod-dropdown-toggle:active { background: rgba(0,0,0,.06); }",
-      "html.dark .prod-dropdown-toggle:active { background: rgba(255,255,255,.08); }",
-      ".prod-dropdown-toggle .prod-dropdown-arrow {",
-      "  font-size: 20px; color: rgba(60,60,67,.4); transition: transform .2s ease;",
-      "}",
-      ".prod-dropdown-wrap.is-open .prod-dropdown-toggle .prod-dropdown-arrow {",
-      "  transform: rotate(180deg);",
-      "}",
-      "html.dark .prod-dropdown-toggle .prod-dropdown-arrow {",
-      "  color: rgba(235,235,245,.35);",
-      "}",
-    ].join("\n");
-    document.head.appendChild(style);
-  }
-
-  /* ───────────────────────── RENDER ───────────────────────── */
-
   function renderDropdown(cfg) {
     var parentHref = "/products/";
     var viewAllHref = "/products/all/";
@@ -254,7 +179,6 @@
     getItems: function () {
       return SUBSERIES;
     },
-    injectStyles: injectStyles,
     renderDropdown: renderDropdown,
     buildPopupContent: buildPopupContent,
     defaultHref: "/products/",

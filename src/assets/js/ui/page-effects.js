@@ -55,16 +55,7 @@
   function initScrollAnimation() {
     // Inject keyframe + utility classes if not already present
     if (!document.getElementById("pi-scroll-anim-style")) {
-      var style = document.createElement("style");
-      style.id = "pi-scroll-anim-style";
-      style.textContent = [
-        ".animate-hidden{opacity:0;transform:translate3d(0,28px,0);transition:opacity .4s cubic-bezier(0.4,0,0.2,1),transform .4s cubic-bezier(0.4,0,0.2,1);}",
-        ".animate-visible{opacity:1!important;transform:translate3d(0,0,0)!important;}",
-        ".animate-delay-1{transition-delay:.1s;}",
-        ".animate-delay-2{transition-delay:.2s;}",
-        ".animate-delay-3{transition-delay:.3s;}",
-      ].join("");
-      document.head.appendChild(style);
+      // [style in components.css]
     }
 
     if (!("IntersectionObserver" in global)) return; // graceful degradation
@@ -122,25 +113,7 @@
 
     // Inject styles
     if (!document.getElementById("pi-sticky-cta-style")) {
-      var s = document.createElement("style");
-      s.id = "pi-sticky-cta-style";
-      s.textContent = [
-        "#yukoli-sticky-cta{position:fixed;bottom:0;left:0;right:0;z-index:calc(var(--z-footer, 10) + 1);",
-        "background:#fff;border-top:2px solid #ec5b13;padding:10px 24px;",
-        "display:flex;align-items:center;justify-content:space-between;",
-        "box-shadow:0 -4px 24px rgba(0,0,0,.12);",
-        "transform:translateY(100%);transition:transform .35s cubic-bezier(.4,0,.2,1);}",
-        "#yukoli-sticky-cta.visible{transform:translateY(0);}",
-        "#yukoli-sticky-cta .sc-title{font-weight:700;font-size:.95rem;color:#0f172a;}",
-        "#yukoli-sticky-cta .sc-sub{font-size:.78rem;color:#64748b;}",
-        "#yukoli-sticky-cta .sc-btn{background:#ec5b13;color:#fff;border:none;",
-        "padding:9px 20px;border-radius:6px;font-weight:700;font-size:.85rem;",
-        "cursor:pointer;white-space:nowrap;}",
-        "#yukoli-sticky-cta .sc-btn:hover{opacity:.88;}",
-        "#yukoli-sticky-cta .sc-close{background:none;border:none;cursor:pointer;",
-        "color:#94a3b8;font-size:18px;padding:4px 8px;line-height:1;}",
-      ].join("");
-      document.head.appendChild(s);
+    // [style in components.css]
     }
 
     var bar = document.getElementById("yukoli-sticky-cta");
@@ -225,14 +198,7 @@
   function initProgressiveDisclosure() {
     // Inject collapse styles
     if (!document.getElementById("pi-expand-style")) {
-      var s = document.createElement("style");
-      s.id = "pi-expand-style";
-      s.textContent = [
-        ".expandable{max-height:0;overflow:hidden;",
-        "transition:max-height .45s ease,opacity .35s ease;opacity:0;}",
-        ".expandable.expanded{max-height:2000px;opacity:1;}",
-      ].join("");
-      document.head.appendChild(s);
+      // [style in components.css]
     }
 
     // 1. Buttons with data-expand attribute
@@ -286,23 +252,7 @@
    */
   function initToastSystem() {
     if (!document.getElementById("pi-toast-style")) {
-      var s = document.createElement("style");
-      s.id = "pi-toast-style";
-      s.textContent = [
-        "#yukoli-toast-container{position:fixed;top:80px;right:24px;z-index:var(--z-toast, 400);",
-        "display:flex;flex-direction:column;gap:10px;pointer-events:none;}",
-        ".yukoli-toast{padding:12px 18px 12px 14px;border-radius:8px;",
-        'font-family:"Public Sans",sans-serif;font-size:.875rem;font-weight:600;',
-        "display:flex;align-items:center;gap:10px;max-width:340px;",
-        "box-shadow:0 8px 24px rgba(0,0,0,.14);pointer-events:auto;",
-        "animation:toastIn .3s ease,toastOut .3s ease 2.7s forwards;}",
-        ".yukoli-toast.success{background:#16a34a;color:#fff;}",
-        ".yukoli-toast.error{background:#dc2626;color:#fff;}",
-        ".yukoli-toast.info{background:#0ea5e9;color:#fff;}",
-        "@keyframes toastIn{from{opacity:0;transform:translateX(60px)}to{opacity:1;transform:none}}",
-        "@keyframes toastOut{from{opacity:1}to{opacity:0;transform:translateX(60px)}}",
-      ].join("");
-      document.head.appendChild(s);
+      // [style in components.css]
     }
 
     var container = document.getElementById("yukoli-toast-container");
@@ -347,15 +297,7 @@
   function initPageTransition() {
     // Inject fade animation CSS
     if (!document.getElementById("pi-transition-style")) {
-      var s = document.createElement("style");
-      s.id = "pi-transition-style";
-      s.textContent = [
-        "@keyframes pageFadeOut{from{opacity:1}to{opacity:0}}",
-        "@keyframes pageFadeIn{from{opacity:0}to{opacity:1}}",
-        ".page-fade-in{animation:pageFadeIn .25s ease;}",
-        ".page-fade-out{animation:pageFadeOut .2s ease forwards;}",
-      ].join("");
-      document.head.appendChild(s);
+      // [style in components.css]
     }
 
     // Fade in on load

@@ -157,21 +157,6 @@
 
   var floatingBarId = "compare-floating-bar";
 
-  function injectFloatingBarStyles() {
-    if (document.getElementById("compare-bar-styles")) return;
-    var style = document.createElement("style");
-    style.id = "compare-bar-styles";
-    style.textContent =
-      "#compare-floating-bar { transition: transform 0.3s cubic-bezier(0.4,0,0.2,1), opacity 0.3s ease; transform: translateY(100%); opacity: 0; pointer-events: none; }" +
-      "#compare-floating-bar.visible { transform: translateY(0); opacity: 1; pointer-events: auto; }" +
-      ".compare-selected { box-shadow: 0 0 0 2px rgba(236,91,19,0.5); }" +
-      ".compare-btn { transition: all 0.2s ease; }" +
-      ".compare-btn:hover { opacity: 0.85; }" +
-      ".compare-btn-mobile { position: absolute; top: 8px; right: 8px; z-index: 10; }" +
-      "@media (max-width: 767px) { body { padding-bottom: 70px; } }";
-    document.head.appendChild(style);
-  }
-
   function getDeviceType() {
     var w = window.innerWidth;
     if (w < 768) return "mobile";
@@ -342,7 +327,6 @@
 
   function createFloatingBar() {
     if (document.getElementById(floatingBarId)) return;
-    injectFloatingBarStyles();
 
     var device = getDeviceType();
     var bar = document.createElement("div");

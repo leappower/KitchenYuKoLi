@@ -22,67 +22,6 @@
 
   /* ───────────────────────── CSS ───────────────────────── */
 
-  function injectStyles() {
-    if (window.DropdownBaseStyles) window.DropdownBaseStyles.inject();
-
-    var style = document.createElement("style");
-    style.id = "sup-dropdown-styles-v1";
-    style.setAttribute("data-ver", "2026-05-20-v2");
-    style.textContent = [
-      ".sup-dropdown-card { min-width: 320px; max-width: 420px; }",
-      ".sup-dropdown-emoji {",
-      "  margin-left: auto; font-size: 13px; line-height: 1; opacity: .85; flex-shrink: 0;",
-      "}",
-      ".sup-popup-emoji {",
-      "  margin-left: auto; font-size: 15px; opacity: .85; flex-shrink: 0;",
-      "}",
-      /* Overview item styling */
-      ".sup-overview-item {",
-      "  display: flex; align-items: center; gap: 8px;",
-      "  padding: 9px 12px; font-size: 13px; font-weight: 700; color: #1d1d1f;",
-      "  text-decoration: none; border-radius: 10px; transition: background .1s ease;",
-      "}",
-      ".sup-overview-item:hover { background: rgba(236,91,19,.06); color: #ec5b13; }",
-      "html.dark .sup-overview-item { color: #f5f5f7; }",
-      "html.dark .sup-overview-item:hover { background: rgba(236,91,19,.10); color: #f97316; }",
-      /* View all styling */
-      ".sup-viewall-item {",
-      "  display: flex; align-items: center; gap: 8px;",
-      "  padding: 9px 12px; font-size: 13px; font-weight: 600; color: #1d1d1f;",
-      "  text-decoration: none; border-radius: 10px; transition: background .1s ease;",
-      "}",
-      ".sup-viewall-item:hover { background: rgba(236,91,19,.06); color: #ec5b13; }",
-      "html.dark .sup-viewall-item { color: #f5f5f7; }",
-      "html.dark .sup-viewall-item:hover { background: rgba(236,91,19,.10); color: #f97316; }",
-      /* Split trigger toggle button */
-      ".sup-dropdown-trigger {",
-      "  display: flex; align-items: center; gap: 4px;",
-      "}",
-      ".sup-dropdown-link {",
-      "  text-decoration: none; color: inherit;",
-      "}",
-      ".sup-dropdown-toggle {",
-      "  display: flex; align-items: center; justify-content: center;",
-      "  width: 28px; height: 28px; padding: 0; border: none;",
-      "  background: transparent; cursor: pointer; border-radius: 6px;",
-      "  -webkit-tap-highlight-color: transparent;",
-      "  transition: background .15s ease;",
-      "}",
-      ".sup-dropdown-toggle:active { background: rgba(0,0,0,.06); }",
-      "html.dark .sup-dropdown-toggle:active { background: rgba(255,255,255,.08); }",
-      ".sup-dropdown-toggle .sup-dropdown-arrow {",
-      "  font-size: 20px; color: rgba(60,60,67,.4); transition: transform .2s ease;",
-      "}",
-      ".sup-dropdown-wrap.is-open .sup-dropdown-toggle .sup-dropdown-arrow {",
-      "  transform: rotate(180deg);",
-      "}",
-      "html.dark .sup-dropdown-toggle .sup-dropdown-arrow {",
-      "  color: rgba(235,235,245,.35);",
-      "}",
-    ].join("\n");
-    document.head.appendChild(style);
-  }
-
   /* ───────────────────────── RENDER ───────────────────────── */
 
   function renderDropdown(cfg) {
@@ -242,7 +181,6 @@
     getItems: function () {
       return SUBSERIES;
     },
-    injectStyles: injectStyles,
     renderDropdown: renderDropdown,
     buildPopupContent: buildPopupContent,
     defaultHref: "/support/",

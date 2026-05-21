@@ -76,19 +76,26 @@
       return;
     }
 
-    var swup = new global.Swup({
-      containers: ["#spa-content"],
-      linkSelector:
-        'a[href^="/"]:not([href$=".pdf"]):not([href$=".zip"]):not([href$=".doc"]):not([href*="mailto:"]):not([href*="tel:"]):not([target="_blank"])',
-      plugins: [
-        new global.SwupHeadPlugin({
-          persistTags: 'style[id], style[data-swup-persist], link[rel="stylesheet"][href], script[src]',
-          persistAssets: true,
-        }),
-        new global.SwupPreloadPlugin({ preloadHoveredLinks: true, preloadInitialPage: true }),
-      ],
-      animateHistoryBrowsing: false,
-    });
+    var swup;
+    try {
+      swup = new global.Swup({
+        containers: ["#spa-content"],
+        linkSelector:
+          'a[href^="/"]:not([href$=".pdf"]):not([href$=".zip"]):not([href$=".doc"]):not([href*="mailto:"]):not([href*="tel:"]):not([target="_blank"])',
+        plugins: [
+          new global.SwupHeadPlugin({
+            persistTags: 'style[id], style[data-swup-persist], link[rel="stylesheet"][href], script[src]',
+            persistAssets: true,
+          }),
+          new global.SwupPreloadPlugin({ preloadHoveredLinks: true, preloadInitialPage: true }),
+        ],
+        animateHistoryBrowsing: false,
+      });
+    } catch (e) {
+      console.error("[spa-router] Swup init failed:", e);
+      global.__spaNavigating = false;
+      return;
+    }
 
     global.swupInstance = swup;
 
