@@ -255,11 +255,37 @@ function injectLangRegistry(html) {
  * load device-specific file based on screen width.
  */
 function generateResponsiveEntry(route) {
+  // Serve index-mobile.html content directly as index.html.
+  // No JS redirect — URL stays clean: /route/?lang=xx
+  // Responsive layout handled by Tailwind classes (sm:, md:, lg:).
+  // Language handled by [i18n-url-sync] + translations.js.
+  var srcDir = path.join(SRC_PAGES_DIR, route.slug);
+  var mobileFile = path.join(srcDir, 'index-mobile.html');
+
+  if (fs.existsSync(mobileFile)) {
+    var html = fs.readFileSync(mobileFile, 'utf-8');
+    var bp = BASE_PATH || '';
+    var canonicalUrl = 'https://www.kitchen.yukoli.com/' + (bp ? bp.replace(/^\//, '') + '/' : '') + route.slug + '/';
+    html = html.replace(
+      /<link\s+rel="canonical"\s+href="[^"]*"\s*\/?>/i,
+      '<link rel="canonical" href="' + canonicalUrl + '"/>'
+    );
+    html = html.replace(
+      /<meta\s+property="og:url"\s+content="[^"]*"\s*>/gi,
+      '<meta property="og:url" content="' + canonicalUrl + '">'
+    );
+    html = injectLangUrlSync(html);
+    if (BASE_PATH) {
+      html = patchHtmlPaths(html);
+    }
+    return html;
+  }
+
+  // Fallback: minimal redirect (should never happen)
   var bp = BASE_PATH || '';
   var slug = route.slug;
   var canonicalUrl = 'https://www.kitchen.yukoli.com/' + (bp ? bp.replace(/^\//, '') + '/' : '') + slug + '/';
   var title = 'YuKoLi | Smart Kitchen Solutions - ' + slug.split('/').pop().replace(/-/g, ' ').replace(/\w\S*/g, function(w){return w.charAt(0).toUpperCase()+w.substr(1);});
-
   return [
     '<!DOCTYPE html>',
     '<html class="light" lang="en">',
@@ -272,28 +298,15 @@ function generateResponsiveEntry(route) {
     '  <meta property="og:type" content="website">',
     '  <meta property="og:title" content="' + title + '">',
     '  <meta name="robots" content="index, follow">',
-    '',
     '  <script defer src="' + bp + '/assets/js/ui/navigator.js"></script>',
     '  <script defer src="' + bp + '/assets/js/lang-registry.js"></script>',
     '  <script defer src="' + bp + '/assets/js/translations.js"></script>',
-    '  <script>',
-    '    (function() {',
-    '      var w = window.innerWidth;',
-    '      var file;',
-    '      if (w < 768) { file = "index-mobile.html"; }',
-    '      else if (w < 1280) { file = "index-tablet.html"; }',
-    '      else { file = "index-pc.html"; }',
-    '      var lang = localStorage.getItem("userLanguage") || "en";',
-    '      var href = file + "?lang=" + lang;',
-    '      window.location.replace(href);',
-    '    })();',
-    '  </script>',
     '</head>',
     '<body>',
     '  <noscript>',
-    '    <meta http-equiv="refresh" content="0;url=index-pc.html?lang=en">',
+    '    <meta http-equiv="refresh" content="0;url=index-mobile.html?lang=en">',
     '  </noscript>',
-    '  <p>Redirecting to the appropriate device view...</p>',
+    '  <p>Loading...</p>',
     '</body>',
     '</html>'
   ].join('\n');
