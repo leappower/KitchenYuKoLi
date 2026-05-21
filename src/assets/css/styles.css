@@ -587,6 +587,8 @@ a.bg-primary {
   font-size: 0.75rem;
   margin-top: 0.25rem;
   display: block;
+  width: 100%;
+  flex-shrink: 0;
 }
 
 /* Shake keyframe (0.2s) */
