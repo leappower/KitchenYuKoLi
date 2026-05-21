@@ -1581,10 +1581,15 @@
     tgt.addEventListener(evt, fn, { signal: ac.signal });
   }
 
-  /* ───────── SPA auto-init on spa:load ───────── */
-  _spaOn(document, "spa:load", function initProfitCalc() {
+  /* ───────── Init helper (shared by DOMContentLoaded and spa:load) ── */
+  function initProfitCalc() {
     var form = document.getElementById("profit-calc-form");
-    if (!form || form._spaInitialized) return;
+    if (!form) return;
+    if (form._spaInitialized) {
+      // Already initialized — just ensure DOM is in sync
+      syncRangeDisplay();
+      return;
+    }
     form._spaInitialized = true;
 
     // Detect mobile by presence of back-btn (only mobile has steps mode)
@@ -1635,7 +1640,17 @@
 
     // Apply URL presets if any
     calc.applyPreset();
-  });
+  }
+
+  /* ── DOMContentLoaded fallback for first page load ── */
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initProfitCalc);
+  } else {
+    initProfitCalc();
+  }
+
+  /* ── SPA: re-init on every navigation ── */
+  _spaOn(document, "spa:load", initProfitCalc);
 
   /* On language change, capture phase (prevents other handlers from breaking) */
   _spaOn(window, "languageChanged", function (e) {}, true);
