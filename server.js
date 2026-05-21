@@ -363,10 +363,6 @@ function resolvePage(reqPath) {
   var f404 = path.join(__dirname, 'dist', '404.html');
   if (isFile(f404)) return f404;
 
-  // 7. SPA shell catch-all (shouldn't normally reach here)
-  return null;
-}
-
   // 6. 404 page — return 404.html for non-asset, non-API, non-spa routes
   var f404 = path.join(__dirname, 'dist', '404.html');
   if (isFile(f404)) return f404;

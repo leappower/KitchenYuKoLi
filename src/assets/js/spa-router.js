@@ -77,6 +77,7 @@
 
     var swup = new global.Swup({
       containers: ["#spa-content"],
+      linkSelector: 'a[href^="/"]:not([href$=".pdf"]):not([href$=".zip"]):not([href$=".doc"]):not([href*="mailto:"]):not([href*="tel:"]):not([target="_blank"])',
       plugins: [
         new global.SwupHeadPlugin(),
         new global.SwupPreloadPlugin({ preloadHoveredLinks: true, preloadInitialPage: true }),

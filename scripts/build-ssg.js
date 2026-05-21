@@ -281,6 +281,19 @@ function injectSwupScripts(html) {
 }
 
 /**
+ * Normalize #spa-content container classes across all SSG pages.
+ * Swup only replaces container INNER content, so container-level classes
+ * must be consistent across pages to avoid layout breaks on SPA navigation.
+ */
+function normalizeSpaContent(html) {
+  html = html.replace(
+    /(<main\s+id="spa-content")(\s+class="[^"]*")?/gi,
+    '$1 class="flex-1 overflow-x-hidden"'
+  );
+  return html;
+}
+
+/**
  * Generate a minimal responsive entry page for routes that have device-specific
  * HTML files (index-pc.html etc.) but no src/pages/<route>/index.html entry point.
  *
@@ -314,6 +327,7 @@ function generateResponsiveEntry(route) {
       html = patchHtmlPaths(html);
     }
     html = injectSwupScripts(html);
+    html = normalizeSpaContent(html);
     return html;
   }
 
@@ -342,7 +356,7 @@ function generateResponsiveEntry(route) {
     '</head>',
     '<body>',
     '  <navigator data-component="navigator" data-active="' + route.slug.split('/')[0] + '" data-search="true"></navigator>',
-    '  <main id="spa-content"></main>',
+    '  <main id="spa-content" class="flex-1 overflow-x-hidden"></main>',
     '  <footer data-component="footer" data-active="' + route.slug.split('/')[0] + '"></footer>',
     '  <noscript>',
     '    <meta http-equiv="refresh" content="0;url=index-mobile.html?lang=en">',
@@ -405,6 +419,7 @@ function generateRouteIndex(route) {
   html = injectLangRegistry(html);
   html = injectTranslationsDropdown(html);
   html = injectSwupScripts(html);
+  html = normalizeSpaContent(html);
 
   // Patch all root-absolute paths with BASE_PATH prefix
   html = patchHtmlPaths(html);
@@ -457,6 +472,7 @@ function copyDeviceFiles(route) {
     content = injectLangRegistry(content);
     content = injectTranslationsDropdown(content);
     content = injectSwupScripts(content);
+    content = normalizeSpaContent(content);
     if (BASE_PATH) {
       content = patchHtmlPaths(content);
     }
