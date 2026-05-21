@@ -216,6 +216,21 @@ function patchHtmlPaths(html) {
  * The script is injected with `defer` to match the pattern used in pages that
  * already include it statically (e.g. home, landing, 404).
  */
+function injectLangUrlSync(html) {
+  // Already injected — skip (idempotent)
+  if (/\[i18n-url-sync\]/.test(html)) return html;
+  // Inject a synchronous script right after <head> that reads ?lang= URL parameter
+  // and sets localStorage("userLanguage") so translations.js picks it up.
+  // Must run BEFORE lang-registry.js / translations.js.
+  var tag = '<script>/*[i18n-url-sync]*/(function(){var p=new URLSearchParams(location.search),l=p.get("lang");if(l){localStorage.setItem("userLanguage",l);document.documentElement.lang=l}})();</script>';
+  if (/<head[^>]*>/i.test(html)) {
+    html = html.replace(/(<head[^>]*>)/i, '$1\n  ' + tag);
+  } else {
+    html = tag + '\n' + html;
+  }
+  return html;
+}
+
 function injectLangRegistry(html) {
   // Already has lang-registry.js — skip (idempotent)
   if (/lang-registry\.js/.test(html)) return html;
@@ -258,10 +273,9 @@ function generateResponsiveEntry(route) {
     '  <meta property="og:title" content="' + title + '">',
     '  <meta name="robots" content="index, follow">',
     '',
-    '  <script defer src="' + bp + '/assets/js/i18n/navigator.js"></script>',
-    '  <script defer src="' + bp + '/assets/js/i18n/dropdown.js"></script>',
-    '  <script defer src="' + bp + '/assets/js/i18n/lang-registry.js"></script>',
-    '  <script defer src="' + bp + '/assets/js/i18n/translations.js"></script>',
+    '  <script defer src="' + bp + '/assets/js/ui/navigator.js"></script>',
+    '  <script defer src="' + bp + '/assets/js/lang-registry.js"></script>',
+    '  <script defer src="' + bp + '/assets/js/translations.js"></script>',
     '  <script>',
     '    (function() {',
     '      var w = window.innerWidth;',
@@ -269,7 +283,7 @@ function generateResponsiveEntry(route) {
     '      if (w < 768) { file = "index-mobile.html"; }',
     '      else if (w < 1280) { file = "index-tablet.html"; }',
     '      else { file = "index-pc.html"; }',
-    '      var lang = localStorage.getItem("lang") || "en";',
+    '      var lang = localStorage.getItem("userLanguage") || "en";',
     '      var href = file + "?lang=" + lang;',
     '      window.location.replace(href);',
     '    })();',
@@ -327,6 +341,8 @@ function generateRouteIndex(route) {
     '<meta property="og:url" content="' + canonicalUrl + '">'
   );
 
+  // Inject URL ?lang= parameter sync script (must be before lang-registry)
+  html = injectLangUrlSync(html);
   // Inject lang-registry.js before translations.js (if not already present)
   html = injectLangRegistry(html);
 
@@ -374,6 +390,8 @@ function copyDeviceFiles(route) {
     const destFile = path.join(destRouteDir, file);
 
     let content = fs.readFileSync(srcFile, 'utf-8');
+    // Inject URL ?lang= parameter sync script (must be before lang-registry)
+    content = injectLangUrlSync(content);
     // Inject lang-registry.js before translations.js (if not already present)
     content = injectLangRegistry(content);
     if (BASE_PATH) {
