@@ -298,15 +298,19 @@ function normalizeSpaContent(html) {
  * load device-specific file based on screen width.
  */
 function generateResponsiveEntry(route) {
-  // Serve index-mobile.html content directly as index.html.
-  // No JS redirect — URL stays clean: /route/?lang=xx
-  // Responsive layout handled by Tailwind classes (sm:, md:, lg:).
+  // Serve index-pc.html content directly as index.html.
+  // PC variant provides the most complete layout (Tailwind responsive classes
+  // handle mobile/tablet/desktop via sm:/md:/lg:). Using index-mobile.html
+  // makes navigator variant="mobile" on desktop, breaking structure.
   // Language handled by [i18n-url-sync] + translations.js.
   var srcDir = path.join(SRC_PAGES_DIR, route.slug);
-  var mobileFile = path.join(srcDir, 'index-mobile.html');
+  var srcFile = path.join(srcDir, 'index-pc.html');
+  if (!fs.existsSync(srcFile)) {
+    srcFile = path.join(srcDir, 'index-mobile.html');
+  }
 
-  if (fs.existsSync(mobileFile)) {
-    var html = fs.readFileSync(mobileFile, 'utf-8');
+  if (fs.existsSync(srcFile)) {
+    var html = fs.readFileSync(srcFile, 'utf-8');
     var bp = BASE_PATH || '';
     var canonicalUrl = 'https://www.kitchen.yukoli.com/' + (bp ? bp.replace(/^\//, '') + '/' : '') + route.slug + '/';
     html = html.replace(

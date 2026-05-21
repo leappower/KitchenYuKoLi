@@ -1387,24 +1387,50 @@
   };
 
   ProfitCalculator.prototype.run = function () {
-    if (!validateForm()) return;
+    console.log("[profit-calc] run() called");
+    if (!validateForm()) {
+      console.log("[profit-calc] run(): validation failed, returning");
+      return;
+    }
     var input = this.getInput();
-    if (input.dailyMeals <= 0) return;
+    if (input.dailyMeals <= 0) {
+      console.log("[profit-calc] run(): dailyMeals <= 0, returning");
+      return;
+    }
+    console.log("[profit-calc] run(): input=", JSON.stringify(input));
     var result = calculate(input);
 
     // Show result panel
     var panel = document.getElementById(this.resultId);
     if (panel) {
+      console.log("[profit-calc] run(): showing result panel (was hidden:", panel.classList.contains("hidden") + ")");
       panel.classList.remove("hidden");
       panel.scrollIntoView({ behavior: "smooth", block: "start" });
+    } else {
+      console.log("[profit-calc] run(): result panel not found!");
+    }
+
+    // Check placeholder state
+    var placeholder = document.getElementById("profit-placeholder");
+    if (placeholder) {
+      console.log("[profit-calc] run(): placeholder hidden:", placeholder.classList.contains("hidden"));
     }
 
     // Steps mode: switch to step 2
     if (this.stepsMode) {
+      console.log("[profit-calc] run(): stepsMode enabled");
       var step1 = document.getElementById("pc-step-1");
       var step2 = document.getElementById("pc-step-2");
-      if (step1) step1.classList.add("hidden");
-      if (step2) step2.classList.remove("hidden");
+      if (step1) {
+        console.log("[profit-calc] run(): hiding step-1");
+        step1.classList.add("hidden");
+      }
+      if (step2) {
+        console.log("[profit-calc] run(): showing step-2");
+        step2.classList.remove("hidden");
+      }
+    } else {
+      console.log("[profit-calc] run(): stepsMode disabled (PC/desktop)");
     }
 
     this.renderResults(result, input.salaryInfo);
@@ -1583,13 +1609,18 @@
 
   /* ───────── Init helper (shared by DOMContentLoaded and spa:load) ── */
   function initProfitCalc() {
+    console.log("[profit-calc] initProfitCalc called, readyState:", document.readyState);
     var form = document.getElementById("profit-calc-form");
-    if (!form) return;
+    if (!form) {
+      console.log("[profit-calc] initProfitCalc: form not found");
+      return;
+    }
     if (form._spaInitialized) {
-      // Already initialized — just ensure DOM is in sync
+      console.log("[profit-calc] initProfitCalc: already initialized, skipping");
       syncRangeDisplay();
       return;
     }
+    console.log("[profit-calc] initProfitCalc: initializing fresh");
     form._spaInitialized = true;
 
     // Detect mobile by presence of back-btn (only mobile has steps mode)
@@ -1616,10 +1647,22 @@
     var placeholder = document.getElementById("profit-placeholder");
 
     if (calcBtn) {
-      calcBtn.addEventListener("click", function () {
-        if (placeholder) placeholder.classList.add("hidden");
+      console.log("[profit-calc] binding click handler to pc-calc-btn");
+      // Guard: remove existing handlers to prevent duplicates
+      var oldBtn = calcBtn;
+      var newBtn = oldBtn.cloneNode(true);
+      oldBtn.parentNode.replaceChild(newBtn, oldBtn);
+      newBtn.addEventListener("click", function () {
+        console.log("[profit-calc] pc-calc-btn clicked");
+        if (placeholder) {
+          console.log("[profit-calc] hiding placeholder");
+          placeholder.classList.add("hidden");
+        }
+        console.log("[profit-calc] calling calc.run()");
         calc.run();
+        console.log("[profit-calc] calc.run() completed");
       });
+      calcBtn = newBtn; // update reference for later use
     }
     if (backBtn) {
       backBtn.addEventListener("click", function () {

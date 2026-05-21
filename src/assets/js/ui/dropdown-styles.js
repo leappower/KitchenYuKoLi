@@ -201,4 +201,28 @@
    * Inject shared dropdown base styles for all prefixes.
    * Idempotent — safe to call multiple times.
    */
+  function injectDropdownBaseStyles() {
+    if (document.getElementById(STYLE_ID)) return;
+    var style = document.createElement("style");
+    style.id = STYLE_ID;
+    style.setAttribute("data-ver", "2026-03-25-v1");
+
+    var css = PREFIXES.map(function (pfx) {
+      return TEMPLATE.replace(/\{\{PREFIX\}\}/g, pfx);
+    }).join("\n\n");
+
+    // Shared @keyframes (only once)
+    css += "\n@keyframes dd-fade-in { from { opacity: 0; } to { opacity: 1; } }\n";
+
+    style.textContent = css;
+    document.head.appendChild(style);
+  }
+
+  // Auto-inject on script load
+  injectDropdownBaseStyles();
+
+  window.DropdownBaseStyles = {
+    inject: injectDropdownBaseStyles,
+    STYLE_ID: STYLE_ID,
+  };
 })(window);

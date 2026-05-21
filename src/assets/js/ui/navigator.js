@@ -1218,6 +1218,9 @@
    */
   function registerListeners() {
     /* Inject CSS (one-time — these functions check by ID internally) */
+    if (typeof window.DropdownBaseStyles !== "undefined" && window.DropdownBaseStyles.inject) {
+      window.DropdownBaseStyles.inject();
+    }
 
     initSearchInteraction();
 
