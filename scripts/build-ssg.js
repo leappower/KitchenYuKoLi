@@ -260,6 +260,24 @@ function injectTranslationsDropdown(html) {
   return html;
 }
 
+function injectSwupScripts(html) {
+  // Already has swup.min.js — skip (idempotent)
+  if (/swup\.min\.js/.test(html)) return html;
+
+  var bp = BASE_PATH ? BASE_PATH.replace(/\/$/, '') : '';
+  // Insert swup + plugins before spa-router.js (which initializes Swup)
+  // Pattern: <script ... src="/assets/js/spa-router.js">
+  var swupTag =
+    '    <script defer src="' + bp + '/assets/js/swup.min.js"></script>\n' +
+    '    <script defer src="' + bp + '/assets/js/swup-head-plugin.min.js"></script>\n' +
+    '    <script defer src="' + bp + '/assets/js/swup-preload-plugin.min.js"></script>';
+  html = html.replace(
+    /(<script[^>]*src=["'][^"']*\/assets\/js\/spa-router\.js[^>]*>[^<]*<\/script>)/i,
+    swupTag + '\n    ' + '$1'
+  );
+  return html;
+}
+
 /**
  * Generate a minimal responsive entry page for routes that have device-specific
  * HTML files (index-pc.html etc.) but no src/pages/<route>/index.html entry point.
@@ -293,6 +311,7 @@ function generateResponsiveEntry(route) {
     if (BASE_PATH) {
       html = patchHtmlPaths(html);
     }
+    html = injectSwupScripts(html);
     return html;
   }
 
@@ -323,6 +342,10 @@ function generateResponsiveEntry(route) {
     '    <meta http-equiv="refresh" content="0;url=index-mobile.html?lang=en">',
     '  </noscript>',
     '  <p>Loading...</p>',
+    '  <script defer src="' + bp + '/assets/js/swup.min.js"></script>',
+    '  <script defer src="' + bp + '/assets/js/swup-head-plugin.min.js"></script>',
+    '  <script defer src="' + bp + '/assets/js/swup-preload-plugin.min.js"></script>',
+    '  <script defer src="' + bp + '/assets/js/spa-router.js"></script>',
     '</body>',
     '</html>'
   ].join('\n');
@@ -375,6 +398,7 @@ function generateRouteIndex(route) {
   // Inject lang-registry.js before translations.js (if not already present)
   html = injectLangRegistry(html);
   html = injectTranslationsDropdown(html);
+  html = injectSwupScripts(html);
 
   // Patch all root-absolute paths with BASE_PATH prefix
   html = patchHtmlPaths(html);
@@ -426,6 +450,7 @@ function copyDeviceFiles(route) {
     // Inject lang-registry.js before translations.js (if not already present)
     content = injectLangRegistry(content);
     content = injectTranslationsDropdown(content);
+    content = injectSwupScripts(content);
     if (BASE_PATH) {
       content = patchHtmlPaths(content);
     }

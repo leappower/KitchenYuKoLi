@@ -55,6 +55,7 @@
 <!-- SPA Shell Structure -->
 <!-- Navigator placeholder - will be replaced by Navigator component -->
 <navigator data-component="navigator"
+  data-swup-persist="navigator"
   data-active="home"
   data-search="true"
   data-cta-text-key="nav_get_quote"
@@ -85,7 +86,7 @@
 </div>
 
 <!-- Footer placeholder - will be replaced by Footer component -->
-<footer data-component="footer" data-active="home"></footer>
+<footer data-component="footer" data-swup-persist="footer" data-active="home"></footer>
 
 <!-- All scripts deferred: browser parses HTML + renders skeleton immediately,
      scripts download in parallel and execute in order after DOM is ready -->
@@ -112,6 +113,9 @@
 <script defer src="/assets/js/home-core-products.js?v=202605201849"></script>
 <script defer src="/assets/js/quote-form.js?v=202605201849"></script>
 <script defer src="/assets/js/ui/currency.js?v=202605201849"></script>
+<script defer src="/assets/js/swup.min.js?v=202605201849"></script>
+<script defer src="/assets/js/swup-head-plugin.min.js?v=202605201849"></script>
+<script defer src="/assets/js/swup-preload-plugin.min.js?v=202605201849"></script>
 <script defer src="/assets/js/spa-router.js?v=202605201849"></script>
 
 <!-- Product data: static initial data → API refresh with ETag → localStorage cache -->
