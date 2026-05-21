@@ -67,7 +67,13 @@
 
   // ── Swup initialization ────────────────────────────────────────────
   function initSwup() {
-    if (global.swupInstance) return; // Already initialized
+    // Destroy any previous Swup instance (e.g., after navigation to 404 page
+    // that left Swup in a broken state due to container mismatch)
+    if (global.swupInstance) {
+      try { global.swupInstance.destroy(); } catch (e) { /* ignore */ }
+      global.swupInstance = null;
+    }
+
     if (global.Swup === undefined) {
       // Swup not loaded yet — retry on DOMContentLoaded
       if (document.readyState === "loading") {
