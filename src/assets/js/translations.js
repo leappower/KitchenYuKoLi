@@ -1,6 +1,6 @@
 !(function (t) {
   "use strict";
-  var I18N_CACHE_V = 1779441564;
+  var I18N_CACHE_V = 1779452838;
   var _spaRegs = {};
 
   // ─── Ensure LANG_REGISTRY is loaded ─────────────────────────
@@ -802,10 +802,29 @@
       document,
       "spa:load",
       function () {
+        // [LOG] i18n spa:load — check lang state before re-applying translations
+        (function() {
+          var _l = s.currentLanguage;
+          var _v = s.uiText ? s.uiText("nav_products", "[MISSING]") : "[no uiText]";
+          var _v2 = s.uiText ? s.uiText("nav_applications", "[MISSING]") : "[no uiText]";
+          var _nav_span = document.querySelector('header nav a[href="/products/"] > span[data-i18n="nav_products"]');
+          var _txt = _nav_span ? _nav_span.textContent : "[NOT FOUND]";
+          var _nav_exists = !!document.querySelector('header')
+          var _ph = document.querySelectorAll('[data-component="navigator"]').length
+          console.debug("[i18n:spa:load] lang=" + _l + " uiText('nav_products')=" + _v + " uiText('nav_applications')=" + _v2 + " navSpanText=" + _txt.replace(/ /g,'_') + " headerExists=" + _nav_exists + " placeholders=" + _ph);
+        })();
         (s.resetEventListeners(),
           s
             .applyTranslations()
             .then(function () {
+              // [LOG] i18n spa:load — after applyTranslations, check if nav text changed
+              (function() {
+                var _l2 = s.currentLanguage;
+                var _nav_span2 = document.querySelector('header nav a[href="/products/"] > span[data-i18n="nav_products"]');
+                var _txt2 = _nav_span2 ? _nav_span2.textContent : "[NOT FOUND]";
+                var _all_i18n = document.querySelectorAll('[data-i18n]').length;
+                console.log("[i18n:spa:load:after] lang=" + _l2 + " navSpanText=" + _txt2.replace(/ /g,'_') + " totalDataI18n=" + _all_i18n);
+              })();
               document.dispatchEvent(new Event("spa:ready"));
             })
             .catch(function (t) {

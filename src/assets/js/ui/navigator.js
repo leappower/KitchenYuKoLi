@@ -1291,10 +1291,19 @@
    * Can be called multiple times safely (idempotent by nature).
    */
   function mountNavigator() {
+    // [LOG] mountNavigator — check i18n state before header rebuild
+    (function() {
+      var _l = window.translationManager ? window.translationManager.currentLanguage : "[no tm]";
+      var _txt = "[N/A]";
+      var _s = document.querySelector('header nav a[href="/products/"] > span[data-i18n="nav_products"]');
+      if (_s) _txt = _s.textContent.replace(/ /g,'_');
+      var _ph = document.querySelectorAll('[data-component="navigator"]').length;
+      var _hdr = document.querySelector('header');
+      
+    })();
     /* Close all open dropdowns before remounting */
     closeOtherDropdowns(null);
     var placeholders = document.querySelectorAll('[data-component="navigator"]');
-    console.log("[navigator] mountNavigator called, placeholders:", placeholders.length);
 
     for (var i = 0; i < placeholders.length; i++) {
       var placeholder = placeholders[i];
@@ -1304,6 +1313,7 @@
       /* 如果 placeholder 内已有 <header>，直接提取替换 */
       var existingHeader = placeholder.querySelector("header");
       if (existingHeader) {
+        // [LOG] mountNavigator — found existing header in placeholder, check if it's ACTUALLY a nav header
         placeholder.parentNode.replaceChild(existingHeader, placeholder);
         continue;
       }
@@ -1326,6 +1336,12 @@
       placeholder.parentNode.replaceChild(headerEl, placeholder);
     }
 
+    // [LOG] mountNavigator — after rebuild, check nav text
+    (function() {
+      var _s = document.querySelector('header nav a[href="/products/"] > span[data-i18n="nav_products"]');
+      var _s2 = document.querySelector('header nav a[href="/applications/"] > span[data-i18n="nav_applications"]');
+
+    })();
     /* 3. 每次构建后需要重新执行的 DOM 相关初始化 */
     reinitTranslationManager();
     initSlideMenu();
@@ -1354,6 +1370,15 @@
    *   (e.g. "products", "applications", "support", "about")
    */
   function updateActive(activeSectionId) {
+    // [LOG] updateActive — check nav text before class toggle
+    (function() {
+      var _l = window.translationManager ? window.translationManager.currentLanguage : "[no tm]";
+      var _s = document.querySelector('header nav a[href="/products/"] > span[data-i18n="nav_products"]');
+      var _txt = _s ? _s.textContent.replace(/ /g,'_') : "[NOT FOUND]";
+      var _s2 = document.querySelector('header nav a[href="/applications/"] > span[data-i18n="nav_applications"]');
+      var _txt2 = _s2 ? _s2.textContent.replace(/ /g,'_') : "[NOT FOUND]";
+      var _hdr = document.querySelector('header');
+    })();
     activeSectionId = activeSectionId || "";
     var currentPath = window.location.pathname.replace(/\/$/, "") || "/";
 

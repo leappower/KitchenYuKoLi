@@ -171,16 +171,16 @@
                 </div>
                 <div class="w-full lg:w-1/2 relative">
                   <div class="absolute -inset-4 bg-primary/20 rounded-3xl blur-3xl"></div>
-                  <div class="relative rounded-3xl overflow-hidden shadow-2xl border border-white/10" data-hero-video>
+                  <div class="relative rounded-3xl overflow-hidden shadow-2xl border border-white/10 aspect-[3/2]" data-hero-video>
                     <video
                       class="hero-video-player"
                       src="/assets/video/food-factory-scenario.mp4"
                       poster="/assets/images/applications/food-factory-hero.webp"
-                      preload="metadata"
+                      preload="none"
                       muted
                       playsinline
                       webkit-playsinline
-                      loop controlsList="nodownload" disableRemotePlayback
+                      loop controls controlsList="nodownload" disableRemotePlayback
                     ></video>
                     <div class="hero-video-overlay">
                       <button class="hero-video-mute" aria-label="Toggle mute" data-i18n-aria="aria_toggle_mute">
@@ -199,7 +199,7 @@
                       onerror="this.src = '/assets/images/applications/cloud-kitchen-hero.webp'"
                     />
                     <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
-                    <div class="absolute bottom-0 left-0 right-0 p-8">
+                    <div data-hide-on-play class="hero-video-info absolute bottom-0 left-0 right-0 p-8">
                       <div class="flex items-center gap-4 text-white">
                         <div
                           class="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-xs font-bold"
@@ -976,9 +976,9 @@
     </main>
     <footer data-component="footer" data-variant="mobile" data-active="applications" data-cta="true"></footer>
     <script defer src="/assets/js/router.js"></script>
-    <script defer src="/assets/js/spa-router.js?v=202605221719"></script>
+    <script defer src="/assets/js/spa-router.js?v=202605222027"></script>
     <script defer src="/assets/js/lang-registry.js"></script>
-    <script src="/assets/js/translations.js?v=202605221719"></script>
+    <script src="/assets/js/translations.js?v=202605222027"></script>
 
     <script src="/assets/js/ui/slide-menu.js"></script>
     <script src="/assets/js/ui/dropdown-styles.js"></script>
@@ -990,8 +990,8 @@
     <script src="/assets/js/utils.js"></script>
 
     <script defer src="/assets/js/ui/search-engine.js"></script>
-    <script src="/assets/js/ui/navigator.js?v=202605221719"></script>
-    <script src="/assets/js/ui/footer.js?v=202605221719"></script>
+    <script src="/assets/js/ui/navigator.js?v=202605222027"></script>
+    <script src="/assets/js/ui/footer.js?v=202605222027"></script>
     <script defer src="/assets/js/ui/floating-actions.js"></script>
     <script src="/assets/js/ui/hero-video.js"></script>
   </body>

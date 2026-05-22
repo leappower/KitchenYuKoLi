@@ -150,7 +150,7 @@
     //
     // Strategy: On every navigation, remove all previously injected scripts,
     // then reload every non-global script the new page needs. The browser
-    // executes each <script> synchronously (no defer/async) on appendChild.
+    // execute on the next microtask to avoid blocking navigation paint.
     var _dynamicScripts = [];
     var _globalScriptPatterns = /spa-router\.js|swup|translations\.js|lang-registry\.js|spa-events\.js|dropdown-base\.js|navigator\.js|footer\.js$/;
     function reloadPageScripts(newDoc) {
@@ -173,23 +173,50 @@
         var curKey = currentScripts[c].getAttribute("src").replace(/\?.*$/, "");
         currentSrcs[curKey] = true;
       }
-      // 4. Inject missing scripts as synchronous (forces re-execution)
+      // 4. Collect scripts to inject
+      var toInject = [];
       for (var i = 0; i < allNewScripts.length; i++) {
         var src = allNewScripts[i].getAttribute("src");
         if (!src) continue;
         var srcKey = src.replace(/\?.*$/, "");
         if (_globalScriptPatterns.test(srcKey)) continue;
         if (currentSrcs[srcKey]) continue;
-        var newScript = document.createElement("script");
-        newScript.src = src;
-        document.head.appendChild(newScript);
-        _dynamicScripts.push(newScript);
+        toInject.push(src);
         currentSrcs[srcKey] = true; // prevent duplicate within same navigation
+      }
+      // 5. Inject scripts asynchronously in batches — defer to idle to
+      // let the browser paint the new content first, then load JS.
+      function injectBatch(idx) {
+        var batchSize = 3;
+        var end = Math.min(idx + batchSize, toInject.length);
+        for (var j = idx; j < end; j++) {
+          var newScript = document.createElement("script");
+          newScript.src = toInject[j];
+          newScript.async = false; // preserve execution order within batch
+          document.head.appendChild(newScript);
+          _dynamicScripts.push(newScript);
+        }
+        if (end < toInject.length) {
+          (window.requestIdleCallback || window.setTimeout)(function() { injectBatch(end); });
+        }
+      }
+      if (toInject.length > 0) {
+        (window.requestIdleCallback || window.setTimeout)(function() { injectBatch(0); });
       }
     }
 
     // Forward Swup lifecycle to spa:load event
     swupHooks.on("content:replace", function (visit) {
+      global.__spaNavigating = false;
+      _spaState.currentRoute = global.location.pathname.replace(/\/$/, "") || "/";
+      // [LOG] content:replace — check nav text and i18n before any mutations
+      (function() {
+        var _l = window.translationManager ? window.translationManager.currentLanguage : "[no tm]";
+        var _s = document.querySelector('header nav a[href="/products/"] > span[data-i18n="nav_products"]');
+        var _txt = _s ? _s.textContent.replace(/ /g,'_') : "[NO HEADER]";
+        var _tm = window.translationManager && window.translationManager.uiText ? window.translationManager.uiText("nav_products", "[?]") : "[no uiText]";
+        var _newDocOk = !!(visit && visit.to && visit.to.document);
+      })();
       global.__spaNavigating = false;
       _spaState.currentRoute = global.location.pathname.replace(/\/$/, "") || "/";
       // Reload page-specific scripts from the NEW page (not just #spa-content)

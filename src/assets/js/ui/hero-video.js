@@ -74,8 +74,15 @@
 
     if (!video || !poster) return;
 
+    // Upgrade preload from "none" to "auto" when visible — saves bandwidth on SPA nav
+    if (video.getAttribute("preload") === "none") {
+      video.setAttribute("preload", "auto");
+    }
+
     var isManual = container.getAttribute("data-hero-video-mode") === "manual";
 
+    /* 初始化：关闭原生 controls，由 JS 统一管理 */
+    video.controls = false;
     /* ── 状态 ── */
     var state = {
       hasStarted: false, // 是否首次播放（控制 crossfade 只执行一次）
@@ -115,7 +122,9 @@
     function updatePlayBtn(isPlaying, isEnded) {
       if (!playBtn) return;
       if (isPlaying) {
-        playBtn.style.display = "none";
+        playBtn.style.display = "flex";
+        playBtn.innerHTML = '<span class="material-symbols-outlined">pause</span>';
+        playBtn.setAttribute("aria-label", "Pause video");
       } else if (isEnded) {
         playBtn.style.display = "flex";
         playBtn.innerHTML = '<span class="material-symbols-outlined">replay</span>';
@@ -311,6 +320,7 @@
 
       container.setAttribute("data-hero-video-playing", "true");
       updatePlayBtn(true, false);
+      autoHideControls();
     });
 
     video.addEventListener("pause", function () {
@@ -364,6 +374,7 @@
     /* ── 点击视频切换播放/暂停（不切换音频） ── */
     video.addEventListener("click", function (e) {
       e.stopPropagation();
+      // Toggle play/pause on video click
       if (state.isPlaying) {
         state.pausedByScroll = false;
         video.pause();
@@ -375,12 +386,64 @@
       }
     });
 
-    /* ── PC hover 显示原生 controls ── */
+    /* ── Mobile: tap to toggle controls + playBtn visibility ── */
+    container.addEventListener("touchstart", function (e) {
+      // Don't interfere with scroll/swipe gestures
+      if (e.touches.length > 1) return;
+      showControls();
+      // Show native controls when playing, hide when paused
+      video.controls = state.isPlaying;
+      if (state.isPlaying) autoHideControls();
+      else if (_hideBtnTimer) { clearTimeout(_hideBtnTimer); _hideBtnTimer = null; }
+    });
+
+    /* ── PC hover 显示原生 controls + playBtn ── */
+    var _hideBtnTimer = null;
+
+    function showControls() {
+      if (playBtn) {
+        playBtn.style.opacity = "1";
+        playBtn.style.transition = "opacity 0.2s ease";
+      }
+      if (overlay) {
+        overlay.style.opacity = "1";
+        overlay.style.transition = "opacity 0.2s ease";
+      }
+      var fb = container.querySelector(".hero-video-fallback-btn");
+      if (fb && !state.isPlaying) {
+        fb.style.opacity = "1";
+        fb.style.transition = "opacity 0.2s ease";
+      }
+      if (_hideBtnTimer) { clearTimeout(_hideBtnTimer); _hideBtnTimer = null; }
+    }
+
+    function autoHideControls() {
+      if (!state.isPlaying) return;
+      if (_hideBtnTimer) clearTimeout(_hideBtnTimer);
+      _hideBtnTimer = setTimeout(function () {
+        if (playBtn) playBtn.style.opacity = "0";
+        if (overlay) overlay.style.opacity = "0";
+        var fb = container.querySelector(".hero-video-fallback-btn");
+        if (fb) fb.style.opacity = "0";
+      }, 2000);
+    }
+
+    container.addEventListener("mousemove", function () {
+      if (state.isPlaying) {
+        showControls();
+        autoHideControls();
+      }
+    });
+
     container.addEventListener("mouseenter", function () {
-      if (state.isPlaying) video.controls = true;
+      if (state.isPlaying) {
+        video.controls = true;
+        showControls();
+      }
     });
     container.addEventListener("mouseleave", function () {
       video.controls = false;
+      if (state.isPlaying) autoHideControls();
     });
 
     /* ── 注册到全局 ── */
@@ -427,6 +490,14 @@
   } else {
     init();
   }
+
+  // SPA navigation: pause and release all videos
+  document.addEventListener("spa:load", function () {
+    if (typeof pauseAllExcept === "function") {
+      pauseAllExcept(null);
+    }
+    _activeInstances = [];
+  });
 
   _spaOn(
     document,

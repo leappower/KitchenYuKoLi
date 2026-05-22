@@ -153,26 +153,33 @@
                   </a>
                 </div>
               </div>
-              <div class="relative rounded-3xl overflow-hidden shadow-2xl border border-white/10">
-                <!-- TODO: 替换为菜单实验室实际 Hero 图 -->
+              <div class="relative rounded-3xl overflow-hidden shadow-2xl border border-white/10 aspect-[3/2]" data-hero-video>
+                <video
+                  class="hero-video-player"
+                  src="/assets/video/aboutus.mp4"
+                  poster="/assets/images/applications/menu-lab/hero.webp"
+                  preload="none"
+                  muted
+                  playsinline
+                  webkit-playsinline
+                  loop controls controlsList="nodownload" disableRemotePlayback
+                ></video>
+                <div class="hero-video-overlay">
+                  <button class="hero-video-mute" aria-label="Toggle mute" data-i18n-aria="aria_toggle_mute">
+                    <span class="material-symbols-outlined text-white text-xl">volume_off</span>
+                  </button>
+                </div>
+                <button class="hero-video-fallback-btn" aria-label="Play video" data-i18n-aria="aria_play_video">
+                  <span class="material-symbols-outlined text-white text-3xl">play_circle</span>
+                </button>
                 <img
                   loading="eager"
                   alt="菜单实验室 · 东南亚菜系智能厨房"
                   data-i18n-alt="alt_applications_menu-lab_index-tablet_菜单实验室___东南亚菜系智能厨房"
-                  class="w-full aspect-[3/2] object-cover"
-                  src="/assets/images/applications/menu-lab-hero.webp"
-                  onerror="this.src = '/assets/images/applications/chain-restaurant-hero.webp'"
+                  class="hero-video-poster w-full h-full object-cover"
+                  src="/assets/images/applications/menu-lab/hero.webp"
+                  onerror="this.src='/assets/images/default.webp'"
                 />
-                <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
-                <div class="absolute bottom-0 left-0 right-0 p-6">
-                  <div class="flex items-center gap-3 text-white">
-                    <div class="text-3xl">🌏</div>
-                    <div>
-                      <p class="text-sm font-semibold" data-i18n="menu_lab_hero_badge">5 Cuisines · 800+ Recipes</p>
-                      <p class="text-xs opacity-80" data-i18n="menu_lab_hero_badge_sub">Covering 5 Cuisines</p>
-                    </div>
-                  </div>
-                </div>
               </div>
             </div>
           </div>
@@ -647,23 +654,23 @@
     <footer data-component="footer" data-variant="tablet" data-active="applications" data-cta="true"></footer>
 
     <script defer src="/assets/js/router.js"></script>
-    <script defer src="/assets/js/spa-router.js?v=202605221719"></script>
+    <script defer src="/assets/js/spa-router.js?v=202605222027"></script>
     <script defer src="/assets/js/lang-registry.js"></script>
-    <script src="/assets/js/translations.js?v=202605221719"></script>
+    <script src="/assets/js/translations.js?v=202605222027"></script>
 
     <script src="/assets/js/ui/slide-menu.js"></script>
     <script src="/assets/js/ui/dropdown-styles.js"></script>
     <script src="/assets/js/ui/dropdown-base.js"></script>
     <script src="/assets/js/ui/products-dropdown.js"></script>
-    <script defer src="/assets/js/ui/applications-dropdown.js?v=202605221719"></script>
+    <script defer src="/assets/js/ui/applications-dropdown.js?v=202605222027"></script>
     <script src="/assets/js/ui/support-dropdown.js"></script>
     <script src="/assets/js/ui/about-dropdown.js"></script>
     <script src="/assets/js/ui/contact-dropdown.js"></script>
     <script src="/assets/js/product-list.js"></script>
     <script src="/assets/js/utils.js"></script>
     <script src="/assets/js/ui/search-engine.js"></script>
-    <script src="/assets/js/ui/navigator.js?v=202605221719"></script>
-    <script src="/assets/js/ui/footer.js?v=202605221719"></script>
+    <script src="/assets/js/ui/navigator.js?v=202605222027"></script>
+    <script src="/assets/js/ui/footer.js?v=202605222027"></script>
 
     <script defer src="/assets/js/ui/floating-actions.js"></script>
   </body>

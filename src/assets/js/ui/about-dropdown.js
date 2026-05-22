@@ -66,9 +66,7 @@
       '<a class="' +
       esc(cfg.activeClass || "") +
       ' abt-dropdown-link"' +
-      ' href="' +
-      esc(cfg.href || "#") +
-      '"' +
+      ' href="javascript:void(0)"' +
       ' data-abt-trigger-label="' +
       esc(cfg.labelKey || cfg.label) +
       '">' +
