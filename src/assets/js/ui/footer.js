@@ -183,6 +183,8 @@
       var links = document.querySelectorAll(".fixed.bottom-0 a[href]");
       if (links.length === 0) return;
 
+      var currentPath = window.location.pathname.replace(/\/$/, "") || "/";
+
       for (var i = 0; i < links.length; i++) {
         var link = links[i];
         var href = link.getAttribute("href") || "";
@@ -198,6 +200,18 @@
           if (itemHref === linkHref) {
             matched = allItems[j];
             break;
+          }
+        }
+
+        // Fallback: if no exact match, check if current path starts with this item's base path
+        // e.g. /products/stirfry/ starts with /products/ → highlight products
+        if (!matched && newActiveId) {
+          for (var k = 0; k < allItems.length; k++) {
+            var baseHref = allItems[k].href.replace(/\/$/, "");
+            if (baseHref && currentPath.indexOf(baseHref) === 0 && allItems[k].id === newActiveId) {
+              matched = allItems[k];
+              break;
+            }
           }
         }
 
