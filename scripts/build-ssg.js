@@ -90,6 +90,23 @@ const path = require('path');
 const DIST_DIR = path.resolve(__dirname, '..', 'dist');
 const SRC_PAGES_DIR = path.resolve(__dirname, '..', 'src', 'pages');
 
+// ─── Case slug alias map ──────────────────────────────────────────────
+// Maps SSG directory names (derived from src/pages/cases/<city>/) to the
+// SEO-friendly slug used in case-grid.js and roi-data.js.
+// These generate alias directories at dist/cases/<slug>/ so that
+// links like /cases/manila-lunchbox-studio-2025/ resolve correctly.
+// ⚠️ Keep this in sync with src/assets/js/case-grid.js ROI_CASES[].slug
+var CASE_SLUG_MAP = {
+  'manila': 'manila-lunchbox-studio-2025',
+  'jakarta': 'jakarta-catering-hub-2025',
+  'hcmc': 'hcmc-cloud-kitchen-compact',
+  'bangkok': 'bangkok-chain-8-stores',
+  'kl': 'kl-canteen-2000-meals',
+  'cebu': 'cebu-small-resto-payback',
+  'surabaya': 'surabaya-central-automation',
+  'hanoi': 'hanoi-street-food-modern',
+};
+
 // ─── Auto-discover routes from src/pages/ directory ───────
 // Scans src/pages/ recursively for directories containing HTML files.
 // Adding a new page directory under src/pages/ is all that's needed.
@@ -528,7 +545,13 @@ function generateRootIndex() {
  */
 function generate404() {
   var bp = BASE_PATH;
-  var routesJson = JSON.stringify(ROUTES.map(function (r) { return r.slug; }));
+  // Include both SSG routes + case slug aliases for 404 redirect handling
+  var allRoutes = ROUTES.map(function (r) { return r.slug; });
+  // Add case slug aliases so /cases/manila-lunchbox-studio-2025 → /cases/manila-lunchbox-studio-2025/
+  for (var _city in CASE_SLUG_MAP) {
+    allRoutes.push('cases/' + CASE_SLUG_MAP[_city]);
+  }
+  var routesJson = JSON.stringify(allRoutes);
   var src404 = path.resolve(__dirname, '..', 'src', '404.html');
   if (!fs.existsSync(src404)) {
     log('  WARN: src/404.html not found, skipping 404 generation');
@@ -589,6 +612,15 @@ function main() {
         log('  Removed: ' + route.slug + '/');
       }
     }
+    // Also clean case slug alias directories (from previous runs)
+    for (const cityName of Object.keys(CASE_SLUG_MAP)) {
+      const slugName = CASE_SLUG_MAP[cityName];
+      const aliasDir = path.join(DIST_DIR, 'cases', slugName);
+      if (fs.existsSync(aliasDir)) {
+        fs.rmSync(aliasDir, { recursive: true });
+        log('  Removed: cases/' + slugName + '/ (slug alias)');
+      }
+    }
     // Also clean root index.html and 404.html
     const rootIndex = path.join(DIST_DIR, 'index.html');
     if (fs.existsSync(rootIndex)) {
@@ -622,6 +654,56 @@ function main() {
       log('  ✓ ' + route.slug + '/ (' + n + ' device files)');
       totalCopied += n;
     }
+  }
+
+  // Step 2.5: Create case slug alias directories (hard links)
+  // This makes /cases/manila-lunchbox-studio-2025/ resolve to the same
+  // content as /cases/manila/ without duplicating files on disk.
+  log('\nStep 2.5: Creating case slug alias directories...');
+  let aliasCount = 0;
+  // Find all cases sub-routes from ROUTES
+  for (const route of ROUTES) {
+    const parts = route.slug.split('/');
+    if (parts.length === 2 && parts[0] === 'cases') {
+      const cityName = parts[1];
+      const slugName = CASE_SLUG_MAP[cityName];
+      if (slugName) {
+        const srcPath = path.join(DIST_DIR, route.slug);
+        const dstPath = path.join(DIST_DIR, 'cases', slugName);
+        if (!fs.existsSync(srcPath)) {
+          log('  WARN: Source dir not found: ' + route.slug + '/');
+          continue;
+        }
+        // Skip if alias already exists (e.g. from a previous run)
+        if (fs.existsSync(dstPath)) {
+          log('  ~ ' + 'cases/' + slugName + '/ (already exists)');
+        } else {
+          ensureDir(dstPath);
+          // Hard-link all files from city dir to slug dir
+          const files = fs.readdirSync(srcPath);
+          let linked = 0;
+          for (const file of files) {
+            const srcFile = path.join(srcPath, file);
+            const dstFile = path.join(dstPath, file);
+            try {
+              fs.linkSync(srcFile, dstFile);
+              linked++;
+            } catch (e) {
+              // Fallback: copy if link fails (e.g. across filesystems)
+              fs.copyFileSync(srcFile, dstFile);
+              linked++;
+            }
+          }
+          log('  ✓ ' + 'cases/' + slugName + '/ (' + linked + ' files, hardlinked)');
+          aliasCount++;
+        }
+      } else {
+        log('  WARN: No slug alias for case city: ' + cityName);
+      }
+    }
+  }
+  if (aliasCount === 0) {
+    log('  (none needed)');
   }
 
   // Step 3: Generate root index.html
