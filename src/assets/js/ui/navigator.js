@@ -1299,7 +1299,7 @@
       if (_s) _txt = _s.textContent.replace(/ /g,'_');
       var _ph = document.querySelectorAll('[data-component="navigator"]').length;
       var _hdr = document.querySelector('header');
-      console.debug("[navigator:mount] lang=" + _l + " navProductsText=" + _txt + " placeholders=" + _ph + " headerExists=" + !!_hdr + " headerTag=" + (_hdr ? _hdr.className.substring(0,40) : 'none'));
+      
     })();
     /* Close all open dropdowns before remounting */
     closeOtherDropdowns(null);
@@ -1342,9 +1342,7 @@
     (function() {
       var _s = document.querySelector('header nav a[href="/products/"] > span[data-i18n="nav_products"]');
       var _s2 = document.querySelector('header nav a[href="/applications/"] > span[data-i18n="nav_applications"]');
-      var _t = window.uiText ? window.uiText("nav_products", "[?]") : "[no uiText]";
-      var _t2 = window.uiText ? window.uiText("nav_applications", "[?]") : "[no uiText]";
-      console.debug("[navigator:mount:after] navProductsSpan=" + (_s ? _s.textContent.replace(/ /g,'_') : '[NO_SPAN]') + " navAppsSpan=" + (_s2 ? _s2.textContent.replace(/ /g,'_') : '[NO_SPAN]') + " uiText(nav_products)=" + _t + " uiText(nav_applications)=" + _t2);
+
     })();
     /* 3. 每次构建后需要重新执行的 DOM 相关初始化 */
     reinitTranslationManager();

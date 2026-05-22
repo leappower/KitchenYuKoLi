@@ -31,7 +31,6 @@
   "use strict";
 
   var _spaRegs = {};
-    window.__onSpaEvent("spa:load", function () { pauseAllExcept(null); _activeInstances = []; });
   function _spaOn(tgt, evt, fn, key) {
     if (key == null) key = evt + ":" + (++_spaRegs.__k || (_spaRegs.__k = 1));
     if (_spaRegs[key]) _spaRegs[key].abort();
@@ -482,6 +481,14 @@
   } else {
     init();
   }
+
+  // SPA navigation: pause and release all videos
+  document.addEventListener("spa:load", function () {
+    if (typeof pauseAllExcept === "function") {
+      pauseAllExcept(null);
+    }
+    _activeInstances = [];
+  });
 
   _spaOn(
     document,
