@@ -81,6 +81,8 @@
 
     var isManual = container.getAttribute("data-hero-video-mode") === "manual";
 
+    /* 初始化：关闭原生 controls，由 JS 统一管理 */
+    video.controls = false;
     /* ── 状态 ── */
     var state = {
       hasStarted: false, // 是否首次播放（控制 crossfade 只执行一次）
@@ -372,13 +374,7 @@
     /* ── 点击视频切换播放/暂停（不切换音频） ── */
     video.addEventListener("click", function (e) {
       e.stopPropagation();
-      // If playBtn is hidden (mobile idle state), first tap just reveals controls
-      if (state.isPlaying && playBtn && playBtn.style.opacity === "0") {
-        showPlayBtn();
-        video.controls = true;
-        autoHidePlayBtn();
-        return;
-      }
+      // Toggle play/pause on video click
       if (state.isPlaying) {
         state.pausedByScroll = false;
         video.pause();
