@@ -1304,7 +1304,6 @@
     /* Close all open dropdowns before remounting */
     closeOtherDropdowns(null);
     var placeholders = document.querySelectorAll('[data-component="navigator"]');
-    console.debug("[navigator] mountNavigator called, placeholders:", placeholders.length);
 
     for (var i = 0; i < placeholders.length; i++) {
       var placeholder = placeholders[i];
@@ -1315,7 +1314,6 @@
       var existingHeader = placeholder.querySelector("header");
       if (existingHeader) {
         // [LOG] mountNavigator — found existing header in placeholder, check if it's ACTUALLY a nav header
-        console.debug("[navigator:mount:extract] existing header found in placeholder: headerClass=" + (existingHeader.className || '').substring(0,60) + " headerId=" + (existingHeader.id || 'none') + " headerTag=" + existingHeader.tagName + " navTest=" + !!existingHeader.querySelector('nav'));
         placeholder.parentNode.replaceChild(existingHeader, placeholder);
         continue;
       }
@@ -1380,7 +1378,6 @@
       var _s2 = document.querySelector('header nav a[href="/applications/"] > span[data-i18n="nav_applications"]');
       var _txt2 = _s2 ? _s2.textContent.replace(/ /g,'_') : "[NOT FOUND]";
       var _hdr = document.querySelector('header');
-      console.debug("[navigator:updateActive] section=" + activeSectionId + " lang=" + _l + " navProducts=" + _txt + " navApps=" + _txt2 + " headerExists=" + !!_hdr);
     })();
     activeSectionId = activeSectionId || "";
     var currentPath = window.location.pathname.replace(/\/$/, "") || "/";
