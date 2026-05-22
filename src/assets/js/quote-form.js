@@ -294,21 +294,21 @@
       ].join(" | ");
 
       var formData = {
-        formType: "quote_form",
-        name: contact ? contact.value : "",
-        email: email ? email.value : "",
-        phone: (phoneCode && phoneCode.value !== "+other" ? phoneCode.value : "") + " " + (phone ? phone.value : ""),
+        source: "获取报价",
         country: countryText,
+        contact: contact ? contact.value : "",
         company: company ? company.value : "",
         restaurantType: restaurantText,
+        phoneCode: phoneCode && phoneCode.value !== "+other" ? phoneCode.value : "",
+        phone: phone ? phone.value : "",
         contactChannel: contactChannel ? contactChannel.value : "",
         contactAccount: contactAccount ? contactAccount.value : "",
-        equipment: equipments.join(", "),
-        dailyOutput: capacity && capacity.value ? capacity.options[capacity.selectedIndex].text : "",
+        email: email ? email.value : "",
+        equipTypes: equipments.join(", "),
+        capacity: capacity && capacity.value ? capacity.options[capacity.selectedIndex].text : "",
         budget: budget && budget.value ? budget.options[budget.selectedIndex].text : "",
-        timeline: timeline ? timeline.value : "",
         painPoints: pains.join(", "),
-        message: richMsg,
+        painOther: painOtherCb && painOtherCb.checked && painOther ? painOther.value.trim() : "",
         language: (window.translationManager && window.translationManager.currentLang) || navigator.language,
         browserLanguage: navigator.language,
         screenWidth: window.screen.width,
@@ -326,7 +326,7 @@
         btn.innerHTML = '<span class="material-symbols-outlined animate-spin">progress_activity</span> 提交中...';
       }
 
-      fetch("/api/quote-submit", {
+      fetch("/api/form-submit", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),

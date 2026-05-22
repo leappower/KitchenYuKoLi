@@ -388,20 +388,20 @@
         <p class="text-slate-600 dark:text-slate-400 max-w-2xl" data-i18n="support_faq_ticket_desc">Can't resolve through above methods?</p>
       </div>
       <div class="bg-white dark:bg-slate-800 rounded-2xl p-6 md:p-8 shadow-lg border border-slate-300 dark:border-slate-700 max-w-2xl mx-auto">
-        <form class="space-y-6" onsubmit="return false;">
+        <form id="faq-form" class="space-y-6" onsubmit="return false;">
           <div>
             <label class="block text-sm font-semibold mb-2 text-slate-700 dark:text-slate-300" data-i18n="support_faq_ticket_name_label">Name</label>
-            <input type="text" class="w-full px-4 py-3 rounded-xl border border-slate-300 dark:border-slate-700 bg-transparent focus:ring-2 focus:ring-primary/50 focus:border-primary outline-none text-base" data-i18n-placeholder="support_faq_ticket_name_placeholder" placeholder="请输入您的姓名">
+            <input type="text" id="faq-name" class="w-full px-4 py-3 rounded-xl border border-slate-300 dark:border-slate-700 bg-transparent focus:ring-2 focus:ring-primary/50 focus:border-primary outline-none text-base" data-i18n-placeholder="support_faq_ticket_name_placeholder" placeholder="请输入您的姓名">
           </div>
           <div>
             <label class="block text-sm font-semibold mb-2 text-slate-700 dark:text-slate-300" data-i18n="support_faq_ticket_phone_label">Phone</label>
-            <input type="tel" class="w-full px-4 py-3 rounded-xl border border-slate-300 dark:border-slate-700 bg-transparent focus:ring-2 focus:ring-primary/50 focus:border-primary outline-none text-base" data-i18n-placeholder="support_faq_ticket_phone_placeholder" placeholder="请输入联系电话">
+            <input type="tel" id="faq-phone" class="w-full px-4 py-3 rounded-xl border border-slate-300 dark:border-slate-700 bg-transparent focus:ring-2 focus:ring-primary/50 focus:border-primary outline-none text-base" data-i18n-placeholder="support_faq_ticket_phone_placeholder" placeholder="请输入联系电话">
           </div>
           <div>
             <label class="block text-sm font-semibold mb-2 text-slate-700 dark:text-slate-300" data-i18n="support_faq_ticket_device_label">
                       Equipment Model
                     </label>
-            <select data-custom-select class="w-full px-4 py-3 rounded-xl border border-slate-300 dark:border-slate-700 bg-transparent focus:ring-2 focus:ring-primary/50 focus:border-primary outline-none text-base">
+            <select data-custom-select id="faq-issue-type" class="w-full px-4 py-3 rounded-xl border border-slate-300 dark:border-slate-700 bg-transparent focus:ring-2 focus:ring-primary/50 focus:border-primary outline-none text-base">
               <option data-i18n="support_faq_ticket_device_1">Vegetable Cutter</option>
               <option data-i18n="support_faq_ticket_device_2">Stir Fryer</option>
               <option data-i18n="support_faq_ticket_device_3">Fryer</option>
@@ -414,9 +414,9 @@
             <label class="block text-sm font-semibold mb-2 text-slate-700 dark:text-slate-300" data-i18n="support_faq_ticket_desc_label">
                       Reply within 24h
                     </label>
-            <textarea rows="4" class="w-full px-4 py-3 rounded-xl border border-slate-300 dark:border-slate-700 bg-transparent focus:ring-2 focus:ring-primary/50 focus:border-primary outline-none text-base resize-y" data-i18n-placeholder="support_faq_ticket_desc_placeholder" placeholder="请描述您遇到的问题..."></textarea>
+            <textarea rows="4" id="faq-description" class="w-full px-4 py-3 rounded-xl border border-slate-300 dark:border-slate-700 bg-transparent focus:ring-2 focus:ring-primary/50 focus:border-primary outline-none text-base resize-y" data-i18n-placeholder="support_faq_ticket_desc_placeholder" placeholder="请描述您遇到的问题..."></textarea>
           </div>
-          <button type="submit" class="w-full bg-primary text-white py-3 rounded-xl font-bold text-lg hover:shadow-lg hover:shadow-primary/20 transition-all" data-i18n="support_faq_ticket_submit">
+          <button type="submit" id="faq-submit-btn" class="w-full bg-primary text-white py-3 rounded-xl font-bold text-lg hover:shadow-lg hover:shadow-primary/20 transition-all" data-i18n="support_faq_ticket_submit">
                     Submit Ticket
                   </button>
         </form>
@@ -489,19 +489,19 @@
 <script src="/assets/js/ui/dropdown-styles.js"></script>
     <script src="/assets/js/ui/dropdown-base.js"></script>
     <script src="/assets/js/ui/custom-select.js"></script>
-<script defer src="/assets/js/ui/products-dropdown.js?v=202605221719"></script>
-<script defer src="/assets/js/ui/applications-dropdown.js?v=202605221719"></script>
-<script defer src="/assets/js/ui/support-dropdown.js?v=202605221719"></script>
-<script defer src="/assets/js/ui/about-dropdown.js?v=202605221719"></script>
+<script defer src="/assets/js/ui/products-dropdown.js?v=202605221949"></script>
+<script defer src="/assets/js/ui/applications-dropdown.js?v=202605221949"></script>
+<script defer src="/assets/js/ui/support-dropdown.js?v=202605221949"></script>
+<script defer src="/assets/js/ui/about-dropdown.js?v=202605221949"></script>
 <script src="/assets/js/product-list.js"></script>
 <script src="/assets/js/utils.js"></script>
 <script defer src="/assets/js/ui/search-engine.js"></script>
-    <script defer src="/assets/js/ui/navigator.js?v=202605221719"></script>
-<script defer src="/assets/js/ui/slide-menu.js?v=202605221719"></script>
-<script defer src="/assets/js/ui/footer.js?v=202605221719"></script>
-<script defer src="/assets/js/lang-registry.js?v=202605221719"></script>
-<script defer src="/assets/js/translations.js?v=202605221719"></script>
-<script defer src="/assets/js/translations-dropdown-template.js?v=202605221719"></script>
+    <script defer src="/assets/js/ui/navigator.js?v=202605221949"></script>
+<script defer src="/assets/js/ui/slide-menu.js?v=202605221949"></script>
+<script defer src="/assets/js/ui/footer.js?v=202605221949"></script>
+<script defer src="/assets/js/lang-registry.js?v=202605221949"></script>
+<script defer src="/assets/js/translations.js?v=202605221949"></script>
+<script defer src="/assets/js/translations-dropdown-template.js?v=202605221949"></script>
 
 <script defer src="/assets/js/contacts.js"></script>
 <script defer src="/assets/js/router.js"></script>
@@ -509,9 +509,49 @@
     <script defer src="/assets/js/ui/page-effects.js"></script>
     <script defer src="/assets/js/ui/form-interactions.js"></script>
 <script defer src="/assets/js/page-interactions.js"></script><script src="/assets/js/utils/device-utils.js"></script>
-<script src="/assets/js/spa-router.js?v=202605221719"></script>
+<script src="/assets/js/spa-router.js?v=202605221949"></script>
 
 
     <script defer src="/assets/js/ui/floating-actions.js"></script>
+    <script>
+    (function(){
+      document.addEventListener('DOMContentLoaded', function(){
+        var form = document.getElementById('faq-form');
+        if(!form) return;
+        form.removeAttribute('onsubmit');
+        form.addEventListener('submit', function(e){
+          e.preventDefault();
+          var formData = {
+            source: '技术支持',
+            name: document.getElementById('faq-name')?.value || '',
+            phone: document.getElementById('faq-phone')?.value || '',
+            issueType: document.getElementById('faq-issue-type')?.value || '',
+            description: document.getElementById('faq-description')?.value || '',
+            pageUrl: location.href,
+            language: navigator.language
+          };
+          var btn = document.getElementById('faq-submit-btn');
+          var orig = btn.textContent;
+          btn.disabled = true;
+          btn.textContent = '提交中...';
+          fetch('/api/form-submit', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify(formData)
+          }).then(function(r){ return r.json(); }).then(function(d){
+            if(d.ok){
+              btn.textContent = '✓ 提交成功！';
+              btn.classList.remove('bg-primary');
+              btn.classList.add('bg-green-600');
+              form.reset();
+              setTimeout(function(){ btn.textContent = orig; btn.disabled = false; btn.classList.remove('bg-green-600'); btn.classList.add('bg-primary'); }, 3000);
+            } else {
+              btn.textContent = orig; btn.disabled = false;
+            }
+          }).catch(function(){ btn.textContent = orig; btn.disabled = false; });
+        });
+      });
+    })();
+    </script>
 </body>
 </html>

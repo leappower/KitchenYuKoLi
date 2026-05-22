@@ -120,11 +120,47 @@ app.use(compression({
   }
 }));
 
-// ─── Quote Submission API (proxies to Google Apps Script) ─────────────
+// ─── Unified Form Submission API (proxies to Google Apps Script) ─────────────
 const GOOGLE_FORM_URL = process.env.GOOGLE_FORM_URL;
+const formLimiter = rateLimit({
+  windowMs: 60 * 1000,
+  max: 10,
+  message: { error: 'Too many requests' },
+  standardHeaders: true,
+  legacyHeaders: false,
+});
+app.post('/api/form-submit', formLimiter, express.json({ limit: '100kb' }), async (req, res) => {
+  if (!GOOGLE_FORM_URL) {
+    console.warn('[form-submit] GOOGLE_FORM_URL not configured, logging payload instead');
+    console.log('[form-submit]', JSON.stringify(req.body));
+    return res.status(503).json({ ok: false, error: 'Form service not configured' });
+  }
+  const body = req.body;
+  if (!body || typeof body !== 'object') {
+    return res.status(400).json({ error: 'Invalid request body' });
+  }
+  try {
+    const response = await fetch(GOOGLE_FORM_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+      body: JSON.stringify(body),
+    });
+    if (!response.ok) {
+      console.error('[form-submit] upstream error:', response.status);
+      return res.status(502).json({ ok: false, error: 'Submission service error' });
+    }
+    console.log('[form-submit] OK source=' + (body.source || 'unknown'));
+    res.json({ ok: true });
+  } catch (err) {
+    console.error('[form-submit] fetch error:', err.message);
+    res.status(502).json({ ok: false, error: 'Failed to submit' });
+  }
+});
+
+// ─── Legacy quote-submit (backward compat, redirects to unified) ─────
 const quoteLimiter = rateLimit({
-  windowMs: 60 * 1000,  // 1 minute
-  max: 3,                // max 3 submissions per IP per minute
+  windowMs: 60 * 1000,
+  max: 3,
   message: { error: '提交过于频繁，请稍后再试' },
   standardHeaders: true,
   legacyHeaders: false,

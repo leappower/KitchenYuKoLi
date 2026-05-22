@@ -293,6 +293,24 @@
                     </div>
                   </div>
 
+                  <!-- Phone Code + Phone Number -->
+                  <div class="flex gap-3">
+                    <select id="pc-phone-code" class="w-28 shrink-0 bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-lg p-3 focus:ring-primary focus:border-primary text-sm appearance-none">
+                      <option value="">Code</option>
+                      <option value="+62">🇮🇩 +62</option><option value="+60">🇲🇾 +60</option><option value="+63">🇵🇭 +63</option><option value="+84">🇻🇳 +84</option><option value="+66">🇹🇭 +66</option><option value="+65">🇸🇬 +65</option><option value="+95">🇲🇲 +95</option><option value="+855">🇰🇭 +855</option><option value="+856">🇱🇦 +856</option><option value="+673">🇧🇳 +673</option><option value="+86">🇨🇳 +86</option><option value="+91">🇮🇳 +91</option><option value="+81">🇯🇵 +81</option><option value="+82">🇰🇷 +82</option><option value="+966">🇸🇦 +966</option><option value="+886">🇹🇼 +886</option><option value="+852">🇭🇰 +852</option><option value="+853">🇲🇴 +853</option><option value="+49">🇩🇪 +49</option><option value="+34">🇪🇸 +34</option><option value="+33">🇫🇷 +33</option><option value="+351">🇵🇹 +351</option><option value="+7">🇷🇺 +7</option><option value="+31">🇳🇱 +31</option><option value="+48">🇵🇱 +48</option><option value="+39">🇮🇹 +39</option><option value="+90">🇹🇷 +90</option><option value="+972">🇮🇱 +972</option><option value="+1">🇺🇸 +1</option><option value="+44">🇬🇧 +44</option><option value="+61">🇦🇺 +61</option><option value="+other">Other</option>
+                    </select>
+                    <input type="tel" id="pc-phone" class="flex-1 bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-lg p-3 focus:ring-primary focus:border-primary text-sm" placeholder="Phone Number" />
+                  </div>
+
+                  <!-- Contact Channel + Account -->
+                  <div class="flex gap-3">
+                    <select data-custom-select id="pc-contact-channel" class="flex-1 bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-lg p-3 focus:ring-primary focus:border-primary text-sm appearance-none">
+                      <option value="">Select Channel</option>
+                      <option value="WhatsApp">WhatsApp</option><option value="LINE">LINE</option><option value="Zalo">Zalo</option><option value="Facebook Messenger">Messenger</option><option value="Viber">Viber</option><option value="Telegram">Telegram</option><option value="WeChat">WeChat</option><option value="Phone Call">Phone</option><option value="other">Other</option>
+                    </select>
+                    <input type="text" id="pc-contact-account" class="flex-1 bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-lg p-3 focus:ring-primary focus:border-primary text-sm" placeholder="Account (optional)" />
+                  </div>
+
                   <!-- Submit -->
                   <button
                     type="button"
@@ -476,19 +494,19 @@
     <script src="/assets/js/ui/dropdown-styles.js"></script>
     <script src="/assets/js/ui/dropdown-base.js"></script>
     <script src="/assets/js/ui/custom-select.js"></script>
-    <script defer src="/assets/js/ui/products-dropdown.js?v=202605221719"></script>
-    <script defer src="/assets/js/ui/applications-dropdown.js?v=202605221719"></script>
-    <script defer src="/assets/js/ui/support-dropdown.js?v=202605221719"></script>
-    <script defer src="/assets/js/ui/about-dropdown.js?v=202605221719"></script>
+    <script defer src="/assets/js/ui/products-dropdown.js?v=202605221949"></script>
+    <script defer src="/assets/js/ui/applications-dropdown.js?v=202605221949"></script>
+    <script defer src="/assets/js/ui/support-dropdown.js?v=202605221949"></script>
+    <script defer src="/assets/js/ui/about-dropdown.js?v=202605221949"></script>
     <script src="/assets/js/product-list.js"></script>
     <script src="/assets/js/utils.js"></script>
     <script defer src="/assets/js/ui/search-engine.js"></script>
-    <script defer src="/assets/js/ui/navigator.js?v=202605221719"></script>
-    <script defer src="/assets/js/ui/slide-menu.js?v=202605221719"></script>
-    <script defer src="/assets/js/ui/footer.js?v=202605221719"></script>
-    <script defer src="/assets/js/lang-registry.js?v=202605221719"></script>
-    <script defer src="/assets/js/translations.js?v=202605221719"></script>
-    <script defer src="/assets/js/translations-dropdown-template.js?v=202605221719"></script>
+    <script defer src="/assets/js/ui/navigator.js?v=202605221949"></script>
+    <script defer src="/assets/js/ui/slide-menu.js?v=202605221949"></script>
+    <script defer src="/assets/js/ui/footer.js?v=202605221949"></script>
+    <script defer src="/assets/js/lang-registry.js?v=202605221949"></script>
+    <script defer src="/assets/js/translations.js?v=202605221949"></script>
+    <script defer src="/assets/js/translations-dropdown-template.js?v=202605221949"></script>
 
     <script defer src="/assets/js/contacts.js"></script>
     <script defer src="/assets/js/router.js"></script>
@@ -502,11 +520,47 @@
     <script src="/assets/js/vendor/html2canvas.min.js"></script>
     <script src="/assets/js/vendor/jspdf.umd.min.js"></script>
     <!-- Calculator Engine -->
-    <script src="/assets/js/profit-calculator.js?v=202605221719"></script>
+    <script src="/assets/js/profit-calculator.js?v=202605221949"></script>
 
 
     <script>
       document.addEventListener("DOMContentLoaded", function () {
+        // Country → Phone Code auto-sync
+        var COUNTRY_PHONE_MAP = {
+          "Singapore": "+65", "Malaysia": "+60", "Indonesia": "+62",
+          "Philippines": "+63", "Thailand": "+66", "Vietnam": "+84",
+          "Myanmar": "+95", "Cambodia": "+855", "Laos": "+856",
+          "China": "+86", "Japan": "+81", "South Korea": "+82",
+          "India": "+91", "Saudi Arabia": "+966", "Taiwan": "+886",
+          "Hong Kong SAR": "+852", "Macau SAR": "+853",
+          "Brunei": "+673", "Germany": "+49", "Spain": "+34",
+          "France": "+33", "Portugal": "+351", "Russia": "+7",
+          "Netherlands": "+31", "Poland": "+48", "Italy": "+39",
+          "Turkey": "+90", "Israel": "+972"
+        };
+        document.getElementById("pc-country").addEventListener("change", function() {
+          var code = COUNTRY_PHONE_MAP[this.value];
+          var sel = document.getElementById("pc-phone-code");
+          if (code) sel.value = code;
+        });
+
+        // Phone Code + Phone Number → Contact Account auto-sync
+        function syncAccount() {
+          var accountEl = document.getElementById("pc-contact-account");
+          if (accountEl.dataset.manual === "1") return;
+          var code = document.getElementById("pc-phone-code").value || "";
+          var phone = document.getElementById("pc-phone").value.trim();
+          accountEl.value = phone ? (code + " " + phone) : "";
+        }
+        document.getElementById("pc-phone-code").addEventListener("change", syncAccount);
+        document.getElementById("pc-phone").addEventListener("input", syncAccount);
+        document.getElementById("pc-contact-account").addEventListener("focus", function() {
+          this.dataset.manual = "0";
+        });
+        document.getElementById("pc-contact-account").addEventListener("input", function() {
+          this.dataset.manual = "1";
+        });
+
         var calc = new ProfitCalculator({
           formId: "profit-calc-form",
           resultId: "profit-result-panel",
@@ -524,6 +578,39 @@
         document.getElementById("pc-calc-btn").addEventListener("click", function () {
           document.getElementById("profit-placeholder").classList.add("hidden");
           calc.run();
+          // 静默提交到 Google Sheets
+          setTimeout(function() {
+            var input = calc.getInput();
+            var lastResult = calc.lastResult;
+            var sym = (lastResult && lastResult.info) ? lastResult.info.symbol : '';
+            var calcSummary = '';
+            if (lastResult && lastResult.result) {
+              var r = lastResult.result;
+              calcSummary = '月节省: ' + sym + (r.monthlySavings.min||'') + '-' + sym + (r.monthlySavings.max||'')
+                + ' | 投资回报: ' + r.payback.min + '-' + r.payback.max + '月'
+                + ' | 5年净利: ' + sym + (r.fiveYearReturn.min||'') + '-' + sym + (r.fiveYearReturn.max||'');
+            }
+            var formData = {
+              source: '利润计算器',
+              country: document.getElementById('pc-country')?.value || input.country,
+              contact: '',
+              company: '',
+              businessType: document.getElementById('pc-business-type')?.value || '',
+              phoneCode: document.getElementById('pc-phone-code')?.value || '',
+              phone: document.getElementById('pc-phone')?.value || '',
+              contactChannel: document.getElementById('pc-contact-channel')?.value || '',
+              contactAccount: document.getElementById('pc-contact-account')?.value || '',
+              email: '',
+              painPoints: document.getElementById('pc-pain-point')?.value || '',
+              laborCost: input.laborCost,
+              dailyMeals: input.dailyMeals,
+              operatorReduction: input.operatorReduction,
+              calcResult: calcSummary,
+              language: navigator.language,
+              pageUrl: location.href
+            };
+            navigator.sendBeacon('/api/form-submit', JSON.stringify(formData));
+          }, 2000);
         });
 
         document.getElementById("pc-whatsapp-btn").addEventListener("click", function () {
@@ -537,7 +624,7 @@
     </script>
 
     <script src="/assets/js/utils/device-utils.js"></script>
-    <script src="/assets/js/spa-router.js?v=202605221719"></script>
+    <script src="/assets/js/spa-router.js?v=202605221949"></script>
     <script defer src="/assets/js/ui/floating-actions.js"></script>
 
   </body>
