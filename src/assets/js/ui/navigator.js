@@ -1337,6 +1337,11 @@
       var _abt = typeof window.AboutDropdown !== 'undefined' && typeof window.AboutDropdown.renderPC === 'function';
       console.debug("[navigator:mount] lang=" + _l + " navProductsText=" + _txt + " placeholders=" + _ph + " headerExists=" + !!_hdr + " ProdsDd=" + _pd + " AppsDd=" + _ad + " SupDd=" + _sd + " AbtDd=" + _abt);
 
+    })();
+    /* Close all open dropdowns before remounting */
+    closeOtherDropdowns(null);
+    var placeholders = document.querySelectorAll('[data-component="navigator"]');
+
     for (var i = 0; i < placeholders.length; i++) {
       var placeholder = placeholders[i];
 
