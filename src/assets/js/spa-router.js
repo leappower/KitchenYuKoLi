@@ -207,6 +207,9 @@
       if (global.Navigator && typeof global.Navigator.updateActive === "function") {
         global.Navigator.updateActive(_spaState.currentRoute);
       }
+      if (global.SlideMenu && typeof global.SlideMenu.updateActive === "function") {
+        global.SlideMenu.updateActive();
+      }
       if (global.Footer && typeof global.Footer.updateActive === "function") {
         global.Footer.updateActive(_spaState.currentRoute);
       }

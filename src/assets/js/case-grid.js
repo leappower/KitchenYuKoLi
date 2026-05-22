@@ -213,7 +213,9 @@
       '<div class="w-full aspect-video bg-slate-200 dark:bg-slate-700 overflow-hidden relative flex-shrink-0">' +
       '<img loading="lazy" alt="' +
       c.title +
-      '" class="w-full h-full object-cover group-hover:scale-105 transition-transform" src="/assets/images/default.webp" />' +
+      '" class="w-full h-full object-cover group-hover:scale-105 transition-transform" src="/assets/images/cases/' +
+      c.slug.split("-")[0] +
+      '/cover.webp" />' +
       '<div class="absolute top-3 left-3 flex items-center gap-2">' +
       '<span class="px-3 py-1 rounded-full bg-white/90 dark:bg-slate-800/90 text-sm font-semibold text-slate-700 dark:text-slate-200 backdrop-blur-sm">' +
       c.country +
@@ -403,6 +405,24 @@
     if (countEl) {
       var template = __("cases_count_format", "{count} 个案例");
       countEl.textContent = template.replace("{count}", cases.length);
+    }
+
+    // Make entire case cards clickable
+    var cards = container.querySelectorAll(".case-card");
+    for (var ci = 0; ci < cards.length; ci++) {
+      (function (card) {
+        card.style.cursor = "pointer";
+        card.addEventListener("click", function (e) {
+          // Don't intercept clicks on nested links or buttons
+          if (e.target.closest("a") || e.target.closest("button")) return;
+          var link = card.querySelector('a[href^="/cases/"]');
+          if (link) {
+            e.preventDefault();
+            var href = link.getAttribute("href");
+            if (href) window.location.href = href;
+          }
+        });
+      })(cards[ci]);
     }
   }
 
