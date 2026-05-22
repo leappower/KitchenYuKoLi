@@ -1,6 +1,6 @@
 !(function (t) {
   "use strict";
-  var I18N_CACHE_V = 1779457099;
+  var I18N_CACHE_V = 1779457601;
   var _spaRegs = {};
 
   // ─── Ensure LANG_REGISTRY is loaded ─────────────────────────
@@ -356,7 +356,7 @@
                     });
                 }),
                 c.length > 0 &&
-                  requestAnimationFrame(function () {
+                  (function () {
                     c.forEach(function (e) {
                       if (e.text) {
                         t.setElementTranslation(e.el, e.text);
@@ -368,7 +368,7 @@
                         e.el.alt = e.alt;
                       }
                     });
-                  }),
+                  })(),
                 i)
               ) {
                 var g = getO()[t.currentLanguage] || t.currentLanguage.toUpperCase();
