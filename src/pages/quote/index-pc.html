@@ -111,16 +111,16 @@
 
           <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:items-stretch">
             <!-- Form Section: 8 cols -->
-            <div class="lg:col-span-8">
-              <div class="bg-white dark:bg-slate-900/50 border border-slate-200 dark:border-slate-800 rounded-xl p-6 md:p-10 shadow-sm min-h-[600px]">
-              <form id="quote-form" class="space-y-5" novalidate>
+            <div class="lg:col-span-8 flex flex-col">
+              <div class="bg-white dark:bg-slate-900/50 border border-slate-200 dark:border-slate-800 rounded-xl p-6 md:p-10 shadow-sm flex-1 flex flex-col">
+              <form id="quote-form" class="flex-1 flex flex-col" novalidate>
               <!-- Step 1: Info -->
-              <div id="quote-step-1">
+              <div id="quote-step-1" class="flex-1 flex flex-col">
                 <h2 class="text-lg font-bold mb-4 flex items-center gap-2">
                   <span class="inline-flex items-center justify-center size-7 rounded-full bg-primary text-white text-xs font-black">1</span>
                   <span data-i18n="quote_step_1">基本信息</span>
                 </h2>
-                <div class="grid grid-cols-3 gap-4">
+                <div class="grid grid-cols-3 gap-4 flex-1 content-start">
                   <!-- Row 1: Country + Name + Restaurant Type -->
                   <label class="flex flex-col gap-1.5 col-span-1"><span class="text-base font-bold" data-i18n="quote_country_label">国家 <span class="text-red-500">*</span></span>
                     <select data-custom-select id="q-country" required onchange="window._onCountryChange&&window._onCountryChange(this.value)" class="h-14 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white focus:border-primary text-base px-4 py-3.5 appearance-none">
@@ -158,8 +158,8 @@
                       <input id="q-contact-account" type="text" class="h-14 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white focus:border-primary text-base px-4 py-3.5" placeholder="Leave blank to use phone" data-i18n-placeholder="quote_account_placeholder" />
                     </label>
                   </div>
-                  <!-- Row 3: Email (full width) + Next button -->
-                  <div class="col-span-3">
+                  <!-- Row 3: Email (full width) + Next button pushed to bottom -->
+                  <div class="col-span-3 mt-auto">
                     <label class="flex flex-col gap-1.5"><span class="text-base font-bold" data-i18n="quote_email_label">电子邮箱</span>
                       <input id="q-email" type="email" class="h-14 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white focus:border-primary text-base px-4 py-3.5" placeholder="Your email" data-i18n-placeholder="quote_email_placeholder" />
                     </label>
@@ -171,13 +171,14 @@
               </div>
 
               <!-- Step 2: Equip -->
-              <div id="quote-step-2" class="hidden">
+              <div id="quote-step-2" class="hidden flex-1 flex flex-col">
                 <h2 class="text-lg font-bold mb-3 flex items-center gap-2">
                   <span class="inline-flex items-center justify-center size-7 rounded-full bg-primary text-white text-xs font-black">2</span>
                   <span data-i18n="quote_step_2">设备需求</span>
                 </h2>
-                <div class="mb-4">
-                  <span class="text-base font-bold">需要哪些设备？<span class="text-red-500">*</span></span>
+                <div class="flex-1 content-start">
+                  <div class="mb-4">
+                    <span class="text-base font-bold">需要哪些设备？<span class="text-red-500">*</span></span>
                   <div class="grid grid-cols-4 gap-3 mt-2">
                     <label class="flex items-center gap-1.5 p-2 rounded-lg border border-slate-200 cursor-pointer hover:border-primary transition-all text-base"><input type="checkbox" class="accent-primary" value="cutting" /> 切配</label>
                     <label class="flex items-center gap-1.5 p-2 rounded-lg border border-slate-200 cursor-pointer hover:border-primary transition-all text-base"><input type="checkbox" class="accent-primary" value="stirfry" /> 翻炒</label>
@@ -216,7 +217,8 @@
                   </div>
                   <div class="flex items-center gap-2 mt-2"><input type="checkbox" id="q-pain-other-cb" class="accent-primary" value="其他" /><span class="text-sm" data-i18n="quote_challenge_other">其他：</span><input type="text" id="q-pain-other" class="flex-1 px-3 py-2 rounded-lg border border-slate-200 bg-transparent text-sm" data-i18n-placeholder="quote_challenge_other_placeholder" placeholder="Describe..." /></div>
                 </div>
-                <div class="flex gap-3 mt-4">
+                </div>  <!-- end content-start -->
+                <div class="flex gap-3 mt-auto pt-4">
                   <button type="button" id="quote-prev-btn" class="px-5 py-3 rounded-xl font-bold text-slate-600 border border-slate-300 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800 transition-all flex items-center gap-1.5 text-base"><span class="material-symbols-outlined text-sm">arrow_back</span> <span data-i18n="quote_prev_btn">上一步</span></button>
                   <button type="submit" id="quote-submit-btn" class="flex-1 bg-primary text-white py-4 rounded-xl font-bold hover:bg-primary/90 transition-all flex items-center justify-center gap-2 text-base"><span data-i18n="quote_submit_btn">提交获取报价</span> <span class="material-symbols-outlined">arrow_forward</span></button>
                 </div>
