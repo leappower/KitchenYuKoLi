@@ -210,7 +210,7 @@
       bc +
       '-500/50 flex flex-col">' +
       "<!-- 上方图片 16:9 -->" +
-      '<div class="w-full aspect-video bg-slate-200 dark:bg-slate-700 overflow-hidden relative flex-shrink-0">' +
+      '<div class="w-full h-44 md:h-56 lg:h-64 bg-slate-200 dark:bg-slate-700 overflow-hidden relative flex-shrink-0">' +
       '<img loading="lazy" alt="' +
       c.title +
       '" class="w-full h-full object-cover group-hover:scale-105 transition-transform" src="/assets/images/cases/' +
@@ -311,6 +311,26 @@
     var bc = benefitColor(c.benefit);
     return (
       '<div class="case-card bg-white dark:bg-slate-800 rounded-xl overflow-hidden shadow-md border border-slate-200 dark:border-slate-700">' +
+      '  <!-- 上方图片 16:9 -->' +
+      '<div class="w-full h-36 md:h-44 bg-slate-200 dark:bg-slate-700 overflow-hidden relative flex-shrink-0">' +
+      '<img loading="lazy" alt="' +
+      c.title +
+      '" class="w-full h-full object-cover group-hover:scale-105 transition-transform" src="/assets/images/cases/' +
+      c.slug.split("-")[0] +
+      '/cover.webp" />' +
+      '<div class="absolute top-2 left-2 flex items-center gap-1.5">' +
+      '<span class="px-2 py-0.5 rounded-full bg-white/90 dark:bg-slate-800/90 text-xs font-semibold text-slate-700 dark:text-slate-200 backdrop-blur-sm">' +
+      c.country +
+      "</span>" +
+      '<span class="px-2 py-0.5 rounded-full bg-' +
+      bc +
+      '-500 text-white text-xs font-bold" data-i18n="cases_benefit_' +
+      c.benefit.replace(/ /g, '_').toLowerCase() +
+      '">' +
+      benefitLabel(c.benefit) +
+      "</span>" +
+      "</div>" +
+      "</div>" +
       '<div class="p-4 flex flex-col gap-2">' +
       '<div class="flex items-center justify-between text-sm text-slate-500 dark:text-slate-400">' +
       "<span>" +
