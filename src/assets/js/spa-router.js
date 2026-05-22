@@ -203,13 +203,13 @@
         console.log('[spa-router] forced CaseGrid.init variant=' + variant);
         global.CaseGrid.init(variant);
       }
-      // Update navigator: re-mount if placeholder reappeared (slug page has own <navigator> tag)
-      if (global.Navigator && typeof global.Navigator.mount === "function") {
-        var navPlaceholders = document.querySelectorAll('[data-component="navigator"]');
-        if (navPlaceholders.length > 0) {
-          global.Navigator.mount();
-        }
-      }
+      // Do NOT re-mount navigator on SPA navigation.
+      // Swup containers=["#spa-content"] only replaces main content;
+      // body-level <navigator> survives. Calling mount() destroys
+      // existing dropdown event bindings by rebuilding the header DOM
+      // from scratch, while initDropdownClick will not rebind
+      // triggers because _docClickBound is already true.
+      // Instead, only update the active state to reflect new route.
       // Update navigator active state
       if (global.Navigator && typeof global.Navigator.updateActive === "function") {
         // Extract the top-level section from the route (e.g. /cases/manila → "cases")
