@@ -348,7 +348,11 @@
    */
   function renderGrid(variant) {
     var container = document.getElementById("case-grid");
-    if (!container) return;
+    if (!container) {
+      console.log('[case-grid] renderGrid: #case-grid not found');
+      return;
+    }
+    console.log('[case-grid] renderGrid variant=' + variant + ' filtered=' + getFiltered().length);
     var cases = getFiltered();
     if (cases.length === 0) {
       container.innerHTML =
@@ -535,6 +539,7 @@
 
   /* ── Init ───────────────────────────────────────── */
   function init(variant) {
+    console.log('[case-grid] init variant=' + variant + ' case-grid=' + !!document.getElementById('case-grid') + ' case-filters=' + !!document.getElementById('case-filters'));
     if (variant === "pc") buildFiltersPc();
     else if (variant === "tablet") buildFiltersTablet();
     else buildFiltersMobile();
@@ -545,4 +550,20 @@
 
   /* ── Auto-init based on data attribute ──────────── */
   window.CaseGrid = { init: init, FILTERS: FILTERS, ROI_CASES: ROI_CASES };
+
+  // ── Auto-init when DOM is ready ────────────────────
+  function autoInit() {
+    if (!document.getElementById('case-grid')) return;
+    var variant = window.innerWidth < 768 ? 'mobile' : window.innerWidth < 1280 ? 'tablet' : 'pc';
+    init(variant);
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', autoInit);
+  } else {
+    autoInit();
+  }
+
+  // SPA navigation re-init
+  document.addEventListener('spa:load', autoInit);
 })();

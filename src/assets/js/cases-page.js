@@ -600,9 +600,12 @@
     // Also init case cards if CaseGrid is loaded
     if (window.CaseGrid && typeof window.CaseGrid.init === "function") {
       var variant = window.innerWidth < 768 ? "mobile" : window.innerWidth < 1280 ? "tablet" : "pc";
+      console.log('[cases-page] spa:load variant=' + variant + ' case-grid=' + !!document.getElementById('case-grid') + ' case-filters=' + !!document.getElementById('case-filters'));
       if (document.getElementById("case-grid")) {
         window.CaseGrid.init(variant);
       }
+    } else {
+      console.log('[cases-page] CaseGrid not available', !!window.CaseGrid);
     }
   }
   if (document.readyState === "loading") {

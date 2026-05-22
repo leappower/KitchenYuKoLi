@@ -87,6 +87,50 @@ npm run build:dev        # 开发构建（无版本号注入）
 npm run dev              # 开发模式：nodemon + 自动构建
 ```
 
+### ⚠️ 构建规范：build.sh 是唯一入口
+
+`build.sh` 是唯一合法的构建入口。跳过它直接调用 webpack 等工具会导致构建不完整。
+
+**build.sh 完整流程：**
+
+| 步骤 | 做什么 | 跳过后果 |
+|---|---|---|
+| 1. 清理 dist | rm -rf | 残留文件污染 |
+| 2. Tailwind + Webpack | 编译 CSS/JS | 代码不更新 |
+| 3. 同步 assets 到 pages | 复制 lang/images 到页面子目录 | 页面 asset 404 |
+| 4. 注入 lang + translations | 全局多语言初始化 | 页面 i18n 不工作 |
+| 5. 版本号注入 | `?v=timestamp` 缓存破坏 | 部署后缓存不更新 |
+| 6. SSG build-ssg.js | 为每个路由生成 index.html | **路由 404，Swup 无法工作** |
+| 6.5 创建 case slug 别名 | 硬链接 SEO slug → 短目录 | **案例详情页 slug URL 404** |
+| 7. Sitemap / search index | 搜索引擎爬取 | SEO 降级 |
+| 8. 注入 device redirect | 移动端/pc 自适应 | 响应式降级 |
+| 9. 验证 slug 目录 | 确认 8 个 case slug 都存在 | 缺失则构建失败 |
+
+**错误做法（会出问题）：**
+```bash
+# ❌ 缺少 SSG，dist 中没有路由 index.html，案例 slug URL 404
+npx webpack
+
+# ❌ 同上，且没有 version bump
+npx webpack --mode development
+
+# ❌ 缺少 slug 硬链接，静态部署时案例详情 404
+node scripts/build-ssg.js # 单独跑也不行，需要完整流程
+```
+
+**正确做法：**
+```bash
+# ✅ 完整生产构建
+bash build.sh
+
+# ✅ 或通过 npm 脚本
+npm run build
+npm run build:production
+npm run build:dev
+```
+
+> `npm run dev` 也会在 nodemon 中调用 build.sh 确保 dist 完整，但开发时新增案例 slug 需要手动跑一次 `npm run build` 重建硬链接。
+
 ## 多语言
 
 - 30+ 语言翻译文件在 `src/assets/lang/`
