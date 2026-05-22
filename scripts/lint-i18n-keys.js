@@ -30,7 +30,7 @@ var I18N_REGEX = /data-i18n(?:-placeholder|-aria|-alt)?=["']([^"']+)["']/g;
 
 // 跳过 JS 中动态拼接的 key 前缀（不完整 key）
 // 例如 data-i18n="cases_" + c.slug + "_title" 中的 cases_ 本身不是完整 key
-var JS_DYNAMIC_PREFIXES = ["cases_", "cases_quote_"];
+var JS_DYNAMIC_PREFIXES = ["cases_", "cases_quote_", "cases_benefit_", "cases_industry_", "cases_daily_", "cases_payback_", "cases_labor_"];
 // data-i18n-alt 图片 alt 翻译（大量缺失，降级为 warn 不阻断）
 var WARN_ONLY_ATTRS = ["data-i18n-alt"];
 
