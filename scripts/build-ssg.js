@@ -300,11 +300,13 @@ function injectSwupScripts(html) {
  * must be consistent across pages to avoid layout breaks on SPA navigation.
  */
 function normalizeSpaContent(html) {
-  // Normalize main#spa-content: ensure flex-1 exists, remove overflow-x constraints
-  // which would clip fullwidth-bg negative margin breakout.
+  // Normalize main#spa-content: ensure flex-1 + overflow-x-hidden
+  // to prevent fullwidth-bg negative margin from creating horizontal scroll.
+  // body overflow-x:clip handles the outermost clipping;
+  // main overflow-x:hidden ensures inner sections don't overflow.
   html = html.replace(
     /(<main\s+id="spa-content")(\s+class="[^"]*")?/gi,
-    '$1 class="flex-1"'
+    '$1 class="flex-1 overflow-x-hidden"'
   );
   return html;
 }
@@ -469,6 +471,8 @@ function copyDeviceFiles(route) {
     return 0;
   }
 
+
+
   ensureDir(destRouteDir);
 
   let copied = 0;
@@ -495,6 +499,7 @@ function copyDeviceFiles(route) {
     }
     fs.writeFileSync(destFile, content, 'utf-8');
     copied++;
+
   }
 
   return copied;
