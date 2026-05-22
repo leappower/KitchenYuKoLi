@@ -319,6 +319,7 @@
 
       container.setAttribute("data-hero-video-playing", "true");
       updatePlayBtn(true, false);
+      autoHidePlayBtn();
     });
 
     video.addEventListener("pause", function () {
@@ -383,12 +384,40 @@
       }
     });
 
-    /* ── PC hover 显示原生 controls ── */
+    /* ── PC hover 显示原生 controls + playBtn ── */
+    var _hideBtnTimer = null;
+
+    function showPlayBtn() {
+      if (!playBtn) return;
+      playBtn.style.opacity = "1";
+      playBtn.style.transition = "opacity 0.2s ease";
+      if (_hideBtnTimer) { clearTimeout(_hideBtnTimer); _hideBtnTimer = null; }
+    }
+
+    function autoHidePlayBtn() {
+      if (!playBtn || !state.isPlaying) return;
+      if (_hideBtnTimer) clearTimeout(_hideBtnTimer);
+      _hideBtnTimer = setTimeout(function () {
+        playBtn.style.opacity = "0";
+      }, 2000);
+    }
+
+    container.addEventListener("mousemove", function () {
+      if (state.isPlaying) {
+        showPlayBtn();
+        autoHidePlayBtn();
+      }
+    });
+
     container.addEventListener("mouseenter", function () {
-      if (state.isPlaying) video.controls = true;
+      if (state.isPlaying) {
+        video.controls = true;
+        showPlayBtn();
+      }
     });
     container.addEventListener("mouseleave", function () {
       video.controls = false;
+      if (state.isPlaying) autoHidePlayBtn();
     });
 
     /* ── 注册到全局 ── */
