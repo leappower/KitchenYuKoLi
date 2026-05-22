@@ -318,6 +318,12 @@
         </section>
         <section class="fullwidth-bg pt-2 pb-4" id="products">
           <div class="section-content">
+            <!-- Tier filter -->
+            <div class="flex items-center gap-2 overflow-x-auto scrollbar-hide pb-2">
+              <button class="filter-chip active px-2.5 py-1 rounded-full border border-slate-200 dark:border-slate-700 text-[10px] font-medium whitespace-nowrap" data-filter="all" data-i18n="all">All</button>
+              <button class="filter-chip px-2.5 py-1 rounded-full border border-slate-200 dark:border-slate-700 text-[10px] font-medium whitespace-nowrap" data-filter="入门" data-i18n="products_filter_starter">Starter</button>
+              <button class="filter-chip px-2.5 py-1 rounded-full border border-slate-200 dark:border-slate-700 text-[10px] font-medium whitespace-nowrap" data-filter="智能" data-i18n="products_filter_smart">Smart</button>
+            </div>
             <div class="grid grid-cols-2 gap-3" id="product-grid">
               <!-- Dynamically rendered by product-grid.js -->
             </div>
