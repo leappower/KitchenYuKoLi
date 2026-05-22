@@ -811,7 +811,7 @@
           var _txt = _nav_span ? _nav_span.textContent : "[NOT FOUND]";
           var _nav_exists = !!document.querySelector('header')
           var _ph = document.querySelectorAll('[data-component="navigator"]').length
-          console.log("[i18n:spa:load] lang=" + _l + " uiText('nav_products')=" + _v + " uiText('nav_applications')=" + _v2 + " navSpanText=" + _txt.replace(/ /g,'_') + " headerExists=" + _nav_exists + " placeholders=" + _ph);
+          console.debug("[i18n:spa:load] lang=" + _l + " uiText('nav_products')=" + _v + " uiText('nav_applications')=" + _v2 + " navSpanText=" + _txt.replace(/ /g,'_') + " headerExists=" + _nav_exists + " placeholders=" + _ph);
         })();
         (s.resetEventListeners(),
           s

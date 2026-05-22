@@ -216,7 +216,7 @@
         var _txt = _s ? _s.textContent.replace(/ /g,'_') : "[NO HEADER]";
         var _tm = window.translationManager && window.translationManager.uiText ? window.translationManager.uiText("nav_products", "[?]") : "[no uiText]";
         var _newDocOk = !!(visit && visit.to && visit.to.document);
-        console.log("[spa-router:content:replace] lang=" + _l + " navProducts=" + _txt + " uiText(nav_products)=" + _tm + " newDocOk=" + _newDocOk);
+        console.debug("[spa-router:content:replace] lang=" + _l + " navProducts=" + _txt + " uiText(nav_products)=" + _tm + " newDocOk=" + _newDocOk);
       })();
       global.__spaNavigating = false;
       _spaState.currentRoute = global.location.pathname.replace(/\/$/, "") || "/";
