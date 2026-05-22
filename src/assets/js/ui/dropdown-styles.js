@@ -34,7 +34,7 @@
     "}",
 
     ".{{PREFIX}}-dropdown-wrap.is-open .{{PREFIX}}-dropdown-arrow,",
-    ".{{PREFIX}}-dropdown-wrap:not(.touch-device):hover .{{PREFIX}}-dropdown-arrow {",
+    ".{{PREFIX}}-dropdown-wrap:hover .{{PREFIX}}-dropdown-arrow {",
     "  transform: rotate(180deg);",
     "}",
 
@@ -51,7 +51,7 @@
     "}",
 
     ".{{PREFIX}}-dropdown-wrap.is-open .{{PREFIX}}-dropdown-panel,",
-    ".{{PREFIX}}-dropdown-wrap:not(.touch-device):hover .{{PREFIX}}-dropdown-panel {",
+    ".{{PREFIX}}-dropdown-wrap:hover .{{PREFIX}}-dropdown-panel {",
     "  opacity: 1; visibility: visible; pointer-events: auto;",
     "  transform: translateX(-50%) scale(1);",
     "  transition: opacity .2s ease, transform .35s cubic-bezier(.32,.72,0,1), visibility 0s 0s;",
