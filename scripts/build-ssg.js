@@ -300,10 +300,13 @@ function injectSwupScripts(html) {
  * must be consistent across pages to avoid layout breaks on SPA navigation.
  */
 function normalizeSpaContent(html) {
-  // Normalize main#spa-content: ensure flex-1 + overflow-x-hidden.
+  // Normalize main#spa-content: ensure flex-1 + overflow-x-clip.
+  // Use overflow-x:clip instead of hidden — CSS spec forces
+  // overflow-y:auto when overflow-x is hidden, creating a nested
+  // vertical scrollbar inside main at 2048px+ wide viewports.
   // Append to existing class instead of replacing, so unique classes
   // (e.g. mobile pages' max-w-[1024px] mx-auto) are preserved.
-  var required = ['flex-1', 'overflow-x-hidden'];
+  var required = ['flex-1', 'overflow-x-clip'];
   html = html.replace(
     /(<main\s+id="spa-content")(\s+class="([^"]*)")?/gi,
     function(match, open, classAttr, existing) {
