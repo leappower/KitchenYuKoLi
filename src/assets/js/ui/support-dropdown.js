@@ -72,9 +72,7 @@
       '<a class="' +
       esc(cfg.activeClass || "") +
       ' sup-dropdown-link"' +
-      ' href="' +
-      esc(cfg.href || "#") +
-      '"' +
+      ' href="javascript:void(0)"' +
       ' data-sup-trigger-label="' +
       esc(cfg.labelKey || cfg.label) +
       '">' +

@@ -77,9 +77,7 @@
       '<a class="' +
       esc(cfg.activeClass || "") +
       ' app-dropdown-link"' +
-      ' href="' +
-      esc(cfg.href || "#") +
-      '"' +
+      ' href="javascript:void(0)"' +
       ' data-app-trigger-label="' +
       esc(cfg.labelKey || cfg.label) +
       '">' +
