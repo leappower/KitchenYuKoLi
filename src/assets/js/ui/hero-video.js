@@ -74,6 +74,11 @@
 
     if (!video || !poster) return;
 
+    // Upgrade preload from "none" to "auto" when visible — saves bandwidth on SPA nav
+    if (video.getAttribute("preload") === "none") {
+      video.setAttribute("preload", "auto");
+    }
+
     var isManual = container.getAttribute("data-hero-video-mode") === "manual";
 
     /* ── 状态 ── */

@@ -874,9 +874,21 @@ function main() {
   }
 
   // Walk dist/ for all .html files
+  function _injectLazyLoading(html) {
+    // Add loading="lazy" to <img> tags that don't have loading= already.
+    // Skip images with loading="eager" (hero images, above-the-fold).
+    // Match <img ...> or <img ... /> closing patterns.
+    html = html.replace(/<img\s+((?:(?!loading=)[^>])*)>/gi, function(match, attrs) {
+      return '<img ' + attrs.trim() + ' loading="lazy">';
+    });
+    return html;
+  }
+
+  // Walk dist/ for all .html files
   function _walkHtml(dir) {
     if (!fs.existsSync(dir)) return;
     var entries = fs.readdirSync(dir, { withFileTypes: true });
+    var _lazyInjected = 0;
     entries.forEach(function (entry) {
       var fullPath = path.join(dir, entry.name);
       if (entry.isDirectory()) {
@@ -885,6 +897,11 @@ function main() {
         var html = fs.readFileSync(fullPath, 'utf-8');
         var modified = _injectComponentsCss(html);
         modified = _injectCoreCss(modified);
+        var lazyModified = _injectLazyLoading(modified);
+        if (lazyModified !== modified) {
+          _lazyInjected++;
+          modified = lazyModified;
+        }
         if (modified !== html) {
           fs.writeFileSync(fullPath, modified);
           _componentsInjected++;
@@ -910,6 +927,7 @@ function main() {
         }
       }
     });
+    if (_lazyInjected > 0) log('  ✓ Injected loading=lazy into ' + _lazyInjected + ' HTML files');
   }
 
   _walkHtml(DIST_DIR);
