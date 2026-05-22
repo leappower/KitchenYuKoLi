@@ -15,52 +15,28 @@
     />
     <link rel="alternate" media="only screen and (min-width: 1280px)" href="/home/index-pc.html" />
     <script>
-      /* Responsive redirect — runs before render, no flash */
-      (function () {
-        // 防止 bfcache 恢复时重复 redirect
-        if (window.__redirectChecked) return;
-        window.__redirectChecked = true;
-
-        // 处理 clean-url 参数:重定向后清理 URL 为干净的目录 URL
-        var urlParams = new URLSearchParams(location.search);
-        var cleanUrl = urlParams.get("clean-url");
-        if (cleanUrl) {
-          history.replaceState({}, "", cleanUrl);
-          return;
-        }
-
-        // SPA 导航时跳过响应式重定向
-        if (window.__spaNavigating) {
-          return;
-        }
-
-        // 使用 DeviceUtils 统一管理设备判断
-        var currentFile = location.pathname.split("/").pop();
-
-        // 当访问目录 URL(以 / 结尾)时,不要重定向(SPA 导航使用干净的目录 URL)
-        if (window.DeviceUtils && window.DeviceUtils.isDirectoryURL()) {
-          return;
-        }
-
-        // 使用 DeviceUtils 判断是否需要重定向
-        if (window.DeviceUtils && window.DeviceUtils.shouldRedirect(currentFile)) {
-          var deviceType = window.DeviceUtils.getDeviceType();
-          var targetFile;
-
-          if (deviceType === window.DeviceUtils.DeviceType.MOBILE) {
-            targetFile = "index-mobile.html";
-          } else if (deviceType === window.DeviceUtils.DeviceType.TABLET) {
-            targetFile = "index-tablet.html";
-          } else {
-            targetFile = "index-pc.html";
-          }
-
-          location.href = targetFile;
-          return;
-        }
-      })();
+    (function checkDevice(){
+      if(window.__redirectChecked)return;
+      if(document.querySelector("meta[name=ssg-device]"))return;
+      window.__redirectChecked=true;
+      var u=new URLSearchParams(location.search);
+      var c=u.get("clean-url");
+      if(c){history.replaceState({},"",c);return}
+      if(window.__spaNavigating)return;
+      var f=location.pathname.split("/").pop();
+      if(f&&f.match(/^index-(pc|mobile|tablet)\.html$/))return;
+      function doRedirect(){
+        var mq767=window.matchMedia("(max-width:767px)");
+        var mq1279=window.matchMedia("(max-width:1279px)");
+        var e=mq767.matches?"index-mobile.html":mq1279.matches?"index-tablet.html":"index-pc.html";
+        if(f){if(f===e)return}
+        location.href=location.pathname.replace(/[^\/]*\.html$/,"")+e;
+      }
+      window.addEventListener("DOMContentLoaded",doRedirect);
+      setTimeout(doRedirect,100);
+    })();
     </script>
-    <script>
+<script>
       /* Pre-apply cached translations to prevent flash */
       (function () {
         try {
@@ -588,22 +564,30 @@
     <!-- Schema Markup for SEO -->
     <script src="/assets/js/ui/dropdown-styles.js"></script>
     <script src="/assets/js/ui/dropdown-base.js"></script>
-    <script defer src="/assets/js/ui/products-dropdown.js?v=202605212122"></script>
-    <script defer src="/assets/js/ui/applications-dropdown.js?v=202605212122"></script>
-    <script defer src="/assets/js/ui/support-dropdown.js?v=202605212122"></script>
-    <script defer src="/assets/js/ui/about-dropdown.js?v=202605212122"></script>
+    <script defer src="/assets/js/ui/products-dropdown.js?v=202605221159"></script>
+    <script defer src="/assets/js/ui/applications-dropdown.js?v=202605221159"></script>
+    <script defer src="/assets/js/ui/support-dropdown.js?v=202605221159"></script>
+    <script defer src="/assets/js/ui/about-dropdown.js?v=202605221159"></script>
     <script src="/assets/js/product-list.js"></script>
     <script src="/assets/js/utils.js"></script>
     <script defer src="/assets/js/ui/search-engine.js"></script>
-    <script defer src="/assets/js/ui/navigator.js?v=202605212122"></script>
-    <script defer src="/assets/js/ui/slide-menu.js?v=202605212122"></script>
+    <script defer src="/assets/js/ui/navigator.js?v=202605221159"></script>
+    <script defer src="/assets/js/ui/slide-menu.js?v=202605221159"></script>
     <script src="/assets/js/ui/hero-video.js"></script>
+<<<<<<< Updated upstream
     <script defer src="/assets/js/ui/footer.js?v=202605212122"></script>
     <script defer src="/assets/js/lang-registry.js?v=202605212122"></script>
     <script defer src="/assets/js/translations.js?v=202605212122"></script>
     <script defer src="/assets/js/translations-dropdown-template.js?v=202605212122"></script>
     <script defer src="/assets/js/home-core-products.js?v=202605212122"></script>
 
+=======
+    <script defer src="/assets/js/ui/footer.js?v=202605221159"></script>
+    <script defer src="/assets/js/lang-registry.js?v=202605221159"></script>
+    <script defer src="/assets/js/translations.js?v=202605221159"></script>
+    <script defer src="/assets/js/translations-dropdown-template.js?v=202605221159"></script>
+    <script defer src="/assets/js/home-core-products.js?v=202605221159"></script>
+>>>>>>> Stashed changes
     <script defer src="/assets/js/contacts.js"></script>
     <script defer src="/assets/js/router.js"></script>
 
@@ -612,7 +596,7 @@
     <script defer src="/assets/js/ui/form-interactions.js"></script>
     <script defer src="/assets/js/page-interactions.js"></script>
     <script src="/assets/js/utils/device-utils.js"></script>
-    <script src="/assets/js/spa-router.js?v=202605212122"></script>
+    <script src="/assets/js/spa-router.js?v=202605221159"></script>
     <script defer src="/assets/js/ui/floating-actions.js"></script>
 
   </body>

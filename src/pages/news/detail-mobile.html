@@ -3,29 +3,26 @@
 <head>
 <meta charset="utf-8"/>
     <script>
-      (function () {
-        if (window.__redirectChecked) return;
-        window.__redirectChecked = true;
-        var urlParams = new URLSearchParams(location.search);
-        var cleanUrl = urlParams.get("clean-url");
-        if (cleanUrl) {
-          history.replaceState({}, "", cleanUrl);
-          return;
-        }
-        if (window.__spaNavigating) return;
-        var currentFile = location.pathname.split("/").pop();
-        if (window.DeviceUtils && window.DeviceUtils.isDirectoryURL()) return;
-        if (window.DeviceUtils && window.DeviceUtils.shouldRedirect(currentFile)) {
-          var deviceType = window.DeviceUtils.getDeviceType();
-          var targetFile =
-            deviceType === window.DeviceUtils.DeviceType.MOBILE
-              ? "index-mobile.html"
-              : deviceType === window.DeviceUtils.DeviceType.TABLET
-                ? "index-tablet.html"
-                : "index-pc.html";
-          location.href = targetFile;
-        }
-      })();
+    (function checkDevice(){
+      if(window.__redirectChecked)return;
+      if(document.querySelector("meta[name=ssg-device]"))return;
+      window.__redirectChecked=true;
+      var u=new URLSearchParams(location.search);
+      var c=u.get("clean-url");
+      if(c){history.replaceState({},"",c);return}
+      if(window.__spaNavigating)return;
+      var f=location.pathname.split("/").pop();
+      if(f&&f.match(/^index-(pc|mobile|tablet)\.html$/))return;
+      function doRedirect(){
+        var mq767=window.matchMedia("(max-width:767px)");
+        var mq1279=window.matchMedia("(max-width:1279px)");
+        var e=mq767.matches?"index-mobile.html":mq1279.matches?"index-tablet.html":"index-pc.html";
+        if(f){if(f===e)return}
+        location.href=location.pathname.replace(/[^\/]*\.html$/,"")+e;
+      }
+      window.addEventListener("DOMContentLoaded",doRedirect);
+      setTimeout(doRedirect,100);
+    })();
     </script>
 <link rel="canonical" href="https://www.kitchen.yukoli.com/news/detail/" />
 <meta name="description" content="YuKoLi 新闻详情 — 商用厨房自动化最新动态。">
@@ -114,12 +111,20 @@
 </footer>
 
 <script src="/assets/js/utils/device-utils.js"></script>
+<<<<<<< Updated upstream
 <script src="/assets/js/spa-router.js?v=202605212122"></script>
 <script defer src="/assets/js/lang-registry.js?v=202605212122"></script>
 <script defer src="/assets/js/translations.js?v=202605212122"></script>
 <script defer src="/assets/js/translations-dropdown-template.js?v=202605212122"></script>
 <script defer src="/assets/js/ui/slide-menu.js?v=202605212122"></script>
 
+=======
+<script src="/assets/js/spa-router.js?v=202605221159"></script>
+<script defer src="/assets/js/lang-registry.js?v=202605221159"></script>
+<script defer src="/assets/js/translations.js?v=202605221159"></script>
+<script defer src="/assets/js/translations-dropdown-template.js?v=202605221159"></script>
+<script defer src="/assets/js/ui/slide-menu.js?v=202605221159"></script>
+>>>>>>> Stashed changes
     <script defer src="/assets/js/ui/footer.js"></script>
   </body>
 </html>

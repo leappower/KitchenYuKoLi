@@ -16,11 +16,9 @@
  *
  *   // 获取设备类型
  *   var deviceType = DeviceUtils.getDeviceType();
- *   console.log(deviceType); // 'mobile' | 'tablet' | 'pc'
  *
  *   // 获取设备特定页面路径
  *   var devicePath = DeviceUtils.getDevicePagePath('/pages/home/index.html');
- *   console.log(devicePath); // '/pages/home/index-mobile.html' (tablet)
  *
  *   // 判断是否需要重定向
  *   if (DeviceUtils.shouldRedirect('index.html')) {
@@ -128,11 +126,18 @@
   }
 
   /**
-   * @deprecated SSG 已生成 index.html，不再需要设备重定向。
-   * 始终返回 false。
+   * 判断是否需要设备重定向
+   * 仅当访问 SSG 入口 index.html（目录 URL 或 index.html）时重定向
+   * SPA 导航（已通过 fetch:request 重写 URL）不触发
+   *
+   * @param {string} currentFile - 当前文件名称
+   * @returns {boolean} 是否需要重定向
    */
   function shouldRedirect(currentFile) {
-    return false;
+    // SPA 导航中跳过
+    if (window.__spaNavigating) return false;
+    // 访问 index.html 或目录 URL 时触发
+    return !currentFile || currentFile === "" || currentFile === "index.html";
   }
 
   /**

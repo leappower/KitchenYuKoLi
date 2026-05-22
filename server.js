@@ -347,7 +347,27 @@ app.get('/', (req, res) => {
 // Security: only serves files under dist/ (and src/ in dev mode).
 //
 
-function resolvePage(reqPath) {
+function isMobileUA(ua) {
+  var u = (ua || '').toLowerCase();
+  // Explicity tablet keywords
+  if (/tablet|ipad|playbook|silk/i.test(u)) return 'tablet';
+  // Explicit mobile keywords
+  if (/mobi|iphone|ipod|blackberry|iemobile|opera mini|fennec/i.test(u)) return 'mobile';
+  // Android without 'Mobile' in UA: check model names
+  // True tablets: SM-T, SM-X, Lenovo Tab, Xiaomi Pad
+  // Phone models: Pixel, Galaxy S/Note/Z, OnePlus, Xiaomi [number]
+  if (/android/i.test(u)) {
+    var mobileModels = /pixel|galaxy s|galaxy note|galaxy z|oneplus|mi [0-9]|redmi|oppo|vivo|huawei.*(?:p[0-9]|mate|nova)/i;
+    var tabletModels = /sm-t|sm-x|tab |tb-|lenovo tab|xiaomi pad|honor pad/i;
+    if (tabletModels.test(u)) return 'tablet';
+    if (mobileModels.test(u)) return 'mobile';
+    // Default Android to mobile (most Android devices are phones)
+    return 'mobile';
+  }
+  return 'pc';
+}
+
+function resolvePage(reqPath, ua) {
   var clean = reqPath.replace(/\/+$/, '');
   if (!clean) clean = '/';
 
@@ -357,7 +377,15 @@ function resolvePage(reqPath) {
 
   // 2. dist/<path>/index.html (SSG-generated route entry)
   f = path.join(__dirname, 'dist', clean, 'index.html');
-  if (isFile(f)) return f;
+  if (isFile(f)) {
+    // Device-aware: check UA and serve variant directly if available
+    var variantIdx = { 'mobile': 'index-mobile.html', 'tablet': 'index-tablet.html', 'pc': 'index-pc.html' };
+    var deviceFile = path.join(__dirname, 'dist', clean, variantIdx[isMobileUA(ua)]);
+    if (isFile(deviceFile)) {
+      return deviceFile;
+    }
+    return f;
+  }
 
   // 2b. Variant fallback: index-{pc,mobile,tablet}.html → index.html
   //     When SPA fetches /cases/<city>/index-pc.html, serve index.html instead.
@@ -390,7 +418,17 @@ app.get('*', (req, res) => {
   // Never intercept API routes
   if (req.path.startsWith('/api/')) return res.status(404).json({ error: 'Not found' });
 
-  var resolved = resolvePage(req.path);
+  var resolved = resolvePage(req.path, req.headers['user-agent']);
+  
+  // Device-aware delivery: inject ssg-device meta so client-side redirect skips
+  if (resolved.endsWith('index.html') && /index-(mobile|tablet)\.html$/.test(resolved)) {
+    var content = fs.readFileSync(resolved, 'utf-8');
+    content = content.replace('<head>', '<head><meta name="ssg-device" content="1"/>');
+    res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate');
+    res.setHeader('Pragma', 'no-cache');
+    return res.send(content);
+  }
+
   if (resolved.endsWith('index.html')) {
     res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate');
     res.setHeader('Pragma', 'no-cache');
