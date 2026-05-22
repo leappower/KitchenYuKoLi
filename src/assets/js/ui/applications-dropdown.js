@@ -74,12 +74,9 @@
       (isTouch() ? " touch-device" : "") +
       '">' +
       '<div class="app-dropdown-trigger">' +
-      '<a class="' +
+      '<span class="' +
       esc(cfg.activeClass || "") +
       ' app-dropdown-link"' +
-      ' href="' +
-      esc(cfg.href || "#") +
-      '"' +
       ' data-app-trigger-label="' +
       esc(cfg.labelKey || cfg.label) +
       '">' +
@@ -88,7 +85,7 @@
       '">' +
       esc(cfg.label || cfg.labelKey) +
       "</span>" +
-      "</a>" +
+      "</span>" +
       '<button class="app-dropdown-toggle" type="button" aria-label="Toggle submenu">' +
       '<span class="material-symbols-outlined app-dropdown-arrow">expand_more</span>' +
       "</button>" +

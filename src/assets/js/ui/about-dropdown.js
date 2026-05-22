@@ -63,12 +63,9 @@
       (isTouch() ? " touch-device" : "") +
       '">' +
       '<div class="abt-dropdown-trigger">' +
-      '<a class="' +
+      '<span class="' +
       esc(cfg.activeClass || "") +
       ' abt-dropdown-link"' +
-      ' href="' +
-      esc(cfg.href || "#") +
-      '"' +
       ' data-abt-trigger-label="' +
       esc(cfg.labelKey || cfg.label) +
       '">' +
@@ -77,7 +74,7 @@
       '">' +
       esc(cfg.label || cfg.labelKey) +
       "</span>" +
-      "</a>" +
+      "</span>" +
       '<button class="abt-dropdown-toggle" type="button" aria-label="Toggle submenu">' +
       '<span class="material-symbols-outlined abt-dropdown-arrow">expand_more</span>' +
       "</button>" +
