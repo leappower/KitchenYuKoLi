@@ -69,9 +69,12 @@
       (isTouch() ? " touch-device" : "") +
       '">' +
       '<div class="sup-dropdown-trigger">' +
-      '<span class="' +
+      '<a class="' +
       esc(cfg.activeClass || "") +
       ' sup-dropdown-link"' +
+      ' href="' +
+      esc(cfg.href || "#") +
+      '"' +
       ' data-sup-trigger-label="' +
       esc(cfg.labelKey || cfg.label) +
       '">' +
@@ -80,7 +83,7 @@
       '">' +
       esc(cfg.label || cfg.labelKey) +
       "</span>" +
-      "</span>" +
+      "</a>" +
       '<button class="sup-dropdown-toggle" type="button" aria-label="Toggle submenu">' +
       '<span class="material-symbols-outlined sup-dropdown-arrow">expand_more</span>' +
       "</button>" +
