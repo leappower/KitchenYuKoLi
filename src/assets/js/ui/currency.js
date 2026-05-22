@@ -157,7 +157,7 @@
       var t = el.textContent.trim();
       // 匹配 "10K RMB/year"、"万元/年"、"K/yr" 等格式
       var m = t.match(
-        /^(\d*[\.]?\d*)\s*(万元|萬元|K|M|Lakh|ล้าน|Triệu|Juta|万円|백만)?\s*(RMB|USD|CNY|THB|VND|MYR|IDR|JPY|KRW|INR|TWD|SAR)?\s*\/\s*(year|yr|年)$/i
+        /^(\d*[.]?\d*)\s*(万元|萬元|K|M|Lakh|ล้าน|Triệu|Juta|万円|백만)?\s*(RMB|USD|CNY|THB|VND|MYR|IDR|JPY|KRW|INR|TWD|SAR)?\s*\/\s*(year|yr|年)$/i
       );
       if (m) {
         var num = m[1] || "";

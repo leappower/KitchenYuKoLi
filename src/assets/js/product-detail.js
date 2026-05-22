@@ -147,15 +147,17 @@
     if (count < max) {
       var shown2 = new Set(product.relatedProducts || []);
       shown2.add(product.model);
+      /* eslint-disable no-redeclare */
       for (var i = 0; i < allProducts.length; i++) {
-        var rp = allProducts[i];
-        if (rp.category === product.category) shown2.add(rp.model);
+        var rp0 = allProducts[i];
+        if (rp0.category === product.category) shown2.add(rp0.model);
       }
-      for (var i = 0; i < allProducts.length && count < max; i++) {
-        var rp = allProducts[i];
+      for (var i2 = 0; i2 < allProducts.length && count < max; i2++) {
+        var rp = allProducts[i2];
         if (shown2.has(rp.model)) continue;
         cards += buildRelatedCard(rp, count++);
         shown2.add(rp.model);
+        /* eslint-enable no-redeclare */
       }
     }
     if (cards) el.innerHTML = cards;
@@ -313,6 +315,7 @@
     }
 
     // Spec fields — values use getProductField() for i18n
+    /* global getProductField */
     var specs = [
       { l: tl("pd_spec_model", "型号"), v: product.model },
       { l: tl("pd_spec_category", "分类"), v: getCategoryName(product) },
@@ -380,6 +383,7 @@
     var isYouTube = /youtu\.?be(\/|\.com\/)/.test(videoUrl);
     var embedUrl = "";
     if (isYouTube) {
+      /* eslint-disable-next-line no-redeclare */
       var m = videoUrl.match(/(?:v=|youtu\.be\/|embed\/)([\w-]{11})/);
       if (m) embedUrl = "https://www.youtube.com/embed/" + m[1] + "?autoplay=1&rel=0";
     }
@@ -507,13 +511,13 @@
       tl("pd_get_quote", "获取报价") +
       "</a></div></section>";
 
-    var ce = document.getElementById("product-content");
+    ce = document.getElementById("product-content");
     if (ce) ce.className = "w-full py-10";
     if (ce) ce.innerHTML = html;
 
     // Static specs grid
-    var sg = document.getElementById("specs-grid");
-    if (sg) sg.innerHTML = specCards;
+    var sg2 = document.getElementById("specs-grid");
+    if (sg2) sg2.innerHTML = specCards;
 
     // Related products
     renderRelated(product);

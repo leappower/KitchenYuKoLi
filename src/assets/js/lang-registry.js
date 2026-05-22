@@ -308,33 +308,33 @@ function getNativeNames(filter) {
 // 导出
 // ─────────────────────────────────────────────────────────────────────────────
 
+// Aliases for backward compatibility with build scripts
+function lrGetSupportedCodes(filter) {
+  return getLangs(filter).map(function (l) {
+    return l.code;
+  });
+}
+function lrGetAllCodes() {
+  return LANGUAGES.map(function (l) {
+    return l.code;
+  });
+}
+function lrGetEnglishNames(filter) {
+  return getLangs(filter).reduce(function (acc, l) {
+    acc[l.code] = l.englishName;
+    return acc;
+  }, {});
+}
+
 // Node.js 环境
 if (typeof module !== "undefined" && module.exports) {
-  // Aliases for backward compatibility with build scripts
-  function getSupportedCodes(filter) {
-    return getLangs(filter).map(function (l) {
-      return l.code;
-    });
-  }
-  function getAllCodes() {
-    return LANGUAGES.map(function (l) {
-      return l.code;
-    });
-  }
-  function getEnglishNames(filter) {
-    return getLangs(filter).reduce(function (acc, l) {
-      acc[l.code] = l.englishName;
-      return acc;
-    }, {});
-  }
-
   module.exports = {
     LANGUAGES,
     getLangs,
     getNativeNames,
-    getSupportedCodes,
-    getAllCodes,
-    getEnglishNames,
+    getSupportedCodes: lrGetSupportedCodes,
+    getAllCodes: lrGetAllCodes,
+    getEnglishNames: lrGetEnglishNames,
   };
 }
 

@@ -23,7 +23,7 @@
 #skeleton-overlay {
   padding-top: var(--nav-height, 65px);
 }
-@media (min-width: 1024px) {
+@media (width >= 1024px) {
   #skeleton-overlay {
     padding-top: var(--nav-height, 109px);
   }
@@ -41,17 +41,17 @@
   animation: sk-fadeIn 0.15s ease-out;
 }
 
-@media (min-width: 768px) {
+@media (width >= 768px) {
   .skeleton-container {
     padding: 2.5rem var(--container-px, 1.25rem);
   } /* tablet: aligned */
 }
-@media (min-width: 1024px) {
+@media (width >= 1024px) {
   .skeleton-container {
     padding: 2.5rem var(--container-px, 1.25rem);
   } /* lg: aligned */
 }
-@media (min-width: 1280px) {
+@media (width >= 1280px) {
   /* PC: main#spa-content already has padding-top from --nav-height CSS variable;
    skeleton-container just needs content padding */
   .skeleton-container {
@@ -160,7 +160,7 @@
 }
 
 /* ───────── 响应式：Mobile ───────── */
-@media (max-width: 767px) {
+@media (width <= 767px) {
   .sk-hero {
     margin-bottom: 1rem;
   }
@@ -207,7 +207,7 @@
 }
 
 /* ───────── 响应式：Tablet ───────── */
-@media (min-width: 768px) and (max-width: 1279px) {
+@media (width >= 768px) and (width <= 1279px) {
   .sk-grid {
     grid-template-columns: repeat(2, 1fr);
   }
@@ -217,7 +217,7 @@
 }
 
 /* ───────── 响应式：PC ───────── */
-@media (min-width: 1280px) {
+@media (width >= 1280px) {
   .sk-grid {
     grid-template-columns: repeat(3, 1fr);
   }

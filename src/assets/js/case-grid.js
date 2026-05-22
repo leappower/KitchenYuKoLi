@@ -484,7 +484,7 @@
         ' appearance-none cursor-pointer min-w-[110px]"' +
         " style='background-image: url(\"data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22" +
         " width=%2212%22 height=%2212%22 viewBox=%220 0 24 24%22 fill=%22none%22" +
-        " stroke=%22%2394a3b8%22 stroke-width=%222%22><path d=%22M6 9l6 6 6-6%22/></svg>\');" +
+        " stroke=%22%2394a3b8%22 stroke-width=%222%22><path d=%22M6 9l6 6 6-6%22/></svg>');" +
         " background-repeat: no-repeat; background-position: right 8px center; padding-right: 28px;'>";
       html += '<option value="">' + f.label + "</option>";
       for (var i = 0; i < f.options.length; i++) {

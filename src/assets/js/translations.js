@@ -670,7 +670,6 @@
           en: "en",
           "zh-TW": "en",
           "zh-HK": "en",
-          en: "en",
           "en-US": "en",
           "en-GB": "en",
         };

@@ -35,7 +35,7 @@
   transition: background 0.1s ease;
 }
 .prod-viewall-item:hover {
-  background: rgba(236, 91, 19, 0.06);
+  background: rgb(236, 91, 19, 0.06);
   color: #ec5b13;
 }
 .prod-viewall-item .material-symbols-outlined {
@@ -45,7 +45,7 @@ html.dark .prod-viewall-item {
   color: #f5f5f7;
 }
 html.dark .prod-viewall-item:hover {
-  background: rgba(236, 91, 19, 0.1);
+  background: rgb(236, 91, 19, 0.1);
   color: #f97316;
 }
 .prod-popup-emoji {
@@ -68,14 +68,14 @@ html.dark .prod-viewall-item:hover {
   transition: background 0.1s ease;
 }
 .prod-overview-item:hover {
-  background: rgba(236, 91, 19, 0.06);
+  background: rgb(236, 91, 19, 0.06);
   color: #ec5b13;
 }
 html.dark .prod-overview-item {
   color: #f5f5f7;
 }
 html.dark .prod-overview-item:hover {
-  background: rgba(236, 91, 19, 0.1);
+  background: rgb(236, 91, 19, 0.1);
   color: #f97316;
 }
 /* Split trigger toggle button */
@@ -103,21 +103,21 @@ html.dark .prod-overview-item:hover {
   transition: background 0.15s ease;
 }
 .prod-dropdown-toggle:active {
-  background: rgba(0, 0, 0, 0.06);
+  background: rgb(0, 0, 0, 0.06);
 }
 html.dark .prod-dropdown-toggle:active {
-  background: rgba(255, 255, 255, 0.08);
+  background: rgb(255, 255, 255, 0.08);
 }
 .prod-dropdown-toggle .prod-dropdown-arrow {
   font-size: 20px;
-  color: rgba(60, 60, 67, 0.4);
+  color: rgb(60, 60, 67, 0.4);
   transition: transform 0.2s ease;
 }
 .prod-dropdown-wrap.is-open .prod-dropdown-toggle .prod-dropdown-arrow {
   transform: rotate(180deg);
 }
 html.dark .prod-dropdown-toggle .prod-dropdown-arrow {
-  color: rgba(235, 235, 245, 0.35);
+  color: rgb(235, 235, 245, 0.35);
 }
 
 /* ── ../src/assets/js/ui/applications-dropdown.js ── */
@@ -153,14 +153,14 @@ html.dark .prod-dropdown-toggle .prod-dropdown-arrow {
   transition: background 0.1s ease;
 }
 .app-overview-item:hover {
-  background: rgba(236, 91, 19, 0.06);
+  background: rgb(236, 91, 19, 0.06);
   color: #ec5b13;
 }
 html.dark .app-overview-item {
   color: #f5f5f7;
 }
 html.dark .app-overview-item:hover {
-  background: rgba(236, 91, 19, 0.1);
+  background: rgb(236, 91, 19, 0.1);
   color: #f97316;
 }
 /* View all styling */
@@ -177,14 +177,14 @@ html.dark .app-overview-item:hover {
   transition: background 0.1s ease;
 }
 .app-viewall-item:hover {
-  background: rgba(236, 91, 19, 0.06);
+  background: rgb(236, 91, 19, 0.06);
   color: #ec5b13;
 }
 html.dark .app-viewall-item {
   color: #f5f5f7;
 }
 html.dark .app-viewall-item:hover {
-  background: rgba(236, 91, 19, 0.1);
+  background: rgb(236, 91, 19, 0.1);
   color: #f97316;
 }
 /* Split trigger toggle button */
@@ -212,21 +212,21 @@ html.dark .app-viewall-item:hover {
   transition: background 0.15s ease;
 }
 .app-dropdown-toggle:active {
-  background: rgba(0, 0, 0, 0.06);
+  background: rgb(0, 0, 0, 0.06);
 }
 html.dark .app-dropdown-toggle:active {
-  background: rgba(255, 255, 255, 0.08);
+  background: rgb(255, 255, 255, 0.08);
 }
 .app-dropdown-toggle .app-dropdown-arrow {
   font-size: 20px;
-  color: rgba(60, 60, 67, 0.4);
+  color: rgb(60, 60, 67, 0.4);
   transition: transform 0.2s ease;
 }
 .app-dropdown-wrap.is-open .app-dropdown-toggle .app-dropdown-arrow {
   transform: rotate(180deg);
 }
 html.dark .app-dropdown-toggle .app-dropdown-arrow {
-  color: rgba(235, 235, 245, 0.35);
+  color: rgb(235, 235, 245, 0.35);
 }
 
 /* ── ../src/assets/js/ui/support-dropdown.js ── */
@@ -262,14 +262,14 @@ html.dark .app-dropdown-toggle .app-dropdown-arrow {
   transition: background 0.1s ease;
 }
 .sup-overview-item:hover {
-  background: rgba(236, 91, 19, 0.06);
+  background: rgb(236, 91, 19, 0.06);
   color: #ec5b13;
 }
 html.dark .sup-overview-item {
   color: #f5f5f7;
 }
 html.dark .sup-overview-item:hover {
-  background: rgba(236, 91, 19, 0.1);
+  background: rgb(236, 91, 19, 0.1);
   color: #f97316;
 }
 /* View all styling */
@@ -286,14 +286,14 @@ html.dark .sup-overview-item:hover {
   transition: background 0.1s ease;
 }
 .sup-viewall-item:hover {
-  background: rgba(236, 91, 19, 0.06);
+  background: rgb(236, 91, 19, 0.06);
   color: #ec5b13;
 }
 html.dark .sup-viewall-item {
   color: #f5f5f7;
 }
 html.dark .sup-viewall-item:hover {
-  background: rgba(236, 91, 19, 0.1);
+  background: rgb(236, 91, 19, 0.1);
   color: #f97316;
 }
 /* Split trigger toggle button */
@@ -321,21 +321,21 @@ html.dark .sup-viewall-item:hover {
   transition: background 0.15s ease;
 }
 .sup-dropdown-toggle:active {
-  background: rgba(0, 0, 0, 0.06);
+  background: rgb(0, 0, 0, 0.06);
 }
 html.dark .sup-dropdown-toggle:active {
-  background: rgba(255, 255, 255, 0.08);
+  background: rgb(255, 255, 255, 0.08);
 }
 .sup-dropdown-toggle .sup-dropdown-arrow {
   font-size: 20px;
-  color: rgba(60, 60, 67, 0.4);
+  color: rgb(60, 60, 67, 0.4);
   transition: transform 0.2s ease;
 }
 .sup-dropdown-wrap.is-open .sup-dropdown-toggle .sup-dropdown-arrow {
   transform: rotate(180deg);
 }
 html.dark .sup-dropdown-toggle .sup-dropdown-arrow {
-  color: rgba(235, 235, 245, 0.35);
+  color: rgb(235, 235, 245, 0.35);
 }
 
 /* ── ../src/assets/js/ui/about-dropdown.js ── */
@@ -365,39 +365,39 @@ html.dark .sup-dropdown-toggle .sup-dropdown-arrow {
   transition: background 0.15s ease;
 }
 .abt-dropdown-toggle:active {
-  background: rgba(0, 0, 0, 0.06);
+  background: rgb(0, 0, 0, 0.06);
 }
 html.dark .abt-dropdown-toggle:active {
-  background: rgba(255, 255, 255, 0.08);
+  background: rgb(255, 255, 255, 0.08);
 }
 .abt-dropdown-toggle .abt-dropdown-arrow {
   font-size: 20px;
-  color: rgba(60, 60, 67, 0.4);
+  color: rgb(60, 60, 67, 0.4);
   transition: transform 0.2s ease;
 }
 .abt-dropdown-wrap.is-open .abt-dropdown-toggle .abt-dropdown-arrow {
   transform: rotate(180deg);
 }
 html.dark .abt-dropdown-toggle .abt-dropdown-arrow {
-  color: rgba(235, 235, 245, 0.35);
+  color: rgb(235, 235, 245, 0.35);
 }
 
 /* ── ../src/assets/js/ui/contact-dropdown.js ── */
 /*   L50 */
 .cnt-dropdown-item.is-whatsapp .cnt-dropdown-icon {
-  background: rgba(37, 211, 102, 0.12);
+  background: rgb(37, 211, 102, 0.12);
 }
 html.dark .cnt-dropdown-item.is-whatsapp .cnt-dropdown-icon {
-  background: rgba(37, 211, 102, 0.2);
+  background: rgb(37, 211, 102, 0.2);
 }
 .cnt-dropdown-item.is-whatsapp .cnt-dropdown-icon .material-symbols-outlined {
   color: #25d366;
 }
 .cnt-popup-item.is-whatsapp .cnt-dropdown-icon {
-  background: rgba(37, 211, 102, 0.12);
+  background: rgb(37, 211, 102, 0.12);
 }
 html.dark .cnt-popup-item.is-whatsapp .cnt-dropdown-icon {
-  background: rgba(37, 211, 102, 0.2);
+  background: rgb(37, 211, 102, 0.2);
 }
 .cnt-popup-item.is-whatsapp .cnt-dropdown-icon .material-symbols-outlined {
   color: #25d366;
@@ -405,7 +405,7 @@ html.dark .cnt-popup-item.is-whatsapp .cnt-dropdown-icon {
 
 /* ── ../src/assets/js/ui/navigator.js ── */
 /*   L602 */
-@media (min-width: 1024px) {
+@media (width >= 1024px) {
   .nav-logo-link {
     display: flex;
     align-items: center;
@@ -418,11 +418,11 @@ html.dark .cnt-popup-item.is-whatsapp .cnt-dropdown-icon {
     -webkit-tap-highlight-color: transparent;
   }
   .nav-logo-link:active {
-    background: rgba(236, 91, 19, 0.12);
+    background: rgb(236, 91, 19, 0.12);
     transform: scale(0.92);
   }
   html.dark .nav-logo-link:active {
-    background: rgba(236, 91, 19, 0.18);
+    background: rgb(236, 91, 19, 0.18);
   }
 }
 
@@ -441,10 +441,9 @@ html.dark .cnt-popup-item.is-whatsapp .cnt-dropdown-icon {
   width: 200px;
   padding: 7px 14px;
   border-radius: 9999px;
-  background: rgba(120, 120, 128, 0.12);
+  background: rgb(120, 120, 128, 0.12);
   backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(120, 120, 128, 0.18);
+  border: 1px solid rgb(120, 120, 128, 0.18);
   transition:
     width 320ms cubic-bezier(0.4, 0, 0.2, 1),
     max-width 320ms cubic-bezier(0.4, 0, 0.2, 1),
@@ -458,7 +457,7 @@ html.dark .cnt-popup-item.is-whatsapp .cnt-dropdown-icon {
   position: relative;
 }
 /* Mobile: fill available space */
-@media (max-width: 767px) {
+@media (width <= 767px) {
   .ios-search-bar {
     flex: 1 1 0;
     max-width: 100%;
@@ -467,7 +466,7 @@ html.dark .cnt-popup-item.is-whatsapp .cnt-dropdown-icon {
   }
 }
 /* Tablet: narrower default, stretch on focus */
-@media (min-width: 768px) and (max-width: 1279px) {
+@media (width >= 768px) and (width <= 1279px) {
   .ios-search-bar {
     flex: 0 1 55%;
     max-width: 380px;
@@ -479,12 +478,12 @@ html.dark .cnt-popup-item.is-whatsapp .cnt-dropdown-icon {
 }
 .ios-search-bar.is-focused {
   width: 280px;
-  background: rgba(120, 120, 128, 0.08);
-  border-color: rgba(236, 91, 19, 0.4);
-  box-shadow: 0 0 0 3px rgba(236, 91, 19, 0.12);
+  background: rgb(120, 120, 128, 0.08);
+  border-color: rgb(236, 91, 19, 0.4);
+  box-shadow: 0 0 0 3px rgb(236, 91, 19, 0.12);
 }
 /* Mobile focused: stretch to full width */
-@media (max-width: 767px) {
+@media (width <= 767px) {
   .ios-search-bar.is-focused {
     flex: 1 1 100%;
     max-width: 100%;
@@ -493,24 +492,24 @@ html.dark .cnt-popup-item.is-whatsapp .cnt-dropdown-icon {
 }
 /* 暗色模式搜索栏 */
 html.dark .ios-search-bar {
-  background: rgba(255, 255, 255, 0.08);
-  border-color: rgba(255, 255, 255, 0.12);
+  background: rgb(255, 255, 255, 0.08);
+  border-color: rgb(255, 255, 255, 0.12);
 }
 html.dark .ios-search-bar.is-focused {
-  background: rgba(255, 255, 255, 0.1);
-  border-color: rgba(236, 91, 19, 0.5);
-  box-shadow: 0 0 0 3px rgba(236, 91, 19, 0.15);
+  background: rgb(255, 255, 255, 0.1);
+  border-color: rgb(236, 91, 19, 0.5);
+  box-shadow: 0 0 0 3px rgb(236, 91, 19, 0.15);
 }
 /* 搜索图标 */
 .ios-search-icon {
   font-size: 17px !important;
   line-height: 1;
   flex-shrink: 0;
-  color: rgba(60, 60, 67, 0.6);
+  color: rgb(60, 60, 67, 0.6);
   transition: color 200ms ease;
 }
 html.dark .ios-search-icon {
-  color: rgba(235, 235, 245, 0.6);
+  color: rgb(235, 235, 245, 0.6);
 }
 .ios-search-bar.is-focused .ios-search-icon {
   color: #ec5b13;
@@ -527,16 +526,16 @@ html.dark .ios-search-icon {
   font-family: inherit;
   color: inherit;
   line-height: 1.4;
-  -webkit-appearance: none;
+  appearance: none;
 }
 .ios-search-input::-webkit-search-cancel-button {
   display: none;
 }
 .ios-search-input::placeholder {
-  color: rgba(60, 60, 67, 0.45);
+  color: rgb(60, 60, 67, 0.45);
 }
 html.dark .ios-search-input::placeholder {
-  color: rgba(235, 235, 245, 0.4);
+  color: rgb(235, 235, 245, 0.4);
 }
 /* 清除按钮 */
 .ios-search-clear {
@@ -544,7 +543,7 @@ html.dark .ios-search-input::placeholder {
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  background: rgba(120, 120, 128, 0.28);
+  background: rgb(120, 120, 128, 0.28);
   border: none;
   border-radius: 50%;
   width: 18px;
@@ -557,14 +556,14 @@ html.dark .ios-search-input::placeholder {
 }
 .ios-search-clear .material-symbols-outlined {
   font-size: 14px !important;
-  color: rgba(60, 60, 67, 0.55);
+  color: rgb(60, 60, 67, 0.55);
   line-height: 1;
 }
 html.dark .ios-search-clear {
-  background: rgba(255, 255, 255, 0.2);
+  background: rgb(255, 255, 255, 0.2);
 }
 html.dark .ios-search-clear .material-symbols-outlined {
-  color: rgba(235, 235, 245, 0.55);
+  color: rgb(235, 235, 245, 0.55);
 }
 .ios-search-clear:hover {
   opacity: 0.75;
@@ -579,9 +578,9 @@ html.dark .ios-search-clear .material-symbols-outlined {
   left: 0;
   right: 0;
   background: #fff;
-  border: 1px solid rgba(0, 0, 0, 0.08);
+  border: 1px solid rgb(0, 0, 0, 0.08);
   border-radius: 12px;
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+  box-shadow: 0 8px 30px rgb(0, 0, 0, 0.12);
   max-height: 60vh;
   overflow-y: auto;
   z-index: 9999;
@@ -590,8 +589,8 @@ html.dark .ios-search-clear .material-symbols-outlined {
 }
 html.dark .search-results-panel {
   background: #1c1c1e;
-  border-color: rgba(255, 255, 255, 0.08);
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+  border-color: rgb(255, 255, 255, 0.08);
+  box-shadow: 0 8px 30px rgb(0, 0, 0, 0.4);
 }
 .search-results-panel.is-open {
   display: block;
@@ -602,18 +601,18 @@ html.dark .search-results-panel {
   cursor: pointer;
   text-decoration: none;
   color: inherit;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.04);
+  border-bottom: 1px solid rgb(0, 0, 0, 0.04);
   transition: background 100ms ease;
 }
 html.dark .search-results-panel .sr-item {
-  border-color: rgba(255, 255, 255, 0.04);
+  border-color: rgb(255, 255, 255, 0.04);
 }
 .search-results-panel .sr-item:last-child {
   border-bottom: none;
 }
 .search-results-panel .sr-item:hover,
 .search-results-panel .sr-item.is-highlighted {
-  background: rgba(236, 91, 19, 0.06);
+  background: rgb(236, 91, 19, 0.06);
 }
 .search-results-panel .sr-title {
   font-size: 14px;
@@ -658,7 +657,7 @@ html.dark .search-results-panel .sr-title {
 .mobile-menu-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.4);
+  background: rgb(0, 0, 0, 0.4);
   z-index: var(--z-header, 2000);
   opacity: 0;
   visibility: hidden;
@@ -682,22 +681,21 @@ html.dark .search-results-panel .sr-title {
   width: 85%;
   max-width: 360px;
   min-width: 280px;
-  background: rgba(246, 246, 248, 0.98);
+  background: rgb(246, 246, 248, 0.98);
   backdrop-filter: blur(40px) saturate(200%);
-  -webkit-backdrop-filter: blur(40px) saturate(200%);
   z-index: calc(var(--z-header, 2000) + 10);
   transform: translateX(-100%);
   transition: transform 0.35s cubic-bezier(0.32, 0.72, 0, 1);
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
-  box-shadow: 4px 0 24px rgba(0, 0, 0, 0.08);
+  box-shadow: 4px 0 24px rgb(0, 0, 0, 0.08);
 }
 .mobile-menu-panel.is-open {
   transform: translateX(0);
 }
 html.dark .mobile-menu-panel {
-  background: rgba(44, 44, 46, 0.98);
-  box-shadow: 4px 0 24px rgba(0, 0, 0, 0.3);
+  background: rgb(44, 44, 46, 0.98);
+  box-shadow: 4px 0 24px rgb(0, 0, 0, 0.3);
 }
 /* ---------- 面板头部（Logo + 关闭按钮） ---------- */
 .mobile-menu-header {
@@ -705,10 +703,10 @@ html.dark .mobile-menu-panel {
   align-items: center;
   justify-content: space-between;
   padding: 16px 20px;
-  border-bottom: 0.5px solid rgba(60, 60, 67, 0.12);
+  border-bottom: 0.5px solid rgb(60, 60, 67, 0.12);
 }
 html.dark .mobile-menu-header {
-  border-color: rgba(235, 235, 245, 0.15);
+  border-color: rgb(235, 235, 245, 0.15);
 }
 .mobile-menu-logo img {
   width: 32px;
@@ -723,19 +721,19 @@ html.dark .mobile-menu-header {
   height: 36px;
   border-radius: 50%;
   border: none;
-  background: rgba(60, 60, 67, 0.08);
+  background: rgb(60, 60, 67, 0.08);
   cursor: pointer;
   -webkit-tap-highlight-color: transparent;
 }
 html.dark .mobile-menu-close {
-  background: rgba(235, 235, 245, 0.12);
+  background: rgb(235, 235, 245, 0.12);
 }
 .mobile-menu-close .material-symbols-outlined {
   font-size: 20px;
-  color: rgba(60, 60, 67, 0.8);
+  color: rgb(60, 60, 67, 0.8);
 }
 html.dark .mobile-menu-close .material-symbols-outlined {
-  color: rgba(235, 235, 245, 0.8);
+  color: rgb(235, 235, 245, 0.8);
 }
 /* ---------- 一级菜单项 ---------- */
 .mobile-menu-l1 {
@@ -753,32 +751,32 @@ html.dark .mobile-menu-l1 {
   color: #f5f5f7;
 }
 html.dark .mobile-menu-l1 {
-  border-color: rgba(235, 235, 245, 0.08);
+  border-color: rgb(235, 235, 245, 0.08);
 }
 .mobile-menu-l1.is-active {
-  background: rgba(236, 91, 19, 0.06);
+  background: rgb(236, 91, 19, 0.06);
 }
 html.dark .mobile-menu-l1.is-active {
-  background: rgba(236, 91, 19, 0.1);
+  background: rgb(236, 91, 19, 0.1);
 }
 .mobile-menu-l1:active {
-  background: rgba(236, 91, 19, 0.06);
+  background: rgb(236, 91, 19, 0.06);
 }
 html.dark .mobile-menu-l1:active {
-  background: rgba(236, 91, 19, 0.1);
+  background: rgb(236, 91, 19, 0.1);
 }
 .mobile-menu-l1-icon {
   width: 28px;
   height: 28px;
   border-radius: 7px;
-  background: rgba(236, 91, 19, 0.1);
+  background: rgb(236, 91, 19, 0.1);
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
 }
 html.dark .mobile-menu-l1-icon {
-  background: rgba(236, 91, 19, 0.18);
+  background: rgb(236, 91, 19, 0.18);
 }
 .mobile-menu-l1-icon .material-symbols-outlined {
   font-size: 18px;
@@ -790,12 +788,12 @@ html.dark .mobile-menu-l1-icon {
 }
 .mobile-menu-l1-arrow {
   font-size: 20px;
-  color: rgba(60, 60, 67, 0.3);
+  color: rgb(60, 60, 67, 0.3);
   flex-shrink: 0;
   transition: transform 0.3s cubic-bezier(0.32, 0.72, 0, 1);
 }
 html.dark .mobile-menu-l1-arrow {
-  color: rgba(235, 235, 245, 0.25);
+  color: rgb(235, 235, 245, 0.25);
 }
 .mobile-menu-l1.is-expanded .mobile-menu-l1-arrow {
   transform: rotate(90deg);
@@ -805,10 +803,10 @@ html.dark .mobile-menu-l1-arrow {
   max-height: 0;
   overflow: hidden;
   transition: max-height 0.35s cubic-bezier(0.32, 0.72, 0, 1);
-  background: rgba(0, 0, 0, 0.02);
+  background: rgb(0, 0, 0, 0.02);
 }
 html.dark .mobile-menu-l2 {
-  background: rgba(0, 0, 0, 0.15);
+  background: rgb(0, 0, 0, 0.15);
 }
 .mobile-menu-l2.is-open {
   max-height: 600px;
@@ -816,11 +814,11 @@ html.dark .mobile-menu-l2 {
 /* 二级菜单分隔线 & 表情标签 */
 .mobile-menu-l2-separator {
   height: 0.5px;
-  background: rgba(60, 60, 67, 0.08);
+  background: rgb(60, 60, 67, 0.08);
   margin: 6px 0;
 }
 html.dark .mobile-menu-l2-separator {
-  background: rgba(235, 235, 245, 0.15);
+  background: rgb(235, 235, 245, 0.15);
 }
 .mobile-menu-l2-emoji {
   margin-left: auto;
@@ -845,10 +843,10 @@ html.dark .mobile-menu-l2-item {
   color: #f5f5f7;
 }
 .mobile-menu-l2-item:active {
-  background: rgba(236, 91, 19, 0.06);
+  background: rgb(236, 91, 19, 0.06);
 }
 html.dark .mobile-menu-l2-item:active {
-  background: rgba(236, 91, 19, 0.1);
+  background: rgb(236, 91, 19, 0.1);
 }
 .mobile-menu-l2-viewall .mobile-menu-l2-icon {
   color: var(--color-primary, #ec5b13);
@@ -861,14 +859,14 @@ html.dark .mobile-menu-l2-item:active {
   width: 24px;
   height: 24px;
   border-radius: 6px;
-  background: rgba(236, 91, 19, 0.08);
+  background: rgb(236, 91, 19, 0.08);
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
 }
 html.dark .mobile-menu-l2-icon {
-  background: rgba(236, 91, 19, 0.14);
+  background: rgb(236, 91, 19, 0.14);
 }
 .mobile-menu-l2-icon .material-symbols-outlined {
   font-size: 14px;
@@ -904,10 +902,10 @@ html.dark .mobile-menu-l2-icon {
 }
 /* WhatsApp 特殊样式 */
 .mobile-menu-l2-item.is-whatsapp .mobile-menu-l2-icon {
-  background: rgba(37, 211, 102, 0.12);
+  background: rgb(37, 211, 102, 0.12);
 }
 html.dark .mobile-menu-l2-item.is-whatsapp .mobile-menu-l2-icon {
-  background: rgba(37, 211, 102, 0.2);
+  background: rgb(37, 211, 102, 0.2);
 }
 .mobile-menu-l2-item.is-whatsapp .mobile-menu-l2-icon .material-symbols-outlined {
   color: #25d366;
@@ -918,13 +916,13 @@ html.dark .mobile-menu-l2-item.is-whatsapp .mobile-menu-l2-icon {
   font-weight: 600;
 }
 .mobile-menu-l2-item.is-active .mobile-menu-l2-icon {
-  background: rgba(236, 91, 19, 0.2);
+  background: rgb(236, 91, 19, 0.2);
 }
 html.dark .mobile-menu-l2-item.is-active {
   color: #ff8c5a;
 }
 html.dark .mobile-menu-l2-item.is-active .mobile-menu-l2-icon {
-  background: rgba(236, 91, 19, 0.25);
+  background: rgb(236, 91, 19, 0.25);
 }
 /* ---------- 底部 CTA 栏 ---------- */
 .mobile-menu-cta-bar {
@@ -932,18 +930,17 @@ html.dark .mobile-menu-l2-item.is-active .mobile-menu-l2-icon {
   bottom: 0;
   left: 0;
   right: 0;
-  padding: 12px 16px calc(12px + env(safe-area-inset-bottom)) 16px;
-  background: rgba(246, 246, 248, 0.98);
+  padding: 12px 16px calc(12px + env(safe-area-inset-bottom));
+  background: rgb(246, 246, 248, 0.98);
   backdrop-filter: blur(40px) saturate(200%);
-  -webkit-backdrop-filter: blur(40px) saturate(200%);
-  border-top: 0.5px solid rgba(60, 60, 67, 0.12);
+  border-top: 0.5px solid rgb(60, 60, 67, 0.12);
   display: flex;
   gap: 12px;
   z-index: 920;
 }
 html.dark .mobile-menu-cta-bar {
-  background: rgba(44, 44, 46, 0.98);
-  border-color: rgba(235, 235, 245, 0.15);
+  background: rgb(44, 44, 46, 0.98);
+  border-color: rgb(235, 235, 245, 0.15);
 }
 /* CTA 按钮 */
 .mobile-menu-cta-btn {
@@ -971,21 +968,21 @@ html.dark .mobile-menu-cta-bar {
   background: #d54f0f;
 }
 .mobile-menu-cta-btn.secondary {
-  background: rgba(236, 91, 19, 0.1);
+  background: rgb(236, 91, 19, 0.1);
   color: #ec5b13;
 }
 html.dark .mobile-menu-cta-btn.secondary {
-  background: rgba(236, 91, 19, 0.18);
+  background: rgb(236, 91, 19, 0.18);
   color: #ff8c5a;
 }
 .mobile-menu-cta-btn.secondary:hover,
 .mobile-menu-cta-btn.secondary:active {
-  background: rgba(236, 91, 19, 0.2);
+  background: rgb(236, 91, 19, 0.2);
   color: #d54f0f;
 }
 html.dark .mobile-menu-cta-btn.secondary:hover,
 html.dark .mobile-menu-cta-btn.secondary:active {
-  background: rgba(236, 91, 19, 0.25);
+  background: rgb(236, 91, 19, 0.25);
   color: #ff9f70;
 }
 .mobile-menu-cta-btn .material-symbols-outlined {
@@ -1003,9 +1000,8 @@ html.dark .mobile-menu-cta-btn.secondary:active {
 .mobile-search-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(246, 246, 248, 0.98);
+  background: rgb(246, 246, 248, 0.98);
   backdrop-filter: blur(40px) saturate(200%);
-  -webkit-backdrop-filter: blur(40px) saturate(200%);
   z-index: 950;
   opacity: 0;
   visibility: hidden;
@@ -1023,7 +1019,7 @@ html.dark .mobile-menu-cta-btn.secondary:active {
     visibility 0s 0s;
 }
 html.dark .mobile-search-overlay {
-  background: rgba(28, 28, 30, 0.98);
+  background: rgb(28, 28, 30, 0.98);
 }
 /* 搜索栏 */
 .mobile-search-bar {
@@ -1033,22 +1029,21 @@ html.dark .mobile-search-overlay {
   padding: 12px 16px;
   position: sticky;
   top: 0;
-  background: rgba(246, 246, 248, 0.95);
+  background: rgb(246, 246, 248, 0.95);
   backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border-bottom: 0.5px solid rgba(60, 60, 67, 0.1);
+  border-bottom: 0.5px solid rgb(60, 60, 67, 0.1);
 }
 html.dark .mobile-search-bar {
-  background: rgba(28, 28, 30, 0.95);
-  border-color: rgba(235, 235, 245, 0.1);
+  background: rgb(28, 28, 30, 0.95);
+  border-color: rgb(235, 235, 245, 0.1);
 }
 .mobile-search-icon {
   font-size: 22px;
-  color: rgba(60, 60, 67, 0.5);
+  color: rgb(60, 60, 67, 0.5);
   flex-shrink: 0;
 }
 html.dark .mobile-search-icon {
-  color: rgba(235, 235, 245, 0.5);
+  color: rgb(235, 235, 245, 0.5);
 }
 .mobile-search-input {
   flex: 1;
@@ -1059,17 +1054,17 @@ html.dark .mobile-search-icon {
   color: #1d1d1f;
   font-family: inherit;
   line-height: 1.4;
-  -webkit-appearance: none;
+  appearance: none;
   min-width: 0;
 }
 .mobile-search-input::placeholder {
-  color: rgba(60, 60, 67, 0.4);
+  color: rgb(60, 60, 67, 0.4);
 }
 html.dark .mobile-search-input {
   color: #f5f5f7;
 }
 html.dark .mobile-search-input::placeholder {
-  color: rgba(235, 235, 245, 0.35);
+  color: rgb(235, 235, 245, 0.35);
 }
 .mobile-search-input::-webkit-search-cancel-button {
   display: none;
@@ -1082,7 +1077,7 @@ html.dark .mobile-search-input::placeholder {
   height: 28px;
   border-radius: 50%;
   border: none;
-  background: rgba(120, 120, 128, 0.2);
+  background: rgb(120, 120, 128, 0.2);
   cursor: pointer;
   flex-shrink: 0;
 }
@@ -1091,13 +1086,13 @@ html.dark .mobile-search-input::placeholder {
 }
 .mobile-search-clear .material-symbols-outlined {
   font-size: 18px;
-  color: rgba(60, 60, 67, 0.6);
+  color: rgb(60, 60, 67, 0.6);
 }
 html.dark .mobile-search-clear {
-  background: rgba(255, 255, 255, 0.15);
+  background: rgb(255, 255, 255, 0.15);
 }
 html.dark .mobile-search-clear .material-symbols-outlined {
-  color: rgba(235, 235, 245, 0.6);
+  color: rgb(235, 235, 245, 0.6);
 }
 /* 搜索结果列表 */
 .mobile-search-results {
@@ -1114,16 +1109,16 @@ html.dark .mobile-search-clear .material-symbols-outlined {
   -webkit-tap-highlight-color: transparent;
 }
 .mobile-search-result-item:active {
-  background: rgba(236, 91, 19, 0.06);
+  background: rgb(236, 91, 19, 0.06);
 }
 html.dark .mobile-search-result-item:active {
-  background: rgba(236, 91, 19, 0.1);
+  background: rgb(236, 91, 19, 0.1);
 }
 .mobile-search-result-img {
   width: 48px;
   height: 48px;
   border-radius: 10px;
-  background: rgba(120, 120, 128, 0.08);
+  background: rgb(120, 120, 128, 0.08);
   flex-shrink: 0;
   display: flex;
   align-items: center;
@@ -1138,13 +1133,13 @@ html.dark .mobile-search-result-item:active {
 }
 .mobile-search-result-img .material-symbols-outlined {
   font-size: 24px;
-  color: rgba(60, 60, 67, 0.25);
+  color: rgb(60, 60, 67, 0.25);
 }
 html.dark .mobile-search-result-img {
-  background: rgba(255, 255, 255, 0.06);
+  background: rgb(255, 255, 255, 0.06);
 }
 html.dark .mobile-search-result-img .material-symbols-outlined {
-  color: rgba(235, 235, 245, 0.2);
+  color: rgb(235, 235, 245, 0.2);
 }
 /* 搜索结果文本信息 */
 .mobile-search-result-info {
@@ -1168,16 +1163,16 @@ html.dark .mobile-search-result-name {
 }
 .mobile-search-result-meta span {
   font-size: 12px;
-  color: rgba(60, 60, 67, 0.5);
+  color: rgb(60, 60, 67, 0.5);
 }
 html.dark .mobile-search-result-meta span {
-  color: rgba(235, 235, 245, 0.4);
+  color: rgb(235, 235, 245, 0.4);
 }
 .mobile-search-result-sep {
-  color: rgba(60, 60, 67, 0.25) !important;
+  color: rgb(60, 60, 67, 0.25) !important;
 }
 html.dark .mobile-search-result-sep {
-  color: rgba(235, 235, 245, 0.15) !important;
+  color: rgb(235, 235, 245, 0.15) !important;
 }
 /* 搜索空结果 */
 .mobile-search-empty {
@@ -1186,19 +1181,19 @@ html.dark .mobile-search-result-sep {
 }
 .mobile-search-empty .material-symbols-outlined {
   font-size: 36px;
-  color: rgba(60, 60, 67, 0.15);
+  color: rgb(60, 60, 67, 0.15);
   margin-bottom: 8px;
 }
 .mobile-search-empty p {
   font-size: 14px;
-  color: rgba(60, 60, 67, 0.5);
+  color: rgb(60, 60, 67, 0.5);
   margin: 0;
 }
 html.dark .mobile-search-empty .material-symbols-outlined {
-  color: rgba(235, 235, 245, 0.1);
+  color: rgb(235, 235, 245, 0.1);
 }
 html.dark .mobile-search-empty p {
-  color: rgba(235, 235, 245, 0.4);
+  color: rgb(235, 235, 245, 0.4);
 }
 
 /* ── ../src/assets/js/ui/floating-actions.js ── */
@@ -1207,7 +1202,7 @@ html.dark .mobile-search-empty p {
   position: fixed;
   right: 1rem;
   bottom: 5rem;
-  @media (max-width: 767px) {
+  @media (width <= 767px) {
     right: 1.25rem;
   }
   z-index: var(--z-fab, 1100);
@@ -1216,7 +1211,7 @@ html.dark .mobile-search-empty p {
   align-items: center;
   gap: 0.75rem;
 }
-@media (max-width: 767px) {
+@media (width <= 767px) {
   #floating-actions-container {
     bottom: 7.5rem;
   }
@@ -1228,7 +1223,7 @@ html.dark .mobile-search-empty p {
   width: 3.5rem;
   height: 3.5rem;
   border-radius: 9999px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+  box-shadow: 0 4px 20px rgb(0, 0, 0, 0.25);
   transition:
     transform 0.2s ease,
     box-shadow 0.2s ease;
@@ -1248,7 +1243,7 @@ html.dark .mobile-search-empty p {
 #fab-backtotop {
   background: #fff;
   color: #1e293b;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.18);
+  box-shadow: 0 4px 20px rgb(0, 0, 0, 0.18);
   border: none;
   cursor: pointer;
   opacity: 0;
@@ -1265,27 +1260,27 @@ html.dark .mobile-search-empty p {
   transform: scale(1) translateY(0);
 }
 #fab-backtotop:hover {
-  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.22);
+  box-shadow: 0 6px 24px rgb(0, 0, 0, 0.22);
 }
 /* Pulse animation — gentle, single pulse */
 @keyframes fab-pulse {
   0% {
     transform: scale(1);
     box-shadow:
-      0 4px 20px rgba(0, 0, 0, 0.25),
-      0 0 0 0 rgba(37, 211, 102, 0.6);
+      0 4px 20px rgb(0, 0, 0, 0.25),
+      0 0 0 0 rgb(37, 211, 102, 0.6);
   }
   40% {
     transform: scale(1.12);
     box-shadow:
-      0 6px 24px rgba(0, 0, 0, 0.28),
-      0 0 0 10px rgba(37, 211, 102, 0.2);
+      0 6px 24px rgb(0, 0, 0, 0.28),
+      0 0 0 10px rgb(37, 211, 102, 0.2);
   }
   100% {
     transform: scale(1);
     box-shadow:
-      0 4px 20px rgba(0, 0, 0, 0.25),
-      0 0 0 16px rgba(37, 211, 102, 0);
+      0 4px 20px rgb(0, 0, 0, 0.25),
+      0 0 0 16px rgb(37, 211, 102, 0);
   }
 }
 .fab-pulsing {
@@ -1298,14 +1293,13 @@ html.dark .mobile-search-empty p {
 .ios-search-results {
   display: none;
   position: fixed;
-  background: rgba(255, 255, 255, 0.98);
+  background: rgb(255, 255, 255, 0.98);
   backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(120, 120, 128, 0.15);
+  border: 1px solid rgb(120, 120, 128, 0.15);
   border-radius: 16px;
   box-shadow:
-    0 8px 32px rgba(0, 0, 0, 0.12),
-    0 2px 8px rgba(0, 0, 0, 0.06);
+    0 8px 32px rgb(0, 0, 0, 0.12),
+    0 2px 8px rgb(0, 0, 0, 0.06);
   max-height: 420px;
   overflow-y: auto;
   padding: 8px;
@@ -1321,27 +1315,27 @@ html.dark .mobile-search-empty p {
 }
 /* Dark mode */
 html.dark .ios-search-results {
-  background: rgba(30, 30, 40, 0.98);
-  border-color: rgba(255, 255, 255, 0.1);
+  background: rgb(30, 30, 40, 0.98);
+  border-color: rgb(255, 255, 255, 0.1);
   box-shadow:
-    0 8px 32px rgba(0, 0, 0, 0.3),
-    0 2px 8px rgba(0, 0, 0, 0.15);
+    0 8px 32px rgb(0, 0, 0, 0.3),
+    0 2px 8px rgb(0, 0, 0, 0.15);
 }
 /* Header with count */
 .ios-search-header {
   padding: 4px 8px 6px;
-  border-bottom: 1px solid rgba(120, 120, 128, 0.12);
+  border-bottom: 1px solid rgb(120, 120, 128, 0.12);
   margin-bottom: 4px;
 }
 .ios-search-count {
   font-size: 11px;
   font-weight: 600;
-  color: rgba(60, 60, 67, 0.5);
+  color: rgb(60, 60, 67, 0.5);
   text-transform: uppercase;
   letter-spacing: 0.05em;
 }
 html.dark .ios-search-count {
-  color: rgba(235, 235, 245, 0.4);
+  color: rgb(235, 235, 245, 0.4);
 }
 /* Result list */
 .ios-search-results-list {
@@ -1362,11 +1356,11 @@ html.dark .ios-search-count {
 }
 .ios-search-result-item:hover,
 .ios-search-result-item.is-highlighted {
-  background: rgba(120, 120, 128, 0.08);
+  background: rgb(120, 120, 128, 0.08);
 }
 html.dark .ios-search-result-item:hover,
 html.dark .ios-search-result-item.is-highlighted {
-  background: rgba(255, 255, 255, 0.06);
+  background: rgb(255, 255, 255, 0.06);
 }
 /* Product image thumbnail */
 .ios-search-result-img {
@@ -1374,7 +1368,7 @@ html.dark .ios-search-result-item.is-highlighted {
   height: 40px;
   flex-shrink: 0;
   border-radius: 8px;
-  background: rgba(120, 120, 128, 0.08);
+  background: rgb(120, 120, 128, 0.08);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1388,13 +1382,13 @@ html.dark .ios-search-result-item.is-highlighted {
 }
 .ios-search-result-img .material-symbols-outlined {
   font-size: 20px;
-  color: rgba(60, 60, 67, 0.3);
+  color: rgb(60, 60, 67, 0.3);
 }
 html.dark .ios-search-result-img {
-  background: rgba(255, 255, 255, 0.06);
+  background: rgb(255, 255, 255, 0.06);
 }
 html.dark .ios-search-result-img .material-symbols-outlined {
-  color: rgba(235, 235, 245, 0.25);
+  color: rgb(235, 235, 245, 0.25);
 }
 /* Info section */
 .ios-search-result-info {
@@ -1425,25 +1419,25 @@ html.dark .ios-search-result-name {
 .ios-search-result-model,
 .ios-search-result-category {
   font-size: 11px;
-  color: rgba(60, 60, 67, 0.55);
+  color: rgb(60, 60, 67, 0.55);
   white-space: nowrap;
 }
 html.dark .ios-search-result-model,
 html.dark .ios-search-result-category {
-  color: rgba(235, 235, 245, 0.4);
+  color: rgb(235, 235, 245, 0.4);
 }
 .ios-search-result-sep {
-  color: rgba(60, 60, 67, 0.25);
+  color: rgb(60, 60, 67, 0.25);
 }
 html.dark .ios-search-result-sep {
-  color: rgba(235, 235, 245, 0.15);
+  color: rgb(235, 235, 245, 0.15);
 }
 /* Badge */
 .ios-search-badge {
   display: inline-block;
   padding: 1px 6px;
   border-radius: 4px;
-  background: rgba(236, 91, 19, 0.1);
+  background: rgb(236, 91, 19, 0.1);
   color: #ec5b13;
   font-size: 10px;
   font-weight: 700;
@@ -1457,28 +1451,28 @@ html.dark .ios-search-result-sep {
 }
 .ios-search-empty-icon {
   font-size: 28px;
-  color: rgba(60, 60, 67, 0.18);
+  color: rgb(60, 60, 67, 0.18);
   margin-bottom: 6px;
 }
 html.dark .ios-search-empty-icon {
-  color: rgba(235, 235, 245, 0.12);
+  color: rgb(235, 235, 245, 0.12);
 }
 .ios-search-empty-title {
   font-size: 13px;
   font-weight: 600;
-  color: rgba(60, 60, 67, 0.7);
+  color: rgb(60, 60, 67, 0.7);
   margin: 0;
 }
 .ios-search-empty-hint {
   font-size: 11px;
-  color: rgba(60, 60, 67, 0.4);
+  color: rgb(60, 60, 67, 0.4);
   margin-top: 4px;
 }
 html.dark .ios-search-empty-title {
-  color: rgba(235, 235, 245, 0.5);
+  color: rgb(235, 235, 245, 0.5);
 }
 html.dark .ios-search-empty-hint {
-  color: rgba(235, 235, 245, 0.25);
+  color: rgb(235, 235, 245, 0.25);
 }
 /* View all link */
 .ios-search-view-all {
@@ -1488,7 +1482,7 @@ html.dark .ios-search-empty-hint {
   gap: 4px;
   padding: 8px;
   margin-top: 4px;
-  border-top: 1px solid rgba(120, 120, 128, 0.1);
+  border-top: 1px solid rgb(120, 120, 128, 0.1);
   font-size: 12px;
   font-weight: 600;
   color: #ec5b13;
@@ -1498,17 +1492,17 @@ html.dark .ios-search-empty-hint {
   cursor: pointer;
 }
 .ios-search-view-all:hover {
-  background: rgba(236, 91, 19, 0.06);
+  background: rgb(236, 91, 19, 0.06);
 }
 .ios-search-view-all .material-symbols-outlined {
   font-size: 14px;
 }
 html.dark .ios-search-view-all {
   color: #ec5b13;
-  border-top-color: rgba(255, 255, 255, 0.06);
+  border-top-color: rgb(255, 255, 255, 0.06);
 }
 html.dark .ios-search-view-all:hover {
-  background: rgba(236, 91, 19, 0.1);
+  background: rgb(236, 91, 19, 0.1);
 }
 /* Scrollbar */
 .ios-search-results::-webkit-scrollbar {
@@ -1518,7 +1512,7 @@ html.dark .ios-search-view-all:hover {
   background: transparent;
 }
 .ios-search-results::-webkit-scrollbar-thumb {
-  background: rgba(120, 120, 128, 0.2);
+  background: rgb(120, 120, 128, 0.2);
   border-radius: 2px;
 }
 .ios-search-results-list::-webkit-scrollbar {
@@ -1528,7 +1522,7 @@ html.dark .ios-search-view-all:hover {
   background: transparent;
 }
 .ios-search-results-list::-webkit-scrollbar-thumb {
-  background: rgba(120, 120, 128, 0.2);
+  background: rgb(120, 120, 128, 0.2);
   border-radius: 2px;
 }
 
@@ -1568,7 +1562,7 @@ html.dark .ios-search-view-all:hover {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  box-shadow: 0 -4px 24px rgba(0, 0, 0, 0.12);
+  box-shadow: 0 -4px 24px rgb(0, 0, 0, 0.12);
   transform: translateY(100%);
   transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
 }
@@ -1643,7 +1637,7 @@ html.dark .ios-search-view-all:hover {
   align-items: center;
   gap: 10px;
   max-width: 340px;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.14);
+  box-shadow: 0 8px 24px rgb(0, 0, 0, 0.14);
   pointer-events: auto;
   animation:
     toastIn 0.3s ease,
@@ -1708,14 +1702,14 @@ html.dark .ios-search-view-all:hover {
 /* ── ../src/assets/js/translations-dropdown-template.js ── */
 /*   L74 */
 .lang-option.is-active {
-  background: rgba(236, 91, 19, 0.08);
+  background: rgb(236, 91, 19, 0.08);
   color: #ec5b13;
 }
 .lang-option.is-active span {
   color: #ec5b13;
 }
 html.dark .lang-option.is-active {
-  background: rgba(236, 91, 19, 0.14);
+  background: rgb(236, 91, 19, 0.14);
   color: #f97316;
 }
 html.dark .lang-option.is-active span {
@@ -1746,7 +1740,7 @@ html.dark .lang-option.is-active span {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: rgba(0, 0, 0, 0.5);
+  background: rgb(0, 0, 0, 0.5);
   backdrop-filter: blur(4px);
   transition:
     opacity 0.25s ease,
@@ -1808,7 +1802,7 @@ html.dark .lang-option.is-active span {
   pointer-events: auto;
 }
 .compare-selected {
-  box-shadow: 0 0 0 2px rgba(236, 91, 19, 0.5);
+  box-shadow: 0 0 0 2px rgb(236, 91, 19, 0.5);
 }
 .compare-btn {
   transition: all 0.2s ease;
@@ -1822,7 +1816,7 @@ html.dark .lang-option.is-active span {
   right: 8px;
   z-index: 10;
 }
-@media (max-width: 767px) {
+@media (width <= 767px) {
   body {
     padding-bottom: 70px;
   }

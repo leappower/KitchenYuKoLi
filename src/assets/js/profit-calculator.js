@@ -655,6 +655,7 @@
 
   /* ───────── PDF generation (html2canvas + jsPDF) ───────── */
 
+  /* global html2canvas, jsPDF, Chart */
   function generatePDF(input, result, salaryInfo) {
     // Debug: check library availability
 
@@ -1247,30 +1248,39 @@
   ProfitCalculator.prototype.init = function () {
     var self = this;
     var countryEl = document.getElementById(this.countrySelectId);
+
+    function applyCountryFromLang() {
+      if (!window.translationManager || !countryEl) return;
+      var lang = window.translationManager.currentLanguage || "";
+      var matchedCountry = null;
+      if (LANG_COUNTRY_MAP[lang]) {
+        matchedCountry = LANG_COUNTRY_MAP[lang];
+      } else {
+        var prefix = lang.split("-")[0];
+        matchedCountry = LANG_COUNTRY_MAP[prefix] || null;
+      }
+      if (matchedCountry && countryEl.value !== matchedCountry) {
+        countryEl.value = matchedCountry;
+        var info = DEFAULT_SALARIES[matchedCountry];
+        var laborEl = document.getElementById(self.laborInputId);
+        if (info && laborEl && !laborEl.dataset.touched) {
+          laborEl.value = info.monthly;
+        }
+        updateCurrencySymbol();
+        /* Dispatch change so CustomSelect syncs */
+        countryEl.dispatchEvent(new Event("change"));
+      }
+    }
+
+    function updateCurrencySymbol() {
+      if (!countryEl) return;
+      var info = DEFAULT_SALARIES[countryEl.value];
+      var symEl = document.getElementById("pc-currency-symbol");
+      if (symEl) symEl.textContent = info ? "(" + info.currency + ")" : "";
+    }
+
     if (countryEl) {
       // Auto-select country based on current language
-      function applyCountryFromLang() {
-        if (!window.translationManager) return;
-        var lang = window.translationManager.currentLanguage || "";
-        var matchedCountry = null;
-        if (LANG_COUNTRY_MAP[lang]) {
-          matchedCountry = LANG_COUNTRY_MAP[lang];
-        } else {
-          var prefix = lang.split("-")[0];
-          matchedCountry = LANG_COUNTRY_MAP[prefix] || null;
-        }
-        if (matchedCountry && countryEl.value !== matchedCountry) {
-          countryEl.value = matchedCountry;
-          var info = DEFAULT_SALARIES[matchedCountry];
-          var laborEl = document.getElementById(self.laborInputId);
-          if (info && laborEl && !laborEl.dataset.touched) {
-            laborEl.value = info.monthly;
-          }
-          updateCurrencySymbol();
-          /* Dispatch change so CustomSelect syncs */
-          countryEl.dispatchEvent(new Event("change"));
-        }
-      }
       applyCountryFromLang();
 
       // Re-apply on language change (user manually toggled lang)
@@ -1278,11 +1288,6 @@
         applyCountryFromLang();
       });
 
-      function updateCurrencySymbol() {
-        var info = DEFAULT_SALARIES[countryEl.value];
-        var symEl = document.getElementById("pc-currency-symbol");
-        if (symEl) symEl.textContent = info ? "(" + info.currency + ")" : "";
-      }
       updateCurrencySymbol();
 
       countryEl.addEventListener("change", function () {

@@ -8,7 +8,7 @@
     console.warn = function () {
       // Keep errors visible, suppress routine warnings
       var msg = Array.prototype.join.call(arguments, " ");
-      if (/error|fail|crash/i.test(msg)) origWarn.apply(console, arguments);
+      if (/error|fail|crash/i.test(msg)) origWarn.apply(console, arguments);
     };
     console.log = function () {};
   }

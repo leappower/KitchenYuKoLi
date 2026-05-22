@@ -186,7 +186,7 @@
         "</a>"
       );
     }
-    var _wa = window.Contacts ? window.Contacts.whatsapp : "8613163756465";
+    _wa = window.Contacts ? window.Contacts.whatsapp : "8613163756465";
     return (
       '<a href="https://wa.me/' +
       _wa +
@@ -245,7 +245,7 @@
     }
     var phoneKey = cfg.phoneKey || "support_contact_phone_label";
     var phoneDescKey = cfg.phoneDescKey || "support_contact_phone_desc";
-    var _tel = window.Contacts ? window.Contacts.whatsapp : "8613163756465";
+    _tel = window.Contacts ? window.Contacts.whatsapp : "8613163756465";
     return (
       '<a href="tel:+' +
       _tel +

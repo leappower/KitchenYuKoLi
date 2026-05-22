@@ -572,9 +572,8 @@
         var crossSellHtml = renderCrossSell(slug);
         if (crossSellHtml) {
           crossSellContainer.innerHTML = crossSellHtml;
-        } else {
         }
-      } else {
+        /* else: no cross-sell, container stays hidden */
       }
     }
     var sceneEntryContainer = document.getElementById("scene-entry-container");
@@ -582,8 +581,8 @@
       var sceneHtml = renderSceneEntry(slug);
       if (sceneHtml) {
         sceneEntryContainer.innerHTML = sceneHtml;
-      } else {
       }
+      /* else: no scene entry, container stays hidden */
     }
   }
 

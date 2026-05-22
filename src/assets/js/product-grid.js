@@ -1063,6 +1063,7 @@
   })();
 
   // Guard: ensure init runs once even if script loads multiple times
+  /* eslint-disable-next-line no-empty */
   if (window._productGridInited) {
   } else {
     window._productGridInited = true;
@@ -1090,32 +1091,34 @@
     var list = document.getElementById("product-list");
     if (grid && grid.querySelector(".sk-product-card")) {
       console.warn("[ProductGrid] Skeleton still present after 5s — clearing");
-      var errorMsg =
+      var gridErrorMsg =
         typeof window.t === "function"
           ? window.uiText("products_load_error", "Failed to load products. Please refresh.")
           : window.uiText("products_load_error", "Failed to load products. Please refresh.");
-      var retryText = typeof window.t === "function" ? window.uiText("products_load_retry", "重新加载") : "重新加载";
+      var gridRetryText =
+        typeof window.t === "function" ? window.uiText("products_load_retry", "重新加载") : "重新加载";
       grid.innerHTML =
         '<div class="col-span-full text-center py-16"><p class="text-slate-500 dark:text-slate-400 text-lg" data-i18n="products_load_error">' +
-        errorMsg +
+        gridErrorMsg +
         '</p><button class="mt-4 inline-flex items-center gap-2 bg-primary text-white px-5 py-2.5 rounded-xl font-bold text-sm hover:opacity-90 transition-all" data-i18n="products_load_retry" onclick="window.ProductGrid.retryLoad()">' +
         '<span class="material-symbols-outlined text-sm">refresh</span>' +
-        retryText +
+        gridRetryText +
         "</button></div>";
     }
     if (list && list.querySelector(".sk-product-card")) {
       console.warn("[ProductGrid] Skeleton still present in list after 5s — clearing");
-      var errorMsg =
+      var listErrorMsg =
         typeof window.t === "function"
           ? window.uiText("products_load_error", "Failed to load products. Please refresh.")
           : window.uiText("products_load_error", "Failed to load products. Please refresh.");
-      var retryText = typeof window.t === "function" ? window.uiText("products_load_retry", "重新加载") : "重新加载";
+      var listRetryText =
+        typeof window.t === "function" ? window.uiText("products_load_retry", "重新加载") : "重新加载";
       list.innerHTML =
         '<div class="text-center py-16"><p class="text-slate-500 dark:text-slate-400 text-lg" data-i18n="products_load_error">' +
-        errorMsg +
+        listErrorMsg +
         '</p><button class="mt-4 inline-flex items-center gap-2 bg-primary text-white px-5 py-2.5 rounded-xl font-bold text-sm hover:opacity-90 transition-all" data-i18n="products_load_retry" onclick="window.ProductGrid.retryLoad()">' +
         '<span class="material-symbols-outlined text-sm">refresh</span>' +
-        retryText +
+        listRetryText +
         "</button></div>";
     }
   }, 5000);

@@ -1,7 +1,9 @@
 {
   "extends": ["stylelint-config-standard"],
   "rules": {
+    "selector-type-no-unknown": [true, { "ignoreTypes": ["navigator"] }],
     "no-descending-specificity": null,
+    "no-duplicate-selectors": null,
     "comment-empty-line-before": null,
     "declaration-empty-line-before": null,
     "custom-property-empty-line-before": null,

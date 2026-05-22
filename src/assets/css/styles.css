@@ -44,17 +44,17 @@
   --container-gap: 2rem; /* gap-8 */
 }
 
-@media (min-width: 768px) {
+@media (width >= 768px) {
   :root {
     --container-px: 1.25rem;
   }
 }
-@media (min-width: 1024px) {
+@media (width >= 1024px) {
   :root {
     --container-px: 1.25rem;
   }
 }
-@media (min-width: 1280px) {
+@media (width >= 1280px) {
   :root {
     --container-px: 2.5rem;
   }
@@ -260,7 +260,7 @@ main#spa-content > .hero-overlap {
   padding-top: calc(var(--nav-height, 65px) + 1.5rem);
 }
 
-@media (min-width: 1024px) {
+@media (width >= 1024px) {
   main#spa-content {
     padding-top: var(--nav-height, 109px);
   }
@@ -285,7 +285,7 @@ main > section + section {
   margin-top: -1rem;
 }
 
-@media (min-width: 768px) {
+@media (width >= 768px) {
   main > section + section {
     margin-top: -1.5rem;
   }
@@ -321,14 +321,14 @@ main#spa-content:not([class*="p-"], [class*="px-"], [class*="py-"]) {
   padding-right: 0.75rem;
 }
 
-@media (min-width: 768px) {
+@media (width >= 768px) {
   main#spa-content:not([class*="p-"], [class*="px-"], [class*="py-"]) {
     padding-left: 1.25rem; /* 20px */
     padding-right: 1.25rem;
   }
 }
 
-@media (min-width: 1280px) {
+@media (width >= 1280px) {
   main#spa-content:not([class*="p-"], [class*="px-"], [class*="py-"]) {
     padding-left: 2.5rem; /* 40px */
     padding-right: 2.5rem;
@@ -347,7 +347,7 @@ main#spa-content:not([class*="p-"], [class*="px-"], [class*="py-"]) .fullwidth-b
   margin-right: 0;
 }
 
-@media (min-width: 768px) {
+@media (width >= 768px) {
   main#spa-content:not([class*="p-"], [class*="px-"], [class*="py-"]) .fullwidth-bg {
     width: 100vw;
     margin-left: calc(-50vw + 50%);
@@ -355,7 +355,7 @@ main#spa-content:not([class*="p-"], [class*="px-"], [class*="py-"]) .fullwidth-b
   }
 }
 
-@media (min-width: 1280px) {
+@media (width >= 1280px) {
   main#spa-content:not([class*="p-"], [class*="px-"], [class*="py-"]) .fullwidth-bg {
     width: 100vw;
     margin-left: calc(-50vw + 50%);
@@ -439,17 +439,17 @@ main[class*="px-"] > section > .section-content {
 navigator[data-component="navigator"] {
   display: block;
   height: 109px;
-  background: rgba(248, 246, 246, 0.8);
-  border-bottom: 1px solid rgba(226, 232, 240, 1);
+  background: rgb(248, 246, 246, 0.8);
+  border-bottom: 1px solid rgb(226, 232, 240, 1);
 }
-@media (max-width: 767px) {
+@media (width <= 767px) {
   navigator[data-component="navigator"] {
     height: 61px;
   }
 }
 html.dark navigator[data-component="navigator"] {
-  background: rgba(34, 22, 16, 0.8);
-  border-bottom-color: rgba(30, 41, 59, 1);
+  background: rgb(34, 22, 16, 0.8);
+  border-bottom-color: rgb(30, 41, 59, 1);
 }
 
 /* Spacer divs from navigator.js are no longer created (removed to fix double-spacing).
@@ -485,14 +485,14 @@ main#spa-content [id] {
   scroll-margin-top: 80px; /* mobile: 62px nav + 18px buffer */
 }
 
-@media (min-width: 768px) {
+@media (width >= 768px) {
   main#spa-content > section,
   main#spa-content [id] {
     scroll-margin-top: 88px; /* tablet: ~72px nav + 16px buffer */
   }
 }
 
-@media (min-width: 1280px) {
+@media (width >= 1280px) {
   main#spa-content > section,
   main#spa-content [id] {
     scroll-margin-top: 144px; /* PC: 109px nav + 35px buffer */
@@ -542,7 +542,6 @@ details[open] > summary {
 /* ─── Select dropdown arrow ────────────────────────────────────── */
 select {
   appearance: none;
-  -webkit-appearance: none;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%2394a3b8' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
   background-repeat: no-repeat;
   background-position: right 0.75rem center;
@@ -763,7 +762,7 @@ a.bg-primary {
 /* iOS: 隐藏系统原生播放按钮覆盖层 */
 [data-hero-video] video::-webkit-media-controls-start-playback-button {
   display: none !important;
-  -webkit-appearance: none;
+  appearance: none;
 }
 
 [data-hero-video] video::-webkit-media-controls {
@@ -798,10 +797,7 @@ a.bg-primary {
    手动模式(manual)下默认可见，播放后隐藏 */
 .hero-video-overlay {
   position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
+  inset: 0;
   z-index: var(--z-hero-overlay);
   display: flex;
   justify-content: flex-end;
@@ -822,9 +818,8 @@ a.bg-primary {
   height: 36px;
   border-radius: 50%;
   border: none;
-  background: rgba(0, 0, 0, 0.4);
+  background: rgb(0, 0, 0, 0.4);
   backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
   color: white;
   font-size: 16px;
   cursor: pointer;
@@ -837,7 +832,7 @@ a.bg-primary {
 }
 
 .hero-video-mute:hover {
-  background: rgba(0, 0, 0, 0.6);
+  background: rgb(0, 0, 0, 0.6);
 }
 
 /* 底部信息卡片 — 始终在最上层 */
@@ -856,10 +851,9 @@ a.bg-primary {
   width: 72px;
   height: 72px;
   border-radius: 50%;
-  border: 3px solid rgba(255, 255, 255, 0.5);
-  background: rgba(0, 0, 0, 0.35);
+  border: 3px solid rgb(255, 255, 255, 0.5);
+  background: rgb(0, 0, 0, 0.35);
   backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
   color: white;
   cursor: pointer;
   display: flex;
@@ -870,12 +864,12 @@ a.bg-primary {
     transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1),
     background 0.2s,
     opacity 0.3s ease;
-  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 4px 24px rgb(0, 0, 0, 0.2);
 }
 
 .hero-video-playbtn:hover {
   transform: translate(-50%, -50%) scale(1.08);
-  background: rgba(0, 0, 0, 0.5);
+  background: rgb(0, 0, 0, 0.5);
 }
 
 .hero-video-playbtn:active {
@@ -909,10 +903,9 @@ a.bg-primary {
   width: 64px;
   height: 64px;
   border-radius: 50%;
-  border: 2px solid rgba(255, 255, 255, 0.3);
-  background: rgba(255, 255, 255, 0.15);
+  border: 2px solid rgb(255, 255, 255, 0.3);
+  background: rgb(255, 255, 255, 0.15);
   backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
   color: white;
   font-size: 24px;
   cursor: pointer;
@@ -926,11 +919,11 @@ a.bg-primary {
 
 .hero-video-fallback-btn:hover {
   transform: translate(-50%, -50%) scale(1.1);
-  background: rgba(255, 255, 255, 0.25);
+  background: rgb(255, 255, 255, 0.25);
 }
 
 /* PC: 视频播放中 hover 显示 overlay（方便调音量/静音） */
-@media (min-width: 1024px) {
+@media (width >= 1024px) {
   [data-hero-video-playing="true"]:hover .hero-video-overlay {
     opacity: 1 !important;
     pointer-events: auto !important;

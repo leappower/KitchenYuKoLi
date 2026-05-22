@@ -463,10 +463,9 @@
     var path = window.location.pathname || "/";
     var device = window.innerWidth < 768 ? "mobile" : window.innerWidth < 1280 ? "tablet" : "pc";
     if (path.indexOf("/home") !== -1) {
-      if (device === "mobile") renderHomeCoreMobile("home-core-products-mobile");
-      else if (device === "tablet") renderHomeCoreTablet("home-core-products-tablet");
-      else renderHomeCorePC("home-core-products-pc");
-    } else {
+      if (device === "mobile") window.renderHomeCoreMobile("home-core-products-mobile");
+      else if (device === "tablet") window.renderHomeCoreTablet("home-core-products-tablet");
+      else window.renderHomeCorePC("home-core-products-pc");
     }
   }
 
@@ -490,6 +489,7 @@
 
   // Re-render on language change
   document.addEventListener("languageChanged", function () {
-    HomeCoreProducts.render();
+    /* global HomeCoreProducts */
+    window.HomeCoreProducts.render();
   });
 })();
