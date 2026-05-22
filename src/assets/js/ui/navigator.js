@@ -27,9 +27,12 @@
     tgt.addEventListener(evt, fn, { signal: ac.signal });
   }
 
-  /** Safe i18n helper — guards against scripts loading before translations.js */
+  /** Safe i18n helper — guards against scripts loading before translations.js
+   *  如果翻译未就绪，返回占位标记 __I18N_PENDING__，mountNavigator 检测到后延迟重试 */
   function _t(key, fallback) {
-    return typeof window.uiText === "function" ? window.uiText(key, fallback) : fallback;
+    if (typeof window.uiText !== "function") return "__I18N_PENDING__";
+    var v = window.uiText(key, "__I18N_PENDING__");
+    return v && v !== "__I18N_PENDING__" ? v : "__I18N_PENDING__";
   }
 
   /* ================================================================
@@ -848,17 +851,45 @@
   /**
    * 重新绑定翻译管理器的事件监听并应用当前语言翻译
    */
+  /**
+   * 重新绑定翻译管理器的事件监听并应用当前语言翻译。
+   *
+   * 处理时序问题：翻译引擎的 loadUITranslations() 是异步的（fetch），
+   * 而 mountNavigator 可能在 fetch 完成前被调用。
+   * 策略：如果翻译缓存还没就绪，延迟 500ms 后重试。
+   */
   function reinitTranslationManager() {
     if (!window.translationManager) return;
 
-    if (typeof window.translationManager.resetEventListeners === "function") {
-      window.translationManager.resetEventListeners();
+    var tm = window.translationManager;
+    if (typeof tm.resetEventListeners === "function") {
+      tm.resetEventListeners();
     }
-    if (typeof window.translationManager.applyTranslations === "function") {
-      window.translationManager.applyTranslations();
+    if (typeof tm.setupEventListeners === "function") {
+      tm.setupEventListeners();
     }
-    if (typeof window.translationManager.setupEventListeners === "function") {
-      window.translationManager.setupEventListeners();
+    
+    // 尝试应用翻译，如果缓存未就绪则延迟重试
+    if (typeof tm.applyTranslations === "function") {
+      var lang = tm.currentLanguage;
+      var cacheKey = "ui-" + lang;
+      var cacheReady = tm.translationsCache && tm.translationsCache.has(cacheKey);
+      if (cacheReady) {
+        tm.applyTranslations();
+        console.debug("[navigator:reinitTM] cache ready, applied translations for lang=" + lang);
+      } else {
+        // Cache not ready — translation fetch still in progress
+        // Retry after 500ms to let fetch complete
+        console.debug("[navigator:reinitTM] cache NOT ready for lang=" + lang + ", scheduling retry");
+        setTimeout(function() {
+          if (tm.translationsCache && tm.translationsCache.has(cacheKey)) {
+            tm.applyTranslations();
+            console.debug("[navigator:reinitTM] retry success, applied translations for lang=" + lang);
+          } else {
+            console.debug("[navigator:reinitTM] retry still not ready for lang=" + lang);
+          }
+        }, 500);
+      }
     }
   }
 
@@ -1299,11 +1330,12 @@
       if (_s) _txt = _s.textContent.replace(/ /g,'_');
       var _ph = document.querySelectorAll('[data-component="navigator"]').length;
       var _hdr = document.querySelector('header');
-      
-    })();
-    /* Close all open dropdowns before remounting */
-    closeOtherDropdowns(null);
-    var placeholders = document.querySelectorAll('[data-component="navigator"]');
+      // Check dropdown module availability
+      var _pd = typeof window.ProductsDropdown !== 'undefined' && typeof window.ProductsDropdown.renderPC === 'function';
+      var _ad = typeof window.ApplicationsDropdown !== 'undefined' && typeof window.ApplicationsDropdown.renderPC === 'function';
+      var _sd = typeof window.SupportDropdown !== 'undefined' && typeof window.SupportDropdown.renderPC === 'function';
+      var _abt = typeof window.AboutDropdown !== 'undefined' && typeof window.AboutDropdown.renderPC === 'function';
+      console.debug("[navigator:mount] lang=" + _l + " navProductsText=" + _txt + " placeholders=" + _ph + " headerExists=" + !!_hdr + " ProdsDd=" + _pd + " AppsDd=" + _ad + " SupDd=" + _sd + " AbtDd=" + _abt);
 
     for (var i = 0; i < placeholders.length; i++) {
       var placeholder = placeholders[i];
@@ -1312,10 +1344,12 @@
 
       /* 如果 placeholder 内已有 <header>，直接提取替换 */
       var existingHeader = placeholder.querySelector("header");
-      if (existingHeader) {
-        // [LOG] mountNavigator — found existing header in placeholder, check if it's ACTUALLY a nav header
+      if (existingHeader && existingHeader.querySelector("nav")) {
+        console.debug("[navigator:mount:extract] valid nav header found: headerClass=" + (existingHeader.className || '').substring(0,60));
         placeholder.parentNode.replaceChild(existingHeader, placeholder);
         continue;
+      } else if (existingHeader) {
+        console.debug("[navigator:mount:extract] header WITHOUT nav found, will rebuild: class=" + (existingHeader.className || '').substring(0,40));
       }
 
       /* 否则根据配置构建新 header */
@@ -1336,11 +1370,30 @@
       placeholder.parentNode.replaceChild(headerEl, placeholder);
     }
 
-    // [LOG] mountNavigator — after rebuild, check nav text
+    // [LOG] mountNavigator — after rebuild, check nav text and structure
     (function() {
       var _s = document.querySelector('header nav a[href="/products/"] > span[data-i18n="nav_products"]');
       var _s2 = document.querySelector('header nav a[href="/applications/"] > span[data-i18n="nav_applications"]');
-
+      var _t = window.uiText ? window.uiText("nav_products", "[?]") : "[no uiText]";
+      var _t2 = window.uiText ? window.uiText("nav_applications", "[?]") : "[no uiText]";
+      var _arrow = document.querySelector('.prod-dropdown-toggle');
+      var _trigger = document.querySelector('.prod-dropdown-trigger');
+      var _headerNav = document.querySelector('header nav');
+      console.debug("[navigator:mount:after] navProductsSpan=" + (_s ? _s.textContent.replace(/ /g,'_') : '[NO_SPAN]') + " navAppsSpan=" + (_s2 ? _s2.textContent.replace(/ /g,'_') : '[NO_SPAN]') + " uiText(nav_products)=" + _t + " uiText(nav_applications)=" + _t2 + " headerNav=" + !!_headerNav + " trigger=" + !!_trigger + " arrow=" + !!_arrow);
+      // 检测是否有 __I18N_PENDING__ 占位文本，有则延迟 200ms 后重新挂载
+      var _hasPending = (_s && _s.textContent.indexOf('__I18N_PENDING__') !== -1) || (_s2 && _s2.textContent.indexOf('__I18N_PENDING__') !== -1);
+      if (_hasPending) {
+        console.debug("[navigator:mount:after] i18n pending detected, scheduling remount");
+        var _tm = window.translationManager;
+        var _lang = _tm ? _tm.currentLanguage : '';
+        var _cacheKey = 'ui-' + _lang;
+        setTimeout(function() {
+          if (_tm && _tm.translationsCache && _tm.translationsCache.has(_cacheKey)) {
+            console.debug("[navigator:mount:after] cache ready now, remounting navigator");
+            mountNavigator();
+          }
+        }, 200);
+      }
     })();
     /* 3. 每次构建后需要重新执行的 DOM 相关初始化 */
     reinitTranslationManager();
@@ -1659,6 +1712,19 @@
    * SPA 路由导航事件——重新初始化导航和底部栏
    */
   _spaOn(document, "spa:load", function () {
+    // [LOG] spa:load — check dropdown module + nav structure
+    (function() {
+      var _pd = typeof window.ProductsDropdown !== 'undefined';
+      var _ad = typeof window.ApplicationsDropdown !== 'undefined';
+      var _sd = typeof window.SupportDropdown !== 'undefined';
+      var _abt = typeof window.AboutDropdown !== 'undefined';
+      var _trigger = document.querySelector('.prod-dropdown-trigger');
+      var _arrow = document.querySelector('.prod-dropdown-toggle');
+      var _headerNav = document.querySelector('header nav');
+      var _s = document.querySelector('header nav a[href="/products/"] > span[data-i18n="nav_products"]');
+      var _txt = _s ? _s.textContent.replace(/ /g,'_') : '[NO_SPAN]';
+      console.debug("[navigator:spa:load] ProdsDd=" + _pd + " AppsDd=" + _ad + " SupDd=" + _sd + " AbtDd=" + _abt + " trigger=" + !!_trigger + " arrow=" + !!_arrow + " navProducts=" + _txt);
+    })();
     /* 关闭所有打开的 dropdown（SPA 导航前未关闭的） */
     closeOtherDropdowns(null);
 
