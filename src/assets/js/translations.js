@@ -1,6 +1,6 @@
 !(function (t) {
   "use strict";
-  var I18N_CACHE_V = 1779456885;
+  var I18N_CACHE_V = 1779457099;
   var _spaRegs = {};
 
   // ─── Ensure LANG_REGISTRY is loaded ─────────────────────────
@@ -75,7 +75,7 @@
   }
   ((r.prototype.getInitialLanguage = function () {
     var t = localStorage.getItem("userLanguage");
-    return t && getO()[t] ? t : "zh-CN";
+    return t && getO()[t] ? t : "en";
   }),
     (r.prototype.loadTranslations = function (t) {
       if (
