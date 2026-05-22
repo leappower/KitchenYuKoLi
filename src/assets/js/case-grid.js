@@ -210,7 +210,7 @@
       bc +
       '-500/50 flex flex-col">' +
       "<!-- 上方图片 16:9 -->" +
-      '<div class="w-full h-44 md:h-56 lg:h-64 bg-slate-200 dark:bg-slate-700 overflow-hidden relative flex-shrink-0">' +
+      '<div class="w-full aspect-video md:aspect-[4/3] bg-slate-200 dark:bg-slate-700 overflow-hidden relative flex-shrink-0">' +
       '<img loading="lazy" alt="' +
       c.title +
       '" class="w-full h-full object-cover group-hover:scale-105 transition-transform" src="/assets/images/cases/' +
@@ -238,19 +238,31 @@
       "</h3>" +
       '<div class="flex flex-wrap items-center gap-x-3 gap-y-1 text-sm text-slate-500 dark:text-slate-400">' +
       '<span class="flex items-center gap-1"><span class="material-symbols-outlined text-base">storefront</span>' +
-      __("cases_industry_" + c.slug.split("-")[0], c.industry) +
+      '<span data-i18n="cases_industry_' +
+      c.slug.split("-")[0] +
+      '">' +
+      c.industry +
+      "</span>" +
       "</span>" +
       '<span class="text-slate-300 dark:text-slate-600">·</span>' +
       '<span class="flex items-center gap-1"><span class="material-symbols-outlined text-base">restaurant</span>' +
+      '<span data-i18n="cases_daily_' +
+      c.slug.split("-")[0] +
+      '">' +
       c.dailyOutput +
       " " +
       __("cases_per_day", "餐/天") +
       "</span>" +
+      "</span>" +
       '<span class="text-slate-300 dark:text-slate-600">·</span>' +
       '<span class="flex items-center gap-1"><span class="material-symbols-outlined text-base">schedule</span>' +
+      '<span data-i18n="cases_payback_' +
+      c.slug.split("-")[0] +
+      '">' +
       c.payback +
       " " +
       __("cases_payback_month", "月回本") +
+      "</span>" +
       "</span>" +
       "</div>" +
       '<p class="text-sm leading-relaxed text-slate-600 dark:text-slate-300 italic border-l-4 border-' +
@@ -312,7 +324,7 @@
     return (
       '<div class="case-card bg-white dark:bg-slate-800 rounded-xl overflow-hidden shadow-md border border-slate-200 dark:border-slate-700">' +
       '  <!-- 上方图片 16:9 -->' +
-      '<div class="w-full h-36 md:h-44 bg-slate-200 dark:bg-slate-700 overflow-hidden relative flex-shrink-0">' +
+      '<div class="w-full aspect-video bg-slate-200 dark:bg-slate-700 overflow-hidden relative flex-shrink-0">' +
       '<img loading="lazy" alt="' +
       c.title +
       '" class="w-full h-full object-cover group-hover:scale-105 transition-transform" src="/assets/images/cases/' +
@@ -336,12 +348,20 @@
       "<span>" +
       c.country +
       " · " +
-      __("cases_industry_" + c.slug.split("-")[0], c.industry) +
+      '<span data-i18n="cases_industry_' +
+      c.slug.split("-")[0] +
+      '">' +
+      c.industry +
+      "</span>" +
       "</span>" +
       '<span class="font-semibold text-slate-700 dark:text-slate-200">' +
+      '<span data-i18n="cases_daily_' +
+      c.slug.split("-")[0] +
+      '">' +
       c.dailyOutput +
       " " +
       __("cases_per_day", "餐/天") +
+      "</span>" +
       "</span>" +
       "</div>" +
       '<h3 class="font-bold text-base leading-snug" data-i18n="cases_' +
@@ -356,16 +376,24 @@
       '<span class="material-symbols-outlined text-sm">' +
       benefitIcon(c.benefit) +
       "</span>" +
+      '<span data-i18n="cases_labor_' +
+      c.slug.split("-")[0] +
+      '">' +
       __("cases_labor_reduction", "人工") +
       " -" +
       pct +
       "%" +
       "</span>" +
+      "</span>" +
       '<span class="inline-flex items-center gap-1 text-sm font-semibold text-slate-700 dark:text-slate-200">' +
       '<span class="material-symbols-outlined text-sm text-primary">schedule</span>' +
+      '<span data-i18n="cases_payback_' +
+      c.slug.split("-")[0] +
+      '">' +
       c.payback +
       " " +
       __("cases_payback_month", "月回本") +
+      "</span>" +
       "</span>" +
       "</div>" +
       '<p class="text-sm text-slate-600 dark:text-slate-400 italic" data-i18n="cases_quote_' +

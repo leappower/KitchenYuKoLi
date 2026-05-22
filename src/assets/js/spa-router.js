@@ -205,13 +205,15 @@
       }
       // Update navigator active state
       if (global.Navigator && typeof global.Navigator.updateActive === "function") {
-        global.Navigator.updateActive(_spaState.currentRoute);
+        // Extract the top-level section from the route (e.g. /cases/manila → "cases")
+        var sectionId = _spaState.currentRoute === "/" ? "/" : (_spaState.currentRoute.match(/^\/([^/]+)/) || [])[1] || _spaState.currentRoute;
+        global.Navigator.updateActive(sectionId);
       }
       if (global.SlideMenu && typeof global.SlideMenu.updateActive === "function") {
         global.SlideMenu.updateActive();
       }
       if (global.Footer && typeof global.Footer.updateActive === "function") {
-        global.Footer.updateActive(_spaState.currentRoute);
+        global.Footer.updateActive(sectionId);
       }
       // Trigger spa:load for other modules
       dispatchSpaLoad();
