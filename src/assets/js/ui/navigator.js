@@ -1374,9 +1374,7 @@
     (function() {
       var _l = window.translationManager ? window.translationManager.currentLanguage : "[no tm]";
       var _s = document.querySelector('header nav a[href="/products/"] > span[data-i18n="nav_products"]');
-      var _txt = _s ? _s.textContent.replace(/ /g,'_') : "[NOT FOUND]";
       var _s2 = document.querySelector('header nav a[href="/applications/"] > span[data-i18n="nav_applications"]');
-      var _txt2 = _s2 ? _s2.textContent.replace(/ /g,'_') : "[NOT FOUND]";
       var _hdr = document.querySelector('header');
     })();
     activeSectionId = activeSectionId || "";

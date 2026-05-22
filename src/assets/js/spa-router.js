@@ -209,16 +209,6 @@
     swupHooks.on("content:replace", function (visit) {
       global.__spaNavigating = false;
       _spaState.currentRoute = global.location.pathname.replace(/\/$/, "") || "/";
-      // [LOG] content:replace — check nav text and i18n before any mutations
-      (function() {
-        var _l = window.translationManager ? window.translationManager.currentLanguage : "[no tm]";
-        var _s = document.querySelector('header nav a[href="/products/"] > span[data-i18n="nav_products"]');
-        var _txt = _s ? _s.textContent.replace(/ /g,'_') : "[NO HEADER]";
-        var _tm = window.translationManager && window.translationManager.uiText ? window.translationManager.uiText("nav_products", "[?]") : "[no uiText]";
-        var _newDocOk = !!(visit && visit.to && visit.to.document);
-      })();
-      global.__spaNavigating = false;
-      _spaState.currentRoute = global.location.pathname.replace(/\/$/, "") || "/";
       // Reload page-specific scripts from the NEW page (not just #spa-content)
       var newDoc = visit && visit.to && visit.to.document ? visit.to.document : null;
       console.log('[spa-router] content:replace start case-grid=' + !!document.getElementById('case-grid'));
