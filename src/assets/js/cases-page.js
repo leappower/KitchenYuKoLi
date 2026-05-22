@@ -597,6 +597,13 @@
 
   function runInit() {
     init();
+    // Also init case cards if CaseGrid is loaded
+    if (window.CaseGrid && typeof window.CaseGrid.init === "function") {
+      var variant = window.innerWidth < 768 ? "mobile" : window.innerWidth < 1280 ? "tablet" : "pc";
+      if (document.getElementById("case-grid")) {
+        window.CaseGrid.init(variant);
+      }
+    }
   }
   if (document.readyState === "loading") {
     document.addEventListener("DOMContentLoaded", runInit);
