@@ -3518,5 +3518,7 @@
   "quote_challenge": "最大挑战？（多选）",
   "quote_challenge_other": "其他：",
   "quote_challenge_other_placeholder": "请描述",
-  "quote_submit_hint": "提交后 2 小时内专人联系"
+  "quote_submit_hint": "提交后 2 小时内专人联系",
+  "quote_step_1": "基本信息",
+  "quote_step_2": "设备需求"
 }

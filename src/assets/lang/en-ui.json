@@ -3567,5 +3567,7 @@
   "quote_challenge": "Biggest Challenge(s)?",
   "quote_challenge_other": "Other:",
   "quote_challenge_other_placeholder": "Describe...",
-  "quote_submit_hint": "We'll reach out within 2 hours"
+  "quote_submit_hint": "We'll reach out within 2 hours",
+  "quote_step_1": "Basic Info",
+  "quote_step_2": "Equipment Needs"
 }
