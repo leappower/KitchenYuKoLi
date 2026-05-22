@@ -7,6 +7,14 @@
 (function (global) {
   "use strict";
 
+  // Guard: DropdownBase must be loaded first
+  if (!global.DropdownBase || typeof global.DropdownBase.esc !== "function") {
+    // DropdownBase not ready — this script ran out of order (likely SPA re-execution).
+    // The first page load ensures correct order via synchronous script tags.
+    // For SPA navigation, DropdownBase is already persisted by Swup head plugin.
+    return;
+  }
+
   var esc = global.DropdownBase.esc;
   var isTouch = global.DropdownBase.isTouch;
 

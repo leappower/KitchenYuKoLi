@@ -150,7 +150,7 @@
     // then reload every non-global script the new page needs. The browser
     // executes each <script> synchronously (no defer/async) on appendChild.
     var _dynamicScripts = [];
-    var _globalScriptPatterns = /spa-router\.js|swup|translations\.js|lang-registry\.js|spa-events\.js$/;
+    var _globalScriptPatterns = /spa-router\.js|swup|translations\.js|lang-registry\.js|spa-events\.js|dropdown-base\.js$/;
     function reloadPageScripts(newDoc) {
       if (!newDoc) return;
       // 1. Remove all previously injected script tags
