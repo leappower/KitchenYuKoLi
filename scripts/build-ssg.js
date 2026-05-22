@@ -300,13 +300,21 @@ function injectSwupScripts(html) {
  * must be consistent across pages to avoid layout breaks on SPA navigation.
  */
 function normalizeSpaContent(html) {
-  // Normalize main#spa-content: ensure flex-1 + overflow-x-hidden
-  // to prevent fullwidth-bg negative margin from creating horizontal scroll.
-  // body overflow-x:clip handles the outermost clipping;
-  // main overflow-x:hidden ensures inner sections don't overflow.
+  // Normalize main#spa-content: ensure flex-1 + overflow-x-hidden.
+  // Append to existing class instead of replacing, so unique classes
+  // (e.g. mobile pages' max-w-[1024px] mx-auto) are preserved.
+  var required = ['flex-1', 'overflow-x-hidden'];
   html = html.replace(
-    /(<main\s+id="spa-content")(\s+class="[^"]*")?/gi,
-    '$1 class="flex-1 overflow-x-hidden"'
+    /(<main\s+id="spa-content")(\s+class="([^"]*)")?/gi,
+    function(match, open, classAttr, existing) {
+      var merged = existing || '';
+      for (var i = 0; i < required.length; i++) {
+        if (merged.indexOf(required[i]) === -1) {
+          merged += (merged ? ' ' : '') + required[i];
+        }
+      }
+      return open + ' class="' + merged + '"';
+    }
   );
   return html;
 }

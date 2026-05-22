@@ -345,17 +345,10 @@ main#spa-content:not([class*="p-"], [class*="px-"], [class*="py-"]) .fullwidth-b
   width: 100vw;
   margin-left: calc(-50vw + 50%);
   margin-right: 0;
+  padding-inline: 0;
 }
 
 @media (width >= 768px) {
-  main#spa-content:not([class*="p-"], [class*="px-"], [class*="py-"]) .fullwidth-bg {
-    width: 100vw;
-    margin-left: calc(-50vw + 50%);
-    margin-right: 0;
-  }
-}
-
-@media (width >= 1280px) {
   main#spa-content:not([class*="p-"], [class*="px-"], [class*="py-"]) .fullwidth-bg {
     width: 100vw;
     margin-left: calc(-50vw + 50%);
