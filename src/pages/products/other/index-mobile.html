@@ -81,13 +81,6 @@
       .product-card-mobile:active {
         transform: scale(0.98);
       }
-      .filter-bottom-sheet {
-        transform: translateY(100%);
-        transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-      }
-      .filter-bottom-sheet.open {
-        transform: translateY(0);
-      }
     </style>
     <script>
       (function () {
@@ -448,58 +441,6 @@
       </div>
     </main>
     <!-- Bottom Navigation -->
-    <!-- Filter Bottom Sheet -->
-    <div
-      class="filter-bottom-sheet fixed inset-x-0 bottom-0 z-[60] bg-white dark:bg-slate-900 rounded-t-2xl shadow-2xl max-h-[70vh]"
-      id="filter-sheet"
-    >
-      <div class="flex items-center justify-between p-4 border-b border-slate-200 dark:border-slate-800">
-        <h3 class="font-bold" data-i18n="products_filter_title">Filter Products</h3>
-        <button class="p-2" id="close-filter">
-          <span class="material-symbols-outlined">close</span>
-        </button>
-      </div>
-      <div class="p-4 space-y-4 overflow-y-auto max-h-[50vh]">
-        <div>
-          <h4 class="text-sm font-bold mb-3" data-i18n="products_filter_type">Equipment Type</h4>
-          <div class="flex flex-wrap gap-2">
-            <button
-              class="filter-chip-mobile px-4 py-2 rounded-full border border-slate-200 dark:border-slate-700 text-sm active"
-              data-filter="all"
-            >
-              <span data-i18n="product_filter_all">All</span>
-            </button>
-            <button
-              class="filter-chip-mobile px-4 py-2 rounded-full border border-slate-200 dark:border-slate-700 text-sm"
-              data-filter="industrial"
-            >
-              <span data-i18n="product_filter_industrial">Industrial</span>
-            </button>
-            <button
-              class="filter-chip-mobile px-4 py-2 rounded-full border border-slate-200 dark:border-slate-700 text-sm"
-              data-filter="commercial"
-            >
-              <span data-i18n="product_filter_commercial">Commercial</span>
-            </button>
-            <button
-              class="filter-chip-mobile px-4 py-2 rounded-full border border-slate-200 dark:border-slate-700 text-sm"
-              data-filter="compact"
-            >
-              <span data-i18n="product_filter_compact">Compact</span>
-            </button>
-          </div>
-        </div>
-      </div>
-      <div class="p-4 border-t border-slate-200 dark:border-slate-800">
-        <button
-          class="w-full bg-primary text-white py-3 rounded-xl font-bold"
-          data-i18n="products_apply_filter"
-          id="apply-filter"
-        >Apply Filters</button>
-      </div>
-    </div>
-    <div id="filter-overlay" class="fixed inset-0 bg-black/50 z-[55] hidden"></div>
-
     <script defer src="/assets/js/lang-registry.js?v=202605221159"></script>
     <script defer src="/assets/js/translations.js?v=202605221159"></script>
     <script defer src="/assets/js/translations-dropdown-template.js?v=202605221159"></script>
