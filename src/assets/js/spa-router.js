@@ -152,7 +152,7 @@
     // then reload every non-global script the new page needs. The browser
     // executes each <script> synchronously (no defer/async) on appendChild.
     var _dynamicScripts = [];
-    var _globalScriptPatterns = /spa-router\.js|swup|translations\.js|lang-registry\.js|spa-events\.js|dropdown-base\.js$/;
+    var _globalScriptPatterns = /spa-router\.js|swup|translations\.js|lang-registry\.js|spa-events\.js|dropdown-base\.js|navigator\.js|footer\.js$/;
     function reloadPageScripts(newDoc) {
       if (!newDoc) return;
       // 1. Remove all previously injected script tags
@@ -202,6 +202,13 @@
         var variant = global.innerWidth < 768 ? 'mobile' : global.innerWidth < 1280 ? 'tablet' : 'pc';
         console.log('[spa-router] forced CaseGrid.init variant=' + variant);
         global.CaseGrid.init(variant);
+      }
+      // Update navigator: re-mount if placeholder reappeared (slug page has own <navigator> tag)
+      if (global.Navigator && typeof global.Navigator.mount === "function") {
+        var navPlaceholders = document.querySelectorAll('[data-component="navigator"]');
+        if (navPlaceholders.length > 0) {
+          global.Navigator.mount();
+        }
       }
       // Update navigator active state
       if (global.Navigator && typeof global.Navigator.updateActive === "function") {

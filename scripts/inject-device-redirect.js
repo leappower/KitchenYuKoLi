@@ -94,9 +94,12 @@ function injectRedirect(filePath) {
   var hasOld = /__redirectChecked/.test(content);
 
   if (hasOld) {
-    // 替换：从 <script> 到包含 __redirectChecked 的 </script>
+    // 替换包含 __redirectChecked 的 device-check <script> 块。
+    // 需要精确匹配该 script 块，不能跨越其他 <script> 标签。
+    // 注意：当前页面可能有 i18n-url-sync 等 script 在它前面。
+    // 使用更精确的模式：匹配包含 checkDevice 函数定义的 <script>...</script>。
     content = content.replace(
-      /[\s]*<script>[\s\S]*?__redirectChecked[\s\S]*?<\/script>\s*/i,
+      /[\s]*<script>\s*\(function\s+checkDevice\(\)[\s\S]*?__redirectChecked[\s\S]*?<\/script>\s*/i,
       '\n' + REDIRECT_SCRIPT + '\n'
     );
   } else {
