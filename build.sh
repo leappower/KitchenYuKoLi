@@ -96,7 +96,23 @@ node scripts/build-ssg.js 2>&1 | grep -E 'Step|✓|✅|WARN|ERROR' || true
 echo "🔄 Injecting redirect into SSG-generated entries..."
 node scripts/inject-device-redirect.js 2>&1 | tail -3
 
-# ─── 9. Fix permissions ─────────────────────────────────────────
+# ─── 9. Validate case slug alias directories ──────────────
+echo "🔍 Validating case slug alias directories..."
+SLUG_MISSING=0
+for slug in manila-lunchbox-studio-2025 jakarta-catering-hub-2025 hcmc-cloud-kitchen-compact bangkok-chain-8-stores kl-canteen-2000-meals cebu-small-resto-payback surabaya-central-automation hanoi-street-food-modern; do
+  if [ ! -d "$DIST/cases/$slug" ]; then
+    echo "  ❌ MISSING: cases/$slug/"
+    SLUG_MISSING=1
+  fi
+done
+if [ "$SLUG_MISSING" -ne 0 ]; then
+  echo "❌ ERROR: Case slug alias directories missing — SSG step likely failed."
+  echo "   Run 'node scripts/build-ssg.js' manually to debug."
+  exit 1
+fi
+echo "  ✅ All 8 slug alias directories present"
+
+# ─── 10. Fix permissions ────────────────────────────────────
 chmod -R a+rX "$DIST" 2>/dev/null || true
 
 FILES=$(find "$DIST" -type f | wc -l | tr -d ' ')
