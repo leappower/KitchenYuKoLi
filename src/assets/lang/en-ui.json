@@ -3569,5 +3569,18 @@
   "quote_challenge_other_placeholder": "Describe...",
   "quote_submit_hint": "We'll reach out within 2 hours",
   "quote_step_1": "Basic Info",
-  "quote_step_2": "Equipment Needs"
+  "quote_step_2": "Equipment Needs",
+  "contact_name_label": "Your Name",
+  "contact_name_placeholder": "Your name",
+  "contact_phone_label": "Phone Number",
+  "contact_phone_placeholder": "Phone number",
+  "contact_email_label": "Email",
+  "contact_email_placeholder": "Your email",
+  "contact_channel_prompt": "Preferred Contact",
+  "contact_channel_prompt_label": "Preferred Contact",
+  "contact_account_label": "Account",
+  "contact_account_placeholder": "Leave blank to use phone",
+  "contact_other_desc_placeholder": "Describe...",
+  "contact_challenge_title": "Biggest Challenge(s)?",
+  "contact_submit_btn": "Get Free Consultation"
 }
