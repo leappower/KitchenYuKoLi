@@ -320,7 +320,7 @@
 
       container.setAttribute("data-hero-video-playing", "true");
       updatePlayBtn(true, false);
-      autoHidePlayBtn();
+      autoHideControls();
     });
 
     video.addEventListener("pause", function () {
@@ -390,47 +390,60 @@
     container.addEventListener("touchstart", function (e) {
       // Don't interfere with scroll/swipe gestures
       if (e.touches.length > 1) return;
-      showPlayBtn();
+      showControls();
       // Show native controls when playing, hide when paused
       video.controls = state.isPlaying;
-      if (state.isPlaying) autoHidePlayBtn();
+      if (state.isPlaying) autoHideControls();
       else if (_hideBtnTimer) { clearTimeout(_hideBtnTimer); _hideBtnTimer = null; }
     });
 
     /* ── PC hover 显示原生 controls + playBtn ── */
     var _hideBtnTimer = null;
 
-    function showPlayBtn() {
-      if (!playBtn) return;
-      playBtn.style.opacity = "1";
-      playBtn.style.transition = "opacity 0.2s ease";
+    function showControls() {
+      if (playBtn) {
+        playBtn.style.opacity = "1";
+        playBtn.style.transition = "opacity 0.2s ease";
+      }
+      if (overlay) {
+        overlay.style.opacity = "1";
+        overlay.style.transition = "opacity 0.2s ease";
+      }
+      var fb = container.querySelector(".hero-video-fallback-btn");
+      if (fb && !state.isPlaying) {
+        fb.style.opacity = "1";
+        fb.style.transition = "opacity 0.2s ease";
+      }
       if (_hideBtnTimer) { clearTimeout(_hideBtnTimer); _hideBtnTimer = null; }
     }
 
-    function autoHidePlayBtn() {
-      if (!playBtn || !state.isPlaying) return;
+    function autoHideControls() {
+      if (!state.isPlaying) return;
       if (_hideBtnTimer) clearTimeout(_hideBtnTimer);
       _hideBtnTimer = setTimeout(function () {
-        playBtn.style.opacity = "0";
+        if (playBtn) playBtn.style.opacity = "0";
+        if (overlay) overlay.style.opacity = "0";
+        var fb = container.querySelector(".hero-video-fallback-btn");
+        if (fb) fb.style.opacity = "0";
       }, 2000);
     }
 
     container.addEventListener("mousemove", function () {
       if (state.isPlaying) {
-        showPlayBtn();
-        autoHidePlayBtn();
+        showControls();
+        autoHideControls();
       }
     });
 
     container.addEventListener("mouseenter", function () {
       if (state.isPlaying) {
         video.controls = true;
-        showPlayBtn();
+        showControls();
       }
     });
     container.addEventListener("mouseleave", function () {
       video.controls = false;
-      if (state.isPlaying) autoHidePlayBtn();
+      if (state.isPlaying) autoHideControls();
     });
 
     /* ── 注册到全局 ── */
