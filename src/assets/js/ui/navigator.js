@@ -1304,7 +1304,7 @@
     /* Close all open dropdowns before remounting */
     closeOtherDropdowns(null);
     var placeholders = document.querySelectorAll('[data-component="navigator"]');
-    console.log("[navigator] mountNavigator called, placeholders:", placeholders.length);
+    console.debug("[navigator] mountNavigator called, placeholders:", placeholders.length);
 
     for (var i = 0; i < placeholders.length; i++) {
       var placeholder = placeholders[i];
@@ -1314,6 +1314,8 @@
       /* 如果 placeholder 内已有 <header>，直接提取替换 */
       var existingHeader = placeholder.querySelector("header");
       if (existingHeader) {
+        // [LOG] mountNavigator — found existing header in placeholder, check if it's ACTUALLY a nav header
+        console.debug("[navigator:mount:extract] existing header found in placeholder: headerClass=" + (existingHeader.className || '').substring(0,60) + " headerId=" + (existingHeader.id || 'none') + " headerTag=" + existingHeader.tagName + " navTest=" + !!existingHeader.querySelector('nav'));
         placeholder.parentNode.replaceChild(existingHeader, placeholder);
         continue;
       }
@@ -1336,6 +1338,14 @@
       placeholder.parentNode.replaceChild(headerEl, placeholder);
     }
 
+    // [LOG] mountNavigator — after rebuild, check nav text
+    (function() {
+      var _s = document.querySelector('header nav a[href="/products/"] > span[data-i18n="nav_products"]');
+      var _s2 = document.querySelector('header nav a[href="/applications/"] > span[data-i18n="nav_applications"]');
+      var _t = window.uiText ? window.uiText("nav_products", "[?]") : "[no uiText]";
+      var _t2 = window.uiText ? window.uiText("nav_applications", "[?]") : "[no uiText]";
+      console.debug("[navigator:mount:after] navProductsSpan=" + (_s ? _s.textContent.replace(/ /g,'_') : '[NO_SPAN]') + " navAppsSpan=" + (_s2 ? _s2.textContent.replace(/ /g,'_') : '[NO_SPAN]') + " uiText(nav_products)=" + _t + " uiText(nav_applications)=" + _t2);
+    })();
     /* 3. 每次构建后需要重新执行的 DOM 相关初始化 */
     reinitTranslationManager();
     initSlideMenu();

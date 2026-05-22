@@ -373,6 +373,13 @@
     /* ── 点击视频切换播放/暂停（不切换音频） ── */
     video.addEventListener("click", function (e) {
       e.stopPropagation();
+      // If playBtn is hidden (mobile idle state), first tap just reveals controls
+      if (state.isPlaying && playBtn && playBtn.style.opacity === "0") {
+        showPlayBtn();
+        video.controls = true;
+        autoHidePlayBtn();
+        return;
+      }
       if (state.isPlaying) {
         state.pausedByScroll = false;
         video.pause();
@@ -381,6 +388,17 @@
           video.currentTime = state.savedTime;
         }
         doPlay();
+      }
+    });
+
+    /* ── Mobile: tap to toggle controls + playBtn visibility ── */
+    container.addEventListener("touchstart", function (e) {
+      // Don't interfere with scroll/swipe gestures
+      if (e.touches.length > 1) return;
+      if (state.isPlaying) {
+        showPlayBtn();
+        video.controls = !video.controls;
+        autoHidePlayBtn();
       }
     });
 
