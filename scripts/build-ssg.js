@@ -827,6 +827,34 @@ function main() {
     return html;
   }
 
+  // Ensure core CSS files (tailwind, styles) are present in all HTML files
+  function _injectCoreCss(html) {
+    var coreCss = [
+      '/assets/css/styles.css',
+      '/assets/css/tailwind.css',
+      '/assets/css/z-index-system.css',
+      '/assets/css/performance-optimizations.css',
+    ];
+    for (var ci = 0; ci < coreCss.length; ci++) {
+      if (html.indexOf(coreCss[ci]) === -1) {
+        // Find the last <link> tag before </head> and insert after it
+        // This avoids matching substrings in href values of other links
+        var linkPattern = /<link[^>]*href="[^"]*\.css"[^>]*\/>/gi;
+        var matches = html.match(linkPattern);
+        if (matches && matches.length > 0) {
+          var lastLink = matches[matches.length - 1];
+          html = html.replace(
+            lastLink,
+            lastLink + '\n    <link rel="stylesheet" href="' + coreCss[ci] + '" />'
+          );
+        } else {
+          html = html.replace('</head>', '  <link rel="stylesheet" href="' + coreCss[ci] + '" />\n  </head>');
+        }
+      }
+    }
+    return html;
+  }
+
   // Walk dist/ for all .html files
   function _walkHtml(dir) {
     if (!fs.existsSync(dir)) return;
@@ -838,9 +866,29 @@ function main() {
       } else if (entry.name.endsWith('.html')) {
         var html = fs.readFileSync(fullPath, 'utf-8');
         var modified = _injectComponentsCss(html);
+        modified = _injectCoreCss(modified);
         if (modified !== html) {
           fs.writeFileSync(fullPath, modified);
           _componentsInjected++;
+        } else if (html.indexOf('/assets/css/styles.css') === -1 || html.indexOf('/assets/css/tailwind.css') === -1) {
+          // Force inject core CSS even if _injectCoreCss returned unchanged.
+          // Can happen if components.css link's href value was matched as substring.
+          var coreCss2 = [
+            '/assets/css/styles.css',
+            '/assets/css/tailwind.css',
+            '/assets/css/z-index-system.css',
+            '/assets/css/performance-optimizations.css',
+          ];
+          var fixed = html;
+          for (var ci2 = 0; ci2 < coreCss2.length; ci2++) {
+            if (fixed.indexOf(coreCss2[ci2]) === -1) {
+              fixed = fixed.replace('</head>', '  <link rel="stylesheet" href="' + coreCss2[ci2] + '" />\n  </head>');
+            }
+          }
+          if (fixed !== html) {
+            fs.writeFileSync(fullPath, fixed);
+            _componentsInjected++;
+          }
         }
       }
     });
