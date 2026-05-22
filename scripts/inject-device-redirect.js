@@ -45,18 +45,21 @@ var REDIRECT_SCRIPT =
   '      if(c){history.replaceState({},"",c);return}\n' +
   '      if(window.__spaNavigating)return;\n' +
   '      var f=location.pathname.split("/").pop();\n' +
-  '      if(f&&f.match(/^index-(pc|mobile|tablet)\\.html$/))return;\n' +
+  '      // 目录 URL（末尾斜杠 /）— 不跳转，让 server.js 处理\n' +
+  '      if(!f||!f.match(/\.html$/))return;\n' +
+  '      if(f.match(/^index-(pc|mobile|tablet)\.html$/))return;\n' +
   '      function doRedirect(){\n' +
   '        var mq767=window.matchMedia("(max-width:767px)");\n' +
   '        var mq1279=window.matchMedia("(max-width:1279px)");\n' +
   '        var e=mq767.matches?"index-mobile.html":mq1279.matches?"index-tablet.html":"index-pc.html";\n' +
-  '        if(f){if(f===e)return}\n' +
-  '        location.href=location.pathname.replace(/[^\\/]*\\.html$/,"")+e;\n' +
+  '        if(f===e)return;\n' +
+  '        location.href=location.pathname.replace(/[^\\/]*\.html$/,"")+e;\n' +
   '      }\n' +
   '      window.addEventListener("DOMContentLoaded",doRedirect);\n' +
   '      setTimeout(doRedirect,100);\n' +
   '    })();\n' +
   '    </script>';
+
 
 // ═══ 工具函数 ═══════════════════════════════════════════════════════
 

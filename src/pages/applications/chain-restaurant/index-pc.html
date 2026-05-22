@@ -25,13 +25,15 @@
       if(c){history.replaceState({},"",c);return}
       if(window.__spaNavigating)return;
       var f=location.pathname.split("/").pop();
-      if(f&&f.match(/^index-(pc|mobile|tablet)\.html$/))return;
+      // 目录 URL（末尾斜杠 /）— 不跳转，让 server.js 处理
+      if(!f||!f.match(/.html$/))return;
+      if(f.match(/^index-(pc|mobile|tablet).html$/))return;
       function doRedirect(){
         var mq767=window.matchMedia("(max-width:767px)");
         var mq1279=window.matchMedia("(max-width:1279px)");
         var e=mq767.matches?"index-mobile.html":mq1279.matches?"index-tablet.html":"index-pc.html";
-        if(f){if(f===e)return}
-        location.href=location.pathname.replace(/[^\/]*\.html$/,"")+e;
+        if(f===e)return;
+        location.href=location.pathname.replace(/[^\/]*.html$/,"")+e;
       }
       window.addEventListener("DOMContentLoaded",doRedirect);
       setTimeout(doRedirect,100);
@@ -571,21 +573,21 @@
     <!-- Scripts -->
     <script defer src="/assets/js/router.js"></script>
     <script defer src="/assets/js/lang-registry.js"></script>
-    <script src="/assets/js/translations.js?v=202605221408"></script>
+    <script src="/assets/js/translations.js?v=202605221417"></script>
 
     <script src="/assets/js/ui/slide-menu.js"></script>
     <script src="/assets/js/ui/dropdown-styles.js"></script>
     <script src="/assets/js/ui/dropdown-base.js"></script>
     <script src="/assets/js/ui/products-dropdown.js"></script>
-    <script defer src="/assets/js/ui/applications-dropdown.js?v=202605221408"></script>
+    <script defer src="/assets/js/ui/applications-dropdown.js?v=202605221417"></script>
     <script src="/assets/js/ui/support-dropdown.js"></script>
     <script src="/assets/js/ui/about-dropdown.js"></script>
     <script src="/assets/js/ui/contact-dropdown.js"></script>
     <script src="/assets/js/product-list.js"></script>
     <script src="/assets/js/utils.js"></script>
     <script src="/assets/js/ui/search-engine.js"></script>
-    <script src="/assets/js/ui/navigator.js?v=202605221408"></script>
-    <script src="/assets/js/ui/footer.js?v=202605221408"></script>
+    <script src="/assets/js/ui/navigator.js?v=202605221417"></script>
+    <script src="/assets/js/ui/footer.js?v=202605221417"></script>
 
     <script defer src="/assets/js/ui/floating-actions.js"></script>
     <script src="/assets/js/ui/hero-video.js"></script>
