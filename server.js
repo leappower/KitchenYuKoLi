@@ -370,6 +370,7 @@ function isMobileUA(ua) {
 function resolvePage(reqPath, ua) {
   var clean = reqPath.replace(/\/+$/, '');
   if (!clean) clean = '/';
+  var variantIdx = { 'mobile': 'index-mobile.html', 'tablet': 'index-tablet.html', 'pc': 'index-pc.html' };
 
   // 1. Exact file: dist/<reqPath>  (assets, fonts, images, index-{mobile,pc,tablet}.html)
   var f = path.join(__dirname, 'dist', reqPath);
@@ -379,7 +380,6 @@ function resolvePage(reqPath, ua) {
   f = path.join(__dirname, 'dist', clean, 'index.html');
   if (isFile(f)) {
     // Device-aware: check UA and serve variant directly if available
-    var variantIdx = { 'mobile': 'index-mobile.html', 'tablet': 'index-tablet.html', 'pc': 'index-pc.html' };
     var deviceFile = path.join(__dirname, 'dist', clean, variantIdx[isMobileUA(ua)]);
     if (isFile(deviceFile)) {
       return deviceFile;
@@ -393,6 +393,34 @@ function resolvePage(reqPath, ua) {
     var variantFallback = reqPath.replace(/\/index-(pc|mobile|tablet)\.html$/, '/index.html');
     f = path.join(__dirname, 'dist', variantFallback);
     if (isFile(f)) return f;
+  }
+
+  // 2c. Case slug alias — resolve /cases/<seo-slug>/ to /cases/<short-name>/
+  //     Required for dev mode (SSG hardlinks only exist after build.sh)
+  var caseMatch = clean.match(/^\/cases\/([^/]+)$/);
+  if (caseMatch) {
+    var caseDir = caseMatch[1];
+    var CASE_SLUG_MAP = {
+      'manila-lunchbox-studio-2025': 'manila',
+      'jakarta-catering-hub-2025': 'jakarta',
+      'hcmc-cloud-kitchen-compact': 'hcmc',
+      'bangkok-chain-8-stores': 'bangkok',
+      'kl-canteen-2000-meals': 'kl',
+      'cebu-small-resto-payback': 'cebu',
+      'surabaya-central-automation': 'surabaya',
+      'hanoi-street-food-modern': 'hanoi',
+    };
+    var shortName = CASE_SLUG_MAP[caseDir];
+    if (shortName) {
+      // Resolve to the short-name directory
+      f = path.join(__dirname, 'dist', 'cases', shortName, 'index.html');
+      if (isFile(f)) {
+        // Device-aware variant
+        var variantFile = path.join(__dirname, 'dist', 'cases', shortName, variantIdx[isMobileUA(ua)]);
+        if (isFile(variantFile)) return variantFile;
+        return f;
+      }
+    }
   }
 
   // 3. dist/<path>-pc.html (flat-file pattern, e.g. news/detail-pc.html)
