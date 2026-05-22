@@ -300,9 +300,11 @@ function injectSwupScripts(html) {
  * must be consistent across pages to avoid layout breaks on SPA navigation.
  */
 function normalizeSpaContent(html) {
+  // Normalize main#spa-content: ensure flex-1 exists, remove overflow-x constraints
+  // which would clip fullwidth-bg negative margin breakout.
   html = html.replace(
     /(<main\s+id="spa-content")(\s+class="[^"]*")?/gi,
-    '$1 class="flex-1 overflow-x-hidden"'
+    '$1 class="flex-1"'
   );
   return html;
 }
