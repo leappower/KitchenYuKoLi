@@ -1737,12 +1737,16 @@
   });
 
   /* ────────────────────────────────────────────────────────────────
-   *  languageChanged — update any visible "no results" text in navigator
+   *  languageChanged — re-apply translations to navigator DOM
    * ──────────────────────────────────────────────────────────────── */
   _spaOn(
     document,
     "languageChanged",
     function () {
+      // Re-apply translations to update navigator text after language switch
+      if (window.translationManager && typeof window.translationManager.applyTranslations === "function") {
+        window.translationManager.applyTranslations();
+      }
       var noResEls = document.querySelectorAll(".cs-no-results");
       noResEls.forEach(function (el) {
         el.textContent =
