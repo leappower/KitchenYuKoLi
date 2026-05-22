@@ -43,6 +43,26 @@ pre-commit:
     i18n-keys:
       glob: "src/**/*.{js,html}"
       run: node scripts/lint-i18n-keys.js {staged_files}
+    no-git-conflict-markers:
+      glob: "src/**/*"
+      run: |
+        found=0
+        for f in {staged_files}; do
+          if grep -qE '<<<<<<< |=======$|>>>>>>> ' "$f" 2>/dev/null; then
+            echo "❌ Git conflict markers found in: $f"
+            grep -nE '<<<<<<< |=======$|>>>>>>> ' "$f" 2>/dev/null | head -5
+            found=1
+          fi
+        done
+        if [ "$found" -ne 0 ]; then
+          echo ""
+          echo "请解决 git 冲突后再提交。"
+          echo "  快速修复: 取当前分支版本"
+          echo "    git checkout --ours -- <file>"
+          echo "  快速修复: 取舍入分支版本"
+          echo "    git checkout --theirs -- <file>"
+          exit 1
+        fi
 
 pre-push:
   commands:
