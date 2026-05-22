@@ -552,8 +552,15 @@
   window.CaseGrid = { init: init, FILTERS: FILTERS, ROI_CASES: ROI_CASES };
 
   // ── Auto-init when DOM is ready ────────────────────
-  function autoInit() {
-    if (!document.getElementById('case-grid')) return;
+  function autoInit(evt) {
+    var grid = document.getElementById('case-grid');
+    var filters = document.getElementById('case-filters');
+    console.log('[case-grid] autoInit called from=' + (evt && evt.type) + ' readyState=' + document.readyState + ' grid=' + !!grid + ' filters=' + !!filters);
+    if (!grid) {
+      console.log('[case-grid] autoInit: #case-grid missing, scheduling retry');
+      setTimeout(autoInit, 200);
+      return;
+    }
     var variant = window.innerWidth < 768 ? 'mobile' : window.innerWidth < 1280 ? 'tablet' : 'pc';
     init(variant);
   }
@@ -564,6 +571,9 @@
     autoInit();
   }
 
-  // SPA navigation re-init
+  // SPA navigation: re-init after i18n translations are applied
+  // Wait for spa:ready (fired by translations.js after applyTranslations resolves)
+  // to ensure data-i18n fallback text is replaced before/after we render cards
   document.addEventListener('spa:load', autoInit);
+  document.addEventListener('spa:ready', autoInit);
 })();
