@@ -112,6 +112,10 @@ if [ "$SLUG_MISSING" -ne 0 ]; then
 fi
 echo "  ✅ All 8 slug alias directories present"
 
+# ─── 9.5 Inject dropdown scripts into pages that lack them ──
+echo "🔄 Injecting dropdown scripts into pages that lack them..."
+node scripts/inject-dropdown-scripts.js 2>&1 | tail -1
+
 # ─── 10. Fix permissions ────────────────────────────────────
 chmod -R a+rX "$DIST" 2>/dev/null || true
 

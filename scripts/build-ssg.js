@@ -885,6 +885,40 @@ function main() {
   }
 
   // Walk dist/ for all .html files
+  /**
+   * _injectDropdownScripts — 给缺少 dropdown 模块的页面补全导航下拉脚本。
+   *
+   * 问题：case slug 页面（/cases/）等二级页面的 SSG 模板不包含 dropdown-base.js、
+   * products-dropdown.js、applications-dropdown.js、support-dropdown.js、
+   * about-dropdown.js、dropdown-styles.js。当整页加载这些页面时，
+   * mountNavigator 找不到 dropdown 模块，降级为纯文本链接，导致箭头消失且无法点击。
+   *
+   * 修复：检测 HTML 中是否缺少 products-dropdown.js，若缺少则在 </body> 前补全所有 6 个脚本。
+   */
+  function _injectDropdownScripts(html, filePath) {
+    if (html.indexOf('products-dropdown.js') !== -1) return html;
+    if (html.indexOf('</body>') === -1) {
+      log('  ⚠ Skipping (no </body>): ' + (filePath || 'unknown'));
+      return html;
+    }
+    var versionTag = _buildVersion ? '?v=' + _buildVersion : '';
+    var scripts = [
+      '<script src="/assets/js/ui/dropdown-base.js"></script>',
+      '<script defer src="/assets/js/ui/products-dropdown.js' + versionTag + '"></script>',
+      '<script defer src="/assets/js/ui/applications-dropdown.js' + versionTag + '"></script>',
+      '<script defer src="/assets/js/ui/support-dropdown.js' + versionTag + '"></script>',
+      '<script defer src="/assets/js/ui/about-dropdown.js' + versionTag + '"></script>',
+      '<script src="/assets/js/ui/dropdown-styles.js"></script>',
+    ];
+    var result = html.replace('</body>', scripts.join('\n    ') + '\n  </body>');
+    if (result !== html) {
+      log('  ✓ Injected dropdown scripts into ' + (filePath || 'unknown'));
+    } else {
+      log('  ⚠ injectDropdownScripts: replace failed for ' + (filePath || 'unknown'));
+    }
+    return result;
+  }
+
   function _walkHtml(dir) {
     if (!fs.existsSync(dir)) return;
     var entries = fs.readdirSync(dir, { withFileTypes: true });
@@ -897,6 +931,7 @@ function main() {
         var html = fs.readFileSync(fullPath, 'utf-8');
         var modified = _injectComponentsCss(html);
         modified = _injectCoreCss(modified);
+        modified = _injectDropdownScripts(modified, fullPath);
         var lazyModified = _injectLazyLoading(modified);
         if (lazyModified !== modified) {
           _lazyInjected++;
