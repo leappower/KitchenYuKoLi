@@ -901,7 +901,7 @@ function main() {
       log('  ⚠ Skipping (no </body>): ' + (filePath || 'unknown'));
       return html;
     }
-    var versionTag = _buildVersion ? '?v=' + _buildVersion : '';
+    var versionTag = '';
     var scripts = [
       '<script src="/assets/js/ui/dropdown-base.js"></script>',
       '<script defer src="/assets/js/ui/products-dropdown.js' + versionTag + '"></script>',

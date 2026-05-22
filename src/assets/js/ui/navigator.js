@@ -876,17 +876,13 @@
       var cacheReady = tm.translationsCache && tm.translationsCache.has(cacheKey);
       if (cacheReady) {
         tm.applyTranslations();
-        console.debug("[navigator:reinitTM] cache ready, applied translations for lang=" + lang);
       } else {
         // Cache not ready — translation fetch still in progress
         // Retry after 500ms to let fetch complete
-        console.debug("[navigator:reinitTM] cache NOT ready for lang=" + lang + ", scheduling retry");
         setTimeout(function() {
           if (tm.translationsCache && tm.translationsCache.has(cacheKey)) {
             tm.applyTranslations();
-            console.debug("[navigator:reinitTM] retry success, applied translations for lang=" + lang);
           } else {
-            console.debug("[navigator:reinitTM] retry still not ready for lang=" + lang);
           }
         }, 500);
       }
@@ -930,7 +926,6 @@
 
   function initLangSwitcher() {
     var btn = document.getElementById("lang-toggle-btn");
-    console.log("[navigator] initLangSwitcher called, btn:", !!btn);
     if (!btn) {
       console.warn("[navigator] #lang-toggle-btn not found in document");
       return;
@@ -941,27 +936,21 @@
     btn.parentNode.replaceChild(clone, btn);
 
     clone.addEventListener("click", function (e) {
-      console.log("[navigator] lang-toggle-btn CLICKED");
       e.stopPropagation();
       _closeLangPanel();
 
       var selectEl = document.getElementById("lang-selector");
-      console.log("[navigator] lang-selector:", !!selectEl);
       if (!selectEl) {
         console.warn("[navigator] #lang-selector not found");
         return;
       }
 
       // Ensure lang-registry.js + custom-select.js are loaded, then open
-      console.log("[navigator] loading lang dependencies...");
       Promise.all([ensureLangRegistry(), ensureCustomSelect()])
         .then(function (results) {
-          console.log("[navigator] lang deps loaded, populating select");
           // Populate <select> with optgroups from LANG_REGISTRY (idempotent)
           _populateLangSelect(selectEl);
-          console.log("[navigator] select populated, options count:", selectEl.options.length);
           _openLangPanel(selectEl, clone);
-          console.log("[navigator] _openLangPanel done");
         })
         .catch(function (err) {
           console.warn("[Navigator] Failed to load lang dependencies:", err);
@@ -1335,7 +1324,6 @@
       var _ad = typeof window.ApplicationsDropdown !== 'undefined' && typeof window.ApplicationsDropdown.renderPC === 'function';
       var _sd = typeof window.SupportDropdown !== 'undefined' && typeof window.SupportDropdown.renderPC === 'function';
       var _abt = typeof window.AboutDropdown !== 'undefined' && typeof window.AboutDropdown.renderPC === 'function';
-      console.debug("[navigator:mount] lang=" + _l + " navProductsText=" + _txt + " placeholders=" + _ph + " headerExists=" + !!_hdr + " ProdsDd=" + _pd + " AppsDd=" + _ad + " SupDd=" + _sd + " AbtDd=" + _abt);
 
     })();
     /* Close all open dropdowns before remounting */
@@ -1350,11 +1338,9 @@
       /* 如果 placeholder 内已有 <header>，直接提取替换 */
       var existingHeader = placeholder.querySelector("header");
       if (existingHeader && existingHeader.querySelector("nav")) {
-        console.debug("[navigator:mount:extract] valid nav header found: headerClass=" + (existingHeader.className || '').substring(0,60));
         placeholder.parentNode.replaceChild(existingHeader, placeholder);
         continue;
       } else if (existingHeader) {
-        console.debug("[navigator:mount:extract] header WITHOUT nav found, will rebuild: class=" + (existingHeader.className || '').substring(0,40));
       }
 
       /* 否则根据配置构建新 header */
@@ -1379,22 +1365,17 @@
     (function() {
       var _s = document.querySelector('header nav a[href="/products/"] > span[data-i18n="nav_products"]');
       var _s2 = document.querySelector('header nav a[href="/applications/"] > span[data-i18n="nav_applications"]');
-      var _t = window.uiText ? window.uiText("nav_products", "[?]") : "[no uiText]";
-      var _t2 = window.uiText ? window.uiText("nav_applications", "[?]") : "[no uiText]";
       var _arrow = document.querySelector('.prod-dropdown-toggle');
       var _trigger = document.querySelector('.prod-dropdown-trigger');
       var _headerNav = document.querySelector('header nav');
-      console.debug("[navigator:mount:after] navProductsSpan=" + (_s ? _s.textContent.replace(/ /g,'_') : '[NO_SPAN]') + " navAppsSpan=" + (_s2 ? _s2.textContent.replace(/ /g,'_') : '[NO_SPAN]') + " uiText(nav_products)=" + _t + " uiText(nav_applications)=" + _t2 + " headerNav=" + !!_headerNav + " trigger=" + !!_trigger + " arrow=" + !!_arrow);
       // 检测是否有 __I18N_PENDING__ 占位文本，有则延迟 200ms 后重新挂载
       var _hasPending = (_s && _s.textContent.indexOf('__I18N_PENDING__') !== -1) || (_s2 && _s2.textContent.indexOf('__I18N_PENDING__') !== -1);
       if (_hasPending) {
-        console.debug("[navigator:mount:after] i18n pending detected, scheduling remount");
         var _tm = window.translationManager;
         var _lang = _tm ? _tm.currentLanguage : '';
         var _cacheKey = 'ui-' + _lang;
         setTimeout(function() {
           if (_tm && _tm.translationsCache && _tm.translationsCache.has(_cacheKey)) {
-            console.debug("[navigator:mount:after] cache ready now, remounting navigator");
             mountNavigator();
           }
         }, 200);
@@ -1725,8 +1706,6 @@
       var _arrow = document.querySelector('.prod-dropdown-toggle');
       var _headerNav = document.querySelector('header nav');
       var _s = document.querySelector('header nav a[href="/products/"] > span[data-i18n="nav_products"]');
-      var _txt = _s ? _s.textContent.replace(/ /g,'_') : '[NO_SPAN]';
-      console.debug("[navigator:spa:load] ProdsDd=" + _pd + " AppsDd=" + _ad + " SupDd=" + _sd + " AbtDd=" + _abt + " trigger=" + !!_trigger + " arrow=" + !!_arrow + " navProducts=" + _txt);
     })();
     /* 关闭所有打开的 dropdown（SPA 导航前未关闭的） */
     closeOtherDropdowns(null);

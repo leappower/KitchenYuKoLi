@@ -61,10 +61,8 @@
   }
 
   function dispatchSpaLoad() {
-    console.log('[spa-router] dispatchSpaLoad starting, case-grid=' + !!document.getElementById('case-grid') + ' spa-content=' + (document.getElementById('spa-content') && document.getElementById('spa-content').innerHTML.length));
     emitSpaEvent("spa:load", { path: global.location.pathname });
     global.dispatchEvent(new CustomEvent("spa:load", { detail: { path: global.location.pathname } }));
-    console.log('[spa-router] dispatchSpaLoad done');
   }
 
   // ── Swup initialization ────────────────────────────────────────────
@@ -211,13 +209,10 @@
       _spaState.currentRoute = global.location.pathname.replace(/\/$/, "") || "/";
       // Reload page-specific scripts from the NEW page (not just #spa-content)
       var newDoc = visit && visit.to && visit.to.document ? visit.to.document : null;
-      console.log('[spa-router] content:replace start case-grid=' + !!document.getElementById('case-grid'));
       reloadPageScripts(newDoc);
-      console.log('[spa-router] after reloadPageScripts case-grid=' + !!document.getElementById('case-grid') + ' spa-content=' + !!document.getElementById('spa-content') + ' case-filters=' + !!document.getElementById('case-filters'));
       // Force re-init CaseGrid if present (ensures it works even if spa:load event timing is off)
       if (global.CaseGrid && typeof global.CaseGrid.init === 'function' && document.getElementById('case-grid')) {
         var variant = global.innerWidth < 768 ? 'mobile' : global.innerWidth < 1280 ? 'tablet' : 'pc';
-        console.log('[spa-router] forced CaseGrid.init variant=' + variant);
         global.CaseGrid.init(variant);
       }
       // Do NOT re-mount navigator on SPA navigation.
