@@ -288,7 +288,8 @@
         '<a href="' +
         s.href +
         '" class="inline-flex items-center gap-1.5 px-4 py-2 rounded-full border border-slate-200 dark:border-slate-700 text-sm text-slate-600 dark:text-slate-300 hover:border-primary hover:text-primary transition-all">' +
-        esc(s.label) + "</a>";
+        esc(s.label) +
+        "</a>";
     });
     pc += "</div></div>";
 
@@ -301,7 +302,8 @@
         '<a href="' +
         s.href +
         '" class="flex-shrink-0 inline-flex items-center gap-1 px-3 py-1.5 rounded-full border border-slate-200 dark:border-slate-700 text-xs text-slate-600 dark:text-slate-300 hover:border-primary hover:text-primary transition-all whitespace-nowrap">' +
-        esc(s.label) + "</a>";
+        esc(s.label) +
+        "</a>";
     });
     mobile += "</div></div>";
 

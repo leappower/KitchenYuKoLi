@@ -45,7 +45,8 @@
           entry._ndesc = normalize(entry.description || "");
           entry._nheadings = (entry.headings || []).map(normalize);
           entry._ncats = (entry.categories || []).map(normalize);
-          entry._ntext = entry._ntitle + " " + entry._ndesc + " " + entry._nheadings.join(" ") + " " + entry._ncats.join(" ");
+          entry._ntext =
+            entry._ntitle + " " + entry._ndesc + " " + entry._nheadings.join(" ") + " " + entry._ncats.join(" ");
         });
         return index;
       })
@@ -69,7 +70,9 @@
     for (var t = 0; t < tokens.length; t++) {
       var token = tokens[t];
       var inTitle = title.indexOf(token) !== -1;
-      var inHeadings = headings.some(function (h) { return h.indexOf(token) !== -1; });
+      var inHeadings = headings.some(function (h) {
+        return h.indexOf(token) !== -1;
+      });
       var inAll = text.indexOf(token) !== -1;
 
       if (!inAll) {

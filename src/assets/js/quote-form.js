@@ -16,11 +16,33 @@
 
   // Country → phone code mapping
   var COUNTRY_CODE_MAP = {
-    ID: "+62", MY: "+60", PH: "+63", VN: "+84", TH: "+66", SG: "+65",
-    MM: "+95", KH: "+855", LA: "+856", BN: "+673", CN: "+86", IN: "+91",
-    JP: "+81", KR: "+82", SA: "+966", TW: "+886", HK: "+852",
-    DE: "+49", ES: "+34", FR: "+33", PT: "+351", RU: "+7", NL: "+31",
-    PL: "+48", IT: "+39", TR: "+90", IL: "+972"
+    ID: "+62",
+    MY: "+60",
+    PH: "+63",
+    VN: "+84",
+    TH: "+66",
+    SG: "+65",
+    MM: "+95",
+    KH: "+855",
+    LA: "+856",
+    BN: "+673",
+    CN: "+86",
+    IN: "+91",
+    JP: "+81",
+    KR: "+82",
+    SA: "+966",
+    TW: "+886",
+    HK: "+852",
+    DE: "+49",
+    ES: "+34",
+    FR: "+33",
+    PT: "+351",
+    RU: "+7",
+    NL: "+31",
+    PL: "+48",
+    IT: "+39",
+    TR: "+90",
+    IL: "+972",
   };
 
   // Set a native phone-code select to a given code value
@@ -57,7 +79,8 @@
     if (existing) return existing;
     var banner = document.createElement("div");
     banner.id = id;
-    banner.style.cssText = "display:none;background:#fef2f2;border:1px solid #fca5a5;color:#dc2626;padding:12px 16px;border-radius:8px;margin-bottom:16px;font-size:14px;font-weight:600;text-align:center;";
+    banner.style.cssText =
+      "display:none;background:#fef2f2;border:1px solid #fca5a5;color:#dc2626;padding:12px 16px;border-radius:8px;margin-bottom:16px;font-size:14px;font-weight:600;text-align:center;";
     form.insertBefore(banner, form.firstChild);
     return banner;
   }
@@ -109,8 +132,13 @@
     var equipOther = form.querySelector("#q-equip-other");
     if (equipOtherCb && equipOther) {
       equipOtherCb.addEventListener("change", function () {
-        if (equipOtherCb.checked) { equipOther.classList.remove("hidden"); equipOther.focus(); }
-        else { equipOther.classList.add("hidden"); equipOther.value = ""; }
+        if (equipOtherCb.checked) {
+          equipOther.classList.remove("hidden");
+          equipOther.focus();
+        } else {
+          equipOther.classList.add("hidden");
+          equipOther.value = "";
+        }
       });
     }
 
@@ -119,8 +147,13 @@
     var painOther = form.querySelector("#q-pain-other");
     if (painOtherCb && painOther) {
       painOtherCb.addEventListener("change", function () {
-        if (painOtherCb.checked) { painOther.classList.remove("hidden"); painOther.focus(); }
-        else { painOther.classList.add("hidden"); painOther.value = ""; }
+        if (painOtherCb.checked) {
+          painOther.classList.remove("hidden");
+          painOther.focus();
+        } else {
+          painOther.classList.add("hidden");
+          painOther.value = "";
+        }
       });
     }
 
@@ -129,7 +162,8 @@
       nextBtn.addEventListener("click", function () {
         clearError(form);
         var required = ["q-country", "q-contact", "q-restaurant-type", "q-phone", "q-contact-channel"];
-        var valid = true, firstInvalid = null;
+        var valid = true,
+          firstInvalid = null;
         required.forEach(function (id) {
           var el = form.querySelector("#" + id);
           if (!el) return;
@@ -168,8 +202,12 @@
     form.dataset.quoteFormBound = "1";
 
     initStepNavigation(form);
-    form.addEventListener("input", function () { clearError(form); });
-    form.addEventListener("change", function () { clearError(form); });
+    form.addEventListener("input", function () {
+      clearError(form);
+    });
+    form.addEventListener("change", function () {
+      clearError(form);
+    });
 
     form.addEventListener("submit", function (e) {
       e.preventDefault();
@@ -178,7 +216,8 @@
       // Validate step 2
       var requiredStep2 = ["q-capacity", "q-budget"];
       var timelineChecked = form.querySelector('input[name="q-timeline"]:checked');
-      var valid = true, firstInvalid = null;
+      var valid = true,
+        firstInvalid = null;
 
       requiredStep2.forEach(function (id) {
         var el = form.querySelector("#" + id);
@@ -214,19 +253,28 @@
       var timeline = form.querySelector('input[name="q-timeline"]:checked');
 
       var countryText = country && country.value ? country.options[country.selectedIndex].text : "";
-      var restaurantText = restaurantType && restaurantType.value ? restaurantType.options[restaurantType.selectedIndex].text : "";
+      var restaurantText =
+        restaurantType && restaurantType.value ? restaurantType.options[restaurantType.selectedIndex].text : "";
 
       var equipments = [];
-      form.querySelectorAll('#quote-step-2 input[type="checkbox"][value="cutting"],#quote-step-2 input[type="checkbox"][value="stirfry"],#quote-step-2 input[type="checkbox"][value="frying"],#quote-step-2 input[type="checkbox"][value="stewing"],#quote-step-2 input[type="checkbox"][value="steaming"],#quote-step-2 input[type="checkbox"][value="auxiliary"]').forEach(function (cb) {
-        if (cb.checked) equipments.push(cb.value);
-      });
+      form
+        .querySelectorAll(
+          '#quote-step-2 input[type="checkbox"][value="cutting"],#quote-step-2 input[type="checkbox"][value="stirfry"],#quote-step-2 input[type="checkbox"][value="frying"],#quote-step-2 input[type="checkbox"][value="stewing"],#quote-step-2 input[type="checkbox"][value="steaming"],#quote-step-2 input[type="checkbox"][value="auxiliary"]'
+        )
+        .forEach(function (cb) {
+          if (cb.checked) equipments.push(cb.value);
+        });
       var equipOther = form.querySelector("#q-equip-other");
       if (equipOther && equipOther.value.trim()) equipments.push("Other: " + equipOther.value.trim());
 
       var pains = [];
-      form.querySelectorAll('#quote-step-2 input[type="checkbox"][value="招聘困难"],#quote-step-2 input[type="checkbox"][value="出餐慢"],#quote-step-2 input[type="checkbox"][value="品质不稳"],#quote-step-2 input[type="checkbox"][value="成本高"],#quote-step-2 input[type="checkbox"][value="新店"]').forEach(function (cb) {
-        if (cb.checked) pains.push(cb.value);
-      });
+      form
+        .querySelectorAll(
+          '#quote-step-2 input[type="checkbox"][value="招聘困难"],#quote-step-2 input[type="checkbox"][value="出餐慢"],#quote-step-2 input[type="checkbox"][value="品质不稳"],#quote-step-2 input[type="checkbox"][value="成本高"],#quote-step-2 input[type="checkbox"][value="新店"]'
+        )
+        .forEach(function (cb) {
+          if (cb.checked) pains.push(cb.value);
+        });
       var painOtherCb = form.querySelector("#q-pain-other-cb");
       var painOther = form.querySelector("#q-pain-other");
       if (painOtherCb && painOtherCb.checked && painOther && painOther.value.trim()) {
@@ -235,7 +283,9 @@
 
       var richMsg = [
         "Restaurant Type: " + restaurantText,
-        "Contact Via: " + (contactChannel ? contactChannel.value : "") + (contactAccount && contactAccount.value ? " (" + contactAccount.value + ")" : ""),
+        "Contact Via: " +
+          (contactChannel ? contactChannel.value : "") +
+          (contactAccount && contactAccount.value ? " (" + contactAccount.value + ")" : ""),
         "Equipment: " + (equipments.length ? equipments.join(", ") : "Not specified"),
         "Daily Output: " + (capacity && capacity.value ? capacity.options[capacity.selectedIndex].text : ""),
         "Budget: " + (budget && budget.value ? budget.options[budget.selectedIndex].text : ""),
@@ -282,11 +332,15 @@
         body: JSON.stringify(formData),
       })
         .then(function (res) {
-          if (!res.ok) return res.json().then(function (err) { throw new Error(err.error || "Submission failed"); });
+          if (!res.ok)
+            return res.json().then(function (err) {
+              throw new Error(err.error || "Submission failed");
+            });
           return res.json();
         })
         .then(function () {
-          if (typeof window.showNotification === "function") window.showNotification("提交成功！我们将尽快与您联系。", "success");
+          if (typeof window.showNotification === "function")
+            window.showNotification("提交成功！我们将尽快与您联系。", "success");
           setTimeout(function () {
             if (window.SpaRouter) window.SpaRouter.navigate("/thank-you/");
             else location.href = "/thank-you/";
@@ -294,7 +348,10 @@
         })
         .catch(function (err) {
           showError(form, err.message || "提交失败，请稍后重试。");
-          if (btn) { btn.disabled = false; btn.innerHTML = btnOrig; }
+          if (btn) {
+            btn.disabled = false;
+            btn.innerHTML = btnOrig;
+          }
         });
     });
   }
@@ -312,21 +369,51 @@
     var painOther = form.querySelector("#c-pain-other");
     if (pain6 && painOther) {
       pain6.addEventListener("change", function () {
-        if (pain6.checked) { painOther.classList.remove("hidden"); painOther.focus(); }
-        else { painOther.classList.add("hidden"); painOther.value = ""; }
+        if (pain6.checked) {
+          painOther.classList.remove("hidden");
+          painOther.focus();
+        } else {
+          painOther.classList.add("hidden");
+          painOther.value = "";
+        }
       });
     }
   }
 
   // Bind on DOM ready + SPA navigation
-  if (document.readyState !== "loading") { initQuoteForm(); initContactForm(); }
-  else document.addEventListener("DOMContentLoaded", function () { initQuoteForm(); initContactForm(); });
+  if (document.readyState !== "loading") {
+    initQuoteForm();
+    initContactForm();
+  } else
+    document.addEventListener("DOMContentLoaded", function () {
+      initQuoteForm();
+      initContactForm();
+    });
 
-  _spaOn(document, "spa:ready", function () { initQuoteForm(); initContactForm(); }, "spa:ready");
-  _spaOn(document, "spa:load", function () {
-    var qf = document.getElementById("quote-form") || document.getElementById("quote-form-mobile");
-    if (qf && !qf._spaLoadInitialized) { qf._spaLoadInitialized = true; initQuoteForm(); }
-    var cf = document.querySelector("#contact-form-el");
-    if (cf && !cf._spaLoadInitialized) { cf._spaLoadInitialized = true; initContactForm(); }
-  }, "spa:load");
+  _spaOn(
+    document,
+    "spa:ready",
+    function () {
+      initQuoteForm();
+      initContactForm();
+    },
+    "spa:ready"
+  );
+  _spaOn(
+    document,
+    "spa:load",
+    function () {
+      var qf = document.getElementById("quote-form") || document.getElementById("quote-form-mobile");
+      if (qf && !qf._spaLoadInitialized) {
+        qf._spaLoadInitialized = true;
+        initQuoteForm();
+      }
+      var cf = document.querySelector("#contact-form-el");
+      if (cf && !cf._spaLoadInitialized) {
+        cf._spaLoadInitialized = true;
+        initContactForm();
+      }
+    },
+    "spa:load"
+  );
 })();

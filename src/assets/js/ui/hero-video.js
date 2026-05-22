@@ -78,8 +78,8 @@
 
     /* ── 状态 ── */
     var state = {
-      hasStarted: false,     // 是否首次播放（控制 crossfade 只执行一次）
-      hasAutoPlayed: false,  // 是否已自动播放过（auto 模式初始行为，永不重置）
+      hasStarted: false, // 是否首次播放（控制 crossfade 只执行一次）
+      hasAutoPlayed: false, // 是否已自动播放过（auto 模式初始行为，永不重置）
       isPlaying: false,
       isMuted: true,
       savedTime: 0,
@@ -357,10 +357,7 @@
         muteBtn.innerHTML = state.isMuted
           ? '<span class="material-symbols-outlined text-white text-xl">volume_off</span>'
           : '<span class="material-symbols-outlined text-white text-xl">volume_up</span>';
-        muteBtn.setAttribute(
-          "data-i18n",
-          state.isMuted ? "hero_video_mute" : "hero_video_unmute"
-        );
+        muteBtn.setAttribute("data-i18n", state.isMuted ? "hero_video_mute" : "hero_video_unmute");
       });
     }
 

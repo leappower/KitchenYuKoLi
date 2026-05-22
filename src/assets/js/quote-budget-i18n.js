@@ -108,7 +108,9 @@
       html +=
         '<option value="">' +
         (placeholder.textContent ||
-          (typeof window.t === "function" ? window.uiText("quote_select_budget", "请选择预算范围") : "请选择预算范围")) +
+          (typeof window.t === "function"
+            ? window.uiText("quote_select_budget", "请选择预算范围")
+            : "请选择预算范围")) +
         "</option>";
     } else {
       html += '<option value="">—</option>';
@@ -117,7 +119,8 @@
     if (consult) {
       html +=
         '<option value="consult">' +
-        (consult.textContent || (typeof window.t === "function" ? window.uiText("quote_consult", "需咨询") : "需咨询")) +
+        (consult.textContent ||
+          (typeof window.t === "function" ? window.uiText("quote_consult", "需咨询") : "需咨询")) +
         "</option>";
     }
 

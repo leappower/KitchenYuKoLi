@@ -26,21 +26,21 @@
  * TODO: Remove JS imports below once webpack entry is converted to CSS-only.
  *       Track: https://github.com/leappower/HTML-YuQL/issues (F1 cleanup)
  */
-import './assets/css/styles.css';
+import "./assets/css/styles.css";
 // JS imports below produce dead code in bundle — kept for reference only
-import './assets/js/media-queries.js';   // window.MediaQueries
-import './assets/js/common.js';          // window.CommonUtils
-import './assets/js/translations.js';    // window.translationManager / setupLanguageSystem
-import './assets/js/lang-registry.js';   // window.LangRegistry
-import './assets/js/image-assets.js';    // window.ImageAssets
-import './assets/js/init.js';            // Initialization
-import './assets/js/utils.js';           // window.AppUtils
-import './assets/js/main.js';            // Lazy loading, error handling, app modules
-import './assets/js/contacts.js';        // window contact helpers
+import "./assets/js/media-queries.js"; // window.MediaQueries
+import "./assets/js/common.js"; // window.CommonUtils
+import "./assets/js/translations.js"; // window.translationManager / setupLanguageSystem
+import "./assets/js/lang-registry.js"; // window.LangRegistry
+import "./assets/js/image-assets.js"; // window.ImageAssets
+import "./assets/js/init.js"; // Initialization
+import "./assets/js/utils.js"; // window.AppUtils
+import "./assets/js/main.js"; // Lazy loading, error handling, app modules
+import "./assets/js/contacts.js"; // window contact helpers
 // navigation.js DELETED: functions duplicated in floating-actions.js, slide-menu.js, page-interactions.js
 // sidebar.js DELETED: unused — no page loads it
 // products.js DELETED: unused — product-grid.js handles rendering independently
 // import './assets/js/smart-popup.js';     // REMOVED: now in assets/js/ui/smart-popup.js, loaded directly by pages
-import './assets/js/product-list.js';    // window.ProductList
+import "./assets/js/product-list.js"; // window.ProductList
 // product-data-table.js is now loaded as an external script (not bundled)
 // so CMS publish can update it without rebuilding. See src/index.html.

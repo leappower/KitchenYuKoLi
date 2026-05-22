@@ -900,7 +900,10 @@
   function initLangSwitcher() {
     var btn = document.getElementById("lang-toggle-btn");
     console.log("[navigator] initLangSwitcher called, btn:", !!btn);
-    if (!btn) { console.warn("[navigator] #lang-toggle-btn not found in document"); return; }
+    if (!btn) {
+      console.warn("[navigator] #lang-toggle-btn not found in document");
+      return;
+    }
 
     // Remove old listeners by replacing node
     var clone = btn.cloneNode(true);
@@ -913,7 +916,10 @@
 
       var selectEl = document.getElementById("lang-selector");
       console.log("[navigator] lang-selector:", !!selectEl);
-      if (!selectEl) { console.warn("[navigator] #lang-selector not found"); return; }
+      if (!selectEl) {
+        console.warn("[navigator] #lang-selector not found");
+        return;
+      }
 
       // Ensure lang-registry.js + custom-select.js are loaded, then open
       console.log("[navigator] loading lang dependencies...");
