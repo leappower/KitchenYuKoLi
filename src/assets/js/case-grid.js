@@ -149,6 +149,15 @@
   /* ── State ──────────────────────────────────────── */
   var activeFilters = { industry: null, volume: null, country: null, benefit: null };
 
+  /* ── i18n helper ────────────────────────────────── */
+  function __(key, fallback) {
+    if (typeof window.t === 'function') {
+      var result = window.t(key);
+      if (result && result !== key) return result;
+    }
+    return fallback || key;
+  }
+
   /* ── Helpers ────────────────────────────────────── */
   function laborReduction(b, a) {
     return Math.round((1 - a / b) * 100);
@@ -156,12 +165,16 @@
 
   function benefitLabel(key) {
     var map = {
-      "Labor Cost Reduction": "降人工",
-      Consistency: "标准化",
-      "Space Saving": "省空间",
-      "Fast Payback": "快回本",
+      "Labor Cost Reduction": "cases_benefit_labor",
+      Consistency: "cases_benefit_consistency",
+      "Space Saving": "cases_benefit_space",
+      "Fast Payback": "cases_benefit_payback",
     };
-    return map[key] || key;
+    return __(map[key] || key, map[key] || key);
+  }
+
+  function ii(key, fallback) {
+    return __(key, fallback);
   }
 
   function benefitIcon(key) {
@@ -207,7 +220,9 @@
       "</span>" +
       '<span class="px-3 py-1 rounded-full bg-' +
       bc +
-      '-500 text-white text-sm font-bold">' +
+      '-500 text-white text-sm font-bold" data-i18n="cases_benefit_' +
+      c.benefit.replace(/ /g, '_').toLowerCase() +
+      '">' +
       benefitLabel(c.benefit) +
       "</span>" +
       "</div>" +
@@ -221,16 +236,20 @@
       "</h3>" +
       '<div class="flex flex-wrap items-center gap-x-3 gap-y-1 text-sm text-slate-500 dark:text-slate-400">' +
       '<span class="flex items-center gap-1"><span class="material-symbols-outlined text-base">storefront</span>' +
-      c.industry +
+      __("cases_industry_" + c.slug.split("-")[0], c.industry) +
       "</span>" +
       '<span class="text-slate-300 dark:text-slate-600">·</span>' +
       '<span class="flex items-center gap-1"><span class="material-symbols-outlined text-base">restaurant</span>' +
       c.dailyOutput +
-      " 餐/天</span>" +
+      " " +
+      __("cases_per_day", "餐/天") +
+      "</span>" +
       '<span class="text-slate-300 dark:text-slate-600">·</span>' +
       '<span class="flex items-center gap-1"><span class="material-symbols-outlined text-base">schedule</span>' +
       c.payback +
-      " 月回本</span>" +
+      " " +
+      __("cases_payback_month", "月回本") +
+      "</span>" +
       "</div>" +
       '<p class="text-sm leading-relaxed text-slate-600 dark:text-slate-300 italic border-l-4 border-' +
       bc +
@@ -246,7 +265,9 @@
       '-600">-' +
       pct +
       "%</div>" +
-      '<div class="text-xs text-slate-500 dark:text-slate-400">人工成本</div>' +
+      '<div class="text-xs text-slate-500 dark:text-slate-400" data-i18n="cases_label_labor_cost">' +
+      __("cases_label_labor_cost", "人工成本") +
+      "</div>" +
       "</div>" +
       '<div class="bg-slate-50 dark:bg-slate-900/50 rounded-lg p-2.5 text-center">' +
       '<div class="text-lg font-black text-slate-700 dark:text-slate-200">' +
@@ -254,19 +275,25 @@
       "→" +
       c.laborAfter +
       "</div>" +
-      '<div class="text-xs text-slate-500 dark:text-slate-400">人数变化</div>' +
+      '<div class="text-xs text-slate-500 dark:text-slate-400" data-i18n="cases_label_staff_change">' +
+      __("cases_label_staff_change", "人数变化") +
+      "</div>" +
       "</div>" +
       '<div class="bg-slate-50 dark:bg-slate-900/50 rounded-lg p-2.5 text-center">' +
       '<div class="text-base font-black text-primary">' +
       c.monthlySaving +
       "</div>" +
-      '<div class="text-xs text-slate-500 dark:text-slate-400">月节省</div>' +
+      '<div class="text-xs text-slate-500 dark:text-slate-400" data-i18n="cases_label_monthly_saving">' +
+      __("cases_label_monthly_saving", "月节省") +
+      "</div>" +
       "</div>" +
       "</div>" +
       '<a href="/cases/' +
       c.slug +
       '/" target="_self" class="inline-flex items-center gap-1 text-primary font-bold text-sm group-hover:gap-2 transition-all mt-auto pt-1">' +
-      '<span data-i18n="cases_read_story">查看详情</span>' +
+      '<span data-i18n="cases_read_story">' +
+      __("cases_read_story", "查看详情") +
+      "</span>" +
       '<span class="material-symbols-outlined text-base">arrow_forward</span>' +
       "</a>" +
       "</div>" +
@@ -287,11 +314,13 @@
       "<span>" +
       c.country +
       " · " +
-      c.industry +
+      __("cases_industry_" + c.slug.split("-")[0], c.industry) +
       "</span>" +
       '<span class="font-semibold text-slate-700 dark:text-slate-200">' +
       c.dailyOutput +
-      " 餐/天</span>" +
+      " " +
+      __("cases_per_day", "餐/天") +
+      "</span>" +
       "</div>" +
       '<h3 class="font-bold text-base leading-snug" data-i18n="cases_' +
       c.slug.split("-")[0] +
@@ -305,14 +334,16 @@
       '<span class="material-symbols-outlined text-sm">' +
       benefitIcon(c.benefit) +
       "</span>" +
-      "人工 -" +
+      __("cases_labor_reduction", "人工") +
+      " -" +
       pct +
       "%" +
       "</span>" +
       '<span class="inline-flex items-center gap-1 text-sm font-semibold text-slate-700 dark:text-slate-200">' +
       '<span class="material-symbols-outlined text-sm text-primary">schedule</span>' +
       c.payback +
-      " 月回本" +
+      " " +
+      __("cases_payback_month", "月回本") +
       "</span>" +
       "</div>" +
       '<p class="text-sm text-slate-600 dark:text-slate-400 italic" data-i18n="cases_quote_' +
@@ -323,7 +354,9 @@
       '<a href="/cases/' +
       c.slug +
       '/" target="_self" class="inline-flex items-center gap-1 text-primary font-bold text-sm">' +
-      '<span data-i18n="cases_read_more">Read More</span>' +
+      '<span data-i18n="cases_read_more">' +
+      __("cases_read_more", "Read More") +
+      "</span>" +
       '<span class="material-symbols-outlined text-base">arrow_forward</span>' +
       "</a>" +
       "</div>" +
@@ -365,9 +398,12 @@
     }
     container.innerHTML = html;
 
-    // Update count
+    // Update count — use i18n format
     var countEl = document.getElementById("case-count");
-    if (countEl) countEl.textContent = cases.length + " 个案例";
+    if (countEl) {
+      var template = __("cases_count_format", "{count} 个案例");
+      countEl.textContent = template.replace("{count}", cases.length);
+    }
   }
 
   /* ── Filter UI Builders ─────────────────────────── */
@@ -393,7 +429,9 @@
       html +=
         '<button data-filter="' +
         key +
-        '" data-value="" class="case-filter-btn px-3 py-1.5 text-xs font-semibold rounded-full border transition-all border-primary bg-primary text-white">全部</button>';
+        '" data-value="" class="case-filter-btn px-3 py-1.5 text-xs font-semibold rounded-full border transition-all border-primary bg-primary text-white" data-i18n="cases_filter_all">' +
+        __("cases_filter_all", "全部") +
+        "</button>";
       for (var i = 0; i < f.options.length; i++) {
         html +=
           '<button data-filter="' +
@@ -420,8 +458,12 @@
     var html =
       '<button id="case-filter-toggle" class="flex items-center gap-2 px-4 py-2 rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-sm font-semibold shadow-sm hover:shadow-md transition-all">' +
       '<span class="material-symbols-outlined text-primary">tune</span>' +
-      '<span data-i18n="cases_filter_toggle">筛选案例</span>' +
-      '<span id="case-count" class="ml-1 bg-primary/10 text-primary px-2 py-0.5 rounded-full text-xs font-bold">8</span>' +
+      '<span data-i18n="cases_filter_toggle">' +
+      __("cases_filter_toggle", "筛选案例") +
+      '</span>' +
+      '<span id="case-count" class="ml-1 bg-primary/10 text-primary px-2 py-0.5 rounded-full text-xs font-bold">' +
+      __("cases_count_format", "8 个案例").replace("{count}", "8") +
+      '</span>' +
       '<span class="material-symbols-outlined ml-auto transition-transform" id="case-filter-arrow">expand_more</span>' +
       "</button>" +
       '<div id="case-filter-panel" class="hidden mt-3 bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 p-4 shadow-lg space-y-4">';
@@ -439,7 +481,9 @@
       html +=
         '<button data-filter="' +
         key +
-        '" data-value="" class="case-filter-btn px-3 py-1.5 text-xs font-semibold rounded-full border transition-all border-primary bg-primary text-white">全部</button>';
+        '" data-value="" class="case-filter-btn px-3 py-1.5 text-xs font-semibold rounded-full border transition-all border-primary bg-primary text-white" data-i18n="cases_filter_all">' +
+        __("cases_filter_all", "全部") +
+        "</button>";
       for (var i = 0; i < f.options.length; i++) {
         html +=
           '<button data-filter="' +
@@ -490,14 +534,16 @@
         " width=%2212%22 height=%2212%22 viewBox=%220 0 24 24%22 fill=%22none%22" +
         " stroke=%22%2394a3b8%22 stroke-width=%222%22><path d=%22M6 9l6 6 6-6%22/></svg>');" +
         " background-repeat: no-repeat; background-position: right 8px center; padding-right: 28px;'>";
-      html += '<option value="">' + f.label + "</option>";
+      html += '<option value="">' + __(f.i18n, f.label) + "</option>";
       for (var i = 0; i < f.options.length; i++) {
         html += '<option value="' + f.options[i] + '">' + f.options[i] + "</option>";
       }
       html += "</select>";
     }
     html +=
-      '<span id="case-count" class="flex-shrink-0 text-xs font-bold text-primary whitespace-nowrap">8 个案例</span>';
+      '<span id="case-count" class="flex-shrink-0 text-xs font-bold text-primary whitespace-nowrap">' +
+      __("cases_count_format", "8 个案例").replace("{count}", "8") +
+      '</span>';
     html += "</div>";
     bar.innerHTML = html;
 
