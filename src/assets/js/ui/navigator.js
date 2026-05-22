@@ -1291,6 +1291,16 @@
    * Can be called multiple times safely (idempotent by nature).
    */
   function mountNavigator() {
+    // [LOG] mountNavigator — check i18n state before header rebuild
+    (function() {
+      var _l = window.translationManager ? window.translationManager.currentLanguage : "[no tm]";
+      var _txt = "[N/A]";
+      var _s = document.querySelector('header nav a[href="/products/"] > span[data-i18n="nav_products"]');
+      if (_s) _txt = _s.textContent.replace(/ /g,'_');
+      var _ph = document.querySelectorAll('[data-component="navigator"]').length;
+      var _hdr = document.querySelector('header');
+      console.log("[navigator:mount] lang=" + _l + " navProductsText=" + _txt + " placeholders=" + _ph + " headerExists=" + !!_hdr + " headerTag=" + (_hdr ? _hdr.className.substring(0,40) : 'none'));
+    })();
     /* Close all open dropdowns before remounting */
     closeOtherDropdowns(null);
     var placeholders = document.querySelectorAll('[data-component="navigator"]');
@@ -1354,6 +1364,16 @@
    *   (e.g. "products", "applications", "support", "about")
    */
   function updateActive(activeSectionId) {
+    // [LOG] updateActive — check nav text before class toggle
+    (function() {
+      var _l = window.translationManager ? window.translationManager.currentLanguage : "[no tm]";
+      var _s = document.querySelector('header nav a[href="/products/"] > span[data-i18n="nav_products"]');
+      var _txt = _s ? _s.textContent.replace(/ /g,'_') : "[NOT FOUND]";
+      var _s2 = document.querySelector('header nav a[href="/applications/"] > span[data-i18n="nav_applications"]');
+      var _txt2 = _s2 ? _s2.textContent.replace(/ /g,'_') : "[NOT FOUND]";
+      var _hdr = document.querySelector('header');
+      console.log("[navigator:updateActive] section=" + activeSectionId + " lang=" + _l + " navProducts=" + _txt + " navApps=" + _txt2 + " headerExists=" + !!_hdr);
+    })();
     activeSectionId = activeSectionId || "";
     var currentPath = window.location.pathname.replace(/\/$/, "") || "/";
 

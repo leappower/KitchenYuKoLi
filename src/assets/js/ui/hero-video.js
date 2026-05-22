@@ -31,6 +31,7 @@
   "use strict";
 
   var _spaRegs = {};
+    window.__onSpaEvent("spa:load", function () { pauseAllExcept(null); _activeInstances = []; });
   function _spaOn(tgt, evt, fn, key) {
     if (key == null) key = evt + ":" + (++_spaRegs.__k || (_spaRegs.__k = 1));
     if (_spaRegs[key]) _spaRegs[key].abort();
@@ -120,7 +121,9 @@
     function updatePlayBtn(isPlaying, isEnded) {
       if (!playBtn) return;
       if (isPlaying) {
-        playBtn.style.display = "none";
+        playBtn.style.display = "flex";
+        playBtn.innerHTML = '<span class="material-symbols-outlined">pause</span>';
+        playBtn.setAttribute("aria-label", "Pause video");
       } else if (isEnded) {
         playBtn.style.display = "flex";
         playBtn.innerHTML = '<span class="material-symbols-outlined">replay</span>';
