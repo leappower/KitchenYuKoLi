@@ -390,11 +390,11 @@
     container.addEventListener("touchstart", function (e) {
       // Don't interfere with scroll/swipe gestures
       if (e.touches.length > 1) return;
-      if (state.isPlaying) {
-        showPlayBtn();
-        video.controls = !video.controls;
-        autoHidePlayBtn();
-      }
+      showPlayBtn();
+      // Show native controls when playing, hide when paused
+      video.controls = state.isPlaying;
+      if (state.isPlaying) autoHidePlayBtn();
+      else if (_hideBtnTimer) { clearTimeout(_hideBtnTimer); _hideBtnTimer = null; }
     });
 
     /* ── PC hover 显示原生 controls + playBtn ── */
