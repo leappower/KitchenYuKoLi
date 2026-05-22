@@ -213,7 +213,7 @@
       '<div class="w-full aspect-video md:aspect-[4/3] bg-slate-200 dark:bg-slate-700 overflow-hidden relative flex-shrink-0">' +
       '<img loading="lazy" alt="' +
       c.title +
-      '" class="w-full h-full object-cover group-hover:scale-105 transition-transform" src="/assets/images/cases/' +
+      '" class="w-full h-full object-contain bg-slate-100 dark:bg-slate-700 group-hover:scale-105 transition-transform" src="/assets/images/cases/' +
       c.slug.split("-")[0] +
       '/cover.webp" />' +
       '<div class="absolute top-3 left-3 flex items-center gap-2">' +
@@ -327,7 +327,7 @@
       '<div class="w-full aspect-video bg-slate-200 dark:bg-slate-700 overflow-hidden relative flex-shrink-0">' +
       '<img loading="lazy" alt="' +
       c.title +
-      '" class="w-full h-full object-cover group-hover:scale-105 transition-transform" src="/assets/images/cases/' +
+      '" class="w-full h-full object-contain bg-slate-100 dark:bg-slate-700 group-hover:scale-105 transition-transform" src="/assets/images/cases/' +
       c.slug.split("-")[0] +
       '/cover.webp" />' +
       '<div class="absolute top-2 left-2 flex items-center gap-1.5">' +
