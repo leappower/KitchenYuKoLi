@@ -246,94 +246,62 @@ function injectLangUrlSync(html) {
 }
 
 function injectNavConfig(html) {
-  // Already has nav-config.js — skip (idempotent)
-  if (/nav-config\.js/.test(html)) return html;
-
-  // Insert before navigator.js — navigator.js reads from NAV_CONFIG
-  var bp = BASE_PATH ? BASE_PATH.replace(/\/$/, '') : '';
-  var tag = '<script defer src="' + bp + '/assets/js/nav-config.js"></script>\n    ';
-  html = html.replace(
-    /(\s*)(<script[^>]*src=["'][^"']*\/assets\/js\/ui\/navigator\.js[^>]*>[^<]*<\/script>)/i,
-    '$1' + tag + '$2'
-  );
-
+  // nav-config.js is now handled by injectCoreScripts() via core-scripts.json
   return html;
 }
 
 function injectLangRegistry(html) {
-  // Already has lang-registry.js — skip (idempotent)
-  if (/lang-registry\.js/.test(html)) return html;
-
-  // Insert before translations.js (which navigator.js depends on)
-  // Pattern: <script ... src="/assets/js/translations.js">
-  var bp = BASE_PATH ? BASE_PATH.replace(/\/$/, '') : '';
-  var tag = '<script defer src="' + bp + '/assets/js/lang-registry.js"></script>\n    ';
-  html = html.replace(
-    /(\s*)(<script[^>]*src=["'][^"']*\/assets\/js\/translations\.js[^>]*>[^<]*<\/script>)/i,
-    '$1' + tag + '$2'
-  );
-
+  // lang-registry.js is now handled by injectCoreScripts() via core-scripts.json
   return html;
 }
 
 function injectTranslationsDropdown(html) {
   // Already has translations-dropdown-template.js — skip (idempotent)
-  if (/translations-dropdown-template\.js/.test(html)) return html;
-  var bp = BASE_PATH ? BASE_PATH.replace(/\/$/, '') : '';
-  var tag = '<script defer src="' + bp + '/assets/js/translations-dropdown-template.js"></script>';
-  // Insert right after translations.js
-  html = html.replace(
-    /(\s*)(<script[^>]*src=["'][^"']*\/assets\/js\/translations\.js[^>]*>[^<]*<\/script>)/i,
-    '$1$2\n    ' + tag
-  );
+  // translations-dropdown-template.js is now handled by injectCoreScripts() via core-scripts.json
   return html;
 }
 
-function injectCoreScripts(html) {
-  // Inject spa-router.js + slide-menu.js + device-utils.js if missing.
-  // These are essential for SPA routing and mobile menu.
-  // Skipped if already present (idempotent).
+var CORE_SCRIPTS = (function () {
+  var configPath = path.join(__dirname, 'core-scripts.json');
+  if (fs.existsSync(configPath)) {
+    return JSON.parse(fs.readFileSync(configPath, 'utf-8'));
+  }
+  return { core: [], pageSpecific: {} };
+})();
+
+function injectCoreScripts(html, routeSlug) {
+  // 从单一清单 core-scripts.json 注入所有核心脚本和页面特定脚本
+  // 每个脚本检查是否已存在（idempotent）
   var bp = BASE_PATH ? BASE_PATH.replace(/\/$/, '') : '';
   var tags = [];
 
-  if (!/spa-router\.js/.test(html)) {
-    tags.push('    <script defer src="' + bp + '/assets/js/spa-router.js"></script>');
-  }
-  if (!/slide-menu\.js/.test(html)) {
-    tags.push('    <script defer src="' + bp + '/assets/js/ui/slide-menu.js"></script>');
-  }
-  if (!/device-utils\.js/.test(html)) {
-    tags.push('    <script defer src="' + bp + '/assets/js/utils/device-utils.js"></script>');
-  }
+  // 核心脚本
+  CORE_SCRIPTS.core.forEach(function (path) {
+    var filename = path.split('/').pop();
+    if (html.indexOf(filename) === -1) {
+      tags.push('    <script defer src="' + bp + '/' + path + '"></script>');
+    }
+  });
+
+  // 页面特定脚本（根据路由匹配）
+  var topSection = routeSlug ? routeSlug.split('/')[0] : '';
+  var pageScripts = CORE_SCRIPTS.pageSpecific[topSection] || [];
+  pageScripts.forEach(function (path) {
+    var filename = path.split('/').pop();
+    if (html.indexOf(filename) === -1) {
+      tags.push('    <script defer src="' + bp + '/' + path + '"></script>');
+    }
+  });
 
   if (tags.length === 0) return html;
 
-  // Insert before existing navigator.js, or before </body>
-  var navPattern = /(<script[^>]*src=["'][^"']*\/assets\/js\/ui\/navigator\.js[^>]*>[^<]*<\/script>)/i;
-  if (navPattern.test(html)) {
-    return html.replace(navPattern, tags.join('\n') + '\n    $1');
-  }
+  // 注入到 </body> 前
   return html.replace(/<\/body>/i, tags.join('\n') + '\n  </body>');
 }
 
 function injectSwupScripts(html) {
-  // Already has swup.min.js — skip (idempotent)
-  if (/swup\.min\.js/.test(html)) return html;
-
-  var bp = BASE_PATH ? BASE_PATH.replace(/\/$/, '') : '';
-  var swupTag =
-    '    <script defer src="' + bp + '/assets/js/swup.min.js"></script>\n' +
-    '    <script defer src="' + bp + '/assets/js/swup-head-plugin.min.js"></script>\n' +
-    '    <script defer src="' + bp + '/assets/js/swup-preload-plugin.min.js"></script>';
-
-  // Preferred: insert before spa-router.js
-  var spaRouterPattern = /(<script[^>]*src=["'][^"']*\/assets\/js\/spa-router\.js[^>]*>[^<]*<\/script>)/i;
-  if (spaRouterPattern.test(html)) {
-    return html.replace(spaRouterPattern, swupTag + '\n    ' + '$1');
-  }
-
-  // Fallback: insert before </body>
-  return html.replace(/<\/body>/i, swupTag + '\n  </body>');
+  // Swup scripts are now handled by injectCoreScripts() via core-scripts.json
+  return html;
 }
 
 /**
@@ -399,7 +367,7 @@ function generateResponsiveEntry(route) {
     html = injectLangUrlSync(html);
     html = injectLangRegistry(html);
     html = injectNavConfig(html);
-    html = injectCoreScripts(html);
+    html = injectCoreScripts(html, route.slug);
     html = injectTranslationsDropdown(html);
     if (BASE_PATH) {
       html = patchHtmlPaths(html);
@@ -492,7 +460,7 @@ function generateRouteIndex(route) {
   // Inject lang-registry.js before translations.js (if not already present)
   html = injectLangRegistry(html);
   html = injectNavConfig(html);
-  html = injectCoreScripts(html);
+  html = injectCoreScripts(html, route.slug);
   html = injectTranslationsDropdown(html);
   html = injectSwupScripts(html);
   html = normalizeSpaContent(html);
@@ -549,7 +517,7 @@ function copyDeviceFiles(route) {
     // Inject lang-registry.js before translations.js (if not already present)
     content = injectLangRegistry(content);
     content = injectNavConfig(content);
-    content = injectCoreScripts(content);
+    content = injectCoreScripts(content, route.slug);
     content = injectTranslationsDropdown(content);
     content = injectSwupScripts(content);
     content = normalizeSpaContent(content);

@@ -1,0 +1,61 @@
+{
+  "_comment": "核心共享脚本清单 — 所有 SSG/SPA 页面都从此单一来源注入脚本。新增共享脚本时只需在这里加一行。",
+  "core": [
+    "assets/js/utils/device-utils.js",
+    "assets/js/lang-registry.js",
+    "assets/js/translations.js",
+    "assets/js/translations-dropdown-template.js",
+    "assets/js/ui/dropdown-styles.js",
+    "assets/js/ui/dropdown-base.js",
+    "assets/js/ui/products-dropdown.js",
+    "assets/js/ui/applications-dropdown.js",
+    "assets/js/ui/support-dropdown.js",
+    "assets/js/ui/about-dropdown.js",
+    "assets/js/nav-config.js",
+    "assets/js/ui/navigator.js",
+    "assets/js/ui/slide-menu.js",
+    "assets/js/ui/footer.js",
+    "assets/js/ui/floating-actions.js",
+    "assets/js/swup.min.js",
+    "assets/js/swup-head-plugin.min.js",
+    "assets/js/swup-preload-plugin.min.js",
+    "assets/js/spa-router.js"
+  ],
+  "pageSpecific": {
+    "home": [
+      "assets/js/home-core-products.js",
+      "assets/js/contacts.js",
+      "assets/js/product-grid.js",
+      "assets/js/product-detail.js",
+      "assets/js/quote-form.js",
+      "assets/js/ui/currency.js",
+      "assets/js/ui/hero-video.js",
+      "assets/js/breadcrumb.js"
+    ],
+    "products": [
+      "assets/js/product-grid.js",
+      "assets/js/product-detail.js",
+      "assets/js/product-list.js",
+      "assets/js/breadcrumb.js"
+    ],
+    "cases": [
+      "assets/js/case-grid.js",
+      "assets/js/cases-page.js",
+      "assets/js/breadcrumb.js"
+    ],
+    "support": [
+      "assets/js/support-contact-channels.js",
+      "assets/js/support-wechat-modal.js",
+      "assets/js/breadcrumb.js"
+    ],
+    "about": [
+      "assets/js/breadcrumb.js"
+    ],
+    "contact": [
+      "assets/js/quote-form.js"
+    ],
+    "quote": [
+      "assets/js/quote-form.js"
+    ]
+  }
+}
