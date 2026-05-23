@@ -305,32 +305,8 @@ function injectCoreScripts(html, routeSlug) {
   var patternStr = '(?:^|[\\/])(?:' + scriptNames.join('|') + ')\\.js';
   var injectPattern = '<script>window._SPA_GLOBAL_PATTERNS=/' + patternStr + '/</script>';
 
-  // 分离 swup 脚本：必须在 spa-router.js 之前加载
-  var swupTags = [];
-  var otherTags = [];
-  tags.forEach(function (t) {
-    if (/swup/.test(t)) {
-      swupTags.push(t);
-    } else {
-      otherTags.push(t);
-    }
-  });
-
-  var allInject = otherTags.join('\n');
-
-  // 先注入 otherTags（包含 spa-router），这样 swup 可以正确定位
-  html = html.replace(/<\/body>/i, allInject + '\n  </body>');
-
-  // swup 注入到 spa-router.js 之前（现在 html 中已有 spa-router）
-  var spaRouterPattern = /(<script[^>]*src=["'][^"']*\/assets\/js\/spa-router\.js[^>]*>[^<]*<\/script>)/i;
-  if (swupTags.length > 0 && spaRouterPattern.test(html)) {
-    html = html.replace(spaRouterPattern, swupTags.join('\n') + '\n    $1');
-  }
-
-  // 注入 _SPA_GLOBAL_PATTERNS
-  html = html.replace(/<\/body>/i, '    ' + injectPattern + '\n  </body>');
-
-  return html;
+  // 统一注入到 </body> 前。spa-router.js 内部有自重试机制，不依赖脚本顺序。
+  return html.replace(/<\/body>/i, tags.join('\n') + '\n    ' + injectPattern + '\n  </body>');
 }
 
 function injectSwupScripts(html) {

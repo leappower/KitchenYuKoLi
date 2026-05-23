@@ -79,10 +79,9 @@
     }
 
     if (global.Swup === undefined) {
-      // Swup not loaded yet — retry on DOMContentLoaded
-      if (document.readyState === "loading") {
-        document.addEventListener("DOMContentLoaded", initSwup);
-      }
+      // Swup not loaded yet — retry after a short delay.
+      // defer scripts may execute in any order; we can't assume Swup is ready.
+      setTimeout(initSwup, 50);
       return;
     }
 
@@ -324,15 +323,15 @@
   global.SpaRouter = SpaRouter;
 
   // ── Auto-init ──────────────────────────────────────────────────────
+  // Always use DOMContentLoaded or immediate-ready to kick off initSwup.
+  // initSwup will self-retry if Swup is not yet loaded (defer order may vary).
   if (document.readyState === "loading") {
     document.addEventListener("DOMContentLoaded", function () {
       initSwup();
-      // Root path redirect: / → /home/
       var path = global.location.pathname;
       if (path === "/" || path === "/index.html") {
         history.replaceState(null, "", "/home/");
       }
-      // GitHub Pages 404 SPA redirect
       var redirectParam = new URLSearchParams(global.location.search).get("redirect");
       if (redirectParam) {
         history.replaceState(null, "", redirectParam);
