@@ -125,10 +125,14 @@
         playBtn.style.display = "flex";
         playBtn.innerHTML = '<span class="material-symbols-outlined">replay</span>';
         playBtn.setAttribute("aria-label", "Replay video");
+        // Restore overlay visibility when video ends
+        if (overlay) { overlay.style.opacity = "1"; overlay.style.transition = "opacity 0.2s ease"; }
       } else {
         playBtn.style.display = "flex";
         playBtn.innerHTML = '<span class="material-symbols-outlined">play_arrow</span>';
         playBtn.setAttribute("aria-label", "Play video");
+        // Restore overlay visibility when paused
+        if (overlay) { overlay.style.opacity = "1"; overlay.style.transition = "opacity 0.2s ease"; }
       }
     }
 
@@ -436,6 +440,7 @@
       if (!state.isPlaying) return;
       if (_hideBtnTimer) clearTimeout(_hideBtnTimer);
       _hideBtnTimer = setTimeout(function () {
+        if (!state.isPlaying) return; // Don't hide if paused in the meantime
         if (playBtn) playBtn.style.opacity = "0";
         if (overlay) overlay.style.opacity = "0";
         var fb = container.querySelector(".hero-video-fallback-btn");
