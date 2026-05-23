@@ -257,7 +257,7 @@ function injectPreTranslate(html) {
     '      (function () {',
     '        try {',
     '          var lang = localStorage.getItem("userLanguage") || "zh-CN";',
-    '          if (lang === "zh-CN") return;',
+    '          if (!lang) return;',
     '          var cacheKey = "yukoli-translations-ui-" + lang;',
     '          var cached = localStorage.getItem(cacheKey);',
     '          if (!cached) return;',
