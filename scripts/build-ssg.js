@@ -350,17 +350,6 @@ function injectCoreScripts(html, routeSlug) {
   var patternStr = '(?:^|[\\/])(?:' + scriptNames.join('|') + ')\\.js';
   var injectPattern = '<script>window._SPA_GLOBAL_PATTERNS=/' + patternStr + '/</script>';
 
-  // nav-config.js 必须强制注入到 navigator.js 之前
-  // 因为源模板中 navigator.js 可能排在 nav-config 之前（defer 顺序问题）
-  var navConfigTag = '    <script defer src="' + bp + '/assets/js/nav-config.js"></script>';
-  var translationsTag = '    <script defer src="' + bp + '/assets/js/translations.js"></script>';
-  var navPattern = /(<script[^>]*src=["'][^"']*\/assets\/js\/ui\/navigator\.js[^>]*>[^<]*<\/script>)/i;
-  if (navPattern.test(html)) {
-    // 强制注入 translations.js + nav-config.js 到 navigator.js 之前
-    // 源模板中 translations/nav-config 可能在 navigator 之后，需要修复 defer 顺序
-    html = html.replace(navPattern, translationsTag + '\n    ' + navConfigTag + '\n    $1');
-  }
-
   // 统一注入到 </body> 前
   return html.replace(/<\/body>/i, tags.join('\n') + '\n    ' + injectPattern + '\n  </body>');
 }
@@ -462,9 +451,6 @@ function generateResponsiveEntry(route) {
     '  <meta property="og:title" content="' + title + '">',
     '  <meta name="robots" content="index, follow">',
     '  <script defer src="' + bp + '/assets/js/ui/navigator.js"></script>',
-    '  <script defer src="' + bp + '/assets/js/lang-registry.js"></script>',
-    '  <script defer src="' + bp + '/assets/js/translations.js"></script>',
-    '  <script defer src="' + bp + '/assets/js/translations-dropdown-template.js"></script>',
     '</head>',
     '<body>',
     '  <navigator data-component="navigator" data-active="' + route.slug.split('/')[0] + '" data-search="true"></navigator>',
