@@ -1300,7 +1300,7 @@
    * Can be called multiple times safely (idempotent by nature).
    */
   function mountNavigator() {
-    // 如果 translationManager 尚未初始化（defer 顺序不确定），
+    console.log("[nav:mount] mountNavigator() — tm=" + (!!window.translationManager) + " initialized=" + (window.translationManager ? window.translationManager.isInitialized : "N/A") + " retries=" + (window._navMountRetries||0));    // 如果 translationManager 尚未初始化（defer 顺序不确定），
     // 延迟重试直到就绪，避免渲染英文 fallback 文本。
     if (!window.translationManager || !window.translationManager.isInitialized) {
       if (!window._navMountRetries) window._navMountRetries = 0;
