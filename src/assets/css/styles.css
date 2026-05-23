@@ -861,6 +861,7 @@ a.bg-primary {
   transition: background 0.2s;
   z-index: 1;
   line-height: 1;
+  flex-shrink: 0;
 }
 .hero-video-fullscreen .material-symbols-outlined {
   display: flex;
@@ -874,6 +875,19 @@ a.bg-primary {
 
 .hero-video-fullscreen:hover {
   background: rgb(0, 0, 0, 0.6);
+}
+
+/* Mobile: smaller control buttons */
+@media (width < 768px) {
+  .hero-video-mute,
+  .hero-video-fullscreen {
+    width: 30px;
+    height: 30px;
+  }
+  .hero-video-mute .material-symbols-outlined,
+  .hero-video-fullscreen .material-symbols-outlined {
+    font-size: 17px;
+  }
 }
 
 /* 底部信息卡片 — 始终在最上层 */
