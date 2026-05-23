@@ -797,26 +797,12 @@ a.bg-primary {
   inset: 0;
   z-index: var(--z-hero-overlay);
   display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
+  justify-content: flex-end;
+  align-items: flex-start;
+  gap: 8px;
   padding: 16px;
-  padding-bottom: 20px;
   pointer-events: none;
   transition: opacity 1.5s ease;
-}
-
-/* 左下控件组 */
-.hero-video-controls-left {
-  display: flex;
-  gap: 8px;
-  pointer-events: auto;
-}
-
-/* 右下控件组 */
-.hero-video-controls-right {
-  display: flex;
-  gap: 8px;
-  pointer-events: auto;
 }
 
 /* 手动模式：overlay 默认可见，播放后隐藏 */
@@ -876,8 +862,31 @@ a.bg-primary {
   z-index: var(--z-hero-info);
 }
 
-/* 播放按钮 — 左下控制组中，与静音按钮并排 */
+/* 播放按钮 — 视频正中央，大圆形 */
 .hero-video-playbtn {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: calc(var(--z-hero-overlay) + 1);
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  border: 3px solid rgb(255, 255, 255, 0.5);
+  background: rgb(0, 0, 0, 0.35);
+  backdrop-filter: blur(16px);
+  color: white;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: auto;
+  transition:
+    transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1),
+    background 0.2s,
+    opacity 0.3s ease;
+  box-shadow: 0 4px 24px rgb(0, 0, 0, 0.2);
+}
   width: 40px;
   height: 40px;
   border-radius: 50%;
@@ -896,11 +905,12 @@ a.bg-primary {
 }
 
 .hero-video-playbtn:hover {
-  background: rgb(0, 0, 0, 0.6);
+  transform: translate(-50%, -50%) scale(1.08);
+  background: rgb(0, 0, 0, 0.5);
 }
 
 .hero-video-playbtn:active {
-  transform: scale(0.92);
+  transform: translate(-50%, -50%) scale(0.92);
 }
 
 .hero-video-playbtn .material-symbols-outlined {

@@ -105,33 +105,13 @@
       return;
     }
 
-    /* ── 确保控制栏容器存在 ── */
-    var leftGroup = overlay ? overlay.querySelector(".hero-video-controls-left") : null;
-    var rightGroup = overlay ? overlay.querySelector(".hero-video-controls-right") : null;
-    if (overlay && !leftGroup) {
-      leftGroup = document.createElement("div");
-      leftGroup.className = "hero-video-controls-left";
-      overlay.appendChild(leftGroup);
-    }
-    if (overlay && !rightGroup) {
-      rightGroup = document.createElement("div");
-      rightGroup.className = "hero-video-controls-right";
-      overlay.appendChild(rightGroup);
-    }
-
-    /* ── 确保播放按钮存在（左下）── */
+    /* ── 确保播放按钮存在（居中）── */
     if (!playBtn) {
       playBtn = document.createElement("button");
       playBtn.className = "hero-video-playbtn";
       playBtn.setAttribute("aria-label", "Play video");
       playBtn.innerHTML = '<span class="material-symbols-outlined">play_arrow</span>';
-      if (leftGroup) {
-        leftGroup.appendChild(playBtn);
-      } else if (overlay) {
-        overlay.appendChild(playBtn);
-      } else {
-        container.appendChild(playBtn);
-      }
+      container.appendChild(playBtn);
     }
 
     /* ── 更新播放按钮外观 ── */
@@ -374,7 +354,7 @@
       showFallback(container, poster, video, overlay, playBtn);
     });
 
-    /* ── 静音按钮（左下组）── */
+    /* ── 静音按钮（右上角 overlay 中）── */
     if (muteBtn) {
       muteBtn.addEventListener("click", function (e) {
         e.stopPropagation();
@@ -386,12 +366,7 @@
         muteBtn.setAttribute("data-i18n", state.isMuted ? "hero_video_mute" : "hero_video_unmute");
       });
 
-      // 将 mute 按钮移到左下控制组
-      if (leftGroup && muteBtn.parentNode !== leftGroup) {
-        leftGroup.appendChild(muteBtn);
-      }
-
-      // 全屏按钮（右下组）
+      // 全屏按钮（右上角，mute 旁边）
       if (overlay && !container.querySelector(".hero-video-fullscreen")) {
         var fullscreenBtn = document.createElement("button");
         fullscreenBtn.className = "hero-video-fullscreen";
@@ -407,11 +382,7 @@
             container.webkitRequestFullscreen();
           }
         });
-        if (rightGroup) {
-          rightGroup.appendChild(fullscreenBtn);
-        } else {
-          overlay.appendChild(fullscreenBtn);
-        }
+        overlay.appendChild(fullscreenBtn);
       }
     }
 
