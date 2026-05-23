@@ -772,6 +772,10 @@ a.bg-primary {
   height: 100%;
   object-fit: cover;
   object-position: center;
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
   transition: opacity 1.5s ease;
   z-index: var(--z-hero-poster);
 }
