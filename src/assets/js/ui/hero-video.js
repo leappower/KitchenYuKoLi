@@ -438,14 +438,20 @@
 
     function autoHideControls() {
       if (!state.isPlaying) return;
+      // Don't auto-hide on touch devices — user should always see controls
+      if (isTouchDevice()) return;
       if (_hideBtnTimer) clearTimeout(_hideBtnTimer);
       _hideBtnTimer = setTimeout(function () {
-        if (!state.isPlaying) return; // Don't hide if paused in the meantime
+        if (!state.isPlaying) return;
         if (playBtn) playBtn.style.opacity = "0";
         if (overlay) overlay.style.opacity = "0";
         var fb = container.querySelector(".hero-video-fallback-btn");
         if (fb) fb.style.opacity = "0";
       }, 2000);
+    }
+
+    function isTouchDevice() {
+      return 'ontouchstart' in window || navigator.maxTouchPoints > 0;
     }
 
     container.addEventListener("mousemove", function () {
