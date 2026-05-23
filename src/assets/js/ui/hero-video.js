@@ -369,6 +369,25 @@
           : '<span class="material-symbols-outlined text-white text-xl">volume_up</span>';
         muteBtn.setAttribute("data-i18n", state.isMuted ? "hero_video_mute" : "hero_video_unmute");
       });
+
+      // 创建全屏按钮，放在 mute 按钮旁边
+      if (overlay && !container.querySelector(".hero-video-fullscreen")) {
+        var fullscreenBtn = document.createElement("button");
+        fullscreenBtn.className = "hero-video-fullscreen";
+        fullscreenBtn.setAttribute("aria-label", "Fullscreen");
+        fullscreenBtn.innerHTML = '<span class="material-symbols-outlined text-white text-xl">fullscreen</span>';
+        fullscreenBtn.addEventListener("click", function (e) {
+          e.stopPropagation();
+          if (document.fullscreenElement) {
+            document.exitFullscreen();
+          } else if (container.requestFullscreen) {
+            container.requestFullscreen();
+          } else if (container.webkitRequestFullscreen) {
+            container.webkitRequestFullscreen();
+          }
+        });
+        overlay.appendChild(fullscreenBtn);
+      }
     }
 
     /* ── 点击视频切换播放/暂停（不切换音频） ── */

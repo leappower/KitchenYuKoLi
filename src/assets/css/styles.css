@@ -797,9 +797,11 @@ a.bg-primary {
   inset: 0;
   z-index: var(--z-hero-overlay);
   display: flex;
-  justify-content: flex-end;
-  align-items: flex-start;
+  justify-content: center;
+  align-items: flex-end;
+  gap: 8px;
   padding: 12px;
+  padding-bottom: 20px;
   pointer-events: none;
   transition: opacity 1.5s ease;
 }
@@ -829,6 +831,29 @@ a.bg-primary {
 }
 
 .hero-video-mute:hover {
+  background: rgb(0, 0, 0, 0.6);
+}
+
+/* 全屏按钮 */
+.hero-video-fullscreen {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: none;
+  background: rgb(0, 0, 0, 0.4);
+  backdrop-filter: blur(8px);
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: auto;
+  transition: background 0.2s;
+  z-index: 1;
+}
+
+.hero-video-fullscreen:hover {
   background: rgb(0, 0, 0, 0.6);
 }
 
