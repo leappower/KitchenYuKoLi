@@ -19,9 +19,20 @@
  *   PC:      --container-px 40px, --nav-height CSS variable for navigator, py-10 hero
  */
 
-/* ───────── 骨架层：文档流中 header 和 footer 之间，独立于 #spa-content ───────── */
+/* ───────── 骨架层：固定覆盖在视口上，不影响文档流 ───────── */
 #skeleton-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 5;
   padding-top: var(--nav-height, 65px);
+  pointer-events: none;
+  background-color: var(--color-bg-light);
+}
+html.dark #skeleton-overlay {
+  background-color: var(--color-bg-dark);
 }
 @media (width >= 1024px) {
   #skeleton-overlay {

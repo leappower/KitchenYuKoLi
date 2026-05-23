@@ -150,7 +150,11 @@
     // then reload every non-global script the new page needs. The browser
     // execute on the next microtask to avoid blocking navigation paint.
     var _dynamicScripts = [];
-    var _globalScriptPatterns = /spa-router\.js|swup|translations\.js|lang-registry\.js|spa-events\.js|dropdown-base\.js|navigator\.js|footer\.js$/;
+    // Include ALL global/shared scripts that persist across SPA navigation.
+    // Missing entries cause redundant script injection on every page transition.
+    // This list should match all scripts loaded by src/index.html (the SPA shell).
+    var _globalScriptPatterns =
+      /(?:^|[\/])(?:spa-router|swup|translations|lang-registry|translations-dropdown-template|spa-events|dropdown-base|dropdown-styles|navigator|footer|slide-menu|products-dropdown|applications-dropdown|support-dropdown|about-dropdown|contact-dropdown|product-list|product-grid|product-detail|case-grid|utils|search-engine|device-utils|hero-video|contacts|page-interactions|common|main|init|image-assets|media-queries|floating-actions|currency|custom-select|breadcrumb|home-core-products|compare|cross-sell|profit-calculator|quote-form|quote-select-i18n|quote-budget-i18n|news-detail|support-contact-channels|support-wechat-modal|smart-popup|helpers|page-effects|form-interactions|router|roi-data|cases-page|html2canvas|jspdf|pi-maps)\.js/;
     function reloadPageScripts(newDoc) {
       if (!newDoc) return;
       // 1. Remove all previously injected script tags
@@ -195,11 +199,15 @@
           _dynamicScripts.push(newScript);
         }
         if (end < toInject.length) {
-          (window.requestIdleCallback || window.setTimeout)(function() { injectBatch(end); });
+          (window.requestIdleCallback || window.setTimeout)(function () {
+            injectBatch(end);
+          });
         }
       }
       if (toInject.length > 0) {
-        (window.requestIdleCallback || window.setTimeout)(function() { injectBatch(0); });
+        (window.requestIdleCallback || window.setTimeout)(function () {
+          injectBatch(0);
+        });
       }
     }
 
@@ -207,12 +215,15 @@
     swupHooks.on("content:replace", function (visit) {
       global.__spaNavigating = false;
       _spaState.currentRoute = global.location.pathname.replace(/\/$/, "") || "/";
+      // Hide skeleton overlay after content is replaced
+      var skel = document.getElementById("skeleton-overlay");
+      if (skel) skel.setAttribute("hidden", "");
       // Reload page-specific scripts from the NEW page (not just #spa-content)
       var newDoc = visit && visit.to && visit.to.document ? visit.to.document : null;
       reloadPageScripts(newDoc);
       // Force re-init CaseGrid if present (ensures it works even if spa:load event timing is off)
-      if (global.CaseGrid && typeof global.CaseGrid.init === 'function' && document.getElementById('case-grid')) {
-        var variant = global.innerWidth < 768 ? 'mobile' : global.innerWidth < 1280 ? 'tablet' : 'pc';
+      if (global.CaseGrid && typeof global.CaseGrid.init === "function" && document.getElementById("case-grid")) {
+        var variant = global.innerWidth < 768 ? "mobile" : global.innerWidth < 1280 ? "tablet" : "pc";
         global.CaseGrid.init(variant);
       }
       // Do NOT re-mount navigator on SPA navigation.
@@ -225,7 +236,10 @@
       // Update navigator active state
       if (global.Navigator && typeof global.Navigator.updateActive === "function") {
         // Extract the top-level section from the route (e.g. /cases/manila → "cases")
-        var sectionId = _spaState.currentRoute === "/" ? "/" : (_spaState.currentRoute.match(/^\/([^/]+)/) || [])[1] || _spaState.currentRoute;
+        var sectionId =
+          _spaState.currentRoute === "/"
+            ? "/"
+            : (_spaState.currentRoute.match(/^\/([^/]+)/) || [])[1] || _spaState.currentRoute;
         global.Navigator.updateActive(sectionId);
       }
       if (global.SlideMenu && typeof global.SlideMenu.updateActive === "function") {
@@ -238,33 +252,32 @@
       dispatchSpaLoad();
     });
 
+    // Safety net: if Swup intercepts a click but navigation hangs >3s,
+    // allow the next click to bypass Swup entirely.
+    var _lastSwupNavStart = 0;
     swupHooks.on("visit:start", function () {
       global.__spaNavigating = true;
+      _lastSwupNavStart = Date.now();
+      // Show skeleton overlay for SPA navigation transitions
+      var skel = document.getElementById("skeleton-overlay");
+      if (skel) skel.removeAttribute("hidden");
     });
 
     // ── Graceful degradation ──────────────────────────────────────
     // Do NOT do location.href jumps on abort/error — that breaks user
     // interaction (SwupPreloadPlugin also triggers these for hovered links).
     // Instead, just reset the navigating flag so the page stays usable.
-    swupHooks.on("visit:abort", function (visit) {
+    swupHooks.on("visit:abort", function () {
       global.__spaNavigating = false;
-    });
-
-    swupHooks.on("fetch:error", function (visit, args) {
-      // Silently reset — Swup will not navigate, page stays intact
-      global.__spaNavigating = false;
-    });
-
-    // Safety net: if Swup intercepts a click but navigation hangs >3s,
-    // allow the next click to bypass Swup entirely.
-    var _lastSwupNavStart = 0;
-    swupHooks.on("visit:start", function () {
-      _lastSwupNavStart = Date.now();
-    });
-    swupHooks.on("content:replace", function () {
       _lastSwupNavStart = 0;
     });
-    swupHooks.on("visit:abort", function () {
+
+    swupHooks.on("fetch:error", function () {
+      global.__spaNavigating = false;
+      _lastSwupNavStart = 0;
+    });
+
+    swupHooks.on("content:replace", function () {
       _lastSwupNavStart = 0;
     });
     document.addEventListener(
@@ -278,7 +291,7 @@
       true
     );
 
-    // Handle popstate (browser back/forward)// Handle popstate (browser back/forward) — scroll to top
+    // Handle popstate (browser back/forward) — scroll to top
     global.addEventListener("popstate", function () {
       global.scrollTo({ top: 0, left: 0, behavior: "instant" });
     });

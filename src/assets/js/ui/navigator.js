@@ -27,9 +27,10 @@
     tgt.addEventListener(evt, fn, { signal: ac.signal });
   }
 
-  /** Safe i18n helper — guards against scripts loading before translations.js
-   *  如果翻译未就绪，返回占位标记 __I18N_PENDING__，mountNavigator 检测到后延迟重试 */
-  function _t(key, fallback) {
+  /** Safe i18n helper — guards against scripts loading before translations.js.
+   *  Returns fallback text when translation system is not yet ready.
+   *  reinitTranslationManager() will apply correct translations once cache is populated. */
+  function _t(key, _fallback) {
     if (typeof window.uiText !== "function") return "__I18N_PENDING__";
     var v = window.uiText(key, "__I18N_PENDING__");
     return v && v !== "__I18N_PENDING__" ? v : "__I18N_PENDING__";
@@ -868,7 +869,7 @@
     if (typeof tm.setupEventListeners === "function") {
       tm.setupEventListeners();
     }
-    
+
     // 尝试应用翻译，如果缓存未就绪则延迟重试
     if (typeof tm.applyTranslations === "function") {
       var lang = tm.currentLanguage;
@@ -879,10 +880,9 @@
       } else {
         // Cache not ready — translation fetch still in progress
         // Retry after 500ms to let fetch complete
-        setTimeout(function() {
+        setTimeout(function () {
           if (tm.translationsCache && tm.translationsCache.has(cacheKey)) {
             tm.applyTranslations();
-          } else {
           }
         }, 500);
       }
@@ -947,7 +947,7 @@
 
       // Ensure lang-registry.js + custom-select.js are loaded, then open
       Promise.all([ensureLangRegistry(), ensureCustomSelect()])
-        .then(function (results) {
+        .then(function () {
           // Populate <select> with optgroups from LANG_REGISTRY (idempotent)
           _populateLangSelect(selectEl);
           _openLangPanel(selectEl, clone);
@@ -1311,21 +1311,6 @@
    * Can be called multiple times safely (idempotent by nature).
    */
   function mountNavigator() {
-    // [LOG] mountNavigator — check i18n state before header rebuild
-    (function() {
-      var _l = window.translationManager ? window.translationManager.currentLanguage : "[no tm]";
-      var _txt = "[N/A]";
-      var _s = document.querySelector('header nav a[href="/products/"] > span[data-i18n="nav_products"]');
-      if (_s) _txt = _s.textContent.replace(/ /g,'_');
-      var _ph = document.querySelectorAll('[data-component="navigator"]').length;
-      var _hdr = document.querySelector('header');
-      // Check dropdown module availability
-      var _pd = typeof window.ProductsDropdown !== 'undefined' && typeof window.ProductsDropdown.renderPC === 'function';
-      var _ad = typeof window.ApplicationsDropdown !== 'undefined' && typeof window.ApplicationsDropdown.renderPC === 'function';
-      var _sd = typeof window.SupportDropdown !== 'undefined' && typeof window.SupportDropdown.renderPC === 'function';
-      var _abt = typeof window.AboutDropdown !== 'undefined' && typeof window.AboutDropdown.renderPC === 'function';
-
-    })();
     /* Close all open dropdowns before remounting */
     closeOtherDropdowns(null);
     var placeholders = document.querySelectorAll('[data-component="navigator"]');
@@ -1341,6 +1326,7 @@
         placeholder.parentNode.replaceChild(existingHeader, placeholder);
         continue;
       } else if (existingHeader) {
+        // Header element exists but has no nav — skip this placeholder
       }
 
       /* 否则根据配置构建新 header */
@@ -1361,26 +1347,6 @@
       placeholder.parentNode.replaceChild(headerEl, placeholder);
     }
 
-    // [LOG] mountNavigator — after rebuild, check nav text and structure
-    (function() {
-      var _s = document.querySelector('header nav a[href="/products/"] > span[data-i18n="nav_products"]');
-      var _s2 = document.querySelector('header nav a[href="/applications/"] > span[data-i18n="nav_applications"]');
-      var _arrow = document.querySelector('.prod-dropdown-toggle');
-      var _trigger = document.querySelector('.prod-dropdown-trigger');
-      var _headerNav = document.querySelector('header nav');
-      // 检测是否有 __I18N_PENDING__ 占位文本，有则延迟 200ms 后重新挂载
-      var _hasPending = (_s && _s.textContent.indexOf('__I18N_PENDING__') !== -1) || (_s2 && _s2.textContent.indexOf('__I18N_PENDING__') !== -1);
-      if (_hasPending) {
-        var _tm = window.translationManager;
-        var _lang = _tm ? _tm.currentLanguage : '';
-        var _cacheKey = 'ui-' + _lang;
-        setTimeout(function() {
-          if (_tm && _tm.translationsCache && _tm.translationsCache.has(_cacheKey)) {
-            mountNavigator();
-          }
-        }, 200);
-      }
-    })();
     /* 3. 每次构建后需要重新执行的 DOM 相关初始化 */
     reinitTranslationManager();
     initSlideMenu();
@@ -1409,13 +1375,6 @@
    *   (e.g. "products", "applications", "support", "about")
    */
   function updateActive(activeSectionId) {
-    // [LOG] updateActive — check nav text before class toggle
-    (function() {
-      var _l = window.translationManager ? window.translationManager.currentLanguage : "[no tm]";
-      var _s = document.querySelector('header nav a[href="/products/"] > span[data-i18n="nav_products"]');
-      var _s2 = document.querySelector('header nav a[href="/applications/"] > span[data-i18n="nav_applications"]');
-      var _hdr = document.querySelector('header');
-    })();
     activeSectionId = activeSectionId || "";
     var currentPath = window.location.pathname.replace(/\/$/, "") || "/";
 
@@ -1696,17 +1655,6 @@
    * SPA 路由导航事件——重新初始化导航和底部栏
    */
   _spaOn(document, "spa:load", function () {
-    // [LOG] spa:load — check dropdown module + nav structure
-    (function() {
-      var _pd = typeof window.ProductsDropdown !== 'undefined';
-      var _ad = typeof window.ApplicationsDropdown !== 'undefined';
-      var _sd = typeof window.SupportDropdown !== 'undefined';
-      var _abt = typeof window.AboutDropdown !== 'undefined';
-      var _trigger = document.querySelector('.prod-dropdown-trigger');
-      var _arrow = document.querySelector('.prod-dropdown-toggle');
-      var _headerNav = document.querySelector('header nav');
-      var _s = document.querySelector('header nav a[href="/products/"] > span[data-i18n="nav_products"]');
-    })();
     /* 关闭所有打开的 dropdown（SPA 导航前未关闭的） */
     closeOtherDropdowns(null);
 
