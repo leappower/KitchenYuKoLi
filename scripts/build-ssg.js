@@ -356,8 +356,10 @@ function injectCoreScripts(html, routeSlug) {
   var translationsTag = '    <script defer src="' + bp + '/assets/js/translations.js"></script>';
   var navPattern = /(<script[^>]*src=["'][^"']*\/assets\/js\/ui\/navigator\.js[^>]*>[^<]*<\/script>)/i;
   if (navPattern.test(html)) {
-    // 先注入 translations.js，再 nav-config.js，确保翻译在导航之前就绪
-    html = html.replace(navPattern, translationsTag + '\n    ' + navConfigTag + '\n    $1');
+    // 先注入 translations.js（如果缺失），再 nav-config.js
+    var hasTranslations = /<script[^>]*src="[^"]*translations\.js[^"]*"/i.test(html);
+    var prefix = (hasTranslations ? '' : translationsTag + '\n    ') + navConfigTag + '\n    ';
+    html = html.replace(navPattern, prefix + '$1');
   }
 
   // 统一注入到 </body> 前
