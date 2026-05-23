@@ -153,7 +153,9 @@
             var wrap = t.closest("." + wrapClass);
             if (wrap) wrap.classList.toggle("is-open");
           }
-          /* Non-touch: do nothing — hover already opened the dropdown. */
+          /* Non-touch: also toggle panel on click (not just hover) */
+          var wrap = t.closest("." + wrapClass);
+          if (wrap) wrap.classList.toggle("is-open");
         });
       });
 
@@ -168,6 +170,8 @@
             if (isTouch()) {
               e.preventDefault();
               e.stopPropagation();
+              t.closest("." + wrapClass).classList.toggle("is-open");
+            } else {
               t.closest("." + wrapClass).classList.toggle("is-open");
             }
           });
