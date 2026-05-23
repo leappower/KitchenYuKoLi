@@ -276,20 +276,23 @@ function injectCoreScripts(html, routeSlug) {
   var tags = [];
 
   // 核心脚本
-  CORE_SCRIPTS.core.forEach(function (path) {
-    var filename = path.split('/').pop();
-    if (html.indexOf(filename) === -1) {
-      tags.push('    <script defer src="' + bp + '/' + path + '"></script>');
+  CORE_SCRIPTS.core.forEach(function (scriptPath) {
+    var filename = path.basename(scriptPath);
+    // 精确检测：只匹配 <script src="...filename"，不匹配内联脚本内容
+    var hasScript = new RegExp('<script[^>]*src="[^"]*' + filename.replace(/\./g, '\\.') + '"', 'i').test(html);
+    if (!hasScript) {
+      tags.push('    <script defer src="' + bp + '/' + scriptPath + '"></script>');
     }
   });
 
   // 页面特定脚本（根据路由匹配）
   var topSection = routeSlug ? routeSlug.split('/')[0] : '';
   var pageScripts = CORE_SCRIPTS.pageSpecific[topSection] || [];
-  pageScripts.forEach(function (path) {
-    var filename = path.split('/').pop();
-    if (html.indexOf(filename) === -1) {
-      tags.push('    <script defer src="' + bp + '/' + path + '"></script>');
+  pageScripts.forEach(function (scriptPath) {
+    var filename = path.basename(scriptPath);
+    var hasScript = new RegExp('<script[^>]*src="[^"]*' + filename.replace(/\./g, '\\.') + '"', 'i').test(html);
+    if (!hasScript) {
+      tags.push('    <script defer src="' + bp + '/' + scriptPath + '"></script>');
     }
   });
 
@@ -313,15 +316,21 @@ function injectCoreScripts(html, routeSlug) {
     }
   });
 
-  var allInject = otherTags.join('\n') + '\n    ' + injectPattern;
+  var allInject = otherTags.join('\n');
 
-  // swup 注入到 spa-router.js 之前，其余注入到 </body> 前
+  // 先注入 otherTags（包含 spa-router），这样 swup 可以正确定位
+  html = html.replace(/<\/body>/i, allInject + '\n  </body>');
+
+  // swup 注入到 spa-router.js 之前（现在 html 中已有 spa-router）
   var spaRouterPattern = /(<script[^>]*src=["'][^"']*\/assets\/js\/spa-router\.js[^>]*>[^<]*<\/script>)/i;
   if (swupTags.length > 0 && spaRouterPattern.test(html)) {
     html = html.replace(spaRouterPattern, swupTags.join('\n') + '\n    $1');
   }
 
-  return html.replace(/<\/body>/i, allInject + '\n  </body>');
+  // 注入 _SPA_GLOBAL_PATTERNS
+  html = html.replace(/<\/body>/i, '    ' + injectPattern + '\n  </body>');
+
+  return html;
 }
 
 function injectSwupScripts(html) {
