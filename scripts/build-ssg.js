@@ -245,6 +245,49 @@ function injectLangUrlSync(html) {
   return html;
 }
 
+function injectPreTranslate(html) {
+  // Already has pre-translate — skip (idempotent)
+  if (/Pre-apply cached translations/.test(html)) return html;
+
+  // Inject synchronous pre-translate script after <head>, before lang-registry.
+  // Reads cached translations from localStorage to prevent flash on non-zh-CN first load.
+  var tag = [
+    '    <script>',
+    '      /* Pre-apply cached translations to prevent flash */',
+    '      (function () {',
+    '        try {',
+    '          var lang = localStorage.getItem("userLanguage") || "zh-CN";',
+    '          if (lang === "zh-CN") return;',
+    '          var cacheKey = "yukoli-translations-ui-" + lang;',
+    '          var cached = localStorage.getItem(cacheKey);',
+    '          if (!cached) return;',
+    '          var data = JSON.parse(cached);',
+    '          if (!data.data) return;',
+    '          var translations = data.data;',
+    '          document.documentElement.lang = lang;',
+    '          var elements = document.querySelectorAll("[data-i18n]");',
+    '          for (var i = 0; i < elements.length; i++) {',
+    '            var el = elements[i];',
+    '            var key = el.getAttribute("data-i18n");',
+    '            if (translations[key] && el.children.length === 0) {',
+    '              el.textContent = translations[key];',
+    '            }',
+    '          }',
+    '        } catch (e) {',
+    '          /* ignore */',
+    '        }',
+    '      })();',
+    '    </script>'
+  ].join('\n');
+
+  if (/<head[^>]*>/i.test(html)) {
+    html = html.replace(/(<head[^>]*>)/i, '$1\n' + tag);
+  } else {
+    html = tag + '\n' + html;
+  }
+  return html;
+}
+
 function injectNavConfig(html) {
   // nav-config.js is now handled by injectCoreScripts() via core-scripts.json
   return html;
@@ -377,6 +420,7 @@ function generateResponsiveEntry(route) {
       '<meta property="og:url" content="' + canonicalUrl + '">'
     );
     html = injectLangUrlSync(html);
+    html = injectPreTranslate(html);
     html = injectLangRegistry(html);
     html = injectNavConfig(html);
     html = injectCoreScripts(html, route.slug);
@@ -469,6 +513,7 @@ function generateRouteIndex(route) {
 
   // Inject URL ?lang= parameter sync script (must be before lang-registry)
   html = injectLangUrlSync(html);
+  html = injectPreTranslate(html);
   // Inject lang-registry.js before translations.js (if not already present)
   html = injectLangRegistry(html);
   html = injectNavConfig(html);
@@ -526,6 +571,7 @@ function copyDeviceFiles(route) {
     let content = fs.readFileSync(srcFile, 'utf-8');
     // Inject URL ?lang= parameter sync script (must be before lang-registry)
     content = injectLangUrlSync(content);
+    content = injectPreTranslate(content);
     // Inject lang-registry.js before translations.js (if not already present)
     content = injectLangRegistry(content);
     content = injectNavConfig(content);
