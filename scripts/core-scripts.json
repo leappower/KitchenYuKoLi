@@ -2,6 +2,8 @@
   "_comment": "核心共享脚本清单 — 所有 SSG/SPA 页面都从此单一来源注入脚本。新增共享脚本时只需在这里加一行。",
   "core": [
     "assets/js/utils/device-utils.js",
+    "assets/js/lang-registry.js",
+    "assets/js/translations.js",
     "assets/js/translations-dropdown-template.js",
     "assets/js/ui/dropdown-styles.js",
     "assets/js/ui/dropdown-base.js",
@@ -9,6 +11,7 @@
     "assets/js/ui/applications-dropdown.js",
     "assets/js/ui/support-dropdown.js",
     "assets/js/ui/about-dropdown.js",
+    "assets/js/nav-config.js",
     "assets/js/ui/navigator.js",
     "assets/js/ui/slide-menu.js",
     "assets/js/ui/footer.js",
