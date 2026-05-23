@@ -19,25 +19,12 @@
 
   /* ───────────────────────── DATA ───────────────────────── */
 
-  var SUBSERIES = [
-    {
-      key: "nav_applications_small_restaurant",
-      icon: "storefront",
-      href: "/applications/small-restaurant/",
-      emoji: "",
-    },
-    { key: "nav_applications_central_kitchen", icon: "apartment", href: "/applications/central-kitchen/", emoji: "" },
-    {
-      key: "nav_applications_chain_restaurant",
-      icon: "ramen_dining",
-      href: "/applications/chain-restaurant/",
-      emoji: "",
-    },
-    { key: "nav_applications_canteen", icon: "restaurant", href: "/applications/canteen/", emoji: "" },
-    { key: "nav_applications_cloud_kitchen", icon: "delivery_dining", href: "/applications/cloud-kitchen/", emoji: "" },
-    { key: "nav_applications_food_factory", icon: "factory", href: "/applications/food-factory/", emoji: "" },
-    { key: "nav_applications_menu_lab", icon: "science", href: "/applications/menu-lab/", emoji: "" },
-  ];
+  /**
+   * 从共享 NAV_CONFIG 读取 applications 子分类（剔除 separator, overview 等辅助项）
+   */
+  function getSubseries() {
+    return (window.NAV_CONFIG && window.NAV_CONFIG.applications || []).filter(function(s) { return !s._separator; });
+  }
 
   var EXTRAS = [];
 
@@ -46,9 +33,10 @@
   function renderDropdown(cfg) {
     var parentHref = "/applications/";
 
-    var items = SUBSERIES.map(function (s, idx) {
+    var _subs = getSubseries();
+    var items = _subs.map(function (s, idx) {
       var html = _buildItem(s, parentHref);
-      if (idx < SUBSERIES.length - 1) html += '<div class="app-dropdown-separator"></div>';
+      if (idx < _subs.length - 1) html += '<div class="app-dropdown-separator"></div>';
       return html;
     }).join("\n");
 
@@ -148,6 +136,7 @@
   /* ───────────────────────── POPUP CONTENT ───────────────────────── */
 
   function buildPopupContent(items, parentHref) {
+    if (!items) items = getSubseries();
     var overviewHtml =
       '<a href="' +
       esc(parentHref || "/applications/") +
@@ -213,7 +202,7 @@
   global.ApplicationsDropdown = global.DropdownBase.create({
     prefix: "app",
     getItems: function () {
-      return SUBSERIES;
+      return getSubseries();
     },
     renderDropdown: renderDropdown,
     buildPopupContent: buildPopupContent,

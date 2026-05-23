@@ -55,142 +55,43 @@
   /** @type {Array|null} 缓存的菜单项，避免重复构建 */
   var cachedMenuItems = null;
 
-  var L1_ICON_MAP = {
-    products: "kitchen",
-    applications: "apps",
-    cases: "cases",
-    "profit-calculator": "calculate",
-    support: "support_agent",
-    about: "info",
-    contact: "mail",
-  };
-
   function getL1Icon(navId) {
-    return L1_ICON_MAP[navId] || "menu";
+    var map = window.NAV_CONFIG && window.NAV_CONFIG.l1IconMap || {};
+    return map[navId] || "menu";
   }
 
   /**
-   * 构建导航菜单项数组（使用内置默认菜单）
+   * 构建导航菜单项数组（从共享 NAV_CONFIG 读取）
    * @returns {Array<{key, href, id, icon, children}>} 菜单项列表
    */
   function getMenuItems() {
     if (cachedMenuItems) return cachedMenuItems;
 
-    var items = [
-      {
-        key: "nav_products",
-        label: window.uiText("nav_products", "Products"),
-        href: "/products/",
-        id: "products",
-        icon: "kitchen",
-        children: [
-          { key: "nav_products_overview", icon: "apps", emoji: "", href: "/products/" },
-          { key: "_sep", _separator: true },
-          { key: "nav_products_cutting", icon: "content_cut", emoji: "", href: "/products/cutting/" },
-          { key: "nav_products_stirfry", icon: "local_fire_department", emoji: "🔥", href: "/products/stirfry/" },
-          { key: "nav_products_frying", icon: "outdoor_grill", emoji: "", href: "/products/frying/" },
-          { key: "nav_products_stewing", icon: "soup_kitchen", emoji: "", href: "/products/stewing/" },
-          { key: "nav_products_steaming", icon: "cloud", emoji: "", href: "/products/steaming/" },
-          { key: "nav_products_other", icon: "more_horiz", emoji: "", href: "/products/other/" },
-        ],
-      },
-      {
-        key: "nav_applications",
-        label: window.uiText("nav_applications", "Application Scenarios"),
-        href: "/applications/",
-        id: "applications",
-        icon: "apps",
-        children: [
-          {
-            key: "nav_applications_overview",
-            icon: "apps",
-            emoji: "",
-            href: "/applications/",
-          },
-          { key: "_sep_app", _separator: true },
-          {
-            key: "nav_applications_small_restaurant",
-            icon: "storefront",
-            emoji: "",
-            href: "/applications/small-restaurant/",
-          },
-          {
-            key: "nav_applications_central_kitchen",
-            icon: "apartment",
-            emoji: "",
-            href: "/applications/central-kitchen/",
-          },
-          {
-            key: "nav_applications_chain_restaurant",
-            icon: "ramen_dining",
-            emoji: "",
-            href: "/applications/chain-restaurant/",
-          },
-          { key: "nav_applications_canteen", icon: "restaurant", emoji: "", href: "/applications/canteen/" },
-          {
-            key: "nav_applications_cloud_kitchen",
-            icon: "delivery_dining",
-            emoji: "",
-            href: "/applications/cloud-kitchen/",
-          },
-          { key: "nav_applications_food_factory", icon: "factory", emoji: "", href: "/applications/food-factory/" },
-          { key: "nav_applications_menu_lab", icon: "science", emoji: "", href: "/applications/menu-lab/" },
-        ],
-      },
-      {
-        key: "nav_cases",
-        label: window.uiText("nav_cases", "Case Studies"),
-        href: "/cases/",
-        id: "cases",
-        icon: "cases",
-        children: [],
-      },
-      {
-        key: "nav_roi",
-        label: window.uiText("nav_roi", "ROI"),
-        href: "/profit-calculator/",
-        id: "profit-calculator",
-        icon: "calculate",
-        children: [],
-      },
-      {
-        key: "nav_support",
-        label: window.uiText("nav_support", "Service & Support"),
-        href: "/support/",
-        id: "support",
-        icon: "support_agent",
-        children: [
-          { key: "nav_support_overview", icon: "apps", emoji: "", href: "/support/" },
-          { key: "_sep_sup", _separator: true },
-          { key: "nav_support_services", icon: "grid_view", emoji: "", href: "/support/services/" },
-          { key: "nav_support_installation", icon: "construction", emoji: "", href: "/support/installation/" },
-          { key: "nav_support_warranty", icon: "verified", emoji: "", href: "/support/warranty/" },
-          { key: "nav_support_spare_parts", icon: "build_circle", emoji: "", href: "/support/spare-parts/" },
-          { key: "nav_support_training", icon: "school", emoji: "", href: "/support/training/" },
-          { key: "nav_support_faq", icon: "contact_support", emoji: "", href: "/support/faq/" },
-        ],
-      },
-      {
-        key: "nav_about",
-        label: window.uiText("nav_about", "About Us"),
-        href: "/about/",
-        id: "about",
-        icon: "info",
-        children: [
-          { key: "nav_about_profile", icon: "apartment", emoji: "", href: "/about/#profile" },
-          { key: "nav_about_factory", icon: "factory", emoji: "", href: "/about/#factory" },
-          { key: "nav_about_cert", icon: "verified", emoji: "", href: "/about/#cert" },
-        ],
-      },
-      {
-        key: "nav_contact",
-        label: window.uiText("nav_contact", "Contact Us"),
-        href: "/contact/",
-        id: "contact",
-        icon: "mail",
-        children: [],
-      },
-    ];
+    var cfg = window.NAV_CONFIG;
+    if (!cfg) {
+      // Fallback: produce empty items if nav-config hasn't loaded yet
+      cachedMenuItems = [];
+      return [];
+    }
+
+    function childEntries(sectionKey) {
+      return (cfg[sectionKey] || []).slice(); // shallow copy to preserve original
+    }
+
+    var items = cfg.items.map(function (navItem) {
+      var children = [];
+      if (navItem.hasDropdown && cfg[navItem.id] && cfg[navItem.id].length > 0) {
+        children = childEntries(navItem.id);
+      }
+      return {
+        key: navItem.key,
+        label: window.uiText(navItem.key, navItem.key),
+        href: navItem.path,
+        id: navItem.id,
+        icon: getL1Icon(navItem.id),
+        children: children,
+      };
+    });
 
     cachedMenuItems = items;
     return items;

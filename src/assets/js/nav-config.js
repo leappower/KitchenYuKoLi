@@ -1,0 +1,91 @@
+/**
+ * nav-config.js — 单一菜单数据源
+ *
+ * 所有导航组件（navigator, slide-menu, products-dropdown,
+ * applications-dropdown, support-dropdown, about-dropdown, breadcrumb）
+ * 共享此数据。
+ */
+(function (global) {
+  "use strict";
+
+  var NAV_CONFIG = {
+    /** 一级导航项 */
+    items: [
+      { key: "nav_products",     id: "products",          path: "/products/",      hasDropdown: true },
+      { key: "nav_applications", id: "applications",      path: "/applications/",  hasDropdown: true },
+      { key: "nav_cases",        id: "cases",             path: "/cases/",         hasDropdown: false },
+      { key: "nav_roi",          id: "profit-calculator", path: "/profit-calculator/", hasDropdown: false },
+      { key: "nav_support",      id: "support",           path: "/support/",       hasDropdown: true },
+      { key: "nav_about",        id: "about",             path: "/about/",         hasDropdown: true },
+      { key: "nav_contact",      id: "contact",           path: "/contact/",       hasDropdown: false }
+    ],
+
+    /** Products 子分类 */
+    products: [
+      { key: "nav_products_overview", icon: "apps",           emoji: "", href: "/products/" },
+      { _separator: true },
+      { key: "nav_products_cutting",  icon: "content_cut",           emoji: "",  href: "/products/cutting/" },
+      { key: "nav_products_stirfry",  icon: "local_fire_department", emoji: "🔥", href: "/products/stirfry/" },
+      { key: "nav_products_frying",   icon: "outdoor_grill",         emoji: "",  href: "/products/frying/" },
+      { key: "nav_products_stewing",  icon: "soup_kitchen",          emoji: "",  href: "/products/stewing/" },
+      { key: "nav_products_steaming", icon: "cloud",                 emoji: "",  href: "/products/steaming/" },
+      { key: "nav_products_other",    icon: "more_horiz",            emoji: "",  href: "/products/other/" }
+    ],
+
+    /** Applications 子分类 */
+    applications: [
+      { key: "nav_applications_overview",        icon: "apps",             emoji: "", href: "/applications/" },
+      { _separator: true },
+      { key: "nav_applications_small_restaurant", icon: "storefront",       emoji: "", href: "/applications/small-restaurant/" },
+      { key: "nav_applications_central_kitchen",  icon: "apartment",        emoji: "", href: "/applications/central-kitchen/" },
+      { key: "nav_applications_chain_restaurant", icon: "ramen_dining",     emoji: "", href: "/applications/chain-restaurant/" },
+      { key: "nav_applications_canteen",          icon: "restaurant",       emoji: "", href: "/applications/canteen/" },
+      { key: "nav_applications_cloud_kitchen",    icon: "delivery_dining",  emoji: "", href: "/applications/cloud-kitchen/" },
+      { key: "nav_applications_food_factory",     icon: "factory",          emoji: "", href: "/applications/food-factory/" },
+      { key: "nav_applications_menu_lab",         icon: "science",          emoji: "", href: "/applications/menu-lab/" }
+    ],
+
+    /** Support 子分类 */
+    support: [
+      { key: "nav_support_overview",    icon: "apps",          emoji: "", href: "/support/" },
+      { _separator: true },
+      { key: "nav_support_services",    icon: "grid_view",     emoji: "", href: "/support/services/" },
+      { key: "nav_support_installation",icon: "construction",  emoji: "", href: "/support/installation/" },
+      { key: "nav_support_warranty",    icon: "verified",      emoji: "", href: "/support/warranty/" },
+      { key: "nav_support_spare_parts", icon: "build_circle",  emoji: "", href: "/support/spare-parts/" },
+      { key: "nav_support_training",    icon: "school",        emoji: "", href: "/support/training/" },
+      { key: "nav_support_faq",         icon: "contact_support",emoji: "", href: "/support/faq/" }
+    ],
+
+    /** About 子分类 */
+    about: [
+      { key: "nav_about_profile", icon: "apartment", emoji: "", href: "/about/#profile" },
+      { key: "nav_about_factory",  icon: "factory",   emoji: "", href: "/about/#factory" },
+      { key: "nav_about_cert",     icon: "verified",  emoji: "", href: "/about/#cert" }
+    ],
+
+    /** Contact 子分类 */
+    contact: [],
+
+    /** 导航名 → 图标映射 */
+    l1IconMap: {
+      products: "kitchen", applications: "apps", cases: "cases",
+      "profit-calculator": "calculate", support: "support_agent",
+      about: "info", contact: "mail"
+    },
+
+    /** path → active id 映射 */
+    pathToActiveMap: {
+      "case-studies": "applications", roi: "profit-calculator",
+      news: "contact", quote: "contact", "thank-you": "contact"
+    },
+
+    /** id 别名 */
+    idAliases: {
+      "profit-calculator": ["profit", "profit-calculator"],
+      profit: ["profit", "profit-calculator"]
+    }
+  };
+
+  global.NAV_CONFIG = NAV_CONFIG;
+})(window);

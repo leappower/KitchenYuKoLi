@@ -41,56 +41,30 @@
    * ================================================================ */
 
   /**
-   * 主导航项
+   * 主导航项 — 从 NAV_CONFIG 读取
    * @type {Array<{key:string, label:string, path:string, id:string, hasDropdown:boolean}>}
    */
-  var DEFAULT_NAV_ITEMS = [
-    {
-      key: "nav_products",
-      label: _t("nav_products", "Products"),
-      path: "/products/",
-      id: "products",
-      hasDropdown: true,
-    },
-    {
-      key: "nav_applications",
-      label: _t("nav_applications", "Application Scenarios"),
-      path: "/applications/",
-      id: "applications",
-      hasDropdown: true,
-    },
-    {
-      key: "nav_cases",
-      label: _t("nav_cases", "Case Studies"),
-      path: "/cases/",
-      id: "cases",
-      hasDropdown: false,
-    },
-    {
-      key: "nav_roi",
-      label: _t("nav_roi", "ROI"),
-      path: "/profit-calculator/",
-      id: "profit-calculator",
-      hasDropdown: false,
-    },
-    {
-      key: "nav_support",
-      label: _t("nav_support", "Service & Support"),
-      path: "/support/",
-      id: "support",
-      hasDropdown: true,
-    },
-    { key: "nav_about", label: _t("nav_about", "About Us"), path: "/about/", id: "about", hasDropdown: true },
-    {
-      key: "nav_contact",
-      label: _t("nav_contact", "Contact Us"),
-      path: "/contact/",
-      id: "contact",
-      hasDropdown: false,
-    },
-  ];
+  var DEFAULT_NAV_ITEMS;
 
-  /** @type {Array} 当前生效的导航项 (recomputed per-call to avoid stale closure) */
+  function _getNavItems() {
+    if (DEFAULT_NAV_ITEMS) return DEFAULT_NAV_ITEMS;
+    var cfg = window.NAV_CONFIG;
+    if (cfg && cfg.items) {
+      DEFAULT_NAV_ITEMS = cfg.items.map(function (navItem) {
+        return {
+          key: navItem.key,
+          label: _t(navItem.key, navItem.key),
+          path: navItem.path,
+          id: navItem.id,
+          hasDropdown: navItem.hasDropdown,
+        };
+      });
+    } else {
+      // Fallback — should not happen as nav-config.js loads first
+      DEFAULT_NAV_ITEMS = [];
+    }
+    return DEFAULT_NAV_ITEMS;
+  }
 
   /**
    * 所有 dropdown 容器的 CSS 类名（用于互斥开关）
@@ -105,23 +79,19 @@
   ];
 
   /**
-   * 特殊路径 → 导航 active id 的映射
-   * 用于将非标准路径（如 case-studies）映射到对应主导航项
+   * 特殊路径 → 导航 active id 的映射（从 NAV_CONFIG 读取）
    * @type {Object<string, string>}
    */
-  var PATH_TO_ACTIVE_MAP = {
-    "case-studies": "applications",
-    roi: "profit-calculator",
-    news: "contact",
-    quote: "contact",
-    "thank-you": "contact",
-  };
+  var PATH_TO_ACTIVE_MAP;
+  var ID_ALIASES;
 
-  /* Sections whose nav item id differs from the activeSectionId (version drift) */
-  var ID_ALIASES = {
-    "profit-calculator": ["profit", "profit-calculator"],
-    profit: ["profit", "profit-calculator"],
-  };
+  function _getActiveMap() {
+    if (PATH_TO_ACTIVE_MAP) return PATH_TO_ACTIVE_MAP;
+    var cfg = window.NAV_CONFIG;
+    PATH_TO_ACTIVE_MAP = (cfg && cfg.pathToActiveMap) ? cfg.pathToActiveMap : {};
+    ID_ALIASES = (cfg && cfg.idAliases) ? cfg.idAliases : {};
+    return PATH_TO_ACTIVE_MAP;
+  }
 
   /**
    * 导航 id → dropdown item 前缀的映射
@@ -299,6 +269,7 @@
    * @returns {string} HTML 字符串
    */
   function buildNavItemHtml(navItem, activeId, variant) {
+    _getActiveMap();
     var activeIds = ID_ALIASES[activeId] || [activeId];
     var isActive = activeIds.indexOf(navItem.id) !== -1;
     var activeClass = isActive
@@ -355,7 +326,7 @@
    * @returns {string} HTML 字符串
    */
   function buildNavItemsHtml(activeId, variant) {
-    var items = DEFAULT_NAV_ITEMS;
+    var items = _getNavItems();
     return items
       .map(function (item) {
         return buildNavItemHtml(item, activeId, variant);
@@ -1379,7 +1350,8 @@
     activeSectionId = activeSectionId || "";
     var currentPath = window.location.pathname.replace(/\/$/, "") || "/";
 
-    var navItems = DEFAULT_NAV_ITEMS;
+    _getActiveMap();
+    var navItems = _getNavItems();
 
     /* 确保 dropdown 样式已注入（SPA 动态加载场景） */
 

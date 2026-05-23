@@ -20,14 +20,12 @@
 
   /* ───────────────────────── DATA ───────────────────────── */
 
-  var SUBSERIES = [
-    { key: "nav_products_cutting", icon: "content_cut", emoji: "", href: "/products/cutting/" },
-    { key: "nav_products_stirfry", icon: "local_fire_department", emoji: "🔥", href: "/products/stirfry/" },
-    { key: "nav_products_frying", icon: "outdoor_grill", emoji: "", href: "/products/frying/" },
-    { key: "nav_products_stewing", icon: "soup_kitchen", emoji: "", href: "/products/stewing/" },
-    { key: "nav_products_steaming", icon: "cloud", emoji: "", href: "/products/steaming/" },
-    { key: "nav_products_other", icon: "more_horiz", emoji: "", href: "/products/other/" },
-  ];
+  /**
+   * 从共享 NAV_CONFIG 读取 products 子分类（剔除 separator, overview 等辅助项）
+   */
+  function getSubseries() {
+    return (window.NAV_CONFIG && window.NAV_CONFIG.products || []).filter(function(s) { return !s._separator; });
+  }
 
   /* ───────────────────────── CSS ───────────────────────── */
 
@@ -57,9 +55,10 @@
       '<span class="material-symbols-outlined prod-dropdown-chevron">chevron_right</span>' +
       "</a>";
 
-    var items = SUBSERIES.map(function (s, idx) {
+    var _subs = getSubseries();
+    var items = _subs.map(function (s, idx) {
       var html = _buildItem(s, parentHref);
-      if (idx < SUBSERIES.length - 1) html += '<div class="prod-dropdown-separator"></div>';
+      if (idx < _subs.length - 1) html += '<div class="prod-dropdown-separator"></div>';
       return html;
     }).join("\n");
 
@@ -123,6 +122,7 @@
   /* ───────────────────────── POPUP CONTENT ───────────────────────── */
 
   function buildPopupContent(items, parentHref) {
+    if (!items) items = getSubseries();
     var overviewHtml =
       '<a href="' +
       esc(parentHref || "/products/") +
@@ -183,7 +183,7 @@
   global.ProductsDropdown = global.DropdownBase.create({
     prefix: "prod",
     getItems: function () {
-      return SUBSERIES;
+      return getSubseries();
     },
     renderDropdown: renderDropdown,
     buildPopupContent: buildPopupContent,
