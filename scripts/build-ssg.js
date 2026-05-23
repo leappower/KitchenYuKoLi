@@ -897,20 +897,41 @@ function main() {
    */
   function _injectDropdownScripts(html, filePath) {
     if (html.indexOf('products-dropdown.js') !== -1) return html;
-    if (html.indexOf('</body>') === -1) {
-      log('  ⚠ Skipping (no </body>): ' + (filePath || 'unknown'));
-      return html;
-    }
     var versionTag = '';
-    var scripts = [
-      '<script src="/assets/js/ui/dropdown-base.js"></script>',
+    var scriptsArr = [
+      '<script defer src="/assets/js/ui/dropdown-base.js"></script>',
       '<script defer src="/assets/js/ui/products-dropdown.js' + versionTag + '"></script>',
       '<script defer src="/assets/js/ui/applications-dropdown.js' + versionTag + '"></script>',
       '<script defer src="/assets/js/ui/support-dropdown.js' + versionTag + '"></script>',
       '<script defer src="/assets/js/ui/about-dropdown.js' + versionTag + '"></script>',
-      '<script src="/assets/js/ui/dropdown-styles.js"></script>',
+      '<script defer src="/assets/js/ui/dropdown-styles.js"></script>',
     ];
-    var result = html.replace('</body>', scripts.join('\n    ') + '\n  </body>');
+    var scriptsTag = scriptsArr.join('\n    ');
+
+    var result = null;
+
+    // Strategy A: inject BEFORE navigator.js so dropdown modules are
+    // registered before navigator.js calls mountNavigator().
+    // This is critical because all scripts are now defer;
+    // defer scripts execute in HTML appearance order.
+    if (html.indexOf('navigator.js') !== -1) {
+      var navPattern = /([ \t]*<script[^>]*navigator\.js[^>]*>[ \t]*\n?)/;
+      var navMatch = html.match(navPattern);
+      if (navMatch) {
+        result = html.replace(navMatch[0], scriptsTag + '\n' + navMatch[0]);
+        if (result !== html) {
+          log('  ✓ Injected dropdown scripts before navigator.js in ' + (filePath || 'unknown'));
+          return result;
+        }
+      }
+    }
+
+    // Strategy B: fallback for pages without navigator.js
+    if (html.indexOf('</body>') === -1) {
+      log('  ⚠ Skipping (no </body>): ' + (filePath || 'unknown'));
+      return html;
+    }
+    result = html.replace('</body>', scriptsTag + '\n  </body>');
     if (result !== html) {
       log('  ✓ Injected dropdown scripts into ' + (filePath || 'unknown'));
     } else {
