@@ -289,6 +289,33 @@ function injectTranslationsDropdown(html) {
   return html;
 }
 
+function injectCoreScripts(html) {
+  // Inject spa-router.js + slide-menu.js + device-utils.js if missing.
+  // These are essential for SPA routing and mobile menu.
+  // Skipped if already present (idempotent).
+  var bp = BASE_PATH ? BASE_PATH.replace(/\/$/, '') : '';
+  var tags = [];
+
+  if (!/spa-router\.js/.test(html)) {
+    tags.push('    <script defer src="' + bp + '/assets/js/spa-router.js"></script>');
+  }
+  if (!/slide-menu\.js/.test(html)) {
+    tags.push('    <script defer src="' + bp + '/assets/js/ui/slide-menu.js"></script>');
+  }
+  if (!/device-utils\.js/.test(html)) {
+    tags.push('    <script defer src="' + bp + '/assets/js/utils/device-utils.js"></script>');
+  }
+
+  if (tags.length === 0) return html;
+
+  // Insert before existing navigator.js, or before </body>
+  var navPattern = /(<script[^>]*src=["'][^"']*\/assets\/js\/ui\/navigator\.js[^>]*>[^<]*<\/script>)/i;
+  if (navPattern.test(html)) {
+    return html.replace(navPattern, tags.join('\n') + '\n    $1');
+  }
+  return html.replace(/<\/body>/i, tags.join('\n') + '\n  </body>');
+}
+
 function injectSwupScripts(html) {
   // Already has swup.min.js — skip (idempotent)
   if (/swup\.min\.js/.test(html)) return html;
@@ -372,6 +399,7 @@ function generateResponsiveEntry(route) {
     html = injectLangUrlSync(html);
     html = injectLangRegistry(html);
     html = injectNavConfig(html);
+    html = injectCoreScripts(html);
     html = injectTranslationsDropdown(html);
     if (BASE_PATH) {
       html = patchHtmlPaths(html);
@@ -464,6 +492,7 @@ function generateRouteIndex(route) {
   // Inject lang-registry.js before translations.js (if not already present)
   html = injectLangRegistry(html);
   html = injectNavConfig(html);
+  html = injectCoreScripts(html);
   html = injectTranslationsDropdown(html);
   html = injectSwupScripts(html);
   html = normalizeSpaContent(html);
@@ -520,6 +549,7 @@ function copyDeviceFiles(route) {
     // Inject lang-registry.js before translations.js (if not already present)
     content = injectLangRegistry(content);
     content = injectNavConfig(content);
+    content = injectCoreScripts(content);
     content = injectTranslationsDropdown(content);
     content = injectSwupScripts(content);
     content = normalizeSpaContent(content);
