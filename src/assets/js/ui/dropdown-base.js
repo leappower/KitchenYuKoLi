@@ -110,9 +110,7 @@
         " " +
         triggerClass +
         '"' +
-        ' href="' +
-        esc(cfg.href || "#") +
-        '"' +
+        ' href="javascript:void(0)"' +
         " data-" +
         prefix +
         '-trigger-label="' +
