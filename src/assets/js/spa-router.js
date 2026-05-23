@@ -82,7 +82,7 @@
     if (global.Swup === undefined) {
       // Swup not loaded yet — retry after a short delay.
       // defer scripts may execute in any order; we can't assume Swup is ready.
-      setTimeout(initSwup, 50);
+      setTimeout(initSwup, 10);
       return;
     }
 

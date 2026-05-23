@@ -350,7 +350,15 @@ function injectCoreScripts(html, routeSlug) {
   var patternStr = '(?:^|[\\/])(?:' + scriptNames.join('|') + ')\\.js';
   var injectPattern = '<script>window._SPA_GLOBAL_PATTERNS=/' + patternStr + '/</script>';
 
-  // 统一注入到 </body> 前。spa-router.js 内部有自重试机制，不依赖脚本顺序。
+  // nav-config.js 必须强制注入到 navigator.js 之前
+  // 因为源模板中 navigator.js 可能排在 nav-config 之前（defer 顺序问题）
+  var navConfigTag = '    <script defer src="' + bp + '/assets/js/nav-config.js"></script>';
+  var navPattern = /(<script[^>]*src=["'][^"']*\/assets\/js\/ui\/navigator\.js[^>]*>[^<]*<\/script>)/i;
+  if (navPattern.test(html)) {
+    html = html.replace(navPattern, navConfigTag + '\n    $1');
+  }
+
+  // 统一注入到 </body> 前
   return html.replace(/<\/body>/i, tags.join('\n') + '\n    ' + injectPattern + '\n  </body>');
 }
 
