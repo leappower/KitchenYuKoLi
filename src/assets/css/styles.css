@@ -879,7 +879,27 @@ a.bg-primary {
 /* 底部信息卡片 — 始终在最上层 */
 .hero-video-info {
   position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
   z-index: var(--z-hero-info);
+  background: rgba(0, 0, 0, 0.35);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 12px 16px;
+  color: white;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+@media (width >= 768px) {
+  .hero-video-info {
+    padding: 16px 24px;
+  }
+}
+@media (width >= 1280px) {
+  .hero-video-info {
+    padding: 20px 32px;
+  }
 }
 
 /* 播放按钮 — 视频正中央，大圆形 */
@@ -889,8 +909,8 @@ a.bg-primary {
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: calc(var(--z-hero-overlay) + 1);
-  width: 72px;
-  height: 72px;
+  width: 56px;
+  height: 56px;
   border-radius: 50%;
   border: 3px solid rgb(255, 255, 255, 0.5);
   background: rgb(0, 0, 0, 0.35);
@@ -907,46 +927,47 @@ a.bg-primary {
     opacity 0.3s ease;
   box-shadow: 0 4px 24px rgb(0, 0, 0, 0.2);
 }
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  border: none;
-  background: rgb(0, 0, 0, 0.4);
-  backdrop-filter: blur(8px);
-  color: white;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  pointer-events: auto;
-  transition: background 0.2s, transform 0.15s;
-  z-index: 1;
-  flex-shrink: 0;
-}
-
 .hero-video-playbtn:hover {
   transform: translate(-50%, -50%) scale(1.08);
   background: rgb(0, 0, 0, 0.5);
 }
-
 .hero-video-playbtn:active {
   transform: translate(-50%, -50%) scale(0.92);
 }
-
 .hero-video-playbtn .material-symbols-outlined {
-  font-size: 36px;
+  font-size: 28px;
 }
 
-/* 视频播放中 → 播放按钮隐藏 */
+@media (width >= 768px) {
+  .hero-video-playbtn {
+    width: 64px;
+    height: 64px;
+  }
+  .hero-video-playbtn .material-symbols-outlined {
+    font-size: 32px;
+  }
+}
+@media (width >= 1280px) {
+  .hero-video-playbtn {
+    width: 72px;
+    height: 72px;
+  }
+  .hero-video-playbtn .material-symbols-outlined {
+    font-size: 36px;
+  }
+}
 [data-hero-video-playing="true"] .hero-video-playbtn {
   opacity: 0;
   pointer-events: none;
 }
 
-/* 视频播放中 → overlay 隐藏（静音/降级按钮） */
-[data-hero-video-playing="true"] .hero-video-overlay,
+/* 视频播放中 → info 卡片隐藏 */
 [data-hero-video-playing="true"] [data-hide-on-play] {
+
+[data-hero-video-playing="true"] .hero-video-overlay {
   opacity: 0;
+  pointer-events: none;
+}  opacity: 0;
   pointer-events: none;
 }
 
