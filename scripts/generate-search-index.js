@@ -12,6 +12,7 @@ const path = require('path');
 
 const DIST_DIR = path.resolve(__dirname, '..', 'dist');
 const htmlFiles = [];
+const EXCLUDE_DIRS = ['assets', 'pages', 'node_modules'];
 
 function collect(dir) {
   if (!fs.existsSync(dir)) return;
@@ -19,23 +20,26 @@ function collect(dir) {
     const fp = path.join(dir, f);
     const stat = fs.statSync(fp);
     if (stat.isDirectory()) {
+      if (EXCLUDE_DIRS.includes(f)) return;
+      // Check for index-pc.html in this directory
+      const pcFile = path.join(fp, 'index-pc.html');
+      if (fs.existsSync(pcFile)) htmlFiles.push(pcFile);
+      // Recurse
       collect(fp);
-    } else if (f === 'index-pc.html') {
-      htmlFiles.push(fp);
     }
   });
 }
 
-collect(path.join(DIST_DIR, 'pages'));
+collect(DIST_DIR);
 
 const index = [];
 
 htmlFiles.forEach(function (fp) {
   const c = fs.readFileSync(fp, 'utf-8');
 
-  const rel = path.relative(DIST_DIR, fp).replace(/\\/g, '/');
-  let urlPath = '/' + path.dirname(rel).replace(/^pages\//, '') + '/';
-  if (urlPath === '//') urlPath = '/';
+  let urlPath = '/' + path.relative(DIST_DIR, path.dirname(fp)) + '/';
+  // 规范化
+  urlPath = urlPath.replace(/\/+/g, '/');
 
   const tMatch = c.match(/<title>([^<]*)<\/title>/i);
   const title = tMatch ? tMatch[1].trim() : '';

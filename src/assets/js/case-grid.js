@@ -6,6 +6,15 @@
 (function () {
   "use strict";
 
+  var _spaRegs = {};
+  function _spaOn(tgt, evt, fn, key) {
+    if (key == null) key = evt + ":" + (++_spaRegs.__k || (_spaRegs.__k = 1));
+    if (_spaRegs[key]) _spaRegs[key].abort();
+    var ac = new AbortController();
+    _spaRegs[key] = ac;
+    tgt.addEventListener(evt, fn, { signal: ac.signal });
+  }
+
   /* ── Mock Data ──────────────────────────────────── */
   var ROI_CASES = [
     {
@@ -151,7 +160,7 @@
 
   /* ── i18n helper ────────────────────────────────── */
   function __(key, fallback) {
-    if (typeof window.t === 'function') {
+    if (typeof window.t === "function") {
       var result = window.t(key);
       if (result && result !== key) return result;
     }
@@ -223,7 +232,7 @@
       '<span class="px-3 py-1 rounded-full bg-' +
       bc +
       '-500 text-white text-sm font-bold" data-i18n="cases_benefit_' +
-      c.benefit.replace(/ /g, '_').toLowerCase() +
+      c.benefit.replace(/ /g, "_").toLowerCase() +
       '">' +
       benefitLabel(c.benefit) +
       "</span>" +
@@ -323,7 +332,7 @@
     var bc = benefitColor(c.benefit);
     return (
       '<div class="case-card bg-white dark:bg-slate-800 rounded-xl overflow-hidden shadow-md border border-slate-200 dark:border-slate-700">' +
-      '  <!-- 上方图片 16:9 -->' +
+      "  <!-- 上方图片 16:9 -->" +
       '<div class="w-full aspect-video bg-slate-200 dark:bg-slate-700 overflow-hidden relative flex-shrink-0">' +
       '<img loading="lazy" alt="' +
       c.title +
@@ -337,7 +346,7 @@
       '<span class="px-2 py-0.5 rounded-full bg-' +
       bc +
       '-500 text-white text-xs font-bold" data-i18n="cases_benefit_' +
-      c.benefit.replace(/ /g, '_').toLowerCase() +
+      c.benefit.replace(/ /g, "_").toLowerCase() +
       '">' +
       benefitLabel(c.benefit) +
       "</span>" +
@@ -432,10 +441,8 @@
   function renderGrid(variant) {
     var container = document.getElementById("case-grid");
     if (!container) {
-      console.log('[case-grid] renderGrid: #case-grid not found');
       return;
     }
-    console.log('[case-grid] renderGrid variant=' + variant + ' filtered=' + getFiltered().length);
     var cases = getFiltered();
     if (cases.length === 0) {
       container.innerHTML =
@@ -460,16 +467,21 @@
     for (var ci = 0; ci < cards.length; ci++) {
       (function (card) {
         card.style.cursor = "pointer";
-        card.addEventListener("click", function (e) {
-          // Don't intercept clicks on nested links or buttons
-          if (e.target.closest("a") || e.target.closest("button")) return;
-          var link = card.querySelector('a[href^="/cases/"]');
-          if (link) {
-            e.preventDefault();
-            var href = link.getAttribute("href");
-            if (href) window.location.href = href;
-          }
-        });
+        _spaOn(
+          card,
+          "click",
+          function (e) {
+            // Don't intercept clicks on nested links or buttons
+            if (e.target.closest("a") || e.target.closest("button")) return;
+            var link = card.querySelector('a[href^="/cases/"]');
+            if (link) {
+              e.preventDefault();
+              var href = link.getAttribute("href");
+              if (href) window.location.href = href;
+            }
+          },
+          "casegrid:cardClick_" + ci
+        );
       })(cards[ci]);
     }
   }
@@ -528,10 +540,10 @@
       '<span class="material-symbols-outlined text-primary">tune</span>' +
       '<span data-i18n="cases_filter_toggle">' +
       __("cases_filter_toggle", "筛选案例") +
-      '</span>' +
+      "</span>" +
       '<span id="case-count" class="ml-1 bg-primary/10 text-primary px-2 py-0.5 rounded-full text-xs font-bold">' +
       __("cases_count_format", "8 个案例").replace("{count}", "8") +
-      '</span>' +
+      "</span>" +
       '<span class="material-symbols-outlined ml-auto transition-transform" id="case-filter-arrow">expand_more</span>' +
       "</button>" +
       '<div id="case-filter-panel" class="hidden mt-3 bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 p-4 shadow-lg space-y-4">';
@@ -572,11 +584,16 @@
     var panel = document.getElementById("case-filter-panel");
     var arrow = document.getElementById("case-filter-arrow");
     if (toggle && panel) {
-      toggle.addEventListener("click", function () {
-        var open = !panel.classList.contains("hidden");
-        panel.classList.toggle("hidden");
-        if (arrow) arrow.style.transform = open ? "" : "rotate(180deg)";
-      });
+      _spaOn(
+        toggle,
+        "click",
+        function () {
+          var open = !panel.classList.contains("hidden");
+          panel.classList.toggle("hidden");
+          if (arrow) arrow.style.transform = open ? "" : "rotate(180deg)";
+        },
+        "casegrid:filterToggle"
+      );
     }
   }
 
@@ -611,49 +628,58 @@
     html +=
       '<span id="case-count" class="flex-shrink-0 text-xs font-bold text-primary whitespace-nowrap">' +
       __("cases_count_format", "8 个案例").replace("{count}", "8") +
-      '</span>';
+      "</span>";
     html += "</div>";
     bar.innerHTML = html;
 
     // Bind select change events
     var selects = bar.querySelectorAll(".case-filter-select");
     for (var s = 0; s < selects.length; s++) {
-      selects[s].addEventListener("change", function () {
-        activeFilters[this.getAttribute("data-filter-select")] = this.value || null;
-        renderGrid("mobile");
-      });
+      _spaOn(
+        selects[s],
+        "change",
+        function () {
+          activeFilters[this.getAttribute("data-filter-select")] = this.value || null;
+          renderGrid("mobile");
+        },
+        "casegrid:selectChange_" + s
+      );
     }
   }
 
   /* ── Filter Button Event Binding ────────────────── */
   function bindFilterButtons() {
-    document.addEventListener("click", function (e) {
-      var btn = e.target.closest(".case-filter-btn");
-      if (!btn) return;
+    _spaOn(
+      document,
+      "click",
+      function (e) {
+        var btn = e.target.closest(".case-filter-btn");
+        if (!btn) return;
 
-      var filterKey = btn.getAttribute("data-filter");
-      var value = btn.getAttribute("data-value");
+        var filterKey = btn.getAttribute("data-filter");
+        var value = btn.getAttribute("data-value");
 
-      activeFilters[filterKey] = value || null;
+        activeFilters[filterKey] = value || null;
 
-      // Update button states within the same filter group
-      var siblings = btn.parentElement.querySelectorAll(".case-filter-btn");
-      for (var i = 0; i < siblings.length; i++) {
-        siblings[i].className =
-          "case-filter-btn px-3 py-1.5 text-xs font-semibold rounded-full border transition-all border-slate-300 dark:border-slate-600 text-slate-600 dark:text-slate-300 hover:border-primary hover:text-primary";
-      }
-      btn.className =
-        "case-filter-btn px-3 py-1.5 text-xs font-semibold rounded-full border transition-all border-primary bg-primary text-white";
+        // Update button states within the same filter group
+        var siblings = btn.parentElement.querySelectorAll(".case-filter-btn");
+        for (var i = 0; i < siblings.length; i++) {
+          siblings[i].className =
+            "case-filter-btn px-3 py-1.5 text-xs font-semibold rounded-full border transition-all border-slate-300 dark:border-slate-600 text-slate-600 dark:text-slate-300 hover:border-primary hover:text-primary";
+        }
+        btn.className =
+          "case-filter-btn px-3 py-1.5 text-xs font-semibold rounded-full border transition-all border-primary bg-primary text-white";
 
-      // Determine variant
-      var variant = document.body.getAttribute("data-case-variant") || "pc";
-      renderGrid(variant);
-    });
+        // Determine variant
+        var variant = document.body.getAttribute("data-case-variant") || "pc";
+        renderGrid(variant);
+      },
+      "casegrid:filterButtonClick"
+    );
   }
 
   /* ── Init ───────────────────────────────────────── */
   function init(variant) {
-    console.log('[case-grid] init variant=' + variant + ' case-grid=' + !!document.getElementById('case-grid') + ' case-filters=' + !!document.getElementById('case-filters'));
     if (variant === "pc") buildFiltersPc();
     else if (variant === "tablet") buildFiltersTablet();
     else buildFiltersMobile();
@@ -667,20 +693,18 @@
 
   // ── Auto-init when DOM is ready ────────────────────
   function autoInit(evt) {
-    var grid = document.getElementById('case-grid');
-    var filters = document.getElementById('case-filters');
-    console.log('[case-grid] autoInit called from=' + (evt && evt.type) + ' readyState=' + document.readyState + ' grid=' + !!grid + ' filters=' + !!filters);
+    var grid = document.getElementById("case-grid");
+    var filters = document.getElementById("case-filters");
     if (!grid) {
-      console.log('[case-grid] autoInit: #case-grid missing, scheduling retry');
       setTimeout(autoInit, 200);
       return;
     }
-    var variant = window.innerWidth < 768 ? 'mobile' : window.innerWidth < 1280 ? 'tablet' : 'pc';
+    var variant = window.innerWidth < 768 ? "mobile" : window.innerWidth < 1280 ? "tablet" : "pc";
     init(variant);
   }
 
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', autoInit);
+  if (document.readyState === "loading") {
+    _spaOn(document, "DOMContentLoaded", autoInit, "casegrid:DOMContentLoaded");
   } else {
     autoInit();
   }
@@ -688,6 +712,6 @@
   // SPA navigation: re-init after i18n translations are applied
   // Wait for spa:ready (fired by translations.js after applyTranslations resolves)
   // to ensure data-i18n fallback text is replaced before/after we render cards
-  document.addEventListener('spa:load', autoInit);
-  document.addEventListener('spa:ready', autoInit);
+  _spaOn(document, "spa:load", autoInit, "casegrid:spaLoad");
+  _spaOn(document, "spa:ready", autoInit, "casegrid:spaReady");
 })();
