@@ -1239,8 +1239,8 @@
 
     initSearchInteraction();
 
-    /* Dropdown trigger click — close other dropdowns on trigger click.
-     * DropdownBase.bindTriggers() handles toggle (touch) or pass-through (non-touch). */
+    /* Dropdown trigger click — toggle panel. Works for both touch (via
+     * DropdownBase.bindTriggers) and PC (this handler). */
     document.addEventListener(
       "click",
       function (e) {
@@ -1254,6 +1254,7 @@
         );
         if (wrap) {
           closeOtherDropdowns(wrap);
+          wrap.classList.toggle("is-open");
         }
       },
       true
