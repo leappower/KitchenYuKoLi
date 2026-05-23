@@ -245,6 +245,21 @@ function injectLangUrlSync(html) {
   return html;
 }
 
+function injectNavConfig(html) {
+  // Already has nav-config.js — skip (idempotent)
+  if (/nav-config\.js/.test(html)) return html;
+
+  // Insert before navigator.js — navigator.js reads from NAV_CONFIG
+  var bp = BASE_PATH ? BASE_PATH.replace(/\/$/, '') : '';
+  var tag = '<script defer src="' + bp + '/assets/js/nav-config.js"></script>\n    ';
+  html = html.replace(
+    /(\s*)(<script[^>]*src=["'][^"']*\/assets\/js\/ui\/navigator\.js[^>]*>[^<]*<\/script>)/i,
+    '$1' + tag + '$2'
+  );
+
+  return html;
+}
+
 function injectLangRegistry(html) {
   // Already has lang-registry.js — skip (idempotent)
   if (/lang-registry\.js/.test(html)) return html;
@@ -356,6 +371,7 @@ function generateResponsiveEntry(route) {
     );
     html = injectLangUrlSync(html);
     html = injectLangRegistry(html);
+    html = injectNavConfig(html);
     html = injectTranslationsDropdown(html);
     if (BASE_PATH) {
       html = patchHtmlPaths(html);
@@ -447,6 +463,7 @@ function generateRouteIndex(route) {
   html = injectLangUrlSync(html);
   // Inject lang-registry.js before translations.js (if not already present)
   html = injectLangRegistry(html);
+  html = injectNavConfig(html);
   html = injectTranslationsDropdown(html);
   html = injectSwupScripts(html);
   html = normalizeSpaContent(html);
@@ -502,6 +519,7 @@ function copyDeviceFiles(route) {
     content = injectLangUrlSync(content);
     // Inject lang-registry.js before translations.js (if not already present)
     content = injectLangRegistry(content);
+    content = injectNavConfig(content);
     content = injectTranslationsDropdown(content);
     content = injectSwupScripts(content);
     content = normalizeSpaContent(content);
