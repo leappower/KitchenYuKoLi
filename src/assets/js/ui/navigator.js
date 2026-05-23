@@ -1300,7 +1300,17 @@
    * Can be called multiple times safely (idempotent by nature).
    */
   function mountNavigator() {
-    console.log("[nav:mount] mountNavigator() — ProductsDropdown=" + (!!window.ProductsDropdown) + " NavConfig=" + (!!window.NAV_CONFIG) + " uiText=" + (typeof window.uiText));
+    // 如果 translationManager 尚未初始化（defer 顺序不确定），
+    // 延迟重试直到就绪，避免渲染英文 fallback 文本。
+    if (!window.translationManager || !window.translationManager.isInitialized) {
+      if (!window._navMountRetries) window._navMountRetries = 0;
+      if (window._navMountRetries < 50) {
+        window._navMountRetries++;
+        setTimeout(mountNavigator, 20);
+        return;
+      }
+      // 超时后强制挂载（translationManager 可能永远不可用）
+    }
     /* Close all open dropdowns before remounting */
     closeOtherDropdowns(null);
     var placeholders = document.querySelectorAll('[data-component="navigator"]');
