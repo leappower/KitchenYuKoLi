@@ -67,6 +67,7 @@
 
   // ── Swup initialization ────────────────────────────────────────────
   function initSwup() {
+    console.log("[spa-router] initSwup() — Swup=" + (typeof global.Swup) + " readyState=" + document.readyState);
     // Destroy any previous Swup instance (e.g., after navigation to 404 page
     // that left Swup in a broken state due to container mismatch)
     if (global.swupInstance) {

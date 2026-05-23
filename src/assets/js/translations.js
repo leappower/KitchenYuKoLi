@@ -1,6 +1,6 @@
 !(function (t) {
   "use strict";
-  var I18N_CACHE_V = 1779517684;
+  var I18N_CACHE_V = 1779517876;
   var _spaRegs = {};
 
   // ─── Ensure LANG_REGISTRY is loaded ─────────────────────────
@@ -105,6 +105,7 @@
         });
     }),
     (r.prototype.loadUITranslations = function (t) {
+      console.log("[i18n:fetch] loadUITranslations(" + t + ")");
       var e = "ui-" + t;
       if (this.translationsCache.has(e)) return Promise.resolve(this.translationsCache.get(e));
       var n = "yukoli-translations-" + e,
@@ -279,6 +280,7 @@
       return a && a !== t ? a : e;
     }),
     (r.prototype.applyTranslations = function () {
+      var _aLang = this.currentLanguage; console.log("[i18n:apply] applyTranslations() lang=" + _aLang + " elements=" + document.querySelectorAll("[data-i18n]").length);
       var t = this,
         e = "ui-" + this.currentLanguage;
       return (
@@ -420,6 +422,7 @@
       });
     }),
     (r.prototype.setLanguage = function (e) {
+      console.log("[i18n:lang] setLanguage(" + e + ") called, currentLang=" + this.currentLanguage);
       var n = this;
       // Idempotent lock: prevent duplicate calls from firing multiple toasts
       if (n._switchingTo === e) return Promise.resolve();
@@ -682,6 +685,7 @@
       });
     }),
     (r.prototype.initialize = function () {
+      console.log("[i18n:init] initialize() called, lang=" + this.currentLanguage);
       var e = this;
       if (e.isInitialized) return Promise.resolve(e);
       localStorage.getItem("browserLang") || localStorage.setItem("browserLang", this.detectBrowserLanguage());
@@ -762,6 +766,7 @@
   var s = new r();
   (function autoInit() {
     function tryInit() {
+      console.log("[i18n:init] tryInit — isInitialized=" + s.isInitialized + " lang=" + (localStorage.getItem("userLanguage") || "none"));
       if (!s.isInitialized) s.initialize();
     }
     if (document.readyState === "loading") {

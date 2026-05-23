@@ -31,6 +31,7 @@
    *  Returns fallback text when translation system is not yet ready.
    *  reinitTranslationManager() will apply correct translations once cache is populated. */
   function _t(key, fallback) {
+    var _logT = key === "nav_products" || key === "nav_home";
     // 优先用 translationManager（已初始化时）
     if (typeof window.uiText === "function") {
       var v = window.uiText(key, null);
@@ -1230,6 +1231,7 @@
    * These listeners survive SPA navigations (document is not destroyed).
    */
   function registerListeners() {
+    console.log("[nav:register] registerListeners()");
     /* Inject CSS (one-time — these functions check by ID internally) */
     if (typeof window.DropdownBaseStyles !== "undefined" && window.DropdownBaseStyles.inject) {
       window.DropdownBaseStyles.inject();
@@ -1298,6 +1300,7 @@
    * Can be called multiple times safely (idempotent by nature).
    */
   function mountNavigator() {
+    console.log("[nav:mount] mountNavigator() — ProductsDropdown=" + (!!window.ProductsDropdown) + " NavConfig=" + (!!window.NAV_CONFIG) + " uiText=" + (typeof window.uiText));
     /* Close all open dropdowns before remounting */
     closeOtherDropdowns(null);
     var placeholders = document.querySelectorAll('[data-component="navigator"]');
