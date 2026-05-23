@@ -56,6 +56,11 @@
     ],
     "quote": [
       "assets/js/quote-form.js"
+    ],
+    "profit-calculator": [
+      "assets/js/profit-calculator.js",
+      "assets/js/ui/currency.js",
+      "assets/js/ui/custom-select.js"
     ]
   }
 }

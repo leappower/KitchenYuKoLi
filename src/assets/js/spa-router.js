@@ -218,9 +218,15 @@
     swupHooks.on("content:replace", function (visit) {
       global.__spaNavigating = false;
       _spaState.currentRoute = global.location.pathname.replace(/\/$/, "") || "/";
-      // Hide skeleton overlay after content is replaced
+      // Fade out skeleton overlay after content is replaced
       var skel = document.getElementById("skeleton-overlay");
-      if (skel) skel.setAttribute("hidden", "");
+      if (skel) {
+        skel.setAttribute("hidden", "");
+        // After fade-out transition (0.25s), fully remove from layout
+        setTimeout(function () {
+          skel.style.display = "none";
+        }, 300);
+      }
       // Reload page-specific scripts from the NEW page (not just #spa-content)
       var newDoc = visit && visit.to && visit.to.document ? visit.to.document : null;
       reloadPageScripts(newDoc);
@@ -263,7 +269,10 @@
       _lastSwupNavStart = Date.now();
       // Show skeleton overlay for SPA navigation transitions
       var skel = document.getElementById("skeleton-overlay");
-      if (skel) skel.removeAttribute("hidden");
+      if (skel) {
+        skel.style.display = "";
+        skel.removeAttribute("hidden");
+      }
     });
 
     // ── Graceful degradation ──────────────────────────────────────
