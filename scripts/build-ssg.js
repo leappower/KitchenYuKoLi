@@ -353,9 +353,11 @@ function injectCoreScripts(html, routeSlug) {
   // nav-config.js 必须强制注入到 navigator.js 之前
   // 因为源模板中 navigator.js 可能排在 nav-config 之前（defer 顺序问题）
   var navConfigTag = '    <script defer src="' + bp + '/assets/js/nav-config.js"></script>';
+  var translationsTag = '    <script defer src="' + bp + '/assets/js/translations.js"></script>';
   var navPattern = /(<script[^>]*src=["'][^"']*\/assets\/js\/ui\/navigator\.js[^>]*>[^<]*<\/script>)/i;
   if (navPattern.test(html)) {
-    html = html.replace(navPattern, navConfigTag + '\n    $1');
+    // 先注入 translations.js，再 nav-config.js，确保翻译在导航之前就绪
+    html = html.replace(navPattern, translationsTag + '\n    ' + navConfigTag + '\n    $1');
   }
 
   // 统一注入到 </body> 前
