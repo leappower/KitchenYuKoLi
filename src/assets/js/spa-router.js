@@ -223,11 +223,15 @@
       var skel = document.getElementById("skeleton-overlay");
       if (skel) {
         skel.setAttribute("hidden", "");
-        // After fade-out transition (0.25s), fully remove from layout
-        setTimeout(function () {
-          skel.style.display = "none";
-        }, 300);
+        setTimeout(function () { skel.style.display = "none"; }, 300);
       }
+      // Explicitly re-apply translations for the new page content
+      // (safety net in case spa:load handler was unregistered)
+      setTimeout(function () {
+        if (window.translationManager && window.translationManager.applyTranslations) {
+          window.translationManager.applyTranslations();
+        }
+      }, 100);
       // Reload page-specific scripts from the NEW page (not just #spa-content)
       var newDoc = visit && visit.to && visit.to.document ? visit.to.document : null;
       reloadPageScripts(newDoc);
