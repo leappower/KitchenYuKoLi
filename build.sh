@@ -66,6 +66,9 @@ sync_assets "lang"         "*.json"
 sync_assets "images"       "*"  
 sync_assets "video"        "*"
 
+# 排除 aboutus.mp4（已弃用，65MB）
+rm -f "$DIST/assets/video/aboutus.mp4"
+
 # ─── 4. SPA shell (index.html + 404.html + robots.txt) ──────────
 cp "$SRC/index.html" "$DIST/index.html"
 [ -f "$SRC/404.html" ] && cp "$SRC/404.html" "$DIST/404.html"

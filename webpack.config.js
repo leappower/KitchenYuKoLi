@@ -194,6 +194,9 @@ module.exports = (env = {}, argv = {}) => {
                 from: 'src/assets/video',
                 to: 'assets/video',
                 noErrorOnMissing: true,
+                filter: (resourcePath) => {
+                  return !resourcePath.endsWith('aboutus.mp4');
+                }
               },
               {
                 from: 'src/sw.js',

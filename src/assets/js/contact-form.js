@@ -5,11 +5,20 @@
 (function () {
   "use strict";
 
-  document.addEventListener("DOMContentLoaded", function () {
+  var _spaRegs = {};
+  function _spaOn(tgt, evt, fn, key) {
+    if (key == null) key = evt + ":" + (++_spaRegs.__k || (_spaRegs.__k = 1));
+    if (_spaRegs[key]) _spaRegs[key].abort();
+    var ac = new AbortController();
+    _spaRegs[key] = ac;
+    tgt.addEventListener(evt, fn, { signal: ac.signal });
+  }
+
+  _spaOn(document, "DOMContentLoaded", function () {
     var form = document.getElementById("contact-form-el");
     if (!form) return;
 
-    form.addEventListener("submit", function (e) {
+    _spaOn(form, "submit", function (e) {
       e.preventDefault();
 
       // 收集痛点多选

@@ -14,6 +14,15 @@
  */
 (function (global) {
   "use strict";
+
+  var _spaRegs = {};
+  function _spaOn(tgt, evt, fn, key) {
+    if (key == null) key = evt + ":" + (++_spaRegs.__k || (_spaRegs.__k = 1));
+    if (_spaRegs[key]) _spaRegs[key].abort();
+    var ac = new AbortController();
+    _spaRegs[key] = ac;
+    tgt.addEventListener(evt, fn, { signal: ac.signal });
+  }
   /* ═══════════════════════════════════════════════════════════════════
      SECTION 1: CONSTANTS & CONFIGURATION
      ═══════════════════════════════════════════════════════════════════ */
@@ -82,7 +91,7 @@
   function on(selector, handler) {
     var els = document.querySelectorAll(selector);
     for (var i = 0; i < els.length; i++) {
-      els[i].addEventListener("click", handler);
+      _spaOn(els[i], "click", handler, "on:" + selector);
     }
   }
   /**
@@ -165,9 +174,14 @@
       (function (btn) {
         var key = btn.getAttribute("data-i18n");
         if (quoteI18nKeys.indexOf(key) !== -1) {
-          btn.addEventListener("click", function () {
-            navigate(PAGES.quote);
-          });
+          _spaOn(
+            btn,
+            "click",
+            function () {
+              navigate(PAGES.quote);
+            },
+            "wireQuoteButtons:" + btn.getAttribute("data-i18n")
+          );
         }
       })(btns[i]);
     }
@@ -194,7 +208,7 @@
     var forms = document.querySelectorAll("form");
     for (var i = 0; i < forms.length; i++) {
       (function (form) {
-        form.addEventListener("submit", function (e) {
+        _spaOn(form, "submit", function (e) {
           e.preventDefault();
           var inputs = form.querySelectorAll(
             'input[type="text"], input[type="email"], input[type="number"], input[type="url"]'
@@ -315,17 +329,22 @@
    * Event-driven recovery is the correct modern approach
    */
   function setupBfcacheRecovery() {
-    window.addEventListener("pageshow", function (event) {
-      if (!event.persisted) return;
-      if (typeof init === "function") {
-        init();
-      }
-      if (typeof window.recoverTranslationsFromBfcache === "function") {
-        window.recoverTranslationsFromBfcache();
-      } else if (typeof window.applyTranslations === "function") {
-        window.applyTranslations();
-      }
-    });
+    _spaOn(
+      window,
+      "pageshow",
+      function (event) {
+        if (!event.persisted) return;
+        if (typeof init === "function") {
+          init();
+        }
+        if (typeof window.recoverTranslationsFromBfcache === "function") {
+          window.recoverTranslationsFromBfcache();
+        } else if (typeof window.applyTranslations === "function") {
+          window.applyTranslations();
+        }
+      },
+      "bfcache:pageshow"
+    );
   }
   /* ═══════════════════════════════════════════════════════════════════
      SECTION 14: MAIN INITIALIZATION
@@ -357,7 +376,7 @@
   if (window.CommonUtils && typeof window.CommonUtils.ready === "function") {
     window.CommonUtils.ready(init);
   } else if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", init);
+    _spaOn(document, "DOMContentLoaded", init, "router:DOMContentLoaded");
   } else {
     init();
   }

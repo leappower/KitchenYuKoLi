@@ -28,12 +28,12 @@
   }
 
   var scripts = [
-    '<script defer src="/assets/js/ui/dropdown-base.js"></script>',
-    '<script defer src="/assets/js/ui/products-dropdown.js"></script>',
-    '<script defer src="/assets/js/ui/applications-dropdown.js"></script>',
-    '<script defer src="/assets/js/ui/support-dropdown.js"></script>',
-    '<script defer src="/assets/js/ui/about-dropdown.js"></script>',
-    '<script defer src="/assets/js/ui/dropdown-styles.js"></script>',
+    '<script src="/assets/js/ui/dropdown-base.js"></script>',
+    '<script src="/assets/js/ui/products-dropdown.js"></script>',
+    '<script src="/assets/js/ui/applications-dropdown.js"></script>',
+    '<script src="/assets/js/ui/support-dropdown.js"></script>',
+    '<script src="/assets/js/ui/about-dropdown.js"></script>',
+    '<script src="/assets/js/ui/dropdown-styles.js"></script>',
   ];
   var tag = scripts.join("\n    ");
 

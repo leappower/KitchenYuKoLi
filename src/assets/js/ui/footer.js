@@ -8,6 +8,15 @@
 (function (window) {
   "use strict";
 
+  var _spaRegs = {};
+  function _spaOn(tgt, evt, fn, key) {
+    if (key == null) key = evt + ":" + (++_spaRegs.__k || (_spaRegs.__k = 1));
+    if (_spaRegs[key]) _spaRegs[key].abort();
+    var ac = new AbortController();
+    _spaRegs[key] = ac;
+    tgt.addEventListener(evt, fn, { signal: ac.signal });
+  }
+
   var resizeTimer;
 
   /* ─── Mobile items (4) ─── */
@@ -159,19 +168,24 @@
   }
 
   /* ─── Handle bfcache (back/forward) ─── */
-  window.addEventListener("pageshow", function (e) {
-    if (!e.persisted) return;
-    var needsRemount = false;
-    var footers = document.querySelectorAll('footer[data-component="footer"]');
-    for (var i = 0; i < footers.length; i++) {
-      if (!footers[i].querySelector || !footers[i].querySelector(".fixed.bottom-0")) {
-        needsRemount = true;
-        break;
+  _spaOn(
+    window,
+    "pageshow",
+    function (e) {
+      if (!e.persisted) return;
+      var needsRemount = false;
+      var footers = document.querySelectorAll('footer[data-component="footer"]');
+      for (var i = 0; i < footers.length; i++) {
+        if (!footers[i].querySelector || !footers[i].querySelector(".fixed.bottom-0")) {
+          needsRemount = true;
+          break;
+        }
       }
-    }
-    if (!document.querySelector(".fixed.bottom-0")) needsRemount = true;
-    if (needsRemount) mount();
-  });
+      if (!document.querySelector(".fixed.bottom-0")) needsRemount = true;
+      if (needsRemount) mount();
+    },
+    "footer:pageshow"
+  );
 
   /* ─── Public API ─── */
   window.Footer = {
@@ -231,14 +245,19 @@
 
   /* ─── Init ─── */
   if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", mount);
+    _spaOn(document, "DOMContentLoaded", mount, "footer:DOMContentLoaded");
   } else {
     mount();
   }
 
   /* ─── Resize handler ─── */
-  window.addEventListener("resize", function () {
-    clearTimeout(resizeTimer);
-    resizeTimer = setTimeout(mount, 200);
-  });
+  _spaOn(
+    window,
+    "resize",
+    function () {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(mount, 200);
+    },
+    "footer:resize"
+  );
 })(window);
