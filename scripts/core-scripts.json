@@ -58,6 +58,9 @@
       "assets/js/profit-calculator.js",
       "assets/js/ui/currency.js",
       "assets/js/ui/custom-select.js"
+    ],
+    "applications": [
+      "assets/js/ui/hero-video.js"
     ]
   }
 }
