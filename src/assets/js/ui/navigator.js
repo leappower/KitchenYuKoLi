@@ -31,9 +31,24 @@
    *  Returns fallback text when translation system is not yet ready.
    *  reinitTranslationManager() will apply correct translations once cache is populated. */
   function _t(key, fallback) {
-    if (typeof window.uiText !== "function") return fallback || key;
-    var v = window.uiText(key, null);
-    return v || fallback || key;
+    // 优先用 translationManager（已初始化时）
+    if (typeof window.uiText === "function") {
+      var v = window.uiText(key, null);
+      if (v) return v;
+    }
+    // Fallback: 从 localStorage 翻译缓存同步读取
+    var lang = localStorage.getItem("userLanguage");
+    if (lang) {
+      try {
+        var cacheKey = "yukoli-translations-ui-" + lang;
+        var cached = localStorage.getItem(cacheKey);
+        if (cached) {
+          var data = JSON.parse(cached);
+          if (data && data.data && data.data[key]) return data.data[key];
+        }
+      } catch (e) { /* ignore */ }
+    }
+    return fallback || key;
   }
 
   /* ================================================================
