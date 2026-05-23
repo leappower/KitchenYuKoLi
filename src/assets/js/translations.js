@@ -1,6 +1,6 @@
 !(function (t) {
   "use strict";
-  var I18N_CACHE_V = 1779522242;
+  var I18N_CACHE_V = 1779522475;
   var _spaRegs = {};
 
   // ─── Ensure LANG_REGISTRY is loaded ─────────────────────────
@@ -809,6 +809,7 @@
       document,
       "spa:load",
       function () {
+        console.log("[i18n:spa:load] FIRED — lang=" + s.currentLanguage);
         // [LOG] i18n spa:load — check lang state before re-applying translations
         (function () {
           var _l = s.currentLanguage;
