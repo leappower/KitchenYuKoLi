@@ -278,8 +278,9 @@ function injectCoreScripts(html, routeSlug) {
   // 核心脚本
   CORE_SCRIPTS.core.forEach(function (scriptPath) {
     var filename = path.basename(scriptPath);
-    // 精确检测：只匹配 <script src="...filename"，不匹配内联脚本内容
-    var hasScript = new RegExp('<script[^>]*src="[^"]*' + filename.replace(/\./g, '\\.') + '"', 'i').test(html);
+    // 精确检测：匹配 <script src="...filename" 或 <script src="...filename?v=xxx"
+    var escaped = filename.replace(/\./g, '\\.');
+    var hasScript = new RegExp('<script[^>]*src="[^"]*' + escaped + '(?:\\?[^"]*)?"', 'i').test(html);
     if (!hasScript) {
       tags.push('    <script defer src="' + bp + '/' + scriptPath + '"></script>');
     }
@@ -290,7 +291,8 @@ function injectCoreScripts(html, routeSlug) {
   var pageScripts = CORE_SCRIPTS.pageSpecific[topSection] || [];
   pageScripts.forEach(function (scriptPath) {
     var filename = path.basename(scriptPath);
-    var hasScript = new RegExp('<script[^>]*src="[^"]*' + filename.replace(/\./g, '\\.') + '"', 'i').test(html);
+    var escaped = filename.replace(/\./g, '\\.');
+    var hasScript = new RegExp('<script[^>]*src="[^"]*' + escaped + '(?:\\?[^"]*)?"', 'i').test(html);
     if (!hasScript) {
       tags.push('    <script defer src="' + bp + '/' + scriptPath + '"></script>');
     }
