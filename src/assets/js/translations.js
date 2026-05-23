@@ -1,6 +1,6 @@
 !(function (t) {
   "use strict";
-  var I18N_CACHE_V = 1779520465;
+  var I18N_CACHE_V = 1779520871;
   var _spaRegs = {};
 
   // ─── Ensure LANG_REGISTRY is loaded ─────────────────────────
@@ -764,6 +764,12 @@
           })
       );
     }));
+  // 如果已存在 translationManager（另一份 translations.js 已初始化），直接复用
+  if (window.translationManager) {
+    window.t = window.translationManager.translate.bind(window.translationManager);
+    window.uiText = window.translationManager.uiText.bind(window.translationManager);
+    return;
+  }
   var s = new r();
   (function autoInit() {
     function tryInit() {
