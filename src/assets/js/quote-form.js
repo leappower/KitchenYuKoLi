@@ -14,6 +14,12 @@
 
   window._quotePageLoadTime = window._quotePageLoadTime || Date.now();
 
+  function _t(key, fallback) {
+    if (typeof window.uiText !== "function") return fallback || key;
+    var v = window.uiText(key, null);
+    return v || fallback || key;
+  }
+
   // Country → phone code mapping
   var COUNTRY_CODE_MAP = {
     ID: "+62",
@@ -176,7 +182,7 @@
           }
         });
         if (!valid) {
-          showError(form, "请填写所有必填字段（标记 * 的项）");
+          showError(form, _t("quote_fill_required", "Please fill in all required fields (*)"));
           if (firstInvalid) firstInvalid.focus();
           return;
         }
@@ -233,7 +239,7 @@
       if (!timelineChecked) valid = false;
 
       if (!valid) {
-        showError(form, "请填写所有必填字段（标记 * 的项）");
+        showError(form, _t("quote_fill_required", "Please fill in all required fields (*)"));
         if (firstInvalid) firstInvalid.focus();
         return;
       }
@@ -323,7 +329,10 @@
       var btnOrig = btn ? btn.innerHTML : "";
       if (btn) {
         btn.disabled = true;
-        btn.innerHTML = '<span class="material-symbols-outlined animate-spin">progress_activity</span> 提交中...';
+        btn.innerHTML =
+          '<span class="material-symbols-outlined animate-spin">progress_activity</span> ' +
+          _t("quote_submitting", "Submitting...") +
+          "...";
       }
 
       fetch("/api/form-submit", {
@@ -340,14 +349,14 @@
         })
         .then(function () {
           if (typeof window.showNotification === "function")
-            window.showNotification("提交成功！我们将尽快与您联系。", "success");
+            window.showNotification(_t("quote_submit_success", "Submitted! We will contact you soon."), "success");
           setTimeout(function () {
             if (window.SpaRouter) window.SpaRouter.navigate("/thank-you/");
             else location.href = "/thank-you/";
           }, 1000);
         })
         .catch(function (err) {
-          showError(form, err.message || "提交失败，请稍后重试。");
+          showError(form, err.message || _t("quote_submit_error", "Submission failed, please try again later."));
           if (btn) {
             btn.disabled = false;
             btn.innerHTML = btnOrig;

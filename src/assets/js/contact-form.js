@@ -39,7 +39,8 @@
       var btn = form.querySelector('button[type="submit"]');
       var origText = btn.textContent;
       btn.disabled = true;
-      btn.textContent = "提交中...";
+      btn.textContent =
+        typeof window.uiText === "function" ? window.uiText("quote_submitting") || "Submitting..." : "Submitting...";
 
       fetch("/api/form-submit", {
         method: "POST",
@@ -53,13 +54,21 @@
           if (data.ok) {
             window.location.href = "/thank-you/?from=contact";
           } else {
-            alert("提交失败，请稍后重试");
+            alert(
+              typeof window.uiText === "function"
+                ? window.uiText("contact_submit_error") || "Submission failed, please try again."
+                : "Submission failed, please try again."
+            );
             btn.disabled = false;
             btn.textContent = origText;
           }
         })
         .catch(function () {
-          alert("网络错误，请稍后重试");
+          alert(
+            typeof window.uiText === "function"
+              ? window.uiText("contact_network_error") || "Network error, please try again."
+              : "Network error, please try again."
+          );
           btn.disabled = false;
           btn.textContent = origText;
         });
