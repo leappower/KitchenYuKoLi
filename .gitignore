@@ -188,3 +188,4 @@ translate-quota.json
 /playwright-report/
 /blob-report/
 /playwright/.cache/
+scripts/products-table.xlsx
