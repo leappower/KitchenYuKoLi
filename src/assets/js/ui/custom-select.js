@@ -1057,7 +1057,7 @@
       wraps.forEach(function (wrap) {
         var select = wrap.querySelector("select[" + ATTR + "]");
         if (!select) return;
-        var inst = select["__csInstance"];
+        var inst = select._customSelectInstance;
         if (!inst) return;
         var textEl = inst.trigger && inst.trigger.querySelector(".cs-trigger-text");
         if (!textEl) return;
@@ -1065,6 +1065,21 @@
         var isPlaceholder = !inst.select.value;
         textEl.textContent = displayText;
         textEl.className = "cs-trigger-text" + (isPlaceholder ? " cs-placeholder" : "");
+        // Also update panel item text from translated <option> text
+        if (inst.panel) {
+          var panelItems = inst.panel.querySelectorAll(".cs-item");
+          for (var i = 0; i < panelItems.length; i++) {
+            var val = panelItems[i].getAttribute("data-value");
+            for (var j = 0; j < select.options.length; j++) {
+              if (select.options[j].value === val) {
+                var span = panelItems[i].querySelector("span:first-child");
+                if (span) span.textContent = select.options[j].text;
+                panelItems[i].setAttribute("data-text", select.options[j].text);
+                break;
+              }
+            }
+          }
+        }
       });
     },
     "langChanged:noResults"
