@@ -15,33 +15,30 @@
     />
     <link rel="alternate" media="only screen and (min-width: 1280px)" href="/quote/index-pc.html" />
     <script>
-      (function checkDevice() {
-        if (window.__redirectChecked) return;
-        if (document.querySelector("meta[name=ssg-device]")) return;
-        window.__redirectChecked = true;
-        var u = new URLSearchParams(location.search);
-        var c = u.get("clean-url");
-        if (c) {
-          history.replaceState({}, "", c);
-          return;
-        }
-        if (window.__spaNavigating) return;
-        var f = location.pathname.split("/").pop();
-        // 目录 URL（末尾斜杠 /）— 不跳转，让 server.js 处理
-        if (!f || !f.match(/.html$/)) return;
-        if (f.match(/^index-(pc|mobile|tablet).html$/)) return;
-        function doRedirect() {
-          var mq767 = window.matchMedia("(max-width:767px)");
-          var mq1279 = window.matchMedia("(max-width:1279px)");
-          var e = mq767.matches ? "index-mobile.html" : mq1279.matches ? "index-tablet.html" : "index-pc.html";
-          if (f === e) return;
-          location.href = location.pathname.replace(/[^\/]*.html$/, "") + e;
-        }
-        window.addEventListener("DOMContentLoaded", doRedirect);
-        setTimeout(doRedirect, 100);
-      })();
+    (function checkDevice(){
+      if(window.__redirectChecked)return;
+      if(document.querySelector("meta[name=ssg-device]"))return;
+      window.__redirectChecked=true;
+      var u=new URLSearchParams(location.search);
+      var c=u.get("clean-url");
+      if(c){history.replaceState({},"",c);return}
+      if(window.__spaNavigating)return;
+      var f=location.pathname.split("/").pop();
+      // 目录 URL（末尾斜杠 /）— 不跳转，让 server.js 处理
+      if(!f||!f.match(/.html$/))return;
+      if(f.match(/^index-(pc|mobile|tablet).html$/))return;
+      function doRedirect(){
+        var mq767=window.matchMedia("(max-width:767px)");
+        var mq1279=window.matchMedia("(max-width:1279px)");
+        var e=mq767.matches?"index-mobile.html":mq1279.matches?"index-tablet.html":"index-pc.html";
+        if(f===e)return;
+        location.href=location.pathname.replace(/[^\/]*.html$/,"")+e;
+      }
+      window.addEventListener("DOMContentLoaded",doRedirect);
+      setTimeout(doRedirect,100);
+    })();
     </script>
-    <!-- ═══ End Responsive Redirect ═══ -->
+<!-- ═══ End Responsive Redirect ═══ -->
 
     <meta charset="utf-8" />
     <meta
@@ -680,19 +677,19 @@
     <script defer src="/assets/js/ui/dropdown-base.js"></script>
     <script defer src="/assets/js/ui/custom-select.js"></script>
     <script defer src="/assets/js/quote-select-i18n.js"></script>
-    <script defer src="/assets/js/ui/products-dropdown.js?v=202605231108"></script>
-    <script defer src="/assets/js/ui/applications-dropdown.js?v=202605231108"></script>
-    <script defer src="/assets/js/ui/support-dropdown.js?v=202605231108"></script>
-    <script defer src="/assets/js/ui/about-dropdown.js?v=202605231108"></script>
+    <script defer src="/assets/js/ui/products-dropdown.js?v=202605231121"></script>
+    <script defer src="/assets/js/ui/applications-dropdown.js?v=202605231121"></script>
+    <script defer src="/assets/js/ui/support-dropdown.js?v=202605231121"></script>
+    <script defer src="/assets/js/ui/about-dropdown.js?v=202605231121"></script>
     <script defer src="/assets/js/product-list.js"></script>
     <script defer src="/assets/js/utils.js"></script>
     <script defer src="/assets/js/ui/search-engine.js"></script>
-    <script defer src="/assets/js/ui/navigator.js?v=202605231108"></script>
-    <script defer src="/assets/js/ui/slide-menu.js?v=202605231108"></script>
-    <script defer src="/assets/js/ui/footer.js?v=202605231108"></script>
-    <script defer src="/assets/js/lang-registry.js?v=202605231108"></script>
-    <script defer src="/assets/js/translations.js?v=202605231108"></script>
-    <script defer src="/assets/js/translations-dropdown-template.js?v=202605231108"></script>
+    <script defer src="/assets/js/ui/navigator.js?v=202605231121"></script>
+    <script defer src="/assets/js/ui/slide-menu.js?v=202605231121"></script>
+    <script defer src="/assets/js/ui/footer.js?v=202605231121"></script>
+    <script defer src="/assets/js/lang-registry.js?v=202605231121"></script>
+    <script defer src="/assets/js/translations.js?v=202605231121"></script>
+    <script defer src="/assets/js/translations-dropdown-template.js?v=202605231121"></script>
 
     <script defer src="/assets/js/contacts.js"></script>
     <script defer src="/assets/js/router.js"></script>
@@ -700,9 +697,9 @@
     <script defer src="/assets/js/ui/page-effects.js"></script>
     <script defer src="/assets/js/ui/form-interactions.js"></script>
     <script defer src="/assets/js/page-interactions.js"></script>
-    <script defer src="/assets/js/quote-form.js?v=202605231108"></script>
+    <script defer src="/assets/js/quote-form.js?v=202605231121"></script>
     <script defer src="/assets/js/utils/device-utils.js"></script>
-    <script defer src="/assets/js/spa-router.js?v=202605231108"></script>
+    <script defer src="/assets/js/spa-router.js?v=202605231121"></script>
 
     <script defer src="/assets/js/ui/floating-actions.js"></script>
     <footer data-component="footer" data-variant="pc" data-active="quote"></footer>
