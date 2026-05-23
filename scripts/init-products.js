@@ -78,6 +78,10 @@ function convertToProductTable(seriesList) {
         scenarios: product.scenarios || '',
         usage: product.usage || '',
       };
+      // 跳过无效行：空model、纯数字、不需要的产品类型
+      if (!model.model || model.model === '-' || /^\d+$/.test(model.model)) continue;
+      var name = model.name || '';
+      if (/洁碟台|污碟台|洗涤剂|架子|花洒/.test(name)) continue;
       models.push(model);
     }
   }
