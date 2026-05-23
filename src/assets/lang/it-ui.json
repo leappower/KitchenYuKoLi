@@ -3492,5 +3492,8 @@
   "wechat_modal_title": "Scan WeChat QR Code",
   "breadcrumb_other_categories": "Altre Categorie",
   "breadcrumb_other_scenarios": "Altri Scenari",
-  "breadcrumb_other_services": "Altri Servizi"
+  "breadcrumb_other_services": "Altri Servizi",
+  "quote_takeaway": "Da asporto / Consegna",
+  "quote_select_restaurant_type": "Seleziona tipo di ristorante",
+  "quote_select_channel": "Seleziona metodo di contatto"
 }

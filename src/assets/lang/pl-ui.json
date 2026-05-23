@@ -3501,5 +3501,8 @@
   "wechat_modal_title": "Scan WeChat QR Code",
   "breadcrumb_other_categories": "Inne Kategorie",
   "breadcrumb_other_scenarios": "Inne Scenariusze",
-  "breadcrumb_other_services": "Inne Usługi"
+  "breadcrumb_other_services": "Inne Usługi",
+  "quote_takeaway": "Na wynos / Dostawa",
+  "quote_select_restaurant_type": "Wybierz typ restauracji",
+  "quote_select_channel": "Wybierz metodę kontaktu"
 }

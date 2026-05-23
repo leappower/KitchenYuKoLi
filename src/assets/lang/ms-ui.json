@@ -3492,5 +3492,8 @@
   "wechat_modal_title": "Scan WeChat QR Code",
   "breadcrumb_other_categories": "Kategori Lain",
   "breadcrumb_other_scenarios": "Senario Lain",
-  "breadcrumb_other_services": "Perkhidmatan Lain"
+  "breadcrumb_other_services": "Perkhidmatan Lain",
+  "quote_takeaway": "Bawa Pulang / Penghantaran",
+  "quote_select_restaurant_type": "Pilih jenis restoran",
+  "quote_select_channel": "Pilih kaedah hubungan"
 }

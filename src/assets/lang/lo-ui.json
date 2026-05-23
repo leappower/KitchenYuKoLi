@@ -3498,5 +3498,8 @@
   "wechat_modal_title": "Scan WeChat QR Code",
   "breadcrumb_other_categories": "ໝວດອື່ນໆ",
   "breadcrumb_other_scenarios": "ສະຖານະການອື່ນ",
-  "breadcrumb_other_services": "ບໍລິການອື່ນ"
+  "breadcrumb_other_services": "ບໍລິການອື່ນ",
+  "quote_takeaway": "ເອົາກັບບ້ານ/ສົ່ງອາຫານ",
+  "quote_select_restaurant_type": "ເລືອກປະເພດຮ້ານອາຫານ",
+  "quote_select_channel": "ເລືອກວິທີຕິດຕໍ່"
 }

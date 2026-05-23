@@ -3492,5 +3492,8 @@
   "wechat_modal_title": "Scan WeChat QR Code",
   "breadcrumb_other_categories": "หมวดหมู่อื่น",
   "breadcrumb_other_scenarios": "สถานการณ์อื่น",
-  "breadcrumb_other_services": "บริการอื่น"
+  "breadcrumb_other_services": "บริการอื่น",
+  "quote_takeaway": "ซื้อกลับบ้าน/เดลิเวอรี่",
+  "quote_select_restaurant_type": "เลือกประเภทร้านอาหาร",
+  "quote_select_channel": "เลือกวิธีการติดต่อ"
 }

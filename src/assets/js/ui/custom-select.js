@@ -1052,6 +1052,20 @@
         el.textContent =
           typeof window.t === "function" ? window.uiText("no_matching_results", "无匹配结果") : "无匹配结果";
       });
+      // Refresh all custom-select trigger display texts after translation
+      var wraps = document.querySelectorAll(".cs-trigger-wrap");
+      wraps.forEach(function (wrap) {
+        var select = wrap.querySelector("select[" + ATTR + "]");
+        if (!select) return;
+        var inst = select["__csInstance"];
+        if (!inst) return;
+        var textEl = inst.trigger && inst.trigger.querySelector(".cs-trigger-text");
+        if (!textEl) return;
+        var displayText = inst.getDisplayText();
+        var isPlaceholder = !inst.select.value;
+        textEl.textContent = displayText;
+        textEl.className = "cs-trigger-text" + (isPlaceholder ? " cs-placeholder" : "");
+      });
     },
     "langChanged:noResults"
   );

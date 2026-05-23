@@ -3492,5 +3492,8 @@
   "wechat_modal_title": "Scan WeChat QR Code",
   "breadcrumb_other_categories": "Ibang Kategorya",
   "breadcrumb_other_scenarios": "Ibang Sitwasyon",
-  "breadcrumb_other_services": "Ibang Serbisyo"
+  "breadcrumb_other_services": "Ibang Serbisyo",
+  "quote_takeaway": "Takeaway / Delivery",
+  "quote_select_restaurant_type": "Pumili ng uri ng restawran",
+  "quote_select_channel": "Pumili ng paraan ng pakikipag-ugnayan"
 }

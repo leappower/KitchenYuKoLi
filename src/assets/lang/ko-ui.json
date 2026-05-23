@@ -3492,5 +3492,8 @@
   "wechat_modal_title": "Scan WeChat QR Code",
   "breadcrumb_other_categories": "기타 카테고리",
   "breadcrumb_other_scenarios": "기타 시나리오",
-  "breadcrumb_other_services": "기타 서비스"
+  "breadcrumb_other_services": "기타 서비스",
+  "quote_takeaway": "테이크아웃/배달",
+  "quote_select_restaurant_type": "레스토랑 유형 선택",
+  "quote_select_channel": "연락 방법 선택"
 }

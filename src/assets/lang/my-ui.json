@@ -3492,5 +3492,8 @@
   "wechat_modal_title": "Scan WeChat QR Code",
   "breadcrumb_other_categories": "အခြားအမျိုးအစားများ",
   "breadcrumb_other_scenarios": "အခြားမြင်ကွင်းများ",
-  "breadcrumb_other_services": "အခြားဝန်ဆောင်မှုများ"
+  "breadcrumb_other_services": "အခြားဝန်ဆောင်မှုများ",
+  "quote_takeaway": "ထုတ်ယူသွားရန်/ပို့ဆောင်ရန်",
+  "quote_select_restaurant_type": "စားသောက်ဆိုင်အမျိုးအစားရွေးချယ်ပါ",
+  "quote_select_channel": "ဆက်သွယ်နည်းရွေးချယ်ပါ"
 }

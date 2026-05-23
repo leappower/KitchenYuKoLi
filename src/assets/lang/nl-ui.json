@@ -3492,5 +3492,8 @@
   "wechat_modal_title": "Scan WeChat QR Code",
   "breadcrumb_other_categories": "Andere Categorieën",
   "breadcrumb_other_scenarios": "Andere Scenario's",
-  "breadcrumb_other_services": "Andere Diensten"
+  "breadcrumb_other_services": "Andere Diensten",
+  "quote_takeaway": "Afhaal / Bezorging",
+  "quote_select_restaurant_type": "Selecteer restauranttype",
+  "quote_select_channel": "Selecteer contactmethode"
 }

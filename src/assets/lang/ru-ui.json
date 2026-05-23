@@ -3492,5 +3492,8 @@
   "wechat_modal_title": "Scan WeChat QR Code",
   "breadcrumb_other_categories": "Другие категории",
   "breadcrumb_other_scenarios": "Другие сценарии",
-  "breadcrumb_other_services": "Другие услуги"
+  "breadcrumb_other_services": "Другие услуги",
+  "quote_takeaway": "На вынос / Доставка",
+  "quote_select_restaurant_type": "Выберите тип заведения",
+  "quote_select_channel": "Выберите способ связи"
 }

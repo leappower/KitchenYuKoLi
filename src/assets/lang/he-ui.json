@@ -3492,5 +3492,8 @@
   "wechat_modal_title": "Scan WeChat QR Code",
   "breadcrumb_other_categories": "קטגוריות אחרות",
   "breadcrumb_other_scenarios": "תרחישים אחרים",
-  "breadcrumb_other_services": "שירותים אחרים"
+  "breadcrumb_other_services": "שירותים אחרים",
+  "quote_takeaway": "טייק אווי / משלוחים",
+  "quote_select_restaurant_type": "בחר סוג מסעדה",
+  "quote_select_channel": "בחר אמצעי קשר"
 }
