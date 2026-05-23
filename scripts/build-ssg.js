@@ -351,6 +351,10 @@ function injectCoreScripts(html, routeSlug) {
   var injectPattern = '<script>window._SPA_GLOBAL_PATTERNS=/' + patternStr + '/</script>';
 
   // 统一注入到 </body> 前
+  // 给无版本号的 CSS/JS 加上构建时间戳，防止浏览器缓存旧文件
+  var VERSION = 'v=' + Date.now().toString(36);
+  html = html.replace(/(href="\/assets\/css\/[^"]+)"/g, '$1?' + VERSION + '"');
+  html = html.replace(/(src="\/assets\/js\/[^"]+)(?<!\?v=[^"]*)"/g, '$1?' + VERSION + '"');
   return html.replace(/<\/body>/i, tags.join('\n') + '\n    ' + injectPattern + '\n  </body>');
 }
 
