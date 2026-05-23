@@ -30,10 +30,10 @@
   /** Safe i18n helper — guards against scripts loading before translations.js.
    *  Returns fallback text when translation system is not yet ready.
    *  reinitTranslationManager() will apply correct translations once cache is populated. */
-  function _t(key, _fallback) {
-    if (typeof window.uiText !== "function") return "__I18N_PENDING__";
-    var v = window.uiText(key, "__I18N_PENDING__");
-    return v && v !== "__I18N_PENDING__" ? v : "__I18N_PENDING__";
+  function _t(key, fallback) {
+    if (typeof window.uiText !== "function") return fallback || key;
+    var v = window.uiText(key, null);
+    return v || fallback || key;
   }
 
   /* ================================================================
@@ -425,6 +425,7 @@
       common: { label: _t("lang_group_common", "Common"), langs: [] },
       southeast_asia: { label: _t("lang_group_se_asia", "Southeast Asia"), langs: [] },
       east_asia: { label: _t("lang_group_east_asia", "East Asia"), langs: [] },
+      european: { label: _t("lang_group_europe", "Europe"), langs: [] },
       other: { label: _t("lang_group_other", "Other"), langs: [] },
     };
 
@@ -434,7 +435,7 @@
       groups[g].langs.push(l);
     });
 
-    var groupOrder = ["common", "southeast_asia", "east_asia", "other"];
+    var groupOrder = ["common", "southeast_asia", "east_asia", "european", "other"];
     groupOrder.forEach(function (gid) {
       var grp = groups[gid];
       if (!grp || grp.langs.length === 0) return;
@@ -1702,5 +1703,17 @@
       });
     },
     "langChanged:navNoResults"
+  );
+
+  // Refresh language dropdown group labels once translations are loaded
+  // (fixes __I18N_PENDING__ shown during initial load before translations.js is ready)
+  _spaOn(
+    document,
+    "translationsApplied",
+    function () {
+      var sel = document.querySelector("#lang-switcher-select");
+      if (sel) _populateLangSelect(sel);
+    },
+    "translationsApplied:refreshLangSelect"
   );
 })(window);
