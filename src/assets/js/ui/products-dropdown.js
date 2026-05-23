@@ -70,7 +70,7 @@
       '<a class="' +
       esc(cfg.activeClass || "") +
       ' prod-dropdown-link"' +
-      ' href="javascript:void(0)"' +
+      ' href="javascript:void(0)" data-no-swup' +
       ' data-prod-trigger-label="' +
       esc(cfg.labelKey || cfg.label) +
       '">' +
