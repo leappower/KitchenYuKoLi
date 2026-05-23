@@ -295,8 +295,16 @@ function injectCoreScripts(html, routeSlug) {
 
   if (tags.length === 0) return html;
 
+  // 从 core-scripts.json 的 core[] 自动生成 _SPA_GLOBAL_PATTERNS 正则
+  // 注入到 spa-router.js 之前，消除 spa-router.js 的手动维护点
+  var scriptNames = CORE_SCRIPTS.core.map(function (p) {
+    return path.basename(p, '.js');
+  });
+  var patternStr = '(?:^|[\\/])(?:' + scriptNames.join('|') + ')\\.js';
+  var injectPattern = '<script>window._SPA_GLOBAL_PATTERNS=/' + patternStr + '/</script>';
+
   // 注入到 </body> 前
-  return html.replace(/<\/body>/i, tags.join('\n') + '\n  </body>');
+  return html.replace(/<\/body>/i, tags.join('\n') + '\n    ' + injectPattern + '\n  </body>');
 }
 
 function injectSwupScripts(html) {

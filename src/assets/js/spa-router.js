@@ -153,7 +153,11 @@
     // Include ALL global/shared scripts that persist across SPA navigation.
     // Missing entries cause redundant script injection on every page transition.
     // This list should match all scripts loaded by src/index.html (the SPA shell).
-    var _globalScriptPatterns =
+    // 全局脚本正则：优先用 build 时注入的 window._SPA_GLOBAL_PATTERNS，
+    // fallback 到硬编码列表（dev 模式或未注入时）。
+    // ⚠️  新增全局脚本只需改 scripts/core-scripts.json 的 core[]
+    //     build 时自动生成 window._SPA_GLOBAL_PATTERNS 注入到每页。
+    var _globalScriptPatterns = window._SPA_GLOBAL_PATTERNS ||
       /(?:^|[/])(?:spa-router|swup|translations|lang-registry|translations-dropdown-template|spa-events|dropdown-base|dropdown-styles|navigator|nav-config|footer|slide-menu|products-dropdown|applications-dropdown|support-dropdown|about-dropdown|contact-dropdown|product-list|product-grid|product-detail|case-grid|utils|search-engine|device-utils|hero-video|contacts|page-interactions|common|main|init|image-assets|media-queries|floating-actions|currency|custom-select|breadcrumb|home-core-products|compare|cross-sell|profit-calculator|quote-form|quote-select-i18n|quote-budget-i18n|news-detail|support-contact-channels|support-wechat-modal|smart-popup|helpers|page-effects|form-interactions|router|roi-data|cases-page|html2canvas|jspdf|pi-maps)\.js/;
     function reloadPageScripts(newDoc) {
       if (!newDoc) return;
