@@ -480,10 +480,8 @@
       video.style.opacity = "0";
       video.style.pointerEvents = "none";
     }
-    if (overlay) {
-      overlay.style.opacity = "0";
-      overlay.style.pointerEvents = "none";
-    }
+    // Keep overlay visible (mute + fullscreen buttons still useful)
+    // Only hide fallback-btn
 
     if (playBtn) {
       playBtn.style.display = "flex";
