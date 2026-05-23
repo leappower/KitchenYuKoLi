@@ -65,7 +65,7 @@
       '<a class="' +
       esc(cfg.activeClass || "") +
       ' app-dropdown-link"' +
-      ' href="javascript:void(0)" data-no-swup' +
+      ' href="javascript:void(0)" data-no-swup onclick="event.stopPropagation();event.preventDefault();return false"' +
       ' data-app-trigger-label="' +
       esc(cfg.labelKey || cfg.label) +
       '">' +

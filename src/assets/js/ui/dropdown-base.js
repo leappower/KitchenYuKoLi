@@ -110,7 +110,7 @@
         " " +
         triggerClass +
         '"' +
-        ' href="javascript:void(0)" data-no-swup' +
+        ' href="javascript:void(0)" data-no-swup onclick="event.stopPropagation();event.preventDefault();return false"' +
         " data-" +
         prefix +
         '-trigger-label="' +
