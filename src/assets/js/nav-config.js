@@ -22,8 +22,6 @@
 
     /** Products 子分类 */
     products: [
-      { key: "nav_products_overview", icon: "apps",           emoji: "", href: "/products/" },
-      { _separator: true },
       { key: "nav_products_cutting",  icon: "content_cut",           emoji: "",  href: "/products/cutting/" },
       { key: "nav_products_stirfry",  icon: "local_fire_department", emoji: "🔥", href: "/products/stirfry/" },
       { key: "nav_products_frying",   icon: "outdoor_grill",         emoji: "",  href: "/products/frying/" },
@@ -34,8 +32,6 @@
 
     /** Applications 子分类 */
     applications: [
-      { key: "nav_applications_overview",        icon: "apps",             emoji: "", href: "/applications/" },
-      { _separator: true },
       { key: "nav_applications_small_restaurant", icon: "storefront",       emoji: "", href: "/applications/small-restaurant/" },
       { key: "nav_applications_central_kitchen",  icon: "apartment",        emoji: "", href: "/applications/central-kitchen/" },
       { key: "nav_applications_chain_restaurant", icon: "ramen_dining",     emoji: "", href: "/applications/chain-restaurant/" },
