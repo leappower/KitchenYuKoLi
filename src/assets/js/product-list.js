@@ -175,7 +175,7 @@
         averageTime: toNullableString(product.averageTime),
         launchTime: toNullableString(product.launchTime),
         status: toNullableString(product.status) || "",
-        isActive: toBooleanOrDefault(product.isActive, true),
+        isActive: toBooleanOrDefault(product.isActive !== undefined ? product.isActive : product.is_active, true),
         badge: toNullableString(product.badge),
         badgeColor: toNullableString(product.badgeColor),
         imageRecognitionKey: imageRecognitionKey,

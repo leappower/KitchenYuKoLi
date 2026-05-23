@@ -63,6 +63,7 @@ sync_assets "js"           "*.js"
 sync_assets "css"          "*.css"
 sync_assets "fonts"        "*"
 sync_assets "lang"         "*.json"
+sync_assets "data"         "*.json"
 sync_assets "images"       "*"  
 sync_assets "video"        "*"
 
@@ -82,6 +83,7 @@ if [ "$BUILD_MODE" != "dev" ]; then
 fi
 
 # ─── 7. Sitemap / search index ──────────────────────────────────
+node scripts/export-products-static.js 2>/dev/null || echo "  ⚠️  Server unavailable, using cached products.json"
 node scripts/generate-sitemap.js 2>/dev/null || true
 node scripts/generate-search-index.js 2>/dev/null || true
 

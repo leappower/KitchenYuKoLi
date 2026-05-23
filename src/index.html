@@ -127,36 +127,43 @@
   // Step 1: initial data from static file (always fresh after publish)
   var initial = window.PRODUCT_DATA_TABLE || [];
   var version = window.PRODUCT_DATA_VERSION || '0';
-  // Step 2: check localStorage cache — invalidate if version changed
-  var cached = null;
-  var storedVersion = localStorage.getItem(VERSION_KEY) || '';
-  if (storedVersion === version) {
-    try { cached = JSON.parse(localStorage.getItem(KEY)); } catch(e) {}
-  } else {
-    // Version mismatch — clear stale cache
-    try { localStorage.removeItem(KEY); localStorage.removeItem(KEY + '_etag'); } catch(e) {}
-  }
-  // Use cached > initial (only if version matches)
-  window.PRODUCT_DATA_TABLE = cached || initial;
-  // Step 3: fetch latest from API (skip cache to always get fresh data after publish)
-  fetch('/api/public/products-data?_t=' + Date.now())
+  // Step 1: load from static file (build-time export, always available)
+  fetch('/assets/data/products.json')
     .then(function(r) {
-      if (!r.ok) throw new Error('API ' + r.status);
-      return r.json().then(function(data) {
-        // Cache to localStorage with version
+      if (!r.ok) throw new Error('Static ' + r.status);
+      return r.json();
+    })
+    .then(function(data) {
+      if (data && data.length) {
+        window.PRODUCT_DATA_TABLE = data;
+        // Cache to localStorage
         try {
           localStorage.setItem(KEY, JSON.stringify(data));
           localStorage.setItem(VERSION_KEY, version);
         } catch(e) {}
-        return data;
-      });
-    })
-    .then(function(data) {
-      if (data && data.length) window.PRODUCT_DATA_TABLE = data;
+      }
       window.dispatchEvent(new Event('product-data-ready'));
     })
     .catch(function() {
-      // API failed — already have initial or cached data, just fire ready event
+      // Step 2: fallback to localStorage cache
+      var cached = null;
+      try { cached = JSON.parse(localStorage.getItem(KEY)); } catch(e) {}
+      window.PRODUCT_DATA_TABLE = cached || initial;
+      // Step 3: async refresh from API
+      fetch('/api/public/products-data?_t=' + Date.now())
+        .then(function(r) {
+          if (!r.ok) throw new Error('API ' + r.status);
+          return r.json();
+        })
+        .then(function(data) {
+          if (data && data.length) window.PRODUCT_DATA_TABLE = data;
+          try {
+            localStorage.setItem(KEY, JSON.stringify(data));
+            localStorage.setItem(VERSION_KEY, version);
+          } catch(e) {}
+          window.dispatchEvent(new Event('product-data-updated'));
+        })
+        .catch(function() {});
       window.dispatchEvent(new Event('product-data-ready'));
     });
 })();
