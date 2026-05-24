@@ -353,7 +353,40 @@
 
     swupHooks.on("content:replace", function () {
       _lastSwupNavStart = 0;
-      _restoreDropdownState();
+      // Do NOT restore dropdown state yet — spa:load will re-render
+      // dropdowns (products-dropdown.js injects new HTML) AFTER
+      // content:replace. Restoring now would make the old display:none
+      // ineffective against newly injected DOM.
+      // Instead, schedule restore after a microtask to give spa:load
+      // handlers time to run.
+      global.__spaRestorePending = true;
+      requestAnimationFrame(function () {
+        // Close dropdowns that may have been re-injected by spa:load
+        var wrapSelectors = [
+          ".prod-dropdown-wrap",
+          ".app-dropdown-wrap",
+          ".sup-dropdown-wrap",
+          ".abt-dropdown-wrap",
+          ".cnt-dropdown-wrap",
+        ];
+        for (var wi = 0; wi < wrapSelectors.length; wi++) {
+          var wraps = document.querySelectorAll(wrapSelectors[wi]);
+          for (var wj = 0; wj < wraps.length; wj++) {
+            wraps[wj].classList.remove("is-open");
+            // Force-hide any new panels injected by spa:load
+            var panel = wraps[wj].querySelector(
+              ".prod-dropdown-panel, .app-dropdown-panel, .sup-dropdown-panel, .abt-dropdown-panel, .cnt-dropdown-panel"
+            );
+            if (panel) {
+              panel.style.display = "none";
+              panel.dataset.navHidden = "1";
+            }
+          }
+        }
+        console.log('[spa:visit:start] post-replace panel check done');
+        // Now restore dropdown state (clears pointer-events:none and display:none)
+        _restoreDropdownState();
+      });
     });
     document.addEventListener(
       "click",

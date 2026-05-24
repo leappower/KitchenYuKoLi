@@ -21,7 +21,7 @@
     "relatedProducts": null,
     "images": [
       {
-        "filePath": "/assets/images/products/DLB-TBS30_hires.webp",
+        "filePath": "/admin/uploads/products/hires/DLB-TBS30_hires.webp",
         "isPrimary": true,
         "sortOrder": 0
       }
@@ -50,12 +50,12 @@
     "relatedProducts": null,
     "images": [
       {
-        "filePath": "/assets/images/products/DLB-TBS40_hires.webp",
+        "filePath": "/admin/uploads/products/hires/DLB-TBS40_hires.webp",
         "isPrimary": true,
         "sortOrder": 0
       },
       {
-        "filePath": "/assets/images/products/DLB-TBS40_6.webp",
+        "filePath": "/admin/uploads/products/DLB-TBS40_6.webp",
         "isPrimary": false,
         "sortOrder": 5
       }
@@ -84,12 +84,12 @@
     "relatedProducts": null,
     "images": [
       {
-        "filePath": "/assets/images/products/DLB-TBS50_hires.webp",
+        "filePath": "/admin/uploads/products/hires/DLB-TBS50_hires.webp",
         "isPrimary": true,
         "sortOrder": 0
       },
       {
-        "filePath": "/assets/images/products/DLB-TBS50_7.webp",
+        "filePath": "/admin/uploads/products/DLB-TBS50_7.webp",
         "isPrimary": false,
         "sortOrder": 6
       }
@@ -118,12 +118,12 @@
     "relatedProducts": null,
     "images": [
       {
-        "filePath": "/assets/images/products/DLB-TZS40_hires.webp",
+        "filePath": "/admin/uploads/products/hires/DLB-TZS40_hires.webp",
         "isPrimary": true,
         "sortOrder": 0
       },
       {
-        "filePath": "/assets/images/products/DLB-TZS40_8.webp",
+        "filePath": "/admin/uploads/products/DLB-TZS40_8.webp",
         "isPrimary": false,
         "sortOrder": 7
       }
@@ -152,12 +152,12 @@
     "relatedProducts": null,
     "images": [
       {
-        "filePath": "/assets/images/products/DLB-TZS50_hires.webp",
+        "filePath": "/admin/uploads/products/hires/DLB-TZS50_hires.webp",
         "isPrimary": true,
         "sortOrder": 0
       },
       {
-        "filePath": "/assets/images/products/DLB-TZS50_9.webp",
+        "filePath": "/admin/uploads/products/DLB-TZS50_9.webp",
         "isPrimary": false,
         "sortOrder": 8
       }
@@ -186,7 +186,7 @@
     "relatedProducts": null,
     "images": [
       {
-        "filePath": "/assets/images/products/P-182_78.webp",
+        "filePath": "/admin/uploads/products/P-182_78.webp",
         "isPrimary": true,
         "sortOrder": 77
       }
@@ -215,7 +215,7 @@
     "relatedProducts": null,
     "images": [
       {
-        "filePath": "/assets/images/products/P-183_79.webp",
+        "filePath": "/admin/uploads/products/P-183_79.webp",
         "isPrimary": true,
         "sortOrder": 78
       }
@@ -244,7 +244,7 @@
     "relatedProducts": null,
     "images": [
       {
-        "filePath": "/assets/images/products/F32F1C_107.webp",
+        "filePath": "/admin/uploads/products/F32F1C_107.webp",
         "isPrimary": true,
         "sortOrder": 106
       }
@@ -273,12 +273,12 @@
     "relatedProducts": null,
     "images": [
       {
-        "filePath": "/assets/images/products/DLB-TBQ30_hires.webp",
+        "filePath": "/admin/uploads/products/hires/DLB-TBQ30_hires.webp",
         "isPrimary": true,
         "sortOrder": 0
       },
       {
-        "filePath": "/assets/images/products/DLB-TBQ30_2.webp",
+        "filePath": "/admin/uploads/products/DLB-TBQ30_2.webp",
         "isPrimary": false,
         "sortOrder": 1
       }
@@ -307,12 +307,12 @@
     "relatedProducts": null,
     "images": [
       {
-        "filePath": "/assets/images/products/DLB-4BQ30_hires.webp",
+        "filePath": "/admin/uploads/products/hires/DLB-4BQ30_hires.webp",
         "isPrimary": true,
         "sortOrder": 0
       },
       {
-        "filePath": "/assets/images/products/DLB-4BQ30_4.webp",
+        "filePath": "/admin/uploads/products/DLB-4BQ30_4.webp",
         "isPrimary": false,
         "sortOrder": 3
       }
@@ -341,7 +341,7 @@
     "relatedProducts": null,
     "images": [
       {
-        "filePath": "/assets/images/products/DLB-TQBQ30_3.webp",
+        "filePath": "/admin/uploads/products/DLB-TQBQ30_3.webp",
         "isPrimary": true,
         "sortOrder": 2
       }
@@ -370,12 +370,12 @@
     "relatedProducts": null,
     "images": [
       {
-        "filePath": "/assets/images/products/DLB-4QBQ30_hires.webp",
+        "filePath": "/admin/uploads/products/hires/DLB-4QBQ30_hires.webp",
         "isPrimary": true,
         "sortOrder": 0
       },
       {
-        "filePath": "/assets/images/products/DLB-4QBQ30_5.webp",
+        "filePath": "/admin/uploads/products/DLB-4QBQ30_5.webp",
         "isPrimary": false,
         "sortOrder": 4
       }
@@ -404,7 +404,7 @@
     "relatedProducts": null,
     "images": [
       {
-        "filePath": "/assets/images/products/DLB-BQ40T_26.webp",
+        "filePath": "/admin/uploads/products/DLB-BQ40T_26.webp",
         "isPrimary": true,
         "sortOrder": 25
       }
@@ -433,12 +433,12 @@
     "relatedProducts": null,
     "images": [
       {
-        "filePath": "/assets/images/products/DLB-TGS30_hires.webp",
+        "filePath": "/admin/uploads/products/hires/DLB-TGS30_hires.webp",
         "isPrimary": true,
         "sortOrder": 0
       },
       {
-        "filePath": "/assets/images/products/DLB-TGS30_10.webp",
+        "filePath": "/admin/uploads/products/DLB-TGS30_10.webp",
         "isPrimary": false,
         "sortOrder": 9
       }
@@ -467,7 +467,7 @@
     "relatedProducts": null,
     "images": [
       {
-        "filePath": "/assets/images/products/P-184_80.webp",
+        "filePath": "/admin/uploads/products/P-184_80.webp",
         "isPrimary": true,
         "sortOrder": 79
       }
@@ -496,7 +496,7 @@
     "relatedProducts": null,
     "images": [
       {
-        "filePath": "/assets/images/products/P-186_82.webp",
+        "filePath": "/admin/uploads/products/P-186_82.webp",
         "isPrimary": true,
         "sortOrder": 81
       }
@@ -525,7 +525,7 @@
     "relatedProducts": null,
     "images": [
       {
-        "filePath": "/assets/images/products/G26D1A_108.webp",
+        "filePath": "/admin/uploads/products/G26D1A_108.webp",
         "isPrimary": true,
         "sortOrder": 107
       }
@@ -554,7 +554,7 @@
     "relatedProducts": null,
     "images": [
       {
-        "filePath": "/assets/images/products/G26D1R_109.webp",
+        "filePath": "/admin/uploads/products/G26D1R_109.webp",
         "isPrimary": true,
         "sortOrder": 108
       }
@@ -583,7 +583,7 @@
     "relatedProducts": null,
     "images": [
       {
-        "filePath": "/assets/images/products/G30D1A_112.webp",
+        "filePath": "/admin/uploads/products/G30D1A_112.webp",
         "isPrimary": true,
         "sortOrder": 111
       }
@@ -612,7 +612,7 @@
     "relatedProducts": null,
     "images": [
       {
-        "filePath": "/assets/images/products/G36D1A_118.webp",
+        "filePath": "/admin/uploads/products/G36D1A_118.webp",
         "isPrimary": true,
         "sortOrder": 117
       }
@@ -641,7 +641,7 @@
     "relatedProducts": null,
     "images": [
       {
-        "filePath": "/assets/images/products/G30D1R_113.webp",
+        "filePath": "/admin/uploads/products/G30D1R_113.webp",
         "isPrimary": true,
         "sortOrder": 112
       }
@@ -670,7 +670,7 @@
     "relatedProducts": null,
     "images": [
       {
-        "filePath": "/assets/images/products/G36D1R_119.webp",
+        "filePath": "/admin/uploads/products/G36D1R_119.webp",
         "isPrimary": true,
         "sortOrder": 118
       }
@@ -699,12 +699,12 @@
     "relatedProducts": null,
     "images": [
       {
-        "filePath": "/assets/images/products/DLB-TGD30_hires.webp",
+        "filePath": "/admin/uploads/products/hires/DLB-TGD30_hires.webp",
         "isPrimary": true,
         "sortOrder": 0
       },
       {
-        "filePath": "/assets/images/products/DLB-TGD30_11.webp",
+        "filePath": "/admin/uploads/products/DLB-TGD30_11.webp",
         "isPrimary": false,
         "sortOrder": 10
       }
@@ -733,12 +733,12 @@
     "relatedProducts": null,
     "images": [
       {
-        "filePath": "/assets/images/products/DLB-TGD36_hires.webp",
+        "filePath": "/admin/uploads/products/hires/DLB-TGD36_hires.webp",
         "isPrimary": true,
         "sortOrder": 0
       },
       {
-        "filePath": "/assets/images/products/DLB-TGD36_13.webp",
+        "filePath": "/admin/uploads/products/DLB-TGD36_13.webp",
         "isPrimary": false,
         "sortOrder": 12
       }
@@ -767,12 +767,12 @@
     "relatedProducts": null,
     "images": [
       {
-        "filePath": "/assets/images/products/DLB-TGD40_hires.webp",
+        "filePath": "/admin/uploads/products/hires/DLB-TGD40_hires.webp",
         "isPrimary": true,
         "sortOrder": 0
       },
       {
-        "filePath": "/assets/images/products/DLB-TGD40_15.webp",
+        "filePath": "/admin/uploads/products/DLB-TGD40_15.webp",
         "isPrimary": false,
         "sortOrder": 14
       }
@@ -801,7 +801,7 @@
     "relatedProducts": null,
     "images": [
       {
-        "filePath": "/assets/images/products/DLB-TGQ30J_16.webp",
+        "filePath": "/admin/uploads/products/DLB-TGQ30J_16.webp",
         "isPrimary": true,
         "sortOrder": 15
       }
@@ -830,7 +830,7 @@
     "relatedProducts": null,
     "images": [
       {
-        "filePath": "/assets/images/products/DLB-TGQ36J_18.webp",
+        "filePath": "/admin/uploads/products/DLB-TGQ36J_18.webp",
         "isPrimary": true,
         "sortOrder": 17
       }
@@ -859,7 +859,7 @@
     "relatedProducts": null,
     "images": [
       {
-        "filePath": "/assets/images/products/DLB-TGQ40J_20.webp",
+        "filePath": "/admin/uploads/products/DLB-TGQ40J_20.webp",
         "isPrimary": true,
         "sortOrder": 19
       }
@@ -888,7 +888,7 @@
     "relatedProducts": null,
     "images": [
       {
-        "filePath": "/assets/images/products/P-185_81.webp",
+        "filePath": "/admin/uploads/products/P-185_81.webp",
         "isPrimary": true,
         "sortOrder": 80
       }
@@ -917,7 +917,7 @@
     "relatedProducts": null,
     "images": [
       {
-        "filePath": "/assets/images/products/P-187_83.webp",
+        "filePath": "/admin/uploads/products/P-187_83.webp",
         "isPrimary": true,
         "sortOrder": 82
       }
@@ -946,7 +946,7 @@
     "relatedProducts": null,
     "images": [
       {
-        "filePath": "/assets/images/products/G30D1T_116.webp",
+        "filePath": "/admin/uploads/products/G30D1T_116.webp",
         "isPrimary": true,
         "sortOrder": 115
       }
@@ -975,12 +975,12 @@
     "relatedProducts": null,
     "images": [
       {
-        "filePath": "/assets/images/products/DLB-GD30_hires.webp",
+        "filePath": "/admin/uploads/products/hires/DLB-GD30_hires.webp",
         "isPrimary": true,
         "sortOrder": 0
       },
       {
-        "filePath": "/assets/images/products/DLB-GD30_12.webp",
+        "filePath": "/admin/uploads/products/DLB-GD30_12.webp",
         "isPrimary": false,
         "sortOrder": 11
       }
@@ -1009,12 +1009,12 @@
     "relatedProducts": null,
     "images": [
       {
-        "filePath": "/assets/images/products/DLB-GD36_hires.webp",
+        "filePath": "/admin/uploads/products/hires/DLB-GD36_hires.webp",
         "isPrimary": true,
         "sortOrder": 0
       },
       {
-        "filePath": "/assets/images/products/DLB-GD36_14.webp",
+        "filePath": "/admin/uploads/products/DLB-GD36_14.webp",
         "isPrimary": false,
         "sortOrder": 13
       }
@@ -1043,7 +1043,7 @@
     "relatedProducts": null,
     "images": [
       {
-        "filePath": "/assets/images/products/DLB-GQ30J_17.webp",
+        "filePath": "/admin/uploads/products/DLB-GQ30J_17.webp",
         "isPrimary": true,
         "sortOrder": 16
       }
@@ -1072,7 +1072,7 @@
     "relatedProducts": null,
     "images": [
       {
-        "filePath": "/assets/images/products/DLB-GQ36J_19.webp",
+        "filePath": "/admin/uploads/products/DLB-GQ36J_19.webp",
         "isPrimary": true,
         "sortOrder": 18
       }
@@ -1101,7 +1101,7 @@
     "relatedProducts": null,
     "images": [
       {
-        "filePath": "/assets/images/products/P-189_85.webp",
+        "filePath": "/admin/uploads/products/P-189_85.webp",
         "isPrimary": true,
         "sortOrder": 84
       }
@@ -1130,7 +1130,7 @@
     "relatedProducts": null,
     "images": [
       {
-        "filePath": "/assets/images/products/P-190_86.webp",
+        "filePath": "/admin/uploads/products/P-190_86.webp",
         "isPrimary": true,
         "sortOrder": 85
       }
@@ -1159,7 +1159,7 @@
     "relatedProducts": null,
     "images": [
       {
-        "filePath": "/assets/images/products/P-191_87.webp",
+        "filePath": "/admin/uploads/products/P-191_87.webp",
         "isPrimary": true,
         "sortOrder": 86
       }
@@ -1188,7 +1188,7 @@
     "relatedProducts": null,
     "images": [
       {
-        "filePath": "/assets/images/products/G26DAG_122.webp",
+        "filePath": "/admin/uploads/products/G26DAG_122.webp",
         "isPrimary": true,
         "sortOrder": 121
       }
@@ -1217,7 +1217,7 @@
     "relatedProducts": null,
     "images": [
       {
-        "filePath": "/assets/images/products/G30DAG_124.webp",
+        "filePath": "/admin/uploads/products/G30DAG_124.webp",
         "isPrimary": true,
         "sortOrder": 123
       }
@@ -1246,7 +1246,7 @@
     "relatedProducts": null,
     "images": [
       {
-        "filePath": "/assets/images/products/G36DAG_126.webp",
+        "filePath": "/admin/uploads/products/G36DAG_126.webp",
         "isPrimary": true,
         "sortOrder": 125
       }
@@ -1275,7 +1275,7 @@
     "relatedProducts": null,
     "images": [
       {
-        "filePath": "/assets/images/products/G26DAS_123.webp",
+        "filePath": "/admin/uploads/products/G26DAS_123.webp",
         "isPrimary": true,
         "sortOrder": 122
       }
@@ -1304,7 +1304,7 @@
     "relatedProducts": null,
     "images": [
       {
-        "filePath": "/assets/images/products/G30DAS_125.webp",
+        "filePath": "/admin/uploads/products/G30DAS_125.webp",
         "isPrimary": true,
         "sortOrder": 124
       }
@@ -1333,7 +1333,7 @@
     "relatedProducts": null,
     "images": [
       {
-        "filePath": "/assets/images/products/G36DAS_127.webp",
+        "filePath": "/admin/uploads/products/G36DAS_127.webp",
         "isPrimary": true,
         "sortOrder": 126
       }
@@ -1362,7 +1362,7 @@
     "relatedProducts": null,
     "images": [
       {
-        "filePath": "/assets/images/products/DLB-TGQ30_21.webp",
+        "filePath": "/admin/uploads/products/DLB-TGQ30_21.webp",
         "isPrimary": true,
         "sortOrder": 20
       }
@@ -1391,7 +1391,7 @@
     "relatedProducts": null,
     "images": [
       {
-        "filePath": "/assets/images/products/DLB-GQ30_22.webp",
+        "filePath": "/admin/uploads/products/DLB-GQ30_22.webp",
         "isPrimary": true,
         "sortOrder": 21
       }
@@ -1420,7 +1420,7 @@
     "relatedProducts": null,
     "images": [
       {
-        "filePath": "/assets/images/products/DLB-GQ36_23.webp",
+        "filePath": "/admin/uploads/products/DLB-GQ36_23.webp",
         "isPrimary": true,
         "sortOrder": 22
       }
@@ -1449,7 +1449,7 @@
     "relatedProducts": null,
     "images": [
       {
-        "filePath": "/assets/images/products/DLB-GQ30T_24.webp",
+        "filePath": "/admin/uploads/products/DLB-GQ30T_24.webp",
         "isPrimary": true,
         "sortOrder": 23
       }
@@ -1478,7 +1478,7 @@
     "relatedProducts": null,
     "images": [
       {
-        "filePath": "/assets/images/products/DLB-GQ35T_25.webp",
+        "filePath": "/admin/uploads/products/DLB-GQ35T_25.webp",
         "isPrimary": true,
         "sortOrder": 24
       }
@@ -1507,7 +1507,7 @@
     "relatedProducts": null,
     "images": [
       {
-        "filePath": "/assets/images/products/J40CBB_128.webp",
+        "filePath": "/admin/uploads/products/J40CBB_128.webp",
         "isPrimary": true,
         "sortOrder": 127
       }
@@ -1536,7 +1536,7 @@
     "relatedProducts": null,
     "images": [
       {
-        "filePath": "/assets/images/products/DLB-TGQ40_27.webp",
+        "filePath": "/admin/uploads/products/DLB-TGQ40_27.webp",
         "isPrimary": true,
         "sortOrder": 26
       }
@@ -1565,7 +1565,7 @@
     "relatedProducts": null,
     "images": [
       {
-        "filePath": "/assets/images/products/DLB-GC50_29.webp",
+        "filePath": "/admin/uploads/products/DLB-GC50_29.webp",
         "isPrimary": true,
         "sortOrder": 28
       }
@@ -1594,7 +1594,7 @@
     "relatedProducts": null,
     "images": [
       {
-        "filePath": "/assets/images/products/DLB-GC60_31.webp",
+        "filePath": "/admin/uploads/products/DLB-GC60_31.webp",
         "isPrimary": true,
         "sortOrder": 30
       }
@@ -1623,7 +1623,7 @@
     "relatedProducts": null,
     "images": [
       {
-        "filePath": "/assets/images/products/DLB-GC70_33.webp",
+        "filePath": "/admin/uploads/products/DLB-GC70_33.webp",
         "isPrimary": true,
         "sortOrder": 32
       }
@@ -1652,7 +1652,7 @@
     "relatedProducts": null,
     "images": [
       {
-        "filePath": "/assets/images/products/DLB-GQ70_35.webp",
+        "filePath": "/admin/uploads/products/DLB-GQ70_35.webp",
         "isPrimary": true,
         "sortOrder": 34
       }
@@ -1681,7 +1681,7 @@
     "relatedProducts": null,
     "images": [
       {
-        "filePath": "/assets/images/products/DLB-GC80_36.webp",
+        "filePath": "/admin/uploads/products/DLB-GC80_36.webp",
         "isPrimary": true,
         "sortOrder": 35
       }
@@ -1710,7 +1710,7 @@
     "relatedProducts": null,
     "images": [
       {
-        "filePath": "/assets/images/products/DLB-GC90_38.webp",
+        "filePath": "/admin/uploads/products/DLB-GC90_38.webp",
         "isPrimary": true,
         "sortOrder": 37
       }
@@ -1739,7 +1739,7 @@
     "relatedProducts": null,
     "images": [
       {
-        "filePath": "/assets/images/products/DLB-GQ40_燃气：DLB-GQ40R_39.webp",
+        "filePath": "/admin/uploads/products/DLB-GQ40_燃气：DLB-GQ40R_39.webp",
         "isPrimary": true,
         "sortOrder": 38
       }
@@ -1768,7 +1768,7 @@
     "relatedProducts": null,
     "images": [
       {
-        "filePath": "/assets/images/products/DLB-GQ50_40.webp",
+        "filePath": "/admin/uploads/products/DLB-GQ50_40.webp",
         "isPrimary": true,
         "sortOrder": 39
       }
@@ -1797,7 +1797,7 @@
     "relatedProducts": null,
     "images": [
       {
-        "filePath": "/assets/images/products/DLB-GQ60_41.webp",
+        "filePath": "/admin/uploads/products/DLB-GQ60_41.webp",
         "isPrimary": true,
         "sortOrder": 40
       }
@@ -1826,7 +1826,7 @@
     "relatedProducts": null,
     "images": [
       {
-        "filePath": "/assets/images/products/DLB-GQ80_42.webp",
+        "filePath": "/admin/uploads/products/DLB-GQ80_42.webp",
         "isPrimary": true,
         "sortOrder": 41
       }
@@ -1855,7 +1855,7 @@
     "relatedProducts": null,
     "images": [
       {
-        "filePath": "/assets/images/products/DLB-GQ90_43.webp",
+        "filePath": "/admin/uploads/products/DLB-GQ90_43.webp",
         "isPrimary": true,
         "sortOrder": 42
       }
@@ -1884,7 +1884,7 @@
     "relatedProducts": null,
     "images": [
       {
-        "filePath": "/assets/images/products/DLB-GC60R_57.webp",
+        "filePath": "/admin/uploads/products/DLB-GC60R_57.webp",
         "isPrimary": true,
         "sortOrder": 56
       }
@@ -1913,7 +1913,7 @@
     "relatedProducts": null,
     "images": [
       {
-        "filePath": "/assets/images/products/DLB-GC70R_59.webp",
+        "filePath": "/admin/uploads/products/DLB-GC70R_59.webp",
         "isPrimary": true,
         "sortOrder": 58
       }
@@ -1942,7 +1942,7 @@
     "relatedProducts": null,
     "images": [
       {
-        "filePath": "/assets/images/products/DLB-GC90R_62.webp",
+        "filePath": "/admin/uploads/products/DLB-GC90R_62.webp",
         "isPrimary": true,
         "sortOrder": 61
       }
@@ -1971,7 +1971,7 @@
     "relatedProducts": null,
     "images": [
       {
-        "filePath": "/assets/images/products/DLB-GQ60R_63.webp",
+        "filePath": "/admin/uploads/products/DLB-GQ60R_63.webp",
         "isPrimary": true,
         "sortOrder": 62
       }
@@ -2000,7 +2000,7 @@
     "relatedProducts": null,
     "images": [
       {
-        "filePath": "/assets/images/products/DLB-GQ70R_64.webp",
+        "filePath": "/admin/uploads/products/DLB-GQ70R_64.webp",
         "isPrimary": true,
         "sortOrder": 63
       }
@@ -2029,7 +2029,7 @@
     "relatedProducts": null,
     "images": [
       {
-        "filePath": "/assets/images/products/DLB-GC80R_65.webp",
+        "filePath": "/admin/uploads/products/DLB-GC80R_65.webp",
         "isPrimary": true,
         "sortOrder": 64
       }
@@ -2058,7 +2058,7 @@
     "relatedProducts": null,
     "images": [
       {
-        "filePath": "/assets/images/products/DLB-GQ80R_66.webp",
+        "filePath": "/admin/uploads/products/DLB-GQ80R_66.webp",
         "isPrimary": true,
         "sortOrder": 65
       }
@@ -2087,7 +2087,7 @@
     "relatedProducts": null,
     "images": [
       {
-        "filePath": "/assets/images/products/DLB-GQ90R_67.webp",
+        "filePath": "/admin/uploads/products/DLB-GQ90R_67.webp",
         "isPrimary": true,
         "sortOrder": 66
       }
@@ -2116,7 +2116,7 @@
     "relatedProducts": null,
     "images": [
       {
-        "filePath": "/assets/images/products/DLB-GB50_28.webp",
+        "filePath": "/admin/uploads/products/DLB-GB50_28.webp",
         "isPrimary": true,
         "sortOrder": 27
       }
@@ -2145,7 +2145,7 @@
     "relatedProducts": null,
     "images": [
       {
-        "filePath": "/assets/images/products/DLB-GB60_30.webp",
+        "filePath": "/admin/uploads/products/DLB-GB60_30.webp",
         "isPrimary": true,
         "sortOrder": 29
       }
@@ -2174,7 +2174,7 @@
     "relatedProducts": null,
     "images": [
       {
-        "filePath": "/assets/images/products/DLB-GB70_32.webp",
+        "filePath": "/admin/uploads/products/DLB-GB70_32.webp",
         "isPrimary": true,
         "sortOrder": 31
       }
@@ -2203,7 +2203,7 @@
     "relatedProducts": null,
     "images": [
       {
-        "filePath": "/assets/images/products/DLB-GB80_34.webp",
+        "filePath": "/admin/uploads/products/DLB-GB80_34.webp",
         "isPrimary": true,
         "sortOrder": 33
       }
@@ -2232,7 +2232,7 @@
     "relatedProducts": null,
     "images": [
       {
-        "filePath": "/assets/images/products/DLB-GB90_37.webp",
+        "filePath": "/admin/uploads/products/DLB-GB90_37.webp",
         "isPrimary": true,
         "sortOrder": 36
       }
@@ -2261,7 +2261,7 @@
     "relatedProducts": null,
     "images": [
       {
-        "filePath": "/assets/images/products/DLB-GB60R_56.webp",
+        "filePath": "/admin/uploads/products/DLB-GB60R_56.webp",
         "isPrimary": true,
         "sortOrder": 55
       }
@@ -2290,7 +2290,7 @@
     "relatedProducts": null,
     "images": [
       {
-        "filePath": "/assets/images/products/DLB-GB70R_58.webp",
+        "filePath": "/admin/uploads/products/DLB-GB70R_58.webp",
         "isPrimary": true,
         "sortOrder": 57
       }
@@ -2319,7 +2319,7 @@
     "relatedProducts": null,
     "images": [
       {
-        "filePath": "/assets/images/products/DLB-GB80R_60.webp",
+        "filePath": "/admin/uploads/products/DLB-GB80R_60.webp",
         "isPrimary": true,
         "sortOrder": 59
       }
@@ -2348,7 +2348,7 @@
     "relatedProducts": null,
     "images": [
       {
-        "filePath": "/assets/images/products/DLB-GB90R_61.webp",
+        "filePath": "/admin/uploads/products/DLB-GB90R_61.webp",
         "isPrimary": true,
         "sortOrder": 60
       }
@@ -2377,7 +2377,7 @@
     "relatedProducts": null,
     "images": [
       {
-        "filePath": "/assets/images/products/G60EAC_132.webp",
+        "filePath": "/admin/uploads/products/G60EAC_132.webp",
         "isPrimary": true,
         "sortOrder": 131
       }
@@ -2406,7 +2406,7 @@
     "relatedProducts": null,
     "images": [
       {
-        "filePath": "/assets/images/products/G70EAC_134.webp",
+        "filePath": "/admin/uploads/products/G70EAC_134.webp",
         "isPrimary": true,
         "sortOrder": 133
       }
@@ -2435,7 +2435,7 @@
     "relatedProducts": null,
     "images": [
       {
-        "filePath": "/assets/images/products/G80EAC_136.webp",
+        "filePath": "/admin/uploads/products/G80EAC_136.webp",
         "isPrimary": true,
         "sortOrder": 135
       }
@@ -2464,7 +2464,7 @@
     "relatedProducts": null,
     "images": [
       {
-        "filePath": "/assets/images/products/G60EAS_133.webp",
+        "filePath": "/admin/uploads/products/G60EAS_133.webp",
         "isPrimary": true,
         "sortOrder": 132
       }
@@ -2493,7 +2493,7 @@
     "relatedProducts": null,
     "images": [
       {
-        "filePath": "/assets/images/products/G70EAS_135.webp",
+        "filePath": "/admin/uploads/products/G70EAS_135.webp",
         "isPrimary": true,
         "sortOrder": 134
       }
@@ -2522,7 +2522,7 @@
     "relatedProducts": null,
     "images": [
       {
-        "filePath": "/assets/images/products/G80EAS_137.webp",
+        "filePath": "/admin/uploads/products/G80EAS_137.webp",
         "isPrimary": true,
         "sortOrder": 136
       }
@@ -2551,7 +2551,7 @@
     "relatedProducts": null,
     "images": [
       {
-        "filePath": "/assets/images/products/DLB-BXC800_53.webp",
+        "filePath": "/admin/uploads/products/DLB-BXC800_53.webp",
         "isPrimary": true,
         "sortOrder": 52
       }
@@ -2580,7 +2580,7 @@
     "relatedProducts": null,
     "images": [
       {
-        "filePath": "/assets/images/products/G50AAB_129.webp",
+        "filePath": "/admin/uploads/products/G50AAB_129.webp",
         "isPrimary": true,
         "sortOrder": 128
       }
@@ -2609,7 +2609,7 @@
     "relatedProducts": null,
     "images": [
       {
-        "filePath": "/assets/images/products/G50AAC_130.webp",
+        "filePath": "/admin/uploads/products/G50AAC_130.webp",
         "isPrimary": true,
         "sortOrder": 129
       }
@@ -2638,7 +2638,7 @@
     "relatedProducts": null,
     "images": [
       {
-        "filePath": "/assets/images/products/G50GAT_131.webp",
+        "filePath": "/admin/uploads/products/G50GAT_131.webp",
         "isPrimary": true,
         "sortOrder": 130
       }
@@ -2667,7 +2667,7 @@
     "relatedProducts": null,
     "images": [
       {
-        "filePath": "/assets/images/products/DLB-XC100_44.webp",
+        "filePath": "/admin/uploads/products/DLB-XC100_44.webp",
         "isPrimary": true,
         "sortOrder": 43
       }
@@ -2696,7 +2696,7 @@
     "relatedProducts": null,
     "images": [
       {
-        "filePath": "/assets/images/products/DLB-XC120_46.webp",
+        "filePath": "/admin/uploads/products/DLB-XC120_46.webp",
         "isPrimary": true,
         "sortOrder": 45
       }
@@ -2725,7 +2725,7 @@
     "relatedProducts": null,
     "images": [
       {
-        "filePath": "/assets/images/products/DLB-XC80_68.webp",
+        "filePath": "/admin/uploads/products/DLB-XC80_68.webp",
         "isPrimary": true,
         "sortOrder": 67
       }
@@ -2754,7 +2754,7 @@
     "relatedProducts": null,
     "images": [
       {
-        "filePath": "/assets/images/products/DLB-XC80R_70.webp",
+        "filePath": "/admin/uploads/products/DLB-XC80R_70.webp",
         "isPrimary": true,
         "sortOrder": 69
       }
@@ -2783,7 +2783,7 @@
     "relatedProducts": null,
     "images": [
       {
-        "filePath": "/assets/images/products/DLB-XC100R_72.webp",
+        "filePath": "/admin/uploads/products/DLB-XC100R_72.webp",
         "isPrimary": true,
         "sortOrder": 71
       }
@@ -2812,7 +2812,7 @@
     "relatedProducts": null,
     "images": [
       {
-        "filePath": "/assets/images/products/DLB-XC120R_74.webp",
+        "filePath": "/admin/uploads/products/DLB-XC120R_74.webp",
         "isPrimary": true,
         "sortOrder": 73
       }
@@ -2841,7 +2841,7 @@
     "relatedProducts": null,
     "images": [
       {
-        "filePath": "/assets/images/products/DLB-QXC100_45.webp",
+        "filePath": "/admin/uploads/products/DLB-QXC100_45.webp",
         "isPrimary": true,
         "sortOrder": 44
       }
@@ -2870,7 +2870,7 @@
     "relatedProducts": null,
     "images": [
       {
-        "filePath": "/assets/images/products/DLB-QXC120_47.webp",
+        "filePath": "/admin/uploads/products/DLB-QXC120_47.webp",
         "isPrimary": true,
         "sortOrder": 46
       }
@@ -2899,7 +2899,7 @@
     "relatedProducts": null,
     "images": [
       {
-        "filePath": "/assets/images/products/DLB-QXC80_69.webp",
+        "filePath": "/admin/uploads/products/DLB-QXC80_69.webp",
         "isPrimary": true,
         "sortOrder": 68
       }
@@ -2928,7 +2928,7 @@
     "relatedProducts": null,
     "images": [
       {
-        "filePath": "/assets/images/products/DLB-QXC80R_71.webp",
+        "filePath": "/admin/uploads/products/DLB-QXC80R_71.webp",
         "isPrimary": true,
         "sortOrder": 70
       }
@@ -2957,7 +2957,7 @@
     "relatedProducts": null,
     "images": [
       {
-        "filePath": "/assets/images/products/DLB-QXC100R_73.webp",
+        "filePath": "/admin/uploads/products/DLB-QXC100R_73.webp",
         "isPrimary": true,
         "sortOrder": 72
       }
@@ -2986,7 +2986,7 @@
     "relatedProducts": null,
     "images": [
       {
-        "filePath": "/assets/images/products/DLB-QXC120R_75.webp",
+        "filePath": "/admin/uploads/products/DLB-QXC120R_75.webp",
         "isPrimary": true,
         "sortOrder": 74
       }
@@ -3015,7 +3015,7 @@
     "relatedProducts": null,
     "images": [
       {
-        "filePath": "/assets/images/products/DLB-ZNT_54.webp",
+        "filePath": "/admin/uploads/products/DLB-ZNT_54.webp",
         "isPrimary": true,
         "sortOrder": 53
       }
@@ -3044,7 +3044,7 @@
     "relatedProducts": null,
     "images": [
       {
-        "filePath": "/assets/images/products/DLB-ZNY_55.webp",
+        "filePath": "/admin/uploads/products/DLB-ZNY_55.webp",
         "isPrimary": true,
         "sortOrder": 54
       }
@@ -3073,7 +3073,7 @@
     "relatedProducts": null,
     "images": [
       {
-        "filePath": "/assets/images/products/M3DAD_138.webp",
+        "filePath": "/admin/uploads/products/M3DAD_138.webp",
         "isPrimary": true,
         "sortOrder": 137
       }
@@ -3102,7 +3102,7 @@
     "relatedProducts": null,
     "images": [
       {
-        "filePath": "/assets/images/products/M6DBD_139.webp",
+        "filePath": "/admin/uploads/products/M6DBD_139.webp",
         "isPrimary": true,
         "sortOrder": 138
       }
@@ -3131,7 +3131,7 @@
     "relatedProducts": null,
     "images": [
       {
-        "filePath": "/assets/images/products/M6RAD_140.webp",
+        "filePath": "/admin/uploads/products/M6RAD_140.webp",
         "isPrimary": true,
         "sortOrder": 139
       }
@@ -3160,7 +3160,7 @@
     "relatedProducts": null,
     "images": [
       {
-        "filePath": "/assets/images/products/M4DAD_1_141.webp",
+        "filePath": "/admin/uploads/products/M4DAD_1_141.webp",
         "isPrimary": true,
         "sortOrder": 140
       }
@@ -3189,7 +3189,7 @@
     "relatedProducts": null,
     "images": [
       {
-        "filePath": "/assets/images/products/M4DAD_2_142.webp",
+        "filePath": "/admin/uploads/products/M4DAD_2_142.webp",
         "isPrimary": true,
         "sortOrder": 141
       }
@@ -3218,7 +3218,7 @@
     "relatedProducts": null,
     "images": [
       {
-        "filePath": "/assets/images/products/M6DAD_143.webp",
+        "filePath": "/admin/uploads/products/M6DAD_143.webp",
         "isPrimary": true,
         "sortOrder": 142
       }
@@ -3247,7 +3247,7 @@
     "relatedProducts": null,
     "images": [
       {
-        "filePath": "/assets/images/products/B4RTD_144.webp",
+        "filePath": "/admin/uploads/products/B4RTD_144.webp",
         "isPrimary": true,
         "sortOrder": 143
       }
@@ -3276,7 +3276,7 @@
     "relatedProducts": null,
     "images": [
       {
-        "filePath": "/assets/images/products/B6RBD_145.webp",
+        "filePath": "/admin/uploads/products/B6RBD_145.webp",
         "isPrimary": true,
         "sortOrder": 144
       }
@@ -3305,7 +3305,7 @@
     "relatedProducts": null,
     "images": [
       {
-        "filePath": "/assets/images/products/B8RBD_146.webp",
+        "filePath": "/admin/uploads/products/B8RBD_146.webp",
         "isPrimary": true,
         "sortOrder": 145
       }
@@ -3334,7 +3334,7 @@
     "relatedProducts": null,
     "images": [
       {
-        "filePath": "/assets/images/products/LZ80D1B_153.webp",
+        "filePath": "/admin/uploads/products/LZ80D1B_153.webp",
         "isPrimary": true,
         "sortOrder": 152
       }
@@ -3363,7 +3363,7 @@
     "relatedProducts": null,
     "images": [
       {
-        "filePath": "/assets/images/products/DLB-PZJ80_48.webp",
+        "filePath": "/admin/uploads/products/DLB-PZJ80_48.webp",
         "isPrimary": true,
         "sortOrder": 47
       }
@@ -3392,7 +3392,7 @@
     "relatedProducts": null,
     "images": [
       {
-        "filePath": "/assets/images/products/DLB-PZJ100_49.webp",
+        "filePath": "/admin/uploads/products/DLB-PZJ100_49.webp",
         "isPrimary": true,
         "sortOrder": 48
       }
@@ -3421,7 +3421,7 @@
     "relatedProducts": null,
     "images": [
       {
-        "filePath": "/assets/images/products/DLB-PZJ120_50.webp",
+        "filePath": "/admin/uploads/products/DLB-PZJ120_50.webp",
         "isPrimary": true,
         "sortOrder": 49
       }
@@ -3450,7 +3450,7 @@
     "relatedProducts": null,
     "images": [
       {
-        "filePath": "/assets/images/products/DLB-PZJ200_51.webp",
+        "filePath": "/admin/uploads/products/DLB-PZJ200_51.webp",
         "isPrimary": true,
         "sortOrder": 50
       }
@@ -3479,7 +3479,7 @@
     "relatedProducts": null,
     "images": [
       {
-        "filePath": "/assets/images/products/DLB-PZJ400_52.webp",
+        "filePath": "/admin/uploads/products/DLB-PZJ400_52.webp",
         "isPrimary": true,
         "sortOrder": 51
       }
@@ -3508,7 +3508,7 @@
     "relatedProducts": null,
     "images": [
       {
-        "filePath": "/assets/images/products/Z8FCB_154.webp",
+        "filePath": "/admin/uploads/products/Z8FCB_154.webp",
         "isPrimary": true,
         "sortOrder": 153
       }
@@ -3537,7 +3537,7 @@
     "relatedProducts": null,
     "images": [
       {
-        "filePath": "/assets/images/products/Z12FCB_155.webp",
+        "filePath": "/admin/uploads/products/Z12FCB_155.webp",
         "isPrimary": true,
         "sortOrder": 154
       }
@@ -3566,7 +3566,7 @@
     "relatedProducts": null,
     "images": [
       {
-        "filePath": "/assets/images/products/Z6FCB_156.webp",
+        "filePath": "/admin/uploads/products/Z6FCB_156.webp",
         "isPrimary": true,
         "sortOrder": 155
       }
@@ -3595,7 +3595,7 @@
     "relatedProducts": null,
     "images": [
       {
-        "filePath": "/assets/images/products/P-181_77.webp",
+        "filePath": "/admin/uploads/products/P-181_77.webp",
         "isPrimary": true,
         "sortOrder": 76
       }
@@ -3624,7 +3624,7 @@
     "relatedProducts": null,
     "images": [
       {
-        "filePath": "/assets/images/products/GT1D1B_147.webp",
+        "filePath": "/admin/uploads/products/GT1D1B_147.webp",
         "isPrimary": true,
         "sortOrder": 146
       }
@@ -3653,7 +3653,7 @@
     "relatedProducts": null,
     "images": [
       {
-        "filePath": "/assets/images/products/GT2D1B_148.webp",
+        "filePath": "/admin/uploads/products/GT2D1B_148.webp",
         "isPrimary": true,
         "sortOrder": 147
       }
@@ -3682,7 +3682,7 @@
     "relatedProducts": null,
     "images": [
       {
-        "filePath": "/assets/images/products/Y12D1C_149.webp",
+        "filePath": "/admin/uploads/products/Y12D1C_149.webp",
         "isPrimary": true,
         "sortOrder": 148
       }
@@ -3711,7 +3711,7 @@
     "relatedProducts": null,
     "images": [
       {
-        "filePath": "/assets/images/products/Y12D2C_150.webp",
+        "filePath": "/admin/uploads/products/Y12D2C_150.webp",
         "isPrimary": true,
         "sortOrder": 149
       }
@@ -3740,7 +3740,7 @@
     "relatedProducts": null,
     "images": [
       {
-        "filePath": "/assets/images/products/Y24C1C_151.webp",
+        "filePath": "/admin/uploads/products/Y24C1C_151.webp",
         "isPrimary": true,
         "sortOrder": 150
       }
@@ -3769,7 +3769,7 @@
     "relatedProducts": null,
     "images": [
       {
-        "filePath": "/assets/images/products/Y50D1C_152.webp",
+        "filePath": "/admin/uploads/products/Y50D1C_152.webp",
         "isPrimary": true,
         "sortOrder": 151
       }
@@ -3798,7 +3798,7 @@
     "relatedProducts": null,
     "images": [
       {
-        "filePath": "/assets/images/products/P-188_84.webp",
+        "filePath": "/admin/uploads/products/P-188_84.webp",
         "isPrimary": true,
         "sortOrder": 83
       }
@@ -3827,7 +3827,7 @@
     "relatedProducts": null,
     "images": [
       {
-        "filePath": "/assets/images/products/DLB-A60-J_88.webp",
+        "filePath": "/admin/uploads/products/DLB-A60-J_88.webp",
         "isPrimary": true,
         "sortOrder": 87
       }
@@ -3856,7 +3856,7 @@
     "relatedProducts": null,
     "images": [
       {
-        "filePath": "/assets/images/products/DLB-A60-G_89.webp",
+        "filePath": "/admin/uploads/products/DLB-A60-G_89.webp",
         "isPrimary": true,
         "sortOrder": 88
       }
@@ -3885,7 +3885,7 @@
     "relatedProducts": null,
     "images": [
       {
-        "filePath": "/assets/images/products/DLB-A60-Z_90.webp",
+        "filePath": "/admin/uploads/products/DLB-A60-Z_90.webp",
         "isPrimary": true,
         "sortOrder": 89
       }
@@ -3914,7 +3914,7 @@
     "relatedProducts": null,
     "images": [
       {
-        "filePath": "/assets/images/products/DLB-A2800_91.webp",
+        "filePath": "/admin/uploads/products/DLB-A2800_91.webp",
         "isPrimary": true,
         "sortOrder": 90
       }
@@ -3943,7 +3943,7 @@
     "relatedProducts": null,
     "images": [
       {
-        "filePath": "/assets/images/products/DLB-A3600_92.webp",
+        "filePath": "/admin/uploads/products/DLB-A3600_92.webp",
         "isPrimary": true,
         "sortOrder": 91
       }
@@ -3972,7 +3972,7 @@
     "relatedProducts": null,
     "images": [
       {
-        "filePath": "/assets/images/products/DLB-A4600_93.webp",
+        "filePath": "/admin/uploads/products/DLB-A4600_93.webp",
         "isPrimary": true,
         "sortOrder": 92
       }
@@ -4001,7 +4001,7 @@
     "relatedProducts": null,
     "images": [
       {
-        "filePath": "/assets/images/products/DLB-A5400_94.webp",
+        "filePath": "/admin/uploads/products/DLB-A5400_94.webp",
         "isPrimary": true,
         "sortOrder": 93
       }
@@ -4030,7 +4030,7 @@
     "relatedProducts": null,
     "images": [
       {
-        "filePath": "/assets/images/products/G26DAA_110.webp",
+        "filePath": "/admin/uploads/products/G26DAA_110.webp",
         "isPrimary": true,
         "sortOrder": 109
       }
@@ -4059,7 +4059,7 @@
     "relatedProducts": null,
     "images": [
       {
-        "filePath": "/assets/images/products/G30DAA_114.webp",
+        "filePath": "/admin/uploads/products/G30DAA_114.webp",
         "isPrimary": true,
         "sortOrder": 113
       }
@@ -4088,7 +4088,7 @@
     "relatedProducts": null,
     "images": [
       {
-        "filePath": "/assets/images/products/G26DAR_111.webp",
+        "filePath": "/admin/uploads/products/G26DAR_111.webp",
         "isPrimary": true,
         "sortOrder": 110
       }
@@ -4117,7 +4117,7 @@
     "relatedProducts": null,
     "images": [
       {
-        "filePath": "/assets/images/products/G30DAR_115.webp",
+        "filePath": "/admin/uploads/products/G30DAR_115.webp",
         "isPrimary": true,
         "sortOrder": 114
       }
@@ -4146,7 +4146,7 @@
     "relatedProducts": null,
     "images": [
       {
-        "filePath": "/assets/images/products/G36DAR_121.webp",
+        "filePath": "/admin/uploads/products/G36DAR_121.webp",
         "isPrimary": true,
         "sortOrder": 120
       }
@@ -4175,7 +4175,7 @@
     "relatedProducts": null,
     "images": [
       {
-        "filePath": "/assets/images/products/G30DFA_117.webp",
+        "filePath": "/admin/uploads/products/G30DFA_117.webp",
         "isPrimary": true,
         "sortOrder": 116
       }
@@ -4204,7 +4204,7 @@
     "relatedProducts": null,
     "images": [
       {
-        "filePath": "/assets/images/products/G36DAA_120.webp",
+        "filePath": "/admin/uploads/products/G36DAA_120.webp",
         "isPrimary": true,
         "sortOrder": 119
       }
@@ -4233,7 +4233,7 @@
     "relatedProducts": null,
     "images": [
       {
-        "filePath": "/assets/images/products/DLB-A6200_95.webp",
+        "filePath": "/admin/uploads/products/DLB-A6200_95.webp",
         "isPrimary": true,
         "sortOrder": 94
       }
@@ -4262,7 +4262,7 @@
     "relatedProducts": null,
     "images": [
       {
-        "filePath": "/assets/images/products/HKQPJ400-VIII_157.webp",
+        "filePath": "/admin/uploads/products/HKQPJ400-VIII_157.webp",
         "isPrimary": true,
         "sortOrder": 156
       }
@@ -4291,7 +4291,7 @@
     "relatedProducts": null,
     "images": [
       {
-        "filePath": "/assets/images/products/HKQPJ500-VIII_158.webp",
+        "filePath": "/admin/uploads/products/HKQPJ500-VIII_158.webp",
         "isPrimary": true,
         "sortOrder": 157
       }
@@ -4320,7 +4320,7 @@
     "relatedProducts": null,
     "images": [
       {
-        "filePath": "/assets/images/products/HKQTJ300_159.webp",
+        "filePath": "/admin/uploads/products/HKQTJ300_159.webp",
         "isPrimary": true,
         "sortOrder": 158
       }
@@ -4349,7 +4349,7 @@
     "relatedProducts": null,
     "images": [
       {
-        "filePath": "/assets/images/products/HKQTJ600-VII_160.webp",
+        "filePath": "/admin/uploads/products/HKQTJ600-VII_160.webp",
         "isPrimary": true,
         "sortOrder": 159
       }
@@ -4378,7 +4378,7 @@
     "relatedProducts": null,
     "images": [
       {
-        "filePath": "/assets/images/products/HKQTJ200-VII_161.webp",
+        "filePath": "/admin/uploads/products/HKQTJ200-VII_161.webp",
         "isPrimary": true,
         "sortOrder": 160
       }
@@ -4407,7 +4407,7 @@
     "relatedProducts": null,
     "images": [
       {
-        "filePath": "/assets/images/products/HKDQJ300-VII_162.webp",
+        "filePath": "/admin/uploads/products/HKDQJ300-VII_162.webp",
         "isPrimary": true,
         "sortOrder": 161
       }
@@ -4436,7 +4436,7 @@
     "relatedProducts": null,
     "images": [
       {
-        "filePath": "/assets/images/products/HKDQJ300_163.webp",
+        "filePath": "/admin/uploads/products/HKDQJ300_163.webp",
         "isPrimary": true,
         "sortOrder": 162
       }
@@ -4465,7 +4465,7 @@
     "relatedProducts": null,
     "images": [
       {
-        "filePath": "/assets/images/products/HKXQJ-400_164.webp",
+        "filePath": "/admin/uploads/products/HKXQJ-400_164.webp",
         "isPrimary": true,
         "sortOrder": 163
       }
@@ -4494,7 +4494,7 @@
     "relatedProducts": null,
     "images": [
       {
-        "filePath": "/assets/images/products/HKQPJ-300_165.webp",
+        "filePath": "/admin/uploads/products/HKQPJ-300_165.webp",
         "isPrimary": true,
         "sortOrder": 164
       }
@@ -4523,7 +4523,7 @@
     "relatedProducts": null,
     "images": [
       {
-        "filePath": "/assets/images/products/HKJGJ380-VI_166.webp",
+        "filePath": "/admin/uploads/products/HKJGJ380-VI_166.webp",
         "isPrimary": true,
         "sortOrder": 165
       }
@@ -4552,7 +4552,7 @@
     "relatedProducts": null,
     "images": [
       {
-        "filePath": "/assets/images/products/HKFBJ_167.webp",
+        "filePath": "/admin/uploads/products/HKFBJ_167.webp",
         "isPrimary": true,
         "sortOrder": 166
       }
