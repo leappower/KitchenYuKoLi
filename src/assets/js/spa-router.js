@@ -270,6 +270,22 @@
         skel.style.display = "";
         skel.removeAttribute("hidden");
       }
+      // Close all open dropdowns BEFORE Swup replaces DOM
+      try {
+        var selectors = [
+          ".prod-dropdown-wrap.is-open",
+          ".app-dropdown-wrap.is-open",
+          ".sup-dropdown-wrap.is-open",
+          ".abt-dropdown-wrap.is-open",
+          ".cnt-dropdown-wrap.is-open",
+        ];
+        for (var i = 0; i < selectors.length; i++) {
+          var els = document.querySelectorAll(selectors[i]);
+          for (var j = 0; j < els.length; j++) {
+            els[j].classList.remove("is-open");
+          }
+        }
+      } catch (e) {}
     });
 
     // ── Graceful degradation ──────────────────────────────────────
