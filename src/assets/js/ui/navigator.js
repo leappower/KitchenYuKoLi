@@ -1264,6 +1264,9 @@
     document.addEventListener(
       "mouseover",
       function (e) {
+        // Block hover-based open for ~800ms after SPA navigation starts,
+        // since the mouse may still be over the dropdown area from the previous page.
+        if (window.__dropdownHoverBlocked) return;
         var wrap = e.target.closest(DROPDOWN_WRAP_SELECTORS.join(", "));
         if (wrap && !wrap.classList.contains("touch-device")) {
           closeOtherDropdowns(wrap);

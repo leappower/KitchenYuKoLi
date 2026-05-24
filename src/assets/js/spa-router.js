@@ -285,6 +285,15 @@
             els[j].classList.remove("is-open");
           }
         }
+        // Temporarily suppress mouseover re-opening of dropdowns.
+        // When user clicks an item, their mouse remains over the dropdown area.
+        // After Swup navigation completes, the mouse position may trigger
+        // mouseover on the new page, re-opening the dropdown.
+        // Block mouseover-based open for 800ms after visit:start.
+        global.__dropdownHoverBlocked = true;
+        setTimeout(function () {
+          global.__dropdownHoverBlocked = false;
+        }, 800);
       } catch (e) {}
     });
 
