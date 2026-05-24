@@ -33,13 +33,6 @@
 (function (global) {
   "use strict";
 
-  var DROPDOWN_WRAP_SELECTORS = [
-    ".prod-dropdown-wrap", ".app-dropdown-wrap",
-    ".sup-dropdown-wrap", ".abt-dropdown-wrap", ".cnt-dropdown-wrap",
-  ];
-
-  var DROPDOWN_PANEL_SELECTOR = ".prod-dropdown-panel, .app-dropdown-panel, .sup-dropdown-panel, .abt-dropdown-panel, .cnt-dropdown-panel";
-
   var _spaState = { currentRoute: global.location.pathname.replace(/\/$/, "") || "/" };
   var _spaListeners = [];
   var _spaRegs = {};
@@ -183,9 +176,22 @@
       }
     }
 
+    // ── visit:start ──────────────────────────────────────────────────
+    var _lastSwupNavStart = 0;
+    swupHooks.on("visit:start", function () {
+      global.__spaNavigating = true;
+      _lastSwupNavStart = Date.now();
+      var skel = document.getElementById("skeleton-overlay");
+      if (skel) {
+        skel.style.display = "";
+        skel.removeAttribute("hidden");
+      }
+    });
+
     // ── content:replace ──────────────────────────────────────────────
     swupHooks.on("content:replace", function (visit) {
       global.__spaNavigating = false;
+      _lastSwupNavStart = 0;
       _spaState.currentRoute = global.location.pathname.replace(/\/$/, "") || "/";
       var skel = document.getElementById("skeleton-overlay");
       if (skel) {
@@ -212,102 +218,7 @@
       dispatchSpaLoad();
     });
 
-    // ── visit:start ──────────────────────────────────────────────────
-    var _lastSwupNavStart = 0;
-    swupHooks.on("visit:start", function () {
-      global.__spaNavigating = true;
-      _lastSwupNavStart = Date.now();
-      var skel = document.getElementById("skeleton-overlay");
-      if (skel) {
-        skel.style.display = "";
-        skel.removeAttribute("hidden");
-      }
-      // Close all dropdowns: remove is-open, block pointer-events,
-      // and force display:none on all panels.
-      // display:none is the only reliable way to override the CSS rule:
-      //   .dropdown-wrap:hover .dropdown-panel { visibility:visible }
-      // which fires instantly when the mouse is still over the area
-      // after SPA navigation loads new DOM.
-      try {
-        for (var wi = 0; wi < DROPDOWN_WRAP_SELECTORS.length; wi++) {
-          var wraps = document.querySelectorAll(DROPDOWN_WRAP_SELECTORS[wi]);
-          for (var wj = 0; wj < wraps.length; wj++) {
-            wraps[wj].classList.remove("is-open");
-            wraps[wj].style.pointerEvents = "none";
-            var panel = wraps[wj].querySelector(DROPDOWN_PANEL_SELECTOR);
-            if (panel) {
-              panel.style.display = "none";
-              panel.dataset.navHidden = "1";
-            }
-          }
-        }
-        global.__pendingPointerRestore = true;
-      } catch (e) {}
-    });
-
-    // ── Restore dropdown state (called after navigation completes) ──
-    //
-    // Root cause: dropdown-styles.js injects CSS:
-    //   .dropdown-wrap:hover .dropdown-panel { visibility:visible; opacity:1 }
-    // After SPA navigation restores pointer-events, CSS :hover matches
-    // the new DOM instantly if the cursor stayed over the area.
-    //
-    // Fix: add .spa-cooldown class to all wraps when restoring.
-    // CSS :hover on .spa-cooldown wraps does NOT trigger the panel.
-    // Remove .spa-cooldown after 300ms — long enough for the browser
-    // to repaint and the hover state to naturally settle (if mouse
-    // still over the area, CSS :hover will re-apply on the next frame).
-    function _restoreDropdownState() {
-      if (!global.__pendingPointerRestore) return;
-      global.__pendingPointerRestore = false;
-
-      for (var wi = 0; wi < DROPDOWN_WRAP_SELECTORS.length; wi++) {
-        var wraps = document.querySelectorAll(DROPDOWN_WRAP_SELECTORS[wi]);
-        for (var wj = 0; wj < wraps.length; wj++) {
-          wraps[wj].classList.add("spa-cooldown");
-          wraps[wj].style.pointerEvents = "";
-          var panel = wraps[wj].querySelector(DROPDOWN_PANEL_SELECTOR);
-          if (panel && panel.dataset.navHidden === "1") {
-            panel.style.display = "";
-            delete panel.dataset.navHidden;
-          }
-        }
-      }
-
-      setTimeout(function () {
-        for (var wi = 0; wi < DROPDOWN_WRAP_SELECTORS.length; wi++) {
-          var wraps = document.querySelectorAll(DROPDOWN_WRAP_SELECTORS[wi]);
-          for (var wj = 0; wj < wraps.length; wj++) {
-            wraps[wj].classList.remove("spa-cooldown");
-          }
-        }
-      }, 300);
-    }
-
-    swupHooks.on("visit:abort", _restoreDropdownState);
-    swupHooks.on("fetch:error", _restoreDropdownState);
-
-    // ── Post-navigation cleanup: close any newly injected dropdowns ──
-    swupHooks.on("content:replace", function () {
-      _lastSwupNavStart = 0;
-      requestAnimationFrame(function () {
-        // spa:load may have injected new dropdown panels.
-        // Force display:none on them before restoring state.
-        for (var wi = 0; wi < DROPDOWN_WRAP_SELECTORS.length; wi++) {
-          var wraps = document.querySelectorAll(DROPDOWN_WRAP_SELECTORS[wi]);
-          for (var wj = 0; wj < wraps.length; wj++) {
-            wraps[wj].classList.remove("is-open");
-            var panel = wraps[wj].querySelector(DROPDOWN_PANEL_SELECTOR);
-            if (panel && panel.dataset.navHidden !== "1") {
-              panel.style.display = "none";
-              panel.dataset.navHidden = "1";
-            }
-          }
-        }
-        _restoreDropdownState();
-      });
-    });
-
+    // ── Safety net ──────────────────────────────────────────────────
     document.addEventListener(
       "click",
       function (e) {

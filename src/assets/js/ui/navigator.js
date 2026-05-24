@@ -614,18 +614,13 @@
    * @param {HTMLElement|null} keepOpen - 保持打开的 dropdown 容器
    */
   function closeOtherDropdowns(keepOpen) {
-    var closed = 0;
     for (var i = 0; i < DROPDOWN_WRAP_SELECTORS.length; i++) {
       var openDropdowns = document.querySelectorAll(DROPDOWN_WRAP_SELECTORS[i] + ".is-open");
       for (var j = 0; j < openDropdowns.length; j++) {
         if (openDropdowns[j] !== keepOpen) {
           openDropdowns[j].classList.remove("is-open");
-          closed++;
         }
       }
-    }
-    if (closed > 0) {
-      console.log('[nav:closeDropdowns] closed ' + closed + ' dropdowns, keepOpen=' + (keepOpen ? keepOpen.className.substring(0,30) : 'null'));
     }
   }
 
@@ -1244,7 +1239,6 @@
    * These listeners survive SPA navigations (document is not destroyed).
    */
   function registerListeners() {
-    console.log("[nav:register] registerListeners()");
     /* Inject CSS (one-time — these functions check by ID internally) */
     if (typeof window.DropdownBaseStyles !== "undefined" && window.DropdownBaseStyles.inject) {
       window.DropdownBaseStyles.inject();
@@ -1252,52 +1246,57 @@
 
     initSearchInteraction();
 
-    /* Unified click handler: toggle dropdown on trigger click, close on outside click */
+    /* Unified click handler: close dropdowns on link-click or outside-click */
     document.addEventListener(
       "click",
       function (e) {
-        var tag = e.target.tagName.toLowerCase();
-        var href = e.target.getAttribute ? e.target.getAttribute("href") : null;
-        var isLink = tag === 'a' && href && href !== 'javascript:void(0)' && href !== '#';
         var clickedWrap = e.target.closest(DROPDOWN_WRAP_SELECTORS.join(", "));
-        var inWrap = !!clickedWrap;
-        var isOpen = inWrap ? clickedWrap.classList.contains("is-open") : false;
-        console.log('[nav:globalclick] tag=' + tag + ' href=' + (href||'null') + ' isLink=' + isLink + ' inWrap=' + inWrap + ' isOpen=' + isOpen);
-
-        // Find closest trigger
+        // Find trigger inside clicked element
         var trigger = e.target.closest(DROPDOWN_TRIGGER_SELECTORS.join(", "));
-        if (trigger) {
-          if (window.innerWidth <= 720) return;
-          // Clicking a navigable <a> link inside trigger: close all and navigate
-          if (isLink) {
-            closeOtherDropdowns(null);
-            return;
-          }
-          // Clicking trigger button/span: toggle
+        if (trigger && window.innerWidth > 720) {
           var wrap = trigger.closest(DROPDOWN_WRAP_SELECTORS.join(", "));
           if (wrap) {
+            var tag = e.target.tagName.toLowerCase();
+            var href = e.target.getAttribute ? e.target.getAttribute("href") : null;
+            var isLink = tag === 'a' && href && href !== 'javascript:void(0)' && href !== '#';
+            if (isLink) {
+              // Clicking a navigable link: close all dropdowns
+              closeOtherDropdowns(null);
+              return;
+            }
+            // Clicking trigger button/span: toggle (touch fallback)
             closeOtherDropdowns(wrap);
             wrap.classList.toggle("is-open");
             return;
           }
         }
-
         // Outside click: close any open dropdowns
         closeOtherDropdowns(clickedWrap || null);
       },
       true
     );
 
-    /* Dropdown hover via event delegation */
+    /* Dropdown hover via event delegation — manages is-open via JS */
     document.addEventListener(
       "mouseover",
       function (e) {
-        var targetWrap = e.target.closest(DROPDOWN_WRAP_SELECTORS.join(", "));
-        var hasIsOpen = targetWrap ? targetWrap.classList.contains("is-open") : false;
-        console.log('[nav:mouseover] hasWrap=' + !!targetWrap + ' wasOpen=' + hasIsOpen);
         var wrap = e.target.closest(DROPDOWN_WRAP_SELECTORS.join(", "));
         if (wrap && !wrap.classList.contains("touch-device")) {
+          if (!wrap.classList.contains("is-open")) {
+            wrap.classList.add("is-open");
+          }
           closeOtherDropdowns(wrap);
+        }
+      },
+      true
+    );
+
+    document.addEventListener(
+      "mouseleave",
+      function (e) {
+        var wrap = e.target.closest(DROPDOWN_WRAP_SELECTORS.join(", "));
+        if (wrap && !wrap.classList.contains("touch-device")) {
+          wrap.classList.remove("is-open");
         }
       },
       true
@@ -1320,8 +1319,8 @@
    * Can be called multiple times safely (idempotent by nature).
    */
   function mountNavigator() {
-    console.log("[nav:mount] mountNavigator() — tm=" + (!!window.translationManager) + " initialized=" + (window.translationManager ? window.translationManager.isInitialized : "N/A") + " retries=" + (window._navMountRetries||0));    // 如果 translationManager 尚未初始化（defer 顺序不确定），
-    // 延迟重试直到就绪，避免渲染英文 fallback 文本。
+    /* 如果 translationManager 尚未初始化（defer 顺序不确定），
+     * 延迟重试直到就绪，避免渲染英文 fallback 文本。 */
     if (!window.translationManager || !window.translationManager.isInitialized) {
       if (!window._navMountRetries) window._navMountRetries = 0;
       if (window._navMountRetries < 50) {
@@ -1676,9 +1675,19 @@
    * SPA 路由导航事件——重新初始化导航和底部栏
    */
   _spaOn(document, "spa:load", function () {
-    console.log('[nav:spa:load] spa:load fired');
-    /* 关闭所有打开的 dropdown（SPA 导航前未关闭的） */
+    /* 关闭所有打开的 dropdown */
     closeOtherDropdowns(null);
+
+    /* 防止 hover 残留：spa:load 后浏览器可能没有触发 mouseover，
+     * 如果鼠标仍在 dropdown 区域，手动触发 mouseover 检查 */
+    requestAnimationFrame(function () {
+      var wraps = document.querySelectorAll(DROPDOWN_WRAP_SELECTORS.join(", "));
+      for (var wi = 0; wi < wraps.length; wi++) {
+        if (wraps[wi].matches(":hover") && !wraps[wi].classList.contains("touch-device")) {
+          wraps[wi].classList.add("is-open");
+        }
+      }
+    });
 
     /* 重新绑定 dropdown click handlers（mountNavigator 可能未调用） */
     if (window.ProductsDropdown) window.ProductsDropdown.initDropdownClick();

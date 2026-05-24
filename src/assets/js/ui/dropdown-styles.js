@@ -33,19 +33,8 @@
     "  transition: transform .25s cubic-bezier(.4,0,.2,1);",
     "}",
 
-    ".{{PREFIX}}-dropdown-wrap.is-open .{{PREFIX}}-dropdown-arrow,",
-    ".{{PREFIX}}-dropdown-wrap:hover .{{PREFIX}}-dropdown-arrow {",
+    ".{{PREFIX}}-dropdown-wrap.is-open .{{PREFIX}}-dropdown-arrow {",
     "  transform: rotate(180deg);",
-    "}",
-
-    /* === SPA navigation cooldown: suppress CSS hover while navigating === */
-    ".spa-cooldown.{{PREFIX}}-dropdown-wrap:hover .{{PREFIX}}-dropdown-panel {",
-    "  opacity: 0; visibility: hidden; pointer-events: none;",
-    "  transform: translateX(-50%) scale(.97);",
-    "  transition: none;",
-    "}",
-    ".spa-cooldown.{{PREFIX}}-dropdown-wrap:hover .{{PREFIX}}-dropdown-arrow {",
-    "  transform: none;",
     "}",
 
     /* ===== Wrap ===== */
@@ -60,8 +49,7 @@
     "  z-index: 2500; padding-top: 8px;",
     "}",
 
-    ".{{PREFIX}}-dropdown-wrap.is-open .{{PREFIX}}-dropdown-panel,",
-    ".{{PREFIX}}-dropdown-wrap:hover .{{PREFIX}}-dropdown-panel {",
+    ".{{PREFIX}}-dropdown-wrap.is-open .{{PREFIX}}-dropdown-panel {",
     "  opacity: 1; visibility: visible; pointer-events: auto;",
     "  transform: translateX(-50%) scale(1);",
     "  transition: opacity .2s ease, transform .35s cubic-bezier(.32,.72,0,1), visibility 0s 0s;",

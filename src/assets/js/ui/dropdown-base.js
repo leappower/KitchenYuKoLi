@@ -153,8 +153,7 @@
             var wrap = t.closest("." + wrapClass);
             if (wrap) wrap.classList.toggle("is-open");
           }
-          /* Non-touch: navigator.js manages dropdown via hover + global click. */
-          /* Do NOT toggle is-open here — it conflicts with SPA navigation */
+          /* Non-touch: navigator.js manages dropdown via mouseenter/leave */
         });
       });
 
