@@ -127,7 +127,7 @@
       return (
         '<a href="' +
         esc(item.href) +
-        '" class="cnt-popup-item' +
+        '" data-no-swup class="cnt-popup-item' +
         waCls +
         '">' +
         '<span class="cnt-dropdown-icon"><span class="material-symbols-outlined">' +
@@ -158,15 +158,23 @@
 
     panel.querySelectorAll(".cnt-popup-item").forEach(function (item) {
       item.addEventListener("click", function (e) {
+        e.stopPropagation();
+        e.preventDefault();
         var itemHref = item.getAttribute("href");
         closePopup();
-        // External links (WhatsApp etc.) open directly, don't SPA-route
+        // External links (WhatsApp etc.) open directly
         if (itemHref && itemHref.startsWith("http")) {
-          e.preventDefault();
           window.open(itemHref, "_blank");
           return;
         }
-        // Navigate 由全局 click handler (spa-router.js) 统一处理
+        // Internal: use SpaRouter or fallback to direct navigation
+        if (itemHref && itemHref !== "#" && itemHref !== "javascript:void(0)") {
+          if (window.SpaRouter && window.SpaRouter.navigate) {
+            window.SpaRouter.navigate(itemHref);
+          } else {
+            window.location.href = itemHref;
+          }
+        }
       });
     });
 

@@ -2403,7 +2403,7 @@
   "products_cta_title_mobile": "需要定制方案？",
   "products_detail_product_detail": "产品详情",
   "products_filter_smart": "智能",
-  "products_filter_starter": "入门",
+  "products_filter_starter": "基础",
   "products_filter_title": "筛选产品",
   "products_filter_type": "设备类型",
   "products_hero_badge": "工业卓越",
@@ -3606,5 +3606,7 @@
   "ty_meta_title": "YuKoLi | 提交成功",
   "wechat_modal_close": "关闭",
   "wechat_modal_subtitle": "添加企业微信获取专属支持",
-  "wechat_modal_title": "扫描微信二维码"
+  "wechat_modal_title": "扫描微信二维码",
+  "products_filter_full_smart": "全智能",
+  "products_filter_basic": "基础"
 }

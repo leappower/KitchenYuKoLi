@@ -1625,7 +1625,7 @@
   "products_cta_title_mobile": "Need a Custom Solution?",
   "products_detail_product_detail": "Product Details",
   "products_filter_smart": "Smart",
-  "products_filter_starter": "Starter",
+  "products_filter_starter": "Basic",
   "products_filter_title": "Filter Products",
   "products_filter_type": "Equipment Type",
   "products_hero_badge": "Industrial Excellence",
@@ -3606,5 +3606,7 @@
   "quote_timeline_6m": "Within 6 months",
   "quote_timeline_nodate": "Just exploring",
   "contact_submit_error": "Submission failed, please try again.",
-  "contact_network_error": "Network error, please try again."
+  "contact_network_error": "Network error, please try again.",
+  "products_filter_full_smart": "Full Smart",
+  "products_filter_basic": "Basic"
 }

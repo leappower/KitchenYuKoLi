@@ -23,7 +23,9 @@
    * 从共享 NAV_CONFIG 读取 applications 子分类（剔除 separator, overview 等辅助项）
    */
   function getSubseries() {
-    return (window.NAV_CONFIG && window.NAV_CONFIG.applications || []).filter(function(s) { return !s._separator; });
+    return ((window.NAV_CONFIG && window.NAV_CONFIG.applications) || []).filter(function (s) {
+      return !s._separator;
+    });
   }
 
   var EXTRAS = [];
@@ -34,11 +36,13 @@
     var parentHref = "/applications/";
 
     var _subs = getSubseries();
-    var items = _subs.map(function (s, idx) {
-      var html = _buildItem(s, parentHref);
-      if (idx < _subs.length - 1) html += '<div class="app-dropdown-separator"></div>';
-      return html;
-    }).join("\n");
+    var items = _subs
+      .map(function (s, idx) {
+        var html = _buildItem(s, parentHref);
+        if (idx < _subs.length - 1) html += '<div class="app-dropdown-separator"></div>';
+        return html;
+      })
+      .join("\n");
 
     var extrasHtml = EXTRAS.map(function (s, idx) {
       var row = _buildDropdownItem(s);
@@ -140,7 +144,7 @@
     var overviewHtml =
       '<a href="' +
       esc(parentHref || "/applications/") +
-      '" class="app-popup-item app-overview-item">' +
+      '" data-no-swup class="app-popup-item app-overview-item">' +
       '<span class="app-dropdown-icon">' +
       '<span class="material-symbols-outlined">apps</span>' +
       "</span>" +
@@ -156,7 +160,7 @@
         return (
           '<a href="' +
           esc(itemHref) +
-          '" class="app-popup-item">' +
+          '" data-no-swup class="app-popup-item">' +
           '<span class="app-dropdown-icon">' +
           '<span class="material-symbols-outlined">' +
           esc(s.icon) +
@@ -178,7 +182,7 @@
       return (
         '<a href="' +
         esc(s.href) +
-        '" class="app-popup-item">' +
+        '" data-no-swup class="app-popup-item">' +
         '<span class="app-dropdown-icon">' +
         '<span class="material-symbols-outlined">' +
         esc(s.icon) +

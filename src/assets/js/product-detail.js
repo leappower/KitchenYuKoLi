@@ -17,7 +17,7 @@
   }
 
   // Category slugs used for product listing — NOT PDP pages
-  var CATEGORY_SLUGS = ["cutting", "stirfry", "frying", "stewing", "steaming", "other"];
+  var CATEGORY_SLUGS = ["all", "cutting", "stirfry", "frying", "stewing", "steaming", "other"];
 
   function isCategorySlug(slug) {
     return CATEGORY_SLUGS.indexOf(slug) >= 0;
@@ -50,6 +50,12 @@
 
   function getAllProducts() {
     var table = window.PRODUCT_DATA_TABLE || [];
+    if (!table.length) return [];
+    // Flat format: table[0].model exists → each item is a product
+    if (table[0].model) {
+      return table;
+    }
+    // Nested format (legacy API): table[i].products exists
     var flat = [];
     for (var i = 0; i < table.length; i++) {
       var ps = table[i].products || [];
@@ -220,6 +226,11 @@
       if (m && !isCategorySlug(m[1])) {
         model = decodeURIComponent(m[1]);
       }
+    }
+    // Also check meta tag (injected by server.js for direct page loads)
+    if (!model) {
+      var meta = document.querySelector('meta[name="product-model"]');
+      if (meta) model = meta.getAttribute("content");
     }
     if (!model) return; // Not a PDP URL, skip silently
 

@@ -71,7 +71,7 @@
       return (
         '<a href="' +
         esc(itemHref) +
-        '" class="' +
+        '" data-no-swup class="' +
         prefix +
         '-dropdown-item">' +
         '<span class="' +
@@ -226,9 +226,31 @@
       // Bind close on popup item click
       var popupItems = panel.querySelectorAll("." + popupItemClass);
       for (var k = 0; k < popupItems.length; k++) {
-        popupItems[k].addEventListener("click", function () {
+        popupItems[k].addEventListener("click", function (ev) {
+          var href = this.getAttribute("href");
+          ev.stopPropagation();
+          ev.preventDefault();
           closePopup();
-          // Navigate 由全局 click handler (spa-router.js) 统一处理
+          if (href && href !== "javascript:void(0)" && href !== "#") {
+            // Manually navigate to the link target
+            if (window.history && window.history.pushState) {
+              // Let SPA router handle it via Swup-compatible navigation
+              var ac = new AbortController();
+              document.addEventListener(
+                "click",
+                function navHandler(e) {
+                  ac.abort();
+                },
+                { signal: ac.signal, once: true }
+              );
+            }
+            // Fallback: direct navigation
+            if (window.SpaRouter && window.SpaRouter.navigate) {
+              window.SpaRouter.navigate(href);
+            } else {
+              window.location.href = href;
+            }
+          }
         });
       }
 
@@ -239,7 +261,8 @@
     }
 
     function closePopup() {
-      document.querySelectorAll("." + overlayClass + ",." + panelClass).forEach(function (el) {
+      var elements = document.querySelectorAll("." + overlayClass + ",." + panelClass);
+      elements.forEach(function (el) {
         el.parentNode && el.parentNode.removeChild(el);
       });
     }

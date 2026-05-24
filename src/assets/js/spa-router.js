@@ -62,12 +62,13 @@
 
   function dispatchSpaLoad() {
     emitSpaEvent("spa:load", { path: global.location.pathname });
-    global.dispatchEvent(new CustomEvent("spa:load", { detail: { path: global.location.pathname } }));
+    var evt = new CustomEvent("spa:load", { detail: { path: global.location.pathname } });
+    global.dispatchEvent(evt);
+    document.dispatchEvent(evt);
   }
 
   // ── Swup initialization ────────────────────────────────────────────
   function initSwup() {
-    console.log("[spa-router] initSwup() — Swup=" + (typeof global.Swup) + " readyState=" + document.readyState);
     // Destroy any previous Swup instance (e.g., after navigation to 404 page
     // that left Swup in a broken state due to container mismatch)
     if (global.swupInstance) {
@@ -97,7 +98,7 @@
             persistTags: 'style[id], style[data-swup-persist], link[rel="stylesheet"][href], script[src]',
             persistAssets: true,
           }),
-          new global.SwupPreloadPlugin({ preloadHoveredLinks: true, preloadInitialPage: true }),
+          new global.SwupPreloadPlugin({ preloadHoveredLinks: true, preloadInitialPage: false }),
         ],
         animateHistoryBrowsing: false,
       });
@@ -157,8 +158,9 @@
     // fallback 到硬编码列表（dev 模式或未注入时）。
     // ⚠️  新增全局脚本只需改 scripts/core-scripts.json 的 core[]
     //     build 时自动生成 window._SPA_GLOBAL_PATTERNS 注入到每页。
-    var _globalScriptPatterns = window._SPA_GLOBAL_PATTERNS ||
-      /(?:^|[/])(?:spa-router|swup|translations|lang-registry|translations-dropdown-template|spa-events|dropdown-base|dropdown-styles|navigator|nav-config|footer|slide-menu|products-dropdown|applications-dropdown|support-dropdown|about-dropdown|contact-dropdown|product-list|product-grid|product-detail|case-grid|utils|search-engine|device-utils|hero-video|contacts|page-interactions|common|main|init|image-assets|media-queries|floating-actions|currency|custom-select|breadcrumb|home-core-products|compare|cross-sell|profit-calculator|quote-form|quote-select-i18n|quote-budget-i18n|news-detail|support-contact-channels|support-wechat-modal|smart-popup|helpers|page-effects|form-interactions|router|roi-data|cases-page|html2canvas|jspdf|pi-maps)\.js/;
+    var _globalScriptPatterns =
+      window._SPA_GLOBAL_PATTERNS ||
+      /(?:^|[/])(?:product-data-table|spa-router|swup|translations|lang-registry|translations-dropdown-template|spa-events|dropdown-base|dropdown-styles|navigator|nav-config|footer|slide-menu|products-dropdown|applications-dropdown|support-dropdown|about-dropdown|contact-dropdown|product-list|product-grid|product-detail|case-grid|utils|search-engine|device-utils|hero-video|contacts|page-interactions|common|main|init|image-assets|media-queries|floating-actions|currency|custom-select|breadcrumb|home-core-products|compare|cross-sell|profit-calculator|quote-form|quote-select-i18n|quote-budget-i18n|news-detail|support-contact-channels|support-wechat-modal|smart-popup|helpers|page-effects|form-interactions|router|roi-data|cases-page|html2canvas|jspdf|pi-maps)\.js/;
     function reloadPageScripts(newDoc) {
       if (!newDoc) return;
       // 1. Remove all previously injected script tags
@@ -223,23 +225,13 @@
       var skel = document.getElementById("skeleton-overlay");
       if (skel) {
         skel.setAttribute("hidden", "");
-        setTimeout(function () { skel.style.display = "none"; }, 300);
+        setTimeout(function () {
+          skel.style.display = "none";
+        }, 300);
       }
-      // Explicitly re-apply translations for the new page content
-      // (safety net in case spa:load handler was unregistered)
-      setTimeout(function () {
-        if (window.translationManager && window.translationManager.applyTranslations) {
-          window.translationManager.applyTranslations();
-        }
-      }, 100);
       // Reload page-specific scripts from the NEW page (not just #spa-content)
       var newDoc = visit && visit.to && visit.to.document ? visit.to.document : null;
       reloadPageScripts(newDoc);
-      // Force re-init CaseGrid if present (ensures it works even if spa:load event timing is off)
-      if (global.CaseGrid && typeof global.CaseGrid.init === "function" && document.getElementById("case-grid")) {
-        var variant = global.innerWidth < 768 ? "mobile" : global.innerWidth < 1280 ? "tablet" : "pc";
-        global.CaseGrid.init(variant);
-      }
       // Do NOT re-mount navigator on SPA navigation.
       // Swup containers=["#spa-content"] only replaces main content;
       // body-level <navigator> survives. Calling mount() destroys
@@ -313,8 +305,9 @@
       global.scrollTo({ top: 0, left: 0, behavior: "instant" });
     });
 
-    // Initial dispatch
-    dispatchSpaLoad();
+    // Initial dispatch — REMOVED. product-grid.js renders on DOMContentLoaded directly.
+    // This dispatch caused spa:load to fire BEFORE Swup's first content:replace,
+    // which resulted in product-grid rendering content that Swup then overwrote.
   }
 
   // ── Backward-compatible API ────────────────────────────────────────

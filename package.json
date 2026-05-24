@@ -37,6 +37,8 @@
     "sync:lang:check": "node scripts/deploy-lang-sync.js --dry-run"
   },
   "dependencies": {
+    "@swup/head-plugin": "^2.3.1",
+    "@swup/preload-plugin": "^3.2.11",
     "adm-zip": "^0.5.17",
     "bcryptjs": "^3.0.3",
     "better-sqlite3": "^12.9.0",
@@ -50,7 +52,9 @@
     "jsonwebtoken": "^9.0.3",
     "jspdf": "^4.2.1",
     "multer": "^2.1.1",
-    "puppeteer-core": "24.39.1"
+    "puppeteer-core": "24.39.1",
+    "swup": "^4.6.1",
+    "xlsx": "^0.18.5"
   },
   "devDependencies": {
     "@babel/preset-env": "7.29.0",

@@ -361,53 +361,87 @@
   var _fetchPromise = null;
   var _dataCallbacks = [];
 
+  // ─── Diagnostic helpers ────────────────────────────────────────
+  var _diagId = Date.now();
+  function diag(label, data) {
+    console.log("[pdt-diag:" + _diagId + "] " + label + " — " + JSON.stringify(data));
+  }
+
   function loadFromAPI(callback) {
     if (_dataLoaded) {
+      diag("loadFromAPI", "data already loaded, calling callback");
       callback();
       return;
     }
-    // SSG path: use PRODUCT_DATA_TABLE inlined from product-data-table.js
-    function trySsg(retries) {
-      retries = retries || 0;
+    diag("loadFromAPI", "start, readyState=" + document.readyState + " hasData=" + (!!(window[STORE_KEY] && Array.isArray(window[STORE_KEY]) && window[STORE_KEY].length > 0)));
+    // SSG path: if PRODUCT_DATA_TABLE already inlined from product-data-table.js, use it directly.
+    function trySsg() {
       var has = window[STORE_KEY] && Array.isArray(window[STORE_KEY]) && window[STORE_KEY].length > 0;
       if (has) {
+        diag("trySsg", "FOUND! length=" + window[STORE_KEY].length + " first=" + (window[STORE_KEY][0].model||'?'));
         _dataLoaded = true;
-        if (typeof callback === "function") callback();
+        if (typeof callback === 'function') callback();
         window.dispatchEvent(new Event("product-data-ready"));
+        diag("trySsg", "dispatched product-data-ready");
         return true;
       }
-      // Fallback: try localStorage cache
-      try {
-        var cached = JSON.parse(localStorage.getItem("pdt_v2"));
-        if (Array.isArray(cached) && cached.length > 0) {
-          window[STORE_KEY] = cached;
-          _dataLoaded = true;
-          if (typeof callback === "function") callback();
-          window.dispatchEvent(new Event("product-data-ready"));
-          return true;
-        }
-      } catch (e) {}
-      // Retry with delay (max 3 times, 50ms apart) — handles edge cases where
-      // product-data-table.js hasn't finished executing yet
-      if (retries < 3) {
-        setTimeout(function () {
-          trySsg(retries + 1);
-        }, 50);
-        return true; // will retry
-      }
+      diag("trySsg", "NOT_FOUND — STORE_KEY=" + STORE_KEY + " typeof=" + typeof window[STORE_KEY]);
       return false;
     }
-    function tryOnReady() {
-      if (document.readyState === "loading") {
-        document.addEventListener("DOMContentLoaded", function () {
-          trySsg();
-        });
-      } else {
-        trySsg();
-      }
+    if (document.readyState === "complete") {
+      diag("loadFromAPI", "readyState=complete, trying SSG");
+      if (trySsg()) return;
+      diag("loadFromAPI", "SSG failed at complete, fallback to API");
+    } else {
+      diag("loadFromAPI", "readyState=" + document.readyState + ", waiting DOMContentLoaded");
+      document.addEventListener("DOMContentLoaded", function() {
+        diag("DOMContentLoaded", "fired! trying SSG");
+        if (trySsg()) return;
+        diag("DOMContentLoaded", "SSG failed, starting API fetch");
+        if (typeof callback === 'function') _dataCallbacks.push(callback);
+        startApiFetch();
+      });
+      if (typeof callback === 'function') _dataCallbacks.push(callback);
+      diag("loadFromAPI", "callback queued, returning");
+      return;
     }
-    if (typeof callback === "function") _dataCallbacks.push(callback);
-    tryOnReady();
+    if (typeof callback === 'function') _dataCallbacks.push(callback);
+    startApiFetch();
+    diag("loadFromAPI", "API fetch started");
+  }
+  
+  function startApiFetch() {
+    if (_fetchPromise) return;
+    _fetchPromise = fetch("/api/public/products-data", { cache: "no-store" })
+      .then(function (r) {
+        if (!r.ok) throw new Error("HTTP " + r.status);
+        return r.json();
+      })
+      .then(function (data) {
+        window[STORE_KEY] = data;
+        try {
+          localStorage.setItem("pdt_v2", JSON.stringify(data));
+        } catch (e) {}
+        _dataLoaded = true;
+        _dataCallbacks.forEach(function (cb) {
+          cb();
+        });
+        _dataCallbacks = [];
+        _fetchPromise = null;
+        window.dispatchEvent(new Event("product-data-ready"));
+      })
+      .catch(function (err) {
+        console.error("[ProductGrid] Failed to load product data:", err);
+        try {
+          var cached = JSON.parse(localStorage.getItem("pdt_v2"));
+          if (Array.isArray(cached) && cached.length > 0) {
+            window[STORE_KEY] = cached;
+            _dataLoaded = true;
+            window.dispatchEvent(new Event("product-data-ready"));
+          }
+        } catch (e) {}
+        _dataCallbacks = [];
+      });
   }
 
   function getCategories() {
@@ -419,7 +453,7 @@
       var seenCat = {};
       var result = [];
       raw.forEach(function (p) {
-        var cat = p.category || "";
+        var cat = p.category || '';
         if (cat && !seenCat[cat]) {
           seenCat[cat] = true;
           result.push({ category: cat });
@@ -434,7 +468,7 @@
     var raw = window[STORE_KEY];
     if (!Array.isArray(raw)) return [];
     var result = [];
-
+    
     // 扁平结构（来自 product-data-table.js）：raw 里每个元素都是产品
     if (raw.length > 0 && raw[0].model) {
       raw.forEach(function (p) {
@@ -448,7 +482,7 @@
       });
       return result;
     }
-
+    
     // 嵌套结构（来自 API）：raw 里每个元素是 { category, products: [...] }
     raw.forEach(function (cat) {
       if (!cat.products || !Array.isArray(cat.products)) return;
@@ -760,16 +794,12 @@
 
   function renderGrid(containerId, renderer, maxCount) {
     var container = document.getElementById(containerId);
-    if (!container) {
-      return;
-    }
+    if (!container) return;
     var products = getFilteredProducts();
     var total = products.length;
     var initial = Math.min(total, getPageSize());
-
     _shownCount[containerId] = initial;
-    var html = products.slice(0, initial).map(renderer).join("");
-    container.innerHTML = html;
+    container.innerHTML = products.slice(0, initial).map(renderer).join("");
     updateLoadMoreBtn(containerId, total, initial);
     bindLoadMore(containerId, renderer, products);
     // Init floating bar after grid render
@@ -803,24 +833,14 @@
 
   var _renderPending = false;
 
-  var _autoRenderRetries = 0;
   function autoRender() {
     if (_renderPending) return;
     var data = window[STORE_KEY];
     var hasData = Array.isArray(data) && data.length > 0;
     if (hasData) {
       _renderPending = false;
-      _autoRenderRetries = 0;
       doRender();
     } else {
-      // Retry with exponential backoff up to ~1s total
-      if (_autoRenderRetries < 7) {
-        _autoRenderRetries++;
-        var delay = Math.min(50 * Math.pow(1.5, _autoRenderRetries - 1), 300);
-        setTimeout(autoRender, delay);
-        return;
-      }
-      _autoRenderRetries = 0;
       _renderPending = true;
       loadFromAPI(function () {
         _renderPending = false;
@@ -833,21 +853,20 @@
     var cats = getCategories();
     var prods = getAllProducts();
     if (!cats.length) {
+      console.warn("[ProductGrid] doRender ABORT: no categories");
       return;
     }
-    var productListEl = document.getElementById("product-list");
-    var productGridEl = document.getElementById("product-grid");
-    if (productListEl) {
+    if (document.getElementById("product-list")) {
       renderGrid("product-list", renderMobile, 100);
-    } else if (productGridEl) {
-      if (productGridEl.classList.contains("md:grid-cols-2")) {
+    } else if (document.getElementById("product-grid")) {
+      var grid = document.getElementById("product-grid");
+      if (grid && grid.classList.contains("md:grid-cols-2")) {
         renderGrid("product-grid", renderPC, 100);
       } else {
         renderGrid("product-grid", renderTablet, 100);
       }
     }
     initCategoryTabs();
-    initTierFilter();
 
     // Hide skeleton overlay after first successful render
     var overlay = document.getElementById("skeleton-overlay");
@@ -855,9 +874,11 @@
     var container = document.getElementById("spa-content");
     if (container) container.style.display = "";
     // Ensure product grid is visible — Swup may set display:none during container replacement
-    document.querySelectorAll("#product-grid, #product-list").forEach(function (el) {
-      el.style.removeProperty("display");
-    });
+    setTimeout(function () {
+      document.querySelectorAll("#product-grid, #product-list").forEach(function (el) {
+        el.style.removeProperty("display");
+      });
+    }, 50);
   }
 
   // ─── Category tabs ─────────────────────────────────────────────
@@ -1123,21 +1144,26 @@
     }
   })();
 
-  // First load: render on DOMContentLoaded (SSG pages already have HTML in DOM)
-  if (document.readyState !== "loading") {
-    autoRender();
+  // Guard: ensure init runs once even if script loads multiple times
+  /* eslint-disable-next-line no-empty */
+  if (window._productGridInited) {
   } else {
-    document.addEventListener("DOMContentLoaded", autoRender);
+    window._productGridInited = true;
+    if (document.readyState !== "loading") {
+      autoRender();
+    } else {
+      document.addEventListener("DOMContentLoaded", autoRender);
+    }
   }
 
-  // product-data-ready: re-render if data arrives late (e.g. after dynamic import)
+  // product-data-ready: only useful if data arrives after page scripts run
   window.addEventListener("product-data-ready", function () {
     autoRender();
   });
 
   // Re-render on language change
   document.addEventListener("languageChanged", function () {
-    autoRender();
+    if (window._productGridInited) autoRender();
   });
 
   // Safety net: if API fails and no cached data, clear skeleton after 5s
@@ -1146,6 +1172,7 @@
     var grid = document.getElementById("product-grid");
     var list = document.getElementById("product-list");
     if (grid && grid.querySelector(".sk-product-card")) {
+      console.warn("[ProductGrid] Skeleton still present after 5s — clearing");
       var gridErrorMsg =
         typeof window.t === "function"
           ? window.uiText("products_load_error", "Failed to load products. Please refresh.")
@@ -1161,6 +1188,7 @@
         "</button></div>";
     }
     if (list && list.querySelector(".sk-product-card")) {
+      console.warn("[ProductGrid] Skeleton still present in list after 5s — clearing");
       var listErrorMsg =
         typeof window.t === "function"
           ? window.uiText("products_load_error", "Failed to load products. Please refresh.")
@@ -1177,7 +1205,7 @@
     }
   }, 5000);
 
-  // spa:load: re-render on SPA navigation (content replaced by Swup)
+  // spa:load: prevent duplicate handler registration
   _spaOn(document, "spa:load", function () {
     _renderPending = false; // reset dedup flag for new page
     // Reset init flag and pagination for SPA navigation

@@ -323,7 +323,7 @@ function injectCoreScripts(html, routeSlug) {
     var filename = path.basename(scriptPath);
     // 精确检测：匹配 <script src="...filename" 或 <script src="...filename?v=xxx"
     var escaped = filename.replace(/\./g, '\\.');
-    var hasScript = new RegExp('<script[^>]*src="[^"]*' + escaped + '(?:\\?[^"]*)?"', 'i').test(html);
+    var hasScript = new RegExp('<script[^>]*src="[^"]*' + escaped + '[^"]*?"', 'i').test(html);
     if (!hasScript) {
       tags.push('    <script defer src="' + bp + '/' + scriptPath + '"></script>');
     }
@@ -335,7 +335,7 @@ function injectCoreScripts(html, routeSlug) {
   pageScripts.forEach(function (scriptPath) {
     var filename = path.basename(scriptPath);
     var escaped = filename.replace(/\./g, '\\.');
-    var hasScript = new RegExp('<script[^>]*src="[^"]*' + escaped + '(?:\\?[^"]*)?"', 'i').test(html);
+    var hasScript = new RegExp('<script[^>]*src="[^"]*' + escaped + '[^"]*?"', 'i').test(html);
     if (!hasScript) {
       tags.push('    <script defer src="' + bp + '/' + scriptPath + '"></script>');
     }
@@ -375,7 +375,7 @@ function normalizeSpaContent(html) {
   // vertical scrollbar inside main at 2048px+ wide viewports.
   // Append to existing class instead of replacing, so unique classes
   // (e.g. mobile pages' max-w-[1024px] mx-auto) are preserved.
-  var required = ['flex-1', 'overflow-x-clip'];
+  var required = ['flex-1'];
   html = html.replace(
     /(<main\s+id="spa-content")(\s+class="([^"]*)")?/gi,
     function(match, open, classAttr, existing) {
@@ -621,6 +621,11 @@ function generateRootIndex() {
 
   // Patch all root-absolute paths with BASE_PATH prefix
   html = patchHtmlPaths(html);
+
+  // Add cache-busting version to all JS/CSS (same as SSG pages)
+  var VERSION = process.env.VERSION || 'v=' + Date.now().toString(36);
+  html = html.replace(/(href="\/assets\/css\/[^\"]+)"/g, '$1?' + VERSION + '"');
+  html = html.replace(/(src="\/assets\/js\/[^\"]+)(?<!\?v=[^"]*)"/g, '$1?' + VERSION + '"');
 
   // Write to dist/index.html
   fs.writeFileSync(path.join(DIST_DIR, 'index.html'), html, 'utf-8');

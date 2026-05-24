@@ -126,7 +126,7 @@
     var overviewHtml =
       '<a href="' +
       esc(parentHref || "/support/") +
-      '" class="sup-popup-item sup-overview-item">' +
+      '" data-no-swup class="sup-popup-item sup-overview-item">' +
       '<span class="sup-dropdown-icon">' +
       '<span class="material-symbols-outlined">apps</span>' +
       "</span>" +
@@ -142,7 +142,7 @@
         return (
           '<a href="' +
           esc(itemHref) +
-          '" class="sup-popup-item">' +
+          '" data-no-swup class="sup-popup-item">' +
           '<span class="sup-dropdown-icon">' +
           '<span class="material-symbols-outlined">' +
           esc(s.icon) +
@@ -163,7 +163,7 @@
     var viewAllHtml =
       '<a href="' +
       esc(parentHref || "/support/") +
-      '" class="sup-popup-item sup-viewall-item">' +
+      '" data-no-swup class="sup-popup-item sup-viewall-item">' +
       '<span class="sup-dropdown-icon">' +
       '<span class="material-symbols-outlined">grid_view</span>' +
       "</span>" +

@@ -1614,18 +1614,15 @@
 
   /* ───────── Init helper (shared by DOMContentLoaded and spa:load) ── */
   function initProfitCalc() {
-    console.log("[profit-calc] initProfitCalc called, readyState:", document.readyState);
     var form = document.getElementById("profit-calc-form");
     if (!form) {
-      console.log("[profit-calc] initProfitCalc: form not found");
       return;
     }
     if (form._spaInitialized) {
-      console.log("[profit-calc] initProfitCalc: already initialized, skipping");
       syncRangeDisplay();
       return;
     }
-    console.log("[profit-calc] initProfitCalc: initializing fresh");
+
     form._spaInitialized = true;
 
     // Detect mobile by presence of back-btn (only mobile has steps mode)
@@ -1652,20 +1649,16 @@
     var placeholder = document.getElementById("profit-placeholder");
 
     if (calcBtn) {
-      console.log("[profit-calc] binding click handler to pc-calc-btn");
       // Guard: remove existing handlers to prevent duplicates
       var oldBtn = calcBtn;
       var newBtn = oldBtn.cloneNode(true);
       oldBtn.parentNode.replaceChild(newBtn, oldBtn);
       newBtn.addEventListener("click", function () {
-        console.log("[profit-calc] pc-calc-btn clicked");
         if (placeholder) {
-          console.log("[profit-calc] hiding placeholder");
           placeholder.classList.add("hidden");
         }
-        console.log("[profit-calc] calling calc.run()");
+
         calc.run();
-        console.log("[profit-calc] calc.run() completed");
       });
       calcBtn = newBtn; // update reference for later use
     }

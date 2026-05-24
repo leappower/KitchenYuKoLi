@@ -25,7 +25,36 @@ if (!process.env.TRANSLATE_API_KEY && fs.existsSync('.env')) {
 }
 // Product sync removed — product data is now static
 
+// ─── API Server Proxy ───────────────────────────────────────────────
+// All API, admin, and upload requests go to KitchenYuKoLiServer.
+// Configurable via API_SERVER env var (default: http://127.0.0.1:8000).
+const API_SERVER = process.env.API_SERVER || 'https://127.0.0.1:8000';
+const { createProxyMiddleware } = require('http-proxy-middleware');
+
 const app = express();
+
+const API_PATHS = ['/api/cms', '/api/public', '/api/translations', '/api/nav-config', '/admin'];
+
+const apiProxy = createProxyMiddleware({
+  target: API_SERVER,
+  changeOrigin: true,
+  // pathFilter has a bug in v2.0.9 that intercepts ALL requests;
+  // use manual path checking via a wrapper middleware instead.
+  logLevel: !IS_PROD ? 'warn' : 'silent',
+  onError: (err, req, res) => {
+    console.error('[proxy] error:', err.message, req.path);
+    if (!res.headersSent) res.status(502).json({ error: 'API server unavailable' });
+  }
+});
+
+// Wrapper: only pass matching paths to the proxy
+const apiProxyGuard = (req, res, next) => {
+  if (API_PATHS.some(p => req.originalUrl.startsWith(p))) {
+    apiProxy(req, res, next);
+  } else {
+    next();
+  }
+};
 app.use(helmet({
   contentSecurityPolicy: {
     directives: {
@@ -42,7 +71,7 @@ app.use(helmet({
   },
 }));
 
-
+app.use(apiProxyGuard);
 app.set('trust proxy', 1);
 
 // Strict CSP for main site
@@ -248,7 +277,8 @@ app.use((req, res, next) => {
   next();
 });
 
-// CMS admin panel — removed (all data served locally via SSG + static files)
+// CMS admin panel — now served by KitchenYuKoLiServer via /admin proxy
+// (local admin removed — all data/API goes through API_SERVER)
 
 // Health check endpoint
 app.get('/health', (req, res) => {
@@ -433,7 +463,7 @@ function resolvePage(reqPath, ua) {
   f = path.join(__dirname, 'dist', clean + '-pc.html');
   if (isFile(f)) return f;
 
-  // 5. Unknown route — return 404.html.
+  // 4. Unknown route — return 404.html.
   //    404.html is a complete page with navigator, footer, and 404 content.
   //    It also has JS that redirects known routes (e.g., /home → /home/).
   //    For truly unknown routes, it shows 'Page Not Found' without redirecting.
@@ -451,29 +481,6 @@ function isFile(p) {
 app.get('*', (req, res) => {
   // Never intercept API routes
   if (req.path.startsWith('/api/')) return res.status(404).json({ error: 'Not found' });
-
-  // Product detail route: /products/<model>/ (not a known category slug)
-  var clean = req.path.replace(/\/+$/, '');
-  var productMatch = clean.match(/^\/products\/([^/]+)$/);
-  if (productMatch) {
-    var productSlug = productMatch[1];
-    var CATEGORY_SLUGS = ['all', 'cutting', 'stirfry', 'frying', 'stewing', 'steaming', 'other', 'compare', 'detail'];
-    if (CATEGORY_SLUGS.indexOf(productSlug) === -1) {
-      var isMobile = isMobileUA(req.headers['user-agent']);
-      var variantIdx = { 'mobile': 'index-mobile.html', 'tablet': 'index-tablet.html', 'pc': 'index-pc.html' };
-      var detailFile = path.join(__dirname, 'dist', 'products', 'detail', variantIdx[isMobile] || 'index-pc.html');
-      if (!isFile(detailFile)) {
-        detailFile = path.join(__dirname, 'dist', 'products', 'detail', 'index.html');
-      }
-      if (isFile(detailFile)) {
-        var html = fs.readFileSync(detailFile, 'utf-8');
-        html = html.replace('<head>', '<head><meta name="product-model" content="' + productSlug + '"/>');
-        html = html.replace('<head>', '<head><meta name="ssg-device" content="1"/>');
-        res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate');
-        return res.send(html);
-      }
-    }
-  }
 
   var resolved = resolvePage(req.path, req.headers['user-agent']);
   

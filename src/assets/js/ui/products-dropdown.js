@@ -24,7 +24,9 @@
    * 从共享 NAV_CONFIG 读取 products 子分类（剔除 separator, overview 等辅助项）
    */
   function getSubseries() {
-    return (window.NAV_CONFIG && window.NAV_CONFIG.products || []).filter(function(s) { return !s._separator; });
+    return ((window.NAV_CONFIG && window.NAV_CONFIG.products) || []).filter(function (s) {
+      return !s._separator;
+    });
   }
 
   /* ───────────────────────── CSS ───────────────────────── */
@@ -56,11 +58,13 @@
       "</a>";
 
     var _subs = getSubseries();
-    var items = _subs.map(function (s, idx) {
-      var html = _buildItem(s, parentHref);
-      if (idx < _subs.length - 1) html += '<div class="prod-dropdown-separator"></div>';
-      return html;
-    }).join("\n");
+    var items = _subs
+      .map(function (s, idx) {
+        var html = _buildItem(s, parentHref);
+        if (idx < _subs.length - 1) html += '<div class="prod-dropdown-separator"></div>';
+        return html;
+      })
+      .join("\n");
 
     return (
       '<div class="prod-dropdown-wrap' +
@@ -126,7 +130,7 @@
     var overviewHtml =
       '<a href="' +
       esc(parentHref || "/products/") +
-      '" class="prod-popup-item prod-overview-item">' +
+      '" data-no-swup class="prod-popup-item prod-overview-item">' +
       '<span class="prod-dropdown-icon">' +
       '<span class="material-symbols-outlined">apps</span>' +
       "</span>" +
@@ -135,7 +139,7 @@
       "</a>";
 
     var viewAllHtml =
-      '<a href="/products/all/" class="prod-popup-item prod-viewall-item">' +
+      '<a href="/products/all/" data-no-swup class="prod-popup-item prod-viewall-item">' +
       '<span class="prod-dropdown-icon">' +
       '<span class="material-symbols-outlined">grid_view</span>' +
       "</span>" +
@@ -151,7 +155,7 @@
         return (
           '<a href="' +
           esc(itemHref) +
-          '" class="prod-popup-item">' +
+          '" data-no-swup class="prod-popup-item">' +
           '<span class="prod-dropdown-icon">' +
           '<span class="material-symbols-outlined">' +
           esc(s.icon) +

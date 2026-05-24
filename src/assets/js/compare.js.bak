@@ -223,19 +223,23 @@
   function fetchProductData() {
     if (_dataFetched) return Promise.resolve(window[STORE_KEY] || []);
     _dataFetched = true;
-    // Use PRODUCT_DATA_TABLE (inlined from product-data-table.js or cached)
-    if (Array.isArray(window[STORE_KEY]) && window[STORE_KEY].length > 0) {
-      return Promise.resolve(window[STORE_KEY]);
-    }
-    // localStorage fallback
-    try {
-      var cached = JSON.parse(localStorage.getItem(DATA_KEY));
-      if (Array.isArray(cached) && cached.length > 0) {
-        window[STORE_KEY] = cached;
-        return Promise.resolve(cached);
-      }
-    } catch (e) {}
-    return Promise.resolve([]);
+    return fetch("/api/public/products-data", { cache: "no-store" })
+      .then(function (r) {
+        if (!r.ok) throw new Error("API " + r.status);
+        return r.json();
+      })
+      .then(function (data) {
+        if (Array.isArray(data) && data.length > 0) {
+          window[STORE_KEY] = data;
+          try {
+            localStorage.setItem(DATA_KEY, JSON.stringify(data));
+          } catch (e) {}
+        }
+        return data || [];
+      })
+      .catch(function () {
+        return window[STORE_KEY] || [];
+      });
   }
 
   // ─── Selected items management ───────────────────────────────

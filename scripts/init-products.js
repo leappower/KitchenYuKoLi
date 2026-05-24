@@ -2,15 +2,15 @@
 /**
  * init-products.js — 从 Excel 初始化 KitchenYuKoLi 产品数据
  *
- * 复用 KitchenYuKoLiServer 的 Excel 解析逻辑，生成前端可直接使用的产品数据文件。
- * 完全不依赖 Server 数据库或运行中的服务。
+ * 直接解析 Excel 原始列，不依赖 KitchenYuKoLiServer。
+ * 生成：
+ *   src/assets/js/product-data-table.js — window.PRODUCT_DATA_TABLE（含 nameEn/specificationsEn/usageEn）
+ *   src/assets/lang/zh-CN-product.json   — 完整中文产品翻译
+ *   src/assets/lang/en-product.json      — 完整英文产品翻译（值留空，fallback 到中文）
  *
  * 用法:
  *   node scripts/init-products.js [xlsxPath]
  *   默认: scripts/products-table.xlsx
- *
- * 输出:
- *   src/assets/js/product-data-table.js — window.PRODUCT_DATA_TABLE = [...]
  */
 
 'use strict';
@@ -19,121 +19,284 @@ const path = require('path');
 const fs = require('fs');
 
 const XLSX_PATH = process.argv[2] || path.join(__dirname, 'products-table.xlsx');
-const OUT_PATH = path.join(__dirname, '..', 'src', 'assets', 'js', 'product-data-table.js');
+const OUT_DATA_TABLE = path.join(__dirname, '..', 'src', 'assets', 'js', 'product-data-table.js');
+const LANG_DIR = path.join(__dirname, '..', 'src', 'assets', 'lang');
 
-// ─── 复用 Server 的 Excel 解析 ────────────────────────────────
-const SERVER_SCRIPTS = path.join(__dirname, '..', '..', 'KitchenYuKoLiServer', 'scripts');
+const EXCLUDED_NAMES = /洁碟台|污碟台|洗涤剂|架子|花洒|蒸柜|售卖/;
+const EXCLUDED_MODEL_REGEX = /^[\d]+$/;
+const VALID_CATEGORIES = ['翻炒系列', '炖煮系列', '煎炸系列', '蒸煮系列', '切配系列', '辅助系列'];
 
-let parseRowsToSeries, writeJs;
-try {
-  const mod = require(path.join(SERVER_SCRIPTS, 'generate-products-data-table'));
-  parseRowsToSeries = mod.parseRowsToSeries || mod.feishuProTables?.parseRowsToSeries;
-  writeJs = mod.writeJs || mod.feishuProTables?.writeJs;
-} catch(e) {
-  console.error('[init] Cannot load Server scripts:', e.message);
-  console.error('[init] Falling back to built-in xlsx parser');
-}
-
-function fallbackParseXlsx(xlsxPath) {
-  // 如果 Server 模块不可用，用内置 xlsx 库解析
-  let XLSX;
-  try { XLSX = require('xlsx'); } catch(e) { 
+// ─── 解析 Excel ────────────────────────────────────────────────
+function parseXlsx(xlsxPath) {
+  var XLSX;
+  try { XLSX = require('xlsx'); } catch(e) {
     console.error('[init] xlsx not installed. Run: npm install xlsx');
     process.exit(1);
   }
-  const wb = XLSX.readFile(xlsxPath);
-  const ws = wb.Sheets[wb.SheetNames[0]];
-  const rows = XLSX.utils.sheet_to_json(ws, { defval: '' });
-  console.log('[init] Fallback: parsed', rows.length, 'rows from', xlsxPath);
-  return rows;
+  var wb = XLSX.readFile(xlsxPath);
+  var ws = wb.Sheets[wb.SheetNames[0]];
+  return XLSX.utils.sheet_to_json(ws, { defval: '' });
 }
 
-// ─── 数据转换: Server 分类树 → 前端 model 数组 ────────────────
-function convertToProductTable(seriesList) {
-  const models = [];
-  for (const series of seriesList) {
-    const category = series.category || '';
-    for (const product of (series.products || [])) {
-      // 合并产品字段
-      const model = {
-        model: product.model || '',
-        name: product.name || product.model || '',
-        category: category,
-        subCategory: product.subCategory || '',
-        specifications: product.specifications || '',
-        power: product.power || '',
-        voltage: product.voltage || '',
-        material: product.material || '',
-        productDimensions: product.productDimensions || '',
-        throughput: product.throughput || '',
-        averageTime: product.averageTime || '',
-        status: product.status || '',
-        badge: product.badge || '',
-        badgeColor: product.badgeColor || '',
-        isActive: product.isActive !== false,
-        // 图片路径：构建时用 model 名匹配
-        images: product.images || [],
-        // 保留 i18n 多语言
-        highlights: product.highlights || '',
-        scenarios: product.scenarios || '',
-        usage: product.usage || '',
-      };
-      // 跳过无效行：空model、纯数字、不需要的产品类型
-      if (!model.model || model.model === '-' || /^\d+$/.test(model.model)) continue;
-      var name = model.name || '';
-      if (/洁碟台|污碟台|洗涤剂|架子|花洒/.test(name)) continue;
-      models.push(model);
-    }
-  }
-  return models;
+// ─── 清洗模型名 ──────────────────────────────────────────────
+function cleanModel(raw) {
+  return String(raw).replace(/\s+/g, '').split('（')[0].split('(')[0].trim();
 }
+
+// ─── 从"配置"列中提取结构化字段 ──────────────────────────────
+function parseConfig(rawConfig) {
+  var result = {
+    power: '',
+    voltage: '',
+    material: '',
+    specifications: rawConfig || ''
+  };
+  if (!rawConfig) return result;
+  var normalized = rawConfig.replace(/◆/g, '；');
+
+  // 功率
+  var pMatch = normalized.match(/功率[：:]\s*([^；;]+?)(?=\s*(?:[；;]|电压|材质|锅体|滚筒|显示屏|额定|电功率|电机功率|$))/);
+  if (!pMatch) pMatch = normalized.match(/额定功率[（(]?.+?[）)]?[：:]\s*([^；;]+?)(?=\s*(?:[；;]|电压|材质|锅体|额定|$))/);
+  if (!pMatch) pMatch = normalized.match(/电功率[：:]\s*([^；;]+?)(?=\s*(?:[；;]|额定|电压|$))/);
+  if (!pMatch) pMatch = normalized.match(/电机功率[：:]\s*([^；;]+?)(?=\s*(?:[；;]|额定|电压|$))/);
+  if (!pMatch) pMatch = normalized.match(/额电功率[：:]\s*([^；;]+?)(?=\s*(?:[；;]|额定|电压|$))/);
+  if (pMatch) result.power = pMatch[1].trim().replace(/\s+/g, '');
+
+  // 电压
+  var vMatch = normalized.match(/电压[：:]\s*([^；;]+?)(?=\s*(?:[；;]|功率|材质|锅体|滚筒|频率|显示屏|额定|电参数|$))/);
+  if (!vMatch) vMatch = normalized.match(/额定电压[：:]\s*([^；;]+?)(?=\s*(?:[；;]|功率|材质|锅体|额定|$))/);
+  if (!vMatch) vMatch = normalized.match(/电参数[：:]\s*([^；;]+?)(?=\s*(?:[；;]|功率|材质|锅体|额定|$))/);
+  if (vMatch) result.voltage = vMatch[1].trim().replace(/\s+/g, '');
+
+  // 材质
+  var mMatch = normalized.match(/材质[：:]\s*([^；;]+?)(?=\s*(?:[；;]|功率|电压|锅体|滚筒|清洗|显示屏|额定|$))/);
+  if (!mMatch) mMatch = normalized.match(/机身材质[：:]\s*([^；;]+?)(?=\s*(?:[；;]|功率|电压|锅体|额定|$))/);
+  if (!mMatch) mMatch = normalized.match(/锅体材质[：:]\s*([^；;]+?)(?=\s*(?:[；;]|功率|电压|锅体|额定|$))/);
+  if (mMatch) result.material = mMatch[1].trim().replace(/\s+/g, '');
+
+  return result;
+}
+
+// ─── 生成 i18n key ────────────────────────────────────────────
+function i18nKeyForCategory(category) {
+  var map = {
+    '翻炒系列': 'nav_products_stirfry',
+    '炖煮系列': 'nav_products_stewing',
+    '煎炸系列': 'nav_products_frying',
+    '蒸煮系列': 'nav_products_steaming',
+    '切配系列': 'nav_products_cutting',
+    '辅助系列': 'nav_products_other'
+  };
+  return map[category] || 'nav_products_' + category;
+}
+
+function i18nKeyForSubCategory(category, subCategory) {
+  var prefixMap = {
+    '翻炒系列': 'stirfry',
+    '炖煮系列': 'stewing',
+    '煎炸系列': 'frying',
+    '蒸煮系列': 'steaming',
+    '切配系列': 'cutting',
+    '辅助系列': 'other'
+  };
+  var prefix = prefixMap[category] || category.replace('系列', '').toLowerCase();
+  var suffix = subCategory.replace(/[^a-zA-Z0-9\u4e00-\u9fff]/g, '').toLowerCase();
+  return 'product_subcat_' + prefix + '_' + suffix;
+}
+
+function i18nKeyForModel(model, field) {
+  var key = 'product_' + model.toLowerCase().replace(/[^a-z0-9]/g, '_');
+  if (field) key += '_' + field;
+  return key;
+}
+
+// ─── 英文翻译映射（品类/子品类） ──────────────────────────────
+var EN_TRANSLATIONS = {
+  'nav_products_stirfry': 'Stir-Fry Series',
+  'nav_products_stewing': 'Stewing Series',
+  'nav_products_frying': 'Frying Series',
+  'nav_products_steaming': 'Steaming Series',
+  'nav_products_cutting': 'Cutting Series',
+  'nav_products_other': 'Auxiliary Series',
+  'product_subcat_stirfry_搅拌炒菜机': 'Stirring Cooker',
+  'product_subcat_stirfry_滚筒炒菜机': 'Drum Stirring Cooker',
+  'product_subcat_stirfry_团餐滚筒炒菜机': 'Bulk Drum Stirring Cooker',
+  'product_subcat_stewing_搅拌炒锅炖烩机': 'Stirring Pot / Braising Machine',
+  'product_subcat_stewing_汤锅': 'Soup Pot',
+  'product_subcat_stewing_压力锅': 'Pressure Cooker',
+  'product_subcat_stewing_煮面炉': 'Noodle Cooker',
+  'product_subcat_stewing_煲仔炉': 'Clay Pot Stove',
+  'product_subcat_stewing_卤煮炉': 'Stewing Stove',
+  'product_subcat_steaming_自动漂烫焯水油炸机': 'Auto Blanching / Frying Machine',
+  'product_subcat_steaming_智能蒸饭机': 'Smart Rice Steamer',
+  'product_subcat_other_揭盖式洗碗机': 'Lift-Type Dishwasher',
+  'product_subcat_other_长龙洗碗机': 'Conveyor Dishwasher',
+  'product_subcat_frying_锅贴机': 'Potsticker Machine',
+  'product_subcat_frying_油炸炉': 'Deep Fryer',
+  'product_subcat_cutting_流水化自动机': 'Auto Flow Processing Machine'
+};
 
 // ─── 主流程 ────────────────────────────────────────────────────
-
-if (!fs.existsSync(XLSX_PATH)) {
-  console.error('[init] Excel not found:', XLSX_PATH);
-  console.error('[init] Please copy products_list_v4.xlsx to scripts/products-table.xlsx');
-  process.exit(1);
-}
-
-console.log('[init] Processing:', XLSX_PATH);
-
-(async () => {
-  let seriesList;
-
-  if (parseRowsToSeries) {
-    // 使用 Server 的完整解析（支持多语言字段、数据校验）
-    console.log('[init] Using Server Excel parser...');
-    const rows = require(path.join(SERVER_SCRIPTS, 'generate-products-data-table')).fetchRowsFromXlsx(XLSX_PATH);
-    seriesList = parseRowsToSeries(rows.rawRows);
-    console.log('[init] Parsed', seriesList.length, 'categories,', 
-      seriesList.reduce((sum, s) => sum + (s.products || []).length, 0), 'products');
-  } else {
-    // Fallback
-    const rows = fallbackParseXlsx(XLSX_PATH);
-    // 简单分组：按 category 列
-    const grouped = {};
-    for (const row of rows) {
-      const cat = row['大类'] || row['category'] || row['一级分类'] || 'Products';
-      if (!grouped[cat]) grouped[cat] = [];
-      grouped[cat].push(row);
-    }
-    seriesList = Object.entries(grouped).map(([cat, products]) => ({ category: cat, products }));
-    console.log('[init] Fallback: parsed', seriesList.length, 'categories');
+function main() {
+  if (!fs.existsSync(XLSX_PATH)) {
+    console.error('[init] Excel not found:', XLSX_PATH);
+    process.exit(1);
   }
 
-  // 转换为前端格式
-  const models = convertToProductTable(seriesList);
-  console.log('[init] Converted to', models.length, 'models');
+  var rawRows = parseXlsx(XLSX_PATH);
+  console.log('[init] Parsed', rawRows.length, 'rows from', XLSX_PATH);
 
-  // 写入 product-data-table.js
-  const jsContent = 
-    '// Product Data Table — Auto-generated by scripts/init-products.js\n' +
-    '// DO NOT EDIT MANUALLY\n' +
-    'window.PRODUCT_DATA_TABLE = ' + JSON.stringify(models, null, 2) + ';\n' +
-    'window.PRODUCT_DATA_VERSION = "' + Date.now() + '";\n';
-  
-  fs.writeFileSync(OUT_PATH, jsContent, 'utf-8');
-  console.log('[init] ✅ Written', models.length, 'models to', OUT_PATH);
+  var models = [];
+  var i18nZh = {};   // 所有翻译 key -> 中文值
+  var i18nEn = {};   // 所有翻译 key -> 英文值（留空 fallback）
+  var seenModels = {};
 
-})();
+  for (var ri = 0; ri < rawRows.length; ri++) {
+    var row = rawRows[ri];
+    var rawModel = String(row['型号'] || '').trim();
+    var model = cleanModel(rawModel);
+    var name = String(row['名称'] || '').trim();
+    var c1 = String(row['一级分类'] || '').trim();
+    var c2 = String(row['二级分类'] || '').trim();
+    var size = String(row['尺寸'] || '').trim();
+    var config = String(row['配置'] || '').trim();
+    var usage = String(row['用途和产能'] || '').trim();
+
+    // 过滤
+    if (!model || model === '-' || EXCLUDED_MODEL_REGEX.test(model)) continue;
+    if (EXCLUDED_NAMES.test(name)) continue;
+    if (seenModels[model]) continue;
+    if (!VALID_CATEGORIES.includes(c1)) {
+      console.warn('[init] Unknown category:', c1, 'model:', model);
+      continue;
+    }
+    seenModels[model] = true;
+
+    var parsed = parseConfig(config);
+    var subCatI18nKey = i18nKeyForSubCategory(c1, c2);
+
+    // i18n key for this product's name/specs/usage
+    var nameKey = i18nKeyForModel(model, 'name');
+    var specsKey = i18nKeyForModel(model, 'specifications');
+    var usageKey = i18nKeyForModel(model, 'usage');
+
+    var product = {
+      model: model,
+      name: name,
+      nameEn: '',             // 英文名（留空，fallback 到 name）
+      category: c1,
+      subCategory: c2,
+      specifications: parsed.specifications,
+      specificationsEn: '',   // 英文规格（留空，fallback 到中文）
+      power: parsed.power,
+      voltage: parsed.voltage,
+      material: parsed.material,
+      productDimensions: size,
+      throughput: '',
+      averageTime: '',
+      status: '在售',
+      badge: '',
+      badgeColor: '',
+      isActive: true,
+      images: [],
+      highlights: '',
+      scenarios: usage,
+      usage: usage,
+      usageEn: ''             // 英文用途（留空，fallback 到中文）
+    };
+
+    models.push(product);
+
+    // ── 填充 i18n 翻译字典 ──
+    // 品类翻译
+    var catKey = i18nKeyForCategory(c1);
+    if (!i18nZh[catKey]) {
+      i18nZh[catKey] = c1;
+      i18nEn[catKey] = EN_TRANSLATIONS[catKey] || '';
+    }
+    // 子品类翻译
+    if (c2 && !i18nZh[subCatI18nKey]) {
+      i18nZh[subCatI18nKey] = c2;
+      i18nEn[subCatI18nKey] = EN_TRANSLATIONS[subCatI18nKey] || '';
+    }
+    // 产品名称翻译
+    if (!i18nZh[nameKey]) {
+      i18nZh[nameKey] = name;
+      i18nEn[nameKey] = '';   // 英文产品名留空，后续手动填充
+    }
+    // 产品规格翻译
+    if (parsed.specifications && !i18nZh[specsKey]) {
+      i18nZh[specsKey] = parsed.specifications;
+      i18nEn[specsKey] = '';
+    }
+    // 产品用途翻译
+    if (usage && !i18nZh[usageKey]) {
+      i18nZh[usageKey] = usage;
+      i18nEn[usageKey] = '';
+    }
+  }
+
+  // ── 写入 product-data-table.js ──
+  var jsContent = [
+    '// Product Data Table — Auto-generated by scripts/init-products.js',
+    '// DO NOT EDIT MANUALLY',
+    '// Generated: ' + new Date().toISOString(),
+    'window.PRODUCT_DATA_TABLE = ' + JSON.stringify(models, null, 2) + ';',
+    'window.PRODUCT_DATA_VERSION = "' + Date.now() + '";',
+    ''
+  ].join('\n');
+
+  var outDir = path.dirname(OUT_DATA_TABLE);
+  if (!fs.existsSync(outDir)) {
+    fs.mkdirSync(outDir, { recursive: true });
+  }
+  fs.writeFileSync(OUT_DATA_TABLE, jsContent, 'utf-8');
+  console.log('[init] Written', models.length, 'models to', path.relative(process.cwd(), OUT_DATA_TABLE));
+
+  // ── 写入 zh-CN-product.json（完整 146 个产品翻译） ──
+  if (!fs.existsSync(LANG_DIR)) {
+    fs.mkdirSync(LANG_DIR, { recursive: true });
+  }
+
+  var zhPath = path.join(LANG_DIR, 'zh-CN-product.json');
+  fs.writeFileSync(zhPath, JSON.stringify(i18nZh, null, 2) + '\n', 'utf-8');
+  console.log('[init] Written', Object.keys(i18nZh).length, 'keys to', path.relative(process.cwd(), zhPath));
+
+  // ── 写入 en-product.json（英文值全部留空） ──
+  var enPath = path.join(LANG_DIR, 'en-product.json');
+  fs.writeFileSync(enPath, JSON.stringify(i18nEn, null, 2) + '\n', 'utf-8');
+  console.log('[init] Written', Object.keys(i18nEn).length, 'keys to', path.relative(process.cwd(), enPath));
+
+  // ── 统计 ──
+  var catCounts = {};
+  models.forEach(function(p) {
+    catCounts[p.category] = (catCounts[p.category] || 0) + 1;
+  });
+  console.log('\n[init] Category distribution:');
+  Object.keys(catCounts).sort(function(a,b) { return catCounts[b] - catCounts[a]; }).forEach(function(k) {
+    console.log('  ' + k + ': ' + catCounts[k]);
+  });
+
+  var withSpecs = models.filter(function(p) { return p.specifications; }).length;
+  var withSize = models.filter(function(p) { return p.productDimensions; }).length;
+  var withUsage = models.filter(function(p) { return p.scenarios; }).length;
+  var withPower = models.filter(function(p) { return p.power; }).length;
+  var withVoltage = models.filter(function(p) { return p.voltage; }).length;
+  var withMaterial = models.filter(function(p) { return p.material; }).length;
+  var withNameEn = models.filter(function(p) { return p.nameEn !== ''; }).length;
+  var prodTransKeys = Object.keys(i18nZh).length;
+
+  console.log('\n[init] Field coverage:');
+  console.log('  specifications:', withSpecs + '/' + models.length);
+  console.log('  productDimensions:', withSize + '/' + models.length);
+  console.log('  scenarios/usage:', withUsage + '/' + models.length);
+  console.log('  power:', withPower + '/' + models.length);
+  console.log('  voltage:', withVoltage + '/' + models.length);
+  console.log('  material:', withMaterial + '/' + models.length);
+  console.log('  nameEn (filled):', withNameEn + '/' + models.length);
+  console.log('  i18n keys total:', prodTransKeys);
+  console.log('    zh-CN filled:', Object.values(i18nZh).filter(function(v) { return v !== ''; }).length + '/' + prodTransKeys);
+  console.log('    en filled:', Object.values(i18nEn).filter(function(v) { return v !== ''; }).length + '/' + prodTransKeys);
+}
+
+main();

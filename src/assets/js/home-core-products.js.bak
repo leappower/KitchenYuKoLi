@@ -28,6 +28,7 @@
 
   var CACHE_KEY = "home_core_products";
   var CACHE_VERSION_KEY = "home_core_products_version";
+  var API_URL = "/api/public/products-data";
   var CACHE_TTL = 5 * 60 * 1000; // 5 minutes
 
   /**
@@ -103,32 +104,102 @@
    * Fetch from CMS API with ETag support
    */
   function _fetchFromNetwork(callback) {
-    // Local data sources (no API dependency)
-    var table = window.PRODUCT_DATA_TABLE || [];
-    var coreProducts = table.filter(function (p) {
-      return p.is_home_core || p.isHomeCore;
-    });
-    if (coreProducts.length > 0) {
-      _saveCache(coreProducts);
-      callback(coreProducts, "local");
-      return;
-    }
-    _loadCachedFallback(callback);
+    var etag = null;
+    try {
+      etag = localStorage.getItem(CACHE_VERSION_KEY);
+    } catch (e) {}
+
+    var headers = {};
+    if (etag) headers["If-None-Match"] = etag;
+
+    fetch(API_URL + "?home_core=1&_t=" + Date.now(), { headers: headers })
+      .then(function (res) {
+        // Save new ETag
+        var newEtag = res.headers.get("ETag");
+        if (newEtag) {
+          try {
+            localStorage.setItem(CACHE_VERSION_KEY, newEtag);
+          } catch (e) {}
+        }
+
+        if (res.status === 304) {
+          _loadCachedFallback(callback);
+          return null;
+        }
+        return res.json();
+      })
+      .then(function (data) {
+        if (!data) return;
+        // Extract home core products from full table
+        var coreProducts = [];
+        if (Array.isArray(data)) {
+          data.forEach(function (cat) {
+            if (cat.products) {
+              cat.products.forEach(function (p) {
+                if (p.is_home_core) coreProducts.push(p);
+              });
+            }
+          });
+        }
+        if (coreProducts.length === 0) {
+          // Show empty state instead of blank
+          var emptyContainer = document.querySelector('[id^="home-core-products"]');
+          if (emptyContainer) {
+            var emptyMsg = tl("no_core_products", "暂无核心产品");
+            emptyContainer.innerHTML = '<div class="text-center text-slate-400 py-8">' + escHtml(emptyMsg) + "</div>";
+          }
+          callback([], "network");
+          return;
+        }
+        _saveCache(coreProducts);
+        callback(coreProducts, "network");
+      })
+      .catch(function (err) {
+        _loadCachedFallback(callback);
+      });
   }
 
   /**
    * Background refresh — fetches fresh data silently
    */
   function _refreshInBackground(callback) {
-    // Refresh from PRODUCT_DATA_TABLE (no API)
-    var table = window.PRODUCT_DATA_TABLE || [];
-    var coreProducts = table.filter(function (p) {
-      return p.is_home_core || p.isHomeCore;
-    });
-    if (coreProducts.length > 0) {
-      _saveCache(coreProducts);
-      window.HOME_CORE_PRODUCTS = coreProducts;
-    }
+    var etag = null;
+    try {
+      etag = localStorage.getItem(CACHE_VERSION_KEY);
+    } catch (e) {}
+
+    var headers = {};
+    if (etag) headers["If-None-Match"] = etag;
+
+    fetch(API_URL + "?home_core=1&_bg=" + Date.now(), { headers: headers })
+      .then(function (res) {
+        var newEtag = res.headers.get("ETag");
+        if (newEtag) {
+          try {
+            localStorage.setItem(CACHE_VERSION_KEY, newEtag);
+          } catch (e) {}
+        }
+        if (res.status === 304) return null;
+        return res.json();
+      })
+      .then(function (data) {
+        if (!data) return;
+        var coreProducts = [];
+        if (Array.isArray(data)) {
+          data.forEach(function (cat) {
+            if (cat.products) {
+              cat.products.forEach(function (p) {
+                if (p.is_home_core) coreProducts.push(p);
+              });
+            }
+          });
+        }
+        if (coreProducts.length > 0) {
+          _saveCache(coreProducts);
+          window.HOME_CORE_PRODUCTS = coreProducts;
+        }
+      })
+      .catch(function () {});
   }
 
   /**

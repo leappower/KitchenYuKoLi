@@ -2331,7 +2331,7 @@
   "products_cta_title_mobile": "需要定制方案？",
   "products_detail_product_detail": "產品詳情",
   "products_filter_smart": "智能",
-  "products_filter_starter": "入門",
+  "products_filter_starter": "基礎",
   "products_filter_title": "篩選產品",
   "products_filter_type": "設備類型",
   "products_hero_badge": "工業卓越",
@@ -3499,5 +3499,7 @@
   "breadcrumb_other_services": "zh",
   "quote_takeaway": "外賣",
   "quote_select_restaurant_type": "選擇餐廳類型",
-  "quote_select_channel": "選擇聯繫方式"
+  "quote_select_channel": "選擇聯繫方式",
+  "products_filter_full_smart": "全智能",
+  "products_filter_basic": "基礎"
 }

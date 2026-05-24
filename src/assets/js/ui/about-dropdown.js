@@ -95,7 +95,7 @@
         return (
           '<a href="' +
           esc(item.href) +
-          '" class="abt-popup-item">' +
+          '" data-no-swup class="abt-popup-item">' +
           '<span class="abt-dropdown-icon"><span class="material-symbols-outlined">' +
           esc(item.icon) +
           "</span></span>" +
