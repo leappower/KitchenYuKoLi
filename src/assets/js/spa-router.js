@@ -246,35 +246,48 @@
     });
 
     // ── Restore dropdown state (called after navigation completes) ──
+    //
+    // Strategy: Restore pointer-events immediately so dropdowns work.
+    // But keep display:none on panels until the user moves their mouse
+    // OUT of the dropdown area. Only then clear display:none.
+    //
+    // Why: dropdown-styles.js CSS rule
+    //   .wrap:hover .panel { visibility:visible; opacity:1 }
+    // fires instantly on any element under the cursor after DOM load.
+    // No timeout is reliable — only mouseleave guarantees the user
+    // has moved away.
     function _restoreDropdownState() {
       if (!global.__pendingPointerRestore) return;
       global.__pendingPointerRestore = false;
 
-      // Restore pointer-events immediately so dropdowns work.
-      // But KEEP display:none briefly to prevent residual CSS :hover
-      // from re-showing the panel instantly.
-      var panelsToRestore = [];
       for (var wi = 0; wi < DROPDOWN_WRAP_SELECTORS.length; wi++) {
         var wraps = document.querySelectorAll(DROPDOWN_WRAP_SELECTORS[wi]);
         for (var wj = 0; wj < wraps.length; wj++) {
           wraps[wj].style.pointerEvents = "";
-          var panel = wraps[wj].querySelector(DROPDOWN_PANEL_SELECTOR);
-          if (panel && panel.dataset.navHidden === "1") {
-            panelsToRestore.push(panel);
-          }
         }
       }
 
-      if (panelsToRestore.length > 0) {
-        setTimeout(function () {
-          for (var pi = 0; pi < panelsToRestore.length; pi++) {
-            if (panelsToRestore[pi].dataset.navHidden === "1") {
-              panelsToRestore[pi].style.display = "";
-              delete panelsToRestore[pi].dataset.navHidden;
-            }
+      // Schedule panel restore on mouseleave. Use a one-shot
+      // listener on document.body that fires once the mouse leaves
+      // ANY dropdown wrap. Then clear display:none on all panels.
+      function _onLeave() {
+        document.body.removeEventListener("mouseleave", _onLeave, true);
+        var panels = document.querySelectorAll(DROPDOWN_PANEL_SELECTOR);
+        for (var pi = 0; pi < panels.length; pi++) {
+          if (panels[pi].dataset.navHidden === "1") {
+            panels[pi].style.display = "";
+            delete panels[pi].dataset.navHidden;
           }
-        }, 150);
+        }
       }
+      document.body.addEventListener("mouseleave", _onLeave, true);
+
+      // Safety timeout: if mouseleave never fires (e.g. touch device),
+      // restore after 2 seconds.
+      setTimeout(function () {
+        document.body.removeEventListener("mouseleave", _onLeave, true);
+        _onLeave();
+      }, 2000);
     }
 
     swupHooks.on("visit:abort", _restoreDropdownState);
