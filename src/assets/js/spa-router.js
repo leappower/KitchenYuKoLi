@@ -270,34 +270,6 @@
         skel.style.display = "";
         skel.removeAttribute("hidden");
       }
-      // Close all open dropdowns BEFORE navigation (Swup replaces DOM)
-      try {
-        var closeFn = global.closeOtherDropdowns;
-        if (typeof closeFn === "function") {
-          closeFn(null);
-        } else {
-          // Fallback: directly remove is-open classes
-          var selectors = [
-            ".prod-dropdown-wrap.is-open",
-            ".app-dropdown-wrap.is-open",
-            ".sup-dropdown-wrap.is-open",
-            ".abt-dropdown-wrap.is-open",
-            ".cnt-dropdown-wrap.is-open",
-          ];
-          for (var i_ = 0; i_ < selectors.length; i_++) {
-            var els_ = document.querySelectorAll(selectors[i_]);
-            for (var j_ = 0; j_ < els_.length; j_++) {
-              els_[j_].classList.remove("is-open");
-            }
-          }
-        }
-        // Also close SlideMenu
-        if (global.SlideMenu && typeof global.SlideMenu.close === "function") {
-          global.SlideMenu.close();
-        }
-      } catch (e_) {
-        // Silently ignore
-      }
     });
 
     // ── Graceful degradation ──────────────────────────────────────
