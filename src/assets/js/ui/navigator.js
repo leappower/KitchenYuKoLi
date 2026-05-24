@@ -1271,9 +1271,11 @@
       function (e) {
         var targetWrap = e.target.closest(DROPDOWN_WRAP_SELECTORS.join(", "));
         var blocked = !!window.__dropdownHoverBlocked;
+        var isNavigating = !!window.__spaNavigating;
         var hasIsOpen = targetWrap ? targetWrap.classList.contains("is-open") : false;
-        console.log('[nav:mouseover] blocked=' + blocked + ' hasWrap=' + !!targetWrap + ' wasOpen=' + hasIsOpen);
-        if (blocked) return;
+        console.log('[nav:mouseover] blocked=' + blocked + ' navigating=' + isNavigating + ' hasWrap=' + !!targetWrap + ' wasOpen=' + hasIsOpen);
+        // Block hover-based open during SPA navigation AND for a brief window after
+        if (blocked || isNavigating) return;
         var wrap = e.target.closest(DROPDOWN_WRAP_SELECTORS.join(", "));
         if (wrap && !wrap.classList.contains("touch-device")) {
           closeOtherDropdowns(wrap);
@@ -1677,6 +1679,12 @@
    */
   _spaOn(document, "spa:load", function () {
     console.log('[nav:spa:load] spa:load fired');
+    
+    // Block hover-based dropdown open for 500ms after SPA nav completes
+    // to prevent residual mouseover from re-opening the dropdown
+    window.__dropdownHoverBlocked = true;
+    setTimeout(function () { window.__dropdownHoverBlocked = false; }, 500);
+    
     var stillOpen = document.querySelectorAll('.prod-dropdown-wrap.is-open,.app-dropdown-wrap.is-open,.sup-dropdown-wrap.is-open,.abt-dropdown-wrap.is-open,.cnt-dropdown-wrap.is-open');
     if (stillOpen.length) {
       console.log('[nav:spa:load] found ' + stillOpen.length + ' open dropdowns, closing them');
