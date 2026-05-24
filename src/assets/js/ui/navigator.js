@@ -1647,6 +1647,11 @@
    *  公开 API - window.Navigator
    * ================================================================ */
 
+  /* Expose closeOtherDropdowns globally so spa-router can close all
+   * dropdowns before Swup navigation begins (prevents dropdowns from
+   * remaining open after SPA page transition). */
+  window.closeOtherDropdowns = closeOtherDropdowns;
+
   window.Navigator = {
     /**
      * 挂载导航栏(查找占位符并替换)
