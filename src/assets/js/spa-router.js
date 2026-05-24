@@ -29,13 +29,48 @@
 
 /**
  * spa-router.js — Swup-backed SPA router
- *
- * Swup handles: link interception, fetch, DOM replacement, head/body scoping.
- * This file provides: Swup initialization, backward-compatible API, and
- * lifecycle events that other modules rely on.
  */
 (function (global) {
   "use strict";
+
+  // ── DEBUG: trace ALL panel display changes ─────────────────────
+  function _logPanelState(label) {
+    var panels = document.querySelectorAll('.prod-dropdown-panel, .app-dropdown-panel, .sup-dropdown-panel, .abt-dropdown-panel, .cnt-dropdown-panel');
+    for (var pi = 0; pi < panels.length; pi++) {
+      var p = panels[pi];
+      var wrap = p.closest('[class*="dropdown-wrap"]');
+      var wrapClass = wrap ? wrap.className : '(no wrap)';
+      var cs = window.getComputedStyle(p);
+      console.log('[PANEL:' + label + '] #' + pi + ' wrap=' + wrapClass.substring(0, 40) +
+        ' display=' + p.style.display +
+        ' computed.visibility=' + cs.visibility +
+        ' computed.opacity=' + cs.opacity +
+        ' computed.display=' + cs.display +
+        ' navHidden=' + (p.dataset.navHidden || 'none'));
+    }
+  }
+  window.__logPanelState = _logPanelState;
+
+  // ── DEBUG: MutationObserver on dropdown wraps ──────────────────
+  function _watchDropdownMutations() {
+    var wraps = document.querySelectorAll('.prod-dropdown-wrap, .app-dropdown-wrap, .sup-dropdown-wrap, .abt-dropdown-wrap, .cnt-dropdown-wrap');
+    for (var wi = 0; wi < wraps.length; wi++) {
+      if (wraps[wi]._watched) continue;
+      wraps[wi]._watched = true;
+      new MutationObserver(function(mutations) {
+        mutations.forEach(function(m) {
+          if (m.target.style && m.attributeName === 'style') {
+            var display = m.target.querySelector('.prod-dropdown-panel, .app-dropdown-panel, .sup-dropdown-panel, .abt-dropdown-panel, .cnt-dropdown-panel');
+            if (display) {
+              console.log('[PANEL:MUTATION] style changed on wrap: ' + m.target.className.substring(0, 40) +
+                ' panel.style.display=' + display.style.display +
+                ' stack=' + (new Error().stack || '').split('\n').slice(2, 5).join(' → '));
+            }
+          }
+        });
+      }).observe(wraps[wi], { attributes: true, attributeFilter: ['style'] });
+    }
+  }
 
   var _spaState = { currentRoute: global.location.pathname.replace(/\/$/, "") || "/" };
   var _spaListeners = [];
@@ -69,8 +104,6 @@
 
   // ── Swup initialization ────────────────────────────────────────────
   function initSwup() {
-    // Destroy any previous Swup instance (e.g., after navigation to 404 page
-    // that left Swup in a broken state due to container mismatch)
     if (global.swupInstance) {
       try {
         global.swupInstance.destroy();
@@ -81,8 +114,6 @@
     }
 
     if (global.Swup === undefined) {
-      // Swup not loaded yet — retry after a short delay.
-      // defer scripts may execute in any order; we can't assume Swup is ready.
       setTimeout(initSwup, 10);
       return;
     }
@@ -109,79 +140,48 @@
     }
 
     global.swupInstance = swup;
-
-    // Swup v4 uses hooks.on() instead of .on()
     var swupHooks = swup.hooks || swup;
 
     // ── Client-side device-aware fetch ─────────────────────────────
-    // Static hosts (GitHub Pages, S3, etc.) serve index.html (mobile)
-    // for all requests. Swup fetch gets mobile HTML → wrong layout on PC.
-    // Fix: intercept Swup's fetch:request and rewrite the URL to point
-    // to index-{device}.html based on the current device type.
     (function () {
       var deviceUtils = global.DeviceUtils;
       if (!deviceUtils || !deviceUtils.getDeviceType) return;
       var deviceType = deviceUtils.getDeviceType();
       var suffixMap = { mobile: "index-mobile.html", tablet: "index-tablet.html", pc: "index-pc.html" };
       var suffix = suffixMap[deviceType];
-      if (!suffix) return; // safety
-
+      if (!suffix) return;
       swupHooks.on("fetch:request", function (visit, { args }) {
         if (!args || !args.url) return;
         var url = args.url;
-        // Only rewrite directory URLs like /profit-calculator/ or /about/
-        // Do NOT touch: /assets/js/..., /index-pc.html (already device-specific), etc.
         if (!/\/$/.test(url) && !/\/index\.html$/.test(url)) return;
-        // If already requesting a device-specific file, skip
         if (/index-(mobile|pc|tablet)\.html$/.test(url)) return;
-        // Rewrite: /profit-calculator/ → /profit-calculator/index-pc.html
-        //          /about/ → /about/index-pc.html
         var base = url.replace(/\/index\.html$/, "");
         var newUrl = base + suffix;
         args.url = newUrl;
       });
     })();
 
-    // Reload ALL page-specific scripts after SPA navigation.
-    //
-    // Why: Swup v4 only replaces #spa-content. Page scripts live in <head>
-    // (defer) and body (after </main>). Neither is re-executed by Swup.
-    //
-    // Strategy: On every navigation, remove all previously injected scripts,
-    // then reload every non-global script the new page needs. The browser
-    // execute on the next microtask to avoid blocking navigation paint.
     var _dynamicScripts = [];
-    // Include ALL global/shared scripts that persist across SPA navigation.
-    // Missing entries cause redundant script injection on every page transition.
-    // This list should match all scripts loaded by src/index.html (the SPA shell).
-    // 全局脚本正则：优先用 build 时注入的 window._SPA_GLOBAL_PATTERNS，
-    // fallback 到硬编码列表（dev 模式或未注入时）。
-    // ⚠️  新增全局脚本只需改 scripts/core-scripts.json 的 core[]
-    //     build 时自动生成 window._SPA_GLOBAL_PATTERNS 注入到每页。
     var _globalScriptPatterns =
       window._SPA_GLOBAL_PATTERNS ||
       /(?:^|[/])(?:product-data-table|spa-router|swup|translations|lang-registry|translations-dropdown-template|spa-events|dropdown-base|dropdown-styles|navigator|nav-config|footer|slide-menu|products-dropdown|applications-dropdown|support-dropdown|about-dropdown|contact-dropdown|product-list|product-grid|product-detail|case-grid|utils|search-engine|device-utils|hero-video|contacts|page-interactions|common|main|init|image-assets|media-queries|floating-actions|currency|custom-select|breadcrumb|home-core-products|compare|cross-sell|profit-calculator|quote-form|quote-select-i18n|quote-budget-i18n|news-detail|support-contact-channels|support-wechat-modal|smart-popup|helpers|page-effects|form-interactions|router|roi-data|cases-page|html2canvas|jspdf|pi-maps)\.js/;
     function reloadPageScripts(newDoc) {
       if (!newDoc) return;
-      // 1. Remove all previously injected script tags
       for (var d = 0; d < _dynamicScripts.length; d++) {
         if (_dynamicScripts[d].parentNode) {
           _dynamicScripts[d].parentNode.removeChild(_dynamicScripts[d]);
         }
       }
       _dynamicScripts = [];
-      // 2. Collect all script[src] from the new page (head + body)
       var headScripts = newDoc.head.querySelectorAll("script[src]");
       var bodyScripts = newDoc.body.querySelectorAll("script[src]");
       var allNewScripts = Array.prototype.slice.call(headScripts).concat(Array.prototype.slice.call(bodyScripts));
-      // 3. Get current document script srcs for dedup
       var currentScripts = document.querySelectorAll("script[src]");
       var currentSrcs = {};
       for (var c = 0; c < currentScripts.length; c++) {
         var curKey = currentScripts[c].getAttribute("src").replace(/\?.*$/, "");
         currentSrcs[curKey] = true;
       }
-      // 4. Collect scripts to inject
       var toInject = [];
       for (var i = 0; i < allNewScripts.length; i++) {
         var src = allNewScripts[i].getAttribute("src");
@@ -190,17 +190,15 @@
         if (_globalScriptPatterns.test(srcKey)) continue;
         if (currentSrcs[srcKey]) continue;
         toInject.push(src);
-        currentSrcs[srcKey] = true; // prevent duplicate within same navigation
+        currentSrcs[srcKey] = true;
       }
-      // 5. Inject scripts asynchronously in batches — defer to idle to
-      // let the browser paint the new content first, then load JS.
       function injectBatch(idx) {
         var batchSize = 3;
         var end = Math.min(idx + batchSize, toInject.length);
         for (var j = idx; j < end; j++) {
           var newScript = document.createElement("script");
           newScript.src = toInject[j];
-          newScript.async = false; // preserve execution order within batch
+          newScript.async = false;
           document.head.appendChild(newScript);
           _dynamicScripts.push(newScript);
         }
@@ -217,20 +215,12 @@
       }
     }
 
-    // Forward Swup lifecycle to spa:load event
+    // ── Hook 1: content:replace (registered first) ──────────────────
     swupHooks.on("content:replace", function (visit) {
-      console.log('[spa:content:replace] Swup content:replace fired');
-      // Check if any dropdowns still have is-open after content replace
-      var stillOpen = document.querySelectorAll('.prod-dropdown-wrap.is-open,.app-dropdown-wrap.is-open,.sup-dropdown-wrap.is-open,.abt-dropdown-wrap.is-open,.cnt-dropdown-wrap.is-open');
-      if (stillOpen.length) {
-        console.log('[spa:content:replace] WARNING: ' + stillOpen.length + ' dropdowns still open after replace!');
-        for (var si = 0; si < stillOpen.length; si++) {
-          stillOpen[si].classList.remove('is-open');
-        }
-      }
+      console.log('[SPA] === content:replace START ===');
+      _logPanelState('content-replace-start');
       global.__spaNavigating = false;
       _spaState.currentRoute = global.location.pathname.replace(/\/$/, "") || "/";
-      // Fade out skeleton overlay after content is replaced
       var skel = document.getElementById("skeleton-overlay");
       if (skel) {
         skel.setAttribute("hidden", "");
@@ -238,19 +228,9 @@
           skel.style.display = "none";
         }, 300);
       }
-      // Reload page-specific scripts from the NEW page (not just #spa-content)
       var newDoc = visit && visit.to && visit.to.document ? visit.to.document : null;
       reloadPageScripts(newDoc);
-      // Do NOT re-mount navigator on SPA navigation.
-      // Swup containers=["#spa-content"] only replaces main content;
-      // body-level <navigator> survives. Calling mount() destroys
-      // existing dropdown event bindings by rebuilding the header DOM
-      // from scratch, while initDropdownClick will not rebind
-      // triggers because _docClickBound is already true.
-      // Instead, only update the active state to reflect new route.
-      // Update navigator active state
       if (global.Navigator && typeof global.Navigator.updateActive === "function") {
-        // Extract the top-level section from the route (e.g. /cases/manila → "cases")
         var sectionId =
           _spaState.currentRoute === "/"
             ? "/"
@@ -263,131 +243,133 @@
       if (global.Footer && typeof global.Footer.updateActive === "function") {
         global.Footer.updateActive(sectionId);
       }
-      // Trigger spa:load for other modules
+      console.log('[SPA] === content:replace before dispatchSpaLoad ===');
+      _logPanelState('content-replace-before-spa-load');
       dispatchSpaLoad();
+      console.log('[SPA] === content:replace after dispatchSpaLoad ===');
+      _logPanelState('content-replace-after-spa-load');
     });
 
-    // Safety net: if Swup intercepts a click but navigation hangs >3s,
-    // allow the next click to bypass Swup entirely.
+    // ── visit:start ──────────────────────────────────────────────────
     var _lastSwupNavStart = 0;
     swupHooks.on("visit:start", function () {
-      console.log('[spa:visit:start] Swup visit:start fired, nav=' + _spaState.currentRoute);
+      console.log('[SPA] === visit:start ===');
+      _logPanelState('visit-start-before');
+      _watchDropdownMutations();
       global.__spaNavigating = true;
       _lastSwupNavStart = Date.now();
-      // Show skeleton overlay for SPA navigation transitions
       var skel = document.getElementById("skeleton-overlay");
       if (skel) {
         skel.style.display = "";
         skel.removeAttribute("hidden");
       }
-      // Close all open dropdowns BEFORE Swup replaces DOM.
-      // Strategy: (1) remove is-open class (JS-based toggle), (2) force-hide
-      // all dropdown panels via CSS (catches CSS :hover-based panels),
-      // (3) block pointer events to prevent re-open during transition.
       try {
         var wrapSelectors = [
-          ".prod-dropdown-wrap",
-          ".app-dropdown-wrap",
-          ".sup-dropdown-wrap",
-          ".abt-dropdown-wrap",
-          ".cnt-dropdown-wrap",
+          ".prod-dropdown-wrap", ".app-dropdown-wrap",
+          ".sup-dropdown-wrap", ".abt-dropdown-wrap", ".cnt-dropdown-wrap",
         ];
-        var totalClosed = 0;
         for (var wi = 0; wi < wrapSelectors.length; wi++) {
           var wraps = document.querySelectorAll(wrapSelectors[wi]);
           for (var wj = 0; wj < wraps.length; wj++) {
             wraps[wj].classList.remove("is-open");
             wraps[wj].style.pointerEvents = "none";
-            // Force-hide all dropdown panels inside this wrap
             var panel = wraps[wj].querySelector(
               ".prod-dropdown-panel, .app-dropdown-panel, .sup-dropdown-panel, .abt-dropdown-panel, .cnt-dropdown-panel"
             );
             if (panel) {
+              console.log('[SPA:visit:start] panel display BEFORE: ' + panel.style.display);
               panel.style.display = "none";
               panel.dataset.navHidden = "1";
+              console.log('[SPA:visit:start] panel display AFTER: ' + panel.style.display + ' navHidden=' + panel.dataset.navHidden);
             }
-            totalClosed++;
           }
         }
-        console.log('[spa:visit:start] closed ' + totalClosed + ' dropdown wraps (is-open + pointer-events:none + display:none)');
         global.__pendingPointerRestore = true;
       } catch (e) {}
+      _logPanelState('visit-start-after');
     });
 
     // ── Graceful degradation ──────────────────────────────────────
-    // Do NOT do location.href jumps on abort/error — that breaks user
-    // interaction (SwupPreloadPlugin also triggers these for hovered links).
-    // Instead, just reset the navigating flag so the page stays usable.
     function _restoreDropdownState() {
-      global.__spaNavigating = false;
-      _lastSwupNavStart = 0;
-      if (global.__pendingPointerRestore) {
-        global.__pendingPointerRestore = false;
-        var wrapSelectors = [
-          ".prod-dropdown-wrap",
-          ".app-dropdown-wrap",
-          ".sup-dropdown-wrap",
-          ".abt-dropdown-wrap",
-          ".cnt-dropdown-wrap",
-        ];
-        for (var wi = 0; wi < wrapSelectors.length; wi++) {
-          var wraps = document.querySelectorAll(wrapSelectors[wi]);
-          for (var wj = 0; wj < wraps.length; wj++) {
-            wraps[wj].style.pointerEvents = "";
-            // Restore dropdown panels hidden by visit:start
-            var panel = wraps[wj].querySelector(
-              ".prod-dropdown-panel, .app-dropdown-panel, .sup-dropdown-panel, .abt-dropdown-panel, .cnt-dropdown-panel"
-            );
-            if (panel && panel.dataset.navHidden === "1") {
+      console.log('[SPA] _restoreDropdownState() called, pending=' + global.__pendingPointerRestore);
+      if (!global.__pendingPointerRestore) {
+        console.log('[SPA] _restoreDropdownState SKIP — not pending');
+        return;
+      }
+      global.__pendingPointerRestore = false;
+      var wrapSelectors = [
+        ".prod-dropdown-wrap", ".app-dropdown-wrap",
+        ".sup-dropdown-wrap", ".abt-dropdown-wrap", ".cnt-dropdown-wrap",
+      ];
+      for (var wi = 0; wi < wrapSelectors.length; wi++) {
+        var wraps = document.querySelectorAll(wrapSelectors[wi]);
+        for (var wj = 0; wj < wraps.length; wj++) {
+          wraps[wj].style.pointerEvents = "";
+          var panel = wraps[wj].querySelector(
+            ".prod-dropdown-panel, .app-dropdown-panel, .sup-dropdown-panel, .abt-dropdown-panel, .cnt-dropdown-panel"
+          );
+          if (panel) {
+            console.log('[SPA:_restore] panel BEFORE restore: display=' + panel.style.display + ' navHidden=' + (panel.dataset.navHidden || 'none'));
+            if (panel.dataset.navHidden === "1") {
               panel.style.display = "";
               delete panel.dataset.navHidden;
+              console.log('[SPA:_restore] panel RESTORED: display now=' + panel.style.display);
+            } else {
+              console.log('[SPA:_restore] panel NOT restored (navHidden !== "1"), keeping display=' + panel.style.display);
             }
           }
         }
-        console.log('[spa:nav] restored dropdown state');
       }
+      _logPanelState('restore-dropdown-done');
     }
 
     swupHooks.on("visit:abort", _restoreDropdownState);
     swupHooks.on("fetch:error", _restoreDropdownState);
 
+    // ── Hook 2: content:replace (registered second, for panel cleanup) ──
     swupHooks.on("content:replace", function () {
+      console.log('[SPA] === content:replace hook 2 (panel cleanup) ===');
       _lastSwupNavStart = 0;
-      // Do NOT restore dropdown state yet — spa:load will re-render
-      // dropdowns (products-dropdown.js injects new HTML) AFTER
-      // content:replace. Restoring now would make the old display:none
-      // ineffective against newly injected DOM.
-      // Instead, schedule restore after a microtask to give spa:load
-      // handlers time to run.
+      _logPanelState('content-replace-hook2-before');
       global.__spaRestorePending = true;
       requestAnimationFrame(function () {
-        // Close dropdowns that may have been re-injected by spa:load
+        console.log('[SPA] === rAF callback (post spa:load) ===');
+        _logPanelState('raf-before-cleanup');
         var wrapSelectors = [
-          ".prod-dropdown-wrap",
-          ".app-dropdown-wrap",
-          ".sup-dropdown-wrap",
-          ".abt-dropdown-wrap",
-          ".cnt-dropdown-wrap",
+          ".prod-dropdown-wrap", ".app-dropdown-wrap",
+          ".sup-dropdown-wrap", ".abt-dropdown-wrap", ".cnt-dropdown-wrap",
         ];
         for (var wi = 0; wi < wrapSelectors.length; wi++) {
           var wraps = document.querySelectorAll(wrapSelectors[wi]);
           for (var wj = 0; wj < wraps.length; wj++) {
             wraps[wj].classList.remove("is-open");
-            // Force-hide any new panels injected by spa:load
             var panel = wraps[wj].querySelector(
               ".prod-dropdown-panel, .app-dropdown-panel, .sup-dropdown-panel, .abt-dropdown-panel, .cnt-dropdown-panel"
             );
             if (panel) {
+              console.log('[SPA:rAF] panel BEFORE cleanup: display=' + panel.style.display + ' navHidden=' + (panel.dataset.navHidden || 'none'));
               panel.style.display = "none";
               panel.dataset.navHidden = "1";
+              console.log('[SPA:rAF] panel AFTER cleanup: display=' + panel.style.display);
             }
           }
         }
-        console.log('[spa:visit:start] post-replace panel check done');
-        // Now restore dropdown state (clears pointer-events:none and display:none)
+        _logPanelState('raf-after-cleanup');
         _restoreDropdownState();
+        _logPanelState('raf-after-restore-final');
+        // 1 second later check
+        setTimeout(function() {
+          console.log('[SPA] === 1s post-navigation check ===');
+          _logPanelState('1s-post-nav');
+        }, 1000);
+        // 3 seconds later check
+        setTimeout(function() {
+          console.log('[SPA] === 3s post-navigation check ===');
+          _logPanelState('3s-post-nav');
+        }, 3000);
       });
     });
+
     document.addEventListener(
       "click",
       function (e) {
@@ -399,14 +381,9 @@
       true
     );
 
-    // Handle popstate (browser back/forward) — scroll to top
     global.addEventListener("popstate", function () {
       global.scrollTo({ top: 0, left: 0, behavior: "instant" });
     });
-
-    // Initial dispatch — REMOVED. product-grid.js renders on DOMContentLoaded directly.
-    // This dispatch caused spa:load to fire BEFORE Swup's first content:replace,
-    // which resulted in product-grid rendering content that Swup then overwrote.
   }
 
   // ── Backward-compatible API ────────────────────────────────────────
@@ -416,7 +393,6 @@
       if (global.swupInstance) {
         global.swupInstance.navigate(url);
       } else {
-        // Fallback: plain redirect
         global.location.href = url;
       }
     },
@@ -428,9 +404,6 @@
 
   global.SpaRouter = SpaRouter;
 
-  // ── Auto-init ──────────────────────────────────────────────────────
-  // Always use DOMContentLoaded or immediate-ready to kick off initSwup.
-  // initSwup will self-retry if Swup is not yet loaded (defer order may vary).
   if (document.readyState === "loading") {
     document.addEventListener("DOMContentLoaded", function () {
       initSwup();
