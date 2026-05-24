@@ -298,15 +298,24 @@
           }
         }
         console.log('[spa:visit:start] removed is-open from ' + totalFound + ' dropdown wraps');
-        // Temporarily suppress mouseover re-opening of dropdowns.
-        // When user clicks an item, their mouse remains over the dropdown area.
-        // After Swup navigation completes, the mouse position may trigger
-        // mouseover on the new page, re-opening the dropdown.
-        // Block mouseover-based open for 800ms after visit:start.
-        global.__dropdownHoverBlocked = true;
-        setTimeout(function () {
-          global.__dropdownHoverBlocked = false;
-        }, 800);
+        // Prevent ALL mouse events on dropdowns during SPA navigation.
+        // Without this, mouseover/mousedown events on the dropdown can
+        // re-add is-open before or during Swup's DOM replacement.
+        var wrapSelectors = [
+          ".prod-dropdown-wrap",
+          ".app-dropdown-wrap",
+          ".sup-dropdown-wrap",
+          ".abt-dropdown-wrap",
+          ".cnt-dropdown-wrap",
+        ];
+        for (var wi = 0; wi < wrapSelectors.length; wi++) {
+          var wraps = document.querySelectorAll(wrapSelectors[wi]);
+          for (var wj = 0; wj < wraps.length; wj++) {
+            wraps[wj].style.pointerEvents = "none";
+          }
+        }
+        // Re-enable after navigation completes
+        global.__pendingPointerRestore = true;
       } catch (e) {}
     });
 
@@ -314,18 +323,49 @@
     // Do NOT do location.href jumps on abort/error — that breaks user
     // interaction (SwupPreloadPlugin also triggers these for hovered links).
     // Instead, just reset the navigating flag so the page stays usable.
-    swupHooks.on("visit:abort", function () {
+    function _restorePointerEvents() {
       global.__spaNavigating = false;
       _lastSwupNavStart = 0;
-    });
+      if (global.__pendingPointerRestore) {
+        global.__pendingPointerRestore = false;
+        var wrapSelectors = [
+          ".prod-dropdown-wrap",
+          ".app-dropdown-wrap",
+          ".sup-dropdown-wrap",
+          ".abt-dropdown-wrap",
+          ".cnt-dropdown-wrap",
+        ];
+        for (var wi = 0; wi < wrapSelectors.length; wi++) {
+          var wraps = document.querySelectorAll(wrapSelectors[wi]);
+          for (var wj = 0; wj < wraps.length; wj++) {
+            wraps[wj].style.pointerEvents = "";
+          }
+        }
+      }
+    }
 
-    swupHooks.on("fetch:error", function () {
-      global.__spaNavigating = false;
-      _lastSwupNavStart = 0;
-    });
+    swupHooks.on("visit:abort", _restorePointerEvents);
+    swupHooks.on("fetch:error", _restorePointerEvents);
 
     swupHooks.on("content:replace", function () {
       _lastSwupNavStart = 0;
+      // Restore pointer-events on dropdown wraps
+      if (global.__pendingPointerRestore) {
+        global.__pendingPointerRestore = false;
+        var wrapSelectors = [
+          ".prod-dropdown-wrap",
+          ".app-dropdown-wrap",
+          ".sup-dropdown-wrap",
+          ".abt-dropdown-wrap",
+          ".cnt-dropdown-wrap",
+        ];
+        for (var wi = 0; wi < wrapSelectors.length; wi++) {
+          var wraps = document.querySelectorAll(wrapSelectors[wi]);
+          for (var wj = 0; wj < wraps.length; wj++) {
+            wraps[wj].style.pointerEvents = "";
+          }
+        }
+      }
     });
     document.addEventListener(
       "click",
