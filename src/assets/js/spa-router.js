@@ -280,27 +280,11 @@
         skel.style.display = "";
         skel.removeAttribute("hidden");
       }
-      // Close all open dropdowns BEFORE Swup replaces DOM
+      // Close all open dropdowns BEFORE Swup replaces DOM.
+      // Strategy: (1) remove is-open class (JS-based toggle), (2) force-hide
+      // all dropdown panels via CSS (catches CSS :hover-based panels),
+      // (3) block pointer events to prevent re-open during transition.
       try {
-        var selectors = [
-          ".prod-dropdown-wrap.is-open",
-          ".app-dropdown-wrap.is-open",
-          ".sup-dropdown-wrap.is-open",
-          ".abt-dropdown-wrap.is-open",
-          ".cnt-dropdown-wrap.is-open",
-        ];
-        var totalFound = 0;
-        for (var i = 0; i < selectors.length; i++) {
-          var els = document.querySelectorAll(selectors[i]);
-          totalFound += els.length;
-          for (var j = 0; j < els.length; j++) {
-            els[j].classList.remove("is-open");
-          }
-        }
-        console.log('[spa:visit:start] removed is-open from ' + totalFound + ' dropdown wraps');
-        // Prevent ALL mouse events on dropdowns during SPA navigation.
-        // Without this, mouseover/mousedown events on the dropdown can
-        // re-add is-open before or during Swup's DOM replacement.
         var wrapSelectors = [
           ".prod-dropdown-wrap",
           ".app-dropdown-wrap",
@@ -308,13 +292,24 @@
           ".abt-dropdown-wrap",
           ".cnt-dropdown-wrap",
         ];
+        var totalClosed = 0;
         for (var wi = 0; wi < wrapSelectors.length; wi++) {
           var wraps = document.querySelectorAll(wrapSelectors[wi]);
           for (var wj = 0; wj < wraps.length; wj++) {
+            wraps[wj].classList.remove("is-open");
             wraps[wj].style.pointerEvents = "none";
+            // Force-hide all dropdown panels inside this wrap
+            var panel = wraps[wj].querySelector(
+              ".prod-dropdown-panel, .app-dropdown-panel, .sup-dropdown-panel, .abt-dropdown-panel, .cnt-dropdown-panel"
+            );
+            if (panel) {
+              panel.style.display = "none";
+              panel.dataset.navHidden = "1";
+            }
+            totalClosed++;
           }
         }
-        // Re-enable after navigation completes
+        console.log('[spa:visit:start] closed ' + totalClosed + ' dropdown wraps (is-open + pointer-events:none + display:none)');
         global.__pendingPointerRestore = true;
       } catch (e) {}
     });
@@ -323,7 +318,7 @@
     // Do NOT do location.href jumps on abort/error — that breaks user
     // interaction (SwupPreloadPlugin also triggers these for hovered links).
     // Instead, just reset the navigating flag so the page stays usable.
-    function _restorePointerEvents() {
+    function _restoreDropdownState() {
       global.__spaNavigating = false;
       _lastSwupNavStart = 0;
       if (global.__pendingPointerRestore) {
@@ -339,33 +334,26 @@
           var wraps = document.querySelectorAll(wrapSelectors[wi]);
           for (var wj = 0; wj < wraps.length; wj++) {
             wraps[wj].style.pointerEvents = "";
+            // Restore dropdown panels hidden by visit:start
+            var panel = wraps[wj].querySelector(
+              ".prod-dropdown-panel, .app-dropdown-panel, .sup-dropdown-panel, .abt-dropdown-panel, .cnt-dropdown-panel"
+            );
+            if (panel && panel.dataset.navHidden === "1") {
+              panel.style.display = "";
+              delete panel.dataset.navHidden;
+            }
           }
         }
+        console.log('[spa:nav] restored dropdown state');
       }
     }
 
-    swupHooks.on("visit:abort", _restorePointerEvents);
-    swupHooks.on("fetch:error", _restorePointerEvents);
+    swupHooks.on("visit:abort", _restoreDropdownState);
+    swupHooks.on("fetch:error", _restoreDropdownState);
 
     swupHooks.on("content:replace", function () {
       _lastSwupNavStart = 0;
-      // Restore pointer-events on dropdown wraps
-      if (global.__pendingPointerRestore) {
-        global.__pendingPointerRestore = false;
-        var wrapSelectors = [
-          ".prod-dropdown-wrap",
-          ".app-dropdown-wrap",
-          ".sup-dropdown-wrap",
-          ".abt-dropdown-wrap",
-          ".cnt-dropdown-wrap",
-        ];
-        for (var wi = 0; wi < wrapSelectors.length; wi++) {
-          var wraps = document.querySelectorAll(wrapSelectors[wi]);
-          for (var wj = 0; wj < wraps.length; wj++) {
-            wraps[wj].style.pointerEvents = "";
-          }
-        }
-      }
+      _restoreDropdownState();
     });
     document.addEventListener(
       "click",
