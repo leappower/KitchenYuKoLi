@@ -1,6 +1,6 @@
 !(function (t) {
   "use strict";
-  var I18N_CACHE_V = 1779625984;
+  var I18N_CACHE_V = 1779627001;
   var _spaRegs = {};
 
   // ─── Ensure LANG_REGISTRY is loaded ─────────────────────────
@@ -106,7 +106,6 @@
         });
     }),
     (r.prototype.loadUITranslations = function (t) {
-      console.log("[i18n:fetch] loadUITranslations(" + t + ")");
       var e = "ui-" + t;
       if (this.translationsCache.has(e)) return Promise.resolve(this.translationsCache.get(e));
       var n = "yukoli-translations-" + e,
@@ -281,7 +280,6 @@
       return a && a !== t ? a : e;
     }),
     (r.prototype.applyTranslations = function () {
-      var _aLang = this.currentLanguage; console.log("[i18n:apply] applyTranslations() lang=" + _aLang + " elements=" + document.querySelectorAll("[data-i18n]").length);
       var t = this,
         e = "ui-" + this.currentLanguage;
       return (
@@ -423,7 +421,6 @@
       });
     }),
     (r.prototype.setLanguage = function (e) {
-      console.log("[i18n:lang] setLanguage(" + e + ") called, currentLang=" + this.currentLanguage);
       var n = this;
       // Idempotent lock: prevent duplicate calls from firing multiple toasts
       if (n._switchingTo === e) return Promise.resolve();
@@ -686,7 +683,6 @@
       });
     }),
     (r.prototype.initialize = function () {
-      console.log("[i18n:init] initialize() called, lang=" + this.currentLanguage);
       var e = this;
       if (e.isInitialized) return Promise.resolve(e);
       localStorage.getItem("browserLang") || localStorage.setItem("browserLang", this.detectBrowserLanguage());
@@ -773,7 +769,6 @@
   var s = new r();
   (function autoInit() {
     function tryInit() {
-      console.log("[i18n:init] tryInit — isInitialized=" + s.isInitialized + " lang=" + (localStorage.getItem("userLanguage") || "none"));
       if (!s.isInitialized) s.initialize();
     }
     if (document.readyState === "loading") {
@@ -809,51 +804,10 @@
       document,
       "spa:load",
       function () {
-        // [LOG] i18n spa:load — check lang state before re-applying translations
-        (function () {
-          var _l = s.currentLanguage;
-          var _v = s.uiText ? s.uiText("nav_products", "[MISSING]") : "[no uiText]";
-          var _v2 = s.uiText ? s.uiText("nav_applications", "[MISSING]") : "[no uiText]";
-          var _nav_span = document.querySelector('header nav a[href="/products/"] > span[data-i18n="nav_products"]');
-          var _txt = _nav_span ? _nav_span.textContent : "[NOT FOUND]";
-          var _nav_exists = !!document.querySelector("header");
-          var _ph = document.querySelectorAll('[data-component="navigator"]').length;
-          console.debug(
-            "[i18n:spa:load] lang=" +
-              _l +
-              " uiText('nav_products')=" +
-              _v +
-              " uiText('nav_applications')=" +
-              _v2 +
-              " navSpanText=" +
-              _txt.replace(/ /g, "_") +
-              " headerExists=" +
-              _nav_exists +
-              " placeholders=" +
-              _ph
-          );
-        })();
         (s.resetEventListeners(),
           s
             .applyTranslations()
             .then(function () {
-              // [LOG] i18n spa:load — after applyTranslations, check if nav text changed
-              (function () {
-                var _l2 = s.currentLanguage;
-                var _nav_span2 = document.querySelector(
-                  'header nav a[href="/products/"] > span[data-i18n="nav_products"]'
-                );
-                var _txt2 = _nav_span2 ? _nav_span2.textContent : "[NOT FOUND]";
-                var _all_i18n = document.querySelectorAll("[data-i18n]").length;
-                console.log(
-                  "[i18n:spa:load:after] lang=" +
-                    _l2 +
-                    " navSpanText=" +
-                    _txt2.replace(/ /g, "_") +
-                    " totalDataI18n=" +
-                    _all_i18n
-                );
-              })();
               document.dispatchEvent(new Event("spa:ready"));
             })
             .catch(function (t) {

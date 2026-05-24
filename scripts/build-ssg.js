@@ -90,6 +90,13 @@ const path = require('path');
 const DIST_DIR = path.resolve(__dirname, '..', 'dist');
 const SRC_PAGES_DIR = path.resolve(__dirname, '..', 'src', 'pages');
 
+// ─── Build-level version stamp (single value for ALL pages) ─────────
+// Previously Date.now() was called per-page → each page got a different ?v= hash.
+// SwupHeadPlugin compared outerHTML strictly → different ?v= caused CSS <link> tags
+// to accumulate in <head> on every SPA navigation (old kept by persistTags, new added).
+// Now one timestamp per build → all pages share identical ?v= → no accumulation.
+const BUILD_VERSION = process.env.VERSION || ('v=' + Date.now().toString(36));
+
 // ─── Case slug alias map ──────────────────────────────────────────────
 // Maps SSG directory names (derived from src/pages/cases/<city>/) to the
 // SEO-friendly slug used in case-grid.js and roi-data.js.
@@ -352,9 +359,9 @@ function injectCoreScripts(html, routeSlug) {
 
   // 统一注入到 </body> 前
   // 给无版本号的 CSS/JS 加上构建时间戳，防止浏览器缓存旧文件
-  var VERSION = 'v=' + Date.now().toString(36);
-  html = html.replace(/(href="\/assets\/css\/[^"]+)"/g, '$1?' + VERSION + '"');
-  html = html.replace(/(src="\/assets\/js\/[^"]+)(?<!\?v=[^"]*)"/g, '$1?' + VERSION + '"');
+
+  html = html.replace(/(href="\/assets\/css\/[^"]+)"/g, '$1?' + BUILD_VERSION + '"');
+  html = html.replace(/(src="\/assets\/js\/[^"]+)(?<!\?v=[^"]*)"/g, '$1?' + BUILD_VERSION + '"');
   return html.replace(/<\/body>/i, tags.join('\n') + '\n    ' + injectPattern + '\n  </body>');
 }
 
@@ -554,8 +561,6 @@ function copyDeviceFiles(route) {
     return 0;
   }
 
-
-
   ensureDir(destRouteDir);
 
   let copied = 0;
@@ -623,9 +628,9 @@ function generateRootIndex() {
   html = patchHtmlPaths(html);
 
   // Add cache-busting version to all JS/CSS (same as SSG pages)
-  var VERSION = process.env.VERSION || 'v=' + Date.now().toString(36);
-  html = html.replace(/(href="\/assets\/css\/[^\"]+)"/g, '$1?' + VERSION + '"');
-  html = html.replace(/(src="\/assets\/js\/[^\"]+)(?<!\?v=[^"]*)"/g, '$1?' + VERSION + '"');
+
+  html = html.replace(/(href="\/assets\/css\/[^\"]+)"/g, '$1?' + BUILD_VERSION + '"');
+  html = html.replace(/(src="\/assets\/js\/[^\"]+)(?<!\?v=[^"]*)"/g, '$1?' + BUILD_VERSION + '"');
 
   // Write to dist/index.html
   fs.writeFileSync(path.join(DIST_DIR, 'index.html'), html, 'utf-8');

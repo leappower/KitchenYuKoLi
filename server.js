@@ -300,10 +300,15 @@ app.use(express.static(path.join(__dirname, 'dist'), {
   maxAge: 0, // Let Cache-Control header handle caching
   index: false, // Disable default index file serving - we handle it explicitly
   setHeaders: (res, path) => {
-    // Development: no cache at all
+    // Development: short cache for CSS/JS to avoid redundant downloads during SPA nav
     if (!IS_PROD) {
-      res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate');
-      res.setHeader('Pragma', 'no-cache');
+      const ext = path.split('.').pop().toLowerCase();
+      if (['css', 'js'].includes(ext)) {
+        res.setHeader('Cache-Control', 'public, max-age=60, must-revalidate');
+      } else {
+        res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate');
+        res.setHeader('Pragma', 'no-cache');
+      }
       return;
     }
     const ext = path.split('.').pop().toLowerCase();

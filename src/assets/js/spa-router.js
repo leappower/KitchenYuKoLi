@@ -159,7 +159,7 @@
         for (var j = idx; j < end; j++) {
           var newScript = document.createElement("script");
           newScript.src = toInject[j];
-          newScript.async = false;
+          newScript.async = true;
           document.head.appendChild(newScript);
           _dynamicScripts.push(newScript);
         }
@@ -183,8 +183,11 @@
       _lastSwupNavStart = Date.now();
       var skel = document.getElementById("skeleton-overlay");
       if (skel) {
-        skel.style.display = "";
         skel.removeAttribute("hidden");
+        skel.style.display = "";
+        // Force browser to commit the skeleton paint before fetch starts,
+        // ensuring it's visible even on fast connections.
+        skel.offsetHeight; // force reflow
       }
     });
 
