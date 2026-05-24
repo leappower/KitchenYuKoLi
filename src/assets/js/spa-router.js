@@ -287,6 +287,29 @@
         global.__pendingPointerRestore = true;
       } catch (e) {}
       _logPanelState('visit-start-after');
+
+      // Check for residual hover 500ms after navigation completes
+      setTimeout(function () {
+        console.log('[SPA] === 500ms post-visit:start residual check ===');
+        _logPanelState('residual-500ms');
+        var allPanels = document.querySelectorAll('.prod-dropdown-panel, .app-dropdown-panel, .sup-dropdown-panel, .abt-dropdown-panel, .cnt-dropdown-panel');
+        for (var api = 0; api < allPanels.length; api++) {
+          var ap = allPanels[api];
+          var cs = window.getComputedStyle(ap);
+          if (cs.display !== 'none' && cs.visibility !== 'hidden' && parseFloat(cs.opacity) > 0) {
+            console.log('[SPA:residual] Panel #' + api + ' still visible! computed.display=' + cs.display + ' computed.visibility=' + cs.visibility + ' computed.opacity=' + cs.opacity);
+            ap.style.display = 'none';
+            ap.dataset.navHidden = '1';
+            setTimeout(function () {
+              if (ap.dataset.navHidden === '1') {
+                ap.style.display = '';
+                delete ap.dataset.navHidden;
+                console.log('[SPA:residual] Restored panel display after cooldown');
+              }
+            }, 800);
+          }
+        }
+      }, 500);
     });
 
     // ── Graceful degradation ──────────────────────────────────────
