@@ -33,44 +33,12 @@
 (function (global) {
   "use strict";
 
-  // ── DEBUG: trace ALL panel display changes ─────────────────────
-  function _logPanelState(label) {
-    var panels = document.querySelectorAll('.prod-dropdown-panel, .app-dropdown-panel, .sup-dropdown-panel, .abt-dropdown-panel, .cnt-dropdown-panel');
-    for (var pi = 0; pi < panels.length; pi++) {
-      var p = panels[pi];
-      var wrap = p.closest('[class*="dropdown-wrap"]');
-      var wrapClass = wrap ? wrap.className : '(no wrap)';
-      var cs = window.getComputedStyle(p);
-      console.log('[PANEL:' + label + '] #' + pi + ' wrap=' + wrapClass.substring(0, 40) +
-        ' display=' + p.style.display +
-        ' computed.visibility=' + cs.visibility +
-        ' computed.opacity=' + cs.opacity +
-        ' computed.display=' + cs.display +
-        ' navHidden=' + (p.dataset.navHidden || 'none'));
-    }
-  }
-  window.__logPanelState = _logPanelState;
+  var DROPDOWN_WRAP_SELECTORS = [
+    ".prod-dropdown-wrap", ".app-dropdown-wrap",
+    ".sup-dropdown-wrap", ".abt-dropdown-wrap", ".cnt-dropdown-wrap",
+  ];
 
-  // ── DEBUG: MutationObserver on dropdown wraps ──────────────────
-  function _watchDropdownMutations() {
-    var wraps = document.querySelectorAll('.prod-dropdown-wrap, .app-dropdown-wrap, .sup-dropdown-wrap, .abt-dropdown-wrap, .cnt-dropdown-wrap');
-    for (var wi = 0; wi < wraps.length; wi++) {
-      if (wraps[wi]._watched) continue;
-      wraps[wi]._watched = true;
-      new MutationObserver(function(mutations) {
-        mutations.forEach(function(m) {
-          if (m.target.style && m.attributeName === 'style') {
-            var display = m.target.querySelector('.prod-dropdown-panel, .app-dropdown-panel, .sup-dropdown-panel, .abt-dropdown-panel, .cnt-dropdown-panel');
-            if (display) {
-              console.log('[PANEL:MUTATION] style changed on wrap: ' + m.target.className.substring(0, 40) +
-                ' panel.style.display=' + display.style.display +
-                ' stack=' + (new Error().stack || '').split('\n').slice(2, 5).join(' → '));
-            }
-          }
-        });
-      }).observe(wraps[wi], { attributes: true, attributeFilter: ['style'] });
-    }
-  }
+  var DROPDOWN_PANEL_SELECTOR = ".prod-dropdown-panel, .app-dropdown-panel, .sup-dropdown-panel, .abt-dropdown-panel, .cnt-dropdown-panel";
 
   var _spaState = { currentRoute: global.location.pathname.replace(/\/$/, "") || "/" };
   var _spaListeners = [];
@@ -215,10 +183,8 @@
       }
     }
 
-    // ── Hook 1: content:replace (registered first) ──────────────────
+    // ── content:replace ──────────────────────────────────────────────
     swupHooks.on("content:replace", function (visit) {
-      console.log('[SPA] === content:replace START ===');
-      _logPanelState('content-replace-start');
       global.__spaNavigating = false;
       _spaState.currentRoute = global.location.pathname.replace(/\/$/, "") || "/";
       var skel = document.getElementById("skeleton-overlay");
@@ -243,19 +209,12 @@
       if (global.Footer && typeof global.Footer.updateActive === "function") {
         global.Footer.updateActive(sectionId);
       }
-      console.log('[SPA] === content:replace before dispatchSpaLoad ===');
-      _logPanelState('content-replace-before-spa-load');
       dispatchSpaLoad();
-      console.log('[SPA] === content:replace after dispatchSpaLoad ===');
-      _logPanelState('content-replace-after-spa-load');
     });
 
     // ── visit:start ──────────────────────────────────────────────────
     var _lastSwupNavStart = 0;
     swupHooks.on("visit:start", function () {
-      console.log('[SPA] === visit:start ===');
-      _logPanelState('visit-start-before');
-      _watchDropdownMutations();
       global.__spaNavigating = true;
       _lastSwupNavStart = Date.now();
       var skel = document.getElementById("skeleton-overlay");
@@ -263,133 +222,82 @@
         skel.style.display = "";
         skel.removeAttribute("hidden");
       }
+      // Close all dropdowns: remove is-open, block pointer-events,
+      // and force display:none on all panels.
+      // display:none is the only reliable way to override the CSS rule:
+      //   .dropdown-wrap:hover .dropdown-panel { visibility:visible }
+      // which fires instantly when the mouse is still over the area
+      // after SPA navigation loads new DOM.
       try {
-        var wrapSelectors = [
-          ".prod-dropdown-wrap", ".app-dropdown-wrap",
-          ".sup-dropdown-wrap", ".abt-dropdown-wrap", ".cnt-dropdown-wrap",
-        ];
-        for (var wi = 0; wi < wrapSelectors.length; wi++) {
-          var wraps = document.querySelectorAll(wrapSelectors[wi]);
+        for (var wi = 0; wi < DROPDOWN_WRAP_SELECTORS.length; wi++) {
+          var wraps = document.querySelectorAll(DROPDOWN_WRAP_SELECTORS[wi]);
           for (var wj = 0; wj < wraps.length; wj++) {
             wraps[wj].classList.remove("is-open");
             wraps[wj].style.pointerEvents = "none";
-            var panel = wraps[wj].querySelector(
-              ".prod-dropdown-panel, .app-dropdown-panel, .sup-dropdown-panel, .abt-dropdown-panel, .cnt-dropdown-panel"
-            );
+            var panel = wraps[wj].querySelector(DROPDOWN_PANEL_SELECTOR);
             if (panel) {
-              console.log('[SPA:visit:start] panel display BEFORE: ' + panel.style.display);
               panel.style.display = "none";
               panel.dataset.navHidden = "1";
-              console.log('[SPA:visit:start] panel display AFTER: ' + panel.style.display + ' navHidden=' + panel.dataset.navHidden);
             }
           }
         }
         global.__pendingPointerRestore = true;
       } catch (e) {}
-      _logPanelState('visit-start-after');
-
-      // Check for residual hover 500ms after navigation completes
-      setTimeout(function () {
-        console.log('[SPA] === 500ms post-visit:start residual check ===');
-        _logPanelState('residual-500ms');
-        var allPanels = document.querySelectorAll('.prod-dropdown-panel, .app-dropdown-panel, .sup-dropdown-panel, .abt-dropdown-panel, .cnt-dropdown-panel');
-        for (var api = 0; api < allPanels.length; api++) {
-          var ap = allPanels[api];
-          var cs = window.getComputedStyle(ap);
-          if (cs.display !== 'none' && cs.visibility !== 'hidden' && parseFloat(cs.opacity) > 0) {
-            console.log('[SPA:residual] Panel #' + api + ' still visible! computed.display=' + cs.display + ' computed.visibility=' + cs.visibility + ' computed.opacity=' + cs.opacity);
-            ap.style.display = 'none';
-            ap.dataset.navHidden = '1';
-            setTimeout(function () {
-              if (ap.dataset.navHidden === '1') {
-                ap.style.display = '';
-                delete ap.dataset.navHidden;
-                console.log('[SPA:residual] Restored panel display after cooldown');
-              }
-            }, 800);
-          }
-        }
-      }, 500);
     });
 
-    // ── Graceful degradation ──────────────────────────────────────
+    // ── Restore dropdown state (called after navigation completes) ──
     function _restoreDropdownState() {
-      console.log('[SPA] _restoreDropdownState() called, pending=' + global.__pendingPointerRestore);
-      if (!global.__pendingPointerRestore) {
-        console.log('[SPA] _restoreDropdownState SKIP — not pending');
-        return;
-      }
+      if (!global.__pendingPointerRestore) return;
       global.__pendingPointerRestore = false;
-      var wrapSelectors = [
-        ".prod-dropdown-wrap", ".app-dropdown-wrap",
-        ".sup-dropdown-wrap", ".abt-dropdown-wrap", ".cnt-dropdown-wrap",
-      ];
-      for (var wi = 0; wi < wrapSelectors.length; wi++) {
-        var wraps = document.querySelectorAll(wrapSelectors[wi]);
+
+      // Restore pointer-events immediately so dropdowns work.
+      // But KEEP display:none briefly to prevent residual CSS :hover
+      // from re-showing the panel instantly.
+      var panelsToRestore = [];
+      for (var wi = 0; wi < DROPDOWN_WRAP_SELECTORS.length; wi++) {
+        var wraps = document.querySelectorAll(DROPDOWN_WRAP_SELECTORS[wi]);
         for (var wj = 0; wj < wraps.length; wj++) {
           wraps[wj].style.pointerEvents = "";
-          var panel = wraps[wj].querySelector(
-            ".prod-dropdown-panel, .app-dropdown-panel, .sup-dropdown-panel, .abt-dropdown-panel, .cnt-dropdown-panel"
-          );
-          if (panel) {
-            console.log('[SPA:_restore] panel BEFORE restore: display=' + panel.style.display + ' navHidden=' + (panel.dataset.navHidden || 'none'));
-            if (panel.dataset.navHidden === "1") {
-              panel.style.display = "";
-              delete panel.dataset.navHidden;
-              console.log('[SPA:_restore] panel RESTORED: display now=' + panel.style.display);
-            } else {
-              console.log('[SPA:_restore] panel NOT restored (navHidden !== "1"), keeping display=' + panel.style.display);
-            }
+          var panel = wraps[wj].querySelector(DROPDOWN_PANEL_SELECTOR);
+          if (panel && panel.dataset.navHidden === "1") {
+            panelsToRestore.push(panel);
           }
         }
       }
-      _logPanelState('restore-dropdown-done');
+
+      if (panelsToRestore.length > 0) {
+        setTimeout(function () {
+          for (var pi = 0; pi < panelsToRestore.length; pi++) {
+            if (panelsToRestore[pi].dataset.navHidden === "1") {
+              panelsToRestore[pi].style.display = "";
+              delete panelsToRestore[pi].dataset.navHidden;
+            }
+          }
+        }, 150);
+      }
     }
 
     swupHooks.on("visit:abort", _restoreDropdownState);
     swupHooks.on("fetch:error", _restoreDropdownState);
 
-    // ── Hook 2: content:replace (registered second, for panel cleanup) ──
+    // ── Post-navigation cleanup: close any newly injected dropdowns ──
     swupHooks.on("content:replace", function () {
-      console.log('[SPA] === content:replace hook 2 (panel cleanup) ===');
       _lastSwupNavStart = 0;
-      _logPanelState('content-replace-hook2-before');
-      global.__spaRestorePending = true;
       requestAnimationFrame(function () {
-        console.log('[SPA] === rAF callback (post spa:load) ===');
-        _logPanelState('raf-before-cleanup');
-        var wrapSelectors = [
-          ".prod-dropdown-wrap", ".app-dropdown-wrap",
-          ".sup-dropdown-wrap", ".abt-dropdown-wrap", ".cnt-dropdown-wrap",
-        ];
-        for (var wi = 0; wi < wrapSelectors.length; wi++) {
-          var wraps = document.querySelectorAll(wrapSelectors[wi]);
+        // spa:load may have injected new dropdown panels.
+        // Force display:none on them before restoring state.
+        for (var wi = 0; wi < DROPDOWN_WRAP_SELECTORS.length; wi++) {
+          var wraps = document.querySelectorAll(DROPDOWN_WRAP_SELECTORS[wi]);
           for (var wj = 0; wj < wraps.length; wj++) {
             wraps[wj].classList.remove("is-open");
-            var panel = wraps[wj].querySelector(
-              ".prod-dropdown-panel, .app-dropdown-panel, .sup-dropdown-panel, .abt-dropdown-panel, .cnt-dropdown-panel"
-            );
-            if (panel) {
-              console.log('[SPA:rAF] panel BEFORE cleanup: display=' + panel.style.display + ' navHidden=' + (panel.dataset.navHidden || 'none'));
+            var panel = wraps[wj].querySelector(DROPDOWN_PANEL_SELECTOR);
+            if (panel && panel.dataset.navHidden !== "1") {
               panel.style.display = "none";
               panel.dataset.navHidden = "1";
-              console.log('[SPA:rAF] panel AFTER cleanup: display=' + panel.style.display);
             }
           }
         }
-        _logPanelState('raf-after-cleanup');
         _restoreDropdownState();
-        _logPanelState('raf-after-restore-final');
-        // 1 second later check
-        setTimeout(function() {
-          console.log('[SPA] === 1s post-navigation check ===');
-          _logPanelState('1s-post-nav');
-        }, 1000);
-        // 3 seconds later check
-        setTimeout(function() {
-          console.log('[SPA] === 3s post-navigation check ===');
-          _logPanelState('3s-post-nav');
-        }, 3000);
       });
     });
 
