@@ -900,7 +900,7 @@
 
     // Emoji map for category tabs
     var CATEGORY_EMOJI = {
-
+      nav_products_stirfry: "🔥",
     };
 
     // Build tab buttons
@@ -928,7 +928,8 @@
         tabSizeClass +
         " font-medium whitespace-nowrap rounded-full border border-slate-200 dark:border-slate-700";
       btn.dataset.category = cat.key;
-      btn.textContent = cat.name;
+      var emoji = CATEGORY_EMOJI[cat.key] || "";
+      btn.textContent = emoji ? emoji + " " + cat.name : cat.name;
       allTabs.push(btn);
     });
 

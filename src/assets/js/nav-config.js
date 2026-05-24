@@ -36,7 +36,7 @@
       { key: "nav_applications_central_kitchen",  icon: "apartment",        emoji: "", href: "/applications/central-kitchen/" },
       { key: "nav_applications_chain_restaurant", icon: "ramen_dining",     emoji: "", href: "/applications/chain-restaurant/" },
       { key: "nav_applications_canteen",          icon: "restaurant",       emoji: "", href: "/applications/canteen/" },
-      { key: "nav_applications_cloud_kitchen",    icon: "delivery_dining", href: "/applications/cloud-kitchen/" },
+      { key: "nav_applications_cloud_kitchen",    icon: "delivery_dining",  emoji: "", href: "/applications/cloud-kitchen/" },
       { key: "nav_applications_food_factory",     icon: "factory",          emoji: "", href: "/applications/food-factory/" },
       { key: "nav_applications_menu_lab",         icon: "science",          emoji: "", href: "/applications/menu-lab/" }
     ],
@@ -46,9 +46,9 @@
       { key: "nav_support_overview",    icon: "apps",          emoji: "", href: "/support/" },
       { _separator: true },
       { key: "nav_support_services",    icon: "grid_view",     emoji: "", href: "/support/services/" },
-      { key: "nav_support_installation",icon: "construction", href: "/support/installation/" },
+      { key: "nav_support_installation",icon: "construction",  emoji: "", href: "/support/installation/" },
       { key: "nav_support_warranty",    icon: "verified",      emoji: "", href: "/support/warranty/" },
-      { key: "nav_support_spare_parts", icon: "build_circle", href: "/support/spare-parts/" },
+      { key: "nav_support_spare_parts", icon: "build_circle",  emoji: "", href: "/support/spare-parts/" },
       { key: "nav_support_training",    icon: "school",        emoji: "", href: "/support/training/" },
       { key: "nav_support_faq",         icon: "contact_support",emoji: "", href: "/support/faq/" }
     ],
@@ -57,7 +57,7 @@
     about: [
       { key: "nav_about_profile", icon: "apartment", emoji: "", href: "/about/#profile" },
       { key: "nav_about_factory",  icon: "factory",   emoji: "", href: "/about/#factory" },
-      { key: "nav_about_cert",     icon: "verified", href: "/about/#cert" }
+      { key: "nav_about_cert",     icon: "verified",  emoji: "", href: "/about/#cert" }
     ],
 
     /** Contact 子分类 */

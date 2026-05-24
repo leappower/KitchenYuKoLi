@@ -367,11 +367,7 @@
    * - 动画完成后销毁 DOM 元素并恢复滚动
    */
   function closeMenu() {
-    if (!panelEl) {
-      console.log('[sm:close] skip: panelEl is null');
-      return;
-    }
-    console.log('[sm:close] closing… panelEl.id=' + panelEl.id + ' overlayEl=' + (!!overlayEl));
+    if (!panelEl) return;
 
     overlayEl.classList.remove("is-open");
     panelEl.classList.remove("is-open");
@@ -457,33 +453,16 @@
     // 二级菜单项点击
     var subItems = panelEl.querySelectorAll(".mobile-menu-l2-item");
     for (var k = 0; k < subItems.length; k++) {
-      (function (item) {
-        item.addEventListener("click", function (evt) {
-          var href = item.getAttribute("href");
-          console.log('[sm:click] l2-item href=' + href + ' panelEl=' + (!!panelEl));
-          
-          // WhatsApp 链接不在 SPA 内处理，关闭菜单后让默认行为生效
-          if (item.classList.contains("is-whatsapp")) {
-            closeMenu();
-            return;
-          }
-
-          // 常规链接：关闭菜单
-          evt.preventDefault();
-          evt.stopPropagation();
+      subItems[k].addEventListener("click", function (evt) {
+        // WhatsApp 链接不在 SPA 内处理，关闭菜单后让默认行为生效
+        if (this.classList.contains("is-whatsapp")) {
           closeMenu();
-          
-          // 关闭后再导航（防止 SPA 路由在面板关闭前触发）
-          if (href && href !== "javascript:void(0)" && href !== "#") {
-            console.log('[sm:close] navigating to ' + href + ', SpaRouter=' + !!(window.SpaRouter && window.SpaRouter.navigate));
-            if (window.SpaRouter && window.SpaRouter.navigate) {
-              setTimeout(function () { window.SpaRouter.navigate(href); }, 400);
-            } else {
-              setTimeout(function () { window.location.href = href; }, 400);
-            }
-          }
-        });
-      })(subItems[k]);
+          return;
+        }
+
+        // 常规链接：关闭菜单，navigate 由全局 click handler 处理
+        closeMenu();
+      });
     }
 
     // 一级菜单项点击 —— 若无子菜单则关闭面板（作为普通链接处理）

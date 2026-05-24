@@ -1,12 +1,12 @@
 /**
- * navigator.js - 主导航组件
+ * navigator.js — 主导航组件
  *
- * 负责渲染桌面端、平板端、移动端三种布局的顶部导航栏,
- * 协调各 dropdown 子模块的样式注入与点击事件绑定,
+ * 负责渲染桌面端、平板端、移动端三种布局的顶部导航栏，
+ * 协调各 dropdown 子模块的样式注入与点击事件绑定，
  * 并提供 updateActive / highlightCategory 等公开 API 供 SPA 路由调用。
  *
- * 依赖:
- *   - (nav-config removed - uses built-in defaults)
+ * 依赖：
+ *   - (nav-config removed — uses built-in defaults)
  *   - window.ProductsDropdown       (dropdown/products-dropdown.js)
  *   - window.ApplicationsDropdown   (dropdown/applications-dropdown.js)
  *   - window.SupportDropdown        (dropdown/support-dropdown.js)
@@ -27,12 +27,12 @@
     tgt.addEventListener(evt, fn, { signal: ac.signal });
   }
 
-  /** Safe i18n helper - guards against scripts loading before translations.js.
+  /** Safe i18n helper — guards against scripts loading before translations.js.
    *  Returns fallback text when translation system is not yet ready.
    *  reinitTranslationManager() will apply correct translations once cache is populated. */
   function _t(key, fallback) {
     var _logT = key === "nav_products" || key === "nav_home";
-    // 优先用 translationManager(已初始化时)
+    // 优先用 translationManager（已初始化时）
     if (typeof window.uiText === "function") {
       var v = window.uiText(key, null);
       if (v) return v;
@@ -57,7 +57,7 @@
    * ================================================================ */
 
   /**
-   * 主导航项 - 从 NAV_CONFIG 读取
+   * 主导航项 — 从 NAV_CONFIG 读取
    * @type {Array<{key:string, label:string, path:string, id:string, hasDropdown:boolean}>}
    */
   var DEFAULT_NAV_ITEMS;
@@ -76,14 +76,14 @@
         };
       });
     } else {
-      // Fallback - should not happen as nav-config.js loads first
+      // Fallback — should not happen as nav-config.js loads first
       DEFAULT_NAV_ITEMS = [];
     }
     return DEFAULT_NAV_ITEMS;
   }
 
   /**
-   * 所有 dropdown 容器的 CSS 类名(用于互斥开关)
+   * 所有 dropdown 容器的 CSS 类名（用于互斥开关）
    * @type {string[]}
    */
   var DROPDOWN_WRAP_SELECTORS = [
@@ -95,7 +95,7 @@
   ];
 
   /**
-   * 特殊路径 → 导航 active id 的映射(从 NAV_CONFIG 读取)
+   * 特殊路径 → 导航 active id 的映射（从 NAV_CONFIG 读取）
    * @type {Object<string, string>}
    */
   var PATH_TO_ACTIVE_MAP;
@@ -126,7 +126,7 @@
     "thank-you": "cnt",
   };
 
-  /** @type {string} 当前检测到的设备变体(mobile / tablet / pc) */
+  /** @type {string} 当前检测到的设备变体（mobile / tablet / pc） */
   var currentVariant = "pc";
 
   /** @type {number|null} resize 防抖定时器 */
@@ -137,7 +137,7 @@
    * ================================================================ */
 
   /**
-   * 对字符串做 HTML 实体转义,防止 XSS
+   * 对字符串做 HTML 实体转义，防止 XSS
    * @param {string} str - 原始字符串
    * @returns {string} 转义后的安全字符串
    */
@@ -167,10 +167,10 @@
    * @returns {string} HTML 字符串
    */
   /**
-   * 统一搜索栏构建(PC / Mobile / Tablet 共用)
+   * 统一搜索栏构建（PC / Mobile / Tablet 共用）
    * @param {Object} opts
-   * @param {string} opts.id          - 搜索栏 DOM id(如 'search-bar')
-   * @param {string} opts.inputId     - 搜索输入框 id(如 'search-input')
+   * @param {string} opts.id          - 搜索栏 DOM id（如 'search-bar'）
+   * @param {string} opts.inputId     - 搜索输入框 id（如 'search-input'）
    * @param {string} opts.placeholderI18n - i18n placeholder key
    * @param {string} [opts.wrapperClass] - 可选 wrapper 额外 class
    * @param {string} [opts.barClass]    - 可选 bar 额外 class
@@ -218,7 +218,7 @@
     var searchI18n = opts.searchI18n || "search_placeholder";
     var isTablet = opts.variant === "tablet";
 
-    /* 右侧区域:tablet 显示 语言切换 + CTA(和 PC 顺序一致),mobile 只显示语言切换 */
+    /* 右侧区域：tablet 显示 语言切换 + CTA（和 PC 顺序一致），mobile 只显示语言切换 */
     var rightSide = "";
     if (isTablet && opts.showCta) {
       rightSide =
@@ -246,7 +246,7 @@
       "border-b border-slate-200 dark:border-slate-800 " +
       'bg-background-light/90 dark:bg-background-dark/90 transition-transform duration-300">' +
       '<div class="px-4 py-3 flex items-center gap-3">' +
-      /* 左侧:汉堡菜单 + Logo */
+      /* 左侧：汉堡菜单 + Logo */
       '<div class="flex items-center gap-1 flex-shrink-0">' +
       '<a id="mobile-menu-toggle" href="javascript:void(0)" ' +
       'class="flex items-center justify-center w-10 h-10 -ml-2 ' +
@@ -266,7 +266,7 @@
       'style="width:32px;height:32px;object-fit:contain" />' +
       "</a>" +
       "</div>" +
-      /* 中间:搜索栏 */
+      /* 中间：搜索栏 */
       '<div class="flex-1 min-w-0 mx-1">' +
       buildSearchBarHtml({ id: "mobile-search-bar", inputId: "mobile-search-input", placeholderI18n: searchI18n }) +
       "</div>" +
@@ -278,7 +278,7 @@
   }
 
   /**
-   * 构建单个导航项的 HTML(含 dropdown 集成)
+   * 构建单个导航项的 HTML（含 dropdown 集成）
    * @param {Object} navItem - 导航项配置
    * @param {string} activeId - 当前激活的导航 id
    * @param {string} variant - 设备变体 (pc / tablet)
@@ -314,7 +314,7 @@
         }
       }
 
-      /* dropdown 模块未加载时,降级为纯文本占位 */
+      /* dropdown 模块未加载时，降级为纯文本占位 */
       return '<span class="' + activeClass + ' pointer-events-none">' + navItem.label + "</span>";
     }
 
@@ -336,7 +336,7 @@
   }
 
   /**
-   * 构建导航区域(<nav> 内的所有项)
+   * 构建导航区域（<nav> 内的所有项）
    * @param {string} activeId - 当前激活的导航 id
    * @param {string} variant - 设备变体
    * @returns {string} HTML 字符串
@@ -370,7 +370,7 @@
 
   /**
    * Ensure custom-select.js is loaded (dynamic loader)
-   * Idempotent - safe to call multiple times.
+   * Idempotent — safe to call multiple times.
    */
   function _loadScript(src, id) {
     if (document.getElementById(id)) return Promise.resolve();
@@ -398,7 +398,7 @@
 
   /**
    * Populate hidden <select> with optgroups from LANG_REGISTRY.
-   * Safe to call multiple times - clears and rebuilds.
+   * Safe to call multiple times — clears and rebuilds.
    */
   function _populateLangSelect(selectEl) {
     var reg = window.LANG_REGISTRY;
@@ -440,7 +440,7 @@
   }
 
   /**
-   * Build language switcher - icon+text button (original style) + hidden <select> with optgroups.
+   * Build language switcher — icon+text button (original style) + hidden <select> with optgroups.
    * The button triggers custom-select's dropdown on click via initLangSwitcher().
    * @returns {string} HTML string
    */
@@ -483,7 +483,7 @@
   }
 
   /**
-   * 构建 CTA 按钮("获取报价")HTML
+   * 构建 CTA 按钮（"获取报价"）HTML
    * @param {Object} opts - 配置项
    * @param {string} opts.ctaTextKey - i18n key
    * @param {string} opts.ctaHref - 链接地址
@@ -543,7 +543,7 @@
       'bg-background-light/90 dark:bg-background-dark/90">' +
       '<div class="max-w-[1920px] mx-auto px-3 md:px-5 lg:px-5 xl:px-10 ' +
       'py-4 flex items-center justify-between" style="min-height:108px">' +
-      /* 左侧:Logo + 导航 */
+      /* 左侧：Logo + 导航 */
       '<div class="flex items-center gap-4 lg:gap-8">' +
       '<a class="nav-logo-link hidden lg:block" href="' +
       basePath +
@@ -559,7 +559,7 @@
       buildNavItemsHtml(opts.active, opts.variant) +
       "</nav>" +
       "</div>" +
-      /* 右侧:搜索 / 语言 / CTA */
+      /* 右侧：搜索 / 语言 / CTA */
       '<div class="flex items-center gap-6">' +
       rightSideItems.join("\n") +
       "</div>" +
@@ -569,7 +569,7 @@
   }
 
   /**
-   * 根据配置构建 Header HTML(统一入口)
+   * 根据配置构建 Header HTML（统一入口）
    * @param {Object} opts - 完整配置项
    * @param {string} opts.variant - 设备变体 (mobile / tablet / pc)
    * @returns {string} HTML 字符串
@@ -586,11 +586,11 @@
    * ================================================================ */
 
   /**
-   * 注入 Logo 链接的基础样式(仅注入一次)
+   * 注入 Logo 链接的基础样式（仅注入一次）
    */
 
   /**
-   * 注入 iOS 风格搜索栏样式(仅注入一次)
+   * 注入 iOS 风格搜索栏样式（仅注入一次）
    */
 
   /**
@@ -621,7 +621,7 @@
    * ================================================================ */
 
   /**
-   * 统一搜索栏交互初始化(focus / blur / input / clear / Escape)
+   * 统一搜索栏交互初始化（focus / blur / input / clear / Escape）
    * 自动检测页面上存在的搜索栏并绑定事件
    */
   function initSearchInteraction() {
@@ -843,9 +843,9 @@
   /**
    * 重新绑定翻译管理器的事件监听并应用当前语言翻译。
    *
-   * 处理时序问题:翻译引擎的 loadUITranslations() 是异步的(fetch),
+   * 处理时序问题：翻译引擎的 loadUITranslations() 是异步的（fetch），
    * 而 mountNavigator 可能在 fetch 完成前被调用。
-   * 策略:如果翻译缓存还没就绪,延迟 500ms 后重试。
+   * 策略：如果翻译缓存还没就绪，延迟 500ms 后重试。
    */
   function reinitTranslationManager() {
     if (!window.translationManager) return;
@@ -858,7 +858,7 @@
       tm.setupEventListeners();
     }
 
-    // 尝试应用翻译,如果缓存未就绪则延迟重试
+    // 尝试应用翻译，如果缓存未就绪则延迟重试
     if (typeof tm.applyTranslations === "function") {
       var lang = tm.currentLanguage;
       var cacheKey = "ui-" + lang;
@@ -866,7 +866,7 @@
       if (cacheReady) {
         tm.applyTranslations();
       } else {
-        // Cache not ready - translation fetch still in progress
+        // Cache not ready — translation fetch still in progress
         // Retry after 500ms to let fetch complete
         setTimeout(function () {
           if (tm.translationsCache && tm.translationsCache.has(cacheKey)) {
@@ -878,7 +878,7 @@
   }
 
   /**
-   * 初始化 SlideMenu(侧滑菜单)
+   * 初始化 SlideMenu（侧滑菜单）
    */
   function initSlideMenu() {
     if (!window.SlideMenu) return;
@@ -1042,7 +1042,7 @@
     }
 
     // ── PC/Tablet: floating panel ──
-    // Use lightweight panel factory - no full render, no trigger/wrap
+    // Use lightweight panel factory — no full render, no trigger/wrap
     var result = CustomSelect.buildPanel(selectEl);
     _langPanel = result.panel;
     document.body.appendChild(_langPanel);
@@ -1218,7 +1218,7 @@
   }
 
   /* ================================================================
-   *  mount() - 核心挂载函数
+   *  mount() — 核心挂载函数
    * ================================================================ */
 
   /**
@@ -1227,19 +1227,19 @@
    */
   /**
    * Register all document-level event listeners.
-   * Called exactly ONCE - at the end of this IIFE.
+   * Called exactly ONCE — at the end of this IIFE.
    * These listeners survive SPA navigations (document is not destroyed).
    */
   function registerListeners() {
     console.log("[nav:register] registerListeners()");
-    /* Inject CSS (one-time - these functions check by ID internally) */
+    /* Inject CSS (one-time — these functions check by ID internally) */
     if (typeof window.DropdownBaseStyles !== "undefined" && window.DropdownBaseStyles.inject) {
       window.DropdownBaseStyles.inject();
     }
 
     initSearchInteraction();
 
-    /* Dropdown trigger click - toggle panel. Works for both touch (via
+    /* Dropdown trigger click — toggle panel. Works for both touch (via
      * DropdownBase.bindTriggers) and PC (this handler). */
     document.addEventListener(
       "click",
@@ -1271,32 +1271,15 @@
       },
       true
     );
-  
-    /* Global click to close all dropdowns.
-     * Exception: if the click is on a dropdown toggle/trigger (not an item link),
-     * keep that dropdown open so it can toggle by itself. */
+
+    /* Global click to close all dropdowns */
     document.addEventListener(
       "click",
       function (e) {
         var clickedWrap = e.target.closest(
           ".prod-dropdown-wrap, .app-dropdown-wrap, .sup-dropdown-wrap, .abt-dropdown-wrap, .cnt-dropdown-wrap"
         );
-        if (clickedWrap) {
-          // Click is inside a dropdown → check if it's on a navigable item (link)
-          var linkItem = e.target.closest(
-            ".prod-dropdown-item, .app-dropdown-item, .sup-dropdown-item, .abt-dropdown-item"
-          );
-          if (linkItem && linkItem.getAttribute("href") && linkItem.getAttribute("href") !== "javascript:void(0)") {
-            // User clicked a navigable dropdown item → close ALL dropdowns (item will navigate)
-            closeOtherDropdowns(null);
-          } else {
-            // Click on toggle/trigger/decoration → keep this wrap open
-            closeOtherDropdowns(clickedWrap);
-          }
-        } else {
-          // Click outside any dropdown → close all
-          closeOtherDropdowns(null);
-        }
+        closeOtherDropdowns(clickedWrap || null);
       },
       true
     );
@@ -1309,7 +1292,7 @@
   }
 
   /**
-   * mountNavigator - Build the header DOM from placeholder config.
+   * mountNavigator — Build the header DOM from placeholder config.
    *
    * This function only deals with DOM: injecting styles and replacing
    * <navigator> placeholders with actual <header> elements.
@@ -1318,8 +1301,8 @@
    * Can be called multiple times safely (idempotent by nature).
    */
   function mountNavigator() {
-    console.log("[nav:mount] mountNavigator() - tm=" + (!!window.translationManager) + " initialized=" + (window.translationManager ? window.translationManager.isInitialized : "N/A") + " retries=" + (window._navMountRetries||0));    // 如果 translationManager 尚未初始化(defer 顺序不确定),
-    // 延迟重试直到就绪,避免渲染英文 fallback 文本。
+    console.log("[nav:mount] mountNavigator() — tm=" + (!!window.translationManager) + " initialized=" + (window.translationManager ? window.translationManager.isInitialized : "N/A") + " retries=" + (window._navMountRetries||0));    // 如果 translationManager 尚未初始化（defer 顺序不确定），
+    // 延迟重试直到就绪，避免渲染英文 fallback 文本。
     if (!window.translationManager || !window.translationManager.isInitialized) {
       if (!window._navMountRetries) window._navMountRetries = 0;
       if (window._navMountRetries < 50) {
@@ -1327,7 +1310,7 @@
         setTimeout(mountNavigator, 20);
         return;
       }
-      // 超时后强制挂载(translationManager 可能永远不可用)
+      // 超时后强制挂载（translationManager 可能永远不可用）
     }
     /* Close all open dropdowns before remounting */
     closeOtherDropdowns(null);
@@ -1338,13 +1321,13 @@
 
       if (!placeholder.parentNode) continue;
 
-      /* 如果 placeholder 内已有 <header>,直接提取替换 */
+      /* 如果 placeholder 内已有 <header>，直接提取替换 */
       var existingHeader = placeholder.querySelector("header");
       if (existingHeader && existingHeader.querySelector("nav")) {
         placeholder.parentNode.replaceChild(existingHeader, placeholder);
         continue;
       } else if (existingHeader) {
-        // Header element exists but has no nav - skip this placeholder
+        // Header element exists but has no nav — skip this placeholder
       }
 
       /* 否则根据配置构建新 header */
@@ -1361,7 +1344,7 @@
 
       // Replace placeholder with header directly.
       // Main content spacing is handled by CSS: main#spa-content { padding-top: var(--nav-height) }
-      // No spacer div needed - prevents double-spacing bug on non-home pages.
+      // No spacer div needed — prevents double-spacing bug on non-home pages.
       placeholder.parentNode.replaceChild(headerEl, placeholder);
     }
 
@@ -1370,7 +1353,7 @@
     initSlideMenu();
     initLangSwitcher();
 
-    /* Re-bind dropdown click handlers after mount - trigger elements
+    /* Re-bind dropdown click handlers after mount — trigger elements
      * may not have existed when registerListeners() first called initDropdownClick() */
     if (window.ProductsDropdown) window.ProductsDropdown.initDropdownClick();
     if (window.ApplicationsDropdown) window.ApplicationsDropdown.initDropdownClick();
@@ -1382,7 +1365,7 @@
   }
 
   /* ================================================================
-   *  updateActive() - SPA 导航后更新 active 状态
+   *  updateActive() — SPA 导航后更新 active 状态
    * ================================================================ */
 
   /**
@@ -1399,7 +1382,7 @@
     _getActiveMap();
     var navItems = _getNavItems();
 
-    /* 确保 dropdown 样式已注入(SPA 动态加载场景) */
+    /* 确保 dropdown 样式已注入（SPA 动态加载场景） */
 
     /* ---------- 1. 更新 dropdown trigger 元素的高亮 ---------- */
     var triggerSelectors = [
@@ -1415,7 +1398,7 @@
 
     var triggers = document.querySelectorAll(triggerSelectors.join(", "));
 
-    /* 应用路径映射(提前计算,确保 plain-link 段能正确取到值) */
+    /* 应用路径映射（提前计算，确保 plain-link 段能正确取到值） */
     var mappedId = activeSectionId;
     if (PATH_TO_ACTIVE_MAP[activeSectionId]) {
       mappedId = PATH_TO_ACTIVE_MAP[activeSectionId];
@@ -1444,7 +1427,7 @@
         }
       }
 
-      /* 使用 classList 增删样式,不覆盖 className */
+      /* 使用 classList 增删样式，不覆盖 className */
       if (isMatch) {
         triggerEl.classList.add("text-primary");
         triggerEl.classList.remove("hover\\:text-primary", "transition-colors");
@@ -1524,7 +1507,7 @@
       }
     }
 
-    /* 3b. 前缀匹配(排除 viewall 项) */
+    /* 3b. 前缀匹配（排除 viewall 项） */
     if (!matchedItem) {
       for (var n = 0; n < dropdownItems.length; n++) {
         var subHref = dropdownItems[n].getAttribute("href");
@@ -1549,11 +1532,11 @@
   }
 
   /* ================================================================
-   *  highlightCategory() - 手动高亮产品分类
+   *  highlightCategory() — 手动高亮产品分类
    * ================================================================ */
 
   /**
-   * 高亮指定的产品分类 dropdown item(用于产品详情页侧边栏联动)
+   * 高亮指定的产品分类 dropdown item（用于产品详情页侧边栏联动）
    *
    * @param {string} categoryKey - 要高亮的分类 i18n key
    *   (e.g. "nav_products_cutting")
@@ -1579,11 +1562,11 @@
   }
 
   /* ================================================================
-   *  resize 响应(防抖)
+   *  resize 响应（防抖）
    * ================================================================ */
 
   /**
-   * 监听窗口 resize,当设备变体变化时重新挂载导航
+   * 监听窗口 resize，当设备变体变化时重新挂载导航
    */
   window.addEventListener("resize", function () {
     clearTimeout(resizeTimer);
@@ -1618,14 +1601,14 @@
   /* Register document-level listeners exactly ONCE */
   registerListeners();
 
-  /* 首次加载:DOM ready 后构建 header DOM */
+  /* 首次加载：DOM ready 后构建 header DOM */
   if (document.readyState === "loading") {
     document.addEventListener("DOMContentLoaded", mountNavigator);
   } else {
     mountNavigator();
   }
 
-  /* bfcache 回退:pageshow 时重新挂载(如果 header 已丢失) */
+  /* bfcache 回退：pageshow 时重新挂载（如果 header 已丢失） */
   window.addEventListener("pageshow", function (event) {
     if (!event.persisted) return;
 
@@ -1644,12 +1627,12 @@
   });
 
   /* ================================================================
-   *  公开 API - window.Navigator
+   *  公开 API — window.Navigator
    * ================================================================ */
 
   window.Navigator = {
     /**
-     * 挂载导航栏(查找占位符并替换)
+     * 挂载导航栏（查找占位符并替换）
      */
     mount: mountNavigator,
 
@@ -1671,24 +1654,19 @@
    * ================================================================ */
 
   /**
-   * SPA 路由导航事件--重新初始化导航和底部栏
+   * SPA 路由导航事件——重新初始化导航和底部栏
    */
   _spaOn(document, "spa:load", function () {
-    /* 关闭所有打开的 dropdown(SPA 导航前未关闭的) */
+    /* 关闭所有打开的 dropdown（SPA 导航前未关闭的） */
     closeOtherDropdowns(null);
 
-    /* 确保 SlideMenu 面板也被关闭 */
-    if (window.SlideMenu && typeof window.SlideMenu.close === "function") {
-      window.SlideMenu.close();
-    }
-
-    /* 重新绑定 dropdown click handlers(mountNavigator 可能未调用) */
+    /* 重新绑定 dropdown click handlers（mountNavigator 可能未调用） */
     if (window.ProductsDropdown) window.ProductsDropdown.initDropdownClick();
     if (window.ApplicationsDropdown) window.ApplicationsDropdown.initDropdownClick();
     if (window.SupportDropdown) window.SupportDropdown.initDropdownClick();
     if (window.AboutDropdown) window.AboutDropdown.initDropdownClick();
 
-    /* 重新初始化 custom-select(navigator 可能创建了新的 lang-selector) */
+    /* 重新初始化 custom-select（navigator 可能创建了新的 lang-selector） */
     if (typeof CustomSelect !== "undefined" && CustomSelect.initAll) {
       CustomSelect.initAll();
     }
@@ -1709,7 +1687,7 @@
   });
 
   /* ────────────────────────────────────────────────────────────────
-   *  languageChanged - re-apply translations to navigator DOM
+   *  languageChanged — re-apply translations to navigator DOM
    * ──────────────────────────────────────────────────────────────── */
   _spaOn(
     document,

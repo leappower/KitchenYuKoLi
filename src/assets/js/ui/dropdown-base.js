@@ -194,7 +194,6 @@
     /* ── MOBILE POPUP ── */
 
     function openPopup(href) {
-      console.log('[popup:' + prefix + '] openPopup() href=' + href);
       closePopup();
 
       var overlay = document.createElement("div");
@@ -226,30 +225,33 @@
 
       // Bind close on popup item click
       var popupItems = panel.querySelectorAll("." + popupItemClass);
-      console.log('[popup:' + prefix + '] popupItems count=' + popupItems.length);
       for (var k = 0; k < popupItems.length; k++) {
-        (function (item) {
-          item.addEventListener("click", function (ev) {
-            var href = item.getAttribute("href");
-            var key = item.getAttribute("data-i18n") || item.textContent.trim().slice(0, 30);
-            console.log('[popup:' + prefix + '] item.click href=' + href + ' key=' + key);
-            ev.stopPropagation();
-            ev.preventDefault();
-            console.log('[popup:' + prefix + '] calling closePopup()');
-            closePopup();
-            console.log('[popup:' + prefix + '] closePopup() done, href=' + href);
-            if (href && href !== "javascript:void(0)" && href !== "#") {
-              console.log('[popup:' + prefix + '] navigating to ' + href + ', SpaRouter=' + !!(window.SpaRouter && window.SpaRouter.navigate));
-              if (window.SpaRouter && window.SpaRouter.navigate) {
-                window.SpaRouter.navigate(href);
-              } else {
-                window.location.href = href;
-              }
-            } else {
-              console.log('[popup:' + prefix + '] no valid href, skipping navigation');
+        popupItems[k].addEventListener("click", function (ev) {
+          var href = this.getAttribute("href");
+          ev.stopPropagation();
+          ev.preventDefault();
+          closePopup();
+          if (href && href !== "javascript:void(0)" && href !== "#") {
+            // Manually navigate to the link target
+            if (window.history && window.history.pushState) {
+              // Let SPA router handle it via Swup-compatible navigation
+              var ac = new AbortController();
+              document.addEventListener(
+                "click",
+                function navHandler(e) {
+                  ac.abort();
+                },
+                { signal: ac.signal, once: true }
+              );
             }
-          });
-        })(popupItems[k]);
+            // Fallback: direct navigation
+            if (window.SpaRouter && window.SpaRouter.navigate) {
+              window.SpaRouter.navigate(href);
+            } else {
+              window.location.href = href;
+            }
+          }
+        });
       }
 
       requestAnimationFrame(function () {
