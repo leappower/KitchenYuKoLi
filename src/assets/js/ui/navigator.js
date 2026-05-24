@@ -606,13 +606,18 @@
    * @param {HTMLElement|null} keepOpen - 保持打开的 dropdown 容器
    */
   function closeOtherDropdowns(keepOpen) {
+    var closed = 0;
     for (var i = 0; i < DROPDOWN_WRAP_SELECTORS.length; i++) {
       var openDropdowns = document.querySelectorAll(DROPDOWN_WRAP_SELECTORS[i] + ".is-open");
       for (var j = 0; j < openDropdowns.length; j++) {
         if (openDropdowns[j] !== keepOpen) {
           openDropdowns[j].classList.remove("is-open");
+          closed++;
         }
       }
+    }
+    if (closed > 0) {
+      console.log('[nav:closeDropdowns] closed ' + closed + ' dropdowns, keepOpen=' + (keepOpen ? keepOpen.className.substring(0,30) : 'null'));
     }
   }
 
@@ -1264,9 +1269,11 @@
     document.addEventListener(
       "mouseover",
       function (e) {
-        // Block hover-based open for ~800ms after SPA navigation starts,
-        // since the mouse may still be over the dropdown area from the previous page.
-        if (window.__dropdownHoverBlocked) return;
+        var targetWrap = e.target.closest(DROPDOWN_WRAP_SELECTORS.join(", "));
+        var blocked = !!window.__dropdownHoverBlocked;
+        var hasIsOpen = targetWrap ? targetWrap.classList.contains("is-open") : false;
+        console.log('[nav:mouseover] blocked=' + blocked + ' hasWrap=' + !!targetWrap + ' wasOpen=' + hasIsOpen);
+        if (blocked) return;
         var wrap = e.target.closest(DROPDOWN_WRAP_SELECTORS.join(", "));
         if (wrap && !wrap.classList.contains("touch-device")) {
           closeOtherDropdowns(wrap);
@@ -1279,6 +1286,15 @@
     document.addEventListener(
       "click",
       function (e) {
+        var target = e.target;
+        var tag = target.tagName.toLowerCase();
+        var href = target.getAttribute ? target.getAttribute("href") : null;
+        var isLink = tag === 'a' && href && href !== 'javascript:void(0)' && href !== '#';
+        var inWrap = target.closest(
+          ".prod-dropdown-wrap, .app-dropdown-wrap, .sup-dropdown-wrap, .abt-dropdown-wrap, .cnt-dropdown-wrap"
+        );
+        var isOpen = inWrap ? inWrap.classList.contains("is-open") : false;
+        console.log('[nav:globalclick] tag=' + tag + ' href=' + (href||'null') + ' isLink=' + isLink + ' inWrap=' + !!inWrap + ' isOpen=' + isOpen);
         var clickedWrap = e.target.closest(
           ".prod-dropdown-wrap, .app-dropdown-wrap, .sup-dropdown-wrap, .abt-dropdown-wrap, .cnt-dropdown-wrap"
         );
@@ -1660,6 +1676,11 @@
    * SPA 路由导航事件——重新初始化导航和底部栏
    */
   _spaOn(document, "spa:load", function () {
+    console.log('[nav:spa:load] spa:load fired');
+    var stillOpen = document.querySelectorAll('.prod-dropdown-wrap.is-open,.app-dropdown-wrap.is-open,.sup-dropdown-wrap.is-open,.abt-dropdown-wrap.is-open,.cnt-dropdown-wrap.is-open');
+    if (stillOpen.length) {
+      console.log('[nav:spa:load] found ' + stillOpen.length + ' open dropdowns, closing them');
+    }
     /* 关闭所有打开的 dropdown（SPA 导航前未关闭的） */
     closeOtherDropdowns(null);
 

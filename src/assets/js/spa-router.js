@@ -93,13 +93,7 @@
         containers: ["#spa-content"],
         linkSelector:
           'a[href^="/"]:not([href$=".pdf"]):not([href$=".zip"]):not([href$=".doc"]):not([href*="mailto:"]):not([href*="tel:"]):not([target="_blank"])',
-        plugins: [
-          new global.SwupHeadPlugin({
-            persistTags: 'style[id], style[data-swup-persist], link[rel="stylesheet"][href], script[src]',
-            persistAssets: true,
-          }),
-
-        ],
+        plugins: [],
         animateHistoryBrowsing: false,
       });
     } catch (e) {
@@ -219,6 +213,15 @@
 
     // Forward Swup lifecycle to spa:load event
     swupHooks.on("content:replace", function (visit) {
+      console.log('[spa:content:replace] Swup content:replace fired');
+      // Check if any dropdowns still have is-open after content replace
+      var stillOpen = document.querySelectorAll('.prod-dropdown-wrap.is-open,.app-dropdown-wrap.is-open,.sup-dropdown-wrap.is-open,.abt-dropdown-wrap.is-open,.cnt-dropdown-wrap.is-open');
+      if (stillOpen.length) {
+        console.log('[spa:content:replace] WARNING: ' + stillOpen.length + ' dropdowns still open after replace!');
+        for (var si = 0; si < stillOpen.length; si++) {
+          stillOpen[si].classList.remove('is-open');
+        }
+      }
       global.__spaNavigating = false;
       _spaState.currentRoute = global.location.pathname.replace(/\/$/, "") || "/";
       // Fade out skeleton overlay after content is replaced
@@ -262,6 +265,7 @@
     // allow the next click to bypass Swup entirely.
     var _lastSwupNavStart = 0;
     swupHooks.on("visit:start", function () {
+      console.log('[spa:visit:start] Swup visit:start fired, nav=' + _spaState.currentRoute);
       global.__spaNavigating = true;
       _lastSwupNavStart = Date.now();
       // Show skeleton overlay for SPA navigation transitions
@@ -279,12 +283,15 @@
           ".abt-dropdown-wrap.is-open",
           ".cnt-dropdown-wrap.is-open",
         ];
+        var totalFound = 0;
         for (var i = 0; i < selectors.length; i++) {
           var els = document.querySelectorAll(selectors[i]);
+          totalFound += els.length;
           for (var j = 0; j < els.length; j++) {
             els[j].classList.remove("is-open");
           }
         }
+        console.log('[spa:visit:start] removed is-open from ' + totalFound + ' dropdown wraps');
         // Temporarily suppress mouseover re-opening of dropdowns.
         // When user clicks an item, their mouse remains over the dropdown area.
         // After Swup navigation completes, the mouse position may trigger
