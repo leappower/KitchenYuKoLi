@@ -95,6 +95,8 @@
           'a[href^="/"]:not([href$=".pdf"]):not([href$=".zip"]):not([href$=".doc"]):not([href*="mailto:"]):not([href*="tel:"]):not([target="_blank"])',
         plugins: [],
         animateHistoryBrowsing: false,
+        // Scope head replacement so stylesheets survive
+        head: { scope: 'title, meta[name="description"], meta[name="keywords"]' },
       });
     } catch (e) {
       console.error("[spa-router] Swup init failed:", e);
