@@ -438,7 +438,7 @@
     // 扁平结构（来自 product-data-table.js）：raw 里每个元素都是产品
     if (raw.length > 0 && raw[0].model) {
       raw.forEach(function (p) {
-        var img = "/assets/images/products/" + (p.model || "default") + ".webp";
+        var img = _resolveImage(p);
         result.push(
           Object.assign({}, p, {
             _category: p.category || "",
@@ -453,24 +453,7 @@
     raw.forEach(function (cat) {
       if (!cat.products || !Array.isArray(cat.products)) return;
       cat.products.forEach(function (p) {
-        var img = "/assets/images/products/" + (p.model || "default") + ".webp";
-        if (p.images && Array.isArray(p.images) && p.images.length > 0) {
-          var primary =
-            p.images.find(function (i) {
-              return i.isPrimary;
-            }) || p.images[0];
-          if (primary && primary.filePath) {
-            img = primary.filePath;
-            // Defensive: rewrite stale CMS paths to local static paths
-            if (img.indexOf("/admin/uploads/") === 0) {
-              img = "/assets/images/products/" + img.split("/").pop();
-            }
-          }
-        } else if (p.image) {
-          img = p.image;
-        } else if (p.imageUrl) {
-          img = p.imageUrl;
-        }
+        var img = _resolveImage(p);
         result.push(
           Object.assign({}, p, {
             _category: cat.category || cat.slug || "",
@@ -480,6 +463,33 @@
       });
     });
     return result;
+  }
+
+  /**
+   * Resolve product image URL:
+   * 1. images[isPrimary].filePath (from CMS/init-products.js)
+   * 2. p.image / p.imageUrl (fallback)
+   * 3. /assets/images/products/{model}.webp (last resort)
+   * 4. /assets/images/products/default.webp
+   */
+  function _resolveImage(p) {
+    var img = "";
+    if (p.images && Array.isArray(p.images) && p.images.length > 0) {
+      var primary =
+        p.images.find(function (i) {
+          return i.isPrimary;
+        }) || p.images[0];
+      if (primary && primary.filePath) {
+        img = primary.filePath;
+        if (img.indexOf("/admin/uploads/") === 0) {
+          img = "/assets/images/products/" + img.split("/").pop();
+        }
+      }
+    }
+    if (!img && p.image) img = p.image;
+    if (!img && p.imageUrl) img = p.imageUrl;
+    if (!img) img = "/assets/images/products/" + (p.model || "default") + ".webp";
+    return img;
   }
 
   function esc(str) {
