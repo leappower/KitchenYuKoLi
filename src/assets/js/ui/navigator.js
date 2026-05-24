@@ -94,6 +94,14 @@
     ".cnt-dropdown-wrap",
   ];
 
+  var DROPDOWN_TRIGGER_SELECTORS = [
+    ".prod-dropdown-trigger",
+    ".app-dropdown-trigger",
+    ".sup-dropdown-trigger",
+    ".abt-dropdown-trigger",
+    ".cnt-dropdown-trigger",
+  ];
+
   /**
    * 特殊路径 → 导航 active id 的映射（从 NAV_CONFIG 读取）
    * @type {Object<string, string>}
@@ -1244,29 +1252,43 @@
 
     initSearchInteraction();
 
-    /* Dropdown trigger click — toggle panel. Works for both touch (via
-     * DropdownBase.bindTriggers) and PC (this handler). */
+    /* Unified click handler: toggle dropdown on trigger click, close on outside click */
     document.addEventListener(
       "click",
       function (e) {
-        var trigger = e.target.closest(
-          ".prod-dropdown-trigger, .app-dropdown-trigger, .sup-dropdown-trigger, .abt-dropdown-trigger, .cnt-dropdown-trigger"
-        );
-        if (!trigger) return;
-        if (window.innerWidth <= 720) return;
-        var wrap = trigger.closest(
-          ".prod-dropdown-wrap, .app-dropdown-wrap, .sup-dropdown-wrap, .abt-dropdown-wrap, .cnt-dropdown-wrap"
-        );
-        if (wrap) {
-          closeOtherDropdowns(wrap);
-          wrap.classList.toggle("is-open");
+        var tag = e.target.tagName.toLowerCase();
+        var href = e.target.getAttribute ? e.target.getAttribute("href") : null;
+        var isLink = tag === 'a' && href && href !== 'javascript:void(0)' && href !== '#';
+        var clickedWrap = e.target.closest(DROPDOWN_WRAP_SELECTORS.join(", "));
+        var inWrap = !!clickedWrap;
+        var isOpen = inWrap ? clickedWrap.classList.contains("is-open") : false;
+        console.log('[nav:globalclick] tag=' + tag + ' href=' + (href||'null') + ' isLink=' + isLink + ' inWrap=' + inWrap + ' isOpen=' + isOpen);
+
+        // Find closest trigger
+        var trigger = e.target.closest(DROPDOWN_TRIGGER_SELECTORS.join(", "));
+        if (trigger) {
+          if (window.innerWidth <= 720) return;
+          // Clicking a navigable <a> link inside trigger: close all and navigate
+          if (isLink) {
+            closeOtherDropdowns(null);
+            return;
+          }
+          // Clicking trigger button/span: toggle
+          var wrap = trigger.closest(DROPDOWN_WRAP_SELECTORS.join(", "));
+          if (wrap) {
+            closeOtherDropdowns(wrap);
+            wrap.classList.toggle("is-open");
+            return;
+          }
         }
+
+        // Outside click: close any open dropdowns
+        closeOtherDropdowns(clickedWrap || null);
       },
       true
     );
 
-    /* Dropdown hover mutex via event delegation (works even after mountNavigator rebuilds DOM) */
-    /* Dropdown hover mutex via event delegation (works even after mountNavigator rebuilds DOM) */
+    /* Dropdown hover via event delegation */
     document.addEventListener(
       "mouseover",
       function (e) {
@@ -1277,27 +1299,6 @@
         if (wrap && !wrap.classList.contains("touch-device")) {
           closeOtherDropdowns(wrap);
         }
-      },
-      true
-    );
-
-    /* Global click to close all dropdowns */
-    document.addEventListener(
-      "click",
-      function (e) {
-        var target = e.target;
-        var tag = target.tagName.toLowerCase();
-        var href = target.getAttribute ? target.getAttribute("href") : null;
-        var isLink = tag === 'a' && href && href !== 'javascript:void(0)' && href !== '#';
-        var inWrap = target.closest(
-          ".prod-dropdown-wrap, .app-dropdown-wrap, .sup-dropdown-wrap, .abt-dropdown-wrap, .cnt-dropdown-wrap"
-        );
-        var isOpen = inWrap ? inWrap.classList.contains("is-open") : false;
-        console.log('[nav:globalclick] tag=' + tag + ' href=' + (href||'null') + ' isLink=' + isLink + ' inWrap=' + !!inWrap + ' isOpen=' + isOpen);
-        var clickedWrap = e.target.closest(
-          ".prod-dropdown-wrap, .app-dropdown-wrap, .sup-dropdown-wrap, .abt-dropdown-wrap, .cnt-dropdown-wrap"
-        );
-        closeOtherDropdowns(clickedWrap || null);
       },
       true
     );
