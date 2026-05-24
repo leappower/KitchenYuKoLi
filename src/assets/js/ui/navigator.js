@@ -1292,11 +1292,16 @@
     );
 
     document.addEventListener(
-      "mouseleave",
+      "mouseout",
       function (e) {
         var wrap = e.target.closest(DROPDOWN_WRAP_SELECTORS.join(", "));
+        // mouseout fires when leaving the wrap or entering a child.
+        // Only remove is-open if the relatedTarget is NOT inside the same wrap.
         if (wrap && !wrap.classList.contains("touch-device")) {
-          wrap.classList.remove("is-open");
+          var related = e.relatedTarget;
+          if (!related || !wrap.contains(related)) {
+            wrap.classList.remove("is-open");
+          }
         }
       },
       true

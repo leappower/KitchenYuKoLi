@@ -1,6 +1,6 @@
 !(function (t) {
   "use strict";
-  var I18N_CACHE_V = 1779624577;
+  var I18N_CACHE_V = 1779624914;
   var _spaRegs = {};
 
   // ─── Ensure LANG_REGISTRY is loaded ─────────────────────────
@@ -358,7 +358,7 @@
                     c.forEach(function (e) {
                       if (e.text) {
                         t.setElementTranslation(e.el, e.text);
-                  if (c.indexOf(e) < 5) { console.log("[i18n:spa:apply] key=" + e.el.getAttribute("data-i18n") + " text=" + e.text + " was=" + e.el.textContent); }                      } else if (e.placeholder) {
+                      } else if (e.placeholder) {
                         e.el.placeholder = e.placeholder;
                       } else if (e.ariaLabel) {
                         e.el.setAttribute("aria-label", e.ariaLabel);
@@ -809,7 +809,6 @@
       document,
       "spa:load",
       function () {
-        console.log("[i18n:spa:load] FIRED — lang=" + s.currentLanguage);
         // [LOG] i18n spa:load — check lang state before re-applying translations
         (function () {
           var _l = s.currentLanguage;
