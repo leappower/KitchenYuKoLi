@@ -38,6 +38,16 @@
     "  transform: rotate(180deg);",
     "}",
 
+    /* === SPA navigation cooldown: suppress CSS hover while navigating === */
+    ".spa-cooldown.{{PREFIX}}-dropdown-wrap:hover .{{PREFIX}}-dropdown-panel {",
+    "  opacity: 0; visibility: hidden; pointer-events: none;",
+    "  transform: translateX(-50%) scale(.97);",
+    "  transition: none;",
+    "}",
+    ".spa-cooldown.{{PREFIX}}-dropdown-wrap:hover .{{PREFIX}}-dropdown-arrow {",
+    "  transform: none;",
+    "}",
+
     /* ===== Wrap ===== */
     ".{{PREFIX}}-dropdown-wrap { position: relative; display: inline-block; }",
 

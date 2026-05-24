@@ -247,15 +247,16 @@
 
     // ── Restore dropdown state (called after navigation completes) ──
     //
-    // Strategy: Restore pointer-events immediately so dropdowns work.
-    // But keep display:none on panels until the user moves their mouse
-    // OUT of the dropdown area. Only then clear display:none.
+    // Root cause: dropdown-styles.js injects CSS:
+    //   .dropdown-wrap:hover .dropdown-panel { visibility:visible; opacity:1 }
+    // After SPA navigation restores pointer-events, CSS :hover matches
+    // the new DOM instantly if the cursor stayed over the area.
     //
-    // Why: dropdown-styles.js CSS rule
-    //   .wrap:hover .panel { visibility:visible; opacity:1 }
-    // fires instantly on any element under the cursor after DOM load.
-    // No timeout is reliable — only mouseleave guarantees the user
-    // has moved away.
+    // Fix: add .spa-cooldown class to all wraps when restoring.
+    // CSS :hover on .spa-cooldown wraps does NOT trigger the panel.
+    // Remove .spa-cooldown after 300ms — long enough for the browser
+    // to repaint and the hover state to naturally settle (if mouse
+    // still over the area, CSS :hover will re-apply on the next frame).
     function _restoreDropdownState() {
       if (!global.__pendingPointerRestore) return;
       global.__pendingPointerRestore = false;
@@ -263,31 +264,24 @@
       for (var wi = 0; wi < DROPDOWN_WRAP_SELECTORS.length; wi++) {
         var wraps = document.querySelectorAll(DROPDOWN_WRAP_SELECTORS[wi]);
         for (var wj = 0; wj < wraps.length; wj++) {
+          wraps[wj].classList.add("spa-cooldown");
           wraps[wj].style.pointerEvents = "";
-        }
-      }
-
-      // Schedule panel restore on mouseleave. Use a one-shot
-      // listener on document.body that fires once the mouse leaves
-      // ANY dropdown wrap. Then clear display:none on all panels.
-      function _onLeave() {
-        document.body.removeEventListener("mouseleave", _onLeave, true);
-        var panels = document.querySelectorAll(DROPDOWN_PANEL_SELECTOR);
-        for (var pi = 0; pi < panels.length; pi++) {
-          if (panels[pi].dataset.navHidden === "1") {
-            panels[pi].style.display = "";
-            delete panels[pi].dataset.navHidden;
+          var panel = wraps[wj].querySelector(DROPDOWN_PANEL_SELECTOR);
+          if (panel && panel.dataset.navHidden === "1") {
+            panel.style.display = "";
+            delete panel.dataset.navHidden;
           }
         }
       }
-      document.body.addEventListener("mouseleave", _onLeave, true);
 
-      // Safety timeout: if mouseleave never fires (e.g. touch device),
-      // restore after 2 seconds.
       setTimeout(function () {
-        document.body.removeEventListener("mouseleave", _onLeave, true);
-        _onLeave();
-      }, 2000);
+        for (var wi = 0; wi < DROPDOWN_WRAP_SELECTORS.length; wi++) {
+          var wraps = document.querySelectorAll(DROPDOWN_WRAP_SELECTORS[wi]);
+          for (var wj = 0; wj < wraps.length; wj++) {
+            wraps[wj].classList.remove("spa-cooldown");
+          }
+        }
+      }, 300);
     }
 
     swupHooks.on("visit:abort", _restoreDropdownState);
