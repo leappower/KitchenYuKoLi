@@ -98,7 +98,7 @@
             persistTags: 'style[id], style[data-swup-persist], link[rel="stylesheet"][href], script[src]',
             persistAssets: true,
           }),
-          new global.SwupPreloadPlugin({ preloadHoveredLinks: true, preloadInitialPage: false }),
+
         ],
         animateHistoryBrowsing: false,
       });
