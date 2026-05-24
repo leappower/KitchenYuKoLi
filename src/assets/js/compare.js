@@ -162,7 +162,14 @@
         p.images.find(function (i) {
           return i.isPrimary;
         }) || p.images[0];
-      if (primary && primary.filePath) return primary.filePath;
+      if (primary && primary.filePath) {
+        var fp = primary.filePath;
+        // Defensive: rewrite stale CMS paths
+        if (fp.indexOf("/admin/uploads/") === 0) {
+          fp = "/assets/images/products/" + fp.split("/").pop();
+        }
+        return fp;
+      }
     }
     if (p.image) return p.image;
     if (p.imageUrl) return p.imageUrl;

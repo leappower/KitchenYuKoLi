@@ -80,11 +80,18 @@
   function buildRelatedCard(rp, idx) {
     var rImg =
       rp.images && rp.images.length > 0
-        ? (
-            rp.images.find(function (i) {
-              return i.isPrimary;
-            }) || rp.images[0]
-          ).filePath
+        ? (function () {
+            var f = (
+              rp.images.find(function (i) {
+                return i.isPrimary;
+              }) || rp.images[0]
+            ).filePath;
+            // Defensive: rewrite stale CMS paths
+            if (f && f.indexOf("/admin/uploads/") === 0) {
+              f = "/assets/images/products/" + f.split("/").pop();
+            }
+            return f;
+          })()
         : "/assets/images/products/" + modelToSnake(rp.model) + "_1.webp";
     var gradients = [
       "from-primary/10 to-blue-100 dark:from-primary/20 dark:to-blue-900/30",
@@ -316,7 +323,13 @@
         product.images.find(function (i) {
           return i.isPrimary;
         }) || product.images[0];
-      if (pi && pi.filePath) imgSrc = pi.filePath;
+      if (pi && pi.filePath) {
+        imgSrc = pi.filePath;
+        // Defensive: rewrite stale CMS paths
+        if (imgSrc.indexOf("/admin/uploads/") === 0) {
+          imgSrc = "/assets/images/products/" + imgSrc.split("/").pop();
+        }
+      }
     }
     document.title = product.model + " | Yukoli Smart Commercial Kitchen";
 

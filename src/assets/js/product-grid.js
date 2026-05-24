@@ -459,7 +459,13 @@
             p.images.find(function (i) {
               return i.isPrimary;
             }) || p.images[0];
-          if (primary && primary.filePath) img = primary.filePath;
+          if (primary && primary.filePath) {
+            img = primary.filePath;
+            // Defensive: rewrite stale CMS paths to local static paths
+            if (img.indexOf("/admin/uploads/") === 0) {
+              img = "/assets/images/products/" + img.split("/").pop();
+            }
+          }
         } else if (p.image) {
           img = p.image;
         } else if (p.imageUrl) {
