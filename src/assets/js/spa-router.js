@@ -93,10 +93,14 @@
         containers: ["#spa-content"],
         linkSelector:
           'a[href^="/"]:not([href$=".pdf"]):not([href$=".zip"]):not([href$=".doc"]):not([href*="mailto:"]):not([href*="tel:"]):not([target="_blank"])',
-        plugins: [],
+        plugins: [
+          new global.SwupHeadPlugin({
+            persistTags: 'style[id], style[data-swup-persist], link[rel="stylesheet"][href], script[src]',
+            persistAssets: true,
+          }),
+          new global.SwupPreloadPlugin({ preloadHoveredLinks: true, preloadInitialPage: false }),
+        ],
         animateHistoryBrowsing: false,
-        // Scope head replacement so stylesheets survive
-        head: { scope: 'title, meta[name="description"], meta[name="keywords"]' },
       });
     } catch (e) {
       console.error("[spa-router] Swup init failed:", e);
