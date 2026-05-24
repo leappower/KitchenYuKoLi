@@ -22,42 +22,42 @@
 
     /** Products 子分类 */
     products: [
-      { key: "nav_products_cutting",  icon: "content_cut",           emoji: "",  href: "/products/cutting/" },
-      { key: "nav_products_stirfry",  icon: "local_fire_department", emoji: "🔥", href: "/products/stirfry/" },
-      { key: "nav_products_frying",   icon: "outdoor_grill",         emoji: "",  href: "/products/frying/" },
-      { key: "nav_products_stewing",  icon: "soup_kitchen",          emoji: "",  href: "/products/stewing/" },
-      { key: "nav_products_steaming", icon: "cloud",                 emoji: "",  href: "/products/steaming/" },
-      { key: "nav_products_other",    icon: "more_horiz",            emoji: "",  href: "/products/other/" }
+      { key: "nav_products_cutting",  icon: "content_cut",  href: "/products/cutting/" },
+      { key: "nav_products_stirfry",  icon: "local_fire_department", href: "/products/stirfry/" },
+      { key: "nav_products_frying",   icon: "outdoor_grill",  href: "/products/frying/" },
+      { key: "nav_products_stewing",  icon: "soup_kitchen",  href: "/products/stewing/" },
+      { key: "nav_products_steaming", icon: "cloud",  href: "/products/steaming/" },
+      { key: "nav_products_other",    icon: "more_horiz",  href: "/products/other/" }
     ],
 
     /** Applications 子分类 */
     applications: [
-      { key: "nav_applications_small_restaurant", icon: "storefront",       emoji: "", href: "/applications/small-restaurant/" },
-      { key: "nav_applications_central_kitchen",  icon: "apartment",        emoji: "", href: "/applications/central-kitchen/" },
-      { key: "nav_applications_chain_restaurant", icon: "ramen_dining",     emoji: "", href: "/applications/chain-restaurant/" },
-      { key: "nav_applications_canteen",          icon: "restaurant",       emoji: "", href: "/applications/canteen/" },
-      { key: "nav_applications_cloud_kitchen",    icon: "delivery_dining",  emoji: "", href: "/applications/cloud-kitchen/" },
-      { key: "nav_applications_food_factory",     icon: "factory",          emoji: "", href: "/applications/food-factory/" },
-      { key: "nav_applications_menu_lab",         icon: "science",          emoji: "", href: "/applications/menu-lab/" }
+      { key: "nav_applications_small_restaurant", icon: "storefront", href: "/applications/small-restaurant/" },
+      { key: "nav_applications_central_kitchen",  icon: "apartment", href: "/applications/central-kitchen/" },
+      { key: "nav_applications_chain_restaurant", icon: "ramen_dining", href: "/applications/chain-restaurant/" },
+      { key: "nav_applications_canteen",          icon: "restaurant", href: "/applications/canteen/" },
+      { key: "nav_applications_cloud_kitchen",    icon: "delivery_dining", href: "/applications/cloud-kitchen/" },
+      { key: "nav_applications_food_factory",     icon: "factory", href: "/applications/food-factory/" },
+      { key: "nav_applications_menu_lab",         icon: "science", href: "/applications/menu-lab/" }
     ],
 
     /** Support 子分类 */
     support: [
-      { key: "nav_support_overview",    icon: "apps",          emoji: "", href: "/support/" },
+      { key: "nav_support_overview",    icon: "apps", href: "/support/" },
       { _separator: true },
-      { key: "nav_support_services",    icon: "grid_view",     emoji: "", href: "/support/services/" },
-      { key: "nav_support_installation",icon: "construction",  emoji: "", href: "/support/installation/" },
-      { key: "nav_support_warranty",    icon: "verified",      emoji: "", href: "/support/warranty/" },
-      { key: "nav_support_spare_parts", icon: "build_circle",  emoji: "", href: "/support/spare-parts/" },
-      { key: "nav_support_training",    icon: "school",        emoji: "", href: "/support/training/" },
-      { key: "nav_support_faq",         icon: "contact_support",emoji: "", href: "/support/faq/" }
+      { key: "nav_support_services",    icon: "grid_view", href: "/support/services/" },
+      { key: "nav_support_installation",icon: "construction", href: "/support/installation/" },
+      { key: "nav_support_warranty",    icon: "verified", href: "/support/warranty/" },
+      { key: "nav_support_spare_parts", icon: "build_circle", href: "/support/spare-parts/" },
+      { key: "nav_support_training",    icon: "school", href: "/support/training/" },
+      { key: "nav_support_faq",         icon: "contact_support", href: "/support/faq/" }
     ],
 
     /** About 子分类 */
     about: [
-      { key: "nav_about_profile", icon: "apartment", emoji: "", href: "/about/#profile" },
-      { key: "nav_about_factory",  icon: "factory",   emoji: "", href: "/about/#factory" },
-      { key: "nav_about_cert",     icon: "verified",  emoji: "", href: "/about/#cert" }
+      { key: "nav_about_profile", icon: "apartment", href: "/about/#profile" },
+      { key: "nav_about_factory",  icon: "factory", href: "/about/#factory" },
+      { key: "nav_about_cert",     icon: "verified", href: "/about/#cert" }
     ],
 
     /** Contact 子分类 */
