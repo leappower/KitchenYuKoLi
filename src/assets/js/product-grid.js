@@ -592,8 +592,9 @@
     var isSelected = isProductCompared(p.model);
     var selectedClass = isSelected ? " compare-selected" : "";
     return (
-      '<article class="product-card group bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 overflow-hidden' +
+      '<article class="product-card group bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 overflow-hidden cursor-pointer' +
       selectedClass +
+      '" data-link="' + link +
       '" data-category="' +
       cat +
       '" data-tier="' +
@@ -665,7 +666,7 @@
     var isSelected = isProductCompared(p.model);
     var selectedClass = isSelected ? " compare-selected" : "";
     return (
-      '<article class="product-card-tablet bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 overflow-hidden' +
+      '<article class="product-card-tablet bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 overflow-hidden cursor-pointer' +
       selectedClass +
       '" data-category="' +
       cat +
@@ -1177,6 +1178,20 @@
   // Re-render on language change
   document.addEventListener("languageChanged", function () {
     autoRender();
+  });
+
+  // Click-to-detail: delegate clicks on product cards (PC/tablet)
+  // Mobile cards already have <a> wrappers, so only target PC/tablet
+  document.addEventListener("click", function (ev) {
+    var card = ev.target.closest('[data-link]');
+    if (!card) return;
+    // Don't intercept clicks on links, buttons, or inputs
+    if (ev.target.closest('a, button, input, select, label')) return;
+    var href = card.getAttribute('data-link');
+    if (href) {
+      ev.preventDefault();
+      window.location.href = href;
+    }
   });
 
   // Safety net: if API fails and no cached data, clear skeleton after 5s
