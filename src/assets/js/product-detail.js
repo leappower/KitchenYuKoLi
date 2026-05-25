@@ -303,7 +303,8 @@
       var catKey = product.category || "";
       // Map Chinese category name (e.g. "翻炒系列") to i18n key via slug
       var catSlug = CATEGORY_NAME_TO_SLUG[catKey] || "";
-      var catI18nKey = catSlug ? (PRODUCT_SLUGS[catSlug] || {}).key || "" : "";
+      var bp = window.Breadcrumb || {};
+      var catI18nKey = catSlug ? (bp.PRODUCT_SLUGS || {})[catSlug] && (bp.PRODUCT_SLUGS || {})[catSlug].key || "" : "";
       var slugMap = (window.Breadcrumb && window.Breadcrumb.CATEGORY_KEY_TO_SLUG) || {};
       var slug = slugMap[catI18nKey] || catSlug;
       var catInfo =
