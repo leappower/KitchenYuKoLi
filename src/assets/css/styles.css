@@ -424,6 +424,15 @@ section > .section-content {
   padding-inline: var(--container-px, 0.75rem);
 }
 
+/* Standalone section-content (e.g. footer injected outside <section>) */
+.section-content {
+  max-width: 1440px;
+  margin-inline: auto;
+}
+.section-content.max-w-\[1920px\] {
+  max-width: 1920px;
+}
+
 /* When <main> already has Tailwind px-*, section-content padding is
  * redundant and would double-indent content. Reset to zero.
  * fullwidth-bg > .section-content has higher specificity and still applies. */
