@@ -431,19 +431,9 @@ main[class*="px-"] > section > .section-content {
   padding-inline: 0;
 }
 
-/* ─── Bottom padding for mobile/tablet bottom nav bar ────── */
+/* ─── Footer padding — footer component handles bottom spacing ── */
 main#spa-content {
-  padding-bottom: 5rem;
-}
-@media (width >= 768px) {
-  main#spa-content {
-    padding-bottom: 4rem;
-  }
-}
-@media (width >= 1024px) {
-  main#spa-content {
-    padding-bottom: 0;
-  }
+  padding-bottom: 0;
 }
 
 
