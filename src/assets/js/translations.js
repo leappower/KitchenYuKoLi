@@ -1,6 +1,6 @@
 !(function (t) {
   "use strict";
-  var I18N_CACHE_V = 1779713960;
+  var I18N_CACHE_V = 1779716161;
   var _spaRegs = {};
 
   // ─── Ensure LANG_REGISTRY is loaded ─────────────────────────
@@ -173,64 +173,49 @@
       var e = "product-" + lang;
       if (this.translationsCache.has(e)) return Promise.resolve(this.translationsCache.get(e));
       var n = this;
-      // Fetch {lang}-product.json and convert flat keys to model-based lookup
-      var baseUrl = (window.BASE_PATH || "") + "/assets/lang/";
-      var url = baseUrl + lang + "-product.json";
-      return fetch(url, { cache: "default" })
-        .then(function (r) {
-          if (!r.ok) throw new Error("HTTP " + r.status);
-          return r.json();
-        })
-        .then(function (json) {
-          var byModel = {};
-          var products = [];
-          if (table.length && table[0].model) {
-            // Flat format: each item is a product
-            products = table.filter(function (p) {
-              return p.model;
-            });
-          } else {
-            // Nested format: table[i].products[]
-            table.forEach(function (cat) {
-              var prods = cat.products || [];
-              prods.forEach(function (p) {
-                if (p.model) products.push(p);
-              });
-            });
-          }
-          var modelMap = {};
-          products.forEach(function (p) {
-            var key = (p.model || "")
-              .toLowerCase()
-              .replace(/[^a-z0-9]/g, "_")
-              .replace(/_+/g, "_")
-              .replace(/^_|_$/g, "");
-            if (key) modelMap[key] = p.model;
+      // Extract product translations from the already-loaded PRODUCT_DATA_TABLE
+      // (translations are embedded as nameEn, specificationsEn, etc. on each product)
+      return Promise.resolve().then(function () {
+        var suffix =
+          lang.charAt(0).toUpperCase() +
+          lang.slice(1).replace(/-([a-z])/g, function (m, c) {
+            return c.toUpperCase();
           });
-          Object.keys(json).forEach(function (key) {
-            var m = key.match(
-              /^product_([a-z0-9]+(?:_[a-z0-9]+)*)_(name|specifications|usage|throughput|material|sub_category|tier|badge|control_method|product_dimensions|color|highlights)$/i
-            );
-            if (!m) return;
-            var modelKey = m[1];
-            var field = m[2].toLowerCase();
-            var model = modelMap[modelKey];
-            if (!model) return;
-            if (!byModel[model]) byModel[model] = {};
-            byModel[model][field] = json[key];
+        var table = window.PRODUCT_DATA_TABLE || [];
+        var map = {};
+        var fields = [
+          "name",
+          "specifications",
+          "usage",
+          "throughput",
+          "material",
+          "sub_category",
+          "tier",
+          "badge",
+          "control_method",
+          "product_dimensions",
+          "color",
+        ];
+        table.forEach(function (cat) {
+          var prods = cat.products || [];
+          prods.forEach(function (p) {
+            var pid = p._productId || p.id;
+            if (!pid) return;
+            var entry = {};
+            fields.forEach(function (f) {
+              var val = p[f + suffix];
+              if (val) entry[f] = val;
+            });
+            if (Object.keys(entry).length > 0) map[pid] = entry;
           });
-          n.translationsCache.set(e, byModel);
-          window._productTranslations = byModel;
-          window._productTranslationsByModel = byModel;
-          return byModel;
-        })
-        .catch(function (err) {
-          var empty = {};
-          n.translationsCache.set(e, empty);
-          window._productTranslations = empty;
-          window._productTranslationsByModel = empty;
-          return empty;
         });
+        if (Object.keys(map).length === 0 && lang !== "zh-CN") {
+          console.warn("[i18n] loadProductTranslations: no embedded translations for " + lang);
+        }
+        n.translationsCache.set(e, map);
+        window._productTranslations = map;
+        return map;
+      });
     }),
     (r.prototype.mergeTranslations = function (t, e) {
       return Object.assign({}, t, e);
