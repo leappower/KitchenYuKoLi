@@ -102,7 +102,8 @@
   /**
    * Fetch from CMS API with ETag support
    */
-  function _fetchFromNetwork(callback) {
+  function _fetchFromNetwork(callback, retries) {
+    retries = retries || 0;
     // Local data sources (no API dependency)
     var table = window.PRODUCT_DATA_TABLE || [];
     var coreProducts = table.filter(function (p) {
@@ -111,6 +112,14 @@
     if (coreProducts.length > 0) {
       _saveCache(coreProducts);
       callback(coreProducts, "local");
+      return;
+    }
+    // Retry if product-data-table.js hasn't loaded yet (max 5 times, 100ms apart)
+    if (retries < 5) {
+      var self = this;
+      setTimeout(function () {
+        _fetchFromNetwork(callback, retries + 1);
+      }, 100);
       return;
     }
     _loadCachedFallback(callback);
