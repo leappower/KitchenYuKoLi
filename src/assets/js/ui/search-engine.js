@@ -309,9 +309,9 @@
     for (var i = 0; i < results.length; i++) {
       var p = results[i];
       var idx = i;
-      var name = esc(p._displayName || p._displayCategory + " " + p.model);
+      var name = esc(p._displayName || p.model || "");
       var model = esc(p.model || "");
-      var category = esc(p._displayCategory || p.category || "");
+      var category = esc(p._displayCategory || p.category || tr("filter_all", "All"));
       var badge = p._displayBadge ? '<span class="ios-search-badge">' + esc(p._displayBadge) + "</span>" : "";
       var imgSrc = p.productImage || p.imageUrl || "";
       var hlClass = idx === highlightedIndex ? " is-highlighted" : "";
