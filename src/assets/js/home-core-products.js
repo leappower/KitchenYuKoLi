@@ -185,7 +185,7 @@
       }
 
       // Reapply i18n after render
-      var VIS_COUNT = 4; // PC: 1 row (4 columns)
+      var VIS_COUNT = 8; // PC: 2 rows (4 columns × 2)
       var hasMore = products.length > VIS_COUNT;
       var visProducts = hasMore ? products.slice(0, VIS_COUNT) : products;
       var restProducts = hasMore ? products.slice(VIS_COUNT) : [];
@@ -193,32 +193,50 @@
       function buildPCCard(p) {
         var img = getPrimaryImage(p);
         var href = getProductDetailHref(p);
+        var catMap = {
+          翻炒系列: "stirfry",
+          炖煮系列: "stewing",
+          蒸煮系列: "steaming",
+          煎炸系列: "frying",
+          切配系列: "cutting",
+          辅助系列: "other",
+        };
+        var catSlug = catMap[p.category] || "other";
+        var catHref = "/products/" + catSlug + "/";
         return (
-          '<div class="group bg-background-light dark:bg-background-dark p-4 rounded-2xl border border-slate-200 dark:border-slate-800 hover:border-primary transition-all shadow-sm">' +
+          '<div class="group bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 hover:border-primary hover:shadow-lg transition-all duration-300 overflow-hidden">' +
           '<a href="' +
           href +
           '" class="block">' +
-          '<div class="aspect-[4/3] rounded-xl bg-slate-100 dark:bg-slate-800 overflow-hidden mb-6">' +
+          '<div class="aspect-[4/3] bg-slate-50 dark:bg-slate-900 overflow-hidden">' +
           (img
             ? '<img alt="' +
               escHtml(p.model) +
-              '" class="w-full h-full object-contain p-2" src="' +
+              '" class="w-full h-full object-contain p-4 group-hover:scale-105 transition-transform duration-300" src="' +
               escHtml(img) +
               '" loading="lazy">'
             : '<div style="font-size:2.5rem;color:#d1d5db;display:flex;align-items:center;justify-content:center;height:100%">📦</div>') +
           "</div>" +
-          '<h3 class="text-xl font-bold mb-2">' +
+          '<div class="p-5">' +
+          (p.category
+            ? '<a href="' +
+              catHref +
+              '" class="inline-block text-xs font-bold px-2.5 py-1 rounded-full bg-primary/10 text-primary mb-3 hover:bg-primary/20 transition-colors">' +
+              escHtml(p.category) +
+              "</a>"
+            : "") +
+          '<h3 class="text-lg font-black mb-1">' +
           escHtml(p.model) +
           "</h3>" +
-          (p.subCategory
-            ? '<p class="text-sm text-slate-500 mb-6">' + escHtml(p.subCategory) + "</p>"
-            : '<div class="mb-6"></div>') +
-          '<div class="flex justify-between items-center border-t border-slate-100 dark:border-slate-800 pt-4">' +
-          (p.badge
-            ? '<span class="text-xs font-bold uppercase text-slate-400">' + escHtml(p.badge) + "</span>"
+          (p.nameEn
+            ? '<p class="text-sm text-slate-500 dark:text-slate-400 line-clamp-2 mb-4">' + escHtml(p.nameEn) + "</p>"
+            : '<div class="mb-4"></div>') +
+          '<div class="flex justify-between items-center pt-3 border-t border-slate-100 dark:border-slate-700">' +
+          (p.power
+            ? '<span class="text-xs font-bold text-slate-400">' + escHtml(p.power) + "</span>"
             : "<span></span>") +
-          '<span class="text-primary font-black" data-i18n="home_hw_learn_more">了解更多</span>' +
-          "</div></a></div>"
+          '<span class="text-sm text-primary font-bold flex items-center gap-1" data-i18n="home_hw_learn_more">了解更多 <span class=\"material-symbols-outlined text-base\">arrow_forward</span></span>' +
+          "</div></div></a></div>"
         );
       }
 
