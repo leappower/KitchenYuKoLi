@@ -103,7 +103,7 @@
               }) || rp.images[0]
             ).filePath;
             // Defensive: normalize _N.webp → -N.webp (file rename migration)
-            if (f) f = f.replace(/_(\d+\.webp)$/, '-$1');
+            if (f) f = f.replace(/_(\d+\.webp)$/, "-$1");
             // Defensive: rewrite stale CMS paths
             if (f && f.indexOf("/admin/uploads/") === 0) {
               f = "/assets/images/products/" + f.split("/").pop();
@@ -250,6 +250,19 @@
   }
 
   function renderPDP() {
+    // Check if language changed — reload translations before rendering
+    var currentLang = (window.CURRENT_LANG || document.documentElement.lang || "zh-CN").replace("_", "-");
+    if (currentLang !== (renderPDP._lastLang || "") && currentLang !== "zh-CN" && currentLang !== "zh") {
+      renderPDP._lastLang = currentLang;
+      if (typeof loadProductTranslations === "function") {
+        loadProductTranslations(currentLang, function () {
+          renderPDP();
+        });
+        return;
+      }
+    }
+    renderPDP._lastLang = currentLang;
+
     // Read model from path:
     //   /products/{slug}/{model}/   (new canonical)
     //   /products/detail/{model}/  (old detail path)
@@ -312,7 +325,9 @@
       // Map Chinese category name (e.g. "翻炒系列") to i18n key via slug
       var catSlug = CATEGORY_NAME_TO_SLUG[catKey] || "";
       var bp = window.Breadcrumb || {};
-      var catI18nKey = catSlug ? (bp.PRODUCT_SLUGS || {})[catSlug] && (bp.PRODUCT_SLUGS || {})[catSlug].key || "" : "";
+      var catI18nKey = catSlug
+        ? ((bp.PRODUCT_SLUGS || {})[catSlug] && (bp.PRODUCT_SLUGS || {})[catSlug].key) || ""
+        : "";
       var slugMap = (window.Breadcrumb && window.Breadcrumb.CATEGORY_KEY_TO_SLUG) || {};
       var slug = slugMap[catI18nKey] || catSlug;
       var catInfo =
@@ -338,12 +353,14 @@
         '<nav class="breadcrumb-nav text-sm text-slate-500 dark:text-slate-400 py-4" aria-label="Breadcrumb">' +
         '<ol class="flex items-center gap-1 flex-wrap">' +
         '<li><a href="/products/" class="hover:text-primary transition-colors">' +
-        esc(tl("nav_products", "Products")) + '</a></li>' +
+        esc(tl("nav_products", "Products")) +
+        "</a></li>" +
         (badgeHtml ? badgeHtml : "") +
         (badgeHtml ? chevron : "") +
         '<li><span class="text-slate-900 dark:text-white font-medium">' +
-        esc(product.name || model) + "</span></li>" +
-        '</ol></nav></div>';
+        esc(product.name || model) +
+        "</span></li>" +
+        "</ol></nav></div>";
       // Mobile breadcrumb — 统一返回按钮 + 两层
       var mChevron = '<span class="mx-1 text-slate-300 text-xs">/</span>';
       html +=
@@ -354,10 +371,15 @@
         '">' +
         '<span class="material-symbols-outlined text-lg">arrow_back</span></button>' +
         '<div class="text-xs text-slate-500 dark:text-slate-400">' +
-        esc(tl("nav_products", "Products")) + '</div>' +
-        (catLabel ? '<div class="text-xs text-slate-500 dark:text-slate-400">' + mChevron + esc(catLabel) + "</div>" : "") +
+        esc(tl("nav_products", "Products")) +
+        "</div>" +
+        (catLabel
+          ? '<div class="text-xs text-slate-500 dark:text-slate-400">' + mChevron + esc(catLabel) + "</div>"
+          : "") +
         '<div class="text-sm font-bold text-slate-900 dark:text-white truncate">' +
-        mChevron + esc(product.name || model) + "</div>" +
+        mChevron +
+        esc(product.name || model) +
+        "</div>" +
         "</div></div>";
       bcEl.innerHTML = html;
     })();
@@ -372,7 +394,7 @@
       if (pi && pi.filePath) {
         imgSrc = pi.filePath;
         // Defensive: normalize _N.webp → -N.webp (file rename migration)
-        imgSrc = imgSrc.replace(/_(\d+\.webp)$/, '-$1');
+        imgSrc = imgSrc.replace(/_(\d+\.webp)$/, "-$1");
         // Defensive: rewrite stale CMS paths
         if (imgSrc.indexOf("/admin/uploads/") === 0) {
           imgSrc = "/assets/images/products/" + imgSrc.split("/").pop();
@@ -694,59 +716,69 @@
     if (!product) return "";
     var lang = (window.CURRENT_LANG || document.documentElement.lang || "zh-CN").replace("_", "-");
     if (lang === "zh-CN" || lang === "zh") return product[field] || "";
-    // Check translations cache (loaded via API)
-    var tKey = product.model || product.id;
-    var translations = window._productTranslations || {};
-    var t = translations[tKey] || translations[product._productId];
+    var model = product.model;
+    var map = window._productTranslationsByModel || {};
+    var t = map[model];
     if (t && t[field]) return t[field];
     return product[field] || "";
   };
 
-  // Load translations for a language (called when user switches language)
+  // Load translations for a language by fetching {lang}-product.json
   window.loadProductTranslations = function (lang, callback) {
-    if (lang === "zh-CN" || lang === "zh") {
+    var normalizedLang = lang.replace("_", "-");
+    // zh-CN uses product-data-table directly (Chinese is the source)
+    if (normalizedLang === "zh-CN" || normalizedLang === "zh") {
       window._productTranslations = {};
+      window._productTranslationsByModel = {};
       if (callback) callback();
       return;
     }
-    // Extract translations from the already-loaded PRODUCT_DATA_TABLE
-    var suffix =
-      lang.charAt(0).toUpperCase() +
-      lang.slice(1).replace(/-([a-z])/g, function (m, c) {
-        return c.toUpperCase();
+    // Fetch {lang}-product.json
+    var baseUrl = (window.BASE_PATH || "") + "/assets/lang/";
+    var url = baseUrl + normalizedLang + "-product.json";
+    fetch(url, { cache: "default" })
+      .then(function (r) {
+        if (!r.ok) throw new Error("HTTP " + r.status);
+        return r.json();
+      })
+      .then(function (json) {
+        // Convert flat keys to model-based lookup
+        // JSON keys: product_dlb_tbs30_name → model=DLB-TBS30, field=name
+        var byModel = {};
+        var products = getAllProducts();
+        var modelMap = {};
+        products.forEach(function (p) {
+          var key = (p.model || "")
+            .toLowerCase()
+            .replace(/[^a-z0-9]/g, "_")
+            .replace(/_+/g, "_")
+            .replace(/^_|_$/g, "");
+          if (key) modelMap[key] = p.model;
+        });
+        Object.keys(json).forEach(function (key) {
+          // Parse: product_{model}_{field}
+          var m = key.match(
+            /^product_([a-z0-9]+(?:_[a-z0-9]+)*)_(name|specifications|usage|throughput|material|sub_category|tier|badge|control_method|product_dimensions|color|highlights)$/i
+          );
+          if (!m) return;
+          var modelKey = m[1];
+          var field = m[2].toLowerCase();
+          var model = modelMap[modelKey];
+          if (!model) return;
+          if (!byModel[model]) byModel[model] = {};
+          byModel[model][field] = json[key];
+        });
+        window._productTranslations = byModel;
+        window._productTranslationsByModel = byModel;
+        if (callback) callback();
+        // Dispatch event for other listeners
+        document.dispatchEvent(new CustomEvent("productTranslationsLoaded"));
+      })
+      .catch(function (e) {
+        window._productTranslations = {};
+        window._productTranslationsByModel = {};
+        if (callback) callback();
       });
-    var products = getAllProducts();
-    var map = {};
-    var fields = [
-      "name",
-      "specifications",
-      "usage",
-      "throughput",
-      "material",
-      "sub_category",
-      "tier",
-      "badge",
-      "control_method",
-      "product_dimensions",
-      "color",
-    ];
-    products.forEach(function (p) {
-      var pid = p._productId || p.id;
-      if (!pid) return;
-      var entry = {};
-      fields.forEach(function (f) {
-        var val = p[f + suffix];
-        if (val) entry[f] = val;
-      });
-      if (Object.keys(entry).length > 0) map[pid] = entry;
-    });
-    window._productTranslations = map;
-    window._productTranslationsByModel = {};
-    products.forEach(function (p) {
-      var t = map[p._ProductId || p.id];
-      if (t) window._productTranslationsByModel[p.model] = t;
-    });
-    if (callback) callback();
   };
 
   _spaOn(window, "languageChanged", renderPDP, "languageChanged");
