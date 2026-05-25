@@ -746,26 +746,36 @@
       buildMobileCompareBtnHTML(model) +
       '<a href="' +
       link +
-      '" class="flex gap-4 p-3">' +
-      '<div class="w-24 h-24 rounded-lg bg-white dark:bg-slate-800 flex-shrink-0 overflow-hidden flex items-center justify-center">' +
+      '" class="block">' +
+      '<div class="aspect-[4/3] overflow-hidden bg-white dark:bg-slate-800 flex items-center justify-center">' +
       '<img loading="lazy" alt="' +
       name +
       '" class="w-full h-full object-contain p-1" src="' +
       img +
       "\" onerror=\"if(!this.dataset.errored){this.dataset.errored='1';this.src='/assets/images/products/default.webp' }\">" +
       "</div>" +
-      '<div class="flex-1 min-w-0">' +
-      '<h3 class="text-sm font-bold text-slate-900 dark:text-white mb-1 truncate">' +
+      '<div class="p-3">' +
+      '<div class="flex items-center gap-1.5 mb-1"><span class="material-symbols-outlined text-primary text-sm">local_fire_department</span><span class="text-xs font-bold text-primary uppercase tracking-wider">' +
+      cat +
+      '</span></div>' +
+      '<h3 class="text-sm font-bold text-slate-900 dark:text-white mb-1">' +
       name +
       "</h3>" +
       '<p class="text-xs text-slate-500 dark:text-slate-400 mb-2 line-clamp-2">' +
       desc +
       "</p>" +
-      '<div class="flex items-center justify-between">' +
+      '<div class="flex items-center justify-between pt-2 border-t border-slate-100 dark:border-slate-700">' +
       '<a href="/quote" class="text-sm font-black text-primary hover:underline">' +
       esc(tl("products_inquire", "询价")) +
       "</a>" +
-      '<span class="material-symbols-outlined text-slate-400 text-sm">arrow_forward</span>' +
+      '<div class="flex items-center gap-2">' +
+      '<a href="' +
+      link +
+      '" class="flex items-center gap-1 text-primary text-sm font-bold hover:underline"><span>' +
+      esc(tl("btn_view_details", "查看详情")) +
+      '</span><span class="material-symbols-outlined text-xs">arrow_forward</span></a>' +
+      buildCompareBtnHTML(model) +
+      "</div>" +
       "</div>" +
       "</div>" +
       "</a>" +
