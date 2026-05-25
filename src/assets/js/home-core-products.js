@@ -311,11 +311,11 @@
         var img = getPrimaryImage(p);
         var href = getProductDetailHref(p);
         return (
-          '<div class="bg-white dark:bg-background-dark p-3 rounded-xl border border-slate-200 dark:border-slate-800 hover:border-primary transition-all shadow-sm">' +
+          '<div class="bg-white p-3 rounded-xl border border-slate-200 hover:border-primary transition-all shadow-sm">' +
           '<a href="' +
           href +
           '">' +
-          '<div class="aspect-square rounded-lg bg-slate-200 dark:bg-slate-800 overflow-hidden mb-3">' +
+          '<div class="aspect-square rounded-lg bg-slate-200 overflow-hidden mb-3">' +
           (img
             ? '<img alt="' +
               escHtml(p.model) +
@@ -388,25 +388,25 @@
         var img = getPrimaryImage(p);
         var href = getProductDetailHref(p);
         return (
-          '<div class="bg-white dark:bg-slate-900 rounded-xl overflow-hidden shadow-sm border border-slate-200 dark:border-slate-800">' +
+          '<div class="bg-white rounded-xl overflow-hidden shadow-sm border border-slate-200">' +
           '<a href="' +
           href +
-          '" class="block">' +
-          '<div class="aspect-[4/3] bg-cover bg-center bg-slate-200 dark:bg-slate-800"' +
+          '" class="flex items-stretch">' +
+          '<div class="w-[120px] shrink-0 bg-slate-200"' +
           (img
             ? ' style="background-image: url(&quot;' +
               escHtml(img) +
               '&quot;); background-size: cover; background-position: center;"'
             : "") +
           "></div>" +
-          '<div class="p-3 sm:p-4">' +
-          '<h3 class="font-bold text-sm sm:text-base mb-1">' +
+          '<div class="flex-1 p-3 flex flex-col justify-center">' +
+          '<h3 class="font-bold text-sm mb-1">' +
           escHtml(p.model) +
           "</h3>" +
           (p.subCategory
-            ? '<p class="text-xs sm:text-sm text-slate-500 mb-2">' + escHtml(p.subCategory) + "</p>"
+            ? '<p class="text-xs text-slate-500 mb-2">' + escHtml(p.subCategory) + "</p>"
             : '<div class="mb-2"></div>') +
-          '<span class="text-xs sm:text-sm font-bold text-primary" data-i18n="home_hw_learn_more">了解更多</span>' +
+          '<span class="text-xs font-bold text-primary" data-i18n="home_hw_learn_more">了解更多</span>' +
           "</div></a></div>"
         );
       }
@@ -419,7 +419,7 @@
       html += "</div>";
       if (hasMore) {
         html +=
-          "<button id=\"hcp-load-more-mobile\" class=\"w-full py-2.5 rounded-xl border border-slate-300 dark:border-slate-600 text-sm font-bold text-primary hover:bg-primary hover:text-white hover:border-primary transition-all flex items-center justify-center gap-2\" onclick=\"(function(){var b=document.getElementById('hcp-hidden-mobile');var btn=document.getElementById('hcp-load-more-mobile');if(b&&btn){b.style.display='';btn.style.display='none';window.translationManager&&window.translationManager.applyTo(b.parentElement);}})()\">" +
+          "<button id=\"hcp-load-more-mobile\" class=\"w-full py-2.5 rounded-xl border border-slate-300  text-sm font-bold text-primary hover:bg-primary hover:text-white hover:border-primary transition-all flex items-center justify-center gap-2\" onclick=\"(function(){var b=document.getElementById('hcp-hidden-mobile');var btn=document.getElementById('hcp-load-more-mobile');if(b&&btn){b.style.display='';btn.style.display='none';window.translationManager&&window.translationManager.applyTo(b.parentElement);}})()\">" +
           '<span class="material-symbols-outlined text-lg">expand_more</span> ' +
           escHtml(tl("home_show_more", "更多产品")) +
           "</button>";
