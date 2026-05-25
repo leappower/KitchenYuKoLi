@@ -117,7 +117,7 @@
   function buildPCFooterHtml() {
     return (
       '<div class="bg-slate-900 text-white">' +
-      '<div class="max-w-7xl mx-auto px-6 py-12">' +
+      '<div class="max-w-7xl mx-auto px-6 pt-0 pb-8">' +
       '<div class="grid grid-cols-2 md:grid-cols-4 gap-8">' +
       /* Products */
       "<div>" +
@@ -163,7 +163,7 @@
       "</ul>" +
       "</div>" +
       "</div>" +
-      '<div class="border-t border-white/20 mt-8 pt-8 text-center text-sm text-slate-400">' +
+      '<div class="border-t border-white/20 mt-6 pt-6 text-center text-sm text-slate-400">' +
       '<p data-i18n="footer_copyright"></p>' +
       "</div>" +
       "</div>" +
