@@ -26,6 +26,9 @@ const EXCLUDED_NAMES = /洁碟台|污碟台|洗涤剂|架子|花洒|蒸柜|售�
 const EXCLUDED_MODEL_REGEX = /^[\d]+$/;
 const VALID_CATEGORIES = ['翻炒系列', '炖煮系列', '煎炸系列', '蒸煮系列', '切配系列', '辅助系列'];
 
+// 产品图片目录
+var PRODUCT_IMAGES_DIR = path.join(__dirname, '..', 'src', 'assets', 'images', 'products');
+
 // ─── 解析 Excel ────────────────────────────────────────────────
 function parseXlsx(xlsxPath) {
   var XLSX;
@@ -36,6 +39,58 @@ function parseXlsx(xlsxPath) {
   var wb = XLSX.readFile(xlsxPath);
   var ws = wb.Sheets[wb.SheetNames[0]];
   return XLSX.utils.sheet_to_json(ws, { defval: '' });
+}
+
+// ─── 扫描产品图片目录 ──────────────────────────────────────────
+// 在 src/assets/images/products/ 中查找 {model}_数字.webp 或 {model}_hires.webp
+// 返回 { model: [{ filePath, isPrimary, isHires }] } 映射
+function scanProductImages(imagesDir) {
+  var result = {};
+  if (!fs.existsSync(imagesDir)) {
+    console.warn('[init] Images directory not found:', imagesDir);
+    return result;
+  }
+  var files = fs.readdirSync(imagesDir);
+  files.forEach(function(f) {
+    // 匹配格式: MODEL_数字.webp 或 MODEL_hires.webp 或 MODEL.webp
+    var match = f.match(/^([A-Z][A-Z0-9_-]+?[A-Z0-9])_(\d+)\.(webp|jpg|png)$/);
+    if (match) {
+      var model = match[1];
+      var suffix = match[2];
+      var ext = match[3];
+      if (!result[model]) result[model] = [];
+      result[model].push({
+        filePath: '/assets/images/products/' + f,
+        isPrimary: suffix === '2' || (result[model].length === 0),
+        isHires: false
+      });
+      return;
+    }
+    // MODEL_hires.webp
+    match = f.match(/^([A-Z][A-Z0-9_-]+?[A-Z0-9])_hires\.(webp|jpg|png)$/);
+    if (match) {
+      var model = match[1];
+      if (!result[model]) result[model] = [];
+      result[model].push({
+        filePath: '/assets/images/products/' + f,
+        isPrimary: result[model].length === 0 && !result[model].some(function(i) { return i.isPrimary; }),
+        isHires: true
+      });
+      return;
+    }
+    // MODEL.webp (无后缀)
+    match = f.match(/^([A-Z][A-Z0-9_-]+?[A-Z0-9])\.(webp|jpg|png)$/);
+    if (match) {
+      var model = match[1];
+      if (!result[model]) result[model] = [];
+      result[model].push({
+        filePath: '/assets/images/products/' + f,
+        isPrimary: result[model].length === 0 && !result[model].some(function(i) { return i.isPrimary; }),
+        isHires: false
+      });
+    }
+  });
+  return result;
 }
 
 // ─── 清洗模型名 ──────────────────────────────────────────────
@@ -151,6 +206,10 @@ function main() {
   var i18nEn = {};   // 所有翻译 key -> 英文值（留空 fallback）
   var seenModels = {};
 
+  // 预扫描图片目录
+  var imageMap = scanProductImages(PRODUCT_IMAGES_DIR);
+  console.log('[init] Scanned', Object.keys(imageMap).length, 'products with images from', PRODUCT_IMAGES_DIR);
+
   for (var ri = 0; ri < rawRows.length; ri++) {
     var row = rawRows[ri];
     var rawModel = String(row['型号'] || '').trim();
@@ -198,7 +257,7 @@ function main() {
       badge: '',
       badgeColor: '',
       isActive: true,
-      images: [],
+      images: imageMap[model] || [],
       highlights: '',
       scenarios: usage,
       usage: usage,
