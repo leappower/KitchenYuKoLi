@@ -27,6 +27,7 @@ const EXCLUDED_MODEL_REGEX = /^[\d]+$/;
 const VALID_CATEGORIES = ['翻炒系列', '炖煮系列', '煎炸系列', '蒸煮系列', '切配系列', '辅助系列'];
 
 // 产品图片目录
+var HOME_CORE_MODELS = ["DLB-BQ40T","DLB-GQ90","DLB-QXC120","DLB-PZJ100","DLB-A2800","G30DAG","GT2D1B","HKQPJ400-VIII"];
 var PRODUCT_IMAGES_DIR = path.join(__dirname, '..', 'src', 'assets', 'images', 'products');
 
 // ─── 解析 Excel ────────────────────────────────────────────────
@@ -258,6 +259,7 @@ function main() {
       badgeColor: '',
       isActive: true,
       images: imageMap[model] || [],
+    is_home_core: HOME_CORE_MODELS.indexOf(model) >= 0,
       highlights: '',
       scenarios: usage,
       usage: usage,
