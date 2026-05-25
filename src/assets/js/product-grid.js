@@ -205,7 +205,7 @@
           esc(p._imageUrl) +
           '" class="w-6 h-6 rounded object-cover" onerror="this.src=\'/assets/images/products/default.webp\'">' +
           '<span class="text-[10px] font-bold text-slate-900 dark:text-white truncate max-w-[56px]">' +
-          esc(p.name || p.model) +
+          esc(_pField(p, "name") || p.model) +
           "</span>" +
           '<button class="float-remove flex-shrink-0 text-slate-400 hover:text-red-500" data-model="' +
           esc(p.model) +
@@ -243,7 +243,7 @@
           esc(p._imageUrl) +
           '" class="w-7 h-7 rounded object-cover" onerror="this.src=\'/assets/images/products/default.webp\'">' +
           '<span class="text-xs font-bold text-slate-900 dark:text-white truncate max-w-[80px]">' +
-          esc(p.name || p.model) +
+          esc(_pField(p, "name") || p.model) +
           "</span>" +
           '<button class="float-remove flex-shrink-0 text-slate-400 hover:text-red-500" data-model="' +
           esc(p.model) +
@@ -281,7 +281,7 @@
           esc(p._imageUrl) +
           '" class="w-8 h-8 rounded-lg object-cover" onerror="this.src=\'/assets/images/products/default.webp\'">' +
           '<div class="min-w-0"><p class="text-sm font-bold text-slate-900 dark:text-white truncate max-w-[120px]">' +
-          esc(p.name || p.model) +
+          esc(_pField(p, "name") || p.model) +
           "</p></div>" +
           '<button class="float-remove flex-shrink-0 text-slate-400 hover:text-red-500 transition-colors" data-model="' +
           esc(p.model) +
@@ -551,10 +551,19 @@
 
   // ─── Card renderers ────────────────────────────────────────────
 
+  /** Get localized product field value (delegates to getProductField from product-detail.js) */
+  function _pField(product, field) {
+    if (typeof window.getProductField === "function") {
+      var val = window.getProductField(product, field);
+      if (val) return val;
+    }
+    return product[field] || "";
+  }
+
   function renderPC(p) {
     var cat = esc(p._category);
     var model = esc(p.model || "");
-    var name = esc(p.name || model);
+    var name = esc(_pField(p, "name") || model);
     var desc = esc(p.description || p.card_desc || p.highlights || "");
     var img = esc(p._imageUrl);
     var subCatRaw = p.subCategory || cat;
@@ -636,7 +645,7 @@
   function renderTablet(p) {
     var cat = esc(p._category);
     var model = esc(p.model || "");
-    var name = esc(p.name || model);
+    var name = esc(_pField(p, "name") || model);
     var desc = esc(p.description || p.card_desc || "");
     var img = esc(p._imageUrl);
     var subCatRaw = p.subCategory || cat;
@@ -706,7 +715,7 @@
   function renderMobile(p) {
     var cat = esc(p._category);
     var model = esc(p.model || "");
-    var name = esc(p.name || model);
+    var name = esc(_pField(p, "name") || model);
     var desc = esc(p.description || p.card_desc || "");
     var img = esc(p._imageUrl);
     var linkSlug = CATEGORY_NAME_TO_SLUG[p._category] || encodeURIComponent(model);
