@@ -117,12 +117,12 @@
   function buildPCFooterHtml() {
     return (
       '<div class="bg-slate-900 text-white">' +
-      '<div class="max-w-7xl mx-auto px-6 pt-0 pb-8">' +
-      '<div class="grid grid-cols-2 md:grid-cols-4 gap-8">' +
+      '<div class="max-w-7xl mx-auto px-4 sm:px-6 pt-0 pb-6 sm:pb-8">' +
+      '<div class="grid grid-cols-2 md:grid-cols-4 gap-4 lg:gap-8">' +
       /* Products */
       "<div>" +
-      '<h4 class="text-sm font-bold uppercase tracking-wider mb-4" data-i18n="footer_products_title">Products</h4>' +
-      '<ul class="space-y-2 text-sm text-slate-300">' +
+      '<h4 class="text-xs sm:text-sm font-bold uppercase tracking-wider mb-2 sm:mb-4" data-i18n="footer_products_title">Products</h4>' +
+      '<ul class="space-y-1 sm:space-y-2 text-xs sm:text-sm text-slate-300">' +
       '<li><a href="/products/" class="hover:text-white transition-colors" data-i18n="footer_products_all">All Products</a></li>' +
       '<li><a href="/products/stirfry/" class="hover:text-white transition-colors" data-i18n="footer_products_stirfry">Stir-fry Equipment</a></li>' +
       '<li><a href="/products/stewing/" class="hover:text-white transition-colors" data-i18n="footer_products_stewing">Stewing Equipment</a></li>' +
@@ -133,8 +133,8 @@
       "</div>" +
       /* Applications */
       "<div>" +
-      '<h4 class="text-sm font-bold uppercase tracking-wider mb-4" data-i18n="footer_applications_title">Applications</h4>' +
-      '<ul class="space-y-2 text-sm text-slate-300">' +
+      '<h4 class="text-xs sm:text-sm font-bold uppercase tracking-wider mb-2 sm:mb-4" data-i18n="footer_applications_title">Applications</h4>' +
+      '<ul class="space-y-1 sm:space-y-2 text-xs sm:text-sm text-slate-300">' +
       '<li><a href="/applications/canteen/" class="hover:text-white transition-colors" data-i18n="footer_app_canteen">School &amp; Corporate Canteens</a></li>' +
       '<li><a href="/applications/small-restaurant/" class="hover:text-white transition-colors" data-i18n="footer_app_restaurant">Small Restaurants</a></li>' +
       '<li><a href="/applications/central-kitchen/" class="hover:text-white transition-colors" data-i18n="footer_app_central">Central Kitchens</a></li>' +
@@ -144,8 +144,8 @@
       "</div>" +
       /* Support */
       "<div>" +
-      '<h4 class="text-sm font-bold uppercase tracking-wider mb-4" data-i18n="footer_support_title">Support</h4>' +
-      '<ul class="space-y-2 text-sm text-slate-300">' +
+      '<h4 class="text-xs sm:text-sm font-bold uppercase tracking-wider mb-2 sm:mb-4" data-i18n="footer_support_title">Support</h4>' +
+      '<ul class="space-y-1 sm:space-y-2 text-xs sm:text-sm text-slate-300">' +
       '<li><a href="/support/" class="hover:text-white transition-colors" data-i18n="footer_support_services">Technical Services</a></li>' +
       '<li><a href="/support/warranty/" class="hover:text-white transition-colors" data-i18n="footer_support_warranty">Warranty</a></li>' +
       '<li><a href="/support/faq/" class="hover:text-white transition-colors" data-i18n="footer_support_faq">FAQ</a></li>' +
@@ -156,14 +156,14 @@
       "</div>" +
       /* Legal */
       "<div>" +
-      '<h4 class="text-sm font-bold uppercase tracking-wider mb-4" data-i18n="footer_legal_title">Legal</h4>' +
-      '<ul class="space-y-2 text-sm text-slate-300">' +
+      '<h4 class="text-xs sm:text-sm font-bold uppercase tracking-wider mb-2 sm:mb-4" data-i18n="footer_legal_title">Legal</h4>' +
+      '<ul class="space-y-1 sm:space-y-2 text-xs sm:text-sm text-slate-300">' +
       '<li><a href="/privacy/" class="hover:text-white transition-colors" data-i18n="footer_legal_privacy_policy">Privacy Policy</a></li>' +
       '<li><a href="/terms/" class="hover:text-white transition-colors" data-i18n="footer_legal_user_agreement">User Agreement</a></li>' +
       "</ul>" +
       "</div>" +
       "</div>" +
-      '<div class="border-t border-white/20 mt-6 pt-6 text-center text-sm text-slate-400">' +
+      '<div class="border-t border-white/20 mt-6 pt-6 text-center text-xs sm:text-sm text-slate-400">' +
       '<p data-i18n="footer_copyright"></p>' +
       "</div>" +
       "</div>" +
