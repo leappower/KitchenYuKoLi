@@ -152,8 +152,6 @@
       '<li><a href="/support/installation/" class="hover:text-white transition-colors" data-i18n="footer_support_installation">Installation Guide</a></li>' +
       '<li><a href="/support/spare-parts/" class="hover:text-white transition-colors" data-i18n="footer_support_spare_parts">Spare Parts</a></li>' +
       '<li><a href="/support/training/" class="hover:text-white transition-colors" data-i18n="footer_support_training">Training</a></li>' +
-      '<li><a href="/profit-calculator/" class="hover:text-white transition-colors" data-i18n="footer_profit_calc">Profit Calculator</a></li>' +
-      '<li><a href="/compare/" class="hover:text-white transition-colors" data-i18n="footer_compare">Compare Products</a></li>' +
       "</ul>" +
       "</div>" +
       /* Legal */
