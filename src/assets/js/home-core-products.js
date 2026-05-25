@@ -218,7 +218,7 @@
         var catSlug = catMap[p.category] || "other";
         var catHref = "/products/" + catSlug + "/";
         return (
-          '<div class="group bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 hover:border-primary hover:shadow-lg transition-all duration-300 overflow-hidden">' +
+          '<div class="group bg-white rounded-2xl border border-slate-200 dark:border-slate-700 hover:border-primary hover:shadow-lg transition-all duration-300 overflow-hidden">' +
           '<a href="' +
           href +
           '" class="block">' +

@@ -120,7 +120,7 @@
     return (
       '<a href="/products/' +
       encodeURIComponent(rp.model) +
-      '" class="group block bg-white dark:bg-slate-800 rounded-xl overflow-hidden shadow-md hover:shadow-lg transition-all border border-slate-100 dark:border-slate-700">' +
+      '" class="group block bg-white rounded-xl overflow-hidden shadow-md hover:shadow-lg transition-all border border-slate-100 dark:border-slate-700">' +
       '<div class="aspect-[4/3] bg-gradient-to-br ' +
       grad +
       ' relative overflow-hidden flex items-center justify-center">' +

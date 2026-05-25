@@ -431,6 +431,22 @@ main[class*="px-"] > section > .section-content {
   padding-inline: 0;
 }
 
+/* ─── Bottom padding for mobile/tablet bottom nav bar ────── */
+main#spa-content {
+  padding-bottom: 5rem;
+}
+@media (width >= 768px) {
+  main#spa-content {
+    padding-bottom: 4rem;
+  }
+}
+@media (width >= 1024px) {
+  main#spa-content {
+    padding-bottom: 0;
+  }
+}
+
+
 /* ─── Navigator placeholder: prevent layout shift before JS mount ───── */
 /* Exact match of real header heights to avoid CLS before navigator.js replaces placeholder. */
 navigator[data-component="navigator"] {
