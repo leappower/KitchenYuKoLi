@@ -392,9 +392,9 @@
           '" class="block">' +
           '<div class="h-36 bg-cover bg-center bg-slate-200 dark:bg-slate-800"' +
           (img
-            ? ' style="background-image: url(&amp;quot;' +
+            ? ' style="background-image: url(&quot;' +
               escHtml(img) +
-              '&amp;quot;); background-size: cover; background-position: center;"'
+              '&quot;); background-size: cover; background-position: center;"'
             : "") +
           "></div>" +
           '<div class="p-3">' +
