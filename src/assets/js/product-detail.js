@@ -327,7 +327,7 @@
           : "";
       var html =
         '<div class="section-content pt-4 pb-0 hidden md:block" style="padding-inline:var(--container-px,0.75rem)">' +
-        '<nav class="breadcrumb-nav text-sm text-slate-500 dark:text-slate-400" aria-label="Breadcrumb">' +
+        '<nav class="breadcrumb-nav text-sm text-slate-500 dark:text-slate-400 py-4" aria-label="Breadcrumb">' +
         '<ol class="flex items-center gap-1 flex-wrap">' +
         '<li><a href="/products/" class="hover:text-primary transition-colors">' +
         esc(tl("nav_products", "Products")) + '</a></li>' +
