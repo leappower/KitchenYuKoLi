@@ -116,7 +116,7 @@
   /* ─── Mobile/Tablet Site Footer (compact) ─── */
   function buildMobileFooterHtml() {
     return (
-      '<div class="bg-slate-900 text-white mx-auto mt-8" style="max-width:1920px">' +
+      '<div class="bg-slate-900 text-white pb-20 mx-auto mt-8" style="max-width:1920px">' +
       '<div class="section-content mx-auto px-3 sm:px-5 py-4 sm:py-6">' +
       // Mobile (<768px): compact 1-column, Tablet (768-1024): 2-column grid
       '<div class="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 mb-4 sm:mb-6">' +
