@@ -47,7 +47,9 @@
           var data = JSON.parse(cached);
           if (data && data.data && data.data[key]) return data.data[key];
         }
-      } catch (e) { /* ignore */ }
+      } catch (e) {
+        /* ignore */
+      }
     }
     return fallback || key;
   }
@@ -75,11 +77,10 @@
           hasDropdown: navItem.hasDropdown,
         };
       });
-    } else {
-      // Fallback — should not happen as nav-config.js loads first
-      DEFAULT_NAV_ITEMS = [];
+      return DEFAULT_NAV_ITEMS;
     }
-    return DEFAULT_NAV_ITEMS;
+    // NAV_CONFIG not ready yet — return empty but don't cache
+    return [];
   }
 
   /**
@@ -112,8 +113,8 @@
   function _getActiveMap() {
     if (PATH_TO_ACTIVE_MAP) return PATH_TO_ACTIVE_MAP;
     var cfg = window.NAV_CONFIG;
-    PATH_TO_ACTIVE_MAP = (cfg && cfg.pathToActiveMap) ? cfg.pathToActiveMap : {};
-    ID_ALIASES = (cfg && cfg.idAliases) ? cfg.idAliases : {};
+    PATH_TO_ACTIVE_MAP = cfg && cfg.pathToActiveMap ? cfg.pathToActiveMap : {};
+    ID_ALIASES = cfg && cfg.idAliases ? cfg.idAliases : {};
     return PATH_TO_ACTIVE_MAP;
   }
 
@@ -1258,7 +1259,7 @@
           if (wrap) {
             var tag = e.target.tagName.toLowerCase();
             var href = e.target.getAttribute ? e.target.getAttribute("href") : null;
-            var isLink = tag === 'a' && href && href !== 'javascript:void(0)' && href !== '#';
+            var isLink = tag === "a" && href && href !== "javascript:void(0)" && href !== "#";
             if (isLink) {
               // Clicking a navigable link: close all dropdowns
               closeOtherDropdowns(null);
