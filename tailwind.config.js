@@ -104,5 +104,6 @@ module.exports = {
     'hover:shadow-lg','hover:shadow-xl',
     'group-hover:border-blue-500/50','group-hover:border-green-500/50','group-hover:border-orange-500/50','group-hover:border-purple-500/50','group-hover:border-primary-500/50',
     'rounded-xl','rounded-2xl','rounded-lg','rounded-full',
+    'max-w-[1920px]','max-w-[1440px]',
   ],
 };
