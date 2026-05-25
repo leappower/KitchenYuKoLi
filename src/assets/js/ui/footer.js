@@ -119,7 +119,7 @@
       '<div class="bg-slate-900 text-white">' +
       '<div class="section-content mx-auto px-3 sm:px-5 py-4 sm:py-6" style="max-width:1440px">' +
       // Mobile (<768px): compact 1-column, Tablet (768-1024): 2-column grid
-      '<div class="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 mb-4 sm:mb-6">' +
+      '<div class="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 mb-4 sm:mb-6">' +
       /* Products */
       '<div>' +
       '<h4 class="text-xs sm:text-sm font-bold uppercase tracking-wider mb-2" data-i18n="footer_products_title">Products</h4>' +
@@ -131,8 +131,8 @@
       '<li><a href="/products/steaming/" class="hover:text-white transition-colors" data-i18n="nav_products_steaming">Steaming Series</a></li>' +
       '<li><a href="/products/cutting/" class="hover:text-white transition-colors" data-i18n="nav_products_cutting">Prep &amp; Cutting</a></li>' +
       '</ul></div>' +
-      /* Applications (shown on md+) */
-      '<div class="hidden md:block">' +
+      /* Applications */
+      '<div class="block">' +
       '<h4 class="text-xs sm:text-sm font-bold uppercase tracking-wider mb-2" data-i18n="footer_applications_title">Applications</h4>' +
       '<ul class="space-y-1 text-xs sm:text-sm text-slate-300">' +
       '<li><a href="/applications/canteen/" class="hover:text-white transition-colors" data-i18n="nav_applications_canteen">School/Corporate</a></li>' +
