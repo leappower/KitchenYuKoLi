@@ -390,27 +390,27 @@
           '<a href="' +
           href +
           '" class="block">' +
-          '<div class="h-36 bg-cover bg-center bg-slate-200 dark:bg-slate-800"' +
+          '<div class="aspect-[4/3] bg-cover bg-center bg-slate-200 dark:bg-slate-800"' +
           (img
             ? ' style="background-image: url(&quot;' +
               escHtml(img) +
               '&quot;); background-size: cover; background-position: center;"'
             : "") +
           "></div>" +
-          '<div class="p-3">' +
-          '<h3 class="font-bold text-sm mb-1">' +
+          '<div class="p-3 sm:p-4">' +
+          '<h3 class="font-bold text-sm sm:text-base mb-1">' +
           escHtml(p.model) +
           "</h3>" +
           (p.subCategory
-            ? '<p class="text-xs text-slate-500 mb-2">' + escHtml(p.subCategory) + "</p>"
+            ? '<p class="text-xs sm:text-sm text-slate-500 mb-2">' + escHtml(p.subCategory) + "</p>"
             : '<div class="mb-2"></div>') +
-          '<span class="text-xs font-bold text-primary" data-i18n="home_hw_learn_more">了解更多</span>' +
+          '<span class="text-xs sm:text-sm font-bold text-primary" data-i18n="home_hw_learn_more">了解更多</span>' +
           "</div></a></div>"
         );
       }
 
-      var html = '<div class="flex flex-col gap-3">';
-      html += '<div class="grid grid-cols-2 gap-3">';
+      var html = '<div class="flex flex-col gap-4">';
+      html += '<div class="flex flex-col gap-3">';
       visProducts.forEach(function (p) {
         html += buildCard(p);
       });
