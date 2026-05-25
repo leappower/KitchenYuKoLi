@@ -32,7 +32,6 @@
     products: "/products/",
     quote: "/quote/",
     thankYou: "/thank-you/",
-    landing: "/landing/",
     support: "/support/",
     cases: "/cases/",
     roiCalculator: "/profit-calculator/",

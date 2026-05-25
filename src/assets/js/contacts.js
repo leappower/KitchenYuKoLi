@@ -49,7 +49,6 @@
     "/products/detail/": window.uiText("pd_spec_product_specs", "Product Details"),
     "/quote/": window.uiText("nav_get_quote", "Get a Quote"),
     "/contact/": window.uiText("nav_contact", "Contact Us"),
-    "/landing/": window.uiText("contact_landing", "Landing Page"),
     "/home/": window.uiText("nav_home", "Home"),
     "/about/": window.uiText("nav_about", "About Us"),
     "/news/": window.uiText("contact_news", "News"),
