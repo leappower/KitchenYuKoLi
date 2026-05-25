@@ -107,23 +107,98 @@ if(localStorage.getItem('darkMode')==='true')document.documentElement.classList.
 
 <main id="spa-content">
   <!-- Hero -->
-  <section class="fullwidth-bg hero-overlap section-passthrough py-8 bg-gradient-to-br from-primary/5 via-transparent to-orange-100/30 dark:from-primary/10 dark:to-orange-900/20">
-    <div class="section-content">
-      <div class="w-full text-center px-4">
-        <div class="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-bold uppercase tracking-wider mb-3">
-          <span class="material-symbols-outlined text-xs">support</span>
-          <span data-i18n="support_overview_hero_badge">Full Lifecycle Service</span>
-        </div>
-        <h1 class="text-2xl font-black leading-tight tracking-tight text-slate-900 dark:text-white mb-2" data-i18n="support_overview_page_title_hero">
-              Covering 10 Southeast Asian Countries, 48-Hour On-Site Response
-            </h1>
-        <p class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed max-w-xs mx-auto" data-i18n="support_overview_page_desc">
-              From installation to repair, training to spare parts — 6 service modules ensure your equipment runs reliably.
-            </p>
-      </div>
-    </div>
-  </section>
+        <!-- Support Card Grid (mobile: horizontal image cards) -->
+      <section class="fullwidth-bg py-4">
+        <div class="section-content">
+          <div class="flex overflow-x-auto gap-3 pb-2 no-scrollbar snap-x snap-mandatory">
 
+            <a href="/support/services/" class="min-w-[260px] snap-start bg-white dark:bg-slate-800 rounded-2xl overflow-hidden shadow-sm border border-slate-200/70 dark:border-slate-700 hover:shadow-lg transition-all flex-shrink-0">
+              <div class="aspect-[3/2] overflow-hidden">
+                <img src="/assets/images/support/hero-engineer.webp" alt="售后服务中心" class="w-full h-full object-cover" loading="lazy" />
+              </div>
+              <div class="p-4">
+                <h3 class="text-sm font-bold mb-1" data-i18n="support_card_services_title">After-Sales Service Center</h3>
+                <p class="text-xs text-slate-500 dark:text-slate-400 line-clamp-2 mb-3" data-i18n="support_card_services_desc">Covering 10 Southeast Asian countries with 48-hour on-site response.</p>
+                <span class="inline-flex items-center gap-1 text-primary font-bold text-xs group-hover:gap-1.5 transition-all">
+                  <span data-i18n="app_card_cta">View Solution</span>
+                  <span class="material-symbols-outlined text-sm">arrow_forward</span>
+                </span>
+              </div>
+            </a>
+
+            <a href="/support/installation/" class="min-w-[260px] snap-start bg-white dark:bg-slate-800 rounded-2xl overflow-hidden shadow-sm border border-slate-200/70 dark:border-slate-700 hover:shadow-lg transition-all flex-shrink-0">
+              <div class="aspect-[3/2] overflow-hidden">
+                <img src="/assets/images/support/installation/env1.webp" alt="安装指导" class="w-full h-full object-cover" loading="lazy" />
+              </div>
+              <div class="p-4">
+                <h3 class="text-sm font-bold mb-1" data-i18n="support_card_installation_title">Installation Guide</h3>
+                <p class="text-xs text-slate-500 dark:text-slate-400 line-clamp-2 mb-3" data-i18n="support_card_installation_desc">Standardized installation procedures for quick deployment.</p>
+                <span class="inline-flex items-center gap-1 text-primary font-bold text-xs group-hover:gap-1.5 transition-all">
+                  <span data-i18n="app_card_cta">View Solution</span>
+                  <span class="material-symbols-outlined text-sm">arrow_forward</span>
+                </span>
+              </div>
+            </a>
+
+            <a href="/support/warranty/" class="min-w-[260px] snap-start bg-white dark:bg-slate-800 rounded-2xl overflow-hidden shadow-sm border border-slate-200/70 dark:border-slate-700 hover:shadow-lg transition-all flex-shrink-0">
+              <div class="aspect-[3/2] overflow-hidden">
+                <img src="/assets/images/support/warranty/value1.webp" alt="保修政策" class="w-full h-full object-cover" loading="lazy" />
+              </div>
+              <div class="p-4">
+                <h3 class="text-sm font-bold mb-1" data-i18n="support_card_warranty_title">Warranty Policy</h3>
+                <p class="text-xs text-slate-500 dark:text-slate-400 line-clamp-2 mb-3" data-i18n="support_card_warranty_desc">1-year comprehensive warranty with genuine parts.</p>
+                <span class="inline-flex items-center gap-1 text-primary font-bold text-xs group-hover:gap-1.5 transition-all">
+                  <span data-i18n="app_card_cta">View Solution</span>
+                  <span class="material-symbols-outlined text-sm">arrow_forward</span>
+                </span>
+              </div>
+            </a>
+
+            <a href="/support/spare-parts/" class="min-w-[260px] snap-start bg-white dark:bg-slate-800 rounded-2xl overflow-hidden shadow-sm border border-slate-200/70 dark:border-slate-700 hover:shadow-lg transition-all flex-shrink-0">
+              <div class="aspect-[3/2] overflow-hidden">
+                <img src="/assets/images/support/spare-parts/cat1.webp" alt="配件供应" class="w-full h-full object-cover" loading="lazy" />
+              </div>
+              <div class="p-4">
+                <h3 class="text-sm font-bold mb-1" data-i18n="support_card_spare_parts_title">Spare Parts Supply</h3>
+                <p class="text-xs text-slate-500 dark:text-slate-400 line-clamp-2 mb-3" data-i18n="support_card_spare_parts_desc">48-hour dispatch from regional warehouses.</p>
+                <span class="inline-flex items-center gap-1 text-primary font-bold text-xs group-hover:gap-1.5 transition-all">
+                  <span data-i18n="app_card_cta">View Solution</span>
+                  <span class="material-symbols-outlined text-sm">arrow_forward</span>
+                </span>
+              </div>
+            </a>
+
+            <a href="/support/training/" class="min-w-[260px] snap-start bg-white dark:bg-slate-800 rounded-2xl overflow-hidden shadow-sm border border-slate-200/70 dark:border-slate-700 hover:shadow-lg transition-all flex-shrink-0">
+              <div class="aspect-[3/2] overflow-hidden">
+                <img src="/assets/images/support/training/core1.webp" alt="操作培训" class="w-full h-full object-cover" loading="lazy" />
+              </div>
+              <div class="p-4">
+                <h3 class="text-sm font-bold mb-1" data-i18n="support_card_training_title">Operation Training</h3>
+                <p class="text-xs text-slate-500 dark:text-slate-400 line-clamp-2 mb-3" data-i18n="support_card_training_desc">HQ-certified training — online and on-site.</p>
+                <span class="inline-flex items-center gap-1 text-primary font-bold text-xs group-hover:gap-1.5 transition-all">
+                  <span data-i18n="app_card_cta">View Solution</span>
+                  <span class="material-symbols-outlined text-sm">arrow_forward</span>
+                </span>
+              </div>
+            </a>
+
+            <a href="/support/faq/" class="min-w-[260px] snap-start bg-white dark:bg-slate-800 rounded-2xl overflow-hidden shadow-sm border border-slate-200/70 dark:border-slate-700 hover:shadow-lg transition-all flex-shrink-0">
+              <div class="aspect-[3/2] overflow-hidden">
+                <img src="/assets/images/support/faq/feature1.webp" alt="常见问题" class="w-full h-full object-cover" loading="lazy" />
+              </div>
+              <div class="p-4">
+                <h3 class="text-sm font-bold mb-1" data-i18n="support_card_faq_title">FAQ</h3>
+                <p class="text-xs text-slate-500 dark:text-slate-400 line-clamp-2 mb-3" data-i18n="support_card_faq_desc">Common troubleshooting guides and service processes.</p>
+                <span class="inline-flex items-center gap-1 text-primary font-bold text-xs group-hover:gap-1.5 transition-all">
+                  <span data-i18n="app_card_cta">View Solution</span>
+                  <span class="material-symbols-outlined text-sm">arrow_forward</span>
+                </span>
+              </div>
+            </a>
+
+          </div>
+        </div>
+      </section>
   <!-- Support Card Grid (mobile: horizontal icon+text cards) -->
   <section class="fullwidth-bg py-4">
     <div class="section-content">
