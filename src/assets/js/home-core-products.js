@@ -377,20 +377,24 @@
         return;
       }
 
-      var html = '<div class="flex overflow-x-auto gap-3 no-scrollbar pb-2">';
-      products.forEach(function (p) {
+      var VIS = 4;
+      var hasMore = products.length > VIS;
+      var visProducts = products.slice(0, VIS);
+      var restProducts = hasMore ? products.slice(VIS) : [];
+
+      function buildCard(p) {
         var img = getPrimaryImage(p);
         var href = getProductDetailHref(p);
-        html +=
-          '<div class="min-w-[260px] bg-white dark:bg-slate-900 rounded-xl overflow-hidden shadow-sm border border-slate-200 dark:border-slate-800">' +
+        return (
+          '<div class="bg-white dark:bg-slate-900 rounded-xl overflow-hidden shadow-sm border border-slate-200 dark:border-slate-800">' +
           '<a href="' +
           href +
           '" class="block">' +
           '<div class="h-36 bg-cover bg-center bg-slate-200 dark:bg-slate-800"' +
           (img
-            ? ' style="background-image: url(&quot;' +
+            ? ' style="background-image: url(&amp;quot;' +
               escHtml(img) +
-              '&quot;); background-size: cover; background-position: center;"'
+              '&amp;quot;); background-size: cover; background-position: center;"'
             : "") +
           "></div>" +
           '<div class="p-3">' +
@@ -401,8 +405,29 @@
             ? '<p class="text-xs text-slate-500 mb-2">' + escHtml(p.subCategory) + "</p>"
             : '<div class="mb-2"></div>') +
           '<span class="text-xs font-bold text-primary" data-i18n="home_hw_learn_more">了解更多</span>' +
-          "</div></a></div>";
+          "</div></a></div>"
+        );
+      }
+
+      var html = '<div class="flex flex-col gap-3">';
+      html += '<div class="grid grid-cols-2 gap-3">';
+      visProducts.forEach(function (p) {
+        html += buildCard(p);
       });
+      html += "</div>";
+      if (hasMore) {
+        html +=
+          '<button id="hcp-load-more-mobile" class="w-full py-2.5 rounded-xl border border-slate-300 dark:border-slate-600 text-sm font-bold text-primary hover:bg-primary hover:text-white hover:border-primary transition-all flex items-center justify-center gap-2" onclick="(function(){var b=document.getElementById(\'hcp-hidden-mobile\');var btn=document.getElementById(\'hcp-load-more-mobile\');if(b&&btn){b.style.display=\'\';btn.style.display=\'none\';window.translationManager&&window.translationManager.applyTo(b.parentElement);}})()">' +
+          '<span class="material-symbols-outlined text-lg">expand_more</span> ' +
+          escHtml(tl("home_show_more", "更多产品")) +
+          "</button>";
+        html +=
+          '<div id="hcp-hidden-mobile" style="display:none" class="grid grid-cols-2 gap-3">';
+        restProducts.forEach(function (p) {
+          html += buildCard(p);
+        });
+        html += "</div>";
+      }
       html += "</div>";
       container.innerHTML = html;
 
