@@ -117,12 +117,12 @@
   function buildMobileFooterHtml() {
     return (
       '<div class="bg-slate-900 text-white">' +
-      '<div class="max-w-4xl mx-auto px-6 py-6">' +
-      '<div class="grid grid-cols-2 gap-6 mb-6">' +
+      '<div class="max-w-4xl mx-auto px-4 sm:px-6 py-4 sm:py-6">' +
+      '<div class="grid grid-cols-2 gap-4 sm:gap-6 mb-4 sm:mb-6">' +
       /* Products */
       "<div>" +
-      '<h4 class="text-xs font-bold uppercase tracking-wider mb-2" data-i18n="footer_products_title">Products</h4>' +
-      '<ul class="space-y-1 text-xs text-slate-300">' +
+      '<h4 class="text-[11px] sm:text-xs font-bold uppercase tracking-wider mb-1 sm:mb-2" data-i18n="footer_products_title">Products</h4>' +
+      '<ul class="space-y-0.5 sm:space-y-1 text-[11px] sm:text-xs text-slate-300">' +
       '<li><a href="/products/" class="hover:text-white transition-colors" data-i18n="footer_products_all">All Products</a></li>' +
       '<li><a href="/products/stirfry/" class="hover:text-white transition-colors" data-i18n="footer_products_stirfry">Stir-fry</a></li>' +
       '<li><a href="/products/stewing/" class="hover:text-white transition-colors" data-i18n="footer_products_stewing">Stewing</a></li>' +
@@ -133,8 +133,8 @@
       "</div>" +
       /* Applications */
       "<div>" +
-      '<h4 class="text-xs font-bold uppercase tracking-wider mb-2" data-i18n="footer_applications_title">Applications</h4>' +
-      '<ul class="space-y-1 text-xs text-slate-300">' +
+      '<h4 class="text-[11px] sm:text-xs font-bold uppercase tracking-wider mb-1 sm:mb-2" data-i18n="footer_applications_title">Applications</h4>' +
+      '<ul class="space-y-0.5 sm:space-y-1 text-[11px] sm:text-xs text-slate-300">' +
       '<li><a href="/applications/canteen/" class="hover:text-white transition-colors" data-i18n="footer_app_canteen">School/Corporate</a></li>' +
       '<li><a href="/applications/small-restaurant/" class="hover:text-white transition-colors" data-i18n="footer_app_restaurant">Small Restaurant</a></li>' +
       '<li><a href="/applications/central-kitchen/" class="hover:text-white transition-colors" data-i18n="footer_app_central">Central Kitchen</a></li>' +
@@ -144,8 +144,8 @@
       "</div>" +
       "</div>" +
       /* Legal + Copyright */
-      '<div class="border-t border-white/20 pt-4 flex flex-col items-center gap-2 text-xs text-slate-400">' +
-      '<div class="flex gap-4">' +
+      '<div class="border-t border-white/20 pt-3 sm:pt-4 flex flex-col items-center gap-1.5 sm:gap-2 text-[10px] sm:text-xs text-slate-400">' +
+      '<div class="flex gap-3 sm:gap-4">' +
       '<a href="/privacy/" class="hover:text-white transition-colors" data-i18n="footer_legal_privacy_policy">Privacy Policy</a>' +
       '<a href="/terms/" class="hover:text-white transition-colors" data-i18n="footer_legal_user_agreement">User Agreement</a>' +
       "</div>" +
