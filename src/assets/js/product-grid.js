@@ -629,9 +629,9 @@
       '<div class="flex items-center justify-between pt-4 border-t border-slate-100 dark:border-slate-700">' +
       '<div><span class="text-xs text-slate-400">' +
       esc(tl("products_starting_price", "起售价")) +
-      '</span><p class="text-xl font-black text-primary">' +
+      '</span><p class="text-xl font-black text-primary"><a href="/quote" class="hover:underline">' +
       esc(tl("products_inquire", "询价")) +
-      "</p></div>" +
+      "</a></p></div>" +
       '<div class="flex items-center gap-2">' +
       '<a href="' +
       link +
@@ -699,9 +699,9 @@
       desc +
       "</p>" +
       '<div class="flex items-center justify-between pt-3 border-t border-slate-100 dark:border-slate-700">' +
-      '<span class="text-base font-black text-primary">' +
+      '<a href="/quote" class="text-base font-black text-primary hover:underline">' +
       esc(tl("products_inquire", "询价")) +
-      "</span>" +
+      "</a>" +
       '<div class="flex items-center gap-2">' +
       '<a href="' +
       link +
@@ -759,9 +759,9 @@
       desc +
       "</p>" +
       '<div class="flex items-center justify-between">' +
-      '<span class="text-sm font-black text-primary">' +
+      '<a href="/quote" class="text-sm font-black text-primary hover:underline">' +
       esc(tl("products_inquire", "询价")) +
-      "</span>" +
+      "</a>" +
       '<span class="material-symbols-outlined text-slate-400 text-sm">arrow_forward</span>' +
       "</div>" +
       "</div>" +
