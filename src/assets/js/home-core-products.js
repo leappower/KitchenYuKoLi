@@ -311,27 +311,39 @@
         var img = getPrimaryImage(p);
         var href = getProductDetailHref(p);
         return (
-          '<div class="bg-white p-3 rounded-xl border border-slate-200 hover:border-primary transition-all shadow-sm">' +
+          '<div class="group bg-white rounded-2xl border border-slate-200 hover:border-primary hover:shadow-lg transition-all duration-300 overflow-hidden">' +
           '<a href="' +
           href +
-          '">' +
-          '<div class="aspect-square rounded-lg bg-slate-200 overflow-hidden mb-3">' +
+          '" class="block">' +
+          '<div class="aspect-[4/3] bg-slate-50 overflow-hidden">' +
           (img
             ? '<img alt="' +
               escHtml(p.model) +
-              '" class="w-full h-full object-cover" src="' +
+              '" class="w-full h-full object-contain p-3 sm:p-4 group-hover:scale-105 transition-transform duration-300" src="' +
               escHtml(img) +
               '" loading="lazy">'
-            : "") +
+            : '<div style="font-size:2rem;color:#d1d5db;display:flex;align-items:center;justify-content:center;height:100%">📦</div>') +
           "</div>" +
-          '<h3 class="text-base font-bold mb-1">' +
+          '<div class="p-3 sm:p-4">' +
+          (p.category
+            ? '<span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-primary/10 text-primary mb-2 inline-block">' +
+              escHtml(p.category) +
+              "</span>"
+            : "") +
+          '<h3 class="font-bold text-sm mb-1">' +
           escHtml(p.model) +
           "</h3>" +
-          (p.subCategory
-            ? '<p class="text-xs text-slate-500 mb-3">' + escHtml(p.subCategory) + "</p>"
+          (typeof getProductField === "function" && getProductField(p, "name")
+            ? '<p class="text-xs text-slate-500 line-clamp-2 mb-3">' +
+              escHtml(getProductField(p, "name")) +
+              "</p>"
             : '<div class="mb-3"></div>') +
-          '<span class="text-xs font-bold text-primary" data-i18n="home_hw_learn_more">了解更多</span>' +
-          "</a></div>"
+          '<div class="flex justify-between items-center pt-2 border-t border-slate-100">' +
+          (p.power
+            ? '<span class="text-[11px] font-bold text-slate-400">' + escHtml(p.power) + "</span>"
+            : "<span></span>") +
+          '<span class="text-xs font-bold text-primary flex items-center gap-0.5" data-i18n="home_hw_learn_more">了解更多 <span class="material-symbols-outlined text-sm">arrow_forward</span></span>' +
+          "</div></div></a></div>"
         );
       }
 
@@ -388,26 +400,39 @@
         var img = getPrimaryImage(p);
         var href = getProductDetailHref(p);
         return (
-          '<div class="bg-white rounded-xl overflow-hidden shadow-sm border border-slate-200">' +
+          '<div class="group bg-white rounded-2xl border border-slate-200 hover:border-primary hover:shadow-lg transition-all duration-300 overflow-hidden">' +
           '<a href="' +
           href +
-          '" class="flex items-stretch">' +
-          '<div class="w-[120px] shrink-0 bg-slate-200"' +
+          '" class="block">' +
+          '<div class="aspect-[4/3] bg-slate-50 overflow-hidden">' +
           (img
-            ? ' style="background-image: url(&quot;' +
+            ? '<img alt="' +
+              escHtml(p.model) +
+              '" class="w-full h-full object-contain p-2 sm:p-3 group-hover:scale-105 transition-transform duration-300" src="' +
               escHtml(img) +
-              '&quot;); background-size: cover; background-position: center;"'
+              '" loading="lazy">'
+            : '<div style="font-size:2rem;color:#d1d5db;display:flex;align-items:center;justify-content:center;height:100%">📦</div>') +
+          "</div>" +
+          '<div class="p-3 sm:p-4">' +
+          (p.category
+            ? '<span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-primary/10 text-primary mb-2 inline-block">' +
+              escHtml(p.category) +
+              "</span>"
             : "") +
-          "></div>" +
-          '<div class="flex-1 p-3 flex flex-col justify-center">' +
           '<h3 class="font-bold text-sm mb-1">' +
           escHtml(p.model) +
           "</h3>" +
-          (p.subCategory
-            ? '<p class="text-xs text-slate-500 mb-2">' + escHtml(p.subCategory) + "</p>"
-            : '<div class="mb-2"></div>') +
-          '<span class="text-xs font-bold text-primary" data-i18n="home_hw_learn_more">了解更多</span>' +
-          "</div></a></div>"
+          (typeof getProductField === "function" && getProductField(p, "name")
+            ? '<p class="text-xs text-slate-500 line-clamp-2 mb-3">' +
+              escHtml(getProductField(p, "name")) +
+              "</p>"
+            : '<div class="mb-3"></div>') +
+          '<div class="flex justify-between items-center pt-2 border-t border-slate-100">' +
+          (p.power
+            ? '<span class="text-[11px] font-bold text-slate-400">' + escHtml(p.power) + "</span>"
+            : "<span></span>") +
+          '<span class="text-xs font-bold text-primary flex items-center gap-0.5" data-i18n="home_hw_learn_more">了解更多 <span class="material-symbols-outlined text-sm">arrow_forward</span></span>' +
+          "</div></div></a></div>"
         );
       }
 
