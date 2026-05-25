@@ -425,12 +425,9 @@ section > .section-content {
 }
 
 /* Standalone section-content (e.g. footer injected outside <section>) */
-.section-content {
-  max-width: 1440px;
+footer .section-content {
+  max-width: 1440px !important;
   margin-inline: auto;
-}
-.section-content.max-w-\[1920px\] {
-  max-width: 1920px;
 }
 
 /* When <main> already has Tailwind px-*, section-content padding is
