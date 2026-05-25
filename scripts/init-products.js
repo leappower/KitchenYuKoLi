@@ -287,26 +287,31 @@ function main() {
   if (!fs.existsSync(LANG_DIR)) {
     fs.mkdirSync(LANG_DIR, { recursive: true });
   }
-
   var zhPath = path.join(LANG_DIR, 'zh-CN-product.json');
   fs.writeFileSync(zhPath, JSON.stringify(i18nZh, null, 2) + '\n', 'utf-8');
   console.log('[init] Written', Object.keys(i18nZh).length, 'keys to', path.relative(process.cwd(), zhPath));
 
-  // ── 写入 en-product.json（保留已有翻译，覆盖新生成的占位） ──
+  // ── 写入 en-product.json（保留已有翻译，合并新生成的，不删除额外 key） ──
   var enPath = path.join(LANG_DIR, 'en-product.json');
-  // Merge existing translations into i18nEn (to preserve manual translations)
+  var existingEn = {};
   if (fs.existsSync(enPath)) {
     try {
-      var existingEn = JSON.parse(fs.readFileSync(enPath, 'utf-8'));
-      Object.keys(i18nEn).forEach(function(k) {
-        if (existingEn[k] && existingEn[k] !== '') {
-          i18nEn[k] = existingEn[k];
-        }
-      });
+      existingEn = JSON.parse(fs.readFileSync(enPath, 'utf-8'));
+      console.log('[init] Loaded', Object.keys(existingEn).length, 'existing keys from', path.relative(process.cwd(), enPath));
     } catch(e) {}
   }
-  fs.writeFileSync(enPath, JSON.stringify(i18nEn, null, 2) + '\n', 'utf-8');
-  console.log('[init] Written', Object.keys(i18nEn).length, 'keys to', path.relative(process.cwd(), enPath));
+  // Merge: existing values win (manual translations preserved), i18nEn fills gaps
+  var mergedEn = {};
+  Object.keys(existingEn).forEach(function(k) { mergedEn[k] = existingEn[k]; });
+  Object.keys(i18nEn).forEach(function(k) {
+    if (!mergedEn[k] || mergedEn[k] === '') {
+      mergedEn[k] = i18nEn[k] || '';
+    }
+  });
+  // Ensure generated keys exist (set empty string as placeholder)
+  Object.keys(i18nEn).forEach(function(k) {
+    if (mergedEn[k] === undefined) mergedEn[k] = '';
+  });
 
   // ── 统计 ──
   var catCounts = {};
