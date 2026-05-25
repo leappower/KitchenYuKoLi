@@ -225,9 +225,9 @@
       }
       if (!re) {
         var section = document.createElement("section");
-        section.className = "w-full py-12";
+        section.className = "fullwidth-bg py-12 lg:py-16";
         section.innerHTML =
-          '<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">' +
+          '<div class="section-content">' +
           '<h2 class="text-xl font-bold mb-4 flex items-center gap-2">' +
           '<span class="material-symbols-outlined text-primary">recommend</span> ' +
           tl("detail_recommended", "推荐产品") +
@@ -332,7 +332,7 @@
             chevron
           : chevron;
       var html =
-        '<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-4 pb-0 hidden md:block">' +
+        '<div class="section-content pt-4 pb-0 hidden md:block" style="padding-inline:var(--container-px,0.75rem)">' +
         '<nav class="flex items-center gap-2 flex-wrap" aria-label="Breadcrumb">' +
         '<a href="/products/" class="text-sm text-slate-500 hover:text-primary transition-colors" data-i18n="nav_products">Products</a>' +
         badgeHtml +
@@ -355,7 +355,7 @@
             mChevron
           : mChevron;
       html +=
-        '<div class="max-w-7xl mx-auto px-4 pt-3 pb-0 md:hidden">' +
+        '<div class="section-content pt-3 pb-0 md:hidden" style="padding-inline:var(--container-px,0.75rem)">' +
         '<div class="flex items-center gap-2">' +
         '<button onclick="window.Breadcrumb&&window.Breadcrumb.goBack()" class="flex items-center justify-center w-8 h-8 rounded-full bg-slate-100 dark:bg-slate-800 hover:bg-primary hover:text-white text-slate-600 dark:text-slate-400 transition-all flex-shrink-0" aria-label="' +
         tl("pd_back", "返回") +
@@ -500,7 +500,7 @@
           '<div class="pdp-play-btn absolute inset-0 flex items-center justify-center bg-black/20 group-hover:bg-black/30 transition-colors">' +
           '<div class="w-16 h-16 rounded-full bg-white/90 flex items-center justify-center shadow-xl group-hover:scale-110 transition-transform">' +
           '<span class="material-symbols-outlined text-3xl text-primary ml-1">play_arrow</span>' +
-          "</div></div></div>";
+          "</div></div>";
       } else {
         mediaHtml =
           '<div class="' +
