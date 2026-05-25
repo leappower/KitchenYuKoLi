@@ -512,10 +512,17 @@ app.get('*', (req, res) => {
           var foundCat = null;
           for (var i = 0; i < lines.length; i++) {
             if (lines[i].indexOf(productSlug) >= 0) {
-              // Search backward for category
-              for (var j = i; j >= 0 && j > i - 20; j--) {
+              // Search forward for the nearest category field
+              for (var j = i; j < lines.length && j < i + 20; j++) {
                 var cm = lines[j].match(catRegex);
                 if (cm) { foundCat = cm[1]; break; }
+              }
+              // If not found forward, try backward
+              if (!foundCat) {
+                for (var j = i; j >= 0 && j > i - 20; j--) {
+                  var cm = lines[j].match(catRegex);
+                  if (cm) { foundCat = cm[1]; break; }
+                }
               }
               break;
             }
