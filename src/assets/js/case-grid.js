@@ -692,13 +692,18 @@
   window.CaseGrid = { init: init, FILTERS: FILTERS, ROI_CASES: ROI_CASES };
 
   // ── Auto-init when DOM is ready ────────────────────
+  var _autoInitRetries = 0;
+  var AUTO_INIT_MAX_RETRIES = 25; // 25 * 200ms = 5s
   function autoInit(_evt) {
     var grid = document.getElementById("case-grid");
     var _filters = document.getElementById("case-filters");
     if (!grid) {
-      setTimeout(autoInit, 200);
+      if (++_autoInitRetries < AUTO_INIT_MAX_RETRIES) {
+        setTimeout(autoInit, 200);
+      }
       return;
     }
+    _autoInitRetries = 0;
     var variant = window.innerWidth < 768 ? "mobile" : window.innerWidth < 1280 ? "tablet" : "pc";
     init(variant);
   }

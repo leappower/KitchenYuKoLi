@@ -75,7 +75,15 @@
     }
 
     if (global.Swup === undefined) {
-      setTimeout(initSwup, 10);
+      var _swupReady = document.getElementById("swup-js");
+      if (_swupReady) {
+        _swupReady.addEventListener("load", initSwup);
+        _swupReady.addEventListener("error", function () {
+          setTimeout(initSwup, 50);
+        });
+      } else {
+        setTimeout(initSwup, 10);
+      }
       return;
     }
 
@@ -185,9 +193,7 @@
       if (skel) {
         skel.removeAttribute("hidden");
         skel.style.display = "";
-        // Force browser to commit the skeleton paint before fetch starts,
-        // ensuring it's visible even on fast connections.
-        skel.offsetHeight; // force reflow
+        skel.style.opacity = "1";
       }
     });
 
@@ -198,10 +204,21 @@
       _spaState.currentRoute = global.location.pathname.replace(/\/$/, "") || "/";
       var skel = document.getElementById("skeleton-overlay");
       if (skel) {
-        skel.setAttribute("hidden", "");
-        setTimeout(function () {
+        var onSkeletonFadeOut = function (e) {
+          if (e.propertyName !== "opacity") return;
+          skel.removeEventListener("transitionend", onSkeletonFadeOut);
           skel.style.display = "none";
-        }, 300);
+        };
+        skel.addEventListener("transitionend", onSkeletonFadeOut);
+        skel.style.opacity = "0";
+        // Safety net: if transitionend never fires (e.g. reduced-motion),
+        // hide after 400ms (CSS transition is 250ms + margin)
+        setTimeout(function () {
+          if (skel.style.opacity !== "0" || skel.style.display !== "none") {
+            skel.removeEventListener("transitionend", onSkeletonFadeOut);
+            skel.style.display = "none";
+          }
+        }, 400);
       }
       var newDoc = visit && visit.to && visit.to.document ? visit.to.document : null;
       reloadPageScripts(newDoc);

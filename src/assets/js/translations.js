@@ -52,6 +52,12 @@
         name: t.nativeName,
       };
     });
+    // Promise that resolves when initialization completes (or rejects on failure)
+    var _self = this;
+    this._readyResolve = null;
+    this.ready = new Promise(function (resolve) {
+      _self._readyResolve = resolve;
+    });
   }
 
   function i(t, e, n) {
@@ -705,6 +711,7 @@
           .then(function () {
             ((document.documentElement.lang = e.currentLanguage),
               (e.isInitialized = !0),
+              e._readyResolve && e._readyResolve(e),
               e.emit("initialized", {
                 language: e.currentLanguage,
               }),
@@ -728,12 +735,15 @@
                 .then(function () {
                   ((document.documentElement.lang = "en"),
                     (e.isInitialized = !0),
+                    e._readyResolve && e._readyResolve(e),
                     e.emit("initialized", {
                       language: "en",
                     }));
                 })
                 .catch(function (t) {
                   console.error("[i18n] initialize: fallback also FAILED:", t);
+                  e.isInitialized = !0;
+                  e._readyResolve && e._readyResolve(e);
                 })
             );
           })

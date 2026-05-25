@@ -261,9 +261,11 @@
     msgSpan.textContent = message;
     notification.appendChild(msgSpan);
     container.appendChild(notification);
-    setTimeout(function () {
-      notification.classList.remove("translate-x-full");
-    }, 10);
+    requestAnimationFrame(function () {
+      requestAnimationFrame(function () {
+        notification.classList.remove("translate-x-full");
+      });
+    });
     setTimeout(function () {
       notification.classList.add("translate-x-full");
       setTimeout(function () {

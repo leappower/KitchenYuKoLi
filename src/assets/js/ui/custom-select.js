@@ -722,12 +722,12 @@
     window.addEventListener("scroll", this._onScrollResize, true);
     window.addEventListener("resize", this._onScrollResize);
 
-    // Focus search if available
+    // Focus search if available (use rAF to ensure panel is visible)
     var searchInput = this.panel.querySelector(".cs-search");
     if (searchInput) {
-      setTimeout(function () {
+      requestAnimationFrame(function () {
         searchInput.focus();
-      }, 50);
+      });
     }
   };
 
@@ -839,9 +839,11 @@
           noRes.style.display = "none";
         }
       });
-      setTimeout(function () {
-        searchInput.focus();
-      }, 100);
+      requestAnimationFrame(function () {
+        requestAnimationFrame(function () {
+          searchInput.focus();
+        });
+      });
     }
 
     // Animate open
