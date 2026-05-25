@@ -17,7 +17,7 @@
  *   window.trackTimeOnPage, window.showSmartPopupManual, window.closeSmartPopup,
  *   window.submitSmartPopupForm, window.submitContactForm, window.submitViaMailto
  */
-(function (global) {
+(function (_global) {
   "use strict";
 
   // ─── Fallback 工具函数 ─────────────────────────────────────────────────────

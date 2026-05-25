@@ -3,7 +3,7 @@
 // This code runs immediately and doesn't wait for DOM ready
 // Outputs: window.userActivity
 
-(function (global) {
+(function (_global) {
   "use strict";
 
   // ============================================

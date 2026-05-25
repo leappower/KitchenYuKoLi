@@ -22,10 +22,7 @@
 /* ───────── 骨架层：固定覆盖在视口上，不影响文档流 ───────── */
 #skeleton-overlay {
   position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
+  inset: 0;
   z-index: 5;
   padding-top: var(--nav-height, 65px);
   pointer-events: none;

@@ -37,7 +37,7 @@
     return "14rem";
   }
 
-  function getCardMaxWidth() {
+  function _getCardMaxWidth() {
     var vw = window.innerWidth;
     if (vw >= 1280) return "28rem";
     if (vw >= 1024) return "26rem";

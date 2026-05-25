@@ -3,7 +3,7 @@
  * Desktop / Tablet / Mobile adaptive
  */
 
-(function (global) {
+(function (_global) {
   "use strict";
 
   // Guard: DropdownBase must be loaded first

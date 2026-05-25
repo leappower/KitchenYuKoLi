@@ -9,7 +9,7 @@
  *              support-dropdown.js, applications-dropdown.js
  */
 
-(function (global) {
+(function (_global) {
   "use strict";
 
   /**

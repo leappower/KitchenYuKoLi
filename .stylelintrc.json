@@ -14,6 +14,9 @@
     "alpha-value-notation": null,
     "color-function-notation": null,
     "import-notation": null,
-    "value-keyword-case": null
+    "value-keyword-case": null,
+    "at-rule-no-unknown": [true, { "ignoreAtRules": ["tailwind", "apply", "screen", "layer", "variants", "responsive", "variant"] }],
+    "no-invalid-position-at-import-rule": null,
+    "property-no-vendor-prefix": null
   }
 }

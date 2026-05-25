@@ -14,7 +14,7 @@
  * @module SlideMenu
  */
 /* global SlideMenu */
-(function (global) {
+(function (_global) {
   "use strict";
 
   var _spaRegs = {};
@@ -56,7 +56,7 @@
   var cachedMenuItems = null;
 
   function getL1Icon(navId) {
-    var map = window.NAV_CONFIG && window.NAV_CONFIG.l1IconMap || {};
+    var map = (window.NAV_CONFIG && window.NAV_CONFIG.l1IconMap) || {};
     return map[navId] || "menu";
   }
 
@@ -417,7 +417,7 @@
     // 一级菜单折叠/展开切换
     var toggleButtons = panelEl.querySelectorAll("[data-menu-toggle]");
     for (var i = 0; i < toggleButtons.length; i++) {
-      toggleButtons[i].addEventListener("click", function (evt) {
+      toggleButtons[i].addEventListener("click", function (_evt) {
         var menuId = this.getAttribute("data-menu-toggle");
         var subMenu = panelEl.querySelector('[data-menu-l2="' + menuId + '"]');
         if (!subMenu) return;
@@ -453,7 +453,7 @@
     // 二级菜单项点击
     var subItems = panelEl.querySelectorAll(".mobile-menu-l2-item");
     for (var k = 0; k < subItems.length; k++) {
-      subItems[k].addEventListener("click", function (evt) {
+      subItems[k].addEventListener("click", function (_evt) {
         // WhatsApp 链接不在 SPA 内处理，关闭菜单后让默认行为生效
         if (this.classList.contains("is-whatsapp")) {
           closeMenu();
@@ -468,7 +468,7 @@
     // 一级菜单项点击 —— 若无子菜单则关闭面板（作为普通链接处理）
     var l1Buttons = panelEl.querySelectorAll(".mobile-menu-l1");
     for (var m = 0; m < l1Buttons.length; m++) {
-      l1Buttons[m].addEventListener("click", function (evt) {
+      l1Buttons[m].addEventListener("click", function (_evt) {
         var menuId = this.getAttribute("data-menu-toggle");
         var subMenu = menuId ? panelEl.querySelector('[data-menu-l2="' + menuId + '"]') : null;
 
@@ -483,7 +483,7 @@
             return; // 让浏览器默认行为导航
           }
 
-          var href = this.getAttribute("data-menu-toggle");
+          var _href = this.getAttribute("data-menu-toggle");
           // Find href from menu items data
           var navItems = getMenuItems();
           var targetItem = null;
@@ -511,7 +511,7 @@
     // 底部 CTA 按钮
     var ctaButtons = panelEl.querySelectorAll(".mobile-menu-cta-btn[data-nav]");
     for (var n = 0; n < ctaButtons.length; n++) {
-      ctaButtons[n].addEventListener("click", function (evt) {
+      ctaButtons[n].addEventListener("click", function (_evt) {
         closeMenu();
         // Navigate 由全局 click handler (spa-router.js) 统一处理
       });
@@ -956,7 +956,7 @@
     /** 更新子菜单项的 is-active 高亮（SPA 导航后调用） */
     updateActive: function () {
       var menuItems = getMenuItems();
-      var currentPath = location.pathname.replace(/\/$/, "");
+      var _currentPath = location.pathname.replace(/\/$/, "");
       menuItems.forEach(function (item) {
         /* 更新一级菜单 L1 的 is-active */
         var l1Button = document.querySelector('.mobile-menu-l1[data-menu-toggle="' + item.id + '"]');

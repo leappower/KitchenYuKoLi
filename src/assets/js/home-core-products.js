@@ -27,7 +27,7 @@
   }
 
   var CACHE_KEY = "home_core_products";
-  var CACHE_VERSION_KEY = "home_core_products_version";
+  var _CACHE_VERSION_KEY = "home_core_products_version";
   var CACHE_TTL = 5 * 60 * 1000; // 5 minutes
 
   /**
@@ -44,7 +44,7 @@
   /**
    * Build a product link href
    */
-  function getProductHref(product) {
+  function _getProductHref(product) {
     if (product.category) {
       return "/products/?category=" + encodeURIComponent(product.category);
     }
@@ -119,7 +119,7 @@
   /**
    * Background refresh — fetches fresh data silently
    */
-  function _refreshInBackground(callback) {
+  function _refreshInBackground(_callback) {
     // Refresh from PRODUCT_DATA_TABLE (no API)
     var table = window.PRODUCT_DATA_TABLE || [];
     var coreProducts = table.filter(function (p) {
@@ -177,7 +177,7 @@
       return;
     }
 
-    loadCoreProducts(function (products, source) {
+    loadCoreProducts(function (products, _source) {
       if (!products || products.length === 0) {
         var noDataMsg = tl("no_core_products_data", "暂无核心产品数据");
         container.innerHTML = '<div class="text-center text-slate-400 py-8">' + escHtml(noDataMsg) + "</div>";
@@ -418,7 +418,7 @@
 
   // Re-render on language change
   document.addEventListener("languageChanged", function () {
-    /* global HomeCoreProducts */
+    /* global _HomeCoreProducts */
     window.HomeCoreProducts.render();
   });
 })();

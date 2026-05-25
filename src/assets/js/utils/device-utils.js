@@ -33,7 +33,7 @@
  * 依赖：无（纯工具类）
  */
 
-(function (global) {
+(function (_global) {
   "use strict";
 
   /**

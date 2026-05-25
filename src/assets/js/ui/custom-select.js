@@ -21,7 +21,7 @@
  *   data-placeholder          - override placeholder text
  */
 
-(function (global) {
+(function (_global) {
   "use strict";
 
   var _spaRegs = {};
@@ -487,7 +487,7 @@
 
     // Bind search
     if (this.searchable) {
-      var self = this;
+      var _self = this;
       var searchInput = panel.querySelector(".cs-search");
       searchInput.addEventListener("input", function () {
         var q = this.value.trim().toLowerCase();
@@ -533,7 +533,7 @@
     }
 
     // Bind item click
-    var _self = this;
+    var _self2 = this;
     panel.addEventListener("click", function (e) {
       var item = e.target.closest(".cs-item");
       if (!item || item.classList.contains("cs-item-disabled")) return;

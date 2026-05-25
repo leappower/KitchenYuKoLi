@@ -182,7 +182,7 @@
     return __(map[key] || key, map[key] || key);
   }
 
-  function ii(key, fallback) {
+  function _ii(key, fallback) {
     return __(key, fallback);
   }
 
@@ -692,9 +692,9 @@
   window.CaseGrid = { init: init, FILTERS: FILTERS, ROI_CASES: ROI_CASES };
 
   // ── Auto-init when DOM is ready ────────────────────
-  function autoInit(evt) {
+  function autoInit(_evt) {
     var grid = document.getElementById("case-grid");
-    var filters = document.getElementById("case-filters");
+    var _filters = document.getElementById("case-filters");
     if (!grid) {
       setTimeout(autoInit, 200);
       return;

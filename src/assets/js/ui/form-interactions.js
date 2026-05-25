@@ -5,7 +5,7 @@
  * Depends on (may be loaded after this file):
  *   smart-popup.js → window.submitContactForm (optional, graceful fallback)
  */
-(function (global) {
+(function (_global) {
   "use strict";
 
   var _spaRegs = {};

@@ -8,7 +8,7 @@
  *
  * Usage: <script src="../../assets/js/contacts.js"></script>
  */
-(function (global) {
+(function (_global) {
   "use strict";
 
   var _spaRegs = {};
@@ -92,7 +92,7 @@
   function contactsWhatsApp(opts) {
     opts = opts || {};
     var message = opts.message || "Hi YuKoLi";
-    var source = opts.source || "";
+    var _source = opts.source || "";
 
     var text = message;
     return "https://wa.me/" + WHATSAPP_NUMBER + "?text=" + encodeURIComponent(text);
@@ -101,7 +101,7 @@
   /**
    * Extract visible text from a link element, ignoring icon children.
    */
-  function getLinkText(el) {
+  function _getLinkText(el) {
     var text = "";
     if (el.textContent) {
       text = el.textContent.trim().replace(/\s+/g, " ").substring(0, 30);

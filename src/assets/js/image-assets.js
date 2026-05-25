@@ -16,7 +16,7 @@
  * Then:  window.ImageAssets.IMAGE_ASSETS.logo  // → "images/logo.webp"
  *        window.ImageAssets.resolveImage('logo')  // → "images/logo.webp"
  */
-(function (global) {
+(function (_global) {
   "use strict";
 
   var IMAGE_PATH_PREFIX = "images";

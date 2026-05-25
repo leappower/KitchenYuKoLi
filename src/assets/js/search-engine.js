@@ -9,7 +9,7 @@
  *   SearchEngine.search("wok") → [{ path, title, snippet, score }]
  */
 
-(function (global) {
+(function (_global) {
   "use strict";
 
   var INDEX_URL = "/assets/data/search-index.json";

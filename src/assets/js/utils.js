@@ -2,7 +2,7 @@
 // Depends on: window.PRODUCT_SERIES, window.PRODUCT_DEFAULTS, window.ImageAssets
 // Outputs: window.AppUtils
 
-(function attachAppUtils(global) {
+(function attachAppUtils(_global) {
   "use strict";
 
   /**

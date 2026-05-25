@@ -4,7 +4,7 @@
  * Mobile: iOS bottom sheet popup
  */
 
-(function (global) {
+(function (_global) {
   "use strict";
 
   // Guard: DropdownBase must be loaded first

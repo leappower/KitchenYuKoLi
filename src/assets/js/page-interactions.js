@@ -10,7 +10,7 @@
  *   ui/form-interactions.js → form validation, submission, success state
  *   ui/pi-maps.js           → Google Maps + IoT Support (self-init on support page only)
  */
-(function (global) {
+(function (_global) {
   "use strict";
 
   var _spaRegs = {};

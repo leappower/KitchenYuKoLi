@@ -2,7 +2,7 @@
 // Depends on: window.ImageAssets, window.PRODUCT_DATA_TABLE
 // Outputs: window.PRODUCT_SERIES, window.ProductEntity, window.PRODUCT_DEFAULTS, window.assembleProductSeries
 
-(function (global) {
+(function (_global) {
   "use strict";
 
   // ─── Safe references to globals ───────────────────────────────────────────

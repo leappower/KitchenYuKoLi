@@ -1,4 +1,4 @@
-(function (global) {
+(function (_global) {
   "use strict";
 
   function safeCall(fnName, args) {

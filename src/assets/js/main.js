@@ -4,7 +4,7 @@
 (function () {
   if (!/debug=1/.test(location.search) && !localStorage.getItem("debug")) {
     var origWarn = console.warn;
-    var origLog = console.log;
+    var _origLog = console.log;
     console.warn = function () {
       // Keep errors visible, suppress routine warnings
       var msg = Array.prototype.join.call(arguments, " ");
@@ -17,7 +17,7 @@
 // IIFE wrapper for src2 (no build tools)
 // Outputs: window.app (App instance)
 
-(function (global) {
+(function (_global) {
   "use strict";
 
   // ─── App class ─────────────────────────────────────────────────────────────

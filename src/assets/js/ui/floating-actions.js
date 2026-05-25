@@ -10,7 +10,7 @@
  * 改为直接注入 DOM（不依赖占位符），SPA 导航后自动保活。
  */
 
-(function (global) {
+(function (_global) {
   "use strict";
 
   var _spaRegs = {};

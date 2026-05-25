@@ -289,7 +289,7 @@
   }
 
   // ─── Toast ───────────────────────────────────────────────────
-  function showToast(msg) {
+  function _showToast(msg) {
     var toast = document.createElement("div");
     toast.className =
       "compare-toast fixed top-24 left-1/2 -translate-x-1/2 bg-slate-900 dark:bg-white text-white dark:text-slate-900 px-5 py-3 rounded-xl shadow-xl z-[200] text-sm font-medium transition-all duration-300";
@@ -356,7 +356,7 @@
   // Tablet / PC: horizontal table
   function renderDesktopTable(tableContainer) {
     var device = getDeviceType();
-    var colCount = selected.length;
+    var _colCount = selected.length;
     var isTablet = device === "tablet";
 
     var minW = isTablet ? "min-w-[480px]" : "min-w-[600px]";

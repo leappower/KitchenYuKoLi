@@ -774,7 +774,6 @@ a.bg-primary {
   object-position: center;
   position: absolute;
   inset: 0;
-  z-index: -1;
   pointer-events: none;
   transition: opacity 1.5s ease;
   z-index: var(--z-hero-poster);
@@ -901,13 +900,13 @@ a.bg-primary {
   left: 0;
   right: 0;
   z-index: var(--z-hero-info);
-  background: rgba(0, 0, 0, 0.35);
+  background: rgb(0 0 0 / 0.35);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  border-top: 1px solid rgb(255 255 255 / 0.1);
   padding: 12px 16px;
   color: white;
-  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+  text-shadow: 0 1px 3px rgb(0 0 0 / 0.3);
   pointer-events: none;
 }
 @media (width >= 768px) {

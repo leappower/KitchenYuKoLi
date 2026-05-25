@@ -774,7 +774,7 @@
     return 6; // Mobile: 2 cols × 3 rows
   }
 
-  function renderGrid(containerId, renderer, maxCount) {
+  function renderGrid(containerId, renderer, _maxCount) {
     var container = document.getElementById(containerId);
     if (!container) {
       return;
@@ -787,7 +787,7 @@
     var html = products.slice(0, initial).map(renderer).join("");
     container.innerHTML = html;
     updateLoadMoreBtn(containerId, total, initial);
-    bindLoadMore(containerId, renderer, products);
+    bindLoadMore(containerId, renderer);
     // Init floating bar after grid render
     createFloatingBar();
   }
@@ -797,20 +797,20 @@
     if (loadMore) loadMore.style.display = total <= shown ? "none" : "";
   }
 
-  function bindLoadMore(containerId, renderer, products) {
+  function bindLoadMore(containerId, renderer) {
     var loadMore = document.querySelector('[data-i18n="products_load_more"]');
     if (!loadMore || loadMore._bound) return;
     loadMore._bound = true;
     loadMore.addEventListener("click", function () {
+      // Always re-evaluate filtered products from current state (category + tier)
+      var products = getFilteredProducts();
       var container = document.getElementById(containerId);
       if (!container) return;
       var shown = _shownCount[containerId] || getPageSize();
       var next = Math.min(shown + getPageSize(), products.length);
       _shownCount[containerId] = next;
-      // Append new products
       container.innerHTML = products.slice(0, next).map(renderer).join("");
       updateLoadMoreBtn(containerId, products.length, next);
-      // Re-sync compare button states for newly rendered cards
       updateCompareButtons();
     });
   }
@@ -847,7 +847,7 @@
 
   function doRender() {
     var cats = getCategories();
-    var prods = getAllProducts();
+    var _prods = getAllProducts();
     if (!cats.length) {
       return;
     }
@@ -889,6 +889,8 @@
         this.classList.add("active");
         _activeTier = this.dataset.filter || "all";
         _shownCount = {};
+        var loadMoreBtn = document.querySelector('[data-i18n="products_load_more"]');
+        if (loadMoreBtn) loadMoreBtn._bound = false;
         doRender();
       });
     });
@@ -1082,11 +1084,13 @@
       btn.classList.add("active");
 
       // Filter products
-      var selector =
+      var _selector =
         "#product-grid .product-card, #product-grid .product-card-tablet, #product-list .product-card-mobile";
       // Update active category and re-render
       _activeCategory = cat;
       _shownCount = {};
+      var loadMoreBtn = document.querySelector('[data-i18n="products_load_more"]');
+      if (loadMoreBtn) loadMoreBtn._bound = false;
       doRender();
 
       // Notify cross-sell module of category change (for /products/all/ page)

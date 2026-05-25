@@ -11,7 +11,7 @@
  *              support-dropdown.js, about-dropdown.js
  */
 
-(function (global) {
+(function (_global) {
   "use strict";
 
   /* ───────────────────────── SHARED UTILITIES ───────────────────────── */
@@ -235,7 +235,7 @@
               var ac = new AbortController();
               document.addEventListener(
                 "click",
-                function navHandler(e) {
+                function navHandler(_e) {
                   ac.abort();
                 },
                 { signal: ac.signal, once: true }

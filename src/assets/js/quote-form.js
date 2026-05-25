@@ -287,7 +287,7 @@
         pains.push("Other: " + painOther.value.trim());
       }
 
-      var richMsg = [
+      var _richMsg = [
         "Restaurant Type: " + restaurantText,
         "Contact Via: " +
           (contactChannel ? contactChannel.value : "") +

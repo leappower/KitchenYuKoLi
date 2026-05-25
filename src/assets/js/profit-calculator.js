@@ -610,7 +610,7 @@
 
   /* ───────── WhatsApp message builder ───────── */
 
-  function buildWhatsAppMessage(input, result, salaryInfo) {
+  function buildWhatsAppMessage(input, result, _salaryInfo) {
     var painLabel = PAIN_KEY_MAP[input.painPoint] ? t(PAIN_KEY_MAP[input.painPoint]) : input.painPoint;
     var lc = langCurrency();
     var eqNames =
@@ -936,7 +936,7 @@
   }
 
   /** Fallback: open print dialog */
-  function generatePDFFallback(input, result, salaryInfo) {
+  function generatePDFFallback(input, result, _salaryInfo) {
     console.warn("[PC-PDF] Using fallback (print) method");
     var painLabel = PAIN_KEY_MAP[input.painPoint] ? t(PAIN_KEY_MAP[input.painPoint]) : input.painPoint;
     var lc = langCurrency();
@@ -1080,7 +1080,7 @@
 
   /* ───────── Chart rendering ───────── */
 
-  function renderChart(canvasId, result, salaryInfo) {
+  function renderChart(canvasId, result, _salaryInfo) {
     var canvas = document.getElementById(canvasId);
     if (!canvas) return;
     var sym = langCurrency().symbol;
@@ -1392,50 +1392,39 @@
   };
 
   ProfitCalculator.prototype.run = function () {
-    console.log("[profit-calc] run() called");
     if (!validateForm()) {
-      console.log("[profit-calc] run(): validation failed, returning");
       return;
     }
     var input = this.getInput();
     if (input.dailyMeals <= 0) {
-      console.log("[profit-calc] run(): dailyMeals <= 0, returning");
       return;
     }
-    console.log("[profit-calc] run(): input=", JSON.stringify(input));
     var result = calculate(input);
 
     // Show result panel
     var panel = document.getElementById(this.resultId);
     if (panel) {
-      console.log("[profit-calc] run(): showing result panel (was hidden:", panel.classList.contains("hidden") + ")");
       panel.classList.remove("hidden");
       panel.scrollIntoView({ behavior: "smooth", block: "start" });
     } else {
-      console.log("[profit-calc] run(): result panel not found!");
     }
 
     // Check placeholder state
     var placeholder = document.getElementById("profit-placeholder");
     if (placeholder) {
-      console.log("[profit-calc] run(): placeholder hidden:", placeholder.classList.contains("hidden"));
     }
 
     // Steps mode: switch to step 2
     if (this.stepsMode) {
-      console.log("[profit-calc] run(): stepsMode enabled");
       var step1 = document.getElementById("pc-step-1");
       var step2 = document.getElementById("pc-step-2");
       if (step1) {
-        console.log("[profit-calc] run(): hiding step-1");
         step1.classList.add("hidden");
       }
       if (step2) {
-        console.log("[profit-calc] run(): showing step-2");
         step2.classList.remove("hidden");
       }
     } else {
-      console.log("[profit-calc] run(): stepsMode disabled (PC/desktop)");
     }
 
     this.renderResults(result, input.salaryInfo);
@@ -1443,7 +1432,7 @@
     this.storeLastResult(input, result);
   };
 
-  ProfitCalculator.prototype.renderResults = function (r, info) {
+  ProfitCalculator.prototype.renderResults = function (r, _info) {
     var sym = langCurrency().symbol;
     var helpers = {
       fmt: formatNumber,
@@ -1694,7 +1683,7 @@
   _spaOn(document, "spa:load", initProfitCalc);
 
   /* On language change, capture phase (prevents other handlers from breaking) */
-  _spaOn(window, "languageChanged", function (e) {}, true);
+  _spaOn(window, "languageChanged", function (_e) {}, true);
 
   /* On language change, re-render results with new currency/labels */
   _spaOn(window, "languageChanged", function () {

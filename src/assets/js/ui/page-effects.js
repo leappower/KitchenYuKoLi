@@ -5,7 +5,7 @@
  * Depends on (may be loaded after this file):
  *   contacts.js → used via safeCall() at runtime
  */
-(function (global) {
+(function (_global) {
   "use strict";
 
   var _spaRegs = {};
@@ -19,7 +19,7 @@
 
   // ─── Helpers (from PiHelpers) ─────────────────────────────────────────
   var _h = window.PiHelpers || {};
-  var safeCall =
+  var _safeCall =
     _h.safeCall ||
     function (fnName, args) {
       if (typeof global[fnName] === "function") return global[fnName].apply(null, args || []);
@@ -34,7 +34,7 @@
       });
       return t.trim();
     };
-  var findByText =
+  var _findByText =
     _h.findByText ||
     function (tag, text) {
       var els = document.querySelectorAll(tag),

@@ -6,7 +6,7 @@
  * Usage: <script src="../../assets/js/common.js"></script>
  * Then: window.CommonUtils.debounce(fn, 300)
  */
-(function (global) {
+(function (_global) {
   "use strict";
 
   /** Debounce function execution */

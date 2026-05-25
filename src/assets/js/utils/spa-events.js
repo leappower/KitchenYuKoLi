@@ -15,7 +15,7 @@
  *   // Instead of: document.addEventListener("spa:load", handler)
  *   window.__onSpaEvent(document, "spa:load", handler, _spaListeners);
  */
-(function (global) {
+(function (_global) {
   "use strict";
 
   /**

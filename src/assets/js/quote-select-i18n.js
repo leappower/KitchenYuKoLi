@@ -119,7 +119,7 @@
     if (!sel) return;
 
     var prevValue = sel.value;
-    var prevLabel = prevValue && sel.options[sel.selectedIndex] ? sel.options[sel.selectedIndex].text : "";
+    var _prevLabel = prevValue && sel.options[sel.selectedIndex] ? sel.options[sel.selectedIndex].text : "";
 
     sel.innerHTML = '<option value="">' + tr(placeholderKey, placeholderFallback) + "</option>";
     sel.value = prevValue;

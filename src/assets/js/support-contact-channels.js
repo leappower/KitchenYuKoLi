@@ -100,7 +100,7 @@
 
   // PC/Tablet: 4-column grid cards
   function renderGrid(cfg) {
-    var maxW = cfg.maxW || "max-w-4xl";
+    var _maxW = cfg.maxW || "max-w-4xl";
     return (
       '<section class="py-12 bg-white dark:bg-slate-900/50 fullwidth-bg">' +
       '<div class="section-content">' +

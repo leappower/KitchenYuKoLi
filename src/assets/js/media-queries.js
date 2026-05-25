@@ -6,7 +6,7 @@
  * Usage: <script src="../../assets/js/media-queries.js"></script>
  * Then: window.MediaQueries.mqMobile  (boolean)
  */
-(function (global) {
+(function (_global) {
   "use strict";
 
   // ─── matchMedia 缓存 ──────────────────────────────────────────────────────────

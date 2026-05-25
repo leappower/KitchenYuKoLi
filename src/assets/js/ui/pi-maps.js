@@ -6,7 +6,7 @@
  *   Google Maps JavaScript API + Places API (optional — graceful degradation)
  *   window.showNotification (optional — from smart-popup.js)
  */
-(function (global) {
+(function (_global) {
   "use strict";
 
   var _spaRegs = {};

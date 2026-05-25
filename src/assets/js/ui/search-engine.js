@@ -13,7 +13,7 @@
  * Exposes: window.ProductSearchEngine
  */
 
-(function (global) {
+(function (_global) {
   "use strict";
 
   var _spaRegs = {};

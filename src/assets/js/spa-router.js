@@ -30,7 +30,7 @@
 /**
  * spa-router.js — Swup-backed SPA router
  */
-(function (global) {
+(function (_global) {
   "use strict";
 
   var _spaState = { currentRoute: global.location.pathname.replace(/\/$/, "") || "/" };
@@ -224,7 +224,7 @@
     // ── Safety net ──────────────────────────────────────────────────
     document.addEventListener(
       "click",
-      function (e) {
+      function (_e) {
         if (global.__spaNavigating && Date.now() - _lastSwupNavStart > 3000) {
           global.__spaNavigating = false;
           _lastSwupNavStart = 0;

@@ -6,7 +6,7 @@
  * Unique: SPA sub-item navigation (hash anchor → SpaRouter.navigate)
  */
 
-(function (global) {
+(function (_global) {
   "use strict";
 
   // Guard: DropdownBase must be loaded first
