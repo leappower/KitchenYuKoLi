@@ -422,7 +422,7 @@
           escHtml(tl("home_show_more", "更多产品")) +
           "</button>";
         html +=
-          '<div id="hcp-hidden-mobile" style="display:none" class="grid grid-cols-2 gap-3">';
+          '<div id="hcp-hidden-mobile" style="display:none" class="flex flex-col gap-3">';
         restProducts.forEach(function (p) {
           html += buildCard(p);
         });
