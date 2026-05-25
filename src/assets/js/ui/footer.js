@@ -116,13 +116,13 @@
   /* ─── Mobile/Tablet Site Footer (compact) ─── */
   function buildMobileFooterHtml() {
     return (
-      '<div class="bg-slate-900 text-white mx-auto" style="max-width:1920px">' +
+      '<div class="bg-slate-900 text-white mx-auto mt-8" style="max-width:1920px">' +
       '<div class="section-content mx-auto px-3 sm:px-5 py-4 sm:py-6">' +
       // Mobile (<768px): compact 1-column, Tablet (768-1024): 2-column grid
       '<div class="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 mb-4 sm:mb-6">' +
       /* Products */
-      '<div class="text-center lg:text-left">' +
-      '<h4 class="text-xs sm:text-sm font-bold uppercase tracking-wider mb-2 text-center lg:text-left" data-i18n="footer_products_title">Products</h4>' +
+      '<div class="text-center">' +
+      '<h4 class="text-xs sm:text-sm font-bold uppercase tracking-wider mb-2 text-center" data-i18n="footer_products_title">Products</h4>' +
       '<ul class="space-y-1 text-xs sm:text-sm text-slate-300">' +
       '<li><a href="/products/all/" class="hover:text-white transition-colors" data-i18n="nav_products">All Products</a></li>' +
       '<li><a href="/products/stirfry/" class="hover:text-white transition-colors" data-i18n="nav_products_stirfry">Stir-fry Series</a></li>' +
@@ -132,8 +132,8 @@
       '<li><a href="/products/cutting/" class="hover:text-white transition-colors" data-i18n="nav_products_cutting">Prep &amp; Cutting</a></li>' +
       '</ul></div>' +
       /* Applications */
-      '<div class="block text-center lg:text-left">' +
-      '<h4 class="text-xs sm:text-sm font-bold uppercase tracking-wider mb-2 text-center lg:text-left" data-i18n="footer_applications_title">Applications</h4>' +
+      '<div class="block text-center">' +
+      '<h4 class="text-xs sm:text-sm font-bold uppercase tracking-wider mb-2 text-center" data-i18n="footer_applications_title">Applications</h4>' +
       '<ul class="space-y-1 text-xs sm:text-sm text-slate-300">' +
       '<li><a href="/applications/canteen/" class="hover:text-white transition-colors" data-i18n="nav_applications_canteen">School/Corporate</a></li>' +
       '<li><a href="/applications/small-restaurant/" class="hover:text-white transition-colors" data-i18n="nav_applications_small_restaurant">Small Restaurant</a></li>' +
@@ -143,7 +143,7 @@
       '</ul></div>' +
       /* Support (shown on md+) */
       '<div class="hidden md:block">' +
-      '<h4 class="text-xs sm:text-sm font-bold uppercase tracking-wider mb-2 lg:text-left" data-i18n="footer_support_title">Support</h4>' +
+      '<h4 class="text-xs sm:text-sm font-bold uppercase tracking-wider mb-2" data-i18n="footer_support_title">Support</h4>' +
       '<ul class="space-y-1 text-xs sm:text-sm text-slate-300">' +
       '<li><a href="/support/" class="hover:text-white transition-colors" data-i18n="nav_support_services">Service Centers</a></li>' +
       '<li><a href="/support/warranty/" class="hover:text-white transition-colors" data-i18n="nav_support_warranty">Warranty</a></li>' +
@@ -153,8 +153,8 @@
       '<li><a href="/support/training/" class="hover:text-white transition-colors" data-i18n="nav_support_training">Training</a></li>' +
       '</ul></div>' +
       /* Legal (shown on md+) */
-      '<div class="hidden md:block lg:text-left">' +
-      '<h4 class="text-xs sm:text-sm font-bold uppercase tracking-wider mb-2 lg:text-left" data-i18n="footer_legal_title">Legal</h4>' +
+      '<div class="hidden md:block">' +
+      '<h4 class="text-xs sm:text-sm font-bold uppercase tracking-wider mb-2" data-i18n="footer_legal_title">Legal</h4>' +
       '<ul class="space-y-1 text-xs sm:text-sm text-slate-300">' +
       '<li><a href="/privacy/" class="hover:text-white transition-colors" data-i18n="footer_legal_privacy_policy">Privacy Policy</a></li>' +
       '<li><a href="/terms/" class="hover:text-white transition-colors" data-i18n="footer_legal_user_agreement">User Agreement</a></li>' +
@@ -176,11 +176,11 @@
   /* ─── PC Footer ─── */
   function buildPCFooterHtml() {
     return (
-      '<div class="bg-slate-900 text-white mx-auto" style="max-width:1920px">' +
+      '<div class="bg-slate-900 text-white mx-auto mt-8" style="max-width:1920px">' +
       '<div class="section-content mx-auto px-3 sm:px-5 xl:px-10 pt-8 sm:pt-12 pb-6 sm:pb-8">' +
       '<div class="grid grid-cols-2 md:grid-cols-4 gap-4 lg:gap-8">' +
       /* Products */
-      "<div>" +
+      '<div class="text-center">' +
       '<h4 class="text-xs sm:text-sm font-bold uppercase tracking-wider mb-2 sm:mb-4" data-i18n="footer_products_title">Products</h4>' +
       '<ul class="space-y-1 sm:space-y-2 text-xs sm:text-sm text-slate-300">' +
       '<li><a href="/products/all/" class="hover:text-white transition-colors" data-i18n="nav_products">All Products</a></li>' +
@@ -192,7 +192,7 @@
       "</ul>" +
       "</div>" +
       /* Applications */
-      "<div>" +
+      '<div class="text-center">' +
       '<h4 class="text-xs sm:text-sm font-bold uppercase tracking-wider mb-2 sm:mb-4" data-i18n="footer_applications_title">Applications</h4>' +
       '<ul class="space-y-1 sm:space-y-2 text-xs sm:text-sm text-slate-300">' +
       '<li><a href="/applications/canteen/" class="hover:text-white transition-colors" data-i18n="nav_applications_canteen">School &amp; Corporate Canteens</a></li>' +
@@ -203,7 +203,7 @@
       "</ul>" +
       "</div>" +
       /* Support */
-      "<div>" +
+      '<div class="text-center">' +
       '<h4 class="text-xs sm:text-sm font-bold uppercase tracking-wider mb-2 sm:mb-4" data-i18n="footer_support_title">Support</h4>' +
       '<ul class="space-y-1 sm:space-y-2 text-xs sm:text-sm text-slate-300">' +
       '<li><a href="/support/" class="hover:text-white transition-colors" data-i18n="nav_support_services">Technical Services</a></li>' +
@@ -215,7 +215,7 @@
       "</ul>" +
       "</div>" +
       /* Legal */
-      "<div>" +
+      '<div class="text-center">' +
       '<h4 class="text-xs sm:text-sm font-bold uppercase tracking-wider mb-2 sm:mb-4" data-i18n="footer_legal_title">Legal</h4>' +
       '<ul class="space-y-1 sm:space-y-2 text-xs sm:text-sm text-slate-300">' +
       '<li><a href="/privacy/" class="hover:text-white transition-colors" data-i18n="footer_legal_privacy_policy">Privacy Policy</a></li>' +
