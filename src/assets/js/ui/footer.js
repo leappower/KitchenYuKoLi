@@ -160,7 +160,7 @@
   function buildPCFooterHtml() {
     return (
       '<div class="bg-slate-900 text-white">' +
-      '<div class="max-w-7xl mx-auto px-4 sm:px-6 pt-0 pb-6 sm:pb-8">' +
+      '<div class="max-w-7xl mx-auto px-4 sm:px-6 pt-8 sm:pt-12 pb-6 sm:pb-8">' +
       '<div class="grid grid-cols-2 md:grid-cols-4 gap-4 lg:gap-8">' +
       /* Products */
       "<div>" +
