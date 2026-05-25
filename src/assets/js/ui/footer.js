@@ -117,7 +117,7 @@
   function buildMobileFooterHtml() {
     return (
       '<div class="bg-slate-900 text-white">' +
-      '<div class="section-content mx-auto px-3 sm:px-5 py-4 sm:py-6" style="max-width:1440px">' +
+      '<div class="section-content mx-auto px-3 sm:px-5 py-4 sm:py-6" style="max-width:1920px">' +
       // Mobile (<768px): compact 1-column, Tablet (768-1024): 2-column grid
       '<div class="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 mb-4 sm:mb-6">' +
       /* Products */
@@ -177,7 +177,7 @@
   function buildPCFooterHtml() {
     return (
       '<div class="bg-slate-900 text-white">' +
-      '<div class="section-content mx-auto px-3 sm:px-5 xl:px-10 pt-8 sm:pt-12 pb-6 sm:pb-8" style="max-width:1440px">' +
+      '<div class="section-content mx-auto px-3 sm:px-5 xl:px-10 pt-8 sm:pt-12 pb-6 sm:pb-8" style="max-width:1920px">' +
       '<div class="grid grid-cols-2 md:grid-cols-4 gap-4 lg:gap-8">' +
       /* Products */
       "<div>" +
