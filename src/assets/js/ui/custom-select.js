@@ -908,6 +908,11 @@
         self.close();
       }
     });
+
+    // Sync trigger display when native select changes externally
+    this.select.addEventListener("change", function () {
+      self.refresh();
+    });
   };
 
   /* Refresh trigger text (e.g. after external value change) */

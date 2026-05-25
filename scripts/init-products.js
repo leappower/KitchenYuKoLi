@@ -53,7 +53,7 @@ function scanProductImages(imagesDir) {
   var files = fs.readdirSync(imagesDir);
   files.forEach(function(f) {
     // 匹配格式: MODEL_数字.webp 或 MODEL_hires.webp 或 MODEL.webp
-    var match = f.match(/^([A-Z][A-Z0-9_-]+?[A-Z0-9])_(\d+)\.(webp|jpg|png)$/);
+    var match = f.match(/^([A-Z][A-Z0-9_-]+?[A-Z0-9])[-_](\d+)\.(webp|jpg|png)$/);
     if (match) {
       var model = match[1];
       var suffix = match[2];
@@ -67,7 +67,7 @@ function scanProductImages(imagesDir) {
       return;
     }
     // MODEL_hires.webp
-    match = f.match(/^([A-Z][A-Z0-9_-]+?[A-Z0-9])_hires\.(webp|jpg|png)$/);
+    match = f.match(/^([A-Z][A-Z0-9_-]+?[A-Z0-9])[-_]hires\.(webp|jpg|png)$/);
     if (match) {
       var model = match[1];
       if (!result[model]) result[model] = [];
