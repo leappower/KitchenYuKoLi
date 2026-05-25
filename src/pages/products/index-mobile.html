@@ -122,178 +122,98 @@
 
     <main id="spa-content">
       <!-- Hero -->
-      <section
-        class="fullwidth-bg hero-overlap section-passthrough py-8 bg-gradient-to-br from-primary/5 via-transparent to-orange-100/30 dark:from-primary/10 dark:to-orange-900/20"
-      >
-        <div class="section-content">
-          <div class="w-full text-center px-4">
-            <h1 class="text-2xl font-black leading-tight tracking-tight text-slate-900 dark:text-white mb-2" data-i18n="products_page_title_hero">150+ Smart Commercial Kitchen Equipment, One-Stop Purchase</h1>
-            <p class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed max-w-xs mx-auto mb-4" data-i18n="products_page_desc">From stir-frying to prep, frying to steaming – 6 product series covering all kitchen needs.</p>
-                      <div class="flex flex-col gap-3">
-              <a href="/products/all/" class="w-full bg-primary text-white px-5 py-3 rounded-xl font-bold text-sm flex items-center justify-center gap-2 shadow-lg shadow-primary/25">
-                <span data-i18n="products_view_all_btn">View All Products</span>
-                <span class="material-symbols-outlined text-lg">inventory_2</span>
-              </a>
-              <a href="/quote" class="w-full border-2 border-slate-200 dark:border-slate-800 px-5 py-3 rounded-xl font-bold text-sm flex items-center justify-center gap-2">
-                <span data-i18n="products_cta_btn_quote">Get Custom Quote</span>
-                <span class="material-symbols-outlined text-lg">request_quote</span>
-              </a>
-            </div>
-        </div>
-        </div>
-      </section>
-
-      <!-- Category Cards (left-icon right-text list) -->
+            <!-- Category Cards (mobile horizontal scroll) -->
       <section class="fullwidth-bg py-4">
         <div class="section-content">
-          <div class="grid grid-cols-1 gap-3 px-3">
+          <div class="flex overflow-x-auto gap-3 pb-2 no-scrollbar snap-x snap-mandatory">
 
-            <!-- 翻炒系列 -->
-            <a href="/products/stirfry/" class="group bg-white rounded-2xl overflow-hidden shadow-sm border border-slate-200/70 dark:border-slate-700 hover:shadow-lg hover:border-primary/30 transition-all">
-              <div class="flex">
-                <div class="w-24 flex-shrink-0 relative overflow-hidden" onmouseenter="this.querySelector('video').play()" onmouseleave="this.querySelector('video').pause()">
-          <video
-            class="hero-video-player w-full h-full object-cover"
-            src="/assets/video/product-stirfry.mp4"
-            poster="/assets/images/products/esl-bxc800.webp"
-            preload="none"
-            muted
-            playsinline
-            loop
-          ></video>
-          <img class="hero-video-poster w-full h-full object-cover" src="/assets/images/products/esl-bxc800.webp" alt=""  loading="lazy"/>
-                </div>
-                <div class="p-4 flex flex-col justify-center flex-1">
-                  <h3 class="text-base font-bold mb-1" data-i18n="nav_products_stirfry">Stir-fry Series</h3>
-                  <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed mb-2 line-clamp-2" data-i18n="prod_card_stirfry_desc">107+ models from entry-level to smart. 1 operator can handle 6 woks, boosting output 5x.</p>
-
-                  <span class="inline-flex items-center gap-0.5 text-primary font-bold text-xs group-hover:gap-1.5 transition-all">
-                    <span data-i18n="app_card_cta">View Solution</span>
-                    <span class="material-symbols-outlined text-sm">arrow_forward</span>
-                  </span>
-                </div>
+            <a href="/products/stirfry/" class="min-w-[260px] snap-start bg-white rounded-2xl overflow-hidden shadow-sm border border-slate-200/70 dark:border-slate-700 hover:shadow-lg transition-all flex-shrink-0">
+              <div class="aspect-[3/2] overflow-hidden">
+                <img src="/assets/images/products/categories/stirfry.webp" alt="Stir-Fry Series" class="w-full h-full object-cover" loading="lazy" />
+              </div>
+              <div class="p-4">
+                <h3 class="text-sm font-bold mb-1" data-i18n="nav_products_stirfry">Stir-fry Series</h3>
+                <p class="text-xs text-slate-500 dark:text-slate-400 line-clamp-2 mb-3" data-i18n="prod_card_stirfry_desc">107+ models from entry-level to smart. 1 operator can handle 6 woks.</p>
+                <span class="inline-flex items-center gap-1 text-primary font-bold text-xs group-hover:gap-1.5 transition-all">
+                  <span data-i18n="app_card_cta">View Solution</span>
+                  <span class="material-symbols-outlined text-sm">arrow_forward</span>
+                </span>
               </div>
             </a>
 
-            <!-- 切配系列 -->
-            <a href="/products/cutting/" class="group bg-white rounded-2xl overflow-hidden shadow-sm border border-slate-200/70 dark:border-slate-700 hover:shadow-lg hover:border-primary/30 transition-all">
-              <div class="flex">
-                <div class="w-24 flex-shrink-0 bg-gradient-to-br from-blue-400 to-indigo-500 flex items-center justify-center">
-                  <span class="material-symbols-outlined text-white text-4xl" style="font-variation-settings: 'FILL' 0, 'wght' 200">content_cut</span>
-                </div>
-                <div class="p-4 flex flex-col justify-center flex-1">
-                  <h3 class="text-base font-bold mb-1" data-i18n="nav_products_cutting">Cutting Series</h3>
-                  <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed mb-2 line-clamp-2" data-i18n="prod_card_cutting_desc">Uniform slicing, shredding, dicing. Replaces 3-5 prep staff with 6x speed.</p>
-                  <span class="inline-flex items-center gap-0.5 text-primary font-bold text-xs group-hover:gap-1.5 transition-all">
-                    <span data-i18n="app_card_cta">View Solution</span>
-                    <span class="material-symbols-outlined text-sm">arrow_forward</span>
-                  </span>
-                </div>
+            <a href="/products/cutting/" class="min-w-[260px] snap-start bg-white rounded-2xl overflow-hidden shadow-sm border border-slate-200/70 dark:border-slate-700 hover:shadow-lg transition-all flex-shrink-0">
+              <div class="aspect-[3/2] overflow-hidden">
+                <img src="/assets/images/products/categories/cutting.webp" alt="Cutting Series" class="w-full h-full object-cover" loading="lazy" />
+              </div>
+              <div class="p-4">
+                <h3 class="text-sm font-bold mb-1" data-i18n="nav_products_cutting">Cutting Series</h3>
+                <p class="text-xs text-slate-500 dark:text-slate-400 line-clamp-2 mb-3" data-i18n="prod_card_cutting_desc">Uniform slicing, shredding, dicing. Replaces 3-5 prep staff.</p>
+                <span class="inline-flex items-center gap-1 text-primary font-bold text-xs group-hover:gap-1.5 transition-all">
+                  <span data-i18n="app_card_cta">View Solution</span>
+                  <span class="material-symbols-outlined text-sm">arrow_forward</span>
+                </span>
               </div>
             </a>
 
-            <!-- 油炸系列 -->
-            <a href="/products/frying/" class="group bg-white rounded-2xl overflow-hidden shadow-sm border border-slate-200/70 dark:border-slate-700 hover:shadow-lg hover:border-primary/30 transition-all">
-              <div class="flex">
-                <div class="w-24 flex-shrink-0 relative overflow-hidden" onmouseenter="this.querySelector('video').play()" onmouseleave="this.querySelector('video').pause()">
-          <video
-            class="hero-video-player w-full h-full object-cover"
-            src="/assets/video/product-frying.mp4"
-            poster="/assets/images/products/esl-bxc800.webp"
-            preload="none"
-            muted
-            playsinline
-            loop
-          ></video>
-          <img class="hero-video-poster w-full h-full object-cover" src="/assets/images/products/esl-bxc800.webp" alt=""  loading="lazy"/>
-                </div>
-                <div class="p-4 flex flex-col justify-center flex-1">
-                  <h3 class="text-base font-bold mb-1" data-i18n="nav_products_frying">Frying Series</h3>
-                  <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed mb-2 line-clamp-2" data-i18n="prod_card_frying_desc">±1°C precision control, auto oil filtration. Consistent batch quality.</p>
-
-                  <span class="inline-flex items-center gap-0.5 text-primary font-bold text-xs group-hover:gap-1.5 transition-all">
-                    <span data-i18n="app_card_cta">View Solution</span>
-                    <span class="material-symbols-outlined text-sm">arrow_forward</span>
-                  </span>
-                </div>
+            <a href="/products/frying/" class="min-w-[260px] snap-start bg-white rounded-2xl overflow-hidden shadow-sm border border-slate-200/70 dark:border-slate-700 hover:shadow-lg transition-all flex-shrink-0">
+              <div class="aspect-[3/2] overflow-hidden">
+                <img src="/assets/images/products/categories/frying.webp" alt="Frying Series" class="w-full h-full object-cover" loading="lazy" />
+              </div>
+              <div class="p-4">
+                <h3 class="text-sm font-bold mb-1" data-i18n="nav_products_frying">Frying Series</h3>
+                <p class="text-xs text-slate-500 dark:text-slate-400 line-clamp-2 mb-3" data-i18n="prod_card_frying_desc">&plusmn;1&deg;C precision control, auto oil filtration.</p>
+                <span class="inline-flex items-center gap-1 text-primary font-bold text-xs group-hover:gap-1.5 transition-all">
+                  <span data-i18n="app_card_cta">View Solution</span>
+                  <span class="material-symbols-outlined text-sm">arrow_forward</span>
+                </span>
               </div>
             </a>
 
-            <!-- 蒸煮系列 -->
-            <a href="/products/steaming/" class="group bg-white rounded-2xl overflow-hidden shadow-sm border border-slate-200/70 dark:border-slate-700 hover:shadow-lg hover:border-primary/30 transition-all">
-              <div class="flex">
-                <div class="w-24 flex-shrink-0 relative overflow-hidden" onmouseenter="this.querySelector('video').play()" onmouseleave="this.querySelector('video').pause()">
-          <video
-            class="hero-video-player w-full h-full object-cover"
-            src="/assets/video/product-steaming.mp4"
-            poster="/assets/images/products/esl-bxc800.webp"
-            preload="none"
-            muted
-            playsinline
-            loop
-          ></video>
-          <img class="hero-video-poster w-full h-full object-cover" src="/assets/images/products/esl-bxc800.webp" alt=""  loading="lazy"/>
-                </div>
-                <div class="p-4 flex flex-col justify-center flex-1">
-                  <h3 class="text-base font-bold mb-1" data-i18n="nav_products_steaming">Steaming Series</h3>
-                  <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed mb-2 line-clamp-2" data-i18n="prod_card_steaming_desc">Multi-layer high-capacity steaming with auto temp control. Serves 500 meals on time.</p>
-
-                  <span class="inline-flex items-center gap-0.5 text-primary font-bold text-xs group-hover:gap-1.5 transition-all">
-                    <span data-i18n="app_card_cta">View Solution</span>
-                    <span class="material-symbols-outlined text-sm">arrow_forward</span>
-                  </span>
-                </div>
+            <a href="/products/steaming/" class="min-w-[260px] snap-start bg-white rounded-2xl overflow-hidden shadow-sm border border-slate-200/70 dark:border-slate-700 hover:shadow-lg transition-all flex-shrink-0">
+              <div class="aspect-[3/2] overflow-hidden">
+                <img src="/assets/images/products/categories/steaming.webp" alt="Steaming Series" class="w-full h-full object-cover" loading="lazy" />
+              </div>
+              <div class="p-4">
+                <h3 class="text-sm font-bold mb-1" data-i18n="nav_products_steaming">Steaming Series</h3>
+                <p class="text-xs text-slate-500 dark:text-slate-400 line-clamp-2 mb-3" data-i18n="prod_card_steaming_desc">Multi-layer high-capacity steaming with auto temp control.</p>
+                <span class="inline-flex items-center gap-1 text-primary font-bold text-xs group-hover:gap-1.5 transition-all">
+                  <span data-i18n="app_card_cta">View Solution</span>
+                  <span class="material-symbols-outlined text-sm">arrow_forward</span>
+                </span>
               </div>
             </a>
 
-            <!-- 炖煮系列 -->
-            <a href="/products/stewing/" class="group bg-white rounded-2xl overflow-hidden shadow-sm border border-slate-200/70 dark:border-slate-700 hover:shadow-lg hover:border-primary/30 transition-all">
-              <div class="flex">
-                <div class="w-24 flex-shrink-0 relative overflow-hidden" onmouseenter="this.querySelector('video').play()" onmouseleave="this.querySelector('video').pause()">
-          <video
-            class="hero-video-player w-full h-full object-cover"
-            src="/assets/video/product-stewing.mp4"
-            poster="/assets/images/products/esl-bxc800.webp"
-            preload="none"
-            muted
-            playsinline
-            loop
-          ></video>
-          <img class="hero-video-poster w-full h-full object-cover" src="/assets/images/products/esl-bxc800.webp" alt=""  loading="lazy"/>
-                </div>
-                <div class="p-4 flex flex-col justify-center flex-1">
-                  <h3 class="text-base font-bold mb-1" data-i18n="nav_products_stewing">Stewing Series</h3>
-                  <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed mb-2 line-clamp-2" data-i18n="prod_card_stewing_desc">Precision low-temperature cooking with auto keep-warm. Zero flavor variance between batches.</p>
-
-                  <span class="inline-flex items-center gap-0.5 text-primary font-bold text-xs group-hover:gap-1.5 transition-all">
-                    <span data-i18n="app_card_cta">View Solution</span>
-                    <span class="material-symbols-outlined text-sm">arrow_forward</span>
-                  </span>
-                </div>
+            <a href="/products/stewing/" class="min-w-[260px] snap-start bg-white rounded-2xl overflow-hidden shadow-sm border border-slate-200/70 dark:border-slate-700 hover:shadow-lg transition-all flex-shrink-0">
+              <div class="aspect-[3/2] overflow-hidden">
+                <img src="/assets/images/products/categories/stewing.webp" alt="Stewing Series" class="w-full h-full object-cover" loading="lazy" />
+              </div>
+              <div class="p-4">
+                <h3 class="text-sm font-bold mb-1" data-i18n="nav_products_stewing">Stewing Series</h3>
+                <p class="text-xs text-slate-500 dark:text-slate-400 line-clamp-2 mb-3" data-i18n="prod_card_stewing_desc">Precision low-temp cooking, zero flavor variance.</p>
+                <span class="inline-flex items-center gap-1 text-primary font-bold text-xs group-hover:gap-1.5 transition-all">
+                  <span data-i18n="app_card_cta">View Solution</span>
+                  <span class="material-symbols-outlined text-sm">arrow_forward</span>
+                </span>
               </div>
             </a>
 
-            <!-- 辅助设备 -->
-            <a href="/products/other/" class="group bg-white rounded-2xl overflow-hidden shadow-sm border border-slate-200/70 dark:border-slate-700 hover:shadow-lg hover:border-primary/30 transition-all">
-              <div class="flex">
-                <div class="w-24 flex-shrink-0 bg-gradient-to-br from-slate-400 to-gray-500 flex items-center justify-center">
-                  <span class="material-symbols-outlined text-white text-4xl" style="font-variation-settings: 'FILL' 0, 'wght' 200">settings</span>
-                </div>
-                <div class="p-4 flex flex-col justify-center flex-1">
-                  <h3 class="text-base font-bold mb-1" data-i18n="nav_products_other">Accessories</h3>
-                  <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed mb-2 line-clamp-2" data-i18n="prod_card_other_desc">Dishwashers, warmers, display cases, worktables – complete your kitchen setup.</p>
-                  <span class="inline-flex items-center gap-0.5 text-primary font-bold text-xs group-hover:gap-1.5 transition-all">
-                    <span data-i18n="app_card_cta">View Solution</span>
-                    <span class="material-symbols-outlined text-sm">arrow_forward</span>
-                  </span>
-                </div>
+            <a href="/products/other/" class="min-w-[260px] snap-start bg-white rounded-2xl overflow-hidden shadow-sm border border-slate-200/70 dark:border-slate-700 hover:shadow-lg transition-all flex-shrink-0">
+              <div class="aspect-[3/2] overflow-hidden">
+                <img src="/assets/images/products/categories/other.webp" alt="Accessories" class="w-full h-full object-cover" loading="lazy" />
+              </div>
+              <div class="p-4">
+                <h3 class="text-sm font-bold mb-1" data-i18n="nav_products_other">Accessories</h3>
+                <p class="text-xs text-slate-500 dark:text-slate-400 line-clamp-2 mb-3" data-i18n="prod_card_other_desc">Complete your kitchen setup with dishwashers, warmers and more.</p>
+                <span class="inline-flex items-center gap-1 text-primary font-bold text-xs group-hover:gap-1.5 transition-all">
+                  <span data-i18n="app_card_cta">View Solution</span>
+                  <span class="material-symbols-outlined text-sm">arrow_forward</span>
+                </span>
               </div>
             </a>
 
           </div>
         </div>
       </section>
-
       <!-- CTA -->
       <section class="fullwidth-bg py-10 bg-primary relative overflow-hidden">
         <div class="section-content">
@@ -320,8 +240,8 @@
     </main>
 
     <!-- Bottom Navigation -->
-<script defer src="/assets/js/lang-registry.js?v=202605252249"></script>
-    <script defer src="/assets/js/translations.js?v=202605252249"></script><script defer src="/assets/js/translations-dropdown-template.js?v=202605252249"></script>
+<script defer src="/assets/js/lang-registry.js?v=202605252320"></script>
+    <script defer src="/assets/js/translations.js?v=202605252320"></script><script defer src="/assets/js/translations-dropdown-template.js?v=202605252320"></script>
 
     <script defer src="/assets/js/contacts.js"></script>
     <script defer src="/assets/js/ui/helpers.js"></script>
@@ -335,7 +255,7 @@
     
       <script defer src="/assets/js/ui/floating-actions.js"></script>
   <script defer src="/assets/js/ui/footer.js"></script>
-<script defer src="/assets/js/ui/slide-menu.js?v=202605252249"></script>
+<script defer src="/assets/js/ui/slide-menu.js?v=202605252320"></script>
 
 </body>
 </html>
