@@ -314,46 +314,30 @@
       // Track referrer for back navigation
       if (slug) sessionStorage.setItem("pdp_referrer", "/products/" + slug + "/");
       var model = product.model || "";
-      // PC/Tablet breadcrumb — chevron_right + badge (matches steaming/food-factory style)
-      var chevron = '<span class="material-symbols-outlined text-xs text-slate-300">chevron_right</span>';
+      // PC/Tablet breadcrumb — 统一三层 Products / 分类 / 型号
+      var chevron = '<span class="mx-1.5 text-slate-300 dark:text-slate-600">/</span>';
       var badgeHtml =
         catLabel && slug
           ? chevron +
             '<a href="/products/' +
             slug +
             '/" class="hover:text-primary transition-colors">' +
-            '<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-primary/10 text-primary text-xs font-bold uppercase tracking-wider">' +
-            '<span class="material-symbols-outlined text-[10px] leading-none">' +
-            catIcon +
-            "</span>" +
-            "<span>" +
-            catLabel +
-            "</span></span></a>" +
-            chevron
-          : chevron;
+            esc(catLabel) +
+            "</a>"
+          : "";
       var html =
         '<div class="section-content pt-4 pb-0 hidden md:block" style="padding-inline:var(--container-px,0.75rem)">' +
-        '<nav class="flex items-center gap-2 flex-wrap" aria-label="Breadcrumb">' +
-        '<a href="/products/" class="text-sm text-slate-500 hover:text-primary transition-colors" data-i18n="nav_products">Products</a>' +
-        badgeHtml +
-        '<span class="text-sm text-slate-900 dark:text-white font-medium">' +
-        esc(product.name || model) +
-        "</span>" +
-        "</nav></div>";
-      // Mobile breadcrumb — back button + single-line (matches mobile steaming style)
-      var mChevron = '<span class="material-symbols-outlined text-xs text-slate-300">chevron_right</span>';
-      var mobileBadgeHtml =
-        catLabel && slug
-          ? mChevron +
-            '<span class="inline-flex items-center gap-0.5 px-2 py-0.5 rounded-full bg-primary/10 text-primary text-[10px] font-bold uppercase tracking-wider">' +
-            '<span class="material-symbols-outlined text-[10px] leading-none">' +
-            catIcon +
-            "</span>" +
-            "<span>" +
-            catLabel +
-            "</span></span>" +
-            mChevron
-          : mChevron;
+        '<nav class="breadcrumb-nav text-sm text-slate-500 dark:text-slate-400" aria-label="Breadcrumb">' +
+        '<ol class="flex items-center gap-1 flex-wrap">' +
+        '<li><a href="/products/" class="hover:text-primary transition-colors">' +
+        esc(tl("nav_products", "Products")) + '</a></li>' +
+        (badgeHtml ? badgeHtml : "") +
+        (badgeHtml ? chevron : "") +
+        '<li><span class="text-slate-900 dark:text-white font-medium">' +
+        esc(product.name || model) + "</span></li>" +
+        '</ol></nav></div>';
+      // Mobile breadcrumb — 统一返回按钮 + 两层
+      var mChevron = '<span class="mx-1 text-slate-300 text-xs">/</span>';
       html +=
         '<div class="section-content pt-3 pb-0 md:hidden" style="padding-inline:var(--container-px,0.75rem)">' +
         '<div class="flex items-center gap-2">' +
@@ -361,11 +345,11 @@
         tl("pd_back", "返回") +
         '">' +
         '<span class="material-symbols-outlined text-lg">arrow_back</span></button>' +
-        '<a href="/products/" class="text-xs text-slate-400 hover:text-primary transition-colors flex-shrink-0" data-i18n="nav_products">Products</a>' +
-        mobileBadgeHtml +
-        '<span class="text-xs font-bold text-slate-900 dark:text-white truncate">' +
-        esc(product.name || model) +
-        "</span>" +
+        '<div class="text-xs text-slate-500 dark:text-slate-400">' +
+        esc(tl("nav_products", "Products")) + '</div>' +
+        (catLabel ? '<div class="text-xs text-slate-500 dark:text-slate-400">' + mChevron + esc(catLabel) + "</div>" : "") +
+        '<div class="text-sm font-bold text-slate-900 dark:text-white truncate">' +
+        mChevron + esc(product.name || model) + "</div>" +
         "</div></div>";
       bcEl.innerHTML = html;
     })();
