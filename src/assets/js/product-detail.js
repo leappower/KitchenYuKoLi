@@ -21,12 +21,12 @@
 
   // Chinese category name (from PRODUCT_DATA_TABLE) → URL slug
   var CATEGORY_NAME_TO_SLUG = {
-    "翻炒系列": "stirfry",
-    "切配系列": "cutting",
-    "煎炸系列": "frying",
-    "炖煮系列": "stewing",
-    "蒸煮系列": "steaming",
-    "辅助系列": "other",
+    翻炒系列: "stirfry",
+    切配系列: "cutting",
+    煎炸系列: "frying",
+    炖煮系列: "stewing",
+    蒸煮系列: "steaming",
+    辅助系列: "other",
   };
 
   function isCategorySlug(slug) {
@@ -336,7 +336,7 @@
         '<a href="/products/" class="text-sm text-slate-500 hover:text-primary transition-colors" data-i18n="nav_products">Products</a>' +
         badgeHtml +
         '<span class="text-sm text-slate-900 dark:text-white font-medium">' +
-        model +
+        esc(product.name || model) +
         "</span>" +
         "</nav></div>";
       // Mobile breadcrumb — back button + single-line (matches mobile steaming style)
@@ -363,7 +363,7 @@
         '<a href="/products/" class="text-xs text-slate-400 hover:text-primary transition-colors flex-shrink-0" data-i18n="nav_products">Products</a>' +
         mobileBadgeHtml +
         '<span class="text-xs font-bold text-slate-900 dark:text-white truncate">' +
-        model +
+        esc(product.name || model) +
         "</span>" +
         "</div></div>";
       bcEl.innerHTML = html;
@@ -423,11 +423,11 @@
       if (!specs[s].v) continue;
       if (specs[s].full) {
         specCards +=
-          '<div class="md:col-span-2 py-3 px-4 rounded-lg bg-slate-50 dark:bg-slate-700/50">' +
+          '<div class="md:col-span-2 py-3 px-4 rounded-lg bg-slate-50 dark:bg-slate-700/50 text-left">' +
           '<span class="text-sm text-slate-500 dark:text-slate-400 font-medium block mb-1">' +
           esc(specs[s].l) +
           "</span>" +
-          '<span class="text-sm font-semibold">' +
+          '<span class="text-sm font-semibold whitespace-pre-line">' +
           esc(specs[s].v) +
           "</span></div>";
       } else {
@@ -452,6 +452,18 @@
         esc(product.badge) +
         "</span>"
       : "";
+    var hlBadges = "";
+    if (product.highlights) {
+      var hlList = product.highlights.split(" · ");
+      hlList.forEach(function (h, i) {
+        if (i >= 4) return;
+        hlBadges +=
+          '<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-medium bg-primary/10 text-primary">' +
+          '<span class="material-symbols-outlined text-[12px]">check_circle</span> ' +
+          esc(h) +
+          "</span>";
+      });
+    }
     var wa = window.Contacts ? window.Contacts.whatsapp : "8613163756465";
 
     // Video support: product.video or product.videoUrl from CMS
@@ -465,16 +477,22 @@
       if (m) embedUrl = "https://www.youtube.com/embed/" + m[1] + "?autoplay=1&rel=0";
     }
 
+    // --- Media HTML (with aspect-ratio + object-contain) ---
     var mediaHtml;
     if (isVideo) {
+      var videoContainerClass =
+        "relative aspect-[4/3] lg:aspect-[3/2] rounded-2xl overflow-hidden bg-slate-50 dark:bg-slate-800 shadow-xl flex items-center justify-center group";
       if (isYouTube) {
         mediaHtml =
-          "<div class=\"relative group cursor-pointer\" onclick=\"(function(el){var f=document.createElement('iframe');f.src='" +
+          '<div class="' +
+          videoContainerClass +
+          '"' +
+          " onclick=\"(function(el){var f=document.createElement('iframe');f.src='" +
           embedUrl +
           "';f.className='absolute inset-0 w-full h-full';f.allow='autoplay;encrypted-media';f.allowFullscreen=true;f.style.border='none';el.querySelector('.pdp-play-btn').style.display='none';el.querySelector('img').style.display='none';el.appendChild(f);})(this)\">" +
           '<img loading="eager" alt="' +
           esc(product.model) +
-          '" class="w-full h-[360px] object-cover" src="' +
+          '" class="w-full h-full object-contain p-4 lg:p-6" src="' +
           imgSrc +
           '"' +
           " onerror=\"this.src='/assets/images/default.webp'\">" +
@@ -484,12 +502,15 @@
           "</div></div></div>";
       } else {
         mediaHtml =
-          "<div class=\"relative group cursor-pointer\" onclick=\"(function(el){var v=document.createElement('video');v.src='" +
+          '<div class="' +
+          videoContainerClass +
+          '"' +
+          " onclick=\"(function(el){var v=document.createElement('video');v.src='" +
           videoUrl +
           "';v.className='absolute inset-0 w-full h-full object-cover';v.controls=true;v.autoplay=true;v.playsInline=true;el.querySelector('.pdp-play-btn').style.display='none';el.querySelector('img').style.display='none';el.appendChild(v);v.play();})(this)\">" +
           '<img loading="eager" alt="' +
           esc(product.model) +
-          '" class="w-full h-[360px] object-cover" src="' +
+          '" class="w-full h-full object-contain p-4 lg:p-6" src="' +
           imgSrc +
           '"' +
           " onerror=\"this.src='/assets/images/default.webp'\">" +
@@ -500,13 +521,17 @@
       }
     } else {
       mediaHtml =
-        '<div class="relative"><img loading="eager" alt="' +
+        '<div class="relative aspect-[4/3] lg:aspect-[3/2] rounded-2xl overflow-hidden bg-slate-50 dark:bg-slate-800 shadow-xl flex items-center justify-center group">' +
+        '<img loading="eager" alt="' +
         esc(product.model) +
         '"' +
-        ' class="w-full h-[360px] object-cover" src="' +
+        ' class="w-full h-full object-contain p-4 lg:p-6" src="' +
         imgSrc +
         '"' +
-        " onerror=\"this.src='/assets/images/default.webp'\">";
+        " onerror=\"this.src='/assets/images/default.webp'\">" +
+        // Zoom hint overlay (PC only)
+        '<div class="hidden lg:flex absolute top-3 right-3 w-8 h-8 rounded-full bg-white/80 items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity shadow">' +
+        '<span class="material-symbols-outlined text-sm text-slate-600">zoom_in</span></div>';
       // Check for additional images (gallery)
       if (product.images && product.images.length > 1) {
         mediaHtml += '<div class="absolute bottom-3 left-3 flex gap-1.5">';
@@ -519,11 +544,51 @@
       mediaHtml += "</div>";
     }
 
+    // --- Quick specs row ---
+    var quickSpecs = "";
+    if (product.power) {
+      quickSpecs +=
+        '<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg text-xs font-medium bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-300">' +
+        '<span class="material-symbols-outlined text-[14px]">bolt</span>' +
+        esc(product.power) +
+        "</span>";
+    }
+    if (product.voltage) {
+      quickSpecs +=
+        '<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg text-xs font-medium bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-300">' +
+        '<span class="material-symbols-outlined text-[14px]">power</span>' +
+        esc(product.voltage) +
+        "</span>";
+    }
+    var dimensionsValue = getProductField(product, "product_dimensions") || product.productDimensions;
+    if (dimensionsValue) {
+      quickSpecs +=
+        '<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg text-xs font-medium bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-300">' +
+        '<span class="material-symbols-outlined text-[14px]">straighten</span>' +
+        esc(dimensionsValue) +
+        "</span>";
+    }
+    var quickSpecsHtml = quickSpecs ? '<div class="flex flex-wrap items-center gap-2">' + quickSpecs + "</div>" : "";
+
+    // --- Usage description box ---
+    var usageValue = getProductField(product, "usage") || product.usage;
+    var usageHtml = usageValue
+      ? '<div class="bg-slate-50 dark:bg-slate-800/50 rounded-xl p-4 mt-1 border border-slate-100 dark:border-slate-700">' +
+        '<p class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed whitespace-pre-line">' +
+        esc(usageValue) +
+        "</p></div>"
+      : "";
+
+    // --- Main layout ---
     var html =
-      '<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"><div class="flex flex-col lg:flex-row gap-8 lg:items-start">' +
-      '<div class="lg:w-1/2"><div class="rounded-xl overflow-hidden bg-white dark:bg-slate-800 shadow-lg">' +
+      // Hero section
+      '<section class="fullwidth-bg bg-gradient-to-br from-primary/[0.03] via-transparent to-orange-50/50 dark:from-primary/[0.06] dark:to-orange-900/10">' +
+      '<div class="section-content"><div class="flex flex-col lg:flex-row gap-8 lg:items-start">' +
+      // Image column
+      '<div class="lg:w-1/2">' +
       mediaHtml +
-      "</div></div>" +
+      "</div>" +
+      // Info column
       '<div class="lg:w-1/2 flex flex-col gap-5"><div>' +
       '<div class="flex items-center gap-3 mb-2">' +
       '<span class="text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">' +
@@ -535,6 +600,7 @@
       '<h1 id="detail-title" class="text-2xl lg:text-3xl font-black tracking-tight mb-2">' +
       esc(product.name || product.model) +
       "</h1>" +
+      // Model subtitle
       (product.model && product.name && product.name !== product.model
         ? '<p class="text-sm text-slate-500 dark:text-slate-400 mt-1">' +
           tl("pd_spec_model", "型号") +
@@ -542,14 +608,23 @@
           esc(product.model) +
           "</p>"
         : "") +
-      '<p class="text-base text-slate-500 dark:text-slate-400">' +
+      // Highlights badges row
+      (hlBadges ? '<div class="flex flex-wrap gap-2 mt-2">' + hlBadges + "</div>" : "") +
+      // Category name
+      '<p class="text-base text-slate-500 dark:text-slate-400 mt-2">' +
       esc(getCategoryName(product)) +
-      "</p></div>" +
+      "</p>" +
+      // Quick specs row
+      quickSpecsHtml +
+      // Usage description
+      usageHtml +
+      "</div>" +
+      // CTA buttons (3:1 ratio)
       '<div class="flex items-center gap-3">' +
       '<a href="/quote/?model=' +
       encodeURIComponent(product.model) +
       '"' +
-      ' class="flex-1 bg-primary text-white px-6 py-3 rounded-xl font-bold' +
+      ' class="flex-[3] bg-primary text-white px-6 py-3.5 rounded-xl font-bold' +
       ' flex items-center justify-center gap-2 hover:shadow-lg hover:shadow-primary/20 transition-all text-sm">' +
       '<span class="material-symbols-outlined text-lg">request_quote</span> ' +
       tl("pd_get_quote", "获取报价") +
@@ -563,20 +638,24 @@
           : "") + product.model
       ) +
       '" target="_blank"' +
-      ' class="flex-1 px-6 py-3 rounded-xl font-bold flex items-center justify-center gap-2' +
+      ' class="flex-1 px-6 py-3.5 rounded-xl font-bold flex items-center justify-center gap-2' +
       ' border-2 border-slate-300 dark:border-slate-600 hover:border-primary hover:text-primary transition-all text-sm">' +
       '<span class="material-symbols-outlined text-lg">chat</span> ' +
       tl("pd_contact_sales", "联系销售") +
-      "</a></div></div></div>" +
-      '<section class="mt-8"><h2 class="text-xl font-bold mb-4 flex items-center gap-2">' +
+      "</a></div></div></div></div></section>" +
+      // Specs section
+      '<section class="fullwidth-bg py-12 lg:py-16">' +
+      '<div class="section-content">' +
+      '<h2 class="text-xl font-bold mb-4 flex items-center gap-2">' +
       '<span class="material-symbols-outlined text-primary">specifications</span> ' +
       tl("pd_spec_product_specs", "产品规格") +
       "</h2>" +
       '<div class="grid grid-cols-1 md:grid-cols-2 gap-3">' +
       specCards +
-      "</div></section>" +
-      "</div></div>" +
-      '<section class="mt-12"><div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 bg-primary rounded-xl p-8 text-center">' +
+      "</div></div></section>" +
+      // CTA section (full-width primary bg)
+      '<section class="fullwidth-bg bg-primary py-12 lg:py-16 overflow-hidden">' +
+      '<div class="section-content text-center">' +
       '<h2 class="text-xl font-black text-white mb-3">' +
       tl("pd_custom_solution", "需要定制方案？") +
       "</h2>" +
@@ -589,7 +668,7 @@
       "</a></div></section>";
 
     ce = document.getElementById("product-content");
-    if (ce) ce.className = "w-full py-10";
+    if (ce) ce.className = "w-full";
     if (ce) ce.innerHTML = html;
 
     // Static specs grid
