@@ -33,16 +33,16 @@
 (function (_global) {
   "use strict";
 
-  var _spaState = { currentRoute: global.location.pathname.replace(/\/$/, "") || "/" };
+  var _spaState = { currentRoute: window.location.pathname.replace(/\/$/, "") || "/" };
   var _spaListeners = [];
   var _spaRegs = {};
 
   // ── Event system ──────────────────────────────────────────────────
-  global.__onSpaEvent = function (name, cb) {
+  window.__onSpaEvent = function (name, cb) {
     if (typeof name !== "string" || typeof cb !== "function") return;
     _spaListeners.push({ name: name, cb: cb });
   };
-  global.__spaNavigating = false;
+  window.__spaNavigating = false;
 
   function emitSpaEvent(name, data) {
     for (var i = 0; i < _spaListeners.length; i++) {
@@ -57,24 +57,24 @@
   }
 
   function dispatchSpaLoad() {
-    emitSpaEvent("spa:load", { path: global.location.pathname });
-    var evt = new CustomEvent("spa:load", { detail: { path: global.location.pathname } });
-    global.dispatchEvent(evt);
+    emitSpaEvent("spa:load", { path: window.location.pathname });
+    var evt = new CustomEvent("spa:load", { detail: { path: window.location.pathname } });
+    window.dispatchEvent(evt);
     document.dispatchEvent(evt);
   }
 
   // ── Swup initialization ────────────────────────────────────────────
   function initSwup() {
-    if (global.swupInstance) {
+    if (window.swupInstance) {
       try {
-        global.swupInstance.destroy();
+        window.swupInstance.destroy();
       } catch (e) {
         /* ignore */
       }
-      global.swupInstance = null;
+      window.swupInstance = null;
     }
 
-    if (global.Swup === undefined) {
+    if (window.Swup === undefined) {
       var _swupReady = document.getElementById("swup-js");
       if (_swupReady) {
         _swupReady.addEventListener("load", initSwup);
@@ -89,31 +89,31 @@
 
     var swup;
     try {
-      swup = new global.Swup({
+      swup = new window.Swup({
         containers: ["#spa-content"],
         linkSelector:
           'a[href^="/"]:not([href$=".pdf"]):not([href$=".zip"]):not([href$=".doc"]):not([href*="mailto:"]):not([href*="tel:"]):not([target="_blank"])',
         plugins: [
-          new global.SwupHeadPlugin({
+          new window.SwupHeadPlugin({
             persistTags: 'style[id], style[data-swup-persist], link[rel="stylesheet"][href], script[src]',
             persistAssets: true,
           }),
-          new global.SwupPreloadPlugin({ preloadHoveredLinks: true, preloadInitialPage: false }),
+          new window.SwupPreloadPlugin({ preloadHoveredLinks: true, preloadInitialPage: false }),
         ],
         animateHistoryBrowsing: false,
       });
     } catch (e) {
       console.error("[spa-router] Swup init failed:", e);
-      global.__spaNavigating = false;
+      window.__spaNavigating = false;
       return;
     }
 
-    global.swupInstance = swup;
+    window.swupInstance = swup;
     var swupHooks = swup.hooks || swup;
 
     // ── Client-side device-aware fetch ─────────────────────────────
     (function () {
-      var deviceUtils = global.DeviceUtils;
+      var deviceUtils = window.DeviceUtils;
       if (!deviceUtils || !deviceUtils.getDeviceType) return;
       var deviceType = deviceUtils.getDeviceType();
       var suffixMap = { mobile: "index-mobile.html", tablet: "index-tablet.html", pc: "index-pc.html" };
@@ -187,7 +187,7 @@
     // ── visit:start ──────────────────────────────────────────────────
     var _lastSwupNavStart = 0;
     swupHooks.on("visit:start", function () {
-      global.__spaNavigating = true;
+      window.__spaNavigating = true;
       _lastSwupNavStart = Date.now();
       var skel = document.getElementById("skeleton-overlay");
       if (skel) {
@@ -199,9 +199,9 @@
 
     // ── content:replace ──────────────────────────────────────────────
     swupHooks.on("content:replace", function (visit) {
-      global.__spaNavigating = false;
+      window.__spaNavigating = false;
       _lastSwupNavStart = 0;
-      _spaState.currentRoute = global.location.pathname.replace(/\/$/, "") || "/";
+      _spaState.currentRoute = window.location.pathname.replace(/\/$/, "") || "/";
       var skel = document.getElementById("skeleton-overlay");
       if (skel) {
         var onSkeletonFadeOut = function (e) {
@@ -222,18 +222,18 @@
       }
       var newDoc = visit && visit.to && visit.to.document ? visit.to.document : null;
       reloadPageScripts(newDoc);
-      if (global.Navigator && typeof global.Navigator.updateActive === "function") {
+      if (window.Navigator && typeof window.Navigator.updateActive === "function") {
         var sectionId =
           _spaState.currentRoute === "/"
             ? "/"
             : (_spaState.currentRoute.match(/^\/([^/]+)/) || [])[1] || _spaState.currentRoute;
-        global.Navigator.updateActive(sectionId);
+        window.Navigator.updateActive(sectionId);
       }
-      if (global.SlideMenu && typeof global.SlideMenu.updateActive === "function") {
-        global.SlideMenu.updateActive();
+      if (window.SlideMenu && typeof window.SlideMenu.updateActive === "function") {
+        window.SlideMenu.updateActive();
       }
-      if (global.Footer && typeof global.Footer.updateActive === "function") {
-        global.Footer.updateActive(sectionId);
+      if (window.Footer && typeof window.Footer.updateActive === "function") {
+        window.Footer.updateActive(sectionId);
       }
       dispatchSpaLoad();
     });
@@ -242,16 +242,16 @@
     document.addEventListener(
       "click",
       function (_e) {
-        if (global.__spaNavigating && Date.now() - _lastSwupNavStart > 3000) {
-          global.__spaNavigating = false;
+        if (window.__spaNavigating && Date.now() - _lastSwupNavStart > 3000) {
+          window.__spaNavigating = false;
           _lastSwupNavStart = 0;
         }
       },
       true
     );
 
-    global.addEventListener("popstate", function () {
-      global.scrollTo({ top: 0, left: 0, behavior: "instant" });
+    window.addEventListener("popstate", function () {
+      window.scrollTo({ top: 0, left: 0, behavior: "instant" });
     });
   }
 
@@ -259,28 +259,28 @@
   var SpaRouter = {
     navigate: function (url) {
       if (!url) return;
-      if (global.swupInstance) {
-        global.swupInstance.navigate(url);
+      if (window.swupInstance) {
+        window.swupInstance.navigate(url);
       } else {
-        global.location.href = url;
+        window.location.href = url;
       }
     },
     getCurrentPath: function () {
-      return _spaState.currentRoute || global.location.pathname.replace(/\/$/, "") || "/";
+      return _spaState.currentRoute || window.location.pathname.replace(/\/$/, "") || "/";
     },
     _pendingScroll: null,
   };
 
-  global.SpaRouter = SpaRouter;
+  window.SpaRouter = SpaRouter;
 
   if (document.readyState === "loading") {
     document.addEventListener("DOMContentLoaded", function () {
       initSwup();
-      var path = global.location.pathname;
+      var path = window.location.pathname;
       if (path === "/" || path === "/index.html") {
         history.replaceState(null, "", "/home/");
       }
-      var redirectParam = new URLSearchParams(global.location.search).get("redirect");
+      var redirectParam = new URLSearchParams(window.location.search).get("redirect");
       if (redirectParam) {
         history.replaceState(null, "", redirectParam);
       }

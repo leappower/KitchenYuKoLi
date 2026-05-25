@@ -1091,5 +1091,5 @@
    *  EXPORT
    * ──────────────────────────────────────────────────────────────── */
 
-  global.CustomSelect = CustomSelect;
+  window.CustomSelect = CustomSelect;
 })(window);

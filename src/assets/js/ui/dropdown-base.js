@@ -360,7 +360,7 @@
 
   /* ───────────────────────── PUBLIC API ───────────────────────── */
 
-  global.DropdownBase = {
+  window.DropdownBase = {
     create: createModule,
     esc: esc,
     isTouch: isTouch,

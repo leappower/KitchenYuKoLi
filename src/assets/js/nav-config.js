@@ -90,5 +90,5 @@
     },
   };
 
-  global.NAV_CONFIG = NAV_CONFIG;
+  window.NAV_CONFIG = NAV_CONFIG;
 })(window);

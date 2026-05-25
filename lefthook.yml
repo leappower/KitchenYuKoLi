@@ -18,10 +18,26 @@ pre-commit:
     no-debug:
       glob: "src/**/*.{js,html}"
       run: |
-        if grep -nE 'console\.(log|debug|table)\s*\(' {staged_files} 2>/dev/null | grep -v '^\s*//' | grep -v '__DEVELOPMENT__'; then
-          echo "❌ 发现 console.log/debug/table 残留！请清理后再提交。"
-          echo "   如果确实需要，用条件包裹: if (__DEVELOPMENT__) console.log(...)"
-          exit 1
+        # Find console.log/debug/table lines, exclude those guarded by __DEVELOPMENT__
+        hits=$(grep -nE 'console\.(log|debug|table)\s*\(' {staged_files} 2>/dev/null | grep -v '^\s*//' || true)
+        if [ -n "$hits" ]; then
+          blocked=$(echo "$hits" | while IFS= read -r line; do
+            file=$(echo "$line" | sed 's/:\([0-9]*\):.*//' )
+            lnum=$( echo "$line" | sed 's/[^:]*:\([0-9]*\):.*/\1/' )
+            cur_line=$(echo "$line" | cut -d: -f3-)
+            if echo "$cur_line" | grep -q '__DEVELOPMENT__'; then continue; fi
+            if [ "$lnum" -gt 1 ] 2>/dev/null; then
+              prev_line=$(sed -n "$((lnum-1))p" "$file" 2>/dev/null || true)
+              if echo "$prev_line" | grep -q '__DEVELOPMENT__'; then continue; fi
+            fi
+            echo "$line"
+          done)
+          if [ -n "$blocked" ]; then
+            echo "$blocked"
+            echo "❌ 发现 console.log/debug/table 残留！请清理后再提交。"
+            echo "   如果确实需要，用条件包裹: if (__DEVELOPMENT__) console.log(...)"
+            exit 1
+          fi
         fi
     no-debug-markers:
       glob: "src/**/*.{js,html}"

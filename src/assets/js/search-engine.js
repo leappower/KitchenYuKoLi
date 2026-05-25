@@ -179,5 +179,5 @@
 
   // ─── Export ────────────────────────────────────────────────────
 
-  global.SearchEngine = SearchEngine;
+  window.SearchEngine = SearchEngine;
 })(window);

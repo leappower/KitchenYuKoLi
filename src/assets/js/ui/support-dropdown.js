@@ -7,15 +7,15 @@
   "use strict";
 
   // Guard: DropdownBase must be loaded first
-  if (!global.DropdownBase || typeof global.DropdownBase.esc !== "function") {
+  if (!window.DropdownBase || typeof window.DropdownBase.esc !== "function") {
     // DropdownBase not ready — this script ran out of order (likely SPA re-execution).
     // The first page load ensures correct order via synchronous script tags.
     // For SPA navigation, DropdownBase is already persisted by Swup head plugin.
     return;
   }
 
-  var esc = global.DropdownBase.esc;
-  var isTouch = global.DropdownBase.isTouch;
+  var esc = window.DropdownBase.esc;
+  var isTouch = window.DropdownBase.isTouch;
 
   /* ───────────────────────── DATA ───────────────────────── */
 
@@ -182,7 +182,7 @@
 
   /* ───────────────────────── PUBLIC API ───────────────────────── */
 
-  global.SupportDropdown = global.DropdownBase.create({
+  window.SupportDropdown = window.DropdownBase.create({
     prefix: "sup",
     getItems: function () {
       return SUBSERIES;

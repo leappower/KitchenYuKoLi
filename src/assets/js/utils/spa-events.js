@@ -38,7 +38,7 @@
     registry.set(key, ctrl);
   }
 
-  global.__onSpaEvent = onSpaEvent;
+  window.__onSpaEvent = onSpaEvent;
 
   // Global _spaOn — shared AbortController registry for SPA-safe event binding
   // Used by multiple modules that previously defined this function locally.
@@ -59,5 +59,5 @@
     tgt.addEventListener(evt, fn, { signal: ac.signal });
   }
 
-  global._spaOn = _spaOn;
+  window._spaOn = _spaOn;
 })(window);
