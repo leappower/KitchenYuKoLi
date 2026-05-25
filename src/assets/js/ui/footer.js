@@ -128,7 +128,7 @@
       '<li><a href="/products/stewing/" class="hover:text-white transition-colors" data-i18n="nav_products_stewing">Stewing Series</a></li>' +
       '<li><a href="/products/frying/" class="hover:text-white transition-colors" data-i18n="nav_products_frying">Deep Fryer</a></li>' +
       '<li><a href="/products/steaming/" class="hover:text-white transition-colors" data-i18n="nav_products_steaming">Steaming Series</a></li>' +
-      '<li><a href="/products/cutting/" class="hover:text-white transition-colors" data-i18n="nav_products_cutting">Prep &amp; Cutting</a></li>'
+      '<li><a href="/products/cutting/" class="hover:text-white transition-colors" data-i18n="nav_products_cutting">Prep &amp; Cutting</a></li>' +
       '<li><a href="/applications/canteen/" class="hover:text-white transition-colors" data-i18n="nav_applications_canteen">School/Corporate</a></li>' +
       '<li><a href="/applications/small-restaurant/" class="hover:text-white transition-colors" data-i18n="nav_applications_small_restaurant">Small Restaurant</a></li>' +
       '<li><a href="/applications/central-kitchen/" class="hover:text-white transition-colors" data-i18n="nav_applications_central_kitchen">Central Kitchen</a></li>' +
