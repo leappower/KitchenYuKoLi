@@ -123,18 +123,12 @@
       "<div>" +
       '<h4 class="text-[11px] sm:text-xs font-bold uppercase tracking-wider mb-1 sm:mb-2" data-i18n="footer_products_title">Products</h4>' +
       '<ul class="space-y-0.5 sm:space-y-1 text-[11px] sm:text-xs text-slate-300">' +
-      '<li><a href="/products/" class="hover:text-white transition-colors" data-i18n="nav_products">All Products</a></li>' +
+      '<li><a href="/products/all/" class="hover:text-white transition-colors" data-i18n="nav_products">All Products</a></li>' +
       '<li><a href="/products/stirfry/" class="hover:text-white transition-colors" data-i18n="nav_products_stirfry">Stir-fry Series</a></li>' +
       '<li><a href="/products/stewing/" class="hover:text-white transition-colors" data-i18n="nav_products_stewing">Stewing Series</a></li>' +
       '<li><a href="/products/frying/" class="hover:text-white transition-colors" data-i18n="nav_products_frying">Deep Fryer</a></li>' +
       '<li><a href="/products/steaming/" class="hover:text-white transition-colors" data-i18n="nav_products_steaming">Steaming Series</a></li>' +
-      '<li><a href="/products/cutting/" class="hover:text-white transition-colors" data-i18n="nav_products_cutting">Prep &amp; Cutting</a></li>' +
-      "</ul>" +
-      "</div>" +
-      /* Applications */
-      "<div>" +
-      '<h4 class="text-[11px] sm:text-xs font-bold uppercase tracking-wider mb-1 sm:mb-2" data-i18n="footer_applications_title">Applications</h4>' +
-      '<ul class="space-y-0.5 sm:space-y-1 text-[11px] sm:text-xs text-slate-300">' +
+      '<li><a href="/products/cutting/" class="hover:text-white transition-colors" data-i18n="nav_products_cutting">Prep &amp; Cutting</a></li>'
       '<li><a href="/applications/canteen/" class="hover:text-white transition-colors" data-i18n="nav_applications_canteen">School/Corporate</a></li>' +
       '<li><a href="/applications/small-restaurant/" class="hover:text-white transition-colors" data-i18n="nav_applications_small_restaurant">Small Restaurant</a></li>' +
       '<li><a href="/applications/central-kitchen/" class="hover:text-white transition-colors" data-i18n="nav_applications_central_kitchen">Central Kitchen</a></li>' +
@@ -166,7 +160,7 @@
       "<div>" +
       '<h4 class="text-xs sm:text-sm font-bold uppercase tracking-wider mb-2 sm:mb-4" data-i18n="footer_products_title">Products</h4>' +
       '<ul class="space-y-1 sm:space-y-2 text-xs sm:text-sm text-slate-300">' +
-      '<li><a href="/products/" class="hover:text-white transition-colors" data-i18n="nav_products">All Products</a></li>' +
+      '<li><a href="/products/all/" class="hover:text-white transition-colors" data-i18n="nav_products">All Products</a></li>' +
       '<li><a href="/products/stirfry/" class="hover:text-white transition-colors" data-i18n="nav_products_stirfry">Stir-fry Equipment</a></li>' +
       '<li><a href="/products/stewing/" class="hover:text-white transition-colors" data-i18n="nav_products_stewing">Stewing Equipment</a></li>' +
       '<li><a href="/products/frying/" class="hover:text-white transition-colors" data-i18n="nav_products_frying">Frying Equipment</a></li>' +
