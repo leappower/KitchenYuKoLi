@@ -123,23 +123,23 @@
       "<div>" +
       '<h4 class="text-[11px] sm:text-xs font-bold uppercase tracking-wider mb-1 sm:mb-2" data-i18n="footer_products_title">Products</h4>' +
       '<ul class="space-y-0.5 sm:space-y-1 text-[11px] sm:text-xs text-slate-300">' +
-      '<li><a href="/products/" class="hover:text-white transition-colors" data-i18n="footer_products_all">All Products</a></li>' +
-      '<li><a href="/products/stirfry/" class="hover:text-white transition-colors" data-i18n="footer_products_stirfry">Stir-fry</a></li>' +
-      '<li><a href="/products/stewing/" class="hover:text-white transition-colors" data-i18n="footer_products_stewing">Stewing</a></li>' +
-      '<li><a href="/products/frying/" class="hover:text-white transition-colors" data-i18n="footer_products_frying">Frying</a></li>' +
-      '<li><a href="/products/steaming/" class="hover:text-white transition-colors" data-i18n="footer_products_steaming">Steaming</a></li>' +
-      '<li><a href="/products/cutting/" class="hover:text-white transition-colors" data-i18n="footer_products_cutting">Prep &amp; Cutting</a></li>' +
+      '<li><a href="/products/" class="hover:text-white transition-colors" data-i18n="nav_products">All Products</a></li>' +
+      '<li><a href="/products/stirfry/" class="hover:text-white transition-colors" data-i18n="nav_products_stirfry">Stir-fry Series</a></li>' +
+      '<li><a href="/products/stewing/" class="hover:text-white transition-colors" data-i18n="nav_products_stewing">Stewing Series</a></li>' +
+      '<li><a href="/products/frying/" class="hover:text-white transition-colors" data-i18n="nav_products_frying">Deep Fryer</a></li>' +
+      '<li><a href="/products/steaming/" class="hover:text-white transition-colors" data-i18n="nav_products_steaming">Steaming Series</a></li>' +
+      '<li><a href="/products/cutting/" class="hover:text-white transition-colors" data-i18n="nav_products_cutting">Prep &amp; Cutting</a></li>' +
       "</ul>" +
       "</div>" +
       /* Applications */
       "<div>" +
       '<h4 class="text-[11px] sm:text-xs font-bold uppercase tracking-wider mb-1 sm:mb-2" data-i18n="footer_applications_title">Applications</h4>' +
       '<ul class="space-y-0.5 sm:space-y-1 text-[11px] sm:text-xs text-slate-300">' +
-      '<li><a href="/applications/canteen/" class="hover:text-white transition-colors" data-i18n="footer_app_canteen">School/Corporate</a></li>' +
-      '<li><a href="/applications/small-restaurant/" class="hover:text-white transition-colors" data-i18n="footer_app_restaurant">Small Restaurant</a></li>' +
-      '<li><a href="/applications/central-kitchen/" class="hover:text-white transition-colors" data-i18n="footer_app_central">Central Kitchen</a></li>' +
-      '<li><a href="/applications/restaurant-chain/" class="hover:text-white transition-colors" data-i18n="footer_app_chain">Chain</a></li>' +
-      '<li><a href="/applications/cloud-kitchen/" class="hover:text-white transition-colors" data-i18n="footer_app_cloud">Cloud Kitchen</a></li>' +
+      '<li><a href="/applications/canteen/" class="hover:text-white transition-colors" data-i18n="nav_applications_canteen">School/Corporate</a></li>' +
+      '<li><a href="/applications/small-restaurant/" class="hover:text-white transition-colors" data-i18n="nav_applications_small_restaurant">Small Restaurant</a></li>' +
+      '<li><a href="/applications/central-kitchen/" class="hover:text-white transition-colors" data-i18n="nav_applications_central_kitchen">Central Kitchen</a></li>' +
+      '<li><a href="/applications/restaurant-chain/" class="hover:text-white transition-colors" data-i18n="nav_applications_chain_restaurant">Chain</a></li>' +
+      '<li><a href="/applications/cloud-kitchen/" class="hover:text-white transition-colors" data-i18n="nav_applications_cloud_kitchen">Cloud Kitchen</a></li>' +
       "</ul>" +
       "</div>" +
       "</div>" +
@@ -166,35 +166,35 @@
       "<div>" +
       '<h4 class="text-xs sm:text-sm font-bold uppercase tracking-wider mb-2 sm:mb-4" data-i18n="footer_products_title">Products</h4>' +
       '<ul class="space-y-1 sm:space-y-2 text-xs sm:text-sm text-slate-300">' +
-      '<li><a href="/products/" class="hover:text-white transition-colors" data-i18n="footer_products_all">All Products</a></li>' +
-      '<li><a href="/products/stirfry/" class="hover:text-white transition-colors" data-i18n="footer_products_stirfry">Stir-fry Equipment</a></li>' +
-      '<li><a href="/products/stewing/" class="hover:text-white transition-colors" data-i18n="footer_products_stewing">Stewing Equipment</a></li>' +
-      '<li><a href="/products/frying/" class="hover:text-white transition-colors" data-i18n="footer_products_frying">Frying Equipment</a></li>' +
-      '<li><a href="/products/steaming/" class="hover:text-white transition-colors" data-i18n="footer_products_steaming">Steaming Equipment</a></li>' +
-      '<li><a href="/products/cutting/" class="hover:text-white transition-colors" data-i18n="footer_products_cutting">Prep &amp; Cutting</a></li>' +
+      '<li><a href="/products/" class="hover:text-white transition-colors" data-i18n="nav_products">All Products</a></li>' +
+      '<li><a href="/products/stirfry/" class="hover:text-white transition-colors" data-i18n="nav_products_stirfry">Stir-fry Equipment</a></li>' +
+      '<li><a href="/products/stewing/" class="hover:text-white transition-colors" data-i18n="nav_products_stewing">Stewing Equipment</a></li>' +
+      '<li><a href="/products/frying/" class="hover:text-white transition-colors" data-i18n="nav_products_frying">Frying Equipment</a></li>' +
+      '<li><a href="/products/steaming/" class="hover:text-white transition-colors" data-i18n="nav_products_steaming">Steaming Equipment</a></li>' +
+      '<li><a href="/products/cutting/" class="hover:text-white transition-colors" data-i18n="nav_products_cutting">Prep &amp; Cutting</a></li>' +
       "</ul>" +
       "</div>" +
       /* Applications */
       "<div>" +
       '<h4 class="text-xs sm:text-sm font-bold uppercase tracking-wider mb-2 sm:mb-4" data-i18n="footer_applications_title">Applications</h4>' +
       '<ul class="space-y-1 sm:space-y-2 text-xs sm:text-sm text-slate-300">' +
-      '<li><a href="/applications/canteen/" class="hover:text-white transition-colors" data-i18n="footer_app_canteen">School &amp; Corporate Canteens</a></li>' +
-      '<li><a href="/applications/small-restaurant/" class="hover:text-white transition-colors" data-i18n="footer_app_restaurant">Small Restaurants</a></li>' +
-      '<li><a href="/applications/central-kitchen/" class="hover:text-white transition-colors" data-i18n="footer_app_central">Central Kitchens</a></li>' +
-      '<li><a href="/applications/restaurant-chain/" class="hover:text-white transition-colors" data-i18n="footer_app_chain">Restaurant Chains</a></li>' +
-      '<li><a href="/applications/cloud-kitchen/" class="hover:text-white transition-colors" data-i18n="footer_app_cloud">Cloud Kitchens</a></li>' +
+      '<li><a href="/applications/canteen/" class="hover:text-white transition-colors" data-i18n="nav_applications_canteen">School &amp; Corporate Canteens</a></li>' +
+      '<li><a href="/applications/small-restaurant/" class="hover:text-white transition-colors" data-i18n="nav_applications_small_restaurant">Small Restaurants</a></li>' +
+      '<li><a href="/applications/central-kitchen/" class="hover:text-white transition-colors" data-i18n="nav_applications_central_kitchen">Central Kitchens</a></li>' +
+      '<li><a href="/applications/restaurant-chain/" class="hover:text-white transition-colors" data-i18n="nav_applications_chain_restaurant">Restaurant Chains</a></li>' +
+      '<li><a href="/applications/cloud-kitchen/" class="hover:text-white transition-colors" data-i18n="nav_applications_cloud_kitchen">Cloud Kitchens</a></li>' +
       "</ul>" +
       "</div>" +
       /* Support */
       "<div>" +
       '<h4 class="text-xs sm:text-sm font-bold uppercase tracking-wider mb-2 sm:mb-4" data-i18n="footer_support_title">Support</h4>' +
       '<ul class="space-y-1 sm:space-y-2 text-xs sm:text-sm text-slate-300">' +
-      '<li><a href="/support/" class="hover:text-white transition-colors" data-i18n="footer_support_services">Technical Services</a></li>' +
-      '<li><a href="/support/warranty/" class="hover:text-white transition-colors" data-i18n="footer_support_warranty">Warranty</a></li>' +
-      '<li><a href="/support/faq/" class="hover:text-white transition-colors" data-i18n="footer_support_faq">FAQ</a></li>' +
-      '<li><a href="/support/installation/" class="hover:text-white transition-colors" data-i18n="footer_support_installation">Installation Guide</a></li>' +
-      '<li><a href="/support/spare-parts/" class="hover:text-white transition-colors" data-i18n="footer_support_spare_parts">Spare Parts</a></li>' +
-      '<li><a href="/support/training/" class="hover:text-white transition-colors" data-i18n="footer_support_training">Training</a></li>' +
+      '<li><a href="/support/" class="hover:text-white transition-colors" data-i18n="nav_support_services">Technical Services</a></li>' +
+      '<li><a href="/support/warranty/" class="hover:text-white transition-colors" data-i18n="nav_support_warranty">Warranty</a></li>' +
+      '<li><a href="/support/faq/" class="hover:text-white transition-colors" data-i18n="nav_support_faq">FAQ</a></li>' +
+      '<li><a href="/support/installation/" class="hover:text-white transition-colors" data-i18n="nav_support_installation">Installation Guide</a></li>' +
+      '<li><a href="/support/spare-parts/" class="hover:text-white transition-colors" data-i18n="nav_support_spare_parts">Spare Parts</a></li>' +
+      '<li><a href="/support/training/" class="hover:text-white transition-colors" data-i18n="nav_support_training">Training</a></li>' +
       "</ul>" +
       "</div>" +
       /* Legal */
