@@ -117,7 +117,7 @@
   function buildMobileFooterHtml() {
     return (
       '<div class="bg-slate-900 text-white">' +
-      '<div class="max-w-7xl mx-auto px-6 py-6">' +
+      '<div class="max-w-4xl mx-auto px-6 py-6">' +
       '<div class="grid grid-cols-2 gap-6 mb-6">' +
       /* Products */
       "<div>" +
