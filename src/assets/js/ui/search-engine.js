@@ -87,38 +87,41 @@
    * Each product gets an additional `_searchName` field combining all searchable fields.
    */
   function buildSearchableProducts() {
-    var utils = window.AppUtils;
-    if (!utils || typeof utils.buildProductCatalog !== "function") return [];
-
-    var products = utils.buildProductCatalog();
-    return products.map(function (p) {
-      var translatedName = getProductTranslation(p, "name", p.name || p.model);
-      var translatedCategory = tr(
-        utils.getCategoryI18nKey ? utils.getCategoryI18nKey(p.category) : "filter_" + p.category,
-        p.category
-      );
-      var translatedBadge = getProductTranslation(p, "badge", p.badge || "");
-      var translatedScenarios = p.scenarios || "";
-      var translatedUsage = getProductTranslation(p, "throughput", p.throughput || "");
-
+    // Use product-data-table.js (146 products) instead of static series
+    var table = window.PRODUCT_DATA_TABLE || [];
+    var catI18n = {
+      "翻炒系列": "nav_products_stirfry",
+      "炖煮系列": "nav_products_stewing",
+      "蒸煮系列": "nav_products_steaming",
+      "煎炸系列": "nav_products_frying",
+      "切配系列": "nav_products_cutting",
+      "辅助系列": "nav_products_other"
+    };
+    return table.map(function (p) {
+      var model = p.model || "";
+      var name = p.name || model;
+      var category = p.category || "";
+      var catKey = catI18n[category] || "filter_" + category;
+      var translatedCategory = typeof window.t === "function"
+        ? (window.t(catKey) || category) : category;
+      var translatedName = typeof window.t === "function"
+        ? (window.t("product_" + model + "_name") || name) : name;
+      var imgSrc = "";
+      if (p.images && p.images.length > 0) {
+        var primary = p.images.find(function(i) { return i.isPrimary; }) || p.images[0];
+        if (primary && primary.filePath) imgSrc = primary.filePath;
+      }
+      if (!imgSrc) imgSrc = "/assets/images/products/" + model + "-1.webp";
       return Object.assign({}, p, {
-        _displayName: translatedName || (translatedCategory + " " + (p.model || "")).trim(),
+        _displayName: translatedName,
         _displayCategory: translatedCategory,
-        _displayBadge: translatedBadge,
         _searchText: [
-          translatedName,
-          p.model,
-          translatedCategory,
-          p.category,
-          translatedScenarios,
-          translatedUsage,
-          p.voltage,
-          p.power,
-          translatedBadge,
-        ]
-          .filter(Boolean)
-          .join(" ")
-          .toLowerCase(),
+          translatedName, model, translatedCategory, category,
+          p.specifications || "", p.throughput || "",
+          p.voltage || "", p.power || "", p.material || "", p.scenarios || ""
+        ].filter(Boolean).join(" ").toLowerCase(),
+        productImage: imgSrc,
+        imageUrl: imgSrc
       });
     });
   }
@@ -317,7 +320,7 @@
         '<a class="ios-search-result-item' +
         hlClass +
         '" ' +
-        'href="/products/" data-search-idx="' +
+        'href="/products/" + (results[idx] && results[idx].model ? "detail/" + encodeURIComponent(results[idx].model) + "/" : "") + " data-search-idx="' +
         idx +
         '" role="option">' +
         '<div class="ios-search-result-img">' +
