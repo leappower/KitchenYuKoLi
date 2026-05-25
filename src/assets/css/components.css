@@ -957,7 +957,7 @@ html.dark .mobile-menu-cta-bar {
   cursor: pointer;
   -webkit-tap-highlight-color: transparent;
   text-decoration: none;
-  transition: all 0.15s ease;
+  transition: background-color 0.15s ease, color 0.15s ease;
 }
 .mobile-menu-cta-btn.primary {
   background: #ec5b13;
@@ -1805,7 +1805,7 @@ html.dark .lang-option.is-active span {
   box-shadow: 0 0 0 2px rgb(236, 91, 19, 0.5);
 }
 .compare-btn {
-  transition: all 0.2s ease;
+  transition: opacity 0.2s ease;
 }
 .compare-btn:hover {
   opacity: 0.85;

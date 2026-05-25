@@ -372,8 +372,11 @@
     overlayEl.classList.remove("is-open");
     panelEl.classList.remove("is-open");
 
-    // 等待动画完成后再移除 DOM（350ms 与 CSS transition 保持一致）
-    setTimeout(function () {
+    // 等待 transitionend 后移除 DOM
+    var _menuCloseDone = false;
+    function _cleanupMenuDOM() {
+      if (_menuCloseDone) return;
+      _menuCloseDone = true;
       if (overlayEl && overlayEl.parentNode) {
         overlayEl.parentNode.removeChild(overlayEl);
       }
@@ -383,7 +386,21 @@
       overlayEl = null;
       panelEl = null;
       document.body.style.overflow = "";
-    }, 350);
+    }
+    overlayEl.addEventListener("transitionend", function onOverlayEnd(e) {
+      if (e.propertyName === "opacity") {
+        overlayEl.removeEventListener("transitionend", onOverlayEnd);
+        _cleanupMenuDOM();
+      }
+    });
+    panelEl.addEventListener("transitionend", function onPanelEnd(e) {
+      if (e.propertyName === "transform") {
+        panelEl.removeEventListener("transitionend", onPanelEnd);
+        _cleanupMenuDOM();
+      }
+    });
+    // Safety net: if transitionend never fires (reduced-motion, etc.)
+    setTimeout(_cleanupMenuDOM, 400);
   }
 
   /* ================================================================
@@ -745,14 +762,24 @@
 
     searchOverlayEl.classList.remove("is-open");
 
-    setTimeout(function () {
+    var _searchCloseDone = false;
+    function _cleanupSearchDOM() {
+      if (_searchCloseDone) return;
+      _searchCloseDone = true;
       if (searchOverlayEl && searchOverlayEl.parentNode) {
         searchOverlayEl.parentNode.removeChild(searchOverlayEl);
       }
       searchOverlayEl = null;
       searchInputEl = null;
       document.body.style.overflow = "";
-    }, 300);
+    }
+    searchOverlayEl.addEventListener("transitionend", function onEnd(e) {
+      if (e.propertyName === "opacity" || e.propertyName === "transform") {
+        searchOverlayEl.removeEventListener("transitionend", onEnd);
+        _cleanupSearchDOM();
+      }
+    });
+    setTimeout(_cleanupSearchDOM, 400);
   }
 
   /**
@@ -909,15 +936,19 @@
     initSmartHeader();
   }
 
-  if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", function () {
-      // Retry after a short delay in case navigator.js hasn't mounted yet
-      tryInit();
-      setTimeout(tryInit, 50);
-    });
-  } else {
+  function tryInitWithTranslation() {
     tryInit();
-    setTimeout(tryInit, 50);
+    // Also retry once translations are ready (menu items may update)
+    if (window.translationManager && window.translationManager.ready && !window.translationManager.isInitialized) {
+      window.translationManager.ready.then(function () {
+        tryInit();
+      });
+    }
+  }
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", tryInitWithTranslation);
+  } else {
+    tryInitWithTranslation();
   }
 
   // bfcache（前进/后退缓存）恢复时重新初始化

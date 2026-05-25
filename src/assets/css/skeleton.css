@@ -30,11 +30,6 @@
   opacity: 1;
   transition: opacity 0.25s ease-out;
 }
-#skeleton-overlay[hidden] {
-  display: block;
-  opacity: 0;
-  /* keep pointer-events:none so clicks pass through during fade-out */
-}
 html.dark #skeleton-overlay {
   background-color: var(--color-bg-dark);
 }

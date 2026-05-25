@@ -659,10 +659,20 @@
         bar.classList.add("is-focused");
       });
 
+      // Use mousedown on bar to detect if user clicked inside the search bar
+      // before blur fires. This avoids the blur/click race condition.
+      bar.addEventListener("mousedown", function (e) {
+        if (bar.contains(e.target)) {
+          bar._mousedownInside = true;
+        }
+      }, true);
       searchInput.addEventListener("blur", function () {
-        setTimeout(function () {
-          if (document.activeElement !== searchInput) removeFocus();
-        }, 150);
+        // If mousedown was inside bar, a click is pending; don't remove focus yet
+        if (bar._mousedownInside) {
+          bar._mousedownInside = false;
+          return;
+        }
+        removeFocus();
       });
 
       searchInput.addEventListener("input", updateClearVisibility);
@@ -875,13 +885,12 @@
       if (cacheReady) {
         tm.applyTranslations();
       } else {
-        // Cache not ready — translation fetch still in progress
-        // Retry after 500ms to let fetch complete
-        setTimeout(function () {
-          if (tm.translationsCache && tm.translationsCache.has(cacheKey)) {
+        // Cache not ready — wait for translationManager.ready instead of polling
+        if (tm.ready) {
+          tm.ready.then(function () {
             tm.applyTranslations();
-          }
-        }, 500);
+          });
+        }
       }
     }
   }
@@ -1091,9 +1100,7 @@
       if (_langPanel.contains(e.target) || anchorBtn.contains(e.target)) return;
       _closeLangPanel();
     };
-    setTimeout(function () {
-      document.addEventListener("click", _langOutsideClickHandler, true);
-    }, 0);
+    document.addEventListener("click", _langOutsideClickHandler, true);
   }
 
   function _openLangMobile(selectEl, anchorBtn) {
@@ -1325,16 +1332,12 @@
    * Can be called multiple times safely (idempotent by nature).
    */
   function mountNavigator() {
-    /* 如果 translationManager 尚未初始化（defer 顺序不确定），
-     * 延迟重试直到就绪，避免渲染英文 fallback 文本。 */
-    if (!window.translationManager || !window.translationManager.isInitialized) {
-      if (!window._navMountRetries) window._navMountRetries = 0;
-      if (window._navMountRetries < 50) {
-        window._navMountRetries++;
-        setTimeout(mountNavigator, 20);
-        return;
-      }
-      // 超时后强制挂载（translationManager 可能永远不可用）
+    /* 如果 translationManager 尚未初始化，等待 ready Promise 而非轮询。 */
+    if (window.translationManager && !window.translationManager.isInitialized && window.translationManager.ready) {
+      window.translationManager.ready.then(function () {
+        mountNavigator();
+      });
+      return;
     }
     /* Close all open dropdowns before remounting */
     closeOtherDropdowns(null);

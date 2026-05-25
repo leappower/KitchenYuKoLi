@@ -221,19 +221,28 @@
     document,
     "spa:load",
     function () {
-      if (root.translationManager && root.translationManager.isInitialized) {
-        root.translationManager
-          .applyTranslations()
-          .then(function () {
-            requestAnimationFrame(function () {
+      if (root.translationManager) {
+        var applyAndRefresh = function () {
+          root.translationManager
+            .applyTranslations()
+            .then(function () {
+              requestAnimationFrame(function () {
+                refreshCurrencyUI();
+              });
+            })
+            .catch(function () {
               refreshCurrencyUI();
             });
-          })
-          .catch(function () {
-            setTimeout(refreshCurrencyUI, 300);
-          });
+        };
+        if (root.translationManager.isInitialized) {
+          applyAndRefresh();
+        } else if (root.translationManager.ready) {
+          root.translationManager.ready.then(applyAndRefresh);
+        } else {
+          refreshCurrencyUI();
+        }
       } else {
-        setTimeout(refreshCurrencyUI, 300);
+        refreshCurrencyUI();
       }
     },
     "spa:load:currencyRefresh"

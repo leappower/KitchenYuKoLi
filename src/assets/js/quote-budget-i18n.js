@@ -181,10 +181,10 @@
       return false;
     }
     if (!tryRegisterOnManager()) {
-      var attempts = 0;
-      var timer = setInterval(function () {
-        if (tryRegisterOnManager() || ++attempts > 20) clearInterval(timer);
-      }, 200);
+      // Wait for translationManager.ready instead of polling
+      if (window.translationManager && window.translationManager.ready) {
+        window.translationManager.ready.then(tryRegisterOnManager);
+      }
     }
   }
 

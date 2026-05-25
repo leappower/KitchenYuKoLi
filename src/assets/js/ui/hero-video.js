@@ -124,7 +124,7 @@
 
     /* ── 更新播放按钮外观 ── */
     function updatePlayBtn(isPlaying, isEnded) {
-      console.log(
+      if (__DEVELOPMENT__) console.log(
         "[hv] updatePlayBtn: isPlaying=" +
           isPlaying +
           " isEnded=" +
@@ -418,7 +418,7 @@
     container.addEventListener("click", function (e) {
       // Ignore clicks on mute/fullscreen buttons (they have their own handlers)
       if (e.target.closest(".hero-video-mute, .hero-video-fullscreen")) return;
-      console.log(
+      if (__DEVELOPMENT__) console.log(
         "[hv] container.click: state.isPlaying=" +
           state.isPlaying +
           " target=" +
@@ -455,7 +455,7 @@
       e.stopPropagation();
       // Ignore clicks that originate from native controls (they handle pause/play themselves)
       if (_videoClickTimer) {
-        console.log("[hv] video.click: SUPPRESSED (native control click)");
+        if (__DEVELOPMENT__) console.log("[hv] video.click: SUPPRESSED (native control click)");
         clearTimeout(_videoClickTimer);
         _videoClickTimer = null;
         return;
@@ -471,22 +471,27 @@
       }
     });
     // When native controls trigger pause/play, suppress the next video click
+    // Use a simple flag set synchronously (no setTimeout race)
+    var _nativeTogglePending = false;
     video.addEventListener("pause", function () {
-      _videoClickTimer = setTimeout(function () {
-        _videoClickTimer = null;
-      }, 300);
+      _nativeTogglePending = true;
+      requestAnimationFrame(function () { _nativeTogglePending = false; });
     });
     video.addEventListener("play", function () {
-      _videoClickTimer = setTimeout(function () {
-        _videoClickTimer = null;
-      }, 300);
+      _nativeTogglePending = true;
+      requestAnimationFrame(function () { _nativeTogglePending = false; });
+    });
+    // Override _videoClickTimer check to use flag
+    Object.defineProperty(container, "_clickSuppressed", {
+      get: function () { return _nativeTogglePending; },
+      configurable: true
     });
 
     /* ── Mobile: tap to toggle controls + playBtn visibility ── */
     container.addEventListener("touchstart", function (e) {
       // Don't interfere with scroll/swipe gestures
       if (e.touches.length > 1) return;
-      console.log("[hv] container.touchstart: state.isPlaying=" + state.isPlaying + " isTouch=" + isTouchDevice());
+      if (__DEVELOPMENT__) console.log("[hv] container.touchstart: state.isPlaying=" + state.isPlaying + " isTouch=" + isTouchDevice());
       showControls();
       // Show native controls when playing, hide when paused
       video.controls = state.isPlaying;
@@ -612,7 +617,9 @@
     document,
     "spa:ready",
     function () {
-      setTimeout(init, 100);
+      requestAnimationFrame(function () {
+        requestAnimationFrame(init);
+      });
     },
     "spa:ready:init"
   );
