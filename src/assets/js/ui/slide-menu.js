@@ -389,13 +389,13 @@
     }
     overlayEl.addEventListener("transitionend", function onOverlayEnd(e) {
       if (e.propertyName === "opacity") {
-        overlayEl.removeEventListener("transitionend", onOverlayEnd);
+        if (overlayEl) overlayEl.removeEventListener("transitionend", onOverlayEnd);
         _cleanupMenuDOM();
       }
     });
     panelEl.addEventListener("transitionend", function onPanelEnd(e) {
       if (e.propertyName === "transform") {
-        panelEl.removeEventListener("transitionend", onPanelEnd);
+        if (panelEl) panelEl.removeEventListener("transitionend", onPanelEnd);
         _cleanupMenuDOM();
       }
     });
