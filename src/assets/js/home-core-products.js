@@ -41,7 +41,7 @@
     var fp = primary ? primary.filePath : product.images[0].filePath;
     // Defensive: normalize _N.webp → -N.webp (file rename migration)
     if (fp) {
-      fp = fp.replace(/_(\d+\.webp)$/, '-$1');
+      fp = fp.replace(/_(\d+\.webp)$/, "-$1");
     }
     return fp;
   }
@@ -242,8 +242,10 @@
           '<h3 class="text-lg font-black mb-1">' +
           escHtml(p.model) +
           "</h3>" +
-          (p.nameEn
-            ? '<p class="text-sm text-slate-500 dark:text-slate-400 line-clamp-2 mb-4">' + escHtml(p.nameEn) + "</p>"
+          (typeof getProductField === "function" && getProductField(p, "name")
+            ? '<p class="text-sm text-slate-500 dark:text-slate-400 line-clamp-2 mb-4">' +
+              escHtml(getProductField(p, "name")) +
+              "</p>"
             : '<div class="mb-4"></div>') +
           '<div class="flex justify-between items-center pt-3 border-t border-slate-100 dark:border-slate-700">' +
           (p.power
@@ -417,12 +419,11 @@
       html += "</div>";
       if (hasMore) {
         html +=
-          '<button id="hcp-load-more-mobile" class="w-full py-2.5 rounded-xl border border-slate-300 dark:border-slate-600 text-sm font-bold text-primary hover:bg-primary hover:text-white hover:border-primary transition-all flex items-center justify-center gap-2" onclick="(function(){var b=document.getElementById(\'hcp-hidden-mobile\');var btn=document.getElementById(\'hcp-load-more-mobile\');if(b&&btn){b.style.display=\'\';btn.style.display=\'none\';window.translationManager&&window.translationManager.applyTo(b.parentElement);}})()">' +
+          "<button id=\"hcp-load-more-mobile\" class=\"w-full py-2.5 rounded-xl border border-slate-300 dark:border-slate-600 text-sm font-bold text-primary hover:bg-primary hover:text-white hover:border-primary transition-all flex items-center justify-center gap-2\" onclick=\"(function(){var b=document.getElementById('hcp-hidden-mobile');var btn=document.getElementById('hcp-load-more-mobile');if(b&&btn){b.style.display='';btn.style.display='none';window.translationManager&&window.translationManager.applyTo(b.parentElement);}})()\">" +
           '<span class="material-symbols-outlined text-lg">expand_more</span> ' +
           escHtml(tl("home_show_more", "更多产品")) +
           "</button>";
-        html +=
-          '<div id="hcp-hidden-mobile" style="display:none" class="flex flex-col gap-3">';
+        html += '<div id="hcp-hidden-mobile" style="display:none" class="flex flex-col gap-3">';
         restProducts.forEach(function (p) {
           html += buildCard(p);
         });
