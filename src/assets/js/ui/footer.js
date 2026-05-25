@@ -117,36 +117,59 @@
   function buildMobileFooterHtml() {
     return (
       '<div class="bg-slate-900 text-white">' +
-      '<div class="section-content max-w-[1920px] mx-auto px-3 sm:px-5 xl:px-10 py-4 sm:py-6">' +
-      '<div class="grid grid-cols-2 gap-4 sm:gap-6 mb-4 sm:mb-6">' +
+      '<div class="section-content mx-auto px-3 sm:px-5 py-4 sm:py-6" style="max-width:1440px">' +
+      // Mobile (<768px): compact 1-column, Tablet (768-1024): 2-column grid
+      '<div class="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 mb-4 sm:mb-6">' +
       /* Products */
-      "<div>" +
-      '<h4 class="text-[11px] sm:text-xs font-bold uppercase tracking-wider mb-1 sm:mb-2" data-i18n="footer_products_title">Products</h4>' +
-      '<ul class="space-y-0.5 sm:space-y-1 text-[11px] sm:text-xs text-slate-300">' +
+      '<div>' +
+      '<h4 class="text-xs sm:text-sm font-bold uppercase tracking-wider mb-2" data-i18n="footer_products_title">Products</h4>' +
+      '<ul class="space-y-1 text-xs sm:text-sm text-slate-300">' +
       '<li><a href="/products/all/" class="hover:text-white transition-colors" data-i18n="nav_products">All Products</a></li>' +
       '<li><a href="/products/stirfry/" class="hover:text-white transition-colors" data-i18n="nav_products_stirfry">Stir-fry Series</a></li>' +
       '<li><a href="/products/stewing/" class="hover:text-white transition-colors" data-i18n="nav_products_stewing">Stewing Series</a></li>' +
       '<li><a href="/products/frying/" class="hover:text-white transition-colors" data-i18n="nav_products_frying">Deep Fryer</a></li>' +
       '<li><a href="/products/steaming/" class="hover:text-white transition-colors" data-i18n="nav_products_steaming">Steaming Series</a></li>' +
       '<li><a href="/products/cutting/" class="hover:text-white transition-colors" data-i18n="nav_products_cutting">Prep &amp; Cutting</a></li>' +
+      '</ul></div>' +
+      /* Applications (shown on md+) */
+      '<div class="hidden md:block">' +
+      '<h4 class="text-xs sm:text-sm font-bold uppercase tracking-wider mb-2" data-i18n="footer_applications_title">Applications</h4>' +
+      '<ul class="space-y-1 text-xs sm:text-sm text-slate-300">' +
       '<li><a href="/applications/canteen/" class="hover:text-white transition-colors" data-i18n="nav_applications_canteen">School/Corporate</a></li>' +
       '<li><a href="/applications/small-restaurant/" class="hover:text-white transition-colors" data-i18n="nav_applications_small_restaurant">Small Restaurant</a></li>' +
       '<li><a href="/applications/central-kitchen/" class="hover:text-white transition-colors" data-i18n="nav_applications_central_kitchen">Central Kitchen</a></li>' +
       '<li><a href="/applications/restaurant-chain/" class="hover:text-white transition-colors" data-i18n="nav_applications_chain_restaurant">Chain</a></li>' +
       '<li><a href="/applications/cloud-kitchen/" class="hover:text-white transition-colors" data-i18n="nav_applications_cloud_kitchen">Cloud Kitchen</a></li>' +
-      "</ul>" +
-      "</div>" +
-      "</div>" +
+      '</ul></div>' +
+      /* Support (shown on md+) */
+      '<div class="hidden md:block">' +
+      '<h4 class="text-xs sm:text-sm font-bold uppercase tracking-wider mb-2" data-i18n="footer_support_title">Support</h4>' +
+      '<ul class="space-y-1 text-xs sm:text-sm text-slate-300">' +
+      '<li><a href="/support/" class="hover:text-white transition-colors" data-i18n="nav_support_services">Service Centers</a></li>' +
+      '<li><a href="/support/warranty/" class="hover:text-white transition-colors" data-i18n="nav_support_warranty">Warranty</a></li>' +
+      '<li><a href="/support/faq/" class="hover:text-white transition-colors" data-i18n="nav_support_faq">Technical FAQ</a></li>' +
+      '<li><a href="/support/installation/" class="hover:text-white transition-colors" data-i18n="nav_support_installation">Installation</a></li>' +
+      '<li><a href="/support/spare-parts/" class="hover:text-white transition-colors" data-i18n="nav_support_spare_parts">Spare Parts</a></li>' +
+      '<li><a href="/support/training/" class="hover:text-white transition-colors" data-i18n="nav_support_training">Training</a></li>' +
+      '</ul></div>' +
+      /* Legal (shown on md+) */
+      '<div class="hidden md:block">' +
+      '<h4 class="text-xs sm:text-sm font-bold uppercase tracking-wider mb-2" data-i18n="footer_legal_title">Legal</h4>' +
+      '<ul class="space-y-1 text-xs sm:text-sm text-slate-300">' +
+      '<li><a href="/privacy/" class="hover:text-white transition-colors" data-i18n="footer_legal_privacy_policy">Privacy Policy</a></li>' +
+      '<li><a href="/terms/" class="hover:text-white transition-colors" data-i18n="footer_legal_user_agreement">User Agreement</a></li>' +
+      '</ul></div>' +
+      '</div>' +
       /* Legal + Copyright */
       '<div class="border-t border-white/20 pt-3 sm:pt-4 flex flex-col items-center gap-1.5 sm:gap-2 text-[10px] sm:text-xs text-slate-400">' +
       '<div class="flex gap-3 sm:gap-4">' +
       '<a href="/privacy/" class="hover:text-white transition-colors" data-i18n="footer_legal_privacy_policy">Privacy Policy</a>' +
       '<a href="/terms/" class="hover:text-white transition-colors" data-i18n="footer_legal_user_agreement">User Agreement</a>' +
-      "</div>" +
+      '</div>' +
       '<p data-i18n="footer_copyright"></p>' +
-      "</div>" +
-      "</div>" +
-      "</div>"
+      '</div>' +
+      '</div>' +
+      '</div>'
     );
   }
 
