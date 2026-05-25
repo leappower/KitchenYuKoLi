@@ -27,8 +27,8 @@
   var safeCall =
     _h.safeCall ||
     function (fnName, args) {
-      if (typeof global[fnName] === "function") {
-        return global[fnName].apply(null, args || []);
+      if (typeof window[fnName] === "function") {
+        return window[fnName].apply(null, args || []);
       }
       console.warn("[PageInteractions] " + fnName + " not found — make sure contacts.js is loaded.");
     };

@@ -22,7 +22,7 @@
   var _safeCall =
     _h.safeCall ||
     function (fnName, args) {
-      if (typeof global[fnName] === "function") return global[fnName].apply(null, args || []);
+      if (typeof window[fnName] === "function") return window[fnName].apply(null, args || []);
       console.warn("[PageEffects] " + fnName + " not found.");
     };
   var directText =
@@ -58,7 +58,7 @@
       // [style in components.css]
     }
 
-    if (!("IntersectionObserver" in global)) return; // graceful degradation
+    if (!("IntersectionObserver" in window)) return; // graceful degradation
 
     var targets = [].slice.call(
       document.querySelectorAll(
