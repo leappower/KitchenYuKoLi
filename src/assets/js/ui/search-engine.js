@@ -102,10 +102,8 @@
       var name = p.name || model;
       var category = p.category || "";
       var catKey = catI18n[category] || "filter_" + category;
-      var translatedCategory = typeof window.t === "function"
-        ? (window.t(catKey) || category) : category;
-      var translatedName = typeof window.t === "function"
-        ? (window.t("product_" + model + "_name") || name) : name;
+      var translatedCategory = tr(catKey, category) || category;
+      var translatedName = tr("product_" + model + "_name", name || model) || name || model;
       var imgSrc = "";
       if (p.images && p.images.length > 0) {
         var primary = p.images.find(function(i) { return i.isPrimary; }) || p.images[0];
@@ -116,7 +114,7 @@
         _displayName: translatedName,
         _displayCategory: translatedCategory,
         _searchText: [
-          translatedName, model, translatedCategory, category,
+          translatedName || name, model, translatedCat || category, category,
           p.specifications || "", p.throughput || "",
           p.voltage || "", p.power || "", p.material || "", p.scenarios || ""
         ].filter(Boolean).join(" ").toLowerCase(),
