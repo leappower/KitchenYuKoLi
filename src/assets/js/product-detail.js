@@ -272,46 +272,66 @@
       if (!bcEl) return;
       var catKey = product.category || "";
       var slugMap = (window.Breadcrumb && window.Breadcrumb.CATEGORY_KEY_TO_SLUG) || {};
-      var _slugMapRev = (window.Breadcrumb && window.Breadcrumb.SLUG_TO_CATEGORY_KEY) || {};
       var slug = slugMap[catKey] || "";
-      var catLabel = slug
-        ? ((window.Breadcrumb && window.Breadcrumb.PRODUCT_SLUGS && window.Breadcrumb.PRODUCT_SLUGS[slug]) || {}).label
-        : "";
+      var catInfo =
+        slug && window.Breadcrumb && window.Breadcrumb.PRODUCT_SLUGS ? window.Breadcrumb.PRODUCT_SLUGS[slug] : {};
+      var catLabel = catInfo.label || "";
+      var catIcon = catInfo.icon || "inventory_2";
       // Track referrer for back navigation
       if (slug) sessionStorage.setItem("pdp_referrer", "/products/" + slug + "/");
       var model = product.model || "";
-      // PC/Tablet breadcrumb
+      // PC/Tablet breadcrumb — chevron_right + badge (matches steaming/food-factory style)
+      var chevron = '<span class="material-symbols-outlined text-xs text-slate-300">chevron_right</span>';
+      var badgeHtml =
+        catLabel && slug
+          ? chevron +
+            '<a href="/products/' +
+            slug +
+            '/" class="hover:text-primary transition-colors">' +
+            '<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-primary/10 text-primary text-xs font-bold uppercase tracking-wider">' +
+            '<span class="material-symbols-outlined text-[10px] leading-none">' +
+            catIcon +
+            "</span>" +
+            "<span>" +
+            catLabel +
+            "</span></span></a>" +
+            chevron
+          : chevron;
       var html =
         '<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-4 pb-0 hidden md:block">' +
-        '<nav class="text-sm text-slate-500 dark:text-slate-400" aria-label="Breadcrumb">' +
-        '<ol class="flex items-center gap-1 flex-wrap">' +
-        '<li><a href="/products/" class="hover:text-primary transition-colors">Products</a></li>' +
-        '<li class="mx-1.5 text-slate-300 dark:text-slate-600">/</li>';
-      if (catLabel && slug) {
-        html +=
-          '<li><a href="/products/' +
-          slug +
-          '/" class="hover:text-primary transition-colors">' +
-          catLabel +
-          "</a></li>" +
-          '<li class="mx-1.5 text-slate-300 dark:text-slate-600">/</li>';
-      }
-      html +=
-        '<li><span class="text-slate-900 dark:text-white font-medium">' + model + "</span></li>" + "</ol></nav></div>";
-      // Mobile back bar
+        '<nav class="flex items-center gap-2 flex-wrap" aria-label="Breadcrumb">' +
+        '<a href="/products/" class="text-sm text-slate-500 hover:text-primary transition-colors" data-i18n="nav_products">Products</a>' +
+        badgeHtml +
+        '<span class="text-sm text-slate-900 dark:text-white font-medium">' +
+        model +
+        "</span>" +
+        "</nav></div>";
+      // Mobile breadcrumb — back button + single-line (matches mobile steaming style)
+      var mChevron = '<span class="material-symbols-outlined text-xs text-slate-300">chevron_right</span>';
+      var mobileBadgeHtml =
+        catLabel && slug
+          ? mChevron +
+            '<span class="inline-flex items-center gap-0.5 px-2 py-0.5 rounded-full bg-primary/10 text-primary text-[10px] font-bold uppercase tracking-wider">' +
+            '<span class="material-symbols-outlined text-[10px] leading-none">' +
+            catIcon +
+            "</span>" +
+            "<span>" +
+            catLabel +
+            "</span></span>" +
+            mChevron
+          : mChevron;
       html +=
         '<div class="max-w-7xl mx-auto px-4 pt-3 pb-0 md:hidden">' +
-        '<div class="flex items-center gap-3">' +
-        '<button onclick="window.Breadcrumb&&window.Breadcrumb.goBack()" class="flex items-center justify-center w-9 h-9 rounded-full bg-slate-100 dark:bg-slate-800 hover:bg-primary hover:text-white text-slate-600 dark:text-slate-400 transition-all" aria-label="' +
+        '<div class="flex items-center gap-2">' +
+        '<button onclick="window.Breadcrumb&&window.Breadcrumb.goBack()" class="flex items-center justify-center w-8 h-8 rounded-full bg-slate-100 dark:bg-slate-800 hover:bg-primary hover:text-white text-slate-600 dark:text-slate-400 transition-all flex-shrink-0" aria-label="' +
         tl("pd_back", "返回") +
         '">' +
-        '<span class="material-symbols-outlined text-xl">arrow_back</span></button>' +
-        '<div><div class="text-xs text-slate-500 dark:text-slate-400">' +
-        (catLabel || tl("pd_product_center", "产品中心")) +
-        "</div>" +
-        '<div class="text-sm font-bold text-slate-900 dark:text-white truncate max-w-[200px]">' +
+        '<span class="material-symbols-outlined text-lg">arrow_back</span></button>' +
+        '<a href="/products/" class="text-xs text-slate-400 hover:text-primary transition-colors flex-shrink-0" data-i18n="nav_products">Products</a>' +
+        mobileBadgeHtml +
+        '<span class="text-xs font-bold text-slate-900 dark:text-white truncate">' +
         model +
-        "</div></div>" +
+        "</span>" +
         "</div></div>";
       bcEl.innerHTML = html;
     })();
