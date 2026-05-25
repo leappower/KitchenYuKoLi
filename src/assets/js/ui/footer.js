@@ -1,9 +1,9 @@
 /**
- * footer.js — Mobile & Tablet Bottom Navigation Bar
+ * footer.js — Mobile & Tablet Bottom Navigation Bar + PC Site Footer
  *
  * Mobile (<768px): 4 items — 首页/产品/案例/WhatsApp
  * Tablet (768-1024px): 6 items — 首页/产品/场景/回报/关于/WhatsApp
- * PC (>=1024px): hidden
+ * PC (>=1024px): Full site footer (4-column) with legal modal triggers
  */
 (function (window) {
   "use strict";
@@ -113,6 +113,66 @@
     );
   }
 
+  /* ─── PC Footer ─── */
+  function buildPCFooterHtml() {
+    return (
+      '<div class="bg-slate-900 text-white">' +
+      '<div class="max-w-7xl mx-auto px-6 py-12">' +
+      '<div class="grid grid-cols-2 md:grid-cols-4 gap-8">' +
+      /* Products */
+      "<div>" +
+      '<h4 class="text-sm font-bold uppercase tracking-wider mb-4" data-i18n="footer_products_title">Products</h4>' +
+      '<ul class="space-y-2 text-sm text-slate-300">' +
+      '<li><a href="/products/" class="hover:text-white transition-colors" data-i18n="footer_products_all">All Products</a></li>' +
+      '<li><a href="/products/stirfry/" class="hover:text-white transition-colors" data-i18n="footer_products_stirfry">Stir-fry Equipment</a></li>' +
+      '<li><a href="/products/stewing/" class="hover:text-white transition-colors" data-i18n="footer_products_stewing">Stewing Equipment</a></li>' +
+      '<li><a href="/products/frying/" class="hover:text-white transition-colors" data-i18n="footer_products_frying">Frying Equipment</a></li>' +
+      '<li><a href="/products/steaming/" class="hover:text-white transition-colors" data-i18n="footer_products_steaming">Steaming Equipment</a></li>' +
+      '<li><a href="/products/cutting/" class="hover:text-white transition-colors" data-i18n="footer_products_cutting">Prep &amp; Cutting</a></li>' +
+      "</ul>" +
+      "</div>" +
+      /* Applications */
+      "<div>" +
+      '<h4 class="text-sm font-bold uppercase tracking-wider mb-4" data-i18n="footer_applications_title">Applications</h4>' +
+      '<ul class="space-y-2 text-sm text-slate-300">' +
+      '<li><a href="/applications/canteen/" class="hover:text-white transition-colors" data-i18n="footer_app_canteen">School &amp; Corporate Canteens</a></li>' +
+      '<li><a href="/applications/small-restaurant/" class="hover:text-white transition-colors" data-i18n="footer_app_restaurant">Small Restaurants</a></li>' +
+      '<li><a href="/applications/central-kitchen/" class="hover:text-white transition-colors" data-i18n="footer_app_central">Central Kitchens</a></li>' +
+      '<li><a href="/applications/restaurant-chain/" class="hover:text-white transition-colors" data-i18n="footer_app_chain">Restaurant Chains</a></li>' +
+      '<li><a href="/applications/cloud-kitchen/" class="hover:text-white transition-colors" data-i18n="footer_app_cloud">Cloud Kitchens</a></li>' +
+      "</ul>" +
+      "</div>" +
+      /* Support */
+      "<div>" +
+      '<h4 class="text-sm font-bold uppercase tracking-wider mb-4" data-i18n="footer_support_title">Support</h4>' +
+      '<ul class="space-y-2 text-sm text-slate-300">' +
+      '<li><a href="/support/" class="hover:text-white transition-colors" data-i18n="footer_support_services">Technical Services</a></li>' +
+      '<li><a href="/support/warranty/" class="hover:text-white transition-colors" data-i18n="footer_support_warranty">Warranty</a></li>' +
+      '<li><a href="/support/faq/" class="hover:text-white transition-colors" data-i18n="footer_support_faq">FAQ</a></li>' +
+      '<li><a href="/support/installation/" class="hover:text-white transition-colors" data-i18n="footer_support_installation">Installation Guide</a></li>' +
+      '<li><a href="/support/spare-parts/" class="hover:text-white transition-colors" data-i18n="footer_support_spare_parts">Spare Parts</a></li>' +
+      '<li><a href="/support/training/" class="hover:text-white transition-colors" data-i18n="footer_support_training">Training</a></li>' +
+      '<li><a href="/profit-calculator/" class="hover:text-white transition-colors" data-i18n="footer_profit_calc">Profit Calculator</a></li>' +
+      '<li><a href="/compare/" class="hover:text-white transition-colors" data-i18n="footer_compare">Compare Products</a></li>' +
+      "</ul>" +
+      "</div>" +
+      /* Legal */
+      "<div>" +
+      '<h4 class="text-sm font-bold uppercase tracking-wider mb-4" data-i18n="footer_legal_title">Legal</h4>' +
+      '<ul class="space-y-2 text-sm text-slate-300">' +
+      '<li><a href="/privacy/" class="hover:text-white transition-colors" data-i18n="footer_legal_privacy_policy">Privacy Policy</a></li>' +
+      '<li><a href="/terms/" class="hover:text-white transition-colors" data-i18n="footer_legal_user_agreement">User Agreement</a></li>' +
+      "</ul>" +
+      "</div>" +
+      "</div>" +
+      '<div class="border-t border-white/20 mt-8 pt-8 text-center text-sm text-slate-400">' +
+      '<p data-i18n="footer_copyright"></p>' +
+      "</div>" +
+      "</div>" +
+      "</div>"
+    );
+  }
+
   function mount() {
     var footers = document.querySelectorAll('footer[data-component="footer"]');
 
@@ -132,11 +192,10 @@
       var _variant = footer.getAttribute("data-variant") || "mobile";
       var activeId = footer.getAttribute("data-active") || "";
 
-      // PC (>=1024px) → hidden
-      // Resolve real variant based on screen width
+      // PC (>=1024px) → render full site footer
       if (w >= 1024) {
-        footer.innerHTML = "";
-        footer.style.display = "none";
+        footer.style.display = "";
+        footer.innerHTML = buildPCFooterHtml();
         continue;
       }
 
