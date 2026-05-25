@@ -74,6 +74,7 @@ rm -f "$DIST/assets/video/aboutus.mp4"
 cp "$SRC/index.html" "$DIST/index.html"
 [ -f "$SRC/404.html" ] && cp "$SRC/404.html" "$DIST/404.html"
 [ -f "$SRC/robots.txt" ] && cp "$SRC/robots.txt" "$DIST/robots.txt"
+[ -f "$SRC/manifest.json" ] && cp "$SRC/manifest.json" "$DIST/manifest.json"
 
 # ─── 5. Version bump (production only) ───────────────────────────
 if [ "$BUILD_MODE" != "dev" ]; then

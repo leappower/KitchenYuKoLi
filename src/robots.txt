@@ -1,8 +1,6 @@
 User-agent: *
 Allow: /
-Disallow: /api/
-Disallow: /admin/
-Disallow: /products/detail/
+Disallow: /compare/
 Disallow: /quote/
 Disallow: /thank-you/
 

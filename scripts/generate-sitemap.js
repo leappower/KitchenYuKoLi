@@ -5,9 +5,9 @@ const path = require('path');
 const BASE_URL = 'https://www.kitchen.yukoli.com';
 const PAGES_DIR = path.join(__dirname, '..', 'dist');
 const EXCLUDE_DIRS = ['assets', 'pages', 'node_modules'];
-const EXCLUDE = ['products/detail', 'quote', 'thank-you', 'landing'];
-const PRIORITY_MAP = { '': 1.0, 'home': 1.0, 'products': 0.9, 'applications': 0.8 };
-const FREQ_MAP = { 'home': 'weekly', 'products': 'daily', 'applications': 'monthly' };
+const EXCLUDE = ['products/detail', 'quote', 'thank-you'];
+const PRIORITY_MAP = { '': 1.0, 'home': 1.0, 'products': 0.9, 'applications': 0.8, 'privacy': 0.3, 'terms': 0.3 };
+const FREQ_MAP = { 'home': 'weekly', 'products': 'daily', 'applications': 'monthly', 'privacy': 'yearly', 'terms': 'yearly' };
 
 function findPages(dir, base) {
   const results = [];

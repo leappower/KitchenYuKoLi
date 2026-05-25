@@ -237,6 +237,13 @@ function patchHtmlPaths(html) {
  * The script is injected with `defer` to match the pattern used in pages that
  * already include it statically (e.g. home, landing, 404).
  */
+function injectManifest(html) {
+  if (/<link[^>]+manifest[^>]*>/.test(html)) return html;
+  var bp = BASE_PATH ? BASE_PATH.replace(/\/$/, '') : '';
+  var href = bp + '/manifest.json';
+  return html.replace('</head>', '  <link rel="manifest" href="' + href + '"/>\n  </head>');
+}
+
 function injectLangUrlSync(html) {
   // Already injected — skip (idempotent)
   if (/\[i18n-url-sync\]/.test(html)) return html;
@@ -433,6 +440,7 @@ function generateResponsiveEntry(route) {
     html = injectLangUrlSync(html);
     html = injectPreTranslate(html);
     html = injectLangRegistry(html);
+    html = injectManifest(html);
     html = injectNavConfig(html);
     html = injectCoreScripts(html, route.slug);
     html = injectTranslationsDropdown(html);
@@ -524,6 +532,7 @@ function generateRouteIndex(route) {
   html = injectPreTranslate(html);
   // Inject lang-registry.js before translations.js (if not already present)
   html = injectLangRegistry(html);
+  html = injectManifest(html);
   html = injectNavConfig(html);
   html = injectCoreScripts(html, route.slug);
   html = injectTranslationsDropdown(html);
@@ -808,6 +817,24 @@ function main() {
   if (aliasCount === 0) {
     log('  (none needed)');
   }
+
+  // Step 2.8: Inject manifest.json link into all device-specific HTML files
+  log('\nStep 2.8: Injecting manifest link...');
+  let manifestCount = 0;
+  for (const route of ROUTES) {
+    const variants = ['index-pc.html', 'index-tablet.html', 'index-mobile.html'];
+    for (const v of variants) {
+      const fp = path.join(DIST_DIR, route.slug, v);
+      if (!fs.existsSync(fp)) continue;
+      let h = fs.readFileSync(fp, 'utf-8');
+      if (/<link[^>]+manifest[^>]*>/.test(h)) continue;
+      const bp = BASE_PATH ? BASE_PATH.replace(/\/$/, '') : '';
+      h = h.replace('</head>', '  <link rel="manifest" href="' + bp + '/manifest.json"/>\n  </head>');
+      fs.writeFileSync(fp, h);
+      manifestCount++;
+    }
+  }
+  log('  ✓ Injected manifest link into ' + manifestCount + ' files');
 
   // Step 3: Generate root index.html
   log('\nStep 3: Generating root index.html...');
