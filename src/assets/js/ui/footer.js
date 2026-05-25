@@ -113,6 +113,49 @@
     );
   }
 
+  /* ─── Mobile/Tablet Site Footer (compact) ─── */
+  function buildMobileFooterHtml() {
+    return (
+      '<div class="bg-slate-900 text-white">' +
+      '<div class="max-w-7xl mx-auto px-6 py-6">' +
+      '<div class="grid grid-cols-2 gap-6 mb-6">' +
+      /* Products */
+      "<div>" +
+      '<h4 class="text-xs font-bold uppercase tracking-wider mb-2" data-i18n="footer_products_title">Products</h4>' +
+      '<ul class="space-y-1 text-xs text-slate-300">' +
+      '<li><a href="/products/" class="hover:text-white transition-colors" data-i18n="footer_products_all">All Products</a></li>' +
+      '<li><a href="/products/stirfry/" class="hover:text-white transition-colors" data-i18n="footer_products_stirfry">Stir-fry</a></li>' +
+      '<li><a href="/products/stewing/" class="hover:text-white transition-colors" data-i18n="footer_products_stewing">Stewing</a></li>' +
+      '<li><a href="/products/frying/" class="hover:text-white transition-colors" data-i18n="footer_products_frying">Frying</a></li>' +
+      '<li><a href="/products/steaming/" class="hover:text-white transition-colors" data-i18n="footer_products_steaming">Steaming</a></li>' +
+      '<li><a href="/products/cutting/" class="hover:text-white transition-colors" data-i18n="footer_products_cutting">Prep &amp; Cutting</a></li>' +
+      "</ul>" +
+      "</div>" +
+      /* Applications */
+      "<div>" +
+      '<h4 class="text-xs font-bold uppercase tracking-wider mb-2" data-i18n="footer_applications_title">Applications</h4>' +
+      '<ul class="space-y-1 text-xs text-slate-300">' +
+      '<li><a href="/applications/canteen/" class="hover:text-white transition-colors" data-i18n="footer_app_canteen">School/Corporate</a></li>' +
+      '<li><a href="/applications/small-restaurant/" class="hover:text-white transition-colors" data-i18n="footer_app_restaurant">Small Restaurant</a></li>' +
+      '<li><a href="/applications/central-kitchen/" class="hover:text-white transition-colors" data-i18n="footer_app_central">Central Kitchen</a></li>' +
+      '<li><a href="/applications/restaurant-chain/" class="hover:text-white transition-colors" data-i18n="footer_app_chain">Chain</a></li>' +
+      '<li><a href="/applications/cloud-kitchen/" class="hover:text-white transition-colors" data-i18n="footer_app_cloud">Cloud Kitchen</a></li>' +
+      "</ul>" +
+      "</div>" +
+      "</div>" +
+      /* Legal + Copyright */
+      '<div class="border-t border-white/20 pt-4 flex flex-col items-center gap-2 text-xs text-slate-400">' +
+      '<div class="flex gap-4">' +
+      '<a href="/privacy/" class="hover:text-white transition-colors" data-i18n="footer_legal_privacy_policy">Privacy Policy</a>' +
+      '<a href="/terms/" class="hover:text-white transition-colors" data-i18n="footer_legal_user_agreement">User Agreement</a>' +
+      "</div>" +
+      '<p data-i18n="footer_copyright"></p>' +
+      "</div>" +
+      "</div>" +
+      "</div>"
+    );
+  }
+
   /* ─── PC Footer ─── */
   function buildPCFooterHtml() {
     return (
@@ -201,7 +244,7 @@
       var resolvedVariant = w >= 768 ? "tablet" : "mobile";
 
       footer.style.display = "";
-      footer.innerHTML = buildBarHtml(resolvedVariant, activeId);
+      footer.innerHTML = buildMobileFooterHtml() + buildBarHtml(resolvedVariant, activeId);
     }
 
     // Fade-in animation
