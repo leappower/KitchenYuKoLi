@@ -270,7 +270,7 @@
       '<img loading="eager" ' +
       'src="' +
       basePath +
-      '/assets/images/logo.webp" ' +
+      '/assets/images/logo/logo.webp" ' +
       'alt="Yukoli" width="32" height="32" ' +
       'style="width:32px;height:32px;object-fit:contain" />' +
       "</a>" +
@@ -560,7 +560,7 @@
       '<img loading="eager" ' +
       'src="' +
       basePath +
-      '/assets/images/logo.webp" ' +
+      '/assets/images/logo/logo.webp" ' +
       'alt="Yukoli" width="44" height="44" ' +
       'style="width:44px;height:44px;object-fit:contain" />' +
       "</a>" +

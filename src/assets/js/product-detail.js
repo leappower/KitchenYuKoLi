@@ -495,7 +495,7 @@
           '" class="w-full h-full object-contain p-4 lg:p-6" src="' +
           imgSrc +
           '"' +
-          " onerror=\"this.src='/assets/images/default.webp'\">" +
+          " onerror=\"this.src='/assets/images/products/default.webp'\">" +
           '<div class="pdp-play-btn absolute inset-0 flex items-center justify-center bg-black/20 group-hover:bg-black/30 transition-colors">' +
           '<div class="w-16 h-16 rounded-full bg-white/90 flex items-center justify-center shadow-xl group-hover:scale-110 transition-transform">' +
           '<span class="material-symbols-outlined text-3xl text-primary ml-1">play_arrow</span>' +
@@ -513,7 +513,7 @@
           '" class="w-full h-full object-contain p-4 lg:p-6" src="' +
           imgSrc +
           '"' +
-          " onerror=\"this.src='/assets/images/default.webp'\">" +
+          " onerror=\"this.src='/assets/images/products/default.webp'\">" +
           '<div class="pdp-play-btn absolute inset-0 flex items-center justify-center bg-black/20 group-hover:bg-black/30 transition-colors">' +
           '<div class="w-16 h-16 rounded-full bg-white/90 flex items-center justify-center shadow-xl group-hover:scale-110 transition-transform">' +
           '<span class="material-symbols-outlined text-3xl text-primary ml-1">play_arrow</span>' +
@@ -528,7 +528,7 @@
         ' class="w-full h-full object-contain p-4 lg:p-6" src="' +
         imgSrc +
         '"' +
-        " onerror=\"this.src='/assets/images/default.webp'\">" +
+        " onerror=\"this.src='/assets/images/products/default.webp'\">" +
         // Zoom hint overlay (PC only)
         '<div class="hidden lg:flex absolute top-3 right-3 w-8 h-8 rounded-full bg-white/80 items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity shadow">' +
         '<span class="material-symbols-outlined text-sm text-slate-600">zoom_in</span></div>';
