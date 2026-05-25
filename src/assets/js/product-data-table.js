@@ -1,6 +1,6 @@
 // Product Data Table — Updated with AI-filled data
 // DO NOT EDIT MANUALLY
-// Updated: 2026-05-25T13:53:33.820Z
+// Updated: 2026-05-25T14:04:44.502Z
 window.PRODUCT_DATA_TABLE = [
   {
     model: "DLB-TBS30",
@@ -65,7 +65,7 @@ window.PRODUCT_DATA_TABLE = [
     isActive: true,
     images: [
       {
-        filePath: "/assets/images/products/DLB-TBQ30-2.webp",
+        filePath: "/assets/images/products/DLB-TBQ30-1.webp",
         isPrimary: true,
         isHires: false,
       },
@@ -106,7 +106,7 @@ window.PRODUCT_DATA_TABLE = [
     isActive: true,
     images: [
       {
-        filePath: "/assets/images/products/DLB-TQBQ30-3.webp",
+        filePath: "/assets/images/products/DLB-TQBQ30-1.webp",
         isPrimary: true,
         isHires: false,
       },
@@ -142,7 +142,7 @@ window.PRODUCT_DATA_TABLE = [
     isActive: true,
     images: [
       {
-        filePath: "/assets/images/products/DLB-4BQ30-4.webp",
+        filePath: "/assets/images/products/DLB-4BQ30-1.webp",
         isPrimary: true,
         isHires: false,
       },
@@ -183,7 +183,7 @@ window.PRODUCT_DATA_TABLE = [
     isActive: true,
     images: [
       {
-        filePath: "/assets/images/products/DLB-4QBQ30-5.webp",
+        filePath: "/assets/images/products/DLB-4QBQ30-1.webp",
         isPrimary: true,
         isHires: false,
       },
@@ -224,7 +224,7 @@ window.PRODUCT_DATA_TABLE = [
     isActive: true,
     images: [
       {
-        filePath: "/assets/images/products/DLB-TBS40-6.webp",
+        filePath: "/assets/images/products/DLB-TBS40-1.webp",
         isPrimary: true,
         isHires: false,
       },
@@ -265,7 +265,7 @@ window.PRODUCT_DATA_TABLE = [
     isActive: true,
     images: [
       {
-        filePath: "/assets/images/products/DLB-TBS50-7.webp",
+        filePath: "/assets/images/products/DLB-TBS50-1.webp",
         isPrimary: true,
         isHires: false,
       },
@@ -306,7 +306,7 @@ window.PRODUCT_DATA_TABLE = [
     isActive: true,
     images: [
       {
-        filePath: "/assets/images/products/DLB-TZS40-8.webp",
+        filePath: "/assets/images/products/DLB-TZS40-1.webp",
         isPrimary: true,
         isHires: false,
       },
@@ -347,7 +347,7 @@ window.PRODUCT_DATA_TABLE = [
     isActive: true,
     images: [
       {
-        filePath: "/assets/images/products/DLB-TZS50-9.webp",
+        filePath: "/assets/images/products/DLB-TZS50-1.webp",
         isPrimary: true,
         isHires: false,
       },
@@ -388,7 +388,7 @@ window.PRODUCT_DATA_TABLE = [
     isActive: true,
     images: [
       {
-        filePath: "/assets/images/products/DLB-TGS30-10.webp",
+        filePath: "/assets/images/products/DLB-TGS30-1.webp",
         isPrimary: true,
         isHires: false,
       },
@@ -429,7 +429,7 @@ window.PRODUCT_DATA_TABLE = [
     isActive: true,
     images: [
       {
-        filePath: "/assets/images/products/DLB-TGD30-11.webp",
+        filePath: "/assets/images/products/DLB-TGD30-1.webp",
         isPrimary: true,
         isHires: false,
       },
@@ -470,7 +470,7 @@ window.PRODUCT_DATA_TABLE = [
     isActive: true,
     images: [
       {
-        filePath: "/assets/images/products/DLB-GD30-12.webp",
+        filePath: "/assets/images/products/DLB-GD30-1.webp",
         isPrimary: true,
         isHires: false,
       },
@@ -511,7 +511,7 @@ window.PRODUCT_DATA_TABLE = [
     isActive: true,
     images: [
       {
-        filePath: "/assets/images/products/DLB-TGD36-13.webp",
+        filePath: "/assets/images/products/DLB-TGD36-1.webp",
         isPrimary: true,
         isHires: false,
       },
@@ -552,7 +552,7 @@ window.PRODUCT_DATA_TABLE = [
     isActive: true,
     images: [
       {
-        filePath: "/assets/images/products/DLB-GD36-14.webp",
+        filePath: "/assets/images/products/DLB-GD36-1.webp",
         isPrimary: true,
         isHires: false,
       },
@@ -653,7 +653,7 @@ window.PRODUCT_DATA_TABLE = [
     isActive: true,
     images: [
       {
-        filePath: "/assets/images/products/DLB-TGD40-15.webp",
+        filePath: "/assets/images/products/DLB-TGD40-1.webp",
         isPrimary: true,
         isHires: false,
       },
@@ -694,7 +694,7 @@ window.PRODUCT_DATA_TABLE = [
     isActive: true,
     images: [
       {
-        filePath: "/assets/images/products/DLB-TGQ30J-16.webp",
+        filePath: "/assets/images/products/DLB-TGQ30J-1.webp",
         isPrimary: true,
         isHires: false,
       },
@@ -730,7 +730,7 @@ window.PRODUCT_DATA_TABLE = [
     isActive: true,
     images: [
       {
-        filePath: "/assets/images/products/DLB-GQ30J-17.webp",
+        filePath: "/assets/images/products/DLB-GQ30J-1.webp",
         isPrimary: true,
         isHires: false,
       },
@@ -766,7 +766,7 @@ window.PRODUCT_DATA_TABLE = [
     isActive: true,
     images: [
       {
-        filePath: "/assets/images/products/DLB-TGQ36J-18.webp",
+        filePath: "/assets/images/products/DLB-TGQ36J-1.webp",
         isPrimary: true,
         isHires: false,
       },
@@ -862,7 +862,7 @@ window.PRODUCT_DATA_TABLE = [
     isActive: true,
     images: [
       {
-        filePath: "/assets/images/products/DLB-TGQ40J-20.webp",
+        filePath: "/assets/images/products/DLB-TGQ40J-1.webp",
         isPrimary: true,
         isHires: false,
       },
@@ -898,7 +898,7 @@ window.PRODUCT_DATA_TABLE = [
     isActive: true,
     images: [
       {
-        filePath: "/assets/images/products/DLB-TGQ30-21.webp",
+        filePath: "/assets/images/products/DLB-TGQ30-1.webp",
         isPrimary: true,
         isHires: false,
       },
@@ -934,7 +934,7 @@ window.PRODUCT_DATA_TABLE = [
     isActive: true,
     images: [
       {
-        filePath: "/assets/images/products/DLB-GQ30-22.webp",
+        filePath: "/assets/images/products/DLB-GQ30-1.webp",
         isPrimary: true,
         isHires: false,
       },
@@ -970,7 +970,7 @@ window.PRODUCT_DATA_TABLE = [
     isActive: true,
     images: [
       {
-        filePath: "/assets/images/products/DLB-GQ36-23.webp",
+        filePath: "/assets/images/products/DLB-GQ36-1.webp",
         isPrimary: true,
         isHires: false,
       },
@@ -1006,7 +1006,7 @@ window.PRODUCT_DATA_TABLE = [
     isActive: true,
     images: [
       {
-        filePath: "/assets/images/products/DLB-GQ30T-24.webp",
+        filePath: "/assets/images/products/DLB-GQ30T-1.webp",
         isPrimary: true,
         isHires: false,
       },
@@ -1042,7 +1042,7 @@ window.PRODUCT_DATA_TABLE = [
     isActive: true,
     images: [
       {
-        filePath: "/assets/images/products/DLB-GQ35T-25.webp",
+        filePath: "/assets/images/products/DLB-GQ35T-1.webp",
         isPrimary: true,
         isHires: false,
       },
@@ -1078,7 +1078,7 @@ window.PRODUCT_DATA_TABLE = [
     isActive: true,
     images: [
       {
-        filePath: "/assets/images/products/DLB-BQ40T-26.webp",
+        filePath: "/assets/images/products/DLB-BQ40T-1.webp",
         isPrimary: true,
         isHires: false,
       },
@@ -1114,7 +1114,7 @@ window.PRODUCT_DATA_TABLE = [
     isActive: true,
     images: [
       {
-        filePath: "/assets/images/products/DLB-TGQ40-27.webp",
+        filePath: "/assets/images/products/DLB-TGQ40-1.webp",
         isPrimary: true,
         isHires: false,
       },
@@ -1150,7 +1150,7 @@ window.PRODUCT_DATA_TABLE = [
     isActive: true,
     images: [
       {
-        filePath: "/assets/images/products/DLB-GB50-28.webp",
+        filePath: "/assets/images/products/DLB-GB50-1.webp",
         isPrimary: true,
         isHires: false,
       },
@@ -1186,7 +1186,7 @@ window.PRODUCT_DATA_TABLE = [
     isActive: true,
     images: [
       {
-        filePath: "/assets/images/products/DLB-GC50-29.webp",
+        filePath: "/assets/images/products/DLB-GC50-1.webp",
         isPrimary: true,
         isHires: false,
       },
@@ -1222,7 +1222,7 @@ window.PRODUCT_DATA_TABLE = [
     isActive: true,
     images: [
       {
-        filePath: "/assets/images/products/DLB-GB60-30.webp",
+        filePath: "/assets/images/products/DLB-GB60-1.webp",
         isPrimary: true,
         isHires: false,
       },
@@ -1258,7 +1258,7 @@ window.PRODUCT_DATA_TABLE = [
     isActive: true,
     images: [
       {
-        filePath: "/assets/images/products/DLB-GC60-31.webp",
+        filePath: "/assets/images/products/DLB-GC60-1.webp",
         isPrimary: true,
         isHires: false,
       },
@@ -1294,7 +1294,7 @@ window.PRODUCT_DATA_TABLE = [
     isActive: true,
     images: [
       {
-        filePath: "/assets/images/products/DLB-GB70-32.webp",
+        filePath: "/assets/images/products/DLB-GB70-1.webp",
         isPrimary: true,
         isHires: false,
       },
@@ -1330,7 +1330,7 @@ window.PRODUCT_DATA_TABLE = [
     isActive: true,
     images: [
       {
-        filePath: "/assets/images/products/DLB-GC70-33.webp",
+        filePath: "/assets/images/products/DLB-GC70-1.webp",
         isPrimary: true,
         isHires: false,
       },
@@ -1366,7 +1366,7 @@ window.PRODUCT_DATA_TABLE = [
     isActive: true,
     images: [
       {
-        filePath: "/assets/images/products/DLB-GB80-34.webp",
+        filePath: "/assets/images/products/DLB-GB80-1.webp",
         isPrimary: true,
         isHires: false,
       },
@@ -1403,7 +1403,7 @@ window.PRODUCT_DATA_TABLE = [
     isActive: true,
     images: [
       {
-        filePath: "/assets/images/products/DLB-GQ70-35.webp",
+        filePath: "/assets/images/products/DLB-GQ70-1.webp",
         isPrimary: true,
         isHires: false,
       },
@@ -1439,7 +1439,7 @@ window.PRODUCT_DATA_TABLE = [
     isActive: true,
     images: [
       {
-        filePath: "/assets/images/products/DLB-GC80-36.webp",
+        filePath: "/assets/images/products/DLB-GC80-1.webp",
         isPrimary: true,
         isHires: false,
       },
@@ -1475,7 +1475,7 @@ window.PRODUCT_DATA_TABLE = [
     isActive: true,
     images: [
       {
-        filePath: "/assets/images/products/DLB-GB90-37.webp",
+        filePath: "/assets/images/products/DLB-GB90-1.webp",
         isPrimary: true,
         isHires: false,
       },
@@ -1511,7 +1511,7 @@ window.PRODUCT_DATA_TABLE = [
     isActive: true,
     images: [
       {
-        filePath: "/assets/images/products/DLB-GC90-38.webp",
+        filePath: "/assets/images/products/DLB-GC90-1.webp",
         isPrimary: true,
         isHires: false,
       },
@@ -1578,7 +1578,7 @@ window.PRODUCT_DATA_TABLE = [
     isActive: true,
     images: [
       {
-        filePath: "/assets/images/products/DLB-GQ50-40.webp",
+        filePath: "/assets/images/products/DLB-GQ50-1.webp",
         isPrimary: true,
         isHires: false,
       },
@@ -1615,7 +1615,7 @@ window.PRODUCT_DATA_TABLE = [
     isActive: true,
     images: [
       {
-        filePath: "/assets/images/products/DLB-GQ60-41.webp",
+        filePath: "/assets/images/products/DLB-GQ60-1.webp",
         isPrimary: true,
         isHires: false,
       },
@@ -1652,7 +1652,7 @@ window.PRODUCT_DATA_TABLE = [
     isActive: true,
     images: [
       {
-        filePath: "/assets/images/products/DLB-GQ80-42.webp",
+        filePath: "/assets/images/products/DLB-GQ80-1.webp",
         isPrimary: true,
         isHires: false,
       },
@@ -1689,7 +1689,7 @@ window.PRODUCT_DATA_TABLE = [
     isActive: true,
     images: [
       {
-        filePath: "/assets/images/products/DLB-GQ90-43.webp",
+        filePath: "/assets/images/products/DLB-GQ90-1.webp",
         isPrimary: true,
         isHires: false,
       },
@@ -1725,7 +1725,7 @@ window.PRODUCT_DATA_TABLE = [
     isActive: true,
     images: [
       {
-        filePath: "/assets/images/products/DLB-XC100-44.webp",
+        filePath: "/assets/images/products/DLB-XC100-1.webp",
         isPrimary: true,
         isHires: false,
       },
@@ -1761,7 +1761,7 @@ window.PRODUCT_DATA_TABLE = [
     isActive: true,
     images: [
       {
-        filePath: "/assets/images/products/DLB-QXC100-45.webp",
+        filePath: "/assets/images/products/DLB-QXC100-1.webp",
         isPrimary: true,
         isHires: false,
       },
@@ -1797,7 +1797,7 @@ window.PRODUCT_DATA_TABLE = [
     isActive: true,
     images: [
       {
-        filePath: "/assets/images/products/DLB-XC120-46.webp",
+        filePath: "/assets/images/products/DLB-XC120-1.webp",
         isPrimary: true,
         isHires: false,
       },
@@ -1833,7 +1833,7 @@ window.PRODUCT_DATA_TABLE = [
     isActive: true,
     images: [
       {
-        filePath: "/assets/images/products/DLB-QXC120-47.webp",
+        filePath: "/assets/images/products/DLB-QXC120-1.webp",
         isPrimary: true,
         isHires: false,
       },
@@ -1869,7 +1869,7 @@ window.PRODUCT_DATA_TABLE = [
     isActive: true,
     images: [
       {
-        filePath: "/assets/images/products/DLB-PZJ80-48.webp",
+        filePath: "/assets/images/products/DLB-PZJ80-1.webp",
         isPrimary: true,
         isHires: false,
       },
@@ -1905,7 +1905,7 @@ window.PRODUCT_DATA_TABLE = [
     isActive: true,
     images: [
       {
-        filePath: "/assets/images/products/DLB-PZJ100-49.webp",
+        filePath: "/assets/images/products/DLB-PZJ100-1.webp",
         isPrimary: true,
         isHires: false,
       },
@@ -1941,7 +1941,7 @@ window.PRODUCT_DATA_TABLE = [
     isActive: true,
     images: [
       {
-        filePath: "/assets/images/products/DLB-PZJ120-50.webp",
+        filePath: "/assets/images/products/DLB-PZJ120-1.webp",
         isPrimary: true,
         isHires: false,
       },
@@ -1977,7 +1977,7 @@ window.PRODUCT_DATA_TABLE = [
     isActive: true,
     images: [
       {
-        filePath: "/assets/images/products/DLB-PZJ200-51.webp",
+        filePath: "/assets/images/products/DLB-PZJ200-1.webp",
         isPrimary: true,
         isHires: false,
       },
@@ -2013,7 +2013,7 @@ window.PRODUCT_DATA_TABLE = [
     isActive: true,
     images: [
       {
-        filePath: "/assets/images/products/DLB-PZJ400-52.webp",
+        filePath: "/assets/images/products/DLB-PZJ400-1.webp",
         isPrimary: true,
         isHires: false,
       },
@@ -2049,7 +2049,7 @@ window.PRODUCT_DATA_TABLE = [
     isActive: true,
     images: [
       {
-        filePath: "/assets/images/products/DLB-BXC800-53.webp",
+        filePath: "/assets/images/products/DLB-BXC800-1.webp",
         isPrimary: true,
         isHires: false,
       },
@@ -2085,7 +2085,7 @@ window.PRODUCT_DATA_TABLE = [
     isActive: true,
     images: [
       {
-        filePath: "/assets/images/products/DLB-ZNT-54.webp",
+        filePath: "/assets/images/products/DLB-ZNT-1.webp",
         isPrimary: true,
         isHires: false,
       },
@@ -2119,7 +2119,7 @@ window.PRODUCT_DATA_TABLE = [
     isActive: true,
     images: [
       {
-        filePath: "/assets/images/products/DLB-ZNY-55.webp",
+        filePath: "/assets/images/products/DLB-ZNY-1.webp",
         isPrimary: true,
         isHires: false,
       },
@@ -2153,7 +2153,7 @@ window.PRODUCT_DATA_TABLE = [
     isActive: true,
     images: [
       {
-        filePath: "/assets/images/products/DLB-GB60R-56.webp",
+        filePath: "/assets/images/products/DLB-GB60R-1.webp",
         isPrimary: true,
         isHires: false,
       },
@@ -2189,7 +2189,7 @@ window.PRODUCT_DATA_TABLE = [
     isActive: true,
     images: [
       {
-        filePath: "/assets/images/products/DLB-GC60R-57.webp",
+        filePath: "/assets/images/products/DLB-GC60R-1.webp",
         isPrimary: true,
         isHires: false,
       },
@@ -2225,7 +2225,7 @@ window.PRODUCT_DATA_TABLE = [
     isActive: true,
     images: [
       {
-        filePath: "/assets/images/products/DLB-GB70R-58.webp",
+        filePath: "/assets/images/products/DLB-GB70R-1.webp",
         isPrimary: true,
         isHires: false,
       },
@@ -2261,7 +2261,7 @@ window.PRODUCT_DATA_TABLE = [
     isActive: true,
     images: [
       {
-        filePath: "/assets/images/products/DLB-GC70R-59.webp",
+        filePath: "/assets/images/products/DLB-GC70R-1.webp",
         isPrimary: true,
         isHires: false,
       },
@@ -2297,7 +2297,7 @@ window.PRODUCT_DATA_TABLE = [
     isActive: true,
     images: [
       {
-        filePath: "/assets/images/products/DLB-GB80R-60.webp",
+        filePath: "/assets/images/products/DLB-GB80R-1.webp",
         isPrimary: true,
         isHires: false,
       },
@@ -2333,7 +2333,7 @@ window.PRODUCT_DATA_TABLE = [
     isActive: true,
     images: [
       {
-        filePath: "/assets/images/products/DLB-GB90R-61.webp",
+        filePath: "/assets/images/products/DLB-GB90R-1.webp",
         isPrimary: true,
         isHires: false,
       },
@@ -2369,7 +2369,7 @@ window.PRODUCT_DATA_TABLE = [
     isActive: true,
     images: [
       {
-        filePath: "/assets/images/products/DLB-GC90R-62.webp",
+        filePath: "/assets/images/products/DLB-GC90R-1.webp",
         isPrimary: true,
         isHires: false,
       },
@@ -2405,7 +2405,7 @@ window.PRODUCT_DATA_TABLE = [
     isActive: true,
     images: [
       {
-        filePath: "/assets/images/products/DLB-GQ60R-63.webp",
+        filePath: "/assets/images/products/DLB-GQ60R-1.webp",
         isPrimary: true,
         isHires: false,
       },
@@ -2441,7 +2441,7 @@ window.PRODUCT_DATA_TABLE = [
     isActive: true,
     images: [
       {
-        filePath: "/assets/images/products/DLB-GQ70R-64.webp",
+        filePath: "/assets/images/products/DLB-GQ70R-1.webp",
         isPrimary: true,
         isHires: false,
       },
@@ -2477,7 +2477,7 @@ window.PRODUCT_DATA_TABLE = [
     isActive: true,
     images: [
       {
-        filePath: "/assets/images/products/DLB-GC80R-65.webp",
+        filePath: "/assets/images/products/DLB-GC80R-1.webp",
         isPrimary: true,
         isHires: false,
       },
@@ -2513,7 +2513,7 @@ window.PRODUCT_DATA_TABLE = [
     isActive: true,
     images: [
       {
-        filePath: "/assets/images/products/DLB-GQ80R-66.webp",
+        filePath: "/assets/images/products/DLB-GQ80R-1.webp",
         isPrimary: true,
         isHires: false,
       },
@@ -2549,7 +2549,7 @@ window.PRODUCT_DATA_TABLE = [
     isActive: true,
     images: [
       {
-        filePath: "/assets/images/products/DLB-GQ90R-67.webp",
+        filePath: "/assets/images/products/DLB-GQ90R-1.webp",
         isPrimary: true,
         isHires: false,
       },
@@ -2585,7 +2585,7 @@ window.PRODUCT_DATA_TABLE = [
     isActive: true,
     images: [
       {
-        filePath: "/assets/images/products/DLB-XC80-68.webp",
+        filePath: "/assets/images/products/DLB-XC80-1.webp",
         isPrimary: true,
         isHires: false,
       },
@@ -2621,7 +2621,7 @@ window.PRODUCT_DATA_TABLE = [
     isActive: true,
     images: [
       {
-        filePath: "/assets/images/products/DLB-QXC80-69.webp",
+        filePath: "/assets/images/products/DLB-QXC80-1.webp",
         isPrimary: true,
         isHires: false,
       },
@@ -2657,7 +2657,7 @@ window.PRODUCT_DATA_TABLE = [
     isActive: true,
     images: [
       {
-        filePath: "/assets/images/products/DLB-XC80R-70.webp",
+        filePath: "/assets/images/products/DLB-XC80R-1.webp",
         isPrimary: true,
         isHires: false,
       },
@@ -2693,7 +2693,7 @@ window.PRODUCT_DATA_TABLE = [
     isActive: true,
     images: [
       {
-        filePath: "/assets/images/products/DLB-QXC80R-71.webp",
+        filePath: "/assets/images/products/DLB-QXC80R-1.webp",
         isPrimary: true,
         isHires: false,
       },
@@ -2729,7 +2729,7 @@ window.PRODUCT_DATA_TABLE = [
     isActive: true,
     images: [
       {
-        filePath: "/assets/images/products/DLB-XC100R-72.webp",
+        filePath: "/assets/images/products/DLB-XC100R-1.webp",
         isPrimary: true,
         isHires: false,
       },
@@ -2765,7 +2765,7 @@ window.PRODUCT_DATA_TABLE = [
     isActive: true,
     images: [
       {
-        filePath: "/assets/images/products/DLB-QXC100R-73.webp",
+        filePath: "/assets/images/products/DLB-QXC100R-1.webp",
         isPrimary: true,
         isHires: false,
       },
@@ -2801,7 +2801,7 @@ window.PRODUCT_DATA_TABLE = [
     isActive: true,
     images: [
       {
-        filePath: "/assets/images/products/DLB-XC120R-74.webp",
+        filePath: "/assets/images/products/DLB-XC120R-1.webp",
         isPrimary: true,
         isHires: false,
       },
@@ -2837,7 +2837,7 @@ window.PRODUCT_DATA_TABLE = [
     isActive: true,
     images: [
       {
-        filePath: "/assets/images/products/DLB-QXC120R-75.webp",
+        filePath: "/assets/images/products/DLB-QXC120R-1.webp",
         isPrimary: true,
         isHires: false,
       },
@@ -2874,7 +2874,7 @@ window.PRODUCT_DATA_TABLE = [
     isActive: true,
     images: [
       {
-        filePath: "/assets/images/products/DLB-A60-J-88.webp",
+        filePath: "/assets/images/products/DLB-A60-J-1.webp",
         isPrimary: true,
         isHires: false,
       },
@@ -2911,7 +2911,7 @@ window.PRODUCT_DATA_TABLE = [
     isActive: true,
     images: [
       {
-        filePath: "/assets/images/products/DLB-A60-G-89.webp",
+        filePath: "/assets/images/products/DLB-A60-G-1.webp",
         isPrimary: true,
         isHires: false,
       },
@@ -2948,7 +2948,7 @@ window.PRODUCT_DATA_TABLE = [
     isActive: true,
     images: [
       {
-        filePath: "/assets/images/products/DLB-A60-Z-90.webp",
+        filePath: "/assets/images/products/DLB-A60-Z-1.webp",
         isPrimary: true,
         isHires: false,
       },
@@ -2986,7 +2986,7 @@ window.PRODUCT_DATA_TABLE = [
     isActive: true,
     images: [
       {
-        filePath: "/assets/images/products/DLB-A2800-91.webp",
+        filePath: "/assets/images/products/DLB-A2800-1.webp",
         isPrimary: true,
         isHires: false,
       },
@@ -3024,7 +3024,7 @@ window.PRODUCT_DATA_TABLE = [
     isActive: true,
     images: [
       {
-        filePath: "/assets/images/products/DLB-A3600-92.webp",
+        filePath: "/assets/images/products/DLB-A3600-1.webp",
         isPrimary: true,
         isHires: false,
       },
@@ -3062,7 +3062,7 @@ window.PRODUCT_DATA_TABLE = [
     isActive: true,
     images: [
       {
-        filePath: "/assets/images/products/DLB-A4600-93.webp",
+        filePath: "/assets/images/products/DLB-A4600-1.webp",
         isPrimary: true,
         isHires: false,
       },
@@ -3100,7 +3100,7 @@ window.PRODUCT_DATA_TABLE = [
     isActive: true,
     images: [
       {
-        filePath: "/assets/images/products/DLB-A5400-94.webp",
+        filePath: "/assets/images/products/DLB-A5400-1.webp",
         isPrimary: true,
         isHires: false,
       },
@@ -3138,7 +3138,7 @@ window.PRODUCT_DATA_TABLE = [
     isActive: true,
     images: [
       {
-        filePath: "/assets/images/products/DLB-A6200-95.webp",
+        filePath: "/assets/images/products/DLB-A6200-1.webp",
         isPrimary: true,
         isHires: false,
       },
@@ -3174,7 +3174,7 @@ window.PRODUCT_DATA_TABLE = [
     isActive: true,
     images: [
       {
-        filePath: "/assets/images/products/F32F1C-107.webp",
+        filePath: "/assets/images/products/F32F1C-1.webp",
         isPrimary: true,
         isHires: false,
       },
@@ -3209,7 +3209,7 @@ window.PRODUCT_DATA_TABLE = [
     isActive: true,
     images: [
       {
-        filePath: "/assets/images/products/G26D1A-108.webp",
+        filePath: "/assets/images/products/G26D1A-1.webp",
         isPrimary: true,
         isHires: false,
       },
@@ -3245,7 +3245,7 @@ window.PRODUCT_DATA_TABLE = [
     isActive: true,
     images: [
       {
-        filePath: "/assets/images/products/G26D1R-109.webp",
+        filePath: "/assets/images/products/G26D1R-1.webp",
         isPrimary: true,
         isHires: false,
       },
@@ -3281,7 +3281,7 @@ window.PRODUCT_DATA_TABLE = [
     isActive: true,
     images: [
       {
-        filePath: "/assets/images/products/G26DAA-110.webp",
+        filePath: "/assets/images/products/G26DAA-1.webp",
         isPrimary: true,
         isHires: false,
       },
@@ -3317,7 +3317,7 @@ window.PRODUCT_DATA_TABLE = [
     isActive: true,
     images: [
       {
-        filePath: "/assets/images/products/G26DAR-111.webp",
+        filePath: "/assets/images/products/G26DAR-1.webp",
         isPrimary: true,
         isHires: false,
       },
@@ -3353,7 +3353,7 @@ window.PRODUCT_DATA_TABLE = [
     isActive: true,
     images: [
       {
-        filePath: "/assets/images/products/G30D1A-112.webp",
+        filePath: "/assets/images/products/G30D1A-1.webp",
         isPrimary: true,
         isHires: false,
       },
@@ -3389,7 +3389,7 @@ window.PRODUCT_DATA_TABLE = [
     isActive: true,
     images: [
       {
-        filePath: "/assets/images/products/G30D1R-113.webp",
+        filePath: "/assets/images/products/G30D1R-1.webp",
         isPrimary: true,
         isHires: false,
       },
@@ -3425,7 +3425,7 @@ window.PRODUCT_DATA_TABLE = [
     isActive: true,
     images: [
       {
-        filePath: "/assets/images/products/G30DAA-114.webp",
+        filePath: "/assets/images/products/G30DAA-1.webp",
         isPrimary: true,
         isHires: false,
       },
@@ -3461,7 +3461,7 @@ window.PRODUCT_DATA_TABLE = [
     isActive: true,
     images: [
       {
-        filePath: "/assets/images/products/G30DAR-115.webp",
+        filePath: "/assets/images/products/G30DAR-1.webp",
         isPrimary: true,
         isHires: false,
       },
@@ -3497,7 +3497,7 @@ window.PRODUCT_DATA_TABLE = [
     isActive: true,
     images: [
       {
-        filePath: "/assets/images/products/G30D1T-116.webp",
+        filePath: "/assets/images/products/G30D1T-1.webp",
         isPrimary: true,
         isHires: false,
       },
@@ -3533,7 +3533,7 @@ window.PRODUCT_DATA_TABLE = [
     isActive: true,
     images: [
       {
-        filePath: "/assets/images/products/G30DFA-117.webp",
+        filePath: "/assets/images/products/G30DFA-1.webp",
         isPrimary: true,
         isHires: false,
       },
@@ -3569,7 +3569,7 @@ window.PRODUCT_DATA_TABLE = [
     isActive: true,
     images: [
       {
-        filePath: "/assets/images/products/G36D1A-118.webp",
+        filePath: "/assets/images/products/G36D1A-1.webp",
         isPrimary: true,
         isHires: false,
       },
@@ -3605,7 +3605,7 @@ window.PRODUCT_DATA_TABLE = [
     isActive: true,
     images: [
       {
-        filePath: "/assets/images/products/G36D1R-119.webp",
+        filePath: "/assets/images/products/G36D1R-1.webp",
         isPrimary: true,
         isHires: false,
       },
@@ -3641,7 +3641,7 @@ window.PRODUCT_DATA_TABLE = [
     isActive: true,
     images: [
       {
-        filePath: "/assets/images/products/G36DAA-120.webp",
+        filePath: "/assets/images/products/G36DAA-1.webp",
         isPrimary: true,
         isHires: false,
       },
@@ -3677,7 +3677,7 @@ window.PRODUCT_DATA_TABLE = [
     isActive: true,
     images: [
       {
-        filePath: "/assets/images/products/G36DAR-121.webp",
+        filePath: "/assets/images/products/G36DAR-1.webp",
         isPrimary: true,
         isHires: false,
       },
@@ -3713,7 +3713,7 @@ window.PRODUCT_DATA_TABLE = [
     isActive: true,
     images: [
       {
-        filePath: "/assets/images/products/G26DAG-122.webp",
+        filePath: "/assets/images/products/G26DAG-1.webp",
         isPrimary: true,
         isHires: false,
       },
@@ -3749,7 +3749,7 @@ window.PRODUCT_DATA_TABLE = [
     isActive: true,
     images: [
       {
-        filePath: "/assets/images/products/G26DAS-123.webp",
+        filePath: "/assets/images/products/G26DAS-1.webp",
         isPrimary: true,
         isHires: false,
       },
@@ -3785,7 +3785,7 @@ window.PRODUCT_DATA_TABLE = [
     isActive: true,
     images: [
       {
-        filePath: "/assets/images/products/G30DAG-124.webp",
+        filePath: "/assets/images/products/G30DAG-1.webp",
         isPrimary: true,
         isHires: false,
       },
@@ -3821,7 +3821,7 @@ window.PRODUCT_DATA_TABLE = [
     isActive: true,
     images: [
       {
-        filePath: "/assets/images/products/G30DAS-125.webp",
+        filePath: "/assets/images/products/G30DAS-1.webp",
         isPrimary: true,
         isHires: false,
       },
@@ -3857,7 +3857,7 @@ window.PRODUCT_DATA_TABLE = [
     isActive: true,
     images: [
       {
-        filePath: "/assets/images/products/G36DAG-126.webp",
+        filePath: "/assets/images/products/G36DAG-1.webp",
         isPrimary: true,
         isHires: false,
       },
@@ -3893,7 +3893,7 @@ window.PRODUCT_DATA_TABLE = [
     isActive: true,
     images: [
       {
-        filePath: "/assets/images/products/G36DAS-127.webp",
+        filePath: "/assets/images/products/G36DAS-1.webp",
         isPrimary: true,
         isHires: false,
       },
@@ -3929,7 +3929,7 @@ window.PRODUCT_DATA_TABLE = [
     isActive: true,
     images: [
       {
-        filePath: "/assets/images/products/J40CBB-128.webp",
+        filePath: "/assets/images/products/J40CBB-1.webp",
         isPrimary: true,
         isHires: false,
       },
@@ -3965,7 +3965,7 @@ window.PRODUCT_DATA_TABLE = [
     isActive: true,
     images: [
       {
-        filePath: "/assets/images/products/G50AAB-129.webp",
+        filePath: "/assets/images/products/G50AAB-1.webp",
         isPrimary: true,
         isHires: false,
       },
@@ -4001,7 +4001,7 @@ window.PRODUCT_DATA_TABLE = [
     isActive: true,
     images: [
       {
-        filePath: "/assets/images/products/G50AAC-130.webp",
+        filePath: "/assets/images/products/G50AAC-1.webp",
         isPrimary: true,
         isHires: false,
       },
@@ -4037,7 +4037,7 @@ window.PRODUCT_DATA_TABLE = [
     isActive: true,
     images: [
       {
-        filePath: "/assets/images/products/G50GAT-131.webp",
+        filePath: "/assets/images/products/G50GAT-1.webp",
         isPrimary: true,
         isHires: false,
       },
@@ -4073,7 +4073,7 @@ window.PRODUCT_DATA_TABLE = [
     isActive: true,
     images: [
       {
-        filePath: "/assets/images/products/G60EAC-132.webp",
+        filePath: "/assets/images/products/G60EAC-1.webp",
         isPrimary: true,
         isHires: false,
       },
@@ -4109,7 +4109,7 @@ window.PRODUCT_DATA_TABLE = [
     isActive: true,
     images: [
       {
-        filePath: "/assets/images/products/G60EAS-133.webp",
+        filePath: "/assets/images/products/G60EAS-1.webp",
         isPrimary: true,
         isHires: false,
       },
@@ -4145,7 +4145,7 @@ window.PRODUCT_DATA_TABLE = [
     isActive: true,
     images: [
       {
-        filePath: "/assets/images/products/G70EAC-134.webp",
+        filePath: "/assets/images/products/G70EAC-1.webp",
         isPrimary: true,
         isHires: false,
       },
@@ -4181,7 +4181,7 @@ window.PRODUCT_DATA_TABLE = [
     isActive: true,
     images: [
       {
-        filePath: "/assets/images/products/G70EAS-135.webp",
+        filePath: "/assets/images/products/G70EAS-1.webp",
         isPrimary: true,
         isHires: false,
       },
@@ -4217,7 +4217,7 @@ window.PRODUCT_DATA_TABLE = [
     isActive: true,
     images: [
       {
-        filePath: "/assets/images/products/G80EAC-136.webp",
+        filePath: "/assets/images/products/G80EAC-1.webp",
         isPrimary: true,
         isHires: false,
       },
@@ -4253,7 +4253,7 @@ window.PRODUCT_DATA_TABLE = [
     isActive: true,
     images: [
       {
-        filePath: "/assets/images/products/G80EAS-137.webp",
+        filePath: "/assets/images/products/G80EAS-1.webp",
         isPrimary: true,
         isHires: false,
       },
@@ -4289,7 +4289,7 @@ window.PRODUCT_DATA_TABLE = [
     isActive: true,
     images: [
       {
-        filePath: "/assets/images/products/M3DAD-138.webp",
+        filePath: "/assets/images/products/M3DAD-1.webp",
         isPrimary: true,
         isHires: false,
       },
@@ -4325,7 +4325,7 @@ window.PRODUCT_DATA_TABLE = [
     isActive: true,
     images: [
       {
-        filePath: "/assets/images/products/M6DBD-139.webp",
+        filePath: "/assets/images/products/M6DBD-1.webp",
         isPrimary: true,
         isHires: false,
       },
@@ -4361,7 +4361,7 @@ window.PRODUCT_DATA_TABLE = [
     isActive: true,
     images: [
       {
-        filePath: "/assets/images/products/M6RAD-140.webp",
+        filePath: "/assets/images/products/M6RAD-1.webp",
         isPrimary: true,
         isHires: false,
       },
@@ -4457,7 +4457,7 @@ window.PRODUCT_DATA_TABLE = [
     isActive: true,
     images: [
       {
-        filePath: "/assets/images/products/M6DAD-143.webp",
+        filePath: "/assets/images/products/M6DAD-1.webp",
         isPrimary: true,
         isHires: false,
       },
@@ -4493,7 +4493,7 @@ window.PRODUCT_DATA_TABLE = [
     isActive: true,
     images: [
       {
-        filePath: "/assets/images/products/B4RTD-144.webp",
+        filePath: "/assets/images/products/B4RTD-1.webp",
         isPrimary: true,
         isHires: false,
       },
@@ -4528,7 +4528,7 @@ window.PRODUCT_DATA_TABLE = [
     isActive: true,
     images: [
       {
-        filePath: "/assets/images/products/B6RBD-145.webp",
+        filePath: "/assets/images/products/B6RBD-1.webp",
         isPrimary: true,
         isHires: false,
       },
@@ -4563,7 +4563,7 @@ window.PRODUCT_DATA_TABLE = [
     isActive: true,
     images: [
       {
-        filePath: "/assets/images/products/B8RBD-146.webp",
+        filePath: "/assets/images/products/B8RBD-1.webp",
         isPrimary: true,
         isHires: false,
       },
@@ -4598,7 +4598,7 @@ window.PRODUCT_DATA_TABLE = [
     isActive: true,
     images: [
       {
-        filePath: "/assets/images/products/GT1D1B-147.webp",
+        filePath: "/assets/images/products/GT1D1B-1.webp",
         isPrimary: true,
         isHires: false,
       },
@@ -4633,7 +4633,7 @@ window.PRODUCT_DATA_TABLE = [
     isActive: true,
     images: [
       {
-        filePath: "/assets/images/products/GT2D1B-148.webp",
+        filePath: "/assets/images/products/GT2D1B-1.webp",
         isPrimary: true,
         isHires: false,
       },
@@ -4668,7 +4668,7 @@ window.PRODUCT_DATA_TABLE = [
     isActive: true,
     images: [
       {
-        filePath: "/assets/images/products/Y12D1C-149.webp",
+        filePath: "/assets/images/products/Y12D1C-1.webp",
         isPrimary: true,
         isHires: false,
       },
@@ -4704,7 +4704,7 @@ window.PRODUCT_DATA_TABLE = [
     isActive: true,
     images: [
       {
-        filePath: "/assets/images/products/Y12D2C-150.webp",
+        filePath: "/assets/images/products/Y12D2C-1.webp",
         isPrimary: true,
         isHires: false,
       },
@@ -4739,7 +4739,7 @@ window.PRODUCT_DATA_TABLE = [
     isActive: true,
     images: [
       {
-        filePath: "/assets/images/products/Y24C1C-151.webp",
+        filePath: "/assets/images/products/Y24C1C-1.webp",
         isPrimary: true,
         isHires: false,
       },
@@ -4774,7 +4774,7 @@ window.PRODUCT_DATA_TABLE = [
     isActive: true,
     images: [
       {
-        filePath: "/assets/images/products/Y50D1C-152.webp",
+        filePath: "/assets/images/products/Y50D1C-1.webp",
         isPrimary: true,
         isHires: false,
       },
@@ -4809,7 +4809,7 @@ window.PRODUCT_DATA_TABLE = [
     isActive: true,
     images: [
       {
-        filePath: "/assets/images/products/LZ80D1B-153.webp",
+        filePath: "/assets/images/products/LZ80D1B-1.webp",
         isPrimary: true,
         isHires: false,
       },
@@ -4875,7 +4875,7 @@ window.PRODUCT_DATA_TABLE = [
     isActive: true,
     images: [
       {
-        filePath: "/assets/images/products/Z6FCB-156.webp",
+        filePath: "/assets/images/products/Z6FCB-1.webp",
         isPrimary: true,
         isHires: false,
       },
@@ -4910,7 +4910,7 @@ window.PRODUCT_DATA_TABLE = [
     isActive: true,
     images: [
       {
-        filePath: "/assets/images/products/HKQPJ400-VIII-157.webp",
+        filePath: "/assets/images/products/HKQPJ400-VIII-1.webp",
         isPrimary: true,
         isHires: false,
       },
@@ -4945,7 +4945,7 @@ window.PRODUCT_DATA_TABLE = [
     isActive: true,
     images: [
       {
-        filePath: "/assets/images/products/HKQPJ500-VIII-158.webp",
+        filePath: "/assets/images/products/HKQPJ500-VIII-1.webp",
         isPrimary: true,
         isHires: false,
       },
@@ -4980,7 +4980,7 @@ window.PRODUCT_DATA_TABLE = [
     isActive: true,
     images: [
       {
-        filePath: "/assets/images/products/HKQTJ300-159.webp",
+        filePath: "/assets/images/products/HKQTJ300-1.webp",
         isPrimary: true,
         isHires: false,
       },
@@ -5015,7 +5015,7 @@ window.PRODUCT_DATA_TABLE = [
     isActive: true,
     images: [
       {
-        filePath: "/assets/images/products/HKQTJ600-VII-160.webp",
+        filePath: "/assets/images/products/HKQTJ600-VII-1.webp",
         isPrimary: true,
         isHires: false,
       },
@@ -5050,7 +5050,7 @@ window.PRODUCT_DATA_TABLE = [
     isActive: true,
     images: [
       {
-        filePath: "/assets/images/products/HKQTJ200-VII-161.webp",
+        filePath: "/assets/images/products/HKQTJ200-VII-1.webp",
         isPrimary: true,
         isHires: false,
       },
@@ -5085,7 +5085,7 @@ window.PRODUCT_DATA_TABLE = [
     isActive: true,
     images: [
       {
-        filePath: "/assets/images/products/HKDQJ300-VII-162.webp",
+        filePath: "/assets/images/products/HKDQJ300-VII-1.webp",
         isPrimary: true,
         isHires: false,
       },
@@ -5120,7 +5120,7 @@ window.PRODUCT_DATA_TABLE = [
     isActive: true,
     images: [
       {
-        filePath: "/assets/images/products/HKDQJ300-163.webp",
+        filePath: "/assets/images/products/HKDQJ300-1.webp",
         isPrimary: true,
         isHires: false,
       },
@@ -5155,7 +5155,7 @@ window.PRODUCT_DATA_TABLE = [
     isActive: true,
     images: [
       {
-        filePath: "/assets/images/products/HKXQJ-400-164.webp",
+        filePath: "/assets/images/products/HKXQJ-400-1.webp",
         isPrimary: true,
         isHires: false,
       },
@@ -5190,7 +5190,7 @@ window.PRODUCT_DATA_TABLE = [
     isActive: true,
     images: [
       {
-        filePath: "/assets/images/products/HKQPJ-300-165.webp",
+        filePath: "/assets/images/products/HKQPJ-300-1.webp",
         isPrimary: true,
         isHires: false,
       },
@@ -5225,7 +5225,7 @@ window.PRODUCT_DATA_TABLE = [
     isActive: true,
     images: [
       {
-        filePath: "/assets/images/products/HKJGJ380-VI-166.webp",
+        filePath: "/assets/images/products/HKJGJ380-VI-1.webp",
         isPrimary: true,
         isHires: false,
       },
@@ -5260,7 +5260,7 @@ window.PRODUCT_DATA_TABLE = [
     isActive: true,
     images: [
       {
-        filePath: "/assets/images/products/HKFBJ-167.webp",
+        filePath: "/assets/images/products/HKFBJ-1.webp",
         isPrimary: true,
         isHires: false,
       },
@@ -5274,4 +5274,4 @@ window.PRODUCT_DATA_TABLE = [
       "Suitable for braised food processing plants, restaurant chains, central kitchens, meat processing plants, and more. Ideal for automatic splitting of pig trotters with clean, even cuts. Capacity: continuous operation, significantly improving pig trotter splitting efficiency.",
   },
 ];
-window.PRODUCT_DATA_VERSION = "1779717213828";
+window.PRODUCT_DATA_VERSION = "1779717884507";
