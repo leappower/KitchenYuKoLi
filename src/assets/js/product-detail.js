@@ -48,6 +48,12 @@
   }
 
   function modelToSnake(m) {
+    // Use raw model name with hyphens (matching actual file naming)
+    // Files are like DLB-BQ40T-1.webp, not dlb_bq40t_1.webp
+    return (m || "").replace(/[/:+]+/g, "_").replace(/_+/g, "_");
+  }
+
+  function _legacyModelToSnake(m) {
     return (m || "")
       .toLowerCase()
       .replace(/\//g, "")
