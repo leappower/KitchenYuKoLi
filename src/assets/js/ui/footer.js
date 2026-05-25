@@ -261,9 +261,6 @@
 
     window.requestAnimationFrame(function () {
       if (bar) bar.style.opacity = "1";
-      if (!document.body.style.paddingBottom) {
-        document.body.style.paddingBottom = (bar ? bar.offsetHeight : 80) + 20 + "px";
-      }
     });
   }
 
