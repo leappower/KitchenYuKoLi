@@ -43,9 +43,6 @@
     cert_4: IMAGE_PATH_PREFIX + "/certs/cert-4.webp",
     cert_5: IMAGE_PATH_PREFIX + "/certs/cert-5.webp",
     cert_6: IMAGE_PATH_PREFIX + "/certs/cert-6.webp",
-    product_compact: IMAGE_PATH_PREFIX + "/home/product-compact.webp",
-    product_professional: IMAGE_PATH_PREFIX + "/home/product-professional.webp",
-    product_industrial: IMAGE_PATH_PREFIX + "/home/product-industrial.webp",
     // Product images are populated at runtime via loadFromManifest()
     // See the ⚠️ note at the top of this file for details.
   };
@@ -72,9 +69,6 @@
       "cert_4",
       "cert_5",
       "cert_6",
-      "product_compact",
-      "product_professional",
-      "product_industrial",
     ]);
 
     return fetch("/images/image-manifest.json")
