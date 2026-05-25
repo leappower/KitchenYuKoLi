@@ -537,7 +537,7 @@
     panel.addEventListener("click", function (e) {
       var item = e.target.closest(".cs-item");
       if (!item || item.classList.contains("cs-item-disabled")) return;
-      _self._selectItem(item);
+      _self2._selectItem(item);
     });
 
     return panel;
@@ -907,6 +907,11 @@
       } else if (e.key === "Escape") {
         self.close();
       }
+    });
+
+    // Sync trigger display when native select changes externally
+    this.select.addEventListener("change", function () {
+      self.refresh();
     });
   };
 

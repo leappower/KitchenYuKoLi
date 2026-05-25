@@ -48,6 +48,12 @@
   }
 
   function modelToSnake(m) {
+    // Use raw model name with hyphens (matching actual file naming)
+    // Files are like DLB-BQ40T-1.webp, not dlb_bq40t_1.webp
+    return (m || "").replace(/[/:+]+/g, "_").replace(/_+/g, "_");
+  }
+
+  function _legacyModelToSnake(m) {
     return (m || "")
       .toLowerCase()
       .replace(/\//g, "")
@@ -96,6 +102,8 @@
                 return i.isPrimary;
               }) || rp.images[0]
             ).filePath;
+            // Defensive: normalize _N.webp → -N.webp (file rename migration)
+            if (f) f = f.replace(/_(\d+\.webp)$/, "-$1");
             // Defensive: rewrite stale CMS paths
             if (f && f.indexOf("/admin/uploads/") === 0) {
               f = "/assets/images/products/" + f.split("/").pop();
@@ -112,13 +120,13 @@
     return (
       '<a href="/products/' +
       encodeURIComponent(rp.model) +
-      '" class="group block bg-white dark:bg-slate-800 rounded-xl overflow-hidden shadow-md hover:shadow-lg transition-all border border-slate-100 dark:border-slate-700">' +
-      '<div class="h-36 bg-gradient-to-br ' +
+      '" class="group block bg-white rounded-xl overflow-hidden shadow-md hover:shadow-lg transition-all border border-slate-100 dark:border-slate-700">' +
+      '<div class="aspect-[4/3] bg-gradient-to-br ' +
       grad +
-      ' relative overflow-hidden">' +
+      ' relative overflow-hidden flex items-center justify-center">' +
       '<img loading="lazy" alt="' +
       esc(rp.model) +
-      '" class="w-full h-full object-cover group-hover:scale-105 transition-transform" src="' +
+      '" class="w-full h-full object-contain p-4 group-hover:scale-105 transition-transform" src="' +
       rImg +
       '" onerror="this.style.display=\'none\'">' +
       '</div><div class="p-4"><h4 class="font-bold text-sm mb-1">' +
@@ -225,9 +233,9 @@
       }
       if (!re) {
         var section = document.createElement("section");
-        section.className = "w-full py-12";
+        section.className = "fullwidth-bg py-12 lg:py-16";
         section.innerHTML =
-          '<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">' +
+          '<div class="section-content">' +
           '<h2 class="text-xl font-bold mb-4 flex items-center gap-2">' +
           '<span class="material-symbols-outlined text-primary">recommend</span> ' +
           tl("detail_recommended", "推荐产品") +
@@ -242,6 +250,19 @@
   }
 
   function renderPDP() {
+    // Check if language changed — reload translations before rendering
+    var currentLang = (window.CURRENT_LANG || document.documentElement.lang || "zh-CN").replace("_", "-");
+    if (currentLang !== (renderPDP._lastLang || "") && currentLang !== "zh-CN" && currentLang !== "zh") {
+      renderPDP._lastLang = currentLang;
+      if (typeof loadProductTranslations === "function") {
+        loadProductTranslations(currentLang, function () {
+          renderPDP();
+        });
+        return;
+      }
+    }
+    renderPDP._lastLang = currentLang;
+
     // Read model from path:
     //   /products/{slug}/{model}/   (new canonical)
     //   /products/detail/{model}/  (old detail path)
@@ -303,7 +324,10 @@
       var catKey = product.category || "";
       // Map Chinese category name (e.g. "翻炒系列") to i18n key via slug
       var catSlug = CATEGORY_NAME_TO_SLUG[catKey] || "";
-      var catI18nKey = catSlug ? (PRODUCT_SLUGS[catSlug] || {}).key || "" : "";
+      var bp = window.Breadcrumb || {};
+      var catI18nKey = catSlug
+        ? ((bp.PRODUCT_SLUGS || {})[catSlug] && (bp.PRODUCT_SLUGS || {})[catSlug].key) || ""
+        : "";
       var slugMap = (window.Breadcrumb && window.Breadcrumb.CATEGORY_KEY_TO_SLUG) || {};
       var slug = slugMap[catI18nKey] || catSlug;
       var catInfo =
@@ -313,58 +337,49 @@
       // Track referrer for back navigation
       if (slug) sessionStorage.setItem("pdp_referrer", "/products/" + slug + "/");
       var model = product.model || "";
-      // PC/Tablet breadcrumb — chevron_right + badge (matches steaming/food-factory style)
-      var chevron = '<span class="material-symbols-outlined text-xs text-slate-300">chevron_right</span>';
+      // PC/Tablet breadcrumb — 统一三层 Products / 分类 / 型号
+      var chevron = '<span class="mx-1.5 text-slate-300 dark:text-slate-600">/</span>';
       var badgeHtml =
         catLabel && slug
           ? chevron +
             '<a href="/products/' +
             slug +
             '/" class="hover:text-primary transition-colors">' +
-            '<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-primary/10 text-primary text-xs font-bold uppercase tracking-wider">' +
-            '<span class="material-symbols-outlined text-[10px] leading-none">' +
-            catIcon +
-            "</span>" +
-            "<span>" +
-            catLabel +
-            "</span></span></a>" +
-            chevron
-          : chevron;
+            esc(catLabel) +
+            "</a>"
+          : "";
       var html =
-        '<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-4 pb-0 hidden md:block">' +
-        '<nav class="flex items-center gap-2 flex-wrap" aria-label="Breadcrumb">' +
-        '<a href="/products/" class="text-sm text-slate-500 hover:text-primary transition-colors" data-i18n="nav_products">Products</a>' +
-        badgeHtml +
-        '<span class="text-sm text-slate-900 dark:text-white font-medium">' +
+        '<div class="section-content pt-4 pb-0 hidden md:block" style="padding-inline:var(--container-px,0.75rem)">' +
+        '<nav class="breadcrumb-nav text-sm text-slate-500 dark:text-slate-400 py-4" aria-label="Breadcrumb">' +
+        '<ol class="flex items-center gap-1 flex-wrap">' +
+        '<li><a href="/products/" class="hover:text-primary transition-colors">' +
+        esc(tl("nav_products", "Products")) +
+        "</a></li>" +
+        (badgeHtml ? badgeHtml : "") +
+        (badgeHtml ? chevron : "") +
+        '<li><span class="text-slate-900 dark:text-white font-medium">' +
         esc(product.name || model) +
-        "</span>" +
-        "</nav></div>";
-      // Mobile breadcrumb — back button + single-line (matches mobile steaming style)
-      var mChevron = '<span class="material-symbols-outlined text-xs text-slate-300">chevron_right</span>';
-      var mobileBadgeHtml =
-        catLabel && slug
-          ? mChevron +
-            '<span class="inline-flex items-center gap-0.5 px-2 py-0.5 rounded-full bg-primary/10 text-primary text-[10px] font-bold uppercase tracking-wider">' +
-            '<span class="material-symbols-outlined text-[10px] leading-none">' +
-            catIcon +
-            "</span>" +
-            "<span>" +
-            catLabel +
-            "</span></span>" +
-            mChevron
-          : mChevron;
+        "</span></li>" +
+        "</ol></nav></div>";
+      // Mobile breadcrumb — 统一返回按钮 + 两层
+      var mChevron = '<span class="mx-1 text-slate-300 text-xs">/</span>';
       html +=
-        '<div class="max-w-7xl mx-auto px-4 pt-3 pb-0 md:hidden">' +
+        '<div class="section-content pt-3 pb-0 md:hidden" style="padding-inline:var(--container-px,0.75rem)">' +
         '<div class="flex items-center gap-2">' +
         '<button onclick="window.Breadcrumb&&window.Breadcrumb.goBack()" class="flex items-center justify-center w-8 h-8 rounded-full bg-slate-100 dark:bg-slate-800 hover:bg-primary hover:text-white text-slate-600 dark:text-slate-400 transition-all flex-shrink-0" aria-label="' +
         tl("pd_back", "返回") +
         '">' +
         '<span class="material-symbols-outlined text-lg">arrow_back</span></button>' +
-        '<a href="/products/" class="text-xs text-slate-400 hover:text-primary transition-colors flex-shrink-0" data-i18n="nav_products">Products</a>' +
-        mobileBadgeHtml +
-        '<span class="text-xs font-bold text-slate-900 dark:text-white truncate">' +
+        '<div class="text-xs text-slate-500 dark:text-slate-400">' +
+        esc(tl("nav_products", "Products")) +
+        "</div>" +
+        (catLabel
+          ? '<div class="text-xs text-slate-500 dark:text-slate-400">' + mChevron + esc(catLabel) + "</div>"
+          : "") +
+        '<div class="text-sm font-bold text-slate-900 dark:text-white truncate">' +
+        mChevron +
         esc(product.name || model) +
-        "</span>" +
+        "</div>" +
         "</div></div>";
       bcEl.innerHTML = html;
     })();
@@ -378,6 +393,8 @@
         }) || product.images[0];
       if (pi && pi.filePath) {
         imgSrc = pi.filePath;
+        // Defensive: normalize _N.webp → -N.webp (file rename migration)
+        imgSrc = imgSrc.replace(/_(\d+\.webp)$/, "-$1");
         // Defensive: rewrite stale CMS paths
         if (imgSrc.indexOf("/admin/uploads/") === 0) {
           imgSrc = "/assets/images/products/" + imgSrc.split("/").pop();
@@ -495,11 +512,11 @@
           '" class="w-full h-full object-contain p-4 lg:p-6" src="' +
           imgSrc +
           '"' +
-          " onerror=\"this.src='/assets/images/default.webp'\">" +
+          " onerror=\"this.src='/assets/images/products/default.webp'\">" +
           '<div class="pdp-play-btn absolute inset-0 flex items-center justify-center bg-black/20 group-hover:bg-black/30 transition-colors">' +
           '<div class="w-16 h-16 rounded-full bg-white/90 flex items-center justify-center shadow-xl group-hover:scale-110 transition-transform">' +
           '<span class="material-symbols-outlined text-3xl text-primary ml-1">play_arrow</span>' +
-          "</div></div></div>";
+          "</div></div>";
       } else {
         mediaHtml =
           '<div class="' +
@@ -513,7 +530,7 @@
           '" class="w-full h-full object-contain p-4 lg:p-6" src="' +
           imgSrc +
           '"' +
-          " onerror=\"this.src='/assets/images/default.webp'\">" +
+          " onerror=\"this.src='/assets/images/products/default.webp'\">" +
           '<div class="pdp-play-btn absolute inset-0 flex items-center justify-center bg-black/20 group-hover:bg-black/30 transition-colors">' +
           '<div class="w-16 h-16 rounded-full bg-white/90 flex items-center justify-center shadow-xl group-hover:scale-110 transition-transform">' +
           '<span class="material-symbols-outlined text-3xl text-primary ml-1">play_arrow</span>' +
@@ -528,7 +545,7 @@
         ' class="w-full h-full object-contain p-4 lg:p-6" src="' +
         imgSrc +
         '"' +
-        " onerror=\"this.src='/assets/images/default.webp'\">" +
+        " onerror=\"this.src='/assets/images/products/default.webp'\">" +
         // Zoom hint overlay (PC only)
         '<div class="hidden lg:flex absolute top-3 right-3 w-8 h-8 rounded-full bg-white/80 items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity shadow">' +
         '<span class="material-symbols-outlined text-sm text-slate-600">zoom_in</span></div>';
@@ -699,59 +716,69 @@
     if (!product) return "";
     var lang = (window.CURRENT_LANG || document.documentElement.lang || "zh-CN").replace("_", "-");
     if (lang === "zh-CN" || lang === "zh") return product[field] || "";
-    // Check translations cache (loaded via API)
-    var tKey = product.model || product.id;
-    var translations = window._productTranslations || {};
-    var t = translations[tKey] || translations[product._productId];
+    var model = product.model;
+    var map = window._productTranslationsByModel || {};
+    var t = map[model];
     if (t && t[field]) return t[field];
     return product[field] || "";
   };
 
-  // Load translations for a language (called when user switches language)
+  // Load translations for a language by fetching {lang}-product.json
   window.loadProductTranslations = function (lang, callback) {
-    if (lang === "zh-CN" || lang === "zh") {
+    var normalizedLang = lang.replace("_", "-");
+    // zh-CN uses product-data-table directly (Chinese is the source)
+    if (normalizedLang === "zh-CN" || normalizedLang === "zh") {
       window._productTranslations = {};
+      window._productTranslationsByModel = {};
       if (callback) callback();
       return;
     }
-    // Extract translations from the already-loaded PRODUCT_DATA_TABLE
-    var suffix =
-      lang.charAt(0).toUpperCase() +
-      lang.slice(1).replace(/-([a-z])/g, function (m, c) {
-        return c.toUpperCase();
+    // Fetch {lang}-product.json
+    var baseUrl = (window.BASE_PATH || "") + "/assets/lang/";
+    var url = baseUrl + normalizedLang + "-product.json";
+    fetch(url, { cache: "default" })
+      .then(function (r) {
+        if (!r.ok) throw new Error("HTTP " + r.status);
+        return r.json();
+      })
+      .then(function (json) {
+        // Convert flat keys to model-based lookup
+        // JSON keys: product_dlb_tbs30_name → model=DLB-TBS30, field=name
+        var byModel = {};
+        var products = getAllProducts();
+        var modelMap = {};
+        products.forEach(function (p) {
+          var key = (p.model || "")
+            .toLowerCase()
+            .replace(/[^a-z0-9]/g, "_")
+            .replace(/_+/g, "_")
+            .replace(/^_|_$/g, "");
+          if (key) modelMap[key] = p.model;
+        });
+        Object.keys(json).forEach(function (key) {
+          // Parse: product_{model}_{field}
+          var m = key.match(
+            /^product_([a-z0-9]+(?:_[a-z0-9]+)*)_(name|specifications|usage|throughput|material|sub_category|tier|badge|control_method|product_dimensions|color|highlights)$/i
+          );
+          if (!m) return;
+          var modelKey = m[1];
+          var field = m[2].toLowerCase();
+          var model = modelMap[modelKey];
+          if (!model) return;
+          if (!byModel[model]) byModel[model] = {};
+          byModel[model][field] = json[key];
+        });
+        window._productTranslations = byModel;
+        window._productTranslationsByModel = byModel;
+        if (callback) callback();
+        // Dispatch event for other listeners
+        document.dispatchEvent(new CustomEvent("productTranslationsLoaded"));
+      })
+      .catch(function (e) {
+        window._productTranslations = {};
+        window._productTranslationsByModel = {};
+        if (callback) callback();
       });
-    var products = getAllProducts();
-    var map = {};
-    var fields = [
-      "name",
-      "specifications",
-      "usage",
-      "throughput",
-      "material",
-      "sub_category",
-      "tier",
-      "badge",
-      "control_method",
-      "product_dimensions",
-      "color",
-    ];
-    products.forEach(function (p) {
-      var pid = p._productId || p.id;
-      if (!pid) return;
-      var entry = {};
-      fields.forEach(function (f) {
-        var val = p[f + suffix];
-        if (val) entry[f] = val;
-      });
-      if (Object.keys(entry).length > 0) map[pid] = entry;
-    });
-    window._productTranslations = map;
-    window._productTranslationsByModel = {};
-    products.forEach(function (p) {
-      var t = map[p._ProductId || p.id];
-      if (t) window._productTranslationsByModel[p.model] = t;
-    });
-    if (callback) callback();
   };
 
   _spaOn(window, "languageChanged", renderPDP, "languageChanged");
@@ -767,6 +794,8 @@
           renderPDP();
         } else if (segs[1] && segs[1] !== "compare" && !isCategorySlug(segs[1])) {
           renderPDP();
+        } else if (isCategorySlug(segs[1]) && segs[2]) {
+          renderPDP();
         }
       }
     },
@@ -781,6 +810,8 @@
         if (segs[1] === "detail" && segs[2]) {
           renderPDP();
         } else if (segs[1] && segs[1] !== "compare" && !isCategorySlug(segs[1])) {
+          renderPDP();
+        } else if (isCategorySlug(segs[1]) && segs[2]) {
           renderPDP();
         }
       }

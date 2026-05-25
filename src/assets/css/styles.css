@@ -424,21 +424,28 @@ section > .section-content {
   padding-inline: var(--container-px, 0.75rem);
 }
 
-/* Standalone section-content (e.g. footer injected outside <section>) */
-.section-content {
-  max-width: 1440px;
-  margin-inline: auto;
-}
-.section-content.max-w-\[1920px\] {
-  max-width: 1920px;
-}
-
 /* When <main> already has Tailwind px-*, section-content padding is
  * redundant and would double-indent content. Reset to zero.
  * fullwidth-bg > .section-content has higher specificity and still applies. */
 main[class*="px-"] > section > .section-content {
   padding-inline: 0;
 }
+
+/* ─── Bottom padding for mobile/tablet bottom nav bar ────── */
+main#spa-content {
+  padding-bottom: 5rem;
+}
+@media (width >= 768px) {
+  main#spa-content {
+    padding-bottom: 4rem;
+  }
+}
+@media (width >= 1024px) {
+  main#spa-content {
+    padding-bottom: 0;
+  }
+}
+
 
 /* ─── Navigator placeholder: prevent layout shift before JS mount ───── */
 /* Exact match of real header heights to avoid CLS before navigator.js replaces placeholder. */

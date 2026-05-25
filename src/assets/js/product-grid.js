@@ -23,12 +23,12 @@
   }
 
   var CATEGORY_NAME_TO_SLUG = {
-    "翻炒系列": "stirfry",
-    "切配系列": "cutting",
-    "煎炸系列": "frying",
-    "炖煮系列": "stewing",
-    "蒸煮系列": "steaming",
-    "辅助系列": "other",
+    翻炒系列: "stirfry",
+    切配系列: "cutting",
+    煎炸系列: "frying",
+    炖煮系列: "stewing",
+    蒸煮系列: "steaming",
+    辅助系列: "other",
   };
 
   var STORE_KEY = "PRODUCT_DATA_TABLE";
@@ -343,13 +343,13 @@
 
     if (device === "mobile") {
       bar.className =
-        "fixed bottom-0 left-0 right-0 bg-white dark:bg-slate-800 border-t border-slate-200 dark:border-slate-700 px-4 py-3 z-50";
+        "fixed bottom-0 left-0 right-0 bg-white border-t border-slate-200 dark:border-slate-700 px-4 py-3 z-50";
     } else if (device === "tablet") {
       bar.className =
-        "fixed bottom-4 left-1/2 -translate-x-1/2 bg-white dark:bg-slate-800 rounded-2xl shadow-xl border border-slate-200 dark:border-slate-700 px-4 py-3 z-50 w-[calc(100%-2rem)]";
+        "fixed bottom-4 left-1/2 -translate-x-1/2 bg-white rounded-2xl shadow-xl border border-slate-200 dark:border-slate-700 px-4 py-3 z-50 w-[calc(100%-2rem)]";
     } else {
       bar.className =
-        "fixed bottom-6 left-1/2 -translate-x-1/2 bg-white dark:bg-slate-800 rounded-2xl shadow-2xl border border-slate-200 dark:border-slate-700 px-6 py-4 z-50 max-w-4xl w-[calc(100%-3rem)]";
+        "fixed bottom-6 left-1/2 -translate-x-1/2 bg-white rounded-2xl shadow-2xl border border-slate-200 dark:border-slate-700 px-6 py-4 z-50 max-w-4xl w-[calc(100%-3rem)]";
     }
 
     bar.innerHTML = '<div class="compare-bar-inner"></div>';
@@ -490,6 +490,8 @@
         }) || p.images[0];
       if (primary && primary.filePath) {
         img = primary.filePath;
+        // Defensive: normalize _N.webp → -N.webp (file rename migration)
+        img = img.replace(/_(\d+\.webp)$/, "-$1");
         if (img.indexOf("/admin/uploads/") === 0) {
           img = "/assets/images/products/" + img.split("/").pop();
         }
@@ -592,9 +594,10 @@
     var isSelected = isProductCompared(p.model);
     var selectedClass = isSelected ? " compare-selected" : "";
     return (
-      '<article class="product-card group bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 overflow-hidden cursor-pointer' +
+      '<article class="product-card group bg-white rounded-2xl border border-slate-200 dark:border-slate-700 overflow-hidden cursor-pointer' +
       selectedClass +
-      '" data-link="' + link +
+      '" data-link="' +
+      link +
       '" data-category="' +
       cat +
       '" data-tier="' +
@@ -606,7 +609,7 @@
       '" data-created="' +
       (p.created_at || "") +
       '">' +
-      '<div class="relative aspect-[4/3] overflow-hidden bg-white dark:bg-slate-800 flex items-center justify-center">' +
+      '<div class="relative aspect-[4/3] overflow-hidden bg-white flex items-center justify-center">' +
       '<img loading="lazy" alt="' +
       name +
       '" class="w-full h-full object-contain p-2 transition-transform duration-500 group-hover:scale-105" src="' +
@@ -666,7 +669,7 @@
     var isSelected = isProductCompared(p.model);
     var selectedClass = isSelected ? " compare-selected" : "";
     return (
-      '<article class="product-card-tablet bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 overflow-hidden cursor-pointer' +
+      '<article class="product-card-tablet bg-white rounded-xl border border-slate-200 dark:border-slate-700 overflow-hidden cursor-pointer' +
       selectedClass +
       '" data-category="' +
       cat +
@@ -679,7 +682,7 @@
       '" data-created="' +
       (p.created_at || "") +
       '">' +
-      '<div class="relative aspect-[4/3] overflow-hidden bg-white dark:bg-slate-800 flex items-center justify-center">' +
+      '<div class="relative aspect-[4/3] overflow-hidden bg-white flex items-center justify-center">' +
       '<img loading="lazy" alt="' +
       name +
       '" class="w-full h-full object-contain p-2" src="' +
@@ -728,7 +731,7 @@
     var isSelected = isProductCompared(p.model);
     var selectedClass = isSelected ? " compare-selected" : "";
     return (
-      '<article class="product-card-mobile bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 overflow-hidden relative' +
+      '<article class="product-card-mobile bg-white rounded-xl border border-slate-200 dark:border-slate-700 overflow-hidden relative' +
       selectedClass +
       '" data-category="' +
       cat +
@@ -744,26 +747,36 @@
       buildMobileCompareBtnHTML(model) +
       '<a href="' +
       link +
-      '" class="flex gap-4 p-3">' +
-      '<div class="w-24 h-24 rounded-lg bg-white dark:bg-slate-800 flex-shrink-0 overflow-hidden flex items-center justify-center">' +
+      '" class="block">' +
+      '<div class="aspect-[4/3] overflow-hidden bg-white flex items-center justify-center">' +
       '<img loading="lazy" alt="' +
       name +
       '" class="w-full h-full object-contain p-1" src="' +
       img +
       "\" onerror=\"if(!this.dataset.errored){this.dataset.errored='1';this.src='/assets/images/products/default.webp' }\">" +
       "</div>" +
-      '<div class="flex-1 min-w-0">' +
-      '<h3 class="text-sm font-bold text-slate-900 dark:text-white mb-1 truncate">' +
+      '<div class="p-3">' +
+      '<div class="flex items-center gap-1.5 mb-1"><span class="material-symbols-outlined text-primary text-sm">local_fire_department</span><span class="text-xs font-bold text-primary uppercase tracking-wider">' +
+      cat +
+      "</span></div>" +
+      '<h3 class="text-sm font-bold text-slate-900 dark:text-white mb-1">' +
       name +
       "</h3>" +
       '<p class="text-xs text-slate-500 dark:text-slate-400 mb-2 line-clamp-2">' +
       desc +
       "</p>" +
-      '<div class="flex items-center justify-between">' +
+      '<div class="flex items-center justify-between pt-2 border-t border-slate-100 dark:border-slate-700">' +
       '<a href="/quote" class="text-sm font-black text-primary hover:underline">' +
       esc(tl("products_inquire", "询价")) +
       "</a>" +
-      '<span class="material-symbols-outlined text-slate-400 text-sm">arrow_forward</span>' +
+      '<div class="flex items-center gap-2">' +
+      '<a href="' +
+      link +
+      '" class="flex items-center gap-1 text-primary text-sm font-bold hover:underline"><span>' +
+      esc(tl("btn_view_details", "查看详情")) +
+      '</span><span class="material-symbols-outlined text-xs">arrow_forward</span></a>' +
+      buildCompareBtnHTML(model) +
+      "</div>" +
       "</div>" +
       "</div>" +
       "</a>" +
@@ -1183,11 +1196,11 @@
   // Click-to-detail: delegate clicks on product cards (PC/tablet)
   // Mobile cards already have <a> wrappers, so only target PC/tablet
   document.addEventListener("click", function (ev) {
-    var card = ev.target.closest('[data-link]');
+    var card = ev.target.closest("[data-link]");
     if (!card) return;
     // Don't intercept clicks on links, buttons, or inputs
-    if (ev.target.closest('a, button, input, select, label')) return;
-    var href = card.getAttribute('data-link');
+    if (ev.target.closest("a, button, input, select, label")) return;
+    var href = card.getAttribute("data-link");
     if (href) {
       ev.preventDefault();
       window.location.href = href;

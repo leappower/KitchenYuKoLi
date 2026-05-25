@@ -38,7 +38,12 @@
     var primary = product.images.find(function (img) {
       return img.isPrimary;
     });
-    return primary ? primary.filePath : product.images[0].filePath;
+    var fp = primary ? primary.filePath : product.images[0].filePath;
+    // Defensive: normalize _N.webp → -N.webp (file rename migration)
+    if (fp) {
+      fp = fp.replace(/_(\d+\.webp)$/, "-$1");
+    }
+    return fp;
   }
 
   /**
@@ -102,7 +107,8 @@
   /**
    * Fetch from CMS API with ETag support
    */
-  function _fetchFromNetwork(callback) {
+  function _fetchFromNetwork(callback, retries) {
+    retries = retries || 0;
     // Local data sources (no API dependency)
     var table = window.PRODUCT_DATA_TABLE || [];
     var coreProducts = table.filter(function (p) {
@@ -111,6 +117,14 @@
     if (coreProducts.length > 0) {
       _saveCache(coreProducts);
       callback(coreProducts, "local");
+      return;
+    }
+    // Retry if product-data-table.js hasn't loaded yet (max 5 times, 100ms apart)
+    if (retries < 5) {
+      var self = this;
+      setTimeout(function () {
+        _fetchFromNetwork(callback, retries + 1);
+      }, 100);
       return;
     }
     _loadCachedFallback(callback);
@@ -185,7 +199,7 @@
       }
 
       // Reapply i18n after render
-      var VIS_COUNT = 4; // PC: 1 row (4 columns)
+      var VIS_COUNT = 8; // PC: 2 rows (4 columns × 2)
       var hasMore = products.length > VIS_COUNT;
       var visProducts = hasMore ? products.slice(0, VIS_COUNT) : products;
       var restProducts = hasMore ? products.slice(VIS_COUNT) : [];
@@ -193,32 +207,52 @@
       function buildPCCard(p) {
         var img = getPrimaryImage(p);
         var href = getProductDetailHref(p);
+        var catMap = {
+          翻炒系列: "stirfry",
+          炖煮系列: "stewing",
+          蒸煮系列: "steaming",
+          煎炸系列: "frying",
+          切配系列: "cutting",
+          辅助系列: "other",
+        };
+        var catSlug = catMap[p.category] || "other";
+        var catHref = "/products/" + catSlug + "/";
         return (
-          '<div class="group bg-background-light dark:bg-background-dark p-4 rounded-2xl border border-slate-200 dark:border-slate-800 hover:border-primary transition-all shadow-sm">' +
+          '<div class="group bg-white rounded-2xl border border-slate-200 dark:border-slate-700 hover:border-primary hover:shadow-lg transition-all duration-300 overflow-hidden">' +
           '<a href="' +
           href +
           '" class="block">' +
-          '<div class="aspect-[4/3] rounded-xl bg-slate-100 dark:bg-slate-800 overflow-hidden mb-6">' +
+          '<div class="aspect-[4/3] bg-slate-50 dark:bg-slate-900 overflow-hidden">' +
           (img
             ? '<img alt="' +
               escHtml(p.model) +
-              '" class="w-full h-full object-contain p-2" src="' +
+              '" class="w-full h-full object-contain p-4 group-hover:scale-105 transition-transform duration-300" src="' +
               escHtml(img) +
               '" loading="lazy">'
             : '<div style="font-size:2.5rem;color:#d1d5db;display:flex;align-items:center;justify-content:center;height:100%">📦</div>') +
           "</div>" +
-          '<h3 class="text-xl font-bold mb-2">' +
+          '<div class="p-5">' +
+          (p.category
+            ? '<a href="' +
+              catHref +
+              '" class="inline-block text-xs font-bold px-2.5 py-1 rounded-full bg-primary/10 text-primary mb-3 hover:bg-primary/20 transition-colors">' +
+              escHtml(p.category) +
+              "</a>"
+            : "") +
+          '<h3 class="text-lg font-black mb-1">' +
           escHtml(p.model) +
           "</h3>" +
-          (p.subCategory
-            ? '<p class="text-sm text-slate-500 mb-6">' + escHtml(p.subCategory) + "</p>"
-            : '<div class="mb-6"></div>') +
-          '<div class="flex justify-between items-center border-t border-slate-100 dark:border-slate-800 pt-4">' +
-          (p.badge
-            ? '<span class="text-xs font-bold uppercase text-slate-400">' + escHtml(p.badge) + "</span>"
+          (typeof getProductField === "function" && getProductField(p, "name")
+            ? '<p class="text-sm text-slate-500 dark:text-slate-400 line-clamp-2 mb-4">' +
+              escHtml(getProductField(p, "name")) +
+              "</p>"
+            : '<div class="mb-4"></div>') +
+          '<div class="flex justify-between items-center pt-3 border-t border-slate-100 dark:border-slate-700">' +
+          (p.power
+            ? '<span class="text-xs font-bold text-slate-400">' + escHtml(p.power) + "</span>"
             : "<span></span>") +
-          '<span class="text-primary font-black" data-i18n="home_hw_learn_more">了解更多</span>' +
-          "</div></a></div>"
+          '<span class="text-sm text-primary font-bold flex items-center gap-1" data-i18n="home_hw_learn_more">了解更多 <span class=\"material-symbols-outlined text-base\">arrow_forward</span></span>' +
+          "</div></div></a></div>"
         );
       }
 
@@ -345,32 +379,56 @@
         return;
       }
 
-      var html = '<div class="flex overflow-x-auto gap-3 no-scrollbar pb-2">';
-      products.forEach(function (p) {
+      var VIS = 4;
+      var hasMore = products.length > VIS;
+      var visProducts = products.slice(0, VIS);
+      var restProducts = hasMore ? products.slice(VIS) : [];
+
+      function buildCard(p) {
         var img = getPrimaryImage(p);
         var href = getProductDetailHref(p);
-        html +=
-          '<div class="min-w-[260px] bg-white dark:bg-slate-900 rounded-xl overflow-hidden shadow-sm border border-slate-200 dark:border-slate-800">' +
+        return (
+          '<div class="bg-white dark:bg-slate-900 rounded-xl overflow-hidden shadow-sm border border-slate-200 dark:border-slate-800">' +
           '<a href="' +
           href +
           '" class="block">' +
-          '<div class="h-36 bg-cover bg-center bg-slate-200 dark:bg-slate-800"' +
+          '<div class="aspect-[4/3] bg-cover bg-center bg-slate-200 dark:bg-slate-800"' +
           (img
             ? ' style="background-image: url(&quot;' +
               escHtml(img) +
               '&quot;); background-size: cover; background-position: center;"'
             : "") +
           "></div>" +
-          '<div class="p-3">' +
-          '<h3 class="font-bold text-sm mb-1">' +
+          '<div class="p-3 sm:p-4">' +
+          '<h3 class="font-bold text-sm sm:text-base mb-1">' +
           escHtml(p.model) +
           "</h3>" +
           (p.subCategory
-            ? '<p class="text-xs text-slate-500 mb-2">' + escHtml(p.subCategory) + "</p>"
+            ? '<p class="text-xs sm:text-sm text-slate-500 mb-2">' + escHtml(p.subCategory) + "</p>"
             : '<div class="mb-2"></div>') +
-          '<span class="text-xs font-bold text-primary" data-i18n="home_hw_learn_more">了解更多</span>' +
-          "</div></a></div>";
+          '<span class="text-xs sm:text-sm font-bold text-primary" data-i18n="home_hw_learn_more">了解更多</span>' +
+          "</div></a></div>"
+        );
+      }
+
+      var html = '<div class="flex flex-col gap-4">';
+      html += '<div class="flex flex-col gap-3">';
+      visProducts.forEach(function (p) {
+        html += buildCard(p);
       });
+      html += "</div>";
+      if (hasMore) {
+        html +=
+          "<button id=\"hcp-load-more-mobile\" class=\"w-full py-2.5 rounded-xl border border-slate-300 dark:border-slate-600 text-sm font-bold text-primary hover:bg-primary hover:text-white hover:border-primary transition-all flex items-center justify-center gap-2\" onclick=\"(function(){var b=document.getElementById('hcp-hidden-mobile');var btn=document.getElementById('hcp-load-more-mobile');if(b&&btn){b.style.display='';btn.style.display='none';window.translationManager&&window.translationManager.applyTo(b.parentElement);}})()\">" +
+          '<span class="material-symbols-outlined text-lg">expand_more</span> ' +
+          escHtml(tl("home_show_more", "更多产品")) +
+          "</button>";
+        html += '<div id="hcp-hidden-mobile" style="display:none" class="flex flex-col gap-3">';
+        restProducts.forEach(function (p) {
+          html += buildCard(p);
+        });
+        html += "</div>";
+      }
       html += "</div>";
       container.innerHTML = html;
 

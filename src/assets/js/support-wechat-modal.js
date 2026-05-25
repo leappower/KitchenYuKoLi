@@ -10,7 +10,7 @@
     tgt.addEventListener(evt, fn, { signal: ac.signal });
   }
 
-  var QR_IMAGE = "/assets/images/wechat-qr.webp";
+  var QR_IMAGE = "/assets/images/about/wechat-qr.webp";
   var TITLE = window.uiText("wechat_modal_title", "Scan WeChat QR Code");
   var SUBTITLE = window.uiText("wechat_modal_subtitle", "Add our enterprise WeChat for dedicated support");
 
