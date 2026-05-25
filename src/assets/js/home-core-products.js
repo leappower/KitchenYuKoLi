@@ -38,7 +38,12 @@
     var primary = product.images.find(function (img) {
       return img.isPrimary;
     });
-    return primary ? primary.filePath : product.images[0].filePath;
+    var fp = primary ? primary.filePath : product.images[0].filePath;
+    // Defensive: normalize _N.webp → -N.webp (file rename migration)
+    if (fp) {
+      fp = fp.replace(/_(\d+\.webp)$/, '-$1');
+    }
+    return fp;
   }
 
   /**

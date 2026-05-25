@@ -490,6 +490,8 @@
         }) || p.images[0];
       if (primary && primary.filePath) {
         img = primary.filePath;
+        // Defensive: normalize _N.webp → -N.webp (file rename migration)
+        img = img.replace(/_(\d+\.webp)$/, '-$1');
         if (img.indexOf("/admin/uploads/") === 0) {
           img = "/assets/images/products/" + img.split("/").pop();
         }

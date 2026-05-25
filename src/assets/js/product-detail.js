@@ -96,6 +96,8 @@
                 return i.isPrimary;
               }) || rp.images[0]
             ).filePath;
+            // Defensive: normalize _N.webp → -N.webp (file rename migration)
+            if (f) f = f.replace(/_(\d+\.webp)$/, '-$1');
             // Defensive: rewrite stale CMS paths
             if (f && f.indexOf("/admin/uploads/") === 0) {
               f = "/assets/images/products/" + f.split("/").pop();
@@ -363,6 +365,8 @@
         }) || product.images[0];
       if (pi && pi.filePath) {
         imgSrc = pi.filePath;
+        // Defensive: normalize _N.webp → -N.webp (file rename migration)
+        imgSrc = imgSrc.replace(/_(\d+\.webp)$/, '-$1');
         // Defensive: rewrite stale CMS paths
         if (imgSrc.indexOf("/admin/uploads/") === 0) {
           imgSrc = "/assets/images/products/" + imgSrc.split("/").pop();
