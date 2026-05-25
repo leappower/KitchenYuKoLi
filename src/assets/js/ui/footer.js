@@ -121,8 +121,8 @@
       // Mobile (<768px): compact 1-column, Tablet (768-1024): 2-column grid
       '<div class="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 mb-4 sm:mb-6">' +
       /* Products */
-      '<div class="text-center sm:text-left">' +
-      '<h4 class="text-xs sm:text-sm font-bold uppercase tracking-wider mb-2 text-center sm:text-left" data-i18n="footer_products_title">Products</h4>' +
+      '<div class="text-center md:text-left">' +
+      '<h4 class="text-xs sm:text-sm font-bold uppercase tracking-wider mb-2 text-center md:text-left" data-i18n="footer_products_title">Products</h4>' +
       '<ul class="space-y-1 text-xs sm:text-sm text-slate-300">' +
       '<li><a href="/products/all/" class="hover:text-white transition-colors" data-i18n="nav_products">All Products</a></li>' +
       '<li><a href="/products/stirfry/" class="hover:text-white transition-colors" data-i18n="nav_products_stirfry">Stir-fry Series</a></li>' +
@@ -132,8 +132,8 @@
       '<li><a href="/products/cutting/" class="hover:text-white transition-colors" data-i18n="nav_products_cutting">Prep &amp; Cutting</a></li>' +
       '</ul></div>' +
       /* Applications */
-      '<div class="block text-center sm:text-left">' +
-      '<h4 class="text-xs sm:text-sm font-bold uppercase tracking-wider mb-2 text-center sm:text-left" data-i18n="footer_applications_title">Applications</h4>' +
+      '<div class="block text-center md:text-left">' +
+      '<h4 class="text-xs sm:text-sm font-bold uppercase tracking-wider mb-2 text-center md:text-left" data-i18n="footer_applications_title">Applications</h4>' +
       '<ul class="space-y-1 text-xs sm:text-sm text-slate-300">' +
       '<li><a href="/applications/canteen/" class="hover:text-white transition-colors" data-i18n="nav_applications_canteen">School/Corporate</a></li>' +
       '<li><a href="/applications/small-restaurant/" class="hover:text-white transition-colors" data-i18n="nav_applications_small_restaurant">Small Restaurant</a></li>' +
