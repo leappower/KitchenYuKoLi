@@ -97,6 +97,7 @@ var __DEVELOPMENT__ = typeof __DEVELOPMENT__ !== "undefined" ? __DEVELOPMENT__ :
       failed: false,
       pausedByScroll: false,
       _scrollTimer: null,
+      _playLock: false,
     };
 
     var fallbackBtn = container.querySelector(".hero-video-fallback-btn");
@@ -174,6 +175,12 @@ var __DEVELOPMENT__ = typeof __DEVELOPMENT__ !== "undefined" ? __DEVELOPMENT__ :
       video.style.display = "";
       video.style.opacity = "1";
 
+      /* 播放锁：防止 play/pause 竞态（IntersectionObserver 可能在同一帧触发 pause） */
+      state._playLock = true;
+      setTimeout(function () {
+        state._playLock = false;
+      }, 300);
+
       /* 播放 */
       video.muted = state.isMuted;
 
@@ -181,8 +188,11 @@ var __DEVELOPMENT__ = typeof __DEVELOPMENT__ !== "undefined" ? __DEVELOPMENT__ :
       if (promise && typeof promise.catch === "function") {
         promise.catch(function (err) {
           console.warn("[hero-video] play() rejected:", err.message);
-          state.failed = true;
-          showFallback(container, poster, video, overlay, playBtn);
+          /* 仅在非 pause 中断时标记失败；pause 中断说明竞态已过，不降级 */
+          if (err.name !== "AbortError") {
+            state.failed = true;
+            showFallback(container, poster, video, overlay, playBtn);
+          }
         });
       }
     }
@@ -258,8 +268,9 @@ var __DEVELOPMENT__ = typeof __DEVELOPMENT__ !== "undefined" ? __DEVELOPMENT__ :
           var entry = entries[0];
           var ratio = entry.intersectionRatio;
 
-          /* ── 不可见 → 暂停 ── */
+          /* ── 不可见 → 暂停（但跳过播放锁窗口期，防止竞态） ── */
           if (!entry.isIntersecting || ratio === 0) {
+            if (state._playLock) return;
             if (state.isPlaying) {
               state.savedTime = video.currentTime;
               state.pausedByScroll = true;
