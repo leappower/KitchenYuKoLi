@@ -113,12 +113,12 @@
       '<a href="/products/' +
       encodeURIComponent(rp.model) +
       '" class="group block bg-white dark:bg-slate-800 rounded-xl overflow-hidden shadow-md hover:shadow-lg transition-all border border-slate-100 dark:border-slate-700">' +
-      '<div class="h-36 bg-gradient-to-br ' +
+      '<div class="aspect-[4/3] bg-gradient-to-br ' +
       grad +
-      ' relative overflow-hidden">' +
+      ' relative overflow-hidden flex items-center justify-center">' +
       '<img loading="lazy" alt="' +
       esc(rp.model) +
-      '" class="w-full h-full object-cover group-hover:scale-105 transition-transform" src="' +
+      '" class="w-full h-full object-contain p-4 group-hover:scale-105 transition-transform" src="' +
       rImg +
       '" onerror="this.style.display=\'none\'">' +
       '</div><div class="p-4"><h4 class="font-bold text-sm mb-1">' +
