@@ -190,6 +190,17 @@
   function ensureContainers() {
     var ce = document.getElementById("product-content");
     var re = document.getElementById("related-products");
+    var bc = document.getElementById("pdp-breadcrumb");
+
+    // Ensure breadcrumb container exists regardless of product-content state
+    if (!bc) {
+      var container = ce ? ce.parentElement : document.querySelector("main") || document.body;
+      bc = document.createElement("div");
+      bc.id = "pdp-breadcrumb";
+      bc.className = "w-full";
+      container.insertBefore(bc, ce || container.firstChild);
+    }
+
     if (!ce || !re) {
       // Products listing page has #products-section; hide it and create PDP containers
       var listing = document.getElementById("products-section") || document.getElementById("product-grid");
