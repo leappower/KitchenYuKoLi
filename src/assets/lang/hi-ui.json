@@ -3499,5 +3499,10 @@
   "breadcrumb_other_services": "अन्य सेवाएं",
   "quote_takeaway": "टेकअवे / डिलीवरी",
   "quote_select_restaurant_type": "रेस्तरां प्रकार चुनें",
-  "quote_select_channel": "संपर्क विधि चुनें"
+  "quote_select_channel": "संपर्क विधि चुनें",
+  "cookie_consent_title": "We use cookies",
+  "cookie_consent_text": "We use cookies to improve your experience. By continuing to visit this site you agree to our use of cookies.",
+  "cookie_consent_accept": "Accept",
+  "cookie_consent_decline": "Decline",
+  "profit_calc_disclaimer": "Disclaimer: The calculated results are for reference only and do not constitute financial advice. Actual results may vary based on local market conditions, labor costs, and operating efficiency."
 }

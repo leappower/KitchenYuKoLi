@@ -3501,5 +3501,10 @@
   "quote_select_restaurant_type": "選擇餐廳類型",
   "quote_select_channel": "選擇聯繫方式",
   "products_filter_full_smart": "全智能",
-  "products_filter_basic": "基礎"
+  "products_filter_basic": "基礎",
+  "cookie_consent_title": "我們使用 Cookie",
+  "cookie_consent_text": "我們使用 Cookie 來改善您的瀏覽體驗。繼續使用本網站即表示您同意我們的 Cookie 政策。",
+  "cookie_consent_accept": "接受",
+  "cookie_consent_decline": "拒絕",
+  "profit_calc_disclaimer": "免責聲明：計算結果僅供參考，不構成財務建議。實際結果可能因當地市場條件、人工成本和營運效率而異。"
 }

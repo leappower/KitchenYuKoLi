@@ -3499,5 +3499,10 @@
   "breadcrumb_other_services": "기타 서비스",
   "quote_takeaway": "테이크아웃/배달",
   "quote_select_restaurant_type": "레스토랑 유형 선택",
-  "quote_select_channel": "연락 방법 선택"
+  "quote_select_channel": "연락 방법 선택",
+  "cookie_consent_title": "We use cookies",
+  "cookie_consent_text": "We use cookies to improve your experience. By continuing to visit this site you agree to our use of cookies.",
+  "cookie_consent_accept": "Accept",
+  "cookie_consent_decline": "Decline",
+  "profit_calc_disclaimer": "Disclaimer: The calculated results are for reference only and do not constitute financial advice. Actual results may vary based on local market conditions, labor costs, and operating efficiency."
 }

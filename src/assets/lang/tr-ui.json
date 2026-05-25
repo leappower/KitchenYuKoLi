@@ -3500,5 +3500,10 @@
   "quote_takeaway": "Paket Servis / Teslimat",
   "quote_select_restaurant_type": "Restoran türünü seçin",
   "quote_select_channel": "İletişim yöntemini seçin",
-  "products_filter_basic": "Başlangıç"
+  "products_filter_basic": "Başlangıç",
+  "cookie_consent_title": "We use cookies",
+  "cookie_consent_text": "We use cookies to improve your experience. By continuing to visit this site you agree to our use of cookies.",
+  "cookie_consent_accept": "Accept",
+  "cookie_consent_decline": "Decline",
+  "profit_calc_disclaimer": "Disclaimer: The calculated results are for reference only and do not constitute financial advice. Actual results may vary based on local market conditions, labor costs, and operating efficiency."
 }

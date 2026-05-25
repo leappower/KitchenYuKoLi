@@ -3499,5 +3499,10 @@
   "breadcrumb_other_services": "Otros Servicios",
   "quote_takeaway": "Para llevar / Delivery",
   "quote_select_restaurant_type": "Seleccionar tipo de restaurante",
-  "quote_select_channel": "Seleccionar método de contacto"
+  "quote_select_channel": "Seleccionar método de contacto",
+  "cookie_consent_title": "We use cookies",
+  "cookie_consent_text": "We use cookies to improve your experience. By continuing to visit this site you agree to our use of cookies.",
+  "cookie_consent_accept": "Accept",
+  "cookie_consent_decline": "Decline",
+  "profit_calc_disclaimer": "Disclaimer: The calculated results are for reference only and do not constitute financial advice. Actual results may vary based on local market conditions, labor costs, and operating efficiency."
 }

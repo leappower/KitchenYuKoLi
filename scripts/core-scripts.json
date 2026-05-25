@@ -14,6 +14,7 @@
     "assets/js/ui/slide-menu.js",
     "assets/js/ui/footer.js",
     "assets/js/ui/floating-actions.js",
+    "assets/js/ui/cookie-consent.js",
     "assets/js/swup.min.js",
     "assets/js/swup-head-plugin.min.js",
     "assets/js/swup-preload-plugin.min.js",

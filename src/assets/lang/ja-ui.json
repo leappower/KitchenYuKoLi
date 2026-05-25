@@ -3499,5 +3499,10 @@
   "breadcrumb_other_services": "その他サービス",
   "quote_takeaway": "テイクアウト/デリバリー",
   "quote_select_restaurant_type": "レストランタイプを選択",
-  "quote_select_channel": "連絡方法を選択"
+  "quote_select_channel": "連絡方法を選択",
+  "cookie_consent_title": "We use cookies",
+  "cookie_consent_text": "We use cookies to improve your experience. By continuing to visit this site you agree to our use of cookies.",
+  "cookie_consent_accept": "Accept",
+  "cookie_consent_decline": "Decline",
+  "profit_calc_disclaimer": "Disclaimer: The calculated results are for reference only and do not constitute financial advice. Actual results may vary based on local market conditions, labor costs, and operating efficiency."
 }
