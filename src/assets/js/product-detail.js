@@ -767,6 +767,8 @@
           renderPDP();
         } else if (segs[1] && segs[1] !== "compare" && !isCategorySlug(segs[1])) {
           renderPDP();
+        } else if (isCategorySlug(segs[1]) && segs[2]) {
+          renderPDP();
         }
       }
     },
@@ -781,6 +783,8 @@
         if (segs[1] === "detail" && segs[2]) {
           renderPDP();
         } else if (segs[1] && segs[1] !== "compare" && !isCategorySlug(segs[1])) {
+          renderPDP();
+        } else if (isCategorySlug(segs[1]) && segs[2]) {
           renderPDP();
         }
       }
