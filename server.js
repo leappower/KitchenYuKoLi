@@ -457,13 +457,77 @@ app.get('*', (req, res) => {
   // Never intercept API routes
   if (req.path.startsWith('/api/')) return res.status(404).json({ error: 'Not found' });
 
-  // Product detail route: /products/<model>/ (not a known category slug)
+  var CATEGORY_SLUGS = ['all', 'cutting', 'stirfry', 'frying', 'stewing', 'steaming', 'other', 'compare', 'detail'];
+  var CATEGORY_NAME_TO_SLUG = {
+    '翻炒系列': 'stirfry',
+    '切配系列': 'cutting',
+    '煎炸系列': 'frying',
+    '炖煮系列': 'stewing',
+    '蒸煮系列': 'steaming',
+    '辅助系列': 'other',
+  };
+  var SLUG_TO_CATEGORY_NAME = {};
+  Object.keys(CATEGORY_NAME_TO_SLUG).forEach(function(k) {
+    SLUG_TO_CATEGORY_NAME[CATEGORY_NAME_TO_SLUG[k]] = k;
+  });
+
   var clean = req.path.replace(/\/+$/, '');
+
+  // New canonical route: /products/{slug}/{model}/
+  var newMatch = clean.match(/^\/products\/([^/]+)\/([^/]+)$/);
+  if (newMatch && CATEGORY_SLUGS.indexOf(newMatch[1]) >= 0) {
+    var catSlug = newMatch[1];
+    var modelSlug = newMatch[2];
+    if (catSlug !== 'detail' && catSlug !== 'compare') {
+      var isMobile = isMobileUA(req.headers['user-agent']);
+      var variantIdx = { 'mobile': 'index-mobile.html', 'tablet': 'index-tablet.html', 'pc': 'index-pc.html' };
+      var detailFile = path.join(__dirname, 'dist', 'products', 'detail', variantIdx[isMobile] || 'index-pc.html');
+      if (!isFile(detailFile)) {
+        detailFile = path.join(__dirname, 'dist', 'products', 'detail', 'index.html');
+      }
+      if (isFile(detailFile)) {
+        var html = fs.readFileSync(detailFile, 'utf-8');
+        html = html.replace('<head>', '<head><meta name="product-model" content="' + modelSlug + '"/>');
+        html = html.replace('<head>', '<head><meta name="product-category-slug" content="' + catSlug + '"/>');
+        html = html.replace('<head>', '<head><meta name="ssg-device" content="1"/>');
+        res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate');
+        return res.send(html);
+      }
+    }
+  }
+
+  // Legacy route: /products/<model>/ (not a known category slug)
   var productMatch = clean.match(/^\/products\/([^/]+)$/);
   if (productMatch) {
     var productSlug = productMatch[1];
-    var CATEGORY_SLUGS = ['all', 'cutting', 'stirfry', 'frying', 'stewing', 'steaming', 'other', 'compare', 'detail'];
     if (CATEGORY_SLUGS.indexOf(productSlug) === -1) {
+      // Try to look up the product's category to redirect to canonical URL
+      try {
+        var dataFile = path.join(__dirname, 'src', 'assets', 'js', 'product-data-table.js');
+        if (isFile(dataFile)) {
+          var dataContent = fs.readFileSync(dataFile, 'utf-8');
+          var modelRegex = new RegExp('"model":\s*"' + productSlug.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '"');
+          var catRegex = /"category":\s*"([^"]+)"/;
+          var lines = dataContent.split('\n');
+          var foundCat = null;
+          for (var i = 0; i < lines.length; i++) {
+            if (lines[i].indexOf(productSlug) >= 0) {
+              // Search backward for category
+              for (var j = i; j >= 0 && j > i - 20; j--) {
+                var cm = lines[j].match(catRegex);
+                if (cm) { foundCat = cm[1]; break; }
+              }
+              break;
+            }
+          }
+          if (foundCat && CATEGORY_NAME_TO_SLUG[foundCat]) {
+            var canonicalSlug = CATEGORY_NAME_TO_SLUG[foundCat];
+            return res.redirect(301, '/products/' + canonicalSlug + '/' + productSlug + '/');
+          }
+        }
+      } catch(e) {}
+
+      // Fallback: serve detail template as before
       var isMobile = isMobileUA(req.headers['user-agent']);
       var variantIdx = { 'mobile': 'index-mobile.html', 'tablet': 'index-tablet.html', 'pc': 'index-pc.html' };
       var detailFile = path.join(__dirname, 'dist', 'products', 'detail', variantIdx[isMobile] || 'index-pc.html');

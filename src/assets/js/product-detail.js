@@ -19,6 +19,16 @@
   // Category slugs used for product listing — NOT PDP pages
   var CATEGORY_SLUGS = ["all", "cutting", "stirfry", "frying", "stewing", "steaming", "other"];
 
+  // Chinese category name (from PRODUCT_DATA_TABLE) → URL slug
+  var CATEGORY_NAME_TO_SLUG = {
+    "翻炒系列": "stirfry",
+    "切配系列": "cutting",
+    "煎炸系列": "frying",
+    "炖煮系列": "stewing",
+    "蒸煮系列": "steaming",
+    "辅助系列": "other",
+  };
+
   function isCategorySlug(slug) {
     return CATEGORY_SLUGS.indexOf(slug) >= 0;
   }
@@ -221,17 +231,26 @@
   }
 
   function renderPDP() {
-    // Read model from path: /products/detail/<model>/ or legacy /products/<model>/
+    // Read model from path:
+    //   /products/{slug}/{model}/   (new canonical)
+    //   /products/detail/{model}/  (old detail path)
+    //   /products/{model}/         (legacy, skip category slugs)
     var path = window.location.pathname.replace(/\/$/, "");
     var model = null;
-    var m = path.match(/^\/products\/detail\/([^/]+)$/);
-    if (m) {
-      model = decodeURIComponent(m[1]);
+    var m = path.match(/^\/products\/([^/]+)\/([^/]+)$/);
+    if (m && isCategorySlug(m[1])) {
+      // /products/stirfry/DLB-TBQ30/ → slug=m[1], model=m[2]
+      model = decodeURIComponent(m[2]);
     } else {
-      // Legacy path: /products/<model>/ — skip category slugs
-      m = path.match(/^\/products\/([^/]+)$/);
-      if (m && !isCategorySlug(m[1])) {
+      m = path.match(/^\/products\/detail\/([^/]+)$/);
+      if (m) {
         model = decodeURIComponent(m[1]);
+      } else {
+        // Legacy path: /products/<model>/ — skip category slugs
+        m = path.match(/^\/products\/([^/]+)$/);
+        if (m && !isCategorySlug(m[1])) {
+          model = decodeURIComponent(m[1]);
+        }
       }
     }
     // Also check meta tag (injected by server.js for direct page loads)
@@ -271,8 +290,11 @@
       var bcEl = document.getElementById("pdp-breadcrumb");
       if (!bcEl) return;
       var catKey = product.category || "";
+      // Map Chinese category name (e.g. "翻炒系列") to i18n key via slug
+      var catSlug = CATEGORY_NAME_TO_SLUG[catKey] || "";
+      var catI18nKey = catSlug ? (PRODUCT_SLUGS[catSlug] || {}).key || "" : "";
       var slugMap = (window.Breadcrumb && window.Breadcrumb.CATEGORY_KEY_TO_SLUG) || {};
-      var slug = slugMap[catKey] || "";
+      var slug = slugMap[catI18nKey] || catSlug;
       var catInfo =
         slug && window.Breadcrumb && window.Breadcrumb.PRODUCT_SLUGS ? window.Breadcrumb.PRODUCT_SLUGS[slug] : {};
       var catLabel = catInfo.label || "";

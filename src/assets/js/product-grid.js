@@ -22,6 +22,15 @@
     return fallback;
   }
 
+  var CATEGORY_NAME_TO_SLUG = {
+    "翻炒系列": "stirfry",
+    "切配系列": "cutting",
+    "煎炸系列": "frying",
+    "炖煮系列": "stewing",
+    "蒸煮系列": "steaming",
+    "辅助系列": "other",
+  };
+
   var STORE_KEY = "PRODUCT_DATA_TABLE";
   var COMPARE_KEY = "YUKOLI_COMPARE_ITEMS";
   var MAX_COMPARE = 3;
@@ -565,7 +574,8 @@
       badge =
         '<span class="px-3 py-1 bg-primary text-white text-xs font-bold rounded-full">' + esc(p.badge) + "</span>";
     }
-    var link = "/products/" + encodeURIComponent(model) + "/";
+    var linkSlug = CATEGORY_NAME_TO_SLUG[p._category] || encodeURIComponent(model);
+    var link = "/products/" + linkSlug + "/" + encodeURIComponent(model) + "/";
     var isSelected = isProductCompared(p.model);
     var selectedClass = isSelected ? " compare-selected" : "";
     return (
@@ -637,7 +647,8 @@
       badge =
         '<span class="px-2 py-0.5 bg-primary text-white text-[10px] font-bold rounded">' + esc(p.badge) + "</span>";
     }
-    var link = "/products/" + encodeURIComponent(model) + "/";
+    var linkSlug = CATEGORY_NAME_TO_SLUG[p._category] || encodeURIComponent(model);
+    var link = "/products/" + linkSlug + "/" + encodeURIComponent(model) + "/";
     var isSelected = isProductCompared(p.model);
     var selectedClass = isSelected ? " compare-selected" : "";
     return (
@@ -698,7 +709,8 @@
     var name = esc(p.name || model);
     var desc = esc(p.description || p.card_desc || "");
     var img = esc(p._imageUrl);
-    var link = "/products/" + encodeURIComponent(model) + "/";
+    var linkSlug = CATEGORY_NAME_TO_SLUG[p._category] || encodeURIComponent(model);
+    var link = "/products/" + linkSlug + "/" + encodeURIComponent(model) + "/";
     var isSelected = isProductCompared(p.model);
     var selectedClass = isSelected ? " compare-selected" : "";
     return (
