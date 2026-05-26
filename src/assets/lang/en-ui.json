@@ -3687,5 +3687,11 @@
   "privacy_section_13_title": "13. Children's Privacy",
   "privacy_section_13_content": "Our services are not directed to individuals under 18. We do not knowingly collect personal data from children. If you believe we have collected data from a minor, please contact us immediately.",
   "privacy_section_14_title": "14. Automated Decision-Making",
-  "privacy_section_14_content": "We do not use automated decision-making or profiling that produces legal effects. All business decisions involve human review."
+  "privacy_section_14_content": "We do not use automated decision-making or profiling that produces legal effects. All business decisions involve human review.",
+  "search_type_product": "Product",
+  "search_type_case": "Case Study",
+  "search_type_solution": "Solution",
+  "search_type_support": "Support",
+  "search_type_page": "Page",
+  "search_type_news": "News"
 }

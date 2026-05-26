@@ -3687,5 +3687,11 @@
   "privacy_section_13_title": "十三、儿童隐私",
   "privacy_section_13_content": "我们的服务不面向 18 岁以下的个人。我们不会故意收集儿童的个人数据。如果您认为我们收集了未成年人的数据，请立即与我们联系。",
   "privacy_section_14_title": "十四、自动化决策",
-  "privacy_section_14_content": "我们不使用产生法律效力的自动化决策或用户画像。所有业务决策都涉及人工审核。"
+  "privacy_section_14_content": "我们不使用产生法律效力的自动化决策或用户画像。所有业务决策都涉及人工审核。",
+  "search_type_product": "产品",
+  "search_type_case": "案例",
+  "search_type_solution": "解决方案",
+  "search_type_support": "支持",
+  "search_type_page": "页面",
+  "search_type_news": "资讯"
 }

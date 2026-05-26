@@ -36,22 +36,6 @@
     return v && v !== key ? v : fallback;
   }
 
-  /** Get translated field from window._productTranslations */
-  function getProductTranslation(product, field, fallback) {
-    if (!product) return fallback || "";
-    var pid = product._productId || product.id;
-    if (pid && window._productTranslations && window._productTranslations[pid]) {
-      var val = window._productTranslations[pid][field];
-      if (val) return val;
-    }
-    var model = product.model;
-    if (model && window._productTranslationsByModel && window._productTranslationsByModel[model]) {
-      var val2 = window._productTranslationsByModel[model][field];
-      if (val2) return val2;
-    }
-    return fallback || "";
-  }
-
   /** Simple debounce */
   function debounce(fn, ms) {
     ms = ms || 250;
@@ -90,12 +74,12 @@
     // Use product-data-table.js (146 products) instead of static series
     var table = window.PRODUCT_DATA_TABLE || [];
     var catI18n = {
-      "翻炒系列": "nav_products_stirfry",
-      "炖煮系列": "nav_products_stewing",
-      "蒸煮系列": "nav_products_steaming",
-      "煎炸系列": "nav_products_frying",
-      "切配系列": "nav_products_cutting",
-      "辅助系列": "nav_products_other"
+      翻炒系列: "nav_products_stirfry",
+      炖煮系列: "nav_products_stewing",
+      蒸煮系列: "nav_products_steaming",
+      煎炸系列: "nav_products_frying",
+      切配系列: "nav_products_cutting",
+      辅助系列: "nav_products_other",
     };
     return table.map(function (p) {
       var model = p.model || "";
@@ -103,10 +87,14 @@
       var category = p.category || "";
       var catKey = catI18n[category] || "filter_" + category;
       var translatedCategory = tr(catKey, category) || category;
-      var translatedName = tr("product_" + model + "_name", name || model) || name || model;
+      var trKey = "product_" + model.toLowerCase().replace(/[-/]/g, "_") + "_name";
+      var translatedName = tr(trKey, name || model) || name || model;
       var imgSrc = "";
       if (p.images && p.images.length > 0) {
-        var primary = p.images.find(function(i) { return i.isPrimary; }) || p.images[0];
+        var primary =
+          p.images.find(function (i) {
+            return i.isPrimary;
+          }) || p.images[0];
         if (primary && primary.filePath) imgSrc = primary.filePath;
       }
       if (!imgSrc) imgSrc = "/assets/images/products/" + model + "-1.webp";
@@ -114,47 +102,118 @@
         _displayName: translatedName,
         _displayCategory: translatedCategory,
         _searchText: [
-          translatedName || name, model, translatedCat || category, category,
-          p.specifications || "", p.throughput || "",
-          p.voltage || "", p.power || "", p.material || "", p.scenarios || ""
-        ].filter(Boolean).join(" ").toLowerCase(),
+          translatedName || name,
+          model,
+          translatedCategory || category,
+          category,
+          p.specifications || "",
+          p.throughput || "",
+          p.voltage || "",
+          p.power || "",
+          p.material || "",
+          p.scenarios || "",
+        ]
+          .filter(Boolean)
+          .join(" ")
+          .toLowerCase(),
         productImage: imgSrc,
-        imageUrl: imgSrc
+        imageUrl: imgSrc,
+        // navigator.js renderResults 期望的字段
+        type: "product",
+        labelKey: "search_type_product",
+        labelFallback: "产品",
+        path: "/products/detail/" + encodeURIComponent(model) + "/",
+        title: translatedName,
+        snippet: (translatedCategory || category) + " · " + model,
+        category: tr("search_type_product", "产品"),
       });
     });
   }
 
+  // ─── Page search index ────────────────────────────────────────────────
+
+  var _pageIndex = null; // cached
+
+  function getPageIndex() {
+    if (_pageIndex) return _pageIndex;
+    // Try pre-loaded (SSG inlined)
+    if (window.__SEARCH_INDEX) {
+      _pageIndex = window.__SEARCH_INDEX;
+      return _pageIndex;
+    }
+    // Fallback: fetch search-index.json
+    return _pageIndex;
+  }
+
+  function buildSearchablePages() {
+    var index = getPageIndex();
+    if (!index || !index.length) return [];
+    return index.map(function (e) {
+      return {
+        type: e.type || "page",
+        labelKey: e.labelKey || "search_type_page",
+        labelFallback: e.labelFallback || "Page",
+        path: e.path,
+        title: e.title || "",
+        snippet: e.snippet || "",
+        _searchText: [e.title, e.snippet, e.keywords || "", e.labelFallback || ""]
+          .filter(Boolean)
+          .join(" ")
+          .toLowerCase(),
+        category: tr(e.labelKey, e.labelFallback) || e.labelFallback || "",
+      };
+    });
+  }
+
+  // Lazy-load page index on first search
+  function ensurePageIndex() {
+    if (_pageIndex) return Promise.resolve(_pageIndex);
+    if (window.__SEARCH_INDEX) {
+      _pageIndex = window.__SEARCH_INDEX;
+      return Promise.resolve(_pageIndex);
+    }
+    return fetch("/search-index.json")
+      .then(function (r) {
+        return r.ok ? r.json() : [];
+      })
+      .then(function (data) {
+        _pageIndex = data;
+        return data;
+      })
+      .catch(function () {
+        _pageIndex = [];
+        return [];
+      });
+  }
+
   /**
-   * Perform the actual search.
+   * Perform the actual search across products AND pages.
    * @param {string} query - The search query
-   * @returns {Array} Matching products (max 8)
+   * @returns {Array} Matching items (max 8), mixed products and pages
    */
   function doSearch(query) {
     if (!query || query.length < 1) return [];
 
     var q = query.toLowerCase().trim();
-    // Split query into tokens for multi-term search; normalize slashes first
     var tokens = q
       .replace(/\//g, " ")
       .split(/[\s,，、-]+/)
       .filter(Boolean);
 
-    var allProducts = buildSearchableProducts();
+    var allItems = buildSearchableProducts().concat(buildSearchablePages());
     var results = [];
     var seen = {};
 
-    for (var i = 0; i < allProducts.length && results.length < 8; i++) {
-      var p = allProducts[i];
-      // Skip inactive
+    for (var i = 0; i < allItems.length && results.length < 20; i++) {
+      var p = allItems[i];
       if (p.isActive === false) continue;
 
-      // Deduplicate by model
-      if (seen[p.model]) continue;
-      seen[p.model] = true;
+      // Deduplicate by path (pages) or model (products)
+      var dedupKey = p.path || p.model;
+      if (dedupKey && seen[dedupKey]) continue;
+      if (dedupKey) seen[dedupKey] = true;
 
       var text = p._searchText;
-
-      // Score-based matching
       var score = 0;
       var matched = false;
 
@@ -166,23 +225,11 @@
           break;
         }
         matched = true;
-        // Exact model match gets highest score
-        if (p.model && p.model.toLowerCase() === token) {
-          score += 100;
-        }
-        // Model starts-with match
-        else if (p.model && p.model.toLowerCase().indexOf(token) === 0) {
-          score += 50;
-        }
-        // Name starts-with match
-        else if (p._displayName && p._displayName.toLowerCase().indexOf(token) === 0) {
-          score += 30;
-        }
-        // Any match
-        else {
-          score += 10;
-        }
-        // Earlier matches get bonus
+        if (p.model && p.model.toLowerCase() === token) score += 100;
+        else if (p.model && p.model.toLowerCase().indexOf(token) === 0) score += 50;
+        else if (p.title && p.title.toLowerCase().indexOf(token) === 0) score += 40;
+        else if (p._displayName && p._displayName.toLowerCase().indexOf(token) === 0) score += 30;
+        else score += 10;
         score -= Math.floor(idx / 50);
       }
 
@@ -192,12 +239,10 @@
       }
     }
 
-    // Sort by score descending
     results.sort(function (a, b) {
       return (b._score || 0) - (a._score || 0);
     });
-
-    return results;
+    return results.slice(0, 8);
   }
 
   // ─── UI Rendering ─────────────────────────────────────────────────────────
@@ -314,11 +359,13 @@
       var imgSrc = p.productImage || p.imageUrl || "";
       var hlClass = idx === highlightedIndex ? " is-highlighted" : "";
 
+      var detailHref = "/products/" + (p.model ? "detail/" + encodeURIComponent(p.model) + "/" : "");
       html +=
         '<a class="ios-search-result-item' +
         hlClass +
-        '" ' +
-        'href="/products/" + (results[idx] && results[idx].model ? "detail/" + encodeURIComponent(results[idx].model) + "/" : "") + " data-search-idx="' +
+        '" href="' +
+        esc(detailHref) +
+        '" data-search-idx="' +
         idx +
         '" role="option">' +
         '<div class="ios-search-result-img">' +
@@ -416,6 +463,9 @@
    * Should be called after navigator.js has rendered the search bar.
    */
   function init() {
+    // Pre-load page index in background
+    ensurePageIndex();
+
     // Support unified search bar input (.ios-search-input)
     var input = document.querySelector(".ios-search-bar .ios-search-input");
     if (!input) {

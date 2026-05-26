@@ -1,83 +1,188 @@
 #!/usr/bin/env node
 /**
- * generate-search-index.js — Generate search-index.json for client-side search
+ * generate-search-index.js
  *
- * Scans dist/pages/ for all index-pc.html files and extracts
- * title, description, headings, and path for client-side search.
- *
- * Usage: node scripts/generate-search-index.js
+ * 从 src/pages/ 的 HTML 文件中提取可搜索内容，生成 dist/search-index.json
+ * 覆盖：案例、应用场景、Support 子页、About、News、Profit Calculator
+ * 不含：产品（已有 PRODUCT_DATA_TABLE）
  */
-const fs = require('fs');
-const path = require('path');
 
-const DIST_DIR = path.resolve(__dirname, '..', 'dist');
-const htmlFiles = [];
-const EXCLUDE_DIRS = ['assets', 'pages', 'node_modules'];
+var fs = require("fs");
+var path = require("path");
 
-function collect(dir) {
-  if (!fs.existsSync(dir)) return;
-  fs.readdirSync(dir).forEach(function (f) {
-    const fp = path.join(dir, f);
-    const stat = fs.statSync(fp);
-    if (stat.isDirectory()) {
-      if (EXCLUDE_DIRS.includes(f)) return;
-      // Check for index-pc.html in this directory
-      const pcFile = path.join(fp, 'index-pc.html');
-      if (fs.existsSync(pcFile)) htmlFiles.push(pcFile);
-      // Recurse
-      collect(fp);
-    }
-  });
+var SRC = path.join(__dirname, "..", "src", "pages");
+var DIST = path.join(__dirname, "..", "dist");
+
+// ─── 页面分类配置 ────────────────────────────────────────────────
+// route: SSG 路由路径
+// labelKey: i18n key for category label
+// labelFallback: fallback label (Chinese)
+// subRoutes: 子路由（如 cases/bangkok）
+var PAGE_CATALOG = [
+  // 案例
+  { route: "cases", type: "case", labelKey: "search_type_case", labelFallback: "案例" },
+  // 应用场景
+  { route: "applications", type: "page", labelKey: "search_type_solution", labelFallback: "解决方案" },
+  // Support 子页
+  { route: "support/faq", type: "page", labelKey: "search_type_support", labelFallback: "支持" },
+  { route: "support/installation", type: "page", labelKey: "search_type_support", labelFallback: "支持" },
+  { route: "support/services", type: "page", labelKey: "search_type_support", labelFallback: "支持" },
+  { route: "support/spare-parts", type: "page", labelKey: "search_type_support", labelFallback: "支持" },
+  { route: "support/training", type: "page", labelKey: "search_type_support", labelFallback: "支持" },
+  { route: "support/warranty", type: "page", labelKey: "search_type_support", labelFallback: "支持" },
+  // 其他页面
+  { route: "about", type: "page", labelKey: "search_type_page", labelFallback: "页面" },
+  { route: "contact", type: "page", labelKey: "search_type_page", labelFallback: "页面" },
+  { route: "quote", type: "page", labelKey: "search_type_page", labelFallback: "页面" },
+  { route: "profit-calculator", type: "page", labelKey: "search_type_page", labelFallback: "页面" },
+  { route: "news", type: "page", labelKey: "search_type_news", labelFallback: "资讯" },
+];
+
+// 案例子目录
+var CASE_SLUGS = [
+  "bangkok",
+  "cebu",
+  "hanoi",
+  "hcmc",
+  "jakarta",
+  "kl",
+  "manila",
+  "surabaya",
+];
+
+// 应用场景子目录
+var APP_SLUGS = [
+  "canteen",
+  "central-kitchen",
+  "chain-restaurant",
+  "cloud-kitchen",
+  "food-factory",
+  "menu-lab",
+  "small-restaurant",
+];
+
+// ─── HTML 提取工具 ───────────────────────────────────────────────
+
+function stripTags(html) {
+  return html
+    .replace(/<script[^>]*>[\s\S]*?<\/script>/gi, "")
+    .replace(/<style[^>]*>[\s\S]*?<\/style>/gi, "")
+    .replace(/<[^>]+>/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
 }
 
-collect(DIST_DIR);
+function extractFromHtml(htmlPath) {
+  if (!fs.existsSync(htmlPath)) return null;
 
-const index = [];
+  var html = fs.readFileSync(htmlPath, "utf8");
+  var title =
+    (html.match(/<title>([^<]+)<\/title>/) || [])[1] || "";
+  // Clean title: remove site name suffix
+  title = title.replace(/\s*[|–—]\s*YuKoLi.*$/i, "").replace(/\s*\|.*/, "").trim();
 
-htmlFiles.forEach(function (fp) {
-  const c = fs.readFileSync(fp, 'utf-8');
+  var desc =
+    (html.match(
+      /<meta[^>]*name=["']description["'][^>]*content=["']([^"']+)["']/
+    ) || [])[1] || "";
 
-  let urlPath = '/' + path.relative(DIST_DIR, path.dirname(fp)) + '/';
-  // 规范化
-  urlPath = urlPath.replace(/\/+/g, '/');
-
-  const tMatch = c.match(/<title>([^<]*)<\/title>/i);
-  const title = tMatch ? tMatch[1].trim() : '';
-
-  const dMatch = c.match(/<meta[^>]*name="description"[^>]*content="([^"]*)"[^>]*\/?>/i);
-  const description = dMatch ? dMatch[1].trim() : '';
-
-  const headings = [];
-  var h1Re = /<h1[^>]*>([\s\S]*?)<\/h1>/gi;
-  var m1;
-  while ((m1 = h1Re.exec(c)) !== null) {
-    var h = m1[1].replace(/<[^>]*>/g, '').trim();
-    if (h) headings.push(h);
-  }
-  var h2Re = /<h2[^>]*>([\s\S]*?)<\/h2>/gi;
-  var m2;
-  while ((m2 = h2Re.exec(c)) !== null) {
-    var h2 = m2[1].replace(/<[^>]*>/g, '').trim();
-    if (h2 && headings.length < 5) headings.push(h2);
+  // Extract h1/h2 headings as keywords
+  var headings = [];
+  var hRe = /<h[1-3][^>]*>([\s\S]*?)<\/h[1-3]>/gi;
+  var m;
+  while ((m = hRe.exec(html)) !== null) {
+    var text = stripTags(m[1]).substring(0, 120);
+    if (text.length > 3) headings.push(text);
   }
 
-  const pathParts = urlPath.split('/').filter(Boolean);
-  const category = pathParts[0] || '';
-
-  if (title || description) {
-    index.push({
-      path: urlPath,
-      title: title,
-      description: description,
-      headings: headings.slice(0, 5),
-      category: category,
-    });
+  // Extract data-i18n text content for richer search
+  var i18nTexts = [];
+  var i18nRe = /data-i18n="[^"]*"[^>]*>([^<]{3,})</gi;
+  while ((m = i18nRe.exec(html)) !== null) {
+    var t = m[1].trim().substring(0, 80);
+    if (t.length > 3) i18nTexts.push(t);
   }
+
+  // 如果 title 为空，从 description 或 h1 提取
+  if (!title && desc) {
+    title = desc.split(/[—\-,，。]/)[0].trim().substring(0, 60);
+  }
+  if (!title && headings.length > 0) {
+    title = headings[0].substring(0, 60);
+  }
+
+  return {
+    title: title,
+    description: desc,
+    headings: headings,
+    i18nTexts: i18nTexts,
+  };
+}
+
+// ─── 构建索引 ────────────────────────────────────────────────────
+
+var entries = [];
+
+PAGE_CATALOG.forEach(function (cat) {
+  var pcFile = path.join(SRC, cat.route, "index-pc.html");
+  var data = extractFromHtml(pcFile);
+  if (!data) return;
+
+  var entry = {
+    type: cat.type,
+    labelKey: cat.labelKey,
+    labelFallback: cat.labelFallback,
+    path: "/" + cat.route + "/",
+    title: data.title,
+    snippet: data.description || "",
+    keywords: data.headings.concat(data.i18nTexts).join(" "),
+  };
+
+  entries.push(entry);
 });
 
-const dataDir = path.join(DIST_DIR, 'assets', 'data');
-if (!fs.existsSync(dataDir)) {
-  fs.mkdirSync(dataDir, { recursive: true });
-}
-fs.writeFileSync(path.join(dataDir, 'search-index.json'), JSON.stringify(index, null, 2), 'utf-8');
-console.log('  ✓ search-index.json with ' + index.length + ' entries');
+// 案例子页
+CASE_SLUGS.forEach(function (slug) {
+  var pcFile = path.join(SRC, "cases", slug, "index-pc.html");
+  var data = extractFromHtml(pcFile);
+  if (!data) return;
+
+  entries.push({
+    type: "case",
+    labelKey: "search_type_case",
+    labelFallback: "案例",
+    path: "/cases/" + slug + "/",
+    title: data.title,
+    snippet: data.description || "",
+    keywords: data.headings.concat(data.i18nTexts).join(" "),
+  });
+});
+
+// 应用场景子页
+APP_SLUGS.forEach(function (slug) {
+  var pcFile = path.join(SRC, "applications", slug, "index-pc.html");
+  var data = extractFromHtml(pcFile);
+  if (!data) return;
+
+  entries.push({
+    type: "page",
+    labelKey: "search_type_solution",
+    labelFallback: "解决方案",
+    path: "/applications/" + slug + "/",
+    title: data.title,
+    snippet: data.description || "",
+    keywords: data.headings.concat(data.i18nTexts).join(" "),
+  });
+});
+
+// ─── 输出 ────────────────────────────────────────────────────────
+
+if (!fs.existsSync(DIST)) fs.mkdirSync(DIST, { recursive: true });
+
+var output = JSON.stringify(entries, null, 2);
+fs.writeFileSync(path.join(DIST, "search-index.json"), output, "utf8");
+
+console.log("✅ search-index.json: " + entries.length + " entries");
+entries.forEach(function (e) {
+  console.log("  " + e.type + " | " + e.path + " | " + (e.title || "(untitled)").substring(0, 40));
+});

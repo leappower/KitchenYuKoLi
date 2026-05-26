@@ -661,11 +661,15 @@
 
       // Use mousedown on bar to detect if user clicked inside the search bar
       // before blur fires. This avoids the blur/click race condition.
-      bar.addEventListener("mousedown", function (e) {
-        if (bar.contains(e.target)) {
-          bar._mousedownInside = true;
-        }
-      }, true);
+      bar.addEventListener(
+        "mousedown",
+        function (e) {
+          if (bar.contains(e.target)) {
+            bar._mousedownInside = true;
+          }
+        },
+        true
+      );
       searchInput.addEventListener("blur", function () {
         // If mousedown was inside bar, a click is pending; don't remove focus yet
         if (bar._mousedownInside) {
@@ -730,16 +734,23 @@
         var html = "";
         for (var i = 0; i < results.length; i++) {
           var r = results[i];
-          var cat = r.category ? '<div class="sr-category">' + escapeHtml(r.category) + "</div>" : "";
+          // Type badge (产品 / 案例 / 解决方案 / 页面)
+          var typeLabel = r.category || "";
+          var typeClass = "sr-type-" + (r.type || "page");
+          var badge = typeLabel
+            ? '<span class="sr-type-badge ' + typeClass + '">' + escapeHtml(typeLabel) + "</span>"
+            : "";
           html +=
             '<a class="sr-item" href="' +
             escapeHtml(r.path) +
             '" data-index="' +
             i +
             '">' +
-            cat +
+            '<div class="sr-item-header">' +
+            badge +
             '<div class="sr-title">' +
             escapeHtml(r.title || "Untitled") +
+            "</div>" +
             "</div>" +
             '<div class="sr-snippet">' +
             escapeHtml(r.snippet || "") +
