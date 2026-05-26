@@ -495,7 +495,9 @@
       _autoInit();
     });
   } else {
-    setTimeout(_autoInit, 0);
+    setTimeout(function () {
+      _autoInit();
+    }, 0);
   }
 
   // Re-render on language change

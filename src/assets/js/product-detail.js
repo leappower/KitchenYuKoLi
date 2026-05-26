@@ -267,21 +267,31 @@
     //   /products/{slug}/{model}/   (new canonical)
     //   /products/detail/{model}/  (old detail path)
     //   /products/{model}/         (legacy, skip category slugs)
+    //   /products/{model}/index-pc.html  (device redirect)
     var path = window.location.pathname.replace(/\/$/, "");
     var model = null;
     var m = path.match(/^\/products\/([^/]+)\/([^/]+)$/);
     if (m && isCategorySlug(m[1])) {
       // /products/stirfry/DLB-TBQ30/ → slug=m[1], model=m[2]
       model = decodeURIComponent(m[2]);
+    } else if (m && !isCategorySlug(m[1]) && /^index-(pc|mobile|tablet)\.html$/.test(m[2])) {
+      // /products/DLB-TBQ30/index-pc.html → device redirect, model=m[1]
+      model = decodeURIComponent(m[1]);
     } else {
-      m = path.match(/^\/products\/detail\/([^/]+)$/);
-      if (m) {
-        model = decodeURIComponent(m[1]);
+      // /products/stirfry/DLB-TBQ30/index-pc.html → 4-segment device redirect
+      var m4 = path.match(/^\/products\/([^/]+)\/([^/]+)\/index-(pc|mobile|tablet)\.html$/);
+      if (m4) {
+        model = decodeURIComponent(m4[2]);
       } else {
-        // Legacy path: /products/<model>/ — skip category slugs
-        m = path.match(/^\/products\/([^/]+)$/);
-        if (m && !isCategorySlug(m[1])) {
+        m = path.match(/^\/products\/detail\/([^/]+)$/);
+        if (m) {
           model = decodeURIComponent(m[1]);
+        } else {
+          // Legacy path: /products/<model>/ — skip category slugs
+          m = path.match(/^\/products\/([^/]+)$/);
+          if (m && !isCategorySlug(m[1])) {
+            model = decodeURIComponent(m[1]);
+          }
         }
       }
     }

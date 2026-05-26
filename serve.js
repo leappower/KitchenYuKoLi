@@ -33,9 +33,13 @@ var MIME = {
   ".webm": "video/webm",
 };
 
-// SPA fallback rules: paths matching these patterns serve the parent index.html
+// SPA fallback rules: paths matching these patterns serve a specific index.html
+// (product detail pages all share the same template at /products/detail/index.html)
 var SPA_FALLBACKS = [
-  /^\/products\/detail\/[^/]+\/?$/,
+  { pattern: /^\/products\/detail\/[^/]+\/?$/, target: "products/detail/index.html" },
+  { pattern: /^\/products\/[^/]+\/[^/]+\/?$/, target: "products/detail/index.html" },
+  { pattern: /^\/products\/[^/]+\/?$/, target: "products/detail/index.html" },
+  { pattern: /^\/products\/[^/]+\/[^/]+\/index-(pc|mobile|tablet)\.html$/, target: "products/detail/index.html" },
 ];
 
 function resolve(urlPath) {
@@ -50,11 +54,9 @@ function resolve(urlPath) {
   }
   // SPA fallback
   for (var i = 0; i < SPA_FALLBACKS.length; i++) {
-    if (SPA_FALLBACKS[i].test(clean)) {
-      // Strip last segment, serve parent index.html
-      var parent = clean.replace(/[^/]+\/?$/, "");
-      var parentIdx = path.join(DIST, parent, "index.html");
-      if (fs.existsSync(parentIdx)) return parentIdx;
+    if (SPA_FALLBACKS[i].pattern.test(clean)) {
+      var fp3 = path.join(DIST, SPA_FALLBACKS[i].target);
+      if (fs.existsSync(fp3)) return fp3;
     }
   }
   // 404
