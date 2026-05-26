@@ -87,8 +87,19 @@
       var category = p.category || "";
       var catKey = catI18n[category] || "filter_" + category;
       var translatedCategory = tr(catKey, category) || category;
-      var trKey = "product_" + model.toLowerCase().replace(/[-/]/g, "_") + "_name";
-      var translatedName = tr(trKey, name || model) || name || model;
+      // Priority: PDT embedded translation (nameEn) > tr() > fallback to Chinese name
+      var lang =
+        (typeof window.translationManager !== "undefined" && window.translationManager.currentLanguage) || "zh-CN";
+      var suffix =
+        lang.charAt(0).toUpperCase() +
+        lang.slice(1).replace(/-([a-z])/g, function (m, c) {
+          return c.toUpperCase();
+        });
+      var translatedName = (lang !== "zh-CN" && p["name" + suffix]) || "";
+      if (!translatedName) {
+        var trKey = "product_" + model.toLowerCase().replace(/[-/]/g, "_") + "_name";
+        translatedName = tr(trKey, name || model) || name || model;
+      }
       var imgSrc = "";
       if (p.images && p.images.length > 0) {
         var primary =
@@ -103,10 +114,13 @@
         _displayCategory: translatedCategory,
         _searchText: [
           translatedName || name,
+          name, // always include Chinese name for cross-language search
+          p.nameEn || "", // always include English name
           model,
           translatedCategory || category,
           category,
           p.specifications || "",
+          p.specificationsEn || "",
           p.throughput || "",
           p.voltage || "",
           p.power || "",
@@ -149,14 +163,28 @@
     var index = getPageIndex();
     if (!index || !index.length) return [];
     return index.map(function (e) {
+      // Determine display title based on current language
+      var lang =
+        (typeof window.translationManager !== "undefined" && window.translationManager.currentLanguage) || "zh-CN";
+      var displayTitle = (lang !== "zh-CN" && e.titleEn) || e.title || "";
+      var displaySnippet = (lang !== "zh-CN" && e.snippetEn) || e.snippet || "";
+      // Searchable text includes BOTH Chinese and English for cross-language search
       return {
         type: e.type || "page",
         labelKey: e.labelKey || "search_type_page",
         labelFallback: e.labelFallback || "Page",
         path: e.path,
-        title: e.title || "",
-        snippet: e.snippet || "",
-        _searchText: [e.title, e.snippet, e.keywords || "", e.labelFallback || ""]
+        title: displayTitle,
+        snippet: displaySnippet,
+        _searchText: [
+          e.title,
+          e.titleEn || "",
+          e.snippet,
+          e.snippetEn || "",
+          e.keywords || "",
+          e.keywordsEn || "",
+          e.labelFallback || "",
+        ]
           .filter(Boolean)
           .join(" ")
           .toLowerCase(),
