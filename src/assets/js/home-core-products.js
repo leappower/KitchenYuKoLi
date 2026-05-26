@@ -530,7 +530,7 @@
       "GT1D1B", // 单头锅贴机
       "B4RTD", // 台式智能燃气煲仔炉
     ],
-    "central-kitchen": [
+    "chain-restaurant": [
       // Batch cooking, high-volume, automated equipment
       "DLB-4BQ30", // 柜式上搅拌平底锅炒菜机（语音提示）
       "DLB-GD30", // 落地式300智能电磁炒菜机（电动）
@@ -547,7 +547,7 @@
       "DLB-PZJ100", // 多功能自动漂烫/焯水/油炸机
       "DLB-PZJ120", // 多功能自动漂烫/焯水/油炸机
     ],
-    "chain-restaurant": [
+    "central-kitchen": [
       // Standardized output, consistent taste across locations
       "DLB-TGQ40J", // 台式400智能电磁炒菜机（触屏）
       "DLB-TGQ36J", // 台式360智能电磁炒菜机（触屏800）
