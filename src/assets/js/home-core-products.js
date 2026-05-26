@@ -218,11 +218,10 @@
         var catSlug = catMap[p.category] || "other";
         var catHref = "/products/" + catSlug + "/";
         return (
-          '<div class="group bg-white rounded-2xl border border-slate-200 dark:border-slate-700 hover:border-primary hover:shadow-lg transition-all duration-300 overflow-hidden">' +
-          '<a href="' +
+          '<div class="group bg-white rounded-2xl border border-slate-200 dark:border-slate-700 hover:border-primary hover:shadow-lg transition-all duration-300 overflow-hidden" data-link="' +
           href +
-          '" class="block">' +
-          '<div class="aspect-[4/3] bg-slate-50 dark:bg-slate-900 overflow-hidden">' +
+          '">' +
+          '<div class="aspect-[4/3] bg-slate-50 dark:bg-slate-900 overflow-hidden cursor-pointer">' +
           (img
             ? '<img alt="' +
               escHtml(p.model) +
@@ -251,8 +250,10 @@
           (p.power
             ? '<span class="text-xs font-bold text-slate-400">' + escHtml(p.power) + "</span>"
             : "<span></span>") +
-          '<span class="text-sm text-primary font-bold flex items-center gap-1" data-i18n="home_hw_learn_more">了解更多 <span class=\"material-symbols-outlined text-base\">arrow_forward</span></span>' +
-          "</div></div></a></div>"
+          '<a href="' +
+          href +
+          '" data-no-swup class="text-sm text-primary font-bold flex items-center gap-1 group-hover:gap-2 transition-all duration-300 hover:opacity-80" data-i18n="home_hw_learn_more">了解更多 <span class="material-symbols-outlined text-base group-hover:translate-x-1 transition-transform duration-300">arrow_forward</span></a>' +
+          "</div></div></div>"
         );
       }
 
@@ -311,11 +312,10 @@
         var img = getPrimaryImage(p);
         var href = getProductDetailHref(p);
         return (
-          '<div class="group bg-white rounded-2xl border border-slate-200 hover:border-primary hover:shadow-lg transition-all duration-300 overflow-hidden">' +
-          '<a href="' +
+          '<div class="group bg-white rounded-2xl border border-slate-200 hover:border-primary hover:shadow-lg transition-all duration-300 overflow-hidden" data-link="' +
           href +
-          '" class="block">' +
-          '<div class="aspect-[4/3] bg-slate-50 overflow-hidden">' +
+          '">' +
+          '<div class="aspect-[4/3] bg-slate-50 overflow-hidden cursor-pointer">' +
           (img
             ? '<img alt="' +
               escHtml(p.model) +
@@ -334,16 +334,16 @@
           escHtml(p.model) +
           "</h3>" +
           (typeof getProductField === "function" && getProductField(p, "name")
-            ? '<p class="text-xs text-slate-500 line-clamp-2 mb-3">' +
-              escHtml(getProductField(p, "name")) +
-              "</p>"
+            ? '<p class="text-xs text-slate-500 line-clamp-2 mb-3">' + escHtml(getProductField(p, "name")) + "</p>"
             : '<div class="mb-3"></div>') +
           '<div class="flex justify-between items-center pt-2 border-t border-slate-100">' +
           (p.power
             ? '<span class="text-[11px] font-bold text-slate-400">' + escHtml(p.power) + "</span>"
             : "<span></span>") +
-          '<span class="text-xs font-bold text-primary flex items-center gap-0.5" data-i18n="home_hw_learn_more">了解更多 <span class="material-symbols-outlined text-sm">arrow_forward</span></span>' +
-          "</div></div></a></div>"
+          '<a href="' +
+          href +
+          '" data-no-swup class="text-xs font-bold text-primary flex items-center gap-0.5 group-hover:gap-1.5 transition-all duration-300 hover:opacity-80" data-i18n="home_hw_learn_more">了解更多 <span class="material-symbols-outlined text-sm group-hover:translate-x-0.5 transition-transform duration-300">arrow_forward</span></a>' +
+          "</div></div></div>"
         );
       }
 
@@ -400,11 +400,10 @@
         var img = getPrimaryImage(p);
         var href = getProductDetailHref(p);
         return (
-          '<div class="group bg-white rounded-2xl border border-slate-200 hover:border-primary hover:shadow-lg transition-all duration-300 overflow-hidden">' +
-          '<a href="' +
+          '<div class="group bg-white rounded-2xl border border-slate-200 hover:border-primary hover:shadow-lg transition-all duration-300 overflow-hidden" data-link="' +
           href +
-          '" class="block">' +
-          '<div class="aspect-[4/3] bg-slate-50 overflow-hidden">' +
+          '">' +
+          '<div class="aspect-[4/3] bg-slate-50 overflow-hidden cursor-pointer">' +
           (img
             ? '<img alt="' +
               escHtml(p.model) +
@@ -423,16 +422,16 @@
           escHtml(p.model) +
           "</h3>" +
           (typeof getProductField === "function" && getProductField(p, "name")
-            ? '<p class="text-xs text-slate-500 line-clamp-2 mb-3">' +
-              escHtml(getProductField(p, "name")) +
-              "</p>"
+            ? '<p class="text-xs text-slate-500 line-clamp-2 mb-3">' + escHtml(getProductField(p, "name")) + "</p>"
             : '<div class="mb-3"></div>') +
           '<div class="flex justify-between items-center pt-2 border-t border-slate-100">' +
           (p.power
             ? '<span class="text-[11px] font-bold text-slate-400">' + escHtml(p.power) + "</span>"
             : "<span></span>") +
-          '<span class="text-xs font-bold text-primary flex items-center gap-0.5" data-i18n="home_hw_learn_more">了解更多 <span class="material-symbols-outlined text-sm">arrow_forward</span></span>' +
-          "</div></div></a></div>"
+          '<a href="' +
+          href +
+          '" data-no-swup class="text-xs font-bold text-primary flex items-center gap-0.5 group-hover:gap-1.5 transition-all duration-300 hover:opacity-80" data-i18n="home_hw_learn_more">了解更多 <span class="material-symbols-outlined text-sm group-hover:translate-x-0.5 transition-transform duration-300">arrow_forward</span></a>' +
+          "</div></div></div>"
         );
       }
 
@@ -504,4 +503,300 @@
     /* global _HomeCoreProducts */
     window.HomeCoreProducts.render();
   });
+
+  /**
+   * ═══ Scenario Product Grid Support ═══
+   * Renders scenario-specific products in the same 4-column card template
+   */
+
+  /**
+   * Scenario → category mapping
+   * Each scenario shows products from these categories
+   */
+  var SCENARIO_CATEGORIES = {
+    "small-restaurant": ["翻炒系列", "煎炸系列"],
+    "central-kitchen": ["翻炒系列", "切配系列", "炖煮系列"],
+    "chain-restaurant": ["翻炒系列", "炖煮系列", "煎炸系列"],
+    canteen: ["翻炒系列", "蒸煮系列", "切配系列"],
+    "cloud-kitchen": ["翻炒系列", "煎炸系列"],
+    "food-factory": ["翻炒系列", "炖煮系列", "切配系列"],
+    "menu-lab": ["翻炒系列", "炖煮系列", "蒸煮系列", "煎炸系列"],
+  };
+
+  /**
+   * Get scenario key from URL path
+   */
+  function _getScenarioKey(path) {
+    var m = path.match(/\/applications\/([^/]+)\//);
+    return m ? m[1] : null;
+  }
+
+  /**
+   * Load products filtered by scenario categories
+   */
+  function _loadScenarioProducts(scenarioKey, callback) {
+    var categories = SCENARIO_CATEGORIES[scenarioKey];
+    if (!categories) {
+      callback([]);
+      return;
+    }
+    // Use full PRODUCT_DATA_TABLE (not just home_core)
+    var table = window.PRODUCT_DATA_TABLE || [];
+    var filtered = table.filter(function (p) {
+      return categories.indexOf(p.category) !== -1;
+    });
+    callback(filtered);
+  }
+
+  /**
+   * Generic PC grid renderer (4-column, shares same card template as homepage)
+   */
+  function _renderScenarioGrid(container, products, device) {
+    if (!products || products.length === 0) {
+      container.innerHTML =
+        '<div class="text-center text-slate-400 py-8">' +
+        escHtml(tl("no_scenario_products", "暂无场景产品数据")) +
+        "</div>";
+      return;
+    }
+
+    var VIS_COUNT = 8;
+    var hasMore = products.length > VIS_COUNT;
+    var visProducts = hasMore ? products.slice(0, VIS_COUNT) : products;
+    var restProducts = hasMore ? products.slice(VIS_COUNT) : [];
+
+    function buildCard(p) {
+      var img = getPrimaryImage(p);
+      var href = getProductDetailHref(p);
+      var catSlug =
+        {
+          翻炒系列: "stirfry",
+          炖煮系列: "stewing",
+          蒸煮系列: "steaming",
+          煎炸系列: "frying",
+          切配系列: "cutting",
+          辅助系列: "other",
+        }[p.category] || "other";
+      var catHref = "/products/" + catSlug + "/";
+
+      if (device === "tablet") {
+        return (
+          '<div class="group bg-white rounded-2xl border border-slate-200 hover:border-primary hover:shadow-lg transition-all duration-300 overflow-hidden" data-link="' +
+          href +
+          '">' +
+          '<div class="aspect-[4/3] bg-slate-50 overflow-hidden cursor-pointer">' +
+          (img
+            ? '<img alt="' +
+              escHtml(p.model) +
+              '" class="w-full h-full object-contain p-3 sm:p-4 group-hover:scale-105 transition-transform duration-300" src="' +
+              escHtml(img) +
+              '" loading="lazy">'
+            : '<div style="font-size:2rem;color:#d1d5db;display:flex;align-items:center;justify-content:center;height:100%">📦</div>') +
+          "</div>" +
+          '<div class="p-3 sm:p-4">' +
+          (p.category
+            ? '<a href="' +
+              catHref +
+              '" class="inline-block text-[10px] font-bold px-2 py-0.5 rounded-full bg-primary/10 text-primary mb-2 hover:bg-primary/20 transition-colors">' +
+              escHtml(p.category) +
+              "</a>"
+            : "") +
+          '<h3 class="font-bold text-sm mb-1">' +
+          escHtml(p.model) +
+          "</h3>" +
+          (typeof getProductField === "function" && getProductField(p, "name")
+            ? '<p class="text-xs text-slate-500 line-clamp-2 mb-3">' + escHtml(getProductField(p, "name")) + "</p>"
+            : '<div class="mb-3"></div>') +
+          '<div class="flex justify-between items-center pt-2 border-t border-slate-100">' +
+          (p.power
+            ? '<span class="text-[11px] font-bold text-slate-400">' + escHtml(p.power) + "</span>"
+            : "<span></span>") +
+          '<a href="' +
+          href +
+          '" data-no-swup class="text-xs font-bold text-primary flex items-center gap-0.5 group-hover:gap-1.5 transition-all duration-300 hover:opacity-80" data-i18n="home_hw_learn_more">了解更多 <span class="material-symbols-outlined text-sm group-hover:translate-x-0.5 transition-transform duration-300">arrow_forward</span></a>' +
+          "</div></div></div>"
+        );
+      }
+
+      // PC: 4-column card
+      return (
+        '<div class="group bg-white rounded-2xl border border-slate-200 dark:border-slate-700 hover:border-primary hover:shadow-lg transition-all duration-300 overflow-hidden" data-link="' +
+        href +
+        '">' +
+        '<div class="aspect-[4/3] bg-slate-50 dark:bg-slate-900 overflow-hidden cursor-pointer">' +
+        (img
+          ? '<img alt="' +
+            escHtml(p.model) +
+            '" class="w-full h-full object-contain p-4 group-hover:scale-105 transition-transform duration-300" src="' +
+            escHtml(img) +
+            '" loading="lazy">'
+          : '<div style="font-size:2.5rem;color:#d1d5db;display:flex;align-items:center;justify-content:center;height:100%">📦</div>') +
+        "</div>" +
+        '<div class="p-5">' +
+        (p.category
+          ? '<a href="' +
+            catHref +
+            '" class="inline-block text-xs font-bold px-2.5 py-1 rounded-full bg-primary/10 text-primary mb-3 hover:bg-primary/20 transition-colors">' +
+            escHtml(p.category) +
+            "</a>"
+          : "") +
+        '<h3 class="text-lg font-black mb-1">' +
+        escHtml(p.model) +
+        "</h3>" +
+        (typeof getProductField === "function" && getProductField(p, "name")
+          ? '<p class="text-sm text-slate-500 dark:text-slate-400 line-clamp-2 mb-4">' +
+            escHtml(getProductField(p, "name")) +
+            "</p>"
+          : '<div class="mb-4"></div>') +
+        '<div class="flex justify-between items-center pt-3 border-t border-slate-100 dark:border-slate-700">' +
+        (p.power ? '<span class="text-xs font-bold text-slate-400">' + escHtml(p.power) + "</span>" : "<span></span>") +
+        '<a href="' +
+        href +
+        '" data-no-swup class="text-sm text-primary font-bold flex items-center gap-1 group-hover:gap-2 transition-all duration-300 hover:opacity-80" data-i18n="home_hw_learn_more">了解更多 <span class="material-symbols-outlined text-base group-hover:translate-x-1 transition-transform duration-300">arrow_forward</span></a>' +
+        "</div></div></div>"
+      );
+    }
+
+    var gridClass =
+      device === "tablet" ? "grid grid-cols-2 gap-4" : "grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-8";
+    var html = '<div id="scenario-grid" class="' + gridClass + '">';
+    visProducts.forEach(function (p) {
+      html += buildCard(p);
+    });
+    html += "</div>";
+
+    if (hasMore) {
+      html +=
+        '<div id="scenario-hidden" style="display:none" class="grid ' + gridClass.replace("gap-8", "gap-8 mt-8") + '">';
+      restProducts.forEach(function (p) {
+        html += buildCard(p);
+      });
+      html += "</div>";
+      var toggleText = tl("home_hw_show_more", "查看更多产品 ▼");
+      html +=
+        '<div class="flex justify-center mt-8">' +
+        "<button onclick=\"(function(){var h=document.getElementById('scenario-hidden'),b=this;if(h.style.display==='none'){h.style.display='';b.textContent=typeof window.uiText==='function'?window.uiText('home_hw_collapse','Collapse ▲'):'Collapse ▲'}else{h.style.display='none';b.textContent=typeof window.uiText==='function'?window.uiText('home_hw_show_more','View More Products ▼'):'View More Products ▼'}})()\" class=\"px-6 py-2.5 rounded-full border-2 border-primary text-primary font-bold hover:bg-primary hover:text-white transition-all cursor-pointer text-sm\" data-i18n=\"home_hw_show_more\">" +
+        toggleText +
+        "</button>" +
+        "</div>";
+    }
+
+    container.innerHTML = html;
+
+    if (window.translationManager && window.translationManager.applyTo) {
+      window.translationManager.applyTo(container);
+    }
+  }
+
+  /**
+   * Scenario PC renderer
+   */
+  window.renderScenarioPC = function (containerId, scenarioKey) {
+    var container = document.getElementById(containerId);
+    if (!container) return;
+    _loadScenarioProducts(scenarioKey, function (products) {
+      _renderScenarioGrid(container, products, "pc");
+    });
+  };
+
+  /**
+   * Scenario Tablet renderer
+   */
+  window.renderScenarioTablet = function (containerId, scenarioKey) {
+    var container = document.getElementById(containerId);
+    if (!container) return;
+    _loadScenarioProducts(scenarioKey, function (products) {
+      _renderScenarioGrid(container, products, "tablet");
+    });
+  };
+
+  /**
+   * Scenario Mobile renderer (horizontal scroll)
+   */
+  window.renderScenarioMobile = function (containerId, scenarioKey) {
+    var container = document.getElementById(containerId);
+    if (!container) return;
+    _loadScenarioProducts(scenarioKey, function (products) {
+      if (!products || products.length === 0) {
+        container.innerHTML = "";
+        return;
+      }
+      var html =
+        '<div class="flex gap-4 overflow-x-auto pb-2 snap-x snap-mandatory scrollbar-hide" style="-webkit-overflow-scrolling:touch;scroll-snap-type:x mandatory">';
+      products.forEach(function (p) {
+        var img = getPrimaryImage(p);
+        var href = getProductDetailHref(p);
+        html +=
+          '<div class="flex-shrink-0 w-[85vw] max-w-[300px] snap-center">' +
+          '<div class="group bg-white rounded-2xl border border-slate-200 hover:border-primary hover:shadow-lg transition-all duration-300 overflow-hidden" data-link="' +
+          href +
+          '">' +
+          '<div class="aspect-[4/3] bg-slate-50 overflow-hidden cursor-pointer">' +
+          (img
+            ? '<img alt="' +
+              escHtml(p.model) +
+              '" class="w-full h-full object-contain p-2 sm:p-3 group-hover:scale-105 transition-transform duration-300" src="' +
+              escHtml(img) +
+              '" loading="lazy">'
+            : '<div style="font-size:2rem;color:#d1d5db;display:flex;align-items:center;justify-content:center;height:100%">📦</div>') +
+          "</div>" +
+          '<div class="p-3 sm:p-4">' +
+          (p.category
+            ? '<span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-primary/10 text-primary mb-2 inline-block">' +
+              escHtml(p.category) +
+              "</span>"
+            : "") +
+          '<h3 class="font-bold text-sm mb-1">' +
+          escHtml(p.model) +
+          "</h3>" +
+          (typeof getProductField === "function" && getProductField(p, "name")
+            ? '<p class="text-xs text-slate-500 line-clamp-2 mb-3">' + escHtml(getProductField(p, "name")) + "</p>"
+            : '<div class="mb-3"></div>') +
+          '<div class="flex justify-between items-center pt-2 border-t border-slate-100">' +
+          (p.power
+            ? '<span class="text-[11px] font-bold text-slate-400">' + escHtml(p.power) + "</span>"
+            : "<span></span>") +
+          '<a href="' +
+          href +
+          '" data-no-swup class="text-xs font-bold text-primary flex items-center gap-0.5 group-hover:gap-1.5 transition-all duration-300 hover:opacity-80" data-i18n="home_hw_learn_more">了解更多 <span class="material-symbols-outlined text-sm group-hover:translate-x-0.5 transition-transform duration-300">arrow_forward</span></a>' +
+          "</div></div></div></div>";
+      });
+      html += "</div>";
+      container.innerHTML = html;
+      if (window.translationManager && window.translationManager.applyTo) {
+        window.translationManager.applyTo(container);
+      }
+    });
+  };
+
+  /**
+   * Update _autoInit to detect scenario pages
+   */
+  var _origAutoInit = _autoInit;
+  _autoInit = function () {
+    var path = window.location.pathname || "/";
+    var device = window.innerWidth < 768 ? "mobile" : window.innerWidth < 1280 ? "tablet" : "pc";
+
+    // Homepage
+    if (path.indexOf("/home") !== -1) {
+      if (device === "mobile") window.renderHomeCoreMobile("home-core-products-mobile");
+      else if (device === "tablet") window.renderHomeCoreTablet("home-core-products-tablet");
+      else window.renderHomeCorePC("home-core-products-pc");
+      return;
+    }
+
+    // Scenario pages
+    var scenarioKey = _getScenarioKey(path);
+    if (scenarioKey && SCENARIO_CATEGORIES[scenarioKey]) {
+      if (device === "mobile") window.renderScenarioMobile("scenario-products-mobile", scenarioKey);
+      else if (device === "tablet") window.renderScenarioTablet("scenario-products-tablet", scenarioKey);
+      else window.renderScenarioPC("scenario-products-pc", scenarioKey);
+      return;
+    }
+
+    // Fallback to original for other pages
+    if (path.indexOf("/home") !== -1) {
+      _origAutoInit.call(this);
+    }
+  };
 })();

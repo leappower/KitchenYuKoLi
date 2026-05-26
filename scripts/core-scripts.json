@@ -61,7 +61,8 @@
       "assets/js/ui/custom-select.js"
     ],
     "applications": [
-      "assets/js/ui/hero-video.js"
+      "assets/js/ui/hero-video.js",
+      "assets/js/home-core-products.js"
     ]
   }
 }
