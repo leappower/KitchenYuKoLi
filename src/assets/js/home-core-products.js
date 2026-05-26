@@ -510,17 +510,118 @@
    */
 
   /**
-   * Scenario → category mapping
-   * Each scenario shows products from these categories
+   * Scenario → product model mapping
+   * Each scenario independently specifies which products to show
+   * Edit per-scenario arrays to fine-tune without affecting other pages
    */
-  var SCENARIO_CATEGORIES = {
-    "small-restaurant": ["翻炒系列", "煎炸系列"],
-    "central-kitchen": ["翻炒系列", "切配系列", "炖煮系列"],
-    "chain-restaurant": ["翻炒系列", "炖煮系列", "煎炸系列"],
-    canteen: ["翻炒系列", "蒸煮系列", "切配系列"],
-    "cloud-kitchen": ["翻炒系列", "煎炸系列"],
-    "food-factory": ["翻炒系列", "炖煮系列", "切配系列"],
-    "menu-lab": ["翻炒系列", "炖煮系列", "蒸煮系列", "煎炸系列"],
+  var SCENARIO_PRODUCTS = {
+    "small-restaurant": [
+      // Compact countertop equipment for small F&B shops
+      "DLB-TBS30", // 台式上搅拌平底锅炒菜机
+      "DLB-TBQ30", // 台式上搅拌平底锅炒菜机（语音提示）
+      "DLB-TQBQ30", // 台式上搅拌平底锅炒菜机（语音提示+自动加料）
+      "DLB-TGS30", // 台式300智能电磁炒菜机（手动）
+      "DLB-TGD30", // 台式300智能电磁炒菜机（电动）
+      "DLB-TBS40", // 台式上搅拌弧底锅炒菜机
+      "DLB-TZS40", // 台式转锅搅拌炒菜机（炒饭机）
+      "F32F1C", // 台式翻盖炒菜机（手动翻盖款）
+      "G26D1A", // 简易台式滚筒炒菜机(电磁款)
+      "Y12D1C", // 台式智能升降单缸油炸炉
+      "GT1D1B", // 单头锅贴机
+      "B4RTD", // 台式智能燃气煲仔炉
+    ],
+    "central-kitchen": [
+      // Batch cooking, high-volume, automated equipment
+      "DLB-4BQ30", // 柜式上搅拌平底锅炒菜机（语音提示）
+      "DLB-GD30", // 落地式300智能电磁炒菜机（电动）
+      "DLB-GD36", // 落地式360智能电磁炒菜机（电动）
+      "DLB-GQ30", // 落地式300智能电磁炒菜机（触屏+喷料）
+      "DLB-GQ36", // 落地式360智能电磁炒菜机（触屏+喷料）
+      "DLB-GQ30T", // 300智能电磁炒菜机（自动投料+喷料）
+      "DLB-GB50", // 座地式500电磁炒菜机（触屏电动）
+      "DLB-GC50", // 座地式500电磁炒菜机（语音菜单）
+      "G50AAB", // 简易/智能团餐滚筒炒菜机（电磁款）
+      "G60EAC", // 智能团餐滚筒炒菜机（电磁款）
+      "DLB-XC80", // 多功能自动搅拌炒锅/炖烩机（触屏电动）
+      "DLB-QXC80", // 多功能全自动搅拌炒锅/炖烩机（语音菜单+自动喷料）
+      "DLB-PZJ100", // 多功能自动漂烫/焯水/油炸机
+      "DLB-PZJ120", // 多功能自动漂烫/焯水/油炸机
+    ],
+    "chain-restaurant": [
+      // Standardized output, consistent taste across locations
+      "DLB-TGQ40J", // 台式400智能电磁炒菜机（触屏）
+      "DLB-TGQ36J", // 台式360智能电磁炒菜机（触屏800）
+      "DLB-GC50", // 座地式500电磁炒菜机（语音菜单）
+      "DLB-GC60", // 座地式600电磁炒菜机（触屏语音菜单）
+      "DLB-GQ50", // 单边座地式500电磁炒菜机（触屏+自动摆臂喷料）
+      "DLB-GQ60", // 座地式600电磁炒菜机（语音菜单+自动摆臂喷料）
+      "G30DAG", // 智能立式滚筒炒菜机（电磁款）
+      "G36DAG", // 智能立式滚筒炒菜机（电磁款）
+      "B4RTD", // 台式智能燃气煲仔炉
+      "B6RBD", // 立式智能燃气煲仔炉
+      "DLB-XC100", // 多功能自动搅拌炒锅/炖烩机（触屏电动）
+      "LZ80D1B", // 智能升降卤煮炉
+    ],
+    canteen: [
+      // Large volume, diverse cooking methods, institutional
+      "DLB-GB70", // 座地式700电磁炒菜机（触屏电动）
+      "DLB-GC70", // 座地式700电磁炒菜机（触屏语音菜单）
+      "DLB-GB80", // 座地式800电磁炒菜机（触屏电动）
+      "DLB-GC80", // 座地式800电磁炒菜机（触屏语音菜单）
+      "DLB-GQ70", // 座地式700电磁炒菜机（语音菜单+自动摆臂喷料）
+      "G70EAC", // 智能团餐滚筒炒菜机（电磁款）
+      "G80EAC", // 智能团餐滚筒炒菜机（电磁款）
+      "DLB-XC100", // 多功能自动搅拌炒锅/炖烩机（触屏电动）
+      "DLB-QXC100", // 多功能全自动搅拌炒锅/炖烩机（语音菜单+自动喷料）
+      "DLB-PZJ200", // 多功能方形自动漂烫/焯水/油炸机
+      "Z8FCB/Z12FCB", // 智能蒸饭机
+      "Z6FCB", // 智能蒸饭机
+      "DLB-ZNT", // （可倾式）全智能汤锅（100升）
+      "DLB-BXC800", // 半自动旋转+翻炒电磁大炒锅
+    ],
+    "cloud-kitchen": [
+      // Fast output, space-efficient, multi-station
+      "DLB-TGS30", // 台式300智能电磁炒菜机（手动）
+      "DLB-TGD30", // 台式300智能电磁炒菜机（电动）
+      "DLB-TGQ30", // 台式300智能电磁炒菜机（触屏+喷料）
+      "G26D1A", // 简易台式滚筒炒菜机(电磁款)
+      "G30D1A", // 简易台式滚筒炒菜机（电磁款）
+      "G26DAA", // 简易立式滚筒炒菜机(电磁款)
+      "F32F1C", // 台式翻盖炒菜机（手动翻盖款）
+      "Y12D1C", // 台式智能升降单缸油炸炉
+      "Y12D2C", // 台式智能升降双缸油炸炉
+      "GT2D1B", // 双头锅贴机
+    ],
+    "food-factory": [
+      // Industrial scale, continuous operation
+      "DLB-GB90", // 座地式900电磁炒菜机（触屏电动）
+      "DLB-GC90", // 座地式900电磁炒菜机（触屏语音菜单）
+      "DLB-GQ90", // 座地式900电磁炒菜机（语音菜单+自动摆臂喷料）
+      "DLB-GB80", // 座地式800电磁炒菜机（触屏电动）
+      "G80EAC", // 智能团餐滚筒炒菜机（电磁款）
+      "DLB-XC120", // 多功能自动搅拌炒锅/炖烩机（触屏电动）
+      "DLB-QXC120", // 多功能全自动搅拌炒锅/炖烩机（语音菜单+自动喷料）
+      "DLB-PZJ400", // 多功能方形自动漂烫/焯水/油炸机
+      "DLB-BXC800", // 半自动旋转+翻炒电磁大炒锅
+      "HKQPJ500-VIII", // 多功能鲜肉切片机(双通道)
+      "DLB-A6200", // 大长龙商用洗碗机(双缸双喷淋双烘干)
+      "HKJGJ380-VI", // 锯骨机380
+    ],
+    "menu-lab": [
+      // Precision control, experimentation, R&D
+      "DLB-TGQ30J", // 台式300智能电磁炒菜机（触屏800）
+      "DLB-TGQ36J", // 台式360智能电磁炒菜机（触屏800）
+      "DLB-TGQ40J", // 台式400智能电磁炒菜机（触屏）
+      "G30D1T", // 智能台式滚筒炒菜机（电磁新款）
+      "G26DAG", // 智能立式滚筒炒菜机（电磁款）
+      "G30DAG", // 智能立式滚筒炒菜机（电磁款）
+      "J40CBB", // 全自动智能炒菜机
+      "F32F1C", // 台式翻盖炒菜机（手动翻盖款）
+      "DLB-TZS40", // 台式转锅搅拌炒菜机（炒饭机）
+      "Y12D1C", // 台式智能升降单缸油炸炉
+      "GT1D1B", // 单头锅贴机
+      "B4RTD", // 台式智能燃气煲仔炉
+    ],
   };
 
   /**
@@ -532,18 +633,27 @@
   }
 
   /**
-   * Load products filtered by scenario categories
+   * Load products by model name for the given scenario
+   * Each scenario has its own independent product list
    */
   function _loadScenarioProducts(scenarioKey, callback) {
-    var categories = SCENARIO_CATEGORIES[scenarioKey];
-    if (!categories) {
+    var modelList = SCENARIO_PRODUCTS[scenarioKey];
+    if (!modelList) {
       callback([]);
       return;
     }
-    // Use full PRODUCT_DATA_TABLE (not just home_core)
     var table = window.PRODUCT_DATA_TABLE || [];
+    // Build lookup by model for O(1) matching
+    var lookup = {};
+    modelList.forEach(function (m) {
+      lookup[m.toLowerCase()] = true;
+    });
     var filtered = table.filter(function (p) {
-      return categories.indexOf(p.category) !== -1;
+      return lookup[p.model.toLowerCase()] === true;
+    });
+    // Preserve the order specified in SCENARIO_PRODUCTS
+    filtered.sort(function (a, b) {
+      return modelList.indexOf(a.model) - modelList.indexOf(b.model);
     });
     callback(filtered);
   }
@@ -787,7 +897,7 @@
 
     // Scenario pages
     var scenarioKey = _getScenarioKey(path);
-    if (scenarioKey && SCENARIO_CATEGORIES[scenarioKey]) {
+    if (scenarioKey && SCENARIO_PRODUCTS[scenarioKey]) {
       if (device === "mobile") window.renderScenarioMobile("scenario-products-mobile", scenarioKey);
       else if (device === "tablet") window.renderScenarioTablet("scenario-products-tablet", scenarioKey);
       else window.renderScenarioPC("scenario-products-pc", scenarioKey);
