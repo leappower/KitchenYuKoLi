@@ -312,6 +312,21 @@
         }
       }
     }
+    // Fallback: try to rebuild model from URL segments for models containing "/"
+    // e.g., /products/DLB-TGD36/9/ → encodeURIComponent("DLB-TGD36/9") is %2F,
+    // but browser decodes %2F back to literal /, splitting the path.
+    if (!model) {
+      var segs = path.replace(/^\/products\//, "").split("/");
+      if (segs.length >= 2) {
+        var reconstructed = decodeURIComponent(segs.slice(0, -1).join("/"));
+        if (reconstructed && window.PRODUCT_DATA_TABLE) {
+          var found = window.PRODUCT_DATA_TABLE.some(function (p) {
+            return p.model === reconstructed;
+          });
+          if (found) model = reconstructed;
+        }
+      }
+    }
     // Also check meta tag (injected by server.js for direct page loads)
     if (!model) {
       var meta = document.querySelector('meta[name="product-model"]');
