@@ -1,18 +1,10 @@
 !(function (t) {
   "use strict";
-<<<<<<< Updated upstream
-  var I18N_CACHE_V = 1779878417;
-  var I18N_CACHE_V = 1779878417;
-  var I18N_CACHE_V = 1779878417;
-  var I18N_CACHE_V = 1779878417;
-  var I18N_CACHE_V = 1779878417;
-=======
-  var I18N_CACHE_V = 1779878417;
-  var I18N_CACHE_V = 1779878417;
-  var I18N_CACHE_V = 1779878417;
-  var I18N_CACHE_V = 1779878417;
-  var I18N_CACHE_V = 1779878417;
->>>>>>> Stashed changes
+  var I18N_CACHE_V = 1779878492;
+  var I18N_CACHE_V = 1779878492;
+  var I18N_CACHE_V = 1779878492;
+  var I18N_CACHE_V = 1779878492;
+  var I18N_CACHE_V = 1779878492;
   var _spaRegs = {};
 
   // ─── Ensure LANG_REGISTRY is loaded ─────────────────────────
