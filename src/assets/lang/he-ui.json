@@ -3671,5 +3671,9 @@
   "quote_timeline_nodate": "רק מתלבט",
   "select_country": "בחר מדינה/אזור",
   "products_filter_full_smart": "חכם מלא",
-  "products_filter_basic": "בסיסי"
+  "products_filter_basic": "בסיסי",
+  "search_results_count": "נמצאו {count} תוצאות",
+  "search_view_all": "הצג את כל המוצרים",
+  "search_no_results": "לא נמצאו תוצאות",
+  "search_hint": "נסה לחפש לפי מספר דגם או סוג מוצר"
 }

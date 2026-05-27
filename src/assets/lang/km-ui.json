@@ -3671,5 +3671,9 @@
   "quote_timeline_nodate": "ស្វែងយល់ជាមុន",
   "select_country": "ជ្រើសរើសប្រទេស/តំបន់",
   "products_filter_full_smart": "ឆ្លាតវៃពេញលេញ",
-  "products_filter_basic": "មូលដ្ឋាន"
+  "products_filter_basic": "មូលដ្ឋាន",
+  "search_results_count": "រកឃើញ {count} លទ្ធផល",
+  "search_view_all": "មើលផលិតផលទាំងអស់",
+  "search_no_results": "រកមិនឃើញលទ្ធផលដែលត្រូវគ្នាទេ",
+  "search_hint": "សាកល្បងស្វែងរកតាមលេខម៉ូដែល ឬប្រភេទផលិតផល"
 }

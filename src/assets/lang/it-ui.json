@@ -3671,5 +3671,9 @@
   "quote_timeline_nodate": "Solo informazione",
   "select_country": "Seleziona Paese/Regione",
   "products_filter_full_smart": "Completamente Intelligente",
-  "products_filter_basic": "Base"
+  "products_filter_basic": "Base",
+  "search_results_count": "{count} risultati trovati",
+  "search_view_all": "Vedi tutti i prodotti",
+  "search_no_results": "Nessun risultato trovato",
+  "search_hint": "Prova a cercare per numero modello o tipo di prodotto"
 }

@@ -3671,5 +3671,9 @@
   "quote_timeline_label": "Satın Alma Zamanı",
   "quote_timeline_nodate": "Önce bilgi al",
   "select_country": "Ülke/Bölge Seçin",
-  "products_filter_full_smart": "Tam Akıllı"
+  "products_filter_full_smart": "Tam Akıllı",
+  "search_results_count": "{count} sonuç bulundu",
+  "search_view_all": "Tüm ürünleri görüntüle",
+  "search_no_results": "Eşleşen sonuç bulunamadı",
+  "search_hint": "Model numarasına veya ürün türüne göre aramayı deneyin"
 }

@@ -3678,5 +3678,9 @@
   "search_type_solution": "Solution",
   "search_type_support": "Support",
   "search_type_page": "Page",
-  "search_type_news": "News"
+  "search_type_news": "News",
+  "search_results_count": "{count} results found",
+  "search_view_all": "View all products",
+  "search_no_results": "No matching results found",
+  "search_hint": "Try searching by model number or product type"
 }

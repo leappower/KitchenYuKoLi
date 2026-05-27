@@ -3671,5 +3671,9 @@
   "quote_timeline_nodate": "Alamin muna",
   "select_country": "Pumili ng Bansa/Rehiyon",
   "products_filter_full_smart": "Ganap na Matalino",
-  "products_filter_basic": "Basic"
+  "products_filter_basic": "Basic",
+  "search_results_count": "{count} resulta(n)g natagpuan",
+  "search_view_all": "Tingnan lahat ng produkto",
+  "search_no_results": "Walang nakitang resulta",
+  "search_hint": "Subukang maghanap sa pamamagitan ng modelo o uri ng produkto"
 }

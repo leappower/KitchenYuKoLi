@@ -3671,5 +3671,9 @@
   "quote_timeline_nodate": "पहले जानकारी लें",
   "select_country": "देश/क्षेत्र चुनें",
   "products_filter_full_smart": "पूर्ण स्मार्ट",
-  "products_filter_basic": "बुनियादी"
+  "products_filter_basic": "बुनियादी",
+  "search_results_count": "{count} परिणाम मिले",
+  "search_view_all": "सभी उत्पाद देखें",
+  "search_no_results": "कोई मिलान परिणाम नहीं मिला",
+  "search_hint": "मॉडल नंबर या उत्पाद प्रकार से खोजने का प्रयास करें"
 }

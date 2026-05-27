@@ -3671,5 +3671,9 @@
   "quote_timeline_label": "Thời gian mua hàng",
   "quote_timeline_nodate": "Tìm hiểu trước",
   "select_country": "Chọn Quốc gia/Khu vực",
-  "products_filter_full_smart": "Thông minh toàn diện"
+  "products_filter_full_smart": "Thông minh toàn diện",
+  "search_results_count": "Tìm thấy {count} kết quả",
+  "search_view_all": "Xem tất cả sản phẩm",
+  "search_no_results": "Không tìm thấy kết quả phù hợp",
+  "search_hint": "Thử tìm kiếm theo số model hoặc loại sản phẩm"
 }

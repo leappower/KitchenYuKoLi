@@ -3671,5 +3671,9 @@
   "quote_timeline_nodate": "Предварительно",
   "select_country": "Выберите страну/регион",
   "products_filter_full_smart": "Полный Smart",
-  "products_filter_basic": "Базовый"
+  "products_filter_basic": "Базовый",
+  "search_results_count": "Найдено {count} результатов",
+  "search_view_all": "Посмотреть все товары",
+  "search_no_results": "Совпадений не найдено",
+  "search_hint": "Попробуйте поискать по номеру модели или типу товара"
 }

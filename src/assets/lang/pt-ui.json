@@ -3671,5 +3671,9 @@
   "quote_timeline_nodate": "Apenas conhecendo",
   "select_country": "Selecionar País/Região",
   "products_filter_full_smart": "Totalmente Inteligente",
-  "products_filter_basic": "Básico"
+  "products_filter_basic": "Básico",
+  "search_results_count": "{count} resultados encontrados",
+  "search_view_all": "Ver todos os produtos",
+  "search_no_results": "Nenhum resultado encontrado",
+  "search_hint": "Tente pesquisar por número do modelo ou tipo de produto"
 }

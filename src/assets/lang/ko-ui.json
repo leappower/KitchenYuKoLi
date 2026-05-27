@@ -3671,5 +3671,9 @@
   "quote_timeline_nodate": "정보 수집",
   "select_country": "국가/지역 선택",
   "products_filter_full_smart": "완전 스마트",
-  "products_filter_basic": "기본"
+  "products_filter_basic": "기본",
+  "search_results_count": "{count}개의 결과를 찾았습니다",
+  "search_view_all": "모든 제품 보기",
+  "search_no_results": "일치하는 결과를 찾을 수 없습니다",
+  "search_hint": "모델 번호 또는 제품 유형으로 검색해 보세요"
 }
