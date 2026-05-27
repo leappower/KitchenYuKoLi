@@ -70,28 +70,27 @@
       };
 
       // 提交到 Google Sheets (via GAS Web App)
+      // GAS 不支持 CORS preflight → no-cors + 不设 Content-Type（避开 preflight）
       var GAS_URL =
         "https://script.google.com/macros/s/AKfycbyUy-DdV0eqNfbzHWXhf5XbSMtyJMIL--Hx_AfMOrBqUYl7PgVD7vX7uhIhXy_DZIXr/exec";
 
       var controller = new AbortController();
       var timeout = setTimeout(function () { controller.abort(); }, 15000);
 
+      // JSON body 但 no-cors + 无自定义 Content-Type = simple request
       fetch(GAS_URL, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        mode: "no-cors",
         body: JSON.stringify(formData),
         signal: controller.signal,
       })
-        .then(function (res) {
-          clearTimeout(timeout);
-          if (!res.ok) console.warn("[ContactForm] GAS returned " + res.status);
-        })
         .catch(function (err) {
           clearTimeout(timeout);
           if (err.name === "AbortError") console.error("[ContactForm] Request timeout");
           else console.error("[ContactForm] Submit error:", err.message);
         })
         .finally(function () {
+          clearTimeout(timeout);
           // 跳转到感谢页（无论成败）
           setTimeout(function () {
             window.location.href = "/thank-you/?from=contact";
