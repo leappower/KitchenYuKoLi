@@ -128,3 +128,35 @@
     getCategoryI18nKey: getCategoryI18nKey,
   };
 })(window);
+
+// ─── Global product i18n utilities (used by home-core-products.js, product-grid.js, product-detail.js, cross-sell.js) ───
+// Priority: zh-CN → zh → product[field] (Chinese). Non-zh → _productTranslationsByModel[model][field] → product[field]
+window.getProductField = function getProductField(product, field) {
+  if (!product) return "";
+  var lang = (
+    window.CURRENT_LANG ||
+    (window.t && window.t.currentLanguage) ||
+    localStorage.getItem("userLanguage") ||
+    document.documentElement.lang ||
+    "en"
+  ).replace("_", "-");
+  // zh-CN / zh: return Chinese field directly
+  if (lang === "zh-CN" || lang === "zh") return product[field] || "";
+  // Non-Chinese: try product translations map first (en-product.json), fallback to product[field]
+  var model = product.model;
+  var map = window._productTranslationsByModel || {};
+  var t = map[model];
+  if (t && t[field]) return t[field];
+  // Support nameEn / specificationsEn as fallback (embedded in product data)
+  if (field === "name" && product.nameEn) return product.nameEn;
+  if (field === "specifications" && product.specificationsEn) return product.specificationsEn;
+  if (field === "usage" && product.usageEn) return product.usageEn;
+  if (field === "material" && product.materialEn) return product.materialEn;
+  if (field === "sub_category" && product.subCategoryEn) return product.subCategoryEn;
+  return product[field] || "";
+};
+
+// Also export for non-window reference
+if (typeof module !== "undefined" && module.exports) {
+  module.exports = { getProductField: window.getProductField };
+}

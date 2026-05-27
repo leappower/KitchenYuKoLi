@@ -790,24 +790,8 @@
     return subCat;
   }
 
-  // Usage: getProductField(product, 'name') → returns translated name or fallback to Chinese
-  window.getProductField = function (product, field) {
-    if (!product) return "";
-    var lang = (
-      window.CURRENT_LANG ||
-      (window.t && window.t.currentLanguage) ||
-      localStorage.getItem("userLanguage") ||
-      document.documentElement.lang ||
-      "en"
-    ).replace("_", "-");
-    if (lang === "zh-CN" || lang === "zh") return product[field] || "";
-    var model = product.model;
-    var map = window._productTranslationsByModel || {};
-    var t = map[model];
-    if (t && t[field]) return t[field];
-    return product[field] || "";
-  };
-
+  // Usage: getProductField is now defined in utils.js (always loaded before this file)
+  // This file only provides loadProductTranslations for async translation loading on PDP
   // Load translations for a language by fetching {lang}-product.json
   window.loadProductTranslations = function (lang, callback) {
     var normalizedLang = lang.replace("_", "-");
