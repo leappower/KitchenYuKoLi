@@ -76,13 +76,6 @@ cp "$SRC/index.html" "$DIST/index.html"
 [ -f "$SRC/robots.txt" ] && cp "$SRC/robots.txt" "$DIST/robots.txt"
 [ -f "$SRC/manifest.json" ] && cp "$SRC/manifest.json" "$DIST/manifest.json"
 
-# ─── 5. Version bump (production only) ───────────────────────────
-if [ "$BUILD_MODE" != "dev" ]; then
-  echo "🔄 Bumping JS version to $VERSION..."
-  find "$DIST" -name '*.html' -exec sed -i '' "s|?v=[a-zA-Z0-9._-]*|?$VERSION|g" {} +
-  find "$SRC/pages" -name '*.html' -exec sed -i '' "s|?v=[a-zA-Z0-9._-]*|?$VERSION|g" {} +
-fi
-
 # ─── 7. Sitemap / search index ──────────────────────────────────
 node scripts/export-products-static.js 2>/dev/null || echo "  ⚠️  Server unavailable, using cached products.json"
 node scripts/generate-search-index.js 2>/dev/null || echo "  ⚠️  Failed to generate search-index.json"
@@ -96,6 +89,13 @@ node scripts/inject-device-redirect.js 2>&1 | tail -5
 # SSG 读取 webpack 的输出 dist/pages/ 然后生成 dist/<route>/
 # SSG also copies Swup + plugins from node_modules and fresh JS from src
 node scripts/build-ssg.js 2>&1 | grep -E 'Step|✓|✅|WARN|ERROR' || true
+
+# ─── 5. Version bump (production only, after SSG) ───────────────
+if [ "$BUILD_MODE" != "dev" ]; then
+  echo "🔄 Bumping JS version to $VERSION..."
+  find "$DIST" -name '*.html' -exec sed -i '' "s|?v=[a-zA-Z0-9._-]*|?$VERSION|g" {} +
+  find "$SRC/pages" -name '*.html' -exec sed -i '' "s|?v=[a-zA-Z0-9._-]*|?$VERSION|g" {} +
+fi
 
 # ─── 8.5. Inject device redirect scripts into SSG-generated entries ──
 # SSG 生成的 dist/<slug>/index.html 需要注入自包含 redirect 脚本

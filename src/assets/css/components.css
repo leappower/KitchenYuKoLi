@@ -86,7 +86,6 @@ html.dark .prod-overview-item:hover {
 }
 .prod-dropdown-link {
   text-decoration: none;
-  color: inherit;
 }
 .prod-dropdown-toggle {
   display: flex;
@@ -195,7 +194,6 @@ html.dark .app-viewall-item:hover {
 }
 .app-dropdown-link {
   text-decoration: none;
-  color: inherit;
 }
 .app-dropdown-toggle {
   display: flex;
@@ -304,7 +302,6 @@ html.dark .sup-viewall-item:hover {
 }
 .sup-dropdown-link {
   text-decoration: none;
-  color: inherit;
 }
 .sup-dropdown-toggle {
   display: flex;
@@ -348,7 +345,6 @@ html.dark .sup-dropdown-toggle .sup-dropdown-arrow {
 }
 .abt-dropdown-link {
   text-decoration: none;
-  color: inherit;
 }
 .abt-dropdown-toggle {
   display: flex;
@@ -792,6 +788,7 @@ html.dark .mobile-menu-close .material-symbols-outlined {
   font-weight: 600;
   color: #1d1d1f;
   text-decoration: none;
+  width: 100%;
   -webkit-tap-highlight-color: transparent;
 }
 html.dark .mobile-menu-l1 {
@@ -832,6 +829,7 @@ html.dark .mobile-menu-l1-icon {
 .mobile-menu-l1-label {
   flex: 1;
   min-width: 0;
+  text-align: left;
 }
 .mobile-menu-l1-arrow {
   font-size: 20px;
@@ -884,6 +882,7 @@ html.dark .mobile-menu-l2-separator {
   font-weight: 400;
   color: #1d1d1f;
   text-decoration: none;
+  width: 100%;
   -webkit-tap-highlight-color: transparent;
 }
 html.dark .mobile-menu-l2-item {
@@ -923,6 +922,7 @@ html.dark .mobile-menu-l2-icon {
 .mobile-menu-l2-label {
   flex: 1;
   min-width: 0;
+  text-align: left;
 }
 /* 左侧激活指示器 — 用 box-shadow 避免伪元素布局冲突 */
 .mobile-menu-l2-item {
@@ -961,6 +961,7 @@ html.dark .mobile-menu-l2-item.is-whatsapp .mobile-menu-l2-icon {
 .mobile-menu-l2-item.is-active {
   color: var(--color-primary, #ec5b13);
   font-weight: 600;
+  background: rgb(236, 91, 19, 0.04);
 }
 .mobile-menu-l2-item.is-active .mobile-menu-l2-icon {
   background: rgb(236, 91, 19, 0.2);

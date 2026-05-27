@@ -1733,6 +1733,15 @@
         if (window.SlideMenu.initSmartHeader) window.SlideMenu.initSmartHeader();
       }
     }, 0);
+
+    /* ── SPA 导航后重新应用当前 URL 的导航高亮 ── */
+    (function () {
+      var _navPath = window.location.pathname.replace(/\/$/, "") || "/";
+      var _navSection = _navPath === "/" ? "/" : (_navPath.match(/^\/([^/]+)/) || [])[1] || _navPath;
+      if (_navSection) {
+        updateActive(_navSection);
+      }
+    })();
   });
 
   /* ────────────────────────────────────────────────────────────────

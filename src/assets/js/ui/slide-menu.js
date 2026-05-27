@@ -195,10 +195,18 @@
         })
         .join("\n");
 
-      subMenuHtml = '<div class="mobile-menu-l2" data-menu-l2="' + escapeHtml(item.id) + '">' + childItemsHtml;
+      subMenuHtml =
+        '<div class="mobile-menu-l2' +
+        (activeHref ? " is-open" : "") +
+        '" data-menu-l2="' +
+        escapeHtml(item.id) +
+        '">' +
+        childItemsHtml;
 
-      /* 判断一级菜单是否有子项匹配当前路径 */
-      if (activeHref) l1ActiveClass = " is-active";
+      /* 有子项匹配当前路径：高亮 + 自动展开 */
+      if (activeHref) {
+        l1ActiveClass = " is-active is-expanded";
+      }
 
       // products 分类末尾追加「查看全部产品」链接
       if (item.id === "products") {
@@ -212,6 +220,15 @@
       }
 
       subMenuHtml += "</div>";
+    } else {
+      /* 无子菜单的一级项：匹配自身 href */
+      if (item.href) {
+        var _cleanCurrent = location.pathname.replace(/\/$/, "");
+        var _cleanItemHref = item.href.replace(/\/$/, "");
+        if (_cleanCurrent === _cleanItemHref) {
+          l1ActiveClass = " is-active";
+        }
+      }
     }
 
     /* 有子菜单 → button 含箭头；无子菜单 → a 链接无箭头 */
@@ -359,6 +376,11 @@
 
     // 绑定交互事件
     bindMenuEvents();
+
+    // 菜单 DOM 已就绪，应用当前 URL 的导航高亮
+    if (typeof SlideMenu !== "undefined" && SlideMenu.updateActive) {
+      SlideMenu.updateActive();
+    }
   }
 
   /**
@@ -1015,9 +1037,17 @@
         if (l1Button) {
           if (hasActiveChild) {
             l1Button.classList.add("is-active");
+          } else if (item.href && _currentPath === item.href.replace(/\/$/, "")) {
+            l1Button.classList.add("is-active");
           } else {
             l1Button.classList.remove("is-active");
           }
+        } else if (item.href && _currentPath === item.href.replace(/\/$/, "")) {
+          /* 无子菜单的 L1（<a> 无 data-menu-toggle），用 href 匹配 */
+          var l1Fallback = document.querySelector(
+            ".mobile-menu-l1-wrap .mobile-menu-l1[href='" + escapeHtml(item.href) + "']"
+          );
+          if (l1Fallback) l1Fallback.classList.add("is-active");
         }
       });
     },
