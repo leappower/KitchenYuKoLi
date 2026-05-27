@@ -23,7 +23,19 @@ function doPost(e) {
   try {
     var lock = LockService.getScriptLock();
     lock.tryLock(10000);
-    var data = JSON.parse(e.postData.contents);
+    // 兼容 JSON 和 form-urlencoded 两种提交格式
+    // - JSON (通过 server.js 代理):   e.postData.contents
+    // - form-urlencoded (直连 no-cors): e.parameter
+    var data = {};
+    try {
+      data = JSON.parse(e.postData.contents || "{}");
+    } catch (err) {
+      data = e.parameter || {};
+    }
+    // form-urlencoded 提交时 Google 会自动 decode，但部分值可能仍是 object
+    if (typeof data === "string") {
+      try { data = JSON.parse(data); } catch (e2) { data = {}; }
+    }
     var ss = SpreadsheetApp.getActiveSpreadsheet();
     var sheet = ss.getActiveSheet();
 

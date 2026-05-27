@@ -365,15 +365,19 @@
       }
 
       // 提交到 Google Sheets (via GAS Web App)
+      // 以 form-urlencoded 格式直接提交到 Google Apps Script（纯静态部署兼容）
       var GAS_URL =
         "https://script.google.com/macros/s/AKfycbyUy-DdV0eqNfbzHWXhf5XbSMtyJMIL--Hx_AfMOrBqUYl7PgVD7vX7uhIhXy_DZIXr/exec";
+      var params = new URLSearchParams();
+      Object.keys(formData).forEach(function (k) {
+        if (formData[k] != null && formData[k] !== "") params.append(k, formData[k]);
+      });
       fetch(GAS_URL, {
         method: "POST",
         mode: "no-cors",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
+        body: params,
       }).catch(function () {
-        // no-cors 模式下 fetch 成功也不返回可读响应，静默处理
+        // no-cors 下响应不可读，静默忽略
       });
 
       // 跳转到感谢页
