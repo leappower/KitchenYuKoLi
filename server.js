@@ -157,13 +157,15 @@ app.post("/api/quote-submit", quoteLimiter, express.json({ limit: "100kb" }), as
       method: "POST",
       headers: { "Content-Type": "text/plain;charset=utf-8" },
       body: JSON.stringify(body),
+      redirect: "manual", // Google Apps Script returns 302 after processing; don't follow
     });
-    if (!response.ok) {
-      console.error("[quote-submit] upstream error:", response.status);
-      return res.status(502).json({ error: "Submission service error" });
+    // Google Apps Script processes doPost before redirecting, so 302 = data written successfully
+    if (response.status === 302 || response.ok) {
+      console.log("[quote-submit] OK source=" + (body.source || body.formType || "unknown"));
+      return res.json({ ok: true });
     }
-    const text = await response.text();
-    res.json({ ok: true });
+    console.error("[quote-submit] upstream error:", response.status);
+    res.status(502).json({ error: "Submission service error" });
   } catch (err) {
     console.error("[quote-submit] fetch error:", err.message);
     res.status(502).json({ error: "Failed to submit quote" });

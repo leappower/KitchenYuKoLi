@@ -33,9 +33,19 @@
       // 收集所有字段
       var formData = {
         source: "联系我们",
-        country: document.getElementById("c-country")?.value || "",
+        country: (function () {
+          var sel = document.getElementById("c-country");
+          if (!sel || !sel.value) return "";
+          var opt = sel.options[sel.selectedIndex];
+          return opt ? opt.text : sel.value;
+        })(),
         contact: document.getElementById("c-contact")?.value || "",
-        restaurantType: document.getElementById("c-restaurant-type")?.value || "",
+        restaurantType: (function () {
+          var sel = document.getElementById("c-restaurant-type");
+          if (!sel || !sel.value) return "";
+          var opt = sel.options[sel.selectedIndex];
+          return opt ? opt.text : sel.value;
+        })(),
         phoneCode: document.getElementById("c-phone-code")?.value || "",
         phone: document.getElementById("c-phone")?.value || "",
         contactChannel: document.getElementById("c-contact-channel")?.value || "",
