@@ -462,12 +462,15 @@
     for (var j = 0; j < items.length; j++) {
       items[j].addEventListener("click", function (e) {
         e.preventDefault();
-        hidePanel();
         var href = this.getAttribute("href");
+        console.warn("[search] 点击结果:", href);
+        hidePanel();
         if (href) {
           if (window.SpaRouter && window.SpaRouter.navigate) {
+            console.warn("[search] SpaRouter.navigate(", href, ")");
             window.SpaRouter.navigate(href);
           } else {
+            console.warn("[search] SpaRouter 不可用，window.location.href = ", href);
             window.location.href = href;
           }
         }
@@ -480,6 +483,7 @@
       viewAllLink.addEventListener("click", function (e) {
         e.preventDefault();
         hidePanel();
+        console.warn("[search] view-all 点击，导航到 /products/");
         if (window.SpaRouter && window.SpaRouter.navigate) {
           window.SpaRouter.navigate("/products/");
         } else {

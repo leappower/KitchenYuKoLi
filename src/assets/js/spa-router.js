@@ -122,17 +122,24 @@
       swupHooks.on("fetch:request", function (visit, { args }) {
         if (!args || !args.url) return;
         var url = args.url;
+        console.warn("[spa-router] fetch:request URL:", url);
         // 只对已知的静态页面根路径（一级路径）添加设备后缀
         // 排除所有多级路径（动态路由如 /products/detail/xxx/、/products/stirfry/xxx/ 等）
         // 只有 /home/、/products/、/applications/、/about/、/contact/、/cases/、/news/ 等根路径才需要替换
         var pathParts = url
           .replace(/\/index\.html$/, "")
           .replace(/^https?:\/\/[^/]+/, "")
+          .split("/")
           .filter(Boolean);
-        if (pathParts.length !== 1) return;
+        console.warn("[spa-router] fetch:request pathParts:", pathParts, "length:", pathParts.length);
+        if (pathParts.length !== 1) {
+          console.warn("[spa-router] fetch:request 跳过（多级路径）:", url);
+          return;
+        }
         if (!/\/$/.test(url)) return;
         if (/index-(mobile|pc|tablet)\.html$/.test(url)) return;
         var newUrl = url.replace(/\/$/, "") + "/" + suffix;
+        console.warn("[spa-router] fetch:request 替换:", url, "→", newUrl);
         args.url = newUrl;
       });
     })();
@@ -267,15 +274,18 @@
     navigate: function (url) {
       if (!url) return;
       if (window.swupInstance) {
+        console.warn("[spa-router] navigate: calling swupInstance.navigate(", url, ")");
         try {
-          window.swupInstance.navigate(url).catch(function () {
-            // swup 导航失败（如 container mismatch），fallback 到浏览器跳转
+          window.swupInstance.navigate(url).catch(function (err) {
+            console.warn("[spa-router] swup navigate 失败:", err, "— fallback window.location.href");
             window.location.href = url;
           });
         } catch (e) {
+          console.warn("[spa-router] swup navigate 异常:", e, "— fallback window.location.href");
           window.location.href = url;
         }
       } else {
+        console.warn("[spa-router] swupInstance 不可用，window.location.href = ", url);
         window.location.href = url;
       }
     },
