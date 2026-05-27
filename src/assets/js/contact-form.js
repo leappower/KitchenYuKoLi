@@ -69,41 +69,19 @@
         userAgent: navigator.userAgent,
       };
 
-      // 提交到 Google Sheets (via 后端代理，避免CORS问题)
-      fetch("/api/form-submit", {
+      // 提交到 Google Sheets (via GAS Web App)
+      var GAS_URL =
+        "https://script.google.com/macros/s/AKfycbyUy-DdV0eqNfbzHWXhf5XbSMtyJMIL--Hx_AfMOrBqUYl7PgVD7vX7uhIhXy_DZIXr/exec";
+      fetch(GAS_URL, {
         method: "POST",
+        mode: "no-cors",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
-      })
-        .then(function (res) {
-          if (!res.ok)
-            return res.json().then(function (err) {
-              throw new Error(err.error || "Submission failed");
-            });
-          return res.json();
-        })
-        .then(function () {
-          if (typeof window.showNotification === "function")
-            window.showNotification(
-              typeof window.uiText === "function"
-                ? window.uiText("quote_submit_success") || "Submitted! We will contact you soon."
-                : "Submitted! We will contact you soon.",
-              "success"
-            );
-          // 跳转到感谢页
-          window.location.href = "/thank-you/?from=contact";
-        })
-        .catch(function () {
-          if (typeof window.showNotification === "function")
-            window.showNotification(
-              typeof window.uiText === "function"
-                ? window.uiText("quote_submit_error") || "Submission failed. Please try again."
-                : "Submission failed. Please try again.",
-              "error"
-            );
-          // 即使出错也跳转
-          window.location.href = "/thank-you/?from=contact";
-        });
+      }).catch(function () {
+        // no-cors 静默处理
+      });
+
+      // 跳转到感谢页
       window.location.href = "/thank-you/?from=contact";
     });
   });
