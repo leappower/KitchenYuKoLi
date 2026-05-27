@@ -296,7 +296,6 @@ var ROUTE_SLUGS = [
   "cases/surabaya",
   "support",
   "support/faq",
-  "news",
   "about",
   "contact",
   "quote",
