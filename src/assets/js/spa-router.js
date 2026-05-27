@@ -232,7 +232,10 @@
             skel.removeEventListener("transitionend", onSkeletonFadeOut);
             skel.style.display = "none";
           }
+          document.body.classList.add("yukoli-ready");
         }, 400);
+      } else {
+        document.body.classList.add("yukoli-ready");
       }
       var newDoc = visit && visit.to && visit.to.document ? visit.to.document : null;
       reloadPageScripts(newDoc);

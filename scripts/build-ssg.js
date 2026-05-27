@@ -363,8 +363,6 @@ function injectCoreScripts(html, routeSlug) {
     }
   });
 
-  if (tags.length === 0) return html;
-
   // 从 core-scripts.json 的 core[] 自动生成 _SPA_GLOBAL_PATTERNS 正则
   var scriptNames = CORE_SCRIPTS.core.map(function (p) {
     return path.basename(p, '.js');
@@ -372,11 +370,27 @@ function injectCoreScripts(html, routeSlug) {
   var patternStr = '(?:^|[\\/])(?:' + scriptNames.join('|') + ')\\.js';
   var injectPattern = '<script>window._SPA_GLOBAL_PATTERNS=/' + patternStr + '/</script>';
 
+  // 如果页面已有 _SPA_GLOBAL_PATTERNS 且 tags 为空，无需重复注入
+  if (tags.length === 0 && /_SPA_GLOBAL_PATTERNS/.test(html)) return html;
+  if (tags.length === 0) {
+    // 无新脚本但有 pattern 需求：仅注入 pattern
+    if (!/_SPA_GLOBAL_PATTERNS/.test(html)) {
+      html = html.replace(/(href="\/assets\/css\/[^"]+)"/g, '$1?' + BUILD_VERSION + '"');
+      html = html.replace(/(src="\/assets\/js\/[^"]+)(?<!\?v=[^"]*)"/g, '$1?' + BUILD_VERSION + '"');
+      return html.replace(/<\/body>/i, injectPattern + '\n  </body>');
+    }
+    return html;
+  }
+
   // 统一注入到 </body> 前
   // 给无版本号的 CSS/JS 加上构建时间戳，防止浏览器缓存旧文件
-
   html = html.replace(/(href="\/assets\/css\/[^"]+)"/g, '$1?' + BUILD_VERSION + '"');
   html = html.replace(/(src="\/assets\/js\/[^"]+)(?<!\?v=[^"]*)"/g, '$1?' + BUILD_VERSION + '"');
+  
+  // 如果已有 _SPA_GLOBAL_PATTERNS，不重复注入；仅注入脚本
+  if (/_SPA_GLOBAL_PATTERNS/.test(html)) {
+    return html.replace(/<\/body>/i, tags.join('\n') + '\n  </body>');
+  }
   return html.replace(/<\/body>/i, tags.join('\n') + '\n    ' + injectPattern + '\n  </body>');
 }
 

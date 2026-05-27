@@ -13,6 +13,7 @@
     "assets/js/ui/applications-dropdown.js",
     "assets/js/ui/support-dropdown.js",
     "assets/js/ui/about-dropdown.js",
+    "assets/js/ui/contact-dropdown.js",
     "assets/js/ui/navigator.js",
     "assets/js/ui/slide-menu.js",
     "assets/js/ui/footer.js",

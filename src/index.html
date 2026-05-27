@@ -41,13 +41,18 @@
   <link rel="stylesheet" href="/assets/css/performance-optimizations.css">
   <link rel="stylesheet" href="/assets/css/skeleton.css">
 
+  <!-- Anti-FOUC: hide body until content + scripts are ready -->
+  <style id="anti-fouc">
+    body{opacity:0;transition:opacity .15s ease}
+    body.yukoli-ready{opacity:1}
+  </style>
   <!-- Dark mode -->
   <script>(function(){if(localStorage.getItem('darkMode')==='true')document.documentElement.classList.add('dark')})()</script>
 
   <!-- Favicon -->
   <link rel="icon" href="/assets/images/logo/logo.webp" type="image/webp">
 </head>
-<body>
+<body class="overflow-x-clip">
 <noscript>
   <p>Please enable JavaScript or <a href="/home/">click here</a> to visit our site.</p>
 </noscript>
@@ -101,7 +106,6 @@
 <script defer src="/assets/js/ui/support-dropdown.js"></script>
 <script defer src="/assets/js/ui/about-dropdown.js"></script>
 <script defer src="/assets/js/utils.js"></script>
-<script defer src="/assets/js/nav-config.js"></script>
 <script defer src="/assets/js/nav-config.js"></script>
 <script defer src="/assets/js/ui/slide-menu.js"></script>
 <script defer src="/assets/js/ui/search-engine.js"></script>
@@ -186,7 +190,12 @@
         history.replaceState(null, '', redirectParam);
       }
 
-
+      // Anti-FOUC: reveal body once DOM + skeleton are ready
+      // SPA router will add yukoli-ready on content:replace;
+      // this fallback covers non-SPA pages and slow loads
+      setTimeout(function () {
+        document.body.classList.add('yukoli-ready');
+      }, 600);
     }
   })();
 </script>

@@ -65,6 +65,20 @@ function resolve(urlPath) {
   return null;
 }
 
+// Content-Security-Policy for development
+// Allows GAS (Google Apps Script) form submissions + local assets
+var CSP = [
+  "default-src 'self'",
+  "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://script.google.com",
+  "connect-src 'self' https://script.google.com https://script.googleusercontent.com",
+  "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
+  "font-src 'self' https://fonts.gstatic.com",
+  "img-src 'self' data: blob:",
+  "media-src 'self'",
+  "frame-src 'self'",
+  "form-action 'self' https://script.google.com",
+].join('; ');
+
 function handler(req, res) {
   var fp = resolve(req.url);
   if (!fp) {
@@ -74,11 +88,16 @@ function handler(req, res) {
   }
   var ext = path.extname(fp);
   var mime = MIME[ext] || "application/octet-stream";
-  res.writeHead(200, {
+  var headers = {
     "Content-Type": mime,
     "Cache-Control": "no-store",
     "Access-Control-Allow-Origin": "*",
-  });
+  };
+  // Apply CSP to HTML files only
+  if (ext === '.html') {
+    headers["Content-Security-Policy"] = CSP;
+  }
+  res.writeHead(200, headers);
   fs.createReadStream(fp).pipe(res);
 }
 
