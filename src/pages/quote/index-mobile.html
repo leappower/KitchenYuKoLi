@@ -139,7 +139,7 @@ header button:active {
                   </label>
                   <label class="flex flex-col gap-1.5"><span class="text-sm font-bold" data-i18n="quote_restaurant_type">餐厅类型 <span class="text-red-500">*</span></span>
                     <select data-custom-select id="q-restaurant-type" required class="h-12 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white focus:border-primary text-sm px-3 py-3 appearance-none">
-                      <option value="">选择餐厅类型</option><option value="small-restaurant">小型餐饮</option><option value="central-kitchen">中央厨房</option><option value="chain-restaurant">连锁餐饮</option><option value="smart-canteen">智慧食堂</option><option value="cloud-kitchen">云厨房</option><option value="takeaway">外卖</option><option value="food-factory">食品工厂</option><option value="other">其他</option>
+                      <option value="" data-i18n="quote_select_restaurant_type">选择餐厅类型</option><option value="small-restaurant">小型餐饮</option><option value="central-kitchen">中央厨房</option><option value="chain-restaurant">连锁餐饮</option><option value="smart-canteen">智慧食堂</option><option value="cloud-kitchen">云厨房</option><option value="takeaway">外卖</option><option value="food-factory">食品工厂</option><option value="other">其他</option>
                     </select>
                   </label>
                   <label class="flex flex-col gap-1.5"><span class="text-sm font-bold" data-i18n="quote_company_label">餐厅名称</span>
@@ -156,7 +156,7 @@ header button:active {
                   <div class="flex gap-2">
                     <label class="flex-1 flex flex-col gap-1.5"><span class="text-sm font-bold" data-i18n="quote_contact_channel_prompt">期望通过 <span class="text-red-500">*</span></span>
                       <select data-custom-select id="q-contact-channel" required class="h-12 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white focus:border-primary text-sm px-3 py-3 appearance-none">
-                        <option value="">选择联系方式</option><option value="WhatsApp">WhatsApp</option><option value="LINE">LINE</option><option value="Zalo">Zalo</option><option value="Facebook Messenger">Messenger</option><option value="Viber">Viber</option><option value="Telegram">Telegram</option><option value="WeChat">WeChat</option><option value="Phone Call">电话</option><option value="other">其他</option>
+                        <option value="" data-i18n="quote_select_channel">选择联系方式</option><option value="WhatsApp">WhatsApp</option><option value="LINE">LINE</option><option value="Zalo">Zalo</option><option value="Facebook Messenger">Messenger</option><option value="Viber">Viber</option><option value="Telegram">Telegram</option><option value="WeChat">WeChat</option><option value="Phone Call">电话</option><option value="other">其他</option>
                       </select>
                     </label>
                     <label class="flex-1 flex flex-col gap-1.5"><span class="text-sm font-bold" data-i18n="quote_account_label">账号</span>
@@ -176,33 +176,33 @@ header button:active {
               <div id="quote-step-2" class="hidden">
                 <h2 class="text-base font-bold mb-3 flex items-center gap-2">
                   <span class="inline-flex items-center justify-center size-7 rounded-full bg-primary text-white text-xs font-black">2</span>
-                  <span>设备需求</span>
+                  <span data-i18n="quote_step_2">设备需求</span>
                 </h2>
                 <div class="mb-4">
-                  <span class="text-sm font-bold">需要哪些设备？<span class="text-red-500">*</span></span>
+                  <span class="text-sm font-bold"><span data-i18n="quote_equip_label">需要哪些设备？</span><span class="text-red-500">*</span></span>
                   <div class="grid grid-cols-2 gap-2 gap-2 mt-2">
-                    <label class="flex items-center gap-1.5 p-2 rounded-lg border border-slate-200 cursor-pointer hover:border-primary transition-all text-sm"><input type="checkbox" class="accent-primary" value="cutting" /> 切配</label>
-                    <label class="flex items-center gap-1.5 p-2 rounded-lg border border-slate-200 cursor-pointer hover:border-primary transition-all text-sm"><input type="checkbox" class="accent-primary" value="stirfry" /> 翻炒</label>
-                    <label class="flex items-center gap-1.5 p-2 rounded-lg border border-slate-200 cursor-pointer hover:border-primary transition-all text-sm"><input type="checkbox" class="accent-primary" value="frying" /> 煎炸</label>
-                    <label class="flex items-center gap-1.5 p-2 rounded-lg border border-slate-200 cursor-pointer hover:border-primary transition-all text-sm"><input type="checkbox" class="accent-primary" value="stewing" /> 炖煮</label>
-                    <label class="flex items-center gap-1.5 p-2 rounded-lg border border-slate-200 cursor-pointer hover:border-primary transition-all text-sm"><input type="checkbox" class="accent-primary" value="steaming" /> 蒸煮</label>
-                    <label class="flex items-center gap-1.5 p-2 rounded-lg border border-slate-200 cursor-pointer hover:border-primary transition-all text-sm"><input type="checkbox" class="accent-primary" value="auxiliary" /> 辅助</label>
+                    <label class="flex items-center gap-1.5 p-2 rounded-lg border border-slate-200 cursor-pointer hover:border-primary transition-all text-sm"><input type="checkbox" class="accent-primary" value="cutting" /> <span data-i18n="equip_cutting">切配</span></label>
+                    <label class="flex items-center gap-1.5 p-2 rounded-lg border border-slate-200 cursor-pointer hover:border-primary transition-all text-sm"><input type="checkbox" class="accent-primary" value="stirfry" /> <span data-i18n="equip_stirfry">翻炒</span></label>
+                    <label class="flex items-center gap-1.5 p-2 rounded-lg border border-slate-200 cursor-pointer hover:border-primary transition-all text-sm"><input type="checkbox" class="accent-primary" value="frying" /> <span data-i18n="equip_frying">煎炸</span></label>
+                    <label class="flex items-center gap-1.5 p-2 rounded-lg border border-slate-200 cursor-pointer hover:border-primary transition-all text-sm"><input type="checkbox" class="accent-primary" value="stewing" /> <span data-i18n="equip_stewing">炖煮</span></label>
+                    <label class="flex items-center gap-1.5 p-2 rounded-lg border border-slate-200 cursor-pointer hover:border-primary transition-all text-sm"><input type="checkbox" class="accent-primary" value="steaming" /> <span data-i18n="equip_steaming">蒸煮</span></label>
+                    <label class="flex items-center gap-1.5 p-2 rounded-lg border border-slate-200 cursor-pointer hover:border-primary transition-all text-sm"><input type="checkbox" class="accent-primary" value="auxiliary" /> <span data-i18n="equip_auxiliary">辅助</span></label>
                   </div>
-                  <div class="flex items-center gap-2 mt-1.5"><input type="checkbox" id="q-equip-other-cb" class="accent-primary" value="other" /><span class="text-sm">Other:</span><input type="text" id="q-equip-other" class="flex-1 px-3 py-2 rounded-lg border border-slate-200 bg-transparent text-sm" placeholder="Describe..." /></div>
+                  <div class="flex items-center gap-2 mt-1.5"><input type="checkbox" id="q-equip-other-cb" class="accent-primary" value="other" /><span class="text-sm" data-i18n="quote_equip_other_label">Other:</span><input type="text" id="q-equip-other" class="flex-1 px-3 py-2 rounded-lg border border-slate-200 bg-transparent text-sm" placeholder="Describe..." /></div>
                 </div>
                 <div class="grid grid-cols-3 gap-3">
-                  <label class="flex flex-col gap-1.5"><span class="text-sm font-bold">日均产量 <span class="text-red-500">*</span></span>
-                    <select data-custom-select id="q-capacity" required class="h-12 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white focus:border-primary text-sm px-3 py-3 appearance-none"><option value="">选择</option><option value="<50">&lt;50</option><option value="50-100">50-100</option><option value="100-300">100-300</option><option value="300+">300+</option></select>
+                  <label class="flex flex-col gap-1.5"><span class="text-sm font-bold"><span data-i18n="quote_daily_capacity">日均产量</span> <span class="text-red-500">*</span></span>
+                    <select data-custom-select id="q-capacity" required class="h-12 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white focus:border-primary text-sm px-3 py-3 appearance-none"><option value="" data-i18n="quote_select_capacity">选择</option><option value="<50">&lt;50</option><option value="50-100">50-100</option><option value="100-300">100-300</option><option value="300+">300+</option></select>
                   </label>
-                  <label class="flex flex-col gap-1.5"><span class="text-sm font-bold">预算 <span class="text-red-500">*</span></span>
-                    <select data-custom-select id="q-budget" required class="h-12 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white focus:border-primary text-sm px-3 py-3 appearance-none"><option value="">选择</option><option value="<$800">&lt;$800</option><option value="$800-1500">$800-1500</option><option value="$1500-3000">$1500-3000</option><option value="$3000-8000">$3000-8000</option><option value="$8000+">$8000+</option></select>
+                  <label class="flex flex-col gap-1.5"><span class="text-sm font-bold"><span data-i18n="quote_budget_label">预算</span> <span class="text-red-500">*</span></span>
+                    <select data-custom-select id="q-budget" required class="h-12 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white focus:border-primary text-sm px-3 py-3 appearance-none"><option value="" data-i18n="quote_select_budget">选择</option><option value="<$800">&lt;$800</option><option value="$800-1500">$800-1500</option><option value="$1500-3000">$1500-3000</option><option value="$3000-8000">$3000-8000</option><option value="$8000+">$8000+</option></select>
                   </label>
-                  <div class="flex flex-col gap-1.5"><span class="text-sm font-bold">采购时间 <span class="text-red-500">*</span></span>
+                  <div class="flex flex-col gap-1.5"><span class="text-sm font-bold"><span data-i18n="quote_timeline_label">采购时间</span> <span class="text-red-500">*</span></span>
                     <div class="space-y-1.5">
-                      <label class="flex items-center gap-1.5 text-sm cursor-pointer"><input type="radio" name="q-timeline" class="accent-primary" value="1month" /> 1个月内</label>
-                      <label class="flex items-center gap-1.5 text-sm cursor-pointer"><input type="radio" name="q-timeline" class="accent-primary" value="3months" /> 3个月内</label>
-                      <label class="flex items-center gap-1.5 text-sm cursor-pointer"><input type="radio" name="q-timeline" class="accent-primary" value="6months" /> 6个月内</label>
-                      <label class="flex items-center gap-1.5 text-sm cursor-pointer"><input type="radio" name="q-timeline" class="accent-primary" value="nodate" checked /> 先了解</label>
+                      <label class="flex items-center gap-1.5 text-sm cursor-pointer"><input type="radio" name="q-timeline" class="accent-primary" value="1month" /> <span data-i18n="quote_timeline_1m">1个月内</span></label>
+                      <label class="flex items-center gap-1.5 text-sm cursor-pointer"><input type="radio" name="q-timeline" class="accent-primary" value="3months" /> <span data-i18n="quote_timeline_3m">3个月内</span></label>
+                      <label class="flex items-center gap-1.5 text-sm cursor-pointer"><input type="radio" name="q-timeline" class="accent-primary" value="6months" /> <span data-i18n="quote_timeline_6m">6个月内</span></label>
+                      <label class="flex items-center gap-1.5 text-sm cursor-pointer"><input type="radio" name="q-timeline" class="accent-primary" value="nodate" checked /> <span data-i18n="quote_timeline_nodate">先了解</span></label>
                     </div>
                   </div>
                 </div>
@@ -338,17 +338,17 @@ header button:active {
     <script defer src="/assets/js/ui/dropdown-base.js"></script>
     <script defer src="/assets/js/ui/custom-select.js"></script>
 <script defer src="/assets/js/quote-select-i18n.js"></script>
-<script defer src="/assets/js/ui/products-dropdown.js?v=202605271442"></script>
-    <script defer src="/assets/js/ui/applications-dropdown.js?v=202605271442"></script>
-    <script defer src="/assets/js/ui/support-dropdown.js?v=202605271442"></script>
-    <script defer src="/assets/js/ui/about-dropdown.js?v=202605271442"></script>
+<script defer src="/assets/js/ui/products-dropdown.js?v=202605271507"></script>
+    <script defer src="/assets/js/ui/applications-dropdown.js?v=202605271507"></script>
+    <script defer src="/assets/js/ui/support-dropdown.js?v=202605271507"></script>
+    <script defer src="/assets/js/ui/about-dropdown.js?v=202605271507"></script>
 <script defer src="/assets/js/product-list.js"></script>
 <script defer src="/assets/js/utils.js"></script>
 <script defer src="/assets/js/ui/search-engine.js"></script>
-    <script defer src="/assets/js/ui/slide-menu.js?v=202605271442"></script>
-<script defer src="/assets/js/ui/footer.js?v=202605271442"></script>
-<script defer src="/assets/js/lang-registry.js?v=202605271442"></script>
-<script defer src="/assets/js/translations.js?v=202605271442"></script><script defer src="/assets/js/translations-dropdown-template.js?v=202605271442"></script>
+    <script defer src="/assets/js/ui/slide-menu.js?v=202605271507"></script>
+<script defer src="/assets/js/ui/footer.js?v=202605271507"></script>
+<script defer src="/assets/js/lang-registry.js?v=202605271507"></script>
+<script defer src="/assets/js/translations.js?v=202605271507"></script><script defer src="/assets/js/translations-dropdown-template.js?v=202605271507"></script>
 
 <script defer src="/assets/js/contacts.js"></script>
 <script defer src="/assets/js/router.js"></script>
