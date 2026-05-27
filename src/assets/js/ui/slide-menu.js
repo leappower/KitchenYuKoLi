@@ -8,8 +8,7 @@
  *   - open()              打开滑出菜单
  *   - close()             关闭滑出菜单
  *   - initToggle()        初始化汉堡按钮 & 搜索按钮的事件绑定
- *   - openMobileSearch()  打开移动端搜索覆盖层
- *   - closeMobileSearch() 关闭移动端搜索覆盖层
+ *   - 搜索已迁移到 search-engine.js（统一搜索系统）
  *
  * @module SlideMenu
  */
@@ -631,13 +630,10 @@
   var toggleBound = false;
 
   /** @type {boolean} 搜索按钮事件是否已绑定 */
-  var searchBound = false;
+  // 搜索已迁移到 search-engine.js，不再需要 searchBound 和 searchClickHandler
 
   /** @type {Function|null} 汉堡按钮点击处理函数引用（用于解绑旧按钮） */
   var toggleClickHandler = null;
-
-  /** @type {Function|null} 搜索按钮点击处理函数引用 */
-  var searchClickHandler = null;
 
   /** @type {HTMLElement|null} 上一次绑定的汉堡按钮 DOM 引用 */
   var lastToggleBtn = null;
@@ -673,272 +669,12 @@
     };
     toggleBtn.addEventListener("click", toggleClickHandler);
 
-    // 绑定搜索按钮
-    var searchBtn = document.getElementById("mobile-search-toggle");
-    if (searchBtn && !searchBound) {
-      searchBound = true;
-      searchClickHandler = function (evt) {
-        evt.preventDefault();
-        evt.stopPropagation();
-        // 切换搜索覆盖层的开/关
-        if (document.getElementById("mobile-search-overlay")) {
-          closeMobileSearch();
-        } else {
-          openMobileSearch();
-        }
-      };
-      searchBtn.addEventListener("click", searchClickHandler);
-    } else if (!searchBtn) {
-      searchBound = false;
-    }
+    // 搜索按钮：已迁移到 search-engine.js（统一搜索系统），此处不再绑定
   }
 
   /* ================================================================
-   *  移动端搜索覆盖层
+   *  搜索已迁移到 search-engine.js（统一搜索系统），此处不再维护
    * ================================================================ */
-
-  /** @type {HTMLElement|null} 搜索覆盖层 DOM 引用 */
-  var searchOverlayEl = null;
-
-  /** @type {HTMLInputElement|null} 搜索输入框 DOM 引用 */
-  var searchInputEl = null;
-
-  /** @type {number|null} 搜索防抖定时器 ID */
-  var searchDebounceTimer = null;
-
-  /**
-   * 打开移动端搜索覆盖层
-   * - 创建全屏搜索 UI 并插入 DOM
-   * - 自动聚焦输入框并绑定搜索事件
-   * - 支持翻译管理器翻译占位符
-   */
-  function openMobileSearch() {
-    searchOverlayEl = document.createElement("div");
-    searchOverlayEl.id = "mobile-search-overlay";
-    searchOverlayEl.className = "mobile-search-overlay";
-    searchOverlayEl.innerHTML =
-      '<div class="mobile-search-bar">' +
-      '<span class="material-symbols-outlined mobile-search-icon">search</span>' +
-      '<input type="search" id="mobile-search-input" class="mobile-search-input"' +
-      ' placeholder="Search..." data-i18n-placeholder="search_placeholder"' +
-      ' autocomplete="off" spellcheck="false" />' +
-      '<button id="mobile-search-clear" type="button" class="mobile-search-clear" aria-label="Clear">' +
-      '<span class="material-symbols-outlined">cancel</span>' +
-      "</button>" +
-      "</div>" +
-      '<div id="mobile-search-results" class="mobile-search-results"></div>';
-
-    document.body.appendChild(searchOverlayEl);
-    document.body.style.overflow = "hidden";
-
-    // 翻译搜索框占位符
-    if (window.translationManager) {
-      var placeholderEl = searchOverlayEl.querySelector("[data-i18n-placeholder]");
-      if (placeholderEl) {
-        var placeholderKey = placeholderEl.getAttribute("data-i18n-placeholder");
-        var translatedPlaceholder = window.translationManager.translate(placeholderKey);
-        if (translatedPlaceholder && translatedPlaceholder !== placeholderKey) {
-          placeholderEl.placeholder = translatedPlaceholder;
-        }
-      }
-    }
-
-    // 入场动画 + 事件绑定（下一帧）
-    requestAnimationFrame(function () {
-      searchOverlayEl.classList.add("is-open");
-
-      searchInputEl = document.getElementById("mobile-search-input");
-      if (searchInputEl) {
-        searchInputEl.focus();
-        searchInputEl.addEventListener("input", onSearchInput);
-        searchInputEl.addEventListener("keydown", onSearchKeydown);
-      }
-
-      // 清除按钮
-      var clearBtn = document.getElementById("mobile-search-clear");
-      if (clearBtn) {
-        clearBtn.addEventListener("click", function () {
-          if (searchInputEl) {
-            searchInputEl.value = "";
-            onSearchInput();
-            searchInputEl.focus();
-          }
-        });
-      }
-
-      // 点击覆盖层空白区域关闭
-      searchOverlayEl.addEventListener("click", function (evt) {
-        if (evt.target === searchOverlayEl) {
-          closeMobileSearch();
-        }
-      });
-    });
-  }
-
-  /**
-   * 关闭移动端搜索覆盖层
-   * - 等待退场动画完成后销毁 DOM
-   */
-  function closeMobileSearch() {
-    if (!searchOverlayEl) return;
-
-    searchOverlayEl.classList.remove("is-open");
-
-    var _searchCloseDone = false;
-    function _cleanupSearchDOM() {
-      if (_searchCloseDone) return;
-      _searchCloseDone = true;
-      if (searchOverlayEl && searchOverlayEl.parentNode) {
-        searchOverlayEl.parentNode.removeChild(searchOverlayEl);
-      }
-      searchOverlayEl = null;
-      searchInputEl = null;
-      document.body.style.overflow = "";
-    }
-    searchOverlayEl.addEventListener("transitionend", function onEnd(e) {
-      if (e.propertyName === "opacity" || e.propertyName === "transform") {
-        searchOverlayEl.removeEventListener("transitionend", onEnd);
-        _cleanupSearchDOM();
-      }
-    });
-    setTimeout(_cleanupSearchDOM, 400);
-  }
-
-  /**
-   * 搜索输入事件处理
-   * - 控制清除按钮显示/隐藏
-   * - 200ms 防抖后执行搜索
-   */
-  function onSearchInput() {
-    if (!searchInputEl) return;
-
-    clearTimeout(searchDebounceTimer);
-
-    var query = searchInputEl.value.trim();
-
-    // 切换清除按钮可见性
-    var clearBtn = document.getElementById("mobile-search-clear");
-    if (clearBtn) {
-      if (query.length > 0) {
-        clearBtn.classList.add("is-visible");
-      } else {
-        clearBtn.classList.remove("is-visible");
-      }
-    }
-
-    // 清空时清除结果
-    if (query.length < 1) {
-      var resultsContainer = document.getElementById("mobile-search-results");
-      if (resultsContainer) {
-        resultsContainer.innerHTML = "";
-      }
-      return;
-    }
-
-    // 防抖搜索
-    searchDebounceTimer = setTimeout(function () {
-      var results = [];
-      if (window.ProductSearchEngine && typeof window.ProductSearchEngine.search === "function") {
-        results = window.ProductSearchEngine.search(query);
-      }
-      renderSearchResults(results);
-    }, 200);
-  }
-
-  /**
-   * 渲染搜索结果到结果容器
-   * @param {Array} results - 搜索结果数组
-   */
-  function renderSearchResults(results) {
-    var container = document.getElementById("mobile-search-results");
-    if (!container) return;
-
-    if (results && results.length > 0) {
-      var html = "";
-      for (var i = 0; i < results.length; i++) {
-        var item = results[i];
-
-        var displayName = (item._displayName || item._displayCategory + " " + item.model)
-          .replace(/</g, "&lt;")
-          .replace(/>/g, "&gt;");
-        var model = (item.model || "").replace(/</g, "&lt;");
-        var category = (item._displayCategory || item.category || "").replace(/</g, "&lt;");
-        var imageUrl = item.productImage || item.imageUrl || "";
-
-        var imageHtml = imageUrl
-          ? '<img src="' + imageUrl + '" alt="" loading="lazy" onerror="this.style.display=\'none\'">'
-          : '<span class="material-symbols-outlined">inventory_2</span>';
-
-        var detailPath = item.path || "/products/detail/" + encodeURIComponent(item.model) + "/";
-
-        html +=
-          '<a class="mobile-search-result-item" href="' +
-          detailPath +
-          '">' +
-          '<div class="mobile-search-result-img">' +
-          imageHtml +
-          "</div>" +
-          '<div class="mobile-search-result-info">' +
-          '<div class="mobile-search-result-name">' +
-          displayName +
-          "</div>" +
-          '<div class="mobile-search-result-meta">' +
-          "<span>" +
-          model +
-          "</span>" +
-          '<span class="mobile-search-result-sep">·</span>' +
-          "<span>" +
-          category +
-          "</span>" +
-          "</div>" +
-          "</div>" +
-          "</a>";
-      }
-
-      container.innerHTML = html;
-
-      // 点击搜索结果时关闭搜索覆盖层并导航
-      var resultLinks = container.querySelectorAll(".mobile-search-result-item");
-      for (var j = 0; j < resultLinks.length; j++) {
-        (function (link) {
-          link.addEventListener("click", function (e) {
-            e.preventDefault();
-            closeMobileSearch();
-            var href = link.getAttribute("href");
-            if (href) {
-              if (window.SpaRouter && window.SpaRouter.navigate) {
-                window.SpaRouter.navigate(href);
-              } else {
-                window.location.href = href;
-              }
-            }
-          });
-        })(resultLinks[j]);
-      }
-    } else {
-      // 空结果提示
-      var trFn = (window.CommonUtils && window.CommonUtils.tr) || window.t;
-      var emptyText = trFn ? trFn("search_no_results", "No matching products found") : "No matching products found";
-
-      container.innerHTML =
-        '<div class="mobile-search-empty">' +
-        '<span class="material-symbols-outlined">search_off</span>' +
-        "<p>" +
-        escapeHtml(emptyText) +
-        "</p>" +
-        "</div>";
-    }
-  }
-
-  /**
-   * 搜索框键盘事件处理
-   * @param {KeyboardEvent} evt
-   */
-  function onSearchKeydown(evt) {
-    if (evt.key === "Escape") {
-      closeMobileSearch();
-    }
-  }
 
   /* ================================================================
    *  初始化 & 生命周期事件
@@ -957,7 +693,6 @@
       closeMenu();
       lastToggleBtn = null;
       toggleBound = false;
-      searchBound = false;
       initToggle();
       initSmartHeader();
       if (typeof SlideMenu !== "undefined" && SlideMenu.updateActive) SlideMenu.updateActive();
@@ -1015,11 +750,7 @@
     /** 初始化汉堡按钮 & 搜索按钮的事件绑定 */
     initToggle: initToggle,
 
-    /** 打开移动端搜索覆盖层 */
-    openMobileSearch: openMobileSearch,
-
-    /** 关闭移动端搜索覆盖层 */
-    closeMobileSearch: closeMobileSearch,
+    // 搜索 API 已迁移到 search-engine.js，此处不再提供
 
     /** 更新子菜单项的 is-active 高亮（SPA 导航后调用） */
     updateActive: function () {

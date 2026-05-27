@@ -122,6 +122,9 @@
       swupHooks.on("fetch:request", function (visit, { args }) {
         if (!args || !args.url) return;
         var url = args.url;
+        // 只对已知的静态页面路径添加设备后缀
+        // 排除产品详情页等动态路由（路径包含 /detail/、/compare/ 等）
+        if (/\/(detail|compare|news\/detail)\/.*\/$/.test(url)) return;
         if (!/\/$/.test(url) && !/\/index\.html$/.test(url)) return;
         if (/index-(mobile|pc|tablet)\.html$/.test(url)) return;
         var base = url.replace(/\/index\.html$/, "");

@@ -921,19 +921,11 @@
   }
 
   /**
-   * 初始化平板端搜索切换按钮
+   * 平板端搜索已统一到 search-engine.js（header 中的 .ios-search-bar）
+   * 此处不再需要独立的搜索切换按钮
    */
   function initTabletSearchToggle() {
-    var toggleBtn = document.getElementById("tablet-search-toggle");
-    if (!toggleBtn) return;
-
-    toggleBtn.addEventListener("click", function (e) {
-      e.preventDefault();
-      e.stopPropagation();
-      if (window.SlideMenu && typeof window.SlideMenu.openMobileSearch === "function") {
-        window.SlideMenu.openMobileSearch();
-      }
-    });
+    // 搜索已迁移到 search-engine.js，此函数保留为空以兼容调用方
   }
 
   /* ── Language switcher panel management (lightweight, no full CustomSelectInstance render) ── */
