@@ -92,7 +92,7 @@
       "}",
 
       /* ─── Wrapper ─── */
-      ".cs-trigger-wrap { position: relative; width: 100%; }",
+      ".cs-trigger-wrap { position: relative; min-width: 0; }",
       ".cs-trigger-wrap" + "." + DISABLED_CLASS + " .cs-trigger {",
       "  cursor: not-allowed; opacity: .5; pointer-events: none;",
       "}",
@@ -391,7 +391,7 @@
 
     this.wrap = document.createElement("div");
     this.wrap.className = "cs-trigger-wrap" + (selectEl.disabled ? " " + DISABLED_CLASS : "");
-    this.wrap.style.width = "100%";
+    this.wrap.style.minWidth = "0";
 
     this.trigger = document.createElement("div");
     this.trigger.className = "cs-trigger";
