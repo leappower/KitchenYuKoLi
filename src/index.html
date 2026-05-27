@@ -172,7 +172,8 @@
       // Root path redirect: / → /home/
       var path = window.location.pathname;
       if (path === '/' || path === '/index.html') {
-        history.replaceState(null, '', '/home/');
+        window.location.replace('/home/');
+        return;
       }
 
       // GitHub Pages 404 SPA redirect:
