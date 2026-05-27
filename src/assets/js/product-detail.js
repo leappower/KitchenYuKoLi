@@ -426,7 +426,10 @@
     var specs = [
       { l: tl("pd_spec_model", "型号"), v: product.model },
       { l: tl("pd_spec_category", "分类"), v: getCategoryName(product) },
-      { l: tl("pd_spec_subcategory", "子分类"), v: getProductField(product, "sub_category") || product.subCategory },
+      {
+        l: tl("pd_spec_subcategory", "子分类"),
+        v: translateSubCategory(product) || getProductField(product, "sub_category") || product.subCategory,
+      },
       { l: tl("pd_spec_tier", "等级"), v: getProductField(product, "tier") || product.tier },
       { l: tl("pd_spec_power", "功率"), v: product.power },
       { l: tl("pd_spec_capacity", "容量"), v: getProductField(product, "throughput") || product.throughput },
@@ -622,7 +625,7 @@
       '<div class="lg:w-1/2 flex flex-col gap-5"><div>' +
       '<div class="flex items-center gap-3 mb-2">' +
       '<span class="text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">' +
-      esc(product.subCategory || getCategoryName(product)) +
+      esc(translateSubCategory(product) || getCategoryName(product)) +
       "</span>" +
       badge +
       tier +
@@ -731,6 +734,38 @@
       if (translated && translated !== i18nKey) return translated;
     }
     return product.categoryName || cat;
+  }
+
+  // Get translated subCategory (e.g. "搅拌炒菜机" → "Stirring Cooking Machine")
+  function translateSubCategory(product) {
+    var subCat = product.subCategory;
+    if (!subCat) return "";
+    var cat = product.category || "";
+    if (window._productTranslationsByModel && product.model) {
+      var tx = window._productTranslationsByModel[product.model];
+      if (tx && tx.sub_category) return tx.sub_category;
+    }
+    // Fallback: try product data-table field (i18n-enriched if set)
+    if (typeof getProductField === "function") {
+      var pf = getProductField(product, "sub_category");
+      if (pf && pf !== product.subCategory) return pf;
+    }
+    // Last resort: UI i18n key lookup
+    var slugMap = {
+      翻炒系列: "stirfry",
+      炖煮系列: "stewing",
+      蒸煮系列: "steaming",
+      煎炸系列: "frying",
+      切配系列: "cutting",
+      辅助系列: "other",
+    };
+    var slug = slugMap[cat];
+    if (slug && typeof window.t === "function") {
+      var key = "product_subcat_" + slug + "_" + subCat;
+      var tx2 = window.t(key);
+      if (tx2 && tx2 !== key) return tx2;
+    }
+    return subCat;
   }
 
   // Usage: getProductField(product, 'name') → returns translated name or fallback to Chinese
