@@ -852,7 +852,7 @@
   };
 
   /**
-   * Scenario Mobile renderer (horizontal scroll)
+   * Scenario Mobile renderer (2-column grid)
    */
   window.renderScenarioMobile = function (containerId, scenarioKey) {
     var container = document.getElementById(containerId);
@@ -862,13 +862,16 @@
         container.innerHTML = "";
         return;
       }
-      var html =
-        '<div class="flex gap-4 overflow-x-auto pb-2 snap-x snap-mandatory scrollbar-hide" style="-webkit-overflow-scrolling:touch;scroll-snap-type:x mandatory">';
-      products.forEach(function (p) {
+
+      var VIS = 6;
+      var hasMore = products.length > VIS;
+      var visProducts = hasMore ? products.slice(0, VIS) : products;
+      var restProducts = hasMore ? products.slice(VIS) : [];
+
+      function buildCard(p) {
         var img = getPrimaryImage(p);
         var href = getProductDetailHref(p);
-        html +=
-          '<div class="flex-shrink-0 w-[85vw] max-w-[300px] snap-center">' +
+        return (
           '<div class="group bg-white rounded-2xl border border-slate-200 hover:border-primary hover:shadow-lg transition-all duration-300 overflow-hidden" data-link="' +
           href +
           '">' +
@@ -902,9 +905,29 @@
           '" data-no-swup class="text-xs font-bold text-primary flex items-center gap-0.5 group-hover:gap-1.5 transition-all duration-300 hover:opacity-80" data-i18n="home_hw_learn_more">' +
           tl("home_hw_learn_more", "了解更多") +
           ' <span class="material-symbols-outlined text-sm group-hover:translate-x-0.5 transition-transform duration-300">arrow_forward</span></a>' +
-          "</div></div></div></div>";
+          "</div></div></div>"
+        );
+      }
+
+      var html = '<div class="grid grid-cols-2 gap-3">';
+      visProducts.forEach(function (p) {
+        html += buildCard(p);
       });
       html += "</div>";
+
+      if (hasMore) {
+        html += '<div id="scenario-hidden-mobile" style="display:none" class="grid grid-cols-2 gap-3 mt-3">';
+        restProducts.forEach(function (p) {
+          html += buildCard(p);
+        });
+        html += "</div>";
+        html +=
+          "<button id=\"scenario-load-more-mobile\" class=\"w-full mt-3 py-2.5 rounded-xl border border-slate-300 text-sm font-bold text-primary hover:bg-primary hover:text-white hover:border-primary transition-all flex items-center justify-center gap-2\" onclick=\"(function(){var h=document.getElementById('scenario-hidden-mobile');var btn=document.getElementById('scenario-load-more-mobile');if(h&&btn){h.style.display='';btn.style.display='none';window.translationManager&&window.translationManager.applyTo(h.parentElement);}})()\">" +
+          '<span class="material-symbols-outlined text-lg">expand_more</span> ' +
+          escHtml(tl("home_show_more", "更多产品")) +
+          "</button>";
+      }
+
       container.innerHTML = html;
       if (window.translationManager && window.translationManager.applyTo) {
         window.translationManager.applyTo(container);
