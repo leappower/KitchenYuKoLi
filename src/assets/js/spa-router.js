@@ -122,13 +122,18 @@
       swupHooks.on("fetch:request", function (visit, { args }) {
         if (!args || !args.url) return;
         var url = args.url;
-        // 只对已知的静态页面路径添加设备后缀
-        // 排除产品详情页等动态路由（路径包含 /detail/、/compare/ 等）
-        if (/\/(detail|compare|news\/detail)\/.*\/$/.test(url)) return;
-        if (!/\/$/.test(url) && !/\/index\.html$/.test(url)) return;
+        // 只对已知的静态页面根路径（一级路径）添加设备后缀
+        // 排除所有多级路径（动态路由如 /products/detail/xxx/、/products/stirfry/xxx/ 等）
+        // 只有 /home/、/products/、/applications/、/about/、/contact/、/cases/、/news/ 等根路径才需要替换
+        var pathParts = url
+          .replace(/\/index\.html$/, "")
+          .replace(/^https?:\/\/[^\/]+/, "")
+          .split("/")
+          .filter(Boolean);
+        if (pathParts.length !== 1) return;
+        if (!/\/$/.test(url)) return;
         if (/index-(mobile|pc|tablet)\.html$/.test(url)) return;
-        var base = url.replace(/\/index\.html$/, "");
-        var newUrl = base + suffix;
+        var newUrl = url.replace(/\/$/, "") + "/" + suffix;
         args.url = newUrl;
       });
     })();
