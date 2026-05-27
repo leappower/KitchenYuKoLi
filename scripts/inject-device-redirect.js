@@ -45,8 +45,11 @@ var REDIRECT_SCRIPT =
   '      if(c){history.replaceState({},"",c);return}\n' +
   '      if(window.__spaNavigating)return;\n' +
   '      var f=location.pathname.split("/").pop();\n' +
-  '      // 目录 URL（末尾斜杠 /）— 不跳转，让 server.js 处理\n' +
-  '      if(!f||!f.match(/\.html$/))return;\n' +
+  '      if(!f||!f.match(/\.html$/)){\n' +
+  '        // 目录 URL — 直接跳转到对应设备文件\n' +
+  '        doRedirect();\n' +
+  '        return;\n' +
+  '      }\n' +
   '      if(f.match(/^index-(pc|mobile|tablet)\.html$/))return;\n' +
   '      function doRedirect(){\n' +
   '        var mq767=window.matchMedia("(max-width:767px)");\n' +
