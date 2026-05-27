@@ -24,7 +24,7 @@
    */
   function getSubseries() {
     return ((window.NAV_CONFIG && window.NAV_CONFIG.applications) || []).filter(function (s) {
-      return !s._separator;
+      return !s._separator && s.key !== "nav_applications_overview";
     });
   }
 
