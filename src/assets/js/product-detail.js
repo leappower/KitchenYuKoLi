@@ -254,8 +254,22 @@
       renderPDP._pending = false;
     });
     // Check if language changed — reload translations before rendering
-    var currentLang = (window.CURRENT_LANG || document.documentElement.lang || "zh-CN").replace("_", "-");
-    if (currentLang !== (renderPDP._lastLang || "") && currentLang !== "zh-CN" && currentLang !== "zh") {
+    var currentLang = (
+      window.CURRENT_LANG ||
+      (window.t && window.t.currentLanguage) ||
+      localStorage.getItem("userLanguage") ||
+      document.documentElement.lang ||
+      "en"
+    ).replace("_", "-");
+    var needsProductTx =
+      currentLang !== "zh-CN" &&
+      currentLang !== "zh" &&
+      (!window._productTranslationsByModel || Object.keys(window._productTranslationsByModel).length === 0);
+
+    if (
+      needsProductTx ||
+      (currentLang !== (renderPDP._lastLang || "") && currentLang !== "zh-CN" && currentLang !== "zh")
+    ) {
       renderPDP._lastLang = currentLang;
       if (typeof loadProductTranslations === "function") {
         loadProductTranslations(currentLang, function () {
@@ -779,7 +793,13 @@
   // Usage: getProductField(product, 'name') → returns translated name or fallback to Chinese
   window.getProductField = function (product, field) {
     if (!product) return "";
-    var lang = (window.CURRENT_LANG || document.documentElement.lang || "zh-CN").replace("_", "-");
+    var lang = (
+      window.CURRENT_LANG ||
+      (window.t && window.t.currentLanguage) ||
+      localStorage.getItem("userLanguage") ||
+      document.documentElement.lang ||
+      "en"
+    ).replace("_", "-");
     if (lang === "zh-CN" || lang === "zh") return product[field] || "";
     var model = product.model;
     var map = window._productTranslationsByModel || {};
