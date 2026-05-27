@@ -5,7 +5,6 @@
  * - PC/Tablet: floating dropdown panel (above/below trigger)
  * - Mobile (≤720px): iOS-style bottom sheet popup
  * - Supports: placeholder, searchable, disabled, optgroup, data-i18n
- * - Fully compatible with existing form-interactions.js validation
  * - Preserves native <select> as hidden source of truth (.value, .selectedIndex)
  * - Dark mode via class-based toggle
  *
