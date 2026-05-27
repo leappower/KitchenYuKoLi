@@ -370,7 +370,9 @@
         "https://script.google.com/macros/s/AKfycbyUy-DdV0eqNfbzHWXhf5XbSMtyJMIL--Hx_AfMOrBqUYl7PgVD7vX7uhIhXy_DZIXr/exec";
 
       var controller = new AbortController();
-      var timeout = setTimeout(function () { controller.abort(); }, 15000);
+      var timeout = setTimeout(function () {
+        controller.abort();
+      }, 15000);
 
       // JSON body 但 no-cors + 无自定义 Content-Type = simple request
       fetch(GAS_URL, {
