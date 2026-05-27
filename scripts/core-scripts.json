@@ -16,6 +16,7 @@
     "assets/js/ui/navigator.js",
     "assets/js/ui/slide-menu.js",
     "assets/js/ui/footer.js",
+    "assets/js/ui/hero-video.js",
     "assets/js/ui/floating-actions.js",
     "assets/js/swup.min.js",
     "assets/js/swup-head-plugin.min.js",
@@ -30,7 +31,6 @@
       "assets/js/product-detail.js",
       "assets/js/quote-form.js",
       "assets/js/ui/currency.js",
-      "assets/js/ui/hero-video.js",
       "assets/js/breadcrumb.js"
     ],
     "products": [
@@ -64,7 +64,6 @@
       "assets/js/ui/custom-select.js"
     ],
     "applications": [
-      "assets/js/ui/hero-video.js",
       "assets/js/scenario-products.js"
     ]
   }
