@@ -228,6 +228,30 @@
       .split(/[\s,，、-]+/)
       .filter(Boolean);
 
+    // CJK 双字符滑动窗口分词：对每个非纯空白 token 做双字切分
+    var cjkTokens = [];
+    for (var t = 0; t < tokens.length; t++) {
+      var token = tokens[t];
+      // 如果 token 长度 >= 2 且包含 CJK 字符，生成双字滑动窗口
+      if (token.length >= 2) {
+        for (var i = 0; i < token.length - 1; i++) {
+          var bigram = token.substring(i, i + 2);
+          // 只加纯 CJK 或不含英语字母的双字
+          if (/[\u4e00-\u9fff]/.test(bigram) || /[^\u4e00-\u9fff]/.test(q)) {
+            cjkTokens.push(bigram);
+          }
+        }
+      }
+    }
+    // 去重
+    var seenBigram = {};
+    for (var t = 0; t < cjkTokens.length; t++) {
+      if (!seenBigram[cjkTokens[t]]) {
+        seenBigram[cjkTokens[t]] = true;
+        tokens.push(cjkTokens[t]);
+      }
+    }
+
     var allItems = buildSearchableProducts().concat(buildSearchablePages());
     var results = [];
     var seen = {};
