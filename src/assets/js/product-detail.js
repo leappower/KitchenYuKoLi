@@ -257,6 +257,7 @@
     // Check if language changed — reload translations before rendering
     var currentLang = (
       window.CURRENT_LANG ||
+      (window.translationManager && window.translationManager.currentLanguage) ||
       (window.t && window.t.currentLanguage) ||
       localStorage.getItem("userLanguage") ||
       document.documentElement.lang ||
@@ -873,15 +874,21 @@
     "spa:load",
     function () {
       var segs = location.pathname.split("/").filter(Boolean);
-      // Only render PDP on /products/detail/<model>/ or /products/<model>/ (non-category)
-      if (segs[0] === "products") {
-        if (segs[1] === "detail" && segs[2]) {
+      if (segs[0] !== "products") return;
+      var shouldRender =
+        (segs[1] === "detail" && segs[2]) ||
+        (segs[1] && segs[1] !== "compare" && !isCategorySlug(segs[1])) ||
+        (isCategorySlug(segs[1]) && segs[2]);
+      if (!shouldRender) return;
+      // spa:load 时 translations 可能还未就绪，等待 spa:ready 确保语言正确
+      if (window.translationManager && !window.translationManager.isInitialized) {
+        var onReady = function () {
+          document.removeEventListener("spa:ready", onReady);
           renderPDP();
-        } else if (segs[1] && segs[1] !== "compare" && !isCategorySlug(segs[1])) {
-          renderPDP();
-        } else if (isCategorySlug(segs[1]) && segs[2]) {
-          renderPDP();
-        }
+        };
+        document.addEventListener("spa:ready", onReady);
+      } else {
+        renderPDP();
       }
     },
     "spa:load:renderPDP"
@@ -891,15 +898,13 @@
     "spa:ready",
     function () {
       var segs = location.pathname.split("/").filter(Boolean);
-      if (segs[0] === "products") {
-        if (segs[1] === "detail" && segs[2]) {
-          renderPDP();
-        } else if (segs[1] && segs[1] !== "compare" && !isCategorySlug(segs[1])) {
-          renderPDP();
-        } else if (isCategorySlug(segs[1]) && segs[2]) {
-          renderPDP();
-        }
-      }
+      if (segs[0] !== "products") return;
+      var shouldRender =
+        (segs[1] === "detail" && segs[2]) ||
+        (segs[1] && segs[1] !== "compare" && !isCategorySlug(segs[1])) ||
+        (isCategorySlug(segs[1]) && segs[2]);
+      if (!shouldRender) return;
+      renderPDP();
     },
     "spa:ready:renderPDP"
   );
