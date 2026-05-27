@@ -66,6 +66,7 @@ sync_assets "lang"         "*.json"
 sync_assets "data"         "*.json"
 sync_assets "images"       "*"  
 sync_assets "video"        "*"
+sync_assets "pdf"          "*.pdf"
 
 # 排除 aboutus.mp4（已弃用，65MB）
 rm -f "$DIST/assets/video/aboutus.mp4"
