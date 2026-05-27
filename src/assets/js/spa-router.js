@@ -127,8 +127,7 @@
         // 只有 /home/、/products/、/applications/、/about/、/contact/、/cases/、/news/ 等根路径才需要替换
         var pathParts = url
           .replace(/\/index\.html$/, "")
-          .replace(/^https?:\/\/[^\/]+/, "")
-          .split("/")
+          .replace(/^https?:\/\/[^/]+/, "")
           .filter(Boolean);
         if (pathParts.length !== 1) return;
         if (!/\/$/.test(url)) return;
