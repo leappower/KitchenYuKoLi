@@ -737,34 +737,43 @@
   }
 
   // Get translated subCategory (e.g. "搅拌炒菜机" → "Stirring Cooking Machine")
+  // Static map: Chinese subCategory → English translation
+  // Derived from src/assets/lang/en-product.json (keys: product_subcat_{slug}_{chinese})
+  var SUBCAT_I18N_MAP = {
+    搅拌炒菜机: "Stirring Cooking Machine",
+    滚筒炒菜机: "Drum Stir-Fry Machine",
+    团餐滚筒炒菜机: "Catering Drum Wok",
+    搅拌炒锅炖烩机: "Stir-fry Pot / Stewing Machine",
+    汤锅: "Stock Pot",
+    压力锅: "Pressure Cooker",
+    煮面炉: "Noodle Cooker",
+    煲仔炉: "Clay Pot Cooker",
+    卤煮炉: "Braising Stew Pot",
+    智能蒸饭机: "Smart Rice Steamer",
+    自动漂烫焯水油炸机: "Automatic Blanching / Scalding / Frying Machine",
+    油炸炉: "Deep Fryer",
+    锅贴机: "Pot Sticker Machine",
+    流水化自动机: "Automated Inline Machine",
+    揭盖式洗碗机: "Lift-Lid Dishwasher",
+    长龙洗碗机: "Long Conveyor Dishwasher",
+    切菜机: "Vegetable Cutting Machine",
+    切肉机: "Meat Cutting Machine",
+    锯骨机: "Bone Saw Machine",
+    切丁机: "Dicing Machine",
+    切片机: "Slicing Machine",
+    绞肉机: "Meat Grinder",
+  };
+
   function translateSubCategory(product) {
     var subCat = product.subCategory;
     if (!subCat) return "";
-    var cat = product.category || "";
-    if (window._productTranslationsByModel && product.model) {
-      var tx = window._productTranslationsByModel[product.model];
-      if (tx && tx.sub_category) return tx.sub_category;
-    }
-    // Fallback: try product data-table field (i18n-enriched if set)
+    // Try per-model translation first (getProductField)
     if (typeof getProductField === "function") {
       var pf = getProductField(product, "sub_category");
       if (pf && pf !== product.subCategory) return pf;
     }
-    // Last resort: UI i18n key lookup
-    var slugMap = {
-      翻炒系列: "stirfry",
-      炖煮系列: "stewing",
-      蒸煮系列: "steaming",
-      煎炸系列: "frying",
-      切配系列: "cutting",
-      辅助系列: "other",
-    };
-    var slug = slugMap[cat];
-    if (slug && typeof window.t === "function") {
-      var key = "product_subcat_" + slug + "_" + subCat;
-      var tx2 = window.t(key);
-      if (tx2 && tx2 !== key) return tx2;
-    }
+    // Static map
+    if (SUBCAT_I18N_MAP[subCat]) return SUBCAT_I18N_MAP[subCat];
     return subCat;
   }
 
