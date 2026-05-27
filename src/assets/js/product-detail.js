@@ -226,7 +226,7 @@
         }
         ce = document.createElement("div");
         ce.id = "product-content";
-        ce.className = "w-full py-10";
+        ce.className = "w-full py-10 md:py-14";
         container.insertBefore(ce, bc.nextSibling);
       }
       if (!re) {
@@ -377,7 +377,7 @@
       // Mobile breadcrumb — 统一返回按钮 + 两层
       var mChevron = '<span class="mx-1 text-slate-300 text-xs">/</span>';
       html +=
-        '<div class="section-content pt-3 pb-0 md:hidden" style="padding-inline:var(--container-px,0.75rem)">' +
+        '<div class="section-content pt-4 pb-2 md:hidden" style="padding-inline:var(--container-px,0.75rem)">' +
         '<div class="flex items-center gap-2">' +
         '<button onclick="window.Breadcrumb&&window.Breadcrumb.goBack()" class="flex items-center justify-center w-8 h-8 rounded-full bg-slate-100 dark:bg-slate-800 hover:bg-primary hover:text-white text-slate-600 dark:text-slate-400 transition-all flex-shrink-0" aria-label="' +
         tl("pd_back", "返回") +
@@ -701,7 +701,6 @@
       "</a></div></section>";
 
     ce = document.getElementById("product-content");
-    if (ce) ce.className = "w-full";
     if (ce) ce.innerHTML = html;
 
     // Static specs grid
