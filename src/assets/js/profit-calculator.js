@@ -21,7 +21,7 @@
     "South Korea": { monthly: 2800000, currency: "KRW", symbol: "\u20a9" },
     India: { monthly: 25000, currency: "INR", symbol: "\u20b9" },
     "Saudi Arabia": { monthly: 4000, currency: "SAR", symbol: "\u0631.\u0633" },
-    Taiwan: { monthly: 40000, currency: "TWD", symbol: "NT$" },
+    "China (Taiwan)": { monthly: 40000, currency: "TWD", symbol: "NT$" },
     Germany: { monthly: 2500, currency: "EUR", symbol: "\u20ac" },
     Spain: { monthly: 1800, currency: "EUR", symbol: "\u20ac" },
     France: { monthly: 2200, currency: "EUR", symbol: "\u20ac" },
@@ -32,8 +32,8 @@
     Italy: { monthly: 1800, currency: "EUR", symbol: "\u20ac" },
     Turkey: { monthly: 15000, currency: "TRY", symbol: "\u20ba" },
     Israel: { monthly: 7000, currency: "ILS", symbol: "\u20aa" },
-    "Hong Kong SAR": { monthly: 15000, currency: "HKD", symbol: "HK$" },
-    "Macau SAR": { monthly: 12000, currency: "MOP", symbol: "MOP$" },
+    "China (Hong Kong)": { monthly: 15000, currency: "HKD", symbol: "HK$" },
+    "China (Macau)": { monthly: 12000, currency: "MOP", symbol: "MOP$" },
     Brunei: { monthly: 1800, currency: "BND", symbol: "B$" },
     Other: { monthly: 2000, currency: "USD", symbol: "$" },
   };
@@ -41,7 +41,7 @@
   /* ───────── Language → Country auto-match ───────── */
   var LANG_COUNTRY_MAP = {
     "zh-CN": "China",
-    "zh-TW": "Taiwan",
+    "zh-TW": "China (Taiwan)",
     zh: "China",
     en: "Other",
     th: "Thailand",
