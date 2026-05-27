@@ -846,6 +846,12 @@ html.dark .mobile-menu-l2-item.is-active {
 html.dark .mobile-menu-l2-item.is-active .mobile-menu-l2-icon {
   background: rgb(236, 91, 19, 0.25);
 }
+/* ---------- 菜单可滚动区域 ---------- */
+.mobile-menu-scroll {
+  flex: 1;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
 /* ---------- 底部 CTA 栏 ---------- */
 .mobile-menu-cta-bar {
   flex-shrink: 0;
