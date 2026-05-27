@@ -535,6 +535,15 @@
     // Support unified search bar input (.ios-search-input)
     var input = document.querySelector(".ios-search-bar .ios-search-input");
     if (!input) {
+      // Navigator may not have mounted yet — defer to end of tick
+      // so that navigator.js (loaded later in page) has a chance to render.
+      if (!window.__searchInitDeferred) {
+        window.__searchInitDeferred = true;
+        setTimeout(function () {
+          window.__searchInitDeferred = false;
+          init();
+        }, 0);
+      }
       return;
     }
 
