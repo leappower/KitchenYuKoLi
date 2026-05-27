@@ -436,7 +436,6 @@ main#spa-content {
   padding-bottom: 0;
 }
 
-
 /* ─── Navigator placeholder: prevent layout shift before JS mount ───── */
 /* Exact match of real header heights to avoid CLS before navigator.js replaces placeholder. */
 navigator[data-component="navigator"] {
@@ -986,10 +985,6 @@ a.bg-primary {
 
 /* 视频播放中 → info 卡片隐藏 */
 [data-hero-video-playing="true"] [data-hide-on-play] {
-  [data-hero-video-playing="true"] .hero-video-overlay {
-    opacity: 0;
-    pointer-events: none;
-  }
   opacity: 0;
   pointer-events: none;
 }

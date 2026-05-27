@@ -125,19 +125,14 @@ var __DEVELOPMENT__ = typeof __DEVELOPMENT__ !== "undefined" ? __DEVELOPMENT__ :
       }
     }
 
+    /* 初始显示播放按钮 — CSS 默认 display:none，确保可见性不受 poster load 条件阻塞 */
+    if (playBtn) {
+      playBtn.style.display = "flex";
+      playBtn.style.opacity = "1";
+    }
+
     /* ── 更新播放按钮外观 ── */
     function updatePlayBtn(isPlaying, isEnded) {
-      if (__DEVELOPMENT__)
-        console.log(
-          "[hv] updatePlayBtn: isPlaying=" +
-            isPlaying +
-            " isEnded=" +
-            isEnded +
-            " playBtn=" +
-            !!playBtn +
-            " playBtn.className=" +
-            (playBtn ? playBtn.className : "N/A")
-        );
       if (!playBtn) return;
       if (isPlaying) {
         playBtn.style.display = "flex";
@@ -248,8 +243,26 @@ var __DEVELOPMENT__ = typeof __DEVELOPMENT__ !== "undefined" ? __DEVELOPMENT__ :
     }
 
     poster.addEventListener("load", afterPosterReady);
+
     if (poster.complete && poster.naturalWidth > 0) {
       afterPosterReady();
+    } else if (poster.complete) {
+      // complete but naturalWidth === 0 (cached image, layout not rendered yet)
+      requestAnimationFrame(function checkPoster() {
+        if (poster.naturalWidth > 0) {
+          afterPosterReady();
+        } else {
+          setTimeout(afterPosterReady, 300);
+        }
+      });
+    } else {
+      // Safety net: ensure buttons/observer are configured even if poster never loads
+      setTimeout(function () {
+        if (!state.observer) {
+          setupObserver();
+          updatePlayBtn(false, false);
+        }
+      }, 3000);
     }
 
     /* ════════════════════════════════════════
@@ -432,15 +445,7 @@ var __DEVELOPMENT__ = typeof __DEVELOPMENT__ !== "undefined" ? __DEVELOPMENT__ :
     container.addEventListener("click", function (e) {
       // Ignore clicks on mute/fullscreen buttons (they have their own handlers)
       if (e.target.closest(".hero-video-mute, .hero-video-fullscreen")) return;
-      if (__DEVELOPMENT__)
-        console.log(
-          "[hv] container.click: state.isPlaying=" +
-            state.isPlaying +
-            " target=" +
-            (e.target.className || e.target.tagName) +
-            " id=" +
-            e.target.id
-        );
+
       e.stopPropagation();
       if (state.isPlaying) {
         state.pausedByScroll = false;
@@ -470,7 +475,6 @@ var __DEVELOPMENT__ = typeof __DEVELOPMENT__ !== "undefined" ? __DEVELOPMENT__ :
       e.stopPropagation();
       // Ignore clicks that originate from native controls (they handle pause/play themselves)
       if (_videoClickTimer) {
-        if (__DEVELOPMENT__) console.log("[hv] video.click: SUPPRESSED (native control click)");
         clearTimeout(_videoClickTimer);
         _videoClickTimer = null;
         return;
@@ -512,8 +516,7 @@ var __DEVELOPMENT__ = typeof __DEVELOPMENT__ !== "undefined" ? __DEVELOPMENT__ :
     container.addEventListener("touchstart", function (e) {
       // Don't interfere with scroll/swipe gestures
       if (e.touches.length > 1) return;
-      if (__DEVELOPMENT__)
-        console.log("[hv] container.touchstart: state.isPlaying=" + state.isPlaying + " isTouch=" + isTouchDevice());
+
       showControls();
       // Show native controls when playing, hide when paused
       video.controls = state.isPlaying;
