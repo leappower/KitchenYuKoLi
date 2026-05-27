@@ -1,24 +1,19 @@
 /**
- * Contact Form — 提交到 Google Forms
+ * Contact Form — 提交到 Google Sheets
  * 数据来源: /contact/ 页面表单 (contact-form-el)
+ *
+ * 由 quote-form.js 统一调用 initContactForm()，
+ * 支持 DOMContentLoaded / spa:load 双入口。
  */
 (function () {
   "use strict";
 
-  var _spaRegs = {};
-  function _spaOn(tgt, evt, fn, key) {
-    if (key == null) key = evt + ":" + (++_spaRegs.__k || (_spaRegs.__k = 1));
-    if (_spaRegs[key]) _spaRegs[key].abort();
-    var ac = new AbortController();
-    _spaRegs[key] = ac;
-    tgt.addEventListener(evt, fn, { signal: ac.signal });
-  }
-
-  _spaOn(document, "DOMContentLoaded", function () {
+  function initContactForm() {
     var form = document.getElementById("contact-form-el");
-    if (!form) return;
+    if (!form || form.dataset.contactFormSubmitBound) return;
+    form.dataset.contactFormSubmitBound = "1";
 
-    _spaOn(form, "submit", function (e) {
+    form.addEventListener("submit", function (e) {
       e.preventDefault();
 
       // ── 基础校验：所有 [required] 字段 ──
@@ -45,10 +40,14 @@
       }
 
       if (!allValid) {
-        var label = typeof window.uiText === "function"
-          ? window.uiText("quote_fill_required", "Please fill in required fields")
-          : "Please fill in required fields";
-        if (typeof window.showNotification === "function") window.showNotification(label, "error");
+        if (typeof window.showNotification === "function") {
+          window.showNotification(
+            typeof window.uiText === "function"
+              ? window.uiText("quote_fill_required", "Please fill in required fields")
+              : "Please fill in required fields",
+            "error"
+          );
+        }
         if (firstInvalid) firstInvalid.focus();
         return;
       }
@@ -101,17 +100,12 @@
         userAgent: navigator.userAgent,
       };
 
-      // 提交到 Google Sheets (via GAS Web App)
-      // GAS 不支持 CORS preflight → no-cors + 不设 Content-Type（避开 preflight）
       var GAS_URL =
         "https://script.google.com/macros/s/AKfycbyUy-DdV0eqNfbzHWXhf5XbSMtyJMIL--Hx_AfMOrBqUYl7PgVD7vX7uhIhXy_DZIXr/exec";
 
       var controller = new AbortController();
-      var timeout = setTimeout(function () {
-        controller.abort();
-      }, 15000);
+      var timeout = setTimeout(function () { controller.abort(); }, 15000);
 
-      // JSON body 但 no-cors + 无自定义 Content-Type = simple request
       fetch(GAS_URL, {
         method: "POST",
         mode: "no-cors",
@@ -125,11 +119,23 @@
         })
         .finally(function () {
           clearTimeout(timeout);
-          // 跳转到感谢页（无论成败）
           setTimeout(function () {
             window.location.href = "/thank-you/?from=contact";
           }, 500);
         });
     });
-  });
+  }
+
+  // 暴露供 quote-form.js 和 SPA router 调用
+  window.initContactForm = initContactForm;
+
+  // DOMContentLoaded / spa:load 由 quote-form.js 统一管理，
+  // 但作为兜底：如果页面直接加载 contact 且 quote-form.js 未加载
+  if (document.readyState !== "loading") {
+    initContactForm();
+  } else {
+    document.addEventListener("DOMContentLoaded", function () {
+      initContactForm();
+    });
+  }
 })();
