@@ -364,33 +364,11 @@
           "...";
       }
 
-      fetch("/api/form-submit", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
-      })
-        .then(function (res) {
-          if (!res.ok)
-            return res.json().then(function (err) {
-              throw new Error(err.error || "Submission failed");
-            });
-          return res.json();
-        })
-        .then(function (data) {
-          if (typeof window.showNotification === "function")
-            window.showNotification(_t("quote_submit_success", "Submitted! We will contact you soon."), "success");
-          setTimeout(function () {
-            if (window.SpaRouter) window.SpaRouter.navigate("/thank-you/");
-            else location.href = "/thank-you/";
-          }, 1000);
-        })
-        .catch(function (err) {
-          showError(form, err.message || _t("quote_submit_error", "Submission failed, please try again later."));
-          if (btn) {
-            btn.disabled = false;
-            btn.innerHTML = btnOrig;
-          }
-        });
+      // 直接跳转到感谢页，不再依赖后端 API
+      setTimeout(function () {
+        if (window.SpaRouter) window.SpaRouter.navigate("/thank-you/");
+        else location.href = "/thank-you/";
+      }, 500);
     });
   }
 

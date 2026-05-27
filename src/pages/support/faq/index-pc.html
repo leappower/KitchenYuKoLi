@@ -547,21 +547,9 @@
           var orig = btn.textContent;
           btn.disabled = true;
           btn.textContent = '提交中...';
-          fetch('/api/form-submit', {
-            method: 'POST',
-            headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify(formData)
-          }).then(function(r){ return r.json(); }).then(function(d){
-            if(d.ok){
-              btn.textContent = '✓ 提交成功！';
-              btn.classList.remove('bg-primary');
-              btn.classList.add('bg-green-600');
-              form.reset();
-              setTimeout(function(){ btn.textContent = orig; btn.disabled = false; btn.classList.remove('bg-green-600'); btn.classList.add('bg-primary'); }, 3000);
-            } else {
-              btn.textContent = orig; btn.disabled = false;
-            }
-          }).catch(function(){ btn.textContent = orig; btn.disabled = false; });
+          // 表单提交已移除（纯静态站点，无后端 API）
+          btn.textContent = orig;
+          btn.disabled = false;
         });
       });
     })();

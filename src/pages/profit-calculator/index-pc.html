@@ -601,7 +601,7 @@
               language: navigator.language,
               pageUrl: location.href
             };
-            navigator.sendBeacon('/api/form-submit', JSON.stringify(formData));
+            // 表单提交已移除（纯静态站点，无后端 API）
           }, 2000);
         });
 
