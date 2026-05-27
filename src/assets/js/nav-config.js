@@ -22,6 +22,7 @@
 
     /** Products 子分类 */
     products: [
+      { key: "nav_products_overview", icon: "apps", href: "/products/" },
       { key: "nav_products_cutting", icon: "content_cut", href: "/products/cutting/" },
       { key: "nav_products_stirfry", icon: "local_fire_department", href: "/products/stirfry/" },
       { key: "nav_products_frying", icon: "outdoor_grill", href: "/products/frying/" },
@@ -32,6 +33,7 @@
 
     /** Applications 子分类 */
     applications: [
+      { key: "nav_applications_overview", icon: "apps", href: "/applications/" },
       { key: "nav_applications_small_restaurant", icon: "storefront", href: "/applications/small-restaurant/" },
       { key: "nav_applications_central_kitchen", icon: "apartment", href: "/applications/central-kitchen/" },
       { key: "nav_applications_chain_restaurant", icon: "ramen_dining", href: "/applications/chain-restaurant/" },

@@ -26,6 +26,20 @@
     return fallback || key;
   }
 
+  var CATEGORY_I18N_MAP = {
+    翻炒系列: "nav_products_stirfry",
+    炖煮系列: "nav_products_stewing",
+    蒸煮系列: "nav_products_steaming",
+    煎炸系列: "nav_products_frying",
+    切配系列: "nav_products_cutting",
+    辅助系列: "nav_products_other",
+  };
+
+  function translateCategory(cat) {
+    var key = CATEGORY_I18N_MAP[cat];
+    return key ? tl(key, cat) : cat;
+  }
+
   var CACHE_KEY = "home_core_products";
   var _CACHE_VERSION_KEY = "home_core_products_version";
   var CACHE_TTL = 5 * 60 * 1000; // 5 minutes
@@ -221,7 +235,7 @@
           '<div class="group bg-white rounded-2xl border border-slate-200 dark:border-slate-700 hover:border-primary hover:shadow-lg transition-all duration-300 overflow-hidden" data-link="' +
           href +
           '">' +
-          '<div class="aspect-[4/3] bg-slate-50 dark:bg-slate-900 overflow-hidden cursor-pointer">' +
+          '<div class="aspect-[4/3] bg-white overflow-hidden cursor-pointer">' +
           (img
             ? '<img alt="' +
               escHtml(p.model) +
@@ -235,7 +249,7 @@
             ? '<a href="' +
               catHref +
               '" class="inline-block text-xs font-bold px-2.5 py-1 rounded-full bg-primary/10 text-primary mb-3 hover:bg-primary/20 transition-colors">' +
-              escHtml(p.category) +
+              escHtml(translateCategory(p.category)) +
               "</a>"
             : "") +
           '<h3 class="text-lg font-black mb-1">' +
@@ -252,7 +266,9 @@
             : "<span></span>") +
           '<a href="' +
           href +
-          '" data-no-swup class="text-sm text-primary font-bold flex items-center gap-1 group-hover:gap-2 transition-all duration-300 hover:opacity-80" data-i18n="home_hw_learn_more">了解更多 <span class="material-symbols-outlined text-base group-hover:translate-x-1 transition-transform duration-300">arrow_forward</span></a>' +
+          '" data-no-swup class="text-sm text-primary font-bold flex items-center gap-1 group-hover:gap-2 transition-all duration-300 hover:opacity-80" data-i18n="home_hw_learn_more">' +
+          tl("home_hw_learn_more", "了解更多") +
+          ' <span class="material-symbols-outlined text-base group-hover:translate-x-1 transition-transform duration-300">arrow_forward</span></a>' +
           "</div></div></div>"
         );
       }
@@ -315,7 +331,7 @@
           '<div class="group bg-white rounded-2xl border border-slate-200 hover:border-primary hover:shadow-lg transition-all duration-300 overflow-hidden" data-link="' +
           href +
           '">' +
-          '<div class="aspect-[4/3] bg-slate-50 overflow-hidden cursor-pointer">' +
+          '<div class="aspect-[4/3] bg-white overflow-hidden cursor-pointer">' +
           (img
             ? '<img alt="' +
               escHtml(p.model) +
@@ -327,7 +343,7 @@
           '<div class="p-3 sm:p-4">' +
           (p.category
             ? '<span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-primary/10 text-primary mb-2 inline-block">' +
-              escHtml(p.category) +
+              escHtml(translateCategory(p.category)) +
               "</span>"
             : "") +
           '<h3 class="font-bold text-sm mb-1">' +
@@ -342,7 +358,9 @@
             : "<span></span>") +
           '<a href="' +
           href +
-          '" data-no-swup class="text-xs font-bold text-primary flex items-center gap-0.5 group-hover:gap-1.5 transition-all duration-300 hover:opacity-80" data-i18n="home_hw_learn_more">了解更多 <span class="material-symbols-outlined text-sm group-hover:translate-x-0.5 transition-transform duration-300">arrow_forward</span></a>' +
+          '" data-no-swup class="text-xs font-bold text-primary flex items-center gap-0.5 group-hover:gap-1.5 transition-all duration-300 hover:opacity-80" data-i18n="home_hw_learn_more">' +
+          tl("home_hw_learn_more", "了解更多") +
+          ' <span class="material-symbols-outlined text-sm group-hover:translate-x-0.5 transition-transform duration-300">arrow_forward</span></a>' +
           "</div></div></div>"
         );
       }
@@ -403,7 +421,7 @@
           '<div class="group bg-white rounded-2xl border border-slate-200 hover:border-primary hover:shadow-lg transition-all duration-300 overflow-hidden" data-link="' +
           href +
           '">' +
-          '<div class="aspect-[4/3] bg-slate-50 overflow-hidden cursor-pointer">' +
+          '<div class="aspect-[4/3] bg-white overflow-hidden cursor-pointer">' +
           (img
             ? '<img alt="' +
               escHtml(p.model) +
@@ -415,7 +433,7 @@
           '<div class="p-3 sm:p-4">' +
           (p.category
             ? '<span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-primary/10 text-primary mb-2 inline-block">' +
-              escHtml(p.category) +
+              escHtml(translateCategory(p.category)) +
               "</span>"
             : "") +
           '<h3 class="font-bold text-sm mb-1">' +
@@ -430,7 +448,9 @@
             : "<span></span>") +
           '<a href="' +
           href +
-          '" data-no-swup class="text-xs font-bold text-primary flex items-center gap-0.5 group-hover:gap-1.5 transition-all duration-300 hover:opacity-80" data-i18n="home_hw_learn_more">了解更多 <span class="material-symbols-outlined text-sm group-hover:translate-x-0.5 transition-transform duration-300">arrow_forward</span></a>' +
+          '" data-no-swup class="text-xs font-bold text-primary flex items-center gap-0.5 group-hover:gap-1.5 transition-all duration-300 hover:opacity-80" data-i18n="home_hw_learn_more">' +
+          tl("home_hw_learn_more", "了解更多") +
+          ' <span class="material-symbols-outlined text-sm group-hover:translate-x-0.5 transition-transform duration-300">arrow_forward</span></a>' +
           "</div></div></div>"
         );
       }
@@ -503,7 +523,12 @@
   // Re-render on language change
   document.addEventListener("languageChanged", function () {
     /* global _HomeCoreProducts */
-    window.HomeCoreProducts.render();
+    var path = window.location.pathname || "/";
+    if (path.indexOf("/home") !== -1) {
+      if (window.innerWidth < 768) window.renderHomeCoreMobile("home-core-products-mobile");
+      else if (window.innerWidth < 1280) window.renderHomeCoreTablet("home-core-products-tablet");
+      else window.renderHomeCorePC("home-core-products-pc");
+    }
   });
 
   /**
@@ -696,7 +721,7 @@
           '<div class="group bg-white rounded-2xl border border-slate-200 hover:border-primary hover:shadow-lg transition-all duration-300 overflow-hidden" data-link="' +
           href +
           '">' +
-          '<div class="aspect-[4/3] bg-slate-50 overflow-hidden cursor-pointer">' +
+          '<div class="aspect-[4/3] bg-white overflow-hidden cursor-pointer">' +
           (img
             ? '<img alt="' +
               escHtml(p.model) +
@@ -710,7 +735,7 @@
             ? '<a href="' +
               catHref +
               '" class="inline-block text-[10px] font-bold px-2 py-0.5 rounded-full bg-primary/10 text-primary mb-2 hover:bg-primary/20 transition-colors">' +
-              escHtml(p.category) +
+              escHtml(translateCategory(p.category)) +
               "</a>"
             : "") +
           '<h3 class="font-bold text-sm mb-1">' +
@@ -725,7 +750,9 @@
             : "<span></span>") +
           '<a href="' +
           href +
-          '" data-no-swup class="text-xs font-bold text-primary flex items-center gap-0.5 group-hover:gap-1.5 transition-all duration-300 hover:opacity-80" data-i18n="home_hw_learn_more">了解更多 <span class="material-symbols-outlined text-sm group-hover:translate-x-0.5 transition-transform duration-300">arrow_forward</span></a>' +
+          '" data-no-swup class="text-xs font-bold text-primary flex items-center gap-0.5 group-hover:gap-1.5 transition-all duration-300 hover:opacity-80" data-i18n="home_hw_learn_more">' +
+          tl("home_hw_learn_more", "了解更多") +
+          ' <span class="material-symbols-outlined text-sm group-hover:translate-x-0.5 transition-transform duration-300">arrow_forward</span></a>' +
           "</div></div></div>"
         );
       }
@@ -735,7 +762,7 @@
         '<div class="group bg-white rounded-2xl border border-slate-200 dark:border-slate-700 hover:border-primary hover:shadow-lg transition-all duration-300 overflow-hidden" data-link="' +
         href +
         '">' +
-        '<div class="aspect-[4/3] bg-slate-50 dark:bg-slate-900 overflow-hidden cursor-pointer">' +
+        '<div class="aspect-[4/3] bg-white overflow-hidden cursor-pointer">' +
         (img
           ? '<img alt="' +
             escHtml(p.model) +
@@ -749,7 +776,7 @@
           ? '<a href="' +
             catHref +
             '" class="inline-block text-xs font-bold px-2.5 py-1 rounded-full bg-primary/10 text-primary mb-3 hover:bg-primary/20 transition-colors">' +
-            escHtml(p.category) +
+            escHtml(translateCategory(p.category)) +
             "</a>"
           : "") +
         '<h3 class="text-lg font-black mb-1">' +
@@ -764,7 +791,9 @@
         (p.power ? '<span class="text-xs font-bold text-slate-400">' + escHtml(p.power) + "</span>" : "<span></span>") +
         '<a href="' +
         href +
-        '" data-no-swup class="text-sm text-primary font-bold flex items-center gap-1 group-hover:gap-2 transition-all duration-300 hover:opacity-80" data-i18n="home_hw_learn_more">了解更多 <span class="material-symbols-outlined text-base group-hover:translate-x-1 transition-transform duration-300">arrow_forward</span></a>' +
+        '" data-no-swup class="text-sm text-primary font-bold flex items-center gap-1 group-hover:gap-2 transition-all duration-300 hover:opacity-80" data-i18n="home_hw_learn_more">' +
+        tl("home_hw_learn_more", "了解更多") +
+        ' <span class="material-symbols-outlined text-base group-hover:translate-x-1 transition-transform duration-300">arrow_forward</span></a>' +
         "</div></div></div>"
       );
     }
@@ -843,7 +872,7 @@
           '<div class="group bg-white rounded-2xl border border-slate-200 hover:border-primary hover:shadow-lg transition-all duration-300 overflow-hidden" data-link="' +
           href +
           '">' +
-          '<div class="aspect-[4/3] bg-slate-50 overflow-hidden cursor-pointer">' +
+          '<div class="aspect-[4/3] bg-white overflow-hidden cursor-pointer">' +
           (img
             ? '<img alt="' +
               escHtml(p.model) +
@@ -855,7 +884,7 @@
           '<div class="p-3 sm:p-4">' +
           (p.category
             ? '<span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-primary/10 text-primary mb-2 inline-block">' +
-              escHtml(p.category) +
+              escHtml(translateCategory(p.category)) +
               "</span>"
             : "") +
           '<h3 class="font-bold text-sm mb-1">' +
@@ -870,7 +899,9 @@
             : "<span></span>") +
           '<a href="' +
           href +
-          '" data-no-swup class="text-xs font-bold text-primary flex items-center gap-0.5 group-hover:gap-1.5 transition-all duration-300 hover:opacity-80" data-i18n="home_hw_learn_more">了解更多 <span class="material-symbols-outlined text-sm group-hover:translate-x-0.5 transition-transform duration-300">arrow_forward</span></a>' +
+          '" data-no-swup class="text-xs font-bold text-primary flex items-center gap-0.5 group-hover:gap-1.5 transition-all duration-300 hover:opacity-80" data-i18n="home_hw_learn_more">' +
+          tl("home_hw_learn_more", "了解更多") +
+          ' <span class="material-symbols-outlined text-sm group-hover:translate-x-0.5 transition-transform duration-300">arrow_forward</span></a>' +
           "</div></div></div></div>";
       });
       html += "</div>";

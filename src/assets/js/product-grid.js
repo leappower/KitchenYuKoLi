@@ -557,6 +557,25 @@
 
   // ─── Card renderers ────────────────────────────────────────────
 
+  var CATEGORY_I18N_MAP = {
+    翻炒系列: "nav_products_stirfry",
+    炖煮系列: "nav_products_stewing",
+    蒸煮系列: "nav_products_steaming",
+    煎炸系列: "nav_products_frying",
+    切配系列: "nav_products_cutting",
+    辅助系列: "nav_products_other",
+  };
+
+  function translateCategory(cat) {
+    var key = CATEGORY_I18N_MAP[cat];
+    return key ? tl(key, cat) : cat;
+  }
+
+  function getSubCatI18nKey(subCatRaw, category) {
+    var slug = CATEGORY_NAME_TO_SLUG[category] || "other";
+    return "product_subcat_" + slug + "_" + subCatRaw;
+  }
+
   /** Get localized product field value (delegates to getProductField from product-detail.js) */
   function _pField(product, field) {
     if (typeof window.getProductField === "function") {
@@ -567,14 +586,17 @@
   }
 
   function renderPC(p) {
-    var cat = esc(p._category);
+    var cat = p._category;
+    var catDisplay = esc(translateCategory(cat));
+    var catEsc = esc(cat);
     var model = esc(p.model || "");
     var name = esc(_pField(p, "name") || model);
     var desc = esc(p.description || p.card_desc || p.highlights || "");
     var img = esc(p._imageUrl);
     var subCatRaw = p.subCategory || cat;
     var subCat = esc(subCatRaw);
-    var subCatDataI18n = ' data-i18n="' + esc(subCatRaw) + '"';
+    var subCatI18nKey = getSubCatI18nKey(subCatRaw, cat);
+    var subCatDataI18n = ' data-i18n="' + esc(subCatI18nKey) + '"';
     var specs = [];
     if (p.power) specs.push(esc(p.power));
     if (p.throughput) specs.push(esc(p.throughput));
@@ -599,7 +621,7 @@
       '" data-link="' +
       link +
       '" data-category="' +
-      cat +
+      catEsc +
       '" data-tier="' +
       esc(p.tier || "") +
       '" data-model="' +
@@ -651,14 +673,17 @@
   }
 
   function renderTablet(p) {
-    var cat = esc(p._category);
+    var cat = p._category;
+    var catDisplay = esc(translateCategory(cat));
+    var catEsc = esc(cat);
     var model = esc(p.model || "");
     var name = esc(_pField(p, "name") || model);
     var desc = esc(p.description || p.card_desc || "");
     var img = esc(p._imageUrl);
     var subCatRaw = p.subCategory || cat;
     var subCat = esc(subCatRaw);
-    var subCatDataI18n = ' data-i18n="' + esc(subCatRaw) + '"';
+    var subCatI18nKey = getSubCatI18nKey(subCatRaw, cat);
+    var subCatDataI18n = ' data-i18n="' + esc(subCatI18nKey) + '"';
     var badge = "";
     if (p.badge) {
       badge =
@@ -672,7 +697,7 @@
       '<article class="product-card-tablet bg-white rounded-xl border border-slate-200 dark:border-slate-700 overflow-hidden cursor-pointer' +
       selectedClass +
       '" data-category="' +
-      cat +
+      catEsc +
       '" data-model="' +
       model +
       '" data-tier="' +
@@ -721,7 +746,9 @@
   }
 
   function renderMobile(p) {
-    var cat = esc(p._category);
+    var cat = p._category;
+    var catDisplay = esc(translateCategory(cat));
+    var catEsc = esc(cat);
     var model = esc(p.model || "");
     var name = esc(_pField(p, "name") || model);
     var desc = esc(p.description || p.card_desc || "");
@@ -730,11 +757,14 @@
     var link = "/products/" + linkSlug + "/" + encodeURIComponent(model) + "/";
     var isSelected = isProductCompared(p.model);
     var selectedClass = isSelected ? " compare-selected" : "";
+    var catI18nKey = CATEGORY_I18N_MAP[cat] || "";
+    var catDataI18n = catI18nKey ? ' data-i18n="' + esc(catI18nKey) + '"' : "";
     return (
       '<article class="product-card-mobile bg-white rounded-xl border border-slate-200 dark:border-slate-700 overflow-hidden relative' +
       selectedClass +
       '" data-category="' +
-      cat +
+      '" data-category="' +
+      catEsc +
       '" data-model="' +
       model +
       '" data-tier="' +
@@ -756,8 +786,10 @@
       "\" onerror=\"if(!this.dataset.errored){this.dataset.errored='1';this.src='/assets/images/products/default.webp' }\">" +
       "</div>" +
       '<div class="p-3">' +
-      '<div class="flex items-center gap-1.5 mb-1"><span class="material-symbols-outlined text-primary text-sm">local_fire_department</span><span class="text-xs font-bold text-primary uppercase tracking-wider">' +
-      cat +
+      '<div class="flex items-center gap-1.5 mb-1"><span class="material-symbols-outlined text-primary text-sm">local_fire_department</span><span class="text-xs font-bold text-primary uppercase tracking-wider"' +
+      catDataI18n +
+      ">" +
+      catDisplay +
       "</span></div>" +
       '<h3 class="text-sm font-bold text-slate-900 dark:text-white mb-1">' +
       name +

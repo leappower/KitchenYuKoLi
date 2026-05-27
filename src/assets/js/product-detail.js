@@ -121,9 +121,7 @@
       '<a href="/products/' +
       encodeURIComponent(rp.model) +
       '" class="group block bg-white rounded-xl overflow-hidden shadow-md hover:shadow-lg transition-all border border-slate-100 dark:border-slate-700">' +
-      '<div class="aspect-[4/3] bg-gradient-to-br ' +
-      grad +
-      ' relative overflow-hidden flex items-center justify-center">' +
+      '<div class="aspect-[4/3] bg-white relative overflow-hidden flex items-center justify-center">' +
       '<img loading="lazy" alt="' +
       esc(rp.model) +
       '" class="w-full h-full object-contain p-4 group-hover:scale-105 transition-transform" src="' +
@@ -250,6 +248,11 @@
   }
 
   function renderPDP() {
+    if (renderPDP._pending) return;
+    renderPDP._pending = true;
+    requestAnimationFrame(function () {
+      renderPDP._pending = false;
+    });
     // Check if language changed — reload translations before rendering
     var currentLang = (window.CURRENT_LANG || document.documentElement.lang || "zh-CN").replace("_", "-");
     if (currentLang !== (renderPDP._lastLang || "") && currentLang !== "zh-CN" && currentLang !== "zh") {
@@ -508,7 +511,7 @@
     var mediaHtml;
     if (isVideo) {
       var videoContainerClass =
-        "relative aspect-[4/3] lg:aspect-[3/2] rounded-2xl overflow-hidden bg-slate-50 dark:bg-slate-800 shadow-xl flex items-center justify-center group";
+        "relative aspect-[4/3] lg:aspect-[3/2] rounded-2xl overflow-hidden bg-white dark:bg-slate-800 shadow-xl flex items-center justify-center group";
       if (isYouTube) {
         mediaHtml =
           '<div class="' +
@@ -548,7 +551,7 @@
       }
     } else {
       mediaHtml =
-        '<div class="relative aspect-[4/3] lg:aspect-[3/2] rounded-2xl overflow-hidden bg-slate-50 dark:bg-slate-800 shadow-xl flex items-center justify-center group">' +
+        '<div class="relative aspect-[4/3] lg:aspect-[3/2] rounded-2xl overflow-hidden bg-white dark:bg-slate-800 shadow-xl flex items-center justify-center group">' +
         '<img loading="eager" alt="' +
         esc(product.model) +
         '"' +
@@ -714,9 +717,18 @@
     if (!cat) return "";
     // Priority: product._categoryName (enriched from parent) > i18n translate > product.categoryName > raw key
     if (product._categoryName) return product._categoryName;
-    if (typeof window.t === "function") {
-      var translated = window.t(cat);
-      if (translated && translated !== cat) return translated;
+    var CATEGORY_I18N_MAP = {
+      翻炒系列: "nav_products_stirfry",
+      炖煮系列: "nav_products_stewing",
+      蒸煮系列: "nav_products_steaming",
+      煎炸系列: "nav_products_frying",
+      切配系列: "nav_products_cutting",
+      辅助系列: "nav_products_other",
+    };
+    var i18nKey = CATEGORY_I18N_MAP[cat];
+    if (i18nKey && typeof window.t === "function") {
+      var translated = window.t(i18nKey);
+      if (translated && translated !== i18nKey) return translated;
     }
     return product.categoryName || cat;
   }

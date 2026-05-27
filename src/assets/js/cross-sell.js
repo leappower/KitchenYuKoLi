@@ -596,8 +596,11 @@
 
   // ─── Public API ────────────────────────────────────────────────
 
-  window.Breadcrumb = {
-    goBack: function () {
+  // Add goBack if not already defined by breadcrumb.js
+  window.Breadcrumb = window.Breadcrumb || {};
+  window.Breadcrumb.goBack =
+    window.Breadcrumb.goBack ||
+    function () {
       var referrer = sessionStorage.getItem("pdp_referrer");
       if (
         referrer &&
@@ -614,11 +617,10 @@
       } else {
         window.history.back();
       }
-    },
-    SLUG_TO_CATEGORY_KEY: {},
-    CATEGORY_KEY_TO_SLUG: CATEGORY_KEY_TO_SLUG,
-    PRODUCT_SLUGS: PRODUCT_SLUGS,
-  };
+    };
+  window.Breadcrumb.SLUG_TO_CATEGORY_KEY = window.Breadcrumb.SLUG_TO_CATEGORY_KEY || {};
+  window.Breadcrumb.CATEGORY_KEY_TO_SLUG = window.Breadcrumb.CATEGORY_KEY_TO_SLUG || CATEGORY_KEY_TO_SLUG;
+  window.Breadcrumb.PRODUCT_SLUGS = window.Breadcrumb.PRODUCT_SLUGS || PRODUCT_SLUGS;
 
   // ─── Public API: allow external category control (e.g. /products/all/ Tab switching) ──
   window.CrossSell = {
