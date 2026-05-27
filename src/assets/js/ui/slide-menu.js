@@ -317,7 +317,7 @@
       "</a>" +
       "</div>";
 
-    return headerHtml + menuItemsHtml + ctaBarHtml;
+    return headerHtml + '<div class="mobile-menu-scroll">' + menuItemsHtml + "</div>" + ctaBarHtml;
   }
 
   /* ================================================================
