@@ -244,25 +244,11 @@ var __DEVELOPMENT__ = typeof __DEVELOPMENT__ !== "undefined" ? __DEVELOPMENT__ :
 
     poster.addEventListener("load", afterPosterReady);
 
-    if (poster.complete && poster.naturalWidth > 0) {
+    // poster.complete alone is sufficient — we only need to know image data is available.
+    // naturalWidth is NOT checked because afterPosterReady only sets up IntersectionObserver
+    // and play button state, neither of which requires rendered image dimensions.
+    if (poster.complete) {
       afterPosterReady();
-    } else if (poster.complete) {
-      // complete but naturalWidth === 0 (cached image, layout not rendered yet)
-      requestAnimationFrame(function checkPoster() {
-        if (poster.naturalWidth > 0) {
-          afterPosterReady();
-        } else {
-          setTimeout(afterPosterReady, 300);
-        }
-      });
-    } else {
-      // Safety net: ensure buttons/observer are configured even if poster never loads
-      setTimeout(function () {
-        if (!state.observer) {
-          setupObserver();
-          updatePlayBtn(false, false);
-        }
-      }, 3000);
     }
 
     /* ════════════════════════════════════════
