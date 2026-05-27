@@ -869,8 +869,12 @@
           ? '<img src="' + imageUrl + '" alt="" loading="lazy" onerror="this.style.display=\'none\'">'
           : '<span class="material-symbols-outlined">inventory_2</span>';
 
+        var detailPath = item.path || "/products/detail/" + encodeURIComponent(item.model) + "/";
+
         html +=
-          '<a class="mobile-search-result-item" href="/products/">' +
+          '<a class="mobile-search-result-item" href="' +
+          detailPath +
+          '">' +
           '<div class="mobile-search-result-img">' +
           imageHtml +
           "</div>" +
@@ -893,12 +897,23 @@
 
       container.innerHTML = html;
 
-      // 点击搜索结果时关闭搜索覆盖层
+      // 点击搜索结果时关闭搜索覆盖层并导航
       var resultLinks = container.querySelectorAll(".mobile-search-result-item");
       for (var j = 0; j < resultLinks.length; j++) {
-        resultLinks[j].addEventListener("click", function () {
-          closeMobileSearch();
-        });
+        (function (link) {
+          link.addEventListener("click", function (e) {
+            e.preventDefault();
+            closeMobileSearch();
+            var href = link.getAttribute("href");
+            if (href) {
+              if (window.SpaRouter && window.SpaRouter.navigate) {
+                window.SpaRouter.navigate(href);
+              } else {
+                window.location.href = href;
+              }
+            }
+          });
+        })(resultLinks[j]);
       }
     } else {
       // 空结果提示

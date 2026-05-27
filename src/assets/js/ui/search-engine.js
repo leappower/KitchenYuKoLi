@@ -461,11 +461,15 @@
     var items = panel.querySelectorAll(".ios-search-result-item");
     for (var j = 0; j < items.length; j++) {
       items[j].addEventListener("click", function (e) {
+        e.preventDefault();
         hidePanel();
-        // Let the SPA router handle navigation
-        // The href is already set to /products/
-        if (e.target.closest(".ios-search-view-all")) {
-          hidePanel();
+        var href = this.getAttribute("href");
+        if (href) {
+          if (window.SpaRouter && window.SpaRouter.navigate) {
+            window.SpaRouter.navigate(href);
+          } else {
+            window.location.href = href;
+          }
         }
       });
     }
@@ -473,8 +477,14 @@
     // View all link
     var viewAllLink = panel.querySelector(".ios-search-view-all");
     if (viewAllLink) {
-      viewAllLink.addEventListener("click", function () {
+      viewAllLink.addEventListener("click", function (e) {
+        e.preventDefault();
         hidePanel();
+        if (window.SpaRouter && window.SpaRouter.navigate) {
+          window.SpaRouter.navigate("/products/");
+        } else {
+          window.location.href = "/products/";
+        }
       });
     }
 
