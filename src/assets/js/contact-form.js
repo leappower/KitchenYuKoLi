@@ -21,6 +21,38 @@
     _spaOn(form, "submit", function (e) {
       e.preventDefault();
 
+      // ── 基础校验：所有 [required] 字段 ──
+      var requiredEls = form.querySelectorAll('[required]');
+      var firstInvalid = null;
+      var allValid = true;
+      requiredEls.forEach(function (el) {
+        if (el.closest && el.closest('.hidden')) return;
+        if (!el.value || !el.value.toString().trim()) {
+          el.classList.add("border-red-500", "ring-2", "ring-red-300");
+          allValid = false;
+          if (!firstInvalid) firstInvalid = el;
+        } else {
+          el.classList.remove("border-red-500", "ring-2", "ring-red-300");
+        }
+      });
+
+      // email 格式校验
+      var emailEl = form.querySelector('#c-email');
+      if (emailEl && emailEl.value.trim() && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailEl.value.trim())) {
+        emailEl.classList.add("border-red-500", "ring-2", "ring-red-300");
+        if (!firstInvalid) firstInvalid = emailEl;
+        allValid = false;
+      }
+
+      if (!allValid) {
+        var label = typeof window.uiText === "function"
+          ? window.uiText("quote_fill_required", "Please fill in required fields")
+          : "Please fill in required fields";
+        if (typeof window.showNotification === "function") window.showNotification(label, "error");
+        if (firstInvalid) firstInvalid.focus();
+        return;
+      }
+
       var btn = form.querySelector('button[type="submit"]');
       var origText = btn.textContent;
       btn.disabled = true;

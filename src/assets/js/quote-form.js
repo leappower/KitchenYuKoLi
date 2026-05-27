@@ -226,49 +226,31 @@
       e.preventDefault();
       clearError(form);
 
-      // ★ Debug: log all form field values
-      var _dbg = [
-        "q-country",
-        "q-contact",
-        "q-restaurant-type",
-        "q-phone",
-        "q-contact-channel",
-        "q-capacity",
-        "q-budget",
-      ];
-
-      // Validate step 2
-      var requiredStep2 = ["q-capacity", "q-budget"];
-      var timelineChecked = form.querySelector('input[name="q-timeline"]:checked');
-      var valid = true,
-        firstInvalid = null;
-
-      requiredStep2.forEach(function (id) {
-        var el = form.querySelector("#" + id);
-        if (!el) return;
-        if (!el.value.trim()) {
+      // ── 基础校验：所有 [required] 字段 ──
+      var requiredEls = form.querySelectorAll('[required]');
+      var firstInvalid = null;
+      var allValid = true;
+      requiredEls.forEach(function (el) {
+        if (el.closest && el.closest('.hidden')) return;
+        if (!el.value || !el.value.toString().trim()) {
           el.classList.add("border-red-500", "ring-2", "ring-red-300");
-          valid = false;
+          allValid = false;
           if (!firstInvalid) firstInvalid = el;
         } else {
           el.classList.remove("border-red-500", "ring-2", "ring-red-300");
         }
       });
-      if (!timelineChecked) valid = false;
 
-      if (!valid) {
-        var emptyIds = requiredStep2.filter(function (id) {
-          var el = form.querySelector("#" + id);
-          return !el || !el.value.trim();
-        });
-        var extra = !timelineChecked ? ["q-timeline"] : [];
-        showError(
-          form,
-          _t("quote_fill_required", "Please fill in all required fields (*)") +
-            " [" +
-            emptyIds.concat(extra).join(", ") +
-            "]"
-        );
+      // email 格式校验
+      var emailEl = form.querySelector('#q-email');
+      if (emailEl && emailEl.value.trim() && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailEl.value.trim())) {
+        emailEl.classList.add("border-red-500", "ring-2", "ring-red-300");
+        if (!firstInvalid) firstInvalid = emailEl;
+        allValid = false;
+      }
+
+      if (!allValid) {
+        showError(form, _t("quote_fill_required", "Please fill in all required fields (*)"));
         if (firstInvalid) firstInvalid.focus();
         return;
       }
