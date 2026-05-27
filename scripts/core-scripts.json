@@ -65,7 +65,7 @@
     ],
     "applications": [
       "assets/js/ui/hero-video.js",
-      "assets/js/home-core-products.js"
+      "assets/js/scenario-products.js"
     ]
   }
 }
