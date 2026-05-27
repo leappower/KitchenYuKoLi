@@ -503,33 +503,27 @@
 
   // Make init callable from outside (for SPA router loadPageScripts)
   window.__hcpInit = function () {
-    _autoInit();
+    window._autoInit();
   };
 
   // Primary: listen for spa:load (SPA router re-renders content)
   _spaOn(document, "spa:load", function () {
-    _autoInit();
+    window._autoInit();
   });
   // Fallback: if SPA router is not active, use DOMContentLoaded
   if (document.readyState === "loading") {
     document.addEventListener("DOMContentLoaded", function () {
-      _autoInit();
+      window._autoInit();
     });
   } else {
     setTimeout(function () {
-      _autoInit();
+      window._autoInit();
     }, 0);
   }
 
   // Re-render on language change
   document.addEventListener("languageChanged", function () {
-    /* global _HomeCoreProducts */
-    var path = window.location.pathname || "/";
-    if (path.indexOf("/home") !== -1) {
-      if (window.innerWidth < 768) window.renderHomeCoreMobile("home-core-products-mobile");
-      else if (window.innerWidth < 1280) window.renderHomeCoreTablet("home-core-products-tablet");
-      else window.renderHomeCorePC("home-core-products-pc");
-    }
+    window._autoInit();
   });
 
   /**
