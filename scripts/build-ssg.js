@@ -339,7 +339,11 @@ function injectCoreScripts(html, routeSlug) {
     var escaped = filename.replace(/\./g, '\\.');
     var hasScript = new RegExp('<script[^>]*src="[^"]*' + escaped + '[^"]*?"', 'i').test(html);
     if (!hasScript) {
+      if (scriptPath.indexOf('product-data-table') !== -1) {
+      tags.push('    <script src="' + bp + '/' + scriptPath + '"></script>');
+    } else {
       tags.push('    <script defer src="' + bp + '/' + scriptPath + '"></script>');
+    }
     }
   });
 
@@ -351,7 +355,11 @@ function injectCoreScripts(html, routeSlug) {
     var escaped = filename.replace(/\./g, '\\.');
     var hasScript = new RegExp('<script[^>]*src="[^"]*' + escaped + '[^"]*?"', 'i').test(html);
     if (!hasScript) {
+      if (scriptPath.indexOf('product-data-table') !== -1) {
+      tags.push('    <script src="' + bp + '/' + scriptPath + '"></script>');
+    } else {
       tags.push('    <script defer src="' + bp + '/' + scriptPath + '"></script>');
+    }
     }
   });
 

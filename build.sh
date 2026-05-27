@@ -97,7 +97,6 @@ node scripts/generate-sitemap.js 2>/dev/null || echo "  ⚠️  Failed to genera
 if [ "$BUILD_MODE" != "dev" ]; then
   echo "🔄 Bumping JS version to $VERSION..."
   find "$DIST" -name '*.html' -exec sed -i '' "s|?v=[a-zA-Z0-9._-]*|?$VERSION|g" {} +
-  find "$SRC/pages" -name '*.html' -exec sed -i '' "s|?v=[a-zA-Z0-9._-]*|?$VERSION|g" {} +
 fi
 
 # ─── 8.5. Inject device redirect scripts into SSG-generated entries ──
