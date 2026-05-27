@@ -124,22 +124,23 @@
    */
   function _fetchFromNetwork(callback, retries) {
     retries = retries || 0;
-    // Local data sources (no API dependency)
-    var table = window.PRODUCT_DATA_TABLE || [];
-    var coreProducts = table.filter(function (p) {
+    // Wait for PRODUCT_DATA_TABLE to be populated (defer 加载顺序不确定)
+    if (!Array.isArray(window.PRODUCT_DATA_TABLE) || window.PRODUCT_DATA_TABLE.length === 0) {
+      if (retries < 30) {
+        setTimeout(function () {
+          _fetchFromNetwork(callback, retries + 1);
+        }, 200);
+        return;
+      }
+      _loadCachedFallback(callback);
+      return;
+    }
+    var coreProducts = window.PRODUCT_DATA_TABLE.filter(function (p) {
       return p.is_home_core || p.isHomeCore;
     });
     if (coreProducts.length > 0) {
       _saveCache(coreProducts);
       callback(coreProducts, "local");
-      return;
-    }
-    // Retry if product-data-table.js hasn't loaded yet (max 5 times, 100ms apart)
-    if (retries < 5) {
-      var self = this;
-      setTimeout(function () {
-        _fetchFromNetwork(callback, retries + 1);
-      }, 100);
       return;
     }
     _loadCachedFallback(callback);
