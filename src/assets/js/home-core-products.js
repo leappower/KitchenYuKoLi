@@ -658,7 +658,7 @@
    * Load products by model name for the given scenario
    * Each scenario has its own independent product list
    */
-  function _loadScenarioProducts(scenarioKey, callback) {
+  function _loadScenarioProducts(scenarioKey, callback, retries) {
     var modelList = SCENARIO_PRODUCTS[scenarioKey];
     if (!modelList) {
       callback([]);
@@ -673,6 +673,16 @@
     var filtered = table.filter(function (p) {
       return lookup[p.model.toLowerCase()] === true;
     });
+    // Retry if product-data-table.js hasn't loaded yet (max 10 tries, 100ms apart)
+    if (filtered.length === 0 && !Array.isArray(window.PRODUCT_DATA_TABLE)) {
+      retries = retries || 0;
+      if (retries < 10) {
+        setTimeout(function () {
+          _loadScenarioProducts(scenarioKey, callback, retries + 1);
+        }, 100);
+        return;
+      }
+    }
     // Preserve the order specified in SCENARIO_PRODUCTS
     filtered.sort(function (a, b) {
       return modelList.indexOf(a.model) - modelList.indexOf(b.model);
