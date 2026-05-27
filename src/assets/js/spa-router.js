@@ -260,7 +260,14 @@
     navigate: function (url) {
       if (!url) return;
       if (window.swupInstance) {
-        window.swupInstance.navigate(url);
+        try {
+          window.swupInstance.navigate(url).catch(function () {
+            // swup 导航失败（如 container mismatch），fallback 到浏览器跳转
+            window.location.href = url;
+          });
+        } catch (e) {
+          window.location.href = url;
+        }
       } else {
         window.location.href = url;
       }

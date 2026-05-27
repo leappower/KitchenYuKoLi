@@ -245,7 +245,7 @@
     }
     // 去重
     var seenBigram = {};
-    for (var t = 0; t < cjkTokens.length; t++) {
+    for (t = 0; t < cjkTokens.length; t++) {
       if (!seenBigram[cjkTokens[t]]) {
         seenBigram[cjkTokens[t]] = true;
         tokens.push(cjkTokens[t]);
@@ -256,7 +256,7 @@
     var results = [];
     var seen = {};
 
-    for (var i = 0; i < allItems.length && results.length < 20; i++) {
+    for (i = 0; i < allItems.length && results.length < 20; i++) {
       var p = allItems[i];
       if (p.isActive === false) continue;
 
@@ -269,8 +269,8 @@
       var score = 0;
       var matched = false;
 
-      for (var t = 0; t < tokens.length; t++) {
-        var token = tokens[t];
+      for (t = 0; t < tokens.length; t++) {
+        token = tokens[t];
         var idx = text.indexOf(token);
         if (idx === -1) {
           matched = false;
