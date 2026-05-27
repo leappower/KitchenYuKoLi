@@ -379,7 +379,7 @@
     if (!panel) createPanel();
 
     if (!results || results.length === 0) {
-      var noResultsText = tr("search_no_results", "No matching products found");
+      var noResultsText = tr("search_no_results", "No matching results found");
       var hintText = tr("search_hint", "Try searching by model number or product type");
       panel.innerHTML =
         '<div class="ios-search-empty">' +
@@ -393,7 +393,7 @@
       return;
     }
 
-    var countText = tr("search_results_count", "{count} products found").replace("{count}", String(results.length));
+    var countText = tr("search_results_count", "{count} results found").replace("{count}", String(results.length));
     var viewAllText = tr("search_view_all", "View all products");
 
     var html =
@@ -404,43 +404,86 @@
     for (var i = 0; i < results.length; i++) {
       var p = results[i];
       var idx = i;
-      var name = esc(p._displayName || p.model || "");
-      var model = esc(p.model || "");
-      var category = esc(p._displayCategory || p.category || tr("filter_all", "All"));
-      var badge = p._displayBadge ? '<span class="ios-search-badge">' + esc(p._displayBadge) + "</span>" : "";
-      var imgSrc = p.productImage || p.imageUrl || "";
       var hlClass = idx === highlightedIndex ? " is-highlighted" : "";
 
-      var detailHref = "/products/" + (p.model ? encodeURIComponent(p.model) + "/" : "");
+      // ─── Product result ─────────────────────────────────────
+      if (p.type === "product" || p.model) {
+        var name = esc(p._displayName || p.model || "");
+        var model = esc(p.model || "");
+        var category = esc(p._displayCategory || p.category || tr("filter_all", "All"));
+        var badge = p._displayBadge ? '<span class="ios-search-badge">' + esc(p._displayBadge) + "</span>" : "";
+        var imgSrc = p.productImage || p.imageUrl || "";
+        var detailHref = "/products/" + (p.model ? encodeURIComponent(p.model) + "/" : "");
+
+        html +=
+          '<a class="ios-search-result-item' +
+          hlClass +
+          '" href="' +
+          esc(detailHref) +
+          '" data-search-idx="' +
+          idx +
+          '" role="option">' +
+          '<div class="ios-search-result-img">' +
+          (imgSrc
+            ? '<img src="' +
+              esc(imgSrc) +
+              '" alt="" loading="lazy" decoding="async" onerror="this.style.display=\'none\'">'
+            : '<span class="material-symbols-outlined">inventory_2</span>') +
+          "</div>" +
+          '<div class="ios-search-result-info">' +
+          '<div class="ios-search-result-name">' +
+          name +
+          badge +
+          "</div>" +
+          '<div class="ios-search-result-meta">' +
+          '<span class="ios-search-result-model">' +
+          model +
+          "</span>" +
+          '<span class="ios-search-result-sep">·</span>' +
+          '<span class="ios-search-result-category">' +
+          category +
+          "</span>" +
+          "</div>" +
+          "</div>" +
+          "</a>";
+        continue;
+      }
+
+      // ─── Page / Case result ─────────────────────────────────
+      var pageTitle = esc(p.title || p.snippet || "");
+      var pageSnippet = esc(p.snippet || "");
+      var pagePath = esc(p.path || "");
+      var pageCategory = esc(p.category || tr("search_type_page", "Page"));
+
       html +=
         '<a class="ios-search-result-item' +
         hlClass +
         '" href="' +
-        esc(detailHref) +
+        pagePath +
         '" data-search-idx="' +
         idx +
         '" role="option">' +
-        '<div class="ios-search-result-img">' +
-        (imgSrc
-          ? '<img src="' +
-            esc(imgSrc) +
-            '" alt="" loading="lazy" decoding="async" onerror="this.style.display=\'none\'">'
-          : '<span class="material-symbols-outlined">inventory_2</span>') +
+        '<div class="ios-search-result-img ios-search-result-img-page">' +
+        '<span class="material-symbols-outlined">' +
+        (p.type === "case" ? "business_center" : "article") +
+        "</span>" +
         "</div>" +
         '<div class="ios-search-result-info">' +
         '<div class="ios-search-result-name">' +
-        name +
-        badge +
+        pageTitle +
         "</div>" +
         '<div class="ios-search-result-meta">' +
-        '<span class="ios-search-result-model">' +
-        model +
+        '<span class="ios-search-result-path">' +
+        pagePath +
         "</span>" +
         '<span class="ios-search-result-sep">·</span>' +
         '<span class="ios-search-result-category">' +
-        category +
+        pageCategory +
         "</span>" +
         "</div>" +
+        (pageSnippet && pageSnippet !== pageTitle
+          ? '<div class="ios-search-result-snippet">' + esc(pageSnippet.substring(0, 80)) + "</div>"
+          : "") +
         "</div>" +
         "</a>";
     }
