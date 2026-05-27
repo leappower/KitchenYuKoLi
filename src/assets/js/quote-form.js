@@ -364,11 +364,23 @@
           "...";
       }
 
-      // 直接跳转到感谢页，不再依赖后端 API
+      // 提交到 Google Sheets (via GAS Web App)
+      var GAS_URL =
+        "https://script.google.com/macros/s/AKfycbyUy-DdV0eqNfbzHWXhf5XbSMtyJMIL--Hx_AfMOrBqUYl7PgVD7vX7uhIhXy_DZIXr/exec";
+      fetch(GAS_URL, {
+        method: "POST",
+        mode: "no-cors",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      }).catch(function () {
+        // no-cors 模式下 fetch 成功也不返回可读响应，静默处理
+      });
+
+      // 跳转到感谢页
       setTimeout(function () {
         if (window.SpaRouter) window.SpaRouter.navigate("/thank-you/");
         else location.href = "/thank-you/";
-      }, 500);
+      }, 800);
     });
   }
 
