@@ -119,16 +119,16 @@
     if (!sel) return;
 
     var prevValue = sel.value;
-    var _prevLabel = prevValue && sel.options[sel.selectedIndex] ? sel.options[sel.selectedIndex].text : "";
+    var prevIdx = sel.selectedIndex;
 
-    sel.innerHTML = '<option value="">' + tr(placeholderKey, placeholderFallback) + "</option>";
-    sel.value = prevValue;
-
-    // If a value was selected, restore the option
-    if (prevValue && sel.options.length === 1) {
-      // Capacity and timeline are numeric — they don't need translation
-      // Just ensure the placeholder is translated
+    // Only update the placeholder text, don't nuke all options
+    var ph = sel.querySelector('option[value=""]');
+    if (ph) {
+      ph.textContent = tr(placeholderKey, placeholderFallback);
     }
+
+    // Restore selection
+    if (prevValue) sel.value = prevValue;
 
     reinitCustomSelect(sel);
   }

@@ -41,7 +41,11 @@
     } else if (val !== "") {
       if (type === "email" || name.indexOf("email") !== -1) {
         if (!EMAIL_RE.test(val)) error = "Please enter a valid email address.";
-      } else if (type === "tel" || name.indexOf("phone") !== -1 || name.indexOf("tel") !== -1) {
+      } else if (
+        type === "tel" ||
+        name.indexOf("tel") !== -1 ||
+        (input.tagName === "INPUT" && name.indexOf("phone") !== -1)
+      ) {
         if (!PHONE_RE.test(val)) error = "Please enter a valid phone number.";
       }
     }
@@ -134,6 +138,10 @@
       // Assign id="contact-form" if form has no id (so submitContactForm can find it)
       if (!form.id) {
         form.id = "contact-form";
+      }
+      // Skip forms that have their own dedicated submit handler
+      if (form.id === "contact-form-el" || form.id === "quote-form" || form.id === "quote-form-mobile") {
+        return;
       }
       // Only add onsubmit handler if not already handled
       if (!form.dataset.interactionBound) {

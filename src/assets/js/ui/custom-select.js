@@ -975,6 +975,15 @@
     },
     "spa:load:closeAll"
   );
+  /* ── translationsApplied: re-refresh after translation system applies texts ── */
+  _spaOn(
+    document,
+    "translationsApplied",
+    function () {
+      _refreshDisplayTexts();
+    },
+    "translationsApplied:refreshCustomSelect"
+  );
 
   /* Init all [data-custom-select] elements */
   CustomSelect.initAll = function (root) {
@@ -1037,14 +1046,59 @@
     CustomSelect.initAll();
   }
 
+  /**
+   * Refresh all existing custom-select instances' display text from live <option> text.
+   * Called on spa:load (after translations settle) and languageChanged.
+   */
+  function _refreshDisplayTexts() {
+    var wraps = document.querySelectorAll(".cs-trigger-wrap");
+    wraps.forEach(function (wrap) {
+      var select = wrap.querySelector("select[" + ATTR + "]");
+      if (!select) return;
+      var inst = select._customSelectInstance;
+      if (!inst) return;
+      var textEl = inst.trigger && inst.trigger.querySelector(".cs-trigger-text");
+      if (!textEl) return;
+      var displayText = inst.getDisplayText();
+      var isPlaceholder = !inst.select.value;
+      textEl.textContent = displayText;
+      textEl.className = "cs-trigger-text" + (isPlaceholder ? " cs-placeholder" : "");
+      // Also update panel item text from live <option> text
+      if (inst.panel) {
+        var panelItems = inst.panel.querySelectorAll(".cs-item");
+        for (var i = 0; i < panelItems.length; i++) {
+          var val = panelItems[i].getAttribute("data-value");
+          for (var j = 0; j < select.options.length; j++) {
+            if (select.options[j].value === val) {
+              var span = panelItems[i].querySelector("span:first-child");
+              if (span) span.textContent = select.options[j].text;
+              panelItems[i].setAttribute("data-text", select.options[j].text);
+              break;
+            }
+          }
+        }
+      }
+    });
+  }
+
   /* Re-init on spa:load (SPA navigation may inject new selects) */
   _spaOn(
     document,
     "spa:load",
     function () {
       CustomSelect.initAll();
+      _refreshDisplayTexts();
     },
     "spa:load:initAll"
+  );
+  /* ── translationsApplied: re-refresh after translation system applies texts ── */
+  _spaOn(
+    document,
+    "translationsApplied",
+    function () {
+      _refreshDisplayTexts();
+    },
+    "translationsApplied:refreshCustomSelect"
   );
 
   /* ────────────────────────────────────────────────────────────────
@@ -1059,37 +1113,18 @@
         el.textContent =
           typeof window.t === "function" ? window.uiText("no_matching_results", "无匹配结果") : "无匹配结果";
       });
-      // Refresh all custom-select trigger display texts after translation
-      var wraps = document.querySelectorAll(".cs-trigger-wrap");
-      wraps.forEach(function (wrap) {
-        var select = wrap.querySelector("select[" + ATTR + "]");
-        if (!select) return;
-        var inst = select._customSelectInstance;
-        if (!inst) return;
-        var textEl = inst.trigger && inst.trigger.querySelector(".cs-trigger-text");
-        if (!textEl) return;
-        var displayText = inst.getDisplayText();
-        var isPlaceholder = !inst.select.value;
-        textEl.textContent = displayText;
-        textEl.className = "cs-trigger-text" + (isPlaceholder ? " cs-placeholder" : "");
-        // Also update panel item text from translated <option> text
-        if (inst.panel) {
-          var panelItems = inst.panel.querySelectorAll(".cs-item");
-          for (var i = 0; i < panelItems.length; i++) {
-            var val = panelItems[i].getAttribute("data-value");
-            for (var j = 0; j < select.options.length; j++) {
-              if (select.options[j].value === val) {
-                var span = panelItems[i].querySelector("span:first-child");
-                if (span) span.textContent = select.options[j].text;
-                panelItems[i].setAttribute("data-text", select.options[j].text);
-                break;
-              }
-            }
-          }
-        }
-      });
+      _refreshDisplayTexts();
     },
     "langChanged:noResults"
+  );
+  /* ── translationsApplied: re-refresh after translation system applies texts ── */
+  _spaOn(
+    document,
+    "translationsApplied",
+    function () {
+      _refreshDisplayTexts();
+    },
+    "translationsApplied:refreshCustomSelect"
   );
 
   /* ────────────────────────────────────────────────────────────────

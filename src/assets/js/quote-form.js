@@ -182,7 +182,14 @@
           }
         });
         if (!valid) {
-          showError(form, _t("quote_fill_required", "Please fill in all required fields (*)"));
+          var emptyIds = required.filter(function (id) {
+            var el = form.querySelector("#" + id);
+            return !el || !el.value.trim();
+          });
+          showError(
+            form,
+            _t("quote_fill_required", "Please fill in all required fields (*)") + " [" + emptyIds.join(", ") + "]"
+          );
           if (firstInvalid) firstInvalid.focus();
           return;
         }
@@ -219,6 +226,17 @@
       e.preventDefault();
       clearError(form);
 
+      // ★ Debug: log all form field values
+      var _dbg = [
+        "q-country",
+        "q-contact",
+        "q-restaurant-type",
+        "q-phone",
+        "q-contact-channel",
+        "q-capacity",
+        "q-budget",
+      ];
+
       // Validate step 2
       var requiredStep2 = ["q-capacity", "q-budget"];
       var timelineChecked = form.querySelector('input[name="q-timeline"]:checked');
@@ -239,7 +257,18 @@
       if (!timelineChecked) valid = false;
 
       if (!valid) {
-        showError(form, _t("quote_fill_required", "Please fill in all required fields (*)"));
+        var emptyIds = requiredStep2.filter(function (id) {
+          var el = form.querySelector("#" + id);
+          return !el || !el.value.trim();
+        });
+        var extra = !timelineChecked ? ["q-timeline"] : [];
+        showError(
+          form,
+          _t("quote_fill_required", "Please fill in all required fields (*)") +
+            " [" +
+            emptyIds.concat(extra).join(", ") +
+            "]"
+        );
         if (firstInvalid) firstInvalid.focus();
         return;
       }
@@ -347,7 +376,7 @@
             });
           return res.json();
         })
-        .then(function () {
+        .then(function (data) {
           if (typeof window.showNotification === "function")
             window.showNotification(_t("quote_submit_success", "Submitted! We will contact you soon."), "success");
           setTimeout(function () {
