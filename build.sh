@@ -77,10 +77,9 @@ cp "$SRC/index.html" "$DIST/index.html"
 [ -f "$SRC/robots.txt" ] && cp "$SRC/robots.txt" "$DIST/robots.txt"
 [ -f "$SRC/manifest.json" ] && cp "$SRC/manifest.json" "$DIST/manifest.json"
 
-# ─── 7. Sitemap / search index ──────────────────────────────────
+# ─── 7. Search index ──────────────────────────────────
 node scripts/export-products-static.js 2>/dev/null || echo "  ⚠️  Server unavailable, using cached products.json"
 node scripts/generate-search-index.js 2>/dev/null || echo "  ⚠️  Failed to generate search-index.json"
-node scripts/generate-sitemap.js 2>/dev/null || true
 
 # ─── 8. Inject device redirect scripts (pre-SSG) ────────────────
 echo "🔄 Injecting device redirect scripts into all pages..."
@@ -90,6 +89,9 @@ node scripts/inject-device-redirect.js 2>&1 | tail -5
 # SSG 读取 webpack 的输出 dist/pages/ 然后生成 dist/<route>/
 # SSG also copies Swup + plugins from node_modules and fresh JS from src
 node scripts/build-ssg.js 2>&1 | grep -E 'Step|✓|✅|WARN|ERROR' || true
+
+# ─── Sitemap (after SSG, needs dist to be populated) ─────────
+node scripts/generate-sitemap.js 2>/dev/null || echo "  ⚠️  Failed to generate sitemap.xml"
 
 # ─── 5. Version bump (production only, after SSG) ───────────────
 if [ "$BUILD_MODE" != "dev" ]; then
