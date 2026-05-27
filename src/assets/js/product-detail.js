@@ -371,7 +371,7 @@
         (badgeHtml ? badgeHtml : "") +
         (badgeHtml ? chevron : "") +
         '<li><span class="text-slate-900 dark:text-white font-medium">' +
-        esc(product.name || model) +
+        esc(getProductField(product, "name") || model) +
         "</span></li>" +
         "</ol></nav></div>";
       // Mobile breadcrumb — 统一返回按钮 + 两层
@@ -391,7 +391,7 @@
           : "") +
         '<div class="text-sm font-bold text-slate-900 dark:text-white truncate">' +
         mChevron +
-        esc(product.name || model) +
+        esc(getProductField(product, "name") || model) +
         "</div>" +
         "</div></div>";
       bcEl.innerHTML = html;
@@ -631,7 +631,7 @@
       tier +
       "</div>" +
       '<h1 id="detail-title" class="text-2xl lg:text-3xl font-black tracking-tight mb-2">' +
-      esc(product.name || product.model) +
+      esc(getProductField(product, "name") || product.model) +
       "</h1>" +
       // Model subtitle
       (product.model && product.name && product.name !== product.model
