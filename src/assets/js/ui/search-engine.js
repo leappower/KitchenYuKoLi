@@ -136,7 +136,7 @@
         type: "product",
         labelKey: "search_type_product",
         labelFallback: "产品",
-        path: "/products/detail/" + encodeURIComponent(model) + "/",
+        path: "/products/" + encodeURIComponent(model) + "/",
         title: translatedName,
         snippet: (translatedCategory || category) + " · " + model,
         category: tr("search_type_product", "产品"),
@@ -411,7 +411,7 @@
       var imgSrc = p.productImage || p.imageUrl || "";
       var hlClass = idx === highlightedIndex ? " is-highlighted" : "";
 
-      var detailHref = "/products/" + (p.model ? "detail/" + encodeURIComponent(p.model) + "/" : "");
+      var detailHref = "/products/" + (p.model ? encodeURIComponent(p.model) + "/" : "");
       html +=
         '<a class="ios-search-result-item' +
         hlClass +
