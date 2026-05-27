@@ -1,3 +1,4 @@
+/* global getProductField */
 /**
  * home-core-products.js — Dynamic Home Core Products renderer
  *
@@ -939,7 +940,7 @@
    * Update _autoInit to detect scenario pages
    */
   var _origAutoInit = _autoInit;
-  _autoInit = function () {
+  window._autoInit = function () {
     var path = window.location.pathname || "/";
     var device = window.innerWidth < 768 ? "mobile" : window.innerWidth < 1280 ? "tablet" : "pc";
 

@@ -1,3 +1,4 @@
+/* global loadProductTranslations */
 /**
  * PDP Renderer - product detail page (SPA-safe)
  * URL: /products/detail/<model>/ or /products/detail/?model=<model>
@@ -210,14 +211,14 @@
     if (!ce || !re) {
       // Products listing page has #products-section; hide it and create PDP containers
       var listing = document.getElementById("products-section") || document.getElementById("product-grid");
-      var container = listing
+      container = listing
         ? listing.parentElement
         : document.getElementById("app") || document.querySelector("main") || document.body;
       if (listing) listing.style.display = "none";
 
       if (!ce) {
         // Insert breadcrumb bar before product-content
-        var bc = document.getElementById("pdp-breadcrumb");
+        bc = document.getElementById("pdp-breadcrumb");
         if (!bc) {
           bc = document.createElement("div");
           bc.id = "pdp-breadcrumb";

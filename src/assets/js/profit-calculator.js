@@ -1407,11 +1407,13 @@
       panel.classList.remove("hidden");
       panel.scrollIntoView({ behavior: "smooth", block: "start" });
     } else {
+      // intentionally empty
     }
 
     // Check placeholder state
     var placeholder = document.getElementById("profit-placeholder");
     if (placeholder) {
+      // intentionally empty
     }
 
     // Steps mode: switch to step 2
@@ -1425,6 +1427,7 @@
         step2.classList.remove("hidden");
       }
     } else {
+      // intentionally empty
     }
 
     this.renderResults(result, input.salaryInfo);

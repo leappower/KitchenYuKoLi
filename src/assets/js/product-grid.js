@@ -501,7 +501,7 @@
     if (!img && p.imageUrl) img = p.imageUrl;
     // Last resort: try {model}.webp, sanitize model name for filesystem
     if (!img) {
-      var safeModel = (p.model || "default").replace(/[\/:+]+/g, "_").replace(/_+/g, "_");
+      var safeModel = (p.model || "default").replace(/[/:+]+/g, "_").replace(/_+/g, "_");
       img = "/assets/images/products/" + safeModel + ".webp";
     }
     return img;
