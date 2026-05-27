@@ -4,7 +4,7 @@
 window.PRODUCT_DATA_TABLE = [
   {
     model: "DLB-TBS30",
-    tier: "入门",
+    tier: "基础",
     name: "台式上搅拌平底锅炒菜 机",
     nameEn: "Countertop Top-stirring Flat-bottom Wok Cooker",
     category: "翻炒系列",
@@ -214,7 +214,7 @@ window.PRODUCT_DATA_TABLE = [
   },
   {
     model: "DLB-TBS40",
-    tier: "入门",
+    tier: "基础",
     name: "台式上搅拌弧底锅 炒菜机",
     nameEn: "Countertop Top-stirring Arc-bottom Wok Cooker",
     category: "翻炒系列",
@@ -257,7 +257,7 @@ window.PRODUCT_DATA_TABLE = [
   },
   {
     model: "DLB-TBS50",
-    tier: "入门",
+    tier: "基础",
     name: "台式上搅拌弧底锅 炒菜机",
     nameEn: "Countertop Top-stirring Arc-bottom Wok Cooker",
     category: "翻炒系列",
@@ -300,7 +300,7 @@ window.PRODUCT_DATA_TABLE = [
   },
   {
     model: "DLB-TZS40",
-    tier: "入门",
+    tier: "基础",
     name: "台式转锅搅拌炒菜机 （炒饭机）",
     nameEn: "Countertop Rotary Stir-fry Wok Cooker (Fried Rice)",
     category: "翻炒系列",
@@ -343,7 +343,7 @@ window.PRODUCT_DATA_TABLE = [
   },
   {
     model: "DLB-TZS50",
-    tier: "入门",
+    tier: "基础",
     name: "台式转锅搅拌炒菜机 （炒饭机）",
     nameEn: "Countertop Rotary Stir-fry Wok Cooker (Fried Rice)",
     category: "翻炒系列",
@@ -386,7 +386,7 @@ window.PRODUCT_DATA_TABLE = [
   },
   {
     model: "DLB-TGS30",
-    tier: "入门",
+    tier: "基础",
     name: "台式300智能电磁炒菜机 （手动）",
     nameEn: "Countertop 300 Induction Cooker (Manual)",
     category: "翻炒系列",
@@ -429,7 +429,7 @@ window.PRODUCT_DATA_TABLE = [
   },
   {
     model: "DLB-TGD30",
-    tier: "入门",
+    tier: "基础",
     name: "台式300智能电磁炒菜机 （电动）",
     nameEn: "Countertop 300 Induction Cooker (Electric)",
     category: "翻炒系列",
@@ -472,7 +472,7 @@ window.PRODUCT_DATA_TABLE = [
   },
   {
     model: "DLB-GD30",
-    tier: "入门",
+    tier: "基础",
     name: "落地式300智能电磁炒菜 机（电动）",
     nameEn: "Floor-standing 300 Induction Cooker (Electric)",
     category: "翻炒系列",
@@ -515,7 +515,7 @@ window.PRODUCT_DATA_TABLE = [
   },
   {
     model: "DLB-TGD36",
-    tier: "入门",
+    tier: "基础",
     name: "台式360智能电磁炒菜机 （电动）",
     nameEn: "Countertop 360 Induction Cooker (Electric)",
     category: "翻炒系列",
@@ -558,7 +558,7 @@ window.PRODUCT_DATA_TABLE = [
   },
   {
     model: "DLB-GD36",
-    tier: "入门",
+    tier: "基础",
     name: "落地式360智能电磁炒菜 机（电动）",
     nameEn: "Floor-standing 360 Induction Cooker (Electric)",
     category: "翻炒系列",
@@ -601,7 +601,7 @@ window.PRODUCT_DATA_TABLE = [
   },
   {
     model: "DLB-TGD36/9",
-    tier: "入门",
+    tier: "基础",
     name: "台式360智能电磁炒菜机 （电动）",
     nameEn: "Countertop 360 Induction Cooker (Electric)",
     category: "翻炒系列",
@@ -633,7 +633,7 @@ window.PRODUCT_DATA_TABLE = [
   },
   {
     model: "DLB-GD36/9",
-    tier: "入门",
+    tier: "基础",
     name: "落地式360智能电磁炒菜 机（电动）",
     nameEn: "Floor-standing 360 Induction Cooker (Electric)",
     category: "翻炒系列",
@@ -665,7 +665,7 @@ window.PRODUCT_DATA_TABLE = [
   },
   {
     model: "DLB-TGD40",
-    tier: "入门",
+    tier: "基础",
     name: "台式400智能电磁炒菜机 （电动）",
     nameEn: "Countertop 400 Induction Cooker (Electric)",
     category: "翻炒系列",
@@ -3358,7 +3358,7 @@ window.PRODUCT_DATA_TABLE = [
   },
   {
     model: "G26D1A",
-    tier: "入门",
+    tier: "基础",
     name: "简易台式滚筒炒菜机 (电磁款)",
     nameEn: "Compact Countertop Drum Cooker (Induction)",
     category: "翻炒系列",
@@ -3394,7 +3394,7 @@ window.PRODUCT_DATA_TABLE = [
   },
   {
     model: "G26D1R",
-    tier: "入门",
+    tier: "基础",
     name: "简易台式滚筒炒菜机 (燃气款)",
     nameEn: "Compact Countertop Drum Cooker (Gas)",
     category: "翻炒系列",
@@ -3430,7 +3430,7 @@ window.PRODUCT_DATA_TABLE = [
   },
   {
     model: "G26DAA",
-    tier: "入门",
+    tier: "基础",
     name: "简易立式滚筒炒菜机 (电磁款)",
     nameEn: "Compact Upright Drum Cooker (Induction)",
     category: "翻炒系列",
@@ -3466,7 +3466,7 @@ window.PRODUCT_DATA_TABLE = [
   },
   {
     model: "G26DAR",
-    tier: "入门",
+    tier: "基础",
     name: "简易立式滚筒炒菜机 (燃气款)",
     nameEn: "Compact Upright Drum Cooker (Gas)",
     category: "翻炒系列",
@@ -3502,7 +3502,7 @@ window.PRODUCT_DATA_TABLE = [
   },
   {
     model: "G30D1A",
-    tier: "入门",
+    tier: "基础",
     name: "简易台式滚筒炒菜机 （电磁款）",
     nameEn: "Compact Countertop Drum Cooker (Induction)",
     category: "翻炒系列",
@@ -3538,7 +3538,7 @@ window.PRODUCT_DATA_TABLE = [
   },
   {
     model: "G30D1R",
-    tier: "入门",
+    tier: "基础",
     name: "简易台式滚簡炒菜机 （燃气款）",
     nameEn: "Compact Countertop Drum Cooker (Gas)",
     category: "翻炒系列",
@@ -3574,7 +3574,7 @@ window.PRODUCT_DATA_TABLE = [
   },
   {
     model: "G30DAA",
-    tier: "入门",
+    tier: "基础",
     name: "简易立式滚筒炒菜机 (电磁款)",
     nameEn: "Compact Upright Drum Cooker (Induction)",
     category: "翻炒系列",
@@ -3610,7 +3610,7 @@ window.PRODUCT_DATA_TABLE = [
   },
   {
     model: "G30DAR",
-    tier: "入门",
+    tier: "基础",
     name: "简易立式滚筒炒菜机 （燃气款）",
     nameEn: "Compact Upright Drum Cooker (Gas)",
     category: "翻炒系列",
@@ -3682,7 +3682,7 @@ window.PRODUCT_DATA_TABLE = [
   },
   {
     model: "G30DFA",
-    tier: "入门",
+    tier: "基础",
     name: "简易立式双头滚筒炒菜机+ 炒锅(电磁款)",
     nameEn: "Compact Upright Dual-drum Cooker+Wok (Induction)",
     category: "翻炒系列",
@@ -3718,7 +3718,7 @@ window.PRODUCT_DATA_TABLE = [
   },
   {
     model: "G36D1A",
-    tier: "入门",
+    tier: "基础",
     name: "简易台式滚筒炒菜机 （电磁款）",
     nameEn: "Compact Countertop Drum Cooker (Induction)",
     category: "翻炒系列",
@@ -3754,7 +3754,7 @@ window.PRODUCT_DATA_TABLE = [
   },
   {
     model: "G36D1R",
-    tier: "入门",
+    tier: "基础",
     name: "简易台式滚筒炒菜机 （燃气款）",
     nameEn: "Compact Countertop Drum Cooker (Gas)",
     category: "翻炒系列",
@@ -3790,7 +3790,7 @@ window.PRODUCT_DATA_TABLE = [
   },
   {
     model: "G36DAA",
-    tier: "入门",
+    tier: "基础",
     name: "简易立式滚筒炒菜机 （电磁款）",
     nameEn: "Compact Upright Drum Cooker (Induction)",
     category: "翻炒系列",
@@ -3826,7 +3826,7 @@ window.PRODUCT_DATA_TABLE = [
   },
   {
     model: "G36DAR",
-    tier: "入门",
+    tier: "基础",
     name: "简易立式滚筒炒菜机 （燃气款）",
     nameEn: "Compact Upright Drum Cooker (Gas)",
     category: "翻炒系列",
@@ -4186,7 +4186,7 @@ window.PRODUCT_DATA_TABLE = [
   },
   {
     model: "G50GAT",
-    tier: "入门",
+    tier: "基础",
     name: "简易团餐滚筒炒菜机 （燃气款）",
     nameEn: "Compact Batch Drum Cooker (Gas)",
     category: "翻炒系列",
@@ -5059,7 +5059,7 @@ window.PRODUCT_DATA_TABLE = [
   },
   {
     model: "HKQPJ400-VIII",
-    tier: "入门",
+    tier: "基础",
     name: "多功能鲜肉切片机(单通道)",
     nameEn: "Multi-function Fresh Meat Slicer (Single Chute)",
     category: "切配系列",
@@ -5093,7 +5093,7 @@ window.PRODUCT_DATA_TABLE = [
   },
   {
     model: "HKQPJ500-VIII",
-    tier: "入门",
+    tier: "基础",
     name: "多功能鲜肉切片机(双通道)",
     nameEn: "Multi-function Fresh Meat Slicer (Dual Chute)",
     category: "切配系列",
@@ -5127,7 +5127,7 @@ window.PRODUCT_DATA_TABLE = [
   },
   {
     model: "HKQTJ300",
-    tier: "入门",
+    tier: "基础",
     name: "多功能鲜肉切条机300",
     nameEn: "Multi-function Fresh Meat Stripper 300",
     category: "切配系列",
@@ -5161,7 +5161,7 @@ window.PRODUCT_DATA_TABLE = [
   },
   {
     model: "HKQTJ600-VII",
-    tier: "入门",
+    tier: "基础",
     name: "多功能鲜肉切条机600",
     nameEn: "Multi-function Fresh Meat Stripper 600",
     category: "切配系列",
@@ -5195,7 +5195,7 @@ window.PRODUCT_DATA_TABLE = [
   },
   {
     model: "HKQTJ200-VII",
-    tier: "入门",
+    tier: "基础",
     name: "多功能鲜肉切条机200(切丝专用定制款)",
     nameEn: "Multi-function Fresh Meat Stripper 200 (Shredder)",
     category: "切配系列",
@@ -5229,7 +5229,7 @@ window.PRODUCT_DATA_TABLE = [
   },
   {
     model: "HKDQJ300-VII",
-    tier: "入门",
+    tier: "基础",
     name: "多功能冻肉切丁机300-VII",
     nameEn: "Multi-function Frozen Meat Dicer 300-VII",
     category: "切配系列",
@@ -5263,7 +5263,7 @@ window.PRODUCT_DATA_TABLE = [
   },
   {
     model: "HKDQJ300",
-    tier: "入门",
+    tier: "基础",
     name: "多功能冻肉切丁机300",
     nameEn: "Multi-function Frozen Meat Dicer 300",
     category: "切配系列",
@@ -5297,7 +5297,7 @@ window.PRODUCT_DATA_TABLE = [
   },
   {
     model: "HKXQJ-400",
-    tier: "入门",
+    tier: "基础",
     name: "自动切花斜切机",
     nameEn: "Auto Diagonal Flower Slicer",
     category: "切配系列",
@@ -5331,7 +5331,7 @@ window.PRODUCT_DATA_TABLE = [
   },
   {
     model: "HKQPJ-300",
-    tier: "入门",
+    tier: "基础",
     name: "熟肉切片机",
     nameEn: "Cooked Meat Slicer",
     category: "切配系列",
@@ -5365,7 +5365,7 @@ window.PRODUCT_DATA_TABLE = [
   },
   {
     model: "HKJGJ380-VI",
-    tier: "入门",
+    tier: "基础",
     name: "锯骨机380",
     nameEn: "Bone Saw Machine 380",
     category: "切配系列",
@@ -5399,7 +5399,7 @@ window.PRODUCT_DATA_TABLE = [
   },
   {
     model: "HKFBJ",
-    tier: "入门",
+    tier: "基础",
     name: "猪蹄分半机",
     nameEn: "Pig Trotter Splitter",
     category: "切配系列",
