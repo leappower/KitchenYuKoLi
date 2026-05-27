@@ -768,7 +768,8 @@
             item.addEventListener("mousedown", function (e) {
               e.preventDefault();
             });
-            item.addEventListener("click", function () {
+            item.addEventListener("click", function (e) {
+              e.preventDefault();
               var href = item.getAttribute("href");
               if (href) {
                 if (window.SpaRouter && typeof window.SpaRouter.navigate === "function") {

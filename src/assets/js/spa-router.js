@@ -274,18 +274,17 @@
     navigate: function (url) {
       if (!url) return;
       if (window.swupInstance) {
-        console.warn("[spa-router] navigate: calling swupInstance.navigate(", url, ")");
         try {
-          window.swupInstance.navigate(url).catch(function (err) {
-            console.warn("[spa-router] swup navigate 失败:", err, "— fallback window.location.href");
-            window.location.href = url;
-          });
+          var navResult = window.swupInstance.navigate(url);
+          if (navResult && typeof navResult.catch === "function") {
+            navResult.catch(function () {
+              window.location.href = url;
+            });
+          }
         } catch (e) {
-          console.warn("[spa-router] swup navigate 异常:", e, "— fallback window.location.href");
           window.location.href = url;
         }
       } else {
-        console.warn("[spa-router] swupInstance 不可用，window.location.href = ", url);
         window.location.href = url;
       }
     },
