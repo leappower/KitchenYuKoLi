@@ -365,26 +365,34 @@
       }
 
       // 提交到 Google Sheets (via GAS Web App)
-      // 以 form-urlencoded 格式直接提交到 Google Apps Script（纯静态部署兼容）
       var GAS_URL =
         "https://script.google.com/macros/s/AKfycbyUy-DdV0eqNfbzHWXhf5XbSMtyJMIL--Hx_AfMOrBqUYl7PgVD7vX7uhIhXy_DZIXr/exec";
-      var params = new URLSearchParams();
-      Object.keys(formData).forEach(function (k) {
-        if (formData[k] != null && formData[k] !== "") params.append(k, formData[k]);
-      });
+
+      var controller = new AbortController();
+      var timeout = setTimeout(function () { controller.abort(); }, 15000);
+
       fetch(GAS_URL, {
         method: "POST",
-        mode: "no-cors",
-        body: params,
-      }).catch(function () {
-        // no-cors 下响应不可读，静默忽略
-      });
-
-      // 跳转到感谢页
-      setTimeout(function () {
-        if (window.SpaRouter) window.SpaRouter.navigate("/thank-you/");
-        else location.href = "/thank-you/";
-      }, 800);
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+        signal: controller.signal,
+      })
+        .then(function (res) {
+          clearTimeout(timeout);
+          if (!res.ok) console.warn("[QuoteForm] GAS returned " + res.status);
+        })
+        .catch(function (err) {
+          clearTimeout(timeout);
+          if (err.name === "AbortError") console.error("[QuoteForm] Request timeout");
+          else console.error("[QuoteForm] Submit error:", err.message);
+        })
+        .finally(function () {
+          // 跳转到感谢页（无论成败）
+          setTimeout(function () {
+            if (window.SpaRouter) window.SpaRouter.navigate("/thank-you/");
+            else location.href = "/thank-you/";
+          }, 500);
+        });
     });
   }
 
