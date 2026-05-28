@@ -304,9 +304,13 @@
     //   /products/{model}/index-pc.html  (device redirect)
     var path = window.location.pathname.replace(/\/$/, "");
     var model = null;
+    // First try: /products/{category}/{model}/ (new canonical)
     var m = path.match(/^\/products\/([^/]+)\/([^/]+)$/);
     if (m && isCategorySlug(m[1])) {
       // /products/stirfry/DLB-TBQ30/ → slug=m[1], model=m[2]
+      model = decodeURIComponent(m[2]);
+    } else if (m && m[1] === "detail") {
+      // /products/detail/{model}/ (old detail path — backward compat)
       model = decodeURIComponent(m[2]);
     } else if (m && !isCategorySlug(m[1]) && /^index-(pc|mobile|tablet)\.html$/.test(m[2])) {
       // /products/DLB-TBQ30/index-pc.html → device redirect, model=m[1]

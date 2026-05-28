@@ -765,10 +765,10 @@ function generate404() {
     '    var path = window.location.pathname;\n' +
     '    var normalized = path.replace(/\\/$/, "");\n' +
     '    var routes = ' + routesJson + ';\n' +
-    '    var categorySlugs = ["cutting","stirfry","frying","stewing","steaming","other","all","detail","compare"];\n' +
+    '    var categorySlugs = ["cutting","stirfry","frying","stewing","steaming","other","all","compare"];\n' +
     '    if (/^\\/products\\//.test(path)) {\n' +
-    '      var productSegment = path.replace(/^\\/products\\//, "").replace(/\\/$/, "");\n' +
-    '      if (categorySlugs.indexOf(productSegment) !== -1 || productSegment) {\n' +
+    '      var productFirstSegment = path.replace(/^\\/products\\//, "").replace(/\\/$/, "").split("/")[0];\n' +
+    '      if (productFirstSegment && categorySlugs.indexOf(productFirstSegment) !== -1) {\n' +
     '        window.location.replace(base + "/?redirect=" + encodeURIComponent(path));\n' +
     '      }\n' +
     '    }\n' +

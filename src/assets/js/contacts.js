@@ -46,7 +46,7 @@
     "/support/faq/": window.uiText("nav_support_faq", "Technical FAQ & Contact"),
     "/products/": window.uiText("nav_products", "Products"),
     "/products/compare/": window.uiText("compare_view", "Compare"),
-    "/products/detail/": window.uiText("pd_spec_product_specs", "Product Details"),
+    "/products/": window.uiText("nav_products", "Products"),
     "/quote/": window.uiText("nav_get_quote", "Get a Quote"),
     "/contact/": window.uiText("nav_contact", "Contact Us"),
     "/home/": window.uiText("nav_home", "Home"),
