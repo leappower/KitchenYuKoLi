@@ -491,7 +491,8 @@
       if (primary && primary.filePath) {
         img = primary.filePath;
         // Defensive: normalize _N.webp → -N.webp (file rename migration)
-        img = img.replace(/_(\d+\.webp)$/, "-$1");
+        // Only replace single-digit index (_1.webp .. _9.webp), not multi-digit filenames
+        img = img.replace(/_(\d\.webp)$/, "-$1");
         if (img.indexOf("/admin/uploads/") === 0) {
           img = "/assets/images/products/" + img.split("/").pop();
         }
@@ -1248,10 +1249,15 @@
     autoRender();
   });
 
-  // Re-render on language change
-  document.addEventListener("languageChanged", function () {
+  // Re-render on language change — listen on window as well (navigator.js may dispatch before product-grid.js loads)
+  function _onLangChange() {
+    _renderPending = false;
     autoRender();
-  });
+  }
+  document.addEventListener("languageChanged", _onLangChange);
+  window.addEventListener("languageChanged", _onLangChange);
+  // Also re-render when navigator completes language switch (navigator.js fires custom event on window)
+  window.addEventListener("lang:applied", _onLangChange);
 
   // Click-to-detail: delegate clicks on product cards (PC/tablet)
   // Mobile cards already have <a> wrappers, so only target PC/tablet

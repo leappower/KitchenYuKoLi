@@ -104,7 +104,7 @@
               }) || rp.images[0]
             ).filePath;
             // Defensive: normalize _N.webp → -N.webp (file rename migration)
-            if (f) f = f.replace(/_(\d+\.webp)$/, "-$1");
+            if (f) f = f.replace(/_(\d\.webp)$/, "-$1");
             // Defensive: rewrite stale CMS paths
             if (f && f.indexOf("/admin/uploads/") === 0) {
               f = "/assets/images/products/" + f.split("/").pop();

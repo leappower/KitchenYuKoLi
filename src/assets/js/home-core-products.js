@@ -56,7 +56,7 @@
     var fp = primary ? primary.filePath : product.images[0].filePath;
     // Defensive: normalize _N.webp → -N.webp (file rename migration)
     if (fp) {
-      fp = fp.replace(/_(\d+\.webp)$/, "-$1");
+      fp = fp.replace(/_(\d\.webp)$/, "-$1");
     }
     return fp;
   }
