@@ -29,6 +29,7 @@ fi
 
 # ─── 0. Bump i18n cache BEFORE webpack ──────────────────────────
 I18N_CACHE_TS=$(date +%s)
+I18N_CACHE_TS=${I18N_CACHE_TS:-$(date +%s)}  # fallback if empty
 perl -i -pe 's/var I18N_CACHE_V = \d+;/var I18N_CACHE_V = $ENV{I18N_CACHE_TS};/' "$SRC/assets/js/translations.js"
 echo "🔄 i18n cache version → $I18N_CACHE_TS"
 
