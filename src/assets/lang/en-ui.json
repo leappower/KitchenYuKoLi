@@ -3684,5 +3684,6 @@
   "search_results_count": "Found {count} results",
   "search_view_all": "View All Products",
   "search_no_results": "No results found",
-  "search_hint": "Search by model or product type"
+  "search_hint": "Search by model or product type",
+  "alt_product_other": "Support Equipment"
 }
