@@ -394,6 +394,67 @@ function injectCoreScripts(html, routeSlug) {
   return html.replace(/<\/body>/i, tags.join('\n') + '\n    ' + injectPattern + '\n  </body>');
 }
 
+/**
+ * Inject skeleton overlay HTML + inline CSS + inline JS into SSG pages.
+ * This provides a shimmer skeleton while CSS/JS assets load,
+ * preventing a plain white or blank flash before the page renders.
+ *
+ * Idempotent: checks for 'skeleton-overlay' before injecting.
+ */
+function injectSkeletonOverlay(html) {
+  if (html.indexOf('skeleton-overlay') !== -1) return html;
+
+  var skeletonHtml = '' +
+    '<div id="skeleton-overlay">' +
+    '  <div class="skeleton-container">' +
+    '    <div class="sk-hero">' +
+    '      <div class="sk-badge"></div>' +
+    '      <div class="sk-line"></div>' +
+    '      <div class="sk-line sk-line-short"></div>' +
+    '      <div class="sk-line sk-line-shorter"></div>' +
+    '      <div class="sk-cta-group">' +
+    '        <div class="sk-cta"></div>' +
+    '        <div class="sk-cta"></div>' +
+    '      </div>' +
+    '    </div>' +
+    '    <div class="sk-grid">' +
+    '      <div class="sk-card"></div>' +
+    '      <div class="sk-card"></div>' +
+    '      <div class="sk-card"></div>' +
+    '    </div>' +
+    '  </div>' +
+    '</div>';
+
+  var inlineCss = '' +
+    '<style data-skeleton-inline>' +
+    '#skeleton-overlay{position:fixed;inset:0;z-index:5;pointer-events:none;background:var(--color-bg-light,#f8fafc);opacity:1;transition:opacity .25s ease-out}' +
+    'html.dark #skeleton-overlay{background:var(--color-bg-dark,#020617)}' +
+    '#skeleton-overlay[hidden]{display:none}' +
+    '@keyframes sk-shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}' +
+    '.skeleton-container{width:100%;max-width:1280px;margin:0 auto;padding:2rem 1.25rem}' +
+    '.sk-badge{width:100px;height:22px;border-radius:9999px;margin:0 auto 16px;background:linear-gradient(90deg,#e8e8e8 25%,#d4d4d4 50%,#e8e8e8 75%);background-size:200% 100%;animation:sk-shimmer 1.5s infinite}' +
+    '.sk-hero{display:flex;flex-direction:column;align-items:center;text-align:center;margin-bottom:24px}' +
+    '.sk-line{width:65%;height:32px;border-radius:8px;margin:0 auto 12px;background:linear-gradient(90deg,#e8e8e8 25%,#d4d4d4 50%,#e8e8e8 75%);background-size:200% 100%;animation:sk-shimmer 1.5s infinite}' +
+    '.sk-line-short{width:45%;height:18px;margin-bottom:8px}' +
+    '.sk-line-shorter{width:30%;height:18px}' +
+    '.sk-cta-group{display:flex;gap:12px;justify-content:center;margin-top:20px}' +
+    '.sk-cta{width:140px;height:44px;border-radius:12px;background:linear-gradient(90deg,#e8e8e8 25%,#d4d4d4 50%,#e8e8e8 75%);background-size:200% 100%;animation:sk-shimmer 1.5s infinite}' +
+    '.sk-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:32px}' +
+    '@media(max-width:767px){.sk-grid{grid-template-columns:1fr}.sk-cta{width:100%;max-width:none}}' +
+    '@media(min-width:768px)and(max-width:1279px){.sk-grid{grid-template-columns:repeat(2,1fr)}}' +
+    '.sk-card{height:220px;border-radius:16px;background:linear-gradient(90deg,#e8e8e8 25%,#d4d4d4 50%,#e8e8e8 75%);background-size:200% 100%;animation:sk-shimmer 1.5s infinite}' +
+    '.dark .sk-badge,.dark .sk-line,.dark .sk-cta,.dark .sk-card{background:linear-gradient(90deg,#1e293b 25%,#334155 50%,#1e293b 75%);background-size:200% 100%}' +
+    '</style>';
+
+  var inlineJs = '' +
+    '<script>' +
+    '(function(){var sk=document.getElementById("skeleton-overlay");if(!sk)return;function hide(){sk.setAttribute("hidden","");sk.style.display="none";document.head.querySelector("[data-skeleton-inline]")?.remove()}if(document.readyState==="complete")hide();else window.addEventListener("load",hide);setTimeout(hide,3000);})();' +
+    '</script>';
+
+  // Inject before </body>: CSS first (prevent FOUC), then skeleton HTML, then JS (auto-hide on load)
+  return html.replace('</body>', inlineCss + '\n' + skeletonHtml + '\n' + inlineJs + '\n  </body>');
+}
+
 function injectSwupScripts(html) {
   // Swup scripts are now handled by injectCoreScripts() via core-scripts.json
   return html;
@@ -471,6 +532,7 @@ function generateResponsiveEntry(route) {
     }
     html = injectSwupScripts(html);
     html = normalizeSpaContent(html);
+    html = injectSkeletonOverlay(html);
     return html;
   }
 
@@ -560,6 +622,7 @@ function generateRouteIndex(route) {
   html = injectTranslationsDropdown(html);
   html = injectSwupScripts(html);
   html = normalizeSpaContent(html);
+  html = injectSkeletonOverlay(html);
 
   // Patch all root-absolute paths with BASE_PATH prefix
   html = patchHtmlPaths(html);
@@ -616,6 +679,7 @@ function copyDeviceFiles(route) {
     content = injectTranslationsDropdown(content);
     content = injectSwupScripts(content);
     content = normalizeSpaContent(content);
+    content = injectSkeletonOverlay(content);
     if (BASE_PATH) {
       content = patchHtmlPaths(content);
     }
