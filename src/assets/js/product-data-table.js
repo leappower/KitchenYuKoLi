@@ -9,8 +9,10 @@ window.PRODUCT_DATA_TABLE = [
     nameEn: "Electric Stainless Steel Slicer",
     category: "切配系列",
     subCategory: "切片机",
-    specifications: "材质：采用不锈钢机身；额定功率：300W；电压：220V；频率：50Hz；刀片：精钢刀片；调节：薄厚可调；安全：防滑设计，安全开关；清洗：可拆卸刀组方便清洗",
-    specificationsEn: "Material: Stainless steel body; Rated power: 300W; Voltage: 220V; Frequency: 50Hz; Blade: Precision steel blade; Adjustment: Thickness adjustable; Safety: Anti-slip design, safety switch; Cleaning: Detachable blade assembly for easy cleaning",
+    specifications:
+      "材质：采用不锈钢机身；额定功率：300W；电压：220V；频率：50Hz；刀片：精钢刀片；调节：薄厚可调；安全：防滑设计，安全开关；清洗：可拆卸刀组方便清洗",
+    specificationsEn:
+      "Material: Stainless steel body; Rated power: 300W; Voltage: 220V; Frequency: 50Hz; Blade: Precision steel blade; Adjustment: Thickness adjustable; Safety: Anti-slip design, safety switch; Cleaning: Detachable blade assembly for easy cleaning",
     power: "300W",
     voltage: "220V",
     material: "不锈钢机身；精钢刀片",
@@ -25,14 +27,17 @@ window.PRODUCT_DATA_TABLE = [
       {
         filePath: "/assets/images/products/XC-0006_171.webp",
         isPrimary: true,
-        isHires: false
-      }
+        isHires: false,
+      },
     ],
     is_home_core: false,
     highlights: "",
-    scenarios: "采用加大料口，进料更方便，不易伤手\n一键开关机，操作便捷\n底部大支撑加防滑设计，切菜更稳定\n精钢刀片，换洗轻便，运转省力，使用耐久\n小巧轻便不占地\n不锈钢机身，结实耐用易清洗\n薄厚可调，应对多种需求",
-    usage: "采用加大料口，进料更方便，不易伤手\n一键开关机，操作便捷\n底部大支撑加防滑设计，切菜更稳定\n精钢刀片，换洗轻便，运转省力，使用耐久\n小巧轻便不占地\n不锈钢机身，结实耐用易清洗\n薄厚可调，应对多种需求",
-    usageEn: "Usage: Restaurant chains, snack shops, canteens, home kitchens; Suitable for multi-ingredient slicing, adjustable thickness, easy operation. Capacity: Efficient slicing, labor-saving."
+    scenarios:
+      "采用加大料口，进料更方便，不易伤手\n一键开关机，操作便捷\n底部大支撑加防滑设计，切菜更稳定\n精钢刀片，换洗轻便，运转省力，使用耐久\n小巧轻便不占地\n不锈钢机身，结实耐用易清洗\n薄厚可调，应对多种需求",
+    usage:
+      "采用加大料口，进料更方便，不易伤手\n一键开关机，操作便捷\n底部大支撑加防滑设计，切菜更稳定\n精钢刀片，换洗轻便，运转省力，使用耐久\n小巧轻便不占地\n不锈钢机身，结实耐用易清洗\n薄厚可调，应对多种需求",
+    usageEn:
+      "Usage: Restaurant chains, snack shops, canteens, home kitchens; Suitable for multi-ingredient slicing, adjustable thickness, easy operation. Capacity: Efficient slicing, labor-saving.",
   },
   {
     model: "XC-1288",
@@ -41,8 +46,10 @@ window.PRODUCT_DATA_TABLE = [
     nameEn: "Multi-function Slicer",
     category: "切配系列",
     subCategory: "切肉机",
-    specifications: "材质：采用全铝合金支架；额定功率：200W；电压：220V；频率：50Hz；刀片：特制不锈钢刀片，直径190mm；调节：20个档位（1-20mm）厚度调节；电机：铜线电机；运行：稳定低分贝；适用：软、硬食材均可，轻松应对多种切片需要",
-    specificationsEn: "Material: Full aluminum alloy frame; Rated power: 200W; Voltage: 220V; Frequency: 50Hz; Blade: Special stainless steel blade, 190mm diameter; Adjustment: 20 gears (1-20mm) thickness adjustable; Motor: Copper wire motor; Operation: Stable, low noise; Suitable: Both soft and hard ingredients",
+    specifications:
+      "材质：采用全铝合金支架；额定功率：200W；电压：220V；频率：50Hz；刀片：特制不锈钢刀片，直径190mm；调节：20个档位（1-20mm）厚度调节；电机：铜线电机；运行：稳定低分贝；适用：软、硬食材均可，轻松应对多种切片需要",
+    specificationsEn:
+      "Material: Full aluminum alloy frame; Rated power: 200W; Voltage: 220V; Frequency: 50Hz; Blade: Special stainless steel blade, 190mm diameter; Adjustment: 20 gears (1-20mm) thickness adjustable; Motor: Copper wire motor; Operation: Stable, low noise; Suitable: Both soft and hard ingredients",
     power: "200W",
     voltage: "220V",
     material: "全铝合金支架；不锈钢刀片",
@@ -57,14 +64,17 @@ window.PRODUCT_DATA_TABLE = [
       {
         filePath: "/assets/images/products/XC-1288_172.webp",
         isPrimary: true,
-        isHires: false
-      }
+        isHires: false,
+      },
     ],
     is_home_core: false,
     highlights: "",
-    scenarios: "不止可以切肉，满足各种切片，轻松应对多种切片需要\n一键开关机，操作便捷\n特制不锈钢刀片，直径190mm，锋利不卡刀\n20个档位(1-20mm)厚度调节，软、硬食材轻松驾驭20\n铜线电机，200W动力，电力足，切肉快\n全铝合金支架，久用不生锈\n运行稳定，低分贝",
-    usage: "不止可以切肉，满足各种切片，轻松应对多种切片需要\n一键开关机，操作便捷\n特制不锈钢刀片，直径190mm，锋利不卡刀\n20个档位(1-20mm)厚度调节，软、硬食材轻松驾驭20\n铜线电机，200W动力，电力足，切肉快\n全铝合金支架，久用不生锈\n运行稳定，低分贝",
-    usageEn: "Usage: Restaurant chains, hot pot restaurants, canteens, central kitchens; Suitable for fresh meat, frozen meat and other ingredients, multi-gear thickness adjustment. Capacity: Efficient slicing for small to medium food service."
+    scenarios:
+      "不止可以切肉，满足各种切片，轻松应对多种切片需要\n一键开关机，操作便捷\n特制不锈钢刀片，直径190mm，锋利不卡刀\n20个档位(1-20mm)厚度调节，软、硬食材轻松驾驭20\n铜线电机，200W动力，电力足，切肉快\n全铝合金支架，久用不生锈\n运行稳定，低分贝",
+    usage:
+      "不止可以切肉，满足各种切片，轻松应对多种切片需要\n一键开关机，操作便捷\n特制不锈钢刀片，直径190mm，锋利不卡刀\n20个档位(1-20mm)厚度调节，软、硬食材轻松驾驭20\n铜线电机，200W动力，电力足，切肉快\n全铝合金支架，久用不生锈\n运行稳定，低分贝",
+    usageEn:
+      "Usage: Restaurant chains, hot pot restaurants, canteens, central kitchens; Suitable for fresh meat, frozen meat and other ingredients, multi-gear thickness adjustment. Capacity: Efficient slicing for small to medium food service.",
   },
   {
     model: "XC-6344",
@@ -73,8 +83,10 @@ window.PRODUCT_DATA_TABLE = [
     nameEn: "Electric 30 Slicer for Frozen Meat & Beef/Mutton",
     category: "切配系列",
     subCategory: "肉卷机",
-    specifications: "材质：采用优质不锈钢；额定功率：1.5kW；电压：220V；频率：50Hz；切片厚度：0.5-15mm可调；刀片材质：特种合金钢；安全防护：带急停功能及安全防护罩；清洗：可拆卸刀组，方便清洗",
-    specificationsEn: "Material: High-quality stainless steel; Rated power: 1.5kW; Voltage: 220V; Frequency: 50Hz; Slicing thickness: 0.5-15mm adjustable; Blade material: Special alloy steel; Safety: Emergency stop & safety guard; Cleaning: Detachable blade assembly",
+    specifications:
+      "材质：采用优质不锈钢；额定功率：1.5kW；电压：220V；频率：50Hz；切片厚度：0.5-15mm可调；刀片材质：特种合金钢；安全防护：带急停功能及安全防护罩；清洗：可拆卸刀组，方便清洗",
+    specificationsEn:
+      "Material: High-quality stainless steel; Rated power: 1.5kW; Voltage: 220V; Frequency: 50Hz; Slicing thickness: 0.5-15mm adjustable; Blade material: Special alloy steel; Safety: Emergency stop & safety guard; Cleaning: Detachable blade assembly",
     power: "1.5kW",
     voltage: "220V",
     material: "优质不锈钢",
@@ -89,14 +101,15 @@ window.PRODUCT_DATA_TABLE = [
       {
         filePath: "/assets/images/products/XC-6344_167.webp",
         isPrimary: true,
-        isHires: false
-      }
+        isHires: false,
+      },
     ],
     is_home_core: false,
     highlights: "",
     scenarios: "",
     usage: "",
-    usageEn: "Usage: Restaurant chains, hot pot restaurants, BBQ restaurants, central kitchens; Suitable for slicing frozen beef/lamb and fresh meat, uniform thickness adjustable. Capacity: Approx. 30kg/hour."
+    usageEn:
+      "Usage: Restaurant chains, hot pot restaurants, BBQ restaurants, central kitchens; Suitable for slicing frozen beef/lamb and fresh meat, uniform thickness adjustable. Capacity: Approx. 30kg/hour.",
   },
   {
     model: "XC-0988",
@@ -105,8 +118,10 @@ window.PRODUCT_DATA_TABLE = [
     nameEn: "Scallion Slicer",
     category: "切配系列",
     subCategory: "刨丝机",
-    specifications: "材质：采用优质不锈钢刀轴；额定功率：200W；电压：220V；频率：50Hz；刀片：二挡可反转刀片；加料口：加大料口设计；清洗：进料口可直接热水冲洗；电机：直流电机，噪音小；支腿：可拆卸一体式支腿；防水：嵌入式食品级硅胶防水圈",
-    specificationsEn: "Material: High-quality stainless steel shaft; Rated power: 200W; Voltage: 220V; Frequency: 50Hz; Blade: 2-speed reversible blades; Feed opening: Large opening design; Cleaning: Feed opening washable with hot water; Motor: DC motor, low noise; Legs: Detachable integrated legs; Waterproof: Embedded food-grade silicone ring",
+    specifications:
+      "材质：采用优质不锈钢刀轴；额定功率：200W；电压：220V；频率：50Hz；刀片：二挡可反转刀片；加料口：加大料口设计；清洗：进料口可直接热水冲洗；电机：直流电机，噪音小；支腿：可拆卸一体式支腿；防水：嵌入式食品级硅胶防水圈",
+    specificationsEn:
+      "Material: High-quality stainless steel shaft; Rated power: 200W; Voltage: 220V; Frequency: 50Hz; Blade: 2-speed reversible blades; Feed opening: Large opening design; Cleaning: Feed opening washable with hot water; Motor: DC motor, low noise; Legs: Detachable integrated legs; Waterproof: Embedded food-grade silicone ring",
     power: "200W",
     voltage: "220V",
     material: "304不锈钢刀轴；食品级硅胶",
@@ -121,14 +136,17 @@ window.PRODUCT_DATA_TABLE = [
       {
         filePath: "/assets/images/products/XC-0988_168.webp",
         isPrimary: true,
-        isHires: false
-      }
+        isHires: false,
+      },
     ],
     is_home_core: false,
     highlights: "",
-    scenarios: "采用加大料口，进料更方便，不易伤手\n一键开关机，操作便捷\n二挡刀片可反转，进料口可直接热水冲洗，清理方便\n采用直流电机，噪音小\n包裹304不锈钢刀轴，换洗轻便，运转省力，使用耐久\n升级可拆卸一体式支腿，更加稳固\n嵌入式食品级硅胶防水圈，更防水、更环保、更健康",
-    usage: "采用加大料口，进料更方便，不易伤手\n一键开关机，操作便捷\n二挡刀片可反转，进料口可直接热水冲洗，清理方便\n采用直流电机，噪音小\n包裹304不锈钢刀轴，换洗轻便，运转省力，使用耐久\n升级可拆卸一体式支腿，更加稳固\n嵌入式食品级硅胶防水圈，更防水、更环保、更健康",
-    usageEn: "Usage: Restaurant chains, snack shops, canteens, central kitchens; Suitable for scallion shredding, one-button operation for quick output. Capacity: Efficient shredding for small to medium food service."
+    scenarios:
+      "采用加大料口，进料更方便，不易伤手\n一键开关机，操作便捷\n二挡刀片可反转，进料口可直接热水冲洗，清理方便\n采用直流电机，噪音小\n包裹304不锈钢刀轴，换洗轻便，运转省力，使用耐久\n升级可拆卸一体式支腿，更加稳固\n嵌入式食品级硅胶防水圈，更防水、更环保、更健康",
+    usage:
+      "采用加大料口，进料更方便，不易伤手\n一键开关机，操作便捷\n二挡刀片可反转，进料口可直接热水冲洗，清理方便\n采用直流电机，噪音小\n包裹304不锈钢刀轴，换洗轻便，运转省力，使用耐久\n升级可拆卸一体式支腿，更加稳固\n嵌入式食品级硅胶防水圈，更防水、更环保、更健康",
+    usageEn:
+      "Usage: Restaurant chains, snack shops, canteens, central kitchens; Suitable for scallion shredding, one-button operation for quick output. Capacity: Efficient shredding for small to medium food service.",
   },
   {
     model: "XC-0888",
@@ -137,8 +155,10 @@ window.PRODUCT_DATA_TABLE = [
     nameEn: "Multi-function Vegetable Cutter",
     category: "切配系列",
     subCategory: "切菜机",
-    specifications: "材质：采用全钢刀盘，精钢刀片；电压：220V；频率：50Hz；刀组：多刀组设计，横切刀和网格刀组合；切丁尺寸：多种刀网可选，适应不同尺寸；出料口：特殊设计，出料顺畅；安全：安全开关设计；防滑：底部大支撑加防滑设计",
-    specificationsEn: "Material: Full steel cutter disc, precision steel blades; Voltage: 220V; Frequency: 50Hz; Blade sets: Multi-blade design, combining cross-cut and grid blades; Dicing sizes: Various grid options available; Discharge: Specially designed for smooth output; Safety: Safety switch design; Anti-slip: Large base with anti-slip design",
+    specifications:
+      "材质：采用全钢刀盘，精钢刀片；电压：220V；频率：50Hz；刀组：多刀组设计，横切刀和网格刀组合；切丁尺寸：多种刀网可选，适应不同尺寸；出料口：特殊设计，出料顺畅；安全：安全开关设计；防滑：底部大支撑加防滑设计",
+    specificationsEn:
+      "Material: Full steel cutter disc, precision steel blades; Voltage: 220V; Frequency: 50Hz; Blade sets: Multi-blade design, combining cross-cut and grid blades; Dicing sizes: Various grid options available; Discharge: Specially designed for smooth output; Safety: Safety switch design; Anti-slip: Large base with anti-slip design",
     power: "",
     voltage: "220V",
     material: "全钢刀盘；精钢刀片",
@@ -153,14 +173,17 @@ window.PRODUCT_DATA_TABLE = [
       {
         filePath: "/assets/images/products/XC-0888_169.webp",
         isPrimary: true,
-        isHires: false
-      }
+        isHires: false,
+      },
     ],
     is_home_core: false,
     highlights: "",
-    scenarios: "采用加大料口，进料更方便，不易伤手\n出料口特殊设计，出料更顺畅\n底部大支撑加防滑设计，切菜更稳定\n全钢刀盘，精钢刀片，多刀组设计，多种食材都能切\n刀网可选，可切不同尺寸的蔬菜丁\n横切刀和网格刀组合设计，切丁一次成型\n安全开关设计，使用无后顾之忧",
-    usage: "采用加大料口，进料更方便，不易伤手\n出料口特殊设计，出料更顺畅\n底部大支撑加防滑设计，切菜更稳定\n全钢刀盘，精钢刀片，多刀组设计，多种食材都能切\n刀网可选，可切不同尺寸的蔬菜丁\n横切刀和网格刀组合设计，切丁一次成型\n安全开关设计，使用无后顾之忧",
-    usageEn: "Usage: Restaurant chains, canteens, central kitchens, pre-cut vegetable processing; Suitable for multi-vegetable dicing and slicing, one-pass operation. Capacity: Efficient vegetable processing, labor-saving."
+    scenarios:
+      "采用加大料口，进料更方便，不易伤手\n出料口特殊设计，出料更顺畅\n底部大支撑加防滑设计，切菜更稳定\n全钢刀盘，精钢刀片，多刀组设计，多种食材都能切\n刀网可选，可切不同尺寸的蔬菜丁\n横切刀和网格刀组合设计，切丁一次成型\n安全开关设计，使用无后顾之忧",
+    usage:
+      "采用加大料口，进料更方便，不易伤手\n出料口特殊设计，出料更顺畅\n底部大支撑加防滑设计，切菜更稳定\n全钢刀盘，精钢刀片，多刀组设计，多种食材都能切\n刀网可选，可切不同尺寸的蔬菜丁\n横切刀和网格刀组合设计，切丁一次成型\n安全开关设计，使用无后顾之忧",
+    usageEn:
+      "Usage: Restaurant chains, canteens, central kitchens, pre-cut vegetable processing; Suitable for multi-vegetable dicing and slicing, one-pass operation. Capacity: Efficient vegetable processing, labor-saving.",
   },
   {
     model: "XC-1088",
@@ -169,8 +192,10 @@ window.PRODUCT_DATA_TABLE = [
     nameEn: "Multi-function Shredder",
     category: "切配系列",
     subCategory: "刨丝机",
-    specifications: "材质：采用精钢刀片；电机：直流电机，噪音小；刀片：十字花刀设计，防滑固定食材；操作：一键开关机，二挡可自动回卷食材；电压：220V；频率：50Hz；款式：电动款和手动款可选；清洗：机器可直接抹布擦拭",
-    specificationsEn: "Material: Precision steel blades; Motor: DC motor, low noise; Blade: Cross-cut design prevents food slipping; Operation: One-button on/off, 2-speed auto-retract; Voltage: 220V; Frequency: 50Hz; Versions: Electric and manual options available; Cleaning: Wipe-clean surface",
+    specifications:
+      "材质：采用精钢刀片；电机：直流电机，噪音小；刀片：十字花刀设计，防滑固定食材；操作：一键开关机，二挡可自动回卷食材；电压：220V；频率：50Hz；款式：电动款和手动款可选；清洗：机器可直接抹布擦拭",
+    specificationsEn:
+      "Material: Precision steel blades; Motor: DC motor, low noise; Blade: Cross-cut design prevents food slipping; Operation: One-button on/off, 2-speed auto-retract; Voltage: 220V; Frequency: 50Hz; Versions: Electric and manual options available; Cleaning: Wipe-clean surface",
     power: "",
     voltage: "220V",
     material: "精钢刀片",
@@ -185,14 +210,17 @@ window.PRODUCT_DATA_TABLE = [
       {
         filePath: "/assets/images/products/XC-1088_170.webp",
         isPrimary: true,
-        isHires: false
-      }
+        isHires: false,
+      },
     ],
     is_home_core: false,
     highlights: "",
-    scenarios: "十字花刀设计，防滑固定食材，更方便放料\n一键开关机，操作便捷\n二挡可自动回卷食材，整齐不凌乱\n采用直流电机，噪音小\n精钢刀片，换洗轻便，运转省力，使用耐久\n机器可直接抹布擦拭，清理方便\n电动款和手动款可选、满足不同需求",
-    usage: "十字花刀设计，防滑固定食材，更方便放料\n一键开关机，操作便捷\n二挡可自动回卷食材，整齐不凌乱\n采用直流电机，噪音小\n精钢刀片，换洗轻便，运转省力，使用耐久\n机器可直接抹布擦拭，清理方便\n电动款和手动款可选、满足不同需求",
-    usageEn: "Usage: Restaurant chains, snack shops, canteens, home kitchens; Suitable for multi-ingredient shredding, cross-cut anti-slip design for easy operation. Capacity: Quick shredding for small to medium food service."
+    scenarios:
+      "十字花刀设计，防滑固定食材，更方便放料\n一键开关机，操作便捷\n二挡可自动回卷食材，整齐不凌乱\n采用直流电机，噪音小\n精钢刀片，换洗轻便，运转省力，使用耐久\n机器可直接抹布擦拭，清理方便\n电动款和手动款可选、满足不同需求",
+    usage:
+      "十字花刀设计，防滑固定食材，更方便放料\n一键开关机，操作便捷\n二挡可自动回卷食材，整齐不凌乱\n采用直流电机，噪音小\n精钢刀片，换洗轻便，运转省力，使用耐久\n机器可直接抹布擦拭，清理方便\n电动款和手动款可选、满足不同需求",
+    usageEn:
+      "Usage: Restaurant chains, snack shops, canteens, home kitchens; Suitable for multi-ingredient shredding, cross-cut anti-slip design for easy operation. Capacity: Quick shredding for small to medium food service.",
   },
   {
     model: "DLB-TBS30",
@@ -201,8 +229,10 @@ window.PRODUCT_DATA_TABLE = [
     nameEn: "Countertop Top-stirring Flat-bottom Wok Cooker",
     category: "翻炒系列",
     subCategory: "搅拌炒菜机",
-    specifications: "材质：采用优质不锈钢 功率：5kW；电压：220V；频率：50Hz 锅体：直径约Φ296mm，深度80mm，不粘锅 显示屏：多功能数码显示屏 智能定时：8组记忆菜谱，定时菜单功能 火力调节：多档位可调，旋钮式调节 翻炒速度：5 档旋钮调节搅拌速度 翻炒方式：采用行星搅拌，刮底刮边设计",
-    specificationsEn: "Material: Premium stainless steel; Power: 5kW; Voltage: 220V; Frequency: 50Hz; Wok Body: Diameter approx. Φ296mm, depth 80mm, non-stick; Display: Multi-function digital display; Smart Timing: 8 sets of recipe memory, timed menu function; Heat Control: Multi-level adjustable, knob adjustment; Stirring Speed: 5-level knob adjustable stirring speed; Stirring Method: Planetary stirring with bottom-scraping and side-scraping design",
+    specifications:
+      "材质：采用优质不锈钢 功率：5kW；电压：220V；频率：50Hz 锅体：直径约Φ296mm，深度80mm，不粘锅 显示屏：多功能数码显示屏 智能定时：8组记忆菜谱，定时菜单功能 火力调节：多档位可调，旋钮式调节 翻炒速度：5 档旋钮调节搅拌速度 翻炒方式：采用行星搅拌，刮底刮边设计",
+    specificationsEn:
+      "Material: Premium stainless steel; Power: 5kW; Voltage: 220V; Frequency: 50Hz; Wok Body: Diameter approx. Φ296mm, depth 80mm, non-stick; Display: Multi-function digital display; Smart Timing: 8 sets of recipe memory, timed menu function; Heat Control: Multi-level adjustable, knob adjustment; Stirring Speed: 5-level knob adjustable stirring speed; Stirring Method: Planetary stirring with bottom-scraping and side-scraping design",
     power: "5kW",
     voltage: "220V",
     material: "采用优质不锈钢",
@@ -217,20 +247,23 @@ window.PRODUCT_DATA_TABLE = [
       {
         filePath: "/assets/images/products/DLB-TBS30-1.webp",
         isPrimary: true,
-        isHires: false
+        isHires: false,
       },
       {
         filePath: "/assets/images/products/DLB-TBS30-hires.webp",
         isPrimary: false,
-        isHires: true
-      }
+        isHires: true,
+      },
     ],
     is_home_core: false,
     highlights: "",
-    scenarios: "用途：餐饮连锁、外 卖、小食店等场所； 适用于自动烹饪炒菜 、炒饭、炒粉、炒面 、辣子鸡、麻辣香锅 、小龙虾、香辣虾蟹 等。 产能：单次烹饪200- 1000g。",
-    usage: "用途：餐饮连锁、外 卖、小食店等场所； 适用于自动烹饪炒菜 、炒饭、炒粉、炒面 、辣子鸡、麻辣香锅 、小龙虾、香辣虾蟹 等。 产能：单次烹饪200- 1000g。",
-    usageEn: "Suitable for restaurant chains, food delivery, snack shops and more. Ideal for automatic cooking of stir-fried dishes, fried rice, fried noodles, chow mein, spicy chicken, spicy hot pot, crawfish, spicy shrimp & crab, and more. Capacity: 200–1000 g per batch.",
-    materialEn: "Premium stainless steel"
+    scenarios:
+      "用途：餐饮连锁、外 卖、小食店等场所； 适用于自动烹饪炒菜 、炒饭、炒粉、炒面 、辣子鸡、麻辣香锅 、小龙虾、香辣虾蟹 等。 产能：单次烹饪200- 1000g。",
+    usage:
+      "用途：餐饮连锁、外 卖、小食店等场所； 适用于自动烹饪炒菜 、炒饭、炒粉、炒面 、辣子鸡、麻辣香锅 、小龙虾、香辣虾蟹 等。 产能：单次烹饪200- 1000g。",
+    usageEn:
+      "Suitable for restaurant chains, food delivery, snack shops and more. Ideal for automatic cooking of stir-fried dishes, fried rice, fried noodles, chow mein, spicy chicken, spicy hot pot, crawfish, spicy shrimp & crab, and more. Capacity: 200–1000 g per batch.",
+    materialEn: "Premium stainless steel",
   },
   {
     model: "DLB-TBQ30",
@@ -239,8 +272,10 @@ window.PRODUCT_DATA_TABLE = [
     nameEn: "Countertop Top-stirring Flat-bottom Wok Cooker (Voice Prompt)",
     category: "翻炒系列",
     subCategory: "搅拌炒菜机",
-    specifications: "材质：整机外壳不锈钢材质 功率：3.5/5kW；电压：220V；频率：50Hz 锅体：直径约Φ296mm，深度80mm，不粘锅 显示屏：7寸多功能触摸显示屏 菜谱：可存储800个菜谱（智能学习功能） 语音：智能实时语音播报功能 搅拌角度：搅拌系统自动抬起 翻炒方式： 自转公转结合行星搅拌结构 火力和翻炒速度：多档位自动调节",
-    specificationsEn: "Material: Entire housing made of stainless steel; Power: 3.5/5kW; Voltage: 220V; Frequency: 50Hz; Wok Body: Diameter approx. Φ296mm, depth 80mm, non-stick; Display: 7-inch multi-function touch display; Recipes: Stores up to 800 recipes (smart learning function); Voice: Smart real-time voice broadcast; Stirring Angle: Stirring system auto-lifts; Stirring Method: Self-rotation + revolution combined planetary stirring structure; Heat and Stirring Speed: Multi-level auto-adjustment",
+    specifications:
+      "材质：整机外壳不锈钢材质 功率：3.5/5kW；电压：220V；频率：50Hz 锅体：直径约Φ296mm，深度80mm，不粘锅 显示屏：7寸多功能触摸显示屏 菜谱：可存储800个菜谱（智能学习功能） 语音：智能实时语音播报功能 搅拌角度：搅拌系统自动抬起 翻炒方式： 自转公转结合行星搅拌结构 火力和翻炒速度：多档位自动调节",
+    specificationsEn:
+      "Material: Entire housing made of stainless steel; Power: 3.5/5kW; Voltage: 220V; Frequency: 50Hz; Wok Body: Diameter approx. Φ296mm, depth 80mm, non-stick; Display: 7-inch multi-function touch display; Recipes: Stores up to 800 recipes (smart learning function); Voice: Smart real-time voice broadcast; Stirring Angle: Stirring system auto-lifts; Stirring Method: Self-rotation + revolution combined planetary stirring structure; Heat and Stirring Speed: Multi-level auto-adjustment",
     power: "3.5/5kW",
     voltage: "220V",
     material: "整机外壳不锈钢材质",
@@ -255,20 +290,23 @@ window.PRODUCT_DATA_TABLE = [
       {
         filePath: "/assets/images/products/DLB-TBQ30-1.webp",
         isPrimary: true,
-        isHires: false
+        isHires: false,
       },
       {
         filePath: "/assets/images/products/DLB-TBQ30-hires.webp",
         isPrimary: false,
-        isHires: true
-      }
+        isHires: true,
+      },
     ],
     is_home_core: false,
     highlights: "",
-    scenarios: "用途：餐饮连锁、外 卖、小食店等场所； 适用于自动烹饪炒菜 、炒饭、炒粉、炒面 、辣子鸡、麻辣香锅 、小龙虾、香辣虾蟹 等。   产能：单次烹 饪200-1000g。",
-    usage: "用途：餐饮连锁、外 卖、小食店等场所； 适用于自动烹饪炒菜 、炒饭、炒粉、炒面 、辣子鸡、麻辣香锅 、小龙虾、香辣虾蟹 等。   产能：单次烹 饪200-1000g。",
-    usageEn: "Suitable for restaurant chains, food delivery, snack shops and more. Ideal for automatic cooking of stir-fried dishes, fried rice, fried noodles, chow mein, spicy chicken, spicy hot pot, crawfish, spicy shrimp & crab, and more. Capacity: 200–1000 g per batch.",
-    materialEn: "Full stainless steel body"
+    scenarios:
+      "用途：餐饮连锁、外 卖、小食店等场所； 适用于自动烹饪炒菜 、炒饭、炒粉、炒面 、辣子鸡、麻辣香锅 、小龙虾、香辣虾蟹 等。   产能：单次烹 饪200-1000g。",
+    usage:
+      "用途：餐饮连锁、外 卖、小食店等场所； 适用于自动烹饪炒菜 、炒饭、炒粉、炒面 、辣子鸡、麻辣香锅 、小龙虾、香辣虾蟹 等。   产能：单次烹 饪200-1000g。",
+    usageEn:
+      "Suitable for restaurant chains, food delivery, snack shops and more. Ideal for automatic cooking of stir-fried dishes, fried rice, fried noodles, chow mein, spicy chicken, spicy hot pot, crawfish, spicy shrimp & crab, and more. Capacity: 200–1000 g per batch.",
+    materialEn: "Full stainless steel body",
   },
   {
     model: "DLB-TQBQ30",
@@ -277,8 +315,10 @@ window.PRODUCT_DATA_TABLE = [
     nameEn: "Countertop Top-stirring Flat-bottom Wok Cooker (Voice+Auto Feed)",
     category: "翻炒系列",
     subCategory: "搅拌炒菜机",
-    specifications: "材质：整机外壳不锈钢材质 功率：3.5/5kW；电压：220V；频率：50Hz 锅体：直径约Φ296mm，深度80mm，不粘锅 显示屏：7寸多功能触摸显示屏 菜谱：可存储800个菜谱（智能学习功能） 语音：智能实时语音播报功能 喷料：带4路自动喷料口， 自动定量加料 搅拌角度：搅拌系统自动抬起 翻炒方式： 自转公转结合行星搅拌结构 火力和翻炒速度：多档位自动调节",
-    specificationsEn: "Material: Entire housing made of stainless steel; Power: 3.5/5kW; Voltage: 220V; Frequency: 50Hz; Wok Body: Diameter approx. Φ296mm, depth 80mm, non-stick; Display: 7-inch multi-function touch display; Recipes: Stores up to 800 recipes (smart learning function); Voice: Smart real-time voice broadcast; Oil Spray: Equipped with 4-way auto oil spray ports, auto quantitative feeding; Stirring Angle: Stirring system auto-lifts; Stirring Method: Self-rotation + revolution combined planetary stirring structure; Heat and Stirring Speed: Multi-level auto-adjustment",
+    specifications:
+      "材质：整机外壳不锈钢材质 功率：3.5/5kW；电压：220V；频率：50Hz 锅体：直径约Φ296mm，深度80mm，不粘锅 显示屏：7寸多功能触摸显示屏 菜谱：可存储800个菜谱（智能学习功能） 语音：智能实时语音播报功能 喷料：带4路自动喷料口， 自动定量加料 搅拌角度：搅拌系统自动抬起 翻炒方式： 自转公转结合行星搅拌结构 火力和翻炒速度：多档位自动调节",
+    specificationsEn:
+      "Material: Entire housing made of stainless steel; Power: 3.5/5kW; Voltage: 220V; Frequency: 50Hz; Wok Body: Diameter approx. Φ296mm, depth 80mm, non-stick; Display: 7-inch multi-function touch display; Recipes: Stores up to 800 recipes (smart learning function); Voice: Smart real-time voice broadcast; Oil Spray: Equipped with 4-way auto oil spray ports, auto quantitative feeding; Stirring Angle: Stirring system auto-lifts; Stirring Method: Self-rotation + revolution combined planetary stirring structure; Heat and Stirring Speed: Multi-level auto-adjustment",
     power: "3.5/5kW",
     voltage: "220V",
     material: "整机外壳不锈钢材质",
@@ -293,15 +333,18 @@ window.PRODUCT_DATA_TABLE = [
       {
         filePath: "/assets/images/products/DLB-TQBQ30-1.webp",
         isPrimary: true,
-        isHires: false
-      }
+        isHires: false,
+      },
     ],
     is_home_core: false,
     highlights: "",
-    scenarios: "用途：餐饮连锁、外 卖、小食店等场所； 适用于自动烹饪炒菜 、炒饭、炒粉、炒面 、辣子鸡、麻辣香锅 、小龙虾、香辣虾蟹 等。   产能：单次烹 饪200-1000g。",
-    usage: "用途：餐饮连锁、外 卖、小食店等场所； 适用于自动烹饪炒菜 、炒饭、炒粉、炒面 、辣子鸡、麻辣香锅 、小龙虾、香辣虾蟹 等。   产能：单次烹 饪200-1000g。",
-    usageEn: "Suitable for restaurant chains, food delivery, snack shops and more. Ideal for automatic cooking of stir-fried dishes, fried rice, fried noodles, chow mein, spicy chicken, spicy hot pot, crawfish, spicy shrimp & crab, and more. Capacity: 200–1000 g per batch.",
-    materialEn: "Full stainless steel body"
+    scenarios:
+      "用途：餐饮连锁、外 卖、小食店等场所； 适用于自动烹饪炒菜 、炒饭、炒粉、炒面 、辣子鸡、麻辣香锅 、小龙虾、香辣虾蟹 等。   产能：单次烹 饪200-1000g。",
+    usage:
+      "用途：餐饮连锁、外 卖、小食店等场所； 适用于自动烹饪炒菜 、炒饭、炒粉、炒面 、辣子鸡、麻辣香锅 、小龙虾、香辣虾蟹 等。   产能：单次烹 饪200-1000g。",
+    usageEn:
+      "Suitable for restaurant chains, food delivery, snack shops and more. Ideal for automatic cooking of stir-fried dishes, fried rice, fried noodles, chow mein, spicy chicken, spicy hot pot, crawfish, spicy shrimp & crab, and more. Capacity: 200–1000 g per batch.",
+    materialEn: "Full stainless steel body",
   },
   {
     model: "DLB-4BQ30",
@@ -310,8 +353,10 @@ window.PRODUCT_DATA_TABLE = [
     nameEn: "Cabinet Top-stirring Flat-bottom Wok Cooker (Voice Prompt)",
     category: "翻炒系列",
     subCategory: "搅拌炒菜机",
-    specifications: "材质：整机外壳不锈钢材质 功率：3.5/5kW*4； 电压：380V；频率：50Hz 锅体：直径约Φ296mm，深度80mm，不粘锅 显示屏：7寸多功能触摸显示屏 菜谱：可存储800个菜谱（智能学习功能） 语音：智能实时语音播报功能 搅拌角度：搅拌系统自动抬起 翻炒方式： 自转公转结合行星搅拌结构 火力和翻炒速度：多档位自动调节",
-    specificationsEn: "Material: Entire housing made of stainless steel; Power: 3.5/5kW*4; Voltage: 380V; Frequency: 50Hz; Wok Body: Diameter approx. Φ296mm, depth 80mm, non-stick; Display: 7-inch multi-function touch display; Recipes: Stores up to 800 recipes (smart learning function); Voice: Smart real-time voice broadcast; Stirring Angle: Stirring system auto-lifts; Stirring Method: Self-rotation + revolution combined planetary stirring structure; Heat and Stirring Speed: Multi-level auto-adjustment",
+    specifications:
+      "材质：整机外壳不锈钢材质 功率：3.5/5kW*4； 电压：380V；频率：50Hz 锅体：直径约Φ296mm，深度80mm，不粘锅 显示屏：7寸多功能触摸显示屏 菜谱：可存储800个菜谱（智能学习功能） 语音：智能实时语音播报功能 搅拌角度：搅拌系统自动抬起 翻炒方式： 自转公转结合行星搅拌结构 火力和翻炒速度：多档位自动调节",
+    specificationsEn:
+      "Material: Entire housing made of stainless steel; Power: 3.5/5kW*4; Voltage: 380V; Frequency: 50Hz; Wok Body: Diameter approx. Φ296mm, depth 80mm, non-stick; Display: 7-inch multi-function touch display; Recipes: Stores up to 800 recipes (smart learning function); Voice: Smart real-time voice broadcast; Stirring Angle: Stirring system auto-lifts; Stirring Method: Self-rotation + revolution combined planetary stirring structure; Heat and Stirring Speed: Multi-level auto-adjustment",
     power: "3.5/5kW*4",
     voltage: "380V",
     material: "整机外壳不锈钢材质",
@@ -326,20 +371,23 @@ window.PRODUCT_DATA_TABLE = [
       {
         filePath: "/assets/images/products/DLB-4BQ30-1.webp",
         isPrimary: true,
-        isHires: false
+        isHires: false,
       },
       {
         filePath: "/assets/images/products/DLB-4BQ30-hires.webp",
         isPrimary: false,
-        isHires: true
-      }
+        isHires: true,
+      },
     ],
     is_home_core: false,
     highlights: "",
-    scenarios: "用途：餐饮连锁、外 卖、小食店等场所； 适用于自动烹饪炒菜 、炒饭、炒粉、炒面 、炒菜等。   产能： 单次烹饪200-1000g。",
-    usage: "用途：餐饮连锁、外 卖、小食店等场所； 适用于自动烹饪炒菜 、炒饭、炒粉、炒面 、炒菜等。   产能： 单次烹饪200-1000g。",
-    usageEn: "Suitable for restaurant chains, food delivery, snack shops and more. Ideal for automatic cooking of stir-fried dishes, fried rice, fried noodles, chow mein, and more. Capacity: 200–1000 g per batch.",
-    materialEn: "Full stainless steel body"
+    scenarios:
+      "用途：餐饮连锁、外 卖、小食店等场所； 适用于自动烹饪炒菜 、炒饭、炒粉、炒面 、炒菜等。   产能： 单次烹饪200-1000g。",
+    usage:
+      "用途：餐饮连锁、外 卖、小食店等场所； 适用于自动烹饪炒菜 、炒饭、炒粉、炒面 、炒菜等。   产能： 单次烹饪200-1000g。",
+    usageEn:
+      "Suitable for restaurant chains, food delivery, snack shops and more. Ideal for automatic cooking of stir-fried dishes, fried rice, fried noodles, chow mein, and more. Capacity: 200–1000 g per batch.",
+    materialEn: "Full stainless steel body",
   },
   {
     model: "DLB-4QBQ30",
@@ -348,8 +396,10 @@ window.PRODUCT_DATA_TABLE = [
     nameEn: "Cabinet Top-stirring Flat-bottom Wok Cooker (Voice+Auto Feed)",
     category: "翻炒系列",
     subCategory: "搅拌炒菜机",
-    specifications: "材质：整机外壳不锈钢材质 功率：3.5/5kW*4； 电压：380V；频率：50Hz 锅体：直径约Φ296mm，深度80mm，不粘锅 显示屏：7寸多功能触摸显示屏 菜谱：可存储800个菜谱（智能学习功能） 语音：智能实时语音播报功能 喷料：带4路自动喷料口， 自动定量加料 搅拌角度：搅拌系统自动抬起 翻炒方式： 自转公转结合行星搅拌结构 火力和翻炒速度：多档位自动调节",
-    specificationsEn: "Material: Entire housing made of stainless steel; Power: 3.5/5kW*4; Voltage: 380V; Frequency: 50Hz; Wok Body: Diameter approx. Φ296mm, depth 80mm, non-stick; Display: 7-inch multi-function touch display; Recipes: Stores up to 800 recipes (smart learning function); Voice: Smart real-time voice broadcast; Oil Spray: Equipped with 4-way auto oil spray ports, auto quantitative feeding; Stirring Angle: Stirring system auto-lifts; Stirring Method: Self-rotation + revolution combined planetary stirring structure; Heat and Stirring Speed: Multi-level auto-adjustment",
+    specifications:
+      "材质：整机外壳不锈钢材质 功率：3.5/5kW*4； 电压：380V；频率：50Hz 锅体：直径约Φ296mm，深度80mm，不粘锅 显示屏：7寸多功能触摸显示屏 菜谱：可存储800个菜谱（智能学习功能） 语音：智能实时语音播报功能 喷料：带4路自动喷料口， 自动定量加料 搅拌角度：搅拌系统自动抬起 翻炒方式： 自转公转结合行星搅拌结构 火力和翻炒速度：多档位自动调节",
+    specificationsEn:
+      "Material: Entire housing made of stainless steel; Power: 3.5/5kW*4; Voltage: 380V; Frequency: 50Hz; Wok Body: Diameter approx. Φ296mm, depth 80mm, non-stick; Display: 7-inch multi-function touch display; Recipes: Stores up to 800 recipes (smart learning function); Voice: Smart real-time voice broadcast; Oil Spray: Equipped with 4-way auto oil spray ports, auto quantitative feeding; Stirring Angle: Stirring system auto-lifts; Stirring Method: Self-rotation + revolution combined planetary stirring structure; Heat and Stirring Speed: Multi-level auto-adjustment",
     power: "3.5/5kW*4",
     voltage: "380V",
     material: "整机外壳不锈钢材质",
@@ -364,20 +414,23 @@ window.PRODUCT_DATA_TABLE = [
       {
         filePath: "/assets/images/products/DLB-4QBQ30-1.webp",
         isPrimary: true,
-        isHires: false
+        isHires: false,
       },
       {
         filePath: "/assets/images/products/DLB-4QBQ30-hires.webp",
         isPrimary: false,
-        isHires: true
-      }
+        isHires: true,
+      },
     ],
     is_home_core: false,
     highlights: "",
-    scenarios: "用途：餐饮连锁、外 卖、小食店等场所； 适用于自动烹饪炒菜 、炒饭、炒粉、炒面 、炒菜等。   产能： 单次烹饪200-1000g。",
-    usage: "用途：餐饮连锁、外 卖、小食店等场所； 适用于自动烹饪炒菜 、炒饭、炒粉、炒面 、炒菜等。   产能： 单次烹饪200-1000g。",
-    usageEn: "Suitable for restaurant chains, food delivery, snack shops and more. Ideal for automatic cooking of stir-fried dishes, fried rice, fried noodles, chow mein, and more. Capacity: 200–1000 g per batch.",
-    materialEn: "Full stainless steel body"
+    scenarios:
+      "用途：餐饮连锁、外 卖、小食店等场所； 适用于自动烹饪炒菜 、炒饭、炒粉、炒面 、炒菜等。   产能： 单次烹饪200-1000g。",
+    usage:
+      "用途：餐饮连锁、外 卖、小食店等场所； 适用于自动烹饪炒菜 、炒饭、炒粉、炒面 、炒菜等。   产能： 单次烹饪200-1000g。",
+    usageEn:
+      "Suitable for restaurant chains, food delivery, snack shops and more. Ideal for automatic cooking of stir-fried dishes, fried rice, fried noodles, chow mein, and more. Capacity: 200–1000 g per batch.",
+    materialEn: "Full stainless steel body",
   },
   {
     model: "DLB-TBS40",
@@ -386,8 +439,10 @@ window.PRODUCT_DATA_TABLE = [
     nameEn: "Countertop Top-stirring Arc-bottom Wok Cooker",
     category: "翻炒系列",
     subCategory: "搅拌炒菜机",
-    specifications: "材质：整机外壳不锈钢材质 功率：5kW；电压：220V；频率：50Hz 锅体规格： Φ400mm，容量：8L 锅体材质：无涂层生铁锅不易粘锅 显示屏：多功能数码显示屏 搅拌角度：搅拌系统可往上抬起 ，方便出料 翻炒方式： 自转公转结合行星搅拌结构 火力和翻炒速度：多档位可调节",
-    specificationsEn: "Material: Entire housing made of stainless steel; Power: 5kW; Voltage: 220V; Frequency: 50Hz; Wok Body Specs: Φ400mm, Capacity: 8L; Wok Body Material: Uncoated cast iron wok, resistant to sticking; Display: Multi-function digital display; Stirring Angle: Stirring system can lift up for easy discharging; Stirring Method: Self-rotation + revolution combined planetary stirring structure; Heat and Stirring Speed: Multi-level adjustable",
+    specifications:
+      "材质：整机外壳不锈钢材质 功率：5kW；电压：220V；频率：50Hz 锅体规格： Φ400mm，容量：8L 锅体材质：无涂层生铁锅不易粘锅 显示屏：多功能数码显示屏 搅拌角度：搅拌系统可往上抬起 ，方便出料 翻炒方式： 自转公转结合行星搅拌结构 火力和翻炒速度：多档位可调节",
+    specificationsEn:
+      "Material: Entire housing made of stainless steel; Power: 5kW; Voltage: 220V; Frequency: 50Hz; Wok Body Specs: Φ400mm, Capacity: 8L; Wok Body Material: Uncoated cast iron wok, resistant to sticking; Display: Multi-function digital display; Stirring Angle: Stirring system can lift up for easy discharging; Stirring Method: Self-rotation + revolution combined planetary stirring structure; Heat and Stirring Speed: Multi-level adjustable",
     power: "5kW",
     voltage: "220V",
     material: "整机外壳不锈钢材质",
@@ -402,20 +457,23 @@ window.PRODUCT_DATA_TABLE = [
       {
         filePath: "/assets/images/products/DLB-TBS40-1.webp",
         isPrimary: true,
-        isHires: false
+        isHires: false,
       },
       {
         filePath: "/assets/images/products/DLB-TBS40-hires.webp",
         isPrimary: false,
-        isHires: true
-      }
+        isHires: true,
+      },
     ],
     is_home_core: false,
     highlights: "",
-    scenarios: "用途：餐饮连锁、外 卖、小食店等场所； 适用于自动烹饪炒菜 、炒饭、炒粉、炒面 、炒菜等。   产能： 单次烹饪200-1000g。",
-    usage: "用途：餐饮连锁、外 卖、小食店等场所； 适用于自动烹饪炒菜 、炒饭、炒粉、炒面 、炒菜等。   产能： 单次烹饪200-1000g。",
-    usageEn: "Suitable for restaurant chains, food delivery, snack shops and more. Ideal for automatic cooking of stir-fried dishes, fried rice, fried noodles, chow mein, and more. Capacity: 200–1000 g per batch.",
-    materialEn: "Full stainless steel body"
+    scenarios:
+      "用途：餐饮连锁、外 卖、小食店等场所； 适用于自动烹饪炒菜 、炒饭、炒粉、炒面 、炒菜等。   产能： 单次烹饪200-1000g。",
+    usage:
+      "用途：餐饮连锁、外 卖、小食店等场所； 适用于自动烹饪炒菜 、炒饭、炒粉、炒面 、炒菜等。   产能： 单次烹饪200-1000g。",
+    usageEn:
+      "Suitable for restaurant chains, food delivery, snack shops and more. Ideal for automatic cooking of stir-fried dishes, fried rice, fried noodles, chow mein, and more. Capacity: 200–1000 g per batch.",
+    materialEn: "Full stainless steel body",
   },
   {
     model: "DLB-TBS50",
@@ -424,8 +482,10 @@ window.PRODUCT_DATA_TABLE = [
     nameEn: "Countertop Top-stirring Arc-bottom Wok Cooker",
     category: "翻炒系列",
     subCategory: "搅拌炒菜机",
-    specifications: "材质：整机外壳不锈钢材质 功率：5kW；电压：220V；频率：50Hz 锅体规格： Φ500mm，容量：16L 锅体材质：无涂层生铁锅不易粘锅 显示屏：多功能数码显示屏 搅拌角度：搅拌系统可往上抬起 ，方便出料 翻炒方式： 自转公转结合行星搅拌结构 火力和翻炒速度：多档位可调节",
-    specificationsEn: "Material: Entire housing made of stainless steel; Power: 5kW; Voltage: 220V; Frequency: 50Hz; Wok Body Specs: Φ500mm, Capacity: 16L; Wok Body Material: Uncoated cast iron wok, resistant to sticking; Display: Multi-function digital display; Stirring Angle: Stirring system can lift up for easy discharging; Stirring Method: Self-rotation + revolution combined planetary stirring structure; Heat and Stirring Speed: Multi-level adjustable",
+    specifications:
+      "材质：整机外壳不锈钢材质 功率：5kW；电压：220V；频率：50Hz 锅体规格： Φ500mm，容量：16L 锅体材质：无涂层生铁锅不易粘锅 显示屏：多功能数码显示屏 搅拌角度：搅拌系统可往上抬起 ，方便出料 翻炒方式： 自转公转结合行星搅拌结构 火力和翻炒速度：多档位可调节",
+    specificationsEn:
+      "Material: Entire housing made of stainless steel; Power: 5kW; Voltage: 220V; Frequency: 50Hz; Wok Body Specs: Φ500mm, Capacity: 16L; Wok Body Material: Uncoated cast iron wok, resistant to sticking; Display: Multi-function digital display; Stirring Angle: Stirring system can lift up for easy discharging; Stirring Method: Self-rotation + revolution combined planetary stirring structure; Heat and Stirring Speed: Multi-level adjustable",
     power: "5kW",
     voltage: "220V",
     material: "整机外壳不锈钢材质",
@@ -440,20 +500,23 @@ window.PRODUCT_DATA_TABLE = [
       {
         filePath: "/assets/images/products/DLB-TBS50-1.webp",
         isPrimary: true,
-        isHires: false
+        isHires: false,
       },
       {
         filePath: "/assets/images/products/DLB-TBS50-hires.webp",
         isPrimary: false,
-        isHires: true
-      }
+        isHires: true,
+      },
     ],
     is_home_core: false,
     highlights: "",
-    scenarios: "用途：餐饮连锁、外 卖、小食店等场所； 适用于自动烹饪炒菜 、炒饭、炒粉、炒面 、炒菜等。   产能： 单次烹饪200-1000g。",
-    usage: "用途：餐饮连锁、外 卖、小食店等场所； 适用于自动烹饪炒菜 、炒饭、炒粉、炒面 、炒菜等。   产能： 单次烹饪200-1000g。",
-    usageEn: "Suitable for restaurant chains, food delivery, snack shops and more. Ideal for automatic cooking of stir-fried dishes, fried rice, fried noodles, chow mein, and more. Capacity: 200–1000 g per batch.",
-    materialEn: "Full stainless steel body"
+    scenarios:
+      "用途：餐饮连锁、外 卖、小食店等场所； 适用于自动烹饪炒菜 、炒饭、炒粉、炒面 、炒菜等。   产能： 单次烹饪200-1000g。",
+    usage:
+      "用途：餐饮连锁、外 卖、小食店等场所； 适用于自动烹饪炒菜 、炒饭、炒粉、炒面 、炒菜等。   产能： 单次烹饪200-1000g。",
+    usageEn:
+      "Suitable for restaurant chains, food delivery, snack shops and more. Ideal for automatic cooking of stir-fried dishes, fried rice, fried noodles, chow mein, and more. Capacity: 200–1000 g per batch.",
+    materialEn: "Full stainless steel body",
   },
   {
     model: "DLB-TZS40",
@@ -462,8 +525,10 @@ window.PRODUCT_DATA_TABLE = [
     nameEn: "Countertop Rotary Stir-fry Wok Cooker (Fried Rice)",
     category: "翻炒系列",
     subCategory: "搅拌炒菜机",
-    specifications: "材质：采用优质不锈钢 功率：5kW；电压：220V；频率：50Hz 锅体规格： Φ400 锅体容量：8L加护锅圈 锅体材质：无涂层生铁锅不粘锅 显示屏：多功能数码显示屏 搅拌角度：搅拌系统可往上抬起 ，方便出料 翻炒方式：锅体旋转+卧式立体翻炒加热 火力和翻炒速度：多档位可调节 正反转功能：破饭团，多方向翻炒",
-    specificationsEn: "Material: Premium stainless steel; Power: 5kW; Voltage: 220V; Frequency: 50Hz; Wok Body Specs: Φ400; Wok Body Capacity: 8L with protective wok ring; Wok Body Material: Uncoated cast iron wok, non-stick; Display: Multi-function digital display; Stirring Angle: Stirring system can lift up for easy discharging; Stirring Method: Wok body rotation + horizontal three-dimensional stirring and heating; Heat and Stirring Speed: Multi-level adjustable; Forward/Reverse Function: Breaks rice clumps, multi-directional stirring",
+    specifications:
+      "材质：采用优质不锈钢 功率：5kW；电压：220V；频率：50Hz 锅体规格： Φ400 锅体容量：8L加护锅圈 锅体材质：无涂层生铁锅不粘锅 显示屏：多功能数码显示屏 搅拌角度：搅拌系统可往上抬起 ，方便出料 翻炒方式：锅体旋转+卧式立体翻炒加热 火力和翻炒速度：多档位可调节 正反转功能：破饭团，多方向翻炒",
+    specificationsEn:
+      "Material: Premium stainless steel; Power: 5kW; Voltage: 220V; Frequency: 50Hz; Wok Body Specs: Φ400; Wok Body Capacity: 8L with protective wok ring; Wok Body Material: Uncoated cast iron wok, non-stick; Display: Multi-function digital display; Stirring Angle: Stirring system can lift up for easy discharging; Stirring Method: Wok body rotation + horizontal three-dimensional stirring and heating; Heat and Stirring Speed: Multi-level adjustable; Forward/Reverse Function: Breaks rice clumps, multi-directional stirring",
     power: "5kW",
     voltage: "220V",
     material: "采用优质不锈钢",
@@ -478,20 +543,23 @@ window.PRODUCT_DATA_TABLE = [
       {
         filePath: "/assets/images/products/DLB-TZS40-1.webp",
         isPrimary: true,
-        isHires: false
+        isHires: false,
       },
       {
         filePath: "/assets/images/products/DLB-TZS40-hires.webp",
         isPrimary: false,
-        isHires: true
-      }
+        isHires: true,
+      },
     ],
     is_home_core: false,
     highlights: "",
-    scenarios: "用途：餐饮连锁、外 卖、小食店等场所； 适用于自动烹饪炒菜 、炒饭、炒粉、炒面 、炒菜等。   产能： 单次烹饪300-1500g。",
-    usage: "用途：餐饮连锁、外 卖、小食店等场所； 适用于自动烹饪炒菜 、炒饭、炒粉、炒面 、炒菜等。   产能： 单次烹饪300-1500g。",
-    usageEn: "Suitable for restaurant chains, food delivery, snack shops and more. Ideal for automatic cooking of stir-fried dishes, fried rice, fried noodles, chow mein, and more. Capacity: 300–1500 g per batch.",
-    materialEn: "Premium stainless steel"
+    scenarios:
+      "用途：餐饮连锁、外 卖、小食店等场所； 适用于自动烹饪炒菜 、炒饭、炒粉、炒面 、炒菜等。   产能： 单次烹饪300-1500g。",
+    usage:
+      "用途：餐饮连锁、外 卖、小食店等场所； 适用于自动烹饪炒菜 、炒饭、炒粉、炒面 、炒菜等。   产能： 单次烹饪300-1500g。",
+    usageEn:
+      "Suitable for restaurant chains, food delivery, snack shops and more. Ideal for automatic cooking of stir-fried dishes, fried rice, fried noodles, chow mein, and more. Capacity: 300–1500 g per batch.",
+    materialEn: "Premium stainless steel",
   },
   {
     model: "DLB-TZS50",
@@ -500,8 +568,10 @@ window.PRODUCT_DATA_TABLE = [
     nameEn: "Countertop Rotary Stir-fry Wok Cooker (Fried Rice)",
     category: "翻炒系列",
     subCategory: "搅拌炒菜机",
-    specifications: "材质：采用优质不锈钢 功率：5kW；电压：220V；频率：50Hz 锅体规格： Φ500 锅体容量：16L加护锅圈 锅体材质：无涂层生铁锅不粘锅 显示屏：多功能数码显示屏 搅拌角度：搅拌系统可往上抬起 ，方便出料 翻炒方式：锅体旋转+卧式立体翻炒加热 火力和翻炒速度：多档位可调节 定制搅拌铲：针对不同食材定制翻炒铲",
-    specificationsEn: "Material: Premium stainless steel; Power: 5kW; Voltage: 220V; Frequency: 50Hz; Wok Body Specs: Φ500; Wok Body Capacity: 16L with protective wok ring; Wok Body Material: Uncoated cast iron wok, non-stick; Display: Multi-function digital display; Stirring Angle: Stirring system can lift up for easy discharging; Stirring Method: Wok body rotation + horizontal three-dimensional stirring and heating; Heat and Stirring Speed: Multi-level adjustable; Custom Stirring Paddle: Customized stirring paddle for different ingredients",
+    specifications:
+      "材质：采用优质不锈钢 功率：5kW；电压：220V；频率：50Hz 锅体规格： Φ500 锅体容量：16L加护锅圈 锅体材质：无涂层生铁锅不粘锅 显示屏：多功能数码显示屏 搅拌角度：搅拌系统可往上抬起 ，方便出料 翻炒方式：锅体旋转+卧式立体翻炒加热 火力和翻炒速度：多档位可调节 定制搅拌铲：针对不同食材定制翻炒铲",
+    specificationsEn:
+      "Material: Premium stainless steel; Power: 5kW; Voltage: 220V; Frequency: 50Hz; Wok Body Specs: Φ500; Wok Body Capacity: 16L with protective wok ring; Wok Body Material: Uncoated cast iron wok, non-stick; Display: Multi-function digital display; Stirring Angle: Stirring system can lift up for easy discharging; Stirring Method: Wok body rotation + horizontal three-dimensional stirring and heating; Heat and Stirring Speed: Multi-level adjustable; Custom Stirring Paddle: Customized stirring paddle for different ingredients",
     power: "5kW",
     voltage: "220V",
     material: "采用优质不锈钢",
@@ -516,20 +586,23 @@ window.PRODUCT_DATA_TABLE = [
       {
         filePath: "/assets/images/products/DLB-TZS50-1.webp",
         isPrimary: true,
-        isHires: false
+        isHires: false,
       },
       {
         filePath: "/assets/images/products/DLB-TZS50-hires.webp",
         isPrimary: false,
-        isHires: true
-      }
+        isHires: true,
+      },
     ],
     is_home_core: false,
     highlights: "",
-    scenarios: "用途：餐饮连锁、外 卖、小食店等场所； 适用于自动烹饪炒菜 、炒饭、炒粉、炒面 、炒菜等。   产能： 单次烹饪500-3000g。",
-    usage: "用途：餐饮连锁、外 卖、小食店等场所； 适用于自动烹饪炒菜 、炒饭、炒粉、炒面 、炒菜等。   产能： 单次烹饪500-3000g。",
-    usageEn: "Suitable for restaurant chains, food delivery, snack shops and more. Ideal for automatic cooking of stir-fried dishes, fried rice, fried noodles, chow mein, and more. Capacity: 500–3000 g per batch.",
-    materialEn: "Premium stainless steel"
+    scenarios:
+      "用途：餐饮连锁、外 卖、小食店等场所； 适用于自动烹饪炒菜 、炒饭、炒粉、炒面 、炒菜等。   产能： 单次烹饪500-3000g。",
+    usage:
+      "用途：餐饮连锁、外 卖、小食店等场所； 适用于自动烹饪炒菜 、炒饭、炒粉、炒面 、炒菜等。   产能： 单次烹饪500-3000g。",
+    usageEn:
+      "Suitable for restaurant chains, food delivery, snack shops and more. Ideal for automatic cooking of stir-fried dishes, fried rice, fried noodles, chow mein, and more. Capacity: 500–3000 g per batch.",
+    materialEn: "Premium stainless steel",
   },
   {
     model: "DLB-TGS30",
@@ -538,8 +611,10 @@ window.PRODUCT_DATA_TABLE = [
     nameEn: "Countertop 300 Induction Cooker (Manual)",
     category: "翻炒系列",
     subCategory: "滚筒炒菜机",
-    specifications: "材质：整机外壳不锈钢材质 功率：5kW；电压：220V；频率：50Hz 锅体规格：球釜型锅Φ300*H300 炒菜容量：4-6L（倾角30 °有效容量） 锅体材质：SUS409不锈钢不粘锅/铸铁锅 配置：多功能数码显示屏，8道菜谱记忆存储 锅倾角度：无极多角度手动半机械式倒菜 翻炒方式：采用360 °滚筒旋转立体翻炒加热 火力和翻炒速度：多档位可调节 清洗：高压水枪清洗，快捷高效",
-    specificationsEn: "Material: Entire housing made of stainless steel; Power: 5kW; Voltage: 220V; Frequency: 50Hz; Wok Body Specs: Dome-shaped wok Φ300*H300; Cooking Capacity: 4-6L (effective capacity at 30° tilt); Wok Body Material: SUS409 stainless steel non-stick wok / cast iron wok; Configuration: Multi-function digital display, 8-recipe memory storage; Tilting Angle: Stepless multi-angle manual semi-mechanical food discharging; Stirring Method: 360° drum rotation three-dimensional stirring and heating; Heat and Stirring Speed: Multi-level adjustable; Cleaning: High-pressure water gun cleaning, fast and efficient",
+    specifications:
+      "材质：整机外壳不锈钢材质 功率：5kW；电压：220V；频率：50Hz 锅体规格：球釜型锅Φ300*H300 炒菜容量：4-6L（倾角30 °有效容量） 锅体材质：SUS409不锈钢不粘锅/铸铁锅 配置：多功能数码显示屏，8道菜谱记忆存储 锅倾角度：无极多角度手动半机械式倒菜 翻炒方式：采用360 °滚筒旋转立体翻炒加热 火力和翻炒速度：多档位可调节 清洗：高压水枪清洗，快捷高效",
+    specificationsEn:
+      "Material: Entire housing made of stainless steel; Power: 5kW; Voltage: 220V; Frequency: 50Hz; Wok Body Specs: Dome-shaped wok Φ300*H300; Cooking Capacity: 4-6L (effective capacity at 30° tilt); Wok Body Material: SUS409 stainless steel non-stick wok / cast iron wok; Configuration: Multi-function digital display, 8-recipe memory storage; Tilting Angle: Stepless multi-angle manual semi-mechanical food discharging; Stirring Method: 360° drum rotation three-dimensional stirring and heating; Heat and Stirring Speed: Multi-level adjustable; Cleaning: High-pressure water gun cleaning, fast and efficient",
     power: "5kW",
     voltage: "220V",
     material: "整机外壳不锈钢材质",
@@ -554,20 +629,23 @@ window.PRODUCT_DATA_TABLE = [
       {
         filePath: "/assets/images/products/DLB-TGS30-1.webp",
         isPrimary: true,
-        isHires: false
+        isHires: false,
       },
       {
         filePath: "/assets/images/products/DLB-TGS30-hires.webp",
         isPrimary: false,
-        isHires: true
-      }
+        isHires: true,
+      },
     ],
     is_home_core: false,
     highlights: "",
-    scenarios: "用途：餐饮连锁、外 卖、小食店等场所； 适用于自动烹饪炒菜 、炒饭、炒粉、炒面 、辣子鸡、麻辣香锅 、小龙虾、香辣虾蟹 、炒肉松、炒酱料、 炒干果、炒茶叶等。 产能：单次烹饪0.5- 3.5kg。",
-    usage: "用途：餐饮连锁、外 卖、小食店等场所； 适用于自动烹饪炒菜 、炒饭、炒粉、炒面 、辣子鸡、麻辣香锅 、小龙虾、香辣虾蟹 、炒肉松、炒酱料、 炒干果、炒茶叶等。 产能：单次烹饪0.5- 3.5kg。",
-    usageEn: "Suitable for restaurant chains, food delivery, snack shops and more. Ideal for automatic cooking of stir-fried dishes, fried rice, fried noodles, chow mein, spicy chicken, spicy hot pot, crawfish, spicy shrimp & crab, meat floss, sauce stir-frying, dried fruit & nut roasting, tea roasting, and more. Capacity: 0.5–3.5 kg per batch.",
-    materialEn: "Full stainless steel body"
+    scenarios:
+      "用途：餐饮连锁、外 卖、小食店等场所； 适用于自动烹饪炒菜 、炒饭、炒粉、炒面 、辣子鸡、麻辣香锅 、小龙虾、香辣虾蟹 、炒肉松、炒酱料、 炒干果、炒茶叶等。 产能：单次烹饪0.5- 3.5kg。",
+    usage:
+      "用途：餐饮连锁、外 卖、小食店等场所； 适用于自动烹饪炒菜 、炒饭、炒粉、炒面 、辣子鸡、麻辣香锅 、小龙虾、香辣虾蟹 、炒肉松、炒酱料、 炒干果、炒茶叶等。 产能：单次烹饪0.5- 3.5kg。",
+    usageEn:
+      "Suitable for restaurant chains, food delivery, snack shops and more. Ideal for automatic cooking of stir-fried dishes, fried rice, fried noodles, chow mein, spicy chicken, spicy hot pot, crawfish, spicy shrimp & crab, meat floss, sauce stir-frying, dried fruit & nut roasting, tea roasting, and more. Capacity: 0.5–3.5 kg per batch.",
+    materialEn: "Full stainless steel body",
   },
   {
     model: "DLB-TGD30",
@@ -576,8 +654,10 @@ window.PRODUCT_DATA_TABLE = [
     nameEn: "Countertop 300 Induction Cooker (Electric)",
     category: "翻炒系列",
     subCategory: "滚筒炒菜机",
-    specifications: "材质：采用优质不锈钢 功率：5kW；电压：220V；频率：50Hz 锅体规格：直桶形Φ300*H300 炒菜容量：4-6L（倾角30 °有效容量） 锅体材质：SUS409不锈钢不粘锅/铸铁锅 配置：多功能数码显示屏，8道菜谱记忆存储 锅倾角度：无极多角度电动翻锅 ， 自动倒菜 翻炒方式：采用360 °滚筒旋转立体翻炒加热 火力和翻炒速度：多档位可调节 清洗：高压水枪清洗，快捷高效",
-    specificationsEn: "Material: Premium stainless steel; Power: 5kW; Voltage: 220V; Frequency: 50Hz; Wok Body Specs: Straight cylinder Φ300*H300; Cooking Capacity: 4-6L (effective capacity at 30° tilt); Wok Body Material: SUS409 stainless steel non-stick wok / cast iron wok; Configuration: Multi-function digital display, 8-recipe memory storage; Tilting Angle: Stepless multi-angle electric tilting, auto food discharging; Stirring Method: 360° drum rotation three-dimensional stirring and heating; Heat and Stirring Speed: Multi-level adjustable; Cleaning: High-pressure water gun cleaning, fast and efficient",
+    specifications:
+      "材质：采用优质不锈钢 功率：5kW；电压：220V；频率：50Hz 锅体规格：直桶形Φ300*H300 炒菜容量：4-6L（倾角30 °有效容量） 锅体材质：SUS409不锈钢不粘锅/铸铁锅 配置：多功能数码显示屏，8道菜谱记忆存储 锅倾角度：无极多角度电动翻锅 ， 自动倒菜 翻炒方式：采用360 °滚筒旋转立体翻炒加热 火力和翻炒速度：多档位可调节 清洗：高压水枪清洗，快捷高效",
+    specificationsEn:
+      "Material: Premium stainless steel; Power: 5kW; Voltage: 220V; Frequency: 50Hz; Wok Body Specs: Straight cylinder Φ300*H300; Cooking Capacity: 4-6L (effective capacity at 30° tilt); Wok Body Material: SUS409 stainless steel non-stick wok / cast iron wok; Configuration: Multi-function digital display, 8-recipe memory storage; Tilting Angle: Stepless multi-angle electric tilting, auto food discharging; Stirring Method: 360° drum rotation three-dimensional stirring and heating; Heat and Stirring Speed: Multi-level adjustable; Cleaning: High-pressure water gun cleaning, fast and efficient",
     power: "5kW",
     voltage: "220V",
     material: "采用优质不锈钢",
@@ -592,20 +672,23 @@ window.PRODUCT_DATA_TABLE = [
       {
         filePath: "/assets/images/products/DLB-TGD30-1.webp",
         isPrimary: true,
-        isHires: false
+        isHires: false,
       },
       {
         filePath: "/assets/images/products/DLB-TGD30-hires.webp",
         isPrimary: false,
-        isHires: true
-      }
+        isHires: true,
+      },
     ],
     is_home_core: false,
     highlights: "",
-    scenarios: "用途：餐饮连锁、外 卖、小食店等场所； 适用于自动烹饪炒菜 、炒饭、炒粉、炒面 、辣子鸡、麻辣香锅 、小龙虾、香辣虾蟹 、炒肉松、炒酱料、 炒干果、炒茶叶等。 产能：单次烹饪0.5- 3.5kg。",
-    usage: "用途：餐饮连锁、外 卖、小食店等场所； 适用于自动烹饪炒菜 、炒饭、炒粉、炒面 、辣子鸡、麻辣香锅 、小龙虾、香辣虾蟹 、炒肉松、炒酱料、 炒干果、炒茶叶等。 产能：单次烹饪0.5- 3.5kg。",
-    usageEn: "Suitable for restaurant chains, food delivery, snack shops and more. Ideal for automatic cooking of stir-fried dishes, fried rice, fried noodles, chow mein, spicy chicken, spicy hot pot, crawfish, spicy shrimp & crab, meat floss, sauce stir-frying, dried fruit & nut roasting, tea roasting, and more. Capacity: 0.5–3.5 kg per batch.",
-    materialEn: "Premium stainless steel"
+    scenarios:
+      "用途：餐饮连锁、外 卖、小食店等场所； 适用于自动烹饪炒菜 、炒饭、炒粉、炒面 、辣子鸡、麻辣香锅 、小龙虾、香辣虾蟹 、炒肉松、炒酱料、 炒干果、炒茶叶等。 产能：单次烹饪0.5- 3.5kg。",
+    usage:
+      "用途：餐饮连锁、外 卖、小食店等场所； 适用于自动烹饪炒菜 、炒饭、炒粉、炒面 、辣子鸡、麻辣香锅 、小龙虾、香辣虾蟹 、炒肉松、炒酱料、 炒干果、炒茶叶等。 产能：单次烹饪0.5- 3.5kg。",
+    usageEn:
+      "Suitable for restaurant chains, food delivery, snack shops and more. Ideal for automatic cooking of stir-fried dishes, fried rice, fried noodles, chow mein, spicy chicken, spicy hot pot, crawfish, spicy shrimp & crab, meat floss, sauce stir-frying, dried fruit & nut roasting, tea roasting, and more. Capacity: 0.5–3.5 kg per batch.",
+    materialEn: "Premium stainless steel",
   },
   {
     model: "DLB-GD30",
@@ -614,8 +697,10 @@ window.PRODUCT_DATA_TABLE = [
     nameEn: "Floor-standing 300 Induction Cooker (Electric)",
     category: "翻炒系列",
     subCategory: "滚筒炒菜机",
-    specifications: "材质：整机外壳不锈钢材质 功率：5kW；电压：220V；频率：50Hz 锅体规格：球釜型锅Φ300*H300 炒菜容量：4-6L（倾角30 °有效容量） 锅体材质：SUS409不锈钢不粘锅/铸铁锅 配置：多功能数码显示屏，8道菜谱记忆存储 锅倾角度：无极多角度电动翻锅 ， 自动倒菜 翻炒方式：采用360 °滚筒旋转立体翻炒加热 火力和翻炒速度：多档位可调节 清洗：高压水枪清洗，快捷高效",
-    specificationsEn: "Material: Entire housing made of stainless steel; Power: 5kW; Voltage: 220V; Frequency: 50Hz; Wok Body Specs: Dome-shaped wok Φ300*H300; Cooking Capacity: 4-6L (effective capacity at 30° tilt); Wok Body Material: SUS409 stainless steel non-stick wok / cast iron wok; Configuration: Multi-function digital display, 8-recipe memory storage; Tilting Angle: Stepless multi-angle electric tilting, auto food discharging; Stirring Method: 360° drum rotation three-dimensional stirring and heating; Heat and Stirring Speed: Multi-level adjustable; Cleaning: High-pressure water gun cleaning, fast and efficient",
+    specifications:
+      "材质：整机外壳不锈钢材质 功率：5kW；电压：220V；频率：50Hz 锅体规格：球釜型锅Φ300*H300 炒菜容量：4-6L（倾角30 °有效容量） 锅体材质：SUS409不锈钢不粘锅/铸铁锅 配置：多功能数码显示屏，8道菜谱记忆存储 锅倾角度：无极多角度电动翻锅 ， 自动倒菜 翻炒方式：采用360 °滚筒旋转立体翻炒加热 火力和翻炒速度：多档位可调节 清洗：高压水枪清洗，快捷高效",
+    specificationsEn:
+      "Material: Entire housing made of stainless steel; Power: 5kW; Voltage: 220V; Frequency: 50Hz; Wok Body Specs: Dome-shaped wok Φ300*H300; Cooking Capacity: 4-6L (effective capacity at 30° tilt); Wok Body Material: SUS409 stainless steel non-stick wok / cast iron wok; Configuration: Multi-function digital display, 8-recipe memory storage; Tilting Angle: Stepless multi-angle electric tilting, auto food discharging; Stirring Method: 360° drum rotation three-dimensional stirring and heating; Heat and Stirring Speed: Multi-level adjustable; Cleaning: High-pressure water gun cleaning, fast and efficient",
     power: "5kW",
     voltage: "220V",
     material: "整机外壳不锈钢材质",
@@ -630,20 +715,23 @@ window.PRODUCT_DATA_TABLE = [
       {
         filePath: "/assets/images/products/DLB-GD30-1.webp",
         isPrimary: true,
-        isHires: false
+        isHires: false,
       },
       {
         filePath: "/assets/images/products/DLB-GD30-hires.webp",
         isPrimary: false,
-        isHires: true
-      }
+        isHires: true,
+      },
     ],
     is_home_core: false,
     highlights: "",
-    scenarios: "用途：餐饮连锁、外 卖、小食店等场所； 适用于自动烹饪炒菜 、炒饭、炒粉、炒面 、辣子鸡、麻辣香锅 、小龙虾、香辣虾蟹 、炒肉松、炒酱料、 炒干果、炒茶叶等。 产能：单次烹饪0.5- 3.5kg。",
-    usage: "用途：餐饮连锁、外 卖、小食店等场所； 适用于自动烹饪炒菜 、炒饭、炒粉、炒面 、辣子鸡、麻辣香锅 、小龙虾、香辣虾蟹 、炒肉松、炒酱料、 炒干果、炒茶叶等。 产能：单次烹饪0.5- 3.5kg。",
-    usageEn: "Suitable for restaurant chains, food delivery, snack shops and more. Ideal for automatic cooking of stir-fried dishes, fried rice, fried noodles, chow mein, spicy chicken, spicy hot pot, crawfish, spicy shrimp & crab, meat floss, sauce stir-frying, dried fruit & nut roasting, tea roasting, and more. Capacity: 0.5–3.5 kg per batch.",
-    materialEn: "Full stainless steel body"
+    scenarios:
+      "用途：餐饮连锁、外 卖、小食店等场所； 适用于自动烹饪炒菜 、炒饭、炒粉、炒面 、辣子鸡、麻辣香锅 、小龙虾、香辣虾蟹 、炒肉松、炒酱料、 炒干果、炒茶叶等。 产能：单次烹饪0.5- 3.5kg。",
+    usage:
+      "用途：餐饮连锁、外 卖、小食店等场所； 适用于自动烹饪炒菜 、炒饭、炒粉、炒面 、辣子鸡、麻辣香锅 、小龙虾、香辣虾蟹 、炒肉松、炒酱料、 炒干果、炒茶叶等。 产能：单次烹饪0.5- 3.5kg。",
+    usageEn:
+      "Suitable for restaurant chains, food delivery, snack shops and more. Ideal for automatic cooking of stir-fried dishes, fried rice, fried noodles, chow mein, spicy chicken, spicy hot pot, crawfish, spicy shrimp & crab, meat floss, sauce stir-frying, dried fruit & nut roasting, tea roasting, and more. Capacity: 0.5–3.5 kg per batch.",
+    materialEn: "Full stainless steel body",
   },
   {
     model: "DLB-TGD36",
@@ -652,8 +740,10 @@ window.PRODUCT_DATA_TABLE = [
     nameEn: "Countertop 360 Induction Cooker (Electric)",
     category: "翻炒系列",
     subCategory: "滚筒炒菜机",
-    specifications: "材质：采用优质不锈钢 功率：5kW；电压：220V；频率：50Hz 锅体规格：直桶形Φ360*H360 炒菜容量：12L（倾角30 °有效容量） 锅体材质：SUS409不锈钢不粘锅 配置：多功能数码显示屏，8道菜谱记忆存储 锅倾角度：无极多角度电动翻锅 ， 自动倒菜 翻炒方式：采用360 °滚筒旋转立体翻炒加热 火力和翻炒速度：多档位可调节 清洗：高压水枪清洗，快捷高效",
-    specificationsEn: "Material: Premium stainless steel; Power: 5kW; Voltage: 220V; Frequency: 50Hz; Wok Body Specs: Straight cylinder Φ360*H360; Cooking Capacity: 12L (effective capacity at 30° tilt); Wok Body Material: SUS409 stainless steel non-stick wok; Configuration: Multi-function digital display, 8-recipe memory storage; Tilting Angle: Stepless multi-angle electric tilting, auto food discharging; Stirring Method: 360° drum rotation three-dimensional stirring and heating; Heat and Stirring Speed: Multi-level adjustable; Cleaning: High-pressure water gun cleaning, fast and efficient",
+    specifications:
+      "材质：采用优质不锈钢 功率：5kW；电压：220V；频率：50Hz 锅体规格：直桶形Φ360*H360 炒菜容量：12L（倾角30 °有效容量） 锅体材质：SUS409不锈钢不粘锅 配置：多功能数码显示屏，8道菜谱记忆存储 锅倾角度：无极多角度电动翻锅 ， 自动倒菜 翻炒方式：采用360 °滚筒旋转立体翻炒加热 火力和翻炒速度：多档位可调节 清洗：高压水枪清洗，快捷高效",
+    specificationsEn:
+      "Material: Premium stainless steel; Power: 5kW; Voltage: 220V; Frequency: 50Hz; Wok Body Specs: Straight cylinder Φ360*H360; Cooking Capacity: 12L (effective capacity at 30° tilt); Wok Body Material: SUS409 stainless steel non-stick wok; Configuration: Multi-function digital display, 8-recipe memory storage; Tilting Angle: Stepless multi-angle electric tilting, auto food discharging; Stirring Method: 360° drum rotation three-dimensional stirring and heating; Heat and Stirring Speed: Multi-level adjustable; Cleaning: High-pressure water gun cleaning, fast and efficient",
     power: "5kW",
     voltage: "220V",
     material: "采用优质不锈钢",
@@ -668,20 +758,23 @@ window.PRODUCT_DATA_TABLE = [
       {
         filePath: "/assets/images/products/DLB-TGD36-1.webp",
         isPrimary: true,
-        isHires: false
+        isHires: false,
       },
       {
         filePath: "/assets/images/products/DLB-TGD36-hires.webp",
         isPrimary: false,
-        isHires: true
-      }
+        isHires: true,
+      },
     ],
     is_home_core: false,
     highlights: "",
-    scenarios: "用途：餐饮连锁、外 卖、小食店等场所； 适用于自动烹饪炒菜 、炒饭、炒粉、炒面 、辣子鸡、麻辣香锅 、小龙虾、香辣虾蟹 、炒肉松、炒酱料、 炒干果、炒茶叶等。 产能：单次烹饪1-5kg 。",
-    usage: "用途：餐饮连锁、外 卖、小食店等场所； 适用于自动烹饪炒菜 、炒饭、炒粉、炒面 、辣子鸡、麻辣香锅 、小龙虾、香辣虾蟹 、炒肉松、炒酱料、 炒干果、炒茶叶等。 产能：单次烹饪1-5kg 。",
-    usageEn: "Suitable for restaurant chains, food delivery, snack shops and more. Ideal for automatic cooking of stir-fried dishes, fried rice, fried noodles, chow mein, spicy chicken, spicy hot pot, crawfish, spicy shrimp & crab, meat floss, sauce stir-frying, dried fruit & nut roasting, tea roasting, and more. Capacity: 1–5 kg per batch.",
-    materialEn: "Premium stainless steel"
+    scenarios:
+      "用途：餐饮连锁、外 卖、小食店等场所； 适用于自动烹饪炒菜 、炒饭、炒粉、炒面 、辣子鸡、麻辣香锅 、小龙虾、香辣虾蟹 、炒肉松、炒酱料、 炒干果、炒茶叶等。 产能：单次烹饪1-5kg 。",
+    usage:
+      "用途：餐饮连锁、外 卖、小食店等场所； 适用于自动烹饪炒菜 、炒饭、炒粉、炒面 、辣子鸡、麻辣香锅 、小龙虾、香辣虾蟹 、炒肉松、炒酱料、 炒干果、炒茶叶等。 产能：单次烹饪1-5kg 。",
+    usageEn:
+      "Suitable for restaurant chains, food delivery, snack shops and more. Ideal for automatic cooking of stir-fried dishes, fried rice, fried noodles, chow mein, spicy chicken, spicy hot pot, crawfish, spicy shrimp & crab, meat floss, sauce stir-frying, dried fruit & nut roasting, tea roasting, and more. Capacity: 1–5 kg per batch.",
+    materialEn: "Premium stainless steel",
   },
   {
     model: "DLB-GD36",
@@ -690,8 +783,10 @@ window.PRODUCT_DATA_TABLE = [
     nameEn: "Floor-standing 360 Induction Cooker (Electric)",
     category: "翻炒系列",
     subCategory: "滚筒炒菜机",
-    specifications: "材质：整机外壳不锈钢材质 功率：5kW；电压：220V；频率：50Hz 锅体规格：球釜型锅Φ360*H360 炒菜容量：12L（倾角30 °有效容量） 锅体材质：SUS409不锈钢不粘锅 配置：多功能数码显示屏，8道菜谱记忆存储 锅倾角度：无极多角度电动翻锅 ， 自动倒菜 翻炒方式：采用360 °滚筒旋转立体翻炒加热 火力和翻炒速度：多档位可调节 清洗：高压水枪清洗，快捷高效",
-    specificationsEn: "Material: Entire housing made of stainless steel; Power: 5kW; Voltage: 220V; Frequency: 50Hz; Wok Body Specs: Dome-shaped wok Φ360*H360; Cooking Capacity: 12L (effective capacity at 30° tilt); Wok Body Material: SUS409 stainless steel non-stick wok; Configuration: Multi-function digital display, 8-recipe memory storage; Tilting Angle: Stepless multi-angle electric tilting, auto food discharging; Stirring Method: 360° drum rotation three-dimensional stirring and heating; Heat and Stirring Speed: Multi-level adjustable; Cleaning: High-pressure water gun cleaning, fast and efficient",
+    specifications:
+      "材质：整机外壳不锈钢材质 功率：5kW；电压：220V；频率：50Hz 锅体规格：球釜型锅Φ360*H360 炒菜容量：12L（倾角30 °有效容量） 锅体材质：SUS409不锈钢不粘锅 配置：多功能数码显示屏，8道菜谱记忆存储 锅倾角度：无极多角度电动翻锅 ， 自动倒菜 翻炒方式：采用360 °滚筒旋转立体翻炒加热 火力和翻炒速度：多档位可调节 清洗：高压水枪清洗，快捷高效",
+    specificationsEn:
+      "Material: Entire housing made of stainless steel; Power: 5kW; Voltage: 220V; Frequency: 50Hz; Wok Body Specs: Dome-shaped wok Φ360*H360; Cooking Capacity: 12L (effective capacity at 30° tilt); Wok Body Material: SUS409 stainless steel non-stick wok; Configuration: Multi-function digital display, 8-recipe memory storage; Tilting Angle: Stepless multi-angle electric tilting, auto food discharging; Stirring Method: 360° drum rotation three-dimensional stirring and heating; Heat and Stirring Speed: Multi-level adjustable; Cleaning: High-pressure water gun cleaning, fast and efficient",
     power: "5kW",
     voltage: "220V",
     material: "整机外壳不锈钢材质",
@@ -706,20 +801,23 @@ window.PRODUCT_DATA_TABLE = [
       {
         filePath: "/assets/images/products/DLB-GD36-1.webp",
         isPrimary: true,
-        isHires: false
+        isHires: false,
       },
       {
         filePath: "/assets/images/products/DLB-GD36-hires.webp",
         isPrimary: false,
-        isHires: true
-      }
+        isHires: true,
+      },
     ],
     is_home_core: false,
     highlights: "",
-    scenarios: "用途：餐饮连锁、外 卖、小食店等场所； 适用于自动烹饪炒菜 、炒饭、炒粉、炒面 、辣子鸡、麻辣香锅 、小龙虾、香辣虾蟹 、炒肉松、炒酱料、 炒干果、炒茶叶等。 产能：单次烹饪1-5kg 。",
-    usage: "用途：餐饮连锁、外 卖、小食店等场所； 适用于自动烹饪炒菜 、炒饭、炒粉、炒面 、辣子鸡、麻辣香锅 、小龙虾、香辣虾蟹 、炒肉松、炒酱料、 炒干果、炒茶叶等。 产能：单次烹饪1-5kg 。",
-    usageEn: "Suitable for restaurant chains, food delivery, snack shops and more. Ideal for automatic cooking of stir-fried dishes, fried rice, fried noodles, chow mein, spicy chicken, spicy hot pot, crawfish, spicy shrimp & crab, meat floss, sauce stir-frying, dried fruit & nut roasting, tea roasting, and more. Capacity: 1–5 kg per batch.",
-    materialEn: "Full stainless steel body"
+    scenarios:
+      "用途：餐饮连锁、外 卖、小食店等场所； 适用于自动烹饪炒菜 、炒饭、炒粉、炒面 、辣子鸡、麻辣香锅 、小龙虾、香辣虾蟹 、炒肉松、炒酱料、 炒干果、炒茶叶等。 产能：单次烹饪1-5kg 。",
+    usage:
+      "用途：餐饮连锁、外 卖、小食店等场所； 适用于自动烹饪炒菜 、炒饭、炒粉、炒面 、辣子鸡、麻辣香锅 、小龙虾、香辣虾蟹 、炒肉松、炒酱料、 炒干果、炒茶叶等。 产能：单次烹饪1-5kg 。",
+    usageEn:
+      "Suitable for restaurant chains, food delivery, snack shops and more. Ideal for automatic cooking of stir-fried dishes, fried rice, fried noodles, chow mein, spicy chicken, spicy hot pot, crawfish, spicy shrimp & crab, meat floss, sauce stir-frying, dried fruit & nut roasting, tea roasting, and more. Capacity: 1–5 kg per batch.",
+    materialEn: "Full stainless steel body",
   },
   {
     model: "DLB-TGD36/9",
@@ -728,8 +826,10 @@ window.PRODUCT_DATA_TABLE = [
     nameEn: "Countertop 360 Induction Cooker (Electric)",
     category: "翻炒系列",
     subCategory: "滚筒炒菜机",
-    specifications: "材质：采用优质不锈钢 功率：9kW；电压：380V；频率：50Hz 锅体规格：直桶形Φ360*H360 炒菜容量：12L（倾角30 °有效容量） 锅体材质：SUS409不锈钢不粘锅 配置：多功能数码显示屏，8道菜谱记忆存储 锅倾角度：无极多角度电动翻锅 ， 自动倒菜 翻炒方式：采用360 °滚筒旋转立体翻炒加热 火力和翻炒速度：多档位可调节 清洗：高压水枪清洗，快捷高效",
-    specificationsEn: "Material: Premium stainless steel; Power: 9kW; Voltage: 380V; Frequency: 50Hz; Wok Body Specs: Straight cylinder Φ360*H360; Cooking Capacity: 12L (effective capacity at 30° tilt); Wok Body Material: SUS409 stainless steel non-stick wok; Configuration: Multi-function digital display, 8-recipe memory storage; Tilting Angle: Stepless multi-angle electric tilting, auto food discharging; Stirring Method: 360° drum rotation three-dimensional stirring and heating; Heat and Stirring Speed: Multi-level adjustable; Cleaning: High-pressure water gun cleaning, fast and efficient",
+    specifications:
+      "材质：采用优质不锈钢 功率：9kW；电压：380V；频率：50Hz 锅体规格：直桶形Φ360*H360 炒菜容量：12L（倾角30 °有效容量） 锅体材质：SUS409不锈钢不粘锅 配置：多功能数码显示屏，8道菜谱记忆存储 锅倾角度：无极多角度电动翻锅 ， 自动倒菜 翻炒方式：采用360 °滚筒旋转立体翻炒加热 火力和翻炒速度：多档位可调节 清洗：高压水枪清洗，快捷高效",
+    specificationsEn:
+      "Material: Premium stainless steel; Power: 9kW; Voltage: 380V; Frequency: 50Hz; Wok Body Specs: Straight cylinder Φ360*H360; Cooking Capacity: 12L (effective capacity at 30° tilt); Wok Body Material: SUS409 stainless steel non-stick wok; Configuration: Multi-function digital display, 8-recipe memory storage; Tilting Angle: Stepless multi-angle electric tilting, auto food discharging; Stirring Method: 360° drum rotation three-dimensional stirring and heating; Heat and Stirring Speed: Multi-level adjustable; Cleaning: High-pressure water gun cleaning, fast and efficient",
     power: "9kW",
     voltage: "380V",
     material: "采用优质不锈钢",
@@ -743,10 +843,13 @@ window.PRODUCT_DATA_TABLE = [
     images: [],
     is_home_core: false,
     highlights: "",
-    scenarios: "用途：餐饮连锁、外 卖、小食店等场所； 适用于自动烹饪炒菜 、炒饭、炒粉、炒面 、辣子鸡、麻辣香锅 、小龙虾、香辣虾蟹 、炒肉松、炒酱料、 炒干果、炒茶叶等。 特别适合爆炒。 产能：单次烹饪1-5kg 。",
-    usage: "用途：餐饮连锁、外 卖、小食店等场所； 适用于自动烹饪炒菜 、炒饭、炒粉、炒面 、辣子鸡、麻辣香锅 、小龙虾、香辣虾蟹 、炒肉松、炒酱料、 炒干果、炒茶叶等。 特别适合爆炒。 产能：单次烹饪1-5kg 。",
-    usageEn: "Suitable for restaurant chains, food delivery, snack shops and more. Ideal for automatic cooking of stir-fried dishes, fried rice, fried noodles, chow mein, spicy chicken, spicy hot pot, crawfish, spicy shrimp & crab, meat floss, sauce stir-frying, dried fruit & nut roasting, tea roasting, and more. Especially suitable for high-heat stir-frying. Capacity: 1–5 kg per batch.",
-    materialEn: "Premium stainless steel"
+    scenarios:
+      "用途：餐饮连锁、外 卖、小食店等场所； 适用于自动烹饪炒菜 、炒饭、炒粉、炒面 、辣子鸡、麻辣香锅 、小龙虾、香辣虾蟹 、炒肉松、炒酱料、 炒干果、炒茶叶等。 特别适合爆炒。 产能：单次烹饪1-5kg 。",
+    usage:
+      "用途：餐饮连锁、外 卖、小食店等场所； 适用于自动烹饪炒菜 、炒饭、炒粉、炒面 、辣子鸡、麻辣香锅 、小龙虾、香辣虾蟹 、炒肉松、炒酱料、 炒干果、炒茶叶等。 特别适合爆炒。 产能：单次烹饪1-5kg 。",
+    usageEn:
+      "Suitable for restaurant chains, food delivery, snack shops and more. Ideal for automatic cooking of stir-fried dishes, fried rice, fried noodles, chow mein, spicy chicken, spicy hot pot, crawfish, spicy shrimp & crab, meat floss, sauce stir-frying, dried fruit & nut roasting, tea roasting, and more. Especially suitable for high-heat stir-frying. Capacity: 1–5 kg per batch.",
+    materialEn: "Premium stainless steel",
   },
   {
     model: "DLB-GD36/9",
@@ -755,8 +858,10 @@ window.PRODUCT_DATA_TABLE = [
     nameEn: "Floor-standing 360 Induction Cooker (Electric)",
     category: "翻炒系列",
     subCategory: "滚筒炒菜机",
-    specifications: "材质：整机外壳不锈钢材质 功率：9kW；电压：380V；频率：50Hz 锅体规格：球釜型锅Φ360*H360 炒菜容量：12L（倾角30 °有效容量） 锅体材质：SUS409不锈钢不粘锅 配置：多功能数码显示屏，8道菜谱记忆存储 锅倾角度：无极多角度电动翻锅 ， 自动倒菜 翻炒方式：采用360 °滚筒旋转立体翻炒加热 火力和翻炒速度：多档位可调节 清洗：高压水枪清洗，快捷高效",
-    specificationsEn: "Material: Entire housing made of stainless steel; Power: 9kW; Voltage: 380V; Frequency: 50Hz; Wok Body Specs: Dome-shaped wok Φ360*H360; Cooking Capacity: 12L (effective capacity at 30° tilt); Wok Body Material: SUS409 stainless steel non-stick wok; Configuration: Multi-function digital display, 8-recipe memory storage; Tilting Angle: Stepless multi-angle electric tilting, auto food discharging; Stirring Method: 360° drum rotation three-dimensional stirring and heating; Heat and Stirring Speed: Multi-level adjustable; Cleaning: High-pressure water gun cleaning, fast and efficient",
+    specifications:
+      "材质：整机外壳不锈钢材质 功率：9kW；电压：380V；频率：50Hz 锅体规格：球釜型锅Φ360*H360 炒菜容量：12L（倾角30 °有效容量） 锅体材质：SUS409不锈钢不粘锅 配置：多功能数码显示屏，8道菜谱记忆存储 锅倾角度：无极多角度电动翻锅 ， 自动倒菜 翻炒方式：采用360 °滚筒旋转立体翻炒加热 火力和翻炒速度：多档位可调节 清洗：高压水枪清洗，快捷高效",
+    specificationsEn:
+      "Material: Entire housing made of stainless steel; Power: 9kW; Voltage: 380V; Frequency: 50Hz; Wok Body Specs: Dome-shaped wok Φ360*H360; Cooking Capacity: 12L (effective capacity at 30° tilt); Wok Body Material: SUS409 stainless steel non-stick wok; Configuration: Multi-function digital display, 8-recipe memory storage; Tilting Angle: Stepless multi-angle electric tilting, auto food discharging; Stirring Method: 360° drum rotation three-dimensional stirring and heating; Heat and Stirring Speed: Multi-level adjustable; Cleaning: High-pressure water gun cleaning, fast and efficient",
     power: "9kW",
     voltage: "380V",
     material: "整机外壳不锈钢材质",
@@ -770,10 +875,13 @@ window.PRODUCT_DATA_TABLE = [
     images: [],
     is_home_core: false,
     highlights: "",
-    scenarios: "用途：餐饮连锁、外 卖、小食店等场所； 适用于自动烹饪炒菜 、炒饭、炒粉、炒面 、辣子鸡、麻辣香锅 、小龙虾、香辣虾蟹 、炒肉松、炒酱料、 炒干果、炒茶叶等。 特别适合爆炒。 产能：单次烹饪1-5kg 。",
-    usage: "用途：餐饮连锁、外 卖、小食店等场所； 适用于自动烹饪炒菜 、炒饭、炒粉、炒面 、辣子鸡、麻辣香锅 、小龙虾、香辣虾蟹 、炒肉松、炒酱料、 炒干果、炒茶叶等。 特别适合爆炒。 产能：单次烹饪1-5kg 。",
-    usageEn: "Suitable for restaurant chains, food delivery, snack shops and more. Ideal for automatic cooking of stir-fried dishes, fried rice, fried noodles, chow mein, spicy chicken, spicy hot pot, crawfish, spicy shrimp & crab, meat floss, sauce stir-frying, dried fruit & nut roasting, tea roasting, and more. Especially suitable for high-heat stir-frying. Capacity: 1–5 kg per batch.",
-    materialEn: "Full stainless steel body"
+    scenarios:
+      "用途：餐饮连锁、外 卖、小食店等场所； 适用于自动烹饪炒菜 、炒饭、炒粉、炒面 、辣子鸡、麻辣香锅 、小龙虾、香辣虾蟹 、炒肉松、炒酱料、 炒干果、炒茶叶等。 特别适合爆炒。 产能：单次烹饪1-5kg 。",
+    usage:
+      "用途：餐饮连锁、外 卖、小食店等场所； 适用于自动烹饪炒菜 、炒饭、炒粉、炒面 、辣子鸡、麻辣香锅 、小龙虾、香辣虾蟹 、炒肉松、炒酱料、 炒干果、炒茶叶等。 特别适合爆炒。 产能：单次烹饪1-5kg 。",
+    usageEn:
+      "Suitable for restaurant chains, food delivery, snack shops and more. Ideal for automatic cooking of stir-fried dishes, fried rice, fried noodles, chow mein, spicy chicken, spicy hot pot, crawfish, spicy shrimp & crab, meat floss, sauce stir-frying, dried fruit & nut roasting, tea roasting, and more. Especially suitable for high-heat stir-frying. Capacity: 1–5 kg per batch.",
+    materialEn: "Full stainless steel body",
   },
   {
     model: "DLB-TGD40",
@@ -782,8 +890,10 @@ window.PRODUCT_DATA_TABLE = [
     nameEn: "Countertop 400 Induction Cooker (Electric)",
     category: "翻炒系列",
     subCategory: "滚筒炒菜机",
-    specifications: "材质：采用优质不锈钢 功率：8-10kW；电压：380V；频率：50Hz 锅体规格：仿球釜型锅体内直径Φ380 炒菜容量：12L（倾角30 °有效容量） 锅体材质：SUS409不锈钢不粘锅/铸铁锅 配置：多功能数码显示屏，8道菜谱记忆存储 锅倾角度：无极多角度电动翻锅 ， 自动倒菜 翻炒方式：采用360 °滚筒旋转立体翻炒加热 火力和翻炒速度：多档位可调节 清洗：高压水枪清洗，快捷高效",
-    specificationsEn: "Material: Premium stainless steel; Power: 8-10kW; Voltage: 380V; Frequency: 50Hz; Wok Body Specs: Dome-shaped wok inner diameter Φ380; Cooking Capacity: 12L (effective capacity at 30° tilt); Wok Body Material: SUS409 stainless steel non-stick wok / cast iron wok; Configuration: Multi-function digital display, 8-recipe memory storage; Tilting Angle: Stepless multi-angle electric tilting, auto food discharging; Stirring Method: 360° drum rotation three-dimensional stirring and heating; Heat and Stirring Speed: Multi-level adjustable; Cleaning: High-pressure water gun cleaning, fast and efficient",
+    specifications:
+      "材质：采用优质不锈钢 功率：8-10kW；电压：380V；频率：50Hz 锅体规格：仿球釜型锅体内直径Φ380 炒菜容量：12L（倾角30 °有效容量） 锅体材质：SUS409不锈钢不粘锅/铸铁锅 配置：多功能数码显示屏，8道菜谱记忆存储 锅倾角度：无极多角度电动翻锅 ， 自动倒菜 翻炒方式：采用360 °滚筒旋转立体翻炒加热 火力和翻炒速度：多档位可调节 清洗：高压水枪清洗，快捷高效",
+    specificationsEn:
+      "Material: Premium stainless steel; Power: 8-10kW; Voltage: 380V; Frequency: 50Hz; Wok Body Specs: Dome-shaped wok inner diameter Φ380; Cooking Capacity: 12L (effective capacity at 30° tilt); Wok Body Material: SUS409 stainless steel non-stick wok / cast iron wok; Configuration: Multi-function digital display, 8-recipe memory storage; Tilting Angle: Stepless multi-angle electric tilting, auto food discharging; Stirring Method: 360° drum rotation three-dimensional stirring and heating; Heat and Stirring Speed: Multi-level adjustable; Cleaning: High-pressure water gun cleaning, fast and efficient",
     power: "8-10kW",
     voltage: "380V",
     material: "采用优质不锈钢",
@@ -798,20 +908,23 @@ window.PRODUCT_DATA_TABLE = [
       {
         filePath: "/assets/images/products/DLB-TGD40-1.webp",
         isPrimary: true,
-        isHires: false
+        isHires: false,
       },
       {
         filePath: "/assets/images/products/DLB-TGD40-hires.webp",
         isPrimary: false,
-        isHires: true
-      }
+        isHires: true,
+      },
     ],
     is_home_core: false,
     highlights: "",
-    scenarios: "用途：餐饮连锁、外 卖、小食店等场所； 适用于自动烹饪炒菜 、炒饭、炒粉、炒面 、辣子鸡、麻辣香锅 、小龙虾、香辣虾蟹 、炒肉松、炒酱料、 炒干果、炒茶叶等。 特别适合爆炒。 产能：单次烹饪1-5kg 。",
-    usage: "用途：餐饮连锁、外 卖、小食店等场所； 适用于自动烹饪炒菜 、炒饭、炒粉、炒面 、辣子鸡、麻辣香锅 、小龙虾、香辣虾蟹 、炒肉松、炒酱料、 炒干果、炒茶叶等。 特别适合爆炒。 产能：单次烹饪1-5kg 。",
-    usageEn: "Suitable for restaurant chains, food delivery, snack shops and more. Ideal for automatic cooking of stir-fried dishes, fried rice, fried noodles, chow mein, spicy chicken, spicy hot pot, crawfish, spicy shrimp & crab, meat floss, sauce stir-frying, dried fruit & nut roasting, tea roasting, and more. Especially suitable for high-heat stir-frying. Capacity: 1–5 kg per batch.",
-    materialEn: "Premium stainless steel"
+    scenarios:
+      "用途：餐饮连锁、外 卖、小食店等场所； 适用于自动烹饪炒菜 、炒饭、炒粉、炒面 、辣子鸡、麻辣香锅 、小龙虾、香辣虾蟹 、炒肉松、炒酱料、 炒干果、炒茶叶等。 特别适合爆炒。 产能：单次烹饪1-5kg 。",
+    usage:
+      "用途：餐饮连锁、外 卖、小食店等场所； 适用于自动烹饪炒菜 、炒饭、炒粉、炒面 、辣子鸡、麻辣香锅 、小龙虾、香辣虾蟹 、炒肉松、炒酱料、 炒干果、炒茶叶等。 特别适合爆炒。 产能：单次烹饪1-5kg 。",
+    usageEn:
+      "Suitable for restaurant chains, food delivery, snack shops and more. Ideal for automatic cooking of stir-fried dishes, fried rice, fried noodles, chow mein, spicy chicken, spicy hot pot, crawfish, spicy shrimp & crab, meat floss, sauce stir-frying, dried fruit & nut roasting, tea roasting, and more. Especially suitable for high-heat stir-frying. Capacity: 1–5 kg per batch.",
+    materialEn: "Premium stainless steel",
   },
   {
     model: "DLB-TGQ30J",
@@ -820,8 +933,10 @@ window.PRODUCT_DATA_TABLE = [
     nameEn: "Countertop 300 Induction Cooker (Touch 800)",
     category: "翻炒系列",
     subCategory: "滚筒炒菜机",
-    specifications: "材质：采用优质不锈钢 功率：5kW；电压：220V；频率：50Hz 锅体规格：直桶形Φ300*H300 炒菜容量：4-6L（倾角30 °有效容量） 锅体材质：SUS409不锈钢不粘锅/铸铁锅 显示屏：7寸多功能触模显示屏 锅倾角度：无极多角度电动翻锅 ， 自动倒菜 翻炒方式：采用360 °滚筒旋转立体翻炒加热 火力和翻炒速度：多档位可调节 菜谱：可存储800个菜谱（智能学习功能） 语音：智能实时语音播报功能 清洗：高压水枪清洗，快捷高效",
-    specificationsEn: "Material: Premium stainless steel; Power: 5kW; Voltage: 220V; Frequency: 50Hz; Wok Body Specs: Straight cylinder Φ300*H300; Cooking Capacity: 4-6L (effective capacity at 30° tilt); Wok Body Material: SUS409 stainless steel non-stick wok / cast iron wok; Display: 7-inch multi-function touch display; Tilting Angle: Stepless multi-angle electric tilting, auto food discharging; Stirring Method: 360° drum rotation three-dimensional stirring and heating; Heat and Stirring Speed: Multi-level adjustable; Recipes: Stores up to 800 recipes (smart learning function); Voice: Smart real-time voice broadcast; Cleaning: High-pressure water gun cleaning, fast and efficient",
+    specifications:
+      "材质：采用优质不锈钢 功率：5kW；电压：220V；频率：50Hz 锅体规格：直桶形Φ300*H300 炒菜容量：4-6L（倾角30 °有效容量） 锅体材质：SUS409不锈钢不粘锅/铸铁锅 显示屏：7寸多功能触模显示屏 锅倾角度：无极多角度电动翻锅 ， 自动倒菜 翻炒方式：采用360 °滚筒旋转立体翻炒加热 火力和翻炒速度：多档位可调节 菜谱：可存储800个菜谱（智能学习功能） 语音：智能实时语音播报功能 清洗：高压水枪清洗，快捷高效",
+    specificationsEn:
+      "Material: Premium stainless steel; Power: 5kW; Voltage: 220V; Frequency: 50Hz; Wok Body Specs: Straight cylinder Φ300*H300; Cooking Capacity: 4-6L (effective capacity at 30° tilt); Wok Body Material: SUS409 stainless steel non-stick wok / cast iron wok; Display: 7-inch multi-function touch display; Tilting Angle: Stepless multi-angle electric tilting, auto food discharging; Stirring Method: 360° drum rotation three-dimensional stirring and heating; Heat and Stirring Speed: Multi-level adjustable; Recipes: Stores up to 800 recipes (smart learning function); Voice: Smart real-time voice broadcast; Cleaning: High-pressure water gun cleaning, fast and efficient",
     power: "5kW",
     voltage: "220V",
     material: "采用优质不锈钢",
@@ -836,15 +951,18 @@ window.PRODUCT_DATA_TABLE = [
       {
         filePath: "/assets/images/products/DLB-TGQ30J-1.webp",
         isPrimary: true,
-        isHires: false
-      }
+        isHires: false,
+      },
     ],
     is_home_core: false,
     highlights: "",
-    scenarios: "用途：餐饮连锁、外 卖、小食店等场所； 适用于自动烹饪炒菜 、炒饭、炒粉、炒面 、辣子鸡、麻辣香锅 、小龙虾、香辣虾蟹 、炒肉松、炒酱料、 炒干果、炒茶叶等。 产能：单次烹饪0.5- 3.5kg。",
-    usage: "用途：餐饮连锁、外 卖、小食店等场所； 适用于自动烹饪炒菜 、炒饭、炒粉、炒面 、辣子鸡、麻辣香锅 、小龙虾、香辣虾蟹 、炒肉松、炒酱料、 炒干果、炒茶叶等。 产能：单次烹饪0.5- 3.5kg。",
-    usageEn: "Suitable for restaurant chains, food delivery, snack shops and more. Ideal for automatic cooking of stir-fried dishes, fried rice, fried noodles, chow mein, spicy chicken, spicy hot pot, crawfish, spicy shrimp & crab, meat floss, sauce stir-frying, dried fruit & nut roasting, tea roasting, and more. Capacity: 0.5–3.5 kg per batch.",
-    materialEn: "Premium stainless steel"
+    scenarios:
+      "用途：餐饮连锁、外 卖、小食店等场所； 适用于自动烹饪炒菜 、炒饭、炒粉、炒面 、辣子鸡、麻辣香锅 、小龙虾、香辣虾蟹 、炒肉松、炒酱料、 炒干果、炒茶叶等。 产能：单次烹饪0.5- 3.5kg。",
+    usage:
+      "用途：餐饮连锁、外 卖、小食店等场所； 适用于自动烹饪炒菜 、炒饭、炒粉、炒面 、辣子鸡、麻辣香锅 、小龙虾、香辣虾蟹 、炒肉松、炒酱料、 炒干果、炒茶叶等。 产能：单次烹饪0.5- 3.5kg。",
+    usageEn:
+      "Suitable for restaurant chains, food delivery, snack shops and more. Ideal for automatic cooking of stir-fried dishes, fried rice, fried noodles, chow mein, spicy chicken, spicy hot pot, crawfish, spicy shrimp & crab, meat floss, sauce stir-frying, dried fruit & nut roasting, tea roasting, and more. Capacity: 0.5–3.5 kg per batch.",
+    materialEn: "Premium stainless steel",
   },
   {
     model: "DLB-GQ30J",
@@ -853,8 +971,10 @@ window.PRODUCT_DATA_TABLE = [
     nameEn: "Floor-standing 300 Induction Cooker (Touch 800)",
     category: "翻炒系列",
     subCategory: "滚筒炒菜机",
-    specifications: "材质：整机外壳不锈钢材质 功率：5kW；电压：220V；频率：50Hz 锅体规格：球釜型锅Φ300*H300 炒菜容量：4-6L（倾角30 °有效容量） 锅体材质：SUS409不锈钢不粘锅/铸铁锅 显示屏：7寸多功能触模显示屏 锅倾角度：无极多角度电动翻锅 ， 自动倒菜 翻炒方式：采用360 °滚筒旋转立体翻炒加热 火力和翻炒速度：多档位可调节 菜谱：可存储800个菜谱（智能学习功能） 语音：智能实时语音播报功能 清洗：高压水枪清洗，快捷高效",
-    specificationsEn: "Material: Entire housing made of stainless steel; Power: 5kW; Voltage: 220V; Frequency: 50Hz; Wok Body Specs: Dome-shaped wok Φ300*H300; Cooking Capacity: 4-6L (effective capacity at 30° tilt); Wok Body Material: SUS409 stainless steel non-stick wok / cast iron wok; Display: 7-inch multi-function touch display; Tilting Angle: Stepless multi-angle electric tilting, auto food discharging; Stirring Method: 360° drum rotation three-dimensional stirring and heating; Heat and Stirring Speed: Multi-level adjustable; Recipes: Stores up to 800 recipes (smart learning function); Voice: Smart real-time voice broadcast; Cleaning: High-pressure water gun cleaning, fast and efficient",
+    specifications:
+      "材质：整机外壳不锈钢材质 功率：5kW；电压：220V；频率：50Hz 锅体规格：球釜型锅Φ300*H300 炒菜容量：4-6L（倾角30 °有效容量） 锅体材质：SUS409不锈钢不粘锅/铸铁锅 显示屏：7寸多功能触模显示屏 锅倾角度：无极多角度电动翻锅 ， 自动倒菜 翻炒方式：采用360 °滚筒旋转立体翻炒加热 火力和翻炒速度：多档位可调节 菜谱：可存储800个菜谱（智能学习功能） 语音：智能实时语音播报功能 清洗：高压水枪清洗，快捷高效",
+    specificationsEn:
+      "Material: Entire housing made of stainless steel; Power: 5kW; Voltage: 220V; Frequency: 50Hz; Wok Body Specs: Dome-shaped wok Φ300*H300; Cooking Capacity: 4-6L (effective capacity at 30° tilt); Wok Body Material: SUS409 stainless steel non-stick wok / cast iron wok; Display: 7-inch multi-function touch display; Tilting Angle: Stepless multi-angle electric tilting, auto food discharging; Stirring Method: 360° drum rotation three-dimensional stirring and heating; Heat and Stirring Speed: Multi-level adjustable; Recipes: Stores up to 800 recipes (smart learning function); Voice: Smart real-time voice broadcast; Cleaning: High-pressure water gun cleaning, fast and efficient",
     power: "5kW",
     voltage: "220V",
     material: "整机外壳不锈钢材质",
@@ -869,15 +989,18 @@ window.PRODUCT_DATA_TABLE = [
       {
         filePath: "/assets/images/products/DLB-GQ30J-1.webp",
         isPrimary: true,
-        isHires: false
-      }
+        isHires: false,
+      },
     ],
     is_home_core: false,
     highlights: "",
-    scenarios: "用途：餐饮连锁、外 卖、小食店等场所； 适用于自动烹饪炒菜 、炒饭、炒粉、炒面 、辣子鸡、麻辣香锅 、小龙虾、香辣虾蟹 、炒肉松、炒酱料、 炒干果、炒茶叶等。 产能：单次烹饪0.5- 3.5kg。",
-    usage: "用途：餐饮连锁、外 卖、小食店等场所； 适用于自动烹饪炒菜 、炒饭、炒粉、炒面 、辣子鸡、麻辣香锅 、小龙虾、香辣虾蟹 、炒肉松、炒酱料、 炒干果、炒茶叶等。 产能：单次烹饪0.5- 3.5kg。",
-    usageEn: "Suitable for restaurant chains, food delivery, snack shops and more. Ideal for automatic cooking of stir-fried dishes, fried rice, fried noodles, chow mein, spicy chicken, spicy hot pot, crawfish, spicy shrimp & crab, meat floss, sauce stir-frying, dried fruit & nut roasting, tea roasting, and more. Capacity: 0.5–3.5 kg per batch.",
-    materialEn: "Full stainless steel body"
+    scenarios:
+      "用途：餐饮连锁、外 卖、小食店等场所； 适用于自动烹饪炒菜 、炒饭、炒粉、炒面 、辣子鸡、麻辣香锅 、小龙虾、香辣虾蟹 、炒肉松、炒酱料、 炒干果、炒茶叶等。 产能：单次烹饪0.5- 3.5kg。",
+    usage:
+      "用途：餐饮连锁、外 卖、小食店等场所； 适用于自动烹饪炒菜 、炒饭、炒粉、炒面 、辣子鸡、麻辣香锅 、小龙虾、香辣虾蟹 、炒肉松、炒酱料、 炒干果、炒茶叶等。 产能：单次烹饪0.5- 3.5kg。",
+    usageEn:
+      "Suitable for restaurant chains, food delivery, snack shops and more. Ideal for automatic cooking of stir-fried dishes, fried rice, fried noodles, chow mein, spicy chicken, spicy hot pot, crawfish, spicy shrimp & crab, meat floss, sauce stir-frying, dried fruit & nut roasting, tea roasting, and more. Capacity: 0.5–3.5 kg per batch.",
+    materialEn: "Full stainless steel body",
   },
   {
     model: "DLB-TGQ36J",
@@ -886,8 +1009,10 @@ window.PRODUCT_DATA_TABLE = [
     nameEn: "Countertop 360 Induction Cooker (Touch 800)",
     category: "翻炒系列",
     subCategory: "滚筒炒菜机",
-    specifications: "材质：采用优质不锈钢 功率：5kW；电压：220V；频率：50Hz 锅体规格：直桶形Φ360*H360 炒菜容量：12L（倾角30 °有效容量） 锅体材质：SUS409不锈钢不粘锅 显示屏：7寸多功能触模显示屏 锅倾角度：无极多角度电动翻锅 ， 自动倒菜 翻炒方式：采用360 °滚筒旋转立体翻炒加热 火力和翻炒速度：多档位可调节 菜谱：可存储800个菜谱（智能学习功能） 语音：智能实时语音播报功能 清洗：高压水枪清洗，快捷高效",
-    specificationsEn: "Material: Premium stainless steel; Power: 5kW; Voltage: 220V; Frequency: 50Hz; Wok Body Specs: Straight cylinder Φ360*H360; Cooking Capacity: 12L (effective capacity at 30° tilt); Wok Body Material: SUS409 stainless steel non-stick wok; Display: 7-inch multi-function touch display; Tilting Angle: Stepless multi-angle electric tilting, auto food discharging; Stirring Method: 360° drum rotation three-dimensional stirring and heating; Heat and Stirring Speed: Multi-level adjustable; Recipes: Stores up to 800 recipes (smart learning function); Voice: Smart real-time voice broadcast; Cleaning: High-pressure water gun cleaning, fast and efficient",
+    specifications:
+      "材质：采用优质不锈钢 功率：5kW；电压：220V；频率：50Hz 锅体规格：直桶形Φ360*H360 炒菜容量：12L（倾角30 °有效容量） 锅体材质：SUS409不锈钢不粘锅 显示屏：7寸多功能触模显示屏 锅倾角度：无极多角度电动翻锅 ， 自动倒菜 翻炒方式：采用360 °滚筒旋转立体翻炒加热 火力和翻炒速度：多档位可调节 菜谱：可存储800个菜谱（智能学习功能） 语音：智能实时语音播报功能 清洗：高压水枪清洗，快捷高效",
+    specificationsEn:
+      "Material: Premium stainless steel; Power: 5kW; Voltage: 220V; Frequency: 50Hz; Wok Body Specs: Straight cylinder Φ360*H360; Cooking Capacity: 12L (effective capacity at 30° tilt); Wok Body Material: SUS409 stainless steel non-stick wok; Display: 7-inch multi-function touch display; Tilting Angle: Stepless multi-angle electric tilting, auto food discharging; Stirring Method: 360° drum rotation three-dimensional stirring and heating; Heat and Stirring Speed: Multi-level adjustable; Recipes: Stores up to 800 recipes (smart learning function); Voice: Smart real-time voice broadcast; Cleaning: High-pressure water gun cleaning, fast and efficient",
     power: "5kW",
     voltage: "220V",
     material: "采用优质不锈钢",
@@ -902,15 +1027,18 @@ window.PRODUCT_DATA_TABLE = [
       {
         filePath: "/assets/images/products/DLB-TGQ36J-1.webp",
         isPrimary: true,
-        isHires: false
-      }
+        isHires: false,
+      },
     ],
     is_home_core: false,
     highlights: "",
-    scenarios: "用途：餐饮连锁、外 卖、小食店等场所； 适用于自动烹饪炒菜 、炒饭、炒粉、炒面 、辣子鸡、麻辣香锅 、小龙虾、香辣虾蟹 、炒肉松、炒酱料、 炒干果、炒茶叶等。 产能：单次烹饪1-5kg 。",
-    usage: "用途：餐饮连锁、外 卖、小食店等场所； 适用于自动烹饪炒菜 、炒饭、炒粉、炒面 、辣子鸡、麻辣香锅 、小龙虾、香辣虾蟹 、炒肉松、炒酱料、 炒干果、炒茶叶等。 产能：单次烹饪1-5kg 。",
-    usageEn: "Suitable for restaurant chains, food delivery, snack shops and more. Ideal for automatic cooking of stir-fried dishes, fried rice, fried noodles, chow mein, spicy chicken, spicy hot pot, crawfish, spicy shrimp & crab, meat floss, sauce stir-frying, dried fruit & nut roasting, tea roasting, and more. Capacity: 1–5 kg per batch.",
-    materialEn: "Premium stainless steel"
+    scenarios:
+      "用途：餐饮连锁、外 卖、小食店等场所； 适用于自动烹饪炒菜 、炒饭、炒粉、炒面 、辣子鸡、麻辣香锅 、小龙虾、香辣虾蟹 、炒肉松、炒酱料、 炒干果、炒茶叶等。 产能：单次烹饪1-5kg 。",
+    usage:
+      "用途：餐饮连锁、外 卖、小食店等场所； 适用于自动烹饪炒菜 、炒饭、炒粉、炒面 、辣子鸡、麻辣香锅 、小龙虾、香辣虾蟹 、炒肉松、炒酱料、 炒干果、炒茶叶等。 产能：单次烹饪1-5kg 。",
+    usageEn:
+      "Suitable for restaurant chains, food delivery, snack shops and more. Ideal for automatic cooking of stir-fried dishes, fried rice, fried noodles, chow mein, spicy chicken, spicy hot pot, crawfish, spicy shrimp & crab, meat floss, sauce stir-frying, dried fruit & nut roasting, tea roasting, and more. Capacity: 1–5 kg per batch.",
+    materialEn: "Premium stainless steel",
   },
   {
     model: "DLB-TGQ36J/9",
@@ -919,8 +1047,10 @@ window.PRODUCT_DATA_TABLE = [
     nameEn: "Countertop 360 Induction Cooker (Touch 800)",
     category: "翻炒系列",
     subCategory: "滚筒炒菜机",
-    specifications: "材质：采用优质不锈钢 功率：9kW；电压：380V；频率：50Hz 锅体规格：直桶形Φ360*H360 炒菜容量：12L（倾角30 °有效容量） 锅体材质：SUS409不锈钢不粘锅 显示屏：7寸多功能触模显示屏 锅倾角度：无极多角度电动翻锅 ， 自动倒菜 翻炒方式：采用360 °滚筒旋转立体翻炒加热 火力和翻炒速度：多档位可调节 菜谱：可存储800个菜谱（智能学习功能） 语音：智能实时语音播报功能 清洗：高压水枪清洗，快捷高效",
-    specificationsEn: "Material: Premium stainless steel; Power: 9kW; Voltage: 380V; Frequency: 50Hz; Wok Body Specs: Straight cylinder Φ360*H360; Cooking Capacity: 12L (effective capacity at 30° tilt); Wok Body Material: SUS409 stainless steel non-stick wok; Display: 7-inch multi-function touch display; Tilting Angle: Stepless multi-angle electric tilting, auto food discharging; Stirring Method: 360° drum rotation three-dimensional stirring and heating; Heat and Stirring Speed: Multi-level adjustable; Recipes: Stores up to 800 recipes (smart learning function); Voice: Smart real-time voice broadcast; Cleaning: High-pressure water gun cleaning, fast and efficient",
+    specifications:
+      "材质：采用优质不锈钢 功率：9kW；电压：380V；频率：50Hz 锅体规格：直桶形Φ360*H360 炒菜容量：12L（倾角30 °有效容量） 锅体材质：SUS409不锈钢不粘锅 显示屏：7寸多功能触模显示屏 锅倾角度：无极多角度电动翻锅 ， 自动倒菜 翻炒方式：采用360 °滚筒旋转立体翻炒加热 火力和翻炒速度：多档位可调节 菜谱：可存储800个菜谱（智能学习功能） 语音：智能实时语音播报功能 清洗：高压水枪清洗，快捷高效",
+    specificationsEn:
+      "Material: Premium stainless steel; Power: 9kW; Voltage: 380V; Frequency: 50Hz; Wok Body Specs: Straight cylinder Φ360*H360; Cooking Capacity: 12L (effective capacity at 30° tilt); Wok Body Material: SUS409 stainless steel non-stick wok; Display: 7-inch multi-function touch display; Tilting Angle: Stepless multi-angle electric tilting, auto food discharging; Stirring Method: 360° drum rotation three-dimensional stirring and heating; Heat and Stirring Speed: Multi-level adjustable; Recipes: Stores up to 800 recipes (smart learning function); Voice: Smart real-time voice broadcast; Cleaning: High-pressure water gun cleaning, fast and efficient",
     power: "9kW",
     voltage: "380V",
     material: "采用优质不锈钢",
@@ -934,10 +1064,13 @@ window.PRODUCT_DATA_TABLE = [
     images: [],
     is_home_core: false,
     highlights: "",
-    scenarios: "用途：餐饮连锁、外 卖、小食店等场所； 适用于自动烹饪炒菜 、炒饭、炒粉、炒面 、辣子鸡、麻辣香锅 、小龙虾、香辣虾蟹 、炒肉松、炒酱料、 炒干果、炒茶叶等。 产能：单次烹饪1-5kg 。",
-    usage: "用途：餐饮连锁、外 卖、小食店等场所； 适用于自动烹饪炒菜 、炒饭、炒粉、炒面 、辣子鸡、麻辣香锅 、小龙虾、香辣虾蟹 、炒肉松、炒酱料、 炒干果、炒茶叶等。 产能：单次烹饪1-5kg 。",
-    usageEn: "Suitable for restaurant chains, food delivery, snack shops and more. Ideal for automatic cooking of stir-fried dishes, fried rice, fried noodles, chow mein, spicy chicken, spicy hot pot, crawfish, spicy shrimp & crab, meat floss, sauce stir-frying, dried fruit & nut roasting, tea roasting, and more. Capacity: 1–5 kg per batch.",
-    materialEn: "Premium stainless steel"
+    scenarios:
+      "用途：餐饮连锁、外 卖、小食店等场所； 适用于自动烹饪炒菜 、炒饭、炒粉、炒面 、辣子鸡、麻辣香锅 、小龙虾、香辣虾蟹 、炒肉松、炒酱料、 炒干果、炒茶叶等。 产能：单次烹饪1-5kg 。",
+    usage:
+      "用途：餐饮连锁、外 卖、小食店等场所； 适用于自动烹饪炒菜 、炒饭、炒粉、炒面 、辣子鸡、麻辣香锅 、小龙虾、香辣虾蟹 、炒肉松、炒酱料、 炒干果、炒茶叶等。 产能：单次烹饪1-5kg 。",
+    usageEn:
+      "Suitable for restaurant chains, food delivery, snack shops and more. Ideal for automatic cooking of stir-fried dishes, fried rice, fried noodles, chow mein, spicy chicken, spicy hot pot, crawfish, spicy shrimp & crab, meat floss, sauce stir-frying, dried fruit & nut roasting, tea roasting, and more. Capacity: 1–5 kg per batch.",
+    materialEn: "Premium stainless steel",
   },
   {
     model: "DLB-GQ36J/9",
@@ -946,8 +1079,10 @@ window.PRODUCT_DATA_TABLE = [
     nameEn: "Floor-standing 360 Induction Cooker (Touch 800)",
     category: "翻炒系列",
     subCategory: "滚筒炒菜机",
-    specifications: "材质：整机外壳不锈钢材质 功率：9kW；电压：380V；频率：50Hz 锅体规格：球釜型锅Φ360*H360 炒菜容量：12L（倾角30 °有效容量） 锅体材质：SUS409不锈钢不粘锅 显示屏：7寸多功能触模显示屏 锅倾角度：无极多角度电动翻锅 ， 自动倒菜 翻炒方式：采用360 °滚筒旋转立体翻炒加热 火力和翻炒速度：多档位可调节 菜谱：可存储800个菜谱（智能学习功能） 语音：智能实时语音播报功能 清洗：高压水枪清洗，快捷高效",
-    specificationsEn: "Material: Entire housing made of stainless steel; Power: 9kW; Voltage: 380V; Frequency: 50Hz; Wok Body Specs: Dome-shaped wok Φ360*H360; Cooking Capacity: 12L (effective capacity at 30° tilt); Wok Body Material: SUS409 stainless steel non-stick wok; Display: 7-inch multi-function touch display; Tilting Angle: Stepless multi-angle electric tilting, auto food discharging; Stirring Method: 360° drum rotation three-dimensional stirring and heating; Heat and Stirring Speed: Multi-level adjustable; Recipes: Stores up to 800 recipes (smart learning function); Voice: Smart real-time voice broadcast; Cleaning: High-pressure water gun cleaning, fast and efficient",
+    specifications:
+      "材质：整机外壳不锈钢材质 功率：9kW；电压：380V；频率：50Hz 锅体规格：球釜型锅Φ360*H360 炒菜容量：12L（倾角30 °有效容量） 锅体材质：SUS409不锈钢不粘锅 显示屏：7寸多功能触模显示屏 锅倾角度：无极多角度电动翻锅 ， 自动倒菜 翻炒方式：采用360 °滚筒旋转立体翻炒加热 火力和翻炒速度：多档位可调节 菜谱：可存储800个菜谱（智能学习功能） 语音：智能实时语音播报功能 清洗：高压水枪清洗，快捷高效",
+    specificationsEn:
+      "Material: Entire housing made of stainless steel; Power: 9kW; Voltage: 380V; Frequency: 50Hz; Wok Body Specs: Dome-shaped wok Φ360*H360; Cooking Capacity: 12L (effective capacity at 30° tilt); Wok Body Material: SUS409 stainless steel non-stick wok; Display: 7-inch multi-function touch display; Tilting Angle: Stepless multi-angle electric tilting, auto food discharging; Stirring Method: 360° drum rotation three-dimensional stirring and heating; Heat and Stirring Speed: Multi-level adjustable; Recipes: Stores up to 800 recipes (smart learning function); Voice: Smart real-time voice broadcast; Cleaning: High-pressure water gun cleaning, fast and efficient",
     power: "9kW",
     voltage: "380V",
     material: "整机外壳不锈钢材质",
@@ -961,10 +1096,13 @@ window.PRODUCT_DATA_TABLE = [
     images: [],
     is_home_core: false,
     highlights: "",
-    scenarios: "用途：餐饮连锁、外 卖、小食店等场所； 适用于自动烹饪炒菜 、炒饭、炒粉、炒面 、辣子鸡、麻辣香锅 、小龙虾、香辣虾蟹 、炒肉松、炒酱料、 炒干果、炒茶叶等。 产能：单次烹饪1-5kg 。",
-    usage: "用途：餐饮连锁、外 卖、小食店等场所； 适用于自动烹饪炒菜 、炒饭、炒粉、炒面 、辣子鸡、麻辣香锅 、小龙虾、香辣虾蟹 、炒肉松、炒酱料、 炒干果、炒茶叶等。 产能：单次烹饪1-5kg 。",
-    usageEn: "Suitable for restaurant chains, food delivery, snack shops and more. Ideal for automatic cooking of stir-fried dishes, fried rice, fried noodles, chow mein, spicy chicken, spicy hot pot, crawfish, spicy shrimp & crab, meat floss, sauce stir-frying, dried fruit & nut roasting, tea roasting, and more. Capacity: 1–5 kg per batch.",
-    materialEn: "Full stainless steel body"
+    scenarios:
+      "用途：餐饮连锁、外 卖、小食店等场所； 适用于自动烹饪炒菜 、炒饭、炒粉、炒面 、辣子鸡、麻辣香锅 、小龙虾、香辣虾蟹 、炒肉松、炒酱料、 炒干果、炒茶叶等。 产能：单次烹饪1-5kg 。",
+    usage:
+      "用途：餐饮连锁、外 卖、小食店等场所； 适用于自动烹饪炒菜 、炒饭、炒粉、炒面 、辣子鸡、麻辣香锅 、小龙虾、香辣虾蟹 、炒肉松、炒酱料、 炒干果、炒茶叶等。 产能：单次烹饪1-5kg 。",
+    usageEn:
+      "Suitable for restaurant chains, food delivery, snack shops and more. Ideal for automatic cooking of stir-fried dishes, fried rice, fried noodles, chow mein, spicy chicken, spicy hot pot, crawfish, spicy shrimp & crab, meat floss, sauce stir-frying, dried fruit & nut roasting, tea roasting, and more. Capacity: 1–5 kg per batch.",
+    materialEn: "Full stainless steel body",
   },
   {
     model: "DLB-TGQ40J",
@@ -973,8 +1111,10 @@ window.PRODUCT_DATA_TABLE = [
     nameEn: "Countertop 400 Induction Cooker (Touchscreen)",
     category: "翻炒系列",
     subCategory: "滚筒炒菜机",
-    specifications: "材质：采用优质不锈钢 功率：8-10kW；电压：380V；频率：50Hz 锅体规格：仿球釜型锅体内直径Φ380 炒菜容量：12L（倾角30 °有效容量） 锅体材质：SUS409不锈钢不粘锅/铸铁锅 显示屏：7寸多功能触模显示屏 锅倾角度：无极多角度电动翻锅 ， 自动倒菜 翻炒方式：采用360 °滚筒旋转立体翻炒加热 火力和翻炒速度：多档位可调节 菜谱：可存储800个菜谱（智能学习功能） 语音：智能实时语音播报功能 清洗：高压水枪清洗，快捷高效",
-    specificationsEn: "Material: Premium stainless steel; Power: 8-10kW; Voltage: 380V; Frequency: 50Hz; Wok Body Specs: Dome-shaped wok inner diameter Φ380; Cooking Capacity: 12L (effective capacity at 30° tilt); Wok Body Material: SUS409 stainless steel non-stick wok / cast iron wok; Display: 7-inch multi-function touch display; Tilting Angle: Stepless multi-angle electric tilting, auto food discharging; Stirring Method: 360° drum rotation three-dimensional stirring and heating; Heat and Stirring Speed: Multi-level adjustable; Recipes: Stores up to 800 recipes (smart learning function); Voice: Smart real-time voice broadcast; Cleaning: High-pressure water gun cleaning, fast and efficient",
+    specifications:
+      "材质：采用优质不锈钢 功率：8-10kW；电压：380V；频率：50Hz 锅体规格：仿球釜型锅体内直径Φ380 炒菜容量：12L（倾角30 °有效容量） 锅体材质：SUS409不锈钢不粘锅/铸铁锅 显示屏：7寸多功能触模显示屏 锅倾角度：无极多角度电动翻锅 ， 自动倒菜 翻炒方式：采用360 °滚筒旋转立体翻炒加热 火力和翻炒速度：多档位可调节 菜谱：可存储800个菜谱（智能学习功能） 语音：智能实时语音播报功能 清洗：高压水枪清洗，快捷高效",
+    specificationsEn:
+      "Material: Premium stainless steel; Power: 8-10kW; Voltage: 380V; Frequency: 50Hz; Wok Body Specs: Dome-shaped wok inner diameter Φ380; Cooking Capacity: 12L (effective capacity at 30° tilt); Wok Body Material: SUS409 stainless steel non-stick wok / cast iron wok; Display: 7-inch multi-function touch display; Tilting Angle: Stepless multi-angle electric tilting, auto food discharging; Stirring Method: 360° drum rotation three-dimensional stirring and heating; Heat and Stirring Speed: Multi-level adjustable; Recipes: Stores up to 800 recipes (smart learning function); Voice: Smart real-time voice broadcast; Cleaning: High-pressure water gun cleaning, fast and efficient",
     power: "8-10kW",
     voltage: "380V",
     material: "采用优质不锈钢",
@@ -989,15 +1129,18 @@ window.PRODUCT_DATA_TABLE = [
       {
         filePath: "/assets/images/products/DLB-TGQ40J-1.webp",
         isPrimary: true,
-        isHires: false
-      }
+        isHires: false,
+      },
     ],
     is_home_core: false,
     highlights: "",
-    scenarios: "用途：餐饮连锁、外 卖、酒店酒楼宴席、 企事业单位员工餐等 场所；适用于自动烹 饪炒菜、炒饭、炒粉 、炒面、辣子鸡、麻 辣香锅、小龙虾、香 辣虾蟹等。 产能：单次烹饪1-5kg 。",
-    usage: "用途：餐饮连锁、外 卖、酒店酒楼宴席、 企事业单位员工餐等 场所；适用于自动烹 饪炒菜、炒饭、炒粉 、炒面、辣子鸡、麻 辣香锅、小龙虾、香 辣虾蟹等。 产能：单次烹饪1-5kg 。",
-    usageEn: "Suitable for restaurant chains, food delivery, hotel banquets, corporate & institutional staff dining, and more. Ideal for automatic cooking of stir-fried dishes, fried rice, fried noodles, chow mein, spicy chicken, spicy hot pot, crawfish, spicy shrimp & crab, and more. Capacity: 1–5 kg per batch.",
-    materialEn: "Premium stainless steel"
+    scenarios:
+      "用途：餐饮连锁、外 卖、酒店酒楼宴席、 企事业单位员工餐等 场所；适用于自动烹 饪炒菜、炒饭、炒粉 、炒面、辣子鸡、麻 辣香锅、小龙虾、香 辣虾蟹等。 产能：单次烹饪1-5kg 。",
+    usage:
+      "用途：餐饮连锁、外 卖、酒店酒楼宴席、 企事业单位员工餐等 场所；适用于自动烹 饪炒菜、炒饭、炒粉 、炒面、辣子鸡、麻 辣香锅、小龙虾、香 辣虾蟹等。 产能：单次烹饪1-5kg 。",
+    usageEn:
+      "Suitable for restaurant chains, food delivery, hotel banquets, corporate & institutional staff dining, and more. Ideal for automatic cooking of stir-fried dishes, fried rice, fried noodles, chow mein, spicy chicken, spicy hot pot, crawfish, spicy shrimp & crab, and more. Capacity: 1–5 kg per batch.",
+    materialEn: "Premium stainless steel",
   },
   {
     model: "DLB-TGQ30",
@@ -1006,8 +1149,10 @@ window.PRODUCT_DATA_TABLE = [
     nameEn: "Countertop 300 Induction Cooker (Touch+Auto Spray)",
     category: "翻炒系列",
     subCategory: "滚筒炒菜机",
-    specifications: "材质：采用优质不锈钢 功率：5kW；电压：220V；频率：50Hz 锅体规格：直桶型或球釜型锅Φ300*H300 炒菜容量：4-6L（倾角30 °有效容量） 锅体材质：SUS409不锈钢不粘锅 显示屏：7寸多功能触模显示屏 翻锅方式： 电控翻锅（无极多角度） 安全防护：带急停功能 菜单：存储800个菜谱（智能学习功能） 语音：智能实时语音播报功能 喷料：带3/4路自动喷料口， 自动定量加料 储料仓：左侧箱体上部可开盖存储液体味料 接料盘：接料台+排水池+可提冲孔隔渣网 清洗：一键式自动清洗，水枪辅助清洗",
-    specificationsEn: "Material: Premium stainless steel; Power: 5kW; Voltage: 220V; Frequency: 50Hz; Wok Body Specs: Straight cylinder or dome-shaped wok Φ300*H300; Cooking Capacity: 4-6L (effective capacity at 30° tilt); Wok Body Material: SUS409 stainless steel non-stick wok; Display: 7-inch multi-function touch display; Tilting Method: Electric tilting (stepless multi-angle); Safety: Emergency stop function; Menu: Stores 800 recipes (smart learning function); Voice: Smart real-time voice broadcast; Oil Spray: Equipped with 3/4-way auto oil spray ports, auto quantitative feeding; Storage Compartment: Left box upper part can be opened to store liquid seasonings; Catch Tray: Catch table + drain + removable perforated strainer mesh; Cleaning: One-key auto cleaning, assisted by water gun",
+    specifications:
+      "材质：采用优质不锈钢 功率：5kW；电压：220V；频率：50Hz 锅体规格：直桶型或球釜型锅Φ300*H300 炒菜容量：4-6L（倾角30 °有效容量） 锅体材质：SUS409不锈钢不粘锅 显示屏：7寸多功能触模显示屏 翻锅方式： 电控翻锅（无极多角度） 安全防护：带急停功能 菜单：存储800个菜谱（智能学习功能） 语音：智能实时语音播报功能 喷料：带3/4路自动喷料口， 自动定量加料 储料仓：左侧箱体上部可开盖存储液体味料 接料盘：接料台+排水池+可提冲孔隔渣网 清洗：一键式自动清洗，水枪辅助清洗",
+    specificationsEn:
+      "Material: Premium stainless steel; Power: 5kW; Voltage: 220V; Frequency: 50Hz; Wok Body Specs: Straight cylinder or dome-shaped wok Φ300*H300; Cooking Capacity: 4-6L (effective capacity at 30° tilt); Wok Body Material: SUS409 stainless steel non-stick wok; Display: 7-inch multi-function touch display; Tilting Method: Electric tilting (stepless multi-angle); Safety: Emergency stop function; Menu: Stores 800 recipes (smart learning function); Voice: Smart real-time voice broadcast; Oil Spray: Equipped with 3/4-way auto oil spray ports, auto quantitative feeding; Storage Compartment: Left box upper part can be opened to store liquid seasonings; Catch Tray: Catch table + drain + removable perforated strainer mesh; Cleaning: One-key auto cleaning, assisted by water gun",
     power: "5kW",
     voltage: "220V",
     material: "采用优质不锈钢",
@@ -1022,15 +1167,18 @@ window.PRODUCT_DATA_TABLE = [
       {
         filePath: "/assets/images/products/DLB-TGQ30-1.webp",
         isPrimary: true,
-        isHires: false
-      }
+        isHires: false,
+      },
     ],
     is_home_core: false,
     highlights: "",
-    scenarios: "用途：餐饮连锁、外 卖、小食店等场所； 适用于自动烹饪炒菜 、炒饭、炒粉、炒面 、辣子鸡、麻辣香锅 、小龙虾、香辣虾蟹 、炒肉松、炒酱料等 。 产能：单次烹饪0.5- 3.5kg。",
-    usage: "用途：餐饮连锁、外 卖、小食店等场所； 适用于自动烹饪炒菜 、炒饭、炒粉、炒面 、辣子鸡、麻辣香锅 、小龙虾、香辣虾蟹 、炒肉松、炒酱料等 。 产能：单次烹饪0.5- 3.5kg。",
-    usageEn: "Suitable for restaurant chains, food delivery, snack shops and more. Ideal for automatic cooking of stir-fried dishes, fried rice, fried noodles, chow mein, spicy chicken, spicy hot pot, crawfish, spicy shrimp & crab, meat floss, sauce stir-frying, and more. Capacity: 0.5–3.5 kg per batch.",
-    materialEn: "Premium stainless steel"
+    scenarios:
+      "用途：餐饮连锁、外 卖、小食店等场所； 适用于自动烹饪炒菜 、炒饭、炒粉、炒面 、辣子鸡、麻辣香锅 、小龙虾、香辣虾蟹 、炒肉松、炒酱料等 。 产能：单次烹饪0.5- 3.5kg。",
+    usage:
+      "用途：餐饮连锁、外 卖、小食店等场所； 适用于自动烹饪炒菜 、炒饭、炒粉、炒面 、辣子鸡、麻辣香锅 、小龙虾、香辣虾蟹 、炒肉松、炒酱料等 。 产能：单次烹饪0.5- 3.5kg。",
+    usageEn:
+      "Suitable for restaurant chains, food delivery, snack shops and more. Ideal for automatic cooking of stir-fried dishes, fried rice, fried noodles, chow mein, spicy chicken, spicy hot pot, crawfish, spicy shrimp & crab, meat floss, sauce stir-frying, and more. Capacity: 0.5–3.5 kg per batch.",
+    materialEn: "Premium stainless steel",
   },
   {
     model: "DLB-GQ30",
@@ -1039,8 +1187,10 @@ window.PRODUCT_DATA_TABLE = [
     nameEn: "Floor-standing 300 Induction Cooker (Touch+Auto Spray)",
     category: "翻炒系列",
     subCategory: "滚筒炒菜机",
-    specifications: "材质：采用优质不锈钢 功率：5kW；电压：220V；频率：50Hz 锅体规格：球釜型锅Φ300*H300 炒菜容量：4-6L（倾角30 °有效容量） 锅体材质：SUS409不锈钢不粘锅 显示屏：7寸多功能触模显示屏 翻锅方式： 电控翻锅（无极多角度） 安全防护：带急停功能 菜单：存储800个菜谱（智能学习功能） 语音：智能实时语音播报功能 喷料：带5路自动喷料口， 自动定量加料 储料仓：箱体可开门存储液体味料 接料盘：接料台+排水池+可提冲孔隔渣网 清洗：一键式自动清洗模式 ，水枪辅助清洗",
-    specificationsEn: "Material: Premium stainless steel; Power: 5kW; Voltage: 220V; Frequency: 50Hz; Wok Body Specs: Dome-shaped wok Φ300*H300; Cooking Capacity: 4-6L (effective capacity at 30° tilt); Wok Body Material: SUS409 stainless steel non-stick wok; Display: 7-inch multi-function touch display; Tilting Method: Electric tilting (stepless multi-angle); Safety: Emergency stop function; Menu: Stores 800 recipes (smart learning function); Voice: Smart real-time voice broadcast; Oil Spray: Equipped with 5-way auto oil spray ports, auto quantitative feeding; Storage Compartment: Box can be opened to store liquid seasonings; Catch Tray: Catch table + drain + removable perforated strainer mesh; Cleaning: One-key auto cleaning mode, assisted by water gun",
+    specifications:
+      "材质：采用优质不锈钢 功率：5kW；电压：220V；频率：50Hz 锅体规格：球釜型锅Φ300*H300 炒菜容量：4-6L（倾角30 °有效容量） 锅体材质：SUS409不锈钢不粘锅 显示屏：7寸多功能触模显示屏 翻锅方式： 电控翻锅（无极多角度） 安全防护：带急停功能 菜单：存储800个菜谱（智能学习功能） 语音：智能实时语音播报功能 喷料：带5路自动喷料口， 自动定量加料 储料仓：箱体可开门存储液体味料 接料盘：接料台+排水池+可提冲孔隔渣网 清洗：一键式自动清洗模式 ，水枪辅助清洗",
+    specificationsEn:
+      "Material: Premium stainless steel; Power: 5kW; Voltage: 220V; Frequency: 50Hz; Wok Body Specs: Dome-shaped wok Φ300*H300; Cooking Capacity: 4-6L (effective capacity at 30° tilt); Wok Body Material: SUS409 stainless steel non-stick wok; Display: 7-inch multi-function touch display; Tilting Method: Electric tilting (stepless multi-angle); Safety: Emergency stop function; Menu: Stores 800 recipes (smart learning function); Voice: Smart real-time voice broadcast; Oil Spray: Equipped with 5-way auto oil spray ports, auto quantitative feeding; Storage Compartment: Box can be opened to store liquid seasonings; Catch Tray: Catch table + drain + removable perforated strainer mesh; Cleaning: One-key auto cleaning mode, assisted by water gun",
     power: "5kW",
     voltage: "220V",
     material: "采用优质不锈钢",
@@ -1055,15 +1205,18 @@ window.PRODUCT_DATA_TABLE = [
       {
         filePath: "/assets/images/products/DLB-GQ30-1.webp",
         isPrimary: true,
-        isHires: false
-      }
+        isHires: false,
+      },
     ],
     is_home_core: false,
     highlights: "",
-    scenarios: "用途：餐饮连锁、外 卖、小食店等场所； 适用于自动烹饪炒菜 、炒饭、炒粉、炒面 、辣子鸡、麻辣香锅 、小龙虾、香辣虾蟹 、炒肉松、炒酱料等 。 产能：单次烹饪0.5- 3.5kg。",
-    usage: "用途：餐饮连锁、外 卖、小食店等场所； 适用于自动烹饪炒菜 、炒饭、炒粉、炒面 、辣子鸡、麻辣香锅 、小龙虾、香辣虾蟹 、炒肉松、炒酱料等 。 产能：单次烹饪0.5- 3.5kg。",
-    usageEn: "Suitable for restaurant chains, food delivery, snack shops and more. Ideal for automatic cooking of stir-fried dishes, fried rice, fried noodles, chow mein, spicy chicken, spicy hot pot, crawfish, spicy shrimp & crab, meat floss, sauce stir-frying, and more. Capacity: 0.5–3.5 kg per batch.",
-    materialEn: "Premium stainless steel"
+    scenarios:
+      "用途：餐饮连锁、外 卖、小食店等场所； 适用于自动烹饪炒菜 、炒饭、炒粉、炒面 、辣子鸡、麻辣香锅 、小龙虾、香辣虾蟹 、炒肉松、炒酱料等 。 产能：单次烹饪0.5- 3.5kg。",
+    usage:
+      "用途：餐饮连锁、外 卖、小食店等场所； 适用于自动烹饪炒菜 、炒饭、炒粉、炒面 、辣子鸡、麻辣香锅 、小龙虾、香辣虾蟹 、炒肉松、炒酱料等 。 产能：单次烹饪0.5- 3.5kg。",
+    usageEn:
+      "Suitable for restaurant chains, food delivery, snack shops and more. Ideal for automatic cooking of stir-fried dishes, fried rice, fried noodles, chow mein, spicy chicken, spicy hot pot, crawfish, spicy shrimp & crab, meat floss, sauce stir-frying, and more. Capacity: 0.5–3.5 kg per batch.",
+    materialEn: "Premium stainless steel",
   },
   {
     model: "DLB-GQ36",
@@ -1072,8 +1225,10 @@ window.PRODUCT_DATA_TABLE = [
     nameEn: "Floor-standing 360 Induction Cooker (Touch+Auto Spray)",
     category: "翻炒系列",
     subCategory: "滚筒炒菜机",
-    specifications: "材质：整机外壳不锈钢材质 功率：9kW；电压：380V；频率：50Hz 锅体规格：球釜型锅Φ360*H360 炒菜容量：12L（倾角30 °有效容量） 锅体材质：SUS409不锈钢不粘锅 显示屏：7寸多功能触模显示屏 翻锅方式： 电控翻锅（无极多角度） 安全防护：带急停功能 菜单：存储800个菜谱（智能学习功能） 语音：智能实时语音播报功能 喷料：带4路自动喷料口， 自动定量加料 储料仓：箱体可开门存储液体味料 接料盘：接料台+排水池+可提冲孔隔渣网 清洗：一键式自动清洗模式 ，水枪辅助清洗",
-    specificationsEn: "Material: Entire housing made of stainless steel; Power: 9kW; Voltage: 380V; Frequency: 50Hz; Wok Body Specs: Dome-shaped wok Φ360*H360; Cooking Capacity: 12L (effective capacity at 30° tilt); Wok Body Material: SUS409 stainless steel non-stick wok; Display: 7-inch multi-function touch display; Tilting Method: Electric tilting (stepless multi-angle); Safety: Emergency stop function; Menu: Stores 800 recipes (smart learning function); Voice: Smart real-time voice broadcast; Oil Spray: Equipped with 4-way auto oil spray ports, auto quantitative feeding; Storage Compartment: Box can be opened to store liquid seasonings; Catch Tray: Catch table + drain + removable perforated strainer mesh; Cleaning: One-key auto cleaning mode, assisted by water gun",
+    specifications:
+      "材质：整机外壳不锈钢材质 功率：9kW；电压：380V；频率：50Hz 锅体规格：球釜型锅Φ360*H360 炒菜容量：12L（倾角30 °有效容量） 锅体材质：SUS409不锈钢不粘锅 显示屏：7寸多功能触模显示屏 翻锅方式： 电控翻锅（无极多角度） 安全防护：带急停功能 菜单：存储800个菜谱（智能学习功能） 语音：智能实时语音播报功能 喷料：带4路自动喷料口， 自动定量加料 储料仓：箱体可开门存储液体味料 接料盘：接料台+排水池+可提冲孔隔渣网 清洗：一键式自动清洗模式 ，水枪辅助清洗",
+    specificationsEn:
+      "Material: Entire housing made of stainless steel; Power: 9kW; Voltage: 380V; Frequency: 50Hz; Wok Body Specs: Dome-shaped wok Φ360*H360; Cooking Capacity: 12L (effective capacity at 30° tilt); Wok Body Material: SUS409 stainless steel non-stick wok; Display: 7-inch multi-function touch display; Tilting Method: Electric tilting (stepless multi-angle); Safety: Emergency stop function; Menu: Stores 800 recipes (smart learning function); Voice: Smart real-time voice broadcast; Oil Spray: Equipped with 4-way auto oil spray ports, auto quantitative feeding; Storage Compartment: Box can be opened to store liquid seasonings; Catch Tray: Catch table + drain + removable perforated strainer mesh; Cleaning: One-key auto cleaning mode, assisted by water gun",
     power: "9kW",
     voltage: "380V",
     material: "整机外壳不锈钢材质",
@@ -1088,15 +1243,18 @@ window.PRODUCT_DATA_TABLE = [
       {
         filePath: "/assets/images/products/DLB-GQ36-1.webp",
         isPrimary: true,
-        isHires: false
-      }
+        isHires: false,
+      },
     ],
     is_home_core: false,
     highlights: "",
-    scenarios: "用途：餐饮连锁、外 卖、小食店等场所； 适用于自动烹饪炒菜 、炒饭、炒粉、炒面 、辣子鸡、麻辣香锅 、小龙虾、香辣虾蟹 、炒肉松、炒酱料等 。 产能：单次烹饪1-5kg 。",
-    usage: "用途：餐饮连锁、外 卖、小食店等场所； 适用于自动烹饪炒菜 、炒饭、炒粉、炒面 、辣子鸡、麻辣香锅 、小龙虾、香辣虾蟹 、炒肉松、炒酱料等 。 产能：单次烹饪1-5kg 。",
-    usageEn: "Suitable for restaurant chains, food delivery, snack shops and more. Ideal for automatic cooking of stir-fried dishes, fried rice, fried noodles, chow mein, spicy chicken, spicy hot pot, crawfish, spicy shrimp & crab, meat floss, sauce stir-frying, and more. Capacity: 1–5 kg per batch.",
-    materialEn: "Full stainless steel body"
+    scenarios:
+      "用途：餐饮连锁、外 卖、小食店等场所； 适用于自动烹饪炒菜 、炒饭、炒粉、炒面 、辣子鸡、麻辣香锅 、小龙虾、香辣虾蟹 、炒肉松、炒酱料等 。 产能：单次烹饪1-5kg 。",
+    usage:
+      "用途：餐饮连锁、外 卖、小食店等场所； 适用于自动烹饪炒菜 、炒饭、炒粉、炒面 、辣子鸡、麻辣香锅 、小龙虾、香辣虾蟹 、炒肉松、炒酱料等 。 产能：单次烹饪1-5kg 。",
+    usageEn:
+      "Suitable for restaurant chains, food delivery, snack shops and more. Ideal for automatic cooking of stir-fried dishes, fried rice, fried noodles, chow mein, spicy chicken, spicy hot pot, crawfish, spicy shrimp & crab, meat floss, sauce stir-frying, and more. Capacity: 1–5 kg per batch.",
+    materialEn: "Full stainless steel body",
   },
   {
     model: "DLB-GQ30T",
@@ -1105,8 +1263,10 @@ window.PRODUCT_DATA_TABLE = [
     nameEn: "300 Induction Cooker (Auto Feed+Spray)",
     category: "翻炒系列",
     subCategory: "滚筒炒菜机",
-    specifications: "材质：整机外壳不锈钢材质 功率：5kW；电压：220V；频率：50Hz 锅体规格：球釜型锅Φ300*H300 炒菜容量：4-6L（倾角30 °有效容量） 锅体材质：铁锅/SUS430不锈钢不粘锅 显示屏：7寸多功能触模显示屏 翻锅方式： 电控翻锅（无极多角度） 安全防护：带急停功能 菜单：存储800个菜谱（智能学习功能） 语音：智能实时语音播报功能 喷料：带4路自动喷料口， 自动定量加料 投料：一组共4个投料盒， 自动投放 接料盘：接料台+排水池+可提冲孔隔渣网 清洗：一键式自动清洗模式 ，水枪辅助清洗",
-    specificationsEn: "Material: Entire housing made of stainless steel; Power: 5kW; Voltage: 220V; Frequency: 50Hz; Wok Body Specs: Dome-shaped wok Φ300*H300; Cooking Capacity: 4-6L (effective capacity at 30° tilt); Wok Body Material: Iron wok / SUS430 stainless steel non-stick wok; Display: 7-inch multi-function touch display; Tilting Method: Electric tilting (stepless multi-angle); Safety: Emergency stop function; Menu: Stores 800 recipes (smart learning function); Voice: Smart real-time voice broadcast; Oil Spray: Equipped with 4-way auto oil spray ports, auto quantitative feeding; Ingredient Dispensing: One set of 4 ingredient dispensing boxes, auto dispensing; Catch Tray: Catch table + drain + removable perforated strainer mesh; Cleaning: One-key auto cleaning mode, assisted by water gun",
+    specifications:
+      "材质：整机外壳不锈钢材质 功率：5kW；电压：220V；频率：50Hz 锅体规格：球釜型锅Φ300*H300 炒菜容量：4-6L（倾角30 °有效容量） 锅体材质：铁锅/SUS430不锈钢不粘锅 显示屏：7寸多功能触模显示屏 翻锅方式： 电控翻锅（无极多角度） 安全防护：带急停功能 菜单：存储800个菜谱（智能学习功能） 语音：智能实时语音播报功能 喷料：带4路自动喷料口， 自动定量加料 投料：一组共4个投料盒， 自动投放 接料盘：接料台+排水池+可提冲孔隔渣网 清洗：一键式自动清洗模式 ，水枪辅助清洗",
+    specificationsEn:
+      "Material: Entire housing made of stainless steel; Power: 5kW; Voltage: 220V; Frequency: 50Hz; Wok Body Specs: Dome-shaped wok Φ300*H300; Cooking Capacity: 4-6L (effective capacity at 30° tilt); Wok Body Material: Iron wok / SUS430 stainless steel non-stick wok; Display: 7-inch multi-function touch display; Tilting Method: Electric tilting (stepless multi-angle); Safety: Emergency stop function; Menu: Stores 800 recipes (smart learning function); Voice: Smart real-time voice broadcast; Oil Spray: Equipped with 4-way auto oil spray ports, auto quantitative feeding; Ingredient Dispensing: One set of 4 ingredient dispensing boxes, auto dispensing; Catch Tray: Catch table + drain + removable perforated strainer mesh; Cleaning: One-key auto cleaning mode, assisted by water gun",
     power: "5kW",
     voltage: "220V",
     material: "整机外壳不锈钢材质",
@@ -1121,15 +1281,18 @@ window.PRODUCT_DATA_TABLE = [
       {
         filePath: "/assets/images/products/DLB-GQ30T-1.webp",
         isPrimary: true,
-        isHires: false
-      }
+        isHires: false,
+      },
     ],
     is_home_core: false,
     highlights: "",
-    scenarios: "用途： 餐饮连锁、 外卖、小食店等场 所；适用于自动烹 饪炒菜、炒饭、炒 粉、炒面、辣子鸡 、麻辣香锅、小龙 虾、香辣虾蟹、炒 肉松、炒酱料等。 产能： 单次烹饪 0.5-2.0kg。",
-    usage: "用途： 餐饮连锁、 外卖、小食店等场 所；适用于自动烹 饪炒菜、炒饭、炒 粉、炒面、辣子鸡 、麻辣香锅、小龙 虾、香辣虾蟹、炒 肉松、炒酱料等。 产能： 单次烹饪 0.5-2.0kg。",
-    usageEn: "Suitable for restaurant chains, food delivery, snack shops and more. Ideal for automatic cooking of stir-fried dishes, fried rice, fried noodles, chow mein, spicy chicken, spicy hot pot, crawfish, spicy shrimp & crab, meat floss, sauce stir-frying, and more. Capacity: 0.5–2.0 kg per batch.",
-    materialEn: "Full stainless steel body"
+    scenarios:
+      "用途： 餐饮连锁、 外卖、小食店等场 所；适用于自动烹 饪炒菜、炒饭、炒 粉、炒面、辣子鸡 、麻辣香锅、小龙 虾、香辣虾蟹、炒 肉松、炒酱料等。 产能： 单次烹饪 0.5-2.0kg。",
+    usage:
+      "用途： 餐饮连锁、 外卖、小食店等场 所；适用于自动烹 饪炒菜、炒饭、炒 粉、炒面、辣子鸡 、麻辣香锅、小龙 虾、香辣虾蟹、炒 肉松、炒酱料等。 产能： 单次烹饪 0.5-2.0kg。",
+    usageEn:
+      "Suitable for restaurant chains, food delivery, snack shops and more. Ideal for automatic cooking of stir-fried dishes, fried rice, fried noodles, chow mein, spicy chicken, spicy hot pot, crawfish, spicy shrimp & crab, meat floss, sauce stir-frying, and more. Capacity: 0.5–2.0 kg per batch.",
+    materialEn: "Full stainless steel body",
   },
   {
     model: "DLB-GQ35T",
@@ -1138,8 +1301,10 @@ window.PRODUCT_DATA_TABLE = [
     nameEn: "350 Induction Cooker (Auto Feed+Spray)",
     category: "翻炒系列",
     subCategory: "滚筒炒菜机",
-    specifications: "材质：整机外壳不锈钢材质 功率：9kW；电压：380V；频率：50Hz 锅体规格：球釜型锅Φ350*H350 炒菜容量：6-12L（倾角30 °有效容量） 锅体材质：铁锅/SUS430不锈钢不粘锅 显示屏：10寸多功能触模显示屏 翻锅方式： 电控翻锅（无极多角度） 安全防护：带急停功能 菜单：存储800个菜谱（智能学习功能） 语音：智能实时语音播报功能 喷料：带4-6路自动喷料口， 自动定量加料 投料：4+1投料盒组合， 自动投放 接料盘：接料台+排水池+可提冲孔隔渣网 清洗：一键式自动清洗模式 ，水枪辅助清洗",
-    specificationsEn: "Material: Entire housing made of stainless steel; Power: 9kW; Voltage: 380V; Frequency: 50Hz; Wok Body Specs: Dome-shaped wok Φ350*H350; Cooking Capacity: 6-12L (effective capacity at 30° tilt); Wok Body Material: Iron wok / SUS430 stainless steel non-stick wok; Display: 10-inch multi-function touch display; Tilting Method: Electric tilting (stepless multi-angle); Safety: Emergency stop function; Menu: Stores 800 recipes (smart learning function); Voice: Smart real-time voice broadcast; Oil Spray: Equipped with 4-6 way auto oil spray ports, auto quantitative feeding; Ingredient Dispensing: 4+1 ingredient box combination, auto dispensing; Catch Tray: Catch table + drain + removable perforated strainer mesh; Cleaning: One-key auto cleaning mode, assisted by water gun",
+    specifications:
+      "材质：整机外壳不锈钢材质 功率：9kW；电压：380V；频率：50Hz 锅体规格：球釜型锅Φ350*H350 炒菜容量：6-12L（倾角30 °有效容量） 锅体材质：铁锅/SUS430不锈钢不粘锅 显示屏：10寸多功能触模显示屏 翻锅方式： 电控翻锅（无极多角度） 安全防护：带急停功能 菜单：存储800个菜谱（智能学习功能） 语音：智能实时语音播报功能 喷料：带4-6路自动喷料口， 自动定量加料 投料：4+1投料盒组合， 自动投放 接料盘：接料台+排水池+可提冲孔隔渣网 清洗：一键式自动清洗模式 ，水枪辅助清洗",
+    specificationsEn:
+      "Material: Entire housing made of stainless steel; Power: 9kW; Voltage: 380V; Frequency: 50Hz; Wok Body Specs: Dome-shaped wok Φ350*H350; Cooking Capacity: 6-12L (effective capacity at 30° tilt); Wok Body Material: Iron wok / SUS430 stainless steel non-stick wok; Display: 10-inch multi-function touch display; Tilting Method: Electric tilting (stepless multi-angle); Safety: Emergency stop function; Menu: Stores 800 recipes (smart learning function); Voice: Smart real-time voice broadcast; Oil Spray: Equipped with 4-6 way auto oil spray ports, auto quantitative feeding; Ingredient Dispensing: 4+1 ingredient box combination, auto dispensing; Catch Tray: Catch table + drain + removable perforated strainer mesh; Cleaning: One-key auto cleaning mode, assisted by water gun",
     power: "9kW",
     voltage: "380V",
     material: "整机外壳不锈钢材质",
@@ -1154,15 +1319,18 @@ window.PRODUCT_DATA_TABLE = [
       {
         filePath: "/assets/images/products/DLB-GQ35T-1.webp",
         isPrimary: true,
-        isHires: false
-      }
+        isHires: false,
+      },
     ],
     is_home_core: false,
     highlights: "",
-    scenarios: "用途：餐饮连锁、外 卖、小食店等场所； 适用于自动烹饪炒菜 、炒饭、炒粉、炒面 、辣子鸡、麻辣香锅 、小龙虾、香辣虾蟹 、炒肉松、炒酱料等 。 产能：单次烹饪 1- 5kg。",
-    usage: "用途：餐饮连锁、外 卖、小食店等场所； 适用于自动烹饪炒菜 、炒饭、炒粉、炒面 、辣子鸡、麻辣香锅 、小龙虾、香辣虾蟹 、炒肉松、炒酱料等 。 产能：单次烹饪 1- 5kg。",
-    usageEn: "Suitable for restaurant chains, food delivery, snack shops and more. Ideal for automatic cooking of stir-fried dishes, fried rice, fried noodles, chow mein, spicy chicken, spicy hot pot, crawfish, spicy shrimp & crab, meat floss, sauce stir-frying, and more. Capacity: 1–5 kg per batch.",
-    materialEn: "Full stainless steel body"
+    scenarios:
+      "用途：餐饮连锁、外 卖、小食店等场所； 适用于自动烹饪炒菜 、炒饭、炒粉、炒面 、辣子鸡、麻辣香锅 、小龙虾、香辣虾蟹 、炒肉松、炒酱料等 。 产能：单次烹饪 1- 5kg。",
+    usage:
+      "用途：餐饮连锁、外 卖、小食店等场所； 适用于自动烹饪炒菜 、炒饭、炒粉、炒面 、辣子鸡、麻辣香锅 、小龙虾、香辣虾蟹 、炒肉松、炒酱料等 。 产能：单次烹饪 1- 5kg。",
+    usageEn:
+      "Suitable for restaurant chains, food delivery, snack shops and more. Ideal for automatic cooking of stir-fried dishes, fried rice, fried noodles, chow mein, spicy chicken, spicy hot pot, crawfish, spicy shrimp & crab, meat floss, sauce stir-frying, and more. Capacity: 1–5 kg per batch.",
+    materialEn: "Full stainless steel body",
   },
   {
     model: "DLB-BQ40T",
@@ -1171,8 +1339,10 @@ window.PRODUCT_DATA_TABLE = [
     nameEn: "Floor-standing Top-stirring Auto Cooker (Auto Feed+Spray)",
     category: "翻炒系列",
     subCategory: "搅拌炒菜机",
-    specifications: "材质：整机外壳不锈钢材质 功率：8-12kW；电压：380V；频率：50Hz 锅体规格： Φ400mm 锅体容量：16L 锅体材质：生铁锅/SUS409不锈钢锅 显示屏：10寸多功能触模显示屏 翻锅倒料方式： 电控翻锅 翻炒方式：采用行星搅拌，刮底刮边设计 菜单：存储800个菜谱（智能学习功能） 语音：智能实时语音播报功能 喷料：带6-8路自动喷料口， 自动定量加料 储料仓：箱体下部可开盖存储液体味料 投料：一组4个投料盒， 自动投放 接料盘：接料台+排水池+可提冲孔隔渣网 清洗：一键式自动清洗模式 ，水枪辅助清洗",
-    specificationsEn: "Material: Entire housing made of stainless steel; Power: 8-12kW; Voltage: 380V; Frequency: 50Hz; Wok Body Specs: Φ400mm; Wok Body Capacity: 16L; Wok Body Material: Cast iron wok / SUS409 stainless steel wok; Display: 10-inch multi-function touch display; Tilting and Discharging Method: Electric tilting; Stirring Method: Planetary stirring with bottom-scraping and side-scraping design; Menu: Stores 800 recipes (smart learning function); Voice: Smart real-time voice broadcast; Oil Spray: Equipped with 6-8 way auto oil spray ports, auto quantitative feeding; Storage Compartment: Box lower part can be opened to store liquid seasonings; Ingredient Dispensing: One set of 4 ingredient dispensing boxes, auto dispensing; Catch Tray: Catch table + drain + removable perforated strainer mesh; Cleaning: One-key auto cleaning mode, assisted by water gun",
+    specifications:
+      "材质：整机外壳不锈钢材质 功率：8-12kW；电压：380V；频率：50Hz 锅体规格： Φ400mm 锅体容量：16L 锅体材质：生铁锅/SUS409不锈钢锅 显示屏：10寸多功能触模显示屏 翻锅倒料方式： 电控翻锅 翻炒方式：采用行星搅拌，刮底刮边设计 菜单：存储800个菜谱（智能学习功能） 语音：智能实时语音播报功能 喷料：带6-8路自动喷料口， 自动定量加料 储料仓：箱体下部可开盖存储液体味料 投料：一组4个投料盒， 自动投放 接料盘：接料台+排水池+可提冲孔隔渣网 清洗：一键式自动清洗模式 ，水枪辅助清洗",
+    specificationsEn:
+      "Material: Entire housing made of stainless steel; Power: 8-12kW; Voltage: 380V; Frequency: 50Hz; Wok Body Specs: Φ400mm; Wok Body Capacity: 16L; Wok Body Material: Cast iron wok / SUS409 stainless steel wok; Display: 10-inch multi-function touch display; Tilting and Discharging Method: Electric tilting; Stirring Method: Planetary stirring with bottom-scraping and side-scraping design; Menu: Stores 800 recipes (smart learning function); Voice: Smart real-time voice broadcast; Oil Spray: Equipped with 6-8 way auto oil spray ports, auto quantitative feeding; Storage Compartment: Box lower part can be opened to store liquid seasonings; Ingredient Dispensing: One set of 4 ingredient dispensing boxes, auto dispensing; Catch Tray: Catch table + drain + removable perforated strainer mesh; Cleaning: One-key auto cleaning mode, assisted by water gun",
     power: "8-12kW",
     voltage: "380V",
     material: "整机外壳不锈钢材质",
@@ -1187,15 +1357,18 @@ window.PRODUCT_DATA_TABLE = [
       {
         filePath: "/assets/images/products/DLB-BQ40T-1.webp",
         isPrimary: true,
-        isHires: false
-      }
+        isHires: false,
+      },
     ],
     is_home_core: true,
     highlights: "",
-    scenarios: "用途：餐饮连锁、外 卖、小食店等场所爆 炒专用烹饪；特别适 合湘菜盖码饭类菜品 。适用于自动烹饪炒 菜、辣子鸡、麻辣香 锅、小龙虾、香辣虾 蟹、炒酱料等。 产能：单次烹饪0.5- 2kg。",
-    usage: "用途：餐饮连锁、外 卖、小食店等场所爆 炒专用烹饪；特别适 合湘菜盖码饭类菜品 。适用于自动烹饪炒 菜、辣子鸡、麻辣香 锅、小龙虾、香辣虾 蟹、炒酱料等。 产能：单次烹饪0.5- 2kg。",
-    usageEn: "Purpose-built high-heat wok cooking for restaurant chains, food delivery, snack shops and more. Especially suitable for Hunan-style rice bowl dishes. Ideal for automatic cooking of stir-fried dishes, spicy chicken, spicy hot pot, crawfish, spicy shrimp & crab, sauce stir-frying, and more. Capacity: 0.5–2 kg per batch.",
-    materialEn: "Full stainless steel body"
+    scenarios:
+      "用途：餐饮连锁、外 卖、小食店等场所爆 炒专用烹饪；特别适 合湘菜盖码饭类菜品 。适用于自动烹饪炒 菜、辣子鸡、麻辣香 锅、小龙虾、香辣虾 蟹、炒酱料等。 产能：单次烹饪0.5- 2kg。",
+    usage:
+      "用途：餐饮连锁、外 卖、小食店等场所爆 炒专用烹饪；特别适 合湘菜盖码饭类菜品 。适用于自动烹饪炒 菜、辣子鸡、麻辣香 锅、小龙虾、香辣虾 蟹、炒酱料等。 产能：单次烹饪0.5- 2kg。",
+    usageEn:
+      "Purpose-built high-heat wok cooking for restaurant chains, food delivery, snack shops and more. Especially suitable for Hunan-style rice bowl dishes. Ideal for automatic cooking of stir-fried dishes, spicy chicken, spicy hot pot, crawfish, spicy shrimp & crab, sauce stir-frying, and more. Capacity: 0.5–2 kg per batch.",
+    materialEn: "Full stainless steel body",
   },
   {
     model: "DLB-TGQ40",
@@ -1204,8 +1377,10 @@ window.PRODUCT_DATA_TABLE = [
     nameEn: "Countertop 400 Induction Cooker (Touch+Auto Spray)",
     category: "翻炒系列",
     subCategory: "团餐滚筒炒菜机",
-    specifications: "材质：采用优质不锈钢 功率：8-10kW；电压：380V；频率：50Hz 锅体规格：仿球釜型锅体内直径Φ380 炒菜容量：12L（倾角30 °有效容量） 锅体材质：SUS409不锈钢不粘锅/铸铁锅 显示屏：7寸多功能触模显示屏 翻锅方式： 电控翻锅（无极多角度） 安全防护：带急停功能 菜单：存储800个菜谱（智能学习功能） 语音：智能实时语音播报功能 喷料：带3/4路自动喷料口， 自动定量加料 储料仓：左侧箱体上部可开盖存储液体味料 接料盘：接料台+排水池+可提冲孔隔渣网 清洗：一键式自动清洗，水枪辅助清洗",
-    specificationsEn: "Material: Premium stainless steel; Power: 8-10kW; Voltage: 380V; Frequency: 50Hz; Wok Body Specs: Dome-shaped wok inner diameter Φ380; Cooking Capacity: 12L (effective capacity at 30° tilt); Wok Body Material: SUS409 stainless steel non-stick wok / cast iron wok; Display: 7-inch multi-function touch display; Tilting Method: Electric tilting (stepless multi-angle); Safety: Emergency stop function; Menu: Stores 800 recipes (smart learning function); Voice: Smart real-time voice broadcast; Oil Spray: Equipped with 3/4-way auto oil spray ports, auto quantitative feeding; Storage Compartment: Left box upper part can be opened to store liquid seasonings; Catch Tray: Catch table + drain + removable perforated strainer mesh; Cleaning: One-key auto cleaning, assisted by water gun",
+    specifications:
+      "材质：采用优质不锈钢 功率：8-10kW；电压：380V；频率：50Hz 锅体规格：仿球釜型锅体内直径Φ380 炒菜容量：12L（倾角30 °有效容量） 锅体材质：SUS409不锈钢不粘锅/铸铁锅 显示屏：7寸多功能触模显示屏 翻锅方式： 电控翻锅（无极多角度） 安全防护：带急停功能 菜单：存储800个菜谱（智能学习功能） 语音：智能实时语音播报功能 喷料：带3/4路自动喷料口， 自动定量加料 储料仓：左侧箱体上部可开盖存储液体味料 接料盘：接料台+排水池+可提冲孔隔渣网 清洗：一键式自动清洗，水枪辅助清洗",
+    specificationsEn:
+      "Material: Premium stainless steel; Power: 8-10kW; Voltage: 380V; Frequency: 50Hz; Wok Body Specs: Dome-shaped wok inner diameter Φ380; Cooking Capacity: 12L (effective capacity at 30° tilt); Wok Body Material: SUS409 stainless steel non-stick wok / cast iron wok; Display: 7-inch multi-function touch display; Tilting Method: Electric tilting (stepless multi-angle); Safety: Emergency stop function; Menu: Stores 800 recipes (smart learning function); Voice: Smart real-time voice broadcast; Oil Spray: Equipped with 3/4-way auto oil spray ports, auto quantitative feeding; Storage Compartment: Left box upper part can be opened to store liquid seasonings; Catch Tray: Catch table + drain + removable perforated strainer mesh; Cleaning: One-key auto cleaning, assisted by water gun",
     power: "8-10kW",
     voltage: "380V",
     material: "采用优质不锈钢",
@@ -1220,15 +1395,18 @@ window.PRODUCT_DATA_TABLE = [
       {
         filePath: "/assets/images/products/DLB-TGQ40-1.webp",
         isPrimary: true,
-        isHires: false
-      }
+        isHires: false,
+      },
     ],
     is_home_core: false,
     highlights: "",
-    scenarios: "用途：餐饮连锁、外 卖、酒店酒楼宴席、 企事业单位员工餐等 场所；适用于自动烹 饪炒菜、炒饭、炒粉 、炒面、辣子鸡、麻 辣香锅、小龙虾、香 辣虾蟹等。 产能：单次烹饪1-5kg 。",
-    usage: "用途：餐饮连锁、外 卖、酒店酒楼宴席、 企事业单位员工餐等 场所；适用于自动烹 饪炒菜、炒饭、炒粉 、炒面、辣子鸡、麻 辣香锅、小龙虾、香 辣虾蟹等。 产能：单次烹饪1-5kg 。",
-    usageEn: "Suitable for restaurant chains, food delivery, hotel banquets, corporate & institutional staff dining, and more. Ideal for automatic cooking of stir-fried dishes, fried rice, fried noodles, chow mein, spicy chicken, spicy hot pot, crawfish, spicy shrimp & crab, and more. Capacity: 1–5 kg per batch.",
-    materialEn: "Premium stainless steel"
+    scenarios:
+      "用途：餐饮连锁、外 卖、酒店酒楼宴席、 企事业单位员工餐等 场所；适用于自动烹 饪炒菜、炒饭、炒粉 、炒面、辣子鸡、麻 辣香锅、小龙虾、香 辣虾蟹等。 产能：单次烹饪1-5kg 。",
+    usage:
+      "用途：餐饮连锁、外 卖、酒店酒楼宴席、 企事业单位员工餐等 场所；适用于自动烹 饪炒菜、炒饭、炒粉 、炒面、辣子鸡、麻 辣香锅、小龙虾、香 辣虾蟹等。 产能：单次烹饪1-5kg 。",
+    usageEn:
+      "Suitable for restaurant chains, food delivery, hotel banquets, corporate & institutional staff dining, and more. Ideal for automatic cooking of stir-fried dishes, fried rice, fried noodles, chow mein, spicy chicken, spicy hot pot, crawfish, spicy shrimp & crab, and more. Capacity: 1–5 kg per batch.",
+    materialEn: "Premium stainless steel",
   },
   {
     model: "DLB-GB50",
@@ -1237,8 +1415,10 @@ window.PRODUCT_DATA_TABLE = [
     nameEn: "Floor-standing 500 Induction Cooker (Touch+Electric)",
     category: "翻炒系列",
     subCategory: "团餐滚筒炒菜机",
-    specifications: "材质：整机外壳不锈钢材质 功率：15-20kW；电压：380V；频率：50Hz 锅体规格：仿球釜型锅体Φ480 炒菜容量：3-10kg/锅 锅体材质：SUS430不锈钢不粘锅 显示屏：7寸多功能触模显示屏 翻锅方式： 电控翻锅（无极多角度） 安全防护：带急停功能 接料盘：接料台+排水池+可提冲孔隔渣网 清洗：配套高压水枪清洗",
-    specificationsEn: "Material: Entire housing made of stainless steel; Power: 15-20kW; Voltage: 380V; Frequency: 50Hz; Wok Body Specs: Dome-shaped wok Φ480; Cooking Capacity: 3-10kg/batch; Wok Body Material: SUS430 stainless steel non-stick wok; Display: 7-inch multi-function touch display; Tilting Method: Electric tilting (stepless multi-angle); Safety: Emergency stop function; Catch Tray: Catch table + drain + removable perforated strainer mesh; Cleaning: Equipped with high-pressure water gun",
+    specifications:
+      "材质：整机外壳不锈钢材质 功率：15-20kW；电压：380V；频率：50Hz 锅体规格：仿球釜型锅体Φ480 炒菜容量：3-10kg/锅 锅体材质：SUS430不锈钢不粘锅 显示屏：7寸多功能触模显示屏 翻锅方式： 电控翻锅（无极多角度） 安全防护：带急停功能 接料盘：接料台+排水池+可提冲孔隔渣网 清洗：配套高压水枪清洗",
+    specificationsEn:
+      "Material: Entire housing made of stainless steel; Power: 15-20kW; Voltage: 380V; Frequency: 50Hz; Wok Body Specs: Dome-shaped wok Φ480; Cooking Capacity: 3-10kg/batch; Wok Body Material: SUS430 stainless steel non-stick wok; Display: 7-inch multi-function touch display; Tilting Method: Electric tilting (stepless multi-angle); Safety: Emergency stop function; Catch Tray: Catch table + drain + removable perforated strainer mesh; Cleaning: Equipped with high-pressure water gun",
     power: "15-20kW",
     voltage: "380V",
     material: "整机外壳不锈钢材质",
@@ -1253,15 +1433,18 @@ window.PRODUCT_DATA_TABLE = [
       {
         filePath: "/assets/images/products/DLB-GB50-1.webp",
         isPrimary: true,
-        isHires: false
-      }
+        isHires: false,
+      },
     ],
     is_home_core: false,
     highlights: "",
-    scenarios: "用途：餐饮连锁、外 卖、酒店酒楼宴席、 企事业单位员工餐等 场所；适用于自动烹 饪炒菜、炒饭、炒粉 、炒面、辣子鸡、麻 辣香锅、小龙虾、香 辣虾蟹等。 产能：单次烹饪3- 10kg。",
-    usage: "用途：餐饮连锁、外 卖、酒店酒楼宴席、 企事业单位员工餐等 场所；适用于自动烹 饪炒菜、炒饭、炒粉 、炒面、辣子鸡、麻 辣香锅、小龙虾、香 辣虾蟹等。 产能：单次烹饪3- 10kg。",
-    usageEn: "Suitable for restaurant chains, food delivery, hotel banquets, corporate & institutional staff dining, and more. Ideal for automatic cooking of stir-fried dishes, fried rice, fried noodles, chow mein, spicy chicken, spicy hot pot, crawfish, spicy shrimp & crab, and more. Capacity: 3–10 kg per batch.",
-    materialEn: "Full stainless steel body"
+    scenarios:
+      "用途：餐饮连锁、外 卖、酒店酒楼宴席、 企事业单位员工餐等 场所；适用于自动烹 饪炒菜、炒饭、炒粉 、炒面、辣子鸡、麻 辣香锅、小龙虾、香 辣虾蟹等。 产能：单次烹饪3- 10kg。",
+    usage:
+      "用途：餐饮连锁、外 卖、酒店酒楼宴席、 企事业单位员工餐等 场所；适用于自动烹 饪炒菜、炒饭、炒粉 、炒面、辣子鸡、麻 辣香锅、小龙虾、香 辣虾蟹等。 产能：单次烹饪3- 10kg。",
+    usageEn:
+      "Suitable for restaurant chains, food delivery, hotel banquets, corporate & institutional staff dining, and more. Ideal for automatic cooking of stir-fried dishes, fried rice, fried noodles, chow mein, spicy chicken, spicy hot pot, crawfish, spicy shrimp & crab, and more. Capacity: 3–10 kg per batch.",
+    materialEn: "Full stainless steel body",
   },
   {
     model: "DLB-GC50",
@@ -1270,8 +1453,10 @@ window.PRODUCT_DATA_TABLE = [
     nameEn: "Floor-standing 500 Induction Cooker (Voice Menu)",
     category: "翻炒系列",
     subCategory: "团餐滚筒炒菜机",
-    specifications: "材质：整机外壳不锈钢材质 功率：15-20kW；电压：380V；频率：50Hz 锅体规格：仿球釜型锅体Φ480 炒菜容量：3-10kg/锅 锅体材质：SUS430不锈钢不粘锅 显示屏：7寸多功能触模显示屏 翻锅方式： 电控翻锅（无极多角度） 安全防护：带急停功能 菜单：存储800个菜谱（智能学习功能） 语音：智能实时语音播报功能 接料盘：接料台+排水池+可提冲孔隔渣网 清洗：一键式自动清洗模式 ，水枪辅助清洗",
-    specificationsEn: "Material: Entire housing made of stainless steel; Power: 15-20kW; Voltage: 380V; Frequency: 50Hz; Wok Body Specs: Dome-shaped wok Φ480; Cooking Capacity: 3-10kg/batch; Wok Body Material: SUS430 stainless steel non-stick wok; Display: 7-inch multi-function touch display; Tilting Method: Electric tilting (stepless multi-angle); Safety: Emergency stop function; Menu: Stores 800 recipes (smart learning function); Voice: Smart real-time voice broadcast; Catch Tray: Catch table + drain + removable perforated strainer mesh; Cleaning: One-key auto cleaning mode, assisted by water gun",
+    specifications:
+      "材质：整机外壳不锈钢材质 功率：15-20kW；电压：380V；频率：50Hz 锅体规格：仿球釜型锅体Φ480 炒菜容量：3-10kg/锅 锅体材质：SUS430不锈钢不粘锅 显示屏：7寸多功能触模显示屏 翻锅方式： 电控翻锅（无极多角度） 安全防护：带急停功能 菜单：存储800个菜谱（智能学习功能） 语音：智能实时语音播报功能 接料盘：接料台+排水池+可提冲孔隔渣网 清洗：一键式自动清洗模式 ，水枪辅助清洗",
+    specificationsEn:
+      "Material: Entire housing made of stainless steel; Power: 15-20kW; Voltage: 380V; Frequency: 50Hz; Wok Body Specs: Dome-shaped wok Φ480; Cooking Capacity: 3-10kg/batch; Wok Body Material: SUS430 stainless steel non-stick wok; Display: 7-inch multi-function touch display; Tilting Method: Electric tilting (stepless multi-angle); Safety: Emergency stop function; Menu: Stores 800 recipes (smart learning function); Voice: Smart real-time voice broadcast; Catch Tray: Catch table + drain + removable perforated strainer mesh; Cleaning: One-key auto cleaning mode, assisted by water gun",
     power: "15-20kW",
     voltage: "380V",
     material: "整机外壳不锈钢材质",
@@ -1286,15 +1471,18 @@ window.PRODUCT_DATA_TABLE = [
       {
         filePath: "/assets/images/products/DLB-GC50-1.webp",
         isPrimary: true,
-        isHires: false
-      }
+        isHires: false,
+      },
     ],
     is_home_core: false,
     highlights: "",
-    scenarios: "用途：餐饮连锁、外 卖、酒店酒楼宴席、 企事业单位员工餐等 场所；适用于自动烹 饪炒菜、炒饭、炒粉 、炒面、辣子鸡、麻 辣香锅、小龙虾、香 辣虾蟹等。 产能：单次烹饪3- 10kg。",
-    usage: "用途：餐饮连锁、外 卖、酒店酒楼宴席、 企事业单位员工餐等 场所；适用于自动烹 饪炒菜、炒饭、炒粉 、炒面、辣子鸡、麻 辣香锅、小龙虾、香 辣虾蟹等。 产能：单次烹饪3- 10kg。",
-    usageEn: "Suitable for restaurant chains, food delivery, hotel banquets, corporate & institutional staff dining, and more. Ideal for automatic cooking of stir-fried dishes, fried rice, fried noodles, chow mein, spicy chicken, spicy hot pot, crawfish, spicy shrimp & crab, and more. Capacity: 3–10 kg per batch.",
-    materialEn: "Full stainless steel body"
+    scenarios:
+      "用途：餐饮连锁、外 卖、酒店酒楼宴席、 企事业单位员工餐等 场所；适用于自动烹 饪炒菜、炒饭、炒粉 、炒面、辣子鸡、麻 辣香锅、小龙虾、香 辣虾蟹等。 产能：单次烹饪3- 10kg。",
+    usage:
+      "用途：餐饮连锁、外 卖、酒店酒楼宴席、 企事业单位员工餐等 场所；适用于自动烹 饪炒菜、炒饭、炒粉 、炒面、辣子鸡、麻 辣香锅、小龙虾、香 辣虾蟹等。 产能：单次烹饪3- 10kg。",
+    usageEn:
+      "Suitable for restaurant chains, food delivery, hotel banquets, corporate & institutional staff dining, and more. Ideal for automatic cooking of stir-fried dishes, fried rice, fried noodles, chow mein, spicy chicken, spicy hot pot, crawfish, spicy shrimp & crab, and more. Capacity: 3–10 kg per batch.",
+    materialEn: "Full stainless steel body",
   },
   {
     model: "DLB-GB60",
@@ -1303,8 +1491,10 @@ window.PRODUCT_DATA_TABLE = [
     nameEn: "Floor-standing 600 Induction Cooker (Touch+Electric)",
     category: "翻炒系列",
     subCategory: "团餐滚筒炒菜机",
-    specifications: "材质：采用优质不锈钢 电压：380V /50Hz 功率：25kW 滚筒： Φ600*H600mm 滚筒炒菜容量：10-20kg/T 滚筒材质：430#不锈钢/选装不粘锅 显示屏：7寸触模显示屏 翻锅方式：半机械式翻锅（无极多角度） 安全防护：带急停功能 控制方式：8/9档火力调节，无极调速翻炒 清洗：高压水枪清洗，快捷高效",
-    specificationsEn: "Material: Premium stainless steel; Voltage: 380V/50Hz; Power: 25kW; Drum: Φ600*H600mm; Drum Cooking Capacity: 10-20kg/T; Drum Material: 430# stainless steel / optional non-stick; Display: 7-inch touch display; Tilting Method: Semi-mechanical tilting (stepless multi-angle); Safety: Emergency stop function; Control: 8/9-level heat adjustment, stepless speed stirring; Cleaning: High-pressure water gun cleaning, fast and efficient",
+    specifications:
+      "材质：采用优质不锈钢 电压：380V /50Hz 功率：25kW 滚筒： Φ600*H600mm 滚筒炒菜容量：10-20kg/T 滚筒材质：430#不锈钢/选装不粘锅 显示屏：7寸触模显示屏 翻锅方式：半机械式翻锅（无极多角度） 安全防护：带急停功能 控制方式：8/9档火力调节，无极调速翻炒 清洗：高压水枪清洗，快捷高效",
+    specificationsEn:
+      "Material: Premium stainless steel; Voltage: 380V/50Hz; Power: 25kW; Drum: Φ600*H600mm; Drum Cooking Capacity: 10-20kg/T; Drum Material: 430# stainless steel / optional non-stick; Display: 7-inch touch display; Tilting Method: Semi-mechanical tilting (stepless multi-angle); Safety: Emergency stop function; Control: 8/9-level heat adjustment, stepless speed stirring; Cleaning: High-pressure water gun cleaning, fast and efficient",
     power: "25kW",
     voltage: "380V/50Hz",
     material: "采用优质不锈钢",
@@ -1319,15 +1509,18 @@ window.PRODUCT_DATA_TABLE = [
       {
         filePath: "/assets/images/products/DLB-GB60-1.webp",
         isPrimary: true,
-        isHires: false
-      }
+        isHires: false,
+      },
     ],
     is_home_core: false,
     highlights: "",
-    scenarios: "用途：餐饮连锁、外 卖、酒店酒楼宴席、 企事业单位员工餐等 场所；适用于自动烹 饪炒菜、炒饭、炒粉 、炒面、小龙虾等。 产能：单次烹饪5- 20kg。 平均烹饪周期：5-10 分钟",
-    usage: "用途：餐饮连锁、外 卖、酒店酒楼宴席、 企事业单位员工餐等 场所；适用于自动烹 饪炒菜、炒饭、炒粉 、炒面、小龙虾等。 产能：单次烹饪5- 20kg。 平均烹饪周期：5-10 分钟",
-    usageEn: "Suitable for restaurant chains, food delivery, hotel banquets, corporate & institutional staff dining, and more. Ideal for automatic cooking of stir-fried dishes, fried rice, fried noodles, chow mein, crawfish, and more. Capacity: 5–20 kg per batch. Avg. cooking cycle: 5–10 min.",
-    materialEn: "Premium stainless steel"
+    scenarios:
+      "用途：餐饮连锁、外 卖、酒店酒楼宴席、 企事业单位员工餐等 场所；适用于自动烹 饪炒菜、炒饭、炒粉 、炒面、小龙虾等。 产能：单次烹饪5- 20kg。 平均烹饪周期：5-10 分钟",
+    usage:
+      "用途：餐饮连锁、外 卖、酒店酒楼宴席、 企事业单位员工餐等 场所；适用于自动烹 饪炒菜、炒饭、炒粉 、炒面、小龙虾等。 产能：单次烹饪5- 20kg。 平均烹饪周期：5-10 分钟",
+    usageEn:
+      "Suitable for restaurant chains, food delivery, hotel banquets, corporate & institutional staff dining, and more. Ideal for automatic cooking of stir-fried dishes, fried rice, fried noodles, chow mein, crawfish, and more. Capacity: 5–20 kg per batch. Avg. cooking cycle: 5–10 min.",
+    materialEn: "Premium stainless steel",
   },
   {
     model: "DLB-GC60",
@@ -1336,8 +1529,10 @@ window.PRODUCT_DATA_TABLE = [
     nameEn: "Floor-standing 600 Induction Cooker (Touch+Voice Menu)",
     category: "翻炒系列",
     subCategory: "团餐滚筒炒菜机",
-    specifications: "材质：采用优质不锈钢 电压：380V /50Hz 功率：25kW 滚筒： Φ600*H600mm 滚筒炒菜容量：10-20kg/T 滚筒材质：430#不锈钢/选装不粘锅 显示屏：7寸多功能触模显示屏 翻锅方式： 电控翻锅 安全防护：带急停功能 测温：红外线监测温度 菜单：存储800个菜谱（智能学习功能） 语音：智能实时语音播报功能 清洁喷枪：优质高压喷枪（配2米软管）",
-    specificationsEn: "Material: Premium stainless steel; Voltage: 380V/50Hz; Power: 25kW; Drum: Φ600*H600mm; Drum Cooking Capacity: 10-20kg/T; Drum Material: 430# stainless steel / optional non-stick; Display: 7-inch multi-function touch display; Tilting Method: Electric tilting; Safety: Emergency stop function; Temperature Measurement: Infrared temperature monitoring; Menu: Stores 800 recipes (smart learning function); Voice: Smart real-time voice broadcast; Cleaning Spray Gun: Premium high-pressure spray gun (with 2m hose)",
+    specifications:
+      "材质：采用优质不锈钢 电压：380V /50Hz 功率：25kW 滚筒： Φ600*H600mm 滚筒炒菜容量：10-20kg/T 滚筒材质：430#不锈钢/选装不粘锅 显示屏：7寸多功能触模显示屏 翻锅方式： 电控翻锅 安全防护：带急停功能 测温：红外线监测温度 菜单：存储800个菜谱（智能学习功能） 语音：智能实时语音播报功能 清洁喷枪：优质高压喷枪（配2米软管）",
+    specificationsEn:
+      "Material: Premium stainless steel; Voltage: 380V/50Hz; Power: 25kW; Drum: Φ600*H600mm; Drum Cooking Capacity: 10-20kg/T; Drum Material: 430# stainless steel / optional non-stick; Display: 7-inch multi-function touch display; Tilting Method: Electric tilting; Safety: Emergency stop function; Temperature Measurement: Infrared temperature monitoring; Menu: Stores 800 recipes (smart learning function); Voice: Smart real-time voice broadcast; Cleaning Spray Gun: Premium high-pressure spray gun (with 2m hose)",
     power: "25kW",
     voltage: "380V/50Hz",
     material: "采用优质不锈钢",
@@ -1352,15 +1547,18 @@ window.PRODUCT_DATA_TABLE = [
       {
         filePath: "/assets/images/products/DLB-GC60-1.webp",
         isPrimary: true,
-        isHires: false
-      }
+        isHires: false,
+      },
     ],
     is_home_core: false,
     highlights: "",
-    scenarios: "用途：餐饮连锁、外 卖、酒店酒楼宴席、 企事业单位员工餐等 场所；适用于自动烹 饪炒菜、炒饭、炒粉 、炒面、小龙虾等。 产能：单次烹饪5- 20kg。 平均烹饪周期：5-10 分钟",
-    usage: "用途：餐饮连锁、外 卖、酒店酒楼宴席、 企事业单位员工餐等 场所；适用于自动烹 饪炒菜、炒饭、炒粉 、炒面、小龙虾等。 产能：单次烹饪5- 20kg。 平均烹饪周期：5-10 分钟",
-    usageEn: "Suitable for restaurant chains, food delivery, hotel banquets, corporate & institutional staff dining, and more. Ideal for automatic cooking of stir-fried dishes, fried rice, fried noodles, chow mein, crawfish, and more. Capacity: 5–20 kg per batch. Avg. cooking cycle: 5–10 min.",
-    materialEn: "Premium stainless steel"
+    scenarios:
+      "用途：餐饮连锁、外 卖、酒店酒楼宴席、 企事业单位员工餐等 场所；适用于自动烹 饪炒菜、炒饭、炒粉 、炒面、小龙虾等。 产能：单次烹饪5- 20kg。 平均烹饪周期：5-10 分钟",
+    usage:
+      "用途：餐饮连锁、外 卖、酒店酒楼宴席、 企事业单位员工餐等 场所；适用于自动烹 饪炒菜、炒饭、炒粉 、炒面、小龙虾等。 产能：单次烹饪5- 20kg。 平均烹饪周期：5-10 分钟",
+    usageEn:
+      "Suitable for restaurant chains, food delivery, hotel banquets, corporate & institutional staff dining, and more. Ideal for automatic cooking of stir-fried dishes, fried rice, fried noodles, chow mein, crawfish, and more. Capacity: 5–20 kg per batch. Avg. cooking cycle: 5–10 min.",
+    materialEn: "Premium stainless steel",
   },
   {
     model: "DLB-GB70",
@@ -1369,8 +1567,10 @@ window.PRODUCT_DATA_TABLE = [
     nameEn: "Floor-standing 700 Induction Cooker (Touch+Electric)",
     category: "翻炒系列",
     subCategory: "团餐滚筒炒菜机",
-    specifications: "材质：采用优质不锈钢 电压：380V/50Hz 功率：30kW 滚筒：Φ700*H700mm 滚筒炒菜容量：15-30kg/T 滚筒材质：430#不锈钢选装不粘锅 显示屏：7寸触模显示屏 翻锅方式：机械式自动翻锅（无极多角度） 安全防护：带急停功能 控制方式：8/9档火力调节，无极调速翻炒 清洗：高压水枪清洗，快捷高效",
-    specificationsEn: "Material: Premium stainless steel; Voltage: 380V/50Hz; Power: 30kW; Drum: Φ700*H700mm; Drum Cooking Capacity: 15-30kg/T; Drum Material: 430# stainless steel / optional non-stick; Display: 7-inch touch display; Tilting Method: Mechanical auto tilting (stepless multi-angle); Safety: Emergency stop function; Control: 8/9-level heat adjustment, stepless speed stirring; Cleaning: High-pressure water gun cleaning, fast and efficient",
+    specifications:
+      "材质：采用优质不锈钢 电压：380V/50Hz 功率：30kW 滚筒：Φ700*H700mm 滚筒炒菜容量：15-30kg/T 滚筒材质：430#不锈钢选装不粘锅 显示屏：7寸触模显示屏 翻锅方式：机械式自动翻锅（无极多角度） 安全防护：带急停功能 控制方式：8/9档火力调节，无极调速翻炒 清洗：高压水枪清洗，快捷高效",
+    specificationsEn:
+      "Material: Premium stainless steel; Voltage: 380V/50Hz; Power: 30kW; Drum: Φ700*H700mm; Drum Cooking Capacity: 15-30kg/T; Drum Material: 430# stainless steel / optional non-stick; Display: 7-inch touch display; Tilting Method: Mechanical auto tilting (stepless multi-angle); Safety: Emergency stop function; Control: 8/9-level heat adjustment, stepless speed stirring; Cleaning: High-pressure water gun cleaning, fast and efficient",
     power: "30kW",
     voltage: "380V/50Hz",
     material: "采用优质不锈钢",
@@ -1385,15 +1585,18 @@ window.PRODUCT_DATA_TABLE = [
       {
         filePath: "/assets/images/products/DLB-GB70-1.webp",
         isPrimary: true,
-        isHires: false
-      }
+        isHires: false,
+      },
     ],
     is_home_core: false,
     highlights: "",
-    scenarios: "用途：院校机关食堂 、中央厨房团膳、工 厂员工食堂、酒楼等 团餐场所；适用于自 动煸炒烹饪炒菜、炒 饭、炒粉、炒面等。 产能：单次烹饪15- 30kg。 平均烹饪周期：8-12 分钟",
-    usage: "用途：院校机关食堂 、中央厨房团膳、工 厂员工食堂、酒楼等 团餐场所；适用于自 动煸炒烹饪炒菜、炒 饭、炒粉、炒面等。 产能：单次烹饪15- 30kg。 平均烹饪周期：8-12 分钟",
-    usageEn: "Suitable for group dining venues such as school & institutional cafeterias, central kitchens & group catering, factory canteens, and restaurants. Ideal for automatic stir-frying of stir-fried dishes, fried rice, fried noodles, chow mein, and more. Capacity: 15–30 kg per batch. Avg. cooking cycle: 8–12 min.",
-    materialEn: "Premium stainless steel"
+    scenarios:
+      "用途：院校机关食堂 、中央厨房团膳、工 厂员工食堂、酒楼等 团餐场所；适用于自 动煸炒烹饪炒菜、炒 饭、炒粉、炒面等。 产能：单次烹饪15- 30kg。 平均烹饪周期：8-12 分钟",
+    usage:
+      "用途：院校机关食堂 、中央厨房团膳、工 厂员工食堂、酒楼等 团餐场所；适用于自 动煸炒烹饪炒菜、炒 饭、炒粉、炒面等。 产能：单次烹饪15- 30kg。 平均烹饪周期：8-12 分钟",
+    usageEn:
+      "Suitable for group dining venues such as school & institutional cafeterias, central kitchens & group catering, factory canteens, and restaurants. Ideal for automatic stir-frying of stir-fried dishes, fried rice, fried noodles, chow mein, and more. Capacity: 15–30 kg per batch. Avg. cooking cycle: 8–12 min.",
+    materialEn: "Premium stainless steel",
   },
   {
     model: "DLB-GC70",
@@ -1402,8 +1605,10 @@ window.PRODUCT_DATA_TABLE = [
     nameEn: "Floor-standing 700 Induction Cooker (Touch+Voice Menu)",
     category: "翻炒系列",
     subCategory: "团餐滚筒炒菜机",
-    specifications: "材质：采用优质不锈钢 电压：380V/50Hz 功率：30kW 滚筒：Φ700*H700mm 滚筒炒菜容量：15-30kg/T 滚筒材质：430#不锈钢选装不粘锅 显示屏：7寸多功能触模显示屏 翻锅方式：电控翻锅 安全防护：带急停功能 测温：红外线监测温度 菜单：存储800个菜谱（智能学习功能） 语音：智能实时语音播报功能 清洁喷枪：优质高压喷枪（配2米软管）",
-    specificationsEn: "Material: Premium stainless steel; Voltage: 380V/50Hz; Power: 30kW; Drum: Φ700*H700mm; Drum Cooking Capacity: 15-30kg/T; Drum Material: 430# stainless steel / optional non-stick; Display: 7-inch multi-function touch display; Tilting Method: Electric tilting; Safety: Emergency stop function; Temperature Measurement: Infrared temperature monitoring; Menu: Stores 800 recipes (smart learning function); Voice: Smart real-time voice broadcast; Cleaning Spray Gun: Premium high-pressure spray gun (with 2m hose)",
+    specifications:
+      "材质：采用优质不锈钢 电压：380V/50Hz 功率：30kW 滚筒：Φ700*H700mm 滚筒炒菜容量：15-30kg/T 滚筒材质：430#不锈钢选装不粘锅 显示屏：7寸多功能触模显示屏 翻锅方式：电控翻锅 安全防护：带急停功能 测温：红外线监测温度 菜单：存储800个菜谱（智能学习功能） 语音：智能实时语音播报功能 清洁喷枪：优质高压喷枪（配2米软管）",
+    specificationsEn:
+      "Material: Premium stainless steel; Voltage: 380V/50Hz; Power: 30kW; Drum: Φ700*H700mm; Drum Cooking Capacity: 15-30kg/T; Drum Material: 430# stainless steel / optional non-stick; Display: 7-inch multi-function touch display; Tilting Method: Electric tilting; Safety: Emergency stop function; Temperature Measurement: Infrared temperature monitoring; Menu: Stores 800 recipes (smart learning function); Voice: Smart real-time voice broadcast; Cleaning Spray Gun: Premium high-pressure spray gun (with 2m hose)",
     power: "30kW",
     voltage: "380V/50Hz",
     material: "采用优质不锈钢",
@@ -1418,15 +1623,18 @@ window.PRODUCT_DATA_TABLE = [
       {
         filePath: "/assets/images/products/DLB-GC70-1.webp",
         isPrimary: true,
-        isHires: false
-      }
+        isHires: false,
+      },
     ],
     is_home_core: false,
     highlights: "",
-    scenarios: "用途：院校机关食堂 、中央厨房团膳、工 厂员工食堂、酒楼等 团餐场所；适用于自 动煸炒烹饪炒菜、炒 饭、炒粉、炒面等。 产能：单次烹饪15- 30kg。 平均烹饪周期：8-12 分钟",
-    usage: "用途：院校机关食堂 、中央厨房团膳、工 厂员工食堂、酒楼等 团餐场所；适用于自 动煸炒烹饪炒菜、炒 饭、炒粉、炒面等。 产能：单次烹饪15- 30kg。 平均烹饪周期：8-12 分钟",
-    usageEn: "Suitable for group dining venues such as school & institutional cafeterias, central kitchens & group catering, factory canteens, and restaurants. Ideal for automatic stir-frying of stir-fried dishes, fried rice, fried noodles, chow mein, and more. Capacity: 15–30 kg per batch. Avg. cooking cycle: 8–12 min.",
-    materialEn: "Premium stainless steel"
+    scenarios:
+      "用途：院校机关食堂 、中央厨房团膳、工 厂员工食堂、酒楼等 团餐场所；适用于自 动煸炒烹饪炒菜、炒 饭、炒粉、炒面等。 产能：单次烹饪15- 30kg。 平均烹饪周期：8-12 分钟",
+    usage:
+      "用途：院校机关食堂 、中央厨房团膳、工 厂员工食堂、酒楼等 团餐场所；适用于自 动煸炒烹饪炒菜、炒 饭、炒粉、炒面等。 产能：单次烹饪15- 30kg。 平均烹饪周期：8-12 分钟",
+    usageEn:
+      "Suitable for group dining venues such as school & institutional cafeterias, central kitchens & group catering, factory canteens, and restaurants. Ideal for automatic stir-frying of stir-fried dishes, fried rice, fried noodles, chow mein, and more. Capacity: 15–30 kg per batch. Avg. cooking cycle: 8–12 min.",
+    materialEn: "Premium stainless steel",
   },
   {
     model: "DLB-GB80",
@@ -1435,8 +1643,10 @@ window.PRODUCT_DATA_TABLE = [
     nameEn: "Floor-standing 800 Induction Cooker (Touch+Electric)",
     category: "翻炒系列",
     subCategory: "团餐滚筒炒菜机",
-    specifications: "材质：采用优质不锈钢  电压：380V /50Hz  功率：35kW  滚筒： Φ800*H800mm  滚筒炒菜容量：20-50kg/T  滚筒材质：430#不锈钢选装不粘锅  显示屏：7寸触模显示屏  翻锅方式：机械式自动翻锅（无极多角度）  安全防护：带急停功能  控制方式：9档火力调节，无极调速翻炒  清洁喷枪：优质高压喷枪（配2米软管）",
-    specificationsEn: "Material: Premium stainless steel; Voltage: 380V/50Hz; Power: 35kW; Drum: Φ800*H800mm; Drum Cooking Capacity: 20-50kg/T; Drum Material: 430# stainless steel / optional non-stick; Display: 7-inch touch display; Tilting Method: Mechanical auto tilting (stepless multi-angle); Safety: Emergency stop function; Control: 9-level heat adjustment, stepless speed stirring; Cleaning Spray Gun: Premium high-pressure spray gun (with 2m hose)",
+    specifications:
+      "材质：采用优质不锈钢  电压：380V /50Hz  功率：35kW  滚筒： Φ800*H800mm  滚筒炒菜容量：20-50kg/T  滚筒材质：430#不锈钢选装不粘锅  显示屏：7寸触模显示屏  翻锅方式：机械式自动翻锅（无极多角度）  安全防护：带急停功能  控制方式：9档火力调节，无极调速翻炒  清洁喷枪：优质高压喷枪（配2米软管）",
+    specificationsEn:
+      "Material: Premium stainless steel; Voltage: 380V/50Hz; Power: 35kW; Drum: Φ800*H800mm; Drum Cooking Capacity: 20-50kg/T; Drum Material: 430# stainless steel / optional non-stick; Display: 7-inch touch display; Tilting Method: Mechanical auto tilting (stepless multi-angle); Safety: Emergency stop function; Control: 9-level heat adjustment, stepless speed stirring; Cleaning Spray Gun: Premium high-pressure spray gun (with 2m hose)",
     power: "35kW",
     voltage: "380V/50Hz",
     material: "采用优质不锈钢",
@@ -1451,15 +1661,18 @@ window.PRODUCT_DATA_TABLE = [
       {
         filePath: "/assets/images/products/DLB-GB80-1.webp",
         isPrimary: true,
-        isHires: false
-      }
+        isHires: false,
+      },
     ],
     is_home_core: false,
     highlights: "",
-    scenarios: "用途：院校机关食堂 、中央厨房团膳、工 厂员工食堂、酒楼等 团餐场所；适用于自 动煸炒烹饪炒菜、炒 饭、炒粉、炒面等。 产能：单次烹饪20- 50kg。 平均烹饪周期：8-15 分钟",
-    usage: "用途：院校机关食堂 、中央厨房团膳、工 厂员工食堂、酒楼等 团餐场所；适用于自 动煸炒烹饪炒菜、炒 饭、炒粉、炒面等。 产能：单次烹饪20- 50kg。 平均烹饪周期：8-15 分钟",
-    usageEn: "Suitable for group dining venues such as school & institutional cafeterias, central kitchens & group catering, factory canteens, and restaurants. Ideal for automatic stir-frying of stir-fried dishes, fried rice, fried noodles, chow mein, and more. Capacity: 20–50 kg per batch. Avg. cooking cycle: 8–15 min.",
-    materialEn: "Premium stainless steel"
+    scenarios:
+      "用途：院校机关食堂 、中央厨房团膳、工 厂员工食堂、酒楼等 团餐场所；适用于自 动煸炒烹饪炒菜、炒 饭、炒粉、炒面等。 产能：单次烹饪20- 50kg。 平均烹饪周期：8-15 分钟",
+    usage:
+      "用途：院校机关食堂 、中央厨房团膳、工 厂员工食堂、酒楼等 团餐场所；适用于自 动煸炒烹饪炒菜、炒 饭、炒粉、炒面等。 产能：单次烹饪20- 50kg。 平均烹饪周期：8-15 分钟",
+    usageEn:
+      "Suitable for group dining venues such as school & institutional cafeterias, central kitchens & group catering, factory canteens, and restaurants. Ideal for automatic stir-frying of stir-fried dishes, fried rice, fried noodles, chow mein, and more. Capacity: 20–50 kg per batch. Avg. cooking cycle: 8–15 min.",
+    materialEn: "Premium stainless steel",
   },
   {
     model: "DLB-GQ70",
@@ -1468,12 +1681,15 @@ window.PRODUCT_DATA_TABLE = [
     nameEn: "Floor-standing 700 Induction Cooker (Voice Menu+Auto Spray Arm)",
     category: "翻炒系列",
     subCategory: "团餐滚筒炒菜机",
-    specifications: "材质：采用优质不锈钢 电压：380V/50Hz  |  功率：30kW 滚筒：仿球釜型锅体内直径Φ680mm 滚筒炒菜容量：15-30kg/T 滚筒材质：430#不锈钢选装不粘锅 显示屏：10寸多功能触模显示屏 翻锅方式：电控翻锅 安全防护：带急停功能 测温：红外线监测温度 菜单：存储800个菜谱（智能学习功能） 语音：智能实时语音播报功能 喷料：自动摆臂四路喷料 接料盘：接料台+排水池+可提冲孔隔渣网 清洗：一键式自动清洗，水枪辅助清洗 清洁喷枪：优质高压喷枪（配2米软管）",
-    specificationsEn: "Material: Premium stainless steel; Voltage: 380V/50Hz | Power: 30kW; Drum: Dome-shaped wok inner diameter Φ680mm; Drum Cooking Capacity: 15-30kg/T; Drum Material: 430# stainless steel / optional non-stick; Display: 10-inch multi-function touch display; Tilting Method: Electric tilting; Safety: Emergency stop function; Temperature Measurement: Infrared temperature monitoring; Menu: Stores 800 recipes (smart learning function); Voice: Smart real-time voice broadcast; Oil Spray: Auto swing-arm 4-way oil spray; Catch Tray: Catch table + drain + removable perforated strainer mesh; Cleaning: One-key auto cleaning, assisted by water gun; Cleaning Spray Gun: Premium high-pressure spray gun (with 2m hose)",
+    specifications:
+      "材质：采用优质不锈钢 电压：380V/50Hz  |  功率：30kW 滚筒：仿球釜型锅体内直径Φ680mm 滚筒炒菜容量：15-30kg/T 滚筒材质：430#不锈钢选装不粘锅 显示屏：10寸多功能触模显示屏 翻锅方式：电控翻锅 安全防护：带急停功能 测温：红外线监测温度 菜单：存储800个菜谱（智能学习功能） 语音：智能实时语音播报功能 喷料：自动摆臂四路喷料 接料盘：接料台+排水池+可提冲孔隔渣网 清洗：一键式自动清洗，水枪辅助清洗 清洁喷枪：优质高压喷枪（配2米软管）",
+    specificationsEn:
+      "Material: Premium stainless steel; Voltage: 380V/50Hz | Power: 30kW; Drum: Dome-shaped wok inner diameter Φ680mm; Drum Cooking Capacity: 15-30kg/T; Drum Material: 430# stainless steel / optional non-stick; Display: 10-inch multi-function touch display; Tilting Method: Electric tilting; Safety: Emergency stop function; Temperature Measurement: Infrared temperature monitoring; Menu: Stores 800 recipes (smart learning function); Voice: Smart real-time voice broadcast; Oil Spray: Auto swing-arm 4-way oil spray; Catch Tray: Catch table + drain + removable perforated strainer mesh; Cleaning: One-key auto cleaning, assisted by water gun; Cleaning Spray Gun: Premium high-pressure spray gun (with 2m hose)",
     power: "30kW",
     voltage: "380V/50Hz|",
     material: "采用优质不锈钢",
-    productDimensions: "大尺寸摆臂喷料： 设备尺寸：1100*1220*1350 所需空间：1100*1670*1750  小尺寸锅口喷料： 设备尺寸：1250*1050*1470 所需空间：1250*1150*1620",
+    productDimensions:
+      "大尺寸摆臂喷料： 设备尺寸：1100*1220*1350 所需空间：1100*1670*1750  小尺寸锅口喷料： 设备尺寸：1250*1050*1470 所需空间：1250*1150*1620",
     throughput: "",
     averageTime: "",
     status: "在售",
@@ -1484,15 +1700,18 @@ window.PRODUCT_DATA_TABLE = [
       {
         filePath: "/assets/images/products/DLB-GQ70-1.webp",
         isPrimary: true,
-        isHires: false
-      }
+        isHires: false,
+      },
     ],
     is_home_core: false,
     highlights: "",
-    scenarios: "用途：院校机关食堂、中央厨房团膳、工厂员工食堂、酒楼等团餐场所；适用于自动煸炒烹饪炒菜、炒饭、炒粉、炒面等。 产能：单次烹饪15-30kg 平均烹饪周期：8-12分钟",
-    usage: "用途：院校机关食堂、中央厨房团膳、工厂员工食堂、酒楼等团餐场所；适用于自动煸炒烹饪炒菜、炒饭、炒粉、炒面等。 产能：单次烹饪15-30kg 平均烹饪周期：8-12分钟",
-    usageEn: "Suitable for group dining venues such as school & institutional cafeterias, central kitchens & group catering, factory canteens, and restaurants. Ideal for automatic stir-frying of stir-fried dishes, fried rice, fried noodles, chow mein, and more. Capacity: 15–30 kg per batch. Avg. cooking cycle: 8–12 min.",
-    materialEn: "Premium stainless steel"
+    scenarios:
+      "用途：院校机关食堂、中央厨房团膳、工厂员工食堂、酒楼等团餐场所；适用于自动煸炒烹饪炒菜、炒饭、炒粉、炒面等。 产能：单次烹饪15-30kg 平均烹饪周期：8-12分钟",
+    usage:
+      "用途：院校机关食堂、中央厨房团膳、工厂员工食堂、酒楼等团餐场所；适用于自动煸炒烹饪炒菜、炒饭、炒粉、炒面等。 产能：单次烹饪15-30kg 平均烹饪周期：8-12分钟",
+    usageEn:
+      "Suitable for group dining venues such as school & institutional cafeterias, central kitchens & group catering, factory canteens, and restaurants. Ideal for automatic stir-frying of stir-fried dishes, fried rice, fried noodles, chow mein, and more. Capacity: 15–30 kg per batch. Avg. cooking cycle: 8–12 min.",
+    materialEn: "Premium stainless steel",
   },
   {
     model: "DLB-GC80",
@@ -1501,8 +1720,10 @@ window.PRODUCT_DATA_TABLE = [
     nameEn: "Floor-standing 800 Induction Cooker (Touch+Voice Menu)",
     category: "翻炒系列",
     subCategory: "团餐滚筒炒菜机",
-    specifications: "材质：采用优质不锈钢 电压：380V /50Hz  |  功率：35kW 滚筒： Φ800*H800mm 滚筒炒菜容量：20-50kg/T 滚筒材质：430#不锈钢选装不粘锅 显示屏：7寸多功能触模显示屏 翻锅方式： 电控翻锅 安全防护：带急停功能 测温：红外线监测温度 菜单：存储800个菜谱（智能学习功能） 语音：智能实时语音播报功能 清洁喷枪：优质高压喷枪（配2米软管）",
-    specificationsEn: "Material: Premium stainless steel; Voltage: 380V/50Hz | Power: 35kW; Drum: Φ800*H800mm; Drum Cooking Capacity: 20-50kg/T; Drum Material: 430# stainless steel / optional non-stick; Display: 7-inch multi-function touch display; Tilting Method: Electric tilting; Safety: Emergency stop function; Temperature Measurement: Infrared temperature monitoring; Menu: Stores 800 recipes (smart learning function); Voice: Smart real-time voice broadcast; Cleaning Spray Gun: Premium high-pressure spray gun (with 2m hose)",
+    specifications:
+      "材质：采用优质不锈钢 电压：380V /50Hz  |  功率：35kW 滚筒： Φ800*H800mm 滚筒炒菜容量：20-50kg/T 滚筒材质：430#不锈钢选装不粘锅 显示屏：7寸多功能触模显示屏 翻锅方式： 电控翻锅 安全防护：带急停功能 测温：红外线监测温度 菜单：存储800个菜谱（智能学习功能） 语音：智能实时语音播报功能 清洁喷枪：优质高压喷枪（配2米软管）",
+    specificationsEn:
+      "Material: Premium stainless steel; Voltage: 380V/50Hz | Power: 35kW; Drum: Φ800*H800mm; Drum Cooking Capacity: 20-50kg/T; Drum Material: 430# stainless steel / optional non-stick; Display: 7-inch multi-function touch display; Tilting Method: Electric tilting; Safety: Emergency stop function; Temperature Measurement: Infrared temperature monitoring; Menu: Stores 800 recipes (smart learning function); Voice: Smart real-time voice broadcast; Cleaning Spray Gun: Premium high-pressure spray gun (with 2m hose)",
     power: "35kW",
     voltage: "380V/50Hz|",
     material: "采用优质不锈钢",
@@ -1517,15 +1738,18 @@ window.PRODUCT_DATA_TABLE = [
       {
         filePath: "/assets/images/products/DLB-GC80-1.webp",
         isPrimary: true,
-        isHires: false
-      }
+        isHires: false,
+      },
     ],
     is_home_core: false,
     highlights: "",
-    scenarios: "用途：院校机关食堂、中央厨房团膳、工厂员工食堂、酒楼等团餐场所； 适用于自动煸炒烹饪炒菜、炒饭、炒粉、炒面等。 产能：单次烹饪20-50kg。 平均烹饪周期：8-15分钟",
-    usage: "用途：院校机关食堂、中央厨房团膳、工厂员工食堂、酒楼等团餐场所； 适用于自动煸炒烹饪炒菜、炒饭、炒粉、炒面等。 产能：单次烹饪20-50kg。 平均烹饪周期：8-15分钟",
-    usageEn: "Suitable for group dining venues such as school & institutional cafeterias, central kitchens & group catering, factory canteens, and restaurants. Ideal for automatic stir-frying of stir-fried dishes, fried rice, fried noodles, chow mein, and more. Capacity: 20–50 kg per batch. Avg. cooking cycle: 8–15 min.",
-    materialEn: "Premium stainless steel"
+    scenarios:
+      "用途：院校机关食堂、中央厨房团膳、工厂员工食堂、酒楼等团餐场所； 适用于自动煸炒烹饪炒菜、炒饭、炒粉、炒面等。 产能：单次烹饪20-50kg。 平均烹饪周期：8-15分钟",
+    usage:
+      "用途：院校机关食堂、中央厨房团膳、工厂员工食堂、酒楼等团餐场所； 适用于自动煸炒烹饪炒菜、炒饭、炒粉、炒面等。 产能：单次烹饪20-50kg。 平均烹饪周期：8-15分钟",
+    usageEn:
+      "Suitable for group dining venues such as school & institutional cafeterias, central kitchens & group catering, factory canteens, and restaurants. Ideal for automatic stir-frying of stir-fried dishes, fried rice, fried noodles, chow mein, and more. Capacity: 20–50 kg per batch. Avg. cooking cycle: 8–15 min.",
+    materialEn: "Premium stainless steel",
   },
   {
     model: "DLB-GB90",
@@ -1534,8 +1758,10 @@ window.PRODUCT_DATA_TABLE = [
     nameEn: "Floor-standing 900 Induction Cooker (Touch+Electric)",
     category: "翻炒系列",
     subCategory: "团餐滚筒炒菜机",
-    specifications: "材质：采用优质不锈钢  电压：380V /50Hz  功率：40kW  滚筒： Φ900*H900mm  滚筒炒菜容量：30-80kg/T  滚筒材质：430#不锈钢选装不粘锅  显示屏：7寸触模显示屏  翻锅方式：机械式自动翻锅（无极多角度）  安全防护：带急停功能  控制方式：9档火力调节，无极调速翻炒  清洁喷枪：优质高压喷枪（配2米软管）",
-    specificationsEn: "Material: Premium stainless steel; Voltage: 380V/50Hz; Power: 40kW; Drum: Φ900*H900mm; Drum Cooking Capacity: 30-80kg/T; Drum Material: 430# stainless steel / optional non-stick; Display: 7-inch touch display; Tilting Method: Mechanical auto tilting (stepless multi-angle); Safety: Emergency stop function; Control: 9-level heat adjustment, stepless speed stirring; Cleaning Spray Gun: Premium high-pressure spray gun (with 2m hose)",
+    specifications:
+      "材质：采用优质不锈钢  电压：380V /50Hz  功率：40kW  滚筒： Φ900*H900mm  滚筒炒菜容量：30-80kg/T  滚筒材质：430#不锈钢选装不粘锅  显示屏：7寸触模显示屏  翻锅方式：机械式自动翻锅（无极多角度）  安全防护：带急停功能  控制方式：9档火力调节，无极调速翻炒  清洁喷枪：优质高压喷枪（配2米软管）",
+    specificationsEn:
+      "Material: Premium stainless steel; Voltage: 380V/50Hz; Power: 40kW; Drum: Φ900*H900mm; Drum Cooking Capacity: 30-80kg/T; Drum Material: 430# stainless steel / optional non-stick; Display: 7-inch touch display; Tilting Method: Mechanical auto tilting (stepless multi-angle); Safety: Emergency stop function; Control: 9-level heat adjustment, stepless speed stirring; Cleaning Spray Gun: Premium high-pressure spray gun (with 2m hose)",
     power: "40kW",
     voltage: "380V/50Hz",
     material: "采用优质不锈钢",
@@ -1550,15 +1776,18 @@ window.PRODUCT_DATA_TABLE = [
       {
         filePath: "/assets/images/products/DLB-GB90-1.webp",
         isPrimary: true,
-        isHires: false
-      }
+        isHires: false,
+      },
     ],
     is_home_core: false,
     highlights: "",
-    scenarios: "用途：院校机关食堂 、中央厨房团膳、工 厂员工食堂、酒楼等 团餐场所；适用于自 动煸炒烹饪炒菜、炒 饭、炒粉、炒面等。 产能：单次烹饪30- 80kg。 平均烹饪周期：12-20 分钟",
-    usage: "用途：院校机关食堂 、中央厨房团膳、工 厂员工食堂、酒楼等 团餐场所；适用于自 动煸炒烹饪炒菜、炒 饭、炒粉、炒面等。 产能：单次烹饪30- 80kg。 平均烹饪周期：12-20 分钟",
-    usageEn: "Suitable for group dining venues such as school & institutional cafeterias, central kitchens & group catering, factory canteens, and restaurants. Ideal for automatic stir-frying of stir-fried dishes, fried rice, fried noodles, chow mein, and more. Capacity: 30–80 kg per batch. Avg. cooking cycle: 12–20 min.",
-    materialEn: "Premium stainless steel"
+    scenarios:
+      "用途：院校机关食堂 、中央厨房团膳、工 厂员工食堂、酒楼等 团餐场所；适用于自 动煸炒烹饪炒菜、炒 饭、炒粉、炒面等。 产能：单次烹饪30- 80kg。 平均烹饪周期：12-20 分钟",
+    usage:
+      "用途：院校机关食堂 、中央厨房团膳、工 厂员工食堂、酒楼等 团餐场所；适用于自 动煸炒烹饪炒菜、炒 饭、炒粉、炒面等。 产能：单次烹饪30- 80kg。 平均烹饪周期：12-20 分钟",
+    usageEn:
+      "Suitable for group dining venues such as school & institutional cafeterias, central kitchens & group catering, factory canteens, and restaurants. Ideal for automatic stir-frying of stir-fried dishes, fried rice, fried noodles, chow mein, and more. Capacity: 30–80 kg per batch. Avg. cooking cycle: 12–20 min.",
+    materialEn: "Premium stainless steel",
   },
   {
     model: "DLB-GC90",
@@ -1567,8 +1796,10 @@ window.PRODUCT_DATA_TABLE = [
     nameEn: "Floor-standing 900 Induction Cooker (Touch+Voice Menu)",
     category: "翻炒系列",
     subCategory: "团餐滚筒炒菜机",
-    specifications: "材质：采用优质不锈钢  电压：380V /50Hz  功率：40kW  滚筒： Φ900*H900mm  滚筒炒菜容量：30-80kg/T  滚筒材质：430#不锈钢选装不粘锅  显示屏：7寸多功能触模显示屏  翻锅方式： 电控翻锅  安全防护：带急停功能  测温：红外线监测温度  菜单：存储800个菜谱（智能学习功能）  语音：智能实时语音播报功能  清洁喷枪：优质高压喷枪（配2米软管）",
-    specificationsEn: "Material: Premium stainless steel; Voltage: 380V/50Hz; Power: 40kW; Drum: Φ900*H900mm; Drum Cooking Capacity: 30-80kg/T; Drum Material: 430# stainless steel / optional non-stick; Display: 7-inch multi-function touch display; Tilting Method: Electric tilting; Safety: Emergency stop function; Temperature Measurement: Infrared temperature monitoring; Menu: Stores 800 recipes (smart learning function); Voice: Smart real-time voice broadcast; Cleaning Spray Gun: Premium high-pressure spray gun (with 2m hose)",
+    specifications:
+      "材质：采用优质不锈钢  电压：380V /50Hz  功率：40kW  滚筒： Φ900*H900mm  滚筒炒菜容量：30-80kg/T  滚筒材质：430#不锈钢选装不粘锅  显示屏：7寸多功能触模显示屏  翻锅方式： 电控翻锅  安全防护：带急停功能  测温：红外线监测温度  菜单：存储800个菜谱（智能学习功能）  语音：智能实时语音播报功能  清洁喷枪：优质高压喷枪（配2米软管）",
+    specificationsEn:
+      "Material: Premium stainless steel; Voltage: 380V/50Hz; Power: 40kW; Drum: Φ900*H900mm; Drum Cooking Capacity: 30-80kg/T; Drum Material: 430# stainless steel / optional non-stick; Display: 7-inch multi-function touch display; Tilting Method: Electric tilting; Safety: Emergency stop function; Temperature Measurement: Infrared temperature monitoring; Menu: Stores 800 recipes (smart learning function); Voice: Smart real-time voice broadcast; Cleaning Spray Gun: Premium high-pressure spray gun (with 2m hose)",
     power: "40kW",
     voltage: "380V/50Hz",
     material: "采用优质不锈钢",
@@ -1583,15 +1814,18 @@ window.PRODUCT_DATA_TABLE = [
       {
         filePath: "/assets/images/products/DLB-GC90-1.webp",
         isPrimary: true,
-        isHires: false
-      }
+        isHires: false,
+      },
     ],
     is_home_core: false,
     highlights: "",
-    scenarios: "用途：院校机关食堂 、中央厨房团膳、工 厂员工食堂、酒楼等 团餐场所；适用于自 动煸炒烹饪炒菜、炒 饭、炒粉、炒面等。 产能：单次烹饪30- 80kg。 平均烹饪周期：12-20 分钟",
-    usage: "用途：院校机关食堂 、中央厨房团膳、工 厂员工食堂、酒楼等 团餐场所；适用于自 动煸炒烹饪炒菜、炒 饭、炒粉、炒面等。 产能：单次烹饪30- 80kg。 平均烹饪周期：12-20 分钟",
-    usageEn: "Suitable for group dining venues such as school & institutional cafeterias, central kitchens & group catering, factory canteens, and restaurants. Ideal for automatic stir-frying of stir-fried dishes, fried rice, fried noodles, chow mein, and more. Capacity: 30–80 kg per batch. Avg. cooking cycle: 12–20 min.",
-    materialEn: "Premium stainless steel"
+    scenarios:
+      "用途：院校机关食堂 、中央厨房团膳、工 厂员工食堂、酒楼等 团餐场所；适用于自 动煸炒烹饪炒菜、炒 饭、炒粉、炒面等。 产能：单次烹饪30- 80kg。 平均烹饪周期：12-20 分钟",
+    usage:
+      "用途：院校机关食堂 、中央厨房团膳、工 厂员工食堂、酒楼等 团餐场所；适用于自 动煸炒烹饪炒菜、炒 饭、炒粉、炒面等。 产能：单次烹饪30- 80kg。 平均烹饪周期：12-20 分钟",
+    usageEn:
+      "Suitable for group dining venues such as school & institutional cafeterias, central kitchens & group catering, factory canteens, and restaurants. Ideal for automatic stir-frying of stir-fried dishes, fried rice, fried noodles, chow mein, and more. Capacity: 30–80 kg per batch. Avg. cooking cycle: 12–20 min.",
+    materialEn: "Premium stainless steel",
   },
   {
     model: "电磁：DLB-GQ40燃气：DLB-GQ40R",
@@ -1600,12 +1834,14 @@ window.PRODUCT_DATA_TABLE = [
     nameEn: "",
     category: "翻炒系列",
     subCategory: "团餐滚筒炒菜机",
-    specifications: "材质：采用优质不锈钢 功率：8-10kW；电压：380V；频率：50Hz 锅体规格：仿球釜型锅体Φ380 炒菜容量：12L（倾角30 °有效容量） 锅体材质：SUS409不锈钢不粘锅/铸铁锅 显示屏：7寸多功能触模显示屏 翻锅方式： 电控翻锅（无极多角度） 安全防护：带急停功能 菜单：存储800个菜谱（智能学习功能） 语音：智能实时语音播报功能 喷料：带3/4路自动喷料口， 自动定量加料 储料仓：左侧箱体上部可开盖存储液体味料 喷料方式： 自动摆臂喷料 接料盘：接料台+排水池+可提冲孔隔渣网 清洗：一键式自动清洗，水枪辅助清洗",
+    specifications:
+      "材质：采用优质不锈钢 功率：8-10kW；电压：380V；频率：50Hz 锅体规格：仿球釜型锅体Φ380 炒菜容量：12L（倾角30 °有效容量） 锅体材质：SUS409不锈钢不粘锅/铸铁锅 显示屏：7寸多功能触模显示屏 翻锅方式： 电控翻锅（无极多角度） 安全防护：带急停功能 菜单：存储800个菜谱（智能学习功能） 语音：智能实时语音播报功能 喷料：带3/4路自动喷料口， 自动定量加料 储料仓：左侧箱体上部可开盖存储液体味料 喷料方式： 自动摆臂喷料 接料盘：接料台+排水池+可提冲孔隔渣网 清洗：一键式自动清洗，水枪辅助清洗",
     specificationsEn: "",
     power: "8-10kW",
     voltage: "380V",
     material: "采用优质不锈钢",
-    productDimensions: "电磁款         设 备尺寸： 770*900*1100 所需空间： 770*1050*1290 燃气款         设 备尺寸： 800*750*1350   所 需空间： 800*1060/1600",
+    productDimensions:
+      "电磁款         设 备尺寸： 770*900*1100 所需空间： 770*1050*1290 燃气款         设 备尺寸： 800*750*1350   所 需空间： 800*1060/1600",
     throughput: "",
     averageTime: "",
     status: "在售",
@@ -1615,9 +1851,11 @@ window.PRODUCT_DATA_TABLE = [
     images: [],
     is_home_core: false,
     highlights: "",
-    scenarios: "用途：餐饮连锁、外 卖、酒店酒楼宴席、 企事业单位员工餐等 场所；适用于自动烹 饪炒菜、炒饭、炒粉 、炒面、辣子鸡、麻 辣香锅、小龙虾、香 辣虾蟹等。 产能：单次烹饪1-5kg 。",
-    usage: "用途：餐饮连锁、外 卖、酒店酒楼宴席、 企事业单位员工餐等 场所；适用于自动烹 饪炒菜、炒饭、炒粉 、炒面、辣子鸡、麻 辣香锅、小龙虾、香 辣虾蟹等。 产能：单次烹饪1-5kg 。",
-    usageEn: ""
+    scenarios:
+      "用途：餐饮连锁、外 卖、酒店酒楼宴席、 企事业单位员工餐等 场所；适用于自动烹 饪炒菜、炒饭、炒粉 、炒面、辣子鸡、麻 辣香锅、小龙虾、香 辣虾蟹等。 产能：单次烹饪1-5kg 。",
+    usage:
+      "用途：餐饮连锁、外 卖、酒店酒楼宴席、 企事业单位员工餐等 场所；适用于自动烹 饪炒菜、炒饭、炒粉 、炒面、辣子鸡、麻 辣香锅、小龙虾、香 辣虾蟹等。 产能：单次烹饪1-5kg 。",
+    usageEn: "",
   },
   {
     model: "DLB-GQ50",
@@ -1626,8 +1864,10 @@ window.PRODUCT_DATA_TABLE = [
     nameEn: "Floor-standing 500 Induction Cooker (Touch+Auto Spray Arm)",
     category: "翻炒系列",
     subCategory: "团餐滚筒炒菜机",
-    specifications: "材质：整机外壳不锈钢材质 功率：15-20kW；电压：380V；频率：50Hz 锅体规格：仿球釜型锅体Φ480 炒菜容量：3-10kg/锅 锅体材质：SUS409不锈钢不粘锅 显示屏：7寸多功能触模显示屏 翻锅方式： 电控翻锅（无极多角度） 安全防护：带急停功能 菜单：存储800个菜谱（智能学习功能） 语音：智能实时语音播报功能 喷料：带4路自动喷料口， 自动定量加料 储料仓：箱体可开门存储液体味料 喷料方式： 自动摆臂喷料 接料盘：接料台+排水池+可提冲孔隔渣网 清洗：一键式自动清洗模式 ，水枪辅助清洗",
-    specificationsEn: "Material: Entire housing made of stainless steel; Power: 15-20kW; Voltage: 380V; Frequency: 50Hz; Wok Body Specs: Dome-shaped wok Φ480; Cooking Capacity: 3-10kg/batch; Wok Body Material: SUS409 stainless steel non-stick wok; Display: 7-inch multi-function touch display; Tilting Method: Electric tilting (stepless multi-angle); Safety: Emergency stop function; Menu: Stores 800 recipes (smart learning function); Voice: Smart real-time voice broadcast; Oil Spray: Equipped with 4-way auto oil spray ports, auto quantitative feeding; Storage Compartment: Box can be opened to store liquid seasonings; Oil Spray Method: Auto swing-arm oil spray; Catch Tray: Catch table + drain + removable perforated strainer mesh; Cleaning: One-key auto cleaning mode, assisted by water gun",
+    specifications:
+      "材质：整机外壳不锈钢材质 功率：15-20kW；电压：380V；频率：50Hz 锅体规格：仿球釜型锅体Φ480 炒菜容量：3-10kg/锅 锅体材质：SUS409不锈钢不粘锅 显示屏：7寸多功能触模显示屏 翻锅方式： 电控翻锅（无极多角度） 安全防护：带急停功能 菜单：存储800个菜谱（智能学习功能） 语音：智能实时语音播报功能 喷料：带4路自动喷料口， 自动定量加料 储料仓：箱体可开门存储液体味料 喷料方式： 自动摆臂喷料 接料盘：接料台+排水池+可提冲孔隔渣网 清洗：一键式自动清洗模式 ，水枪辅助清洗",
+    specificationsEn:
+      "Material: Entire housing made of stainless steel; Power: 15-20kW; Voltage: 380V; Frequency: 50Hz; Wok Body Specs: Dome-shaped wok Φ480; Cooking Capacity: 3-10kg/batch; Wok Body Material: SUS409 stainless steel non-stick wok; Display: 7-inch multi-function touch display; Tilting Method: Electric tilting (stepless multi-angle); Safety: Emergency stop function; Menu: Stores 800 recipes (smart learning function); Voice: Smart real-time voice broadcast; Oil Spray: Equipped with 4-way auto oil spray ports, auto quantitative feeding; Storage Compartment: Box can be opened to store liquid seasonings; Oil Spray Method: Auto swing-arm oil spray; Catch Tray: Catch table + drain + removable perforated strainer mesh; Cleaning: One-key auto cleaning mode, assisted by water gun",
     power: "15-20kW",
     voltage: "380V",
     material: "整机外壳不锈钢材质",
@@ -1642,15 +1882,18 @@ window.PRODUCT_DATA_TABLE = [
       {
         filePath: "/assets/images/products/DLB-GQ50-1.webp",
         isPrimary: true,
-        isHires: false
-      }
+        isHires: false,
+      },
     ],
     is_home_core: false,
     highlights: "",
-    scenarios: "用途：餐饮连锁、外 卖、酒店酒楼宴席、 企事业单位员工餐等 场所；适用于自动烹 饪炒菜、炒饭、炒粉 、炒面、辣子鸡、麻 辣香锅、小龙虾、香 辣虾蟹等。 产能：单次烹饪3- 10kg。",
-    usage: "用途：餐饮连锁、外 卖、酒店酒楼宴席、 企事业单位员工餐等 场所；适用于自动烹 饪炒菜、炒饭、炒粉 、炒面、辣子鸡、麻 辣香锅、小龙虾、香 辣虾蟹等。 产能：单次烹饪3- 10kg。",
-    usageEn: "Suitable for restaurant chains, food delivery, hotel banquets, corporate & institutional staff dining, and more. Ideal for automatic cooking of stir-fried dishes, fried rice, fried noodles, chow mein, spicy chicken, spicy hot pot, crawfish, spicy shrimp & crab, and more. Capacity: 3–10 kg per batch.",
-    materialEn: "Full stainless steel body"
+    scenarios:
+      "用途：餐饮连锁、外 卖、酒店酒楼宴席、 企事业单位员工餐等 场所；适用于自动烹 饪炒菜、炒饭、炒粉 、炒面、辣子鸡、麻 辣香锅、小龙虾、香 辣虾蟹等。 产能：单次烹饪3- 10kg。",
+    usage:
+      "用途：餐饮连锁、外 卖、酒店酒楼宴席、 企事业单位员工餐等 场所；适用于自动烹 饪炒菜、炒饭、炒粉 、炒面、辣子鸡、麻 辣香锅、小龙虾、香 辣虾蟹等。 产能：单次烹饪3- 10kg。",
+    usageEn:
+      "Suitable for restaurant chains, food delivery, hotel banquets, corporate & institutional staff dining, and more. Ideal for automatic cooking of stir-fried dishes, fried rice, fried noodles, chow mein, spicy chicken, spicy hot pot, crawfish, spicy shrimp & crab, and more. Capacity: 3–10 kg per batch.",
+    materialEn: "Full stainless steel body",
   },
   {
     model: "DLB-GQ60",
@@ -1659,12 +1902,15 @@ window.PRODUCT_DATA_TABLE = [
     nameEn: "Floor-standing 600 Induction Cooker (Voice Menu+Auto Spray Arm)",
     category: "翻炒系列",
     subCategory: "团餐滚筒炒菜机",
-    specifications: "材质：采用优质不锈钢 电压：380V /50Hz 功率：25kW 滚筒：仿球釜型锅体内直径Φ580mm 滚筒炒菜容量：5-20kg/T 滚筒材质：430#不锈钢或不锈钢不粘锅 显示屏：10寸多功能触模显示屏 翻锅方式： 电控翻锅 安全防护：带急停功能 测温：红外线监测温度 菜单：存储800个菜谱（智能学习功能） 语音：智能实时语音播报功能 喷料： 自动摆臂四路喷料 接料盘：接料台+排水池+可提冲孔隔渣网 清洗：一键式自动清洗，水枪辅助清洗 清洁喷枪：优质高压喷枪（配2米软管）",
-    specificationsEn: "Material: Premium stainless steel; Voltage: 380V/50Hz; Power: 25kW; Drum: Dome-shaped wok inner diameter Φ580mm; Drum Cooking Capacity: 5-20kg/T; Drum Material: 430# stainless steel or stainless steel non-stick; Display: 10-inch multi-function touch display; Tilting Method: Electric tilting; Safety: Emergency stop function; Temperature Measurement: Infrared temperature monitoring; Menu: Stores 800 recipes (smart learning function); Voice: Smart real-time voice broadcast; Oil Spray: Auto swing-arm 4-way oil spray; Catch Tray: Catch table + drain + removable perforated strainer mesh; Cleaning: One-key auto cleaning, assisted by water gun; Cleaning Spray Gun: Premium high-pressure spray gun (with 2m hose)",
+    specifications:
+      "材质：采用优质不锈钢 电压：380V /50Hz 功率：25kW 滚筒：仿球釜型锅体内直径Φ580mm 滚筒炒菜容量：5-20kg/T 滚筒材质：430#不锈钢或不锈钢不粘锅 显示屏：10寸多功能触模显示屏 翻锅方式： 电控翻锅 安全防护：带急停功能 测温：红外线监测温度 菜单：存储800个菜谱（智能学习功能） 语音：智能实时语音播报功能 喷料： 自动摆臂四路喷料 接料盘：接料台+排水池+可提冲孔隔渣网 清洗：一键式自动清洗，水枪辅助清洗 清洁喷枪：优质高压喷枪（配2米软管）",
+    specificationsEn:
+      "Material: Premium stainless steel; Voltage: 380V/50Hz; Power: 25kW; Drum: Dome-shaped wok inner diameter Φ580mm; Drum Cooking Capacity: 5-20kg/T; Drum Material: 430# stainless steel or stainless steel non-stick; Display: 10-inch multi-function touch display; Tilting Method: Electric tilting; Safety: Emergency stop function; Temperature Measurement: Infrared temperature monitoring; Menu: Stores 800 recipes (smart learning function); Voice: Smart real-time voice broadcast; Oil Spray: Auto swing-arm 4-way oil spray; Catch Tray: Catch table + drain + removable perforated strainer mesh; Cleaning: One-key auto cleaning, assisted by water gun; Cleaning Spray Gun: Premium high-pressure spray gun (with 2m hose)",
     power: "25kW",
     voltage: "380V/50Hz",
     material: "采用优质不锈钢",
-    productDimensions: "大尺寸摆臂喷料： 设备尺寸： 1000*1170*1250 所 需空间： 1000*1540*1550 小尺寸锅口喷料： 设备尺寸： 1150*850*1400  所 需空间： 1150*1010*1500",
+    productDimensions:
+      "大尺寸摆臂喷料： 设备尺寸： 1000*1170*1250 所 需空间： 1000*1540*1550 小尺寸锅口喷料： 设备尺寸： 1150*850*1400  所 需空间： 1150*1010*1500",
     throughput: "",
     averageTime: "",
     status: "在售",
@@ -1675,15 +1921,18 @@ window.PRODUCT_DATA_TABLE = [
       {
         filePath: "/assets/images/products/DLB-GQ60-1.webp",
         isPrimary: true,
-        isHires: false
-      }
+        isHires: false,
+      },
     ],
     is_home_core: false,
     highlights: "",
-    scenarios: "用途：餐饮连锁、外 卖、酒店酒楼宴席、 企事业单位员工餐等 场所；适用于自动烹 饪炒菜、炒饭、炒粉 、炒面、辣子鸡、麻 辣香锅、小龙虾、香 辣虾蟹等。 产能：单次烹饪5- 20kg。 平均烹饪周期：5-10 分钟",
-    usage: "用途：餐饮连锁、外 卖、酒店酒楼宴席、 企事业单位员工餐等 场所；适用于自动烹 饪炒菜、炒饭、炒粉 、炒面、辣子鸡、麻 辣香锅、小龙虾、香 辣虾蟹等。 产能：单次烹饪5- 20kg。 平均烹饪周期：5-10 分钟",
-    usageEn: "Suitable for restaurant chains, food delivery, hotel banquets, corporate & institutional staff dining, and more. Ideal for automatic cooking of stir-fried dishes, fried rice, fried noodles, chow mein, spicy chicken, spicy hot pot, crawfish, spicy shrimp & crab, and more. Capacity: 5–20 kg per batch. Avg. cooking cycle: 5–10 min.",
-    materialEn: "Premium stainless steel"
+    scenarios:
+      "用途：餐饮连锁、外 卖、酒店酒楼宴席、 企事业单位员工餐等 场所；适用于自动烹 饪炒菜、炒饭、炒粉 、炒面、辣子鸡、麻 辣香锅、小龙虾、香 辣虾蟹等。 产能：单次烹饪5- 20kg。 平均烹饪周期：5-10 分钟",
+    usage:
+      "用途：餐饮连锁、外 卖、酒店酒楼宴席、 企事业单位员工餐等 场所；适用于自动烹 饪炒菜、炒饭、炒粉 、炒面、辣子鸡、麻 辣香锅、小龙虾、香 辣虾蟹等。 产能：单次烹饪5- 20kg。 平均烹饪周期：5-10 分钟",
+    usageEn:
+      "Suitable for restaurant chains, food delivery, hotel banquets, corporate & institutional staff dining, and more. Ideal for automatic cooking of stir-fried dishes, fried rice, fried noodles, chow mein, spicy chicken, spicy hot pot, crawfish, spicy shrimp & crab, and more. Capacity: 5–20 kg per batch. Avg. cooking cycle: 5–10 min.",
+    materialEn: "Premium stainless steel",
   },
   {
     model: "DLB-GQ80",
@@ -1692,12 +1941,15 @@ window.PRODUCT_DATA_TABLE = [
     nameEn: "Floor-standing 800 Induction Cooker (Voice Menu+Auto Spray Arm)",
     category: "翻炒系列",
     subCategory: "团餐滚筒炒菜机",
-    specifications: "材质：采用优质不锈钢 电压：380V /50Hz  |  功率：35kW 滚筒：仿球釜型锅体内直径Φ780mm 滚筒炒菜容量：20-50kg/T 滚筒材质：430#不锈钢选装不粘锅 显示屏：10寸多功能触模显示屏 翻锅方式： 电控翻锅 安全防护：带急停功能 测温：红外线监测温度 菜单：存储800个菜谱（智能学习功能） 语音：智能实时语音播报功能 喷料： 自动摆臂四路喷料 接料盘：接料台+排水池+可提冲孔隔渣网 清洗：一键式自动清洗，水枪辅助清洗 清洁喷枪：优质高压喷枪（配2米软管）",
-    specificationsEn: "Material: Premium stainless steel; Voltage: 380V/50Hz | Power: 35kW; Drum: Dome-shaped wok inner diameter Φ780mm; Drum Cooking Capacity: 20-50kg/T; Drum Material: 430# stainless steel / optional non-stick; Display: 10-inch multi-function touch display; Tilting Method: Electric tilting; Safety: Emergency stop function; Temperature Measurement: Infrared temperature monitoring; Menu: Stores 800 recipes (smart learning function); Voice: Smart real-time voice broadcast; Oil Spray: Auto swing-arm 4-way oil spray; Catch Tray: Catch table + drain + removable perforated strainer mesh; Cleaning: One-key auto cleaning, assisted by water gun; Cleaning Spray Gun: Premium high-pressure spray gun (with 2m hose)",
+    specifications:
+      "材质：采用优质不锈钢 电压：380V /50Hz  |  功率：35kW 滚筒：仿球釜型锅体内直径Φ780mm 滚筒炒菜容量：20-50kg/T 滚筒材质：430#不锈钢选装不粘锅 显示屏：10寸多功能触模显示屏 翻锅方式： 电控翻锅 安全防护：带急停功能 测温：红外线监测温度 菜单：存储800个菜谱（智能学习功能） 语音：智能实时语音播报功能 喷料： 自动摆臂四路喷料 接料盘：接料台+排水池+可提冲孔隔渣网 清洗：一键式自动清洗，水枪辅助清洗 清洁喷枪：优质高压喷枪（配2米软管）",
+    specificationsEn:
+      "Material: Premium stainless steel; Voltage: 380V/50Hz | Power: 35kW; Drum: Dome-shaped wok inner diameter Φ780mm; Drum Cooking Capacity: 20-50kg/T; Drum Material: 430# stainless steel / optional non-stick; Display: 10-inch multi-function touch display; Tilting Method: Electric tilting; Safety: Emergency stop function; Temperature Measurement: Infrared temperature monitoring; Menu: Stores 800 recipes (smart learning function); Voice: Smart real-time voice broadcast; Oil Spray: Auto swing-arm 4-way oil spray; Catch Tray: Catch table + drain + removable perforated strainer mesh; Cleaning: One-key auto cleaning, assisted by water gun; Cleaning Spray Gun: Premium high-pressure spray gun (with 2m hose)",
     power: "35kW",
     voltage: "380V/50Hz|",
     material: "采用优质不锈钢",
-    productDimensions: "大尺寸摆臂喷料： 设备尺寸：1500*1150*1580 所需空间：1500*1560*1900  小尺寸锅口喷料： 设备尺寸：1500*1150*1610 所需空间：1500*1270*1770",
+    productDimensions:
+      "大尺寸摆臂喷料： 设备尺寸：1500*1150*1580 所需空间：1500*1560*1900  小尺寸锅口喷料： 设备尺寸：1500*1150*1610 所需空间：1500*1270*1770",
     throughput: "",
     averageTime: "",
     status: "在售",
@@ -1708,15 +1960,18 @@ window.PRODUCT_DATA_TABLE = [
       {
         filePath: "/assets/images/products/DLB-GQ80-1.webp",
         isPrimary: true,
-        isHires: false
-      }
+        isHires: false,
+      },
     ],
     is_home_core: false,
     highlights: "",
-    scenarios: "用途：院校机关食堂、中央厨房团膳、工厂员工食堂、酒楼等团餐场所；适用于自动煸炒烹饪炒菜、炒饭、炒粉、炒面等。 产能：单次烹饪20-50kg 平均烹饪周期：8-15分钟",
-    usage: "用途：院校机关食堂、中央厨房团膳、工厂员工食堂、酒楼等团餐场所；适用于自动煸炒烹饪炒菜、炒饭、炒粉、炒面等。 产能：单次烹饪20-50kg 平均烹饪周期：8-15分钟",
-    usageEn: "Suitable for group dining venues such as school & institutional cafeterias, central kitchens & group catering, factory canteens, and restaurants. Ideal for automatic stir-frying of stir-fried dishes, fried rice, fried noodles, chow mein, and more. Capacity: 20–50 kg per batch. Avg. cooking cycle: 8–15 min.",
-    materialEn: "Premium stainless steel"
+    scenarios:
+      "用途：院校机关食堂、中央厨房团膳、工厂员工食堂、酒楼等团餐场所；适用于自动煸炒烹饪炒菜、炒饭、炒粉、炒面等。 产能：单次烹饪20-50kg 平均烹饪周期：8-15分钟",
+    usage:
+      "用途：院校机关食堂、中央厨房团膳、工厂员工食堂、酒楼等团餐场所；适用于自动煸炒烹饪炒菜、炒饭、炒粉、炒面等。 产能：单次烹饪20-50kg 平均烹饪周期：8-15分钟",
+    usageEn:
+      "Suitable for group dining venues such as school & institutional cafeterias, central kitchens & group catering, factory canteens, and restaurants. Ideal for automatic stir-frying of stir-fried dishes, fried rice, fried noodles, chow mein, and more. Capacity: 20–50 kg per batch. Avg. cooking cycle: 8–15 min.",
+    materialEn: "Premium stainless steel",
   },
   {
     model: "DLB-GQ90",
@@ -1725,12 +1980,15 @@ window.PRODUCT_DATA_TABLE = [
     nameEn: "Floor-standing 900 Induction Cooker (Voice Menu+Auto Spray Arm)",
     category: "翻炒系列",
     subCategory: "团餐滚筒炒菜机",
-    specifications: "材质：采用优质不锈钢 电压：380V /50Hz 功率：40kW 滚筒：仿球釜型锅体内直径Φ880mm 滚筒炒菜容量：30-80kg/T 滚筒材质：430#不锈钢选装不粘锅 显示屏：10寸多功能触模显示屏 翻锅方式： 电控翻锅 安全防护：带急停功能 测温：红外线监测温度 菜单：存储800个菜谱（智能学习功能） 语音：智能实时语音播报功能 喷料： 自动摆臂四路喷料 接料盘：接料台+排水池+可提冲孔隔渣网 清洗：一键式自动清洗，水枪辅助清洗 清洁喷枪：优质高压喷枪（配2米软管）",
-    specificationsEn: "Material: Premium Stainless Steel; Voltage: 380V /50Hz; Power: 40kW; Drum: Imitation ball-pot type wok body, inner diameter Φ880mm; Drum Stir-fry Capacity: 30-80kg/T; Drum Material: 430# Stainless Steel, optional Non-stick coating; Display: 10-inch multi-function touch display; Tilting Method: Electric tilting; Safety Protection: Emergency stop function; Temperature Measurement: Infrared temperature monitoring; Menu: Stores 800 recipes (smart learning function); Voice: Smart real-time voice broadcast; Spraying: Auto swing-arm four-way spraying; Drip Tray: Catch tray + drainage basin + liftable punched oil-strainer; Cleaning: One-key automatic cleaning, water gun assisted cleaning; Cleaning Spray Gun: Premium high-pressure spray gun (with 2m hose)",
+    specifications:
+      "材质：采用优质不锈钢 电压：380V /50Hz 功率：40kW 滚筒：仿球釜型锅体内直径Φ880mm 滚筒炒菜容量：30-80kg/T 滚筒材质：430#不锈钢选装不粘锅 显示屏：10寸多功能触模显示屏 翻锅方式： 电控翻锅 安全防护：带急停功能 测温：红外线监测温度 菜单：存储800个菜谱（智能学习功能） 语音：智能实时语音播报功能 喷料： 自动摆臂四路喷料 接料盘：接料台+排水池+可提冲孔隔渣网 清洗：一键式自动清洗，水枪辅助清洗 清洁喷枪：优质高压喷枪（配2米软管）",
+    specificationsEn:
+      "Material: Premium Stainless Steel; Voltage: 380V /50Hz; Power: 40kW; Drum: Imitation ball-pot type wok body, inner diameter Φ880mm; Drum Stir-fry Capacity: 30-80kg/T; Drum Material: 430# Stainless Steel, optional Non-stick coating; Display: 10-inch multi-function touch display; Tilting Method: Electric tilting; Safety Protection: Emergency stop function; Temperature Measurement: Infrared temperature monitoring; Menu: Stores 800 recipes (smart learning function); Voice: Smart real-time voice broadcast; Spraying: Auto swing-arm four-way spraying; Drip Tray: Catch tray + drainage basin + liftable punched oil-strainer; Cleaning: One-key automatic cleaning, water gun assisted cleaning; Cleaning Spray Gun: Premium high-pressure spray gun (with 2m hose)",
     power: "40kW",
     voltage: "380V/50Hz",
     material: "采用优质不锈钢",
-    productDimensions: "大尺寸摆臂喷料： 设备尺寸： 1600*1250*1670 所 需空间： 1600*1660*1980 小尺寸锅口喷料： 设备尺寸： 1600*1250*1600 所 需空间： 1600*1380*1880",
+    productDimensions:
+      "大尺寸摆臂喷料： 设备尺寸： 1600*1250*1670 所 需空间： 1600*1660*1980 小尺寸锅口喷料： 设备尺寸： 1600*1250*1600 所 需空间： 1600*1380*1880",
     throughput: "",
     averageTime: "",
     status: "在售",
@@ -1741,15 +1999,18 @@ window.PRODUCT_DATA_TABLE = [
       {
         filePath: "/assets/images/products/DLB-GQ90-1.webp",
         isPrimary: true,
-        isHires: false
-      }
+        isHires: false,
+      },
     ],
     is_home_core: true,
     highlights: "",
-    scenarios: "用途：院校机关食堂 、中央厨房团膳、工 厂员工食堂、酒楼等 团餐场所；适用于自 动煸炒烹饪炒菜、炒 饭、炒粉、炒面等。 产能：单次烹饪30- 80kg。 平均烹饪周期：12-20 分钟",
-    usage: "用途：院校机关食堂 、中央厨房团膳、工 厂员工食堂、酒楼等 团餐场所；适用于自 动煸炒烹饪炒菜、炒 饭、炒粉、炒面等。 产能：单次烹饪30- 80kg。 平均烹饪周期：12-20 分钟",
-    usageEn: "Suitable for group dining venues such as school & institutional cafeterias, central kitchens & group catering, factory canteens, and restaurants. Ideal for automatic stir-frying of stir-fried dishes, fried rice, fried noodles, chow mein, and more. Capacity: 30–80 kg per batch. Avg. cooking cycle: 12–20 min.",
-    materialEn: "Premium stainless steel"
+    scenarios:
+      "用途：院校机关食堂 、中央厨房团膳、工 厂员工食堂、酒楼等 团餐场所；适用于自 动煸炒烹饪炒菜、炒 饭、炒粉、炒面等。 产能：单次烹饪30- 80kg。 平均烹饪周期：12-20 分钟",
+    usage:
+      "用途：院校机关食堂 、中央厨房团膳、工 厂员工食堂、酒楼等 团餐场所；适用于自 动煸炒烹饪炒菜、炒 饭、炒粉、炒面等。 产能：单次烹饪30- 80kg。 平均烹饪周期：12-20 分钟",
+    usageEn:
+      "Suitable for group dining venues such as school & institutional cafeterias, central kitchens & group catering, factory canteens, and restaurants. Ideal for automatic stir-frying of stir-fried dishes, fried rice, fried noodles, chow mein, and more. Capacity: 30–80 kg per batch. Avg. cooking cycle: 12–20 min.",
+    materialEn: "Premium stainless steel",
   },
   {
     model: "DLB-XC100",
@@ -1758,8 +2019,10 @@ window.PRODUCT_DATA_TABLE = [
     nameEn: "Multi-function Auto Stir-fry/Braising Cooker (Touch+Electric)",
     category: "炖煮系列",
     subCategory: "搅拌炒锅/炖烩机",
-    specifications: "材质：采用优质不锈钢 电压：380V /50Hz 功率：30kW 锅体： Φ 1000*H500-640mm 锅体容量：260L 锅体材质：复合304不锈钢锅体 显示屏：7寸多功能触模显示屏 翻锅方式： 电控翻锅 安全防护：带急停功能 控制方式：9档火力调节，无极调速翻炒 翻炒方式：行星搅拌，翻炒均匀，无死角 清洁喷枪：优质高压喷枪（配2米软管）",
-    specificationsEn: "Material: Premium Stainless Steel; Voltage: 380V /50Hz; Power: 30kW; Wok Body: Φ 1000*H500-640mm; Wok Capacity: 260L; Wok Body Material: Composite 304 Stainless Steel; Display: 7-inch multi-function touch display; Tilting Method: Electric tilting; Safety Protection: Emergency stop function; Control Mode: 9-level heat adjustment, stepless speed stirring; Stirring Method: Planetary Stirring, even stirring, no dead corners; Cleaning Spray Gun: Premium high-pressure spray gun (with 2m hose)",
+    specifications:
+      "材质：采用优质不锈钢 电压：380V /50Hz 功率：30kW 锅体： Φ 1000*H500-640mm 锅体容量：260L 锅体材质：复合304不锈钢锅体 显示屏：7寸多功能触模显示屏 翻锅方式： 电控翻锅 安全防护：带急停功能 控制方式：9档火力调节，无极调速翻炒 翻炒方式：行星搅拌，翻炒均匀，无死角 清洁喷枪：优质高压喷枪（配2米软管）",
+    specificationsEn:
+      "Material: Premium Stainless Steel; Voltage: 380V /50Hz; Power: 30kW; Wok Body: Φ 1000*H500-640mm; Wok Capacity: 260L; Wok Body Material: Composite 304 Stainless Steel; Display: 7-inch multi-function touch display; Tilting Method: Electric tilting; Safety Protection: Emergency stop function; Control Mode: 9-level heat adjustment, stepless speed stirring; Stirring Method: Planetary Stirring, even stirring, no dead corners; Cleaning Spray Gun: Premium high-pressure spray gun (with 2m hose)",
     power: "30kW",
     voltage: "380V/50Hz",
     material: "采用优质不锈钢",
@@ -1774,15 +2037,18 @@ window.PRODUCT_DATA_TABLE = [
       {
         filePath: "/assets/images/products/DLB-XC100-1.webp",
         isPrimary: true,
-        isHires: false
-      }
+        isHires: false,
+      },
     ],
     is_home_core: false,
     highlights: "",
-    scenarios: "用途：适用于院校企 业机关食堂、中央厨 房团膳等煸炒烹饪20- 50kg菜量；焖炖烹饪 100-200kg菜量。也可 用于食品厂炒制各类 酱料，馅料等等。",
-    usage: "用途：适用于院校企 业机关食堂、中央厨 房团膳等煸炒烹饪20- 50kg菜量；焖炖烹饪 100-200kg菜量。也可 用于食品厂炒制各类 酱料，馅料等等。",
-    usageEn: "Suitable for school, corporate & institutional cafeterias, central kitchens & group catering, and more. Stir-frying capacity: 20–50 kg per batch; braising/stewing capacity: 100–200 kg per batch. Also suitable for food factories to stir-fry various sauces, fillings, and more.",
-    materialEn: "Premium stainless steel"
+    scenarios:
+      "用途：适用于院校企 业机关食堂、中央厨 房团膳等煸炒烹饪20- 50kg菜量；焖炖烹饪 100-200kg菜量。也可 用于食品厂炒制各类 酱料，馅料等等。",
+    usage:
+      "用途：适用于院校企 业机关食堂、中央厨 房团膳等煸炒烹饪20- 50kg菜量；焖炖烹饪 100-200kg菜量。也可 用于食品厂炒制各类 酱料，馅料等等。",
+    usageEn:
+      "Suitable for school, corporate & institutional cafeterias, central kitchens & group catering, and more. Stir-frying capacity: 20–50 kg per batch; braising/stewing capacity: 100–200 kg per batch. Also suitable for food factories to stir-fry various sauces, fillings, and more.",
+    materialEn: "Premium stainless steel",
   },
   {
     model: "DLB-QXC100",
@@ -1791,8 +2057,10 @@ window.PRODUCT_DATA_TABLE = [
     nameEn: "Multi-function Full-auto Stir-fry/Braising Cooker (Voice+Auto Spray)",
     category: "炖煮系列",
     subCategory: "搅拌炒锅/炖烩机",
-    specifications: "材质：采用优质不锈钢 电压：380V /50Hz 功率：30kW 锅体： Φ 1000*H500-640mm 锅体容量：260L 锅体材质：复合304不锈钢锅体 显示屏：10寸多功能触模显示屏 翻锅方式： 电控翻锅 安全防护：带急停功能 测温：带温控功能 菜单：存储800个菜谱（智能学习功能） 语音：智能实时语音播报功能 喷料： 自动四路定量喷料 进水：配摇摆式进水龙头 清洗：一键式自动清洗，水枪辅助清洗 翻炒方式：行星搅拌，翻炒均匀，无死角 清洁喷枪：优质高压喷枪（配2米软管）",
-    specificationsEn: "Material: Premium Stainless Steel; Voltage: 380V /50Hz; Power: 30kW; Wok Body: Φ 1000*H500-640mm; Wok Capacity: 260L; Wok Body Material: Composite 304 Stainless Steel; Display: 10-inch multi-function touch display; Tilting Method: Electric tilting; Safety Protection: Emergency stop function; Temperature Measurement: Temperature control function; Menu: Stores 800 recipes (smart learning function); Voice: Smart real-time voice broadcast; Spraying: Auto four-way quantitative spraying; Water Inlet: Swivel water faucet; Cleaning: One-key automatic cleaning, water gun assisted cleaning; Stirring Method: Planetary Stirring, even stirring, no dead corners; Cleaning Spray Gun: Premium high-pressure spray gun (with 2m hose)",
+    specifications:
+      "材质：采用优质不锈钢 电压：380V /50Hz 功率：30kW 锅体： Φ 1000*H500-640mm 锅体容量：260L 锅体材质：复合304不锈钢锅体 显示屏：10寸多功能触模显示屏 翻锅方式： 电控翻锅 安全防护：带急停功能 测温：带温控功能 菜单：存储800个菜谱（智能学习功能） 语音：智能实时语音播报功能 喷料： 自动四路定量喷料 进水：配摇摆式进水龙头 清洗：一键式自动清洗，水枪辅助清洗 翻炒方式：行星搅拌，翻炒均匀，无死角 清洁喷枪：优质高压喷枪（配2米软管）",
+    specificationsEn:
+      "Material: Premium Stainless Steel; Voltage: 380V /50Hz; Power: 30kW; Wok Body: Φ 1000*H500-640mm; Wok Capacity: 260L; Wok Body Material: Composite 304 Stainless Steel; Display: 10-inch multi-function touch display; Tilting Method: Electric tilting; Safety Protection: Emergency stop function; Temperature Measurement: Temperature control function; Menu: Stores 800 recipes (smart learning function); Voice: Smart real-time voice broadcast; Spraying: Auto four-way quantitative spraying; Water Inlet: Swivel water faucet; Cleaning: One-key automatic cleaning, water gun assisted cleaning; Stirring Method: Planetary Stirring, even stirring, no dead corners; Cleaning Spray Gun: Premium high-pressure spray gun (with 2m hose)",
     power: "30kW",
     voltage: "380V/50Hz",
     material: "采用优质不锈钢",
@@ -1807,15 +2075,18 @@ window.PRODUCT_DATA_TABLE = [
       {
         filePath: "/assets/images/products/DLB-QXC100-1.webp",
         isPrimary: true,
-        isHires: false
-      }
+        isHires: false,
+      },
     ],
     is_home_core: false,
     highlights: "",
-    scenarios: "用途：适用于院校企 业机关食堂、中央厨 房团膳等煸炒烹饪20- 50kg菜量；焖炖烹饪 100-200kg菜量。也可 用于食品厂炒制各类 酱料，馅料等等。",
-    usage: "用途：适用于院校企 业机关食堂、中央厨 房团膳等煸炒烹饪20- 50kg菜量；焖炖烹饪 100-200kg菜量。也可 用于食品厂炒制各类 酱料，馅料等等。",
-    usageEn: "Suitable for school, corporate & institutional cafeterias, central kitchens & group catering, and more. Stir-frying capacity: 20–50 kg per batch; braising/stewing capacity: 100–200 kg per batch. Also suitable for food factories to stir-fry various sauces, fillings, and more.",
-    materialEn: "Premium stainless steel"
+    scenarios:
+      "用途：适用于院校企 业机关食堂、中央厨 房团膳等煸炒烹饪20- 50kg菜量；焖炖烹饪 100-200kg菜量。也可 用于食品厂炒制各类 酱料，馅料等等。",
+    usage:
+      "用途：适用于院校企 业机关食堂、中央厨 房团膳等煸炒烹饪20- 50kg菜量；焖炖烹饪 100-200kg菜量。也可 用于食品厂炒制各类 酱料，馅料等等。",
+    usageEn:
+      "Suitable for school, corporate & institutional cafeterias, central kitchens & group catering, and more. Stir-frying capacity: 20–50 kg per batch; braising/stewing capacity: 100–200 kg per batch. Also suitable for food factories to stir-fry various sauces, fillings, and more.",
+    materialEn: "Premium stainless steel",
   },
   {
     model: "DLB-XC120",
@@ -1824,8 +2095,10 @@ window.PRODUCT_DATA_TABLE = [
     nameEn: "Multi-function Auto Stir-fry/Braising Cooker (Touch+Electric)",
     category: "炖煮系列",
     subCategory: "搅拌炒锅/炖烩机",
-    specifications: "材质：采用优质不锈钢 电压：380V /50Hz 功率：45kW 锅体： Φ 1200*H600-732mm 锅体容量：450L 锅体材质：复合304不锈钢锅体 显示屏：7寸多功能触模显示屏 翻锅方式： 电控翻锅 安全防护：带急停功能 控制方式：9档火力调节，无极调速翻炒 翻炒方式：行星搅拌，翻炒均匀，无死角 清洁喷枪：优质高压喷枪（配2米软管）",
-    specificationsEn: "Material: Premium Stainless Steel; Voltage: 380V /50Hz; Power: 45kW; Wok Body: Φ 1200*H600-732mm; Wok Capacity: 450L; Wok Body Material: Composite 304 Stainless Steel; Display: 7-inch multi-function touch display; Tilting Method: Electric tilting; Safety Protection: Emergency stop function; Control Mode: 9-level heat adjustment, stepless speed stirring; Stirring Method: Planetary Stirring, even stirring, no dead corners; Cleaning Spray Gun: Premium high-pressure spray gun (with 2m hose)",
+    specifications:
+      "材质：采用优质不锈钢 电压：380V /50Hz 功率：45kW 锅体： Φ 1200*H600-732mm 锅体容量：450L 锅体材质：复合304不锈钢锅体 显示屏：7寸多功能触模显示屏 翻锅方式： 电控翻锅 安全防护：带急停功能 控制方式：9档火力调节，无极调速翻炒 翻炒方式：行星搅拌，翻炒均匀，无死角 清洁喷枪：优质高压喷枪（配2米软管）",
+    specificationsEn:
+      "Material: Premium Stainless Steel; Voltage: 380V /50Hz; Power: 45kW; Wok Body: Φ 1200*H600-732mm; Wok Capacity: 450L; Wok Body Material: Composite 304 Stainless Steel; Display: 7-inch multi-function touch display; Tilting Method: Electric tilting; Safety Protection: Emergency stop function; Control Mode: 9-level heat adjustment, stepless speed stirring; Stirring Method: Planetary Stirring, even stirring, no dead corners; Cleaning Spray Gun: Premium high-pressure spray gun (with 2m hose)",
     power: "45kW",
     voltage: "380V/50Hz",
     material: "采用优质不锈钢",
@@ -1840,15 +2113,18 @@ window.PRODUCT_DATA_TABLE = [
       {
         filePath: "/assets/images/products/DLB-XC120-1.webp",
         isPrimary: true,
-        isHires: false
-      }
+        isHires: false,
+      },
     ],
     is_home_core: false,
     highlights: "",
-    scenarios: "用途：适用于院校企 业机关食堂、中央厨 房团膳等煸炒烹饪50- 100kg菜量；焖炖烹饪 200-400kg菜量。也可 用于食品厂炒制各类 酱料，馅料等等。",
-    usage: "用途：适用于院校企 业机关食堂、中央厨 房团膳等煸炒烹饪50- 100kg菜量；焖炖烹饪 200-400kg菜量。也可 用于食品厂炒制各类 酱料，馅料等等。",
-    usageEn: "Suitable for school, corporate & institutional cafeterias, central kitchens & group catering, and more. Stir-frying capacity: 50–100 kg per batch; braising/stewing capacity: 200–400 kg per batch. Also suitable for food factories to stir-fry various sauces, fillings, and more.",
-    materialEn: "Premium stainless steel"
+    scenarios:
+      "用途：适用于院校企 业机关食堂、中央厨 房团膳等煸炒烹饪50- 100kg菜量；焖炖烹饪 200-400kg菜量。也可 用于食品厂炒制各类 酱料，馅料等等。",
+    usage:
+      "用途：适用于院校企 业机关食堂、中央厨 房团膳等煸炒烹饪50- 100kg菜量；焖炖烹饪 200-400kg菜量。也可 用于食品厂炒制各类 酱料，馅料等等。",
+    usageEn:
+      "Suitable for school, corporate & institutional cafeterias, central kitchens & group catering, and more. Stir-frying capacity: 50–100 kg per batch; braising/stewing capacity: 200–400 kg per batch. Also suitable for food factories to stir-fry various sauces, fillings, and more.",
+    materialEn: "Premium stainless steel",
   },
   {
     model: "DLB-QXC120",
@@ -1857,8 +2133,10 @@ window.PRODUCT_DATA_TABLE = [
     nameEn: "Multi-function Full-auto Stir-fry/Braising Cooker (Voice+Auto Spray)",
     category: "炖煮系列",
     subCategory: "搅拌炒锅/炖烩机",
-    specifications: "材质：采用优质不锈钢 电压：380V /50Hz 功率：45kW 锅体： Φ 1200*H600-732mm 锅体容量：450L 锅体材质：复合304不锈钢锅体 显示屏：10寸多功能触模显示屏 翻锅方式： 电控翻锅 安全防护：带急停功能 测温：带温控功能 菜单：存储800个菜谱（智能学习功能） 语音：智能实时语音播报功能 喷料： 自动四路定量喷料 进水：配摇摆式进水龙头 清洗：一键式自动清洗，水枪辅助清洗 翻炒方式：行星搅拌，翻炒均匀，无死角 清洁喷枪：优质高压喷枪（配2米软管）",
-    specificationsEn: "Material: Premium Stainless Steel; Voltage: 380V /50Hz; Power: 45kW; Wok Body: Φ 1200*H600-732mm; Wok Capacity: 450L; Wok Body Material: Composite 304 Stainless Steel; Display: 10-inch multi-function touch display; Tilting Method: Electric tilting; Safety Protection: Emergency stop function; Temperature Measurement: Temperature control function; Menu: Stores 800 recipes (smart learning function); Voice: Smart real-time voice broadcast; Spraying: Auto four-way quantitative spraying; Water Inlet: Swivel water faucet; Cleaning: One-key automatic cleaning, water gun assisted cleaning; Stirring Method: Planetary Stirring, even stirring, no dead corners; Cleaning Spray Gun: Premium high-pressure spray gun (with 2m hose)",
+    specifications:
+      "材质：采用优质不锈钢 电压：380V /50Hz 功率：45kW 锅体： Φ 1200*H600-732mm 锅体容量：450L 锅体材质：复合304不锈钢锅体 显示屏：10寸多功能触模显示屏 翻锅方式： 电控翻锅 安全防护：带急停功能 测温：带温控功能 菜单：存储800个菜谱（智能学习功能） 语音：智能实时语音播报功能 喷料： 自动四路定量喷料 进水：配摇摆式进水龙头 清洗：一键式自动清洗，水枪辅助清洗 翻炒方式：行星搅拌，翻炒均匀，无死角 清洁喷枪：优质高压喷枪（配2米软管）",
+    specificationsEn:
+      "Material: Premium Stainless Steel; Voltage: 380V /50Hz; Power: 45kW; Wok Body: Φ 1200*H600-732mm; Wok Capacity: 450L; Wok Body Material: Composite 304 Stainless Steel; Display: 10-inch multi-function touch display; Tilting Method: Electric tilting; Safety Protection: Emergency stop function; Temperature Measurement: Temperature control function; Menu: Stores 800 recipes (smart learning function); Voice: Smart real-time voice broadcast; Spraying: Auto four-way quantitative spraying; Water Inlet: Swivel water faucet; Cleaning: One-key automatic cleaning, water gun assisted cleaning; Stirring Method: Planetary Stirring, even stirring, no dead corners; Cleaning Spray Gun: Premium high-pressure spray gun (with 2m hose)",
     power: "45kW",
     voltage: "380V/50Hz",
     material: "采用优质不锈钢",
@@ -1873,15 +2151,18 @@ window.PRODUCT_DATA_TABLE = [
       {
         filePath: "/assets/images/products/DLB-QXC120-1.webp",
         isPrimary: true,
-        isHires: false
-      }
+        isHires: false,
+      },
     ],
     is_home_core: true,
     highlights: "",
-    scenarios: "用途：适用于院校企 业机关食堂、中央厨 房团膳等煸炒烹饪50- 100kg菜量；焖炖烹饪 200-400kg菜量。也可 用于食品厂炒制各类 酱料，馅料等等。",
-    usage: "用途：适用于院校企 业机关食堂、中央厨 房团膳等煸炒烹饪50- 100kg菜量；焖炖烹饪 200-400kg菜量。也可 用于食品厂炒制各类 酱料，馅料等等。",
-    usageEn: "Suitable for school, corporate & institutional cafeterias, central kitchens & group catering, and more. Stir-frying capacity: 50–100 kg per batch; braising/stewing capacity: 200–400 kg per batch. Also suitable for food factories to stir-fry various sauces, fillings, and more.",
-    materialEn: "Premium stainless steel"
+    scenarios:
+      "用途：适用于院校企 业机关食堂、中央厨 房团膳等煸炒烹饪50- 100kg菜量；焖炖烹饪 200-400kg菜量。也可 用于食品厂炒制各类 酱料，馅料等等。",
+    usage:
+      "用途：适用于院校企 业机关食堂、中央厨 房团膳等煸炒烹饪50- 100kg菜量；焖炖烹饪 200-400kg菜量。也可 用于食品厂炒制各类 酱料，馅料等等。",
+    usageEn:
+      "Suitable for school, corporate & institutional cafeterias, central kitchens & group catering, and more. Stir-frying capacity: 50–100 kg per batch; braising/stewing capacity: 200–400 kg per batch. Also suitable for food factories to stir-fry various sauces, fillings, and more.",
+    materialEn: "Premium stainless steel",
   },
   {
     model: "DLB-PZJ80",
@@ -1890,8 +2171,10 @@ window.PRODUCT_DATA_TABLE = [
     nameEn: "Multi-function Auto Blanching/Boiling/Frying Machine",
     category: "蒸煮系列",
     subCategory: "自动漂烫/焯水/油炸机",
-    specifications: "材质：采用优质不锈钢 电压：380V /50Hz 功率：30kW 锅体： Φ800mm 锅体容量：200L 锅体材质：304不锈钢锅体，冲孔锅体 操作方式：7寸多功能触模显示屏 翻锅方式： 电控翻锅，倒料，滤水，滤油 安全防护：带急停功能 控制方式：9档火力调节，无极调速搅拌 搅拌方式：多维立体搅拌，物料加热均匀 清洁喷枪：优质高压喷枪（配2米软管）",
-    specificationsEn: "Material: Premium Stainless Steel; Voltage: 380V /50Hz; Power: 30kW; Wok Body: Φ800mm; Wok Capacity: 200L; Wok Body Material: 304 Stainless Steel, punched wok body; Operation: 7-inch multi-function touch display; Tilting Method: Electric tilting, dumping, draining, oil filtering; Safety Protection: Emergency stop function; Control Mode: 9-level heat adjustment, stepless speed stirring; Stirring Method: Multi-dimensional three-dimensional stirring, even heating; Cleaning Spray Gun: Premium high-pressure spray gun (with 2m hose)",
+    specifications:
+      "材质：采用优质不锈钢 电压：380V /50Hz 功率：30kW 锅体： Φ800mm 锅体容量：200L 锅体材质：304不锈钢锅体，冲孔锅体 操作方式：7寸多功能触模显示屏 翻锅方式： 电控翻锅，倒料，滤水，滤油 安全防护：带急停功能 控制方式：9档火力调节，无极调速搅拌 搅拌方式：多维立体搅拌，物料加热均匀 清洁喷枪：优质高压喷枪（配2米软管）",
+    specificationsEn:
+      "Material: Premium Stainless Steel; Voltage: 380V /50Hz; Power: 30kW; Wok Body: Φ800mm; Wok Capacity: 200L; Wok Body Material: 304 Stainless Steel, punched wok body; Operation: 7-inch multi-function touch display; Tilting Method: Electric tilting, dumping, draining, oil filtering; Safety Protection: Emergency stop function; Control Mode: 9-level heat adjustment, stepless speed stirring; Stirring Method: Multi-dimensional three-dimensional stirring, even heating; Cleaning Spray Gun: Premium high-pressure spray gun (with 2m hose)",
     power: "30kW",
     voltage: "380V/50Hz",
     material: "采用优质不锈钢",
@@ -1906,15 +2189,18 @@ window.PRODUCT_DATA_TABLE = [
       {
         filePath: "/assets/images/products/DLB-PZJ80-1.webp",
         isPrimary: true,
-        isHires: false
-      }
+        isHires: false,
+      },
     ],
     is_home_core: false,
     highlights: "",
-    scenarios: "用途：适用于院校企 业机关食堂、大型酒 楼宴席、中央厨房团 膳等各类肉制品、蔬 菜等焯水/漂烫/去农 残等预处理； 以及各 类食品油炸膨化等烹 饪。可选装智能全自 动功能。",
-    usage: "用途：适用于院校企 业机关食堂、大型酒 楼宴席、中央厨房团 膳等各类肉制品、蔬 菜等焯水/漂烫/去农 残等预处理； 以及各 类食品油炸膨化等烹 饪。可选装智能全自 动功能。",
-    usageEn: "Suitable for school, corporate & institutional cafeterias, large-scale restaurant banquets, central kitchens & group catering, and more. Ideal for blanching, parboiling, and pesticide removal pretreatment of various meat products and vegetables; as well as deep-frying and puffing of various foods. Optional fully automatic smart function available.",
-    materialEn: "Premium stainless steel"
+    scenarios:
+      "用途：适用于院校企 业机关食堂、大型酒 楼宴席、中央厨房团 膳等各类肉制品、蔬 菜等焯水/漂烫/去农 残等预处理； 以及各 类食品油炸膨化等烹 饪。可选装智能全自 动功能。",
+    usage:
+      "用途：适用于院校企 业机关食堂、大型酒 楼宴席、中央厨房团 膳等各类肉制品、蔬 菜等焯水/漂烫/去农 残等预处理； 以及各 类食品油炸膨化等烹 饪。可选装智能全自 动功能。",
+    usageEn:
+      "Suitable for school, corporate & institutional cafeterias, large-scale restaurant banquets, central kitchens & group catering, and more. Ideal for blanching, parboiling, and pesticide removal pretreatment of various meat products and vegetables; as well as deep-frying and puffing of various foods. Optional fully automatic smart function available.",
+    materialEn: "Premium stainless steel",
   },
   {
     model: "DLB-PZJ100",
@@ -1923,8 +2209,10 @@ window.PRODUCT_DATA_TABLE = [
     nameEn: "Multi-function Auto Blanching/Boiling/Frying Machine",
     category: "蒸煮系列",
     subCategory: "自动漂烫/焯水/油炸机",
-    specifications: "材质：采用优质不锈钢  电压：380V /50Hz  功率：40kW  锅体： Φ 1000mm  锅体容量：300L  锅体材质：304不锈钢锅体，冲孔锅体  操作方式：7寸多功能触模显示屏  翻锅方式： 电控翻锅，倒料，滤水，滤油  安全防护：带急停功能  控制方式：9档火力调节，无极调速搅拌  搅拌方式：多维立体搅拌，物料加热均匀  清洁喷枪：优质高压喷枪（配2米软管）",
-    specificationsEn: "Material: Premium Stainless Steel; Voltage: 380V /50Hz; Power: 40kW; Wok Body: Φ 1000mm; Wok Capacity: 300L; Wok Body Material: 304 Stainless Steel, punched wok body; Operation: 7-inch multi-function touch display; Tilting Method: Electric tilting, dumping, draining, oil filtering; Safety Protection: Emergency stop function; Control Mode: 9-level heat adjustment, stepless speed stirring; Stirring Method: Multi-dimensional three-dimensional stirring, even heating; Cleaning Spray Gun: Premium high-pressure spray gun (with 2m hose)",
+    specifications:
+      "材质：采用优质不锈钢  电压：380V /50Hz  功率：40kW  锅体： Φ 1000mm  锅体容量：300L  锅体材质：304不锈钢锅体，冲孔锅体  操作方式：7寸多功能触模显示屏  翻锅方式： 电控翻锅，倒料，滤水，滤油  安全防护：带急停功能  控制方式：9档火力调节，无极调速搅拌  搅拌方式：多维立体搅拌，物料加热均匀  清洁喷枪：优质高压喷枪（配2米软管）",
+    specificationsEn:
+      "Material: Premium Stainless Steel; Voltage: 380V /50Hz; Power: 40kW; Wok Body: Φ 1000mm; Wok Capacity: 300L; Wok Body Material: 304 Stainless Steel, punched wok body; Operation: 7-inch multi-function touch display; Tilting Method: Electric tilting, dumping, draining, oil filtering; Safety Protection: Emergency stop function; Control Mode: 9-level heat adjustment, stepless speed stirring; Stirring Method: Multi-dimensional three-dimensional stirring, even heating; Cleaning Spray Gun: Premium high-pressure spray gun (with 2m hose)",
     power: "40kW",
     voltage: "380V/50Hz",
     material: "采用优质不锈钢",
@@ -1939,15 +2227,18 @@ window.PRODUCT_DATA_TABLE = [
       {
         filePath: "/assets/images/products/DLB-PZJ100-1.webp",
         isPrimary: true,
-        isHires: false
-      }
+        isHires: false,
+      },
     ],
     is_home_core: true,
     highlights: "",
-    scenarios: "用途：适用于院校企 业机关食堂、大型酒 楼宴席、中央厨房团 膳等各类肉制品、蔬 菜等焯水/漂烫/去农 残等预处理； 以及各 类食品油炸膨化等烹 饪。可选装智能全自 动功能。",
-    usage: "用途：适用于院校企 业机关食堂、大型酒 楼宴席、中央厨房团 膳等各类肉制品、蔬 菜等焯水/漂烫/去农 残等预处理； 以及各 类食品油炸膨化等烹 饪。可选装智能全自 动功能。",
-    usageEn: "Suitable for school, corporate & institutional cafeterias, large-scale restaurant banquets, central kitchens & group catering, and more. Ideal for blanching, parboiling, and pesticide removal pretreatment of various meat products and vegetables; as well as deep-frying and puffing of various foods. Optional fully automatic smart function available.",
-    materialEn: "Premium stainless steel"
+    scenarios:
+      "用途：适用于院校企 业机关食堂、大型酒 楼宴席、中央厨房团 膳等各类肉制品、蔬 菜等焯水/漂烫/去农 残等预处理； 以及各 类食品油炸膨化等烹 饪。可选装智能全自 动功能。",
+    usage:
+      "用途：适用于院校企 业机关食堂、大型酒 楼宴席、中央厨房团 膳等各类肉制品、蔬 菜等焯水/漂烫/去农 残等预处理； 以及各 类食品油炸膨化等烹 饪。可选装智能全自 动功能。",
+    usageEn:
+      "Suitable for school, corporate & institutional cafeterias, large-scale restaurant banquets, central kitchens & group catering, and more. Ideal for blanching, parboiling, and pesticide removal pretreatment of various meat products and vegetables; as well as deep-frying and puffing of various foods. Optional fully automatic smart function available.",
+    materialEn: "Premium stainless steel",
   },
   {
     model: "DLB-PZJ120",
@@ -1956,8 +2247,10 @@ window.PRODUCT_DATA_TABLE = [
     nameEn: "Multi-function Auto Blanching/Boiling/Frying Machine",
     category: "蒸煮系列",
     subCategory: "自动漂烫/焯水/油炸机",
-    specifications: "材质：采用优质不锈钢  电压：380V /50Hz  功率：45kW  锅体： Φ 1200mm  锅体容量：500L  锅体材质：304不锈钢锅体，冲孔锅体  操作方式：7寸多功能触模显示屏  翻锅方式： 电控翻锅，倒料，滤水，滤油  安全防护：带急停功能  控制方式：9档火力调节，无极调速搅拌  搅拌方式：多维立体搅拌，物料加热均匀  清洁喷枪：优质高压喷枪（配2米软管）",
-    specificationsEn: "Material: Premium Stainless Steel; Voltage: 380V /50Hz; Power: 45kW; Wok Body: Φ 1200mm; Wok Capacity: 500L; Wok Body Material: 304 Stainless Steel, punched wok body; Operation: 7-inch multi-function touch display; Tilting Method: Electric tilting, dumping, draining, oil filtering; Safety Protection: Emergency stop function; Control Mode: 9-level heat adjustment, stepless speed stirring; Stirring Method: Multi-dimensional three-dimensional stirring, even heating; Cleaning Spray Gun: Premium high-pressure spray gun (with 2m hose)",
+    specifications:
+      "材质：采用优质不锈钢  电压：380V /50Hz  功率：45kW  锅体： Φ 1200mm  锅体容量：500L  锅体材质：304不锈钢锅体，冲孔锅体  操作方式：7寸多功能触模显示屏  翻锅方式： 电控翻锅，倒料，滤水，滤油  安全防护：带急停功能  控制方式：9档火力调节，无极调速搅拌  搅拌方式：多维立体搅拌，物料加热均匀  清洁喷枪：优质高压喷枪（配2米软管）",
+    specificationsEn:
+      "Material: Premium Stainless Steel; Voltage: 380V /50Hz; Power: 45kW; Wok Body: Φ 1200mm; Wok Capacity: 500L; Wok Body Material: 304 Stainless Steel, punched wok body; Operation: 7-inch multi-function touch display; Tilting Method: Electric tilting, dumping, draining, oil filtering; Safety Protection: Emergency stop function; Control Mode: 9-level heat adjustment, stepless speed stirring; Stirring Method: Multi-dimensional three-dimensional stirring, even heating; Cleaning Spray Gun: Premium high-pressure spray gun (with 2m hose)",
     power: "45kW",
     voltage: "380V/50Hz",
     material: "采用优质不锈钢",
@@ -1972,15 +2265,18 @@ window.PRODUCT_DATA_TABLE = [
       {
         filePath: "/assets/images/products/DLB-PZJ120-1.webp",
         isPrimary: true,
-        isHires: false
-      }
+        isHires: false,
+      },
     ],
     is_home_core: false,
     highlights: "",
-    scenarios: "用途：适用于院校企 业机关食堂、大型酒 楼宴席、中央厨房团 膳等各类肉制品、蔬 菜等焯水/漂烫/去农 残等预处理； 以及各 类食品油炸膨化等烹 饪。可选装智能全自 动功能。",
-    usage: "用途：适用于院校企 业机关食堂、大型酒 楼宴席、中央厨房团 膳等各类肉制品、蔬 菜等焯水/漂烫/去农 残等预处理； 以及各 类食品油炸膨化等烹 饪。可选装智能全自 动功能。",
-    usageEn: "Suitable for school, corporate & institutional cafeterias, large-scale restaurant banquets, central kitchens & group catering, and more. Ideal for blanching, parboiling, and pesticide removal pretreatment of various meat products and vegetables; as well as deep-frying and puffing of various foods. Optional fully automatic smart function available.",
-    materialEn: "Premium stainless steel"
+    scenarios:
+      "用途：适用于院校企 业机关食堂、大型酒 楼宴席、中央厨房团 膳等各类肉制品、蔬 菜等焯水/漂烫/去农 残等预处理； 以及各 类食品油炸膨化等烹 饪。可选装智能全自 动功能。",
+    usage:
+      "用途：适用于院校企 业机关食堂、大型酒 楼宴席、中央厨房团 膳等各类肉制品、蔬 菜等焯水/漂烫/去农 残等预处理； 以及各 类食品油炸膨化等烹 饪。可选装智能全自 动功能。",
+    usageEn:
+      "Suitable for school, corporate & institutional cafeterias, large-scale restaurant banquets, central kitchens & group catering, and more. Ideal for blanching, parboiling, and pesticide removal pretreatment of various meat products and vegetables; as well as deep-frying and puffing of various foods. Optional fully automatic smart function available.",
+    materialEn: "Premium stainless steel",
   },
   {
     model: "DLB-PZJ200",
@@ -1989,8 +2285,10 @@ window.PRODUCT_DATA_TABLE = [
     nameEn: "Multi-function Square Auto Blanching/Frying Machine",
     category: "蒸煮系列",
     subCategory: "自动漂烫/焯水/油炸机",
-    specifications: "材质：采用优质不锈钢 电压：380V /50Hz 功率：30kW 锅体：1050*660*300 锅体容量：200L 锅体材质：304不锈钢锅体，冲孔锅体 操作方式：7寸多功能触模显示屏 翻锅方式： 电控翻锅，倒料，滤水，滤油 安全防护：带急停功能 控制方式：多档火力调节，无极调速搅拌 清洁喷枪：优质高压喷枪（配2米软管）",
-    specificationsEn: "Material: Premium Stainless Steel; Voltage: 380V /50Hz; Power: 30kW; Wok Body: 1050*660*300; Wok Capacity: 200L; Wok Body Material: 304 Stainless Steel, punched wok body; Operation: 7-inch multi-function touch display; Tilting Method: Electric tilting, dumping, draining, oil filtering; Safety Protection: Emergency stop function; Control Mode: Multi-level heat adjustment, stepless speed stirring; Cleaning Spray Gun: Premium high-pressure spray gun (with 2m hose)",
+    specifications:
+      "材质：采用优质不锈钢 电压：380V /50Hz 功率：30kW 锅体：1050*660*300 锅体容量：200L 锅体材质：304不锈钢锅体，冲孔锅体 操作方式：7寸多功能触模显示屏 翻锅方式： 电控翻锅，倒料，滤水，滤油 安全防护：带急停功能 控制方式：多档火力调节，无极调速搅拌 清洁喷枪：优质高压喷枪（配2米软管）",
+    specificationsEn:
+      "Material: Premium Stainless Steel; Voltage: 380V /50Hz; Power: 30kW; Wok Body: 1050*660*300; Wok Capacity: 200L; Wok Body Material: 304 Stainless Steel, punched wok body; Operation: 7-inch multi-function touch display; Tilting Method: Electric tilting, dumping, draining, oil filtering; Safety Protection: Emergency stop function; Control Mode: Multi-level heat adjustment, stepless speed stirring; Cleaning Spray Gun: Premium high-pressure spray gun (with 2m hose)",
     power: "30kW",
     voltage: "380V/50Hz",
     material: "采用优质不锈钢",
@@ -2005,15 +2303,18 @@ window.PRODUCT_DATA_TABLE = [
       {
         filePath: "/assets/images/products/DLB-PZJ200-1.webp",
         isPrimary: true,
-        isHires: false
-      }
+        isHires: false,
+      },
     ],
     is_home_core: false,
     highlights: "",
-    scenarios: "用途：适用于院校企 业机关食堂、大型酒 楼宴席、中央厨房团 膳等各类肉制品、蔬 菜等焯水/漂烫/去农 残等预处理； 以及各 类食品油炸膨化等烹 饪。可选装智能全自 动功能。",
-    usage: "用途：适用于院校企 业机关食堂、大型酒 楼宴席、中央厨房团 膳等各类肉制品、蔬 菜等焯水/漂烫/去农 残等预处理； 以及各 类食品油炸膨化等烹 饪。可选装智能全自 动功能。",
-    usageEn: "Suitable for school, corporate & institutional cafeterias, large-scale restaurant banquets, central kitchens & group catering, and more. Ideal for blanching, parboiling, and pesticide removal pretreatment of various meat products and vegetables; as well as deep-frying and puffing of various foods. Optional fully automatic smart function available.",
-    materialEn: "Premium stainless steel"
+    scenarios:
+      "用途：适用于院校企 业机关食堂、大型酒 楼宴席、中央厨房团 膳等各类肉制品、蔬 菜等焯水/漂烫/去农 残等预处理； 以及各 类食品油炸膨化等烹 饪。可选装智能全自 动功能。",
+    usage:
+      "用途：适用于院校企 业机关食堂、大型酒 楼宴席、中央厨房团 膳等各类肉制品、蔬 菜等焯水/漂烫/去农 残等预处理； 以及各 类食品油炸膨化等烹 饪。可选装智能全自 动功能。",
+    usageEn:
+      "Suitable for school, corporate & institutional cafeterias, large-scale restaurant banquets, central kitchens & group catering, and more. Ideal for blanching, parboiling, and pesticide removal pretreatment of various meat products and vegetables; as well as deep-frying and puffing of various foods. Optional fully automatic smart function available.",
+    materialEn: "Premium stainless steel",
   },
   {
     model: "DLB-PZJ400",
@@ -2022,8 +2323,10 @@ window.PRODUCT_DATA_TABLE = [
     nameEn: "Multi-function Square Auto Blanching/Frying Machine",
     category: "蒸煮系列",
     subCategory: "自动漂烫/焯水/油炸机",
-    specifications: "材质：采用优质不锈钢 电压：380V /50Hz 功率：45kW 锅体：1250*860*500 锅体容量：400L 锅体材质：304不锈钢锅体，冲孔锅体 操作方式：7寸多功能触模显示屏 翻锅方式： 电控翻锅，倒料，滤水，滤油 安全防护：带急停功能 控制方式：多档火力调节，无极调速搅拌 清洁喷枪：优质高压喷枪（配2米软管）",
-    specificationsEn: "Material: Premium Stainless Steel; Voltage: 380V /50Hz; Power: 45kW; Wok Body: 1250*860*500; Wok Capacity: 400L; Wok Body Material: 304 Stainless Steel, punched wok body; Operation: 7-inch multi-function touch display; Tilting Method: Electric tilting, dumping, draining, oil filtering; Safety Protection: Emergency stop function; Control Mode: Multi-level heat adjustment, stepless speed stirring; Cleaning Spray Gun: Premium high-pressure spray gun (with 2m hose)",
+    specifications:
+      "材质：采用优质不锈钢 电压：380V /50Hz 功率：45kW 锅体：1250*860*500 锅体容量：400L 锅体材质：304不锈钢锅体，冲孔锅体 操作方式：7寸多功能触模显示屏 翻锅方式： 电控翻锅，倒料，滤水，滤油 安全防护：带急停功能 控制方式：多档火力调节，无极调速搅拌 清洁喷枪：优质高压喷枪（配2米软管）",
+    specificationsEn:
+      "Material: Premium Stainless Steel; Voltage: 380V /50Hz; Power: 45kW; Wok Body: 1250*860*500; Wok Capacity: 400L; Wok Body Material: 304 Stainless Steel, punched wok body; Operation: 7-inch multi-function touch display; Tilting Method: Electric tilting, dumping, draining, oil filtering; Safety Protection: Emergency stop function; Control Mode: Multi-level heat adjustment, stepless speed stirring; Cleaning Spray Gun: Premium high-pressure spray gun (with 2m hose)",
     power: "45kW",
     voltage: "380V/50Hz",
     material: "采用优质不锈钢",
@@ -2038,15 +2341,18 @@ window.PRODUCT_DATA_TABLE = [
       {
         filePath: "/assets/images/products/DLB-PZJ400-1.webp",
         isPrimary: true,
-        isHires: false
-      }
+        isHires: false,
+      },
     ],
     is_home_core: false,
     highlights: "",
-    scenarios: "用途：适用于院校企 业机关食堂、大型酒 楼宴席、中央厨房团 膳等各类肉制品、蔬 菜等焯水/漂烫/去农 残等预处理； 以及各 类食品油炸膨化等烹 饪。可选装智能全自 动功能。",
-    usage: "用途：适用于院校企 业机关食堂、大型酒 楼宴席、中央厨房团 膳等各类肉制品、蔬 菜等焯水/漂烫/去农 残等预处理； 以及各 类食品油炸膨化等烹 饪。可选装智能全自 动功能。",
-    usageEn: "Suitable for school, corporate & institutional cafeterias, large-scale restaurant banquets, central kitchens & group catering, and more. Ideal for blanching, parboiling, and pesticide removal pretreatment of various meat products and vegetables; as well as deep-frying and puffing of various foods. Optional fully automatic smart function available.",
-    materialEn: "Premium stainless steel"
+    scenarios:
+      "用途：适用于院校企 业机关食堂、大型酒 楼宴席、中央厨房团 膳等各类肉制品、蔬 菜等焯水/漂烫/去农 残等预处理； 以及各 类食品油炸膨化等烹 饪。可选装智能全自 动功能。",
+    usage:
+      "用途：适用于院校企 业机关食堂、大型酒 楼宴席、中央厨房团 膳等各类肉制品、蔬 菜等焯水/漂烫/去农 残等预处理； 以及各 类食品油炸膨化等烹 饪。可选装智能全自 动功能。",
+    usageEn:
+      "Suitable for school, corporate & institutional cafeterias, large-scale restaurant banquets, central kitchens & group catering, and more. Ideal for blanching, parboiling, and pesticide removal pretreatment of various meat products and vegetables; as well as deep-frying and puffing of various foods. Optional fully automatic smart function available.",
+    materialEn: "Premium stainless steel",
   },
   {
     model: "DLB-BXC800",
@@ -2055,8 +2361,10 @@ window.PRODUCT_DATA_TABLE = [
     nameEn: "Semi-auto Rotary Stir-fry Induction Wok",
     category: "翻炒系列",
     subCategory: "",
-    specifications: "材质：采用优质不锈钢 电压：380V /50Hz 功率：20kW 锅体： Φ800mm翻边锅 锅体容量：50L 锅体材质：430材质食品级锅体 显示器：多功能LED显示器 搅拌器具：搅拌器具电动升降，方便操作 搅拌方式：多维立体搅拌，刮底、刮边 控制方式：多档火力调节，无极调速翻炒 加水方式：摇摆水龙头加水",
-    specificationsEn: "Material: Premium Stainless Steel; Voltage: 380V /50Hz; Power: 20kW; Wok Body: Φ800mm flanged wok; Wok Capacity: 50L; Wok Body Material: 430 food-grade wok body; Display: Multi-function LED display; Stirring Tool: Electric lifting stirring tool for easy operation; Stirring Method: Multi-dimensional three-dimensional stirring, scraping bottom and sides; Control Mode: Multi-level heat adjustment, stepless speed stirring; Water Addition: Swivel faucet water addition",
+    specifications:
+      "材质：采用优质不锈钢 电压：380V /50Hz 功率：20kW 锅体： Φ800mm翻边锅 锅体容量：50L 锅体材质：430材质食品级锅体 显示器：多功能LED显示器 搅拌器具：搅拌器具电动升降，方便操作 搅拌方式：多维立体搅拌，刮底、刮边 控制方式：多档火力调节，无极调速翻炒 加水方式：摇摆水龙头加水",
+    specificationsEn:
+      "Material: Premium Stainless Steel; Voltage: 380V /50Hz; Power: 20kW; Wok Body: Φ800mm flanged wok; Wok Capacity: 50L; Wok Body Material: 430 food-grade wok body; Display: Multi-function LED display; Stirring Tool: Electric lifting stirring tool for easy operation; Stirring Method: Multi-dimensional three-dimensional stirring, scraping bottom and sides; Control Mode: Multi-level heat adjustment, stepless speed stirring; Water Addition: Swivel faucet water addition",
     power: "20kW",
     voltage: "380V/50Hz",
     material: "采用优质不锈钢",
@@ -2071,15 +2379,18 @@ window.PRODUCT_DATA_TABLE = [
       {
         filePath: "/assets/images/products/DLB-BXC800-1.webp",
         isPrimary: true,
-        isHires: false
-      }
+        isHires: false,
+      },
     ],
     is_home_core: false,
     highlights: "",
-    scenarios: "用途：适用于院校企 业机关食堂、酒楼宴 席、餐饮外卖等炒菜/ 炖菜/油炸/焯水/漂烫 等烹饪。可选装智能 全自动功能。",
-    usage: "用途：适用于院校企 业机关食堂、酒楼宴 席、餐饮外卖等炒菜/ 炖菜/油炸/焯水/漂烫 等烹饪。可选装智能 全自动功能。",
-    usageEn: "Suitable for school, corporate & institutional cafeterias, restaurant banquets, food delivery, and more. Ideal for stir-frying, stewing, deep-frying, blanching, and parboiling. Optional fully automatic smart function available.",
-    materialEn: "Premium stainless steel"
+    scenarios:
+      "用途：适用于院校企 业机关食堂、酒楼宴 席、餐饮外卖等炒菜/ 炖菜/油炸/焯水/漂烫 等烹饪。可选装智能 全自动功能。",
+    usage:
+      "用途：适用于院校企 业机关食堂、酒楼宴 席、餐饮外卖等炒菜/ 炖菜/油炸/焯水/漂烫 等烹饪。可选装智能 全自动功能。",
+    usageEn:
+      "Suitable for school, corporate & institutional cafeterias, restaurant banquets, food delivery, and more. Ideal for stir-frying, stewing, deep-frying, blanching, and parboiling. Optional fully automatic smart function available.",
+    materialEn: "Premium stainless steel",
   },
   {
     model: "DLB-ZNT",
@@ -2088,8 +2399,10 @@ window.PRODUCT_DATA_TABLE = [
     nameEn: "Full-auto Tiltable Soup Kettle (100L)",
     category: "炖煮系列",
     subCategory: "汤锅",
-    specifications: "材质：采用优质不锈钢  电压：380V /50Hz  功率：15kW  锅体：内径Φ550*550mm，外径650mm  锅体容量：100L  锅体材质：复合底304(1mm)+Q235B(4mm)  显示屏：7寸多功能触模显示屏  菜单：存储800个菜谱（智能学习功能）  语音：智能实时语音播报功能  翻锅倒料方式： 电控翻锅  进水：4分管接，配万向摇摆式水龙头",
-    specificationsEn: "Material: Premium Stainless Steel; Voltage: 380V /50Hz; Power: 15kW; Wok Body: Inner diameter Φ550*550mm, outer diameter 650mm; Wok Capacity: 100L; Wok Body Material: Composite bottom 304(1mm)+Q235B(4mm); Display: 7-inch multi-function touch display; Menu: Stores 800 recipes (smart learning function); Voice: Smart real-time voice broadcast; Tilting and Dumping Method: Electric tilting; Water Inlet: 1/2\" connection, with universal swivel faucet",
+    specifications:
+      "材质：采用优质不锈钢  电压：380V /50Hz  功率：15kW  锅体：内径Φ550*550mm，外径650mm  锅体容量：100L  锅体材质：复合底304(1mm)+Q235B(4mm)  显示屏：7寸多功能触模显示屏  菜单：存储800个菜谱（智能学习功能）  语音：智能实时语音播报功能  翻锅倒料方式： 电控翻锅  进水：4分管接，配万向摇摆式水龙头",
+    specificationsEn:
+      'Material: Premium Stainless Steel; Voltage: 380V /50Hz; Power: 15kW; Wok Body: Inner diameter Φ550*550mm, outer diameter 650mm; Wok Capacity: 100L; Wok Body Material: Composite bottom 304(1mm)+Q235B(4mm); Display: 7-inch multi-function touch display; Menu: Stores 800 recipes (smart learning function); Voice: Smart real-time voice broadcast; Tilting and Dumping Method: Electric tilting; Water Inlet: 1/2" connection, with universal swivel faucet',
     power: "15kW",
     voltage: "380V/50Hz",
     material: "采用优质不锈钢",
@@ -2104,15 +2417,16 @@ window.PRODUCT_DATA_TABLE = [
       {
         filePath: "/assets/images/products/DLB-ZNT-1.webp",
         isPrimary: true,
-        isHires: false
-      }
+        isHires: false,
+      },
     ],
     is_home_core: false,
     highlights: "",
     scenarios: "用途：适用于院校企 业机关食堂、酒楼宴 席、餐饮外卖等炖汤/ 炖肉/稀饭等烹饪。可 选装智能全自动功能 。",
     usage: "用途：适用于院校企 业机关食堂、酒楼宴 席、餐饮外卖等炖汤/ 炖肉/稀饭等烹饪。可 选装智能全自动功能 。",
-    usageEn: "Suitable for school, corporate & institutional cafeterias, restaurant banquets, food delivery, and more. Ideal for soup, stew, and porridge cooking. Optional fully automatic smart function available.",
-    materialEn: "Premium stainless steel"
+    usageEn:
+      "Suitable for school, corporate & institutional cafeterias, restaurant banquets, food delivery, and more. Ideal for soup, stew, and porridge cooking. Optional fully automatic smart function available.",
+    materialEn: "Premium stainless steel",
   },
   {
     model: "DLB-ZNY",
@@ -2121,8 +2435,10 @@ window.PRODUCT_DATA_TABLE = [
     nameEn: "Full-auto Tiltable Pressure Cooker (80L)",
     category: "炖煮系列",
     subCategory: "压力锅",
-    specifications: "材质：采用优质不锈钢  电压：380V /50Hz  功率：12kW  锅体：内径Φ490*470mm，外径640mm  锅体容量：80L  锅体材质：304不锈钢锅体，冲压锅体  显示屏：7寸多功能触模显示屏  菜单：存储800个菜谱（智能学习功能）  语音：智能实时语音播报功能  翻锅倒料方式： 电控翻锅  进水：4分管接，配万向摇摆式水龙头",
-    specificationsEn: "Material: Premium Stainless Steel; Voltage: 380V /50Hz; Power: 12kW; Wok Body: Inner diameter Φ490*470mm, outer diameter 640mm; Wok Capacity: 80L; Wok Body Material: 304 Stainless Steel, stamped wok body; Display: 7-inch multi-function touch display; Menu: Stores 800 recipes (smart learning function); Voice: Smart real-time voice broadcast; Tilting and Dumping Method: Electric tilting; Water Inlet: 1/2\" connection, with universal swivel faucet",
+    specifications:
+      "材质：采用优质不锈钢  电压：380V /50Hz  功率：12kW  锅体：内径Φ490*470mm，外径640mm  锅体容量：80L  锅体材质：304不锈钢锅体，冲压锅体  显示屏：7寸多功能触模显示屏  菜单：存储800个菜谱（智能学习功能）  语音：智能实时语音播报功能  翻锅倒料方式： 电控翻锅  进水：4分管接，配万向摇摆式水龙头",
+    specificationsEn:
+      'Material: Premium Stainless Steel; Voltage: 380V /50Hz; Power: 12kW; Wok Body: Inner diameter Φ490*470mm, outer diameter 640mm; Wok Capacity: 80L; Wok Body Material: 304 Stainless Steel, stamped wok body; Display: 7-inch multi-function touch display; Menu: Stores 800 recipes (smart learning function); Voice: Smart real-time voice broadcast; Tilting and Dumping Method: Electric tilting; Water Inlet: 1/2" connection, with universal swivel faucet',
     power: "12kW",
     voltage: "380V/50Hz",
     material: "采用优质不锈钢",
@@ -2137,15 +2453,16 @@ window.PRODUCT_DATA_TABLE = [
       {
         filePath: "/assets/images/products/DLB-ZNY-1.webp",
         isPrimary: true,
-        isHires: false
-      }
+        isHires: false,
+      },
     ],
     is_home_core: false,
     highlights: "",
     scenarios: "用途：适用于院校企 业机关食堂、酒楼宴 席、餐饮外卖等炖汤/ 炖肉/熬药材等烹饪。 可选装智能全自动功 能。",
     usage: "用途：适用于院校企 业机关食堂、酒楼宴 席、餐饮外卖等炖汤/ 炖肉/熬药材等烹饪。 可选装智能全自动功 能。",
-    usageEn: "Suitable for school, corporate & institutional cafeterias, restaurant banquets, food delivery, and more. Ideal for soup, stew, and herbal medicine cooking. Optional fully automatic smart function available.",
-    materialEn: "Premium stainless steel"
+    usageEn:
+      "Suitable for school, corporate & institutional cafeterias, restaurant banquets, food delivery, and more. Ideal for soup, stew, and herbal medicine cooking. Optional fully automatic smart function available.",
+    materialEn: "Premium stainless steel",
   },
   {
     model: "DLB-GB60R",
@@ -2154,8 +2471,10 @@ window.PRODUCT_DATA_TABLE = [
     nameEn: "Floor-standing 600 Gas Cooker (Touch+Electric)",
     category: "翻炒系列",
     subCategory: "团餐滚筒炒菜机",
-    specifications: "材质：采用优质不锈钢 加热方式：天然气/液化气 电压：380V/50Hz，功率：1000W 滚筒：Φ600*H600mm 显示屏：7寸触模显示屏 滚筒炒菜容量：10-20kg/次 进气口规格：外螺纹6分接口 进水口规格：外螺纹4分接口 锅体材质：304#材质，可选装不粘锅 翻锅方式：电动翻锅 清洁喷枪：优质高压喷枪（配2米软管）",
-    specificationsEn: "Material: Premium Stainless Steel; Heating Method: Natural gas/LPG; Voltage: 380V/50Hz, Power: 1000W; Drum: Φ600*H600mm; Display: 7-inch touch display; Drum Stir-fry Capacity: 10-20kg/batch; Gas Inlet: 3/4\" male thread; Water Inlet: 1/2\" male thread; Wok Body Material: 304#, optional Non-stick coating; Tilting Method: Electric tilting; Cleaning Spray Gun: Premium high-pressure spray gun (with 2m hose)",
+    specifications:
+      "材质：采用优质不锈钢 加热方式：天然气/液化气 电压：380V/50Hz，功率：1000W 滚筒：Φ600*H600mm 显示屏：7寸触模显示屏 滚筒炒菜容量：10-20kg/次 进气口规格：外螺纹6分接口 进水口规格：外螺纹4分接口 锅体材质：304#材质，可选装不粘锅 翻锅方式：电动翻锅 清洁喷枪：优质高压喷枪（配2米软管）",
+    specificationsEn:
+      'Material: Premium Stainless Steel; Heating Method: Natural gas/LPG; Voltage: 380V/50Hz, Power: 1000W; Drum: Φ600*H600mm; Display: 7-inch touch display; Drum Stir-fry Capacity: 10-20kg/batch; Gas Inlet: 3/4" male thread; Water Inlet: 1/2" male thread; Wok Body Material: 304#, optional Non-stick coating; Tilting Method: Electric tilting; Cleaning Spray Gun: Premium high-pressure spray gun (with 2m hose)',
     power: "1000W",
     voltage: "380V/50Hz，",
     material: "采用优质不锈钢加热方式：天然气/液化气",
@@ -2170,15 +2489,18 @@ window.PRODUCT_DATA_TABLE = [
       {
         filePath: "/assets/images/products/DLB-GB60R-1.webp",
         isPrimary: true,
-        isHires: false
-      }
+        isHires: false,
+      },
     ],
     is_home_core: false,
     highlights: "",
-    scenarios: "用途：院校机关食堂、中央厨房团膳、工厂员工食堂、酒楼等团餐场所；适用于自动煸炒烹饪炒菜、炒饭、炒粉、炒面等。 产能：单次烹饪10-20kg/T。 平均烹饪周期：5-10分钟",
-    usage: "用途：院校机关食堂、中央厨房团膳、工厂员工食堂、酒楼等团餐场所；适用于自动煸炒烹饪炒菜、炒饭、炒粉、炒面等。 产能：单次烹饪10-20kg/T。 平均烹饪周期：5-10分钟",
-    usageEn: "Suitable for group dining venues such as school & institutional cafeterias, central kitchens & group catering, factory canteens, and restaurants. Ideal for automatic stir-frying of stir-fried dishes, fried rice, fried noodles, chow mein, and more. Capacity: 10–20 kg per batch. Avg. cooking cycle: 5–10 min.",
-    materialEn: "Premium stainless steel, gas/LPG heating"
+    scenarios:
+      "用途：院校机关食堂、中央厨房团膳、工厂员工食堂、酒楼等团餐场所；适用于自动煸炒烹饪炒菜、炒饭、炒粉、炒面等。 产能：单次烹饪10-20kg/T。 平均烹饪周期：5-10分钟",
+    usage:
+      "用途：院校机关食堂、中央厨房团膳、工厂员工食堂、酒楼等团餐场所；适用于自动煸炒烹饪炒菜、炒饭、炒粉、炒面等。 产能：单次烹饪10-20kg/T。 平均烹饪周期：5-10分钟",
+    usageEn:
+      "Suitable for group dining venues such as school & institutional cafeterias, central kitchens & group catering, factory canteens, and restaurants. Ideal for automatic stir-frying of stir-fried dishes, fried rice, fried noodles, chow mein, and more. Capacity: 10–20 kg per batch. Avg. cooking cycle: 5–10 min.",
+    materialEn: "Premium stainless steel, gas/LPG heating",
   },
   {
     model: "DLB-GC60R",
@@ -2187,8 +2509,10 @@ window.PRODUCT_DATA_TABLE = [
     nameEn: "Floor-standing 600 Gas Cooker (Touch+Voice Menu)",
     category: "翻炒系列",
     subCategory: "团餐滚筒炒菜机",
-    specifications: "材质：采用优质不锈钢 加热方式：天然气/液化气 电压：380V/50Hz，功率：1000W 滚筒：Φ600*H600mm 显示屏：7寸触模显示屏 滚筒炒菜容量：10-20kg/次 进气口规格：外螺纹6分接口 进水口规格：外螺纹4分接口 锅体材质：304#材质，可选装不粘锅 翻锅方式：电动翻锅 菜单：存储800个菜谱（智能学习功能） 语音：智能实时语音播报功能 清洁喷枪：优质高压喷枪（配2米软管）",
-    specificationsEn: "Material: Premium Stainless Steel; Heating Method: Natural gas/LPG; Voltage: 380V/50Hz, Power: 1000W; Drum: Φ600*H600mm; Display: 7-inch touch display; Drum Stir-fry Capacity: 10-20kg/batch; Gas Inlet: 3/4\" male thread; Water Inlet: 1/2\" male thread; Wok Body Material: 304#, optional Non-stick coating; Tilting Method: Electric tilting; Menu: Stores 800 recipes (smart learning function); Voice: Smart real-time voice broadcast; Cleaning Spray Gun: Premium high-pressure spray gun (with 2m hose)",
+    specifications:
+      "材质：采用优质不锈钢 加热方式：天然气/液化气 电压：380V/50Hz，功率：1000W 滚筒：Φ600*H600mm 显示屏：7寸触模显示屏 滚筒炒菜容量：10-20kg/次 进气口规格：外螺纹6分接口 进水口规格：外螺纹4分接口 锅体材质：304#材质，可选装不粘锅 翻锅方式：电动翻锅 菜单：存储800个菜谱（智能学习功能） 语音：智能实时语音播报功能 清洁喷枪：优质高压喷枪（配2米软管）",
+    specificationsEn:
+      'Material: Premium Stainless Steel; Heating Method: Natural gas/LPG; Voltage: 380V/50Hz, Power: 1000W; Drum: Φ600*H600mm; Display: 7-inch touch display; Drum Stir-fry Capacity: 10-20kg/batch; Gas Inlet: 3/4" male thread; Water Inlet: 1/2" male thread; Wok Body Material: 304#, optional Non-stick coating; Tilting Method: Electric tilting; Menu: Stores 800 recipes (smart learning function); Voice: Smart real-time voice broadcast; Cleaning Spray Gun: Premium high-pressure spray gun (with 2m hose)',
     power: "1000W",
     voltage: "380V/50Hz，",
     material: "采用优质不锈钢加热方式：天然气/液化气",
@@ -2203,15 +2527,18 @@ window.PRODUCT_DATA_TABLE = [
       {
         filePath: "/assets/images/products/DLB-GC60R-1.webp",
         isPrimary: true,
-        isHires: false
-      }
+        isHires: false,
+      },
     ],
     is_home_core: false,
     highlights: "",
-    scenarios: "用途：院校机关食堂、中央厨房团膳、工厂员工食堂、酒楼等团餐场所；适用于自动煸炒烹饪炒菜、炒饭、炒粉、炒面等。 产能：单次烹饪10-20kg/T。 平均烹饪周期：5-10分钟",
-    usage: "用途：院校机关食堂、中央厨房团膳、工厂员工食堂、酒楼等团餐场所；适用于自动煸炒烹饪炒菜、炒饭、炒粉、炒面等。 产能：单次烹饪10-20kg/T。 平均烹饪周期：5-10分钟",
-    usageEn: "Suitable for group dining venues such as school & institutional cafeterias, central kitchens & group catering, factory canteens, and restaurants. Ideal for automatic stir-frying of stir-fried dishes, fried rice, fried noodles, chow mein, and more. Capacity: 10–20 kg per batch. Avg. cooking cycle: 5–10 min.",
-    materialEn: "Premium stainless steel, gas/LPG heating"
+    scenarios:
+      "用途：院校机关食堂、中央厨房团膳、工厂员工食堂、酒楼等团餐场所；适用于自动煸炒烹饪炒菜、炒饭、炒粉、炒面等。 产能：单次烹饪10-20kg/T。 平均烹饪周期：5-10分钟",
+    usage:
+      "用途：院校机关食堂、中央厨房团膳、工厂员工食堂、酒楼等团餐场所；适用于自动煸炒烹饪炒菜、炒饭、炒粉、炒面等。 产能：单次烹饪10-20kg/T。 平均烹饪周期：5-10分钟",
+    usageEn:
+      "Suitable for group dining venues such as school & institutional cafeterias, central kitchens & group catering, factory canteens, and restaurants. Ideal for automatic stir-frying of stir-fried dishes, fried rice, fried noodles, chow mein, and more. Capacity: 10–20 kg per batch. Avg. cooking cycle: 5–10 min.",
+    materialEn: "Premium stainless steel, gas/LPG heating",
   },
   {
     model: "DLB-GB70R",
@@ -2220,8 +2547,10 @@ window.PRODUCT_DATA_TABLE = [
     nameEn: "Floor-standing 700 Gas Cooker (Touch+Electric)",
     category: "翻炒系列",
     subCategory: "团餐滚筒炒菜机",
-    specifications: "材质：采用优质不锈钢 加热方式：天然气/液化气 电压：380V/50Hz，功率：1000W 滚筒：Φ700*H700mm 显示屏：7寸触模显示屏 滚筒炒菜容量：15-30kg/次 进气口规格：外螺纹6分接口 进水口规格：外螺纹4分接口 锅体材质：304#材质，可选装不粘锅 翻锅方式：电动翻锅 清洁喷枪：优质高压喷枪（配2米软管）",
-    specificationsEn: "Material: Premium Stainless Steel; Heating Method: Natural gas/LPG; Voltage: 380V/50Hz, Power: 1000W; Drum: Φ700*H700mm; Display: 7-inch touch display; Drum Stir-fry Capacity: 15-30kg/batch; Gas Inlet: 3/4\" male thread; Water Inlet: 1/2\" male thread; Wok Body Material: 304#, optional Non-stick coating; Tilting Method: Electric tilting; Cleaning Spray Gun: Premium high-pressure spray gun (with 2m hose)",
+    specifications:
+      "材质：采用优质不锈钢 加热方式：天然气/液化气 电压：380V/50Hz，功率：1000W 滚筒：Φ700*H700mm 显示屏：7寸触模显示屏 滚筒炒菜容量：15-30kg/次 进气口规格：外螺纹6分接口 进水口规格：外螺纹4分接口 锅体材质：304#材质，可选装不粘锅 翻锅方式：电动翻锅 清洁喷枪：优质高压喷枪（配2米软管）",
+    specificationsEn:
+      'Material: Premium Stainless Steel; Heating Method: Natural gas/LPG; Voltage: 380V/50Hz, Power: 1000W; Drum: Φ700*H700mm; Display: 7-inch touch display; Drum Stir-fry Capacity: 15-30kg/batch; Gas Inlet: 3/4" male thread; Water Inlet: 1/2" male thread; Wok Body Material: 304#, optional Non-stick coating; Tilting Method: Electric tilting; Cleaning Spray Gun: Premium high-pressure spray gun (with 2m hose)',
     power: "1000W",
     voltage: "380V/50Hz，",
     material: "采用优质不锈钢加热方式：天然气/液化气",
@@ -2236,15 +2565,18 @@ window.PRODUCT_DATA_TABLE = [
       {
         filePath: "/assets/images/products/DLB-GB70R-1.webp",
         isPrimary: true,
-        isHires: false
-      }
+        isHires: false,
+      },
     ],
     is_home_core: false,
     highlights: "",
-    scenarios: "用途：院校机关食堂、中央厨房团膳、工厂员工食堂、酒楼等团餐场所；适用于自动煸炒烹饪炒菜、炒饭、炒粉、炒面等。 产能：单次烹饪15-30kg/T。 平均烹饪周期：8-12分钟",
-    usage: "用途：院校机关食堂、中央厨房团膳、工厂员工食堂、酒楼等团餐场所；适用于自动煸炒烹饪炒菜、炒饭、炒粉、炒面等。 产能：单次烹饪15-30kg/T。 平均烹饪周期：8-12分钟",
-    usageEn: "Suitable for group dining venues such as school & institutional cafeterias, central kitchens & group catering, factory canteens, and restaurants. Ideal for automatic stir-frying of stir-fried dishes, fried rice, fried noodles, chow mein, and more. Capacity: 15–30 kg per batch. Avg. cooking cycle: 8–12 min.",
-    materialEn: "Premium stainless steel, gas/LPG heating"
+    scenarios:
+      "用途：院校机关食堂、中央厨房团膳、工厂员工食堂、酒楼等团餐场所；适用于自动煸炒烹饪炒菜、炒饭、炒粉、炒面等。 产能：单次烹饪15-30kg/T。 平均烹饪周期：8-12分钟",
+    usage:
+      "用途：院校机关食堂、中央厨房团膳、工厂员工食堂、酒楼等团餐场所；适用于自动煸炒烹饪炒菜、炒饭、炒粉、炒面等。 产能：单次烹饪15-30kg/T。 平均烹饪周期：8-12分钟",
+    usageEn:
+      "Suitable for group dining venues such as school & institutional cafeterias, central kitchens & group catering, factory canteens, and restaurants. Ideal for automatic stir-frying of stir-fried dishes, fried rice, fried noodles, chow mein, and more. Capacity: 15–30 kg per batch. Avg. cooking cycle: 8–12 min.",
+    materialEn: "Premium stainless steel, gas/LPG heating",
   },
   {
     model: "DLB-GC70R",
@@ -2253,8 +2585,10 @@ window.PRODUCT_DATA_TABLE = [
     nameEn: "Floor-standing 700 Gas Cooker (Touch+Voice Menu)",
     category: "翻炒系列",
     subCategory: "团餐滚筒炒菜机",
-    specifications: "材质：采用优质不锈钢 加热方式：天然气/液化气 电压：380V/50Hz，功率：1000W 滚筒：Φ700*H700mm 显示屏：7寸触模显示屏 滚筒炒菜容量：15-30kg/次 进气口规格：外螺纹6分接口 进水口规格：外螺纹4分接口 锅体材质：304#材质，可选装不粘锅 翻锅方式：电动翻锅 菜单：存储800个菜谱（智能学习功能） 语音：智能实时语音播报功能 清洁喷枪：优质高压喷枪（配2米软管）",
-    specificationsEn: "Material: Premium Stainless Steel; Heating Method: Natural gas/LPG; Voltage: 380V/50Hz, Power: 1000W; Drum: Φ700*H700mm; Display: 7-inch touch display; Drum Stir-fry Capacity: 15-30kg/batch; Gas Inlet: 3/4\" male thread; Water Inlet: 1/2\" male thread; Wok Body Material: 304#, optional Non-stick coating; Tilting Method: Electric tilting; Menu: Stores 800 recipes (smart learning function); Voice: Smart real-time voice broadcast; Cleaning Spray Gun: Premium high-pressure spray gun (with 2m hose)",
+    specifications:
+      "材质：采用优质不锈钢 加热方式：天然气/液化气 电压：380V/50Hz，功率：1000W 滚筒：Φ700*H700mm 显示屏：7寸触模显示屏 滚筒炒菜容量：15-30kg/次 进气口规格：外螺纹6分接口 进水口规格：外螺纹4分接口 锅体材质：304#材质，可选装不粘锅 翻锅方式：电动翻锅 菜单：存储800个菜谱（智能学习功能） 语音：智能实时语音播报功能 清洁喷枪：优质高压喷枪（配2米软管）",
+    specificationsEn:
+      'Material: Premium Stainless Steel; Heating Method: Natural gas/LPG; Voltage: 380V/50Hz, Power: 1000W; Drum: Φ700*H700mm; Display: 7-inch touch display; Drum Stir-fry Capacity: 15-30kg/batch; Gas Inlet: 3/4" male thread; Water Inlet: 1/2" male thread; Wok Body Material: 304#, optional Non-stick coating; Tilting Method: Electric tilting; Menu: Stores 800 recipes (smart learning function); Voice: Smart real-time voice broadcast; Cleaning Spray Gun: Premium high-pressure spray gun (with 2m hose)',
     power: "1000W",
     voltage: "380V/50Hz，",
     material: "采用优质不锈钢加热方式：天然气/液化气",
@@ -2269,15 +2603,18 @@ window.PRODUCT_DATA_TABLE = [
       {
         filePath: "/assets/images/products/DLB-GC70R-1.webp",
         isPrimary: true,
-        isHires: false
-      }
+        isHires: false,
+      },
     ],
     is_home_core: false,
     highlights: "",
-    scenarios: "用途：院校机关食堂、中央厨房团膳、工厂员工食堂、酒楼等团餐场所；适用于自动煸炒烹饪炒菜、炒饭、炒粉、炒面等。 产能：单次烹饪15-30kg/T。 平均烹饪周期：8-12分钟",
-    usage: "用途：院校机关食堂、中央厨房团膳、工厂员工食堂、酒楼等团餐场所；适用于自动煸炒烹饪炒菜、炒饭、炒粉、炒面等。 产能：单次烹饪15-30kg/T。 平均烹饪周期：8-12分钟",
-    usageEn: "Suitable for group dining venues such as school & institutional cafeterias, central kitchens & group catering, factory canteens, and restaurants. Ideal for automatic stir-frying of stir-fried dishes, fried rice, fried noodles, chow mein, and more. Capacity: 15–30 kg per batch. Avg. cooking cycle: 8–12 min.",
-    materialEn: "Premium stainless steel, gas/LPG heating"
+    scenarios:
+      "用途：院校机关食堂、中央厨房团膳、工厂员工食堂、酒楼等团餐场所；适用于自动煸炒烹饪炒菜、炒饭、炒粉、炒面等。 产能：单次烹饪15-30kg/T。 平均烹饪周期：8-12分钟",
+    usage:
+      "用途：院校机关食堂、中央厨房团膳、工厂员工食堂、酒楼等团餐场所；适用于自动煸炒烹饪炒菜、炒饭、炒粉、炒面等。 产能：单次烹饪15-30kg/T。 平均烹饪周期：8-12分钟",
+    usageEn:
+      "Suitable for group dining venues such as school & institutional cafeterias, central kitchens & group catering, factory canteens, and restaurants. Ideal for automatic stir-frying of stir-fried dishes, fried rice, fried noodles, chow mein, and more. Capacity: 15–30 kg per batch. Avg. cooking cycle: 8–12 min.",
+    materialEn: "Premium stainless steel, gas/LPG heating",
   },
   {
     model: "DLB-GB80R",
@@ -2286,8 +2623,10 @@ window.PRODUCT_DATA_TABLE = [
     nameEn: "Floor-standing 800 Gas Cooker (Touch+Electric)",
     category: "翻炒系列",
     subCategory: "团餐滚筒炒菜机",
-    specifications: "材质：采用优质不锈钢 加热方式：天然气/液化气 电压：380V/50Hz，功率：2100W 滚筒：Φ800*H800mm 显示屏：7寸触模显示屏 滚筒炒菜容量：20-50kg/次 进气口规格：外螺纹6分接口 进水口规格：外螺纹4分接口 锅体材质：304#材质，可选装不粘锅 翻锅方式：电动翻锅 清洁喷枪：优质高压喷枪（配2米软管）",
-    specificationsEn: "Material: Premium Stainless Steel; Heating Method: Natural gas/LPG; Voltage: 380V/50Hz, Power: 2100W; Drum: Φ800*H800mm; Display: 7-inch touch display; Drum Stir-fry Capacity: 20-50kg/batch; Gas Inlet: 3/4\" male thread; Water Inlet: 1/2\" male thread; Wok Body Material: 304#, optional Non-stick coating; Tilting Method: Electric tilting; Cleaning Spray Gun: Premium high-pressure spray gun (with 2m hose)",
+    specifications:
+      "材质：采用优质不锈钢 加热方式：天然气/液化气 电压：380V/50Hz，功率：2100W 滚筒：Φ800*H800mm 显示屏：7寸触模显示屏 滚筒炒菜容量：20-50kg/次 进气口规格：外螺纹6分接口 进水口规格：外螺纹4分接口 锅体材质：304#材质，可选装不粘锅 翻锅方式：电动翻锅 清洁喷枪：优质高压喷枪（配2米软管）",
+    specificationsEn:
+      'Material: Premium Stainless Steel; Heating Method: Natural gas/LPG; Voltage: 380V/50Hz, Power: 2100W; Drum: Φ800*H800mm; Display: 7-inch touch display; Drum Stir-fry Capacity: 20-50kg/batch; Gas Inlet: 3/4" male thread; Water Inlet: 1/2" male thread; Wok Body Material: 304#, optional Non-stick coating; Tilting Method: Electric tilting; Cleaning Spray Gun: Premium high-pressure spray gun (with 2m hose)',
     power: "2100W",
     voltage: "380V/50Hz，",
     material: "采用优质不锈钢加热方式：天然气/液化气",
@@ -2302,15 +2641,18 @@ window.PRODUCT_DATA_TABLE = [
       {
         filePath: "/assets/images/products/DLB-GB80R-1.webp",
         isPrimary: true,
-        isHires: false
-      }
+        isHires: false,
+      },
     ],
     is_home_core: false,
     highlights: "",
-    scenarios: "用途：院校机关食堂、中央厨房团膳、工厂员工食堂、酒楼等团餐场所；适用于自动煸炒烹饪炒菜、炒饭、炒粉、炒面等。                       产能：单次烹饪20-50kg。               平均烹饪周期：8-15分钟",
-    usage: "用途：院校机关食堂、中央厨房团膳、工厂员工食堂、酒楼等团餐场所；适用于自动煸炒烹饪炒菜、炒饭、炒粉、炒面等。                       产能：单次烹饪20-50kg。               平均烹饪周期：8-15分钟",
-    usageEn: "Suitable for group dining venues such as school & institutional cafeterias, central kitchens & group catering, factory canteens, and restaurants. Ideal for automatic stir-frying of stir-fried dishes, fried rice, fried noodles, chow mein, and more. Capacity: 20–50 kg per batch. Avg. cooking cycle: 8–15 min.",
-    materialEn: "Premium stainless steel, gas/LPG heating"
+    scenarios:
+      "用途：院校机关食堂、中央厨房团膳、工厂员工食堂、酒楼等团餐场所；适用于自动煸炒烹饪炒菜、炒饭、炒粉、炒面等。                       产能：单次烹饪20-50kg。               平均烹饪周期：8-15分钟",
+    usage:
+      "用途：院校机关食堂、中央厨房团膳、工厂员工食堂、酒楼等团餐场所；适用于自动煸炒烹饪炒菜、炒饭、炒粉、炒面等。                       产能：单次烹饪20-50kg。               平均烹饪周期：8-15分钟",
+    usageEn:
+      "Suitable for group dining venues such as school & institutional cafeterias, central kitchens & group catering, factory canteens, and restaurants. Ideal for automatic stir-frying of stir-fried dishes, fried rice, fried noodles, chow mein, and more. Capacity: 20–50 kg per batch. Avg. cooking cycle: 8–15 min.",
+    materialEn: "Premium stainless steel, gas/LPG heating",
   },
   {
     model: "DLB-GB90R",
@@ -2319,8 +2661,10 @@ window.PRODUCT_DATA_TABLE = [
     nameEn: "Floor-standing 900 Gas Cooker (Touch+Electric)",
     category: "翻炒系列",
     subCategory: "团餐滚筒炒菜机",
-    specifications: "材质：采用优质不锈钢 加热方式：天然气/液化气 电压：380V/50Hz，功率：3000W 滚筒：Φ900*H900mm 显示屏：7寸触模显示屏 滚筒炒菜容量：30-80kg/次 进气口规格：外螺纹6分接口 进水口规格：外螺纹4分接口 锅体材质：304#材质，可选装不粘锅 翻锅方式：电动翻锅 清洁喷枪：优质高压喷枪（配2米软管）",
-    specificationsEn: "Material: Premium Stainless Steel; Heating Method: Natural gas/LPG; Voltage: 380V/50Hz, Power: 3000W; Drum: Φ900*H900mm; Display: 7-inch touch display; Drum Stir-fry Capacity: 30-80kg/batch; Gas Inlet: 3/4\" male thread; Water Inlet: 1/2\" male thread; Wok Body Material: 304#, optional Non-stick coating; Tilting Method: Electric tilting; Cleaning Spray Gun: Premium high-pressure spray gun (with 2m hose)",
+    specifications:
+      "材质：采用优质不锈钢 加热方式：天然气/液化气 电压：380V/50Hz，功率：3000W 滚筒：Φ900*H900mm 显示屏：7寸触模显示屏 滚筒炒菜容量：30-80kg/次 进气口规格：外螺纹6分接口 进水口规格：外螺纹4分接口 锅体材质：304#材质，可选装不粘锅 翻锅方式：电动翻锅 清洁喷枪：优质高压喷枪（配2米软管）",
+    specificationsEn:
+      'Material: Premium Stainless Steel; Heating Method: Natural gas/LPG; Voltage: 380V/50Hz, Power: 3000W; Drum: Φ900*H900mm; Display: 7-inch touch display; Drum Stir-fry Capacity: 30-80kg/batch; Gas Inlet: 3/4" male thread; Water Inlet: 1/2" male thread; Wok Body Material: 304#, optional Non-stick coating; Tilting Method: Electric tilting; Cleaning Spray Gun: Premium high-pressure spray gun (with 2m hose)',
     power: "3000W",
     voltage: "380V/50Hz，",
     material: "采用优质不锈钢加热方式：天然气/液化气",
@@ -2335,15 +2679,18 @@ window.PRODUCT_DATA_TABLE = [
       {
         filePath: "/assets/images/products/DLB-GB90R-1.webp",
         isPrimary: true,
-        isHires: false
-      }
+        isHires: false,
+      },
     ],
     is_home_core: false,
     highlights: "",
-    scenarios: "用途：院校机关食堂、中央厨房团膳、工厂员工食堂、酒楼等团餐场所； 适用于自动煸炒烹饪炒菜、炒饭、炒粉、炒面等。 产能：单次烹饪30-80kg 平均烹饪周期：12-20分钟",
-    usage: "用途：院校机关食堂、中央厨房团膳、工厂员工食堂、酒楼等团餐场所； 适用于自动煸炒烹饪炒菜、炒饭、炒粉、炒面等。 产能：单次烹饪30-80kg 平均烹饪周期：12-20分钟",
-    usageEn: "Suitable for group dining venues such as school & institutional cafeterias, central kitchens & group catering, factory canteens, and restaurants. Ideal for automatic stir-frying of stir-fried dishes, fried rice, fried noodles, chow mein, and more. Capacity: 30–80 kg per batch. Avg. cooking cycle: 12–20 min.",
-    materialEn: "Premium stainless steel, gas/LPG heating"
+    scenarios:
+      "用途：院校机关食堂、中央厨房团膳、工厂员工食堂、酒楼等团餐场所； 适用于自动煸炒烹饪炒菜、炒饭、炒粉、炒面等。 产能：单次烹饪30-80kg 平均烹饪周期：12-20分钟",
+    usage:
+      "用途：院校机关食堂、中央厨房团膳、工厂员工食堂、酒楼等团餐场所； 适用于自动煸炒烹饪炒菜、炒饭、炒粉、炒面等。 产能：单次烹饪30-80kg 平均烹饪周期：12-20分钟",
+    usageEn:
+      "Suitable for group dining venues such as school & institutional cafeterias, central kitchens & group catering, factory canteens, and restaurants. Ideal for automatic stir-frying of stir-fried dishes, fried rice, fried noodles, chow mein, and more. Capacity: 30–80 kg per batch. Avg. cooking cycle: 12–20 min.",
+    materialEn: "Premium stainless steel, gas/LPG heating",
   },
   {
     model: "DLB-GC90R",
@@ -2352,8 +2699,10 @@ window.PRODUCT_DATA_TABLE = [
     nameEn: "Floor-standing 900 Gas Cooker (Voice Menu)",
     category: "翻炒系列",
     subCategory: "团餐滚筒炒菜机",
-    specifications: "材质：采用优质不锈钢 加热方式：天然气/液化气 电压：380V/50Hz，功率：3000W 滚筒：Φ900*H900mm 显示屏：7寸触模显示屏 滚筒炒菜容量：30-80kg/次 进气口规格：外螺纹6分接口 进水口规格：外螺纹4分接口 锅体材质：304#材质，可选装不粘锅 翻锅方式：电动翻锅 菜单：存储800个菜谱（智能学习功能） 语音：智能实时语音播报功能 清洁喷枪：优质高压喷枪（配2米软管）",
-    specificationsEn: "Material: Premium Stainless Steel; Heating Method: Natural gas/LPG; Voltage: 380V/50Hz, Power: 3000W; Drum: Φ900*H900mm; Display: 7-inch touch display; Drum Stir-fry Capacity: 30-80kg/batch; Gas Inlet: 3/4\" male thread; Water Inlet: 1/2\" male thread; Wok Body Material: 304#, optional Non-stick coating; Tilting Method: Electric tilting; Menu: Stores 800 recipes (smart learning function); Voice: Smart real-time voice broadcast; Cleaning Spray Gun: Premium high-pressure spray gun (with 2m hose)",
+    specifications:
+      "材质：采用优质不锈钢 加热方式：天然气/液化气 电压：380V/50Hz，功率：3000W 滚筒：Φ900*H900mm 显示屏：7寸触模显示屏 滚筒炒菜容量：30-80kg/次 进气口规格：外螺纹6分接口 进水口规格：外螺纹4分接口 锅体材质：304#材质，可选装不粘锅 翻锅方式：电动翻锅 菜单：存储800个菜谱（智能学习功能） 语音：智能实时语音播报功能 清洁喷枪：优质高压喷枪（配2米软管）",
+    specificationsEn:
+      'Material: Premium Stainless Steel; Heating Method: Natural gas/LPG; Voltage: 380V/50Hz, Power: 3000W; Drum: Φ900*H900mm; Display: 7-inch touch display; Drum Stir-fry Capacity: 30-80kg/batch; Gas Inlet: 3/4" male thread; Water Inlet: 1/2" male thread; Wok Body Material: 304#, optional Non-stick coating; Tilting Method: Electric tilting; Menu: Stores 800 recipes (smart learning function); Voice: Smart real-time voice broadcast; Cleaning Spray Gun: Premium high-pressure spray gun (with 2m hose)',
     power: "3000W",
     voltage: "380V/50Hz，",
     material: "采用优质不锈钢加热方式：天然气/液化气",
@@ -2368,15 +2717,18 @@ window.PRODUCT_DATA_TABLE = [
       {
         filePath: "/assets/images/products/DLB-GC90R-1.webp",
         isPrimary: true,
-        isHires: false
-      }
+        isHires: false,
+      },
     ],
     is_home_core: false,
     highlights: "",
-    scenarios: "用途：院校机关食堂、中央厨房团膳、工厂员工食堂、酒楼等团餐场所；适用于自动煸炒烹饪炒菜、炒饭、炒粉、炒面等。                       产能：单次烹饪30-80kg。               平均烹饪周期：12-20分钟",
-    usage: "用途：院校机关食堂、中央厨房团膳、工厂员工食堂、酒楼等团餐场所；适用于自动煸炒烹饪炒菜、炒饭、炒粉、炒面等。                       产能：单次烹饪30-80kg。               平均烹饪周期：12-20分钟",
-    usageEn: "Suitable for group dining venues such as school & institutional cafeterias, central kitchens & group catering, factory canteens, and restaurants. Ideal for automatic stir-frying of stir-fried dishes, fried rice, fried noodles, chow mein, and more. Capacity: 30–80 kg per batch. Avg. cooking cycle: 12–20 min.",
-    materialEn: "Premium stainless steel, gas/LPG heating"
+    scenarios:
+      "用途：院校机关食堂、中央厨房团膳、工厂员工食堂、酒楼等团餐场所；适用于自动煸炒烹饪炒菜、炒饭、炒粉、炒面等。                       产能：单次烹饪30-80kg。               平均烹饪周期：12-20分钟",
+    usage:
+      "用途：院校机关食堂、中央厨房团膳、工厂员工食堂、酒楼等团餐场所；适用于自动煸炒烹饪炒菜、炒饭、炒粉、炒面等。                       产能：单次烹饪30-80kg。               平均烹饪周期：12-20分钟",
+    usageEn:
+      "Suitable for group dining venues such as school & institutional cafeterias, central kitchens & group catering, factory canteens, and restaurants. Ideal for automatic stir-frying of stir-fried dishes, fried rice, fried noodles, chow mein, and more. Capacity: 30–80 kg per batch. Avg. cooking cycle: 12–20 min.",
+    materialEn: "Premium stainless steel, gas/LPG heating",
   },
   {
     model: "DLB-GQ60R",
@@ -2385,8 +2737,10 @@ window.PRODUCT_DATA_TABLE = [
     nameEn: "Floor-standing 600 Gas Cooker (Voice Menu+Auto Spray Arm)",
     category: "翻炒系列",
     subCategory: "团餐滚筒炒菜机",
-    specifications: "材质：采用优质不锈钢 加热方式：天然气/液化气 电压：380V/50Hz，功率：1000W 滚筒：仿球釜型锅体内直径Φ580mm 滚筒炒菜容量：5-20kg/次 滚筒材质：304#材质，可选装不粘锅 显示屏：10寸多功能触模显示屏 翻锅方式：电控翻锅 进气口规格：外螺纹6分接口 进水口规格：外螺纹4分接口 菜单：存储800个菜谱（智能学习功能） 语音：智能实时语音播报功能 喷料：自动摆臂四路喷料 接料盘：接料台+排水池+可提冲孔隔渣网 清洗：一键式自动清洗，水枪辅助清洗 清洁喷枪：优质高压喷枪（配2米软管）",
-    specificationsEn: "Material: Premium Stainless Steel; Heating Method: Natural gas/LPG; Voltage: 380V/50Hz, Power: 1000W; Drum: Imitation ball-pot type wok body, inner diameter Φ580mm; Drum Stir-fry Capacity: 5-20kg/batch; Drum Material: 304#, optional Non-stick coating; Display: 10-inch multi-function touch display; Tilting Method: Electric tilting; Gas Inlet: 3/4\" male thread; Water Inlet: 1/2\" male thread; Menu: Stores 800 recipes (smart learning function); Voice: Smart real-time voice broadcast; Spraying: Auto swing-arm four-way spraying; Drip Tray: Catch tray + drainage basin + liftable punched oil-strainer; Cleaning: One-key automatic cleaning, water gun assisted cleaning; Cleaning Spray Gun: Premium high-pressure spray gun (with 2m hose)",
+    specifications:
+      "材质：采用优质不锈钢 加热方式：天然气/液化气 电压：380V/50Hz，功率：1000W 滚筒：仿球釜型锅体内直径Φ580mm 滚筒炒菜容量：5-20kg/次 滚筒材质：304#材质，可选装不粘锅 显示屏：10寸多功能触模显示屏 翻锅方式：电控翻锅 进气口规格：外螺纹6分接口 进水口规格：外螺纹4分接口 菜单：存储800个菜谱（智能学习功能） 语音：智能实时语音播报功能 喷料：自动摆臂四路喷料 接料盘：接料台+排水池+可提冲孔隔渣网 清洗：一键式自动清洗，水枪辅助清洗 清洁喷枪：优质高压喷枪（配2米软管）",
+    specificationsEn:
+      'Material: Premium Stainless Steel; Heating Method: Natural gas/LPG; Voltage: 380V/50Hz, Power: 1000W; Drum: Imitation ball-pot type wok body, inner diameter Φ580mm; Drum Stir-fry Capacity: 5-20kg/batch; Drum Material: 304#, optional Non-stick coating; Display: 10-inch multi-function touch display; Tilting Method: Electric tilting; Gas Inlet: 3/4" male thread; Water Inlet: 1/2" male thread; Menu: Stores 800 recipes (smart learning function); Voice: Smart real-time voice broadcast; Spraying: Auto swing-arm four-way spraying; Drip Tray: Catch tray + drainage basin + liftable punched oil-strainer; Cleaning: One-key automatic cleaning, water gun assisted cleaning; Cleaning Spray Gun: Premium high-pressure spray gun (with 2m hose)',
     power: "1000W",
     voltage: "380V/50Hz，",
     material: "采用优质不锈钢加热方式：天然气/液化气",
@@ -2401,15 +2755,18 @@ window.PRODUCT_DATA_TABLE = [
       {
         filePath: "/assets/images/products/DLB-GQ60R-1.webp",
         isPrimary: true,
-        isHires: false
-      }
+        isHires: false,
+      },
     ],
     is_home_core: false,
     highlights: "",
-    scenarios: "用途：餐饮连锁、外卖、酒店酒楼宴席、企事业单位员工餐等场所；适用于自动烹饪炒菜、炒饭、炒粉、炒面、辣子鸡、麻辣香锅、小龙虾、香辣虾蟹等。                       产能：单次烹饪5-20kg。               平均烹饪周期：5-10分钟",
-    usage: "用途：餐饮连锁、外卖、酒店酒楼宴席、企事业单位员工餐等场所；适用于自动烹饪炒菜、炒饭、炒粉、炒面、辣子鸡、麻辣香锅、小龙虾、香辣虾蟹等。                       产能：单次烹饪5-20kg。               平均烹饪周期：5-10分钟",
-    usageEn: "Suitable for restaurant chains, food delivery, hotel banquets, corporate & institutional staff dining, and more. Ideal for automatic cooking of stir-fried dishes, fried rice, fried noodles, chow mein, spicy chicken, spicy hot pot, crawfish, spicy shrimp & crab, and more. Capacity: 5–20 kg per batch. Avg. cooking cycle: 5–10 min.",
-    materialEn: "Premium stainless steel, gas/LPG heating"
+    scenarios:
+      "用途：餐饮连锁、外卖、酒店酒楼宴席、企事业单位员工餐等场所；适用于自动烹饪炒菜、炒饭、炒粉、炒面、辣子鸡、麻辣香锅、小龙虾、香辣虾蟹等。                       产能：单次烹饪5-20kg。               平均烹饪周期：5-10分钟",
+    usage:
+      "用途：餐饮连锁、外卖、酒店酒楼宴席、企事业单位员工餐等场所；适用于自动烹饪炒菜、炒饭、炒粉、炒面、辣子鸡、麻辣香锅、小龙虾、香辣虾蟹等。                       产能：单次烹饪5-20kg。               平均烹饪周期：5-10分钟",
+    usageEn:
+      "Suitable for restaurant chains, food delivery, hotel banquets, corporate & institutional staff dining, and more. Ideal for automatic cooking of stir-fried dishes, fried rice, fried noodles, chow mein, spicy chicken, spicy hot pot, crawfish, spicy shrimp & crab, and more. Capacity: 5–20 kg per batch. Avg. cooking cycle: 5–10 min.",
+    materialEn: "Premium stainless steel, gas/LPG heating",
   },
   {
     model: "DLB-GQ70R",
@@ -2418,8 +2775,10 @@ window.PRODUCT_DATA_TABLE = [
     nameEn: "Floor-standing 700 Gas Cooker (Voice Menu+Auto Spray Arm)",
     category: "翻炒系列",
     subCategory: "团餐滚筒炒菜机",
-    specifications: "材质：采用优质不锈钢 加热方式：天然气/液化气 电压：380V/50Hz | 功率：1000W 滚筒：仿球釜型锅体内直径Φ680mm 滚筒炒菜容量：15-30kg/次 滚筒材质：304#材质，可选装不粘锅 显示屏：10寸多功能触模显示屏 翻锅方式：电控翻锅 进气口规格：外螺纹6分接口 进水口规格：外螺纹4分接口 菜单：存储800个菜谱（智能学习功能） 语音：智能实时语音播报功能 喷料：自动摆臂四路喷料 接料盘：接料台+排水池+可提冲孔隔渣网 清洗：一键式自动清洗，水枪辅助清洗 清洁喷枪：优质高压喷枪（配2米软管）",
-    specificationsEn: "Material: Premium Stainless Steel; Heating Method: Natural gas/LPG; Voltage: 380V/50Hz | Power: 1000W; Drum: Imitation ball-pot type wok body, inner diameter Φ680mm; Drum Stir-fry Capacity: 15-30kg/batch; Drum Material: 304#, optional Non-stick coating; Display: 10-inch multi-function touch display; Tilting Method: Electric tilting; Gas Inlet: 3/4\" male thread; Water Inlet: 1/2\" male thread; Menu: Stores 800 recipes (smart learning function); Voice: Smart real-time voice broadcast; Spraying: Auto swing-arm four-way spraying; Drip Tray: Catch tray + drainage basin + liftable punched oil-strainer; Cleaning: One-key automatic cleaning, water gun assisted cleaning; Cleaning Spray Gun: Premium high-pressure spray gun (with 2m hose)",
+    specifications:
+      "材质：采用优质不锈钢 加热方式：天然气/液化气 电压：380V/50Hz | 功率：1000W 滚筒：仿球釜型锅体内直径Φ680mm 滚筒炒菜容量：15-30kg/次 滚筒材质：304#材质，可选装不粘锅 显示屏：10寸多功能触模显示屏 翻锅方式：电控翻锅 进气口规格：外螺纹6分接口 进水口规格：外螺纹4分接口 菜单：存储800个菜谱（智能学习功能） 语音：智能实时语音播报功能 喷料：自动摆臂四路喷料 接料盘：接料台+排水池+可提冲孔隔渣网 清洗：一键式自动清洗，水枪辅助清洗 清洁喷枪：优质高压喷枪（配2米软管）",
+    specificationsEn:
+      'Material: Premium Stainless Steel; Heating Method: Natural gas/LPG; Voltage: 380V/50Hz | Power: 1000W; Drum: Imitation ball-pot type wok body, inner diameter Φ680mm; Drum Stir-fry Capacity: 15-30kg/batch; Drum Material: 304#, optional Non-stick coating; Display: 10-inch multi-function touch display; Tilting Method: Electric tilting; Gas Inlet: 3/4" male thread; Water Inlet: 1/2" male thread; Menu: Stores 800 recipes (smart learning function); Voice: Smart real-time voice broadcast; Spraying: Auto swing-arm four-way spraying; Drip Tray: Catch tray + drainage basin + liftable punched oil-strainer; Cleaning: One-key automatic cleaning, water gun assisted cleaning; Cleaning Spray Gun: Premium high-pressure spray gun (with 2m hose)',
     power: "1000W",
     voltage: "380V/50Hz|",
     material: "采用优质不锈钢加热方式：天然气/液化气",
@@ -2434,15 +2793,18 @@ window.PRODUCT_DATA_TABLE = [
       {
         filePath: "/assets/images/products/DLB-GQ70R-1.webp",
         isPrimary: true,
-        isHires: false
-      }
+        isHires: false,
+      },
     ],
     is_home_core: false,
     highlights: "",
-    scenarios: "用途：院校机关食堂、中央厨房团膳、工厂员工食堂、酒楼等团餐场所； 适用于自动煸炒烹饪炒菜、炒饭、炒粉、炒面等。 产能：单次烹饪15-30kg。 平均烹饪周期：8-12分钟",
-    usage: "用途：院校机关食堂、中央厨房团膳、工厂员工食堂、酒楼等团餐场所； 适用于自动煸炒烹饪炒菜、炒饭、炒粉、炒面等。 产能：单次烹饪15-30kg。 平均烹饪周期：8-12分钟",
-    usageEn: "Suitable for group dining venues such as school & institutional cafeterias, central kitchens & group catering, factory canteens, and restaurants. Ideal for automatic stir-frying of stir-fried dishes, fried rice, fried noodles, chow mein, and more. Capacity: 15–30 kg per batch. Avg. cooking cycle: 8–12 min.",
-    materialEn: "Premium stainless steel, gas/LPG heating"
+    scenarios:
+      "用途：院校机关食堂、中央厨房团膳、工厂员工食堂、酒楼等团餐场所； 适用于自动煸炒烹饪炒菜、炒饭、炒粉、炒面等。 产能：单次烹饪15-30kg。 平均烹饪周期：8-12分钟",
+    usage:
+      "用途：院校机关食堂、中央厨房团膳、工厂员工食堂、酒楼等团餐场所； 适用于自动煸炒烹饪炒菜、炒饭、炒粉、炒面等。 产能：单次烹饪15-30kg。 平均烹饪周期：8-12分钟",
+    usageEn:
+      "Suitable for group dining venues such as school & institutional cafeterias, central kitchens & group catering, factory canteens, and restaurants. Ideal for automatic stir-frying of stir-fried dishes, fried rice, fried noodles, chow mein, and more. Capacity: 15–30 kg per batch. Avg. cooking cycle: 8–12 min.",
+    materialEn: "Premium stainless steel, gas/LPG heating",
   },
   {
     model: "DLB-GC80R",
@@ -2451,8 +2813,10 @@ window.PRODUCT_DATA_TABLE = [
     nameEn: "Floor-standing 800 Gas Cooker (Touch+Voice Menu)",
     category: "翻炒系列",
     subCategory: "团餐滚筒炒菜机",
-    specifications: "材质：采用优质不锈钢 加热方式：天然气/液化气 电压：380V/50Hz | 功率：2100W 滚筒：Φ800*H800mm 显示屏：7寸触模显示屏 滚筒炒菜容量：20-50kg/次 进气口规格：外螺纹6分接口 进水口规格：外螺纹4分接口 锅体材质：304#材质，可选装不粘锅 翻锅方式：电动翻锅 菜单：存储800个菜谱（智能学习功能） 语音：智能实时语音播报功能 清洁喷枪：优质高压喷枪（配2米软管）",
-    specificationsEn: "Material: Premium Stainless Steel; Heating Method: Natural gas/LPG; Voltage: 380V/50Hz | Power: 2100W; Drum: Φ800*H800mm; Display: 7-inch touch display; Drum Stir-fry Capacity: 20-50kg/batch; Gas Inlet: 3/4\" male thread; Water Inlet: 1/2\" male thread; Wok Body Material: 304#, optional Non-stick coating; Tilting Method: Electric tilting; Menu: Stores 800 recipes (smart learning function); Voice: Smart real-time voice broadcast; Cleaning Spray Gun: Premium high-pressure spray gun (with 2m hose)",
+    specifications:
+      "材质：采用优质不锈钢 加热方式：天然气/液化气 电压：380V/50Hz | 功率：2100W 滚筒：Φ800*H800mm 显示屏：7寸触模显示屏 滚筒炒菜容量：20-50kg/次 进气口规格：外螺纹6分接口 进水口规格：外螺纹4分接口 锅体材质：304#材质，可选装不粘锅 翻锅方式：电动翻锅 菜单：存储800个菜谱（智能学习功能） 语音：智能实时语音播报功能 清洁喷枪：优质高压喷枪（配2米软管）",
+    specificationsEn:
+      'Material: Premium Stainless Steel; Heating Method: Natural gas/LPG; Voltage: 380V/50Hz | Power: 2100W; Drum: Φ800*H800mm; Display: 7-inch touch display; Drum Stir-fry Capacity: 20-50kg/batch; Gas Inlet: 3/4" male thread; Water Inlet: 1/2" male thread; Wok Body Material: 304#, optional Non-stick coating; Tilting Method: Electric tilting; Menu: Stores 800 recipes (smart learning function); Voice: Smart real-time voice broadcast; Cleaning Spray Gun: Premium high-pressure spray gun (with 2m hose)',
     power: "2100W",
     voltage: "380V/50Hz|",
     material: "采用优质不锈钢加热方式：天然气/液化气",
@@ -2467,15 +2831,18 @@ window.PRODUCT_DATA_TABLE = [
       {
         filePath: "/assets/images/products/DLB-GC80R-1.webp",
         isPrimary: true,
-        isHires: false
-      }
+        isHires: false,
+      },
     ],
     is_home_core: false,
     highlights: "",
-    scenarios: "用途：院校机关食堂、中央厨房团膳、工厂员工食堂、酒楼等团餐场所； 适用于自动煸炒烹饪炒菜、炒饭、炒粉、炒面等。 产能：单次烹饪20-50kg 平均烹饪周期：8-15分钟",
-    usage: "用途：院校机关食堂、中央厨房团膳、工厂员工食堂、酒楼等团餐场所； 适用于自动煸炒烹饪炒菜、炒饭、炒粉、炒面等。 产能：单次烹饪20-50kg 平均烹饪周期：8-15分钟",
-    usageEn: "Suitable for group dining venues such as school & institutional cafeterias, central kitchens & group catering, factory canteens, and restaurants. Ideal for automatic stir-frying of stir-fried dishes, fried rice, fried noodles, chow mein, and more. Capacity: 20–50 kg per batch. Avg. cooking cycle: 8–15 min.",
-    materialEn: "Premium stainless steel, gas/LPG heating"
+    scenarios:
+      "用途：院校机关食堂、中央厨房团膳、工厂员工食堂、酒楼等团餐场所； 适用于自动煸炒烹饪炒菜、炒饭、炒粉、炒面等。 产能：单次烹饪20-50kg 平均烹饪周期：8-15分钟",
+    usage:
+      "用途：院校机关食堂、中央厨房团膳、工厂员工食堂、酒楼等团餐场所； 适用于自动煸炒烹饪炒菜、炒饭、炒粉、炒面等。 产能：单次烹饪20-50kg 平均烹饪周期：8-15分钟",
+    usageEn:
+      "Suitable for group dining venues such as school & institutional cafeterias, central kitchens & group catering, factory canteens, and restaurants. Ideal for automatic stir-frying of stir-fried dishes, fried rice, fried noodles, chow mein, and more. Capacity: 20–50 kg per batch. Avg. cooking cycle: 8–15 min.",
+    materialEn: "Premium stainless steel, gas/LPG heating",
   },
   {
     model: "DLB-GQ80R",
@@ -2484,8 +2851,10 @@ window.PRODUCT_DATA_TABLE = [
     nameEn: "Floor-standing 800 Gas Cooker (Voice Menu+Auto Spray Arm)",
     category: "翻炒系列",
     subCategory: "团餐滚筒炒菜机",
-    specifications: "材质：采用优质不锈钢 加热方式：天然气/液化气 电压：380V/50Hz  |  功率：2100W 滚筒：仿球釜型锅体内直径Φ780mm 滚筒炒菜容量：20-50kg/次 滚筒材质：304#材质，可选装不粘锅 显示屏：10寸多功能触模显示屏 翻锅方式：电控翻锅 进气口规格：外螺纹6分接口 进水口规格：外螺纹4分接口 菜单：存储800个菜谱（智能学习功能） 语音：智能实时语音播报功能 喷料：自动摆臂四路喷料 接料盘：接料台+排水池+可提冲孔隔渣网 清洗：一键式自动清洗，水枪辅助清洗 清洁喷枪：优质高压喷枪（配2米软管）",
-    specificationsEn: "Material: Premium Stainless Steel; Heating Method: Natural gas/LPG; Voltage: 380V/50Hz | Power: 2100W; Drum: Imitation ball-pot type wok body, inner diameter Φ780mm; Drum Stir-fry Capacity: 20-50kg/batch; Drum Material: 304#, optional Non-stick coating; Display: 10-inch multi-function touch display; Tilting Method: Electric tilting; Gas Inlet: 3/4\" male thread; Water Inlet: 1/2\" male thread; Menu: Stores 800 recipes (smart learning function); Voice: Smart real-time voice broadcast; Spraying: Auto swing-arm four-way spraying; Drip Tray: Catch tray + drainage basin + liftable punched oil-strainer; Cleaning: One-key automatic cleaning, water gun assisted cleaning; Cleaning Spray Gun: Premium high-pressure spray gun (with 2m hose)",
+    specifications:
+      "材质：采用优质不锈钢 加热方式：天然气/液化气 电压：380V/50Hz  |  功率：2100W 滚筒：仿球釜型锅体内直径Φ780mm 滚筒炒菜容量：20-50kg/次 滚筒材质：304#材质，可选装不粘锅 显示屏：10寸多功能触模显示屏 翻锅方式：电控翻锅 进气口规格：外螺纹6分接口 进水口规格：外螺纹4分接口 菜单：存储800个菜谱（智能学习功能） 语音：智能实时语音播报功能 喷料：自动摆臂四路喷料 接料盘：接料台+排水池+可提冲孔隔渣网 清洗：一键式自动清洗，水枪辅助清洗 清洁喷枪：优质高压喷枪（配2米软管）",
+    specificationsEn:
+      'Material: Premium Stainless Steel; Heating Method: Natural gas/LPG; Voltage: 380V/50Hz | Power: 2100W; Drum: Imitation ball-pot type wok body, inner diameter Φ780mm; Drum Stir-fry Capacity: 20-50kg/batch; Drum Material: 304#, optional Non-stick coating; Display: 10-inch multi-function touch display; Tilting Method: Electric tilting; Gas Inlet: 3/4" male thread; Water Inlet: 1/2" male thread; Menu: Stores 800 recipes (smart learning function); Voice: Smart real-time voice broadcast; Spraying: Auto swing-arm four-way spraying; Drip Tray: Catch tray + drainage basin + liftable punched oil-strainer; Cleaning: One-key automatic cleaning, water gun assisted cleaning; Cleaning Spray Gun: Premium high-pressure spray gun (with 2m hose)',
     power: "2100W",
     voltage: "380V/50Hz|",
     material: "采用优质不锈钢加热方式：天然气/液化气",
@@ -2500,15 +2869,18 @@ window.PRODUCT_DATA_TABLE = [
       {
         filePath: "/assets/images/products/DLB-GQ80R-1.webp",
         isPrimary: true,
-        isHires: false
-      }
+        isHires: false,
+      },
     ],
     is_home_core: false,
     highlights: "",
-    scenarios: "用途：院校机关食堂、中央厨房团膳、工厂员工食堂、酒楼等团餐场所； 适用于自动煸炒烹饪炒菜、炒饭、炒粉、炒面等 产能：单次烹饪20-50kg      平均烹饪周期：8-15分钟",
-    usage: "用途：院校机关食堂、中央厨房团膳、工厂员工食堂、酒楼等团餐场所； 适用于自动煸炒烹饪炒菜、炒饭、炒粉、炒面等 产能：单次烹饪20-50kg      平均烹饪周期：8-15分钟",
-    usageEn: "Suitable for group dining venues such as school & institutional cafeterias, central kitchens & group catering, factory canteens, and restaurants. Ideal for automatic stir-frying of stir-fried dishes, fried rice, fried noodles, chow mein, and more. Capacity: 20–50 kg per batch. Avg. cooking cycle: 8–15 min.",
-    materialEn: "Premium stainless steel, gas/LPG heating"
+    scenarios:
+      "用途：院校机关食堂、中央厨房团膳、工厂员工食堂、酒楼等团餐场所； 适用于自动煸炒烹饪炒菜、炒饭、炒粉、炒面等 产能：单次烹饪20-50kg      平均烹饪周期：8-15分钟",
+    usage:
+      "用途：院校机关食堂、中央厨房团膳、工厂员工食堂、酒楼等团餐场所； 适用于自动煸炒烹饪炒菜、炒饭、炒粉、炒面等 产能：单次烹饪20-50kg      平均烹饪周期：8-15分钟",
+    usageEn:
+      "Suitable for group dining venues such as school & institutional cafeterias, central kitchens & group catering, factory canteens, and restaurants. Ideal for automatic stir-frying of stir-fried dishes, fried rice, fried noodles, chow mein, and more. Capacity: 20–50 kg per batch. Avg. cooking cycle: 8–15 min.",
+    materialEn: "Premium stainless steel, gas/LPG heating",
   },
   {
     model: "DLB-GQ90R",
@@ -2517,8 +2889,10 @@ window.PRODUCT_DATA_TABLE = [
     nameEn: "Floor-standing 900 Gas Cooker (Voice Menu+Auto Spray Arm)",
     category: "翻炒系列",
     subCategory: "团餐滚筒炒菜机",
-    specifications: "材质：采用优质不锈钢 加热方式：天然气/液化气 电压：380V/50Hz，功率：3000W 滚筒：仿球釜型锅体内直径Φ880mm 滚筒炒菜容量：30-80kg/次 滚筒材质：304#材质，可选装不粘锅 显示屏：10寸多功能触模显示屏 翻锅方式：电控翻锅 进气口规格：外螺纹6分接口 进水口规格：外螺纹4分接口 菜单：存储800个菜谱（智能学习功能） 语音：智能实时语音播报功能 喷料：自动摆臂四路喷料 接料盘：接料台+排水池+可提冲孔隔渣网 清洗：一键式自动清洗，水枪辅助清洗 清洁喷枪：优质高压喷枪（配2米软管）",
-    specificationsEn: "Material: Premium Stainless Steel; Heating Method: Natural gas/LPG; Voltage: 380V/50Hz, Power: 3000W; Drum: Imitation ball-pot type wok body, inner diameter Φ880mm; Drum Stir-fry Capacity: 30-80kg/batch; Drum Material: 304#, optional Non-stick coating; Display: 10-inch multi-function touch display; Tilting Method: Electric tilting; Gas Inlet: 3/4\" male thread; Water Inlet: 1/2\" male thread; Menu: Stores 800 recipes (smart learning function); Voice: Smart real-time voice broadcast; Spraying: Auto swing-arm four-way spraying; Drip Tray: Catch tray + drainage basin + liftable punched oil-strainer; Cleaning: One-key automatic cleaning, water gun assisted cleaning; Cleaning Spray Gun: Premium high-pressure spray gun (with 2m hose)",
+    specifications:
+      "材质：采用优质不锈钢 加热方式：天然气/液化气 电压：380V/50Hz，功率：3000W 滚筒：仿球釜型锅体内直径Φ880mm 滚筒炒菜容量：30-80kg/次 滚筒材质：304#材质，可选装不粘锅 显示屏：10寸多功能触模显示屏 翻锅方式：电控翻锅 进气口规格：外螺纹6分接口 进水口规格：外螺纹4分接口 菜单：存储800个菜谱（智能学习功能） 语音：智能实时语音播报功能 喷料：自动摆臂四路喷料 接料盘：接料台+排水池+可提冲孔隔渣网 清洗：一键式自动清洗，水枪辅助清洗 清洁喷枪：优质高压喷枪（配2米软管）",
+    specificationsEn:
+      'Material: Premium Stainless Steel; Heating Method: Natural gas/LPG; Voltage: 380V/50Hz, Power: 3000W; Drum: Imitation ball-pot type wok body, inner diameter Φ880mm; Drum Stir-fry Capacity: 30-80kg/batch; Drum Material: 304#, optional Non-stick coating; Display: 10-inch multi-function touch display; Tilting Method: Electric tilting; Gas Inlet: 3/4" male thread; Water Inlet: 1/2" male thread; Menu: Stores 800 recipes (smart learning function); Voice: Smart real-time voice broadcast; Spraying: Auto swing-arm four-way spraying; Drip Tray: Catch tray + drainage basin + liftable punched oil-strainer; Cleaning: One-key automatic cleaning, water gun assisted cleaning; Cleaning Spray Gun: Premium high-pressure spray gun (with 2m hose)',
     power: "3000W",
     voltage: "380V/50Hz，",
     material: "采用优质不锈钢加热方式：天然气/液化气",
@@ -2533,15 +2907,18 @@ window.PRODUCT_DATA_TABLE = [
       {
         filePath: "/assets/images/products/DLB-GQ90R-1.webp",
         isPrimary: true,
-        isHires: false
-      }
+        isHires: false,
+      },
     ],
     is_home_core: false,
     highlights: "",
-    scenarios: "用途：院校机关食堂、中央厨房团膳、工厂员工食堂、酒楼等团餐场所；适用于自动煸炒烹饪炒菜、炒饭、炒粉、炒面等。                       产能：单次烹饪30-80kg。         平均烹饪周期：12-20分钟",
-    usage: "用途：院校机关食堂、中央厨房团膳、工厂员工食堂、酒楼等团餐场所；适用于自动煸炒烹饪炒菜、炒饭、炒粉、炒面等。                       产能：单次烹饪30-80kg。         平均烹饪周期：12-20分钟",
-    usageEn: "Suitable for group dining venues such as school & institutional cafeterias, central kitchens & group catering, factory canteens, and restaurants. Ideal for automatic stir-frying of stir-fried dishes, fried rice, fried noodles, chow mein, and more. Capacity: 30–80 kg per batch. Avg. cooking cycle: 12–20 min.",
-    materialEn: "Premium stainless steel, gas/LPG heating"
+    scenarios:
+      "用途：院校机关食堂、中央厨房团膳、工厂员工食堂、酒楼等团餐场所；适用于自动煸炒烹饪炒菜、炒饭、炒粉、炒面等。                       产能：单次烹饪30-80kg。         平均烹饪周期：12-20分钟",
+    usage:
+      "用途：院校机关食堂、中央厨房团膳、工厂员工食堂、酒楼等团餐场所；适用于自动煸炒烹饪炒菜、炒饭、炒粉、炒面等。                       产能：单次烹饪30-80kg。         平均烹饪周期：12-20分钟",
+    usageEn:
+      "Suitable for group dining venues such as school & institutional cafeterias, central kitchens & group catering, factory canteens, and restaurants. Ideal for automatic stir-frying of stir-fried dishes, fried rice, fried noodles, chow mein, and more. Capacity: 30–80 kg per batch. Avg. cooking cycle: 12–20 min.",
+    materialEn: "Premium stainless steel, gas/LPG heating",
   },
   {
     model: "DLB-XC80",
@@ -2550,8 +2927,10 @@ window.PRODUCT_DATA_TABLE = [
     nameEn: "Multi-function Auto Stir-fry/Braising Cooker (Touch+Electric)",
     category: "炖煮系列",
     subCategory: "搅拌炒锅/炖烩机",
-    specifications: "材质：采用优质不锈钢 电压：380V /50Hz  |  功率：20kW 锅体： Φ800*H400-533mm 锅体容量：133L 锅体材质：复合304不锈钢锅体 显示屏：7寸多功能触模显示屏 翻锅方式： 电控翻锅 安全防护：带急停功能 控制方式：9档火力调节，无极调速翻炒 翻炒方式：行星搅拌，翻炒均匀，无死角 清洁喷枪：优质高压喷枪（配2米软管）",
-    specificationsEn: "Material: Premium Stainless Steel; Voltage: 380V /50Hz | Power: 20kW; Wok Body: Φ800*H400-533mm; Wok Capacity: 133L; Wok Body Material: Composite 304 Stainless Steel; Display: 7-inch multi-function touch display; Tilting Method: Electric tilting; Safety Protection: Emergency stop function; Control Mode: 9-level heat adjustment, stepless speed stirring; Stirring Method: Planetary Stirring, even stirring, no dead corners; Cleaning Spray Gun: Premium high-pressure spray gun (with 2m hose)",
+    specifications:
+      "材质：采用优质不锈钢 电压：380V /50Hz  |  功率：20kW 锅体： Φ800*H400-533mm 锅体容量：133L 锅体材质：复合304不锈钢锅体 显示屏：7寸多功能触模显示屏 翻锅方式： 电控翻锅 安全防护：带急停功能 控制方式：9档火力调节，无极调速翻炒 翻炒方式：行星搅拌，翻炒均匀，无死角 清洁喷枪：优质高压喷枪（配2米软管）",
+    specificationsEn:
+      "Material: Premium Stainless Steel; Voltage: 380V /50Hz | Power: 20kW; Wok Body: Φ800*H400-533mm; Wok Capacity: 133L; Wok Body Material: Composite 304 Stainless Steel; Display: 7-inch multi-function touch display; Tilting Method: Electric tilting; Safety Protection: Emergency stop function; Control Mode: 9-level heat adjustment, stepless speed stirring; Stirring Method: Planetary Stirring, even stirring, no dead corners; Cleaning Spray Gun: Premium high-pressure spray gun (with 2m hose)",
     power: "20kW",
     voltage: "380V/50Hz|",
     material: "采用优质不锈钢",
@@ -2566,15 +2945,18 @@ window.PRODUCT_DATA_TABLE = [
       {
         filePath: "/assets/images/products/DLB-XC80-1.webp",
         isPrimary: true,
-        isHires: false
-      }
+        isHires: false,
+      },
     ],
     is_home_core: false,
     highlights: "",
-    scenarios: "用途：适用于院校企业机关食堂、中央厨房团膳等。 煸炒烹饪10-20kg菜量； 焖炖烹饪50-150kg菜量。 也可用于食品厂炒制各类酱料，馅料等等。",
-    usage: "用途：适用于院校企业机关食堂、中央厨房团膳等。 煸炒烹饪10-20kg菜量； 焖炖烹饪50-150kg菜量。 也可用于食品厂炒制各类酱料，馅料等等。",
-    usageEn: "Suitable for school, corporate & institutional cafeterias, central kitchens & group catering, and more. Stir-frying capacity: 10–20 kg per batch; braising/stewing capacity: 50–150 kg per batch. Also suitable for food factories to stir-fry various sauces, fillings, and more.",
-    materialEn: "Premium stainless steel"
+    scenarios:
+      "用途：适用于院校企业机关食堂、中央厨房团膳等。 煸炒烹饪10-20kg菜量； 焖炖烹饪50-150kg菜量。 也可用于食品厂炒制各类酱料，馅料等等。",
+    usage:
+      "用途：适用于院校企业机关食堂、中央厨房团膳等。 煸炒烹饪10-20kg菜量； 焖炖烹饪50-150kg菜量。 也可用于食品厂炒制各类酱料，馅料等等。",
+    usageEn:
+      "Suitable for school, corporate & institutional cafeterias, central kitchens & group catering, and more. Stir-frying capacity: 10–20 kg per batch; braising/stewing capacity: 50–150 kg per batch. Also suitable for food factories to stir-fry various sauces, fillings, and more.",
+    materialEn: "Premium stainless steel",
   },
   {
     model: "DLB-QXC80",
@@ -2583,8 +2965,10 @@ window.PRODUCT_DATA_TABLE = [
     nameEn: "Multi-function Full-auto Stir-fry/Braising Cooker (Voice+Auto Spray)",
     category: "炖煮系列",
     subCategory: "搅拌炒锅/炖烩机",
-    specifications: "材质：采用优质不锈钢 电压：380V /50Hz  |  功率：20kW 锅体： Φ800*H400-533mm 锅体容量：133L 锅体材质：复合304不锈钢锅体 显示屏：10寸多功能触模显示屏 翻锅方式： 电控翻锅 安全防护：带急停功能 测温：带温控功能 菜单：存储800个菜谱（智能学习功能） 语音：智能实时语音播报功能 喷料： 自动四路定量喷料 进水：配摇摆式进水龙头 清洗：一键式自动清洗，水枪辅助清洗 翻炒方式：行星搅拌，翻炒均匀，无死角 清洁喷枪：优质高压喷枪（配2米软管）",
-    specificationsEn: "Material: Premium Stainless Steel; Voltage: 380V /50Hz | Power: 20kW; Wok Body: Φ800*H400-533mm; Wok Capacity: 133L; Wok Body Material: Composite 304 Stainless Steel; Display: 10-inch multi-function touch display; Tilting Method: Electric tilting; Safety Protection: Emergency stop function; Temperature Measurement: Temperature control function; Menu: Stores 800 recipes (smart learning function); Voice: Smart real-time voice broadcast; Spraying: Auto four-way quantitative spraying; Water Inlet: Swivel water faucet; Cleaning: One-key automatic cleaning, water gun assisted cleaning; Stirring Method: Planetary Stirring, even stirring, no dead corners; Cleaning Spray Gun: Premium high-pressure spray gun (with 2m hose)",
+    specifications:
+      "材质：采用优质不锈钢 电压：380V /50Hz  |  功率：20kW 锅体： Φ800*H400-533mm 锅体容量：133L 锅体材质：复合304不锈钢锅体 显示屏：10寸多功能触模显示屏 翻锅方式： 电控翻锅 安全防护：带急停功能 测温：带温控功能 菜单：存储800个菜谱（智能学习功能） 语音：智能实时语音播报功能 喷料： 自动四路定量喷料 进水：配摇摆式进水龙头 清洗：一键式自动清洗，水枪辅助清洗 翻炒方式：行星搅拌，翻炒均匀，无死角 清洁喷枪：优质高压喷枪（配2米软管）",
+    specificationsEn:
+      "Material: Premium Stainless Steel; Voltage: 380V /50Hz | Power: 20kW; Wok Body: Φ800*H400-533mm; Wok Capacity: 133L; Wok Body Material: Composite 304 Stainless Steel; Display: 10-inch multi-function touch display; Tilting Method: Electric tilting; Safety Protection: Emergency stop function; Temperature Measurement: Temperature control function; Menu: Stores 800 recipes (smart learning function); Voice: Smart real-time voice broadcast; Spraying: Auto four-way quantitative spraying; Water Inlet: Swivel water faucet; Cleaning: One-key automatic cleaning, water gun assisted cleaning; Stirring Method: Planetary Stirring, even stirring, no dead corners; Cleaning Spray Gun: Premium high-pressure spray gun (with 2m hose)",
     power: "20kW",
     voltage: "380V/50Hz|",
     material: "采用优质不锈钢",
@@ -2599,15 +2983,18 @@ window.PRODUCT_DATA_TABLE = [
       {
         filePath: "/assets/images/products/DLB-QXC80-1.webp",
         isPrimary: true,
-        isHires: false
-      }
+        isHires: false,
+      },
     ],
     is_home_core: false,
     highlights: "",
-    scenarios: "用途：适用于院校企业机关食堂、中央厨房团膳等。 煸炒烹饪10-20kg菜量； 焖炖烹饪50-150kg菜量。 也可用于食品厂炒制各类酱料，馅料等等。",
-    usage: "用途：适用于院校企业机关食堂、中央厨房团膳等。 煸炒烹饪10-20kg菜量； 焖炖烹饪50-150kg菜量。 也可用于食品厂炒制各类酱料，馅料等等。",
-    usageEn: "Suitable for school, corporate & institutional cafeterias, central kitchens & group catering, and more. Stir-frying capacity: 10–20 kg per batch; braising/stewing capacity: 50–150 kg per batch. Also suitable for food factories to stir-fry various sauces, fillings, and more.",
-    materialEn: "Premium stainless steel"
+    scenarios:
+      "用途：适用于院校企业机关食堂、中央厨房团膳等。 煸炒烹饪10-20kg菜量； 焖炖烹饪50-150kg菜量。 也可用于食品厂炒制各类酱料，馅料等等。",
+    usage:
+      "用途：适用于院校企业机关食堂、中央厨房团膳等。 煸炒烹饪10-20kg菜量； 焖炖烹饪50-150kg菜量。 也可用于食品厂炒制各类酱料，馅料等等。",
+    usageEn:
+      "Suitable for school, corporate & institutional cafeterias, central kitchens & group catering, and more. Stir-frying capacity: 10–20 kg per batch; braising/stewing capacity: 50–150 kg per batch. Also suitable for food factories to stir-fry various sauces, fillings, and more.",
+    materialEn: "Premium stainless steel",
   },
   {
     model: "DLB-XC80R",
@@ -2616,8 +3003,10 @@ window.PRODUCT_DATA_TABLE = [
     nameEn: "Multi-function Auto Gas Stir-fry/Braising Cooker (Touch+Electric)",
     category: "炖煮系列",
     subCategory: "搅拌炒锅/炖烩机",
-    specifications: "材质：采用优质不锈钢 加热方式：天然气/液化气 电压：380V/50Hz  |  功率：1500W 锅体：Φ800*H400-533mm 锅体容量：133L 锅体材质：复合304不锈钢锅体 显示屏：7寸多功能触模显示屏 翻锅方式：电控翻锅 进气口规格：外螺纹6分接口 进水口规格：外螺纹4分接口 翻炒方式：行星搅拌，翻炒均匀，无死角 清洁喷枪：优质高压喷枪（配2米软管）",
-    specificationsEn: "Material: Premium Stainless Steel; Heating Method: Natural gas/LPG; Voltage: 380V/50Hz | Power: 1500W; Wok Body: Φ800*H400-533mm; Wok Capacity: 133L; Wok Body Material: Composite 304 Stainless Steel; Display: 7-inch multi-function touch display; Tilting Method: Electric tilting; Gas Inlet: 3/4\" male thread; Water Inlet: 1/2\" male thread; Stirring Method: Planetary Stirring, even stirring, no dead corners; Cleaning Spray Gun: Premium high-pressure spray gun (with 2m hose)",
+    specifications:
+      "材质：采用优质不锈钢 加热方式：天然气/液化气 电压：380V/50Hz  |  功率：1500W 锅体：Φ800*H400-533mm 锅体容量：133L 锅体材质：复合304不锈钢锅体 显示屏：7寸多功能触模显示屏 翻锅方式：电控翻锅 进气口规格：外螺纹6分接口 进水口规格：外螺纹4分接口 翻炒方式：行星搅拌，翻炒均匀，无死角 清洁喷枪：优质高压喷枪（配2米软管）",
+    specificationsEn:
+      'Material: Premium Stainless Steel; Heating Method: Natural gas/LPG; Voltage: 380V/50Hz | Power: 1500W; Wok Body: Φ800*H400-533mm; Wok Capacity: 133L; Wok Body Material: Composite 304 Stainless Steel; Display: 7-inch multi-function touch display; Tilting Method: Electric tilting; Gas Inlet: 3/4" male thread; Water Inlet: 1/2" male thread; Stirring Method: Planetary Stirring, even stirring, no dead corners; Cleaning Spray Gun: Premium high-pressure spray gun (with 2m hose)',
     power: "1500W",
     voltage: "380V/50Hz|",
     material: "采用优质不锈钢加热方式：天然气/液化气",
@@ -2632,15 +3021,18 @@ window.PRODUCT_DATA_TABLE = [
       {
         filePath: "/assets/images/products/DLB-XC80R-1.webp",
         isPrimary: true,
-        isHires: false
-      }
+        isHires: false,
+      },
     ],
     is_home_core: false,
     highlights: "",
-    scenarios: "用途：适用于院校企业机关食堂、中央厨房团膳等 煸炒烹饪10-20kg菜量； 焖炖烹饪50-150kg菜量。 也可用于食品厂炒制各类酱料，馅料等等。",
-    usage: "用途：适用于院校企业机关食堂、中央厨房团膳等 煸炒烹饪10-20kg菜量； 焖炖烹饪50-150kg菜量。 也可用于食品厂炒制各类酱料，馅料等等。",
-    usageEn: "Suitable for school, corporate & institutional cafeterias, central kitchens & group catering, and more. Stir-frying capacity: 10–20 kg per batch; braising/stewing capacity: 50–150 kg per batch. Also suitable for food factories to stir-fry various sauces, fillings, and more.",
-    materialEn: "Premium stainless steel, gas/LPG heating"
+    scenarios:
+      "用途：适用于院校企业机关食堂、中央厨房团膳等 煸炒烹饪10-20kg菜量； 焖炖烹饪50-150kg菜量。 也可用于食品厂炒制各类酱料，馅料等等。",
+    usage:
+      "用途：适用于院校企业机关食堂、中央厨房团膳等 煸炒烹饪10-20kg菜量； 焖炖烹饪50-150kg菜量。 也可用于食品厂炒制各类酱料，馅料等等。",
+    usageEn:
+      "Suitable for school, corporate & institutional cafeterias, central kitchens & group catering, and more. Stir-frying capacity: 10–20 kg per batch; braising/stewing capacity: 50–150 kg per batch. Also suitable for food factories to stir-fry various sauces, fillings, and more.",
+    materialEn: "Premium stainless steel, gas/LPG heating",
   },
   {
     model: "DLB-QXC80R",
@@ -2649,8 +3041,10 @@ window.PRODUCT_DATA_TABLE = [
     nameEn: "Multi-function Full-auto Gas Stir-fry/Braising (Voice+Auto Spray)",
     category: "炖煮系列",
     subCategory: "搅拌炒锅/炖烩机",
-    specifications: "材质：采用优质不锈钢 加热方式：天然气/液化气 电压：380V/50Hz，功率：1500W 锅体：Φ800*H400-533mm 锅体容量：133L 锅体材质：复合304不锈钢锅体 显示屏：10寸多功能触模显示屏 翻锅方式：电控翻锅 进气口规格：外螺纹6分接口 进水口规格：外螺纹4分接口 菜单：存储800个菜谱（智能学习功能） 语音：智能实时语音播报功能 喷料：自动四路定量喷料 进水：配摇摆式进水龙头 清洗：一键式自动清洗，水枪辅助清洗 翻炒方式：行星搅拌，翻炒均匀，无死角 清洁喷枪：优质高压喷枪（配2米软管）",
-    specificationsEn: "Material: Premium Stainless Steel; Heating Method: Natural gas/LPG; Voltage: 380V/50Hz, Power: 1500W; Wok Body: Φ800*H400-533mm; Wok Capacity: 133L; Wok Body Material: Composite 304 Stainless Steel; Display: 10-inch multi-function touch display; Tilting Method: Electric tilting; Gas Inlet: 3/4\" male thread; Water Inlet: 1/2\" male thread; Menu: Stores 800 recipes (smart learning function); Voice: Smart real-time voice broadcast; Spraying: Auto four-way quantitative spraying; Water Inlet: Swivel water faucet; Cleaning: One-key automatic cleaning, water gun assisted cleaning; Stirring Method: Planetary Stirring, even stirring, no dead corners; Cleaning Spray Gun: Premium high-pressure spray gun (with 2m hose)",
+    specifications:
+      "材质：采用优质不锈钢 加热方式：天然气/液化气 电压：380V/50Hz，功率：1500W 锅体：Φ800*H400-533mm 锅体容量：133L 锅体材质：复合304不锈钢锅体 显示屏：10寸多功能触模显示屏 翻锅方式：电控翻锅 进气口规格：外螺纹6分接口 进水口规格：外螺纹4分接口 菜单：存储800个菜谱（智能学习功能） 语音：智能实时语音播报功能 喷料：自动四路定量喷料 进水：配摇摆式进水龙头 清洗：一键式自动清洗，水枪辅助清洗 翻炒方式：行星搅拌，翻炒均匀，无死角 清洁喷枪：优质高压喷枪（配2米软管）",
+    specificationsEn:
+      'Material: Premium Stainless Steel; Heating Method: Natural gas/LPG; Voltage: 380V/50Hz, Power: 1500W; Wok Body: Φ800*H400-533mm; Wok Capacity: 133L; Wok Body Material: Composite 304 Stainless Steel; Display: 10-inch multi-function touch display; Tilting Method: Electric tilting; Gas Inlet: 3/4" male thread; Water Inlet: 1/2" male thread; Menu: Stores 800 recipes (smart learning function); Voice: Smart real-time voice broadcast; Spraying: Auto four-way quantitative spraying; Water Inlet: Swivel water faucet; Cleaning: One-key automatic cleaning, water gun assisted cleaning; Stirring Method: Planetary Stirring, even stirring, no dead corners; Cleaning Spray Gun: Premium high-pressure spray gun (with 2m hose)',
     power: "1500W",
     voltage: "380V/50Hz，",
     material: "采用优质不锈钢加热方式：天然气/液化气",
@@ -2665,15 +3059,18 @@ window.PRODUCT_DATA_TABLE = [
       {
         filePath: "/assets/images/products/DLB-QXC80R-1.webp",
         isPrimary: true,
-        isHires: false
-      }
+        isHires: false,
+      },
     ],
     is_home_core: false,
     highlights: "",
-    scenarios: "用途：适用于院校企业机关食堂、中央厨房团膳等 煸炒烹饪10-20kg菜量； 焖炖烹饪50-150kg菜量。 也可用于食品厂炒制各类酱料，馅料等等。",
-    usage: "用途：适用于院校企业机关食堂、中央厨房团膳等 煸炒烹饪10-20kg菜量； 焖炖烹饪50-150kg菜量。 也可用于食品厂炒制各类酱料，馅料等等。",
-    usageEn: "Suitable for school, corporate & institutional cafeterias, central kitchens & group catering, and more. Stir-frying capacity: 10–20 kg per batch; braising/stewing capacity: 50–150 kg per batch. Also suitable for food factories to stir-fry various sauces, fillings, and more.",
-    materialEn: "Premium stainless steel, gas/LPG heating"
+    scenarios:
+      "用途：适用于院校企业机关食堂、中央厨房团膳等 煸炒烹饪10-20kg菜量； 焖炖烹饪50-150kg菜量。 也可用于食品厂炒制各类酱料，馅料等等。",
+    usage:
+      "用途：适用于院校企业机关食堂、中央厨房团膳等 煸炒烹饪10-20kg菜量； 焖炖烹饪50-150kg菜量。 也可用于食品厂炒制各类酱料，馅料等等。",
+    usageEn:
+      "Suitable for school, corporate & institutional cafeterias, central kitchens & group catering, and more. Stir-frying capacity: 10–20 kg per batch; braising/stewing capacity: 50–150 kg per batch. Also suitable for food factories to stir-fry various sauces, fillings, and more.",
+    materialEn: "Premium stainless steel, gas/LPG heating",
   },
   {
     model: "DLB-XC100R",
@@ -2682,8 +3079,10 @@ window.PRODUCT_DATA_TABLE = [
     nameEn: "Multi-function Auto Gas Stir-fry/Braising Cooker (Touch+Electric)",
     category: "炖煮系列",
     subCategory: "搅拌炒锅/炖烩机",
-    specifications: "材质：采用优质不锈钢 加热方式：天然气/液化气 电压：380V/50Hz，功率：2100W 锅体：Φ1000*H500-640mm 锅体容量：260L 锅体材质：复合304不锈钢锅体 显示屏：7寸多功能触模显示屏 翻锅方式：电控翻锅 进气口规格：外螺纹6分接口 进水口规格：外螺纹4分接口 翻炒方式：行星搅拌，翻炒均匀，无死角 清洁喷枪：优质高压喷枪（配2米软管）",
-    specificationsEn: "Material: Premium Stainless Steel; Heating Method: Natural gas/LPG; Voltage: 380V/50Hz, Power: 2100W; Wok Body: Φ1000*H500-640mm; Wok Capacity: 260L; Wok Body Material: Composite 304 Stainless Steel; Display: 7-inch multi-function touch display; Tilting Method: Electric tilting; Gas Inlet: 3/4\" male thread; Water Inlet: 1/2\" male thread; Stirring Method: Planetary Stirring, even stirring, no dead corners; Cleaning Spray Gun: Premium high-pressure spray gun (with 2m hose)",
+    specifications:
+      "材质：采用优质不锈钢 加热方式：天然气/液化气 电压：380V/50Hz，功率：2100W 锅体：Φ1000*H500-640mm 锅体容量：260L 锅体材质：复合304不锈钢锅体 显示屏：7寸多功能触模显示屏 翻锅方式：电控翻锅 进气口规格：外螺纹6分接口 进水口规格：外螺纹4分接口 翻炒方式：行星搅拌，翻炒均匀，无死角 清洁喷枪：优质高压喷枪（配2米软管）",
+    specificationsEn:
+      'Material: Premium Stainless Steel; Heating Method: Natural gas/LPG; Voltage: 380V/50Hz, Power: 2100W; Wok Body: Φ1000*H500-640mm; Wok Capacity: 260L; Wok Body Material: Composite 304 Stainless Steel; Display: 7-inch multi-function touch display; Tilting Method: Electric tilting; Gas Inlet: 3/4" male thread; Water Inlet: 1/2" male thread; Stirring Method: Planetary Stirring, even stirring, no dead corners; Cleaning Spray Gun: Premium high-pressure spray gun (with 2m hose)',
     power: "2100W",
     voltage: "380V/50Hz，",
     material: "采用优质不锈钢加热方式：天然气/液化气",
@@ -2698,15 +3097,18 @@ window.PRODUCT_DATA_TABLE = [
       {
         filePath: "/assets/images/products/DLB-XC100R-1.webp",
         isPrimary: true,
-        isHires: false
-      }
+        isHires: false,
+      },
     ],
     is_home_core: false,
     highlights: "",
-    scenarios: "用途：适用于院校企业机关食堂、中央厨房团膳等煸炒烹饪20-50kg菜量；焖炖烹饪100-200kg菜量。也可用于食品厂炒制各类酱料，馅料等等。",
-    usage: "用途：适用于院校企业机关食堂、中央厨房团膳等煸炒烹饪20-50kg菜量；焖炖烹饪100-200kg菜量。也可用于食品厂炒制各类酱料，馅料等等。",
-    usageEn: "Suitable for school, corporate & institutional cafeterias, central kitchens & group catering, and more. Stir-frying capacity: 20–50 kg per batch; braising/stewing capacity: 100–200 kg per batch. Also suitable for food factories to stir-fry various sauces, fillings, and more.",
-    materialEn: "Premium stainless steel, gas/LPG heating"
+    scenarios:
+      "用途：适用于院校企业机关食堂、中央厨房团膳等煸炒烹饪20-50kg菜量；焖炖烹饪100-200kg菜量。也可用于食品厂炒制各类酱料，馅料等等。",
+    usage:
+      "用途：适用于院校企业机关食堂、中央厨房团膳等煸炒烹饪20-50kg菜量；焖炖烹饪100-200kg菜量。也可用于食品厂炒制各类酱料，馅料等等。",
+    usageEn:
+      "Suitable for school, corporate & institutional cafeterias, central kitchens & group catering, and more. Stir-frying capacity: 20–50 kg per batch; braising/stewing capacity: 100–200 kg per batch. Also suitable for food factories to stir-fry various sauces, fillings, and more.",
+    materialEn: "Premium stainless steel, gas/LPG heating",
   },
   {
     model: "DLB-QXC100R",
@@ -2715,8 +3117,10 @@ window.PRODUCT_DATA_TABLE = [
     nameEn: "Multi-function Full-auto Gas Stir-fry/Braising (Voice+Auto Spray)",
     category: "炖煮系列",
     subCategory: "搅拌炒锅/炖烩机",
-    specifications: "材质：采用优质不锈钢 加热方式：天然气/液化气 电压：380V/50Hz，功率：2100W 锅体：Φ1000*H500-640mm 锅体容量：260L 锅体材质：复合304不锈钢锅体 显示屏：10寸多功能触模显示屏 翻锅方式：电控翻锅 进气口规格：外螺纹6分接口 进水口规格：外螺纹4分接口 菜单：存储800个菜谱（智能学习功能） 语音：智能实时语音播报功能 喷料：自动四路定量喷料 进水：配摇摆式进水龙头 清洗：一键式自动清洗，水枪辅助清洗 翻炒方式：行星搅拌，翻炒均匀，无死角 清洁喷枪：优质高压喷枪（配2米软管）",
-    specificationsEn: "Material: Premium Stainless Steel; Heating Method: Natural gas/LPG; Voltage: 380V/50Hz, Power: 2100W; Wok Body: Φ1000*H500-640mm; Wok Capacity: 260L; Wok Body Material: Composite 304 Stainless Steel; Display: 10-inch multi-function touch display; Tilting Method: Electric tilting; Gas Inlet: 3/4\" male thread; Water Inlet: 1/2\" male thread; Menu: Stores 800 recipes (smart learning function); Voice: Smart real-time voice broadcast; Spraying: Auto four-way quantitative spraying; Water Inlet: Swivel water faucet; Cleaning: One-key automatic cleaning, water gun assisted cleaning; Stirring Method: Planetary Stirring, even stirring, no dead corners; Cleaning Spray Gun: Premium high-pressure spray gun (with 2m hose)",
+    specifications:
+      "材质：采用优质不锈钢 加热方式：天然气/液化气 电压：380V/50Hz，功率：2100W 锅体：Φ1000*H500-640mm 锅体容量：260L 锅体材质：复合304不锈钢锅体 显示屏：10寸多功能触模显示屏 翻锅方式：电控翻锅 进气口规格：外螺纹6分接口 进水口规格：外螺纹4分接口 菜单：存储800个菜谱（智能学习功能） 语音：智能实时语音播报功能 喷料：自动四路定量喷料 进水：配摇摆式进水龙头 清洗：一键式自动清洗，水枪辅助清洗 翻炒方式：行星搅拌，翻炒均匀，无死角 清洁喷枪：优质高压喷枪（配2米软管）",
+    specificationsEn:
+      'Material: Premium Stainless Steel; Heating Method: Natural gas/LPG; Voltage: 380V/50Hz, Power: 2100W; Wok Body: Φ1000*H500-640mm; Wok Capacity: 260L; Wok Body Material: Composite 304 Stainless Steel; Display: 10-inch multi-function touch display; Tilting Method: Electric tilting; Gas Inlet: 3/4" male thread; Water Inlet: 1/2" male thread; Menu: Stores 800 recipes (smart learning function); Voice: Smart real-time voice broadcast; Spraying: Auto four-way quantitative spraying; Water Inlet: Swivel water faucet; Cleaning: One-key automatic cleaning, water gun assisted cleaning; Stirring Method: Planetary Stirring, even stirring, no dead corners; Cleaning Spray Gun: Premium high-pressure spray gun (with 2m hose)',
     power: "2100W",
     voltage: "380V/50Hz，",
     material: "采用优质不锈钢加热方式：天然气/液化气",
@@ -2731,15 +3135,18 @@ window.PRODUCT_DATA_TABLE = [
       {
         filePath: "/assets/images/products/DLB-QXC100R-1.webp",
         isPrimary: true,
-        isHires: false
-      }
+        isHires: false,
+      },
     ],
     is_home_core: false,
     highlights: "",
-    scenarios: "用途：适用于院校企业机关食堂、中央厨房团膳等煸炒烹饪20-50kg菜量；焖炖烹饪100-200kg菜量。也可用于食品厂炒制各类酱料，馅料等等。",
-    usage: "用途：适用于院校企业机关食堂、中央厨房团膳等煸炒烹饪20-50kg菜量；焖炖烹饪100-200kg菜量。也可用于食品厂炒制各类酱料，馅料等等。",
-    usageEn: "Suitable for school, corporate & institutional cafeterias, central kitchens & group catering, and more. Stir-frying capacity: 20–50 kg per batch; braising/stewing capacity: 100–200 kg per batch. Also suitable for food factories to stir-fry various sauces, fillings, and more.",
-    materialEn: "Premium stainless steel, gas/LPG heating"
+    scenarios:
+      "用途：适用于院校企业机关食堂、中央厨房团膳等煸炒烹饪20-50kg菜量；焖炖烹饪100-200kg菜量。也可用于食品厂炒制各类酱料，馅料等等。",
+    usage:
+      "用途：适用于院校企业机关食堂、中央厨房团膳等煸炒烹饪20-50kg菜量；焖炖烹饪100-200kg菜量。也可用于食品厂炒制各类酱料，馅料等等。",
+    usageEn:
+      "Suitable for school, corporate & institutional cafeterias, central kitchens & group catering, and more. Stir-frying capacity: 20–50 kg per batch; braising/stewing capacity: 100–200 kg per batch. Also suitable for food factories to stir-fry various sauces, fillings, and more.",
+    materialEn: "Premium stainless steel, gas/LPG heating",
   },
   {
     model: "DLB-XC120R",
@@ -2748,8 +3155,10 @@ window.PRODUCT_DATA_TABLE = [
     nameEn: "Multi-function Auto Gas Stir-fry/Braising Cooker (Touch+Electric)",
     category: "炖煮系列",
     subCategory: "搅拌炒锅/炖烩机",
-    specifications: "材质：采用优质不锈钢 加热方式：天然气/液化气 电压：380V/50Hz，功率：3000W 锅体：Φ1200*H600-732mm 锅体容量：450L 锅体材质：复合304不锈钢锅体 显示屏：7寸多功能触模显示屏 翻锅方式：电控翻锅 进气口规格：外螺纹6分接口 进水口规格：外螺纹4分接口 翻炒方式：行星搅拌，翻炒均匀，无死角 清洁喷枪：优质高压喷枪（配2米软管）",
-    specificationsEn: "Material: Premium Stainless Steel; Heating Method: Natural gas/LPG; Voltage: 380V/50Hz, Power: 3000W; Wok Body: Φ1200*H600-732mm; Wok Capacity: 450L; Wok Body Material: Composite 304 Stainless Steel; Display: 7-inch multi-function touch display; Tilting Method: Electric tilting; Gas Inlet: 3/4\" male thread; Water Inlet: 1/2\" male thread; Stirring Method: Planetary Stirring, even stirring, no dead corners; Cleaning Spray Gun: Premium high-pressure spray gun (with 2m hose)",
+    specifications:
+      "材质：采用优质不锈钢 加热方式：天然气/液化气 电压：380V/50Hz，功率：3000W 锅体：Φ1200*H600-732mm 锅体容量：450L 锅体材质：复合304不锈钢锅体 显示屏：7寸多功能触模显示屏 翻锅方式：电控翻锅 进气口规格：外螺纹6分接口 进水口规格：外螺纹4分接口 翻炒方式：行星搅拌，翻炒均匀，无死角 清洁喷枪：优质高压喷枪（配2米软管）",
+    specificationsEn:
+      'Material: Premium Stainless Steel; Heating Method: Natural gas/LPG; Voltage: 380V/50Hz, Power: 3000W; Wok Body: Φ1200*H600-732mm; Wok Capacity: 450L; Wok Body Material: Composite 304 Stainless Steel; Display: 7-inch multi-function touch display; Tilting Method: Electric tilting; Gas Inlet: 3/4" male thread; Water Inlet: 1/2" male thread; Stirring Method: Planetary Stirring, even stirring, no dead corners; Cleaning Spray Gun: Premium high-pressure spray gun (with 2m hose)',
     power: "3000W",
     voltage: "380V/50Hz，",
     material: "采用优质不锈钢加热方式：天然气/液化气",
@@ -2764,15 +3173,18 @@ window.PRODUCT_DATA_TABLE = [
       {
         filePath: "/assets/images/products/DLB-XC120R-1.webp",
         isPrimary: true,
-        isHires: false
-      }
+        isHires: false,
+      },
     ],
     is_home_core: false,
     highlights: "",
-    scenarios: "用途：适用于院校企业机关食堂、中央厨房团膳等煸炒烹饪50-100kg菜量；焖炖烹饪200-400kg菜量。也可用于食品厂炒制各类酱料，馅料等等。",
-    usage: "用途：适用于院校企业机关食堂、中央厨房团膳等煸炒烹饪50-100kg菜量；焖炖烹饪200-400kg菜量。也可用于食品厂炒制各类酱料，馅料等等。",
-    usageEn: "Suitable for school, corporate & institutional cafeterias, central kitchens & group catering, and more. Stir-frying capacity: 50–100 kg per batch; braising/stewing capacity: 200–400 kg per batch. Also suitable for food factories to stir-fry various sauces, fillings, and more.",
-    materialEn: "Premium stainless steel, gas/LPG heating"
+    scenarios:
+      "用途：适用于院校企业机关食堂、中央厨房团膳等煸炒烹饪50-100kg菜量；焖炖烹饪200-400kg菜量。也可用于食品厂炒制各类酱料，馅料等等。",
+    usage:
+      "用途：适用于院校企业机关食堂、中央厨房团膳等煸炒烹饪50-100kg菜量；焖炖烹饪200-400kg菜量。也可用于食品厂炒制各类酱料，馅料等等。",
+    usageEn:
+      "Suitable for school, corporate & institutional cafeterias, central kitchens & group catering, and more. Stir-frying capacity: 50–100 kg per batch; braising/stewing capacity: 200–400 kg per batch. Also suitable for food factories to stir-fry various sauces, fillings, and more.",
+    materialEn: "Premium stainless steel, gas/LPG heating",
   },
   {
     model: "DLB-QXC120R",
@@ -2781,8 +3193,10 @@ window.PRODUCT_DATA_TABLE = [
     nameEn: "Multi-function Full-auto Gas Stir-fry/Braising (Voice+Auto Spray)",
     category: "炖煮系列",
     subCategory: "搅拌炒锅/炖烩机",
-    specifications: "材质：采用优质不锈钢 加热方式：天然气/液化气 电压：380V/50Hz，功率：3000W 锅体：Φ1200*H600-732mm 锅体容量：450L 锅体材质：复合304不锈钢锅体 显示屏：10寸多功能触模显示屏 翻锅方式：电控翻锅 进气口规格：外螺纹6分接口 进水口规格：外螺纹4分接口 菜单：存储800个菜谱（智能学习功能） 语音：智能实时语音播报功能 喷料：自动四路定量喷料 进水：配摇摆式进水龙头 清洗：一键式自动清洗，水枪辅助清洗 翻炒方式：行星搅拌，翻炒均匀，无死角 清洁喷枪：优质高压喷枪（配2米软管）",
-    specificationsEn: "Material: Premium Stainless Steel; Heating Method: Natural gas/LPG; Voltage: 380V/50Hz, Power: 3000W; Wok Body: Φ1200*H600-732mm; Wok Capacity: 450L; Wok Body Material: Composite 304 Stainless Steel; Display: 10-inch multi-function touch display; Tilting Method: Electric tilting; Gas Inlet: 3/4\" male thread; Water Inlet: 1/2\" male thread; Menu: Stores 800 recipes (smart learning function); Voice: Smart real-time voice broadcast; Spraying: Auto four-way quantitative spraying; Water Inlet: Swivel water faucet; Cleaning: One-key automatic cleaning, water gun assisted cleaning; Stirring Method: Planetary Stirring, even stirring, no dead corners; Cleaning Spray Gun: Premium high-pressure spray gun (with 2m hose)",
+    specifications:
+      "材质：采用优质不锈钢 加热方式：天然气/液化气 电压：380V/50Hz，功率：3000W 锅体：Φ1200*H600-732mm 锅体容量：450L 锅体材质：复合304不锈钢锅体 显示屏：10寸多功能触模显示屏 翻锅方式：电控翻锅 进气口规格：外螺纹6分接口 进水口规格：外螺纹4分接口 菜单：存储800个菜谱（智能学习功能） 语音：智能实时语音播报功能 喷料：自动四路定量喷料 进水：配摇摆式进水龙头 清洗：一键式自动清洗，水枪辅助清洗 翻炒方式：行星搅拌，翻炒均匀，无死角 清洁喷枪：优质高压喷枪（配2米软管）",
+    specificationsEn:
+      'Material: Premium Stainless Steel; Heating Method: Natural gas/LPG; Voltage: 380V/50Hz, Power: 3000W; Wok Body: Φ1200*H600-732mm; Wok Capacity: 450L; Wok Body Material: Composite 304 Stainless Steel; Display: 10-inch multi-function touch display; Tilting Method: Electric tilting; Gas Inlet: 3/4" male thread; Water Inlet: 1/2" male thread; Menu: Stores 800 recipes (smart learning function); Voice: Smart real-time voice broadcast; Spraying: Auto four-way quantitative spraying; Water Inlet: Swivel water faucet; Cleaning: One-key automatic cleaning, water gun assisted cleaning; Stirring Method: Planetary Stirring, even stirring, no dead corners; Cleaning Spray Gun: Premium high-pressure spray gun (with 2m hose)',
     power: "3000W",
     voltage: "380V/50Hz，",
     material: "采用优质不锈钢加热方式：天然气/液化气",
@@ -2797,15 +3211,18 @@ window.PRODUCT_DATA_TABLE = [
       {
         filePath: "/assets/images/products/DLB-QXC120R-1.webp",
         isPrimary: true,
-        isHires: false
-      }
+        isHires: false,
+      },
     ],
     is_home_core: false,
     highlights: "",
-    scenarios: "用途：适用于院校企业机关食堂、中央厨房团膳等煸炒烹饪50-100kg菜量；焖炖烹饪200-400kg菜量。也可用于食品厂炒制各类酱料，馅料等等。",
-    usage: "用途：适用于院校企业机关食堂、中央厨房团膳等煸炒烹饪50-100kg菜量；焖炖烹饪200-400kg菜量。也可用于食品厂炒制各类酱料，馅料等等。",
-    usageEn: "Suitable for school, corporate & institutional cafeterias, central kitchens & group catering, and more. Stir-frying capacity: 50–100 kg per batch; braising/stewing capacity: 200–400 kg per batch. Also suitable for food factories to stir-fry various sauces, fillings, and more.",
-    materialEn: "Premium stainless steel, gas/LPG heating"
+    scenarios:
+      "用途：适用于院校企业机关食堂、中央厨房团膳等煸炒烹饪50-100kg菜量；焖炖烹饪200-400kg菜量。也可用于食品厂炒制各类酱料，馅料等等。",
+    usage:
+      "用途：适用于院校企业机关食堂、中央厨房团膳等煸炒烹饪50-100kg菜量；焖炖烹饪200-400kg菜量。也可用于食品厂炒制各类酱料，馅料等等。",
+    usageEn:
+      "Suitable for school, corporate & institutional cafeterias, central kitchens & group catering, and more. Stir-frying capacity: 50–100 kg per batch; braising/stewing capacity: 200–400 kg per batch. Also suitable for food factories to stir-fry various sauces, fillings, and more.",
+    materialEn: "Premium stainless steel, gas/LPG heating",
   },
   {
     model: "DLB-A60-J",
@@ -2814,12 +3231,15 @@ window.PRODUCT_DATA_TABLE = [
     nameEn: "Hood-type Commercial Dishwasher (Economy)",
     category: "辅助系列",
     subCategory: "揭盖式洗碗机",
-    specifications: "机身材质：优质不锈钢 清洗高度/(mm)：450 适用场所规模(餐位)：100~300 整机洗涤碗碟能力（框/H）：60 主洗水泵（KW）：0.73 主洗加热器（KW）：3 喷淋加热器（KW)：6 额定功率（KW)进水温度10℃：6.73 额定电压：380V/3N",
-    specificationsEn: "Body Material: Premium Stainless Steel; Wash Height/(mm): 450; Venue Capacity (Diners): 100~300; Dish Washing Capacity (Racks/H): 60; Main Wash Pump (KW): 0.73; Main Wash Heater (KW): 3; Rinse Heater (KW): 6; Rated Power (KW)@Inlet 10°C: 6.73; Rated Voltage: 380V/3N",
+    specifications:
+      "机身材质：优质不锈钢 清洗高度/(mm)：450 适用场所规模(餐位)：100~300 整机洗涤碗碟能力（框/H）：60 主洗水泵（KW）：0.73 主洗加热器（KW）：3 喷淋加热器（KW)：6 额定功率（KW)进水温度10℃：6.73 额定电压：380V/3N",
+    specificationsEn:
+      "Body Material: Premium Stainless Steel; Wash Height/(mm): 450; Venue Capacity (Diners): 100~300; Dish Washing Capacity (Racks/H): 60; Main Wash Pump (KW): 0.73; Main Wash Heater (KW): 3; Rinse Heater (KW): 6; Rated Power (KW)@Inlet 10°C: 6.73; Rated Voltage: 380V/3N",
     power: "6.73",
     voltage: "380V/3N",
     material: "优质不锈钢",
-    productDimensions: "715×830×1400 空间（L*W*H）mm： 1000*1000*2000 进水位预置（离地H/ 离主机进水L）： 500mm/1000mm 排水位（孔&槽）预 置：离地高度≤100mm 进机电源位预置（离 地H/离主电控L）： 1400↑/1500 漏电保护器规格：4P 25A 主线电缆（铜）： RV5*4mm2",
+    productDimensions:
+      "715×830×1400 空间（L*W*H）mm： 1000*1000*2000 进水位预置（离地H/ 离主机进水L）： 500mm/1000mm 排水位（孔&槽）预 置：离地高度≤100mm 进机电源位预置（离 地H/离主电控L）： 1400↑/1500 漏电保护器规格：4P 25A 主线电缆（铜）： RV5*4mm2",
     throughput: "",
     averageTime: "",
     status: "在售",
@@ -2830,15 +3250,18 @@ window.PRODUCT_DATA_TABLE = [
       {
         filePath: "/assets/images/products/DLB-A60-J-1.webp",
         isPrimary: true,
-        isHires: false
-      }
+        isHires: false,
+      },
     ],
     is_home_core: false,
     highlights: "",
-    scenarios: "•内部件（主洗臂,漂洗臂,滤 网,支架）可轻松拆装,方便日常 清洁 •数码管显示操作面板,一键启停 操作,屏幕上可即时显示机器运行 参数 •一体式冲压水箱,大圆角设计， 不残留脏污 •水箱与滤网前置式设计,360° 全景视角,日常清洁非常简单和方 便",
-    usage: "•内部件（主洗臂,漂洗臂,滤 网,支架）可轻松拆装,方便日常 清洁 •数码管显示操作面板,一键启停 操作,屏幕上可即时显示机器运行 参数 •一体式冲压水箱,大圆角设计， 不残留脏污 •水箱与滤网前置式设计,360° 全景视角,日常清洁非常简单和方 便",
-    usageEn: "• Internal components (main wash arm, rinse arm, filter, rack) easily removable for convenient daily cleaning • Digital display control panel with one-touch start/stop; machine parameters displayed in real time on screen • Integrated pressed water tank with large-radius corner design to prevent residue buildup • Front-mounted water tank and filter design with 360° panoramic view for effortless daily cleaning",
-    materialEn: "Premium stainless steel"
+    scenarios:
+      "•内部件（主洗臂,漂洗臂,滤 网,支架）可轻松拆装,方便日常 清洁 •数码管显示操作面板,一键启停 操作,屏幕上可即时显示机器运行 参数 •一体式冲压水箱,大圆角设计， 不残留脏污 •水箱与滤网前置式设计,360° 全景视角,日常清洁非常简单和方 便",
+    usage:
+      "•内部件（主洗臂,漂洗臂,滤 网,支架）可轻松拆装,方便日常 清洁 •数码管显示操作面板,一键启停 操作,屏幕上可即时显示机器运行 参数 •一体式冲压水箱,大圆角设计， 不残留脏污 •水箱与滤网前置式设计,360° 全景视角,日常清洁非常简单和方 便",
+    usageEn:
+      "• Internal components (main wash arm, rinse arm, filter, rack) easily removable for convenient daily cleaning • Digital display control panel with one-touch start/stop; machine parameters displayed in real time on screen • Integrated pressed water tank with large-radius corner design to prevent residue buildup • Front-mounted water tank and filter design with 360° panoramic view for effortless daily cleaning",
+    materialEn: "Premium stainless steel",
   },
   {
     model: "DLB-A60-G",
@@ -2847,12 +3270,15 @@ window.PRODUCT_DATA_TABLE = [
     nameEn: "Hood-type Commercial Dishwasher (Standard)",
     category: "辅助系列",
     subCategory: "揭盖式洗碗机",
-    specifications: "机身材质：优质不锈钢 清洗高度/(mm)：450 适用场所规模(餐位)：100~300 整机洗涤碗碟能力（框/H）：60 主洗水泵（KW）：0.73 主洗加热器（KW）：3 喷淋加热器（KW)：6 额定功率（KW)进水温度10℃：6.73 额定电压：380V/3N",
-    specificationsEn: "Body Material: Premium Stainless Steel; Wash Height/(mm): 450; Venue Capacity (Diners): 100~300; Dish Washing Capacity (Racks/H): 60; Main Wash Pump (KW): 0.73; Main Wash Heater (KW): 3; Rinse Heater (KW): 6; Rated Power (KW)@Inlet 10°C: 6.73; Rated Voltage: 380V/3N",
+    specifications:
+      "机身材质：优质不锈钢 清洗高度/(mm)：450 适用场所规模(餐位)：100~300 整机洗涤碗碟能力（框/H）：60 主洗水泵（KW）：0.73 主洗加热器（KW）：3 喷淋加热器（KW)：6 额定功率（KW)进水温度10℃：6.73 额定电压：380V/3N",
+    specificationsEn:
+      "Body Material: Premium Stainless Steel; Wash Height/(mm): 450; Venue Capacity (Diners): 100~300; Dish Washing Capacity (Racks/H): 60; Main Wash Pump (KW): 0.73; Main Wash Heater (KW): 3; Rinse Heater (KW): 6; Rated Power (KW)@Inlet 10°C: 6.73; Rated Voltage: 380V/3N",
     power: "6.73",
     voltage: "380V/3N",
     material: "优质不锈钢",
-    productDimensions: "715×830×1470 空间（L*W*H）mm：1000*1000*2000 进水位预置（离地H/离主机进水L）：500mm/1000mm 排水位（孔&槽）预置：离地高度≤100mm 进机电源位预置（离地H/离主电控L）：1400↑/1500 漏电保护器规格：4P  25A 主线电缆（铜）：RV5*4mm2",
+    productDimensions:
+      "715×830×1470 空间（L*W*H）mm：1000*1000*2000 进水位预置（离地H/离主机进水L）：500mm/1000mm 排水位（孔&槽）预置：离地高度≤100mm 进机电源位预置（离地H/离主电控L）：1400↑/1500 漏电保护器规格：4P  25A 主线电缆（铜）：RV5*4mm2",
     throughput: "",
     averageTime: "",
     status: "在售",
@@ -2863,15 +3289,18 @@ window.PRODUCT_DATA_TABLE = [
       {
         filePath: "/assets/images/products/DLB-A60-G-1.webp",
         isPrimary: true,
-        isHires: false
-      }
+        isHires: false,
+      },
     ],
     is_home_core: false,
     highlights: "",
-    scenarios: "•内部件（主洗臂,漂洗臂,滤网,支架）可轻松拆装,方便日常清洁 •7英寸LED屏操作面板,一键启停操作,屏幕上可即时显示机器运行状态 •一体式冲压水箱,大圆角设计，不残留脏污 •水箱与滤网前置式设计,360°全景视角,日常清洁非常简单和方便 •大尺寸透视窗设计，全景观察机器整个清洗过程",
-    usage: "•内部件（主洗臂,漂洗臂,滤网,支架）可轻松拆装,方便日常清洁 •7英寸LED屏操作面板,一键启停操作,屏幕上可即时显示机器运行状态 •一体式冲压水箱,大圆角设计，不残留脏污 •水箱与滤网前置式设计,360°全景视角,日常清洁非常简单和方便 •大尺寸透视窗设计，全景观察机器整个清洗过程",
-    usageEn: "• Internal components (main wash arm, rinse arm, filter, rack) easily removable for convenient daily cleaning • 7-inch LED display control panel with one-touch start/stop; machine status displayed in real time on screen • Integrated pressed water tank with large-radius corner design to prevent residue buildup • Front-mounted water tank and filter design with 360° panoramic view for effortless daily cleaning • Large viewing window design for full visibility of the entire washing process",
-    materialEn: "Premium stainless steel"
+    scenarios:
+      "•内部件（主洗臂,漂洗臂,滤网,支架）可轻松拆装,方便日常清洁 •7英寸LED屏操作面板,一键启停操作,屏幕上可即时显示机器运行状态 •一体式冲压水箱,大圆角设计，不残留脏污 •水箱与滤网前置式设计,360°全景视角,日常清洁非常简单和方便 •大尺寸透视窗设计，全景观察机器整个清洗过程",
+    usage:
+      "•内部件（主洗臂,漂洗臂,滤网,支架）可轻松拆装,方便日常清洁 •7英寸LED屏操作面板,一键启停操作,屏幕上可即时显示机器运行状态 •一体式冲压水箱,大圆角设计，不残留脏污 •水箱与滤网前置式设计,360°全景视角,日常清洁非常简单和方便 •大尺寸透视窗设计，全景观察机器整个清洗过程",
+    usageEn:
+      "• Internal components (main wash arm, rinse arm, filter, rack) easily removable for convenient daily cleaning • 7-inch LED display control panel with one-touch start/stop; machine status displayed in real time on screen • Integrated pressed water tank with large-radius corner design to prevent residue buildup • Front-mounted water tank and filter design with 360° panoramic view for effortless daily cleaning • Large viewing window design for full visibility of the entire washing process",
+    materialEn: "Premium stainless steel",
   },
   {
     model: "DLB-A60-Z",
@@ -2880,12 +3309,15 @@ window.PRODUCT_DATA_TABLE = [
     nameEn: "Hood-type Commercial Dishwasher (Smart)",
     category: "辅助系列",
     subCategory: "揭盖式洗碗机",
-    specifications: "机身材质：优质不锈钢 清洗高度/(mm)：450 适用场所规模(餐位)：100~300 整机洗涤碗碟能力（框/H）：60 主洗水泵（KW）：0.73 主洗加热器（KW）：3 喷淋加热器（KW)：6 额定功率（KW)进水温度10℃：6.73 额定电压：380V/3N",
-    specificationsEn: "Body Material: Premium Stainless Steel; Wash Height/(mm): 450; Venue Capacity (Diners): 100~300; Dish Washing Capacity (Racks/H): 60; Main Wash Pump (KW): 0.73; Main Wash Heater (KW): 3; Rinse Heater (KW): 6; Rated Power (KW)@Inlet 10°C: 6.73; Rated Voltage: 380V/3N",
+    specifications:
+      "机身材质：优质不锈钢 清洗高度/(mm)：450 适用场所规模(餐位)：100~300 整机洗涤碗碟能力（框/H）：60 主洗水泵（KW）：0.73 主洗加热器（KW）：3 喷淋加热器（KW)：6 额定功率（KW)进水温度10℃：6.73 额定电压：380V/3N",
+    specificationsEn:
+      "Body Material: Premium Stainless Steel; Wash Height/(mm): 450; Venue Capacity (Diners): 100~300; Dish Washing Capacity (Racks/H): 60; Main Wash Pump (KW): 0.73; Main Wash Heater (KW): 3; Rinse Heater (KW): 6; Rated Power (KW)@Inlet 10°C: 6.73; Rated Voltage: 380V/3N",
     power: "6.73",
     voltage: "380V/3N",
     material: "优质不锈钢",
-    productDimensions: "715×830×1550 空间（L*W*H）mm： 1000*1000*2000 进水位预置（离地H/ 离主机进水L）： 500mm/1000mm 排水位（孔&槽）预 置：离地高度≤100mm 进机电源位预置（离 地H/离主电控L）： 1400↑/1500 漏电保护器规格：4P 25A 主线电缆（铜）： RV5*4mm2",
+    productDimensions:
+      "715×830×1550 空间（L*W*H）mm： 1000*1000*2000 进水位预置（离地H/ 离主机进水L）： 500mm/1000mm 排水位（孔&槽）预 置：离地高度≤100mm 进机电源位预置（离 地H/离主电控L）： 1400↑/1500 漏电保护器规格：4P 25A 主线电缆（铜）： RV5*4mm2",
     throughput: "",
     averageTime: "",
     status: "在售",
@@ -2896,15 +3328,18 @@ window.PRODUCT_DATA_TABLE = [
       {
         filePath: "/assets/images/products/DLB-A60-Z-1.webp",
         isPrimary: true,
-        isHires: false
-      }
+        isHires: false,
+      },
     ],
     is_home_core: false,
     highlights: "",
-    scenarios: "•内部件（主洗臂,漂洗臂,滤 网,支架）可轻松拆装,方便日常 清洁 •7英寸LCD触摸液晶屏操作面板, 人性化的交互界面&最佳的操作视 角（动态显示功能，温度，时间各 种参数可以自行设置，内置各种 碗碟材料的运行模式及清洗蔬果类 运行模式） •一体式冲压水箱,大圆角设计， 不残留脏污 •水箱与滤网前置式设计,360° 全景视角,日常清洁非常简单和方 便 •大尺寸透视窗设计，全景观察机 器整个清洗过程 •380V和220V轻松切换,三个功率 档次可供调节，便于应对多变的使 用环境",
-    usage: "•内部件（主洗臂,漂洗臂,滤 网,支架）可轻松拆装,方便日常 清洁 •7英寸LCD触摸液晶屏操作面板, 人性化的交互界面&最佳的操作视 角（动态显示功能，温度，时间各 种参数可以自行设置，内置各种 碗碟材料的运行模式及清洗蔬果类 运行模式） •一体式冲压水箱,大圆角设计， 不残留脏污 •水箱与滤网前置式设计,360° 全景视角,日常清洁非常简单和方 便 •大尺寸透视窗设计，全景观察机 器整个清洗过程 •380V和220V轻松切换,三个功率 档次可供调节，便于应对多变的使 用环境",
-    usageEn: "• Internal components (main wash arm, rinse arm, filter, rack) easily removable for convenient daily cleaning • 7-inch LCD touchscreen control panel with intuitive interface and optimal viewing angle (dynamic display of temperature, time and other customizable parameters; built-in operating modes for various tableware materials and fruit/vegetable washing) • Integrated pressed water tank with large-radius corner design to prevent residue buildup • Front-mounted water tank and filter design with 360° panoramic view for effortless daily cleaning • Large viewing window design for full visibility of the entire washing process • Easy switching between 380V and 220V; three adjustable power levels to adapt to various operating environments",
-    materialEn: "Premium stainless steel"
+    scenarios:
+      "•内部件（主洗臂,漂洗臂,滤 网,支架）可轻松拆装,方便日常 清洁 •7英寸LCD触摸液晶屏操作面板, 人性化的交互界面&最佳的操作视 角（动态显示功能，温度，时间各 种参数可以自行设置，内置各种 碗碟材料的运行模式及清洗蔬果类 运行模式） •一体式冲压水箱,大圆角设计， 不残留脏污 •水箱与滤网前置式设计,360° 全景视角,日常清洁非常简单和方 便 •大尺寸透视窗设计，全景观察机 器整个清洗过程 •380V和220V轻松切换,三个功率 档次可供调节，便于应对多变的使 用环境",
+    usage:
+      "•内部件（主洗臂,漂洗臂,滤 网,支架）可轻松拆装,方便日常 清洁 •7英寸LCD触摸液晶屏操作面板, 人性化的交互界面&最佳的操作视 角（动态显示功能，温度，时间各 种参数可以自行设置，内置各种 碗碟材料的运行模式及清洗蔬果类 运行模式） •一体式冲压水箱,大圆角设计， 不残留脏污 •水箱与滤网前置式设计,360° 全景视角,日常清洁非常简单和方 便 •大尺寸透视窗设计，全景观察机 器整个清洗过程 •380V和220V轻松切换,三个功率 档次可供调节，便于应对多变的使 用环境",
+    usageEn:
+      "• Internal components (main wash arm, rinse arm, filter, rack) easily removable for convenient daily cleaning • 7-inch LCD touchscreen control panel with intuitive interface and optimal viewing angle (dynamic display of temperature, time and other customizable parameters; built-in operating modes for various tableware materials and fruit/vegetable washing) • Integrated pressed water tank with large-radius corner design to prevent residue buildup • Front-mounted water tank and filter design with 360° panoramic view for effortless daily cleaning • Large viewing window design for full visibility of the entire washing process • Easy switching between 380V and 220V; three adjustable power levels to adapt to various operating environments",
+    materialEn: "Premium stainless steel",
   },
   {
     model: "DLB-A2800",
@@ -2913,12 +3348,16 @@ window.PRODUCT_DATA_TABLE = [
     nameEn: "Conveyor Commercial Dishwasher (1-Tank 1-Rinse)",
     category: "辅助系列",
     subCategory: "长龙洗碗机",
-    specifications: "机身材质：优质不锈钢 导轨宽度/(mm)：610 适用场所规模(餐位)：300-1000 整机洗涤碗碟能力（个/H）：3400 主洗水泵（KW）：1.5 主洗加热器（KW）：12 喷淋加热器（KW)：30 传送电机（KW）：0.2 额定功率（KW)进水温度10℃：43.5 额定电压：380V/3N",
-    specificationsEn: "Body Material: Premium Stainless Steel; Rail Width/(mm): 610; Venue Capacity (Diners): 300-1000; Dish Washing Capacity (Pcs/H): 3400; Main Wash Pump (KW): 1.5; Main Wash Heater (KW): 12; Rinse Heater (KW): 30; Conveyor Motor (KW): 0.2; Rated Power (KW)@Inlet 10°C: 43.5; Rated Voltage: 380V/3N",
+    specifications:
+      "机身材质：优质不锈钢 导轨宽度/(mm)：610 适用场所规模(餐位)：300-1000 整机洗涤碗碟能力（个/H）：3400 主洗水泵（KW）：1.5 主洗加热器（KW）：12 喷淋加热器（KW)：30 传送电机（KW）：0.2 额定功率（KW)进水温度10℃：43.5 额定电压：380V/3N",
+    specificationsEn:
+      "Body Material: Premium Stainless Steel; Rail Width/(mm): 610; Venue Capacity (Diners): 300-1000; Dish Washing Capacity (Pcs/H): 3400; Main Wash Pump (KW): 1.5; Main Wash Heater (KW): 12; Rinse Heater (KW): 30; Conveyor Motor (KW): 0.2; Rated Power (KW)@Inlet 10°C: 43.5; Rated Voltage: 380V/3N",
     power: "43.5",
     voltage: "380V/3N",
-    material: "优质不锈钢导轨宽度/(mm)：610适用场所规模(餐位)：300-1000整机洗涤碗碟能力（个/H）：3400主洗水泵（KW）：1.5主洗加热器（KW）：12喷淋加热器（KW)：30传送电机（KW）：0.2",
-    productDimensions: "2800×860×1630 进水位预置（离地H/ 离主机进水L）： 500mm/1000mm 排水位（孔&槽）预 置：离地高度≤ 100mm 进机电源位预置（离 地H/离主电控L）： 1400↑/1500漏电保 护器规格：4P125A 主线电缆（铜）： RV5*25mm2",
+    material:
+      "优质不锈钢导轨宽度/(mm)：610适用场所规模(餐位)：300-1000整机洗涤碗碟能力（个/H）：3400主洗水泵（KW）：1.5主洗加热器（KW）：12喷淋加热器（KW)：30传送电机（KW）：0.2",
+    productDimensions:
+      "2800×860×1630 进水位预置（离地H/ 离主机进水L）： 500mm/1000mm 排水位（孔&槽）预 置：离地高度≤ 100mm 进机电源位预置（离 地H/离主电控L）： 1400↑/1500漏电保 护器规格：4P125A 主线电缆（铜）： RV5*25mm2",
     throughput: "",
     averageTime: "",
     status: "在售",
@@ -2929,15 +3368,18 @@ window.PRODUCT_DATA_TABLE = [
       {
         filePath: "/assets/images/products/DLB-A2800-1.webp",
         isPrimary: true,
-        isHires: false
-      }
+        isHires: false,
+      },
     ],
     is_home_core: true,
     highlights: "",
-    scenarios: "•灵活的模块化设计，可根据不同 的需求进行搭配，洗涤量3400个/ 小时 •双道漂洗设计，确保最佳的漂洗 效果，无残留 •304不锈钢洗涤臂，内凹式喷 嘴，水幕均匀，不易堵塞 •精准温控设计，确保最低漂洗温 度在82°C以上，卫生有保证 •入口自动感应节能设计，长时间 不使用自动停止运行，节省能耗和 洗涤剂用量",
-    usage: "•灵活的模块化设计，可根据不同 的需求进行搭配，洗涤量3400个/ 小时 •双道漂洗设计，确保最佳的漂洗 效果，无残留 •304不锈钢洗涤臂，内凹式喷 嘴，水幕均匀，不易堵塞 •精准温控设计，确保最低漂洗温 度在82°C以上，卫生有保证 •入口自动感应节能设计，长时间 不使用自动停止运行，节省能耗和 洗涤剂用量",
-    usageEn: "• Flexible modular design for customized configurations based on different needs; washing capacity: 3,400 pieces/hour • Dual-channel rinse design ensures optimal rinsing results with zero residue • 304 stainless steel wash arms with recessed nozzles for even water coverage and clog resistance • Precision temperature control ensures minimum rinse temperature above 82°C for guaranteed hygiene • Auto-sensing energy-saving design at entry; automatically stops after extended idle periods to save energy and detergent",
-    materialEn: "Premium stainless steel"
+    scenarios:
+      "•灵活的模块化设计，可根据不同 的需求进行搭配，洗涤量3400个/ 小时 •双道漂洗设计，确保最佳的漂洗 效果，无残留 •304不锈钢洗涤臂，内凹式喷 嘴，水幕均匀，不易堵塞 •精准温控设计，确保最低漂洗温 度在82°C以上，卫生有保证 •入口自动感应节能设计，长时间 不使用自动停止运行，节省能耗和 洗涤剂用量",
+    usage:
+      "•灵活的模块化设计，可根据不同 的需求进行搭配，洗涤量3400个/ 小时 •双道漂洗设计，确保最佳的漂洗 效果，无残留 •304不锈钢洗涤臂，内凹式喷 嘴，水幕均匀，不易堵塞 •精准温控设计，确保最低漂洗温 度在82°C以上，卫生有保证 •入口自动感应节能设计，长时间 不使用自动停止运行，节省能耗和 洗涤剂用量",
+    usageEn:
+      "• Flexible modular design for customized configurations based on different needs; washing capacity: 3,400 pieces/hour • Dual-channel rinse design ensures optimal rinsing results with zero residue • 304 stainless steel wash arms with recessed nozzles for even water coverage and clog resistance • Precision temperature control ensures minimum rinse temperature above 82°C for guaranteed hygiene • Auto-sensing energy-saving design at entry; automatically stops after extended idle periods to save energy and detergent",
+    materialEn: "Premium stainless steel",
   },
   {
     model: "DLB-A3600",
@@ -2946,12 +3388,16 @@ window.PRODUCT_DATA_TABLE = [
     nameEn: "Conveyor Commercial Dishwasher (1-Tank 2-Rinse)",
     category: "辅助系列",
     subCategory: "长龙洗碗机",
-    specifications: "机身材质：优质不锈钢 导轨宽度/(mm)：610 适用场所规模(餐位)：300-1000 整机洗涤碗碟能力（个/H）：4000 主洗水泵（KW）：1.5 主洗加热器（KW）：12 喷淋加热器（KW)：43.8 传送电机（KW）：0.2 额定功率（KW)进水温度10℃：43.5 额定电压：380V/3N",
-    specificationsEn: "Body Material: Premium Stainless Steel; Rail Width/(mm): 610; Venue Capacity (Diners): 300-1000; Dish Washing Capacity (Pcs/H): 4000; Main Wash Pump (KW): 1.5; Main Wash Heater (KW): 12; Rinse Heater (KW): 43.8; Conveyor Motor (KW): 0.2; Rated Power (KW)@Inlet 10°C: 43.5; Rated Voltage: 380V/3N",
+    specifications:
+      "机身材质：优质不锈钢 导轨宽度/(mm)：610 适用场所规模(餐位)：300-1000 整机洗涤碗碟能力（个/H）：4000 主洗水泵（KW）：1.5 主洗加热器（KW）：12 喷淋加热器（KW)：43.8 传送电机（KW）：0.2 额定功率（KW)进水温度10℃：43.5 额定电压：380V/3N",
+    specificationsEn:
+      "Body Material: Premium Stainless Steel; Rail Width/(mm): 610; Venue Capacity (Diners): 300-1000; Dish Washing Capacity (Pcs/H): 4000; Main Wash Pump (KW): 1.5; Main Wash Heater (KW): 12; Rinse Heater (KW): 43.8; Conveyor Motor (KW): 0.2; Rated Power (KW)@Inlet 10°C: 43.5; Rated Voltage: 380V/3N",
     power: "43.5",
     voltage: "380V/3N",
-    material: "优质不锈钢导轨宽度/(mm)：610适用场所规模(餐位)：300-1000整机洗涤碗碟能力（个/H）：4000主洗水泵（KW）：1.5主洗加热器（KW）：12喷淋加热器（KW)：43.8传送电机（KW）：0.2",
-    productDimensions: "3600×860×1630 进水位预置（离地H/离主机进水L）：500mm/1000mm 排水位（孔&槽）预置：离地高度≤100mm 进机电源位预置（离地H/离主电控L）：1400↑/1500 漏电保护器规格：4P  125A 主线电缆（铜）：RV5*25mm2",
+    material:
+      "优质不锈钢导轨宽度/(mm)：610适用场所规模(餐位)：300-1000整机洗涤碗碟能力（个/H）：4000主洗水泵（KW）：1.5主洗加热器（KW）：12喷淋加热器（KW)：43.8传送电机（KW）：0.2",
+    productDimensions:
+      "3600×860×1630 进水位预置（离地H/离主机进水L）：500mm/1000mm 排水位（孔&槽）预置：离地高度≤100mm 进机电源位预置（离地H/离主电控L）：1400↑/1500 漏电保护器规格：4P  125A 主线电缆（铜）：RV5*25mm2",
     throughput: "",
     averageTime: "",
     status: "在售",
@@ -2962,15 +3408,18 @@ window.PRODUCT_DATA_TABLE = [
       {
         filePath: "/assets/images/products/DLB-A3600-1.webp",
         isPrimary: true,
-        isHires: false
-      }
+        isHires: false,
+      },
     ],
     is_home_core: false,
     highlights: "",
-    scenarios: "•灵活的模块化设计，可根据不同的需求进行搭配，洗涤量4000个/小时 •双道漂洗设计，确保最佳的漂洗效果，无残留 •304不锈钢洗涤臂，内凹式喷嘴，水幕均匀，不易堵塞 •精准温控设计，确保最低漂洗温度在82°C以上，卫生有保证 •入口自动感应节能设计，长时间不使用自动停止运行，节省能耗和洗涤剂用量",
-    usage: "•灵活的模块化设计，可根据不同的需求进行搭配，洗涤量4000个/小时 •双道漂洗设计，确保最佳的漂洗效果，无残留 •304不锈钢洗涤臂，内凹式喷嘴，水幕均匀，不易堵塞 •精准温控设计，确保最低漂洗温度在82°C以上，卫生有保证 •入口自动感应节能设计，长时间不使用自动停止运行，节省能耗和洗涤剂用量",
-    usageEn: "• Flexible modular design for customized configurations based on different needs; washing capacity: 4,000 pieces/hour • Dual-channel rinse design ensures optimal rinsing results with zero residue • 304 stainless steel wash arms with recessed nozzles for even water coverage and clog resistance • Precision temperature control ensures minimum rinse temperature above 82°C for guaranteed hygiene • Auto-sensing energy-saving design at entry; automatically stops after extended idle periods to save energy and detergent",
-    materialEn: "Premium stainless steel"
+    scenarios:
+      "•灵活的模块化设计，可根据不同的需求进行搭配，洗涤量4000个/小时 •双道漂洗设计，确保最佳的漂洗效果，无残留 •304不锈钢洗涤臂，内凹式喷嘴，水幕均匀，不易堵塞 •精准温控设计，确保最低漂洗温度在82°C以上，卫生有保证 •入口自动感应节能设计，长时间不使用自动停止运行，节省能耗和洗涤剂用量",
+    usage:
+      "•灵活的模块化设计，可根据不同的需求进行搭配，洗涤量4000个/小时 •双道漂洗设计，确保最佳的漂洗效果，无残留 •304不锈钢洗涤臂，内凹式喷嘴，水幕均匀，不易堵塞 •精准温控设计，确保最低漂洗温度在82°C以上，卫生有保证 •入口自动感应节能设计，长时间不使用自动停止运行，节省能耗和洗涤剂用量",
+    usageEn:
+      "• Flexible modular design for customized configurations based on different needs; washing capacity: 4,000 pieces/hour • Dual-channel rinse design ensures optimal rinsing results with zero residue • 304 stainless steel wash arms with recessed nozzles for even water coverage and clog resistance • Precision temperature control ensures minimum rinse temperature above 82°C for guaranteed hygiene • Auto-sensing energy-saving design at entry; automatically stops after extended idle periods to save energy and detergent",
+    materialEn: "Premium stainless steel",
   },
   {
     model: "DLB-A4600",
@@ -2979,12 +3428,16 @@ window.PRODUCT_DATA_TABLE = [
     nameEn: "Large Conveyor Dishwasher (1-Tank 2-Rinse 1-Dryer)",
     category: "辅助系列",
     subCategory: "长龙洗碗机",
-    specifications: "整机质保：1年 机身材质：优质不锈钢 导轨宽度/(mm)：610 适用场所规模(餐位)：1000以上 整机洗涤碗碟能力（个/H）：5000 主洗水泵（KW）：1.5 喷淋水泵（KW）：0.37 主洗加热器（KW）：12 喷淋加热器（KW)：30 烘干加热器（KW)：9 烘干风机（KW）：0.75 传送电机（KW）：0.2 额定功率（KW)进水温度10℃：53.8 额定电压：380V/3N",
-    specificationsEn: "Warranty: 1 year; Body Material: Premium Stainless Steel; Rail Width/(mm): 610; Venue Capacity (Diners): 1000+; Dish Washing Capacity (Pcs/H): 5000; Main Wash Pump (KW): 1.5; Rinse Pump (KW): 0.37; Main Wash Heater (KW): 12; Rinse Heater (KW): 30; Drying Heater (KW): 9; Drying Fan (KW): 0.75; Conveyor Motor (KW): 0.2; Rated Power (KW)@Inlet 10°C: 53.8; Rated Voltage: 380V/3N",
+    specifications:
+      "整机质保：1年 机身材质：优质不锈钢 导轨宽度/(mm)：610 适用场所规模(餐位)：1000以上 整机洗涤碗碟能力（个/H）：5000 主洗水泵（KW）：1.5 喷淋水泵（KW）：0.37 主洗加热器（KW）：12 喷淋加热器（KW)：30 烘干加热器（KW)：9 烘干风机（KW）：0.75 传送电机（KW）：0.2 额定功率（KW)进水温度10℃：53.8 额定电压：380V/3N",
+    specificationsEn:
+      "Warranty: 1 year; Body Material: Premium Stainless Steel; Rail Width/(mm): 610; Venue Capacity (Diners): 1000+; Dish Washing Capacity (Pcs/H): 5000; Main Wash Pump (KW): 1.5; Rinse Pump (KW): 0.37; Main Wash Heater (KW): 12; Rinse Heater (KW): 30; Drying Heater (KW): 9; Drying Fan (KW): 0.75; Conveyor Motor (KW): 0.2; Rated Power (KW)@Inlet 10°C: 53.8; Rated Voltage: 380V/3N",
     power: "53.8",
     voltage: "380V/3N",
-    material: "优质不锈钢导轨宽度/(mm)：610适用场所规模(餐位)：1000以上整机洗涤碗碟能力（个/H）：5000主洗水泵（KW）：1.5喷淋水泵（KW）：0.37主洗加热器（KW）：12喷淋加热器（KW)：30烘干加热器（KW)：9烘干风机（KW）：0.75传送电机（KW）：0.2",
-    productDimensions: "4600×860×2020 进水位预置（离地H/ 离主机进水L）： 500mm/1000mm 排水位（孔&槽）预 置：离地高度≤100mm 进机电源位预置（离 地H/离主电控L）： 1400↑/1500 漏电保护器规格：4P 125A 主线电缆（铜）： RV5*25mm2",
+    material:
+      "优质不锈钢导轨宽度/(mm)：610适用场所规模(餐位)：1000以上整机洗涤碗碟能力（个/H）：5000主洗水泵（KW）：1.5喷淋水泵（KW）：0.37主洗加热器（KW）：12喷淋加热器（KW)：30烘干加热器（KW)：9烘干风机（KW）：0.75传送电机（KW）：0.2",
+    productDimensions:
+      "4600×860×2020 进水位预置（离地H/ 离主机进水L）： 500mm/1000mm 排水位（孔&槽）预 置：离地高度≤100mm 进机电源位预置（离 地H/离主电控L）： 1400↑/1500 漏电保护器规格：4P 125A 主线电缆（铜）： RV5*25mm2",
     throughput: "",
     averageTime: "",
     status: "在售",
@@ -2995,15 +3448,18 @@ window.PRODUCT_DATA_TABLE = [
       {
         filePath: "/assets/images/products/DLB-A4600-1.webp",
         isPrimary: true,
-        isHires: false
-      }
+        isHires: false,
+      },
     ],
     is_home_core: false,
     highlights: "",
-    scenarios: "•灵活的模块化设计，可根据不同 的需求进行搭配，洗涤量5000个/ 小时 •双道漂洗设计，确保最佳的漂洗 效果，无残留 •304不锈钢洗涤臂，内凹式喷 嘴，水幕均匀，不易堵塞 •精准温控设计，确保最低漂洗温 度在82°C以上，卫生有保证 •入口自动感应节能设计，长时间 不使用自动停止运行，节省能耗和 洗涤剂用量 •热风循环烘干系统，85℃以上的 热风确保餐具快速干燥",
-    usage: "•灵活的模块化设计，可根据不同 的需求进行搭配，洗涤量5000个/ 小时 •双道漂洗设计，确保最佳的漂洗 效果，无残留 •304不锈钢洗涤臂，内凹式喷 嘴，水幕均匀，不易堵塞 •精准温控设计，确保最低漂洗温 度在82°C以上，卫生有保证 •入口自动感应节能设计，长时间 不使用自动停止运行，节省能耗和 洗涤剂用量 •热风循环烘干系统，85℃以上的 热风确保餐具快速干燥",
-    usageEn: "• Flexible modular design for customized configurations based on different needs; washing capacity: 5,000 pieces/hour • Dual-channel rinse design ensures optimal rinsing results with zero residue • 304 stainless steel wash arms with recessed nozzles for even water coverage and clog resistance • Precision temperature control ensures minimum rinse temperature above 82°C for guaranteed hygiene • Auto-sensing energy-saving design at entry; automatically stops after extended idle periods to save energy and detergent • Hot air circulation drying system with air above 85°C for fast, thorough dishware drying",
-    materialEn: "Premium stainless steel"
+    scenarios:
+      "•灵活的模块化设计，可根据不同 的需求进行搭配，洗涤量5000个/ 小时 •双道漂洗设计，确保最佳的漂洗 效果，无残留 •304不锈钢洗涤臂，内凹式喷 嘴，水幕均匀，不易堵塞 •精准温控设计，确保最低漂洗温 度在82°C以上，卫生有保证 •入口自动感应节能设计，长时间 不使用自动停止运行，节省能耗和 洗涤剂用量 •热风循环烘干系统，85℃以上的 热风确保餐具快速干燥",
+    usage:
+      "•灵活的模块化设计，可根据不同 的需求进行搭配，洗涤量5000个/ 小时 •双道漂洗设计，确保最佳的漂洗 效果，无残留 •304不锈钢洗涤臂，内凹式喷 嘴，水幕均匀，不易堵塞 •精准温控设计，确保最低漂洗温 度在82°C以上，卫生有保证 •入口自动感应节能设计，长时间 不使用自动停止运行，节省能耗和 洗涤剂用量 •热风循环烘干系统，85℃以上的 热风确保餐具快速干燥",
+    usageEn:
+      "• Flexible modular design for customized configurations based on different needs; washing capacity: 5,000 pieces/hour • Dual-channel rinse design ensures optimal rinsing results with zero residue • 304 stainless steel wash arms with recessed nozzles for even water coverage and clog resistance • Precision temperature control ensures minimum rinse temperature above 82°C for guaranteed hygiene • Auto-sensing energy-saving design at entry; automatically stops after extended idle periods to save energy and detergent • Hot air circulation drying system with air above 85°C for fast, thorough dishware drying",
+    materialEn: "Premium stainless steel",
   },
   {
     model: "DLB-A5400",
@@ -3012,12 +3468,16 @@ window.PRODUCT_DATA_TABLE = [
     nameEn: "Large Conveyor Dishwasher (2-Tank 2-Rinse 1-Dryer)",
     category: "辅助系列",
     subCategory: "长龙洗碗机",
-    specifications: "整机质保：1年 机身材质：优质不锈钢 导轨宽度/(mm)：610 适用场所规模(餐位)：1000以上 整机洗涤碗碟能力（个/H）：8000 主洗水泵（KW）：1.5x2 喷淋水泵（KW）：0.37 主洗加热器（KW）：12x2 喷淋加热器（KW)：30 烘干加热器（KW)：9 烘干风机（KW）：0.75 传送电机（KW）：0.2 额定功率（KW)进水温度10℃：67.3 额定电压：380V/3N",
-    specificationsEn: "Warranty: 1 year; Body Material: Premium Stainless Steel; Rail Width/(mm): 610; Venue Capacity (Diners): 1000+; Dish Washing Capacity (Pcs/H): 8000; Main Wash Pump (KW): 1.5x2; Rinse Pump (KW): 0.37; Main Wash Heater (KW): 12x2; Rinse Heater (KW): 30; Drying Heater (KW): 9; Drying Fan (KW): 0.75; Conveyor Motor (KW): 0.2; Rated Power (KW)@Inlet 10°C: 67.3; Rated Voltage: 380V/3N",
+    specifications:
+      "整机质保：1年 机身材质：优质不锈钢 导轨宽度/(mm)：610 适用场所规模(餐位)：1000以上 整机洗涤碗碟能力（个/H）：8000 主洗水泵（KW）：1.5x2 喷淋水泵（KW）：0.37 主洗加热器（KW）：12x2 喷淋加热器（KW)：30 烘干加热器（KW)：9 烘干风机（KW）：0.75 传送电机（KW）：0.2 额定功率（KW)进水温度10℃：67.3 额定电压：380V/3N",
+    specificationsEn:
+      "Warranty: 1 year; Body Material: Premium Stainless Steel; Rail Width/(mm): 610; Venue Capacity (Diners): 1000+; Dish Washing Capacity (Pcs/H): 8000; Main Wash Pump (KW): 1.5x2; Rinse Pump (KW): 0.37; Main Wash Heater (KW): 12x2; Rinse Heater (KW): 30; Drying Heater (KW): 9; Drying Fan (KW): 0.75; Conveyor Motor (KW): 0.2; Rated Power (KW)@Inlet 10°C: 67.3; Rated Voltage: 380V/3N",
     power: "67.3",
     voltage: "380V/3N",
-    material: "优质不锈钢导轨宽度/(mm)：610适用场所规模(餐位)：1000以上整机洗涤碗碟能力（个/H）：8000主洗水泵（KW）：1.5x2喷淋水泵（KW）：0.37主洗加热器（KW）：12x2喷淋加热器（KW)：30烘干加热器（KW)：9烘干风机（KW）：0.75传送电机（KW）：0.2",
-    productDimensions: "5400×860×2020 进水位预置（离地H/ 离主机进水L）： 500mm/1000mm 排水位（孔&槽）预 置：离地高度≤100mm 进机电源位预置（离 地H/离主电控L）： 1400↑/1500 漏电保护器规格：4P 125A 主线电缆（铜）： RV5*25mm2",
+    material:
+      "优质不锈钢导轨宽度/(mm)：610适用场所规模(餐位)：1000以上整机洗涤碗碟能力（个/H）：8000主洗水泵（KW）：1.5x2喷淋水泵（KW）：0.37主洗加热器（KW）：12x2喷淋加热器（KW)：30烘干加热器（KW)：9烘干风机（KW）：0.75传送电机（KW）：0.2",
+    productDimensions:
+      "5400×860×2020 进水位预置（离地H/ 离主机进水L）： 500mm/1000mm 排水位（孔&槽）预 置：离地高度≤100mm 进机电源位预置（离 地H/离主电控L）： 1400↑/1500 漏电保护器规格：4P 125A 主线电缆（铜）： RV5*25mm2",
     throughput: "",
     averageTime: "",
     status: "在售",
@@ -3028,15 +3488,18 @@ window.PRODUCT_DATA_TABLE = [
       {
         filePath: "/assets/images/products/DLB-A5400-1.webp",
         isPrimary: true,
-        isHires: false
-      }
+        isHires: false,
+      },
     ],
     is_home_core: false,
     highlights: "",
-    scenarios: "•灵活的模块化设计，可根据不同 的需求进行搭配，洗涤量8000个/ 小时 •双道漂洗设计，确保最佳的漂洗 效果，无残留 •304不锈钢洗涤臂，内凹式喷 嘴，水幕均匀，不易堵塞 •精准温控设计，确保最低漂洗温 度在82°C以上，卫生有保证 •入口自动感应节能设计，长时间 不使用自动停止运行，节省能耗和 洗涤剂用量 •热风循环烘干系统，85℃以上的 热风确保餐具快速干燥",
-    usage: "•灵活的模块化设计，可根据不同 的需求进行搭配，洗涤量8000个/ 小时 •双道漂洗设计，确保最佳的漂洗 效果，无残留 •304不锈钢洗涤臂，内凹式喷 嘴，水幕均匀，不易堵塞 •精准温控设计，确保最低漂洗温 度在82°C以上，卫生有保证 •入口自动感应节能设计，长时间 不使用自动停止运行，节省能耗和 洗涤剂用量 •热风循环烘干系统，85℃以上的 热风确保餐具快速干燥",
-    usageEn: "• Flexible modular design for customized configurations based on different needs; washing capacity: 8,000 pieces/hour • Dual-channel rinse design ensures optimal rinsing results with zero residue • 304 stainless steel wash arms with recessed nozzles for even water coverage and clog resistance • Precision temperature control ensures minimum rinse temperature above 82°C for guaranteed hygiene • Auto-sensing energy-saving design at entry; automatically stops after extended idle periods to save energy and detergent • Hot air circulation drying system with air above 85°C for fast, thorough dishware drying",
-    materialEn: "Premium stainless steel"
+    scenarios:
+      "•灵活的模块化设计，可根据不同 的需求进行搭配，洗涤量8000个/ 小时 •双道漂洗设计，确保最佳的漂洗 效果，无残留 •304不锈钢洗涤臂，内凹式喷 嘴，水幕均匀，不易堵塞 •精准温控设计，确保最低漂洗温 度在82°C以上，卫生有保证 •入口自动感应节能设计，长时间 不使用自动停止运行，节省能耗和 洗涤剂用量 •热风循环烘干系统，85℃以上的 热风确保餐具快速干燥",
+    usage:
+      "•灵活的模块化设计，可根据不同 的需求进行搭配，洗涤量8000个/ 小时 •双道漂洗设计，确保最佳的漂洗 效果，无残留 •304不锈钢洗涤臂，内凹式喷 嘴，水幕均匀，不易堵塞 •精准温控设计，确保最低漂洗温 度在82°C以上，卫生有保证 •入口自动感应节能设计，长时间 不使用自动停止运行，节省能耗和 洗涤剂用量 •热风循环烘干系统，85℃以上的 热风确保餐具快速干燥",
+    usageEn:
+      "• Flexible modular design for customized configurations based on different needs; washing capacity: 8,000 pieces/hour • Dual-channel rinse design ensures optimal rinsing results with zero residue • 304 stainless steel wash arms with recessed nozzles for even water coverage and clog resistance • Precision temperature control ensures minimum rinse temperature above 82°C for guaranteed hygiene • Auto-sensing energy-saving design at entry; automatically stops after extended idle periods to save energy and detergent • Hot air circulation drying system with air above 85°C for fast, thorough dishware drying",
+    materialEn: "Premium stainless steel",
   },
   {
     model: "DLB-A6200",
@@ -3045,12 +3508,16 @@ window.PRODUCT_DATA_TABLE = [
     nameEn: "Large Conveyor Dishwasher (2-Tank 2-Rinse 2-Dryer)",
     category: "辅助系列",
     subCategory: "长龙洗碗机",
-    specifications: "整机质保：1年 机身材质：优质不锈钢 导轨宽度/(mm)：610 适用场所规模(餐位)：1000以上 整机洗涤碗碟能力（个/H）：10000 主洗水泵（KW）：1.5x2 喷淋水泵（KW）：0.37 主洗加热器（KW）：12x2 喷淋加热器（KW)：30 烘干加热器（KW)：9x2 烘干风机（KW）：0.75x2 传送电机（KW）：0.2 额定功率（KW)进水温度10℃：77 额定电压：380V/3N",
-    specificationsEn: "Warranty: 1 year; Body Material: Premium Stainless Steel; Rail Width/(mm): 610; Venue Capacity (Diners): 1000+; Dish Washing Capacity (Pcs/H): 10000; Main Wash Pump (KW): 1.5x2; Rinse Pump (KW): 0.37; Main Wash Heater (KW): 12x2; Rinse Heater (KW): 30; Drying Heater (KW): 9x2; Drying Fan (KW): 0.75x2; Conveyor Motor (KW): 0.2; Rated Power (KW)@Inlet 10°C: 77; Rated Voltage: 380V/3N",
+    specifications:
+      "整机质保：1年 机身材质：优质不锈钢 导轨宽度/(mm)：610 适用场所规模(餐位)：1000以上 整机洗涤碗碟能力（个/H）：10000 主洗水泵（KW）：1.5x2 喷淋水泵（KW）：0.37 主洗加热器（KW）：12x2 喷淋加热器（KW)：30 烘干加热器（KW)：9x2 烘干风机（KW）：0.75x2 传送电机（KW）：0.2 额定功率（KW)进水温度10℃：77 额定电压：380V/3N",
+    specificationsEn:
+      "Warranty: 1 year; Body Material: Premium Stainless Steel; Rail Width/(mm): 610; Venue Capacity (Diners): 1000+; Dish Washing Capacity (Pcs/H): 10000; Main Wash Pump (KW): 1.5x2; Rinse Pump (KW): 0.37; Main Wash Heater (KW): 12x2; Rinse Heater (KW): 30; Drying Heater (KW): 9x2; Drying Fan (KW): 0.75x2; Conveyor Motor (KW): 0.2; Rated Power (KW)@Inlet 10°C: 77; Rated Voltage: 380V/3N",
     power: "77",
     voltage: "380V/3N",
-    material: "优质不锈钢导轨宽度/(mm)：610适用场所规模(餐位)：1000以上整机洗涤碗碟能力（个/H）：10000主洗水泵（KW）：1.5x2喷淋水泵（KW）：0.37主洗加热器（KW）：12x2喷淋加热器（KW)：30烘干加热器（KW)：9x2烘干风机（KW）：0.75x2传送电机（KW）：0.2",
-    productDimensions: "6200×860×2020 进水位预置（离地H/ 离主机进水L）： 500mm/1000mm 排水位（孔&槽）预 置：离地高度≤100mm 进机电源位预置（离 地H/离主电控L）： 1400↑/1500 漏电保护器规格：4P 125A 主线电缆（铜）： RV5*25mm2",
+    material:
+      "优质不锈钢导轨宽度/(mm)：610适用场所规模(餐位)：1000以上整机洗涤碗碟能力（个/H）：10000主洗水泵（KW）：1.5x2喷淋水泵（KW）：0.37主洗加热器（KW）：12x2喷淋加热器（KW)：30烘干加热器（KW)：9x2烘干风机（KW）：0.75x2传送电机（KW）：0.2",
+    productDimensions:
+      "6200×860×2020 进水位预置（离地H/ 离主机进水L）： 500mm/1000mm 排水位（孔&槽）预 置：离地高度≤100mm 进机电源位预置（离 地H/离主电控L）： 1400↑/1500 漏电保护器规格：4P 125A 主线电缆（铜）： RV5*25mm2",
     throughput: "",
     averageTime: "",
     status: "在售",
@@ -3061,15 +3528,18 @@ window.PRODUCT_DATA_TABLE = [
       {
         filePath: "/assets/images/products/DLB-A6200-1.webp",
         isPrimary: true,
-        isHires: false
-      }
+        isHires: false,
+      },
     ],
     is_home_core: false,
     highlights: "",
-    scenarios: "•灵活的模块化设计，可根据不同 的需求进行搭配，洗涤量10000个/ 小时 •双道漂洗设计，确保最佳的漂洗 效果，无残留 •304不锈钢洗涤臂，内凹式喷 嘴，水幕均匀，不易堵塞 •精准温控设计，确保最低漂洗温 度在82°C以上，卫生有保证 •入口自动感应节能设计，长时间 不使用自动停止运行，节省能耗和 洗涤剂用量 •热风循环烘干系统，85℃以上的 热风确保餐具快速干燥",
-    usage: "•灵活的模块化设计，可根据不同 的需求进行搭配，洗涤量10000个/ 小时 •双道漂洗设计，确保最佳的漂洗 效果，无残留 •304不锈钢洗涤臂，内凹式喷 嘴，水幕均匀，不易堵塞 •精准温控设计，确保最低漂洗温 度在82°C以上，卫生有保证 •入口自动感应节能设计，长时间 不使用自动停止运行，节省能耗和 洗涤剂用量 •热风循环烘干系统，85℃以上的 热风确保餐具快速干燥",
-    usageEn: "• Flexible modular design for customized configurations based on different needs; washing capacity: 10,000 pieces/hour • Dual-channel rinse design ensures optimal rinsing results with zero residue • 304 stainless steel wash arms with recessed nozzles for even water coverage and clog resistance • Precision temperature control ensures minimum rinse temperature above 82°C for guaranteed hygiene • Auto-sensing energy-saving design at entry; automatically stops after extended idle periods to save energy and detergent • Hot air circulation drying system with air above 85°C for fast, thorough dishware drying",
-    materialEn: "Premium stainless steel"
+    scenarios:
+      "•灵活的模块化设计，可根据不同 的需求进行搭配，洗涤量10000个/ 小时 •双道漂洗设计，确保最佳的漂洗 效果，无残留 •304不锈钢洗涤臂，内凹式喷 嘴，水幕均匀，不易堵塞 •精准温控设计，确保最低漂洗温 度在82°C以上，卫生有保证 •入口自动感应节能设计，长时间 不使用自动停止运行，节省能耗和 洗涤剂用量 •热风循环烘干系统，85℃以上的 热风确保餐具快速干燥",
+    usage:
+      "•灵活的模块化设计，可根据不同 的需求进行搭配，洗涤量10000个/ 小时 •双道漂洗设计，确保最佳的漂洗 效果，无残留 •304不锈钢洗涤臂，内凹式喷 嘴，水幕均匀，不易堵塞 •精准温控设计，确保最低漂洗温 度在82°C以上，卫生有保证 •入口自动感应节能设计，长时间 不使用自动停止运行，节省能耗和 洗涤剂用量 •热风循环烘干系统，85℃以上的 热风确保餐具快速干燥",
+    usageEn:
+      "• Flexible modular design for customized configurations based on different needs; washing capacity: 10,000 pieces/hour • Dual-channel rinse design ensures optimal rinsing results with zero residue • 304 stainless steel wash arms with recessed nozzles for even water coverage and clog resistance • Precision temperature control ensures minimum rinse temperature above 82°C for guaranteed hygiene • Auto-sensing energy-saving design at entry; automatically stops after extended idle periods to save energy and detergent • Hot air circulation drying system with air above 85°C for fast, thorough dishware drying",
+    materialEn: "Premium stainless steel",
   },
   {
     model: "F32F1C",
@@ -3078,8 +3548,10 @@ window.PRODUCT_DATA_TABLE = [
     nameEn: "Countertop Flip-lid Cooker (Manual Flip)",
     category: "翻炒系列",
     subCategory: "搅拌炒菜机",
-    specifications: "◆额定电压：220V ◆额定功率：3.5kW ◆配锅尺寸(mm) : φ320*75 ◆配锅容量： 5L ◆炒菜重量：约1.5kg   ◆7寸触摸屏，自动搅拌，语音播报，手动翻盖、菜谱编辑功能。",
-    specificationsEn: "◆Rated Voltage: 220V ◆Rated Power: 3.5kW ◆Wok Size(mm): φ320*75 ◆Wok Capacity: 5L ◆Stir-fry Weight: Approx. 1.5kg ◆7-inch touch screen, auto stirring, voice broadcast, manual lid, recipe editing function.",
+    specifications:
+      "◆额定电压：220V ◆额定功率：3.5kW ◆配锅尺寸(mm) : φ320*75 ◆配锅容量： 5L ◆炒菜重量：约1.5kg   ◆7寸触摸屏，自动搅拌，语音播报，手动翻盖、菜谱编辑功能。",
+    specificationsEn:
+      "◆Rated Voltage: 220V ◆Rated Power: 3.5kW ◆Wok Size(mm): φ320*75 ◆Wok Capacity: 5L ◆Stir-fry Weight: Approx. 1.5kg ◆7-inch touch screen, auto stirring, voice broadcast, manual lid, recipe editing function.",
     power: "3.5kW",
     voltage: "220V",
     material: "",
@@ -3094,14 +3566,15 @@ window.PRODUCT_DATA_TABLE = [
       {
         filePath: "/assets/images/products/F32F1C-1.webp",
         isPrimary: true,
-        isHires: false
-      }
+        isHires: false,
+      },
     ],
     is_home_core: false,
     highlights: "",
     scenarios: "",
     usage: "",
-    usageEn: "Suitable for small restaurants, food delivery kiosks, fast-food shops, and staff canteens. Ideal for automatic cooking of stir-fried dishes, fried rice, fried noodles, rice noodles, and more. Capacity: approx. 1.5kg per batch."
+    usageEn:
+      "Suitable for small restaurants, food delivery kiosks, fast-food shops, and staff canteens. Ideal for automatic cooking of stir-fried dishes, fried rice, fried noodles, rice noodles, and more. Capacity: approx. 1.5kg per batch.",
   },
   {
     model: "G26D1A",
@@ -3110,8 +3583,10 @@ window.PRODUCT_DATA_TABLE = [
     nameEn: "Compact Countertop Drum Cooker (Induction)",
     category: "翻炒系列",
     subCategory: "滚筒炒菜机",
-    specifications: "◆额定电压：220V ◆额定功率：5kW ◆配锅尺寸(mm) : φ260*280 ◆锅体材质：2.5mm精铁 ◆配锅容量： 1L-6.4L ◆炒菜重量：约1.8kg",
-    specificationsEn: "◆Rated Voltage: 220V ◆Rated Power: 5kW ◆Wok Size(mm): φ260*280 ◆Wok Body Material: 2.5mm Wrought Iron ◆Wok Capacity: 1L-6.4L ◆Stir-fry Weight: Approx. 1.8kg",
+    specifications:
+      "◆额定电压：220V ◆额定功率：5kW ◆配锅尺寸(mm) : φ260*280 ◆锅体材质：2.5mm精铁 ◆配锅容量： 1L-6.4L ◆炒菜重量：约1.8kg",
+    specificationsEn:
+      "◆Rated Voltage: 220V ◆Rated Power: 5kW ◆Wok Size(mm): φ260*280 ◆Wok Body Material: 2.5mm Wrought Iron ◆Wok Capacity: 1L-6.4L ◆Stir-fry Weight: Approx. 1.8kg",
     power: "5kW",
     voltage: "220V",
     material: "2.5mm精铁",
@@ -3126,15 +3601,16 @@ window.PRODUCT_DATA_TABLE = [
       {
         filePath: "/assets/images/products/G26D1A-1.webp",
         isPrimary: true,
-        isHires: false
-      }
+        isHires: false,
+      },
     ],
     is_home_core: false,
     highlights: "",
     scenarios: "",
     usage: "",
-    usageEn: "Suitable for restaurant chains, food delivery kiosks, snack shops, and more. Ideal for automatic cooking of stir-fried dishes, fried rice, fried noodles, rice noodles, spicy chicken, spicy hot pot, and more. Capacity: approx. 1.8kg per batch.",
-    materialEn: "2.5mm fine iron"
+    usageEn:
+      "Suitable for restaurant chains, food delivery kiosks, snack shops, and more. Ideal for automatic cooking of stir-fried dishes, fried rice, fried noodles, rice noodles, spicy chicken, spicy hot pot, and more. Capacity: approx. 1.8kg per batch.",
+    materialEn: "2.5mm fine iron",
   },
   {
     model: "G26D1R",
@@ -3143,8 +3619,10 @@ window.PRODUCT_DATA_TABLE = [
     nameEn: "Compact Countertop Drum Cooker (Gas)",
     category: "翻炒系列",
     subCategory: "滚筒炒菜机",
-    specifications: "◆额定电压:220V ◆电功率： 100W ◆配锅尺寸(mm) : φ260*280 ◆锅体材质：2.5mm精铁 ◆炒菜重量：约1.8kg ◆配锅容量： 1L-6.4L ◆燃气类型：液化气/天然气 ◆热负荷： 17.6kW",
-    specificationsEn: "◆Rated Voltage: 220V ◆Electrical Power: 100W ◆Wok Size(mm): φ260*280 ◆Wok Body Material: 2.5mm Wrought Iron ◆Stir-fry Weight: Approx. 1.8kg ◆Wok Capacity: 1L-6.4L ◆Gas Type: LPG/Natural Gas ◆Heat Load: 17.6kW",
+    specifications:
+      "◆额定电压:220V ◆电功率： 100W ◆配锅尺寸(mm) : φ260*280 ◆锅体材质：2.5mm精铁 ◆炒菜重量：约1.8kg ◆配锅容量： 1L-6.4L ◆燃气类型：液化气/天然气 ◆热负荷： 17.6kW",
+    specificationsEn:
+      "◆Rated Voltage: 220V ◆Electrical Power: 100W ◆Wok Size(mm): φ260*280 ◆Wok Body Material: 2.5mm Wrought Iron ◆Stir-fry Weight: Approx. 1.8kg ◆Wok Capacity: 1L-6.4L ◆Gas Type: LPG/Natural Gas ◆Heat Load: 17.6kW",
     power: "100W",
     voltage: "220V",
     material: "2.5mm精铁",
@@ -3159,15 +3637,16 @@ window.PRODUCT_DATA_TABLE = [
       {
         filePath: "/assets/images/products/G26D1R-1.webp",
         isPrimary: true,
-        isHires: false
-      }
+        isHires: false,
+      },
     ],
     is_home_core: false,
     highlights: "",
     scenarios: "",
     usage: "",
-    usageEn: "Suitable for restaurant chains, food delivery kiosks, snack shops, and more. Ideal for automatic cooking of stir-fried dishes, fried rice, fried noodles, rice noodles, spicy chicken, spicy hot pot, and more. Capacity: approx. 1.8kg per batch. Supports LPG and natural gas.",
-    materialEn: "2.5mm fine iron"
+    usageEn:
+      "Suitable for restaurant chains, food delivery kiosks, snack shops, and more. Ideal for automatic cooking of stir-fried dishes, fried rice, fried noodles, rice noodles, spicy chicken, spicy hot pot, and more. Capacity: approx. 1.8kg per batch. Supports LPG and natural gas.",
+    materialEn: "2.5mm fine iron",
   },
   {
     model: "G26DAA",
@@ -3176,8 +3655,10 @@ window.PRODUCT_DATA_TABLE = [
     nameEn: "Compact Upright Drum Cooker (Induction)",
     category: "翻炒系列",
     subCategory: "滚筒炒菜机",
-    specifications: "◆额定电压：220V ◆额定功率：5kW ◆配锅尺寸(mm) : φ260*280 ◆锅体材质：2.5mm精铁 ◆炒菜重量：约1.8kg ◆配锅容量： 1L-6.4L",
-    specificationsEn: "◆Rated Voltage: 220V ◆Rated Power: 5kW ◆Wok Size(mm): φ260*280 ◆Wok Body Material: 2.5mm Wrought Iron ◆Stir-fry Weight: Approx. 1.8kg ◆Wok Capacity: 1L-6.4L",
+    specifications:
+      "◆额定电压：220V ◆额定功率：5kW ◆配锅尺寸(mm) : φ260*280 ◆锅体材质：2.5mm精铁 ◆炒菜重量：约1.8kg ◆配锅容量： 1L-6.4L",
+    specificationsEn:
+      "◆Rated Voltage: 220V ◆Rated Power: 5kW ◆Wok Size(mm): φ260*280 ◆Wok Body Material: 2.5mm Wrought Iron ◆Stir-fry Weight: Approx. 1.8kg ◆Wok Capacity: 1L-6.4L",
     power: "5kW",
     voltage: "220V",
     material: "2.5mm精铁",
@@ -3192,15 +3673,16 @@ window.PRODUCT_DATA_TABLE = [
       {
         filePath: "/assets/images/products/G26DAA-1.webp",
         isPrimary: true,
-        isHires: false
-      }
+        isHires: false,
+      },
     ],
     is_home_core: false,
     highlights: "",
     scenarios: "",
     usage: "",
-    usageEn: "Suitable for restaurant chains, food delivery, snack shops, corporate & institutional canteens, and more. Ideal for automatic cooking of stir-fried dishes, fried rice, fried noodles, rice noodles, spicy chicken, spicy hot pot, and more. Capacity: approx. 1.8kg per batch.",
-    materialEn: "2.5mm fine iron"
+    usageEn:
+      "Suitable for restaurant chains, food delivery, snack shops, corporate & institutional canteens, and more. Ideal for automatic cooking of stir-fried dishes, fried rice, fried noodles, rice noodles, spicy chicken, spicy hot pot, and more. Capacity: approx. 1.8kg per batch.",
+    materialEn: "2.5mm fine iron",
   },
   {
     model: "G26DAR",
@@ -3209,8 +3691,10 @@ window.PRODUCT_DATA_TABLE = [
     nameEn: "Compact Upright Drum Cooker (Gas)",
     category: "翻炒系列",
     subCategory: "滚筒炒菜机",
-    specifications: "◆额定电压:220V ◆电功率： 100W ◆配锅尺寸(mm) : φ260*280 ◆锅体材质：2.5mm精铁 ◆炒菜重量：约1.8kg ◆配锅容量： 1L-6.4L ◆燃气类型：液化气/天然气 ◆热负荷： 17.6kW",
-    specificationsEn: "◆Rated Voltage: 220V ◆Power: 100W ◆Pan Size (mm): φ260*280 ◆Pan Material: 2.5mm Wrought Iron ◆Cooking Capacity: Approx 1.8kg ◆Pan Capacity: 1L-6.4L ◆Gas Type: LPG/Natural Gas ◆Heat Load: 17.6kW",
+    specifications:
+      "◆额定电压:220V ◆电功率： 100W ◆配锅尺寸(mm) : φ260*280 ◆锅体材质：2.5mm精铁 ◆炒菜重量：约1.8kg ◆配锅容量： 1L-6.4L ◆燃气类型：液化气/天然气 ◆热负荷： 17.6kW",
+    specificationsEn:
+      "◆Rated Voltage: 220V ◆Power: 100W ◆Pan Size (mm): φ260*280 ◆Pan Material: 2.5mm Wrought Iron ◆Cooking Capacity: Approx 1.8kg ◆Pan Capacity: 1L-6.4L ◆Gas Type: LPG/Natural Gas ◆Heat Load: 17.6kW",
     power: "100W",
     voltage: "220V",
     material: "2.5mm精铁",
@@ -3225,15 +3709,16 @@ window.PRODUCT_DATA_TABLE = [
       {
         filePath: "/assets/images/products/G26DAR-1.webp",
         isPrimary: true,
-        isHires: false
-      }
+        isHires: false,
+      },
     ],
     is_home_core: false,
     highlights: "",
     scenarios: "",
     usage: "",
-    usageEn: "Suitable for restaurant chains, food delivery, snack shops, corporate & institutional canteens, and more. Ideal for automatic cooking of stir-fried dishes, fried rice, fried noodles, rice noodles, spicy chicken, spicy hot pot, and more. Capacity: approx. 1.8kg per batch. Supports LPG and natural gas.",
-    materialEn: "2.5mm fine iron"
+    usageEn:
+      "Suitable for restaurant chains, food delivery, snack shops, corporate & institutional canteens, and more. Ideal for automatic cooking of stir-fried dishes, fried rice, fried noodles, rice noodles, spicy chicken, spicy hot pot, and more. Capacity: approx. 1.8kg per batch. Supports LPG and natural gas.",
+    materialEn: "2.5mm fine iron",
   },
   {
     model: "G30D1A",
@@ -3242,8 +3727,10 @@ window.PRODUCT_DATA_TABLE = [
     nameEn: "Compact Countertop Drum Cooker (Induction)",
     category: "翻炒系列",
     subCategory: "滚筒炒菜机",
-    specifications: "◆额定电压：220V ◆额定功率：5kW ◆配锅尺寸（mm） : φ300*300 ◆锅体材质：3.0mm精铁 ◆配锅容量： 1.5L-9.3L",
-    specificationsEn: "◆Rated Voltage: 220V ◆Rated Power: 5kW ◆Pan Size (mm): φ300*300 ◆Pan Material: 3.0mm Wrought Iron ◆Pan Capacity: 1.5L-9.3L",
+    specifications:
+      "◆额定电压：220V ◆额定功率：5kW ◆配锅尺寸（mm） : φ300*300 ◆锅体材质：3.0mm精铁 ◆配锅容量： 1.5L-9.3L",
+    specificationsEn:
+      "◆Rated Voltage: 220V ◆Rated Power: 5kW ◆Pan Size (mm): φ300*300 ◆Pan Material: 3.0mm Wrought Iron ◆Pan Capacity: 1.5L-9.3L",
     power: "5kW",
     voltage: "220V",
     material: "3.0mm精铁",
@@ -3258,15 +3745,16 @@ window.PRODUCT_DATA_TABLE = [
       {
         filePath: "/assets/images/products/G30D1A-1.webp",
         isPrimary: true,
-        isHires: false
-      }
+        isHires: false,
+      },
     ],
     is_home_core: false,
     highlights: "",
     scenarios: "",
     usage: "",
-    usageEn: "Suitable for restaurant chains, food delivery, snack shops, fast-food restaurants, and more. Ideal for automatic cooking of stir-fried dishes, fried rice, fried noodles, spicy chicken, spicy hot pot, crawfish, spicy shrimp & crab, and more. Capacity: approx. 2.5kg per batch.",
-    materialEn: "3.0mm fine iron"
+    usageEn:
+      "Suitable for restaurant chains, food delivery, snack shops, fast-food restaurants, and more. Ideal for automatic cooking of stir-fried dishes, fried rice, fried noodles, spicy chicken, spicy hot pot, crawfish, spicy shrimp & crab, and more. Capacity: approx. 2.5kg per batch.",
+    materialEn: "3.0mm fine iron",
   },
   {
     model: "G30D1R",
@@ -3275,8 +3763,10 @@ window.PRODUCT_DATA_TABLE = [
     nameEn: "Compact Countertop Drum Cooker (Gas)",
     category: "翻炒系列",
     subCategory: "滚筒炒菜机",
-    specifications: "◆额定电压:220V ◆电功率： 100W ◆配锅尺寸（mm） : φ300*300 ◆锅体材质：3.0mm精铁 ◆炒菜重量：约2.5kg ◆配锅容量： 1.5L-9.3L ◆燃气类型：液化气/天然气 ◆热负荷： 17.6kW",
-    specificationsEn: "◆Rated Voltage: 220V ◆Power: 100W ◆Pan Size (mm): φ300*300 ◆Pan Material: 3.0mm Wrought Iron ◆Cooking Capacity: Approx 2.5kg ◆Pan Capacity: 1.5L-9.3L ◆Gas Type: LPG/Natural Gas ◆Heat Load: 17.6kW",
+    specifications:
+      "◆额定电压:220V ◆电功率： 100W ◆配锅尺寸（mm） : φ300*300 ◆锅体材质：3.0mm精铁 ◆炒菜重量：约2.5kg ◆配锅容量： 1.5L-9.3L ◆燃气类型：液化气/天然气 ◆热负荷： 17.6kW",
+    specificationsEn:
+      "◆Rated Voltage: 220V ◆Power: 100W ◆Pan Size (mm): φ300*300 ◆Pan Material: 3.0mm Wrought Iron ◆Cooking Capacity: Approx 2.5kg ◆Pan Capacity: 1.5L-9.3L ◆Gas Type: LPG/Natural Gas ◆Heat Load: 17.6kW",
     power: "100W",
     voltage: "220V",
     material: "3.0mm精铁",
@@ -3291,15 +3781,16 @@ window.PRODUCT_DATA_TABLE = [
       {
         filePath: "/assets/images/products/G30D1R-1.webp",
         isPrimary: true,
-        isHires: false
-      }
+        isHires: false,
+      },
     ],
     is_home_core: false,
     highlights: "",
     scenarios: "",
     usage: "",
-    usageEn: "Suitable for restaurant chains, food delivery, snack shops, fast-food restaurants, and more. Ideal for automatic cooking of stir-fried dishes, fried rice, fried noodles, spicy chicken, spicy hot pot, crawfish, spicy shrimp & crab, and more. Capacity: approx. 2.5kg per batch. Supports LPG and natural gas.",
-    materialEn: "3.0mm fine iron"
+    usageEn:
+      "Suitable for restaurant chains, food delivery, snack shops, fast-food restaurants, and more. Ideal for automatic cooking of stir-fried dishes, fried rice, fried noodles, spicy chicken, spicy hot pot, crawfish, spicy shrimp & crab, and more. Capacity: approx. 2.5kg per batch. Supports LPG and natural gas.",
+    materialEn: "3.0mm fine iron",
   },
   {
     model: "G30DAA",
@@ -3308,8 +3799,10 @@ window.PRODUCT_DATA_TABLE = [
     nameEn: "Compact Upright Drum Cooker (Induction)",
     category: "翻炒系列",
     subCategory: "滚筒炒菜机",
-    specifications: "◆额定电压：220V ◆额定功率：5kW ◆配锅尺寸(mm) : φ300*300 ◆锅体材质：3.0mm 精铁 ◆炒菜重量：约2.5kg ◆配锅容量： 1.5L-9.3L",
-    specificationsEn: "◆Rated Voltage: 220V ◆Rated Power: 5kW ◆Pan Size (mm): φ300*300 ◆Pan Material: 3.0mm Wrought Iron ◆Cooking Capacity: Approx 2.5kg ◆Pan Capacity: 1.5L-9.3L",
+    specifications:
+      "◆额定电压：220V ◆额定功率：5kW ◆配锅尺寸(mm) : φ300*300 ◆锅体材质：3.0mm 精铁 ◆炒菜重量：约2.5kg ◆配锅容量： 1.5L-9.3L",
+    specificationsEn:
+      "◆Rated Voltage: 220V ◆Rated Power: 5kW ◆Pan Size (mm): φ300*300 ◆Pan Material: 3.0mm Wrought Iron ◆Cooking Capacity: Approx 2.5kg ◆Pan Capacity: 1.5L-9.3L",
     power: "5kW",
     voltage: "220V",
     material: "3.0mm精铁",
@@ -3324,15 +3817,16 @@ window.PRODUCT_DATA_TABLE = [
       {
         filePath: "/assets/images/products/G30DAA-1.webp",
         isPrimary: true,
-        isHires: false
-      }
+        isHires: false,
+      },
     ],
     is_home_core: false,
     highlights: "",
     scenarios: "",
     usage: "",
-    usageEn: "Suitable for restaurant chains, food delivery, hotel banquets, corporate & institutional canteens, and more. Ideal for automatic cooking of stir-fried dishes, fried rice, fried noodles, spicy chicken, spicy hot pot, crawfish, spicy shrimp & crab, and more. Capacity: approx. 2.5kg per batch.",
-    materialEn: "3.0mm fine iron"
+    usageEn:
+      "Suitable for restaurant chains, food delivery, hotel banquets, corporate & institutional canteens, and more. Ideal for automatic cooking of stir-fried dishes, fried rice, fried noodles, spicy chicken, spicy hot pot, crawfish, spicy shrimp & crab, and more. Capacity: approx. 2.5kg per batch.",
+    materialEn: "3.0mm fine iron",
   },
   {
     model: "G30DAR",
@@ -3341,8 +3835,10 @@ window.PRODUCT_DATA_TABLE = [
     nameEn: "Compact Upright Drum Cooker (Gas)",
     category: "翻炒系列",
     subCategory: "滚筒炒菜机",
-    specifications: "◆额定电压:220V ◆电功率： 100W ◆配锅尺寸（mm） : φ300*300 ◆锅体材质：3.0mm精铁 ◆炒菜重量：约2.5kg ◆配锅容量： 1.5L-9.3L ◆燃气类型：液化气/天然气 ◆热负荷： 17.6kW",
-    specificationsEn: "◆Rated Voltage: 220V ◆Power: 100W ◆Pan Size (mm): φ300*300 ◆Pan Material: 3.0mm Wrought Iron ◆Cooking Capacity: Approx 2.5kg ◆Pan Capacity: 1.5L-9.3L ◆Gas Type: LPG/Natural Gas ◆Heat Load: 17.6kW",
+    specifications:
+      "◆额定电压:220V ◆电功率： 100W ◆配锅尺寸（mm） : φ300*300 ◆锅体材质：3.0mm精铁 ◆炒菜重量：约2.5kg ◆配锅容量： 1.5L-9.3L ◆燃气类型：液化气/天然气 ◆热负荷： 17.6kW",
+    specificationsEn:
+      "◆Rated Voltage: 220V ◆Power: 100W ◆Pan Size (mm): φ300*300 ◆Pan Material: 3.0mm Wrought Iron ◆Cooking Capacity: Approx 2.5kg ◆Pan Capacity: 1.5L-9.3L ◆Gas Type: LPG/Natural Gas ◆Heat Load: 17.6kW",
     power: "100W",
     voltage: "220V",
     material: "3.0mm精铁",
@@ -3357,15 +3853,16 @@ window.PRODUCT_DATA_TABLE = [
       {
         filePath: "/assets/images/products/G30DAR-1.webp",
         isPrimary: true,
-        isHires: false
-      }
+        isHires: false,
+      },
     ],
     is_home_core: false,
     highlights: "",
     scenarios: "",
     usage: "",
-    usageEn: "Suitable for restaurant chains, food delivery, hotel banquets, corporate & institutional canteens, and more. Ideal for automatic cooking of stir-fried dishes, fried rice, fried noodles, spicy chicken, spicy hot pot, crawfish, spicy shrimp & crab, and more. Capacity: approx. 2.5kg per batch. Supports LPG and natural gas.",
-    materialEn: "3.0mm fine iron"
+    usageEn:
+      "Suitable for restaurant chains, food delivery, hotel banquets, corporate & institutional canteens, and more. Ideal for automatic cooking of stir-fried dishes, fried rice, fried noodles, spicy chicken, spicy hot pot, crawfish, spicy shrimp & crab, and more. Capacity: approx. 2.5kg per batch. Supports LPG and natural gas.",
+    materialEn: "3.0mm fine iron",
   },
   {
     model: "G30D1T",
@@ -3374,8 +3871,10 @@ window.PRODUCT_DATA_TABLE = [
     nameEn: "Smart Countertop Drum Cooker (Induction New)",
     category: "翻炒系列",
     subCategory: "滚筒炒菜机",
-    specifications: "◆额定电压 : 220V ◆额定功率：5kW ◆配锅尺寸(mm)：  φ300*300 ◆锅体材质：3.0mm精铁 ◆炒菜重量：约2.5kg ◆配锅容量： 1.5L-9.3L ◆操作方式：触摸屏 ◆锅体款式： 圆底铁锅 ◆一键自动炒菜、机器学习功能、菜谱功能、可菜谱编辑、语音提示",
-    specificationsEn: "◆Rated Voltage: 220V ◆Rated Power: 5kW ◆Pan Size (mm): φ300*300 ◆Pan Material: 3.0mm Wrought Iron ◆Cooking Capacity: Approx 2.5kg ◆Pan Capacity: 1.5L-9.3L ◆Operation: Touch Screen ◆Pan Style: Round Bottom Iron Wok ◆One-Key Auto Cooking, Machine Learning, Recipe Function, Editable Recipes, Voice Prompts",
+    specifications:
+      "◆额定电压 : 220V ◆额定功率：5kW ◆配锅尺寸(mm)：  φ300*300 ◆锅体材质：3.0mm精铁 ◆炒菜重量：约2.5kg ◆配锅容量： 1.5L-9.3L ◆操作方式：触摸屏 ◆锅体款式： 圆底铁锅 ◆一键自动炒菜、机器学习功能、菜谱功能、可菜谱编辑、语音提示",
+    specificationsEn:
+      "◆Rated Voltage: 220V ◆Rated Power: 5kW ◆Pan Size (mm): φ300*300 ◆Pan Material: 3.0mm Wrought Iron ◆Cooking Capacity: Approx 2.5kg ◆Pan Capacity: 1.5L-9.3L ◆Operation: Touch Screen ◆Pan Style: Round Bottom Iron Wok ◆One-Key Auto Cooking, Machine Learning, Recipe Function, Editable Recipes, Voice Prompts",
     power: "5kW",
     voltage: "",
     material: "3.0mm精铁",
@@ -3390,15 +3889,16 @@ window.PRODUCT_DATA_TABLE = [
       {
         filePath: "/assets/images/products/G30D1T-1.webp",
         isPrimary: true,
-        isHires: false
-      }
+        isHires: false,
+      },
     ],
     is_home_core: false,
     highlights: "",
     scenarios: "",
     usage: "",
-    usageEn: "Suitable for restaurant chains, food delivery, snack shops, fast-food restaurants, and more. Ideal for automatic cooking of stir-fried dishes, fried rice, fried noodles, spicy chicken, spicy hot pot, crawfish, spicy shrimp & crab, and more. Capacity: approx. 2.5kg per batch. Smart touchscreen control.",
-    materialEn: "3.0mm fine iron"
+    usageEn:
+      "Suitable for restaurant chains, food delivery, snack shops, fast-food restaurants, and more. Ideal for automatic cooking of stir-fried dishes, fried rice, fried noodles, spicy chicken, spicy hot pot, crawfish, spicy shrimp & crab, and more. Capacity: approx. 2.5kg per batch. Smart touchscreen control.",
+    materialEn: "3.0mm fine iron",
   },
   {
     model: "G30DFA",
@@ -3407,8 +3907,10 @@ window.PRODUCT_DATA_TABLE = [
     nameEn: "Compact Upright Dual-drum Cooker+Wok (Induction)",
     category: "翻炒系列",
     subCategory: "滚筒炒菜机",
-    specifications: "◆额定电压：380V ◆额定功率：5kW*2+15kW ◆配锅尺寸(mm) : φ300*300 ◆锅体材质：3.0mm精铁 ◆炒菜重量：约2.5kg ◆配锅容量： 1.5L-9.3L",
-    specificationsEn: "◆Rated Voltage: 380V ◆Rated Power: 5kW*2+15kW ◆Pan Size (mm): φ300*300 ◆Pan Material: 3.0mm Wrought Iron ◆Cooking Capacity: Approx 2.5kg ◆Pan Capacity: 1.5L-9.3L",
+    specifications:
+      "◆额定电压：380V ◆额定功率：5kW*2+15kW ◆配锅尺寸(mm) : φ300*300 ◆锅体材质：3.0mm精铁 ◆炒菜重量：约2.5kg ◆配锅容量： 1.5L-9.3L",
+    specificationsEn:
+      "◆Rated Voltage: 380V ◆Rated Power: 5kW*2+15kW ◆Pan Size (mm): φ300*300 ◆Pan Material: 3.0mm Wrought Iron ◆Cooking Capacity: Approx 2.5kg ◆Pan Capacity: 1.5L-9.3L",
     power: "5kW*2+15kW",
     voltage: "380V",
     material: "3.0mm精铁",
@@ -3423,15 +3925,16 @@ window.PRODUCT_DATA_TABLE = [
       {
         filePath: "/assets/images/products/G30DFA-1.webp",
         isPrimary: true,
-        isHires: false
-      }
+        isHires: false,
+      },
     ],
     is_home_core: false,
     highlights: "",
     scenarios: "",
     usage: "",
-    usageEn: "Suitable for restaurant chains, food delivery, hotel banquets, corporate & institutional canteens, and more. Dual-head design enables simultaneous stir-frying and cooking, improving serving efficiency. Ideal for stir-fried dishes, fried rice, fried noodles, spicy chicken, spicy hot pot, and more. Capacity: approx. 2.5kg per drum batch plus one wok.",
-    materialEn: "3.0mm fine iron"
+    usageEn:
+      "Suitable for restaurant chains, food delivery, hotel banquets, corporate & institutional canteens, and more. Dual-head design enables simultaneous stir-frying and cooking, improving serving efficiency. Ideal for stir-fried dishes, fried rice, fried noodles, spicy chicken, spicy hot pot, and more. Capacity: approx. 2.5kg per drum batch plus one wok.",
+    materialEn: "3.0mm fine iron",
   },
   {
     model: "G36D1A",
@@ -3440,8 +3943,10 @@ window.PRODUCT_DATA_TABLE = [
     nameEn: "Compact Countertop Drum Cooker (Induction)",
     category: "翻炒系列",
     subCategory: "滚筒炒菜机",
-    specifications: "◆额定电压：380V ◆额定功率：8kW ◆配锅尺寸（mm） : φ360*360 ◆锅体材质：2.5mm精铁 ◆炒菜重量：约5kg ◆配锅容量：3L-17L",
-    specificationsEn: "◆Rated Voltage: 380V ◆Rated Power: 8kW ◆Pan Size (mm): φ360*360 ◆Pan Material: 2.5mm Wrought Iron ◆Cooking Capacity: Approx 5kg ◆Pan Capacity: 3L-17L",
+    specifications:
+      "◆额定电压：380V ◆额定功率：8kW ◆配锅尺寸（mm） : φ360*360 ◆锅体材质：2.5mm精铁 ◆炒菜重量：约5kg ◆配锅容量：3L-17L",
+    specificationsEn:
+      "◆Rated Voltage: 380V ◆Rated Power: 8kW ◆Pan Size (mm): φ360*360 ◆Pan Material: 2.5mm Wrought Iron ◆Cooking Capacity: Approx 5kg ◆Pan Capacity: 3L-17L",
     power: "8kW",
     voltage: "380V",
     material: "2.5mm精铁",
@@ -3456,15 +3961,16 @@ window.PRODUCT_DATA_TABLE = [
       {
         filePath: "/assets/images/products/G36D1A-1.webp",
         isPrimary: true,
-        isHires: false
-      }
+        isHires: false,
+      },
     ],
     is_home_core: false,
     highlights: "",
     scenarios: "",
     usage: "",
-    usageEn: "Suitable for restaurant chains, mid-sized restaurants, school canteens, corporate & institutional dining, and more. Ideal for automatic cooking of stir-fried dishes, fried rice, fried noodles, spicy chicken, spicy hot pot, crawfish, and large-portion dishes. Capacity: approx. 5kg per batch.",
-    materialEn: "2.5mm fine iron"
+    usageEn:
+      "Suitable for restaurant chains, mid-sized restaurants, school canteens, corporate & institutional dining, and more. Ideal for automatic cooking of stir-fried dishes, fried rice, fried noodles, spicy chicken, spicy hot pot, crawfish, and large-portion dishes. Capacity: approx. 5kg per batch.",
+    materialEn: "2.5mm fine iron",
   },
   {
     model: "G36D1R",
@@ -3473,8 +3979,10 @@ window.PRODUCT_DATA_TABLE = [
     nameEn: "Compact Countertop Drum Cooker (Gas)",
     category: "翻炒系列",
     subCategory: "滚筒炒菜机",
-    specifications: "◆额定电压：220V ◆电功率 :100W ◆配锅尺寸（mm） : φ360*360 ◆锅体材质：2.5mm精铁 ◆炒菜重量：约5kg ◆配锅容量：3L-17L ◆燃气类型:液化气/天然气 ◆热负荷： 17.6kW",
-    specificationsEn: "◆Rated Voltage: 220V ◆Power: 100W ◆Pan Size (mm): φ360*360 ◆Pan Material: 2.5mm Wrought Iron ◆Cooking Capacity: Approx 5kg ◆Pan Capacity: 3L-17L ◆Gas Type: LPG/Natural Gas ◆Heat Load: 17.6kW",
+    specifications:
+      "◆额定电压：220V ◆电功率 :100W ◆配锅尺寸（mm） : φ360*360 ◆锅体材质：2.5mm精铁 ◆炒菜重量：约5kg ◆配锅容量：3L-17L ◆燃气类型:液化气/天然气 ◆热负荷： 17.6kW",
+    specificationsEn:
+      "◆Rated Voltage: 220V ◆Power: 100W ◆Pan Size (mm): φ360*360 ◆Pan Material: 2.5mm Wrought Iron ◆Cooking Capacity: Approx 5kg ◆Pan Capacity: 3L-17L ◆Gas Type: LPG/Natural Gas ◆Heat Load: 17.6kW",
     power: "",
     voltage: "220V",
     material: "2.5mm精铁",
@@ -3489,15 +3997,16 @@ window.PRODUCT_DATA_TABLE = [
       {
         filePath: "/assets/images/products/G36D1R-1.webp",
         isPrimary: true,
-        isHires: false
-      }
+        isHires: false,
+      },
     ],
     is_home_core: false,
     highlights: "",
     scenarios: "",
     usage: "",
-    usageEn: "Suitable for restaurant chains, mid-sized restaurants, school canteens, corporate & institutional dining, and more. Ideal for automatic cooking of stir-fried dishes, fried rice, fried noodles, spicy chicken, spicy hot pot, crawfish, and large-portion dishes. Capacity: approx. 5kg per batch. Supports LPG and natural gas.",
-    materialEn: "2.5mm fine iron"
+    usageEn:
+      "Suitable for restaurant chains, mid-sized restaurants, school canteens, corporate & institutional dining, and more. Ideal for automatic cooking of stir-fried dishes, fried rice, fried noodles, spicy chicken, spicy hot pot, crawfish, and large-portion dishes. Capacity: approx. 5kg per batch. Supports LPG and natural gas.",
+    materialEn: "2.5mm fine iron",
   },
   {
     model: "G36DAA",
@@ -3506,8 +4015,10 @@ window.PRODUCT_DATA_TABLE = [
     nameEn: "Compact Upright Drum Cooker (Induction)",
     category: "翻炒系列",
     subCategory: "滚筒炒菜机",
-    specifications: "◆额定电压：380V ◆额定功率 : 8kW ◆配锅尺寸（mm） : φ360*360 ◆锅体材质：2.5mm精铁 ◆炒菜重量：约5kg ◆配锅容量：3L-17L",
-    specificationsEn: "◆Rated Voltage: 380V ◆Rated Power: 8kW ◆Pan Size (mm): φ360*360 ◆Pan Material: 2.5mm Wrought Iron ◆Cooking Capacity: Approx 5kg ◆Pan Capacity: 3L-17L",
+    specifications:
+      "◆额定电压：380V ◆额定功率 : 8kW ◆配锅尺寸（mm） : φ360*360 ◆锅体材质：2.5mm精铁 ◆炒菜重量：约5kg ◆配锅容量：3L-17L",
+    specificationsEn:
+      "◆Rated Voltage: 380V ◆Rated Power: 8kW ◆Pan Size (mm): φ360*360 ◆Pan Material: 2.5mm Wrought Iron ◆Cooking Capacity: Approx 5kg ◆Pan Capacity: 3L-17L",
     power: "8kW",
     voltage: "380V",
     material: "2.5mm精铁",
@@ -3522,15 +4033,16 @@ window.PRODUCT_DATA_TABLE = [
       {
         filePath: "/assets/images/products/G36DAA-1.webp",
         isPrimary: true,
-        isHires: false
-      }
+        isHires: false,
+      },
     ],
     is_home_core: false,
     highlights: "",
     scenarios: "",
     usage: "",
-    usageEn: "Suitable for restaurant chains, mid-sized restaurants, school canteens, corporate & institutional dining, and more. Ideal for automatic cooking of stir-fried dishes, fried rice, fried noodles, spicy chicken, spicy hot pot, crawfish, and large-portion dishes. Capacity: approx. 5kg per batch.",
-    materialEn: "2.5mm fine iron"
+    usageEn:
+      "Suitable for restaurant chains, mid-sized restaurants, school canteens, corporate & institutional dining, and more. Ideal for automatic cooking of stir-fried dishes, fried rice, fried noodles, spicy chicken, spicy hot pot, crawfish, and large-portion dishes. Capacity: approx. 5kg per batch.",
+    materialEn: "2.5mm fine iron",
   },
   {
     model: "G36DAR",
@@ -3539,8 +4051,10 @@ window.PRODUCT_DATA_TABLE = [
     nameEn: "Compact Upright Drum Cooker (Gas)",
     category: "翻炒系列",
     subCategory: "滚筒炒菜机",
-    specifications: "◆额定电压：220V ◆电机功率 :100W ◆配锅尺寸（mm） : φ360*360 ◆锅体材质：2.5mm精铁 ◆炒菜重量：约5kg ◆配锅容量：3L-17L ◆燃气类型:液化气/天然气 ◆热负荷： 17.6kW",
-    specificationsEn: "◆Rated Voltage: 220V ◆Motor Power: 100W ◆Pan Size (mm): φ360*360 ◆Pan Material: 2.5mm Wrought Iron ◆Cooking Capacity: Approx 5kg ◆Pan Capacity: 3L-17L ◆Gas Type: LPG/Natural Gas ◆Heat Load: 17.6kW",
+    specifications:
+      "◆额定电压：220V ◆电机功率 :100W ◆配锅尺寸（mm） : φ360*360 ◆锅体材质：2.5mm精铁 ◆炒菜重量：约5kg ◆配锅容量：3L-17L ◆燃气类型:液化气/天然气 ◆热负荷： 17.6kW",
+    specificationsEn:
+      "◆Rated Voltage: 220V ◆Motor Power: 100W ◆Pan Size (mm): φ360*360 ◆Pan Material: 2.5mm Wrought Iron ◆Cooking Capacity: Approx 5kg ◆Pan Capacity: 3L-17L ◆Gas Type: LPG/Natural Gas ◆Heat Load: 17.6kW",
     power: "",
     voltage: "220V",
     material: "2.5mm精铁",
@@ -3555,15 +4069,16 @@ window.PRODUCT_DATA_TABLE = [
       {
         filePath: "/assets/images/products/G36DAR-1.webp",
         isPrimary: true,
-        isHires: false
-      }
+        isHires: false,
+      },
     ],
     is_home_core: false,
     highlights: "",
     scenarios: "",
     usage: "",
-    usageEn: "Suitable for restaurant chains, mid-sized restaurants, school canteens, corporate & institutional dining, and more. Ideal for automatic cooking of stir-fried dishes, fried rice, fried noodles, spicy chicken, spicy hot pot, crawfish, and large-portion dishes. Capacity: approx. 5kg per batch. Supports LPG and natural gas.",
-    materialEn: "2.5mm fine iron"
+    usageEn:
+      "Suitable for restaurant chains, mid-sized restaurants, school canteens, corporate & institutional dining, and more. Ideal for automatic cooking of stir-fried dishes, fried rice, fried noodles, spicy chicken, spicy hot pot, crawfish, and large-portion dishes. Capacity: approx. 5kg per batch. Supports LPG and natural gas.",
+    materialEn: "2.5mm fine iron",
   },
   {
     model: "G26DAG",
@@ -3572,8 +4087,10 @@ window.PRODUCT_DATA_TABLE = [
     nameEn: "Smart Upright Drum Cooker (Induction)",
     category: "翻炒系列",
     subCategory: "滚筒炒菜机",
-    specifications: "◆额定电压 : 220V ◆额定功率：5kW ◆配锅尺寸（mm） : φ260*280 ◆锅体材质：2.5mm精铁 ◆炒菜重量：约1.8kg ◆配锅容量：  1L-6.4L ◆操作方式：全自动 ◆调料盒容量：5L*3 ◆自动调料功能：三路液态 ◆一键自动炒菜、机器学习功能、菜谱功能、可菜谱编辑、语音提示、温控功能",
-    specificationsEn: "◆Rated Voltage: 220V ◆Rated Power: 5kW ◆Pan Size (mm): φ260*280 ◆Pan Material: 2.5mm Wrought Iron ◆Cooking Capacity: Approx 1.8kg ◆Pan Capacity: 1L-6.4L ◆Operation: Fully Automatic ◆Seasoning Box Capacity: 5L*3 ◆Auto Seasoning: 3-Channel Liquid ◆One-Key Auto Cooking, Machine Learning, Recipe Function, Editable Recipes, Voice Prompts, Temperature Control",
+    specifications:
+      "◆额定电压 : 220V ◆额定功率：5kW ◆配锅尺寸（mm） : φ260*280 ◆锅体材质：2.5mm精铁 ◆炒菜重量：约1.8kg ◆配锅容量：  1L-6.4L ◆操作方式：全自动 ◆调料盒容量：5L*3 ◆自动调料功能：三路液态 ◆一键自动炒菜、机器学习功能、菜谱功能、可菜谱编辑、语音提示、温控功能",
+    specificationsEn:
+      "◆Rated Voltage: 220V ◆Rated Power: 5kW ◆Pan Size (mm): φ260*280 ◆Pan Material: 2.5mm Wrought Iron ◆Cooking Capacity: Approx 1.8kg ◆Pan Capacity: 1L-6.4L ◆Operation: Fully Automatic ◆Seasoning Box Capacity: 5L*3 ◆Auto Seasoning: 3-Channel Liquid ◆One-Key Auto Cooking, Machine Learning, Recipe Function, Editable Recipes, Voice Prompts, Temperature Control",
     power: "5kW",
     voltage: "",
     material: "2.5mm精铁",
@@ -3588,15 +4105,16 @@ window.PRODUCT_DATA_TABLE = [
       {
         filePath: "/assets/images/products/G26DAG-1.webp",
         isPrimary: true,
-        isHires: false
-      }
+        isHires: false,
+      },
     ],
     is_home_core: false,
     highlights: "",
     scenarios: "",
     usage: "",
-    usageEn: "Suitable for restaurant chains, food delivery, snack shops, convenience stores, and more. Fully automatic cooking with auto-dispensing for stir-fried dishes, fried rice, fried noodles, rice noodles, spicy chicken, spicy hot pot, and more. Capacity: approx. 1.8kg per batch.",
-    materialEn: "2.5mm fine iron"
+    usageEn:
+      "Suitable for restaurant chains, food delivery, snack shops, convenience stores, and more. Fully automatic cooking with auto-dispensing for stir-fried dishes, fried rice, fried noodles, rice noodles, spicy chicken, spicy hot pot, and more. Capacity: approx. 1.8kg per batch.",
+    materialEn: "2.5mm fine iron",
   },
   {
     model: "G26DAS",
@@ -3605,8 +4123,10 @@ window.PRODUCT_DATA_TABLE = [
     nameEn: "Smart Upright Drum Cooker (Gas)",
     category: "翻炒系列",
     subCategory: "滚筒炒菜机",
-    specifications: "◆额定电压 : 220V ◆额定功率：100W ◆配锅尺寸（mm） : φ260*280 ◆锅体材质：2.5mm精铁 ◆炒菜重量：约1.8kg ◆配锅容量：  1L-6.4L ◆操作方式：全自动 ◆调料盒容量：5L*3 ◆自动调料功能：三路液态 ◆一键自动炒菜、机器学习功能、菜谱功能、可菜谱编辑、语音提示、温控功能",
-    specificationsEn: "◆Rated Voltage: 220V ◆Rated Power: 100W ◆Pan Size (mm): φ260*280 ◆Pan Material: 2.5mm Wrought Iron ◆Cooking Capacity: Approx 1.8kg ◆Pan Capacity: 1L-6.4L ◆Operation: Fully Automatic ◆Seasoning Box Capacity: 5L*3 ◆Auto Seasoning: 3-Channel Liquid ◆One-Key Auto Cooking, Machine Learning, Recipe Function, Editable Recipes, Voice Prompts, Temperature Control",
+    specifications:
+      "◆额定电压 : 220V ◆额定功率：100W ◆配锅尺寸（mm） : φ260*280 ◆锅体材质：2.5mm精铁 ◆炒菜重量：约1.8kg ◆配锅容量：  1L-6.4L ◆操作方式：全自动 ◆调料盒容量：5L*3 ◆自动调料功能：三路液态 ◆一键自动炒菜、机器学习功能、菜谱功能、可菜谱编辑、语音提示、温控功能",
+    specificationsEn:
+      "◆Rated Voltage: 220V ◆Rated Power: 100W ◆Pan Size (mm): φ260*280 ◆Pan Material: 2.5mm Wrought Iron ◆Cooking Capacity: Approx 1.8kg ◆Pan Capacity: 1L-6.4L ◆Operation: Fully Automatic ◆Seasoning Box Capacity: 5L*3 ◆Auto Seasoning: 3-Channel Liquid ◆One-Key Auto Cooking, Machine Learning, Recipe Function, Editable Recipes, Voice Prompts, Temperature Control",
     power: "100W",
     voltage: "",
     material: "2.5mm精铁",
@@ -3621,15 +4141,16 @@ window.PRODUCT_DATA_TABLE = [
       {
         filePath: "/assets/images/products/G26DAS-1.webp",
         isPrimary: true,
-        isHires: false
-      }
+        isHires: false,
+      },
     ],
     is_home_core: false,
     highlights: "",
     scenarios: "",
     usage: "",
-    usageEn: "Suitable for restaurant chains, food delivery, snack shops, convenience stores, and more. Fully automatic cooking with auto-dispensing for stir-fried dishes, fried rice, fried noodles, rice noodles, spicy chicken, spicy hot pot, and more. Capacity: approx. 1.8kg per batch. Supports LPG and natural gas.",
-    materialEn: "2.5mm fine iron"
+    usageEn:
+      "Suitable for restaurant chains, food delivery, snack shops, convenience stores, and more. Fully automatic cooking with auto-dispensing for stir-fried dishes, fried rice, fried noodles, rice noodles, spicy chicken, spicy hot pot, and more. Capacity: approx. 1.8kg per batch. Supports LPG and natural gas.",
+    materialEn: "2.5mm fine iron",
   },
   {
     model: "G30DAG",
@@ -3638,8 +4159,10 @@ window.PRODUCT_DATA_TABLE = [
     nameEn: "Smart Upright Drum Cooker (Induction)",
     category: "翻炒系列",
     subCategory: "滚筒炒菜机",
-    specifications: "◆额定电压 : 220V ◆额定功率：5kW ◆配锅尺寸（mm） : φ300*300 ◆锅体材质：3.0mm精铁 ◆炒菜重量：约2.5kg ◆配钢容量： 1.5L-9.3L ◆操作方式：全自动 ◆调料盒容量：5L*3 ◆自动调料功能：三路液态 ◆一键自动炒菜、机器学习功能、菜谱功能、可菜谱编辑、语音提示、温控功能",
-    specificationsEn: "◆Rated Voltage: 220V ◆Rated Power: 5kW ◆Pan Size (mm): φ300*300 ◆Pan Material: 3.0mm Wrought Iron ◆Cooking Capacity: Approx 2.5kg ◆Pan Capacity: 1.5L-9.3L ◆Operation: Fully Automatic ◆Seasoning Box Capacity: 5L*3 ◆Auto Seasoning: 3-Channel Liquid ◆One-Key Auto Cooking, Machine Learning, Recipe Function, Editable Recipes, Voice Prompts, Temperature Control",
+    specifications:
+      "◆额定电压 : 220V ◆额定功率：5kW ◆配锅尺寸（mm） : φ300*300 ◆锅体材质：3.0mm精铁 ◆炒菜重量：约2.5kg ◆配钢容量： 1.5L-9.3L ◆操作方式：全自动 ◆调料盒容量：5L*3 ◆自动调料功能：三路液态 ◆一键自动炒菜、机器学习功能、菜谱功能、可菜谱编辑、语音提示、温控功能",
+    specificationsEn:
+      "◆Rated Voltage: 220V ◆Rated Power: 5kW ◆Pan Size (mm): φ300*300 ◆Pan Material: 3.0mm Wrought Iron ◆Cooking Capacity: Approx 2.5kg ◆Pan Capacity: 1.5L-9.3L ◆Operation: Fully Automatic ◆Seasoning Box Capacity: 5L*3 ◆Auto Seasoning: 3-Channel Liquid ◆One-Key Auto Cooking, Machine Learning, Recipe Function, Editable Recipes, Voice Prompts, Temperature Control",
     power: "5kW",
     voltage: "",
     material: "3.0mm精铁",
@@ -3654,15 +4177,16 @@ window.PRODUCT_DATA_TABLE = [
       {
         filePath: "/assets/images/products/G30DAG-1.webp",
         isPrimary: true,
-        isHires: false
-      }
+        isHires: false,
+      },
     ],
     is_home_core: true,
     highlights: "",
     scenarios: "",
     usage: "",
-    usageEn: "Suitable for restaurant chains, food delivery, hotel banquets, corporate & institutional canteens, and more. Fully automatic cooking with auto-dispensing for stir-fried dishes, fried rice, fried noodles, spicy chicken, spicy hot pot, crawfish, spicy shrimp & crab, and more. Capacity: approx. 2.5kg per batch.",
-    materialEn: "3.0mm fine iron"
+    usageEn:
+      "Suitable for restaurant chains, food delivery, hotel banquets, corporate & institutional canteens, and more. Fully automatic cooking with auto-dispensing for stir-fried dishes, fried rice, fried noodles, spicy chicken, spicy hot pot, crawfish, spicy shrimp & crab, and more. Capacity: approx. 2.5kg per batch.",
+    materialEn: "3.0mm fine iron",
   },
   {
     model: "G30DAS",
@@ -3671,8 +4195,10 @@ window.PRODUCT_DATA_TABLE = [
     nameEn: "Smart Upright Drum Cooker (Gas)",
     category: "翻炒系列",
     subCategory: "滚筒炒菜机",
-    specifications: "◆额定电压 : 220V ◆额定功率：100W ◆配锅尺寸（mm） : φ300*300 ◆锅体材质：3.0mm精铁 ◆炒菜重量：约2.5kg ◆配钢容量： 1.5L-9.3L ◆操作方式：全自动 ◆调料盒容量：5L*3 ◆自动调料功能：三路液态 ◆一键自动炒菜、机器学习功能、菜谱功能、可菜谱编辑、语音提示、温控功能",
-    specificationsEn: "◆Rated Voltage: 220V ◆Rated Power: 100W ◆Pan Size (mm): φ300*300 ◆Pan Material: 3.0mm Wrought Iron ◆Cooking Capacity: Approx 2.5kg ◆Pan Capacity: 1.5L-9.3L ◆Operation: Fully Automatic ◆Seasoning Box Capacity: 5L*3 ◆Auto Seasoning: 3-Channel Liquid ◆One-Key Auto Cooking, Machine Learning, Recipe Function, Editable Recipes, Voice Prompts, Temperature Control",
+    specifications:
+      "◆额定电压 : 220V ◆额定功率：100W ◆配锅尺寸（mm） : φ300*300 ◆锅体材质：3.0mm精铁 ◆炒菜重量：约2.5kg ◆配钢容量： 1.5L-9.3L ◆操作方式：全自动 ◆调料盒容量：5L*3 ◆自动调料功能：三路液态 ◆一键自动炒菜、机器学习功能、菜谱功能、可菜谱编辑、语音提示、温控功能",
+    specificationsEn:
+      "◆Rated Voltage: 220V ◆Rated Power: 100W ◆Pan Size (mm): φ300*300 ◆Pan Material: 3.0mm Wrought Iron ◆Cooking Capacity: Approx 2.5kg ◆Pan Capacity: 1.5L-9.3L ◆Operation: Fully Automatic ◆Seasoning Box Capacity: 5L*3 ◆Auto Seasoning: 3-Channel Liquid ◆One-Key Auto Cooking, Machine Learning, Recipe Function, Editable Recipes, Voice Prompts, Temperature Control",
     power: "100W",
     voltage: "",
     material: "3.0mm精铁",
@@ -3687,15 +4213,16 @@ window.PRODUCT_DATA_TABLE = [
       {
         filePath: "/assets/images/products/G30DAS-1.webp",
         isPrimary: true,
-        isHires: false
-      }
+        isHires: false,
+      },
     ],
     is_home_core: false,
     highlights: "",
     scenarios: "",
     usage: "",
-    usageEn: "Suitable for restaurant chains, food delivery, hotel banquets, corporate & institutional canteens, and more. Fully automatic cooking with auto-dispensing for stir-fried dishes, fried rice, fried noodles, spicy chicken, spicy hot pot, crawfish, spicy shrimp & crab, and more. Capacity: approx. 2.5kg per batch. Supports LPG and natural gas.",
-    materialEn: "3.0mm fine iron"
+    usageEn:
+      "Suitable for restaurant chains, food delivery, hotel banquets, corporate & institutional canteens, and more. Fully automatic cooking with auto-dispensing for stir-fried dishes, fried rice, fried noodles, spicy chicken, spicy hot pot, crawfish, spicy shrimp & crab, and more. Capacity: approx. 2.5kg per batch. Supports LPG and natural gas.",
+    materialEn: "3.0mm fine iron",
   },
   {
     model: "G36DAG",
@@ -3704,8 +4231,10 @@ window.PRODUCT_DATA_TABLE = [
     nameEn: "Smart Upright Drum Cooker (Induction)",
     category: "翻炒系列",
     subCategory: "滚筒炒菜机",
-    specifications: "◆额定电压 : 380V ◆额定功率：8kW ◆配锅尺寸（mm） : φ360*360 ◆锅体材质：2.5mm精铁 ◆炒菜重量：约5kg ◆配钢容量： 3L-17L ◆操作方式：全自动 ◆调料盒容量：5L*3 ◆自动调料功能：三路液态 ◆一键自动炒菜、机器学习功能、菜谱功能、可菜谱编辑、语音提示、温控功能",
-    specificationsEn: "◆Rated Voltage: 380V ◆Rated Power: 8kW ◆Pan Size (mm): φ360*360 ◆Pan Material: 2.5mm Wrought Iron ◆Cooking Capacity: Approx 5kg ◆Pan Capacity: 3L-17L ◆Operation: Fully Automatic ◆Seasoning Box Capacity: 5L*3 ◆Auto Seasoning: 3-Channel Liquid ◆One-Key Auto Cooking, Machine Learning, Recipe Function, Editable Recipes, Voice Prompts, Temperature Control",
+    specifications:
+      "◆额定电压 : 380V ◆额定功率：8kW ◆配锅尺寸（mm） : φ360*360 ◆锅体材质：2.5mm精铁 ◆炒菜重量：约5kg ◆配钢容量： 3L-17L ◆操作方式：全自动 ◆调料盒容量：5L*3 ◆自动调料功能：三路液态 ◆一键自动炒菜、机器学习功能、菜谱功能、可菜谱编辑、语音提示、温控功能",
+    specificationsEn:
+      "◆Rated Voltage: 380V ◆Rated Power: 8kW ◆Pan Size (mm): φ360*360 ◆Pan Material: 2.5mm Wrought Iron ◆Cooking Capacity: Approx 5kg ◆Pan Capacity: 3L-17L ◆Operation: Fully Automatic ◆Seasoning Box Capacity: 5L*3 ◆Auto Seasoning: 3-Channel Liquid ◆One-Key Auto Cooking, Machine Learning, Recipe Function, Editable Recipes, Voice Prompts, Temperature Control",
     power: "8kW",
     voltage: "",
     material: "2.5mm精铁",
@@ -3720,15 +4249,16 @@ window.PRODUCT_DATA_TABLE = [
       {
         filePath: "/assets/images/products/G36DAG-1.webp",
         isPrimary: true,
-        isHires: false
-      }
+        isHires: false,
+      },
     ],
     is_home_core: false,
     highlights: "",
     scenarios: "",
     usage: "",
-    usageEn: "Suitable for restaurant chains, mid-sized restaurants, school canteens, catering services, and more. Fully automatic cooking with auto-dispensing for stir-fried dishes, fried rice, fried noodles, spicy chicken, spicy hot pot, and large-portion dishes. Capacity: approx. 5kg per batch.",
-    materialEn: "2.5mm fine iron"
+    usageEn:
+      "Suitable for restaurant chains, mid-sized restaurants, school canteens, catering services, and more. Fully automatic cooking with auto-dispensing for stir-fried dishes, fried rice, fried noodles, spicy chicken, spicy hot pot, and large-portion dishes. Capacity: approx. 5kg per batch.",
+    materialEn: "2.5mm fine iron",
   },
   {
     model: "G36DAS",
@@ -3737,8 +4267,10 @@ window.PRODUCT_DATA_TABLE = [
     nameEn: "Smart Upright Drum Cooker (Gas)",
     category: "翻炒系列",
     subCategory: "滚筒炒菜机",
-    specifications: "◆额定电压 : 220V ◆额定功率：100W ◆配锅尺寸（mm） : φ360*360 ◆锅体材质：2.5mm精铁 ◆炒菜重量：约5kg ◆配钢容量： 3L-17L ◆操作方式：全自动 ◆调料盒容量：5L*3 ◆自动调料功能：三路液态 ◆一键自动炒菜、机器学习功能、菜谱功能、可菜谱编辑、语音提示、温控功能",
-    specificationsEn: "◆Rated Voltage: 220V ◆Rated Power: 100W ◆Pan Size (mm): φ360*360 ◆Pan Material: 2.5mm Wrought Iron ◆Cooking Capacity: Approx 5kg ◆Pan Capacity: 3L-17L ◆Operation: Fully Automatic ◆Seasoning Box Capacity: 5L*3 ◆Auto Seasoning: 3-Channel Liquid ◆One-Key Auto Cooking, Machine Learning, Recipe Function, Editable Recipes, Voice Prompts, Temperature Control",
+    specifications:
+      "◆额定电压 : 220V ◆额定功率：100W ◆配锅尺寸（mm） : φ360*360 ◆锅体材质：2.5mm精铁 ◆炒菜重量：约5kg ◆配钢容量： 3L-17L ◆操作方式：全自动 ◆调料盒容量：5L*3 ◆自动调料功能：三路液态 ◆一键自动炒菜、机器学习功能、菜谱功能、可菜谱编辑、语音提示、温控功能",
+    specificationsEn:
+      "◆Rated Voltage: 220V ◆Rated Power: 100W ◆Pan Size (mm): φ360*360 ◆Pan Material: 2.5mm Wrought Iron ◆Cooking Capacity: Approx 5kg ◆Pan Capacity: 3L-17L ◆Operation: Fully Automatic ◆Seasoning Box Capacity: 5L*3 ◆Auto Seasoning: 3-Channel Liquid ◆One-Key Auto Cooking, Machine Learning, Recipe Function, Editable Recipes, Voice Prompts, Temperature Control",
     power: "100W",
     voltage: "",
     material: "2.5mm精铁",
@@ -3753,15 +4285,16 @@ window.PRODUCT_DATA_TABLE = [
       {
         filePath: "/assets/images/products/G36DAS-1.webp",
         isPrimary: true,
-        isHires: false
-      }
+        isHires: false,
+      },
     ],
     is_home_core: false,
     highlights: "",
     scenarios: "",
     usage: "",
-    usageEn: "Suitable for restaurant chains, mid-sized restaurants, school canteens, catering services, and more. Fully automatic cooking with auto-dispensing for stir-fried dishes, fried rice, fried noodles, spicy chicken, spicy hot pot, and large-portion dishes. Capacity: approx. 5kg per batch. Supports LPG and natural gas.",
-    materialEn: "2.5mm fine iron"
+    usageEn:
+      "Suitable for restaurant chains, mid-sized restaurants, school canteens, catering services, and more. Fully automatic cooking with auto-dispensing for stir-fried dishes, fried rice, fried noodles, spicy chicken, spicy hot pot, and large-portion dishes. Capacity: approx. 5kg per batch. Supports LPG and natural gas.",
+    materialEn: "2.5mm fine iron",
   },
   {
     model: "J40CBB",
@@ -3770,8 +4303,10 @@ window.PRODUCT_DATA_TABLE = [
     nameEn: "Fully Automatic Smart Cooker",
     category: "翻炒系列",
     subCategory: "滚筒炒菜机",
-    specifications: "◆额定电压 : 380V3P+N ◆额定功率：8-12kw ◆配锅尺寸（mm） :  φ400\\*200mm(无涂层) ◆锅体材质：1.5mm铁锅 ◆炒菜重量：2kg ◆配钢容量： 3L-17L ◆操作方式：全自动 ◆调料盒容量：4路(1.7升) ◆固体调料;3路(450ml) 液体调料:共8路 4路(4.5L)、1路(9升)、1路猪油(6升)、1路勾芡(300ml)、1路自来水 ◆自动加菜 自动加调料 自动翻炒 自动洗锅 移动端物联网平台语音提示",
-    specificationsEn: "◆Rated Voltage: 380V 3P+N ◆Rated Power: 8-12kW ◆Pan Size (mm): φ400*200mm (Uncoated) ◆Pan Material: 1.5mm Iron Wok ◆Cooking Capacity: 2kg ◆Pan Capacity: 3L-17L ◆Operation: Fully Automatic ◆Seasoning Box Capacity: 4 channels (1.7L) Solid Seasoning; 3 channels (450ml) Liquid Seasoning: 8 channels total ◆4 channels (4.5L), 1 channel (9L), 1 channel Lard (6L), 1 channel Starch (300ml), 1 channel Tap Water ◆Auto Ingredient Feeding, Auto Seasoning, Auto Stirring, Auto Pan Washing, Mobile IoT Platform, Voice Prompts",
+    specifications:
+      "◆额定电压 : 380V3P+N ◆额定功率：8-12kw ◆配锅尺寸（mm） :  φ400\\*200mm(无涂层) ◆锅体材质：1.5mm铁锅 ◆炒菜重量：2kg ◆配钢容量： 3L-17L ◆操作方式：全自动 ◆调料盒容量：4路(1.7升) ◆固体调料;3路(450ml) 液体调料:共8路 4路(4.5L)、1路(9升)、1路猪油(6升)、1路勾芡(300ml)、1路自来水 ◆自动加菜 自动加调料 自动翻炒 自动洗锅 移动端物联网平台语音提示",
+    specificationsEn:
+      "◆Rated Voltage: 380V 3P+N ◆Rated Power: 8-12kW ◆Pan Size (mm): φ400*200mm (Uncoated) ◆Pan Material: 1.5mm Iron Wok ◆Cooking Capacity: 2kg ◆Pan Capacity: 3L-17L ◆Operation: Fully Automatic ◆Seasoning Box Capacity: 4 channels (1.7L) Solid Seasoning; 3 channels (450ml) Liquid Seasoning: 8 channels total ◆4 channels (4.5L), 1 channel (9L), 1 channel Lard (6L), 1 channel Starch (300ml), 1 channel Tap Water ◆Auto Ingredient Feeding, Auto Seasoning, Auto Stirring, Auto Pan Washing, Mobile IoT Platform, Voice Prompts",
     power: "8-12kw",
     voltage: "",
     material: "1.5mm铁锅",
@@ -3786,15 +4321,16 @@ window.PRODUCT_DATA_TABLE = [
       {
         filePath: "/assets/images/products/J40CBB-1.webp",
         isPrimary: true,
-        isHires: false
-      }
+        isHires: false,
+      },
     ],
     is_home_core: false,
     highlights: "",
     scenarios: "",
     usage: "",
-    usageEn: "Suitable for restaurant chains, food delivery, small to mid-sized restaurants, corporate & institutional canteens, and more. Fully automatic one-touch cooking of stir-fried dishes, fried rice, fried noodles, spicy chicken, spicy hot pot, crawfish, and more. Capacity: approx. 2kg per batch.",
-    materialEn: "1.5mm iron wok"
+    usageEn:
+      "Suitable for restaurant chains, food delivery, small to mid-sized restaurants, corporate & institutional canteens, and more. Fully automatic one-touch cooking of stir-fried dishes, fried rice, fried noodles, spicy chicken, spicy hot pot, crawfish, and more. Capacity: approx. 2kg per batch.",
+    materialEn: "1.5mm iron wok",
   },
   {
     model: "G50AAB",
@@ -3803,8 +4339,10 @@ window.PRODUCT_DATA_TABLE = [
     nameEn: "Compact/Smart Batch Drum Cooker (Induction)",
     category: "翻炒系列",
     subCategory: "团餐滚筒炒菜机",
-    specifications: "◆额定电压：380V ◆额定功率： 15kW ◆配锅尺寸（mm） : φ500*500 ◆锅体材质： 2.5mm 430 ◆炒菜重量：约10kg ◆配锅容量： 14L-41L ◆锅体款式：牛头锅 ◆操作方式：半自动 ◆操作屏幕：旋钮和开关 ◆定时功能：有",
-    specificationsEn: "◆Rated Voltage: 380V ◆Rated Power: 15kW ◆Pan Size (mm): φ500*500 ◆Pan Material: 2.5mm 430 Stainless Steel ◆Cooking Capacity: Approx 10kg ◆Pan Capacity: 14L-41L ◆Pan Style: Bullhead Wok ◆Operation: Semi-Automatic ◆Control Panel: Knob and Switch ◆Timer Function: Yes",
+    specifications:
+      "◆额定电压：380V ◆额定功率： 15kW ◆配锅尺寸（mm） : φ500*500 ◆锅体材质： 2.5mm 430 ◆炒菜重量：约10kg ◆配锅容量： 14L-41L ◆锅体款式：牛头锅 ◆操作方式：半自动 ◆操作屏幕：旋钮和开关 ◆定时功能：有",
+    specificationsEn:
+      "◆Rated Voltage: 380V ◆Rated Power: 15kW ◆Pan Size (mm): φ500*500 ◆Pan Material: 2.5mm 430 Stainless Steel ◆Cooking Capacity: Approx 10kg ◆Pan Capacity: 14L-41L ◆Pan Style: Bullhead Wok ◆Operation: Semi-Automatic ◆Control Panel: Knob and Switch ◆Timer Function: Yes",
     power: "15kW",
     voltage: "380V",
     material: "2.5mm430",
@@ -3819,15 +4357,16 @@ window.PRODUCT_DATA_TABLE = [
       {
         filePath: "/assets/images/products/G50AAB-1.webp",
         isPrimary: true,
-        isHires: false
-      }
+        isHires: false,
+      },
     ],
     is_home_core: false,
     highlights: "",
     scenarios: "",
     usage: "",
-    usageEn: "Suitable for school canteens, corporate & institutional dining, large-scale catering services, hotel banquets, and more. Ideal for large-volume cooking of stir-fried dishes, fried rice, boiled noodles, braised dishes, and more. Capacity: approx. 10kg per batch, pot capacity 14-41L.",
-    materialEn: "2.5mm 430 stainless steel"
+    usageEn:
+      "Suitable for school canteens, corporate & institutional dining, large-scale catering services, hotel banquets, and more. Ideal for large-volume cooking of stir-fried dishes, fried rice, boiled noodles, braised dishes, and more. Capacity: approx. 10kg per batch, pot capacity 14-41L.",
+    materialEn: "2.5mm 430 stainless steel",
   },
   {
     model: "G50AAC",
@@ -3836,8 +4375,10 @@ window.PRODUCT_DATA_TABLE = [
     nameEn: "Compact/Smart Batch Drum Cooker (Induction)",
     category: "翻炒系列",
     subCategory: "团餐滚筒炒菜机",
-    specifications: "◆额定电压：380V ◆额电功率 :15kW ◆配锅尺寸（mm） : φ500*500 ◆锅体材质： 2.5mm 430 ◆炒菜重量：约10kg ◆配锅容量： 14L-41L ◆锅体款式：牛头锅 ◆操作方式：全自动 ◆操作屏幕： 电容屏玻璃面板 ◆有一键自动炒菜、机器学习功能、菜谱功能、语音提示、定时功能",
-    specificationsEn: "◆Rated Voltage: 380V ◆Rated Power: 15kW ◆Pan Size (mm): φ500*500 ◆Pan Material: 2.5mm 430 Stainless Steel ◆Cooking Capacity: Approx 10kg ◆Pan Capacity: 14L-41L ◆Pan Style: Bullhead Wok ◆Operation: Fully Automatic ◆Control Panel: Capacitive Touch Glass Panel ◆One-Key Auto Cooking, Machine Learning, Recipe Function, Voice Prompts, Timer Function",
+    specifications:
+      "◆额定电压：380V ◆额电功率 :15kW ◆配锅尺寸（mm） : φ500*500 ◆锅体材质： 2.5mm 430 ◆炒菜重量：约10kg ◆配锅容量： 14L-41L ◆锅体款式：牛头锅 ◆操作方式：全自动 ◆操作屏幕： 电容屏玻璃面板 ◆有一键自动炒菜、机器学习功能、菜谱功能、语音提示、定时功能",
+    specificationsEn:
+      "◆Rated Voltage: 380V ◆Rated Power: 15kW ◆Pan Size (mm): φ500*500 ◆Pan Material: 2.5mm 430 Stainless Steel ◆Cooking Capacity: Approx 10kg ◆Pan Capacity: 14L-41L ◆Pan Style: Bullhead Wok ◆Operation: Fully Automatic ◆Control Panel: Capacitive Touch Glass Panel ◆One-Key Auto Cooking, Machine Learning, Recipe Function, Voice Prompts, Timer Function",
     power: "",
     voltage: "380V",
     material: "2.5mm430",
@@ -3852,15 +4393,16 @@ window.PRODUCT_DATA_TABLE = [
       {
         filePath: "/assets/images/products/G50AAC-1.webp",
         isPrimary: true,
-        isHires: false
-      }
+        isHires: false,
+      },
     ],
     is_home_core: false,
     highlights: "",
     scenarios: "",
     usage: "",
-    usageEn: "Suitable for school canteens, corporate & institutional dining, large-scale catering services, hotel banquets, and more. Ideal for large-volume cooking of stir-fried dishes, fried rice, boiled noodles, braised dishes, and more. Capacity: approx. 10kg per batch, pot capacity 14-41L.",
-    materialEn: "2.5mm 430 stainless steel"
+    usageEn:
+      "Suitable for school canteens, corporate & institutional dining, large-scale catering services, hotel banquets, and more. Ideal for large-volume cooking of stir-fried dishes, fried rice, boiled noodles, braised dishes, and more. Capacity: approx. 10kg per batch, pot capacity 14-41L.",
+    materialEn: "2.5mm 430 stainless steel",
   },
   {
     model: "G50GAT",
@@ -3869,8 +4411,10 @@ window.PRODUCT_DATA_TABLE = [
     nameEn: "Compact Batch Drum Cooker (Gas)",
     category: "翻炒系列",
     subCategory: "团餐滚筒炒菜机",
-    specifications: "◆额定电压：220V ◆电功率：500W ◆配锅尺寸（mm） : φ500*500 ◆锅体材质：3.0mm 氮化/涂层锅 ◆配锅容量： 14L-41L ◆炒菜重量：约10kg ◆燃气类型:液化气/天然气 ◆热负荷：32kW ◆定时功能：有",
-    specificationsEn: "◆Rated Voltage: 220V ◆Power: 500W ◆Pan Size (mm): φ500*500 ◆Pan Material: 3.0mm Nitrided/Coated Wok ◆Pan Capacity: 14L-41L ◆Cooking Capacity: Approx 10kg ◆Gas Type: LPG/Natural Gas ◆Heat Load: 32kW ◆Timer Function: Yes",
+    specifications:
+      "◆额定电压：220V ◆电功率：500W ◆配锅尺寸（mm） : φ500*500 ◆锅体材质：3.0mm 氮化/涂层锅 ◆配锅容量： 14L-41L ◆炒菜重量：约10kg ◆燃气类型:液化气/天然气 ◆热负荷：32kW ◆定时功能：有",
+    specificationsEn:
+      "◆Rated Voltage: 220V ◆Power: 500W ◆Pan Size (mm): φ500*500 ◆Pan Material: 3.0mm Nitrided/Coated Wok ◆Pan Capacity: 14L-41L ◆Cooking Capacity: Approx 10kg ◆Gas Type: LPG/Natural Gas ◆Heat Load: 32kW ◆Timer Function: Yes",
     power: "500W",
     voltage: "220V",
     material: "3.0mm氮化/涂层锅",
@@ -3885,15 +4429,16 @@ window.PRODUCT_DATA_TABLE = [
       {
         filePath: "/assets/images/products/G50GAT-1.webp",
         isPrimary: true,
-        isHires: false
-      }
+        isHires: false,
+      },
     ],
     is_home_core: false,
     highlights: "",
     scenarios: "",
     usage: "",
-    usageEn: "Suitable for school canteens, corporate & institutional dining, large-scale catering services, hotel banquets, and more. Ideal for large-volume cooking of stir-fried dishes, fried rice, boiled noodles, braised dishes, and more. Capacity: approx. 10kg per batch, pot capacity 14-41L. Supports LPG and natural gas.",
-    materialEn: "3.0mm nitrided/coated wok"
+    usageEn:
+      "Suitable for school canteens, corporate & institutional dining, large-scale catering services, hotel banquets, and more. Ideal for large-volume cooking of stir-fried dishes, fried rice, boiled noodles, braised dishes, and more. Capacity: approx. 10kg per batch, pot capacity 14-41L. Supports LPG and natural gas.",
+    materialEn: "3.0mm nitrided/coated wok",
   },
   {
     model: "G60EAC",
@@ -3902,8 +4447,10 @@ window.PRODUCT_DATA_TABLE = [
     nameEn: "Smart Batch Drum Cooker (Induction)",
     category: "翻炒系列",
     subCategory: "团餐滚筒炒菜机",
-    specifications: "◆额定电压：380V ◆额定功率：30kW ◆配锅尺寸（mm） : φ600*820 ◆锅体材质：3.5mm精铁 ◆配锅容量：40L-60L ◆炒菜重量：约10-30kg ◆自动调料功能:水+5路调料 ◆调料盒容量:10L*1+5L*4 ◆有一键自动炒菜、机器学习功能、菜谱功能、语音播报提示、温控功能",
-    specificationsEn: "◆Rated Voltage: 380V ◆Rated Power: 30kW ◆Pan Size (mm): φ600*820 ◆Pan Material: 3.5mm Wrought Iron ◆Pan Capacity: 40L-60L ◆Cooking Capacity: Approx 10-30kg ◆Auto Seasoning: Water + 5 Channels ◆Seasoning Box Capacity: 10L*1 + 5L*4 ◆One-Key Auto Cooking, Machine Learning, Recipe Function, Voice Announcement Prompts, Temperature Control",
+    specifications:
+      "◆额定电压：380V ◆额定功率：30kW ◆配锅尺寸（mm） : φ600*820 ◆锅体材质：3.5mm精铁 ◆配锅容量：40L-60L ◆炒菜重量：约10-30kg ◆自动调料功能:水+5路调料 ◆调料盒容量:10L*1+5L*4 ◆有一键自动炒菜、机器学习功能、菜谱功能、语音播报提示、温控功能",
+    specificationsEn:
+      "◆Rated Voltage: 380V ◆Rated Power: 30kW ◆Pan Size (mm): φ600*820 ◆Pan Material: 3.5mm Wrought Iron ◆Pan Capacity: 40L-60L ◆Cooking Capacity: Approx 10-30kg ◆Auto Seasoning: Water + 5 Channels ◆Seasoning Box Capacity: 10L*1 + 5L*4 ◆One-Key Auto Cooking, Machine Learning, Recipe Function, Voice Announcement Prompts, Temperature Control",
     power: "30kW",
     voltage: "380V",
     material: "3.5mm精铁",
@@ -3918,15 +4465,16 @@ window.PRODUCT_DATA_TABLE = [
       {
         filePath: "/assets/images/products/G60EAC-1.webp",
         isPrimary: true,
-        isHires: false
-      }
+        isHires: false,
+      },
     ],
     is_home_core: false,
     highlights: "",
     scenarios: "",
     usage: "",
-    usageEn: "Suitable for large-scale catering services, school canteens, hospital kitchens, military dining, corporate & institutional canteens, and more. Ideal for ultra-large-volume cooking of stir-fried dishes, fried rice, and large-portion dishes for centralized food preparation. Capacity: approx. 10-30kg per batch, pot capacity 40-60L.",
-    materialEn: "3.5mm fine iron"
+    usageEn:
+      "Suitable for large-scale catering services, school canteens, hospital kitchens, military dining, corporate & institutional canteens, and more. Ideal for ultra-large-volume cooking of stir-fried dishes, fried rice, and large-portion dishes for centralized food preparation. Capacity: approx. 10-30kg per batch, pot capacity 40-60L.",
+    materialEn: "3.5mm fine iron",
   },
   {
     model: "G60EAS",
@@ -3935,8 +4483,10 @@ window.PRODUCT_DATA_TABLE = [
     nameEn: "Smart Batch Drum Cooker (Gas)",
     category: "翻炒系列",
     subCategory: "团餐滚筒炒菜机",
-    specifications: "◆额定电压：380V ◆额定电功率：2kW ◆配锅尺寸（mm） : φ600*820 ◆锅体材质：3.5mm精铁 ◆炒菜重量：约10-30kg ◆配锅容量：40L-60L ◆燃气类型：液化气/天然气 ◆热负荷：63kW ◆进水口：DN15 ◆自动调料功能：水+5路调料 ◆调料盒容量：10L*1+5L*4 ◆有一键自动炒菜、机器学习功能、菜谱功能、语音播报提示、温控功能",
-    specificationsEn: "◆Rated Voltage: 380V ◆Rated Power: 2kW ◆Pan Size (mm): φ600*820 ◆Pan Material: 3.5mm Wrought Iron ◆Cooking Capacity: Approx 10-30kg ◆Pan Capacity: 40L-60L ◆Gas Type: LPG/Natural Gas ◆Heat Load: 63kW ◆Water Inlet: DN15 ◆Auto Seasoning: Water + 5 Channels ◆Seasoning Box Capacity: 10L*1 + 5L*4 ◆One-Key Auto Cooking, Machine Learning, Recipe Function, Voice Announcement Prompts, Temperature Control",
+    specifications:
+      "◆额定电压：380V ◆额定电功率：2kW ◆配锅尺寸（mm） : φ600*820 ◆锅体材质：3.5mm精铁 ◆炒菜重量：约10-30kg ◆配锅容量：40L-60L ◆燃气类型：液化气/天然气 ◆热负荷：63kW ◆进水口：DN15 ◆自动调料功能：水+5路调料 ◆调料盒容量：10L*1+5L*4 ◆有一键自动炒菜、机器学习功能、菜谱功能、语音播报提示、温控功能",
+    specificationsEn:
+      "◆Rated Voltage: 380V ◆Rated Power: 2kW ◆Pan Size (mm): φ600*820 ◆Pan Material: 3.5mm Wrought Iron ◆Cooking Capacity: Approx 10-30kg ◆Pan Capacity: 40L-60L ◆Gas Type: LPG/Natural Gas ◆Heat Load: 63kW ◆Water Inlet: DN15 ◆Auto Seasoning: Water + 5 Channels ◆Seasoning Box Capacity: 10L*1 + 5L*4 ◆One-Key Auto Cooking, Machine Learning, Recipe Function, Voice Announcement Prompts, Temperature Control",
     power: "2kW",
     voltage: "380V",
     material: "3.5mm精铁",
@@ -3951,15 +4501,16 @@ window.PRODUCT_DATA_TABLE = [
       {
         filePath: "/assets/images/products/G60EAS-1.webp",
         isPrimary: true,
-        isHires: false
-      }
+        isHires: false,
+      },
     ],
     is_home_core: false,
     highlights: "",
     scenarios: "",
     usage: "",
-    usageEn: "Suitable for large-scale catering services, school canteens, hospital kitchens, military dining, corporate & institutional canteens, and more. Ideal for ultra-large-volume cooking of stir-fried dishes, fried rice, and large-portion dishes for centralized food preparation. Capacity: approx. 10-30kg per batch, pot capacity 40-60L. Supports LPG and natural gas.",
-    materialEn: "3.5mm fine iron"
+    usageEn:
+      "Suitable for large-scale catering services, school canteens, hospital kitchens, military dining, corporate & institutional canteens, and more. Ideal for ultra-large-volume cooking of stir-fried dishes, fried rice, and large-portion dishes for centralized food preparation. Capacity: approx. 10-30kg per batch, pot capacity 40-60L. Supports LPG and natural gas.",
+    materialEn: "3.5mm fine iron",
   },
   {
     model: "G70EAC",
@@ -3968,8 +4519,10 @@ window.PRODUCT_DATA_TABLE = [
     nameEn: "Smart Batch Drum Cooker (Induction)",
     category: "翻炒系列",
     subCategory: "团餐滚筒炒菜机",
-    specifications: "◆额定电压：380V ◆额定功率：30kW ◆配锅尺寸（mm） : φ700*880 ◆锅体材质：3.5mm精铁 ◆炒菜重量：约20-50kg ◆配锅容量：40L-100L ◆进水口：   DN15 ◆自动调料功能:水+5路调料 ◆调料盒容量:10L*1+5L*4 ◆有一键自动炒菜、机器学习功能、菜谱功能、语音播报提示、温控功能",
-    specificationsEn: "◆Rated Voltage: 380V ◆Rated Power: 30kW ◆Pan Size (mm): φ700*880 ◆Pan Material: 3.5mm Wrought Iron ◆Cooking Capacity: Approx 20-50kg ◆Pan Capacity: 40L-100L ◆Water Inlet: DN15 ◆Auto Seasoning: Water + 5 Channels ◆Seasoning Box Capacity: 10L*1 + 5L*4 ◆One-Key Auto Cooking, Machine Learning, Recipe Function, Voice Announcement Prompts, Temperature Control",
+    specifications:
+      "◆额定电压：380V ◆额定功率：30kW ◆配锅尺寸（mm） : φ700*880 ◆锅体材质：3.5mm精铁 ◆炒菜重量：约20-50kg ◆配锅容量：40L-100L ◆进水口：   DN15 ◆自动调料功能:水+5路调料 ◆调料盒容量:10L*1+5L*4 ◆有一键自动炒菜、机器学习功能、菜谱功能、语音播报提示、温控功能",
+    specificationsEn:
+      "◆Rated Voltage: 380V ◆Rated Power: 30kW ◆Pan Size (mm): φ700*880 ◆Pan Material: 3.5mm Wrought Iron ◆Cooking Capacity: Approx 20-50kg ◆Pan Capacity: 40L-100L ◆Water Inlet: DN15 ◆Auto Seasoning: Water + 5 Channels ◆Seasoning Box Capacity: 10L*1 + 5L*4 ◆One-Key Auto Cooking, Machine Learning, Recipe Function, Voice Announcement Prompts, Temperature Control",
     power: "30kW",
     voltage: "380V",
     material: "3.5mm精铁",
@@ -3984,15 +4537,16 @@ window.PRODUCT_DATA_TABLE = [
       {
         filePath: "/assets/images/products/G70EAC-1.webp",
         isPrimary: true,
-        isHires: false
-      }
+        isHires: false,
+      },
     ],
     is_home_core: false,
     highlights: "",
     scenarios: "",
     usage: "",
-    usageEn: "Suitable for large-scale catering centers, central kitchens, school canteens, hospital kitchens, military dining, and more. Ideal for ultra-large-volume centralized cooking and food preparation. Capacity: approx. 20-50kg per batch, pot capacity 40-100L.",
-    materialEn: "3.5mm fine iron"
+    usageEn:
+      "Suitable for large-scale catering centers, central kitchens, school canteens, hospital kitchens, military dining, and more. Ideal for ultra-large-volume centralized cooking and food preparation. Capacity: approx. 20-50kg per batch, pot capacity 40-100L.",
+    materialEn: "3.5mm fine iron",
   },
   {
     model: "G70EAS",
@@ -4001,8 +4555,10 @@ window.PRODUCT_DATA_TABLE = [
     nameEn: "Smart Batch Drum Cooker (Gas)",
     category: "翻炒系列",
     subCategory: "团餐滚筒炒菜机",
-    specifications: "◆额定电压：380V ◆额定电功率： 2kW ◆配锅尺寸（mm） : φ700*880 ◆锅体材质：3.5mm精铁 ◆炒菜重量：约20-50kg ◆配锅容量：40L-100L ◆燃气类型：液化气/天然气 ◆热负荷：96kW ◆进水口：DN15 ◆自动调料功能：水+5路调料 ◆调料盒容量：10L*1+5L*4 ◆有一键自动炒菜、机器学习功能、菜谱功能、语音播报提示、温控功能",
-    specificationsEn: "◆Rated Voltage: 380V ◆Rated Power: 2kW ◆Pan Size (mm): φ700*880 ◆Pan Material: 3.5mm Wrought Iron ◆Cooking Capacity: Approx 20-50kg ◆Pan Capacity: 40L-100L ◆Gas Type: LPG/Natural Gas ◆Heat Load: 96kW ◆Water Inlet: DN15 ◆Auto Seasoning: Water + 5 Channels ◆Seasoning Box Capacity: 10L*1 + 5L*4 ◆One-Key Auto Cooking, Machine Learning, Recipe Function, Voice Announcement Prompts, Temperature Control",
+    specifications:
+      "◆额定电压：380V ◆额定电功率： 2kW ◆配锅尺寸（mm） : φ700*880 ◆锅体材质：3.5mm精铁 ◆炒菜重量：约20-50kg ◆配锅容量：40L-100L ◆燃气类型：液化气/天然气 ◆热负荷：96kW ◆进水口：DN15 ◆自动调料功能：水+5路调料 ◆调料盒容量：10L*1+5L*4 ◆有一键自动炒菜、机器学习功能、菜谱功能、语音播报提示、温控功能",
+    specificationsEn:
+      "◆Rated Voltage: 380V ◆Rated Power: 2kW ◆Pan Size (mm): φ700*880 ◆Pan Material: 3.5mm Wrought Iron ◆Cooking Capacity: Approx 20-50kg ◆Pan Capacity: 40L-100L ◆Gas Type: LPG/Natural Gas ◆Heat Load: 96kW ◆Water Inlet: DN15 ◆Auto Seasoning: Water + 5 Channels ◆Seasoning Box Capacity: 10L*1 + 5L*4 ◆One-Key Auto Cooking, Machine Learning, Recipe Function, Voice Announcement Prompts, Temperature Control",
     power: "2kW",
     voltage: "380V",
     material: "3.5mm精铁",
@@ -4017,15 +4573,16 @@ window.PRODUCT_DATA_TABLE = [
       {
         filePath: "/assets/images/products/G70EAS-1.webp",
         isPrimary: true,
-        isHires: false
-      }
+        isHires: false,
+      },
     ],
     is_home_core: false,
     highlights: "",
     scenarios: "",
     usage: "",
-    usageEn: "Suitable for large-scale catering centers, central kitchens, school canteens, hospital kitchens, military dining, and more. Ideal for ultra-large-volume centralized cooking and food preparation. Capacity: approx. 20-50kg per batch, pot capacity 40-100L. Supports LPG and natural gas.",
-    materialEn: "3.5mm fine iron"
+    usageEn:
+      "Suitable for large-scale catering centers, central kitchens, school canteens, hospital kitchens, military dining, and more. Ideal for ultra-large-volume centralized cooking and food preparation. Capacity: approx. 20-50kg per batch, pot capacity 40-100L. Supports LPG and natural gas.",
+    materialEn: "3.5mm fine iron",
   },
   {
     model: "G80EAC",
@@ -4034,8 +4591,10 @@ window.PRODUCT_DATA_TABLE = [
     nameEn: "Smart Batch Drum Cooker (Induction)",
     category: "翻炒系列",
     subCategory: "团餐滚筒炒菜机",
-    specifications: "◆额定电压：380V ◆额定功率：30kW ◆配锅尺寸（mm） : φ800*1000 ◆锅体材质：4.0mm精铁 ◆热负荷：96kW ◆炒菜重量：约30-80kg ◆配锅容量：40L-150L ◆进水口：DN15 ◆自动调料功能:水+5路调料 ◆调料盒容量：10L*1+5L*4 ◆有一键自动炒菜、机器学习功能、菜谱功能、语音播报提示、温控功能",
-    specificationsEn: "◆Rated Voltage: 380V ◆Rated Power: 30kW ◆Pan Size (mm): φ800*1000 ◆Pan Material: 4.0mm Wrought Iron ◆Heat Load: 96kW ◆Cooking Capacity: Approx 30-80kg ◆Pan Capacity: 40L-150L ◆Water Inlet: DN15 ◆Auto Seasoning: Water + 5 Channels ◆Seasoning Box Capacity: 10L*1 + 5L*4 ◆One-Key Auto Cooking, Machine Learning, Recipe Function, Voice Announcement Prompts, Temperature Control",
+    specifications:
+      "◆额定电压：380V ◆额定功率：30kW ◆配锅尺寸（mm） : φ800*1000 ◆锅体材质：4.0mm精铁 ◆热负荷：96kW ◆炒菜重量：约30-80kg ◆配锅容量：40L-150L ◆进水口：DN15 ◆自动调料功能:水+5路调料 ◆调料盒容量：10L*1+5L*4 ◆有一键自动炒菜、机器学习功能、菜谱功能、语音播报提示、温控功能",
+    specificationsEn:
+      "◆Rated Voltage: 380V ◆Rated Power: 30kW ◆Pan Size (mm): φ800*1000 ◆Pan Material: 4.0mm Wrought Iron ◆Heat Load: 96kW ◆Cooking Capacity: Approx 30-80kg ◆Pan Capacity: 40L-150L ◆Water Inlet: DN15 ◆Auto Seasoning: Water + 5 Channels ◆Seasoning Box Capacity: 10L*1 + 5L*4 ◆One-Key Auto Cooking, Machine Learning, Recipe Function, Voice Announcement Prompts, Temperature Control",
     power: "30kW",
     voltage: "380V",
     material: "4.0mm精铁",
@@ -4050,15 +4609,16 @@ window.PRODUCT_DATA_TABLE = [
       {
         filePath: "/assets/images/products/G80EAC-1.webp",
         isPrimary: true,
-        isHires: false
-      }
+        isHires: false,
+      },
     ],
     is_home_core: false,
     highlights: "",
     scenarios: "",
     usage: "",
-    usageEn: "Suitable for large-scale catering centers, central kitchens, large corporate canteens, military logistics, and more. Ideal for ultra-large-volume centralized cooking and food preparation. Capacity: approx. 30-80kg per batch, pot capacity 40-150L.",
-    materialEn: "4.0mm fine iron"
+    usageEn:
+      "Suitable for large-scale catering centers, central kitchens, large corporate canteens, military logistics, and more. Ideal for ultra-large-volume centralized cooking and food preparation. Capacity: approx. 30-80kg per batch, pot capacity 40-150L.",
+    materialEn: "4.0mm fine iron",
   },
   {
     model: "G80EAS",
@@ -4067,8 +4627,10 @@ window.PRODUCT_DATA_TABLE = [
     nameEn: "Smart Batch Drum Cooker (Gas)",
     category: "翻炒系列",
     subCategory: "团餐滚筒炒菜机",
-    specifications: "◆额定电压：380V ◆额定电功率：3kW ◆配锅尺寸（mm） : φ800*1000 ◆锅体材质：4.0mm精铁 ◆热负荷：96kW ◆炒菜重量：约30-80kg ◆配锅容量：40L-150L ◆燃气类型：液化气/天然气 ◆热负荷：96kW ◆进水口：DN15 ◆自动调料功能：水+5路调料 ◆调料盒容量：10L*1+5L*4 ◆有一键自动炒菜、机器学习功能、菜谱功能、语音播报提示、温控功能",
-    specificationsEn: "◆Rated Voltage: 380V ◆Rated Power: 3kW ◆Pan Size (mm): φ800*1000 ◆Pan Material: 4.0mm Wrought Iron ◆Heat Load: 96kW ◆Cooking Capacity: Approx 30-80kg ◆Pan Capacity: 40L-150L ◆Gas Type: LPG/Natural Gas ◆Heat Load: 96kW ◆Water Inlet: DN15 ◆Auto Seasoning: Water + 5 Channels ◆Seasoning Box Capacity: 10L*1 + 5L*4 ◆One-Key Auto Cooking, Machine Learning, Recipe Function, Voice Announcement Prompts, Temperature Control",
+    specifications:
+      "◆额定电压：380V ◆额定电功率：3kW ◆配锅尺寸（mm） : φ800*1000 ◆锅体材质：4.0mm精铁 ◆热负荷：96kW ◆炒菜重量：约30-80kg ◆配锅容量：40L-150L ◆燃气类型：液化气/天然气 ◆热负荷：96kW ◆进水口：DN15 ◆自动调料功能：水+5路调料 ◆调料盒容量：10L*1+5L*4 ◆有一键自动炒菜、机器学习功能、菜谱功能、语音播报提示、温控功能",
+    specificationsEn:
+      "◆Rated Voltage: 380V ◆Rated Power: 3kW ◆Pan Size (mm): φ800*1000 ◆Pan Material: 4.0mm Wrought Iron ◆Heat Load: 96kW ◆Cooking Capacity: Approx 30-80kg ◆Pan Capacity: 40L-150L ◆Gas Type: LPG/Natural Gas ◆Heat Load: 96kW ◆Water Inlet: DN15 ◆Auto Seasoning: Water + 5 Channels ◆Seasoning Box Capacity: 10L*1 + 5L*4 ◆One-Key Auto Cooking, Machine Learning, Recipe Function, Voice Announcement Prompts, Temperature Control",
     power: "3kW",
     voltage: "380V",
     material: "4.0mm精铁",
@@ -4083,15 +4645,16 @@ window.PRODUCT_DATA_TABLE = [
       {
         filePath: "/assets/images/products/G80EAS-1.webp",
         isPrimary: true,
-        isHires: false
-      }
+        isHires: false,
+      },
     ],
     is_home_core: false,
     highlights: "",
     scenarios: "",
     usage: "",
-    usageEn: "Suitable for large-scale catering centers, central kitchens, large corporate canteens, military logistics, and more. Ideal for ultra-large-volume centralized cooking and food preparation. Capacity: approx. 30-80kg per batch, pot capacity 40-150L. Supports LPG and natural gas.",
-    materialEn: "4.0mm fine iron"
+    usageEn:
+      "Suitable for large-scale catering centers, central kitchens, large corporate canteens, military logistics, and more. Ideal for ultra-large-volume centralized cooking and food preparation. Capacity: approx. 30-80kg per batch, pot capacity 40-150L. Supports LPG and natural gas.",
+    materialEn: "4.0mm fine iron",
   },
   {
     model: "M3DAD",
@@ -4100,8 +4663,10 @@ window.PRODUCT_DATA_TABLE = [
     nameEn: "3-Well Smart Lift Noodle Cooker",
     category: "炖煮系列",
     subCategory: "煮面炉",
-    specifications: "◆额定电压：380V ◆额定功率：6kW ◆水箱容量 : 31L ◆水箱材质：#304 ◆操作方式：全自动触摸屏操作 ◆入水口：DN15 排水口： DN25 溢流口： DN25 ◆可选面篮规格： 14cm/16cm/18cm ◆自动补水、自动冲浪功能、节能模式、 自动恒温、菜谱功能",
-    specificationsEn: "◆Rated Voltage: 380V ◆Rated Power: 6kW ◆Water Tank Capacity: 31L ◆Water Tank Material: #304 ◆Operation: Fully Automatic Touch Screen ◆Water Inlet: DN15 Drain Outlet: DN25 Overflow Outlet: DN25 ◆Optional Basket Sizes: 14cm/16cm/18cm ◆Auto Water Fill, Auto Noodle-Surfing Function, Energy Saving Mode, Auto Constant Temperature, Recipe Function",
+    specifications:
+      "◆额定电压：380V ◆额定功率：6kW ◆水箱容量 : 31L ◆水箱材质：#304 ◆操作方式：全自动触摸屏操作 ◆入水口：DN15 排水口： DN25 溢流口： DN25 ◆可选面篮规格： 14cm/16cm/18cm ◆自动补水、自动冲浪功能、节能模式、 自动恒温、菜谱功能",
+    specificationsEn:
+      "◆Rated Voltage: 380V ◆Rated Power: 6kW ◆Water Tank Capacity: 31L ◆Water Tank Material: #304 ◆Operation: Fully Automatic Touch Screen ◆Water Inlet: DN15 Drain Outlet: DN25 Overflow Outlet: DN25 ◆Optional Basket Sizes: 14cm/16cm/18cm ◆Auto Water Fill, Auto Noodle-Surfing Function, Energy Saving Mode, Auto Constant Temperature, Recipe Function",
     power: "6kW",
     voltage: "380V",
     material: "#304",
@@ -4116,15 +4681,16 @@ window.PRODUCT_DATA_TABLE = [
       {
         filePath: "/assets/images/products/M3DAD-1.webp",
         isPrimary: true,
-        isHires: false
-      }
+        isHires: false,
+      },
     ],
     is_home_core: false,
     highlights: "",
     scenarios: "",
     usage: "",
-    usageEn: "Suitable for noodle shops, fast-food restaurants, restaurant chains, school canteens, and more. Ideal for boiling noodles, rice noodles, dumplings, wontons, hot pot ingredients, and more. Three-eye design enables simultaneous boiling of multiple portions. Capacity: 3 boiling stations, 31L water tank.",
-    materialEn: "#304 stainless steel"
+    usageEn:
+      "Suitable for noodle shops, fast-food restaurants, restaurant chains, school canteens, and more. Ideal for boiling noodles, rice noodles, dumplings, wontons, hot pot ingredients, and more. Three-eye design enables simultaneous boiling of multiple portions. Capacity: 3 boiling stations, 31L water tank.",
+    materialEn: "#304 stainless steel",
   },
   {
     model: "M6DBD",
@@ -4133,8 +4699,10 @@ window.PRODUCT_DATA_TABLE = [
     nameEn: "6-Well Smart Lift Noodle Cooker",
     category: "炖煮系列",
     subCategory: "煮面炉",
-    specifications: "◆额定电压：380V ◆额定功率： 12kW（单池:6kW)    水箱容量 : 31L*2 ◆加热方式： 电热加热 ◆水箱材质：#304 ◆操作方式：全自动触摸屏操作 ◆入水口：DN15 排水口： DN25 溢流口： DN25 ◆可选面篮规格： 14cm/16cm/18cm ◆自动补水、自动冲浪功能、节能模式、 自动恒温、菜谱功能",
-    specificationsEn: "◆Rated Voltage: 380V ◆Rated Power: 12kW (Single Tank: 6kW) ◆Water Tank Capacity: 31L*2 ◆Heating Method: Electric Heating ◆Water Tank Material: #304 ◆Operation: Fully Automatic Touch Screen ◆Water Inlet: DN15 Drain Outlet: DN25 Overflow Outlet: DN25 ◆Optional Basket Sizes: 14cm/16cm/18cm ◆Auto Water Fill, Auto Noodle-Surfing Function, Energy Saving Mode, Auto Constant Temperature, Recipe Function",
+    specifications:
+      "◆额定电压：380V ◆额定功率： 12kW（单池:6kW)    水箱容量 : 31L*2 ◆加热方式： 电热加热 ◆水箱材质：#304 ◆操作方式：全自动触摸屏操作 ◆入水口：DN15 排水口： DN25 溢流口： DN25 ◆可选面篮规格： 14cm/16cm/18cm ◆自动补水、自动冲浪功能、节能模式、 自动恒温、菜谱功能",
+    specificationsEn:
+      "◆Rated Voltage: 380V ◆Rated Power: 12kW (Single Tank: 6kW) ◆Water Tank Capacity: 31L*2 ◆Heating Method: Electric Heating ◆Water Tank Material: #304 ◆Operation: Fully Automatic Touch Screen ◆Water Inlet: DN15 Drain Outlet: DN25 Overflow Outlet: DN25 ◆Optional Basket Sizes: 14cm/16cm/18cm ◆Auto Water Fill, Auto Noodle-Surfing Function, Energy Saving Mode, Auto Constant Temperature, Recipe Function",
     power: "12kW（单池:6kW)水箱容量:31L*2",
     voltage: "380V",
     material: "#304",
@@ -4149,15 +4717,16 @@ window.PRODUCT_DATA_TABLE = [
       {
         filePath: "/assets/images/products/M6DBD-1.webp",
         isPrimary: true,
-        isHires: false
-      }
+        isHires: false,
+      },
     ],
     is_home_core: false,
     highlights: "",
     scenarios: "",
     usage: "",
-    usageEn: "Suitable for noodle shops, fast-food chains, restaurants, school canteens, and more. Ideal for high-volume boiling of noodles, rice noodles, dumplings, wontons, and more. Six-eye dual-tank design greatly improves serving efficiency. Capacity: 6 boiling stations, dual 31L water tanks.",
-    materialEn: "#304 stainless steel"
+    usageEn:
+      "Suitable for noodle shops, fast-food chains, restaurants, school canteens, and more. Ideal for high-volume boiling of noodles, rice noodles, dumplings, wontons, and more. Six-eye dual-tank design greatly improves serving efficiency. Capacity: 6 boiling stations, dual 31L water tanks.",
+    materialEn: "#304 stainless steel",
   },
   {
     model: "M6RAD",
@@ -4166,8 +4735,10 @@ window.PRODUCT_DATA_TABLE = [
     nameEn: "6-Well Smart Lift Noodle Cooker (Gas)",
     category: "炖煮系列",
     subCategory: "煮面炉",
-    specifications: "◆额定电压：220V ◆额定功率： 100W ◆水箱材质：#304   水箱容量 : 70L ◆操作方式：全自动触摸屏操作（单池） ◆入水口：DN15 排水口： DN25 溢流口： DN25 ◆可选面篮规格： 14cm/16cm/18cm ◆自动补水、 自动冲浪功能、节能模式、 自动恒温、菜谱功能",
-    specificationsEn: "◆Rated Voltage: 220V ◆Rated Power: 100W ◆Water Tank Material: #304 ◆Water Tank Capacity: 70L ◆Operation: Fully Automatic Touch Screen (Single Tank) ◆Water Inlet: DN15 Drain Outlet: DN25 Overflow Outlet: DN25 ◆Optional Basket Sizes: 14cm/16cm/18cm ◆Auto Water Fill, Auto Noodle-Surfing Function, Energy Saving Mode, Auto Constant Temperature, Recipe Function",
+    specifications:
+      "◆额定电压：220V ◆额定功率： 100W ◆水箱材质：#304   水箱容量 : 70L ◆操作方式：全自动触摸屏操作（单池） ◆入水口：DN15 排水口： DN25 溢流口： DN25 ◆可选面篮规格： 14cm/16cm/18cm ◆自动补水、 自动冲浪功能、节能模式、 自动恒温、菜谱功能",
+    specificationsEn:
+      "◆Rated Voltage: 220V ◆Rated Power: 100W ◆Water Tank Material: #304 ◆Water Tank Capacity: 70L ◆Operation: Fully Automatic Touch Screen (Single Tank) ◆Water Inlet: DN15 Drain Outlet: DN25 Overflow Outlet: DN25 ◆Optional Basket Sizes: 14cm/16cm/18cm ◆Auto Water Fill, Auto Noodle-Surfing Function, Energy Saving Mode, Auto Constant Temperature, Recipe Function",
     power: "100W",
     voltage: "220V",
     material: "#304水箱容量:70L",
@@ -4182,15 +4753,16 @@ window.PRODUCT_DATA_TABLE = [
       {
         filePath: "/assets/images/products/M6RAD-1.webp",
         isPrimary: true,
-        isHires: false
-      }
+        isHires: false,
+      },
     ],
     is_home_core: false,
     highlights: "",
     scenarios: "",
     usage: "",
-    usageEn: "Suitable for noodle shops, fast-food chains, restaurants, school canteens, and more. Ideal for high-volume boiling of noodles, rice noodles, dumplings, wontons, and more. Six-eye gas heating design for fast temperature rise. Capacity: 6 boiling stations, 70L water tank. Supports LPG and natural gas.",
-    materialEn: "#304 stainless steel, 70L tank"
+    usageEn:
+      "Suitable for noodle shops, fast-food chains, restaurants, school canteens, and more. Ideal for high-volume boiling of noodles, rice noodles, dumplings, wontons, and more. Six-eye gas heating design for fast temperature rise. Capacity: 6 boiling stations, 70L water tank. Supports LPG and natural gas.",
+    materialEn: "#304 stainless steel, 70L tank",
   },
   {
     model: "M4DAD+1",
@@ -4199,8 +4771,10 @@ window.PRODUCT_DATA_TABLE = [
     nameEn: "4+1 Smart Lift Noodle Cooker Combo",
     category: "炖煮系列",
     subCategory: "煮面炉",
-    specifications: "◆额定电压：380V ◆额定功率： 2kW*4+4kW ◆煮面池尺寸：210*715*215mm  ◆水箱容量 : 36L ◆水箱材质：#304 ◆汤池尺寸：320*550*315mm ◆汤池容量：约55L ◆加汤流量：约550ml/4.6s ◆操作方式：全自动触摸屏操作 ◆入水口：DN15 排水口： DN25  ◆可选面篮规格： 14cm/16cm/18cm ◆自动补水、手动排水、自动冲浪功能、设定恒温定温、菜谱功能、定量出汤",
-    specificationsEn: "◆Rated Voltage: 380V ◆Rated Power: 2kW*4+4kW ◆Noodle Cooker Size: 210*715*215mm ◆Water Tank Capacity: 36L ◆Water Tank Material: #304 ◆Soup Well Size: 320*550*315mm ◆Soup Well Capacity: Approx 55L ◆Soup Dispensing Flow: Approx 550ml/4.6s ◆Operation: Fully Automatic Touch Screen ◆Water Inlet: DN15 Drain Outlet: DN25 ◆Optional Basket Sizes: 14cm/16cm/18cm ◆Auto Water Fill, Manual Drain, Auto Noodle-Surfing Function, Set Constant Temperature, Recipe Function, Quantified Soup Dispensing",
+    specifications:
+      "◆额定电压：380V ◆额定功率： 2kW*4+4kW ◆煮面池尺寸：210*715*215mm  ◆水箱容量 : 36L ◆水箱材质：#304 ◆汤池尺寸：320*550*315mm ◆汤池容量：约55L ◆加汤流量：约550ml/4.6s ◆操作方式：全自动触摸屏操作 ◆入水口：DN15 排水口： DN25  ◆可选面篮规格： 14cm/16cm/18cm ◆自动补水、手动排水、自动冲浪功能、设定恒温定温、菜谱功能、定量出汤",
+    specificationsEn:
+      "◆Rated Voltage: 380V ◆Rated Power: 2kW*4+4kW ◆Noodle Cooker Size: 210*715*215mm ◆Water Tank Capacity: 36L ◆Water Tank Material: #304 ◆Soup Well Size: 320*550*315mm ◆Soup Well Capacity: Approx 55L ◆Soup Dispensing Flow: Approx 550ml/4.6s ◆Operation: Fully Automatic Touch Screen ◆Water Inlet: DN15 Drain Outlet: DN25 ◆Optional Basket Sizes: 14cm/16cm/18cm ◆Auto Water Fill, Manual Drain, Auto Noodle-Surfing Function, Set Constant Temperature, Recipe Function, Quantified Soup Dispensing",
     power: "2kW*4+4kW",
     voltage: "380V",
     material: "#304",
@@ -4216,8 +4790,9 @@ window.PRODUCT_DATA_TABLE = [
     highlights: "",
     scenarios: "",
     usage: "",
-    usageEn: "Suitable for noodle shops, fast-food chains, restaurants, congee shops, and more. Ideal for boiling noodles, rice noodles, dumplings, wontons, and more. Additional soup tank for simultaneous broth preparation. Capacity: 4 boiling stations + 1 soup tank, 36L water tank.",
-    materialEn: "#304 stainless steel"
+    usageEn:
+      "Suitable for noodle shops, fast-food chains, restaurants, congee shops, and more. Ideal for boiling noodles, rice noodles, dumplings, wontons, and more. Additional soup tank for simultaneous broth preparation. Capacity: 4 boiling stations + 1 soup tank, 36L water tank.",
+    materialEn: "#304 stainless steel",
   },
   {
     model: "M4DAD+2",
@@ -4226,8 +4801,10 @@ window.PRODUCT_DATA_TABLE = [
     nameEn: "4+2 Smart Lift Noodle Cooker Combo",
     category: "炖煮系列",
     subCategory: "煮面炉",
-    specifications: "◆额定电压：380V ◆额定功率： 2kW*4+3.5kW*2 ◆水箱容量 : 36L ◆水箱材质：#304 ◆配锅容量： 1.5L-9.3L ◆操作方式：全自动触摸屏操作 ◆入水口：DN15 排水口： DN25 溢流口： DN25 ◆电磁炉：3.5*kW*2 ◆圆汤桶尺寸（mm)：300*300*2（容量20L*2） ◆可选面篮规格： 14cm/16cm/18cm ◆自动补水、 自动冲浪功能、节能模式、 自动恒温、菜谱功能",
-    specificationsEn: "◆Rated Voltage: 380V ◆Rated Power: 2kW*4+3.5kW*2 ◆Water Tank Capacity: 36L ◆Water Tank Material: #304 ◆Pan Capacity: 1.5L-9.3L ◆Operation: Fully Automatic Touch Screen ◆Water Inlet: DN15 Drain Outlet: DN25 Overflow Outlet: DN25 ◆Induction Cooker: 3.5kW*2 ◆Round Soup Pot Size (mm): φ300*300*2 (Capacity 20L*2) ◆Optional Basket Sizes: 14cm/16cm/18cm ◆Auto Water Fill, Auto Noodle-Surfing Function, Energy Saving Mode, Auto Constant Temperature, Recipe Function",
+    specifications:
+      "◆额定电压：380V ◆额定功率： 2kW*4+3.5kW*2 ◆水箱容量 : 36L ◆水箱材质：#304 ◆配锅容量： 1.5L-9.3L ◆操作方式：全自动触摸屏操作 ◆入水口：DN15 排水口： DN25 溢流口： DN25 ◆电磁炉：3.5*kW*2 ◆圆汤桶尺寸（mm)：300*300*2（容量20L*2） ◆可选面篮规格： 14cm/16cm/18cm ◆自动补水、 自动冲浪功能、节能模式、 自动恒温、菜谱功能",
+    specificationsEn:
+      "◆Rated Voltage: 380V ◆Rated Power: 2kW*4+3.5kW*2 ◆Water Tank Capacity: 36L ◆Water Tank Material: #304 ◆Pan Capacity: 1.5L-9.3L ◆Operation: Fully Automatic Touch Screen ◆Water Inlet: DN15 Drain Outlet: DN25 Overflow Outlet: DN25 ◆Induction Cooker: 3.5kW*2 ◆Round Soup Pot Size (mm): φ300*300*2 (Capacity 20L*2) ◆Optional Basket Sizes: 14cm/16cm/18cm ◆Auto Water Fill, Auto Noodle-Surfing Function, Energy Saving Mode, Auto Constant Temperature, Recipe Function",
     power: "2kW*4+3.5kW*2",
     voltage: "380V",
     material: "#304",
@@ -4243,8 +4820,9 @@ window.PRODUCT_DATA_TABLE = [
     highlights: "",
     scenarios: "",
     usage: "",
-    usageEn: "Suitable for noodle shops, fast-food chains, restaurants, congee shops, and more. Ideal for boiling noodles, rice noodles, dumplings, wontons, and more. Two additional soup tanks for simultaneous broth preparation. Capacity: 4 boiling stations + 2 soup tanks, 36L water tank.",
-    materialEn: "#304 stainless steel"
+    usageEn:
+      "Suitable for noodle shops, fast-food chains, restaurants, congee shops, and more. Ideal for boiling noodles, rice noodles, dumplings, wontons, and more. Two additional soup tanks for simultaneous broth preparation. Capacity: 4 boiling stations + 2 soup tanks, 36L water tank.",
+    materialEn: "#304 stainless steel",
   },
   {
     model: "M6DAD",
@@ -4253,8 +4831,10 @@ window.PRODUCT_DATA_TABLE = [
     nameEn: "6-Well Single-tank Smart Lift Noodle Cooker",
     category: "炖煮系列",
     subCategory: "煮面炉",
-    specifications: "◆额定电压：380V 3P+N ◆额定功率： 12kW ◆水箱尺寸:548mmx369mmx390mm 65L ◆水箱材质：SUS304不锈钢 ◆面篓规格： 直径16cm ◆操作方式：4.3寸触摸屏 ◆入水口：4分外牙  排水口：1寸PPR光壁塑胶管外径32mm 溢流口： DN25 ◆电磁炉：3.5*kW*2 ◆圆汤桶尺寸（mm)：300*300*2（容量20L*2） ◆可选面篮规格： 14cm/16cm/19cm ◆手动补水、 菜谱编辑、手动排水、 自动恒温",
-    specificationsEn: "◆Rated Voltage: 380V 3P+N ◆Rated Power: 12kW ◆Water Tank Size: 548mmx369mmx390mm 65L ◆Water Tank Material: SUS304 Stainless Steel ◆Basket Size: Diameter 16cm ◆Operation: 4.3\" Touch Screen ◆Water Inlet: G1/2 Male Thread Drain Outlet: 1\" PPR Plastic Pipe OD 32mm Overflow Outlet: DN25 ◆Induction Cooker: 3.5kW*2 ◆Round Soup Pot Size (mm): φ300*300*2 (Capacity 20L*2) ◆Optional Basket Sizes: 14cm/16cm/19cm ◆Manual Water Fill, Recipe Editing, Manual Drain, Auto Constant Temperature",
+    specifications:
+      "◆额定电压：380V 3P+N ◆额定功率： 12kW ◆水箱尺寸:548mmx369mmx390mm 65L ◆水箱材质：SUS304不锈钢 ◆面篓规格： 直径16cm ◆操作方式：4.3寸触摸屏 ◆入水口：4分外牙  排水口：1寸PPR光壁塑胶管外径32mm 溢流口： DN25 ◆电磁炉：3.5*kW*2 ◆圆汤桶尺寸（mm)：300*300*2（容量20L*2） ◆可选面篮规格： 14cm/16cm/19cm ◆手动补水、 菜谱编辑、手动排水、 自动恒温",
+    specificationsEn:
+      '◆Rated Voltage: 380V 3P+N ◆Rated Power: 12kW ◆Water Tank Size: 548mmx369mmx390mm 65L ◆Water Tank Material: SUS304 Stainless Steel ◆Basket Size: Diameter 16cm ◆Operation: 4.3" Touch Screen ◆Water Inlet: G1/2 Male Thread Drain Outlet: 1" PPR Plastic Pipe OD 32mm Overflow Outlet: DN25 ◆Induction Cooker: 3.5kW*2 ◆Round Soup Pot Size (mm): φ300*300*2 (Capacity 20L*2) ◆Optional Basket Sizes: 14cm/16cm/19cm ◆Manual Water Fill, Recipe Editing, Manual Drain, Auto Constant Temperature',
     power: "12kW",
     voltage: "380V3P+N",
     material: "SUS304不锈钢",
@@ -4269,15 +4849,16 @@ window.PRODUCT_DATA_TABLE = [
       {
         filePath: "/assets/images/products/M6DAD-1.webp",
         isPrimary: true,
-        isHires: false
-      }
+        isHires: false,
+      },
     ],
     is_home_core: false,
     highlights: "",
     scenarios: "",
     usage: "",
-    usageEn: "Suitable for noodle shops, fast-food chains, restaurants, school canteens, and more. Ideal for high-volume boiling of noodles, rice noodles, dumplings, wontons, and more. Six-eye single-tank compact design. Capacity: 6 boiling stations, 65L water tank.",
-    materialEn: "SUS304 stainless steel"
+    usageEn:
+      "Suitable for noodle shops, fast-food chains, restaurants, school canteens, and more. Ideal for high-volume boiling of noodles, rice noodles, dumplings, wontons, and more. Six-eye single-tank compact design. Capacity: 6 boiling stations, 65L water tank.",
+    materialEn: "SUS304 stainless steel",
   },
   {
     model: "B4RTD",
@@ -4286,8 +4867,10 @@ window.PRODUCT_DATA_TABLE = [
     nameEn: "Countertop Smart Gas Rice Cooker",
     category: "炖煮系列",
     subCategory: "煲仔炉",
-    specifications: "◆额定电压：220V ◆额定电功率：100W ◆炉头数量：4个 ◆热负荷：3.8/5.2kW每头 ◆炉头：7腔 ◆操作方式：触摸屏操作，阶梯式 ◆燃气类型：液化气/天然气 ◆一键启动、菜谱功能、机器学习功能、可编辑的语音",
-    specificationsEn: "◆Rated Voltage: 220V ◆Rated Power: 100W ◆Number of Burners: 4 ◆Heat Load: 3.8/5.2kW per Burner ◆Burner: 7-Cavity ◆Operation: Touch Screen, Step-Type ◆Gas Type: LPG/Natural Gas ◆One-Key Start, Recipe Function, Machine Learning, Editable Voice",
+    specifications:
+      "◆额定电压：220V ◆额定电功率：100W ◆炉头数量：4个 ◆热负荷：3.8/5.2kW每头 ◆炉头：7腔 ◆操作方式：触摸屏操作，阶梯式 ◆燃气类型：液化气/天然气 ◆一键启动、菜谱功能、机器学习功能、可编辑的语音",
+    specificationsEn:
+      "◆Rated Voltage: 220V ◆Rated Power: 100W ◆Number of Burners: 4 ◆Heat Load: 3.8/5.2kW per Burner ◆Burner: 7-Cavity ◆Operation: Touch Screen, Step-Type ◆Gas Type: LPG/Natural Gas ◆One-Key Start, Recipe Function, Machine Learning, Editable Voice",
     power: "100W",
     voltage: "220V",
     material: "",
@@ -4302,14 +4885,15 @@ window.PRODUCT_DATA_TABLE = [
       {
         filePath: "/assets/images/products/B4RTD-1.webp",
         isPrimary: true,
-        isHires: false
-      }
+        isHires: false,
+      },
     ],
     is_home_core: false,
     highlights: "",
     scenarios: "",
     usage: "",
-    usageEn: "Suitable for clay pot rice specialty shops, restaurant chains, cha chaan tengs, food delivery kiosks, and more. Ideal for clay pot rice, clay pot dishes, and other Cantonese-style clay pot meals. Four-burner design cooks 4 portions simultaneously."
+    usageEn:
+      "Suitable for clay pot rice specialty shops, restaurant chains, cha chaan tengs, food delivery kiosks, and more. Ideal for clay pot rice, clay pot dishes, and other Cantonese-style clay pot meals. Four-burner design cooks 4 portions simultaneously.",
   },
   {
     model: "B6RBD",
@@ -4318,8 +4902,10 @@ window.PRODUCT_DATA_TABLE = [
     nameEn: "Upright Smart Gas Rice Cooker",
     category: "炖煮系列",
     subCategory: "煲仔炉",
-    specifications: "◆额定电压：220V ◆额定电功率：200W ◆炉头数量：6个 ◆热负荷：5.2kW/头 ◆炉头：7腔 ◆操作方式：触摸屏操作 ◆燃气类型：液化气/天然气 ◆一键启动、菜谱功能、机器学习功能、可编辑的语音",
-    specificationsEn: "◆Rated Voltage: 220V ◆Rated Power: 200W ◆Number of Burners: 6 ◆Heat Load: 5.2kW per Burner ◆Burner: 7-Cavity ◆Operation: Touch Screen ◆Gas Type: LPG/Natural Gas ◆One-Key Start, Recipe Function, Machine Learning, Editable Voice",
+    specifications:
+      "◆额定电压：220V ◆额定电功率：200W ◆炉头数量：6个 ◆热负荷：5.2kW/头 ◆炉头：7腔 ◆操作方式：触摸屏操作 ◆燃气类型：液化气/天然气 ◆一键启动、菜谱功能、机器学习功能、可编辑的语音",
+    specificationsEn:
+      "◆Rated Voltage: 220V ◆Rated Power: 200W ◆Number of Burners: 6 ◆Heat Load: 5.2kW per Burner ◆Burner: 7-Cavity ◆Operation: Touch Screen ◆Gas Type: LPG/Natural Gas ◆One-Key Start, Recipe Function, Machine Learning, Editable Voice",
     power: "200W",
     voltage: "220V",
     material: "",
@@ -4334,14 +4920,15 @@ window.PRODUCT_DATA_TABLE = [
       {
         filePath: "/assets/images/products/B6RBD-1.webp",
         isPrimary: true,
-        isHires: false
-      }
+        isHires: false,
+      },
     ],
     is_home_core: false,
     highlights: "",
     scenarios: "",
     usage: "",
-    usageEn: "Suitable for clay pot rice specialty shops, restaurant chains, cha chaan tengs, small to mid-sized canteens, and more. Ideal for clay pot rice, clay pot dishes, and other Cantonese-style clay pot meals. Six-burner design improves serving efficiency."
+    usageEn:
+      "Suitable for clay pot rice specialty shops, restaurant chains, cha chaan tengs, small to mid-sized canteens, and more. Ideal for clay pot rice, clay pot dishes, and other Cantonese-style clay pot meals. Six-burner design improves serving efficiency.",
   },
   {
     model: "B8RBD",
@@ -4350,8 +4937,10 @@ window.PRODUCT_DATA_TABLE = [
     nameEn: "Upright Smart Gas Rice Cooker",
     category: "炖煮系列",
     subCategory: "煲仔炉",
-    specifications: "◆额定电压：220V ◆额定电功率：200W ◆炉头数量：8个 ◆热负荷：5.2kW/头 ◆炉头：7腔 ◆操作方式：触摸屏操作 ◆燃气类型：液化气/天然气 ◆一键启动、菜谱功能、机器学习功能、可编辑的语音",
-    specificationsEn: "◆Rated Voltage: 220V ◆Rated Power: 200W ◆Number of Burners: 8 ◆Heat Load: 5.2kW per Burner ◆Burner: 7-Cavity ◆Operation: Touch Screen ◆Gas Type: LPG/Natural Gas ◆One-Key Start, Recipe Function, Machine Learning, Editable Voice",
+    specifications:
+      "◆额定电压：220V ◆额定电功率：200W ◆炉头数量：8个 ◆热负荷：5.2kW/头 ◆炉头：7腔 ◆操作方式：触摸屏操作 ◆燃气类型：液化气/天然气 ◆一键启动、菜谱功能、机器学习功能、可编辑的语音",
+    specificationsEn:
+      "◆Rated Voltage: 220V ◆Rated Power: 200W ◆Number of Burners: 8 ◆Heat Load: 5.2kW per Burner ◆Burner: 7-Cavity ◆Operation: Touch Screen ◆Gas Type: LPG/Natural Gas ◆One-Key Start, Recipe Function, Machine Learning, Editable Voice",
     power: "200W",
     voltage: "220V",
     material: "",
@@ -4366,14 +4955,15 @@ window.PRODUCT_DATA_TABLE = [
       {
         filePath: "/assets/images/products/B8RBD-1.webp",
         isPrimary: true,
-        isHires: false
-      }
+        isHires: false,
+      },
     ],
     is_home_core: false,
     highlights: "",
     scenarios: "",
     usage: "",
-    usageEn: "Suitable for clay pot rice specialty shops, restaurant chains, cha chaan tengs, small to mid-sized canteens, and more. Ideal for clay pot rice, clay pot dishes, and other Cantonese-style clay pot meals. Eight-burner design meets high-volume peak-hour demand."
+    usageEn:
+      "Suitable for clay pot rice specialty shops, restaurant chains, cha chaan tengs, small to mid-sized canteens, and more. Ideal for clay pot rice, clay pot dishes, and other Cantonese-style clay pot meals. Eight-burner design meets high-volume peak-hour demand.",
   },
   {
     model: "GT1D1B",
@@ -4382,8 +4972,10 @@ window.PRODUCT_DATA_TABLE = [
     nameEn: "Single-head Pot Sticker Maker",
     category: "煎炸系列",
     subCategory: "锅贴机",
-    specifications: "◆额定电压：220v ◆额定功率：4.5kW ◆发热盘功率：4.5kW ◆进水类型：抽水款 ◆7寸触摸屏操作，自动烹饪，自动喷水，语音播报，菜谱编辑功能",
-    specificationsEn: "◆Rated Voltage: 220V ◆Rated Power: 4.5kW ◆Heating Plate Power: 4.5kW ◆Water Inlet Type: Water Pump ◆7\" Touch Screen Operation, Auto Cooking, Auto Water Spray, Voice Announcement, Recipe Editing Function",
+    specifications:
+      "◆额定电压：220v ◆额定功率：4.5kW ◆发热盘功率：4.5kW ◆进水类型：抽水款 ◆7寸触摸屏操作，自动烹饪，自动喷水，语音播报，菜谱编辑功能",
+    specificationsEn:
+      '◆Rated Voltage: 220V ◆Rated Power: 4.5kW ◆Heating Plate Power: 4.5kW ◆Water Inlet Type: Water Pump ◆7" Touch Screen Operation, Auto Cooking, Auto Water Spray, Voice Announcement, Recipe Editing Function',
     power: "4.5kW",
     voltage: "220v",
     material: "",
@@ -4398,14 +4990,15 @@ window.PRODUCT_DATA_TABLE = [
       {
         filePath: "/assets/images/products/GT1D1B-1.webp",
         isPrimary: true,
-        isHires: false
-      }
+        isHires: false,
+      },
     ],
     is_home_core: false,
     highlights: "",
     scenarios: "",
     usage: "",
-    usageEn: "Suitable for potsticker specialty shops, breakfast shops, restaurant chains, food delivery kiosks, and more. Ideal for automatic pan-frying of potstickers, pan-fried dumplings, Shengjian bao, and other pan-fried foods with automatic water spray and temperature control. Capacity: single-head pan-frying."
+    usageEn:
+      "Suitable for potsticker specialty shops, breakfast shops, restaurant chains, food delivery kiosks, and more. Ideal for automatic pan-frying of potstickers, pan-fried dumplings, Shengjian bao, and other pan-fried foods with automatic water spray and temperature control. Capacity: single-head pan-frying.",
   },
   {
     model: "GT2D1B",
@@ -4414,8 +5007,10 @@ window.PRODUCT_DATA_TABLE = [
     nameEn: "Dual-head Pot Sticker Maker",
     category: "煎炸系列",
     subCategory: "锅贴机",
-    specifications: "◆额定电压：380V ◆额定功率：9kW ◆发热盘功率：4.5kW*2 ◆进水类型：抽水款 ◆7寸触摸屏操作，自动烹饪，自动喷水，语音播报，菜谱编辑功能",
-    specificationsEn: "◆Rated Voltage: 380V ◆Rated Power: 9kW ◆Heating Plate Power: 4.5kW*2 ◆Water Inlet Type: Water Pump ◆7\" Touch Screen Operation, Auto Cooking, Auto Water Spray, Voice Announcement, Recipe Editing Function",
+    specifications:
+      "◆额定电压：380V ◆额定功率：9kW ◆发热盘功率：4.5kW*2 ◆进水类型：抽水款 ◆7寸触摸屏操作，自动烹饪，自动喷水，语音播报，菜谱编辑功能",
+    specificationsEn:
+      '◆Rated Voltage: 380V ◆Rated Power: 9kW ◆Heating Plate Power: 4.5kW*2 ◆Water Inlet Type: Water Pump ◆7" Touch Screen Operation, Auto Cooking, Auto Water Spray, Voice Announcement, Recipe Editing Function',
     power: "9kW",
     voltage: "380V",
     material: "",
@@ -4430,14 +5025,15 @@ window.PRODUCT_DATA_TABLE = [
       {
         filePath: "/assets/images/products/GT2D1B-1.webp",
         isPrimary: true,
-        isHires: false
-      }
+        isHires: false,
+      },
     ],
     is_home_core: true,
     highlights: "",
     scenarios: "",
     usage: "",
-    usageEn: "Suitable for potsticker specialty shops, breakfast shops, restaurant chains, food delivery kiosks, and more. Ideal for automatic pan-frying of potstickers, pan-fried dumplings, Shengjian bao, and other pan-fried foods. Dual-head design doubles production capacity."
+    usageEn:
+      "Suitable for potsticker specialty shops, breakfast shops, restaurant chains, food delivery kiosks, and more. Ideal for automatic pan-frying of potstickers, pan-fried dumplings, Shengjian bao, and other pan-fried foods. Dual-head design doubles production capacity.",
   },
   {
     model: "Y12D1C",
@@ -4446,8 +5042,10 @@ window.PRODUCT_DATA_TABLE = [
     nameEn: "Countertop Smart Lift Single-tank Fryer",
     category: "煎炸系列",
     subCategory: "油炸炉",
-    specifications: "◆额定电压：220V ◆额定功率：2.8kW ◆油桶规格： 1/2*20cm份数盘 ◆油桶材质：201 ◆油桶容量： 12L ◆加热方式：发热管 ◆操作方式：全自动触摸屏操作 ◆可选炸篮规格： 190*240*140mm孔6mm ◆有菜谱功能",
-    specificationsEn: "◆Rated Voltage: 220V ◆Rated Power: 2.8kW ◆Oil Tub Size: 1/2*20cm Gastronorm Pan ◆Oil Tub Material: 201 Stainless Steel ◆Oil Tub Capacity: 12L ◆Heating Method: Heating Tube ◆Operation: Fully Automatic Touch Screen ◆Optional Fry Basket Size: 190*240*140mm Hole 6mm ◆Recipe Function: Yes",
+    specifications:
+      "◆额定电压：220V ◆额定功率：2.8kW ◆油桶规格： 1/2*20cm份数盘 ◆油桶材质：201 ◆油桶容量： 12L ◆加热方式：发热管 ◆操作方式：全自动触摸屏操作 ◆可选炸篮规格： 190*240*140mm孔6mm ◆有菜谱功能",
+    specificationsEn:
+      "◆Rated Voltage: 220V ◆Rated Power: 2.8kW ◆Oil Tub Size: 1/2*20cm Gastronorm Pan ◆Oil Tub Material: 201 Stainless Steel ◆Oil Tub Capacity: 12L ◆Heating Method: Heating Tube ◆Operation: Fully Automatic Touch Screen ◆Optional Fry Basket Size: 190*240*140mm Hole 6mm ◆Recipe Function: Yes",
     power: "2.8kW",
     voltage: "220V",
     material: "201",
@@ -4462,15 +5060,16 @@ window.PRODUCT_DATA_TABLE = [
       {
         filePath: "/assets/images/products/Y12D1C-1.webp",
         isPrimary: true,
-        isHires: false
-      }
+        isHires: false,
+      },
     ],
     is_home_core: false,
     highlights: "",
     scenarios: "",
     usage: "",
-    usageEn: "Suitable for fast-food shops, fried chicken shops, snack kiosks, restaurant chains, and more. Ideal for frying French fries, chicken nuggets, chicken wings, fried fish, fried shrimp, and other fried foods with smart lifting and temperature control. Capacity: 12L oil tank, approx. 1-2 portions per batch.",
-    materialEn: "201 stainless steel"
+    usageEn:
+      "Suitable for fast-food shops, fried chicken shops, snack kiosks, restaurant chains, and more. Ideal for frying French fries, chicken nuggets, chicken wings, fried fish, fried shrimp, and other fried foods with smart lifting and temperature control. Capacity: 12L oil tank, approx. 1-2 portions per batch.",
+    materialEn: "201 stainless steel",
   },
   {
     model: "Y12D2C",
@@ -4479,8 +5078,10 @@ window.PRODUCT_DATA_TABLE = [
     nameEn: "Countertop Smart Lift Dual-tank Fryer",
     category: "煎炸系列",
     subCategory: "油炸炉",
-    specifications: "◆额定电压：220V/380V ◆额定功率：4.5kW*2 ◆油桶规格(mm)：400*300*200 ◆油桶容量： 18L*2 ◆加热方式：发热管 ◆操作方式：全自动触摸屏操作 ◆可选炸篮规格：200*280*150mm孔6mm ◆有菜谱功能",
-    specificationsEn: "◆Rated Voltage: 220V/380V ◆Rated Power: 4.5kW*2 ◆Oil Tub Size (mm): 400*300*200 ◆Oil Tub Capacity: 18L*2 ◆Heating Method: Heating Tube ◆Operation: Fully Automatic Touch Screen ◆Optional Fry Basket Size: 200*280*150mm Hole 6mm ◆Recipe Function: Yes",
+    specifications:
+      "◆额定电压：220V/380V ◆额定功率：4.5kW*2 ◆油桶规格(mm)：400*300*200 ◆油桶容量： 18L*2 ◆加热方式：发热管 ◆操作方式：全自动触摸屏操作 ◆可选炸篮规格：200*280*150mm孔6mm ◆有菜谱功能",
+    specificationsEn:
+      "◆Rated Voltage: 220V/380V ◆Rated Power: 4.5kW*2 ◆Oil Tub Size (mm): 400*300*200 ◆Oil Tub Capacity: 18L*2 ◆Heating Method: Heating Tube ◆Operation: Fully Automatic Touch Screen ◆Optional Fry Basket Size: 200*280*150mm Hole 6mm ◆Recipe Function: Yes",
     power: "4.5kW*2",
     voltage: "220V/380V",
     material: "",
@@ -4495,14 +5096,15 @@ window.PRODUCT_DATA_TABLE = [
       {
         filePath: "/assets/images/products/Y12D2C-1.webp",
         isPrimary: true,
-        isHires: false
-      }
+        isHires: false,
+      },
     ],
     is_home_core: false,
     highlights: "",
     scenarios: "",
     usage: "",
-    usageEn: "Suitable for fast-food shops, fried chicken shops, snack kiosks, restaurant chains, and more. Ideal for frying French fries, chicken nuggets, chicken wings, fried fish, fried shrimp, and other fried foods. Dual-tank design enables simultaneous frying of different ingredients. Capacity: dual 18L oil tanks."
+    usageEn:
+      "Suitable for fast-food shops, fried chicken shops, snack kiosks, restaurant chains, and more. Ideal for frying French fries, chicken nuggets, chicken wings, fried fish, fried shrimp, and other fried foods. Dual-tank design enables simultaneous frying of different ingredients. Capacity: dual 18L oil tanks.",
   },
   {
     model: "Y24C1C",
@@ -4511,8 +5113,10 @@ window.PRODUCT_DATA_TABLE = [
     nameEn: "Upright Smart Lift 1-Tank 2-Basket Fryer",
     category: "煎炸系列",
     subCategory: "油炸炉",
-    specifications: "◆额定电压：380V-2P+N ◆额定功率： 12kW ◆油桶规格(mm)：300*490*185 ◆油温温度：0-230℃ ◆油桶容量：27L ◆加热方式：发热管/电磁炉 ◆操作方式：全自动触摸屏操作 ◆可选炸篮规格： 190*240*140mm孔6mm ◆有菜谱功能",
-    specificationsEn: "◆Rated Voltage: 380V-2P+N ◆Rated Power: 12kW ◆Oil Tub Size (mm): 300*490*185 ◆Oil Temperature Range: 0-230℃ ◆Oil Tub Capacity: 27L ◆Heating Method: Heating Tube/Induction ◆Operation: Fully Automatic Touch Screen ◆Optional Fry Basket Size: 190*240*140mm Hole 6mm ◆Recipe Function: Yes",
+    specifications:
+      "◆额定电压：380V-2P+N ◆额定功率： 12kW ◆油桶规格(mm)：300*490*185 ◆油温温度：0-230℃ ◆油桶容量：27L ◆加热方式：发热管/电磁炉 ◆操作方式：全自动触摸屏操作 ◆可选炸篮规格： 190*240*140mm孔6mm ◆有菜谱功能",
+    specificationsEn:
+      "◆Rated Voltage: 380V-2P+N ◆Rated Power: 12kW ◆Oil Tub Size (mm): 300*490*185 ◆Oil Temperature Range: 0-230℃ ◆Oil Tub Capacity: 27L ◆Heating Method: Heating Tube/Induction ◆Operation: Fully Automatic Touch Screen ◆Optional Fry Basket Size: 190*240*140mm Hole 6mm ◆Recipe Function: Yes",
     power: "12kW",
     voltage: "380V-2P+N",
     material: "",
@@ -4527,14 +5131,15 @@ window.PRODUCT_DATA_TABLE = [
       {
         filePath: "/assets/images/products/Y24C1C-1.webp",
         isPrimary: true,
-        isHires: false
-      }
+        isHires: false,
+      },
     ],
     is_home_core: false,
     highlights: "",
     scenarios: "",
     usage: "",
-    usageEn: "Suitable for mid-sized restaurants, fast-food chains, fried chicken chains, canteens, and more. Ideal for high-volume frying of French fries, fried chicken, fried fish, fried shrimp, and other fried foods. Dual-basket design increases production. Capacity: 27L oil tank, dual frying baskets."
+    usageEn:
+      "Suitable for mid-sized restaurants, fast-food chains, fried chicken chains, canteens, and more. Ideal for high-volume frying of French fries, fried chicken, fried fish, fried shrimp, and other fried foods. Dual-basket design increases production. Capacity: 27L oil tank, dual frying baskets.",
   },
   {
     model: "Y50D1C",
@@ -4543,8 +5148,10 @@ window.PRODUCT_DATA_TABLE = [
     nameEn: "Upright Smart Lift 1-Tank 3-Basket Fryer (Oil-Water)",
     category: "煎炸系列",
     subCategory: "油炸炉",
-    specifications: "◆额定电压：380V ◆额定功率：12kW ◆油桶规格(mm)：250*600*220 ◆油温温度：0-230℃ ◆油桶容量：30L ◆加热方式：发热管 ◆操作方式：全自动触摸屏操作 ◆可选炸篮规格： 180*215*125mm孔6mm ◆有菜谱功能",
-    specificationsEn: "◆Rated Voltage: 380V ◆Rated Power: 12kW ◆Oil Tub Size (mm): 250*600*220 ◆Oil Temperature Range: 0-230℃ ◆Oil Tub Capacity: 30L ◆Heating Method: Heating Tube ◆Operation: Fully Automatic Touch Screen ◆Optional Fry Basket Size: 180*215*125mm Hole 6mm ◆Recipe Function: Yes",
+    specifications:
+      "◆额定电压：380V ◆额定功率：12kW ◆油桶规格(mm)：250*600*220 ◆油温温度：0-230℃ ◆油桶容量：30L ◆加热方式：发热管 ◆操作方式：全自动触摸屏操作 ◆可选炸篮规格： 180*215*125mm孔6mm ◆有菜谱功能",
+    specificationsEn:
+      "◆Rated Voltage: 380V ◆Rated Power: 12kW ◆Oil Tub Size (mm): 250*600*220 ◆Oil Temperature Range: 0-230℃ ◆Oil Tub Capacity: 30L ◆Heating Method: Heating Tube ◆Operation: Fully Automatic Touch Screen ◆Optional Fry Basket Size: 180*215*125mm Hole 6mm ◆Recipe Function: Yes",
     power: "12kW",
     voltage: "380V",
     material: "",
@@ -4559,14 +5166,15 @@ window.PRODUCT_DATA_TABLE = [
       {
         filePath: "/assets/images/products/Y50D1C-1.webp",
         isPrimary: true,
-        isHires: false
-      }
+        isHires: false,
+      },
     ],
     is_home_core: false,
     highlights: "",
     scenarios: "",
     usage: "",
-    usageEn: "Suitable for mid-sized restaurants, fast-food chains, fried chicken chains, large canteens, and more. Ideal for high-volume frying of French fries, fried chicken, fried fish, fried shrimp, and other fried foods. Triple-basket design with oil-water separation extends oil life. Capacity: 30L oil tank, triple frying baskets."
+    usageEn:
+      "Suitable for mid-sized restaurants, fast-food chains, fried chicken chains, large canteens, and more. Ideal for high-volume frying of French fries, fried chicken, fried fish, fried shrimp, and other fried foods. Triple-basket design with oil-water separation extends oil life. Capacity: 30L oil tank, triple frying baskets.",
   },
   {
     model: "LZ80D1B",
@@ -4575,8 +5183,10 @@ window.PRODUCT_DATA_TABLE = [
     nameEn: "Smart Lift Braising Cooker",
     category: "炖煮系列",
     subCategory: "卤煮炉",
-    specifications: "◆额定电压：380V ◆额定功率：8kW ◆排水口：G1\" ◆卤水温度：0-100℃ ◆最大提升重量：60kg ◆操作方式：触摸屏操作 ◆加热方式：发热盘 ◆卤水桶容量： 110L 降低水位低于30L ◆卤水桶规格(mm)：700*440*350 ◆可选卤篮规格(mm)：690*430*110mm孔6mm",
-    specificationsEn: "◆Rated Voltage: 380V ◆Rated Power: 8kW ◆Drain Outlet: G1\" ◆Brine Temperature: 0-100℃ ◆Max Lifting Weight: 60kg ◆Operation: Touch Screen ◆Heating Method: Heating Plate ◆Brine Tank Capacity: 110L (Low Water Level Below 30L) ◆Brine Tank Size (mm): 700*440*350 ◆Optional Brining Basket Size (mm): 690*430*110mm Hole 6mm",
+    specifications:
+      '◆额定电压：380V ◆额定功率：8kW ◆排水口：G1" ◆卤水温度：0-100℃ ◆最大提升重量：60kg ◆操作方式：触摸屏操作 ◆加热方式：发热盘 ◆卤水桶容量： 110L 降低水位低于30L ◆卤水桶规格(mm)：700*440*350 ◆可选卤篮规格(mm)：690*430*110mm孔6mm',
+    specificationsEn:
+      '◆Rated Voltage: 380V ◆Rated Power: 8kW ◆Drain Outlet: G1" ◆Brine Temperature: 0-100℃ ◆Max Lifting Weight: 60kg ◆Operation: Touch Screen ◆Heating Method: Heating Plate ◆Brine Tank Capacity: 110L (Low Water Level Below 30L) ◆Brine Tank Size (mm): 700*440*350 ◆Optional Brining Basket Size (mm): 690*430*110mm Hole 6mm',
     power: "8kW",
     voltage: "380V",
     material: "",
@@ -4591,14 +5201,15 @@ window.PRODUCT_DATA_TABLE = [
       {
         filePath: "/assets/images/products/LZ80D1B-1.webp",
         isPrimary: true,
-        isHires: false
-      }
+        isHires: false,
+      },
     ],
     is_home_core: false,
     highlights: "",
     scenarios: "",
     usage: "",
-    usageEn: "Suitable for braised food specialty shops, restaurant chains, cooked food processing plants, corporate & institutional canteens, and more. Ideal for braising meat, braised eggs, braised tofu, braised chicken feet, and other braised delicacies with smart lifting and temperature control. Capacity: 110L braising tank, max. lifting weight 60kg."
+    usageEn:
+      "Suitable for braised food specialty shops, restaurant chains, cooked food processing plants, corporate & institutional canteens, and more. Ideal for braising meat, braised eggs, braised tofu, braised chicken feet, and other braised delicacies with smart lifting and temperature control. Capacity: 110L braising tank, max. lifting weight 60kg.",
   },
   {
     model: "Z8FCB/Z12FCB",
@@ -4607,10 +5218,13 @@ window.PRODUCT_DATA_TABLE = [
     nameEn: "Smart Rice Steamer",
     category: "蒸煮系列",
     subCategory: "智能蒸饭机",
-    specifications: "1.设备名称： 智能蒸饭机 2.型号：Z8FCB / Z12FCB 3.电参数：AC380V  8kW/12kW（按订单定） 4.电缆线连接方式：Y型，由制造商服务机构或者类似具有资格的人员来更换 5.进水软管：使用随器具附带的新软管组件，旧软管组件不能重复利用。",
-    specificationsEn: "1. Equipment Name: Smart Rice Steamer 2. Model: Z8FCB / Z12FCB 3. Electrical Parameters: AC380V 8kW/12kW (as per order) 4. Cable Connection: Y-type, to be replaced by manufacturer's service personnel or similarly qualified persons 5. Water Inlet Hose: Use the new hose assembly supplied with the appliance; do not reuse old hose assemblies.",
+    specifications:
+      "1.设备名称： 智能蒸饭机 2.型号：Z8FCB / Z12FCB 3.电参数：AC380V  8kW/12kW（按订单定） 4.电缆线连接方式：Y型，由制造商服务机构或者类似具有资格的人员来更换 5.进水软管：使用随器具附带的新软管组件，旧软管组件不能重复利用。",
+    specificationsEn:
+      "1. Equipment Name: Smart Rice Steamer 2. Model: Z8FCB / Z12FCB 3. Electrical Parameters: AC380V 8kW/12kW (as per order) 4. Cable Connection: Y-type, to be replaced by manufacturer's service personnel or similarly qualified persons 5. Water Inlet Hose: Use the new hose assembly supplied with the appliance; do not reuse old hose assemblies.",
     power: "",
-    voltage: "AC380V8kW/12kW（按订单定）4.电缆线连接方式：Y型，由制造商服务机构或者类似具有资格的人员来更换5.进水软管：使用随器具附带的新软管组件，旧软管组件不能重复利用。",
+    voltage:
+      "AC380V8kW/12kW（按订单定）4.电缆线连接方式：Y型，由制造商服务机构或者类似具有资格的人员来更换5.进水软管：使用随器具附带的新软管组件，旧软管组件不能重复利用。",
     material: "",
     productDimensions: "700mm×800mm×800mm",
     throughput: "",
@@ -4624,7 +5238,8 @@ window.PRODUCT_DATA_TABLE = [
     highlights: "",
     scenarios: "",
     usage: "",
-    usageEn: "Suitable for school canteens, corporate & institutional canteens, hospital kitchens, catering services, and more. Ideal for batch steaming of rice, steamed buns, mantou, dim sum, and more. Available in 8-layer or 12-layer configurations to meet different volume needs."
+    usageEn:
+      "Suitable for school canteens, corporate & institutional canteens, hospital kitchens, catering services, and more. Ideal for batch steaming of rice, steamed buns, mantou, dim sum, and more. Available in 8-layer or 12-layer configurations to meet different volume needs.",
   },
   {
     model: "Z6FCB",
@@ -4633,10 +5248,13 @@ window.PRODUCT_DATA_TABLE = [
     nameEn: "Smart Rice Steamer",
     category: "蒸煮系列",
     subCategory: "智能蒸饭机",
-    specifications: "1.设备名称： 智能蒸饭机 2.型号：Z6FCB  3.电参数：AC380V  6kW 4.电缆线连接方式：Y型，由制造商服务机构或者类似具有资格的人员来更换 5.进水软管：使用随器具附带的新软管组件，旧软管组件不能重复利用。",
-    specificationsEn: "1. Equipment Name: Smart Rice Steamer 2. Model: Z6FCB 3. Electrical Parameters: AC380V 6kW 4. Cable Connection: Y-type, to be replaced by manufacturer's service personnel or similarly qualified persons 5. Water Inlet Hose: Use the new hose assembly supplied with the appliance; do not reuse old hose assemblies.",
+    specifications:
+      "1.设备名称： 智能蒸饭机 2.型号：Z6FCB  3.电参数：AC380V  6kW 4.电缆线连接方式：Y型，由制造商服务机构或者类似具有资格的人员来更换 5.进水软管：使用随器具附带的新软管组件，旧软管组件不能重复利用。",
+    specificationsEn:
+      "1. Equipment Name: Smart Rice Steamer 2. Model: Z6FCB 3. Electrical Parameters: AC380V 6kW 4. Cable Connection: Y-type, to be replaced by manufacturer's service personnel or similarly qualified persons 5. Water Inlet Hose: Use the new hose assembly supplied with the appliance; do not reuse old hose assemblies.",
     power: "",
-    voltage: "AC380V6kW4.电缆线连接方式：Y型，由制造商服务机构或者类似具有资格的人员来更换5.进水软管：使用随器具附带的新软管组件，旧软管组件不能重复利用。",
+    voltage:
+      "AC380V6kW4.电缆线连接方式：Y型，由制造商服务机构或者类似具有资格的人员来更换5.进水软管：使用随器具附带的新软管组件，旧软管组件不能重复利用。",
     material: "",
     productDimensions: "450mm*800mm*800mm",
     throughput: "",
@@ -4649,14 +5267,15 @@ window.PRODUCT_DATA_TABLE = [
       {
         filePath: "/assets/images/products/Z6FCB-1.webp",
         isPrimary: true,
-        isHires: false
-      }
+        isHires: false,
+      },
     ],
     is_home_core: false,
     highlights: "",
     scenarios: "",
     usage: "",
-    usageEn: "Suitable for small to mid-sized canteens, restaurant chains, corporate & institutional canteens, fast-food delivery, and more. Ideal for batch steaming of rice, steamed buns, mantou, dim sum, and more. 6-layer steaming tray design."
+    usageEn:
+      "Suitable for small to mid-sized canteens, restaurant chains, corporate & institutional canteens, fast-food delivery, and more. Ideal for batch steaming of rice, steamed buns, mantou, dim sum, and more. 6-layer steaming tray design.",
   },
   {
     model: "HKQPJ400-VIII",
@@ -4666,7 +5285,8 @@ window.PRODUCT_DATA_TABLE = [
     category: "切配系列",
     subCategory: "流水化自动机",
     specifications: "",
-    specificationsEn: "Material: Premium stainless steel; Blade: Special alloy steel; Power: 2.2kW; Voltage: 220V; Frequency: 50Hz; Dimensions: 2070×1120×1455mm; Cutting Thickness: 0.5-30mm adjustable; Feed Channel: Single; Application: Fresh and frozen meat slicing; Safety: Emergency stop function with protective cover",
+    specificationsEn:
+      "Material: Premium stainless steel; Blade: Special alloy steel; Power: 2.2kW; Voltage: 220V; Frequency: 50Hz; Dimensions: 2070×1120×1455mm; Cutting Thickness: 0.5-30mm adjustable; Feed Channel: Single; Application: Fresh and frozen meat slicing; Safety: Emergency stop function with protective cover",
     power: "",
     voltage: "",
     material: "",
@@ -4681,14 +5301,15 @@ window.PRODUCT_DATA_TABLE = [
       {
         filePath: "/assets/images/products/HKQPJ400-VIII-1.webp",
         isPrimary: true,
-        isHires: false
-      }
+        isHires: false,
+      },
     ],
     is_home_core: true,
     highlights: "",
     scenarios: "",
     usage: "",
-    usageEn: "Suitable for restaurant chains, central kitchens, meat processing plants, canteens, and more. Ideal for slicing fresh pork, beef, and lamb with adjustable uniform thickness. Single-channel design. Capacity: approx. 400 slices per minute."
+    usageEn:
+      "Suitable for restaurant chains, central kitchens, meat processing plants, canteens, and more. Ideal for slicing fresh pork, beef, and lamb with adjustable uniform thickness. Single-channel design. Capacity: approx. 400 slices per minute.",
   },
   {
     model: "HKQPJ500-VIII",
@@ -4698,7 +5319,8 @@ window.PRODUCT_DATA_TABLE = [
     category: "切配系列",
     subCategory: "流水化自动机",
     specifications: "",
-    specificationsEn: "Material: Premium stainless steel; Blade: Special alloy steel; Power: 4kW; Voltage: 380V; Frequency: 50Hz; Dimensions: 2154×1141×1215mm; Cutting Thickness: 0.5-30mm adjustable; Feed Channel: Dual; Application: Fresh and frozen meat slicing; Safety: Emergency stop function with protective cover",
+    specificationsEn:
+      "Material: Premium stainless steel; Blade: Special alloy steel; Power: 4kW; Voltage: 380V; Frequency: 50Hz; Dimensions: 2154×1141×1215mm; Cutting Thickness: 0.5-30mm adjustable; Feed Channel: Dual; Application: Fresh and frozen meat slicing; Safety: Emergency stop function with protective cover",
     power: "",
     voltage: "",
     material: "",
@@ -4713,14 +5335,15 @@ window.PRODUCT_DATA_TABLE = [
       {
         filePath: "/assets/images/products/HKQPJ500-VIII-1.webp",
         isPrimary: true,
-        isHires: false
-      }
+        isHires: false,
+      },
     ],
     is_home_core: false,
     highlights: "",
     scenarios: "",
     usage: "",
-    usageEn: "Suitable for restaurant chains, central kitchens, meat processing plants, canteens, and more. Ideal for slicing fresh pork, beef, and lamb with adjustable uniform thickness. Dual-channel design for higher output. Capacity: approx. 500 slices per minute."
+    usageEn:
+      "Suitable for restaurant chains, central kitchens, meat processing plants, canteens, and more. Ideal for slicing fresh pork, beef, and lamb with adjustable uniform thickness. Dual-channel design for higher output. Capacity: approx. 500 slices per minute.",
   },
   {
     model: "HKQTJ300",
@@ -4730,7 +5353,8 @@ window.PRODUCT_DATA_TABLE = [
     category: "切配系列",
     subCategory: "流水化自动机",
     specifications: "",
-    specificationsEn: "Material: Premium stainless steel; Blade: Special alloy steel; Power: 1.5kW; Voltage: 220V; Frequency: 50Hz; Dimensions: 1450×650×1550mm; Strip Width: 3-30mm adjustable; Application: Fresh meat stripping; Safety: Emergency stop function",
+    specificationsEn:
+      "Material: Premium stainless steel; Blade: Special alloy steel; Power: 1.5kW; Voltage: 220V; Frequency: 50Hz; Dimensions: 1450×650×1550mm; Strip Width: 3-30mm adjustable; Application: Fresh meat stripping; Safety: Emergency stop function",
     power: "",
     voltage: "",
     material: "",
@@ -4745,14 +5369,15 @@ window.PRODUCT_DATA_TABLE = [
       {
         filePath: "/assets/images/products/HKQTJ300-1.webp",
         isPrimary: true,
-        isHires: false
-      }
+        isHires: false,
+      },
     ],
     is_home_core: false,
     highlights: "",
     scenarios: "",
     usage: "",
-    usageEn: "Suitable for restaurant chains, central kitchens, meat processing plants, hot pot restaurants, and more. Ideal for cutting fresh pork, beef, and lamb into strips or julienne strips with adjustable width. Capacity: approx. 300kg/hour."
+    usageEn:
+      "Suitable for restaurant chains, central kitchens, meat processing plants, hot pot restaurants, and more. Ideal for cutting fresh pork, beef, and lamb into strips or julienne strips with adjustable width. Capacity: approx. 300kg/hour.",
   },
   {
     model: "HKQTJ600-VII",
@@ -4762,7 +5387,8 @@ window.PRODUCT_DATA_TABLE = [
     category: "切配系列",
     subCategory: "流水化自动机",
     specifications: "",
-    specificationsEn: "Material: Premium stainless steel; Blade: Special alloy steel; Power: 2.2kW; Voltage: 220V; Frequency: 50Hz; Dimensions: 1800×950×1550mm; Strip Width: 3-30mm adjustable; Application: Fresh meat stripping; Safety: Emergency stop function with protective cover",
+    specificationsEn:
+      "Material: Premium stainless steel; Blade: Special alloy steel; Power: 2.2kW; Voltage: 220V; Frequency: 50Hz; Dimensions: 1800×950×1550mm; Strip Width: 3-30mm adjustable; Application: Fresh meat stripping; Safety: Emergency stop function with protective cover",
     power: "",
     voltage: "",
     material: "",
@@ -4777,14 +5403,15 @@ window.PRODUCT_DATA_TABLE = [
       {
         filePath: "/assets/images/products/HKQTJ600-VII-1.webp",
         isPrimary: true,
-        isHires: false
-      }
+        isHires: false,
+      },
     ],
     is_home_core: false,
     highlights: "",
     scenarios: "",
     usage: "",
-    usageEn: "Suitable for restaurant chains, central kitchens, meat processing plants, large canteens, and more. Ideal for high-volume cutting of fresh pork, beef, and lamb into strips or julienne strips with adjustable width. Capacity: approx. 600kg/hour."
+    usageEn:
+      "Suitable for restaurant chains, central kitchens, meat processing plants, large canteens, and more. Ideal for high-volume cutting of fresh pork, beef, and lamb into strips or julienne strips with adjustable width. Capacity: approx. 600kg/hour.",
   },
   {
     model: "HKQTJ200-VII",
@@ -4794,7 +5421,8 @@ window.PRODUCT_DATA_TABLE = [
     category: "切配系列",
     subCategory: "流水化自动机",
     specifications: "",
-    specificationsEn: "Material: Premium stainless steel; Blade: Special alloy steel; Power: 1.1kW; Voltage: 220V; Frequency: 50Hz; Dimensions: 1950×550×1390mm; Shred Size: Multiple sizes adjustable; Application: Fresh meat shredding (customized); Safety: Emergency stop function",
+    specificationsEn:
+      "Material: Premium stainless steel; Blade: Special alloy steel; Power: 1.1kW; Voltage: 220V; Frequency: 50Hz; Dimensions: 1950×550×1390mm; Shred Size: Multiple sizes adjustable; Application: Fresh meat shredding (customized); Safety: Emergency stop function",
     power: "",
     voltage: "",
     material: "",
@@ -4809,14 +5437,15 @@ window.PRODUCT_DATA_TABLE = [
       {
         filePath: "/assets/images/products/HKQTJ200-VII-1.webp",
         isPrimary: true,
-        isHires: false
-      }
+        isHires: false,
+      },
     ],
     is_home_core: false,
     highlights: "",
     scenarios: "",
     usage: "",
-    usageEn: "Suitable for restaurant chains, central kitchens, meat processing plants, hot pot restaurants, and more. Designed specifically for cutting fresh pork, beef, and lamb into julienne strips with adjustable thickness. Capacity: approx. 200kg/hour."
+    usageEn:
+      "Suitable for restaurant chains, central kitchens, meat processing plants, hot pot restaurants, and more. Designed specifically for cutting fresh pork, beef, and lamb into julienne strips with adjustable thickness. Capacity: approx. 200kg/hour.",
   },
   {
     model: "HKDQJ300-VII",
@@ -4826,7 +5455,8 @@ window.PRODUCT_DATA_TABLE = [
     category: "切配系列",
     subCategory: "流水化自动机",
     specifications: "",
-    specificationsEn: "Material: Premium stainless steel; Blade: Special alloy steel; Power: 4kW; Voltage: 380V; Frequency: 50Hz; Dimensions: 2080×1040×1450mm; Dicing Size: 5-30mm adjustable; Application: Frozen meat dicing; Safety: Emergency stop function with protective cover",
+    specificationsEn:
+      "Material: Premium stainless steel; Blade: Special alloy steel; Power: 4kW; Voltage: 380V; Frequency: 50Hz; Dimensions: 2080×1040×1450mm; Dicing Size: 5-30mm adjustable; Application: Frozen meat dicing; Safety: Emergency stop function with protective cover",
     power: "",
     voltage: "",
     material: "",
@@ -4841,14 +5471,15 @@ window.PRODUCT_DATA_TABLE = [
       {
         filePath: "/assets/images/products/HKDQJ300-VII-1.webp",
         isPrimary: true,
-        isHires: false
-      }
+        isHires: false,
+      },
     ],
     is_home_core: false,
     highlights: "",
     scenarios: "",
     usage: "",
-    usageEn: "Suitable for restaurant chains, central kitchens, meat processing plants, frozen food factories, and more. Ideal for dicing frozen pork, beef, and lamb with adjustable uniform cube size. Capacity: approx. 300kg/hour."
+    usageEn:
+      "Suitable for restaurant chains, central kitchens, meat processing plants, frozen food factories, and more. Ideal for dicing frozen pork, beef, and lamb with adjustable uniform cube size. Capacity: approx. 300kg/hour.",
   },
   {
     model: "HKDQJ300",
@@ -4858,7 +5489,8 @@ window.PRODUCT_DATA_TABLE = [
     category: "切配系列",
     subCategory: "流水化自动机",
     specifications: "",
-    specificationsEn: "Material: Premium stainless steel; Blade: Special alloy steel; Power: 3kW; Voltage: 380V; Frequency: 50Hz; Dimensions: 1480×1040×1450mm; Dicing Size: 5-30mm adjustable; Application: Frozen meat dicing; Safety: Emergency stop function",
+    specificationsEn:
+      "Material: Premium stainless steel; Blade: Special alloy steel; Power: 3kW; Voltage: 380V; Frequency: 50Hz; Dimensions: 1480×1040×1450mm; Dicing Size: 5-30mm adjustable; Application: Frozen meat dicing; Safety: Emergency stop function",
     power: "",
     voltage: "",
     material: "",
@@ -4873,14 +5505,15 @@ window.PRODUCT_DATA_TABLE = [
       {
         filePath: "/assets/images/products/HKDQJ300-1.webp",
         isPrimary: true,
-        isHires: false
-      }
+        isHires: false,
+      },
     ],
     is_home_core: false,
     highlights: "",
     scenarios: "",
     usage: "",
-    usageEn: "Suitable for restaurant chains, central kitchens, meat processing plants, frozen food factories, and more. Ideal for dicing frozen pork, beef, and lamb with adjustable uniform cube size. Capacity: approx. 300kg/hour."
+    usageEn:
+      "Suitable for restaurant chains, central kitchens, meat processing plants, frozen food factories, and more. Ideal for dicing frozen pork, beef, and lamb with adjustable uniform cube size. Capacity: approx. 300kg/hour.",
   },
   {
     model: "HKXQJ-400",
@@ -4890,7 +5523,8 @@ window.PRODUCT_DATA_TABLE = [
     category: "切配系列",
     subCategory: "流水化自动机",
     specifications: "",
-    specificationsEn: "Material: Premium stainless steel; Blade: Special alloy steel; Power: 0.75kW; Voltage: 220V; Frequency: 50Hz; Dimensions: 1257×985×690mm; Cut Angle: 0-60° adjustable; Application: Vegetable decorative and bias cutting; Safety: Emergency stop function",
+    specificationsEn:
+      "Material: Premium stainless steel; Blade: Special alloy steel; Power: 0.75kW; Voltage: 220V; Frequency: 50Hz; Dimensions: 1257×985×690mm; Cut Angle: 0-60° adjustable; Application: Vegetable decorative and bias cutting; Safety: Emergency stop function",
     power: "",
     voltage: "",
     material: "",
@@ -4905,14 +5539,15 @@ window.PRODUCT_DATA_TABLE = [
       {
         filePath: "/assets/images/products/HKXQJ-400-1.webp",
         isPrimary: true,
-        isHires: false
-      }
+        isHires: false,
+      },
     ],
     is_home_core: false,
     highlights: "",
     scenarios: "",
     usage: "",
-    usageEn: "Suitable for restaurant chains, central kitchens, meat processing plants, BBQ restaurants, and more. Ideal for special cuts on fresh meat including scoring, diagonal cutting, and roll-cutting for attractive presentation. Capacity: approx. 400kg/hour."
+    usageEn:
+      "Suitable for restaurant chains, central kitchens, meat processing plants, BBQ restaurants, and more. Ideal for special cuts on fresh meat including scoring, diagonal cutting, and roll-cutting for attractive presentation. Capacity: approx. 400kg/hour.",
   },
   {
     model: "HKQPJ-300",
@@ -4922,7 +5557,8 @@ window.PRODUCT_DATA_TABLE = [
     category: "切配系列",
     subCategory: "流水化自动机",
     specifications: "",
-    specificationsEn: "Material: Premium stainless steel; Blade: Special alloy steel; Power: 1.5kW; Voltage: 220V; Frequency: 50Hz; Dimensions: 1340×800×1250mm; Cutting Thickness: 0.5-25mm adjustable; Application: Cooked meat slicing; Safety: Emergency stop function",
+    specificationsEn:
+      "Material: Premium stainless steel; Blade: Special alloy steel; Power: 1.5kW; Voltage: 220V; Frequency: 50Hz; Dimensions: 1340×800×1250mm; Cutting Thickness: 0.5-25mm adjustable; Application: Cooked meat slicing; Safety: Emergency stop function",
     power: "",
     voltage: "",
     material: "",
@@ -4937,14 +5573,15 @@ window.PRODUCT_DATA_TABLE = [
       {
         filePath: "/assets/images/products/HKQPJ-300-1.webp",
         isPrimary: true,
-        isHires: false
-      }
+        isHires: false,
+      },
     ],
     is_home_core: false,
     highlights: "",
     scenarios: "",
     usage: "",
-    usageEn: "Suitable for restaurant chains, deli shops, central kitchens, canteens, and more. Ideal for slicing cooked meats including braised meat, ham, Chinese sausage, cured meat, and more with clean, uniform thickness. Capacity: approx. 300kg/hour."
+    usageEn:
+      "Suitable for restaurant chains, deli shops, central kitchens, canteens, and more. Ideal for slicing cooked meats including braised meat, ham, Chinese sausage, cured meat, and more with clean, uniform thickness. Capacity: approx. 300kg/hour.",
   },
   {
     model: "HKJGJ380-VI",
@@ -4954,7 +5591,8 @@ window.PRODUCT_DATA_TABLE = [
     category: "切配系列",
     subCategory: "流水化自动机",
     specifications: "",
-    specificationsEn: "Material: Premium stainless steel; Saw Blade: High-strength alloy saw band; Power: 2.2kW; Voltage: 220V; Frequency: 50Hz; Sawing Capacity: Bones and frozen meat; Safety: Emergency stop function with protective cover",
+    specificationsEn:
+      "Material: Premium stainless steel; Saw Blade: High-strength alloy saw band; Power: 2.2kW; Voltage: 220V; Frequency: 50Hz; Sawing Capacity: Bones and frozen meat; Safety: Emergency stop function with protective cover",
     power: "",
     voltage: "",
     material: "",
@@ -4969,14 +5607,15 @@ window.PRODUCT_DATA_TABLE = [
       {
         filePath: "/assets/images/products/HKJGJ380-VI-1.webp",
         isPrimary: true,
-        isHires: false
-      }
+        isHires: false,
+      },
     ],
     is_home_core: false,
     highlights: "",
     scenarios: "",
     usage: "",
-    usageEn: "Suitable for restaurant chains, central kitchens, meat processing plants, supermarkets, and more. Ideal for sawing frozen pork, beef, and lamb ribs, large bones, chicken carcasses, and other bone-in meats. Capacity: 380mm sawing width."
+    usageEn:
+      "Suitable for restaurant chains, central kitchens, meat processing plants, supermarkets, and more. Ideal for sawing frozen pork, beef, and lamb ribs, large bones, chicken carcasses, and other bone-in meats. Capacity: 380mm sawing width.",
   },
   {
     model: "HKFBJ",
@@ -4986,7 +5625,8 @@ window.PRODUCT_DATA_TABLE = [
     category: "切配系列",
     subCategory: "流水化自动机",
     specifications: "",
-    specificationsEn: "Material: Premium stainless steel; Blade: Special alloy steel; Power: 1.5kW; Voltage: 220V; Frequency: 50Hz; Application: Pig trotter halving; Safety: Emergency stop function with protective cover; Processing Capacity: Approx. 600-800 pcs/hour",
+    specificationsEn:
+      "Material: Premium stainless steel; Blade: Special alloy steel; Power: 1.5kW; Voltage: 220V; Frequency: 50Hz; Application: Pig trotter halving; Safety: Emergency stop function with protective cover; Processing Capacity: Approx. 600-800 pcs/hour",
     power: "",
     voltage: "",
     material: "",
@@ -5001,14 +5641,43 @@ window.PRODUCT_DATA_TABLE = [
       {
         filePath: "/assets/images/products/HKFBJ-1.webp",
         isPrimary: true,
-        isHires: false
-      }
+        isHires: false,
+      },
     ],
     is_home_core: false,
     highlights: "",
     scenarios: "",
     usage: "",
-    usageEn: "Suitable for braised food processing plants, restaurant chains, central kitchens, meat processing plants, and more. Ideal for automatic splitting of pig trotters with clean, even cuts. Capacity: continuous operation, significantly improving pig trotter splitting efficiency."
-  }
+    usageEn:
+      "Suitable for braised food processing plants, restaurant chains, central kitchens, meat processing plants, and more. Ideal for automatic splitting of pig trotters with clean, even cuts. Capacity: continuous operation, significantly improving pig trotter splitting efficiency.",
+  },
+  {
+    model: "DLB-GQ36J",
+    name: "落地式360智能电磁炒菜 机（触屏800）",
+    nameEn: "Floor-standing 360 Induction Cooker (Touch 800)",
+    tier: "智能",
+    category: "翻炒系列",
+    subCategory: "滚筒炒菜机",
+    specifications:
+      "材质：整机外壳不锈钢材质 功率：9kW；电压：380V；频率：50Hz 锅体规格：球釜型锅Φ360*H360 炒菜容量：12L（倾角30 °有效容量） 锅体材质：SUS409不锈钢不粘锅 显示屏：7寸多功能触模显示屏 锅倾角度：无极多角度电动翻锅 ， 自动倒菜 翻炒方式：采用360 °滚筒旋转立体翻炒加热 火力和翻炒速度：多档位可调节 菜谱：可存储800个菜谱（智能学习功能） 语音：智能实时语音播报功能 清洗：高压水枪清洗，快捷高效",
+    specificationsEn:
+      "Material: Entire housing made of stainless steel; Power: 9kW; Voltage: 380V; Frequency: 50Hz; Wok Body Specs: Dome-shaped wok Φ360*H360; Cooking Capacity: 12L (effective capacity at 30° tilt); Wok Body Material: SUS409 stainless steel non-stick wok; Display: 7-inch multi-function touch display; Tilting Angle: Stepless multi-angle electric tilting, auto food discharging; Stirring Method: 360° drum rotation three-dimensional stirring and heating; Heat and Stirring Speed: Multi-level adjustable; Recipes: Stores up to 800 recipes (smart learning function); Voice: Smart real-time voice broadcast; Cleaning: High-pressure water gun cleaning, fast and efficient",
+    power: "8-10kW",
+    voltage: "380V",
+    material: "采用优质不锈钢",
+    productDimensions: "640*900*1450",
+    throughput: "",
+    averageTime: "",
+    status: "在售",
+    badge: "",
+    badgeColor: "",
+    isActive: true,
+    images: [],
+    is_home_core: false,
+    highlights: "",
+    scenarios: "",
+    usage: "",
+    usageEn: "",
+  },
 ];
-window.PRODUCT_DATA_VERSION = "1779945778105";
+window.PRODUCT_DATA_VERSION = "1779957552232";
