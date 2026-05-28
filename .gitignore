@@ -189,3 +189,4 @@ translate-quota.json
 /blob-report/
 /playwright/.cache/
 scripts/products-table.xlsx
+.nojekyll
