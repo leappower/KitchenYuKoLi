@@ -107,9 +107,10 @@ KitchenYuKoLi v1.0.0 发布前问题修复文档。
 - [x] product-grid 被误隐藏修复 — ensureContainers URL 保护
 - [x] canteen mobile/tablet 空壳修复 — 补齐7区段30KB+
 - [x] SSG 直出页面骨架屏注入 — injectSkeletonOverlay
+- [x] 旧路径 /products/detail/{model}/ 兼容处理 — 404 路由逻辑修复
 - [ ] 待 DNS CNAME 生效后开启 Enforce HTTPS
 
 ## 当前状态
 
-所有 26 个已记录问题（P0:7 + P1:8 + P2:3 + R2:6 + R3:1）均已修复。
+所有 27 个已记录问题均已修复。
 暂无待修复问题。
