@@ -900,30 +900,28 @@
 
   _spaOn(window, "languageChanged", renderPDP, "languageChanged");
   document.addEventListener("productTranslationsLoaded", renderPDP);
-  _spaOn(
-    document,
-    "spa:load",
-    function () {
-      var segs = location.pathname.split("/").filter(Boolean);
-      if (segs[0] !== "products") return;
-      var shouldRender =
-        (segs[1] === "detail" && segs[2]) ||
-        (segs[1] && segs[1] !== "compare" && !isCategorySlug(segs[1])) ||
-        (isCategorySlug(segs[1]) && segs[2]);
-      if (!shouldRender) return;
-      // spa:load 时 translations 可能还未就绪，等待 spa:ready 确保语言正确
-      if (window.translationManager && !window.translationManager.isInitialized) {
-        var onReady = function () {
-          document.removeEventListener("spa:ready", onReady);
-          renderPDP();
-        };
-        document.addEventListener("spa:ready", onReady);
-      } else {
+  document.addEventListener("spa:load", function () {
+    var segs = location.pathname.split("/").filter(Boolean);
+    if (segs[0] !== "products") return;
+    var shouldRender =
+      (segs[1] === "detail" && segs[2]) ||
+      (segs[1] && segs[1] !== "compare" && !isCategorySlug(segs[1])) ||
+      (isCategorySlug(segs[1]) && segs[2]);
+    if (!shouldRender) return;
+    if (window.translationManager && !window.translationManager.isInitialized) {
+      var onReady = function () {
+        document.removeEventListener("spa:ready", onReady);
         renderPDP();
-      }
-    },
-    "spa:load:renderPDP"
-  );
+      };
+      document.addEventListener("spa:ready", onReady);
+    } else {
+      renderPDP();
+    }
+  });
+  // Fallback: re-render on popstate (browser back/forward via Swup)
+  window.addEventListener("popstate", function () {
+    renderPDP();
+  });
   _spaOn(
     document,
     "spa:ready",
