@@ -90,12 +90,10 @@
     var swup;
     try {
       try {
-        if (
-          typeof window.Swup !== "function" ||
-          typeof window.SwupHeadPlugin !== "function" ||
-          typeof window.SwupPreloadPlugin !== "function"
-        ) {
-          console.warn("[spa-router] Swup or plugins not loaded, falling back to traditional navigation");
+        if (typeof window.Swup !== 'function' ||
+            typeof window.SwupHeadPlugin !== 'function' ||
+            typeof window.SwupPreloadPlugin !== 'function') {
+          console.warn('[spa-router] Swup or plugins not loaded, falling back to traditional navigation');
           window.__spaNavigating = false;
           return;
         }
@@ -108,12 +106,12 @@
               persistTags: 'style[id], style[data-swup-persist], link[rel="stylesheet"][href], script[src]',
               persistAssets: true,
             }),
-            new window.SwupPreloadPlugin({ preloadHoveredLinks: false, preloadInitialPage: false }),
+            new window.SwupPreloadPlugin({ preloadHoveredLinks: true, preloadInitialPage: false }),
           ],
           animateHistoryBrowsing: false,
         });
       } catch (e) {
-        console.warn("[spa-router] Swup init failed, falling back to traditional navigation:", e.message);
+        console.warn('[spa-router] Swup init failed, falling back to traditional navigation:', e.message);
         window.__spaNavigating = false;
         return;
       }

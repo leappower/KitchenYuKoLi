@@ -745,7 +745,7 @@ function generate404() {
   var bp = BASE_PATH;
   // Include both SSG routes + case slug aliases for 404 redirect handling
   var allRoutes = ROUTES.map(function (r) { return r.slug; });
-  // Add case slug aliases so /cases/manila-lunchbox-studio-2025 → /cases/manila-lunchbox-studio-2025/
+  // Add case slug aliases so 404.html can redirect /cases/manila-lunchbox-studio-2025 → /cases/manila-lunchbox-studio-2025/
   for (var _city in CASE_SLUG_MAP) {
     allRoutes.push('cases/' + CASE_SLUG_MAP[_city]);
   }

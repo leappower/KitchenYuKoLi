@@ -575,7 +575,8 @@ app.get("*", (req, res) => {
         var dataFile = path.join(__dirname, "src", "assets", "js", "product-data-table.js");
         if (isFile(dataFile)) {
           var dataContent = fs.readFileSync(dataFile, "utf-8");
-          var modelRegex = new RegExp('"model":\s*"' + productSlug.replace(/[.*+?^${}()|[\]\\]/g, "\\$&") + '"');
+          // Match JS object format:  category: "翻炒系列"
+          // Also match JSON format:  "category": "翻炒系列"
           var catRegex = /["']?category["']?\s*:\s*"([^"]+)"/;
           var lines = dataContent.split("\n");
           var foundCat = null;
@@ -607,12 +608,24 @@ app.get("*", (req, res) => {
             return res.redirect(301, "/products/" + canonicalSlug + "/" + productSlug + "/");
           }
         }
-      } catch (e) {}
+      } catch (e) {
+        console.error("[product] Failed to lookup category for", productSlug, e);
+      }
 
-      // Fallback: unknown product — let resolvePage handle it (will return 404.html)
-      var f404 = path.join(__dirname, "dist", "404.html");
-      if (isFile(f404)) {
-        return res.status(404).sendFile(f404);
+      // Fallback: serve detail template with redirect script
+      var isMobile = isMobileUA(req.headers["user-agent"]);
+      var variantIdx = { mobile: "index-mobile.html", tablet: "index-tablet.html", pc: "index-pc.html" };
+      var detailFile = path.join(__dirname, "dist", "products", "detail", variantIdx[isMobile] || "index-pc.html");
+      if (!isFile(detailFile)) {
+        detailFile = path.join(__dirname, "dist", "products", "detail", "index.html");
+      }
+      if (isFile(detailFile)) {
+        var html = fs.readFileSync(detailFile, "utf-8");
+        html = html.replace("<head>", '<head><meta name="product-model" content="' + productSlug + '"/>');
+        html = html.replace("<head>", '<head><meta name="ssg-device" content="1"/>');
+        html = html.replace("<head>", '<head><meta name="product-redirect-legacy" content="1"/>');
+        res.setHeader("Cache-Control", "no-store, no-cache, must-revalidate");
+        return res.send(html);
       }
     }
   }
@@ -620,9 +633,9 @@ app.get("*", (req, res) => {
   var resolved = resolvePage(req.path, req.headers["user-agent"]);
 
   // Device-aware delivery: inject ssg-device meta so client-side redirect skips
-  // Note: index-pc/mobile/tablet.html do NOT end with 'index.html',
+  // Note: index-mobile.html and index-tablet.html do NOT end with 'index.html',
   // so we must check the full filename pattern, not filter by endsWith first.
-  if (/index-(pc|mobile|tablet)\.html$/.test(resolved)) {
+  if (/index-(mobile|tablet)\.html$/.test(resolved)) {
     var content = fs.readFileSync(resolved, "utf-8");
     content = content.replace("<head>", '<head><meta name="ssg-device" content="1"/>');
     res.setHeader("Cache-Control", "no-store, no-cache, must-revalidate");
