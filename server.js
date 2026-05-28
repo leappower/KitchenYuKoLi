@@ -528,6 +528,26 @@ app.get("*", (req, res) => {
     var catSlug = newMatch[1];
     var modelSlug = newMatch[2];
     if (catSlug !== "detail" && catSlug !== "compare") {
+      // Verify product exists before rendering detail template
+      try {
+        var _dataFile = path.join(__dirname, "src", "assets", "js", "product-data-table.js");
+        if (isFile(_dataFile)) {
+          var _dataContent = fs.readFileSync(_dataFile, "utf-8");
+          var _lines = _dataContent.split("\n");
+          var _productFound = false;
+          for (var _li = 0; _li < _lines.length; _li++) {
+            if (_lines[_li].indexOf(modelSlug) >= 0) {
+              _productFound = true;
+              break;
+            }
+          }
+          if (!_productFound) {
+            var _f404 = path.join(__dirname, "dist", "404.html");
+            if (isFile(_f404)) return res.status(404).sendFile(_f404);
+          }
+        }
+      } catch (e) {}
+
       var isMobile = isMobileUA(req.headers["user-agent"]);
       var variantIdx = { mobile: "index-mobile.html", tablet: "index-tablet.html", pc: "index-pc.html" };
       var detailFile = path.join(__dirname, "dist", "products", "detail", variantIdx[isMobile] || "index-pc.html");
