@@ -100,12 +100,38 @@
         })
       );
     }),
+    (r.prototype.loadProductJson = function (t) {
+      var e = "product-json-" + t;
+      if (this.translationsCache.has(e)) return Promise.resolve(this.translationsCache.get(e));
+      var n = this;
+      if ("function" != typeof fetch) return Promise.resolve({});
+      var u = ("undefined" != typeof window && window.BASE_PATH) || "";
+      return i(
+        fetch(u + "/assets/lang/" + t + "-product.json", { cache: a ? "no-store" : "default" })
+          .then(function (t) {
+            if (!t.ok) return {};
+            return t.json();
+          })
+          .then(function (t) {
+            var o = n.normalizeTranslationKeys(t || {});
+            n.translationsCache.set(e, o);
+            return o;
+          })
+          .catch(function (t) {
+            console.warn("[i18n] loadProductJson: FAILED for " + n + ":", t);
+            return {};
+          }),
+        10e3,
+        "[i18n] loadProductJson timeout for " + t
+      );
+    }),
     (r.prototype.fetchTranslations = function (t) {
       var e = this;
       return this.loadUITranslations(t)
         .then(function (n) {
-          return e.loadProductTranslations(t).then(function (a) {
-            var o = e.mergeTranslations(n, a);
+          return Promise.all([e.loadProductTranslations(t), e.loadProductJson(t)]).then(function (a) {
+            var o = e.mergeTranslations(n, a[0]);
+            o = e.mergeTranslations(o, a[1]);
             return (e.translationsCache.set(t, o), o);
           });
         })
