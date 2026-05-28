@@ -1011,7 +1011,8 @@
         // Translate category if it's an i18n key (e.g. nav_products_stirfry)
         var translated = typeof window.t === "function" ? window.t(cat.category) : null;
         var label = translated && translated !== cat.category ? translated : name;
-        categories.push({ key: cat.category, name: label });
+        var catSlug = CATEGORY_NAME_TO_SLUG[cat.category] || cat.category;
+        categories.push({ key: catSlug, name: label });
       }
     });
     if (!categories.length) return;
