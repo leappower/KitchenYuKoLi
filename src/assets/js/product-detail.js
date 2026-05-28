@@ -940,4 +940,13 @@
     },
     "spa:ready:renderPDP"
   );
+
+  // Expose for debugging and external calls
+  window.renderPDP = renderPDP;
+  
+  // Auto-run on page load (defensive: DOMContentLoaded may race with product-data-ready)
+  if (document.readyState !== "loading") {
+    renderPDP._pending = false;
+    renderPDP();
+  }
 })();
