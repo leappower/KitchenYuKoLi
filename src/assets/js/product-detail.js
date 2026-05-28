@@ -773,7 +773,10 @@
     renderRelated(product);
   }
 
-  document.addEventListener("DOMContentLoaded", renderPDP);
+  document.addEventListener("DOMContentLoaded", function () {
+    renderPDP._pending = false;
+    renderPDP();
+  });
   document.addEventListener("product-data-ready", renderPDP);
   // Get translated category name (from UI i18n, not product_translations)
   function getCategoryName(product) {
