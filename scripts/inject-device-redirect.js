@@ -58,8 +58,7 @@ var REDIRECT_SCRIPT =
   '        if(f===e)return;\n' +
   '        location.href=location.pathname.replace(/[^\\/]*\.html$/,"")+e;\n' +
   '      }\n' +
-  '      window.addEventListener("DOMContentLoaded",doRedirect);\n' +
-  '      setTimeout(doRedirect,100);\n' +
+  '      doRedirect();\n' +
   '    })();\n' +
   '    </script>';
 
