@@ -3683,5 +3683,21 @@
   "product_subcat_cutting_meat_slicer": "เครื่องสไลด์เนื้อ",
   "product_subcat_cutting_meat_roll_slicer": "เครื่องสไลด์เนื้อม้วน",
   "product_subcat_cutting_shredder": "เครื่องขูด",
-  "product_subcat_cutting_vegetable_cutter": "เครื่องหั่นผัก"
+  "product_subcat_cutting_vegetable_cutter": "เครื่องหั่นผัก",
+  "product_subcat_cutting_auto_flow_machine": "Auto Flow Machine",
+  "product_subcat_stewing_stewing_stove": "Stewing Stove",
+  "product_subcat_stewing_pressure_cooker": "Pressure Cooker",
+  "product_subcat_stewing_stirring_pot_braiser": "Stirring Pot & Braiser",
+  "product_subcat_stewing_soup_pot": "Soup Pot",
+  "product_subcat_stewing_noodle_cooker": "Noodle Cooker",
+  "product_subcat_stewing_clay_pot_stove": "Clay Pot Stove",
+  "product_subcat_frying_deep_fryer": "Deep Fryer",
+  "product_subcat_frying_potsticker_machine": "Potsticker Machine",
+  "product_subcat_stirfry_bulk_drum_cooker": "Bulk Drum Cooker",
+  "product_subcat_stirfry_stirring_cooker": "Stirring Cooker",
+  "product_subcat_stirfry_drum_cooker": "Drum Cooker",
+  "product_subcat_steaming_smart_steamer": "Smart Steamer",
+  "product_subcat_steaming_blanch_fry_machine": "Blanch & Fry Machine",
+  "product_subcat_other_lift_dishwasher": "Lift Dishwasher",
+  "product_subcat_other_conveyor_dishwasher": "Conveyor Dishwasher"
 }
