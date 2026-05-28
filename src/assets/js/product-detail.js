@@ -120,6 +120,10 @@
     var grad = gradients[idx % gradients.length];
     return (
       '<a href="/products/' +
+      (product.category ? CATEGORY_SLUG_MAP[product.category] + "/" : "") +
+      (product.category ? CATEGORY_SLUG_MAP[product.category] + "/" : "") +
+      encodeURIComponent(CATEGORY_SLUG_MAP[product.category] || product.category) +
+      "/" +
       encodeURIComponent(rp.model) +
       '" class="group block bg-white rounded-xl overflow-hidden shadow-md hover:shadow-lg transition-all border border-slate-100 dark:border-slate-700">' +
       '<div class="aspect-[4/3] bg-white relative overflow-hidden flex items-center justify-center">' +
@@ -423,6 +427,8 @@
         catLabel && slug
           ? chevron +
             '<a href="/products/' +
+            (product.category ? CATEGORY_SLUG_MAP[product.category] + "/" : "") +
+            (product.category ? CATEGORY_SLUG_MAP[product.category] + "/" : "") +
             slug +
             '/" data-no-swup class="hover:text-primary transition-colors">' +
             esc(catLabel) +
@@ -457,6 +463,8 @@
         (catLabel
           ? mChevron +
             '<a href="/products/' +
+            (product.category ? CATEGORY_SLUG_MAP[product.category] + "/" : "") +
+            (product.category ? CATEGORY_SLUG_MAP[product.category] + "/" : "") +
             esc(catSlug) +
             '/" class="text-xs text-slate-500 dark:text-slate-400 hover:text-primary transition-colors">' +
             esc(catLabel) +
@@ -954,7 +962,7 @@
 
   // Expose for debugging and external calls
   window.renderPDP = renderPDP;
-  
+
   // Auto-run on page load (defensive: DOMContentLoaded may race with product-data-ready)
   if (document.readyState !== "loading") {
     renderPDP._pending = false;
