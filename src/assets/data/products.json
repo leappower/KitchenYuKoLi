@@ -4558,5 +4558,121 @@
       }
     ],
     "isActive": true
+  },
+  {
+    "category": "台式",
+    "subCategory": null,
+    "model": "634480004129",
+    "name": "电动30型冻肉牛羊肉商用切片机刨肉机",
+    "specifications": "材质：采用优质不锈钢；额定功率：1.5kW；电压：220V；频率：50Hz；切片厚度：0.5-15mm可调；刀片材质：特种合金钢；安全防护：带急停功能及安全防护罩；清洗：可拆卸刀组，方便清洗",
+    "status": "在售",
+    "is_active": true,
+    "badge": null,
+    "badgeColor": null,
+    "power": "1.5kW",
+    "throughput": null,
+    "averageTime": null,
+    "voltage": "220V",
+    "material": "优质不锈钢",
+    "productDimensions": "520×450×660mm",
+    "tier": "基础",
+    "sort_order": 0,
+    "is_home_core": false,
+    "relatedProducts": null,
+    "images": [
+      {
+        "filePath": "/assets/images/products/634480004129_167.webp",
+        "isPrimary": true,
+        "sortOrder": 167
+      }
+    ],
+    "isActive": true
+  },
+  {
+    "category": "台式",
+    "subCategory": null,
+    "model": "XC-988A",
+    "name": "葱丝机",
+    "specifications": "材质：采用优质不锈钢刀轴；额定功率：200W；电压：220V；频率：50Hz；刀片：二挡可反转刀片；加料口：加大料口设计；清洗：进料口可直接热水冲洗；电机：直流电机，噪音小；支腿：可拆卸一体式支腿；防水：嵌入式食品级硅胶防水圈",
+    "status": "在售",
+    "is_active": true,
+    "badge": null,
+    "badgeColor": null,
+    "power": "200W",
+    "throughput": null,
+    "averageTime": null,
+    "voltage": "220V",
+    "material": "304不锈钢刀轴；食品级硅胶",
+    "productDimensions": "409×215×350mm",
+    "tier": "基础",
+    "sort_order": 0,
+    "is_home_core": false,
+    "relatedProducts": null,
+    "images": [
+      {
+        "filePath": "/assets/images/products/XC-988A_168.webp",
+        "isPrimary": true,
+        "sortOrder": 168
+      }
+    ],
+    "isActive": true
+  },
+  {
+    "category": "台式",
+    "subCategory": null,
+    "model": "XC-888",
+    "name": "多功能切菜机",
+    "specifications": "材质：采用全钢刀盘，精钢刀片；电压：220V；频率：50Hz；刀组：多刀组设计，横切刀和网格刀组合；切丁尺寸：多种刀网可选，适应不同尺寸；出料口：特殊设计，出料顺畅；安全：安全开关设计；防滑：底部大支撑加防滑设计",
+    "status": "在售",
+    "is_active": true,
+    "badge": null,
+    "badgeColor": null,
+    "power": null,
+    "throughput": null,
+    "averageTime": null,
+    "voltage": "220V",
+    "material": "全钢刀盘；精钢刀片",
+    "productDimensions": "286×243×388mm",
+    "tier": "基础",
+    "sort_order": 0,
+    "is_home_core": false,
+    "relatedProducts": null,
+    "images": [
+      {
+        "filePath": "/assets/images/products/XC-888_169.webp",
+        "isPrimary": true,
+        "sortOrder": 169
+      }
+    ],
+    "isActive": true
+  },
+  {
+    "category": "台式",
+    "subCategory": null,
+    "model": "XC-1088",
+    "name": "多动能刨丝机",
+    "specifications": "材质：采用精钢刀片；电机：直流电机，噪音小；刀片：十字花刀设计，防滑固定食材；操作：一键开关机，二挡可自动回卷食材；电压：220V；频率：50Hz；款式：电动款和手动款可选；清洗：机器可直接抹布擦拭",
+    "status": "在售",
+    "is_active": true,
+    "badge": null,
+    "badgeColor": null,
+    "power": null,
+    "throughput": null,
+    "averageTime": null,
+    "voltage": "220V",
+    "material": "精钢刀片",
+    "productDimensions": "288×160×180mm",
+    "tier": "基础",
+    "sort_order": 0,
+    "is_home_core": false,
+    "relatedProducts": null,
+    "images": [
+      {
+        "filePath": "/assets/images/products/XC-1088_170.webp",
+        "isPrimary": true,
+        "sortOrder": 170
+      }
+    ],
+    "isActive": true
   }
 ]
