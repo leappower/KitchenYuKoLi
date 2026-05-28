@@ -1008,11 +1008,11 @@
     getCategories().forEach(function (cat) {
       var name = cat.categoryName || cat.category;
       if (name) {
-        // Translate category if it's an i18n key (e.g. nav_products_stirfry)
-        var translated = typeof window.t === "function" ? window.t(cat.category) : null;
-        var label = translated && translated !== cat.category ? translated : name;
-        var catSlug = CATEGORY_NAME_TO_SLUG[cat.category] || cat.category;
-        categories.push({ key: catSlug, name: label });
+        var i18nKey = CATEGORY_I18N_MAP[name] || "";
+        var translated = typeof window.t === "function" ? window.t(i18nKey) : name;
+        var label = translated && translated !== i18nKey ? translated : name;
+        var catSlug = CATEGORY_NAME_TO_SLUG[name] || name;
+        categories.push({ key: catSlug, name: label, i18nKey: i18nKey });
       }
     });
     if (!categories.length) return;
@@ -1042,10 +1042,8 @@
         tabSizeClass +
         " font-medium whitespace-nowrap rounded-full border border-slate-200 dark:border-slate-700";
       btn.dataset.category = cat.key;
-      // Use data-i18n so language switch re-applies translation
-      var i18nKey = cat.key && cat.key.indexOf("nav_") === 0 ? cat.key : null;
-      if (i18nKey) {
-        btn.setAttribute("data-i18n", i18nKey);
+      if (cat.i18nKey) {
+        btn.setAttribute("data-i18n", cat.i18nKey);
       }
       btn.textContent = cat.name;
       allTabs.push(btn);
