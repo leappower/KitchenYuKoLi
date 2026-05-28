@@ -47,6 +47,7 @@ var REDIRECT_SCRIPT =
   '      var f=location.pathname.split("/").pop();\n' +
   '      if(!f||!f.match(/\.html$/)){\n' +
   '        // 目录 URL — 直接跳转到对应设备文件\n' +
+  '        console.debug("[device-debug] dir URL, calling doRedirect",{f:f,path:location.pathname});\n' +
   '        doRedirect();\n' +
   '        return;\n' +
   '      }\n' +
@@ -55,8 +56,11 @@ var REDIRECT_SCRIPT =
   '        var mq767=window.matchMedia("(max-width:767px)");\n' +
   '        var mq1279=window.matchMedia("(max-width:1279px)");\n' +
   '        var e=mq767.matches?"index-mobile.html":mq1279.matches?"index-tablet.html":"index-pc.html";\n' +
-  '        if(f===e)return;\n' +
-  '        location.href=location.pathname.replace(/[^\\/]*\.html$/,"")+e;\n' +
+  '        console.debug("[device-debug] doRedirect",{f:f,e:e,mq767:mq767.matches,mq1279:mq1279.matches,w:screen.width,hdpr:window.devicePixelRatio,ua:navigator.userAgent.slice(0,60)});\n' +
+  '        if(f===e){console.debug("[device-debug] skip, already on correct version");return;}\n' +
+  '        var newUrl=location.pathname.replace(/[^\\/]*\.html$/,"")+e;\n' +
+  '        console.debug("[device-debug] redirecting to",newUrl);\n' +
+  '        location.href=newUrl;\n' +
   '      }\n' +
   '      doRedirect();\n' +
   '    })();\n' +
