@@ -3679,9 +3679,9 @@
   "search_view_all": "عرض جميع المنتجات",
   "search_no_results": "لم يتم العثور على نتائج مطابقة",
   "search_hint": "حاول البحث برقم الموديل أو نوع المنتج",
-  "product_subcat_cutting_切片机": "قطاعة",
-  "product_subcat_cutting_切肉机": "قطاعة لحم",
-  "product_subcat_cutting_肉卷机": "قطاعة لفائف اللحم",
-  "product_subcat_cutting_刨丝机": "مبشرة",
-  "product_subcat_cutting_切菜机": "قطاعة خضار"
+  "product_subcat_cutting_slicer": "قطاعة",
+  "product_subcat_cutting_meat_slicer": "قطاعة لحم",
+  "product_subcat_cutting_meat_roll_slicer": "قطاعة لفائف اللحم",
+  "product_subcat_cutting_shredder": "مبشرة",
+  "product_subcat_cutting_vegetable_cutter": "قطاعة خضار"
 }

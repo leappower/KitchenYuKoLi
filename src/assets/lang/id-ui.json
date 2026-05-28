@@ -3679,9 +3679,9 @@
   "search_view_all": "Lihat semua produk",
   "search_no_results": "Tidak ada hasil yang cocok",
   "search_hint": "Coba cari berdasarkan nomor model atau jenis produk",
-  "product_subcat_cutting_切片机": "Pemotong",
-  "product_subcat_cutting_切肉机": "Pemotong daging",
-  "product_subcat_cutting_肉卷机": "Pemotong gulungan daging",
-  "product_subcat_cutting_刨丝机": "Mesin serut",
-  "product_subcat_cutting_切菜机": "Pemotong sayur"
+  "product_subcat_cutting_slicer": "Pemotong",
+  "product_subcat_cutting_meat_slicer": "Pemotong daging",
+  "product_subcat_cutting_meat_roll_slicer": "Pemotong gulungan daging",
+  "product_subcat_cutting_shredder": "Mesin serut",
+  "product_subcat_cutting_vegetable_cutter": "Pemotong sayur"
 }

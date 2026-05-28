@@ -3685,9 +3685,9 @@
   "search_view_all": "ເບິ່ງຜະລິດຕະພັນທັງໝົດ",
   "search_no_results": "ບໍ່ພົບຜົນການຊອກຫາທີ່ກົງກັນ",
   "search_hint": "ລອງຄົ້ນຫາຕາມຫມາຍເລກລຸ້ນ ຫຼື ປະເພດຜະລິດຕະພັນ",
-  "product_subcat_cutting_切片机": "ເຄື່ອງຕັດ",
-  "product_subcat_cutting_切肉机": "ເຄື່ອງຕັດຊີ້ນ",
-  "product_subcat_cutting_肉卷机": "ເຄື່ອງຕັດມ້ວນຊີ້ນ",
-  "product_subcat_cutting_刨丝机": "ເຄື່ອງຂູດ",
-  "product_subcat_cutting_切菜机": "ເຄື່ອງຕັດຜັກ"
+  "product_subcat_cutting_slicer": "ເຄື່ອງຕັດ",
+  "product_subcat_cutting_meat_slicer": "ເຄື່ອງຕັດຊີ້ນ",
+  "product_subcat_cutting_meat_roll_slicer": "ເຄື່ອງຕັດມ້ວນຊີ້ນ",
+  "product_subcat_cutting_shredder": "ເຄື່ອງຂູດ",
+  "product_subcat_cutting_vegetable_cutter": "ເຄື່ອງຕັດຜັກ"
 }

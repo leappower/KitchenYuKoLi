@@ -3679,9 +3679,9 @@
   "search_view_all": "הצג את כל המוצרים",
   "search_no_results": "לא נמצאו תוצאות",
   "search_hint": "נסה לחפש לפי מספר דגם או סוג מוצר",
-  "product_subcat_cutting_切片机": "מכשיר חיתוך",
-  "product_subcat_cutting_切肉机": "מכשיר חיתוך בשר",
-  "product_subcat_cutting_肉卷机": "מכשיר חיתוך גלילי בשר",
-  "product_subcat_cutting_刨丝机": "מגרסה",
-  "product_subcat_cutting_切菜机": "מכשיר לחיתוך ירקות"
+  "product_subcat_cutting_slicer": "מכשיר חיתוך",
+  "product_subcat_cutting_meat_slicer": "מכשיר חיתוך בשר",
+  "product_subcat_cutting_meat_roll_slicer": "מכשיר חיתוך גלילי בשר",
+  "product_subcat_cutting_shredder": "מגרסה",
+  "product_subcat_cutting_vegetable_cutter": "מכשיר לחיתוך ירקות"
 }

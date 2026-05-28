@@ -3679,9 +3679,9 @@
   "search_view_all": "Tingnan lahat ng produkto",
   "search_no_results": "Walang nakitang resulta",
   "search_hint": "Subukang maghanap sa pamamagitan ng modelo o uri ng produkto",
-  "product_subcat_cutting_切片机": "Pamutol",
-  "product_subcat_cutting_切肉机": "Pamutol ng karne",
-  "product_subcat_cutting_肉卷机": "Pamutol ng meat roll",
-  "product_subcat_cutting_刨丝机": "Panghiwa ng pira-piraso",
-  "product_subcat_cutting_切菜机": "Pamutol ng gulay"
+  "product_subcat_cutting_slicer": "Pamutol",
+  "product_subcat_cutting_meat_slicer": "Pamutol ng karne",
+  "product_subcat_cutting_meat_roll_slicer": "Pamutol ng meat roll",
+  "product_subcat_cutting_shredder": "Panghiwa ng pira-piraso",
+  "product_subcat_cutting_vegetable_cutter": "Pamutol ng gulay"
 }

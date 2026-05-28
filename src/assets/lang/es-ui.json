@@ -3679,9 +3679,9 @@
   "search_view_all": "Ver todos los productos",
   "search_no_results": "No se encontraron resultados",
   "search_hint": "Intenta buscar por número de modelo o tipo de producto",
-  "product_subcat_cutting_切片机": "Cortadora",
-  "product_subcat_cutting_切肉机": "Cortadora de carne",
-  "product_subcat_cutting_肉卷机": "Cortadora de rollos de carne",
-  "product_subcat_cutting_刨丝机": "Rallador",
-  "product_subcat_cutting_切菜机": "Cortadora de verduras"
+  "product_subcat_cutting_slicer": "Cortadora",
+  "product_subcat_cutting_meat_slicer": "Cortadora de carne",
+  "product_subcat_cutting_meat_roll_slicer": "Cortadora de rollos de carne",
+  "product_subcat_cutting_shredder": "Rallador",
+  "product_subcat_cutting_vegetable_cutter": "Cortadora de verduras"
 }

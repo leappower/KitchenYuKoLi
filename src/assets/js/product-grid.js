@@ -571,12 +571,40 @@
     return key ? tl(key, cat) : cat;
   }
 
+  var SUB_CAT_TO_EN_SLUG = {
+  "切片机": "slicer",
+  "切肉机": "meat_slicer",
+  "切菜机": "vegetable_cutter",
+  "刨丝机": "shredder",
+  "流水化自动机": "auto_flow_machine",
+  "肉卷机": "meat_roll_slicer",
+  "油炸炉": "deep_fryer",
+  "锅贴机": "potsticker_machine",
+  "揭盖式洗碗机": "lift_dishwasher",
+  "长龙洗碗机": "conveyor_dishwasher",
+  "智能蒸饭机": "smart_steamer",
+  "自动漂烫/焯水/油炸机": "blanch_fry_machine",
+  "卤煮炉": "stewing_stove",
+  "压力锅": "pressure_cooker",
+  "搅拌炒锅/炖烩机": "stirring_pot_braiser",
+  "搅拌炒锅炖烩机": "stirring_pot_braiser",
+  "汤锅": "soup_pot",
+  "煮面炉": "noodle_cooker",
+  "煲仔炉": "clay_pot_stove",
+  "团餐滚筒炒菜机": "bulk_drum_cooker",
+  "搅拌炒菜机": "stirring_cooker",
+  "滚筒炒菜机": "drum_cooker"
+};
+
+
+
   function getSubCatI18nKey(subCatRaw, category) {
     var slug = CATEGORY_NAME_TO_SLUG[category] || "other";
-    return "product_subcat_" + slug + "_" + subCatRaw;
+    var enSlug = SUB_CAT_TO_EN_SLUG[subCatRaw] || subCatRaw;
+    return "product_subcat_" + slug + "_" + enSlug;
   }
 
-  /** Get localized product field value (delegates to getProductField from product-detail.js) */
+  /** (delegates to getProductField from product-detail.js) */
   function _pField(product, field) {
     if (typeof window.getProductField === "function") {
       var val = window.getProductField(product, field);

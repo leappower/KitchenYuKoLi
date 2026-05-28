@@ -3679,9 +3679,9 @@
   "search_view_all": "Bekijk alle producten",
   "search_no_results": "Geen overeenkomende resultaten gevonden",
   "search_hint": "Probeer te zoeken op modelnummer of producttype",
-  "product_subcat_cutting_切片机": "Snijmachine",
-  "product_subcat_cutting_切肉机": "Vleessnijder",
-  "product_subcat_cutting_肉卷机": "Vleesrolsnijder",
-  "product_subcat_cutting_刨丝机": "Raspmachine",
-  "product_subcat_cutting_切菜机": "Groentesnijder"
+  "product_subcat_cutting_slicer": "Snijmachine",
+  "product_subcat_cutting_meat_slicer": "Vleessnijder",
+  "product_subcat_cutting_meat_roll_slicer": "Vleesrolsnijder",
+  "product_subcat_cutting_shredder": "Raspmachine",
+  "product_subcat_cutting_vegetable_cutter": "Groentesnijder"
 }

@@ -3679,9 +3679,9 @@
   "search_view_all": "Alle Produkte anzeigen",
   "search_no_results": "Keine passenden Ergebnisse gefunden",
   "search_hint": "Versuchen Sie, nach Modellnummer oder Produkttyp zu suchen",
-  "product_subcat_cutting_切片机": "Schneidemaschine",
-  "product_subcat_cutting_切肉机": "Fleischschneider",
-  "product_subcat_cutting_肉卷机": "Fleischröllchen-Schneider",
-  "product_subcat_cutting_刨丝机": "Hobelmaschine",
-  "product_subcat_cutting_切菜机": "Gemüseschneider"
+  "product_subcat_cutting_slicer": "Schneidemaschine",
+  "product_subcat_cutting_meat_slicer": "Fleischschneider",
+  "product_subcat_cutting_meat_roll_slicer": "Fleischröllchen-Schneider",
+  "product_subcat_cutting_shredder": "Hobelmaschine",
+  "product_subcat_cutting_vegetable_cutter": "Gemüseschneider"
 }

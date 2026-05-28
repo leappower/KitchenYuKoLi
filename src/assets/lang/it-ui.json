@@ -3679,9 +3679,9 @@
   "search_view_all": "Vedi tutti i prodotti",
   "search_no_results": "Nessun risultato trovato",
   "search_hint": "Prova a cercare per numero modello o tipo di prodotto",
-  "product_subcat_cutting_切片机": "Affettatrice",
-  "product_subcat_cutting_切肉机": "Affettatrice per carne",
-  "product_subcat_cutting_肉卷机": "Affettatrice per involtini di carne",
-  "product_subcat_cutting_刨丝机": "Grattugia",
-  "product_subcat_cutting_切菜机": "Tagliaverdure"
+  "product_subcat_cutting_slicer": "Affettatrice",
+  "product_subcat_cutting_meat_slicer": "Affettatrice per carne",
+  "product_subcat_cutting_meat_roll_slicer": "Affettatrice per involtini di carne",
+  "product_subcat_cutting_shredder": "Grattugia",
+  "product_subcat_cutting_vegetable_cutter": "Tagliaverdure"
 }

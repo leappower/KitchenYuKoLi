@@ -3679,9 +3679,9 @@
   "search_view_all": "ดูสินค้าทั้งหมด",
   "search_no_results": "ไม่พบผลลัพธ์ที่ตรงกัน",
   "search_hint": "ลองค้นหาด้วยหมายเลขรุ่นหรือประเภทสินค้า",
-  "product_subcat_cutting_切片机": "เครื่องสไลด์",
-  "product_subcat_cutting_切肉机": "เครื่องสไลด์เนื้อ",
-  "product_subcat_cutting_肉卷机": "เครื่องสไลด์เนื้อม้วน",
-  "product_subcat_cutting_刨丝机": "เครื่องขูด",
-  "product_subcat_cutting_切菜机": "เครื่องหั่นผัก"
+  "product_subcat_cutting_slicer": "เครื่องสไลด์",
+  "product_subcat_cutting_meat_slicer": "เครื่องสไลด์เนื้อ",
+  "product_subcat_cutting_meat_roll_slicer": "เครื่องสไลด์เนื้อม้วน",
+  "product_subcat_cutting_shredder": "เครื่องขูด",
+  "product_subcat_cutting_vegetable_cutter": "เครื่องหั่นผัก"
 }

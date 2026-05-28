@@ -3679,9 +3679,9 @@
   "search_view_all": "Tüm ürünleri görüntüle",
   "search_no_results": "Eşleşen sonuç bulunamadı",
   "search_hint": "Model numarasına veya ürün türüne göre aramayı deneyin",
-  "product_subcat_cutting_切片机": "Dilimleyici",
-  "product_subcat_cutting_切肉机": "Et dilimleyici",
-  "product_subcat_cutting_肉卷机": "Et rulo dilimleyici",
-  "product_subcat_cutting_刨丝机": "Rendeli makinesi",
-  "product_subcat_cutting_切菜机": "Sebze doğrayıcı"
+  "product_subcat_cutting_slicer": "Dilimleyici",
+  "product_subcat_cutting_meat_slicer": "Et dilimleyici",
+  "product_subcat_cutting_meat_roll_slicer": "Et rulo dilimleyici",
+  "product_subcat_cutting_shredder": "Rendeli makinesi",
+  "product_subcat_cutting_vegetable_cutter": "Sebze doğrayıcı"
 }

@@ -3679,9 +3679,9 @@
   "search_view_all": "सभी उत्पाद देखें",
   "search_no_results": "कोई मिलान परिणाम नहीं मिला",
   "search_hint": "मॉडल नंबर या उत्पाद प्रकार से खोजने का प्रयास करें",
-  "product_subcat_cutting_切片机": "स्लाइसर",
-  "product_subcat_cutting_切肉机": "मांस काटने की मशीन",
-  "product_subcat_cutting_肉卷机": "मीट रोल काटने की मशीन",
-  "product_subcat_cutting_刨丝机": "कद्दूकस मशीन",
-  "product_subcat_cutting_切菜机": "सब्जी काटने की मशीन"
+  "product_subcat_cutting_slicer": "स्लाइसर",
+  "product_subcat_cutting_meat_slicer": "मांस काटने की मशीन",
+  "product_subcat_cutting_meat_roll_slicer": "मीट रोल काटने की मशीन",
+  "product_subcat_cutting_shredder": "कद्दूकस मशीन",
+  "product_subcat_cutting_vegetable_cutter": "सब्जी काटने की मशीन"
 }

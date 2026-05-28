@@ -3679,9 +3679,9 @@
   "search_view_all": "ထုတ်ကုန်အားလုံးကြည့်ရန်",
   "search_no_results": "ကိုက်ညီသောရလဒ်မတွေ့ပါ",
   "search_hint": "မော်ဒယ်နံပါတ် သို့မဟုတ် ထုတ်ကုန်အမျိုးအစားဖြင့် ရှာဖွေကြည့်ပါ",
-  "product_subcat_cutting_切片机": "အလှီးစက်",
-  "product_subcat_cutting_切肉机": "အသားလှီးစက်",
-  "product_subcat_cutting_肉卷机": "အသားလိပ်လှီးစက်",
-  "product_subcat_cutting_刨丝机": "ခြစ်စက်",
-  "product_subcat_cutting_切菜机": "ဟင်းသီးဟင်းရွက်လှီးစက်"
+  "product_subcat_cutting_slicer": "အလှီးစက်",
+  "product_subcat_cutting_meat_slicer": "အသားလှီးစက်",
+  "product_subcat_cutting_meat_roll_slicer": "အသားလိပ်လှီးစက်",
+  "product_subcat_cutting_shredder": "ခြစ်စက်",
+  "product_subcat_cutting_vegetable_cutter": "ဟင်းသီးဟင်းရွက်လှီးစက်"
 }
