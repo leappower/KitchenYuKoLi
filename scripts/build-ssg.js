@@ -1046,6 +1046,7 @@ function main() {
   // Ensure core CSS files (tailwind, styles) are present in all HTML files
   function _injectCoreCss(html) {
     var coreCss = [
+      '/assets/fonts/local-fonts.css',
       '/assets/css/styles.css',
       '/assets/css/tailwind.css',
       '/assets/css/z-index-system.css',

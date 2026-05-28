@@ -74,8 +74,18 @@
   /**
    * Get product detail link (to specific product)
    */
+  var CATEGORY_NAME_TO_SLUG = {
+    翻炒系列: "stirfry",
+    切配系列: "cutting",
+    煎炸系列: "frying",
+    炖煮系列: "stewing",
+    蒸煮系列: "steaming",
+    辅助系列: "other",
+  };
+
   function getProductDetailHref(product) {
-    return "/products/" + encodeURIComponent(product.model) + "/";
+    var slug = CATEGORY_NAME_TO_SLUG[product.category] || encodeURIComponent(product.model);
+    return "/products/" + slug + "/" + encodeURIComponent(product.model) + "/";
   }
 
   /**

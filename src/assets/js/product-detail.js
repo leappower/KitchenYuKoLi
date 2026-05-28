@@ -304,28 +304,37 @@
     //   /products/{model}/index-pc.html  (device redirect)
     var path = window.location.pathname.replace(/\/$/, "");
     var model = null;
-    // First try: /products/{category}/{model}/ (new canonical)
-    var m = path.match(/^\/products\/([^/]+)\/([^/]+)$/);
-    if (m && isCategorySlug(m[1])) {
-      // /products/stirfry/DLB-TBQ30/ → slug=m[1], model=m[2]
-      model = decodeURIComponent(m[2]);
-    } else if (m && !isCategorySlug(m[1]) && /^index-(pc|mobile|tablet)\.html$/.test(m[2])) {
-      // /products/DLB-TBQ30/index-pc.html → device redirect, model=m[1]
-      model = decodeURIComponent(m[1]);
-    } else {
-      // /products/stirfry/DLB-TBQ30/index-pc.html → 4-segment device redirect
-      var m4 = path.match(/^\/products\/([^/]+)\/([^/]+)\/index-(pc|mobile|tablet)\.html$/);
-      if (m4) {
-        model = decodeURIComponent(m4[2]);
+
+    // First try: ?model= query string (/products/detail/?model=xxx)
+    var qsMatch = (window.location.search || "").match(/[?&]model=([^&]+)/);
+    if (qsMatch) {
+      model = decodeURIComponent(qsMatch[1]);
+    }
+
+    if (!model) {
+      // Try: /products/{category}/{model}/ (new canonical)
+      var m = path.match(/^\/products\/([^/]+)\/([^/]+)$/);
+      if (m && isCategorySlug(m[1])) {
+        // /products/stirfry/DLB-TBQ30/ → slug=m[1], model=m[2]
+        model = decodeURIComponent(m[2]);
+      } else if (m && !isCategorySlug(m[1]) && /^index-(pc|mobile|tablet)\.html$/.test(m[2])) {
+        // /products/DLB-TBQ30/index-pc.html → device redirect, model=m[1]
+        model = decodeURIComponent(m[1]);
       } else {
-        m = path.match(/^\/products\/detail\/([^/]+)$/);
-        if (m) {
-          model = decodeURIComponent(m[1]);
+        // /products/stirfry/DLB-TBQ30/index-pc.html → 4-segment device redirect
+        var m4 = path.match(/^\/products\/([^/]+)\/([^/]+)\/index-(pc|mobile|tablet)\.html$/);
+        if (m4) {
+          model = decodeURIComponent(m4[2]);
         } else {
-          // Legacy path: /products/<model>/ — skip category slugs
-          m = path.match(/^\/products\/([^/]+)$/);
-          if (m && !isCategorySlug(m[1])) {
+          m = path.match(/^\/products\/detail\/([^/]+)$/);
+          if (m) {
             model = decodeURIComponent(m[1]);
+          } else {
+            // Legacy path: /products/<model>/ — skip category slugs
+            m = path.match(/^\/products\/([^/]+)$/);
+            if (m && !isCategorySlug(m[1])) {
+              model = decodeURIComponent(m[1]);
+            }
           }
         }
       }

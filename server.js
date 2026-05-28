@@ -268,23 +268,31 @@ app.get("/health", (req, res) => {
 // ─── Known routes list (SSG-generated) — used by resolvePage for non-trailing-slash redirects ───
 var ROUTE_SLUGS = [
   "home",
+  "about",
+  "contact",
+  "privacy",
+  "terms",
+  "thank-you",
+  "quote",
+  "profit-calculator",
   "products",
+  "products/all",
   "products/compare",
-  "products/stirfry",
   "products/cutting",
-  "products/frying",
-  "products/stewing",
-  "products/steaming",
-  "products/other",
   "products/detail",
+  "products/frying",
+  "products/other",
+  "products/steaming",
+  "products/stewing",
+  "products/stirfry",
   "applications",
-  "applications/chain-restaurant",
-  "applications/food-factory",
-  "applications/central-kitchen",
-  "applications/small-restaurant",
   "applications/canteen",
-  "applications/menu-lab",
+  "applications/central-kitchen",
+  "applications/chain-restaurant",
   "applications/cloud-kitchen",
+  "applications/food-factory",
+  "applications/menu-lab",
+  "applications/small-restaurant",
   "cases",
   "cases/bangkok",
   "cases/cebu",
@@ -296,12 +304,11 @@ var ROUTE_SLUGS = [
   "cases/surabaya",
   "support",
   "support/faq",
-  "about",
-  "contact",
-  "quote",
-  "profit-calculator",
-  "thank-you",
-  "landing",
+  "support/installation",
+  "support/services",
+  "support/spare-parts",
+  "support/training",
+  "support/warranty",
 ];
 
 // ═══ Trailing slash redirect for known route directories
@@ -386,9 +393,11 @@ app.get("/", (req, res) => {
 // Resolution order (first match wins):
 //   1. Exact file in dist/              (CSS, JS, images, fonts)
 //   2. dist/<path>/index.html           (SSG route entry — preferred)
-//   3. dist/<path>/index-mobile.html    (SPA router fallback from page list)
-//   4. dist/<path>-pc.html              (flat-file pattern, e.g. news/detail-pc.html)
-//   5. SPA shell (dist/index.html)      (catch-all)
+//   2b. Variant fallback: index-{mobile,tablet,pc}.html -> index.html
+//   2c. Case slug alias resolution      (SEO slug -> short-name directory)
+//   3. dist/<path>-pc.html              (flat-file pattern, e.g. news/detail-pc.html)
+//   4. dist/404.html                    (fallback for unknown routes)
+//   5. dist/index.html                  (SPA shell, last resort)
 //
 // Security: only serves files under dist/ (and src/ in dev mode).
 //
@@ -547,7 +556,7 @@ app.get("*", (req, res) => {
         if (isFile(dataFile)) {
           var dataContent = fs.readFileSync(dataFile, "utf-8");
           var modelRegex = new RegExp('"model":\s*"' + productSlug.replace(/[.*+?^${}()|[\]\\]/g, "\\$&") + '"');
-          var catRegex = /"category":\s*"([^"]+)"/;
+          var catRegex = /["']?category["']?\s*:\s*"([^"]+)"/;
           var lines = dataContent.split("\n");
           var foundCat = null;
           for (var i = 0; i < lines.length; i++) {
@@ -580,19 +589,10 @@ app.get("*", (req, res) => {
         }
       } catch (e) {}
 
-      // Fallback: serve detail template as before
-      var isMobile = isMobileUA(req.headers["user-agent"]);
-      var variantIdx = { mobile: "index-mobile.html", tablet: "index-tablet.html", pc: "index-pc.html" };
-      var detailFile = path.join(__dirname, "dist", "products", "detail", variantIdx[isMobile] || "index-pc.html");
-      if (!isFile(detailFile)) {
-        detailFile = path.join(__dirname, "dist", "products", "detail", "index.html");
-      }
-      if (isFile(detailFile)) {
-        var html = fs.readFileSync(detailFile, "utf-8");
-        html = html.replace("<head>", '<head><meta name="product-model" content="' + productSlug + '"/>');
-        html = html.replace("<head>", '<head><meta name="ssg-device" content="1"/>');
-        res.setHeader("Cache-Control", "no-store, no-cache, must-revalidate");
-        return res.send(html);
+      // Fallback: unknown product — let resolvePage handle it (will return 404.html)
+      var f404 = path.join(__dirname, "dist", "404.html");
+      if (isFile(f404)) {
+        return res.status(404).sendFile(f404);
       }
     }
   }
@@ -600,9 +600,9 @@ app.get("*", (req, res) => {
   var resolved = resolvePage(req.path, req.headers["user-agent"]);
 
   // Device-aware delivery: inject ssg-device meta so client-side redirect skips
-  // Note: index-mobile.html and index-tablet.html do NOT end with 'index.html',
+  // Note: index-pc/mobile/tablet.html do NOT end with 'index.html',
   // so we must check the full filename pattern, not filter by endsWith first.
-  if (/index-(mobile|tablet)\.html$/.test(resolved)) {
+  if (/index-(pc|mobile|tablet)\.html$/.test(resolved)) {
     var content = fs.readFileSync(resolved, "utf-8");
     content = content.replace("<head>", '<head><meta name="ssg-device" content="1"/>');
     res.setHeader("Cache-Control", "no-store, no-cache, must-revalidate");

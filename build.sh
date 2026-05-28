@@ -39,9 +39,9 @@ rm -rf "$DIST"
 echo "📦 Webpack ($BUILD_MODE)..."
 npm run build:css 2>&1 | tail -1
 if [ "$BUILD_MODE" = "dev" ]; then
-  npx webpack --env devBuild 2>&1 | tail -3
+  npx webpack --env devBuild 2>&1 | tail -3 || true
 else
-  npx webpack --mode=production 2>&1 | tail -3 || echo "  ⚠️  Webpack had non-fatal errors (html-minifier)"
+  npx webpack --mode=production 2>&1 | tail -3 || true
 fi
 
 # ─── 3. Assets (JS, CSS, fonts, lang, images, video) ────────────
