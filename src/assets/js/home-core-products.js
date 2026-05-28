@@ -531,8 +531,8 @@
     }, 0);
   }
 
-  // Re-render on language change
-  document.addEventListener("languageChanged", function () {
-    _autoInit();
-  });
+  // Re-render on language change — listen on both document and window
+  function _onLangChange() { _autoInit(); }
+  document.addEventListener("languageChanged", _onLangChange);
+  window.addEventListener("languageChanged", _onLangChange);
 })();

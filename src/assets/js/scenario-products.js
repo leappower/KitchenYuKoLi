@@ -253,5 +253,8 @@
     init();
   }
 
-  document.addEventListener("languageChanged", function () { init(); });
+  // Re-render on language change — listen on both document and window
+  function _onLangChange() { init(); }
+  document.addEventListener("languageChanged", _onLangChange);
+  window.addEventListener("languageChanged", _onLangChange);
 })();
