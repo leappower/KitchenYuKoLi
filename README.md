@@ -139,4 +139,4 @@ npm run build:dev
 
 ## 部署
 
-构建产物 `dist/` 可直接部署到任何静态服务器（GitHub Pages、Nginx、Cloudflare Pages 等）。
+构建产物 `dist/` 可直接部署到任何静态服务器（GitHub Pages、Nginx、Cloudflare Pages 等）。// Build trigger 1779967374
