@@ -1,7 +1,8 @@
 #!/usr/bin/env node
 /**
  * serve.js — 本地开发静态服务器
- * 支持 SPA fallback：/products/detail/DLB-TBS30/ → /products/detail/index.html
+ * SPA fallback: /products/{category}/{model}/ → /products/detail/index.html
+ * 旧路径 /products/detail/{model}/ 已废弃，不再支持
  */
 
 var fs = require("fs");
@@ -36,14 +37,18 @@ var MIME = {
 // SPA fallback rules: paths matching these patterns serve a specific index.html
 // (product detail pages all share the same template at /products/detail/index.html)
 var SPA_FALLBACKS = [
-  { pattern: /^\/products\/detail\/[^/]+\/?$/, target: "products/detail/index.html" },
+  // /products/{category}/{model}/ → detail template
   { pattern: /^\/products\/[^/]+\/[^/]+\/?$/, target: "products/detail/index.html" },
+  // /products/{category}/ → listing template (no model, needs category slug match elsewhere)
   { pattern: /^\/products\/[^/]+\/?$/, target: "products/detail/index.html" },
+  // /products/{category}/{model}/index-{pc,mobile,tablet}.html → device-specific detail
   { pattern: /^\/products\/[^/]+\/[^/]+\/index-(pc|mobile|tablet)\.html$/, target: "products/detail/index.html" },
 ];
 
 function resolve(urlPath) {
   var clean = urlPath.split("?")[0].split("#")[0];
+  // Legacy /products/detail/{model}/ — not supported, let it 404
+  // (new canonical: /products/{category}/{model}/)
   // Try exact file
   var fp = path.join(DIST, clean);
   if (fs.existsSync(fp) && fs.statSync(fp).isFile()) return fp;
@@ -109,7 +114,8 @@ if (fs.existsSync(certPath) && fs.existsSync(keyPath)) {
   };
   https.createServer(options, handler).listen(PORT, HOST, function () {
     console.log("✅ HTTPS server running on https://" + HOST + ":" + PORT);
-    console.log("   SPA fallback: /products/detail/* → /products/detail/index.html");
+    console.log("   SPA fallback: /products/{category}/{model}/ → /products/detail/index.html");
+    console.log("   ⚠️ /products/detail/{model}/ deprecated — use /products/{cat}/{model}/");
   });
 } else {
   http.createServer(handler).listen(PORT, HOST, function () {
