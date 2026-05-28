@@ -289,10 +289,21 @@
     ) {
       renderPDP._lastLang = currentLang;
       if (typeof loadProductTranslations === "function") {
-        loadProductTranslations(currentLang, function () {
-          renderPDP();
-        });
-        return;
+        // Prevent infinite loop: only attempt translation once per language
+        if (!renderPDP._txAttempted) renderPDP._txAttempted = {};
+        if (renderPDP._txAttempted[currentLang]) {
+          // Already attempted, proceed normally
+        } else {
+          renderPDP._txAttempted[currentLang] = true;
+          renderPDP._lastLang = currentLang;
+          loadProductTranslations(currentLang, function () {
+            renderPDP._pending = false;
+            renderPDP._lastLang = currentLang;
+            renderPDP._txAttempted[currentLang] = true;
+            renderPDP();
+          });
+          return;
+        }
       }
     }
     renderPDP._lastLang = currentLang;
