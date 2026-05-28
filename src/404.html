@@ -75,7 +75,20 @@
         animation-delay: 0.4s;
       }
     </style>
-  </head>
+  
+<script>
+  // GitHub Pages SPA fallback: /products/{cat}/{model}/ → SPA shell
+  (function() {
+    var p = location.pathname;
+    if (/^/products/[w-]+/[w-%]+/$/.test(p)) {
+      // Redirect to SPA shell, preserving the path via ?spa-route=
+      var shell = '/?spa-route=' + encodeURIComponent(p);
+      history.replaceState && history.replaceState({}, '', shell);
+      location.replace(shell);
+    }
+  })();
+</script>
+</head>
   <body
     class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 antialiased transition-colors duration-300 min-h-screen flex flex-col overflow-x-clip"
   >
