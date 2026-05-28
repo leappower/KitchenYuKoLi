@@ -71,8 +71,9 @@ sync_assets "pdf"          "*.pdf"
 # 排除 aboutus.mp4（已弃用，65MB）
 rm -f "$DIST/assets/video/aboutus.mp4"
 
-# ─── 4. SPA shell (index.html + 404.html + robots.txt) ──────────
+# ─── 4. SPA shell (index.html + CNAME + 404.html + robots.txt) ───
 cp "$SRC/index.html" "$DIST/index.html"
+[ -f "$SRC/CNAME" ] && cp "$SRC/CNAME" "$DIST/CNAME"
 [ -f "$SRC/404.html" ] && cp "$SRC/404.html" "$DIST/404.html"
 [ -f "$SRC/robots.txt" ] && cp "$SRC/robots.txt" "$DIST/robots.txt"
 [ -f "$SRC/manifest.json" ] && cp "$SRC/manifest.json" "$DIST/manifest.json"
