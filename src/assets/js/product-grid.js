@@ -1041,6 +1041,11 @@
         tabSizeClass +
         " font-medium whitespace-nowrap rounded-full border border-slate-200 dark:border-slate-700";
       btn.dataset.category = cat.key;
+      // Use data-i18n so language switch re-applies translation
+      var i18nKey = cat.key && cat.key.indexOf("nav_") === 0 ? cat.key : null;
+      if (i18nKey) {
+        btn.setAttribute("data-i18n", i18nKey);
+      }
       btn.textContent = cat.name;
       allTabs.push(btn);
     });
@@ -1249,15 +1254,17 @@
     autoRender();
   });
 
-  // Re-render on language change — listen on window as well (navigator.js may dispatch before product-grid.js loads)
+  // Re-render on language change — listen on both document and window
   function _onLangChange() {
     _renderPending = false;
+    // Reset category tabs init flag so they re-render with new translations
+    document.querySelectorAll(".category-tab-container").forEach(function (el) {
+      el._categoryTabsInit = false;
+    });
     autoRender();
   }
   document.addEventListener("languageChanged", _onLangChange);
   window.addEventListener("languageChanged", _onLangChange);
-  // Also re-render when navigator completes language switch (navigator.js fires custom event on window)
-  window.addEventListener("lang:applied", _onLangChange);
 
   // Click-to-detail: delegate clicks on product cards (PC/tablet)
   // Mobile cards already have <a> wrappers, so only target PC/tablet
