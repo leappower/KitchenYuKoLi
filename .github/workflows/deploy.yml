@@ -22,7 +22,10 @@ jobs:
       - run: npx tailwindcss -i src/assets/css/tailwind-entry.css -o src/assets/css/tailwind.css --minify
 
       - name: Build SSG
-        run: bash build.sh
+        run: |
+          export I18N_CACHE_TS=$(date +%s)
+          export VERSION=$(date +%s000)
+          bash build.sh
 
       - name: Generate SPA product routes
         run: node scripts/generate-spa-product-routes.js
