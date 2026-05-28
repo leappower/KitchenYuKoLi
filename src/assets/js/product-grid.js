@@ -451,6 +451,7 @@
         result.push(
           Object.assign({}, p, {
             _category: p.category || "",
+            _categorySlug: CATEGORY_NAME_TO_SLUG[p.category] || "",
             _imageUrl: img,
           })
         );
@@ -466,6 +467,7 @@
         result.push(
           Object.assign({}, p, {
             _category: cat.category || cat.slug || "",
+            _categorySlug: CATEGORY_NAME_TO_SLUG[cat.category] || cat.slug || "",
             _imageUrl: img,
           })
         );
@@ -853,7 +855,7 @@
     var products = getAllProducts();
     if (_activeCategory !== "all") {
       products = products.filter(function (p) {
-        return p._category === _activeCategory;
+        return (p._categorySlug || p._category) === _activeCategory;
       });
     }
     if (_activeTier !== "all") {
@@ -1335,17 +1337,7 @@
     var categoryFromUrl = "";
     var match = window.location.pathname.match(/^\/products\/([^/]+)\/$/);
     if (match) {
-      var slug = match[1];
-      var SLUG_MAP = {
-        all: "all",
-        cutting: "切配系列",
-        stirfry: "翻炒系列",
-        frying: "煎炸系列",
-        stewing: "炖煮系列",
-        steaming: "蒸煮系列",
-        other: "辅助系列",
-      };
-      categoryFromUrl = SLUG_MAP[slug];
+      categoryFromUrl = match[1];
     }
     _activeCategory = categoryFromUrl || "all";
 
