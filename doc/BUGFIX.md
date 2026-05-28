@@ -45,6 +45,8 @@ KitchenYuKoLi v1.0.0 发布前问题修复文档。
 | 20 | 首次渲染闪烁 (FOUC) | 页面加载时 body 显现后突然闪白 | web components (navigator/footer) 异步渲染，CSS 无初始隐藏 | `body { opacity:0 }` → `.yukoli-ready { opacity:1 }`，600ms 兜底 |
 | 21 | 移动端水平滚动溢出 | 部分页面出现横向滚动条 | 50+ 页面未设 `overflow-x` 约束 | 统一补 `overflow-x-clip` |
 | 22 | canteen/central-kitchen tag-pair 预警（5处） | htmlhint 报 tag-pair 错误 | canteen PC/central-kitchen PC 末尾缺 `</section></main></body>`；canteen mobile/tablet 缺 `</head><body>` | 补全缺失闭合标签 |
+| 23 | 产品列表页产品网格隐藏（询价按钮不可见） | products/stirfry 等页面产品网格不显示 | `product-detail.js` 的 `ensureContainers()` 在 listing 页面误将 `#product-grid` 设 `display:none`；SSG 直出路径 `index-pc.html` 未被 URL 检查识别 | URL 检查增加 SSG 路径匹配；非 PDP 页面跳过隐藏 |
+| 24 | products/detail + applications 等页面缺失全局脚本 | `helpers.js`/`page-effects.js`/`page-interactions.js`/`search-engine.js` 未注入 | 这些脚本不在 `core-scripts.json` 的 `core[]` 中。`copyDeviceFiles` 读 `src/pages/` 而非 webpack 输出的 `dist/pages/`，src 中未硬编码的脚本就不会被注入 | 加入 `core-scripts.json` core[]（按依赖顺序）|
 
 ### 待修复
 
