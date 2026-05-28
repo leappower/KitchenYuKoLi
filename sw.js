@@ -1,4 +1,4 @@
-var SW_VERSION = "v1-0-0";
+var SW_VERSION = "v1-0-1";
 self.addEventListener("install", function() { self.skipWaiting(); });
 self.addEventListener("activate", function(e) {
   e.waitUntil(
