@@ -30,7 +30,7 @@ fi
 # ─── 0. Bump i18n cache BEFORE webpack ──────────────────────────
 I18N_CACHE_TS=$(date +%s)
 I18N_CACHE_TS=${I18N_CACHE_TS:-$(date +%s)}  # fallback if empty
-perl -i -pe 's/var I18N_CACHE_V = \d+;/var I18N_CACHE_V = $ENV{I18N_CACHE_TS};/' "$SRC/assets/js/translations.js"
+sed -i.bak "s/var I18N_CACHE_V = [0-9]*;/var I18N_CACHE_V = $I18N_CACHE_TS;/" "$SRC/assets/js/translations.js" && rm -f "$SRC/assets/js/translations.js.bak"
 echo "🔄 i18n cache version → $I18N_CACHE_TS"
 
 # ─── 1. Clean dist (webpack output.clean: true also cleans, but explicit) ──
@@ -99,7 +99,7 @@ node scripts/generate-sitemap.js 2>/dev/null || echo "  ⚠️  Failed to genera
 # ─── 5. Version bump (production only, after SSG) ───────────────
 if [ "$BUILD_MODE" != "dev" ]; then
   echo "🔄 Bumping JS version to $VERSION..."
-  find "$DIST" -name '*.html' -exec perl -i -pe 's/\?v=[a-zA-Z0-9._-]*/?v=$ENV{VERSION}/g' {} +
+  find "$DIST" -name "*.html" -exec sed -i.bak "s/\\?v=[a-zA-Z0-9._-]*/\\?v=$VERSION/g" {} ; -exec rm -f "{}.bak" ;
 fi
 
 # ─── 8.5. Inject device redirect scripts into SSG-generated entries ──
