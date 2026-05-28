@@ -41,6 +41,7 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./dist
+          force_orphan: true
 
       - name: Purge Cloudflare cache
         if: env.CF_ZONE != '' && env.CF_TOKEN != ''
