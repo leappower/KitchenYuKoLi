@@ -81,13 +81,6 @@
   (function() {
     var p = location.pathname;
     if (/^/products/[w-]+/[w-%]+/$/.test(p)) {
-      // Redirect to SPA shell, preserving the path via ?spa-route=
-      var shell = '/?spa-route=' + encodeURIComponent(p);
-      history.replaceState && history.replaceState({}, '', shell);
-      location.replace(shell);
-    }
-  })();
-</script>
 
   <script>
     // SPA 产品路由 fallback: /products/{cat}/{model}/ → 加载 SPA shell
@@ -96,14 +89,13 @@
       var match = p.match(/^\/products\/([\w-]+)\/([\w-%]+)\/$/);
       if (!match) return;
       
-      // 产品详情页的 404 — 加载 SPA shell
-      // 使用 history.replaceState 改 URL 为根路径 + spa-route 参数
-      // 然后 location.replace 到根路径，spa-router 会读取 spa-route 参数跳转
+      // Load SPA shell via pushState + replace to avoid redirect loop
       var spaRoute = '/?spa=' + encodeURIComponent(p.slice(1));
       history.pushState({ spaRoute: p }, '', spaRoute);
       location.replace(spaRoute);
     })();
   </script>
+
 </head>
   <body
     class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 antialiased transition-colors duration-300 min-h-screen flex flex-col overflow-x-clip"
@@ -294,13 +286,6 @@
   (function() {
     var p = location.pathname;
     if (/^/products/[w-]+/[w-%]+/$/.test(p)) {
-      // Redirect to SPA shell, preserving the path via ?spa-route=
-      var shell = '/?spa-route=' + encodeURIComponent(p);
-      history.replaceState && history.replaceState({}, '', shell);
-      location.replace(shell);
-    }
-  })();
-</script>
 </head>
   <body
     class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 antialiased transition-colors duration-300 min-h-screen flex flex-col overflow-x-clip"
