@@ -11,7 +11,7 @@ var https = require("https");
 var http = require("http");
 
 var DIST = path.join(__dirname, "dist");
-var PORT = 3000;
+var PORT = process.env.PORT || 3000;
 var HOST = "0.0.0.0";
 
 // SSL certs
@@ -47,8 +47,10 @@ var SPA_FALLBACKS = [
 
 function resolve(urlPath) {
   var clean = urlPath.split("?")[0].split("#")[0];
-  // Legacy /products/detail/{model}/ — not supported, let it 404
-  // (new canonical: /products/{category}/{model}/)
+  // Legacy /products/detail/{model}/ — explicitly return 404
+  if (/^\/products\/detail\//.test(clean)) {
+    return null;
+  }
   // Try exact file
   var fp = path.join(DIST, clean);
   if (fs.existsSync(fp) && fs.statSync(fp).isFile()) return fp;
