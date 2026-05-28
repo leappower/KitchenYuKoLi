@@ -599,5 +599,10 @@
   "product_xc_0006_usage": "Usage: Restaurant chains, snack shops, canteens, home kitchens; Suitable for multi-ingredient slicing, adjustable thickness, easy operation. Capacity: Efficient slicing, labor-saving.",
   "product_xc_1288_name": "Multi-function Slicer",
   "product_xc_1288_specifications": "Material: Full aluminum alloy frame; Rated power: 200W; Voltage: 220V; Frequency: 50Hz; Blade: Special stainless steel blade, 190mm diameter; Adjustment: 20 gears (1-20mm) thickness adjustable; Motor: Copper wire motor; Operation: Stable, low noise; Suitable: Both soft and hard ingredients",
-  "product_xc_1288_usage": "Usage: Restaurant chains, hot pot restaurants, canteens, central kitchens; Suitable for fresh meat, frozen meat and other ingredients, multi-gear thickness adjustment. Capacity: Efficient slicing for small to medium food service."
+  "product_xc_1288_usage": "Usage: Restaurant chains, hot pot restaurants, canteens, central kitchens; Suitable for fresh meat, frozen meat and other ingredients, multi-gear thickness adjustment. Capacity: Efficient slicing for small to medium food service.",
+  "product_subcat_cutting_切片机": "Slicer",
+  "product_subcat_cutting_切肉机": "Meat Slicer",
+  "product_subcat_cutting_肉卷机": "Meat Roll Slicer",
+  "product_subcat_cutting_刨丝机": "Shredder",
+  "product_subcat_cutting_切菜机": "Vegetable Cutter"
 }

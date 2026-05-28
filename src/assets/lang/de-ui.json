@@ -3678,5 +3678,10 @@
   "search_results_count": "{count} Ergebnisse gefunden",
   "search_view_all": "Alle Produkte anzeigen",
   "search_no_results": "Keine passenden Ergebnisse gefunden",
-  "search_hint": "Versuchen Sie, nach Modellnummer oder Produkttyp zu suchen"
+  "search_hint": "Versuchen Sie, nach Modellnummer oder Produkttyp zu suchen",
+  "product_subcat_cutting_切片机": "Schneidemaschine",
+  "product_subcat_cutting_切肉机": "Fleischschneider",
+  "product_subcat_cutting_肉卷机": "Fleischröllchen-Schneider",
+  "product_subcat_cutting_刨丝机": "Hobelmaschine",
+  "product_subcat_cutting_切菜机": "Gemüseschneider"
 }

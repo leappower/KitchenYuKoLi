@@ -3678,5 +3678,10 @@
   "search_results_count": "{count} resultados encontrados",
   "search_view_all": "Ver todos os produtos",
   "search_no_results": "Nenhum resultado encontrado",
-  "search_hint": "Tente pesquisar por número do modelo ou tipo de produto"
+  "search_hint": "Tente pesquisar por número do modelo ou tipo de produto",
+  "product_subcat_cutting_切片机": "Fatiador",
+  "product_subcat_cutting_切肉机": "Fatiador de carne",
+  "product_subcat_cutting_肉卷机": "Fatiador de rolos de carne",
+  "product_subcat_cutting_刨丝机": "Ralador",
+  "product_subcat_cutting_切菜机": "Cortador de legumes"
 }

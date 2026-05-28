@@ -3678,5 +3678,10 @@
   "search_results_count": "{count} 件の結果が見つかりました",
   "search_view_all": "すべての製品を見る",
   "search_no_results": "一致する結果が見つかりませんでした",
-  "search_hint": "型番または製品タイプで検索してみてください"
+  "search_hint": "型番または製品タイプで検索してみてください",
+  "product_subcat_cutting_切片机": "スライサー",
+  "product_subcat_cutting_切肉机": "ミートスライサー",
+  "product_subcat_cutting_肉卷机": "ミートロールスライサー",
+  "product_subcat_cutting_刨丝机": "シュレッダー",
+  "product_subcat_cutting_切菜机": "野菜カッター"
 }

@@ -430,7 +430,7 @@
         esc(getProductField(product, "name") || model) +
         "</span></li>" +
         "</ol></nav></div>";
-      // Mobile breadcrumb — 统一返回按钮 + 两层
+      // Mobile breadcrumb — 统一返回按钮 + 可点击链接
       var mChevron = '<span class="mx-1 text-slate-300 text-xs">/</span>';
       html +=
         '<div class="section-content pt-4 pb-2 md:hidden" style="padding-inline:var(--container-px,0.75rem)">' +
@@ -439,16 +439,22 @@
         tl("pd_back", "返回") +
         '">' +
         '<span class="material-symbols-outlined text-lg">arrow_back</span></button>' +
-        '<div class="text-xs text-slate-500 dark:text-slate-400">' +
+        '<div class="flex items-center gap-1 flex-wrap">' +
+        '<a href="/products/" class="text-xs text-slate-500 dark:text-slate-400 hover:text-primary transition-colors">' +
         esc(tl("nav_products", "Products")) +
-        "</div>" +
+        "</a>" +
         (catLabel
-          ? '<div class="text-xs text-slate-500 dark:text-slate-400">' + mChevron + esc(catLabel) + "</div>"
+          ? mChevron +
+            '<a href="/products/' +
+            esc(catSlug) +
+            '/" class="text-xs text-slate-500 dark:text-slate-400 hover:text-primary transition-colors">' +
+            esc(catLabel) +
+            "</a>"
           : "") +
-        '<div class="text-sm font-bold text-slate-900 dark:text-white truncate">' +
         mChevron +
+        '<span class="text-sm font-bold text-slate-900 dark:text-white truncate max-w-[160px]">' +
         esc(getProductField(product, "name") || model) +
-        "</div>" +
+        "</span>" +
         "</div></div>";
       bcEl.innerHTML = html;
     })();

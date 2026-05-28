@@ -3678,5 +3678,10 @@
   "search_results_count": "{count}개의 결과를 찾았습니다",
   "search_view_all": "모든 제품 보기",
   "search_no_results": "일치하는 결과를 찾을 수 없습니다",
-  "search_hint": "모델 번호 또는 제품 유형으로 검색해 보세요"
+  "search_hint": "모델 번호 또는 제품 유형으로 검색해 보세요",
+  "product_subcat_cutting_切片机": "슬라이서",
+  "product_subcat_cutting_切肉机": "고기 슬라이서",
+  "product_subcat_cutting_肉卷机": "고기 롤 슬라이서",
+  "product_subcat_cutting_刨丝机": "강판 기계",
+  "product_subcat_cutting_切菜机": "야채 절단기"
 }

@@ -3678,5 +3678,10 @@
   "search_results_count": "{count} hasil ditemui",
   "search_view_all": "Lihat semua produk",
   "search_no_results": "Tiada hasil yang sepadan ditemui",
-  "search_hint": "Cuba cari dengan nombor model atau jenis produk"
+  "search_hint": "Cuba cari dengan nombor model atau jenis produk",
+  "product_subcat_cutting_切片机": "Pemotong",
+  "product_subcat_cutting_切肉机": "Pemotong daging",
+  "product_subcat_cutting_肉卷机": "Pemotong gulung daging",
+  "product_subcat_cutting_刨丝机": "Mesin serut",
+  "product_subcat_cutting_切菜机": "Pemotong sayur"
 }

@@ -3687,5 +3687,10 @@
   "search_results_count": "Znaleziono {count} wyników",
   "search_view_all": "Zobacz wszystkie produkty",
   "search_no_results": "Nie znaleziono pasujących wyników",
-  "search_hint": "Spróbuj wyszukać według numeru modelu lub typu produktu"
+  "search_hint": "Spróbuj wyszukać według numeru modelu lub typu produktu",
+  "product_subcat_cutting_切片机": "Krajalnica",
+  "product_subcat_cutting_切肉机": "Krajalnica do mięsa",
+  "product_subcat_cutting_肉卷机": "Krajalnica do rolek mięsnych",
+  "product_subcat_cutting_刨丝机": "Maszyna do szatkowania",
+  "product_subcat_cutting_切菜机": "Krajalnica do warzyw"
 }
