@@ -149,8 +149,12 @@
       return p.is_home_core || p.isHomeCore;
     });
     if (coreProducts.length > 0) {
-      _saveCache(coreProducts);
       callback(coreProducts, "local");
+      try {
+        _saveCache(coreProducts);
+      } catch (e) {
+        /* sessionStorage may be blocked */
+      }
       return;
     }
     _loadCachedFallback(callback);
@@ -532,7 +536,9 @@
   }
 
   // Re-render on language change — listen on both document and window
-  function _onLangChange() { _autoInit(); }
+  function _onLangChange() {
+    _autoInit();
+  }
   document.addEventListener("languageChanged", _onLangChange);
   window.addEventListener("languageChanged", _onLangChange);
 })();
