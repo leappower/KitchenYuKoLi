@@ -37,14 +37,21 @@ KitchenYuKoLi v1.0.0 发布前问题修复文档。
 | 17 | `home-core-products.js` 承载首页 + 场景两套功能 | 拆分为 `scenario-products.js` 独立文件 |
 | 18 | `smart-popup.js` 引用残留 | 全部清除 |
 
+### 已修复（追加 round 2）
+
+| # | 问题 | 现象 | 根因 | 修复 |
+|---|------|------|------|------|
+| 19 | contact-dropdown 未全局注入 | 部分页面缺少联系下拉菜单 | `contact-dropdown.js` 只在部分 SPA 路由页面加载 | 移入 `core[]`，删除 16 个源文件中的硬编码 `<script>` |
+| 20 | 首次渲染闪烁 (FOUC) | 页面加载时 body 显现后突然闪白 | web components (navigator/footer) 异步渲染，CSS 无初始隐藏 | `body { opacity:0 }` → `.yukoli-ready { opacity:1 }`，600ms 兜底 |
+| 21 | 移动端水平滚动溢出 | 部分页面出现横向滚动条 | 50+ 页面未设 `overflow-x` 约束 | 统一补 `overflow-x-clip` |
+| 22 | canteen/central-kitchen tag-pair 预警（5处） | htmlhint 报 tag-pair 错误 | canteen PC/central-kitchen PC 末尾缺 `</section></main></body>`；canteen mobile/tablet 缺 `</head><body>` | 补全缺失闭合标签 |
+
 ### 待修复
 
 | # | 问题 | 优先级 | 方案 |
 |---|------|:--:|------|
 | A | `product-data-table.js` 加载顺序 | P1 | 已改为同步加载，需验证所有页面生效 |
-| B | 首次渲染闪现 footer | P2 | 在 body 加初始 `opacity:0`，CSS 过渡到 `opacity:1` |
-| C | `home-core-products.js` 重复引用 | P2 | `build.sh` 版本号替换已修复（只改 dist），需 clean build 验证 |
-| D | 移动端水平轻微滚动 | P3 | 排查固定宽度元素，加全局 `overflow-x: hidden` 兜底 |
+| B | 首次渲染闪现 footer | P2 | 在 body 加初始 `opacity:0`，CSS 过渡到 `opacity:1`（已在 #20 修复）|
 
 ## 关键文件修改一览
 
@@ -84,5 +91,8 @@ KitchenYuKoLi v1.0.0 发布前问题修复文档。
 - [x] 目录 URL 设备跳转正常
 - [x] Tag: `v1.0.0` @ `0f1ae0c74`
 - [x] Branch: `gh-pages` @ `a49dbdf`
+- [x] FOUC 修复（anti-fouc CSS + 600ms 兜底）
+- [x] 移动端水平溢出修复（50+ 页 overflow-x-clip）
+- [x] canteen/central-kitchen tag-pair 预警消除（5处）
+- [x] contact-dropdown 全局注入
 - [ ] 待 DNS CNAME 生效后开启 Enforce HTTPS
-- [ ] 待修复 P2 问题 A/B/C/D

@@ -199,6 +199,19 @@
     var re = document.getElementById("related-products");
     var bc = document.getElementById("pdp-breadcrumb");
 
+    // PDP containers already exist — nothing to do
+    if (ce && re) return;
+
+    // Only hide product-grid on PDP URLs, not on listing pages
+    // Check if current path is a PDP (has model in path, not just category slug)
+    var _path = window.location.pathname.replace(/\/$/, "");
+    var _segs = _path.replace(/^\/products\//, "").split("/");
+    // Account for SSG device files (/products/stirfry/index-pc.html → segs=["stirfry","index-pc.html"])
+    // which should be treated as listing pages
+    var _listingPage =
+      (_segs.length === 1 || (_segs.length === 2 && /^index-(pc|mobile|tablet)\.html$/.test(_segs[1]))) &&
+      isCategorySlug(_segs[0]);
+
     // Ensure breadcrumb container exists regardless of product-content state
     if (!bc) {
       var container = ce ? ce.parentElement : document.querySelector("main") || document.body;
@@ -210,7 +223,9 @@
 
     if (!ce || !re) {
       // Products listing page has #products-section; hide it and create PDP containers
-      var listing = document.getElementById("products-section") || document.getElementById("product-grid");
+      var listing = _listingPage
+        ? null
+        : document.getElementById("products-section") || document.getElementById("product-grid");
       container = listing
         ? listing.parentElement
         : document.getElementById("app") || document.querySelector("main") || document.body;
