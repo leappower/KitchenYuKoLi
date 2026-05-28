@@ -17,7 +17,7 @@ echo "🏗️  Building ($BUILD_MODE)..."
 
 SRC="src"
 DIST="dist"
-VERSION="v=$(date +%Y%m%d%H%M)"
+VERSION="v=$(date +%s%3N)"
 
 # ─── Pre-flight checks ───────────────────────────────────────────
 INDEX_SIZE=$(wc -c < "$SRC/index.html")
