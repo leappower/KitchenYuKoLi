@@ -24,19 +24,23 @@
       var f=location.pathname.split("/").pop();
       if(!f||!f.match(/.html$/)){
         // 目录 URL — 直接跳转到对应设备文件
+        console.debug("[device-debug] dir URL, calling doRedirect",{f:f,path:location.pathname});
         doRedirect();
         return;
       }
       if(f.match(/^index-(pc|mobile|tablet).html$/))return;
       function doRedirect(){
-        var mq767=window.matchMedia("(max-width:767px)");
-        var mq1279=window.matchMedia("(max-width:1279px)");
-        var e=mq767.matches?"index-mobile.html":mq1279.matches?"index-tablet.html":"index-pc.html";
-        if(f===e)return;
-        location.href=location.pathname.replace(/[^\/]*.html$/,"")+e;
+        var vw = window.innerWidth;
+        var isTouch = window.matchMedia && window.matchMedia("(pointer:coarse)").matches;
+        if (isTouch && vw >= 768) vw = 767;
+        var e=vw<768?"index-mobile.html":vw<1280?"index-tablet.html":"index-pc.html";
+        console.debug("[device-debug] doRedirect",{f:f,e:e,vw:vw,innerW:window.innerWidth,dpr:window.devicePixelRatio,isTouch:isTouch});
+        if(f===e){console.debug("[device-debug] skip, already on correct version");return;}
+        var newUrl=location.pathname.replace(/[^\/]*.html$/,"")+e;
+        console.debug("[device-debug] redirecting to",newUrl);
+        location.href=newUrl;
       }
-      window.addEventListener("DOMContentLoaded",doRedirect);
-      setTimeout(doRedirect,100);
+      doRedirect();
     })();
     </script>
 <!-- ═══ End Responsive Redirect ═══ -->
@@ -156,13 +160,13 @@ header button:active {
                       <input id="q-phone" type="tel" required class="flex-1 h-12 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white focus:border-primary text-sm px-3 py-3" placeholder="Phone number" data-i18n-placeholder="quote_phone_placeholder" />
                     </div>
                   </label>
-                  <div class="flex gap-2">
-                    <label class="flex-1 flex flex-col gap-1.5"><span class="text-sm font-bold" data-i18n="quote_contact_channel_prompt">期望通过 <span class="text-red-500">*</span></span>
+                  <div class="flex flex-col sm:flex-row gap-2">
+                    <label class="w-full sm:flex-1 flex flex-col gap-1.5"><span class="text-sm font-bold" data-i18n="quote_contact_channel_prompt">期望通过 <span class="text-red-500">*</span></span>
                       <select data-custom-select id="q-contact-channel" required class="h-12 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white focus:border-primary text-sm px-3 py-3 appearance-none">
                         <option value="" data-i18n="quote_select_channel">选择联系方式</option><option value="WhatsApp">WhatsApp</option><option value="LINE">LINE</option><option value="Zalo">Zalo</option><option value="Facebook Messenger">Messenger</option><option value="Viber">Viber</option><option value="Telegram">Telegram</option><option value="WeChat">WeChat</option><option value="Phone Call">电话</option><option value="other">其他</option>
                       </select>
                     </label>
-                    <label class="flex-1 flex flex-col gap-1.5"><span class="text-sm font-bold" data-i18n="quote_account_label">账号</span>
+                    <label class="w-full sm:flex-1 flex flex-col gap-1.5"><span class="text-sm font-bold" data-i18n="quote_account_label">账号</span>
                       <input id="q-contact-account" type="text" class="h-12 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white focus:border-primary text-sm px-3 py-3" placeholder="Leave blank to use phone" data-i18n-placeholder="quote_account_placeholder" />
                     </label>
                   </div>
