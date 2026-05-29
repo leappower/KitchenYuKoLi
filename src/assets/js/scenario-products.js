@@ -50,6 +50,8 @@
       辅助系列: "other",
     };
     var catSlug = CATEGORY_NAME_TO_SLUG[product.category] || null;
+    // fallback: 从不可变 MODEL_TO_SLUG 查找
+    if (!catSlug && window.MODEL_TO_SLUG) catSlug = window.MODEL_TO_SLUG[product.model] || null;
     if (catSlug) {
       return "/products/" + catSlug + "/" + encodeURIComponent(product.model) + "/";
     }

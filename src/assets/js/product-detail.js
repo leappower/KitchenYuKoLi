@@ -30,23 +30,74 @@
     辅助系列: "other",
   };
 
-  // MODEL_TO_SLUG: 构建时从 PRODUCT_DATA_TABLE 初始数据提取，不可变
+    // MODEL_TO_SLUG: 从 product-data-table 生成的硬编码映射，不依赖任何运行时数据
   // 防止 API 实时数据覆盖后回查失效
-  var MODEL_TO_SLUG = (function () {
-    var map = {};
-    if (typeof window !== "undefined" && window.PRODUCT_DATA_TABLE) {
-      var t = window.PRODUCT_DATA_TABLE;
-      if (t && t.length) {
-        for (var _i = 0; _i < t.length; _i++) {
-          if (t[_i].model && t[_i].category) {
-            var _s = CATEGORY_NAME_TO_SLUG[t[_i].category];
-            if (_s) map[t[_i].model] = _s;
-          }
-        }
-      }
-    }
-    return map;
-  })();
+  var MODEL_TO_SLUG = {
+    "B4RTD": "stewing", "B6RBD": "stewing", "B8RBD": "stewing",
+    "DLB-4BQ30": "stirfry", "DLB-4QBQ30": "stirfry",
+    "DLB-A2800": "other", "DLB-A3600": "other", "DLB-A4600": "other", "DLB-A5400": "other",
+    "DLB-A60-G": "other", "DLB-A60-J": "other", "DLB-A60-Z": "other", "DLB-A6200": "other",
+    "DLB-BQ40T": "stirfry", "DLB-BXC800": "stirfry",
+    "DLB-GB50": "stirfry", "DLB-GB60": "stirfry", "DLB-GB60R": "stirfry",
+    "DLB-GB70": "stirfry", "DLB-GB70R": "stirfry",
+    "DLB-GB80": "stirfry", "DLB-GB80R": "stirfry",
+    "DLB-GB90": "stirfry", "DLB-GB90R": "stirfry",
+    "DLB-GC50": "stirfry", "DLB-GC60": "stirfry", "DLB-GC60R": "stirfry",
+    "DLB-GC70": "stirfry", "DLB-GC70R": "stirfry",
+    "DLB-GC80": "stirfry", "DLB-GC80R": "stirfry",
+    "DLB-GC90": "stirfry", "DLB-GC90R": "stirfry",
+    "DLB-GD30": "stirfry", "DLB-GD36": "stirfry",
+    "DLB-GD36/9": "stirfry",
+    "DLB-GQ30": "stirfry", "DLB-GQ30J": "stirfry", "DLB-GQ30T": "stirfry", "DLB-GQ35T": "stirfry",
+    "DLB-GQ36": "stirfry", "DLB-GQ36J": "stirfry", "DLB-GQ36J/9": "stirfry",
+    "DLB-GQ50": "stirfry",
+    "DLB-GQ60": "stirfry", "DLB-GQ60R": "stirfry",
+    "DLB-GQ70": "stirfry", "DLB-GQ70R": "stirfry",
+    "DLB-GQ80": "stirfry", "DLB-GQ80R": "stirfry",
+    "DLB-GQ90": "stirfry", "DLB-GQ90R": "stirfry",
+    "DLB-PZJ80": "steaming", "DLB-PZJ100": "steaming", "DLB-PZJ120": "steaming", "DLB-PZJ200": "steaming", "DLB-PZJ400": "steaming",
+    "DLB-QXC80": "stewing", "DLB-QXC80R": "stewing",
+    "DLB-QXC100": "stewing", "DLB-QXC100R": "stewing",
+    "DLB-QXC120": "stewing", "DLB-QXC120R": "stewing",
+    "DLB-TBQ30": "stirfry", "DLB-TBS30": "stirfry", "DLB-TBS40": "stirfry", "DLB-TBS50": "stirfry",
+    "DLB-TGD30": "stirfry", "DLB-TGD36": "stirfry", "DLB-TGD36/9": "stirfry", "DLB-TGD40": "stirfry",
+    "DLB-TGQ30": "stirfry", "DLB-TGQ30J": "stirfry",
+    "DLB-TGQ36J": "stirfry", "DLB-TGQ36J/9": "stirfry",
+    "DLB-TGQ40": "stirfry", "DLB-TGQ40J": "stirfry",
+    "DLB-TGS30": "stirfry",
+    "DLB-TQBQ30": "stirfry",
+    "DLB-TZS40": "stirfry", "DLB-TZS50": "stirfry",
+    "DLB-XC80": "stewing", "DLB-XC80R": "stewing",
+    "DLB-XC100": "stewing", "DLB-XC100R": "stewing",
+    "DLB-XC120": "stewing", "DLB-XC120R": "stewing",
+    "DLB-ZNT": "stewing", "DLB-ZNY": "stewing",
+    "F32F1C": "stirfry",
+    "G26D1A": "stirfry", "G26D1R": "stirfry", "G26DAA": "stirfry",
+    "G26DAG": "stirfry", "G26DAR": "stirfry", "G26DAS": "stirfry",
+    "G30D1A": "stirfry", "G30D1R": "stirfry", "G30D1T": "stirfry",
+    "G30DAA": "stirfry", "G30DAG": "stirfry", "G30DAR": "stirfry", "G30DAS": "stirfry", "G30DFA": "stirfry",
+    "G36D1A": "stirfry", "G36D1R": "stirfry", "G36DAA": "stirfry",
+    "G36DAG": "stirfry", "G36DAR": "stirfry", "G36DAS": "stirfry",
+    "G50AAB": "stirfry", "G50AAC": "stirfry", "G50GAT": "stirfry",
+    "G60EAC": "stirfry", "G60EAS": "stirfry",
+    "G70EAC": "stirfry", "G70EAS": "stirfry",
+    "G80EAC": "stirfry", "G80EAS": "stirfry",
+    "GT1D1B": "frying", "GT2D1B": "frying",
+    "HKDQJ300": "cutting", "HKDQJ300-VII": "cutting",
+    "HKFBJ": "cutting", "HKJGJ380-VI": "cutting",
+    "HKQPJ-300": "cutting", "HKQPJ400-VIII": "cutting", "HKQPJ500-VIII": "cutting",
+    "HKQTJ200-VII": "cutting", "HKQTJ300": "cutting", "HKQTJ600-VII": "cutting",
+    "HKXQJ-400": "cutting",
+    "J40CBB": "stirfry", "LZ80D1B": "stewing",
+    "M3DAD": "stewing", "M4DAD+1": "stewing", "M4DAD+2": "stewing",
+    "M6DAD": "stewing", "M6DBD": "stewing", "M6RAD": "stewing",
+    "XC-0006": "cutting", "XC-0888": "cutting", "XC-0988": "cutting",
+    "XC-1088": "cutting", "XC-1288": "cutting", "XC-6344": "cutting",
+    "Y12D1C": "frying", "Y12D2C": "frying", "Y24C1C": "frying", "Y50D1C": "frying",
+    "Z6FCB": "steaming", "Z8FCB/Z12FCB": "steaming",
+    "\u7535\u78c1\uff1aDLB-GQ40\u71c3\u6c14\uff1aDLB-GQ40R": "stirfry",
+  };
+  if (typeof window !== "undefined") window.MODEL_TO_SLUG = MODEL_TO_SLUG;
 
   function isCategorySlug(slug) {
     return CATEGORY_SLUGS.indexOf(slug) >= 0;

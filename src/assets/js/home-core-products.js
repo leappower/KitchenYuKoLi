@@ -98,7 +98,7 @@
   })();
 
   function getProductDetailHref(product) {
-    var slug = CATEGORY_NAME_TO_SLUG[product.category] || (MODEL_TO_SLUG && MODEL_TO_SLUG[product.model]) || encodeURIComponent(product.model);
+    var slug = CATEGORY_NAME_TO_SLUG[product.category] || (window.MODEL_TO_SLUG && window.MODEL_TO_SLUG[product.model]) || encodeURIComponent(product.model);
     return "/products/" + slug + "/" + encodeURIComponent(product.model) + "/";
   }
 

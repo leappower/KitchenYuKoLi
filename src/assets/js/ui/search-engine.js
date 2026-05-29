@@ -27,7 +27,9 @@
   };
   function getProductDetailHref(product) {
     var catSlug = CATEGORY_NAME_TO_SLUG[product.category] || CATEGORY_NAME_TO_SLUG[product.categoryName];
-    // 如果搜索结果中没有 category，尝试从全局产品数据表查找
+    // fallback: 从不可变 MODEL_TO_SLUG 查找
+    if (!catSlug && window.MODEL_TO_SLUG) catSlug = window.MODEL_TO_SLUG[product.model] || "";
+    // fallback: PRODUCT_DATA_TABLE 回查
     if (!catSlug && product.model && window.PRODUCT_DATA_TABLE) {
       for (var i = 0; i < window.PRODUCT_DATA_TABLE.length; i++) {
         if (window.PRODUCT_DATA_TABLE[i].model === product.model) {

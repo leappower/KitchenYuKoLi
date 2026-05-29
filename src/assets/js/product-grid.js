@@ -487,14 +487,8 @@
   function _resolveImage(p) {
     // 统一用 model.webp，不信任 API/data-table 的 filePath
     var img = "/assets/images/products/" + (p.model || "") + ".webp";
-    if (img.indexOf("/admin/uploads/") === 0) {
-          img = "/assets/images/products/" + img.split("/").pop();
-        }
-      }
-    }
     if (!img && p.image) img = p.image;
     if (!img && p.imageUrl) img = p.imageUrl;
-    // Last resort: try {model}.webp, sanitize model name for filesystem
     if (!img) {
       var safeModel = (p.model || "default").replace(/[/:+]+/g, "_").replace(/_+/g, "_");
       img = "/assets/images/products/" + safeModel + ".webp";
@@ -632,7 +626,7 @@
       badge =
         '<span class="px-3 py-1 bg-primary text-white text-xs font-bold rounded-full">' + esc(p.badge) + "</span>";
     }
-    var linkSlug = CATEGORY_NAME_TO_SLUG[p._category] || encodeURIComponent(model);
+    var linkSlug = CATEGORY_NAME_TO_SLUG[p._category] || (window.MODEL_TO_SLUG && window.MODEL_TO_SLUG[model]) || encodeURIComponent(model);
     var link = "/products/" + linkSlug + "/" + encodeURIComponent(model) + "/";
     var isSelected = isProductCompared(p.model);
     var selectedClass = isSelected ? " compare-selected" : "";
@@ -710,7 +704,7 @@
       badge =
         '<span class="px-2 py-0.5 bg-primary text-white text-[10px] font-bold rounded">' + esc(p.badge) + "</span>";
     }
-    var linkSlug = CATEGORY_NAME_TO_SLUG[p._category] || encodeURIComponent(model);
+    var linkSlug = CATEGORY_NAME_TO_SLUG[p._category] || (window.MODEL_TO_SLUG && window.MODEL_TO_SLUG[model]) || encodeURIComponent(model);
     var link = "/products/" + linkSlug + "/" + encodeURIComponent(model) + "/";
     var isSelected = isProductCompared(p.model);
     var selectedClass = isSelected ? " compare-selected" : "";
@@ -774,7 +768,7 @@
     var name = esc(_pField(p, "name") || model);
     var desc = esc(p.description || p.card_desc || "");
     var img = esc(p._imageUrl);
-    var linkSlug = CATEGORY_NAME_TO_SLUG[p._category] || encodeURIComponent(model);
+    var linkSlug = CATEGORY_NAME_TO_SLUG[p._category] || (window.MODEL_TO_SLUG && window.MODEL_TO_SLUG[model]) || encodeURIComponent(model);
     var link = "/products/" + linkSlug + "/" + encodeURIComponent(model) + "/";
     var isSelected = isProductCompared(p.model);
     var selectedClass = isSelected ? " compare-selected" : "";
