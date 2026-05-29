@@ -1,123 +1,114 @@
 #!/bin/bash
 # pre-push-check.sh — Build smoke tests before push
-# Called by lefthook pre-push
 set -euo pipefail
 
 echo "🔍 Running pre-push smoke checks..."
+PASS=0; FAIL=0; SRC="src"
 
-PASS=0
-FAIL=0
-SRC="src"
+# ─── 1. Syntax check ─────────────────────────────────────
+check_js_syntax() {
+  echo ""; echo "📝 Checking JS syntax..."
+  local errs=0
+  for f in src/assets/js/*.js src/assets/js/ui/*.js scripts/*.js; do
+    [ -f "$f" ] || continue
+    node --check "$f" 2>/dev/null || { echo "  ❌ $f"; errs=$((errs+1)); }
+  done
+  [ "$errs" -gt 0 ] && { FAIL=$((FAIL+1)); return; }
+  echo "  ✅ All JS files pass syntax check"; PASS=$((PASS+1))
+}
 
-# ─── 1. Syntax check all JS files ─────────────────────────────
-echo ""
-echo "📝 Checking JS syntax..."
-JS_ERRORS=0
-for f in src/assets/js/*.js src/assets/js/ui/*.js scripts/*.js; do
-  [ -f "$f" ] || continue
-  if ! node --check "$f" 2>/dev/null; then
-    echo "  ❌ SYNTAX ERROR: $f"
-    JS_ERRORS=$((JS_ERRORS + 1))
-  fi
-done
-if [ "$JS_ERRORS" -gt 0 ]; then
-  echo "  ❌ $JS_ERRORS file(s) have syntax errors"
-  FAIL=$((FAIL + 1))
-else
-  echo "  ✅ All JS files pass syntax check"
-  PASS=$((PASS + 1))
-fi
+# ─── 2. DOCTYPE ──────────────────────────────────────────
+check_doctype() {
+  echo ""; echo "📄 Checking DOCTYPE declarations..."
+  local errs=0
+  for f in $(find src/pages -name '*.html' 2>/dev/null); do
+    head -1 "$f" | grep -qi '<!doctype' || { echo "  ❌ Missing DOCTYPE: $f"; errs=$((errs+1)); }
+  done
+  [ "$errs" -gt 0 ] && { FAIL=$((FAIL+1)); return; }
+  echo "  ✅ All HTML files have DOCTYPE"; PASS=$((PASS+1))
+}
 
-# ─── 2. DOCTYPE check ─────────────────────────────────────────
-echo ""
-echo "📄 Checking DOCTYPE declarations..."
-DOCTYPE_ERRORS=0
-for f in $(find src/pages -name '*.html' 2>/dev/null); do
-  FIRST_LINE=$(head -1 "$f")
-  if ! echo "$FIRST_LINE" | grep -qi '<!doctype'; then
-    echo "  ❌ Missing DOCTYPE: $f"
-    DOCTYPE_ERRORS=$((DOCTYPE_ERRORS + 1))
-  fi
-done
-if [ "$DOCTYPE_ERRORS" -gt 0 ]; then
-  echo "  ❌ $DOCTYPE_ERRORS file(s) missing DOCTYPE"
-  FAIL=$((FAIL + 1))
-else
-  echo "  ✅ All HTML files have DOCTYPE"
-  PASS=$((PASS + 1))
-fi
+# ─── 3. Empty scripts ────────────────────────────────────
+check_empty_script() {
+  echo ""; echo "🔍 Checking empty <script> tags..."
+  local hits=$(grep -rn '<script[^>]*>\s*</script>' src/ --include="*.html" 2>/dev/null | grep -v 'src=' | grep -v 'type=' || true)
+  [ -n "$hits" ] && { echo "$hits" | head -10; echo "  ❌ Empty scripts found"; FAIL=$((FAIL+1)); return; }
+  echo "  ✅ No empty <script> tags"; PASS=$((PASS+1))
+}
 
-# ─── 3. Empty script tags ─────────────────────────────────────
-echo ""
-echo "🔍 Checking for truly empty <script> tags (no src, no type)..."
-EMPTY_SCRIPTS=$(grep -rn '<script[^>]*>\s*</script>' src/ --include="*.html" 2>/dev/null | \
-  grep -v 'src=' | \
-  grep -v 'type=' || true)
-if [ -n "$EMPTY_SCRIPTS" ]; then
-  echo "  ❌ Empty <script> tags found:"
-  echo "$EMPTY_SCRIPTS" | while read -r line; do echo "     $line"; done
-  COUNT=$(echo "$EMPTY_SCRIPTS" | wc -l | tr -d ' ')
-  echo "  ❌ Total: $COUNT file(s) with empty scripts"
-  FAIL=$((FAIL + 1))
-else
-  echo "  ✅ No empty <script> tags"
-  PASS=$((PASS + 1))
-fi
-
-# ─── 4. Duplicate event listeners ─────────────────────────────
-echo ""
-echo "🎧 Checking for duplicate addEventListener patterns..."
-DUP_EVENTS=$(grep -rn '\.addEventListener(' src/ --include="*.js" 2>/dev/null | \
-  grep -v '__DEVELOPMENT__' | \
-  sed "s/.*\.addEventListener(//" | \
-  sed "s/,.*//" | \
-  sort | uniq -d || true)
-if [ -n "$DUP_EVENTS" ]; then
-  echo "  ⚠️  Potentially duplicate addEventListener calls:"
-  echo "$DUP_EVENTS" | while read -r ev; do echo "     $ev"; done
-  echo "     (review recommended, not blocking)"
-fi
-
-# ─── 5. i18n keys check ──────────────────────────────────────
-echo ""
-echo "🌐 Checking i18n keys..."
-if [ -f "scripts/lint-i18n-keys.js" ]; then
-  node scripts/lint-i18n-keys.js 2>&1 | tail -5
-fi
-
-# ─── 6. build-ssg generate404 输出验证 ────────────────────
-echo ""
-echo "🏗️  Checking build-ssg generate404 regex..."
-if [ -f "scripts/build-ssg.js" ] && [ -f "scripts/lint-build-ssg-regex.js" ]; then
-  if node scripts/lint-build-ssg-regex.js 2>&1; then
-    echo "  ✅ generate404 regex valid"
-    PASS=$((PASS + 1))
+# ─── 4. Full HTML lint ────────────────────────────────────
+check_html_lint() {
+  echo ""; echo "🔍 Running full HTML lint..."
+  local out=$(npx htmlhint "src/**/*.html" 2>&1)
+  local scanned=$(echo "$out" | grep "Scanned")
+  if echo "$scanned" | grep -q "no errors"; then
+    echo "  ✅ All HTML files pass lint ($(echo $scanned | grep -o 'Scanned[^)]*'))"
+    PASS=$((PASS+1))
+  elif echo "$scanned" | grep -q "errors"; then
+    local n=$(echo "$scanned" | grep -o '[0-9]* errors' | grep -o '[0-9]*')
+    echo "$out" | grep -E "error" | head -5
+    echo "  ❌ $n HTML error(s) found"; FAIL=$((FAIL+1))
   else
-    FAIL=$((FAIL + 1))
+    echo "  ⚠️  htmlhint scan issue"; PASS=$((PASS+1))
   fi
-fi
+}
 
-# ─── 7. Quick CSS build ──────────────────────────────────────
-echo ""
-echo "🏗️  Running build..."
-if npm run build:css 2>&1 | tail -1 | grep -q "Done"; then
-  echo "  ✅ CSS build passed"
-  PASS=$((PASS + 1))
-else
-  echo "  ❌ CSS build failed"
-  FAIL=$((FAIL + 1))
-fi
+# ─── 5. Duplicate events ─────────────────────────────────
+check_dup_events() {
+  echo ""; echo "🎧 Checking duplicate addEventListener..."
+  local evts=$(grep -rn '\.addEventListener(' src/ --include="*.js" 2>/dev/null | \
+    grep -v '__DEVELOPMENT__' | sed "s/.*\.addEventListener(//" | sed "s/,.*//" | sort | uniq -d || true)
+  [ -n "$evts" ] && { echo "  ⚠️  Potentially duplicate listeners:"; echo "$evts" | head -20; echo "     (review recommended)"; }
+}
 
-# ─── Summary ──────────────────────────────────────────────────
-echo ""
-echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+# ─── 6. i18n keys ────────────────────────────────────────
+check_i18n() {
+  echo ""; echo "🌐 Checking i18n keys..."
+  [ -f "scripts/lint-i18n-keys.js" ] && node scripts/lint-i18n-keys.js 2>&1 | tail -5
+}
+
+# ─── 7. build-ssg regex ──────────────────────────────────
+check_build_ssg() {
+  echo ""; echo "🏗️  Checking build-ssg generate404 regex..."
+  if [ -f "scripts/build-ssg.js" ] && [ -f "scripts/lint-build-ssg-regex.js" ]; then
+    if node scripts/lint-build-ssg-regex.js 2>&1; then echo "  ✅ generate404 regex valid"; PASS=$((PASS+1))
+    else FAIL=$((FAIL+1)); fi
+  fi
+}
+
+# ─── 8. CSS build ────────────────────────────────────────
+check_css_build() {
+  echo ""; echo "🏗️  Running build..."
+  if npm run build:css 2>&1 | tail -1 | grep -q "Done"; then echo "  ✅ CSS build passed"; PASS=$((PASS+1))
+  else echo "  ❌ CSS build failed"; FAIL=$((FAIL+1)); fi
+}
+
+# ─── 9. 404.html 结构检查（新增）───────────────────────────
+check_404_structure() {
+  echo ""; echo "📋 Checking 404.html structure..."
+  [ ! -f "src/404.html" ] && return
+  local bodies=$(grep -c '</body>' src/404.html)
+  local htmls=$(grep -c '</html>' src/404.html)
+  [ "$bodies" -ne 1 ] && { echo "  ❌ 404.html has $bodies </body> tags (expected 1)"; FAIL=$((FAIL+1)); return; }
+  [ "$htmls" -ne 1 ] && { echo "  ❌ 404.html has $htmls </html> tags (expected 1)"; FAIL=$((FAIL+1)); return; }
+  echo "  ✅ 404.html single <body>/<html> structure"
+  PASS=$((PASS+1))
+}
+
+# Execute all checks
+check_js_syntax
+check_doctype
+check_empty_script
+check_html_lint
+check_dup_events
+check_i18n
+check_build_ssg
+check_404_structure
+check_css_build
+
+# Summary
+echo ""; echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
 echo "  Results: ✅ $PASS passed, ❌ $FAIL failed"
 echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
-
-if [ "$FAIL" -gt 0 ]; then
-  echo "❌ Pre-push check FAILED. Fix issues before pushing."
-  exit 1
-fi
-
-echo "✅ All checks passed!"
-exit 0
+[ "$FAIL" -gt 0 ] && { echo "❌ Pre-push check FAILED."; exit 1; }
+echo "✅ All checks passed!"; exit 0

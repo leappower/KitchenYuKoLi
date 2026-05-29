@@ -67,6 +67,13 @@ echo "🔗 验证产品路由..."
 ROUTE_COUNT=$(find "$DIST/products" -mindepth 2 -name 'index.html' 2>/dev/null | wc -l | tr -d ' ')
 if [ "$ROUTE_COUNT" -gt 0 ]; then
   echo "  ✅ $ROUTE_COUNT 个产品详情页路由"
+  # 抽样检查 PDP 路由是否包含设备重定向——不应该有
+  SAMPLE=$(find "$DIST/products" -mindepth 2 -name 'index.html' 2>/dev/null | head -3)
+  for p in $SAMPLE; do
+    if grep -q 'index-mobile.html' "$p" 2>/dev/null; then
+      echo "  ⚠️  $p 包含设备重定向脚本（可能存在问题）"
+    fi
+  done
 else
   echo "  ⚠️  没有产品详情页路由（dev 模式或构建不完整）"
 fi
