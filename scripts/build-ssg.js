@@ -791,13 +791,13 @@ function generate404() {
     ";\n" +
     '    var categorySlugs = ["cutting","stirfry","frying","stewing","steaming","other","all","compare"];\n' +
     "    // Only redirect /products/{category} (2 segments), not /products/{category}/{model}/ (3+ segments)\n" +
-    '    if (/^\\/products\/([^/]+)$/.test(path.replace(/\/$/, ""))) {\n' +
-    '      var productFirstSegment = path.replace(/^\/products\\//, "").replace(/\/$/, "");\n' +
+    '    if (/^\\/products\\/([^/]+)$/.test(path.replace(/\\/$/, ""))) {\n' +
+    '      var productFirstSegment = path.replace(/^\\/products\\//, "").replace(/\\/$/, "");\n' +
     "      if (productFirstSegment && categorySlugs.indexOf(productFirstSegment) !== -1) {\n" +
     '        window.location.replace(base + "/?redirect=" + encodeURIComponent(path));\n' +
     "      }\n" +
     "    }\n" +
-    '    var stripped = normalized.replace(/^\\\\//, "");\n' +
+    '    var stripped = normalized.replace(/^\\//, "");\n' +
     "    if (routes.indexOf(stripped) !== -1) {\n" +
     '      window.location.replace(base + "/" + stripped + "/");\n' +
     "    } else {\n" +
