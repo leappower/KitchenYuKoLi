@@ -160,6 +160,10 @@ window.getProductField = function getProductField(product, field) {
   if (field === "specifications" && product.specificationsEn) return product.specificationsEn;
   if (field === "usage" && product.usageEn) return product.usageEn;
   if (field === "material" && product.materialEn) return product.materialEn;
+  if (field === "throughput" && product.throughputEn) return product.throughputEn;
+  if (field === "average_time" && product.averageTimeEn) return product.averageTimeEn;
+  if (field === "power" && product.powerEn) return product.powerEn;
+  if (field === "voltage" && product.voltageEn) return product.voltageEn;
   if (field === "sub_category" && product.subCategoryEn) return product.subCategoryEn;
   // Try tier/category from generic i18n keys (tier_basic, tier_smart, tier_full_smart)
   if (field === "tier" && product.tier) {
