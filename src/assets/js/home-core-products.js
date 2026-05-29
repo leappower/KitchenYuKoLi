@@ -510,9 +510,24 @@
     var path = window.location.pathname || "/";
     var device = window.innerWidth < 768 ? "mobile" : window.innerWidth < 1280 ? "tablet" : "pc";
     if (path.indexOf("/home") !== -1) {
-      if (device === "mobile") window.renderHomeCoreMobile("home-core-products-mobile");
-      else if (device === "tablet") window.renderHomeCoreTablet("home-core-products-tablet");
-      else window.renderHomeCorePC("home-core-products-pc");
+      var containerId =
+        device === "mobile"
+          ? "home-core-products-mobile"
+          : device === "tablet"
+            ? "home-core-products-tablet"
+            : "home-core-products-pc";
+      // 等待容器元素出现（SPA content:replace 后 DOM 可能还未更新）
+      function tryRender() {
+        if (document.getElementById(containerId)) {
+          if (device === "mobile") window.renderHomeCoreMobile(containerId);
+          else if (device === "tablet") window.renderHomeCoreTablet(containerId);
+          else window.renderHomeCorePC(containerId);
+        } else {
+          // 容器还没出现，重试
+          setTimeout(tryRender, 50);
+        }
+      }
+      tryRender();
     }
   }
   // Make init callable from outside (for SPA router loadPageScripts)

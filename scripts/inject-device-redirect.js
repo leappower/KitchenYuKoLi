@@ -85,6 +85,12 @@ function findHtmlFiles(dir) {
 function needsRedirect(filePath) {
   // 跳过 entry-only 文件（无页面结构）
   if (filePath.indexOf('/products/detail/index.html') !== -1) return false;
+  // 跳过产品详情页（SPA 路由，无设备三屏版本）
+  // 路径模式：/products/{category}/{model}/index.html（三级路径 = 详情页）
+  var rel = filePath.replace(/^.*?\/products\//, 'products/');
+  var parts = rel.split('/').filter(Boolean);
+  // products/stirfry/DLB-BQ40T/index.html → ['products','stirfry','DLB-BQ40T','index.html'] = 4 parts
+  if (rel.startsWith('products/') && parts.length >= 4) return false;
   var content = fs.readFileSync(filePath, 'utf-8');
   return content.indexOf('<main') !== -1 || content.indexOf('navigator') !== -1;
 }
