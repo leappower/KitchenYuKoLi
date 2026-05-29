@@ -78,6 +78,6 @@ pre-commit:
 pre-push:
   commands:
     test:
-      run: npm run test:ci 2>/dev/null || echo "⚠️  测试未配置，跳过"
+      run: npx jest tests/unit/ --silent --passWithNoTests --maxWorkers=2
     build-smoke:
       run: bash scripts/pre-push-check.sh
