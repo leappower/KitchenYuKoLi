@@ -53,11 +53,15 @@ var REDIRECT_SCRIPT =
   '      }\n' +
   '      if(f.match(/^index-(pc|mobile|tablet)\.html$/))return;\n' +
   '      function doRedirect(){\n' +
-  '        var vw = window.innerWidth;\n' +
-  '        var isTouch = window.matchMedia && window.matchMedia("(pointer:coarse)").matches;\n' +
-  '        if (isTouch && vw >= 768) vw = 767;\n' +
+  '        var mq = window.matchMedia;\n' +
+  '        var isTouch = mq && mq("(pointer:coarse)").matches;\n' +
+  '        var isMb = mq("(max-width:767px)").matches;\n' +
+  '        var isTb = mq("(min-width:768px) and (max-width:1023px)").matches;\n' +
+  '        var isPc = mq("(min-width:1024px)").matches;\n' +
+  '        if (isTouch && !isPc) { isMb = true; isTb = false; }\n' +
+  '        var e = isPc ? "index-pc.html" : isTb ? "index-tablet.html" : "index-mobile.html";\n' +
+  '        console.debug("[device-debug] doRedirect",{f:f,e:e,mobile:isMb,tablet:isTb,pc:isPc,innerW:window.innerWidth,isTouch:isTouch});\n' +
   '        var e=vw<768?"index-mobile.html":vw<1280?"index-tablet.html":"index-pc.html";\n' +
-  '        console.debug("[device-debug] doRedirect",{f:f,e:e,vw:vw,innerW:window.innerWidth,dpr:window.devicePixelRatio,isTouch:isTouch});\n' +
   '        if(f===e){console.debug("[device-debug] skip, already on correct version");return;}\n' +
   '        var newUrl=location.pathname.replace(/[^\\/]*\.html$/,"")+e;\n' +
   '        console.debug("[device-debug] redirecting to",newUrl);\n' +

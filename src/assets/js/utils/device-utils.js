@@ -57,33 +57,42 @@
   };
 
   /**
-   * 获取当前屏幕宽度（视口宽度）
-   * 使用 window.innerWidth 而非 screen.width，因为：
-   * - window.innerWidth 是视口宽度（不包括滚动条）
-   * - screen.width 是物理屏幕宽度（不随窗口大小变化）
-   * - 响应式布局应该基于视口宽度
+   * 媒体查询列表，用于统一设备判断
+   * 使用 CSS Media Query 而非 window.innerWidth，因为：
+   * - Media Query 与 CSS 渲染引擎用同一个断点，不会出现 CSS 和 JS 判断不一致
+   * - 支持 pointer:coarse 等媒体特性，触摸设备即使视口 980px 也正确识别为 mobile
+   * - 支持 change 事件监听，不需要防抖轮询
+   */
+  var mqlList = {
+    mobile: window.matchMedia("(max-width: 767px)"),
+    tablet: window.matchMedia("(min-width: 768px) and (max-width: 1023px)"),
+    pc: window.matchMedia("(min-width: 1024px)"),
+    touch: window.matchMedia("(pointer: coarse)"),
+  };
+
+  /**
+   * 判断当前设备类型（基于 matchMedia）
+   * 触摸设备优先判断为 mobile（即使视口宽度在 tablet 范围内）
+   *
+   * @returns {string} DeviceType.MOBILE | DeviceType.TABLET | DeviceType.PC
+   */
+  function getDeviceType() {
+    if (mqlList.touch.matches && !mqlList.pc.matches) {
+      // 触摸设备非 PC 宽屏 → mobile
+      return DeviceType.MOBILE;
+    }
+    if (mqlList.mobile.matches) return DeviceType.MOBILE;
+    if (mqlList.tablet.matches) return DeviceType.TABLET;
+    return DeviceType.PC;
+  }
+
+  /**
+   * 获取当前屏幕宽度（视口宽度）— 保留兼容
    *
    * @returns {number} 视口宽度（px）
    */
   function getScreenSize() {
     return window.innerWidth;
-  }
-
-  /**
-   * 判断当前设备类型
-   *
-   * @returns {string} DeviceType.MOBILE | DeviceType.TABLET | DeviceType.PC
-   */
-  function getDeviceType() {
-    var width = getScreenSize();
-
-    if (width < Breakpoints.TABLET_MIN) {
-      return DeviceType.MOBILE;
-    } else if (width < Breakpoints.PC_MIN) {
-      return DeviceType.TABLET;
-    } else {
-      return DeviceType.PC;
-    }
   }
 
   /**
