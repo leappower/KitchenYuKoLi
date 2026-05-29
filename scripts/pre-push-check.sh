@@ -55,7 +55,7 @@ EMPTY_SCRIPTS=$(grep -rn '<script[^>]*>\s*</script>' src/ --include="*.html" 2>/
   grep -v 'type=' || true)
 if [ -n "$EMPTY_SCRIPTS" ]; then
   echo "  ❌ Empty <script> tags found:"
-  echo "$EMPTY_SCRIPTS" | head -20 | while read -r line; do echo "     $line"; done
+  echo "$EMPTY_SCRIPTS" | while read -r line; do echo "     $line"; done
   COUNT=$(echo "$EMPTY_SCRIPTS" | wc -l | tr -d ' ')
   echo "  ❌ Total: $COUNT file(s) with empty scripts"
   FAIL=$((FAIL + 1))
@@ -74,7 +74,7 @@ DUP_EVENTS=$(grep -rn '\.addEventListener(' src/ --include="*.js" 2>/dev/null | 
   sort | uniq -d || true)
 if [ -n "$DUP_EVENTS" ]; then
   echo "  ⚠️  Potentially duplicate addEventListener calls:"
-  echo "$DUP_EVENTS" | head -20 | while read -r ev; do echo "     $ev"; done
+  echo "$DUP_EVENTS" | while read -r ev; do echo "     $ev"; done
   echo "     (review recommended, not blocking)"
 fi
 
@@ -85,29 +85,27 @@ if [ -f "scripts/lint-i18n-keys.js" ]; then
   node scripts/lint-i18n-keys.js 2>&1 | tail -5
 fi
 
+# ─── 6. build-ssg generate404 输出验证 ────────────────────
+echo ""
+echo "🏗️  Checking build-ssg generate404 regex..."
+if [ -f "scripts/build-ssg.js" ] && [ -f "scripts/lint-build-ssg-regex.js" ]; then
+  if node scripts/lint-build-ssg-regex.js 2>&1; then
+    echo "  ✅ generate404 regex valid"
+    PASS=$((PASS + 1))
+  else
+    FAIL=$((FAIL + 1))
+  fi
+fi
+
+# ─── 7. Quick CSS build ──────────────────────────────────────
+echo ""
+echo "🏗️  Running build..."
+if npm run build:css 2>&1 | tail -1 | grep -q "Done"; then
+  echo "  ✅ CSS build passed"
   PASS=$((PASS + 1))
 else
   echo "  ❌ CSS build failed"
   FAIL=$((FAIL + 1))
-fi
-
-# ─── Summary ──────────────────────────────────────────────────
-echo ""
-echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
-echo "  Results: ✅ $PASS passed, ❌ $FAIL failed"
-echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
-
-if [ "$FAIL" -gt 0 ]; then
-  echo "❌ Pre-push check FAILED. Fix issues before pushing."
-  exit 1
-fi
-
-echo "✅ All checks passed!"
-exit 0
-echo ""
-echo "🏗️  Checking build-ssg generate404 regex..."
-if [ -f "scripts/build-ssg.js" ]; then
-  node scripts/lint-build-ssg-regex.js && { echo "  ✅ generate404 regex valid"; PASS=$((PASS + 1)); } || FAIL=$((FAIL + 1))
 fi
 
 # ─── Summary ──────────────────────────────────────────────────
