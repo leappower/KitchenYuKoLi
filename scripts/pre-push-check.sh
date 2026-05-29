@@ -83,16 +83,30 @@ check_css_build() {
   else echo "  ❌ CSS build failed"; FAIL=$((FAIL+1)); fi
 }
 
-# ─── 9. 404.html 结构检查（新增）───────────────────────────
-check_404_structure() {
-  echo ""; echo "📋 Checking 404.html structure..."
-  [ ! -f "src/404.html" ] && return
-  local bodies=$(grep -c '</body>' src/404.html)
-  local htmls=$(grep -c '</html>' src/404.html)
-  [ "$bodies" -ne 1 ] && { echo "  ❌ 404.html has $bodies </body> tags (expected 1)"; FAIL=$((FAIL+1)); return; }
-  [ "$htmls" -ne 1 ] && { echo "  ❌ 404.html has $htmls </html> tags (expected 1)"; FAIL=$((FAIL+1)); return; }
-  echo "  ✅ 404.html single <body>/<html> structure"
-  PASS=$((PASS+1))
+# ─── 9. HTML 结构全局检查 ─────────────────────────────
+check_html_structure() {
+  echo ""; echo "📋 Checking HTML structure (body/html tags)..."
+  local issues=0
+  for f in $(find src/pages -name '*.html' 2>/dev/null | head -200); do
+    local content=$(cat "$f")
+    local bodies=$(echo "$content" | grep -c '</body>' || true)
+    local htmls=$(echo "$content" | grep -c '</html>' || true)
+    if [ "$bodies" -eq 0 ] && [ "$htmls" -eq 0 ]; then continue; fi  # 片段文件
+    if [ "$bodies" -ne 1 ] && [ "$bodies" -ne 0 ]; then
+      echo "  ❌ $f: $bodies </body> tags"
+      issues=$((issues+1))
+    fi
+    if [ "$htmls" -ne 1 ] && [ "$htmls" -ne 0 ]; then
+      echo "  ❌ $f: $htmls </html> tags"
+      issues=$((issues+1))
+    fi
+  done
+  if [ "$issues" -gt 0 ]; then
+    FAIL=$((FAIL+1))
+  else
+    echo "  ✅ All HTML files have single <body>/<html>"
+    PASS=$((PASS+1))
+  fi
 }
 
 # Execute all checks
@@ -103,7 +117,7 @@ check_html_lint
 check_dup_events
 check_i18n
 check_build_ssg
-check_404_structure
+check_html_structure
 check_css_build
 
 # Summary
