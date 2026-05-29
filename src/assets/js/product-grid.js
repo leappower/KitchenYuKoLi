@@ -499,7 +499,7 @@
           img
             .split("/")
             .pop()
-            .replace(/_(\d+|hires|large|small|thumb)\.webp$/i, "-.webp")
+            .replace(/_(\d+|hires|large|small|thumb)\.webp$/i, "-1.webp")
             .replace(/-\d{2,}\.webp$/, "-1.webp");
         if (img.indexOf("/admin/uploads/") === 0) {
           img = "/assets/images/products/" + img.split("/").pop();
