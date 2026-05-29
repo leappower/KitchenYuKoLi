@@ -92,7 +92,7 @@
       "}",
 
       /* ─── Wrapper ─── */
-      ".cs-trigger-wrap { position: relative; min-width: 0; }",
+      ".cs-trigger-wrap { position: relative; min-width: 0; min-height: 48px; }",
       ".cs-trigger-wrap" + "." + DISABLED_CLASS + " .cs-trigger {",
       "  cursor: not-allowed; opacity: .5; pointer-events: none;",
       "}",
