@@ -704,7 +704,13 @@
       return;
     }
     _autoInitRetries = 0;
-    var variant = window.innerWidth < 768 ? "mobile" : window.innerWidth < 1280 ? "tablet" : "pc";
+    var variant = window.DeviceUtils
+      ? window.DeviceUtils.getDeviceType()
+      : window.innerWidth < 768
+        ? "mobile"
+        : window.innerWidth < 1280
+          ? "tablet"
+          : "pc";
     init(variant);
   }
 

@@ -11,19 +11,27 @@
       var f=location.pathname.split("/").pop();
       if(!f||!f.match(/.html$/)){
         // 目录 URL — 直接跳转到对应设备文件
+        console.debug("[device-debug] dir URL, calling doRedirect",{f:f,path:location.pathname});
         doRedirect();
         return;
       }
       if(f.match(/^index-(pc|mobile|tablet).html$/))return;
       function doRedirect(){
-        var mq767=window.matchMedia("(max-width:767px)");
-        var mq1279=window.matchMedia("(max-width:1279px)");
-        var e=mq767.matches?"index-mobile.html":mq1279.matches?"index-tablet.html":"index-pc.html";
-        if(f===e)return;
-        location.href=location.pathname.replace(/[^\/]*.html$/,"")+e;
+        var mq = window.matchMedia;
+        var isTouch = mq && mq("(pointer:coarse)").matches;
+        var isMb = mq("(max-width:767px)").matches;
+        var isTb = mq("(min-width:768px) and (max-width:1023px)").matches;
+        var isPc = mq("(min-width:1024px)").matches;
+        if (isTouch && !isPc) { isMb = true; isTb = false; }
+        var e = isPc ? "index-pc.html" : isTb ? "index-tablet.html" : "index-mobile.html";
+        console.debug("[device-debug] doRedirect",{f:f,e:e,mobile:isMb,tablet:isTb,pc:isPc,innerW:window.innerWidth,isTouch:isTouch});
+        var e=vw<768?"index-mobile.html":vw<1280?"index-tablet.html":"index-pc.html";
+        if(f===e){console.debug("[device-debug] skip, already on correct version");return;}
+        var newUrl=location.pathname.replace(/[^\/]*.html$/,"")+e;
+        console.debug("[device-debug] redirecting to",newUrl);
+        location.href=newUrl;
       }
-      window.addEventListener("DOMContentLoaded",doRedirect);
-      setTimeout(doRedirect,100);
+      doRedirect();
     })();
     </script>
 <meta charset="utf-8" /> <meta name="description" content="YuKoLi 食堂设备与运营方案 — 现场烹饪+恒温分餐，服务学校/医院/机关食堂200-5000人，食品安全全程有记录。" /> <meta name="keywords" content="食堂设备,学校食堂,医院食堂,食堂运营,食品安全,食堂改造" /> <meta property="og:type" content="website" /> <meta property="og:url" content="https://www.kitchen.yukoli.com/applications/canteen/" /> <meta property="og:image" content="https://www.kitchen.yukoli.com/assets/images/logo/logo.webp" /> <meta property="og:title" content="YuKoLi | 食堂设备与运营方案" /> <meta property="og:description" content="现场烹饪+恒温分餐，服务学校/医院/机关食堂200-5000人，食品安全全程有记录。" /> <meta property="og:site_name" content="YuKoLi 智能厨具"/> <meta property="og:locale" content="zh_CN"/> <meta name="twitter:card" content="summary_large_image"/> <meta name="twitter:title" content="YuKoLi | 食堂设备与运营方案"/> <meta name="twitter:description" content="现场烹饪+恒温分餐，服务学校/医院/机关食堂200-5000人，食品安全全程有记录。"/> <meta name="twitter:image" content="https://www.kitchen.yukoli.com/assets/images/logo/logo.webp"/> <meta content="width=device-width, initial-scale=1.0" name="viewport" /> <title data-i18n="canteen_page_title">YuKoLi | Smart Kitchen Solutions for Canteens & Central Kitchens</title> <link rel="preload" href="/assets/fonts/local-fonts.css" as="style" /> <link rel="preload" href="/assets/css/styles.css" as="style" /> <link rel="preload" href="/assets/css/tailwind.css" as="style" /> <link href="/assets/fonts/local-fonts.css" rel="stylesheet" /> <link rel="stylesheet" href="/assets/css/styles.css" /> <link rel="stylesheet" href="/assets/css/tailwind.css" /> <link rel="stylesheet" href="/assets/css/z-index-system.css" /> <link rel="stylesheet" href="/assets/css/performance-optimizations.css" /> <script> (function () { if (localStorage.getItem("darkMode") ==="true") document.documentElement.classList.add("dark"); })(); </script> <link rel="stylesheet" href="/assets/css/skeleton.css" /> <link rel="icon" href="/assets/images/logo/logo.webp" type="image/webp" /> <title>YuKoLi 智慧食堂设备方案 | 学校医院机关食堂自动化</title> <script type="application/ld+json">

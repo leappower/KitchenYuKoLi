@@ -584,7 +584,9 @@
     // Note: navigator.js replaces <navigator> placeholder with <header> element,
     // so document.querySelector('navigator[data-variant]') always returns null.
     // We rely solely on innerWidth for tablet detection.
-    var isTablet = window.innerWidth >= 768 && window.innerWidth < 1280;
+    var isTablet = window.DeviceUtils
+      ? window.DeviceUtils.getDeviceType() === "tablet"
+      : window.innerWidth >= 768 && window.innerWidth < 1280;
 
     if (isTablet) {
       mobileHeaderEl.classList.remove("header-hidden");

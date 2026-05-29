@@ -12,19 +12,27 @@
       var f=location.pathname.split("/").pop();
       if(!f||!f.match(/.html$/)){
         // 目录 URL — 直接跳转到对应设备文件
+        console.debug("[device-debug] dir URL, calling doRedirect",{f:f,path:location.pathname});
         doRedirect();
         return;
       }
       if(f.match(/^index-(pc|mobile|tablet).html$/))return;
       function doRedirect(){
-        var mq767=window.matchMedia("(max-width:767px)");
-        var mq1279=window.matchMedia("(max-width:1279px)");
-        var e=mq767.matches?"index-mobile.html":mq1279.matches?"index-tablet.html":"index-pc.html";
-        if(f===e)return;
-        location.href=location.pathname.replace(/[^\/]*.html$/,"")+e;
+        var mq = window.matchMedia;
+        var isTouch = mq && mq("(pointer:coarse)").matches;
+        var isMb = mq("(max-width:767px)").matches;
+        var isTb = mq("(min-width:768px) and (max-width:1023px)").matches;
+        var isPc = mq("(min-width:1024px)").matches;
+        if (isTouch && !isPc) { isMb = true; isTb = false; }
+        var e = isPc ? "index-pc.html" : isTb ? "index-tablet.html" : "index-mobile.html";
+        console.debug("[device-debug] doRedirect",{f:f,e:e,mobile:isMb,tablet:isTb,pc:isPc,innerW:window.innerWidth,isTouch:isTouch});
+        var e=vw<768?"index-mobile.html":vw<1280?"index-tablet.html":"index-pc.html";
+        if(f===e){console.debug("[device-debug] skip, already on correct version");return;}
+        var newUrl=location.pathname.replace(/[^\/]*.html$/,"")+e;
+        console.debug("[device-debug] redirecting to",newUrl);
+        location.href=newUrl;
       }
-      window.addEventListener("DOMContentLoaded",doRedirect);
-      setTimeout(doRedirect,100);
+      doRedirect();
     })();
     </script>
 <meta charset="utf-8" /> <meta name="description" content="YuKoLi 云厨房外卖解决方案 — 专为外卖场景设计的高效率出餐系统，小空间大产能，支持多品牌共享厨房。" /> <meta name="keywords" content="云厨房,外卖,共享厨房,幽灵厨房,智能出餐" /> <meta property="og:type" content="website" /> <meta property="og:url" content="https://www.kitchen.yukoli.com/applications/cloud-kitchen/" /> <meta property="og:image" content="https://www.kitchen.yukoli.com/assets/images/logo/logo.webp" /> <meta property="og:title" content="YuKoLi | 云厨房/外卖智能厨房解决方案" /> <meta property="og:description" content="YuKoLi 云厨房外卖解决方案 — 专为外卖场景设计的高效率出餐系统，小空间大产能，支持多品牌共享厨房。" /> <meta property="og:site_name" content="YuKoLi 智能厨具" /> <meta property="og:locale" content="zh_CN" /> <meta name="twitter:card" content="summary_large_image" /> <meta name="twitter:title" content="YuKoLi | 云厨房/外卖智能厨房解决方案" /> <meta name="twitter:description" content="YuKoLi 云厨房外卖解决方案 — 专为外卖场景设计的高效率出餐系统，小空间大产能，支持多品牌共享厨房。" /> <meta name="twitter:image" content="https://www.kitchen.yukoli.com/assets/images/logo/logo.webp" /> <meta content="width=device-width, initial-scale=1.0" name="viewport" /> <title data-i18n="cloud-kitchen_page_title">YuKoLi | Cloud Kitchen/Delivery Smart Kitchen Solutions</title> <link rel="preload" href="/assets/fonts/local-fonts.css" as="style" /> <link rel="preload" href="/assets/css/styles.css" as="style" /> <link rel="preload" href="/assets/css/tailwind.css" as="style" /> <link href="/assets/fonts/local-fonts.css" rel="stylesheet" /> <link rel="stylesheet" href="/assets/css/styles.css" /> <link rel="stylesheet" href="/assets/css/tailwind.css" /> <link rel="stylesheet" href="/assets/css/z-index-system.css" /> <link rel="stylesheet" href="/assets/css/performance-optimizations.css" /> <script> (function () { if (localStorage.getItem("darkMode") ==="true") document.documentElement.classList.add("dark"); })(); </script> <link rel="stylesheet" href="/assets/css/skeleton.css" /> <link rel="icon" href="/assets/images/logo/logo.webp" type="image/webp" /> <title>YuKoLi 云厨房外卖厨房设备 | 外卖自动化烹饪方案</title> <script type="application/ld+json"> {"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement": [ {"@type":"ListItem","position": 1,"name":"Home","item":"https://www.kitchen.yukoli.com/home/" }, {"@type":"ListItem","position": 2,"name":"Applications","item":"https://www.kitchen.yukoli.com/applications/" }, {"@type":"ListItem","position": 3,"name":"云厨房","item":"https://www.kitchen.yukoli.com/applications/cloud-kitchen/" } ] } </script> </head> <body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 antialiased transition-colors duration-300 overflow-x-clip" > <navigator data-search="true" data-component="navigator" data-variant="tablet" data-active="applications" data-cta-text-key="nav_get_quote" data-cta-href="/quote" ></navigator> <main id="spa-content"> <div class="w-full">

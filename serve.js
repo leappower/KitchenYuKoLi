@@ -114,7 +114,7 @@ if (fs.existsSync(certPath) && fs.existsSync(keyPath)) {
     cert: fs.readFileSync(certPath),
     key: fs.readFileSync(keyPath),
   };
-  https.createServer(options, handler).listen(PORT, HOST, function () {
+  http.createServer(handler).listen(PORT, HOST, function () {
     console.log("✅ HTTPS server running on https://" + HOST + ":" + PORT);
     console.log("   SPA fallback: /products/{category}/{model}/ → /products/detail/index.html");
     console.log("   ⚠️ /products/detail/{model}/ deprecated — use /products/{cat}/{model}/");

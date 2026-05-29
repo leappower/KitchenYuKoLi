@@ -283,6 +283,7 @@
   // ─── Detect device type ──────────────────────────────────────
   function getDeviceType() {
     var w = window.innerWidth;
+    if (window.DeviceUtils && window.DeviceUtils.getDeviceType) return window.DeviceUtils.getDeviceType();
     if (w < 768) return "mobile";
     if (w < 1280) return "tablet";
     return "pc";

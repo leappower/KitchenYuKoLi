@@ -1055,6 +1055,7 @@
     if (declaredVariant !== "pc") return declaredVariant;
 
     var width = window.innerWidth;
+    if (window.DeviceUtils && window.DeviceUtils.getDeviceType) return window.DeviceUtils.getDeviceType();
     if (width < 768) return "mobile";
     if (width < 1024) return "tablet";
     return "pc";
@@ -1447,7 +1448,7 @@
     clearTimeout(resizeTimer);
     resizeTimer = setTimeout(function () {
       var newVariant;
-      if (window.innerWidth < 768) {
+      if (window.DeviceUtils ? window.DeviceUtils.getDeviceType() !== "pc" : window.innerWidth < 768) {
         newVariant = "mobile";
       } else if (window.innerWidth < 1024) {
         newVariant = "tablet";

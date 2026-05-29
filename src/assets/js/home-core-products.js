@@ -513,7 +513,13 @@
    */
   function _autoInit() {
     var path = window.location.pathname || "/";
-    var device = window.innerWidth < 768 ? "mobile" : window.innerWidth < 1280 ? "tablet" : "pc";
+    var device = window.DeviceUtils
+      ? window.DeviceUtils.getDeviceType()
+      : window.innerWidth < 768
+        ? "mobile"
+        : window.innerWidth < 1280
+          ? "tablet"
+          : "pc";
     if (path.indexOf("/home") !== -1) {
       var containerId =
         device === "mobile"

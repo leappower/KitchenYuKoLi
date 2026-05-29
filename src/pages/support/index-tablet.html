@@ -24,19 +24,27 @@
       var f=location.pathname.split("/").pop();
       if(!f||!f.match(/.html$/)){
         // 目录 URL — 直接跳转到对应设备文件
+        console.debug("[device-debug] dir URL, calling doRedirect",{f:f,path:location.pathname});
         doRedirect();
         return;
       }
       if(f.match(/^index-(pc|mobile|tablet).html$/))return;
       function doRedirect(){
-        var mq767=window.matchMedia("(max-width:767px)");
-        var mq1279=window.matchMedia("(max-width:1279px)");
-        var e=mq767.matches?"index-mobile.html":mq1279.matches?"index-tablet.html":"index-pc.html";
-        if(f===e)return;
-        location.href=location.pathname.replace(/[^\/]*.html$/,"")+e;
+        var mq = window.matchMedia;
+        var isTouch = mq && mq("(pointer:coarse)").matches;
+        var isMb = mq("(max-width:767px)").matches;
+        var isTb = mq("(min-width:768px) and (max-width:1023px)").matches;
+        var isPc = mq("(min-width:1024px)").matches;
+        if (isTouch && !isPc) { isMb = true; isTb = false; }
+        var e = isPc ? "index-pc.html" : isTb ? "index-tablet.html" : "index-mobile.html";
+        console.debug("[device-debug] doRedirect",{f:f,e:e,mobile:isMb,tablet:isTb,pc:isPc,innerW:window.innerWidth,isTouch:isTouch});
+        var e=vw<768?"index-mobile.html":vw<1280?"index-tablet.html":"index-pc.html";
+        if(f===e){console.debug("[device-debug] skip, already on correct version");return;}
+        var newUrl=location.pathname.replace(/[^\/]*.html$/,"")+e;
+        console.debug("[device-debug] redirecting to",newUrl);
+        location.href=newUrl;
       }
-      window.addEventListener("DOMContentLoaded",doRedirect);
-      setTimeout(doRedirect,100);
+      doRedirect();
     })();
     </script>
 <!-- ═══ End Responsive Redirect ═══ -->

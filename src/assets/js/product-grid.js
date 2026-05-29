@@ -168,6 +168,7 @@
 
   function getDeviceType() {
     var w = window.innerWidth;
+    if (window.DeviceUtils && window.DeviceUtils.getDeviceType) return window.DeviceUtils.getDeviceType();
     if (w < 768) return "mobile";
     if (w < 1280) return "tablet";
     return "pc";
@@ -575,31 +576,29 @@
   }
 
   var SUB_CAT_TO_EN_SLUG = {
-  "切片机": "slicer",
-  "切肉机": "meat_slicer",
-  "切菜机": "vegetable_cutter",
-  "刨丝机": "shredder",
-  "流水化自动机": "auto_flow_machine",
-  "肉卷机": "meat_roll_slicer",
-  "油炸炉": "deep_fryer",
-  "锅贴机": "potsticker_machine",
-  "揭盖式洗碗机": "lift_dishwasher",
-  "长龙洗碗机": "conveyor_dishwasher",
-  "智能蒸饭机": "smart_steamer",
-  "自动漂烫/焯水/油炸机": "blanch_fry_machine",
-  "卤煮炉": "stewing_stove",
-  "压力锅": "pressure_cooker",
-  "搅拌炒锅/炖烩机": "stirring_pot_braiser",
-  "搅拌炒锅炖烩机": "stirring_pot_braiser",
-  "汤锅": "soup_pot",
-  "煮面炉": "noodle_cooker",
-  "煲仔炉": "clay_pot_stove",
-  "团餐滚筒炒菜机": "bulk_drum_cooker",
-  "搅拌炒菜机": "stirring_cooker",
-  "滚筒炒菜机": "drum_cooker"
-};
-
-
+    切片机: "slicer",
+    切肉机: "meat_slicer",
+    切菜机: "vegetable_cutter",
+    刨丝机: "shredder",
+    流水化自动机: "auto_flow_machine",
+    肉卷机: "meat_roll_slicer",
+    油炸炉: "deep_fryer",
+    锅贴机: "potsticker_machine",
+    揭盖式洗碗机: "lift_dishwasher",
+    长龙洗碗机: "conveyor_dishwasher",
+    智能蒸饭机: "smart_steamer",
+    "自动漂烫/焯水/油炸机": "blanch_fry_machine",
+    卤煮炉: "stewing_stove",
+    压力锅: "pressure_cooker",
+    "搅拌炒锅/炖烩机": "stirring_pot_braiser",
+    搅拌炒锅炖烩机: "stirring_pot_braiser",
+    汤锅: "soup_pot",
+    煮面炉: "noodle_cooker",
+    煲仔炉: "clay_pot_stove",
+    团餐滚筒炒菜机: "bulk_drum_cooker",
+    搅拌炒菜机: "stirring_cooker",
+    滚筒炒菜机: "drum_cooker",
+  };
 
   function getSubCatI18nKey(subCatRaw, category) {
     var slug = CATEGORY_NAME_TO_SLUG[category] || "other";
@@ -1021,7 +1020,7 @@
 
     // Build tab buttons
     var allTabs = [];
-    var isMobile = window.innerWidth < 768;
+    var isMobile = window.DeviceUtils ? window.DeviceUtils.getDeviceType() === "mobile" : window.innerWidth < 768;
     var tabSizeClass = isMobile ? "px-3 py-1.5 text-xs" : "px-4 py-2 text-sm";
 
     // "全部产品" button
@@ -1059,7 +1058,7 @@
     // Dynamic visible tab count: measures actual tab widths against container
     var dynamicMax = Infinity;
     function calcDynamicMax() {
-      if (window.innerWidth >= 1280) {
+      if (window.DeviceUtils ? window.DeviceUtils.getDeviceType() === "pc" : window.innerWidth >= 1280) {
         dynamicMax = Infinity;
         return;
       }
@@ -1100,7 +1099,7 @@
     var isExpanded = false;
 
     function getVisibleCount() {
-      if (window.innerWidth >= 1280) return Infinity;
+      if (window.DeviceUtils ? window.DeviceUtils.getDeviceType() === "pc" : window.innerWidth >= 1280) return Infinity;
       return dynamicMax;
     }
 
