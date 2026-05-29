@@ -1076,6 +1076,13 @@ window.PRODUCT_DATA_TABLE = [
     model: "DLB-GQ36J/9",
     tier: "智能",
     name: "落地式360智能电磁炒菜 机（触屏800）",
+    images: [
+        {
+          filePath: "/assets/images/products/DLB-GQ36J-1.webp",
+          isPrimary: true,
+          isHires: false,
+        },
+      ],
     nameEn: "Floor-standing 360 Intelligent Induction Stir-Fry Machine (Touch Screen 800)",
     category: "翻炒系列",
     subCategory: "滚筒炒菜机",
@@ -5700,6 +5707,13 @@ window.PRODUCT_DATA_TABLE = [
   {
     model: "DLB-GQ36J",
     name: "落地式360智能电磁炒菜 机（触屏800）",
+    images: [
+        {
+          filePath: "/assets/images/products/DLB-GQ36J-1.webp",
+          isPrimary: true,
+          isHires: false,
+        },
+      ],
     nameEn: "Floor-standing 360 Induction Cooker (Touch 800)",
     tier: "智能",
     category: "翻炒系列",
