@@ -8,7 +8,9 @@ pre-commit:
     lint-js:
       glob: "src/assets/js/**/*.js"
       run: npx eslint {staged_files}
-      # Don't auto-fix in pre-commit — force agent to write clean code
+    build-ssg-regex:
+      glob: "scripts/build-ssg.js"
+      run: node scripts/lint-build-ssg-regex.js
     lint-css:
       glob: "src/assets/css/**/*.css"
       run: npx stylelint {staged_files} --ignore-pattern "tailwind.css" --ignore-pattern "tailwind-entry.css"
@@ -18,7 +20,6 @@ pre-commit:
     no-debug:
       glob: "src/**/*.{js,html}"
       run: |
-        # Find console.log/debug/table lines, exclude those guarded by __DEVELOPMENT__
         hits=$(grep -nE 'console\.(log|debug|table)\s*\(' {staged_files} 2>/dev/null | grep -v '^\s*//' || true)
         if [ -n "$hits" ]; then
           blocked=$(echo "$hits" | while IFS= read -r line; do
@@ -35,7 +36,6 @@ pre-commit:
           if [ -n "$blocked" ]; then
             echo "$blocked"
             echo "❌ 发现 console.log/debug/table 残留！请清理后再提交。"
-            echo "   如果确实需要，用条件包裹: if (__DEVELOPMENT__) console.log(...)"
             exit 1
           fi
         fi
@@ -71,12 +71,7 @@ pre-commit:
           fi
         done
         if [ "$found" -ne 0 ]; then
-          echo ""
           echo "请解决 git 冲突后再提交。"
-          echo "  快速修复: 取当前分支版本"
-          echo "    git checkout --ours -- <file>"
-          echo "  快速修复: 取舍入分支版本"
-          echo "    git checkout --theirs -- <file>"
           exit 1
         fi
 
