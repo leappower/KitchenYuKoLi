@@ -4,6 +4,10 @@ on:
   push:
     branches: [publish]
 
+concurrency:
+  group: deploy
+  cancel-in-progress: true
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
@@ -11,7 +15,6 @@ jobs:
       contents: write
     steps:
       - uses: actions/checkout@v4
-
       - uses: actions/setup-node@v4
         with:
           node-version: 20
@@ -19,31 +22,19 @@ jobs:
 
       - run: npm ci
 
-      - run: npx tailwindcss -i src/assets/css/tailwind-entry.css -o src/assets/css/tailwind.css --minify
-
-      - name: Build SSG
-        run: |
-          export I18N_CACHE_TS=$(date +%s)
-          export VERSION=$(date +%s000)
-          bash build.sh
-
-      - name: Generate SPA product routes
-        run: node scripts/generate-spa-product-routes.js
-
-      - name: Copy extra root files
-        run: |
-          cp CNAME dist/
-          cp sw.js dist/
-          touch dist/.nojekyll
+      # build.sh 全权负责构建：tailwind、webpack、SSG、版本号、SPA路由生成、静态资源复制
+      - name: Build
+        run: bash build.sh
 
       - name: Deploy to gh-pages
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./dist
+          force_orphan: true
 
       - name: Purge Cloudflare cache
-        if: env.CF_ZONE != '' && env.CF_TOKEN != ''
+        if: always()
         env:
           CF_ZONE: ${{ secrets.CF_ZONE }}
           CF_TOKEN: ${{ secrets.CF_TOKEN }}
