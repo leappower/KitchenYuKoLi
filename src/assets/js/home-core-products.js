@@ -538,9 +538,14 @@
   };
 
   // Primary: listen for spa:load (SPA router re-renders content)
-  _spaOn(document, "spa:load", function () {
-    _autoInit();
-  });
+  // 同时在 document 和 window 上监听，防止 SPA 切换时 AbortController 被动触发
+  function _onSpaLoad() {
+    requestAnimationFrame(function () {
+      _autoInit();
+    });
+  }
+  window.addEventListener("spa:load", _onSpaLoad);
+  document.addEventListener("spa:load", _onSpaLoad);
   // Fallback: if SPA router is not active, use DOMContentLoaded
   if (document.readyState === "loading") {
     document.addEventListener("DOMContentLoaded", function () {
