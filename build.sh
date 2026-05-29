@@ -4,9 +4,20 @@
 #   (no arg) = production build (default)
 #   dev      = development build (no version bump)
 #
-# 不再同步 src/pages/ → dist/pages/。
-# 唯一页面来源 = build-ssg.js 生成到 dist/<route>/。
-# webpack 输出 dist/ 作为中转，SSG 读它然后输出 dist/<route>/。
+# ════════════════════════════════════════════════════════════════
+# 职责
+# ════════════════════════════════════════════════════════════════
+# - Tailwind CSS 构建
+# - Webpack 打包
+# - 静态资源复制（JS/CSS/fonts/lang/images/video/pdf）
+# - i18n 缓存版本刷新
+# - 搜索索引生成
+# - 设备重定向脚本注入
+# - SSG（Static Site Generation）：路由 index.html 生成
+# - SPA 产品路由 index.html 生成
+# - Sitemap 生成
+# - 版本号注入（HTML + CSS）
+# - 质量验证
 
 set -euo pipefail
 
@@ -17,7 +28,12 @@ echo "🏗️  Building ($BUILD_MODE)..."
 
 SRC="src"
 DIST="dist"
-VERSION="v=$(date +%s%3N)"
+
+# ─── 版本号 ────────────────────────────────────────────────────
+# 使用毫秒时间戳确保每次构建唯一，触发 CDN/浏览器缓存失效
+VERSION=$(date +%s%3N)
+VERSION_TAG="v=$VERSION"
+echo "   Version: $VERSION_TAG"
 
 # ─── Pre-flight checks ───────────────────────────────────────────
 INDEX_SIZE=$(wc -c < "$SRC/index.html")
@@ -29,7 +45,6 @@ fi
 
 # ─── 0. Bump i18n cache BEFORE webpack ──────────────────────────
 I18N_CACHE_TS=$(date +%s)
-I18N_CACHE_TS=${I18N_CACHE_TS:-$(date +%s)}  # fallback if empty
 python3 -c "
 import re,os
 fp = os.path.expandvars('$SRC/assets/js/translations.js')
@@ -39,7 +54,7 @@ with open(fp, 'w') as f: f.write(c)
 "
 echo "🔄 i18n cache version → $I18N_CACHE_TS"
 
-# ─── 1. Clean dist (webpack output.clean: true also cleans, but explicit) ──
+# ─── 1. Clean dist ─────────────────────────────────────────────
 rm -rf "$DIST"
 
 # ─── 2. Tailwind CSS + Webpack ──────────────────────────────────
@@ -51,8 +66,7 @@ else
   npx webpack --mode=production 2>&1 | tail -3 || echo "  ⚠️  Webpack had non-fatal errors (html-minifier)"
 fi
 
-# ─── 3. Assets (JS, CSS, fonts, lang, images, video) ────────────
-# Assets don't go through webpack, copy directly
+# ─── 3. Assets (JS, CSS, fonts, lang, images, video, pdf) ──────
 echo "📦 Syncing assets..."
 sync_assets() {
   local src_dir="$1"
@@ -75,18 +89,21 @@ sync_assets "images"       "*"
 sync_assets "video"        "*"
 sync_assets "pdf"          "*.pdf"
 
-# 排除 aboutus.mp4（已弃用，65MB）
+# 排除 aboutus.mp4 (已弃用，65MB)
 rm -f "$DIST/assets/video/aboutus.mp4"
 
-# ─── 4. SPA shell (index.html + sw.js + CNAME + 404.html + robots.txt) ───
+# ─── 4. Root files ──────────────────────────────────────────────
+# CNAME、.nojekyll 等供 GitHub Pages + Cloudflare 使用
 cp "$SRC/index.html" "$DIST/index.html"
-[ -f "$SRC/sw.js" ] && cp "$SRC/sw.js" "$DIST/sw.js"
-[ -f "$SRC/CNAME" ] && cp "$SRC/CNAME" "$DIST/CNAME"
-[ -f "$SRC/404.html" ] && cp "$SRC/404.html" "$DIST/404.html"
-[ -f "$SRC/robots.txt" ] && cp "$SRC/robots.txt" "$DIST/robots.txt"
+[ -f "$SRC/sw.js" ]        && cp "$SRC/sw.js"        "$DIST/sw.js"
+[ -f "$SRC/CNAME" ]        && cp "$SRC/CNAME"        "$DIST/CNAME"
+[ -f "../CNAME" ]          && cp "../CNAME"          "$DIST/CNAME"  # 兼容根目录
+[ -f "$SRC/404.html" ]     && cp "$SRC/404.html"     "$DIST/404.html"
+[ -f "$SRC/robots.txt" ]   && cp "$SRC/robots.txt"   "$DIST/robots.txt"
 [ -f "$SRC/manifest.json" ] && cp "$SRC/manifest.json" "$DIST/manifest.json"
+touch "$DIST/.nojekyll"
 
-# ─── 7. Search index ──────────────────────────────────
+# ─── Search index ──────────────────────────────────────────────
 node scripts/export-products-static.js 2>/dev/null || echo "  ⚠️  Server unavailable, using cached products.json"
 node scripts/generate-search-index.js 2>/dev/null || echo "  ⚠️  Failed to generate search-index.json"
 
@@ -94,26 +111,43 @@ node scripts/generate-search-index.js 2>/dev/null || echo "  ⚠️  Failed to g
 echo "🔄 Injecting device redirect scripts into all pages..."
 node scripts/inject-device-redirect.js 2>&1 | tail -5
 
-# ─── 9. SSG: build route index.html + copy device files ──────────
-# SSG 读取 webpack 的输出 dist/pages/ 然后生成 dist/<route>/
-# SSG also copies Swup + plugins from node_modules and fresh JS from src
+# ─── 9. SSG: build route index.html + copy device files ─────────
 node scripts/build-ssg.js 2>&1 | grep -E 'Step|✓|✅|WARN|ERROR' || true
 
-# ─── Sitemap (after SSG, needs dist to be populated) ─────────
+# ─── SPA product routes (SSG 之后，确保 dist 已填充) ──────────
+echo "🔄 Generating SPA product routes..."
+node scripts/generate-spa-product-routes.js 2>&1 | tail -3 || echo "  ⚠️  SPA route generation had non-fatal errors"
+
+# ─── Sitemap ───────────────────────────────────────────────────
 node scripts/generate-sitemap.js 2>/dev/null || echo "  ⚠️  Failed to generate sitemap.xml"
 
-# ─── 5. Version bump (production only, after SSG) ───────────────
+# ─── 5. Version bump (production only) ──────────────────────────
 if [ "$BUILD_MODE" != "dev" ]; then
-  echo "🔄 Bumping JS version to $VERSION..."
-DIST="$DIST" VERSION="$VERSION" python3 scripts/bump-version.py
+  echo "🔄 Bumping version to $VERSION_TAG..."
+  python3 -c "
+import os, re
+root = os.environ.get('DIST', 'dist')
+version = '$VERSION'
+for r, d, fs in os.walk(root):
+    for f in fs:
+        fp = os.path.join(r, f)
+        if not (f.endswith('.html') or f.endswith('.css')):
+            continue
+        with open(fp) as fh:
+            c = fh.read()
+        nc = re.sub(r'\?v=[a-zA-Z0-9._-]*', '?v=' + version, c)
+        if nc != c:
+            with open(fp, 'w') as fh:
+                fh.write(nc)
+"
+  echo "  ✅ Version bump complete"
 fi
 
-# ─── 8.5. Inject device redirect scripts into SSG-generated entries ──
-# SSG 生成的 dist/<slug>/index.html 需要注入自包含 redirect 脚本
+# ─── 8.5. Inject device redirect (post-SSG) ─────────────────────
 echo "🔄 Injecting redirect into SSG-generated entries..."
 node scripts/inject-device-redirect.js 2>&1 | tail -3
 
-# ─── 9. Validate case slug alias directories ──────────────
+# ─── Validate case slug alias directories ─────────────────────
 echo "🔍 Validating case slug alias directories..."
 SLUG_MISSING=0
 for slug in manila-lunchbox-studio-2025 jakarta-catering-hub-2025 hcmc-cloud-kitchen-compact bangkok-chain-8-stores kl-canteen-2000-meals cebu-small-resto-payback surabaya-central-automation hanoi-street-food-modern; do
@@ -124,19 +158,20 @@ for slug in manila-lunchbox-studio-2025 jakarta-catering-hub-2025 hcmc-cloud-kit
 done
 if [ "$SLUG_MISSING" -ne 0 ]; then
   echo "❌ ERROR: Case slug alias directories missing — SSG step likely failed."
-  echo "   Run 'node scripts/build-ssg.js' manually to debug."
   exit 1
 fi
 echo "  ✅ All 8 slug alias directories present"
 
-# ─── 9.5 Inject dropdown scripts into pages that lack them ──
+# ─── Inject dropdown scripts ──────────────────────────────────
 echo "🔄 Injecting dropdown scripts into pages that lack them..."
 node scripts/inject-dropdown-scripts.js 2>&1 | tail -1
 
-# ─── 10. Fix permissions ────────────────────────────────────
+# ─── Fix permissions ──────────────────────────────────────────
 chmod -R a+rX "$DIST" 2>/dev/null || true
 
+# ─── Summary ────────────────────────────────────────────────────
 FILES=$(find "$DIST" -type f | wc -l | tr -d ' ')
 echo ""
 echo "✅ Build complete: $FILES files in dist/"
-echo "   Version: $VERSION"
+echo "   Version: $VERSION_TAG"
+echo "   i18n cache: $I18N_CACHE_TS"
