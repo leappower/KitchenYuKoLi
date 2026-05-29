@@ -95,8 +95,16 @@ rm -f "$DIST/assets/video/aboutus.mp4"
 # ─── 4. Root files ──────────────────────────────────────────────
 # CNAME、.nojekyll 等供 GitHub Pages + Cloudflare 使用
 cp "$SRC/index.html" "$DIST/index.html"
-[ -f "$SRC/sw.js" ]        && cp "$SRC/sw.js"        "$DIST/sw.js"
-[ -f "sw.js" ]             && cp "sw.js"             "$DIST/sw.js"
+# sw.js 优先从根目录复制，其次 src/；复制后注入构建版本号
+SW_SRC=""
+[ -f "sw.js" ]      && SW_SRC="sw.js"
+[ -z "$SW_SRC" ] && [ -f "$SRC/sw.js" ] && SW_SRC="$SRC/sw.js"
+if [ -n "$SW_SRC" ]; then
+  cp "$SW_SRC" "$DIST/sw.js"
+  # 注入版本号到 sw.js，让浏览器感知 SW 更新
+  sed -i '' "s/var SW_VERSION = \"[^\"]*\";/var SW_VERSION = \"v$VERSION\";/" "$DIST/sw.js"
+  echo "  📦 sw.js → v$VERSION"
+fi
 [ -f "CNAME" ]             && cp "CNAME"             "$DIST/CNAME"
 [ -f "$SRC/404.html" ]     && cp "$SRC/404.html"     "$DIST/404.html"
 [ -f "$SRC/robots.txt" ]   && cp "$SRC/robots.txt"   "$DIST/robots.txt"
