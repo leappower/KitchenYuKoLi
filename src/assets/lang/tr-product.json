@@ -607,5 +607,9 @@
   "product_subcat_cutting_meat_slicer": "Et dilimleme makinesi",
   "product_subcat_cutting_meat_roll_slicer": "Et rulo dilimleme makinesi",
   "product_subcat_cutting_shredder": "Rende makinesi",
-  "product_subcat_cutting_vegetable_cutter": "Sebze doğrama makinesi"
+  "product_subcat_cutting_vegetable_cutter": "Sebze doğrama makinesi",
+  "home_show_more": "",
+  "tier_basic": "Basic",
+  "tier_smart": "Smart",
+  "tier_full_smart": "Full Smart"
 }

@@ -609,8 +609,8 @@
     var desc = esc(p.description || p.card_desc || p.highlights || "");
     var img = esc(p._imageUrl);
     var subCatRaw = p.subCategory || cat;
-    var subCat = esc(subCatRaw);
     var subCatI18nKey = getSubCatI18nKey(subCatRaw, cat);
+    var subCat = esc(tl(subCatI18nKey, subCatRaw));
     var subCatDataI18n = ' data-i18n="' + esc(subCatI18nKey) + '"';
     var specs = [];
     if (p.power) specs.push(esc(p.power));
@@ -696,8 +696,8 @@
     var desc = esc(p.description || p.card_desc || "");
     var img = esc(p._imageUrl);
     var subCatRaw = p.subCategory || cat;
-    var subCat = esc(subCatRaw);
     var subCatI18nKey = getSubCatI18nKey(subCatRaw, cat);
+    var subCat = esc(tl(subCatI18nKey, subCatRaw));
     var subCatDataI18n = ' data-i18n="' + esc(subCatI18nKey) + '"';
     var badge = "";
     if (p.badge) {
@@ -1236,6 +1236,11 @@
 
   // product-data-ready: re-render if data arrives late (e.g. after dynamic import)
   window.addEventListener("product-data-ready", function () {
+    autoRender();
+  });
+
+  // productTranslationsLoaded: re-render when translations JSON finishes loading
+  document.addEventListener("productTranslationsLoaded", function () {
     autoRender();
   });
 

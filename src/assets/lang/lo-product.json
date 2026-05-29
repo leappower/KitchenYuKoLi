@@ -607,5 +607,9 @@
   "product_subcat_cutting_meat_slicer": "ເຄື່ອງຕັດຊີ້ນ",
   "product_subcat_cutting_meat_roll_slicer": "ເຄື່ອງຕັດເນື້ອມ້ວນ",
   "product_subcat_cutting_shredder": "ເຄື່ອງຂູດເສັ້ນ",
-  "product_subcat_cutting_vegetable_cutter": "ເຄື່ອງຕັດຜັກ"
+  "product_subcat_cutting_vegetable_cutter": "ເຄື່ອງຕັດຜັກ",
+  "home_show_more": "",
+  "tier_basic": "Basic",
+  "tier_smart": "Smart",
+  "tier_full_smart": "Full Smart"
 }

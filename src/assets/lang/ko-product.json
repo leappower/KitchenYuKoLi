@@ -607,5 +607,9 @@
   "product_subcat_cutting_meat_slicer": "고기 절단기",
   "product_subcat_cutting_meat_roll_slicer": "고기 롤 절단기",
   "product_subcat_cutting_shredder": "채 써는 기계",
-  "product_subcat_cutting_vegetable_cutter": "야채 절단기"
+  "product_subcat_cutting_vegetable_cutter": "야채 절단기",
+  "home_show_more": "",
+  "tier_basic": "Basic",
+  "tier_smart": "Smart",
+  "tier_full_smart": "Full Smart"
 }

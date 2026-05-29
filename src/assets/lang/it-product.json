@@ -607,5 +607,9 @@
   "product_subcat_cutting_meat_slicer": "Affettatrice per carne",
   "product_subcat_cutting_meat_roll_slicer": "Affettatrice per rotoli di carne",
   "product_subcat_cutting_shredder": "Trituratrice / Grattugia",
-  "product_subcat_cutting_vegetable_cutter": "Tagliaverdure"
+  "product_subcat_cutting_vegetable_cutter": "Tagliaverdure",
+  "home_show_more": "",
+  "tier_basic": "Basic",
+  "tier_smart": "Smart",
+  "tier_full_smart": "Full Smart"
 }

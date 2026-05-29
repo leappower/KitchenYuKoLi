@@ -607,5 +607,9 @@
   "product_subcat_cutting_meat_slicer": "מכונת חיתוך בשר",
   "product_subcat_cutting_meat_roll_slicer": "מכונת פריסת גלילי בשר",
   "product_subcat_cutting_shredder": "מכונת גריסה",
-  "product_subcat_cutting_vegetable_cutter": "מכונת חיתוך ירקות"
+  "product_subcat_cutting_vegetable_cutter": "מכונת חיתוך ירקות",
+  "home_show_more": "",
+  "tier_basic": "Basic",
+  "tier_smart": "Smart",
+  "tier_full_smart": "Full Smart"
 }

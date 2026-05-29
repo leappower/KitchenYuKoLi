@@ -607,5 +607,9 @@
   "product_subcat_cutting_meat_slicer": "Fatiadora de carne",
   "product_subcat_cutting_meat_roll_slicer": "Fatiadora de rolo de carne",
   "product_subcat_cutting_shredder": "Ralador",
-  "product_subcat_cutting_vegetable_cutter": "Cortador de legumes"
+  "product_subcat_cutting_vegetable_cutter": "Cortador de legumes",
+  "home_show_more": "",
+  "tier_basic": "Basic",
+  "tier_smart": "Smart",
+  "tier_full_smart": "Full Smart"
 }

@@ -585,6 +585,11 @@
   function _onLangChange() {
     _autoInit();
   }
+  // Init on SPA reload: same as spa:load
   document.addEventListener("languageChanged", _onLangChange);
   window.addEventListener("languageChanged", _onLangChange);
+  // Re-render when translations JSON finishes loading
+  document.addEventListener("productTranslationsLoaded", function () {
+    _autoInit();
+  });
 })();

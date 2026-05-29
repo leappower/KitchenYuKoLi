@@ -607,5 +607,9 @@
   "product_subcat_cutting_meat_slicer": "Cortadora de carne",
   "product_subcat_cutting_meat_roll_slicer": "Cortadora de rollos de carne",
   "product_subcat_cutting_shredder": "Máquina para rallar",
-  "product_subcat_cutting_vegetable_cutter": "Cortadora de verduras"
+  "product_subcat_cutting_vegetable_cutter": "Cortadora de verduras",
+  "home_show_more": "",
+  "tier_basic": "Basic",
+  "tier_smart": "Smart",
+  "tier_full_smart": "Full Smart"
 }

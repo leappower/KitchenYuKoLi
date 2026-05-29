@@ -190,8 +190,12 @@
     function reloadPageScripts(newDoc) {
       if (!newDoc) return;
       for (var d = 0; d < _dynamicScripts.length; d++) {
-        if (_dynamicScripts[d].parentNode) {
-          _dynamicScripts[d].parentNode.removeChild(_dynamicScripts[d]);
+        try {
+          if (_dynamicScripts[d].parentNode) {
+            _dynamicScripts[d].parentNode.removeChild(_dynamicScripts[d]);
+          }
+        } catch (e) {
+          // ignore: removeChild may fail if parent was modified by SPA
         }
       }
       _dynamicScripts = [];

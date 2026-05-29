@@ -607,5 +607,9 @@
   "product_subcat_cutting_meat_slicer": "切肉機",
   "product_subcat_cutting_meat_roll_slicer": "肉捲機",
   "product_subcat_cutting_shredder": "刨絲機",
-  "product_subcat_cutting_vegetable_cutter": "切菜機"
+  "product_subcat_cutting_vegetable_cutter": "切菜機",
+  "home_show_more": "",
+  "tier_basic": "Basic",
+  "tier_smart": "Smart",
+  "tier_full_smart": "Full Smart"
 }

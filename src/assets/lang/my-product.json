@@ -607,5 +607,9 @@
   "product_subcat_cutting_meat_slicer": "အသားလှီးစက်",
   "product_subcat_cutting_meat_roll_slicer": "အသားလိပ်စက်",
   "product_subcat_cutting_shredder": "ခြစ်စက်",
-  "product_subcat_cutting_vegetable_cutter": "ဟင်းသီးဟင်းရွက်လှီးစက်"
+  "product_subcat_cutting_vegetable_cutter": "ဟင်းသီးဟင်းရွက်လှီးစက်",
+  "home_show_more": "",
+  "tier_basic": "Basic",
+  "tier_smart": "Smart",
+  "tier_full_smart": "Full Smart"
 }

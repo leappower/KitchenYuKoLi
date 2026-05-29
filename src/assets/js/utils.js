@@ -161,6 +161,17 @@ window.getProductField = function getProductField(product, field) {
   if (field === "usage" && product.usageEn) return product.usageEn;
   if (field === "material" && product.materialEn) return product.materialEn;
   if (field === "sub_category" && product.subCategoryEn) return product.subCategoryEn;
+  // Try tier/category from generic i18n keys (tier_basic, tier_smart, tier_full_smart)
+  if (field === "tier" && product.tier) {
+    var tierMap = {"基础": "basic", "智能": "smart", "全智能": "full_smart"};
+    var tierSlug = tierMap[product.tier];
+    if (tierSlug) {
+      var tierVal = window.uiText ? window.uiText("tier_" + tierSlug, "") : "";
+      if (tierVal) return tierVal;
+    }
+  }
+  // For non-Chinese, if no translation available, return empty rather than Chinese
+  if (lang !== "zh-CN" && lang !== "zh") return "";
   return product[field] || "";
 };
 

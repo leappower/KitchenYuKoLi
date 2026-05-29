@@ -607,5 +607,9 @@
   "product_subcat_cutting_meat_slicer": "Fleischschneidemaschine",
   "product_subcat_cutting_meat_roll_slicer": "Fleischrollenschneider",
   "product_subcat_cutting_shredder": "Hobelmaschine",
-  "product_subcat_cutting_vegetable_cutter": "Gemüseschneider"
+  "product_subcat_cutting_vegetable_cutter": "Gemüseschneider",
+  "home_show_more": "",
+  "tier_basic": "Basic",
+  "tier_smart": "Smart",
+  "tier_full_smart": "Full Smart"
 }

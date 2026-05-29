@@ -607,5 +607,9 @@
   "product_subcat_cutting_meat_slicer": "Vleessnijmachine",
   "product_subcat_cutting_meat_roll_slicer": "Vleesrolsnijmachine",
   "product_subcat_cutting_shredder": "Versnipperaar",
-  "product_subcat_cutting_vegetable_cutter": "Groentesnijmachine"
+  "product_subcat_cutting_vegetable_cutter": "Groentesnijmachine",
+  "home_show_more": "",
+  "tier_basic": "Basic",
+  "tier_smart": "Smart",
+  "tier_full_smart": "Full Smart"
 }

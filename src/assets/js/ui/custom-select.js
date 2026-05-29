@@ -1098,6 +1098,10 @@
   }
   window.addEventListener("languageChanged", _onLangChanged);
   document.addEventListener("languageChanged", _onLangChanged);
+  // 翻译文件加载完成后刷新显示文本
+  document.addEventListener("productTranslationsLoaded", function () {
+    _refreshDisplayTexts();
+  });
 
   /* ── translationsApplied: re-refresh after translation system applies texts ── */
   window.addEventListener("translationsApplied", _refreshDisplayTexts);

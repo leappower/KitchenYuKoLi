@@ -327,7 +327,7 @@
           '<span class="material-symbols-outlined text-primary">recommend</span> ' +
           tl("detail_recommended", "推荐产品") +
           "</h2>" +
-          '<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6" id="related-products"></div>' +
+          '<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6" id="related-products" data-i18n-container></div>' +
           "</div>";
         // Find the container's parent to append
         var target = ce.parentElement || container;
@@ -340,6 +340,15 @@
     // 只在产品详情页执行（路径匹配 /products/{cat}/{model}/ ）
     var _pdpPath = window.location.pathname;
     if (!/^\/products\/[^/]+\/[^/]+\/$/.test(_pdpPath)) return;
+    // 确保 PRODUCT_DATA_TABLE 就绪
+    if (!window.PRODUCT_DATA_TABLE || !window.PRODUCT_DATA_TABLE.length) {
+      if (!renderPDP._pdtRetry) renderPDP._pdtRetry = 0;
+      if (renderPDP._pdtRetry < 5) {
+        renderPDP._pdtRetry++;
+        setTimeout(renderPDP, 200);
+      }
+      return;
+    }
     if (renderPDP._pending) return;
     renderPDP._pending = true;
     requestAnimationFrame(function () {
@@ -612,7 +621,7 @@
 
     var tier = product.tier
       ? '<span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-bold bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-300">' +
-        esc(product.tier) +
+        esc(getProductField(product, "tier")) +
         "</span>"
       : "";
     var badge = product.badge
@@ -870,9 +879,18 @@
       辅助系列: "nav_products_other",
     };
     var i18nKey = CATEGORY_I18N_MAP[cat];
-    if (i18nKey && typeof window.t === "function") {
-      var translated = window.t(i18nKey);
-      if (translated && translated !== i18nKey) return translated;
+    // fallback: 通过 model 从 MODEL_TO_SLUG 反查标准分类名
+    if (!i18nKey && product.model && window.MODEL_TO_SLUG) {
+      var slug = window.MODEL_TO_SLUG[product.model];
+      if (slug) {
+        var slugToName = { stirfry: "nav_products_stirfry", cutting: "nav_products_cutting", frying: "nav_products_frying", stewing: "nav_products_stewing", steaming: "nav_products_steaming", other: "nav_products_other" };
+        var nameKey = slugToName[slug];
+        if (nameKey) i18nKey = nameKey;
+      }
+    }
+    if (i18nKey) {
+      var translated = tl(i18nKey, "");
+      if (translated) return translated;
     }
     return product.categoryName || cat;
   }

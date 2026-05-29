@@ -607,5 +607,9 @@
   "product_subcat_cutting_meat_slicer": "آلة تقطيع اللحم",
   "product_subcat_cutting_meat_roll_slicer": "آلة تقطيع لفائف اللحم",
   "product_subcat_cutting_shredder": "آلة التقطيع إلى شرائح",
-  "product_subcat_cutting_vegetable_cutter": "آلة تقطيع الخضروات"
+  "product_subcat_cutting_vegetable_cutter": "آلة تقطيع الخضروات",
+  "home_show_more": "",
+  "tier_basic": "Basic",
+  "tier_smart": "Smart",
+  "tier_full_smart": "Full Smart"
 }

@@ -607,5 +607,9 @@
   "product_subcat_cutting_meat_slicer": "Máy thái thịt",
   "product_subcat_cutting_meat_roll_slicer": "Máy thái thịt cuộn",
   "product_subcat_cutting_shredder": "Máy bào sợi",
-  "product_subcat_cutting_vegetable_cutter": "Máy thái rau củ"
+  "product_subcat_cutting_vegetable_cutter": "Máy thái rau củ",
+  "home_show_more": "",
+  "tier_basic": "Basic",
+  "tier_smart": "Smart",
+  "tier_full_smart": "Full Smart"
 }

@@ -607,5 +607,9 @@
   "product_subcat_cutting_meat_slicer": "ម៉ាស៊ីនកាត់សាច់",
   "product_subcat_cutting_meat_roll_slicer": "ម៉ាស៊ីនកាត់សាច់ក្រឡុក",
   "product_subcat_cutting_shredder": "ម៉ាស៊ីនហាន់",
-  "product_subcat_cutting_vegetable_cutter": "ម៉ាស៊ីនកាត់បន្លែ"
+  "product_subcat_cutting_vegetable_cutter": "ម៉ាស៊ីនកាត់បន្លែ",
+  "home_show_more": "",
+  "tier_basic": "Basic",
+  "tier_smart": "Smart",
+  "tier_full_smart": "Full Smart"
 }
