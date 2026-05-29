@@ -1830,6 +1830,13 @@ window.PRODUCT_DATA_TABLE = [
   },
   {
     model: "电磁：DLB-GQ40燃气：DLB-GQ40R",
+    images: [
+      {
+        filePath: "/assets/images/products/DLB-TGQ40-1.webp",
+        isPrimary: true,
+        isHires: false,
+      },
+    ],
     tier: "全智能",
     name: "单边座地式400电磁炒菜 机（触屏+自动摆臂喷 料）",
     nameEn: "Single-side floor-standing 400 induction wok cooker (touch screen + automatic swing arm spraying)",
