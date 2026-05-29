@@ -118,11 +118,12 @@
       "from-amber-100 to-orange-50 dark:from-amber-900/30 dark:to-orange-900/20",
     ];
     var grad = gradients[idx % gradients.length];
+    var catSlug = (rp && rp.category && CATEGORY_NAME_TO_SLUG[rp.category]) || "";
     return (
       '<a href="/products/' +
-      (product.category ? CATEGORY_SLUG_MAP[product.category] + "/" : "") +
-      (product.category ? CATEGORY_SLUG_MAP[product.category] + "/" : "") +
-      encodeURIComponent(CATEGORY_SLUG_MAP[product.category] || product.category) +
+      (catSlug ? catSlug + "/" : "") +
+      (catSlug ? catSlug + "/" : "") +
+      encodeURIComponent(catSlug || (rp && rp.category) || "") +
       "/" +
       encodeURIComponent(rp.model) +
       '" class="group block bg-white rounded-xl overflow-hidden shadow-md hover:shadow-lg transition-all border border-slate-100 dark:border-slate-700">' +
