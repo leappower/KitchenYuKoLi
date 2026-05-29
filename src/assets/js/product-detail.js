@@ -431,8 +431,8 @@
         catLabel && slug
           ? chevron +
             '<a href="/products/' +
-            (product.category ? CATEGORY_SLUG_MAP[product.category] + "/" : "") +
-            (product.category ? CATEGORY_SLUG_MAP[product.category] + "/" : "") +
+            (product.category ? catSlug + "/" : "") +
+            (product.category ? catSlug + "/" : "") +
             slug +
             '/" data-no-swup class="hover:text-primary transition-colors">' +
             esc(catLabel) +
@@ -467,8 +467,8 @@
         (catLabel
           ? mChevron +
             '<a href="/products/' +
-            (product.category ? CATEGORY_SLUG_MAP[product.category] + "/" : "") +
-            (product.category ? CATEGORY_SLUG_MAP[product.category] + "/" : "") +
+            (product.category ? catSlug + "/" : "") +
+            (product.category ? catSlug + "/" : "") +
             esc(catSlug) +
             '/" class="text-xs text-slate-500 dark:text-slate-400 hover:text-primary transition-colors">' +
             esc(catLabel) +
