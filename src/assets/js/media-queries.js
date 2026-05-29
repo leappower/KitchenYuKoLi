@@ -1,7 +1,10 @@
 /**
- * media-queries.js — Responsive breakpoint cache (IIFE build for src/ static HTML)
- * Synced from: src/assets/media-queries.js
- * Global: window.MediaQueries
+ * media-queries.js — Responsive breakpoint cache
+ *
+ * 所有三档断点 (mobile/tablet/pc) 统一委托给 DeviceUtils 的 matchMedia 实例，
+ * 避免维护两套 matchMedia 导致的不一致。
+ *
+ * 额外的 mqMobileSmall (max-width: 640px) 用于手机竖屏轮播等特殊场景。
  *
  * Usage: <script src="../../assets/js/media-queries.js"></script>
  * Then: window.MediaQueries.mqMobile  (boolean)
@@ -9,39 +12,52 @@
 (function (_global) {
   "use strict";
 
-  // ─── matchMedia 缓存 ──────────────────────────────────────────────────────────
-  // 将 window.matchMedia 结果缓存为布尔变量，避免在每次渲染 / 事件回调里重复触发
-  // 布局计算。通过 'change' 事件保持与实际视口同步。
-  var _mq768 = window.matchMedia("(max-width: 768px)");
   var _mq640 = window.matchMedia("(max-width: 640px)");
-  var _mq1024 = window.matchMedia("(min-width: 1024px)");
-  var _mq768min = window.matchMedia("(min-width: 768px)");
 
-  /** 视口宽度 ≤ 768px */
-  var mqMobile = _mq768.matches;
+  // ─── Getter helpers ──────────────────────────────────────────────
+
   /** 视口宽度 ≤ 640px（手机竖屏轮播） */
   var mqMobileSmall = _mq640.matches;
-  /** 视口宽度 ≥ 1024px */
-  var mqDesktop = _mq1024.matches;
-  /** 视口宽度 ≥ 768px（平板以上） */
-  var mqTablet = _mq768min.matches;
 
-  _mq768.addEventListener("change", function (e) {
-    mqMobile = e.matches;
-    window.MediaQueries.mqMobile = e.matches;
-  });
+  /** 委托到 DeviceUtils 的 matchMedia 实例获取当前设备类型 */
+  var mqMobile = false;
+  var mqDesktop = false;
+  var mqTablet = false;
+
+  function syncFromDeviceUtils() {
+    if (typeof DeviceUtils !== "undefined" && DeviceUtils && DeviceUtils.getMqBreakpoints) {
+      var bps = DeviceUtils.getMqBreakpoints();
+      mqMobile = bps.mobile.matches;
+      mqTablet = bps.tablet.matches;
+      mqDesktop = bps.pc.matches;
+    } else {
+      // fallback: 独立 matchMedia
+      mqMobile = window.matchMedia("(max-width: 767px)").matches;
+      mqTablet = window.matchMedia("(min-width: 768px) and (max-width: 1279px)").matches;
+      mqDesktop = window.matchMedia("(min-width: 1280px)").matches;
+    }
+  }
+
+  // ─── 监听来自 DeviceUtils 的设备变化 ──────────────────────────
+
+  if (typeof DeviceUtils !== "undefined" && DeviceUtils && typeof DeviceUtils.onDeviceChange === "function") {
+    DeviceUtils.onDeviceChange(function () {
+      syncFromDeviceUtils();
+      window.MediaQueries.mqMobile = mqMobile;
+      window.MediaQueries.mqMobileSmall = mqMobileSmall;
+      window.MediaQueries.mqDesktop = mqDesktop;
+      window.MediaQueries.mqTablet = mqTablet;
+    });
+  }
+
+  // 640 监听保留（独立断点，不在 DeviceUtils 体系内）
   _mq640.addEventListener("change", function (e) {
     mqMobileSmall = e.matches;
     window.MediaQueries.mqMobileSmall = e.matches;
   });
-  _mq1024.addEventListener("change", function (e) {
-    mqDesktop = e.matches;
-    window.MediaQueries.mqDesktop = e.matches;
-  });
-  _mq768min.addEventListener("change", function (e) {
-    mqTablet = e.matches;
-    window.MediaQueries.mqTablet = e.matches;
-  });
+
+  // 初始同步
+  syncFromDeviceUtils();
 
   window.MediaQueries = {
     get mqMobile() {
@@ -56,7 +72,7 @@
     get mqTablet() {
       return mqTablet;
     },
-    /** 返回当前是否为移动端（≤768px）。等同于 mqMobile，语义更直观。 */
+    /** 返回当前是否为移动端（<768px）。等同于 mqMobile，语义更直观。 */
     isMobile: function () {
       return mqMobile;
     },

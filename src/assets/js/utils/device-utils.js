@@ -57,32 +57,36 @@
   };
 
   /**
-   * 媒体查询列表，用于统一设备判断
-   * 使用 CSS Media Query 而非 window.innerWidth，因为：
-   * - Media Query 与 CSS 渲染引擎用同一个断点，不会出现 CSS 和 JS 判断不一致
-   * - 支持 pointer:coarse 等媒体特性，触摸设备即使视口 980px 也正确识别为 mobile
-   * - 支持 change 事件监听，不需要防抖轮询
+   * 预注册 matchMedia 监听，用于精确的断点变化通知。
+   * 与 CSS @media 共享同一份断点表达式，不会出现 JS 判定与 CSS 渲染不一致。
    */
-  var mqlList = {
-    mobile: window.matchMedia("(max-width: 767px)"),
-    tablet: window.matchMedia("(min-width: 768px) and (max-width: 1023px)"),
-    pc: window.matchMedia("(min-width: 1024px)"),
-    touch: window.matchMedia("(pointer: coarse)"),
-  };
+  var _mqBreakpoints = null;
+
+  function initMatchMedia() {
+    if (_mqBreakpoints) return;
+    _mqBreakpoints = {
+      mobile: window.matchMedia("(max-width: 767px)"),
+      tablet: window.matchMedia("(min-width: 768px) and (max-width: 1279px)"),
+      pc: window.matchMedia("(min-width: 1280px)"),
+    };
+  }
 
   /**
    * 判断当前设备类型（基于 matchMedia）
-   * 触摸设备优先判断为 mobile（即使视口宽度在 tablet 范围内）
+   * 使用 matchMedia 查询，与 CSS 渲染引擎完全一致，
+   * 不会出现 JS 判定与 CSS @media 不一致的情况。
    *
    * @returns {string} DeviceType.MOBILE | DeviceType.TABLET | DeviceType.PC
    */
   function getDeviceType() {
-    if (mqlList.touch.matches && !mqlList.pc.matches) {
-      // 触摸设备非 PC 宽屏 → mobile
+    initMatchMedia();
+
+    if (_mqBreakpoints.mobile.matches) {
       return DeviceType.MOBILE;
     }
-    if (mqlList.mobile.matches) return DeviceType.MOBILE;
-    if (mqlList.tablet.matches) return DeviceType.TABLET;
+    if (_mqBreakpoints.tablet.matches) {
+      return DeviceType.TABLET;
+    }
     return DeviceType.PC;
   }
 
@@ -175,17 +179,18 @@
   }
 
   /**
-   * 检查设备类型是否变化
+   * 检查设备类型是否变化，并通知所有回调
    */
   function checkDeviceChange() {
+    initMatchMedia();
     var currentDeviceType = getDeviceType();
     if (currentDeviceType !== lastDeviceType) {
+      var oldDeviceType = lastDeviceType;
       lastDeviceType = currentDeviceType;
 
-      // 触发所有回调
       deviceChangeCallbacks.forEach(function (callback) {
         try {
-          callback(currentDeviceType, lastDeviceType);
+          callback(currentDeviceType, oldDeviceType);
         } catch (e) {
           console.error("[DeviceUtils] Error in device change callback:", e);
         }
@@ -194,14 +199,18 @@
   }
 
   /**
-   * 初始化窗口大小变化监听
+   * 初始化 matchMedia change 监听
+   * 代替 resize + 防抖方案：
+   * - resize 在每次窗口大小变化时都触发，浪费性能
+   * - matchMedia change 只在条件真值跨断点时触发，更精确
+   * - 三个断点互斥，但各自独立监听确保不会遗漏
    */
   function initResizeListener() {
-    var resizeTimer;
-    window.addEventListener("resize", function () {
-      clearTimeout(resizeTimer);
-      resizeTimer = setTimeout(checkDeviceChange, 250); // 防抖250ms
-    });
+    initMatchMedia();
+
+    _mqBreakpoints.mobile.addEventListener("change", checkDeviceChange);
+    _mqBreakpoints.tablet.addEventListener("change", checkDeviceChange);
+    _mqBreakpoints.pc.addEventListener("change", checkDeviceChange);
 
     // 初始检查
     setTimeout(checkDeviceChange, 100);
@@ -211,6 +220,11 @@
   window.DeviceUtils = {
     DeviceType: DeviceType,
     Breakpoints: Breakpoints,
+    /** 获取 matchMedia 断点对象（只读），供外部直接查询 */
+    getMqBreakpoints: function () {
+      initMatchMedia();
+      return _mqBreakpoints;
+    },
     getScreenSize: getScreenSize,
     getDeviceType: getDeviceType,
     isMobile: isMobile,

@@ -38,7 +38,6 @@
         if (isTouch && !isPc) { isMb = true; isTb = false; }
         var e = isPc ? "index-pc.html" : isTb ? "index-tablet.html" : "index-mobile.html";
         console.debug("[device-debug] doRedirect",{f:f,e:e,mobile:isMb,tablet:isTb,pc:isPc,innerW:window.innerWidth,isTouch:isTouch});
-        var e=vw<768?"index-mobile.html":vw<1280?"index-tablet.html":"index-pc.html";
         if(f===e){console.debug("[device-debug] skip, already on correct version");return;}
         var newUrl=location.pathname.replace(/[^\/]*.html$/,"")+e;
         console.debug("[device-debug] redirecting to",newUrl);
