@@ -54,8 +54,10 @@ var REDIRECT_SCRIPT =
   '      if(f.match(/^index-(pc|mobile|tablet)\.html$/))return;\n' +
   '      function doRedirect(){\n' +
   '        var vw = window.innerWidth;\n' +
+  '        var isTouch = window.matchMedia && window.matchMedia("(pointer:coarse)").matches;\n' +
+  '        if (isTouch && vw >= 768) vw = 767;\n' +
   '        var e=vw<768?"index-mobile.html":vw<1280?"index-tablet.html":"index-pc.html";\n' +
-  '        console.debug("[device-debug] doRedirect",{f:f,e:e,vw:vw,innerW:window.innerWidth,hdpr:window.devicePixelRatio});\n' +
+  '        console.debug("[device-debug] doRedirect",{f:f,e:e,vw:vw,innerW:window.innerWidth,dpr:window.devicePixelRatio,isTouch:isTouch});\n' +
   '        if(f===e){console.debug("[device-debug] skip, already on correct version");return;}\n' +
   '        var newUrl=location.pathname.replace(/[^\\/]*\.html$/,"")+e;\n' +
   '        console.debug("[device-debug] redirecting to",newUrl);\n' +
