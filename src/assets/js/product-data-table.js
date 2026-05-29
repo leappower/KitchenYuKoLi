@@ -5255,6 +5255,13 @@ window.PRODUCT_DATA_TABLE = [
     tier: "全智能",
     name: "智能蒸饭机",
     nameEn: "Smart Rice Steamer",
+    images: [
+        {
+          filePath: "/assets/images/products/Z8FCB-1.webp",
+          isPrimary: true,
+          isHires: false,
+        },
+      ],
     category: "蒸煮系列",
     subCategory: "智能蒸饭机",
     specifications:

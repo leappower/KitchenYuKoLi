@@ -119,6 +119,18 @@
     ];
     var grad = gradients[idx % gradients.length];
     var catSlug = (rp && rp.category && CATEGORY_NAME_TO_SLUG[rp.category]) || "";
+    // fallback: 从完整数据表回查 category
+    if (!catSlug && rp && rp.model && window.PRODUCT_DATA_TABLE) {
+      var _all = PRODUCT_DATA_TABLE;
+      if (_all && _all.length) {
+        for (var _i = 0; _i < _all.length; _i++) {
+          if (_all[_i].model === rp.model) {
+            catSlug = CATEGORY_NAME_TO_SLUG[_all[_i].category] || "";
+            break;
+          }
+        }
+      }
+    }
     return (
       '<a href="/products/' +
       (catSlug ? catSlug + "/" : "") +
