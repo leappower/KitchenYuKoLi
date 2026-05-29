@@ -1,4 +1,4 @@
-/* global loadProductTranslations */
+/* global loadProductTranslations, CATEGORY_SLUG_MAP, product */
 /**
  * PDP Renderer - product detail page (SPA-safe)
  * URL: /products/detail/<model>/ or /products/detail/?model=<model>
@@ -269,8 +269,8 @@
 
   function renderPDP() {
     // 只在产品详情页执行（路径匹配 /products/{cat}/{model}/ ）
-    var path = window.location.pathname;
-    if (!/^\/products\/[^/]+\/[^/]+\/$/.test(path)) return;
+    var _pdpPath = window.location.pathname;
+    if (!/^\/products\/[^/]+\/[^/]+\/$/.test(_pdpPath)) return;
     if (renderPDP._pending) return;
     renderPDP._pending = true;
     requestAnimationFrame(function () {
