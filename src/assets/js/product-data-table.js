@@ -4784,6 +4784,13 @@ window.PRODUCT_DATA_TABLE = [
     nameEn: "4+1 Combo Intelligent Lifting Noodle Cooker",
     category: "炖煮系列",
     subCategory: "煮面炉",
+    images: [
+        {
+          filePath: "/assets/images/products/M4DAD-1.webp",
+          isPrimary: true,
+          isHires: false,
+        },
+      ],
     specifications:
       "◆额定电压：380V ◆额定功率： 2kW*4+4kW ◆煮面池尺寸：210*715*215mm  ◆水箱容量 : 36L ◆水箱材质：#304 ◆汤池尺寸：320*550*315mm ◆汤池容量：约55L ◆加汤流量：约550ml/4.6s ◆操作方式：全自动触摸屏操作 ◆入水口：DN15 排水口： DN25  ◆可选面篮规格： 14cm/16cm/18cm ◆自动补水、手动排水、自动冲浪功能、设定恒温定温、菜谱功能、定量出汤",
     specificationsEn:
@@ -4798,7 +4805,13 @@ window.PRODUCT_DATA_TABLE = [
     badge: "",
     badgeColor: "",
     isActive: true,
-    images: [],
+    images: [
+        {
+          filePath: "/assets/images/products/M4DAD-1.webp",
+          isPrimary: true,
+          isHires: false,
+        },
+      ],
     is_home_core: false,
     highlights: "",
     scenarios: "",
@@ -4814,6 +4827,13 @@ window.PRODUCT_DATA_TABLE = [
     nameEn: "4+2 Combo Intelligent Lifting Noodle Cooker",
     category: "炖煮系列",
     subCategory: "煮面炉",
+    images: [
+        {
+          filePath: "/assets/images/products/M4DAD-2.webp",
+          isPrimary: true,
+          isHires: false,
+        },
+      ],
     specifications:
       "◆额定电压：380V ◆额定功率： 2kW*4+3.5kW*2 ◆水箱容量 : 36L ◆水箱材质：#304 ◆配锅容量： 1.5L-9.3L ◆操作方式：全自动触摸屏操作 ◆入水口：DN15 排水口： DN25 溢流口： DN25 ◆电磁炉：3.5*kW*2 ◆圆汤桶尺寸（mm)：300*300*2（容量20L*2） ◆可选面篮规格： 14cm/16cm/18cm ◆自动补水、 自动冲浪功能、节能模式、 自动恒温、菜谱功能",
     specificationsEn:
@@ -4828,7 +4848,13 @@ window.PRODUCT_DATA_TABLE = [
     badge: "",
     badgeColor: "",
     isActive: true,
-    images: [],
+    images: [
+        {
+          filePath: "/assets/images/products/M4DAD-2.webp",
+          isPrimary: true,
+          isHires: false,
+        },
+      ],
     is_home_core: false,
     highlights: "",
     scenarios: "",
