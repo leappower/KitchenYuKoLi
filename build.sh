@@ -96,6 +96,7 @@ rm -f "$DIST/assets/video/aboutus.mp4"
 # CNAME、.nojekyll 等供 GitHub Pages + Cloudflare 使用
 cp "$SRC/index.html" "$DIST/index.html"
 [ -f "$SRC/sw.js" ]        && cp "$SRC/sw.js"        "$DIST/sw.js"
+[ -f "sw.js" ]             && cp "sw.js"             "$DIST/sw.js"
 [ -f "CNAME" ]             && cp "CNAME"             "$DIST/CNAME"
 [ -f "$SRC/404.html" ]     && cp "$SRC/404.html"     "$DIST/404.html"
 [ -f "$SRC/robots.txt" ]   && cp "$SRC/robots.txt"   "$DIST/robots.txt"
