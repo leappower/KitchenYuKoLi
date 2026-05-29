@@ -94,7 +94,9 @@
     html.push(
       '<option value=""' +
         (prevValue === "" ? " selected" : "") +
-        ">" +
+        ' data-i18n="' +
+        placeholderKey +
+        '">' +
         tr(placeholderKey, placeholderFallback) +
         "</option>"
     );
