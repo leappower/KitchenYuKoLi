@@ -33,6 +33,8 @@ DIST="dist"
 # 使用毫秒时间戳确保每次构建唯一，触发 CDN/浏览器缓存失效
 VERSION=$(date +%s%3N)
 VERSION_TAG="v=$VERSION"
+BUILD_TS=$(date -u +%Y-%m-%dT%H:%M:%SZ)
+echo "   Build: $BUILD_TS"
 echo "   Version: $VERSION_TAG"
 
 # ─── Pre-flight checks ───────────────────────────────────────────
@@ -182,6 +184,12 @@ chmod -R a+rX "$DIST" 2>/dev/null || true
 # ─── Summary ────────────────────────────────────────────────────
 FILES=$(find "$DIST" -type f | wc -l | tr -d ' ')
 echo ""
+# ─── 构建标识文件 ────────────────────────────────────────────
+echo "$VERSION" > "$DIST/VERSION.txt"
+echo "$BUILD_TS" >> "$DIST/VERSION.txt"
+
+# ─── Summary ────────────────────────────────────────────────────
 echo "✅ Build complete: $FILES files in dist/"
 echo "   Version: $VERSION_TAG"
+echo "   Build at: $BUILD_TS"
 echo "   i18n cache: $I18N_CACHE_TS"
