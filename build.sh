@@ -102,7 +102,7 @@ SW_SRC=""
 if [ -n "$SW_SRC" ]; then
   cp "$SW_SRC" "$DIST/sw.js"
   # 注入版本号到 sw.js，让浏览器感知 SW 更新
-  sed -i '' "s/var SW_VERSION = \"[^\"]*\";/var SW_VERSION = \"v$VERSION\";/" "$DIST/sw.js"
+  sed -i.bak "s/var SW_VERSION = \"[^\"]*\";/var SW_VERSION = \"v$VERSION\";/" "$DIST/sw.js" && rm -f "$DIST/sw.js.bak"
   echo "  📦 sw.js → v$VERSION"
 fi
 [ -f "CNAME" ]             && cp "CNAME"             "$DIST/CNAME"
