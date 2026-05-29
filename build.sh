@@ -33,6 +33,8 @@ DIST="dist"
 # 使用毫秒时间戳确保每次构建唯一，触发 CDN/浏览器缓存失效
 VERSION=$(date +%s%3N)
 VERSION_TAG="v=$VERSION"
+BUILD_TS=$(date -u +%Y-%m-%dT%H:%M:%SZ)
+echo "   Build: $BUILD_TS"
 echo "   Version: $VERSION_TAG"
 
 # ─── Pre-flight checks ───────────────────────────────────────────
@@ -95,7 +97,18 @@ rm -f "$DIST/assets/video/aboutus.mp4"
 # ─── 4. Root files ──────────────────────────────────────────────
 # CNAME、.nojekyll 等供 GitHub Pages + Cloudflare 使用
 cp "$SRC/index.html" "$DIST/index.html"
-[ -f "$SRC/sw.js" ]        && cp "$SRC/sw.js"        "$DIST/sw.js"
+# sw.js 优先从根目录复制，其次 src/；复制后注入构建版本号
+SW_SRC=""
+[ -f "sw.js" ]      && SW_SRC="sw.js"
+[ -z "$SW_SRC" ] && [ -f "$SRC/sw.js" ] && SW_SRC="$SRC/sw.js"
+if [ -n "$SW_SRC" ]; then
+  cp "$SW_SRC" "$DIST/sw.js"
+  # 注入版本号仅 production 模式，dev 模式保留源文件版本号
+  if [ "$BUILD_MODE" != "dev" ]; then
+    sed -i.bak "s/var SW_VERSION = \"[^\"]*\";/var SW_VERSION = \"v$VERSION\";/" "$DIST/sw.js" && rm -f "$DIST/sw.js.bak"
+    echo "  📦 sw.js → v$VERSION"
+  fi
+fi
 [ -f "CNAME" ]             && cp "CNAME"             "$DIST/CNAME"
 [ -f "$SRC/404.html" ]     && cp "$SRC/404.html"     "$DIST/404.html"
 [ -f "$SRC/robots.txt" ]   && cp "$SRC/robots.txt"   "$DIST/robots.txt"
@@ -171,6 +184,12 @@ chmod -R a+rX "$DIST" 2>/dev/null || true
 # ─── Summary ────────────────────────────────────────────────────
 FILES=$(find "$DIST" -type f | wc -l | tr -d ' ')
 echo ""
+# ─── 构建标识文件 ────────────────────────────────────────────
+echo "$VERSION" > "$DIST/VERSION.txt"
+echo "$BUILD_TS" >> "$DIST/VERSION.txt"
+
+# ─── Summary ────────────────────────────────────────────────────
 echo "✅ Build complete: $FILES files in dist/"
 echo "   Version: $VERSION_TAG"
+echo "   Build at: $BUILD_TS"
 echo "   i18n cache: $I18N_CACHE_TS"
