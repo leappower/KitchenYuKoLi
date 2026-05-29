@@ -1093,6 +1093,9 @@
     });
     _refreshDisplayTexts();
   }
+  if (window.translationManager && window.translationManager.on) {
+    window.translationManager.on("languageChanged", _onLangChanged);
+  }
   window.addEventListener("languageChanged", _onLangChanged);
   document.addEventListener("languageChanged", _onLangChanged);
 
