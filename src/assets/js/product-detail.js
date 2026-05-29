@@ -111,7 +111,7 @@
             }
             return f;
           })()
-        : "/assets/images/products/" + rp.model + "-1.webp";
+        : "/assets/images/products/" + (rp.model || "").replace(/[^a-zA-Z0-9]/g, "") + "-1.webp";
     var gradients = [
       "from-primary/10 to-blue-100 dark:from-primary/20 dark:to-blue-900/30",
       "from-emerald-100 to-teal-50 dark:from-emerald-900/30 dark:to-teal-900/20",
@@ -482,7 +482,7 @@
     })();
 
     // Image: CMS upload > static
-    var imgSrc = "/assets/images/products/" + product.model + "-1.webp";
+    var imgSrc = "/assets/images/products/" + (product.model || "").replace(/[^a-zA-Z0-9]/g, "") + "-1.webp";
     if (product.images && product.images.length > 0) {
       var pi =
         product.images.find(function (i) {
