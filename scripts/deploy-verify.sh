@@ -32,31 +32,21 @@ for f in index.html 404.html CNAME .nojekyll robots.txt manifest.json sw.js; do
   fi
 done
 
-# 3. 404.html 正则验证
+# 3. 404.html JS 语法验证（用 vm.Script 编译，捕获正则错误）
 echo ""
-echo "🔐 验证 404.html 脚本..."
+echo "🔐 验证 404.html 脚本语法..."
 INLINE_JS=$(sed -n '/<script>/,/<\/script>/p' "$DIST/404.html" 2>/dev/null | grep -v '<script>\|</script>' || true)
 if [ -n "$INLINE_JS" ]; then
-  # 提取所有正则，验证合法性
-  REGEX_ERRORS=$(echo "$INLINE_JS" | node -e "
-const lines = [];
-require('fs').readFileSync('/dev/stdin','utf-8').split('\n').forEach(l => {
-  const matches = l.match(/\/[^/].*?\/[gimsuyd]*(?=\s*[\.\])])/g);
-  if (matches) matches.forEach(m => {
-    try {
-      const lastSlash = m.lastIndexOf('/');
-      new RegExp(m.slice(1, lastSlash), m.slice(lastSlash+1));
-    } catch(e) { lines.push(m + ' → ' + e.message); }
-  });
-});
-if (lines.length > 0) console.log(lines.join('\n'));
-" 2>/dev/null || true)
-  if [ -n "$REGEX_ERRORS" ]; then
-    echo "  ❌ 404.html 包含非法正则:"
-    echo "$REGEX_ERRORS"
-    ERRORS=$((ERRORS + 1))
+  if echo "$INLINE_JS" | node -e "
+const vm = require('vm');
+const fs = require('fs');
+try { new vm.Script(fs.readFileSync('/dev/stdin','utf-8')); }
+catch(e) { console.log(e.message); process.exit(1); }
+" 2>/dev/null; then
+    echo "  ✅ 404.html JS 语法合法"
   else
-    echo "  ✅ 404.html 正则合法"
+    echo "  ❌ 404.html JS 语法错误"
+    ERRORS=$((ERRORS + 1))
   fi
 fi
 
@@ -81,15 +71,7 @@ else
   echo "  ⚠️  没有产品详情页路由（dev 模式或构建不完整）"
 fi
 
-# 6. SPA 产品路由验证
-echo ""
-echo "🔗 验证 SPA 产品路由..."
-SPA_ROUTE_COUNT=$(find "$DIST/products" -name 'index.html' -not -path '*/detail/*' -not -path '*/all/*' -not -path '*/compare/*' -not -path '*/cutting/*' -not -path '*/stirfry/*' -not -path '*/frying/*' -not -path '*/stewing/*' -not -path '*/steaming/*' -not -path '*/other/*' 2>/dev/null | wc -l | tr -d ' ')
-if [ "$SPA_ROUTE_COUNT" -gt 0 ]; then
-  echo "  ✅ $SPA_ROUTE_COUNT 个 SPA产品路由生成"
-fi
-
-# 7. sw.js 版本号验证
+# 6. sw.js 版本号验证
 echo ""
 echo "📦 验证 sw.js 版本号..."
 if grep -q 'SW_VERSION = "v' "$DIST/sw.js" 2>/dev/null; then
