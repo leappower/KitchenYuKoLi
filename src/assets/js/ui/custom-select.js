@@ -974,15 +974,6 @@
     },
     "spa:load:closeAll"
   );
-  /* ── translationsApplied: re-refresh after translation system applies texts ── */
-  _spaOn(
-    document,
-    "translationsApplied",
-    function () {
-      _refreshDisplayTexts();
-    },
-    "translationsApplied:refreshCustomSelect"
-  );
 
   /* Init all [data-custom-select] elements */
   CustomSelect.initAll = function (root) {
@@ -1090,41 +1081,24 @@
     },
     "spa:load:initAll"
   );
-  /* ── translationsApplied: re-refresh after translation system applies texts ── */
-  _spaOn(
-    document,
-    "translationsApplied",
-    function () {
-      _refreshDisplayTexts();
-    },
-    "translationsApplied:refreshCustomSelect"
-  );
 
   /* ────────────────────────────────────────────────────────────────
    *  languageChanged — update any visible "no results" text
    * ──────────────────────────────────────────────────────────────── */
-  _spaOn(
-    document,
-    "languageChanged",
-    function () {
-      var noResEls = document.querySelectorAll(".cs-no-results");
-      noResEls.forEach(function (el) {
-        el.textContent =
-          typeof window.t === "function" ? window.uiText("no_matching_results", "无匹配结果") : "无匹配结果";
-      });
-      _refreshDisplayTexts();
-    },
-    "langChanged:noResults"
-  );
+  function _onLangChanged() {
+    var noResEls = document.querySelectorAll(".cs-no-results");
+    noResEls.forEach(function (el) {
+      el.textContent =
+        typeof window.t === "function" ? window.uiText("no_matching_results", "无匹配结果") : "无匹配结果";
+    });
+    _refreshDisplayTexts();
+  }
+  window.addEventListener("languageChanged", _onLangChanged);
+  document.addEventListener("languageChanged", _onLangChanged);
+
   /* ── translationsApplied: re-refresh after translation system applies texts ── */
-  _spaOn(
-    document,
-    "translationsApplied",
-    function () {
-      _refreshDisplayTexts();
-    },
-    "translationsApplied:refreshCustomSelect"
-  );
+  window.addEventListener("translationsApplied", _refreshDisplayTexts);
+  document.addEventListener("translationsApplied", _refreshDisplayTexts);
 
   /* ────────────────────────────────────────────────────────────────
    *  EXPORT
