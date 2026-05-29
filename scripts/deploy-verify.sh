@@ -54,7 +54,7 @@ fi
 echo ""
 echo "🔢 验证版本号注入..."
 VERSION_TAG=$(echo "$V" | sed 's/^v//')
-MATCH_COUNT=$(grep -roc "?v=${VERSION_TAG}" "$DIST/404.html" 2>/dev/null || echo 0)
+MATCH_COUNT=$(grep -roc "?v=${VERSION_TAG}" "$DIST/404.html" 2>/dev/null || true) && MATCH_COUNT="${MATCH_COUNT:-0}"
 if [ "$MATCH_COUNT" -gt 0 ]; then
   echo "  ✅ 404.html 版本号已注入"
 else
