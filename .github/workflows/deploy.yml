@@ -27,6 +27,9 @@ jobs:
       - name: Build
         run: bash build.sh
 
+      - name: 验证构建产物
+        run: bash scripts/deploy-verify.sh
+
       - name: Deploy to gh-pages
         uses: peaceiris/actions-gh-pages@v4
         with:
