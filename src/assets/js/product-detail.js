@@ -103,8 +103,6 @@
                 return i.isPrimary;
               }) || rp.images[0]
             ).filePath;
-            // Defensive: normalize _N.webp → -N.webp (file rename migration)
-            if (f) f = f.replace(/_(\d\.webp)$/, "-$1");
             // Defensive: rewrite stale CMS paths
             if (f && f.indexOf("/admin/uploads/") === 0) {
               f = "/assets/images/products/" + f.split("/").pop();
@@ -122,10 +120,8 @@
     return (
       '<a href="/products/' +
       (catSlug ? catSlug + "/" : "") +
-      (catSlug ? catSlug + "/" : "") +
-      encodeURIComponent(catSlug || (rp && rp.category) || "") +
-      "/" +
       encodeURIComponent(rp.model) +
+      "/" +
       '" class="group block bg-white rounded-xl overflow-hidden shadow-md hover:shadow-lg transition-all border border-slate-100 dark:border-slate-700">' +
       '<div class="aspect-[4/3] bg-white relative overflow-hidden flex items-center justify-center">' +
       '<img loading="lazy" alt="' +
@@ -431,8 +427,6 @@
         catLabel && slug
           ? chevron +
             '<a href="/products/' +
-            (product.category ? catSlug + "/" : "") +
-            (product.category ? catSlug + "/" : "") +
             slug +
             '/" data-no-swup class="hover:text-primary transition-colors">' +
             esc(catLabel) +
@@ -467,8 +461,6 @@
         (catLabel
           ? mChevron +
             '<a href="/products/' +
-            (product.category ? catSlug + "/" : "") +
-            (product.category ? catSlug + "/" : "") +
             esc(catSlug) +
             '/" class="text-xs text-slate-500 dark:text-slate-400 hover:text-primary transition-colors">' +
             esc(catLabel) +
