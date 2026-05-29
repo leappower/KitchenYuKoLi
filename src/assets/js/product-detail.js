@@ -268,6 +268,9 @@
   }
 
   function renderPDP() {
+    // 只在产品详情页执行（路径匹配 /products/{cat}/{model}/ ）
+    var path = window.location.pathname;
+    if (!/^\/products\/[^/]+\/[^/]+\/$/.test(path)) return;
     if (renderPDP._pending) return;
     renderPDP._pending = true;
     requestAnimationFrame(function () {
@@ -796,7 +799,11 @@
     renderPDP._pending = false;
     renderPDP();
   });
-  document.addEventListener("product-data-ready", renderPDP);
+  document.addEventListener("product-data-ready", function () {
+    var path = window.location.pathname;
+    if (!/^\/products\/[^/]+\/[^/]+\/$/.test(path)) return;
+    renderPDP();
+  });
   // Get translated category name (from UI i18n, not product_translations)
   function getCategoryName(product) {
     var cat = product.category || product.categoryName || "";
