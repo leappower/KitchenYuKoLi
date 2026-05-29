@@ -82,20 +82,20 @@
  *   --clean  Remove old route directories from dist before generating
  */
 
-'use strict';
+"use strict";
 
-const fs = require('fs');
-const path = require('path');
+const fs = require("fs");
+const path = require("path");
 
-const DIST_DIR = path.resolve(__dirname, '..', 'dist');
-const SRC_PAGES_DIR = path.resolve(__dirname, '..', 'src', 'pages');
+const DIST_DIR = path.resolve(__dirname, "..", "dist");
+const SRC_PAGES_DIR = path.resolve(__dirname, "..", "src", "pages");
 
 // ─── Build-level version stamp (single value for ALL pages) ─────────
 // Previously Date.now() was called per-page → each page got a different ?v= hash.
 // SwupHeadPlugin compared outerHTML strictly → different ?v= caused CSS <link> tags
 // to accumulate in <head> on every SPA navigation (old kept by persistTags, new added).
 // Now one timestamp per build → all pages share identical ?v= → no accumulation.
-const BUILD_VERSION = process.env.VERSION || ('v=' + Date.now().toString(36));
+const BUILD_VERSION = process.env.VERSION || "v=" + Date.now().toString(36);
 
 // ─── Case slug alias map ──────────────────────────────────────────────
 // Maps SSG directory names (derived from src/pages/cases/<city>/) to the
@@ -104,14 +104,14 @@ const BUILD_VERSION = process.env.VERSION || ('v=' + Date.now().toString(36));
 // links like /cases/manila-lunchbox-studio-2025/ resolve correctly.
 // ⚠️ Keep this in sync with src/assets/js/case-grid.js ROI_CASES[].slug
 var CASE_SLUG_MAP = {
-  'manila': 'manila-lunchbox-studio-2025',
-  'jakarta': 'jakarta-catering-hub-2025',
-  'hcmc': 'hcmc-cloud-kitchen-compact',
-  'bangkok': 'bangkok-chain-8-stores',
-  'kl': 'kl-canteen-2000-meals',
-  'cebu': 'cebu-small-resto-payback',
-  'surabaya': 'surabaya-central-automation',
-  'hanoi': 'hanoi-street-food-modern',
+  manila: "manila-lunchbox-studio-2025",
+  jakarta: "jakarta-catering-hub-2025",
+  hcmc: "hcmc-cloud-kitchen-compact",
+  bangkok: "bangkok-chain-8-stores",
+  kl: "kl-canteen-2000-meals",
+  cebu: "cebu-small-resto-payback",
+  surabaya: "surabaya-central-automation",
+  hanoi: "hanoi-street-food-modern",
 };
 
 // ─── Auto-discover routes from src/pages/ directory ───────
@@ -120,8 +120,8 @@ var CASE_SLUG_MAP = {
 // Excludes: news/detail (dynamic SPA template, not a static route).
 function discoverRoutes() {
   var routes = [];
-  var excludeDirs = ['node_modules', '.git', 'assets'];
-  var excludeSlugs = ['news/detail']; // dynamic SPA template, not a static route
+  var excludeDirs = ["node_modules", ".git", "assets"];
+  var excludeSlugs = ["news/detail"]; // dynamic SPA template, not a static route
 
   function walk(dir, prefix) {
     if (!fs.existsSync(dir)) return;
@@ -130,20 +130,26 @@ function discoverRoutes() {
       if (!entries[i].isDirectory()) continue;
       if (excludeDirs.indexOf(entries[i].name) !== -1) continue;
       var fullPath = path.join(dir, entries[i].name);
-      var slug = prefix ? prefix + '/' + entries[i].name : entries[i].name;
-      if (excludeSlugs.indexOf(slug) !== -1) { walk(fullPath, slug); continue; }
-      var htmlFiles = fs.readdirSync(fullPath).filter(function (f) { return f.endsWith('.html'); });
+      var slug = prefix ? prefix + "/" + entries[i].name : entries[i].name;
+      if (excludeSlugs.indexOf(slug) !== -1) {
+        walk(fullPath, slug);
+        continue;
+      }
+      var htmlFiles = fs.readdirSync(fullPath).filter(function (f) {
+        return f.endsWith(".html");
+      });
       if (htmlFiles.length > 0) {
-        var topSection = slug.split('/')[0];
+        var topSection = slug.split("/")[0];
         routes.push({ slug: slug, navId: topSection });
       }
       walk(fullPath, slug);
     }
   }
 
-  walk(SRC_PAGES_DIR, '');
+  walk(SRC_PAGES_DIR, "");
   routes.sort(function (a, b) {
-    var aParts = a.slug.split('/'), bParts = b.slug.split('/');
+    var aParts = a.slug.split("/"),
+      bParts = b.slug.split("/");
     for (var i = 0; i < Math.min(aParts.length, bParts.length); i++) {
       if (aParts[i] !== bParts[i]) return aParts[i].localeCompare(bParts[i]);
     }
@@ -156,14 +162,16 @@ const ROUTES = discoverRoutes();
 
 // Parse CLI args
 const args = process.argv.slice(2);
-const shouldClean = args.includes('--clean');
+const shouldClean = args.includes("--clean");
 // basePath: prefix for sub-directory deployments (e.g. /KitchenYuKoLi)
 // Affects all asset href/src paths and URL redirects in generated HTML.
-const basePathArg = args.find(function (a) { return a.startsWith('--base-path='); });
-const BASE_PATH = basePathArg ? basePathArg.replace('--base-path=', '').replace(/\/$/, '') : '';
+const basePathArg = args.find(function (a) {
+  return a.startsWith("--base-path=");
+});
+const BASE_PATH = basePathArg ? basePathArg.replace("--base-path=", "").replace(/\/$/, "") : "";
 
 function log(msg) {
-  console.log('[build-ssg] ' + msg);
+  console.log("[build-ssg] " + msg);
 }
 
 function ensureDir(dirPath) {
@@ -192,39 +200,39 @@ function patchHtmlPaths(html) {
   if (!BASE_PATH) return html;
 
   // Ensure BASE_PATH doesn't have trailing slash for consistent replacement
-  var bp = BASE_PATH.replace(/\/$/, '');
+  var bp = BASE_PATH.replace(/\/$/, "");
   // Extract the path part for negative lookahead (e.g., 'KitchenYuKoLi' from '/KitchenYuKoLi')
-  var bpName = bp.replace(/^\//, '');
+  var bpName = bp.replace(/^\//, "");
 
   // 0. Inject window.BASE_PATH for JS files to use
   // Insert after <head> tag
   var basePathScript = '<script>window.BASE_PATH="' + bp + '";</script>';
-  html = html.replace(/<head>/i, '<head>\n' + basePathScript);
+  html = html.replace(/<head>/i, "<head>\n" + basePathScript);
 
   // 1. Patch src= and href= attributes in HTML tags
   //    Match: src="/path" or href="/path" (not //, not /#, not already prefixed)
   //    $2 captures the leading "/", so we prepend bp (without extra slash)
   //    Only apply negative lookahead if bpName is not empty
   var attrPattern = bpName
-    ? '((?:src|href)\\s*=\\s*")(\\/(?!\\/|#))(?!' + bpName + '\\/)'
+    ? '((?:src|href)\\s*=\\s*")(\\/(?!\\/|#))(?!' + bpName + "\\/)"
     : '((?:src|href)\\s*=\\s*")(\\/(?!\\/|#))';
-  var attrRegex = new RegExp(attrPattern, 'g');
-  html = html.replace(attrRegex, '$1' + bp + '$2');
+  var attrRegex = new RegExp(attrPattern, "g");
+  html = html.replace(attrRegex, "$1" + bp + "$2");
 
   // 2. Patch inline JS: location.href = '/home/' and similar redirects
   //    Matches: location.href = '/path', window.location.replace('/path')
   var jsPattern1 = bpName
     ? "(location\\.href\\s*=\\s*'|window\\.location\\.replace\\(['\"])(\\/(?!\\/|#))(?!" + bpName + ")"
     : "(location\\.href\\s*=\\s*'|window\\.location\\.replace\\(['\"])(\\/(?!\\/|#))";
-  var jsRegex1 = new RegExp(jsPattern1, 'g');
-  html = html.replace(jsRegex1, '$1' + bp + '$2');
+  var jsRegex1 = new RegExp(jsPattern1, "g");
+  html = html.replace(jsRegex1, "$1" + bp + "$2");
 
   // 3. Patch inline JS: history.replaceState(null, '', '/path')
   var jsPattern2 = bpName
     ? "(history\\.(?:push|replace)State\\([^,]*,\\s*[^,]*,\\s*')(" + bpName + ")"
     : "(history\\.(?:push|replace)State\\([^,]*,\\s*[^,]*,\\s*')";
-  var jsRegex2 = new RegExp(jsPattern2, 'g');
-  html = html.replace(jsRegex2, '$1' + bp + '$2');
+  var jsRegex2 = new RegExp(jsPattern2, "g");
+  html = html.replace(jsRegex2, "$1" + bp + "$2");
 
   return html;
 }
@@ -239,9 +247,9 @@ function patchHtmlPaths(html) {
  */
 function injectManifest(html) {
   if (/<link[^>]+manifest[^>]*>/.test(html)) return html;
-  var bp = BASE_PATH ? BASE_PATH.replace(/\/$/, '') : '';
-  var href = bp + '/manifest.json';
-  return html.replace('</head>', '  <link rel="manifest" href="' + href + '"/>\n  </head>');
+  var bp = BASE_PATH ? BASE_PATH.replace(/\/$/, "") : "";
+  var href = bp + "/manifest.json";
+  return html.replace("</head>", '  <link rel="manifest" href="' + href + '"/>\n  </head>');
 }
 
 function injectLangUrlSync(html) {
@@ -250,11 +258,12 @@ function injectLangUrlSync(html) {
   // Inject a synchronous script right after <head> that reads ?lang= URL parameter
   // and sets localStorage("userLanguage") so translations.js picks it up.
   // Must run BEFORE lang-registry.js / translations.js.
-  var tag = '<script>/*[i18n-url-sync]*/(function(){var p=new URLSearchParams(location.search),l=p.get("lang");if(l){localStorage.setItem("userLanguage",l);document.documentElement.lang=l}})();</script>';
+  var tag =
+    '<script>/*[i18n-url-sync]*/(function(){var p=new URLSearchParams(location.search),l=p.get("lang");if(l){localStorage.setItem("userLanguage",l);document.documentElement.lang=l}})();</script>';
   if (/<head[^>]*>/i.test(html)) {
-    html = html.replace(/(<head[^>]*>)/i, '$1\n  ' + tag);
+    html = html.replace(/(<head[^>]*>)/i, "$1\n  " + tag);
   } else {
-    html = tag + '\n' + html;
+    html = tag + "\n" + html;
   }
   return html;
 }
@@ -266,38 +275,38 @@ function injectPreTranslate(html) {
   // Inject synchronous pre-translate script after <head>, before lang-registry.
   // Reads cached translations from localStorage to prevent flash on non-zh-CN first load.
   var tag = [
-    '    <script>',
-    '      /* Pre-apply cached translations to prevent flash */',
-    '      (function () {',
-    '        try {',
+    "    <script>",
+    "      /* Pre-apply cached translations to prevent flash */",
+    "      (function () {",
+    "        try {",
     '          var lang = localStorage.getItem("userLanguage") || "zh-CN";',
-    '          if (!lang) return;',
+    "          if (!lang) return;",
     '          var cacheKey = "yukoli-translations-ui-" + lang;',
-    '          var cached = localStorage.getItem(cacheKey);',
-    '          if (!cached) return;',
-    '          var data = JSON.parse(cached);',
-    '          if (!data.data) return;',
-    '          var translations = data.data;',
-    '          document.documentElement.lang = lang;',
+    "          var cached = localStorage.getItem(cacheKey);",
+    "          if (!cached) return;",
+    "          var data = JSON.parse(cached);",
+    "          if (!data.data) return;",
+    "          var translations = data.data;",
+    "          document.documentElement.lang = lang;",
     '          var elements = document.querySelectorAll("[data-i18n]");',
-    '          for (var i = 0; i < elements.length; i++) {',
-    '            var el = elements[i];',
+    "          for (var i = 0; i < elements.length; i++) {",
+    "            var el = elements[i];",
     '            var key = el.getAttribute("data-i18n");',
-    '            if (translations[key] && el.children.length === 0) {',
-    '              el.textContent = translations[key];',
-    '            }',
-    '          }',
-    '        } catch (e) {',
-    '          /* ignore */',
-    '        }',
-    '      })();',
-    '    </script>'
-  ].join('\n');
+    "            if (translations[key] && el.children.length === 0) {",
+    "              el.textContent = translations[key];",
+    "            }",
+    "          }",
+    "        } catch (e) {",
+    "          /* ignore */",
+    "        }",
+    "      })();",
+    "    </script>",
+  ].join("\n");
 
   if (/<head[^>]*>/i.test(html)) {
-    html = html.replace(/(<head[^>]*>)/i, '$1\n' + tag);
+    html = html.replace(/(<head[^>]*>)/i, "$1\n" + tag);
   } else {
-    html = tag + '\n' + html;
+    html = tag + "\n" + html;
   }
   return html;
 }
@@ -319,9 +328,9 @@ function injectTranslationsDropdown(html) {
 }
 
 var CORE_SCRIPTS = (function () {
-  var configPath = path.join(__dirname, 'core-scripts.json');
+  var configPath = path.join(__dirname, "core-scripts.json");
   if (fs.existsSync(configPath)) {
-    return JSON.parse(fs.readFileSync(configPath, 'utf-8'));
+    return JSON.parse(fs.readFileSync(configPath, "utf-8"));
   }
   return { core: [], pageSpecific: {} };
 })();
@@ -329,69 +338,69 @@ var CORE_SCRIPTS = (function () {
 function injectCoreScripts(html, routeSlug) {
   // 从单一清单 core-scripts.json 注入所有核心脚本和页面特定脚本
   // 每个脚本检查是否已存在（idempotent）
-  var bp = BASE_PATH ? BASE_PATH.replace(/\/$/, '') : '';
+  var bp = BASE_PATH ? BASE_PATH.replace(/\/$/, "") : "";
   var tags = [];
 
   // 核心脚本
   CORE_SCRIPTS.core.forEach(function (scriptPath) {
     var filename = path.basename(scriptPath);
     // 精确检测：匹配 <script src="...filename" 或 <script src="...filename?v=xxx"
-    var escaped = filename.replace(/\./g, '\\.');
-    var hasScript = new RegExp('<script[^>]*src="[^"]*' + escaped + '[^"]*?"', 'i').test(html);
+    var escaped = filename.replace(/\./g, "\\.");
+    var hasScript = new RegExp('<script[^>]*src="[^"]*' + escaped + '[^"]*?"', "i").test(html);
     if (!hasScript) {
-      if (scriptPath.indexOf('product-data-table') !== -1) {
-      tags.push('    <script src="' + bp + '/' + scriptPath + '"></script>');
-    } else {
-      tags.push('    <script defer src="' + bp + '/' + scriptPath + '"></script>');
-    }
+      if (scriptPath.indexOf("product-data-table") !== -1) {
+        tags.push('    <script src="' + bp + "/" + scriptPath + '"></script>');
+      } else {
+        tags.push('    <script defer src="' + bp + "/" + scriptPath + '"></script>');
+      }
     }
   });
 
   // 页面特定脚本（根据路由匹配）
-  var topSection = routeSlug ? routeSlug.split('/')[0] : '';
+  var topSection = routeSlug ? routeSlug.split("/")[0] : "";
   var pageScripts = CORE_SCRIPTS.pageSpecific[topSection] || [];
   pageScripts.forEach(function (scriptPath) {
     var filename = path.basename(scriptPath);
-    var escaped = filename.replace(/\./g, '\\.');
-    var hasScript = new RegExp('<script[^>]*src="[^"]*' + escaped + '[^"]*?"', 'i').test(html);
+    var escaped = filename.replace(/\./g, "\\.");
+    var hasScript = new RegExp('<script[^>]*src="[^"]*' + escaped + '[^"]*?"', "i").test(html);
     if (!hasScript) {
-      if (scriptPath.indexOf('product-data-table') !== -1) {
-      tags.push('    <script src="' + bp + '/' + scriptPath + '"></script>');
-    } else {
-      tags.push('    <script defer src="' + bp + '/' + scriptPath + '"></script>');
-    }
+      if (scriptPath.indexOf("product-data-table") !== -1) {
+        tags.push('    <script src="' + bp + "/" + scriptPath + '"></script>');
+      } else {
+        tags.push('    <script defer src="' + bp + "/" + scriptPath + '"></script>');
+      }
     }
   });
 
   // 从 core-scripts.json 的 core[] 自动生成 _SPA_GLOBAL_PATTERNS 正则
   var scriptNames = CORE_SCRIPTS.core.map(function (p) {
-    return path.basename(p, '.js');
+    return path.basename(p, ".js");
   });
-  var patternStr = '(?:^|[\\/])(?:' + scriptNames.join('|') + ')\\.js';
-  var injectPattern = '<script>window._SPA_GLOBAL_PATTERNS=/' + patternStr + '/</script>';
+  var patternStr = "(?:^|[\\/])(?:" + scriptNames.join("|") + ")\\.js";
+  var injectPattern = "<script>window._SPA_GLOBAL_PATTERNS=/" + patternStr + "/</script>";
 
   // 如果页面已有 _SPA_GLOBAL_PATTERNS 且 tags 为空，无需重复注入
   if (tags.length === 0 && /_SPA_GLOBAL_PATTERNS/.test(html)) return html;
   if (tags.length === 0) {
     // 无新脚本但有 pattern 需求：仅注入 pattern
     if (!/_SPA_GLOBAL_PATTERNS/.test(html)) {
-      html = html.replace(/(href="\/assets\/css\/[^"]+)"/g, '$1?' + BUILD_VERSION + '"');
-      html = html.replace(/(src="\/assets\/js\/[^"]+)(?<!\?v=[^"]*)"/g, '$1?' + BUILD_VERSION + '"');
-      return html.replace(/<\/body>/i, injectPattern + '\n  </body>');
+      html = html.replace(/(href="\/assets\/css\/[^"]+)"/g, "$1?" + BUILD_VERSION + '"');
+      html = html.replace(/(src="\/assets\/js\/[^"]+)(?<!\?v=[^"]*)"/g, "$1?" + BUILD_VERSION + '"');
+      return html.replace(/<\/body>/i, injectPattern + "\n  </body>");
     }
     return html;
   }
 
   // 统一注入到 </body> 前
   // 给无版本号的 CSS/JS 加上构建时间戳，防止浏览器缓存旧文件
-  html = html.replace(/(href="\/assets\/css\/[^"]+)"/g, '$1?' + BUILD_VERSION + '"');
-  html = html.replace(/(src="\/assets\/js\/[^"]+)(?<!\?v=[^"]*)"/g, '$1?' + BUILD_VERSION + '"');
-  
+  html = html.replace(/(href="\/assets\/css\/[^"]+)"/g, "$1?" + BUILD_VERSION + '"');
+  html = html.replace(/(src="\/assets\/js\/[^"]+)(?<!\?v=[^"]*)"/g, "$1?" + BUILD_VERSION + '"');
+
   // 如果已有 _SPA_GLOBAL_PATTERNS，不重复注入；仅注入脚本
   if (/_SPA_GLOBAL_PATTERNS/.test(html)) {
-    return html.replace(/<\/body>/i, tags.join('\n') + '\n  </body>');
+    return html.replace(/<\/body>/i, tags.join("\n") + "\n  </body>");
   }
-  return html.replace(/<\/body>/i, tags.join('\n') + '\n    ' + injectPattern + '\n  </body>');
+  return html.replace(/<\/body>/i, tags.join("\n") + "\n    " + injectPattern + "\n  </body>");
 }
 
 /**
@@ -402,9 +411,10 @@ function injectCoreScripts(html, routeSlug) {
  * Idempotent: checks for 'skeleton-overlay' before injecting.
  */
 function injectSkeletonOverlay(html) {
-  if (html.indexOf('skeleton-overlay') !== -1) return html;
+  if (html.indexOf("skeleton-overlay") !== -1) return html;
 
-  var skeletonHtml = '' +
+  var skeletonHtml =
+    "" +
     '<div id="skeleton-overlay">' +
     '  <div class="skeleton-container">' +
     '    <div class="sk-hero">' +
@@ -415,44 +425,46 @@ function injectSkeletonOverlay(html) {
     '      <div class="sk-cta-group">' +
     '        <div class="sk-cta"></div>' +
     '        <div class="sk-cta"></div>' +
-    '      </div>' +
-    '    </div>' +
+    "      </div>" +
+    "    </div>" +
     '    <div class="sk-grid">' +
     '      <div class="sk-card"></div>' +
     '      <div class="sk-card"></div>' +
     '      <div class="sk-card"></div>' +
-    '    </div>' +
-    '  </div>' +
-    '</div>';
+    "    </div>" +
+    "  </div>" +
+    "</div>";
 
-  var inlineCss = '' +
-    '<style data-skeleton-inline>' +
-    '#skeleton-overlay{position:fixed;inset:0;z-index:5;pointer-events:none;background:var(--color-bg-light,#f8fafc);opacity:1;transition:opacity .25s ease-out}' +
-    'html.dark #skeleton-overlay{background:var(--color-bg-dark,#020617)}' +
-    '#skeleton-overlay[hidden]{display:none}' +
-    '@keyframes sk-shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}' +
-    '.skeleton-container{width:100%;max-width:1280px;margin:0 auto;padding:2rem 1.25rem}' +
-    '.sk-badge{width:100px;height:22px;border-radius:9999px;margin:0 auto 16px;background:linear-gradient(90deg,#e8e8e8 25%,#d4d4d4 50%,#e8e8e8 75%);background-size:200% 100%;animation:sk-shimmer 1.5s infinite}' +
-    '.sk-hero{display:flex;flex-direction:column;align-items:center;text-align:center;margin-bottom:24px}' +
-    '.sk-line{width:65%;height:32px;border-radius:8px;margin:0 auto 12px;background:linear-gradient(90deg,#e8e8e8 25%,#d4d4d4 50%,#e8e8e8 75%);background-size:200% 100%;animation:sk-shimmer 1.5s infinite}' +
-    '.sk-line-short{width:45%;height:18px;margin-bottom:8px}' +
-    '.sk-line-shorter{width:30%;height:18px}' +
-    '.sk-cta-group{display:flex;gap:12px;justify-content:center;margin-top:20px}' +
-    '.sk-cta{width:140px;height:44px;border-radius:12px;background:linear-gradient(90deg,#e8e8e8 25%,#d4d4d4 50%,#e8e8e8 75%);background-size:200% 100%;animation:sk-shimmer 1.5s infinite}' +
-    '.sk-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:32px}' +
-    '@media(max-width:767px){.sk-grid{grid-template-columns:1fr}.sk-cta{width:100%;max-width:none}}' +
-    '@media(min-width:768px)and(max-width:1279px){.sk-grid{grid-template-columns:repeat(2,1fr)}}' +
-    '.sk-card{height:220px;border-radius:16px;background:linear-gradient(90deg,#e8e8e8 25%,#d4d4d4 50%,#e8e8e8 75%);background-size:200% 100%;animation:sk-shimmer 1.5s infinite}' +
-    '.dark .sk-badge,.dark .sk-line,.dark .sk-cta,.dark .sk-card{background:linear-gradient(90deg,#1e293b 25%,#334155 50%,#1e293b 75%);background-size:200% 100%}' +
-    '</style>';
+  var inlineCss =
+    "" +
+    "<style data-skeleton-inline>" +
+    "#skeleton-overlay{position:fixed;inset:0;z-index:5;pointer-events:none;background:var(--color-bg-light,#f8fafc);opacity:1;transition:opacity .25s ease-out}" +
+    "html.dark #skeleton-overlay{background:var(--color-bg-dark,#020617)}" +
+    "#skeleton-overlay[hidden]{display:none}" +
+    "@keyframes sk-shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}" +
+    ".skeleton-container{width:100%;max-width:1280px;margin:0 auto;padding:2rem 1.25rem}" +
+    ".sk-badge{width:100px;height:22px;border-radius:9999px;margin:0 auto 16px;background:linear-gradient(90deg,#e8e8e8 25%,#d4d4d4 50%,#e8e8e8 75%);background-size:200% 100%;animation:sk-shimmer 1.5s infinite}" +
+    ".sk-hero{display:flex;flex-direction:column;align-items:center;text-align:center;margin-bottom:24px}" +
+    ".sk-line{width:65%;height:32px;border-radius:8px;margin:0 auto 12px;background:linear-gradient(90deg,#e8e8e8 25%,#d4d4d4 50%,#e8e8e8 75%);background-size:200% 100%;animation:sk-shimmer 1.5s infinite}" +
+    ".sk-line-short{width:45%;height:18px;margin-bottom:8px}" +
+    ".sk-line-shorter{width:30%;height:18px}" +
+    ".sk-cta-group{display:flex;gap:12px;justify-content:center;margin-top:20px}" +
+    ".sk-cta{width:140px;height:44px;border-radius:12px;background:linear-gradient(90deg,#e8e8e8 25%,#d4d4d4 50%,#e8e8e8 75%);background-size:200% 100%;animation:sk-shimmer 1.5s infinite}" +
+    ".sk-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:32px}" +
+    "@media(max-width:767px){.sk-grid{grid-template-columns:1fr}.sk-cta{width:100%;max-width:none}}" +
+    "@media(min-width:768px)and(max-width:1279px){.sk-grid{grid-template-columns:repeat(2,1fr)}}" +
+    ".sk-card{height:220px;border-radius:16px;background:linear-gradient(90deg,#e8e8e8 25%,#d4d4d4 50%,#e8e8e8 75%);background-size:200% 100%;animation:sk-shimmer 1.5s infinite}" +
+    ".dark .sk-badge,.dark .sk-line,.dark .sk-cta,.dark .sk-card{background:linear-gradient(90deg,#1e293b 25%,#334155 50%,#1e293b 75%);background-size:200% 100%}" +
+    "</style>";
 
-  var inlineJs = '' +
-    '<script>' +
+  var inlineJs =
+    "" +
+    "<script>" +
     '(function(){var sk=document.getElementById("skeleton-overlay");if(!sk)return;function hide(){sk.setAttribute("hidden","");sk.style.display="none";document.head.querySelector("[data-skeleton-inline]")?.remove()}if(document.readyState==="complete")hide();else window.addEventListener("load",hide);setTimeout(hide,3000);})();' +
-    '</script>';
+    "</script>";
 
   // Inject before </body>: CSS first (prevent FOUC), then skeleton HTML, then JS (auto-hide on load)
-  return html.replace('</body>', inlineCss + '\n' + skeletonHtml + '\n' + inlineJs + '\n  </body>');
+  return html.replace("</body>", inlineCss + "\n" + skeletonHtml + "\n" + inlineJs + "\n  </body>");
 }
 
 function injectSwupScripts(html) {
@@ -472,19 +484,16 @@ function normalizeSpaContent(html) {
   // vertical scrollbar inside main at 2048px+ wide viewports.
   // Append to existing class instead of replacing, so unique classes
   // (e.g. mobile pages' max-w-[1024px] mx-auto) are preserved.
-  var required = ['flex-1'];
-  html = html.replace(
-    /(<main\s+id="spa-content")(\s+class="([^"]*)")?/gi,
-    function(match, open, classAttr, existing) {
-      var merged = existing || '';
-      for (var i = 0; i < required.length; i++) {
-        if (merged.indexOf(required[i]) === -1) {
-          merged += (merged ? ' ' : '') + required[i];
-        }
+  var required = ["flex-1"];
+  html = html.replace(/(<main\s+id="spa-content")(\s+class="([^"]*)")?/gi, function (match, open, classAttr, existing) {
+    var merged = existing || "";
+    for (var i = 0; i < required.length; i++) {
+      if (merged.indexOf(required[i]) === -1) {
+        merged += (merged ? " " : "") + required[i];
       }
-      return open + ' class="' + merged + '"';
     }
-  );
+    return open + ' class="' + merged + '"';
+  });
   return html;
 }
 
@@ -497,22 +506,22 @@ function normalizeSpaContent(html) {
  */
 function generateResponsiveEntry(route) {
   var srcDir = path.join(SRC_PAGES_DIR, route.slug);
-  var srcFile = path.join(srcDir, 'index-pc.html');
+  var srcFile = path.join(srcDir, "index-pc.html");
   if (!fs.existsSync(srcFile)) {
-    srcFile = path.join(srcDir, 'index-mobile.html');
+    srcFile = path.join(srcDir, "index-mobile.html");
   }
 
   if (fs.existsSync(srcFile)) {
-    var html = fs.readFileSync(srcFile, 'utf-8');
-    var bp = BASE_PATH || '';
-    var canonicalUrl = 'https://www.kitchen.yukoli.com/' + (bp ? bp.replace(/^\//, '') + '/' : '') + route.slug + '/';
+    var html = fs.readFileSync(srcFile, "utf-8");
+    var bp = BASE_PATH || "";
+    var canonicalUrl = "https://www.kitchen.yukoli.com/" + (bp ? bp.replace(/^\//, "") + "/" : "") + route.slug + "/";
 
     // Device-aware redirect: inject inline script to jump to correct version
     // on direct SSG hit (SPA fetch uses index-mobile.html etc. and skips this).
     // Device-aware redirect script (SSG直出时根据屏幕宽度跳转到正确版本)
     // SPA fetch不经过此路径，不会触发跳转
     // Note: JS string中 \\/ 输出为 \/，在HTML中成为正则字面量 \/index\.html$
-        html = html.replace(
+    html = html.replace(
       /<link\s+rel="canonical"\s+href="[^"]*"\s*\/?>/i,
       '<link rel="canonical" href="' + canonicalUrl + '"/>'
     );
@@ -537,36 +546,46 @@ function generateResponsiveEntry(route) {
   }
 
   // Fallback: minimal redirect (should never happen)
-  var bp = BASE_PATH || '';
+  var bp = BASE_PATH || "";
   var slug = route.slug;
-  var canonicalUrl = 'https://www.kitchen.yukoli.com/' + (bp ? bp.replace(/^\//, '') + '/' : '') + slug + '/';
-  var title = 'YuKoLi | Smart Kitchen Solutions - ' + slug.split('/').pop().replace(/-/g, ' ').replace(/\w\S*/g, function(w){return w.charAt(0).toUpperCase()+w.substr(1);});
+  var canonicalUrl = "https://www.kitchen.yukoli.com/" + (bp ? bp.replace(/^\//, "") + "/" : "") + slug + "/";
+  var title =
+    "YuKoLi | Smart Kitchen Solutions - " +
+    slug
+      .split("/")
+      .pop()
+      .replace(/-/g, " ")
+      .replace(/\w\S*/g, function (w) {
+        return w.charAt(0).toUpperCase() + w.substr(1);
+      });
   return [
-    '<!DOCTYPE html>',
+    "<!DOCTYPE html>",
     '<html class="light" lang="en">',
-    '<head>',
+    "<head>",
     '  <meta charset="UTF-8">',
     '  <meta name="viewport" content="width=device-width, initial-scale=1.0">',
-    '  <title>' + title + '</title>',
+    "  <title>" + title + "</title>",
     '  <link rel="canonical" href="' + canonicalUrl + '"/>',
     '  <meta property="og:url" content="' + canonicalUrl + '">',
     '  <meta property="og:type" content="website">',
     '  <meta property="og:title" content="' + title + '">',
     '  <meta name="robots" content="index, follow">',
     '  <script defer src="' + bp + '/assets/js/ui/navigator.js"></script>',
-    '</head>',
-    '<body>',
-    '  <navigator data-component="navigator" data-active="' + route.slug.split('/')[0] + '" data-search="true"></navigator>',
+    "</head>",
+    "<body>",
+    '  <navigator data-component="navigator" data-active="' +
+      route.slug.split("/")[0] +
+      '" data-search="true"></navigator>',
     '  <main id="spa-content" class="flex-1 overflow-x-hidden"></main>',
-    '  <footer data-component="footer" data-active="' + route.slug.split('/')[0] + '"></footer>',
-    '  <noscript>',
+    '  <footer data-component="footer" data-active="' + route.slug.split("/")[0] + '"></footer>',
+    "  <noscript>",
     '    <meta http-equiv="refresh" content="0;url=index-mobile.html?lang=en">',
-    '  </noscript>',
-    '  <p>Loading...</p>',
+    "  </noscript>",
+    "  <p>Loading...</p>",
     '  <script defer src="' + bp + '/assets/js/spa-router.js"></script>',
-    '</body>',
-    '</html>'
-  ].join('\n');
+    "</body>",
+    "</html>",
+  ].join("\n");
 }
 
 /**
@@ -580,26 +599,26 @@ function generateResponsiveEntry(route) {
  */
 function generateRouteIndex(route) {
   const srcDir = path.join(SRC_PAGES_DIR, route.slug);
-  const srcEntryFile = path.join(srcDir, 'index.html');
+  const srcEntryFile = path.join(srcDir, "index.html");
 
   if (!fs.existsSync(srcEntryFile)) {
     // Auto-generate a responsive entry for routes without index.html
     // (e.g., case city pages like cases/manila/)
-    log('AUTO: Generating responsive entry for route: ' + route.slug);
+    log("AUTO: Generating responsive entry for route: " + route.slug);
     const autoHtml = generateResponsiveEntry(route);
     const distRouteDir = path.join(DIST_DIR, route.slug);
     ensureDir(distRouteDir);
-    const distFile = path.join(distRouteDir, 'index.html');
-    fs.writeFileSync(distFile, autoHtml, 'utf-8');
+    const distFile = path.join(distRouteDir, "index.html");
+    fs.writeFileSync(distFile, autoHtml, "utf-8");
     return true;
   }
 
   // Read the source entry file
-  let html = fs.readFileSync(srcEntryFile, 'utf-8');
+  let html = fs.readFileSync(srcEntryFile, "utf-8");
 
   // Update canonical URL to clean directory path
-  const basePathPart = BASE_PATH ? BASE_PATH.replace(/^\//, '') + '/' : '';
-  const canonicalUrl = 'https://www.kitchen.yukoli.com/' + basePathPart + route.slug + '/';
+  const basePathPart = BASE_PATH ? BASE_PATH.replace(/^\//, "") + "/" : "";
+  const canonicalUrl = "https://www.kitchen.yukoli.com/" + basePathPart + route.slug + "/";
   html = html.replace(
     /<link\s+rel="canonical"\s+href="[^"]*"\s*\/?>/i,
     '<link rel="canonical" href="' + canonicalUrl + '"/>'
@@ -633,9 +652,9 @@ function generateRouteIndex(route) {
   // Write to dist/<slug>/index.html
   const distRouteDir = path.join(DIST_DIR, route.slug);
   ensureDir(distRouteDir);
-  const distFile = path.join(distRouteDir, 'index.html');
+  const distFile = path.join(distRouteDir, "index.html");
 
-  fs.writeFileSync(distFile, html, 'utf-8');
+  fs.writeFileSync(distFile, html, "utf-8");
   return true;
 }
 
@@ -651,7 +670,7 @@ function copyDeviceFiles(route) {
   const destRouteDir = path.join(DIST_DIR, route.slug);
 
   if (!fs.existsSync(srcPagesDir)) {
-    log('WARN: No src/pages/' + route.slug + '/ directory found');
+    log("WARN: No src/pages/" + route.slug + "/ directory found");
     return 0;
   }
 
@@ -660,15 +679,15 @@ function copyDeviceFiles(route) {
   let copied = 0;
   const files = fs.readdirSync(srcPagesDir);
   for (const file of files) {
-    if (!file.endsWith('.html')) continue;
+    if (!file.endsWith(".html")) continue;
     // Skip index.html — we generate our own with updated URLs
     // Also skip src/pages/index.html (the SPA shell) — handled separately
-    if (file === 'index.html') continue;
+    if (file === "index.html") continue;
 
     const srcFile = path.join(srcPagesDir, file);
     const destFile = path.join(destRouteDir, file);
 
-    let content = fs.readFileSync(srcFile, 'utf-8');
+    let content = fs.readFileSync(srcFile, "utf-8");
     // Inject URL ?lang= parameter sync script (must be before lang-registry)
     content = injectLangUrlSync(content);
     content = injectPreTranslate(content);
@@ -683,9 +702,8 @@ function copyDeviceFiles(route) {
     if (BASE_PATH) {
       content = patchHtmlPaths(content);
     }
-    fs.writeFileSync(destFile, content, 'utf-8');
+    fs.writeFileSync(destFile, content, "utf-8");
     copied++;
-
   }
 
   return copied;
@@ -698,16 +716,16 @@ function copyDeviceFiles(route) {
  */
 function generateRootIndex() {
   // Use the SPA shell as base (not the MPA home entry)
-  const spaShell = path.join(__dirname, '..', 'src', 'index.html');
+  const spaShell = path.join(__dirname, "..", "src", "index.html");
   if (!fs.existsSync(spaShell)) {
-    log('ERROR: src/index.html (SPA shell) not found');
+    log("ERROR: src/index.html (SPA shell) not found");
     return false;
   }
 
-  let html = fs.readFileSync(spaShell, 'utf-8');
+  let html = fs.readFileSync(spaShell, "utf-8");
 
   // Update canonical URL to root
-  var rootCanonical = 'https://www.kitchen.yukoli.com/' + (BASE_PATH ? BASE_PATH.replace(/^\//, '') + '/' : '');
+  var rootCanonical = "https://www.kitchen.yukoli.com/" + (BASE_PATH ? BASE_PATH.replace(/^\//, "") + "/" : "");
   html = html.replace(
     /<link\s+rel="canonical"\s+href="[^"]*"\s*\/?>/i,
     '<link rel="canonical" href="' + rootCanonical + '"/>'
@@ -724,11 +742,11 @@ function generateRootIndex() {
 
   // Add cache-busting version to all JS/CSS (same as SSG pages)
 
-  html = html.replace(/(href="\/assets\/css\/[^\"]+)"/g, '$1?' + BUILD_VERSION + '"');
-  html = html.replace(/(src="\/assets\/js\/[^\"]+)(?<!\?v=[^"]*)"/g, '$1?' + BUILD_VERSION + '"');
+  html = html.replace(/(href="\/assets\/css\/[^\"]+)"/g, "$1?" + BUILD_VERSION + '"');
+  html = html.replace(/(src="\/assets\/js\/[^\"]+)(?<!\?v=[^"]*)"/g, "$1?" + BUILD_VERSION + '"');
 
   // Write to dist/index.html
-  fs.writeFileSync(path.join(DIST_DIR, 'index.html'), html, 'utf-8');
+  fs.writeFileSync(path.join(DIST_DIR, "index.html"), html, "utf-8");
   return true;
 }
 
@@ -744,58 +762,66 @@ function generateRootIndex() {
 function generate404() {
   var bp = BASE_PATH;
   // Include both SSG routes + case slug aliases for 404 redirect handling
-  var allRoutes = ROUTES.map(function (r) { return r.slug; });
+  var allRoutes = ROUTES.map(function (r) {
+    return r.slug;
+  });
   // Add case slug aliases so 404.html can redirect /cases/manila-lunchbox-studio-2025 → /cases/manila-lunchbox-studio-2025/
   for (var _city in CASE_SLUG_MAP) {
-    allRoutes.push('cases/' + CASE_SLUG_MAP[_city]);
+    allRoutes.push("cases/" + CASE_SLUG_MAP[_city]);
   }
   var routesJson = JSON.stringify(allRoutes);
-  var src404 = path.resolve(__dirname, '..', 'src', '404.html');
+  var src404 = path.resolve(__dirname, "..", "src", "404.html");
   if (!fs.existsSync(src404)) {
-    log('  WARN: src/404.html not found, skipping 404 generation');
+    log("  WARN: src/404.html not found, skipping 404 generation");
     return false;
   }
-  var html = fs.readFileSync(src404, 'utf-8');
+  var html = fs.readFileSync(src404, "utf-8");
 
   var redirectScript =
-    '  <!-- SSG redirect: missing trailing slash -->\n' +
-    '  <script>\n' +
-    '  (function () {\n' +
-    '    var base = "' + (bp || '') + '";\n' +
-    '    var path = window.location.pathname;\n' +
+    "  <!-- SSG redirect: missing trailing slash -->\n" +
+    "  <script>\n" +
+    "  (function () {\n" +
+    '    var base = "' +
+    (bp || "") +
+    '";\n' +
+    "    var path = window.location.pathname;\n" +
     '    var normalized = path.replace(/\\/$/, "");\n' +
-    '    var routes = ' + routesJson + ';\n' +
+    "    var routes = " +
+    routesJson +
+    ";\n" +
     '    var categorySlugs = ["cutting","stirfry","frying","stewing","steaming","other","all","compare"];\n' +
-    '    // Only redirect /products/{category} (2 segments), not /products/{category}/{model}/ (3+ segments)\n' +
-    '    if (/^\/products\/([^/]+)$/.test(path.replace(/\/$/, ""))) {\n' +
+    "    // Only redirect /products/{category} (2 segments), not /products/{category}/{model}/ (3+ segments)\n" +
+    '    if (/^\\/products\/([^/]+)$/.test(path.replace(/\/$/, ""))) {\n' +
     '      var productFirstSegment = path.replace(/^\/products\\//, "").replace(/\/$/, "");\n' +
-    '      if (productFirstSegment && categorySlugs.indexOf(productFirstSegment) !== -1) {\n' +
+    "      if (productFirstSegment && categorySlugs.indexOf(productFirstSegment) !== -1) {\n" +
     '        window.location.replace(base + "/?redirect=" + encodeURIComponent(path));\n' +
-    '      }\n' +
-    '    }\n' +
-    '    var stripped = normalized.replace(/^\\//, "");\n' +
-    '    if (routes.indexOf(stripped) !== -1) {\n' +
+    "      }\n" +
+    "    }\n" +
+    '    var stripped = normalized.replace(/^\\\\//, "");\n' +
+    "    if (routes.indexOf(stripped) !== -1) {\n" +
     '      window.location.replace(base + "/" + stripped + "/");\n' +
-    '    } else {\n' +
+    "    } else {\n" +
     '      var segment = normalized.split("/").pop();\n' +
-    '      if (routes.indexOf(segment) !== -1) {\n' +
+    "      if (routes.indexOf(segment) !== -1) {\n" +
     '        window.location.replace(base + "/" + segment + "/");\n' +
-    '      }\n' +
-    '    }\n' +
-    '  }());\n' +
-    '  </script>';
+    "      }\n" +
+    "    }\n" +
+    "  }());\n" +
+    "  </script>";
 
-  html = html.replace('</head>', redirectScript + '\n  </head>');
-  if (bp) { html = patchHtmlPaths(html); }
-  fs.writeFileSync(path.join(DIST_DIR, '404.html'), html, 'utf-8');
+  html = html.replace("</head>", redirectScript + "\n  </head>");
+  if (bp) {
+    html = patchHtmlPaths(html);
+  }
+  fs.writeFileSync(path.join(DIST_DIR, "404.html"), html, "utf-8");
   return true;
 }
 
 // ─── Main ────────────────────────────────────────────────────────
 
 function main() {
-  log('Starting SSG build...');
-  log('Dist directory: ' + DIST_DIR);
+  log("Starting SSG build...");
+  log("Dist directory: " + DIST_DIR);
 
   if (!fs.existsSync(DIST_DIR)) {
     log('ERROR: dist/ directory not found. Run "npm run build" first.');
@@ -803,54 +829,54 @@ function main() {
   }
 
   if (shouldClean) {
-    log('Cleaning old route directories from dist...');
+    log("Cleaning old route directories from dist...");
     for (const route of ROUTES) {
       const routeDir = path.join(DIST_DIR, route.slug);
       if (fs.existsSync(routeDir)) {
         fs.rmSync(routeDir, { recursive: true });
-        log('  Removed: ' + route.slug + '/');
+        log("  Removed: " + route.slug + "/");
       }
     }
     // Also clean case slug alias directories (from previous runs)
     for (const cityName of Object.keys(CASE_SLUG_MAP)) {
       const slugName = CASE_SLUG_MAP[cityName];
-      const aliasDir = path.join(DIST_DIR, 'cases', slugName);
+      const aliasDir = path.join(DIST_DIR, "cases", slugName);
       if (fs.existsSync(aliasDir)) {
         fs.rmSync(aliasDir, { recursive: true });
-        log('  Removed: cases/' + slugName + '/ (slug alias)');
+        log("  Removed: cases/" + slugName + "/ (slug alias)");
       }
     }
     // Also clean root index.html and 404.html
-    const rootIndex = path.join(DIST_DIR, 'index.html');
+    const rootIndex = path.join(DIST_DIR, "index.html");
     if (fs.existsSync(rootIndex)) {
       fs.unlinkSync(rootIndex);
-      log('  Removed: index.html (root)');
+      log("  Removed: index.html (root)");
     }
-    const notFoundFile = path.join(DIST_DIR, '404.html');
+    const notFoundFile = path.join(DIST_DIR, "404.html");
     if (fs.existsSync(notFoundFile)) {
       fs.unlinkSync(notFoundFile);
-      log('  Removed: 404.html');
+      log("  Removed: 404.html");
     }
   }
 
   // Step 1: Generate route entry points
-  log('\nStep 1: Generating route entry points...');
+  log("\nStep 1: Generating route entry points...");
   let generatedRoutes = 0;
   for (const route of ROUTES) {
     const ok = generateRouteIndex(route);
     if (ok) {
       generatedRoutes++;
-      log('  ✓ ' + route.slug + '/');
+      log("  ✓ " + route.slug + "/");
     }
   }
 
   // Step 2: Copy device-specific files from dist/pages/<route>/ to dist/<route>/
-  log('\nStep 2: Copying device-specific files...');
+  log("\nStep 2: Copying device-specific files...");
   let totalCopied = 0;
   for (const route of ROUTES) {
     const n = copyDeviceFiles(route);
     if (n > 0) {
-      log('  ✓ ' + route.slug + '/ (' + n + ' device files)');
+      log("  ✓ " + route.slug + "/ (" + n + " device files)");
       totalCopied += n;
     }
   }
@@ -858,24 +884,24 @@ function main() {
   // Step 2.5: Create case slug alias directories (hard links)
   // This makes /cases/manila-lunchbox-studio-2025/ resolve to the same
   // content as /cases/manila/ without duplicating files on disk.
-  log('\nStep 2.5: Creating case slug alias directories...');
+  log("\nStep 2.5: Creating case slug alias directories...");
   let aliasCount = 0;
   // Find all cases sub-routes from ROUTES
   for (const route of ROUTES) {
-    const parts = route.slug.split('/');
-    if (parts.length === 2 && parts[0] === 'cases') {
+    const parts = route.slug.split("/");
+    if (parts.length === 2 && parts[0] === "cases") {
       const cityName = parts[1];
       const slugName = CASE_SLUG_MAP[cityName];
       if (slugName) {
         const srcPath = path.join(DIST_DIR, route.slug);
-        const dstPath = path.join(DIST_DIR, 'cases', slugName);
+        const dstPath = path.join(DIST_DIR, "cases", slugName);
         if (!fs.existsSync(srcPath)) {
-          log('  WARN: Source dir not found: ' + route.slug + '/');
+          log("  WARN: Source dir not found: " + route.slug + "/");
           continue;
         }
         // Skip if alias already exists (e.g. from a previous run)
         if (fs.existsSync(dstPath)) {
-          log('  ~ ' + 'cases/' + slugName + '/ (already exists)');
+          log("  ~ " + "cases/" + slugName + "/ (already exists)");
         } else {
           ensureDir(dstPath);
           // Hard-link all files from city dir to slug dir
@@ -893,54 +919,54 @@ function main() {
               linked++;
             }
           }
-          log('  ✓ ' + 'cases/' + slugName + '/ (' + linked + ' files, hardlinked)');
+          log("  ✓ " + "cases/" + slugName + "/ (" + linked + " files, hardlinked)");
           aliasCount++;
         }
       } else {
-        log('  WARN: No slug alias for case city: ' + cityName);
+        log("  WARN: No slug alias for case city: " + cityName);
       }
     }
   }
   if (aliasCount === 0) {
-    log('  (none needed)');
+    log("  (none needed)");
   }
 
   // Step 2.8: Inject manifest.json link into all device-specific HTML files
-  log('\nStep 2.8: Injecting manifest link...');
+  log("\nStep 2.8: Injecting manifest link...");
   let manifestCount = 0;
   for (const route of ROUTES) {
-    const variants = ['index-pc.html', 'index-tablet.html', 'index-mobile.html'];
+    const variants = ["index-pc.html", "index-tablet.html", "index-mobile.html"];
     for (const v of variants) {
       const fp = path.join(DIST_DIR, route.slug, v);
       if (!fs.existsSync(fp)) continue;
-      let h = fs.readFileSync(fp, 'utf-8');
+      let h = fs.readFileSync(fp, "utf-8");
       if (/<link[^>]+manifest[^>]*>/.test(h)) continue;
-      const bp = BASE_PATH ? BASE_PATH.replace(/\/$/, '') : '';
-      h = h.replace('</head>', '  <link rel="manifest" href="' + bp + '/manifest.json"/>\n  </head>');
+      const bp = BASE_PATH ? BASE_PATH.replace(/\/$/, "") : "";
+      h = h.replace("</head>", '  <link rel="manifest" href="' + bp + '/manifest.json"/>\n  </head>');
       fs.writeFileSync(fp, h);
       manifestCount++;
     }
   }
-  log('  ✓ Injected manifest link into ' + manifestCount + ' files');
+  log("  ✓ Injected manifest link into " + manifestCount + " files");
 
   // Step 3: Generate root index.html
-  log('\nStep 3: Generating root index.html...');
+  log("\nStep 3: Generating root index.html...");
   const rootOk = generateRootIndex();
   if (rootOk) {
-    log('  ✓ / → redirects to /home/');
+    log("  ✓ / → redirects to /home/");
   }
 
   // Step 4: Generate 404.html (handles /home → /home/ redirects)
-  log('\nStep 4: Generating 404.html...');
+  log("\nStep 4: Generating 404.html...");
   var notFoundOk = generate404();
   if (notFoundOk) {
-    log('  ✓ 404.html → redirects /home → /home/ and unknown → /home/');
+    log("  ✓ 404.html → redirects /home → /home/ and unknown → /home/");
   }
 
   // Step 5: Copy language files to dist/assets/lang/
-  log('\nStep 5: Copying language files...');
-  const srcLangDir = path.resolve(__dirname, '..', 'src', 'assets', 'lang');
-  const distLangDir = path.join(DIST_DIR, 'assets', 'lang');
+  log("\nStep 5: Copying language files...");
+  const srcLangDir = path.resolve(__dirname, "..", "src", "assets", "lang");
+  const distLangDir = path.join(DIST_DIR, "assets", "lang");
   if (fs.existsSync(srcLangDir)) {
     if (!fs.existsSync(distLangDir)) {
       fs.mkdirSync(distLangDir, { recursive: true });
@@ -953,17 +979,17 @@ function main() {
       fs.copyFileSync(srcFile, destFile);
       copiedLangFiles++;
     }
-    log('  ✓ Copied ' + copiedLangFiles + ' language files to assets/lang/');
+    log("  ✓ Copied " + copiedLangFiles + " language files to assets/lang/");
   } else {
-    log('  ⚠ Language directory not found: ' + srcLangDir);
+    log("  ⚠ Language directory not found: " + srcLangDir);
   }
 
   // Step 5.5: Overwrite JS files that webpack may have minified from stale cache.
   // CopyWebpackPlugin copies src/assets/js/* but webpack production mode can
   // re-minify them from a stale compilation, losing recent edits.
-  log('\nStep 5.5: Copying fresh JS files from src...');
-  var _srcJsDir = path.resolve(__dirname, '..', 'src', 'assets', 'js');
-  var _distJsDir = path.join(DIST_DIR, 'assets', 'js');
+  log("\nStep 5.5: Copying fresh JS files from src...");
+  var _srcJsDir = path.resolve(__dirname, "..", "src", "assets", "js");
+  var _distJsDir = path.join(DIST_DIR, "assets", "js");
   var _jsCopied = 0;
   function copyJsRecursive(srcDir, dstDir) {
     if (!fs.existsSync(srcDir)) return;
@@ -974,84 +1000,84 @@ function main() {
       var dstPath = path.join(dstDir, entries[i]);
       if (fs.statSync(srcPath).isDirectory()) {
         copyJsRecursive(srcPath, dstPath);
-      } else if (entries[i].endsWith('.js')) {
+      } else if (entries[i].endsWith(".js")) {
         fs.copyFileSync(srcPath, dstPath);
         _jsCopied++;
       }
     }
   }
   copyJsRecursive(_srcJsDir, _distJsDir);
-  if (_jsCopied > 0) log('  ✓ Copied ' + _jsCopied + ' JS files to assets/js/');
+  if (_jsCopied > 0) log("  ✓ Copied " + _jsCopied + " JS files to assets/js/");
 
   // Step 5.6: Copy Swup + plugins from node_modules (for build:production / build:dev)
   var swupVendors = [
-    { src: 'node_modules/swup/dist/Swup.umd.js', dest: 'swup.min.js' },
-    { src: 'node_modules/@swup/head-plugin/dist/index.umd.js', dest: 'swup-head-plugin.min.js' },
-    { src: 'node_modules/@swup/preload-plugin/dist/index.umd.js', dest: 'swup-preload-plugin.min.js' },
+    { src: "node_modules/swup/dist/Swup.umd.js", dest: "swup.min.js" },
+    { src: "node_modules/@swup/head-plugin/dist/index.umd.js", dest: "swup-head-plugin.min.js" },
+    { src: "node_modules/@swup/preload-plugin/dist/index.umd.js", dest: "swup-preload-plugin.min.js" },
   ];
-  var swupJsDir = path.join(DIST_DIR, 'assets', 'js');
+  var swupJsDir = path.join(DIST_DIR, "assets", "js");
   if (!fs.existsSync(swupJsDir)) fs.mkdirSync(swupJsDir, { recursive: true });
   for (var s = 0; s < swupVendors.length; s++) {
-    var vSrc = path.resolve(__dirname, '..', swupVendors[s].src);
+    var vSrc = path.resolve(__dirname, "..", swupVendors[s].src);
     var vDst = path.join(swupJsDir, swupVendors[s].dest);
     if (fs.existsSync(vSrc)) {
       fs.copyFileSync(vSrc, vDst);
-      log('  ✓ swup vendor: ' + swupVendors[s].dest);
+      log("  ✓ swup vendor: " + swupVendors[s].dest);
     }
   }
 
   // Step 6: Patch CSS files for basePath (font URLs in local-fonts.css)
   if (BASE_PATH) {
-    log('\nStep 6: Patching CSS files for basePath...');
-    const _cssDir = path.join(DIST_DIR, 'assets', 'css');
-    const fontsCssPath = path.join(DIST_DIR, 'assets', 'fonts', 'local-fonts.css');
-    
+    log("\nStep 6: Patching CSS files for basePath...");
+    const _cssDir = path.join(DIST_DIR, "assets", "css");
+    const fontsCssPath = path.join(DIST_DIR, "assets", "fonts", "local-fonts.css");
+
     // Patch local-fonts.css font URLs
     if (fs.existsSync(fontsCssPath)) {
-      let cssContent = fs.readFileSync(fontsCssPath, 'utf-8');
-      const bp = BASE_PATH.replace(/\/$/, '');
+      let cssContent = fs.readFileSync(fontsCssPath, "utf-8");
+      const bp = BASE_PATH.replace(/\/$/, "");
       // Replace url('/assets/fonts/...') with url('/KitchenYuKoLi/assets/fonts/...')
       // Match url('...') or url("...") or url(...)
-      cssContent = cssContent.replace(/url\((['"])\/assets\/fonts\//g, 'url($1' + bp + '/assets/fonts/');
-      fs.writeFileSync(fontsCssPath, cssContent, 'utf-8');
-      log('  ✓ Patched local-fonts.css font URLs');
+      cssContent = cssContent.replace(/url\((['"])\/assets\/fonts\//g, "url($1" + bp + "/assets/fonts/");
+      fs.writeFileSync(fontsCssPath, cssContent, "utf-8");
+      log("  ✓ Patched local-fonts.css font URLs");
     }
   }
 
-// Step 6.5: Inject components.css into all SSG pages and SPA shell
+  // Step 6.5: Inject components.css into all SSG pages and SPA shell
   // This replaces previously dynamic injectStyles() calls with static CSS.
-  log('\nStep 6.5: Injecting components.css...');
-  var _componentsCssPath = path.join(DIST_DIR, 'assets', 'css', 'components.css');
+  log("\nStep 6.5: Injecting components.css...");
+  var _componentsCssPath = path.join(DIST_DIR, "assets", "css", "components.css");
   var _componentsInjected = 0;
 
   // Copy components.css from src to dist
-  var _srcComponentsCss = path.resolve(__dirname, '..', 'src', 'assets', 'css', 'components.css');
+  var _srcComponentsCss = path.resolve(__dirname, "..", "src", "assets", "css", "components.css");
   if (fs.existsSync(_srcComponentsCss)) {
     fs.copyFileSync(_srcComponentsCss, _componentsCssPath);
-    log('  ✓ Copied components.css to dist/assets/css/');
+    log("  ✓ Copied components.css to dist/assets/css/");
   } else {
-    log('  ⚠ components.css not found at src/assets/css/components.css');
+    log("  ⚠ components.css not found at src/assets/css/components.css");
   }
 
   // Inject <link> into all HTML files in dist/
   function _injectComponentsCss(html) {
-    if (html.indexOf('components.css') !== -1) return html; // already injected
+    if (html.indexOf("components.css") !== -1) return html; // already injected
     // Insert as the LAST <link> before </head> to ensure highest priority
     // (same as original JS injectStyles which appended <style> after all CSS)
     var tag = '  <link rel="stylesheet" href="/assets/css/components.css" />';
     // Insert before </head>
-    html = html.replace('</head>', '  ' + tag + '\n</head>');
+    html = html.replace("</head>", "  " + tag + "\n</head>");
     return html;
   }
 
   // Ensure core CSS files (tailwind, styles) are present in all HTML files
   function _injectCoreCss(html) {
     var coreCss = [
-      '/assets/fonts/local-fonts.css',
-      '/assets/css/styles.css',
-      '/assets/css/tailwind.css',
-      '/assets/css/z-index-system.css',
-      '/assets/css/performance-optimizations.css',
+      "/assets/fonts/local-fonts.css",
+      "/assets/css/styles.css",
+      "/assets/css/tailwind.css",
+      "/assets/css/z-index-system.css",
+      "/assets/css/performance-optimizations.css",
     ];
     for (var ci = 0; ci < coreCss.length; ci++) {
       if (html.indexOf(coreCss[ci]) === -1) {
@@ -1061,12 +1087,9 @@ function main() {
         var matches = html.match(linkPattern);
         if (matches && matches.length > 0) {
           var lastLink = matches[matches.length - 1];
-          html = html.replace(
-            lastLink,
-            lastLink + '\n    <link rel="stylesheet" href="' + coreCss[ci] + '" />'
-          );
+          html = html.replace(lastLink, lastLink + '\n    <link rel="stylesheet" href="' + coreCss[ci] + '" />');
         } else {
-          html = html.replace('</head>', '  <link rel="stylesheet" href="' + coreCss[ci] + '" />\n  </head>');
+          html = html.replace("</head>", '  <link rel="stylesheet" href="' + coreCss[ci] + '" />\n  </head>');
         }
       }
     }
@@ -1078,8 +1101,8 @@ function main() {
     // Add loading="lazy" to <img> tags that don't have loading= already.
     // Skip images with loading="eager" (hero images, above-the-fold).
     // Match <img ...> or <img ... /> closing patterns.
-    html = html.replace(/<img\s+((?:(?!loading=)[^>])*)>/gi, function(match, attrs) {
-      return '<img ' + attrs.trim() + ' loading="lazy">';
+    html = html.replace(/<img\s+((?:(?!loading=)[^>])*)>/gi, function (match, attrs) {
+      return "<img " + attrs.trim() + ' loading="lazy">';
     });
     return html;
   }
@@ -1096,8 +1119,8 @@ function main() {
    * 修复：检测 HTML 中是否缺少 products-dropdown.js，若缺少则在 </body> 前补全所有 6 个脚本。
    */
   function _injectDropdownScripts(html, filePath) {
-    if (html.indexOf('products-dropdown.js') !== -1) return html;
-    var versionTag = '';
+    if (html.indexOf("products-dropdown.js") !== -1) return html;
+    var versionTag = "";
     var scriptsArr = [
       '<script defer src="/assets/js/ui/dropdown-base.js"></script>',
       '<script defer src="/assets/js/ui/products-dropdown.js' + versionTag + '"></script>',
@@ -1106,7 +1129,7 @@ function main() {
       '<script defer src="/assets/js/ui/about-dropdown.js' + versionTag + '"></script>',
       '<script defer src="/assets/js/ui/dropdown-styles.js"></script>',
     ];
-    var scriptsTag = scriptsArr.join('\n    ');
+    var scriptsTag = scriptsArr.join("\n    ");
 
     var result = null;
 
@@ -1114,28 +1137,28 @@ function main() {
     // registered before navigator.js calls mountNavigator().
     // This is critical because all scripts are now defer;
     // defer scripts execute in HTML appearance order.
-    if (html.indexOf('navigator.js') !== -1) {
+    if (html.indexOf("navigator.js") !== -1) {
       var navPattern = /([ \t]*<script[^>]*navigator\.js[^>]*>[ \t]*\n?)/;
       var navMatch = html.match(navPattern);
       if (navMatch) {
-        result = html.replace(navMatch[0], scriptsTag + '\n' + navMatch[0]);
+        result = html.replace(navMatch[0], scriptsTag + "\n" + navMatch[0]);
         if (result !== html) {
-          log('  ✓ Injected dropdown scripts before navigator.js in ' + (filePath || 'unknown'));
+          log("  ✓ Injected dropdown scripts before navigator.js in " + (filePath || "unknown"));
           return result;
         }
       }
     }
 
     // Strategy B: fallback for pages without navigator.js
-    if (html.indexOf('</body>') === -1) {
-      log('  ⚠ Skipping (no </body>): ' + (filePath || 'unknown'));
+    if (html.indexOf("</body>") === -1) {
+      log("  ⚠ Skipping (no </body>): " + (filePath || "unknown"));
       return html;
     }
-    result = html.replace('</body>', scriptsTag + '\n  </body>');
+    result = html.replace("</body>", scriptsTag + "\n  </body>");
     if (result !== html) {
-      log('  ✓ Injected dropdown scripts into ' + (filePath || 'unknown'));
+      log("  ✓ Injected dropdown scripts into " + (filePath || "unknown"));
     } else {
-      log('  ⚠ injectDropdownScripts: replace failed for ' + (filePath || 'unknown'));
+      log("  ⚠ injectDropdownScripts: replace failed for " + (filePath || "unknown"));
     }
     return result;
   }
@@ -1148,8 +1171,8 @@ function main() {
       var fullPath = path.join(dir, entry.name);
       if (entry.isDirectory()) {
         _walkHtml(fullPath);
-      } else if (entry.name.endsWith('.html')) {
-        var html = fs.readFileSync(fullPath, 'utf-8');
+      } else if (entry.name.endsWith(".html")) {
+        var html = fs.readFileSync(fullPath, "utf-8");
         var modified = _injectComponentsCss(html);
         modified = _injectCoreCss(modified);
         modified = _injectDropdownScripts(modified, fullPath);
@@ -1161,19 +1184,19 @@ function main() {
         if (modified !== html) {
           fs.writeFileSync(fullPath, modified);
           _componentsInjected++;
-        } else if (html.indexOf('/assets/css/styles.css') === -1 || html.indexOf('/assets/css/tailwind.css') === -1) {
+        } else if (html.indexOf("/assets/css/styles.css") === -1 || html.indexOf("/assets/css/tailwind.css") === -1) {
           // Force inject core CSS even if _injectCoreCss returned unchanged.
           // Can happen if components.css link's href value was matched as substring.
           var coreCss2 = [
-            '/assets/css/styles.css',
-            '/assets/css/tailwind.css',
-            '/assets/css/z-index-system.css',
-            '/assets/css/performance-optimizations.css',
+            "/assets/css/styles.css",
+            "/assets/css/tailwind.css",
+            "/assets/css/z-index-system.css",
+            "/assets/css/performance-optimizations.css",
           ];
           var fixed = html;
           for (var ci2 = 0; ci2 < coreCss2.length; ci2++) {
             if (fixed.indexOf(coreCss2[ci2]) === -1) {
-              fixed = fixed.replace('</head>', '  <link rel="stylesheet" href="' + coreCss2[ci2] + '" />\n  </head>');
+              fixed = fixed.replace("</head>", '  <link rel="stylesheet" href="' + coreCss2[ci2] + '" />\n  </head>');
             }
           }
           if (fixed !== html) {
@@ -1183,32 +1206,32 @@ function main() {
         }
       }
     });
-    if (_lazyInjected > 0) log('  ✓ Injected loading=lazy into ' + _lazyInjected + ' HTML files');
+    if (_lazyInjected > 0) log("  ✓ Injected loading=lazy into " + _lazyInjected + " HTML files");
   }
 
   _walkHtml(DIST_DIR);
-  log('  ✓ Injected components.css into ' + _componentsInjected + ' HTML files');
+  log("  ✓ Injected components.css into " + _componentsInjected + " HTML files");
 
   // Summary
-  log('\n────────────────────────────────────────');
-  log('SSG build complete!');
-  log('  Routes generated: ' + generatedRoutes);
-  log('  Device files copied: ' + totalCopied);
-  log('  Root entry: ' + (rootOk ? 'OK' : 'FAILED'));
-  log('  404 handler: ' + (notFoundOk ? 'OK' : 'FAILED'));
-  log('');
-  log('Directory structure:');
-  log('  dist/');
-  log('    index.html          → / (redirects to /home/)');
-  log('    404.html            → handles /home → /home/ (no-trailing-slash)');
+  log("\n────────────────────────────────────────");
+  log("SSG build complete!");
+  log("  Routes generated: " + generatedRoutes);
+  log("  Device files copied: " + totalCopied);
+  log("  Root entry: " + (rootOk ? "OK" : "FAILED"));
+  log("  404 handler: " + (notFoundOk ? "OK" : "FAILED"));
+  log("");
+  log("Directory structure:");
+  log("  dist/");
+  log("    index.html          → / (redirects to /home/)");
+  log("    404.html            → handles /home → /home/ (no-trailing-slash)");
   for (var _ri = 0; _ri < ROUTES.length; _ri++) {
-    log('    ' + ROUTES[_ri].slug + '/');
-    log('      index.html        → /' + ROUTES[_ri].slug + '/');
-    log('      index-pc.html     → /' + ROUTES[_ri].slug + '/index-pc.html');
-    log('      index-mobile.html → /' + ROUTES[_ri].slug + '/index-mobile.html');
-    log('      index-tablet.html → /' + ROUTES[_ri].slug + '/index-tablet.html');
+    log("    " + ROUTES[_ri].slug + "/");
+    log("      index.html        → /" + ROUTES[_ri].slug + "/");
+    log("      index-pc.html     → /" + ROUTES[_ri].slug + "/index-pc.html");
+    log("      index-mobile.html → /" + ROUTES[_ri].slug + "/index-mobile.html");
+    log("      index-tablet.html → /" + ROUTES[_ri].slug + "/index-tablet.html");
   }
-  log('    assets/               → /assets/ (JS, CSS, images, lang)');
+  log("    assets/               → /assets/ (JS, CSS, images, lang)");
 }
 
 main();

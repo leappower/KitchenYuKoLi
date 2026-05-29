@@ -506,6 +506,11 @@
   /**
    * Auto-init: detect device type and render on spa:load (or DOMContentLoaded fallback)
    */
+  /**
+   * Auto-init: detect device type and render on spa:load (or DOMContentLoaded fallback)
+   * SPA 路由切换后 spa:load 事件触发时，新的 spa-content 已经替换完毕，
+   * 容器元素已存在于 DOM 中，直接渲染即可。
+   */
   function _autoInit() {
     var path = window.location.pathname || "/";
     var device = window.innerWidth < 768 ? "mobile" : window.innerWidth < 1280 ? "tablet" : "pc";
@@ -516,18 +521,15 @@
           : device === "tablet"
             ? "home-core-products-tablet"
             : "home-core-products-pc";
-      // 等待容器元素出现（SPA content:replace 后 DOM 可能还未更新）
-      function tryRender() {
-        if (document.getElementById(containerId)) {
-          if (device === "mobile") window.renderHomeCoreMobile(containerId);
-          else if (device === "tablet") window.renderHomeCoreTablet(containerId);
-          else window.renderHomeCorePC(containerId);
-        } else {
-          // 容器还没出现，重试
-          setTimeout(tryRender, 50);
-        }
+      var container = document.getElementById(containerId);
+      if (container) {
+        if (device === "mobile") window.renderHomeCoreMobile(containerId);
+        else if (device === "tablet") window.renderHomeCoreTablet(containerId);
+        else window.renderHomeCorePC(containerId);
+      } else {
+        // 容器不在 DOM 中 → 不是首页页面结构，不渲染
+        console.warn("[hcp] container not found:", containerId);
       }
-      tryRender();
     }
   }
   // Make init callable from outside (for SPA router loadPageScripts)
