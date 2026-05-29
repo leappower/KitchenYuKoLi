@@ -54,9 +54,14 @@
       return img.isPrimary;
     });
     var fp = primary ? primary.filePath : product.images[0].filePath;
-    // Defensive: normalize _N.webp → -N.webp (file rename migration)
+    // 统一用 model-1.webp，不信任 CMS 的 filePath 编号
     if (fp) {
-      fp = fp.replace(/_(\d\.webp)$/, "-$1");
+      fp =
+        "/assets/images/products/" +
+        fp
+          .split("/")
+          .pop()
+          .replace(/_\d+\.webp$/, "-1.webp");
     }
     return fp;
   }

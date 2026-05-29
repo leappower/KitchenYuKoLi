@@ -3,21 +3,24 @@
 <meta charset="utf-8"/>
     <script>
     (function checkDevice(){
-      if(window.__redirectChecked)return;
-      if(document.querySelector("meta[name=ssg-device]"))return;
+      if(window.__redirectChecked){console.log("[device-redirect] skip, __redirectChecked=true");return;}
+      if(document.querySelector("meta[name=ssg-device]")){console.log("[device-redirect] skip, ssg-device meta found");return;}
       window.__redirectChecked=true;
       var u=new URLSearchParams(location.search);
       var c=u.get("clean-url");
-      if(c){history.replaceState({},"",c);return}
-      if(window.__spaNavigating)return;
+      if(c){console.log("[device-redirect] clean-url detected, replaceState:",c);history.replaceState({},"",c);return}
+      if(window.__spaNavigating){console.log("[device-redirect] skip, __spaNavigating=true");return;}
       var f=location.pathname.split("/").pop();
+      console.log("[device-redirect] pathname=",location.pathname," f=",f," innerW=",window.innerWidth);
       if(!f||!f.match(/.html$/)){
-        // 目录 URL — 直接跳转到对应设备文件
-        console.debug("[device-debug] dir URL, calling doRedirect",{f:f,path:location.pathname});
+        console.log("[device-redirect] dir URL (no .html), calling doRedirect");
         doRedirect();
         return;
       }
-      if(f.match(/^index-(pc|mobile|tablet).html$/))return;
+      if(f.match(/^index-(pc|mobile|tablet).html$/)){
+        console.log("[device-redirect] already on device-specific page:",f,"→ skip");
+        return;
+      }
       function doRedirect(){
         var mq = window.matchMedia;
         var isTouch = mq && mq("(pointer:coarse)").matches;
@@ -26,10 +29,10 @@
         var isPc = mq("(min-width:1024px)").matches;
         if (isTouch && !isPc) { isMb = true; isTb = false; }
         var e = isPc ? "index-pc.html" : isTb ? "index-tablet.html" : "index-mobile.html";
-        console.debug("[device-debug] doRedirect",{f:f,e:e,mobile:isMb,tablet:isTb,pc:isPc,innerW:window.innerWidth,isTouch:isTouch});
-        if(f===e){console.debug("[device-debug] skip, already on correct version");return;}
+        console.log("[device-redirect] doRedirect",{innerW:window.innerWidth,isTouch:isTouch,mobile:isMb,tablet:isTb,pc:isPc,target:e,currentF:f});
+        if(f===e){console.log("[device-redirect] already on correct version, skip");return;}
         var newUrl=location.pathname.replace(/[^\/]*.html$/,"")+e;
-        console.debug("[device-debug] redirecting to",newUrl);
+        console.log("[device-redirect] redirecting to",newUrl);
         location.href=newUrl;
       }
       doRedirect();

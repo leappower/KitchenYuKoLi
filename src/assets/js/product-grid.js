@@ -493,9 +493,14 @@
         }) || p.images[0];
       if (primary && primary.filePath) {
         img = primary.filePath;
-        // Defensive: normalize _N.webp → -N.webp (file rename migration)
-        // Only replace single-digit index (_1.webp .. _9.webp), not multi-digit filenames
-        img = img.replace(/_(\d\.webp)$/, "-$1");
+        // 统一用 -1.webp，不信任 CMS 的 filePath 编号
+        img =
+          "/assets/images/products/" +
+          img
+            .split("/")
+            .pop()
+            .replace(/_\d+\.webp$/, "-1.webp")
+            .replace(/-\d{2,}\.webp$/, "-1.webp");
         if (img.indexOf("/admin/uploads/") === 0) {
           img = "/assets/images/products/" + img.split("/").pop();
         }

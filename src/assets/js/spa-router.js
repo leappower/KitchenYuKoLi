@@ -90,10 +90,12 @@
     var swup;
     try {
       try {
-        if (typeof window.Swup !== 'function' ||
-            typeof window.SwupHeadPlugin !== 'function' ||
-            typeof window.SwupPreloadPlugin !== 'function') {
-          console.warn('[spa-router] Swup or plugins not loaded, falling back to traditional navigation');
+        if (
+          typeof window.Swup !== "function" ||
+          typeof window.SwupHeadPlugin !== "function" ||
+          typeof window.SwupPreloadPlugin !== "function"
+        ) {
+          console.warn("[spa-router] Swup or plugins not loaded, falling back to traditional navigation");
           window.__spaNavigating = false;
           return;
         }
@@ -110,8 +112,9 @@
           ],
           animateHistoryBrowsing: false,
         });
+        console.log("[spa-router] Swup 初始化成功，selector:", 'a[href^="/"]:not([href$=".pdf"]):...');
       } catch (e) {
-        console.warn('[spa-router] Swup init failed, falling back to traditional navigation:', e.message);
+        console.warn("[spa-router] Swup init failed, falling back to traditional navigation:", e.message);
         window.__spaNavigating = false;
         return;
       }
@@ -126,34 +129,57 @@
 
     // ── Client-side device-aware fetch ─────────────────────────────
     (function () {
-      var deviceUtils = window.DeviceUtils;
-      if (!deviceUtils || !deviceUtils.getDeviceType) return;
-      var deviceType = deviceUtils.getDeviceType();
       var suffixMap = { mobile: "index-mobile.html", tablet: "index-tablet.html", pc: "index-pc.html" };
-      var suffix = suffixMap[deviceType];
-      if (!suffix) return;
-      swupHooks.on("fetch:request", function (visit, { args }) {
+      swupHooks.before("fetch:request", function (visit, args) {
         if (!args || !args.url) return;
+        var deviceUtils = window.DeviceUtils;
+        if (!deviceUtils || !deviceUtils.getDeviceType) {
+          console.log("[spa-router] fetch:request 跳过（DeviceUtils 未就绪）");
+          return;
+        }
+        var deviceType = deviceUtils.getDeviceType();
+        var suffix = suffixMap[deviceType];
+        if (!suffix) return;
         var url = args.url;
-        console.warn("[spa-router] fetch:request URL:", url);
-        // 只对已知的静态页面根路径（一级路径）添加设备后缀
-        // 排除所有多级路径（动态路由如 /products/detail/xxx/、/products/stirfry/xxx/ 等）
-        // 只有 /home/、/products/、/applications/、/about/、/contact/、/cases/、/news/ 等根路径才需要替换
         var pathParts = url
           .replace(/\/index\.html$/, "")
           .replace(/^https?:\/\/[^/]+/, "")
           .split("/")
           .filter(Boolean);
-        console.warn("[spa-router] fetch:request pathParts:", pathParts, "length:", pathParts.length);
-        if (pathParts.length !== 1) {
-          console.warn("[spa-router] fetch:request 跳过（多级路径）:", url);
+        var isProductsCategory =
+          pathParts.length === 2 && pathParts[0] === "products" && /^[a-z-]+$/.test(pathParts[1]);
+        // 允许所有有设备三屏静态入口的目录 URL
+        // 排除：产品详情页（/products/{cat}/{model}/）等三级以上路径
+        var isStaticPage = pathParts.length <= 2;
+        // 排除 products 下的 model 详情路径（/products/DLB-GD30/ 不带 category slug）
+        var isProductDetail = pathParts.length >= 3 && pathParts[0] === "products";
+        // 排除搜索直接跳转的无 category 路径：/products/DLB-GD30/（2级，第二个段包含大写/数字）
+        var isProductModelPath =
+          pathParts.length === 2 && pathParts[0] === "products" && !/^[a-z-]+$/.test(pathParts[1]);
+        console.log("[spa-router] fetch:request", {
+          url: url,
+          pathParts: pathParts,
+          isProdCat: isProductsCategory,
+          isStatic: isStaticPage,
+          isDetail: isProductDetail,
+          isModelPath: isProductModelPath,
+          suffix: suffix,
+          device: deviceType,
+        });
+        if (!isStaticPage || isProductDetail || isProductModelPath) {
+          console.log("[spa-router] fetch:request 跳过（非静态页面或产品详情）");
           return;
         }
-        if (!/\/$/.test(url)) return;
-        if (/index-(mobile|pc|tablet)\.html$/.test(url)) return;
-        var newUrl = url.replace(/\/$/, "") + "/" + suffix;
-        console.warn("[spa-router] fetch:request 替换:", url, "→", newUrl);
-        args.url = newUrl;
+        if (!/\/$/.test(url)) {
+          console.log("[spa-router] fetch:request 跳过（非目录URL）");
+          return;
+        }
+        if (/index-(mobile|pc|tablet)\.html$/.test(url)) {
+          console.log("[spa-router] fetch:request 跳过（已是设备页）");
+          return;
+        }
+        args.url = url.replace(/\/$/, "") + "/" + suffix;
+        console.log("[spa-router] fetch:request 改写:", url, "→", args.url);
       });
     })();
 
@@ -213,7 +239,8 @@
 
     // ── visit:start ──────────────────────────────────────────────────
     var _lastSwupNavStart = 0;
-    swupHooks.on("visit:start", function () {
+    swupHooks.on("visit:start", function (visit) {
+      console.log("[spa-router] visit:start", { href: window.location.href, visit: visit.to ? visit.to.url : "N/A" });
       window.__spaNavigating = true;
       _lastSwupNavStart = Date.now();
       var skel = document.getElementById("skeleton-overlay");
@@ -226,8 +253,17 @@
 
     // ── content:replace ──────────────────────────────────────────────
     swupHooks.on("content:replace", function (visit) {
+      console.log("[spa-router] content:replace 触发");
       window.__spaNavigating = false;
       _lastSwupNavStart = 0;
+      // 清理设备后缀，保持干净 URL
+      var _url = window.location.href;
+      if (/index-(mobile|tablet|pc)\.html$/.test(_url)) {
+        var clean = _url.replace(/\/index-(mobile|tablet|pc)\.html$/, "/");
+        console.log("[spa-router] content:replace 清理URL:", _url, "→", clean);
+        window.__redirectChecked = true;
+        history.replaceState(null, "", clean);
+      }
       _spaState.currentRoute = window.location.pathname.replace(/\/$/, "") || "/";
       var skel = document.getElementById("skeleton-overlay");
       if (skel) {
@@ -252,6 +288,17 @@
       }
       var newDoc = visit && visit.to && visit.to.document ? visit.to.document : null;
       reloadPageScripts(newDoc);
+      // 确保 navigator 组件存在（SPA 替换可能清空了它的 DOM）
+      var navPlaceholder = document.querySelector('[data-component="navigator"]');
+      if (
+        navPlaceholder &&
+        !navPlaceholder.querySelector("header") &&
+        window.Navigator &&
+        typeof window.Navigator.mount === "function"
+      ) {
+        console.log("[spa-router] navigator placeholder 为空，重新挂载");
+        window.Navigator.mount();
+      }
       if (window.Navigator && typeof window.Navigator.updateActive === "function") {
         var sectionId =
           _spaState.currentRoute === "/"

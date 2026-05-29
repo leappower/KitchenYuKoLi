@@ -484,8 +484,10 @@
         }) || product.images[0];
       if (pi && pi.filePath) {
         imgSrc = pi.filePath;
-        // Defensive: normalize _N.webp → -N.webp (file rename migration)
-        imgSrc = imgSrc.replace(/_(\d\.webp)$/, "-$1");
+        // Defensive: 不信任 CMS 的 filePath 后缀，统一替换为 -1.webp
+        if (imgSrc && /_\d+\.webp$/.test(imgSrc)) {
+          imgSrc = imgSrc.replace(/_\d+\.webp$/, "-1.webp");
+        }
         // Defensive: rewrite stale CMS paths
         if (imgSrc.indexOf("/admin/uploads/") === 0) {
           imgSrc = "/assets/images/products/" + imgSrc.split("/").pop();

@@ -37,21 +37,24 @@ var DIST_DIR = path.resolve(__dirname, '..', 'dist');
 var REDIRECT_SCRIPT =
   '    <script>\n' +
   '    (function checkDevice(){\n' +
-  '      if(window.__redirectChecked)return;\n' +
-  '      if(document.querySelector("meta[name=ssg-device]"))return;\n' +
+  '      if(window.__redirectChecked){console.log("[device-redirect] skip, __redirectChecked=true");return;}\n' +
+  '      if(document.querySelector("meta[name=ssg-device]")){console.log("[device-redirect] skip, ssg-device meta found");return;}\n' +
   '      window.__redirectChecked=true;\n' +
   '      var u=new URLSearchParams(location.search);\n' +
   '      var c=u.get("clean-url");\n' +
-  '      if(c){history.replaceState({},"",c);return}\n' +
-  '      if(window.__spaNavigating)return;\n' +
+  '      if(c){console.log("[device-redirect] clean-url detected, replaceState:",c);history.replaceState({},"",c);return}\n' +
+  '      if(window.__spaNavigating){console.log("[device-redirect] skip, __spaNavigating=true");return;}\n' +
   '      var f=location.pathname.split("/").pop();\n' +
+  '      console.log("[device-redirect] pathname=",location.pathname," f=",f," innerW=",window.innerWidth);\n' +
   '      if(!f||!f.match(/\.html$/)){\n' +
-  '        // 目录 URL — 直接跳转到对应设备文件\n' +
-  '        console.debug("[device-debug] dir URL, calling doRedirect",{f:f,path:location.pathname});\n' +
+  '        console.log("[device-redirect] dir URL (no .html), calling doRedirect");\n' +
   '        doRedirect();\n' +
   '        return;\n' +
   '      }\n' +
-  '      if(f.match(/^index-(pc|mobile|tablet)\.html$/))return;\n' +
+  '      if(f.match(/^index-(pc|mobile|tablet)\.html$/)){\n' +
+  '        console.log("[device-redirect] already on device-specific page:",f,"→ skip");\n' +
+  '        return;\n' +
+  '      }\n' +
   '      function doRedirect(){\n' +
   '        var mq = window.matchMedia;\n' +
   '        var isTouch = mq && mq("(pointer:coarse)").matches;\n' +
@@ -60,10 +63,10 @@ var REDIRECT_SCRIPT =
   '        var isPc = mq("(min-width:1024px)").matches;\n' +
   '        if (isTouch && !isPc) { isMb = true; isTb = false; }\n' +
   '        var e = isPc ? "index-pc.html" : isTb ? "index-tablet.html" : "index-mobile.html";\n' +
-  '        console.debug("[device-debug] doRedirect",{f:f,e:e,mobile:isMb,tablet:isTb,pc:isPc,innerW:window.innerWidth,isTouch:isTouch});\n' +
-  '        if(f===e){console.debug("[device-debug] skip, already on correct version");return;}\n' +
+  '        console.log("[device-redirect] doRedirect",{innerW:window.innerWidth,isTouch:isTouch,mobile:isMb,tablet:isTb,pc:isPc,target:e,currentF:f});\n' +
+  '        if(f===e){console.log("[device-redirect] already on correct version, skip");return;}\n' +
   '        var newUrl=location.pathname.replace(/[^\\/]*\.html$/,"")+e;\n' +
-  '        console.debug("[device-debug] redirecting to",newUrl);\n' +
+  '        console.log("[device-redirect] redirecting to",newUrl);\n' +
   '        location.href=newUrl;\n' +
   '      }\n' +
   '      doRedirect();\n' +

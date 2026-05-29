@@ -616,22 +616,12 @@ var __DEVELOPMENT__ = typeof __DEVELOPMENT__ !== "undefined" ? __DEVELOPMENT__ :
     init();
   }
 
-  // SPA navigation: pause and release all videos
+  // SPA navigation: pause and release all videos, then reinit
   document.addEventListener("spa:load", function () {
     if (typeof pauseAllExcept === "function") {
       pauseAllExcept(null);
     }
     _activeInstances = [];
+    requestAnimationFrame(init);
   });
-
-  _spaOn(
-    document,
-    "spa:ready",
-    function () {
-      requestAnimationFrame(function () {
-        requestAnimationFrame(init);
-      });
-    },
-    "spa:ready:init"
-  );
 })();

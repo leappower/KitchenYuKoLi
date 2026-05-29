@@ -17,6 +17,28 @@
   "use strict";
 
   var _spaRegs = {};
+  var CATEGORY_NAME_TO_SLUG = {
+    翻炒系列: "stirfry",
+    切配系列: "cutting",
+    煎炸系列: "frying",
+    炖煮系列: "stewing",
+    蒸煮系列: "steaming",
+    辅助系列: "other",
+  };
+  function getProductDetailHref(product) {
+    var catSlug = CATEGORY_NAME_TO_SLUG[product.category] || CATEGORY_NAME_TO_SLUG[product.categoryName];
+    // 如果搜索结果中没有 category，尝试从全局产品数据表查找
+    if (!catSlug && product.model && window.PRODUCT_DATA_TABLE) {
+      for (var i = 0; i < window.PRODUCT_DATA_TABLE.length; i++) {
+        if (window.PRODUCT_DATA_TABLE[i].model === product.model) {
+          catSlug = CATEGORY_NAME_TO_SLUG[window.PRODUCT_DATA_TABLE[i].category];
+          break;
+        }
+      }
+    }
+    if (catSlug) return "/products/" + catSlug + "/" + encodeURIComponent(product.model) + "/";
+    return "/products/" + encodeURIComponent(product.model) + "/";
+  }
   function _spaOn(tgt, evt, fn, key) {
     if (key == null) key = evt + ":" + (++_spaRegs.__k || (_spaRegs.__k = 1));
     if (_spaRegs[key]) _spaRegs[key].abort();
@@ -136,7 +158,7 @@
         type: "product",
         labelKey: "search_type_product",
         labelFallback: "产品",
-        path: "/products/" + encodeURIComponent(model) + "/",
+        path: getProductDetailHref(p),
         title: translatedName,
         snippet: (translatedCategory || category) + " · " + model,
         category: tr("search_type_product", "产品"),
@@ -413,7 +435,7 @@
         var category = esc(p._displayCategory || p.category || tr("filter_all", "All"));
         var badge = p._displayBadge ? '<span class="ios-search-badge">' + esc(p._displayBadge) + "</span>" : "";
         var imgSrc = p.productImage || p.imageUrl || "";
-        var detailHref = "/products/" + (p.model ? encodeURIComponent(p.model) + "/" : "");
+        var detailHref = getProductDetailHref(p);
 
         html +=
           '<a class="ios-search-result-item' +
