@@ -533,8 +533,12 @@
         else if (device === "tablet") window.renderHomeCoreTablet(containerId);
         else window.renderHomeCorePC(containerId);
       } else {
-        // 容器不在 DOM 中 → 不是首页页面结构，不渲染
-        console.warn("[hcp] container not found:", containerId);
+        // 容器不在 DOM 中 → 可能是 SPA 还没完成 content:replace，重试 3 次
+        var _retryCount = (window._hcpRetryCount || 0) + 1;
+        window._hcpRetryCount = _retryCount;
+        if (_retryCount <= 3) {
+          setTimeout(_autoInit, 300);
+        }
       }
     }
   }
