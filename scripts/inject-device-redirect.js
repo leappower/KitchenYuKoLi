@@ -61,7 +61,6 @@ var REDIRECT_SCRIPT =
   '        if (isTouch && !isPc) { isMb = true; isTb = false; }\n' +
   '        var e = isPc ? "index-pc.html" : isTb ? "index-tablet.html" : "index-mobile.html";\n' +
   '        console.debug("[device-debug] doRedirect",{f:f,e:e,mobile:isMb,tablet:isTb,pc:isPc,innerW:window.innerWidth,isTouch:isTouch});\n' +
-  '        var e=vw<768?"index-mobile.html":vw<1280?"index-tablet.html":"index-pc.html";\n' +
   '        if(f===e){console.debug("[device-debug] skip, already on correct version");return;}\n' +
   '        var newUrl=location.pathname.replace(/[^\\/]*\.html$/,"")+e;\n' +
   '        console.debug("[device-debug] redirecting to",newUrl);\n' +
