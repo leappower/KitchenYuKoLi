@@ -54,11 +54,8 @@
       return img.isPrimary;
     });
     var fp = primary ? primary.filePath : product.images[0].filePath;
-    // 统一用 model-1.webp，不信任 CMS 的 filePath 编号
-    if (fp) {
-      fp = "/assets/images/products/" + fp.split("/").pop();
-    }
-    return fp;
+    // 统一用 model.webp，不信任 API/data-table 的 filePath
+    return "/assets/images/products/" + product.model + ".webp";
   }
 
   /**

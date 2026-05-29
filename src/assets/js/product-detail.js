@@ -113,21 +113,8 @@
   }
 
   function buildRelatedCard(rp, idx) {
-    var rImg =
-      rp.images && rp.images.length > 0
-        ? (function () {
-            var f = (
-              rp.images.find(function (i) {
-                return i.isPrimary;
-              }) || rp.images[0]
-            ).filePath;
-            // Defensive: rewrite stale CMS paths
-            if (f && f.indexOf("/admin/uploads/") === 0) {
-              f = "/assets/images/products/" + f.split("/").pop();
-            }
-            return f;
-          })()
-        : "/assets/images/products/" + (rp.model || "") + ".webp";
+    // 统一用 model.webp，不信任 API 的 filePath
+    var rImg = "/assets/images/products/" + (rp.model || "") + ".webp";
     var gradients = [
       "from-primary/10 to-blue-100 dark:from-primary/20 dark:to-blue-900/30",
       "from-emerald-100 to-teal-50 dark:from-emerald-900/30 dark:to-teal-900/20",
@@ -509,21 +496,8 @@
     })();
 
     // Image: CMS upload > static
-    var imgSrc =
-      "/assets/images/products/" + (product.model || "") + ".webp";
-    if (product.images && product.images.length > 0) {
-      var pi =
-        product.images.find(function (i) {
-          return i.isPrimary;
-        }) || product.images[0];
-      if (pi && pi.filePath) {
-        imgSrc = pi.filePath;
-        // Defensive: rewrite stale CMS paths
-        if (imgSrc.indexOf("/admin/uploads/") === 0) {
-          imgSrc = "/assets/images/products/" + imgSrc.split("/").pop();
-        }
-      }
-    }
+    // 统一用 model.webp，不信任 API 或数据表 filePath（命名格式不统一）
+    var imgSrc = "/assets/images/products/" + (product.model || "") + ".webp";
     document.title = product.model + " | Yukoli Smart Commercial Kitchen";
 
     // Highlight matching category in navigator dropdown

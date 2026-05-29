@@ -37,11 +37,7 @@
 
   function getPrimaryImage(product) {
     if (!product.images || !product.images.length) return null;
-    var primary = product.images.find(function (img) {
-      return img.isPrimary;
-    });
-    var fp = primary ? primary.filePath : product.images[0].filePath;
-    return fp;
+    return "/assets/images/products/" + product.model + ".webp";
   }
 
   function getProductDetailHref(product) {

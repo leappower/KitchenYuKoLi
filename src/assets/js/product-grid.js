@@ -485,21 +485,9 @@
    * 4. /assets/images/products/default.webp
    */
   function _resolveImage(p) {
-    var img = "";
-    if (p.images && Array.isArray(p.images) && p.images.length > 0) {
-      var primary =
-        p.images.find(function (i) {
-          return i.isPrimary;
-        }) || p.images[0];
-      if (primary && primary.filePath) {
-        img = primary.filePath;
-        // 统一用 -1.webp，不信任 CMS 的 filePath 编号
-        img =
-          "/assets/images/products/" +
-          img
-            .split("/")
-            .pop();
-        if (img.indexOf("/admin/uploads/") === 0) {
+    // 统一用 model.webp，不信任 API/data-table 的 filePath
+    var img = "/assets/images/products/" + (p.model || "") + ".webp";
+    if (img.indexOf("/admin/uploads/") === 0) {
           img = "/assets/images/products/" + img.split("/").pop();
         }
       }

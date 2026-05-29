@@ -122,15 +122,7 @@
         var trKey = "product_" + model.toLowerCase().replace(/[-/]/g, "_") + "_name";
         translatedName = tr(trKey, name || model) || name || model;
       }
-      var imgSrc = "";
-      if (p.images && p.images.length > 0) {
-        var primary =
-          p.images.find(function (i) {
-            return i.isPrimary;
-          }) || p.images[0];
-        if (primary && primary.filePath) imgSrc = primary.filePath;
-      }
-      if (!imgSrc) imgSrc = "/assets/images/products/" + model + ".webp";
+      var imgSrc = "/assets/images/products/" + model + ".webp";
       return Object.assign({}, p, {
         _displayName: translatedName,
         _displayCategory: translatedCategory,
