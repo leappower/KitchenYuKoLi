@@ -130,7 +130,7 @@
           }) || p.images[0];
         if (primary && primary.filePath) imgSrc = primary.filePath;
       }
-      if (!imgSrc) imgSrc = "/assets/images/products/" + model + "-1.webp";
+      if (!imgSrc) imgSrc = "/assets/images/products/" + model + ".webp";
       return Object.assign({}, p, {
         _displayName: translatedName,
         _displayCategory: translatedCategory,

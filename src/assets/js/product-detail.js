@@ -30,6 +30,24 @@
     辅助系列: "other",
   };
 
+  // MODEL_TO_SLUG: 构建时从 PRODUCT_DATA_TABLE 初始数据提取，不可变
+  // 防止 API 实时数据覆盖后回查失效
+  var MODEL_TO_SLUG = (function () {
+    var map = {};
+    if (typeof window !== "undefined" && window.PRODUCT_DATA_TABLE) {
+      var t = window.PRODUCT_DATA_TABLE;
+      if (t && t.length) {
+        for (var _i = 0; _i < t.length; _i++) {
+          if (t[_i].model && t[_i].category) {
+            var _s = CATEGORY_NAME_TO_SLUG[t[_i].category];
+            if (_s) map[t[_i].model] = _s;
+          }
+        }
+      }
+    }
+    return map;
+  })();
+
   function isCategorySlug(slug) {
     return CATEGORY_SLUGS.indexOf(slug) >= 0;
   }
@@ -107,11 +125,9 @@
             if (f && f.indexOf("/admin/uploads/") === 0) {
               f = "/assets/images/products/" + f.split("/").pop();
             }
-            // 统一替换 CMS 下划线命名为磁盘连字符格式
-            if (f) f = f.replace(/_(\d+|hires|large|small|thumb)\.webp$/i, "-1.webp");
             return f;
           })()
-        : "/assets/images/products/" + (rp.model || "").replace(/\/\d+$/g, "").replace(/\+/g, "-").replace(/[^\w-]/g, "") + "-1.webp";
+        : "/assets/images/products/" + (rp.model || "") + ".webp";
     var gradients = [
       "from-primary/10 to-blue-100 dark:from-primary/20 dark:to-blue-900/30",
       "from-emerald-100 to-teal-50 dark:from-emerald-900/30 dark:to-teal-900/20",
@@ -119,7 +135,11 @@
     ];
     var grad = gradients[idx % gradients.length];
     var catSlug = (rp && rp.category && CATEGORY_NAME_TO_SLUG[rp.category]) || "";
-    // fallback: 从完整数据表回查 category
+    // fallback 1: 从不可变 MODEL_TO_SLUG 映射查找
+    if (!catSlug && rp && rp.model && MODEL_TO_SLUG) {
+      catSlug = MODEL_TO_SLUG[rp.model] || "";
+    }
+    // fallback 2: 从 PRODUCT_DATA_TABLE 回查（API 可能覆盖后数据差异时兜底）
     if (!catSlug && rp && rp.model && window.PRODUCT_DATA_TABLE) {
       var _all = window.PRODUCT_DATA_TABLE;
       if (_all && _all.length) {
@@ -490,7 +510,7 @@
 
     // Image: CMS upload > static
     var imgSrc =
-      "/assets/images/products/" + (product.model || "").replace(/\/\d+$/g, "").replace(/\+/g, "-").replace(/[^\w-]/g, "") + "-1.webp";
+      "/assets/images/products/" + (product.model || "") + ".webp";
     if (product.images && product.images.length > 0) {
       var pi =
         product.images.find(function (i) {
@@ -498,10 +518,6 @@
         }) || product.images[0];
       if (pi && pi.filePath) {
         imgSrc = pi.filePath;
-        // Defensive: 不信任 CMS 的 filePath 后缀，统一替换为 -1.webp
-        if (imgSrc && /_\d+\.webp$/.test(imgSrc)) {
-          imgSrc = imgSrc.replace(/_(\d+|hires|large|small|thumb)\.webp$/i, "-1.webp");
-        }
         // Defensive: rewrite stale CMS paths
         if (imgSrc.indexOf("/admin/uploads/") === 0) {
           imgSrc = "/assets/images/products/" + imgSrc.split("/").pop();

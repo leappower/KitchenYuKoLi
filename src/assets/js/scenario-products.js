@@ -41,7 +41,6 @@
       return img.isPrimary;
     });
     var fp = primary ? primary.filePath : product.images[0].filePath;
-    if (fp) fp = fp.replace(/_(\d+\.webp)$/, "-$1");
     return fp;
   }
 

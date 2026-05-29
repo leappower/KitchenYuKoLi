@@ -56,12 +56,7 @@
     var fp = primary ? primary.filePath : product.images[0].filePath;
     // 统一用 model-1.webp，不信任 CMS 的 filePath 编号
     if (fp) {
-      fp =
-        "/assets/images/products/" +
-        fp
-          .split("/")
-          .pop()
-          .replace(/_(\d+|hires|large|small|thumb)\.webp$/i, "-1.webp");
+      fp = "/assets/images/products/" + fp.split("/").pop();
     }
     return fp;
   }
@@ -88,8 +83,25 @@
     辅助系列: "other",
   };
 
+  // MODEL_TO_SLUG: 构建时从 PRODUCT_DATA_TABLE 初始数据提取，不可变
+  var MODEL_TO_SLUG = (function () {
+    var map = {};
+    if (typeof window !== "undefined" && window.PRODUCT_DATA_TABLE) {
+      var t = window.PRODUCT_DATA_TABLE;
+      if (t && t.length) {
+        for (var _i = 0; _i < t.length; _i++) {
+          if (t[_i].model && t[_i].category) {
+            var _s = CATEGORY_NAME_TO_SLUG[t[_i].category];
+            if (_s) map[t[_i].model] = _s;
+          }
+        }
+      }
+    }
+    return map;
+  })();
+
   function getProductDetailHref(product) {
-    var slug = CATEGORY_NAME_TO_SLUG[product.category] || encodeURIComponent(product.model);
+    var slug = CATEGORY_NAME_TO_SLUG[product.category] || (MODEL_TO_SLUG && MODEL_TO_SLUG[product.model]) || encodeURIComponent(product.model);
     return "/products/" + slug + "/" + encodeURIComponent(product.model) + "/";
   }
 
