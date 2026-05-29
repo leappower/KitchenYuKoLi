@@ -9,6 +9,14 @@
    * 产品分类名 → i18n key 中的 ASCII slug 映射表
    */
   var CATEGORY_SLUG_MAP = {
+    // 粗分类名 → URL slug（用于 product-detail.js 构建面包屑和路由）
+    翻炒系列: "stirfry",
+    炖煮系列: "stewing",
+    煎炸系列: "frying",
+    蒸煮系列: "steaming",
+    切配系列: "cutting",
+    辅助系列: "other",
+    // 细分品类名 — 保留兼容
     中小型智能炒菜机: "smart_cooker_mid",
     其他烹饪设备: "other_cooking",
     团餐专用炒菜机: "catering_cooker",
