@@ -32,7 +32,8 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./dist
-          force_orphan: true
+          keep_history: true
+          enable_jekyll: false
 
       - name: Purge Cloudflare cache
         if: always()
