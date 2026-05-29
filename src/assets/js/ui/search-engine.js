@@ -703,22 +703,19 @@
   );
 
   // Re-init on language change
-  if (window.translationManager) {
-    window.translationManager.on("languageChanged", function () {
-      // Clear current query and hide panel
-      currentQuery = "";
-      hidePanel();
-    });
+  function _onLangChange() {
+    currentQuery = "";
+    // 清空面板内容，切换语言后搜索结果的 _displayName 是旧语言的翻译
+    if (panel) {
+      panel.innerHTML = "";
+    }
+    hidePanel();
   }
-  _spaOn(
-    window,
-    "languageChanged",
-    function () {
-      currentQuery = "";
-      hidePanel();
-    },
-    "languageChanged"
-  );
+
+  if (window.translationManager) {
+    window.translationManager.on("languageChanged", _onLangChange);
+  }
+  _spaOn(window, "languageChanged", _onLangChange, "languageChanged");
 
   // ─── Expose ──────────────────────────────────────────────────────────────
 
