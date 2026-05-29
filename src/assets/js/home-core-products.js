@@ -61,7 +61,7 @@
         fp
           .split("/")
           .pop()
-          .replace(/_\d+\.webp$/, "-1.webp");
+          .replace(/_(\d+|hires|large|small|thumb)\.webp$/i, "-.webp");
     }
     return fp;
   }

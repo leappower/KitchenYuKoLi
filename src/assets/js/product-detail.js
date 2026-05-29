@@ -107,6 +107,8 @@
             if (f && f.indexOf("/admin/uploads/") === 0) {
               f = "/assets/images/products/" + f.split("/").pop();
             }
+            // 统一替换 CMS 下划线命名为磁盘连字符格式
+            if (f) f = f.replace(/_([\d]+|hires|large|small|thumb)\.webp$/i, "-.webp");
             return f;
           })()
         : "/assets/images/products/" + (rp.model || "").replace(/\/\d+$/g, "").replace(/[^\w-]/g, "") + "-1.webp";
@@ -486,7 +488,7 @@
         imgSrc = pi.filePath;
         // Defensive: 不信任 CMS 的 filePath 后缀，统一替换为 -1.webp
         if (imgSrc && /_\d+\.webp$/.test(imgSrc)) {
-          imgSrc = imgSrc.replace(/_\d+\.webp$/, "-1.webp");
+          imgSrc = imgSrc.replace(/_(\d+|hires|large|small|thumb)\.webp$/i, "-.webp");
         }
         // Defensive: rewrite stale CMS paths
         if (imgSrc.indexOf("/admin/uploads/") === 0) {

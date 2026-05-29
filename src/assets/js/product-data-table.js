@@ -25,7 +25,7 @@ window.PRODUCT_DATA_TABLE = [
     isActive: true,
     images: [
       {
-        filePath: "/assets/images/products/XC-0006_171.webp",
+        filePath: "/assets/images/products/XC-0006-1.webp",
         isPrimary: true,
         isHires: false,
       },
@@ -62,7 +62,7 @@ window.PRODUCT_DATA_TABLE = [
     isActive: true,
     images: [
       {
-        filePath: "/assets/images/products/XC-1288_172.webp",
+        filePath: "/assets/images/products/XC-1288-1.webp",
         isPrimary: true,
         isHires: false,
       },
@@ -99,7 +99,7 @@ window.PRODUCT_DATA_TABLE = [
     isActive: true,
     images: [
       {
-        filePath: "/assets/images/products/XC-6344_167.webp",
+        filePath: "/assets/images/products/XC-6344-1.webp",
         isPrimary: true,
         isHires: false,
       },
@@ -134,7 +134,7 @@ window.PRODUCT_DATA_TABLE = [
     isActive: true,
     images: [
       {
-        filePath: "/assets/images/products/XC-0988_168.webp",
+        filePath: "/assets/images/products/XC-0988-1.webp",
         isPrimary: true,
         isHires: false,
       },
@@ -171,7 +171,7 @@ window.PRODUCT_DATA_TABLE = [
     isActive: true,
     images: [
       {
-        filePath: "/assets/images/products/XC-0888_169.webp",
+        filePath: "/assets/images/products/XC-0888-1.webp",
         isPrimary: true,
         isHires: false,
       },
@@ -208,7 +208,7 @@ window.PRODUCT_DATA_TABLE = [
     isActive: true,
     images: [
       {
-        filePath: "/assets/images/products/XC-1088_170.webp",
+        filePath: "/assets/images/products/XC-1088-1.webp",
         isPrimary: true,
         isHires: false,
       },

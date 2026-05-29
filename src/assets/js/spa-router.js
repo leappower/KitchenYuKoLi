@@ -105,7 +105,7 @@
             'a[href^="/"]:not([href$=".pdf"]):not([href$=".zip"]):not([href$=".doc"]):not([href*="mailto:"]):not([href*="tel:"]):not([target="_blank"])',
           plugins: [
             new window.SwupHeadPlugin({
-              persistTags: 'style[id], style[data-swup-persist], link[rel="stylesheet"][href], script[src]',
+              persistTags: 'style[id], style[data-swup-persist], link[rel="stylesheet"][href], script[src], navigator[data-component="navigator"]',
               persistAssets: true,
             }),
             new window.SwupPreloadPlugin({ preloadHoveredLinks: true, preloadInitialPage: false }),
