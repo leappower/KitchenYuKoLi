@@ -101,9 +101,11 @@ SW_SRC=""
 [ -z "$SW_SRC" ] && [ -f "$SRC/sw.js" ] && SW_SRC="$SRC/sw.js"
 if [ -n "$SW_SRC" ]; then
   cp "$SW_SRC" "$DIST/sw.js"
-  # 注入版本号到 sw.js，让浏览器感知 SW 更新
-  sed -i.bak "s/var SW_VERSION = \"[^\"]*\";/var SW_VERSION = \"v$VERSION\";/" "$DIST/sw.js" && rm -f "$DIST/sw.js.bak"
-  echo "  📦 sw.js → v$VERSION"
+  # 注入版本号仅 production 模式，dev 模式保留源文件版本号
+  if [ "$BUILD_MODE" != "dev" ]; then
+    sed -i.bak "s/var SW_VERSION = \"[^\"]*\";/var SW_VERSION = \"v$VERSION\";/" "$DIST/sw.js" && rm -f "$DIST/sw.js.bak"
+    echo "  📦 sw.js → v$VERSION"
+  fi
 fi
 [ -f "CNAME" ]             && cp "CNAME"             "$DIST/CNAME"
 [ -f "$SRC/404.html" ]     && cp "$SRC/404.html"     "$DIST/404.html"
