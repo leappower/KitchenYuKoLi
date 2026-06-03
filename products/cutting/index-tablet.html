@@ -1,0 +1,634 @@
+<!doctype html>
+
+<html class="light" lang="zh-CN">
+  <head>
+    <script>
+      /* Pre-apply cached translations to prevent flash */
+      (function () {
+        try {
+          var lang = localStorage.getItem("userLanguage") || "zh-CN";
+          if (!lang) return;
+          var cacheKey = "yukoli-translations-ui-" + lang;
+          var cached = localStorage.getItem(cacheKey);
+          if (!cached) return;
+          var data = JSON.parse(cached);
+          if (!data.data) return;
+          var translations = data.data;
+          document.documentElement.lang = lang;
+          var elements = document.querySelectorAll("[data-i18n]");
+          for (var i = 0; i < elements.length; i++) {
+            var el = elements[i];
+            var key = el.getAttribute("data-i18n");
+            if (translations[key] && el.children.length === 0) {
+              el.textContent = translations[key];
+            }
+          }
+        } catch (e) {
+          /* ignore */
+        }
+      })();
+    </script>
+  <script>/*[i18n-url-sync]*/(function(){var p=new URLSearchParams(location.search),l=p.get("lang");if(l){localStorage.setItem("userLanguage",l);document.documentElement.lang=l}})();</script>
+    <!-- ═══ Responsive Redirect (injected by patch-responsive-redirect.py) ═══ -->
+    <link href="https://www.kitchen.yukoli.com/products/cutting/" rel="canonical" />
+    <link href="https://www.kitchen.yukoli.com/products/cutting/" hreflang="zh-CN" rel="alternate" />
+    <link href="https://www.kitchen.yukoli.com/products/cutting/" hreflang="en" rel="alternate" />
+    <link href="https://www.kitchen.yukoli.com/products/cutting/" hreflang="x-default" rel="alternate" />
+    <link href="/products/cutting/index-mobile.html" media="only screen and (max-width: 767px)" rel="alternate" />
+    <link
+      href="/products/cutting/index-tablet.html"
+      media="only screen and (min-width: 768px) and (max-width: 1279px)"
+      rel="alternate"
+    />
+    <link href="/products/cutting/index-pc.html" media="only screen and (min-width: 1280px)" rel="alternate" />
+    <script>
+    (function checkDevice(){
+      if(window.__redirectChecked){console.log("[device-redirect] skip, __redirectChecked=true");return;}
+      if(document.querySelector("meta[name=ssg-device]")){console.log("[device-redirect] skip, ssg-device meta found");return;}
+      window.__redirectChecked=true;
+      var u=new URLSearchParams(location.search);
+      var c=u.get("clean-url");
+      if(c){console.log("[device-redirect] clean-url detected, replaceState:",c);history.replaceState({},"",c);return}
+      if(window.__spaNavigating){console.log("[device-redirect] skip, __spaNavigating=true");return;}
+      var f=location.pathname.split("/").pop();
+      console.log("[device-redirect] pathname=",location.pathname," f=",f," innerW=",window.innerWidth);
+      if(!f||!f.match(/.html$/)){
+        console.log("[device-redirect] dir URL (no .html), calling doRedirect");
+        doRedirect();
+        return;
+      }
+      if(f.match(/^index-(pc|mobile|tablet).html$/)){
+        console.log("[device-redirect] already on device-specific page:",f,"→ skip");
+        return;
+      }
+      function doRedirect(){
+        var mq = window.matchMedia;
+        var isTouch = mq && mq("(pointer:coarse)").matches;
+        var isMb = mq("(max-width:767px)").matches;
+        var isTb = mq("(min-width:768px) and (max-width:1023px)").matches;
+        var isPc = mq("(min-width:1024px)").matches;
+        if (isTouch && !isPc) { isMb = true; isTb = false; }
+        var e = isPc ? "index-pc.html" : isTb ? "index-tablet.html" : "index-mobile.html";
+        console.log("[device-redirect] doRedirect",{innerW:window.innerWidth,isTouch:isTouch,mobile:isMb,tablet:isTb,pc:isPc,target:e,currentF:f});
+        if(f===e){console.log("[device-redirect] already on correct version, skip");return;}
+        var newUrl=location.pathname.replace(/[^\/]*.html$/,"")+e;
+        console.log("[device-redirect] redirecting to",newUrl);
+        location.href=newUrl;
+      }
+      doRedirect();
+    })();
+    </script>
+<!-- ═══ End Responsive Redirect ═══ -->
+    <meta charset="utf-8" />
+    <meta
+      content="YuKoLi 智能切配设备系列，切丝切片切丁规格统一，替代 3-5 个切菜工，备料效率提升 6 倍。"
+      name="description"
+    />
+    <meta content="website" property="og:type" />
+    <meta content="智能切配设备 | 切配系列 | YuKoLi" property="og:title" />
+    <meta
+      content="YuKoLi 智能切配设备系列，切丝切片切丁规格统一，替代 3-5 个切菜工，备料效率提升 6 倍。"
+      property="og:description"
+    />
+    <meta content="https://www.kitchen.yukoli.com/products/cutting/" property="og:url" />
+    <meta property="og:site_name" content="YuKoLi 智能厨具" />
+    <meta property="og:locale" content="zh_CN" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title data-i18n="cutting_page_title">Smart Cutting Equipment | YuKoLi</title>
+    <link as="style" href="/assets/fonts/local-fonts.css" rel="preload" />
+    <link as="style" href="/assets/css/styles.css?v=1780474841186" rel="preload" />
+    <link as="style" href="/assets/css/tailwind.css?v=1780474841186" rel="preload" />
+    <link href="/assets/fonts/local-fonts.css" rel="stylesheet" />
+    <link href="/assets/css/styles.css?v=1780474841186" rel="stylesheet" />
+    <link href="/assets/css/tailwind.css?v=1780474841186" rel="stylesheet" />
+    <link href="/assets/css/z-index-system.css?v=1780474841186" rel="stylesheet" />
+    <link href="/assets/css/performance-optimizations.css?v=1780474841186" rel="stylesheet" />
+    <style>
+      body {
+        font-family: "Public Sans", sans-serif;
+      }
+      .filter-chip {
+        transition: all 0.2s ease;
+        -webkit-tap-highlight-color: transparent;
+        cursor: pointer;
+      }
+      .filter-chip.active {
+        background: #ec5b13;
+        color: white;
+        border-color: #ec5b13;
+      }
+      html.dark .filter-chip.active {
+        background: #ec5b13;
+        color: white;
+        border-color: #ec5b13;
+      }
+      .product-card-tablet {
+        transition: all 0.3s ease;
+      }
+      .product-card-tablet:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.12);
+      }
+    </style>
+    <script>
+      (function () {
+        if (localStorage.getItem("darkMode") === "true") document.documentElement.classList.add("dark");
+      })();
+    </script>
+    <link href="/assets/css/skeleton.css?v=1780474841186" rel="stylesheet" />
+    <link href="/assets/images/logo/logo.webp" rel="icon" type="image/webp" />
+    <title>YuKoLi 商用切菜机 | 自动切配设备 | 10+款</title>
+    <meta
+      name="description"
+      content="YuKoLi 商用切菜机系列 — 10+款自动切配设备，切丝切片切丁一机搞定，效率提升5-10倍。"
+    />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://www.kitchen.yukoli.com/home/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Products",
+            "item": "https://www.kitchen.yukoli.com/products/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 3,
+            "name": "切配设备",
+            "item": "https://www.kitchen.yukoli.com/products/cutting/"
+          }
+        ]
+      }
+    </script>
+    <link rel="manifest" href="/manifest.json"/>
+      <link rel="stylesheet" href="/assets/css/components.css" />
+</head>
+  <body
+    class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 transition-colors duration-300 overflow-x-clip"
+  >
+    <navigator
+      data-active="products"
+      data-component="navigator"
+      data-cta-href="/quote"
+      data-cta-text-key="nav_get_quote"
+      data-search="true"
+      data-variant="tablet"
+    ></navigator>
+    <main id="spa-content" class="flex-1">
+      <div class="w-full">
+        <!-- Hero Section -->
+        <section
+          class="fullwidth-bg hero-overlap section-passthrough relative py-10 bg-gradient-to-br from-slate-50 dark:from-slate-900 to-white dark:to-black overflow-hidden"
+        >
+          <div class="section-content">
+            <div class="absolute inset-0 opacity-25">
+              <div class="absolute top-16 right-16 w-72 h-72 bg-primary/10 rounded-full blur-3xl"></div>
+              <div class="absolute bottom-16 left-16 w-56 h-56 bg-primary/5 rounded-full blur-2xl"></div>
+            </div>
+            <div class="relative max-w-4xl mx-auto text-center">
+              <div class="flex items-center gap-2 flex-wrap">
+                <a
+                  class="text-sm text-slate-500 hover:text-primary transition-colors"
+                  data-i18n="nav_products"
+                  href="/products/"
+                >
+                  Products
+                </a>
+                <span class="material-symbols-outlined text-sm text-slate-300">chevron_right</span>
+                <span
+                  class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-bold uppercase tracking-widest"
+                >
+                  <span class="material-symbols-outlined text-xs leading-none">content_cut</span>
+                  <span data-i18n="cutting_hero_badge">Cutting Series</span>
+                </span>
+              </div>
+              <h1
+                class="text-4xl font-black leading-tight tracking-tight text-slate-900 dark:text-white mb-4"
+                data-i18n="cutting_hero_title"
+              >2-hour prep → 20 minutes, 6x efficiency boost</h1>
+              <p
+                class="text-base text-slate-600 dark:text-slate-400 max-w-xl mx-auto leading-relaxed mb-6"
+                data-i18n="cutting_hero_desc_tablet"
+              >Shred, slice, dice - uniform specs and thickness, replaces 3-5 prep staff.</p>
+              <p class="text-sm font-bold text-primary" data-i18n="cutting_hero_card_title">Smart Cutting Series</p>
+              <div class="flex flex-wrap justify-center gap-3">
+                <a
+                  class="bg-primary text-white px-6 py-3 rounded-xl font-bold text-sm flex items-center gap-2"
+                  href="#products"
+                  onclick="
+                    event.preventDefault();
+                    document.getElementById('products').scrollIntoView({ behavior: 'smooth', block: 'start' });
+                  "
+                >
+                  <span data-i18n="products_browse_products">Browse Products</span>
+                  <span class="material-symbols-outlined text-sm">arrow_downward</span>
+                </a>
+                <a
+                  class="border-2 border-slate-200 dark:border-slate-800 px-6 py-3 rounded-xl font-bold text-sm flex items-center gap-2"
+                  href="/quote"
+                >
+                  <span data-i18n="products_request_quote">Get Quote</span>
+                  <span class="material-symbols-outlined text-sm">request_quote</span>
+                </a>
+              </div>
+            <div class="mt-8 max-w-2xl mx-auto"><div class="relative w-full aspect-[3/2] bg-slate-100 dark:bg-slate-800 rounded-2xl overflow-hidden shadow-2xl border border-white/10" data-hero-video-mode="manual" data-hero-video> <video class="hero-video-player" src="/assets/video/factory-strength-exploration.mp4" poster="/assets/images/products/cutting/hero.webp" preload="none" muted playsinline webkit-playsinline loop></video> <img alt="Smart Cutting Equipment" data-i18n="alt_product_cutting" class="hero-video-poster w-full h-full object-cover" src="/assets/images/products/cutting/hero.webp" loading="eager" /> <div class="hero-video-overlay"> <button class="hero-video-mute" aria-label="Toggle mute" data-i18n-aria="aria_toggle_mute"> <span class="material-symbols-outlined text-white text-xl">volume_off</span> </button> <button class="hero-video-fallback-btn" aria-label="Play video" data-i18n-aria="aria_play_video"> <span class="material-symbols-outlined text-white text-3xl">play_circle</span> </button> </div> <div data-hide-on-play class="absolute bottom-6 left-6 right-6 p-6 border border-white/20 rounded-2xl"> <div class="flex justify-between items-center text-white"> <div> <p class="text-xs font-bold uppercase opacity-70" data-i18n="alt_product_cutting">Smart Cutting Equipment</p> <p class="text-xl font-black" data-i18n="cutting_hero_card_title">Smart Cutting Series</p> </div> <div class="text-right"> <p class="text-xs font-bold uppercase opacity-70">30+ models</p> <p class="text-xl font-black text-primary" data-i18n="cutting_card_models">30+ models</p> </div> </div> </div> </div></div>
+        </div>
+          </div>
+        </section>
+        <!-- 痛点区 -->
+        <section class="fullwidth-bg py-12">
+          <div class="section-content">
+            <div class="w-full text-center mb-10">
+              <span
+                class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-red-100 dark:bg-red-900/20 text-red-600 text-xs font-bold uppercase tracking-widest mb-4"
+              >
+                <span class="material-symbols-outlined text-sm">warning</span>
+                <span data-i18n="app_pain_badge">Industry Pain Points</span>
+              </span>
+              <h2 class="text-2xl font-bold mb-3" data-i18n="cutting_pain_title">Common Prep Challenges</h2>
+              <p class="text-slate-500 dark:text-slate-400 max-w-2xl mx-auto text-sm" data-i18n="cutting_pain_desc">Slow prep, uneven cuts, high costs - this overlooked kitchen stage is often the biggest efficiency drain.</p>
+            </div>
+            <div class="grid grid-cols-1 gap-4">
+              <div
+                class="rounded-2xl overflow-hidden bg-red-50/50 dark:bg-red-900/10 border border-red-100 dark:border-red-900/30"
+              >
+                <div class="overflow-hidden aspect-[3/2] rounded-xl">
+                  <img
+                    alt="Prep Takes 2 Hours"
+                    data-i18n-alt="alt_cutting_pain_1"
+                    class="w-full h-full object-cover"
+                    loading="lazy"
+                    src="/assets/images/products/cutting/pain1.webp"
+                  />
+                </div>
+                <div class="p-5">
+                  <h3 class="font-bold mb-1" data-i18n="cutting_pain_1_title">2-hour prep time</h3>
+                  <p class="text-sm text-slate-600 dark:text-slate-400" data-i18n="cutting_pain_1_desc">3 staff prepping all morning, yet inconsistent results. Chaos before lunch rush.</p>
+                </div>
+              </div>
+              <div
+                class="rounded-2xl overflow-hidden bg-red-50/50 dark:bg-red-900/10 border border-red-100 dark:border-red-900/30"
+              >
+                <div class="overflow-hidden aspect-[3/2] rounded-xl">
+                  <img
+                    alt="Hard to Hire Prep Workers"
+                    data-i18n-alt="alt_cutting_pain_2"
+                    class="w-full h-full object-cover"
+                    loading="lazy"
+                    src="/assets/images/products/cutting/pain2.webp"
+                  />
+                </div>
+                <div class="p-5">
+                  <h3 class="font-bold mb-1" data-i18n="cutting_pain_2_title">Prep staff shortage</h3>
+                  <p class="text-sm text-slate-600 dark:text-slate-400" data-i18n="cutting_pain_2_desc">Low pay, high intensity - youth avoid these jobs. Hard to hire/retain in peak seasons.</p>
+                </div>
+              </div>
+              <div
+                class="rounded-2xl overflow-hidden bg-red-50/50 dark:bg-red-900/10 border border-red-100 dark:border-red-900/30"
+              >
+                <div class="overflow-hidden aspect-[3/2] rounded-xl">
+                  <img
+                    alt="High Ingredient Waste"
+                    data-i18n-alt="alt_cutting_pain_3"
+                    class="w-full h-full object-cover"
+                    loading="lazy"
+                    src="/assets/images/products/cutting/pain3.webp"
+                  />
+                </div>
+                <div class="p-5">
+                  <h3 class="font-bold mb-1" data-i18n="cutting_pain_3_title">Severe ingredient waste</h3>
+                  <p class="text-sm text-slate-600 dark:text-slate-400" data-i18n="cutting_pain_3_desc">High manual cutting waste. One-third of each carrot discarded - losses add up fast.</p>
+                </div>
+              </div>
+              <div
+                class="rounded-2xl overflow-hidden bg-red-50/50 dark:bg-red-900/10 border border-red-100 dark:border-red-900/30"
+              >
+                <div class="overflow-hidden aspect-[3/2] rounded-xl">
+                  <img
+                    alt="Inconsistent Cuts"
+                    data-i18n-alt="alt_cutting_pain_4"
+                    class="w-full h-full object-cover"
+                    loading="lazy"
+                    src="/assets/images/products/cutting/pain4.webp"
+                  />
+                </div>
+                <div class="p-5">
+                  <h3 class="font-bold mb-1" data-i18n="cutting_pain_4_title">Irregular cuts</h3>
+                  <p class="text-sm text-slate-600 dark:text-slate-400" data-i18n="cutting_pain_4_desc">Uneven shred thickness and slice sizes. Inconsistent dish textures.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        <!-- 方案优势区 -->
+        <section class="fullwidth-bg py-10">
+          <div class="section-content">
+            <div class="w-full flex flex-col gap-8">
+              <div class="w-full">
+                <span
+                  class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 text-primary text-sm font-bold uppercase tracking-wider mb-4"
+                >
+                  <span class="material-symbols-outlined">lightbulb</span>
+                  <span data-i18n="cutting_solution_badge">Smart Cutting</span>
+                </span>
+                <h2 class="text-2xl font-black tracking-tight mb-4" data-i18n="cutting_solution_title">One-touch cutting, uniform specs, 6x faster prep</h2>
+                <p class="text-base text-slate-600 dark:text-slate-400 mb-6" data-i18n="cutting_solution_subtitle">From vegetable dicers to slicers - complete smart cutting solutions.</p>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                  <div class="rounded-2xl overflow-hidden border border-slate-200 dark:border-slate-700">
+                    <div class="aspect-[3/2] overflow-hidden">
+                      <img
+                        alt="6x Faster Prep"
+                        data-i18n-alt="alt_cutting_feat_1"
+                        class="w-full h-full object-cover"
+                        loading="lazy"
+                        src="/assets/images/products/cutting/feature1.webp"
+                      />
+                    </div>
+                    <div class="p-3">
+                      <h4 class="font-bold" data-i18n="cutting_solution_1_title">6x faster prep</h4>
+                      <p class="text-sm text-slate-600 dark:text-slate-400" data-i18n="cutting_solution_1_desc">2-hour prep → 20 minutes. Quantum leap in cutting efficiency.</p>
+                    </div>
+                  </div>
+                  <div class="rounded-2xl overflow-hidden border border-slate-200 dark:border-slate-700">
+                    <div class="aspect-[3/2] overflow-hidden">
+                      <img
+                        alt="Consistent Specifications"
+                        data-i18n-alt="alt_cutting_feat_2"
+                        class="w-full h-full object-cover"
+                        loading="lazy"
+                        src="/assets/images/products/cutting/feature2.webp"
+                      />
+                    </div>
+                    <div class="p-3">
+                      <h4 class="font-bold" data-i18n="cutting_solution_2_title">Consistent specifications</h4>
+                      <p class="text-sm text-slate-600 dark:text-slate-400" data-i18n="cutting_solution_2_desc">One-touch switching between shred/slice/dice modes. Every cut precision-perfect.</p>
+                    </div>
+                  </div>
+                  <div class="rounded-2xl overflow-hidden border border-slate-200 dark:border-slate-700">
+                    <div class="aspect-[3/2] overflow-hidden">
+                      <img
+                        alt="Replaces 3-5 Workers"
+                        data-i18n-alt="alt_cutting_feat_3"
+                        class="w-full h-full object-cover"
+                        loading="lazy"
+                        src="/assets/images/products/cutting/feature3.webp"
+                      />
+                    </div>
+                    <div class="p-3">
+                      <h4 class="font-bold" data-i18n="cutting_solution_3_title">Replaces 3-5 workers</h4>
+                      <p class="text-sm text-slate-600 dark:text-slate-400" data-i18n="cutting_solution_3_desc">One machine replaces 3-5 prep staff. Immediate labor cost savings.</p>
+                    </div>
+                  </div>
+                  <div class="rounded-2xl overflow-hidden border border-slate-200 dark:border-slate-700">
+                    <div class="aspect-[3/2] overflow-hidden">
+                      <img
+                        alt="40% Less Waste"
+                        data-i18n-alt="alt_cutting_feat_4"
+                        class="w-full h-full object-cover"
+                        loading="lazy"
+                        src="/assets/images/products/cutting/feature4.webp"
+                      />
+                    </div>
+                    <div class="p-3">
+                      <h4 class="font-bold" data-i18n="cutting_solution_4_title">40% less waste</h4>
+                      <p class="text-sm text-slate-600 dark:text-slate-400" data-i18n="cutting_solution_4_desc">Mechanical waste far lower than manual. Significant ingredient utilization boost.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="text-center mt-8 pt-6 border-t border-slate-200 dark:border-slate-700 w-full">
+              <p
+                class="text-base text-slate-600 dark:text-slate-400 max-w-2xl mx-auto"
+                data-i18n="cutting_solution_transition"
+              >When selecting cutting equipment, focus on daily prep volume and ingredient types.</p>
+            </div>
+          </div>
+        </section>
+        <section class="fullwidth-bg pt-6 pb-8" id="products">
+          <div class="section-content">
+            <div class="flex flex-wrap items-center justify-between gap-4 mb-8">
+                            <!-- Tier filter -->
+              <div class="flex items-center gap-2 flex-shrink-0">
+                <button
+                  class="filter-chip active px-3 py-1.5 rounded-full border border-slate-200 dark:border-slate-700 text-xs font-medium"
+                  data-filter="all"
+                  data-i18n="all"
+                >
+                  All
+                </button>
+                <button
+                  class="filter-chip px-3 py-1.5 rounded-full border border-slate-200 dark:border-slate-700 text-xs font-medium"
+                  data-filter="基础"
+                  data-i18n="products_filter_basic"
+                >
+                  Basic
+                </button>
+                <button
+                  class="filter-chip px-3 py-1.5 rounded-full border border-slate-200 dark:border-slate-700 text-xs font-medium"
+                  data-filter="智能"
+                  data-i18n="products_filter_smart"
+                >
+                  Smart
+                </button>
+                <button
+                  class="filter-chip px-3 py-1.5 rounded-full border border-slate-200 dark:border-slate-700 text-xs font-medium"
+                  data-filter="全智能"
+                  data-i18n="products_filter_full_smart"
+                >
+                  Full Smart
+                </button>
+              </div>
+            </div>
+            <div class="grid grid-cols-3 gap-4" id="product-grid">
+              <!-- Dynamically rendered by product-grid.js -->
+            </div>
+            <!-- Load More -->
+            <div class="flex justify-center mt-8">
+              <button
+                class="flex items-center gap-2 px-8 py-3 border-2 border-slate-200 dark:border-slate-700 rounded-xl font-bold text-sm text-slate-600 dark:text-slate-400 hover:border-primary hover:text-primary transition-all"
+                data-i18n="products_load_more"
+              >Load More</button>
+            </div>
+          </div>
+        </section>
+        <!-- FAQ 区 -->
+        <section class="fullwidth-bg py-10 bg-slate-50 dark:bg-slate-900/50">
+          <div class="section-content">
+            <div class="text-center max-w-3xl mx-auto mb-10">
+              <h2 class="text-2xl font-black tracking-tight mb-4" data-i18n="cutting_faq_title">Cutting Equipment FAQs</h2>
+            </div>
+            <div class="max-w-3xl mx-auto space-y-3">
+              <details
+                class="group bg-white rounded-2xl border border-slate-200 dark:border-slate-700 overflow-hidden"
+              >
+                <summary class="flex items-center justify-between p-5 cursor-pointer font-bold text-base select-none">
+                  <span data-i18n="cutting_faq1_q">What ingredients can the cutter process?</span>
+                  <span class="material-symbols-outlined text-slate-400 group-open:rotate-180 transition-transform">
+                    expand_more
+                  </span>
+                </summary>
+                <div
+                  class="px-5 pt-5 pb-5 text-sm text-slate-600 dark:text-slate-400 leading-relaxed"
+                  data-i18n="cutting_faq1_a"
+                >Vegetables, root crops, and hard ingredients. Standard support: potatoes, carrots, cabbage, onions, cucumbers, celery, etc. Special ingredients require sample testing.</div>
+              </details>
+              <details
+                class="group bg-white rounded-2xl border border-slate-200 dark:border-slate-700 overflow-hidden"
+              >
+                <summary class="flex items-center justify-between p-5 cursor-pointer font-bold text-base select-none">
+                  <span data-i18n="cutting_faq2_q">Can cutting specifications be adjusted?</span>
+                  <span class="material-symbols-outlined text-slate-400 group-open:rotate-180 transition-transform">
+                    expand_more
+                  </span>
+                </summary>
+                <div
+                  class="px-5 pt-5 pb-5 text-sm text-slate-600 dark:text-slate-400 leading-relaxed"
+                  data-i18n="cutting_faq2_a"
+                >Yes. Blade changes or parameter adjustments control shred thickness, slice size, dice dimensions, with multiple presets available.</div>
+              </details>
+              <details
+                class="group bg-white rounded-2xl border border-slate-200 dark:border-slate-700 overflow-hidden"
+              >
+                <summary class="flex items-center justify-between p-5 cursor-pointer font-bold text-base select-none">
+                  <span data-i18n="cutting_faq3_q">Is cleaning convenient?</span>
+                  <span class="material-symbols-outlined text-slate-400 group-open:rotate-180 transition-transform">
+                    expand_more
+                  </span>
+                </summary>
+                <div
+                  class="px-5 pt-5 pb-5 text-sm text-slate-600 dark:text-slate-400 leading-relaxed"
+                  data-i18n="cutting_faq3_a"
+                >Quick-release design for blades and feed chutes enables 5-10 minute daily cleaning.</div>
+              </details>
+              <details
+                class="group bg-white rounded-2xl border border-slate-200 dark:border-slate-700 overflow-hidden"
+              >
+                <summary class="flex items-center justify-between p-5 cursor-pointer font-bold text-base select-none">
+                  <span data-i18n="cutting_faq4_q">What kitchen sizes is this suitable for?</span>
+                  <span class="material-symbols-outlined text-slate-400 group-open:rotate-180 transition-transform">
+                    expand_more
+                  </span>
+                </summary>
+                <div
+                  class="px-5 pt-5 pb-5 text-sm text-slate-600 dark:text-slate-400 leading-relaxed"
+                  data-i18n="cutting_faq4_a"
+                >Scales from small restaurants (50kg/day) to central kitchens (500+kg/day). Select models based on daily prep volume.</div>
+              </details>
+            </div>
+          </div>
+        </section>
+        <!-- Cross-sell & Scene Entry Section -->
+        <section class="fullwidth-bg py-12 bg-slate-50 dark:bg-slate-900/50">
+          <div class="section-content">
+            <div id="cross-sell-container"></div>
+            <div id="scene-entry-container"></div>
+            <nav id="product-category-nav"></nav>
+          </div>
+        </section>
+        <!-- CTA Section -->
+        <section class="fullwidth-bg py-10">
+          <div class="section-content">
+            <div class="bg-gradient-to-br from-primary/10 to-primary/5 rounded-2xl p-8 text-center">
+              <h2 class="text-2xl font-bold mb-3 text-slate-900 dark:text-white" data-i18n="cutting_cta_title">
+                Boost Prep Efficiency
+              </h2>
+              <p class="text-sm text-slate-600 dark:text-slate-400 mb-6" data-i18n="cutting_cta_desc">From vegetable cutters to slicers - complete cutting solutions for central kitchens, canteens, and chain restaurants.</p>
+              <div class="flex flex-wrap justify-center gap-3">
+                <a
+                  class="bg-primary text-white py-3 px-6 rounded-xl font-bold text-sm hover:shadow-lg hover:shadow-primary/20 transition-all"
+                  href="/quote"
+                >
+                  <span data-i18n="products_cta_btn_quote">Get Custom Quote</span>
+                </a>
+                <a
+                  class="border-2 border-slate-300 dark:border-slate-600 py-3 px-6 rounded-xl font-bold text-sm hover:bg-slate-100 dark:hover:bg-slate-800 transition-all"
+                  data-i18n="products_cta_btn_contact"
+                  data-wa-message-key="wa_msg_products"
+                  href="https://wa.me/8613163756465"
+                  target="_blank" rel="noopener noreferrer"
+                >Contact Sales Team</a>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <script defer src="/assets/js/ui/dropdown-styles.js?v=1780474841186"></script>
+    <script defer src="/assets/js/ui/dropdown-base.js?v=1780474841186"></script>
+    <script defer src="/assets/js/ui/products-dropdown.js?v=1780474841186"></script>
+    <script defer src="/assets/js/ui/applications-dropdown.js?v=1780474841186"></script>
+    <script defer src="/assets/js/ui/support-dropdown.js?v=1780474841186"></script>
+    <script defer src="/assets/js/ui/about-dropdown.js?v=1780474841186"></script>
+    <script defer src="/assets/js/utils.js?v=1780474841186"></script>
+    <script defer src="/assets/js/ui/search-engine.js?v=1780474841186"></script>
+        <script defer src="/assets/js/ui/slide-menu.js?v=1780474841186"></script>
+    <script defer src="/assets/js/ui/footer.js?v=1780474841186"></script>
+    <script defer src="/assets/js/lang-registry.js?v=1780474841186"></script>
+    <script defer src="/assets/js/translations.js?v=1780474841186"></script>
+    <script defer src="/assets/js/translations-dropdown-template.js?v=1780474841186"></script>
+
+    <script defer src="/assets/js/contacts.js?v=1780474841186"></script>
+    <script defer src="/assets/js/router.js?v=1780474841186"></script>
+    <script defer src="/assets/js/ui/helpers.js?v=1780474841186"></script>
+    <script defer src="/assets/js/ui/page-effects.js?v=1780474841186"></script><script defer src="/assets/js/page-interactions.js?v=1780474841186"></script>
+
+
+    <style>
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(10px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      .scrollbar-hide::-webkit-scrollbar {
+        display: none;
+      }
+      .scrollbar-hide {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+      }
+      .line-clamp-2 {
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+      }
+    </style>
+
+    <script defer src="/assets/js/utils/device-utils.js?v=1780474841186"></script>
+    <script defer src="/assets/js/ui/floating-actions.js?v=1780474841186"></script>
+      <script src="/assets/js/product-data-table.js"></script>
+    <script defer src="/assets/js/nav-config.js"></script>
+    <script defer src="/assets/js/ui/contact-dropdown.js"></script>
+    <script defer src="/assets/js/ui/navigator.js"></script>
+    <script defer src="/assets/js/ui/hero-video.js"></script>
+    <script defer src="/assets/js/swup.min.js"></script>
+    <script defer src="/assets/js/swup-head-plugin.min.js"></script>
+    <script defer src="/assets/js/swup-preload-plugin.min.js"></script>
+    <script defer src="/assets/js/spa-router.js"></script>
+    <script defer src="/assets/js/product-grid.js"></script>
+    <script defer src="/assets/js/product-detail.js"></script>
+    <script defer src="/assets/js/product-list.js"></script>
+    <script defer src="/assets/js/breadcrumb.js"></script>
+    <script>window._SPA_GLOBAL_PATTERNS=/(?:^|[\/])(?:product-data-table|nav-config|device-utils|lang-registry|utils|translations|translations-dropdown-template|dropdown-styles|dropdown-base|products-dropdown|applications-dropdown|support-dropdown|about-dropdown|contact-dropdown|navigator|slide-menu|footer|hero-video|floating-actions|helpers|page-effects|page-interactions|search-engine|swup.min|swup-head-plugin.min|swup-preload-plugin.min|spa-router)\.js/</script>
+  <style data-skeleton-inline>#skeleton-overlay{position:fixed;inset:0;z-index:5;pointer-events:none;background:var(--color-bg-light,#f8fafc);opacity:1;transition:opacity .25s ease-out}html.dark #skeleton-overlay{background:var(--color-bg-dark,#020617)}#skeleton-overlay[hidden]{display:none}@keyframes sk-shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}.skeleton-container{width:100%;max-width:1280px;margin:0 auto;padding:2rem 1.25rem}.sk-badge{width:100px;height:22px;border-radius:9999px;margin:0 auto 16px;background:linear-gradient(90deg,#e8e8e8 25%,#d4d4d4 50%,#e8e8e8 75%);background-size:200% 100%;animation:sk-shimmer 1.5s infinite}.sk-hero{display:flex;flex-direction:column;align-items:center;text-align:center;margin-bottom:24px}.sk-line{width:65%;height:32px;border-radius:8px;margin:0 auto 12px;background:linear-gradient(90deg,#e8e8e8 25%,#d4d4d4 50%,#e8e8e8 75%);background-size:200% 100%;animation:sk-shimmer 1.5s infinite}.sk-line-short{width:45%;height:18px;margin-bottom:8px}.sk-line-shorter{width:30%;height:18px}.sk-cta-group{display:flex;gap:12px;justify-content:center;margin-top:20px}.sk-cta{width:140px;height:44px;border-radius:12px;background:linear-gradient(90deg,#e8e8e8 25%,#d4d4d4 50%,#e8e8e8 75%);background-size:200% 100%;animation:sk-shimmer 1.5s infinite}.sk-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:32px}@media(max-width:767px){.sk-grid{grid-template-columns:1fr}.sk-cta{width:100%;max-width:none}}@media(min-width:768px)and(max-width:1279px){.sk-grid{grid-template-columns:repeat(2,1fr)}}.sk-card{height:220px;border-radius:16px;background:linear-gradient(90deg,#e8e8e8 25%,#d4d4d4 50%,#e8e8e8 75%);background-size:200% 100%;animation:sk-shimmer 1.5s infinite}.dark .sk-badge,.dark .sk-line,.dark .sk-cta,.dark .sk-card{background:linear-gradient(90deg,#1e293b 25%,#334155 50%,#1e293b 75%);background-size:200% 100%}</style>
+<div id="skeleton-overlay">  <div class="skeleton-container">    <div class="sk-hero">      <div class="sk-badge"></div>      <div class="sk-line"></div>      <div class="sk-line sk-line-short"></div>      <div class="sk-line sk-line-shorter"></div>      <div class="sk-cta-group">        <div class="sk-cta"></div>        <div class="sk-cta"></div>      </div>    </div>    <div class="sk-grid">      <div class="sk-card"></div>      <div class="sk-card"></div>      <div class="sk-card"></div>    </div>  </div></div>
+<script>(function(){var sk=document.getElementById("skeleton-overlay");if(!sk)return;function hide(){sk.setAttribute("hidden","");sk.style.display="none";document.head.querySelector("[data-skeleton-inline]")?.remove()}if(document.readyState==="complete")hide();else window.addEventListener("load",hide);setTimeout(hide,3000);})();</script>
+  </body>
+
+</html>

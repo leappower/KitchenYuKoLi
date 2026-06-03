@@ -1,0 +1,853 @@
+<!doctype html>
+
+<html class="light" lang="zh-CN">
+  <head>
+    <script>
+      /* Pre-apply cached translations to prevent flash */
+      (function () {
+        try {
+          var lang = localStorage.getItem("userLanguage") || "zh-CN";
+          if (!lang) return;
+          var cacheKey = "yukoli-translations-ui-" + lang;
+          var cached = localStorage.getItem(cacheKey);
+          if (!cached) return;
+          var data = JSON.parse(cached);
+          if (!data.data) return;
+          var translations = data.data;
+          document.documentElement.lang = lang;
+          var elements = document.querySelectorAll("[data-i18n]");
+          for (var i = 0; i < elements.length; i++) {
+            var el = elements[i];
+            var key = el.getAttribute("data-i18n");
+            if (translations[key] && el.children.length === 0) {
+              el.textContent = translations[key];
+            }
+          }
+        } catch (e) {
+          /* ignore */
+        }
+      })();
+    </script>
+  <script>/*[i18n-url-sync]*/(function(){var p=new URLSearchParams(location.search),l=p.get("lang");if(l){localStorage.setItem("userLanguage",l);document.documentElement.lang=l}})();</script>
+    <!-- ═══ Responsive Redirect (injected by patch-responsive-redirect.py) ═══ -->
+    <link rel="canonical" href="https://www.kitchen.yukoli.com/quote/"/>
+    <link rel="alternate" hreflang="zh-CN" href="https://www.kitchen.yukoli.com/quote/" />
+    <link rel="alternate" hreflang="en" href="https://www.kitchen.yukoli.com/quote/" />
+    <link rel="alternate" hreflang="x-default" href="https://www.kitchen.yukoli.com/quote/" />
+    <link rel="alternate" media="only screen and (max-width: 767px)" href="/quote/index-mobile.html" />
+    <link
+      rel="alternate"
+      media="only screen and (min-width: 768px) and (max-width: 1279px)"
+      href="/quote/index-tablet.html"
+    />
+    <link rel="alternate" media="only screen and (min-width: 1280px)" href="/quote/index-pc.html" />
+    <script>
+    (function checkDevice(){
+      if(window.__redirectChecked){console.log("[device-redirect] skip, __redirectChecked=true");return;}
+      if(document.querySelector("meta[name=ssg-device]")){console.log("[device-redirect] skip, ssg-device meta found");return;}
+      window.__redirectChecked=true;
+      var u=new URLSearchParams(location.search);
+      var c=u.get("clean-url");
+      if(c){console.log("[device-redirect] clean-url detected, replaceState:",c);history.replaceState({},"",c);return}
+      if(window.__spaNavigating){console.log("[device-redirect] skip, __spaNavigating=true");return;}
+      var f=location.pathname.split("/").pop();
+      console.log("[device-redirect] pathname=",location.pathname," f=",f," innerW=",window.innerWidth);
+      if(!f||!f.match(/.html$/)){
+        console.log("[device-redirect] dir URL (no .html), calling doRedirect");
+        doRedirect();
+        return;
+      }
+      if(f.match(/^index-(pc|mobile|tablet).html$/)){
+        console.log("[device-redirect] already on device-specific page:",f,"→ skip");
+        return;
+      }
+      function doRedirect(){
+        var mq = window.matchMedia;
+        var isTouch = mq && mq("(pointer:coarse)").matches;
+        var isMb = mq("(max-width:767px)").matches;
+        var isTb = mq("(min-width:768px) and (max-width:1023px)").matches;
+        var isPc = mq("(min-width:1024px)").matches;
+        if (isTouch && !isPc) { isMb = true; isTb = false; }
+        var e = isPc ? "index-pc.html" : isTb ? "index-tablet.html" : "index-mobile.html";
+        console.log("[device-redirect] doRedirect",{innerW:window.innerWidth,isTouch:isTouch,mobile:isMb,tablet:isTb,pc:isPc,target:e,currentF:f});
+        if(f===e){console.log("[device-redirect] already on correct version, skip");return;}
+        var newUrl=location.pathname.replace(/[^\/]*.html$/,"")+e;
+        console.log("[device-redirect] redirecting to",newUrl);
+        location.href=newUrl;
+      }
+      doRedirect();
+    })();
+    </script>
+<!-- ═══ End Responsive Redirect ═══ -->
+
+    <meta charset="utf-8" />
+    <meta
+      name="description"
+      content="获取 YuKoLi 智能厨具定制报价 — 告诉我们您的商用厨房需求，我们将为您提供专属的智能设备解决方案。"
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="YuKoLi 智能厨具 | 获取报价" />
+    <meta
+      property="og:description"
+      content="获取 YuKoLi 智能厨具定制报价 — 告诉我们您的商用厨房需求，我们将为您提供专属的智能设备解决方案。"
+    />
+    <meta property="og:url" content="https://www.kitchen.yukoli.com/quote/" />
+    <meta property="og:image" content="https://www.kitchen.yukoli.com/assets/images/logo/logo.webp" />
+    <meta property="og:site_name" content="YuKoLi 智能厨具" />
+    <meta property="og:locale" content="zh_CN" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="YuKoLi 智能厨具 | 获取报价" />
+    <meta
+      name="twitter:description"
+      content="获取 YuKoLi 智能厨具定制报价 — 告诉我们您的商用厨房需求，我们将为您提供专属的智能设备解决方案。"
+    />
+    <meta name="twitter:image" content="https://www.kitchen.yukoli.com/assets/images/logo/logo.webp" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <meta
+      name="description"
+      content="获取 YuKoLi 智能商用厨房设备免费报价 — 填写需求表单，24小时内获得专业设备选型建议和定制方案。"
+    />
+    <title>YuKoLi 智能厨具 | <span data-i18n="compare_get_quote">Get Quote</span></title>
+    <link rel="preload" href="/assets/fonts/local-fonts.css" as="style" />
+    <link rel="preload" href="/assets/css/styles.css?v=1780474841186" as="style" />
+    <link rel="preload" href="/assets/css/tailwind.css?v=1780474841186" as="style" />
+    <link href="/assets/fonts/local-fonts.css" rel="stylesheet" />
+    <link rel="stylesheet" href="/assets/css/styles.css?v=1780474841186" />
+    <link rel="stylesheet" href="/assets/css/tailwind.css?v=1780474841186" />
+    <link rel="stylesheet" href="/assets/css/z-index-system.css?v=1780474841186" />
+    <link rel="stylesheet" href="/assets/css/performance-optimizations.css?v=1780474841186" />
+    <script>
+      (function () {
+        if (localStorage.getItem("darkMode") === "true") document.documentElement.classList.add("dark");
+      })();
+    </script>
+    <link rel="stylesheet" href="/assets/css/skeleton.css?v=1780474841186" />
+    <link rel="icon" href="/assets/images/logo/logo.webp" type="image/webp" />
+
+    <script>
+      window.addEventListener("DOMContentLoaded", function () {
+        setTimeout(function () {
+          var m = document.getElementById("spa-content");
+          if (!m) return;
+          var s = getComputedStyle(m);
+          var ok = s.maxWidth === "none" || parseInt(s.maxWidth) >= 1920;
+          if (!ok) console.warn("Expected max-width: 1920px, got:", s.maxWidth);
+        }, 200);
+      });
+    </script>
+    <style>
+      /* === Step 2: Equipment Needs Polish === */
+
+      /* Equipment checkbox cards */
+      #quote-step-2 .grid.grid-cols-4 label {
+        flex-direction: row;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.75rem 1rem;
+        border-radius: 12px;
+        border: 1.5px solid #e2e8f0;
+        background: #fff;
+        transition: all 0.2s ease;
+        cursor: pointer;
+        font-size: 0.9375rem;
+      }
+      #quote-step-2 .grid.grid-cols-4 label:hover {
+        border-color: #ec5b13;
+        background: #fff7f3;
+        transform: translateY(-1px);
+        box-shadow: 0 2px 8px rgba(236,91,19,0.08);
+      }
+      #quote-step-2 .grid.grid-cols-4 label:has(input:checked) {
+        border-color: #ec5b13;
+        background: #fff7f3;
+        box-shadow: 0 0 0 1px #ec5b13;
+      }
+      #quote-step-2 .grid.grid-cols-4 label input:checked + span {
+        color: #ec5b13;
+        font-weight: 700;
+      }
+
+      /* Pain points as pills/tags */
+      #quote-step-2 .flex.flex-wrap label {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.375rem;
+        padding: 0.5rem 1rem;
+        border-radius: 9999px;
+        border: 1.5px solid #e2e8f0;
+        background: #fff;
+        transition: all 0.2s ease;
+        cursor: pointer;
+        font-size: 0.875rem;
+        font-weight: 500;
+        color: #475569;
+      }
+      #quote-step-2 .flex.flex-wrap label:hover {
+        border-color: #ec5b13;
+        color: #ec5b13;
+        background: #fff7f3;
+      }
+      #quote-step-2 .flex.flex-wrap label:has(input:checked) {
+        border-color: #ec5b13;
+        background: #ec5b13;
+        color: #fff;
+      }
+      #quote-step-2 .flex.flex-wrap label:has(input:checked) span {
+        color: #fff !important;
+      }
+
+      /* Capacity/Budget selects: softer background */
+      #quote-step-2 select {
+        background: #f8fafc;
+        transition: all 0.2s ease;
+      }
+      #quote-step-2 select:focus {
+        background: #fff;
+        box-shadow: 0 0 0 3px rgba(236,91,19,0.1);
+      }
+
+      /* Timeline radio cards - checked state: orange text, NOT white */
+      #quote-step-2 .flex.flex-wrap label:has(input[name="q-timeline"]:checked) {
+        border-color: #ec5b13 !important;
+        background: #fff7f3 !important;
+        font-weight: 700 !important;
+        color: #ec5b13 !important;
+      }
+      #quote-step-2 .flex.flex-wrap label:has(input[name="q-timeline"]:checked) span {
+        color: #ec5b13 !important;
+      }
+    </style>
+    <link rel="manifest" href="/manifest.json"/>
+      <link rel="stylesheet" href="/assets/css/components.css" />
+</head>
+  <body
+    class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 antialiased overflow-x-clip"
+  >
+    <div class="relative flex min-h-screen flex-col">
+      <navigator
+        data-search="true"
+        data-component="navigator"
+        data-variant="pc"
+        data-active="quote"
+        data-cta-text-key="nav_get_quote"
+        data-cta-href="/quote"
+      ></navigator>
+      <main id="spa-content" class="flex-1">
+        <div class="py-4">
+          <!-- Page Title & Breadcrumbs -->
+          <div class="mb-6">
+            <h1 class="text-4xl md:text-5xl font-black tracking-tight mb-2" data-i18n="quote_get_quote">Get Quote</h1>
+            <p
+              class="text-base text-slate-600 dark:text-slate-400 max-w-2xl leading-relaxed"
+              data-i18n="quote_hero_desc"
+            >
+              Tell us your commercial kitchen needs. We'll provide customized smart equipment solutions and quotes
+              within 24 hours.
+            </p>
+          </div>
+
+          <div class="flex flex-col lg:flex-row gap-8">
+            <!-- Form Section (Left) -->
+            <div class="flex-1 flex flex-col">
+              <div
+                class="bg-white dark:bg-slate-900/50 border border-slate-200 dark:border-slate-800 rounded-xl p-8 shadow-sm flex-1 flex flex-col"
+              >
+                <form id="quote-form" class="flex-1 flex flex-col" novalidate>
+                  <!-- Step 1: Company Info -->
+                  <div id="quote-step-1" class="flex-1 flex flex-col">
+                    <h2 class="text-base font-bold mb-6 flex items-center gap-2">
+                      <span
+                        class="inline-flex items-center justify-center size-7 rounded-full bg-primary text-white text-xs font-black"
+                      >
+                        1
+                      </span>
+                      <span data-i18n="quote_step_1">基本信息</span>
+                    </h2>
+                    <div class="space-y-5">
+                      <!-- Row 1: Country* + Name* -->
+                      <div class="grid grid-cols-2 gap-x-8">
+                        <label class="flex flex-col gap-1">
+                          <span class="text-sm font-bold" data-i18n="quote_country_label">
+                            国家
+                            <span class="text-red-500">*</span>
+                          </span>
+                          <select
+                            data-custom-select
+                            id="q-country"
+                            required
+                            onchange="window._onCountryChange && window._onCountryChange(this.value)"
+                            class="h-12 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white focus:border-primary text-base px-4 py-2.5 appearance-none"
+                          >
+                            <option value="" data-i18n="select_country">Select Country/Region</option>
+                            <option value="ID">🇮🇩 Indonesia</option>
+                            <option value="MY">🇲🇾 Malaysia</option>
+                            <option value="PH">🇵🇭 Pilipinas</option>
+                            <option value="VN">🇻🇳 Việt Nam</option>
+                            <option value="TH">🇹🇭 ไทย</option>
+                            <option value="SG">🇸🇬 Singapore</option>
+                            <option value="MM">🇲🇲 မြန်မာ</option>
+                            <option value="KH">🇰🇭 កង្ពុជា</option>
+                            <option value="LA">🇱🇦 ລາວ</option>
+                            <option value="BN">🇧🇳 Brunei</option>
+                            <option value="CN">🇨🇳 中国</option>
+                            <option value="IN">🇮🇳 भारत</option>
+                            <option value="JP">🇯🇵 日本</option>
+                            <option value="KR">🇰🇷 대한민국</option>
+                            <option value="SA">🇸🇦 السعودية</option>
+                            <option value="TW">🇹🇼 中国台湾</option>
+                            <option value="HK">🇭🇰 中国香港</option>
+                            <option value="DE">🇩🇪 Deutschland</option>
+                            <option value="ES">🇪🇸 España</option>
+                            <option value="FR">🇫🇷 France</option>
+                            <option value="PT">🇵🇹 Portugal</option>
+                            <option value="RU">🇷🇺 Россия</option>
+                            <option value="NL">🇳🇱 Nederland</option>
+                            <option value="PL">🇵🇱 Polska</option>
+                            <option value="IT">🇮🇹 Italia</option>
+                            <option value="TR">🇹🇷 Türkiye</option>
+                            <option value="IL">🇮🇱 ישראל</option>
+                            <option value="other">其他/Other</option>
+                          </select>
+                        </label>
+                        <label class="flex flex-col gap-1">
+                          <span class="text-sm font-bold" data-i18n="quote_name_label">
+                            怎么称呼您
+                            <span class="text-red-500">*</span>
+                          </span>
+                          <input
+                            id="q-contact"
+                            type="text"
+                            required
+                            class="h-12 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white focus:border-primary text-base px-4 py-2.5"
+                            placeholder="Your name"
+                            data-i18n-placeholder="quote_contact_placeholder"
+                          />
+                        </label>
+                      </div>
+                      <!-- Row 2: Phone* + Email -->
+                      <div class="grid grid-cols-2 gap-x-8">
+                        <label class="flex flex-col gap-1">
+                          <span class="text-sm font-bold" data-i18n="quote_phone_label">
+                            手机号码
+                            <span class="text-red-500">*</span>
+                          </span>
+                          <div class="flex gap-2">
+                            <select
+                              id="q-phone-code"
+                              class="w-24 shrink-0 h-12 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white focus:border-primary text-sm px-3 py-2.5 appearance-none"
+                            >
+                              <option value="+62">🇮🇩 +62</option>
+                              <option value="+60">🇲🇾 +60</option>
+                              <option value="+63">🇵🇭 +63</option>
+                              <option value="+84">🇻🇳 +84</option>
+                              <option value="+66">🇹🇭 +66</option>
+                              <option value="+65">🇸🇬 +65</option>
+                              <option value="+95">🇲🇲 +95</option>
+                              <option value="+855">🇰🇭 +855</option>
+                              <option value="+856">🇱🇦 +856</option>
+                              <option value="+673">🇧🇳 +673</option>
+                              <option value="+86">🇨🇳 +86</option>
+                              <option value="+91">🇮🇳 +91</option>
+                              <option value="+81">🇯🇵 +81</option>
+                              <option value="+82">🇰🇷 +82</option>
+                              <option value="+966">🇸🇦 +966</option>
+                              <option value="+886">🇹🇼 +886</option>
+                              <option value="+852">🇭🇰 +852</option>
+                              <option value="+49">🇩🇪 +49</option>
+                              <option value="+34">🇪🇸 +34</option>
+                              <option value="+33">🇫🇷 +33</option>
+                              <option value="+351">🇵🇹 +351</option>
+                              <option value="+7">🇷🇺 +7</option>
+                              <option value="+31">🇳🇱 +31</option>
+                              <option value="+48">🇵🇱 +48</option>
+                              <option value="+39">🇮🇹 +39</option>
+                              <option value="+90">🇹🇷 +90</option>
+                              <option value="+972">🇮🇱 +972</option>
+                              <option value="+1">🇺🇸 +1</option>
+                              <option value="+44">🇬🇧 +44</option>
+                              <option value="+61">🇦🇺 +61</option>
+                              <option value="+other">其他</option>
+                            </select>
+                            <input
+                              id="q-phone"
+                              type="tel"
+                              required
+                              class="flex-1 h-12 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white focus:border-primary text-base px-4 py-2.5"
+                              placeholder="Phone number"
+                              data-i18n-placeholder="quote_phone_placeholder"
+                            />
+                          </div>
+                        </label>
+                        <label class="flex flex-col gap-1">
+                          <span class="text-sm font-bold" data-i18n="quote_email_label">电子邮箱</span>
+                          <input
+                            id="q-email"
+                            type="email"
+                            class="h-12 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white focus:border-primary text-base px-4 py-2.5"
+                            placeholder="Your email"
+                            data-i18n-placeholder="quote_email_placeholder"
+                          />
+                        </label>
+                      </div>
+                      <!-- Row 3: Restaurant Type* + Company -->
+                      <div class="grid grid-cols-2 gap-x-8">
+                        <label class="flex flex-col gap-1">
+                          <span class="text-sm font-bold" data-i18n="quote_restaurant_type">
+                            餐厅类型
+                            <span class="text-red-500">*</span>
+                          </span>
+                          <select
+                            data-custom-select
+                            id="q-restaurant-type"
+                            required
+                            class="h-12 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white focus:border-primary text-base px-4 py-2.5 appearance-none"
+                          >
+                            <option value="" data-i18n="quote_select_restaurant_type">Select Restaurant Type</option>
+                            <option value="small-restaurant">小型餐饮</option>
+                            <option value="central-kitchen">中央厨房</option>
+                            <option value="chain-restaurant">连锁餐饮</option>
+                            <option value="smart-canteen">智慧食堂</option>
+                            <option value="cloud-kitchen">云厨房</option>
+                            <option value="takeaway">外卖</option>
+                            <option value="food-factory">食品工厂</option>
+                            <option value="other">其他</option>
+                          </select>
+                        </label>
+                        <label class="flex flex-col gap-1">
+                          <span class="text-sm font-bold" data-i18n="quote_company_label">餐厅名称</span>
+                          <input
+                            id="q-company"
+                            type="text"
+                            class="h-12 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white focus:border-primary text-base px-4 py-2.5"
+                            placeholder="Optional"
+                            data-i18n-placeholder="quote_company_placeholder"
+                          />
+                        </label>
+                      </div>
+                      <!-- Row 4: Contact Channel* + Account -->
+                      <div class="grid grid-cols-2 gap-x-8">
+                        <label class="flex flex-col gap-1">
+                          <span class="text-sm font-bold" data-i18n="quote_contact_channel_prompt">
+                            期望通过
+                            <span class="text-red-500">*</span>
+                          </span>
+                          <select
+                            data-custom-select
+                            id="q-contact-channel"
+                            required
+                            class="h-12 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white focus:border-primary text-base px-4 py-2.5 appearance-none"
+                          >
+                            <option value="" data-i18n="quote_select_channel">选择联系方式</option>
+                            <option value="WhatsApp">WhatsApp</option>
+                            <option value="LINE">LINE</option>
+                            <option value="Zalo">Zalo</option>
+                            <option value="Facebook Messenger">Messenger</option>
+                            <option value="Viber">Viber</option>
+                            <option value="Telegram">Telegram</option>
+                            <option value="WeChat">WeChat</option>
+                            <option value="Phone Call">电话</option>
+                            <option value="other">其他</option>
+                          </select>
+                        </label>
+                        <label class="flex flex-col gap-1">
+                          <span class="text-sm font-bold" data-i18n="quote_account_label">账号</span>
+                          <input
+                            id="q-contact-account"
+                            type="text"
+                            class="h-12 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white focus:border-primary text-base px-4 py-2.5"
+                            placeholder="Leave blank to use phone"
+                            data-i18n-placeholder="quote_account_placeholder"
+                          />
+                        </label>
+                      </div>
+                      <!-- Next button -->
+                      <div>
+                        <button
+                          type="button"
+                          id="quote-next-btn"
+                          class="w-full bg-primary text-white py-3.5 rounded-xl font-black text-base hover:bg-primary/90 transition-all flex items-center justify-center gap-2 uppercase tracking-widest"
+                          style="margin-top:100px"
+                        >
+                          <span data-i18n="quote_next_btn">下一步：设备需求</span>
+                          <span class="material-symbols-outlined">arrow_forward</span>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Step 2: Equipment Needs -->
+                  <div id="quote-step-2" class="hidden flex-1 flex flex-col">
+                    <h2 class="text-base font-bold mb-5 flex items-center gap-2">
+                      <span
+                        class="inline-flex items-center justify-center size-7 rounded-full bg-primary text-white text-xs font-black"
+                      >
+                        2
+                      </span>
+                      <span data-i18n="quote_step_2">设备需求</span>
+                    </h2>
+                    <div class="space-y-4">
+                      <!-- Equipment checkboxes -->
+                      <div>
+                        <span class="text-sm font-bold">
+                          <span data-i18n="quote_equip_label">需要哪些设备？</span>
+                          <span class="text-red-500">*</span>
+                        </span>
+                        <div class="grid grid-cols-4 gap-x-6 gap-y-3 mt-2.5">
+                          <label
+                            class="flex items-center gap-1.5 p-2.5 rounded-lg border border-slate-200 cursor-pointer hover:border-primary transition-all text-base"
+                          >
+                            <input type="checkbox" class="accent-primary" value="cutting" />
+                            <span data-i18n="equip_cutting">切配</span>
+                          </label>
+                          <label
+                            class="flex items-center gap-1.5 p-2.5 rounded-lg border border-slate-200 cursor-pointer hover:border-primary transition-all text-base"
+                          >
+                            <input type="checkbox" class="accent-primary" value="stirfry" />
+                            <span data-i18n="equip_stirfry">翻炒</span>
+                          </label>
+                          <label
+                            class="flex items-center gap-1.5 p-2.5 rounded-lg border border-slate-200 cursor-pointer hover:border-primary transition-all text-base"
+                          >
+                            <input type="checkbox" class="accent-primary" value="frying" />
+                            <span data-i18n="equip_frying">煎炸</span>
+                          </label>
+                          <label
+                            class="flex items-center gap-1.5 p-2.5 rounded-lg border border-slate-200 cursor-pointer hover:border-primary transition-all text-base"
+                          >
+                            <input type="checkbox" class="accent-primary" value="stewing" />
+                            <span data-i18n="equip_stewing">炖煮</span>
+                          </label>
+                          <label
+                            class="flex items-center gap-1.5 p-2.5 rounded-lg border border-slate-200 cursor-pointer hover:border-primary transition-all text-base"
+                          >
+                            <input type="checkbox" class="accent-primary" value="steaming" />
+                            <span data-i18n="equip_steaming">蒸煮</span>
+                          </label>
+                          <label
+                            class="flex items-center gap-1.5 p-2.5 rounded-lg border border-slate-200 cursor-pointer hover:border-primary transition-all text-base"
+                          >
+                            <input type="checkbox" class="accent-primary" value="auxiliary" />
+                            <span data-i18n="equip_auxiliary">辅助</span>
+                          </label>
+                        </div>
+                        <div class="flex items-center gap-2 mt-1.5">
+                          <input type="checkbox" id="q-equip-other-cb" class="accent-primary" value="other" />
+                          <span class="text-base" data-i18n="quote_equip_other_label">Other:</span>
+                          <input
+                            type="text"
+                            id="q-equip-other"
+                            class="flex-1 px-3 py-2 rounded-lg border border-slate-200 bg-transparent text-base"
+                            placeholder="Describe..."
+                          />
+                        </div>
+                      </div>
+                      <!-- Capacity + Budget -->
+                      <div class="grid gap-5 md:grid-cols-2">
+                        <label class="flex flex-col gap-1">
+                          <span class="text-sm font-bold">
+                            <span data-i18n="quote_daily_capacity">日均产量</span>
+                            <span class="text-red-500">*</span>
+                          </span>
+                          <select
+                            data-custom-select
+                            id="q-capacity"
+                            required
+                            class="h-12 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white focus:border-primary text-base px-4 py-2.5 appearance-none"
+                          >
+                            <option value="" data-i18n="quote_select_capacity">选择</option>
+                            <option value="<50">&lt;50</option>
+                            <option value="50-100">50-100</option>
+                            <option value="100-300">100-300</option>
+                            <option value="300+">300+</option>
+                          </select>
+                        </label>
+                        <label class="flex flex-col gap-1">
+                          <span class="text-sm font-bold">
+                            <span data-i18n="quote_budget_label">预算</span>
+                            <span class="text-red-500">*</span>
+                          </span>
+                          <select
+                            data-custom-select
+                            id="q-budget"
+                            required
+                            class="h-12 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white focus:border-primary text-base px-4 py-2.5 appearance-none"
+                          >
+                            <option value="" data-i18n="quote_select_budget">选择</option>
+                            <option value="<$800">&lt;$800</option>
+                            <option value="$800-1500">$800-1500</option>
+                            <option value="$1500-3000">$1500-3000</option>
+                            <option value="$3000-8000">$3000-8000</option>
+                            <option value="$8000+">$8000+</option>
+                          </select>
+                        </label>
+                      </div>
+                      <!-- Timeline: horizontal row -->
+                      <div>
+                        <span class="text-sm font-bold">
+                          <span data-i18n="quote_timeline_label">采购时间</span>
+                          <span class="text-red-500">*</span>
+                        </span>
+                        <div class="flex flex-wrap gap-3 mt-2">
+                          <label
+                            class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl border-2 border-slate-200 cursor-pointer hover:border-primary hover:bg-orange-50/50 transition-all text-sm font-medium text-slate-600"
+                          >
+                            <input type="radio" name="q-timeline" class="accent-primary" value="1month" />
+                            <span data-i18n="quote_timeline_1m">1个月内</span>
+                          </label>
+                          <label
+                            class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl border-2 border-slate-200 cursor-pointer hover:border-primary hover:bg-orange-50/50 transition-all text-sm font-medium text-slate-600"
+                          >
+                            <input type="radio" name="q-timeline" class="accent-primary" value="3months" />
+                            <span data-i18n="quote_timeline_3m">3个月内</span>
+                          </label>
+                          <label
+                            class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl border-2 border-slate-200 cursor-pointer hover:border-primary hover:bg-orange-50/50 transition-all text-sm font-medium text-slate-600"
+                          >
+                            <input type="radio" name="q-timeline" class="accent-primary" value="6months" />
+                            <span data-i18n="quote_timeline_6m">6个月内</span>
+                          </label>
+                          <label
+                            class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl border-2 border-primary bg-orange-50/50 cursor-pointer transition-all text-sm font-bold text-primary"
+                          >
+                            <input type="radio" name="q-timeline" class="accent-primary" value="nodate" checked />
+                            <span data-i18n="quote_timeline_nodate">先了解</span>
+                          </label>
+                        </div>
+                      </div>
+                      <!-- Pain points -->
+                      <div>
+                        <span class="text-base font-bold" data-i18n="quote_challenge">最大挑战？（多选）</span>
+                        <div class="flex flex-wrap gap-x-6 gap-y-3 mt-2">
+                          <label class="flex items-center gap-1.5 text-base cursor-pointer">
+                            <input type="checkbox" class="accent-primary" value="招聘困难" />
+                            <span data-i18n="quote_pain_hiring">招不到厨师</span>
+                          </label>
+                          <label class="flex items-center gap-1.5 text-base cursor-pointer">
+                            <input type="checkbox" class="accent-primary" value="出餐慢" />
+                            <span data-i18n="quote_pain_slow">出餐速度慢</span>
+                          </label>
+                          <label class="flex items-center gap-1.5 text-base cursor-pointer">
+                            <input type="checkbox" class="accent-primary" value="品质不稳" />
+                            <span data-i18n="quote_pain_quality">品质不稳定</span>
+                          </label>
+                          <label class="flex items-center gap-1.5 text-base cursor-pointer">
+                            <input type="checkbox" class="accent-primary" value="成本高" />
+                            <span data-i18n="quote_pain_cost">人力成本高</span>
+                          </label>
+                          <label class="flex items-center gap-1.5 text-base cursor-pointer">
+                            <input type="checkbox" class="accent-primary" value="新店" />
+                            <span data-i18n="quote_pain_new_store">准备开新店</span>
+                          </label>
+                          <label class="flex items-center gap-1.5 text-base cursor-pointer">
+                            <input type="checkbox" class="accent-primary" value="其他" />
+                            <span data-i18n="quote_pain_other">其他</span>
+                          </label>
+                        </div>
+                        <div class="flex items-center gap-2 mt-2">
+                          <input type="checkbox" id="q-pain-other-cb" class="accent-primary" value="其他" />
+                          <span class="text-sm" data-i18n="quote_challenge_other">其他：</span>
+                          <input
+                            type="text"
+                            id="q-pain-other"
+                            class="flex-1 px-3 py-2 rounded-lg border border-slate-200 bg-transparent text-sm"
+                            data-i18n-placeholder="quote_challenge_other_placeholder"
+                            placeholder="Describe..."
+                          />
+                        </div>
+                      </div>
+                    </div>
+                    <!-- Step 2 Actions -->
+                    <div class="mt-auto pt-4">
+                      <div class="flex gap-3">
+                        <button
+                          type="button"
+                          id="quote-prev-btn"
+                          class="px-5 py-2.5 rounded-xl font-bold text-slate-600 border border-slate-300 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800 transition-all flex items-center gap-1.5 text-base"
+                        >
+                          <span class="material-symbols-outlined text-sm">arrow_back</span>
+                          <span data-i18n="quote_prev_btn">上一步</span>
+                        </button>
+                        <button
+                          type="submit"
+                          id="quote-submit-btn"
+                          class="flex-1 bg-primary text-white py-3 rounded-xl font-bold hover:bg-primary/90 transition-all flex items-center justify-center gap-2 text-base"
+                        >
+                          <span data-i18n="quote_submit_btn">提交获取报价</span>
+                          <span class="material-symbols-outlined">arrow_forward</span>
+                        </button>
+                      </div>
+                      <p class="text-xs text-center text-slate-400 mt-1.5" data-i18n="quote_submit_hint">
+                        提交后 2 小时内专人联系
+                      </p>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+
+            <!-- Trust Sidebar (Right) -->
+            <aside class="lg:w-[420px] lg:shrink-0 flex flex-col gap-5">
+              <!-- Why Yukoli -->
+              <div
+                class="bg-slate-100 dark:bg-slate-900/50 p-6 rounded-2xl border border-slate-200 dark:border-slate-800 flex-1"
+              >
+                <h3 class="text-base font-bold mb-4" data-i18n="quote_why_yukoli">Why Choose YuKoLi?</h3>
+                <ul class="space-y-4">
+                  <li class="flex gap-4">
+                    <div class="flex-shrink-0 size-10 bg-primary/10 rounded-lg flex items-center justify-center">
+                      <span class="material-symbols-outlined text-primary">inventory_2</span>
+                    </div>
+                    <div>
+                      <p class="font-bold text-sm" data-i18n="quote_114_products">200+ Smart Appliances</p>
+                      <p class="text-sm text-slate-500 mt-1" data-i18n="quote_114_products_desc">
+                        Complete commercial kitchen solutions for stir-frying, steaming, roasting, soup-making, and rice
+                        cooking.
+                      </p>
+                    </div>
+                  </li>
+                  <li class="flex gap-4">
+                    <div class="flex-shrink-0 size-10 bg-primary/10 rounded-lg flex items-center justify-center">
+                      <span class="material-symbols-outlined text-primary">public</span>
+                    </div>
+                    <div>
+                      <p class="font-bold text-sm" data-i18n="quote_50_countries">68+ Countries Covered</p>
+                      <p class="text-sm text-slate-500 mt-1" data-i18n="quote_50_countries_desc">
+                        Strong presence in Southeast Asia, exporting to 50+ countries worldwide.
+                      </p>
+                    </div>
+                  </li>
+                  <li class="flex gap-4">
+                    <div class="flex-shrink-0 size-10 bg-primary/10 rounded-lg flex items-center justify-center">
+                      <span class="material-symbols-outlined text-primary">verified_user</span>
+                    </div>
+                    <div>
+                      <p class="font-bold text-sm" data-i18n="quote_certified">Internationally Certified Quality</p>
+                      <p class="text-sm text-slate-500 mt-1" data-i18n="quote_certified_desc">
+                        CE, UL, ISO 9001 certified for guaranteed quality.
+                      </p>
+                    </div>
+                  </li>
+                  <li class="flex gap-4">
+                    <div class="flex-shrink-0 size-10 bg-primary/10 rounded-lg flex items-center justify-center">
+                      <span class="material-symbols-outlined text-primary">support_agent</span>
+                    </div>
+                    <div>
+                      <p class="font-bold text-sm" data-i18n="quote_after_sales">Comprehensive After-Sales</p>
+                      <p class="text-sm text-slate-500 mt-1" data-i18n="quote_after_sales_desc">
+                        Installation guidance, operation training, and ongoing technical support.
+                      </p>
+                    </div>
+                  </li>
+                </ul>
+                <!-- Certifications (inline) -->
+                <div class="mt-6 pt-5 border-t border-slate-200 dark:border-slate-700">
+                  <h3
+                    class="text-xs font-black uppercase tracking-widest text-slate-400 mb-4 text-center"
+                    data-i18n="quote_certifications"
+                  >
+                    Certifications
+                  </h3>
+                  <div
+                    class="flex flex-wrap justify-center gap-8 opacity-60 grayscale hover:grayscale-0 transition-all duration-500"
+                  >
+                    <div class="flex flex-col items-center">
+                      <div
+                        class="size-12 rounded border border-slate-300 dark:border-slate-700 flex items-center justify-center font-black text-xl mb-1"
+                      >
+                        CE
+                      </div>
+                      <span class="text-[10px] font-bold" data-i18n="quote_ce_standard">European Standards</span>
+                    </div>
+                    <div class="flex flex-col items-center">
+                      <div
+                        class="size-12 rounded border border-slate-300 dark:border-slate-700 flex items-center justify-center font-black text-xl mb-1"
+                      >
+                        UL
+                      </div>
+                      <span class="text-[10px] font-bold" data-i18n="quote_ul_safety">Safety Certified</span>
+                    </div>
+                    <div class="flex flex-col items-center">
+                      <div
+                        class="size-12 rounded border border-slate-300 dark:border-slate-700 flex items-center justify-center font-black text-xl mb-1"
+                      >
+                        ISO
+                      </div>
+                      <span class="text-[10px] font-bold" data-i18n="quote_iso_quality">Quality System</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Quick Contact -->
+              <div class="bg-primary p-6 rounded-2xl text-white">
+                <div class="flex items-center gap-3 mb-4">
+                  <span class="material-symbols-outlined text-3xl">forum</span>
+                  <h3 class="text-base font-bold" data-i18n="quote_prefer_chat">Prefer direct chat?</h3>
+                </div>
+                <p class="text-base opacity-90 mb-6" data-i18n="quote_prefer_chat_desc">
+                  Our sales team is online to answer questions and help you find the right equipment quickly.
+                </p>
+                <div class="flex gap-3">
+                  <button
+                    onclick="startWhatsApp()"
+                    class="flex-1 bg-white text-primary py-3 rounded-lg font-bold text-sm flex items-center justify-center gap-2 hover:bg-white/90 transition-all"
+                  >
+                    <span class="material-symbols-outlined text-lg">chat</span>
+                    WhatsApp
+                  </button>
+                  <button
+                    onclick="startEmail()"
+                    class="flex-1 bg-white/20 text-white py-3 rounded-lg font-bold text-sm flex items-center justify-center gap-2 hover:bg-white/30 transition-all"
+                  >
+                    <span class="material-symbols-outlined text-lg">mail</span>
+                    <span data-i18n="quote_send_email">Email Us</span>
+                  </button>
+                </div>
+              </div>
+            </aside>
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <script defer src="/assets/js/ui/dropdown-styles.js?v=1780474841186"></script>
+    <script defer src="/assets/js/ui/dropdown-base.js?v=1780474841186"></script>
+    <script defer src="/assets/js/ui/custom-select.js?v=1780474841186"></script>
+    <script defer src="/assets/js/quote-select-i18n.js?v=1780474841186"></script>
+    <script defer src="/assets/js/ui/products-dropdown.js?v=1780474841186"></script>
+    <script defer src="/assets/js/ui/applications-dropdown.js?v=1780474841186"></script>
+    <script defer src="/assets/js/ui/support-dropdown.js?v=1780474841186"></script>
+    <script defer src="/assets/js/ui/about-dropdown.js?v=1780474841186"></script>
+    <script defer src="/assets/js/product-list.js?v=1780474841186"></script>
+    <script defer src="/assets/js/utils.js?v=1780474841186"></script>
+    <script defer src="/assets/js/ui/search-engine.js?v=1780474841186"></script>
+        <script defer src="/assets/js/ui/slide-menu.js?v=1780474841186"></script>
+    <script defer src="/assets/js/ui/footer.js?v=1780474841186"></script>
+    <script defer src="/assets/js/lang-registry.js?v=1780474841186"></script>
+    <script defer src="/assets/js/translations.js?v=1780474841186"></script>
+    <script defer src="/assets/js/translations-dropdown-template.js?v=1780474841186"></script>
+
+    <script defer src="/assets/js/contacts.js?v=1780474841186"></script>
+    <script defer src="/assets/js/router.js?v=1780474841186"></script>
+    <script defer src="/assets/js/ui/helpers.js?v=1780474841186"></script>
+    <script defer src="/assets/js/ui/page-effects.js?v=1780474841186"></script><script defer src="/assets/js/page-interactions.js?v=1780474841186"></script>
+    <script defer src="/assets/js/quote-form.js?v=1780474841186"></script>
+    <script defer src="/assets/js/utils/device-utils.js?v=1780474841186"></script>
+
+    <script defer src="/assets/js/ui/floating-actions.js?v=1780474841186"></script>
+    <footer data-component="footer" data-variant="pc" data-active="quote"></footer>
+      <script src="/assets/js/product-data-table.js"></script>
+    <script defer src="/assets/js/nav-config.js"></script>
+    <script defer src="/assets/js/ui/contact-dropdown.js"></script>
+    <script defer src="/assets/js/ui/navigator.js"></script>
+    <script defer src="/assets/js/ui/hero-video.js"></script>
+    <script defer src="/assets/js/swup.min.js"></script>
+    <script defer src="/assets/js/swup-head-plugin.min.js"></script>
+    <script defer src="/assets/js/swup-preload-plugin.min.js"></script>
+    <script defer src="/assets/js/spa-router.js"></script>
+    <script>window._SPA_GLOBAL_PATTERNS=/(?:^|[\/])(?:product-data-table|nav-config|device-utils|lang-registry|utils|translations|translations-dropdown-template|dropdown-styles|dropdown-base|products-dropdown|applications-dropdown|support-dropdown|about-dropdown|contact-dropdown|navigator|slide-menu|footer|hero-video|floating-actions|helpers|page-effects|page-interactions|search-engine|swup.min|swup-head-plugin.min|swup-preload-plugin.min|spa-router)\.js/</script>
+  <style data-skeleton-inline>#skeleton-overlay{position:fixed;inset:0;z-index:5;pointer-events:none;background:var(--color-bg-light,#f8fafc);opacity:1;transition:opacity .25s ease-out}html.dark #skeleton-overlay{background:var(--color-bg-dark,#020617)}#skeleton-overlay[hidden]{display:none}@keyframes sk-shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}.skeleton-container{width:100%;max-width:1280px;margin:0 auto;padding:2rem 1.25rem}.sk-badge{width:100px;height:22px;border-radius:9999px;margin:0 auto 16px;background:linear-gradient(90deg,#e8e8e8 25%,#d4d4d4 50%,#e8e8e8 75%);background-size:200% 100%;animation:sk-shimmer 1.5s infinite}.sk-hero{display:flex;flex-direction:column;align-items:center;text-align:center;margin-bottom:24px}.sk-line{width:65%;height:32px;border-radius:8px;margin:0 auto 12px;background:linear-gradient(90deg,#e8e8e8 25%,#d4d4d4 50%,#e8e8e8 75%);background-size:200% 100%;animation:sk-shimmer 1.5s infinite}.sk-line-short{width:45%;height:18px;margin-bottom:8px}.sk-line-shorter{width:30%;height:18px}.sk-cta-group{display:flex;gap:12px;justify-content:center;margin-top:20px}.sk-cta{width:140px;height:44px;border-radius:12px;background:linear-gradient(90deg,#e8e8e8 25%,#d4d4d4 50%,#e8e8e8 75%);background-size:200% 100%;animation:sk-shimmer 1.5s infinite}.sk-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:32px}@media(max-width:767px){.sk-grid{grid-template-columns:1fr}.sk-cta{width:100%;max-width:none}}@media(min-width:768px)and(max-width:1279px){.sk-grid{grid-template-columns:repeat(2,1fr)}}.sk-card{height:220px;border-radius:16px;background:linear-gradient(90deg,#e8e8e8 25%,#d4d4d4 50%,#e8e8e8 75%);background-size:200% 100%;animation:sk-shimmer 1.5s infinite}.dark .sk-badge,.dark .sk-line,.dark .sk-cta,.dark .sk-card{background:linear-gradient(90deg,#1e293b 25%,#334155 50%,#1e293b 75%);background-size:200% 100%}</style>
+<div id="skeleton-overlay">  <div class="skeleton-container">    <div class="sk-hero">      <div class="sk-badge"></div>      <div class="sk-line"></div>      <div class="sk-line sk-line-short"></div>      <div class="sk-line sk-line-shorter"></div>      <div class="sk-cta-group">        <div class="sk-cta"></div>        <div class="sk-cta"></div>      </div>    </div>    <div class="sk-grid">      <div class="sk-card"></div>      <div class="sk-card"></div>      <div class="sk-card"></div>    </div>  </div></div>
+<script>(function(){var sk=document.getElementById("skeleton-overlay");if(!sk)return;function hide(){sk.setAttribute("hidden","");sk.style.display="none";document.head.querySelector("[data-skeleton-inline]")?.remove()}if(document.readyState==="complete")hide();else window.addEventListener("load",hide);setTimeout(hide,3000);})();</script>
+  </body>
+</html>

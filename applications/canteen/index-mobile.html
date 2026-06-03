@@ -1,0 +1,428 @@
+<!doctype html>
+<html class="light" lang="zh-CN"> <head>
+    <script>
+      /* Pre-apply cached translations to prevent flash */
+      (function () {
+        try {
+          var lang = localStorage.getItem("userLanguage") || "zh-CN";
+          if (!lang) return;
+          var cacheKey = "yukoli-translations-ui-" + lang;
+          var cached = localStorage.getItem(cacheKey);
+          if (!cached) return;
+          var data = JSON.parse(cached);
+          if (!data.data) return;
+          var translations = data.data;
+          document.documentElement.lang = lang;
+          var elements = document.querySelectorAll("[data-i18n]");
+          for (var i = 0; i < elements.length; i++) {
+            var el = elements[i];
+            var key = el.getAttribute("data-i18n");
+            if (translations[key] && el.children.length === 0) {
+              el.textContent = translations[key];
+            }
+          }
+        } catch (e) {
+          /* ignore */
+        }
+      })();
+    </script>
+  <script>/*[i18n-url-sync]*/(function(){var p=new URLSearchParams(location.search),l=p.get("lang");if(l){localStorage.setItem("userLanguage",l);document.documentElement.lang=l}})();</script> <link rel="canonical" href="https://www.kitchen.yukoli.com/applications/canteen/" /> <link rel="alternate" hreflang="zh-CN" href="https://www.kitchen.yukoli.com/applications/canteen/" /> <link rel="alternate" hreflang="en" href="https://www.kitchen.yukoli.com/applications/canteen/" /> <link rel="alternate" hreflang="x-default" href="https://www.kitchen.yukoli.com/applications/canteen/" /> <link rel="alternate" media="only screen and (max-width: 767px)" href="/applications/canteen/index-mobile.html" /> <link rel="alternate" media="only screen and (min-width: 768px) and (max-width: 1279px)" href="/applications/canteen/index-tablet.html" /> <link rel="alternate" media="only screen and (min-width: 1280px)" href="/applications/canteen/index-pc.html" />
+    <script>
+    (function checkDevice(){
+      if(window.__redirectChecked){console.log("[device-redirect] skip, __redirectChecked=true");return;}
+      if(document.querySelector("meta[name=ssg-device]")){console.log("[device-redirect] skip, ssg-device meta found");return;}
+      window.__redirectChecked=true;
+      var u=new URLSearchParams(location.search);
+      var c=u.get("clean-url");
+      if(c){console.log("[device-redirect] clean-url detected, replaceState:",c);history.replaceState({},"",c);return}
+      if(window.__spaNavigating){console.log("[device-redirect] skip, __spaNavigating=true");return;}
+      var f=location.pathname.split("/").pop();
+      console.log("[device-redirect] pathname=",location.pathname," f=",f," innerW=",window.innerWidth);
+      if(!f||!f.match(/.html$/)){
+        console.log("[device-redirect] dir URL (no .html), calling doRedirect");
+        doRedirect();
+        return;
+      }
+      if(f.match(/^index-(pc|mobile|tablet).html$/)){
+        console.log("[device-redirect] already on device-specific page:",f,"→ skip");
+        return;
+      }
+      function doRedirect(){
+        var mq = window.matchMedia;
+        var isTouch = mq && mq("(pointer:coarse)").matches;
+        var isMb = mq("(max-width:767px)").matches;
+        var isTb = mq("(min-width:768px) and (max-width:1023px)").matches;
+        var isPc = mq("(min-width:1024px)").matches;
+        if (isTouch && !isPc) { isMb = true; isTb = false; }
+        var e = isPc ? "index-pc.html" : isTb ? "index-tablet.html" : "index-mobile.html";
+        console.log("[device-redirect] doRedirect",{innerW:window.innerWidth,isTouch:isTouch,mobile:isMb,tablet:isTb,pc:isPc,target:e,currentF:f});
+        if(f===e){console.log("[device-redirect] already on correct version, skip");return;}
+        var newUrl=location.pathname.replace(/[^\/]*.html$/,"")+e;
+        console.log("[device-redirect] redirecting to",newUrl);
+        location.href=newUrl;
+      }
+      doRedirect();
+    })();
+    </script>
+<meta charset="utf-8" /> <meta name="description" content="YuKoLi 食堂设备与运营方案 — 现场烹饪+恒温分餐，服务学校/医院/机关食堂200-5000人，食品安全全程有记录。" /> <meta name="keywords" content="食堂设备,学校食堂,医院食堂,食堂运营,食品安全,食堂改造" /> <meta property="og:type" content="website" /> <meta property="og:url" content="https://www.kitchen.yukoli.com/applications/canteen/" /> <meta property="og:image" content="https://www.kitchen.yukoli.com/assets/images/logo/logo.webp" /> <meta property="og:title" content="YuKoLi | 食堂设备与运营方案" /> <meta property="og:description" content="现场烹饪+恒温分餐，服务学校/医院/机关食堂200-5000人，食品安全全程有记录。" /> <meta property="og:site_name" content="YuKoLi 智能厨具"/> <meta property="og:locale" content="zh_CN"/> <meta name="twitter:card" content="summary_large_image"/> <meta name="twitter:title" content="YuKoLi | 食堂设备与运营方案"/> <meta name="twitter:description" content="现场烹饪+恒温分餐，服务学校/医院/机关食堂200-5000人，食品安全全程有记录。"/> <meta name="twitter:image" content="https://www.kitchen.yukoli.com/assets/images/logo/logo.webp"/> <meta content="width=device-width, initial-scale=1.0" name="viewport" /> <title data-i18n="canteen_page_title">YuKoLi | Smart Kitchen Solutions for Canteens & Central Kitchens</title> <link rel="preload" href="/assets/fonts/local-fonts.css" as="style" /> <link rel="preload" href="/assets/css/styles.css?v=1780474841186" as="style" /> <link rel="preload" href="/assets/css/tailwind.css?v=1780474841186" as="style" /> <link href="/assets/fonts/local-fonts.css" rel="stylesheet" /> <link rel="stylesheet" href="/assets/css/styles.css?v=1780474841186" /> <link rel="stylesheet" href="/assets/css/tailwind.css?v=1780474841186" /> <link rel="stylesheet" href="/assets/css/z-index-system.css?v=1780474841186" /> <link rel="stylesheet" href="/assets/css/performance-optimizations.css?v=1780474841186" /> <script> (function () { if (localStorage.getItem("darkMode") ==="true") document.documentElement.classList.add("dark"); })(); </script> <link rel="stylesheet" href="/assets/css/skeleton.css?v=1780474841186" /> <link rel="icon" href="/assets/images/logo/logo.webp" type="image/webp" /> <title>YuKoLi 智慧食堂设备方案 | 学校医院机关食堂自动化</title> <script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement": [ {"@type":"ListItem","position": 1,"name":"Home","item":"https://www.kitchen.yukoli.com/home/" }, {"@type":"ListItem","position": 2,"name":"Applications","item":"https://www.kitchen.yukoli.com/applications/" }, {"@type":"ListItem","position": 3,"name":"智慧食堂","item":"https://www.kitchen.yukoli.com/applications/canteen/" } ]
+} </script>
+  <link rel="manifest" href="/manifest.json"/>
+  <link rel="stylesheet" href="/assets/css/components.css?v=1780474841186" />
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 antialiased transition-colors duration-300 overflow-x-clip"
+>
+<navigator data-search="true" data-component="navigator" data-variant="mobile" data-active="applications"></navigator>
+<main id="spa-content" class="flex-1">
+
+<!-- ========== Section 1: Hero ========== -->
+<section class="fullwidth-bg hero-overlap section-passthrough relative py-8 bg-gradient-to-br from-primary/5 via-transparent to-orange-100/30 dark:from-primary/10 dark:to-orange-900/20">
+  <div class="section-content">
+    <div class="w-full relative">
+      <div class="flex items-center gap-2 mb-4 flex-wrap">
+        <a href="/applications/" class="text-xs text-slate-400 hover:text-primary transition-colors" data-i18n="nav_applications">Applications</a>
+        <span class="material-symbols-outlined text-xs text-slate-300">chevron_right</span>
+        <span class="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-bold uppercase tracking-wider">
+          <span class="material-symbols-outlined text-xs">restaurant</span>
+          <span data-i18n="nav_applications_canteen">Smart Canteen</span>
+        </span>
+      </div>
+      <h1 class="text-3xl font-black leading-tight tracking-tighter mb-4">
+        <span data-i18n="canteen_hero_title_1">Smart Canteen</span>
+        <br />
+        <span class="text-primary" data-i18n="canteen_hero_title_2">Solution</span>
+      </h1>
+      <p class="text-base text-slate-600 dark:text-slate-400 mb-6" data-i18n="canteen_hero_subtitle">Live cooking + smart serving for <span class="text-primary font-bold">200-5,000</span> people</p>
+      <div class="flex flex-col gap-3 mb-6">
+        <a href="/quote/" class="bg-primary text-white px-6 py-3 rounded-xl font-bold text-sm flex items-center justify-center gap-2 hover:shadow-lg transition-all">
+          <span data-i18n="canteen_cta_btn_send">Send Headcount</span>
+          <span class="material-symbols-outlined">arrow_forward</span>
+        </a>
+        <a href="/profit-calculator/" class="px-6 py-3 rounded-xl font-bold text-sm flex items-center justify-center gap-2 border-2 border-slate-300 dark:border-slate-600 hover:border-primary hover:text-primary transition-all">
+          <span class="material-symbols-outlined">calculate</span>
+          <span data-i18n="canteen_cta_btn_roi">ROI Calculator</span>
+        </a>
+      </div>
+      <div class="relative rounded-xl overflow-hidden shadow-lg aspect-[3/2]" data-hero-video>
+        <video class="hero-video-player" src="/assets/video/canteen-stirfry.mp4" poster="/assets/images/applications/canteen/hero.webp" preload="none" muted playsinline webkit-playsinline></video>
+        <div class="hero-video-overlay">
+          <button class="hero-video-mute" aria-label="Toggle mute" data-i18n-aria="aria_toggle_mute">
+            <span class="material-symbols-outlined text-white text-xl">volume_off</span>
+          </button>
+          <button class="hero-video-fallback-btn" aria-label="Play video" data-i18n-aria="aria_play_video">
+            <span class="material-symbols-outlined text-white text-3xl">play_circle</span>
+          </button>
+        </div>
+        <img loading="eager" alt="YuKoLi 食堂设备方案" data-i18n-alt="alt_applications_canteen_index-pc_YuKoLi_食堂设备方案" data-i18n="canteen_hero_img_alt" class="hero-video-poster w-full h-full object-cover" src="/assets/images/applications/canteen/hero.webp" onerror="this.src='/assets/images/products/default.webp'" />
+        <div data-hide-on-play class="">
+          <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+          <div class="absolute bottom-0 left-0 right-0 p-4">
+            <div class="flex items-center gap-3 text-white">
+              <div class="flex -space-x-2">
+                <div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center text-xs font-bold">Y</div>
+              </div>
+              <div>
+                <p class="text-sm font-semibold" data-i18n="canteen_sol_1">YuKoLi Commercial Kitchen Equipment</p>
+                <p class="text-xs opacity-80" data-i18n="canteen_hero_tagline">Smart Canteen Solution</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== Section 2: Pain Points ========== -->
+<section class="fullwidth-bg py-8 bg-slate-50 dark:bg-slate-900/50">
+  <div class="section-content">
+    <div class="w-full text-center mb-8">
+      <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-red-100 dark:bg-red-900/20 text-red-600 text-xs font-bold uppercase tracking-widest mb-3">
+        <span class="material-symbols-outlined text-sm">warning</span>
+        <span data-i18n="app_pain_badge">Industry Pain Points</span>
+      </span>
+      <h2 class="text-xl font-black tracking-tight mb-2" data-i18n="ct_pain_title">A Cafeteria Manager's Routine</h2>
+      <p class="text-sm text-slate-500 dark:text-slate-400" data-i18n="ct_pain_desc">Beyond meal service, these happen daily.</p>
+    </div>
+    <div class="space-y-4">
+      <div class="bg-white dark:bg-slate-800 rounded-2xl overflow-hidden shadow-md">
+        <div class="aspect-[3/2] overflow-hidden">
+          <img src="/assets/images/applications/canteen/pain1.webp" alt="Gas Range Breakdown" class="w-full h-full object-cover" loading="lazy" />
+        </div>
+        <div class="p-4">
+          <h3 class="text-sm font-bold mb-1" data-i18n="ct_pain_1_title">Gas Stove Issues Again</h3>
+          <p class="text-xs text-slate-600 dark:text-slate-400" data-i18n="ct_pain_1_desc">A faulty burner slows cooking by half. Three-day repair wait – what about lunch rush?</p>
+        </div>
+      </div>
+      <div class="bg-white dark:bg-slate-800 rounded-2xl overflow-hidden shadow-md">
+        <div class="aspect-[3/2] overflow-hidden">
+          <img src="/assets/images/applications/canteen/pain2.webp" alt="Chef Calls in Sick" class="w-full h-full object-cover" loading="lazy" />
+        </div>
+        <div class="p-4">
+          <h3 class="text-sm font-bold mb-1" data-i18n="ct_pain_2_title">Chef Absenteeism</h3>
+          <p class="text-xs text-slate-600 dark:text-slate-400" data-i18n="ct_pain_2_desc">One cook calls in sick, and two dishes disappear from the menu.</p>
+        </div>
+      </div>
+      <div class="bg-white dark:bg-slate-800 rounded-2xl overflow-hidden shadow-md">
+        <div class="aspect-[3/2] overflow-hidden">
+          <img src="/assets/images/applications/canteen/pain3.webp" alt="Food Waste Over Budget" class="w-full h-full object-cover" loading="lazy" />
+        </div>
+        <div class="p-4">
+          <h3 class="text-sm font-bold mb-1" data-i18n="ct_pain_3_title">Excessive Food Waste</h3>
+          <p class="text-xs text-slate-600 dark:text-slate-400" data-i18n="ct_pain_3_desc">Veteran cooks' guesswork leads to waste or shortages.</p>
+        </div>
+      </div>
+      <div class="bg-white dark:bg-slate-800 rounded-2xl overflow-hidden shadow-md">
+        <div class="aspect-[3/2] overflow-hidden">
+          <img src="/assets/images/applications/canteen/pain4.webp" alt="Menu Rotation Too Slow" class="w-full h-full object-cover" loading="lazy" />
+        </div>
+        <div class="p-4">
+          <h3 class="text-sm font-bold mb-1" data-i18n="ct_pain_4_title">Dishwasher Burnout</h3>
+          <p class="text-xs text-slate-600 dark:text-slate-400" data-i18n="ct_pain_4_desc">Four staff washing 3,000 sets until 2 PM – resignations pile up monthly.</p>
+        </div>
+      </div>
+      <div class="bg-white dark:bg-slate-800 rounded-2xl overflow-hidden shadow-md">
+        <div class="aspect-[3/2] overflow-hidden">
+          <img src="/assets/images/applications/canteen/pain5.webp" alt="Peak Rush Serving Can't Keep Up" class="w-full h-full object-cover" loading="lazy" />
+        </div>
+        <div class="p-4">
+          <h3 class="text-sm font-bold mb-1" data-i18n="ct_pain_5_title">Peak Hour Bottlenecks</h3>
+          <p class="text-xs text-slate-600 dark:text-slate-400" data-i18n="ct_pain_5_desc">3,000 diners in 90 minutes – long queues mean lost customers and complaints.</p>
+        </div>
+      </div>
+      <div class="bg-white dark:bg-slate-800 rounded-2xl overflow-hidden shadow-md">
+        <div class="aspect-[3/2] overflow-hidden">
+          <img src="/assets/images/applications/canteen/pain6.webp" alt="Food Safety Audit Anxiety" class="w-full h-full object-cover" loading="lazy" />
+        </div>
+        <div class="p-4">
+          <h3 class="text-sm font-bold mb-1" data-i18n="ct_pain_6_title">Food Safety Inspection Day</h3>
+          <p class="text-xs text-slate-600 dark:text-slate-400" data-i18n="ct_pain_6_desc">Incomplete temp logs, messy expiry dates, unchecked sanitizer – every inspection risks shutdown.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== Section 3: Solution ========== -->
+<section class="fullwidth-bg py-8">
+  <div class="section-content">
+    <div class="w-full mx-auto">
+      <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-primary/10 text-primary text-xs font-bold uppercase tracking-wider mb-3">
+        <span class="material-symbols-outlined">lightbulb</span>
+        <span data-i18n="ct_solution_badge">Canteen Operations</span>
+      </div>
+      <h2 class="text-xl font-black tracking-tight mb-2" data-i18n="ct_solution_title">Hundreds dining simultaneously? Never run out at serving windows</h2>
+      <p class="text-sm text-slate-600 dark:text-slate-400 mb-6" data-i18n="ct_solution_subtitle">Kitchen solutions designed for schools, hospitals, and institutional canteens.</p>
+      <div class="space-y-4">
+        <div class="rounded-2xl overflow-hidden border border-slate-200 dark:border-slate-700">
+          <div class="aspect-[3/2] overflow-hidden"><img src="/assets/images/applications/canteen/feature1.webp" alt="现场烹饪+保温" data-i18n-alt="alt_applications_canteen_index-mobile_现场烹饪_保温" class="w-full h-full object-cover" loading="lazy" onerror="this.onerror=null;this.src='/assets/images/placeholders/product-fallback.webp';"></div>
+          <div class="p-4">
+            <h4 class="text-sm font-bold" data-i18n="ct_solution_1_title">Live Cooking + Constant Warming</h4>
+            <p class="text-xs text-slate-600 dark:text-slate-400" data-i18n="ct_solution_1_desc">Induction wok + rice steamer for cooking, warming stations for constant serving temperature and texture.</p>
+          </div>
+        </div>
+        <div class="rounded-2xl overflow-hidden border border-slate-200 dark:border-slate-700">
+          <div class="aspect-[3/2] overflow-hidden"><img src="/assets/images/applications/canteen/feature2.webp" alt="标准化输出" data-i18n-alt="alt_applications_canteen_index-mobile_标准化输出" class="w-full h-full object-cover" loading="lazy" onerror="this.onerror=null;this.src='/assets/images/placeholders/product-fallback.webp';"></div>
+          <div class="p-4">
+            <h4 class="text-sm font-bold" data-i18n="ct_solution_2_title">Standardized Meal Prep</h4>
+            <p class="text-xs text-slate-600 dark:text-slate-400" data-i18n="ct_solution_2_desc">Pre-set recipes with controlled heat and stirring, ensuring consistent taste without chef dependency.</p>
+          </div>
+        </div>
+        <div class="rounded-2xl overflow-hidden border border-slate-200 dark:border-slate-700">
+          <div class="aspect-[3/2] overflow-hidden"><img src="/assets/images/applications/canteen/feature3.webp" alt="营养管理" data-i18n-alt="alt_applications_canteen_index-mobile_营养管理" class="w-full h-full object-cover" loading="lazy" onerror="this.onerror=null;this.src='/assets/images/placeholders/product-fallback.webp';"></div>
+          <div class="p-4">
+            <h4 class="text-sm font-bold" data-i18n="ct_solution_3_title">Nutrition Management</h4>
+            <p class="text-xs text-slate-600 dark:text-slate-400" data-i18n="ct_solution_3_desc">Standardized recipe management with traceable records for internal control and inspections.</p>
+          </div>
+        </div>
+        <div class="rounded-2xl overflow-hidden border border-slate-200 dark:border-slate-700">
+          <div class="aspect-[3/2] overflow-hidden"><img src="/assets/images/applications/canteen/feature4.webp" alt="减少浪费" data-i18n-alt="alt_applications_canteen_index-mobile_减少浪费" class="w-full h-full object-cover" loading="lazy" onerror="this.onerror=null;this.src='/assets/images/placeholders/product-fallback.webp';"></div>
+          <div class="p-4">
+            <h4 class="text-sm font-bold" data-i18n="ct_solution_4_title">Waste Reduction</h4>
+            <p class="text-xs text-slate-600 dark:text-slate-400" data-i18n="ct_solution_4_desc">Precise ingredient dosing and on-demand prep to reduce waste and operational costs.</p>
+          </div>
+        </div>
+      </div>
+      <div class="text-center mt-6 pt-4 border-t border-slate-200 dark:border-slate-700">
+        <p class="text-sm text-slate-600 dark:text-slate-400" data-i18n="ct_solution_transition">Select canteen equipment based on diner volume and menu variety.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== Section 4: Scenarios ========== -->
+<section class="fullwidth-bg py-8 bg-slate-50 dark:bg-slate-900/50">
+  <div class="section-content">
+    <div class="w-full text-center mb-8">
+      <h2 class="text-xl font-black tracking-tight mb-2" data-i18n="ct_scenarios_title">Different Canteens, Tailored Solutions</h2>
+    </div>
+    <div class="space-y-4">
+      <div class="bg-white dark:bg-slate-800 rounded-2xl overflow-hidden shadow-lg">
+        <div class="h-40 bg-slate-200 dark:bg-slate-700 overflow-hidden">
+          <img src="/assets/images/applications/canteen/feature1.webp" alt="学校食堂" data-i18n-alt="alt_applications_canteen_index-mobile_学校食堂" class="w-full h-full object-cover" loading="lazy" onerror="this.onerror=null;this.src='/assets/images/placeholders/product-fallback.webp';">
+        </div>
+        <div class="p-4">
+          <h3 class="text-sm font-bold mb-1" data-i18n="ct_scenario_1_title">School Canteen</h3>
+          <p class="text-xs text-slate-600 dark:text-slate-400" data-i18n="ct_scenario_1_body">Serving hundreds to thousands daily, requires quick meal prep + constant warming, with peak hours at noon.</p>
+        </div>
+      </div>
+      <div class="bg-white dark:bg-slate-800 rounded-2xl overflow-hidden shadow-lg">
+        <div class="h-40 bg-slate-200 dark:bg-slate-700 overflow-hidden">
+          <img src="/assets/images/applications/canteen/feature2.webp" alt="企业食堂" data-i18n-alt="alt_applications_canteen_index-mobile_企业食堂" class="w-full h-full object-cover" loading="lazy" onerror="this.onerror=null;this.src='/assets/images/placeholders/product-fallback.webp';">
+        </div>
+        <div class="p-4">
+          <h3 class="text-sm font-bold mb-1" data-i18n="ct_scenario_2_title">Corporate Canteen</h3>
+          <p class="text-xs text-slate-600 dark:text-slate-400" data-i18n="ct_scenario_2_body">Diverse menu requiring parallel cooking with multiple appliances, possibly across cuisines.</p>
+        </div>
+      </div>
+      <div class="bg-white dark:bg-slate-800 rounded-2xl overflow-hidden shadow-lg">
+        <div class="h-40 bg-slate-200 dark:bg-slate-700 overflow-hidden">
+          <img src="/assets/images/applications/canteen/feature3.webp" alt="医院食堂" data-i18n-alt="alt_applications_canteen_index-mobile_医院食堂" class="w-full h-full object-cover" loading="lazy" onerror="this.onerror=null;this.src='/assets/images/placeholders/product-fallback.webp';">
+        </div>
+        <div class="p-4">
+          <h3 class="text-sm font-bold mb-1" data-i18n="ct_scenario_3_title">Hospital Canteen</h3>
+          <p class="text-xs text-slate-600 dark:text-slate-400" data-i18n="ct_scenario_3_body">Highest food safety standards, precise temperature control + batch traceability.</p>
+        </div>
+      </div>
+      <div class="bg-white dark:bg-slate-800 rounded-2xl overflow-hidden shadow-lg">
+        <div class="h-40 bg-slate-200 dark:bg-slate-700 overflow-hidden">
+          <img src="/assets/images/applications/canteen/feature4.webp" alt="社区长者食堂" data-i18n-alt="alt_applications_canteen_index-mobile_社区长者食堂" class="w-full h-full object-cover" loading="lazy" onerror="this.onerror=null;this.src='/assets/images/placeholders/product-fallback.webp';">
+        </div>
+        <div class="p-4">
+          <h3 class="text-sm font-bold mb-1" data-i18n="ct_scenario_4_title">Community Senior Canteen</h3>
+          <p class="text-xs text-slate-600 dark:text-slate-400" data-i18n="ct_scenario_4_body">Precise portions + soft-textured dishes, requiring stewing equipment.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== Section 5: Recommended Equipment ========== -->
+<section class="fullwidth-bg py-8 bg-white dark:bg-slate-950">
+  <div class="section-content">
+    <div class="text-center mb-8">
+      <h2 class="text-xl font-black tracking-tight mb-2" data-i18n="ct_equip_title">Recommended Equipment for Smart Canteens</h2>
+      <p class="text-sm text-slate-600 dark:text-slate-400" data-i18n="ct_equip_subtitle">High-throughput, automated cooking equipment designed for large-scale canteen operations.</p>
+    </div>
+    <div id="scenario-products-mobile" data-scenario="canteen" data-device="mobile"></div>
+  </div>
+</section>
+
+<!-- ========== Section 6: FAQ ========== -->
+<section class="fullwidth-bg py-8 bg-slate-50 dark:bg-slate-900/50">
+  <div class="section-content">
+    <div class="text-center mb-8">
+      <h2 class="text-xl font-black tracking-tight mb-2" data-i18n="ct_faq_title">Canteen FAQs</h2>
+      <p class="text-sm text-slate-600 dark:text-slate-400" data-i18n="ct_faq_subtitle">Clarify your questions before selecting equipment.</p>
+    </div>
+    <div class="space-y-3">
+      <details class="group bg-white dark:bg-slate-800 rounded-xl shadow-sm border border-slate-200/70 dark:border-slate-700">
+        <summary class="flex items-center justify-between p-4 cursor-pointer list-none">
+          <h3 class="text-sm font-bold pr-3" data-i18n="ct_faq1_q">What canteen scale is suitable for your equipment?</h3>
+          <span class="material-symbols-outlined text-primary transition-transform group-open:rotate-180 flex-shrink-0">expand_more</span>
+        </summary>
+        <div class="px-4 pb-4 text-xs text-slate-600 dark:text-slate-400 leading-relaxed" data-i18n="ct_faq1_a">Our solutions cover 200-5,000 diners. Small canteens (200-500) use countertop units, medium (500-2,000) use multiple induction woks, large (2,000-5,000) use production-line setups. Share your diner count for a tailored plan.</div>
+      </details>
+      <details class="group bg-white dark:bg-slate-800 rounded-xl shadow-sm border border-slate-200/70 dark:border-slate-700">
+        <summary class="flex items-center justify-between p-4 cursor-pointer list-none">
+          <h3 class="text-sm font-bold pr-3" data-i18n="ct_faq2_q">How does the equipment handle peak lunch hours?</h3>
+          <span class="material-symbols-outlined text-primary transition-transform group-open:rotate-180 flex-shrink-0">expand_more</span>
+        </summary>
+        <div class="px-4 pb-4 text-xs text-slate-600 dark:text-slate-400 leading-relaxed" data-i18n="ct_faq2_a">Induction woks cook faster than gas, with batch cooking at full capacity. Warming stations hold food at serving temp. Multiple units in parallel handle 3,000+ diners in 90 minutes.</div>
+      </details>
+      <details class="group bg-white dark:bg-slate-800 rounded-xl shadow-sm border border-slate-200/70 dark:border-slate-700">
+        <summary class="flex items-center justify-between p-4 cursor-pointer list-none">
+          <h3 class="text-sm font-bold pr-3" data-i18n="ct_faq3_q">Does the equipment support multi-cuisine menus?</h3>
+          <span class="material-symbols-outlined text-primary transition-transform group-open:rotate-180 flex-shrink-0">expand_more</span>
+        </summary>
+        <div class="px-4 pb-4 text-xs text-slate-600 dark:text-slate-400 leading-relaxed" data-i18n="ct_faq3_a">Yes. Preset recipes cover Chinese, Western, and Southeast Asian cuisines. Switch between recipes instantly via the control panel. Custom recipes also supported.</div>
+      </details>
+      <details class="group bg-white dark:bg-slate-800 rounded-xl shadow-sm border border-slate-200/70 dark:border-slate-700">
+        <summary class="flex items-center justify-between p-4 cursor-pointer list-none">
+          <h3 class="text-sm font-bold pr-3" data-i18n="ct_faq4_q">How about food safety and temperature control?</h3>
+          <span class="material-symbols-outlined text-primary transition-transform group-open:rotate-180 flex-shrink-0">expand_more</span>
+        </summary>
+        <div class="px-4 pb-4 text-xs text-slate-600 dark:text-slate-400 leading-relaxed" data-i18n="ct_faq4_a">Real-time core temperature monitoring ensures ≥75°C sterilization. All cooking data logged for inspection. HACCP-compliant processes with full traceability.</div>
+      </details>
+      <details class="group bg-white dark:bg-slate-800 rounded-xl shadow-sm border border-slate-200/70 dark:border-slate-700">
+        <summary class="flex items-center justify-between p-4 cursor-pointer list-none">
+          <h3 class="text-sm font-bold pr-3" data-i18n="ct_faq5_q">What's the warranty and after-sales service?</h3>
+          <span class="material-symbols-outlined text-primary transition-transform group-open:rotate-180 flex-shrink-0">expand_more</span>
+        </summary>
+        <div class="px-4 pb-4 text-xs text-slate-600 dark:text-slate-400 leading-relaxed" data-i18n="ct_faq5_a">1-year full machine warranty, 3-year core component coverage. Fast replacement design with spare parts from 10+ warehouse locations nationwide. Local service teams for on-site repairs.</div>
+      </details>
+      <details class="group bg-white dark:bg-slate-800 rounded-xl shadow-sm border border-slate-200/70 dark:border-slate-700">
+        <summary class="flex items-center justify-between p-4 cursor-pointer list-none">
+          <h3 class="text-sm font-bold pr-3" data-i18n="ct_faq6_q">How much space does the equipment need?</h3>
+          <span class="material-symbols-outlined text-primary transition-transform group-open:rotate-180 flex-shrink-0">expand_more</span>
+        </summary>
+        <div class="px-4 pb-4 text-xs text-slate-600 dark:text-slate-400 leading-relaxed" data-i18n="ct_faq6_a">Countertop models fit standard kitchen counters (60cm depth). Floor models occupy 1-2㎡ each. Space planning included in our consultation – we'll work with your kitchen layout.</div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ========== Section 7: CTA ========== -->
+<section class="fullwidth-bg py-8 bg-primary relative overflow-hidden">
+  <div class="section-content">
+    <div class="absolute inset-0 opacity-10">
+      <div class="absolute top-0 left-0 w-96 h-96 bg-white rounded-full -translate-x-1/2 -translate-y-1/2"></div>
+      <div class="absolute bottom-0 right-0 w-96 h-96 bg-white rounded-full translate-x-1/2 translate-y-1/2"></div>
+    </div>
+    <div class="w-full relative max-w-4xl mx-auto text-center">
+      <h2 class="text-xl font-black text-white mb-3" data-i18n="canteen_cta_title">Custom Smart Canteen Solutions</h2>
+      <p class="text-sm text-white/80 mb-6" data-i18n="canteen_cta_desc">From 200-seat school cafeterias to 5,000-meal canteens, YuKoLi delivers proven solutions</p>
+      <div class="flex flex-col gap-3">
+        <a href="/quote/" class="bg-white text-primary px-6 py-3 rounded-xl font-bold text-sm flex items-center justify-center gap-2 hover:shadow-lg transition-all">
+          <span data-i18n="canteen_cta_get_plan">Get Canteen Plan</span>
+          <span class="material-symbol          <span class="material-symbols-outlined">arrow_forward</span>
+        </a>
+        <a href="https://wa.me/8613163756465" data-wa-message-key="wa_msg_canteen" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center gap-2 bg-[#25D366] text-white px-6 py-3 rounded-xl font-bold text-sm hover:shadow-lg hover:shadow-green-500/30 transition-all">
+          <span data-i18n="canteen_cta_whatsapp">WhatsApp Inquiry</span>
+        </a>
+        <a href="/contact/" class="px-6 py-3 rounded-xl font-bold text-sm flex items-center justify-center gap-2 border-2 border-white text-white hover:bg-white/10 transition-all">
+          <span class="material-symbols-outlined text-sm">phone</span>
+          <span data-i18n="canteen_cta_contact">Contact Sales</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+<footer data-component="footer" data-variant="mobile" data-active="applications" data-cta="true"></footer>
+<script defer src="/assets/js/router.js?v=1780474841186"></script>
+<script defer src="/assets/js/lang-registry.js?v=1780474841186"></script>
+<script defer src="/assets/js/translations.js?v=1780474841186"></script>
+<script defer src="/assets/js/ui/slide-menu.js?v=1780474841186"></script>
+<script defer src="/assets/js/ui/dropdown-styles.js?v=1780474841186"></script>
+<script defer src="/assets/js/ui/dropdown-base.js?v=1780474841186"></script>
+<script defer src="/assets/js/ui/products-dropdown.js?v=1780474841186"></script>
+<script defer src="/assets/js/ui/applications-dropdown.js?v=1780474841186"></script>
+<script defer src="/assets/js/ui/support-dropdown.js?v=1780474841186"></script>
+<script defer src="/assets/js/ui/about-dropdown.js?v=1780474841186"></script>
+<script defer src="/assets/js/product-list.js?v=1780474841186"></script>
+<script defer src="/assets/js/utils.js?v=1780474841186"></script>
+<script defer src="/assets/js/ui/search-engine.js?v=1780474841186"></script>
+<script defer src="/assets/js/ui/footer.js?v=1780474841186"></script>
+<script defer src="/assets/js/ui/floating-actions.js?v=1780474841186"></script>
+<script defer src="/assets/js/ui/hero-video.js?v=1780474841186"></script>
+    <script src="/assets/js/product-data-table.js"></script>
+    <script defer src="/assets/js/nav-config.js"></script>
+    <script defer src="/assets/js/utils/device-utils.js"></script>
+    <script defer src="/assets/js/translations-dropdown-template.js"></script>
+    <script defer src="/assets/js/ui/contact-dropdown.js"></script>
+    <script defer src="/assets/js/ui/navigator.js"></script>
+    <script defer src="/assets/js/ui/helpers.js"></script>
+    <script defer src="/assets/js/ui/page-effects.js"></script>
+    <script defer src="/assets/js/page-interactions.js"></script>
+    <script defer src="/assets/js/swup.min.js"></script>
+    <script defer src="/assets/js/swup-head-plugin.min.js"></script>
+    <script defer src="/assets/js/swup-preload-plugin.min.js"></script>
+    <script defer src="/assets/js/spa-router.js"></script>
+    <script defer src="/assets/js/scenario-products.js"></script>
+    <script>window._SPA_GLOBAL_PATTERNS=/(?:^|[\/])(?:product-data-table|nav-config|device-utils|lang-registry|utils|translations|translations-dropdown-template|dropdown-styles|dropdown-base|products-dropdown|applications-dropdown|support-dropdown|about-dropdown|contact-dropdown|navigator|slide-menu|footer|hero-video|floating-actions|helpers|page-effects|page-interactions|search-engine|swup.min|swup-head-plugin.min|swup-preload-plugin.min|spa-router)\.js/</script>
+  <style data-skeleton-inline>#skeleton-overlay{position:fixed;inset:0;z-index:5;pointer-events:none;background:var(--color-bg-light,#f8fafc);opacity:1;transition:opacity .25s ease-out}html.dark #skeleton-overlay{background:var(--color-bg-dark,#020617)}#skeleton-overlay[hidden]{display:none}@keyframes sk-shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}.skeleton-container{width:100%;max-width:1280px;margin:0 auto;padding:2rem 1.25rem}.sk-badge{width:100px;height:22px;border-radius:9999px;margin:0 auto 16px;background:linear-gradient(90deg,#e8e8e8 25%,#d4d4d4 50%,#e8e8e8 75%);background-size:200% 100%;animation:sk-shimmer 1.5s infinite}.sk-hero{display:flex;flex-direction:column;align-items:center;text-align:center;margin-bottom:24px}.sk-line{width:65%;height:32px;border-radius:8px;margin:0 auto 12px;background:linear-gradient(90deg,#e8e8e8 25%,#d4d4d4 50%,#e8e8e8 75%);background-size:200% 100%;animation:sk-shimmer 1.5s infinite}.sk-line-short{width:45%;height:18px;margin-bottom:8px}.sk-line-shorter{width:30%;height:18px}.sk-cta-group{display:flex;gap:12px;justify-content:center;margin-top:20px}.sk-cta{width:140px;height:44px;border-radius:12px;background:linear-gradient(90deg,#e8e8e8 25%,#d4d4d4 50%,#e8e8e8 75%);background-size:200% 100%;animation:sk-shimmer 1.5s infinite}.sk-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:32px}@media(max-width:767px){.sk-grid{grid-template-columns:1fr}.sk-cta{width:100%;max-width:none}}@media(min-width:768px)and(max-width:1279px){.sk-grid{grid-template-columns:repeat(2,1fr)}}.sk-card{height:220px;border-radius:16px;background:linear-gradient(90deg,#e8e8e8 25%,#d4d4d4 50%,#e8e8e8 75%);background-size:200% 100%;animation:sk-shimmer 1.5s infinite}.dark .sk-badge,.dark .sk-line,.dark .sk-cta,.dark .sk-card{background:linear-gradient(90deg,#1e293b 25%,#334155 50%,#1e293b 75%);background-size:200% 100%}</style>
+<div id="skeleton-overlay">  <div class="skeleton-container">    <div class="sk-hero">      <div class="sk-badge"></div>      <div class="sk-line"></div>      <div class="sk-line sk-line-short"></div>      <div class="sk-line sk-line-shorter"></div>      <div class="sk-cta-group">        <div class="sk-cta"></div>        <div class="sk-cta"></div>      </div>    </div>    <div class="sk-grid">      <div class="sk-card"></div>      <div class="sk-card"></div>      <div class="sk-card"></div>    </div>  </div></div>
+<script>(function(){var sk=document.getElementById("skeleton-overlay");if(!sk)return;function hide(){sk.setAttribute("hidden","");sk.style.display="none";document.head.querySelector("[data-skeleton-inline]")?.remove()}if(document.readyState==="complete")hide();else window.addEventListener("load",hide);setTimeout(hide,3000);})();</script>
+  </body>
+</html>

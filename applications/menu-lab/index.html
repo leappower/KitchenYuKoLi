@@ -1,0 +1,812 @@
+<!doctype html>
+
+<html class="light" lang="zh-CN">
+  <head>
+    <script>
+      /* Pre-apply cached translations to prevent flash */
+      (function () {
+        try {
+          var lang = localStorage.getItem("userLanguage") || "zh-CN";
+          if (!lang) return;
+          var cacheKey = "yukoli-translations-ui-" + lang;
+          var cached = localStorage.getItem(cacheKey);
+          if (!cached) return;
+          var data = JSON.parse(cached);
+          if (!data.data) return;
+          var translations = data.data;
+          document.documentElement.lang = lang;
+          var elements = document.querySelectorAll("[data-i18n]");
+          for (var i = 0; i < elements.length; i++) {
+            var el = elements[i];
+            var key = el.getAttribute("data-i18n");
+            if (translations[key] && el.children.length === 0) {
+              el.textContent = translations[key];
+            }
+          }
+        } catch (e) {
+          /* ignore */
+        }
+      })();
+    </script>
+  <script>/*[i18n-url-sync]*/(function(){var p=new URLSearchParams(location.search),l=p.get("lang");if(l){localStorage.setItem("userLanguage",l);document.documentElement.lang=l}})();</script>
+    <!-- ═══ Responsive Redirect (injected by patch-responsive-redirect.py) ═══ -->
+    <link rel="canonical" href="https://www.kitchen.yukoli.com/applications/menu-lab/"/>
+    <link rel="alternate" hreflang="zh-CN" href="https://www.kitchen.yukoli.com/applications/menu-lab/" />
+    <link rel="alternate" hreflang="en" href="https://www.kitchen.yukoli.com/applications/menu-lab/" />
+    <link rel="alternate" hreflang="x-default" href="https://www.kitchen.yukoli.com/applications/menu-lab/" />
+    <link rel="alternate" media="only screen and (max-width: 767px)" href="/applications/menu-lab/index-mobile.html" />
+    <link
+      rel="alternate"
+      media="only screen and (min-width: 768px) and (max-width: 1279px)"
+      href="/applications/menu-lab/index-tablet.html"
+    />
+    <link rel="alternate" media="only screen and (min-width: 1280px)" href="/applications/menu-lab/index-pc.html" />
+    <script>
+    (function checkDevice(){
+      if(window.__redirectChecked){console.log("[device-redirect] skip, __redirectChecked=true");return;}
+      if(document.querySelector("meta[name=ssg-device]")){console.log("[device-redirect] skip, ssg-device meta found");return;}
+      window.__redirectChecked=true;
+      var u=new URLSearchParams(location.search);
+      var c=u.get("clean-url");
+      if(c){console.log("[device-redirect] clean-url detected, replaceState:",c);history.replaceState({},"",c);return}
+      if(window.__spaNavigating){console.log("[device-redirect] skip, __spaNavigating=true");return;}
+      var f=location.pathname.split("/").pop();
+      console.log("[device-redirect] pathname=",location.pathname," f=",f," innerW=",window.innerWidth);
+      if(!f||!f.match(/.html$/)){
+        console.log("[device-redirect] dir URL (no .html), calling doRedirect");
+        doRedirect();
+        return;
+      }
+      if(f.match(/^index-(pc|mobile|tablet).html$/)){
+        console.log("[device-redirect] already on device-specific page:",f,"→ skip");
+        return;
+      }
+      function doRedirect(){
+        var mq = window.matchMedia;
+        var isTouch = mq && mq("(pointer:coarse)").matches;
+        var isMb = mq("(max-width:767px)").matches;
+        var isTb = mq("(min-width:768px) and (max-width:1023px)").matches;
+        var isPc = mq("(min-width:1024px)").matches;
+        if (isTouch && !isPc) { isMb = true; isTb = false; }
+        var e = isPc ? "index-pc.html" : isTb ? "index-tablet.html" : "index-mobile.html";
+        console.log("[device-redirect] doRedirect",{innerW:window.innerWidth,isTouch:isTouch,mobile:isMb,tablet:isTb,pc:isPc,target:e,currentF:f});
+        if(f===e){console.log("[device-redirect] already on correct version, skip");return;}
+        var newUrl=location.pathname.replace(/[^\/]*.html$/,"")+e;
+        console.log("[device-redirect] redirecting to",newUrl);
+        location.href=newUrl;
+      }
+      doRedirect();
+    })();
+    </script>
+<!-- ═══ End Responsive Redirect ═══ -->
+
+    <meta charset="utf-8" />
+    <meta
+      name="description"
+      content="YuKoLi 菜单实验室 — 800+菜谱覆盖中餐/泰餐/马来菜/印尼菜/越南菜，一台设备搞定多菜系切换，不用请五个师傅。"
+    />
+    <meta
+      name="keywords"
+      content="东南亚菜系,智能厨房,菜单实验室,炒菜机,泰餐,马来菜,印尼菜,越南菜,商用厨房设备,餐饮自动化"
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="YuKoLi | 菜单实验室 · 一台设备搞定东南亚五大菜系" />
+    <meta
+      property="og:description"
+      content="800+菜谱覆盖泰餐/马来菜/印尼菜/越南菜/中餐，一台设备按菜谱自动切换烹饪参数。"
+    />
+    <meta property="og:url" content="https://www.kitchen.yukoli.com/applications/menu-lab/" />
+    <meta property="og:image" content="https://www.kitchen.yukoli.com/assets/images/logo/logo.webp" />
+    <meta property="og:site_name" content="YuKoLi 智能厨具" />
+    <meta property="og:locale" content="zh_CN" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="YuKoLi | 菜单实验室 · 一台设备搞定东南亚五大菜系" />
+    <meta
+      name="twitter:description"
+      content="800+菜谱覆盖泰餐/马来菜/印尼菜/越南菜/中餐，一台设备按菜谱自动切换烹饪参数。"
+    />
+    <meta name="twitter:image" content="https://www.kitchen.yukoli.com/assets/images/logo/logo.webp" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title data-i18n="menu_lab_page_title">YuKoLi | Menu Lab · Smart Kitchen Solution for Southeast Asian Cuisines</title>
+    <link rel="preload" href="/assets/fonts/local-fonts.css" as="style" />
+    <link rel="preload" href="/assets/css/styles.css?v=1780474841186" as="style" />
+    <link rel="preload" href="/assets/css/tailwind.css?v=1780474841186" as="style" />
+    <link
+      rel="preload"
+      href="/assets/fonts/public-sans-latin-400-normal.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href="/assets/fonts/public-sans-latin-700-normal.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link href="/assets/fonts/local-fonts.css" rel="stylesheet" />
+    <link rel="stylesheet" href="/assets/css/styles.css?v=1780474841186" />
+    <link rel="stylesheet" href="/assets/css/tailwind.css?v=1780474841186" />
+    <link rel="stylesheet" href="/assets/css/z-index-system.css?v=1780474841186" />
+    <link rel="stylesheet" href="/assets/css/performance-optimizations.css?v=1780474841186" />
+    <script>
+      (function () {
+        if (localStorage.getItem("darkMode") === "true") document.documentElement.classList.add("dark");
+      })();
+    </script>
+    <link rel="stylesheet" href="/assets/css/skeleton.css?v=1780474841186" />
+    <link rel="icon" href="/assets/images/logo/logo.webp" type="image/webp" />
+    <title>YuKoLi 菜单实验室 | 800+智能菜谱研发平台</title>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://www.kitchen.yukoli.com/home/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Applications",
+            "item": "https://www.kitchen.yukoli.com/applications/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 3,
+            "name": "菜单实验室",
+            "item": "https://www.kitchen.yukoli.com/applications/menu-lab/"
+          }
+        ]
+      }
+    </script>
+    <link rel="manifest" href="/manifest.json"/>
+      <link rel="stylesheet" href="/assets/css/components.css" />
+</head>
+  <body
+    class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 antialiased transition-colors duration-300 overflow-x-clip"
+  >
+    <!-- Top Navigation Bar -->
+    <navigator data-search="true"
+      data-component="navigator"
+      data-variant="pc"
+      data-active="applications"
+      data-cta-text-key="nav_get_quote"
+      data-cta-href="/quote"
+    ></navigator>
+    <main id="spa-content" class="flex-1">
+      <!-- Hero Section -->
+      <section
+        class="fullwidth-bg hero-overlap section-passthrough relative py-10 overflow-hidden bg-gradient-to-br from-primary/5 via-transparent to-orange-100/30 dark:from-primary/10 dark:to-orange-900/20"
+      >
+        <div class="section-content">
+          <div class="w-full relative">
+            <div class="flex flex-col lg:flex-row items-center gap-12">
+              <div class="w-full lg:w-1/2 mx-auto flex flex-col gap-6">
+                <div class="flex items-center gap-2 flex-wrap">
+                  <a
+                    href="/applications/"
+                    class="text-sm text-slate-500 hover:text-primary transition-colors"
+                    data-i18n="nav_applications"
+                  >Applications</a>
+                  <span class="material-symbols-outlined text-sm text-slate-300">chevron_right</span>
+                  <span
+                    class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-bold uppercase tracking-widest"
+                  >
+                    <span class="material-symbols-outlined text-xs leading-none">science</span>
+                    <span data-i18n="menu_lab_scenario_1">Menu Lab</span>
+                  </span>
+                </div>
+                <h1 class="text-4xl xl:text-6xl font-black leading-[1.1] tracking-tight">
+                  <span data-i18n="menu_lab_hero_title_1">Southeast Asian Cuisine </span>
+                  <br />
+                  <span class="text-primary" data-i18n="menu_lab_hero_title_2">Smart Solution</span>
+                </h1>
+                <p
+                  class="text-xl text-slate-600 dark:text-slate-400 max-w-xl leading-relaxed"
+                  data-i18n="menu_lab_hero_subtitle"
+                >100-800+ recipe library for Chinese/Thai/Malay/Indonesian cuisines,<br /><span class="text-primary font-bold">precisely replicating regional flavors</span></p>
+                <div class="flex items-center gap-4 pt-4">
+                  <a
+                    href="/quote/"
+                    class="bg-primary text-white px-8 py-4 rounded-xl font-bold flex items-center gap-2 hover:shadow-lg hover:shadow-primary/20 transition-all"
+                  >
+                    Send Cuisine Requirements
+                    <span class="material-symbols-outlined">arrow_forward</span>
+                  </a>
+                  <a
+                    href="https://wa.me/8613163756465"
+                    data-wa-message-key="wa_msg_menu_lab"
+                    target="_blank" rel="noopener noreferrer"
+                    class="bg-green-500 text-white px-8 py-4 rounded-xl font-bold flex items-center gap-2 hover:shadow-lg hover:shadow-green-500/20 transition-all"
+                  >
+                    <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
+                      <path
+                        d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"
+                      />
+                    </svg>
+                    WhatsApp
+                  </a>
+                </div>
+              </div>
+              <div class="w-full lg:w-1/2 mx-auto relative">
+                <div class="absolute -inset-4 bg-primary/20 rounded-3xl blur-3xl"></div>
+                <div class="relative rounded-3xl overflow-hidden shadow-2xl border border-white/10 aspect-[3/2]" data-hero-video>
+                  <video class="hero-video-player" src="/assets/video/factory-strength-exploration.mp4" poster="/assets/images/applications/menu-lab/hero.webp" preload="none" muted playsinline webkit-playsinline loop ></video>
+                  <div class="hero-video-overlay">
+                    <button class="hero-video-mute" aria-label="Toggle mute" data-i18n-aria="aria_toggle_mute">
+                      <span class="material-symbols-outlined text-white text-xl">volume_off</span>
+                    </button>
+                  <button class="hero-video-fallback-btn" aria-label="Play video" data-i18n-aria="aria_play_video">
+                    <span class="material-symbols-outlined text-white text-3xl">play_circle</span>
+                  </button>
+          
+          </div>
+          <img
+                    loading="eager"
+                    alt="YuKoLi Menu Lab"
+                    class="hero-video-poster w-full h-full object-cover"
+                    src="/assets/images/applications/menu-lab/hero.webp"
+                    onerror="this.src='/assets/images/products/default.webp'"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- Pain Points Section -->
+      <section class="fullwidth-bg py-12 bg-slate-50 dark:bg-slate-900/50">
+        <div class="section-content">
+          <div class="w-full text-center mb-16">
+            <h2 class="text-3xl lg:text-4xl font-black tracking-tight mb-4" data-i18n="menu_lab_pain_title">Cross-cuisine pain points</h2>
+            <p class="text-lg text-slate-600 dark:text-slate-400" data-i18n="menu_lab_pain_subtitle">Four core challenges in Southeast Asian multi-cuisine operations</p>
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div
+              class="bg-white dark:bg-slate-800 rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow"
+            >
+              <div class="aspect-[3/2] overflow-hidden">
+                <img
+                  src="/assets/images/applications/menu-lab/pain1.webp"
+                  alt="曼谷师傅的冬阴功到了悉尼分店就变味"
+                  data-i18n-alt="alt_applications_menu-lab_index-pc_曼谷师傅的冬阴功到了悉尼分店就变味"
+                  class="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+                  loading="lazy"
+                />
+              </div>
+              <div class="px-8 py-6">
+                <h3 class="text-xl font-bold mb-3" data-i18n="menu_lab_pain_1_title">Cross-border Flavors Hard to Replicate</h3>
+                <p class="text-slate-600 dark:text-slate-400 leading-relaxed" data-i18n="menu_lab_pain_1_desc">Thai sour-spicy, Malay coconut-rich, Indonesian aromatic - each cuisine's heat control and seasoning differ. Traditional reliance on chef experience makes standardization difficult.</p>
+              </div>
+            </div>
+            <div
+              class="bg-white dark:bg-slate-800 rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow"
+            >
+              <div class="aspect-[3/2] overflow-hidden">
+                <img
+                  src="/assets/images/applications/menu-lab/pain2.webp"
+                  alt="新菜从试做到上架2-4周"
+                  data-i18n-alt="alt_applications_menu-lab_index-pc_新菜从试做到上架2_4周"
+                  class="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+                  loading="lazy"
+                />
+              </div>
+              <div class="px-8 py-6">
+                <h3 class="text-xl font-bold mb-3" data-i18n="menu_lab_pain_2_title">Long recipe development cycle</h3>
+                <p class="text-slate-600 dark:text-slate-400 leading-relaxed" data-i18n="menu_lab_pain_2_desc">New dishes typically take 2-4 weeks from R&D to rollout, with high trial costs and slow response to market trends and seasonal menus.</p>
+              </div>
+            </div>
+            <div
+              class="bg-white dark:bg-slate-800 rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow"
+            >
+              <div class="aspect-[3/2] overflow-hidden">
+                <img
+                  src="/assets/images/applications/menu-lab/pain3.webp"
+                  alt="高成本多菜系厨师"
+                  data-i18n-alt="alt_applications_menu-lab_index-pc_高成本多菜系厨师"
+                  class="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+                  loading="lazy"
+                />
+              </div>
+              <div class="px-8 py-6">
+                <h3 class="text-xl font-bold mb-3" data-i18n="menu_lab_pain_3_title">High cost of multi-cuisine chefs</h3>
+                <p class="text-slate-600 dark:text-slate-400 leading-relaxed" data-i18n="menu_lab_pain_3_desc">Covering multiple cuisines requires hiring chefs with different specialties, leading to high labor costs, especially for scarce Southeast Asian chefs overseas.</p>
+              </div>
+            </div>
+            <div
+              class="bg-white dark:bg-slate-800 rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow"
+            >
+              <div class="aspect-[3/2] overflow-hidden">
+                <img
+                  src="/assets/images/applications/menu-lab/pain4.webp"
+                  alt="分店出品不一致"
+                  data-i18n-alt="alt_applications_menu-lab_index-pc_分店出品不一致"
+                  class="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+                  loading="lazy"
+                />
+              </div>
+              <div class="px-8 py-6">
+                <h3 class="text-xl font-bold mb-3" data-i18n="menu_lab_pain_4_title">Chain store flavor deviation</h3>
+                <p class="text-slate-600 dark:text-slate-400 leading-relaxed" data-i18n="menu_lab_pain_4_desc">Inconsistent flavors across locations and chefs make brand standardization difficult, affecting customer loyalty and repurchase rates.</p>
+              </div>
+            </div>
+            <div
+              class="bg-white dark:bg-slate-800 rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow"
+            >
+              <div class="aspect-[3/2] overflow-hidden">
+                <img
+                  src="/assets/images/applications/menu-lab/pain5.webp"
+                  alt="Unstable Cross-Border Ingredient Supply"
+                  class="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+                  loading="lazy"
+                />
+              </div>
+              <div class="px-8 py-6">
+                <h3 class="text-xl font-bold mb-3" data-i18n="menu_lab_pain_5_title">Unstable ingredient supply chain</h3>
+                <p class="text-slate-600 dark:text-slate-400 leading-relaxed" data-i18n="menu_lab_pain_5_desc">Authentic ingredients like Thai bird's eye chili, Malaysian torch ginger, and Indonesian candlenuts are hard to source and expensive to import. Seasonal shortages force menu removals, and local substitutes fall short in taste.</p>
+              </div>
+            </div>
+            <div
+              class="bg-white dark:bg-slate-800 rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow"
+            >
+              <div class="aspect-[3/2] overflow-hidden">
+                <img
+                  src="/assets/images/applications/menu-lab/pain6.webp"
+                  alt="High Staff Turnover and Training Costs"
+                  class="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+                  loading="lazy"
+                />
+              </div>
+              <div class="px-8 py-6">
+                <h3 class="text-xl font-bold mb-3" data-i18n="menu_lab_pain_6_title">High turnover · Long training</h3>
+                <p class="text-slate-600 dark:text-slate-400 leading-relaxed" data-i18n="menu_lab_pain_6_desc">Multi-cuisine kitchens require versatile chefs, but mastering Thai stir-fry, Malay stew, and Indonesian frying takes months. Newly trained chefs often get poached, creating endless training cycles.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Solution Overview -->
+      <section class="fullwidth-bg py-12">
+        <div class="section-content">
+          <div class="w-full flex flex-col gap-16 items-center">
+            <div class="w-full mx-auto">
+              <div
+                class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 text-primary text-sm font-bold uppercase tracking-wider mb-6"
+              >
+                <span class="material-symbols-outlined">lightbulb</span>
+                <span data-i18n="ml_kitchen_breakthrough">Kitchen Revolution</span>
+              </div>
+              <h2 class="text-3xl lg:text-4xl font-black tracking-tight mb-6" data-i18n="menu_lab_solution_title">Full menu lab coverage</h2>
+              <p class="text-lg text-slate-600 dark:text-slate-400 mb-8" data-i18n="menu_lab_solution_subtitle">From recipe development to deployment, YuKoLi Menu Lab delivers end-to-end solutions for multi-cuisine mastery in one device.</p>
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                <div class="rounded-2xl overflow-hidden border border-slate-200 dark:border-slate-700">
+                  <div class="aspect-[3/2] overflow-hidden">
+                    <img
+                      src="/assets/images/applications/menu-lab/feature1.webp"
+                      alt="多菜系菜谱库"
+                      data-i18n-alt="alt_applications_menu-lab_index-pc_多菜系菜谱库"
+                      class="w-full h-full object-cover"
+                      loading="lazy"
+                      onerror="this.onerror=null;this.src='/assets/images/placeholders/product-fallback.webp'"
+                    />
+                  </div>
+                  <div class="p-4">
+                    <h4 class="font-bold text-lg" data-i18n="menu_lab_solution_1_title">Multi-cuisine recipe library</h4>
+                    <p class="text-slate-600 dark:text-slate-400" data-i18n="menu_lab_solution_1_desc">Built-in 100-800+ fine-tuned recipes for Chinese/Thai/Malay/Indonesian/Vietnamese cuisines, with OTA updates</p>
+                  </div>
+                </div>
+                <div class="rounded-2xl overflow-hidden border border-slate-200 dark:border-slate-700">
+                  <div class="aspect-[3/2] overflow-hidden">
+                    <img
+                      src="/assets/images/applications/menu-lab/feature2.webp"
+                      alt="菜谱定制服务"
+                      data-i18n-alt="alt_applications_menu-lab_index-pc_菜谱定制服务"
+                      class="w-full h-full object-cover"
+                      loading="lazy"
+                      onerror="this.onerror=null;this.src='/assets/images/placeholders/product-fallback.webp'"
+                    />
+                  </div>
+                  <div class="p-4">
+                    <h4 class="font-bold text-lg" data-i18n="menu_lab_solution_2_title">Recipe customization</h4>
+                    <p class="text-slate-600 dark:text-slate-400" data-i18n="menu_lab_solution_2_desc">Custom recipes tailored to your needs by professional chefs, from R&D to deployment in just 2 days</p>
+                  </div>
+                </div>
+                <div class="rounded-2xl overflow-hidden border border-slate-200 dark:border-slate-700">
+                  <div class="aspect-[3/2] overflow-hidden">
+                    <img
+                      src="/assets/images/applications/menu-lab/feature3.webp"
+                      alt="智能温度自适应"
+                      data-i18n-alt="alt_applications_menu-lab_index-pc_智能温度自适应"
+                      class="w-full h-full object-cover"
+                      loading="lazy"
+                      onerror="this.onerror=null;this.src='/assets/images/placeholders/product-fallback.webp'"
+                    />
+                  </div>
+                  <div class="p-4">
+                    <h4 class="font-bold text-lg" data-i18n="menu_lab_solution_3_title">Precision temperature control</h4>
+                    <p class="text-slate-600 dark:text-slate-400" data-i18n="menu_lab_solution_3_desc">Smart temperature control replicates authentic flavors with &lt;0.5% deviation</p>
+                  </div>
+                </div>
+                <div class="rounded-2xl overflow-hidden border border-slate-200 dark:border-slate-700">
+                  <div class="aspect-[3/2] overflow-hidden">
+                    <img
+                      src="/assets/images/applications/menu-lab/feature4.webp"
+                      alt="一机多用"
+                      data-i18n-alt="alt_applications_menu-lab_index-pc_一机多用"
+                      class="w-full h-full object-cover"
+                      loading="lazy"
+                      onerror="this.onerror=null;this.src='/assets/images/placeholders/product-fallback.webp'"
+                    />
+                  </div>
+                  <div class="p-4">
+                    <h4 class="font-bold text-lg" data-i18n="menu_lab_solution_4_title">Multi-functional</h4>
+                    <p class="text-slate-600 dark:text-slate-400" data-i18n="menu_lab_solution_4_desc">One device handles stir-fry/boil/stew/fry, saving space and equipment costs</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <p
+            class="text-center text-lg text-slate-600 dark:text-slate-400 mt-8 max-w-2xl mx-auto"
+            data-i18n="menu_lab_solution_transition"
+          >Five cuisines made easy with the right equipment.</p>
+        </div>
+      </section>
+
+      <!-- Recommended Equipment -->
+      <section class="fullwidth-bg py-12">
+        <div class="section-content">
+          <div class="w-full text-center mb-16">
+            <h2 class="text-3xl lg:text-4xl font-black tracking-tight mb-4" data-i18n="menu_lab_equipment_title">Recommended Equipment Combo</h2>
+            <p class="text-lg text-slate-600 dark:text-slate-400" data-i18n="menu_lab_equipment_subtitle">Smart equipment solutions tailored for multi-cuisine Southeast Asian restaurants</p>
+          </div>
+            <!-- Dynamic Scenario Products (rendered by scenario-products.js) -->
+  <div id="scenario-products-pc" data-scenario="menu-lab" data-device="pc"></div>
+</div>
+</section>
+
+      <!-- Cuisine Showcase -->
+      <section class="fullwidth-bg py-12 bg-slate-50 dark:bg-slate-900/50">
+        <div class="section-content">
+          <div class="w-full text-center mb-16">
+            <h2 class="text-3xl lg:text-4xl font-black tracking-tight mb-4" data-i18n="menu_lab_cuisine_title">Master Five Cuisines in One Station</h2>
+            <p class="text-lg text-slate-600 dark:text-slate-400" data-i18n="menu_lab_cuisine_subtitle">From classic Chinese to Southeast Asian flavors, our Recipe Lab precisely recreates every authentic dish</p>
+          </div>
+          <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+            <!-- Thai -->
+            <div
+              class="bg-white dark:bg-slate-800 rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all group"
+            >
+              <div class="aspect-[3/2] bg-slate-200 dark:bg-slate-700 overflow-hidden">
+                <img
+                  loading="lazy"
+                  alt="泰式冬阴功汤等经典料理"
+                  data-i18n-alt="alt_applications_menu-lab_index-pc_泰式冬阴功汤等经典料理"
+                  class="w-full h-full object-cover group-hover:scale-105 transition-transform"
+                  src="/assets/images/applications/menu-lab/cuisine-thai.webp"
+                  onerror="this.src = '/assets/images/applications/chain-restaurant-hero.webp'"
+                />
+              </div>
+              <div class="p-6">
+                <div class="flex items-center gap-2 mb-3">
+                  <span class="text-2xl">🇹🇭</span>
+                  <h3 class="text-xl font-bold" data-i18n="ml_thai_cuisine">Thai Cuisine</h3>
+                </div>
+                <ul class="space-y-2 text-slate-600 dark:text-slate-400 text-sm">
+                  <li class="flex items-center gap-2">
+                    <span class="material-symbols-outlined text-primary text-sm">check_circle</span>
+                    <span data-i18n="ml_tom_yum">Tom Yum Soup</span>
+                  </li>
+                  <li class="flex items-center gap-2">
+                    <span class="material-symbols-outlined text-primary text-sm">check_circle</span>
+                    <span data-i18n="ml_pad_thai">Pad Thai</span>
+                  </li>
+                  <li class="flex items-center gap-2">
+                    <span class="material-symbols-outlined text-primary text-sm">check_circle</span>
+                    <span data-i18n="ml_green_curry">Green Curry Chicken</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <!-- Malaysian -->
+            <div
+              class="bg-white dark:bg-slate-800 rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all group"
+            >
+              <div class="aspect-[3/2] bg-slate-200 dark:bg-slate-700 overflow-hidden">
+                <img
+                  loading="lazy"
+                  alt="马来椰浆饭、叻沙等经典料理"
+                  data-i18n-alt="alt_applications_menu-lab_index-pc_马来椰浆饭_叻沙等经典料理"
+                  class="w-full h-full object-cover group-hover:scale-105 transition-transform"
+                  src="/assets/images/applications/menu-lab/cuisine-malaysian.webp"
+                  onerror="this.src = '/assets/images/applications/chain-restaurant-hero.webp'"
+                />
+              </div>
+              <div class="p-6">
+                <div class="flex items-center gap-2 mb-3">
+                  <span class="text-2xl">🇲🇾</span>
+                  <h3 class="text-xl font-bold" data-i18n="ml_malay_cuisine">Malay Cuisine</h3>
+                </div>
+                <ul class="space-y-2 text-slate-600 dark:text-slate-400 text-sm">
+                  <li class="flex items-center gap-2">
+                    <span class="material-symbols-outlined text-primary text-sm">check_circle</span>
+                    <span data-i18n="ml_nasi_lemak">Nasi Lemak</span>
+                  </li>
+                  <li class="flex items-center gap-2">
+                    <span class="material-symbols-outlined text-primary text-sm">check_circle</span>
+                    <span data-i18n="ml_laksa">Laksa</span>
+                  </li>
+                  <li class="flex items-center gap-2">
+                    <span class="material-symbols-outlined text-primary text-sm">check_circle</span>
+                    <span data-i18n="ml_satay">Satay</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <!-- Indonesian -->
+            <div
+              class="bg-white dark:bg-slate-800 rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all group"
+            >
+              <div class="aspect-[3/2] bg-slate-200 dark:bg-slate-700 overflow-hidden">
+                <img
+                  loading="lazy"
+                  alt="印尼炒饭、仁当牛肉等经典料理"
+                  data-i18n-alt="alt_applications_menu-lab_index-pc_印尼炒饭_仁当牛肉等经典料理"
+                  class="w-full h-full object-cover group-hover:scale-105 transition-transform"
+                  src="/assets/images/applications/menu-lab/cuisine-indonesian.webp"
+                  onerror="this.src = '/assets/images/applications/chain-restaurant-hero.webp'"
+                />
+              </div>
+              <div class="p-6">
+                <div class="flex items-center gap-2 mb-3">
+                  <span class="text-2xl">🇮🇩</span>
+                  <h3 class="text-xl font-bold" data-i18n="ml_indo_cuisine">Indonesian Cuisine</h3>
+                </div>
+                <ul class="space-y-2 text-slate-600 dark:text-slate-400 text-sm">
+                  <li class="flex items-center gap-2">
+                    <span class="material-symbols-outlined text-primary text-sm">check_circle</span>
+                    <span data-i18n="ml_nasi_goreng">Nasi Goreng</span>
+                  </li>
+                  <li class="flex items-center gap-2">
+                    <span class="material-symbols-outlined text-primary text-sm">check_circle</span>
+                    <span data-i18n="ml_rendang">Beef Rendang</span>
+                  </li>
+                  <li class="flex items-center gap-2">
+                    <span class="material-symbols-outlined text-primary text-sm">check_circle</span>
+                    <span data-i18n="ml_sate_skewers">Satay Skewers</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <!-- Vietnamese -->
+            <div
+              class="bg-white dark:bg-slate-800 rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all group"
+            >
+              <div class="aspect-[3/2] bg-slate-200 dark:bg-slate-700 overflow-hidden">
+                <img
+                  loading="lazy"
+                  alt="越南河粉、春卷等经典料理"
+                  data-i18n-alt="alt_applications_menu-lab_index-pc_越南河粉_春卷等经典料理"
+                  class="w-full h-full object-cover group-hover:scale-105 transition-transform"
+                  src="/assets/images/applications/menu-lab/cuisine-vietnamese.webp"
+                  onerror="this.src = '/assets/images/applications/chain-restaurant-hero.webp'"
+                />
+              </div>
+              <div class="p-6">
+                <div class="flex items-center gap-2 mb-3">
+                  <span class="text-2xl">🇻🇳</span>
+                  <h3 class="text-xl font-bold" data-i18n="ml_vietnam_cuisine">Vietnamese Cuisine</h3>
+                </div>
+                <ul class="space-y-2 text-slate-600 dark:text-slate-400 text-sm">
+                  <li class="flex items-center gap-2">
+                    <span class="material-symbols-outlined text-primary text-sm">check_circle</span>
+                    <span data-i18n="ml_pho">Pho</span>
+                  </li>
+                  <li class="flex items-center gap-2">
+                    <span class="material-symbols-outlined text-primary text-sm">check_circle</span>
+                    <span data-i18n="ml_spring_roll">Spring Roll</span>
+                  </li>
+                  <li class="flex items-center gap-2">
+                    <span class="material-symbols-outlined text-primary text-sm">check_circle</span>
+                    <span data-i18n="ml_banh_mi">Banh Mi</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- FAQ Section -->
+      <section class="fullwidth-bg py-12 bg-slate-50 dark:bg-slate-900/50">
+        <div class="section-content">
+          <div class="text-center mb-12">
+            <h2 class="text-3xl lg:text-4xl font-black tracking-tight mb-4" data-i18n="menu_lab_faq_title">Multi-Cuisine FAQs</h2>
+            <p class="text-slate-600 dark:text-slate-400" data-i18n="menu_lab_faq_subtitle">Answers you may need about recipes, equipment and adaptation.</p>
+          </div>
+
+          <div class="space-y-4">
+            <!-- FAQ 1 -->
+            <details
+              class="group bg-white dark:bg-slate-800 rounded-2xl shadow-sm border border-slate-200/70 dark:border-slate-700"
+            >
+              <summary class="flex items-center justify-between p-6 cursor-pointer list-none">
+                <h3 class="text-lg font-bold pr-4" data-i18n="menu_lab_faq1_q">
+                  How many cuisines can one device handle?
+                </h3>
+                <span class="material-symbols-outlined text-primary transition-transform group-open:rotate-180">
+                  expand_more
+                </span>
+              </summary>
+              <div
+                class="px-6 pt-6 pb-6 text-slate-600 dark:text-slate-400 leading-relaxed"
+                data-i18n="menu_lab_faq1_a"
+              >Devices come with 1000+ preset recipes covering Chinese, Thai, Malay, Indonesian, Vietnamese and other Southeast Asian cuisines. Quick switching between cuisines with optimized cooking parameters.</div>
+            </details>
+
+            <!-- FAQ 2 -->
+            <details
+              class="group bg-white dark:bg-slate-800 rounded-2xl shadow-sm border border-slate-200/70 dark:border-slate-700"
+            >
+              <summary class="flex items-center justify-between p-6 cursor-pointer list-none">
+                <h3 class="text-lg font-bold pr-4" data-i18n="menu_lab_faq2_q">Can recipe precision deliver authentic flavors?</h3>
+                <span class="material-symbols-outlined text-primary transition-transform group-open:rotate-180">
+                  expand_more
+                </span>
+              </summary>
+              <div
+                class="px-6 pt-6 pb-6 text-slate-600 dark:text-slate-400 leading-relaxed"
+                data-i18n="menu_lab_faq2_a"
+              >Yes. Each recipe's heat control, stirring rhythm, and temperature curve are professionally calibrated. Supports custom fine-tuning for local taste preferences.</div>
+            </details>
+
+            <!-- FAQ 3 -->
+            <details
+              class="group bg-white dark:bg-slate-800 rounded-2xl shadow-sm border border-slate-200/70 dark:border-slate-700"
+            >
+              <summary class="flex items-center justify-between p-6 cursor-pointer list-none">
+                <h3 class="text-lg font-bold pr-4" data-i18n="menu_lab_faq3_q">Can I input my own recipes?</h3>
+                <span class="material-symbols-outlined text-primary transition-transform group-open:rotate-180">
+                  expand_more
+                </span>
+              </summary>
+              <div
+                class="px-6 pt-6 pb-6 text-slate-600 dark:text-slate-400 leading-relaxed"
+                data-i18n="menu_lab_faq3_a"
+              >Yes. Devices support custom recipe input - save your own dish parameters for consistent output.</div>
+            </details>
+
+            <!-- FAQ 4 -->
+            <details
+              class="group bg-white dark:bg-slate-800 rounded-2xl shadow-sm border border-slate-200/70 dark:border-slate-700"
+            >
+              <summary class="flex items-center justify-between p-6 cursor-pointer list-none">
+                <h3 class="text-lg font-bold pr-4" data-i18n="menu_lab_faq4_q">What restaurant scale is suitable?</h3>
+                <span class="material-symbols-outlined text-primary transition-transform group-open:rotate-180">
+                  expand_more
+                </span>
+              </summary>
+              <div
+                class="px-6 pt-6 pb-6 text-slate-600 dark:text-slate-400 leading-relaxed"
+                data-i18n="menu_lab_faq4_a"
+              >Models available from dozens to thousands of meals daily. Small restaurants can use tabletop units, while large F&B or central kitchens can choose high-capacity models or multi-device setups.</div>
+            </details>
+
+            <!-- FAQ 5 -->
+            <details
+              class="group bg-white dark:bg-slate-800 rounded-2xl shadow-sm border border-slate-200/70 dark:border-slate-700"
+            >
+              <summary class="flex items-center justify-between p-6 cursor-pointer list-none">
+                <h3 class="text-lg font-bold pr-4" data-i18n="menu_lab_faq5_q">What about warranty and after-sales?</h3>
+                <span class="material-symbols-outlined text-primary transition-transform group-open:rotate-180">
+                  expand_more
+                </span>
+              </summary>
+              <div
+                class="px-6 pt-6 pb-6 text-slate-600 dark:text-slate-400 leading-relaxed"
+                data-i18n="menu_lab_faq5_a"
+              >YuKoLi offers 1-year full warranty, 3-year core components (IGBT, coil, pot). Strengthened wear parts with quick-replacement design. Free on-site repairs by local professional teams across 10 warehouses for rapid response.</div>
+            </details>
+
+            <!-- FAQ 6 -->
+            <details
+              class="group bg-white dark:bg-slate-800 rounded-2xl shadow-sm border border-slate-200/70 dark:border-slate-700"
+            >
+              <summary class="flex items-center justify-between p-6 cursor-pointer list-none">
+                <h3 class="text-lg font-bold pr-4" data-i18n="menu_lab_faq6_q">How long for new recipe development?</h3>
+                <span class="material-symbols-outlined text-primary transition-transform group-open:rotate-180">
+                  expand_more
+                </span>
+              </summary>
+              <div
+                class="px-6 pt-6 pb-6 text-slate-600 dark:text-slate-400 leading-relaxed"
+                data-i18n="menu_lab_faq6_a"
+              >New recipes only require one-time parameter calibration before saving. Contact sales for estimated R&D assistance timelines.</div>
+            </details>
+          </div>
+        </div>
+      </section>
+
+      <!-- CTA Section -->
+      <section class="fullwidth-bg py-12 bg-primary">
+        <div class="section-content">
+          <div class="w-full max-w-5xl mx-auto text-center">
+            <h2 class="text-3xl lg:text-4xl font-black text-white mb-6" data-i18n="menu_lab_cta_title">Start Your Menu Lab Journey</h2>
+            <p class="text-xl text-white/80 mb-8" data-i18n="menu_lab_cta_desc">Share your cuisine needs for a free customized smart kitchen solution</p>
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+              <a
+                href="/quote/"
+                class="bg-white text-primary px-8 py-4 rounded-xl font-bold flex items-center gap-2 hover:shadow-lg transition-all"
+              >
+                <span class="material-symbols-outlined">arrow_forward</span>
+                <span data-i18n="menu_lab_cta_btn_quote">Submit Cuisine Requirements</span>
+              </a>
+              <a
+                href="https://wa.me/8613163756465"
+                data-wa-message-key="wa_msg_menu_lab"
+                target="_blank" rel="noopener noreferrer"
+                class="bg-green-500 text-white px-8 py-4 rounded-xl font-bold flex items-center gap-2 hover:shadow-lg hover:shadow-green-500/20 transition-all"
+              >
+                <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
+                  <path
+                    d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"
+                  />
+                </svg>
+                WhatsApp
+              </a>
+              <a
+                href="/contact/"
+                class="px-8 py-4 rounded-xl font-bold flex items-center gap-2 border-2 border-white text-white hover:bg-white/10 transition-all"
+              >
+                <span class="material-symbols-outlined">phone</span>
+                <span data-i18n="menu_lab_cta_btn_contact">Contact Sales</span>
+              </a>
+            </div></div></div>      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer data-component="footer" data-variant="pc" data-active="applications" data-cta="true"></footer>
+
+    <!-- Scripts -->
+    <script defer src="/assets/js/router.js?v=1780474841186"></script>
+    <script defer src="/assets/js/lang-registry.js?v=1780474841186"></script>
+    <script defer src="/assets/js/translations.js?v=1780474841186"></script>
+
+    <script defer src="/assets/js/ui/slide-menu.js?v=1780474841186"></script>
+    <script defer src="/assets/js/ui/dropdown-styles.js?v=1780474841186"></script>
+    <script defer src="/assets/js/ui/dropdown-base.js?v=1780474841186"></script>
+    <script defer src="/assets/js/ui/products-dropdown.js?v=1780474841186"></script>
+    <script defer src="/assets/js/ui/applications-dropdown.js?v=1780474841186"></script>
+    <script defer src="/assets/js/ui/support-dropdown.js?v=1780474841186"></script>
+    <script defer src="/assets/js/ui/about-dropdown.js?v=1780474841186"></script>
+    <script defer src="/assets/js/product-list.js?v=1780474841186"></script>
+    <script defer src="/assets/js/nav-config.js?v=1780474841186"></script> <script defer src="/assets/js/utils.js?v=1780474841186"></script>
+    <script defer src="/assets/js/ui/search-engine.js?v=1780474841186"></script>
+        <script defer src="/assets/js/ui/footer.js?v=1780474841186"></script>
+
+    <script defer src="/assets/js/ui/floating-actions.js?v=1780474841186"></script>    <script src="/assets/js/product-data-table.js"></script>
+    <script defer src="/assets/js/utils/device-utils.js"></script>
+    <script defer src="/assets/js/translations-dropdown-template.js"></script>
+    <script defer src="/assets/js/ui/contact-dropdown.js"></script>
+    <script defer src="/assets/js/ui/navigator.js"></script>
+    <script defer src="/assets/js/ui/hero-video.js"></script>
+    <script defer src="/assets/js/ui/helpers.js"></script>
+    <script defer src="/assets/js/ui/page-effects.js"></script>
+    <script defer src="/assets/js/page-interactions.js"></script>
+    <script defer src="/assets/js/swup.min.js"></script>
+    <script defer src="/assets/js/swup-head-plugin.min.js"></script>
+    <script defer src="/assets/js/swup-preload-plugin.min.js"></script>
+    <script defer src="/assets/js/spa-router.js"></script>
+    <script defer src="/assets/js/scenario-products.js"></script>
+    <script>window._SPA_GLOBAL_PATTERNS=/(?:^|[\/])(?:product-data-table|nav-config|device-utils|lang-registry|utils|translations|translations-dropdown-template|dropdown-styles|dropdown-base|products-dropdown|applications-dropdown|support-dropdown|about-dropdown|contact-dropdown|navigator|slide-menu|footer|hero-video|floating-actions|helpers|page-effects|page-interactions|search-engine|swup.min|swup-head-plugin.min|swup-preload-plugin.min|spa-router)\.js/</script>
+  <style data-skeleton-inline>#skeleton-overlay{position:fixed;inset:0;z-index:5;pointer-events:none;background:var(--color-bg-light,#f8fafc);opacity:1;transition:opacity .25s ease-out}html.dark #skeleton-overlay{background:var(--color-bg-dark,#020617)}#skeleton-overlay[hidden]{display:none}@keyframes sk-shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}.skeleton-container{width:100%;max-width:1280px;margin:0 auto;padding:2rem 1.25rem}.sk-badge{width:100px;height:22px;border-radius:9999px;margin:0 auto 16px;background:linear-gradient(90deg,#e8e8e8 25%,#d4d4d4 50%,#e8e8e8 75%);background-size:200% 100%;animation:sk-shimmer 1.5s infinite}.sk-hero{display:flex;flex-direction:column;align-items:center;text-align:center;margin-bottom:24px}.sk-line{width:65%;height:32px;border-radius:8px;margin:0 auto 12px;background:linear-gradient(90deg,#e8e8e8 25%,#d4d4d4 50%,#e8e8e8 75%);background-size:200% 100%;animation:sk-shimmer 1.5s infinite}.sk-line-short{width:45%;height:18px;margin-bottom:8px}.sk-line-shorter{width:30%;height:18px}.sk-cta-group{display:flex;gap:12px;justify-content:center;margin-top:20px}.sk-cta{width:140px;height:44px;border-radius:12px;background:linear-gradient(90deg,#e8e8e8 25%,#d4d4d4 50%,#e8e8e8 75%);background-size:200% 100%;animation:sk-shimmer 1.5s infinite}.sk-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:32px}@media(max-width:767px){.sk-grid{grid-template-columns:1fr}.sk-cta{width:100%;max-width:none}}@media(min-width:768px)and(max-width:1279px){.sk-grid{grid-template-columns:repeat(2,1fr)}}.sk-card{height:220px;border-radius:16px;background:linear-gradient(90deg,#e8e8e8 25%,#d4d4d4 50%,#e8e8e8 75%);background-size:200% 100%;animation:sk-shimmer 1.5s infinite}.dark .sk-badge,.dark .sk-line,.dark .sk-cta,.dark .sk-card{background:linear-gradient(90deg,#1e293b 25%,#334155 50%,#1e293b 75%);background-size:200% 100%}</style>
+<div id="skeleton-overlay">  <div class="skeleton-container">    <div class="sk-hero">      <div class="sk-badge"></div>      <div class="sk-line"></div>      <div class="sk-line sk-line-short"></div>      <div class="sk-line sk-line-shorter"></div>      <div class="sk-cta-group">        <div class="sk-cta"></div>        <div class="sk-cta"></div>      </div>    </div>    <div class="sk-grid">      <div class="sk-card"></div>      <div class="sk-card"></div>      <div class="sk-card"></div>    </div>  </div></div>
+<script>(function(){var sk=document.getElementById("skeleton-overlay");if(!sk)return;function hide(){sk.setAttribute("hidden","");sk.style.display="none";document.head.querySelector("[data-skeleton-inline]")?.remove()}if(document.readyState==="complete")hide();else window.addEventListener("load",hide);setTimeout(hide,3000);})();</script>
+  </body>
+</html>

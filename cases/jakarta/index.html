@@ -1,0 +1,348 @@
+<!doctype html>
+<html class="light" lang="zh-CN">
+  <head>
+    <script>
+      /* Pre-apply cached translations to prevent flash */
+      (function () {
+        try {
+          var lang = localStorage.getItem("userLanguage") || "zh-CN";
+          if (!lang) return;
+          var cacheKey = "yukoli-translations-ui-" + lang;
+          var cached = localStorage.getItem(cacheKey);
+          if (!cached) return;
+          var data = JSON.parse(cached);
+          if (!data.data) return;
+          var translations = data.data;
+          document.documentElement.lang = lang;
+          var elements = document.querySelectorAll("[data-i18n]");
+          for (var i = 0; i < elements.length; i++) {
+            var el = elements[i];
+            var key = el.getAttribute("data-i18n");
+            if (translations[key] && el.children.length === 0) {
+              el.textContent = translations[key];
+            }
+          }
+        } catch (e) {
+          /* ignore */
+        }
+      })();
+    </script>
+  <script>/*[i18n-url-sync]*/(function(){var p=new URLSearchParams(location.search),l=p.get("lang");if(l){localStorage.setItem("userLanguage",l);document.documentElement.lang=l}})();</script>
+    <link href="https://www.kitchen.yukoli.com/cases/jakarta/" rel="canonical" />
+
+    <meta charset="utf-8" />
+    <meta name="description" content="雅加达送餐中央厨房：6 家门店统一出品 — YuKoLi 商用厨房自动化真实案例" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>雅加达送餐中央厨房：6 家门店统一出品 | YuKoLi 案例</title>
+    <link rel="preload" href="/assets/fonts/local-fonts.css" as="style" />
+    <link rel="preload" href="/assets/css/styles.css?v=1780474841186" as="style" />
+    <link rel="preload" href="/assets/css/tailwind.css?v=1780474841186" as="style" />
+    <link href="/assets/fonts/local-fonts.css" rel="stylesheet" />
+    <link rel="stylesheet" href="/assets/css/styles.css?v=1780474841186" />
+    <link rel="stylesheet" href="/assets/css/tailwind.css?v=1780474841186" />
+    <link rel="stylesheet" href="/assets/css/z-index-system.css?v=1780474841186" />
+    <link rel="stylesheet" href="/assets/css/performance-optimizations.css?v=1780474841186" />
+    <link rel="icon" href="/assets/images/logo/logo.webp" type="image/webp" />
+    <script>
+    (function checkDevice(){
+      if(window.__redirectChecked){console.log("[device-redirect] skip, __redirectChecked=true");return;}
+      if(document.querySelector("meta[name=ssg-device]")){console.log("[device-redirect] skip, ssg-device meta found");return;}
+      window.__redirectChecked=true;
+      var u=new URLSearchParams(location.search);
+      var c=u.get("clean-url");
+      if(c){console.log("[device-redirect] clean-url detected, replaceState:",c);history.replaceState({},"",c);return}
+      if(window.__spaNavigating){console.log("[device-redirect] skip, __spaNavigating=true");return;}
+      var f=location.pathname.split("/").pop();
+      console.log("[device-redirect] pathname=",location.pathname," f=",f," innerW=",window.innerWidth);
+      if(!f||!f.match(/.html$/)){
+        console.log("[device-redirect] dir URL (no .html), calling doRedirect");
+        doRedirect();
+        return;
+      }
+      if(f.match(/^index-(pc|mobile|tablet).html$/)){
+        console.log("[device-redirect] already on device-specific page:",f,"→ skip");
+        return;
+      }
+      function doRedirect(){
+        var mq = window.matchMedia;
+        var isTouch = mq && mq("(pointer:coarse)").matches;
+        var isMb = mq("(max-width:767px)").matches;
+        var isTb = mq("(min-width:768px) and (max-width:1023px)").matches;
+        var isPc = mq("(min-width:1024px)").matches;
+        if (isTouch && !isPc) { isMb = true; isTb = false; }
+        var e = isPc ? "index-pc.html" : isTb ? "index-tablet.html" : "index-mobile.html";
+        console.log("[device-redirect] doRedirect",{innerW:window.innerWidth,isTouch:isTouch,mobile:isMb,tablet:isTb,pc:isPc,target:e,currentF:f});
+        if(f===e){console.log("[device-redirect] already on correct version, skip");return;}
+        var newUrl=location.pathname.replace(/[^\/]*.html$/,"")+e;
+        console.log("[device-redirect] redirecting to",newUrl);
+        location.href=newUrl;
+      }
+      doRedirect();
+    })();
+    </script>
+<link rel="stylesheet" href="/assets/css/skeleton.css?v=1780474841186" />
+  <link rel="manifest" href="/manifest.json"/>
+      <link rel="stylesheet" href="/assets/css/components.css" />
+</head>
+  <body
+    class="overflow-x-clip bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 antialiased transition-colors duration-300"
+  >
+    <navigator data-search="true"
+      data-component="navigator"
+      data-variant="pc"
+      data-active="cases"
+      data-cta-text-key="nav_get_quote"
+      data-cta-href="/quote"
+    ></navigator>
+
+    <main id="spa-content" class="flex-1">
+      <div class="max-w-7xl mx-auto px-8 py-12">
+        <!-- Breadcrumb -->
+        <nav class="flex items-center gap-2 text-sm text-slate-500 dark:text-slate-400 mb-6">
+          <a href="/cases/" class="hover:text-primary transition-colors flex items-center gap-1">
+            <span class="material-symbols-outlined text-base">arrow_back</span>
+            <span data-i18n="cases_all_cases">All Case Studies</span>
+          </a>
+          <span>/</span>
+          <span class="text-slate-700 dark:text-slate-300" data-i18n="cases_jakarta_breadcrumb">Jakarta · Central Kitchen</span>
+        </nav>
+
+        <!-- Hero -->
+        <header class="mb-10">
+          <div class="flex flex-wrap items-center gap-3 mb-4">
+            <span
+              class="px-3 py-1 rounded-full bg-white dark:bg-slate-800 text-sm font-semibold text-slate-700 dark:text-slate-200 border border-slate-200 dark:border-slate-700 shadow-sm"
+            >
+              🇮🇩 Indonesia
+            </span>
+            <span class="px-3 py-1 rounded-full bg-blue-500 text-white text-sm font-bold flex items-center gap-1">
+              <span class="material-symbols-outlined text-base">verified</span>
+              <span data-i18n="cases_roi_standardized">Standardized</span>
+            </span>
+          </div>
+          <h1 class="text-5xl font-black leading-tight tracking-tight mb-3" data-i18n="cases_jakarta_title">Jakarta Central Kitchen: Standardized output across 6 outlets</h1>
+          <p class="text-lg text-slate-500 dark:text-slate-400" data-i18n="cases_jakarta_subtitle">Jakarta · Central Kitchen · 600 meals/day</p>
+        </header>
+
+        <!-- Data Cards -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 mb-12">
+          <div
+            class="bg-white dark:bg-slate-800 rounded-2xl p-4 border border-slate-200 dark:border-slate-700 shadow-sm text-center"
+          >
+            <div
+              class="w-10 h-10 rounded-xl bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center mx-auto mb-2"
+            >
+              <span class="material-symbols-outlined text-blue-600">restaurant</span>
+            </div>
+            <div class="text-2xl font-black text-slate-900 dark:text-white">600</div>
+            <div class="text-xs text-slate-500 dark:text-slate-400 mt-1" data-i18n="cases_stat_meals">Daily Meals Output</div>
+          </div>
+          <div
+            class="bg-white dark:bg-slate-800 rounded-2xl p-4 border border-slate-200 dark:border-slate-700 shadow-sm text-center"
+          >
+            <div
+              class="w-10 h-10 rounded-xl bg-green-100 dark:bg-green-900/30 flex items-center justify-center mx-auto mb-2"
+            >
+              <span class="material-symbols-outlined text-green-600">trending_down</span>
+            </div>
+            <div class="text-2xl font-black text-green-600">--140%</div>
+            <div class="text-xs text-slate-500 dark:text-slate-400 mt-1" data-i18n="cases_stat_labor_cost">Labor Cost Reduction</div>
+          </div>
+          <div
+            class="bg-white dark:bg-slate-800 rounded-2xl p-4 border border-slate-200 dark:border-slate-700 shadow-sm text-center"
+          >
+            <div
+              class="w-10 h-10 rounded-xl bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center mx-auto mb-2"
+            >
+              <span class="material-symbols-outlined text-blue-600">savings</span>
+            </div>
+            <div class="text-2xl font-black text-slate-900 dark:text-white">IDR 22M</div>
+            <div class="text-xs text-slate-500 dark:text-slate-400 mt-1" data-i18n="cases_stat_monthly_save">Monthly Savings</div>
+          </div>
+          <div
+            class="bg-white dark:bg-slate-800 rounded-2xl p-4 border border-slate-200 dark:border-slate-700 shadow-sm text-center"
+          >
+            <div
+              class="w-10 h-10 rounded-xl bg-orange-100 dark:bg-orange-900/30 flex items-center justify-center mx-auto mb-2"
+            >
+              <span class="material-symbols-outlined text-orange-600">schedule</span>
+            </div>
+            <div class="text-2xl font-black text-slate-900 dark:text-white">8.0</div>
+            <div class="text-xs text-slate-500 dark:text-slate-400 mt-1" data-i18n="cases_stat_payback">Payback Period (Months)</div>
+          </div>
+        </div>
+
+        <!-- Story -->
+        <section class="mb-12">
+          <div class="flex items-center gap-2 mb-6">
+            <span class="material-symbols-outlined text-primary">auto_stories</span>
+            <h2 class="text-xl font-bold" data-i18n="cases_story_title">Customer Stories</h2>
+          </div>
+          <div class="prose prose-slate dark:prose-invert max-w-none">
+            <p
+              class="text-lg leading-relaxed text-slate-700 dark:text-slate-300 mb-5"
+              data-i18n="cases_jakarta_story_p1"
+            >Jakarta central kitchen serves 6 outlets with 1000+ daily meals. 12 chefs worked in high-temperature conditions, causing major flavor inconsistencies in signature dishes that triggered customer complaints.</p>
+            <p
+              class="text-lg leading-relaxed text-slate-700 dark:text-slate-300 mb-5"
+              data-i18n="cases_jakarta_story_p2"
+            >With YuKoLi, we customized cooking processes for Southeast Asian stir-fry cuisine. Smart equipment digitized wok techniques, seasoning ratios, and cooking sequences previously reliant on master chefs.</p>
+            <p
+              class="text-lg leading-relaxed text-slate-700 dark:text-slate-300 mb-5"
+              data-i18n="cases_jakarta_story_p3"
+            >Maintaining 1000-meal daily output, kitchen staff reduced from 12 to 5, saving 22 million IDR monthly with 8.0-month ROI.</p>
+            <p
+              class="text-lg leading-relaxed text-slate-700 dark:text-slate-300 mb-5"
+              data-i18n="cases_jakarta_story_p5"
+            >"Complaints about inconsistent flavors across outlets disappeared—now all 6 stores taste identical, boosting repeat customers."</p>
+          </div>
+        </section>
+
+        <!-- Quote -->
+        <section
+          class="bg-gradient-to-r from-blue-50 to-blue-100/50 dark:from-blue-900/20 dark:to-blue-800/10 rounded-2xl p-6 mb-12 border border-blue-200 dark:border-blue-800/50"
+        >
+          <div class="flex items-start gap-4">
+            <div class="text-4xl text-blue-400 dark:text-blue-600 leading-none">"</div>
+            <div>
+              <p
+                class="text-lg font-medium text-slate-800 dark:text-slate-200 italic leading-relaxed mb-3"
+                data-i18n="cases_jakarta_quote_text"
+              >Before, each outlet tasted different with frequent complaints. Now all 6 stores deliver identical flavors, significantly increasing repeat customers.</p>
+              <p class="text-sm text-slate-500 dark:text-slate-400" data-i18n="cases_jakarta_quote_author">— Jakarta Central Kitchen Client</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- Before vs After -->
+        <section class="mb-12">
+          <div class="flex items-center gap-2 mb-6">
+            <span class="material-symbols-outlined text-primary">compare_arrows</span>
+            <h2 class="text-xl font-bold" data-i18n="cases_compare_title">Before & After</h2>
+          </div>
+          <div class="grid grid-cols-1 gap-4">
+            <div class="bg-red-50 dark:bg-red-900/20 rounded-2xl p-6 border border-red-200 dark:border-red-800/50">
+              <div class="flex items-center gap-2 mb-4">
+                <div class="w-8 h-8 rounded-lg bg-red-500 flex items-center justify-center">
+                  <span class="material-symbols-outlined text-white text-sm">close</span>
+                </div>
+                <h3 class="font-bold text-red-700 dark:text-red-400" data-i18n="cases_before_title">Before</h3>
+              </div>
+              <ul class="space-y-3 text-slate-700 dark:text-slate-300">
+                <li class="flex items-center gap-2">
+                  <span class="material-symbols-outlined text-red-500 text-sm">group</span>
+                  <span data-i18n="cases_jakarta_before_1"><strong>12 chefs</strong> working simultaneously</span>
+                </li>
+                <li class="flex items-center gap-2">
+                  <span class="material-symbols-outlined text-red-500 text-sm">trending_up</span>
+                  <span data-i18n="cases_jakarta_before_2">Rising labor costs</span>
+                </li>
+                <li class="flex items-center gap-2">
+                  <span class="material-symbols-outlined text-red-500 text-sm">shuffle</span>
+                  <span data-i18n="cases_jakarta_before_3">Inconsistent quality</span>
+                </li>
+                <li class="flex items-center gap-2">
+                  <span class="material-symbols-outlined text-red-500 text-sm">person_search</span>
+                  <span data-i18n="cases_jakarta_before_4">Hiring & retention challenges</span>
+                </li>
+              </ul>
+            </div>
+            <div
+              class="bg-green-50 dark:bg-green-900/20 rounded-2xl p-6 border border-green-200 dark:border-green-800/50"
+            >
+              <div class="flex items-center gap-2 mb-4">
+                <div class="w-8 h-8 rounded-lg bg-green-500 flex items-center justify-center">
+                  <span class="material-symbols-outlined text-white text-sm">check</span>
+                </div>
+                <h3 class="font-bold text-green-700 dark:text-green-400" data-i18n="cases_after_title">After</h3>
+              </div>
+              <ul class="space-y-3 text-slate-700 dark:text-slate-300">
+                <li class="flex items-center gap-2">
+                  <span class="material-symbols-outlined text-green-600 text-sm">person</span>
+                  <span data-i18n="cases_jakarta_after_1"><strong>5 staff</strong> handle all meal production</span>
+                </li>
+                <li class="flex items-center gap-2">
+                  <span class="material-symbols-outlined text-green-600 text-sm">savings</span>
+                  <span>
+                    <span data-i18n="cases_monthly_saving">Monthly Savings</span>
+                    <strong>IDR 22M</strong>
+                  </span>
+                </li>
+                <li class="flex items-center gap-2">
+                  <span class="material-symbols-outlined text-green-600 text-sm">verified</span>
+                  <span><span data-i18n="cases_consistent">Perfect consistency</span></span>
+                </li>
+                <li class="flex items-center gap-2">
+                  <span class="material-symbols-outlined text-green-600 text-sm">speed</span>
+                  <span data-i18n="cases_jakarta_payback"><strong>8.0 months</strong> payback period</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <!-- CTA -->
+        <section class="bg-gradient-to-r from-primary to-primary/90 rounded-2xl p-6 text-center mb-8">
+          <h2 class="text-2xl font-black text-white mb-3" data-i18n="cases_cta_title">Your kitchen could too</h2>
+          <p class="text-white/80 mb-6 text-lg" data-i18n="cases_cta_desc">Calculate your ROI in 45 seconds</p>
+          <div class="flex flex-col items-center justify-center gap-3">
+            <a
+              href="/profit-calculator/"
+              class="inline-flex items-center gap-2 bg-white text-primary px-8 py-4 rounded-xl font-bold hover:shadow-lg transition-all text-lg"
+            >
+              <span class="material-symbols-outlined">calculate</span>
+              <span data-i18n="cases_calc_roi">Calculate your ROI</span>
+            </a>
+            <a
+              href="https://wa.me/8613163756465"
+              target="_blank" rel="noopener noreferrer"
+              class="inline-flex items-center gap-2 bg-white/20 text-white border border-white/30 px-8 py-4 rounded-xl font-bold hover:bg-white/30 transition-all text-lg"
+            >
+              <span class="material-symbols-outlined">chat</span>
+              <span data-i18n="small_restaurant_cta_btn_whatsapp">WhatsApp consult</span>
+            </a>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <footer data-component="footer" data-variant="pc" data-cta="true"></footer>
+    <script defer src="/assets/js/lang-registry.js?v=1780474841186"></script>
+    <script defer src="/assets/js/translations.js?v=1780474841186"></script>
+    <script defer src="/assets/js/product-list.js?v=1780474841186"></script>
+    <script defer src="/assets/js/utils.js?v=1780474841186"></script>
+    <script defer src="/assets/js/ui/search-engine.js?v=1780474841186"></script>
+        <script defer src="/assets/js/ui/footer.js?v=1780474841186"></script>
+
+    <script defer src="/assets/js/router.js?v=1780474841186"></script>
+    <script defer src="/assets/js/ui/floating-actions.js?v=1780474841186"></script>
+      <script src="/assets/js/product-data-table.js"></script>
+    <script defer src="/assets/js/nav-config.js"></script>
+    <script defer src="/assets/js/utils/device-utils.js"></script>
+    <script defer src="/assets/js/translations-dropdown-template.js"></script>
+    <script defer src="/assets/js/ui/dropdown-styles.js"></script>
+    <script defer src="/assets/js/ui/dropdown-base.js"></script>
+    <script defer src="/assets/js/ui/products-dropdown.js"></script>
+    <script defer src="/assets/js/ui/applications-dropdown.js"></script>
+    <script defer src="/assets/js/ui/support-dropdown.js"></script>
+    <script defer src="/assets/js/ui/about-dropdown.js"></script>
+    <script defer src="/assets/js/ui/contact-dropdown.js"></script>
+    <script defer src="/assets/js/ui/navigator.js"></script>
+    <script defer src="/assets/js/ui/slide-menu.js"></script>
+    <script defer src="/assets/js/ui/hero-video.js"></script>
+    <script defer src="/assets/js/ui/helpers.js"></script>
+    <script defer src="/assets/js/ui/page-effects.js"></script>
+    <script defer src="/assets/js/page-interactions.js"></script>
+    <script defer src="/assets/js/swup.min.js"></script>
+    <script defer src="/assets/js/swup-head-plugin.min.js"></script>
+    <script defer src="/assets/js/swup-preload-plugin.min.js"></script>
+    <script defer src="/assets/js/spa-router.js"></script>
+    <script defer src="/assets/js/case-grid.js"></script>
+    <script defer src="/assets/js/cases-page.js"></script>
+    <script defer src="/assets/js/breadcrumb.js"></script>
+    <script>window._SPA_GLOBAL_PATTERNS=/(?:^|[\/])(?:product-data-table|nav-config|device-utils|lang-registry|utils|translations|translations-dropdown-template|dropdown-styles|dropdown-base|products-dropdown|applications-dropdown|support-dropdown|about-dropdown|contact-dropdown|navigator|slide-menu|footer|hero-video|floating-actions|helpers|page-effects|page-interactions|search-engine|swup.min|swup-head-plugin.min|swup-preload-plugin.min|spa-router)\.js/</script>
+  <style data-skeleton-inline>#skeleton-overlay{position:fixed;inset:0;z-index:5;pointer-events:none;background:var(--color-bg-light,#f8fafc);opacity:1;transition:opacity .25s ease-out}html.dark #skeleton-overlay{background:var(--color-bg-dark,#020617)}#skeleton-overlay[hidden]{display:none}@keyframes sk-shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}.skeleton-container{width:100%;max-width:1280px;margin:0 auto;padding:2rem 1.25rem}.sk-badge{width:100px;height:22px;border-radius:9999px;margin:0 auto 16px;background:linear-gradient(90deg,#e8e8e8 25%,#d4d4d4 50%,#e8e8e8 75%);background-size:200% 100%;animation:sk-shimmer 1.5s infinite}.sk-hero{display:flex;flex-direction:column;align-items:center;text-align:center;margin-bottom:24px}.sk-line{width:65%;height:32px;border-radius:8px;margin:0 auto 12px;background:linear-gradient(90deg,#e8e8e8 25%,#d4d4d4 50%,#e8e8e8 75%);background-size:200% 100%;animation:sk-shimmer 1.5s infinite}.sk-line-short{width:45%;height:18px;margin-bottom:8px}.sk-line-shorter{width:30%;height:18px}.sk-cta-group{display:flex;gap:12px;justify-content:center;margin-top:20px}.sk-cta{width:140px;height:44px;border-radius:12px;background:linear-gradient(90deg,#e8e8e8 25%,#d4d4d4 50%,#e8e8e8 75%);background-size:200% 100%;animation:sk-shimmer 1.5s infinite}.sk-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:32px}@media(max-width:767px){.sk-grid{grid-template-columns:1fr}.sk-cta{width:100%;max-width:none}}@media(min-width:768px)and(max-width:1279px){.sk-grid{grid-template-columns:repeat(2,1fr)}}.sk-card{height:220px;border-radius:16px;background:linear-gradient(90deg,#e8e8e8 25%,#d4d4d4 50%,#e8e8e8 75%);background-size:200% 100%;animation:sk-shimmer 1.5s infinite}.dark .sk-badge,.dark .sk-line,.dark .sk-cta,.dark .sk-card{background:linear-gradient(90deg,#1e293b 25%,#334155 50%,#1e293b 75%);background-size:200% 100%}</style>
+<div id="skeleton-overlay">  <div class="skeleton-container">    <div class="sk-hero">      <div class="sk-badge"></div>      <div class="sk-line"></div>      <div class="sk-line sk-line-short"></div>      <div class="sk-line sk-line-shorter"></div>      <div class="sk-cta-group">        <div class="sk-cta"></div>        <div class="sk-cta"></div>      </div>    </div>    <div class="sk-grid">      <div class="sk-card"></div>      <div class="sk-card"></div>      <div class="sk-card"></div>    </div>  </div></div>
+<script>(function(){var sk=document.getElementById("skeleton-overlay");if(!sk)return;function hide(){sk.setAttribute("hidden","");sk.style.display="none";document.head.querySelector("[data-skeleton-inline]")?.remove()}if(document.readyState==="complete")hide();else window.addEventListener("load",hide);setTimeout(hide,3000);})();</script>
+  </body>
+</html>

@@ -1,0 +1,40 @@
+/**
+ * CSS动画性能优化
+ *
+ * 已优化: 移除全局 will-change，改为按需使用
+ *
+ * 注意事项:
+ * 1. will-change 只在动画执行期间添加
+ * 2. 动画结束后必须移除，释放内存
+ * 3. 优先使用 transform 和 opacity (GPU 加速)
+ * 4. 避免对大量元素使用 will-change
+ */
+
+/* -------------------------------------------------------
+   Performance Tips (作为注释保留，供开发者参考)
+   ------------------------------------------------------- */
+
+/*
+优化建议:
+1. 优先使用 transform 和 opacity 进行动画 (GPU加速)
+2. 避免对 width, height, top, left 进行动画 (触发重排)
+3. 对于大量动画，考虑使用 CSS transform: translateZ(0) 强制GPU加速
+4. 使用 requestAnimationFrame 进行动画而非 setInterval
+5. 在动画结束后移除 will-change 属性以释放内存
+
+will-change 使用规范:
+- 仅在动画即将开始时通过 JS 添加: element.style.willChange = 'transform, opacity'
+- 在 transitionend/animationend 回调中立即移除: element.style.willChange = 'auto'
+- 不要在 CSS 中静态声明 will-change（已移除所有静态声明）
+- 特别注意: animate-pulse, animate-spin, animate-bounce 等 Tailwind 动画类
+  已移除 will-change，浏览器会自动优化这些常见动画
+*/
+
+/* -------------------------------------------------------
+   GPU 加速优化
+   ------------------------------------------------------- */
+
+.backface-hidden {
+  backface-visibility: hidden;
+  perspective: 1000px;
+}

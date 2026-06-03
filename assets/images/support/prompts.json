@@ -1,0 +1,49 @@
+{
+  "faq": {
+    "feature1": "Professional commercial kitchen customer service representative using a tablet with AI diagnostic interface, warm modern office, soft lighting",
+    "feature2": "Friendly support engineer in branded uniform speaking with customer at kitchen equipment, professional service visit",
+    "feature3": "Digital service ticket tracking dashboard on monitor showing progress status, clean modern workspace",
+    "feature4": "Technician wearing headset conducting video call remote diagnostics from service center, multiple screens"
+  },
+  "installation": {
+    "value1": "Professional engineer measuring and surveying commercial kitchen layout with clipboard and tools",
+    "value2": "Certified technician installing commercial kitchen equipment, connecting pipes and electrical wiring",
+    "value3": "Engineer testing and calibrating newly installed kitchen equipment with digital instruments",
+    "value4": "Trainer demonstrating commercial cooking equipment operation to kitchen staff in white uniforms",
+    "env1": "Commercial kitchen electrical panel with three-phase power connections, 380V industrial setup",
+    "env2": "Stainless steel commercial kitchen sink with water supply lines and drainage system",
+    "env3": "Modern commercial kitchen exhaust hood and ventilation system installed above cooking station",
+    "env4": "Wide commercial kitchen space with equipment layout planning tape measurements on floor"
+  },
+  "spare-parts": {
+    "value1": "Close-up of genuine factory parts with quality certification seal, branded packaging",
+    "value2": "Packaged spare parts boxes on loading dock ready for express shipping, logistics scene",
+    "value3": "Large organized warehouse shelf filled with commercial kitchen equipment spare parts, neat inventory",
+    "value4": "Collection of common wear replacement parts neatly arranged on workbench, labeled compartments",
+    "value5": "Vintage kitchen equipment model with spare parts arranged alongside, long-term support concept",
+    "value6": "Box of complimentary spare parts accessories included with equipment delivery, unboxing scene",
+    "cat1": "Assorted stainless steel cutting blades and slicing discs for commercial food processor, sharp edges gleaming",
+    "cat2": "Collection of oil mesh filters and water inlet filters for commercial kitchen equipment",
+    "cat3": "Neatly arranged silicone sealing rings and rubber gaskets of various sizes on clean surface",
+    "cat4": "Electronic control boards and digital display panels for commercial kitchen equipment, circuit detail",
+    "cat5": "Heating elements and thermostat components for commercial cooking equipment, warm metallic tones",
+    "cat6": "Electric motors and drive belts for commercial kitchen equipment on maintenance table"
+  },
+  "training": {
+    "core1": "Group of kitchen staff in uniforms receiving hands-on training from engineer at commercial equipment",
+    "core2": "Person watching cooking equipment training video on laptop, online learning concept",
+    "core3": "Open comprehensive equipment operation manual with illustrated diagrams on clean desk",
+    "core4": "Professional training certificate with gold seal and graduate receiving it proudly",
+    "course1": "New kitchen employee learning basic operations on commercial cooking equipment with instructor",
+    "manual1": "Colorful operation manual for commercial food preparation equipment on kitchen counter",
+    "manual2": "Cooking equipment manual showing automatic wok machine and deep fryer illustrations",
+    "manual3": "Equipment maintenance guide with cleaning tools and checklists on workbench",
+    "manual4": "Safety operation manual with warning icons and emergency procedures on clipboard"
+  },
+  "warranty": {
+    "value1": "Elegant warranty service certificate and protection card for commercial kitchen equipment",
+    "value2": "Technical support specialist providing remote assistance via video call on large screen",
+    "value3": "Maintenance technician performing scheduled inspection on commercial kitchen equipment",
+    "value4": "Warehouse shelf with spare parts for discontinued equipment models, organized inventory"
+  }
+}

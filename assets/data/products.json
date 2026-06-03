@@ -1,0 +1,4474 @@
+[
+  {
+    "category": "台式",
+    "subCategory": null,
+    "model": "XC-0006",
+    "name": "电动不锈钢切片机",
+    "specifications": "材质：采用不锈钢机身；额定功率：300W；电压：220V；频率：50Hz；刀片：精钢刀片；调节：薄厚可调；安全：防滑设计，安全开关；清洗：可拆卸刀组方便清洗",
+    "status": "在售",
+    "is_active": true,
+    "badge": null,
+    "badgeColor": null,
+    "power": "300W",
+    "throughput": null,
+    "averageTime": null,
+    "voltage": "220V",
+    "material": "不锈钢机身；精钢刀片",
+    "productDimensions": "375×375×525mm",
+    "tier": "基础",
+    "sort_order": 0,
+    "is_home_core": false,
+    "relatedProducts": null,
+    "images": [
+      {
+        "filePath": "/assets/images/products/XC-0006_171.webp",
+        "isPrimary": true,
+        "sortOrder": 171
+      }
+    ],
+    "isActive": true
+  },
+  {
+    "category": "台式",
+    "subCategory": null,
+    "model": "XC-1288",
+    "name": "多功能切片机",
+    "specifications": "材质：采用全铝合金支架；额定功率：200W；电压：220V；频率：50Hz；刀片：特制不锈钢刀片，直径190mm；调节：20个档位（1-20mm）厚度调节；电机：铜线电机；运行：稳定低分贝；适用：软、硬食材均可，轻松应对多种切片需要",
+    "status": "在售",
+    "is_active": true,
+    "badge": null,
+    "badgeColor": null,
+    "power": "200W",
+    "throughput": null,
+    "averageTime": null,
+    "voltage": "220V",
+    "material": "全铝合金支架；不锈钢刀片",
+    "productDimensions": "345×253×210mm",
+    "tier": "基础",
+    "sort_order": 0,
+    "is_home_core": false,
+    "relatedProducts": null,
+    "images": [
+      {
+        "filePath": "/assets/images/products/XC-1288_172.webp",
+        "isPrimary": true,
+        "sortOrder": 172
+      }
+    ],
+    "isActive": true
+  },
+  {
+    "category": "台式",
+    "subCategory": null,
+    "model": "XC-6344",
+    "name": "电动30型冻肉牛羊肉商用切片机刨肉机",
+    "specifications": "材质：采用优质不锈钢；额定功率：1.5kW；电压：220V；频率：50Hz；切片厚度：0.5-15mm可调；刀片材质：特种合金钢；安全防护：带急停功能及安全防护罩；清洗：可拆卸刀组，方便清洗",
+    "status": "在售",
+    "is_active": true,
+    "badge": null,
+    "badgeColor": null,
+    "power": "1.5kW",
+    "throughput": null,
+    "averageTime": null,
+    "voltage": "220V",
+    "material": "优质不锈钢",
+    "productDimensions": "520×450×660mm",
+    "tier": "基础",
+    "sort_order": 0,
+    "is_home_core": false,
+    "relatedProducts": null,
+    "images": [
+      {
+        "filePath": "/assets/images/products/XC-6344_167.webp",
+        "isPrimary": true,
+        "sortOrder": 167
+      }
+    ],
+    "isActive": true
+  },
+  {
+    "category": "台式",
+    "subCategory": null,
+    "model": "XC-0988",
+    "name": "葱丝机",
+    "specifications": "材质：采用优质不锈钢刀轴；额定功率：200W；电压：220V；频率：50Hz；刀片：二挡可反转刀片；加料口：加大料口设计；清洗：进料口可直接热水冲洗；电机：直流电机，噪音小；支腿：可拆卸一体式支腿；防水：嵌入式食品级硅胶防水圈",
+    "status": "在售",
+    "is_active": true,
+    "badge": null,
+    "badgeColor": null,
+    "power": "200W",
+    "throughput": null,
+    "averageTime": null,
+    "voltage": "220V",
+    "material": "304不锈钢刀轴；食品级硅胶",
+    "productDimensions": "409×215×350mm",
+    "tier": "基础",
+    "sort_order": 0,
+    "is_home_core": false,
+    "relatedProducts": null,
+    "images": [
+      {
+        "filePath": "/assets/images/products/XC-0988_168.webp",
+        "isPrimary": true,
+        "sortOrder": 168
+      }
+    ],
+    "isActive": true
+  },
+  {
+    "category": "台式",
+    "subCategory": null,
+    "model": "XC-0888",
+    "name": "多功能切菜机",
+    "specifications": "材质：采用全钢刀盘，精钢刀片；电压：220V；频率：50Hz；刀组：多刀组设计，横切刀和网格刀组合；切丁尺寸：多种刀网可选，适应不同尺寸；出料口：特殊设计，出料顺畅；安全：安全开关设计；防滑：底部大支撑加防滑设计",
+    "status": "在售",
+    "is_active": true,
+    "badge": null,
+    "badgeColor": null,
+    "power": null,
+    "throughput": null,
+    "averageTime": null,
+    "voltage": "220V",
+    "material": "全钢刀盘；精钢刀片",
+    "productDimensions": "286×243×388mm",
+    "tier": "基础",
+    "sort_order": 0,
+    "is_home_core": false,
+    "relatedProducts": null,
+    "images": [
+      {
+        "filePath": "/assets/images/products/XC-0888_169.webp",
+        "isPrimary": true,
+        "sortOrder": 169
+      }
+    ],
+    "isActive": true
+  },
+  {
+    "category": "台式",
+    "subCategory": null,
+    "model": "XC-1088",
+    "name": "多动能刨丝机",
+    "specifications": "材质：采用精钢刀片；电机：直流电机，噪音小；刀片：十字花刀设计，防滑固定食材；操作：一键开关机，二挡可自动回卷食材；电压：220V；频率：50Hz；款式：电动款和手动款可选；清洗：机器可直接抹布擦拭",
+    "status": "在售",
+    "is_active": true,
+    "badge": null,
+    "badgeColor": null,
+    "power": null,
+    "throughput": null,
+    "averageTime": null,
+    "voltage": "220V",
+    "material": "精钢刀片",
+    "productDimensions": "288×160×180mm",
+    "tier": "基础",
+    "sort_order": 0,
+    "is_home_core": false,
+    "relatedProducts": null,
+    "images": [
+      {
+        "filePath": "/assets/images/products/XC-1088_170.webp",
+        "isPrimary": true,
+        "sortOrder": 170
+      }
+    ],
+    "isActive": true
+  },
+  {
+    "category": "台式",
+    "subCategory": null,
+    "model": "DLB-TBS30",
+    "name": "台式上搅拌平底锅炒菜 机",
+    "specifications": "锅体：直径约Φ296mm，深度80mm，不粘锅；显示屏：多功能数码显示屏；智能定时：8组记忆菜谱，定时菜单功能；火力调节：多档位可调，旋钮式调节；翻炒速度：5档旋钮调节搅拌速度；翻炒方式：采用行星搅拌，刮底刮边设计",
+    "status": "在售",
+    "is_active": true,
+    "badge": null,
+    "badgeColor": null,
+    "power": "5kW",
+    "throughput": null,
+    "averageTime": null,
+    "voltage": "220V",
+    "material": "优质不锈钢",
+    "productDimensions": "380×510×420/580",
+    "tier": "基础",
+    "sort_order": 0,
+    "is_home_core": false,
+    "relatedProducts": null,
+    "images": [
+      {
+        "filePath": "/assets/images/products/DLB-TBS30_hires.webp",
+        "isPrimary": true,
+        "sortOrder": 0
+      }
+    ],
+    "isActive": true
+  },
+  {
+    "category": "台式",
+    "subCategory": null,
+    "model": "DLB-TBS40",
+    "name": "台式上搅拌弧底锅 炒菜机",
+    "specifications": "锅体规格：Φ400mm；容量：8L；显示屏：多功能数码显示屏；搅拌角度：搅拌系统可往上抬起；翻炒方式：自转公转结合行星搅拌结构；火力和翻炒速度：多档位可调节",
+    "status": "在售",
+    "is_active": true,
+    "badge": null,
+    "badgeColor": null,
+    "power": "5kW",
+    "throughput": null,
+    "averageTime": null,
+    "voltage": "220V",
+    "material": "不锈钢；无涂层生铁锅",
+    "productDimensions": "400×550×450/820mm",
+    "tier": "基础",
+    "sort_order": 0,
+    "is_home_core": false,
+    "relatedProducts": null,
+    "images": [
+      {
+        "filePath": "/assets/images/products/DLB-TBS40_hires.webp",
+        "isPrimary": true,
+        "sortOrder": 0
+      },
+      {
+        "filePath": "/assets/images/products/DLB-TBS40_6.webp",
+        "isPrimary": false,
+        "sortOrder": 5
+      }
+    ],
+    "isActive": true
+  },
+  {
+    "category": "台式",
+    "subCategory": null,
+    "model": "DLB-TBS50",
+    "name": "台式上搅拌弧底锅 炒菜机",
+    "specifications": "材质：整机外壳不锈钢材质；功率：5kW；电压：220V；频率：50Hz；锅体规格：Φ500mm；容量：16L；锅体材质：无涂层生铁锅；显示屏：多功能数码显示屏；搅拌角度：搅拌系统可往上抬起；翻炒方式：自转公转结合行星搅拌结构；火力和翻炒速度：多档位可调节",
+    "status": "在售",
+    "is_active": true,
+    "badge": null,
+    "badgeColor": null,
+    "power": "5kW",
+    "throughput": null,
+    "averageTime": null,
+    "voltage": "220V",
+    "material": "不锈钢；无涂层生铁锅",
+    "productDimensions": "500×680×510/780",
+    "tier": "基础",
+    "sort_order": 0,
+    "is_home_core": false,
+    "relatedProducts": null,
+    "images": [
+      {
+        "filePath": "/assets/images/products/DLB-TBS50_hires.webp",
+        "isPrimary": true,
+        "sortOrder": 0
+      },
+      {
+        "filePath": "/assets/images/products/DLB-TBS50_7.webp",
+        "isPrimary": false,
+        "sortOrder": 6
+      }
+    ],
+    "isActive": true
+  },
+  {
+    "category": "台式",
+    "subCategory": null,
+    "model": "DLB-TZS40",
+    "name": "台式转锅搅拌炒菜机 （炒饭机）",
+    "specifications": "材质：优质不锈钢；锅体规格：Φ400；锅体容量：8L加护锅圈；锅体材质：无涂层生铁锅不粘锅；显示屏：多功能数码显示屏；搅拌角度：搅拌系统可往上抬起；翻炒方式：锅体旋转+卧式立体翻炒加热；火力和翻炒速度：多档位可调节；正反转功能：破饭团，多方向翻炒",
+    "status": "在售",
+    "is_active": true,
+    "badge": null,
+    "badgeColor": null,
+    "power": "5kW",
+    "throughput": null,
+    "averageTime": null,
+    "voltage": "220V",
+    "material": "优质不锈钢；无涂层生铁锅不粘锅",
+    "productDimensions": "410×530×410/750",
+    "tier": "基础",
+    "sort_order": 0,
+    "is_home_core": false,
+    "relatedProducts": null,
+    "images": [
+      {
+        "filePath": "/assets/images/products/DLB-TZS40_hires.webp",
+        "isPrimary": true,
+        "sortOrder": 0
+      },
+      {
+        "filePath": "/assets/images/products/DLB-TZS40_8.webp",
+        "isPrimary": false,
+        "sortOrder": 7
+      }
+    ],
+    "isActive": true
+  },
+  {
+    "category": "台式",
+    "subCategory": null,
+    "model": "DLB-TZS50",
+    "name": "台式转锅搅拌炒菜机 （炒饭机）",
+    "specifications": "材质：优质不锈钢；锅体规格：Φ500；锅体容量：16L加护锅圈；锅体材质：无涂层生铁锅不粘锅；显示屏：多功能数码显示屏；搅拌角度：搅拌系统可往上抬起；翻炒方式：锅体旋转+卧式立体翻炒加热；火力和翻炒速度：多档位可调节；定制搅拌铲：针对不同食材定制翻炒铲",
+    "status": "在售",
+    "is_active": true,
+    "badge": null,
+    "badgeColor": null,
+    "power": "5kW",
+    "throughput": null,
+    "averageTime": null,
+    "voltage": "220V",
+    "material": "优质不锈钢；无涂层生铁锅不粘锅",
+    "productDimensions": "480×650×480/900",
+    "tier": "基础",
+    "sort_order": 0,
+    "is_home_core": false,
+    "relatedProducts": null,
+    "images": [
+      {
+        "filePath": "/assets/images/products/DLB-TZS50_hires.webp",
+        "isPrimary": true,
+        "sortOrder": 0
+      },
+      {
+        "filePath": "/assets/images/products/DLB-TZS50_9.webp",
+        "isPrimary": false,
+        "sortOrder": 8
+      }
+    ],
+    "isActive": true
+  },
+  {
+    "category": "台式",
+    "subCategory": null,
+    "model": "F32F1C",
+    "name": "台式翻盖炒菜机 （手动翻盖款）",
+    "specifications": "额定电压：220V；额定功率：3.5kW；配锅尺寸(mm)：φ320*75；配锅容量：5L；炒菜重量：约1.5kg；7寸触摸屏；自动搅拌；语音播报；手动翻盖；菜谱编辑功能",
+    "status": "在售",
+    "is_active": true,
+    "badge": null,
+    "badgeColor": null,
+    "power": "3.5kW",
+    "throughput": "约1.5kg   ◆7寸触摸屏",
+    "averageTime": null,
+    "voltage": "220V",
+    "material": null,
+    "productDimensions": "400×555×360",
+    "tier": "智能",
+    "sort_order": 0,
+    "is_home_core": false,
+    "relatedProducts": null,
+    "images": [
+      {
+        "filePath": "/assets/images/products/F32F1C_107.webp",
+        "isPrimary": true,
+        "sortOrder": 106
+      }
+    ],
+    "isActive": true
+  },
+  {
+    "category": "台式",
+    "subCategory": null,
+    "model": "DLB-TBQ30",
+    "name": "台式上搅拌平底锅 炒菜机（语音提示）",
+    "specifications": "整机外壳不锈钢材质；锅体：直径约Φ296mm，深度80mm，不粘锅；显示屏：7寸多功能触摸显示屏；菜谱：可存储800个菜谱（智能学习功能）；语音：智能实时语音播报功能；搅拌角度：搅拌系统自动抬起；翻炒方式：自转公转结合行星搅拌结构；火力和翻炒速度：多档位自动调节",
+    "status": "在售",
+    "is_active": true,
+    "badge": null,
+    "badgeColor": null,
+    "power": "3.5/5kW",
+    "throughput": null,
+    "averageTime": null,
+    "voltage": "220V",
+    "material": "不锈钢；不粘锅",
+    "productDimensions": "380×510×430/590",
+    "tier": "智能",
+    "sort_order": 0,
+    "is_home_core": false,
+    "relatedProducts": null,
+    "images": [
+      {
+        "filePath": "/assets/images/products/DLB-TBQ30_hires.webp",
+        "isPrimary": true,
+        "sortOrder": 0
+      },
+      {
+        "filePath": "/assets/images/products/DLB-TBQ30_2.webp",
+        "isPrimary": false,
+        "sortOrder": 1
+      }
+    ],
+    "isActive": true
+  },
+  {
+    "category": "落地式",
+    "subCategory": null,
+    "model": "DLB-4BQ30",
+    "name": "柜式上搅拌平底锅 炒菜机（语音提示）",
+    "specifications": "整机外壳不锈钢材质；锅体：直径约Φ296mm，深度80mm，不粘锅；显示屏：7寸多功能触摸显示屏；菜谱：可存储800个菜谱（智能学习功能）；语音：智能实时语音播报功能；搅拌角度：搅拌系统自动抬起；翻炒方式：自转公转结合行星搅拌结构；火力和翻炒速度：多档位自动调节",
+    "status": "在售",
+    "is_active": true,
+    "badge": null,
+    "badgeColor": null,
+    "power": "3.5kW；5kW",
+    "throughput": null,
+    "averageTime": null,
+    "voltage": "380V",
+    "material": "不锈钢；不粘锅",
+    "productDimensions": "900×850×1150/1300mm",
+    "tier": "智能",
+    "sort_order": 0,
+    "is_home_core": false,
+    "relatedProducts": null,
+    "images": [
+      {
+        "filePath": "/assets/images/products/DLB-4BQ30_hires.webp",
+        "isPrimary": true,
+        "sortOrder": 0
+      },
+      {
+        "filePath": "/assets/images/products/DLB-4BQ30_4.webp",
+        "isPrimary": false,
+        "sortOrder": 3
+      }
+    ],
+    "isActive": true
+  },
+  {
+    "category": "台式",
+    "subCategory": null,
+    "model": "DLB-TQBQ30",
+    "name": "台式上搅拌平底锅 炒菜机（语音提示+自动 加料）",
+    "specifications": "锅体：直径约Φ296mm，深度80mm，不粘锅；显示屏：7寸多功能触摸显示屏；菜谱：可存储800个菜谱（智能学习功能）；语音：智能实时语音播报功能；喷料：带4路自动喷料口，自动定量加料；搅拌角度：搅拌系统自动抬起；翻炒方式：自转公转结合行星搅拌结构；火力和翻炒速度：多档位自动调节",
+    "status": "在售",
+    "is_active": true,
+    "badge": null,
+    "badgeColor": null,
+    "power": "3.5/5kW",
+    "throughput": null,
+    "averageTime": null,
+    "voltage": "220V",
+    "material": "不锈钢；不粘锅",
+    "productDimensions": "380×620×430/620mm",
+    "tier": "全智能",
+    "sort_order": 0,
+    "is_home_core": false,
+    "relatedProducts": null,
+    "images": [
+      {
+        "filePath": "/assets/images/products/DLB-TQBQ30_3.webp",
+        "isPrimary": true,
+        "sortOrder": 2
+      }
+    ],
+    "isActive": true
+  },
+  {
+    "category": "落地式",
+    "subCategory": null,
+    "model": "DLB-4QBQ30",
+    "name": "柜式上搅拌平底锅 炒菜机（语音提示+自动 加料）",
+    "specifications": "整机外壳不锈钢材质；锅体：直径约Φ296mm，深度80mm，不粘锅；显示屏：7寸多功能触摸显示屏；菜谱：可存储800个菜谱（智能学习功能）；语音：智能实时语音播报功能；喷料：带4路自动喷料口，自动定量加料；搅拌角度：搅拌系统自动抬起；翻炒方式：自转公转结合行星搅拌结构；火力和翻炒速度：多档位自动调节",
+    "status": "在售",
+    "is_active": true,
+    "badge": null,
+    "badgeColor": null,
+    "power": "3.5kW；5kW",
+    "throughput": null,
+    "averageTime": null,
+    "voltage": "380V",
+    "material": "不锈钢；不粘锅",
+    "productDimensions": "900×850×1150/1300mm",
+    "tier": "全智能",
+    "sort_order": 0,
+    "is_home_core": false,
+    "relatedProducts": null,
+    "images": [
+      {
+        "filePath": "/assets/images/products/DLB-4QBQ30_hires.webp",
+        "isPrimary": true,
+        "sortOrder": 0
+      },
+      {
+        "filePath": "/assets/images/products/DLB-4QBQ30_5.webp",
+        "isPrimary": false,
+        "sortOrder": 4
+      }
+    ],
+    "isActive": true
+  },
+  {
+    "category": "落地式",
+    "subCategory": null,
+    "model": "DLB-BQ40T",
+    "name": "落地式上搅拌全自动小 炒炒菜机（自动投料+喷 料）",
+    "specifications": "锅体规格：Φ400mm；锅体容量：16L；显示屏：10寸多功能触模显示屏；翻锅倒料方式：电控翻锅；翻炒方式：采用行星搅拌，刮底刮边设计；菜单：存储800个菜谱（智能学习功能）；语音：智能实时语音播报功能；喷料：带6-8路自动喷料口，自动定量加料；储料仓：箱体下部可开盖存储液体味料；投料：一组4个投料盒，自动投放；接料盘：接料台+排水池+可提冲孔隔渣网；清洗：一键式自动清洗模式，水枪辅助清洗",
+    "status": "在售",
+    "is_active": true,
+    "badge": null,
+    "badgeColor": null,
+    "power": "8-12kW",
+    "throughput": null,
+    "averageTime": null,
+    "voltage": "380V",
+    "material": "生铁锅；SUS409不锈钢锅",
+    "productDimensions": "800×880×1310mm；900×880×1310mm",
+    "tier": "全智能",
+    "sort_order": 0,
+    "is_home_core": false,
+    "relatedProducts": null,
+    "images": [
+      {
+        "filePath": "/assets/images/products/DLB-BQ40T_26.webp",
+        "isPrimary": true,
+        "sortOrder": 25
+      }
+    ],
+    "isActive": true
+  },
+  {
+    "category": "台式",
+    "subCategory": null,
+    "model": "DLB-TGS30",
+    "name": "台式300智能电磁炒菜机 （手动）",
+    "specifications": "整机外壳不锈钢材质；锅体规格：球釜型锅Φ300*H300；炒菜容量：4-6L（倾角30 °有效容量）；锅体材质：SUS409不锈钢不粘锅/铸铁锅；配置：多功能数码显示屏，8道菜谱记忆存储；锅倾角度：无极多角度手动半机械式倒菜；翻炒方式：采用360 °滚筒旋转立体翻炒加热；火力和翻炒速度：多档位可调节；清洗：高压水枪清洗，快捷高效",
+    "status": "在售",
+    "is_active": true,
+    "badge": null,
+    "badgeColor": null,
+    "power": "5kW",
+    "throughput": "4-6L",
+    "averageTime": null,
+    "voltage": "220V",
+    "material": "SUS409不锈钢不粘锅/铸铁锅",
+    "productDimensions": "630×500×650/750",
+    "tier": "基础",
+    "sort_order": 0,
+    "is_home_core": false,
+    "relatedProducts": null,
+    "images": [
+      {
+        "filePath": "/assets/images/products/DLB-TGS30_hires.webp",
+        "isPrimary": true,
+        "sortOrder": 0
+      },
+      {
+        "filePath": "/assets/images/products/DLB-TGS30_10.webp",
+        "isPrimary": false,
+        "sortOrder": 9
+      }
+    ],
+    "isActive": true
+  },
+  {
+    "category": "台式",
+    "subCategory": null,
+    "model": "G26D1A",
+    "name": "简易台式滚筒炒菜机 (电磁款)",
+    "specifications": "配锅尺寸(mm): φ260*280；锅体材质：2.5mm精铁；配锅容量：1L-6.4L；炒菜重量：约1.8kg",
+    "status": "在售",
+    "is_active": true,
+    "badge": null,
+    "badgeColor": null,
+    "power": "5kW",
+    "throughput": "1L-6.4L",
+    "averageTime": null,
+    "voltage": "220V",
+    "material": "2.5mm精铁",
+    "productDimensions": "470×680×700mm",
+    "tier": "基础",
+    "sort_order": 0,
+    "is_home_core": false,
+    "relatedProducts": null,
+    "images": [
+      {
+        "filePath": "/assets/images/products/G26D1A_108.webp",
+        "isPrimary": true,
+        "sortOrder": 107
+      }
+    ],
+    "isActive": true
+  },
+  {
+    "category": "台式",
+    "subCategory": null,
+    "model": "G26D1R",
+    "name": "简易台式滚筒炒菜机 (燃气款)",
+    "specifications": "配锅尺寸(mm): φ260*280；炒菜重量: 约1.8kg；配锅容量: 1L-6.4L；燃气类型: 液化气/天然气；热负荷: 17.6kW",
+    "status": "在售",
+    "is_active": true,
+    "badge": null,
+    "badgeColor": null,
+    "power": "100W",
+    "throughput": "1L-6.4L",
+    "averageTime": null,
+    "voltage": "220V",
+    "material": "2.5mm精铁",
+    "productDimensions": "490×690×700",
+    "tier": "基础",
+    "sort_order": 0,
+    "is_home_core": false,
+    "relatedProducts": null,
+    "images": [
+      {
+        "filePath": "/assets/images/products/G26D1R_109.webp",
+        "isPrimary": true,
+        "sortOrder": 108
+      }
+    ],
+    "isActive": true
+  },
+  {
+    "category": "台式",
+    "subCategory": null,
+    "model": "G30D1A",
+    "name": "简易台式滚筒炒菜机 （电磁款）",
+    "specifications": "额定电压：220V；额定功率：5kW；配锅尺寸（mm）：φ300*300；锅体材质：3.0mm精铁；配锅容量：1.5L-9.3L",
+    "status": "在售",
+    "is_active": true,
+    "badge": null,
+    "badgeColor": null,
+    "power": "5kW",
+    "throughput": null,
+    "averageTime": null,
+    "voltage": "220V",
+    "material": "3.0mm精铁",
+    "productDimensions": "470×680×700",
+    "tier": "基础",
+    "sort_order": 0,
+    "is_home_core": false,
+    "relatedProducts": null,
+    "images": [
+      {
+        "filePath": "/assets/images/products/G30D1A_112.webp",
+        "isPrimary": true,
+        "sortOrder": 111
+      }
+    ],
+    "isActive": true
+  },
+  {
+    "category": "台式",
+    "subCategory": null,
+    "model": "G36D1A",
+    "name": "简易台式滚筒炒菜机 （电磁款）",
+    "specifications": "配锅尺寸（mm） : φ360*360；炒菜重量：约5kg；配锅容量：3L-17L",
+    "status": "在售",
+    "is_active": true,
+    "badge": null,
+    "badgeColor": null,
+    "power": "8kW",
+    "throughput": "约5kg ◆配锅容量：3L-17L",
+    "averageTime": null,
+    "voltage": "380V",
+    "material": "2.5mm精铁",
+    "productDimensions": "530×680×770",
+    "tier": "基础",
+    "sort_order": 0,
+    "is_home_core": false,
+    "relatedProducts": null,
+    "images": [
+      {
+        "filePath": "/assets/images/products/G36D1A_118.webp",
+        "isPrimary": true,
+        "sortOrder": 117
+      }
+    ],
+    "isActive": true
+  },
+  {
+    "category": "台式",
+    "subCategory": null,
+    "model": "G30D1R",
+    "name": "简易台式滚簡炒菜机 （燃气款）",
+    "specifications": "配锅尺寸（mm） : φ300*300；炒菜重量：约2.5kg；配锅容量：1.5L-9.3L；燃气类型：液化气/天然气；热负荷：17.6kW",
+    "status": "在售",
+    "is_active": true,
+    "badge": null,
+    "badgeColor": null,
+    "power": "100W",
+    "throughput": "1.5L-9.3L",
+    "averageTime": null,
+    "voltage": "220V",
+    "material": "3.0mm精铁",
+    "productDimensions": "490×690×700",
+    "tier": "基础",
+    "sort_order": 0,
+    "is_home_core": false,
+    "relatedProducts": null,
+    "images": [
+      {
+        "filePath": "/assets/images/products/G30D1R_113.webp",
+        "isPrimary": true,
+        "sortOrder": 112
+      }
+    ],
+    "isActive": true
+  },
+  {
+    "category": "台式",
+    "subCategory": null,
+    "model": "G36D1R",
+    "name": "简易台式滚筒炒菜机 （燃气款）",
+    "specifications": "额定电压：220V；电功率：100W；配锅尺寸：φ360*360；锅体材质：2.5mm精铁；炒菜重量：约5kg；配锅容量：3L-17L；燃气类型：液化气/天然气；热负荷：17.6kW",
+    "status": "在售",
+    "is_active": true,
+    "badge": null,
+    "badgeColor": null,
+    "power": "100W",
+    "throughput": "约5kg ◆配锅容量：3L-17L ◆燃气类型:液化气/天然气 ◆热负荷： 17.6kW",
+    "averageTime": null,
+    "voltage": "220V",
+    "material": "2.5mm精铁",
+    "productDimensions": "550×680×800",
+    "tier": "基础",
+    "sort_order": 0,
+    "is_home_core": false,
+    "relatedProducts": null,
+    "images": [
+      {
+        "filePath": "/assets/images/products/G36D1R_119.webp",
+        "isPrimary": true,
+        "sortOrder": 118
+      }
+    ],
+    "isActive": true
+  },
+  {
+    "category": "台式",
+    "subCategory": null,
+    "model": "DLB-TGD30",
+    "name": "台式300智能电磁炒菜机 （电动）",
+    "specifications": "锅体规格：直桶形Φ300*H300；炒菜容量：4-6L（倾角30 °有效容量）；锅倾角度：无极多角度电动翻锅；自动倒菜；翻炒方式：360 °滚筒旋转立体翻炒加热；火力和翻炒速度：多档位可调节；清洗：高压水枪清洗，快捷高效",
+    "status": "在售",
+    "is_active": true,
+    "badge": null,
+    "badgeColor": null,
+    "power": "5kW",
+    "throughput": "4-6L",
+    "averageTime": null,
+    "voltage": "220V",
+    "material": "SUS409不锈钢不粘锅；铸铁锅",
+    "productDimensions": "580×500×650/750",
+    "tier": "基础",
+    "sort_order": 0,
+    "is_home_core": false,
+    "relatedProducts": null,
+    "images": [
+      {
+        "filePath": "/assets/images/products/DLB-TGD30_hires.webp",
+        "isPrimary": true,
+        "sortOrder": 0
+      },
+      {
+        "filePath": "/assets/images/products/DLB-TGD30_11.webp",
+        "isPrimary": false,
+        "sortOrder": 10
+      }
+    ],
+    "isActive": true
+  },
+  {
+    "category": "台式",
+    "subCategory": null,
+    "model": "DLB-TGD36",
+    "name": "台式360智能电磁炒菜机 （电动）",
+    "specifications": "锅体规格：直桶形Φ360*H360；炒菜容量：12L（倾角30 °有效容量）；锅体材质：SUS409不锈钢不粘锅；配置：多功能数码显示屏，8道菜谱记忆存储；锅倾角度：无极多角度电动翻锅，自动倒菜；翻炒方式：采用360 °滚筒旋转立体翻炒加热；火力和翻炒速度：多档位可调节；清洗：高压水枪清洗，快捷高效",
+    "status": "在售",
+    "is_active": true,
+    "badge": null,
+    "badgeColor": null,
+    "power": "5kW",
+    "throughput": "12L",
+    "averageTime": null,
+    "voltage": "220V",
+    "material": "SUS409不锈钢不粘锅",
+    "productDimensions": "640×550×710/820",
+    "tier": "基础",
+    "sort_order": 0,
+    "is_home_core": false,
+    "relatedProducts": null,
+    "images": [
+      {
+        "filePath": "/assets/images/products/DLB-TGD36_hires.webp",
+        "isPrimary": true,
+        "sortOrder": 0
+      },
+      {
+        "filePath": "/assets/images/products/DLB-TGD36_13.webp",
+        "isPrimary": false,
+        "sortOrder": 12
+      }
+    ],
+    "isActive": true
+  },
+  {
+    "category": "台式",
+    "subCategory": null,
+    "model": "DLB-TGD40",
+    "name": "台式400智能电磁炒菜机 （电动）",
+    "specifications": "锅体规格：仿球釜型锅体内直径Φ380；炒菜容量：12L（倾角30 °有效容量）；配置：多功能数码显示屏，8道菜谱记忆存储；锅倾角度：无极多角度电动翻锅，自动倒菜；翻炒方式：采用360 °滚筒旋转立体翻炒加热；火力和翻炒速度：多档位可调节；清洗：高压水枪清洗，快捷高效",
+    "status": "在售",
+    "is_active": true,
+    "badge": null,
+    "badgeColor": null,
+    "power": "8-10kW",
+    "throughput": "12L",
+    "averageTime": null,
+    "voltage": "380V",
+    "material": "SUS409不锈钢不粘锅；铸铁锅",
+    "productDimensions": "720×650×700/850",
+    "tier": "基础",
+    "sort_order": 0,
+    "is_home_core": false,
+    "relatedProducts": null,
+    "images": [
+      {
+        "filePath": "/assets/images/products/DLB-TGD40_hires.webp",
+        "isPrimary": true,
+        "sortOrder": 0
+      },
+      {
+        "filePath": "/assets/images/products/DLB-TGD40_15.webp",
+        "isPrimary": false,
+        "sortOrder": 14
+      }
+    ],
+    "isActive": true
+  },
+  {
+    "category": "台式",
+    "subCategory": null,
+    "model": "DLB-TGQ30J",
+    "name": "台式300智能电磁炒菜机 （触屏800）",
+    "specifications": "锅体规格：直桶形Φ300*H300；显示屏：7寸多功能触模显示屏；锅倾角度：无极多角度电动翻锅；翻炒方式：360 °滚筒旋转立体翻炒加热；火力和翻炒速度：多档位可调节；菜谱：可存储800个菜谱（智能学习功能）；语音：智能实时语音播报功能；清洗：高压水枪清洗，快捷高效",
+    "status": "在售",
+    "is_active": true,
+    "badge": null,
+    "badgeColor": null,
+    "power": "5kW",
+    "throughput": "4-6L",
+    "averageTime": null,
+    "voltage": "220V",
+    "material": "SUS409不锈钢不粘锅；铸铁锅",
+    "productDimensions": "610×500×650mm；750mm",
+    "tier": "智能",
+    "sort_order": 0,
+    "is_home_core": false,
+    "relatedProducts": null,
+    "images": [
+      {
+        "filePath": "/assets/images/products/DLB-TGQ30J_16.webp",
+        "isPrimary": true,
+        "sortOrder": 15
+      }
+    ],
+    "isActive": true
+  },
+  {
+    "category": "台式",
+    "subCategory": null,
+    "model": "DLB-TGQ36J",
+    "name": "台式360智能电磁炒菜机 （触屏800）",
+    "specifications": "锅体规格：直桶形Φ360*H360；显示屏：7寸多功能触模显示屏；锅倾角度：无极多角度电动翻锅；翻炒方式：360 °滚筒旋转立体翻炒加热；火力和翻炒速度：多档位可调节；菜谱：可存储800个菜谱（智能学习功能）；语音：智能实时语音播报功能；清洗：高压水枪清洗，快捷高效",
+    "status": "在售",
+    "is_active": true,
+    "badge": null,
+    "badgeColor": null,
+    "power": "5kW",
+    "throughput": "12L",
+    "averageTime": null,
+    "voltage": "220V",
+    "material": "SUS409不锈钢不粘锅",
+    "productDimensions": "670×550×710/820",
+    "tier": "智能",
+    "sort_order": 0,
+    "is_home_core": false,
+    "relatedProducts": null,
+    "images": [
+      {
+        "filePath": "/assets/images/products/DLB-TGQ36J_18.webp",
+        "isPrimary": true,
+        "sortOrder": 17
+      }
+    ],
+    "isActive": true
+  },
+  {
+    "category": "台式",
+    "subCategory": null,
+    "model": "DLB-TGQ40J",
+    "name": "台式400智能电磁炒菜机 （触屏）",
+    "specifications": "锅体规格：仿球釜型锅体内直径Φ380；炒菜容量：12L（倾角30 °有效容量）；显示屏：7寸多功能触模显示屏；锅倾角度：无极多角度电动翻锅，自动倒菜；翻炒方式：采用360 °滚筒旋转立体翻炒加热；火力和翻炒速度：多档位可调节；菜谱：可存储800个菜谱（智能学习功能）；语音：智能实时语音播报功能；清洗：高压水枪清洗，快捷高效",
+    "status": "在售",
+    "is_active": true,
+    "badge": null,
+    "badgeColor": null,
+    "power": "8-10kW",
+    "throughput": "12L",
+    "averageTime": null,
+    "voltage": "380V",
+    "material": "SUS409不锈钢不粘锅；铸铁锅",
+    "productDimensions": "750×650×700；850",
+    "tier": "智能",
+    "sort_order": 0,
+    "is_home_core": false,
+    "relatedProducts": null,
+    "images": [
+      {
+        "filePath": "/assets/images/products/DLB-TGQ40J_20.webp",
+        "isPrimary": true,
+        "sortOrder": 19
+      }
+    ],
+    "isActive": true
+  },
+  {
+    "category": "台式",
+    "subCategory": null,
+    "model": "G30D1T",
+    "name": "智能台式滚筒炒菜机 （电磁新款）",
+    "specifications": "配锅尺寸(mm)：φ300*300；炒菜重量：约2.5kg；配锅容量：1.5L-9.3L；操作方式：触摸屏；锅体款式：圆底铁锅；一键自动炒菜；机器学习功能；菜谱功能；可菜谱编辑；语音提示",
+    "status": "在售",
+    "is_active": true,
+    "badge": null,
+    "badgeColor": null,
+    "power": "5kW",
+    "throughput": "1.5L-9.3L",
+    "averageTime": null,
+    "voltage": "220V",
+    "material": "3.0mm精铁",
+    "productDimensions": "600×600×600",
+    "tier": "智能",
+    "sort_order": 0,
+    "is_home_core": false,
+    "relatedProducts": null,
+    "images": [
+      {
+        "filePath": "/assets/images/products/G30D1T_116.webp",
+        "isPrimary": true,
+        "sortOrder": 115
+      }
+    ],
+    "isActive": true
+  },
+  {
+    "category": "落地式",
+    "subCategory": null,
+    "model": "DLB-GD30",
+    "name": "落地式300智能电磁炒菜 机（电动）",
+    "specifications": "材质：整机外壳不锈钢材质；锅体规格：球釜型锅Φ300*H300；炒菜容量：4-6L（倾角30 °有效容量）；配置：多功能数码显示屏，8道菜谱记忆存储；锅倾角度：无极多角度电动翻锅，自动倒菜；翻炒方式：采用360 °滚筒旋转立体翻炒加热；火力和翻炒速度：多档位可调节；清洗：高压水枪清洗，快捷高效",
+    "status": "在售",
+    "is_active": true,
+    "badge": null,
+    "badgeColor": null,
+    "power": "5kW",
+    "throughput": "4-6L",
+    "averageTime": null,
+    "voltage": "220V",
+    "material": "SUS409不锈钢不粘锅/铸铁锅",
+    "productDimensions": "550×800×1350；500×800×1350",
+    "tier": "基础",
+    "sort_order": 0,
+    "is_home_core": false,
+    "relatedProducts": null,
+    "images": [
+      {
+        "filePath": "/assets/images/products/DLB-GD30_hires.webp",
+        "isPrimary": true,
+        "sortOrder": 0
+      },
+      {
+        "filePath": "/assets/images/products/DLB-GD30_12.webp",
+        "isPrimary": false,
+        "sortOrder": 11
+      }
+    ],
+    "isActive": true
+  },
+  {
+    "category": "落地式",
+    "subCategory": null,
+    "model": "DLB-GD36",
+    "name": "落地式360智能电磁炒菜 机（电动）",
+    "specifications": "材质：整机外壳不锈钢材质；锅体规格：球釜型锅Φ360*H360；炒菜容量：12L（倾角30 °有效容量）；锅体材质：SUS409不锈钢不粘锅；配置：多功能数码显示屏，8道菜谱记忆存储；锅倾角度：无极多角度电动翻锅，自动倒菜；翻炒方式：采用360 °滚筒旋转立体翻炒加热；火力和翻炒速度：多档位可调节；清洗：高压水枪清洗，快捷高效",
+    "status": "在售",
+    "is_active": true,
+    "badge": null,
+    "badgeColor": null,
+    "power": "5kW",
+    "throughput": "12L",
+    "averageTime": null,
+    "voltage": "220V",
+    "material": "SUS409不锈钢不粘锅",
+    "productDimensions": "560×900×1450mm",
+    "tier": "基础",
+    "sort_order": 0,
+    "is_home_core": false,
+    "relatedProducts": null,
+    "images": [
+      {
+        "filePath": "/assets/images/products/DLB-GD36_hires.webp",
+        "isPrimary": true,
+        "sortOrder": 0
+      },
+      {
+        "filePath": "/assets/images/products/DLB-GD36_14.webp",
+        "isPrimary": false,
+        "sortOrder": 13
+      }
+    ],
+    "isActive": true
+  },
+  {
+    "category": "落地式",
+    "subCategory": null,
+    "model": "DLB-GQ30J",
+    "name": "落地式300智能电磁炒菜 机（触屏800）",
+    "specifications": "整机外壳不锈钢材质；锅体规格：球釜型锅Φ300*H300；炒菜容量：4-6L（倾角30 °有效容量）；显示屏：7寸多功能触模显示屏；锅倾角度：无极多角度电动翻锅，自动倒菜；翻炒方式：采用360 °滚筒旋转立体翻炒加热；火力和翻炒速度：多档位可调节；菜谱：可存储800个菜谱（智能学习功能）；语音：智能实时语音播报功能；清洗：高压水枪清洗，快捷高效",
+    "status": "在售",
+    "is_active": true,
+    "badge": null,
+    "badgeColor": null,
+    "power": "5kW",
+    "throughput": "4-6L",
+    "averageTime": null,
+    "voltage": "220V",
+    "material": "SUS409不锈钢不粘锅/铸铁锅",
+    "productDimensions": "580×800×1350mm",
+    "tier": "智能",
+    "sort_order": 0,
+    "is_home_core": false,
+    "relatedProducts": null,
+    "images": [
+      {
+        "filePath": "/assets/images/products/DLB-GQ30J_17.webp",
+        "isPrimary": true,
+        "sortOrder": 16
+      }
+    ],
+    "isActive": true
+  },
+  {
+    "category": "落地式",
+    "subCategory": null,
+    "model": "DLB-GQ36J",
+    "name": "落地式360智能电磁炒菜 机（触屏800）",
+    "specifications": "整机外壳不锈钢材质；锅体规格：球釜型锅Φ360*H360；炒菜容量：12L（倾角30 °有效容量）；显示屏：7寸多功能触模显示屏；锅倾角度：无极多角度电动翻锅，自动倒菜；翻炒方式：采用360 °滚筒旋转立体翻炒加热；火力和翻炒速度：多档位可调节；菜谱：可存储800个菜谱（智能学习功能）；语音：智能实时语音播报功能；清洗：高压水枪清洗，快捷高效",
+    "status": "在售",
+    "is_active": true,
+    "badge": null,
+    "badgeColor": null,
+    "power": "9kW",
+    "throughput": "12L",
+    "averageTime": null,
+    "voltage": "380V",
+    "material": "SUS409不锈钢不粘锅",
+    "productDimensions": "640×900×1450mm",
+    "tier": "智能",
+    "sort_order": 0,
+    "is_home_core": false,
+    "relatedProducts": null,
+    "images": [
+      {
+        "filePath": "/assets/images/products/DLB-GQ36J_19.webp",
+        "isPrimary": true,
+        "sortOrder": 18
+      }
+    ],
+    "isActive": true
+  },
+  {
+    "category": "落地式",
+    "subCategory": null,
+    "model": "G26DAG",
+    "name": "智能立式滚筒炒菜机 （电磁款）",
+    "specifications": "配锅尺寸（mm） : φ260*280；炒菜重量：约1.8kg；配锅容量：1L-6.4L；操作方式：全自动；调料盒容量：5L*3；自动调料功能：三路液态；一键自动炒菜；机器学习功能；菜谱功能；可菜谱编辑；语音提示；温控功能",
+    "status": "在售",
+    "is_active": true,
+    "badge": null,
+    "badgeColor": null,
+    "power": "5kW",
+    "throughput": "1L-6.4L",
+    "averageTime": null,
+    "voltage": "220V",
+    "material": "2.5mm精铁",
+    "productDimensions": "550×800×(800+580)",
+    "tier": "智能",
+    "sort_order": 0,
+    "is_home_core": false,
+    "relatedProducts": null,
+    "images": [
+      {
+        "filePath": "/assets/images/products/G26DAG_122.webp",
+        "isPrimary": true,
+        "sortOrder": 121
+      }
+    ],
+    "isActive": true
+  },
+  {
+    "category": "落地式",
+    "subCategory": null,
+    "model": "G30DAG",
+    "name": "智能立式滚筒炒菜机 （电磁款）",
+    "specifications": "配锅尺寸：φ300*300；炒菜重量：约2.5kg；配钢容量：1.5L-9.3L；操作方式：全自动；调料盒容量：5L*3；自动调料功能：三路液态；一键自动炒菜；机器学习功能；菜谱功能；可菜谱编辑；语音提示；温控功能",
+    "status": "在售",
+    "is_active": true,
+    "badge": null,
+    "badgeColor": null,
+    "power": "5kW",
+    "throughput": "约2.5kg ◆配钢容量： 1.5L-9.3L ◆操作方式：全自动 ◆调料盒容量：5L*3 ◆自动调料功能：三路液态 ◆一键自动炒菜、机器学习功能、菜谱功能、可菜谱编辑、语音提示、温控功能",
+    "averageTime": null,
+    "voltage": "220V",
+    "material": "3.0mm精铁",
+    "productDimensions": "550×800×(800+580)",
+    "tier": "智能",
+    "sort_order": 0,
+    "is_home_core": false,
+    "relatedProducts": null,
+    "images": [
+      {
+        "filePath": "/assets/images/products/G30DAG_124.webp",
+        "isPrimary": true,
+        "sortOrder": 123
+      }
+    ],
+    "isActive": true
+  },
+  {
+    "category": "落地式",
+    "subCategory": null,
+    "model": "G36DAG",
+    "name": "智能立式滚筒炒菜机 （电磁款）",
+    "specifications": "配锅尺寸：φ360*360；炒菜重量：约5kg；配钢容量：3L-17L；操作方式：全自动；调料盒容量：5L*3；自动调料功能：三路液态；一键自动炒菜；机器学习功能；菜谱功能；可菜谱编辑；语音提示；温控功能",
+    "status": "在售",
+    "is_active": true,
+    "badge": null,
+    "badgeColor": null,
+    "power": "8kW",
+    "throughput": "约5kg ◆配钢容量： 3L-17L ◆操作方式：全自动 ◆调料盒容量：5L*3 ◆自动调料功能：三路液态 ◆一键自动炒菜、机器学习功能、菜谱功能、可菜谱编辑、语音提示、温控功能",
+    "averageTime": null,
+    "voltage": "380V",
+    "material": "2.5mm精铁",
+    "productDimensions": "610×800×(800+610)",
+    "tier": "智能",
+    "sort_order": 0,
+    "is_home_core": false,
+    "relatedProducts": null,
+    "images": [
+      {
+        "filePath": "/assets/images/products/G36DAG_126.webp",
+        "isPrimary": true,
+        "sortOrder": 125
+      }
+    ],
+    "isActive": true
+  },
+  {
+    "category": "落地式",
+    "subCategory": null,
+    "model": "G26DAS",
+    "name": "智能立式滚筒炒菜机 （燃气款）",
+    "specifications": "配锅尺寸（mm） : φ260*280；炒菜重量：约1.8kg；配锅容量：1L-6.4L；操作方式：全自动；调料盒容量：5L*3；自动调料功能：三路液态；一键自动炒菜、机器学习功能、菜谱功能、可菜谱编辑、语音提示、温控功能",
+    "status": "在售",
+    "is_active": true,
+    "badge": null,
+    "badgeColor": null,
+    "power": "100W",
+    "throughput": "1L-6.4L",
+    "averageTime": null,
+    "voltage": "220V",
+    "material": "2.5mm精铁",
+    "productDimensions": "550×800×(800+580)",
+    "tier": "智能",
+    "sort_order": 0,
+    "is_home_core": false,
+    "relatedProducts": null,
+    "images": [
+      {
+        "filePath": "/assets/images/products/G26DAS_123.webp",
+        "isPrimary": true,
+        "sortOrder": 122
+      }
+    ],
+    "isActive": true
+  },
+  {
+    "category": "落地式",
+    "subCategory": null,
+    "model": "G30DAS",
+    "name": "智能立式滚筒炒菜机 （燃气款）",
+    "specifications": "配锅尺寸：φ300*300；炒菜重量：约2.5kg；配钢容量：1.5L-9.3L；操作方式：全自动；调料盒容量：5L*3；自动调料功能：三路液态；一键自动炒菜；机器学习功能；菜谱功能；可菜谱编辑；语音提示；温控功能",
+    "status": "在售",
+    "is_active": true,
+    "badge": null,
+    "badgeColor": null,
+    "power": "100W",
+    "throughput": "约2.5kg ◆配钢容量： 1.5L-9.3L ◆操作方式：全自动 ◆调料盒容量：5L*3 ◆自动调料功能：三路液态 ◆一键自动炒菜、机器学习功能、菜谱功能、可菜谱编辑、语音提示、温控功能",
+    "averageTime": null,
+    "voltage": "220V",
+    "material": "3.0mm精铁",
+    "productDimensions": "550×800×(800+580)",
+    "tier": "智能",
+    "sort_order": 0,
+    "is_home_core": false,
+    "relatedProducts": null,
+    "images": [
+      {
+        "filePath": "/assets/images/products/G30DAS_125.webp",
+        "isPrimary": true,
+        "sortOrder": 124
+      }
+    ],
+    "isActive": true
+  },
+  {
+    "category": "落地式",
+    "subCategory": null,
+    "model": "G36DAS",
+    "name": "智能立式滚筒炒菜机 （燃气款）",
+    "specifications": "额定电压 : 220V；额定功率：100W；配锅尺寸（mm） : φ360*360；锅体材质：2.5mm精铁；炒菜重量：约5kg；配钢容量： 3L-17L；操作方式：全自动；调料盒容量：5L*3；自动调料功能：三路液态；一键自动炒菜、机器学习功能、菜谱功能、可菜谱编辑、语音提示、温控功能",
+    "status": "在售",
+    "is_active": true,
+    "badge": null,
+    "badgeColor": null,
+    "power": "100W",
+    "throughput": "约5kg ◆配钢容量： 3L-17L ◆操作方式：全自动 ◆调料盒容量：5L*3 ◆自动调料功能：三路液态 ◆一键自动炒菜、机器学习功能、菜谱功能、可菜谱编辑、语音提示、温控功能",
+    "averageTime": null,
+    "voltage": "220V",
+    "material": "2.5mm精铁",
+    "productDimensions": "610×840×(800+660)",
+    "tier": "智能",
+    "sort_order": 0,
+    "is_home_core": false,
+    "relatedProducts": null,
+    "images": [
+      {
+        "filePath": "/assets/images/products/G36DAS_127.webp",
+        "isPrimary": true,
+        "sortOrder": 126
+      }
+    ],
+    "isActive": true
+  },
+  {
+    "category": "台式",
+    "subCategory": null,
+    "model": "DLB-TGQ30",
+    "name": "台式300智能电磁炒菜机 （触屏+喷料）",
+    "specifications": "锅体规格：直桶型或球釜型锅Φ300*H300；炒菜容量：4-6L（倾角30 °有效容量）；显示屏：7寸多功能触模显示屏；翻锅方式：电控翻锅（无极多角度）；安全防护：带急停功能；菜单：存储800个菜谱（智能学习功能）；语音：智能实时语音播报功能；喷料：带3/4路自动喷料口；自动定量加料；储料仓：左侧箱体上部可开盖存储液体味料；接料盘：接料台+排水池+可提冲孔隔渣网；清洗：一键式自动清洗，水枪辅助清洗",
+    "status": "在售",
+    "is_active": true,
+    "badge": null,
+    "badgeColor": null,
+    "power": "5kW",
+    "throughput": "4-6L",
+    "averageTime": null,
+    "voltage": "220V",
+    "material": "SUS409不锈钢不粘锅",
+    "productDimensions": "750×720×750；750×910×870",
+    "tier": "全智能",
+    "sort_order": 0,
+    "is_home_core": false,
+    "relatedProducts": null,
+    "images": [
+      {
+        "filePath": "/assets/images/products/DLB-TGQ30_21.webp",
+        "isPrimary": true,
+        "sortOrder": 20
+      }
+    ],
+    "isActive": true
+  },
+  {
+    "category": "落地式",
+    "subCategory": null,
+    "model": "DLB-GQ30",
+    "name": "落地式300智能电磁炒菜 机（触屏+喷料）",
+    "specifications": "锅体规格：球釜型锅Φ300*H300；显示屏：7寸多功能触模显示屏；翻锅方式：电控翻锅（无极多角度）；安全防护：带急停功能；菜单：存储800个菜谱（智能学习功能）；语音：智能实时语音播报功能；喷料：带5路自动喷料口；自动定量加料；储料仓：箱体可开门存储液体味料；接料盘：接料台+排水池+可提冲孔隔渣网；清洗：一键式自动清洗模式，水枪辅助清洗",
+    "status": "在售",
+    "is_active": true,
+    "badge": null,
+    "badgeColor": null,
+    "power": "5kW",
+    "throughput": "4-6L",
+    "averageTime": null,
+    "voltage": "220V",
+    "material": "SUS409不锈钢不粘锅",
+    "productDimensions": "700×800×1350mm",
+    "tier": "全智能",
+    "sort_order": 0,
+    "is_home_core": false,
+    "relatedProducts": null,
+    "images": [
+      {
+        "filePath": "/assets/images/products/DLB-GQ30_22.webp",
+        "isPrimary": true,
+        "sortOrder": 21
+      }
+    ],
+    "isActive": true
+  },
+  {
+    "category": "落地式",
+    "subCategory": null,
+    "model": "DLB-GQ36",
+    "name": "落地式360智能电磁炒菜 机（触屏+喷料）",
+    "specifications": "整机外壳不锈钢材质；锅体规格：球釜型锅Φ360*H360；炒菜容量：12L（倾角30 °有效容量）；显示屏：7寸多功能触模显示屏；翻锅方式：电控翻锅（无极多角度）；安全防护：带急停功能；菜单：存储800个菜谱（智能学习功能）；语音：智能实时语音播报功能；喷料：带4路自动喷料口；自动定量加料；储料仓：箱体可开门存储液体味料；接料盘：接料台+排水池+可提冲孔隔渣网；清洗：一键式自动清洗模式，水枪辅助清洗",
+    "status": "在售",
+    "is_active": true,
+    "badge": null,
+    "badgeColor": null,
+    "power": "9kW",
+    "throughput": "12L",
+    "averageTime": null,
+    "voltage": "380V",
+    "material": "SUS409不锈钢不粘锅",
+    "productDimensions": "720×910×1420mm",
+    "tier": "全智能",
+    "sort_order": 0,
+    "is_home_core": false,
+    "relatedProducts": null,
+    "images": [
+      {
+        "filePath": "/assets/images/products/DLB-GQ36_23.webp",
+        "isPrimary": true,
+        "sortOrder": 22
+      }
+    ],
+    "isActive": true
+  },
+  {
+    "category": "落地式",
+    "subCategory": null,
+    "model": "DLB-GQ30T",
+    "name": "300智能电磁炒菜机 （自动投料+喷料）",
+    "specifications": "锅体规格：球釜型锅Φ300*H300；显示屏：7寸多功能触模显示屏；翻锅方式：电控翻锅（无极多角度）；安全防护：带急停功能；菜单：存储800个菜谱（智能学习功能）；语音：智能实时语音播报功能；喷料：带4路自动喷料口；自动定量加料；投料：一组共4个投料盒；接料盘：接料台+排水池+可提冲孔隔渣网；清洗：一键式自动清洗模式，水枪辅助清洗",
+    "status": "在售",
+    "is_active": true,
+    "badge": null,
+    "badgeColor": null,
+    "power": "5kW",
+    "throughput": "4-6L",
+    "averageTime": null,
+    "voltage": "220V",
+    "material": "铁锅；SUS430不锈钢不粘锅",
+    "productDimensions": "700×830×1410mm",
+    "tier": "全智能",
+    "sort_order": 0,
+    "is_home_core": false,
+    "relatedProducts": null,
+    "images": [
+      {
+        "filePath": "/assets/images/products/DLB-GQ30T_24.webp",
+        "isPrimary": true,
+        "sortOrder": 23
+      }
+    ],
+    "isActive": true
+  },
+  {
+    "category": "落地式",
+    "subCategory": null,
+    "model": "DLB-GQ35T",
+    "name": "350智能电磁炒菜机 （自动投料 +喷料）",
+    "specifications": "整机外壳不锈钢材质；锅体规格：球釜型锅Φ350*H350；炒菜容量：6-12L（倾角30 °有效容量）；显示屏：10寸多功能触模显示屏；翻锅方式：电控翻锅（无极多角度）；安全防护：带急停功能；菜单：存储800个菜谱（智能学习功能）；语音：智能实时语音播报功能；喷料：带4-6路自动喷料口；自动定量加料；投料：4+1投料盒组合；自动投放；接料盘：接料台+排水池+可提冲孔隔渣网；清洗：一键式自动清洗模式；水枪辅助清洗",
+    "status": "在售",
+    "is_active": true,
+    "badge": null,
+    "badgeColor": null,
+    "power": "9kW",
+    "throughput": "6-12L",
+    "averageTime": null,
+    "voltage": "380V",
+    "material": "铁锅；SUS430不锈钢不粘锅",
+    "productDimensions": "1080×950×1450mm",
+    "tier": "全智能",
+    "sort_order": 0,
+    "is_home_core": false,
+    "relatedProducts": null,
+    "images": [
+      {
+        "filePath": "/assets/images/products/DLB-GQ35T_25.webp",
+        "isPrimary": true,
+        "sortOrder": 24
+      }
+    ],
+    "isActive": true
+  },
+  {
+    "category": "落地式",
+    "subCategory": null,
+    "model": "J40CBB",
+    "name": "全自动智能炒菜机",
+    "specifications": "额定电压 : 380V3P+N；额定功率：8-12kw；配锅尺寸（mm） : φ400*200mm(无涂层)；锅体材质：1.5mm铁锅；炒菜重量：2kg；配钢容量：3L-17L；操作方式：全自动；调料盒容量：4路(1.7升)；固体调料:3路(450ml)；液体调料:共8路 4路(4.5L)、1路(9升)、1路猪油(6升)、1路勾芡(300ml)、1路自来水；自动加菜；自动加调料；自动翻炒；自动洗锅；移动端物联网平台语音提示",
+    "status": "在售",
+    "is_active": true,
+    "badge": null,
+    "badgeColor": null,
+    "power": "8-12kw",
+    "throughput": "2kg",
+    "averageTime": null,
+    "voltage": "380V",
+    "material": "1.5mm铁锅",
+    "productDimensions": "700×800×1380mm",
+    "tier": "全智能",
+    "sort_order": 0,
+    "is_home_core": false,
+    "relatedProducts": null,
+    "images": [
+      {
+        "filePath": "/assets/images/products/J40CBB_128.webp",
+        "isPrimary": true,
+        "sortOrder": 127
+      }
+    ],
+    "isActive": true
+  },
+  {
+    "category": "台式",
+    "subCategory": null,
+    "model": "DLB-TGQ40",
+    "name": "台式400智能电磁炒菜机 （触屏+喷料）",
+    "specifications": "锅体规格：仿球釜型锅体内直径Φ380；炒菜容量：12L（倾角30 °有效容量）；显示屏：7寸多功能触模显示屏；翻锅方式：电控翻锅（无极多角度）；安全防护：带急停功能；菜单：存储800个菜谱（智能学习功能）；语音：智能实时语音播报功能；喷料：带3/4路自动喷料口；自动定量加料；储料仓：左侧箱体上部可开盖存储液体味料；接料盘：接料台+排水池+可提冲孔隔渣网；清洗：一键式自动清洗，水枪辅助清洗",
+    "status": "在售",
+    "is_active": true,
+    "badge": null,
+    "badgeColor": null,
+    "power": "8-10kW",
+    "throughput": "12L",
+    "averageTime": null,
+    "voltage": "380V",
+    "material": "SUS409不锈钢不粘锅/铸铁锅",
+    "productDimensions": "800×820×790mm",
+    "tier": "全智能",
+    "sort_order": 0,
+    "is_home_core": false,
+    "relatedProducts": null,
+    "images": [
+      {
+        "filePath": "/assets/images/products/DLB-TGQ40_27.webp",
+        "isPrimary": true,
+        "sortOrder": 26
+      }
+    ],
+    "isActive": true
+  },
+  {
+    "category": "落地式",
+    "subCategory": null,
+    "model": "DLB-GC50",
+    "name": "座地式500电磁炒菜机 （语音菜单）",
+    "specifications": "整机外壳不锈钢材质；锅体规格：仿球釜型锅体Φ480；炒菜容量：3-10kg/锅；显示屏：7寸多功能触模显示屏；翻锅方式：电控翻锅（无极多角度）；安全防护：带急停功能；菜单：存储800个菜谱（智能学习功能）；语音：智能实时语音播报功能；接料盘：接料台+排水池+可提冲孔隔渣网；清洗：一键式自动清洗模式，水枪辅助清洗",
+    "status": "在售",
+    "is_active": true,
+    "badge": null,
+    "badgeColor": null,
+    "power": "15-20kW",
+    "throughput": "3-10kg/锅",
+    "averageTime": null,
+    "voltage": "380V",
+    "material": "SUS430不锈钢不粘锅",
+    "productDimensions": "900×1320×1130mm；900×1320×1390mm",
+    "tier": "智能",
+    "sort_order": 0,
+    "is_home_core": false,
+    "relatedProducts": null,
+    "images": [
+      {
+        "filePath": "/assets/images/products/DLB-GC50_29.webp",
+        "isPrimary": true,
+        "sortOrder": 28
+      }
+    ],
+    "isActive": true
+  },
+  {
+    "category": "落地式",
+    "subCategory": null,
+    "model": "DLB-GC60",
+    "name": "座地式600电磁炒菜机 （触屏语音菜单）",
+    "specifications": "滚筒：Φ600*H600mm；滚筒炒菜容量：10-20kg/T；滚筒材质：430#不锈钢/选装不粘锅；显示屏：7寸多功能触模显示屏；翻锅方式：电控翻锅；安全防护：带急停功能；测温：红外线监测温度；菜单：存储800个菜谱（智能学习功能）；语音：智能实时语音播报功能；清洁喷枪：优质高压喷枪（配2米软管）",
+    "status": "在售",
+    "is_active": true,
+    "badge": null,
+    "badgeColor": null,
+    "power": "25kW",
+    "throughput": "10-20kg/T",
+    "averageTime": null,
+    "voltage": "380V",
+    "material": "优质不锈钢；430#不锈钢/选装不粘锅",
+    "productDimensions": "1300×950×1380mm",
+    "tier": "智能",
+    "sort_order": 0,
+    "is_home_core": false,
+    "relatedProducts": null,
+    "images": [
+      {
+        "filePath": "/assets/images/products/DLB-GC60_31.webp",
+        "isPrimary": true,
+        "sortOrder": 30
+      }
+    ],
+    "isActive": true
+  },
+  {
+    "category": "落地式",
+    "subCategory": null,
+    "model": "DLB-GC70",
+    "name": "座地式700电磁炒菜机 （触屏语音菜单）",
+    "specifications": "滚筒：Φ700*H700mm；滚筒炒菜容量：15-30kg/T；滚筒材质：430#不锈钢选装不粘锅；显示屏：7寸多功能触模显示屏；翻锅方式：电控翻锅；安全防护：带急停功能；测温：红外线监测温度；菜单：存储800个菜谱（智能学习功能）；语音：智能实时语音播报功能；清洁喷枪：优质高压喷枪（配2米软管）",
+    "status": "在售",
+    "is_active": true,
+    "badge": null,
+    "badgeColor": null,
+    "power": "30kW",
+    "throughput": "15-30kg/T",
+    "averageTime": null,
+    "voltage": "380V",
+    "material": "优质不锈钢；430#不锈钢",
+    "productDimensions": "1400×1050×1500mm；1400×1140×1760mm",
+    "tier": "智能",
+    "sort_order": 0,
+    "is_home_core": false,
+    "relatedProducts": null,
+    "images": [
+      {
+        "filePath": "/assets/images/products/DLB-GC70_33.webp",
+        "isPrimary": true,
+        "sortOrder": 32
+      }
+    ],
+    "isActive": true
+  },
+  {
+    "category": "落地式",
+    "subCategory": null,
+    "model": "DLB-GQ70",
+    "name": "座地式700电磁炒菜机（语音菜单+自动 摆臂喷料）",
+    "specifications": "滚筒：仿球釜型锅体内直径Φ680mm；滚筒炒菜容量：15-30kg/T；滚筒材质：430#不锈钢选装不粘锅；显示屏：10寸多功能触模显示屏；翻锅方式：电控翻锅；安全防护：带急停功能；测温：红外线监测温度；菜单：存储800个菜谱（智能学习功能）；语音：智能实时语音播报功能；喷料：自动摆臂四路喷料；接料盘：接料台+排水池+可提冲孔隔渣网；清洗：一键式自动清洗，水枪辅助清洗；清洁喷枪：优质高压喷枪（配2米软管）",
+    "status": "在售",
+    "is_active": true,
+    "badge": null,
+    "badgeColor": null,
+    "power": "30kW",
+    "throughput": "15-30kg/T",
+    "averageTime": null,
+    "voltage": "380V",
+    "material": "优质不锈钢；430#不锈钢",
+    "productDimensions": "1100×1220×1350mm；1250×1050×1470mm",
+    "tier": "全智能",
+    "sort_order": 0,
+    "is_home_core": false,
+    "relatedProducts": null,
+    "images": [
+      {
+        "filePath": "/assets/images/products/DLB-GQ70_35.webp",
+        "isPrimary": true,
+        "sortOrder": 34
+      }
+    ],
+    "isActive": true
+  },
+  {
+    "category": "落地式",
+    "subCategory": null,
+    "model": "DLB-GC80",
+    "name": "座地式800电磁炒菜机（触屏语音菜单）",
+    "specifications": "滚筒： Φ800*H800mm；滚筒炒菜容量：20-50kg/T；滚筒材质：430#不锈钢选装不粘锅；显示屏：7寸多功能触模显示屏；翻锅方式：电控翻锅；安全防护：带急停功能；测温：红外线监测温度；菜单：存储800个菜谱（智能学习功能）；语音：智能实时语音播报功能；清洁喷枪：优质高压喷枪（配2米软管）",
+    "status": "在售",
+    "is_active": true,
+    "badge": null,
+    "badgeColor": null,
+    "power": "35kW",
+    "throughput": "20-50kg/T",
+    "averageTime": null,
+    "voltage": "380V",
+    "material": "优质不锈钢；430#不锈钢",
+    "productDimensions": "1500×1150×1600mm；1500×1270×1890mm",
+    "tier": "智能",
+    "sort_order": 0,
+    "is_home_core": false,
+    "relatedProducts": null,
+    "images": [
+      {
+        "filePath": "/assets/images/products/DLB-GC80_36.webp",
+        "isPrimary": true,
+        "sortOrder": 35
+      }
+    ],
+    "isActive": true
+  },
+  {
+    "category": "落地式",
+    "subCategory": null,
+    "model": "DLB-GC90",
+    "name": "座地式900电磁炒菜机 （触屏语音菜单）",
+    "specifications": "滚筒： Φ900*H900mm；滚筒炒菜容量：30-80kg/T；滚筒材质：430#不锈钢选装不粘锅；显示屏：7寸多功能触模显示屏；翻锅方式：电控翻锅；安全防护：带急停功能；测温：红外线监测温度；菜单：存储800个菜谱（智能学习功能）；语音：智能实时语音播报功能；清洁喷枪：优质高压喷枪（配2米软管）",
+    "status": "在售",
+    "is_active": true,
+    "badge": null,
+    "badgeColor": null,
+    "power": "40kW",
+    "throughput": "30-80kg/T",
+    "averageTime": null,
+    "voltage": "380V",
+    "material": "优质不锈钢；430#不锈钢不粘锅",
+    "productDimensions": "1600×1250×1720mm",
+    "tier": "智能",
+    "sort_order": 0,
+    "is_home_core": false,
+    "relatedProducts": null,
+    "images": [
+      {
+        "filePath": "/assets/images/products/DLB-GC90_38.webp",
+        "isPrimary": true,
+        "sortOrder": 37
+      }
+    ],
+    "isActive": true
+  },
+  {
+    "category": "落地式",
+    "subCategory": null,
+    "model": "电磁：DLB-GQ40燃气：DLB-GQ40R",
+    "name": "单边座地式400电磁炒菜 机（触屏+自动摆臂喷 料）",
+    "specifications": "锅体规格：仿球釜型锅体Φ380；显示屏：7寸多功能触模显示屏；翻锅方式：电控翻锅（无极多角度）；安全防护：带急停功能；菜单：存储800个菜谱（智能学习功能）；语音：智能实时语音播报功能；喷料：带3/4路自动喷料口；自动定量加料；储料仓：左侧箱体上部可开盖存储液体味料；喷料方式：自动摆臂喷料；接料盘：接料台+排水池+可提冲孔隔渣网；清洗：一键式自动清洗，水枪辅助清洗",
+    "status": "在售",
+    "is_active": true,
+    "badge": null,
+    "badgeColor": null,
+    "power": "8-10kW",
+    "throughput": "12L",
+    "averageTime": null,
+    "voltage": "380V",
+    "material": "SUS409不锈钢不粘锅/铸铁锅",
+    "productDimensions": "770×900×1100mm；800×750×1350mm",
+    "tier": "基础",
+    "sort_order": 0,
+    "is_home_core": false,
+    "relatedProducts": null,
+    "images": [
+      {
+        "filePath": "/assets/images/products/DLB-GQ40_燃气：DLB-GQ40R_39.webp",
+        "isPrimary": true,
+        "sortOrder": 38
+      }
+    ],
+    "isActive": true
+  },
+  {
+    "category": "落地式",
+    "subCategory": null,
+    "model": "DLB-GQ50",
+    "name": "单边座地式500电磁炒菜 机（触屏+自动摆臂喷 料）",
+    "specifications": "整机外壳不锈钢材质；锅体规格：仿球釜型锅体Φ480；炒菜容量：3-10kg/锅；显示屏：7寸多功能触模显示屏；翻锅方式：电控翻锅（无极多角度）；安全防护：带急停功能；菜单：存储800个菜谱（智能学习功能）；语音：智能实时语音播报功能；喷料：带4路自动喷料口；自动定量加料；储料仓：箱体可开门存储液体味料；喷料方式：自动摆臂喷料；接料盘：接料台+排水池+可提冲孔隔渣网；清洗：一键式自动清洗模式，水枪辅助清洗",
+    "status": "在售",
+    "is_active": true,
+    "badge": null,
+    "badgeColor": null,
+    "power": "15-20kW",
+    "throughput": "3-10kg/锅",
+    "averageTime": null,
+    "voltage": "380V",
+    "material": "SUS409不锈钢不粘锅",
+    "productDimensions": "900×1120×1130mm",
+    "tier": "全智能",
+    "sort_order": 0,
+    "is_home_core": false,
+    "relatedProducts": null,
+    "images": [
+      {
+        "filePath": "/assets/images/products/DLB-GQ50_40.webp",
+        "isPrimary": true,
+        "sortOrder": 39
+      }
+    ],
+    "isActive": true
+  },
+  {
+    "category": "落地式",
+    "subCategory": null,
+    "model": "DLB-GQ60",
+    "name": "座地式600电磁炒菜机 （语音菜单+自动 摆臂 喷料）",
+    "specifications": "滚筒：仿球釜型锅体内直径Φ580mm；滚筒炒菜容量：5-20kg/T；滚筒材质：430#不锈钢或不锈钢不粘锅；显示屏：10寸多功能触模显示屏；翻锅方式：电控翻锅；安全防护：带急停功能；测温：红外线监测温度；菜单：存储800个菜谱（智能学习功能）；语音：智能实时语音播报功能；喷料：自动摆臂四路喷料；接料盘：接料台+排水池+可提冲孔隔渣网；清洗：一键式自动清洗，水枪辅助清洗；清洁喷枪：优质高压喷枪（配2米软管）",
+    "status": "在售",
+    "is_active": true,
+    "badge": null,
+    "badgeColor": null,
+    "power": "25kW",
+    "throughput": "5-20kg/T",
+    "averageTime": null,
+    "voltage": "380V",
+    "material": "优质不锈钢；430#不锈钢或不锈钢不粘锅",
+    "productDimensions": "1000×1170×1250mm；1150×850×1400mm",
+    "tier": "全智能",
+    "sort_order": 0,
+    "is_home_core": false,
+    "relatedProducts": null,
+    "images": [
+      {
+        "filePath": "/assets/images/products/DLB-GQ60_41.webp",
+        "isPrimary": true,
+        "sortOrder": 40
+      }
+    ],
+    "isActive": true
+  },
+  {
+    "category": "落地式",
+    "subCategory": null,
+    "model": "DLB-GQ80",
+    "name": "座地式800电磁炒菜机（语音菜单+自动 摆臂喷料）",
+    "specifications": "滚筒：仿球釜型锅体内直径Φ780mm；滚筒炒菜容量：20-50kg/T；滚筒材质：430#不锈钢选装不粘锅；显示屏：10寸多功能触模显示屏；翻锅方式：电控翻锅；安全防护：带急停功能；测温：红外线监测温度；菜单：存储800个菜谱（智能学习功能）；语音：智能实时语音播报功能；喷料：自动摆臂四路喷料；接料盘：接料台+排水池+可提冲孔隔渣网；清洗：一键式自动清洗，水枪辅助清洗；清洁喷枪：优质高压喷枪（配2米软管）",
+    "status": "在售",
+    "is_active": true,
+    "badge": null,
+    "badgeColor": null,
+    "power": "35kW",
+    "throughput": "20-50kg/T",
+    "averageTime": null,
+    "voltage": "380V",
+    "material": "优质不锈钢；430#不锈钢",
+    "productDimensions": "1500×1150×1580mm；1500×1150×1610mm",
+    "tier": "全智能",
+    "sort_order": 0,
+    "is_home_core": false,
+    "relatedProducts": null,
+    "images": [
+      {
+        "filePath": "/assets/images/products/DLB-GQ80_42.webp",
+        "isPrimary": true,
+        "sortOrder": 41
+      }
+    ],
+    "isActive": true
+  },
+  {
+    "category": "落地式",
+    "subCategory": null,
+    "model": "DLB-GQ90",
+    "name": "座地式900电磁炒菜机 （语音菜单+自动 摆臂 喷料）",
+    "specifications": "滚筒：仿球釜型锅体内直径Φ880mm；滚筒炒菜容量：30-80kg/T；滚筒材质：430#不锈钢选装不粘锅；显示屏：10寸多功能触模显示屏；翻锅方式：电控翻锅；安全防护：带急停功能；测温：红外线监测温度；菜单：存储800个菜谱（智能学习功能）；语音：智能实时语音播报功能；喷料：自动摆臂四路喷料；接料盘：接料台+排水池+可提冲孔隔渣网；清洗：一键式自动清洗，水枪辅助清洗；清洁喷枪：优质高压喷枪（配2米软管）",
+    "status": "在售",
+    "is_active": true,
+    "badge": null,
+    "badgeColor": null,
+    "power": "40kW",
+    "throughput": "30-80kg/T",
+    "averageTime": null,
+    "voltage": "380V",
+    "material": "优质不锈钢；430#不锈钢",
+    "productDimensions": "1600×1250×1670mm；1600×1250×1600mm",
+    "tier": "全智能",
+    "sort_order": 0,
+    "is_home_core": false,
+    "relatedProducts": null,
+    "images": [
+      {
+        "filePath": "/assets/images/products/DLB-GQ90_43.webp",
+        "isPrimary": true,
+        "sortOrder": 42
+      }
+    ],
+    "isActive": true
+  },
+  {
+    "category": "落地式",
+    "subCategory": null,
+    "model": "DLB-GC60R",
+    "name": "座地式600燃气炒菜机（触屏语音菜单）",
+    "specifications": "加热方式：天然气/液化气；滚筒：Φ600*H600mm；显示屏：7寸触模显示屏；滚筒炒菜容量：10-20kg/次；进气口规格：外螺纹6分接口；进水口规格：外螺纹4分接口；锅体材质：304#材质，可选装不粘锅；翻锅方式：电动翻锅；菜单：存储800个菜谱（智能学习功能）；语音：智能实时语音播报功能；清洁喷枪：优质高压喷枪（配2米软管）",
+    "status": "在售",
+    "is_active": true,
+    "badge": null,
+    "badgeColor": null,
+    "power": "1000W",
+    "throughput": "10-20kg/次",
+    "averageTime": null,
+    "voltage": "380V",
+    "material": "304不锈钢",
+    "productDimensions": "1400×1020/1320×1300/1650",
+    "tier": "智能",
+    "sort_order": 0,
+    "is_home_core": false,
+    "relatedProducts": null,
+    "images": [
+      {
+        "filePath": "/assets/images/products/DLB-GC60R_57.webp",
+        "isPrimary": true,
+        "sortOrder": 56
+      }
+    ],
+    "isActive": true
+  },
+  {
+    "category": "落地式",
+    "subCategory": null,
+    "model": "DLB-GC70R",
+    "name": "座地式700燃气炒菜机（触屏语音菜单）",
+    "specifications": "加热方式：天然气/液化气；滚筒：Φ700*H700mm；显示屏：7寸触模显示屏；滚筒炒菜容量：15-30kg/次；进气口规格：外螺纹6分接口；进水口规格：外螺纹4分接口；锅体材质：304#材质，可选装不粘锅；翻锅方式：电动翻锅；菜单：存储800个菜谱（智能学习功能）；语音：智能实时语音播报功能；清洁喷枪：优质高压喷枪（配2米软管）",
+    "status": "在售",
+    "is_active": true,
+    "badge": null,
+    "badgeColor": null,
+    "power": "1000W",
+    "throughput": "15-30kg/次",
+    "averageTime": null,
+    "voltage": "380V",
+    "material": "304不锈钢",
+    "productDimensions": "1500×1120/1420×1400/1750",
+    "tier": "智能",
+    "sort_order": 0,
+    "is_home_core": false,
+    "relatedProducts": null,
+    "images": [
+      {
+        "filePath": "/assets/images/products/DLB-GC70R_59.webp",
+        "isPrimary": true,
+        "sortOrder": 58
+      }
+    ],
+    "isActive": true
+  },
+  {
+    "category": "落地式",
+    "subCategory": null,
+    "model": "DLB-GC90R",
+    "name": "座地式900燃气炒菜机（语音菜单）",
+    "specifications": "加热方式：天然气/液化气；滚筒：Φ900*H900mm；显示屏：7寸触模显示屏；滚筒炒菜容量：30-80kg/次；进气口规格：外螺纹6分接口；进水口规格：外螺纹4分接口；锅体材质：304#材质，可选装不粘锅；翻锅方式：电动翻锅；菜单：存储800个菜谱（智能学习功能）；语音：智能实时语音播报功能；清洁喷枪：优质高压喷枪（配2米软管）",
+    "status": "在售",
+    "is_active": true,
+    "badge": null,
+    "badgeColor": null,
+    "power": "3000W",
+    "throughput": "30-80kg/次",
+    "averageTime": null,
+    "voltage": "380V",
+    "material": "304不锈钢",
+    "productDimensions": "1700×1350/1650×1700/1950",
+    "tier": "智能",
+    "sort_order": 0,
+    "is_home_core": false,
+    "relatedProducts": null,
+    "images": [
+      {
+        "filePath": "/assets/images/products/DLB-GC90R_62.webp",
+        "isPrimary": true,
+        "sortOrder": 61
+      }
+    ],
+    "isActive": true
+  },
+  {
+    "category": "落地式",
+    "subCategory": null,
+    "model": "DLB-GQ60R",
+    "name": "座地式600燃气炒菜机（语音菜单+自动 摆臂喷料）",
+    "specifications": "加热方式：天然气/液化气；滚筒：仿球釜型锅体内直径Φ580mm；滚筒炒菜容量：5-20kg/次；滚筒材质：304#材质，可选装不粘锅；显示屏：10寸多功能触模显示屏；翻锅方式：电控翻锅；进气口规格：外螺纹6分接口；进水口规格：外螺纹4分接口；菜单：存储800个菜谱（智能学习功能）；语音：智能实时语音播报功能；喷料：自动摆臂四路喷料；接料盘：接料台+排水池+可提冲孔隔渣网；清洗：一键式自动清洗，水枪辅助清洗；清洁喷枪：优质高压喷枪（配2米软管）",
+    "status": "在售",
+    "is_active": true,
+    "badge": null,
+    "badgeColor": null,
+    "power": "1000W",
+    "throughput": "5-20kg/次",
+    "averageTime": null,
+    "voltage": "380V",
+    "material": "优质不锈钢；304#材质",
+    "productDimensions": "1000×1170+410×1250/1550",
+    "tier": "全智能",
+    "sort_order": 0,
+    "is_home_core": false,
+    "relatedProducts": null,
+    "images": [
+      {
+        "filePath": "/assets/images/products/DLB-GQ60R_63.webp",
+        "isPrimary": true,
+        "sortOrder": 62
+      }
+    ],
+    "isActive": true
+  },
+  {
+    "category": "落地式",
+    "subCategory": null,
+    "model": "DLB-GQ70R",
+    "name": "座地式700燃气炒菜机（语音菜单+自动 摆臂喷料）",
+    "specifications": "加热方式：天然气/液化气；滚筒：仿球釜型锅体内直径Φ680mm；滚筒炒菜容量：15-30kg/次；滚筒材质：304#材质，可选装不粘锅；显示屏：10寸多功能触模显示屏；翻锅方式：电控翻锅；进气口规格：外螺纹6分接口；进水口规格：外螺纹4分接口；菜单：存储800个菜谱（智能学习功能）；语音：智能实时语音播报功能；喷料：自动摆臂四路喷料；接料盘：接料台+排水池+可提冲孔隔渣网；清洗：一键式自动清洗，水枪辅助清洗；清洁喷枪：优质高压喷枪（配2米软管）",
+    "status": "在售",
+    "is_active": true,
+    "badge": null,
+    "badgeColor": null,
+    "power": "1000W",
+    "throughput": "15-30kg/次",
+    "averageTime": null,
+    "voltage": "380V",
+    "material": "304不锈钢",
+    "productDimensions": "1100×1220+460×1350/1750",
+    "tier": "全智能",
+    "sort_order": 0,
+    "is_home_core": false,
+    "relatedProducts": null,
+    "images": [
+      {
+        "filePath": "/assets/images/products/DLB-GQ70R_64.webp",
+        "isPrimary": true,
+        "sortOrder": 63
+      }
+    ],
+    "isActive": true
+  },
+  {
+    "category": "落地式",
+    "subCategory": null,
+    "model": "DLB-GC80R",
+    "name": "座地式800燃气炒菜机（触屏语音菜单）",
+    "specifications": "加热方式：天然气/液化气；滚筒：Φ800*H800mm；显示屏：7寸触模显示屏；滚筒炒菜容量：20-50kg/次；进气口规格：外螺纹6分接口；进水口规格：外螺纹4分接口；锅体材质：304#材质，可选装不粘锅；翻锅方式：电动翻锅；菜单：存储800个菜谱（智能学习功能）；语音：智能实时语音播报功能；清洁喷枪：优质高压喷枪（配2米软管）",
+    "status": "在售",
+    "is_active": true,
+    "badge": null,
+    "badgeColor": null,
+    "power": "2100W",
+    "throughput": "20-50kg/次",
+    "averageTime": null,
+    "voltage": "380V",
+    "material": "304不锈钢",
+    "productDimensions": "1600×1220/1520×1500/1850",
+    "tier": "智能",
+    "sort_order": 0,
+    "is_home_core": false,
+    "relatedProducts": null,
+    "images": [
+      {
+        "filePath": "/assets/images/products/DLB-GC80R_65.webp",
+        "isPrimary": true,
+        "sortOrder": 64
+      }
+    ],
+    "isActive": true
+  },
+  {
+    "category": "落地式",
+    "subCategory": null,
+    "model": "DLB-GQ80R",
+    "name": "座地式800燃气炒菜机（语音菜单+自动 摆臂喷料）",
+    "specifications": "加热方式：天然气/液化气；滚筒：仿球釜型锅体内直径Φ780mm；滚筒炒菜容量：20-50kg/次；滚筒材质：304#材质，可选装不粘锅；显示屏：10寸多功能触模显示屏；翻锅方式：电控翻锅；进气口规格：外螺纹6分接口；进水口规格：外螺纹4分接口；菜单：存储800个菜谱（智能学习功能）；语音：智能实时语音播报功能；喷料：自动摆臂四路喷料；接料盘：接料台+排水池+可提冲孔隔渣网；清洗：一键式自动清洗，水枪辅助清洗；清洁喷枪：优质高压喷枪（配2米软管）",
+    "status": "在售",
+    "is_active": true,
+    "badge": null,
+    "badgeColor": null,
+    "power": "2100W",
+    "throughput": "20-50kg/次",
+    "averageTime": null,
+    "voltage": "380V",
+    "material": "304不锈钢",
+    "productDimensions": "1500×1150+410×1500/1910",
+    "tier": "全智能",
+    "sort_order": 0,
+    "is_home_core": false,
+    "relatedProducts": null,
+    "images": [
+      {
+        "filePath": "/assets/images/products/DLB-GQ80R_66.webp",
+        "isPrimary": true,
+        "sortOrder": 65
+      }
+    ],
+    "isActive": true
+  },
+  {
+    "category": "落地式",
+    "subCategory": null,
+    "model": "DLB-GQ90R",
+    "name": "座地式900燃气炒菜机（语音菜单+自动 摆臂喷料）",
+    "specifications": "加热方式：天然气/液化气；滚筒：仿球釜型锅体内直径Φ880mm；滚筒炒菜容量：30-80kg/次；滚筒材质：304#材质，可选装不粘锅；显示屏：10寸多功能触模显示屏；翻锅方式：电控翻锅；进气口规格：外螺纹6分接口；进水口规格：外螺纹4分接口；菜单：存储800个菜谱（智能学习功能）；语音：智能实时语音播报功能；喷料：自动摆臂四路喷料；接料盘：接料台+排水池+可提冲孔隔渣网；清洗：一键式自动清洗，水枪辅助清洗；清洁喷枪：优质高压喷枪（配2米软管）",
+    "status": "在售",
+    "is_active": true,
+    "badge": null,
+    "badgeColor": null,
+    "power": "3000W",
+    "throughput": "30-80kg/次",
+    "averageTime": null,
+    "voltage": "380V",
+    "material": "优质不锈钢；304#材质",
+    "productDimensions": "1600×1250+410×1700/1950",
+    "tier": "全智能",
+    "sort_order": 0,
+    "is_home_core": false,
+    "relatedProducts": null,
+    "images": [
+      {
+        "filePath": "/assets/images/products/DLB-GQ90R_67.webp",
+        "isPrimary": true,
+        "sortOrder": 66
+      }
+    ],
+    "isActive": true
+  },
+  {
+    "category": "落地式",
+    "subCategory": null,
+    "model": "DLB-GB50",
+    "name": "座地式500电磁炒菜机 （触屏电动）",
+    "specifications": "整机外壳不锈钢材质；锅体规格：仿球釜型锅体Φ480；炒菜容量：3-10kg/锅；显示屏：7寸多功能触模显示屏；翻锅方式：电控翻锅（无极多角度）；安全防护：带急停功能；接料盘：接料台+排水池+可提冲孔隔渣网；清洗：配套高压水枪清洗",
+    "status": "在售",
+    "is_active": true,
+    "badge": null,
+    "badgeColor": null,
+    "power": "15-20kW",
+    "throughput": "3-10kg/锅",
+    "averageTime": null,
+    "voltage": "380V",
+    "material": "SUS430不锈钢不粘锅",
+    "productDimensions": "900×1120×1130mm；900×1320×1390mm",
+    "tier": "智能",
+    "sort_order": 0,
+    "is_home_core": false,
+    "relatedProducts": null,
+    "images": [
+      {
+        "filePath": "/assets/images/products/DLB-GB50_28.webp",
+        "isPrimary": true,
+        "sortOrder": 27
+      }
+    ],
+    "isActive": true
+  },
+  {
+    "category": "落地式",
+    "subCategory": null,
+    "model": "DLB-GB60",
+    "name": "座地式600电磁炒菜机 （触屏电动）",
+    "specifications": "滚筒：Φ600*H600mm；滚筒炒菜容量：10-20kg/T；滚筒材质：430#不锈钢/选装不粘锅；显示屏：7寸触模显示屏；翻锅方式：半机械式翻锅（无极多角度）；安全防护：带急停功能；控制方式：8/9档火力调节，无极调速翻炒；清洗：高压水枪清洗，快捷高效",
+    "status": "在售",
+    "is_active": true,
+    "badge": null,
+    "badgeColor": null,
+    "power": "25kW",
+    "throughput": "10-20kg/T",
+    "averageTime": null,
+    "voltage": "380V",
+    "material": "优质不锈钢；430#不锈钢/不粘锅",
+    "productDimensions": "1300×950×1380mm",
+    "tier": "智能",
+    "sort_order": 0,
+    "is_home_core": false,
+    "relatedProducts": null,
+    "images": [
+      {
+        "filePath": "/assets/images/products/DLB-GB60_30.webp",
+        "isPrimary": true,
+        "sortOrder": 29
+      }
+    ],
+    "isActive": true
+  },
+  {
+    "category": "落地式",
+    "subCategory": null,
+    "model": "DLB-GB70",
+    "name": "座地式700电磁炒菜机 （触屏电动）",
+    "specifications": "滚筒：Φ700*H700mm；滚筒炒菜容量：15-30kg/T；滚筒材质：430#不锈钢选装不粘锅；显示屏：7寸触模显示屏；翻锅方式：机械式自动翻锅（无极多角度）；安全防护：带急停功能；控制方式：8/9档火力调节，无极调速翻炒；清洗：高压水枪清洗，快捷高效",
+    "status": "在售",
+    "is_active": true,
+    "badge": null,
+    "badgeColor": null,
+    "power": "30kW",
+    "throughput": "15-30kg/T",
+    "averageTime": null,
+    "voltage": "380V",
+    "material": "优质不锈钢；430#不锈钢不粘锅",
+    "productDimensions": "1400×1050×1500mm；1400×1140×1760mm",
+    "tier": "智能",
+    "sort_order": 0,
+    "is_home_core": false,
+    "relatedProducts": null,
+    "images": [
+      {
+        "filePath": "/assets/images/products/DLB-GB70_32.webp",
+        "isPrimary": true,
+        "sortOrder": 31
+      }
+    ],
+    "isActive": true
+  },
+  {
+    "category": "落地式",
+    "subCategory": null,
+    "model": "DLB-GB80",
+    "name": "座地式800电磁炒菜机 （触屏电动）",
+    "specifications": "滚筒： Φ800*H800mm；滚筒炒菜容量：20-50kg/T；滚筒材质：430#不锈钢选装不粘锅；显示屏：7寸触模显示屏；翻锅方式：机械式自动翻锅（无极多角度）；安全防护：带急停功能；控制方式：9档火力调节，无极调速翻炒；清洁喷枪：优质高压喷枪（配2米软管）",
+    "status": "在售",
+    "is_active": true,
+    "badge": null,
+    "badgeColor": null,
+    "power": "35kW",
+    "throughput": "20-50kg/T",
+    "averageTime": null,
+    "voltage": "380V",
+    "material": "优质不锈钢；430#不锈钢",
+    "productDimensions": "1500×1150×1600mm；1500×1270×1890mm",
+    "tier": "智能",
+    "sort_order": 0,
+    "is_home_core": false,
+    "relatedProducts": null,
+    "images": [
+      {
+        "filePath": "/assets/images/products/DLB-GB80_34.webp",
+        "isPrimary": true,
+        "sortOrder": 33
+      }
+    ],
+    "isActive": true
+  },
+  {
+    "category": "落地式",
+    "subCategory": null,
+    "model": "DLB-GB90",
+    "name": "座地式900电磁炒菜机 （触屏电动）",
+    "specifications": "滚筒： Φ900*H900mm；滚筒炒菜容量：30-80kg/T；滚筒材质：430#不锈钢选装不粘锅；显示屏：7寸触模显示屏；翻锅方式：机械式自动翻锅（无极多角度）；安全防护：带急停功能；控制方式：9档火力调节，无极调速翻炒；清洁喷枪：优质高压喷枪（配2米软管）",
+    "status": "在售",
+    "is_active": true,
+    "badge": null,
+    "badgeColor": null,
+    "power": "40kW",
+    "throughput": "30-80kg/T",
+    "averageTime": null,
+    "voltage": "380V",
+    "material": "优质不锈钢；430#不锈钢不粘锅",
+    "productDimensions": "1600×1250×1720mm",
+    "tier": "智能",
+    "sort_order": 0,
+    "is_home_core": false,
+    "relatedProducts": null,
+    "images": [
+      {
+        "filePath": "/assets/images/products/DLB-GB90_37.webp",
+        "isPrimary": true,
+        "sortOrder": 36
+      }
+    ],
+    "isActive": true
+  },
+  {
+    "category": "落地式",
+    "subCategory": null,
+    "model": "DLB-GB60R",
+    "name": "座地式600燃气炒菜机（触屏电动）",
+    "specifications": "加热方式：天然气/液化气；滚筒：Φ600*H600mm；显示屏：7寸触模显示屏；滚筒炒菜容量：10-20kg/次；进气口规格：外螺纹6分接口；进水口规格：外螺纹4分接口；锅体材质：304#材质，可选装不粘锅；翻锅方式：电动翻锅；清洁喷枪：优质高压喷枪（配2米软管）",
+    "status": "在售",
+    "is_active": true,
+    "badge": null,
+    "badgeColor": null,
+    "power": "1000W",
+    "throughput": "10-20kg/次",
+    "averageTime": null,
+    "voltage": "380V",
+    "material": "304不锈钢",
+    "productDimensions": "1400×1020×1320×1300×1650",
+    "tier": "智能",
+    "sort_order": 0,
+    "is_home_core": false,
+    "relatedProducts": null,
+    "images": [
+      {
+        "filePath": "/assets/images/products/DLB-GB60R_56.webp",
+        "isPrimary": true,
+        "sortOrder": 55
+      }
+    ],
+    "isActive": true
+  },
+  {
+    "category": "落地式",
+    "subCategory": null,
+    "model": "DLB-GB70R",
+    "name": "座地式700燃气炒菜机（触屏电动）",
+    "specifications": "加热方式：天然气/液化气；滚筒：Φ700*H700mm；显示屏：7寸触模显示屏；滚筒炒菜容量：15-30kg/次；进气口规格：外螺纹6分接口；进水口规格：外螺纹4分接口；锅体材质：304#材质，可选装不粘锅；翻锅方式：电动翻锅；清洁喷枪：优质高压喷枪（配2米软管）",
+    "status": "在售",
+    "is_active": true,
+    "badge": null,
+    "badgeColor": null,
+    "power": "1000W",
+    "throughput": "15-30kg/次",
+    "averageTime": null,
+    "voltage": "380V",
+    "material": "304不锈钢",
+    "productDimensions": "1500×1120/1420×1400/1750",
+    "tier": "智能",
+    "sort_order": 0,
+    "is_home_core": false,
+    "relatedProducts": null,
+    "images": [
+      {
+        "filePath": "/assets/images/products/DLB-GB70R_58.webp",
+        "isPrimary": true,
+        "sortOrder": 57
+      }
+    ],
+    "isActive": true
+  },
+  {
+    "category": "落地式",
+    "subCategory": null,
+    "model": "DLB-GB80R",
+    "name": "座地式800燃气炒菜机（触屏电动）",
+    "specifications": "加热方式：天然气/液化气；滚筒：Φ800*H800mm；显示屏：7寸触模显示屏；滚筒炒菜容量：20-50kg/次；进气口规格：外螺纹6分接口；进水口规格：外螺纹4分接口；锅体材质：304#材质，可选装不粘锅；翻锅方式：电动翻锅；清洁喷枪：优质高压喷枪（配2米软管）",
+    "status": "在售",
+    "is_active": true,
+    "badge": null,
+    "badgeColor": null,
+    "power": "2100W",
+    "throughput": "20-50kg/次",
+    "averageTime": null,
+    "voltage": "380V",
+    "material": "304不锈钢",
+    "productDimensions": "1600×1220/1520×1500/1850",
+    "tier": "智能",
+    "sort_order": 0,
+    "is_home_core": false,
+    "relatedProducts": null,
+    "images": [
+      {
+        "filePath": "/assets/images/products/DLB-GB80R_60.webp",
+        "isPrimary": true,
+        "sortOrder": 59
+      }
+    ],
+    "isActive": true
+  },
+  {
+    "category": "落地式",
+    "subCategory": null,
+    "model": "DLB-GB90R",
+    "name": "座地式900燃气炒菜机（触屏电动）",
+    "specifications": "加热方式：天然气/液化气；滚筒：Φ900*H900mm；显示屏：7寸触模显示屏；进气口规格：外螺纹6分接口；进水口规格：外螺纹4分接口；锅体材质：304#材质，可选装不粘锅；翻锅方式：电动翻锅；清洁喷枪：优质高压喷枪（配2米软管）",
+    "status": "在售",
+    "is_active": true,
+    "badge": null,
+    "badgeColor": null,
+    "power": "3000W",
+    "throughput": "30-80kg/次",
+    "averageTime": null,
+    "voltage": "380V",
+    "material": "304不锈钢",
+    "productDimensions": "1700×1350/1650×1700/1950",
+    "tier": "智能",
+    "sort_order": 0,
+    "is_home_core": false,
+    "relatedProducts": null,
+    "images": [
+      {
+        "filePath": "/assets/images/products/DLB-GB90R_61.webp",
+        "isPrimary": true,
+        "sortOrder": 60
+      }
+    ],
+    "isActive": true
+  },
+  {
+    "category": "落地式",
+    "subCategory": null,
+    "model": "G60EAC",
+    "name": "智能团餐滚筒炒菜机 （电磁款）",
+    "specifications": "配锅尺寸（mm） : φ600*820；锅体材质：3.5mm精铁；配锅容量：40L-60L；炒菜重量：约10-30kg；自动调料功能:水+5路调料；调料盒容量:10L*1+5L*4；一键自动炒菜；机器学习功能；菜谱功能；语音播报提示；温控功能",
+    "status": "在售",
+    "is_active": true,
+    "badge": null,
+    "badgeColor": null,
+    "power": "30kW",
+    "throughput": "约10-30kg ◆自动调料功能:水+5路调料 ◆调料盒容量:10L*1+5L*4 ◆有一键自动炒菜、机器学习功能、菜谱功能、语音播报提示、温控功能",
+    "averageTime": null,
+    "voltage": "380V",
+    "material": "3.5mm精铁",
+    "productDimensions": "1200×1350×1350",
+    "tier": "智能",
+    "sort_order": 0,
+    "is_home_core": false,
+    "relatedProducts": null,
+    "images": [
+      {
+        "filePath": "/assets/images/products/G60EAC_132.webp",
+        "isPrimary": true,
+        "sortOrder": 131
+      }
+    ],
+    "isActive": true
+  },
+  {
+    "category": "落地式",
+    "subCategory": null,
+    "model": "G70EAC",
+    "name": "智能团餐滚筒炒菜机 （电磁款）",
+    "specifications": "配锅尺寸（mm） : φ700*880；炒菜重量：约20-50kg；配锅容量：40L-100L；进水口：DN15；自动调料功能:水+5路调料；调料盒容量:10L*1+5L*4；一键自动炒菜；机器学习功能；菜谱功能；语音播报提示；温控功能",
+    "status": "在售",
+    "is_active": true,
+    "badge": null,
+    "badgeColor": null,
+    "power": "30kW",
+    "throughput": "20-50kg",
+    "averageTime": null,
+    "voltage": "380V",
+    "material": "3.5mm精铁",
+    "productDimensions": "1310×1400×1450",
+    "tier": "智能",
+    "sort_order": 0,
+    "is_home_core": false,
+    "relatedProducts": null,
+    "images": [
+      {
+        "filePath": "/assets/images/products/G70EAC_134.webp",
+        "isPrimary": true,
+        "sortOrder": 133
+      }
+    ],
+    "isActive": true
+  },
+  {
+    "category": "落地式",
+    "subCategory": null,
+    "model": "G80EAC",
+    "name": "智能团餐滚筒炒菜机 （电磁款）",
+    "specifications": "配锅尺寸（mm）:φ800*1000；热负荷:96kW；炒菜重量:约30-80kg；配锅容量:40L-150L；进水口:DN15；自动调料功能:水+5路调料；调料盒容量:10L*1+5L*4；一键自动炒菜；机器学习功能；菜谱功能；语音播报提示；温控功能",
+    "status": "在售",
+    "is_active": true,
+    "badge": null,
+    "badgeColor": null,
+    "power": "30kW",
+    "throughput": "30-80kg",
+    "averageTime": null,
+    "voltage": "380V",
+    "material": "4.0mm精铁",
+    "productDimensions": "1410×1500×1620",
+    "tier": "智能",
+    "sort_order": 0,
+    "is_home_core": false,
+    "relatedProducts": null,
+    "images": [
+      {
+        "filePath": "/assets/images/products/G80EAC_136.webp",
+        "isPrimary": true,
+        "sortOrder": 135
+      }
+    ],
+    "isActive": true
+  },
+  {
+    "category": "落地式",
+    "subCategory": null,
+    "model": "G60EAS",
+    "name": "智能团餐滚筒炒菜机 （燃气款）",
+    "specifications": "配锅尺寸（mm） : φ600*820；炒菜重量：约10-30kg；配锅容量：40L-60L；燃气类型：液化气/天然气；热负荷：63kW；进水口：DN15；自动调料功能：水+5路调料；调料盒容量：10L*1+5L*4；一键自动炒菜；机器学习功能；菜谱功能；语音播报提示；温控功能",
+    "status": "在售",
+    "is_active": true,
+    "badge": null,
+    "badgeColor": null,
+    "power": "2kW",
+    "throughput": "10-30kg；40L-60L",
+    "averageTime": null,
+    "voltage": "380V",
+    "material": "3.5mm精铁",
+    "productDimensions": "1200×1350×1500",
+    "tier": "智能",
+    "sort_order": 0,
+    "is_home_core": false,
+    "relatedProducts": null,
+    "images": [
+      {
+        "filePath": "/assets/images/products/G60EAS_133.webp",
+        "isPrimary": true,
+        "sortOrder": 132
+      }
+    ],
+    "isActive": true
+  },
+  {
+    "category": "落地式",
+    "subCategory": null,
+    "model": "G70EAS",
+    "name": "智能团餐滚筒炒菜机 （燃气款）",
+    "specifications": "配锅尺寸（mm） : φ700*880；炒菜重量：约20-50kg；配锅容量：40L-100L；燃气类型：液化气/天然气；热负荷：96kW；进水口：DN15；自动调料功能：水+5路调料；调料盒容量：10L*1+5L*4",
+    "status": "在售",
+    "is_active": true,
+    "badge": null,
+    "badgeColor": null,
+    "power": "2kW",
+    "throughput": "20-50kg；40L-100L",
+    "averageTime": null,
+    "voltage": "380V",
+    "material": "3.5mm精铁",
+    "productDimensions": "1310×1400×1600",
+    "tier": "智能",
+    "sort_order": 0,
+    "is_home_core": false,
+    "relatedProducts": null,
+    "images": [
+      {
+        "filePath": "/assets/images/products/G70EAS_135.webp",
+        "isPrimary": true,
+        "sortOrder": 134
+      }
+    ],
+    "isActive": true
+  },
+  {
+    "category": "落地式",
+    "subCategory": null,
+    "model": "G80EAS",
+    "name": "智能团餐滚筒炒菜机 （燃气款）",
+    "specifications": "配锅尺寸（mm） : φ800*1000；热负荷：96kW；炒菜重量：约30-80kg；配锅容量：40L-150L；燃气类型：液化气/天然气；进水口：DN15；自动调料功能：水+5路调料；调料盒容量：10L*1+5L*4；一键自动炒菜；机器学习功能；菜谱功能；语音播报提示；温控功能",
+    "status": "在售",
+    "is_active": true,
+    "badge": null,
+    "badgeColor": null,
+    "power": "3kW",
+    "throughput": "30-80kg",
+    "averageTime": null,
+    "voltage": "380V",
+    "material": "4.0mm精铁",
+    "productDimensions": "1410×1500×1770",
+    "tier": "智能",
+    "sort_order": 0,
+    "is_home_core": false,
+    "relatedProducts": null,
+    "images": [
+      {
+        "filePath": "/assets/images/products/G80EAS_137.webp",
+        "isPrimary": true,
+        "sortOrder": 136
+      }
+    ],
+    "isActive": true
+  },
+  {
+    "category": "落地式",
+    "subCategory": null,
+    "model": "DLB-BXC800",
+    "name": "半自动旋转+翻炒电磁大 炒锅",
+    "specifications": "锅体：Φ800mm翻边锅；锅体容量：50L；显示器：多功能LED显示器；搅拌器具：电动升降；搅拌方式：多维立体搅拌，刮底、刮边；控制方式：多档火力调节，无极调速翻炒；加水方式：摇摆水龙头加水",
+    "status": "在售",
+    "is_active": true,
+    "badge": null,
+    "badgeColor": null,
+    "power": "20kW",
+    "throughput": null,
+    "averageTime": null,
+    "voltage": "380V",
+    "material": "优质不锈钢；430材质食品级锅体",
+    "productDimensions": "1000×1100×800mm；1200mm",
+    "tier": "智能",
+    "sort_order": 0,
+    "is_home_core": false,
+    "relatedProducts": null,
+    "images": [
+      {
+        "filePath": "/assets/images/products/DLB-BXC800_53.webp",
+        "isPrimary": true,
+        "sortOrder": 52
+      }
+    ],
+    "isActive": true
+  },
+  {
+    "category": "落地式",
+    "subCategory": null,
+    "model": "G50AAB",
+    "name": "简易/智能团餐滚筒炒菜机 （电磁款）",
+    "specifications": "配锅尺寸（mm）: φ500*500；炒菜重量: 约10kg；配锅容量: 14L-41L；锅体款式: 牛头锅；操作方式: 半自动；操作屏幕: 旋钮和开关；定时功能: 有",
+    "status": "在售",
+    "is_active": true,
+    "badge": null,
+    "badgeColor": null,
+    "power": "15kW",
+    "throughput": "14L-41L",
+    "averageTime": null,
+    "voltage": "380V",
+    "material": "430",
+    "productDimensions": "700×900×1470",
+    "tier": "智能",
+    "sort_order": 0,
+    "is_home_core": false,
+    "relatedProducts": null,
+    "images": [
+      {
+        "filePath": "/assets/images/products/G50AAB_129.webp",
+        "isPrimary": true,
+        "sortOrder": 128
+      }
+    ],
+    "isActive": true
+  },
+  {
+    "category": "落地式",
+    "subCategory": null,
+    "model": "G50AAC",
+    "name": "简易/智能团餐滚筒炒菜机 （电磁款）",
+    "specifications": "配锅尺寸（mm）: φ500*500；炒菜重量: 约10kg；配锅容量: 14L-41L；锅体款式: 牛头锅；操作方式: 全自动；操作屏幕: 电容屏玻璃面板；一键自动炒菜；机器学习功能；菜谱功能；语音提示；定时功能",
+    "status": "在售",
+    "is_active": true,
+    "badge": null,
+    "badgeColor": null,
+    "power": "15kW",
+    "throughput": "约10kg ◆配锅容量： 14L-41L ◆锅体款式：牛头锅 ◆操作方式：全自动 ◆操作屏幕： 电容屏玻璃面板 ◆有一键自动炒菜、机器学习功能、菜谱功能、语音提示、定时功能",
+    "averageTime": null,
+    "voltage": "380V",
+    "material": "430",
+    "productDimensions": "700×900×1470",
+    "tier": "全智能",
+    "sort_order": 0,
+    "is_home_core": false,
+    "relatedProducts": null,
+    "images": [
+      {
+        "filePath": "/assets/images/products/G50AAC_130.webp",
+        "isPrimary": true,
+        "sortOrder": 129
+      }
+    ],
+    "isActive": true
+  },
+  {
+    "category": "落地式",
+    "subCategory": null,
+    "model": "G50GAT",
+    "name": "简易团餐滚筒炒菜机 （燃气款）",
+    "specifications": "配锅尺寸（mm） : φ500*500；锅体材质：3.0mm 氮化/涂层锅；配锅容量：14L-41L；炒菜重量：约10kg；燃气类型:液化气/天然气；热负荷：32kW；定时功能：有",
+    "status": "在售",
+    "is_active": true,
+    "badge": null,
+    "badgeColor": null,
+    "power": "500W",
+    "throughput": "约10kg ◆燃气类型:液化气/天然气 ◆热负荷：32kW ◆定时功能：有",
+    "averageTime": null,
+    "voltage": "220V",
+    "material": "3.0mm 氮化/涂层锅",
+    "productDimensions": "1023×850×1365",
+    "tier": "基础",
+    "sort_order": 0,
+    "is_home_core": false,
+    "relatedProducts": null,
+    "images": [
+      {
+        "filePath": "/assets/images/products/G50GAT_131.webp",
+        "isPrimary": true,
+        "sortOrder": 130
+      }
+    ],
+    "isActive": true
+  },
+  {
+    "category": "落地式",
+    "subCategory": null,
+    "model": "DLB-XC100",
+    "name": "多功能自动搅拌炒锅/炖 烩机（触屏电动）",
+    "specifications": "锅体：Φ1000*H500-640mm；锅体容量：260L；显示屏：7寸多功能触模显示屏；翻锅方式：电控翻锅；安全防护：带急停功能；控制方式：9档火力调节，无极调速翻炒；翻炒方式：行星搅拌，翻炒均匀，无死角；清洁喷枪：优质高压喷枪（配2米软管）",
+    "status": "在售",
+    "is_active": true,
+    "badge": null,
+    "badgeColor": null,
+    "power": "30kW",
+    "throughput": null,
+    "averageTime": null,
+    "voltage": "380V",
+    "material": "复合304不锈钢",
+    "productDimensions": "1800×1350×1750/2000",
+    "tier": "智能",
+    "sort_order": 0,
+    "is_home_core": false,
+    "relatedProducts": null,
+    "images": [
+      {
+        "filePath": "/assets/images/products/DLB-XC100_44.webp",
+        "isPrimary": true,
+        "sortOrder": 43
+      }
+    ],
+    "isActive": true
+  },
+  {
+    "category": "落地式",
+    "subCategory": null,
+    "model": "DLB-XC120",
+    "name": "多功能自动搅拌炒锅/炖 烩机（触屏电动）",
+    "specifications": "锅体： Φ 1200*H600-732mm；锅体容量：450L；显示屏：7寸多功能触模显示屏；翻锅方式：电控翻锅；安全防护：带急停功能；控制方式：9档火力调节，无极调速翻炒；翻炒方式：行星搅拌，翻炒均匀，无死角；清洁喷枪：优质高压喷枪（配2米软管）",
+    "status": "在售",
+    "is_active": true,
+    "badge": null,
+    "badgeColor": null,
+    "power": "45kW",
+    "throughput": null,
+    "averageTime": null,
+    "voltage": "380V",
+    "material": "复合304不锈钢",
+    "productDimensions": "2020×1550×1830；2020×1550×1980",
+    "tier": "智能",
+    "sort_order": 0,
+    "is_home_core": false,
+    "relatedProducts": null,
+    "images": [
+      {
+        "filePath": "/assets/images/products/DLB-XC120_46.webp",
+        "isPrimary": true,
+        "sortOrder": 45
+      }
+    ],
+    "isActive": true
+  },
+  {
+    "category": "落地式",
+    "subCategory": null,
+    "model": "DLB-XC80",
+    "name": "多功能自动搅拌炒锅/炖烩机（触屏电动）",
+    "specifications": "锅体： Φ800*H400-533mm；锅体容量：133L；显示屏：7寸多功能触模显示屏；翻锅方式：电控翻锅；安全防护：带急停功能；控制方式：9档火力调节，无极调速翻炒；翻炒方式：行星搅拌，翻炒均匀，无死角；清洁喷枪：优质高压喷枪（配2米软管）",
+    "status": "在售",
+    "is_active": true,
+    "badge": null,
+    "badgeColor": null,
+    "power": "20kW",
+    "throughput": null,
+    "averageTime": null,
+    "voltage": "380V",
+    "material": "复合304不锈钢",
+    "productDimensions": "1500×1100×1450/1600",
+    "tier": "智能",
+    "sort_order": 0,
+    "is_home_core": false,
+    "relatedProducts": null,
+    "images": [
+      {
+        "filePath": "/assets/images/products/DLB-XC80_68.webp",
+        "isPrimary": true,
+        "sortOrder": 67
+      }
+    ],
+    "isActive": true
+  },
+  {
+    "category": "落地式",
+    "subCategory": null,
+    "model": "DLB-XC80R",
+    "name": "多功能自动燃气搅拌炒锅/炖烩机（触屏电动）",
+    "specifications": "加热方式：天然气/液化气；锅体：Φ800*H400-533mm；锅体容量：133L；显示屏：7寸多功能触模显示屏；翻锅方式：电控翻锅；进气口规格：外螺纹6分接口；进水口规格：外螺纹4分接口；翻炒方式：行星搅拌，翻炒均匀，无死角；清洁喷枪：优质高压喷枪（配2米软管）",
+    "status": "在售",
+    "is_active": true,
+    "badge": null,
+    "badgeColor": null,
+    "power": "1500W",
+    "throughput": null,
+    "averageTime": null,
+    "voltage": "380V",
+    "material": "复合304不锈钢",
+    "productDimensions": "1610×1200×1800",
+    "tier": "智能",
+    "sort_order": 0,
+    "is_home_core": false,
+    "relatedProducts": null,
+    "images": [
+      {
+        "filePath": "/assets/images/products/DLB-XC80R_70.webp",
+        "isPrimary": true,
+        "sortOrder": 69
+      }
+    ],
+    "isActive": true
+  },
+  {
+    "category": "落地式",
+    "subCategory": null,
+    "model": "DLB-XC100R",
+    "name": "多功能自动燃气搅拌炒锅/炖烩机（触屏电动）",
+    "specifications": "加热方式：天然气/液化气；锅体：Φ1000*H500-640mm；锅体容量：260L；显示屏：7寸多功能触模显示屏；翻锅方式：电控翻锅；进气口规格：外螺纹6分接口；进水口规格：外螺纹4分接口；翻炒方式：行星搅拌，翻炒均匀，无死角；清洁喷枪：优质高压喷枪（配2米软管）",
+    "status": "在售",
+    "is_active": true,
+    "badge": null,
+    "badgeColor": null,
+    "power": "2100W",
+    "throughput": null,
+    "averageTime": null,
+    "voltage": "380V",
+    "material": "复合304不锈钢锅体",
+    "productDimensions": "1810×1400×2000",
+    "tier": "智能",
+    "sort_order": 0,
+    "is_home_core": false,
+    "relatedProducts": null,
+    "images": [
+      {
+        "filePath": "/assets/images/products/DLB-XC100R_72.webp",
+        "isPrimary": true,
+        "sortOrder": 71
+      }
+    ],
+    "isActive": true
+  },
+  {
+    "category": "落地式",
+    "subCategory": null,
+    "model": "DLB-XC120R",
+    "name": "多功能自动燃气搅拌炒锅/炖烩机（触屏电动）",
+    "specifications": "加热方式：天然气/液化气；锅体：Φ1200*H600-732mm；锅体容量：450L；显示屏：7寸多功能触模显示屏；翻锅方式：电控翻锅；进气口规格：外螺纹6分接口；进水口规格：外螺纹4分接口；翻炒方式：行星搅拌，翻炒均匀，无死角；清洁喷枪：优质高压喷枪（配2米软管）",
+    "status": "在售",
+    "is_active": true,
+    "badge": null,
+    "badgeColor": null,
+    "power": "3000W",
+    "throughput": null,
+    "averageTime": null,
+    "voltage": "380V",
+    "material": "复合304不锈钢",
+    "productDimensions": "2020×1600×2000",
+    "tier": "智能",
+    "sort_order": 0,
+    "is_home_core": false,
+    "relatedProducts": null,
+    "images": [
+      {
+        "filePath": "/assets/images/products/DLB-XC120R_74.webp",
+        "isPrimary": true,
+        "sortOrder": 73
+      }
+    ],
+    "isActive": true
+  },
+  {
+    "category": "落地式",
+    "subCategory": null,
+    "model": "DLB-QXC100",
+    "name": "多功能全自动搅拌炒锅/ 炖烩机（语音菜单+自动 喷料）",
+    "specifications": "锅体：Φ1000*H500-640mm；锅体容量：260L；显示屏：10寸多功能触模显示屏；翻锅方式：电控翻锅；安全防护：带急停功能；测温：带温控功能；菜单：存储800个菜谱（智能学习功能）；语音：智能实时语音播报功能；喷料：自动四路定量喷料；进水：配摇摆式进水龙头；清洗：一键式自动清洗，水枪辅助清洗；翻炒方式：行星搅拌，翻炒均匀，无死角；清洁喷枪：优质高压喷枪（配2米软管）",
+    "status": "在售",
+    "is_active": true,
+    "badge": null,
+    "badgeColor": null,
+    "power": "30kW",
+    "throughput": null,
+    "averageTime": null,
+    "voltage": "380V",
+    "material": "复合304不锈钢",
+    "productDimensions": "1810×1350×1750mm",
+    "tier": "全智能",
+    "sort_order": 0,
+    "is_home_core": false,
+    "relatedProducts": null,
+    "images": [
+      {
+        "filePath": "/assets/images/products/DLB-QXC100_45.webp",
+        "isPrimary": true,
+        "sortOrder": 44
+      }
+    ],
+    "isActive": true
+  },
+  {
+    "category": "落地式",
+    "subCategory": null,
+    "model": "DLB-QXC120",
+    "name": "多功能全自动搅拌炒锅/ 炖烩机（语音菜单+自动 喷料）",
+    "specifications": "锅体：Φ1200*H600-732mm；锅体容量：450L；显示屏：10寸多功能触模显示屏；翻锅方式：电控翻锅；安全防护：带急停功能；测温：带温控功能；菜单：存储800个菜谱（智能学习功能）；语音：智能实时语音播报功能；喷料：自动四路定量喷料；进水：配摇摆式进水龙头；清洗：一键式自动清洗，水枪辅助清洗；翻炒方式：行星搅拌，翻炒均匀，无死角；清洁喷枪：优质高压喷枪（配2米软管）",
+    "status": "在售",
+    "is_active": true,
+    "badge": null,
+    "badgeColor": null,
+    "power": "45kW",
+    "throughput": null,
+    "averageTime": null,
+    "voltage": "380V",
+    "material": "复合304不锈钢",
+    "productDimensions": "2020×1550×1830/1980",
+    "tier": "全智能",
+    "sort_order": 0,
+    "is_home_core": false,
+    "relatedProducts": null,
+    "images": [
+      {
+        "filePath": "/assets/images/products/DLB-QXC120_47.webp",
+        "isPrimary": true,
+        "sortOrder": 46
+      }
+    ],
+    "isActive": true
+  },
+  {
+    "category": "落地式",
+    "subCategory": null,
+    "model": "DLB-QXC80",
+    "name": "多功能全自动搅拌炒锅/炖烩机（语音菜单+自动喷料）",
+    "specifications": "材质：优质不锈钢；电压：380V /50Hz；功率：20kW；锅体：Φ800*H400-533mm；锅体容量：133L；锅体材质：复合304不锈钢锅体；显示屏：10寸多功能触模显示屏；翻锅方式：电控翻锅；安全防护：带急停功能；测温：带温控功能；菜单：存储800个菜谱（智能学习功能）；语音：智能实时语音播报功能；喷料：自动四路定量喷料；进水：配摇摆式进水龙头；清洗：一键式自动清洗，水枪辅助清洗；翻炒方式：行星搅拌，翻炒均匀，无死角；清洁喷枪：优质高压喷枪（配2米软管）",
+    "status": "在售",
+    "is_active": true,
+    "badge": null,
+    "badgeColor": null,
+    "power": "20kW",
+    "throughput": null,
+    "averageTime": null,
+    "voltage": "380V",
+    "material": "优质不锈钢；复合304不锈钢",
+    "productDimensions": "1500×1100×1450/1600",
+    "tier": "全智能",
+    "sort_order": 0,
+    "is_home_core": false,
+    "relatedProducts": null,
+    "images": [
+      {
+        "filePath": "/assets/images/products/DLB-QXC80_69.webp",
+        "isPrimary": true,
+        "sortOrder": 68
+      }
+    ],
+    "isActive": true
+  },
+  {
+    "category": "落地式",
+    "subCategory": null,
+    "model": "DLB-QXC80R",
+    "name": "多功能全自动燃气搅拌炒锅/炖烩机（语音菜单+自动喷料）",
+    "specifications": "加热方式：天然气/液化气；锅体：Φ800*H400-533mm；锅体容量：133L；显示屏：10寸多功能触模显示屏；翻锅方式：电控翻锅；进气口规格：外螺纹6分接口；进水口规格：外螺纹4分接口；菜单：存储800个菜谱（智能学习功能）；语音：智能实时语音播报功能；喷料：自动四路定量喷料；进水：配摇摆式进水龙头；清洗：一键式自动清洗，水枪辅助清洗；翻炒方式：行星搅拌，翻炒均匀，无死角；清洁喷枪：优质高压喷枪（配2米软管）",
+    "status": "在售",
+    "is_active": true,
+    "badge": null,
+    "badgeColor": null,
+    "power": "1500W",
+    "throughput": null,
+    "averageTime": null,
+    "voltage": "380V",
+    "material": "复合304不锈钢",
+    "productDimensions": "1610×1200×1800",
+    "tier": "全智能",
+    "sort_order": 0,
+    "is_home_core": false,
+    "relatedProducts": null,
+    "images": [
+      {
+        "filePath": "/assets/images/products/DLB-QXC80R_71.webp",
+        "isPrimary": true,
+        "sortOrder": 70
+      }
+    ],
+    "isActive": true
+  },
+  {
+    "category": "落地式",
+    "subCategory": null,
+    "model": "DLB-QXC100R",
+    "name": "多功能全自动燃气搅拌炒锅/炖烩机（语音菜单+自动喷料）",
+    "specifications": "加热方式：天然气/液化气；锅体：Φ1000*H500-640mm；锅体容量：260L；显示屏：10寸多功能触模显示屏；翻锅方式：电控翻锅；进气口规格：外螺纹6分接口；进水口规格：外螺纹4分接口；菜单：存储800个菜谱（智能学习功能）；语音：智能实时语音播报功能；喷料：自动四路定量喷料；进水：配摇摆式进水龙头；清洗：一键式自动清洗，水枪辅助清洗；翻炒方式：行星搅拌，翻炒均匀，无死角；清洁喷枪：优质高压喷枪（配2米软管）",
+    "status": "在售",
+    "is_active": true,
+    "badge": null,
+    "badgeColor": null,
+    "power": "2100W",
+    "throughput": null,
+    "averageTime": null,
+    "voltage": "380V",
+    "material": "复合304不锈钢",
+    "productDimensions": "1810×1400×2000",
+    "tier": "全智能",
+    "sort_order": 0,
+    "is_home_core": false,
+    "relatedProducts": null,
+    "images": [
+      {
+        "filePath": "/assets/images/products/DLB-QXC100R_73.webp",
+        "isPrimary": true,
+        "sortOrder": 72
+      }
+    ],
+    "isActive": true
+  },
+  {
+    "category": "落地式",
+    "subCategory": null,
+    "model": "DLB-QXC120R",
+    "name": "多功能全自动燃气搅拌炒锅/炖烩机（语音菜单+自动喷料）",
+    "specifications": "加热方式：天然气/液化气；锅体：Φ1200*H600-732mm；锅体容量：450L；显示屏：10寸多功能触模显示屏；翻锅方式：电控翻锅；进气口规格：外螺纹6分接口；进水口规格：外螺纹4分接口；菜单：存储800个菜谱（智能学习功能）；语音：智能实时语音播报功能；喷料：自动四路定量喷料；进水：配摇摆式进水龙头；清洗：一键式自动清洗，水枪辅助清洗；翻炒方式：行星搅拌，翻炒均匀，无死角；清洁喷枪：优质高压喷枪（配2米软管）",
+    "status": "在售",
+    "is_active": true,
+    "badge": null,
+    "badgeColor": null,
+    "power": "3000W",
+    "throughput": null,
+    "averageTime": null,
+    "voltage": "380V",
+    "material": "304不锈钢",
+    "productDimensions": "2020×1600×2000",
+    "tier": "全智能",
+    "sort_order": 0,
+    "is_home_core": false,
+    "relatedProducts": null,
+    "images": [
+      {
+        "filePath": "/assets/images/products/DLB-QXC120R_75.webp",
+        "isPrimary": true,
+        "sortOrder": 74
+      }
+    ],
+    "isActive": true
+  },
+  {
+    "category": "落地式",
+    "subCategory": null,
+    "model": "DLB-ZNT",
+    "name": "（可倾式）全智能汤锅 （100升）",
+    "specifications": "材质：优质不锈钢；锅体：内径Φ550*550mm，外径650mm；锅体容量：100L；锅体材质：复合底304(1mm)+Q235B(4mm)；显示屏：7寸多功能触模显示屏；菜单：存储800个菜谱（智能学习功能）；语音：智能实时语音播报功能；翻锅倒料方式：电控翻锅；进水：4分管接，配万向摇摆式水龙头",
+    "status": "在售",
+    "is_active": true,
+    "badge": null,
+    "badgeColor": null,
+    "power": "15kW",
+    "throughput": null,
+    "averageTime": null,
+    "voltage": "380V",
+    "material": "优质不锈钢；复合底304(1mm)+Q235B(4mm)",
+    "productDimensions": "1100×980×1200mm",
+    "tier": "全智能",
+    "sort_order": 0,
+    "is_home_core": false,
+    "relatedProducts": null,
+    "images": [
+      {
+        "filePath": "/assets/images/products/DLB-ZNT_54.webp",
+        "isPrimary": true,
+        "sortOrder": 53
+      }
+    ],
+    "isActive": true
+  },
+  {
+    "category": "落地式",
+    "subCategory": null,
+    "model": "DLB-ZNY",
+    "name": "（可倾式）全智能压力锅（80升）",
+    "specifications": "锅体：内径Φ490*470mm，外径640mm；锅体容量：80L；锅体材质：304不锈钢锅体，冲压锅体；显示屏：7寸多功能触模显示屏；菜单：存储800个菜谱（智能学习功能）；语音：智能实时语音播报功能；翻锅倒料方式：电控翻锅；进水：4分管接，配万向摇摆式水龙头",
+    "status": "在售",
+    "is_active": true,
+    "badge": null,
+    "badgeColor": null,
+    "power": "12kW",
+    "throughput": null,
+    "averageTime": null,
+    "voltage": "380V",
+    "material": "304不锈钢",
+    "productDimensions": "1100×980×1200mm",
+    "tier": "全智能",
+    "sort_order": 0,
+    "is_home_core": false,
+    "relatedProducts": null,
+    "images": [
+      {
+        "filePath": "/assets/images/products/DLB-ZNY_55.webp",
+        "isPrimary": true,
+        "sortOrder": 54
+      }
+    ],
+    "isActive": true
+  },
+  {
+    "category": "台式",
+    "subCategory": null,
+    "model": "M3DAD",
+    "name": "三眼智能升降煮面炉",
+    "specifications": "水箱容量：31L；水箱材质：304；操作方式：全自动触摸屏操作；入水口：DN15；排水口：DN25；溢流口：DN25；可选面篮规格：14cm/16cm/18cm；自动补水；自动冲浪功能；节能模式；自动恒温；菜谱功能",
+    "status": "在售",
+    "is_active": true,
+    "badge": null,
+    "badgeColor": null,
+    "power": "6kW",
+    "throughput": null,
+    "averageTime": null,
+    "voltage": "380V",
+    "material": "304",
+    "productDimensions": "400×800×1100mm",
+    "tier": "全智能",
+    "sort_order": 0,
+    "is_home_core": false,
+    "relatedProducts": null,
+    "images": [
+      {
+        "filePath": "/assets/images/products/M3DAD_138.webp",
+        "isPrimary": true,
+        "sortOrder": 137
+      }
+    ],
+    "isActive": true
+  },
+  {
+    "category": "台式",
+    "subCategory": null,
+    "model": "M6DBD",
+    "name": "六眼智能升降煮面炉",
+    "specifications": "额定电压：380V；额定功率：12kW（单池:6kW）；水箱容量：31L*2；加热方式：电热加热；水箱材质：#304；操作方式：全自动触摸屏操作；入水口：DN15；排水口：DN25；溢流口：DN25；可选面篮规格：14cm/16cm/18cm；自动补水；自动冲浪功能；节能模式；自动恒温；菜谱功能",
+    "status": "在售",
+    "is_active": true,
+    "badge": null,
+    "badgeColor": null,
+    "power": "12kW",
+    "throughput": null,
+    "averageTime": null,
+    "voltage": "380V",
+    "material": "#304",
+    "productDimensions": "650×800×1100mm",
+    "tier": "全智能",
+    "sort_order": 0,
+    "is_home_core": false,
+    "relatedProducts": null,
+    "images": [
+      {
+        "filePath": "/assets/images/products/M6DBD_139.webp",
+        "isPrimary": true,
+        "sortOrder": 138
+      }
+    ],
+    "isActive": true
+  },
+  {
+    "category": "台式",
+    "subCategory": null,
+    "model": "M6RAD",
+    "name": "六眼智能升降煮面炉 （燃气款）",
+    "specifications": "额定电压：220V；额定功率：100W；水箱材质：304；水箱容量：70L；操作方式：全自动触摸屏操作（单池）；入水口：DN15；排水口：DN25；溢流口：DN25；可选面篮规格：14cm/16cm/18cm；自动补水；自动冲浪功能；节能模式；自动恒温；菜谱功能",
+    "status": "在售",
+    "is_active": true,
+    "badge": null,
+    "badgeColor": null,
+    "power": "100W",
+    "throughput": null,
+    "averageTime": null,
+    "voltage": "220V",
+    "material": "304",
+    "productDimensions": "650×800×1100mm",
+    "tier": "全智能",
+    "sort_order": 0,
+    "is_home_core": false,
+    "relatedProducts": null,
+    "images": [
+      {
+        "filePath": "/assets/images/products/M6RAD_140.webp",
+        "isPrimary": true,
+        "sortOrder": 139
+      }
+    ],
+    "isActive": true
+  },
+  {
+    "category": "台式",
+    "subCategory": null,
+    "model": "M4DAD+1",
+    "name": "4+1组合智能升降煮面炉",
+    "specifications": "煮面池尺寸：210*715*215mm；水箱容量：36L；汤池尺寸：320*550*315mm；汤池容量：约55L；加汤流量：约550ml/4.6s；操作方式：全自动触摸屏操作；入水口：DN15；排水口：DN25；可选面篮规格：14cm/16cm/18cm；自动补水；手动排水；自动冲浪功能；设定恒温定温；菜谱功能；定量出汤",
+    "status": "在售",
+    "is_active": true,
+    "badge": null,
+    "badgeColor": null,
+    "power": "2kW*4+4kW",
+    "throughput": null,
+    "averageTime": null,
+    "voltage": "380V",
+    "material": "304不锈钢",
+    "productDimensions": "800×850×1100mm",
+    "tier": "全智能",
+    "sort_order": 0,
+    "is_home_core": false,
+    "relatedProducts": null,
+    "images": [
+      {
+        "filePath": "/assets/images/products/M4DAD_1_141.webp",
+        "isPrimary": true,
+        "sortOrder": 140
+      }
+    ],
+    "isActive": true
+  },
+  {
+    "category": "台式",
+    "subCategory": null,
+    "model": "M4DAD+2",
+    "name": "4+2组合智能升降煮面炉",
+    "specifications": "水箱容量：36L；配锅容量：1.5L-9.3L；操作方式：全自动触摸屏操作；入水口：DN15；排水口：DN25；溢流口：DN25；电磁炉：3.5kW*2；圆汤桶尺寸：300*300*2（容量20L*2）；可选面篮规格：14cm/16cm/18cm；自动补水；自动冲浪功能；节能模式；自动恒温；菜谱功能",
+    "status": "在售",
+    "is_active": true,
+    "badge": null,
+    "badgeColor": null,
+    "power": "2kW*4；3.5kW*2",
+    "throughput": null,
+    "averageTime": null,
+    "voltage": "380V",
+    "material": "304不锈钢",
+    "productDimensions": "850×800×1100mm",
+    "tier": "全智能",
+    "sort_order": 0,
+    "is_home_core": false,
+    "relatedProducts": null,
+    "images": [
+      {
+        "filePath": "/assets/images/products/M4DAD_2_142.webp",
+        "isPrimary": true,
+        "sortOrder": 141
+      }
+    ],
+    "isActive": true
+  },
+  {
+    "category": "台式",
+    "subCategory": null,
+    "model": "M6DAD",
+    "name": "六眼单缸智能升降煮面炉",
+    "specifications": "水箱尺寸:548mmx369mmx390mm 65L；面篓规格：直径16cm；操作方式：4.3寸触摸屏；入水口：4分外牙；排水口：1寸PPR光壁塑胶管外径32mm；溢流口：DN25；电磁炉：3.5kW*2；圆汤桶尺寸（mm)：300*300*2（容量20L*2）；可选面篮规格：14cm/16cm/19cm；手动补水；菜谱编辑；手动排水；自动恒温",
+    "status": "在售",
+    "is_active": true,
+    "badge": null,
+    "badgeColor": null,
+    "power": "12kW",
+    "throughput": null,
+    "averageTime": null,
+    "voltage": "380V",
+    "material": "SUS304不锈钢",
+    "productDimensions": "500×700×800mm",
+    "tier": "全智能",
+    "sort_order": 0,
+    "is_home_core": false,
+    "relatedProducts": null,
+    "images": [
+      {
+        "filePath": "/assets/images/products/M6DAD_143.webp",
+        "isPrimary": true,
+        "sortOrder": 142
+      }
+    ],
+    "isActive": true
+  },
+  {
+    "category": "台式",
+    "subCategory": null,
+    "model": "B4RTD",
+    "name": "台式智能燃气煲仔炉",
+    "specifications": "炉头数量：4个；热负荷：3.8/5.2kW每头；炉头：7腔；操作方式：触摸屏操作，阶梯式；燃气类型：液化气/天然气；一键启动；菜谱功能；机器学习功能；可编辑的语音",
+    "status": "在售",
+    "is_active": true,
+    "badge": null,
+    "badgeColor": null,
+    "power": "100W",
+    "throughput": null,
+    "averageTime": null,
+    "voltage": "220V",
+    "material": null,
+    "productDimensions": "750×700×400mm",
+    "tier": "智能",
+    "sort_order": 0,
+    "is_home_core": false,
+    "relatedProducts": null,
+    "images": [
+      {
+        "filePath": "/assets/images/products/B4RTD_144.webp",
+        "isPrimary": true,
+        "sortOrder": 143
+      }
+    ],
+    "isActive": true
+  },
+  {
+    "category": "落地式",
+    "subCategory": null,
+    "model": "B6RBD",
+    "name": "立式智能燃气煲仔炉",
+    "specifications": "炉头数量：6个；热负荷：5.2kW/头；炉头：7腔；操作方式：触摸屏操作；燃气类型：液化气/天然气；一键启动；菜谱功能；机器学习功能；可编辑的语音",
+    "status": "在售",
+    "is_active": true,
+    "badge": null,
+    "badgeColor": null,
+    "power": "200W",
+    "throughput": null,
+    "averageTime": null,
+    "voltage": "220V",
+    "material": null,
+    "productDimensions": "1200×680×1100mm",
+    "tier": "智能",
+    "sort_order": 0,
+    "is_home_core": false,
+    "relatedProducts": null,
+    "images": [
+      {
+        "filePath": "/assets/images/products/B6RBD_145.webp",
+        "isPrimary": true,
+        "sortOrder": 144
+      }
+    ],
+    "isActive": true
+  },
+  {
+    "category": "落地式",
+    "subCategory": null,
+    "model": "B8RBD",
+    "name": "立式智能燃气煲仔炉",
+    "specifications": "炉头数量：8个；热负荷：5.2kW/头；炉头：7腔；操作方式：触摸屏操作；燃气类型：液化气/天然气；一键启动；菜谱功能；机器学习功能；可编辑的语音",
+    "status": "在售",
+    "is_active": true,
+    "badge": null,
+    "badgeColor": null,
+    "power": "200W",
+    "throughput": null,
+    "averageTime": null,
+    "voltage": "220V",
+    "material": null,
+    "productDimensions": "1500×680×1100mm",
+    "tier": "智能",
+    "sort_order": 0,
+    "is_home_core": false,
+    "relatedProducts": null,
+    "images": [
+      {
+        "filePath": "/assets/images/products/B8RBD_146.webp",
+        "isPrimary": true,
+        "sortOrder": 145
+      }
+    ],
+    "isActive": true
+  },
+  {
+    "category": "落地式",
+    "subCategory": null,
+    "model": "LZ80D1B",
+    "name": "智能升降卤煮炉",
+    "specifications": "排水口：G1\";卤水温度：0-100℃;最大提升重量：60kg;操作方式：触摸屏操作;加热方式：发热盘;卤水桶容量：110L 降低水位低于30L;卤水桶规格(mm)：700*440*350;可选卤篮规格(mm)：690*430*110mm孔6mm",
+    "status": "在售",
+    "is_active": true,
+    "badge": null,
+    "badgeColor": null,
+    "power": "8kW",
+    "throughput": null,
+    "averageTime": null,
+    "voltage": "380V",
+    "material": null,
+    "productDimensions": "800×700×800",
+    "tier": "全智能",
+    "sort_order": 0,
+    "is_home_core": false,
+    "relatedProducts": null,
+    "images": [
+      {
+        "filePath": "/assets/images/products/LZ80D1B_153.webp",
+        "isPrimary": true,
+        "sortOrder": 152
+      }
+    ],
+    "isActive": true
+  },
+  {
+    "category": "落地式",
+    "subCategory": null,
+    "model": "DLB-PZJ80",
+    "name": "多功能自动漂烫/焯水/ 油炸机",
+    "specifications": "锅体：Φ800mm；锅体容量：200L；锅体材质：304不锈钢锅体，冲孔锅体；操作方式：7寸多功能触模显示屏；翻锅方式：电控翻锅，倒料，滤水，滤油；安全防护：带急停功能；控制方式：9档火力调节，无极调速搅拌；搅拌方式：多维立体搅拌，物料加热均匀；清洁喷枪：优质高压喷枪（配2米软管）",
+    "status": "在售",
+    "is_active": true,
+    "badge": null,
+    "badgeColor": null,
+    "power": "30kW",
+    "throughput": null,
+    "averageTime": null,
+    "voltage": "380V",
+    "material": "304不锈钢",
+    "productDimensions": "1300×1150×1400mm；1300×1150×1780mm",
+    "tier": "智能",
+    "sort_order": 0,
+    "is_home_core": false,
+    "relatedProducts": null,
+    "images": [
+      {
+        "filePath": "/assets/images/products/DLB-PZJ80_48.webp",
+        "isPrimary": true,
+        "sortOrder": 47
+      }
+    ],
+    "isActive": true
+  },
+  {
+    "category": "落地式",
+    "subCategory": null,
+    "model": "DLB-PZJ100",
+    "name": "多功能自动漂烫/焯水/ 油炸机",
+    "specifications": "锅体：Φ1000mm；锅体容量：300L；锅体材质：304不锈钢锅体，冲孔锅体；操作方式：7寸多功能触模显示屏；翻锅方式：电控翻锅，倒料，滤水，滤油；安全防护：带急停功能；控制方式：9档火力调节，无极调速搅拌；搅拌方式：多维立体搅拌，物料加热均匀；清洁喷枪：优质高压喷枪（配2米软管）",
+    "status": "在售",
+    "is_active": true,
+    "badge": null,
+    "badgeColor": null,
+    "power": "40kW",
+    "throughput": null,
+    "averageTime": null,
+    "voltage": "380V",
+    "material": "304不锈钢",
+    "productDimensions": "1500×1350×1550mm；1500×1350×1980mm",
+    "tier": "智能",
+    "sort_order": 0,
+    "is_home_core": false,
+    "relatedProducts": null,
+    "images": [
+      {
+        "filePath": "/assets/images/products/DLB-PZJ100_49.webp",
+        "isPrimary": true,
+        "sortOrder": 48
+      }
+    ],
+    "isActive": true
+  },
+  {
+    "category": "落地式",
+    "subCategory": null,
+    "model": "DLB-PZJ120",
+    "name": "多功能自动漂烫/焯水/ 油炸机",
+    "specifications": "锅体：Φ1200mm；锅体容量：500L；锅体材质：304不锈钢锅体，冲孔锅体；操作方式：7寸多功能触模显示屏；翻锅方式：电控翻锅，倒料，滤水，滤油；安全防护：带急停功能；控制方式：9档火力调节，无极调速搅拌；搅拌方式：多维立体搅拌，物料加热均匀；清洁喷枪：优质高压喷枪（配2米软管）",
+    "status": "在售",
+    "is_active": true,
+    "badge": null,
+    "badgeColor": null,
+    "power": "45kW",
+    "throughput": null,
+    "averageTime": null,
+    "voltage": "380V",
+    "material": "304不锈钢",
+    "productDimensions": "1800×1700×1550mm",
+    "tier": "智能",
+    "sort_order": 0,
+    "is_home_core": false,
+    "relatedProducts": null,
+    "images": [
+      {
+        "filePath": "/assets/images/products/DLB-PZJ120_50.webp",
+        "isPrimary": true,
+        "sortOrder": 49
+      }
+    ],
+    "isActive": true
+  },
+  {
+    "category": "落地式",
+    "subCategory": null,
+    "model": "DLB-PZJ200",
+    "name": "多功能方形自动漂烫/焯 水/油炸机",
+    "specifications": "锅体：1050×660×300；锅体容量：200L；锅体材质：304不锈钢锅体，冲孔锅体；操作方式：7寸多功能触模显示屏；翻锅方式：电控翻锅，倒料，滤水，滤油；安全防护：带急停功能；控制方式：多档火力调节，无极调速搅拌；清洁喷枪：优质高压喷枪（配2米软管）",
+    "status": "在售",
+    "is_active": true,
+    "badge": null,
+    "badgeColor": null,
+    "power": "30kW",
+    "throughput": null,
+    "averageTime": null,
+    "voltage": "380V",
+    "material": "304不锈钢",
+    "productDimensions": "1500×950×1150",
+    "tier": "智能",
+    "sort_order": 0,
+    "is_home_core": false,
+    "relatedProducts": null,
+    "images": [
+      {
+        "filePath": "/assets/images/products/DLB-PZJ200_51.webp",
+        "isPrimary": true,
+        "sortOrder": 50
+      }
+    ],
+    "isActive": true
+  },
+  {
+    "category": "落地式",
+    "subCategory": null,
+    "model": "DLB-PZJ400",
+    "name": "多功能方形自动漂烫/焯 水/油炸机",
+    "specifications": "材质：优质不锈钢；电压：380V /50Hz；功率：45kW；锅体：1250*860*500；锅体容量：400L；锅体材质：304不锈钢锅体，冲孔锅体；操作方式：7寸多功能触模显示屏；翻锅方式：电控翻锅，倒料，滤水，滤油；安全防护：带急停功能；控制方式：多档火力调节，无极调速搅拌；清洁喷枪：优质高压喷枪（配2米软管）",
+    "status": "在售",
+    "is_active": true,
+    "badge": null,
+    "badgeColor": null,
+    "power": "45kW",
+    "throughput": null,
+    "averageTime": null,
+    "voltage": "380V",
+    "material": "304不锈钢",
+    "productDimensions": "1700×1150×1220mm",
+    "tier": "智能",
+    "sort_order": 0,
+    "is_home_core": false,
+    "relatedProducts": null,
+    "images": [
+      {
+        "filePath": "/assets/images/products/DLB-PZJ400_52.webp",
+        "isPrimary": true,
+        "sortOrder": 51
+      }
+    ],
+    "isActive": true
+  },
+  {
+    "category": "落地式",
+    "subCategory": null,
+    "model": "Z6FCB",
+    "name": "智能蒸饭机",
+    "specifications": "设备名称：智能蒸饭机；型号：Z6FCB；电参数：AC380V 6kW；电缆线连接方式：Y型，由制造商服务机构或者类似具有资格的人员来更换；进水软管：使用随器具附带的新软管组件，旧软管组件不能重复利用",
+    "status": "在售",
+    "is_active": true,
+    "badge": null,
+    "badgeColor": null,
+    "power": "6kW",
+    "throughput": null,
+    "averageTime": null,
+    "voltage": "380V",
+    "material": null,
+    "productDimensions": "450×800×800mm",
+    "tier": "全智能",
+    "sort_order": 0,
+    "is_home_core": false,
+    "relatedProducts": null,
+    "images": [
+      {
+        "filePath": "/assets/images/products/Z6FCB_156.webp",
+        "isPrimary": true,
+        "sortOrder": 155
+      }
+    ],
+    "isActive": true
+  },
+  {
+    "category": "台式",
+    "subCategory": null,
+    "model": "GT1D1B",
+    "name": "单头锅贴机",
+    "specifications": "额定电压：220v；额定功率：4.5kW；发热盘功率：4.5kW；进水类型：抽水款；7寸触摸屏操作，自动烹饪，自动喷水，语音播报，菜谱编辑功能",
+    "status": "在售",
+    "is_active": true,
+    "badge": null,
+    "badgeColor": null,
+    "power": "4.5kW",
+    "throughput": null,
+    "averageTime": null,
+    "voltage": "220V",
+    "material": null,
+    "productDimensions": "350×750×280mm",
+    "tier": "智能",
+    "sort_order": 0,
+    "is_home_core": false,
+    "relatedProducts": null,
+    "images": [
+      {
+        "filePath": "/assets/images/products/GT1D1B_147.webp",
+        "isPrimary": true,
+        "sortOrder": 146
+      }
+    ],
+    "isActive": true
+  },
+  {
+    "category": "台式",
+    "subCategory": null,
+    "model": "GT2D1B",
+    "name": "双头锅贴机",
+    "specifications": "额定电压：380V；额定功率：9kW；发热盘功率：4.5kW*2；进水类型：抽水款；7寸触摸屏操作，自动烹饪，自动喷水，语音播报，菜谱编辑功能",
+    "status": "在售",
+    "is_active": true,
+    "badge": null,
+    "badgeColor": null,
+    "power": "9kW",
+    "throughput": null,
+    "averageTime": null,
+    "voltage": "380V",
+    "material": null,
+    "productDimensions": "650×750×280",
+    "tier": "智能",
+    "sort_order": 0,
+    "is_home_core": false,
+    "relatedProducts": null,
+    "images": [
+      {
+        "filePath": "/assets/images/products/GT2D1B_148.webp",
+        "isPrimary": true,
+        "sortOrder": 147
+      }
+    ],
+    "isActive": true
+  },
+  {
+    "category": "台式",
+    "subCategory": null,
+    "model": "Y12D1C",
+    "name": "台式智能升降单缸油炸炉",
+    "specifications": "油桶规格：1/2*20cm份数盘；油桶容量：12L；加热方式：发热管；操作方式：全自动触摸屏操作；可选炸篮规格：190*240*140mm孔6mm；有菜谱功能",
+    "status": "在售",
+    "is_active": true,
+    "badge": null,
+    "badgeColor": null,
+    "power": "2.8kW",
+    "throughput": null,
+    "averageTime": null,
+    "voltage": "220V",
+    "material": "201",
+    "productDimensions": "520×280×380mm",
+    "tier": "智能",
+    "sort_order": 0,
+    "is_home_core": false,
+    "relatedProducts": null,
+    "images": [
+      {
+        "filePath": "/assets/images/products/Y12D1C_149.webp",
+        "isPrimary": true,
+        "sortOrder": 148
+      }
+    ],
+    "isActive": true
+  },
+  {
+    "category": "台式",
+    "subCategory": null,
+    "model": "Y12D2C",
+    "name": "台式智能升降双缸油炸炉",
+    "specifications": "油桶规格(mm)：400*300*200；油桶容量：18L*2；加热方式：发热管；操作方式：全自动触摸屏操作；可选炸篮规格：200*280*150mm孔6mm；有菜谱功能",
+    "status": "在售",
+    "is_active": true,
+    "badge": null,
+    "badgeColor": null,
+    "power": "4.5kW",
+    "throughput": null,
+    "averageTime": null,
+    "voltage": "220V/380V",
+    "material": null,
+    "productDimensions": "620×560×360mm",
+    "tier": "全智能",
+    "sort_order": 0,
+    "is_home_core": false,
+    "relatedProducts": null,
+    "images": [
+      {
+        "filePath": "/assets/images/products/Y12D2C_150.webp",
+        "isPrimary": true,
+        "sortOrder": 149
+      }
+    ],
+    "isActive": true
+  },
+  {
+    "category": "落地式",
+    "subCategory": null,
+    "model": "Y24C1C",
+    "name": "立式智能升降单缸双筛油炸炉",
+    "specifications": "油桶规格(mm)：300*490*185；油温温度：0-230℃；油桶容量：27L；加热方式：发热管/电磁炉；操作方式：全自动触摸屏操作；可选炸篮规格：190*240*140mm孔6mm；有菜谱功能",
+    "status": "在售",
+    "is_active": true,
+    "badge": null,
+    "badgeColor": null,
+    "power": "12kW",
+    "throughput": null,
+    "averageTime": null,
+    "voltage": "380V",
+    "material": null,
+    "productDimensions": "500×800×1070mm",
+    "tier": "全智能",
+    "sort_order": 0,
+    "is_home_core": false,
+    "relatedProducts": null,
+    "images": [
+      {
+        "filePath": "/assets/images/products/Y24C1C_151.webp",
+        "isPrimary": true,
+        "sortOrder": 150
+      }
+    ],
+    "isActive": true
+  },
+  {
+    "category": "落地式",
+    "subCategory": null,
+    "model": "Y50D1C",
+    "name": "立式智能升降单缸三筛油炸炉 （油水分离款）",
+    "specifications": "油桶规格(mm)：250*600*220；油温温度：0-230℃；油桶容量：30L；加热方式：发热管；操作方式：全自动触摸屏操作；可选炸篮规格：180*215*125mm孔6mm；有菜谱功能",
+    "status": "在售",
+    "is_active": true,
+    "badge": null,
+    "badgeColor": null,
+    "power": "12kW",
+    "throughput": null,
+    "averageTime": null,
+    "voltage": "380V",
+    "material": null,
+    "productDimensions": "800×400×1150mm",
+    "tier": "全智能",
+    "sort_order": 0,
+    "is_home_core": false,
+    "relatedProducts": null,
+    "images": [
+      {
+        "filePath": "/assets/images/products/Y50D1C_152.webp",
+        "isPrimary": true,
+        "sortOrder": 151
+      }
+    ],
+    "isActive": true
+  },
+  {
+    "category": "台式",
+    "subCategory": null,
+    "model": "DLB-A60-J",
+    "name": "揭盖式商用洗碗机 （经济款）",
+    "specifications": "机身材质：优质不锈钢；清洗高度：450mm；适用场所规模：100~300餐位；整机洗涤碗碟能力：60框/H；主洗水泵：0.73KW；主洗加热器：3KW；喷淋加热器：6KW；额定功率：6.73KW；进水温度：10℃；额定电压：380V/3N；空间：1000×1000×2000mm；进水位预置：500mm/1000mm；排水位预置：离地高度≤100mm；进机电源位预置：1400↑/1500；漏电保护器规格：4P 25A；主线电缆：RV5*4mm2",
+    "status": "在售",
+    "is_active": true,
+    "badge": null,
+    "badgeColor": null,
+    "power": "0.73KW；3KW；6KW；6.73KW",
+    "throughput": "60框/H",
+    "averageTime": null,
+    "voltage": "380V",
+    "material": "优质不锈钢",
+    "productDimensions": "715×830×1400mm；1000×1000×2000mm",
+    "tier": "全智能",
+    "sort_order": 0,
+    "is_home_core": false,
+    "relatedProducts": null,
+    "images": [
+      {
+        "filePath": "/assets/images/products/DLB-A60-J_88.webp",
+        "isPrimary": true,
+        "sortOrder": 87
+      }
+    ],
+    "isActive": true
+  },
+  {
+    "category": "台式",
+    "subCategory": null,
+    "model": "DLB-A60-G",
+    "name": "揭盖式商用洗碗机（工程款）",
+    "specifications": "机身材质：优质不锈钢；清洗高度/(mm)：450；适用场所规模(餐位)：100~300；整机洗涤碗碟能力（框/H）：60；主洗水泵（KW）：0.73；主洗加热器（KW）：3；喷淋加热器（KW)：6；额定功率（KW)进水温度10℃：6.73；额定电压：380V/3N；空间（L*W*H）mm：1000*1000*2000；进水位预置（离地H/离主机进水L）：500mm/1000mm；排水位（孔&槽）预置：离地高度≤100mm；进机电源位预置（离地H/离主电控L）：1400↑/1500；漏电保护器规格：4P 25A；主线电缆（铜）：RV5*4mm2",
+    "status": "在售",
+    "is_active": true,
+    "badge": null,
+    "badgeColor": null,
+    "power": "0.73KW；3KW；6KW；6.73KW",
+    "throughput": "60框/H",
+    "averageTime": null,
+    "voltage": "380V",
+    "material": "优质不锈钢",
+    "productDimensions": "715×830×1470；1000×1000×2000",
+    "tier": "全智能",
+    "sort_order": 0,
+    "is_home_core": false,
+    "relatedProducts": null,
+    "images": [
+      {
+        "filePath": "/assets/images/products/DLB-A60-G_89.webp",
+        "isPrimary": true,
+        "sortOrder": 88
+      }
+    ],
+    "isActive": true
+  },
+  {
+    "category": "台式",
+    "subCategory": null,
+    "model": "DLB-A60-Z",
+    "name": "揭盖式商用洗碗机 （智能款）",
+    "specifications": "机身材质：优质不锈钢；清洗高度：450mm；适用场所规模：100~300餐位；整机洗涤碗碟能力：60框/H；主洗水泵：0.73KW；主洗加热器：3KW；喷淋加热器：6KW；额定功率：6.73KW；进水温度：10℃；额定电压：380V/3N；空间：1000×1000×2000mm；进水位预置：500mm/1000mm；排水位预置：离地高度≤100mm；进机电源位预置：1400↑/1500；漏电保护器规格：4P 25A；主线电缆：RV5*4mm2",
+    "status": "在售",
+    "is_active": true,
+    "badge": null,
+    "badgeColor": null,
+    "power": "0.73KW；3KW；6KW；6.73KW",
+    "throughput": "60框/H",
+    "averageTime": null,
+    "voltage": "380V",
+    "material": "优质不锈钢",
+    "productDimensions": "715×830×1550mm；1000×1000×2000mm",
+    "tier": "全智能",
+    "sort_order": 0,
+    "is_home_core": false,
+    "relatedProducts": null,
+    "images": [
+      {
+        "filePath": "/assets/images/products/DLB-A60-Z_90.webp",
+        "isPrimary": true,
+        "sortOrder": 89
+      }
+    ],
+    "isActive": true
+  },
+  {
+    "category": "落地式",
+    "subCategory": null,
+    "model": "DLB-A2800",
+    "name": "长龙商用洗碗机 （单缸单喷淋）",
+    "specifications": "机身材质：优质不锈钢；导轨宽度：610mm；适用场所规模：300-1000餐位；整机洗涤碗碟能力：3400个/H；主洗水泵：1.5KW；主洗加热器：12KW；喷淋加热器：30KW；传送电机：0.2KW；额定功率：43.5KW；进水温度：10℃；额定电压：380V/3N",
+    "status": "在售",
+    "is_active": true,
+    "badge": null,
+    "badgeColor": null,
+    "power": "1.5KW；12KW；30KW；0.2KW；43.5KW",
+    "throughput": "3400个/H",
+    "averageTime": null,
+    "voltage": "380V",
+    "material": "优质不锈钢",
+    "productDimensions": "2800×860×1630mm",
+    "tier": "全智能",
+    "sort_order": 0,
+    "is_home_core": false,
+    "relatedProducts": null,
+    "images": [
+      {
+        "filePath": "/assets/images/products/DLB-A2800_91.webp",
+        "isPrimary": true,
+        "sortOrder": 90
+      }
+    ],
+    "isActive": true
+  },
+  {
+    "category": "落地式",
+    "subCategory": null,
+    "model": "DLB-A3600",
+    "name": "长龙商用洗碗机（单缸双喷淋）",
+    "specifications": "机身材质：优质不锈钢；导轨宽度/(mm)：610；适用场所规模(餐位)：300-1000；整机洗涤碗碟能力（个/H）：4000；主洗水泵（KW）：1.5；主洗加热器（KW）：12；喷淋加热器（KW)：43.8；传送电机（KW）：0.2；额定功率（KW)进水温度10℃：43.5；额定电压：380V/3N；进水位预置（离地H/离主机进水L）：500mm/1000mm；排水位（孔&槽）预置：离地高度≤100mm；进机电源位预置（离地H/离主电控L）：1400↑/1500；漏电保护器规格：4P 125A；主线电缆（铜）：RV5*25mm2",
+    "status": "在售",
+    "is_active": true,
+    "badge": null,
+    "badgeColor": null,
+    "power": "1.5kW；12kW；43.8kW；0.2kW；43.5kW",
+    "throughput": "4000个/H",
+    "averageTime": null,
+    "voltage": "380V",
+    "material": "优质不锈钢",
+    "productDimensions": "3600×860×1630",
+    "tier": "全智能",
+    "sort_order": 0,
+    "is_home_core": false,
+    "relatedProducts": null,
+    "images": [
+      {
+        "filePath": "/assets/images/products/DLB-A3600_92.webp",
+        "isPrimary": true,
+        "sortOrder": 91
+      }
+    ],
+    "isActive": true
+  },
+  {
+    "category": "落地式",
+    "subCategory": null,
+    "model": "DLB-A4600",
+    "name": "大长龙商用洗碗机 (单缸双喷淋单烘干)",
+    "specifications": "整机质保：1年；导轨宽度：610mm；适用场所规模：1000以上；整机洗涤碗碟能力：5000个/H；主洗水泵：1.5KW；喷淋水泵：0.37KW；主洗加热器：12KW；喷淋加热器：30KW；烘干加热器：9KW；烘干风机：0.75KW；传送电机：0.2KW；额定功率进水温度10℃：53.8KW；额定电压：380V/3N；进水位预置：500mm/1000mm；排水位预置：离地高度≤100mm；进机电源位预置：1400↑/1500；漏电保护器规格：4P 125A；主线电缆：RV5*25mm2",
+    "status": "在售",
+    "is_active": true,
+    "badge": null,
+    "badgeColor": null,
+    "power": "1.5KW；0.37KW；12KW；30KW；9KW；0.75KW；0.2KW；53.8KW",
+    "throughput": "5000个/H",
+    "averageTime": null,
+    "voltage": "380V",
+    "material": "优质不锈钢",
+    "productDimensions": "4600×860×2020mm",
+    "tier": "全智能",
+    "sort_order": 0,
+    "is_home_core": false,
+    "relatedProducts": null,
+    "images": [
+      {
+        "filePath": "/assets/images/products/DLB-A4600_93.webp",
+        "isPrimary": true,
+        "sortOrder": 92
+      }
+    ],
+    "isActive": true
+  },
+  {
+    "category": "落地式",
+    "subCategory": null,
+    "model": "DLB-A5400",
+    "name": "大长龙商用洗碗机 (双缸双喷淋单烘干)",
+    "specifications": "整机质保：1年；机身材质：优质不锈钢；导轨宽度：610mm；适用场所规模(餐位)：1000以上；整机洗涤碗碟能力：8000个/H；主洗水泵：1.5x2KW；喷淋水泵：0.37KW；主洗加热器：12x2KW；喷淋加热器：30KW；烘干加热器：9KW；烘干风机：0.75KW；传送电机：0.2KW；额定功率(进水温度10℃)：67.3KW；额定电压：380V/3N；进水位预置(离地H/离主机进水L)：500mm/1000mm；排水位(孔&槽)预置：离地高度≤100mm；进机电源位预置(离地H/离主电控L)：1400↑/1500；漏电保护器规格：4P 125A；主线电缆(铜)：RV5*25mm2",
+    "status": "在售",
+    "is_active": true,
+    "badge": null,
+    "badgeColor": null,
+    "power": "1.5x2KW；0.37KW；12x2KW；30KW；9KW；0.75KW；0.2KW；67.3KW",
+    "throughput": "8000个/H",
+    "averageTime": null,
+    "voltage": "380V/3N",
+    "material": "优质不锈钢",
+    "productDimensions": "5400×860×2020mm",
+    "tier": "全智能",
+    "sort_order": 0,
+    "is_home_core": false,
+    "relatedProducts": null,
+    "images": [
+      {
+        "filePath": "/assets/images/products/DLB-A5400_94.webp",
+        "isPrimary": true,
+        "sortOrder": 93
+      }
+    ],
+    "isActive": true
+  },
+  {
+    "category": "落地式",
+    "subCategory": null,
+    "model": "G26DAA",
+    "name": "简易立式滚筒炒菜机 (电磁款)",
+    "specifications": "配锅尺寸(mm): φ260*280；炒菜重量: 约1.8kg；配锅容量: 1L-6.4L",
+    "status": "在售",
+    "is_active": true,
+    "badge": null,
+    "badgeColor": null,
+    "power": "5kW",
+    "throughput": "1L-6.4L",
+    "averageTime": null,
+    "voltage": "220V",
+    "material": "2.5mm精铁",
+    "productDimensions": "500×800×(800+520)",
+    "tier": "基础",
+    "sort_order": 0,
+    "is_home_core": false,
+    "relatedProducts": null,
+    "images": [
+      {
+        "filePath": "/assets/images/products/G26DAA_110.webp",
+        "isPrimary": true,
+        "sortOrder": 109
+      }
+    ],
+    "isActive": true
+  },
+  {
+    "category": "落地式",
+    "subCategory": null,
+    "model": "G30DAA",
+    "name": "简易立式滚筒炒菜机 (电磁款)",
+    "specifications": "额定电压：220V；额定功率：5kW；配锅尺寸(mm)：φ300*300；锅体材质：3.0mm 精铁；炒菜重量：约2.5kg；配锅容量：1.5L-9.3L",
+    "status": "在售",
+    "is_active": true,
+    "badge": null,
+    "badgeColor": null,
+    "power": "5kW",
+    "throughput": "1.5L-9.3L",
+    "averageTime": null,
+    "voltage": "220V",
+    "material": "3.0mm 精铁",
+    "productDimensions": "500×800×(800+520)",
+    "tier": "基础",
+    "sort_order": 0,
+    "is_home_core": false,
+    "relatedProducts": null,
+    "images": [
+      {
+        "filePath": "/assets/images/products/G30DAA_114.webp",
+        "isPrimary": true,
+        "sortOrder": 113
+      }
+    ],
+    "isActive": true
+  },
+  {
+    "category": "落地式",
+    "subCategory": null,
+    "model": "G26DAR",
+    "name": "简易立式滚筒炒菜机 (燃气款)",
+    "specifications": "额定电压:220V；电功率：100W；配锅尺寸(mm):φ260*280；锅体材质：2.5mm精铁；炒菜重量：约1.8kg；配锅容量：1L-6.4L；燃气类型：液化气/天然气；热负荷：17.6kW",
+    "status": "在售",
+    "is_active": true,
+    "badge": null,
+    "badgeColor": null,
+    "power": "100W",
+    "throughput": "1L-6.4L",
+    "averageTime": null,
+    "voltage": "220V",
+    "material": "2.5mm精铁",
+    "productDimensions": "500×800×(800+520)",
+    "tier": "基础",
+    "sort_order": 0,
+    "is_home_core": false,
+    "relatedProducts": null,
+    "images": [
+      {
+        "filePath": "/assets/images/products/G26DAR_111.webp",
+        "isPrimary": true,
+        "sortOrder": 110
+      }
+    ],
+    "isActive": true
+  },
+  {
+    "category": "落地式",
+    "subCategory": null,
+    "model": "G30DAR",
+    "name": "简易立式滚筒炒菜机 （燃气款）",
+    "specifications": "配锅尺寸（mm） : φ300*300；炒菜重量：约2.5kg；配锅容量：1.5L-9.3L；燃气类型：液化气/天然气；热负荷：17.6kW",
+    "status": "在售",
+    "is_active": true,
+    "badge": null,
+    "badgeColor": null,
+    "power": "100W",
+    "throughput": "约2.5kg ◆配锅容量： 1.5L-9.3L ◆燃气类型：液化气/天然气 ◆热负荷： 17.6kW",
+    "averageTime": null,
+    "voltage": "220V",
+    "material": "3.0mm精铁",
+    "productDimensions": "500×800×(800+520)",
+    "tier": "基础",
+    "sort_order": 0,
+    "is_home_core": false,
+    "relatedProducts": null,
+    "images": [
+      {
+        "filePath": "/assets/images/products/G30DAR_115.webp",
+        "isPrimary": true,
+        "sortOrder": 114
+      }
+    ],
+    "isActive": true
+  },
+  {
+    "category": "落地式",
+    "subCategory": null,
+    "model": "G36DAR",
+    "name": "简易立式滚筒炒菜机 （燃气款）",
+    "specifications": "额定电压：220V；电机功率：100W；配锅尺寸：φ360*360mm；锅体材质：2.5mm精铁；炒菜重量：约5kg；配锅容量：3L-17L；燃气类型：液化气/天然气；热负荷：17.6kW",
+    "status": "在售",
+    "is_active": true,
+    "badge": null,
+    "badgeColor": null,
+    "power": "100W；17.6kW",
+    "throughput": "3L-17L",
+    "averageTime": null,
+    "voltage": "220V",
+    "material": "2.5mm精铁",
+    "productDimensions": "560×800×(800+610)mm",
+    "tier": "基础",
+    "sort_order": 0,
+    "is_home_core": false,
+    "relatedProducts": null,
+    "images": [
+      {
+        "filePath": "/assets/images/products/G36DAR_121.webp",
+        "isPrimary": true,
+        "sortOrder": 120
+      }
+    ],
+    "isActive": true
+  },
+  {
+    "category": "落地式",
+    "subCategory": null,
+    "model": "G30DFA",
+    "name": "简易立式双头滚筒炒菜机+ 炒锅(电磁款)",
+    "specifications": "额定电压：380V；额定功率：5kW*2+15kW；配锅尺寸(mm)：φ300*300；锅体材质：3.0mm精铁；炒菜重量：约2.5kg；配锅容量：1.5L-9.3L",
+    "status": "在售",
+    "is_active": true,
+    "badge": null,
+    "badgeColor": null,
+    "power": "5kW",
+    "throughput": "1.5L-9.3L",
+    "averageTime": null,
+    "voltage": "380V",
+    "material": "3.0mm精铁",
+    "productDimensions": "1800×950×1200",
+    "tier": "基础",
+    "sort_order": 0,
+    "is_home_core": false,
+    "relatedProducts": null,
+    "images": [
+      {
+        "filePath": "/assets/images/products/G30DFA_117.webp",
+        "isPrimary": true,
+        "sortOrder": 116
+      }
+    ],
+    "isActive": true
+  },
+  {
+    "category": "落地式",
+    "subCategory": null,
+    "model": "G36DAA",
+    "name": "简易立式滚筒炒菜机 （电磁款）",
+    "specifications": "配锅尺寸（mm） : φ360*360；炒菜重量：约5kg；配锅容量：3L-17L",
+    "status": "在售",
+    "is_active": true,
+    "badge": null,
+    "badgeColor": null,
+    "power": "8kW",
+    "throughput": "约5kg ◆配锅容量：3L-17L",
+    "averageTime": null,
+    "voltage": "380V",
+    "material": "2.5mm精铁",
+    "productDimensions": "560×800×(800+580)",
+    "tier": "基础",
+    "sort_order": 0,
+    "is_home_core": false,
+    "relatedProducts": null,
+    "images": [
+      {
+        "filePath": "/assets/images/products/G36DAA_120.webp",
+        "isPrimary": true,
+        "sortOrder": 119
+      }
+    ],
+    "isActive": true
+  },
+  {
+    "category": "落地式",
+    "subCategory": null,
+    "model": "DLB-A6200",
+    "name": "大长龙商用洗碗机 (双缸双喷淋双烘干)",
+    "specifications": "整机质保：1年；机身材质：优质不锈钢；导轨宽度：610mm；适用场所规模：1000以上；整机洗涤碗碟能力：10000个/H；主洗水泵：1.5x2KW；喷淋水泵：0.37KW；主洗加热器：12x2KW；喷淋加热器：30KW；烘干加热器：9x2KW；烘干风机：0.75x2KW；传送电机：0.2KW；额定功率：77KW；进水温度：10℃；额定电压：380V/3N",
+    "status": "在售",
+    "is_active": true,
+    "badge": null,
+    "badgeColor": null,
+    "power": "1.5x2KW；0.37KW；12x2KW；30KW；9x2KW；0.75x2KW；0.2KW；77KW",
+    "throughput": "10000个/H",
+    "averageTime": null,
+    "voltage": "380V/3",
+    "material": "优质不锈钢",
+    "productDimensions": "6200×860×2020mm",
+    "tier": "全智能",
+    "sort_order": 0,
+    "is_home_core": false,
+    "relatedProducts": null,
+    "images": [
+      {
+        "filePath": "/assets/images/products/DLB-A6200_95.webp",
+        "isPrimary": true,
+        "sortOrder": 94
+      }
+    ],
+    "isActive": true
+  },
+  {
+    "category": "落地式",
+    "subCategory": null,
+    "model": "HKQPJ400-VIII",
+    "name": "多功能鲜肉切片机(单通道)",
+    "specifications": null,
+    "status": "在售",
+    "is_active": true,
+    "badge": null,
+    "badgeColor": null,
+    "power": null,
+    "throughput": null,
+    "averageTime": null,
+    "voltage": null,
+    "material": null,
+    "productDimensions": "2070×1120×1455mm",
+    "tier": "基础",
+    "sort_order": 0,
+    "is_home_core": false,
+    "relatedProducts": null,
+    "images": [
+      {
+        "filePath": "/assets/images/products/HKQPJ400-VIII_157.webp",
+        "isPrimary": true,
+        "sortOrder": 156
+      }
+    ],
+    "isActive": true
+  },
+  {
+    "category": "落地式",
+    "subCategory": null,
+    "model": "HKQPJ500-VIII",
+    "name": "多功能鲜肉切片机(双通道)",
+    "specifications": null,
+    "status": "在售",
+    "is_active": true,
+    "badge": null,
+    "badgeColor": null,
+    "power": null,
+    "throughput": null,
+    "averageTime": null,
+    "voltage": null,
+    "material": null,
+    "productDimensions": "2154×1141×1215mm",
+    "tier": "基础",
+    "sort_order": 0,
+    "is_home_core": false,
+    "relatedProducts": null,
+    "images": [
+      {
+        "filePath": "/assets/images/products/HKQPJ500-VIII_158.webp",
+        "isPrimary": true,
+        "sortOrder": 157
+      }
+    ],
+    "isActive": true
+  },
+  {
+    "category": "落地式",
+    "subCategory": null,
+    "model": "HKQTJ300",
+    "name": "多功能鲜肉切条机300",
+    "specifications": null,
+    "status": "在售",
+    "is_active": true,
+    "badge": null,
+    "badgeColor": null,
+    "power": null,
+    "throughput": null,
+    "averageTime": null,
+    "voltage": null,
+    "material": null,
+    "productDimensions": "1450×650×1550mm",
+    "tier": "基础",
+    "sort_order": 0,
+    "is_home_core": false,
+    "relatedProducts": null,
+    "images": [
+      {
+        "filePath": "/assets/images/products/HKQTJ300_159.webp",
+        "isPrimary": true,
+        "sortOrder": 158
+      }
+    ],
+    "isActive": true
+  },
+  {
+    "category": "落地式",
+    "subCategory": null,
+    "model": "HKQTJ600-VII",
+    "name": "多功能鲜肉切条机600",
+    "specifications": null,
+    "status": "在售",
+    "is_active": true,
+    "badge": null,
+    "badgeColor": null,
+    "power": null,
+    "throughput": null,
+    "averageTime": null,
+    "voltage": null,
+    "material": null,
+    "productDimensions": "1800×950×1550mm",
+    "tier": "基础",
+    "sort_order": 0,
+    "is_home_core": false,
+    "relatedProducts": null,
+    "images": [
+      {
+        "filePath": "/assets/images/products/HKQTJ600-VII_160.webp",
+        "isPrimary": true,
+        "sortOrder": 159
+      }
+    ],
+    "isActive": true
+  },
+  {
+    "category": "落地式",
+    "subCategory": null,
+    "model": "HKQTJ200-VII",
+    "name": "多功能鲜肉切条机200(切丝专用定制款)",
+    "specifications": null,
+    "status": "在售",
+    "is_active": true,
+    "badge": null,
+    "badgeColor": null,
+    "power": null,
+    "throughput": null,
+    "averageTime": null,
+    "voltage": null,
+    "material": null,
+    "productDimensions": "1950×550×1390mm",
+    "tier": "基础",
+    "sort_order": 0,
+    "is_home_core": false,
+    "relatedProducts": null,
+    "images": [
+      {
+        "filePath": "/assets/images/products/HKQTJ200-VII_161.webp",
+        "isPrimary": true,
+        "sortOrder": 160
+      }
+    ],
+    "isActive": true
+  },
+  {
+    "category": "落地式",
+    "subCategory": null,
+    "model": "HKDQJ300-VII",
+    "name": "多功能冻肉切丁机300-VII",
+    "specifications": null,
+    "status": "在售",
+    "is_active": true,
+    "badge": null,
+    "badgeColor": null,
+    "power": null,
+    "throughput": null,
+    "averageTime": null,
+    "voltage": null,
+    "material": null,
+    "productDimensions": "2080×1040×1450mm",
+    "tier": "基础",
+    "sort_order": 0,
+    "is_home_core": false,
+    "relatedProducts": null,
+    "images": [
+      {
+        "filePath": "/assets/images/products/HKDQJ300-VII_162.webp",
+        "isPrimary": true,
+        "sortOrder": 161
+      }
+    ],
+    "isActive": true
+  },
+  {
+    "category": "落地式",
+    "subCategory": null,
+    "model": "HKDQJ300",
+    "name": "多功能冻肉切丁机300",
+    "specifications": null,
+    "status": "在售",
+    "is_active": true,
+    "badge": null,
+    "badgeColor": null,
+    "power": null,
+    "throughput": null,
+    "averageTime": null,
+    "voltage": null,
+    "material": null,
+    "productDimensions": "1480×1040×1450mm",
+    "tier": "基础",
+    "sort_order": 0,
+    "is_home_core": false,
+    "relatedProducts": null,
+    "images": [
+      {
+        "filePath": "/assets/images/products/HKDQJ300_163.webp",
+        "isPrimary": true,
+        "sortOrder": 162
+      }
+    ],
+    "isActive": true
+  },
+  {
+    "category": "落地式",
+    "subCategory": null,
+    "model": "HKXQJ-400",
+    "name": "自动切花斜切机",
+    "specifications": null,
+    "status": "在售",
+    "is_active": true,
+    "badge": null,
+    "badgeColor": null,
+    "power": null,
+    "throughput": null,
+    "averageTime": null,
+    "voltage": null,
+    "material": null,
+    "productDimensions": "1257×985×690mm",
+    "tier": "基础",
+    "sort_order": 0,
+    "is_home_core": false,
+    "relatedProducts": null,
+    "images": [
+      {
+        "filePath": "/assets/images/products/HKXQJ-400_164.webp",
+        "isPrimary": true,
+        "sortOrder": 163
+      }
+    ],
+    "isActive": true
+  },
+  {
+    "category": "落地式",
+    "subCategory": null,
+    "model": "HKQPJ-300",
+    "name": "熟肉切片机",
+    "specifications": null,
+    "status": "在售",
+    "is_active": true,
+    "badge": null,
+    "badgeColor": null,
+    "power": null,
+    "throughput": null,
+    "averageTime": null,
+    "voltage": null,
+    "material": null,
+    "productDimensions": "1340×800×1250mm",
+    "tier": "基础",
+    "sort_order": 0,
+    "is_home_core": false,
+    "relatedProducts": null,
+    "images": [
+      {
+        "filePath": "/assets/images/products/HKQPJ-300_165.webp",
+        "isPrimary": true,
+        "sortOrder": 164
+      }
+    ],
+    "isActive": true
+  },
+  {
+    "category": "落地式",
+    "subCategory": null,
+    "model": "HKJGJ380-VI",
+    "name": "锯骨机380",
+    "specifications": null,
+    "status": "在售",
+    "is_active": true,
+    "badge": null,
+    "badgeColor": null,
+    "power": null,
+    "throughput": null,
+    "averageTime": null,
+    "voltage": null,
+    "material": null,
+    "productDimensions": null,
+    "tier": "基础",
+    "sort_order": 0,
+    "is_home_core": false,
+    "relatedProducts": null,
+    "images": [
+      {
+        "filePath": "/assets/images/products/HKJGJ380-VI_166.webp",
+        "isPrimary": true,
+        "sortOrder": 165
+      }
+    ],
+    "isActive": true
+  },
+  {
+    "category": "落地式",
+    "subCategory": null,
+    "model": "HKFBJ",
+    "name": "猪蹄分半机",
+    "specifications": null,
+    "status": "在售",
+    "is_active": true,
+    "badge": null,
+    "badgeColor": null,
+    "power": null,
+    "throughput": null,
+    "averageTime": null,
+    "voltage": null,
+    "material": null,
+    "productDimensions": null,
+    "tier": "基础",
+    "sort_order": 0,
+    "is_home_core": false,
+    "relatedProducts": null,
+    "images": [
+      {
+        "filePath": "/assets/images/products/HKFBJ_167.webp",
+        "isPrimary": true,
+        "sortOrder": 166
+      }
+    ],
+    "isActive": true
+  },
+  {
+    "category": "落地式",
+    "subCategory": null,
+    "model": "Z8FCB/Z12FCB",
+    "name": "智能蒸饭机",
+    "specifications": "1.设备名称： 智能蒸饭机 2.型号：Z8FCB / Z12FCB 3.电参数：AC380V  8kW/12kW（按订单定） 4.电缆线连接方式：Y型，由制造商服务机构或者类似具有资格的人员来更换 5.进水软管：使用随器具附带的新软管组件，旧软管组件不能重复利用。",
+    "status": "在售",
+    "is_active": true,
+    "badge": null,
+    "badgeColor": null,
+    "power": "",
+    "throughput": "",
+    "averageTime": "",
+    "voltage": "AC380V8kW/12kW（按订单定）4.电缆线连接方式：Y型，由制造商服务机构或者类似具有资格的人员来更换5.进水软管：使用随器具附带的新软管组件，旧软管组件不能重复利用。",
+    "material": "",
+    "productDimensions": "700mm×800mm×800mm",
+    "tier": "基础",
+    "sort_order": 0,
+    "is_home_core": false,
+    "relatedProducts": null,
+    "images": [],
+    "isActive": true
+  },
+  {
+    "category": "落地式",
+    "subCategory": null,
+    "model": "DLB-TGD36/9",
+    "name": "台式360智能电磁炒菜机 （电动）",
+    "specifications": "材质：采用优质不锈钢 功率：9kW；电压：380V；频率：50Hz 锅体规格：直桶形Φ360*H360 炒菜容量：12L（倾角30 °有效容量） 锅体材质：SUS409不锈钢不粘锅 配置：多功能数码显示屏，8道菜谱记忆存储 锅倾角度：无极多角度电动翻锅 ， 自动倒菜 翻炒方式：采用360 °滚筒旋转立体翻炒加热 火力和翻炒速度：多档位可调节 清洗：高压水枪清洗，快捷高效",
+    "status": "在售",
+    "is_active": true,
+    "badge": null,
+    "badgeColor": null,
+    "power": "9kW",
+    "throughput": null,
+    "averageTime": null,
+    "voltage": "380V",
+    "material": "采用优质不锈钢",
+    "productDimensions": "640*550*710/820",
+    "tier": "基础",
+    "sort_order": 0,
+    "is_home_core": false,
+    "relatedProducts": null,
+    "images": [],
+    "isActive": true
+  },
+  {
+    "category": "落地式",
+    "subCategory": null,
+    "model": "DLB-GD36/9",
+    "name": "落地式360智能电磁炒菜 机（电动）",
+    "specifications": "材质：整机外壳不锈钢材质 功率：9kW；电压：380V；频率：50Hz 锅体规格：球釜型锅Φ360*H360 炒菜容量：12L（倾角30 °有效容量） 锅体材质：SUS409不锈钢不粘锅 配置：多功能数码显示屏，8道菜谱记忆存储 锅倾角度：无极多角度电动翻锅 ， 自动倒菜 翻炒方式：采用360 °滚筒旋转立体翻炒加热 火力和翻炒速度：多档位可调节 清洗：高压水枪清洗，快捷高效",
+    "status": "在售",
+    "is_active": true,
+    "badge": null,
+    "badgeColor": null,
+    "power": "9kW",
+    "throughput": null,
+    "averageTime": null,
+    "voltage": "380V",
+    "material": "整机外壳不锈钢材质",
+    "productDimensions": "610*900*1450",
+    "tier": "基础",
+    "sort_order": 0,
+    "is_home_core": false,
+    "relatedProducts": null,
+    "images": [],
+    "isActive": true
+  },
+  {
+    "category": "落地式",
+    "subCategory": null,
+    "model": "DLB-TGQ36J/9",
+    "name": "台式360智能电磁炒菜机 （触屏800）",
+    "specifications": "材质：采用优质不锈钢 功率：9kW；电压：380V；频率：50Hz 锅体规格：直桶形Φ360*H360 炒菜容量：12L（倾角30 °有效容量） 锅体材质：SUS409不锈钢不粘锅 显示屏：7寸多功能触模显示屏 锅倾角度：无极多角度电动翻锅 ， 自动倒菜 翻炒方式：采用360 °滚筒旋转立体翻炒加热 火力和翻炒速度：多档位可调节 菜谱：可存储800个菜谱（智能学习功能） 语音：智能实时语音播报功能 清洗：高压水枪清洗，快捷高效",
+    "status": "在售",
+    "is_active": true,
+    "badge": null,
+    "badgeColor": null,
+    "power": "9kW",
+    "throughput": null,
+    "averageTime": null,
+    "voltage": "380V",
+    "material": "采用优质不锈钢",
+    "productDimensions": "670*550*710/820",
+    "tier": "智能",
+    "sort_order": 0,
+    "is_home_core": false,
+    "relatedProducts": null,
+    "images": [],
+    "isActive": true
+  },
+  {
+    "category": "落地式",
+    "subCategory": null,
+    "model": "DLB-GQ36J/9",
+    "name": "落地式360智能电磁炒菜 机（触屏800）",
+    "specifications": "材质：整机外壳不锈钢材质 功率：9kW；电压：380V；频率：50Hz 锅体规格：球釜型锅Φ360*H360 炒菜容量：12L（倾角30 °有效容量） 锅体材质：SUS409不锈钢不粘锅 显示屏：7寸多功能触模显示屏 锅倾角度：无极多角度电动翻锅 ， 自动倒菜 翻炒方式：采用360 °滚筒旋转立体翻炒加热 火力和翻炒速度：多档位可调节 菜谱：可存储800个菜谱（智能学习功能） 语音：智能实时语音播报功能 清洗：高压水枪清洗，快捷高效",
+    "status": "在售",
+    "is_active": true,
+    "badge": null,
+    "badgeColor": null,
+    "power": "9kW",
+    "throughput": null,
+    "averageTime": null,
+    "voltage": "380V",
+    "material": "整机外壳不锈钢材质",
+    "productDimensions": "640*900*1450",
+    "tier": "智能",
+    "sort_order": 0,
+    "is_home_core": false,
+    "relatedProducts": null,
+    "images": [],
+    "isActive": true
+  }
+]

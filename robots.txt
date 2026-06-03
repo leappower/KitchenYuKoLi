@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+Disallow: /compare/
+Disallow: /quote/
+Disallow: /thank-you/
+
+Sitemap: https://www.kitchen.yukoli.com/sitemap.xml

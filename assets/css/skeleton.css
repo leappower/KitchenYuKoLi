@@ -1,0 +1,301 @@
+/* [navigator] custom elements must be block-level */
+
+/* Prevent layout shift: <navigator> custom elements must be block-level */
+[data-component="navigator"] {
+  display: block;
+}
+
+/**
+ * skeleton.css — 骨架屏样式（三屏适配）
+ *
+ * JS 根据设备宽度动态生成不同骨架结构：
+ *   Mobile  (＜768px):  badge + h2 + 1 desc + 1 CTA     + 1 card
+ *   Tablet  (768-1279): badge + h1 + 2 desc + 2 CTAs     + 2 cards
+ *   PC      (≥1280px):  badge + h1 + 2 desc + 2 CTAs     + 3 cards
+ *
+ * 间距与实际页面对齐（使用 --container-px 变量）：
+ *   Mobile:  --container-px 12px, py-8 hero, gap-6
+ *   Tablet:  --container-px 20px, py-10 hero, gap-8
+ *   PC:      --container-px 40px, --nav-height CSS variable for navigator, py-10 hero
+ */
+
+/* ───────── 骨架层：固定覆盖在视口上，不影响文档流 ───────── */
+#skeleton-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 5;
+  padding-top: var(--nav-height, 65px);
+  pointer-events: none;
+  background-color: var(--color-bg-light);
+  opacity: 1;
+  transition: opacity 0.25s ease-out;
+}
+html.dark #skeleton-overlay {
+  background-color: var(--color-bg-dark);
+}
+@media (width >= 1024px) {
+  #skeleton-overlay {
+    padding-top: var(--nav-height, 109px);
+  }
+}
+#skeleton-overlay[hidden] {
+  display: none;
+}
+
+/* ───────── 容器 ───────── */
+.skeleton-container {
+  width: 100%;
+  margin: 0 auto;
+  min-height: 50vh;
+  padding: 2rem var(--container-px, 0.75rem); /* mobile: aligned with section-content */
+  animation: sk-fadeIn 0.15s ease-out;
+}
+
+@media (width >= 768px) {
+  .skeleton-container {
+    padding: 2.5rem var(--container-px, 1.25rem);
+  } /* tablet: aligned */
+}
+@media (width >= 1024px) {
+  .skeleton-container {
+    padding: 2.5rem var(--container-px, 1.25rem);
+  } /* lg: aligned */
+}
+@media (width >= 1280px) {
+  /* PC: main#spa-content already has padding-top from --nav-height CSS variable;
+   skeleton-container just needs content padding */
+  .skeleton-container {
+    padding: 2.5rem var(--container-px, 2.5rem);
+  }
+}
+
+/* ───────── Hero 区域（居中，与实际 hero 一致）───────── */
+.sk-hero {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  margin-bottom: 1.5rem;
+  width: 100%;
+}
+
+/* Badge（药丸标签） */
+.sk-badge {
+  width: 100px;
+  height: 22px;
+  border-radius: 9999px;
+  margin-bottom: 16px;
+  margin-left: auto;
+  margin-right: auto;
+  background: linear-gradient(90deg, #e8e8e8 25%, #d4d4d4 50%, #e8e8e8 75%);
+  background-size: 200% 100%;
+  animation: sk-shimmer 1.5s infinite;
+}
+
+/* 标题行 */
+.sk-hero .sk-line {
+  width: 65%;
+  height: 32px;
+  border-radius: 8px;
+  margin-bottom: 12px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Mobile h2 稍小 */
+.sk-hero .sk-line--h2 {
+  height: 26px;
+}
+
+/* 描述行 */
+.sk-line--desc {
+  width: 80%;
+  height: 18px;
+  margin-bottom: 8px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.sk-line--short {
+  width: 45%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* CTA 按钮组 */
+.sk-cta-group {
+  display: flex;
+  gap: 12px;
+  margin-top: 20px;
+  justify-content: center;
+  width: 100%;
+  max-width: 340px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.sk-cta {
+  flex: 1 1 0;
+  max-width: 160px;
+  height: 44px;
+  border-radius: 12px;
+}
+
+.sk-cta--outline {
+  flex: 1 1 0;
+  max-width: 140px;
+  height: 44px;
+}
+
+/* ───────── 内容网格 ───────── */
+.sk-grid {
+  display: grid;
+  gap: 16px;
+  margin-top: 2rem;
+}
+
+.sk-card {
+  height: 220px;
+  border-radius: 16px;
+  background: linear-gradient(90deg, #e8e8e8 25%, #d4d4d4 50%, #e8e8e8 75%);
+  background-size: 200% 100%;
+  animation: sk-shimmer 1.5s infinite;
+}
+
+/* 通用线条 */
+.sk-line {
+  background: linear-gradient(90deg, #e8e8e8 25%, #d4d4d4 50%, #e8e8e8 75%);
+  background-size: 200% 100%;
+  animation: sk-shimmer 1.5s infinite;
+}
+
+/* ───────── 响应式：Mobile ───────── */
+@media (width <= 767px) {
+  .sk-hero {
+    margin-bottom: 1rem;
+  }
+  .sk-badge {
+    width: 80px;
+    height: 18px;
+  }
+  .sk-hero .sk-line {
+    width: 80%;
+    height: 26px;
+  }
+  .sk-line--desc {
+    height: 14px;
+  }
+  .sk-cta {
+    width: 100%;
+    max-width: none;
+    height: 40px;
+    border-radius: 10px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .sk-cta--outline {
+    width: 100%;
+    max-width: none;
+    height: 40px;
+    border-radius: 10px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .sk-cta-group {
+    flex-direction: column;
+    width: 100%;
+    max-width: none;
+    gap: 10px;
+  }
+  .sk-grid {
+    gap: 12px;
+  }
+  .sk-card {
+    height: 180px;
+    border-radius: 12px;
+  }
+}
+
+/* ───────── 响应式：Tablet ───────── */
+@media (width >= 768px) and (width <= 1279px) {
+  .sk-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .sk-card {
+    height: 220px;
+  }
+}
+
+/* ───────── 响应式：PC ───────── */
+@media (width >= 1280px) {
+  .sk-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .sk-card {
+    height: 240px;
+  }
+}
+
+/* ───────── Animations ───────── */
+@keyframes sk-shimmer {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+@keyframes sk-fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* ───────── Dark Mode ───────── */
+/* ───────── Product grid skeleton cards ───────── */
+.sk-product-card {
+  border-radius: 12px;
+  overflow: hidden;
+  background: #fff;
+  border: 1px solid #f1f5f9;
+}
+.dark .sk-product-card {
+  background: #0f172a;
+  border-color: #1e293b;
+}
+.sk-product-img {
+  width: 100%;
+  aspect-ratio: 1/1;
+  background: linear-gradient(90deg, #e8e8e8 25%, #d4d4d4 50%, #e8e8e8 75%);
+  background-size: 200% 100%;
+  animation: sk-shimmer 1.5s infinite;
+}
+.dark .sk-product-img {
+  background: linear-gradient(90deg, #1e293b 25%, #334155 50%, #1e293b 75%);
+  background-size: 200% 100%;
+}
+.sk-product-text {
+  height: 16px;
+  width: 60%;
+  margin: 12px auto 16px;
+  border-radius: 4px;
+  background: linear-gradient(90deg, #e8e8e8 25%, #d4d4d4 50%, #e8e8e8 75%);
+  background-size: 200% 100%;
+  animation: sk-shimmer 1.5s infinite;
+}
+.dark .sk-product-text {
+  background: linear-gradient(90deg, #1e293b 25%, #334155 50%, #1e293b 75%);
+  background-size: 200% 100%;
+}
+
+.dark .sk-badge,
+.dark .sk-line,
+.dark .sk-cta,
+.dark .sk-card {
+  background: linear-gradient(90deg, #1e293b 25%, #334155 50%, #1e293b 75%);
+  background-size: 200% 100%;
+}

@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html class="light" lang="zh-CN"><head>
+    <script>
+      /* Pre-apply cached translations to prevent flash */
+      (function () {
+        try {
+          var lang = localStorage.getItem("userLanguage") || "zh-CN";
+          if (!lang) return;
+          var cacheKey = "yukoli-translations-ui-" + lang;
+          var cached = localStorage.getItem(cacheKey);
+          if (!cached) return;
+          var data = JSON.parse(cached);
+          if (!data.data) return;
+          var translations = data.data;
+          document.documentElement.lang = lang;
+          var elements = document.querySelectorAll("[data-i18n]");
+          for (var i = 0; i < elements.length; i++) {
+            var el = elements[i];
+            var key = el.getAttribute("data-i18n");
+            if (translations[key] && el.children.length === 0) {
+              el.textContent = translations[key];
+            }
+          }
+        } catch (e) {
+          /* ignore */
+        }
+      })();
+    </script>
+  <script>/*[i18n-url-sync]*/(function(){var p=new URLSearchParams(location.search),l=p.get("lang");if(l){localStorage.setItem("userLanguage",l);document.documentElement.lang=l}})();</script>
+<meta charset="utf-8"/>
+    <script>
+    (function checkDevice(){
+      if(window.__redirectChecked){console.log("[device-redirect] skip, __redirectChecked=true");return;}
+      if(document.querySelector("meta[name=ssg-device]")){console.log("[device-redirect] skip, ssg-device meta found");return;}
+      window.__redirectChecked=true;
+      var u=new URLSearchParams(location.search);
+      var c=u.get("clean-url");
+      if(c){console.log("[device-redirect] clean-url detected, replaceState:",c);history.replaceState({},"",c);return}
+      if(window.__spaNavigating){console.log("[device-redirect] skip, __spaNavigating=true");return;}
+      var f=location.pathname.split("/").pop();
+      console.log("[device-redirect] pathname=",location.pathname," f=",f," innerW=",window.innerWidth);
+      if(!f||!f.match(/.html$/)){
+        console.log("[device-redirect] dir URL (no .html), calling doRedirect");
+        doRedirect();
+        return;
+      }
+      if(f.match(/^index-(pc|mobile|tablet).html$/)){
+        console.log("[device-redirect] already on device-specific page:",f,"→ skip");
+        return;
+      }
+      function doRedirect(){
+        var mq = window.matchMedia;
+        var isTouch = mq && mq("(pointer:coarse)").matches;
+        var isMb = mq("(max-width:767px)").matches;
+        var isTb = mq("(min-width:768px) and (max-width:1023px)").matches;
+        var isPc = mq("(min-width:1024px)").matches;
+        if (isTouch && !isPc) { isMb = true; isTb = false; }
+        var e = isPc ? "index-pc.html" : isTb ? "index-tablet.html" : "index-mobile.html";
+        console.log("[device-redirect] doRedirect",{innerW:window.innerWidth,isTouch:isTouch,mobile:isMb,tablet:isTb,pc:isPc,target:e,currentF:f});
+        if(f===e){console.log("[device-redirect] already on correct version, skip");return;}
+        var newUrl=location.pathname.replace(/[^\/]*.html$/,"")+e;
+        console.log("[device-redirect] redirecting to",newUrl);
+        location.href=newUrl;
+      }
+      doRedirect();
+    })();
+    </script>
+<meta name="description" content="YuKoLi 智能厨具培训与手册下载：分级培训课程、操作手册PDF下载、在线学习平台。">
+<meta property="og:type" content="website">
+<meta property="og:title" content="YuKoLi 智能厨具 | 培训与手册下载">
+<meta property="og:description" content="YuKoLi 分级培训体系，从设备操作到日常维护。提供现场培训、在线课程和完整操作手册下载。">
+<meta property="og:url" content="https://www.kitchen.yukoli.com/support/training/">
+<meta property="og:image" content="/assets/images/home/og-image.webp">
+    <meta property="og:site_name" content="YuKoLi 智能厨具"/>
+    <meta property="og:locale" content="zh_CN"/>
+    <meta name="twitter:card" content="summary_large_image"/>
+    <meta name="twitter:title" content="YuKoLi 智能厨具 | 培训与手册下载"/>
+    <meta name="twitter:description" content="YuKoLi 分级培训体系，从设备操作到日常维护。提供现场培训、在线课程和完整操作手册下载。"/>
+    <meta name="twitter:image" content="/assets/images/home/og-image.webp"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>YuKoLi 智能厨具 | 培训与手册下载</title>
+<link rel="preload" href="/assets/fonts/local-fonts.css" as="style">
+<link rel="preload" href="/assets/css/styles.css?v=1780474841186" as="style">
+<link rel="preload" href="/assets/css/tailwind.css?v=1780474841186" as="style">
+<link rel="preload" href="/assets/fonts/public-sans-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/fonts/public-sans-latin-700-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link href="/assets/fonts/local-fonts.css" rel="stylesheet"/>
+<link rel="stylesheet" href="/assets/css/styles.css?v=1780474841186">
+<link rel="stylesheet" href="/assets/css/tailwind.css?v=1780474841186">
+<link rel="stylesheet" href="/assets/css/z-index-system.css?v=1780474841186">
+<link rel="stylesheet" href="/assets/css/performance-optimizations.css?v=1780474841186"/>
+<style>
+  body { min-height: 100dvh; }
+</style>
+<script>(function(){if(localStorage.getItem('darkMode')==='true')document.documentElement.classList.add('dark')})()</script>
+<link rel="stylesheet" href="/assets/css/skeleton.css?v=1780474841186"/>
+<link rel="icon" href="/assets/images/logo/logo.webp" type="image/webp">
+  <link rel="manifest" href="/manifest.json"/>
+      <link rel="stylesheet" href="/assets/css/components.css" />
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 antialiased overflow-x-clip">
+<navigator data-search="true" data-component="navigator" data-variant="mobile" data-active="support"></navigator>
+<!-- Breadcrumb -->
+<main id="spa-content" class="px-0 flex-1">
+<div class="relative flex min-h-screen flex-col overflow-x-hidden max-w-md mx-auto shadow-2xl bg-background-light dark:bg-background-dark pb-24">
+
+<!-- ═══ 1. Hero Section ═══ -->
+<section class="py-8">
+  <div class="section-content">
+    <div class="relative overflow-hidden rounded-xl bg-slate-900 aspect-[16/9] flex items-end" style="background-image: url('/assets/images/support/hero-training.webp'); background-size: cover; background-position: center;">
+      <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent"></div>
+      <div class="relative p-5 w-full">
+        <span class="inline-block px-2 py-1 mb-2 rounded bg-primary text-white text-[10px] font-bold uppercase tracking-wider" data-i18n="training_hero_badge">Empowerment Training</span>
+        <h2 class="text-white text-2xl font-bold leading-tight">
+          <span data-i18n="training_hero_title_prefix">Structured Training System</span>
+          <span class="text-primary" data-i18n="training_hero_title_highlight">Team Readiness</span>
+        </h2>
+        <p class="text-slate-300 text-sm mt-1" data-i18n="training_hero_desc">From operation to maintenance: tiered courses and manuals. On-site and online options for rapid skill acquisition.</p>
+        <div class="flex gap-3 mt-3">
+          <a class="flex items-center gap-1.5 bg-primary hover:bg-primary/90 text-white py-3 px-5 rounded-lg text-sm font-semibold transition-all active:scale-95 w-full justify-center" href="/quote/">
+            <span class="material-symbols-outlined text-lg">school</span>
+            <span data-i18n="training_hero_cta_primary">Book Training</span>
+          </a>
+          <a class="flex items-center gap-1.5 bg-white/15 hover:bg-white/25 backdrop-blur-sm text-white py-3 px-5 rounded-lg text-sm font-semibold transition-all active:scale-95 w-full justify-center" href="#manuals">
+            <span class="material-symbols-outlined text-lg">menu_book</span>
+            <span data-i18n="training_hero_cta_secondary">Download Manual</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ 2. Stats Row (Trust Signals) ═══ -->
+<section class="bg-slate-900 py-8">
+  <div class="section-content">
+    <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 px-3 py-4">
+      <div class="text-center py-1 px-1">
+        <p class="text-slate-400 text-[10px] font-medium" data-i18n="training_stats_1_label">
+                  Training Sessions
+                </p>
+        <p class="text-white text-lg font-bold">100<span class="text-primary text-xs">+</span></p>
+      </div>
+      <div class="text-center py-1 px-1">
+        <p class="text-slate-400 text-[10px] font-medium" data-i18n="training_stats_2_label">
+                  Trainees
+                </p>
+        <p class="text-white text-lg font-bold">500<span class="text-primary text-xs">+</span></p>
+      </div>
+      <div class="text-center py-1 px-1">
+        <p class="text-slate-400 text-[10px] font-medium" data-i18n="training_stats_3_label">Training System</p>
+        <p class="text-white text-lg font-bold">4<span data-i18n="support_training_grade" class="text-primary text-xs">Level</span></p>
+      </div>
+      <div class="text-center py-1 px-1">
+        <p class="text-slate-400 text-[10px] font-medium" data-i18n="training_stats_4_label">Language Materials</p>
+        <p class="text-white text-lg font-bold">3</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ 3. Core Values ═══ -->
+<section class="py-8">
+  <div class="section-content">
+    <h3 class="text-slate-900 dark:text-slate-100 text-xl font-bold leading-tight mb-4" data-i18n="training_core_title">
+              Comprehensive Training Support
+            </h3>
+    <div class="grid grid-cols-1 gap-3">
+      <div class="flex flex-col items-center gap-2 p-4 rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-center">
+        <div class="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center text-primary">
+          <span class="material-symbols-outlined text-xl">groups</span>
+        </div>
+        <p class="font-bold text-sm text-slate-900 dark:text-slate-100" data-i18n="training_core_1_title">
+                  On-site Training
+                </p>
+        <p class="text-[11px] text-slate-500 dark:text-slate-400 leading-relaxed" data-i18n="training_core_1_desc">On-site training by YuKoLi technicians with hands-on guidance and Q&A, ensuring independent operation.</p>
+      </div>
+      <div class="flex flex-col items-center gap-2 p-4 rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-center">
+        <div class="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center text-primary">
+          <span class="material-symbols-outlined text-xl">play_circle</span>
+        </div>
+        <p class="font-bold text-sm text-slate-900 dark:text-slate-100" data-i18n="training_core_2_title">
+                  Online Courses
+                </p>
+        <p class="text-[11px] text-slate-500 dark:text-slate-400 leading-relaxed" data-i18n="training_core_2_desc">Video tutorials and online resources for flexible learning anytime, anywhere.</p>
+      </div>
+      <div class="flex flex-col items-center gap-2 p-4 rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-center">
+        <div class="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center text-primary">
+          <span class="material-symbols-outlined text-xl">menu_book</span>
+        </div>
+        <p class="font-bold text-sm text-slate-900 dark:text-slate-100" data-i18n="training_core_3_title">
+                  Operation Manuals
+                </p>
+        <p class="text-[11px] text-slate-500 dark:text-slate-400 leading-relaxed" data-i18n="training_core_3_desc">Complete operation manuals with visual guides, maintenance instructions, and troubleshooting.</p>
+      </div>
+      <div class="flex flex-col items-center gap-2 p-4 rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-center">
+        <div class="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center text-primary">
+          <span class="material-symbols-outlined text-xl">workspace_premium</span>
+        </div>
+        <p class="font-bold text-sm text-slate-900 dark:text-slate-100" data-i18n="training_core_4_title">
+                  Certification
+                </p>
+        <p class="text-[11px] text-slate-500 dark:text-slate-400 leading-relaxed" data-i18n="training_core_4_desc">Post-training assessment with YuKoLi certification for qualified operators.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ 4. Process Steps ═══ -->
+<section class="py-8">
+  <div class="section-content">
+    <h3 class="text-slate-900 dark:text-slate-100 text-xl font-bold leading-tight mb-4" data-i18n="training_process_title">
+              Training Process
+            </h3>
+    <div class="flex flex-col gap-3">
+      <div class="flex items-start gap-3">
+        <div class="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center text-primary text-xs font-black shrink-0 mt-0.5">01</div>
+        <div>
+          <p class="font-bold text-sm text-slate-900 dark:text-slate-100" data-i18n="training_step_1_title">
+                    Needs Assessment
+                  </p>
+          <p class="text-xs text-slate-500 dark:text-slate-400 mt-0.5" data-i18n="training_step_1_desc">Assess team size, equipment models, training objectives, and schedule</p>
+        </div>
+      </div>
+      <div class="flex items-start gap-3">
+        <div class="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center text-primary text-xs font-black shrink-0 mt-0.5">02</div>
+        <div>
+          <p class="font-bold text-sm text-slate-900 dark:text-slate-100" data-i18n="training_step_2_title">Plan Development</p>
+          <p class="text-xs text-slate-500 dark:text-slate-400 mt-0.5" data-i18n="training_step_2_desc">Customize training plan with course content, duration, and format</p>
+        </div>
+      </div>
+      <div class="flex items-start gap-3">
+        <div class="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center text-primary text-xs font-black shrink-0 mt-0.5">03</div>
+        <div>
+          <p class="font-bold text-sm text-slate-900 dark:text-slate-100" data-i18n="training_step_3_title">
+                    Training Delivery
+                  </p>
+          <p class="text-xs text-slate-500 dark:text-slate-400 mt-0.5" data-i18n="training_step_3_desc">On-site or online training combining theory and hands-on practice</p>
+        </div>
+      </div>
+      <div class="flex items-start gap-3">
+        <div class="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center text-primary text-xs font-black shrink-0 mt-0.5">04</div>
+        <div>
+          <p class="font-bold text-sm text-slate-900 dark:text-slate-100" data-i18n="training_step_4_title">Evaluation & Certification</p>
+          <p class="text-xs text-slate-500 dark:text-slate-400 mt-0.5" data-i18n="training_step_4_desc">Skill assessment with YuKoLi Operator Certification for qualified trainees</p>
+        </div>
+      </div>
+      <div class="flex items-start gap-3">
+        <div class="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center text-primary text-xs font-black shrink-0 mt-0.5">05</div>
+        <div>
+          <p class="font-bold text-sm text-slate-900 dark:text-slate-100" data-i18n="training_step_5_title">Continuous Support</p>
+          <p class="text-xs text-slate-500 dark:text-slate-400 mt-0.5" data-i18n="training_step_5_desc">Ongoing online support with new courses and operation tips</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ 5. Training Courses ═══ -->
+<section class="py-8">
+  <div class="section-content">
+    <h3 class="text-slate-900 dark:text-slate-100 text-xl font-bold leading-tight mb-4" data-i18n="training_courses_title">Tiered Training Programs</h3>
+    <div class="flex flex-col gap-3">
+      <!-- Beginner -->
+      <div class="rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 overflow-hidden">
+        <div class="flex items-center gap-2 p-4 pb-2">
+          <div class="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center text-primary">
+            <span class="material-symbols-outlined text-lg">verified</span>
+          </div>
+          <h4 class="font-bold text-sm" data-i18n="training_course_beginner_title">Beginner Courses</h4>
+        </div>
+        <p class="text-xs text-slate-500 dark:text-slate-400 px-3 pb-2" data-i18n="training_course_beginner_desc">For new operators: fundamentals & safety</p>
+        <ul class="py-4 px-4 space-y-1.5">
+          <li class="flex items-start gap-1.5">
+            <span class="material-symbols-outlined text-primary text-xs mt-0.5 shrink-0">check_circle</span>
+            <span class="text-xs text-slate-700 dark:text-slate-300" data-i18n="training_course_beginner_1">Basic Operation & Safety (2hrs)</span>
+          </li>
+          <li class="flex items-start gap-1.5">
+            <span class="material-symbols-outlined text-primary text-xs mt-0.5 shrink-0">check_circle</span>
+            <span class="text-xs text-slate-700 dark:text-slate-300" data-i18n="training_course_beginner_2">Daily Cleaning & Maintenance (1hr)</span>
+          </li>
+          <li class="flex items-start gap-1.5">
+            <span class="material-symbols-outlined text-primary text-xs mt-0.5 shrink-0">check_circle</span>
+            <span class="text-xs text-slate-700 dark:text-slate-300" data-i18n="training_course_beginner_3">Troubleshooting Basics (1hr)</span>
+          </li>
+        </ul>
+      </div>
+      <!-- Intermediate -->
+      <div class="rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 overflow-hidden">
+        <div class="flex items-center gap-2 p-4 pb-2">
+          <div class="w-8 h-8 rounded-lg bg-amber-500/10 flex items-center justify-center text-amber-500">
+            <span class="material-symbols-outlined text-lg">star</span>
+          </div>
+          <h4 class="font-bold text-sm" data-i18n="training_course_intermediate_title">Intermediate Courses</h4>
+        </div>
+        <p class="text-xs text-slate-500 dark:text-slate-400 px-3 pb-2" data-i18n="training_course_intermediate_desc">For experienced operators: advanced features</p>
+        <ul class="py-4 px-4 space-y-1.5">
+          <li class="flex items-start gap-1.5">
+            <span class="material-symbols-outlined text-amber-500 text-xs mt-0.5 shrink-0">check_circle</span>
+            <span class="text-xs text-slate-700 dark:text-slate-300" data-i18n="training_course_intermediate_1">Advanced Parameter Setup (2hrs)</span>
+          </li>
+          <li class="flex items-start gap-1.5">
+            <span class="material-symbols-outlined text-amber-500 text-xs mt-0.5 shrink-0">check_circle</span>
+            <span class="text-xs text-slate-700 dark:text-slate-300" data-i18n="training_course_intermediate_2">Scheduled Maintenance (2hrs)</span>
+          </li>
+          <li class="flex items-start gap-1.5">
+            <span class="material-symbols-outlined text-amber-500 text-xs mt-0.5 shrink-0">check_circle</span>
+            <span class="text-xs text-slate-700 dark:text-slate-300" data-i18n="training_course_intermediate_3">Efficiency Optimization (1.5hrs)</span>
+          </li>
+        </ul>
+      </div>
+      <!-- Advanced -->
+      <div class="rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 overflow-hidden">
+        <div class="flex items-center gap-2 p-4 pb-2">
+          <div class="w-8 h-8 rounded-lg bg-rose-500/10 flex items-center justify-center text-rose-500">
+            <span class="material-symbols-outlined text-lg">emoji_events</span>
+          </div>
+          <h4 class="font-bold text-sm" data-i18n="training_course_advanced_title">Advanced Courses</h4>
+        </div>
+        <p class="text-xs text-slate-500 dark:text-slate-400 px-3 pb-2" data-i18n="training_course_advanced_desc">For kitchen supervisors & maintenance engineers</p>
+        <ul class="py-4 px-4 space-y-1.5">
+          <li class="flex items-start gap-1.5">
+            <span class="material-symbols-outlined text-rose-500 text-xs mt-0.5 shrink-0">check_circle</span>
+            <span class="text-xs text-slate-700 dark:text-slate-300" data-i18n="training_course_advanced_1">Advanced Equipment Diagnostics (3hrs)</span>
+          </li>
+          <li class="flex items-start gap-1.5">
+            <span class="material-symbols-outlined text-rose-500 text-xs mt-0.5 shrink-0">check_circle</span>
+            <span class="text-xs text-slate-700 dark:text-slate-300" data-i18n="training_course_advanced_2">Multi-device Coordination (2hrs)</span>
+          </li>
+          <li class="flex items-start gap-1.5">
+            <span class="material-symbols-outlined text-rose-500 text-xs mt-0.5 shrink-0">check_circle</span>
+            <span class="text-xs text-slate-700 dark:text-slate-300" data-i18n="training_course_advanced_3">Kitchen Efficiency Analysis (2hrs)</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ 6. Manual Downloads ═══ -->
+  <section id="manuals" class="py-10">
+    <div class="section-content">
+    <h2 class="text-2xl font-black tracking-tight mb-6 text-center" data-i18n="training_manuals_title">Manual Downloads</h2>
+      <div class="flex flex-col gap-4">
+        <a href="/assets/pdf/YuKoLi-Cutting-Prep-Equipment-Operation-Manual.pdf" target="_blank" rel="noopener noreferrer" class="flex items-center gap-3 p-4 rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 transition-all active:scale-[0.98]">
+          <div class="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center text-primary shrink-0">
+            <span class="material-symbols-outlined text-xl">description</span>
+          </div>
+          <div class="flex-1 min-w-0">
+            <p class="font-bold text-sm text-slate-900 dark:text-slate-100" data-i18n="training_manual_1_title">Cutting Equipment Manual</p>
+            <p class="text-[11px] text-slate-500 dark:text-slate-400 mt-0.5" data-i18n="training_manual_1_desc">Covers all cutting/prep equipment</p>
+          </div>
+          <span class="material-symbols-outlined text-slate-400 text-lg shrink-0">download</span>
+        </a>
+        <a href="/assets/pdf/YuKoLi-Cooking-Equipment-Operation-Manual.pdf" target="_blank" rel="noopener noreferrer" class="flex items-center gap-3 p-4 rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 transition-all active:scale-[0.98]">
+          <div class="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center text-primary shrink-0">
+            <span class="material-symbols-outlined text-xl">description</span>
+          </div>
+          <div class="flex-1 min-w-0">
+            <p class="font-bold text-sm text-slate-900 dark:text-slate-100" data-i18n="training_manual_2_title">
+                    Cooking Equipment Manual
+                  </p>
+            <p class="text-[11px] text-slate-500 dark:text-slate-400 mt-0.5" data-i18n="training_manual_2_desc">Covers wok ranges, fryers, steamers</p>
+          </div>
+          <span class="material-symbols-outlined text-slate-400 text-lg shrink-0">download</span>
+        </a>
+        <a href="/assets/pdf/YuKoLi-Equipment-Maintenance-Guide.pdf" target="_blank" rel="noopener noreferrer" class="flex items-center gap-3 p-4 rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 transition-all active:scale-[0.98]">
+          <div class="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center text-primary shrink-0">
+            <span class="material-symbols-outlined text-xl">description</span>
+          </div>
+          <div class="flex-1 min-w-0">
+            <p class="font-bold text-sm text-slate-900 dark:text-slate-100" data-i18n="training_manual_3_title">Maintenance Manual</p>
+            <p class="text-[11px] text-slate-500 dark:text-slate-400 mt-0.5" data-i18n="training_manual_3_desc">Maintenance guides for all equipment</p>
+          </div>
+          <span class="material-symbols-outlined text-slate-400 text-lg shrink-0">download</span>
+        </a>
+        <a class="flex items-center gap-3 p-4 rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 transition-all active:scale-95" href="mailto:support.kitchen@yukoli.com">
+          <span class="material-symbols-outlined text-2xl text-primary">email</span>
+          <div>
+            <p class="font-bold text-sm">Email</p>
+            <p class="text-xs text-slate-500 dark:text-slate-400" data-i18n="training_contact_email_desc">Request Training Materials</p>
+          </div>
+        </a>
+        <a class="flex items-center gap-3 p-4 rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 transition-all active:scale-95" href="tel:+8613163756465">
+          <span class="material-symbols-outlined text-2xl text-primary">call</span>
+          <div>
+            <p class="font-bold text-sm" data-i18n="support_contact_phone_label">Phone</p>
+            <p class="text-xs text-slate-500 dark:text-slate-400" data-i18n="training_contact_phone_desc">Training Consultation</p>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+<!-- ═══ 7. Contact Channels ═══ -->
+<div id="support-contact-channels" data-page="training"></div>
+
+<!-- ═══ 8. FAQ Section ═══ -->
+<section class="py-8">
+  <div class="section-content">
+    <h3 class="text-slate-900 dark:text-slate-100 text-xl font-bold leading-tight mb-4" data-i18n="support_faq_title">FAQs</h3>
+    <div class="flex flex-col gap-2">
+      <details class="rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 overflow-hidden group">
+        <summary class="flex items-center justify-between p-4 text-sm font-semibold text-slate-900 dark:text-slate-100 cursor-pointer select-none">
+          <span data-i18n="training_faq_q1">Is training free?</span>
+          <span class="material-symbols-outlined text-slate-400 group-open:rotate-180 transition-transform">expand_more</span>
+        </summary>
+        <div class="px-3 py-4 text-xs text-slate-600 dark:text-slate-300 leading-relaxed" data-i18n="training_faq_a1">Basic training post-installation is free. Advanced/custom training is quoted based on content and duration. Contact us for details.</div>
+      </details>
+      <details class="rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 overflow-hidden group">
+        <summary class="flex items-center justify-between p-4 text-sm font-semibold text-slate-900 dark:text-slate-100 cursor-pointer select-none">
+          <span data-i18n="training_faq_q2">Available languages?</span>
+          <span class="material-symbols-outlined text-slate-400 group-open:rotate-180 transition-transform">expand_more</span>
+        </summary>
+        <div class="px-3 py-4 text-xs text-slate-600 dark:text-slate-300 leading-relaxed" data-i18n="training_faq_a2">Available in Chinese, English, and Thai. Other languages (Vietnamese, Malay) require advance notice for translation support.</div>
+      </details>
+      <details class="rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 overflow-hidden group">
+        <summary class="flex items-center justify-between p-4 text-sm font-semibold text-slate-900 dark:text-slate-100 cursor-pointer select-none">
+          <span data-i18n="training_faq_q3">Training duration?</span>
+          <span class="material-symbols-outlined text-slate-400 group-open:rotate-180 transition-transform">expand_more</span>
+        </summary>
+        <div class="px-3 py-4 text-xs text-slate-600 dark:text-slate-300 leading-relaxed" data-i18n="training_faq_a3">Beginner: 4hrs (installation day). Intermediate: 5.5hrs. Advanced: 7hrs. Can be scheduled in sessions with certification.</div>
+      </details>
+      <details class="rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 overflow-hidden group">
+        <summary class="flex items-center justify-between p-4 text-sm font-semibold text-slate-900 dark:text-slate-100 cursor-pointer select-none">
+          <span data-i18n="training_faq_q4">How to get manuals?</span>
+          <span class="material-symbols-outlined text-slate-400 group-open:rotate-180 transition-transform">expand_more</span>
+        </summary>
+        <div class="px-3 py-4 text-xs text-slate-600 dark:text-slate-300 leading-relaxed" data-i18n="training_faq_a4">Paper manuals come with equipment. Digital versions available under "Manual Download". Contact via WhatsApp/Email for others.</div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ 9. CTA Section ═══ -->
+<section class="py-10">
+  <div class="section-content">
+    <div class="px-3 py-6 flex flex-col gap-3">
+      <a class="w-full bg-primary hover:bg-primary/90 text-white font-bold py-4 rounded-xl shadow-lg shadow-primary/30 transition-all active:scale-95 flex items-center justify-center gap-2" href="/quote/">
+        <span class="material-symbols-outlined">school</span>
+        <span data-i18n="training_cta_primary">Book Training</span>
+      </a>
+      <a class="w-full bg-[#06C755]/5 border border-[#06C755]/20 text-slate-700 dark:text-slate-300 font-bold py-4 rounded-xl transition-all active:scale-95 flex items-center justify-center gap-2" href="https://wa.me/8613163756465" data-wa-message-key="wa_msg_support_training" target="_blank" rel="noopener noreferrer">
+        <span class="material-symbols-outlined text-[#06C755]">forum</span> WhatsApp
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- Service Flow Navigation -->
+<section class="py-8">
+  <div class="px-4">
+    <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-3" data-i18n="support_flow_label">Full Lifecycle Service</p>
+    <div class="grid grid-cols-2 gap-2">
+<a href="/support/faq/" class="flex items-center gap-2 px-3 py-2.5 rounded-lg border border-slate-200 dark:border-slate-700">
+        <span class="material-symbols-outlined text-slate-400 text-sm">contact_support</span>
+        <span class="text-xs font-medium text-slate-500 dark:text-slate-400" data-i18n="nav_support_faq">FAQ</span>
+      </a>
+<a href="/support/installation/" class="flex items-center gap-2 px-3 py-2.5 rounded-lg border border-slate-200 dark:border-slate-700">
+        <span class="material-symbols-outlined text-slate-400 text-sm">construction</span>
+        <span class="text-xs font-medium text-slate-500 dark:text-slate-400" data-i18n="nav_support_installation">
+                Installation
+              </span>
+      </a>
+<a href="/support/warranty/" class="flex items-center gap-2 px-3 py-2.5 rounded-lg border border-slate-200 dark:border-slate-700">
+        <span class="material-symbols-outlined text-slate-400 text-sm">verified</span>
+        <span class="text-xs font-medium text-slate-500 dark:text-slate-400" data-i18n="nav_support_warranty">
+                Warranty
+              </span>
+      </a>
+<a href="/support/spare-parts/" class="flex items-center gap-2 px-3 py-2.5 rounded-lg border border-slate-200 dark:border-slate-700">
+        <span class="material-symbols-outlined text-slate-400 text-sm">build_circle</span>
+        <span class="text-xs font-medium text-slate-500 dark:text-slate-400" data-i18n="nav_support_spare_parts">
+                Spare Parts
+              </span>
+      </a>
+<a href="/support/training/" class="flex items-center gap-2 px-3 py-2.5 rounded-lg bg-primary/10 border border-primary/30 col-span-2 justify-self-center">
+        <span class="material-symbols-outlined text-primary text-sm">school</span>
+        <span class="text-xs font-bold text-primary" data-i18n="nav_support_training">Training</span>
+      </a>
+    </div>
+  </div>
+</section>
+</div>
+</main>
+
+    <footer data-component="footer" data-variant="mobile" data-active="support"></footer>
+
+<script defer src="/assets/js/ui/dropdown-styles.js?v=1780474841186"></script>
+    <script defer src="/assets/js/ui/dropdown-base.js?v=1780474841186"></script>
+<script defer src="/assets/js/ui/products-dropdown.js?v=1780474841186"></script>
+<script defer src="/assets/js/ui/applications-dropdown.js?v=1780474841186"></script>
+<script defer src="/assets/js/ui/support-dropdown.js?v=1780474841186"></script>
+<script defer src="/assets/js/ui/about-dropdown.js?v=1780474841186"></script>
+<script defer src="/assets/js/product-list.js?v=1780474841186"></script>
+<script defer src="/assets/js/utils.js?v=1780474841186"></script>
+<script defer src="/assets/js/ui/search-engine.js?v=1780474841186"></script>
+    <script defer src="/assets/js/ui/slide-menu.js?v=1780474841186"></script>
+<script defer src="/assets/js/ui/footer.js?v=1780474841186"></script>
+<script defer src="/assets/js/lang-registry.js?v=1780474841186"></script>
+<script defer src="/assets/js/translations.js?v=1780474841186"></script>
+<script defer src="/assets/js/translations-dropdown-template.js?v=1780474841186"></script>
+
+<script defer src="/assets/js/contacts.js?v=1780474841186"></script>
+<script defer src="/assets/js/router.js?v=1780474841186"></script>
+    <script defer src="/assets/js/ui/helpers.js?v=1780474841186"></script>
+    <script defer src="/assets/js/ui/page-effects.js?v=1780474841186"></script><script defer src="/assets/js/page-interactions.js?v=1780474841186"></script><script defer src="/assets/js/utils/device-utils.js?v=1780474841186"></script>
+
+
+    <script defer src="/assets/js/ui/floating-actions.js?v=1780474841186"></script>
+    <script src="/assets/js/product-data-table.js"></script>
+    <script defer src="/assets/js/nav-config.js"></script>
+    <script defer src="/assets/js/ui/contact-dropdown.js"></script>
+    <script defer src="/assets/js/ui/navigator.js"></script>
+    <script defer src="/assets/js/ui/hero-video.js"></script>
+    <script defer src="/assets/js/swup.min.js"></script>
+    <script defer src="/assets/js/swup-head-plugin.min.js"></script>
+    <script defer src="/assets/js/swup-preload-plugin.min.js"></script>
+    <script defer src="/assets/js/spa-router.js"></script>
+    <script defer src="/assets/js/support-contact-channels.js"></script>
+    <script defer src="/assets/js/support-wechat-modal.js"></script>
+    <script defer src="/assets/js/breadcrumb.js"></script>
+    <script>window._SPA_GLOBAL_PATTERNS=/(?:^|[\/])(?:product-data-table|nav-config|device-utils|lang-registry|utils|translations|translations-dropdown-template|dropdown-styles|dropdown-base|products-dropdown|applications-dropdown|support-dropdown|about-dropdown|contact-dropdown|navigator|slide-menu|footer|hero-video|floating-actions|helpers|page-effects|page-interactions|search-engine|swup.min|swup-head-plugin.min|swup-preload-plugin.min|spa-router)\.js/</script>
+  <style data-skeleton-inline>#skeleton-overlay{position:fixed;inset:0;z-index:5;pointer-events:none;background:var(--color-bg-light,#f8fafc);opacity:1;transition:opacity .25s ease-out}html.dark #skeleton-overlay{background:var(--color-bg-dark,#020617)}#skeleton-overlay[hidden]{display:none}@keyframes sk-shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}.skeleton-container{width:100%;max-width:1280px;margin:0 auto;padding:2rem 1.25rem}.sk-badge{width:100px;height:22px;border-radius:9999px;margin:0 auto 16px;background:linear-gradient(90deg,#e8e8e8 25%,#d4d4d4 50%,#e8e8e8 75%);background-size:200% 100%;animation:sk-shimmer 1.5s infinite}.sk-hero{display:flex;flex-direction:column;align-items:center;text-align:center;margin-bottom:24px}.sk-line{width:65%;height:32px;border-radius:8px;margin:0 auto 12px;background:linear-gradient(90deg,#e8e8e8 25%,#d4d4d4 50%,#e8e8e8 75%);background-size:200% 100%;animation:sk-shimmer 1.5s infinite}.sk-line-short{width:45%;height:18px;margin-bottom:8px}.sk-line-shorter{width:30%;height:18px}.sk-cta-group{display:flex;gap:12px;justify-content:center;margin-top:20px}.sk-cta{width:140px;height:44px;border-radius:12px;background:linear-gradient(90deg,#e8e8e8 25%,#d4d4d4 50%,#e8e8e8 75%);background-size:200% 100%;animation:sk-shimmer 1.5s infinite}.sk-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:32px}@media(max-width:767px){.sk-grid{grid-template-columns:1fr}.sk-cta{width:100%;max-width:none}}@media(min-width:768px)and(max-width:1279px){.sk-grid{grid-template-columns:repeat(2,1fr)}}.sk-card{height:220px;border-radius:16px;background:linear-gradient(90deg,#e8e8e8 25%,#d4d4d4 50%,#e8e8e8 75%);background-size:200% 100%;animation:sk-shimmer 1.5s infinite}.dark .sk-badge,.dark .sk-line,.dark .sk-cta,.dark .sk-card{background:linear-gradient(90deg,#1e293b 25%,#334155 50%,#1e293b 75%);background-size:200% 100%}</style>
+<div id="skeleton-overlay">  <div class="skeleton-container">    <div class="sk-hero">      <div class="sk-badge"></div>      <div class="sk-line"></div>      <div class="sk-line sk-line-short"></div>      <div class="sk-line sk-line-shorter"></div>      <div class="sk-cta-group">        <div class="sk-cta"></div>        <div class="sk-cta"></div>      </div>    </div>    <div class="sk-grid">      <div class="sk-card"></div>      <div class="sk-card"></div>      <div class="sk-card"></div>    </div>  </div></div>
+<script>(function(){var sk=document.getElementById("skeleton-overlay");if(!sk)return;function hide(){sk.setAttribute("hidden","");sk.style.display="none";document.head.querySelector("[data-skeleton-inline]")?.remove()}if(document.readyState==="complete")hide();else window.addEventListener("load",hide);setTimeout(hide,3000);})();</script>
+  </body></html>

@@ -1,0 +1,97 @@
+/**
+ * image-assets.js — Image path mapping (IIFE build for src/ static HTML)
+ * Synced from: src/assets/image-assets.js
+ * Global: window.ImageAssets
+ *
+ * ⚠️  NOTE: In the original src/ build, this module imports image-manifest.json
+ *     at webpack build time to auto-discover product images. In this static
+ *     version, product images from the manifest are NOT auto-populated.
+ *
+ *     If you need product images in src/, either:
+ *       a) Manually add keys to productImages below, OR
+ *       b) Fetch /images/image-manifest.json at runtime and call
+ *          window.ImageAssets.loadFromManifest() after page load.
+ *
+ * Usage: <script src="../../assets/js/image-assets.js"></script>
+ * Then:  window.ImageAssets.IMAGE_ASSETS.logo  // → "images/logo.webp"
+ *        window.ImageAssets.resolveImage('logo')  // → "images/logo.webp"
+ */
+(function (_global) {
+  "use strict";
+
+  var IMAGE_PATH_PREFIX = "images";
+
+  /** Return WebP image path for a key */
+  function resolveImage(key) {
+    return IMAGE_PATH_PREFIX + "/" + key + ".webp";
+  }
+
+  // ─── Static image assets (non-product, paths are fixed) ──────────────────────
+  var IMAGE_ASSETS = {
+    logo: IMAGE_PATH_PREFIX + "/logo/logo.webp",
+    logo_dark: IMAGE_PATH_PREFIX + "/logo/logo-dark.webp",
+    hero_bg: IMAGE_PATH_PREFIX + "/about/workshop-bgm.webp",
+    hero_main: IMAGE_PATH_PREFIX + "/home/hero-main.webp",
+    factory_video_poster: IMAGE_PATH_PREFIX + "/about/factory-video-poster.webp",
+    factory_gallery_1: IMAGE_PATH_PREFIX + "/about/factory-gallery-1.webp",
+    factory_gallery_2: IMAGE_PATH_PREFIX + "/about/factory-gallery-2.webp",
+    factory_gallery_3: IMAGE_PATH_PREFIX + "/about/factory-gallery-3.webp",
+    factory_gallery_4: IMAGE_PATH_PREFIX + "/about/factory-gallery-4.webp",
+    cert_1: IMAGE_PATH_PREFIX + "/certs/cert-1.webp",
+    cert_2: IMAGE_PATH_PREFIX + "/certs/cert-2.webp",
+    cert_3: IMAGE_PATH_PREFIX + "/certs/cert-3.webp",
+    cert_4: IMAGE_PATH_PREFIX + "/certs/cert-4.webp",
+    cert_5: IMAGE_PATH_PREFIX + "/certs/cert-5.webp",
+    cert_6: IMAGE_PATH_PREFIX + "/certs/cert-6.webp",
+    // Product images are populated at runtime via loadFromManifest()
+    // See the ⚠️ note at the top of this file for details.
+  };
+
+  /**
+   * Load product image keys from /images/image-manifest.json at runtime.
+   * Call this after the page has loaded if you need product images:
+   *   window.ImageAssets.loadFromManifest().then(() => { ... });
+   */
+  function loadFromManifest() {
+    var NON_PRODUCT_KEYS = new Set([
+      "logo",
+      "logo_dark",
+      "workshop_bgm",
+      "hero_main",
+      "factory_video_poster",
+      "factory_gallery_1",
+      "factory_gallery_2",
+      "factory_gallery_3",
+      "factory_gallery_4",
+      "cert_1",
+      "cert_2",
+      "cert_3",
+      "cert_4",
+      "cert_5",
+      "cert_6",
+    ]);
+
+    return fetch("/images/image-manifest.json")
+      .then(function (res) {
+        if (!res.ok) throw new Error("Failed to load image-manifest.json");
+        return res.json();
+      })
+      .then(function (manifest) {
+        var images = manifest.images || [];
+        images.forEach(function (key) {
+          if (!NON_PRODUCT_KEYS.has(key)) {
+            IMAGE_ASSETS[key] = IMAGE_PATH_PREFIX + "/" + key + ".webp";
+          }
+        });
+      })
+      .catch(function (err) {
+        console.warn("[ImageAssets] Could not load image-manifest.json:", err.message);
+      });
+  }
+
+  window.ImageAssets = {
+    IMAGE_ASSETS: IMAGE_ASSETS,
+    resolveImage: resolveImage,
+    loadFromManifest: loadFromManifest,
+  };
+})(window);

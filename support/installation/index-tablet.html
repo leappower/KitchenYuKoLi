@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+
+<html class="light" lang="zh-CN">
+<head>
+    <script>
+      /* Pre-apply cached translations to prevent flash */
+      (function () {
+        try {
+          var lang = localStorage.getItem("userLanguage") || "zh-CN";
+          if (!lang) return;
+          var cacheKey = "yukoli-translations-ui-" + lang;
+          var cached = localStorage.getItem(cacheKey);
+          if (!cached) return;
+          var data = JSON.parse(cached);
+          if (!data.data) return;
+          var translations = data.data;
+          document.documentElement.lang = lang;
+          var elements = document.querySelectorAll("[data-i18n]");
+          for (var i = 0; i < elements.length; i++) {
+            var el = elements[i];
+            var key = el.getAttribute("data-i18n");
+            if (translations[key] && el.children.length === 0) {
+              el.textContent = translations[key];
+            }
+          }
+        } catch (e) {
+          /* ignore */
+        }
+      })();
+    </script>
+  <script>/*[i18n-url-sync]*/(function(){var p=new URLSearchParams(location.search),l=p.get("lang");if(l){localStorage.setItem("userLanguage",l);document.documentElement.lang=l}})();</script>
+<meta charset="utf-8"/>
+    <script>
+    (function checkDevice(){
+      if(window.__redirectChecked){console.log("[device-redirect] skip, __redirectChecked=true");return;}
+      if(document.querySelector("meta[name=ssg-device]")){console.log("[device-redirect] skip, ssg-device meta found");return;}
+      window.__redirectChecked=true;
+      var u=new URLSearchParams(location.search);
+      var c=u.get("clean-url");
+      if(c){console.log("[device-redirect] clean-url detected, replaceState:",c);history.replaceState({},"",c);return}
+      if(window.__spaNavigating){console.log("[device-redirect] skip, __spaNavigating=true");return;}
+      var f=location.pathname.split("/").pop();
+      console.log("[device-redirect] pathname=",location.pathname," f=",f," innerW=",window.innerWidth);
+      if(!f||!f.match(/.html$/)){
+        console.log("[device-redirect] dir URL (no .html), calling doRedirect");
+        doRedirect();
+        return;
+      }
+      if(f.match(/^index-(pc|mobile|tablet).html$/)){
+        console.log("[device-redirect] already on device-specific page:",f,"→ skip");
+        return;
+      }
+      function doRedirect(){
+        var mq = window.matchMedia;
+        var isTouch = mq && mq("(pointer:coarse)").matches;
+        var isMb = mq("(max-width:767px)").matches;
+        var isTb = mq("(min-width:768px) and (max-width:1023px)").matches;
+        var isPc = mq("(min-width:1024px)").matches;
+        if (isTouch && !isPc) { isMb = true; isTb = false; }
+        var e = isPc ? "index-pc.html" : isTb ? "index-tablet.html" : "index-mobile.html";
+        console.log("[device-redirect] doRedirect",{innerW:window.innerWidth,isTouch:isTouch,mobile:isMb,tablet:isTb,pc:isPc,target:e,currentF:f});
+        if(f===e){console.log("[device-redirect] already on correct version, skip");return;}
+        var newUrl=location.pathname.replace(/[^\/]*.html$/,"")+e;
+        console.log("[device-redirect] redirecting to",newUrl);
+        location.href=newUrl;
+      }
+      doRedirect();
+    })();
+    </script>
+<meta name="description" content="YuKoLi 专业安装调试服务：现场勘测、设备安装、调试校准、验收培训全流程。覆盖全球 68+ 国家，紧急故障 2 小时响应，200+ 安装案例。">
+<meta property="og:type" content="website">
+<meta property="og:title" content="YuKoLi 智能厨具 | 专业安装调试服务">
+<meta property="og:description" content="YuKoLi 专业工程师团队提供从现场勘测到验收交付的全流程安装服务。覆盖东南亚 10 国，确保设备精准安装、一次调试到位。">
+<meta property="og:url" content="https://www.kitchen.yukoli.com/support/installation/">
+<meta property="og:image" content="/assets/images/home/og-image.webp">
+    <meta property="og:site_name" content="YuKoLi 智能厨具"/>
+    <meta property="og:locale" content="zh_CN"/>
+    <meta name="twitter:card" content="summary_large_image"/>
+    <meta name="twitter:title" content="YuKoLi 智能厨具 | 专业安装调试服务"/>
+    <meta name="twitter:description" content="YuKoLi 专业工程师团队提供从现场勘测到验收交付的全流程安装服务。覆盖东南亚 10 国，确保设备精准安装、一次调试到位。"/>
+    <meta name="twitter:image" content="/assets/images/home/og-image.webp"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>YuKoLi 智能厨具 | 专业安装调试服务</title>
+<link rel="preload" href="/assets/fonts/local-fonts.css" as="style">
+<link rel="preload" href="/assets/css/styles.css?v=1780474841186" as="style">
+<link rel="preload" href="/assets/css/tailwind.css?v=1780474841186" as="style">
+<link rel="preload" href="/assets/fonts/public-sans-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/fonts/public-sans-latin-700-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link href="/assets/fonts/local-fonts.css" rel="stylesheet"/>
+<link rel="stylesheet" href="/assets/css/styles.css?v=1780474841186">
+<link rel="stylesheet" href="/assets/css/tailwind.css?v=1780474841186">
+<link rel="stylesheet" href="/assets/css/z-index-system.css?v=1780474841186">
+<link rel="stylesheet" href="/assets/css/performance-optimizations.css?v=1780474841186"/>
+<link rel="stylesheet" href="/assets/css/skeleton.css?v=1780474841186"/>
+<link rel="icon" href="/assets/images/logo/logo.webp" type="image/webp">
+<script>(function(){if(localStorage.getItem('darkMode')==='true')document.documentElement.classList.add('dark')})()</script>
+  <link rel="manifest" href="/manifest.json"/>
+      <link rel="stylesheet" href="/assets/css/components.css" />
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 antialiased overflow-x-clip">
+<div class="relative flex h-auto min-h-screen w-full flex-col">
+
+<navigator data-search="true" data-component="navigator" data-variant="tablet" data-active="support" data-cta-text-key="nav_get_quote" data-cta-href="/quote"></navigator>
+<main id="spa-content" class="flex-1">
+
+<!-- ═══ Section 1: Hero ═══ -->
+<section class="fullwidth-bg hero-overlap section-passthrough flex flex-col lg:flex-row items-center py-12 gap-12">
+  <div class="section-content">
+    <div class="">
+    <div class="w-full lg:w-1/2 space-y-8">
+            <div class="flex items-center gap-2 flex-wrap">
+        <a href="/support/" class="text-sm text-slate-500 hover:text-primary transition-colors" data-i18n="nav_support">
+                    Support
+                  </a>
+        <span class="material-symbols-outlined text-sm text-slate-300">chevron_right</span>
+        <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-bold uppercase tracking-widest">
+          <span class="material-symbols-outlined text-xs leading-none">construction</span>
+          <span data-i18n="support_install_hero_badge">200+ Successful Installations</span>
+        </span>
+      </div>
+      <h1 class="text-3xl xl:text-5xl font-black leading-[1.1] tracking-tight text-slate-900 dark:text-white">
+        <span data-i18n="support_install_hero_title_1">Custom-tested before shipping</span><br/>
+        <span class="text-primary" data-i18n="support_install_hero_title_2">Plug in & start cooking</span>
+      </h1>
+      <p class="text-lg text-slate-600 dark:text-slate-400 max-w-2xl leading-relaxed" data-i18n="support_install_hero_desc">Every unit is factory-tested - plug & play ready. Our engineers optimize layout, complete connections, and train your staff for smooth operations.</p>
+      <div class="flex flex-wrap gap-4 pt-4">
+        <a href="/quote/" class="bg-primary text-white px-6 py-3 rounded-xl font-bold text-sm flex items-center gap-2 hover:shadow-lg hover:shadow-primary/20 transition-all">
+          <span data-i18n="support_install_cta_primary">Get Free Plan</span>
+          <span class="material-symbols-outlined">bolt</span>
+        </a>
+        <a href="/support/training/" class="border-2 border-slate-200 dark:border-slate-800 px-6 py-3 rounded-xl font-bold text-sm hover:bg-slate-100 dark:hover:bg-slate-800 transition-all flex items-center gap-2">
+          <span data-i18n="support_install_cta_secondary">View Training</span>
+          <span class="material-symbols-outlined">description</span>
+        </a>
+      </div>
+    <div class="w-full lg:w-1/2 relative">
+      <div class="aspect-square bg-gradient-to-br from-primary/20 to-transparent rounded-full absolute -top-10 -right-10 blur-3xl opacity-50 -z-10"></div>
+      <div class="relative w-full aspect-[3/2] bg-slate-200 dark:bg-slate-800 rounded-3xl overflow-hidden shadow-2xl border border-white/10" data-hero-video-mode="manual" data-hero-video>
+        <video class="hero-video-player w-full h-full object-cover" src="/assets/video/installation-packaging.mp4" poster="/assets/images/support/install-hero.webp" preload="none" muted playsinline loop ></video>
+        <div class="hero-video-overlay">
+        <button class="hero-video-mute" aria-label="Toggle mute" data-i18n-aria="aria_toggle_mute">
+        <span class="material-symbols-outlined text-white text-xl">volume_off</span>
+        </button>
+        <button class="hero-video-fallback-btn" aria-label="Play video" data-i18n-aria="aria_play_video">
+        <span class="material-symbols-outlined text-white text-3xl">play_circle</span>
+        </button>
+          
+          </div>
+          <img class="hero-video-poster w-full h-full object-cover" src="/assets/images/support/install-hero.webp" alt="Professional installation service" style="position:absolute; inset:0;"  loading="lazy"/>
+        <div data-hide-on-play class="absolute bottom-6 left-6 bg-white/90 dark:bg-slate-900/90 backdrop-blur p-4 rounded-2xl shadow-xl border border-slate-100 dark:border-slate-800">
+          <div class="flex items-center gap-3 mb-1">
+            <span class="material-symbols-outlined text-primary text-xl">schedule</span>
+            <span class="text-lg font-black" data-i18n="support_install_hero_float_value">On-site</span>
+          </div>
+          <p class="text-[11px] font-medium text-slate-500 uppercase tracking-wide" data-i18n="support_install_hero_float_label">Ready-to-Use</p>
+        </div>
+      </div>
+    </div>
+    </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══ Trust Bar ═══ -->
+<section class="fullwidth-bg py-6 border-y border-slate-200 dark:border-slate-800">
+  <div class="section-content">
+    <div class="">
+      <div class="flex flex-wrap items-center justify-center gap-6 md:gap-10 text-slate-400 dark:text-slate-500">
+        <div class="flex items-center gap-2 text-xs font-medium">
+          <span class="material-symbols-outlined text-base">verified</span>
+          <span data-i18n="support_install_trust_cert">CE / ISO / ROHS Certified</span>
+        </div>
+        <div class="flex items-center gap-2 text-xs font-medium">
+          <span class="material-symbols-outlined text-base">public</span>
+          <span data-i18n="support_install_trust_export">Exported to 68+ countries</span>
+        </div>
+        <div class="flex items-center gap-2 text-xs font-medium">
+          <span class="material-symbols-outlined text-base">apartment</span>
+          <span data-i18n="support_install_trust_clients">Serving chains, hotels, central kitchens across foodservice industry</span>
+        </div>
+        <div class="flex items-center gap-2 text-xs font-medium">
+          <span class="material-symbols-outlined text-base">factory</span>
+          <span data-i18n="support_install_trust_factory">20-Year OEM Factory</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- ═══ Section 2: Core Values ═══ -->
+<section class="fullwidth-bg py-10">
+  <div class="section-content">
+    <div class="">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="bg-white dark:bg-slate-800 rounded-2xl p-6 shadow-sm border border-slate-200 dark:border-slate-700 hover:shadow-lg transition-all">
+          <div class="w-full aspect-[3/2] overflow-hidden rounded-xl">
+            <img src="/assets/images/support/installation/value1.png" alt="Site Survey" data-i18n-alt="alt_install_survey" class="w-full h-full object-cover"  loading="lazy"/>
+          </div>
+          <h3 class="text-lg font-bold mt-4" data-i18n="support_install_value_1_title">We Audit Your Kitchen</h3>
+          <p class="text-sm text-slate-500 dark:text-slate-400 mt-2 leading-relaxed" data-i18n="support_install_value_1_desc">Engineers evaluate electrical, plumbing, and ventilation for optimal equipment placement.</p>
+        </div>
+        <div class="bg-white dark:bg-slate-800 rounded-2xl p-6 shadow-sm border border-slate-200 dark:border-slate-700 hover:shadow-lg transition-all">
+          <div class="w-full aspect-[3/2] overflow-hidden rounded-xl">
+            <img src="/assets/images/support/installation/value2.png" alt="Professional Installation" data-i18n-alt="alt_install_professional" class="w-full h-full object-cover"  loading="lazy"/>
+          </div>
+          <h3 class="text-lg font-bold mt-4" data-i18n="support_install_value_2_title">Hassle-Free Installation</h3>
+          <p class="text-sm text-slate-500 dark:text-slate-400 mt-2 leading-relaxed" data-i18n="support_install_value_2_desc">Complete installation service - layout planning, utility connections, and factory-tested equipment ready for immediate use.</p>
+        </div>
+        <div class="bg-white dark:bg-slate-800 rounded-2xl p-6 shadow-sm border border-slate-200 dark:border-slate-700 hover:shadow-lg transition-all">
+          <div class="w-full aspect-[3/2] overflow-hidden rounded-xl">
+            <img src="/assets/images/support/installation/value3.png" alt="Commissioning & Testing" data-i18n-alt="alt_install_commissioning" class="w-full h-full object-cover"  loading="lazy"/>
+          </div>
+          <h3 class="text-lg font-bold mt-4" data-i18n="support_install_value_3_title">Factory-Tested & Ready</h3>
+          <p class="text-sm text-slate-500 dark:text-slate-400 mt-2 leading-relaxed" data-i18n="support_install_value_3_desc">Every unit is factory-tested to match performance specifications - plug & play ready.</p>
+        </div>
+        <div class="bg-white dark:bg-slate-800 rounded-2xl p-6 shadow-sm border border-slate-200 dark:border-slate-700 hover:shadow-lg transition-all">
+          <div class="w-full aspect-[3/2] overflow-hidden rounded-xl">
+            <img src="/assets/images/support/installation/value4.png" alt="Operator Training" data-i18n-alt="alt_install_training" class="w-full h-full object-cover"  loading="lazy"/>
+          </div>
+          <h3 class="text-lg font-bold mt-4" data-i18n="support_install_value_4_title">Comprehensive Training</h3>
+          <p class="text-sm text-slate-500 dark:text-slate-400 mt-2 leading-relaxed" data-i18n="support_install_value_4_desc">On-site operation demo and training until your team is proficient. Includes manuals and video tutorials.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ Section 3: Process Steps ═══ -->
+<section class="fullwidth-bg py-10 bg-slate-50 dark:bg-slate-900/30">
+  <div class="section-content">
+    <div class="">
+      <div class="flex flex-col items-center text-center mb-10 gap-4">
+        <h2 class="text-3xl font-black tracking-tight" data-i18n="support_install_process_title">3-Step Installation</h2>
+        <p class="text-slate-600 dark:text-slate-400 max-w-2xl" data-i18n="support_install_process_desc">Transparent, controlled process from arrival to handover.</p>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="flex gap-4">
+          <div><span class="text-3xl font-black text-primary/20">01</span></div>
+          <div>
+            <h3 class="text-lg font-bold" data-i18n="support_install_step_1_title">Free On-site Survey</h3>
+            <p class="text-sm text-slate-500 mt-1" data-i18n="support_install_step_1_desc">Engineers assess your kitchen to prevent installation issues - no wasted costs.</p>
+          </div>
+        </div>
+        <div class="flex gap-4">
+          <div><span class="text-3xl font-black text-primary/20">02</span></div>
+          <div>
+            <h3 class="text-lg font-bold" data-i18n="support_install_step_2_title">Professional Installation</h3>
+            <p class="text-sm text-slate-500 mt-1" data-i18n="support_install_step_2_desc">Engineers install with optimal layout planning. Factory-tested units are operational immediately.</p>
+          </div>
+        </div>
+        <div class="flex gap-4">
+          <div><span class="text-3xl font-black text-primary/20">03</span></div>
+          <div>
+            <h3 class="text-lg font-bold" data-i18n="support_install_step_3_title">Acceptance & Training</h3>
+            <p class="text-sm text-slate-500 mt-1" data-i18n="support_install_step_3_desc">Performance demo, staff training, and documentation handover. We leave only after your approval.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ Section 4: Environment Requirements ═══ -->
+<section class="fullwidth-bg py-10">
+  <div class="section-content">
+    <div class="">
+      <div class="flex flex-col items-center text-center mb-10 gap-4">
+        <h2 class="text-3xl font-black tracking-tight" data-i18n="support_install_env_title">Kitchen Requirements</h2>
+        <p class="text-slate-600 dark:text-slate-400 max-w-2xl" data-i18n="support_install_env_desc">Basic operational requirements. Engineers will verify during on-site survey.</p>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="bg-white dark:bg-slate-800 rounded-2xl p-6 shadow-sm border border-slate-200 dark:border-slate-700 hover:shadow-lg transition-all">
+          <div class="w-full aspect-[3/2] overflow-hidden rounded-xl">
+            <img src="/assets/images/support/installation/env1.png" alt="Three-Phase Power" data-i18n-alt="alt_install_three_phase" class="w-full h-full object-cover"  loading="lazy"/>
+          </div>
+          <h3 class="text-lg font-bold mt-4" data-i18n="support_install_env_1_title">3-phase power required (380V/220V)</h3>
+          <p class="text-sm text-slate-500 dark:text-slate-400 mt-2 leading-relaxed" data-i18n="support_install_env_1_desc">Available in most commercial kitchens. Unsure? Our engineers will verify during survey.</p>
+        </div>
+        <div class="bg-white dark:bg-slate-800 rounded-2xl p-6 shadow-sm border border-slate-200 dark:border-slate-700 hover:shadow-lg transition-all">
+          <div class="w-full aspect-[3/2] overflow-hidden rounded-xl">
+            <img src="/assets/images/support/installation/env2.png" alt="Water Supply & Drainage" data-i18n-alt="alt_install_water_supply" class="w-full h-full object-cover"  loading="lazy"/>
+          </div>
+          <h3 class="text-lg font-bold mt-4" data-i18n="support_install_env_2_title">Water supply & drainage needed</h3>
+          <p class="text-sm text-slate-500 dark:text-slate-400 mt-2 leading-relaxed" data-i18n="support_install_env_2_desc">Standard commercial sink setup suffices. Booster pumps available for low water pressure.</p>
+        </div>
+        <div class="bg-white dark:bg-slate-800 rounded-2xl p-6 shadow-sm border border-slate-200 dark:border-slate-700 hover:shadow-lg transition-all">
+          <div class="w-full aspect-[3/2] overflow-hidden rounded-xl">
+            <img src="/assets/images/support/installation/env3.png" alt="Exhaust System" data-i18n-alt="alt_install_exhaust" class="w-full h-full object-cover"  loading="lazy"/>
+          </div>
+          <h3 class="text-lg font-bold mt-4" data-i18n="support_install_env_3_title">Exhaust system required</h3>
+          <p class="text-sm text-slate-500 dark:text-slate-400 mt-2 leading-relaxed" data-i18n="support_install_env_3_desc">Kitchen requires exhaust system. We can recommend partners if unavailable.</p>
+        </div>
+        <div class="bg-white dark:bg-slate-800 rounded-2xl p-6 shadow-sm border border-slate-200 dark:border-slate-700 hover:shadow-lg transition-all">
+          <div class="w-full aspect-[3/2] overflow-hidden rounded-xl">
+            <img src="/assets/images/support/installation/env4.png" alt="Operating Space" data-i18n-alt="alt_install_operating_space" class="w-full h-full object-cover"  loading="lazy"/>
+          </div>
+          <h3 class="text-lg font-bold mt-4" data-i18n="support_install_env_4_title">Adequate workspace needed</h3>
+          <p class="text-sm text-slate-500 dark:text-slate-400 mt-2 leading-relaxed" data-i18n="support_install_env_4_desc">Space varies by model. Engineers will measure precisely for operational & maintenance access.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ Section 5: Stats Row ═══ -->
+<section class="fullwidth-bg bg-slate-900 py-10">
+  <div class="section-content">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+      <div class="flex flex-col gap-1 border-l-2 border-primary/40 pl-6">
+        <span class="text-slate-400 text-sm font-semibold uppercase" data-i18n="support_install_stat_1_label">
+                  Emergency Response
+                </span>
+        <span class="text-white text-3xl font-black" data-i18n="support_install_stat_1_value">2 hours</span>
+        <span class="text-emerald-400 text-sm flex items-center gap-1">
+          <span class="material-symbols-outlined text-xs">arrow_upward</span>
+          <span data-i18n="support_install_stat_1_sub">SLA Guaranteed</span>
+        </span>
+      </div>
+      <div class="flex flex-col gap-1 border-l-2 border-primary/40 pl-6">
+        <span class="text-slate-400 text-sm font-semibold uppercase" data-i18n="support_install_stat_2_label">Installations</span>
+        <span class="text-white text-3xl font-black" data-i18n="support_install_stat_2_value">200+</span>
+        <span class="text-slate-400 text-sm" data-i18n="support_install_stat_2_sub">Units</span>
+      </div>
+      <div class="flex flex-col gap-1 border-l-2 border-primary/40 pl-6">
+        <span class="text-slate-400 text-sm font-semibold uppercase" data-i18n="support_install_stat_3_label">
+                  First-Time Acceptance
+                </span>
+        <span class="text-white text-3xl font-black" data-i18n="support_install_stat_3_value">98%</span>
+        <span class="text-slate-400 text-sm" data-i18n="support_install_stat_3_sub">Successful installations</span>
+      </div>
+      <div class="flex flex-col gap-1 border-l-2 border-primary/40 pl-6">
+        <span class="text-slate-400 text-sm font-semibold uppercase" data-i18n="support_install_stat_4_label">
+                  Countries Served
+                </span>
+        <span class="text-white text-3xl font-black" data-i18n="support_install_stat_4_value">68+</span>
+        <span class="text-slate-400 text-sm" data-i18n="support_install_stat_4_sub">
+                  Global Coverage
+                </span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div id="support-contact-channels" data-page="installation"></div>
+
+
+<!-- ═══ Section 7: FAQ ═══ -->
+<section class="fullwidth-bg py-10 bg-slate-50 dark:bg-slate-900/30">
+  <div class="section-content">
+    <div class="">
+        <h2 class="text-3xl font-black tracking-tight mb-8" data-i18n="support_install_faq_title">FAQs</h2>
+        <div class="space-y-4">
+          <details class="bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 overflow-hidden">
+            <summary class="flex items-center justify-between p-5 cursor-pointer font-bold text-slate-900 dark:text-slate-100 hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-colors">
+              <span data-i18n="support_install_faq_q1">What preparations are needed?</span>
+              <span class="material-symbols-outlined text-slate-400 transition-transform">expand_more</span>
+            </summary>
+            <div class="px-5 py-5 text-slate-600 dark:text-slate-400 leading-relaxed" data-i18n="support_install_faq_a1">Ensure basic electricity, plumbing, and ventilation. All equipment is factory-tested - plug & play after installation. Our service focuses on layout planning and utility connections. We provide checklists and final confirmation during survey.</div>
+          </details>
+          <details class="bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 overflow-hidden">
+            <summary class="flex items-center justify-between p-5 cursor-pointer font-bold text-slate-900 dark:text-slate-100 hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-colors">
+              <span data-i18n="support_install_faq_q2">How long does installation take?</span>
+              <span class="material-symbols-outlined text-slate-400 transition-transform">expand_more</span>
+            </summary>
+            <div class="px-5 py-5 text-slate-600 dark:text-slate-400 leading-relaxed" data-i18n="support_install_faq_a2">Single unit: half-day. Full line (3+ units): 1-2 days. All units are factory-tested - operational immediately after installation.</div>
+          </details>
+          <details class="bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 overflow-hidden">
+            <summary class="flex items-center justify-between p-5 cursor-pointer font-bold text-slate-900 dark:text-slate-100 hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-colors">
+              <span data-i18n="support_install_faq_q3">Who handles installation?</span>
+              <span class="material-symbols-outlined text-slate-400 transition-transform">expand_more</span>
+            </summary>
+            <div class="px-5 py-5 text-slate-600 dark:text-slate-400 leading-relaxed" data-i18n="support_install_faq_a3">Choose YuKoLi-certified engineers or self-install. All equipment is pre-tested - plug & play ready. Basic electrical knowledge suffices for DIY.</div>
+          </details>
+          <details class="bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 overflow-hidden">
+            <summary class="flex items-center justify-between p-5 cursor-pointer font-bold text-slate-900 dark:text-slate-100 hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-colors">
+              <span data-i18n="support_install_faq_q4">Post-installation acceptance?</span>
+              <span class="material-symbols-outlined text-slate-400 transition-transform">expand_more</span>
+            </summary>
+            <div class="px-5 py-5 text-slate-600 dark:text-slate-400 leading-relaxed" data-i18n="support_install_faq_a4">With professional installation: engineers verify operation, provide acceptance reports/manuals, and conduct staff training. For DIY: simply confirm proper delivery and power connection. All units are factory-tested.</div>
+          </details>
+          <details class="bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 overflow-hidden">
+            <summary class="flex items-center justify-between p-5 cursor-pointer font-bold text-slate-900 dark:text-slate-100 hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-colors">
+              <span data-i18n="support_install_faq_q5">Installation costs?</span>
+              <span class="material-symbols-outlined text-slate-400 transition-transform">expand_more</span>
+            </summary>
+            <div class="px-5 py-5 text-slate-600 dark:text-slate-400 leading-relaxed" data-i18n="support_install_faq_a5">Includes labor and standard parts. Free quote provided upfront - no hidden fees.</div>
+          </details>
+          <details class="bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 overflow-hidden">
+            <summary class="flex items-center justify-between p-5 cursor-pointer font-bold text-slate-900 dark:text-slate-100 hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-colors">
+              <span data-i18n="support_install_faq_q6">Will installation disrupt operations?</span>
+              <span class="material-symbols-outlined text-slate-400 transition-transform">expand_more</span>
+            </summary>
+            <div class="px-5 py-5 text-slate-600 dark:text-slate-400 leading-relaxed" data-i18n="support_install_faq_a6">Minimal disruption - single units take hours. Full-line installations scheduled during off-hours when possible.</div>
+          </details>
+          <details class="bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 overflow-hidden">
+            <summary class="flex items-center justify-between p-5 cursor-pointer font-bold text-slate-900 dark:text-slate-100 hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-colors">
+              <span data-i18n="support_install_faq_q7">Warranty coverage?</span>
+              <span class="material-symbols-outlined text-slate-400 transition-transform">expand_more</span>
+            </summary>
+            <div class="px-5 py-5 text-slate-600 dark:text-slate-400 leading-relaxed" data-i18n="support_install_faq_a7">1-year full warranty (from acceptance), 3 years for core components (IGBT modules, coils, pots), 12 months for control boards (excludes non-quality issues). Free replacement for defective parts.</div>
+          </details>
+          <details class="bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 overflow-hidden">
+            <summary class="flex items-center justify-between p-5 cursor-pointer font-bold text-slate-900 dark:text-slate-100 hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-colors">
+              <span data-i18n="support_install_faq_q8">Troubleshooting?</span>
+              <span class="material-symbols-outlined text-slate-400 transition-transform">expand_more</span>
+            </summary>
+            <div class="px-5 py-5 text-slate-600 dark:text-slate-400 leading-relaxed" data-i18n="support_install_faq_a8">Contact via WhatsApp/phone/email. 2-hour emergency response. 60%+ issues resolved remotely.</div>
+          </details>
+        </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ Section 8: CTA ═══ -->
+<section class="fullwidth-bg py-12">
+  <div class="section-content">
+    <div class="">
+      <div class="bg-slate-900 rounded-[3rem] p-12 md:p-16 text-center flex flex-col items-center gap-8 relative overflow-hidden">
+        <div class="absolute top-0 right-0 w-64 h-64 bg-primary/10 blur-[100px] rounded-full"></div>
+
+        <div class="absolute bottom-0 left-0 w-96 h-96 bg-primary/5 blur-[120px] rounded-full"></div>
+        <h2 class="text-3xl font-black text-white leading-tight" data-i18n="support_install_cta_title">Equipment purchased? We'll install it.</h2>
+        <p class="text-slate-400 max-w-xl text-lg" data-i18n="support_install_cta_desc">200+ equipment installations worldwide across 68+ countries. Expert team, fast & reliable.</p>
+        <div class="flex flex-wrap justify-center gap-4">
+          <a href="/quote/" class="bg-primary text-white px-6 py-3 rounded-2xl font-black text-sm shadow-2xl shadow-primary/40 hover:scale-105 transition-transform" data-i18n="support_install_cta_btn_primary">Get Free Plan</a>
+        <a href="https://wa.me/8613163756465" data-wa-message-key="wa_msg_support_installation" data-wa-source="bottom-cta" target="_blank" rel="noopener noreferrer" class="bg-white/10 text-white border border-white/20 backdrop-blur-sm px-6 py-3 rounded-2xl font-black text-sm hover:bg-white/20 transition-colors" ><span data-i18n="compare_contact_whatsapp">WhatsApp Inquiry</span></a>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+</div>
+
+<!-- Service Flow Navigation -->
+<section class="fullwidth-bg py-10">
+  <div class="section-content">
+    <div class="text-center mb-6">
+      <p class="text-xs font-bold text-slate-400 dark:text-slate-500 uppercase tracking-widest mb-1" data-i18n="support_flow_label">Full Lifecycle Service</p>
+      <p class="text-sm text-slate-500 dark:text-slate-400" data-i18n="support_flow_desc">End-to-end support from selection to training</p>
+    </div>
+    <div class="flex flex-wrap justify-center gap-3">
+<a href="/support/faq/" class="flex items-center gap-2 px-4 py-3 rounded-xl border border-slate-200 dark:border-slate-700 hover:border-primary/50 hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-all">
+              <span class="material-symbols-outlined text-slate-400">contact_support</span>
+              <span class="text-sm font-medium text-slate-600 dark:text-slate-400" data-i18n="nav_support_faq">FAQ</span>
+            </a>
+<div class="flex items-center gap-2 px-4 py-3 rounded-xl bg-primary/10 border border-primary/30">
+              <span class="material-symbols-outlined text-primary">construction</span>
+              <span class="text-sm font-bold text-primary" data-i18n="nav_support_installation">
+              Installation
+            </span>
+              <span class="material-symbols-outlined text-primary text-xs">check_circle</span>
+            </div>
+<a href="/support/warranty/" class="flex items-center gap-2 px-4 py-3 rounded-xl border border-slate-200 dark:border-slate-700 hover:border-primary/50 hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-all">
+              <span class="material-symbols-outlined text-slate-400">verified</span>
+              <span class="text-sm font-medium text-slate-600 dark:text-slate-400" data-i18n="nav_support_warranty">
+              Warranty
+            </span>
+            </a>
+<a href="/support/spare-parts/" class="flex items-center gap-2 px-4 py-3 rounded-xl border border-slate-200 dark:border-slate-700 hover:border-primary/50 hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-all">
+              <span class="material-symbols-outlined text-slate-400">build_circle</span>
+              <span class="text-sm font-medium text-slate-600 dark:text-slate-400" data-i18n="nav_support_spare_parts">
+              Spare Parts
+            </span>
+            </a>
+<a href="/support/training/" class="flex items-center gap-2 px-4 py-3 rounded-xl border border-slate-200 dark:border-slate-700 hover:border-primary/50 hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-all">
+              <span class="material-symbols-outlined text-slate-400">school</span>
+              <span class="text-sm font-medium text-slate-600 dark:text-slate-400" data-i18n="nav_support_training">
+              Training
+            </span>
+            </a>
+    </div>
+  </div>
+</section>
+<!-- ═══ Scripts ═══ -->
+<script defer src="/assets/js/ui/dropdown-styles.js?v=1780474841186"></script>
+    <script defer src="/assets/js/ui/dropdown-base.js?v=1780474841186"></script>
+<script defer src="/assets/js/ui/products-dropdown.js?v=1780474841186"></script>
+<script defer src="/assets/js/ui/applications-dropdown.js?v=1780474841186"></script>
+<script defer src="/assets/js/ui/support-dropdown.js?v=1780474841186"></script>
+<script defer src="/assets/js/ui/about-dropdown.js?v=1780474841186"></script>
+<script defer src="/assets/js/product-list.js?v=1780474841186"></script>
+<script defer src="/assets/js/utils.js?v=1780474841186"></script>
+<script defer src="/assets/js/ui/search-engine.js?v=1780474841186"></script>
+    <script defer src="/assets/js/ui/slide-menu.js?v=1780474841186"></script>
+<script defer src="/assets/js/ui/footer.js?v=1780474841186"></script>
+<script defer src="/assets/js/lang-registry.js?v=1780474841186"></script>
+<script defer src="/assets/js/translations.js?v=1780474841186"></script>
+<script defer src="/assets/js/translations-dropdown-template.js?v=1780474841186"></script>
+
+<script defer src="/assets/js/contacts.js?v=1780474841186"></script>
+<script defer src="/assets/js/router.js?v=1780474841186"></script>
+    <script defer src="/assets/js/ui/helpers.js?v=1780474841186"></script>
+    <script defer src="/assets/js/ui/page-effects.js?v=1780474841186"></script><script defer src="/assets/js/page-interactions.js?v=1780474841186"></script><script defer src="/assets/js/utils/device-utils.js?v=1780474841186"></script>
+
+
+    <script defer src="/assets/js/ui/floating-actions.js?v=1780474841186"></script>
+    <script defer src="/assets/js/ui/hero-video.js?v=1780474841186"></script>
+    <script src="/assets/js/product-data-table.js"></script>
+    <script defer src="/assets/js/nav-config.js"></script>
+    <script defer src="/assets/js/ui/contact-dropdown.js"></script>
+    <script defer src="/assets/js/ui/navigator.js"></script>
+    <script defer src="/assets/js/swup.min.js"></script>
+    <script defer src="/assets/js/swup-head-plugin.min.js"></script>
+    <script defer src="/assets/js/swup-preload-plugin.min.js"></script>
+    <script defer src="/assets/js/spa-router.js"></script>
+    <script defer src="/assets/js/support-contact-channels.js"></script>
+    <script defer src="/assets/js/support-wechat-modal.js"></script>
+    <script defer src="/assets/js/breadcrumb.js"></script>
+    <script>window._SPA_GLOBAL_PATTERNS=/(?:^|[\/])(?:product-data-table|nav-config|device-utils|lang-registry|utils|translations|translations-dropdown-template|dropdown-styles|dropdown-base|products-dropdown|applications-dropdown|support-dropdown|about-dropdown|contact-dropdown|navigator|slide-menu|footer|hero-video|floating-actions|helpers|page-effects|page-interactions|search-engine|swup.min|swup-head-plugin.min|swup-preload-plugin.min|spa-router)\.js/</script>
+  <style data-skeleton-inline>#skeleton-overlay{position:fixed;inset:0;z-index:5;pointer-events:none;background:var(--color-bg-light,#f8fafc);opacity:1;transition:opacity .25s ease-out}html.dark #skeleton-overlay{background:var(--color-bg-dark,#020617)}#skeleton-overlay[hidden]{display:none}@keyframes sk-shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}.skeleton-container{width:100%;max-width:1280px;margin:0 auto;padding:2rem 1.25rem}.sk-badge{width:100px;height:22px;border-radius:9999px;margin:0 auto 16px;background:linear-gradient(90deg,#e8e8e8 25%,#d4d4d4 50%,#e8e8e8 75%);background-size:200% 100%;animation:sk-shimmer 1.5s infinite}.sk-hero{display:flex;flex-direction:column;align-items:center;text-align:center;margin-bottom:24px}.sk-line{width:65%;height:32px;border-radius:8px;margin:0 auto 12px;background:linear-gradient(90deg,#e8e8e8 25%,#d4d4d4 50%,#e8e8e8 75%);background-size:200% 100%;animation:sk-shimmer 1.5s infinite}.sk-line-short{width:45%;height:18px;margin-bottom:8px}.sk-line-shorter{width:30%;height:18px}.sk-cta-group{display:flex;gap:12px;justify-content:center;margin-top:20px}.sk-cta{width:140px;height:44px;border-radius:12px;background:linear-gradient(90deg,#e8e8e8 25%,#d4d4d4 50%,#e8e8e8 75%);background-size:200% 100%;animation:sk-shimmer 1.5s infinite}.sk-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:32px}@media(max-width:767px){.sk-grid{grid-template-columns:1fr}.sk-cta{width:100%;max-width:none}}@media(min-width:768px)and(max-width:1279px){.sk-grid{grid-template-columns:repeat(2,1fr)}}.sk-card{height:220px;border-radius:16px;background:linear-gradient(90deg,#e8e8e8 25%,#d4d4d4 50%,#e8e8e8 75%);background-size:200% 100%;animation:sk-shimmer 1.5s infinite}.dark .sk-badge,.dark .sk-line,.dark .sk-cta,.dark .sk-card{background:linear-gradient(90deg,#1e293b 25%,#334155 50%,#1e293b 75%);background-size:200% 100%}</style>
+<div id="skeleton-overlay">  <div class="skeleton-container">    <div class="sk-hero">      <div class="sk-badge"></div>      <div class="sk-line"></div>      <div class="sk-line sk-line-short"></div>      <div class="sk-line sk-line-shorter"></div>      <div class="sk-cta-group">        <div class="sk-cta"></div>        <div class="sk-cta"></div>      </div>    </div>    <div class="sk-grid">      <div class="sk-card"></div>      <div class="sk-card"></div>      <div class="sk-card"></div>    </div>  </div></div>
+<script>(function(){var sk=document.getElementById("skeleton-overlay");if(!sk)return;function hide(){sk.setAttribute("hidden","");sk.style.display="none";document.head.querySelector("[data-skeleton-inline]")?.remove()}if(document.readyState==="complete")hide();else window.addEventListener("load",hide);setTimeout(hide,3000);})();</script>
+  </body>
+</html>

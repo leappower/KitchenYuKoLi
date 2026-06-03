@@ -1,0 +1,725 @@
+<!doctype html>
+
+<html class="light" lang="zh-CN">
+  <head>
+    <script>
+      /* Pre-apply cached translations to prevent flash */
+      (function () {
+        try {
+          var lang = localStorage.getItem("userLanguage") || "zh-CN";
+          if (!lang) return;
+          var cacheKey = "yukoli-translations-ui-" + lang;
+          var cached = localStorage.getItem(cacheKey);
+          if (!cached) return;
+          var data = JSON.parse(cached);
+          if (!data.data) return;
+          var translations = data.data;
+          document.documentElement.lang = lang;
+          var elements = document.querySelectorAll("[data-i18n]");
+          for (var i = 0; i < elements.length; i++) {
+            var el = elements[i];
+            var key = el.getAttribute("data-i18n");
+            if (translations[key] && el.children.length === 0) {
+              el.textContent = translations[key];
+            }
+          }
+        } catch (e) {
+          /* ignore */
+        }
+      })();
+    </script>
+  <script>/*[i18n-url-sync]*/(function(){var p=new URLSearchParams(location.search),l=p.get("lang");if(l){localStorage.setItem("userLanguage",l);document.documentElement.lang=l}})();</script>
+    <!-- ═══ Responsive Redirect (injected by patch-responsive-redirect.py) ═══ -->
+    <link rel="canonical" href="https://www.kitchen.yukoli.com/about/" />
+  <link rel="alternate" hreflang="zh-CN" href="https://www.kitchen.yukoli.com/about/" />
+  <link rel="alternate" hreflang="en" href="https://www.kitchen.yukoli.com/about/" />
+  <link rel="alternate" hreflang="x-default" href="https://www.kitchen.yukoli.com/about/" />
+    <link rel="alternate" media="only screen and (max-width: 767px)" href="/about/index-mobile.html" />
+    <link
+      rel="alternate"
+      media="only screen and (min-width: 768px) and (max-width: 1279px)"
+      href="/about/index-tablet.html"
+    />
+    <link rel="alternate" media="only screen and (min-width: 1280px)" href="/about/index-pc.html" />
+    <script>
+    (function checkDevice(){
+      if(window.__redirectChecked){console.log("[device-redirect] skip, __redirectChecked=true");return;}
+      if(document.querySelector("meta[name=ssg-device]")){console.log("[device-redirect] skip, ssg-device meta found");return;}
+      window.__redirectChecked=true;
+      var u=new URLSearchParams(location.search);
+      var c=u.get("clean-url");
+      if(c){console.log("[device-redirect] clean-url detected, replaceState:",c);history.replaceState({},"",c);return}
+      if(window.__spaNavigating){console.log("[device-redirect] skip, __spaNavigating=true");return;}
+      var f=location.pathname.split("/").pop();
+      console.log("[device-redirect] pathname=",location.pathname," f=",f," innerW=",window.innerWidth);
+      if(!f||!f.match(/.html$/)){
+        console.log("[device-redirect] dir URL (no .html), calling doRedirect");
+        doRedirect();
+        return;
+      }
+      if(f.match(/^index-(pc|mobile|tablet).html$/)){
+        console.log("[device-redirect] already on device-specific page:",f,"→ skip");
+        return;
+      }
+      function doRedirect(){
+        var mq = window.matchMedia;
+        var isTouch = mq && mq("(pointer:coarse)").matches;
+        var isMb = mq("(max-width:767px)").matches;
+        var isTb = mq("(min-width:768px) and (max-width:1023px)").matches;
+        var isPc = mq("(min-width:1024px)").matches;
+        if (isTouch && !isPc) { isMb = true; isTb = false; }
+        var e = isPc ? "index-pc.html" : isTb ? "index-tablet.html" : "index-mobile.html";
+        console.log("[device-redirect] doRedirect",{innerW:window.innerWidth,isTouch:isTouch,mobile:isMb,tablet:isTb,pc:isPc,target:e,currentF:f});
+        if(f===e){console.log("[device-redirect] already on correct version, skip");return;}
+        var newUrl=location.pathname.replace(/[^\/]*.html$/,"")+e;
+        console.log("[device-redirect] redirecting to",newUrl);
+        location.href=newUrl;
+      }
+      doRedirect();
+    })();
+    </script>
+<!-- ═══ End Responsive Redirect ═══ -->
+
+    <meta charset="utf-8" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="YuKoLi 智能厨具 | 关于我们 - 23年商用厨房设备制造商" />
+    <meta
+      property="og:description"
+      content="YuKoLi（跃迁力科技）— 23年商用厨房设备制造商，总部位于广东佛山。200款智能商厨设备，覆盖全球68+国家，通过CE、UL、ISO 9001认证。"
+    />
+    <meta property="og:url" content="https://www.kitchen.yukoli.com/about/" />
+    <meta property="og:image" content="https://www.kitchen.yukoli.com/assets/images/logo/logo.webp" />
+    <meta property="og:site_name" content="YuKoLi 智能厨具"/>
+    <meta property="og:locale" content="zh_CN"/>
+    <meta name="twitter:card" content="summary_large_image"/>
+    <meta name="twitter:title" content="YuKoLi 智能厨具 | 关于我们 - 23年商用厨房设备制造商"/>
+    <meta name="twitter:description" content="YuKoLi（跃迁力科技）— 23年商用厨房设备制造商，总部位于广东佛山。200款智能商厨设备，覆盖全球68+国家，通过CE、UL、ISO 9001认证。"/>
+    <meta name="twitter:image" content="https://www.kitchen.yukoli.com/assets/images/logo/logo.webp"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <meta name="description" content="关于 YuKoLi 跃迁力科技 — 23年商用厨房设备制造经验，ISO 9001/CE双认证，200款智能设备服务全球68+国家餐饮企业。" />
+    <title>YuKoLi 智能厨具 | 关于我们 - 23年商用厨房设备制造商</title>
+
+    <!-- Organization JSON-LD -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "佛山市跃迁力科技有限公司",
+        "alternateName": ["Foshan YuKoLi Technology Co., Ltd.", "YuKoLi", "跃迁力科技"],
+        "url": "https://www.kitchen.yukoli.com",
+        "logo": "https://www.kitchen.yukoli.com/assets/images/logo/logo.webp",
+        "description": "YuKoLi 是一家位于广东佛山的商用厨房设备制造商，拥有23年行业经验，200款智能设备，产品出口全球68+国家。",
+        "foundingDate": "2003",
+        "foundingLocation": {
+          "@type": "Place",
+          "name": "Foshan, Guangdong, China"
+        },
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Foshan",
+          "addressRegion": "Guangdong",
+          "addressCountry": "CN"
+        },
+        "areaServed": [
+          { "@type": "Country", "name": "Thailand" },
+          { "@type": "Country", "name": "Vietnam" },
+          { "@type": "Country", "name": "Malaysia" },
+          { "@type": "Country", "name": "Indonesia" },
+          { "@type": "Country", "name": "Philippines" }
+        ],
+        "numberOfEmployees": { "@type": "QuantitativeValue", "minValue": 200, "maxValue": 499 },
+        "sameAs": []
+      }
+    </script>
+
+    <link rel="preload" href="/assets/fonts/local-fonts.css" as="style" />
+    <link rel="preload" href="/assets/css/styles.css?v=1780474841186" as="style" />
+    <link rel="preload" href="/assets/css/tailwind.css?v=1780474841186" as="style" />
+    <link
+      rel="preload"
+      href="/assets/fonts/public-sans-latin-400-normal.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href="/assets/fonts/public-sans-latin-700-normal.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link href="/assets/fonts/local-fonts.css" rel="stylesheet" />
+    <link rel="stylesheet" href="/assets/css/styles.css?v=1780474841186" />
+    <link rel="stylesheet" href="/assets/css/tailwind.css?v=1780474841186" />
+    <link rel="stylesheet" href="/assets/css/z-index-system.css?v=1780474841186" />
+    <link rel="stylesheet" href="/assets/css/performance-optimizations.css?v=1780474841186" />
+    <!-- Dark mode: apply saved preference before first paint (prevents flash) -->
+    <script>
+      (function () {
+        if (localStorage.getItem("darkMode") === "true") document.documentElement.classList.add("dark");
+      })();
+    </script>
+    <link rel="stylesheet" href="/assets/css/skeleton.css?v=1780474841186" />
+    <link rel="icon" href="/assets/images/logo/logo.webp" type="image/webp" />
+
+    <!-- SEO JSON-LD: AboutPage -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "AboutPage",
+        "name": "关于 YuKoLi - 23年商用厨房设备制造商",
+        "url": "https://www.kitchen.yukoli.com/about/",
+        "description": "YuKoLi（跃迁力科技）— 23年专注智能商用厨房设备的研发与制造，200款智能设备服务全球68+国家。",
+        "mainEntity": {
+          "@type": "Organization",
+          "name": "佛山市跃迁力科技有限公司",
+          "url": "https://www.kitchen.yukoli.com"
+        }
+      }
+    </script>
+    <link rel="manifest" href="/manifest.json"/>
+      <link rel="stylesheet" href="/assets/css/components.css" />
+</head>
+  <body
+    class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 antialiased transition-colors duration-300 overflow-x-clip"
+  >
+    <!-- Top Navigation Bar -->
+    <!-- ═══ Navigator Component ═══ -->
+    <navigator data-search="true"
+      data-component="navigator"
+      data-variant="pc"
+      data-active="about"
+      data-cta-text-key="nav_get_quote"
+      data-cta-href="/quote"
+    ></navigator>
+    <main id="spa-content" class="flex-1">
+      <!-- Hero Section -->
+      <section id="profile" class="fullwidth-bg hero-overlap section-passthrough flex flex-col lg:flex-row items-center py-10 gap-12">
+        <div class="section-content">
+          <div class="w-full lg:w-1/2 space-y-8">
+            <div
+              class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-bold uppercase tracking-widest"
+            >
+              <span class="material-symbols-outlined text-xs leading-none">apartment</span>
+              <span data-i18n="about_badge">About YuKoLi</span>
+            </div>
+            <h1 class="text-5xl xl:text-7xl font-black leading-[1.1] tracking-tight text-slate-900 dark:text-white">
+              <span data-i18n="about_hero_title_1">23 years focused on one mission:</span>
+              <br />
+              <span class="text-primary" data-i18n="about_hero_title_2">Chef-independent cooking</span>
+            </h1>
+            <p class="text-lg xl:text-xl text-slate-600 dark:text-slate-400 max-w-2xl leading-relaxed">
+              <span data-i18n="about_hero_desc">Based in Foshan, China's kitchenware hub, YuKoLi has 23 years of expertise in smart commercial kitchen equipment. From one wok machine to 200+ smart devices with custom solutions, we help F&B businesses in 68+ countries reduce costs and standardize operations.</span>
+            </p>
+            <div class="flex items-center gap-4 pt-4">
+              <a
+                href="#story"
+                class="bg-primary text-white px-8 py-4 rounded-xl font-bold text-lg flex items-center gap-2 hover:shadow-lg hover:shadow-primary/20 transition-all"
+                onclick="event.preventDefault(); document.getElementById('story').scrollIntoView({behavior:'smooth',block:'start'})"
+              >
+                <span data-i18n="about_hero_btn">Our Story</span>
+                <span class="material-symbols-outlined">arrow_downward</span>
+              </a>
+            </div>
+          </div>
+          <div class="w-full lg:w-1/2 relative">
+            <div
+              class="aspect-square bg-gradient-to-br from-primary/20 to-transparent rounded-full absolute -top-10 -right-10 blur-3xl opacity-50 -z-10"
+            ></div>
+            <div
+              class="relative w-full aspect-[3/2] bg-slate-200 dark:bg-slate-800 rounded-3xl overflow-hidden shadow-2xl border border-white/10"
+            >
+              <img
+                loading="lazy"
+                alt="YuKoLi 工厂" data-i18n-alt="alt_yukoli_factory"
+                class="w-full h-full object-cover"
+                src="/assets/images/about/hero.webp"
+                width="800"
+                height="600"
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Company Stats -->
+      <section class="fullwidth-bg py-20">
+        <div class="section-content">
+          <div class="w-full grid grid-cols-2 lg:grid-cols-4 gap-6">
+            <div
+              class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-8 text-center"
+            >
+              <p class="text-4xl lg:text-5xl font-black text-primary mb-2" data-i18n="about_stat_1_num">23+</p>
+              <p class="text-sm font-bold text-slate-500 uppercase tracking-wider" data-i18n="about_stat_1_label">Years Experience</p>
+            </div>
+            <div
+              class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-8 text-center"
+            >
+              <p class="text-4xl lg:text-5xl font-black text-primary mb-2" data-i18n="about_stat_2_num">68+</p>
+              <p class="text-sm font-bold text-slate-500 uppercase tracking-wider" data-i18n="about_stat_2_label">Export Countries</p>
+            </div>
+            <div
+              class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-8 text-center"
+            >
+              <p class="text-4xl lg:text-5xl font-black text-primary mb-2" data-i18n="about_stat_3_num">200+ Models</p>
+              <p class="text-sm font-bold text-slate-500 uppercase tracking-wider" data-i18n="about_stat_3_label">Smart Equipment</p>
+            </div>
+            <div
+              class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-8 text-center"
+            >
+              <p class="text-4xl lg:text-5xl font-black text-primary mb-2" data-i18n="about_stat_4_num">5,000+</p>
+              <p class="text-sm font-bold text-slate-500 uppercase tracking-wider" data-i18n="about_stat_4_label">
+                Clients Served
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Core Advantages -->
+      <section class="fullwidth-bg py-20">
+        <div class="section-content">
+          <div class="w-full grid grid-cols-1 lg:grid-cols-3 gap-6">
+            <div
+              class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-8 hover:border-primary/50 transition-all flex items-start gap-6"
+            >
+              <div class="flex-shrink-0">
+                <div class="inline-flex items-center justify-center size-14 bg-primary/10 rounded-xl mb-3">
+                  <span class="material-symbols-outlined text-primary text-2xl">groups</span>
+                </div>
+                <p class="text-3xl font-black text-primary" data-i18n="about_advantage_labor_value">70%</p>
+              </div>
+              <div>
+                <p class="font-bold mb-2" data-i18n="about_advantage_labor">Labor Saving</p>
+                <p class="text-base text-slate-500" data-i18n="about_advantage_labor_desc">1 staff operates 2-5 units, ROI in 3-6 months</p>
+              </div>
+            </div>
+            <div
+              class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-8 hover:border-primary/50 transition-all flex items-start gap-6"
+            >
+              <div class="flex-shrink-0">
+                <div class="inline-flex items-center justify-center size-14 bg-primary/10 rounded-xl mb-3">
+                  <span class="material-symbols-outlined text-primary text-2xl">bolt</span>
+                </div>
+                <p class="text-3xl font-black text-primary" data-i18n="about_advantage_energy_value">30%+</p>
+              </div>
+              <div>
+                <p class="font-bold mb-2" data-i18n="about_advantage_energy">Energy Saving</p>
+                <p class="text-base text-slate-500" data-i18n="about_advantage_energy_desc">Induction heating efficiency ≥90%, saves ~$26k/year in fuel</p>
+              </div>
+            </div>
+            <div
+              class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-8 hover:border-primary/50 transition-all flex items-start gap-6"
+            >
+              <div class="flex-shrink-0">
+                <div class="inline-flex items-center justify-center size-14 bg-primary/10 rounded-xl mb-3">
+                  <span class="material-symbols-outlined text-primary text-2xl">restaurant</span>
+                </div>
+                <p class="text-3xl font-black text-primary" data-i18n="about_advantage_capacity_value">500 servings</p>
+              </div>
+              <div>
+                <p class="font-bold mb-2" data-i18n="about_advantage_capacity">Single Pot Capacity</p>
+                <p class="text-base text-slate-500" data-i18n="about_advantage_capacity_desc">800+ recipes with one-touch cooking, no chef required</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Our Story Section -->
+      <section class="fullwidth-bg py-20 bg-slate-50 dark:bg-slate-900/50">
+        <div class="section-content">
+          <h2 class="text-3xl lg:text-4xl font-black tracking-tighter mb-10" data-i18n="about_story_title" id="story">
+            Our Story
+          </h2>
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
+            <div>
+              <div class="rounded-2xl shadow-xl shadow-slate-200/50 dark:shadow-black/30 mb-3 sm:mb-5 bg-black aspect-[3/2] overflow-hidden" data-hero-video>
+                <video class="hero-video-player w-full h-full rounded-2xl object-cover" src="/assets/video/factory-strength-exploration.mp4" poster="/assets/images/about/story-rd.webp" preload="none" muted playsinline loop ></video>
+                <img
+                  class="hero-video-poster w-full h-full rounded-2xl object-cover"
+                  src="/assets/images/about/story-rd.webp"
+                  alt="YuKoLi About Story Video"
+                  data-i18n-alt="alt_about_story_video"
+                  loading="eager"
+                />
+                <div class="hero-video-overlay">
+                  <button class="hero-video-mute" aria-label="Toggle mute" data-i18n-aria="aria_toggle_mute">
+                    <span class="material-symbols-outlined text-white text-xl">volume_off</span>
+                  </button>                <button class="hero-video-fallback-btn" aria-label="Play video" data-i18n-aria="aria_play_video">
+                  <span class="material-symbols-outlined text-white text-3xl">play_circle</span>
+                </button>
+                </div>
+
+              </div>
+            </div>
+          <div class="flex flex-col gap-6">
+            <p class="text-slate-600 dark:text-slate-400 leading-relaxed">
+              <span data-i18n="about_story_p1">Founded in 2003 in Foshan, China's kitchenware manufacturing hub, YuKoLi started as a small workshop with one mission: transforming commercial kitchens through smart automation. After 23 years of technological innovation, we've grown into a full-cycle manufacturer of intelligent kitchen equipment.</span>
+            </p>
+            <p class="text-slate-600 dark:text-slate-400">
+              <span data-i18n="about_story_p2">Today, our 200+ smart devices serve clients in 68+ countries – from 5-star hotel kitchens in Bangkok to QSR chains in Ho Chi Minh City, from corporate canteens in Kuala Lumpur to institutional meal programs producing 30,000 servings daily. Whether you're a chain brand or regional distributor, YuKoLi powers your standardized expansion.</span>
+            </p>
+            <!-- Key stats -->
+              <div class="grid grid-cols-3 gap-4 mt-2">
+                <div class="bg-white dark:bg-slate-800 rounded-xl p-4 text-center shadow-sm">
+                  <div class="text-2xl font-black text-primary">20+</div>
+                  <div class="text-xs text-slate-500 font-bold mt-1" data-i18n="about_stat_years">20+ Years Experience</div>
+                </div>
+                <div class="bg-white dark:bg-slate-800 rounded-xl p-4 text-center shadow-sm">
+                  <div class="text-2xl font-black text-primary">200+</div>
+                  <div class="text-xs text-slate-500 font-bold mt-1" data-i18n="about_stat_products">200+ Smart Devices</div>
+                </div>
+                <div class="bg-white dark:bg-slate-800 rounded-xl p-4 text-center shadow-sm">
+                  <div class="text-2xl font-black text-primary">50+</div>
+                  <div class="text-xs text-slate-500 font-bold mt-1" data-i18n="about_stat_countries">50+ Countries Served</div>
+                </div>
+              </div>
+              <div class="flex gap-4">
+              <div class="flex items-center gap-2">
+                <span class="material-symbols-outlined text-primary">check_circle</span>
+                <span class="text-sm font-bold"><span data-i18n="about_check_1">In-house R&D</span></span>
+              </div>
+              <div class="flex items-center gap-2">
+                <span class="material-symbols-outlined text-primary">check_circle</span>
+                <span class="text-sm font-bold"><span data-i18n="about_check_2">Quality Assurance</span></span>
+              </div>
+            </div>
+          </div>
+        </div>
+        </div>      </section>
+
+      <!-- Manufacturing Excellence -->
+      <section class="fullwidth-bg py-20" id="factory">
+        <div class="section-content">
+          <div class="w-full bg-slate-900 text-white rounded-3xl overflow-hidden relative">
+            <div class="absolute inset-0 opacity-20 pointer-events-none">
+              <img
+                loading="lazy"
+                alt="工厂" data-i18n-alt="alt_factory"
+                class="w-full h-full object-cover"
+                src="/assets/images/about/factory-bg.webp"
+                width="800"
+                height="600"
+              />
+            </div>
+            <div class="relative p-12 lg:p-20">
+              <div class="max-w-3xl">
+                <h2 class="text-3xl lg:text-4xl font-black mb-6" data-i18n="about_mfg_title">Manufacturing Strength</h2>
+                <p class="text-slate-300 text-lg mb-8">
+                  <span data-i18n="about_mfg_desc">YuKoLi's Foshan facility features a 45-member R&D team with national patents. All core technologies are self-developed - no OEM assembly. Every unit undergoes strict testing before shipment.</span>
+                </p>
+                <div class="grid grid-cols-2 gap-6">
+                  <div class="flex items-start gap-3">
+                    <div class="size-10 bg-primary/20 rounded-lg flex items-center justify-center flex-shrink-0">
+                      <span class="material-symbols-outlined text-primary">precision_manufacturing</span>
+                    </div>
+                    <div>
+                      <h4 class="font-bold mb-1" data-i18n="about_mfg_adv1_title">Precision Manufacturing</h4>
+                      <p class="text-base text-slate-400" data-i18n="about_mfg_adv1_desc">Core components self-developed, from coils to algorithms</p>
+                    </div>
+                  </div>
+                  <div class="flex items-start gap-3">
+                    <div class="size-10 bg-primary/20 rounded-lg flex items-center justify-center flex-shrink-0">
+                      <span class="material-symbols-outlined text-primary">verified</span>
+                    </div>
+                    <div>
+                      <h4 class="font-bold mb-1" data-i18n="about_mfg_adv2_title">100% Inspected</h4>
+                      <p class="text-base text-slate-400" data-i18n="about_mfg_adv2_desc">Each unit passes performance, safety & endurance tests</p>
+                    </div>
+                  </div>
+                  <div class="flex items-start gap-3">
+                    <div class="size-10 bg-primary/20 rounded-lg flex items-center justify-center flex-shrink-0">
+                      <span class="material-symbols-outlined text-primary">inventory</span>
+                    </div>
+                    <div>
+                      <h4 class="font-bold mb-1" data-i18n="about_mfg_adv3_title">Supply Chain</h4>
+                      <p class="text-base text-slate-400" data-i18n="about_mfg_adv3_desc">Shunde industrial cluster ensures cost-effective supply chain</p>
+                    </div>
+                  </div>
+                  <div class="flex items-start gap-3">
+                    <div class="size-10 bg-primary/20 rounded-lg flex items-center justify-center flex-shrink-0">
+                      <span class="material-symbols-outlined text-primary">local_shipping</span>
+                    </div>
+                    <div>
+                      <h4 class="font-bold mb-1" data-i18n="about_mfg_adv4_title">Global Logistics</h4>
+                      <p class="text-base text-slate-400" data-i18n="about_mfg_adv4_desc">Delivered to 68+ countries with SEA/Middle East parts stock</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Certifications -->
+      <section class="fullwidth-bg py-20">
+        <div class="section-content">
+          <h2 class="text-3xl lg:text-4xl font-bold text-center mb-12" data-i18n="about_cert_title" id="cert">
+            Global Certifications
+          </h2>
+          <div class="w-full grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 lg:gap-6">
+            <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-8 text-center hover:border-primary/50 transition-all">
+              <img src="/assets/images/certs/cert-ce.webp" alt="CE" class="w-16 h-16 mx-auto mb-3 object-contain"  loading="lazy"/>
+              <p class="text-sm font-bold text-slate-600 dark:text-slate-400" data-i18n="about_cert_ce">CE Certification</p>
+            </div>
+            <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-8 text-center hover:border-primary/50 transition-all">
+              <img src="/assets/images/certs/cert-iso9001.webp" alt="ISO 9001" class="w-16 h-16 mx-auto mb-3 object-contain"  loading="lazy"/>
+              <p class="text-sm font-bold text-slate-600 dark:text-slate-400" data-i18n="about_cert_iso">ISO 9001 Quality</p>
+            </div>
+            <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-8 text-center hover:border-primary/50 transition-all">
+              <img src="/assets/images/certs/cert-iso14001.webp" alt="ISO 14001" class="w-16 h-16 mx-auto mb-3 object-contain"  loading="lazy"/>
+              <p class="text-sm font-bold text-slate-600 dark:text-slate-400" data-i18n="about_cert_ul">ISO 14001 Environmental</p>
+            </div>
+            <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-8 text-center hover:border-primary/50 transition-all">
+              <img src="/assets/images/certs/cert-rohs.webp" alt="RoHS" class="w-16 h-16 mx-auto mb-3 object-contain"  loading="lazy"/>
+              <p class="text-sm font-bold text-slate-600 dark:text-slate-400" data-i18n="about_cert_rohs">RoHS Compliance</p>
+            </div>
+            <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-8 text-center hover:border-primary/50 transition-all">
+              <img src="/assets/images/certs/cert-cb.webp" alt="CB" class="w-16 h-16 mx-auto mb-3 object-contain"  loading="lazy"/>
+              <p class="text-sm font-bold text-slate-600 dark:text-slate-400" data-i18n="about_cert_cb">CB Certification</p>
+            </div>
+            <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-8 text-center hover:border-primary/50 transition-all">
+              <img src="/assets/images/certs/cert-sni.webp" alt="SNI" class="w-16 h-16 mx-auto mb-3 object-contain"  loading="lazy"/>
+              <p class="text-sm font-bold text-slate-600 dark:text-slate-400" data-i18n="about_cert_sni">SNI Indonesia Standard</p>
+            </div>
+            <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-8 text-center hover:border-primary/50 transition-all">
+              <img src="/assets/images/certs/cert-tis.webp" alt="TIS" class="w-16 h-16 mx-auto mb-3 object-contain"  loading="lazy"/>
+              <p class="text-sm font-bold text-slate-600 dark:text-slate-400" data-i18n="about_cert_tis">TIS Thailand Standard</p>
+            </div>
+            <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-8 text-center hover:border-primary/50 transition-all">
+              <img src="/assets/images/certs/cert-pli.webp" alt="PLI" class="w-16 h-16 mx-auto mb-3 object-contain"  loading="lazy"/>
+              <p class="text-sm font-bold text-slate-600 dark:text-slate-400" data-i18n="about_cert_pli">Product Liability Insurance</p>
+            </div>
+            <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-8 text-center hover:border-primary/50 transition-all hidden md:block lg:hidden">
+              <img src="/assets/images/certs/cert-custom.webp" alt="Custom" class="w-16 h-16 mx-auto mb-3 object-contain"  loading="lazy"/>
+              <p class="text-sm font-bold text-slate-600 dark:text-slate-400" data-i18n="about_cert_custom">Custom Certification</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ═══════════════════════════════════════════ -->
+      <!-- 72h Parts Guarantee (merged from trust page) -->
+      <!-- ═══════════════════════════════════════════ -->
+      <section class="fullwidth-bg py-20 bg-slate-50 dark:bg-slate-900/50">
+        <div class="section-content">
+            <div class="w-full text-center mb-10">
+              <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-green-100 dark:bg-green-900/20 text-green-700 dark:text-green-400 text-xs font-bold uppercase tracking-widest mb-4">
+                <span class="material-symbols-outlined text-sm">inventory_2</span>
+                <span data-i18n="about_parts_badge">Parts Support</span>
+              </span>
+              <h2 class="text-3xl lg:text-4xl font-black tracking-tight mb-4" data-i18n="about_parts_title">72hr Parts Dispatch Guarantee</h2>
+              <p class="text-lg text-slate-600 dark:text-slate-400 max-w-2xl mx-auto" data-i18n="about_parts_subtitle">No long waits - our Thailand warehouse ships parts to SEA within 72hrs.</p>
+            </div>
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-10">
+              <div class="bg-white dark:bg-slate-800 rounded-2xl p-8 shadow-lg hover:shadow-xl transition-shadow">
+                <div class="w-14 h-14 rounded-xl bg-green-100 dark:bg-green-900/30 flex items-center justify-center mb-6">
+                  <span class="material-symbols-outlined text-3xl text-green-600">local_shipping</span>
+                </div>
+                <h3 class="text-xl font-bold mb-3" data-i18n="about_parts_dispatch">72hr Dispatch</h3>
+                <p class="text-slate-600 dark:text-slate-400" data-i18n="about_parts_dispatch_desc">Common wear parts (seals, bearings, thermostats) shipped within 72hrs from Singapore warehouse.</p>
+                <div class="mt-4 rounded-lg overflow-hidden aspect-[3/2] bg-slate-200 dark:bg-slate-700 overflow-hidden">
+                  <img loading="lazy" alt="72hr Parts Dispatch" class="w-full h-full object-cover" src="/assets/images/about/parts-dispatch.webp" />
+                </div>
+              </div>
+              <div class="bg-white dark:bg-slate-800 rounded-2xl p-8 shadow-lg hover:shadow-xl transition-shadow">
+                <div class="w-14 h-14 rounded-xl bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center mb-6">
+                  <span class="material-symbols-outlined text-3xl text-blue-600">warehouse</span>
+                </div>
+                <h3 class="text-xl font-bold mb-3" data-i18n="about_parts_hub">Thailand Parts Hub</h3>
+                <p class="text-slate-600 dark:text-slate-400" data-i18n="about_parts_hub_desc">Covers Thailand, Vietnam, Malaysia, Indonesia, Philippines.</p>
+                <!-- TODO: Replace with real photo of Singapore warehouse -->
+                <div class="mt-4 rounded-lg overflow-hidden aspect-[3/2] bg-slate-200 dark:bg-slate-700 overflow-hidden">
+                  <img loading="lazy" alt="新加坡备件仓库" data-i18n-alt="alt_warehouse_sg" class="w-full h-full object-cover" src="/assets/images/about/sg-warehouse.webp" onerror="this.parentElement.innerHTML='<div class=\'flex items-center justify-center h-full text-slate-400 text-sm\'>仓库照片加载中...</div>'" />
+                </div>
+              </div>
+              <div class="bg-white dark:bg-slate-800 rounded-2xl p-8 shadow-lg hover:shadow-xl transition-shadow">
+                <div class="w-14 h-14 rounded-xl bg-purple-100 dark:bg-purple-900/30 flex items-center justify-center mb-6">
+                  <span class="material-symbols-outlined text-3xl text-purple-600">play_circle</span>
+                </div>
+                <h3 class="text-xl font-bold mb-3" data-i18n="about_parts_tutorial">5-min Replacement Guide</h3>
+                <p class="text-slate-600 dark:text-slate-400 mb-4" data-i18n="about_parts_tutorial_desc">Video tutorials for DIY fixes in 5 minutes.</p>
+                <!-- TODO: Replace with real video tutorial embed -->
+                <div class="mt-2 rounded-lg overflow-hidden aspect-[3/2] bg-slate-200 dark:bg-slate-700 overflow-hidden">
+                  <img loading="lazy" alt="5-min Replacement Guide" class="w-full h-full object-cover" src="/assets/images/about/parts-tutorial.webp" />
+                </div>
+              </div>
+            </div>
+        </div>
+      </section>
+
+      <!-- ═══════════════════════════════════════════ -->
+      <!-- Service SLA (merged from trust page) -->
+      <!-- ═══════════════════════════════════════════ -->
+      <section class="fullwidth-bg py-20 bg-slate-50 dark:bg-slate-900/50">
+        <div class="section-content">
+            <div class="w-full text-center mb-10">
+              <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-purple-100 dark:bg-purple-900/20 text-purple-700 dark:text-purple-400 text-xs font-bold uppercase tracking-widest mb-4">
+                <span class="material-symbols-outlined text-sm">support_agent</span>
+                <span data-i18n="about_sla_badge">Service Commitment</span>
+              </span>
+              <h2 class="text-3xl lg:text-4xl font-black tracking-tight mb-4" data-i18n="about_sla_title">Contractual Service SLA</h2>
+            </div>
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+              <div class="bg-white dark:bg-slate-800 rounded-2xl p-8 shadow-lg text-center">
+                <div class="text-5xl font-black text-primary mb-2">1<span data-i18n="about_year" class="text-2xl">Years</span></div>
+                <h4 class="text-lg font-bold mb-2" data-i18n="about_sla_warranty">Full Warranty</h4>
+                <p class="text-base text-slate-600 dark:text-slate-400" data-i18n="about_sla_warranty_desc">Free repairs for non-human damage</p>
+              </div>
+              <div class="bg-white dark:bg-slate-800 rounded-2xl p-8 shadow-lg text-center">
+                <div class="text-5xl font-black text-primary mb-2">3<span data-i18n="about_year" class="text-2xl">Years</span></div>
+                <h4 class="text-lg font-bold mb-2" data-i18n="about_sla_core">Core Parts Warranty</h4>
+                <p class="text-base text-slate-600 dark:text-slate-400" data-i18n="about_sla_core_desc">Motor, PLC, heating elements</p>
+              </div>
+              <div class="bg-white dark:bg-slate-800 rounded-2xl p-8 shadow-lg text-center">
+                <div class="text-5xl font-black text-green-600 mb-2">2<span class="text-2xl" data-i18n="about_min_label">minutes</span></div>
+                <h4 class="text-lg font-bold mb-2" data-i18n="about_sla_response">WhatsApp Response</h4>
+                <p class="text-base text-slate-600 dark:text-slate-400" data-i18n="about_sla_response_desc">&lt;2 mins during business hours</p>
+              </div>
+              <div class="bg-white dark:bg-slate-800 rounded-2xl p-8 shadow-lg text-center">
+                <div class="text-5xl font-black text-orange-600 mb-2">✓</div>
+                <h4 class="text-lg font-bold mb-2" data-i18n="about_sla_install">Installation & Training</h4>
+                <p class="text-base text-slate-600 dark:text-slate-400" data-i18n="about_sla_install_desc">Included in project cost</p>
+              </div>
+            </div>
+            <div class="mt-8 bg-white dark:bg-slate-800 rounded-2xl p-8 shadow-lg">
+              <h3 class="text-xl font-bold mb-6 flex items-center gap-2">
+                <span class="material-symbols-outlined text-primary">assignment</span>
+                <span data-i18n="about_sla_detail_title">Service Details</span>
+              </h3>
+              <div class="grid md:grid-cols-2 gap-6">
+                <div class="flex gap-3">
+                  <span class="material-symbols-outlined text-green-600 mt-0.5">check_circle</span>
+                  <div>
+                    <p class="font-bold text-base" data-i18n="about_sla_spare_parts">SEA Parts Stock</p>
+                    <p class="text-base text-slate-500" data-i18n="about_sla_spare_parts_desc">200+ common parts in Thailand warehouse</p>
+                  </div>
+                </div>
+                <div class="flex gap-3">
+                  <span class="material-symbols-outlined text-green-600 mt-0.5">check_circle</span>
+                  <div>
+                    <p class="font-bold text-base" data-i18n="about_sla_remote">Remote Support</p>
+                    <p class="text-base text-slate-500" data-i18n="about_sla_remote_desc">Video diagnostics & guidance</p>
+                  </div>
+                </div>
+                <div class="flex gap-3">
+                  <span class="material-symbols-outlined text-green-600 mt-0.5">check_circle</span>
+                  <div>
+                    <p class="font-bold text-base" data-i18n="about_sla_recipe">Free Recipe Updates</p>
+                    <p class="text-base text-slate-500" data-i18n="about_sla_recipe_desc">Lifetime free updates to expand menu options</p>
+                  </div>
+                </div>
+                <div class="flex gap-3">
+                  <span class="material-symbols-outlined text-green-600 mt-0.5">check_circle</span>
+                  <div>
+                    <p class="font-bold text-base" data-i18n="about_sla_training">Operator Certification</p>
+                    <p class="text-base text-slate-500" data-i18n="about_sla_training_desc">Issued upon training completion</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+        </div>
+      </section>
+
+      <!-- CTA Section -->
+      <div class="mb-12">
+        <section class="fullwidth-bg py-16 bg-primary">
+          <div class="section-content">
+
+            <div class="py-12 lg:py-20 text-center text-white relative overflow-hidden rounded-3xl">
+            <div class="absolute top-0 right-0 size-64 bg-white/10 rounded-full -mr-32 -mt-32"></div>
+            <div class="relative z-10">
+              <h2 class="text-4xl lg:text-5xl font-black mb-6" data-i18n="about_cta_title">Next kitchen with YuKoLi?</h2>
+              <p class="text-white/80 text-lg mb-10 max-w-2xl mx-auto">
+                <span data-i18n="about_cta_desc">Free customized solution - Our engineers recommend optimal equipment based on your menu & volume. Response within 24hrs.</span>
+              </p>
+              <div class="flex flex-wrap justify-center gap-4">
+                <a
+                  href="/quote"
+                  class="bg-white text-primary px-10 py-5 rounded-xl font-black hover:bg-slate-100 transition-colors shadow-xl"
+                  data-i18n="about_cta_btn_quote"
+                >Get Quote</a>
+                <a
+                  href="/products/"
+                  class="bg-slate-900 text-white px-10 py-5 rounded-xl font-black hover:bg-slate-800 transition-colors shadow-xl"
+                  data-i18n="about_cta_btn_products"
+                >View Products</a>
+            </div>
+            </div>
+
+        </div>
+          </div>
+        </section>
+      </div>
+
+      <!-- ═══════════════════════════════════════════ -->
+      <!-- WhatsApp CTA (merged from trust page) -->
+      <!-- ═══════════════════════════════════════════ -->
+      <section class="fullwidth-bg py-8 bg-[#25D366] relative overflow-hidden">
+        <div class="section-content">
+
+          <div class="absolute inset-0 opacity-10">
+            <div class="absolute top-0 left-0 w-96 h-96 bg-white rounded-full -translate-x-1/2 -translate-y-1/2"></div>
+            <div class="absolute bottom-0 right-0 w-96 h-96 bg-white rounded-full translate-x-1/2 translate-y-1/2"></div>
+          </div>
+          <div class="w-full relative max-w-4xl mx-auto text-center">
+            <h2 class="text-3xl lg:text-4xl font-black text-white mb-4" data-i18n="about_wa_cta_title">
+              Questions? WhatsApp Us
+            </h2>
+            <p class="text-xl text-white/90 mb-8 max-w-2xl mx-auto" data-i18n="about_wa_cta_desc">2-min response · Remote diagnostics · On-site support</p>
+            <a
+              href="https://wa.me/8613163756465" data-wa-message-key="wa_msg_about"
+              target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-3 bg-white text-[#25D366] px-10 py-5 rounded-xl font-bold text-lg hover:shadow-xl transition-all"
+            >
+              <svg class="w-6 h-6" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+              <span data-i18n="about_wa_cta_btn">Contact via WhatsApp</span>
+            </a>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <script defer src="/assets/js/ui/dropdown-styles.js?v=1780474841186"></script>
+    <script defer src="/assets/js/ui/dropdown-base.js?v=1780474841186"></script>
+    <script defer src="/assets/js/ui/products-dropdown.js?v=1780474841186"></script>
+    <script defer src="/assets/js/ui/applications-dropdown.js?v=1780474841186"></script>
+    <script defer src="/assets/js/ui/support-dropdown.js?v=1780474841186"></script>
+    <script defer src="/assets/js/ui/about-dropdown.js?v=1780474841186"></script>
+    <script defer src="/assets/js/product-list.js?v=1780474841186"></script>
+    <script defer src="/assets/js/utils.js?v=1780474841186"></script>
+    <script defer src="/assets/js/ui/search-engine.js?v=1780474841186"></script>
+    <script defer src="/assets/js/ui/slide-menu.js?v=1780474841186"></script>
+    <script defer src="/assets/js/ui/footer.js?v=1780474841186"></script>
+    <script defer src="/assets/js/lang-registry.js?v=1780474841186"></script>
+    <script defer src="/assets/js/translations.js?v=1780474841186"></script>
+    <script defer src="/assets/js/translations-dropdown-template.js?v=1780474841186"></script>
+
+    <script defer src="/assets/js/contacts.js?v=1780474841186"></script>
+    <script defer src="/assets/js/router.js?v=1780474841186"></script>
+
+    <script defer src="/assets/js/ui/helpers.js?v=1780474841186"></script>
+    <script defer src="/assets/js/ui/page-effects.js?v=1780474841186"></script><script defer src="/assets/js/page-interactions.js?v=1780474841186"></script><script defer src="/assets/js/utils/device-utils.js?v=1780474841186"></script>
+
+      <script defer src="/assets/js/ui/floating-actions.js?v=1780474841186"></script>
+    <script defer src="/assets/js/ui/hero-video.js?v=1780474841186"></script>
+    <script src="/assets/js/product-data-table.js"></script>
+    <script defer src="/assets/js/nav-config.js"></script>
+    <script defer src="/assets/js/ui/contact-dropdown.js"></script>
+    <script defer src="/assets/js/ui/navigator.js"></script>
+    <script defer src="/assets/js/swup.min.js"></script>
+    <script defer src="/assets/js/swup-head-plugin.min.js"></script>
+    <script defer src="/assets/js/swup-preload-plugin.min.js"></script>
+    <script defer src="/assets/js/spa-router.js"></script>
+    <script defer src="/assets/js/breadcrumb.js"></script>
+    <script>window._SPA_GLOBAL_PATTERNS=/(?:^|[\/])(?:product-data-table|nav-config|device-utils|lang-registry|utils|translations|translations-dropdown-template|dropdown-styles|dropdown-base|products-dropdown|applications-dropdown|support-dropdown|about-dropdown|contact-dropdown|navigator|slide-menu|footer|hero-video|floating-actions|helpers|page-effects|page-interactions|search-engine|swup.min|swup-head-plugin.min|swup-preload-plugin.min|spa-router)\.js/</script>
+  <style data-skeleton-inline>#skeleton-overlay{position:fixed;inset:0;z-index:5;pointer-events:none;background:var(--color-bg-light,#f8fafc);opacity:1;transition:opacity .25s ease-out}html.dark #skeleton-overlay{background:var(--color-bg-dark,#020617)}#skeleton-overlay[hidden]{display:none}@keyframes sk-shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}.skeleton-container{width:100%;max-width:1280px;margin:0 auto;padding:2rem 1.25rem}.sk-badge{width:100px;height:22px;border-radius:9999px;margin:0 auto 16px;background:linear-gradient(90deg,#e8e8e8 25%,#d4d4d4 50%,#e8e8e8 75%);background-size:200% 100%;animation:sk-shimmer 1.5s infinite}.sk-hero{display:flex;flex-direction:column;align-items:center;text-align:center;margin-bottom:24px}.sk-line{width:65%;height:32px;border-radius:8px;margin:0 auto 12px;background:linear-gradient(90deg,#e8e8e8 25%,#d4d4d4 50%,#e8e8e8 75%);background-size:200% 100%;animation:sk-shimmer 1.5s infinite}.sk-line-short{width:45%;height:18px;margin-bottom:8px}.sk-line-shorter{width:30%;height:18px}.sk-cta-group{display:flex;gap:12px;justify-content:center;margin-top:20px}.sk-cta{width:140px;height:44px;border-radius:12px;background:linear-gradient(90deg,#e8e8e8 25%,#d4d4d4 50%,#e8e8e8 75%);background-size:200% 100%;animation:sk-shimmer 1.5s infinite}.sk-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:32px}@media(max-width:767px){.sk-grid{grid-template-columns:1fr}.sk-cta{width:100%;max-width:none}}@media(min-width:768px)and(max-width:1279px){.sk-grid{grid-template-columns:repeat(2,1fr)}}.sk-card{height:220px;border-radius:16px;background:linear-gradient(90deg,#e8e8e8 25%,#d4d4d4 50%,#e8e8e8 75%);background-size:200% 100%;animation:sk-shimmer 1.5s infinite}.dark .sk-badge,.dark .sk-line,.dark .sk-cta,.dark .sk-card{background:linear-gradient(90deg,#1e293b 25%,#334155 50%,#1e293b 75%);background-size:200% 100%}</style>
+<div id="skeleton-overlay">  <div class="skeleton-container">    <div class="sk-hero">      <div class="sk-badge"></div>      <div class="sk-line"></div>      <div class="sk-line sk-line-short"></div>      <div class="sk-line sk-line-shorter"></div>      <div class="sk-cta-group">        <div class="sk-cta"></div>        <div class="sk-cta"></div>      </div>    </div>    <div class="sk-grid">      <div class="sk-card"></div>      <div class="sk-card"></div>      <div class="sk-card"></div>    </div>  </div></div>
+<script>(function(){var sk=document.getElementById("skeleton-overlay");if(!sk)return;function hide(){sk.setAttribute("hidden","");sk.style.display="none";document.head.querySelector("[data-skeleton-inline]")?.remove()}if(document.readyState==="complete")hide();else window.addEventListener("load",hide);setTimeout(hide,3000);})();</script>
+  </body>
+</html>
+

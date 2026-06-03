@@ -1,0 +1,536 @@
+<!doctype html>
+
+<html class="light" lang="zh-CN">
+  <head>
+    <script>
+      /* Pre-apply cached translations to prevent flash */
+      (function () {
+        try {
+          var lang = localStorage.getItem("userLanguage") || "zh-CN";
+          if (!lang) return;
+          var cacheKey = "yukoli-translations-ui-" + lang;
+          var cached = localStorage.getItem(cacheKey);
+          if (!cached) return;
+          var data = JSON.parse(cached);
+          if (!data.data) return;
+          var translations = data.data;
+          document.documentElement.lang = lang;
+          var elements = document.querySelectorAll("[data-i18n]");
+          for (var i = 0; i < elements.length; i++) {
+            var el = elements[i];
+            var key = el.getAttribute("data-i18n");
+            if (translations[key] && el.children.length === 0) {
+              el.textContent = translations[key];
+            }
+          }
+        } catch (e) {
+          /* ignore */
+        }
+      })();
+    </script>
+  <script>/*[i18n-url-sync]*/(function(){var p=new URLSearchParams(location.search),l=p.get("lang");if(l){localStorage.setItem("userLanguage",l);document.documentElement.lang=l}})();</script>
+    <!-- ═══ Responsive Redirect (injected by patch-responsive-redirect.py) ═══ -->
+    <link href="https://www.kitchen.yukoli.com/products/stirfry/" rel="canonical" />
+    <link href="https://www.kitchen.yukoli.com/products/stirfry/" hreflang="zh-CN" rel="alternate" />
+    <link href="https://www.kitchen.yukoli.com/products/stirfry/" hreflang="en" rel="alternate" />
+    <link href="https://www.kitchen.yukoli.com/products/stirfry/" hreflang="x-default" rel="alternate" />
+    <link href="/products/stirfry/index-mobile.html" media="only screen and (max-width: 767px)" rel="alternate" />
+    <link
+      href="/products/stirfry/index-tablet.html"
+      media="only screen and (min-width: 768px) and (max-width: 1279px)"
+      rel="alternate"
+    />
+    <link href="/products/stirfry/index-pc.html" media="only screen and (min-width: 1280px)" rel="alternate" />
+    <script>
+    (function checkDevice(){
+      if(window.__redirectChecked){console.log("[device-redirect] skip, __redirectChecked=true");return;}
+      if(document.querySelector("meta[name=ssg-device]")){console.log("[device-redirect] skip, ssg-device meta found");return;}
+      window.__redirectChecked=true;
+      var u=new URLSearchParams(location.search);
+      var c=u.get("clean-url");
+      if(c){console.log("[device-redirect] clean-url detected, replaceState:",c);history.replaceState({},"",c);return}
+      if(window.__spaNavigating){console.log("[device-redirect] skip, __spaNavigating=true");return;}
+      var f=location.pathname.split("/").pop();
+      console.log("[device-redirect] pathname=",location.pathname," f=",f," innerW=",window.innerWidth);
+      if(!f||!f.match(/.html$/)){
+        console.log("[device-redirect] dir URL (no .html), calling doRedirect");
+        doRedirect();
+        return;
+      }
+      if(f.match(/^index-(pc|mobile|tablet).html$/)){
+        console.log("[device-redirect] already on device-specific page:",f,"→ skip");
+        return;
+      }
+      function doRedirect(){
+        var mq = window.matchMedia;
+        var isTouch = mq && mq("(pointer:coarse)").matches;
+        var isMb = mq("(max-width:767px)").matches;
+        var isTb = mq("(min-width:768px) and (max-width:1023px)").matches;
+        var isPc = mq("(min-width:1024px)").matches;
+        if (isTouch && !isPc) { isMb = true; isTb = false; }
+        var e = isPc ? "index-pc.html" : isTb ? "index-tablet.html" : "index-mobile.html";
+        console.log("[device-redirect] doRedirect",{innerW:window.innerWidth,isTouch:isTouch,mobile:isMb,tablet:isTb,pc:isPc,target:e,currentF:f});
+        if(f===e){console.log("[device-redirect] already on correct version, skip");return;}
+        var newUrl=location.pathname.replace(/[^\/]*.html$/,"")+e;
+        console.log("[device-redirect] redirecting to",newUrl);
+        location.href=newUrl;
+      }
+      doRedirect();
+    })();
+    </script>
+<!-- ═══ End Responsive Redirect ═══ -->
+    <meta charset="utf-8" />
+    <meta content="YuKoLi 智能爆炒机系列，一人操作多台，出餐效率提升 5 倍。" name="description" />
+    <meta content="website" property="og:type" />
+    <meta content="智能爆炒机 | 翻炒系列 | YuKoLi" property="og:title" />
+    <meta content="107+ 款智能爆炒机，智能温控还原锅气，一人操作多台，出餐效率提升 5 倍。" property="og:description" />
+    <meta content="https://www.kitchen.yukoli.com/products/stirfry/" property="og:url" />
+    <meta property="og:site_name" content="YuKoLi 智能厨具" />
+    <meta property="og:locale" content="zh_CN" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title data-i18n="stirfry_page_title">Smart Stir-Fry Machine | YuKoLi</title>
+    <link as="style" href="/assets/fonts/local-fonts.css" rel="preload" />
+    <link as="style" href="/assets/css/styles.css?v=1780474841186" rel="preload" />
+    <link as="style" href="/assets/css/tailwind.css?v=1780474841186" rel="preload" />
+    <link href="/assets/fonts/local-fonts.css" rel="stylesheet" />
+    <link href="/assets/css/styles.css?v=1780474841186" rel="stylesheet" />
+    <link href="/assets/css/tailwind.css?v=1780474841186" rel="stylesheet" />
+    <link href="/assets/css/z-index-system.css?v=1780474841186" rel="stylesheet" />
+    <link href="/assets/css/performance-optimizations.css?v=1780474841186" rel="stylesheet" />
+    <style>
+      body {
+        font-family: "Public Sans", sans-serif;
+      }
+      .filter-chip {
+        transition: all 0.2s ease;
+        -webkit-tap-highlight-color: transparent;
+        cursor: pointer;
+      }
+      .filter-chip.active {
+        background: #ec5b13;
+        color: white;
+        border-color: #ec5b13;
+      }
+      html.dark .filter-chip.active {
+        background: #ec5b13;
+        color: white;
+        border-color: #ec5b13;
+      }
+      .product-card-mobile {
+        transition: all 0.25s ease;
+      }
+      .product-card-mobile:active {
+        transform: scale(0.98);
+      }
+    </style>
+    <script>
+      (function () {
+        if (localStorage.getItem("darkMode") === "true") document.documentElement.classList.add("dark");
+      })();
+    </script>
+    <link href="/assets/css/skeleton.css?v=1780474841186" rel="stylesheet" />
+    <link href="/assets/images/logo/logo.webp" rel="icon" type="image/webp" />
+    <title>YuKoLi 智能炒菜机 | 自动爆炒机 | 30+款商用炒菜设备</title>
+    <meta
+      name="description"
+      content="YuKoLi 智能炒菜机系列 — 30+款自动爆炒机，覆盖1L-120L容量，一键标准化烹饪，口味不靠厨师靠设备。"
+    />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://www.kitchen.yukoli.com/home/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Products",
+            "item": "https://www.kitchen.yukoli.com/products/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 3,
+            "name": "炒菜机",
+            "item": "https://www.kitchen.yukoli.com/products/stirfry/"
+          }
+        ]
+      }
+    </script>
+    <link rel="manifest" href="/manifest.json"/>
+      <link rel="stylesheet" href="/assets/css/components.css" />
+</head>
+  <body
+    class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 transition-colors duration-300 overflow-x-clip pb-20"
+  >
+    <navigator data-search="true" data-active="products" data-component="navigator" data-variant="mobile"></navigator>
+    <!-- Breadcrumb -->
+    <main id="spa-content" class="flex-1">
+      <div class="w-full">
+        <!-- Hero Section -->
+        <section
+          class="fullwidth-bg hero-overlap relative py-8 px-4 bg-gradient-to-br from-slate-50 dark:from-slate-900 to-white dark:to-black pt-6"
+        >
+          <div class="section-content">
+            <div class="absolute inset-0 opacity-20">
+              <div class="absolute top-10 right-10 w-48 h-48 bg-primary/10 rounded-full blur-2xl"></div>
+            </div>
+            <div class="relative">
+              <div class="flex items-center gap-2 mb-4">
+                <a
+                  class="text-xs text-slate-400 hover:text-primary transition-colors"
+                  data-i18n="nav_products"
+                  href="/products/"
+                >
+                  Products
+                </a>
+                <span class="material-symbols-outlined text-xs text-slate-300">chevron_right</span>
+                <span
+                  class="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-bold uppercase tracking-wider"
+                >
+                  <span class="material-symbols-outlined text-xs">local_fire_department</span>
+                  <span data-i18n="stirfry_hero_badge">Stir-Fry Series</span>
+                </span>
+              </div>
+              <h1
+                class="text-3xl font-black leading-tight tracking-tight text-slate-900 dark:text-white mb-3"
+                data-i18n="stirfry_hero_title"
+              >One operator manages 6 burners, easily handling 300 orders during lunch rush</h1>
+              <p
+                class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed mb-4"
+                data-i18n="stirfry_hero_desc_mobile"
+              >Smart temperature control restores wok hei. One operator runs multiple units, boosting efficiency 5x.</p>
+                          <div class="relative w-full aspect-[3/2] rounded-2xl overflow-hidden shadow-xl border border-white/10" data-hero-video-mode="manual" data-hero-video> <video class="hero-video-player" src="/assets/video/product-stirfry.mp4" poster="/assets/images/products/stirfry/hero.webp" preload="none" muted playsinline webkit-playsinline loop></video> <img alt="Smart Stir-Fry Machine" data-i18n="alt_product_stirfry" class="hero-video-poster w-full h-full object-cover" src="/assets/images/products/stirfry/hero.webp" loading="eager" /> <div class="hero-video-overlay"> <button class="hero-video-mute" aria-label="Toggle mute" data-i18n-aria="aria_toggle_mute"> <span class="material-symbols-outlined text-white text-xl">volume_off</span> </button> <button class="hero-video-fallback-btn" aria-label="Play video" data-i18n-aria="aria_play_video"> <span class="material-symbols-outlined text-white text-3xl">play_circle</span> </button> </div> <div data-hide-on-play class="absolute bottom-6 left-6 right-6 p-6 border border-white/20 rounded-2xl"> <div class="flex justify-between items-center text-white"> <div> <p class="text-xs font-bold uppercase opacity-70" data-i18n="alt_product_stirfry">Smart Stir-Fry Machine</p> <p class="text-xl font-black" data-i18n="stirfry_hero_card_title">Smart Stir-Fry Series</p> </div> <div class="text-right"> <p class="text-xs font-bold uppercase opacity-70">107+ models</p> <p class="text-xl font-black text-primary" data-i18n="stirfry_card_models">107+ models</p> </div> </div> </div> </div>
+              <div class="mb-4"></div>
+              <div class="flex flex-col gap-3">
+                <a href="#products" onclick="event.preventDefault();document.getElementById('products').scrollIntoView({behavior:'smooth',block:'start'})" class="w-full bg-primary text-white px-5 py-3 rounded-xl font-bold text-sm flex items-center justify-center gap-2 shadow-lg shadow-primary/25">
+                  <span data-i18n="products_browse_products">Browse Products</span>
+                  <span class="material-symbols-outlined text-lg">arrow_downward</span>
+                </a>
+                <a href="/quote" class="w-full border-2 border-slate-200 dark:border-slate-800 px-5 py-3 rounded-xl font-bold text-sm flex items-center justify-center gap-2">
+                  <span data-i18n="products_request_quote">Get Quote</span>
+                  <span class="material-symbols-outlined text-lg">request_quote</span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </section>
+        <!-- 痛点区 -->
+        <section class="fullwidth-bg py-8 px-4">
+          <div class="section-content">
+            <div class="w-full text-center mb-8">
+              <span
+                class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-red-100 dark:bg-red-900/20 text-red-600 text-[10px] font-bold uppercase tracking-widest mb-3"
+              >
+                <span class="material-symbols-outlined text-xs">warning</span>
+                <span data-i18n="app_pain_badge">Industry Pain Points</span>
+              </span>
+              <h2 class="text-xl font-bold mb-2" data-i18n="stirfry_pain_title">Common Stir-Fry Challenges</h2>
+              <p class="text-slate-500 dark:text-slate-400 max-w-xl mx-auto text-xs" data-i18n="stirfry_pain_desc">Staff shortages, inconsistent flavors, slow output—the core bottlenecks often occur at stir-fry stations.</p>
+            </div>
+            <div class="grid grid-cols-1 gap-3">
+              <div
+                class="flex gap-3 p-5 rounded-xl bg-red-50/50 dark:bg-red-900/10 border border-red-100 dark:border-red-900/30"
+              >
+                <div class="w-9 h-9 rounded-lg bg-red-100 dark:bg-red-900/30 flex items-center justify-center shrink-0">
+                  <span class="material-symbols-outlined text-red-600 text-sm">person_off</span>
+                </div>
+                <div>
+                  <h3 class="font-bold text-sm mb-1" data-i18n="stirfry_pain_1_title">Staff shortage halts operations</h3>
+                  <p class="text-xs text-slate-600 dark:text-slate-400" data-i18n="stirfry_pain_1_desc">Only 1-2 staff assigned to stir-fry stations. One absence can paralyze lunch service.</p>
+                </div>
+              </div>
+              <div
+                class="flex gap-3 p-5 rounded-xl bg-red-50/50 dark:bg-red-900/10 border border-red-100 dark:border-red-900/30"
+              >
+                <div class="w-9 h-9 rounded-lg bg-red-100 dark:bg-red-900/30 flex items-center justify-center shrink-0">
+                  <span class="material-symbols-outlined text-red-600 text-sm">swap_horiz</span>
+                </div>
+                <div>
+                  <h3 class="font-bold text-sm mb-1" data-i18n="stirfry_pain_2_title">Inconsistent flavors</h3>
+                  <p class="text-xs text-slate-600 dark:text-slate-400" data-i18n="stirfry_pain_2_desc">The same Kung Pao Chicken tastes completely different when made by Chef Zhang vs. Chef Li. Customers complain 'not as good as last time.'</p>
+                </div>
+              </div>
+              <div
+                class="flex gap-3 p-5 rounded-xl bg-red-50/50 dark:bg-red-900/10 border border-red-100 dark:border-red-900/30"
+              >
+                <div class="w-9 h-9 rounded-lg bg-red-100 dark:bg-red-900/30 flex items-center justify-center shrink-0">
+                  <span class="material-symbols-outlined text-red-600 text-sm">schedule</span>
+                </div>
+                <div>
+                  <h3 class="font-bold text-sm mb-1" data-i18n="stirfry_pain_3_title">Slow output during peak hours</h3>
+                  <p class="text-xs text-slate-600 dark:text-slate-400" data-i18n="stirfry_pain_3_desc">Manual stir-fry yields 8-12 servings per batch. Peak hours lead to order backlogs and delays.</p>
+                </div>
+              </div>
+              <div
+                class="flex gap-3 p-5 rounded-xl bg-red-50/50 dark:bg-red-900/10 border border-red-100 dark:border-red-900/30"
+              >
+                <div class="w-9 h-9 rounded-lg bg-red-100 dark:bg-red-900/30 flex items-center justify-center shrink-0">
+                  <span class="material-symbols-outlined text-red-600 text-sm">school</span>
+                </div>
+                <div>
+                  <h3 class="font-bold text-sm mb-1" data-i18n="stirfry_pain_4_title">Long training cycles for new hires</h3>
+                  <p class="text-xs text-slate-600 dark:text-slate-400" data-i18n="stirfry_pain_4_desc">Training a stir-fry chef takes 2-3 years. Until qualified, they can only prep ingredients. Labor costs remain high.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        <!-- 方案优势区 -->
+        <section class="fullwidth-bg py-8 px-4">
+          <div class="section-content">
+            <div class="w-full flex flex-col gap-6">
+              <div class="w-full">
+                <span
+                  class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-primary/10 text-primary text-xs font-bold uppercase tracking-wider mb-3"
+                >
+                  <span class="material-symbols-outlined text-sm">lightbulb</span>
+                  <span data-i18n="stirfry_solution_badge">Smart Stir-Fry</span>
+                </span>
+                <h2 class="text-xl font-black tracking-tight mb-3" data-i18n="stirfry_solution_title">Smart temperature control restores wok hei—every dish becomes a signature</h2>
+                <p class="text-sm text-slate-600 dark:text-slate-400 mb-5" data-i18n="stirfry_solution_subtitle">107+ models from entry-level to smart series. Engineers recommend the best match for your menu.</p>
+                <div class="grid grid-cols-1 gap-4">
+                  <div class="rounded-2xl overflow-hidden border border-slate-200 dark:border-slate-700">
+                    <div class="aspect-[3/2] overflow-hidden">
+                      <img
+                        alt=""
+                        class="w-full h-full object-cover"
+                        loading="lazy"
+                        src="/assets/images/products/stirfry/feature1.webp"
+                      />
+                    </div>
+                    <div class="p-3">
+                      <h4 class="font-bold text-sm" data-i18n="stirfry_solution_1_title">Precision Temperature Control</h4>
+                      <p class="text-xs text-slate-600 dark:text-slate-400" data-i18n="stirfry_solution_1_desc">Smart temperature control replicates traditional wok hei, accurately restoring master chef techniques.</p>
+                    </div>
+                  </div>
+                  <div class="rounded-2xl overflow-hidden border border-slate-200 dark:border-slate-700">
+                    <div class="aspect-[3/2] overflow-hidden">
+                      <img
+                        alt=""
+                        class="w-full h-full object-cover"
+                        loading="lazy"
+                        src="/assets/images/products/stirfry/feature2.webp"
+                      />
+                    </div>
+                    <div class="p-3">
+                      <h4 class="font-bold text-sm" data-i18n="stirfry_solution_2_title">One operator, multiple machines</h4>
+                      <p class="text-xs text-slate-600 dark:text-slate-400" data-i18n="stirfry_solution_2_desc">One operator can run multiple stir-fry machines simultaneously. Capacity increases 5x.</p>
+                    </div>
+                  </div>
+                  <div class="rounded-2xl overflow-hidden border border-slate-200 dark:border-slate-700">
+                    <div class="aspect-[3/2] overflow-hidden">
+                      <img
+                        alt=""
+                        class="w-full h-full object-cover"
+                        loading="lazy"
+                        src="/assets/images/products/stirfry/feature3.webp"
+                      />
+                    </div>
+                    <div class="p-3">
+                      <h4 class="font-bold text-sm" data-i18n="stirfry_solution_3_title">800+ Preset Recipes</h4>
+                      <p class="text-xs text-slate-600 dark:text-slate-400" data-i18n="stirfry_solution_3_desc">800+ preset recipes cover Thai, Malay, Indonesian, and Chinese cuisines.</p>
+                    </div>
+                  </div>
+                  <div class="rounded-2xl overflow-hidden border border-slate-200 dark:border-slate-700">
+                    <div class="aspect-[3/2] overflow-hidden">
+                      <img
+                        alt=""
+                        class="w-full h-full object-cover"
+                        loading="lazy"
+                        src="/assets/images/products/stirfry/feature4.webp"
+                      />
+                    </div>
+                    <div class="p-3">
+                      <h4 class="font-bold text-sm" data-i18n="stirfry_solution_4_title">Zero flavor deviation</h4>
+                      <p class="text-xs text-slate-600 dark:text-slate-400" data-i18n="stirfry_solution_4_desc">Preset heat levels and stir-fry rhythms eliminate reliance on chef experience—every dish tastes consistent.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="text-center mt-6 pt-4 border-t border-slate-200 dark:border-slate-700 w-full">
+              <p
+                class="text-sm text-slate-600 dark:text-slate-400 max-w-xl mx-auto"
+                data-i18n="stirfry_solution_transition"
+              >When choosing stir-fry equipment, prioritize menu diversity and peak-hour output.</p>
+            </div>
+          </div>
+        </section>
+        <section class="fullwidth-bg pt-2 pb-4" id="products">
+          <div class="section-content">
+            <!-- Tier filter -->
+            <div class="flex items-center gap-2 overflow-x-auto scrollbar-hide pb-2 mb-4">
+              <button class="filter-chip active px-2.5 py-1 rounded-full border border-slate-200 dark:border-slate-700 text-[10px] font-medium whitespace-nowrap" data-filter="all" data-i18n="all">All</button>
+              <button class="filter-chip px-2.5 py-1 rounded-full border border-slate-200 dark:border-slate-700 text-[10px] font-medium whitespace-nowrap" data-filter="基础" data-i18n="products_filter_basic">Basic</button>
+              <button class="filter-chip px-2.5 py-1 rounded-full border border-slate-200 dark:border-slate-700 text-[10px] font-medium whitespace-nowrap" data-filter="智能" data-i18n="products_filter_smart">Smart</button>
+              <button class="filter-chip px-2.5 py-1 rounded-full border border-slate-200 dark:border-slate-700 text-[10px] font-medium whitespace-nowrap" data-filter="全智能" data-i18n="products_filter_full_smart">Full Smart</button>
+            </div>
+            <div class="grid grid-cols-2 gap-3" id="product-grid">
+              <!-- Dynamically rendered by product-grid.js -->
+            </div>
+            <!-- Load More -->
+            <div class="flex justify-center mt-6">
+              <button
+                class="flex items-center gap-2 px-6 py-2.5 border-2 border-slate-200 dark:border-slate-700 rounded-xl font-bold text-xs text-slate-600 dark:text-slate-400 hover:border-primary hover:text-primary transition-all"
+                data-i18n="products_load_more"
+              >Load More</button>
+            </div>
+          </div>
+        </section>
+        <!-- FAQ 区 -->
+        <section class="fullwidth-bg py-8 bg-slate-50 dark:bg-slate-900/50 px-4">
+          <div class="section-content">
+            <div class="text-center max-w-xl mx-auto mb-8">
+              <h2 class="text-xl font-black tracking-tight mb-3" data-i18n="stirfry_faq_title">Stir-Fry Equipment FAQs</h2>
+            </div>
+            <div class="max-w-xl mx-auto space-y-2">
+              <details
+                class="group bg-white rounded-xl border border-slate-200 dark:border-slate-700 overflow-hidden"
+              >
+                <summary class="flex items-center justify-between p-4 cursor-pointer font-bold text-sm select-none">
+                  <span data-i18n="stirfry_faq1_q">What dishes can the stir-fry machine cook?</span>
+                  <span
+                    class="material-symbols-outlined text-slate-400 text-sm group-open:rotate-180 transition-transform"
+                  >
+                    expand_more
+                  </span>
+                </summary>
+                <div
+                  class="px-4 pt-4 pb-4 text-xs text-slate-600 dark:text-slate-400 leading-relaxed"
+                  data-i18n="stirfry_faq1_a"
+                >800+ recipes cover Chinese, Thai, Malay, Indonesian and Vietnamese cuisines. From stir-fried veggies to braised pork—continuously updated.</div>
+              </details>
+              <details
+                class="group bg-white rounded-xl border border-slate-200 dark:border-slate-700 overflow-hidden"
+              >
+                <summary class="flex items-center justify-between p-4 cursor-pointer font-bold text-sm select-none">
+                  <span data-i18n="stirfry_faq2_q">Can it achieve the wok hei effect of flame cooking?</span>
+                  <span
+                    class="material-symbols-outlined text-slate-400 text-sm group-open:rotate-180 transition-transform"
+                  >
+                    expand_more
+                  </span>
+                </summary>
+                <div
+                  class="px-4 pt-4 pb-4 text-xs text-slate-600 dark:text-slate-400 leading-relaxed"
+                  data-i18n="stirfry_faq2_a"
+                >YuKoLi's smart temperature control accurately replicates traditional wok hei. In blind tests, most chefs couldn't distinguish between induction cooking and open flame results.</div>
+              </details>
+              <details
+                class="group bg-white rounded-xl border border-slate-200 dark:border-slate-700 overflow-hidden"
+              >
+                <summary class="flex items-center justify-between p-4 cursor-pointer font-bold text-sm select-none">
+                  <span data-i18n="stirfry_faq3_q">Can someone without chef experience operate it?</span>
+                  <span
+                    class="material-symbols-outlined text-slate-400 text-sm group-open:rotate-180 transition-transform"
+                  >
+                    expand_more
+                  </span>
+                </summary>
+                <div
+                  class="px-4 pt-4 pb-4 text-xs text-slate-600 dark:text-slate-400 leading-relaxed"
+                  data-i18n="stirfry_faq3_a"
+                >Yes. Select the dish, add ingredients, and press start. New operators can run the equipment independently after 30 minutes of training. Heat levels and stir-fry rhythms are preset.</div>
+              </details>
+              <details
+                class="group bg-white rounded-xl border border-slate-200 dark:border-slate-700 overflow-hidden"
+              >
+                <summary class="flex items-center justify-between p-4 cursor-pointer font-bold text-sm select-none">
+                  <span data-i18n="stirfry_faq4_q">How many servings can one machine handle at a time?</span>
+                  <span
+                    class="material-symbols-outlined text-slate-400 text-sm group-open:rotate-180 transition-transform"
+                  >
+                    expand_more
+                  </span>
+                </summary>
+                <div
+                  class="px-4 pt-4 pb-4 text-xs text-slate-600 dark:text-slate-400 leading-relaxed"
+                  data-i18n="stirfry_faq4_a"
+                >Capacity varies by model—typically 8-12 servings per batch. One operator can run multiple units simultaneously.</div>
+              </details>
+            </div>
+          </div>
+        </section>
+        <!-- Cross-sell & Scene Entry Section -->
+        <section class="fullwidth-bg py-12 bg-slate-50 dark:bg-slate-900/50">
+          <div class="section-content">
+            <div id="cross-sell-container"></div>
+            <div id="scene-entry-container"></div>
+            <nav id="product-category-nav"></nav>
+          </div>
+        </section>
+        <!-- CTA Section -->
+        <section class="fullwidth-bg py-8">
+          <div class="section-content">
+            <div class="bg-gradient-to-br from-primary/10 to-primary/5 rounded-2xl p-6 text-center">
+              <h2 class="text-lg font-bold mb-2 text-slate-900 dark:text-white" data-i18n="stirfry_cta_title_mobile">Need stir-fry equipment recommendations?</h2>
+              <p class="text-sm text-slate-600 dark:text-slate-400 mb-4" data-i18n="stirfry_cta_desc_mobile">Engineers recommend based on your menu</p>
+              <a
+                class="inline-flex items-center gap-2 bg-primary text-white px-6 py-3 rounded-xl font-bold text-sm"
+                href="/quote"
+              >
+                <span data-i18n="products_cta_btn_quote">Get Custom Quote</span>
+                <span class="material-symbols-outlined text-sm">arrow_forward</span>
+              </a>
+              <a
+                class="inline-flex items-center gap-2 border-2 border-primary text-primary px-6 py-3 rounded-xl font-bold text-sm"
+                data-wa-message-key="wa_msg_products"
+                href="https://wa.me/8613163756465"
+                target="_blank" rel="noopener noreferrer"
+              >
+                <span data-i18n="products_cta_btn_contact">Contact Sales Team</span>
+                <span class="material-symbols-outlined text-sm">support_agent</span>
+              </a>
+            </div>
+          </div>
+        </section>
+      </div>
+    </main>
+    <!-- Bottom Navigation -->
+    <script defer src="/assets/js/lang-registry.js?v=1780474841186"></script>
+    <script defer src="/assets/js/translations.js?v=1780474841186"></script>
+    <script defer src="/assets/js/translations-dropdown-template.js?v=1780474841186"></script>
+
+    <script defer src="/assets/js/contacts.js?v=1780474841186"></script>
+    <script defer src="/assets/js/ui/helpers.js?v=1780474841186"></script>
+    <script defer src="/assets/js/ui/page-effects.js?v=1780474841186"></script><script defer src="/assets/js/page-interactions.js?v=1780474841186"></script>
+    <script defer src="/assets/js/utils.js?v=1780474841186"></script>
+
+    <script defer src="/assets/js/ui/search-engine.js?v=1780474841186"></script>
+    
+    <script defer src="/assets/js/ui/floating-actions.js?v=1780474841186"></script>
+    <script defer src="/assets/js/ui/footer.js?v=1780474841186"></script>
+    <script defer src="/assets/js/ui/slide-menu.js?v=1780474841186"></script>
+      <script src="/assets/js/product-data-table.js"></script>
+    <script defer src="/assets/js/nav-config.js"></script>
+    <script defer src="/assets/js/utils/device-utils.js"></script>
+    <script defer src="/assets/js/ui/dropdown-styles.js"></script>
+    <script defer src="/assets/js/ui/dropdown-base.js"></script>
+    <script defer src="/assets/js/ui/products-dropdown.js"></script>
+    <script defer src="/assets/js/ui/applications-dropdown.js"></script>
+    <script defer src="/assets/js/ui/support-dropdown.js"></script>
+    <script defer src="/assets/js/ui/about-dropdown.js"></script>
+    <script defer src="/assets/js/ui/contact-dropdown.js"></script>
+    <script defer src="/assets/js/ui/navigator.js"></script>
+    <script defer src="/assets/js/ui/hero-video.js"></script>
+    <script defer src="/assets/js/swup.min.js"></script>
+    <script defer src="/assets/js/swup-head-plugin.min.js"></script>
+    <script defer src="/assets/js/swup-preload-plugin.min.js"></script>
+    <script defer src="/assets/js/spa-router.js"></script>
+    <script defer src="/assets/js/product-grid.js"></script>
+    <script defer src="/assets/js/product-detail.js"></script>
+    <script defer src="/assets/js/product-list.js"></script>
+    <script defer src="/assets/js/breadcrumb.js"></script>
+    <script>window._SPA_GLOBAL_PATTERNS=/(?:^|[\/])(?:product-data-table|nav-config|device-utils|lang-registry|utils|translations|translations-dropdown-template|dropdown-styles|dropdown-base|products-dropdown|applications-dropdown|support-dropdown|about-dropdown|contact-dropdown|navigator|slide-menu|footer|hero-video|floating-actions|helpers|page-effects|page-interactions|search-engine|swup.min|swup-head-plugin.min|swup-preload-plugin.min|spa-router)\.js/</script>
+  <style data-skeleton-inline>#skeleton-overlay{position:fixed;inset:0;z-index:5;pointer-events:none;background:var(--color-bg-light,#f8fafc);opacity:1;transition:opacity .25s ease-out}html.dark #skeleton-overlay{background:var(--color-bg-dark,#020617)}#skeleton-overlay[hidden]{display:none}@keyframes sk-shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}.skeleton-container{width:100%;max-width:1280px;margin:0 auto;padding:2rem 1.25rem}.sk-badge{width:100px;height:22px;border-radius:9999px;margin:0 auto 16px;background:linear-gradient(90deg,#e8e8e8 25%,#d4d4d4 50%,#e8e8e8 75%);background-size:200% 100%;animation:sk-shimmer 1.5s infinite}.sk-hero{display:flex;flex-direction:column;align-items:center;text-align:center;margin-bottom:24px}.sk-line{width:65%;height:32px;border-radius:8px;margin:0 auto 12px;background:linear-gradient(90deg,#e8e8e8 25%,#d4d4d4 50%,#e8e8e8 75%);background-size:200% 100%;animation:sk-shimmer 1.5s infinite}.sk-line-short{width:45%;height:18px;margin-bottom:8px}.sk-line-shorter{width:30%;height:18px}.sk-cta-group{display:flex;gap:12px;justify-content:center;margin-top:20px}.sk-cta{width:140px;height:44px;border-radius:12px;background:linear-gradient(90deg,#e8e8e8 25%,#d4d4d4 50%,#e8e8e8 75%);background-size:200% 100%;animation:sk-shimmer 1.5s infinite}.sk-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:32px}@media(max-width:767px){.sk-grid{grid-template-columns:1fr}.sk-cta{width:100%;max-width:none}}@media(min-width:768px)and(max-width:1279px){.sk-grid{grid-template-columns:repeat(2,1fr)}}.sk-card{height:220px;border-radius:16px;background:linear-gradient(90deg,#e8e8e8 25%,#d4d4d4 50%,#e8e8e8 75%);background-size:200% 100%;animation:sk-shimmer 1.5s infinite}.dark .sk-badge,.dark .sk-line,.dark .sk-cta,.dark .sk-card{background:linear-gradient(90deg,#1e293b 25%,#334155 50%,#1e293b 75%);background-size:200% 100%}</style>
+<div id="skeleton-overlay">  <div class="skeleton-container">    <div class="sk-hero">      <div class="sk-badge"></div>      <div class="sk-line"></div>      <div class="sk-line sk-line-short"></div>      <div class="sk-line sk-line-shorter"></div>      <div class="sk-cta-group">        <div class="sk-cta"></div>        <div class="sk-cta"></div>      </div>    </div>    <div class="sk-grid">      <div class="sk-card"></div>      <div class="sk-card"></div>      <div class="sk-card"></div>    </div>  </div></div>
+<script>(function(){var sk=document.getElementById("skeleton-overlay");if(!sk)return;function hide(){sk.setAttribute("hidden","");sk.style.display="none";document.head.querySelector("[data-skeleton-inline]")?.remove()}if(document.readyState==="complete")hide();else window.addEventListener("load",hide);setTimeout(hide,3000);})();</script>
+  </body>
+
+</html>

@@ -1,0 +1,1027 @@
+/**
+ * src2 Design System — Yukoli 2026 UI
+ * Isolated from src/ styles. Do NOT import from src/assets/css/styles.css.
+ *
+ * Design tokens:
+ *   Primary:          #ec5b13  (Yukoli orange)
+ *   Background light: #f8f6f6
+ *   Background dark:  #221610
+ *   Font:             Public Sans (Google Fonts)
+ *   Icons:            Material Symbols Outlined
+ */
+
+/* ─── Fixed Navigator Compensation ─────────────────────────────── */
+/*
+ * When navigator.js renders as position:fixed, it inserts placeholder divs.
+ * But for extra safety, ensure main content has enough top margin.
+ * Mobile/tablet header: 56px | PC header: 109px
+ */
+#mobile-header-placeholder {
+  flex-shrink: 0;
+}
+#pc-header-placeholder {
+  flex-shrink: 0;
+}
+
+/* ─── CSS Custom Properties ─────────────────────────────────────── */
+:root {
+  --color-primary: #ec5b13;
+  --color-primary-10: rgb(236, 91, 19, 0.1);
+  --color-primary-20: rgb(236, 91, 19, 0.2);
+  --color-bg-light: #f8f6f6;
+  --color-bg-dark: #221610;
+  --font-display: "Public Sans", sans-serif;
+  --radius-sm: 0.25rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 0.75rem;
+  --radius-full: 9999px;
+  --transition-base: 150ms ease;
+  --transition-colors: colors 300ms ease;
+  /* ── Design Tokens: 统一间距 ── */
+  --section-py: 5rem; /* py-20 */
+  --section-py-lg: 6rem; /* py-24 */
+  --container-px: 0.75rem; /* px-3 */
+  --container-gap: 2rem; /* gap-8 */
+}
+
+@media (width >= 768px) {
+  :root {
+    --container-px: 1.25rem;
+  }
+}
+@media (width >= 1024px) {
+  :root {
+    --container-px: 1.25rem;
+  }
+}
+@media (width >= 1280px) {
+  :root {
+    --container-px: 2.5rem;
+  }
+}
+
+/* ─── Base Reset ─────────────────────────────────────────────────── */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  text-size-adjust: 100%;
+  overflow-x: clip;
+}
+
+main#spa-content {
+  width: 100%;
+  min-width: 0;
+}
+
+body {
+  font-family: var(--font-display);
+  background-color: var(--color-bg-light);
+  color: #0f172a; /* slate-900 */
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ─── Dark Mode ──────────────────────────────────────────────────── */
+html.dark body {
+  background-color: var(--color-bg-dark);
+  color: #f1f5f9; /* slate-100 */
+}
+
+/* ─── Tailwind Config (CDN) ──────────────────────────────────────── */
+
+/*
+ * Each page includes this inline script for Tailwind CDN config:
+ *
+ * <script id="tailwind-config">
+ *   tailwind.config = {
+ *     darkMode: "class",
+ *     theme: {
+ *       extend: {
+ *         colors: {
+ *           "primary":          "#ec5b13",
+ *           "background-light": "#f8f6f6",
+ *           "background-dark":  "#221610",
+ *         },
+ *         fontFamily: {
+ *           "display": ["Public Sans", "sans-serif"]
+ *         },
+ *         borderRadius: {
+ *           "DEFAULT": "0.25rem",
+ *           "lg":      "0.5rem",
+ *           "xl":      "0.75rem",
+ *           "full":    "9999px"
+ *         },
+ *       },
+ *     },
+ *   }
+ * </script>
+ */
+
+/* ─── Design Tokens ──────────────────────────────────────────────── */
+/* 统一间距系统 - 所有页面遵循此规范
+   Container 左右边距: px-6 md:px-10 lg:px-16 xl:px-20
+   Section 上下间距:   py-20 (标准) / py-24 (大区块)
+   元素内部间距:       gap-8 (标准) / gap-12 (宽松)
+   卡片圆角:           rounded-xl (12px) / rounded-2xl (16px)
+   区块圆角:           rounded-3xl (24px)
+*/
+
+/* ─── Brand Utility Classes ──────────────────────────────────────── */
+.text-primary {
+  color: var(--color-primary);
+}
+.bg-primary {
+  background-color: var(--color-primary);
+}
+.border-primary {
+  border-color: var(--color-primary);
+}
+
+/* ─── Typography Scale ───────────────────────────────────────────── */
+/* 统一排版规范 - 三端(PC/Tablet/Mobile)遵循此体系
+   字体: Public Sans (全局), font-weight: 400/600/700/900
+   标题层级:
+     h1 (Hero): PC 6xl→5xl→4xl | Tablet 4xl→3xl | Mobile 3xl→2xl
+     h2 (Section): PC 4xl | Tablet 3xl | Mobile 2xl
+     h3 (Card): PC 2xl | Tablet xl | Mobile lg
+     h4 (Sub): PC xl | Mobile lg
+   正文: text-base (PC) | text-sm (Mobile)
+   辅助: text-sm (PC) | text-xs (Mobile)
+   强调色: text-primary (#ec5b13)
+   正文色: text-slate-900 dark:text-white
+   辅助色: text-slate-500 dark:text-slate-400
+*/
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-display);
+  font-weight: 900;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+
+/* Section 标题统一: PC 4xl / Tablet 3xl / Mobile 2xl */
+/* h2.section-title moved to inline Tailwind classes */
+
+/* 卡片标题统一: PC 2xl / Mobile xl */
+/* h3.card-title moved to inline Tailwind classes */
+
+/* ─── Links ──────────────────────────────────────────────────────── */
+a {
+  color: inherit;
+  text-decoration: none;
+  transition: color var(--transition-base);
+}
+
+a:hover {
+  color: var(--color-primary);
+}
+
+/* ─── Images ─────────────────────────────────────────────────────── */
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* ─── Buttons ────────────────────────────────────────────────────── */
+button,
+[role="button"] {
+  cursor: pointer;
+  font-family: var(--font-display);
+}
+
+/* ─── Focus Visible ──────────────────────────────────────────────── */
+:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+/* ─── Scrollbar (WebKit) ─────────────────────────────────────────── */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1; /* slate-300 */
+  border-radius: var(--radius-full);
+}
+
+html.dark ::-webkit-scrollbar-thumb {
+  background: #334155; /* slate-700 */
+}
+
+/* ─── Layout: main#spa-content unified padding ──────────────────── */
+
+/* Navigator spacing: single source of truth is CSS variable --nav-height.
+ *   - Before JS loads: CSS fallback value (65px / 109px) provides spacing
+ *   - After JS loads: navigator.js sets --nav-height to actual header height
+ *
+ * This replaces the old approach of:
+ *   1) per-page inline pt-[110px] classes (inconsistent, caused double-spacing)
+ *   2) JS placeholder div with inline height (not CSS-responsive, T0 gap)
+ *   3) body.nav-mounted class toggle (two mechanisms fighting)
+ *
+ * Breakpoints aligned with Navigator.resolveVariant:
+ *   mobile/tablet < 1024px → 65px fallback
+ *   PC ≥ 1024px             → 109px fallback */
+
+main#spa-content {
+  max-width: 1920px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-top: var(--nav-height, 65px); /* fallback before JS; JS sets exact value */
+}
+
+/* Hero overlap: first section pulls up to overlap with fixed navigator.
+   Uses a dedicated class instead of Tailwind arbitrary value (-mt-[var(...)])
+   because the comma inside arbitrary values causes unreliable CSS selector matching.
+   Padding-top on the hero section itself ensures content stays below the header.
+   The inline pt-* class on the section provides additional breathing room beyond
+   the nav clearance (e.g. pt-6 after this base padding). */
+main#spa-content > .hero-overlap {
+  margin-top: calc(var(--nav-height, 65px) * -1);
+  padding-top: calc(var(--nav-height, 65px) + 1.5rem);
+}
+
+@media (width >= 1024px) {
+  main#spa-content {
+    padding-top: var(--nav-height, 109px);
+  }
+  main#spa-content > .hero-overlap {
+    margin-top: calc(var(--nav-height, 109px) * -1);
+    padding-top: calc(var(--nav-height, 109px) + 1.5rem);
+  }
+}
+
+/* ── Section Spacing Collapse ────────────────────────────────────────
+ *
+ * Prevents double-padding between adjacent sections.
+ * Each section keeps its py-* for first/last position, but consecutive
+ * sections collapse their overlapping padding.
+ *
+ * Target visual gap between consecutive sections:
+ *   Mobile (<768px):   ~1.5–2.5rem (24–40px)
+ *   Desktop (≥768px):  ~2.5–3.5rem (40–56px)
+ */
+
+main > section + section {
+  margin-top: -1rem;
+}
+
+@media (width >= 768px) {
+  main > section + section {
+    margin-top: -1.5rem;
+  }
+}
+
+/* After hero sections: use mild collapse instead of full collapse.
+ * Full collapse conflicts with hero's negative margin-top.
+ * 0.5rem provides ~8px extra breathing room for short heroes. */
+main > section.section-passthrough + section,
+main > section.hero-overlap + section {
+  margin-top: 0.5rem;
+}
+
+/* Alternating background sections: no collapse needed.
+ * The background color change itself provides visual separation. */
+main > section + section[class*="bg-slate-100"],
+main > section + section[class*="bg-slate-900"],
+main > section + section[class*="bg-primary"],
+main > section + section[class*="bg-slate-800/"] {
+  margin-top: 0;
+}
+
+/* Inline card sections that shouldn't participate in collapse */
+section.no-collapse {
+  margin-top: revert !important;
+}
+
+/* ── End Section Spacing Collapse ───────────────────────────────────── */
+
+/* Left/right inline padding — only when main has NO Tailwind padding class */
+main#spa-content:not([class*="p-"], [class*="px-"], [class*="py-"]) {
+  padding-left: 0.75rem; /* 12px */
+  padding-right: 0.75rem;
+}
+
+@media (width >= 768px) {
+  main#spa-content:not([class*="p-"], [class*="px-"], [class*="py-"]) {
+    padding-left: 1.25rem; /* 20px */
+    padding-right: 1.25rem;
+  }
+}
+
+@media (width >= 1280px) {
+  main#spa-content:not([class*="p-"], [class*="px-"], [class*="py-"]) {
+    padding-left: 2.5rem; /* 40px */
+    padding-right: 2.5rem;
+  }
+}
+
+/* Full-width background sections: break out of main padding.
+ * Only applies when main uses CSS padding (PC pages with fullwidth-bg).
+ * Tablet/mobile pages handle their own layout differently.
+ * Usage: <section class="... fullwidth-bg bg-slate-100">
+ * Child div keeps px-6 md:px-10 lg:px-16 xl:px-20 for content alignment. */
+
+main#spa-content:not([class*="p-"], [class*="px-"], [class*="py-"]) .fullwidth-bg {
+  margin-left: -0.75rem;
+  margin-right: -0.75rem;
+}
+
+@media (width >= 768px) {
+  main#spa-content:not([class*="p-"], [class*="px-"], [class*="py-"]) .fullwidth-bg {
+    margin-left: -1.25rem;
+    margin-right: -1.25rem;
+  }
+}
+
+@media (width >= 1280px) {
+  main#spa-content:not([class*="p-"], [class*="px-"], [class*="py-"]) .fullwidth-bg {
+    margin-left: -2.5rem;
+    margin-right: -2.5rem;
+  }
+}
+
+/* ─── fullwidth-bg: background full-width breakout ───────────────
+ *
+ * Purpose: Break section out of main padding so bg-color/image fills the screen.
+ *
+ * Pattern:
+ *   <section class="py-8 fullwidth-bg bg-slate-100">
+ *     <div class="section-content">          ← auto padded
+ *       ...content...
+ *     </div>
+ *   </section>
+ *
+ * .section-content uses var(--container-px) responsive padding.
+ * Mobile/tablet pages (where main has inline px classes) also work:
+ * the selector targets ALL .fullwidth-bg, not just those inside
+ * the main#spa-content:not() rule.
+ */
+
+.fullwidth-bg > .section-content {
+  padding-inline: var(--container-px, 0.75rem);
+  max-width: 1920px;
+  margin-inline: auto;
+}
+
+/* ─── section-passthrough: flex layout transparency ──────────────
+ *
+ * Purpose: Make section-content transparent in flex/grid parent sections
+ * so direct children (columns, flex items) participate in the parent layout.
+ *
+ * Pattern:
+ *   <section class="flex flex-col lg:flex-row gap-12 section-passthrough">
+ *     <div class="section-content">
+ *       <div class="lg:w-1/2">...</div>  ← becomes direct flex child
+ *       <div class="lg:w-1/2">...</div>
+ *     </div>
+ *   </section>
+ *
+ * Can combine with fullwidth-bg for hero sections that need both
+ * background breakout and flex layout:
+ *   <section class="... fullwidth-bg section-passthrough">
+ */
+
+.section-passthrough {
+  padding-inline: var(--container-px, 0.75rem);
+}
+.section-passthrough > .section-content {
+  display: contents;
+  padding-inline: 0;
+  max-width: none;
+  margin-inline: 0;
+}
+
+/* ─── section-content: responsive content padding ──────────────
+ *
+ * Provides consistent horizontal padding for content inside any section.
+ * Used as a semantic wrapper: <section><div class="section-content">...</div></section>
+ *
+ * Overridden by fullwidth-bg (which adds its own padding) and
+ * section-passthrough (which uses display: contents).
+ */
+
+section > .section-content {
+  padding-inline: var(--container-px, 0.75rem);
+}
+
+/* When <main> already has Tailwind px-*, section-content padding is
+ * redundant and would double-indent content. Reset to zero.
+ * fullwidth-bg > .section-content has higher specificity and still applies. */
+main[class*="px-"] > section > .section-content {
+  padding-inline: 0;
+}
+
+/* ─── Footer padding — footer component handles bottom spacing ── */
+main#spa-content {
+  padding-bottom: 0;
+}
+
+/* ─── Navigator placeholder: prevent layout shift before JS mount ───── */
+/* Exact match of real header heights to avoid CLS before navigator.js replaces placeholder. */
+navigator[data-component="navigator"] {
+  display: block;
+  height: 109px;
+  background: rgb(248, 246, 246, 0.8);
+  border-bottom: 1px solid rgb(226, 232, 240, 1);
+}
+@media (width <= 767px) {
+  navigator[data-component="navigator"] {
+    height: 61px;
+  }
+}
+html.dark navigator[data-component="navigator"] {
+  background: rgb(34, 22, 16, 0.8);
+  border-bottom-color: rgb(30, 41, 59, 1);
+}
+
+/* Spacer divs from navigator.js are no longer created (removed to fix double-spacing).
+ * If any stale spacers remain in cached HTML, hide them. */
+#mobile-header-placeholder,
+#pc-header-placeholder {
+  display: none !important;
+}
+
+/* ─── Navigator: top-level menu text uniformity ─────────────────── */
+/*
+ * All nav items (dropdown triggers and plain links) must render with
+ * identical font metrics. Dropdown triggers use <button> with font:inherit;
+ * plain links use <a>. This rule ensures visual parity regardless of tag.
+ */
+header nav > *,
+header nav > a,
+header nav > .prod-dropdown-wrap > a.prod-dropdown-trigger,
+header nav > .app-dropdown-wrap > a.app-dropdown-trigger,
+header nav > .sup-dropdown-wrap > a.sup-dropdown-trigger,
+header nav > .abt-dropdown-wrap > a.abt-dropdown-trigger,
+header nav > .cnt-dropdown-wrap > a.cnt-dropdown-trigger {
+  font-size: 0.875rem; /* text-sm = 14px */
+  font-weight: 600; /* font-semibold */
+  line-height: 1.25rem; /* text-sm line-height */
+  letter-spacing: 0;
+  font-family: var(--font-display);
+}
+
+/* ─── Scroll margin for sections (prevent navigator overlap) ───── */
+main#spa-content > section,
+main#spa-content [id] {
+  scroll-margin-top: 80px; /* mobile: 62px nav + 18px buffer */
+}
+
+@media (width >= 768px) {
+  main#spa-content > section,
+  main#spa-content [id] {
+    scroll-margin-top: 88px; /* tablet: ~72px nav + 16px buffer */
+  }
+}
+
+@media (width >= 1280px) {
+  main#spa-content > section,
+  main#spa-content [id] {
+    scroll-margin-top: 144px; /* PC: 109px nav + 35px buffer */
+  }
+}
+
+/* ─── Details/FAQ accordion ────────────────────────────────────── */
+details summary::-webkit-details-marker {
+  display: none;
+}
+details[open] > summary .material-symbols-outlined {
+  transform: rotate(180deg);
+}
+details[open] > summary {
+  border-bottom: 1px solid var(--color-primary);
+}
+
+/* ─── Material Symbols helper ────────────────────────────────────── */
+.material-symbols-outlined {
+  font-variation-settings:
+    "FILL" 0,
+    "wght" 400,
+    "GRAD" 0,
+    "opsz" 24;
+  line-height: 1;
+  /* Ensure consistent sizing in all contexts */
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  vertical-align: -0.15em;
+  flex-shrink: 0;
+  overflow: hidden;
+  /* Fallback: hide text content if font fails to load */
+  font-family: "Material Symbols Outlined", sans-serif;
+}
+
+/* In flex containers, let align-items handle centering */
+.flex .material-symbols-outlined,
+[class*="items-"] .material-symbols-outlined {
+  vertical-align: initial;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  align-self: center;
+}
+
+/* ─── Select dropdown arrow ────────────────────────────────────── */
+select {
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%2394a3b8' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.75rem center;
+  background-size: 1rem;
+  padding-right: 2.5rem;
+  cursor: pointer;
+}
+
+/* ─── §3.2 Button Hover — CTA lift & deepen ─────────────────────────────── */
+
+/* ─── §3.4 Primary Button Hover ───────────────────────────────────────── */
+/* 所有 bg-primary 按钮的 hover 效果：加深背景色 + 微上浮 + 阴影
+   通过 Tailwind 的 group/peer 机制或直接 class 触发 */
+.btn-cta:hover,
+a.bg-primary:hover,
+button.bg-primary:hover,
+a.bg-primary[class*="hover:"]:hover,
+button.bg-primary[class*="hover:"]:hover {
+  background-color: #d4521a;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgb(242 101 34 / 0.35);
+}
+
+/* ─── §4 Form Inline Validation ──────────────────────────────────────────── */
+
+/* Error state: red border + shake */
+.field-error {
+  border-color: #ef4444 !important;
+  outline: none !important;
+  box-shadow: 0 0 0 1px #ef4444 !important;
+}
+
+/* Fix: remove default border on buttons to prevent black edge */
+button[type="submit"],
+button.bg-primary,
+a.bg-primary {
+  border: none;
+}
+
+.field-error-msg {
+  color: #ef4444;
+  font-size: 0.75rem;
+  margin-top: 0.25rem;
+  display: block;
+  width: 100%;
+  flex-shrink: 0;
+}
+
+/* Shake keyframe (0.2s) */
+@keyframes shake {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+
+  20% {
+    transform: translateX(-6px);
+  }
+
+  40% {
+    transform: translateX(6px);
+  }
+
+  60% {
+    transform: translateX(-4px);
+  }
+
+  80% {
+    transform: translateX(4px);
+  }
+}
+
+.shake {
+  animation: shake 0.2s ease-in-out;
+}
+
+/* ─── §3.1 IoT Pulse / breathing light ──────────────────────────────────── */
+@keyframes iot-breathe {
+  0%,
+  100% {
+    background-color: #22c55e;
+    box-shadow: 0 0 0 0 rgb(34 197 94 / 0.6);
+  }
+
+  50% {
+    background-color: #ec5b13;
+    box-shadow: 0 0 0 8px rgb(236 91 19 / 0);
+  }
+}
+
+.iot-pulse {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  display: inline-block;
+  animation: iot-breathe 2s ease-in-out infinite;
+}
+
+/* ─── §4 Form success — collapse + checkmark ────────────────────────────── */
+@keyframes form-collapse {
+  0% {
+    max-height: 800px;
+    opacity: 1;
+    transform: scaleY(1);
+  }
+
+  100% {
+    max-height: 0;
+    opacity: 0;
+    transform: scaleY(0);
+  }
+}
+
+.form-collapsing {
+  overflow: hidden;
+  transform-origin: top;
+  animation: form-collapse 0.4s ease-in forwards;
+}
+
+@keyframes checkmark-draw {
+  0% {
+    stroke-dashoffset: 48;
+    opacity: 0;
+  }
+
+  30% {
+    opacity: 1;
+  }
+
+  100% {
+    stroke-dashoffset: 0;
+    opacity: 1;
+  }
+}
+
+.form-success-overlay {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  padding: 2rem;
+  text-align: center;
+  animation: fade-in 0.4s ease 0.4s both;
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.checkmark-svg circle {
+  fill: none;
+  stroke: #22c55e;
+  stroke-width: 2;
+}
+
+.checkmark-svg path {
+  fill: none;
+  stroke: #22c55e;
+  stroke-width: 3;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 48;
+  stroke-dashoffset: 48;
+  animation: checkmark-draw 0.5s ease 0.5s forwards;
+}
+
+/* ─── Product page filter chips ────────────────────────── */
+.filter-chip {
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.filter-chip:hover {
+  border-color: #ec5b13;
+  color: #ec5b13;
+}
+.filter-chip.active {
+  background: #ec5b13;
+  color: white;
+  border-color: #ec5b13;
+}
+
+/* Category tabs active state */
+.category-tab {
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.category-tab:hover {
+  color: #ec5b13;
+}
+.category-tab.active {
+  background: #ec5b13;
+  color: white;
+  border-color: #ec5b13;
+  border-radius: 9999px;
+}
+
+/* Mobile smart header: hide on scroll down */
+#mobile-header.header-hidden {
+  transform: translateY(-100%);
+}
+
+/* ─── Hero Video: Apple-style progressive enhancement ─────────── */
+
+/* Container */
+[data-hero-video] {
+  position: relative;
+}
+
+/* iOS: 隐藏系统原生播放按钮覆盖层 */
+[data-hero-video] video::-webkit-media-controls-start-playback-button {
+  display: none !important;
+  appearance: none;
+}
+
+[data-hero-video] video::-webkit-media-controls {
+  display: none !important;
+}
+
+/* Poster (封面图) — 初始可见，crossfade 后隐藏 */
+.hero-video-poster {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  transition: opacity 1.5s ease;
+  z-index: var(--z-hero-poster);
+}
+
+/* Video player — 初始透明，crossfade 后显示 */
+.hero-video-player {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  opacity: 0;
+  z-index: var(--z-hero-player);
+  outline: none;
+}
+
+/* Overlay — 静音按钮 + 播放按钮容器，初始隐藏（auto 模式）
+   手动模式(manual)下默认可见，播放后隐藏 */
+.hero-video-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: var(--z-hero-overlay);
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-start;
+  gap: 8px;
+  padding: 16px;
+  pointer-events: none;
+  transition: opacity 1.5s ease;
+}
+
+/* 手动模式：overlay 默认可见，播放后隐藏 */
+[data-hero-video-mode="manual"] .hero-video-overlay {
+  opacity: 1;
+}
+
+/* 静音切换按钮 */
+.hero-video-mute {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: none;
+  background: rgb(0, 0, 0, 0.4);
+  backdrop-filter: blur(8px);
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: auto;
+  transition: background 0.2s;
+  z-index: 1;
+  line-height: 1;
+}
+.hero-video-mute .material-symbols-outlined {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  width: 100%;
+  height: 100%;
+  line-height: 1;
+}
+
+.hero-video-mute:hover {
+  background: rgb(0, 0, 0, 0.6);
+}
+
+/* 全屏按钮 */
+.hero-video-fullscreen {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: none;
+  background: rgb(0, 0, 0, 0.4);
+  backdrop-filter: blur(8px);
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: auto;
+  transition: background 0.2s;
+  z-index: 1;
+  line-height: 1;
+  flex-shrink: 0;
+}
+.hero-video-fullscreen .material-symbols-outlined {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  width: 100%;
+  height: 100%;
+  line-height: 1;
+}
+
+.hero-video-fullscreen:hover {
+  background: rgb(0, 0, 0, 0.6);
+}
+
+/* Mobile: smaller control buttons */
+@media (width < 768px) {
+  .hero-video-mute,
+  .hero-video-fullscreen {
+    width: 30px;
+    height: 30px;
+  }
+  .hero-video-mute .material-symbols-outlined,
+  .hero-video-fullscreen .material-symbols-outlined {
+    font-size: 17px;
+  }
+}
+
+/* 底部信息卡片 — 始终在最上层 */
+.hero-video-info {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: var(--z-hero-info);
+  background: rgb(0 0 0 / 0.35);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-top: 1px solid rgb(255 255 255 / 0.1);
+  padding: 12px 16px;
+  color: white;
+  text-shadow: 0 1px 3px rgb(0 0 0 / 0.3);
+  pointer-events: none;
+}
+@media (width >= 768px) {
+  .hero-video-info {
+    padding: 16px 24px;
+  }
+}
+@media (width >= 1280px) {
+  .hero-video-info {
+    padding: 20px 32px;
+  }
+}
+
+/* 播放按钮 — 视频正中央，大圆形 */
+.hero-video-playbtn {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: calc(var(--z-hero-overlay) + 1);
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  border: 3px solid rgb(255, 255, 255, 0.5);
+  background: rgb(0, 0, 0, 0.35);
+  backdrop-filter: blur(16px);
+  color: white;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: auto;
+  transition:
+    transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1),
+    background 0.2s,
+    opacity 0.3s ease;
+  box-shadow: 0 4px 24px rgb(0, 0, 0, 0.2);
+}
+.hero-video-playbtn:hover {
+  transform: translate(-50%, -50%) scale(1.08);
+  background: rgb(0, 0, 0, 0.5);
+}
+.hero-video-playbtn:active {
+  transform: translate(-50%, -50%) scale(0.92);
+}
+.hero-video-playbtn .material-symbols-outlined {
+  font-size: 28px;
+}
+
+@media (width >= 768px) {
+  .hero-video-playbtn {
+    width: 64px;
+    height: 64px;
+  }
+  .hero-video-playbtn .material-symbols-outlined {
+    font-size: 32px;
+  }
+}
+@media (width >= 1280px) {
+  .hero-video-playbtn {
+    width: 72px;
+    height: 72px;
+  }
+  .hero-video-playbtn .material-symbols-outlined {
+    font-size: 36px;
+  }
+}
+[data-hero-video-playing="true"] .hero-video-playbtn {
+  opacity: 0.5;
+}
+
+/* 视频播放中 → info 卡片隐藏 */
+[data-hero-video-playing="true"] [data-hide-on-play] {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* 降级播放按钮 */
+.hero-video-fallback-btn {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: var(--z-hero-fallback);
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  border: 2px solid rgb(255, 255, 255, 0.3);
+  background: rgb(255, 255, 255, 0.15);
+  backdrop-filter: blur(12px);
+  color: white;
+  font-size: 24px;
+  cursor: pointer;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  transition:
+    transform 0.2s,
+    background 0.2s;
+}
+
+.hero-video-fallback-btn:hover {
+  transform: translate(-50%, -50%) scale(1.1);
+  background: rgb(255, 255, 255, 0.25);
+}
+
+/* PC: 视频播放中 hover 显示 overlay（方便调音量/静音） */
+@media (width >= 1024px) {
+  [data-hero-video-playing="true"]:hover .hero-video-overlay {
+    opacity: 1 !important;
+    pointer-events: auto !important;
+  }
+}

@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+
+
+<html class="light" lang="zh-CN">
+  <head>
+    <script>
+      /* Pre-apply cached translations to prevent flash */
+      (function () {
+        try {
+          var lang = localStorage.getItem("userLanguage") || "zh-CN";
+          if (!lang) return;
+          var cacheKey = "yukoli-translations-ui-" + lang;
+          var cached = localStorage.getItem(cacheKey);
+          if (!cached) return;
+          var data = JSON.parse(cached);
+          if (!data.data) return;
+          var translations = data.data;
+          document.documentElement.lang = lang;
+          var elements = document.querySelectorAll("[data-i18n]");
+          for (var i = 0; i < elements.length; i++) {
+            var el = elements[i];
+            var key = el.getAttribute("data-i18n");
+            if (translations[key] && el.children.length === 0) {
+              el.textContent = translations[key];
+            }
+          }
+        } catch (e) {
+          /* ignore */
+        }
+      })();
+    </script>
+  <script>/*[i18n-url-sync]*/(function(){var p=new URLSearchParams(location.search),l=p.get("lang");if(l){localStorage.setItem("userLanguage",l);document.documentElement.lang=l}})();</script>
+    <link rel="canonical" href="https://www.kitchen.yukoli.com/contact/" />
+  <link rel="alternate" hreflang="zh-CN" href="https://www.kitchen.yukoli.com/contact/" />
+  <link rel="alternate" hreflang="en" href="https://www.kitchen.yukoli.com/contact/" />
+  <link rel="alternate" hreflang="x-default" href="https://www.kitchen.yukoli.com/contact/" />
+    <link rel="alternate" media="only screen and (max-width: 767px)" href="/contact/index-mobile.html" />
+    <link
+      rel="alternate"
+      media="only screen and (min-width: 768px) and (max-width: 1279px)"
+      href="/contact/index-tablet.html"
+    />
+    <link rel="alternate" media="only screen and (min-width: 1280px)" href="/contact/index-pc.html" />
+    <script>
+      (function () {
+        if (window.__redirectChecked) return;
+        window.__redirectChecked = true;
+        var urlParams = new URLSearchParams(location.search);
+        var cleanUrl = urlParams.get("clean-url");
+        if (cleanUrl) {
+          history.replaceState({}, "", cleanUrl);
+          return;
+        }
+        if (window.__spaNavigating) return;
+        var currentFile = location.pathname.split("/").pop();
+        if (window.DeviceUtils && window.DeviceUtils.isDirectoryURL()) return;
+        if (window.DeviceUtils && window.DeviceUtils.shouldRedirect(currentFile)) {
+          var deviceType = window.DeviceUtils.getDeviceType();
+          var targetFile =
+            deviceType === window.DeviceUtils.DeviceType.MOBILE
+              ? "index-mobile.html"
+              : deviceType === window.DeviceUtils.DeviceType.TABLET
+                ? "index-tablet.html"
+                : "index-pc.html";
+          location.href = targetFile;
+        }
+      })();
+    </script>
+
+    <meta charset="utf-8" />
+    <meta name="description" content="联系 YuKoLi — 获取智能商用厨房设备报价和技术咨询，全球服务网络覆盖东南亚、中东、南亚市场。" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>YuKoLi | 联系我们</title>
+    <link rel="preload" href="/assets/fonts/local-fonts.css" as="style" />
+    <link rel="preload" href="/assets/css/styles.css?v=1780474841186" as="style" />
+    <link rel="preload" href="/assets/css/tailwind.css?v=1780474841186" as="style" />
+    <link href="/assets/fonts/local-fonts.css" rel="stylesheet" />
+    <link rel="stylesheet" href="/assets/css/styles.css?v=1780474841186" />
+    <link rel="stylesheet" href="/assets/css/tailwind.css?v=1780474841186" />
+    <link rel="stylesheet" href="/assets/css/z-index-system.css?v=1780474841186" />
+    <link rel="stylesheet" href="/assets/css/performance-optimizations.css?v=1780474841186" />
+    <script>
+      (function () {
+        if (localStorage.getItem("darkMode") === "true") document.documentElement.classList.add("dark");
+      })();
+    </script>
+    <link rel="stylesheet" href="/assets/css/skeleton.css?v=1780474841186" />
+    <link rel="icon" href="/assets/images/logo/logo.webp" type="image/webp" />
+    <link rel="manifest" href="/manifest.json"/>
+      <link rel="stylesheet" href="/assets/css/components.css" />
+</head>
+  <body
+    class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 antialiased transition-colors duration-300 overflow-x-clip"
+  >
+    <navigator data-search="true"
+      data-component="navigator"
+      data-variant="tablet"
+      data-active="contact"
+      data-cta-text-key="nav_get_quote"
+      data-cta-href="/quote"
+    ></navigator>
+
+    <main id="spa-content" class="py-8 flex-1">
+      <!-- Hero -->
+      <section class="fullwidth-bg hero-overlap py-16">
+        <div class="section-content">
+          <div
+            class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-bold uppercase tracking-wider mb-4"
+          >
+            <span class="material-symbols-outlined text-sm">mail</span>
+            <span data-i18n="contact_hero_badge">Contact Us</span>
+          </div>
+          <h1 class="text-4xl font-black leading-tight tracking-tighter mb-4">
+            <span data-i18n="contact_hero_title">Contact Our</span>
+            <span class="text-primary" data-i18n="contact_hero_title_highlight">Expert Team</span>
+          </h1>
+          <p class="text-slate-600 dark:text-slate-400 mb-6" data-i18n="contact_hero_desc">From manual prep to fully automated cooking - one machine replaces 3 chefs. YuKoLi smart kitchen equipment has helped hotels and F&B businesses in 68+ countries reduce labor costs by 60% and increase meal output efficiency by 5x.</p>
+        </div>
+      </section>
+
+      <!-- Contact Form -->
+      <section class="fullwidth-bg py-16">
+
+        <div class="section-content">
+        
+          <div class="w-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-6">
+            <h3 id="contact-form" class="text-lg font-bold mb-4" data-i18n="contact_form_title">Contact Us</h3>
+            
+<form id="contact-form-el" class="space-y-3" novalidate>
+                <select data-custom-select id="c-country" required onchange="window._onCountryChange&&window._onCountryChange(this.value)" class="w-full h-12 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white focus:border-primary text-sm px-3 py-3 appearance-none">
+                  <option value="" data-i18n="select_country">选择国家/地区</option>
+<option value="ID">🇮🇩 Indonesia</option><option value="MY">🇲🇾 Malaysia</option><option value="PH">🇵🇭 Pilipinas</option><option value="VN">🇻🇳 Việt Nam</option><option value="TH">🇹🇭 ไทย</option><option value="SG">🇸🇬 Singapore</option><option value="MM">🇲🇲 မြန်မာ</option><option value="KH">🇰🇭 កង្ពុជា</option><option value="LA">🇱🇦 ລາວ</option><option value="BN">🇧🇳 Brunei</option><option value="CN">🇨🇳 中国</option><option value="IN">🇮🇳 भारत</option><option value="JP">🇯🇵 日本</option><option value="KR">🇰🇷 대한민국</option><option value="SA">🇸🇦 السعودية</option><option value="TW">🇹🇼 中国台湾</option><option value="HK">🇭🇰 中国香港</option><option value="DE">🇩🇪 Deutschland</option><option value="ES">🇪🇸 España</option><option value="FR">🇫🇷 France</option><option value="PT">🇵🇹 Portugal</option><option value="RU">🇷🇺 Россия</option><option value="NL">🇳🇱 Nederland</option><option value="PL">🇵🇱 Polska</option><option value="IT">🇮🇹 Italia</option><option value="TR">🇹🇷 Türkiye</option><option value="IL">🇮🇱 ישראל</option><option value="other">其他/Other</option>
+                </select>
+                <input type="text" id="c-contact" required class="w-full h-12 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white focus:border-primary text-sm px-3 py-3" data-i18n-placeholder="contact_name_placeholder" placeholder="Your name *" />
+                <select data-custom-select id="c-restaurant-type" required class="w-full h-12 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white focus:border-primary text-sm px-3 py-3 appearance-none">
+                  <option value="">选择餐厅类型</option><option value="small-restaurant">小型餐饮</option><option value="central-kitchen">中央厨房</option><option value="chain-restaurant">连锁餐饮</option><option value="smart-canteen">智慧食堂</option><option value="cloud-kitchen">云厨房</option><option value="takeaway">外卖</option><option value="food-factory">食品工厂</option><option value="other">其他</option>
+                </select>
+                <div class="flex gap-3">
+                  <select id="c-phone-code" class="w-24 shrink-0 h-12 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white focus:border-primary text-sm px-3 py-3 appearance-none">
+                    <option value="+62">🇮🇩 +62</option><option value="+60">🇲🇾 +60</option><option value="+63">🇵🇭 +63</option><option value="+84">🇻🇳 +84</option><option value="+66">🇹🇭 +66</option><option value="+65">🇸🇬 +65</option><option value="+95">🇲🇲 +95</option><option value="+855">🇰🇭 +855</option><option value="+856">🇱🇦 +856</option><option value="+673">🇧🇳 +673</option><option value="+86">🇨🇳 +86</option><option value="+91">🇮🇳 +91</option><option value="+81">🇯🇵 +81</option><option value="+82">🇰🇷 +82</option><option value="+966">🇸🇦 +966</option><option value="+886">🇹🇼 +886</option><option value="+852">🇭🇰 +852</option><option value="+49">🇩🇪 +49</option><option value="+34">🇪🇸 +34</option><option value="+33">🇫🇷 +33</option><option value="+351">🇵🇹 +351</option><option value="+7">🇷🇺 +7</option><option value="+31">🇳🇱 +31</option><option value="+48">🇵🇱 +48</option><option value="+39">🇮🇹 +39</option><option value="+90">🇹🇷 +90</option><option value="+972">🇮🇱 +972</option><option value="+1">🇺🇸 +1</option><option value="+44">🇬🇧 +44</option><option value="+61">🇦🇺 +61</option><option value="+other">其他</option>
+                  </select>
+                  <input type="tel" id="c-phone" required class="flex-1 h-12 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white focus:border-primary text-sm px-3 py-3" data-i18n-placeholder="contact_phone_placeholder" placeholder="Phone number *" />
+                </div>
+                <div class="flex gap-3">
+                  <select data-custom-select data-cs-wrap-class="flex-1" id="c-contact-channel" required class="flex-1 h-12 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white focus:border-primary text-sm px-3 py-3 appearance-none">
+                    <option value="">选择联系方式</option><option value="WhatsApp">WhatsApp</option><option value="LINE">LINE</option><option value="Zalo">Zalo</option><option value="Facebook Messenger">Messenger</option><option value="Viber">Viber</option><option value="Telegram">Telegram</option><option value="WeChat">WeChat</option><option value="Phone Call">电话</option><option value="other">其他</option>
+                  </select>
+                  <input type="text" id="c-contact-account" class="flex-1 h-12 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white focus:border-primary text-sm px-3 py-3" data-i18n-placeholder="contact_account_placeholder" placeholder="Leave blank" />
+                </div>
+                <input type="email" id="c-email" class="w-full h-12 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white focus:border-primary text-sm px-3 py-3" data-i18n-placeholder="contact_email_placeholder" placeholder="Your email" />
+                <div>
+                  <span class="text-sm font-bold" data-i18n="contact_challenge_title">Biggest Challenge? (Multi Select)</span>
+                  <div class="flex flex-wrap gap-x-4 gap-y-2 mt-2">
+                    <label class="flex items-center gap-1.5 text-sm"><input type="checkbox" class="accent-primary" value="招聘困难" /> <span data-i18n="quote_pain_hiring">Can't Find Chefs</span></label>
+                    <label class="flex items-center gap-1.5 text-sm"><input type="checkbox" class="accent-primary" value="出餐慢" /> <span data-i18n="quote_pain_slow">Slow Service</span></label>
+                    <label class="flex items-center gap-1.5 text-sm"><input type="checkbox" class="accent-primary" value="品质不稳" /> <span data-i18n="quote_pain_quality">Inconsistent Quality</span></label>
+                    <label class="flex items-center gap-1.5 text-sm"><input type="checkbox" class="accent-primary" value="成本高" /> <span data-i18n="quote_pain_cost">High Labor Cost</span></label>
+                    <label class="flex items-center gap-1.5 text-sm"><input type="checkbox" class="accent-primary" value="新店" /> <span data-i18n="quote_pain_new_store">Opening New Store</span></label>
+                    <label class="flex items-center gap-1.5 text-sm"><input type="checkbox" class="accent-primary" value="其他" /> <span data-i18n="quote_pain_other">Other</span></label>
+                  </div>
+                  <input type="text" id="c-pain-other" class="hidden w-full mt-1 px-3 py-2 rounded-lg border border-slate-300 dark:border-slate-700 bg-transparent focus:border-primary text-xs" placeholder="Describe..." />
+                </div>
+                <button type="submit" class="w-full bg-primary text-white py-3.5 rounded-lg font-bold hover:bg-primary/90 transition-all text-sm" data-i18n="contact_submit_btn">Get Free Assessment</button>
+              </form>
+
+          </div>
+      
+
+        </div></section>
+
+      <!-- Contact Info -->
+      <section class="fullwidth-bg py-16">
+        <div class="section-content">
+          <div class="w-full grid grid-cols-3 gap-3">
+            <div
+              class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-4 text-center"
+            >
+              <span class="material-symbols-outlined text-primary text-xl mb-2">email</span>
+              <p class="text-xs font-bold" data-i18n="contact_card_email_title">Email</p>
+              <p class="text-xs text-slate-500">support.kitchen@yukoli.com</p>
+            </div>
+            <div
+              class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-4 text-center"
+            >
+              <span class="material-symbols-outlined text-primary text-xl mb-2">phone</span>
+              <p class="text-xs font-bold" data-i18n="contact_card_phone_title">Phone</p>
+              <p class="text-xs text-slate-500">+86 13163756465</p>
+            </div>
+            <div
+              class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-4 text-center"
+            >
+              <span class="material-symbols-outlined text-primary text-xl mb-2">chat</span>
+              <p class="text-xs font-bold">WhatsApp</p>
+              <p class="text-xs text-slate-500">+86 13163756465</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Office Address -->
+      <section class="fullwidth-bg py-16">
+        <div class="section-content">
+          <h2 class="text-xl font-bold mb-4" data-i18n="contact_offices_title">Global Offices</h2>
+          <div class="w-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-6">
+            <div class="flex items-start gap-3 mb-5">
+              <div class="size-10 bg-primary/10 rounded-xl flex items-center justify-center flex-shrink-0">
+                <span class="material-symbols-outlined text-primary text-lg">location_on</span>
+              </div>
+              <div>
+                <div class="flex items-center gap-2 mb-1">
+                  <span class="text-xl">🇨🇳</span>
+                  <h3 class="font-bold" data-i18n="contact_office_hq">Headquarters</h3>
+                </div>
+                <p class="text-xs text-slate-500" data-i18n="contact_company_name">Foshan YuKoLi Technology Co., Ltd</p>
+              </div>
+            </div>
+            <div class="space-y-3">
+              <div class="flex items-start gap-2">
+                <span class="material-symbols-outlined text-primary text-base mt-0.5">apartment</span>
+                <div>
+                  <p class="text-sm font-bold mb-0.5" data-i18n="contact_addr_zh_label">Chinese Address</p>
+                  <p class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed" data-i18n="contact_addr_zh_value">广东省佛山市顺德区大良街道红岗社区展伦路83号万创园12栋502室之六</p>
+                </div>
+              </div>
+              <div class="border-t border-slate-100 dark:border-slate-800"></div>
+              <div class="flex items-start gap-2">
+                <span class="material-symbols-outlined text-primary text-base mt-0.5">language</span>
+                <div>
+                  <p class="text-sm font-bold mb-0.5" data-i18n="contact_addr_en_label">English Address</p>
+                  <p class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed" data-i18n="contact_addr_en_value">Room 502-6, Building 12, WANCHUANG Park, No.83 Zhanlun Road, Honggang Community, Daliang Street, Shunde District, Foshan City, Guangdong Province, China</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Partner -->
+      <section class="bg-slate-900 text-white rounded-2xl p-6 text-center mt-8 mb-6 no-collapse">
+
+        <div>
+        <h2 class="text-xl font-black mb-3" data-i18n="contact_partner_title">Become a Partner</h2>
+        <p class="text-slate-300 text-sm mb-4" data-i18n="contact_partner_desc">YuKoLi focuses on helping every client grow their business through smart kitchen equipment - whether improving meal efficiency, reducing labor costs, or expanding new categories. We seek like-minded regional partners, offering complete product training, localized technical support, and regional protection policies. Let's build a long-term win-win ecosystem where technology and services continuously create value.</p>
+        <a href="#contact-form"
+          class="inline-block bg-primary text-white px-6 py-2.5 rounded-lg font-bold text-sm"
+          data-i18n="contact_partner_btn"
+        >Apply for Partnership</a>
+      
+
+        </div></section>
+    
+  <!-- Quick Navigation -->
+  <section class="fullwidth-bg bg-primary py-10 overflow-hidden">
+    <div class="section-content relative">
+          <div class="relative z-10 text-center">
+        <h2 class="text-2xl font-black text-white mb-2" data-i18n="contact_quicknav_title">Still Exploring?</h2>
+        <p class="text-white/80 text-base mb-8 max-w-xl mx-auto" data-i18n="contact_quicknav_desc">Browse products, view case scenarios, or get customized quotes - we're here to serve you.</p>
+        <div class="flex flex-wrap justify-center gap-3">
+          <a href="/products/" class="inline-flex items-center gap-2 bg-white text-primary px-6 py-3.5 rounded-xl font-bold text-sm hover:shadow-lg hover:scale-105 transition-all">
+            <span class="material-symbols-outlined">kitchen</span>
+            <span data-i18n="nav_products">Products</span>
+            <span class="material-symbols-outlined">arrow_forward</span>
+          </a>
+          <a href="/cases/" class="inline-flex items-center gap-2 bg-white/10 border-2 border-white/30 text-white px-6 py-3.5 rounded-xl font-bold text-sm hover:bg-white/20 transition-all">
+            <span class="material-symbols-outlined">monitoring</span>
+            <span data-i18n="nav_applications">Applications</span>
+          </a>
+          <a href="/quote/" class="inline-flex items-center gap-2 bg-white/10 border-2 border-white/30 text-white px-6 py-3.5 rounded-xl font-bold text-sm hover:bg-white/20 transition-all">
+            <span class="material-symbols-outlined">request_quote</span>
+            <span data-i18n="nav_get_quote">Get Quote</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+    <script defer src="/assets/js/ui/dropdown-styles.js?v=1780474841186"></script>
+    <script defer src="/assets/js/ui/dropdown-base.js?v=1780474841186"></script>
+    <script defer src="/assets/js/ui/products-dropdown.js?v=1780474841186"></script>
+    <script defer src="/assets/js/ui/applications-dropdown.js?v=1780474841186"></script>
+    <script defer src="/assets/js/ui/support-dropdown.js?v=1780474841186"></script>
+    <script defer src="/assets/js/ui/about-dropdown.js?v=1780474841186"></script>
+    <script defer src="/assets/js/product-list.js?v=1780474841186"></script>
+    <script defer src="/assets/js/utils.js?v=1780474841186"></script>
+    <script defer src="/assets/js/ui/search-engine.js?v=1780474841186"></script>
+        <script defer src="/assets/js/ui/slide-menu.js?v=1780474841186"></script>
+    <script defer src="/assets/js/ui/footer.js?v=1780474841186"></script>
+    <script defer src="/assets/js/lang-registry.js?v=1780474841186"></script>
+    <script defer src="/assets/js/translations.js?v=1780474841186"></script><script defer src="/assets/js/ui/helpers.js?v=1780474841186"></script>
+    <script defer src="/assets/js/ui/page-effects.js?v=1780474841186"></script><script defer src="/assets/js/quote-form.js?v=1780474841186"></script>
+    <script defer src="/assets/js/page-interactions.js?v=1780474841186"></script>
+    <script defer src="/assets/js/utils/device-utils.js?v=1780474841186"></script>
+      <script defer src="/assets/js/ui/custom-select.js?v=1780474841186"></script>
+      <script defer src="/assets/js/quote-select-i18n.js?v=1780474841186"></script>
+      <script defer src="/assets/js/ui/floating-actions.js?v=1780474841186"></script>
+  <script defer src="/assets/js/contact-form.js?v=1780474841186"></script>
+      <script src="/assets/js/product-data-table.js"></script>
+    <script defer src="/assets/js/nav-config.js"></script>
+    <script defer src="/assets/js/translations-dropdown-template.js"></script>
+    <script defer src="/assets/js/ui/contact-dropdown.js"></script>
+    <script defer src="/assets/js/ui/navigator.js"></script>
+    <script defer src="/assets/js/ui/hero-video.js"></script>
+    <script defer src="/assets/js/swup.min.js"></script>
+    <script defer src="/assets/js/swup-head-plugin.min.js"></script>
+    <script defer src="/assets/js/swup-preload-plugin.min.js"></script>
+    <script defer src="/assets/js/spa-router.js"></script>
+    <script>window._SPA_GLOBAL_PATTERNS=/(?:^|[\/])(?:product-data-table|nav-config|device-utils|lang-registry|utils|translations|translations-dropdown-template|dropdown-styles|dropdown-base|products-dropdown|applications-dropdown|support-dropdown|about-dropdown|contact-dropdown|navigator|slide-menu|footer|hero-video|floating-actions|helpers|page-effects|page-interactions|search-engine|swup.min|swup-head-plugin.min|swup-preload-plugin.min|spa-router)\.js/</script>
+  <style data-skeleton-inline>#skeleton-overlay{position:fixed;inset:0;z-index:5;pointer-events:none;background:var(--color-bg-light,#f8fafc);opacity:1;transition:opacity .25s ease-out}html.dark #skeleton-overlay{background:var(--color-bg-dark,#020617)}#skeleton-overlay[hidden]{display:none}@keyframes sk-shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}.skeleton-container{width:100%;max-width:1280px;margin:0 auto;padding:2rem 1.25rem}.sk-badge{width:100px;height:22px;border-radius:9999px;margin:0 auto 16px;background:linear-gradient(90deg,#e8e8e8 25%,#d4d4d4 50%,#e8e8e8 75%);background-size:200% 100%;animation:sk-shimmer 1.5s infinite}.sk-hero{display:flex;flex-direction:column;align-items:center;text-align:center;margin-bottom:24px}.sk-line{width:65%;height:32px;border-radius:8px;margin:0 auto 12px;background:linear-gradient(90deg,#e8e8e8 25%,#d4d4d4 50%,#e8e8e8 75%);background-size:200% 100%;animation:sk-shimmer 1.5s infinite}.sk-line-short{width:45%;height:18px;margin-bottom:8px}.sk-line-shorter{width:30%;height:18px}.sk-cta-group{display:flex;gap:12px;justify-content:center;margin-top:20px}.sk-cta{width:140px;height:44px;border-radius:12px;background:linear-gradient(90deg,#e8e8e8 25%,#d4d4d4 50%,#e8e8e8 75%);background-size:200% 100%;animation:sk-shimmer 1.5s infinite}.sk-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:32px}@media(max-width:767px){.sk-grid{grid-template-columns:1fr}.sk-cta{width:100%;max-width:none}}@media(min-width:768px)and(max-width:1279px){.sk-grid{grid-template-columns:repeat(2,1fr)}}.sk-card{height:220px;border-radius:16px;background:linear-gradient(90deg,#e8e8e8 25%,#d4d4d4 50%,#e8e8e8 75%);background-size:200% 100%;animation:sk-shimmer 1.5s infinite}.dark .sk-badge,.dark .sk-line,.dark .sk-cta,.dark .sk-card{background:linear-gradient(90deg,#1e293b 25%,#334155 50%,#1e293b 75%);background-size:200% 100%}</style>
+<div id="skeleton-overlay">  <div class="skeleton-container">    <div class="sk-hero">      <div class="sk-badge"></div>      <div class="sk-line"></div>      <div class="sk-line sk-line-short"></div>      <div class="sk-line sk-line-shorter"></div>      <div class="sk-cta-group">        <div class="sk-cta"></div>        <div class="sk-cta"></div>      </div>    </div>    <div class="sk-grid">      <div class="sk-card"></div>      <div class="sk-card"></div>      <div class="sk-card"></div>    </div>  </div></div>
+<script>(function(){var sk=document.getElementById("skeleton-overlay");if(!sk)return;function hide(){sk.setAttribute("hidden","");sk.style.display="none";document.head.querySelector("[data-skeleton-inline]")?.remove()}if(document.readyState==="complete")hide();else window.addEventListener("load",hide);setTimeout(hide,3000);})();</script>
+  </body>
+</html>
