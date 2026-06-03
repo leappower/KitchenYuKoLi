@@ -111,6 +111,9 @@
 
     sel.innerHTML = html.join("");
     sel.value = prevValue;
+    // Sync placeholder into data-placeholder for custom-select
+    var phOpt = sel.querySelector('option[value=""]');
+    if (phOpt) sel.setAttribute('data-placeholder', phOpt.textContent);
 
     // Re-init custom-select instance
     reinitCustomSelect(sel);
@@ -138,7 +141,7 @@
   function reinitCustomSelect(sel) {
     if (window.CustomSelect && typeof window.CustomSelect.init === "function") {
       try {
-        if (sel.__csInstance) {
+        if (sel._customSelectInstance) {
           var oldWrap = sel.parentElement;
           if (oldWrap && oldWrap.classList.contains("cs-trigger-wrap")) {
             // 恢复 select 到原始位置和内联样式
@@ -148,7 +151,7 @@
               parent.removeChild(oldWrap);
             }
           }
-          sel.__csInstance = null;
+          sel._customSelectInstance = null;
           sel.style.cssText = "";
           sel.style.display = "";
           sel.removeAttribute("aria-hidden");
@@ -228,8 +231,11 @@
     if (listenersRegistered) return;
     listenersRegistered = true;
 
-    /* Listen for language changes */
+    /* Listen for language changes and initial translation load */
     window.addEventListener("translationsApplied", function () {
+      updateAllSelects();
+    });
+    document.addEventListener("productTranslationsLoaded", function () {
       updateAllSelects();
     });
 
