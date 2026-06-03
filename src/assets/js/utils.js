@@ -142,12 +142,17 @@
 window.getProductField = function getProductField(product, field) {
   if (!product) return "";
   var lang = (
+    (window.translationManager && window.translationManager.currentLanguage) ||
     window.CURRENT_LANG ||
     (window.t && window.t.currentLanguage) ||
     localStorage.getItem("userLanguage") ||
     document.documentElement.lang ||
     "en"
-  ).replace("_", "-");
+  )
+    .replace("_", "-")
+    .split("-")
+    .slice(0, 2)
+    .join("-");
   // zh-CN / zh: return Chinese field directly
   if (lang === "zh-CN" || lang === "zh") return product[field] || "";
   // Non-Chinese: try product translations map first (en-product.json), fallback to product[field]
