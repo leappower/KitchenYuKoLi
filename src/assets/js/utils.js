@@ -167,12 +167,24 @@ window.getProductField = function getProductField(product, field) {
   if (field === "sub_category" && product.subCategoryEn) return product.subCategoryEn;
   // Try tier/category from generic i18n keys (tier_basic, tier_smart, tier_full_smart)
   if (field === "tier" && product.tier) {
-    var tierMap = {"基础": "basic", "智能": "smart", "全智能": "full_smart"};
+    var tierMap = { 基础: "basic", 智能: "smart", 全智能: "full_smart" };
     var tierSlug = tierMap[product.tier];
     if (tierSlug) {
       var tierVal = window.uiText ? window.uiText("tier_" + tierSlug, "") : "";
       if (tierVal) return tierVal;
     }
+  }
+  // Try uiText/tr() fallback from ui.json translations (product_xxx_<field>)
+  if (field === "name" || field === "specifications" || field === "usage" || field === "material") {
+    var trKey = "product_" + model.toLowerCase().replace(/[-/]/g, "_") + "_" + field;
+    var trVal = null;
+    if (typeof window.uiText === "function") trVal = window.uiText(trKey, null);
+    if (!trVal && typeof window.t === "function") {
+      try {
+        trVal = window.t(trKey);
+      } catch (e) {}
+    }
+    if (trVal) return trVal;
   }
   // For non-Chinese, if no translation available, return empty rather than Chinese
   if (lang !== "zh-CN" && lang !== "zh") return "";
