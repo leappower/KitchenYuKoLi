@@ -155,6 +155,22 @@ window.getProductField = function getProductField(product, field) {
   var map = window._productTranslationsByModel || {};
   var t = map[model];
   if (t && t[field]) return t[field];
+
+  // For non-English languages: try uiText/tr() from ui.json first
+  // (product_{model}_{field} keys were synced from product.json in the latest build)
+  if (lang !== "en" && lang !== "en-US" && lang !== "en-GB") {
+    if (field === "name" || field === "specifications" || field === "usage" || field === "material") {
+      var trKey = "product_" + model.toLowerCase().replace(/[-/]/g, "_") + "_" + field;
+      var trVal = null;
+      if (typeof window.uiText === "function") trVal = window.uiText(trKey, null);
+      if (!trVal && typeof window.t === "function") {
+        try {
+          trVal = window.t(trKey);
+        } catch (e) {}
+      }
+      if (trVal && trVal !== trKey) return trVal;
+    }
+  }
   // Support nameEn / specificationsEn as fallback (embedded in product data)
   if (field === "name" && product.nameEn) return product.nameEn;
   if (field === "specifications" && product.specificationsEn) return product.specificationsEn;
@@ -173,18 +189,6 @@ window.getProductField = function getProductField(product, field) {
       var tierVal = window.uiText ? window.uiText("tier_" + tierSlug, "") : "";
       if (tierVal) return tierVal;
     }
-  }
-  // Try uiText/tr() fallback from ui.json translations (product_xxx_<field>)
-  if (field === "name" || field === "specifications" || field === "usage" || field === "material") {
-    var trKey = "product_" + model.toLowerCase().replace(/[-/]/g, "_") + "_" + field;
-    var trVal = null;
-    if (typeof window.uiText === "function") trVal = window.uiText(trKey, null);
-    if (!trVal && typeof window.t === "function") {
-      try {
-        trVal = window.t(trKey);
-      } catch (e) {}
-    }
-    if (trVal) return trVal;
   }
   // For non-Chinese, if no translation available, return empty rather than Chinese
   if (lang !== "zh-CN" && lang !== "zh") return "";
