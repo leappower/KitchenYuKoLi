@@ -626,7 +626,10 @@
       badge =
         '<span class="px-3 py-1 bg-primary text-white text-xs font-bold rounded-full">' + esc(p.badge) + "</span>";
     }
-    var linkSlug = CATEGORY_NAME_TO_SLUG[p._category] || (window.MODEL_TO_SLUG && window.MODEL_TO_SLUG[model]) || encodeURIComponent(model);
+    var linkSlug =
+      CATEGORY_NAME_TO_SLUG[p._category] ||
+      (window.MODEL_TO_SLUG && window.MODEL_TO_SLUG[model]) ||
+      encodeURIComponent(model);
     var link = "/products/" + linkSlug + "/" + encodeURIComponent(model) + "/";
     var isSelected = isProductCompared(p.model);
     var selectedClass = isSelected ? " compare-selected" : "";
@@ -704,7 +707,10 @@
       badge =
         '<span class="px-2 py-0.5 bg-primary text-white text-[10px] font-bold rounded">' + esc(p.badge) + "</span>";
     }
-    var linkSlug = CATEGORY_NAME_TO_SLUG[p._category] || (window.MODEL_TO_SLUG && window.MODEL_TO_SLUG[model]) || encodeURIComponent(model);
+    var linkSlug =
+      CATEGORY_NAME_TO_SLUG[p._category] ||
+      (window.MODEL_TO_SLUG && window.MODEL_TO_SLUG[model]) ||
+      encodeURIComponent(model);
     var link = "/products/" + linkSlug + "/" + encodeURIComponent(model) + "/";
     var isSelected = isProductCompared(p.model);
     var selectedClass = isSelected ? " compare-selected" : "";
@@ -768,7 +774,10 @@
     var name = esc(_pField(p, "name") || model);
     var desc = esc(p.description || p.card_desc || "");
     var img = esc(p._imageUrl);
-    var linkSlug = CATEGORY_NAME_TO_SLUG[p._category] || (window.MODEL_TO_SLUG && window.MODEL_TO_SLUG[model]) || encodeURIComponent(model);
+    var linkSlug =
+      CATEGORY_NAME_TO_SLUG[p._category] ||
+      (window.MODEL_TO_SLUG && window.MODEL_TO_SLUG[model]) ||
+      encodeURIComponent(model);
     var link = "/products/" + linkSlug + "/" + encodeURIComponent(model) + "/";
     var isSelected = isProductCompared(p.model);
     var selectedClass = isSelected ? " compare-selected" : "";
@@ -915,16 +924,27 @@
       _autoRenderRetries = 0;
       doRender();
     } else {
-      // Retry with exponential backoff up to ~1s total
-      if (_autoRenderRetries < 7) {
+      // Retry with exponential backoff — up to 30 retries (~3s total)
+      // This handles SPA navigation where product-grid.js may be async-injected
+      // before product-data-table.js has finished loading
+      if (_autoRenderRetries < 30) {
         _autoRenderRetries++;
-        var delay = Math.min(50 * Math.pow(1.5, _autoRenderRetries - 1), 300);
+        var delay = Math.min(100 * Math.pow(1.2, _autoRenderRetries - 1), 300);
         setTimeout(autoRender, delay);
         return;
       }
       _autoRenderRetries = 0;
       _renderPending = true;
+      // Fallback: listen for product-data-ready event before loading from API
+      var _dataReadyHandler = function () {
+        window.removeEventListener("product-data-ready", _dataReadyHandler);
+        _renderPending = false;
+        doRender();
+      };
+      window.addEventListener("product-data-ready", _dataReadyHandler);
+      // Also try loading from API as fallback
       loadFromAPI(function () {
+        window.removeEventListener("product-data-ready", _dataReadyHandler);
         _renderPending = false;
         doRender();
       });
