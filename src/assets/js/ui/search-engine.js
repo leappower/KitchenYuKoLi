@@ -124,6 +124,22 @@
         var trKey = "product_" + model.toLowerCase().replace(/[-/]/g, "_") + "_name";
         translatedName = tr(trKey, name || model) || name || model;
       }
+      // 多语言字段：动态获取当前语言的规格/用途/材质/场景
+      var langSpecs =
+        (lang !== "zh-CN" && p["specifications" + suffix]) || p.specificationsEn || p.specifications || "";
+      var langUsage = (lang !== "zh-CN" && p["usage" + suffix]) || p.usageEn || p.usage || "";
+      var langScenarios = (lang !== "zh-CN" && p["scenarios" + suffix]) || p.scenariosEn || p.scenarios || "";
+      // Fallback to tr() for specs/usage/scenarios (loaded from xx-product.json)
+      if (lang !== "zh-CN" && (!langSpecs || langSpecs === p.specifications)) {
+        var specKey = "product_" + model.toLowerCase().replace(/[-/]/g, "_") + "_specifications";
+        var trSpecs = tr(specKey, "");
+        if (trSpecs && trSpecs !== specKey) langSpecs = trSpecs;
+      }
+      if (lang !== "zh-CN" && (!langUsage || langUsage === p.usage)) {
+        var usageKey = "product_" + model.toLowerCase().replace(/[-/]/g, "_") + "_usage";
+        var trUsage = tr(usageKey, "");
+        if (trUsage && trUsage !== usageKey) langUsage = trUsage;
+      }
       var imgSrc = "/assets/images/products/" + model + ".webp";
       return Object.assign({}, p, {
         _displayName: translatedName,
@@ -135,13 +151,15 @@
           model,
           translatedCategory || category,
           category,
+          langSpecs, // 当前语言的规格
+          langUsage, // 当前语言的用途
           p.specifications || "",
           p.specificationsEn || "",
           p.throughput || "",
           p.voltage || "",
           p.power || "",
           p.material || "",
-          p.scenarios || "",
+          langScenarios, // 当前语言的场景
         ]
           .filter(Boolean)
           .join(" ")
@@ -182,9 +200,30 @@
       // Determine display title based on current language
       var lang =
         (typeof window.translationManager !== "undefined" && window.translationManager.currentLanguage) || "zh-CN";
-      var displayTitle = (lang !== "zh-CN" && e.titleEn) || e.title || "";
-      var displaySnippet = (lang !== "zh-CN" && e.snippetEn) || e.snippet || "";
-      // Searchable text includes BOTH Chinese and English for cross-language search
+      // 对于 25 种语言，优先使用对应语言的 title/snippet/keywords 字段
+      var langPrefix = lang.split("-")[0]; // 'th', 'vi', 'id', 'zh' etc.
+      var titleField = "title" + (lang !== "zh-CN" ? langPrefix.charAt(0).toUpperCase() + langPrefix.slice(1) : "");
+      var snippetField = "snippet" + (lang !== "zh-CN" ? langPrefix.charAt(0).toUpperCase() + langPrefix.slice(1) : "");
+      var kwField = "keywords" + (lang !== "zh-CN" ? langPrefix.charAt(0).toUpperCase() + langPrefix.slice(1) : "");
+
+      var displayTitle = (lang !== "zh-CN" && e[titleField]) || e.titleEn || e.title || "";
+      var displaySnippet = (lang !== "zh-CN" && e[snippetField]) || e.snippetEn || e.snippet || "";
+      var pageKws = (lang !== "zh-CN" && e[kwField]) || e.keywordsEn || e.keywords || "";
+
+      // Searchable text includes ALL available language content for cross-language search
+      var searchParts = [
+        e.title,
+        e.titleEn || "",
+        e.snippet,
+        e.snippetEn || "",
+        e.keywords || "",
+        e.keywordsEn || "",
+        e.labelFallback || "",
+      ];
+      // 添加当前语言的翻译内容
+      if (displayTitle && displayTitle !== e.title && displayTitle !== e.titleEn) searchParts.push(displayTitle);
+      if (pageKws && pageKws !== e.keywords && pageKws !== e.keywordsEn) searchParts.push(pageKws);
+
       return {
         type: e.type || "page",
         labelKey: e.labelKey || "search_type_page",
@@ -192,18 +231,7 @@
         path: e.path,
         title: displayTitle,
         snippet: displaySnippet,
-        _searchText: [
-          e.title,
-          e.titleEn || "",
-          e.snippet,
-          e.snippetEn || "",
-          e.keywords || "",
-          e.keywordsEn || "",
-          e.labelFallback || "",
-        ]
-          .filter(Boolean)
-          .join(" ")
-          .toLowerCase(),
+        _searchText: searchParts.filter(Boolean).join(" ").toLowerCase(),
         category: tr(e.labelKey, e.labelFallback) || e.labelFallback || "",
       };
     });
@@ -244,27 +272,25 @@
       .split(/[\s,，、-]+/)
       .filter(Boolean);
 
-    // CJK 双字符滑动窗口分词：对每个非纯空白 token 做双字切分
-    var cjkTokens = [];
-    for (var t = 0; t < tokens.length; t++) {
-      var token = tokens[t];
-      // 如果 token 长度 >= 2 且包含 CJK 字符，生成双字滑动窗口
-      if (token.length >= 2) {
-        for (var i = 0; i < token.length - 1; i++) {
-          var bigram = token.substring(i, i + 2);
-          // 只加纯 CJK 或不含英语字母的双字
-          if (/[\u4e00-\u9fff]/.test(bigram) || /[^\u4e00-\u9fff]/.test(q)) {
-            cjkTokens.push(bigram);
+    // CJK/泰文/高棉文/老挝文/缅甸文 双字符滑动窗口分词
+    var hasBigramLang = /[\u4e00-\u9fff\u3400-\u4dbf\u0e00-\u0e7f\u1780-\u17ff\u0e80-\u0eff\u1000-\u109f]/.test(q);
+    if (hasBigramLang) {
+      var bigramTokens = [];
+      for (var bt = 0; bt < tokens.length; bt++) {
+        var token = tokens[bt];
+        if (token.length >= 2) {
+          for (var bi = 0; bi < token.length - 1; bi++) {
+            bigramTokens.push(token.substring(bi, bi + 2));
           }
         }
       }
-    }
-    // 去重
-    var seenBigram = {};
-    for (t = 0; t < cjkTokens.length; t++) {
-      if (!seenBigram[cjkTokens[t]]) {
-        seenBigram[cjkTokens[t]] = true;
-        tokens.push(cjkTokens[t]);
+      // 去重
+      var seenBigram = {};
+      for (bt = 0; bt < bigramTokens.length; bt++) {
+        if (!seenBigram[bigramTokens[bt]]) {
+          seenBigram[bigramTokens[bt]] = true;
+          tokens.push(bigramTokens[bt]);
+        }
       }
     }
 
@@ -272,7 +298,7 @@
     var results = [];
     var seen = {};
 
-    for (i = 0; i < allItems.length && results.length < 20; i++) {
+    for (var i = 0; i < allItems.length && results.length < 20; i++) {
       var p = allItems[i];
       if (p.isActive === false) continue;
 
@@ -285,7 +311,7 @@
       var score = 0;
       var matched = false;
 
-      for (t = 0; t < tokens.length; t++) {
+      for (var t = 0; t < tokens.length; t++) {
         token = tokens[t];
         var idx = text.indexOf(token);
         if (idx === -1) {

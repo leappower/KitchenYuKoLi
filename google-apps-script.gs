@@ -10,6 +10,12 @@
  * V: 提交时间
  */
 
+// doGet — 防止 GET 访问时报错，直接重定向到官网
+function doGet() {
+  var html = '<html><head><meta charset="utf-8"><script>window.location.href="https://www.kitchen.yukoli.com";</script></head><body><p>Redirecting to <a href="https://www.kitchen.yukoli.com">YuKoLi</a>...</p></body></html>';
+  return HtmlService.createHtmlOutput(html);
+}
+
 var HEADERS = [
   '表单来源', '国家/地区', '联系人', '公司名称', '餐厅类型/业态',
   '区号', '手机号', '联系方式渠道', '联系方式账号', '邮箱',

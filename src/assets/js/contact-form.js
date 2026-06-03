@@ -17,11 +17,11 @@
       e.preventDefault();
 
       // ── 基础校验：所有 [required] 字段 ──
-      var requiredEls = form.querySelectorAll('[required]');
+      var requiredEls = form.querySelectorAll("[required]");
       var firstInvalid = null;
       var allValid = true;
       requiredEls.forEach(function (el) {
-        if (el.closest && el.closest('.hidden')) return;
+        if (el.closest && el.closest(".hidden")) return;
         if (!el.value || !el.value.toString().trim()) {
           el.classList.add("border-red-500", "ring-2", "ring-red-300");
           allValid = false;
@@ -32,7 +32,7 @@
       });
 
       // email 格式校验
-      var emailEl = form.querySelector('#c-email');
+      var emailEl = form.querySelector("#c-email");
       if (emailEl && emailEl.value.trim() && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailEl.value.trim())) {
         emailEl.classList.add("border-red-500", "ring-2", "ring-red-300");
         if (!firstInvalid) firstInvalid = emailEl;
@@ -101,10 +101,12 @@
       };
 
       var GAS_URL =
-        "https://script.google.com/macros/s/AKfycbyUy-DdV0eqNfbzHWXhf5XbSMtyJMIL--Hx_AfMOrBqUYl7PgVD7vX7uhIhXy_DZIXr/exec";
+        "https://script.google.com/macros/s/AKfycbyvtCAQYrK6GDMCiYcT70NQjVITwDk9w_gMAhS9qbN9WyCwxAz2YiaemR4Mbtn1tmkb/exec";
 
       var controller = new AbortController();
-      var timeout = setTimeout(function () { controller.abort(); }, 15000);
+      var timeout = setTimeout(function () {
+        controller.abort();
+      }, 15000);
 
       fetch(GAS_URL, {
         method: "POST",

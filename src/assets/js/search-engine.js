@@ -18,10 +18,26 @@
 
   // ─── Normalisation ─────────────────────────────────────────────
 
+  // ─── Unicode Ranges for 25 supported languages ─────────────
+  // zh-CN/zh-TW: \u4e00-\u9fff
+  // ja: \u3040-\u309f \u30a0-\u30ff
+  // ko: \uac00-\ud7af
+  // th: \u0e00-\u0e7f
+  // vi: latin with diacritics remain via a-z
+  // ar: \u0600-\u06ff
+  // he: \u0590-\u05ff
+  // hi: \u0900-\u097f
+  // km: \u1780-\u17ff
+  // lo: \u0e80-\u0eff
+  // my: \u1000-\u109f
+  // ms, id, fil, de, fr, es, it, nl, pl, pt, ru, tr: a-z + specific chars
   function normalize(str) {
     return String(str)
       .toLowerCase()
-      .replace(/[^a-z0-9\u4e00-\u9fff\u3040-\u309f\u30a0-\u30ff\uac00-\ud7af\s-]/g, "")
+      .replace(
+        /[^a-z0-9\u00c0-\u024f\u0400-\u04ff\u0590-\u05ff\u0600-\u06ff\u0900-\u097f\u0e00-\u0e7f\u0e80-\u0eff\u1000-\u109f\u1780-\u17ff\u3040-\u309f\u30a0-\u30ff\u4e00-\u9fff\uac00-\ud7af\s-]/g,
+        ""
+      )
       .replace(/\s+/g, " ")
       .trim();
   }
