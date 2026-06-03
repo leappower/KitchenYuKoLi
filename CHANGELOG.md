@@ -1,5 +1,19 @@
 # Changelog
 
+## v1.0.5 (2026-06-03)
+
+### 🐛 修复
+- **产品列表白屏**: injectSequential 脚本顺序加载、autoRender 重试优化
+- **产品数据保护**: PRODUCT_DATA_TABLE 添加 Object.freeze 防止运行时污染
+- **custom-select i18n**: span.cs-trigger-text 添加 data-i18n 属性，class引号闭合修复
+- **getProductField lang检测**: 优先使用 translationManager.currentLanguage
+- **search-engine lang回退**: 默认 "en" 而非 "zh-CN"
+- **quote-select-i18n**: 添加 productTranslationsLoaded 监听 + data-placeholder 同步
+- **CTA按钮布局**: 6个产品分类移动版间距 + 居中 + py-10
+- **home移动端按钮**: hcp-load-more-mobile 添加 data-i18n 属性
+- **breadcrumb**: 添加 languageChanged 监听实现多语言切换
+- **serve.js**: 注入 __spaNavigating 抑制 SSG 设备重定向
+
 ## v1.0.4 (2026-06-03)
 
 ### 🎉 新功能
