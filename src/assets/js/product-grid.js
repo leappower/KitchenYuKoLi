@@ -924,10 +924,8 @@
       _autoRenderRetries = 0;
       doRender();
     } else {
-      // Retry with exponential backoff — up to 30 retries (~3s total)
-      // This handles SPA navigation where product-grid.js may be async-injected
-      // before product-data-table.js has finished loading
-      if (_autoRenderRetries < 30) {
+      // Retry briefly for edge cases (injectSequential ensures script order)
+      if (_autoRenderRetries < 5) {
         _autoRenderRetries++;
         var delay = Math.min(100 * Math.pow(1.2, _autoRenderRetries - 1), 300);
         setTimeout(autoRender, delay);
