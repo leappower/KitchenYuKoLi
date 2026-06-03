@@ -218,26 +218,21 @@
         toInject.push(src);
         currentSrcs[srcKey] = true;
       }
-      function injectBatch(idx) {
-        var batchSize = 3;
-        var end = Math.min(idx + batchSize, toInject.length);
-        for (var j = idx; j < end; j++) {
-          var newScript = document.createElement("script");
-          newScript.src = toInject[j];
-          newScript.async = true;
-          document.head.appendChild(newScript);
-          _dynamicScripts.push(newScript);
-        }
-        if (end < toInject.length) {
-          (window.requestIdleCallback || window.setTimeout)(function () {
-            injectBatch(end);
-          });
-        }
+      function injectSequential(idx) {
+        if (idx >= toInject.length) return;
+        var newScript = document.createElement("script");
+        newScript.src = toInject[idx];
+        newScript.onload = function () {
+          injectSequential(idx + 1);
+        };
+        newScript.onerror = function () {
+          injectSequential(idx + 1);
+        };
+        document.head.appendChild(newScript);
+        _dynamicScripts.push(newScript);
       }
       if (toInject.length > 0) {
-        (window.requestIdleCallback || window.setTimeout)(function () {
-          injectBatch(0);
-        });
+        injectSequential(0);
       }
     }
 
