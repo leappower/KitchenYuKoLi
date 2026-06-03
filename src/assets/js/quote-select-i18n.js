@@ -228,8 +228,11 @@
     if (listenersRegistered) return;
     listenersRegistered = true;
 
-    /* Listen for language changes */
+    /* Listen for language changes and initial translation load */
     window.addEventListener("translationsApplied", function () {
+      updateAllSelects();
+    });
+    document.addEventListener("productTranslationsLoaded", function () {
       updateAllSelects();
     });
 
