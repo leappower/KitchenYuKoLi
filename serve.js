@@ -103,6 +103,13 @@ function handler(req, res) {
   // Apply CSP to HTML files only
   if (ext === '.html') {
     headers["Content-Security-Policy"] = CSP;
+    // For HTML pages: inject __spaNavigating flag to suppress device redirect
+    // This ensures SPA properly takes over without URL changing to index-{pc,mobile,tablet}.html
+    var html = fs.readFileSync(fp, "utf8");
+    html = html.replace("</head>", '<script>window.__spaNavigating=true;window.__redirectChecked=true;</script></head>');
+    res.writeHead(200, headers);
+    res.end(html);
+    return;
   }
   res.writeHead(200, headers);
   fs.createReadStream(fp).pipe(res);
