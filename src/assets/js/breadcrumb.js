@@ -450,4 +450,12 @@
   } else {
     init();
   }
+
+  // Re-render breadcrumbs on language switch
+  document.addEventListener("languageChanged", function () {
+    init();
+  });
+  window.addEventListener("languageChanged", function () {
+    init();
+  });
 })();
