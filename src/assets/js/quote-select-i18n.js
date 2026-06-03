@@ -111,6 +111,9 @@
 
     sel.innerHTML = html.join("");
     sel.value = prevValue;
+    // Sync placeholder into data-placeholder for custom-select
+    var phOpt = sel.querySelector('option[value=""]');
+    if (phOpt) sel.setAttribute('data-placeholder', phOpt.textContent);
 
     // Re-init custom-select instance
     reinitCustomSelect(sel);
