@@ -32,14 +32,17 @@
   // my: \u1000-\u109f
   // ms, id, fil, de, fr, es, it, nl, pl, pt, ru, tr: a-z + specific chars
   function normalize(str) {
-    return String(str)
-      .toLowerCase()
-      .replace(
-        /[^a-z0-9\u00c0-\u024f\u0400-\u04ff\u0590-\u05ff\u0600-\u06ff\u0900-\u097f\u0e00-\u0e7f\u0e80-\u0eff\u1000-\u109f\u1780-\u17ff\u3040-\u309f\u30a0-\u30ff\u4e00-\u9fff\uac00-\ud7af\s-]/g,
-        ""
-      )
-      .replace(/\s+/g, " ")
-      .trim();
+    return (
+      String(str)
+        .toLowerCase()
+        // eslint-disable-next-line no-misleading-character-class
+        .replace(
+          /[^a-z0-9\u00c0-\u024f\u0400-\u04ff\u0590-\u05ff\u0600-\u06ff\u0900-\u097f\u0e00-\u0e7f\u0e80-\u0eff\u1000-\u109f\u1780-\u17ff\u3040-\u309f\u30a0-\u30ff\u4e00-\u9fff\uac00-\ud7af\s-]/g,
+          ""
+        )
+        .replace(/\s+/g, " ")
+        .trim()
+    );
   }
 
   // ─── Index Loading ─────────────────────────────────────────────
