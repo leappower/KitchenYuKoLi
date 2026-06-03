@@ -334,6 +334,7 @@ function main() {
     '// Generated: ' + new Date().toISOString(),
     'window.PRODUCT_DATA_TABLE = ' + JSON.stringify(models, null, 2) + ';',
     'window.PRODUCT_DATA_VERSION = "' + Date.now() + '";',
+    '(function(){var d=window.PRODUCT_DATA_TABLE;d.forEach(function(p){Object.freeze(p)});Object.freeze(d);})();',
     ''
   ].join('\n');
 
