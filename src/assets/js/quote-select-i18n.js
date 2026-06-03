@@ -141,7 +141,7 @@
   function reinitCustomSelect(sel) {
     if (window.CustomSelect && typeof window.CustomSelect.init === "function") {
       try {
-        if (sel.__csInstance) {
+        if (sel._customSelectInstance) {
           var oldWrap = sel.parentElement;
           if (oldWrap && oldWrap.classList.contains("cs-trigger-wrap")) {
             // 恢复 select 到原始位置和内联样式
@@ -151,7 +151,7 @@
               parent.removeChild(oldWrap);
             }
           }
-          sel.__csInstance = null;
+          sel._customSelectInstance = null;
           sel.style.cssText = "";
           sel.style.display = "";
           sel.removeAttribute("aria-hidden");

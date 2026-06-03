@@ -434,7 +434,7 @@
     this.trigger.innerHTML =
       '<span class="cs-trigger-text' +
       (isPlaceholder ? " cs-placeholder" : "") +
-      '">' +
+      '" data-i18n="' + (this.getDisplayTextKey ? esc(this.getDisplayTextKey()) : '') + '">' +
       esc(displayText) +
       "</span>" +
       '<span class="material-symbols-outlined cs-trigger-chevron">expand_more</span>';
