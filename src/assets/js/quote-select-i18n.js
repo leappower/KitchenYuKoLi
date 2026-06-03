@@ -141,15 +141,21 @@
         if (sel.__csInstance) {
           var oldWrap = sel.parentElement;
           if (oldWrap && oldWrap.classList.contains("cs-trigger-wrap")) {
-            oldWrap.parentNode.insertBefore(sel, oldWrap);
-            oldWrap.parentNode.removeChild(oldWrap);
+            // 恢复 select 到原始位置和内联样式
+            var parent = oldWrap.parentNode;
+            if (parent) {
+              parent.insertBefore(sel, oldWrap);
+              parent.removeChild(oldWrap);
+            }
           }
           sel.__csInstance = null;
           sel.style.cssText = "";
+          sel.style.display = "";
+          sel.removeAttribute("aria-hidden");
         }
         window.CustomSelect.init(sel);
       } catch (e) {
-        /* ignore */
+        // 静默忽略重建失败，下次切换语言会重新尝试
       }
     }
   }
