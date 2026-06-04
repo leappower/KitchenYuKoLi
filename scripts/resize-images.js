@@ -3,9 +3,11 @@
  * resize-images.js — 为 KitchenYuKoLi 全站图片生成多尺寸 srcset 副本
  *
  * 读取 src/assets/images/ 下所有 .webp 文件，在相同目录下生成：
- *   -375w.webp, -828w.webp, -1200w.webp, -1920w.webp, -2048w.webp
+ *   -375w.webp, -828w.webp, -1200w.webp, -1920w.webp
  *
- * 并发处理以加速。
+ * Kitchen 设备宽度配置：
+ *   mobile=375w, tablet=828w, pc 卡片=1200w, pc hero/banner=1920w
+ * 1920w 仅用于全屏 hero/banner（源图 >= 1920px 时生成）
  */
 
 const fs = require('fs');
@@ -14,7 +16,7 @@ const { execSync } = require('child_process');
 const sharp = require('sharp');
 
 const SRC_DIR = path.resolve(__dirname, '..', 'src', 'assets', 'images');
-const TARGET_WIDTHS = [375, 828, 1200, ];
+const TARGET_WIDTHS = [375, 828, 1200, 1920];
 const CONCURRENCY = 16;
 
 async function getImageWidth(filePath) {
@@ -130,7 +132,7 @@ async function main() {
 
   // Check key paths
   console.log('\n--- 关键目录验证 ---');
-  for (const subdir of ['products', 'factory', 'solutions', 'cases', 'about']) {
+  for (const subdir of ['products', 'factory', 'solutions', 'cases', 'about', 'home', 'contact', 'support']) {
     const fullDir = path.join(SRC_DIR, subdir);
     if (fs.existsSync(fullDir)) {
       const w375 = execSync(`find "${fullDir}" -name "*-375w.webp" -type f | wc -l`, { encoding: 'utf-8' }).trim();

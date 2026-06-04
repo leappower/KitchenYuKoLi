@@ -21,7 +21,7 @@ const IMG_DIR = path.join(ROOT, 'src', 'assets', 'images');
 const PAGES_DIR = path.join(ROOT, 'src', 'pages');
 const MAIN_JS = path.join(ROOT, 'src', 'assets', 'js', 'main.js');
 
-const TARGET_WIDTHS = [375, 828, 1200];
+const TARGET_WIDTHS = [375, 828, 1200, 1920];
 const IMG_EXTS = ['.webp', '.png', '.jpg', '.jpeg', '.avif'];
 
 let exitCode = 0;

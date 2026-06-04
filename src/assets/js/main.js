@@ -83,8 +83,8 @@
     if (document.documentElement && document.documentElement.dataset) {
       dev = document.documentElement.dataset.device || "";
     }
-    var wm = { mobile: [375, 828], tablet: [828, 1200] };
-    var widths = wm[dev] || [1200];
+    var wm = { mobile: [375, 828], tablet: [828, 1200], pc: [1200, 1920] };
+    var widths = wm[dev] || [1200, 1920];
     var srcset = widths
       .map(function (w) {
         return base + "-" + w + "w" + ext + " " + w + "w";
