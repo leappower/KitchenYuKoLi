@@ -67,8 +67,65 @@
     this._mutationObserver = null;
   }
 
+  /**
+   * 统一为图片注入 srcset（覆盖所有动态渲染点，无需逐个改 JS）
+   */
+  LazyLoadingModule.prototype._injectSrcset = function (img) {
+    if (!img || img.getAttribute("srcset") || img.hasAttribute("data-no-srcset")) return;
+    var src = img.getAttribute("src") || img.dataset.src || "";
+    if (!src) return;
+    if (!/\.(webp|png|jpg|jpeg|avif)$/i.test(src)) return;
+    if (/-(\d+)w\./.test(src) || src.indexOf("data:") === 0) return;
+
+    var base = src.replace(/\.(webp|png|jpg|jpeg|avif)$/i, "");
+    var ext = src.match(/\.(webp|png|jpg|jpeg|avif)$/i)[0];
+    var dev = "";
+    if (document.documentElement && document.documentElement.dataset) {
+      dev = document.documentElement.dataset.device || "";
+    }
+    var wm = { mobile: [375, 828], tablet: [828, 1200] };
+    var widths = wm[dev] || [1200];
+    var srcset = widths
+      .map(function (w) {
+        return base + "-" + w + "w" + ext + " " + w + "w";
+      })
+      .join(", ");
+    img.setAttribute("srcset", srcset);
+    var sz = "calc(100vw - 32px)";
+    if (dev === "pc") sz = "(max-width: 1024px) 50vw, 25vw";
+    else if (dev === "tablet") sz = "(max-width: 768px) 50vw, 33vw";
+    img.setAttribute("sizes", sz);
+  };
+
   LazyLoadingModule.prototype.init = function () {
     var self = this;
+
+    // 用 MutationObserver 监控所有新加入的 img 标签，统一注入 srcset
+    self._globalImgObserver = new MutationObserver(function (mutations) {
+      mutations.forEach(function (mutation) {
+        mutation.addedNodes.forEach(function (node) {
+          if (node.nodeType === Node.ELEMENT_NODE) {
+            if (node.tagName === "IMG") {
+              self._injectSrcset(node);
+            }
+            var imgs = node.querySelectorAll ? node.querySelectorAll("img") : [];
+            [].forEach.call(imgs, function (subImg) {
+              self._injectSrcset(subImg);
+            });
+          }
+        });
+      });
+    });
+    self._globalImgObserver.observe(document.documentElement, {
+      childList: true,
+      subtree: true,
+    });
+
+    // 同时处理已存在的 img
+    [].forEach.call(document.querySelectorAll("img"), function (existingImg) {
+      self._injectSrcset(existingImg);
+    });
+
     self._imageObserver = new IntersectionObserver(
       function (entries) {
         entries.forEach(function (entry) {
