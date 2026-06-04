@@ -127,36 +127,95 @@
 
 <!-- Product data: static initial data → API refresh with ETag → localStorage cache -->
 <script>
+/**
+ * 产品数据加载策略（v2 — 消除 category 污染）
+ *
+ * 数据来源（两个，按优先级）：
+ *   1. product-data-table.js（SSG 注入的 <script>，硬编码）
+ *      → 拥有正确的 category（"翻炒系列"/"切配系列"等）
+ *      → 是分类映射（CATEGORY_NAME_TO_SLUG）的唯一基准
+ *   2. products.json（build 时从 Server 导出的静态 JSON）
+ *      → 拥有 product-data-table.js 没有的字段：relatedProducts、sort_order
+ *      → category 值是 "台式"/"落地式"（不同分类维度，不适用于前端）
+ *
+ * 策略：
+ *   以 product-data-table.js 为主表，products.json 为辅表。
+ *   products.json 按 model 合并补充字段，但绝不覆盖：
+ *     - category（保留主表的值）
+ *     - name（保留主表的值）
+ *     - images（保留主表的值）
+ */
 (function() {
   var KEY = 'pdt_v2';
   var VERSION_KEY = 'pdt_version';
-  // Step 1: initial data from static file (always fresh after publish)
   var initial = window.PRODUCT_DATA_TABLE || [];
   var version = window.PRODUCT_DATA_VERSION || '0';
-  // Step 1: load from static file (build-time export, always available)
+
   fetch('/assets/data/products.json')
     .then(function(r) {
       if (!r.ok) throw new Error('Static ' + r.status);
       return r.json();
     })
-    .then(function(data) {
-      if (data && data.length) {
-        window.PRODUCT_DATA_TABLE = data;
-        // Cache to localStorage
-        try {
-          localStorage.setItem(KEY, JSON.stringify(data));
-          localStorage.setItem(VERSION_KEY, version);
-        } catch(e) {}
+    .then(function(extra) {
+      if (!extra || !extra.length) {
+        window.dispatchEvent(new Event('product-data-ready'));
+        return;
       }
+
+      // 以 product-data-table.js 的硬编码数据为主表
+      var base = window.PRODUCT_DATA_TABLE;
+      if (!base || !base.length) {
+        // 没有主表时直接用 products.json（但不保留错误 category）
+        window.PRODUCT_DATA_TABLE = extra;
+        cacheToLocal(extra);
+        window.dispatchEvent(new Event('product-data-ready'));
+        return;
+      }
+
+      // 按 model 建立 products.json 的索引
+      var extraIndex = {};
+      for (var ei = 0; ei < extra.length; ei++) {
+        var ep = extra[ei];
+        if (ep && ep.model) extraIndex[ep.model] = ep;
+      }
+
+      // 合并：保留主表字段，从辅表补充缺失字段
+      var NEVER_OVERWRITE = { category: 1, name: 1, images: 1 };
+      for (var bi = 0; bi < base.length; bi++) {
+        var bp = base[bi];
+        if (!bp || !bp.model) continue;
+        var ep2 = extraIndex[bp.model];
+        if (!ep2) continue;
+        for (var ek in ep2) {
+          if (ep2.hasOwnProperty && !ep2.hasOwnProperty(ek)) continue;
+          // 绝不覆盖这些字段
+          if (NEVER_OVERWRITE[ek]) continue;
+          // 只有主表中该字段不存在或为 null/undefined/空字符串时才补充
+          if (bp[ek] === undefined || bp[ek] === null || bp[ek] === '') {
+            bp[ek] = ep2[ek];
+          }
+        }
+      }
+
+      // 缓存合并后的数据
+      cacheToLocal(base);
       window.dispatchEvent(new Event('product-data-ready'));
     })
     .catch(function() {
-      // Step 2: fallback to localStorage cache (no API dependency)
+      // products.json 加载失败：fallback 到主表或 localStorage
       var cached = null;
       try { cached = JSON.parse(localStorage.getItem(KEY)); } catch(e) {}
-      window.PRODUCT_DATA_TABLE = cached || initial;
+      var fallback = cached || window.PRODUCT_DATA_TABLE || initial;
+      window.PRODUCT_DATA_TABLE = fallback;
       window.dispatchEvent(new Event('product-data-ready'));
     });
+
+  function cacheToLocal(data) {
+    try {
+      localStorage.setItem(KEY, JSON.stringify(data));
+      localStorage.setItem(VERSION_KEY, version);
+    } catch(e) {}
+  }
 })();
 </script>
 

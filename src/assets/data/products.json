@@ -1,6 +1,6 @@
 [
   {
-    "category": "台式",
+    "category": "切配系列",
     "subCategory": null,
     "model": "XC-0006",
     "name": "电动不锈钢切片机",
@@ -29,7 +29,7 @@
     "isActive": true
   },
   {
-    "category": "台式",
+    "category": "切配系列",
     "subCategory": null,
     "model": "XC-1288",
     "name": "多功能切片机",
@@ -58,7 +58,7 @@
     "isActive": true
   },
   {
-    "category": "台式",
+    "category": "切配系列",
     "subCategory": null,
     "model": "XC-6344",
     "name": "电动30型冻肉牛羊肉商用切片机刨肉机",
@@ -87,7 +87,7 @@
     "isActive": true
   },
   {
-    "category": "台式",
+    "category": "切配系列",
     "subCategory": null,
     "model": "XC-0988",
     "name": "葱丝机",
@@ -116,7 +116,7 @@
     "isActive": true
   },
   {
-    "category": "台式",
+    "category": "切配系列",
     "subCategory": null,
     "model": "XC-0888",
     "name": "多功能切菜机",
@@ -145,7 +145,7 @@
     "isActive": true
   },
   {
-    "category": "台式",
+    "category": "切配系列",
     "subCategory": null,
     "model": "XC-1088",
     "name": "多动能刨丝机",
@@ -174,7 +174,7 @@
     "isActive": true
   },
   {
-    "category": "台式",
+    "category": "翻炒系列",
     "subCategory": null,
     "model": "DLB-TBS30",
     "name": "台式上搅拌平底锅炒菜 机",
@@ -203,7 +203,7 @@
     "isActive": true
   },
   {
-    "category": "台式",
+    "category": "翻炒系列",
     "subCategory": null,
     "model": "DLB-TBS40",
     "name": "台式上搅拌弧底锅 炒菜机",
@@ -237,7 +237,7 @@
     "isActive": true
   },
   {
-    "category": "台式",
+    "category": "翻炒系列",
     "subCategory": null,
     "model": "DLB-TBS50",
     "name": "台式上搅拌弧底锅 炒菜机",
@@ -271,7 +271,7 @@
     "isActive": true
   },
   {
-    "category": "台式",
+    "category": "翻炒系列",
     "subCategory": null,
     "model": "DLB-TZS40",
     "name": "台式转锅搅拌炒菜机 （炒饭机）",
@@ -305,7 +305,7 @@
     "isActive": true
   },
   {
-    "category": "台式",
+    "category": "翻炒系列",
     "subCategory": null,
     "model": "DLB-TZS50",
     "name": "台式转锅搅拌炒菜机 （炒饭机）",
@@ -339,7 +339,7 @@
     "isActive": true
   },
   {
-    "category": "台式",
+    "category": "翻炒系列",
     "subCategory": null,
     "model": "F32F1C",
     "name": "台式翻盖炒菜机 （手动翻盖款）",
@@ -368,7 +368,7 @@
     "isActive": true
   },
   {
-    "category": "台式",
+    "category": "翻炒系列",
     "subCategory": null,
     "model": "DLB-TBQ30",
     "name": "台式上搅拌平底锅 炒菜机（语音提示）",
@@ -402,7 +402,7 @@
     "isActive": true
   },
   {
-    "category": "落地式",
+    "category": "翻炒系列",
     "subCategory": null,
     "model": "DLB-4BQ30",
     "name": "柜式上搅拌平底锅 炒菜机（语音提示）",
@@ -436,7 +436,7 @@
     "isActive": true
   },
   {
-    "category": "台式",
+    "category": "翻炒系列",
     "subCategory": null,
     "model": "DLB-TQBQ30",
     "name": "台式上搅拌平底锅 炒菜机（语音提示+自动 加料）",
@@ -465,7 +465,7 @@
     "isActive": true
   },
   {
-    "category": "落地式",
+    "category": "翻炒系列",
     "subCategory": null,
     "model": "DLB-4QBQ30",
     "name": "柜式上搅拌平底锅 炒菜机（语音提示+自动 加料）",
@@ -499,7 +499,7 @@
     "isActive": true
   },
   {
-    "category": "落地式",
+    "category": "翻炒系列",
     "subCategory": null,
     "model": "DLB-BQ40T",
     "name": "落地式上搅拌全自动小 炒炒菜机（自动投料+喷 料）",
@@ -528,7 +528,7 @@
     "isActive": true
   },
   {
-    "category": "台式",
+    "category": "翻炒系列",
     "subCategory": null,
     "model": "DLB-TGS30",
     "name": "台式300智能电磁炒菜机 （手动）",
@@ -562,7 +562,7 @@
     "isActive": true
   },
   {
-    "category": "台式",
+    "category": "翻炒系列",
     "subCategory": null,
     "model": "G26D1A",
     "name": "简易台式滚筒炒菜机 (电磁款)",
@@ -591,7 +591,7 @@
     "isActive": true
   },
   {
-    "category": "台式",
+    "category": "翻炒系列",
     "subCategory": null,
     "model": "G26D1R",
     "name": "简易台式滚筒炒菜机 (燃气款)",
@@ -620,7 +620,7 @@
     "isActive": true
   },
   {
-    "category": "台式",
+    "category": "翻炒系列",
     "subCategory": null,
     "model": "G30D1A",
     "name": "简易台式滚筒炒菜机 （电磁款）",
@@ -649,7 +649,7 @@
     "isActive": true
   },
   {
-    "category": "台式",
+    "category": "翻炒系列",
     "subCategory": null,
     "model": "G36D1A",
     "name": "简易台式滚筒炒菜机 （电磁款）",
@@ -678,7 +678,7 @@
     "isActive": true
   },
   {
-    "category": "台式",
+    "category": "翻炒系列",
     "subCategory": null,
     "model": "G30D1R",
     "name": "简易台式滚簡炒菜机 （燃气款）",
@@ -707,7 +707,7 @@
     "isActive": true
   },
   {
-    "category": "台式",
+    "category": "翻炒系列",
     "subCategory": null,
     "model": "G36D1R",
     "name": "简易台式滚筒炒菜机 （燃气款）",
@@ -736,7 +736,7 @@
     "isActive": true
   },
   {
-    "category": "台式",
+    "category": "翻炒系列",
     "subCategory": null,
     "model": "DLB-TGD30",
     "name": "台式300智能电磁炒菜机 （电动）",
@@ -770,7 +770,7 @@
     "isActive": true
   },
   {
-    "category": "台式",
+    "category": "翻炒系列",
     "subCategory": null,
     "model": "DLB-TGD36",
     "name": "台式360智能电磁炒菜机 （电动）",
@@ -804,7 +804,7 @@
     "isActive": true
   },
   {
-    "category": "台式",
+    "category": "翻炒系列",
     "subCategory": null,
     "model": "DLB-TGD40",
     "name": "台式400智能电磁炒菜机 （电动）",
@@ -838,7 +838,7 @@
     "isActive": true
   },
   {
-    "category": "台式",
+    "category": "翻炒系列",
     "subCategory": null,
     "model": "DLB-TGQ30J",
     "name": "台式300智能电磁炒菜机 （触屏800）",
@@ -867,7 +867,7 @@
     "isActive": true
   },
   {
-    "category": "台式",
+    "category": "翻炒系列",
     "subCategory": null,
     "model": "DLB-TGQ36J",
     "name": "台式360智能电磁炒菜机 （触屏800）",
@@ -896,7 +896,7 @@
     "isActive": true
   },
   {
-    "category": "台式",
+    "category": "翻炒系列",
     "subCategory": null,
     "model": "DLB-TGQ40J",
     "name": "台式400智能电磁炒菜机 （触屏）",
@@ -925,7 +925,7 @@
     "isActive": true
   },
   {
-    "category": "台式",
+    "category": "翻炒系列",
     "subCategory": null,
     "model": "G30D1T",
     "name": "智能台式滚筒炒菜机 （电磁新款）",
@@ -954,7 +954,7 @@
     "isActive": true
   },
   {
-    "category": "落地式",
+    "category": "翻炒系列",
     "subCategory": null,
     "model": "DLB-GD30",
     "name": "落地式300智能电磁炒菜 机（电动）",
@@ -988,7 +988,7 @@
     "isActive": true
   },
   {
-    "category": "落地式",
+    "category": "翻炒系列",
     "subCategory": null,
     "model": "DLB-GD36",
     "name": "落地式360智能电磁炒菜 机（电动）",
@@ -1022,7 +1022,7 @@
     "isActive": true
   },
   {
-    "category": "落地式",
+    "category": "翻炒系列",
     "subCategory": null,
     "model": "DLB-GQ30J",
     "name": "落地式300智能电磁炒菜 机（触屏800）",
@@ -1080,7 +1080,7 @@
     "isActive": true
   },
   {
-    "category": "落地式",
+    "category": "翻炒系列",
     "subCategory": null,
     "model": "G26DAG",
     "name": "智能立式滚筒炒菜机 （电磁款）",
@@ -1109,7 +1109,7 @@
     "isActive": true
   },
   {
-    "category": "落地式",
+    "category": "翻炒系列",
     "subCategory": null,
     "model": "G30DAG",
     "name": "智能立式滚筒炒菜机 （电磁款）",
@@ -1138,7 +1138,7 @@
     "isActive": true
   },
   {
-    "category": "落地式",
+    "category": "翻炒系列",
     "subCategory": null,
     "model": "G36DAG",
     "name": "智能立式滚筒炒菜机 （电磁款）",
@@ -1167,7 +1167,7 @@
     "isActive": true
   },
   {
-    "category": "落地式",
+    "category": "翻炒系列",
     "subCategory": null,
     "model": "G26DAS",
     "name": "智能立式滚筒炒菜机 （燃气款）",
@@ -1196,7 +1196,7 @@
     "isActive": true
   },
   {
-    "category": "落地式",
+    "category": "翻炒系列",
     "subCategory": null,
     "model": "G30DAS",
     "name": "智能立式滚筒炒菜机 （燃气款）",
@@ -1225,7 +1225,7 @@
     "isActive": true
   },
   {
-    "category": "落地式",
+    "category": "翻炒系列",
     "subCategory": null,
     "model": "G36DAS",
     "name": "智能立式滚筒炒菜机 （燃气款）",
@@ -1254,7 +1254,7 @@
     "isActive": true
   },
   {
-    "category": "台式",
+    "category": "翻炒系列",
     "subCategory": null,
     "model": "DLB-TGQ30",
     "name": "台式300智能电磁炒菜机 （触屏+喷料）",
@@ -1283,7 +1283,7 @@
     "isActive": true
   },
   {
-    "category": "落地式",
+    "category": "翻炒系列",
     "subCategory": null,
     "model": "DLB-GQ30",
     "name": "落地式300智能电磁炒菜 机（触屏+喷料）",
@@ -1312,7 +1312,7 @@
     "isActive": true
   },
   {
-    "category": "落地式",
+    "category": "翻炒系列",
     "subCategory": null,
     "model": "DLB-GQ36",
     "name": "落地式360智能电磁炒菜 机（触屏+喷料）",
@@ -1341,7 +1341,7 @@
     "isActive": true
   },
   {
-    "category": "落地式",
+    "category": "翻炒系列",
     "subCategory": null,
     "model": "DLB-GQ30T",
     "name": "300智能电磁炒菜机 （自动投料+喷料）",
@@ -1370,7 +1370,7 @@
     "isActive": true
   },
   {
-    "category": "落地式",
+    "category": "翻炒系列",
     "subCategory": null,
     "model": "DLB-GQ35T",
     "name": "350智能电磁炒菜机 （自动投料 +喷料）",
@@ -1399,7 +1399,7 @@
     "isActive": true
   },
   {
-    "category": "落地式",
+    "category": "翻炒系列",
     "subCategory": null,
     "model": "J40CBB",
     "name": "全自动智能炒菜机",
@@ -1428,7 +1428,7 @@
     "isActive": true
   },
   {
-    "category": "台式",
+    "category": "翻炒系列",
     "subCategory": null,
     "model": "DLB-TGQ40",
     "name": "台式400智能电磁炒菜机 （触屏+喷料）",
@@ -1457,7 +1457,7 @@
     "isActive": true
   },
   {
-    "category": "落地式",
+    "category": "翻炒系列",
     "subCategory": null,
     "model": "DLB-GC50",
     "name": "座地式500电磁炒菜机 （语音菜单）",
@@ -1486,7 +1486,7 @@
     "isActive": true
   },
   {
-    "category": "落地式",
+    "category": "翻炒系列",
     "subCategory": null,
     "model": "DLB-GC60",
     "name": "座地式600电磁炒菜机 （触屏语音菜单）",
@@ -1515,7 +1515,7 @@
     "isActive": true
   },
   {
-    "category": "落地式",
+    "category": "翻炒系列",
     "subCategory": null,
     "model": "DLB-GC70",
     "name": "座地式700电磁炒菜机 （触屏语音菜单）",
@@ -1544,7 +1544,7 @@
     "isActive": true
   },
   {
-    "category": "落地式",
+    "category": "翻炒系列",
     "subCategory": null,
     "model": "DLB-GQ70",
     "name": "座地式700电磁炒菜机（语音菜单+自动 摆臂喷料）",
@@ -1573,7 +1573,7 @@
     "isActive": true
   },
   {
-    "category": "落地式",
+    "category": "翻炒系列",
     "subCategory": null,
     "model": "DLB-GC80",
     "name": "座地式800电磁炒菜机（触屏语音菜单）",
@@ -1602,7 +1602,7 @@
     "isActive": true
   },
   {
-    "category": "落地式",
+    "category": "翻炒系列",
     "subCategory": null,
     "model": "DLB-GC90",
     "name": "座地式900电磁炒菜机 （触屏语音菜单）",
@@ -1660,7 +1660,7 @@
     "isActive": true
   },
   {
-    "category": "落地式",
+    "category": "翻炒系列",
     "subCategory": null,
     "model": "DLB-GQ50",
     "name": "单边座地式500电磁炒菜 机（触屏+自动摆臂喷 料）",
@@ -1689,7 +1689,7 @@
     "isActive": true
   },
   {
-    "category": "落地式",
+    "category": "翻炒系列",
     "subCategory": null,
     "model": "DLB-GQ60",
     "name": "座地式600电磁炒菜机 （语音菜单+自动 摆臂 喷料）",
@@ -1718,7 +1718,7 @@
     "isActive": true
   },
   {
-    "category": "落地式",
+    "category": "翻炒系列",
     "subCategory": null,
     "model": "DLB-GQ80",
     "name": "座地式800电磁炒菜机（语音菜单+自动 摆臂喷料）",
@@ -1747,7 +1747,7 @@
     "isActive": true
   },
   {
-    "category": "落地式",
+    "category": "翻炒系列",
     "subCategory": null,
     "model": "DLB-GQ90",
     "name": "座地式900电磁炒菜机 （语音菜单+自动 摆臂 喷料）",
@@ -1776,7 +1776,7 @@
     "isActive": true
   },
   {
-    "category": "落地式",
+    "category": "翻炒系列",
     "subCategory": null,
     "model": "DLB-GC60R",
     "name": "座地式600燃气炒菜机（触屏语音菜单）",
@@ -1805,7 +1805,7 @@
     "isActive": true
   },
   {
-    "category": "落地式",
+    "category": "翻炒系列",
     "subCategory": null,
     "model": "DLB-GC70R",
     "name": "座地式700燃气炒菜机（触屏语音菜单）",
@@ -1834,7 +1834,7 @@
     "isActive": true
   },
   {
-    "category": "落地式",
+    "category": "翻炒系列",
     "subCategory": null,
     "model": "DLB-GC90R",
     "name": "座地式900燃气炒菜机（语音菜单）",
@@ -1863,7 +1863,7 @@
     "isActive": true
   },
   {
-    "category": "落地式",
+    "category": "翻炒系列",
     "subCategory": null,
     "model": "DLB-GQ60R",
     "name": "座地式600燃气炒菜机（语音菜单+自动 摆臂喷料）",
@@ -1892,7 +1892,7 @@
     "isActive": true
   },
   {
-    "category": "落地式",
+    "category": "翻炒系列",
     "subCategory": null,
     "model": "DLB-GQ70R",
     "name": "座地式700燃气炒菜机（语音菜单+自动 摆臂喷料）",
@@ -1921,7 +1921,7 @@
     "isActive": true
   },
   {
-    "category": "落地式",
+    "category": "翻炒系列",
     "subCategory": null,
     "model": "DLB-GC80R",
     "name": "座地式800燃气炒菜机（触屏语音菜单）",
@@ -1950,7 +1950,7 @@
     "isActive": true
   },
   {
-    "category": "落地式",
+    "category": "翻炒系列",
     "subCategory": null,
     "model": "DLB-GQ80R",
     "name": "座地式800燃气炒菜机（语音菜单+自动 摆臂喷料）",
@@ -1979,7 +1979,7 @@
     "isActive": true
   },
   {
-    "category": "落地式",
+    "category": "翻炒系列",
     "subCategory": null,
     "model": "DLB-GQ90R",
     "name": "座地式900燃气炒菜机（语音菜单+自动 摆臂喷料）",
@@ -2008,7 +2008,7 @@
     "isActive": true
   },
   {
-    "category": "落地式",
+    "category": "翻炒系列",
     "subCategory": null,
     "model": "DLB-GB50",
     "name": "座地式500电磁炒菜机 （触屏电动）",
@@ -2037,7 +2037,7 @@
     "isActive": true
   },
   {
-    "category": "落地式",
+    "category": "翻炒系列",
     "subCategory": null,
     "model": "DLB-GB60",
     "name": "座地式600电磁炒菜机 （触屏电动）",
@@ -2066,7 +2066,7 @@
     "isActive": true
   },
   {
-    "category": "落地式",
+    "category": "翻炒系列",
     "subCategory": null,
     "model": "DLB-GB70",
     "name": "座地式700电磁炒菜机 （触屏电动）",
@@ -2095,7 +2095,7 @@
     "isActive": true
   },
   {
-    "category": "落地式",
+    "category": "翻炒系列",
     "subCategory": null,
     "model": "DLB-GB80",
     "name": "座地式800电磁炒菜机 （触屏电动）",
@@ -2124,7 +2124,7 @@
     "isActive": true
   },
   {
-    "category": "落地式",
+    "category": "翻炒系列",
     "subCategory": null,
     "model": "DLB-GB90",
     "name": "座地式900电磁炒菜机 （触屏电动）",
@@ -2153,7 +2153,7 @@
     "isActive": true
   },
   {
-    "category": "落地式",
+    "category": "翻炒系列",
     "subCategory": null,
     "model": "DLB-GB60R",
     "name": "座地式600燃气炒菜机（触屏电动）",
@@ -2182,7 +2182,7 @@
     "isActive": true
   },
   {
-    "category": "落地式",
+    "category": "翻炒系列",
     "subCategory": null,
     "model": "DLB-GB70R",
     "name": "座地式700燃气炒菜机（触屏电动）",
@@ -2211,7 +2211,7 @@
     "isActive": true
   },
   {
-    "category": "落地式",
+    "category": "翻炒系列",
     "subCategory": null,
     "model": "DLB-GB80R",
     "name": "座地式800燃气炒菜机（触屏电动）",
@@ -2240,7 +2240,7 @@
     "isActive": true
   },
   {
-    "category": "落地式",
+    "category": "翻炒系列",
     "subCategory": null,
     "model": "DLB-GB90R",
     "name": "座地式900燃气炒菜机（触屏电动）",
@@ -2269,7 +2269,7 @@
     "isActive": true
   },
   {
-    "category": "落地式",
+    "category": "翻炒系列",
     "subCategory": null,
     "model": "G60EAC",
     "name": "智能团餐滚筒炒菜机 （电磁款）",
@@ -2298,7 +2298,7 @@
     "isActive": true
   },
   {
-    "category": "落地式",
+    "category": "翻炒系列",
     "subCategory": null,
     "model": "G70EAC",
     "name": "智能团餐滚筒炒菜机 （电磁款）",
@@ -2327,7 +2327,7 @@
     "isActive": true
   },
   {
-    "category": "落地式",
+    "category": "翻炒系列",
     "subCategory": null,
     "model": "G80EAC",
     "name": "智能团餐滚筒炒菜机 （电磁款）",
@@ -2356,7 +2356,7 @@
     "isActive": true
   },
   {
-    "category": "落地式",
+    "category": "翻炒系列",
     "subCategory": null,
     "model": "G60EAS",
     "name": "智能团餐滚筒炒菜机 （燃气款）",
@@ -2385,7 +2385,7 @@
     "isActive": true
   },
   {
-    "category": "落地式",
+    "category": "翻炒系列",
     "subCategory": null,
     "model": "G70EAS",
     "name": "智能团餐滚筒炒菜机 （燃气款）",
@@ -2414,7 +2414,7 @@
     "isActive": true
   },
   {
-    "category": "落地式",
+    "category": "翻炒系列",
     "subCategory": null,
     "model": "G80EAS",
     "name": "智能团餐滚筒炒菜机 （燃气款）",
@@ -2443,7 +2443,7 @@
     "isActive": true
   },
   {
-    "category": "落地式",
+    "category": "翻炒系列",
     "subCategory": null,
     "model": "DLB-BXC800",
     "name": "半自动旋转+翻炒电磁大 炒锅",
@@ -2472,7 +2472,7 @@
     "isActive": true
   },
   {
-    "category": "落地式",
+    "category": "翻炒系列",
     "subCategory": null,
     "model": "G50AAB",
     "name": "简易/智能团餐滚筒炒菜机 （电磁款）",
@@ -2501,7 +2501,7 @@
     "isActive": true
   },
   {
-    "category": "落地式",
+    "category": "翻炒系列",
     "subCategory": null,
     "model": "G50AAC",
     "name": "简易/智能团餐滚筒炒菜机 （电磁款）",
@@ -2530,7 +2530,7 @@
     "isActive": true
   },
   {
-    "category": "落地式",
+    "category": "翻炒系列",
     "subCategory": null,
     "model": "G50GAT",
     "name": "简易团餐滚筒炒菜机 （燃气款）",
@@ -2559,7 +2559,7 @@
     "isActive": true
   },
   {
-    "category": "落地式",
+    "category": "炖煮系列",
     "subCategory": null,
     "model": "DLB-XC100",
     "name": "多功能自动搅拌炒锅/炖 烩机（触屏电动）",
@@ -2588,7 +2588,7 @@
     "isActive": true
   },
   {
-    "category": "落地式",
+    "category": "炖煮系列",
     "subCategory": null,
     "model": "DLB-XC120",
     "name": "多功能自动搅拌炒锅/炖 烩机（触屏电动）",
@@ -2617,7 +2617,7 @@
     "isActive": true
   },
   {
-    "category": "落地式",
+    "category": "炖煮系列",
     "subCategory": null,
     "model": "DLB-XC80",
     "name": "多功能自动搅拌炒锅/炖烩机（触屏电动）",
@@ -2646,7 +2646,7 @@
     "isActive": true
   },
   {
-    "category": "落地式",
+    "category": "炖煮系列",
     "subCategory": null,
     "model": "DLB-XC80R",
     "name": "多功能自动燃气搅拌炒锅/炖烩机（触屏电动）",
@@ -2675,7 +2675,7 @@
     "isActive": true
   },
   {
-    "category": "落地式",
+    "category": "炖煮系列",
     "subCategory": null,
     "model": "DLB-XC100R",
     "name": "多功能自动燃气搅拌炒锅/炖烩机（触屏电动）",
@@ -2704,7 +2704,7 @@
     "isActive": true
   },
   {
-    "category": "落地式",
+    "category": "炖煮系列",
     "subCategory": null,
     "model": "DLB-XC120R",
     "name": "多功能自动燃气搅拌炒锅/炖烩机（触屏电动）",
@@ -2733,7 +2733,7 @@
     "isActive": true
   },
   {
-    "category": "落地式",
+    "category": "炖煮系列",
     "subCategory": null,
     "model": "DLB-QXC100",
     "name": "多功能全自动搅拌炒锅/ 炖烩机（语音菜单+自动 喷料）",
@@ -2762,7 +2762,7 @@
     "isActive": true
   },
   {
-    "category": "落地式",
+    "category": "炖煮系列",
     "subCategory": null,
     "model": "DLB-QXC120",
     "name": "多功能全自动搅拌炒锅/ 炖烩机（语音菜单+自动 喷料）",
@@ -2791,7 +2791,7 @@
     "isActive": true
   },
   {
-    "category": "落地式",
+    "category": "炖煮系列",
     "subCategory": null,
     "model": "DLB-QXC80",
     "name": "多功能全自动搅拌炒锅/炖烩机（语音菜单+自动喷料）",
@@ -2820,7 +2820,7 @@
     "isActive": true
   },
   {
-    "category": "落地式",
+    "category": "炖煮系列",
     "subCategory": null,
     "model": "DLB-QXC80R",
     "name": "多功能全自动燃气搅拌炒锅/炖烩机（语音菜单+自动喷料）",
@@ -2849,7 +2849,7 @@
     "isActive": true
   },
   {
-    "category": "落地式",
+    "category": "炖煮系列",
     "subCategory": null,
     "model": "DLB-QXC100R",
     "name": "多功能全自动燃气搅拌炒锅/炖烩机（语音菜单+自动喷料）",
@@ -2878,7 +2878,7 @@
     "isActive": true
   },
   {
-    "category": "落地式",
+    "category": "炖煮系列",
     "subCategory": null,
     "model": "DLB-QXC120R",
     "name": "多功能全自动燃气搅拌炒锅/炖烩机（语音菜单+自动喷料）",
@@ -2907,7 +2907,7 @@
     "isActive": true
   },
   {
-    "category": "落地式",
+    "category": "炖煮系列",
     "subCategory": null,
     "model": "DLB-ZNT",
     "name": "（可倾式）全智能汤锅 （100升）",
@@ -2936,7 +2936,7 @@
     "isActive": true
   },
   {
-    "category": "落地式",
+    "category": "炖煮系列",
     "subCategory": null,
     "model": "DLB-ZNY",
     "name": "（可倾式）全智能压力锅（80升）",
@@ -2965,7 +2965,7 @@
     "isActive": true
   },
   {
-    "category": "台式",
+    "category": "炖煮系列",
     "subCategory": null,
     "model": "M3DAD",
     "name": "三眼智能升降煮面炉",
@@ -2994,7 +2994,7 @@
     "isActive": true
   },
   {
-    "category": "台式",
+    "category": "炖煮系列",
     "subCategory": null,
     "model": "M6DBD",
     "name": "六眼智能升降煮面炉",
@@ -3023,7 +3023,7 @@
     "isActive": true
   },
   {
-    "category": "台式",
+    "category": "炖煮系列",
     "subCategory": null,
     "model": "M6RAD",
     "name": "六眼智能升降煮面炉 （燃气款）",
@@ -3052,7 +3052,7 @@
     "isActive": true
   },
   {
-    "category": "台式",
+    "category": "炖煮系列",
     "subCategory": null,
     "model": "M4DAD+1",
     "name": "4+1组合智能升降煮面炉",
@@ -3081,7 +3081,7 @@
     "isActive": true
   },
   {
-    "category": "台式",
+    "category": "炖煮系列",
     "subCategory": null,
     "model": "M4DAD+2",
     "name": "4+2组合智能升降煮面炉",
@@ -3110,7 +3110,7 @@
     "isActive": true
   },
   {
-    "category": "台式",
+    "category": "炖煮系列",
     "subCategory": null,
     "model": "M6DAD",
     "name": "六眼单缸智能升降煮面炉",
@@ -3139,7 +3139,7 @@
     "isActive": true
   },
   {
-    "category": "台式",
+    "category": "炖煮系列",
     "subCategory": null,
     "model": "B4RTD",
     "name": "台式智能燃气煲仔炉",
@@ -3168,7 +3168,7 @@
     "isActive": true
   },
   {
-    "category": "落地式",
+    "category": "炖煮系列",
     "subCategory": null,
     "model": "B6RBD",
     "name": "立式智能燃气煲仔炉",
@@ -3197,7 +3197,7 @@
     "isActive": true
   },
   {
-    "category": "落地式",
+    "category": "炖煮系列",
     "subCategory": null,
     "model": "B8RBD",
     "name": "立式智能燃气煲仔炉",
@@ -3226,7 +3226,7 @@
     "isActive": true
   },
   {
-    "category": "落地式",
+    "category": "炖煮系列",
     "subCategory": null,
     "model": "LZ80D1B",
     "name": "智能升降卤煮炉",
@@ -3255,7 +3255,7 @@
     "isActive": true
   },
   {
-    "category": "落地式",
+    "category": "蒸煮系列",
     "subCategory": null,
     "model": "DLB-PZJ80",
     "name": "多功能自动漂烫/焯水/ 油炸机",
@@ -3284,7 +3284,7 @@
     "isActive": true
   },
   {
-    "category": "落地式",
+    "category": "蒸煮系列",
     "subCategory": null,
     "model": "DLB-PZJ100",
     "name": "多功能自动漂烫/焯水/ 油炸机",
@@ -3313,7 +3313,7 @@
     "isActive": true
   },
   {
-    "category": "落地式",
+    "category": "蒸煮系列",
     "subCategory": null,
     "model": "DLB-PZJ120",
     "name": "多功能自动漂烫/焯水/ 油炸机",
@@ -3342,7 +3342,7 @@
     "isActive": true
   },
   {
-    "category": "落地式",
+    "category": "蒸煮系列",
     "subCategory": null,
     "model": "DLB-PZJ200",
     "name": "多功能方形自动漂烫/焯 水/油炸机",
@@ -3371,7 +3371,7 @@
     "isActive": true
   },
   {
-    "category": "落地式",
+    "category": "蒸煮系列",
     "subCategory": null,
     "model": "DLB-PZJ400",
     "name": "多功能方形自动漂烫/焯 水/油炸机",
@@ -3400,7 +3400,7 @@
     "isActive": true
   },
   {
-    "category": "落地式",
+    "category": "蒸煮系列",
     "subCategory": null,
     "model": "Z6FCB",
     "name": "智能蒸饭机",
@@ -3429,7 +3429,7 @@
     "isActive": true
   },
   {
-    "category": "台式",
+    "category": "煎炸系列",
     "subCategory": null,
     "model": "GT1D1B",
     "name": "单头锅贴机",
@@ -3458,7 +3458,7 @@
     "isActive": true
   },
   {
-    "category": "台式",
+    "category": "煎炸系列",
     "subCategory": null,
     "model": "GT2D1B",
     "name": "双头锅贴机",
@@ -3487,7 +3487,7 @@
     "isActive": true
   },
   {
-    "category": "台式",
+    "category": "煎炸系列",
     "subCategory": null,
     "model": "Y12D1C",
     "name": "台式智能升降单缸油炸炉",
@@ -3516,7 +3516,7 @@
     "isActive": true
   },
   {
-    "category": "台式",
+    "category": "煎炸系列",
     "subCategory": null,
     "model": "Y12D2C",
     "name": "台式智能升降双缸油炸炉",
@@ -3545,7 +3545,7 @@
     "isActive": true
   },
   {
-    "category": "落地式",
+    "category": "煎炸系列",
     "subCategory": null,
     "model": "Y24C1C",
     "name": "立式智能升降单缸双筛油炸炉",
@@ -3574,7 +3574,7 @@
     "isActive": true
   },
   {
-    "category": "落地式",
+    "category": "煎炸系列",
     "subCategory": null,
     "model": "Y50D1C",
     "name": "立式智能升降单缸三筛油炸炉 （油水分离款）",
@@ -3603,7 +3603,7 @@
     "isActive": true
   },
   {
-    "category": "台式",
+    "category": "辅助系列",
     "subCategory": null,
     "model": "DLB-A60-J",
     "name": "揭盖式商用洗碗机 （经济款）",
@@ -3632,7 +3632,7 @@
     "isActive": true
   },
   {
-    "category": "台式",
+    "category": "辅助系列",
     "subCategory": null,
     "model": "DLB-A60-G",
     "name": "揭盖式商用洗碗机（工程款）",
@@ -3661,7 +3661,7 @@
     "isActive": true
   },
   {
-    "category": "台式",
+    "category": "辅助系列",
     "subCategory": null,
     "model": "DLB-A60-Z",
     "name": "揭盖式商用洗碗机 （智能款）",
@@ -3690,7 +3690,7 @@
     "isActive": true
   },
   {
-    "category": "落地式",
+    "category": "辅助系列",
     "subCategory": null,
     "model": "DLB-A2800",
     "name": "长龙商用洗碗机 （单缸单喷淋）",
@@ -3719,7 +3719,7 @@
     "isActive": true
   },
   {
-    "category": "落地式",
+    "category": "辅助系列",
     "subCategory": null,
     "model": "DLB-A3600",
     "name": "长龙商用洗碗机（单缸双喷淋）",
@@ -3748,7 +3748,7 @@
     "isActive": true
   },
   {
-    "category": "落地式",
+    "category": "辅助系列",
     "subCategory": null,
     "model": "DLB-A4600",
     "name": "大长龙商用洗碗机 (单缸双喷淋单烘干)",
@@ -3777,7 +3777,7 @@
     "isActive": true
   },
   {
-    "category": "落地式",
+    "category": "辅助系列",
     "subCategory": null,
     "model": "DLB-A5400",
     "name": "大长龙商用洗碗机 (双缸双喷淋单烘干)",
@@ -3806,7 +3806,7 @@
     "isActive": true
   },
   {
-    "category": "落地式",
+    "category": "翻炒系列",
     "subCategory": null,
     "model": "G26DAA",
     "name": "简易立式滚筒炒菜机 (电磁款)",
@@ -3835,7 +3835,7 @@
     "isActive": true
   },
   {
-    "category": "落地式",
+    "category": "翻炒系列",
     "subCategory": null,
     "model": "G30DAA",
     "name": "简易立式滚筒炒菜机 (电磁款)",
@@ -3864,7 +3864,7 @@
     "isActive": true
   },
   {
-    "category": "落地式",
+    "category": "翻炒系列",
     "subCategory": null,
     "model": "G26DAR",
     "name": "简易立式滚筒炒菜机 (燃气款)",
@@ -3893,7 +3893,7 @@
     "isActive": true
   },
   {
-    "category": "落地式",
+    "category": "翻炒系列",
     "subCategory": null,
     "model": "G30DAR",
     "name": "简易立式滚筒炒菜机 （燃气款）",
@@ -3922,7 +3922,7 @@
     "isActive": true
   },
   {
-    "category": "落地式",
+    "category": "翻炒系列",
     "subCategory": null,
     "model": "G36DAR",
     "name": "简易立式滚筒炒菜机 （燃气款）",
@@ -3951,7 +3951,7 @@
     "isActive": true
   },
   {
-    "category": "落地式",
+    "category": "翻炒系列",
     "subCategory": null,
     "model": "G30DFA",
     "name": "简易立式双头滚筒炒菜机+ 炒锅(电磁款)",
@@ -3980,7 +3980,7 @@
     "isActive": true
   },
   {
-    "category": "落地式",
+    "category": "翻炒系列",
     "subCategory": null,
     "model": "G36DAA",
     "name": "简易立式滚筒炒菜机 （电磁款）",
@@ -4009,7 +4009,7 @@
     "isActive": true
   },
   {
-    "category": "落地式",
+    "category": "辅助系列",
     "subCategory": null,
     "model": "DLB-A6200",
     "name": "大长龙商用洗碗机 (双缸双喷淋双烘干)",
@@ -4038,7 +4038,7 @@
     "isActive": true
   },
   {
-    "category": "落地式",
+    "category": "切配系列",
     "subCategory": null,
     "model": "HKQPJ400-VIII",
     "name": "多功能鲜肉切片机(单通道)",
@@ -4067,7 +4067,7 @@
     "isActive": true
   },
   {
-    "category": "落地式",
+    "category": "切配系列",
     "subCategory": null,
     "model": "HKQPJ500-VIII",
     "name": "多功能鲜肉切片机(双通道)",
@@ -4096,7 +4096,7 @@
     "isActive": true
   },
   {
-    "category": "落地式",
+    "category": "切配系列",
     "subCategory": null,
     "model": "HKQTJ300",
     "name": "多功能鲜肉切条机300",
@@ -4125,7 +4125,7 @@
     "isActive": true
   },
   {
-    "category": "落地式",
+    "category": "切配系列",
     "subCategory": null,
     "model": "HKQTJ600-VII",
     "name": "多功能鲜肉切条机600",
@@ -4154,7 +4154,7 @@
     "isActive": true
   },
   {
-    "category": "落地式",
+    "category": "切配系列",
     "subCategory": null,
     "model": "HKQTJ200-VII",
     "name": "多功能鲜肉切条机200(切丝专用定制款)",
@@ -4183,7 +4183,7 @@
     "isActive": true
   },
   {
-    "category": "落地式",
+    "category": "切配系列",
     "subCategory": null,
     "model": "HKDQJ300-VII",
     "name": "多功能冻肉切丁机300-VII",
@@ -4212,7 +4212,7 @@
     "isActive": true
   },
   {
-    "category": "落地式",
+    "category": "切配系列",
     "subCategory": null,
     "model": "HKDQJ300",
     "name": "多功能冻肉切丁机300",
@@ -4241,7 +4241,7 @@
     "isActive": true
   },
   {
-    "category": "落地式",
+    "category": "切配系列",
     "subCategory": null,
     "model": "HKXQJ-400",
     "name": "自动切花斜切机",
@@ -4270,7 +4270,7 @@
     "isActive": true
   },
   {
-    "category": "落地式",
+    "category": "切配系列",
     "subCategory": null,
     "model": "HKQPJ-300",
     "name": "熟肉切片机",
@@ -4299,7 +4299,7 @@
     "isActive": true
   },
   {
-    "category": "落地式",
+    "category": "切配系列",
     "subCategory": null,
     "model": "HKJGJ380-VI",
     "name": "锯骨机380",
@@ -4328,7 +4328,7 @@
     "isActive": true
   },
   {
-    "category": "落地式",
+    "category": "切配系列",
     "subCategory": null,
     "model": "HKFBJ",
     "name": "猪蹄分半机",
@@ -4380,7 +4380,7 @@
     "isActive": true
   },
   {
-    "category": "落地式",
+    "category": "翻炒系列",
     "subCategory": null,
     "model": "DLB-TGD36/9",
     "name": "台式360智能电磁炒菜机 （电动）",
@@ -4403,7 +4403,7 @@
     "isActive": true
   },
   {
-    "category": "落地式",
+    "category": "翻炒系列",
     "subCategory": null,
     "model": "DLB-GD36/9",
     "name": "落地式360智能电磁炒菜 机（电动）",
@@ -4426,7 +4426,7 @@
     "isActive": true
   },
   {
-    "category": "落地式",
+    "category": "翻炒系列",
     "subCategory": null,
     "model": "DLB-TGQ36J/9",
     "name": "台式360智能电磁炒菜机 （触屏800）",

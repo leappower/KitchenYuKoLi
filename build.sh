@@ -116,7 +116,10 @@ fi
 touch "$DIST/.nojekyll"
 
 # ─── Search index ──────────────────────────────────────────────
-node scripts/export-products-static.js 2>/dev/null || echo "  ⚠️  Server unavailable, using cached products.json"
+# 前置校验：产品分类数据一致性
+node scripts/validate-product-categories.js 2>&1 || exit 1
+# 从 Server 导出产品数据（补充 relatedProducts 等字段，不覆盖 category）
+node scripts/export-products-static.js 2>/dev/null || echo "  ℹ️  Server unavailable, using cached products.json"
 node scripts/generate-search-index.js 2>/dev/null || echo "  ⚠️  Failed to generate search-index.json"
 
 # ─── 8. Inject device redirect scripts (pre-SSG) ────────────────

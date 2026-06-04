@@ -120,6 +120,19 @@ check_build_ssg
 check_html_structure
 check_css_build
 
+# ─── 10. Product category validation ─────────────────────
+check_product_categories() {
+  echo ""; echo "🏷️  Checking product category consistency..."
+  if [ -f "scripts/validate-product-categories.js" ]; then
+    if node scripts/validate-product-categories.js 2>&1; then
+      echo "  ✅ Product categories valid"; PASS=$((PASS+1))
+    else
+      echo "  ❌ Product category validation failed"; FAIL=$((FAIL+1))
+    fi
+  fi
+}
+check_product_categories
+
 # Summary
 echo ""; echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
 echo "  Results: ✅ $PASS passed, ❌ $FAIL failed"

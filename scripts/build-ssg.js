@@ -820,6 +820,23 @@ function generate404() {
 // ─── Main ────────────────────────────────────────────────────────
 
 function main() {
+  // ─── 前置校验：产品分类数据 ────────────────────────
+  var validateScript = path.join(__dirname, 'validate-product-categories.js');
+  if (fs.existsSync(validateScript)) {
+    log('🔍 前置校验: 产品分类数据一致性...');
+    try {
+      require('child_process').execSync(
+        'node ' + validateScript,
+        { cwd: __dirname, stdio: 'inherit', timeout: 30000 }
+      );
+      log('  ✅ 产品分类数据校验通过');
+    } catch (e) {
+      log('');
+      log('❌ 产品分类数据校验未通过！修复后重新构建。');
+      process.exit(1);
+    }
+  }
+
   log("Starting SSG build...");
   log("Dist directory: " + DIST_DIR);
 
