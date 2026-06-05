@@ -4291,5 +4291,13 @@
   "product_xc_0006_usage": "Gamit: Mga lugar tulad ng restaurant chains, snack shops, canteens, home kitchens; angkop para sa paghiwa ng iba't ibang sangkap, maaaring ayusin ang kapal, madaling operasyon. Kapasidad: Mahusay na paghiwa, nakakatipid ng labor.",
   "product_xc_1288_name": "Makinang Panghiwa ng Iba't Ibang Gamit",
   "product_xc_1288_specifications": "Materyales: Gumagamit ng buong aluminum alloy na suporta; Rated Power: 200W; Boltahe: 220V; Frequency: 50Hz; Kutsilyo: Espesyal na stainless steel na kutsilyo, diameter 190mm; Pagsasaayos: 20 antas (1-20mm) na pagsasaayos ng kapal; Motor: Copper wire motor; Pagpapatakbo: Matatag at mababang decibel; Angkop: Para sa malambot at matigas na sangkap, madaling tugunan ang iba't ibang pangangailangan sa paghiwa",
-  "product_xc_1288_usage": "Gamit: Mga lugar tulad ng mga chain ng restaurant, hotpot restaurant, kantina, central kitchen, atbp.; Angkop para sa paghiwa ng sariwang karne, frozen na karne at iba pang sangkap, maraming antas na pagsasaayos ng kapal. Kapasidad: Mahusay na paghiwa, nakakatugon sa pangangailangan ng maliit hanggang katamtamang laki ng negosyo sa pagkain."
+  "product_xc_1288_usage": "Gamit: Mga lugar tulad ng mga chain ng restaurant, hotpot restaurant, kantina, central kitchen, atbp.; Angkop para sa paghiwa ng sariwang karne, frozen na karne at iba pang sangkap, maraming antas na pagsasaayos ng kapal. Kapasidad: Mahusay na paghiwa, nakakatugon sa pangangailangan ng maliit hanggang katamtamang laki ng negosyo sa pagkain.",
+  "pd_tier_basic": "Basic",
+  "pd_tier_smart": "Smart",
+  "pd_tier_full_smart": "Full Smart",
+  "cases_filter_小型餐饮": "Maliit na F&B",
+  "cases_filter_中央厨房": "Central Kitchen",
+  "cases_filter_连锁餐饮": "Chain Restaurant",
+  "cases_filter_智慧食堂": "Smart Canteen",
+  "cases_filter_云厨房": "Cloud Kitchen"
 }

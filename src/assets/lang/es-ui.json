@@ -4291,5 +4291,13 @@
   "product_xc_0006_usage": "Uso: Restaurantes en cadena, puestos de comida, comedores, cocinas domésticas, etc.; adecuado para rebanar diversos ingredientes, grosor ajustable, operación conveniente. Capacidad: Rebanado eficiente, ahorro de mano de obra.",
   "product_xc_1288_name": "Máquina de rebanar multifunción",
   "product_xc_1288_specifications": "Material: Soporte de aleación de aluminio; Potencia nominal: 200W; Voltaje: 220V; Frecuencia: 50Hz; Cuchilla: Cuchilla especial de acero inoxidable, diámetro 190mm; Ajuste: 20 niveles de ajuste de grosor (1-20mm); Motor: Motor de cobre; Funcionamiento: Estable y de bajo decibelio; Aplicación: Adecuado para ingredientes blandos y duros, maneja fácilmente diversas necesidades de rebanado",
-  "product_xc_1288_usage": "Uso: Cadenas de restaurantes, restaurantes de hot pot, comedores, cocinas centrales, etc.; Adecuado para rebanar carnes frescas, congeladas y otros ingredientes, ajuste de grosor de múltiples niveles. Capacidad: Rebanado eficiente, satisfaciendo las necesidades de restaurantes pequeños y medianos."
+  "product_xc_1288_usage": "Uso: Cadenas de restaurantes, restaurantes de hot pot, comedores, cocinas centrales, etc.; Adecuado para rebanar carnes frescas, congeladas y otros ingredientes, ajuste de grosor de múltiples niveles. Capacidad: Rebanado eficiente, satisfaciendo las necesidades de restaurantes pequeños y medianos.",
+  "pd_tier_basic": "Básico",
+  "pd_tier_smart": "Inteligente",
+  "pd_tier_full_smart": "Totalmente Inteligente",
+  "cases_filter_小型餐饮": "Restauración pequeña",
+  "cases_filter_中央厨房": "Cocina central",
+  "cases_filter_连锁餐饮": "Cadena de restaurantes",
+  "cases_filter_智慧食堂": "Comedor inteligente",
+  "cases_filter_云厨房": "Cocina en la nube"
 }

@@ -4291,5 +4291,13 @@
   "product_xc_0006_usage": "Verwendung: Gastronomieketten, Imbissstände, Kantinen, Haushaltsküchen usw.; geeignet für das Schneiden verschiedener Lebensmittel, Dicke einstellbar, einfache Bedienung. Kapazität: Effizientes Schneiden, spart Arbeitskraft.",
   "product_xc_1288_name": "Multifunktions-Schneidemaschine",
   "product_xc_1288_specifications": "Material: Vollaluminiumgestell; Nennleistung: 200W; Spannung: 220V; Frequenz: 50Hz; Klingen: Spezielle Edelstahlklingen, Durchmesser 190mm; Einstellung: 20 Stufen (1-20mm) Dickenverstellung; Motor: Kupferdrahtmotor; Betrieb: Stabil, niedriger Geräuschpegel; Anwendung: Weiche und harte Lebensmittel, problemlos für verschiedene Schneidanforderungen",
-  "product_xc_1288_usage": "Verwendung: Gastronomieketten, Hotpot-Restaurants, Kantinen, Großküchen usw.; Geeignet für das Schneiden von frischem Fleisch, gefrorenem Fleisch und anderen Lebensmitteln, mehrstufige Dickenverstellung. Leistung: Effizientes Schneiden, erfüllt die Anforderungen kleiner und mittlerer Gastronomiebetriebe."
+  "product_xc_1288_usage": "Verwendung: Gastronomieketten, Hotpot-Restaurants, Kantinen, Großküchen usw.; Geeignet für das Schneiden von frischem Fleisch, gefrorenem Fleisch und anderen Lebensmitteln, mehrstufige Dickenverstellung. Leistung: Effizientes Schneiden, erfüllt die Anforderungen kleiner und mittlerer Gastronomiebetriebe.",
+  "pd_tier_basic": "Basis",
+  "pd_tier_smart": "Smart",
+  "pd_tier_full_smart": "Voll-Smart",
+  "cases_filter_小型餐饮": "Kleine Gastronomie",
+  "cases_filter_中央厨房": "Zentralküche",
+  "cases_filter_连锁餐饮": "Restaurantkette",
+  "cases_filter_智慧食堂": "Smart Canteen",
+  "cases_filter_云厨房": "Cloud Kitchen"
 }

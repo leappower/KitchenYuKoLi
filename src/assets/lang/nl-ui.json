@@ -4291,5 +4291,13 @@
   "product_xc_0006_usage": "Toepassing: cateringketens, snackbars, kantines, thuiskeukens, etc.; geschikt voor het snijden van diverse ingrediënten, dikte verstelbaar, eenvoudig te bedienen.\nCapaciteit: efficiënt snijden, bespaart arbeid.",
   "product_xc_1288_name": "Multifunctionele snijmachine",
   "product_xc_1288_specifications": "Materiaal: volledig aluminium frame; Nominaal vermogen: 200W; Spanning: 220V; Frequentie: 50Hz; Mes: speciaal roestvrijstalen mes, diameter 190mm; Instelling: 20 standen (1-20mm) dikte-instelling; Motor: koperdraad motor; Werking: stabiel, laag decibel; Toepassing: zowel zachte als harde ingrediënten, gemakkelijk voor diverse snijbehoeften",
-  "product_xc_1288_usage": "Gebruik: geschikt voor horecaketens, hotpot restaurants, kantines, centrale keukens, etc.; voor het snijden van vers vlees, bevroren vlees en andere ingrediënten, meerdere dikte-instellingen. Capaciteit: efficiënt snijden, voldoet aan de behoeften van kleine tot middelgrote horeca."
+  "product_xc_1288_usage": "Gebruik: geschikt voor horecaketens, hotpot restaurants, kantines, centrale keukens, etc.; voor het snijden van vers vlees, bevroren vlees en andere ingrediënten, meerdere dikte-instellingen. Capaciteit: efficiënt snijden, voldoet aan de behoeften van kleine tot middelgrote horeca.",
+  "pd_tier_basic": "Basis",
+  "pd_tier_smart": "Slim",
+  "pd_tier_full_smart": "Volledig Slim",
+  "cases_filter_小型餐饮": "Kleine horeca",
+  "cases_filter_中央厨房": "Centrale keuken",
+  "cases_filter_连锁餐饮": "Restaurantketen",
+  "cases_filter_智慧食堂": "Slimme kantine",
+  "cases_filter_云厨房": "Cloud Kitchen"
 }
