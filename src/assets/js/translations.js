@@ -312,6 +312,7 @@
       return a && a !== t ? a : e;
     }),
     (r.prototype.applyTo = function (root) {
+      console.log("[i18n] applyTo called, root:", root && root.id, "currentLang:", this.currentLanguage, "cacheSize:", this.translationsCache.size);
       var t = this;
       var uiKey = "ui-" + t.currentLanguage;
       var e = t.translationsCache.get(uiKey) || {};
@@ -771,7 +772,7 @@
           .then(function () {
             ((document.documentElement.lang = e.currentLanguage),
               (e.isInitialized = !0),
-              e._readyResolve && e._readyResolve(e),
+              console.log("[i18n] ready resolving, lang:", e.currentLanguage), e._readyResolve && e._readyResolve(e),
               e.emit("initialized", {
                 language: e.currentLanguage,
               }),

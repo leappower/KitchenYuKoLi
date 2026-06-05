@@ -613,6 +613,9 @@
         (badgeHtml ? badgeHtml : "") +
         (badgeHtml ? chevron : "") +
         '<li><span class="text-slate-900 dark:text-white font-medium">' +
+function _prodKey(model) {
+    return (model || "").toLowerCase().replace(/[^a-z0-9]+/g, "_").replace(/_+/g, "_").replace(/^_|_$/g, "");
+  }
         esc(tl("product_" + _prodKey(model) + "_name", getProductField(product, "name") || model)) +
         "</span></li>" +
         "</ol></nav></div>";

@@ -469,7 +469,7 @@
         }
       };
       if (window.translationManager.ready && typeof window.translationManager.ready.then === "function") {
-        window.translationManager.ready.then(applyFn);
+        window.translationManager.ready.then(function() { console.log("[case-grid] ready.then fired"); applyFn(); });
       } else {
         applyFn();
       }
@@ -700,6 +700,7 @@
 
   /* ── Init ───────────────────────────────────────── */
   function init(variant) {
+      console.log("[case-grid] init called, variant:", variant, "translationManager:", !!window.translationManager, "ready:", !!(window.translationManager && window.translationManager.ready));
     if (variant === "pc") buildFiltersPc();
     else if (variant === "tablet") buildFiltersTablet();
     else buildFiltersMobile();
