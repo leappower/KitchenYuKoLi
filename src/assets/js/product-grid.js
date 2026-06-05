@@ -973,6 +973,8 @@
     _shownCount[containerId] = initial;
     var html = products.slice(0, initial).map(renderer).join("");
     container.innerHTML = html;
+    if (window.translationManager && typeof window.translationManager.applyTo === "function")
+      window.translationManager.applyTo(container);
     updateLoadMoreBtn(containerId, total, initial);
     bindLoadMore(containerId, renderer);
     // Init floating bar after grid render
@@ -997,6 +999,8 @@
       var next = Math.min(shown + getPageSize(), products.length);
       _shownCount[containerId] = next;
       container.innerHTML = products.slice(0, next).map(renderer).join("");
+      if (window.translationManager && typeof window.translationManager.applyTo === "function")
+        window.translationManager.applyTo(container);
       updateLoadMoreBtn(containerId, products.length, next);
       updateCompareButtons();
     });

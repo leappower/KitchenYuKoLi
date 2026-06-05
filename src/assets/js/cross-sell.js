@@ -575,6 +575,8 @@ function _reInjectSrcset(root) {
         var crossSellHtml = renderCrossSell(slug);
         if (crossSellHtml) {
           _reInjectSrcset(crossSellContainer);
+          if (window.translationManager && typeof window.translationManager.applyTo === "function")
+            window.translationManager.applyTo(crossSellContainer);
           crossSellContainer.innerHTML = crossSellHtml;
         }
         /* else: no cross-sell, container stays hidden */
@@ -588,6 +590,8 @@ function _reInjectSrcset(root) {
       }
       /* else: no scene entry, container stays hidden */
       _reInjectSrcset(sceneEntryContainer);
+      if (window.translationManager && typeof window.translationManager.applyTo === "function")
+        window.translationManager.applyTo(sceneEntryContainer);
     }
   }
 
