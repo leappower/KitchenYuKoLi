@@ -230,6 +230,14 @@ function _reInjectSrcset(root) {
       切配系列: "cutting",
       辅助系列: "other",
     };
+    var CATEGORY_I18N_MAP = {
+      翻炒系列: "nav_products_stirfry",
+      炖煮系列: "nav_products_stewing",
+      蒸煮系列: "nav_products_steaming",
+      煎炸系列: "nav_products_frying",
+      切配系列: "nav_products_cutting",
+      辅助系列: "nav_products_other",
+    };
     var catSlug = catMap[p.category] || "other";
     var catHref = "/products/" + catSlug + "/";
 
