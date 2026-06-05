@@ -454,8 +454,8 @@
             _category: p.category || "",
             _categorySlug: CATEGORY_NAME_TO_SLUG[p.category] || "",
             _imageUrl: img,
-            _imgSrcset: _buildSrcset(img, "pc"),
-            _imgSizes: _buildSizes("pc"),
+            _imgSrcset: _buildSrcset(img, getDeviceType()),
+            _imgSizes: _buildSizes(getDeviceType()),
           })
         );
       });
@@ -472,8 +472,8 @@
             _category: cat.category || cat.slug || "",
             _categorySlug: CATEGORY_NAME_TO_SLUG[cat.category] || cat.slug || "",
             _imageUrl: img,
-            _imgSrcset: _buildSrcset(img, "pc"),
-            _imgSizes: _buildSizes("pc"),
+            _imgSrcset: _buildSrcset(img, getDeviceType()),
+            _imgSizes: _buildSizes(getDeviceType()),
           })
         );
       });
