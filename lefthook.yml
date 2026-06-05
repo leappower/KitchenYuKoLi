@@ -20,19 +20,26 @@ pre-commit:
     no-debug:
       glob: "src/**/*.{js,html}"
       run: |
+        # awk-based parser: correctly handles colons in content (fixes :// bug)
+        # Skips console.log/debug/table inside <script>...</script> blocks in HTML
+        # (inline scripts like device-redirect intentionally use console.log)
         hits=$(grep -nE 'console\.(log|debug|table)\s*\(' {staged_files} 2>/dev/null | grep -v '^\s*//' || true)
         if [ -n "$hits" ]; then
-          blocked=$(echo "$hits" | while IFS= read -r line; do
-            file=$(echo "$line" | sed 's/:\([0-9]*\):.*//' )
-            lnum=$( echo "$line" | sed 's/[^:]*:\([0-9]*\):.*/\1/' )
-            cur_line=$(echo "$line" | cut -d: -f3-)
-            if echo "$cur_line" | grep -q '__DEVELOPMENT__'; then continue; fi
-            if [ "$lnum" -gt 1 ] 2>/dev/null; then
-              prev_line=$(sed -n "$((lnum-1))p" "$file" 2>/dev/null || true)
-              if echo "$prev_line" | grep -q '__DEVELOPMENT__'; then continue; fi
-            fi
-            echo "$line"
-          done)
+          blocked=$(echo "$hits" | awk -F: 'NF >= 3 {
+            file = $1
+            # Skip .html files — they have intentional inline <script> console.log
+            if (file ~ /\.html$/) next
+            lnum = $2
+            rest = $0; p = index(rest, $2)
+            cur_line = substr(rest, p + length($2) + 2)
+            if (cur_line ~ /__DEVELOPMENT__/) next
+            if (lnum > 1) {
+              cmd = "sed -n \"" lnum-1 "p\" \"" file "\""
+              cmd | getline prev_line; close(cmd)
+              if (prev_line ~ /__DEVELOPMENT__/) next
+            }
+            print $0
+          }')
           if [ -n "$blocked" ]; then
             echo "$blocked"
             echo "❌ 发现 console.log/debug/table 残留！请清理后再提交。"

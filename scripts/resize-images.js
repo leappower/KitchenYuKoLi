@@ -47,15 +47,11 @@ async function processFile(absPath) {
       generated++;
       continue;
     }
-    if (sourceWidth < width) {
-      // Skip upscaling
-      generated++;
-      continue;
-    }
-
+    // Upscale small source images: better than browser stretch
+    // Lanczos3 interpolation > browser CSS scaling, correct file size for srcset
     try {
       await sharp(absPath)
-        .resize(width, undefined, { fit: 'outside', withoutEnlargement: true })
+        .resize(width, undefined, { fit: 'outside', withoutEnlargement: false, kernel: 'lanczos3' })
         .webp({ quality: 82, effort: 4 })
         .toFile(targetPath);
       generated++;
@@ -142,7 +138,35 @@ async function main() {
   }
 }
 
-main().catch((err) => {
+main().then(() => {
+  // ─── 生成 srcset manifest ─────────────────────────────────
+  // JS 运行时用此 manifest 知道每张图有哪些尺寸可用
+  const manifest = {};
+  function buildManifest(dir, prefix) {
+    for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
+      const abs = path.join(dir, entry.name);
+      if (entry.isDirectory()) {
+        buildManifest(abs, prefix ? prefix + entry.name + '/' : entry.name + '/');
+      } else if (entry.isFile() && entry.name.endsWith('.webp')) {
+        // 跳过缩放图本身（以 -数字w.webp 结尾）
+        if (/(\d+)w\.webp$/.test(entry.name)) continue;
+        const key = prefix + entry.name; // e.g. "products/DLB-BQ40T.webp"
+        const widths = [];
+        const base = entry.name.replace(/\.webp$/, '');
+        for (const w of TARGET_WIDTHS) {
+          const variant = path.join(dir, `${base}-${w}w.webp`);
+          if (fs.existsSync(variant)) widths.push(w);
+        }
+        manifest[key] = widths;
+      }
+    }
+  }
+  buildManifest(SRC_DIR, '/assets/images/');
+
+  const outPath = path.join(__dirname, '..', 'src', 'assets', 'js', '_srcset-manifest.json');
+  fs.writeFileSync(outPath, JSON.stringify(manifest, null, 2));
+  console.log(`\n✅ srcset manifest → ${outPath} (${Object.keys(manifest).length} images)`);
+}).catch((err) => {
   console.error(err);
   process.exit(1);
 });

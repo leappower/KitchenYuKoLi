@@ -72,7 +72,7 @@ def build_srcset(src_path, device_widths, manifest):
     """Build srcset from manifest data.
     Only includes widths that exist in the manifest for this image.
     """
-    clean = src_path.lstrip('/')
+    clean = src_path  # manifest keys include leading /
     available = manifest.get(clean, [])
     if not available:
         return ''
@@ -83,7 +83,7 @@ def build_srcset(src_path, device_widths, manifest):
     if not widths:
         return ''
     root, ext = os.path.splitext(clean)
-    parts = [f'/{root}-{w}w{ext} {w}w' for w in widths]
+    parts = [f'{root}-{w}w{ext} {w}w' for w in widths]
     return ', '.join(parts)
 
 
