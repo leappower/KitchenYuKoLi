@@ -454,6 +454,8 @@
             _category: p.category || "",
             _categorySlug: CATEGORY_NAME_TO_SLUG[p.category] || "",
             _imageUrl: img,
+            _imgSrcset: _buildSrcset(img, "pc"),
+            _imgSizes: _buildSizes("pc"),
           })
         );
       });
@@ -470,6 +472,8 @@
             _category: cat.category || cat.slug || "",
             _categorySlug: CATEGORY_NAME_TO_SLUG[cat.category] || cat.slug || "",
             _imageUrl: img,
+            _imgSrcset: _buildSrcset(img, "pc"),
+            _imgSizes: _buildSizes("pc"),
           })
         );
       });
@@ -484,6 +488,68 @@
    * 3. /assets/images/products/{model}.webp (last resort)
    * 4. /assets/images/products/default.webp
    */
+  /**
+   * 生成图片的 srcset 属性字符串
+   * 设备宽度参考：mobile=375w/828w, tablet=828w/1200w, pc=1200w/1920w
+   * Uses shared manifest from main.js (window.__SRCSET_MANIFEST__ / window.SrcsetManifest)
+   */
+  function _loadManifest() {
+    // Reuse main.js's manifest loader if available, otherwise fall back to direct fetch
+    if (window.SrcsetManifest) {
+      window.SrcsetManifest.load();
+      return Promise.resolve(window.__SRCSET_MANIFEST__ || window.SrcsetManifest.get());
+    }
+    return fetch("/assets/js/_srcset-manifest.json")
+      .then(function (r) {
+        return r.json();
+      })
+      .then(function (data) {
+        window.__SRCSET_MANIFEST__ = data;
+        return data;
+      })
+      .catch(function () {
+        return null;
+      });
+  }
+
+  function _buildSrcset(baseUrl, device) {
+    if (!baseUrl || !/\.(webp|png|jpg|jpeg|avif)$/i.test(baseUrl)) return "";
+    if (baseUrl.indexOf("data:") === 0) return "";
+    var ext = baseUrl.match(/\.(webp|png|jpg|jpeg|avif)$/i)[0];
+    var base = baseUrl.replace(/\.(webp|png|jpg|jpeg|avif)$/i, "");
+    if (/-(\d+)w$/.test(base)) return "";
+    // 从 shared manifest 获取实际存在的尺寸
+    var manifest = window.__SRCSET_MANIFEST__ || (window.SrcsetManifest && window.SrcsetManifest.get());
+    if (manifest && manifest[baseUrl]) {
+      var available = manifest[baseUrl];
+      if (available.length === 0) return "";
+      var devicePref = { mobile: [375, 828], tablet: [828, 1200], pc: [1200, 1920] };
+      var preferred = devicePref[device] || devicePref.pc;
+      var widths = preferred.filter(function (w) {
+        return available.indexOf(w) !== -1;
+      });
+      if (widths.length === 0) {
+        widths = available.slice(-2);
+      }
+      return widths
+        .map(function (w) {
+          return base + "-" + w + "w" + ext + " " + w + "w";
+        })
+        .join(", ");
+    }
+    // manifest 不可用时降级：不生成 srcset（避免 404）
+    return "";
+  }
+
+  function _buildSizes(device) {
+    var m = {
+      mobile: "calc(100vw - 32px)",
+      tablet: "(max-width: 768px) 50vw, 33vw",
+      pc: "(max-width: 1024px) 50vw, 25vw",
+    };
+    return m[device] || m.pc;
+  }
+
   function _resolveImage(p) {
     // 统一用 model.webp，不信任 API/data-table 的 filePath
     var img = "/assets/images/products/" + (p.model || "") + ".webp";
@@ -608,6 +674,8 @@
     var name = esc(_pField(p, "name") || model);
     var desc = esc(p.description || p.card_desc || p.highlights || "");
     var img = esc(p._imageUrl);
+    var imgSrcset = p._imgSrcset ? ' srcset="' + esc(p._imgSrcset) + '"' : "";
+    var imgSizes = p._imgSizes ? ' sizes="' + esc(p._imgSizes) + '"' : "";
     var subCatRaw = p.subCategory || cat;
     var subCatI18nKey = getSubCatI18nKey(subCatRaw, cat);
     var subCat = esc(tl(subCatI18nKey, subCatRaw));
@@ -654,7 +722,10 @@
       name +
       '" class="w-full h-full object-contain p-2 transition-transform duration-500 group-hover:scale-105" src="' +
       img +
-      "\" onerror=\"if(!this.dataset.errored){this.dataset.errored='1';this.src='/assets/images/products/default.webp' }\">" +
+      '"' +
+      imgSrcset +
+      imgSizes +
+      " onerror=\"if(!this.dataset.errored){this.dataset.errored='1';this.src='/assets/images/products/default.webp' }\">" +
       (badge ? '<div class="absolute top-4 left-4 flex gap-2">' + badge + "</div>" : "") +
       "</div>" +
       '<div class="p-6">' +
@@ -698,6 +769,8 @@
     var name = esc(_pField(p, "name") || model);
     var desc = esc(p.description || p.card_desc || "");
     var img = esc(p._imageUrl);
+    var imgSrcset = p._imgSrcset ? ' srcset="' + esc(p._imgSrcset) + '"' : "";
+    var imgSizes = p._imgSizes ? ' sizes="' + esc(p._imgSizes) + '"' : "";
     var subCatRaw = p.subCategory || cat;
     var subCatI18nKey = getSubCatI18nKey(subCatRaw, cat);
     var subCat = esc(tl(subCatI18nKey, subCatRaw));
@@ -733,7 +806,10 @@
       name +
       '" class="w-full h-full object-contain p-2" src="' +
       img +
-      "\" onerror=\"if(!this.dataset.errored){this.dataset.errored='1';this.src='/assets/images/products/default.webp' }\">" +
+      '"' +
+      imgSrcset +
+      imgSizes +
+      " onerror=\"if(!this.dataset.errored){this.dataset.errored='1';this.src='/assets/images/products/default.webp' }\">" +
       (badge ? '<div class="absolute top-3 left-3 flex gap-1.5">' + badge + "</div>" : "") +
       "</div>" +
       '<div class="p-4">' +
@@ -774,6 +850,8 @@
     var name = esc(_pField(p, "name") || model);
     var desc = esc(p.description || p.card_desc || "");
     var img = esc(p._imageUrl);
+    var imgSrcset = p._imgSrcset ? ' srcset="' + esc(p._imgSrcset) + '"' : "";
+    var imgSizes = p._imgSizes ? ' sizes="' + esc(p._imgSizes) + '"' : "";
     var linkSlug =
       CATEGORY_NAME_TO_SLUG[p._category] ||
       (window.MODEL_TO_SLUG && window.MODEL_TO_SLUG[model]) ||
@@ -807,7 +885,10 @@
       name +
       '" class="w-full h-full object-contain p-1" src="' +
       img +
-      "\" onerror=\"if(!this.dataset.errored){this.dataset.errored='1';this.src='/assets/images/products/default.webp' }\">" +
+      '"' +
+      imgSrcset +
+      imgSizes +
+      " onerror=\"if(!this.dataset.errored){this.dataset.errored='1';this.src='/assets/images/products/default.webp' }\">" +
       "</div>" +
       '<div class="p-3">' +
       '<div class="flex items-center gap-1.5 mb-1"><span class="material-symbols-outlined text-primary text-sm">local_fire_department</span><span class="text-xs font-bold text-primary uppercase tracking-wider"' +
@@ -1245,12 +1326,18 @@
     }
   })();
 
-  // First load: render on DOMContentLoaded (SSG pages already have HTML in DOM)
-  if (document.readyState !== "loading") {
-    autoRender();
-  } else {
-    document.addEventListener("DOMContentLoaded", autoRender);
+  // First load: 先加载 srcset manifest，再渲染
+  function _firstRender() {
+    _loadManifest().then(function () {
+      if (document.readyState !== "loading") {
+        autoRender();
+      }
+    });
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", autoRender);
+    }
   }
+  _firstRender();
 
   // product-data-ready: re-render if data arrives late (e.g. after dynamic import)
   window.addEventListener("product-data-ready", function () {

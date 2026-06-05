@@ -20,6 +20,41 @@
 (function (_global) {
   "use strict";
 
+  // ─── Async manifest loader (no XHR sync blocking) ───────────────────
+  // Shared single fetch — both main.js and product-grid.js use this.
+  // The callback fires once when manifest arrives (or immediately if cached).
+  var _manifest = null;
+  var _manifestLoaded = false;
+  var _manifestPromise = null;
+
+  function loadManifest() {
+    if (_manifestLoaded) return;
+    if (_manifestPromise) return;
+    _manifestPromise = fetch("/assets/js/_srcset-manifest.json")
+      .then(function (r) {
+        return r.json();
+      })
+      .then(function (data) {
+        _manifest = data;
+        window.__SRCSET_MANIFEST__ = data;
+        _manifestLoaded = true;
+        // Re-inject for any imgs that were waiting (first-paint race)
+        if (window.app && window.app.modules && window.app.modules.get("lazyLoading")) {
+          window.app.modules.get("lazyLoading").reInjectSrcset();
+        }
+      })
+      .catch(function () {
+        _manifestLoaded = true;
+      });
+  }
+
+  window.SrcsetManifest = {
+    load: loadManifest,
+    get: function () {
+      return _manifest;
+    },
+  };
+
   // ─── App class ─────────────────────────────────────────────────────────────
   function App() {
     this.modules = new Map();
@@ -67,11 +102,29 @@
     this._mutationObserver = null;
   }
 
+  // Device → preferred srcset widths
+  var SRCSET_DEV_MAP = { mobile: [375, 828], tablet: [828, 1200], pc: [1200, 1920] };
+  // Device → default sizes attribute
+  var SIZES_MAP = {
+    pc: "(max-width: 1024px) 50vw, 25vw",
+    tablet: "(max-width: 768px) 50vw, 33vw",
+  };
+
   /**
-   * 统一为图片注入 srcset（覆盖所有动态渲染点，无需逐个改 JS）
+   * Inject srcset for a single <img> (only if it has no srcset yet).
+   * If manifest not loaded yet → skip silently (reInjectSrcset will retry).
    */
   LazyLoadingModule.prototype._injectSrcset = function (img) {
-    if (!img || img.getAttribute("srcset") || img.hasAttribute("data-no-srcset")) return;
+    if (!img) return;
+    if (img.getAttribute("srcset")) {
+      // Already has srcset — only fill in sizes if missing
+      if (!img.getAttribute("sizes")) {
+        var dev = document.documentElement.dataset.device || "";
+        img.setAttribute("sizes", SIZES_MAP[dev] || "calc(100vw - 32px)");
+      }
+      return;
+    }
+    if (img.hasAttribute("data-no-srcset")) return;
     var src = img.getAttribute("src") || img.dataset.src || "";
     if (!src) return;
     if (!/\.(webp|png|jpg|jpeg|avif)$/i.test(src)) return;
@@ -79,52 +132,54 @@
 
     var base = src.replace(/\.(webp|png|jpg|jpeg|avif)$/i, "");
     var ext = src.match(/\.(webp|png|jpg|jpeg|avif)$/i)[0];
-    var dev = "";
-    if (document.documentElement && document.documentElement.dataset) {
-      dev = document.documentElement.dataset.device || "";
-    }
-    var wm = { mobile: [375, 828], tablet: [828, 1200], pc: [1200, 1920] };
-    var widths = wm[dev] || [1200, 1920];
+    var dev = document.documentElement.dataset.device || "";
+
+    // Manifest-driven: only inject widths that actually exist on disk
+    var manifest = window.__SRCSET_MANIFEST__ || _manifest;
+    if (!manifest || !manifest[src]) return; // not loaded yet or image not in manifest
+
+    var available = manifest[src];
+    var preferred = SRCSET_DEV_MAP[dev] || [1200, 1920];
+    var widths = preferred.filter(function (w) {
+      return available.indexOf(w) !== -1;
+    });
+    if (widths.length === 0) widths = available.slice(-2);
+    if (widths.length === 0) return;
+
     var srcset = widths
       .map(function (w) {
         return base + "-" + w + "w" + ext + " " + w + "w";
       })
       .join(", ");
     img.setAttribute("srcset", srcset);
-    var sz = "calc(100vw - 32px)";
-    if (dev === "pc") sz = "(max-width: 1024px) 50vw, 25vw";
-    else if (dev === "tablet") sz = "(max-width: 768px) 50vw, 33vw";
-    img.setAttribute("sizes", sz);
+    if (!img.getAttribute("sizes")) {
+      img.setAttribute("sizes", SIZES_MAP[dev] || "calc(100vw - 32px)");
+    }
+  };
+
+  /**
+   * Active srcset injection — call after DOM changes (SPA navigate, dynamic render).
+   * Replaces the expensive MutationObserver on documentElement.
+   * @param {Element} [root=document] — scope to scan; defaults to entire document
+   */
+  LazyLoadingModule.prototype.reInjectSrcset = function (root) {
+    var self = this;
+    root = root || document;
+    var imgs = root.querySelectorAll ? root.querySelectorAll("img") : [];
+    if (root.nodeType === Node.ELEMENT_NODE && root.tagName === "IMG") {
+      imgs = [root].concat(Array.prototype.slice.call(imgs));
+    }
+    for (var i = 0; i < imgs.length; i++) {
+      self._injectSrcset(imgs[i]);
+    }
   };
 
   LazyLoadingModule.prototype.init = function () {
     var self = this;
 
-    // 用 MutationObserver 监控所有新加入的 img 标签，统一注入 srcset
-    self._globalImgObserver = new MutationObserver(function (mutations) {
-      mutations.forEach(function (mutation) {
-        mutation.addedNodes.forEach(function (node) {
-          if (node.nodeType === Node.ELEMENT_NODE) {
-            if (node.tagName === "IMG") {
-              self._injectSrcset(node);
-            }
-            var imgs = node.querySelectorAll ? node.querySelectorAll("img") : [];
-            [].forEach.call(imgs, function (subImg) {
-              self._injectSrcset(subImg);
-            });
-          }
-        });
-      });
-    });
-    self._globalImgObserver.observe(document.documentElement, {
-      childList: true,
-      subtree: true,
-    });
-
-    // 同时处理已存在的 img
-    [].forEach.call(document.querySelectorAll("img"), function (existingImg) {
-      self._injectSrcset(existingImg);
-    });
+    // Kick off async manifest load, then inject srcset for existing images
+    loadManifest();
+    self.reInjectSrcset();
 
     self._imageObserver = new IntersectionObserver(
       function (entries) {
@@ -140,6 +195,7 @@
 
     self._observeImages(document);
 
+    // MutationObserver only for lazy-loaded images (data-src), NOT for srcset
     self._mutationObserver = new MutationObserver(function (mutations) {
       mutations.forEach(function (mutation) {
         mutation.addedNodes.forEach(function (node) {
