@@ -112,7 +112,6 @@
           ],
           animateHistoryBrowsing: false,
         });
-        console.log("[spa-router] Swup 初始化成功，selector:", 'a[href^="/"]:not([href$=".pdf"]):...');
       } catch (e) {
         console.warn("[spa-router] Swup init failed, falling back to traditional navigation:", e.message);
         window.__spaNavigating = false;
@@ -134,7 +133,6 @@
         if (!args || !args.url) return;
         var deviceUtils = window.DeviceUtils;
         if (!deviceUtils || !deviceUtils.getDeviceType) {
-          console.log("[spa-router] fetch:request 跳过（DeviceUtils 未就绪）");
           return;
         }
         var deviceType = deviceUtils.getDeviceType();
@@ -156,30 +154,16 @@
         // 排除搜索直接跳转的无 category 路径：/products/DLB-GD30/（2级，第二个段包含大写/数字）
         var isProductModelPath =
           pathParts.length === 2 && pathParts[0] === "products" && !/^[a-z-]+$/.test(pathParts[1]);
-        console.log("[spa-router] fetch:request", {
-          url: url,
-          pathParts: pathParts,
-          isProdCat: isProductsCategory,
-          isStatic: isStaticPage,
-          isDetail: isProductDetail,
-          isModelPath: isProductModelPath,
-          suffix: suffix,
-          device: deviceType,
-        });
         if (!isStaticPage || isProductDetail || isProductModelPath) {
-          console.log("[spa-router] fetch:request 跳过（非静态页面或产品详情）");
           return;
         }
         if (!/\/$/.test(url)) {
-          console.log("[spa-router] fetch:request 跳过（非目录URL）");
           return;
         }
         if (/index-(mobile|pc|tablet)\.html$/.test(url)) {
-          console.log("[spa-router] fetch:request 跳过（已是设备页）");
           return;
         }
         args.url = url.replace(/\/$/, "") + "/" + suffix;
-        console.log("[spa-router] fetch:request 改写:", url, "→", args.url);
       });
     })();
 
@@ -239,7 +223,6 @@
     // ── visit:start ──────────────────────────────────────────────────
     var _lastSwupNavStart = 0;
     swupHooks.on("visit:start", function (visit) {
-      console.log("[spa-router] visit:start", { href: window.location.href, visit: visit.to ? visit.to.url : "N/A" });
       window.__spaNavigating = true;
       _lastSwupNavStart = Date.now();
       var skel = document.getElementById("skeleton-overlay");
@@ -252,14 +235,17 @@
 
     // ── content:replace ──────────────────────────────────────────────
     swupHooks.on("content:replace", function (visit) {
-      console.log("[spa-router] content:replace 触发");
       window.__spaNavigating = false;
+      // Re-inject srcset for new content (replaces expensive MutationObserver)
+      var lazyMod = window.app && window.app.modules && window.app.modules.get("lazyLoading");
+      if (lazyMod && typeof lazyMod.reInjectSrcset === "function") {
+        lazyMod.reInjectSrcset(document.getElementById("spa-content") || document);
+      }
       _lastSwupNavStart = 0;
       // 清理设备后缀，保持干净 URL
       var _url = window.location.href;
       if (/index-(mobile|tablet|pc)\.html$/.test(_url)) {
         var clean = _url.replace(/\/index-(mobile|tablet|pc)\.html$/, "/");
-        console.log("[spa-router] content:replace 清理URL:", _url, "→", clean);
         window.__redirectChecked = true;
         history.replaceState(null, "", clean);
       }
@@ -295,7 +281,6 @@
         window.Navigator &&
         typeof window.Navigator.mount === "function"
       ) {
-        console.log("[spa-router] navigator placeholder 为空，重新挂载");
         window.Navigator.mount();
       }
       if (window.Navigator && typeof window.Navigator.updateActive === "function") {
