@@ -613,7 +613,7 @@
         (badgeHtml ? badgeHtml : "") +
         (badgeHtml ? chevron : "") +
         '<li><span class="text-slate-900 dark:text-white font-medium">' +
-        esc(getProductField(product, "name") || model) +
+        esc(tl("product_" + _prodKey(model) + "_name", getProductField(product, "name") || model)) +
         "</span></li>" +
         "</ol></nav></div>";
       // Mobile breadcrumb — 统一返回按钮 + 可点击链接
@@ -639,7 +639,7 @@
           : "") +
         mChevron +
         '<span class="text-sm font-bold text-slate-900 dark:text-white truncate max-w-[160px]">' +
-        esc(getProductField(product, "name") || model) +
+        esc(tl("product_" + _prodKey(model) + "_name", getProductField(product, "name") || model)) +
         "</span>" +
         "</div></div>";
       bcEl.innerHTML = html;
@@ -711,12 +711,12 @@
 
     var tier = product.tier
       ? '<span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-bold bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-300">' +
-        esc(getProductField(product, "tier")) +
+        esc(translateTier(getProductField(product, "tier") || product.tier)) +
         "</span>"
       : "";
     var badge = product.badge
       ? '<span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-bold bg-primary text-white">' +
-        esc(product.badge) +
+        esc(tl("product_" + _prodKey(product.model) + "_badge", product.badge)) +
         "</span>"
       : "";
     var hlBadges = "";
@@ -865,7 +865,7 @@
       tier +
       "</div>" +
       '<h1 id="detail-title" class="text-2xl lg:text-3xl font-black tracking-tight mb-2">' +
-      esc(getProductField(product, "name") || product.model) +
+      esc(tl("product_" + _prodKey(product.model) + "_name", getProductField(product, "name") || product.model)) +
       "</h1>" +
       // Model subtitle
       (product.model && product.name && product.name !== product.model

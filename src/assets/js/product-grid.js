@@ -206,7 +206,7 @@
           esc(p._imageUrl) +
           '" class="w-6 h-6 rounded object-cover" onerror="this.src=\'/assets/images/products/default.webp\'">' +
           '<span class="text-[10px] font-bold text-slate-900 dark:text-white truncate max-w-[56px]">' +
-          esc(_pField(p, "name") || p.model) +
+          esc(tl("product_" + _prodKey(p.model) + "_name", _pField(p, "name") || p.model)) +
           "</span>" +
           '<button class="float-remove flex-shrink-0 text-slate-400 hover:text-red-500" data-model="' +
           esc(p.model) +
@@ -244,7 +244,7 @@
           esc(p._imageUrl) +
           '" class="w-7 h-7 rounded object-cover" onerror="this.src=\'/assets/images/products/default.webp\'">' +
           '<span class="text-xs font-bold text-slate-900 dark:text-white truncate max-w-[80px]">' +
-          esc(_pField(p, "name") || p.model) +
+          esc(tl("product_" + _prodKey(p.model) + "_name", _pField(p, "name") || p.model)) +
           "</span>" +
           '<button class="float-remove flex-shrink-0 text-slate-400 hover:text-red-500" data-model="' +
           esc(p.model) +
@@ -665,13 +665,20 @@
     }
     return product[field] || "";
   }
+  function _prodKey(model) {
+    return (model || "")
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, "_")
+      .replace(/_+/g, "_")
+      .replace(/^_|_$/g, "");
+  }
 
   function renderPC(p) {
     var cat = p._category;
     var catDisplay = esc(translateCategory(cat));
     var catEsc = esc(cat);
     var model = esc(p.model || "");
-    var name = esc(_pField(p, "name") || model);
+    var name = esc(tl("product_" + _prodKey(model) + "_name", _pField(p, "name") || model));
     var desc = esc(p.description || p.card_desc || p.highlights || "");
     var img = esc(p._imageUrl);
     var imgSrcset = p._imgSrcset ? ' srcset="' + esc(p._imgSrcset) + '"' : "";
@@ -692,7 +699,9 @@
     var badge = "";
     if (p.badge) {
       badge =
-        '<span class="px-3 py-1 bg-primary text-white text-xs font-bold rounded-full">' + esc(p.badge) + "</span>";
+        '<span class="px-3 py-1 bg-primary text-white text-xs font-bold rounded-full">' +
+        esc(tl("product_" + _prodKey(model) + "_badge", p.badge)) +
+        "</span>";
     }
     var linkSlug =
       CATEGORY_NAME_TO_SLUG[p._category] ||
@@ -766,7 +775,7 @@
     var catDisplay = esc(translateCategory(cat));
     var catEsc = esc(cat);
     var model = esc(p.model || "");
-    var name = esc(_pField(p, "name") || model);
+    var name = esc(tl("product_" + _prodKey(model) + "_name", _pField(p, "name") || model));
     var desc = esc(p.description || p.card_desc || "");
     var img = esc(p._imageUrl);
     var imgSrcset = p._imgSrcset ? ' srcset="' + esc(p._imgSrcset) + '"' : "";
@@ -778,7 +787,9 @@
     var badge = "";
     if (p.badge) {
       badge =
-        '<span class="px-2 py-0.5 bg-primary text-white text-[10px] font-bold rounded">' + esc(p.badge) + "</span>";
+        '<span class="px-2 py-0.5 bg-primary text-white text-[10px] font-bold rounded">' +
+        esc(tl("product_" + _prodKey(model) + "_badge", p.badge)) +
+        "</span>";
     }
     var linkSlug =
       CATEGORY_NAME_TO_SLUG[p._category] ||
@@ -847,7 +858,7 @@
     var catDisplay = esc(translateCategory(cat));
     var catEsc = esc(cat);
     var model = esc(p.model || "");
-    var name = esc(_pField(p, "name") || model);
+    var name = esc(tl("product_" + _prodKey(model) + "_name", _pField(p, "name") || model));
     var desc = esc(p.description || p.card_desc || "");
     var img = esc(p._imageUrl);
     var imgSrcset = p._imgSrcset ? ' srcset="' + esc(p._imgSrcset) + '"' : "";

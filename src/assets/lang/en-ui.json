@@ -4292,5 +4292,13 @@
   "product_xc_0006_usage": "Usage: Suitable for restaurant chains, snack shops, canteens, home kitchens, etc.; suitable for slicing various ingredients, thickness adjustable, easy operation. Capacity: Efficient slicing, saves labor.",
   "product_xc_1288_name": "Multi-Function Slicer",
   "product_xc_1288_specifications": "Material: Full aluminum alloy bracket; Rated Power: 200W; Voltage: 220V; Frequency: 50Hz; Blade: Special stainless steel blade, diameter 190mm; Adjustment: 20 gears (1-20mm) thickness adjustment; Motor: Copper wire motor; Operation: Stable low decibel; Applicable: Suitable for both soft and hard ingredients, easily handles various slicing needs",
-  "product_xc_1288_usage": "Usage: Suitable for restaurant chains, hot pot restaurants, canteens, central kitchens, etc.; suitable for slicing fresh meat, frozen meat, and other ingredients, multi-gear thickness adjustment. Capacity: Efficient slicing, meeting the needs of small to medium-sized catering."
+  "product_xc_1288_usage": "Usage: Suitable for restaurant chains, hot pot restaurants, canteens, central kitchens, etc.; suitable for slicing fresh meat, frozen meat, and other ingredients, multi-gear thickness adjustment. Capacity: Efficient slicing, meeting the needs of small to medium-sized catering.",
+  "cases_filter_小型餐饮": "Small F&B",
+  "cases_filter_中央厨房": "Central Kitchen",
+  "cases_filter_连锁餐饮": "Chain Restaurant",
+  "cases_filter_智慧食堂": "Smart Canteen",
+  "cases_filter_云厨房": "Cloud Kitchen",
+  "pd_tier_basic": "Basic",
+  "pd_tier_smart": "Smart",
+  "pd_tier_full_smart": "Full Smart"
 }
