@@ -40,6 +40,14 @@ function _reInjectSrcset(root) {
     辅助系列: "nav_products_other",
   };
 
+  function _prodKey(model) {
+    return (model || "")
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, "_")
+      .replace(/_+/g, "_")
+      .replace(/^_|_$/g, "");
+  }
+
   function translateCategory(cat) {
     var key = CATEGORY_I18N_MAP[cat];
     return key ? tl(key, cat) : cat;
@@ -285,7 +293,9 @@ function _reInjectSrcset(root) {
           (p.category
             ? '<a href="' +
               catHref +
-              '" class="inline-block text-xs font-bold px-2.5 py-1 rounded-full bg-primary/10 text-primary mb-3 hover:bg-primary/20 transition-colors">' +
+              '" class="inline-block text-xs font-bold px-2.5 py-1 rounded-full bg-primary/10 text-primary mb-3 hover:bg-primary/20 transition-colors" data-i18n="' +
+              (CATEGORY_I18N_MAP[p.category] || "") +
+              '">' +
               escHtml(translateCategory(p.category)) +
               "</a>"
             : "") +
@@ -294,7 +304,7 @@ function _reInjectSrcset(root) {
           "</h3>" +
           (typeof getProductField === "function" && getProductField(p, "name")
             ? '<p class="text-sm text-slate-500 dark:text-slate-400 line-clamp-2 mb-4">' +
-              escHtml(getProductField(p, "name")) +
+              escHtml(tl("product_" + _prodKey(p.model) + "_name", getProductField(p, "name") || p.model)) +
               "</p>"
             : '<div class="mb-4"></div>') +
           '<div class="flex justify-between items-center pt-3 border-t border-slate-100 dark:border-slate-700">' +
@@ -380,7 +390,9 @@ function _reInjectSrcset(root) {
           "</div>" +
           '<div class="p-3 sm:p-4">' +
           (p.category
-            ? '<span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-primary/10 text-primary mb-2 inline-block">' +
+            ? '<span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-primary/10 text-primary mb-2 inline-block" data-i18n="' +
+              (CATEGORY_I18N_MAP[p.category] || "") +
+              '">' +
               escHtml(translateCategory(p.category)) +
               "</span>"
             : "") +
@@ -388,7 +400,9 @@ function _reInjectSrcset(root) {
           escHtml(p.model) +
           "</h3>" +
           (typeof getProductField === "function" && getProductField(p, "name")
-            ? '<p class="text-xs text-slate-500 line-clamp-2 mb-3">' + escHtml(getProductField(p, "name")) + "</p>"
+            ? '<p class="text-xs text-slate-500 line-clamp-2 mb-3">' +
+              escHtml(tl("product_" + _prodKey(p.model) + "_name", getProductField(p, "name") || p.model)) +
+              "</p>"
             : '<div class="mb-3"></div>') +
           '<div class="flex justify-between items-center pt-2 border-t border-slate-100">' +
           (p.power
@@ -471,7 +485,9 @@ function _reInjectSrcset(root) {
           "</div>" +
           '<div class="p-3 sm:p-4">' +
           (p.category
-            ? '<span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-primary/10 text-primary mb-2 inline-block">' +
+            ? '<span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-primary/10 text-primary mb-2 inline-block" data-i18n="' +
+              (CATEGORY_I18N_MAP[p.category] || "") +
+              '">' +
               escHtml(translateCategory(p.category)) +
               "</span>"
             : "") +
@@ -479,7 +495,9 @@ function _reInjectSrcset(root) {
           escHtml(p.model) +
           "</h3>" +
           (typeof getProductField === "function" && getProductField(p, "name")
-            ? '<p class="text-xs text-slate-500 line-clamp-2 mb-3">' + escHtml(getProductField(p, "name")) + "</p>"
+            ? '<p class="text-xs text-slate-500 line-clamp-2 mb-3">' +
+              escHtml(tl("product_" + _prodKey(p.model) + "_name", getProductField(p, "name") || p.model)) +
+              "</p>"
             : '<div class="mb-3"></div>') +
           '<div class="flex justify-between items-center pt-2 border-t border-slate-100">' +
           (p.power

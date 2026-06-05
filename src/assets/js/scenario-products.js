@@ -25,6 +25,14 @@ function _reInjectSrcset(root) {
     return fallback || key;
   }
 
+  function _prodKey(model) {
+    return (model || "")
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, "_")
+      .replace(/_+/g, "_")
+      .replace(/^_|_$/g, "");
+  }
+
   function translateCategory(cat) {
     var map = {
       翻炒系列: "nav_products_stirfry",
@@ -264,7 +272,9 @@ function _reInjectSrcset(root) {
           catHref +
           '" class="inline-block ' +
           badgeClass +
-          ' rounded-full bg-primary/10 text-primary hover:bg-primary/20 transition-colors font-bold">' +
+          ' rounded-full bg-primary/10 text-primary hover:bg-primary/20 transition-colors font-bold" data-i18n="' +
+          (CATEGORY_I18N_MAP[p.category] || "") +
+          '">' +
           escHtml(translateCategory(p.category)) +
           "</a>"
         : "") +
@@ -274,7 +284,11 @@ function _reInjectSrcset(root) {
       escHtml(p.model) +
       "</h3>" +
       (typeof getProductField === "function" && getProductField(p, "name")
-        ? '<p class="' + descClass + '">' + escHtml(getProductField(p, "name")) + "</p>"
+        ? '<p class="' +
+          descClass +
+          '">' +
+          escHtml(tl("product_" + _prodKey(p.model) + "_name", getProductField(p, "name") || p.model)) +
+          "</p>"
         : '<div class="mb-4"></div>') +
       '<div class="flex justify-between items-center pt-2 border-t border-slate-100' +
       (isDark ? " dark:border-slate-700" : "") +
