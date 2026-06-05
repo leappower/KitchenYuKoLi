@@ -48,7 +48,7 @@
       '<span class="sup-dropdown-icon">' +
       '<span class="material-symbols-outlined">apps</span>' +
       "</span>" +
-      '<span class="sup-dropdown-label" data-i18n="nav_support_overview">服务与支持总览</span>' +
+      '<span class="sup-dropdown-label" data-i18n="nav_support_overview">Service >服务与支持总览< Support Overview</span>' +
       '<span class="material-symbols-outlined sup-dropdown-chevron">chevron_right</span>' +
       "</a>";
 
@@ -60,7 +60,7 @@
       '<span class="sup-dropdown-icon">' +
       '<span class="material-symbols-outlined">grid_view</span>' +
       "</span>" +
-      '<span class="sup-dropdown-label" data-i18n="nav_support_view_all">查看全部服务</span>' +
+      '<span class="sup-dropdown-label" data-i18n="nav_support_view_all">View All Services</span>' +
       '<span class="material-symbols-outlined sup-dropdown-chevron">chevron_right</span>' +
       "</a>";
 
@@ -130,7 +130,7 @@
       '<span class="sup-dropdown-icon">' +
       '<span class="material-symbols-outlined">apps</span>' +
       "</span>" +
-      '<span class="sup-popup-label" data-i18n="nav_support_overview">服务与支持总览</span>' +
+      '<span class="sup-popup-label" data-i18n="nav_support_overview">Service >服务与支持总览< Support Overview</span>' +
       '<span class="material-symbols-outlined sup-popup-chevron">chevron_right</span>' +
       "</a>";
 
@@ -167,7 +167,7 @@
       '<span class="sup-dropdown-icon">' +
       '<span class="material-symbols-outlined">grid_view</span>' +
       "</span>" +
-      '<span class="sup-popup-label" data-i18n="nav_support_view_all">查看全部服务</span>' +
+      '<span class="sup-popup-label" data-i18n="nav_support_view_all">View All Services</span>' +
       '<span class="material-symbols-outlined sup-popup-chevron">chevron_right</span>' +
       "</a>";
 

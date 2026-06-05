@@ -149,7 +149,7 @@
         '<div class="w-10 h-10 rounded-lg bg-white/20 flex items-center justify-center shrink-0">' +
         WECHAT_ICON +
         "</div>" +
-        '<div class="flex-1"><p class="font-bold text-sm" data-i18n="support_wechat">微信</p><p class="text-xs text-white/80">' +
+        '<div class="flex-1"><p class="font-bold text-sm" data-i18n="support_wechat">WeChat</p><p class="text-xs text-white/80">' +
         cfg.wechat +
         "</p></div>" +
         '<span class="material-symbols-outlined text-white/60 text-lg shrink-0">qr_code_2</span>' +
@@ -161,7 +161,7 @@
       '<div class="w-14 h-14 rounded-full bg-[#07C160] flex items-center justify-center group-hover:scale-110 transition-transform duration-300">' +
       WECHAT_ICON +
       "</div>" +
-      '<h3 class="font-bold text-lg" data-i18n="support_wechat">微信</h3>' +
+      '<h3 class="font-bold text-lg" data-i18n="support_wechat">WeChat</h3>' +
       '<p class="text-sm text-slate-500 dark:text-slate-400 text-center">' +
       cfg.wechat +
       "</p>" +
@@ -237,7 +237,7 @@
         _tel +
         '" class="flex items-center gap-3 p-4 rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 transition-all active:scale-95">' +
         '<div class="w-10 h-10 rounded-lg bg-blue-500/10 flex items-center justify-center shrink-0"><span class="material-symbols-outlined text-blue-500 text-xl">call</span></div>' +
-        '<div class="flex-1"><p class="font-bold text-sm text-slate-900 dark:text-slate-100" data-i18n="support_phone">电话</p><p class="text-xs text-slate-500 dark:text-slate-400">' +
+        '<div class="flex-1"><p class="font-bold text-sm text-slate-900 dark:text-slate-100" data-i18n="support_phone">Phone</p><p class="text-xs text-slate-500 dark:text-slate-400">' +
         cfg.phone +
         "</p></div>" +
         '<span class="material-symbols-outlined text-slate-400 text-lg shrink-0">open_in_new</span>' +
@@ -257,7 +257,7 @@
       '<div class="w-14 h-14 rounded-full bg-blue-500 flex items-center justify-center group-hover:scale-110 transition-transform"><span class="material-symbols-outlined text-white text-2xl">call</span></div>' +
       '<h3 class="font-bold text-lg"' +
       attr(phoneKey) +
-      ' data-i18n="support_phone">电话</h3>' +
+      ' data-i18n="support_phone">Phone</h3>' +
       '<p class="text-sm text-slate-500 dark:text-slate-400 text-center"' +
       attr(phoneDescKey) +
       ">" +

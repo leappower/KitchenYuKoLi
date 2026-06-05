@@ -42,7 +42,7 @@
       '<span class="prod-dropdown-icon">' +
       '<span class="material-symbols-outlined">apps</span>' +
       "</span>" +
-      '<span class="prod-dropdown-label" data-i18n="nav_products_overview">产品中心</span>' +
+      '<span class="prod-dropdown-label" data-i18n="nav_products_overview">Product Center</span>' +
       '<span class="material-symbols-outlined prod-dropdown-chevron">chevron_right</span>' +
       "</a>";
 
@@ -134,7 +134,7 @@
       '<span class="prod-dropdown-icon">' +
       '<span class="material-symbols-outlined">apps</span>' +
       "</span>" +
-      '<span class="prod-popup-label" data-i18n="nav_products_overview">产品中心</span>' +
+      '<span class="prod-popup-label" data-i18n="nav_products_overview">Product Center</span>' +
       '<span class="material-symbols-outlined prod-popup-chevron">chevron_right</span>' +
       "</a>";
 

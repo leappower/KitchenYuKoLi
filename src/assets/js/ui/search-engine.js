@@ -113,7 +113,10 @@
       var translatedCategory = tr(catKey, category) || category;
       // Priority: PDT embedded translation (nameEn) > tr() > fallback to Chinese name
       var lang =
-        (typeof window.translationManager !== "undefined" && window.translationManager.currentLanguage) || localStorage.getItem("userLanguage") || document.documentElement.lang || "en";
+        (typeof window.translationManager !== "undefined" && window.translationManager.currentLanguage) ||
+        localStorage.getItem("userLanguage") ||
+        document.documentElement.lang ||
+        "en";
       var suffix =
         lang.charAt(0).toUpperCase() +
         lang.slice(1).replace(/-([a-z])/g, function (m, c) {
@@ -169,11 +172,11 @@
         // navigator.js renderResults 期望的字段
         type: "product",
         labelKey: "search_type_product",
-        labelFallback: "产品",
+        labelFallback: "Product",
         path: getProductDetailHref(p),
         title: translatedName,
         snippet: (translatedCategory || category) + " · " + model,
-        category: tr("search_type_product", "产品"),
+        category: tr("search_type_product", "Product"),
       });
     });
   }
@@ -199,7 +202,10 @@
     return index.map(function (e) {
       // Determine display title based on current language
       var lang =
-        (typeof window.translationManager !== "undefined" && window.translationManager.currentLanguage) || localStorage.getItem("userLanguage") || document.documentElement.lang || "en";
+        (typeof window.translationManager !== "undefined" && window.translationManager.currentLanguage) ||
+        localStorage.getItem("userLanguage") ||
+        document.documentElement.lang ||
+        "en";
       // 对于 25 种语言，优先使用对应语言的 title/snippet/keywords 字段
       var langPrefix = lang.split("-")[0]; // 'th', 'vi', 'id', 'zh' etc.
       var titleField = "title" + (lang !== "zh-CN" ? langPrefix.charAt(0).toUpperCase() + langPrefix.slice(1) : "");

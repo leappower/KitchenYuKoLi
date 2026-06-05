@@ -226,7 +226,7 @@
       e.preventDefault();
       clearError(form);
 
-      // ── 基础校验：所有 [required] 字段 ──
+      // ── Basic validation: all [required] fields ──
       var requiredEls = form.querySelectorAll("[required]");
       var firstInvalid = null;
       var allValid = true;
@@ -241,7 +241,7 @@
         }
       });
 
-      // email 格式校验
+      // Email format validation
       var emailEl = form.querySelector("#q-email");
       if (emailEl && emailEl.value.trim() && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailEl.value.trim())) {
         emailEl.classList.add("border-red-500", "ring-2", "ring-red-300");
@@ -311,7 +311,7 @@
       ].join(" | ");
 
       var formData = {
-        source: "获取报价",
+        source: "Get Quote",
         country: countryText,
         contact: contact ? contact.value : "",
         company: company ? company.value : "",
@@ -346,8 +346,8 @@
           "...";
       }
 
-      // 提交到 Google Sheets (via GAS Web App)
-      // GAS 不支持 CORS preflight → no-cors + 不设 Content-Type（避开 preflight）
+      // Submit to Google Sheets (via GAS Web App)
+      // GAS doesn't support CORS preflight → no-cors without Content-Type (avoids preflight)
       var GAS_URL =
         "https://script.google.com/macros/s/AKfycbyvtCAQYrK6GDMCiYcT70NQjVITwDk9w_gMAhS9qbN9WyCwxAz2YiaemR4Mbtn1tmkb/exec";
 
@@ -356,7 +356,7 @@
         controller.abort();
       }, 15000);
 
-      // JSON body 但 no-cors + 无自定义 Content-Type = simple request
+      // JSON body but no-cors + no custom Content-Type = simple request
       fetch(GAS_URL, {
         method: "POST",
         mode: "no-cors",
@@ -370,7 +370,7 @@
         })
         .finally(function () {
           clearTimeout(timeout);
-          // 跳转到感谢页（无论成败）
+          // Redirect to thank-you page (success or failure)
           setTimeout(function () {
             if (window.SpaRouter) window.SpaRouter.navigate("/thank-you/");
             else location.href = "/thank-you/";

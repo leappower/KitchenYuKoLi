@@ -972,7 +972,9 @@
     html +=
       '<div class="cs-popup-search-wrap">' +
       '<span class="material-symbols-outlined cs-popup-search-icon">search</span>' +
-      '<input type="text" class="cs-popup-search" placeholder="搜索...">' +
+      '<input type="text" class="cs-popup-search" placeholder="' +
+      window.uiText("search_placeholder", "Search...") +
+      '">' +
       "</div>";
     html += '<div class="cs-popup-list">' + result.inst._buildItemsHTML(data) + "</div>";
     _langPanel.innerHTML = html;
@@ -1026,7 +1028,9 @@
             noRes = document.createElement("div");
             noRes.className = "cs-no-results";
             noRes.textContent =
-              typeof window.t === "function" ? window.uiText("no_matching_results", "无匹配结果") : "无匹配结果";
+              typeof window.t === "function"
+                ? window.uiText("no_matching_results", "No matching results")
+                : "No matching results";
             _langPanel.querySelector(".cs-popup-list").appendChild(noRes);
           }
           noRes.style.display = "";
@@ -1596,7 +1600,9 @@
       var noResEls = document.querySelectorAll(".cs-no-results");
       noResEls.forEach(function (el) {
         el.textContent =
-          typeof window.t === "function" ? window.uiText("no_matching_results", "无匹配结果") : "无匹配结果";
+          typeof window.t === "function"
+            ? window.uiText("no_matching_results", "No matching results")
+            : "No matching results";
       });
     },
     "langChanged:navNoResults"

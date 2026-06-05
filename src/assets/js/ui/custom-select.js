@@ -318,9 +318,9 @@
 
   /* Get display text for current value */
   CustomSelectInstance.prototype.getDisplayTextKey = function () {
-    if (!this.select) return '';
+    if (!this.select) return "";
     var opt = this.select.options[this.select.selectedIndex];
-    return opt ? opt.getAttribute('data-i18n') || '' : '';
+    return opt ? opt.getAttribute("data-i18n") || "" : "";
   };
   CustomSelectInstance.prototype.getDisplayText = function () {
     if (!this.select.value) return this.placeholder || this.getOptions().options[0].text || "";
@@ -434,7 +434,9 @@
     this.trigger.innerHTML =
       '<span class="cs-trigger-text' +
       (isPlaceholder ? " cs-placeholder" : "") +
-      '" data-i18n="' + (this.getDisplayTextKey ? esc(this.getDisplayTextKey()) : '') + '">' +
+      '" data-i18n="' +
+      (this.getDisplayTextKey ? esc(this.getDisplayTextKey()) : "") +
+      '">' +
       esc(displayText) +
       "</span>" +
       '<span class="material-symbols-outlined cs-trigger-chevron">expand_more</span>';
@@ -526,7 +528,9 @@
             noRes = document.createElement("div");
             noRes.className = "cs-no-results";
             noRes.textContent =
-              typeof window.t === "function" ? window.uiText("no_matching_results", "无匹配结果") : "无匹配结果";
+              typeof window.t === "function"
+                ? window.uiText("no_matching_results", "No matching results")
+                : "No matching results";
             panel.appendChild(noRes);
           }
           noRes.style.display = "";
@@ -636,8 +640,9 @@
       var textEl = this.trigger.querySelector(".cs-trigger-text");
       if (textEl) {
         textEl.textContent = isPlaceholder ? this.placeholder || text : text;
-          var _k = this.getDisplayTextKey ? this.getDisplayTextKey() : "";
-          if (_k) textEl.setAttribute("data-i18n", _k); else textEl.removeAttribute("data-i18n");
+        var _k = this.getDisplayTextKey ? this.getDisplayTextKey() : "";
+        if (_k) textEl.setAttribute("data-i18n", _k);
+        else textEl.removeAttribute("data-i18n");
         textEl.className = "cs-trigger-text" + (isPlaceholder ? " cs-placeholder" : "");
       }
     }
@@ -837,7 +842,9 @@
             noRes = document.createElement("div");
             noRes.className = "cs-no-results";
             noRes.textContent =
-              typeof window.t === "function" ? window.uiText("no_matching_results", "无匹配结果") : "无匹配结果";
+              typeof window.t === "function"
+                ? window.uiText("no_matching_results", "No matching results")
+                : "No matching results";
             self._popupPanel.querySelector(".cs-popup-list").appendChild(noRes);
           }
           noRes.style.display = "";
@@ -929,7 +936,8 @@
     if (textEl) {
       textEl.textContent = text;
       var _k2 = this.getDisplayTextKey ? this.getDisplayTextKey() : "";
-          if (_k2) textEl.setAttribute("data-i18n", _k2); else textEl.removeAttribute("data-i18n");
+      if (_k2) textEl.setAttribute("data-i18n", _k2);
+      else textEl.removeAttribute("data-i18n");
       textEl.className = "cs-trigger-text" + (isPlaceholder ? " cs-placeholder" : "");
     }
     // Refresh panel active state
@@ -1062,7 +1070,8 @@
       var isPlaceholder = !inst.select.value;
       textEl.textContent = displayText;
       var _k3 = inst.getDisplayTextKey ? inst.getDisplayTextKey() : "";
-          if (_k3) textEl.setAttribute("data-i18n", _k3); else textEl.removeAttribute("data-i18n");
+      if (_k3) textEl.setAttribute("data-i18n", _k3);
+      else textEl.removeAttribute("data-i18n");
       textEl.className = "cs-trigger-text" + (isPlaceholder ? " cs-placeholder" : "");
       // Also update panel item text from live <option> text
       if (inst.panel) {
@@ -1100,7 +1109,9 @@
     var noResEls = document.querySelectorAll(".cs-no-results");
     noResEls.forEach(function (el) {
       el.textContent =
-        typeof window.t === "function" ? window.uiText("no_matching_results", "无匹配结果") : "无匹配结果";
+        typeof window.t === "function"
+          ? window.uiText("no_matching_results", "No matching results")
+          : "No matching results";
     });
     _refreshDisplayTexts();
   }

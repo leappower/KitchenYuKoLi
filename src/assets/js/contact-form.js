@@ -84,7 +84,7 @@
       }
 
       var formData = {
-        source: "联系我们",
+        source: "Contact Us",
         country: countryText,
         contact: contact ? contact.value : "",
         restaurantType: restaurantText,
@@ -128,11 +128,11 @@
     });
   }
 
-  // 暴露供 quote-form.js 和 SPA router 调用
+  // Exposed for quote-form.js and SPA router
   window.initContactForm = initContactForm;
 
-  // DOMContentLoaded / spa:load 由 quote-form.js 统一管理，
-  // 但作为兜底：如果页面直接加载 contact 且 quote-form.js 未加载
+  // DOMContentLoaded / spa:load is managed by quote-form.js,
+  // but as fallback: if page loads contact directly and quote-form.js is not loaded
   if (document.readyState !== "loading") {
     initContactForm();
   } else {

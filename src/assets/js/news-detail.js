@@ -83,11 +83,11 @@
           '<div class="w-20 h-20 rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center mb-6">' +
           '<span class="material-symbols-outlined text-4xl text-slate-400">article</span>' +
           "</div>" +
-          '<h1 class="text-3xl font-black mb-3" data-i18n="news_not_found_title">文章未找到</h1>' +
-          '<p class="text-slate-500 dark:text-slate-400 mb-8 max-w-md" data-i18n="news_not_found_desc">您查找的文章不存在或已被删除。</p>' +
+          '<h1 class="text-3xl font-black mb-3" data-i18n="news_not_found_title">Article not found</h1>' +
+          '<p class="text-slate-500 dark:text-slate-400 mb-8 max-w-md" data-i18n="news_not_found_desc">The article you are looking for does not exist or has been deleted.</p>' +
           '<a href="/news/" class="inline-flex items-center gap-2 bg-primary text-white px-6 py-3 rounded-xl font-bold hover:shadow-lg hover:shadow-primary/20 transition-all">' +
           '<span class="material-symbols-outlined">arrow_back</span>' +
-          '<span data-i18n="news_not_found_back">返回新闻</span>' +
+          '<span data-i18n="news_not_found_back">Back to News</span>' +
           "</a>" +
           "</div>";
       }
