@@ -1,4 +1,8 @@
 /* global getProductField */
+function _reInjectSrcset(root) {
+  var m = window.app && window.app.modules && window.app.modules.get("lazyLoading");
+  if (m && typeof m.reInjectSrcset === "function") m.reInjectSrcset(root);
+}
 /**
  * home-core-products.js — Dynamic Home Core Products renderer
  *
@@ -98,7 +102,10 @@
   })();
 
   function getProductDetailHref(product) {
-    var slug = CATEGORY_NAME_TO_SLUG[product.category] || (window.MODEL_TO_SLUG && window.MODEL_TO_SLUG[product.model]) || encodeURIComponent(product.model);
+    var slug =
+      CATEGORY_NAME_TO_SLUG[product.category] ||
+      (window.MODEL_TO_SLUG && window.MODEL_TO_SLUG[product.model]) ||
+      encodeURIComponent(product.model);
     return "/products/" + slug + "/" + encodeURIComponent(product.model) + "/";
   }
 
@@ -325,6 +332,7 @@
       }
 
       container.innerHTML = html;
+      _reInjectSrcset(container);
 
       // Trigger i18n if available
       if (window.translationManager && window.translationManager.applyTo) {
@@ -416,6 +424,7 @@
       }
 
       container.innerHTML = html;
+      _reInjectSrcset(container);
 
       if (window.translationManager && window.translationManager.applyTo) {
         window.translationManager.applyTo(container);
@@ -504,6 +513,7 @@
         html += "</div>";
       }
       html += "</div>";
+      _reInjectSrcset(container);
       container.innerHTML = html;
 
       if (window.translationManager && window.translationManager.applyTo) {

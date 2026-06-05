@@ -4,7 +4,11 @@
    ═══════════════════════════════════════════════════ */
 
 (function () {
-  "use strict";
+  function _reInjectSrcset(root) {
+    var m = window.app && window.app.modules && window.app.modules.get("lazyLoading");
+    if (m && typeof m.reInjectSrcset === "function") m.reInjectSrcset(root);
+  }
+  ("use strict");
 
   var _spaRegs = {};
   function _spaOn(tgt, evt, fn, key) {
@@ -455,6 +459,7 @@
     }
     container.innerHTML = html;
 
+    _reInjectSrcset(container);
     // Update count — use i18n format
     var countEl = document.getElementById("case-count");
     if (countEl) {

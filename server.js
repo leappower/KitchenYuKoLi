@@ -635,7 +635,7 @@ app.get("*", (req, res) => {
   // Device-aware delivery: inject ssg-device meta so client-side redirect skips
   // Note: index-mobile.html and index-tablet.html do NOT end with 'index.html',
   // so we must check the full filename pattern, not filter by endsWith first.
-  if (/index-(mobile|tablet)\.html$/.test(resolved)) {
+  if (/index-(mobile|tablet|pc)\.html$/.test(resolved)) {
     var content = fs.readFileSync(resolved, "utf-8");
     content = content.replace("<head>", '<head><meta name="ssg-device" content="1"/>');
     res.setHeader("Cache-Control", "no-store, no-cache, must-revalidate");

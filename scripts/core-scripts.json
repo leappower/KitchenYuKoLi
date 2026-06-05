@@ -27,6 +27,7 @@
         "assets/js/swup.min.js",
         "assets/js/swup-head-plugin.min.js",
         "assets/js/swup-preload-plugin.min.js",
+        "assets/js/main.js",
         "assets/js/spa-router.js"
     ],
     "pageSpecific": {

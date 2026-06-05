@@ -1252,3 +1252,13 @@ function main() {
 }
 
 main();
+
+// ─── 拷贝 srcset manifest 到 dist ──────────────────────────────
+(function () {
+  var src = path.join(__dirname, '..', 'src', 'assets', 'js', '_srcset-manifest.json');
+  var dst = path.join(__dirname, '..', 'dist', 'assets', 'js', '_srcset-manifest.json');
+  if (fs.existsSync(src)) {
+    fs.copyFileSync(src, dst);
+    console.log('✅ srcset manifest → dist/assets/js/_srcset-manifest.json');
+  }
+})();

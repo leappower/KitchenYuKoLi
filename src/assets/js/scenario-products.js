@@ -4,7 +4,10 @@
  * 从 HTML 容器的 data-scenario / data-device 属性读取场景和设备信息，
  * 不依赖 URL 正则匹配，不依赖 window.innerWidth。
  *
- * 数据源: window.PRODUCT_DATA_TABLE (product-data-table.js SSG 时注入)
+function _reInjectSrcset(root) {
+  var m = window.app && window.app.modules && window.app.modules.get("lazyLoading");
+  if (m && typeof m.reInjectSrcset === "function") m.reInjectSrcset(root);
+} * 数据源: window.PRODUCT_DATA_TABLE (product-data-table.js SSG 时注入)
  * 产品列表: SCENARIO_PRODUCTS 映射表 (场景 key → 产品型号数组)
  */
 (function () {
@@ -294,10 +297,8 @@
 
   function render(container, products, device) {
     if (!products || products.length === 0) {
-      container.innerHTML =
-        '<div class="text-center text-slate-400 py-8">' +
-        escHtml(tl("no_scenario_products", "暂无场景产品数据")) +
-        "</div>";
+      container.innerHTML = '<div class="text-center text-slate-400 py-8">' + _reInjectSrcset(container);
+      escHtml(tl("no_scenario_products", "暂无场景产品数据")) + "</div>";
       return;
     }
 
@@ -342,6 +343,7 @@
 
     container.innerHTML = html;
     if (window.translationManager && window.translationManager.applyTo) {
+      _reInjectSrcset(container);
       window.translationManager.applyTo(container);
     }
   }
