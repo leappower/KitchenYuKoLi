@@ -973,8 +973,18 @@
     _shownCount[containerId] = initial;
     var html = products.slice(0, initial).map(renderer).join("");
     container.innerHTML = html;
-    if (window.translationManager && typeof window.translationManager.applyTo === "function")
-      window.translationManager.applyTo(container);
+    if (window.translationManager) {
+      var applyFn = function () {
+        if (typeof window.translationManager.applyTo === "function") {
+          window.translationManager.applyTo(container);
+        }
+      };
+      if (window.translationManager.ready && typeof window.translationManager.ready.then === "function") {
+        window.translationManager.ready.then(applyFn);
+      } else {
+        applyFn();
+      }
+    }
     updateLoadMoreBtn(containerId, total, initial);
     bindLoadMore(containerId, renderer);
     // Init floating bar after grid render

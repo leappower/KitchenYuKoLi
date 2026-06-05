@@ -345,7 +345,15 @@ function _reInjectSrcset(root) {
       _reInjectSrcset(container);
 
       // Trigger i18n if available
-      if (window.translationManager && window.translationManager.applyTo) {
+      if (
+        window.translationManager &&
+        window.translationManager.ready &&
+        typeof window.translationManager.ready.then === "function"
+      ) {
+        window.translationManager.ready.then(function () {
+          if (typeof window.translationManager.applyTo === "function") window.translationManager.applyTo(container);
+        });
+      } else if (window.translationManager && typeof window.translationManager.applyTo === "function") {
         window.translationManager.applyTo(container);
       }
     });

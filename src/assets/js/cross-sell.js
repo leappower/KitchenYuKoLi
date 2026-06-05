@@ -575,8 +575,18 @@ function _reInjectSrcset(root) {
         var crossSellHtml = renderCrossSell(slug);
         if (crossSellHtml) {
           _reInjectSrcset(crossSellContainer);
-          if (window.translationManager && typeof window.translationManager.applyTo === "function")
-            window.translationManager.applyTo(crossSellContainer);
+          if (window.translationManager) {
+            var applyFn = function () {
+              if (typeof window.translationManager.applyTo === "function") {
+                window.translationManager.applyTo(crossSellContainer);
+              }
+            };
+            if (window.translationManager.ready && typeof window.translationManager.ready.then === "function") {
+              window.translationManager.ready.then(applyFn);
+            } else {
+              applyFn();
+            }
+          }
           crossSellContainer.innerHTML = crossSellHtml;
         }
         /* else: no cross-sell, container stays hidden */

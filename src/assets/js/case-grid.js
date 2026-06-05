@@ -462,6 +462,18 @@
     container.innerHTML = html;
 
     _reInjectSrcset(container);
+    if (window.translationManager) {
+      var applyFn = function () {
+        if (typeof window.translationManager.applyTo === "function") {
+          window.translationManager.applyTo(container);
+        }
+      };
+      if (window.translationManager.ready && typeof window.translationManager.ready.then === "function") {
+        window.translationManager.ready.then(applyFn);
+      } else {
+        applyFn();
+      }
+    }
     // Update count — use i18n format
     var countEl = document.getElementById("case-count");
     if (countEl) {

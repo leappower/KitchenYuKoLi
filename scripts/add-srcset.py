@@ -106,8 +106,19 @@ def process_html(filepath, manifest, rebuild=False):
     skipped = 0
     warnings = 0
 
+    # Track onerror ranges so we can skip <img> tags embedded inside them
+    onerror_ranges = []
+    for m in re.finditer(r'onerror\s*=\s*(["\'])([\s\S]*?)\1', content, re.IGNORECASE):
+        onerror_ranges.append((m.start(), m.end()))
+
     def replace_img(match):
         nonlocal changes, skipped, warnings
+
+        # Skip <img> tags embedded inside onerror attributes
+        if any(s <= match.start() <= e for s, e in onerror_ranges):
+            skipped += 1
+            return match.group(0)
+
         tag_start = match.group(1)
         tag_end = match.group(2)
         tag_text = match.group(0)
