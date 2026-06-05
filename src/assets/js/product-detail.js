@@ -21,6 +21,31 @@
     return (model || "").toLowerCase().replace(/[^a-z0-9]+/g, "_").replace(/_+/g, "_").replace(/^_|_$/g, "");
   }
 
+  var CATEGORY_I18N_MAP = {
+    翻炒系列: "nav_products_stirfry",
+    炖煮系列: "nav_products_stewing",
+    蒸煮系列: "nav_products_steaming",
+    煎炸系列: "nav_products_frying",
+    切配系列: "nav_products_cutting",
+    辅助系列: "nav_products_other",
+  };
+
+  function translateCategory(cat) {
+    var key = CATEGORY_I18N_MAP[cat];
+    return key ? tl(key, cat) : cat;
+  }
+
+  var TIER_I18N_MAP = {
+    基础: "tier_basic",
+    智能: "tier_smart",
+    全智能: "tier_full_smart",
+  };
+
+  function translateTier(tier) {
+    var key = TIER_I18N_MAP[tier];
+    return key ? tl(key, tier) : tier;
+  }
+
   
 
   // Category slugs used for product listing — NOT PDP pages
