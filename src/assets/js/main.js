@@ -119,7 +119,7 @@
     if (img.getAttribute("srcset")) {
       // Already has srcset — only fill in sizes if missing
       if (!img.getAttribute("sizes")) {
-        var dev = document.documentElement.dataset.device || "";
+        var dev = (window.DeviceUtils && window.DeviceUtils.getDeviceType()) || "pc";
         img.setAttribute("sizes", SIZES_MAP[dev] || "calc(100vw - 32px)");
       }
       return;
@@ -132,7 +132,7 @@
 
     var base = src.replace(/\.(webp|png|jpg|jpeg|avif)$/i, "");
     var ext = src.match(/\.(webp|png|jpg|jpeg|avif)$/i)[0];
-    var dev = document.documentElement.dataset.device || "";
+    var dev = (window.DeviceUtils && window.DeviceUtils.getDeviceType()) || "pc";
 
     // Manifest-driven: only inject widths that actually exist on disk
     var manifest = window.__SRCSET_MANIFEST__ || _manifest;
