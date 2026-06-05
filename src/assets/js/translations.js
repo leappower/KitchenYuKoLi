@@ -311,6 +311,40 @@
       var a = this.getFallbackTranslation(t);
       return a && a !== t ? a : e;
     }),
+    (r.prototype.applyTo = function (root) {
+      var t = this;
+      var uiKey = "ui-" + t.currentLanguage;
+      var e = t.translationsCache.get(uiKey) || {};
+      var s = t.translationsCache.get("product-" + t.currentLanguage) || {};
+      var en = t.translationsCache.get("ui-en") || {};
+      var pEn = t.translationsCache.get("product-en") || {};
+      var merged = Object.assign({}, en, pEn, e, s);
+      var resolve = function (key) {
+        var v = t.resolveTranslationValue(merged, key);
+        return v && v !== key ? v : null;
+      };
+      root.querySelectorAll("[data-i18n]").forEach(function (el) {
+        if (el.id === "current-lang-label") return;
+        var key = el.getAttribute("data-i18n");
+        var val = resolve(key);
+        if (val) el.textContent = val;
+      });
+      root.querySelectorAll("[data-i18n-placeholder]").forEach(function (el) {
+        var key = el.getAttribute("data-i18n-placeholder");
+        var val = resolve(key);
+        if (val) el.setAttribute("placeholder", val);
+      });
+      root.querySelectorAll("[data-i18n-aria]").forEach(function (el) {
+        var key = el.getAttribute("data-i18n-aria");
+        var val = resolve(key);
+        if (val) el.setAttribute("aria-label", val);
+      });
+      root.querySelectorAll("[data-i18n-alt]").forEach(function (el) {
+        var key = el.getAttribute("data-i18n-alt");
+        var val = resolve(key);
+        if (val) el.setAttribute("alt", val);
+      });
+    }),
     (r.prototype.applyTranslations = function () {
       var t = this,
         e = "ui-" + this.currentLanguage;
