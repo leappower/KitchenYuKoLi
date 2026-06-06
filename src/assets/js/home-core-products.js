@@ -364,7 +364,7 @@ function _reInjectSrcset(root) {
         html += '<div class="flex justify-center mt-10">';
         html +=
           "<button id=\"hcp-toggle-pc\" onclick=\"(function(){var h=document.getElementById('hcp-hidden-pc'),b=document.getElementById('hcp-toggle-pc');if(h.style.display==='none'){h.style.display='';b.textContent=typeof window.uiText==='function'?window.uiText('home_hw_collapse','Collapse ▲'):'Collapse ▲'}else{h.style.display='none';b.textContent=typeof window.uiText==='function'?window.uiText('home_hw_show_more','View More Products ▼'):'View More Products ▼'}})()\" class=\"px-8 py-3 rounded-full border-2 border-primary text-primary font-bold hover:bg-primary hover:text-white transition-all cursor-pointer\" data-i18n=\"home_hw_show_more\">" +
-          tl("home_hw_show_more", "查看更多产品 ▼") +
+          tl("home_hw_show_more", "View More Products ▼") +
           "</button>";
         html += "</div>";
       }
@@ -472,7 +472,7 @@ function _reInjectSrcset(root) {
         html += '<div class="flex justify-center mt-8">';
         html +=
           "<button id=\"hcp-toggle-tablet\" onclick=\"(function(){var h=document.getElementById('hcp-hidden-tablet'),b=document.getElementById('hcp-toggle-tablet');if(h.style.display==='none'){h.style.display='';b.textContent=typeof window.uiText==='function'?window.uiText('home_hw_collapse','Collapse ▲'):'Collapse ▲'}else{h.style.display='none';b.textContent=typeof window.uiText==='function'?window.uiText('home_hw_show_more','View More Products ▼'):'View More Products ▼'}})()\" class=\"px-6 py-2.5 rounded-full border-2 border-primary text-primary font-bold hover:bg-primary hover:text-white transition-all cursor-pointer text-sm\" data-i18n=\"home_hw_show_more\">" +
-          tl("home_hw_show_more", "查看更多产品 ▼") +
+          tl("home_hw_show_more", "View More Products ▼") +
           "</button>";
         html += "</div>";
       }
@@ -566,7 +566,7 @@ function _reInjectSrcset(root) {
         html +=
           "<button id=\"hcp-load-more-mobile\" class=\"w-full py-2.5 rounded-xl border border-slate-300  text-sm font-bold text-primary hover:bg-primary hover:text-white hover:border-primary transition-all flex items-center justify-center gap-2\" data-i18n=\"home_show_more\" onclick=\"(function(){var b=document.getElementById('hcp-hidden-mobile');var btn=document.getElementById('hcp-load-more-mobile');if(b&&btn){b.style.display='';btn.style.display='none';window.translationManager&&window.translationManager.applyTo(b.parentElement);}})()\">" +
           '<span class="material-symbols-outlined text-lg">expand_more</span> ' +
-          escHtml(tl("home_show_more", "更多产品")) +
+          escHtml(tl("home_show_more", "More Products")) +
           "</button>";
         html += '<div id="hcp-hidden-mobile" style="display:none" class="flex flex-col gap-3">';
         restProducts.forEach(function (p) {

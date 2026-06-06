@@ -355,15 +355,15 @@ function _reInjectSrcset(root) {
           hiddenId +
           "');var b=document.getElementById('scenario-load-more');if(h&&b){h.style.display='';b.style.display='none';window.translationManager&&window.translationManager.applyTo(h.parentElement);}})()\">" +
           '<span class="material-symbols-outlined text-lg">expand_more</span> ' +
-          escHtml(tl("home_show_more", "更多产品")) +
+          escHtml(tl("home_show_more", "More Products")) +
           "</button>";
       } else {
         html +=
           '<div class="flex justify-center mt-8">' +
           '<button class="px-6 py-2.5 rounded-full border-2 border-primary text-primary font-bold hover:bg-primary hover:text-white transition-all cursor-pointer text-sm" onclick="(function(){var h=document.getElementById(\'' +
           hiddenId +
-          "');var b=this;if(h.style.display==='none'){h.style.display='';b.textContent=typeof window.uiText==='function'?window.uiText('home_hw_collapse','收起 ▲'):'收起 ▲'}else{h.style.display='none';b.textContent=typeof window.uiText==='function'?window.uiText('home_hw_show_more','查看更多产品 ▼'):'查看更多产品 ▼'}})()\" data-i18n=\"home_hw_show_more\">" +
-          tl("home_hw_show_more", "查看更多产品 ▼") +
+          "');var b=this;if(h.style.display==='none'){h.style.display='';b.textContent=typeof window.uiText==='function'?window.uiText('home_hw_collapse','Collapse ▲'):'Collapse ▲'}else{h.style.display='none';b.textContent=typeof window.uiText==='function'?window.uiText('home_hw_show_more','View More Products ▼'):'View More Products ▼'}})()\" data-i18n=\"home_hw_show_more\">" +
+          tl("home_hw_show_more", "View More Products ▼") +
           "</button></div>";
       }
     }
