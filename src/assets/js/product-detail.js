@@ -890,7 +890,9 @@
       // Info column
       '<div class="lg:w-1/2 flex flex-col gap-5"><div>' +
       '<div class="flex items-center gap-3 mb-2">' +
-      '<span class="text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">' +
+      '<span class="text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400" data-i18n="' +
+      esc(getSubCatI18nKey(product)) +
+      '">' +
       esc(translateSubCategory(product) || getCategoryName(product)) +
       "</span>" +
       badge +
@@ -1015,6 +1017,41 @@
     return key;
   }
 
+  // Get i18n key for subCategory (for data-i18n on PDP subcategory span)
+  function getSubCatI18nKey(product) {
+    var subCat = product.subCategory;
+    if (!subCat) return "";
+    var cat = product.category || "";
+    var slug = CATEGORY_NAME_TO_SLUG[cat] || "other";
+    var enSlug = (SUBCAT_EN_SLUG || {})[subCat] || subCat.replace(/\//g, "_");
+    return "product_subcat_" + slug + "_" + enSlug;
+  }
+
+  var SUBCAT_EN_SLUG = {
+    搅拌炒菜机: "stirring_cooker",
+    滚筒炒菜机: "drum_cooker",
+    团餐滚筒炒菜机: "catering_drum_wok",
+    "搅拌炒锅/炖烩机": "stirfry_pot_stewing",
+    汤锅: "stock_pot",
+    压力锅: "pressure_cooker",
+    煮面炉: "noodle_cooker",
+    煲仔炉: "clay_pot_cooker",
+    卤煮炉: "braising_stew_pot",
+    智能蒸饭机: "smart_rice_steamer",
+    "自动漂烫/焯水/油炸机": "blanching_scalding_frying",
+    油炸炉: "deep_fryer",
+    锅贴机: "pot_sticker",
+    流水化自动机: "automated_inline",
+    揭盖式洗碗机: "lift_lid_dishwasher",
+    长龙洗碗机: "long_conveyor_dishwasher",
+    切菜机: "vegetable_cutting",
+    切肉机: "meat_cutting",
+    锯骨机: "bone_saw",
+    切丁机: "dicing",
+    切片机: "slicing",
+    绞肉机: "meat_grinder",
+  };
+
   // Get translated category name (from UI i18n, not product_translations)
   function getCategoryName(product) {
     var cat = product.category || product.categoryName || "";
@@ -1053,6 +1090,8 @@
     滚筒炒菜机: "Drum Stir-Fry Machine",
     团餐滚筒炒菜机: "Catering Drum Wok",
     搅拌炒锅炖烩机: "Stir-fry Pot / Stewing Machine",
+    "搅拌炒锅/炖烩机": "Stir-fry Pot / Stewing Machine",
+    "自动漂烫/焯水/油炸机": "Automatic Blanching / Scalding / Frying Machine",
     汤锅: "Stock Pot",
     压力锅: "Pressure Cooker",
     煮面炉: "Noodle Cooker",
