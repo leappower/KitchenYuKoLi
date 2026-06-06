@@ -71,12 +71,30 @@ products.forEach(product => {
   
   try {
     fs.mkdirSync(dir, { recursive: true });
-    // 写入 SPA shell
-    fs.writeFileSync(path.join(dir, 'index.html'), spaShell);
+    // 注入产品 SEO meta 到 SPA shell
+    var productName = product.name || product.model;
+    var productDescription = product.description || product.specifications || '';
+    var cleanDesc = productName.replace(/\s+/g, ' ').substring(0, 80);
+    var seoTitle = cleanDesc + ' | YuKoLi Smart Commercial Kitchen';
+    var seoDesc = (productDescription.replace(/\s+/g, ' ').substring(0, 150) || 
+      'YuKoLi ' + (product.category || '') + ' ' + productName + ' — 查看规格、亮点和方案。');
+    
+    var html = spaShell
+      .replace(/<title>[^<]*<\/title>/, '<title>' + escHtml(seoTitle) + '</title>')
+      .replace(/<meta\s+name="description"[^>]*>/, '<meta name="description" content="' + escHtml(seoDesc) + '">')
+      .replace(/property="og:title"[^>]*>/, 'property="og:title" content="' + escHtml(seoTitle) + '">')
+      .replace(/property="og:description"[^>]*>/, 'property="og:description" content="' + escHtml(seoDesc) + '">');
+    
+    fs.writeFileSync(path.join(dir, 'index.html'), html);
     generated++;
   } catch (e) {
     console.error('[spa-routes] Failed to create', dir, ':', e.message);
     errors++;
+  }
+
+  function escHtml(str) {
+    if (!str) return '';
+    return String(str).replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/'/g, '&#39;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
   }
 });
 
