@@ -689,6 +689,7 @@
         clearBtn.addEventListener("click", function () {
           searchInput.value = "";
           updateClearVisibility();
+          searchInput.dispatchEvent(new Event("input", { bubbles: true }));
           searchInput.focus();
         });
       }
