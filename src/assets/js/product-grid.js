@@ -1330,21 +1330,22 @@
 
   // Resolve initial category from URL for SSG page loads (e.g. /products/cutting/ → "nav_products_cutting")
   // This runs before autoRender so the first render filters correctly.
+  // Build slug→name lookup for URL-based category selection
+  var SLUG_TO_CATEGORY = {};
+  Object.keys(CATEGORY_NAME_TO_SLUG).forEach(function (name) {
+    SLUG_TO_CATEGORY[CATEGORY_NAME_TO_SLUG[name]] = name;
+  });
+
   (function initCategoryFromUrl() {
     var match = window.location.pathname.match(/^\/products\/([^/]+)\/$/);
     if (match) {
       var slug = match[1];
-      var SLUG_MAP = {
-        all: "all",
-        cutting: "切配系列",
-        stirfry: "翻炒系列",
-        frying: "煎炸系列",
-        stewing: "炖煮系列",
-        steaming: "蒸煮系列",
-        other: "辅助系列",
-      };
-      var cat = SLUG_MAP[slug];
-      if (cat) _activeCategory = cat;
+      // Use slug directly — getFilteredProducts compares against _categorySlug
+      if (slug === "all") {
+        _activeCategory = "all";
+      } else if (SLUG_TO_CATEGORY[slug]) {
+        _activeCategory = slug;
+      }
     }
   })();
 
