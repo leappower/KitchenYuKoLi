@@ -125,9 +125,10 @@
       var e = this;
       return this.loadUITranslations(t)
         .then(function (n) {
-          return Promise.all([e.loadProductTranslations(t), e.loadProductJson(t)]).then(function (a) {
-            var o = e.mergeTranslations(n, a[0]);
-            o = e.mergeTranslations(o, a[1]);
+          return e.loadProductTranslations(t).then(function (pt) {
+            // loadProductTranslations now fetches {lang}-product.json internally
+            // and caches it. Merge flat UI + flat product JSON.
+            var o = e.mergeTranslations(n, pt);
             return (e.translationsCache.set(t, o), o);
           });
         })
@@ -195,53 +196,66 @@
         "[i18n] loadUITranslations timeout for " + t
       );
     }),
+    /* global PRODUCT_DATA_TABLE */
     (r.prototype.loadProductTranslations = function (lang) {
       var e = "product-" + lang;
       if (this.translationsCache.has(e)) return Promise.resolve(this.translationsCache.get(e));
       var n = this;
-      // Extract product translations from the already-loaded PRODUCT_DATA_TABLE
-      // (translations are embedded as nameEn, specificationsEn, etc. on each product)
-      return Promise.resolve().then(function () {
-        var suffix =
-          lang.charAt(0).toUpperCase() +
-          lang.slice(1).replace(/-([a-z])/g, function (m, c) {
-            return c.toUpperCase();
-          });
+      if (lang === "zh-CN" || lang === "zh") {
+        window._productTranslationsByModel = {};
+        n.translationsCache.set(e, {});
+        return Promise.resolve({});
+      }
+      // Helper: convert flat JSON keys (product_{key}_{field}) → { model: { field: val } }
+      function _prodKey(m) {
+        return (m || "")
+          .toLowerCase()
+          .replace(/[^a-z0-9]+/g, "_")
+          .replace(/_+/g, "_")
+          .replace(/^_|_$/g, "");
+      }
+      function _buildModelMap(json) {
         var table = window.PRODUCT_DATA_TABLE || [];
-        var map = {};
-        var fields = [
-          "name",
-          "specifications",
-          "usage",
-          "throughput",
-          "material",
-          "sub_category",
-          "tier",
-          "badge",
-          "control_method",
-          "product_dimensions",
-          "color",
-        ];
+        var modelMap = {};
         table.forEach(function (cat) {
-          var prods = cat.products || [];
-          prods.forEach(function (p) {
-            var pid = p._productId || p.id;
-            if (!pid) return;
-            var entry = {};
-            fields.forEach(function (f) {
-              var val = p[f + suffix];
-              if (val) entry[f] = val;
-            });
-            if (Object.keys(entry).length > 0) map[pid] = entry;
+          (cat.products || []).forEach(function (p) {
+            if (!p.model) return;
+            var k = _prodKey(p.model);
+            if (k) modelMap[k] = p.model;
           });
         });
-        if (Object.keys(map).length === 0 && lang !== "zh-CN") {
-          console.warn("[i18n] loadProductTranslations: no embedded translations for " + lang);
-        }
-        n.translationsCache.set(e, map);
-        window._productTranslations = map;
-        return map;
-      });
+        var byModel = {};
+        Object.keys(json || {}).forEach(function (key) {
+          var m = key.match(
+            /^product_([a-z0-9]+(?:_[a-z0-9]+)*)_(name|specifications|usage|throughput|material|sub_category|tier|badge|control_method|product_dimensions|color|highlights)$/i
+          );
+          if (!m) return;
+          var mk = m[1],
+            f = m[2].toLowerCase(),
+            model = modelMap[mk];
+          if (!model) return;
+          if (!byModel[model]) byModel[model] = {};
+          byModel[model][f] = json[key];
+        });
+        return byModel;
+      }
+      // Fetch {lang}-product.json
+      return n
+        .loadProductJson(lang)
+        .then(function (json) {
+          // Build model-based map for getProductField()
+          var byModel = _buildModelMap(json);
+          window._productTranslationsByModel = byModel;
+          // Cache the raw flat JSON so applyTranslations() can resolve data-i18n keys
+          n.translationsCache.set(e, json || {});
+          return json || {};
+        })
+        .catch(function (err) {
+          console.warn("[i18n] loadProductTranslations: FAILED for " + lang + ":", err);
+          window._productTranslationsByModel = {};
+          n.translationsCache.set(e, {});
+          return {};
+        });
     }),
     (r.prototype.mergeTranslations = function (t, e) {
       return Object.assign({}, t, e);
@@ -312,7 +326,6 @@
       return a && a !== t ? a : e;
     }),
     (r.prototype.applyTo = function (root) {
-      console.log("[i18n] applyTo called, root:", root && root.id, "currentLang:", this.currentLanguage, "cacheSize:", this.translationsCache.size);
       var t = this;
       var uiKey = "ui-" + t.currentLanguage;
       var e = t.translationsCache.get(uiKey) || {};
@@ -772,7 +785,7 @@
           .then(function () {
             ((document.documentElement.lang = e.currentLanguage),
               (e.isInitialized = !0),
-              console.log("[i18n] ready resolving, lang:", e.currentLanguage), e._readyResolve && e._readyResolve(e),
+              e._readyResolve && e._readyResolve(e),
               e.emit("initialized", {
                 language: e.currentLanguage,
               }),

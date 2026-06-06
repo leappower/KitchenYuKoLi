@@ -69,7 +69,9 @@ function _reInjectSrcset(root) {
     return "/products/" + encodeURIComponent(product.model) + "/";
   }
 
-  if (typeof getProductField === "undefined") {
+  // Only define fallback if utils.js getProductField hasn't been loaded
+  // (utils.js is loaded before scenario-products.js via script tags)
+  if (typeof window.getProductField !== "function") {
     window.getProductField = function (p, field) {
       if (!p) return "";
       if (field === "name") return p.name_en || p.name || "";

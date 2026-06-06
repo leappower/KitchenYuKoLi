@@ -18,7 +18,11 @@
   }
 
   function _prodKey(model) {
-    return (model || "").toLowerCase().replace(/[^a-z0-9]+/g, "_").replace(/_+/g, "_").replace(/^_|_$/g, "");
+    return (model || "")
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, "_")
+      .replace(/_+/g, "_")
+      .replace(/^_|_$/g, "");
   }
 
   var CATEGORY_I18N_MAP = {
@@ -45,8 +49,6 @@
     var key = TIER_I18N_MAP[tier];
     return key ? tl(key, tier) : tier;
   }
-
-  
 
   // Category slugs used for product listing — NOT PDP pages
   var CATEGORY_SLUGS = ["all", "cutting", "stirfry", "frying", "stewing", "steaming", "other"];
@@ -225,10 +227,7 @@
   }
 
   function tl(key, fallback) {
-    if (typeof window.t === "function") {
-      var result = window.t(key);
-      if (result && result !== key) return result;
-    }
+    if (typeof window.uiText === "function") return window.uiText(key, fallback);
     return fallback || key;
   }
 
@@ -324,7 +323,9 @@
       '" onerror="this.style.display=\'none\'">' +
       '</div><div class="p-4"><h4 class="font-bold text-sm mb-1">' +
       esc(rp.model) +
-      '</h4><p class="text-xs text-slate-500 dark:text-slate-400 mb-2">' +
+      '</h4><p class="text-xs text-slate-500 dark:text-slate-400 mb-2" data-i18n="' +
+      esc(getCategoryI18nKey(rp)) +
+      '">' +
       esc(getCategoryName(rp)) +
       '</p><span class="inline-flex items-center gap-1 text-sm font-bold text-primary group-hover:gap-2 transition-all">' +
       tl("btn_view_details", "查看详情") +
@@ -644,7 +645,6 @@
         (badgeHtml ? badgeHtml : "") +
         (badgeHtml ? chevron : "") +
         '<li><span class="text-slate-900 dark:text-white font-medium">' +
-
         esc(tl("product_" + _prodKey(model) + "_name", getProductField(product, "name") || model)) +
         "</span></li>" +
         "</ol></nav></div>";
@@ -992,20 +992,35 @@
     if (!/^\/products\/[^/]+\/[^/]+\/$/.test(path)) return;
     renderPDP();
   });
+  // Get the i18n key for a product's category (for data-i18n attributes)
+  function getCategoryI18nKey(product) {
+    var cat = product.category || product.categoryName || "";
+    if (!cat) return "";
+    var key = CATEGORY_I18N_MAP[cat];
+    // fallback: 通过 model 从 MODEL_TO_SLUG 反查标准分类名
+    if (!key && product.model && window.MODEL_TO_SLUG) {
+      var slug = window.MODEL_TO_SLUG[product.model];
+      if (slug) {
+        var slugToName = {
+          stirfry: "nav_products_stirfry",
+          cutting: "nav_products_cutting",
+          frying: "nav_products_frying",
+          stewing: "nav_products_stewing",
+          steaming: "nav_products_steaming",
+          other: "nav_products_other",
+        };
+        key = slugToName[slug] || "";
+      }
+    }
+    return key;
+  }
+
   // Get translated category name (from UI i18n, not product_translations)
   function getCategoryName(product) {
     var cat = product.category || product.categoryName || "";
     if (!cat) return "";
     // Priority: product._categoryName (enriched from parent) > i18n translate > product.categoryName > raw key
     if (product._categoryName) return product._categoryName;
-    var CATEGORY_I18N_MAP = {
-      翻炒系列: "nav_products_stirfry",
-      炖煮系列: "nav_products_stewing",
-      蒸煮系列: "nav_products_steaming",
-      煎炸系列: "nav_products_frying",
-      切配系列: "nav_products_cutting",
-      辅助系列: "nav_products_other",
-    };
     var i18nKey = CATEGORY_I18N_MAP[cat];
     // fallback: 通过 model 从 MODEL_TO_SLUG 反查标准分类名
     if (!i18nKey && product.model && window.MODEL_TO_SLUG) {
@@ -1076,16 +1091,23 @@
   // Load translations for a language by fetching {lang}-product.json
   window.loadProductTranslations = function (lang, callback) {
     var normalizedLang = lang.replace("_", "-");
-    // zh-CN uses product-data-table directly (Chinese is the source)
     if (normalizedLang === "zh-CN" || normalizedLang === "zh") {
-      window._productTranslations = {};
       window._productTranslationsByModel = {};
       if (callback) callback();
       return;
     }
-    // Fetch {lang}-product.json
-    var baseUrl = (window.BASE_PATH || "") + "/assets/lang/";
-    var url = baseUrl + normalizedLang + "-product.json";
+    // Priority 1: translations.js already loaded and cached
+    if (window.translationManager) {
+      var cached = window.translationManager.translationsCache.get("product-" + normalizedLang);
+      if (cached) {
+        // translations.js's loadProductTranslations already built _productTranslationsByModel
+        if (callback) callback();
+        document.dispatchEvent(new CustomEvent("productTranslationsLoaded"));
+        return;
+      }
+    }
+    // Priority 2: fallback fetch directly (standalone PDP without translations.js)
+    var url = (window.BASE_PATH || "") + "/assets/lang/" + normalizedLang + "-product.json";
     fetch(url, { cache: "default" })
       .then(function (r) {
         if (!r.ok) throw new Error("HTTP " + r.status);
@@ -1093,7 +1115,6 @@
       })
       .then(function (json) {
         // Convert flat keys to model-based lookup
-        // JSON keys: product_dlb_tbs30_name → model=DLB-TBS30, field=name
         var byModel = {};
         var products = getAllProducts();
         var modelMap = {};
@@ -1106,26 +1127,22 @@
           if (key) modelMap[key] = p.model;
         });
         Object.keys(json).forEach(function (key) {
-          // Parse: product_{model}_{field}
           var m = key.match(
             /^product_([a-z0-9]+(?:_[a-z0-9]+)*)_(name|specifications|usage|throughput|material|sub_category|tier|badge|control_method|product_dimensions|color|highlights)$/i
           );
           if (!m) return;
-          var modelKey = m[1];
-          var field = m[2].toLowerCase();
-          var model = modelMap[modelKey];
+          var modelKey = m[1],
+            field = m[2].toLowerCase(),
+            model = modelMap[modelKey];
           if (!model) return;
           if (!byModel[model]) byModel[model] = {};
           byModel[model][field] = json[key];
         });
-        window._productTranslations = byModel;
         window._productTranslationsByModel = byModel;
         if (callback) callback();
-        // Dispatch event for other listeners
         document.dispatchEvent(new CustomEvent("productTranslationsLoaded"));
       })
       .catch(function (e) {
-        window._productTranslations = {};
         window._productTranslationsByModel = {};
         if (callback) callback();
       });

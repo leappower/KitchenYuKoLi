@@ -25,9 +25,7 @@ function _reInjectSrcset(root) {
   }
 
   function tl(key, fallback) {
-    if (typeof window.uiText === "function") {
-      return window.uiText(key, fallback);
-    }
+    if (typeof window.uiText === "function") return window.uiText(key, fallback);
     return fallback || key;
   }
 
@@ -302,11 +300,9 @@ function _reInjectSrcset(root) {
           '<h3 class="text-lg font-black mb-1">' +
           escHtml(p.model) +
           "</h3>" +
-          (typeof getProductField === "function" && getProductField(p, "name")
-            ? '<p class="text-sm text-slate-500 dark:text-slate-400 line-clamp-2 mb-4">' +
-              escHtml(tl("product_" + _prodKey(p.model) + "_name", getProductField(p, "name") || p.model)) +
-              "</p>"
-            : '<div class="mb-4"></div>') +
+          '<p class="text-sm text-slate-500 dark:text-slate-400 line-clamp-2 mb-4">' +
+          escHtml(typeof getProductField === "function" ? getProductField(p, "name") || p.model : p.model) +
+          "</p>" +
           '<div class="flex justify-between items-center pt-3 border-t border-slate-100 dark:border-slate-700">' +
           (p.power
             ? '<span class="text-xs font-bold text-slate-400">' + escHtml(p.power) + "</span>"
@@ -407,11 +403,9 @@ function _reInjectSrcset(root) {
           '<h3 class="font-bold text-sm mb-1">' +
           escHtml(p.model) +
           "</h3>" +
-          (typeof getProductField === "function" && getProductField(p, "name")
-            ? '<p class="text-xs text-slate-500 line-clamp-2 mb-3">' +
-              escHtml(tl("product_" + _prodKey(p.model) + "_name", getProductField(p, "name") || p.model)) +
-              "</p>"
-            : '<div class="mb-3"></div>') +
+          '<p class="text-xs text-slate-500 line-clamp-2 mb-3">' +
+          escHtml(typeof getProductField === "function" ? getProductField(p, "name") || p.model : p.model) +
+          "</p>" +
           '<div class="flex justify-between items-center pt-2 border-t border-slate-100">' +
           (p.power
             ? '<span class="text-[11px] font-bold text-slate-400">' + escHtml(p.power) + "</span>"
@@ -502,11 +496,9 @@ function _reInjectSrcset(root) {
           '<h3 class="font-bold text-sm mb-1">' +
           escHtml(p.model) +
           "</h3>" +
-          (typeof getProductField === "function" && getProductField(p, "name")
-            ? '<p class="text-xs text-slate-500 line-clamp-2 mb-3">' +
-              escHtml(tl("product_" + _prodKey(p.model) + "_name", getProductField(p, "name") || p.model)) +
-              "</p>"
-            : '<div class="mb-3"></div>') +
+          '<p class="text-xs text-slate-500 line-clamp-2 mb-3">' +
+          escHtml(typeof getProductField === "function" ? getProductField(p, "name") || p.model : p.model) +
+          "</p>" +
           '<div class="flex justify-between items-center pt-2 border-t border-slate-100">' +
           (p.power
             ? '<span class="text-[11px] font-bold text-slate-400">' + escHtml(p.power) + "</span>"

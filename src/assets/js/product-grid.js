@@ -16,10 +16,8 @@
   }
 
   function tl(key, fallback) {
-    if (typeof window.uiText === "function") {
-      return window.uiText(key, fallback);
-    }
-    return fallback;
+    if (typeof window.uiText === "function") return window.uiText(key, fallback);
+    return fallback || key;
   }
 
   var CATEGORY_NAME_TO_SLUG = {
@@ -657,11 +655,10 @@
     return "product_subcat_" + slug + "_" + enSlug;
   }
 
-  /** (delegates to getProductField from product-detail.js) */
+  /** Get translated product field, falling back to raw value */
   function _pField(product, field) {
     if (typeof window.getProductField === "function") {
-      var val = window.getProductField(product, field);
-      if (val) return val;
+      return window.getProductField(product, field);
     }
     return product[field] || "";
   }
@@ -678,7 +675,7 @@
     var catDisplay = esc(translateCategory(cat));
     var catEsc = esc(cat);
     var model = esc(p.model || "");
-    var name = esc(tl("product_" + _prodKey(model) + "_name", _pField(p, "name") || model));
+    var name = esc(_pField(p, "name") || model);
     var desc = esc(p.description || p.card_desc || p.highlights || "");
     var img = esc(p._imageUrl);
     var imgSrcset = p._imgSrcset ? ' srcset="' + esc(p._imgSrcset) + '"' : "";
@@ -775,7 +772,7 @@
     var catDisplay = esc(translateCategory(cat));
     var catEsc = esc(cat);
     var model = esc(p.model || "");
-    var name = esc(tl("product_" + _prodKey(model) + "_name", _pField(p, "name") || model));
+    var name = esc(_pField(p, "name") || model);
     var desc = esc(p.description || p.card_desc || "");
     var img = esc(p._imageUrl);
     var imgSrcset = p._imgSrcset ? ' srcset="' + esc(p._imgSrcset) + '"' : "";
@@ -858,7 +855,7 @@
     var catDisplay = esc(translateCategory(cat));
     var catEsc = esc(cat);
     var model = esc(p.model || "");
-    var name = esc(tl("product_" + _prodKey(model) + "_name", _pField(p, "name") || model));
+    var name = esc(_pField(p, "name") || model);
     var desc = esc(p.description || p.card_desc || "");
     var img = esc(p._imageUrl);
     var imgSrcset = p._imgSrcset ? ' srcset="' + esc(p._imgSrcset) + '"' : "";

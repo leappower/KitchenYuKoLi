@@ -155,14 +155,29 @@ window.getProductField = function getProductField(product, field) {
     .join("-");
   // zh-CN / zh: return Chinese field directly
   if (lang === "zh-CN" || lang === "zh") return product[field] || "";
-  // Non-Chinese: try product translations map first (en-product.json), fallback to product[field]
+  // Non-Chinese: try product translations map first (en-product.json)
   var model = product.model;
   var map = window._productTranslationsByModel || {};
   var t = map[model];
   if (t && t[field]) return t[field];
 
-  // For non-English languages: try uiText/tr() from ui.json first
-  // (product_{model}_{field} keys were synced from product.json in the latest build)
+  // Step 2: embedded English fallback fields (nameEn, specificationsEn, etc.)
+  // Always available immediately without async loading.
+  var enFallbacks = {
+    name: product.nameEn,
+    specifications: product.specificationsEn,
+    usage: product.usageEn,
+    material: product.materialEn,
+    throughput: product.throughputEn,
+    average_time: product.averageTimeEn,
+    power: product.powerEn,
+    voltage: product.voltageEn,
+    sub_category: product.subCategoryEn,
+  };
+  if (enFallbacks[field]) return enFallbacks[field];
+
+  // Step 3: for non-English languages, try uiText/t from ui.json
+  // (product_{model}_{field} keys may have been loaded from product.json)
   if (lang !== "en" && lang !== "en-US" && lang !== "en-GB") {
     if (field === "name" || field === "specifications" || field === "usage" || field === "material") {
       var trKey = "product_" + model.toLowerCase().replace(/[-/]/g, "_") + "_" + field;
@@ -176,17 +191,7 @@ window.getProductField = function getProductField(product, field) {
       if (trVal && trVal !== trKey) return trVal;
     }
   }
-  // Support nameEn / specificationsEn as fallback (embedded in product data)
-  if (field === "name" && product.nameEn) return product.nameEn;
-  if (field === "specifications" && product.specificationsEn) return product.specificationsEn;
-  if (field === "usage" && product.usageEn) return product.usageEn;
-  if (field === "material" && product.materialEn) return product.materialEn;
-  if (field === "throughput" && product.throughputEn) return product.throughputEn;
-  if (field === "average_time" && product.averageTimeEn) return product.averageTimeEn;
-  if (field === "power" && product.powerEn) return product.powerEn;
-  if (field === "voltage" && product.voltageEn) return product.voltageEn;
-  if (field === "sub_category" && product.subCategoryEn) return product.subCategoryEn;
-  // Try tier/category from generic i18n keys (tier_basic, tier_smart, tier_full_smart)
+  // Step 4: generic i18n for tier
   if (field === "tier" && product.tier) {
     var tierMap = { 基础: "basic", 智能: "smart", 全智能: "full_smart" };
     var tierSlug = tierMap[product.tier];
@@ -195,8 +200,7 @@ window.getProductField = function getProductField(product, field) {
       if (tierVal) return tierVal;
     }
   }
-  // For non-Chinese, if no translation available, return empty rather than Chinese
-  if (lang !== "zh-CN" && lang !== "zh") return "";
+  // Final: return the raw Chinese field rather than blank
   return product[field] || "";
 };
 
