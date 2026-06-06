@@ -28,10 +28,7 @@
   // ─── Category slug ↔ key ↔ label maps ──────────────────────────
 
   function tl(key, fallback) {
-    if (typeof window.t === "function") {
-      var result = window.t(key);
-      if (result && result !== key) return result;
-    }
+    if (typeof window.uiText === "function") return window.uiText(key, fallback);
     return fallback || key;
   }
 
@@ -256,11 +253,21 @@
       '">';
     backBar += '<span class="material-symbols-outlined text-xl">arrow_back</span>';
     backBar += "</button>";
-    backBar += "<div class=\"flex items-center gap-1 flex-wrap\">";
-    backBar += '<a href="' + page.parentPath + '" class="text-xs text-slate-500 dark:text-slate-400 hover:text-primary transition-colors">' + esc(page.parentLabel) + "</a>";
+    backBar += '<div class="flex items-center gap-1 flex-wrap">';
+    backBar +=
+      '<a href="' +
+      page.parentPath +
+      '" class="text-xs text-slate-500 dark:text-slate-400 hover:text-primary transition-colors">' +
+      esc(page.parentLabel) +
+      "</a>";
     if (page.type === "pdp" && page.refCategoryLabel) {
       backBar += '<span class="text-xs text-slate-300 dark:text-slate-600">/</span>';
-      backBar += '<a href="/products/' + page.refSlug + '/" class="text-xs text-slate-500 dark:text-slate-400 hover:text-primary transition-colors">' + esc(page.refCategoryLabel) + "</a>";
+      backBar +=
+        '<a href="/products/' +
+        page.refSlug +
+        '/" class="text-xs text-slate-500 dark:text-slate-400 hover:text-primary transition-colors">' +
+        esc(page.refCategoryLabel) +
+        "</a>";
     }
     backBar += '<span class="text-xs text-slate-300 dark:text-slate-600">/</span>';
     backBar +=

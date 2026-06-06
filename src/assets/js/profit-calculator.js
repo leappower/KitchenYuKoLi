@@ -338,12 +338,9 @@
   }
 
   /* ───────── i18n helper ───────── */
-  function t(key) {
-    if (window.translationManager && typeof window.translationManager.translate === "function") {
-      var v = window.translationManager.translate(key);
-      return v !== key ? v : key;
-    }
-    return key;
+  function t(key, fallback) {
+    if (typeof window.uiText === "function") return window.uiText(key, fallback);
+    return fallback || key;
   }
 
   /* ───────── Pain point → i18n key mapping ───────── */
