@@ -4291,5 +4291,14 @@
   "product_xc_0006_usage": "Zastosowanie: sieci gastronomiczne, bary przekąskowe, stołówki, kuchnie domowe; nadaje się do krojenia w plastry różnych składników, regulacja grubości, łatwa obsługa.\nWydajność: wydajne krojenie, oszczędność pracy.",
   "product_xc_1288_name": "Wielofunkcyjna krajalnica do plastrów",
   "product_xc_1288_specifications": "Materiał: wspornik z pełnego stopu aluminium; Moc znamionowa: 200W; Napięcie: 220V; Częstotliwość: 50Hz; Noże: specjalne noże ze stali nierdzewnej, średnica 190mm; Regulacja: 20 stopni (1-20mm) regulacji grubości; Silnik: silnik z miedzianym uzwojeniem; Praca: stabilna, niski poziom decybeli; Zastosowanie: nadaje się do miękkich i twardych składników, łatwo radzi sobie z różnymi potrzebami krojenia w plastry",
-  "product_xc_1288_usage": "Zastosowanie: sieci gastronomiczne, restauracje hotpot, stołówki, kuchnie centralne itp.; nadaje się do krojenia w plastry świeżego mięsa, mrożonego mięsa i innych składników, wielostopniowa regulacja grubości. Wydajność: wydajne krojenie w plastry, spełniające potrzeby małych i średnich gastronomii."
+  "product_xc_1288_usage": "Zastosowanie: sieci gastronomiczne, restauracje hotpot, stołówki, kuchnie centralne itp.; nadaje się do krojenia w plastry świeżego mięsa, mrożonego mięsa i innych składników, wielostopniowa regulacja grubości. Wydajność: wydajne krojenie w plastry, spełniające potrzeby małych i średnich gastronomii.",
+  "pd_tier_basic": "Podstawowy",
+  "pd_tier_smart": "Smart",
+  "pd_tier_full_smart": "Pełny Smart",
+  "cases_filter_小型餐饮": "Mała gastronomia",
+  "cases_filter_中央厨房": "Kuchnia centralna",
+  "cases_filter_连锁餐饮": "Sieć restauracji",
+  "cases_filter_智慧食堂": "Inteligentna stołówka",
+  "cases_filter_云厨房": "Cloud Kitchen",
+  "alt_product_other": "Sprzęt pomocniczy"
 }

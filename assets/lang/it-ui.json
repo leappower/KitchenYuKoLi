@@ -4291,5 +4291,14 @@
   "product_xc_0006_usage": "Utilizzo: catene di ristorazione, snack bar, mense, cucine domestiche, ecc.; adatto per affettare vari ingredienti, spessore regolabile, facile da usare. Capacità: affettatura efficiente, risparmio di manodopera.",
   "product_xc_1288_name": "Affettatrice multifunzione",
   "product_xc_1288_specifications": "Materiale: supporto in lega di alluminio; Potenza nominale: 200W; Tensione: 220V; Frequenza: 50Hz; Lama: lama speciale in acciaio inossidabile, diametro 190mm; Regolazione: 20 livelli di regolazione dello spessore (1-20mm); Motore: motore con filo di rame; Funzionamento: stabile e a basso rumore; Applicazione: adatto sia per ingredienti morbidi che duri, facile da gestire varie esigenze di affettatura",
-  "product_xc_1288_usage": "Uso: catene di ristorazione, ristoranti hot pot, mense, cucine centrali, ecc.; adatto per affettare carne fresca, carne congelata e altri ingredienti, regolazione dello spessore a più livelli. Capacità: affettatura efficiente, soddisfa le esigenze della ristorazione medio-piccola."
+  "product_xc_1288_usage": "Uso: catene di ristorazione, ristoranti hot pot, mense, cucine centrali, ecc.; adatto per affettare carne fresca, carne congelata e altri ingredienti, regolazione dello spessore a più livelli. Capacità: affettatura efficiente, soddisfa le esigenze della ristorazione medio-piccola.",
+  "pd_tier_basic": "Base",
+  "pd_tier_smart": "Smart",
+  "pd_tier_full_smart": "Full Smart",
+  "cases_filter_小型餐饮": "Piccola ristorazione",
+  "cases_filter_中央厨房": "Cucina centrale",
+  "cases_filter_连锁餐饮": "Catena di ristoranti",
+  "cases_filter_智慧食堂": "Mensa intelligente",
+  "cases_filter_云厨房": "Cloud Kitchen",
+  "alt_product_other": "Attrezzature di supporto"
 }

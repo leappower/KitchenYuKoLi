@@ -1,4 +1,8 @@
 /* global getProductField */
+function _reInjectSrcset(root) {
+  var m = window.app && window.app.modules && window.app.modules.get("lazyLoading");
+  if (m && typeof m.reInjectSrcset === "function") m.reInjectSrcset(root);
+}
 /**
  * home-core-products.js — Dynamic Home Core Products renderer
  *
@@ -21,9 +25,7 @@
   }
 
   function tl(key, fallback) {
-    if (typeof window.uiText === "function") {
-      return window.uiText(key, fallback);
-    }
+    if (typeof window.uiText === "function") return window.uiText(key, fallback);
     return fallback || key;
   }
 
@@ -35,6 +37,14 @@
     切配系列: "nav_products_cutting",
     辅助系列: "nav_products_other",
   };
+
+  function _prodKey(model) {
+    return (model || "")
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, "_")
+      .replace(/_+/g, "_")
+      .replace(/^_|_$/g, "");
+  }
 
   function translateCategory(cat) {
     var key = CATEGORY_I18N_MAP[cat];
@@ -56,6 +66,32 @@
     var fp = primary ? primary.filePath : product.images[0].filePath;
     // 统一用 model.webp，不信任 API/data-table 的 filePath
     return "/assets/images/products/" + product.model + ".webp";
+  }
+
+  function getDeviceType() {
+    return window.DeviceUtils
+      ? window.DeviceUtils.getDeviceType()
+      : window.innerWidth < 768
+        ? "mobile"
+        : window.innerWidth < 1280
+          ? "tablet"
+          : "pc";
+  }
+
+  function buildSrcset(baseUrl, device) {
+    if (!baseUrl || !/\.(webp|png|jpg|jpeg|avif)$/i.test(baseUrl)) return "";
+    var widths = device === "mobile" ? [375, 828] : device === "tablet" ? [828, 1200] : [1200, 1920];
+    return widths
+      .map(function (w) {
+        return baseUrl.replace(/\.(webp|png|jpg|jpeg|avif)$/, "-" + w + "w.$1") + " " + w + "w";
+      })
+      .join(", ");
+  }
+
+  function buildSizes(device) {
+    if (device === "mobile") return "(max-width: 767px) 50vw, 33vw";
+    if (device === "tablet") return "(max-width: 1279px) 50vw, 25vw";
+    return "(max-width: 1535px) 25vw, 20vw";
   }
 
   /**
@@ -98,7 +134,10 @@
   })();
 
   function getProductDetailHref(product) {
-    var slug = CATEGORY_NAME_TO_SLUG[product.category] || (window.MODEL_TO_SLUG && window.MODEL_TO_SLUG[product.model]) || encodeURIComponent(product.model);
+    var slug =
+      CATEGORY_NAME_TO_SLUG[product.category] ||
+      (window.MODEL_TO_SLUG && window.MODEL_TO_SLUG[product.model]) ||
+      encodeURIComponent(product.model);
     return "/products/" + slug + "/" + encodeURIComponent(product.model) + "/";
   }
 
@@ -250,6 +289,9 @@
 
       function buildPCCard(p) {
         var img = getPrimaryImage(p);
+        var device = getDeviceType();
+        var imgSrcset = buildSrcset(img, device);
+        var imgSizes = buildSizes(device);
         var href = getProductDetailHref(p);
         var catMap = {
           翻炒系列: "stirfry",
@@ -271,25 +313,28 @@
               escHtml(p.model) +
               '" class="w-full h-full object-contain p-4 group-hover:scale-105 transition-transform duration-300" src="' +
               escHtml(img) +
-              '" loading="lazy">'
+              '"' +
+              (imgSrcset ? ' srcset="' + imgSrcset + '"' : "") +
+              (imgSizes ? ' sizes="' + imgSizes + '"' : "") +
+              ' loading="lazy">'
             : '<div style="font-size:2.5rem;color:#d1d5db;display:flex;align-items:center;justify-content:center;height:100%">📦</div>') +
           "</div>" +
           '<div class="p-5">' +
           (p.category
             ? '<a href="' +
               catHref +
-              '" class="inline-block text-xs font-bold px-2.5 py-1 rounded-full bg-primary/10 text-primary mb-3 hover:bg-primary/20 transition-colors">' +
+              '" class="inline-block text-xs font-bold px-2.5 py-1 rounded-full bg-primary/10 text-primary mb-3 hover:bg-primary/20 transition-colors" data-i18n="' +
+              (CATEGORY_I18N_MAP[p.category] || "") +
+              '">' +
               escHtml(translateCategory(p.category)) +
               "</a>"
             : "") +
           '<h3 class="text-lg font-black mb-1">' +
           escHtml(p.model) +
           "</h3>" +
-          (typeof getProductField === "function" && getProductField(p, "name")
-            ? '<p class="text-sm text-slate-500 dark:text-slate-400 line-clamp-2 mb-4">' +
-              escHtml(getProductField(p, "name")) +
-              "</p>"
-            : '<div class="mb-4"></div>') +
+          '<p class="text-sm text-slate-500 dark:text-slate-400 line-clamp-2 mb-4">' +
+          escHtml(typeof getProductField === "function" ? getProductField(p, "name") || p.model : p.model) +
+          "</p>" +
           '<div class="flex justify-between items-center pt-3 border-t border-slate-100 dark:border-slate-700">' +
           (p.power
             ? '<span class="text-xs font-bold text-slate-400">' + escHtml(p.power) + "</span>"
@@ -319,15 +364,24 @@
         html += '<div class="flex justify-center mt-10">';
         html +=
           "<button id=\"hcp-toggle-pc\" onclick=\"(function(){var h=document.getElementById('hcp-hidden-pc'),b=document.getElementById('hcp-toggle-pc');if(h.style.display==='none'){h.style.display='';b.textContent=typeof window.uiText==='function'?window.uiText('home_hw_collapse','Collapse ▲'):'Collapse ▲'}else{h.style.display='none';b.textContent=typeof window.uiText==='function'?window.uiText('home_hw_show_more','View More Products ▼'):'View More Products ▼'}})()\" class=\"px-8 py-3 rounded-full border-2 border-primary text-primary font-bold hover:bg-primary hover:text-white transition-all cursor-pointer\" data-i18n=\"home_hw_show_more\">" +
-          tl("home_hw_show_more", "查看更多产品 ▼") +
+          tl("home_hw_show_more", "View More Products ▼") +
           "</button>";
         html += "</div>";
       }
 
       container.innerHTML = html;
+      _reInjectSrcset(container);
 
       // Trigger i18n if available
-      if (window.translationManager && window.translationManager.applyTo) {
+      if (
+        window.translationManager &&
+        window.translationManager.ready &&
+        typeof window.translationManager.ready.then === "function"
+      ) {
+        window.translationManager.ready.then(function () {
+          if (typeof window.translationManager.applyTo === "function") window.translationManager.applyTo(container);
+        });
+      } else if (window.translationManager && typeof window.translationManager.applyTo === "function") {
         window.translationManager.applyTo(container);
       }
     });
@@ -356,6 +410,9 @@
 
       function buildTabletCard(p) {
         var img = getPrimaryImage(p);
+        var device = getDeviceType();
+        var imgSrcset = buildSrcset(img, device);
+        var imgSizes = buildSizes(device);
         var href = getProductDetailHref(p);
         return (
           '<div class="group bg-white rounded-2xl border border-slate-200 hover:border-primary hover:shadow-lg transition-all duration-300 overflow-hidden" data-link="' +
@@ -367,21 +424,26 @@
               escHtml(p.model) +
               '" class="w-full h-full object-contain p-3 sm:p-4 group-hover:scale-105 transition-transform duration-300" src="' +
               escHtml(img) +
-              '" loading="lazy">'
+              '"' +
+              (imgSrcset ? ' srcset="' + imgSrcset + '"' : "") +
+              (imgSizes ? ' sizes="' + imgSizes + '"' : "") +
+              ' loading="lazy">'
             : '<div style="font-size:2rem;color:#d1d5db;display:flex;align-items:center;justify-content:center;height:100%">📦</div>') +
           "</div>" +
           '<div class="p-3 sm:p-4">' +
           (p.category
-            ? '<span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-primary/10 text-primary mb-2 inline-block">' +
+            ? '<span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-primary/10 text-primary mb-2 inline-block" data-i18n="' +
+              (CATEGORY_I18N_MAP[p.category] || "") +
+              '">' +
               escHtml(translateCategory(p.category)) +
               "</span>"
             : "") +
           '<h3 class="font-bold text-sm mb-1">' +
           escHtml(p.model) +
           "</h3>" +
-          (typeof getProductField === "function" && getProductField(p, "name")
-            ? '<p class="text-xs text-slate-500 line-clamp-2 mb-3">' + escHtml(getProductField(p, "name")) + "</p>"
-            : '<div class="mb-3"></div>') +
+          '<p class="text-xs text-slate-500 line-clamp-2 mb-3">' +
+          escHtml(typeof getProductField === "function" ? getProductField(p, "name") || p.model : p.model) +
+          "</p>" +
           '<div class="flex justify-between items-center pt-2 border-t border-slate-100">' +
           (p.power
             ? '<span class="text-[11px] font-bold text-slate-400">' + escHtml(p.power) + "</span>"
@@ -410,12 +472,13 @@
         html += '<div class="flex justify-center mt-8">';
         html +=
           "<button id=\"hcp-toggle-tablet\" onclick=\"(function(){var h=document.getElementById('hcp-hidden-tablet'),b=document.getElementById('hcp-toggle-tablet');if(h.style.display==='none'){h.style.display='';b.textContent=typeof window.uiText==='function'?window.uiText('home_hw_collapse','Collapse ▲'):'Collapse ▲'}else{h.style.display='none';b.textContent=typeof window.uiText==='function'?window.uiText('home_hw_show_more','View More Products ▼'):'View More Products ▼'}})()\" class=\"px-6 py-2.5 rounded-full border-2 border-primary text-primary font-bold hover:bg-primary hover:text-white transition-all cursor-pointer text-sm\" data-i18n=\"home_hw_show_more\">" +
-          tl("home_hw_show_more", "查看更多产品 ▼") +
+          tl("home_hw_show_more", "View More Products ▼") +
           "</button>";
         html += "</div>";
       }
 
       container.innerHTML = html;
+      _reInjectSrcset(container);
 
       if (window.translationManager && window.translationManager.applyTo) {
         window.translationManager.applyTo(container);
@@ -446,6 +509,9 @@
 
       function buildCard(p) {
         var img = getPrimaryImage(p);
+        var device = getDeviceType();
+        var imgSrcset = buildSrcset(img, device);
+        var imgSizes = buildSizes(device);
         var href = getProductDetailHref(p);
         return (
           '<div class="group bg-white rounded-2xl border border-slate-200 hover:border-primary hover:shadow-lg transition-all duration-300 overflow-hidden" data-link="' +
@@ -457,21 +523,26 @@
               escHtml(p.model) +
               '" class="w-full h-full object-contain p-2 sm:p-3 group-hover:scale-105 transition-transform duration-300" src="' +
               escHtml(img) +
-              '" loading="lazy">'
+              '"' +
+              (imgSrcset ? ' srcset="' + imgSrcset + '"' : "") +
+              (imgSizes ? ' sizes="' + imgSizes + '"' : "") +
+              ' loading="lazy">'
             : '<div style="font-size:2rem;color:#d1d5db;display:flex;align-items:center;justify-content:center;height:100%">📦</div>') +
           "</div>" +
           '<div class="p-3 sm:p-4">' +
           (p.category
-            ? '<span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-primary/10 text-primary mb-2 inline-block">' +
+            ? '<span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-primary/10 text-primary mb-2 inline-block" data-i18n="' +
+              (CATEGORY_I18N_MAP[p.category] || "") +
+              '">' +
               escHtml(translateCategory(p.category)) +
               "</span>"
             : "") +
           '<h3 class="font-bold text-sm mb-1">' +
           escHtml(p.model) +
           "</h3>" +
-          (typeof getProductField === "function" && getProductField(p, "name")
-            ? '<p class="text-xs text-slate-500 line-clamp-2 mb-3">' + escHtml(getProductField(p, "name")) + "</p>"
-            : '<div class="mb-3"></div>') +
+          '<p class="text-xs text-slate-500 line-clamp-2 mb-3">' +
+          escHtml(typeof getProductField === "function" ? getProductField(p, "name") || p.model : p.model) +
+          "</p>" +
           '<div class="flex justify-between items-center pt-2 border-t border-slate-100">' +
           (p.power
             ? '<span class="text-[11px] font-bold text-slate-400">' + escHtml(p.power) + "</span>"
@@ -495,7 +566,7 @@
         html +=
           "<button id=\"hcp-load-more-mobile\" class=\"w-full py-2.5 rounded-xl border border-slate-300  text-sm font-bold text-primary hover:bg-primary hover:text-white hover:border-primary transition-all flex items-center justify-center gap-2\" data-i18n=\"home_show_more\" onclick=\"(function(){var b=document.getElementById('hcp-hidden-mobile');var btn=document.getElementById('hcp-load-more-mobile');if(b&&btn){b.style.display='';btn.style.display='none';window.translationManager&&window.translationManager.applyTo(b.parentElement);}})()\">" +
           '<span class="material-symbols-outlined text-lg">expand_more</span> ' +
-          escHtml(tl("home_show_more", "更多产品")) +
+          escHtml(tl("home_show_more", "More Products")) +
           "</button>";
         html += '<div id="hcp-hidden-mobile" style="display:none" class="flex flex-col gap-3">';
         restProducts.forEach(function (p) {
@@ -504,6 +575,7 @@
         html += "</div>";
       }
       html += "</div>";
+      _reInjectSrcset(container);
       container.innerHTML = html;
 
       if (window.translationManager && window.translationManager.applyTo) {

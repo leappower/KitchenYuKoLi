@@ -109,8 +109,8 @@
         '<option value="">' +
         (placeholder.textContent ||
           (typeof window.t === "function"
-            ? window.uiText("quote_select_budget", "请选择预算范围")
-            : "请选择预算范围")) +
+            ? window.uiText("quote_select_budget", "Please select budget range")
+            : "Please select budget range")) +
         "</option>";
     } else {
       html += '<option value="">—</option>';
@@ -120,7 +120,7 @@
       html +=
         '<option value="consult">' +
         (consult.textContent ||
-          (typeof window.t === "function" ? window.uiText("quote_consult", "需咨询") : "需咨询")) +
+          (typeof window.t === "function" ? window.uiText("quote_consult", "Consult us") : "Consult us")) +
         "</option>";
     }
 

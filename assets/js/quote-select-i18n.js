@@ -113,7 +113,7 @@
     sel.value = prevValue;
     // Sync placeholder into data-placeholder for custom-select
     var phOpt = sel.querySelector('option[value=""]');
-    if (phOpt) sel.setAttribute('data-placeholder', phOpt.textContent);
+    if (phOpt) sel.setAttribute("data-placeholder", phOpt.textContent);
 
     // Re-init custom-select instance
     reinitCustomSelect(sel);
@@ -144,7 +144,7 @@
         if (sel._customSelectInstance) {
           var oldWrap = sel.parentElement;
           if (oldWrap && oldWrap.classList.contains("cs-trigger-wrap")) {
-            // 恢复 select 到原始位置和内联样式
+            // Restore select to original position and inline styles
             var parent = oldWrap.parentNode;
             if (parent) {
               parent.insertBefore(sel, oldWrap);
@@ -158,7 +158,7 @@
         }
         window.CustomSelect.init(sel);
       } catch (e) {
-        // 静默忽略重建失败，下次切换语言会重新尝试
+        // Silently ignore rebuild failure, will retry on next language switch
       }
     }
   }
@@ -169,19 +169,24 @@
 
   function updateAllSelects() {
     /* Restaurant type */
-    rebuildSelect("q-restaurant-type", RESTAURANT_TYPE_LABELS, "quote_select_restaurant_type", "选择餐厅类型");
+    rebuildSelect(
+      "q-restaurant-type",
+      RESTAURANT_TYPE_LABELS,
+      "quote_select_restaurant_type",
+      "Select restaurant type"
+    );
 
     /* Contact channel */
     rebuildSelect(
       "q-contact-channel",
       CONTACT_CHANNEL_LABELS,
       "quote_select_channel",
-      "选择联系方式",
+      "Select contact method",
       CHANNEL_DEFAULTS
     );
 
     /* Capacity — just translate placeholder */
-    rebuildPlaceholderSelect("q-capacity", "quote_select_capacity", "选择");
+    rebuildPlaceholderSelect("q-capacity", "quote_select_capacity", "Select");
 
     /* Country select doesn't need translation (country names are universal) */
     /* Just translate placeholder if needed */
@@ -189,7 +194,7 @@
     if (countrySel) {
       var ph = countrySel.querySelector('option[value=""]');
       if (ph && typeof window.t === "function") {
-        var translated = tr("select_country", "选择国家/地区");
+        var translated = tr("select_country", "Select country/region");
         ph.textContent = translated;
         // Refresh custom-select trigger
         reinitCustomSelect(countrySel);
@@ -197,19 +202,24 @@
     }
 
     /* Contact page selects */
-    rebuildSelect("c-restaurant-type", RESTAURANT_TYPE_LABELS, "quote_select_restaurant_type", "选择餐厅类型");
+    rebuildSelect(
+      "c-restaurant-type",
+      RESTAURANT_TYPE_LABELS,
+      "quote_select_restaurant_type",
+      "Select restaurant type"
+    );
     rebuildSelect(
       "c-contact-channel",
       CONTACT_CHANNEL_LABELS,
       "quote_select_channel",
-      "选择联系方式",
+      "Select contact method",
       CHANNEL_DEFAULTS
     );
     var cCountry = document.getElementById("c-country");
     if (cCountry) {
       var ph2 = cCountry.querySelector('option[value=""]');
       if (ph2 && typeof window.t === "function") {
-        ph2.textContent = tr("select_country", "选择国家/地区");
+        ph2.textContent = tr("select_country", "Select country/region");
         reinitCustomSelect(cCountry);
       }
     }

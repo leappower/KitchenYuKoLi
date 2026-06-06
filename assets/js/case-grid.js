@@ -4,7 +4,11 @@
    ═══════════════════════════════════════════════════ */
 
 (function () {
-  "use strict";
+  function _reInjectSrcset(root) {
+    var m = window.app && window.app.modules && window.app.modules.get("lazyLoading");
+    if (m && typeof m.reInjectSrcset === "function") m.reInjectSrcset(root);
+  }
+  ("use strict");
 
   var _spaRegs = {};
   function _spaOn(tgt, evt, fn, key) {
@@ -134,22 +138,22 @@
   /* ── Filter Definitions ─────────────────────────── */
   var FILTERS = {
     industry: {
-      label: "行业",
+      label: "Industry",
       i18n: "cases_filter_industry",
       options: ["小型餐饮", "中央厨房", "连锁餐饮", "智慧食堂", "云厨房"],
     },
     volume: {
-      label: "日单量",
+      label: "Volume",
       i18n: "cases_filter_volume",
       options: ["<200", "200-500", "500-1000", "1000+"],
     },
     country: {
-      label: "国家",
+      label: "Country",
       i18n: "cases_filter_country",
       options: ["🇵🇭 Philippines", "🇮🇩 Indonesia", "🇻🇳 Vietnam", "🇹🇭 Thailand", "🇲🇾 Malaysia"],
     },
     benefit: {
-      label: "核心收益",
+      label: "Benefit",
       i18n: "cases_filter_benefit",
       options: ["Labor Cost Reduction", "Consistency", "Space Saving", "Fast Payback"],
     },
@@ -160,10 +164,7 @@
 
   /* ── i18n helper ────────────────────────────────── */
   function __(key, fallback) {
-    if (typeof window.t === "function") {
-      var result = window.t(key);
-      if (result && result !== key) return result;
-    }
+    if (typeof window.uiText === "function") return window.uiText(key, fallback);
     return fallback || key;
   }
 
@@ -260,7 +261,7 @@
       '">' +
       c.dailyOutput +
       " " +
-      __("cases_per_day", "餐/天") +
+      __("cases_per_day", "meals/day") +
       "</span>" +
       "</span>" +
       '<span class="text-slate-300 dark:text-slate-600">·</span>' +
@@ -270,7 +271,7 @@
       '">' +
       c.payback +
       " " +
-      __("cases_payback_month", "月回本") +
+      __("cases_payback_month", "mo payback") +
       "</span>" +
       "</span>" +
       "</div>" +
@@ -289,7 +290,7 @@
       pct +
       "%</div>" +
       '<div class="text-xs text-slate-500 dark:text-slate-400" data-i18n="cases_label_labor_cost">' +
-      __("cases_label_labor_cost", "人工成本") +
+      __("cases_label_labor_cost", "Labor Cost") +
       "</div>" +
       "</div>" +
       '<div class="bg-slate-50 dark:bg-slate-900/50 rounded-lg p-2.5 text-center">' +
@@ -299,7 +300,7 @@
       c.laborAfter +
       "</div>" +
       '<div class="text-xs text-slate-500 dark:text-slate-400" data-i18n="cases_label_staff_change">' +
-      __("cases_label_staff_change", "人数变化") +
+      __("cases_label_staff_change", "Staff Change") +
       "</div>" +
       "</div>" +
       '<div class="bg-slate-50 dark:bg-slate-900/50 rounded-lg p-2.5 text-center">' +
@@ -307,7 +308,7 @@
       c.monthlySaving +
       "</div>" +
       '<div class="text-xs text-slate-500 dark:text-slate-400" data-i18n="cases_label_monthly_saving">' +
-      __("cases_label_monthly_saving", "月节省") +
+      __("cases_label_monthly_saving", "Monthly Saving") +
       "</div>" +
       "</div>" +
       "</div>" +
@@ -315,7 +316,7 @@
       c.slug +
       '/" target="_self" class="inline-flex items-center gap-1 text-primary font-bold text-sm group-hover:gap-2 transition-all mt-auto pt-1">' +
       '<span data-i18n="cases_read_story">' +
-      __("cases_read_story", "查看详情") +
+      __("cases_read_story", "View details") +
       "</span>" +
       '<span class="material-symbols-outlined text-base">arrow_forward</span>' +
       "</a>" +
@@ -369,7 +370,7 @@
       '">' +
       c.dailyOutput +
       " " +
-      __("cases_per_day", "餐/天") +
+      __("cases_per_day", "meals/day") +
       "</span>" +
       "</span>" +
       "</div>" +
@@ -388,7 +389,7 @@
       '<span data-i18n="cases_labor_' +
       c.slug.split("-")[0] +
       '">' +
-      __("cases_labor_reduction", "人工") +
+      __("cases_labor_reduction", "Labor") +
       " -" +
       pct +
       "%" +
@@ -401,7 +402,7 @@
       '">' +
       c.payback +
       " " +
-      __("cases_payback_month", "月回本") +
+      __("cases_payback_month", "mo payback") +
       "</span>" +
       "</span>" +
       "</div>" +
@@ -445,8 +446,10 @@
     }
     var cases = getFiltered();
     if (cases.length === 0) {
-      container.innerHTML =
-        '<div class="col-span-full text-center py-16"><p class="text-slate-500 dark:text-slate-400 text-lg" data-i18n="cases_no_results">没有找到匹配的案例，试试调整筛选条件。</p></div>';
+      container.innerHTML = container.innerHTML =
+        '<div class="col-span-full text-center py-16"><p class="text-slate-500 dark:text-slate-400 text-lg" data-i18n="cases_no_results">' +
+        __("cases_no_results", "No matching cases, try different filters.") +
+        "</p></div>";
       return;
     }
     var html = "";
@@ -455,10 +458,25 @@
     }
     container.innerHTML = html;
 
+    _reInjectSrcset(container);
+    if (window.translationManager) {
+      var applyFn = function () {
+        if (typeof window.translationManager.applyTo === "function") {
+          window.translationManager.applyTo(container);
+        }
+      };
+      if (window.translationManager.ready && typeof window.translationManager.ready.then === "function") {
+        window.translationManager.ready.then(function () {
+          applyFn();
+        });
+      } else {
+        applyFn();
+      }
+    }
     // Update count — use i18n format
     var countEl = document.getElementById("case-count");
     if (countEl) {
-      var template = __("cases_count_format", "{count} 个案例");
+      var template = __("cases_count_format", "{count} case(s)");
       countEl.textContent = template.replace("{count}", cases.length);
     }
 
@@ -510,7 +528,7 @@
         '<button data-filter="' +
         key +
         '" data-value="" class="case-filter-btn px-3 py-1.5 text-xs font-semibold rounded-full border transition-all border-primary bg-primary text-white" data-i18n="cases_filter_all">' +
-        __("cases_filter_all", "全部") +
+        __("cases_filter_all", "All") +
         "</button>";
       for (var i = 0; i < f.options.length; i++) {
         html +=
@@ -519,7 +537,7 @@
           '" data-value="' +
           f.options[i] +
           '" class="case-filter-btn px-3 py-1.5 text-xs font-semibold rounded-full border transition-all border-slate-300 dark:border-slate-600 text-slate-600 dark:text-slate-300 hover:border-primary hover:text-primary">' +
-          f.options[i] +
+          _ii("cases_filter_" + f.options[i], f.options[i]) +
           "</button>";
       }
       html += "</div></div>";
@@ -539,10 +557,10 @@
       '<button id="case-filter-toggle" class="flex items-center gap-2 px-4 py-2 rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-sm font-semibold shadow-sm hover:shadow-md transition-all">' +
       '<span class="material-symbols-outlined text-primary">tune</span>' +
       '<span data-i18n="cases_filter_toggle">' +
-      __("cases_filter_toggle", "筛选案例") +
+      __("cases_filter_toggle", "Filter cases") +
       "</span>" +
       '<span id="case-count" class="ml-1 bg-primary/10 text-primary px-2 py-0.5 rounded-full text-xs font-bold">' +
-      __("cases_count_format", "8 个案例").replace("{count}", "8") +
+      __("cases_count_format", "8 case(s)").replace("{count}", "8") +
       "</span>" +
       '<span class="material-symbols-outlined ml-auto transition-transform" id="case-filter-arrow">expand_more</span>' +
       "</button>" +
@@ -562,7 +580,7 @@
         '<button data-filter="' +
         key +
         '" data-value="" class="case-filter-btn px-3 py-1.5 text-xs font-semibold rounded-full border transition-all border-primary bg-primary text-white" data-i18n="cases_filter_all">' +
-        __("cases_filter_all", "全部") +
+        __("cases_filter_all", "All") +
         "</button>";
       for (var i = 0; i < f.options.length; i++) {
         html +=
@@ -571,7 +589,7 @@
           '" data-value="' +
           f.options[i] +
           '" class="case-filter-btn px-3 py-1.5 text-xs font-semibold rounded-full border transition-all border-slate-300 dark:border-slate-600 text-slate-600 dark:text-slate-300 hover:border-primary hover:text-primary">' +
-          f.options[i] +
+          _ii("cases_filter_" + f.options[i], f.options[i]) +
           "</button>";
       }
       html += "</div></div>";
@@ -621,13 +639,14 @@
         " background-repeat: no-repeat; background-position: right 8px center; padding-right: 28px;'>";
       html += '<option value="">' + __(f.i18n, f.label) + "</option>";
       for (var i = 0; i < f.options.length; i++) {
-        html += '<option value="' + f.options[i] + '">' + f.options[i] + "</option>";
+        html +=
+          '<option value="' + f.options[i] + '">' + _ii("cases_filter_" + f.options[i], f.options[i]) + "</option>";
       }
       html += "</select>";
     }
     html +=
       '<span id="case-count" class="flex-shrink-0 text-xs font-bold text-primary whitespace-nowrap">' +
-      __("cases_count_format", "8 个案例").replace("{count}", "8") +
+      __("cases_count_format", "8 case(s)").replace("{count}", "8") +
       "</span>";
     html += "</div>";
     bar.innerHTML = html;

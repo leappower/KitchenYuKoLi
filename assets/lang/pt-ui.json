@@ -4291,5 +4291,14 @@
   "product_xc_0006_usage": "Uso: redes de restaurantes, lanchonetes, refeitórios, cozinhas domésticas, etc.; adequado para fatiar diversos ingredientes com espessura ajustável, operação conveniente. Capacidade: fatiamento eficiente, economia de mão de obra.",
   "product_xc_1288_name": "Máquina multifuncional de fatiar",
   "product_xc_1288_specifications": "Material: suporte em liga de alumínio; Potência nominal: 200W; Tensão: 220V; Frequência: 50Hz; Lâmina: lâmina especial em aço inoxidável, diâmetro 190mm; Ajuste: 20 níveis de ajuste de espessura (1-20mm); Motor: motor com fio de cobre; Funcionamento: estável e baixo ruído; Aplicação: adequado para ingredientes macios e duros, atendendo facilmente a diversas necessidades de fatiamento",
-  "product_xc_1288_usage": "Uso: redes de restaurantes, casas de fondue, refeitórios, cozinhas centrais, etc.; adequado para fatiar carnes frescas, congeladas e outros ingredientes, ajuste de espessura em múltiplos níveis. Capacidade: fatiamento eficiente, atendendo às necessidades de restaurantes de médio e pequeno porte."
+  "product_xc_1288_usage": "Uso: redes de restaurantes, casas de fondue, refeitórios, cozinhas centrais, etc.; adequado para fatiar carnes frescas, congeladas e outros ingredientes, ajuste de espessura em múltiplos níveis. Capacidade: fatiamento eficiente, atendendo às necessidades de restaurantes de médio e pequeno porte.",
+  "pd_tier_basic": "Básico",
+  "pd_tier_smart": "Inteligente",
+  "pd_tier_full_smart": "Totalmente Inteligente",
+  "cases_filter_小型餐饮": "Pequena restauração",
+  "cases_filter_中央厨房": "Cozinha central",
+  "cases_filter_连锁餐饮": "Cadeia de restaurantes",
+  "cases_filter_智慧食堂": "Cantina inteligente",
+  "cases_filter_云厨房": "Cloud Kitchen",
+  "alt_product_other": "Equipamento auxiliar"
 }

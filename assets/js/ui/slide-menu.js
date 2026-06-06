@@ -214,7 +214,7 @@
           '<span class="mobile-menu-l2-icon">' +
           '<span class="material-symbols-outlined">grid_view</span>' +
           "</span>" +
-          '<span class="mobile-menu-l2-label" data-i18n="nav_mega_view_all">查看全部产品</span>' +
+          '<span class="mobile-menu-l2-label" data-i18n="nav_mega_view_all">View All Products</span>' +
           "</a>";
       }
 

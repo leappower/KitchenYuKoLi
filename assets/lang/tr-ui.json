@@ -4291,5 +4291,14 @@
   "product_xc_0006_usage": "Kullanım: Yemek zincirleri, atıştırmalık dükkanları, kantinler, ev mutfakları vb.; çeşitli malzemelerin dilimlenmesi için uygundur, ince-kalın ayarlanabilir, kullanımı kolay.\nKapasite: Yüksek verimli dilimleme, işçilik tasarrufu.",
   "product_xc_1288_name": "Çok Fonksiyonlu Dilimleme Makinesi",
   "product_xc_1288_specifications": "Malzeme: Tam alüminyum alaşım stand; Nominal güç: 200W; Voltaj: 220V; Frekans: 50Hz; Bıçak: Özel paslanmaz çelik bıçak, çap 190mm; Ayar: 20 kademe (1-20mm) kalınlık ayarı; Motor: Bakır tel motor; Çalışma: Stabil, düşük desibel; Uygunluk: Yumuşak ve sert malzemeler için uygundur, çeşitli dilimleme ihtiyaçlarını kolayca karşılar",
-  "product_xc_1288_usage": "Kullanım: Restoran zincirleri, hotpot restoranları, kantinler, merkezi mutfaklar vb. yerler; taze et, donmuş et vb. çeşitli malzemelerin dilimlenmesi için uygundur, çok kademeli kalınlık ayarı. Kapasite: Verimli dilimleme, küçük ve orta ölçekli restoran ihtiyaçlarını karşılar."
+  "product_xc_1288_usage": "Kullanım: Restoran zincirleri, hotpot restoranları, kantinler, merkezi mutfaklar vb. yerler; taze et, donmuş et vb. çeşitli malzemelerin dilimlenmesi için uygundur, çok kademeli kalınlık ayarı. Kapasite: Verimli dilimleme, küçük ve orta ölçekli restoran ihtiyaçlarını karşılar.",
+  "pd_tier_basic": "Temel",
+  "pd_tier_smart": "Akıllı",
+  "pd_tier_full_smart": "Tam Akıllı",
+  "cases_filter_小型餐饮": "Küçük yiyecek-içecek",
+  "cases_filter_中央厨房": "Merkez mutfak",
+  "cases_filter_连锁餐饮": "Zincir restoran",
+  "cases_filter_智慧食堂": "Akıllı yemekhane",
+  "cases_filter_云厨房": "Cloud Kitchen",
+  "alt_product_other": "Destek Ekipmanları"
 }

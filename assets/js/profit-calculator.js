@@ -212,7 +212,7 @@
   function shortCurrency(n, symbol) {
     if (isCJK()) {
       // CJK: 万 (10,000) and 億 (100,000,000)
-      if (n >= 100000000) return symbol + formatNumber(n / 100000000, 1) + "億";
+      if (n >= 100000000) return symbol + formatNumber(n / 100000000, 1) + "亿";
       if (n >= 10000) return symbol + formatNumber(n / 10000, 1) + "万";
       return symbol + formatNumber(n);
     }
@@ -338,12 +338,9 @@
   }
 
   /* ───────── i18n helper ───────── */
-  function t(key) {
-    if (window.translationManager && typeof window.translationManager.translate === "function") {
-      var v = window.translationManager.translate(key);
-      return v !== key ? v : key;
-    }
-    return key;
+  function t(key, fallback) {
+    if (typeof window.uiText === "function") return window.uiText(key, fallback);
+    return fallback || key;
   }
 
   /* ───────── Pain point → i18n key mapping ───────── */

@@ -190,6 +190,20 @@ var __DEVELOPMENT__ = typeof __DEVELOPMENT__ !== "undefined" ? __DEVELOPMENT__ :
           }
         });
       }
+
+      /* 检测视频是否实际解码成功 — HEVC 视频在某些浏览器上 play() resolve 但无法显示 */
+      var decodeCheck = setTimeout(function () {
+        if (video.videoWidth === 0 && video.videoHeight === 0 && !state.failed) {
+          console.warn("[hero-video] play() resolved but no video decoded (codec not supported)");
+          state.failed = true;
+          showFallback(container, poster, video, overlay, playBtn);
+        }
+      }, 500);
+      /* 如果后续解码成功，取消 fallback */
+      video.addEventListener("loadedmetadata", function _cancel() {
+        clearTimeout(decodeCheck);
+        video.removeEventListener("loadedmetadata", _cancel);
+      });
     }
 
     /* ── 自动模式首次播放 ── */

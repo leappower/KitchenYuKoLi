@@ -4291,5 +4291,14 @@
   "product_xc_0006_usage": "Penggunaan: Restoran rantai, toko makanan ringan, kantin, dapur rumah tangga, dll.; Cocok untuk pengirisan berbagai bahan, ketebalan dapat diatur, operasi mudah. Kapasitas: Pengirisan efisien, menghemat tenaga kerja.",
   "product_xc_1288_name": "Mesin Pengiris Serbaguna",
   "product_xc_1288_specifications": "Bahan: Dudukan aluminium alloy penuh; Daya: 200W; Tegangan: 220V; Frekuensi: 50Hz; Pisau: Pisau stainless steel khusus, diameter 190mm; Penyesuaian: 20 tingkat penyesuaian ketebalan (1-20mm); Motor: Motor kawat tembaga; Operasi: Stabil, desibel rendah; Cocok: Bahan lunak dan keras, mudah menangani berbagai kebutuhan pengirisan",
-  "product_xc_1288_usage": "Penggunaan: Restoran berantai, restoran hotpot, kantin, dapur pusat, dll.; Cocok untuk mengiris berbagai bahan seperti daging segar dan beku, penyesuaian ketebalan multi-tingkat. Kapasitas: Pengirisan efisien, memenuhi kebutuhan restoran skala kecil hingga menengah."
+  "product_xc_1288_usage": "Penggunaan: Restoran berantai, restoran hotpot, kantin, dapur pusat, dll.; Cocok untuk mengiris berbagai bahan seperti daging segar dan beku, penyesuaian ketebalan multi-tingkat. Kapasitas: Pengirisan efisien, memenuhi kebutuhan restoran skala kecil hingga menengah.",
+  "pd_tier_basic": "Dasar",
+  "pd_tier_smart": "Pintar",
+  "pd_tier_full_smart": "Penuh Pintar",
+  "cases_filter_小型餐饮": "F&B Kecil",
+  "cases_filter_中央厨房": "Dapur Sentral",
+  "cases_filter_连锁餐饮": "Rantai Restoran",
+  "cases_filter_智慧食堂": "Kantin Pintar",
+  "cases_filter_云厨房": "Cloud Kitchen",
+  "alt_product_other": "Peralatan Pendukung"
 }

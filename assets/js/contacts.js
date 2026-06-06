@@ -212,8 +212,8 @@
   function startEmail() {
     var subject =
       typeof window.t === "function"
-        ? window.uiText("contacts_email_subject", "YuKoLi 智能厨具询价")
-        : "YuKoLi 智能厨具询价";
+        ? window.uiText("contacts_email_subject", "YuKoLi Smart Kitchen Inquiry")
+        : "YuKoLi Smart Kitchen Inquiry";
     var body = buildQuoteMessage();
     window.location.href =
       "mailto:support@yukoli.com?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(body);

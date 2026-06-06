@@ -57,7 +57,7 @@
       '<span class="app-dropdown-icon">' +
       '<span class="material-symbols-outlined">apps</span>' +
       "</span>" +
-      '<span class="app-dropdown-label" data-i18n="nav_applications_overview">应用场景总览</span>' +
+      '<span class="app-dropdown-label" data-i18n="nav_applications_overview">Application Overview</span>' +
       '<span class="material-symbols-outlined app-dropdown-chevron">chevron_right</span>' +
       "</a>";
 
@@ -148,7 +148,7 @@
       '<span class="app-dropdown-icon">' +
       '<span class="material-symbols-outlined">apps</span>' +
       "</span>" +
-      '<span class="app-popup-label" data-i18n="nav_applications_overview">应用场景总览</span>' +
+      '<span class="app-popup-label" data-i18n="nav_applications_overview">Application Overview</span>' +
       '<span class="material-symbols-outlined app-popup-chevron">chevron_right</span>' +
       "</a>";
 

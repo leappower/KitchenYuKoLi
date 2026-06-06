@@ -4291,5 +4291,14 @@
   "product_xc_0006_usage": "Utilisation : chaînes de restauration, snack-bars, cantines, cuisines familiales, etc. ; adapté au tranchage de divers ingrédients, épaisseur réglable, fonctionnement pratique. Capacité : tranchage efficace, économie de main-d'œuvre.",
   "product_xc_1288_name": "Trancheuse multifonction",
   "product_xc_1288_specifications": "Matériau : support entièrement en alliage d'aluminium ; Puissance nominale : 200W ; Tension : 220V ; Fréquence : 50Hz ; Lames : lames spéciales en acier inoxydable, diamètre 190mm ; Réglage : 20 positions (1-20mm) pour l'épaisseur ; Moteur : moteur à fil de cuivre ; Fonctionnement : stable et faible niveau sonore ; Applicabilité : convient aux aliments mous et durs, répond facilement à divers besoins de tranchage",
-  "product_xc_1288_usage": "Utilisation : chaînes de restauration, restaurants de fondue, cantines, cuisines centrales, etc. ; adapté au tranchage de viande fraîche, viande congelée et autres ingrédients, réglage de l'épaisseur sur plusieurs positions. Capacité : tranchage efficace, répondant aux besoins des restaurants de taille moyenne."
+  "product_xc_1288_usage": "Utilisation : chaînes de restauration, restaurants de fondue, cantines, cuisines centrales, etc. ; adapté au tranchage de viande fraîche, viande congelée et autres ingrédients, réglage de l'épaisseur sur plusieurs positions. Capacité : tranchage efficace, répondant aux besoins des restaurants de taille moyenne.",
+  "pd_tier_basic": "Basique",
+  "pd_tier_smart": "Intelligent",
+  "pd_tier_full_smart": "Totalement Intelligent",
+  "cases_filter_小型餐饮": "Petite restauration",
+  "cases_filter_中央厨房": "Cuisine centrale",
+  "cases_filter_连锁餐饮": "Chaîne de restaurants",
+  "cases_filter_智慧食堂": "Cantine intelligente",
+  "cases_filter_云厨房": "Cloud Kitchen",
+  "alt_product_other": "Équipement auxiliaire"
 }

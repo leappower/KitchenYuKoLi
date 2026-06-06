@@ -4,7 +4,10 @@
  * Renders on product category pages:
  *   - "搭配推荐" cross-sell cards (3-4 per category)
  *   - "适用场景" scene entry links (3 per category, with descriptions)
- *
+function _reInjectSrcset(root) {
+  var m = window.app && window.app.modules && window.app.modules.get("lazyLoading");
+  if (m && typeof m.reInjectSrcset === "function") m.reInjectSrcset(root);
+} *
  * Also populates PDP category navigation (#product-category-nav).
  *
  * Responsive layout:
@@ -25,10 +28,7 @@
   }
 
   function tl(key, fallback) {
-    if (typeof window.t === "function") {
-      var result = window.t(key);
-      if (result && result !== key) return result;
-    }
+    if (typeof window.uiText === "function") return window.uiText(key, fallback);
     return fallback || key;
   }
 
@@ -571,6 +571,19 @@
       if (crossSellContainer) {
         var crossSellHtml = renderCrossSell(slug);
         if (crossSellHtml) {
+          _reInjectSrcset(crossSellContainer);
+          if (window.translationManager) {
+            var applyFn = function () {
+              if (typeof window.translationManager.applyTo === "function") {
+                window.translationManager.applyTo(crossSellContainer);
+              }
+            };
+            if (window.translationManager.ready && typeof window.translationManager.ready.then === "function") {
+              window.translationManager.ready.then(applyFn);
+            } else {
+              applyFn();
+            }
+          }
           crossSellContainer.innerHTML = crossSellHtml;
         }
         /* else: no cross-sell, container stays hidden */
@@ -583,6 +596,9 @@
         sceneEntryContainer.innerHTML = sceneHtml;
       }
       /* else: no scene entry, container stays hidden */
+      _reInjectSrcset(sceneEntryContainer);
+      if (window.translationManager && typeof window.translationManager.applyTo === "function")
+        window.translationManager.applyTo(sceneEntryContainer);
     }
   }
 
@@ -652,7 +668,9 @@
   });
 
   // Re-render on language change — listen on both document and window
-  function _onLangChange() { renderCrossSellForCurrentPage(); }
+  function _onLangChange() {
+    renderCrossSellForCurrentPage();
+  }
   document.addEventListener("languageChanged", _onLangChange);
   window.addEventListener("languageChanged", _onLangChange);
 })();

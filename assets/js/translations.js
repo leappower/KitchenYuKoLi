@@ -1,6 +1,6 @@
 !(function (t) {
   "use strict";
-  var I18N_CACHE_V = 1780492000;
+  var I18N_CACHE_V = 1780747882;
   var _spaRegs = {};
 
   // ─── Ensure LANG_REGISTRY is loaded ─────────────────────────
@@ -125,9 +125,10 @@
       var e = this;
       return this.loadUITranslations(t)
         .then(function (n) {
-          return Promise.all([e.loadProductTranslations(t), e.loadProductJson(t)]).then(function (a) {
-            var o = e.mergeTranslations(n, a[0]);
-            o = e.mergeTranslations(o, a[1]);
+          return e.loadProductTranslations(t).then(function (pt) {
+            // loadProductTranslations now fetches {lang}-product.json internally
+            // and caches it. Merge flat UI + flat product JSON.
+            var o = e.mergeTranslations(n, pt);
             return (e.translationsCache.set(t, o), o);
           });
         })
@@ -195,53 +196,76 @@
         "[i18n] loadUITranslations timeout for " + t
       );
     }),
+    /* global PRODUCT_DATA_TABLE */
     (r.prototype.loadProductTranslations = function (lang) {
       var e = "product-" + lang;
       if (this.translationsCache.has(e)) return Promise.resolve(this.translationsCache.get(e));
       var n = this;
-      // Extract product translations from the already-loaded PRODUCT_DATA_TABLE
-      // (translations are embedded as nameEn, specificationsEn, etc. on each product)
-      return Promise.resolve().then(function () {
-        var suffix =
-          lang.charAt(0).toUpperCase() +
-          lang.slice(1).replace(/-([a-z])/g, function (m, c) {
-            return c.toUpperCase();
-          });
+      if (lang === "zh-CN" || lang === "zh") {
+        window._productTranslationsByModel = {};
+        n.translationsCache.set(e, {});
+        return Promise.resolve({});
+      }
+      // Helper: convert flat JSON keys (product_{key}_{field}) → { model: { field: val } }
+      function _prodKey(m) {
+        return (m || "")
+          .toLowerCase()
+          .replace(/[^a-z0-9]+/g, "_")
+          .replace(/_+/g, "_")
+          .replace(/^_|_$/g, "");
+      }
+      function _buildModelMap(json) {
         var table = window.PRODUCT_DATA_TABLE || [];
-        var map = {};
-        var fields = [
-          "name",
-          "specifications",
-          "usage",
-          "throughput",
-          "material",
-          "sub_category",
-          "tier",
-          "badge",
-          "control_method",
-          "product_dimensions",
-          "color",
-        ];
-        table.forEach(function (cat) {
-          var prods = cat.products || [];
-          prods.forEach(function (p) {
-            var pid = p._productId || p.id;
-            if (!pid) return;
-            var entry = {};
-            fields.forEach(function (f) {
-              var val = p[f + suffix];
-              if (val) entry[f] = val;
-            });
-            if (Object.keys(entry).length > 0) map[pid] = entry;
+        var modelMap = {};
+        // Flat format (product-data-table.js): each item has .model directly
+        if (Array.isArray(table) && table.length > 0 && table[0] && table[0].model) {
+          table.forEach(function (p) {
+            if (!p.model) return;
+            var k = _prodKey(p.model);
+            if (k) modelMap[k] = p.model;
           });
-        });
-        if (Object.keys(map).length === 0 && lang !== "zh-CN") {
-          console.warn("[i18n] loadProductTranslations: no embedded translations for " + lang);
+        } else {
+          // Nested format (legacy API): each item has .products
+          table.forEach(function (cat) {
+            (cat.products || []).forEach(function (p) {
+              if (!p.model) return;
+              var k = _prodKey(p.model);
+              if (k) modelMap[k] = p.model;
+            });
+          });
         }
-        n.translationsCache.set(e, map);
-        window._productTranslations = map;
-        return map;
-      });
+        var byModel = {};
+        Object.keys(json || {}).forEach(function (key) {
+          var m = key.match(
+            /^product_([a-z0-9]+(?:_[a-z0-9]+)*)_(name|specifications|usage|throughput|material|sub_category|tier|badge|control_method|product_dimensions|color|highlights)$/i
+          );
+          if (!m) return;
+          var mk = m[1],
+            f = m[2].toLowerCase(),
+            model = modelMap[mk];
+          if (!model) return;
+          if (!byModel[model]) byModel[model] = {};
+          byModel[model][f] = json[key];
+        });
+        return byModel;
+      }
+      // Fetch {lang}-product.json
+      return n
+        .loadProductJson(lang)
+        .then(function (json) {
+          // Build model-based map for getProductField()
+          var byModel = _buildModelMap(json);
+          window._productTranslationsByModel = byModel;
+          // Cache the raw flat JSON so applyTranslations() can resolve data-i18n keys
+          n.translationsCache.set(e, json || {});
+          return json || {};
+        })
+        .catch(function (err) {
+          console.warn("[i18n] loadProductTranslations: FAILED for " + lang + ":", err);
+          window._productTranslationsByModel = {};
+          n.translationsCache.set(e, {});
+          return {};
+        });
     }),
     (r.prototype.mergeTranslations = function (t, e) {
       return Object.assign({}, t, e);
@@ -310,6 +334,40 @@
       if (n && n !== t) return n;
       var a = this.getFallbackTranslation(t);
       return a && a !== t ? a : e;
+    }),
+    (r.prototype.applyTo = function (root) {
+      var t = this;
+      var uiKey = "ui-" + t.currentLanguage;
+      var e = t.translationsCache.get(uiKey) || {};
+      var s = t.translationsCache.get("product-" + t.currentLanguage) || {};
+      var en = t.translationsCache.get("ui-en") || {};
+      var pEn = t.translationsCache.get("product-en") || {};
+      var merged = Object.assign({}, en, pEn, e, s);
+      var resolve = function (key) {
+        var v = t.resolveTranslationValue(merged, key);
+        return v && v !== key ? v : null;
+      };
+      root.querySelectorAll("[data-i18n]").forEach(function (el) {
+        if (el.id === "current-lang-label") return;
+        var key = el.getAttribute("data-i18n");
+        var val = resolve(key);
+        if (val) el.textContent = val;
+      });
+      root.querySelectorAll("[data-i18n-placeholder]").forEach(function (el) {
+        var key = el.getAttribute("data-i18n-placeholder");
+        var val = resolve(key);
+        if (val) el.setAttribute("placeholder", val);
+      });
+      root.querySelectorAll("[data-i18n-aria]").forEach(function (el) {
+        var key = el.getAttribute("data-i18n-aria");
+        var val = resolve(key);
+        if (val) el.setAttribute("aria-label", val);
+      });
+      root.querySelectorAll("[data-i18n-alt]").forEach(function (el) {
+        var key = el.getAttribute("data-i18n-alt");
+        var val = resolve(key);
+        if (val) el.setAttribute("alt", val);
+      });
     }),
     (r.prototype.applyTranslations = function () {
       var t = this,

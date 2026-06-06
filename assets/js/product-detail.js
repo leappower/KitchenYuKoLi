@@ -17,6 +17,39 @@
     tgt.addEventListener(evt, fn, { signal: ac.signal });
   }
 
+  function _prodKey(model) {
+    return (model || "")
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, "_")
+      .replace(/_+/g, "_")
+      .replace(/^_|_$/g, "");
+  }
+
+  var CATEGORY_I18N_MAP = {
+    翻炒系列: "nav_products_stirfry",
+    炖煮系列: "nav_products_stewing",
+    蒸煮系列: "nav_products_steaming",
+    煎炸系列: "nav_products_frying",
+    切配系列: "nav_products_cutting",
+    辅助系列: "nav_products_other",
+  };
+
+  function translateCategory(cat) {
+    var key = CATEGORY_I18N_MAP[cat];
+    return key ? tl(key, cat) : cat;
+  }
+
+  var TIER_I18N_MAP = {
+    基础: "tier_basic",
+    智能: "tier_smart",
+    全智能: "tier_full_smart",
+  };
+
+  function translateTier(tier) {
+    var key = TIER_I18N_MAP[tier];
+    return key ? tl(key, tier) : tier;
+  }
+
   // Category slugs used for product listing — NOT PDP pages
   var CATEGORY_SLUGS = ["all", "cutting", "stirfry", "frying", "stewing", "steaming", "other"];
 
@@ -30,71 +63,161 @@
     辅助系列: "other",
   };
 
-    // MODEL_TO_SLUG: 从 product-data-table 生成的硬编码映射，不依赖任何运行时数据
+  // MODEL_TO_SLUG: 从 product-data-table 生成的硬编码映射，不依赖任何运行时数据
   // 防止 API 实时数据覆盖后回查失效
   var MODEL_TO_SLUG = {
-    "B4RTD": "stewing", "B6RBD": "stewing", "B8RBD": "stewing",
-    "DLB-4BQ30": "stirfry", "DLB-4QBQ30": "stirfry",
-    "DLB-A2800": "other", "DLB-A3600": "other", "DLB-A4600": "other", "DLB-A5400": "other",
-    "DLB-A60-G": "other", "DLB-A60-J": "other", "DLB-A60-Z": "other", "DLB-A6200": "other",
-    "DLB-BQ40T": "stirfry", "DLB-BXC800": "stirfry",
-    "DLB-GB50": "stirfry", "DLB-GB60": "stirfry", "DLB-GB60R": "stirfry",
-    "DLB-GB70": "stirfry", "DLB-GB70R": "stirfry",
-    "DLB-GB80": "stirfry", "DLB-GB80R": "stirfry",
-    "DLB-GB90": "stirfry", "DLB-GB90R": "stirfry",
-    "DLB-GC50": "stirfry", "DLB-GC60": "stirfry", "DLB-GC60R": "stirfry",
-    "DLB-GC70": "stirfry", "DLB-GC70R": "stirfry",
-    "DLB-GC80": "stirfry", "DLB-GC80R": "stirfry",
-    "DLB-GC90": "stirfry", "DLB-GC90R": "stirfry",
-    "DLB-GD30": "stirfry", "DLB-GD36": "stirfry",
+    B4RTD: "stewing",
+    B6RBD: "stewing",
+    B8RBD: "stewing",
+    "DLB-4BQ30": "stirfry",
+    "DLB-4QBQ30": "stirfry",
+    "DLB-A2800": "other",
+    "DLB-A3600": "other",
+    "DLB-A4600": "other",
+    "DLB-A5400": "other",
+    "DLB-A60-G": "other",
+    "DLB-A60-J": "other",
+    "DLB-A60-Z": "other",
+    "DLB-A6200": "other",
+    "DLB-BQ40T": "stirfry",
+    "DLB-BXC800": "stirfry",
+    "DLB-GB50": "stirfry",
+    "DLB-GB60": "stirfry",
+    "DLB-GB60R": "stirfry",
+    "DLB-GB70": "stirfry",
+    "DLB-GB70R": "stirfry",
+    "DLB-GB80": "stirfry",
+    "DLB-GB80R": "stirfry",
+    "DLB-GB90": "stirfry",
+    "DLB-GB90R": "stirfry",
+    "DLB-GC50": "stirfry",
+    "DLB-GC60": "stirfry",
+    "DLB-GC60R": "stirfry",
+    "DLB-GC70": "stirfry",
+    "DLB-GC70R": "stirfry",
+    "DLB-GC80": "stirfry",
+    "DLB-GC80R": "stirfry",
+    "DLB-GC90": "stirfry",
+    "DLB-GC90R": "stirfry",
+    "DLB-GD30": "stirfry",
+    "DLB-GD36": "stirfry",
     "DLB-GD36/9": "stirfry",
-    "DLB-GQ30": "stirfry", "DLB-GQ30J": "stirfry", "DLB-GQ30T": "stirfry", "DLB-GQ35T": "stirfry",
-    "DLB-GQ36": "stirfry", "DLB-GQ36J": "stirfry", "DLB-GQ36J/9": "stirfry",
+    "DLB-GQ30": "stirfry",
+    "DLB-GQ30J": "stirfry",
+    "DLB-GQ30T": "stirfry",
+    "DLB-GQ35T": "stirfry",
+    "DLB-GQ36": "stirfry",
+    "DLB-GQ36J": "stirfry",
+    "DLB-GQ36J/9": "stirfry",
     "DLB-GQ50": "stirfry",
-    "DLB-GQ60": "stirfry", "DLB-GQ60R": "stirfry",
-    "DLB-GQ70": "stirfry", "DLB-GQ70R": "stirfry",
-    "DLB-GQ80": "stirfry", "DLB-GQ80R": "stirfry",
-    "DLB-GQ90": "stirfry", "DLB-GQ90R": "stirfry",
-    "DLB-PZJ80": "steaming", "DLB-PZJ100": "steaming", "DLB-PZJ120": "steaming", "DLB-PZJ200": "steaming", "DLB-PZJ400": "steaming",
-    "DLB-QXC80": "stewing", "DLB-QXC80R": "stewing",
-    "DLB-QXC100": "stewing", "DLB-QXC100R": "stewing",
-    "DLB-QXC120": "stewing", "DLB-QXC120R": "stewing",
-    "DLB-TBQ30": "stirfry", "DLB-TBS30": "stirfry", "DLB-TBS40": "stirfry", "DLB-TBS50": "stirfry",
-    "DLB-TGD30": "stirfry", "DLB-TGD36": "stirfry", "DLB-TGD36/9": "stirfry", "DLB-TGD40": "stirfry",
-    "DLB-TGQ30": "stirfry", "DLB-TGQ30J": "stirfry",
-    "DLB-TGQ36J": "stirfry", "DLB-TGQ36J/9": "stirfry",
-    "DLB-TGQ40": "stirfry", "DLB-TGQ40J": "stirfry",
+    "DLB-GQ60": "stirfry",
+    "DLB-GQ60R": "stirfry",
+    "DLB-GQ70": "stirfry",
+    "DLB-GQ70R": "stirfry",
+    "DLB-GQ80": "stirfry",
+    "DLB-GQ80R": "stirfry",
+    "DLB-GQ90": "stirfry",
+    "DLB-GQ90R": "stirfry",
+    "DLB-PZJ80": "steaming",
+    "DLB-PZJ100": "steaming",
+    "DLB-PZJ120": "steaming",
+    "DLB-PZJ200": "steaming",
+    "DLB-PZJ400": "steaming",
+    "DLB-QXC80": "stewing",
+    "DLB-QXC80R": "stewing",
+    "DLB-QXC100": "stewing",
+    "DLB-QXC100R": "stewing",
+    "DLB-QXC120": "stewing",
+    "DLB-QXC120R": "stewing",
+    "DLB-TBQ30": "stirfry",
+    "DLB-TBS30": "stirfry",
+    "DLB-TBS40": "stirfry",
+    "DLB-TBS50": "stirfry",
+    "DLB-TGD30": "stirfry",
+    "DLB-TGD36": "stirfry",
+    "DLB-TGD36/9": "stirfry",
+    "DLB-TGD40": "stirfry",
+    "DLB-TGQ30": "stirfry",
+    "DLB-TGQ30J": "stirfry",
+    "DLB-TGQ36J": "stirfry",
+    "DLB-TGQ36J/9": "stirfry",
+    "DLB-TGQ40": "stirfry",
+    "DLB-TGQ40J": "stirfry",
     "DLB-TGS30": "stirfry",
     "DLB-TQBQ30": "stirfry",
-    "DLB-TZS40": "stirfry", "DLB-TZS50": "stirfry",
-    "DLB-XC80": "stewing", "DLB-XC80R": "stewing",
-    "DLB-XC100": "stewing", "DLB-XC100R": "stewing",
-    "DLB-XC120": "stewing", "DLB-XC120R": "stewing",
-    "DLB-ZNT": "stewing", "DLB-ZNY": "stewing",
-    "F32F1C": "stirfry",
-    "G26D1A": "stirfry", "G26D1R": "stirfry", "G26DAA": "stirfry",
-    "G26DAG": "stirfry", "G26DAR": "stirfry", "G26DAS": "stirfry",
-    "G30D1A": "stirfry", "G30D1R": "stirfry", "G30D1T": "stirfry",
-    "G30DAA": "stirfry", "G30DAG": "stirfry", "G30DAR": "stirfry", "G30DAS": "stirfry", "G30DFA": "stirfry",
-    "G36D1A": "stirfry", "G36D1R": "stirfry", "G36DAA": "stirfry",
-    "G36DAG": "stirfry", "G36DAR": "stirfry", "G36DAS": "stirfry",
-    "G50AAB": "stirfry", "G50AAC": "stirfry", "G50GAT": "stirfry",
-    "G60EAC": "stirfry", "G60EAS": "stirfry",
-    "G70EAC": "stirfry", "G70EAS": "stirfry",
-    "G80EAC": "stirfry", "G80EAS": "stirfry",
-    "GT1D1B": "frying", "GT2D1B": "frying",
-    "HKDQJ300": "cutting", "HKDQJ300-VII": "cutting",
-    "HKFBJ": "cutting", "HKJGJ380-VI": "cutting",
-    "HKQPJ-300": "cutting", "HKQPJ400-VIII": "cutting", "HKQPJ500-VIII": "cutting",
-    "HKQTJ200-VII": "cutting", "HKQTJ300": "cutting", "HKQTJ600-VII": "cutting",
+    "DLB-TZS40": "stirfry",
+    "DLB-TZS50": "stirfry",
+    "DLB-XC80": "stewing",
+    "DLB-XC80R": "stewing",
+    "DLB-XC100": "stewing",
+    "DLB-XC100R": "stewing",
+    "DLB-XC120": "stewing",
+    "DLB-XC120R": "stewing",
+    "DLB-ZNT": "stewing",
+    "DLB-ZNY": "stewing",
+    F32F1C: "stirfry",
+    G26D1A: "stirfry",
+    G26D1R: "stirfry",
+    G26DAA: "stirfry",
+    G26DAG: "stirfry",
+    G26DAR: "stirfry",
+    G26DAS: "stirfry",
+    G30D1A: "stirfry",
+    G30D1R: "stirfry",
+    G30D1T: "stirfry",
+    G30DAA: "stirfry",
+    G30DAG: "stirfry",
+    G30DAR: "stirfry",
+    G30DAS: "stirfry",
+    G30DFA: "stirfry",
+    G36D1A: "stirfry",
+    G36D1R: "stirfry",
+    G36DAA: "stirfry",
+    G36DAG: "stirfry",
+    G36DAR: "stirfry",
+    G36DAS: "stirfry",
+    G50AAB: "stirfry",
+    G50AAC: "stirfry",
+    G50GAT: "stirfry",
+    G60EAC: "stirfry",
+    G60EAS: "stirfry",
+    G70EAC: "stirfry",
+    G70EAS: "stirfry",
+    G80EAC: "stirfry",
+    G80EAS: "stirfry",
+    GT1D1B: "frying",
+    GT2D1B: "frying",
+    HKDQJ300: "cutting",
+    "HKDQJ300-VII": "cutting",
+    HKFBJ: "cutting",
+    "HKJGJ380-VI": "cutting",
+    "HKQPJ-300": "cutting",
+    "HKQPJ400-VIII": "cutting",
+    "HKQPJ500-VIII": "cutting",
+    "HKQTJ200-VII": "cutting",
+    HKQTJ300: "cutting",
+    "HKQTJ600-VII": "cutting",
     "HKXQJ-400": "cutting",
-    "J40CBB": "stirfry", "LZ80D1B": "stewing",
-    "M3DAD": "stewing", "M4DAD+1": "stewing", "M4DAD+2": "stewing",
-    "M6DAD": "stewing", "M6DBD": "stewing", "M6RAD": "stewing",
-    "XC-0006": "cutting", "XC-0888": "cutting", "XC-0988": "cutting",
-    "XC-1088": "cutting", "XC-1288": "cutting", "XC-6344": "cutting",
-    "Y12D1C": "frying", "Y12D2C": "frying", "Y24C1C": "frying", "Y50D1C": "frying",
-    "Z6FCB": "steaming", "Z8FCB/Z12FCB": "steaming",
+    J40CBB: "stirfry",
+    LZ80D1B: "stewing",
+    M3DAD: "stewing",
+    "M4DAD+1": "stewing",
+    "M4DAD+2": "stewing",
+    M6DAD: "stewing",
+    M6DBD: "stewing",
+    M6RAD: "stewing",
+    "XC-0006": "cutting",
+    "XC-0888": "cutting",
+    "XC-0988": "cutting",
+    "XC-1088": "cutting",
+    "XC-1288": "cutting",
+    "XC-6344": "cutting",
+    Y12D1C: "frying",
+    Y12D2C: "frying",
+    Y24C1C: "frying",
+    Y50D1C: "frying",
+    Z6FCB: "steaming",
+    "Z8FCB/Z12FCB": "steaming",
     "\u7535\u78c1\uff1aDLB-GQ40\u71c3\u6c14\uff1aDLB-GQ40R": "stirfry",
   };
   if (typeof window !== "undefined") window.MODEL_TO_SLUG = MODEL_TO_SLUG;
@@ -104,10 +227,7 @@
   }
 
   function tl(key, fallback) {
-    if (typeof window.t === "function") {
-      var result = window.t(key);
-      if (result && result !== key) return result;
-    }
+    if (typeof window.uiText === "function") return window.uiText(key, fallback);
     return fallback || key;
   }
 
@@ -203,7 +323,9 @@
       '" onerror="this.style.display=\'none\'">' +
       '</div><div class="p-4"><h4 class="font-bold text-sm mb-1">' +
       esc(rp.model) +
-      '</h4><p class="text-xs text-slate-500 dark:text-slate-400 mb-2">' +
+      '</h4><p class="text-xs text-slate-500 dark:text-slate-400 mb-2" data-i18n="' +
+      esc(getCategoryI18nKey(rp)) +
+      '">' +
       esc(getCategoryName(rp)) +
       '</p><span class="inline-flex items-center gap-1 text-sm font-bold text-primary group-hover:gap-2 transition-all">' +
       tl("btn_view_details", "查看详情") +
@@ -523,7 +645,7 @@
         (badgeHtml ? badgeHtml : "") +
         (badgeHtml ? chevron : "") +
         '<li><span class="text-slate-900 dark:text-white font-medium">' +
-        esc(getProductField(product, "name") || model) +
+        esc(tl("product_" + _prodKey(model) + "_name", getProductField(product, "name") || model)) +
         "</span></li>" +
         "</ol></nav></div>";
       // Mobile breadcrumb — 统一返回按钮 + 可点击链接
@@ -549,7 +671,7 @@
           : "") +
         mChevron +
         '<span class="text-sm font-bold text-slate-900 dark:text-white truncate max-w-[160px]">' +
-        esc(getProductField(product, "name") || model) +
+        esc(tl("product_" + _prodKey(model) + "_name", getProductField(product, "name") || model)) +
         "</span>" +
         "</div></div>";
       bcEl.innerHTML = html;
@@ -621,12 +743,12 @@
 
     var tier = product.tier
       ? '<span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-bold bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-300">' +
-        esc(getProductField(product, "tier")) +
+        esc(translateTier(getProductField(product, "tier") || product.tier)) +
         "</span>"
       : "";
     var badge = product.badge
       ? '<span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-bold bg-primary text-white">' +
-        esc(product.badge) +
+        esc(tl("product_" + _prodKey(product.model) + "_badge", product.badge)) +
         "</span>"
       : "";
     var hlBadges = "";
@@ -768,14 +890,16 @@
       // Info column
       '<div class="lg:w-1/2 flex flex-col gap-5"><div>' +
       '<div class="flex items-center gap-3 mb-2">' +
-      '<span class="text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">' +
+      '<span class="text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400" data-i18n="' +
+      esc(getSubCatI18nKey(product)) +
+      '">' +
       esc(translateSubCategory(product) || getCategoryName(product)) +
       "</span>" +
       badge +
       tier +
       "</div>" +
       '<h1 id="detail-title" class="text-2xl lg:text-3xl font-black tracking-tight mb-2">' +
-      esc(getProductField(product, "name") || product.model) +
+      esc(tl("product_" + _prodKey(product.model) + "_name", getProductField(product, "name") || product.model)) +
       "</h1>" +
       // Model subtitle
       (product.model && product.name && product.name !== product.model
@@ -853,6 +977,12 @@
 
     // Related products
     renderRelated(product);
+
+    // Inject responsive srcset for all rendered images
+    var lazyMod = window.app && window.app.modules && window.app.modules.get("lazyLoading");
+    if (lazyMod && typeof lazyMod.reInjectSrcset === "function") {
+      lazyMod.reInjectSrcset(document.getElementById("product-content") || document);
+    }
   }
 
   document.addEventListener("DOMContentLoaded", function () {
@@ -864,26 +994,83 @@
     if (!/^\/products\/[^/]+\/[^/]+\/$/.test(path)) return;
     renderPDP();
   });
+  // Get the i18n key for a product's category (for data-i18n attributes)
+  function getCategoryI18nKey(product) {
+    var cat = product.category || product.categoryName || "";
+    if (!cat) return "";
+    var key = CATEGORY_I18N_MAP[cat];
+    // fallback: 通过 model 从 MODEL_TO_SLUG 反查标准分类名
+    if (!key && product.model && window.MODEL_TO_SLUG) {
+      var slug = window.MODEL_TO_SLUG[product.model];
+      if (slug) {
+        var slugToName = {
+          stirfry: "nav_products_stirfry",
+          cutting: "nav_products_cutting",
+          frying: "nav_products_frying",
+          stewing: "nav_products_stewing",
+          steaming: "nav_products_steaming",
+          other: "nav_products_other",
+        };
+        key = slugToName[slug] || "";
+      }
+    }
+    return key;
+  }
+
+  // Get i18n key for subCategory (for data-i18n on PDP subcategory span)
+  function getSubCatI18nKey(product) {
+    var subCat = product.subCategory;
+    if (!subCat) return "";
+    var cat = product.category || "";
+    var slug = CATEGORY_NAME_TO_SLUG[cat] || "other";
+    var enSlug = (SUBCAT_EN_SLUG || {})[subCat] || subCat.replace(/\//g, "_");
+    return "product_subcat_" + slug + "_" + enSlug;
+  }
+
+  var SUBCAT_EN_SLUG = {
+    搅拌炒菜机: "stirring_cooker",
+    滚筒炒菜机: "drum_cooker",
+    团餐滚筒炒菜机: "catering_drum_wok",
+    "搅拌炒锅/炖烩机": "stirfry_pot_stewing",
+    汤锅: "stock_pot",
+    压力锅: "pressure_cooker",
+    煮面炉: "noodle_cooker",
+    煲仔炉: "clay_pot_cooker",
+    卤煮炉: "braising_stew_pot",
+    智能蒸饭机: "smart_rice_steamer",
+    "自动漂烫/焯水/油炸机": "blanching_scalding_frying",
+    油炸炉: "deep_fryer",
+    锅贴机: "pot_sticker",
+    流水化自动机: "automated_inline",
+    揭盖式洗碗机: "lift_lid_dishwasher",
+    长龙洗碗机: "long_conveyor_dishwasher",
+    切菜机: "vegetable_cutting",
+    切肉机: "meat_cutting",
+    锯骨机: "bone_saw",
+    切丁机: "dicing",
+    切片机: "slicing",
+    绞肉机: "meat_grinder",
+  };
+
   // Get translated category name (from UI i18n, not product_translations)
   function getCategoryName(product) {
     var cat = product.category || product.categoryName || "";
     if (!cat) return "";
     // Priority: product._categoryName (enriched from parent) > i18n translate > product.categoryName > raw key
     if (product._categoryName) return product._categoryName;
-    var CATEGORY_I18N_MAP = {
-      翻炒系列: "nav_products_stirfry",
-      炖煮系列: "nav_products_stewing",
-      蒸煮系列: "nav_products_steaming",
-      煎炸系列: "nav_products_frying",
-      切配系列: "nav_products_cutting",
-      辅助系列: "nav_products_other",
-    };
     var i18nKey = CATEGORY_I18N_MAP[cat];
     // fallback: 通过 model 从 MODEL_TO_SLUG 反查标准分类名
     if (!i18nKey && product.model && window.MODEL_TO_SLUG) {
       var slug = window.MODEL_TO_SLUG[product.model];
       if (slug) {
-        var slugToName = { stirfry: "nav_products_stirfry", cutting: "nav_products_cutting", frying: "nav_products_frying", stewing: "nav_products_stewing", steaming: "nav_products_steaming", other: "nav_products_other" };
+        var slugToName = {
+          stirfry: "nav_products_stirfry",
+          cutting: "nav_products_cutting",
+          frying: "nav_products_frying",
+          stewing: "nav_products_stewing",
+          steaming: "nav_products_steaming",
+          other: "nav_products_other",
+        };
         var nameKey = slugToName[slug];
         if (nameKey) i18nKey = nameKey;
       }
@@ -903,6 +1090,8 @@
     滚筒炒菜机: "Drum Stir-Fry Machine",
     团餐滚筒炒菜机: "Catering Drum Wok",
     搅拌炒锅炖烩机: "Stir-fry Pot / Stewing Machine",
+    "搅拌炒锅/炖烩机": "Stir-fry Pot / Stewing Machine",
+    "自动漂烫/焯水/油炸机": "Automatic Blanching / Scalding / Frying Machine",
     汤锅: "Stock Pot",
     压力锅: "Pressure Cooker",
     煮面炉: "Noodle Cooker",
@@ -941,16 +1130,23 @@
   // Load translations for a language by fetching {lang}-product.json
   window.loadProductTranslations = function (lang, callback) {
     var normalizedLang = lang.replace("_", "-");
-    // zh-CN uses product-data-table directly (Chinese is the source)
     if (normalizedLang === "zh-CN" || normalizedLang === "zh") {
-      window._productTranslations = {};
       window._productTranslationsByModel = {};
       if (callback) callback();
       return;
     }
-    // Fetch {lang}-product.json
-    var baseUrl = (window.BASE_PATH || "") + "/assets/lang/";
-    var url = baseUrl + normalizedLang + "-product.json";
+    // Priority 1: translations.js already loaded and cached
+    if (window.translationManager) {
+      var cached = window.translationManager.translationsCache.get("product-" + normalizedLang);
+      if (cached) {
+        // translations.js's loadProductTranslations already built _productTranslationsByModel
+        if (callback) callback();
+        document.dispatchEvent(new CustomEvent("productTranslationsLoaded"));
+        return;
+      }
+    }
+    // Priority 2: fallback fetch directly (standalone PDP without translations.js)
+    var url = (window.BASE_PATH || "") + "/assets/lang/" + normalizedLang + "-product.json";
     fetch(url, { cache: "default" })
       .then(function (r) {
         if (!r.ok) throw new Error("HTTP " + r.status);
@@ -958,7 +1154,6 @@
       })
       .then(function (json) {
         // Convert flat keys to model-based lookup
-        // JSON keys: product_dlb_tbs30_name → model=DLB-TBS30, field=name
         var byModel = {};
         var products = getAllProducts();
         var modelMap = {};
@@ -971,26 +1166,22 @@
           if (key) modelMap[key] = p.model;
         });
         Object.keys(json).forEach(function (key) {
-          // Parse: product_{model}_{field}
           var m = key.match(
             /^product_([a-z0-9]+(?:_[a-z0-9]+)*)_(name|specifications|usage|throughput|material|sub_category|tier|badge|control_method|product_dimensions|color|highlights)$/i
           );
           if (!m) return;
-          var modelKey = m[1];
-          var field = m[2].toLowerCase();
-          var model = modelMap[modelKey];
+          var modelKey = m[1],
+            field = m[2].toLowerCase(),
+            model = modelMap[modelKey];
           if (!model) return;
           if (!byModel[model]) byModel[model] = {};
           byModel[model][field] = json[key];
         });
-        window._productTranslations = byModel;
         window._productTranslationsByModel = byModel;
         if (callback) callback();
-        // Dispatch event for other listeners
         document.dispatchEvent(new CustomEvent("productTranslationsLoaded"));
       })
       .catch(function (e) {
-        window._productTranslations = {};
         window._productTranslationsByModel = {};
         if (callback) callback();
       });

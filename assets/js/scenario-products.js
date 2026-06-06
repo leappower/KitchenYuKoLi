@@ -4,6 +4,12 @@
  * 从 HTML 容器的 data-scenario / data-device 属性读取场景和设备信息，
  * 不依赖 URL 正则匹配，不依赖 window.innerWidth。
  *
+function _reInjectSrcset(root) {
+  var m = window.app && window.app.modules && window.app.modules.get("lazyLoading");
+  if (m && typeof m.reInjectSrcset === "function") m.reInjectSrcset(root);
+}
+
+/**
  * 数据源: window.PRODUCT_DATA_TABLE (product-data-table.js SSG 时注入)
  * 产品列表: SCENARIO_PRODUCTS 映射表 (场景 key → 产品型号数组)
  */
@@ -20,6 +26,14 @@
   function tl(key, fallback) {
     if (typeof window.uiText === "function") return window.uiText(key, fallback);
     return fallback || key;
+  }
+
+  function _prodKey(model) {
+    return (model || "")
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, "_")
+      .replace(/_+/g, "_")
+      .replace(/^_|_$/g, "");
   }
 
   function translateCategory(cat) {
@@ -58,7 +72,9 @@
     return "/products/" + encodeURIComponent(product.model) + "/";
   }
 
-  if (typeof getProductField === "undefined") {
+  // Only define fallback if utils.js getProductField hasn't been loaded
+  // (utils.js is loaded before scenario-products.js via script tags)
+  if (typeof window.getProductField !== "function") {
     window.getProductField = function (p, field) {
       if (!p) return "";
       if (field === "name") return p.name_en || p.name || "";
@@ -219,6 +235,14 @@
       切配系列: "cutting",
       辅助系列: "other",
     };
+    var CATEGORY_I18N_MAP = {
+      翻炒系列: "nav_products_stirfry",
+      炖煮系列: "nav_products_stewing",
+      蒸煮系列: "nav_products_steaming",
+      煎炸系列: "nav_products_frying",
+      切配系列: "nav_products_cutting",
+      辅助系列: "nav_products_other",
+    };
     var catSlug = catMap[p.category] || "other";
     var catHref = "/products/" + catSlug + "/";
 
@@ -261,7 +285,9 @@
           catHref +
           '" class="inline-block ' +
           badgeClass +
-          ' rounded-full bg-primary/10 text-primary hover:bg-primary/20 transition-colors font-bold">' +
+          ' rounded-full bg-primary/10 text-primary hover:bg-primary/20 transition-colors font-bold" data-i18n="' +
+          (CATEGORY_I18N_MAP[p.category] || "") +
+          '">' +
           escHtml(translateCategory(p.category)) +
           "</a>"
         : "") +
@@ -271,7 +297,11 @@
       escHtml(p.model) +
       "</h3>" +
       (typeof getProductField === "function" && getProductField(p, "name")
-        ? '<p class="' + descClass + '">' + escHtml(getProductField(p, "name")) + "</p>"
+        ? '<p class="' +
+          descClass +
+          '">' +
+          escHtml(tl("product_" + _prodKey(p.model) + "_name", getProductField(p, "name") || p.model)) +
+          "</p>"
         : '<div class="mb-4"></div>') +
       '<div class="flex justify-between items-center pt-2 border-t border-slate-100' +
       (isDark ? " dark:border-slate-700" : "") +
@@ -294,10 +324,8 @@
 
   function render(container, products, device) {
     if (!products || products.length === 0) {
-      container.innerHTML =
-        '<div class="text-center text-slate-400 py-8">' +
-        escHtml(tl("no_scenario_products", "暂无场景产品数据")) +
-        "</div>";
+      container.innerHTML = '<div class="text-center text-slate-400 py-8">' + _reInjectSrcset(container);
+      escHtml(tl("no_scenario_products", "暂无场景产品数据")) + "</div>";
       return;
     }
 
@@ -327,21 +355,22 @@
           hiddenId +
           "');var b=document.getElementById('scenario-load-more');if(h&&b){h.style.display='';b.style.display='none';window.translationManager&&window.translationManager.applyTo(h.parentElement);}})()\">" +
           '<span class="material-symbols-outlined text-lg">expand_more</span> ' +
-          escHtml(tl("home_show_more", "更多产品")) +
+          escHtml(tl("home_show_more", "More Products")) +
           "</button>";
       } else {
         html +=
           '<div class="flex justify-center mt-8">' +
           '<button class="px-6 py-2.5 rounded-full border-2 border-primary text-primary font-bold hover:bg-primary hover:text-white transition-all cursor-pointer text-sm" onclick="(function(){var h=document.getElementById(\'' +
           hiddenId +
-          "');var b=this;if(h.style.display==='none'){h.style.display='';b.textContent=typeof window.uiText==='function'?window.uiText('home_hw_collapse','收起 ▲'):'收起 ▲'}else{h.style.display='none';b.textContent=typeof window.uiText==='function'?window.uiText('home_hw_show_more','查看更多产品 ▼'):'查看更多产品 ▼'}})()\" data-i18n=\"home_hw_show_more\">" +
-          tl("home_hw_show_more", "查看更多产品 ▼") +
+          "');var b=this;if(h.style.display==='none'){h.style.display='';b.textContent=typeof window.uiText==='function'?window.uiText('home_hw_collapse','Collapse ▲'):'Collapse ▲'}else{h.style.display='none';b.textContent=typeof window.uiText==='function'?window.uiText('home_hw_show_more','View More Products ▼'):'View More Products ▼'}})()\" data-i18n=\"home_hw_show_more\">" +
+          tl("home_hw_show_more", "View More Products ▼") +
           "</button></div>";
       }
     }
 
     container.innerHTML = html;
     if (window.translationManager && window.translationManager.applyTo) {
+      _reInjectSrcset(container);
       window.translationManager.applyTo(container);
     }
   }

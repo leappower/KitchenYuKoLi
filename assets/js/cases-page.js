@@ -16,10 +16,7 @@
 
   /* ─── i18n helper ─── */
   function tl(key, fallback) {
-    if (typeof window.t === "function") {
-      var result = window.t(key);
-      if (result && result !== key) return result;
-    }
+    if (typeof window.uiText === "function") return window.uiText(key, fallback);
     return fallback || key;
   }
 
@@ -33,11 +30,11 @@
       client: tl("casepage_1_client", "泰国炒菜连锁品牌，覆盖曼谷、清迈、芭提雅共86家门店"),
       challenge: tl(
         "casepage_1_challenge",
-        "门店间菜品配方一致性差，厨师流动率高，新店开业周期长达6周，培训成本居高不下。"
+        tl("casepage_1_challenge", "门店间菜品配方一致性差，厨师流动率高，新店开业周期长达6周，培训成本居高不下。")
       ),
       solution: tl(
         "casepage_1_solution",
-        "部署172台YuKoLi自动炒菜机（YK-AW2000），每台内置200+道菜谱，实现一键标准化烹饪。"
+        tl("casepage_1_solution", "部署172台YuKoLi自动炒菜机（YK-AW2000），每台内置200+道菜谱，实现一键标准化烹饪。")
       ),
       results: [
         { value: "70%", label: tl("casepage_1_r1", "人力缩减（5人→1.5人/店）") },
@@ -92,11 +89,11 @@
       client: tl("casepage_3_client", "吉隆坡电子工厂食堂，服务3,000名工人，需符合马来西亚卫生部食品安全标准"),
       challenge: tl(
         "casepage_3_challenge",
-        "场地有限、人手不足，需在有限空间内满足3,000人用餐，同时通过政府食品安全检查。"
+        tl("casepage_3_challenge", "场地有限、人手不足，需在有限空间内满足3,000人用餐，同时通过政府食品安全检查。")
       ),
       solution: tl(
         "casepage_3_solution",
-        "部署YK-ST3000商用蒸柜 + YK-RC2000电饭煲 + 自动洗碗线，实现大规模标准化出餐。"
+        tl("casepage_3_solution", "部署YK-ST3000商用蒸柜 + YK-RC2000电饭煲 + 自动洗碗线，实现大规模标准化出餐。")
       ),
       results: [
         { value: "75%", label: tl("casepage_3_r1", "人力缩减（16人→4人）") },

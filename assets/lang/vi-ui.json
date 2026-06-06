@@ -4291,5 +4291,14 @@
   "product_xc_0006_usage": "Công dụng: Chuỗi nhà hàng, quán ăn nhẹ, căng tin, bếp gia đình...; Thích hợp cho thái lát nhiều loại nguyên liệu, điều chỉnh độ dày mỏng, thao tác tiện lợi.\nNăng suất: Thái lát hiệu quả, tiết kiệm nhân công.",
   "product_xc_1288_name": "Máy thái lát đa năng",
   "product_xc_1288_specifications": "Chất liệu: Khung bằng hợp kim nhôm toàn bộ; Công suất định mức: 200W; Điện áp: 220V; Tần số: 50Hz; Lưỡi dao: Lưỡi dao thép không gỉ đặc chế, đường kính 190mm; Điều chỉnh: 20 cấp độ (1-20mm) điều chỉnh độ dày; Động cơ: Động cơ dây đồng; Vận hành: Ổn định, decibel thấp; Ứng dụng: Nguyên liệu mềm, cứng đều được, dễ dàng đáp ứng nhu cầu thái lát đa dạng",
-  "product_xc_1288_usage": "Công dụng: Chuỗi nhà hàng, quán lẩu, căng tin, bếp trung tâm,...; Thích hợp thái lát thịt tươi, thịt đông lạnh và nhiều nguyên liệu khác, điều chỉnh độ dày nhiều cấp. Năng suất: Thái lát hiệu quả, đáp ứng nhu cầu ẩm thực vừa và nhỏ."
+  "product_xc_1288_usage": "Công dụng: Chuỗi nhà hàng, quán lẩu, căng tin, bếp trung tâm,...; Thích hợp thái lát thịt tươi, thịt đông lạnh và nhiều nguyên liệu khác, điều chỉnh độ dày nhiều cấp. Năng suất: Thái lát hiệu quả, đáp ứng nhu cầu ẩm thực vừa và nhỏ.",
+  "pd_tier_basic": "Cơ bản",
+  "pd_tier_smart": "Thông minh",
+  "pd_tier_full_smart": "Thông minh hoàn toàn",
+  "cases_filter_小型餐饮": "Nhà hàng nhỏ",
+  "cases_filter_中央厨房": "Nhà bếp trung tâm",
+  "cases_filter_连锁餐饮": "Chuỗi nhà hàng",
+  "cases_filter_智慧食堂": "Nhà ăn thông minh",
+  "cases_filter_云厨房": "Nhà bếp đám mây",
+  "alt_product_other": "Thiết bị hỗ trợ"
 }
