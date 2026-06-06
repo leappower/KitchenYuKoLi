@@ -1,6 +1,6 @@
 !(function (t) {
   "use strict";
-  var I18N_CACHE_V = 1780749612;
+  var I18N_CACHE_V = 1780757636;
   var _spaRegs = {};
 
   // ─── Ensure LANG_REGISTRY is loaded ─────────────────────────
@@ -486,25 +486,25 @@
     }),
     (r.prototype.refreshDocumentTitle = function (t) {
       // Derive page_title_{route} key from current URL path
-      var path = window.location.pathname.replace(/\/+$/, '') || '/';
-      if (path === '/') path = '/home';
-      var route = path.replace(/^\//, '').replace(/\//g, '_');
+      var path = window.location.pathname.replace(/\/+$/, "") || "/";
+      if (path === "/") path = "/home";
+      var route = path.replace(/^\//, "").replace(/\//g, "_");
       // Check if it's a product detail page (/products/{cat}/{model}/)
       var isProductDetail = /^\/products\/[^/]+\/[^/]+\/$/.test(window.location.pathname);
       if (isProductDetail) {
         // Product detail pages use JS-rendered title (set by product-detail.js)
         return;
       }
-      var pageTitleKey = 'page_title_' + route;
-      var pageDescKey = 'page_desc_' + route;
-      var titleVal = this.uiText(pageTitleKey, '');
-      var descVal = this.uiText(pageDescKey, '');
+      var pageTitleKey = "page_title_" + route;
+      var pageDescKey = "page_desc_" + route;
+      var titleVal = this.uiText(pageTitleKey, "");
+      var descVal = this.uiText(pageDescKey, "");
       if (titleVal && titleVal !== pageTitleKey) {
         document.title = titleVal;
       }
       if (descVal && descVal !== pageDescKey) {
         var meta = document.querySelector('meta[name="description"]');
-        if (meta) meta.setAttribute('content', descVal);
+        if (meta) meta.setAttribute("content", descVal);
       }
     }),
     (r.prototype.getFallbackTranslation = function (t) {
