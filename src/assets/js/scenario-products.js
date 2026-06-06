@@ -7,7 +7,10 @@
 function _reInjectSrcset(root) {
   var m = window.app && window.app.modules && window.app.modules.get("lazyLoading");
   if (m && typeof m.reInjectSrcset === "function") m.reInjectSrcset(root);
-} * 数据源: window.PRODUCT_DATA_TABLE (product-data-table.js SSG 时注入)
+}
+
+/**
+ * 数据源: window.PRODUCT_DATA_TABLE (product-data-table.js SSG 时注入)
  * 产品列表: SCENARIO_PRODUCTS 映射表 (场景 key → 产品型号数组)
  */
 (function () {
