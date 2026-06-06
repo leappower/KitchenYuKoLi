@@ -68,6 +68,32 @@ function _reInjectSrcset(root) {
     return "/assets/images/products/" + product.model + ".webp";
   }
 
+  function getDeviceType() {
+    return window.DeviceUtils
+      ? window.DeviceUtils.getDeviceType()
+      : window.innerWidth < 768
+        ? "mobile"
+        : window.innerWidth < 1280
+          ? "tablet"
+          : "pc";
+  }
+
+  function buildSrcset(baseUrl, device) {
+    if (!baseUrl || !/\.(webp|png|jpg|jpeg|avif)$/i.test(baseUrl)) return "";
+    var widths = device === "mobile" ? [375, 828] : device === "tablet" ? [828, 1200] : [1200, 1920];
+    return widths
+      .map(function (w) {
+        return baseUrl.replace(/\.(webp|png|jpg|jpeg|avif)$/, "-" + w + "w.$1") + " " + w + "w";
+      })
+      .join(", ");
+  }
+
+  function buildSizes(device) {
+    if (device === "mobile") return "(max-width: 767px) 50vw, 33vw";
+    if (device === "tablet") return "(max-width: 1279px) 50vw, 25vw";
+    return "(max-width: 1535px) 25vw, 20vw";
+  }
+
   /**
    * Build a product link href
    */
@@ -263,6 +289,9 @@ function _reInjectSrcset(root) {
 
       function buildPCCard(p) {
         var img = getPrimaryImage(p);
+        var device = getDeviceType();
+        var imgSrcset = buildSrcset(img, device);
+        var imgSizes = buildSizes(device);
         var href = getProductDetailHref(p);
         var catMap = {
           翻炒系列: "stirfry",
@@ -284,7 +313,10 @@ function _reInjectSrcset(root) {
               escHtml(p.model) +
               '" class="w-full h-full object-contain p-4 group-hover:scale-105 transition-transform duration-300" src="' +
               escHtml(img) +
-              '" loading="lazy">'
+              '"' +
+              (imgSrcset ? ' srcset="' + imgSrcset + '"' : "") +
+              (imgSizes ? ' sizes="' + imgSizes + '"' : "") +
+              ' loading="lazy">'
             : '<div style="font-size:2.5rem;color:#d1d5db;display:flex;align-items:center;justify-content:center;height:100%">📦</div>') +
           "</div>" +
           '<div class="p-5">' +
@@ -378,6 +410,9 @@ function _reInjectSrcset(root) {
 
       function buildTabletCard(p) {
         var img = getPrimaryImage(p);
+        var device = getDeviceType();
+        var imgSrcset = buildSrcset(img, device);
+        var imgSizes = buildSizes(device);
         var href = getProductDetailHref(p);
         return (
           '<div class="group bg-white rounded-2xl border border-slate-200 hover:border-primary hover:shadow-lg transition-all duration-300 overflow-hidden" data-link="' +
@@ -389,7 +424,10 @@ function _reInjectSrcset(root) {
               escHtml(p.model) +
               '" class="w-full h-full object-contain p-3 sm:p-4 group-hover:scale-105 transition-transform duration-300" src="' +
               escHtml(img) +
-              '" loading="lazy">'
+              '"' +
+              (imgSrcset ? ' srcset="' + imgSrcset + '"' : "") +
+              (imgSizes ? ' sizes="' + imgSizes + '"' : "") +
+              ' loading="lazy">'
             : '<div style="font-size:2rem;color:#d1d5db;display:flex;align-items:center;justify-content:center;height:100%">📦</div>') +
           "</div>" +
           '<div class="p-3 sm:p-4">' +
@@ -471,6 +509,9 @@ function _reInjectSrcset(root) {
 
       function buildCard(p) {
         var img = getPrimaryImage(p);
+        var device = getDeviceType();
+        var imgSrcset = buildSrcset(img, device);
+        var imgSizes = buildSizes(device);
         var href = getProductDetailHref(p);
         return (
           '<div class="group bg-white rounded-2xl border border-slate-200 hover:border-primary hover:shadow-lg transition-all duration-300 overflow-hidden" data-link="' +
@@ -482,7 +523,10 @@ function _reInjectSrcset(root) {
               escHtml(p.model) +
               '" class="w-full h-full object-contain p-2 sm:p-3 group-hover:scale-105 transition-transform duration-300" src="' +
               escHtml(img) +
-              '" loading="lazy">'
+              '"' +
+              (imgSrcset ? ' srcset="' + imgSrcset + '"' : "") +
+              (imgSizes ? ' sizes="' + imgSizes + '"' : "") +
+              ' loading="lazy">'
             : '<div style="font-size:2rem;color:#d1d5db;display:flex;align-items:center;justify-content:center;height:100%">📦</div>') +
           "</div>" +
           '<div class="p-3 sm:p-4">' +
