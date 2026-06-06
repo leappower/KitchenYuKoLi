@@ -475,14 +475,7 @@
           (imgSrc
             ? '<img src="' +
               esc(imgSrc) +
-              '" alt="" loading="lazy" decoding="async"' +
-              ' srcset="' +
-              esc(imgSrc.replace(/\.(webp|png|jpg|jpeg|avif)$/, "-120w.$1")) +
-              " 120w, " +
-              esc(imgSrc.replace(/\.(webp|png|jpg|jpeg|avif)$/, "-240w.$1")) +
-              ' 240w"' +
-              ' sizes="60px"' +
-              " onerror=\"this.style.display='none'\">"
+              '" alt="" loading="lazy" decoding="async" onerror="this.style.display=\'none\'">'
             : '<span class="material-symbols-outlined">inventory_2</span>') +
           "</div>" +
           '<div class="ios-search-result-info">' +
