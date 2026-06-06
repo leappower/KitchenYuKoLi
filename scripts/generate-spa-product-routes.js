@@ -73,11 +73,11 @@ products.forEach(product => {
     fs.mkdirSync(dir, { recursive: true });
     // 注入产品 SEO meta 到 SPA shell
     var productName = product.name || product.model;
-    var productDescription = product.description || product.specifications || '';
-    var cleanDesc = productName.replace(/\s+/g, ' ').substring(0, 80);
-    var seoTitle = cleanDesc + ' | YuKoLi Smart Commercial Kitchen';
-    var seoDesc = (productDescription.replace(/\s+/g, ' ').substring(0, 150) || 
-      'YuKoLi ' + (product.category || '') + ' ' + productName + ' — 查看规格、亮点和方案。');
+    var cleanName = productName.replace(/\s+/g, ' ').trim();
+    var categoryEn = ({'翻炒系列':'Stir-Fry','炖煮系列':'Stewing','煎炸系列':'Frying','蒸煮系列':'Steaming','切配系列':'Cutting','辅助系列':'Auxiliary','落地式':'Floor-Standing'})[product.category] || product.category || '';
+    var shortDesc = cleanName.substring(0, 80);
+    var seoTitle = shortDesc + ' | YuKoLi Smart Commercial Kitchen';
+    var seoDesc = 'YuKoLi ' + categoryEn + ' ' + cleanName.substring(0, 60) + ' — Smart commercial kitchen equipment with precise temperature control and one-button operation.';
     
     var html = spaShell
       .replace(/<title>[^<]*<\/title>/, '<title>' + escHtml(seoTitle) + '</title>')
