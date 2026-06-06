@@ -206,11 +206,11 @@
       escapeHtml(opts.placeholderI18n || "search_placeholder") +
       '" ' +
       'type="search" autocomplete="off" spellcheck="false"/>' +
-      '<a class="ios-search-clear" href="javascript:void(0)" ' +
-      'aria-label="Clear" role="button" tabindex="-1" ' +
-      'style="text-decoration:none;-webkit-tap-highlight-color:transparent">' +
+      '<button class="ios-search-clear" type="button" ' +
+      'aria-label="Clear" tabindex="-1" ' +
+      'style="background:none;border:none;cursor:pointer;padding:0;-webkit-tap-highlight-color:transparent">' +
       '<span class="material-symbols-outlined">cancel</span>' +
-      "</a>" +
+      "</button>" +
       "</div>" +
       "</div>"
     );
