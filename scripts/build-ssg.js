@@ -541,7 +541,7 @@ function generateResponsiveEntry(route) {
     }
     html = injectSwupScripts(html);
     html = normalizeSpaContent(html);
-    html = injectSkeletonOverlay(html);
+    // injectSkeletonOverlay is called by generateRouteIndex() on the returned result
     return html;
   }
 
@@ -605,7 +605,10 @@ function generateRouteIndex(route) {
     // Auto-generate a responsive entry for routes without index.html
     // (e.g., case city pages like cases/manila/)
     log("AUTO: Generating responsive entry for route: " + route.slug);
-    const autoHtml = generateResponsiveEntry(route);
+    var autoHtml = generateResponsiveEntry(route);
+    // generateResponsiveEntry no longer injects skeleton overlay;
+    // do it here so generateRouteIndex() is the single injector for index.html
+    autoHtml = injectSkeletonOverlay(autoHtml);
     const distRouteDir = path.join(DIST_DIR, route.slug);
     ensureDir(distRouteDir);
     const distFile = path.join(distRouteDir, "index.html");
@@ -641,10 +644,12 @@ function generateRouteIndex(route) {
   html = injectTranslationsDropdown(html);
   html = injectSwupScripts(html);
   html = normalizeSpaContent(html);
-  html = injectSkeletonOverlay(html);
 
   // Patch all root-absolute paths with BASE_PATH prefix
   html = patchHtmlPaths(html);
+
+  // Inject skeleton overlay AFTER patchHtmlPaths (which may modify HTML)
+  html = injectSkeletonOverlay(html);
 
   // Ensure the responsive redirect uses relative paths (it already does in source)
   // No change needed — 'index-mobile.html' etc. are relative
