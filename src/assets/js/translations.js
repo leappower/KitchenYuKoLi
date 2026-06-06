@@ -1,6 +1,6 @@
 !(function (t) {
   "use strict";
-  var I18N_CACHE_V = 1780650972;
+  var I18N_CACHE_V = 1780734100;
   var _spaRegs = {};
 
   // ─── Ensure LANG_REGISTRY is loaded ─────────────────────────
@@ -217,13 +217,23 @@
       function _buildModelMap(json) {
         var table = window.PRODUCT_DATA_TABLE || [];
         var modelMap = {};
-        table.forEach(function (cat) {
-          (cat.products || []).forEach(function (p) {
+        // Flat format (product-data-table.js): each item has .model directly
+        if (Array.isArray(table) && table.length > 0 && table[0] && table[0].model) {
+          table.forEach(function (p) {
             if (!p.model) return;
             var k = _prodKey(p.model);
             if (k) modelMap[k] = p.model;
           });
-        });
+        } else {
+          // Nested format (legacy API): each item has .products
+          table.forEach(function (cat) {
+            (cat.products || []).forEach(function (p) {
+              if (!p.model) return;
+              var k = _prodKey(p.model);
+              if (k) modelMap[k] = p.model;
+            });
+          });
+        }
         var byModel = {};
         Object.keys(json || {}).forEach(function (key) {
           var m = key.match(
