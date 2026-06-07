@@ -437,7 +437,9 @@
           window.location.pathname.replace("/products/", "")
         )
       ) {
-        if (window.SpaRouter && typeof window.SpaRouter.navigate === "function") {
+        if (window.swupInstance && typeof window.swupInstance.navigate === "function") {
+          window.swupInstance.navigate(referrer);
+        } else if (window.SpaRouter && typeof window.SpaRouter.navigate === "function") {
           window.SpaRouter.navigate(referrer);
         } else {
           window.location.href = referrer;
