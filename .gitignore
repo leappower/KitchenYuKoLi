@@ -1,17 +1,113 @@
+
+!**/ios/**/default.mode1v3
+!**/ios/**/default.mode2v3
+!**/ios/**/default.pbxuser
+!**/ios/**/default.perspectivev3
+!/dev/ci/**/Gemfile.lock
+# Build outputs
+# Coverage
+# Dependency directories
+# Docker
+# Environment
+# Git hooks
+# IDEs and editors
+# Linux
+# Logs, pids, temp files
+# Misc
+# Node / JavaScript
+# OS files
+# Playwright
+# Reference files
+# Secrets / certs
+# Symbols
+# Windows
+# macOS
+# packages file containing multi-root paths
+**/Flutter/ephemeral/
+**/Pods/
+**/android/**/GeneratedPluginRegistrant.java
+**/android/**/gradle-wrapper.jar
+**/android/captures/
+**/android/gradlew
+**/android/gradlew.bat
+**/android/key.properties
+**/android/local.properties
+**/doc/api/
+**/ios/**/*.mode1v3
+**/ios/**/*.mode2v3
+**/ios/**/*.moved-aside
+**/ios/**/*.pbxuser
+**/ios/**/*.perspectivev3
+**/ios/**/*sync/
+**/ios/**/.sconsign.dblite
+**/ios/**/.symlinks/
+**/ios/**/.tags*
+**/ios/**/.vagrant/
+**/ios/**/DerivedData/
+**/ios/**/Icon?
+**/ios/**/Pods/
+**/ios/**/profile
+**/ios/.generated/
+**/ios/ServiceDefinitions.json
+**/linux/flutter/generated_plugin_registrant.cc
+**/linux/flutter/generated_plugin_registrant.h
+**/linux/flutter/generated_plugins.cmake
+**/macos/Flutter/GeneratedPluginRegistrant.swift
+**/macos/Flutter/ephemeral
+**/windows/flutter/generated_plugin_registrant.cc
+**/windows/flutter/generated_plugin_registrant.h
+**/windows/flutter/generated_plugins.cmake
+**/xcuserdata/
 *.class
+*.crt
+*.jks
+*.key
 *.lock
 *.log
+*.pem
+*.pid
 *.pyc
+*.seed
+*.sublime-project
+*.sublime-workspace
 *.swp
+-e 
+.DS_Store
+.archive/
 .buildlog/
+.cache/
+.docker/
+.env
+.env.*
+.env.*.local
+.env.local
+.githooks/
+.gradle/
 .history
-
-
-
+.idea/
+.next/
+.nojekyll
+.nuxt/
+.nyc_output/
+.openclaw-project
+.packages
+.packages.generated
+.parcel-cache/
+.pnp.cjs
+.pnp.js
+.pnp/
+.pub-preload-cache/
+.pub/
+.reference/
+.tmp/
+.vite/
+.vscode/
+/.pnp.cjs
 /bin/cache/
 /bin/internal/bootstrap.bat
 /bin/internal/bootstrap.sh
 /bin/mingit/
+/blob-report/
 /dev/benchmarks/mega_gallery/
 /dev/bots/.recipe_deps
 /dev/bots/android_tools/
@@ -20,173 +116,38 @@
 /dev/docs/lib/
 /dev/docs/pubspec.yaml
 /dev/integration_tests/**/Pods
-version
+/playwright-report/
+/playwright/.cache/
+/test-results/
+Icon?
+Thumbs.db
 analysis_benchmark.json
-
-# packages file containing multi-root paths
-.packages.generated
-
-**/doc/api/
-.packages
-.pub-preload-cache/
-.pub/
+app.*.symbols
 build/
+coverage/
+dist/
+docker-compose.override.yml
+ehthumbs.db
+i18n-seo-backup/
 linked_*.ds
+logs/
+node_modules/
+npm-debug.log*
+out/
+pids/
+pnpm-debug.log*
+public/assets/
+public/build/
+scripts/.archive/
+scripts/archive/
+scripts/ci/
+scripts/products-table.xlsx
+skill/.openclaw-project/
+temp/
+tmp/
+translate-quota.json
 unlinked.ds
 unlinked_spec.ds
-
-**/android/**/gradle-wrapper.jar
-.gradle/
-**/android/captures/
-**/android/gradlew
-**/android/gradlew.bat
-**/android/local.properties
-**/android/**/GeneratedPluginRegistrant.java
-**/android/key.properties
-*.jks
-
-**/ios/**/*.mode1v3
-**/ios/**/*.mode2v3
-**/ios/**/*.moved-aside
-**/ios/**/*.pbxuser
-**/ios/**/*.perspectivev3
-**/ios/**/*sync/
-**/ios/**/.sconsign.dblite
-**/ios/**/.tags*
-**/ios/**/.vagrant/
-**/ios/**/DerivedData/
-**/ios/**/Icon?
-**/ios/**/Pods/
-**/ios/**/.symlinks/
-**/ios/**/profile
-**/ios/.generated/
-**/ios/ServiceDefinitions.json
-
-# macOS
-**/Flutter/ephemeral/
-**/Pods/
-**/macos/Flutter/GeneratedPluginRegistrant.swift
-**/macos/Flutter/ephemeral
-**/xcuserdata/
-
-# Windows
-**/windows/flutter/generated_plugin_registrant.cc
-**/windows/flutter/generated_plugin_registrant.h
-**/windows/flutter/generated_plugins.cmake
-
-# Linux
-**/linux/flutter/generated_plugin_registrant.cc
-**/linux/flutter/generated_plugin_registrant.h
-**/linux/flutter/generated_plugins.cmake
-
-# Coverage
-coverage/
-
-# Symbols
-app.*.symbols
-
-!**/ios/**/default.mode1v3
-!**/ios/**/default.mode2v3
-!**/ios/**/default.pbxuser
-!**/ios/**/default.perspectivev3
-!/dev/ci/**/Gemfile.lock
-node_modules/
-
-# Node / JavaScript
-npm-debug.log*
+version
 yarn-debug.log*
 yarn-error.log*
-pnpm-debug.log*
-.pnp/
-.pnp.js
-.pnp.cjs
-
-# Dependency directories
-/.pnp.cjs
-
-# Build outputs
-dist/
-build/
-out/
-public/build/
-public/assets/
-.parcel-cache/
-.next/
-.nuxt/
-.vite/
-.cache/
-.tmp/
-
-# Coverage
-coverage/
-.nyc_output/
-
-# Environment
-.env
-.env.local
-.env.*.local
-.env.*
-
-# Logs, pids, temp files
-logs/
-*.log
-pids/
-*.pid
-*.seed
-tmp/
-temp/
-
-# OS files
-.DS_Store
-Thumbs.db
-Icon?
-
-# IDEs and editors
-.vscode/
-.idea/
-*.sublime-workspace
-*.sublime-project
-
-# Docker
-docker-compose.override.yml
-.docker/
-
-# Secrets / certs
-*.pem
-*.key
-*.crt
-
-# Misc
-ehthumbs.db
-
-scripts/ci/
-scripts/archive/
-scripts/.archive/
-.archive/
-
-dist/
-build/
-coverage/
-skill/.openclaw-project/
-.openclaw-project
-translate-quota.json
-
-# Git hooks
-.githooks/
-
-# Reference files
-.reference/
--e 
-# Playwright
-/test-results/
-/playwright-report/
-/blob-report/
-/playwright/.cache/
--e 
-# Playwright
-/test-results/
-/playwright-report/
-/blob-report/
-/playwright/.cache/
-scripts/products-table.xlsx
-.nojekyll
