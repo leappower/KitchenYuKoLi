@@ -378,12 +378,12 @@ app.use(
   })
 );
 
-// Explicit root route - serve SPA entry with SPA navigation
-// The entry handler script in index.html will handle device-specific routing
-// without page redirect, maintaining header/body/footer structure
-app.get("/", (req, res) => {
-  res.redirect(301, "/home/");
-});
+// Root route: handled by the universal page resolver below.
+// resolvePage() serves device-specific home page directly (no 301 redirect),
+// eliminating a blank-page flash in incognito/first-visit.
+// app.get("/", (req, res) => {
+//   res.redirect(301, "/home/");
+// });
 
 // ─── Universal page resolver ─────────────────────────────────────────────
 //
@@ -427,6 +427,21 @@ function resolvePage(reqPath, ua) {
   var clean = reqPath.replace(/\/+$/, "");
   if (!clean) clean = "/";
   var variantIdx = { mobile: "index-mobile.html", tablet: "index-tablet.html", pc: "index-pc.html" };
+
+  // 0. Root path /: serve device-specific home page directly, skip SPA shell.
+  //    The SPA shell (dist/index.html) has empty #spa-content and causes blank
+  //    page flash in incognito/first-visit.  Serve the real content immediately.
+  if (clean === "/" || clean === "") {
+    var rootDeviceFile = path.join(__dirname, "dist", "home", variantIdx[isMobileUA(ua)]);
+    if (isFile(rootDeviceFile)) {
+      return rootDeviceFile;
+    }
+    // Fallback: dist/home/index.html
+    var rootHomeIndex = path.join(__dirname, "dist", "home", "index.html");
+    if (isFile(rootHomeIndex)) {
+      return rootHomeIndex;
+    }
+  }
 
   // 1. Exact file: dist/<reqPath>  (assets, fonts, images, index-{mobile,pc,tablet}.html)
   var f = path.join(__dirname, "dist", reqPath);
