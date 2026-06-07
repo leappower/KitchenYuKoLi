@@ -349,10 +349,9 @@
   if (document.readyState === "loading") {
     document.addEventListener("DOMContentLoaded", function () {
       initSwup();
-      var path = window.location.pathname;
-      if (path === "/" || path === "/index.html") {
-        history.replaceState(null, "", "/home/");
-      }
+      // Root path redirect is handled in <head> of index.html (SPA shell).
+      // Do NOT call history.replaceState here — it would change the URL to /home/
+      // without loading any content, resulting in blank #spa-content.
       var redirectParam = new URLSearchParams(window.location.search).get("redirect");
       if (redirectParam) {
         history.replaceState(null, "", redirectParam);
