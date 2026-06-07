@@ -548,11 +548,7 @@ app.get("*", (req, res) => {
             }
             if (!_productFound) {
               var _f404 = path.join(__dirname, "dist", "404.html");
-              if (isFile(_f404)) {
-                var _html404 = fs.readFileSync(_f404, "utf-8");
-                _html404 = _html404.replace("<head>", '<head><meta name="product-404" content="1"/>');
-                return res.status(404).send(_html404);
-              }
+              if (isFile(_f404)) return res.status(404).sendFile(_f404);
             }
           }
         } catch (e) {}

@@ -75,20 +75,7 @@
         animation-delay: 0.4s;
       }
     </style>
-  
-<script>
-    // SPA product route fallback: /products/{cat}/{model}/ → SPA shell
-    // Skip if server already confirmed product doesn't exist (injected meta[name=product-404])
-    (function() {
-      if (document.querySelector('meta[name="product-404"]')) return;
-      var p = location.pathname;
-      var match = p.match(/^\/products\/([\w-]+)\/([\w-%]+)\/$/);
-      if (!match) return;
-      var spaRoute = '/?spa=' + encodeURIComponent(p.slice(1));
-      history.pushState({ spaRoute: p }, '', spaRoute);
-      location.replace(spaRoute);
-    })();
-  </script></head>
+</head>
   <body
     class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 antialiased transition-colors duration-300 min-h-screen flex flex-col overflow-x-clip"
   >
