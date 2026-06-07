@@ -522,45 +522,51 @@ app.get("*", (req, res) => {
 
   var clean = req.path.replace(/\/+$/, "");
 
-  // New canonical route: /products/{slug}/{model}/
+  // New canonical route: /products/{slug}/{model}/ — prefer SSG-generated file
   var newMatch = clean.match(/^\/products\/([^/]+)\/([^/]+)$/);
   if (newMatch && CATEGORY_SLUGS.indexOf(newMatch[1]) >= 0) {
     var catSlug = newMatch[1];
     var modelSlug = newMatch[2];
     if (catSlug !== "detail" && catSlug !== "compare") {
-      // Verify product exists before rendering detail template
-      try {
-        var _dataFile = path.join(__dirname, "src", "assets", "js", "product-data-table.js");
-        if (isFile(_dataFile)) {
-          var _dataContent = fs.readFileSync(_dataFile, "utf-8");
-          var _lines = _dataContent.split("\n");
-          var _productFound = false;
-          for (var _li = 0; _li < _lines.length; _li++) {
-            if (_lines[_li].indexOf(modelSlug) >= 0) {
-              _productFound = true;
-              break;
+      // Try SSG-generated file first (has SEO meta already injected)
+      var ssgFile = path.join(__dirname, "dist", "products", catSlug, modelSlug, "index.html");
+      if (isFile(ssgFile)) {
+        // Fall through to resolvePage below — it will find this file
+      } else {
+        // Verify product exists, then serve detail template (legacy fallback)
+        try {
+          var _dataFile = path.join(__dirname, "src", "assets", "js", "product-data-table.js");
+          if (isFile(_dataFile)) {
+            var _dataContent = fs.readFileSync(_dataFile, "utf-8");
+            var _lines = _dataContent.split("\n");
+            var _productFound = false;
+            for (var _li = 0; _li < _lines.length; _li++) {
+              if (_lines[_li].indexOf(modelSlug) >= 0) {
+                _productFound = true;
+                break;
+              }
+            }
+            if (!_productFound) {
+              var _f404 = path.join(__dirname, "dist", "404.html");
+              if (isFile(_f404)) return res.status(404).sendFile(_f404);
             }
           }
-          if (!_productFound) {
-            var _f404 = path.join(__dirname, "dist", "404.html");
-            if (isFile(_f404)) return res.status(404).sendFile(_f404);
-          }
-        }
-      } catch (e) {}
+        } catch (e) {}
 
-      var isMobile = isMobileUA(req.headers["user-agent"]);
-      var variantIdx = { mobile: "index-mobile.html", tablet: "index-tablet.html", pc: "index-pc.html" };
-      var detailFile = path.join(__dirname, "dist", "products", "detail", variantIdx[isMobile] || "index-pc.html");
-      if (!isFile(detailFile)) {
-        detailFile = path.join(__dirname, "dist", "products", "detail", "index.html");
-      }
-      if (isFile(detailFile)) {
-        var html = fs.readFileSync(detailFile, "utf-8");
-        html = html.replace("<head>", '<head><meta name="product-model" content="' + modelSlug + '"/>');
-        html = html.replace("<head>", '<head><meta name="product-category-slug" content="' + catSlug + '"/>');
-        html = html.replace("<head>", '<head><meta name="ssg-device" content="1"/>');
-        res.setHeader("Cache-Control", "no-store, no-cache, must-revalidate");
-        return res.send(html);
+        var isMobile = isMobileUA(req.headers["user-agent"]);
+        var variantIdx = { mobile: "index-mobile.html", tablet: "index-tablet.html", pc: "index-pc.html" };
+        var detailFile = path.join(__dirname, "dist", "products", "detail", variantIdx[isMobile] || "index-pc.html");
+        if (!isFile(detailFile)) {
+          detailFile = path.join(__dirname, "dist", "products", "detail", "index.html");
+        }
+        if (isFile(detailFile)) {
+          var html = fs.readFileSync(detailFile, "utf-8");
+          html = html.replace("<head>", '<head><meta name="product-model" content="' + modelSlug + '"/>');
+          html = html.replace("<head>", '<head><meta name="product-category-slug" content="' + catSlug + '"/>');
+          html = html.replace("<head>", '<head><meta name="ssg-device" content="1"/>');
+          res.setHeader("Cache-Control", "no-store, no-cache, must-revalidate");
+          return res.send(html);
+        }
       }
     }
   }
