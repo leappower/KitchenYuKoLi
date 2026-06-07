@@ -29,6 +29,21 @@ function _reInjectSrcset(root) {
     return fallback || key;
   }
 
+  /**
+   * Wait for translationManager.ready before calling tl() or rendering.
+   * Returns a promise that resolves when translations are loaded.
+   */
+  function _waitForI18n() {
+    if (
+      window.translationManager &&
+      window.translationManager.ready &&
+      typeof window.translationManager.ready.then === "function"
+    ) {
+      return window.translationManager.ready;
+    }
+    return Promise.resolve();
+  }
+
   var CATEGORY_I18N_MAP = {
     翻炒系列: "nav_products_stirfry",
     炖煮系列: "nav_products_stewing",
@@ -274,116 +289,118 @@ function _reInjectSrcset(root) {
       return;
     }
 
-    loadCoreProducts(function (products, _source) {
-      if (!products || products.length === 0) {
-        var noDataMsg = tl("no_core_products_data", "暂无核心产品数据");
-        container.innerHTML = '<div class="text-center text-slate-400 py-8">' + escHtml(noDataMsg) + "</div>";
-        return;
-      }
+    _waitForI18n().then(function () {
+      loadCoreProducts(function (products, _source) {
+        if (!products || products.length === 0) {
+          var noDataMsg = tl("no_core_products_data", "暂无核心产品数据");
+          container.innerHTML = '<div class="text-center text-slate-400 py-8">' + escHtml(noDataMsg) + "</div>";
+          return;
+        }
 
-      // Reapply i18n after render
-      var VIS_COUNT = 8; // PC: 2 rows (4 columns × 2)
-      var hasMore = products.length > VIS_COUNT;
-      var visProducts = hasMore ? products.slice(0, VIS_COUNT) : products;
-      var restProducts = hasMore ? products.slice(VIS_COUNT) : [];
+        // Reapply i18n after render
+        var VIS_COUNT = 8; // PC: 2 rows (4 columns x 2)
+        var hasMore = products.length > VIS_COUNT;
+        var visProducts = hasMore ? products.slice(0, VIS_COUNT) : products;
+        var restProducts = hasMore ? products.slice(VIS_COUNT) : [];
 
-      function buildPCCard(p) {
-        var img = getPrimaryImage(p);
-        var device = getDeviceType();
-        var imgSrcset = buildSrcset(img, device);
-        var imgSizes = buildSizes(device);
-        var href = getProductDetailHref(p);
-        var catMap = {
-          翻炒系列: "stirfry",
-          炖煮系列: "stewing",
-          蒸煮系列: "steaming",
-          煎炸系列: "frying",
-          切配系列: "cutting",
-          辅助系列: "other",
-        };
-        var catSlug = catMap[p.category] || "other";
-        var catHref = "/products/" + catSlug + "/";
-        return (
-          '<div class="group bg-white rounded-2xl border border-slate-200 dark:border-slate-700 hover:border-primary hover:shadow-lg transition-all duration-300 overflow-hidden" data-link="' +
-          href +
-          '">' +
-          '<div class="aspect-[4/3] bg-white overflow-hidden cursor-pointer">' +
-          (img
-            ? '<img alt="' +
-              escHtml(p.model) +
-              '" class="w-full h-full object-contain p-4 group-hover:scale-105 transition-transform duration-300" src="' +
-              escHtml(img) +
-              '"' +
-              (imgSrcset ? ' srcset="' + imgSrcset + '"' : "") +
-              (imgSizes ? ' sizes="' + imgSizes + '"' : "") +
-              ' loading="lazy">'
-            : '<div style="font-size:2.5rem;color:#d1d5db;display:flex;align-items:center;justify-content:center;height:100%">📦</div>') +
-          "</div>" +
-          '<div class="p-5">' +
-          (p.category
-            ? '<a href="' +
-              catHref +
-              '" class="inline-block text-xs font-bold px-2.5 py-1 rounded-full bg-primary/10 text-primary mb-3 hover:bg-primary/20 transition-colors" data-i18n="' +
-              (CATEGORY_I18N_MAP[p.category] || "") +
-              '">' +
-              escHtml(translateCategory(p.category)) +
-              "</a>"
-            : "") +
-          '<h3 class="text-lg font-black mb-1">' +
-          escHtml(p.model) +
-          "</h3>" +
-          '<p class="text-sm text-slate-500 dark:text-slate-400 line-clamp-2 mb-4">' +
-          escHtml(typeof getProductField === "function" ? getProductField(p, "name") || p.model : p.model) +
-          "</p>" +
-          '<div class="flex justify-between items-center pt-3 border-t border-slate-100 dark:border-slate-700">' +
-          (p.power
-            ? '<span class="text-xs font-bold text-slate-400">' + escHtml(p.power) + "</span>"
-            : "<span></span>") +
-          '<a href="' +
-          href +
-          '" data-no-swup class="text-sm text-primary font-bold flex items-center gap-1 group-hover:gap-2 transition-all duration-300 hover:opacity-80" data-i18n="home_hw_learn_more">' +
-          tl("home_hw_learn_more", "了解更多") +
-          ' <span class="material-symbols-outlined text-base group-hover:translate-x-1 transition-transform duration-300">arrow_forward</span></a>' +
-          "</div></div></div>"
-        );
-      }
+        function buildPCCard(p) {
+          var img = getPrimaryImage(p);
+          var device = getDeviceType();
+          var imgSrcset = buildSrcset(img, device);
+          var imgSizes = buildSizes(device);
+          var href = getProductDetailHref(p);
+          var catMap = {
+            翻炒系列: "stirfry",
+            炖煮系列: "stewing",
+            蒸煮系列: "steaming",
+            煎炸系列: "frying",
+            切配系列: "cutting",
+            辅助系列: "other",
+          };
+          var catSlug = catMap[p.category] || "other";
+          var catHref = "/products/" + catSlug + "/";
+          return (
+            '<div class="group bg-white rounded-2xl border border-slate-200 dark:border-slate-700 hover:border-primary hover:shadow-lg transition-all duration-300 overflow-hidden" data-link="' +
+            href +
+            '">' +
+            '<div class="aspect-[4/3] bg-white overflow-hidden cursor-pointer">' +
+            (img
+              ? '<img alt="' +
+                escHtml(p.model) +
+                '" class="w-full h-full object-contain p-4 group-hover:scale-105 transition-transform duration-300" src="' +
+                escHtml(img) +
+                '"' +
+                (imgSrcset ? ' srcset="' + imgSrcset + '"' : "") +
+                (imgSizes ? ' sizes="' + imgSizes + '"' : "") +
+                ' loading="lazy">'
+              : '<div style="font-size:2.5rem;color:#d1d5db;display:flex;align-items:center;justify-content:center;height:100%">📦</div>') +
+            "</div>" +
+            '<div class="p-5">' +
+            (p.category
+              ? '<a href="' +
+                catHref +
+                '" class="inline-block text-xs font-bold px-2.5 py-1 rounded-full bg-primary/10 text-primary mb-3 hover:bg-primary/20 transition-colors" data-i18n="' +
+                (CATEGORY_I18N_MAP[p.category] || "") +
+                '">' +
+                escHtml(translateCategory(p.category)) +
+                "</a>"
+              : "") +
+            '<h3 class="text-lg font-black mb-1">' +
+            escHtml(p.model) +
+            "</h3>" +
+            '<p class="text-sm text-slate-500 dark:text-slate-400 line-clamp-2 mb-4">' +
+            escHtml(typeof getProductField === "function" ? getProductField(p, "name") || p.model : p.model) +
+            "</p>" +
+            '<div class="flex justify-between items-center pt-3 border-t border-slate-100 dark:border-slate-700">' +
+            (p.power
+              ? '<span class="text-xs font-bold text-slate-400">' + escHtml(p.power) + "</span>"
+              : "<span></span>") +
+            '<a href="' +
+            href +
+            '" data-no-swup class="text-sm text-primary font-bold flex items-center gap-1 group-hover:gap-2 transition-all duration-300 hover:opacity-80" data-i18n="home_hw_learn_more">' +
+            tl("home_hw_learn_more", "了解更多") +
+            ' <span class="material-symbols-outlined text-base group-hover:translate-x-1 transition-transform duration-300">arrow_forward</span></a>' +
+            "</div></div></div>"
+          );
+        }
 
-      var html = '<div id="hcp-grid-pc" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-8">';
-      visProducts.forEach(function (p) {
-        html += buildPCCard(p);
-      });
-      html += "</div>";
-
-      if (hasMore) {
-        html +=
-          '<div id="hcp-hidden-pc" style="display:none" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-8 mt-8">';
-        restProducts.forEach(function (p) {
+        var html = '<div id="hcp-grid-pc" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-8">';
+        visProducts.forEach(function (p) {
           html += buildPCCard(p);
         });
         html += "</div>";
-        html += '<div class="flex justify-center mt-10">';
-        html +=
-          "<button id=\"hcp-toggle-pc\" onclick=\"(function(){var h=document.getElementById('hcp-hidden-pc'),b=document.getElementById('hcp-toggle-pc');if(h.style.display==='none'){h.style.display='';b.textContent=typeof window.uiText==='function'?window.uiText('home_hw_collapse','Collapse ▲'):'Collapse ▲'}else{h.style.display='none';b.textContent=typeof window.uiText==='function'?window.uiText('home_hw_show_more','View More Products ▼'):'View More Products ▼'}})()\" class=\"px-8 py-3 rounded-full border-2 border-primary text-primary font-bold hover:bg-primary hover:text-white transition-all cursor-pointer\" data-i18n=\"home_hw_show_more\">" +
-          tl("home_hw_show_more", "View More Products ▼") +
-          "</button>";
-        html += "</div>";
-      }
 
-      container.innerHTML = html;
-      _reInjectSrcset(container);
+        if (hasMore) {
+          html +=
+            '<div id="hcp-hidden-pc" style="display:none" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-8 mt-8">';
+          restProducts.forEach(function (p) {
+            html += buildPCCard(p);
+          });
+          html += "</div>";
+          html += '<div class="flex justify-center mt-10">';
+          html +=
+            "<button id=\"hcp-toggle-pc\" onclick=\"(function(){var h=document.getElementById('hcp-hidden-pc'),b=document.getElementById('hcp-toggle-pc');if(h.style.display==='none'){h.style.display='';b.textContent=typeof window.uiText==='function'?window.uiText('home_hw_collapse','Collapse ▲'):'Collapse ▲'}else{h.style.display='none';b.textContent=typeof window.uiText==='function'?window.uiText('home_hw_show_more','View More Products ▼'):'View More Products ▼'}})()\" class=\"px-8 py-3 rounded-full border-2 border-primary text-primary font-bold hover:bg-primary hover:text-white transition-all cursor-pointer\" data-i18n=\"home_hw_show_more\">" +
+            tl("home_hw_show_more", "View More Products ▼") +
+            "</button>";
+          html += "</div>";
+        }
 
-      // Trigger i18n if available
-      if (
-        window.translationManager &&
-        window.translationManager.ready &&
-        typeof window.translationManager.ready.then === "function"
-      ) {
-        window.translationManager.ready.then(function () {
-          if (typeof window.translationManager.applyTo === "function") window.translationManager.applyTo(container);
-        });
-      } else if (window.translationManager && typeof window.translationManager.applyTo === "function") {
-        window.translationManager.applyTo(container);
-      }
+        container.innerHTML = html;
+        _reInjectSrcset(container);
+
+        // Trigger i18n if available
+        if (
+          window.translationManager &&
+          window.translationManager.ready &&
+          typeof window.translationManager.ready.then === "function"
+        ) {
+          window.translationManager.ready.then(function () {
+            if (typeof window.translationManager.applyTo === "function") window.translationManager.applyTo(container);
+          });
+        } else if (window.translationManager && typeof window.translationManager.applyTo === "function") {
+          window.translationManager.applyTo(container);
+        }
+      });
     });
   };
 
@@ -394,95 +411,97 @@ function _reInjectSrcset(root) {
     var container = document.getElementById(containerId);
     if (!container) return;
 
-    loadCoreProducts(function (products) {
-      if (!products || products.length === 0) {
-        container.innerHTML =
-          '<div class="text-center text-slate-400 py-6">' +
-          escHtml(tl("no_core_products_data", "暂无核心产品数据")) +
-          "</div>";
-        return;
-      }
+    _waitForI18n().then(function () {
+      loadCoreProducts(function (products) {
+        if (!products || products.length === 0) {
+          container.innerHTML =
+            '<div class="text-center text-slate-400 py-6">' +
+            escHtml(tl("no_core_products_data", "暂无核心产品数据")) +
+            "</div>";
+          return;
+        }
 
-      var VIS_COUNT = 4; // Tablet: 2 rows (2 columns)
-      var hasMore = products.length > VIS_COUNT;
-      var visProducts = hasMore ? products.slice(0, VIS_COUNT) : products;
-      var restProducts = hasMore ? products.slice(VIS_COUNT) : [];
+        var VIS_COUNT = 4; // Tablet: 2 rows (2 columns)
+        var hasMore = products.length > VIS_COUNT;
+        var visProducts = hasMore ? products.slice(0, VIS_COUNT) : products;
+        var restProducts = hasMore ? products.slice(VIS_COUNT) : [];
 
-      function buildTabletCard(p) {
-        var img = getPrimaryImage(p);
-        var device = getDeviceType();
-        var imgSrcset = buildSrcset(img, device);
-        var imgSizes = buildSizes(device);
-        var href = getProductDetailHref(p);
-        return (
-          '<div class="group bg-white rounded-2xl border border-slate-200 hover:border-primary hover:shadow-lg transition-all duration-300 overflow-hidden" data-link="' +
-          href +
-          '">' +
-          '<div class="aspect-[4/3] bg-white overflow-hidden cursor-pointer">' +
-          (img
-            ? '<img alt="' +
-              escHtml(p.model) +
-              '" class="w-full h-full object-contain p-3 sm:p-4 group-hover:scale-105 transition-transform duration-300" src="' +
-              escHtml(img) +
-              '"' +
-              (imgSrcset ? ' srcset="' + imgSrcset + '"' : "") +
-              (imgSizes ? ' sizes="' + imgSizes + '"' : "") +
-              ' loading="lazy">'
-            : '<div style="font-size:2rem;color:#d1d5db;display:flex;align-items:center;justify-content:center;height:100%">📦</div>') +
-          "</div>" +
-          '<div class="p-3 sm:p-4">' +
-          (p.category
-            ? '<span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-primary/10 text-primary mb-2 inline-block" data-i18n="' +
-              (CATEGORY_I18N_MAP[p.category] || "") +
-              '">' +
-              escHtml(translateCategory(p.category)) +
-              "</span>"
-            : "") +
-          '<h3 class="font-bold text-sm mb-1">' +
-          escHtml(p.model) +
-          "</h3>" +
-          '<p class="text-xs text-slate-500 line-clamp-2 mb-3">' +
-          escHtml(typeof getProductField === "function" ? getProductField(p, "name") || p.model : p.model) +
-          "</p>" +
-          '<div class="flex justify-between items-center pt-2 border-t border-slate-100">' +
-          (p.power
-            ? '<span class="text-[11px] font-bold text-slate-400">' + escHtml(p.power) + "</span>"
-            : "<span></span>") +
-          '<a href="' +
-          href +
-          '" data-no-swup class="text-xs font-bold text-primary flex items-center gap-0.5 group-hover:gap-1.5 transition-all duration-300 hover:opacity-80" data-i18n="home_hw_learn_more">' +
-          tl("home_hw_learn_more", "了解更多") +
-          ' <span class="material-symbols-outlined text-sm group-hover:translate-x-0.5 transition-transform duration-300">arrow_forward</span></a>' +
-          "</div></div></div>"
-        );
-      }
+        function buildTabletCard(p) {
+          var img = getPrimaryImage(p);
+          var device = getDeviceType();
+          var imgSrcset = buildSrcset(img, device);
+          var imgSizes = buildSizes(device);
+          var href = getProductDetailHref(p);
+          return (
+            '<div class="group bg-white rounded-2xl border border-slate-200 hover:border-primary hover:shadow-lg transition-all duration-300 overflow-hidden" data-link="' +
+            href +
+            '">' +
+            '<div class="aspect-[4/3] bg-white overflow-hidden cursor-pointer">' +
+            (img
+              ? '<img alt="' +
+                escHtml(p.model) +
+                '" class="w-full h-full object-contain p-3 sm:p-4 group-hover:scale-105 transition-transform duration-300" src="' +
+                escHtml(img) +
+                '"' +
+                (imgSrcset ? ' srcset="' + imgSrcset + '"' : "") +
+                (imgSizes ? ' sizes="' + imgSizes + '"' : "") +
+                ' loading="lazy">'
+              : '<div style="font-size:2rem;color:#d1d5db;display:flex;align-items:center;justify-content:center;height:100%">📦</div>') +
+            "</div>" +
+            '<div class="p-3 sm:p-4">' +
+            (p.category
+              ? '<span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-primary/10 text-primary mb-2 inline-block" data-i18n="' +
+                (CATEGORY_I18N_MAP[p.category] || "") +
+                '">' +
+                escHtml(translateCategory(p.category)) +
+                "</span>"
+              : "") +
+            '<h3 class="font-bold text-sm mb-1">' +
+            escHtml(p.model) +
+            "</h3>" +
+            '<p class="text-xs text-slate-500 line-clamp-2 mb-3">' +
+            escHtml(typeof getProductField === "function" ? getProductField(p, "name") || p.model : p.model) +
+            "</p>" +
+            '<div class="flex justify-between items-center pt-2 border-t border-slate-100">' +
+            (p.power
+              ? '<span class="text-[11px] font-bold text-slate-400">' + escHtml(p.power) + "</span>"
+              : "<span></span>") +
+            '<a href="' +
+            href +
+            '" data-no-swup class="text-xs font-bold text-primary flex items-center gap-0.5 group-hover:gap-1.5 transition-all duration-300 hover:opacity-80" data-i18n="home_hw_learn_more">' +
+            tl("home_hw_learn_more", "了解更多") +
+            ' <span class="material-symbols-outlined text-sm group-hover:translate-x-0.5 transition-transform duration-300">arrow_forward</span></a>' +
+            "</div></div></div>"
+          );
+        }
 
-      var html = '<div id="hcp-grid-tablet" class="grid grid-cols-2 gap-4">';
-      visProducts.forEach(function (p) {
-        html += buildTabletCard(p);
-      });
-      html += "</div>";
-
-      if (hasMore) {
-        html += '<div id="hcp-hidden-tablet" style="display:none" class="grid grid-cols-2 gap-4 mt-4">';
-        restProducts.forEach(function (p) {
+        var html = '<div id="hcp-grid-tablet" class="grid grid-cols-2 gap-4">';
+        visProducts.forEach(function (p) {
           html += buildTabletCard(p);
         });
         html += "</div>";
-        html += '<div class="flex justify-center mt-8">';
-        html +=
-          "<button id=\"hcp-toggle-tablet\" onclick=\"(function(){var h=document.getElementById('hcp-hidden-tablet'),b=document.getElementById('hcp-toggle-tablet');if(h.style.display==='none'){h.style.display='';b.textContent=typeof window.uiText==='function'?window.uiText('home_hw_collapse','Collapse ▲'):'Collapse ▲'}else{h.style.display='none';b.textContent=typeof window.uiText==='function'?window.uiText('home_hw_show_more','View More Products ▼'):'View More Products ▼'}})()\" class=\"px-6 py-2.5 rounded-full border-2 border-primary text-primary font-bold hover:bg-primary hover:text-white transition-all cursor-pointer text-sm\" data-i18n=\"home_hw_show_more\">" +
-          tl("home_hw_show_more", "View More Products ▼") +
-          "</button>";
-        html += "</div>";
-      }
 
-      container.innerHTML = html;
-      _reInjectSrcset(container);
+        if (hasMore) {
+          html += '<div id="hcp-hidden-tablet" style="display:none" class="grid grid-cols-2 gap-4 mt-4">';
+          restProducts.forEach(function (p) {
+            html += buildTabletCard(p);
+          });
+          html += "</div>";
+          html += '<div class="flex justify-center mt-8">';
+          html +=
+            "<button id=\"hcp-toggle-tablet\" onclick=\"(function(){var h=document.getElementById('hcp-hidden-tablet'),b=document.getElementById('hcp-toggle-tablet');if(h.style.display==='none'){h.style.display='';b.textContent=typeof window.uiText==='function'?window.uiText('home_hw_collapse','Collapse ▲'):'Collapse ▲'}else{h.style.display='none';b.textContent=typeof window.uiText==='function'?window.uiText('home_hw_show_more','View More Products ▼'):'View More Products ▼'}})()\" class=\"px-6 py-2.5 rounded-full border-2 border-primary text-primary font-bold hover:bg-primary hover:text-white transition-all cursor-pointer text-sm\" data-i18n=\"home_hw_show_more\">" +
+            tl("home_hw_show_more", "View More Products ▼") +
+            "</button>";
+          html += "</div>";
+        }
 
-      if (window.translationManager && window.translationManager.applyTo) {
-        window.translationManager.applyTo(container);
-      }
+        container.innerHTML = html;
+        _reInjectSrcset(container);
+
+        if (window.translationManager && window.translationManager.applyTo) {
+          window.translationManager.applyTo(container);
+        }
+      });
     });
   };
 
@@ -493,94 +512,96 @@ function _reInjectSrcset(root) {
     var container = document.getElementById(containerId);
     if (!container) return;
 
-    loadCoreProducts(function (products) {
-      if (!products || products.length === 0) {
-        container.innerHTML =
-          '<div class="text-center text-slate-400 py-4">' +
-          escHtml(tl("no_core_products_data", "暂无核心产品数据")) +
-          "</div>";
-        return;
-      }
+    _waitForI18n().then(function () {
+      loadCoreProducts(function (products) {
+        if (!products || products.length === 0) {
+          container.innerHTML =
+            '<div class="text-center text-slate-400 py-4">' +
+            escHtml(tl("no_core_products_data", "暂无核心产品数据")) +
+            "</div>";
+          return;
+        }
 
-      var VIS = 4;
-      var hasMore = products.length > VIS;
-      var visProducts = products.slice(0, VIS);
-      var restProducts = hasMore ? products.slice(VIS) : [];
+        var VIS = 4;
+        var hasMore = products.length > VIS;
+        var visProducts = products.slice(0, VIS);
+        var restProducts = hasMore ? products.slice(VIS) : [];
 
-      function buildCard(p) {
-        var img = getPrimaryImage(p);
-        var device = getDeviceType();
-        var imgSrcset = buildSrcset(img, device);
-        var imgSizes = buildSizes(device);
-        var href = getProductDetailHref(p);
-        return (
-          '<div class="group bg-white rounded-2xl border border-slate-200 hover:border-primary hover:shadow-lg transition-all duration-300 overflow-hidden" data-link="' +
-          href +
-          '">' +
-          '<div class="aspect-[4/3] bg-white overflow-hidden cursor-pointer">' +
-          (img
-            ? '<img alt="' +
-              escHtml(p.model) +
-              '" class="w-full h-full object-contain p-2 sm:p-3 group-hover:scale-105 transition-transform duration-300" src="' +
-              escHtml(img) +
-              '"' +
-              (imgSrcset ? ' srcset="' + imgSrcset + '"' : "") +
-              (imgSizes ? ' sizes="' + imgSizes + '"' : "") +
-              ' loading="lazy">'
-            : '<div style="font-size:2rem;color:#d1d5db;display:flex;align-items:center;justify-content:center;height:100%">📦</div>') +
-          "</div>" +
-          '<div class="p-3 sm:p-4">' +
-          (p.category
-            ? '<span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-primary/10 text-primary mb-2 inline-block" data-i18n="' +
-              (CATEGORY_I18N_MAP[p.category] || "") +
-              '">' +
-              escHtml(translateCategory(p.category)) +
-              "</span>"
-            : "") +
-          '<h3 class="font-bold text-sm mb-1">' +
-          escHtml(p.model) +
-          "</h3>" +
-          '<p class="text-xs text-slate-500 line-clamp-2 mb-3">' +
-          escHtml(typeof getProductField === "function" ? getProductField(p, "name") || p.model : p.model) +
-          "</p>" +
-          '<div class="flex justify-between items-center pt-2 border-t border-slate-100">' +
-          (p.power
-            ? '<span class="text-[11px] font-bold text-slate-400">' + escHtml(p.power) + "</span>"
-            : "<span></span>") +
-          '<a href="' +
-          href +
-          '" data-no-swup class="text-xs font-bold text-primary flex items-center gap-0.5 group-hover:gap-1.5 transition-all duration-300 hover:opacity-80" data-i18n="home_hw_learn_more">' +
-          tl("home_hw_learn_more", "了解更多") +
-          ' <span class="material-symbols-outlined text-sm group-hover:translate-x-0.5 transition-transform duration-300">arrow_forward</span></a>' +
-          "</div></div></div>"
-        );
-      }
+        function buildCard(p) {
+          var img = getPrimaryImage(p);
+          var device = getDeviceType();
+          var imgSrcset = buildSrcset(img, device);
+          var imgSizes = buildSizes(device);
+          var href = getProductDetailHref(p);
+          return (
+            '<div class="group bg-white rounded-2xl border border-slate-200 hover:border-primary hover:shadow-lg transition-all duration-300 overflow-hidden" data-link="' +
+            href +
+            '">' +
+            '<div class="aspect-[4/3] bg-white overflow-hidden cursor-pointer">' +
+            (img
+              ? '<img alt="' +
+                escHtml(p.model) +
+                '" class="w-full h-full object-contain p-2 sm:p-3 group-hover:scale-105 transition-transform duration-300" src="' +
+                escHtml(img) +
+                '"' +
+                (imgSrcset ? ' srcset="' + imgSrcset + '"' : "") +
+                (imgSizes ? ' sizes="' + imgSizes + '"' : "") +
+                ' loading="lazy">'
+              : '<div style="font-size:2rem;color:#d1d5db;display:flex;align-items:center;justify-content:center;height:100%">📦</div>') +
+            "</div>" +
+            '<div class="p-3 sm:p-4">' +
+            (p.category
+              ? '<span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-primary/10 text-primary mb-2 inline-block" data-i18n="' +
+                (CATEGORY_I18N_MAP[p.category] || "") +
+                '">' +
+                escHtml(translateCategory(p.category)) +
+                "</span>"
+              : "") +
+            '<h3 class="font-bold text-sm mb-1">' +
+            escHtml(p.model) +
+            "</h3>" +
+            '<p class="text-xs text-slate-500 line-clamp-2 mb-3">' +
+            escHtml(typeof getProductField === "function" ? getProductField(p, "name") || p.model : p.model) +
+            "</p>" +
+            '<div class="flex justify-between items-center pt-2 border-t border-slate-100">' +
+            (p.power
+              ? '<span class="text-[11px] font-bold text-slate-400">' + escHtml(p.power) + "</span>"
+              : "<span></span>") +
+            '<a href="' +
+            href +
+            '" data-no-swup class="text-xs font-bold text-primary flex items-center gap-0.5 group-hover:gap-1.5 transition-all duration-300 hover:opacity-80" data-i18n="home_hw_learn_more">' +
+            tl("home_hw_learn_more", "了解更多") +
+            ' <span class="material-symbols-outlined text-sm group-hover:translate-x-0.5 transition-transform duration-300">arrow_forward</span></a>' +
+            "</div></div></div>"
+          );
+        }
 
-      var html = '<div class="flex flex-col gap-4">';
-      html += '<div class="flex flex-col gap-3">';
-      visProducts.forEach(function (p) {
-        html += buildCard(p);
-      });
-      html += "</div>";
-      if (hasMore) {
-        html +=
-          "<button id=\"hcp-load-more-mobile\" class=\"w-full py-2.5 rounded-xl border border-slate-300  text-sm font-bold text-primary hover:bg-primary hover:text-white hover:border-primary transition-all flex items-center justify-center gap-2\" data-i18n=\"home_show_more\" onclick=\"(function(){var b=document.getElementById('hcp-hidden-mobile');var btn=document.getElementById('hcp-load-more-mobile');if(b&&btn){b.style.display='';btn.style.display='none';window.translationManager&&window.translationManager.applyTo(b.parentElement);}})()\">" +
-          '<span class="material-symbols-outlined text-lg">expand_more</span> ' +
-          escHtml(tl("home_show_more", "More Products")) +
-          "</button>";
-        html += '<div id="hcp-hidden-mobile" style="display:none" class="flex flex-col gap-3">';
-        restProducts.forEach(function (p) {
+        var html = '<div class="flex flex-col gap-4">';
+        html += '<div class="flex flex-col gap-3">';
+        visProducts.forEach(function (p) {
           html += buildCard(p);
         });
         html += "</div>";
-      }
-      html += "</div>";
-      _reInjectSrcset(container);
-      container.innerHTML = html;
+        if (hasMore) {
+          html +=
+            "<button id=\"hcp-load-more-mobile\" class=\"w-full py-2.5 rounded-xl border border-slate-300  text-sm font-bold text-primary hover:bg-primary hover:text-white hover:border-primary transition-all flex items-center justify-center gap-2\" data-i18n=\"home_show_more\" onclick=\"(function(){var b=document.getElementById('hcp-hidden-mobile');var btn=document.getElementById('hcp-load-more-mobile');if(b&&btn){b.style.display='';btn.style.display='none';window.translationManager&&window.translationManager.applyTo(b.parentElement);}})()\">" +
+            '<span class="material-symbols-outlined text-lg">expand_more</span> ' +
+            escHtml(tl("home_show_more", "More Products")) +
+            "</button>";
+          html += '<div id="hcp-hidden-mobile" style="display:none" class="flex flex-col gap-3">';
+          restProducts.forEach(function (p) {
+            html += buildCard(p);
+          });
+          html += "</div>";
+        }
+        html += "</div>";
+        _reInjectSrcset(container);
+        container.innerHTML = html;
 
-      if (window.translationManager && window.translationManager.applyTo) {
-        window.translationManager.applyTo(container);
-      }
+        if (window.translationManager && window.translationManager.applyTo) {
+          window.translationManager.applyTo(container);
+        }
+      });
     });
   };
 
@@ -591,11 +612,6 @@ function _reInjectSrcset(root) {
 
   /**
    * Auto-init: detect device type and render on spa:load (or DOMContentLoaded fallback)
-   */
-  /**
-   * Auto-init: detect device type and render on spa:load (or DOMContentLoaded fallback)
-   * SPA 路由切换后 spa:load 事件触发时，新的 spa-content 已经替换完毕，
-   * 容器元素已存在于 DOM 中，直接渲染即可。
    */
   function _autoInit() {
     var path = window.location.pathname || "/";
@@ -619,7 +635,7 @@ function _reInjectSrcset(root) {
         else if (device === "tablet") window.renderHomeCoreTablet(containerId);
         else window.renderHomeCorePC(containerId);
       } else {
-        // 容器不在 DOM 中 → 可能是 SPA 还没完成 content:replace，重试 3 次
+        // 容器不在 DOM 中 -> 可能是 SPA 还没完成 content:replace，重试 3 次
         var _retryCount = (window._hcpRetryCount || 0) + 1;
         window._hcpRetryCount = _retryCount;
         if (_retryCount <= 3) {
@@ -657,7 +673,6 @@ function _reInjectSrcset(root) {
   function _onLangChange() {
     _autoInit();
   }
-  // Init on SPA reload: same as spa:load
   document.addEventListener("languageChanged", _onLangChange);
   window.addEventListener("languageChanged", _onLangChange);
   // Re-render when translations JSON finishes loading
