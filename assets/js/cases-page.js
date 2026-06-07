@@ -16,10 +16,12 @@
 
   /* ─── i18n helper ─── */
   function tl(key, fallback) {
-    if (typeof window.uiText === "function") return window.uiText(key, fallback);
+    if (typeof window.uiText === "function") {
+      var _tl_lang = (window.translationManager && window.translationManager.currentLanguage) || "";
+      if (_tl_lang !== "zh-CN" && _tl_lang !== "zh") return window.uiText(key, fallback);
+    }
     return fallback || key;
   }
-
   /* ─── Case Study Data ─── */
   var CASES = {
     1: {

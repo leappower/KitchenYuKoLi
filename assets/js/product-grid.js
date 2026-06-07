@@ -16,7 +16,10 @@
   }
 
   function tl(key, fallback) {
-    if (typeof window.uiText === "function") return window.uiText(key, fallback);
+    if (typeof window.uiText === "function") {
+      var lang = (window.translationManager && window.translationManager.currentLanguage) || "";
+      if (lang !== "zh-CN" && lang !== "zh") return window.uiText(key, fallback);
+    }
     return fallback || key;
   }
 
@@ -1394,7 +1397,13 @@
     var href = card.getAttribute("data-link");
     if (href) {
       ev.preventDefault();
-      window.location.href = href;
+      if (window.swupInstance && typeof window.swupInstance.navigate === "function") {
+        window.swupInstance.navigate(href);
+      } else if (window.SpaRouter && typeof window.SpaRouter.navigate === "function") {
+        window.SpaRouter.navigate(href);
+      } else {
+        window.location.href = href;
+      }
     }
   });
 

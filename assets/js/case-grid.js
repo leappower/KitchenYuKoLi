@@ -495,7 +495,16 @@
             if (link) {
               e.preventDefault();
               var href = link.getAttribute("href");
-              if (href) window.location.href = href;
+              if (href) {
+                // SPA 导航：使用 swup.loadPage 或 fallback 到 pushState
+                if (window.swupInstance && typeof window.swupInstance.navigate === "function") {
+                  window.swupInstance.navigate(href);
+                } else if (window.swupInstance && typeof window.swupInstance.loadPage === "function") {
+                  window.swupInstance.loadPage({ url: href });
+                } else {
+                  window.location.href = href;
+                }
+              }
             }
           },
           "casegrid:cardClick_" + ci
