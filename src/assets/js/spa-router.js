@@ -111,6 +111,9 @@
             new window.SwupPreloadPlugin({ preloadHoveredLinks: true, preloadInitialPage: false }),
           ],
           animateHistoryBrowsing: false,
+          skipPopStateHandling: function () {
+            return false;
+          },
         });
       } catch (e) {
         console.warn("[spa-router] Swup init failed, falling back to traditional navigation:", e.message);
