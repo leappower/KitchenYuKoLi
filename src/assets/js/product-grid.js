@@ -16,7 +16,10 @@
   }
 
   function tl(key, fallback) {
-    if (typeof window.uiText === "function") return window.uiText(key, fallback);
+    if (typeof window.uiText === "function") {
+      var lang = (window.translationManager && window.translationManager.currentLanguage) || "";
+      if (lang !== "zh-CN" && lang !== "zh") return window.uiText(key, fallback);
+    }
     return fallback || key;
   }
 

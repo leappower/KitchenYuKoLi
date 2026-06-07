@@ -28,10 +28,12 @@
   // ─── Category slug ↔ key ↔ label maps ──────────────────────────
 
   function tl(key, fallback) {
-    if (typeof window.uiText === "function") return window.uiText(key, fallback);
+    if (typeof window.uiText === "function") {
+      var _tl_lang = (window.translationManager && window.translationManager.currentLanguage) || "";
+      if (_tl_lang !== "zh-CN" && _tl_lang !== "zh") return window.uiText(key, fallback);
+    }
     return fallback || key;
   }
-
   var PRODUCT_SLUGS = {
     stirfry: { key: "nav_products_stirfry", label: "Stir-Fry Series", icon: "local_fire_department" },
     cutting: { key: "nav_products_cutting", label: "Prep Series", icon: "content_cut" },

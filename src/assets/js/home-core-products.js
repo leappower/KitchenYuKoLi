@@ -25,10 +25,12 @@ function _reInjectSrcset(root) {
   }
 
   function tl(key, fallback) {
-    if (typeof window.uiText === "function") return window.uiText(key, fallback);
+    if (typeof window.uiText === "function") {
+      var _tl_lang = (window.translationManager && window.translationManager.currentLanguage) || "";
+      if (_tl_lang !== "zh-CN" && _tl_lang !== "zh") return window.uiText(key, fallback);
+    }
     return fallback || key;
   }
-
   /**
    * Wait for translationManager.ready before calling tl() or rendering.
    * Returns a promise that resolves when translations are loaded.
