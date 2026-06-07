@@ -78,7 +78,9 @@
   
 <script>
     // SPA product route fallback: /products/{cat}/{model}/ → SPA shell
+    // Skip if server already confirmed product doesn't exist (injected meta[name=product-404])
     (function() {
+      if (document.querySelector('meta[name="product-404"]')) return;
       var p = location.pathname;
       var match = p.match(/^\/products\/([\w-]+)\/([\w-%]+)\/$/);
       if (!match) return;
@@ -100,7 +102,7 @@
     ></navigator>
 
     <!-- 404 Content -->
-    <main class="flex-1 flex items-center justify-center px-4 sm:px-6 lg:px-8 py-12 sm:py-20 lg:py-24">
+    <main id="spa-content" class="flex-1 flex items-center justify-center px-4 sm:px-6 lg:px-8 py-12 sm:py-20 lg:py-24">
       <div class="max-w-2xl mx-auto text-center">
         <!-- Animated 404 Graphic -->
         <div class="relative flex items-center justify-center h-36 sm:h-44 lg:h-48 mb-8 sm:mb-10 fade-up">

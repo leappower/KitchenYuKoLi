@@ -581,23 +581,33 @@
 
     var product = findProduct(model);
     if (!product) {
-      ensureContainers();
-      var ce = document.getElementById("product-content");
-      if (ce)
-        ce.innerHTML =
-          '<div class="max-w-3xl mx-auto px-4 py-16 text-center">' +
-          '<div class="w-20 h-20 bg-slate-100 dark:bg-slate-800 rounded-full flex items-center justify-center mx-auto mb-6">' +
-          '<span class="material-symbols-outlined text-3xl text-slate-400">search_off</span></div>' +
+      // Product not found — render full 404 page in #spa-content
+      var spaEl = document.getElementById("spa-content");
+      if (spaEl) {
+        spaEl.innerHTML =
+          '<div class="flex-1 flex flex-col items-center justify-center min-h-[60vh] px-4 py-16 text-center">' +
+          '<div class="w-24 h-24 bg-slate-100 dark:bg-slate-800 rounded-full flex items-center justify-center mx-auto mb-6">' +
+          '<span class="material-symbols-outlined text-4xl text-slate-400">search_off</span></div>' +
+          '<h1 class="text-6xl font-black tracking-tighter mb-2 text-slate-200 dark:text-slate-700">404</h1>' +
           '<h2 class="text-xl font-bold mb-3">' +
           tl("pd_product_not_found", "产品未找到") +
           "</h2>" +
-          '<p class="text-slate-500 mb-6">' +
+          '<p class="text-slate-500 mb-8 max-w-md">' +
           tl("pd_product_not_found_desc", "抱歉，未找到该产品。") +
           "</p>" +
           '<a href="/products/" class="inline-flex items-center gap-2 bg-primary text-white px-5 py-3 rounded-xl font-bold hover:shadow-lg transition-all">' +
           '<span class="material-symbols-outlined">arrow_back</span> ' +
           tl("pd_back_to_products", "返回产品中心") +
           "</a></div>";
+      }
+      // Update document meta for 404 state
+      document.title = "404 — " + tl("pd_product_not_found", "产品未找到") + " | YuKoLi";
+      var canon = document.querySelector('link[rel=\"canonical\"]');
+      if (canon) canon.setAttribute("href", "https://www.kitchen.yukoli.com/");
+      var desc = document.querySelector('meta[name=\"description\"]');
+      if (desc) desc.setAttribute("content", "");
+      var ogUrl = document.querySelector('meta[property=\"og:url\"]');
+      if (ogUrl) ogUrl.setAttribute("content", "https://www.kitchen.yukoli.com/");
       return;
     }
 
