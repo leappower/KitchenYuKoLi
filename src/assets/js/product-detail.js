@@ -704,7 +704,10 @@
       { l: tl("pd_spec_material", "材质"), v: getProductField(product, "material") || product.material },
       {
         l: tl("pd_spec_dimensions", "尺寸"),
-        v: getProductField(product, "product_dimensions") || product.productDimensions,
+        v: (getProductField(product, "product_dimensions") || product.productDimensions || "")
+          .replace(/[\u4e00-\u9fff\uff00-\uffef\s：：]+/g, " ")
+          .trim()
+          .replace(/\s+/g, " "),
       },
       { l: tl("pd_spec_color", "颜色"), v: getProductField(product, "color") || product.color },
       { l: tl("pd_spec_control", "控制方式"), v: getProductField(product, "control_method") || product.controlMethod },
@@ -860,7 +863,12 @@
         "</span>";
     }
     var dimensionsValue = getProductField(product, "product_dimensions") || product.productDimensions;
+    // Strip Chinese prefix like '设备尺寸：' / '所需空间：' from raw data
     if (dimensionsValue) {
+      dimensionsValue = dimensionsValue
+        .replace(/[\u4e00-\u9fff\uff00-\uffef\s：：]+/g, " ")
+        .trim()
+        .replace(/\s+/g, " ");
       quickSpecs +=
         '<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg text-xs font-medium bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-300">' +
         '<span class="material-symbols-outlined text-[14px]">straighten</span>' +
