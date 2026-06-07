@@ -1,6 +1,6 @@
 !(function (t) {
   "use strict";
-  var I18N_CACHE_V = 1780747314;
+  var I18N_CACHE_V = 1780837315;
   var _spaRegs = {};
 
   // ─── Ensure LANG_REGISTRY is loaded ─────────────────────────
@@ -485,9 +485,26 @@
           }));
     }),
     (r.prototype.refreshDocumentTitle = function (t) {
-      if (document.getElementById("page-title")) {
-        var e = (t && t.page_title) || this.getFallbackTranslation("page_title");
-        e && "page_title" !== e && document.title !== e && (document.title = e);
+      // Derive page_title_{route} key from current URL path
+      var path = window.location.pathname.replace(/\/+$/, "") || "/";
+      if (path === "/") path = "/home";
+      var route = path.replace(/^\//, "").replace(/\//g, "_");
+      // Check if it's a product detail page (/products/{cat}/{model}/)
+      var isProductDetail = /^\/products\/[^/]+\/[^/]+\/$/.test(window.location.pathname);
+      if (isProductDetail) {
+        // Product detail pages use JS-rendered title (set by product-detail.js)
+        return;
+      }
+      var pageTitleKey = "page_title_" + route;
+      var pageDescKey = "page_desc_" + route;
+      var titleVal = this.uiText(pageTitleKey, "");
+      var descVal = this.uiText(pageDescKey, "");
+      if (titleVal && titleVal !== pageTitleKey) {
+        document.title = titleVal;
+      }
+      if (descVal && descVal !== pageDescKey) {
+        var meta = document.querySelector('meta[name="description"]');
+        if (meta) meta.setAttribute("content", descVal);
       }
     }),
     (r.prototype.getFallbackTranslation = function (t) {
@@ -903,10 +920,17 @@
             .applyTranslations()
             .then(function () {
               document.dispatchEvent(new Event("spa:ready"));
+              // 延迟再应用一次，覆盖 content:replace 后新注入的 HTML
+              setTimeout(function () {
+                s.applyTranslations();
+              }, 100);
             })
             .catch(function (t) {
               console.warn("[i18n] spa:load translation apply failed:", t);
               document.dispatchEvent(new Event("spa:ready"));
+              setTimeout(function () {
+                s.applyTranslations();
+              }, 100);
             }));
       },
       "spa:load:i18n"

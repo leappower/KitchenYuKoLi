@@ -9,39 +9,35 @@
 <link href="/products/steaming/index-pc.html" media="only screen and (min-width: 1280px)" rel="alternate"/>
     <script>
     (function checkDevice(){
-      if(window.__redirectChecked){console.log("[device-redirect] skip, __redirectChecked=true");return;}
-      if(document.querySelector("meta[name=ssg-device]")){console.log("[device-redirect] skip, ssg-device meta found");return;}
+      if(window.__redirectChecked){return;}
+      if(document.querySelector("meta[name=ssg-device]")){return;}
       window.__redirectChecked=true;
       var u=new URLSearchParams(location.search);
       var c=u.get("clean-url");
-      if(c){console.log("[device-redirect] clean-url detected, replaceState:",c);history.replaceState({},"",c);return}
-      if(window.__spaNavigating){console.log("[device-redirect] skip, __spaNavigating=true");return;}
+      if(c){history.replaceState({},"",c);return}
+      if(window.__spaNavigating){return;}
       var f=location.pathname.split("/").pop();
-      console.log("[device-redirect] pathname=",location.pathname," f=",f," innerW=",window.innerWidth);
-      if(!f||!f.match(/.html$/)){
-        console.log("[device-redirect] dir URL (no .html), calling doRedirect");
-        doRedirect();
+      var dir=location.pathname.replace(/[^\/]*$/,"");
+      function getTarget(){
+        var mq=window.matchMedia;
+        var isPc=mq("(min-width:1024px)").matches;
+        var isTb=mq("(min-width:768px) and (max-width:1023px)").matches;
+        var isMb=mq("(max-width:767px)").matches;
+        if(mq&&mq("(pointer:coarse)").matches&&!isPc){isMb=true;isTb=false;}
+        return isPc?"index-pc.html":isTb?"index-tablet.html":"index-mobile.html";
+      }
+      var t=getTarget();
+      if(!f||!f.match(/\.html$/)){
+        // 目录 URL → replace 跳到对应设备版本（不留历史记录）
+        location.replace(dir+t);
         return;
       }
-      if(f.match(/^index-(pc|mobile|tablet).html$/)){
-        console.log("[device-redirect] already on device-specific page:",f,"→ skip");
+      if(f.match(/^index-(pc|mobile|tablet)\.html$/)){
+        // 已在设备版本 → replaceState 清理 URL，显示干净路径
+        var clean=dir;
+        if(location.pathname!==clean){history.replaceState({},"",clean);}
         return;
       }
-      function doRedirect(){
-        var mq = window.matchMedia;
-        var isTouch = mq && mq("(pointer:coarse)").matches;
-        var isMb = mq("(max-width:767px)").matches;
-        var isTb = mq("(min-width:768px) and (max-width:1023px)").matches;
-        var isPc = mq("(min-width:1024px)").matches;
-        if (isTouch && !isPc) { isMb = true; isTb = false; }
-        var e = isPc ? "index-pc.html" : isTb ? "index-tablet.html" : "index-mobile.html";
-        console.log("[device-redirect] doRedirect",{innerW:window.innerWidth,isTouch:isTouch,mobile:isMb,tablet:isTb,pc:isPc,target:e,currentF:f});
-        if(f===e){console.log("[device-redirect] already on correct version, skip");return;}
-        var newUrl=location.pathname.replace(/[^\/]*.html$/,"")+e;
-        console.log("[device-redirect] redirecting to",newUrl);
-        location.href=newUrl;
-      }
-      doRedirect();
     })();
     </script>
 <!-- ═══ End Responsive Redirect ═══ -->
@@ -75,7 +71,7 @@ if(localStorage.getItem('darkMode')==='true')document.documentElement.classList.
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"CollectionPage","name":"YuKoLi 智能爆炒机系列","description":"YuKoLi 智能爆炒机全系列，107+ 款型号覆盖入门到智能全线，智能温控还原传统锅气。","url":"https://www.kitchen.yukoli.com/products/steaming/"
 }
-</script> <title>YuKoLi 商用蒸柜蒸箱 | 全自动蒸煮设备 | 15+款</title> <meta name="description" content="YuKoLi 商用蒸柜系列 — 15+款全自动蒸箱，智能温控，多层同时蒸煮，适合食堂和中央厨房。" /> <script type="application/ld+json">
+</script> <title>Commercial Steamers & Steam Cooking Equipment | YuKoLi</title> <meta name="description" content="YuKoLi commercial steamer series — 15+ models with smart temperature control, multi-layer steaming for canteens and central kitchens." /> <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement": [ {"@type":"ListItem","position": 1,"name":"Home","item":"https://www.kitchen.yukoli.com/home/" }, {"@type":"ListItem","position": 2,"name":"Products","item":"https://www.kitchen.yukoli.com/products/" }, {"@type":"ListItem","position": 3,"name":"蒸煮设备","item":"https://www.kitchen.yukoli.com/products/steaming/" } ]
 } </script>
 </head>

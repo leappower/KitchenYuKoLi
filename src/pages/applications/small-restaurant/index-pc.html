@@ -1,42 +1,38 @@
 <!DOCTYPE html> <html class="light" lang="zh-CN"> <head> <!-- ═══ Responsive Redirect (injected by patch-responsive-redirect.py) ═══ --> <link rel="canonical" href="https://www.kitchen.yukoli.com/applications/small-restaurant/" /> <link rel="alternate" hreflang="zh-CN" href="https://www.kitchen.yukoli.com/applications/small-restaurant/" /> <link rel="alternate" hreflang="en" href="https://www.kitchen.yukoli.com/applications/small-restaurant/" /> <link rel="alternate" hreflang="x-default" href="https://www.kitchen.yukoli.com/applications/small-restaurant/" /> <link rel="alternate" media="only screen and (max-width: 767px)" href="/applications/small-restaurant/index-mobile.html" /> <link rel="alternate" media="only screen and (min-width: 768px) and (max-width: 1279px)" href="/applications/small-restaurant/index-tablet.html" /> <link rel="alternate" media="only screen and (min-width: 1280px)" href="/applications/small-restaurant/index-pc.html" />
     <script>
     (function checkDevice(){
-      if(window.__redirectChecked){console.log("[device-redirect] skip, __redirectChecked=true");return;}
-      if(document.querySelector("meta[name=ssg-device]")){console.log("[device-redirect] skip, ssg-device meta found");return;}
+      if(window.__redirectChecked){return;}
+      if(document.querySelector("meta[name=ssg-device]")){return;}
       window.__redirectChecked=true;
       var u=new URLSearchParams(location.search);
       var c=u.get("clean-url");
-      if(c){console.log("[device-redirect] clean-url detected, replaceState:",c);history.replaceState({},"",c);return}
-      if(window.__spaNavigating){console.log("[device-redirect] skip, __spaNavigating=true");return;}
+      if(c){history.replaceState({},"",c);return}
+      if(window.__spaNavigating){return;}
       var f=location.pathname.split("/").pop();
-      console.log("[device-redirect] pathname=",location.pathname," f=",f," innerW=",window.innerWidth);
-      if(!f||!f.match(/.html$/)){
-        console.log("[device-redirect] dir URL (no .html), calling doRedirect");
-        doRedirect();
+      var dir=location.pathname.replace(/[^\/]*$/,"");
+      function getTarget(){
+        var mq=window.matchMedia;
+        var isPc=mq("(min-width:1024px)").matches;
+        var isTb=mq("(min-width:768px) and (max-width:1023px)").matches;
+        var isMb=mq("(max-width:767px)").matches;
+        if(mq&&mq("(pointer:coarse)").matches&&!isPc){isMb=true;isTb=false;}
+        return isPc?"index-pc.html":isTb?"index-tablet.html":"index-mobile.html";
+      }
+      var t=getTarget();
+      if(!f||!f.match(/\.html$/)){
+        // 目录 URL → replace 跳到对应设备版本（不留历史记录）
+        location.replace(dir+t);
         return;
       }
-      if(f.match(/^index-(pc|mobile|tablet).html$/)){
-        console.log("[device-redirect] already on device-specific page:",f,"→ skip");
+      if(f.match(/^index-(pc|mobile|tablet)\.html$/)){
+        // 已在设备版本 → replaceState 清理 URL，显示干净路径
+        var clean=dir;
+        if(location.pathname!==clean){history.replaceState({},"",clean);}
         return;
       }
-      function doRedirect(){
-        var mq = window.matchMedia;
-        var isTouch = mq && mq("(pointer:coarse)").matches;
-        var isMb = mq("(max-width:767px)").matches;
-        var isTb = mq("(min-width:768px) and (max-width:1023px)").matches;
-        var isPc = mq("(min-width:1024px)").matches;
-        if (isTouch && !isPc) { isMb = true; isTb = false; }
-        var e = isPc ? "index-pc.html" : isTb ? "index-tablet.html" : "index-mobile.html";
-        console.log("[device-redirect] doRedirect",{innerW:window.innerWidth,isTouch:isTouch,mobile:isMb,tablet:isTb,pc:isPc,target:e,currentF:f});
-        if(f===e){console.log("[device-redirect] already on correct version, skip");return;}
-        var newUrl=location.pathname.replace(/[^\/]*.html$/,"")+e;
-        console.log("[device-redirect] redirecting to",newUrl);
-        location.href=newUrl;
-      }
-      doRedirect();
     })();
     </script>
-<!-- ═══ End Responsive Redirect ═══ --> <meta charset="utf-8" /> <meta name="description" content="YuKoLi 小型餐饮/云厨房智能解决方案 — 台式自动炒菜机，1-2台设备即可启动创业，15㎡厨房即可营业，日出餐100-500份。" /> <meta name="keywords" content="小型餐饮,云厨房,创业厨房,台式炒菜机,智能厨房,餐饮自动化,外卖厨房" /> <meta property="og:type" content="website" /> <meta property="og:title" content="YuKoLi | 小型餐饮/云厨房智能解决方案" /> <meta property="og:description" content="1-2台设备启动创业，15㎡厨房即可营业，为小型餐饮和云厨房提供智能自动化解决方案。" /> <meta property="og:url" content="https://www.kitchen.yukoli.com/applications/small-restaurant/" /> <meta property="og:image" content="https://www.kitchen.yukoli.com/assets/images/logo/logo.webp" /> <meta property="og:site_name" content="YuKoLi 智能厨具"/> <meta property="og:locale" content="zh_CN"/> <meta name="twitter:card" content="summary_large_image"/> <meta name="twitter:title" content="YuKoLi | 小型餐饮/云厨房智能解决方案"/> <meta name="twitter:description" content="1-2台设备启动创业，15㎡厨房即可营业，为小型餐饮和云厨房提供智能自动化解决方案。"/> <meta name="twitter:image" content="https://www.kitchen.yukoli.com/assets/images/logo/logo.webp"/> <meta content="width=device-width, initial-scale=1.0" name="viewport" /> <title data-i18n="small_restaurant_page_title">YuKoLi | Smart Solutions for Small Restaurants/Cloud Kitchens</title> <link rel="preload" href="/assets/fonts/local-fonts.css" as="style" /> <link rel="preload" href="/assets/css/styles.css" as="style" /> <link rel="preload" href="/assets/css/tailwind.css" as="style" /> <link rel="preload" href="/assets/fonts/public-sans-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin /> <link rel="preload" href="/assets/fonts/public-sans-latin-700-normal.woff2" as="font" type="font/woff2" crossorigin /> <link href="/assets/fonts/local-fonts.css" rel="stylesheet" /> <link rel="stylesheet" href="/assets/css/styles.css" /> <link rel="stylesheet" href="/assets/css/tailwind.css" /> <link rel="stylesheet" href="/assets/css/z-index-system.css" /> <link rel="stylesheet" href="/assets/css/performance-optimizations.css" /> <script> (function () { if (localStorage.getItem("darkMode") ==="true") document.documentElement.classList.add("dark"); })(); </script> <link rel="stylesheet" href="/assets/css/skeleton.css" /> <link rel="icon" href="/assets/images/logo/logo.webp" type="image/webp" /> <title>YuKoLi 小型餐饮设备方案 | 1-2台设备启动创业</title> <script type="application/ld+json">
+<!-- ═══ End Responsive Redirect ═══ --> <meta charset="utf-8" /> <meta name="description" content="YuKoLi small restaurant solutions — countertop automatic cookers. Start your business with 1-2 machines. 15㎡ kitchen, 100-500 meals/day." /> <meta name="keywords" content="小型餐饮,云厨房,创业厨房,台式炒菜机,智能厨房,餐饮自动化,外卖厨房" /> <meta property="og:type" content="website" /> <meta property="og:title" content="YuKoLi | 小型餐饮/云厨房智能解决方案" /> <meta property="og:description" content="1-2台设备启动创业，15㎡厨房即可营业，为小型餐饮和云厨房提供智能自动化解决方案。" /> <meta property="og:url" content="https://www.kitchen.yukoli.com/applications/small-restaurant/" /> <meta property="og:image" content="https://www.kitchen.yukoli.com/assets/images/logo/logo.webp" /> <meta property="og:site_name" content="YuKoLi 智能厨具"/> <meta property="og:locale" content="zh_CN"/> <meta name="twitter:card" content="summary_large_image"/> <meta name="twitter:title" content="YuKoLi | 小型餐饮/云厨房智能解决方案"/> <meta name="twitter:description" content="1-2台设备启动创业，15㎡厨房即可营业，为小型餐饮和云厨房提供智能自动化解决方案。"/> <meta name="twitter:image" content="https://www.kitchen.yukoli.com/assets/images/logo/logo.webp"/> <meta content="width=device-width, initial-scale=1.0" name="viewport" /> <title data-i18n="small_restaurant_page_title">YuKoLi | Smart Solutions for Small Restaurants/Cloud Kitchens</title> <link rel="preload" href="/assets/fonts/local-fonts.css" as="style" /> <link rel="preload" href="/assets/css/styles.css" as="style" /> <link rel="preload" href="/assets/css/tailwind.css" as="style" /> <link rel="preload" href="/assets/fonts/public-sans-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin /> <link rel="preload" href="/assets/fonts/public-sans-latin-700-normal.woff2" as="font" type="font/woff2" crossorigin /> <link href="/assets/fonts/local-fonts.css" rel="stylesheet" /> <link rel="stylesheet" href="/assets/css/styles.css" /> <link rel="stylesheet" href="/assets/css/tailwind.css" /> <link rel="stylesheet" href="/assets/css/z-index-system.css" /> <link rel="stylesheet" href="/assets/css/performance-optimizations.css" /> <script> (function () { if (localStorage.getItem("darkMode") ==="true") document.documentElement.classList.add("dark"); })(); </script> <link rel="stylesheet" href="/assets/css/skeleton.css" /> <link rel="icon" href="/assets/images/logo/logo.webp" type="image/webp" /> <title>Small Restaurant Automation | Start with 1 Machine | YuKoLi</title> <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement": [ {"@type":"ListItem","position": 1,"name":"Home","item":"https://www.kitchen.yukoli.com/home/" }, {"@type":"ListItem","position": 2,"name":"Applications","item":"https://www.kitchen.yukoli.com/applications/" }, {"@type":"ListItem","position": 3,"name":"小型餐饮","item":"https://www.kitchen.yukoli.com/applications/small-restaurant/" } ]
 } </script>
 </head>

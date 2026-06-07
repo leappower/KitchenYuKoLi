@@ -2,21 +2,14 @@
 /**
  * inject-device-redirect.js — 注入/更新所有页面的自包含设备重定向脚本
  *
- * 替换 PC/Tablet/Mobile 页面中旧的 redirect 脚本（依赖 DeviceUtils），
- * 注入新的自包含脚本（不依赖任何外部 JS，仅用 window.innerWidth）。
- *
- * 同时为缺失脚本的页面（applications/index-pc.html、case studies）
- * 补充完整的 redirect 脚本。
+ * 重定向逻辑（自包含，零依赖）：
+ *   1. 检测 viewport 宽度判断设备类型
+ *   2. 目录 URL（如 /home/）→ location.replace 跳到对应设备版本（不留历史）
+ *   3. 已在设备版本（如 index-pc.html）→ replaceState 清理 URL（去掉 .html 后缀）
+ *   4. SPA 导航中（__spaNavigating）→ 跳过
+ *   5. ssg-device meta → 跳过
  *
  * 此脚本作为 build.sh 的一部分运行，每次构建都会执行。
- *
- * 重定向逻辑（自包含，零依赖）：
- *   1. 读取当前 viewport 宽度（window.innerWidth）
- *   2. <768 → 期望 index-mobile.html
- *   3. 768-1279 → 期望 index-tablet.html
- *   4. >=1280 → 期望 index-pc.html
- *   5. 如果 URL 有文件名部分且等于期望 → 不跳转
- *   6. 否则（文件名不对、目录 URL、无 .html）→ 跳转到期望文件
  */
 
 'use strict';
@@ -28,48 +21,42 @@ var SRC_DIR = path.resolve(__dirname, '..', 'src', 'pages');
 var DIST_DIR = path.resolve(__dirname, '..', 'dist');
 
 // ═══ 自包含重定向脚本 ═══════════════════════════════════════════════
-// 零外部依赖。逻辑：
-//   v = viewport 宽度
-//   e = 当前设备对应的期望文件名（index-mobile/tablet/pc.html）
-//   f = URL 中的文件名部分
-//   如果有文件名且匹配 → 不跳转（已在正确版本）
-//   否则（目录 URL、文件名不匹配）→ 跳转到期望文件
+// 行为：
+//   目录 URL → location.replace 到对应设备版本（无历史记录）
+//   设备版本 URL → replaceState 清理 URL（去掉 .html 后缀，显示干净路径）
+//   SPA 导航 / ssg-device → 跳过
 var REDIRECT_SCRIPT =
   '    <script>\n' +
   '    (function checkDevice(){\n' +
-  '      if(window.__redirectChecked){console.log("[device-redirect] skip, __redirectChecked=true");return;}\n' +
-  '      if(document.querySelector("meta[name=ssg-device]")){console.log("[device-redirect] skip, ssg-device meta found");return;}\n' +
+  '      if(window.__redirectChecked){return;}\n' +
+  '      if(document.querySelector("meta[name=ssg-device]")){return;}\n' +
   '      window.__redirectChecked=true;\n' +
   '      var u=new URLSearchParams(location.search);\n' +
   '      var c=u.get("clean-url");\n' +
-  '      if(c){console.log("[device-redirect] clean-url detected, replaceState:",c);history.replaceState({},"",c);return}\n' +
-  '      if(window.__spaNavigating){console.log("[device-redirect] skip, __spaNavigating=true");return;}\n' +
+  '      if(c){history.replaceState({},"",c);return}\n' +
+  '      if(window.__spaNavigating){return;}\n' +
   '      var f=location.pathname.split("/").pop();\n' +
-  '      console.log("[device-redirect] pathname=",location.pathname," f=",f," innerW=",window.innerWidth);\n' +
-  '      if(!f||!f.match(/\.html$/)){\n' +
-  '        console.log("[device-redirect] dir URL (no .html), calling doRedirect");\n' +
-  '        doRedirect();\n' +
+  '      var dir=location.pathname.replace(/[^\\/]*$/,"");\n' +
+  '      function getTarget(){\n' +
+  '        var mq=window.matchMedia;\n' +
+  '        var isPc=mq("(min-width:1024px)").matches;\n' +
+  '        var isTb=mq("(min-width:768px) and (max-width:1023px)").matches;\n' +
+  '        var isMb=mq("(max-width:767px)").matches;\n' +
+  '        if(mq&&mq("(pointer:coarse)").matches&&!isPc){isMb=true;isTb=false;}\n' +
+  '        return isPc?"index-pc.html":isTb?"index-tablet.html":"index-mobile.html";\n' +
+  '      }\n' +
+  '      var t=getTarget();\n' +
+  '      if(!f||!f.match(/\\.html$/)){\n' +
+  '        // 目录 URL → replace 跳到对应设备版本（不留历史记录）\n' +
+  '        location.replace(dir+t);\n' +
   '        return;\n' +
   '      }\n' +
-  '      if(f.match(/^index-(pc|mobile|tablet)\.html$/)){\n' +
-  '        console.log("[device-redirect] already on device-specific page:",f,"→ skip");\n' +
+  '      if(f.match(/^index-(pc|mobile|tablet)\\.html$/)){\n' +
+  '        // 已在设备版本 → replaceState 清理 URL，显示干净路径\n' +
+  '        var clean=dir;\n' +
+  '        if(location.pathname!==clean){history.replaceState({},"",clean);}\n' +
   '        return;\n' +
   '      }\n' +
-  '      function doRedirect(){\n' +
-  '        var mq = window.matchMedia;\n' +
-  '        var isTouch = mq && mq("(pointer:coarse)").matches;\n' +
-  '        var isMb = mq("(max-width:767px)").matches;\n' +
-  '        var isTb = mq("(min-width:768px) and (max-width:1023px)").matches;\n' +
-  '        var isPc = mq("(min-width:1024px)").matches;\n' +
-  '        if (isTouch && !isPc) { isMb = true; isTb = false; }\n' +
-  '        var e = isPc ? "index-pc.html" : isTb ? "index-tablet.html" : "index-mobile.html";\n' +
-  '        console.log("[device-redirect] doRedirect",{innerW:window.innerWidth,isTouch:isTouch,mobile:isMb,tablet:isTb,pc:isPc,target:e,currentF:f});\n' +
-  '        if(f===e){console.log("[device-redirect] already on correct version, skip");return;}\n' +
-  '        var newUrl=location.pathname.replace(/[^\\/]*\.html$/,"")+e;\n' +
-  '        console.log("[device-redirect] redirecting to",newUrl);\n' +
-  '        location.href=newUrl;\n' +
-  '      }\n' +
-  '      doRedirect();\n' +
   '    })();\n' +
   '    </script>';
 
@@ -94,10 +81,8 @@ function needsRedirect(filePath) {
   // 跳过 entry-only 文件（无页面结构）
   if (filePath.indexOf('/products/detail/index.html') !== -1) return false;
   // 跳过产品详情页（SPA 路由，无设备三屏版本）
-  // 路径模式：/products/{category}/{model}/index.html（三级路径 = 详情页）
   var rel = filePath.replace(/^.*?\/products\//, 'products/');
   var parts = rel.split('/').filter(Boolean);
-  // products/stirfry/DLB-BQ40T/index.html → ['products','stirfry','DLB-BQ40T','index.html'] = 4 parts
   if (rel.startsWith('products/') && parts.length >= 4) return false;
   var content = fs.readFileSync(filePath, 'utf-8');
   return content.indexOf('<main') !== -1 || content.indexOf('navigator') !== -1;
@@ -109,21 +94,14 @@ function injectRedirect(filePath) {
   var content = fs.readFileSync(filePath, 'utf-8');
   var original = content;
 
-  // Step 1: 是否已有旧的 redirect 脚本（包含 __redirectChecked）？
   var hasOld = /__redirectChecked/.test(content);
 
   if (hasOld) {
-    // 替换包含 __redirectChecked 的 device-check <script> 块。
-    // 需要精确匹配该 script 块，不能跨越其他 <script> 标签。
-    // 注意：当前页面可能有 i18n-url-sync 等 script 在它前面。
-    // 使用更精确的模式：匹配包含 checkDevice 函数定义的 <script>...</script>。
     content = content.replace(
       /[\s]*<script>\s*\(function\s+checkDevice\(\)[\s\S]*?__redirectChecked[\s\S]*?<\/script>\s*/i,
       '\n' + REDIRECT_SCRIPT + '\n'
     );
   } else {
-    // 没有旧脚本：在最后一个 <link rel="alternate"> 后插入
-    // 或直接在 </head> 前插入
     if (/<link\s+rel="alternate"/.test(content)) {
       var altLinks = content.match(/<link\s+rel="alternate"[^>]*>/g);
       var lastAlt = altLinks[altLinks.length - 1];
@@ -144,11 +122,9 @@ function injectRedirect(filePath) {
 
 function main() {
   var targetDirs = [SRC_DIR];
-  // If dist exists, also process dist subdirectories (SSG-generated route dirs)
   if (fs.existsSync(DIST_DIR)) {
     var pagesDist = path.join(DIST_DIR, 'pages');
     if (fs.existsSync(pagesDist)) targetDirs.push(pagesDist);
-    // Also scan dist/ for SSG-generated files (excluding assets/ and pages/)
     var distChildren = fs.readdirSync(DIST_DIR);
     for (var di = 0; di < distChildren.length; di++) {
       var child = path.join(DIST_DIR, distChildren[di]);

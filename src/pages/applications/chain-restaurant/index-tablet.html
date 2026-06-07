@@ -1,42 +1,38 @@
 <!doctype html> <html class="light" lang="zh-CN"> <head> <link rel="canonical" href="https://www.kitchen.yukoli.com/applications/chain-restaurant/" /> <link rel="alternate" hreflang="zh-CN" href="https://www.kitchen.yukoli.com/applications/chain-restaurant/" /> <link rel="alternate" hreflang="en" href="https://www.kitchen.yukoli.com/applications/chain-restaurant/" /> <link rel="alternate" hreflang="x-default" href="https://www.kitchen.yukoli.com/applications/chain-restaurant/" /> <link rel="alternate" media="only screen and (max-width: 767px)" href="/applications/chain-restaurant/index-mobile.html" /> <link rel="alternate" media="only screen and (min-width: 768px) and (max-width: 1279px)" href="/applications/chain-restaurant/index-tablet.html" /> <link rel="alternate" media="only screen and (min-width: 1280px)" href="/applications/chain-restaurant/index-pc.html" />
     <script>
     (function checkDevice(){
-      if(window.__redirectChecked){console.log("[device-redirect] skip, __redirectChecked=true");return;}
-      if(document.querySelector("meta[name=ssg-device]")){console.log("[device-redirect] skip, ssg-device meta found");return;}
+      if(window.__redirectChecked){return;}
+      if(document.querySelector("meta[name=ssg-device]")){return;}
       window.__redirectChecked=true;
       var u=new URLSearchParams(location.search);
       var c=u.get("clean-url");
-      if(c){console.log("[device-redirect] clean-url detected, replaceState:",c);history.replaceState({},"",c);return}
-      if(window.__spaNavigating){console.log("[device-redirect] skip, __spaNavigating=true");return;}
+      if(c){history.replaceState({},"",c);return}
+      if(window.__spaNavigating){return;}
       var f=location.pathname.split("/").pop();
-      console.log("[device-redirect] pathname=",location.pathname," f=",f," innerW=",window.innerWidth);
-      if(!f||!f.match(/.html$/)){
-        console.log("[device-redirect] dir URL (no .html), calling doRedirect");
-        doRedirect();
+      var dir=location.pathname.replace(/[^\/]*$/,"");
+      function getTarget(){
+        var mq=window.matchMedia;
+        var isPc=mq("(min-width:1024px)").matches;
+        var isTb=mq("(min-width:768px) and (max-width:1023px)").matches;
+        var isMb=mq("(max-width:767px)").matches;
+        if(mq&&mq("(pointer:coarse)").matches&&!isPc){isMb=true;isTb=false;}
+        return isPc?"index-pc.html":isTb?"index-tablet.html":"index-mobile.html";
+      }
+      var t=getTarget();
+      if(!f||!f.match(/\.html$/)){
+        // 目录 URL → replace 跳到对应设备版本（不留历史记录）
+        location.replace(dir+t);
         return;
       }
-      if(f.match(/^index-(pc|mobile|tablet).html$/)){
-        console.log("[device-redirect] already on device-specific page:",f,"→ skip");
+      if(f.match(/^index-(pc|mobile|tablet)\.html$/)){
+        // 已在设备版本 → replaceState 清理 URL，显示干净路径
+        var clean=dir;
+        if(location.pathname!==clean){history.replaceState({},"",clean);}
         return;
       }
-      function doRedirect(){
-        var mq = window.matchMedia;
-        var isTouch = mq && mq("(pointer:coarse)").matches;
-        var isMb = mq("(max-width:767px)").matches;
-        var isTb = mq("(min-width:768px) and (max-width:1023px)").matches;
-        var isPc = mq("(min-width:1024px)").matches;
-        if (isTouch && !isPc) { isMb = true; isTb = false; }
-        var e = isPc ? "index-pc.html" : isTb ? "index-tablet.html" : "index-mobile.html";
-        console.log("[device-redirect] doRedirect",{innerW:window.innerWidth,isTouch:isTouch,mobile:isMb,tablet:isTb,pc:isPc,target:e,currentF:f});
-        if(f===e){console.log("[device-redirect] already on correct version, skip");return;}
-        var newUrl=location.pathname.replace(/[^\/]*.html$/,"")+e;
-        console.log("[device-redirect] redirecting to",newUrl);
-        location.href=newUrl;
-      }
-      doRedirect();
     })();
     </script>
-<meta charset="utf-8" /> <meta name="description" content="YuKoLi连锁餐饮标准化解决方案 — 1名厨工操作全套设备，日出餐500-5000份，出品一致性99.9%。覆盖快餐连锁、火锅连锁、烤肉连锁等场景。" /> <meta name="keywords" content="连锁餐饮,快餐连锁,火锅连锁,智能厨房,自动化炒菜机,商用厨房设备" /> <meta property="og:title" content="YuKoLi | 连锁餐饮标准化智能厨房解决方案" /> <meta property="og:site_name" content="YuKoLi 智能厨具"/> <meta property="og:locale" content="zh_CN"/> <meta name="twitter:card" content="summary_large_image"/> <meta name="twitter:title" content="YuKoLi | 连锁餐饮标准化智能厨房解决方案"/> <meta content="width=device-width, initial-scale=1.0" name="viewport" /> <title data-i18n="chain_restaurant_page_title">YuKoLi | Standardized Kitchen Equipment Solutions for Chain Restaurants</title> <link rel="preload" href="/assets/fonts/local-fonts.css" as="style" /> <link rel="preload" href="/assets/css/styles.css" as="style" /> <link rel="preload" href="/assets/css/tailwind.css" as="style" /> <link href="/assets/fonts/local-fonts.css" rel="stylesheet" /> <link rel="stylesheet" href="/assets/css/styles.css" /> <link rel="stylesheet" href="/assets/css/tailwind.css" /> <link rel="stylesheet" href="/assets/css/z-index-system.css" /> <link rel="stylesheet" href="/assets/css/performance-optimizations.css" /> <script> (function () { if (localStorage.getItem("darkMode") ==="true") document.documentElement.classList.add("dark"); })(); </script> <link rel="stylesheet" href="/assets/css/skeleton.css" /> <link rel="icon" href="/assets/images/logo/logo.webp" type="image/webp" /> <title>YuKoLi 连锁餐饮后厨自动化 | 口味标准化设备方案</title> <script type="application/ld+json">
+<meta charset="utf-8" /> <meta name="description" content="YuKoLi chain restaurant kitchen equipment — standardize flavor across locations. New stores ready in 1 week. Fast food, hot pot, BBQ chains." /> <meta name="keywords" content="连锁餐饮,快餐连锁,火锅连锁,智能厨房,自动化炒菜机,商用厨房设备" /> <meta property="og:title" content="YuKoLi | 连锁餐饮标准化智能厨房解决方案" /> <meta property="og:site_name" content="YuKoLi 智能厨具"/> <meta property="og:locale" content="zh_CN"/> <meta name="twitter:card" content="summary_large_image"/> <meta name="twitter:title" content="YuKoLi | 连锁餐饮标准化智能厨房解决方案"/> <meta content="width=device-width, initial-scale=1.0" name="viewport" /> <title data-i18n="chain_restaurant_page_title">YuKoLi | Standardized Kitchen Equipment Solutions for Chain Restaurants</title> <link rel="preload" href="/assets/fonts/local-fonts.css" as="style" /> <link rel="preload" href="/assets/css/styles.css" as="style" /> <link rel="preload" href="/assets/css/tailwind.css" as="style" /> <link href="/assets/fonts/local-fonts.css" rel="stylesheet" /> <link rel="stylesheet" href="/assets/css/styles.css" /> <link rel="stylesheet" href="/assets/css/tailwind.css" /> <link rel="stylesheet" href="/assets/css/z-index-system.css" /> <link rel="stylesheet" href="/assets/css/performance-optimizations.css" /> <script> (function () { if (localStorage.getItem("darkMode") ==="true") document.documentElement.classList.add("dark"); })(); </script> <link rel="stylesheet" href="/assets/css/skeleton.css" /> <link rel="icon" href="/assets/images/logo/logo.webp" type="image/webp" /> <title>Chain Restaurant Kitchen Automation | YuKoLi</title> <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement": [ {"@type":"ListItem","position": 1,"name":"Home","item":"https://www.kitchen.yukoli.com/home/" }, {"@type":"ListItem","position": 2,"name":"Applications","item":"https://www.kitchen.yukoli.com/applications/" }, {"@type":"ListItem","position": 3,"name":"连锁餐饮","item":"https://www.kitchen.yukoli.com/applications/chain-restaurant/" } ]
 } </script>
 </head> <body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 antialiased transition-colors duration-300 overflow-x-clip" > <navigator data-search="true" data-component="navigator" data-variant="tablet" data-active="applications" data-cta-text-key="nav_get_quote" data-cta-href="/quote" ></navigator> <main id="spa-content"> <!-- Hero Section --> <section class="fullwidth-bg hero-overlap section-passthrough relative py-12 overflow-hidden bg-gradient-to-br from-primary/5 via-transparent to-orange-100/30 dark:from-primary/10 dark:to-orange-900/20"> <div class="section-content"> <div class="w-full relative"> <div class="flex flex-col gap-8"> <div class="flex flex-col gap-4"> <div class="flex items-center gap-2 flex-wrap"> <a href="/applications/" class="text-sm text-slate-500 hover:text-primary transition-colors" data-i18n="nav_applications">Applications</a> <span class="material-symbols-outlined text-sm text-slate-300">chevron_right</span> <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-bold uppercase tracking-widest"> <span class="material-symbols-outlined text-xs leading-none">store</span> <span data-i18n="chain_restaurant_badge">Chain Restaurant Solutions</span> </span> </div> <h1 class="text-4xl font-black leading-tight tracking-tighter"> <span data-i18n="chain_restaurant_hero_title_1">Standardized Chain Restaurant</span> <br /> <span class="text-primary" data-i18n="chain_restaurant_hero_title_2">Kitchen Equipment</span> </h1> <p class="text-lg text-slate-600 dark:text-slate-400 leading-relaxed" data-i18n="chain_restaurant_hero_subtitle">Cloud-synced recipes ensure consistent flavors across locations—no chef dependency.</p> <div class="flex flex-wrap items-center gap-3 pt-2"> <a href="/quote/" class="bg-primary text-white px-6 py-3 rounded-xl font-bold flex items-center gap-2 hover:shadow-lg transition-all text-sm" > <span data-i18n="chain_restaurant_cta_free">Free Consultation</span> <span class="material-symbols-outlined text-sm">arrow_forward</span> </a> <a href="https://wa.me/8613163756465" data-wa-message-key="wa_msg_chain_restaurant" target="_blank" rel="noopener noreferrer" class="px-6 py-3 rounded-xl font-bold flex items-center gap-2 border-2 border-green-500 text-green-600 hover:bg-green-50 dark:hover:bg-green-900/20 transition-all text-sm" > <span class="material-symbols-outlined text-sm">chat</span> WhatsApp </a> </div> </div> <div class="relative rounded-3xl overflow-hidden shadow-2xl border border-white/10 aspect-[3/2]" data-hero-video> <!-- TODO: Replace with real photo — 连锁后厨实拍 --> <video class="hero-video-player" src="/assets/video/chain-restaurant-scenario.mp4" poster="/assets/images/applications/chain-restaurant-hero.webp" preload="none" muted playsinline webkit-playsinline loop ></video> <div class="hero-video-overlay"> <button class="hero-video-mute" aria-label="Toggle mute" data-i18n-aria="aria_toggle_mute"> <span class="material-symbols-outlined text-white text-xl">volume_off</span> </button> <button class="hero-video-fallback-btn" aria-label="Play video" data-i18n-aria="aria_play_video"> <span class="material-symbols-outlined text-white text-3xl">play_circle</span> </button>  </div>

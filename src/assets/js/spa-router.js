@@ -111,6 +111,9 @@
             new window.SwupPreloadPlugin({ preloadHoveredLinks: true, preloadInitialPage: false }),
           ],
           animateHistoryBrowsing: false,
+          skipPopStateHandling: function () {
+            return false;
+          },
         });
       } catch (e) {
         console.warn("[spa-router] Swup init failed, falling back to traditional navigation:", e.message);
@@ -170,7 +173,7 @@
     var _dynamicScripts = [];
     var _globalScriptPatterns =
       window._SPA_GLOBAL_PATTERNS ||
-      /(?:^|[/])(?:product-data-table|spa-router|swup|translations|lang-registry|translations-dropdown-template|spa-events|dropdown-base|dropdown-styles|navigator|nav-config|footer|slide-menu|products-dropdown|applications-dropdown|support-dropdown|about-dropdown|contact-dropdown|product-list|product-grid|product-detail|case-grid|utils|search-engine|device-utils|hero-video|contacts|page-interactions|common|main|init|image-assets|media-queries|floating-actions|currency|custom-select|breadcrumb|home-core-products|compare|cross-sell|profit-calculator|quote-form|quote-select-i18n|quote-budget-i18n|news-detail|support-contact-channels|support-wechat-modal|helpers|page-effects|router|roi-data|cases-page|html2canvas|jspdf|pi-maps)\.js/;
+      /(?:^|[/])(?:product-data-table|spa-router|swup|translations|lang-registry|translations-dropdown-template|spa-events|dropdown-base|dropdown-styles|navigator|nav-config|footer|slide-menu|products-dropdown|applications-dropdown|support-dropdown|about-dropdown|contact-dropdown|product-list|product-grid|product-detail|case-grid|utils|search-engine|device-utils|hero-video|contacts|page-interactions|common|main|init|image-assets|media-queries|floating-actions|currency|custom-select|breadcrumb|home-core-products|compare|cross-sell|profit-calculator|quote-form|quote-select-i18n|quote-budget-i18n|news-detail|support-contact-channels|support-wechat-modal|helpers|page-effects|router|roi-data|cases-page|scenario-products|html2canvas|jspdf|pi-maps)\.js/;
     function reloadPageScripts(newDoc) {
       if (!newDoc) return;
       for (var d = 0; d < _dynamicScripts.length; d++) {
@@ -346,10 +349,9 @@
   if (document.readyState === "loading") {
     document.addEventListener("DOMContentLoaded", function () {
       initSwup();
-      var path = window.location.pathname;
-      if (path === "/" || path === "/index.html") {
-        history.replaceState(null, "", "/home/");
-      }
+      // Root path redirect is handled in <head> of index.html (SPA shell).
+      // Do NOT call history.replaceState here — it would change the URL to /home/
+      // without loading any content, resulting in blank #spa-content.
       var redirectParam = new URLSearchParams(window.location.search).get("redirect");
       if (redirectParam) {
         history.replaceState(null, "", redirectParam);
