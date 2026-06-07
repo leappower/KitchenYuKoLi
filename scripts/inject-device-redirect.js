@@ -16,7 +16,8 @@
  *   3. 768-1279 → 期望 index-tablet.html
  *   4. >=1280 → 期望 index-pc.html
  *   5. 如果 URL 有文件名部分且等于期望 → 不跳转
- *   6. 否则（文件名不对、目录 URL、无 .html）→ 跳转到期望文件
+ *   6. 否则（目录 URL、无 .html）→ 保持 URL 干净，不跳转
+ *   7. 文件名不匹配 → 跳转到期望文件
  */
 
 'use strict';
@@ -32,8 +33,9 @@ var DIST_DIR = path.resolve(__dirname, '..', 'dist');
 //   v = viewport 宽度
 //   e = 当前设备对应的期望文件名（index-mobile/tablet/pc.html）
 //   f = URL 中的文件名部分
-//   如果有文件名且匹配 → 不跳转（已在正确版本）
-//   否则（目录 URL、文件名不匹配）→ 跳转到期望文件
+//   目录 URL（无 .html）→ 不跳转（index.html 已有正确内容，保持 URL 干净）
+//   有文件名且匹配 → 不跳转（已在正确版本）
+//   文件名不匹配 → 跳转到期望文件（此分支极少触发）
 var REDIRECT_SCRIPT =
   '    <script>\n' +
   '    (function checkDevice(){\n' +
@@ -46,12 +48,12 @@ var REDIRECT_SCRIPT =
   '      if(window.__spaNavigating){console.log("[device-redirect] skip, __spaNavigating=true");return;}\n' +
   '      var f=location.pathname.split("/").pop();\n' +
   '      console.log("[device-redirect] pathname=",location.pathname," f=",f," innerW=",window.innerWidth);\n' +
-  '      if(!f||!f.match(/\.html$/)){\n' +
-  '        console.log("[device-redirect] dir URL (no .html), calling doRedirect");\n' +
-  '        doRedirect();\n' +
+  '      if(!f||!f.match(/\\.html$/)){\n' +
+  '        // 目录 URL — index.html 已有正确内容，保持 URL 干净\n' +
+  '        console.log("[device-redirect] dir URL (no .html), keep clean URL");\n' +
   '        return;\n' +
   '      }\n' +
-  '      if(f.match(/^index-(pc|mobile|tablet)\.html$/)){\n' +
+  '      if(f.match(/^index-(pc|mobile|tablet)\\.html$/)){\n' +
   '        console.log("[device-redirect] already on device-specific page:",f,"→ skip");\n' +
   '        return;\n' +
   '      }\n' +
@@ -65,7 +67,7 @@ var REDIRECT_SCRIPT =
   '        var e = isPc ? "index-pc.html" : isTb ? "index-tablet.html" : "index-mobile.html";\n' +
   '        console.log("[device-redirect] doRedirect",{innerW:window.innerWidth,isTouch:isTouch,mobile:isMb,tablet:isTb,pc:isPc,target:e,currentF:f});\n' +
   '        if(f===e){console.log("[device-redirect] already on correct version, skip");return;}\n' +
-  '        var newUrl=location.pathname.replace(/[^\\/]*\.html$/,"")+e;\n' +
+  '        var newUrl=location.pathname.replace(/[^\\/]*\\.html$/,"")+e;\n' +
   '        console.log("[device-redirect] redirecting to",newUrl);\n' +
   '        location.href=newUrl;\n' +
   '      }\n' +
