@@ -234,12 +234,22 @@
       // Do NOT call mount() again — the placeholder has already been replaced
       // and a second mount would find no placeholder to render.
 
-      // Root path redirect: / → /home/ (SPA-friendly, no page reload)
+      // Root path redirect: / → /home/ → device-specific version
+      // This SPA shell has no spa-content, so we redirect to /home/ and let
+      // the device-redirect script pick the right index-pc/mobile/tablet.html.
       var path = window.location.pathname;
       if (path === '/' || path === '/index.html') {
-        // Tell device-redirect script to skip (no jump to index-pc.html)
-        window.__redirectChecked = true;
-        history.replaceState(null, '', '/home/');
+        var mq = window.matchMedia;
+        var isPc = mq && mq('(min-width:1024px)').matches;
+        var isMb = mq && mq('(max-width:767px)').matches;
+        var isTouch = mq && mq('(pointer:coarse)').matches && !isPc;
+        if (isTouch || isMb) {
+          location.replace('/home/index-mobile.html');
+        } else if (mq && mq('(min-width:768px) and (max-width:1023px)').matches) {
+          location.replace('/home/index-tablet.html');
+        } else {
+          location.replace('/home/index-pc.html');
+        }
       }
 
       // GitHub Pages 404 SPA redirect:
