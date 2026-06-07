@@ -1,6 +1,6 @@
 !(function (t) {
   "use strict";
-  var I18N_CACHE_V = 1780757636;
+  var I18N_CACHE_V = 1780822173;
   var _spaRegs = {};
 
   // ─── Ensure LANG_REGISTRY is loaded ─────────────────────────
@@ -920,10 +920,17 @@
             .applyTranslations()
             .then(function () {
               document.dispatchEvent(new Event("spa:ready"));
+              // 延迟再应用一次，覆盖 content:replace 后新注入的 HTML
+              setTimeout(function () {
+                s.applyTranslations();
+              }, 100);
             })
             .catch(function (t) {
               console.warn("[i18n] spa:load translation apply failed:", t);
               document.dispatchEvent(new Event("spa:ready"));
+              setTimeout(function () {
+                s.applyTranslations();
+              }, 100);
             }));
       },
       "spa:load:i18n"
