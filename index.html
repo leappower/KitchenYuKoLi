@@ -3,6 +3,50 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- ═══ GH Pages 静态部署 SPA fallback ═══
+       场景1: 访问 / → SPA Shell（spa-content 为空）→ 立刻同步跳转到设备版首页
+       场景2: 访问 /?redirect=/products/ → 404 还原 → 如果 Swup 初始化失败，页面保持空白
+       场景3: SPA Shell 中任何导致 Swup 不初始化的异常
+
+       此脚本在 <head> 中同步执行（无 defer），在浏览器渲染 body 前完成跳转。
+       即使后续脚本全部加载失败，用户也已经在新页面上了。
+  -->
+  <script>
+    // ⚡ 同步检测：当前路径是否是 SPA Shell（只有根路径 / 和 /index.html 返回空 shell）
+    (function(){
+      var path = window.location.pathname;
+
+      // 场景1: 根路径 → 跳到 /home/ 目录页
+      // serve 对 .html 文件做 301 去后缀重定向，不能用 .html 后缀跳转。
+      // /home/index.html 的 device-redirect 负责判断设备类型并跳转到设备版。
+      // 跳转时带上 ?source=shell 参数，注明来自 SPA Shell。
+      if (path === '/' || path === '/index.html') {
+        window.location.replace('/home/');
+        return;
+      }
+
+      // 场景2: redirect 参数（来自 404.html SPA 还原）
+      var rp = new URLSearchParams(window.location.search).get('redirect');
+      if (rp) {
+        // 判断 redirect 目标是否在已知路由列表中
+        var knownRoutes = ["about","applications","applications/canteen","applications/central-kitchen","applications/chain-restaurant","applications/cloud-kitchen","applications/food-factory","applications/menu-lab","applications/small-restaurant","cases","cases/bangkok","cases/cebu","cases/hanoi","cases/hcmc","cases/jakarta","cases/kl","cases/manila","cases/surabaya","contact","home","privacy","products","products/all","products/compare","products/cutting","products/detail","products/frying","products/other","products/steaming","products/stewing","products/stirfry","profit-calculator","quote","support","support/faq","support/installation","support/services","support/spare-parts","support/training","support/warranty","terms","thank-you"];
+        var rpClean = rp.replace(/^\/+|\/+$/g, '');
+        // 已知路由 → 跳到对应的 SSG 目录页面
+        // 目录页本身就是 PC 版完整内容，device-redirect 不再跳转
+        if (knownRoutes.indexOf(rpClean) !== -1) {
+          window.location.replace('/' + rpClean + '/');
+          return;
+        }
+        // 未知路由 → 跳到 products 页面
+        if (/^products\/[^/]+$/.test(rpClean)) {
+          window.location.replace('/products/');
+          return;
+        }
+      }
+    })();
+  </script>
+
   <script>
   // Force unregister any stale Service Worker from previous versions
   if('serviceWorker' in navigator){
@@ -21,6 +65,33 @@
   <link rel="alternate" hreflang="zh-CN" href="https://www.kitchen.yukoli.com/home/" />
   <link rel="alternate" hreflang="en" href="https://www.kitchen.yukoli.com/home/" />
   <link rel="alternate" hreflang="x-default" href="https://www.kitchen.yukoli.com/home/" />
+    <script>
+    (function checkDevice(){
+      if(window.__redirectChecked)return;
+      if(window.__spaNavigating)return;
+      window.__redirectChecked=true;
+      var u=new URLSearchParams(location.search);
+      var c=u.get("clean-url");
+      if(c){
+        history.replaceState({},"",c);
+        return;
+      }
+      var f=location.pathname.split("/").pop();
+      var dir=location.pathname.replace(/[^\/]*$/,"");
+      // 设备版页面（有或无 .html 后缀）→ 不做任何操作
+      if(f.match(/^index-(pc|mobile|tablet)(\.html)?$/))return;
+      // 目录 URL → 跳到对应设备版本（不带 .html 后缀，避免 serve 301）
+      function getTarget(){
+        var mq=window.matchMedia;
+        var isPc=mq("(min-width:1024px)").matches;
+        var isTb=mq("(min-width:768px) and (max-width:1023px)").matches;
+        var isMb=mq("(max-width:767px)").matches;
+        if(mq&&mq("(pointer:coarse)").matches&&!isPc){isMb=true;isTb=false;}
+        return isPc?"index-pc":isTb?"index-tablet":"index-mobile";
+      }
+      location.replace(dir+getTarget()+"?clean-url="+encodeURIComponent(dir));
+    })();
+    </script>
   <meta name="description" content="Yukoli Smart Kitchen — industrial cooking automation and IoT solutions for commercial kitchens worldwide.">
   <meta property="og:type" content="website">
   <meta property="og:title" content="Yukoli Technology - Professional Kitchen Equipment">
@@ -31,15 +102,15 @@
   <!-- Fonts -->
   <link rel="preload" href="/assets/fonts/local-fonts.css" as="style">
   <link rel="preload" href="/assets/fonts/material-symbols-outlined-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="preload" href="/assets/css/tailwind.css?v=1780837491124" as="style">
+  <link rel="preload" href="/assets/css/tailwind.css?v=1780928945783" as="style">
   <link href="/assets/fonts/local-fonts.css" rel="stylesheet"/>
 
   <!-- Core Styles (loaded in SPA shell) -->
-  <link rel="stylesheet" href="/assets/css/styles.css?v=1780837491124">
-  <link rel="stylesheet" href="/assets/css/tailwind.css?v=1780837491124">
-  <link rel="stylesheet" href="/assets/css/z-index-system.css?v=1780837491124">
-  <link rel="stylesheet" href="/assets/css/performance-optimizations.css?v=1780837491124">
-  <link rel="stylesheet" href="/assets/css/skeleton.css?v=1780837491124">
+  <link rel="stylesheet" href="/assets/css/styles.css?v=1780928945783">
+  <link rel="stylesheet" href="/assets/css/tailwind.css?v=1780928945783">
+  <link rel="stylesheet" href="/assets/css/z-index-system.css?v=1780928945783">
+  <link rel="stylesheet" href="/assets/css/performance-optimizations.css?v=1780928945783">
+  <link rel="stylesheet" href="/assets/css/skeleton.css?v=1780928945783">
 
   <!-- Anti-FOUC: hide body until content + scripts are ready -->
   <style id="anti-fouc">
@@ -96,35 +167,35 @@
 
 <!-- All scripts deferred: browser parses HTML + renders skeleton immediately,
      scripts download in parallel and execute in order after DOM is ready -->
-<script defer src="/assets/js/utils/device-utils.js?v=1780837491124"></script>
-<script defer src="/assets/js/lang-registry.js?v=1780837491124"></script>
-<script defer src="/assets/js/translations.js?v=1780837491124"></script>
-<script defer src="/assets/js/translations-dropdown-template.js?v=1780837491124"></script>
-<script defer src="/assets/js/ui/dropdown-styles.js?v=1780837491124"></script>
-<script defer src="/assets/js/ui/dropdown-base.js?v=1780837491124"></script>
-<script defer src="/assets/js/ui/products-dropdown.js?v=1780837491124"></script>
-<script defer src="/assets/js/ui/applications-dropdown.js?v=1780837491124"></script>
-<script defer src="/assets/js/ui/support-dropdown.js?v=1780837491124"></script>
-<script defer src="/assets/js/ui/about-dropdown.js?v=1780837491124"></script>
-<script defer src="/assets/js/utils.js?v=1780837491124"></script>
-<script defer src="/assets/js/nav-config.js?v=1780837491124"></script>
-<script defer src="/assets/js/ui/slide-menu.js?v=1780837491124"></script>
-<script defer src="/assets/js/ui/search-engine.js?v=1780837491124"></script>
-<script defer src="/assets/js/ui/footer.js?v=1780837491124"></script>
-<script defer src="/assets/js/ui/floating-actions.js?v=1780837491124"></script>
-<script defer src="/assets/js/ui/hero-video.js?v=1780837491124"></script>
-<script defer src="/assets/js/contacts.js?v=1780837491124"></script>
-<script src="/assets/js/product-data-table.js?v=1780837491124"></script>
-<script defer src="/assets/js/product-grid.js?v=1780837491124"></script>
-<script defer src="/assets/js/product-detail.js?v=1780837491124"></script>
-<script defer src="/assets/js/home-core-products.js?v=1780837491124"></script>
-<script defer src="/assets/js/quote-form.js?v=1780837491124"></script>
-<script defer src="/assets/js/ui/navigator.js?v=1780837491124"></script>
-<script defer src="/assets/js/spa-router.js?v=1780837491124"></script>
-<script defer src="/assets/js/ui/currency.js?v=1780837491124"></script>
-<script defer src="/assets/js/swup.min.js?v=1780837491124"></script>
-<script defer src="/assets/js/swup-head-plugin.min.js?v=1780837491124"></script>
-<script defer src="/assets/js/swup-preload-plugin.min.js?v=1780837491124"></script>
+<script defer src="/assets/js/utils/device-utils.js?v=1780928945783"></script>
+<script defer src="/assets/js/lang-registry.js?v=1780928945783"></script>
+<script defer src="/assets/js/translations.js?v=1780928945783"></script>
+<script defer src="/assets/js/translations-dropdown-template.js?v=1780928945783"></script>
+<script defer src="/assets/js/ui/dropdown-styles.js?v=1780928945783"></script>
+<script defer src="/assets/js/ui/dropdown-base.js?v=1780928945783"></script>
+<script defer src="/assets/js/ui/products-dropdown.js?v=1780928945783"></script>
+<script defer src="/assets/js/ui/applications-dropdown.js?v=1780928945783"></script>
+<script defer src="/assets/js/ui/support-dropdown.js?v=1780928945783"></script>
+<script defer src="/assets/js/ui/about-dropdown.js?v=1780928945783"></script>
+<script defer src="/assets/js/utils.js?v=1780928945783"></script>
+<script defer src="/assets/js/nav-config.js?v=1780928945783"></script>
+<script defer src="/assets/js/ui/slide-menu.js?v=1780928945783"></script>
+<script defer src="/assets/js/ui/search-engine.js?v=1780928945783"></script>
+<script defer src="/assets/js/ui/footer.js?v=1780928945783"></script>
+<script defer src="/assets/js/ui/floating-actions.js?v=1780928945783"></script>
+<script defer src="/assets/js/ui/hero-video.js?v=1780928945783"></script>
+<script defer src="/assets/js/contacts.js?v=1780928945783"></script>
+<script src="/assets/js/product-data-table.js?v=1780928945783"></script>
+<script defer src="/assets/js/product-grid.js?v=1780928945783"></script>
+<script defer src="/assets/js/product-detail.js?v=1780928945783"></script>
+<script defer src="/assets/js/home-core-products.js?v=1780928945783"></script>
+<script defer src="/assets/js/quote-form.js?v=1780928945783"></script>
+<script defer src="/assets/js/ui/navigator.js?v=1780928945783"></script>
+<script defer src="/assets/js/spa-router.js?v=1780928945783"></script>
+<script defer src="/assets/js/ui/currency.js?v=1780928945783"></script>
+<script defer src="/assets/js/swup.min.js?v=1780928945783"></script>
+<script defer src="/assets/js/swup-head-plugin.min.js?v=1780928945783"></script>
+<script defer src="/assets/js/swup-preload-plugin.min.js?v=1780928945783"></script>
 
 <!-- Product data: static initial data → API refresh with ETag → localStorage cache -->
 <script>
@@ -235,12 +306,12 @@
       // Do NOT call mount() again — the placeholder has already been replaced
       // and a second mount would find no placeholder to render.
 
-      // Root path redirect: / → /home/ (SPA-friendly, no page reload)
+      // 根路径跳转：已在 <head> 同步脚本中处理，此处为兜底（针对 DOMContentLoaded
+      // 触发时的 defer 脚本环境，head 同步跳转可能已阻止了此页面的继续渲染）
+      // 但为保险保留检查，防止极端情况下 head 脚本未执行跳转
       var path = window.location.pathname;
       if (path === '/' || path === '/index.html') {
-        // Tell device-redirect script to skip (no jump to index-pc.html)
-        window.__redirectChecked = true;
-        history.replaceState(null, '', '/home/');
+        return; // 如果还能执行到这里说明 head 脚本已失败，放弃 SPA 初始化
       }
 
       // GitHub Pages 404 SPA redirect:
@@ -249,7 +320,8 @@
       // navigates to the correct route instead of home.
       var redirectParam = new URLSearchParams(window.location.search).get('redirect');
       if (redirectParam) {
-        // Clean the URL back to the original path before router init
+        // redirect 已在 head 同步脚本中处理跳转到 SSG 页面
+        // 如果还能执行到此处，说明 head 脚本决定走 SPA 路由，保留恢复逻辑
         history.replaceState(null, '', redirectParam);
       }
 
@@ -263,6 +335,48 @@
   })();
 </script>
     <script>window._SPA_GLOBAL_PATTERNS=/(?:^|[\/])(?:product-data-table|nav-config|device-utils|lang-registry|utils|translations|translations-dropdown-template|dropdown-styles|dropdown-base|products-dropdown|applications-dropdown|support-dropdown|about-dropdown|contact-dropdown|navigator|slide-menu|footer|hero-video|floating-actions|helpers|page-effects|page-interactions|search-engine|spa-router|swup\.min|swup-head-plugin\.min|swup-preload-plugin\.min)\.js/</script>
-    <script defer src="/assets/js/breadcrumb.js?v=1780837491124"></script>
+    <script defer src="/assets/js/breadcrumb.js?v=1780928945783"></script>
+
+  <!-- ═══ SPA 初始化超时 fallback ═══
+       如果 SPA 路由初始化失败（Swup 未加载、脚本报错等），
+       spa-content 将保持为空（骨架屏可见但无实际内容）。
+       此脚本检测超时后：
+       1. 仍然在 / (SPA Shell) → 整页跳转到 /home/（设备版由 device-redirect 处理）
+       2. 已切换到其他路径（?redirect=）但 spa-content 仍为空 → fallback 到整页跳转
+  -->
+  <script>
+    (function(){
+      var SPA_TIMEOUT = 5000; // 5 秒后检测 SPA 是否初始化成功
+      var tid = setTimeout(function(){
+        var spaContent = document.getElementById('spa-content');
+        if (!spaContent) return;
+        // 检查 spa-content 是否有子元素（Swup 填充内容后至少有一个元素）
+        if (spaContent.children.length === 0) {
+          // 还在 / 或 redirect 场景 → 整页跳转到对应 SSG 页面
+          var path = window.location.pathname;
+          var fallbackTarget = '/home/';
+          // 根据当前路径尝试匹配已知路由
+          var m = path.match(/^\/([a-z][a-z-]+)\/$/);
+          if (m) {
+            var pages = ["about","applications","cases","contact","home","privacy","products","profit-calculator","quote","support","terms","thank-you"];
+            if (pages.indexOf(m[1]) !== -1) {
+              fallbackTarget = '/' + m[1] + '/';
+            }
+          }
+          window.location.replace(fallbackTarget);
+        }
+      }, SPA_TIMEOUT);
+
+      // 如果 Swup 成功初始化，取消超时检测
+      var checkSwup = function(){
+        if (window.swupInstance) {
+          clearTimeout(tid);
+        } else {
+          setTimeout(checkSwup, 500);
+        }
+      };
+      setTimeout(checkSwup, 1000);
+    })();
+  </script>
   </body>
 </html>

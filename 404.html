@@ -1,4 +1,4 @@
-<!doctype html>
+  <!doctype html>
 <html lang="zh-CN">
   <head>
     <meta charset="UTF-8" />
@@ -102,7 +102,35 @@
   }());
   </script>
       <link rel="stylesheet" href="/assets/css/components.css" />
-</head>
+
+    <script>
+    (function checkDevice(){
+      if(window.__redirectChecked)return;
+      if(window.__spaNavigating)return;
+      window.__redirectChecked=true;
+      var u=new URLSearchParams(location.search);
+      var c=u.get("clean-url");
+      if(c){
+        history.replaceState({},"",c);
+        return;
+      }
+      var f=location.pathname.split("/").pop();
+      var dir=location.pathname.replace(/[^\/]*$/,"");
+      // 设备版页面（有或无 .html 后缀）→ 不做任何操作
+      if(f.match(/^index-(pc|mobile|tablet)(\.html)?$/))return;
+      // 目录 URL → 跳到对应设备版本（不带 .html 后缀，避免 serve 301）
+      function getTarget(){
+        var mq=window.matchMedia;
+        var isPc=mq("(min-width:1024px)").matches;
+        var isTb=mq("(min-width:768px) and (max-width:1023px)").matches;
+        var isMb=mq("(max-width:767px)").matches;
+        if(mq&&mq("(pointer:coarse)").matches&&!isPc){isMb=true;isTb=false;}
+        return isPc?"index-pc":isTb?"index-tablet":"index-mobile";
+      }
+      location.replace(dir+getTarget()+"?clean-url="+encodeURIComponent(dir));
+    })();
+    </script>
+  </head>
   <body
     class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 antialiased transition-colors duration-300 min-h-screen flex flex-col overflow-x-clip"
   >
@@ -233,3 +261,5 @@
     <script defer src="/assets/js/ui/floating-actions.js"></script>
   </body>
 </html>
+
+</head>

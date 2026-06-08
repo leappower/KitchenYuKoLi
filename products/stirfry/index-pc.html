@@ -36,39 +36,29 @@
 <link href="/products/stirfry/index-pc.html" media="only screen and (min-width: 1280px)" rel="alternate"/>
     <script>
     (function checkDevice(){
-      if(window.__redirectChecked){console.log("[device-redirect] skip, __redirectChecked=true");return;}
-      if(document.querySelector("meta[name=ssg-device]")){console.log("[device-redirect] skip, ssg-device meta found");return;}
+      if(window.__redirectChecked)return;
+      if(window.__spaNavigating)return;
       window.__redirectChecked=true;
       var u=new URLSearchParams(location.search);
       var c=u.get("clean-url");
-      if(c){console.log("[device-redirect] clean-url detected, replaceState:",c);history.replaceState({},"",c);return}
-      if(window.__spaNavigating){console.log("[device-redirect] skip, __spaNavigating=true");return;}
+      if(c){
+        history.replaceState({},"",c);
+        return;
+      }
       var f=location.pathname.split("/").pop();
-      console.log("[device-redirect] pathname=",location.pathname," f=",f," innerW=",window.innerWidth);
-      if(!f||!f.match(/.html$/)){
-        console.log("[device-redirect] dir URL (no .html), calling doRedirect");
-        doRedirect();
-        return;
+      var dir=location.pathname.replace(/[^\/]*$/,"");
+      // 设备版页面（有或无 .html 后缀）→ 不做任何操作
+      if(f.match(/^index-(pc|mobile|tablet)(\.html)?$/))return;
+      // 目录 URL → 跳到对应设备版本（不带 .html 后缀，避免 serve 301）
+      function getTarget(){
+        var mq=window.matchMedia;
+        var isPc=mq("(min-width:1024px)").matches;
+        var isTb=mq("(min-width:768px) and (max-width:1023px)").matches;
+        var isMb=mq("(max-width:767px)").matches;
+        if(mq&&mq("(pointer:coarse)").matches&&!isPc){isMb=true;isTb=false;}
+        return isPc?"index-pc":isTb?"index-tablet":"index-mobile";
       }
-      if(f.match(/^index-(pc|mobile|tablet).html$/)){
-        console.log("[device-redirect] already on device-specific page:",f,"→ skip");
-        return;
-      }
-      function doRedirect(){
-        var mq = window.matchMedia;
-        var isTouch = mq && mq("(pointer:coarse)").matches;
-        var isMb = mq("(max-width:767px)").matches;
-        var isTb = mq("(min-width:768px) and (max-width:1023px)").matches;
-        var isPc = mq("(min-width:1024px)").matches;
-        if (isTouch && !isPc) { isMb = true; isTb = false; }
-        var e = isPc ? "index-pc.html" : isTb ? "index-tablet.html" : "index-mobile.html";
-        console.log("[device-redirect] doRedirect",{innerW:window.innerWidth,isTouch:isTouch,mobile:isMb,tablet:isTb,pc:isPc,target:e,currentF:f});
-        if(f===e){console.log("[device-redirect] already on correct version, skip");return;}
-        var newUrl=location.pathname.replace(/[^\/]*.html$/,"")+e;
-        console.log("[device-redirect] redirecting to",newUrl);
-        location.href=newUrl;
-      }
-      doRedirect();
+      location.replace(dir+getTarget()+"?clean-url="+encodeURIComponent(dir));
     })();
     </script>
 <!-- ═══ End Responsive Redirect ═══ -->
@@ -82,21 +72,21 @@
 <meta content="width=device-width, initial-scale=1.0" name="viewport">
 <title data-i18n="stirfry_page_title">Smart Stir-Fry Machine | YuKoLi</title>
 <link as="style" href="/assets/fonts/local-fonts.css" rel="preload"/>
-<link as="style" href="/assets/css/styles.css?v=1780837491124" rel="preload"/>
-<link as="style" href="/assets/css/tailwind.css?v=1780837491124" rel="preload"/>
+<link as="style" href="/assets/css/styles.css?v=1780928945783" rel="preload"/>
+<link as="style" href="/assets/css/tailwind.css?v=1780928945783" rel="preload"/>
 <link as="font" crossorigin="" href="/assets/fonts/public-sans-latin-400-normal.woff2" rel="preload" type="font/woff2"/>
 <link as="font" crossorigin="" href="/assets/fonts/public-sans-latin-700-normal.woff2" rel="preload" type="font/woff2"/>
 <link href="/assets/fonts/local-fonts.css" rel="stylesheet">
-<link href="/assets/css/styles.css?v=1780837491124" rel="stylesheet"/>
-<link href="/assets/css/tailwind.css?v=1780837491124" rel="stylesheet"/>
-<link href="/assets/css/z-index-system.css?v=1780837491124" rel="stylesheet"/>
-<link href="/assets/css/performance-optimizations.css?v=1780837491124" rel="stylesheet">
+<link href="/assets/css/styles.css?v=1780928945783" rel="stylesheet"/>
+<link href="/assets/css/tailwind.css?v=1780928945783" rel="stylesheet"/>
+<link href="/assets/css/z-index-system.css?v=1780928945783" rel="stylesheet"/>
+<link href="/assets/css/performance-optimizations.css?v=1780928945783" rel="stylesheet">
 <style> body { font-family: 'Public Sans', sans-serif; } .product-card { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); } .product-card:hover { transform: translateY(-8px); box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15); } .filter-chip { transition: all 0.2s ease; } .filter-chip:hover { background: rgba(236, 91, 19, 0.1); border-color: #ec5b13; } .filter-chip.active { background: #ec5b13; color: white; border-color: #ec5b13; } .spec-badge { background: linear-gradient(135deg, rgba(236, 91, 19, 0.1) 0%, rgba(236, 91, 19, 0.05) 100%); border: 1px solid rgba(236, 91, 19, 0.2); }
 </style>
 <!-- Dark mode: apply saved preference before first paint -->
 <script>(function(){
 if(localStorage.getItem('darkMode')==='true')document.documentElement.classList.add('dark')})()</script>
-<link href="/assets/css/skeleton.css?v=1780837491124" rel="stylesheet">
+<link href="/assets/css/skeleton.css?v=1780928945783" rel="stylesheet">
 <link href="/assets/images/logo/logo.webp" rel="icon" type="image/webp"/>
 <!-- SEO JSON-LD: CollectionPage -->
 <script type="application/ld+json">
@@ -314,16 +304,16 @@ if(localStorage.getItem('darkMode')==='true')document.documentElement.classList.
 </div>
 </section>
 </div>
-</main> <script defer src="/assets/js/ui/dropdown-styles.js?v=1780837491124"></script> <script defer src="/assets/js/ui/dropdown-base.js?v=1780837491124"></script>
-<script defer src="/assets/js/ui/products-dropdown.js?v=1780837491124"></script> <script defer src="/assets/js/ui/applications-dropdown.js?v=1780837491124"></script> <script defer src="/assets/js/ui/support-dropdown.js?v=1780837491124"></script> <script defer src="/assets/js/ui/about-dropdown.js?v=1780837491124"></script>
-<script defer src="/assets/js/utils.js?v=1780837491124"></script>
-<script defer src="/assets/js/ui/search-engine.js?v=1780837491124"></script> <script defer src="/assets/js/ui/slide-menu.js?v=1780837491124"></script>
-<script defer src="/assets/js/ui/footer.js?v=1780837491124"></script>
-<script defer src="/assets/js/lang-registry.js?v=1780837491124"></script>
-<script defer src="/assets/js/translations.js?v=1780837491124"></script><script defer src="/assets/js/translations-dropdown-template.js?v=1780837491124"></script> <script defer src="/assets/js/contacts.js?v=1780837491124"></script>
-<script defer src="/assets/js/router.js?v=1780837491124"></script> <script defer src="/assets/js/ui/helpers.js?v=1780837491124"></script> <script defer src="/assets/js/ui/page-effects.js?v=1780837491124"></script><script defer src="/assets/js/page-interactions.js?v=1780837491124"></script> <style> @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } } .scrollbar-hide::-webkit-scrollbar { display: none; } .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
+</main> <script defer src="/assets/js/ui/dropdown-styles.js?v=1780928945783"></script> <script defer src="/assets/js/ui/dropdown-base.js?v=1780928945783"></script>
+<script defer src="/assets/js/ui/products-dropdown.js?v=1780928945783"></script> <script defer src="/assets/js/ui/applications-dropdown.js?v=1780928945783"></script> <script defer src="/assets/js/ui/support-dropdown.js?v=1780928945783"></script> <script defer src="/assets/js/ui/about-dropdown.js?v=1780928945783"></script>
+<script defer src="/assets/js/utils.js?v=1780928945783"></script>
+<script defer src="/assets/js/ui/search-engine.js?v=1780928945783"></script> <script defer src="/assets/js/ui/slide-menu.js?v=1780928945783"></script>
+<script defer src="/assets/js/ui/footer.js?v=1780928945783"></script>
+<script defer src="/assets/js/lang-registry.js?v=1780928945783"></script>
+<script defer src="/assets/js/translations.js?v=1780928945783"></script><script defer src="/assets/js/translations-dropdown-template.js?v=1780928945783"></script> <script defer src="/assets/js/contacts.js?v=1780928945783"></script>
+<script defer src="/assets/js/router.js?v=1780928945783"></script> <script defer src="/assets/js/ui/helpers.js?v=1780928945783"></script> <script defer src="/assets/js/ui/page-effects.js?v=1780928945783"></script><script defer src="/assets/js/page-interactions.js?v=1780928945783"></script> <style> @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } } .scrollbar-hide::-webkit-scrollbar { display: none; } .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
 </style>
-<script defer src="/assets/js/utils/device-utils.js?v=1780837491124"></script>
+<script defer src="/assets/js/utils/device-utils.js?v=1780928945783"></script>
     <script src="/assets/js/product-data-table.js"></script>
     <script defer src="/assets/js/nav-config.js"></script>
     <script defer src="/assets/js/ui/contact-dropdown.js"></script>
