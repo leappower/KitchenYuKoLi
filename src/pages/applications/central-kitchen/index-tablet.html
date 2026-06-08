@@ -1,35 +1,29 @@
 <!doctype html> <html class="light" lang="zh-CN"> <head> <link rel="canonical" href="https://www.kitchen.yukoli.com/applications/central-kitchen/" /> <link rel="alternate" hreflang="zh-CN" href="https://www.kitchen.yukoli.com/applications/central-kitchen/" /> <link rel="alternate" hreflang="en" href="https://www.kitchen.yukoli.com/applications/central-kitchen/" /> <link rel="alternate" hreflang="x-default" href="https://www.kitchen.yukoli.com/applications/central-kitchen/" /> <link rel="alternate" media="only screen and (max-width: 767px)" href="/applications/central-kitchen/index-mobile.html" /> <link rel="alternate" media="only screen and (min-width: 768px) and (max-width: 1279px)" href="/applications/central-kitchen/index-tablet.html" /> <link rel="alternate" media="only screen and (min-width: 1280px)" href="/applications/central-kitchen/index-pc.html" />
     <script>
     (function checkDevice(){
-      if(window.__redirectChecked){return;}
-      if(document.querySelector("meta[name=ssg-device]")){return;}
+      if(window.__redirectChecked)return;
+      if(window.__spaNavigating)return;
       window.__redirectChecked=true;
       var u=new URLSearchParams(location.search);
       var c=u.get("clean-url");
-      if(c){history.replaceState({},"",c);return}
-      if(window.__spaNavigating){return;}
+      if(c){
+        history.replaceState({},"",c);
+        return;
+      }
       var f=location.pathname.split("/").pop();
       var dir=location.pathname.replace(/[^\/]*$/,"");
+      // 设备版页面（有或无 .html 后缀）→ 不做任何操作
+      if(f.match(/^index-(pc|mobile|tablet)(\.html)?$/))return;
+      // 目录 URL → 跳到对应设备版本（不带 .html 后缀，避免 serve 301）
       function getTarget(){
         var mq=window.matchMedia;
         var isPc=mq("(min-width:1024px)").matches;
         var isTb=mq("(min-width:768px) and (max-width:1023px)").matches;
         var isMb=mq("(max-width:767px)").matches;
         if(mq&&mq("(pointer:coarse)").matches&&!isPc){isMb=true;isTb=false;}
-        return isPc?"index-pc.html":isTb?"index-tablet.html":"index-mobile.html";
+        return isPc?"index-pc":isTb?"index-tablet":"index-mobile";
       }
-      var t=getTarget();
-      if(!f||!f.match(/\.html$/)){
-        // 目录 URL → replace 跳到对应设备版本（不留历史记录）
-        location.replace(dir+t);
-        return;
-      }
-      if(f.match(/^index-(pc|mobile|tablet)\.html$/)){
-        // 已在设备版本 → replaceState 清理 URL，显示干净路径
-        var clean=dir;
-        if(location.pathname!==clean){history.replaceState({},"",clean);}
-        return;
-      }
+      location.replace(dir+getTarget()+"?clean-url="+encodeURIComponent(dir));
     })();
     </script>
 <meta charset="utf-8" /> <meta name="description" content="YuKoLi central kitchen equipment — serving 500-10,000 meals. Batch cooking lines, 1000+ standardized recipes, smart temperature control." /> <meta name="keywords" content="团餐,中央厨房,食堂,院校食堂,企业食堂,商用厨房设备,智能厨房,批量烹饪" /> <meta property="og:title" content="YuKoLi | 团餐/中央厨房智能解决方案" /> <meta property="og:site_name" content="YuKoLi 智能厨具" /> <meta property="og:locale" content="zh_CN" /> <meta name="twitter:card" content="summary_large_image" /> <meta name="twitter:title" content="YuKoLi | 团餐/中央厨房智能解决方案" /> <meta content="width=device-width, initial-scale=1.0" name="viewport" /> <title data-i18n="central_kitchen_page_title">YuKoLi | Smart Solutions for Mass Catering</title> <link rel="preload" href="/assets/fonts/local-fonts.css" as="style" /> <link rel="preload" href="/assets/css/styles.css" as="style" /> <link rel="preload" href="/assets/css/tailwind.css" as="style" /> <link href="/assets/fonts/local-fonts.css" rel="stylesheet" /> <link rel="stylesheet" href="/assets/css/styles.css" /> <link rel="stylesheet" href="/assets/css/tailwind.css" /> <link rel="stylesheet" href="/assets/css/z-index-system.css" /> <link rel="stylesheet" href="/assets/css/performance-optimizations.css" /> <script> (function () { if (localStorage.getItem("darkMode") ==="true") document.documentElement.classList.add("dark"); })(); </script> <link rel="stylesheet" href="/assets/css/skeleton.css" /> <link rel="icon" href="/assets/images/logo/logo.webp" type="image/webp" /> <title>Central Kitchen Solutions | 500-10000 Meals | YuKoLi</title> <script type="application/ld+json"> {"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement": [ {"@type":"ListItem","position": 1,"name":"Home","item":"https://www.kitchen.yukoli.com/home/" }, {"@type":"ListItem","position": 2,"name":"Applications","item":"https://www.kitchen.yukoli.com/applications/" }, {"@type":"ListItem","position": 3,"name":"中央厨房","item":"https://www.kitchen.yukoli.com/applications/central-kitchen/" } ] } </script> </head> <body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 antialiased transition-colors duration-300 overflow-x-clip" > <navigator data-search="true" data-component="navigator" data-variant="tablet" data-active="applications" data-cta-text-key="nav_get_quote" data-cta-href="/quote" ></navigator> <main id="spa-content">

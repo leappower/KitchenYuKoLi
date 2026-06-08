@@ -1,35 +1,29 @@
 <!DOCTYPE html> <html class="light" lang="zh-CN"> <head> <!-- ═══ Responsive Redirect (injected by patch-responsive-redirect.py) ═══ --> <link rel="canonical" href="https://www.kitchen.yukoli.com/applications/chain-restaurant/" /> <link rel="alternate" hreflang="zh-CN" href="https://www.kitchen.yukoli.com/applications/chain-restaurant/" /> <link rel="alternate" hreflang="en" href="https://www.kitchen.yukoli.com/applications/chain-restaurant/" /> <link rel="alternate" hreflang="x-default" href="https://www.kitchen.yukoli.com/applications/chain-restaurant/" /> <link rel="alternate" media="only screen and (max-width: 767px)" href="/applications/chain-restaurant/index-mobile.html" /> <link rel="alternate" media="only screen and (min-width: 768px) and (max-width: 1279px)" href="/applications/chain-restaurant/index-tablet.html" /> <link rel="alternate" media="only screen and (min-width: 1280px)" href="/applications/chain-restaurant/index-pc.html" />
     <script>
     (function checkDevice(){
-      if(window.__redirectChecked){return;}
-      if(document.querySelector("meta[name=ssg-device]")){return;}
+      if(window.__redirectChecked)return;
+      if(window.__spaNavigating)return;
       window.__redirectChecked=true;
       var u=new URLSearchParams(location.search);
       var c=u.get("clean-url");
-      if(c){history.replaceState({},"",c);return}
-      if(window.__spaNavigating){return;}
+      if(c){
+        history.replaceState({},"",c);
+        return;
+      }
       var f=location.pathname.split("/").pop();
       var dir=location.pathname.replace(/[^\/]*$/,"");
+      // 设备版页面（有或无 .html 后缀）→ 不做任何操作
+      if(f.match(/^index-(pc|mobile|tablet)(\.html)?$/))return;
+      // 目录 URL → 跳到对应设备版本（不带 .html 后缀，避免 serve 301）
       function getTarget(){
         var mq=window.matchMedia;
         var isPc=mq("(min-width:1024px)").matches;
         var isTb=mq("(min-width:768px) and (max-width:1023px)").matches;
         var isMb=mq("(max-width:767px)").matches;
         if(mq&&mq("(pointer:coarse)").matches&&!isPc){isMb=true;isTb=false;}
-        return isPc?"index-pc.html":isTb?"index-tablet.html":"index-mobile.html";
+        return isPc?"index-pc":isTb?"index-tablet":"index-mobile";
       }
-      var t=getTarget();
-      if(!f||!f.match(/\.html$/)){
-        // 目录 URL → replace 跳到对应设备版本（不留历史记录）
-        location.replace(dir+t);
-        return;
-      }
-      if(f.match(/^index-(pc|mobile|tablet)\.html$/)){
-        // 已在设备版本 → replaceState 清理 URL，显示干净路径
-        var clean=dir;
-        if(location.pathname!==clean){history.replaceState({},"",clean);}
-        return;
-      }
+      location.replace(dir+getTarget()+"?clean-url="+encodeURIComponent(dir));
     })();
     </script>
 <!-- ═══ End Responsive Redirect ═══ --> <meta charset="utf-8" /> <meta name="description" content="YuKoLi chain restaurant kitchen equipment — standardize flavor across locations. New stores ready in 1 week. Fast food, hot pot, BBQ chains." /> <meta name="keywords" content="连锁餐饮,快餐连锁,火锅连锁,智能厨房,自动化炒菜机,商用厨房设备,餐饮标准化" /> <meta property="og:type" content="website" /> <meta property="og:title" content="YuKoLi | 连锁餐饮后厨设备" /> <meta property="og:description" content="连锁餐饮后厨设备化：新店1周出餐达标，口味不靠厨师，靠设备和标准流程。" /> <meta property="og:url" content="https://www.kitchen.yukoli.com/applications/chain-restaurant/" /> <meta property="og:image" content="https://www.kitchen.yukoli.com/assets/images/logo/logo.webp" /> <meta property="og:site_name" content="YuKoLi 智能厨具"/> <meta property="og:locale" content="zh_CN"/> <meta name="twitter:card" content="summary_large_image"/> <meta name="twitter:title" content="YuKoLi | 连锁餐饮后厨设备"/> <meta name="twitter:description" content="连锁餐饮后厨设备化：新店1周出餐达标，口味不靠厨师，靠设备和标准流程。"/> <meta name="twitter:image" content="https://www.kitchen.yukoli.com/assets/images/logo/logo.webp"/> <meta content="width=device-width, initial-scale=1.0" name="viewport" /> <title data-i18n="chain_restaurant_page_title">YuKoLi | Standardized Kitchen Equipment Solutions for Chain Restaurants</title> <link rel="preload" href="/assets/fonts/local-fonts.css" as="style" /> <link rel="preload" href="/assets/css/styles.css" as="style" /> <link rel="preload" href="/assets/css/tailwind.css" as="style" /> <link rel="preload" href="/assets/fonts/public-sans-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin /> <link rel="preload" href="/assets/fonts/public-sans-latin-700-normal.woff2" as="font" type="font/woff2" crossorigin /> <link href="/assets/fonts/local-fonts.css" rel="stylesheet" /> <link rel="stylesheet" href="/assets/css/styles.css" /> <link rel="stylesheet" href="/assets/css/tailwind.css" /> <link rel="stylesheet" href="/assets/css/z-index-system.css" /> <link rel="stylesheet" href="/assets/css/performance-optimizations.css" /> <script> (function () { if (localStorage.getItem("darkMode") ==="true") document.documentElement.classList.add("dark"); })(); </script> <link rel="stylesheet" href="/assets/css/skeleton.css" /> <link rel="icon" href="/assets/images/logo/logo.webp" type="image/webp" /> <title>Chain Restaurant Kitchen Automation | YuKoLi</title> <script type="application/ld+json">
